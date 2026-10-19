@@ -1,0 +1,136 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/dialog-diagnostic.spec.ts --grep on desktop --repeat-each=3 --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/dialog-diagnostic.spec.ts --grep on desktop --repeat-each=3 --workers=3
+
+[WebServer] (node:162451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 12 tests using 3 workers
+
+(node:162472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:162470) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:162471) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/browser/dialog-diagnostic.spec.ts:173:5 › standard keeps its canonical layout, overlay and focus on desktop (9.8s)
+  ✓   2 tests/browser/dialog-diagnostic.spec.ts:173:5 › standard keeps its canonical layout, overlay and focus on desktop (10.2s)
+  ✓   1 tests/browser/dialog-diagnostic.spec.ts:173:5 › standard keeps its canonical layout, overlay and focus on desktop (12.0s)
+  ✓   5 tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop (10.5s)
+  ✓   7 tests/browser/dialog-diagnostic.spec.ts:173:5 › wide keeps its canonical layout, overlay and focus on desktop (5.2s)
+  ✘   4 tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop (16.4s)
+(node:163102) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop (16.7s)
+(node:163238) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 tests/browser/dialog-diagnostic.spec.ts:173:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (7.7s)
+  ✓   9 tests/browser/dialog-diagnostic.spec.ts:173:5 › wide keeps its canonical layout, overlay and focus on desktop (9.3s)
+  ✓  10 tests/browser/dialog-diagnostic.spec.ts:173:5 › wide keeps its canonical layout, overlay and focus on desktop (9.0s)
+  ✓  11 tests/browser/dialog-diagnostic.spec.ts:173:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (5.9s)
+  ✓  12 tests/browser/dialog-diagnostic.spec.ts:173:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (5.7s)
+
+
+  1) tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Edit objective', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      228 |         await expect(dialog).toBeVisible();
+      229 |         await page.mouse.click(4, 4);
+    > 230 |         await expect(dialog).toHaveCount(0);
+          |                              ^
+      231 |         await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(
+      232 |           0,
+      233 |         );
+        at /workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts:230:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Edit objective', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      228 |         await expect(dialog).toBeVisible();
+      229 |         await page.mouse.click(4, 4);
+    > 230 |         await expect(dialog).toHaveCount(0);
+          |                              ^
+      231 |         await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(
+      232 |           0,
+      233 |         );
+        at /workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts:230:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+    tests/browser/dialog-diagnostic.spec.ts:173:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+  10 passed (46.5s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test tests/browser/dialog-diagnostic.spec.ts --grep 'on desktop' --repeat-each=3 --workers=3
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

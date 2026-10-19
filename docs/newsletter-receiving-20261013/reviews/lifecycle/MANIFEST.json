@@ -1,0 +1,210 @@
+{
+  "schema": "capiro-independent-lifecycle-review/1",
+  "sealedAt": "2026-10-13T03:06:07.364886+00:00",
+  "sourceHead": "7c87678730538958ace9762f824dc3e588bf445b",
+  "sourceState": "Uncommitted feature candidate; file hashes unchanged at final verification",
+  "fileCount": 40,
+  "bytes": 181443,
+  "files": [
+    {
+      "path": "AUTHOR-EVIDENCE-VERIFICATION.json",
+      "bytes": 2862,
+      "sha256": "3ffa148aefe7cdb949ea93f369d45288b53850990eaeae97d1f061e59052a32e"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 557,
+      "sha256": "7f7cfdd0ce7c08e4778b0c986df88835ae66f734865e8cb76393ef22d8885e77"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 7323,
+      "sha256": "accebb166e8e9ec4b7e28ed5a19f1f2f75d10269413dd630c818cd001bc0fa26"
+    },
+    {
+      "path": "SOURCE-VERIFICATION.json",
+      "bytes": 6556,
+      "sha256": "cd4c6e12dad620377708b21cf4691e05d1794a59519c7740fd1d1d67112de97e"
+    },
+    {
+      "path": "STRUCTURE-REVIEW.json",
+      "bytes": 8499,
+      "sha256": "b94b469f157e4d4fe3799f5bf58bc6085efb064db51eb6542d5762aa924d9b92"
+    },
+    {
+      "path": "author-evidence/MANIFEST.json",
+      "bytes": 2830,
+      "sha256": "3c8b13561df372e758a01a2f58fc8ec8b346b7ecc5ccd6d3899d495b3661841f"
+    },
+    {
+      "path": "author-evidence/REPORT.md",
+      "bytes": 6160,
+      "sha256": "7f6c20c4c31207c590fd91df11ce8406fb18ec7d8c04de3cfaf206106140292d"
+    },
+    {
+      "path": "author-evidence/SOURCE-BINDING.json",
+      "bytes": 4123,
+      "sha256": "0acf2f7fbba28d142a4d9652dc874f777d0ae1b04a32f0d044ddaad0160be465"
+    },
+    {
+      "path": "author-evidence/STRUCTURE-REVIEW.json",
+      "bytes": 8999,
+      "sha256": "9fcc80f49feb8de38db0eb8c7985f8e1303c2d4aeca3c5fde84f78a63764d167"
+    },
+    {
+      "path": "author-evidence/before-journal-REPORT.md",
+      "bytes": 4388,
+      "sha256": "317ebe08b1943e046616c3db5447fb5d3b3149030479255018e7b7600dd9df3d"
+    },
+    {
+      "path": "author-evidence/before-journal-STRUCTURE-REVIEW.json",
+      "bytes": 6700,
+      "sha256": "2d4bc20ded99eda8cf11e9bd31bdc19116434f69b4199531007185922abc7e1a"
+    },
+    {
+      "path": "author-evidence/before-journal-source-and-structure.json",
+      "bytes": 7771,
+      "sha256": "035b80902ecb9d7bb62e539f89989a9d10d61296b43eba68077eefe6db2ea791"
+    },
+    {
+      "path": "author-evidence/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "author-evidence/format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "author-evidence/journal-disposal-red.log",
+      "bytes": 2897,
+      "sha256": "03d1d72c571e2163f551eb95d58ed8fef50824a3b8de78f8a323febeb6f05232"
+    },
+    {
+      "path": "author-evidence/journal-final-green.log",
+      "bytes": 247,
+      "sha256": "ab65c8f472f92656ac85c366e42a01dea7348ca58c135685c5114004042ce401"
+    },
+    {
+      "path": "author-evidence/journal-first.log",
+      "bytes": 247,
+      "sha256": "c18b01fe72c3d1282f4d3bebd2c39d497a45944bbc1c7b72ead5bce5618bd66e"
+    },
+    {
+      "path": "author-evidence/journal-scope-order-red.log",
+      "bytes": 2611,
+      "sha256": "9db2bd83d283869ab68257abbc40b9d735b722830134b4c09c31fe0fc2b4f6f6"
+    },
+    {
+      "path": "author-evidence/source-and-structure.json",
+      "bytes": 9273,
+      "sha256": "08b749b4a3856138ccb7797a06e8b1f2b2449270f94fcddf854d1aa574ab7522"
+    },
+    {
+      "path": "author-evidence/stage-identity-red.log",
+      "bytes": 1309,
+      "sha256": "a1a3470b636af4e0df79487f3af094cf77a99547fd5226cbff9896a203015aaa"
+    },
+    {
+      "path": "author-evidence/structure-first.json",
+      "bytes": 3519,
+      "sha256": "2a1318f8a332679c840410723a958e9aa4fed2da4721ec2c29a8121b4795054b"
+    },
+    {
+      "path": "author-evidence/unit-first.log",
+      "bytes": 247,
+      "sha256": "093f2ebe55ce7e23c68bb9808b1adc6affb07f9976ffc9a0a4e7344b7a23cf49"
+    },
+    {
+      "path": "author-evidence/unit-green.log",
+      "bytes": 247,
+      "sha256": "91396a2096d23bd7fd68e12da9659d9b46b4e5fbfb0e89f9df6333868205eb1f"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/README.md",
+      "bytes": 2713,
+      "sha256": "3614c0781cffd8d31e0f16589e378f0694f4ebfa199d5ca5de4b9a57d1ba1f34"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
+      "bytes": 6930,
+      "sha256": "9afb178f9cf6ddf90f33d059803a716dc2192a099e16c9439fd52c15faeedada"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "bytes": 6203,
+      "sha256": "7ee5e694f88e58ec9a041f1d82a8052dcf35cee496697cd68857c459fec7e32b"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "bytes": 4263,
+      "sha256": "e869fe2a804e593afb00eec4b32c472848f90f88ef3f88486ddc88309f901a8b"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+      "bytes": 23464,
+      "sha256": "4d9bbf10922565b27cfd1b07e4b07bc27130a6e464df6ef59d42a0bf766fe8e4"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+      "bytes": 11461,
+      "sha256": "8f5097b4bb3296667ec7e0190e1ac90261f51990c50835df50b04f6e6bb73b67"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+      "bytes": 2847,
+      "sha256": "102e47f125212ddb43b23bd9bd418ab1f116fecad26740765f1ae61091230468"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/draft.ts",
+      "bytes": 2166,
+      "sha256": "826918f665336a9b73151b3657b1bba8a8c8bfbc7bb41a65bc87a051b8ab34ca"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/rich-newsletter.module.css",
+      "bytes": 2277,
+      "sha256": "c6724bbc0b7153941b3d5f3ccb8d857205d0ed156885c7e63d52e30da2454b47"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/use-rich-document.ts",
+      "bytes": 1001,
+      "sha256": "15fc89fd33342dc91eed524b7dd37fe0ec4c17085a9b4607e7abcfd63aae5d60"
+    },
+    {
+      "path": "source/apps/web/src/features/modules/workspace/rich-newsletter/write-journal.ts",
+      "bytes": 4675,
+      "sha256": "d131eb1e7bdb44c5053be257d6b3e3c2e749b16f9d2312502069045eef109a57"
+    },
+    {
+      "path": "source/apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "bytes": 2686,
+      "sha256": "e00ffb9b2f4ed6cb033f655754b28b10a63bf989fa5c4a8ad20c36e3dd7b8cf4"
+    },
+    {
+      "path": "source/apps/web/src/shared/capiro/operations/rich-newsletter.ts",
+      "bytes": 4619,
+      "sha256": "d28cbba88c631f6d53d901b1277bc566e60d10f17b2bb819894d8d2886c95d77"
+    },
+    {
+      "path": "source/apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3887,
+      "sha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6"
+    },
+    {
+      "path": "source/apps/web/src/shared/portfolio/api/provider.tsx",
+      "bytes": 2049,
+      "sha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a"
+    },
+    {
+      "path": "source/apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 3005,
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f"
+    },
+    {
+      "path": "source/apps/web/test/browser/newsletter-rich.spec.ts",
+      "bytes": 9766,
+      "sha256": "33ec7ad0ac0d18b6b5a9cc2b3826d0bbe1809f15d738a6801f94c3fc7fdabd90"
+    }
+  ]
+}

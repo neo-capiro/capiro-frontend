@@ -1,0 +1,162 @@
+{
+  "reviewer": "Codex outreach_review",
+  "status": "FINAL_STAGED_SOURCE_EVIDENCE_ACCEPTED",
+  "qualifiedSource": "68bc14f09a9f43c61b8854ca3e7f6b4264e47661",
+  "productionSource": "43f23842b589e64f7730e58d85d434f0a2021d80",
+  "mergeParents": [
+    "038ee79e93e9b4d1a371a5d38e17dd339b1af859",
+    "7d7bf4c550e8d906c6ef3498ff79327820519daa"
+  ],
+  "manifest": {
+    "path": "docs/unified-desktop-20261014/MANIFEST.json",
+    "sha256": "65a85eac6182145a8b238cf9b54833935be19201a3d3500899fa519c27a98278",
+    "entries": 292,
+    "allIndexBytesShaAndGitBlobsMatch": true,
+    "changedPathCoverageExact": true,
+    "losslessGzipBase64WrappersVerified": 53
+  },
+  "combinedBrowser": {
+    "report": "docs/unified-desktop-20261014/evidence/qualified-browser-report.json",
+    "log": "docs/unified-desktop-20261014/evidence/qualified-browser-log.json",
+    "stats": {
+      "startTime": "2026-10-14T19:53:21.943Z",
+      "duration": 200939.064,
+      "expected": 131,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "logMatches131Passes": true,
+    "earlierDiagnosticCountsNotAdded": true
+  },
+  "objectiveBrowser": {
+    "report": "docs/unified-desktop-20261014/evidence/objective-report.json",
+    "stats": {
+      "startTime": "2026-10-14T19:36:39.679Z",
+      "duration": 36927.722,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "aggregate": {
+    "root": 113,
+    "web": 2367,
+    "capiro": 483,
+    "transport": 84,
+    "newsletter": 385,
+    "declarations": 8,
+    "declarationLogReceipt": {
+      "directory": "/tmp/capiro-newsletter-types-sb4Gtv",
+      "passed": 8
+    },
+    "lintErrors": 0,
+    "inheritedLintWarnings": 81
+  },
+  "build": "Compiled successfully;24/24 static pages; parent exit0 confirmed",
+  "standalone": {
+    "results": 36,
+    "pageErrors": [],
+    "rootSmoke": "Default Portfolio root200/ followedSetup:true observed in retained log"
+  },
+  "sourceCustody": {
+    "runtimeTestsReviewsEqualQualifiedCommit": true,
+    "production43To68Unchanged": true,
+    "MeriRuntimeChangesAgainstPR48": [],
+    "registryUniqueRecords": 296,
+    "registryNoDuplicateKeys": true,
+    "preservedParentRecords": [
+      {
+        "source": "038ee79e93e9b4d1a371a5d38e17dd339b1af859",
+        "count": 7,
+        "preserved": true
+      },
+      {
+        "source": "7d7bf4c550e8d906c6ef3498ff79327820519daa",
+        "count": 9,
+        "preserved": true
+      }
+    ],
+    "currentAcceptedFunctions": [
+      {
+        "file": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+        "kind": "function",
+        "symbol": "TaskForm",
+        "fingerprint": "e1f6859972da30b1c2157a7c22dd38a001947b634d84e1412aebbcb603ad4422",
+        "reason": "One canonical task draft/versioned mutation/pending/error controller remains mounted above viewport presentation; delegates field implementation and preserves membership IDs/positions. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
+        "reviewedBy": "Codex independent outreach_review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/planner/TaskProjectFields.tsx",
+        "kind": "function",
+        "symbol": "TaskProjectFields",
+        "fingerprint": "d51836f3ec58dff66f02f5e8a33f4cf515b48880e06f67da3644fd5911c8d679",
+        "reason": "Canonical project membership/section presentation with explicit current project edit walls, saved unavailable preservation and desktop-only admission; no service or authority responsibility. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
+        "reviewedBy": "Codex independent outreach_review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+        "kind": "function",
+        "symbol": "TaskDetailFields",
+        "fingerprint": "27695f2eb100f5e4adc0433ad401b9269a35203c89f03e2b46f4632f9e766cab",
+        "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
+        "reviewedBy": "Codex independent outreach_review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+        "kind": "function",
+        "symbol": "EngagementOverview",
+        "fingerprint": "b59c0963a35421238b31cff2646a324b1ba4f3fac4fa8117461c1117414c6ef9",
+        "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
+        "reviewedBy": "Codex independent outreach_review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+        "kind": "function",
+        "symbol": "OrdinaryEngagementScreen",
+        "fingerprint": "849de8e656b06ae97fbe90b3d9504cd046666071787ca843995f66c26d20f9b3",
+        "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
+        "reviewedBy": "Codex independent outreach_review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+        "kind": "function",
+        "symbol": "TaskDetail",
+        "fingerprint": "420e51976d843b703adb1ba284aa694db956bed0580ec5cbb282c6ee6e769f93",
+        "reason": "One task detail composition owns comment/archive pending fencing and existing nested actions; canonical mutations own transport and lifetime.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/planner/TaskSubtasks.tsx",
+        "kind": "function",
+        "symbol": "TaskSubtasks",
+        "fingerprint": "b453b02718b5f8d863eeab492f1a3bd5ef9291ebd16b0e62b1227705799319e7",
+        "reason": "One parent-scoped subtask page admits current parent/cursor receipts, controls explicit paging and preserves scoped navigation. Canonical query owns transport/lifetime; linked detail rechecks child receipt.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      }
+    ]
+  },
+  "unchanged": {
+    "nativeLedgerSha256": "3849d8a07a4f6c0961d4726683c66946a4842d6f2710736cc22727a1049a85f4",
+    "nativeLedgerByteEqualPR48": true,
+    "lockSha256": "6dc039be028c302b58965532b05d3dd5aa0ca1ed8bb6a90be716eb6325d24d13",
+    "lockByteEqualPR48": true,
+    "SDK": "0.1.3; no automatic0.1.5 adoption"
+  },
+  "ledger": "POST-BATCH-DELTA adds historical PR47/49 local batches and final combined131+4 local batch; prior data unchanged,0nativeaccepted337open.",
+  "remainingLimits": [
+    "All337 native rows OPEN_FINAL_ACCEPTANCE; local synthetic/build/standalone evidence does not prove native acceptance.",
+    "Active Objective operational association map unresolved; exact audited source snapshots are not claims about current deployed/latest implementation.",
+    "Full inline TaskDetail prototype/duplicate/richtext, Engagement operational associations/header offsets/full meeting reference remain explicitly open.",
+    "Mobile parity deferred; no Meri/Fable runtime work or deployment/AWS/credentials/provider/database/live data changes."
+  ],
+  "finalSealingNote": "Parent disclosed one worktree-only HANDOFF wording clarification from Exact current backend to Audited backend snapshot. This receipt audits the current staged index; stage that wording and refresh its manifest entry together with this receipt before publication. Runtime/test/review bytes unchanged."
+}

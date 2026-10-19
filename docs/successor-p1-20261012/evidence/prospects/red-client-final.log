@@ -1,0 +1,51 @@
+
+Running 2 tests using 1 worker
+
+(node:462217) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/prospect-current-read.spec.ts:250:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return (11.2s)
+(node:462787) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 apps/web/tests/browser/prospect-current-read.spec.ts:278:1 › a successful background reread preserves an active creation draft (9.0s)
+
+
+  1) apps/web/tests/browser/prospect-current-read.spec.ts:250:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Test Aerospace', exact: true, level: 1 })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Test Aerospace', exact: true, level: 1 })
+
+
+      264 |       level: 1,
+      265 |     }),
+    > 266 |   ).toBeVisible();
+          |     ^
+      267 |   control.fail(403);
+      268 |   await page.clock.setFixedTime(new Date("2026-10-12T12:00:31Z"));
+      269 |   await replaceRoute(page, `${listPath}?new=1`);
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:266:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-client-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-client-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-client-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-client-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/prospect-current-read.spec.ts:250:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return 
+  1 passed (24.7s)

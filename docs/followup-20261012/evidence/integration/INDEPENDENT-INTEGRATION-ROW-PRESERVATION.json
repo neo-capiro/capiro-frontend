@@ -1,0 +1,17 @@
+{
+  "source": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+  "comparedRows": 345,
+  "rowReferenceErrors": [],
+  "prospectFiles": [
+    {
+      "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+      "sha256": "45b12448e5849095afc5b3cd575824a590289d12329238fecf0333cf76154160",
+      "integratedProspectCommitByteEqual": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-files-local-search.spec.ts",
+      "sha256": "ad59ea80af69fcc89cdf62c5195b3fbc1a10bd2de526ac245d697980738cc41c",
+      "integratedProspectCommitByteEqual": true
+    }
+  ]
+}

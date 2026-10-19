@@ -1,0 +1,165 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-parent-client-clear-red-09aa0ab/review.playwright.ts"
+    ],
+    "configFile": "/tmp/capiro-parent-client-clear-red-09aa0ab/review.playwright.ts",
+    "rootDir": "/tmp/capiro-parent-client-clear-red-09aa0ab",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-parent-client-clear-red-09aa0ab/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-parent-client-clear-red-09aa0ab",
+        "testIgnore": [],
+        "testMatch": [
+          "control.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-parent-client-clear-red-09aa0ab/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" /workspace/capiro-p1-successor/apps/web/tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "control.spec.ts",
+      "file": "control.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "No client in an existing meeting submits and verifies an explicit association clear",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3941,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-01T15:00:00Z\", \"location\": \"Meeting room\", \"startsAt\": \"2026-10-01T14:00:00Z\", \"subject\": \"Synthetic association clear\"}\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-01T15:00:00Z\", \"location\": \"Meeting room\", \"startsAt\": \"2026-10-01T14:00:00Z\", \"subject\": \"Synthetic association clear\"}\u001b[39m\n    at /tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts:32:46",
+                    "location": {
+                      "file": "/tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts",
+                      "column": 46,
+                      "line": 32
+                    },
+                    "snippet": "  30 |  writeFileSync(info.outputPath('client-clear-observation.json'),JSON.stringify({requestedUiClient:null,body,returnedClient:returned.client,editorClosed:true,writes,unexpected},null,2));\n  31 |  await page.screenshot({path:info.outputPath('client-clear-after.png'),fullPage:true});\n> 32 |  expect(unexpected).toEqual([]);expect(body).toHaveProperty('clientId',null);\n     |                                              ^\n  33 |  expect(returned.client).toBeNull();\n  34 | });\n  35 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts",
+                        "column": 46,
+                        "line": 32
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-01T15:00:00Z\", \"location\": \"Meeting room\", \"startsAt\": \"2026-10-01T14:00:00Z\", \"subject\": \"Synthetic association clear\"}\u001b[39m\n\n  30 |  writeFileSync(info.outputPath('client-clear-observation.json'),JSON.stringify({requestedUiClient:null,body,returnedClient:returned.client,editorClosed:true,writes,unexpected},null,2));\n  31 |  await page.screenshot({path:info.outputPath('client-clear-after.png'),fullPage:true});\n> 32 |  expect(unexpected).toEqual([]);expect(body).toHaveProperty('clientId',null);\n     |                                              ^\n  33 |  expect(returned.client).toBeNull();\n  34 | });\n  35 |\n    at /tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts:32:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:37:15.501Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts",
+                    "column": 46,
+                    "line": 32
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df0f65ccd0bbb0c6ab20-7a6b5190b4aaa438b4cf",
+          "file": "control.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:37:14.587Z",
+    "duration": 5310.259,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

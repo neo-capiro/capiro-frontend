@@ -1,0 +1,42 @@
+{
+  "verdict": "PASS_bounded_existing_Portfolio_gate_evidence_review",
+  "records": 1122,
+  "added": [
+    [
+      "mail-rich-compose.spec.ts",
+      "ordinary formatting and typing keep native Undo after a verified rewrite with delayed selection observation"
+    ],
+    [
+      "mail-rich-compose.spec.ts",
+      "intentional all selection still replaces text and supports Undo"
+    ],
+    [
+      "mail-rich-compose.spec.ts",
+      "intentional partial selection still replaces text and supports Undo"
+    ],
+    [
+      "profile-identity-layout.spec.ts",
+      "profile identity resolution replaces stale focus ownership and preserves editable layout"
+    ]
+  ],
+  "source": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "screenshots": [
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-desktop.png",
+      "bytes": 99056,
+      "sha256": "e7be805270c7b78740280cd076113a54d8ea366ba31a15fc5612366da1fd50d9",
+      "width": 1440,
+      "height": 1040,
+      "completePngWithValidChunkCrcs": true
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-mobile-dark.png",
+      "bytes": 82331,
+      "sha256": "c459759c611ccf0f9e74d9e823a3c11a04813d1d31ed5245eca40598f90cfb66",
+      "width": 390,
+      "height": 1425,
+      "completePngWithValidChunkCrcs": true
+    }
+  ],
+  "references": 22
+}

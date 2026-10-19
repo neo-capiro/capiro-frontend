@@ -1,0 +1,38 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+    "kind": "function",
+    "symbol": "ActivityTimeline",
+    "fingerprint": "bed4a3575c212136c24a958ab46948381b88018db78b65157f197de2bc170510",
+    "reason": "Owns presentation of one current activity feed, its existing search/kind/date projection and source-specific links. Filtering and date validation remain in activity-filters, controls in ActivityFilters, row operations in ActivityActions and mail reads in TimelineMailThread. The current-success projection gates rows, kinds and the source-limit caption together without adding an operation, identity or cache owner.",
+    "reviewedBy": "Codex root, full component and final diff reviewed",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+    "kind": "function",
+    "symbol": "ClientOverview",
+    "fingerprint": "2ee4de520c6aba4138d1dee504f9f3d7c5574ffabb03b0e15fe84dc09c45f488",
+    "reason": "Composes the selected client overview from existing identity, team, facilities, Objective summary, activity and dialog owners. The change requires a current successful Client before rendering and gates only the activity-derived count on that feed; independently healthy sources keep their existing presentation. Detailed forms, actions, query contracts, metrics and mutation lifetimes remain delegated. No new workflow is placed in this component.",
+    "reviewedBy": "Codex root, full component and final diff reviewed",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/IndexFilters.tsx",
+    "kind": "function",
+    "symbol": "IndexFilters",
+    "fingerprint": "c6a5c99cad74084998b4d0f8a760cf776980841924331f5d2d986874f3b69dbd",
+    "reason": "Owns the coordinated URL-backed search filter controls for one Portfolio catalog: status, sector, owner, ordering and display. Optional clients distinguish an unavailable current catalog from a successful empty one, preserving selected filter values with truthful labels. It contains no service calls, query effects or mutation lifetime, and derives each option group from the supplied native data.",
+    "reviewedBy": "Codex root, full component and final diff reviewed",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "kind": "function",
+    "symbol": "PortfolioIndex",
+    "fingerprint": "e5a63bd1ded18e92d9689db356b1a55ca6ac0a7a09f1b8a21cccc57691e84b7f",
+    "reason": "Owns composition and URL state for the Portfolio index. Current-success catalog projection is now the single input for its count, pulse, filter choices, result cards, attention and Quick log. Native queries, filtering/sorting, result layouts, attention, create intake and the Objective picker remain separate existing owners. The long body is page composition of related index controls; this change adds no server operation or independent feature lifecycle.",
+    "reviewedBy": "Codex root, full component and final diff reviewed",
+    "reviewedOn": "2026-10-11"
+  }
+]

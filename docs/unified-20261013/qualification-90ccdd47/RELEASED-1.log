@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-13T10:07:41.068018+00:00",
+  "status": "RELEASED_INPUT_WAVE_VERIFIED_NOT_FINAL_PUBLICATION_SEAL",
+  "records": 49,
+  "originalBytes": 2864913,
+  "archive": {
+    "path": "released-1-objects.zip",
+    "bytes": 1928702,
+    "sha256": "bdba7ff9ae9ce63c4478af6f5631e870c8d386640a9134191ffa80c5382f6580",
+    "uniqueMembers": 47
+  },
+  "directFiles": 15,
+  "ownerManifests": [
+    {
+      "path": "/workspace/capiro-final-storage-addendum-20261013/MANIFEST.json",
+      "sha256": "7facf7523946960e7c2cecf1a7dc012ab898c91af542ff128c3da3521220daea",
+      "membersVerified": 18
+    }
+  ],
+  "allOriginalBytesReopenedEqual": true,
+  "scope": "Root explicitly released completed285-case Portfolio shard1 and sealed historical storage addendum. Shards2/3/4/progress remain excluded and no overall acceptance is claimed."
+}

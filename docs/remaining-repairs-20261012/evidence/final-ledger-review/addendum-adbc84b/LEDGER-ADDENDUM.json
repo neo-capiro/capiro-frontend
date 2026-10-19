@@ -1,0 +1,101 @@
+{
+  "createdUTC": "2026-10-12T20:57:40.130882+00:00",
+  "kind": "READ_ONLY_FINAL_SOURCE_LEDGER_ADDENDUM",
+  "checkpointPreserved": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "finalSource": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "checkpointPacket": "/tmp/capiro-remaining-final-ledger-review",
+  "checkpointManifestSHA256": "42260e95b4dc65374e672eed1e2498fc68caf42292ffd781bb8971b504c10082",
+  "purpose": "Bind the attendance test setup and Docker context repair to the final source without changing the prior finding or native-row assessment.",
+  "mappingAdditions": [
+    {
+      "owner": "calendar_relationships_review",
+      "source": "1cbca00a471a722ed249fccb95f761853e96246a",
+      "integration": "3c64057d3a436a728cd35f05b805ce6e7e7e8577",
+      "scope": "Attendance browser test setup only; no removed assertions and no production edits.",
+      "relatedFinding": "CR-06",
+      "newFinding": false,
+      "rowStatusChange": false
+    },
+    {
+      "owner": "root",
+      "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+      "integration": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+      "scope": "Root Docker context correction, import-safe verification CLI, CLI tests, package script and two structure-review paragraphs.",
+      "relatedFinding": null,
+      "newFinding": false,
+      "rowStatusChange": false
+    }
+  ],
+  "statusInvariants": {
+    "findings": 18,
+    "mappedUniqueOriginalRows": 34,
+    "directRows": 33,
+    "relatedModulesVariantRows": 1,
+    "supplementaryFindingsWithoutOriginalRowAllocation": [
+      "MS07",
+      "MS08",
+      "MS09"
+    ],
+    "inScopeRows": 337,
+    "inScopeFullAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowsNewlyAccepted": 0,
+    "originalExclusions": 8,
+    "otherInScopeRowsNotReassessed": 303,
+    "allOriginalFindingMetadataUnchanged": true,
+    "allOriginalRowMetadataUnchanged": true
+  },
+  "sourceConsequences": {
+    "applicationRuntimeUnchanged": true,
+    "runtimeSourceTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+    "prior132MappedPathsRemainIdentical": true,
+    "ownerMappingsNowRecorded": 15,
+    "historicalCallbackStillExcluded": true,
+    "repositoryFilesWrittenByReviewer": false
+  },
+  "focusedEvidence": {
+    "attendance": {
+      "producer": "calendar_relationships_review",
+      "ownerCommit": "1cbca00a471a722ed249fccb95f761853e96246a",
+      "report": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/REPORT.md",
+      "results": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/candidate-results.json",
+      "assertionPreservation": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/assertion-preservation.json",
+      "passed": 20,
+      "attendanceCases": 12,
+      "unchangedLifecycleCases": 8,
+      "failures": 0,
+      "skips": 0,
+      "retries": 0,
+      "meaning": "Owner replay of explicit Information-tab setup, with original behavioral assertions retained. Original combined failures are preserved; this is not a complete combined rerun."
+    },
+    "docker": {
+      "producer": "root",
+      "independentReview": "/tmp/capiro-remaining-docker-independent-review/final-evidence-binding.json",
+      "finalScriptBaseline": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/report.json",
+      "finalScriptCorrected": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/report.json",
+      "cliLog": "/tmp/capiro-remaining-docker-evidence/cli-final-script-tests.log",
+      "functionalRed": {
+        "actualDockerExportSucceeded": true,
+        "requiredWorkFilesMissing": 12,
+        "canariesPassed": 21
+      },
+      "green": {
+        "actualDockerExportSucceeded": true,
+        "requiredWorkFilesPresentAndByteIdentical": 12,
+        "canariesPassed": 21,
+        "checksPassed": 33
+      },
+      "cliCasesPassed": 3,
+      "sourceReceiptTiming": "Docker red/green receipts name parent HEAD 3c64057 while the helper/config edits were uncommitted. Their explicit final script/ignore hashes and 12 tracked Work hashes independently match committed adbc84b.",
+      "meaning": "Real local Docker/BuildKit scratch COPY verifies context semantics; no application/container build, live provider or deployment acceptance follows."
+    }
+  },
+  "remainingLimits": [
+    "All native acceptance and full-design limits in the 104495d packet remain open and unchanged.",
+    "All 337 in-scope rows remain unaccepted; no new native backend, provider, attendance execution, payment or deployed behavior was reviewed.",
+    "Docker scratch export does not establish a successful full image build, production smoke, registry publication or deployment.",
+    "This read-only addendum executes no browser, runtime, unit, typecheck, lint, Docker or build gate.",
+    "Root combined qualification is separately owned and is not claimed in this addendum."
+  ],
+  "combinedGates": "NOT_CLAIMED",
+  "newScopeGapsIdentified": "None within the two bounded follow-up changes. Prior SCOPE-GAPS.md remains authoritative for broader unassessed requirements."
+}

@@ -1,0 +1,14 @@
+{
+  "commit": "943d90c459998dac4ac90a462bf5a9c880d6a736",
+  "rootTree": "f6ba34d27536feef6931a22ddde87781a8a0e966",
+  "trees": {
+    "apps/web": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "apps/web/src": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e"
+  },
+  "cleanInstall": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund --cache /tmp/capiro-p1-npm-cache",
+    "exitCode": 0,
+    "packages": 847
+  },
+  "moduleOutputNote": "Root npm script consumed the --output option; Playwright actual artifacts remain apps/web/test-results/modules-browser and will be copied after completion. No case or assertion was omitted. JSON output uses absolute PLAYWRIGHT_JSON_OUTPUT_NAME."
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+    "kind": "function",
+    "symbol": "RichMailEditor",
+    "fingerprint": "40af6fabef2fcab149455aa2ef6b3bec6189b8fe19ac363a30cd688adca4bbf3",
+    "reason": "Owns one controlled Tiptap mail editor: supported schema, safe paste, formatting controls and external-rewrite/guarded-Undo synchronization remain one local presentation responsibility. The only new integration delegates public handleKeyPress selection reconciliation to the cohesive 35-line rich-mail-selection helper; that helper reconciles a focused collapsed native text caret only when the current model still has AllSelection, without changing document content, history or event consumption. Existing source-key lifetime, body ownership, authority, transport, attachment and provider responsibilities remain outside. Independently reviewed exact 125-line function against the controlled three-run text-loss baseline and v2 original/delayed/intentional-replacement controls; see docs/shipping-browser-correction-20261013/IMPLEMENTATION.md and the independent correction review packet. The size signal is accepted for this cohesive editor responsibility, not waived.",
+    "reviewedBy": "Codex independent Modules reviewer",
+    "reviewedOn": "2026-10-13"
+  }
+]

@@ -1,0 +1,340 @@
+{
+  "assessmentDate": "2026-10-12",
+  "evidenceHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "frozenApplicationCommit": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "frozenApplicationTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "mode": "READ_ONLY_SOURCE_AND_SYNTHETIC_BROWSER_ASSESSMENT",
+  "nativeStatus": "NOT_RUN_NATIVE",
+  "sourceEdits": false,
+  "providerCalls": false,
+  "note": "Passing repro cases assert the observed defect; they are not acceptance tests.",
+  "findings": [
+    {
+      "id": "MS01",
+      "title": "Existing-plan Add profiles invokes subscription creation checkout",
+      "severity": "P1",
+      "category": "confirmed_source_contract_mismatch",
+      "route": "/settings/billing",
+      "frameIds": [
+        "411:91384"
+      ],
+      "rowIds": [
+        "CORE-077"
+      ],
+      "locations": [
+        {
+          "path": "apps/web/src/features/settings/BillingSettings.tsx",
+          "line": 86
+        },
+        {
+          "path": "apps/web/src/features/settings/BillingSettings.tsx",
+          "line": 219
+        },
+        {
+          "path": "apps/web/src/shared/capiro/operations/settings.ts",
+          "line": 363
+        },
+        {
+          "path": "capirov2@4be13b0:apps/onboard-api/src/billing/billing.service.ts",
+          "line": 95
+        }
+      ],
+      "observed": "Active plan with hasSubscription=true enables Add profiles. Submission calls settings.billing.checkout with absolute quantity. Pinned backend always creates a Stripe Checkout Session in subscription mode; it does not read or update an existing subscription. ensureCustomer only reuses the customer. Existing subscription quantity management is documented on the portal path.",
+      "reproduction": "Using settingsFixtures active subscription, open Billing and Add profiles. Review checkout remains enabled. Do not submit. Read pinned backend service lines95-145 and148-166.",
+      "evidence": [
+        "billing-active-add-profiles.png",
+        "backend-pin-billing.service.ts",
+        "backend-pin-billing.controller.ts",
+        "figma-billing-context.json",
+        "browser-results.json"
+      ],
+      "deploymentImpact": "Block existing-payer Add profiles path pending reviewed semantics. Source mismatch is proven; duplicate subscriptions/charges were not executed or claimed."
+    },
+    {
+      "id": "MS02",
+      "title": "Modules Calendar loses a verified client selection on entry",
+      "severity": "P2",
+      "category": "confirmed_source_behavior",
+      "route": "/modules/calendar?clientId=<verified-client>",
+      "frameIds": [
+        "795:148369"
+      ],
+      "rowIds": [
+        "MCAL-002",
+        "MCAL-003"
+      ],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
+          "line": 18
+        }
+      ],
+      "observed": "After shared ApplicationBoundary verifies the client in the URL, Calendar initializes clientId to empty, displays Master view and sends engagement.meetings without clientId. Global /calendar retains the same hint correctly.",
+      "reproduction": "Supply verified client response and clients.list, visit scoped Modules calendar; inspect selected scope and request.",
+      "evidence": [
+        "calendar-scope-repro.json",
+        "calendar-scope-repro.png",
+        "browser-results.json"
+      ],
+      "deploymentImpact": "Wrong client scope is displayed and queried within permitted records; no authorization bypass claimed."
+    },
+    {
+      "id": "MS03",
+      "title": "Modules Agenda drops the start of tasks with a separate due date",
+      "severity": "P2",
+      "category": "confirmed_source_behavior",
+      "route": "/modules/calendar",
+      "frameIds": [
+        "460:90798"
+      ],
+      "rowIds": [
+        "MCAL-009"
+      ],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/calendar/agenda.ts",
+          "line": 56
+        }
+      ],
+      "observed": "plannerItems chooses task.dueOn ?? task.startOn and creates one task key. A task scheduled October10 and due October12 appears only October12. Global /calendar preserves both distinct occurrences.",
+      "reproduction": "Return task with startOn2026-10-10 and dueOn2026-10-12, select Agenda in October. Only the due row is rendered.",
+      "evidence": [
+        "calendar-task-occurrence-repro.png",
+        "browser-results.json",
+        "canonical-results.json"
+      ],
+      "deploymentImpact": "Users miss scheduled starts; route-specific defect, not a failed canonical global-calendar occurrence check."
+    },
+    {
+      "id": "MS04",
+      "title": "Modules meetings failure hides independently loaded agenda sources",
+      "severity": "P2",
+      "category": "confirmed_source_behavior",
+      "route": "/modules/calendar",
+      "frameIds": [
+        "460:90798"
+      ],
+      "rowIds": [
+        "MCAL-013"
+      ],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
+          "line": 48
+        },
+        {
+          "path": "apps/web/src/shared/module-ui/layout.tsx",
+          "line": 77
+        }
+      ],
+      "observed": "All agenda content is inside StatusPanel driven by meetings. A403 meeting response hides a successful Planner feed although its source chip says1. Global /calendar keeps the Planner rows visible with a meeting error.",
+      "reproduction": "Return403 for engagement.meetings, successful planner.tasks, select Agenda. Planner1 is visible but no table or task row exists.",
+      "evidence": [
+        "calendar-independent-feed-repro.png",
+        "browser-results.json",
+        "canonical-results.json"
+      ],
+      "deploymentImpact": "One unavailable source suppresses useful independently authorized sources."
+    },
+    {
+      "id": "MS05",
+      "title": "Modules agenda task links never open the referenced task",
+      "severity": "P2",
+      "category": "confirmed_source_behavior",
+      "route": "/modules/calendar -> /modules/planner?task=<id>",
+      "frameIds": [
+        "460:90798",
+        "411:100367"
+      ],
+      "rowIds": [
+        "MCAL-009"
+      ],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/calendar/agenda.ts",
+          "line": 70
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+          "line": 44
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+          "line": 59
+        }
+      ],
+      "observed": "Agenda links include task=id, but PlannerScreen and TaskWorkspace do not read that parameter. The destination is default My tasks with no selected task dialog. Generic Planner list/edit/complete works when a task is selected from its own list.",
+      "reproduction": "Click the synthetic task title in Modules Agenda. URL has task=id, Planner heading appears, dialog count remains0.",
+      "evidence": [
+        "calendar-task-target-repro.png",
+        "browser-results.json"
+      ],
+      "deploymentImpact": "Calendar-to-task drilldown stops short of the requested record; do not label the canonical Planner task writer unavailable."
+    },
+    {
+      "id": "MS06",
+      "title": "Modules meeting detail omits supplied join link and designed split view",
+      "severity": "P2",
+      "category": "confirmed_source_and_visual_defect",
+      "route": "/modules/engagement?view=meetings and /modules/calendar",
+      "frameIds": [
+        "411:94827"
+      ],
+      "rowIds": [
+        "MCAL-006"
+      ],
+      "locations": [
+        {
+          "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+          "line": 29
+        },
+        {
+          "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+          "line": 34
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+          "line": 107
+        }
+      ],
+      "observed": "Reviewed response schema retains joinLink but shared MeetingDetail never renders it. Fixture with https://example.test/join yields no link in the dialog. The meetings surface is a table plus modal, unlike Figma list/detail split view with Join, attendee line and prep panel. No claim that missing Meri execution controls can work without backend integration.",
+      "reproduction": "Open populated Engagement Meetings and click record. Inspect dialog and supplied joinLink.",
+      "evidence": [
+        "engagement-meeting-repro.png",
+        "figma-engagement.png",
+        "figma-engagement-context.json",
+        "browser-results.json"
+      ],
+      "deploymentImpact": "Users cannot join from the Modules meeting detail even when the source supplies a link; substantial remaining Figma mismatch. Portfolio global MeetingDetail separately renders Join and attendees."
+    },
+    {
+      "id": "MS07",
+      "title": "Workspace desktop filters expand to three full-width rows",
+      "severity": "P2",
+      "category": "confirmed_visual_defect",
+      "route": "/modules/workspace",
+      "frameIds": [
+        "411:112533"
+      ],
+      "rowIds": [],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+          "line": 50
+        },
+        {
+          "path": "apps/web/src/shared/module-ui/module-ui.module.css",
+          "line": 75
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+          "line": 175
+        }
+      ],
+      "observed": "Workspace CSS targets .filters > select. SelectInput renders a Radix button with width100%, so client/template/status triggers each take a whole row. At1440 the document table begins around y749 instead of the designed y584 compact layout.",
+      "reproduction": "Visit Workspace at1440x1040 with reviewed empty library fixture. The three dropdowns span the full content width.",
+      "evidence": [
+        "browser-workspace-desktop.png",
+        "figma-workspace.png",
+        "figma-workspace-context.json"
+      ],
+      "deploymentImpact": "Pushes library content below the intended fold; backend data does not resolve this CSS mismatch."
+    },
+    {
+      "id": "MS08",
+      "title": "Planner All tasks lacks the authored client grouping and scope controls",
+      "severity": "P2",
+      "category": "confirmed_visual_and_presentation_gap",
+      "route": "/modules/planner?view=all-tasks",
+      "frameIds": [
+        "411:95475"
+      ],
+      "rowIds": [],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+          "line": 82
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+          "line": 185
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+          "line": 113
+        }
+      ],
+      "observed": "Figma groups All tasks under client headings with Open client links and Group by Client plus scope selector. Source renders one flat task table with estimate/actual columns and has no Group by control or page-level client selector. Available task clientId and project membership filtering are already represented in source.",
+      "reproduction": "Open All tasks with a permitted populated task list; compare controls and table structure with411:95475.",
+      "evidence": [
+        "browser-planner-desktop.png",
+        "figma-planner.png",
+        "figma-planner-context.json"
+      ],
+      "deploymentImpact": "Firm-wide task presentation is not Figma accepted; generic task operations remain implemented."
+    },
+    {
+      "id": "MS09",
+      "title": "Public Planner form loses the designed title and validation hierarchy",
+      "severity": "P3",
+      "category": "confirmed_visual_defect",
+      "route": "/forms/<synthetic-token>",
+      "frameIds": [
+        "411:108618"
+      ],
+      "rowIds": [],
+      "locations": [
+        {
+          "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+          "line": 63
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+          "line": 143
+        }
+      ],
+      "observed": "Figma places eyebrow and a40px title within the card over a muted canvas, with bounded submit and styled error strip. Source puts eyebrow outside the card, uses shared Panel small heading, white canvas, full-width submit and unstyled error after submit. Error retains input and successful fixture submission shows the receipt.",
+      "reproduction": "Render Request a briefing with text/select/attachment questions; submit against a synthetic400 error, then successful received:true fixture.",
+      "evidence": [
+        "browser-form-error-desktop.png",
+        "browser-form-receipt-desktop.png",
+        "figma-form.png",
+        "figma-form-context.json",
+        "browser-results.json"
+      ],
+      "deploymentImpact": "Visual acceptance remains open; the checked receipt/error behavior passes synthetic scope."
+    }
+  ],
+  "dependenciesAndUnavailable": [
+    {
+      "id": "MS-D01",
+      "category": "backend_native_dependency",
+      "scope": "All14 Global Master calendar rows and Modules/Settings",
+      "detail": "No native Clerk session, role/RLS matrix, exact deployed API release, real calendar provider, microphone/socket/S3, billing, mail delivery or durable strategy execution was qualified. All14 row full acceptances remain OPEN_FINAL_ACCEPTANCE."
+    },
+    {
+      "id": "MS-D02",
+      "category": "backend_contract_or_integration_dependency",
+      "scope": "MCAL-010",
+      "detail": "Canonical /calendar calls only Federal Register upcoming-deadlines (max50/next30days); no SAM/SBIR funding feed appears in its queries.ts. Modules Calendar has a separate intelligence.funding.search adapter, which is not proof of global coverage. Full range and funding composition still need owner integration/acceptance."
+    },
+    {
+      "id": "MS-D03",
+      "category": "legitimate_unavailable_feature",
+      "scope": "MCAL-012",
+      "detail": "Publisher effective civil dates are implemented with provenance/partial-coverage warnings. Markup/floor-vote forecasts remain unavailable without published source/confidence/time semantics."
+    },
+    {
+      "id": "MS-U01",
+      "category": "legitimate_unavailable_feature",
+      "scope": "Settings Memory/Meri Preferences, Engagement aggregate plans, HQ impersonation/SAM/provisioning, Meri assistant controls",
+      "detail": "Documented missing reviewed contracts are explicitly unavailable, not confirmed frontend failures. Do not substitute legacy runtime or invent aggregate/private access."
+    },
+    {
+      "id": "MS-U02",
+      "category": "legitimate_unavailable_feature",
+      "scope": "Billing cancellation-window/survey/term-change frames",
+      "detail": "Hosted billing portal is implemented; authored in-app cancellation-window/survey/term semantics lack equivalent reviewed API. Distinct from confirmed MS01 checkout mismatch."
+    }
+  ]
+}

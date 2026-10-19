@@ -1,0 +1,173 @@
+
+> @capiro/web@0.1.0 test
+> vitest run tests/mailbox-selection.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-contracts/apps/web
+
+ ❯ tests/mailbox-selection.test.ts (17 tests | 14 failed) 54ms
+     × rechecks and sends mailbox B, without leaking review metadata 33ms
+     × never substitutes or dispatches a stale/absent mailbox 3ms
+     × never substitutes or dispatches a stale/absent mailbox 2ms
+     × never substitutes or dispatches a stale/absent mailbox 1ms
+     × never substitutes or dispatches a stale/absent mailbox 1ms
+     × never substitutes or dispatches a stale/absent mailbox 1ms
+     × a mismatched sender/signature receipt is uncertain and never replayed 1ms
+     × a mismatched sender/signature receipt is uncertain and never replayed 1ms
+     × a mismatched sender/signature receipt is uncertain and never replayed 1ms
+     × a mismatched sender/signature receipt is uncertain and never replayed 1ms
+     × a mismatched sender/signature receipt is uncertain and never replayed 1ms
+     × a mismatched sender/signature receipt is uncertain and never replayed 1ms
+     × refuses a reply from B to an A-owned thread before dispatch 1ms
+     × an actor change during mailbox reread dispatches nothing 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > rechecks and sends mailbox B, without leaking review metadata
+AssertionError: expected { ok: true, …(2) } to match object { ok: true, …(7) }
+
+- Expected
++ Received
+
+  {
+    "messageId": "10000000-0000-4000-8000-000000000001",
+    "ok": true,
+-   "senderConnectionId": "10000000-0000-4000-8000-000000000002",
+-   "senderEmail": "b@example.test",
+-   "senderName": "Mailbox B",
+-   "signatureAppended": false,
+-   "signaturePolicy": "actor",
+    "threadId": "30000000-0000-4000-8000-000000000001",
+  }
+
+ ❯ tests/mailbox-selection.test.ts:25:59
+     23|   it("rechecks and sends mailbox B, without leaking review metadata", …
+     24|     const f = fixture({ rows: [{ ...mailbox, id: a, accountEmail: "a@e…
+     25|     await expect(sendReviewedMail(f.api, input, () => {})).resolves.to…
+       |                                                           ^
+     26|     expect(f.calls.map((call) => call.path)).toEqual(["/api/backend/co…
+     27|     expect(f.writes()).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > never substitutes or dispatches a stale/absent mailbox
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > never substitutes or dispatches a stale/absent mailbox
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > never substitutes or dispatches a stale/absent mailbox
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > never substitutes or dispatches a stale/absent mailbox
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > never substitutes or dispatches a stale/absent mailbox
+AssertionError: promise resolved "{ ok: true, …(2) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "messageId": "10000000-0000-4000-8000-000000000001",
++   "ok": true,
++   "threadId": "30000000-0000-4000-8000-000000000001",
+  }
+
+ ❯ tests/mailbox-selection.test.ts:36:59
+     34|   ])("never substitutes or dispatches a stale/absent mailbox", async (…
+     35|     const f = fixture({ rows });
+     36|     await expect(sendReviewedMail(f.api, input, () => {})).rejects.toM…
+       |                                                           ^
+     37|     expect(f.writes()).toHaveLength(0);
+     38|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > a mismatched sender/signature receipt is uncertain and never replayed
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > a mismatched sender/signature receipt is uncertain and never replayed
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > a mismatched sender/signature receipt is uncertain and never replayed
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > a mismatched sender/signature receipt is uncertain and never replayed
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > a mismatched sender/signature receipt is uncertain and never replayed
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > a mismatched sender/signature receipt is uncertain and never replayed
+AssertionError: promise resolved "{ ok: true, …(2) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "messageId": "10000000-0000-4000-8000-000000000001",
++   "ok": true,
++   "threadId": "30000000-0000-4000-8000-000000000001",
+  }
+
+ ❯ tests/mailbox-selection.test.ts:44:59
+     42|   ])("a mismatched sender/signature receipt is uncertain and never rep…
+     43|     const f = fixture({ result: { ...receipt, ...change } });
+     44|     await expect(sendReviewedMail(f.api, input, () => {})).rejects.toM…
+       |                                                           ^
+     45|     expect(f.writes()).toHaveLength(1);
+     46|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > refuses a reply from B to an A-owned thread before dispatch
+AssertionError: promise resolved "{ ok: true, …(2) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "messageId": "10000000-0000-4000-8000-000000000001",
++   "ok": true,
++   "threadId": "30000000-0000-4000-8000-000000000001",
+  }
+
+ ❯ tests/mailbox-selection.test.ts:54:76
+     52|   it("refuses a reply from B to an A-owned thread before dispatch", as…
+     53|     const f = fixture({ connectionId: a });
+     54|     await expect(sendReviewedMail(f.api, { ...input, threadId }, () =>…
+       |                                                                            ^
+     55|     expect(f.writes()).toHaveLength(0);
+     56|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  tests/mailbox-selection.test.ts > reviewed exact mailbox selection > an actor change during mailbox reread dispatches nothing
+AssertionError: expected Error: Your session changed while sending… { uncertain: true } to match object { uncertain: false }
+
+- Expected
++ Received
+
+- {
+-   "uncertain": false,
++ MailSendError {
++   "uncertain": true,
+  }
+
+ ❯ tests/mailbox-selection.test.ts:61:8
+     59|     await expect(sendReviewedMail(f.api, input, () => {
+     60|       if (f.calls.length) throw Error("Actor replaced");
+     61|     })).rejects.toMatchObject({ uncertain: false });
+       |        ^
+     62|     expect(f.writes()).toHaveLength(0);
+     63|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  14 failed | 3 passed (17)
+   Start at  05:11:49
+   Duration  628ms (transform 168ms, setup 0ms, import 427ms, tests 54ms, environment 0ms)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c vitest run tests/mailbox-selection.test.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

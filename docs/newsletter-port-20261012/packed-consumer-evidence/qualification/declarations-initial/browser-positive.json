@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "types": [],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler"
+  },
+  "files": [
+    "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/consumer-positive.ts"
+  ]
+}

@@ -1,0 +1,26 @@
+--- pinned apps/web/tests/browser/server.mjs
++++ external server.mjs
+@@ -1,8 +1,8 @@
+-import { createServer } from "vite";
++import { createServer } from "/workspace/capiro-next-prospect-files/node_modules/vite/dist/node/index.js";
+ import { fileURLToPath } from "node:url";
+ import path from "node:path";
+ import { existsSync, realpathSync } from "node:fs";
+-const app = fileURLToPath(new URL("../../", import.meta.url));
++const app = "/workspace/capiro-next-prospect-files/apps/web";
+ const navigation = path.join(app, "tests/browser/navigation.tsx");
+ // Worktree dependency installs may be junctions outside this checkout. Vite
+ // resolves font imports to the real path, so allow the installed dependency
+@@ -50,10 +50,10 @@
+   },
+   server: {
+     host: "127.0.0.1",
+-    port: 5191,
++    port: Number(process.env.PROSPECT_FILES_PORT ?? 5299),
+     strictPort: true,
+     fs: { allow: [app, path.join(app, "../../packages/ui"), ...dependencies] },
+   },
+ });
+ await server.listen();
+-console.log("Test-only component server: http://127.0.0.1:5191");
++console.log(`Test-only component server: http://127.0.0.1:${process.env.PROSPECT_FILES_PORT ?? 5299}`);

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "types": [],
+    "lib": ["ES2022", "DOM"]
+  },
+  "files": ["fixtures/consumer-positive.ts", "fixtures/receiving-positive.ts"]
+}

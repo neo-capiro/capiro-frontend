@@ -1,0 +1,25 @@
+{
+  "changesAfterRunOutsideTestImportClosure": [
+    {
+      "file": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "runSHA256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0",
+      "currentSHA256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3"
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "runSHA256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b",
+      "currentSHA256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171"
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "runSHA256": "af7b2d3240a164c50e19c1b702653e4d52bc0aa2ce50e24b558ed453eeb6290c",
+      "currentSHA256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458"
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "runSHA256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba",
+      "currentSHA256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b"
+    }
+  ],
+  "relevantSourceAndTestsStillExact": true
+}

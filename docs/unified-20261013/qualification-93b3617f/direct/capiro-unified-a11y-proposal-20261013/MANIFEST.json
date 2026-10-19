@@ -1,0 +1,106 @@
+{
+  "sourceHead": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "status": "SEALED_READ_ONLY_PROPOSAL_UNAPPLIED_UNRUN",
+  "files": [
+    {
+      "file": "01-confirmed-product.patch",
+      "bytes": 4474,
+      "sha256": "fee434f5d8fea546d88acc17503fbb15d8bfab08063c00597bc15b3c4e8689ca"
+    },
+    {
+      "file": "02-fixture-landmarks.patch",
+      "bytes": 722,
+      "sha256": "9313c983fefddffef45509012f104203f6d5b7f02575c701a8d3c2b4e7983593"
+    },
+    {
+      "file": "03-incomplete-semantic-followup.patch",
+      "bytes": 1517,
+      "sha256": "61d2154d2485570be5ac9b910f3f8740629abd03708e6b9bf8bc63df6df29e65"
+    },
+    {
+      "file": "ALL-PROPOSED.patch",
+      "bytes": 6479,
+      "sha256": "28d68a58f14c51131cfb56ce3c35ca03ca8cbaea7e2ee43112910717e55bd19e"
+    },
+    {
+      "file": "BASELINE-RUNNER-PINS.json",
+      "bytes": 948,
+      "sha256": "7a0efbab6f9a567f12633d64891f67438a64d6f877d4a60694d240a4e8486199"
+    },
+    {
+      "file": "CONTRAST-ARITHMETIC.json",
+      "bytes": 1309,
+      "sha256": "752e572c33344d1cbdf4d024366f758cf61de28ea9c147f39f28b08a8e8cfd96"
+    },
+    {
+      "file": "FINAL-READ-ONLY-RECEIPT.json",
+      "bytes": 3727,
+      "sha256": "dd49ebf794d2b4c521de9d817321e81751c9e059cc25ae1b29de529d7743a755"
+    },
+    {
+      "file": "INCOMPLETE-DISPOSITIONS.json",
+      "bytes": 46434,
+      "sha256": "5d94366c36cd88342d714154c72f93587743d2891abf7923493a9935758e48ae"
+    },
+    {
+      "file": "RAW-AUDIT-INVENTORY.json",
+      "bytes": 189198,
+      "sha256": "70a23a2a70e1c429accd8cf6e1f2a5ece61d6d320ec4e65ed953cea7979a5fc3"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 9156,
+      "sha256": "bb639be3b1e94ed395b2801f0862786c658cc8d7b41f0a089e90ad0a11693263"
+    },
+    {
+      "file": "SOURCE-PINS.json",
+      "bytes": 6475,
+      "sha256": "b0fe5216884ed7f8a0dc349dee48f18bafeb50206b45bd55a5459c4fbd076db9"
+    },
+    {
+      "file": "VERIFICATION-PLAN.md",
+      "bytes": 6892,
+      "sha256": "642ca7c95c01628b80a8d6e50ad73948f142b89323557feed2755885670d5077"
+    },
+    {
+      "file": "candidate/apps/web/src/app/globals.css",
+      "bytes": 1113,
+      "sha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d"
+    },
+    {
+      "file": "candidate/apps/web/src/features/meri/MeriSuggestions.tsx",
+      "bytes": 1988,
+      "sha256": "98408cf322ae10295b4926cf6a293c79ae640aa3ab0bc61d157d1d225bf106f2"
+    },
+    {
+      "file": "candidate/apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "bytes": 4234,
+      "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c"
+    },
+    {
+      "file": "candidate/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "bytes": 3478,
+      "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09"
+    },
+    {
+      "file": "candidate/apps/web/src/features/portfolio/index/portfolio.module.css",
+      "bytes": 8306,
+      "sha256": "7f2eaa718ee225f0ccb77f5043c65d0c3fe6ea18dc4b5b7838d102295b3bcb05"
+    },
+    {
+      "file": "candidate/apps/web/src/shared/shell/ProductShell.tsx",
+      "bytes": 1727,
+      "sha256": "65e4754e186893f8956d6bf3e0580f6a8e0b1e5c782ceefc88d282208859b4d1"
+    },
+    {
+      "file": "candidate/apps/web/test/browser/main.tsx",
+      "bytes": 5847,
+      "sha256": "8e450fb7a59fc6d9b3a2e6ee784e3188ffb8251badc47672fb382f2d2e82029c"
+    },
+    {
+      "file": "prepare-proposal.py",
+      "bytes": 8843,
+      "sha256": "8053b15717dd49b2d9aa076800368a6cfde9d30304cce00fa53ce148d5fec307"
+    }
+  ]
+}

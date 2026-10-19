@@ -1,0 +1,53 @@
+[
+  {
+    "path": "apps/web/test/browser/meri-files-fixtures.ts",
+    "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+    "nonblank": 260,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/meri-files-fixtures.ts",
+        "kind": "function",
+        "symbol": "filesFixture",
+        "line": 98,
+        "nonblank": 96,
+        "fingerprint": "c553ce58544088d3207f3a12ec11c127349f0b17c191f8ec55c48e6fcf7b5395"
+      }
+    ]
+  },
+  {
+    "path": "apps/web/test/browser/meri-files-workflow.spec.ts",
+    "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+    "nonblank": 214,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/meri-files-workflow.spec.ts",
+        "kind": "function",
+        "symbol": "<anonymous>",
+        "line": 19,
+        "nonblank": 108,
+        "fingerprint": "225ff7109c6fd3eb2e52d698230396f0a94c65aa2e74334cf1a1da3f6432cf95"
+      }
+    ]
+  },
+  {
+    "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+    "nonblank": 309,
+    "findings": []
+  },
+  {
+    "path": "apps/web/test/browser/meri-files-navigation.spec.ts",
+    "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+    "nonblank": 157,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/meri-files-navigation.spec.ts",
+        "kind": "function",
+        "symbol": "<anonymous>",
+        "line": 14,
+        "nonblank": 85,
+        "fingerprint": "f9299e646d79d349074f36ba77490d3db60e95b1569e0c7be981de47b5545d45"
+      }
+    ]
+  }
+]

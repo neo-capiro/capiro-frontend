@@ -1,0 +1,419 @@
+{
+  "source": "845cebade818b8ceef1568574662196d813d14d0",
+  "stage": "install",
+  "profileSha256": "8a4ff50a976f843f68a44cd246e29224b3142eef7685f2771b5bb0b4fba44131",
+  "workingDirectory": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input",
+  "argv": [
+    "node",
+    "--max-old-space-size=512",
+    "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+    "ci",
+    "--ignore-scripts",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "startedAt": "2026-10-16T05:18:10.4841767+00:00",
+  "endedAt": "2026-10-16T05:18:54.1782571+00:00",
+  "rootPid": 38444,
+  "exitCode": 0,
+  "rootExited": true,
+  "nodeVersion": "24.19.0",
+  "capacity": {
+    "at": "2026-10-16T05:18:10.4518271+00:00",
+    "availableMiB": 11620,
+    "commitHeadroomMiB": 2956,
+    "requiredStartCommitMiB": 2560,
+    "requiredStartPhysicalMiB": 1024,
+    "remainingFloorMiB": 1024
+  },
+  "ownedProcesses": [
+    {
+      "pid": 38980,
+      "name": "conhost",
+      "startedUtcTicks": 639277246904934026,
+      "commandLine": "\\??\\C:\\Windows\\system32\\conhost.exe 0x4"
+    },
+    {
+      "pid": 38444,
+      "name": "node",
+      "startedUtcTicks": 639277246904866595,
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" --max-old-space-size=512 \"C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js\" ci --ignore-scripts --no-audit --no-fund"
+    }
+  ],
+  "sampledAggregatePeakWorkingSetBytes": 1183825920,
+  "memorySamples": [
+    {
+      "at": "2026-10-16T05:18:11.5539377+00:00",
+      "availableMiB": 11548,
+      "commitHeadroomMiB": 2848,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 79331328
+    },
+    {
+      "at": "2026-10-16T05:18:12.5068609+00:00",
+      "availableMiB": 11477,
+      "commitHeadroomMiB": 2754,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 153350144
+    },
+    {
+      "at": "2026-10-16T05:18:13.4594445+00:00",
+      "availableMiB": 11067,
+      "commitHeadroomMiB": 2365,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 695713792
+    },
+    {
+      "at": "2026-10-16T05:18:14.3830533+00:00",
+      "availableMiB": 10729,
+      "commitHeadroomMiB": 2099,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1134911488
+    },
+    {
+      "at": "2026-10-16T05:18:16.5037882+00:00",
+      "availableMiB": 10662,
+      "commitHeadroomMiB": 1831,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1174843392
+    },
+    {
+      "at": "2026-10-16T05:18:18.4035897+00:00",
+      "availableMiB": 10707,
+      "commitHeadroomMiB": 1857,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1175871488
+    },
+    {
+      "at": "2026-10-16T05:18:20.1367246+00:00",
+      "availableMiB": 10637,
+      "commitHeadroomMiB": 1779,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1183080448
+    },
+    {
+      "at": "2026-10-16T05:18:21.4834993+00:00",
+      "availableMiB": 10688,
+      "commitHeadroomMiB": 1889,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1183825920
+    },
+    {
+      "at": "2026-10-16T05:18:23.0517108+00:00",
+      "availableMiB": 10807,
+      "commitHeadroomMiB": 2006,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1073504256
+    },
+    {
+      "at": "2026-10-16T05:18:24.5865258+00:00",
+      "availableMiB": 10715,
+      "commitHeadroomMiB": 1941,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1073664000
+    },
+    {
+      "at": "2026-10-16T05:18:25.9344645+00:00",
+      "availableMiB": 10616,
+      "commitHeadroomMiB": 1835,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1074642944
+    },
+    {
+      "at": "2026-10-16T05:18:27.2284164+00:00",
+      "availableMiB": 10708,
+      "commitHeadroomMiB": 2015,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1074651136
+    },
+    {
+      "at": "2026-10-16T05:18:28.5899811+00:00",
+      "availableMiB": 10685,
+      "commitHeadroomMiB": 2001,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1074651136
+    },
+    {
+      "at": "2026-10-16T05:18:29.9461206+00:00",
+      "availableMiB": 10674,
+      "commitHeadroomMiB": 1989,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1074835456
+    },
+    {
+      "at": "2026-10-16T05:18:31.2067628+00:00",
+      "availableMiB": 10649,
+      "commitHeadroomMiB": 1986,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1074839552
+    },
+    {
+      "at": "2026-10-16T05:18:32.4414806+00:00",
+      "availableMiB": 10586,
+      "commitHeadroomMiB": 1909,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1075347456
+    },
+    {
+      "at": "2026-10-16T05:18:33.6017883+00:00",
+      "availableMiB": 10517,
+      "commitHeadroomMiB": 1882,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 1078517760
+    },
+    {
+      "at": "2026-10-16T05:18:34.7586525+00:00",
+      "availableMiB": 10877,
+      "commitHeadroomMiB": 2313,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 652972032
+    },
+    {
+      "at": "2026-10-16T05:18:35.9415093+00:00",
+      "availableMiB": 10895,
+      "commitHeadroomMiB": 2346,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 652972032
+    },
+    {
+      "at": "2026-10-16T05:18:37.2008860+00:00",
+      "availableMiB": 10895,
+      "commitHeadroomMiB": 2309,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 653434880
+    },
+    {
+      "at": "2026-10-16T05:18:38.3762508+00:00",
+      "availableMiB": 10893,
+      "commitHeadroomMiB": 2310,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 653447168
+    },
+    {
+      "at": "2026-10-16T05:18:39.6546282+00:00",
+      "availableMiB": 10896,
+      "commitHeadroomMiB": 2304,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 653447168
+    },
+    {
+      "at": "2026-10-16T05:18:40.7974518+00:00",
+      "availableMiB": 10877,
+      "commitHeadroomMiB": 2257,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 653430784
+    },
+    {
+      "at": "2026-10-16T05:18:41.9094083+00:00",
+      "availableMiB": 10979,
+      "commitHeadroomMiB": 2391,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 653430784
+    },
+    {
+      "at": "2026-10-16T05:18:43.0183963+00:00",
+      "availableMiB": 10963,
+      "commitHeadroomMiB": 2390,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 653443072
+    },
+    {
+      "at": "2026-10-16T05:18:44.2187200+00:00",
+      "availableMiB": 10906,
+      "commitHeadroomMiB": 2311,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 655265792
+    },
+    {
+      "at": "2026-10-16T05:18:45.3199237+00:00",
+      "availableMiB": 10893,
+      "commitHeadroomMiB": 2292,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 655536128
+    },
+    {
+      "at": "2026-10-16T05:18:46.3396800+00:00",
+      "availableMiB": 10835,
+      "commitHeadroomMiB": 2199,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 655532032
+    },
+    {
+      "at": "2026-10-16T05:18:47.2983776+00:00",
+      "availableMiB": 11088,
+      "commitHeadroomMiB": 2502,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 465604608
+    },
+    {
+      "at": "2026-10-16T05:18:48.2043391+00:00",
+      "availableMiB": 11071,
+      "commitHeadroomMiB": 2526,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 465915904
+    },
+    {
+      "at": "2026-10-16T05:18:49.1208110+00:00",
+      "availableMiB": 11067,
+      "commitHeadroomMiB": 2514,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 465915904
+    },
+    {
+      "at": "2026-10-16T05:18:50.0117615+00:00",
+      "availableMiB": 11050,
+      "commitHeadroomMiB": 2491,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 465924096
+    },
+    {
+      "at": "2026-10-16T05:18:50.8988777+00:00",
+      "availableMiB": 11042,
+      "commitHeadroomMiB": 2490,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 466112512
+    },
+    {
+      "at": "2026-10-16T05:18:51.7849142+00:00",
+      "availableMiB": 11060,
+      "commitHeadroomMiB": 2493,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 466112512
+    },
+    {
+      "at": "2026-10-16T05:18:52.7476953+00:00",
+      "availableMiB": 11013,
+      "commitHeadroomMiB": 2419,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 466681856
+    },
+    {
+      "at": "2026-10-16T05:18:53.8176516+00:00",
+      "availableMiB": 10967,
+      "commitHeadroomMiB": 2398,
+      "ownedPids": [
+        38444,
+        38980
+      ],
+      "aggregateWorkingSetBytes": 484782080
+    }
+  ],
+  "timedOut": false,
+  "pressureStop": false,
+  "monitorFailure": null,
+  "forcedCleanupPids": [],
+  "remainingDirectChildren": [],
+  "generatedBeforeSha256": "d3afa6d2f64474c3e077ea1ef35d23b45caa3ab2cec3e117faccc13be4729f34",
+  "generatedAfterSha256": "d3afa6d2f64474c3e077ea1ef35d23b45caa3ab2cec3e117faccc13be4729f34",
+  "afterSourceStatus": [],
+  "lockUnchanged": true,
+  "scopeValid": true,
+  "synthetic": true,
+  "browserNextProviderDatabase": false,
+  "automaticNextStage": false
+}

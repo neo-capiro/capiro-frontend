@@ -1,0 +1,191 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+    "kind": "function",
+    "symbol": "TrackBillDialog",
+    "fingerprint": "47a3fb02b37cfb437a8606642af70f570d4cd695fa45474ca9617f2e1d742683",
+    "reason": "One bill-search-and-selection dialog owns its search inputs, current result projection, selection disposal and explicit Track action. The canonical query hook and current-data helper own cache provenance and pre-dispatch validation; the API owns transport. Keeping result selection and its rendered radio/disabled state together makes revision invalidation visible and does not combine another workflow.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
+    "kind": "function",
+    "symbol": "BriefEditor",
+    "fingerprint": "2e01be3301868165ac9febcd14927df2a751fe06ffe95c8f8336f239629f5066",
+    "reason": "One saved brief edit transaction owns draft fields, the frozen SaveInput, pending/unknown concealment, conflict review/rebase and close confirmation. The existing editing helpers own section merging and the write hook/API own persistence. Availability generations belong to this same draft/review lifetime. No unrelated workflow or new transport responsibility is embedded in its large field/recovery JSX. The revised same-component conditional reset clears only an unavailable reviewed record or selection, terminates after that reset, and leaves submitted writer state and existing generation fencing intact.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/BriefSource.tsx",
+    "kind": "function",
+    "symbol": "BriefSource",
+    "fingerprint": "8f38bcb85481eb503b0bd212c1708b5d4e9e1f009af1ca0c53a03f11201b685d",
+    "reason": "One citation detail dialog presents immutable saved citation and snapshot facts alongside a separately gated current-resolution result. The resolver API owns retrieval and sourceHref owns URL policy. Saved and current evidence are intentionally shown together to explain provenance, while the failed current result is withheld; splitting solely by line count would obscure that distinction without separating an independent owner.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+    "kind": "function",
+    "symbol": "BriefViewer",
+    "fingerprint": "156296bda66630cbf3b9a9974c543f120a3d2577320790a847377b5585b0ce1d",
+    "reason": "One saved brief viewer owns current-versus-historical selection and composition of document, history, source and editing dialogs. Dedicated components own each leaf presentation and mutation lifecycle. Retaining the exact editing snapshot through a temporary read failure is a viewer/editor lifetime seam, not a second persistence implementation. The revised same-component conditional reset clears only an unavailable reviewed record or selection, terminates after that reset, and leaves submitted writer state and existing generation fencing intact.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+    "kind": "function",
+    "symbol": "ContactEditor",
+    "fingerprint": "47bc6b1414324862a4d8d9cc6466c05faf4ff6f453fd130418c2322ac4db9a4b",
+    "reason": "One prospect contact editor owns its initial record/draft, field validation, existing-contact removal and CAS recovery. The narrow new latch captures canonical submitted creation variables after an unknown outcome and owns the same form's frozen fields and explicit exact retry; it cannot be cleared by a later refusal. Availability concealment retains this same dispatched editor. The hooks/API still own transport and receipt validation; no DTO copy, cross-feature cache service, durable journal or second workflow is introduced. The large body primarily renders the fields and recovery controls, so this exact owner remains cohesive. The revised same-component conditional reset clears only an unavailable reviewed record or selection, terminates after that reset, and leaves submitted writer state and existing generation fencing intact.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+    "kind": "function",
+    "symbol": "ProspectContacts",
+    "fingerprint": "8d9662a1022435633467481eb346a4cbad166a3bbf327d416b6201636e2552af",
+    "reason": "One prospect contacts section owns current-read/role presentation, its contact list and one selected editor snapshot. ContactEditor owns draft/recovery and the canonical query hook owns retrieval. Snapshot-specific close and availability props are small ownership seams that prevent stale presentation from clearing a newer editor; no independent service or generic cache framework is introduced.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+    "kind": "function",
+    "symbol": "ClientLinkDialog",
+    "fingerprint": "02718467f77d1f64359d11917bdc7de0767f06b810dd9cd68efa51e85ca3bb52",
+    "reason": "One explicit existing-client link confirmation owns the normalized search term, current candidate projection, selected candidate and confirmation checkbox. The query/API own native lookup and link dispatch. Selection revocation and mutation outcome preservation are aspects of the same confirmation transaction; the large JSX does not add a second conversion workflow or provider operation. The revised same-component conditional reset clears only an unavailable reviewed record or selection, terminates after that reset, and leaves submitted writer state and existing generation fencing intact.",
+    "reviewedBy": "Codex modules_settings_review independent",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "35a3a7afe621bc15e4d5fd4f619ead15457548e5a9fb5dad446480473f4111bf",
+    "reason": "This module composes one meeting-artifact list/editor/share interaction for notes and debriefs, which use the same canonical list, draft and attempt lifecycle. It owns presentation and local draft/selection state; schemas, response admission, transport operations, native receipt validation and session-scoped mutation uncertainty remain in their existing separate owners. The new cache checks are local action/read admission, not a second backend or authorization system. At 403 nonblank lines, another extraction solely for the threshold would distribute tightly related draft/confirmation state without separating a new domain.",
+    "reviewedBy": "Codex independent objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor",
+    "fingerprint": "84987c52a7ac9f398dfeda361b152aace59767606e2d29e112653a57d9df4301",
+    "reason": "The editor owns one current meeting-artifact interaction: current list projection, retained local draft, share selection, preview ID, and availability of commands against that list. Keeping the attempt hook mounted above concealed dialogs preserves pending/unknown intent. Query and mutation adapters own receiving and dispatch; the editor rechecks canonical cache state rather than maintaining a parallel data store. The larger JSX covers the two related artifact presentations and their save/share confirmations; no provider, transport, approval authority or artifact generation implementation is embedded here. This review is limited to these exact bytes and does not waive future growth.",
+    "reviewedBy": "Codex independent objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor > <anonymous> #8",
+    "fingerprint": "9642d78ce89ccbe26f470394b88d974c14851ab8e3f6c1ec2a6c506188b7ae86",
+    "reason": "This map callback renders one already-admitted saved artifact card: status/sharing knowledge, restricted-content treatment, body and its edit/approve/share/unshare/export entry points. The repeated current-row checks prevent a stale rendered card from acting after the source changes; dispatch delegates to changeArtifact and the existing mutation owner. It does not fetch or persist records, and all branches describe the same artifact. A card extraction could aid later readability but is not necessary to separate a currently unrelated responsibility.",
+    "reviewedBy": "Codex independent objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+    "kind": "function",
+    "symbol": "useArtifactMutation",
+    "fingerprint": "29475903976d48e6b4238dfa7fa676e3c5a0839f900be25ef4442f997ca0344f",
+    "reason": "This hook is the existing actor/meeting/client/kind-scoped artifact attempt fence. Its synchronous pending write, shared sharing-attempt check, lifetime abort, uncertain/refused disposition and retained exact change describe one non-idempotent attempt. The sole extension forwards the optional current-list callback to the API owner; request/receipt mapping remains there. Preserving the hook instance while dialogs are concealed avoids resetting uncertainty. No generic retry framework or extra workflow is introduced.",
+    "reviewedBy": "Codex independent objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/documents/SavedMeetingDocumentPreview.tsx",
+    "kind": "function",
+    "symbol": "SavedMeetingDocumentPreview",
+    "fingerprint": "2cf04c4bc89d14cd608c3409ee52eaf0e20a3e8d14ff1017319ea66c85d2d445",
+    "reason": "This component presents and prints one saved meeting document under the existing document authority/read owners. It withholds stale content while the read is fetching, failed or invalidated, and rechecks the current query and authority at print execution. Rendering preparation versus debrief is an existing document union; the adapter owns source/provenance parsing and printMeetingDocument owns printing. Its footer, status and document content are cohesive with the same preview lifetime; it does not create a second document service.",
+    "reviewedBy": "Codex independent objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+    "kind": "function",
+    "symbol": "ContactMail",
+    "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
+    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+    "kind": "function",
+    "symbol": "DirectoryResults",
+    "fingerprint": "9c62a2d17449b29c55508d14fd030b06542934362e8e5f0683124cede34cc29c",
+    "reason": "One paged Directory result feed and explicit add-target affordances. Kind/query/page determine one canonical query; failure admission, current rows, empty result and pagination are one result lifecycle. Actual writes stay in useTargetMutation and do not enter this renderer. No separate responsibility introduced by the current-result guard. Directory-specific adapters already own response normalization.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+    "kind": "function",
+    "symbol": "GovernmentRelationships",
+    "fingerprint": "61d68a89dab78d5413adade51ac766af5c644a666d072f2fcaa0a3ae01736b5a",
+    "reason": "The current client target roster, target selection and add-target entry composition. Filtering targets into priority/committee/state groups is presentation of the same roster. URL selection, failure disposal and AddTargetDialog admission all depend on that current roster. TargetTable, recommendations, Directory and TargetDrawer remain separate owners. Retain the page composition; no provider, mail implementation or mutation algorithm was added to this container.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "58dcec17ff70d486702c0c50888d7057ef86355c9b893c4e65cef8c2c13c0c08",
+    "reason": "The existing reviewed mail-composition entry module and its props. The module has one substantive exported UI function. Rich text, body sanitization, recipients, attachments, authority, rewrite/Undo, signature sandbox, mailbox selection and transport/send validation already live in cohesive separate modules. This patch adds only stable contact/thread identity to the existing send hook. 411 lines is a visible review signal, not a new responsibility. No wholesale extraction is justified by this bounded argument change. Extract future independently changing workflow logic into the existing email owners, not a generic composer service.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "kind": "function",
+    "symbol": "MailCompose",
+    "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+    "kind": "function",
+    "symbol": "OrganizationRelationships",
+    "fingerprint": "6cb28957ed5eec22dfa0d76e3d48978cdcb9b511c4fb0d49265648faae4385ba",
+    "reason": "The current organization-contact roster, hierarchy review navigation and selected-contact composition. Roster/search/review filtering and route selection derive from the same current client roster. Current-read disposal and the create-attempt status are necessary admission for the same Add contact affordance. OrganizationChart, ContactDrawer/forms, mailbox workflow and mutation/attempt owners remain external. No new independent subsystem is embedded. Keep the current roster owner cohesive; the unchanged hierarchy review here is selection/navigation, not a copied write algorithm.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+    "kind": "function",
+    "symbol": "TargetDrawer",
+    "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
+    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/target-queries.ts",
+    "kind": "function",
+    "symbol": "useTargetMutation",
+    "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
+    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+    "kind": "function",
+    "symbol": "useChangeActivity",
+    "fingerprint": "62da22b035a7877a5e68e1edb4c9a4fec62f497fabc57a5217661ff14ae04714",
+    "reason": "The two-line net size growth adds an activity-specific completion observer to the existing one-command/one-review lifecycle, plus guaranteed disposal. Captured controller, authority, attempt and completion invariants remain in one canonical hook. The54-line helper owns only cache completion eligibility; it does not duplicate receipt validators, transport, mutation state or presentation. Existing ten-case suite responsibility fingerprint41ffecd9 is unchanged. No registry waiver/edit performed.",
+    "reviewedBy": "Codex independent core_intake_review",
+    "reviewedOn": "2026-10-13"
+  }
+]

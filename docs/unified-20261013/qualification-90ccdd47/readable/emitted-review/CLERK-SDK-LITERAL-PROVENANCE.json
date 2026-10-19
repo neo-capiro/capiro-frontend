@@ -1,0 +1,24 @@
+{
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "comparisonBase": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "unchangedClerkLockEntries": [
+    "node_modules/@clerk/backend",
+    "node_modules/@clerk/nextjs",
+    "node_modules/@clerk/react",
+    "node_modules/@clerk/shared"
+  ],
+  "exactEquality": true,
+  "clerkVersion": "7.9.14",
+  "installedConstants": {
+    "path": "/workspace/capiro-onboard-port-20261013/node_modules/@clerk/nextjs/dist/esm/server/constants.js",
+    "bytes": 1935,
+    "sha256": "a60452508eb3c0c7175aab10712ca343cff9e87c109772402191da6a478ecf71"
+  },
+  "emittedChunk": {
+    "path": "/workspace/capiro-onboard-port-20261013/apps/web/.next/static/chunks/32x_5wd72cjw1.js",
+    "bytes": 85923,
+    "sha256": "a553a1112a598ef4184b0b1abf0426c2fa6e8a50dca2da0407a539c9609be27b"
+  },
+  "literalExcerpt": "K_JS_VERSION,R.default.env.NEXT_PUBLIC_CLERK_JS_URL,R.default.env.NEXT_PUBLIC_CLERK_UI_URL,R.default.env.NEXT_PUBLIC_CLERK_UI_VERSION,R.default.env.CLERK_API_VERSION,R.default.env.CLERK_SECRET_KEY,R.default.env.CLERK_MACHINE_SECRET_KEY,R.default.env.CLERK_ENCRYPTION_KEY,R.default.env.CLERK_API_URL||(t=(0,b.p)(\"\")?.frontendApi,t?.startsWith(\"clerk.\")&&E.Z.some(e=>t?.endsWith",
+  "classification": "Inherited pinned Clerk SDK environment-property names are visible in shared emitted client code; no secret value is in this excerpt, and no secret-value absence proof beyond the explicitly blank build configuration is asserted. No application security defect established by this name match."
+}

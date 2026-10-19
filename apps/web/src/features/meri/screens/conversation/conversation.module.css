@@ -1,0 +1,157 @@
+/* Figma 3.4 conversation screens: 01.03, 01.04, 01.05, 09.08 and shared rows/fields. */
+.rowList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rowList [data-slot="detail-row-copy"] {
+  flex: 0 1 466px;
+}
+.divider {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--border);
+}
+.sectionTitle {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+}
+.alignStart {
+  align-self: flex-start;
+}
+.userMessage {
+  min-height: 56px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.075px;
+}
+/* 01.04 history search and filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+.searchField {
+  flex: 0 1 752px;
+  min-width: 240px;
+}
+/* 01.04H: with no selected conversation every action is visibly unavailable. */
+.historyActions[data-selection="none"] > button {
+  opacity: 0.5;
+}
+/* 01.05 command palette */
+.paletteHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 36px;
+}
+.paletteHeading > :last-child {
+  margin-left: auto;
+}
+.kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.result {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.result[aria-selected="true"] {
+  background: var(--muted);
+}
+.resultAction {
+  height: 36px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.shortcuts {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+.shortcuts div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.shortcuts dt {
+  min-width: 110px;
+}
+.shortcuts dd {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+/* 09.08 branch navigation; the open rename dialog keeps its Figma place in the flow. */
+.dialogSpace {
+  height: 252px;
+  flex-shrink: 0;
+}
+.branchPanel {
+  width: min(800px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.branchPanel > button {
+  align-self: flex-start;
+}
+@media (max-width: 680px) {
+  .userMessage {
+    min-height: 0;
+  }
+  .rowList [data-slot="detail-row-copy"] {
+    flex: 1;
+  }
+  .branchPanel {
+    padding: 20px 16px;
+  }
+  .dialogSpace {
+    display: none;
+  }
+}
+/* Delete confirmations stack their actions (Figma overlays 3035:33134, 3022:32527). */
+.stackedActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}

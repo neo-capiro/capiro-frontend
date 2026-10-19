@@ -1,0 +1,187 @@
+import { z } from "zod";
+import { defineOperation } from "../contracts";
+const source =
+  "capirov2@4be13b0 outreach-v3/api/outreach-v3-state.controller.ts + services/outreach-session.service.ts + persistence/outreach-state.repository.ts + outreach-command.contract.ts";
+const id = z.uuid();
+const params = z.object({ sessionId: id }).strict();
+const session = z
+  .object({
+    id,
+    title: z.string().nullable(),
+    status: z.string(),
+    currentStateVersion: z.number().int().positive(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    archivedAt: z.string().nullable(),
+  })
+  .strip();
+const text = z.string().nullable();
+const spec = z
+  .object({
+    goal: z.object({
+      goal: text,
+      objective: text,
+      topic: text,
+      desiredOutcome: text,
+      ask: z.object({ mode: z.string(), text }),
+      whyNow: text,
+    }),
+    sponsor: z.object({
+      kind: z.string(),
+      label: text,
+      clientRefs: z.array(z.object({ clientId: id })),
+    }),
+    strategy: z.object({
+      campaignAngle: text,
+      tone: text,
+      length: z.string(),
+      customLengthInstruction: text,
+    }),
+    delivery: z.object({ pattern: z.string(), personalization: z.string() }),
+    targeting: z
+      .object({
+        selectedTargetRefs: z.array(
+          z
+            .object({
+              targetKey: z.string().min(1).max(384),
+              displayName: z.string().min(1).max(240),
+              email: z.string().email().nullable(),
+              snapshotHash: z.string().regex(/^[a-f0-9]{64}$/),
+            })
+            .strip(),
+        ),
+      })
+      .strip(),
+  })
+  .strip();
+const detail = z.object({
+  session,
+  currentStateVersion: z.number().int().positive(),
+  spec,
+  specHash: z.string(),
+  readiness: z.object({
+    goalReady: z.boolean(),
+    sponsorResolved: z.boolean(),
+    targetCriteriaReady: z.boolean(),
+    targetsReady: z.boolean(),
+    deliveryReady: z.boolean(),
+    contextReady: z.boolean(),
+    contextEvidenceReady: z.boolean(),
+    strategyReady: z.boolean(),
+    sampleGenerationEligible: z.boolean(),
+    fullGenerationEligible: z.boolean(),
+    sendReviewEligible: z.boolean(),
+    blockers: z.array(z.string()),
+  }),
+  pendingProposalCount: z.number().int().nonnegative(),
+});
+const bounded = (max: number) => z.string().max(max).nullable();
+const command = (type: string, payload: z.ZodType) =>
+  z
+    .object({ type: z.literal(type), schemaVersion: z.literal(1), payload })
+    .strict();
+const commands = z.union([
+  command("SET_GOAL", z.object({ value: bounded(2000) }).strict()),
+  command("SET_OBJECTIVE", z.object({ value: bounded(4000) }).strict()),
+  command("SET_TOPIC", z.object({ value: bounded(500) }).strict()),
+  command("SET_DESIRED_OUTCOME", z.object({ value: bounded(2000) }).strict()),
+  command("SET_WHY_NOW", z.object({ value: bounded(2000) }).strict()),
+  command("SET_CAMPAIGN_ANGLE", z.object({ value: bounded(4000) }).strict()),
+  command("SET_TONE", z.object({ value: bounded(120) }).strict()),
+  command(
+    "SET_SPONSOR_SCOPE",
+    z
+      .object({
+        kind: z.enum([
+          "undecided",
+          "firm",
+          "client",
+          "multi_client",
+          "coalition",
+          "internal_team",
+          "none",
+        ]),
+        label: bounded(240),
+        clientRefs: z.array(z.object({ clientId: id }).strict()).max(50),
+      })
+      .strict(),
+  ),
+]);
+export const engagementSessionOperations = {
+  "engagement.session.create": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/engagement/outreach-v3/sessions",
+    request: z
+      .object({
+        body: z
+          .object({ title: z.string().trim().min(1).max(240).optional() })
+          .strict(),
+      })
+      .strict(),
+    response: detail,
+    source,
+  }),
+  "engagement.sessions": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/engagement/outreach-v3/sessions",
+    request: z
+      .object({
+        query: z
+          .object({
+            limit: z.number().int().min(1).max(100).optional(),
+            offset: z.number().int().nonnegative().optional(),
+            includeArchived: z.boolean().optional(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict(),
+    response: z.array(
+      session.extend({
+        topic: text,
+        goal: text,
+        targetCount: z.number().int().nonnegative(),
+        recordStatus: text,
+        sentAt: text,
+      }),
+    ),
+    source,
+  }),
+  "engagement.session": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/engagement/outreach-v3/sessions/:sessionId",
+    request: z.object({ params }).strict(),
+    response: detail,
+    source,
+  }),
+  "engagement.session.commands": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/engagement/outreach-v3/sessions/:sessionId/commands",
+    request: z
+      .object({
+        params,
+        body: z
+          .object({
+            batchId: id,
+            expectedStateVersion: z.number().int().positive(),
+            commands: z.array(commands).min(1).max(20),
+          })
+          .strict(),
+      })
+      .strict(),
+    response: z.object({
+      status: z.enum(["applied", "no_change"]),
+      batchId: id,
+      stateVersion: z.number().int().positive(),
+      specHash: z.string(),
+      changed: z.boolean(),
+      commandCount: z.number().int(),
+      replayed: z.boolean(),
+    }),
+    source,
+  }),
+};

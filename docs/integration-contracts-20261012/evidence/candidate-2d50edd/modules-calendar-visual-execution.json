@@ -1,0 +1,21 @@
+{
+  "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+  "statusAtStart": "",
+  "command": [
+    "env",
+    "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+    "node",
+    "/tmp/review-r3-controls/run-review-control.mjs",
+    "/workspace/capiro-contracts",
+    "/tmp/capiro-visual-2d50edd/modules-calendar-capture.spec.ts",
+    "/tmp/capiro-candidate-2d50edd/modules-calendar-visual",
+    "modules"
+  ],
+  "startedAt": "2026-10-12T10:45:26.354558+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T10:45:37.843205+00:00",
+  "headAtFinish": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "statusAtFinish": ""
+}

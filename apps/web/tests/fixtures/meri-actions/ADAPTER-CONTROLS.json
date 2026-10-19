@@ -1,0 +1,25 @@
+{
+  "scope": "Required adapter controls described here, not executed by this receiver-only packet",
+  "opaqueHandleControls": [
+    {"operation": "draft", "input": "Fresh structurally equal clone of an admitted selection", "expectedTransportCalls": 0, "reason": "Only this adapter's privately retained selection identity is admissible"},
+    {"operation": "prepare", "input": "Fresh structurally equal clone of an admitted draft", "expectedTransportCalls": 0, "reason": "Serialized valid draft content does not grant admission to a private handle"},
+    {"operation": "execute", "input": "Fresh structurally equal clone of an admitted proposal", "expectedTransportCalls": 0, "reason": "Never reconstruct trusted proposal admission from caller-controlled fields"},
+    {"operation": "draft/prepare/execute", "input": "An actual handle from another adapter instance", "expectedTransportCalls": 0, "reason": "Admission and retained immutable wire values belong to their originating adapter"},
+    {"operation": "draft/prepare/execute", "input": "Previously admitted handle after canonical host disposal", "expectedTransportCalls": 0, "reason": "Disposal invalidates admission without authorizing replay"}
+  ],
+  "contextControls": [
+    {"fixture": "query.json", "mutation": "Change only expected host tenant, actor, conversation, run or selected client", "receiverExpectation": "accept", "adapterExpectation": "reject response; hide private material according to canonical lifetime owner"},
+    {"fixture": "prepare-recovered-worker.json", "mutation": "Original draft A and current proposal B differ only in attempt/worker/fence", "receiverExpectation": "accept", "adapterExpectation": "preserve canonical recovery; compare stable lineage, retained draft and current host policy rather than imposing original full-binding equality"},
+    {"fixture": "execute-recovered-worker.json", "mutation": "Use with retained prepare-recovered-worker proposal", "receiverExpectation": "accept", "adapterExpectation": "match command ID/hash/idempotency and stable lineage/task; do not compare command hash to old unrecovered proposal"},
+    {"fixture": "execute-observed.json", "mutation": "Host replacement or cancellation while awaiting asynchronous receiver hashing", "receiverExpectation": "accept", "adapterExpectation": "discard old completion, preserve any dispatched uncertainty fence, no automatic retry"},
+    {"fixture": "approval-refused-but-unknown.json", "mutation": "None", "receiverExpectation": "accept", "adapterExpectation": "unknown; do not map COMMAND_APPROVAL_REFUSED alone to approval-pending"}
+  ],
+  "coverageControls": [
+    "Preserve recommendations/acceptedTasks:false and row acceptedAsTask:false; nativeCompletion does not prove delivery or acceptance.",
+    "Preserve coverage.enumeration unknown, historySupport unsupported and both limitations.",
+    "Preserve source partial status, null synchronization/asOf, unknown freshness and derived authority.",
+    "Do not turn pageCoverage complete/healthy/exact-for-scope/hasMore:false into exhaustive source completeness, absence support or evidence readiness.",
+    "Expose the finite first-page limit, remaining continuation and any later truncation explicitly; this packet does not invent pagination behavior."
+  ],
+  "clock": "Use CONTEXT.json syntheticNow for original proposal validity; its historical expiration is intentional and must not be relabeled as current approval."
+}

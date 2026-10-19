@@ -1,0 +1,18 @@
+
+> @capiro/web@0.1.0 test
+> vitest run tests/prospect-files.test.ts tests/prospect-workspace.test.ts tests/work-contracts.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-contracts/apps/web
+
+
+ Test Files  3 passed (3)
+      Tests  35 passed (35)
+   Start at  06:15:08
+   Duration  644ms (transform 339ms, setup 0ms, import 769ms, tests 269ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

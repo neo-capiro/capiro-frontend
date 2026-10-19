@@ -1,0 +1,183 @@
+
+Running 12 tests using 1 worker
+
+(node:646800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/files-delete-recovery.spec.ts:21:5 › unknown deletion survives close/reopen until deliberate current review and a new confirmation (3.9s)
+  ✓   2 apps/web/tests/browser/files-delete-recovery.spec.ts:86:5 › an absent current file is unavailable, not a deletion confirmation (2.6s)
+  ✓   3 apps/web/tests/browser/files-delete-recovery.spec.ts:134:5 › pending current deletion stays fenced until a later explicit review reports a recoverable file (2.6s)
+  ✓   4 apps/web/tests/browser/files-delete-recovery.spec.ts:170:5 › a definite deletion refusal does not impose an unknown fence (1.4s)
+  ✘   5 apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 403 revokes all cached file actions until successful recovery (6.9s)
+(node:647174) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 503 revokes all cached file actions until successful recovery (8.2s)
+(node:647367) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 apps/web/tests/browser/files-delete-recovery.spec.ts:253:7 › a late deletion receipt after actor replacement cannot publish completion into the new view (1.9s)
+  ✓   8 apps/web/tests/browser/files-delete-recovery.spec.ts:253:7 › a late deletion receipt after client replacement cannot publish completion into the new view (1.5s)
+  ✓   9 apps/web/tests/browser/files-delete-recovery.spec.ts:253:7 › a late deletion receipt after unmount replacement cannot publish completion into the new view (1.3s)
+  ✓  10 apps/web/tests/browser/files-delete-recovery.spec.ts:302:5 › a current read completing after actor replacement cannot release the old fence or leak its state (1.6s)
+  ✘  11 apps/web/tests/browser/files-delete-recovery.spec.ts:335:7 › a superseded current read returning 200 cannot replace or poison newer client files (6.3s)
+(node:647697) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 apps/web/tests/browser/files-delete-recovery.spec.ts:335:7 › a superseded current read returning 403 cannot replace or poison newer client files (6.5s)
+
+
+  1) apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 403 revokes all cached file actions until successful recovery 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('button', { name: 'Actions for Second current file.txt' })
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Actions for Second current file.txt' })
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      240 |     await expect(
+      241 |       page.getByRole("button", { name: `Actions for ${other.fileName}` }),
+    > 242 |     ).toHaveCount(1);
+          |       ^
+      243 |     await dialog.getByRole("button", { name: "Review current files" }).click();
+      244 |     await expect(
+      245 |       dialog.getByRole("button", { name: "Confirm delete" }),
+        at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:242:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--9b36e-s-until-successful-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--9b36e-s-until-successful-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--9b36e-s-until-successful-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--9b36e-s-until-successful-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 503 revokes all cached file actions until successful recovery 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('button', { name: 'Actions for Second current file.txt' })
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Actions for Second current file.txt' })
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      240 |     await expect(
+      241 |       page.getByRole("button", { name: `Actions for ${other.fileName}` }),
+    > 242 |     ).toHaveCount(1);
+          |       ^
+      243 |     await dialog.getByRole("button", { name: "Review current files" }).click();
+      244 |     await expect(
+      245 |       dialog.getByRole("button", { name: "Confirm delete" }),
+        at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:242:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--6c27f-s-until-successful-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--6c27f-s-until-successful-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--6c27f-s-until-successful-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-failed-explicit--6c27f-s-until-successful-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/files-delete-recovery.spec.ts:335:7 › a superseded current read returning 200 cannot replace or poison newer client files 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Delete file', exact: true }).getByText(/current files changed during review/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Delete file', exact: true }).getByText(/current files changed during review/)
+
+
+      378 |     await expect(
+      379 |       dialog.getByText(/current files changed during review/),
+    > 380 |     ).toBeVisible();
+          |       ^
+      381 |     await expect(
+      382 |       dialog.getByRole("button", { name: "Confirm delete" }),
+      383 |     ).toBeDisabled();
+        at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:380:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-e91e0-r-poison-newer-client-files/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-e91e0-r-poison-newer-client-files/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-e91e0-r-poison-newer-client-files/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-e91e0-r-poison-newer-client-files/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/tests/browser/files-delete-recovery.spec.ts:335:7 › a superseded current read returning 403 cannot replace or poison newer client files 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Delete file', exact: true }).getByText(/current files changed during review/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Delete file', exact: true }).getByText(/current files changed during review/)
+
+
+      378 |     await expect(
+      379 |       dialog.getByText(/current files changed during review/),
+    > 380 |     ).toBeVisible();
+          |       ^
+      381 |     await expect(
+      382 |       dialog.getByRole("button", { name: "Confirm delete" }),
+      383 |     ).toBeDisabled();
+        at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:380:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-7aa23-r-poison-newer-client-files/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-7aa23-r-poison-newer-client-files/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-7aa23-r-poison-newer-client-files/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-delete-evidence/browser-final/guarded-a-superseded-curre-7aa23-r-poison-newer-client-files/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 403 revokes all cached file actions until successful recovery 
+    apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 503 revokes all cached file actions until successful recovery 
+    apps/web/tests/browser/files-delete-recovery.spec.ts:335:7 › a superseded current read returning 200 cannot replace or poison newer client files 
+    apps/web/tests/browser/files-delete-recovery.spec.ts:335:7 › a superseded current read returning 403 cannot replace or poison newer client files 
+  8 passed (48.6s)

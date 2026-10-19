@@ -1,0 +1,56 @@
+{
+  "atUTC": "2026-10-13T05:38:46.984982+00:00",
+  "sourceManifestSha256": "4aa158f9c161de7328c628b3fcc93715c6ec83903f868a25ba6e0607efad3e82",
+  "scope": "Independent static/pure correction acceptance; native/mounted/full qualification excluded",
+  "findings": [
+    {
+      "id": "OBFI-01",
+      "status": "CORRECTED_AT_EXACT_SOURCE",
+      "reason": "Latched current setup opening eligibility fences managed/prerequisite/error replacements before held chunk/recipient continuation; deliberate reopening retains unknown/partial journals. Parent current-read lifetime also guards invitation/task continuations.",
+      "evidence": [
+        "independent-pure/results.json",
+        "author-proof/setup-eligibility-followup/final-spec-red-results.json"
+      ]
+    },
+    {
+      "id": "OBFI-02",
+      "status": "CORRECTED_AT_EXACT_SOURCE",
+      "reason": "Legal query admission, exact document/session/plan/body/read generation and keyed consent editor separated. Current error/loading/replacement resets acknowledgements; held older acceptance remains unknown rather than producing signed/newer state.",
+      "evidence": [
+        "independent-pure/results.json",
+        "author-proof/legal-review-followup/red-consent-projection.json",
+        "author-proof/legal-review-followup/green-consent-projection.json"
+      ]
+    },
+    {
+      "id": "OBFI-03",
+      "status": "CORRECTED_AT_EXACT_SOURCE",
+      "reason": "Funnel/Register/Verify/setup deliberate GETs use canonical QueryClient success/error lifecycle. Immutable original queryFn signal rejects replacement promise adoption, including same-options refetch. Native funnel404 remains null; registration POST remains distinct. Setup failed-read lifetime revokes held parent actions.",
+      "evidence": [
+        "independent-pure/results.json",
+        "silent-adoption/actual-red.json",
+        "silent-adoption/SAME-OPTIONS-REFETCH.json",
+        "author-proof/current-funnel-read-followup/same-options-red-results.json"
+      ]
+    },
+    {
+      "id": "OBFI-04",
+      "status": "CORRECTED_AT_EXACT_SOURCE",
+      "reason": "Public done route supplies neutral unverified return guidance. Current token-backed granted/verified or skipped cards remain unchanged.",
+      "evidence": [
+        "author-proof/it-return-followup/red-results.json",
+        "author-proof/review-corrections-handoff/final3-pure-results.json"
+      ]
+    },
+    {
+      "id": "OBFI-05",
+      "status": "CORRECTED_AT_EXACT_SOURCE",
+      "reason": "Held consent/deferral binds displayed current token/provider facts through a latched subscription; stale URL cannot navigate after current read error/replacement. Root/API owner fence remains in force.",
+      "evidence": [
+        "it-current-invite/PROBE.json",
+        "it-current-invite/current-green/PROBE.json",
+        "independent-pure/results.json"
+      ]
+    }
+  ]
+}

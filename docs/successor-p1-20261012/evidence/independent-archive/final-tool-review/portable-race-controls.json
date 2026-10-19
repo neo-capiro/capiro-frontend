@@ -1,0 +1,517 @@
+{
+  "results": [
+    {
+      "case": "path:'README.md'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'.gitattributes'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'apps/web/src/Name with spaces.ts'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'docs/COM10.txt'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'docs/console.md'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'docs/nulled.txt'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'docs/caf\u00e9.md'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:'a/b.c'",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "path:''",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: ''"
+    },
+    {
+      "case": "path:'.'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: '.'"
+    },
+    {
+      "case": "path:'..'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: '..'"
+    },
+    {
+      "case": "path:'./a'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: './a'"
+    },
+    {
+      "case": "path:'../a'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: '../a'"
+    },
+    {
+      "case": "path:'/a'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: '/a'"
+    },
+    {
+      "case": "path:'a//b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a//b'"
+    },
+    {
+      "case": "path:'a/'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a/'"
+    },
+    {
+      "case": "path:'a/../b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a/../b'"
+    },
+    {
+      "case": "path:'a/./b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a/./b'"
+    },
+    {
+      "case": "path:'a\\\\b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a\\\\b'"
+    },
+    {
+      "case": "path:'C:/a'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'C:/a'"
+    },
+    {
+      "case": "path:'a:b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a:b'"
+    },
+    {
+      "case": "path:'\\\\server\\\\a'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: '\\\\server\\\\a'"
+    },
+    {
+      "case": "path:'.git/config'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: '.git/config'"
+    },
+    {
+      "case": "path:'a/.GIT/config'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a/.GIT/config'"
+    },
+    {
+      "case": "path:'a\\x00b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a\\x00b'"
+    },
+    {
+      "case": "path:'a\\nb'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a\\nb'"
+    },
+    {
+      "case": "path:'a\\x1fb'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a\\x1fb'"
+    },
+    {
+      "case": "path:'a<b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a<b'"
+    },
+    {
+      "case": "path:'a>b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a>b'"
+    },
+    {
+      "case": "path:'a\"b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a\"b'"
+    },
+    {
+      "case": "path:'a|b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a|b'"
+    },
+    {
+      "case": "path:'a?b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a?b'"
+    },
+    {
+      "case": "path:'a*b'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a*b'"
+    },
+    {
+      "case": "path:'a.'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a.'"
+    },
+    {
+      "case": "path:'a '",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a '"
+    },
+    {
+      "case": "path:'a/b.'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a/b.'"
+    },
+    {
+      "case": "path:'a/b '",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'a/b '"
+    },
+    {
+      "case": "path:'CON'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'CON'"
+    },
+    {
+      "case": "path:'con.txt'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'con.txt'"
+    },
+    {
+      "case": "path:'PRN'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'PRN'"
+    },
+    {
+      "case": "path:'AUX'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'AUX'"
+    },
+    {
+      "case": "path:'NUL'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'NUL'"
+    },
+    {
+      "case": "path:'COM1'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'COM1'"
+    },
+    {
+      "case": "path:'COM9.txt'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'COM9.txt'"
+    },
+    {
+      "case": "path:'LPT1'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'LPT1'"
+    },
+    {
+      "case": "path:'lpt9.log'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'lpt9.log'"
+    },
+    {
+      "case": "path:'COM\u00b9.txt'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'COM\u00b9.txt'"
+    },
+    {
+      "case": "path:'COM\u00b2'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'COM\u00b2'"
+    },
+    {
+      "case": "path:'LPT\u00b3.foo'",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "Unsafe or noncanonical archive path: 'LPT\u00b3.foo'"
+    },
+    {
+      "case": "same-length-metadata-change-coarse-stat",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ZIP changed during verification; no identity can be bound",
+      "sourceGitUnchanged": true,
+      "mtimeRestored": true,
+      "statChecksMockedUninformative": true,
+      "bytesBefore": 613,
+      "bytesAfter": 613
+    },
+    {
+      "case": "unchanged-source-and-archive-coarse-stat",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    }
+  ],
+  "passed": 51,
+  "total": 51,
+  "architecture": [
+    {
+      "path": "/workspace/capiro-p1-successor/docs/successor-p1-20261012/packaging/source_archive.py",
+      "sha256": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+      "nonblankLines": 184,
+      "functions": [
+        {
+          "name": "git",
+          "line": 24,
+          "nonblankLines": 5
+        },
+        {
+          "name": "safe_path",
+          "line": 31,
+          "nonblankLines": 12
+        },
+        {
+          "name": "source",
+          "line": 45,
+          "nonblankLines": 19
+        },
+        {
+          "name": "blobs",
+          "line": 66,
+          "nonblankLines": 28
+        },
+        {
+          "name": "zip_mode",
+          "line": 96,
+          "nonblankLines": 10
+        },
+        {
+          "name": "add_entry",
+          "line": 108,
+          "nonblankLines": 6
+        },
+        {
+          "name": "create",
+          "line": 116,
+          "nonblankLines": 8
+        },
+        {
+          "name": "verify_members",
+          "line": 126,
+          "nonblankLines": 35
+        },
+        {
+          "name": "snapshot",
+          "line": 163,
+          "nonblankLines": 2
+        },
+        {
+          "name": "verify",
+          "line": 167,
+          "nonblankLines": 17
+        },
+        {
+          "name": "main",
+          "line": 186,
+          "nonblankLines": 21
+        }
+      ],
+      "newSizeThresholdSignals": []
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/docs/successor-p1-20261012/packaging/zip_layout.py",
+      "sha256": "1666011cab053d93ddd7feb2d95cb8283c069444cc507cc0f62d79f57fef1179",
+      "nonblankLines": 83,
+      "functions": [
+        {
+          "name": "verify_extra",
+          "line": 5,
+          "nonblankLines": 14
+        },
+        {
+          "name": "central_directory",
+          "line": 21,
+          "nonblankLines": 17
+        },
+        {
+          "name": "verify_layout",
+          "line": 40,
+          "nonblankLines": 50
+        }
+      ],
+      "newSizeThresholdSignals": []
+    },
+    {
+      "path": "/tmp/capiro-successor-archive-review/verify-source-zip.py",
+      "sha256": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2",
+      "nonblankLines": 272,
+      "functions": [
+        {
+          "name": "require",
+          "line": 29,
+          "nonblankLines": 3
+        },
+        {
+          "name": "safe_path",
+          "line": 34,
+          "nonblankLines": 15
+        },
+        {
+          "name": "git",
+          "line": 51,
+          "nonblankLines": 4
+        },
+        {
+          "name": "committed_files",
+          "line": 57,
+          "nonblankLines": 24
+        },
+        {
+          "name": "add_git_sha256",
+          "line": 83,
+          "nonblankLines": 30
+        },
+        {
+          "name": "zip_mode",
+          "line": 115,
+          "nonblankLines": 17
+        },
+        {
+          "name": "extra_fields",
+          "line": 134,
+          "nonblankLines": 11
+        },
+        {
+          "name": "check_layout",
+          "line": 147,
+          "nonblankLines": 66
+        },
+        {
+          "name": "verify_zip",
+          "line": 215,
+          "nonblankLines": 65
+        },
+        {
+          "name": "main",
+          "line": 282,
+          "nonblankLines": 13
+        }
+      ],
+      "newSizeThresholdSignals": []
+    }
+  ],
+  "nativeWindowsRun": false,
+  "successorArchiveCreated": false,
+  "cloudActions": []
+}

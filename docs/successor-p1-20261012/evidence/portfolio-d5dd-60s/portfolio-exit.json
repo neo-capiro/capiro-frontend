@@ -1,0 +1,30 @@
+{
+  "name": "portfolio",
+  "command": [
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=3",
+    "--timeout=60000",
+    "--retries=0",
+    "--output=/tmp/capiro-successor-qualification/portfolio-d5dd0be-60s/portfolio-artifacts"
+  ],
+  "startedUTC": "2026-10-12T17:00:59.338519+00:00",
+  "endedUTC": "2026-10-12T17:35:50.819741+00:00",
+  "durationSeconds": 2091.481270985001,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+    "tree": "7448658084841f7773144ce5d8714a19103e4ddd",
+    "applicationTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+    "tree": "7448658084841f7773144ce5d8714a19103e4ddd",
+    "applicationTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

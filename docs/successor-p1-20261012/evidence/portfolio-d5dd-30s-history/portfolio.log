@@ -1,0 +1,218 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=4 --output=/tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=4 --output=/tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts
+
+[WebServer] (node:556782) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 996 tests using 4 workers
+
+(node:556914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:556917) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:556908) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:556915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 tests/browser/activity-command-recovery.spec.ts:11:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (13.6s)
+  ✓    2 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (13.4s)
+  ✓    3 tests/browser/activity-actions.spec.ts:27:1 › recorded edits retain failed input, reject blank titles and refresh the scoped feed (19.0s)
+  ✓    5 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core actor never sees or dispatches the retained body after reload (10.2s)
+  ✓    6 tests/browser/activity-command-storage.spec.ts:9:3 › localStorage unavailable after response loss blocks replacement commands across reload (11.8s)
+  ✘    4 tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (31.5s)
+  ✓    8 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core tenant never sees or dispatches the retained body after reload (10.1s)
+  ✓    9 tests/browser/activity-command-storage.spec.ts:9:3 › indexedDB unavailable after response loss blocks replacement commands across reload (8.6s)
+(node:558055) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    7 tests/browser/activity-actions.spec.ts:133:1 › settlement requires a due date, retains permission errors, prevents duplicate writes and reopens (17.9s)
+  ✓   10 tests/browser/activity-command-recovery.spec.ts:89:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (7.4s)
+  ✓   11 tests/browser/activity-command-storage.spec.ts:9:3 › locks unavailable after response loss blocks replacement commands across reload (10.4s)
+  ✓   12 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (10.1s)
+  ✓   14 tests/browser/activity-command-recovery.spec.ts:109:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (9.7s)
+  ✓   15 tests/browser/activity-command-storage.spec.ts:47:3 › fence corruption cannot become an empty form or a replacement key (8.7s)
+  ✓   16 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (6.9s)
+  ✓   17 tests/browser/activity-command-recovery.spec.ts:132:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (10.5s)
+  ✓   19 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (8.0s)
+  ✓   18 tests/browser/activity-command-storage.spec.ts:47:3 › missing-fence corruption cannot become an empty form or a replacement key (9.6s)
+  ✓   13 tests/browser/activity-actions.spec.ts:209:1 › removal is confirmed, retains service errors and rejects a false success response (29.9s)
+  ✓   21 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (8.2s)
+  ✓   20 tests/browser/activity-command-recovery.spec.ts:152:1 › closing the document and opening another tab recovers the journal without an automatic command call (10.1s)
+  ✓   22 tests/browser/activity-command-storage.spec.ts:47:3 › missing-record corruption cannot become an empty form or a replacement key (9.2s)
+  ✓   24 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (8.3s)
+  ✓   23 tests/browser/activity-actions.spec.ts:301:1 › expired authentication during removal uses the shared session boundary (13.3s)
+  ✓   26 tests/browser/activity-command-storage.spec.ts:47:3 › ciphertext corruption cannot become an empty form or a replacement key (11.0s)
+  ✓   27 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (5.8s)
+  ✓   29 tests/browser/activity-command-storage.spec.ts:97:1 › retained browser storage contains opaque ciphertext and a nonextractable key, never plaintext draft fields (7.7s)
+  ✓   30 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (7.6s)
+  ✓   25 tests/browser/activity-pin.spec.ts:25:1 › pin/unpin persists only the note field, displays inline state and returns keyboard focus (22.7s)
+  ✓   32 tests/browser/advocacy-history-edit.spec.ts:41:1 › baseline: dated timeline reveals only withheld loaded events and preserves undated evidence (8.2s)
+  ✓   28 tests/browser/activity.spec.ts:28:1 › history search, kind, inclusive local dates, invalid range and clear use the existing feed (20.9s)
+  ✓   34 tests/browser/advocacy-history-edit.spec.ts:77:1 › baseline: search and status operate on native title summary PE and bill fields (4.7s)
+  ✓   31 tests/browser/advocacy-corrections.spec.ts:64:1 › Objectives preserves history left/current objectives right and New matter; saved source identity stays explicit (14.3s)
+  ✓   33 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong client receipt and requires review before retry (14.3s)
+  ✓   36 tests/browser/advocacy-history-edit.spec.ts:108:1 › baseline: failed timeline refresh conceals retained events while current matters stay reachable (5.7s)
+  ✓   35 tests/browser/activity.spec.ts:137:1 › history failure and retry retain entered filters (14.4s)
+  ✓   39 tests/browser/advocacy-history-edit.spec.ts:128:1 › failed matter reads conceal retained rows but preserve independently current unfiltered events (7.0s)
+  ✓   37 tests/browser/advocacy-corrections.spec.ts:111:1 › merge explicitly reviews source into kept destination, guards pending and verifies transferred evidence (15.2s)
+  ✓   40 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark desktop timeline keeps loaded Figma icons legible at their exact geometry (6.5s)
+  ✓   38 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong tenant receipt and requires review before retry (14.0s)
+  ✓   41 tests/browser/advocacy-history-edit.spec.ts:157:1 › a selected status cannot join stale matter data after catalog failure (6.0s)
+  ✓   43 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark phone timeline keeps loaded Figma icons legible at their exact geometry (5.5s)
+  ✓   45 tests/browser/advocacy-history-edit.spec.ts:187:1 › exact requested detail remains independent of a failed timeline and refuses another matter receipt (7.0s)
+  ✓   46 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown start attempt survives close and requires deliberate review before another dispatch (6.4s)
+  ✓   47 tests/browser/advocacy-history-edit.spec.ts:215:1 › invalidated timeline success is not displayed as current (4.4s)
+  ✓   48 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown test attempt survives close and requires deliberate review before another dispatch (6.7s)
+  ✓   42 tests/browser/advocacy-corrections.spec.ts:171:1 › reassign moves exact reviewed record and refreshes both matter views (21.7s)
+  ✓   44 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong record receipt and requires review before retry (19.3s)
+  ✓   49 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final successful requires explicit judgment and exact native confirmation body (9.3s)
+  ✓   50 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after actor change (5.3s)
+  ✓   54 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after client change (6.2s)
+  ✓   53 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final partially_successful requires explicit judgment and exact native confirmation body (8.5s)
+  ✓   55 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after owner change (4.4s)
+  ✓   52 tests/browser/activity-pin.spec.ts:83:3 › pin refuses false pinned result receipt and requires review before retry (15.7s)
+  ✓   56 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final unsuccessful requires explicit judgment and exact native confirmation body (7.8s)
+  ✓   51 tests/browser/advocacy-corrections.spec.ts:199:1 › detach preserves a scoped unassigned record that can be reassigned later (19.1s)
+  ✓   57 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after close change (5.4s)
+  ✓   61 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after actor change (5.3s)
+  ✓   58 tests/browser/activity-pin.spec.ts:131:1 › readonly identity cannot open activity mutations (11.6s)
+  ✓   59 tests/browser/advocacy-history-edit.spec.ts:266:3 › linked status edit follows native outcome evidence semantics (8.7s)
+  ✓   62 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after client change (5.5s)
+  ✓   60 tests/browser/advocacy-corrections.spec.ts:237:1 › not advocacy reviews optional bounded reason and refreshes the visible history (12.9s)
+  ✓   64 tests/browser/advocacy-history-edit.spec.ts:266:3 › unchanged-final status edit follows native outcome evidence semantics (7.4s)
+  ✓   65 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after owner change (5.7s)
+  ✓   67 tests/browser/advocacy-history-edit.spec.ts:304:1 › legacy current status remains editable without offering other legacy transitions (6.2s)
+  ✓   68 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after close change (4.6s)
+  ✓   66 tests/browser/advocacy-corrections.spec.ts:271:1 › lost response preserves submitted state and uses read-only reconciliation without repost (10.5s)
+  ✓   63 tests/browser/activity-pin.spec.ts:152:1 › a changed note at preflight stops before PATCH and preserves edit input (17.4s)
+  ✓   70 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback identity interruption even after the source is restored (7.0s)
+  ✓   69 tests/browser/advocacy-history-edit.spec.ts:325:1 › fresh native source changes retain the draft and stop dispatch (9.5s)
+  ✓   73 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback client interruption even after the source is restored (4.3s)
+  ✓   71 tests/browser/advocacy-corrections.spec.ts:292:1 › unapplied failed request remains unconfirmed and cannot silently repeat (12.9s)
+  ✓   74 tests/browser/advocacy-history-edit.spec.ts:360:1 › a definite native refusal allows an explicit retry without a false success (6.4s)
+  ✓   75 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback preferences interruption even after the source is restored (5.6s)
+  ✓   77 tests/browser/advocacy-history-edit.spec.ts:381:1 › unexpected acknowledgement remains unknown and reconciles by GET without replay (9.0s)
+  ✓   72 tests/browser/activity-pin.spec.ts:205:1 › unmount during held preflight prevents PATCH after the read returns (22.0s)
+  ✓   78 tests/browser/alert-channel-lifetime.spec.ts:153:1 › a late confirmation cannot trigger a saved-state read after the client lifetime ends (9.3s)
+  ✓   76 tests/browser/advocacy-corrections.spec.ts:311:1 › leaving the feature during preflight aborts the review and prevents a late POST (16.7s)
+  ✓   81 tests/browser/alert-channel-lifetime.spec.ts:199:1 › a pending channel action disables preference edits and other channel effects (6.1s)
+  ✓   79 tests/browser/advocacy-history-edit.spec.ts:411:1 › void acknowledgement cannot replace wrong-field readback with a success claim (8.5s)
+  ✓   83 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop light alert controls match the authored Figma fields and remain keyboard reachable (6.8s)
+  ✓   84 tests/browser/advocacy-history-edit.spec.ts:438:1 › another matter returned after PATCH remains unknown without late invalidation (6.4s)
+  ✓   82 tests/browser/advocacy-corrections.spec.ts:344:1 › lost not-advocacy acknowledgement remains unconfirmed even when the bounded history is empty (11.0s)
+  ✓   80 tests/browser/activity-pin.spec.ts:241:1 › a lost pin response is reconciled by an explicit read without replaying the write (16.2s)
+  ✓   86 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after actor changes (6.4s)
+  ✓   85 tests/browser/alert-channel-visual.spec.ts:9:5 › phone light alert controls match the authored Figma fields and remain keyboard reachable (9.7s)
+  ✓   89 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after role changes (7.3s)
+  ✓   90 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop dark alert controls match the authored Figma fields and remain keyboard reachable (7.0s)
+  ✓   88 tests/browser/activity-pin.spec.ts:279:1 › session expiry at preflight dispatches no activity write (14.9s)
+  ✓   87 tests/browser/advocacy-corrections.spec.ts:375:1 › concurrent matter changes require reload/review while preserving reason before any write (15.9s)
+  ✓   91 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after source changes (6.8s)
+  ✓   93 tests/browser/alert-channels.spec.ts:16:1 › baseline: Core preferences use database identity and preserve the full native no-echo PUT (5.4s)
+  ✓   92 tests/browser/alert-channel-visual.spec.ts:9:5 › phone dark alert controls match the authored Figma fields and remain keyboard reachable (7.0s)
+  ✓   95 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after client changes (6.0s)
+  ✓   94 tests/browser/advocacy-corrections.spec.ts:406:1 › standard user retains source reads and New matter label but correction writes are unavailable (10.6s)
+  ✓   96 tests/browser/alert-channels.spec.ts:46:1 › baseline: Core phone edits clear the submitted verification flag without losing native criteria (6.1s)
+  ✓   98 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after unmount changes (7.1s)
+  ✓  100 tests/browser/alert-channels.spec.ts:72:3 › baseline: core verification uses exact explicit requests and reads the resulting SMS opt-in (5.8s)
+  ✓   97 tests/browser/attendance.spec.ts:126:1 › Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance (13.5s)
+  ✓   99 tests/browser/advocacy-corrections.spec.ts:435:1 › unsafe or missing source does not become guessed source navigation (10.8s)
+  ✓  102 tests/browser/alert-channels.spec.ts:123:3 › baseline: core test alerts use saved channels and distinguish provider acceptance from delivery (6.4s)
+  ✓  101 tests/browser/advocacy-history-edit.spec.ts:511:1 › closing after dispatch preserves the original attempt across reopen and does not replay (10.7s)
+  ✓  105 tests/browser/alert-channels.spec.ts:72:3 › baseline: intelligence verification uses exact explicit requests and reads the resulting SMS opt-in (5.5s)
+  ✓  103 tests/browser/attendance.spec.ts:171:1 › Server validation retains the join URL and confirmations for explicit correction (11.4s)
+  ✓  104 tests/browser/advocacy-corrections.spec.ts:450:3 › empty user identity fails closed before history writes (9.7s)
+  ✓  107 tests/browser/alert-channels.spec.ts:123:3 › baseline: intelligence test alerts use saved channels and distinguish provider acceptance from delivery (5.6s)
+  ✓  106 tests/browser/advocacy-history-edit.spec.ts:554:1 › a late role response cannot refresh or clear the initiating actor's uncertain save (7.9s)
+  ✓  110 tests/browser/alert-channels.spec.ts:158:1 › Core defaults cannot authorize preferences when the separate current client read is refused (6.2s)
+  ✓  109 tests/browser/advocacy-corrections.spec.ts:450:3 › empty tenant identity fails closed before history writes (9.6s)
+  ✓  111 tests/browser/advocacy-history-edit.spec.ts:590:1 › timeline and outcome review match phone geometry with keyboard cancellation (9.9s)
+  ✓  108 tests/browser/attendance.spec.ts:201:1 › A foreign success receipt is uncertain and cannot be resent automatically or from the same form (14.3s)
+  ✓  112 tests/browser/alert-channels.spec.ts:180:3 › core unsaved destinations disable verification and test actions without implicit saves (6.4s)
+  ✓  116 tests/browser/alert-channels.spec.ts:180:3 › intelligence unsaved destinations disable verification and test actions without implicit saves (6.5s)
+  ✓  114 tests/browser/advocacy-history-edit.spec.ts:630:1 › desktop outcome review uses the exact Figma frame dimensions (8.8s)
+  ✓  115 tests/browser/attendance.spec.ts:234:1 › Explicit removal handles a still-dispatching error and then accepts the actual removed receipt (13.6s)
+  ✓  117 tests/browser/alert-channels.spec.ts:206:1 › a changed current saved phone conceals the old challenge and requires explicit reload (6.4s)
+  ✓  118 tests/browser/advocacy-history-edit.spec.ts:649:1 › interrupted actor lifetime prevents a held save after same-callback identity restoration (6.6s)
+  ✓  113 tests/browser/advocacy-corrections.spec.ts:481:1 › mobile dark correction keeps draft, readable review and keyboard cancel within viewport (22.6s)
+  ✓  120 tests/browser/alert-channels.spec.ts:248:1 › Core dormant acknowledgement displays only an actually returned development code (4.7s)
+  ✓  121 tests/browser/advocacy-history-edit.spec.ts:669:1 › interrupted actor lifetime prevents a held result check after same-callback role restoration (6.8s)
+  ✓  123 tests/browser/alert-channels.spec.ts:274:3 › a preference PUT cannot publish after a same-callback client interruption and restoration (5.6s)
+  ✓  119 tests/browser/attendance.spec.ts:282:1 › Client preference saves consent once, preserves Off/stopping, and retries only DELETE (14.0s)
+  ✓  122 tests/browser/bill-hearings.spec.ts:62:1 › lazy linked hearing evidence uses canonical IDs and preserves board client scope and supplied latest details (11.3s)
+  ✓  124 tests/browser/advocacy-history-edit.spec.ts:699:1 › interrupted actor lifetime prevents a held review reload after same-callback identity restoration (7.7s)
+  ✓  125 tests/browser/alert-channels.spec.ts:274:3 › a preference PUT cannot publish after a same-callback preferences interruption and restoration (6.7s)
+  ✓  129 tests/browser/alert-channels.spec.ts:309:1 › a Core no-echo PUT with different returned settings remains unconfirmed (5.9s)
+  ✓  127 tests/browser/bill-hearings.spec.ts:113:1 › owner-disabled refusal stays visible and retry does not switch backend or claim empty (11.0s)
+  ✓  126 tests/browser/attendance.spec.ts:309:1 › A concurrent preference change requires refresh and preserves the unsaved affirmations (13.1s)
+  ✓  130 tests/browser/alert-channels.spec.ts:329:1 › a failed client refresh conceals old fields and blocks every changed operation until a current reload (5.5s)
+  ✓  128 tests/browser/billing-summary-integration.spec.ts:25:1 › actual Add profile keeps creation reachable around an optional billing disclosure (18.2s)
+  ✓  133 tests/browser/alert-channels.spec.ts:367:3 › a native 403 start refusal stays on the configured owner without a delivery claim or retry (4.8s)
+  ✓  132 tests/browser/attendance.spec.ts:330:1 › Runtime disabled keeps real session status visible and forbids external actions (9.1s)
+  ✓  131 tests/browser/bill-hearings.spec.ts:141:1 › in-flight, empty and unavailable hearing states are distinct (9.8s)
+  ✓  135 tests/browser/alert-channels.spec.ts:367:3 › a native 404 test refusal stays on the configured owner without a delivery claim or retry (6.9s)
+  ✓  134 tests/browser/billing-summary-integration.spec.ts:79:1 › actual chooser omits financial summary without billing permission while retaining profile intake (13.2s)
+  ✓  136 tests/browser/attendance.spec.ts:353:1 › Read-only role does not fetch private attendance or expose dispatch controls (11.4s)
+  ✓  137 tests/browser/bill-hearings.spec.ts:169:1 › Core owner never requests Intel hearings and retains its own board details (11.0s)
+  ✓  138 tests/browser/alert-channels.spec.ts:402:1 › a mismatched phone confirmation is unknown and cannot fabricate verification or auto-read success (7.0s)
+  ✓  142 tests/browser/alert-channels.spec.ts:448:1 › an accepted phone confirmation with an unavailable saved read cannot claim SMS opt-in (8.2s)
+  ✓  139 tests/browser/billing-summary.spec.ts:49:1 › eligible billing admin sees real supplied rows with responsive light/dark styling (10.4s)
+  ✓  140 tests/browser/attendance.spec.ts:383:1 › Meeting privacy errors and session expiry never expose a successful-looking attendance control (12.6s)
+  ✓  141 tests/browser/bill-hearings.spec.ts:215:1 › missing canonical hearing IDs keep evidence readable without session substitution and encrypted pointers remain unavailable (13.1s)
+  ✓  143 tests/browser/alert-channels.spec.ts:492:3 › a missing test result is unknown without inferred success or automatic replay (6.5s)
+  ✓  144 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/undefined makes no financial request (9.9s)
+  ✓  147 tests/browser/alert-channels.spec.ts:492:3 › a duplicate test result is unknown without inferred success or automatic replay (6.7s)
+  ✘  146 tests/browser/bill-hearings.spec.ts:268:1 › malformed hearing receipts refuse links; retry can establish a genuine empty response (12.0s)
+  ✘  145 tests/browser/attendance.spec.ts:410:1 › Unmounting during held dispatch preflight prevents the later POST (14.5s)
+  ✘  149 tests/browser/alert-channels.spec.ts:492:3 › a unrequested test result is unknown without inferred success or automatic replay (5.4s)
+  ✘  148 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/false makes no financial request (8.0s)
+
+
+  1) tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes 
+  4 interrupted
+    tests/browser/alert-channels.spec.ts:492:3 › a unrequested test result is unknown without inferred success or automatic replay 
+    tests/browser/attendance.spec.ts:410:1 › Unmounting during held dispatch preflight prevents the later POST 
+    tests/browser/bill-hearings.spec.ts:268:1 › malformed hearing receipts refuse links; retry can establish a genuine empty response 
+    tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/false makes no financial request 
+  847 did not run
+  144 passed (6.4m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 130
+npm error path /workspace/capiro-p1-successor/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-p1-successor/apps/web
+npm error command failed
+npm error command sh -c playwright test --workers=4 --output=/tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

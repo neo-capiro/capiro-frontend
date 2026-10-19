@@ -1,0 +1,58 @@
+export default function MobileMeetingDialogShare() {
+  return (
+    <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-start overflow-clip p-[var(--theme(spacing.4),16px)] relative rounded-[var(--radius-2xl,16px)] size-full" data-node-id="698:142722" data-name="Mobile meeting dialog · share">
+      <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="698:142723" data-name="Dialog heading">
+        <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.3] min-w-px relative text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px]" data-node-id="698:142724">
+          Share artifacts with your organization?
+        </p>
+        <button className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="698:142725" data-name="Dialog · Close">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I698:142725;12:385">
+            ×
+          </p>
+        </button>
+      </div>
+      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="698:142726">
+        Selected client meeting
+      </p>
+      <div className="[word-break:break-word] content-stretch flex flex-col font-['Geist:Regular'] font-normal gap-[var(--theme(spacing.3),12px)] items-start overflow-clip relative shrink-0 text-[13px] tracking-[-0.039px] w-full" data-node-id="698:142727" data-name="Dialog body">
+        <p className="leading-[1.45] relative shrink-0 text-[color:var(--muted-foreground,#78716c)] w-full" data-node-id="698:142728">
+          □ Meeting prep · Approval required
+        </p>
+        <p className="leading-[1.45] relative shrink-0 text-[color:var(--muted-foreground,#78716c)] w-full" data-node-id="698:142729">
+          Selected artifacts appear in Anduril → Documents and the firm’s Meeting Library. Everyone in your organization can see them.
+        </p>
+        <p className="leading-[1.45] relative shrink-0 text-[color:var(--muted-foreground,#78716c)] w-full" data-node-id="698:142730">
+          Meeting prep · Generated · Approval required
+        </p>
+        <button className="block cursor-pointer leading-[0] relative shrink-0 text-[color:var(--foreground,#0a0a0a)] text-left w-full" data-node-id="698:142731">
+          <p className="leading-[1.45]">□ Meeting notes · Approve first</p>
+        </button>
+        <button className="block cursor-pointer leading-[0] relative shrink-0 text-[color:var(--foreground,#0a0a0a)] text-left w-full" data-node-id="698:142732">
+          <p className="leading-[1.45]">□ Debrief · Approve first</p>
+        </button>
+        <button className="block cursor-pointer leading-[0] relative shrink-0 text-[color:var(--foreground,#0a0a0a)] text-left w-full" data-node-id="698:142733">
+          <p className="leading-[1.45]">□ Staff questions.pdf · Approve first</p>
+        </button>
+      </div>
+      <div className="content-center cursor-pointer flex flex-wrap gap-[var(--theme(spacing.2),8px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="698:142734" data-name="Dialog footer">
+        <button className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="698:142735" data-name="Dialog · Cancel">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I698:142735;12:379">
+            Cancel
+          </p>
+        </button>
+        <button className="content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.14)] flex gap-[8px] h-[36px] items-center opacity-[calc(var(--shareopacity,45)/100)] px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="698:142736" data-name="Submit · Share artifacts">
+          <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[var(--radius-lg,10px)]" style={{ backgroundImage: "linear-gradient(173.19795488721223deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} />
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I698:142736;12:373">
+            Share selected artifacts
+          </p>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.14)]" />
+        </button>
+        <button className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center opacity-[calc(var(--meeting-gates\/unshareopacity,45)/100)] px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="698:142737" data-name="Action · Unshare all">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I698:142737;12:379">
+            Unshare all
+          </p>
+        </button>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,25 @@
+{
+  "status": "Author responsibility review proposed for root independent review; no registry edits",
+  "reference": "/tmp/capiro-meri-action-host-locator-correction-20261013/REPORT.md",
+  "records": [
+    {
+      "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+      "kind": "function",
+      "symbol": "actionHostFixture",
+      "fingerprint": "7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b",
+      "reason": "This109-line fixture owns one actual-host test's synthetic network scope: historical clock setup, remote blocking, canonical Core/Capiro defaults, public action response selection, request/header capture and HTTP entry/completion barriers. These support the same mounted ApplicationBoundary/Host rather than implement any application workflow, authorization or receiver. It reuses operationFixtures and onlyLocalRequests and loads unchanged public fixture bytes. Keeping queue, ledger and barriers together makes no-dispatch and stale-response assertions independently inspectable; separating those coupled controls would obscure their causal relationship. See the actual-host browser REPORT.md.",
+      "reviewedBy": "Codex modules_settings_review (author; root review pending)",
+      "reviewedOn": "2026-10-13"
+    },
+    {
+      "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "fingerprint": "f1193210490b7e9500d09a8bf7733471b7424749155908cbe26194c031204832",
+      "reason": "This86-line callback verifies one uncertainty fence across an ordered real-navigation lifetime: explicit preparation, received unknown or still-held response, cross-mode link, Back/reconnect, late response, Forward/Back/reconnect, and unchanged action counts. The two input variants exercise the same journal invariant at different observation states. HTTP interception and ordinary preparation helpers own setup mechanics; all no-replay and removed-private-view assertions remain contiguous with the transitions they constrain. No durable state is recreated by the test. See the actual-host browser REPORT.md.",
+      "reviewedBy": "Codex modules_settings_review (author; root review pending)",
+      "reviewedOn": "2026-10-13"
+    }
+  ],
+  "correction": "The two regex locators are outside the actionHostFixture function and navigation callback; both exact reviewed fingerprints are unchanged. No additional trigger."
+}

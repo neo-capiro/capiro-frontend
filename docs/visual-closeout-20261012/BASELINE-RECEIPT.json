@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-10-12T11:23:27.137699+00:00",
+  "head": "a397d45c461b24eb741afcd3b7cf28ca354d1e96",
+  "state": "seven expected product failures on clean qualified application",
+  "suites": [
+    {
+      "suite": "portfolio",
+      "stats": {
+        "startTime": "2026-10-12T11:22:23.376Z",
+        "duration": 50896.028999999995,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "controlSha256": "47a8faecfb55bea520d43748663014e64a12e684666486f49c14cc0edece25ea"
+    },
+    {
+      "suite": "modules",
+      "stats": {
+        "startTime": "2026-10-12T11:21:50.665Z",
+        "duration": 4056.4439999999995,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "controlSha256": "01f43f1b255ef9c7125872d995f6f3ad38d7bc098a4b8d669c17d56fc8870285"
+    }
+  ],
+  "preparatoryFailures": [
+    "Modules external config initially loaded as CJS; corrected external package type without application edits.",
+    "Initial capability label locator was incorrectly scoped; retained original failed run, corrected the control and repeated all six Portfolio baselines before source edits."
+  ]
+}

@@ -1,0 +1,28 @@
+# Independent rich-preview history and size-binding review
+
+**PASS within this bounded source/evidence review. No source defect found.** The current uncommitted `RichPreview.tsx` is bound by SHA-256 `617d3c8ca4f9194cae14312192cfa4252405670a61782a3aaff3428a17c7a60f`, on merge HEAD `977cf7b3b6bb4924c85d1cc5be5b31d93d94e026`. HEAD alone does not identify this work in progress. No browser, application, install, build, tests or native calls were run by this reviewer; only read-only inspection, hashing and pure source parsing.
+
+## History correction
+
+The preserved first browser run is **10 passed / two genuine failures**, not a flaky success. CDP records Workspace at index 1, editor/review at 2, adoption and pending stage at 3, then native Back at 2 while the parent remains on the editor URL. This independently supports the iframe joint-session-history diagnosis.
+
+Before-to-current source differs only by `key={document}` on the two iframe instances and the explanatory two-line comment. Changing the sanitized document replaces the inert child browsing context; unchanged sanitized HTML keeps the same key. Parent editor, selection, controller, request lifetimes, draft/undo state and QueryClient write journal are not keyed or reset by this change. Mobile sizing alone does not replace the frame. This is an appropriate local fix, without replacing history entries or weakening navigation assertions.
+
+Sanitization and rendering are byte-unchanged by the correction: DOMPurify rules, generated CSP, empty sandbox, no-referrer, disabled remote images/links and plain-text fallback remain. Keying on the already-produced string does not interpret it as code or establish authority. The same rule covers saved owner HTML and local design HTML. Both descriptive iframe titles and plain-text alternatives remain accessible. A replaced iframe may lose its own scroll/focus position, an expected consequence of replacing this read-only display; the parent draft is retained. This is not comprehensive accessibility or Figma acceptance.
+
+The author preserved a new history-length regression against the pre-key fixture bundle: expected 2 entries, received 3. The final author run independently verifies **12/12 passed**, no unexpected/skipped/flaky results, one result each, retries zero, one worker, duration 20,450 ms. Its test hashes match current files and its reported preview hash matches this review. Existing Back and Workspace assertions remain; new dispatch barriers establish that the held operation actually entered the interceptor before navigation. Forward now restores the editor with its uncertain attempt fence. The saved-preview test retains its sanitization/no-remote-effects controls and adds unchanged history length after adoption and both explicit saved previews. Exact request assertions now include both intended preview POSTs. See the two preserved test diffs.
+
+## Architecture review bindings
+
+Pure parsing independently reproduced every fingerprint in the eleven applied controller/adapter size records and matched each to the registry and `APPLIED-SIZE-REVIEWS.json`:
+
+- `createRichNewsletterAdapter`, line 34, 94 nonblank body lines, fingerprint `9535f5a145d16624ec813b181b1896757ae04b7b4a15a87ae2576cb72589db14`.
+- Receiving suite `<anonymous> #2`, line 141, 227 nonblank body lines, fingerprint `886665df815ae5a4d34dac5f871cd8f29c9e742bd5f1f9523808acbb7a1af8fd`.
+
+These adapter/test files remain byte-identical to the earlier independent boundary review. I accept the exact root rationale: eight related request/receipt methods form one protocol boundary over the canonical cancelling transport and public parsers. The finite suite tests that same boundary, including mutable expected-binding capture, nominal revision, mismatches, stage separation, historical tests and disposal. Neither owns UI recovery, backend authorization, persistence or retries.
+
+The separate new browser fixture `documentFixture`, line 48, 88 nonblank body lines, fingerprint `fa9917a8ab1044cdfedb876d9a0bacb5223ba3c52e7e62a3bd2c4f40009e561c`, is also **independently accepted**. Its single responsibility is the finite synthetic saved-document protocol fixture: it composes existing client/operation/network fixture owners, queues response variants and records actual intercepted request bodies/dispatch plus page errors, external requests and dialogs. Production parsers, lifecycle controller and session boundary remain exercised. It introduces no backend claim or duplicate validator. The lifecycle suite covers create/save/CAS/review/rebase/preview isolation; the navigation suite covers unknown writes, Back/Forward and authority replacement. Both use observable behavior and retained meaningful assertions. `BROWSER-TEST-STRUCTURE.json` binds the three current files; only the fixture crosses a size threshold.
+
+The earlier whole architecture receipt records 439 source signals, 415 reviewed, 24 inherited unreviewed and zero blocking/errors. Its canonical discovery is `apps/web/src` and `packages/meri-client/src`, unchanged here; browser tests are outside that discovery. The new test review is explicit manual application of the same responsibility/size policy, **not a guard waiver or a claim that the earlier scan included them**.
+
+The receiving/lifecycle slice still requires its eventual exact-source full qualification and native acceptance separately. This review neither authorizes nor establishes backend, provider, deployment or native success. Original failures and raw evidence remain untouched; `RECEIPT.json` records source and raw-evidence hashes, and `MANIFEST.json` seals this small review packet.

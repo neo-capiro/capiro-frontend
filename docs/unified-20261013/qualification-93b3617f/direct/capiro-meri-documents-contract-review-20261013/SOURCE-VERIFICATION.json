@@ -1,0 +1,324 @@
+{
+  "capturedAt": "2026-10-13T07:09:04.046788+00:00",
+  "publishedPin": "a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8",
+  "remoteFiles": [
+    {
+      "path": "apps/control/document-application/README.md",
+      "bytes": 4537,
+      "gitBlob": "a9c937f1f605821161dd33ff840d55edebd2a55a",
+      "sha256": "35082f1e1c50f5a7b5799d0fc5e1e93b3abd965e358664804ead0572128e0a5e",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/apps/control/document-application/README.md"
+    },
+    {
+      "path": "apps/control/document-application/OUTLINE.md",
+      "bytes": 2165,
+      "gitBlob": "c7fb150d1dc0e4a9906b7985f44a3718b536aad1",
+      "sha256": "6d33524b346fb7a19bd4fd50a8f6e2e37bf532bd59cb181331ea2cf302696f8d",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/apps/control/document-application/OUTLINE.md"
+    },
+    {
+      "path": "apps/control/document-application/local/README.md",
+      "bytes": 2781,
+      "gitBlob": "9e2f20e04d8397e4dc8fe9dda06bd07f29d491fb",
+      "sha256": "d0559149533511afdf0c34826d7e0693d6c33cd27aac1ee04be05f57ed789450",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/apps/control/document-application/local/README.md"
+    },
+    {
+      "path": "docs/coordination/reports/CODEX-DOCUMENT-DRAFTING-20261013.md",
+      "bytes": 6648,
+      "gitBlob": "0f426f4616c0923ac06f93a612b6a77ad9cbf533",
+      "sha256": "4276551517490a95e53ccfa0cdd29b945b5d11cb78343aa0f263f8b37c38aa64",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/coordination/reports/CODEX-DOCUMENT-DRAFTING-20261013.md"
+    },
+    {
+      "path": "docs/coordination/reports/CODEX-DOCUMENT-DRAFTING-REVIEW-20261013.md",
+      "bytes": 3603,
+      "gitBlob": "7828224910115354e33b8fc6e7aac8380c7e169f",
+      "sha256": "672d47f9ef63e7909d8bd614d83a5f64e3b496f01ee4cf0184cfd07a06eb9b50",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/coordination/reports/CODEX-DOCUMENT-DRAFTING-REVIEW-20261013.md"
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "bytes": 1754,
+      "gitBlob": "e089d85a69067c6ddfc1850dacc96fcf13566959",
+      "sha256": "693564eebec85be85ab3e5fd94b2de6620207f841f411b7cd5d4f29f250706c9",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/packages/contracts/package.json"
+    },
+    {
+      "path": "packages/contracts/dist/index.d.ts",
+      "bytes": 85,
+      "gitBlob": "79e6e96d047b3766f91352ec2845765a169059d7",
+      "sha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/packages/contracts/dist/index.d.ts"
+    },
+    {
+      "path": "packages/contracts/dist/action-application.d.ts",
+      "bytes": 17721,
+      "gitBlob": "da6e859f49b92797300fd662e6733338b42f4da1",
+      "sha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/packages/contracts/dist/action-application.d.ts"
+    },
+    {
+      "path": "packages/contracts/README.md",
+      "bytes": 8945,
+      "gitBlob": "c38c38cd62bbbd1c4e7430d576477cea8e578b93",
+      "sha256": "68e930f792bca89778c448a637115570c21299c6a757cdeafff2f276c1545534",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/packages/contracts/README.md"
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/integration/final-http-tests.json",
+      "bytes": 1483,
+      "gitBlob": "c04baf83635162d393f90110e16dadef647f8542",
+      "sha256": "3420d8e26860c8d9fe94efd2bd71e8ffd31447d04fa1becc143836645b7c8c3f",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/qualification/candidates/document-drafting-20261013/integration/final-http-tests.json"
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/integration/canonical-regressions.json",
+      "bytes": 2774,
+      "gitBlob": "7b665080441e95903188545cc881019966d8f8ac",
+      "sha256": "695615ce19962fa219ee91734ecdefba56580ba68fa4d17627b82e28d3243f4f",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/qualification/candidates/document-drafting-20261013/integration/canonical-regressions.json"
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/review/repaired.json",
+      "bytes": 1282,
+      "gitBlob": "86ef015f4483e902383cc4242bac46e59d57dd16",
+      "sha256": "66028d3bc016ac3d7306c6c42f7f9d9d1d3640a59e822440a93f9a1fd45953a4",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/qualification/candidates/document-drafting-20261013/review/repaired.json"
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/integration/final-http-tests.stdout.bin",
+      "bytes": 1931,
+      "gitBlob": "da892c499762393380fb35062dd71f60cafa3963",
+      "sha256": "0ca30e1066f391e6bd41492e1bb381766751f4c2be0b689b9478e53bbd647b4d",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/qualification/candidates/document-drafting-20261013/integration/final-http-tests.stdout.bin"
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/integration/canonical-regressions.stdout.bin",
+      "bytes": 44772,
+      "gitBlob": "c6cb925a9bd17bffa90c53f7e35195e44a16a64f",
+      "sha256": "0c959de29d7d4d97fe557df926a081071595a206961896031bd875a8a122e7b5",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/qualification/candidates/document-drafting-20261013/integration/canonical-regressions.stdout.bin"
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/review/repaired.stdout.bin",
+      "bytes": 3729,
+      "gitBlob": "6cd207f83f1363631d916c8412e3610ae03d75e1",
+      "sha256": "b403a400dd180d111aa07694887c303af088a8db08c504d4400c8c6b6d7897e8",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8/docs/qualification/candidates/document-drafting-20261013/review/repaired.stdout.bin"
+    }
+  ],
+  "retainedPublisherReceiptsVerified": [
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/integration/final-http-tests",
+      "receiptSourceHead": "b4d5380d936d1a7d5e34356c3cdf93eb90578989",
+      "exitCode": 0,
+      "scope": "LOCAL_SOURCE_ONLY_NOT_RUNTIME_ADMISSION",
+      "stdoutSHA256Verified": true,
+      "counts": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "independentlyRerun": false
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/integration/canonical-regressions",
+      "receiptSourceHead": "e36f1ae2c2ec3fce512518a8128de4c62bd0e32f",
+      "exitCode": 0,
+      "scope": "LOCAL_SOURCE_ONLY_NOT_RUNTIME_ADMISSION",
+      "stdoutSHA256Verified": true,
+      "counts": {
+        "tests": 512,
+        "pass": 512,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "independentlyRerun": false
+    },
+    {
+      "path": "docs/qualification/candidates/document-drafting-20261013/review/repaired",
+      "receiptSourceHead": "2767b12f8a0532d4f2ad9316f43e8a7bd90ccbeb",
+      "exitCode": 0,
+      "scope": "LOCAL_SOURCE_ONLY_NOT_RUNTIME_ADMISSION",
+      "stdoutSHA256Verified": true,
+      "counts": {
+        "tests": 37,
+        "pass": 37,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "independentlyRerun": false
+    }
+  ],
+  "frontendPin": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "frontendFiles": [
+    {
+      "path": "AGENTS.md",
+      "gitBlob": "e13c8fc2cf81ed5d7a7cc309e3eee25c858ac199",
+      "sha256": "3889dd45c593695fbdbb3c3935eb06b0ee48c38c17d9ba3fcce0c606e5cf4389",
+      "bytes": 2319,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "docs/IMPLEMENTATION-STANDARDS.md",
+      "gitBlob": "7f680395e07d1114667a800f3f8ed77010a3eac2",
+      "sha256": "d4f10f964ee207187abacd967649a1cfc9bdd468072dc01f859268f08b719959",
+      "bytes": 11082,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "gitBlob": "560908a79072ee2c2cc1fed8f0a6cc4c9a5ac0cd",
+      "sha256": "63f00bf6913309476d70152cdd04761ccb69bb6059bd1d2f7d698bbcab517ee7",
+      "bytes": 9096,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "gitBlob": "11ab2760813e6d81601e5ee721cc46737a905d12",
+      "sha256": "cd1584326cabd10d95f86b11ba2421f0eef5465285d75cb82ceb17c12279dd80",
+      "bytes": 4521,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "gitBlob": "1071c10926365eb17f60e1878da2c7bfaa75c1d4",
+      "sha256": "68379ce566220a205122e197e5c3ae8d211c0ab7f82afe3eeb6bead34e7a92fd",
+      "bytes": 1260,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "gitBlob": "4ae56be9c7c2e39052279a2b531c7e7cba7c0be0",
+      "sha256": "d7942d79955c8cbe1c1929f3d551118eef701c4b1ade6d92cbbd3858bdf3dad3",
+      "bytes": 1668,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/shell.module.css",
+      "gitBlob": "71ed4b84a1a52215e42ac91edab4904d3622b2a6",
+      "sha256": "748440948fc9e9e997060bac6414c17e19ab0914c28dfea9272c9037a02c3171",
+      "bytes": 2897,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "gitBlob": "4c4a510934836f0c83cd36f4ff3f266eb2ba11bd",
+      "sha256": "47eb6dab030eefcd0cb8b17627d1f10c6f0a2673964a9d060050687e9bee1f21",
+      "bytes": 3873,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "gitBlob": "7f38b002cf68609ad03b0525d330967b37bb9e6b",
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "bytes": 3597,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "gitBlob": "769bd1fa9c62bba4949351cee17f9ab487d028f2",
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6",
+      "bytes": 391,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "gitBlob": "94a1b5da56677e3ea13a517f3107ab81b9a29b06",
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171",
+      "bytes": 1241,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "gitBlob": "4f17e9817795c6e93ee57278319d34002170938e",
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028",
+      "bytes": 1640,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "gitBlob": "1e46db51a7fc761ece4a59aeb7cdc48607ad4094",
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76",
+      "bytes": 1355,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "gitBlob": "1ea802e91677008dfe76221e3acf122e7a628d3b",
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+      "bytes": 2843,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "gitBlob": "45a88a29c8e6f334a133a3917dfbee0b84ce0b09",
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b",
+      "bytes": 2038,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "gitBlob": "52f64ae5dedcfa61f472b5ad20ddf728dc4888f3",
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471",
+      "bytes": 474,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "gitBlob": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8",
+      "bytes": 1296,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "apps/web/package.json",
+      "gitBlob": "cb490bbe3468f202f382616dbc23f32f7dc3bf71",
+      "sha256": "6de6b086942388fbdad21eca2f12bc1ba9f3a73f8ce9259249c46ffac3903134",
+      "bytes": 2050,
+      "workingBytesMatchFrozen": true
+    },
+    {
+      "path": "vendor/meri-public-packages.json",
+      "gitBlob": "dad44520b24e752e60d952ce49c022493b0103f4",
+      "sha256": "61f3faca8efc23e0ebe215ea99ff098d68346c28cf02f0d9d9a6a8450a5d54de",
+      "bytes": 1840,
+      "workingBytesMatchFrozen": true
+    }
+  ],
+  "publicPackage": {
+    "version": "0.1.1",
+    "bytes": 175627,
+    "sha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+    "exactManifestMatchesPR50": true,
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/browser.mjs"
+      },
+      "./browser": {
+        "types": "./dist/browser.d.ts",
+        "default": "./dist/browser.mjs"
+      },
+      "./node": "./validate.mjs",
+      "./metadata": {
+        "types": "./dist/metadata.d.ts",
+        "default": "./dist/metadata.mjs"
+      },
+      "./schema": "./meri.schema.json",
+      "./action-application": {
+        "types": "./dist/action-application.d.ts",
+        "default": "./dist/action-application.mjs"
+      },
+      "./action-application/schema": "./dist/action-application.schema.json"
+    }
+  },
+  "privateImplementationCopied": false,
+  "testsOrNativeRuntimeRun": false,
+  "frontendStatus": ""
+}

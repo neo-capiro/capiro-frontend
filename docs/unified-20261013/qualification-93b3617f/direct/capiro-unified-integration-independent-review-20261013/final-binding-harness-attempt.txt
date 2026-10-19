@@ -1,0 +1,1 @@
+Read-only verifier setup attempt failed before any checks/writes: git ls-tree with an empty pathspec returned128 (empty string is not a valid pathspec). This is a local verification-script error, not a source/product failure. Corrected verifier omits the pathspec when inspecting the whole tree. No repository mutation or runtime execution.

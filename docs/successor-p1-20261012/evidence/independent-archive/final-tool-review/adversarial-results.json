@@ -1,0 +1,432 @@
+{
+  "canonicalSHA256": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+  "independentSHA256": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2",
+  "syntheticCommit": "d46507df37c8cf2cbdd2b973f39b751a369a0746",
+  "syntheticRepository": "/tmp/capiro-successor-archive-review/synthetic-git",
+  "successorArchiveCreated": false,
+  "awsCalls": 0,
+  "providerCalls": 0,
+  "results": [
+    {
+      "case": "canonical-valid",
+      "expectedAccept": true,
+      "archiveSHA256": "aa4fb69468f670de24d7f52c4b00ad6b835a41b3dd2641bd7bd317928d02bbe0",
+      "canonical": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-metadata-order-compression",
+      "expectedAccept": true,
+      "archiveSHA256": "42b60d72d29cf2c295415d9c89bbe9ea794255aa432fad884d04340e8ad2b370",
+      "canonical": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-dos-regular",
+      "expectedAccept": true,
+      "archiveSHA256": "a6b27a3a4072c06a9b7e8dbd420610c18c3b505ba90d133e502d41b86e5a13bb",
+      "canonical": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-optional-directory",
+      "expectedAccept": true,
+      "archiveSHA256": "5594994d60b052a9f7ba5e73c63445bb0748c7c0941282f5428d3b59ae3f4ec2",
+      "canonical": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-data-descriptor",
+      "expectedAccept": true,
+      "archiveSHA256": "2751754593202eaab69697c32f1d3fa002ae90dc0e0642ad33423c66351f0874",
+      "canonical": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-local-zip64",
+      "expectedAccept": true,
+      "archiveSHA256": "99f3486c94e493f2487cdf81a7b0dadea1b1e30a58fcf5b4b9911b8463900990",
+      "canonical": {
+        "accepted": false,
+        "passed": false,
+        "error": "ValueError: ZIP local/central header mismatch or unsupported layout"
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-zip64-data-descriptor",
+      "expectedAccept": true,
+      "archiveSHA256": "dec3a03d5e29ac1ff8c9bccd2f6457403005664b2140313bf0ac496b47f41b05",
+      "canonical": {
+        "accepted": false,
+        "passed": false,
+        "error": "ValueError: ZIP local/central header mismatch or unsupported layout"
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "valid-zip64-directory",
+      "expectedAccept": true,
+      "archiveSHA256": "e8f705d1ab54fd6e30ab4ffc3d8c0551c24cc6faa3de481fd7cbf4cffb9653c5",
+      "canonical": {
+        "accepted": false,
+        "passed": false,
+        "error": "ValueError: ZIP has prefix/trailing data, split volumes or unsupported ZIP64 layout"
+      },
+      "independent": {
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    },
+    {
+      "case": "missing-file",
+      "expectedAccept": false,
+      "archiveSHA256": "da1c18e31ce4b8cb298461552734db5290147dd848fc742d54421046aebe113f",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP does not contain the exact committed file set plus source marker"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Missing tracked file or exact marker"
+      }
+    },
+    {
+      "case": "extra-file",
+      "expectedAccept": false,
+      "archiveSHA256": "2a255e77cba528f62f5729ddf6ebc44c921e2f3bb7943f83a3ab5060147e0416",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unexpected ZIP file: unexpected.txt"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Extra ZIP file: unexpected.txt"
+      }
+    },
+    {
+      "case": "duplicate-file",
+      "expectedAccept": false,
+      "archiveSHA256": "ac6c7ac6674ebdbbf831a122f56bab7afea7e74a5ebafae95efd4ce960c46004",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP has overlapping or unindexed local data"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Duplicate ZIP path: README.md"
+      }
+    },
+    {
+      "case": "duplicate-marker",
+      "expectedAccept": false,
+      "archiveSHA256": "f49ee8bf91112f6b678b0c0d48aa28ca34c1cb71660148365f736d0f9ca7d4ab",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP has unindexed data between members"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Duplicate ZIP path: source-commit.txt"
+      }
+    },
+    {
+      "case": "traversal",
+      "expectedAccept": false,
+      "archiveSHA256": "40b92edf96e1446ba7be3c5e87629a03bda06675134d71900f02b4ad0152b22b",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unsafe or noncanonical archive path: '../escape.txt'"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Unsafe path component"
+      }
+    },
+    {
+      "case": "absolute-path",
+      "expectedAccept": false,
+      "archiveSHA256": "17551abb00ad4376911f987a2d9283d93a91eb33165c15ebbdd72de1ee96bfb0",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unsafe or noncanonical archive path: '/escape.txt'"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Unsafe path component"
+      }
+    },
+    {
+      "case": "backslash-path",
+      "expectedAccept": false,
+      "archiveSHA256": "3b71c7044d807fbecb15f94734b90ae2f75e656d07eb1aa310dea617a4449a0b",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unsafe or noncanonical archive path: 'apps\\\\escape.txt'"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Nonportable path separator/drive"
+      }
+    },
+    {
+      "case": "unexpected-directory",
+      "expectedAccept": false,
+      "archiveSHA256": "5a8c8cef15c05e73ff705804c5dd2c1cdb4661ab8f56c1af932e5c50b6ebc104",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unexpected directory entry: unexpected"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Extra/nonempty directory"
+      }
+    },
+    {
+      "case": "nonempty-directory",
+      "expectedAccept": false,
+      "archiveSHA256": "f8966d6985003d8a8c314b6efb7bb1b8d5002bf6fa3490b2c3b19e54190d6ffb",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unexpected directory entry: apps"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Extra/nonempty directory"
+      }
+    },
+    {
+      "case": "symlink-file",
+      "expectedAccept": false,
+      "archiveSHA256": "0f0c2609c92f6985292c09f1bc4fe931f573f021c6ca663f11572db403297364",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unsupported or ambiguous ZIP file mode: README.md"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Nonregular ZIP member: README.md"
+      }
+    },
+    {
+      "case": "symlink-marker",
+      "expectedAccept": false,
+      "archiveSHA256": "fd5762fd3dc0d3e350d026d3a8887cfa9fa8b8c06f0c7a0eb82cad153eacc4f9",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unsupported or ambiguous ZIP file mode: source-commit.txt"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Nonregular ZIP member: source-commit.txt"
+      }
+    },
+    {
+      "case": "wrong-mode",
+      "expectedAccept": false,
+      "archiveSHA256": "8730cbfe3be69dc7d63bcdd9164b700bd99f8f51c48328b7b0a4414a4d22474e",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP size/mode differs: run.sh"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Git/ZIP mode mismatch: run.sh"
+      }
+    },
+    {
+      "case": "wrong-payload-same-size",
+      "expectedAccept": false,
+      "archiveSHA256": "0d44ab5069232dc1efa1852ca66abe8bc598d26344be97816085b72b1e8901bf",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP payload differs: README.md"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Git/ZIP payload mismatch: README.md"
+      }
+    },
+    {
+      "case": "wrong-marker-same-size",
+      "expectedAccept": false,
+      "archiveSHA256": "2fdf80a18bc23b1afeec4a61a732c60b3447bd05891968a28b9dcc3c5bbd4bf9",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Source marker differs"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Git/ZIP payload mismatch: source-commit.txt"
+      }
+    },
+    {
+      "case": "file-dos-directory-conflict",
+      "expectedAccept": false,
+      "archiveSHA256": "b0aaed228a482db4b0bd1787ad35ebef5afcf45cfc90d5b8fc9b415c7e2a3bd8",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP file has a conflicting DOS directory flag: README.md"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: File mode/type mismatch"
+      }
+    },
+    {
+      "case": "dos-creator-executable-bits",
+      "expectedAccept": false,
+      "archiveSHA256": "63c47d392cf7e95b8963ed44ed9dd8d3222d6808fa6ea2b6b579db4914918d81",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: Unsupported or ambiguous ZIP file mode: run.sh"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Unsupported non-Unix permission metadata"
+      }
+    },
+    {
+      "case": "hidden-prefixed-archive",
+      "expectedAccept": false,
+      "archiveSHA256": "4c8cf2da618e7a13dd8e41838dc0ceaf55bfc78e337ec03dfd832f46ba8bd98d",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP has prefix/trailing data, split volumes or unsupported ZIP64 layout"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: ZIP prefix or unindexed first member"
+      }
+    },
+    {
+      "case": "trailing-unindexed-bytes",
+      "expectedAccept": false,
+      "archiveSHA256": "64783bb09f3f57d5e45bca1818f475c48afdbde746f002c944787bcddf51c3d5",
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP has prefix/trailing data, split volumes or unsupported ZIP64 layout"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Multipart or trailing ZIP content"
+      }
+    },
+    {
+      "case": "pathname-mutated-after-zip-close",
+      "expectedAccept": false,
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP changed during verification; no identity can be bound"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Archive changed during verification"
+      }
+    },
+    {
+      "case": "pathname-replaced-after-zip-close",
+      "expectedAccept": false,
+      "canonical": {
+        "accepted": false,
+        "passed": true,
+        "error": "ValueError: ZIP changed during verification; no identity can be bound"
+      },
+      "independent": {
+        "accepted": false,
+        "passed": true,
+        "error": "Rejected: Archive pathname changed during verification"
+      }
+    }
+  ],
+  "canonicalPassed": 25,
+  "independentPassed": 28,
+  "total": 28
+}

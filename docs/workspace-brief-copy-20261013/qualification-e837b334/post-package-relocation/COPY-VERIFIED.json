@@ -1,0 +1,27 @@
+{
+  "destination": {
+    "device": 27,
+    "inode": 1052961,
+    "bytes": 270372695,
+    "mode": 384,
+    "mtimeNs": 1791861112481798851,
+    "uid": 1000,
+    "gid": 1000
+  },
+  "compressedSHA256": "49e6dc2049818a8d5933183f90eefd960dd8f79b6ae7314d73454f9a915bdab4",
+  "activityAfterCopy": {
+    "UTC": "2026-10-13T20:46:20.430820+00:00",
+    "matchingArchiveDescriptors": [],
+    "denied": [
+      {
+        "pid": 201,
+        "name": "dockerd"
+      },
+      {
+        "pid": 253,
+        "name": "containerd"
+      }
+    ]
+  },
+  "sourceUnchanged": true
+}

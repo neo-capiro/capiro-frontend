@@ -1,0 +1,630 @@
+[
+  {
+    "name": "applies the operation deadline to a hanging token provider before dispatch",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "cancels a hanging upstream response stream when the caller leaves",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "refuses an oversized streamed success and redacts upstream diagnostic headers",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "never forwards caller credentials or selected tenant headers",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "does not admit a late successful read after the session scope was aborted",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "does not admit a late response body or expire a new scope from an old 401",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "closes a late upstream response even if the provider ignores cancellation",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/lifecycle.test.ts"
+  },
+  {
+    "name": "retained hearing audio transport > commits ordered frames only after a matching durable acknowledgement",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/intelligence/legiwatch/live/HearingRecordingTransport.test.ts"
+  },
+  {
+    "name": "retained hearing audio transport > retries an immutable frame without advancing the saved checkpoint",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/intelligence/legiwatch/live/HearingRecordingTransport.test.ts"
+  },
+  {
+    "name": "retained hearing audio transport > stops when the queue exceeds its bounded unsaved tail",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/intelligence/legiwatch/live/HearingRecordingTransport.test.ts"
+  },
+  {
+    "name": "maps only registered paths and preserves the trusted bearer without browser scope headers",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects unknown operation unknown.operation before auth/network",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects unknown operation __proto__ before auth/network",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects unknown operation constructor before auth/network",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects mismatched methods, extra scope authority and malformed JSON",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal ../me",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal ..",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal .",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal path/segment",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal %2fme",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal abc?role=admin",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects parameter traversal bad\\path",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "rejects writes without the same origin and forwards the validated backend body only",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "fails closed without configured auth, service or a verified session",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "handles unavailable auth and cancelled requests without upstream dispatch",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "strips upstream error diagnostics and refuses malformed successful responses",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "bounds input size before dispatch and preserves acknowledged 204 responses",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/gateway.test.ts"
+  },
+  {
+    "name": "forwards the authorized multipart fields and derived bearer, with automatic multipart boundary",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "rejects undeclared fields, oversize files, duplicate files and authority metadata before token/network",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "browser upload validates file policy and does not expose bearer or manually set multipart Content-Type",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "bounds binary MIME/size and returns an opaque download with a safe registered filename",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "only hands off a reviewed hearing socket derived from the configured service and single-use ticket",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "presigned logo upload omits all credentials and rejects an arbitrary destination",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "preserves the separate attachment type policy, rejects scriptable SVG essence and signed type mismatches",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/transfers.test.ts"
+  },
+  {
+    "name": "loads all Planner cursors and reports repeated cursors without claiming complete coverage",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/agenda-loader.test.ts"
+  },
+  {
+    "name": "keeps permitted successful source rows when another source fails and filters civil dates locally",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/agenda-loader.test.ts"
+  },
+  {
+    "name": "retains the funding source completeness signal even for an empty deadline page",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/agenda-loader.test.ts"
+  },
+  {
+    "name": "public forms use only a revocable capability and project no internal identities",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/public-forms.test.ts"
+  },
+  {
+    "name": "malformed capabilities, private operations and cross-origin form writes never dispatch",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/public-forms.test.ts"
+  },
+  {
+    "name": "public submissions expose a receipt only and preserve revoked-link failures",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/public-forms.test.ts"
+  },
+  {
+    "name": "Planner view semantics > keeps blocked tasks open and excludes completed tasks",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-presentation.test.ts"
+  },
+  {
+    "name": "Planner view semantics > combines scope hints without treating an unassigned task as an arbitrary team member",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-presentation.test.ts"
+  },
+  {
+    "name": "Planner view semantics > keeps calendar arithmetic stable over daylight saving changes",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-presentation.test.ts"
+  },
+  {
+    "name": "Planner view semantics > formats time as hours and minutes without rounding away work",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-presentation.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > keeps retained search pagination independent of matched rows and preserves incomplete coverage",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > requires exact distinct retained revisions for comparison",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > keeps unknown analytics coverage null and rejects inverted windows",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > requires preview and current version before activating internal workflows",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > projects held workflow history without exposing worker leases, prefill or old-app review URLs",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > projects captured recipient metadata while keeping write recipients strict",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > uses source-supported timezone names and never allows forced sending in run-now",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "reviewed source and authority boundaries > does not accept captured keyword ownership as editable configuration",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "captured imports > rejects unsafe/deep capture data and mismatched workspace manifests",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "captured imports > requires reviewed source qualification for imported statutes but retains unresolved decisions",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/legiwatch-review.test.ts"
+  },
+  {
+    "name": "encodes only registered operation input and validates responses",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/http.test.ts"
+  },
+  {
+    "name": "rejects invalid request fields before network and has no automatic write retry",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/http.test.ts"
+  },
+  {
+    "name": "returns bounded session and schema failures and forwards cancellation",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/http.test.ts"
+  },
+  {
+    "name": "imports the complete reviewed allowlist safely and exposes no silently overwritten operation",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/registry.test.ts"
+  },
+  {
+    "name": "applies configured service prefixes once and ties the hearing socket to its actual gateway",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/registry.test.ts"
+  },
+  {
+    "name": "Modules source contracts > joins the configured service prefix exactly once",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts"
+  },
+  {
+    "name": "Modules source contracts > preserves canonical source identity and missing funding independently from zero",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts"
+  },
+  {
+    "name": "Modules source contracts > retains source date precision and timezone instead of manufacturing a deadline time",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts"
+  },
+  {
+    "name": "Modules source contracts > refuses tenant or actor authority fields in research writes and requires revisions",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts"
+  },
+  {
+    "name": "Modules source contracts > allows current geography only and never admits future metrics as current",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts"
+  },
+  {
+    "name": "Modules source contracts > keeps financial bases distinct and decimal strings exact",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts"
+  },
+  {
+    "name": "official hearing calendar dates > keeps the official Eastern date at UTC midnight and across DST boundaries",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/intelligence/legiwatch/hearings/calendar-dates.test.ts"
+  },
+  {
+    "name": "official hearing calendar dates > uses announced wall time without inventing an instant or a capture hour",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/intelligence/legiwatch/hearings/calendar-dates.test.ts"
+  },
+  {
+    "name": "official hearing calendar dates > rejects impossible dates before dispatching a calendar operation",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/intelligence/legiwatch/hearings/calendar-dates.test.ts"
+  },
+  {
+    "name": "retains a start inside the selected week when the deadline is outside",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/planner-occurrences.test.ts"
+  },
+  {
+    "name": "combines identical civil-day occurrences with both semantics",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/planner-occurrences.test.ts"
+  },
+  {
+    "name": "retains distinct times on the same date and collapses identical timestamps",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/planner-occurrences.test.ts"
+  },
+  {
+    "name": "does not confuse date-only and timed occurrences on the same day",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/planner-occurrences.test.ts"
+  },
+  {
+    "name": "deduplicates repeated pages without losing separate start and due rows",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/planner-occurrences.test.ts"
+  },
+  {
+    "name": "omits archived or undated work while preserving start-only work",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/planner-occurrences.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > requires current versions for explicitly versioned financial and staffing writes",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > rejects authority fields and unreviewed resource configuration",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > preserves exact fixed service ownership and blocks traversal in task identifiers",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > rejects invalid calendar dates and gates timesheet actions on a revision",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > bounds multipart files to the actual Planner service limit",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > validates the actual meeting Library envelope and refuses an invented items envelope",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "Planner and engagement wire boundaries > does not permit send commands through the campaign decision operation",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/planner-contracts.test.ts"
+  },
+  {
+    "name": "verified LegiWatch contract boundaries > keeps the ticket endpoint and actual gateway route tied to the validated session",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts"
+  },
+  {
+    "name": "verified LegiWatch contract boundaries > requires an explicit attendance request while following preserves no capture demand",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts"
+  },
+  {
+    "name": "verified LegiWatch contract boundaries > preserves nullable official evidence without substituting transcript prose",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts"
+  },
+  {
+    "name": "verified LegiWatch contract boundaries > rejects a delivery without the reviewed composition approval hash",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > preserves reserved routing fields and strips unrelated metadata",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > retains ordinary metadata undefined",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > retains ordinary metadata null",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > retains ordinary metadata {}",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed stage marker null",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed stage marker \"\"",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed stage marker \"wrong\"",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed stage marker 1",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed stage marker \"20000000-0000-7000-8000-000000000001\"",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed stage marker \"20000000-0000-4000-0000-000000000001\"",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed revision 0",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed revision -1",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed revision 1.5",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed revision 9007199254740992",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed revision \"2\"",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > refuses malformed revision null",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > accepts producer UUID version 1",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > accepts producer UUID version 2",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > accepts producer UUID version 3",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > accepts producer UUID version 4",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "existing rich newsletter response routing > accepts producer UUID version 5",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/newsletter-routing.test.ts"
+  },
+  {
+    "name": "keeps exact correction values as strings and accepts the backend pending-approval receipt",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/settings-admin.test.ts"
+  },
+  {
+    "name": "binds mapping identity to the path and refuses actor/tenant authority in its body",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/settings-admin.test.ts"
+  },
+  {
+    "name": "requires a current credential readback and accepts only the supported model action",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/settings-admin.test.ts"
+  },
+  {
+    "name": "preserves source-specific search envelopes and never turns CAGE into a supported match",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/operations/settings-admin.test.ts"
+  },
+  {
+    "name": "uses Monday-based month padding and end-exclusive Eastern instants",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/range.test.ts"
+  },
+  {
+    "name": "respects the daylight-saving transition instead of assuming a 168-hour week",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/range.test.ts"
+  },
+  {
+    "name": "navigates civil months and excludes dates outside inclusive source-day bounds",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/range.test.ts"
+  },
+  {
+    "name": "rich editor local ownership > edits nested content without losing style, crop, provenance or font references",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts"
+  },
+  {
+    "name": "rich editor local ownership > removes only the chosen nested block and retains source provenance",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts"
+  },
+  {
+    "name": "rich editor local ownership > adds a factory block without changing other sections or delivery settings",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts"
+  },
+  {
+    "name": "accepts designated public/secret key pairs and never serializes secret/service configuration publicly",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/config.test.ts"
+  },
+  {
+    "name": "rejects unsafe service origin http://remote.example.test/api",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/config.test.ts"
+  },
+  {
+    "name": "rejects unsafe service origin https://name:password@core.example.test/api",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/config.test.ts"
+  },
+  {
+    "name": "rejects unsafe service origin https://core.example.test/api?tenant=x",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/config.test.ts"
+  },
+  {
+    "name": "rejects unsafe service origin https://core.example.test/api#x",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/config.test.ts"
+  },
+  {
+    "name": "allows loopback HTTP only and rejects mismatched Clerk environments",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/config.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > preserves ordinary routes",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > keeps newsletter IDs distinct",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > keeps newsletterStage IDs distinct",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=bad",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&newsletter=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletterStage=20000000-0000-4000-8000-000000000001&newsletterStage=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&newsletterStage=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&session=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&draft=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&create=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&objectiveId=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&objectiveVersion=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&directoryContactId=20000000-0000-4000-8000-000000000001",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > refuses ambiguous/invalid destination newsletter=20000000-0000-4000-8000-000000000001&view=meetings",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "rich newsletter destinations > requires the producer kind and never treats a marker as authority",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/engagement/newsletter-route.test.ts"
+  },
+  {
+    "name": "restores a validated month and civil date from the route",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "restores a validated week and civil date from the route",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "restores a validated agenda and civil date from the route",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "rejects invalid civil-date URL hint 2026-02-30",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "rejects invalid civil-date URL hint 2026-13-01",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "rejects invalid civil-date URL hint 2026-10-08T12:00:00Z",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "rejects invalid civil-date URL hint ../2027-02-17",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "rejects invalid civil-date URL hint not-a-date",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "rejects invalid civil-date URL hint ",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "retains leap-day civil date without timezone conversion",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/calendar/selection.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > keeps permitted rows once, in original order within their groups",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > uses a unique current project client without inventing a direct link",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > direct linkage wins grouping while scope preserves its existing OR membership rule",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > does not call multiple client associations firm work or choose the first",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > missing project authority stays unavailable, even with another known association",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > unknown client names cannot invent navigation or collapse into firm work",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "All tasks client presentation > only unlinked or known firm projects are firm work; empty page stays empty",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/task-client-groups.test.ts"
+  },
+  {
+    "name": "question type edits preserve compatible task names and clear incompatible settings",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/form-model.test.ts"
+  },
+  {
+    "name": "hidden parent branches suppress retained descendant answers",
+    "file": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/planner/form-model.test.ts"
+  }
+]

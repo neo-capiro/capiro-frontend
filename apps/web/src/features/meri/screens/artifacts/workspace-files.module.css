@@ -1,0 +1,106 @@
+/* Figma 3.4 03.01 Workspace files: adopted FileTree styled from the caller. */
+.treePanel {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.tree {
+  width: 100%;
+}
+.tree > div {
+  display: flex;
+  flex-direction: column;
+}
+.tree [role="treeitem"]:has(> div > button) {
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.tree [role="treeitem"] > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.tree button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  font-weight: 500;
+  text-align: left;
+}
+.tree button svg {
+  width: 16px;
+  height: 16px;
+  color: var(--muted-foreground);
+  transition: transform 120ms;
+}
+.tree button[data-state="open"] svg {
+  transform: rotate(90deg);
+}
+/* The design lists files without folder glyphs; the disclosure chevron stays. */
+.tree button + button > span:first-child {
+  display: none;
+}
+.tree [data-slot="collapsible-content"] > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0 0 20px;
+}
+.file {
+  padding: 2px 6px;
+  margin-left: -6px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
+  cursor: pointer;
+}
+.file[aria-selected="true"] {
+  background: var(--card);
+  font-weight: 600;
+}
+.tree [role="treeitem"]:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+.empty {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+@media (max-width: 680px) {
+  .treePanel {
+    width: 100%;
+  }
+}
+/* Figma 10.27 tablet workspace files: the 232px tree stays beside the file list. */
+@media (min-width: 681px) and (max-width: 1100px) {
+  div.layout {
+    flex-direction: row;
+  }
+  .layout > .treePanel {
+    width: 232px !important;
+  }
+  .layout > :not(.treePanel) {
+    width: auto !important;
+  }
+  /* The 70px version column keeps "Working" on one line, as the frame draws it. */
+  .layout td > span {
+    white-space: nowrap;
+  }
+}

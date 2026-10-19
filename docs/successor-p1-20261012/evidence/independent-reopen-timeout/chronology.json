@@ -1,0 +1,366 @@
+[
+  {
+    "callId": "pw:api@43",
+    "step": "Navigate to activity fixture",
+    "startTraceMs": 6368.302,
+    "endTraceMs": 10894.764,
+    "durationMs": 4526.462,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 32,
+        "column": 14,
+        "function": "retainedCommand"
+      }
+    ]
+  },
+  {
+    "callId": "pw:api@52",
+    "step": "Save initial uncertain command",
+    "startTraceMs": 12705.283,
+    "endTraceMs": 14367.318,
+    "durationMs": 1662.035,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 45,
+        "column": 6,
+        "function": "retainedCommand"
+      }
+    ]
+  },
+  {
+    "callId": "expect@55",
+    "step": "Poll confirms exactly one saved pair",
+    "startTraceMs": 14399.666,
+    "endTraceMs": 14777.577,
+    "durationMs": 377.911,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 46,
+        "column": 39,
+        "function": "retainedCommand"
+      }
+    ]
+  },
+  {
+    "callId": "expect@62",
+    "step": "Recovery read enabled",
+    "startTraceMs": 14779.049,
+    "endTraceMs": 14867.666,
+    "durationMs": 88.617,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 49,
+        "column": 5,
+        "function": "retainedCommand"
+      }
+    ]
+  },
+  {
+    "callId": "pw:api@63",
+    "step": "Navigate to client profile",
+    "startTraceMs": 14868.922,
+    "endTraceMs": 19516.414,
+    "durationMs": 4647.492,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 12,
+        "column": 14
+      }
+    ]
+  },
+  {
+    "callId": "expect@65",
+    "step": "Initial retained title",
+    "startTraceMs": 19518.006,
+    "endTraceMs": 21271.579,
+    "durationMs": 1753.573,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 66,
+        "column": 59,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@74",
+    "step": "Initial retained details",
+    "startTraceMs": 21272.662,
+    "endTraceMs": 21378.152,
+    "durationMs": 105.49,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 69,
+        "column": 61,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@75",
+    "step": "Initial retained request ID",
+    "startTraceMs": 21379.239,
+    "endTraceMs": 21419.888,
+    "durationMs": 40.649,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 72,
+        "column": 60,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@76",
+    "step": "Initial recovery read enabled",
+    "startTraceMs": 21423.712,
+    "endTraceMs": 21512.047,
+    "durationMs": 88.335,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 75,
+        "column": 5,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "pw:api@77",
+    "step": "Close dialog",
+    "startTraceMs": 21517.884,
+    "endTraceMs": 26506.271,
+    "durationMs": 4988.387,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 17,
+        "column": 6
+      }
+    ]
+  },
+  {
+    "callId": "expect@78",
+    "step": "Dialog absent",
+    "startTraceMs": 26507.295,
+    "endTraceMs": 26609.537,
+    "durationMs": 102.242,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 20,
+        "column": 5
+      }
+    ]
+  },
+  {
+    "callId": "pw:api@80",
+    "step": "Reopen via Quick log link",
+    "startTraceMs": 26612.034,
+    "endTraceMs": 29101.916,
+    "durationMs": 2489.882,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 30,
+        "column": 70
+      }
+    ]
+  },
+  {
+    "callId": "expect@81",
+    "step": "Fresh authority read starts",
+    "startTraceMs": 29102.63,
+    "endTraceMs": 29103.178,
+    "durationMs": 0.548,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 31,
+        "column": 36
+      }
+    ]
+  },
+  {
+    "callId": "expect@83",
+    "step": "Exactly one POST before authority release",
+    "startTraceMs": 29103.654,
+    "endTraceMs": 29114.112,
+    "durationMs": 10.458,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 32,
+        "column": 27
+      }
+    ]
+  },
+  {
+    "callId": "pw:api@84",
+    "step": "Capture held-authority screenshot",
+    "startTraceMs": 29115.459,
+    "endTraceMs": 34818.57,
+    "durationMs": 5703.111,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 33,
+        "column": 16
+      }
+    ]
+  },
+  {
+    "callId": "expect@85",
+    "step": "Title absent while authority held",
+    "startTraceMs": 34820.62,
+    "endTraceMs": 34889.542,
+    "durationMs": 68.922,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 36,
+        "column": 61
+      }
+    ]
+  },
+  {
+    "callId": "expect@86",
+    "step": "Request ID absent while authority held",
+    "startTraceMs": 34890.578,
+    "endTraceMs": 34925.434,
+    "durationMs": 34.856,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 39,
+        "column": 7
+      }
+    ]
+  },
+  {
+    "callId": "expect@87",
+    "step": "Released authority restores title",
+    "startTraceMs": 34926.652,
+    "endTraceMs": 35186.331,
+    "durationMs": 259.679,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 66,
+        "column": 59,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@91",
+    "step": "Released authority restores details",
+    "startTraceMs": 35187.544,
+    "endTraceMs": 35269.276,
+    "durationMs": 81.732,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": false,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 69,
+        "column": 61,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@92",
+    "step": "Released authority restores request ID visibility",
+    "startTraceMs": 35270.468,
+    "endTraceMs": 35377.805,
+    "durationMs": 107.337,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": true,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 72,
+        "column": 60,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@94",
+    "step": "Recovery read enabled after release",
+    "startTraceMs": 35378.509,
+    "endTraceMs": 35463.86,
+    "durationMs": 85.351,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": true,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+        "line": 75,
+        "column": 5,
+        "function": "expectRetained"
+      }
+    ]
+  },
+  {
+    "callId": "expect@95",
+    "step": "Exactly one POST after reopen",
+    "startTraceMs": 35464.419,
+    "endTraceMs": 35464.482,
+    "durationMs": 0.063,
+    "recordedError": null,
+    "endedAfterGlobalTimeoutEvent": true,
+    "stack": [
+      {
+        "file": "/workspace/capiro-p1-successor/apps/web/tests/browser/activity-command-reopen.spec.ts",
+        "line": 44,
+        "column": 25
+      }
+    ]
+  }
+]

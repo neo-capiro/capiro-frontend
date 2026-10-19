@@ -1,0 +1,25 @@
+{
+  "authorization": "Root explicitly confirmed old task copies unused and approved bounded cleanup",
+  "activeOldCwdProcesses": [],
+  "newDependencyCopyPhysicalAndDistinct": true,
+  "targets": [
+    {
+      "path": "/workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/node_modules",
+      "ownership": "previous Codex cited-consolidation task-owned ignored copy/output; root confirmed no borrowers",
+      "entries": 50547,
+      "logicalFileBytes": 727476755,
+      "allocatedEntryBytes": 880226304,
+      "symlinksFollowed": false
+    },
+    {
+      "path": "/workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/apps/web/.next",
+      "ownership": "previous Codex cited-consolidation task-owned ignored copy/output; root confirmed no borrowers",
+      "entries": 291,
+      "logicalFileBytes": 35185597,
+      "allocatedEntryBytes": 36093952,
+      "symlinksFollowed": false
+    }
+  ],
+  "trackedSourceEvidenceAssetsPreserved": true,
+  "borrowedRuntimeOrOtherOwnerTreesTouched": false
+}

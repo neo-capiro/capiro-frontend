@@ -1,0 +1,644 @@
+{
+  "stats": {
+    "startTime": "2026-10-14T16:06:56.232Z",
+    "duration": 130951.067,
+    "expected": 79,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "selectedCases": [
+    {
+      "file": "desktop-engagement-coverage.spec.ts",
+      "line": 8,
+      "title": "Desktop Engagement overview and selected meeting preserve distinct intents at 1440 light",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-engagement-coverage.spec.ts",
+      "line": 8,
+      "title": "Desktop Engagement overview and selected meeting preserve distinct intents at 1440 dark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner new uses the Figma drawer at 1440 light",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner detail uses the Figma drawer at 1440 light",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner edit uses the Figma drawer at 1440 light",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner subtask uses the Figma drawer at 1440 light",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner new uses the Figma drawer at 1440 dark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner detail uses the Figma drawer at 1440 dark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner edit uses the Figma drawer at 1440 dark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 56,
+      "title": "Desktop Planner subtask uses the Figma drawer at 1440 dark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 133,
+      "title": "Desktop long task description keeps the body and nested editor reachable at 1440 light",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 133,
+      "title": "Desktop long task description keeps the body and nested editor reachable at 1440 dark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "desktop-task-drawer.spec.ts",
+      "line": 182,
+      "title": "Desktop Planner pending native resubmission keeps one request and the visible footer disabled",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 44,
+      "title": "MS06 baseline: current supplied link appears with safe external-link attributes",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 56,
+      "title": "MS06 baseline: meetings retain selectable list beside current detail with Prep entry",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 83,
+      "title": "MS06 absent preparation metadata is unavailable rather than a claimed empty collection",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: null",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: ",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: javascript:alert(1)",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: data:text/html,hello",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: https://name:secret@meet.example.test/",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: //meet.example.test/alpha",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 123,
+      "title": "MS06 loading and denied detail never activate summary link or read its materials",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000002:30000000-0000-4000-8000-000000000001",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000001:30000000-0000-4000-8000-000000000002",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 183,
+      "title": "MS06 replaced detail cannot publish its late link",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 239,
+      "title": "MS06 client replacement clears selection before a new list can expose the prior link",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 24,
+      "title": "Figma Modules landscape keeps the authored wide card",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 38,
+      "title": "Figma Modules card SVGs preserve native rendered geometry",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "Figma Modules information is available by keyboard at 1440px light without changing the heading",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "Figma Modules information is available by keyboard at 1440px dark without changing the heading",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 13,
+      "title": "Calendar picker and history share verified scope and discard a held former-client read",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 67,
+      "title": "Calendar denied client verification never falls back to master reads",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 67,
+      "title": "Calendar wrong-client client verification never falls back to master reads",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 91,
+      "title": "Calendar current scope label survives optional picker-list failure",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 106,
+      "title": "Calendar meeting retry preserves other feeds and reports partial empty coverage",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 144,
+      "title": "Calendar tenant replacement and failed current read hide prior agenda rows",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 15,
+      "title": "linked task rejects wrong-task receipt without detail actions",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 15,
+      "title": "linked task rejects wrong-client receipt without detail actions",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 41,
+      "title": "invalid task link makes no detail request and can be dismissed without losing scope",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 63,
+      "title": "task link hides prior editor after current 403, then recovers only after successful retry",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 63,
+      "title": "task link hides prior editor after current 503, then recovers only after successful retry",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 107,
+      "title": "linked task follows back-forward and discards a held replaced task",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 151,
+      "title": "linked task client replacement rejects the former read and editor",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 151,
+      "title": "linked task tenant replacement rejects the former read and editor",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 196,
+      "title": "agenda link opens a done task despite default open list filter, and respects viewer access",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 217,
+      "title": "linked task uses current project membership when direct client is absent",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 217,
+      "title": "linked task uses current project membership when direct client is different",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 114,
+      "title": "Planner modes use the same permitted task data and exact board assets",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 165,
+      "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 269,
+      "title": "Planner pending writes freeze the submitted draft and dismissal until rejection at 1440",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 425,
+      "title": "A template session deep link keeps the server state version and sends no mail",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings personal renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings contact-info renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings branding renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings team renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings integrations renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings memory renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings meri-preferences renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings billing renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings ai-usage renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings profiles renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings intelligence-mappings renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-tenants renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-customers renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-ai-keys renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-broadcasts renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-personnel renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-reconciliation renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-matches renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-analyst renders compatible responses without runtime failures",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 59,
+      "title": "All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 95,
+      "title": "Settings dialogs trap focus and Escape closes an unsent invitation",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "Meri semantic correction: 1440px conversations footer exposes its scoped notice within contentinfo",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "Meri semantic correction: 1440px actions footer exposes its scoped notice within contentinfo",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 90,
+      "title": "Meri semantic correction: named suggestions group preserves three Start controls without becoming a focus stop",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 112,
+      "title": "Modules semantic correction: fixture warning remains visible in a named complementary landmark",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "meri home retains full default axe checks at 1440px",
+      "status": [
+        "expected"
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "modules home retains full default axe checks at 1440px",
+      "status": [
+        "expected"
+      ]
+    }
+  ]
+}

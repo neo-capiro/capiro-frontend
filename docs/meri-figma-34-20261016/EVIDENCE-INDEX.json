@@ -1,0 +1,287 @@
+{
+  "schema": "meri-current-design-evidence/1",
+  "capturedDate": "2026-10-16",
+  "assemblyUtc": "2026-10-16T11:22:14.4544036Z",
+  "scope": "Current Figma source captures, source-only asset binding and authored unrun desktop controls",
+  "baseSource": "8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+  "headerCandidate": "aecec5813d51f2b3f0386130bb350edbb04e3c53",
+  "headerVerdict": "ACCEPT_SOURCE_ONLY_PRESERVATION; browser/build/adoption unqualified",
+  "normalMemory": {
+    "api": "GetPerformanceInfo",
+    "commitHeadroomMiB": 1201,
+    "physicalAvailableMiB": 11825
+  },
+  "sourceAnalysis": "No child processes, application/test imports, compiler, install, browser, DB or provider",
+  "earlierMemoryReadFailure": "Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory: access to CIM resource unavailable; no elevation or CIM retry",
+  "metadata": {
+    "encoding": "UTF-8",
+    "compression": "deterministic gzip",
+    "decompressedBytes": 1765193,
+    "sha256": "b08df8391c27b590bed3f7185b2521314c44e815a07578f02f5de4f7064a0c97"
+  },
+  "currentParity": "UNRUN",
+  "mobile": "DEFERRED",
+  "initialInputArtifact018": null,
+  "runtimeLease": null,
+  "rows": [
+    {
+      "path": "docs/meri-figma-34-20261016/AUDIT.md",
+      "bytes": 8982,
+      "sha256": "7d665217cd2a58a51e4efe5a78f216debdb677e552e951a14bac86ddd7194afb",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/COMPONENT-STATE-MAP.json",
+      "bytes": 21566,
+      "sha256": "145ba89f4555dc5f77eb368d5fbe362ac58f33ca5357257cc660f0b7af447187",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/COMPONENT-STATE-MAP.md",
+      "bytes": 4636,
+      "sha256": "2e3bff31da67468b95408fb2f5a5d7a8811bf861f4f0425763ed640b232b8ce3",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/CURRENT-INVENTORY.json",
+      "bytes": 663131,
+      "sha256": "4740c26135b0f497f0a9b6718896d756d45e5e860ff044d131afa539632565c9",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/DESIGN-GAPS.md",
+      "bytes": 5042,
+      "sha256": "44f59bea34ed4353b1165552825b8f60a02e696cd979315d64c8dc273cf2299e",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/build-inventory.py",
+      "bytes": 12187,
+      "sha256": "33ea4a35463998e1a6c9cb7ea3351b5a61c8057ce05f48348db595b76d50db46",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/cited-answer-design-context-6.png",
+      "bytes": 76123,
+      "sha256": "3e67350b77e1c14729f86fb14517ceffb5fae48080af64c0815b80e7f5aee904",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/cited-answer-design-context.json",
+      "bytes": 46917,
+      "sha256": "6be2a6cb4c23cd5d6b813a2658f706c0fdf69df3653c71194b77ba06f73affc2",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/client-context-design-context-6.png",
+      "bytes": 80788,
+      "sha256": "d2d96ed3e88d0e8d7829d5bd0265d2ec3742bcbc317f31ee09fb9eb76ed696e2",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/client-context-design-context.json",
+      "bytes": 42367,
+      "sha256": "5f29ab72728bd007eff44222ee154c83052978af0bc71b693db96ade59562afe",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-canonical-meri-components.json",
+      "bytes": 130,
+      "sha256": "d6e96419db47ce466c5796fe753389d02278da27009921a6fc3a70a3304e9cee",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-components-and-edge-sample.json",
+      "bytes": 18712,
+      "sha256": "90ddc38265ee06c300fd80a4de6bcb3b751e42e5d4fb7a2ef3fcc610c97f77fc",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-desktop-identities.json",
+      "bytes": 15169,
+      "sha256": "07aad35fd517a260348b4bd02f5efc0388cc6979ab8977111ad12f0fb462da8d",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-figma-assets-format.result.json",
+      "bytes": 999,
+      "sha256": "0e9d16cae6e33c5b285efad476fdd0004725540ee0c80b62c6257b5ef151cf83",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-figma-assets-format.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-figma-assets-format.stdout.log",
+      "bytes": 391,
+      "sha256": "2f8db5e153b009c4441ca18db029fdf0ce214183831091976e18aa5078a5b358",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-group-counts.json",
+      "bytes": 1063,
+      "sha256": "473d37d3c29151caaa056be8eee0b90ce8119b2079a1237d52d560a0de7e380c",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-mask-format.result.json",
+      "bytes": 931,
+      "sha256": "5c6c1593030ec5cd6f1f0343bdabc6d6c0750e4931e7604acb3eb46599424ad5",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-mask-format.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-mask-format.stdout.log",
+      "bytes": 222,
+      "sha256": "f5de499d1441ab21f2218ae353ef314e84df575fa555633603ff32074466807c",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-page.xml.gz",
+      "bytes": 177532,
+      "sha256": "5ab9a7576ba0a586e363abdb74104009801d315a04eae703496cd1a77da067c9",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-pages.json",
+      "bytes": 562,
+      "sha256": "1c030c48715e80614ee26bc89eee3a1d8109113c3ebeb23bb8e9e0b2076f8f7c",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/current-prototype-patterns.json",
+      "bytes": 465533,
+      "sha256": "3542ad02bbce9e50d0f1bb9e771b79517d8ed64fd8adadb64692730f5477bdc7",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/history-design-context-6.png",
+      "bytes": 64241,
+      "sha256": "92ac1887cfd2231696a6430e88d17df3c2afc0bf5ecb111da4df34c1e4b66838",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/history-design-context.json",
+      "bytes": 47091,
+      "sha256": "f0060d8f85a8adc38af95d95251ea5e0247695add083d9f637d2e612488bf480",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/home-asset-binding-comparison.json",
+      "bytes": 19686,
+      "sha256": "41b88cedfc62395c87dd4575e9e468d47fa200dd60409093d239a974259455a1",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/home-design-context.json",
+      "bytes": 42789,
+      "sha256": "918fc841db2d783352ba774f6c313ee17ff125c514905c26620ef6b53a87ad25",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/home-design-target-0.png",
+      "bytes": 59438,
+      "sha256": "1d5e3ff10101e15a132ce0b985da0cebef4b1673d6d814ba17aee02cba920ec2",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/home-motion-context.json",
+      "bytes": 1895,
+      "sha256": "89d5daf2a281fc17e7313bb49906cd32181cd82b72ad2d637c37aafe05039451",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/initial-input-design-state-search.json",
+      "bytes": 5906,
+      "sha256": "cead4859660bc9dec66f9103ac97c507f6fbcfc6640fe0969ecf5e99f221fa56",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/run-states-design-context-6.png",
+      "bytes": 101335,
+      "sha256": "ae1efe8432d48883106071df012e912e968d91fd73e397e02ebfc55f11c68a22",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/run-states-design-context.json",
+      "bytes": 53677,
+      "sha256": "64be2b406acbb53c4e5cb35156d6a05e71102b79a13ed4a834c4ebcde0ec5f9b",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/session-states-design-context-6.png",
+      "bytes": 103204,
+      "sha256": "ec28b88c9aff745114b6503ea24760a618ea19d33be902331347d1de73fa8d93",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/session-states-design-context.json",
+      "bytes": 47290,
+      "sha256": "0a5b2dad4139f70dd3125310ea930c8d66c3149b2fc6e7a144e97f155169533d",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/SOURCE-EVIDENCE-CHECKS.json",
+      "bytes": 488,
+      "sha256": "ec4633ef6065ccddf16ef720892be51c33d010114f8ce903ef5949932ef6eb28",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/wordmark-binding.json",
+      "bytes": 796,
+      "sha256": "3701c05df2786abf7f7bb4408be13e71493eac6c69eb6d65c6c6cff0889ce618",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/workflow-setup-groups.json",
+      "bytes": 4087,
+      "sha256": "41a19c81ed7d3613bc83d3f218874c84e52a47d0e3471389ef1931aec8df3308",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/IMPLEMENTATION-GAPS.md",
+      "bytes": 6477,
+      "sha256": "5129c234a72bc986bdf501dd8ca04a6241b60f5eeaa5c1e853ca9e60fb9918bb",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/SCREEN-STATE-MAP.md",
+      "bytes": 64215,
+      "sha256": "f2a83f1d2335acaf1d4a34ef46e793d6c53d144c709e25b77cfa4d4a99557ba5",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/SHARED-HEADER-ASSET-CANDIDATE.md",
+      "bytes": 2635,
+      "sha256": "d4c1b1fd76df9c089e86c2b7e88967dd15b8ac4bbd942dd15d5575e9fe65df10",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/WORDMARK-CANDIDATE.md",
+      "bytes": 1526,
+      "sha256": "2d774043e662fcf69644f9c154fa06b9afa46f9075562b3a4e6d7c6ec3450860",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/.gitattributes",
+      "bytes": 395,
+      "sha256": "a86ee3411d063f6883d2cce937b11037b0d1892fc26cb47a0302a954206537b6",
+      "domain": "working file bytes"
+    },
+    {
+      "path": "docs/meri-figma-34-20261016/evidence/SOURCE-ASSEMBLY-NOTES.md",
+      "bytes": 1442,
+      "sha256": "e599ca9460273b215c58e1afbda55255a3c7f9ad6afc141b47d1ae433492e022",
+      "domain": "working file bytes"
+    }
+  ],
+  "finalIndexRefresh": "Native PowerShell file hashes only; no app/test/compiler/browser/build execution; normal memory readings remain dated source-assembly observations."
+}

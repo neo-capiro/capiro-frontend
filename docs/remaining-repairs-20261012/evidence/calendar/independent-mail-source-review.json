@@ -1,0 +1,141 @@
+{
+  "reviewedAt": "2026-10-12T19:49:59.917995+00:00",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "nativePin": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email.ts",
+      "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mail-body.ts",
+      "sha256": "28a5ff7a27a20052b5b6556c380fc05bcb2ab6435f59ca3ca2576237c6893f7b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mail-body-html.ts",
+      "sha256": "0dda52ccf4331d07d4096d4bcdf112a69b70fbb294ae662bfcb5575755627336"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx",
+      "sha256": "800100747439b187a2b8f4c23635b945aee3fe7d0c423e201442978fccfb27c0"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-message-assertions.ts",
+      "sha256": "8f60ca0460b3b62a2fd0d7be35debe6806799455171c94bf8ead7be42236dd59"
+    }
+  ],
+  "nativeHistoryFinding": "Independent source finding confirmed by author red1/1. Corrected history owner independently reviewed; unchanged control and preservation cases pass45/45. No further source concern.",
+  "nativeEffects": "None; read-only source/evidence review.",
+  "evidence": {
+    "history-red-results.json": {
+      "stats": {
+        "startTime": "2026-10-12T19:47:06.688Z",
+        "duration": 9499.356,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "sha256": "aa356be6e9e4bdb300287b5a349c0af32f0a79acf58033f178731d324d3484c1"
+    },
+    "history-green-results.json": {
+      "stats": {
+        "startTime": "2026-10-12T19:47:41.812Z",
+        "duration": 179152.11800000002,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "sha256": "66515d1b183834d42269d268df08ea59307dc69ce0a6f067d594187227f277ec"
+    },
+    "final-results.json": {
+      "stats": {
+        "startTime": "2026-10-12T19:40:13.330Z",
+        "duration": 295426.86100000003,
+        "expected": 79,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "sha256": "d215d98457a343b67067f28e0b5aa17a06b1d497c744361b778391808470c4d1"
+    }
+  },
+  "structureReviews": [
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 404,
+      "fingerprint": "085d41cdae4c7395f952951cfcf24d288456fa9d77daa01f49779c5f40cf0fd3",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "responsibilityReview": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 21,
+      "nonblank": 369,
+      "fingerprint": "0307558bf27a23b765bab9ce4e78ad1149bf88f2896ead69313805a8e241ede0",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "responsibilityReview": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "kind": "function",
+      "symbol": "RichMailEditor",
+      "line": 11,
+      "nonblank": 124,
+      "fingerprint": "5d677184fdfad38853a16f9a178d24c4c93af24c868af676e66d946b58b2e255",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086",
+      "responsibilityReview": "Owns a single controlled Tiptap editor and its inert body preview. Editor schema, formatting controls, safe paste, selection preservation and externally supplied draft synchronization are one local presentation responsibility. Attach invokes the existing picker through a callback; no upload, provider, state persistence or authority implementation is introduced. External rewrite/guarded-Undo replacements start a new editor history, while local typing and formatting retain native Undo. This prevents the native keyboard history from bypassing guarded Meri Undo lifetime checks.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "kind": "function",
+      "symbol": "useMailRewrite",
+      "line": 25,
+      "nonblank": 161,
+      "fingerprint": "f6045b9a9e6ec9613609eed24a0d9b4c2e0b918a2f5a7893f549fcfcf10f4fea",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+      "responsibilityReview": "Owns one in-flight rewrite, verified result and one local Undo under the same draft/source and captured-authority lifetime. Atomic MailBody replaces the old string snapshot so formatting-only edits revoke pending/previous rewrites and Undo restores text plus HTML together. Existing transport, cancellation, source revision and identity checks remain unchanged.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    }
+  ],
+  "disposition": "Bounded source/evidence acceptance of corrected owned source hashes; root exact combined qualification remains required.",
+  "acceptedCommit": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "acceptedTree": "849a4714e59ccecb85a44e4d651121f977572de2"
+}

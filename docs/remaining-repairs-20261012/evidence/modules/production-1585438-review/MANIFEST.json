@@ -1,0 +1,103 @@
+{
+  "sealedAtUTC": "2026-10-12T22:12:48.356421+00:00",
+  "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "inputs": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "bytes": 3624,
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "3369c9ea9a42245d036e46f816e552863c8c52f214c0ad2be54b0b4d6155d95a"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/BUILD-IDENTITY.json",
+      "bytes": 428,
+      "sha256": "9bab5f88efd0ee22c8ec539a2082e94b64b415ac7a5a416a751a9aa8fe3726e7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build-exit.json",
+      "bytes": 778,
+      "sha256": "c2770fc52e329bc8c38f0d8f4eb3bf695f45b99f7f8b4dbfb3a36608ab136cbb"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server-exit.json",
+      "bytes": 893,
+      "sha256": "afcc2925fa4bc95bdc5a9b7c4f86810e202b9c42fc4c5caf35151d7d9d6d585d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build.log",
+      "bytes": 2232,
+      "sha256": "b4d3b9940c1255771317f21613d619d605a6c78738f604562849de4cb0841999"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server.log",
+      "bytes": 4258,
+      "sha256": "30123cc0fb4fd5935f8a619f2c46afdc52f8264bae803af7da5eab1a2580dddb"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-d68-review/MANIFEST.json",
+      "bytes": 3430,
+      "sha256": "d200cf101574355ded75c36e2a4d0bf6bfc9500b6158098fe91049dc1d359508"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/ASSERTION-LIMITS.json",
+      "bytes": 4679,
+      "sha256": "199e565a36eff6b011c2972218f6e80bfb932dfd9a02c30ce04ad636243ba822"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/SOURCE-AND-GATE-BINDING.json",
+      "bytes": 9408,
+      "sha256": "ca25b802e447475895bffad0028689342915da4dd56960a7bf5b3a84578baeb0"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/VISUAL-REUSE.json",
+      "bytes": 6311,
+      "sha256": "d86f4832ee2012905a7eb2e05b448eddbf3eb093dbfe96da152fd6a2b0929a4d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/report.md",
+      "bytes": 2624,
+      "sha256": "867276fa7caff73b52dfcb90b2de9adaf1ce043e43ad91515d98cbb66465e992"
+    }
+  ],
+  "priorReviewUnchanged": true,
+  "readOnlyReview": true,
+  "allPngsByteIdentical": true,
+  "visualInspectionExplicitlyReused": true,
+  "combinedNativeFigmaFullAccessibilityAccepted": false
+}

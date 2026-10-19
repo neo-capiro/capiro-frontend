@@ -1,0 +1,16 @@
+{
+  "kind": "repository-vendor-reference",
+  "path": "vendor/capiro-meri-contracts-0.1.2.tgz",
+  "observedRepository": "/workspace/capiro-meri-files-20261013",
+  "observedHead": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "trackedAtPreparation": false,
+  "bytes": 228048,
+  "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+  "finalCommitBinding": "SAME_PUBLICATION_COMMIT_TO_BE_CREATED_BY_ROOT",
+  "access": "Resolve path against final publication repository and verify bytes/hash; current observedRepository also contains exact bytes.",
+  "gitBlob": "3b1b1e6345539632b8a4be80de44b0ab548369af",
+  "publicationRequirement": "Exact vendor file must be included in the same source publication commit; this content binding does not claim an existing final commit.",
+  "trackedAtFinalSeal": true,
+  "indexEntryAtFinalSeal": "100644 3b1b1e6345539632b8a4be80de44b0ab548369af 0\tvendor/capiro-meri-contracts-0.1.2.tgz",
+  "finalSealObservedUTC": "2026-10-13T09:30:47.200235+00:00"
+}

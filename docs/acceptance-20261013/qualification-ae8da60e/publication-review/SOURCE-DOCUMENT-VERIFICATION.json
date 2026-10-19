@@ -1,0 +1,53 @@
+{
+  "utc": "2026-10-13T14:16:23.105848+00:00",
+  "head": "ae8da60e6d63d02b65a6ff9eb71c90554f213a10",
+  "branch": "repair/capiro-acceptance-batch-20261013",
+  "statusPorcelain": "M docs/acceptance-20261013/README.md\n?? docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md\n?? docs/acceptance-20261013/POST-BATCH-DELTA.json\n?? docs/acceptance-20261013/qualification-ae8da60e/",
+  "trackedChanges": [
+    "docs/acceptance-20261013/README.md"
+  ],
+  "stagedChanges": [],
+  "untrackedFiles": [
+    "docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md",
+    "docs/acceptance-20261013/POST-BATCH-DELTA.json",
+    "docs/acceptance-20261013/qualification-ae8da60e/INDEPENDENT-AUDIT.md",
+    "docs/acceptance-20261013/qualification-ae8da60e/MANIFEST.json",
+    "docs/acceptance-20261013/qualification-ae8da60e/README.md",
+    "docs/acceptance-20261013/qualification-ae8da60e/evidence.tar.gz"
+  ],
+  "allChangesUnderAcceptanceDocs": true,
+  "applicationDiffVsVerifier": "",
+  "rootLock": {
+    "path": "/workspace/capiro-acceptance-batch-20261013/package-lock.json",
+    "bytes": 512816,
+    "sha256": "6acaf74b4fb676b59731245e04a6c2d54865fb71727b6f6d5f99b4cfa5e1fed7"
+  },
+  "applicationTree": "43ff317df65aa2fe490dc732ebb497ed2cfe3915",
+  "sourceTree": "207898a469653870d113c24139cd96c894bdef5c",
+  "publicationBaseIsAncestor": true,
+  "independentAuditCopiedByteExact": true,
+  "finalReadUTC": "2026-10-13T14:18:43.481401+00:00",
+  "finalStatusPorcelain": " M docs/acceptance-20261013/README.md\n?? docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md\n?? docs/acceptance-20261013/POST-BATCH-DELTA.json\n?? docs/acceptance-20261013/qualification-ae8da60e/\n",
+  "finalHead": "ae8da60e6d63d02b65a6ff9eb71c90554f213a10",
+  "finalTrackedChanges": [
+    "docs/acceptance-20261013/README.md"
+  ],
+  "finalUntrackedFiles": [
+    "docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md",
+    "docs/acceptance-20261013/POST-BATCH-DELTA.json",
+    "docs/acceptance-20261013/qualification-ae8da60e/INDEPENDENT-AUDIT.md",
+    "docs/acceptance-20261013/qualification-ae8da60e/MANIFEST.json",
+    "docs/acceptance-20261013/qualification-ae8da60e/README.md",
+    "docs/acceptance-20261013/qualification-ae8da60e/evidence.tar.gz"
+  ],
+  "finalArchive": {
+    "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/qualification-ae8da60e/evidence.tar.gz",
+    "bytes": 42576798,
+    "sha256": "2a08f8618ff3e0c87797427136b1d209da6a68872898fe7402a75b79f8cb890f"
+  },
+  "finalManifest": {
+    "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/qualification-ae8da60e/MANIFEST.json",
+    "bytes": 245539,
+    "sha256": "57a507398cadd5412815d647ed2f3a570a137ded291e4176c0021824ac344f34"
+  }
+}

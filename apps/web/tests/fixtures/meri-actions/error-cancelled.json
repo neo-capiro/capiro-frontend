@@ -1,0 +1,13 @@
+{
+  "name": "error-cancelled",
+  "route": "execute",
+  "httpStatus": 499,
+  "response": {
+    "error": {
+      "code": "CANCELLED",
+      "outcome": "NOT_DISPATCHED"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Exact published public-test code/status. Local abort and durable cancellation remain distinct."
+}

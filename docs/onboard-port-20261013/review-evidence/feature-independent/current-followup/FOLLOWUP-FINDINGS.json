@@ -1,0 +1,45 @@
+{
+  "atUTC": "2026-10-13T05:25:04.906114+00:00",
+  "findings": [
+    {
+      "id": "OBFI-03-SETUP",
+      "priority": "P2",
+      "status": "AUTHOR_CORRECTION_PENDING",
+      "title": "Setup deliberate recovery GET bypasses canonical read authority",
+      "files": [
+        {
+          "path": "pages/setup/SetupWorkspace.tsx",
+          "sha256": "e9c2615cc0c596c3f79e882b3d4da8a03190327d71afbfaeeb2dcd5311d471cf"
+        },
+        {
+          "path": "pages/setup/InvitesOverlay.tsx",
+          "sha256": "ac9fab2935dab65b4b17606cb0f73b7c0bf659f6e6ddcdaa9e6bde7aed58766d"
+        }
+      ],
+      "evidence": "Source-confirmed same direct getState reconcile pattern as independent funnel denied-read reproduction. No independent mounted setup reproduction claimed.",
+      "required": "Publish deliberate setup GET through existing canonical query lifecycle, preserve failed-read and original-dispatch fences, preserve attempt/partial outcome journals."
+    },
+    {
+      "id": "OBFI-05",
+      "priority": "P2",
+      "status": "AUTHOR_CORRECTION_PENDING",
+      "title": "Held IT consent continuation ignores a newer denied invite read",
+      "evidence": "it-current-invite/PROBE.json",
+      "required": "Bind attempt admission and post-await navigation to current same-token invitation/provider state; no additional endpoint, browser authority or native provider effects.",
+      "nativeLimit": "No proof of backend authorization bypass/revocation; the independently reproduced effect is synthetic navigation from a stale local read."
+    },
+    {
+      "id": "OBFI-03-SILENT-ADOPTION",
+      "priority": "P2",
+      "status": "CORRECTION_IN_PROGRESS",
+      "title": "Superseded explicit current read adopts replacement promise",
+      "evidence": [
+        "silent-adoption/actual-red.json",
+        "silent-adoption/actual-green.json",
+        "silent-adoption/SAME-OPTIONS-REFETCH.json"
+      ],
+      "required": "First actual queryFn signal remains immutable across same-options canonical refetch; replacement read may refresh cache but cannot satisfy original caller.",
+      "note": "Initial first-signal binding addresses two-reader adoption; mutable capture still fails same-options refetch. The separate harness attempt is not a feature red."
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "commit": "1cbca00a471a722ed249fccb95f761853e96246a",
+  "tree": "fe8fe4fe1cb7d33bd8f8b320329650f9292fe8e0",
+  "parent": "3195ffab57584054a714ff5bd025063fba363929",
+  "frozenRootRed": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "productionChanges": false,
+  "calendarProductionMatchesFrozenRoot": true,
+  "file": {
+    "path": "apps/web/tests/browser/attendance.spec.ts",
+    "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+    "bytes": 18067,
+    "nonblank": 527
+  },
+  "browser": {
+    "passed": 20,
+    "failed": 0,
+    "attendanceCases": 12,
+    "lifecycleCases": 8,
+    "workers": 1,
+    "retries": 0
+  },
+  "originalAssertionsPreserved": true,
+  "static": {
+    "format": 0,
+    "lint": 0,
+    "diffCheck": 0,
+    "fullTsc": "NOT_RUN",
+    "build": "NOT_RUN"
+  },
+  "evidence": [
+    {
+      "path": "REPORT.md",
+      "sha256": "1833b0d947cedaa3d8164bc90d3d9c135f0089e1ce9f8253bdb9fca3ce5ad143",
+      "bytes": 3696
+    },
+    {
+      "path": "assertion-preservation.json",
+      "sha256": "e39e20196afda9dac3b798535e9d6086e3303292499d6dfdc9e35df51976f15f",
+      "bytes": 707
+    },
+    {
+      "path": "attendance.before.spec.ts",
+      "sha256": "42f9b3532b3c02c9eeb274e2e6d80e308f0d03f7a36b4eb913b08993b0270710",
+      "bytes": 17505
+    },
+    {
+      "path": "candidate-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "candidate-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/agenda-1440.png",
+      "sha256": "6d6d3940832606546b1c7e72ca6035030bce38072ed195b6951383209dae69f7",
+      "bytes": 78441
+    },
+    {
+      "path": "candidate-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/agenda-390.png",
+      "sha256": "b94f5036061e0e1b0db51fc42af6549ef1a6a0226af13fbc5aa619a3cca749fc",
+      "bytes": 86608
+    },
+    {
+      "path": "candidate-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/meeting-mobile.png",
+      "sha256": "eb245aaa063964e5a79811c0ad32e076b4b280870d8e1065dd6975db075f14c8",
+      "bytes": 84096
+    },
+    {
+      "path": "candidate-results.json",
+      "sha256": "50360935ad145584ac7561feb5045e67fa12322d3dd5524c45616f8343a44b63",
+      "bytes": 23840
+    },
+    {
+      "path": "candidate.log",
+      "sha256": "68139ded4762b806b09d1e1251765a69cc4244c546c07bd847039c6fa974d8ae",
+      "bytes": 3313
+    },
+    {
+      "path": "captures/attendance-desktop.png",
+      "sha256": "e32e7e8f381cb8f8119de5075a27700887a846068359e135b6068c09a9583537",
+      "bytes": 145169
+    },
+    {
+      "path": "captures/attendance-mobile-dark.png",
+      "sha256": "d22f8259deb13124bedf77cb0e85f433c3d169d4d5ac8bcd2820f8221bfdfea5",
+      "bytes": 73207
+    },
+    {
+      "path": "consumer-audit.json",
+      "sha256": "a360e4565f0791fa84e9d3377cb236ec44391d72a6bbbdbf0c3a578a446df05a",
+      "bytes": 5275
+    },
+    {
+      "path": "diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "format.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytes": 66
+    },
+    {
+      "path": "frozen-error-contexts/attendance-A-foreign-succe-4adc1-cally-or-from-the-same-form/error-context.md",
+      "sha256": "2e7f57580f62d5bf32cec66b235257f3bac15dc2ee4dcf80a49ed9e67127654f",
+      "bytes": 10681
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Explicit-remova-175af--the-actual-removed-receipt/error-context.md",
+      "sha256": "856d3e5c2f6f03e67fbfc9d6a811dcbe01bf86c48e7e206b1a8e921d7f6f1599",
+      "bytes": 10680
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Meeting-privacy-45166--looking-attendance-control/error-context.md",
+      "sha256": "ea61f62e0b77b00a814617171e66da9b1f1777266c673200b071529767b141cb",
+      "bytes": 10680
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Owned-meeting-d-fd500-without-claiming-attendance/error-context.md",
+      "sha256": "5477f145f695ad129c1fcc90bdbb6e747c978056af01ee01b053b9674594dc47",
+      "bytes": 10696
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Read-only-role--65095-or-expose-dispatch-controls/error-context.md",
+      "sha256": "61a507b7198c60d5aa426d016242299021955626bec9eada969f03e7c366f53b",
+      "bytes": 10487
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Runtime-disable-59349-nd-forbids-external-actions/error-context.md",
+      "sha256": "5870a4288645a82aff34188a9131a85242893dd6aca887229db0da284895b162",
+      "bytes": 10747
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Server-validati-4184a-ons-for-explicit-correction/error-context.md",
+      "sha256": "0ef62deb1a10a1eeb384fa8cf7ec51688f2ef73859fe5e3a627ec0f3325e3aba",
+      "bytes": 10666
+    },
+    {
+      "path": "frozen-error-contexts/attendance-Unmounting-duri-4dcd3-ght-prevents-the-later-POST/error-context.md",
+      "sha256": "3d55b6439d9d2a4a041a106d9a776afa90958b55bb71fa61075b55c94e425ab9",
+      "bytes": 10635
+    },
+    {
+      "path": "lease-release.json",
+      "sha256": "21bc3e0d9c2f2123b609fc6e6fd9e7979646eb112e80e41098786d806e72b1df",
+      "bytes": 145
+    },
+    {
+      "path": "lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "server.log",
+      "sha256": "33d7a21fdb1e510c02caaa1cb8c6dc837f915aad4f45f01fa64c9504136e0dfb",
+      "bytes": 50
+    },
+    {
+      "path": "seven-frozen-reds.json",
+      "sha256": "1ae0e45439b8020deb3860571776e1de12df7757052b8f1ac2ae313d887ba0bf",
+      "bytes": 35550
+    }
+  ]
+}

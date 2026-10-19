@@ -1,0 +1,55 @@
+
+  // Per-artifact sharing (Phase 2 §d, ENGAGEMENT_ARTIFACT_SHARING_V2). Requires
+  // each target artifact to already be approved; the legacy whole-meeting
+  // share/unshare above keep working unchanged while the flag is off, and
+  // shareMeeting() is refused once it's on (see the service).
+  @Post('meetings/:id/artifacts/share')
+  shareArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: ShareArtifactsDto,
+  ) {
+    return this.service.shareArtifacts(ctx, meetingId, body.artifacts);
+  }
+
+  @Post('meetings/:id/artifacts/unshare')
+  unshareArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: ShareArtifactsDto,
+  ) {
+    return this.service.unshareArtifacts(ctx, meetingId, body.artifacts);
+  }
+
+  @Post('meetings/:id/notes')
+  createNote(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: CreateNoteDto,
+  ) {
+    return this.service.createMeetingNote(ctx, meetingId, body);
+  }
+
+  @Get('meetings/:id/notes')
+  meetingNotes(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.service.listMeetingNotes(ctx, meetingId);
+  }
+
+  @Patch('meetings/:id/notes/:noteId')
+  updateNote(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Param('noteId') noteId: string,
+
+  // Shared meeting records for a client's Documents tab (Meetings v2 §8). Tenant-
+  // scoped (shared material is org-visible), NOT owner-scoped — mirrors the
+  // client-scoped debriefs feed above. Query-param client scoping matches the
+  // existing /engagement/attachments?clientId= and /engagement/debriefs?clientId= idiom.
+  @Get('shared-meetings')
+  sharedMeetings(@CurrentTenant() ctx: TenantContext, @Query('clientId') clientId: string) {
+    return this.service.listSharedMeetingsForClient(ctx, clientId);
+  }
+
+  @Get('outreach')
+  outreachRecords(
+    @CurrentTenant() ctx: TenantContext,

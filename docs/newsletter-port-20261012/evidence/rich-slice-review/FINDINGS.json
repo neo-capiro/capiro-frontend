@@ -1,0 +1,43 @@
+{
+  "disposition": "bounded source/fixture review accepted; full-rich and production qualification not accepted",
+  "findings": [
+    {
+      "id": "NRS-01",
+      "severity": "P2",
+      "status": "resolved",
+      "area": "Undo then type",
+      "source": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "detail": "Redo-length component key remounted focused editor; stable block key plus changed-only no-update external content synchronization fixes it. Preserved red and final green."
+    },
+    {
+      "id": "NRS-02",
+      "severity": "P2",
+      "status": "resolved",
+      "area": "Renderer/control parity",
+      "source": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "detail": "Button/logo renderer uses plain text. Final controls restrict them to plain text; logo positive browser control passes; button branch inspected statically."
+    },
+    {
+      "id": "NRS-03",
+      "severity": "P2",
+      "status": "resolved-source-and-positive-regression",
+      "area": "Responsive preview",
+      "source": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "detail": "Whole-document sanitizer preserves canonical responsive CSS. Final responsive rule and containment assertions pass. Interim exact375px assertion failure at373px is preserved and causally corrected; no claim of paired old-headless baseline execution."
+    },
+    {
+      "id": "NRS-GATE-01",
+      "severity": "qualification-blocker",
+      "status": "open",
+      "area": "Production runtime",
+      "detail": "Production build failed ENOSPC during prerender after compile/type success; actual Next server, clean install of this slice, native and full-design/accessibility gates unrun."
+    },
+    {
+      "id": "NRS-CONTRACT-01",
+      "severity": "native-feature-dependency",
+      "status": "open-explicitly-unavailable",
+      "area": "Rich persistence and receiving",
+      "detail": "Qualified package lacks runtime receiving parsers and rich read envelopes. Save/stage remain disabled. No original43 runtime facets or37 test histories accepted."
+    }
+  ]
+}

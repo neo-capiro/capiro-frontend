@@ -1,0 +1,214 @@
+{
+  "schema": "figma34-modules-desktop-control-audit-summary/2",
+  "status": "COMPLETE_DIRECT_DESIGN_BODY_INVENTORY_SOURCE_MAPPING_NOT_PARITY",
+  "fileKey": "zGvvF6V6hh7yweoplCdpdE",
+  "page": "1064:140864",
+  "sourceBase": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "inventory": {
+    "metadataNodes": 49219,
+    "structuralFrameCandidates": 752,
+    "partition": {
+      "shared_shell_boundary_other_owner": 15,
+      "desktop_or_1024_responsive": 682,
+      "phone_deferred": 24,
+      "design_reference_not_product_navigation": 10,
+      "meri_boundary_not_allocated": 13,
+      "shared_component_master_other_owner": 8
+    },
+    "eligibleDesktopFrames": 682,
+    "directVisibleBodies": 682,
+    "originalMetadataCollapsedCandidates": 217,
+    "collapsedEligibleBodiesNowDirectlyExpanded": 200,
+    "collapsedExcludedCandidates": 17,
+    "remainingInScopeUnexpandedBodies": 0,
+    "fullScreenEquivalenceCredits": 0,
+    "familyCounts": {
+      "responsive": 7,
+      "hub": 1,
+      "engagement": 11,
+      "planner": 133,
+      "strategies": 82,
+      "directory": 32,
+      "intelligence": 7,
+      "research": 3,
+      "settings": 62,
+      "workspace": 216,
+      "legiwatch": 116,
+      "calendar": 12
+    },
+    "shortAssetReferenceOrComponentSectionFramesExcluded": 93
+  },
+  "visibleControls": {
+    "frames": 682,
+    "uniqueFrameIDs": 682,
+    "missing": 0,
+    "instanceControlUses": 6883,
+    "localVisualControlCandidates": 7393,
+    "prototypeActionNodeUses": 8220,
+    "sharedChromeInstanceUses": 1152,
+    "stateTextUses": 621,
+    "hiddenRootCount": 574,
+    "definitionCount": 14177,
+    "globalExactDefinitionCount": 12171,
+    "uniqueControlMasters": 69,
+    "sourceCategories": {
+      "responsive": 7,
+      "hub": 1,
+      "engagement": 11,
+      "planner": 133,
+      "strategies": 82,
+      "directory": 32,
+      "intelligence": 7,
+      "research": 3,
+      "settings": 62,
+      "workspace": 216,
+      "legiwatch": 116,
+      "calendar": 12
+    },
+    "traversedVisibleNodes": 94593,
+    "note": "Instance, visual candidate, state and action uses overlap and nest; not unique user controls."
+  },
+  "hidden": {
+    "allRootUses": 574,
+    "sharedChromeRootUsesOtherOwner": 480,
+    "localConditionalRoots": 19,
+    "localOtherHiddenRoots": 75,
+    "localBodiesDirectlyRead": 94,
+    "localNestedHiddenRootsRemaining": 0,
+    "conditional": {
+      "instanceCandidates": 27,
+      "localCandidates": 9,
+      "actionNodes": 36
+    },
+    "otherHidden": {
+      "instanceCandidates": 92,
+      "localCandidates": 98,
+      "actionNodes": 53
+    },
+    "policy": "Observed without changing visibility. No native authority, enabled initial state, dead-code or universal unreachable claim."
+  },
+  "contexts": {
+    "responses": 38,
+    "screenshotResponses": 36,
+    "sparseOuterResponses": 2,
+    "eligibleFramesDirectlyPictured": 34,
+    "eligibleSparseParentsWithChildDrawerPicture": 2,
+    "eligibleFramesNotManuallyPictured": 646,
+    "newTargetedContexts": [
+      {
+        "id": "1175:286459",
+        "label": "Sections"
+      },
+      {
+        "id": "1064:207352",
+        "label": "Planner chart editor"
+      },
+      {
+        "id": "3012:299303",
+        "label": "DoW profile"
+      },
+      {
+        "id": "1064:250631",
+        "label": "HQ Quarantine"
+      },
+      {
+        "id": "1064:264267",
+        "label": "LegiWatch source preflight"
+      }
+    ],
+    "decodedAndHashedPNGs": 30,
+    "allOtherScreenshotsRetainedInRawContextJSON": true,
+    "renderedApplicationComparisons": 0
+  },
+  "semantics": {
+    "effectiveObservedActionTypes": {
+      "NODE": 7861,
+      "SET_VARIABLE": 715,
+      "BACK": 172,
+      "CONDITIONAL": 62,
+      "URL": 4,
+      "CLOSE": 121
+    },
+    "containerNote": "CONDITIONAL counts container actions; nested SET_VARIABLE actions are also counted. These are uses, not unique product operations.",
+    "nodeTargetUses": {
+      "nested_master_or_other_node": 338,
+      "desktop_or_1024_responsive": 7483,
+      "design_reference_not_product_navigation": 1,
+      "meri_boundary_not_allocated": 38,
+      "phone_deferred": 1
+    },
+    "uniqueNodeTargets": 578,
+    "uniqueNodeTargetsNotNamedByPageMetadata": [],
+    "urlActions": [
+      {
+        "origin": "1064:240729",
+        "controlId": "3013:299517",
+        "label": "Link Email member",
+        "url": "mailto:m.fallon@example.org"
+      },
+      {
+        "origin": "3012:299307",
+        "controlId": "3018:103183",
+        "label": "Link Email member",
+        "url": "mailto:m.fallon@example.org"
+      },
+      {
+        "origin": "3012:299308",
+        "controlId": "3018:103513",
+        "label": "Link Email member",
+        "url": "mailto:m.fallon@example.org"
+      },
+      {
+        "origin": "1176:299230",
+        "controlId": "1181:308298",
+        "label": "NL/preview-inbox/panel0/Action/Open Mailtrap HTML Check",
+        "url": "https://mailtrap.io/email-sandbox/"
+      }
+    ],
+    "perInstanceOverridesPreserved": true
+  },
+  "source": {
+    "sourceBindingDefinitions": 86,
+    "sourcePaths": 129,
+    "freshBodyReadPins": 18,
+    "rowsWithFreshBodyReadOwnerAnchor": 279,
+    "perControlHandlerAcceptance": 0
+  },
+  "reuse": {
+    "visibleSharedInstanceUses": 1152,
+    "exactVisibleSharedMasterPropertyGroups": 5,
+    "distinctControlMasterIDs": 69,
+    "fullScreenEquivalenceCredits": 0,
+    "sharedMasterConformance": "Separate shared-component owner; not inherited"
+  },
+  "integrity": {
+    "scope": "Pure in-memory documentation-reference checks, not source/app tests",
+    "eligibleIDs": 682,
+    "rowIDs": 682,
+    "missingEligibleIDs": [],
+    "extraIDs": [],
+    "semanticReferences": 24269,
+    "invalidReferences": 0,
+    "readOrMissingHiddenBodyErrors": 0,
+    "batchDataOrRoundtripFailures": 0,
+    "noBlankSourceBindings": true
+  },
+  "remainingGates": [
+    "646 exact eligible frames have not been manually pictured; design-body/control inventory is complete, pixel/manual layout conformance is not.",
+    "Per-control source handlers, native permission/version/receipt semantics and current contract field coverage remain unqualified; source mapping is not implementation absence.",
+    "534 aggregate label definitions are explicitly previews beyond320characters (467 local container candidates,67 instance/container candidates); no full static-copy acceptance.",
+    "Shared master/component acceptance must be joined from the separate Components owner.",
+    "No source test/compiler/browser/install/native/provider/cloud or app rendered comparison ran.",
+    "No Meri/phone/live effects/image/release/deployment acceptance."
+  ],
+  "docs": [
+    "ROW-CONTROL-CHECKLIST.json",
+    "CONTROL-AUDIT-SUMMARY.json",
+    "CONTROL-AUDIT.md",
+    "DESKTOP-ROWS.md",
+    "DESIGN-GAPS.md",
+    "DESIGN-GAPS.json"
+  ],
+  "externalEvidenceRoot": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/figma34/modules",
+  "structuralExclusionRegister": "control-audit-v2/STRUCTURAL-EXCLUSION-REGISTER.json"
+}

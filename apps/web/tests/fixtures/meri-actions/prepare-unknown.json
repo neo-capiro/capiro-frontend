@@ -1,0 +1,13 @@
+{
+  "name": "prepare-unknown",
+  "route": "prepare",
+  "httpStatus": 502,
+  "response": {
+    "error": {
+      "code": "COMMAND_PREPARATION_REFUSED",
+      "outcome": "UNKNOWN"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Published synthetic uncertainty: metadata disposition does not establish task success or authorize retry."
+}

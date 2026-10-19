@@ -1,0 +1,16 @@
+{
+  "baseSource": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
+  "changedTest": "apps/web/tests/browser/meeting-preparation.spec.ts",
+  "changedTestSha256": "6f123f0a9c75b391f21e8d50d0d1d5a4acb5a663560da37778b2101cf38adac6",
+  "applicationAndDeploymentSourceUnchanged": true,
+  "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:browser --workspace @capiro/web -- tests/browser/meeting-preparation.spec.ts --grep \"ambiguous submit|source settings\" --repeat-each=5 --workers=3",
+  "stats": {
+    "startTime": "2026-10-12T04:00:15.294Z",
+    "duration": 54925.481,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "scope": "Bounded asynchronous positive request observation. Original exact2 count, identical body/key and saved-job cancellation controls retained; exact2 count also asserted after cancellation. Adjacent selected-depth dispatch uses the same bounded observation. No assertion removed or skipped."
+}

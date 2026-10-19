@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-14T01:27:25.648526+00:00",
+  "sourceCommit": "2d653f3885babcb9a8e78ae01d174d4fab50ed3a",
+  "base": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "applicationTree": "52e82390f0aeab0c8d8305ddf134b1dbb3b009e5",
+  "runtimeTree": "9d78e88f41d8aa7c30503bf92003dd78f984d52e",
+  "lockBlob": "767472784c53fc91f56f96ab5785c582fabb0a31",
+  "scope": "Separate follow-up; does not replace frozen PR25 image source or shipping inputs.",
+  "frozenImageSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "baseline": {
+    "sourceCommit": "257cf5b5db673b31c98264f9da33759c68066ba4",
+    "newUnitFailures": 12,
+    "newMountedBrowserFailures": 3,
+    "originalEvidence": [
+      "BASELINE.json",
+      "regression-red.log",
+      "browser-red.json",
+      "browser-red.log"
+    ]
+  },
+  "passed": {
+    "newUnitRegression": {
+      "cases": 12,
+      "includedInWebTotal": true,
+      "log": "regression-green.log"
+    },
+    "webUnit": {
+      "files": 155,
+      "cases": 2255,
+      "log": "web-unit.log",
+      "config": "vitest.config.mts"
+    },
+    "capiroAndFeatureUnit": {
+      "files": 35,
+      "cases": 442,
+      "log": "capiro-unit.log",
+      "config": "capiro-vitest.config.mts"
+    },
+    "rootControls": {
+      "cases": 111,
+      "command": "npm test",
+      "log": "root-controls.log"
+    },
+    "transport": {
+      "cases": 84,
+      "command": "npm run test:transport",
+      "log": "transport.log"
+    },
+    "totalDistinctUnitAndControlCases": 2892,
+    "portfolioMountedBrowser": {
+      "cases": 15,
+      "config": "portfolio-green.config.mts",
+      "log": "browser-green.log",
+      "report": "browser-green.json",
+      "includesNewCases": 3
+    },
+    "newsletterMountedBrowser": {
+      "cases": 11,
+      "config": "modules.config.mts",
+      "log": "modules-browser-corrected.log",
+      "report": "modules-browser.json",
+      "originalCasesPreserved": 9,
+      "newCases": 2
+    },
+    "workspaceTypes": {
+      "command": "npm run typecheck",
+      "log": "workspace-types.log"
+    },
+    "webTypes": {
+      "command": "tsc --noEmit --incremental false",
+      "log": "types-corrected.log",
+      "typeGeneration": "typegen.log"
+    },
+    "publicPackages": {
+      "command": "npm run check:packages",
+      "log": "packages.log"
+    },
+    "changedFileLint": {
+      "scope": "Three production and three test files; zero warnings",
+      "log": "lint-corrected.log"
+    },
+    "changedFileFormat": {
+      "scope": "Three production and three test files plus architecture review JSON",
+      "log": "format.log"
+    },
+    "architecture": {
+      "command": "npm run architecture",
+      "errors": 0,
+      "total": 488,
+      "reviewed": 467,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "log": "architecture-reviewed.log"
+    },
+    "productionBuild": {
+      "command": "npm run build",
+      "log": "build-local-dependencies.log"
+    },
+    "actualStandalone": {
+      "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:production -- <evidence>/production-corrected",
+      "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+      "observations": 30,
+      "httpObservations": 16,
+      "browserObservations": 14,
+      "additionalExplicitPortfolioRootSmoke": true,
+      "pageErrors": [],
+      "browserVersion": "154.0.8037.57",
+      "log": "production-corrected.log",
+      "report": "production-corrected/production-smoke.json"
+    }
+  },
+  "correctedSetupFailures": [
+    {
+      "logs": ["architecture-first.log", "architecture-evidence-restored.log"],
+      "cause": "Sparse checkout omitted existing architecture-review evidence; restored exact committed paths and added the required exact changed-function responsibility review."
+    },
+    {
+      "logs": ["types.log", "modules-browser.log", "build.log"],
+      "cause": "Borrowed node_modules tree lacked app-local / package-local Meri 0.1.3 contract and nested type links; restored exact installed packages without changing versions or lock."
+    },
+    {
+      "logs": ["lint.log"],
+      "cause": "Incorrect app-local ESLint executable path; corrected to the existing root installation."
+    },
+    {
+      "logs": ["build-dependencies-corrected.log"],
+      "cause": "Turbopack refused an outward root node_modules symlink; used a real local dependency tree of verified identical hardlinks and exact current copies."
+    },
+    {
+      "logs": ["production.log"],
+      "cause": "Default bundled Playwright Chromium was unavailable; the existing runner option selected installed /usr/bin/chromium and passed."
+    }
+  ],
+  "dependencyReuse": {
+    "hardlinkedVerifiedIdenticalFiles": 48026,
+    "copiedCurrentDependencyFiles": 450,
+    "copyBytes": 5041576,
+    "sourceOrLockChanged": false,
+    "sourceDependencyTreesModified": false,
+    "freshInstall": false
+  },
+  "unrun": [
+    "Fresh clean dependency install on this follow-up",
+    "Full unchanged-file lint/format rerun",
+    "Native production Clerk sign-in/sign-out/expiry",
+    "Native own-tenant/client reads and writes",
+    "Deployed backend revision verification",
+    "Container build/image scan/deployment",
+    "New Figma comparison",
+    "Comprehensive accessibility acceptance"
+  ],
+  "nativeLedger": {
+    "inScopeRows": 337,
+    "allRemainUnaccepted": true,
+    "basicPreviewAccessGate": false,
+    "files": [
+      {
+        "path": "docs/acceptance-20261013/RECONCILED-337.json",
+        "gitBlob": "a16e83506d60326e05ece7219a3a4105b5269e3a",
+        "sha256": "3849d8a07a4f6c0961d4726683c66946a4842d6f2710736cc22727a1049a85f4",
+        "unchangedFromBase": true,
+        "rows": 337
+      },
+      {
+        "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+        "gitBlob": "570e827c478f735855eec4ec4c2f5f8afc0970f0",
+        "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+        "unchangedFromBase": true,
+        "rows": 345
+      }
+    ]
+  },
+  "noLiveMutation": true,
+  "providerOrPaidCalls": false,
+  "authOrTenantPermissionChanges": false,
+  "deploymentPerformed": false,
+  "imageUri": null,
+  "imageDigest": null,
+  "evidenceArchive": {
+    "path": "evidence.tar.gz",
+    "bytes": 3655816,
+    "sha256": "614fb550cf59d110318ecef2a70749f594580d4cc46ed6cbb44a1e0718d2023e",
+    "memberCount": 76,
+    "manifest": "EVIDENCE-MANIFEST.json",
+    "excluded": "Borrowed dependency symlinks and generated caches/build outputs; all test/setup failure logs, reports and screenshots retained."
+  }
+}

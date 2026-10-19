@@ -1,0 +1,69 @@
+{
+  "checkedUTC": "2026-10-13T08:02:05.516670+00:00",
+  "source": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "workingTree": "",
+  "activeGate": "Portfolio shard1/4",
+  "pid": 1352208,
+  "processAlive": true,
+  "command": "npm run test:browser --workers=2 --shard=1/4 --output=/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-shard-1-artifacts                                                                         ",
+  "startedUTC": "2026-10-13T07:58:52.512702+00:00",
+  "completed": [
+    {
+      "gate": "actual-additions",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "build",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "check",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "clean-install",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "elements",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "modules-browser",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "portfolio-discovery",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "production",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "public-newsletter-browser",
+      "exitCode": 0,
+      "sourceChanged": false
+    },
+    {
+      "gate": "served-newsletter-assets",
+      "exitCode": 0,
+      "sourceChanged": false
+    }
+  ],
+  "latestProgress": [
+    "  \u2713   93 tests/browser/alert-channel-lifetime.spec.ts:116:3 \u203a a test action latches a same-callback identity interruption even after the source is restored (2.3s)",
+    "  \u2713   94 tests/browser/advocacy-history-edit.spec.ts:590:1 \u203a timeline and outcome review match phone geometry with keyboard cancellation (3.2s)",
+    "  \u2713   95 tests/browser/alert-channel-lifetime.spec.ts:116:3 \u203a a test action latches a same-callback client interruption even after the source is restored (1.9s)",
+    "  \u2713   97 tests/browser/alert-channel-lifetime.spec.ts:116:3 \u203a a test action latches a same-callback preferences interruption even after the source is restored (2.2s)",
+    "  \u2713   96 tests/browser/advocacy-history-edit.spec.ts:630:1 \u203a desktop outcome review uses the exact Figma frame dimensions (2.7s)"
+  ]
+}

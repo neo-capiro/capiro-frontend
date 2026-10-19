@@ -1,0 +1,20 @@
+- 'dialog "Access: Test report.pdf"':
+  - banner:
+    - 'heading "Access: Test report.pdf" [level=2]'
+    - button "Close"
+  - paragraph: Choose who on your team can view these files. The uploader retains access.
+  - group "Who can view":
+    - text: Who can view
+    - radio "All team members" [disabled]
+    - text: All team members
+    - radio "Specific people" [checked] [disabled]
+    - text: Specific people
+  - checkbox "Alexandria Montgomery-Washingtonalexandria.long@example.test" [disabled]
+  - text: Alexandria Montgomery-Washingtonalexandria.long@example.test
+  - checkbox "Christopher Andersonchristopher@example.test" [disabled]
+  - text: Christopher Andersonchristopher@example.test An empty selection grants access only to the uploader.
+  - button "Save access" [disabled]
+  - alert:
+    - paragraph: The service returned an unexpected response. Please retry or contact support.
+  - paragraph: The save outcome is unknown. Your draft is retained. Review the current file before deciding whether to save again.
+  - button "Review current file"

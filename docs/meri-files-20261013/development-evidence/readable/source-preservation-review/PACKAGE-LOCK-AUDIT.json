@@ -1,0 +1,342 @@
+{
+  "base": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "changedLockPackageEntries": [
+    "apps/web",
+    "apps/web/node_modules/@capiro/meri-contracts"
+  ],
+  "rootLockMetadataUnchanged": true,
+  "changedEntries": {
+    "apps/web": {
+      "before": {
+        "name": "@capiro/web",
+        "version": "0.1.0",
+        "dependencies": {
+          "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+          "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+          "@capiro/ui": "0.0.0",
+          "@clerk/nextjs": "7.9.14",
+          "@fontsource/newsreader": "5.3.0",
+          "@schedule-x/calendar": "4.9.1",
+          "@schedule-x/calendar-controls": "4.9.1",
+          "@schedule-x/react": "4.1.0",
+          "@schedule-x/theme-default": "4.9.1",
+          "@stripe/react-stripe-js": "3.10.0",
+          "@stripe/stripe-js": "5.10.0",
+          "@tanstack/react-query": "5.104.1",
+          "@tiptap/core": "3.31.4",
+          "@tiptap/extension-image": "3.31.4",
+          "@tiptap/pm": "3.31.4",
+          "@tiptap/react": "3.31.4",
+          "@tiptap/starter-kit": "3.31.4",
+          "@xyflow/react": "12.12.0",
+          "d3-geo": "3.1.1",
+          "dompurify": "3.4.16",
+          "geist": "1.7.2",
+          "lucide-react": "0.577.0",
+          "next": "16.4.0",
+          "radix-ui": "1.7.0",
+          "react": "19.3.0",
+          "react-dom": "19.3.0",
+          "temporal-polyfill": "0.3.2",
+          "zod": "4.6.5"
+        },
+        "devDependencies": {
+          "@playwright/test": "1.61.1",
+          "@types/d3-geo": "3.1.1",
+          "@types/node": "24.10.0",
+          "@types/react": "19.3.0",
+          "@types/react-dom": "19.3.0",
+          "eslint": "9.39.2",
+          "eslint-config-next": "16.4.0",
+          "prettier": "3.8.1",
+          "typescript": "5.9.3",
+          "vite": "8.3.4",
+          "vitest": "4.1.11",
+          "axe-core": "4.14.0"
+        },
+        "engines": {
+          "node": ">=24 <25"
+        }
+      },
+      "after": {
+        "name": "@capiro/web",
+        "version": "0.1.0",
+        "dependencies": {
+          "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+          "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.2.tgz",
+          "@capiro/ui": "0.0.0",
+          "@clerk/nextjs": "7.9.14",
+          "@fontsource/newsreader": "5.3.0",
+          "@schedule-x/calendar": "4.9.1",
+          "@schedule-x/calendar-controls": "4.9.1",
+          "@schedule-x/react": "4.1.0",
+          "@schedule-x/theme-default": "4.9.1",
+          "@stripe/react-stripe-js": "3.10.0",
+          "@stripe/stripe-js": "5.10.0",
+          "@tanstack/react-query": "5.104.1",
+          "@tiptap/core": "3.31.4",
+          "@tiptap/extension-image": "3.31.4",
+          "@tiptap/pm": "3.31.4",
+          "@tiptap/react": "3.31.4",
+          "@tiptap/starter-kit": "3.31.4",
+          "@xyflow/react": "12.12.0",
+          "d3-geo": "3.1.1",
+          "dompurify": "3.4.16",
+          "geist": "1.7.2",
+          "lucide-react": "0.577.0",
+          "next": "16.4.0",
+          "radix-ui": "1.7.0",
+          "react": "19.3.0",
+          "react-dom": "19.3.0",
+          "temporal-polyfill": "0.3.2",
+          "zod": "4.6.5"
+        },
+        "devDependencies": {
+          "@playwright/test": "1.61.1",
+          "@types/d3-geo": "3.1.1",
+          "@types/node": "24.10.0",
+          "@types/react": "19.3.0",
+          "@types/react-dom": "19.3.0",
+          "eslint": "9.39.2",
+          "eslint-config-next": "16.4.0",
+          "prettier": "3.8.1",
+          "typescript": "5.9.3",
+          "vite": "8.3.4",
+          "vitest": "4.1.11",
+          "axe-core": "4.14.0"
+        },
+        "engines": {
+          "node": ">=24 <25"
+        }
+      }
+    },
+    "apps/web/node_modules/@capiro/meri-contracts": {
+      "before": {
+        "version": "0.1.1",
+        "resolved": "file:vendor/capiro-meri-contracts-0.1.1.tgz",
+        "integrity": "sha512-DQGUUm88mWTb0w7Me7CqvN9l+XTZwgtHD1VymifcyZHZes4O2ZugmxSMmH5Zwzs8m+3OLQS+/ulq8wKQ0ntxpA==",
+        "license": "UNLICENSED",
+        "dependencies": {
+          "ajv": "8.20.0",
+          "ajv-formats": "3.0.1",
+          "canonicalize": "5.1.0"
+        },
+        "engines": {
+          "node": ">=24 <25"
+        }
+      },
+      "after": {
+        "version": "0.1.2",
+        "resolved": "file:vendor/capiro-meri-contracts-0.1.2.tgz",
+        "integrity": "sha512-JvT7OeRN3T5HMsmuyeG9ZTBsM7CZaidWlRgYzgJqqhvqcxZE05Ze1p6K2GAVoqpdBnAFAHUYjHYkSFOhrDfjkg==",
+        "license": "UNLICENSED",
+        "dependencies": {
+          "ajv": "8.20.0",
+          "ajv-formats": "3.0.1",
+          "canonicalize": "5.1.0"
+        },
+        "engines": {
+          "node": ">=24 <25"
+        }
+      }
+    }
+  },
+  "artifact": {
+    "path": "/workspace/capiro-meri-files-20261013/vendor/capiro-meri-contracts-0.1.2.tgz",
+    "source": "70516e5c9681917ce493bbc50e3023494f2e1209",
+    "bytes": 228048,
+    "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+    "gitBlob": "3b1b1e6345539632b8a4be80de44b0ab548369af",
+    "sha512Integrity": "sha512-JvT7OeRN3T5HMsmuyeG9ZTBsM7CZaidWlRgYzgJqqhvqcxZE05Ze1p6K2GAVoqpdBnAFAHUYjHYkSFOhrDfjkg==",
+    "lockIntegrityMatches": true,
+    "memberCount": 19
+  },
+  "members": [
+    {
+      "path": "package/dist/action-application.metadata.json",
+      "bytes": 1980,
+      "sha256": "9909cec1f8008a69415d5cca842230eb27e1bb70f419563be3da0da0b9514355",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/action-application.schema.json",
+      "bytes": 67726,
+      "sha256": "a44e403281e8404462be8d06ddbb369e175b61e6501e16c8007646d9e74a803c",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/document-application.metadata.json",
+      "bytes": 1996,
+      "sha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/document-application.schema.json",
+      "bytes": 34642,
+      "sha256": "712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/meri.schema.json",
+      "bytes": 50043,
+      "sha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/package.json",
+      "bytes": 2129,
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/README.md",
+      "bytes": 14061,
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/THIRD-PARTY-NOTICES.md",
+      "bytes": 3841,
+      "sha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/action-application.mjs",
+      "bytes": 1480808,
+      "sha256": "9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/browser.mjs",
+      "bytes": 466002,
+      "sha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/document-application.mjs",
+      "bytes": 498894,
+      "sha256": "4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/metadata.mjs",
+      "bytes": 533,
+      "sha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/validate.mjs",
+      "bytes": 3311,
+      "sha256": "c2449fd55300b31bdc1e829b5d918a531f1c4b2c675085a5b4707726ddd36d10",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/action-application.d.ts",
+      "bytes": 17721,
+      "sha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/browser.d.ts",
+      "bytes": 166,
+      "sha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/contracts.d.ts",
+      "bytes": 4090,
+      "sha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/document-application.d.ts",
+      "bytes": 23960,
+      "sha256": "1ce1f8f0f8967cbb705732bd9fd0396149cb4266fa0aec26d225d2f7e2a01d31",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/index.d.ts",
+      "bytes": 85,
+      "sha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "installedOverlayIdentical": true
+    },
+    {
+      "path": "package/dist/metadata.d.ts",
+      "bytes": 485,
+      "sha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "installedOverlayIdentical": true
+    }
+  ],
+  "previousPublicMembersChanged": [
+    "package/package.json",
+    "package/README.md"
+  ],
+  "addedMembers": [
+    "package/dist/document-application.d.ts",
+    "package/dist/document-application.metadata.json",
+    "package/dist/document-application.mjs",
+    "package/dist/document-application.schema.json"
+  ],
+  "oldVendorArchives": [
+    {
+      "path": "vendor/capiro-meri-contracts-0.1.0.tgz",
+      "mode": "100644",
+      "baseGitBlob": "ad34bb186699fd0af365b973ca5de9e820802c0c",
+      "baseSha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "currentSha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "bytes": 48823,
+      "unchanged": true
+    },
+    {
+      "path": "vendor/capiro-meri-contracts-0.1.1.tgz",
+      "mode": "100644",
+      "baseGitBlob": "f2341ace3663780a236a959f55474332369061d8",
+      "baseSha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "currentSha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "bytes": 175627,
+      "unchanged": true
+    },
+    {
+      "path": "vendor/capiro-meri-ui-stream-0.1.0.tgz",
+      "mode": "100644",
+      "baseGitBlob": "0d8aefacc2fc42aa45fbf0f77a8e34db5aea0e46",
+      "baseSha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "currentSha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "bytes": 2280,
+      "unchanged": true
+    },
+    {
+      "path": "vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+      "mode": "100644",
+      "baseGitBlob": "df067ad7e9a96125a33353aad50b8dabbde9e206",
+      "baseSha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "currentSha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "bytes": 532178,
+      "unchanged": true
+    },
+    {
+      "path": "vendor/capiro-shared-0.0.0.tgz",
+      "mode": "100644",
+      "baseGitBlob": "04ea25adba740eca8f677c0259e45211b73c5f2e",
+      "baseSha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+      "currentSha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+      "bytes": 510772,
+      "unchanged": true
+    }
+  ],
+  "oldEventConsumerEntry": {
+    "version": "0.1.0",
+    "resolved": "file:vendor/capiro-meri-contracts-0.1.0.tgz",
+    "integrity": "sha512-gsJpKHbwliWB2jVP1jVoaH+t9RNrIC334+VkU3hYN7MrkCF7INS9YES+prCSD7SfVn7gIsp7eTwM1kCHwfQ3EA==",
+    "license": "UNLICENSED",
+    "dependencies": {
+      "ajv": "8.20.0",
+      "ajv-formats": "3.0.1",
+      "canonicalize": "5.1.0"
+    },
+    "engines": {
+      "node": ">=24 <25"
+    }
+  },
+  "oldEventConsumerUnchanged": true
+}

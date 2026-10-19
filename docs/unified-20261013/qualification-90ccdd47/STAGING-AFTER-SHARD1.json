@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-13T10:08:03.880104+00:00",
+  "status": "PREPARED_NOT_FINALLY_SEALED",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "includedOriginalRecords": 235,
+  "includedOriginalBytes": 17972135,
+  "completedPortfolioShards": {
+    "1": 285
+  },
+  "portfolioFinalStatus": "PENDING; shards2/3/4 and progress excluded until root releases them",
+  "modulesPassed": 324,
+  "includedReviews": [
+    "source-preservation",
+    "emitted-boundary",
+    "sealed historical-storage addendum"
+  ],
+  "pending": [
+    "Remaining completed Portfolio shards and artifacts",
+    "Final aggregate/progress receipts after root release",
+    "Final independent gate review"
+  ],
+  "originalFailuresRetained": [
+    "6150 typecheck exit2 before build",
+    "90cc served-asset missing metadata preflight exit1 before HTTP"
+  ],
+  "archiveVerification": "Every included original byte reopened and equal; no originals changed",
+  "snapshotBytesBeforeThisFile": 10337974,
+  "preparationCheckpointRole": "Initial README/preparation/checkpoint reflect earlier partial selection; this status is newer and does not constitute final acceptance"
+}

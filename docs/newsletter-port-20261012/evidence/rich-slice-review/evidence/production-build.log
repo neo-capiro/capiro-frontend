@@ -1,0 +1,22 @@
+▲ Next.js 16.4.0 (webpack)
+✓ Running next.config.ts took 62ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 48s
+  Running TypeScript ...
+  Finished TypeScript in 28.7s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/7) ...
+  Generating static pages using 4 workers (1/7) 
+  Generating static pages using 4 workers (3/7) 
+  Generating static pages using 4 workers (5/7) 
+Error occurred prerendering page "/_global-error". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: ENOSPC: no space left on device, mkdir '/workspace/capiro-newsletter-port/apps/web/.next/server/app/_global-error.segments'
+    at ignore-listed frames {
+  errno: -28,
+  code: 'ENOSPC',
+  syscall: 'mkdir',
+  path: '/workspace/capiro-newsletter-port/apps/web/.next/server/app/_global-error.segments'
+}
+Export encountered an error on /_global-error/page: /_global-error, exiting the build.
+⨯ Next.js build worker exited with code: 1 and signal: null

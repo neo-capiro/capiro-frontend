@@ -1,0 +1,407 @@
+{
+  "sealedAt": "2026-10-13T00:13:02.491875+00:00",
+  "reviewer": "Codex independent modules_settings_review",
+  "scope": "PR16 rich receiving/local editor source and observed owner evidence; not PR15",
+  "files": [
+    {
+      "path": "EVIDENCE.json",
+      "sha256": "bd3af78fff26b516457c509642d669a7018c41923a39e972db4f54ad2aae3cde",
+      "bytes": 9053
+    },
+    {
+      "path": "EXACT-SIZE-EVIDENCE.json",
+      "sha256": "69b7211e0e93edc1805828fac2891358d17c406ecb758b668ef792b65b61ecc5",
+      "bytes": 4258
+    },
+    {
+      "path": "FINAL-SOURCE.json",
+      "sha256": "22abfe29c8d93b71e9597736854cb23e2aa10c05ff8f0bfc08de04b3e8a3e426",
+      "bytes": 6144
+    },
+    {
+      "path": "FINDINGS.json",
+      "sha256": "413385b36a1918eedc4a825d2c8ef71b497da53bfc9acc487edb6cac221c9446",
+      "bytes": 2157
+    },
+    {
+      "path": "INITIAL-SOURCE.json",
+      "sha256": "00ef613a1dc3c05acd35426d04e396c13acb2729246d92e26f3bcab896544551",
+      "bytes": 6139
+    },
+    {
+      "path": "PRESERVATION.json",
+      "sha256": "4aabfb07292bd0f066fa5788b6df61dcd41dffcc280af7c6c2863f7a63ffc85a",
+      "bytes": 831
+    },
+    {
+      "path": "READY-SIZE-RECORDS.json",
+      "sha256": "18189f949035af94a8b3d7226d8077f5cc3059040cf4f32f99cbcc1d01ca9fc7",
+      "bytes": 6209
+    },
+    {
+      "path": "REVIEW.md",
+      "sha256": "119721bc120dcd0db9d153f5bca4994c284b7c9313ca47c789bb56f04fb2363c",
+      "bytes": 11594
+    },
+    {
+      "path": "ROOT-INTEGRATION-CHECK.json",
+      "sha256": "7454491813e312dd14a31d343032a752421f5b19bb3ae57f7cc8cc0cb3be03a7",
+      "bytes": 1735
+    },
+    {
+      "path": "STAGED-BINDING.json",
+      "sha256": "7a0939f4b824c6b571d8fd38425e59844b4cc28b614a40eb98f66246e629389e",
+      "bytes": 1763
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "9bb95581e4df52b4386f4016d5231971db78aa2efae4297e060561c3a2b026b2",
+      "bytes": 478
+    },
+    {
+      "path": "STRUCTURE-REVIEW.md",
+      "sha256": "c15996bb0b8f91d811fa30ea9f0ef062818c61169ec06ad17ac50a87664e69df",
+      "bytes": 5947
+    },
+    {
+      "path": "evidence/application-unit-final.log",
+      "sha256": "20fbd32d8710555d7eaba041b29caae80beb4b5d2317a39f23261e12ef10376b",
+      "bytes": 236
+    },
+    {
+      "path": "evidence/application-unit.log",
+      "sha256": "271791de550302ff7d1df3f1831efbb3e6e44331d61073d6dfdc1d4cefcdeb58",
+      "bytes": 236
+    },
+    {
+      "path": "evidence/architecture-tests-final.log",
+      "sha256": "0eb91fd582aec101cd316367b0b7e2d9a2cac5ae66f703b3398e46a69fcc5959",
+      "bytes": 3089
+    },
+    {
+      "path": "evidence/browser-final.log",
+      "sha256": "2e40118af5465ef17670a936b6ee2c1ef482ffa5ce3d31786b0bc0c4edd8b0b7",
+      "bytes": 6259
+    },
+    {
+      "path": "evidence/browser-first.log",
+      "sha256": "44f94909c99a303e45182e658a37c1d3c170159cae7da0c05645542af5f2c133",
+      "bytes": 6120
+    },
+    {
+      "path": "evidence/browser-qualified-local.log",
+      "sha256": "0b0ed5798a88e8f506c18a34bb5f23034d39cbcf368ce50c01c74ca7814e6781",
+      "bytes": 6395
+    },
+    {
+      "path": "evidence/browser-reviewed.log",
+      "sha256": "1c98d35239868de41627841b628da29945986dfd2cabd0e00e249a33d1322566",
+      "bytes": 9360
+    },
+    {
+      "path": "evidence/capiro-unit-reviewed.log",
+      "sha256": "16ee53bf0c7b84b129af5d1c9499405a15b009cc3d109661108705b5cbeb799a",
+      "bytes": 251
+    },
+    {
+      "path": "evidence/format-reviewed.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytes": 66
+    },
+    {
+      "path": "evidence/history-before.log",
+      "sha256": "547955d4a623354c24a30fb7080c0fd4829cc683bd0fafd0a3aeecde185486ff",
+      "bytes": 3413
+    },
+    {
+      "path": "evidence/lint-reviewed.log",
+      "sha256": "73dc500a49ad975753a4cb647df702911fcd32ed8d37d971a2a5838e39f923f2",
+      "bytes": 672
+    },
+    {
+      "path": "evidence/metadata-before.log",
+      "sha256": "188b784d4b369d7bb52afda1c0c8cc5f9d590545a28c6ef184251fe5ce11ef9a",
+      "bytes": 4607
+    },
+    {
+      "path": "evidence/node-tests-restored.log",
+      "sha256": "4821bddecccd92f3195f2e24a80e506aeda3e7c8648ca3afff77524b1d2e5c8c",
+      "bytes": 6222
+    },
+    {
+      "path": "evidence/node-tests.log",
+      "sha256": "f92bf46fa14f49f69898fe4ae150ca19ea5de979fae38e64dd7f11e6a06542c4",
+      "bytes": 13648
+    },
+    {
+      "path": "evidence/package-unit.log",
+      "sha256": "f5afa0dd1bb754536c4e6d94e95d02330df5a1185534df80efb13f38e201f56a",
+      "bytes": 8708
+    },
+    {
+      "path": "evidence/production-build.log",
+      "sha256": "d0e21faca44cbf86906bb17d75038596371b7040621c9ae8ce7f1be6ff7ccd08",
+      "bytes": 1018
+    },
+    {
+      "path": "evidence/public-packages.log",
+      "sha256": "a41ce4777569fe931dd0feb294ca03cf6c639fe863134648d5404334fb6b8f76",
+      "bytes": 759
+    },
+    {
+      "path": "evidence/typecheck-reviewed.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "final-source/apps/web/package.json",
+      "sha256": "36cd7a98306d00ef3667bbf0a47a707e7896431feb0d60638be575a70155e6ec",
+      "bytes": 1882
+    },
+    {
+      "path": "final-source/apps/web/src/app/engagement/outreach/page.tsx",
+      "sha256": "045f081f8751bcf45a4ad737de30d3b9c616b30e054425694799facbbdcc35e4",
+      "bytes": 411
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5",
+      "bytes": 5925
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+      "sha256": "15900285c0ece4cce17967f5842323fe40df584b25663ff8ca7d0359f8be3d0e",
+      "bytes": 1704
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "sha256": "e2795611b5783cdf5e7f616f6fa7201d914a664bb88703f23e86bf90427fbe73",
+      "bytes": 11121
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+      "sha256": "3f50d27c9893de488a9538f699ddbc36a60cf6f4f20525bc7c87b024b449127b",
+      "bytes": 1896
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/engagement/newsletter-route.ts",
+      "sha256": "b4c0ea0a99b4fde3358bcb0cc079381bc02a484c3f027bbc9d7508cdd17af682",
+      "bytes": 1708
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "sha256": "7ec9d3ae32de4a11446190d4ee99b43b830ec44590983d155e49a78309ddf3a5",
+      "bytes": 7766
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "sha256": "c252f1201084ddc3a3bbfdb19e49ae850adf7f020daa286bd7c9bb78a3418f95",
+      "bytes": 3569
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "sha256": "4cce004224a7cc56e313bd03eda347e97dd28920ce7b4a4a789f59e373b505d0",
+      "bytes": 6504
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "sha256": "92f22e482133a1454a2122bcc78b9f916836627f1b4122248507c20abd0d4158",
+      "bytes": 2897
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+      "sha256": "9cc350f82297eba25cfddb937ad45934072afc0821988a4a9a052569dc879d03",
+      "bytes": 2447
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/RichText.tsx",
+      "sha256": "0c2647f8ba7beb62e1f903edbd03a7b23835561b45ed435fec0402a584ab6a59",
+      "bytes": 2224
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+      "sha256": "102e47f125212ddb43b23bd9bd418ab1f116fecad26740765f1ae61091230468",
+      "bytes": 2847
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/draft.ts",
+      "sha256": "743537f90a47a6300e2e04733526043d40d593fc9a3f9b98f6ee54667866ee61",
+      "bytes": 2152
+    },
+    {
+      "path": "final-source/apps/web/src/features/modules/workspace/rich-newsletter/rich-newsletter.module.css",
+      "sha256": "8661f21e1fa15878ce2dc95eb6a5afc89bdc322a9b232ea43389534407ebf97a",
+      "bytes": 2155
+    },
+    {
+      "path": "final-source/apps/web/src/shared/capiro/newsletter-routing.test.ts",
+      "sha256": "53b14d2f350e19a16130f02f5883deb1cb6acc13ee834b19eb7e20efaf54f74e",
+      "bytes": 1956
+    },
+    {
+      "path": "final-source/apps/web/src/shared/capiro/operations/engagement.ts",
+      "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8",
+      "bytes": 11049
+    },
+    {
+      "path": "final-source/apps/web/src/shared/capiro/operations/newsletter-routing.ts",
+      "sha256": "8e6fff50996b8af6e7c6c261bef64d816f36a861696125009adccf591a240c91",
+      "bytes": 567
+    },
+    {
+      "path": "final-source/apps/web/test/browser/newsletter-rich-history.spec.ts",
+      "sha256": "f155d0e2167958b685827acfaedf6ccbf6958b26ad7a4c631482c3a702390c2b",
+      "bytes": 1665
+    },
+    {
+      "path": "final-source/apps/web/test/browser/newsletter-rich.spec.ts",
+      "sha256": "33ec7ad0ac0d18b6b5a9cc2b3826d0bbe1809f15d738a6801f94c3fc7fdabd90",
+      "bytes": 9766
+    },
+    {
+      "path": "final-source/docs/newsletter-port-20261012/RICH-IMPLEMENTATION-PLAN.md",
+      "sha256": "6ee79562c7a1932fbeabb684d85bcd33073681862d2f23599b93233e5b5677e5",
+      "bytes": 3178
+    },
+    {
+      "path": "final-source/package-lock.json",
+      "sha256": "1847b2eca0198110c55481bd2bc5c65f77e4bdf51ab07532f96771cdcfa11251",
+      "bytes": 511299
+    },
+    {
+      "path": "initial-source/apps/web/package.json",
+      "sha256": "36cd7a98306d00ef3667bbf0a47a707e7896431feb0d60638be575a70155e6ec",
+      "bytes": 1882
+    },
+    {
+      "path": "initial-source/apps/web/src/app/engagement/outreach/page.tsx",
+      "sha256": "045f081f8751bcf45a4ad737de30d3b9c616b30e054425694799facbbdcc35e4",
+      "bytes": 411
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5",
+      "bytes": 5925
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+      "sha256": "15900285c0ece4cce17967f5842323fe40df584b25663ff8ca7d0359f8be3d0e",
+      "bytes": 1704
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "sha256": "e2795611b5783cdf5e7f616f6fa7201d914a664bb88703f23e86bf90427fbe73",
+      "bytes": 11121
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+      "sha256": "3f50d27c9893de488a9538f699ddbc36a60cf6f4f20525bc7c87b024b449127b",
+      "bytes": 1896
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/newsletter-route.ts",
+      "sha256": "b4c0ea0a99b4fde3358bcb0cc079381bc02a484c3f027bbc9d7508cdd17af682",
+      "bytes": 1708
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "sha256": "7ec9d3ae32de4a11446190d4ee99b43b830ec44590983d155e49a78309ddf3a5",
+      "bytes": 7766
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "sha256": "f92a9a70d8b6f9f4af140d0d326e384f90d88cb48976bc4e3a950752d92e0622",
+      "bytes": 3234
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "sha256": "4cce004224a7cc56e313bd03eda347e97dd28920ce7b4a4a789f59e373b505d0",
+      "bytes": 6504
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "sha256": "5070e14083aa452ebbbcb9b8a848ebd306ba1af8da9a510f09af2c9aef5a59ea",
+      "bytes": 2684
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+      "sha256": "9cc350f82297eba25cfddb937ad45934072afc0821988a4a9a052569dc879d03",
+      "bytes": 2447
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/RichText.tsx",
+      "sha256": "0c2647f8ba7beb62e1f903edbd03a7b23835561b45ed435fec0402a584ab6a59",
+      "bytes": 2224
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+      "sha256": "102e47f125212ddb43b23bd9bd418ab1f116fecad26740765f1ae61091230468",
+      "bytes": 2847
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/draft.ts",
+      "sha256": "3ea39651ad522a489144fe93c6f8071c816525a8cdf48e8b453f6edcc85eafd7",
+      "bytes": 1899
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/workspace/rich-newsletter/rich-newsletter.module.css",
+      "sha256": "8661f21e1fa15878ce2dc95eb6a5afc89bdc322a9b232ea43389534407ebf97a",
+      "bytes": 2155
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/capiro/newsletter-routing.test.ts",
+      "sha256": "53b14d2f350e19a16130f02f5883deb1cb6acc13ee834b19eb7e20efaf54f74e",
+      "bytes": 1956
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/capiro/operations/engagement.ts",
+      "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8",
+      "bytes": 11049
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/capiro/operations/newsletter-routing.ts",
+      "sha256": "8e6fff50996b8af6e7c6c261bef64d816f36a861696125009adccf591a240c91",
+      "bytes": 567
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/newsletter-rich-history.spec.ts",
+      "sha256": "ec27affed4b0109e96d899d7d65db6ee48847b72679b53782c2d71dbe121caa9",
+      "bytes": 1023
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/newsletter-rich.spec.ts",
+      "sha256": "c6500b05a56fec529b0ebd91cf3c9401bbde6cf3c478b8ba1c22024e157b27f1",
+      "bytes": 9177
+    },
+    {
+      "path": "initial-source/docs/newsletter-port-20261012/RICH-IMPLEMENTATION-PLAN.md",
+      "sha256": "6ee79562c7a1932fbeabb684d85bcd33073681862d2f23599b93233e5b5677e5",
+      "bytes": 3178
+    },
+    {
+      "path": "initial-source/package-lock.json",
+      "sha256": "1847b2eca0198110c55481bd2bc5c65f77e4bdf51ab07532f96771cdcfa11251",
+      "bytes": 511299
+    },
+    {
+      "path": "prepare-size-review.mjs",
+      "sha256": "5b4721fb96ee711912374c73f4bdad3cc893d1487a4d773add12b880c43ef20a",
+      "bytes": 7090
+    },
+    {
+      "path": "size-summary.json",
+      "sha256": "9affc99ebe66574c6e9b2346ff0cc5599cc9c13225bba4ece8330b6e7327a2d8",
+      "bytes": 906
+    },
+    {
+      "path": "visuals/rich-editor-desktop.png",
+      "sha256": "d46590f031ab0961c4f11800309a21c44be84cd1115a4e3a44016c3cf86e7056",
+      "bytes": 156916
+    },
+    {
+      "path": "visuals/rich-editor-mobile.png",
+      "sha256": "0cab8751ee4e740f676dac8ff22cc43ca12804c0fe7a6daa2c5f6f232c93e97f",
+      "bytes": 120416
+    }
+  ]
+}

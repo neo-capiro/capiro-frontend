@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/tmp/capiro-unified-83f54f5a-final-gate-independent-review-20261013/verify.py", line 59, in <module>
+    name=f'portfolio-shard-{n}';d,cc=validate_run(name,count,passed,failed,2)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/capiro-unified-83f54f5a-final-gate-independent-review-20261013/verify.py", line 54, in validate_run
+    for key in ['file','title','line','project','timeout','expectedStatus']:assert c[key]==di[c['id']][key],(key,c)
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('timeout', {'id': 'adc3254f0aa778bb9311-1b8cd8f1873b07558c8f', 'file': 'capability-presentation-visual.spec.ts', 'title': 'Figma capability Profile, Documents and create surfaces at desktop-light', 'line': 42, 'project': '', 'timeout': 90000, 'expectedStatus': 'passed', 'status': 'expected', 'results': [{'workerIndex': 1, 'parallelIndex': 1, 'status': 'passed', 'duration': 8806, 'errors': [], 'stdout': [], 'stderr': [], 'retry': 0, 'startTime': '2026-10-13T08:08:17.683Z', 'annotations': [{'type': 'slow', 'location': {'file': '/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts', 'line': 47, 'column': 10}}], 'attachments': []}]})

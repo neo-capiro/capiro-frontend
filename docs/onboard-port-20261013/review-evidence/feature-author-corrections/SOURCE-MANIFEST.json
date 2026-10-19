@@ -1,0 +1,465 @@
+{
+  "atUTC": "2026-10-13T05:34:02.131Z",
+  "records": [
+    {
+      "file": "apps/web/public/onboard/favicon.svg",
+      "size": 310,
+      "sha256": "6b853e45dfd9c0b5de548d2d1fa779330c09f6cda89f52c1d1bf6b3ca44904c4"
+    },
+    {
+      "file": "apps/web/public/onboard/fonts/hanken-grotesk-latin.woff2",
+      "size": 34704,
+      "sha256": "e9201eddf1d41d0b62253295d869ce3cf65768f7102b797f02c7f8c876b4a9d5"
+    },
+    {
+      "file": "apps/web/public/onboard/fonts/jetbrains-mono-latin.woff2",
+      "size": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+    },
+    {
+      "file": "apps/web/public/onboard/fonts/newsreader-latin.woff2",
+      "size": 132000,
+      "sha256": "6e4f2958c3a7c4a80acde4e5a679abe7e01bc1e30b92be3c7a8b696ef401d101"
+    },
+    {
+      "file": "apps/web/public/onboard/legal-docs/Capiro-Subscription-Agreement.pdf",
+      "size": 201149,
+      "sha256": "2ae1437094f9310c9e9cf49c71aa1725e06823c02fba6cb546d40e3cedd33ff5"
+    },
+    {
+      "file": "apps/web/public/onboard/legal-docs/Capiro-Terms-of-Service.pdf",
+      "size": 58509,
+      "sha256": "94e03031d00eaf759c7e55795aa89edfa5429bf667c3ce9f975f8f2b69b6d5d2"
+    },
+    {
+      "file": "apps/web/src/features/onboard/OnboardPage.tsx",
+      "size": 2491,
+      "sha256": "f1a5eb1b39ee1e6539ee6ab924ade5170ade1c9cb9b268f15495f9dfa3394621"
+    },
+    {
+      "file": "apps/web/src/features/onboard/OnboardSurface.tsx",
+      "size": 505,
+      "sha256": "f1fd5f14c1348f2817bab772bd5a41e9f0e8d71673a1df2c9a99c55882814f2d"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/FunnelLifetime.tsx",
+      "size": 1139,
+      "sha256": "93ec7409af5d10cb93b960f3bf0647db21456e404cf74f4b7e4230154815473b"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/SetupOverlayLifetime.tsx",
+      "size": 1131,
+      "sha256": "b1e5914766bdb28be45e158ed5546088d22b47560e280205a6a336d0f6787808"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+      "size": 3701,
+      "sha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/capiro-api.ts",
+      "size": 1182,
+      "sha256": "3239f3a33f13ee57c2d697c448426fd90354b194437cee6afd8b3a63cf881adb"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/clerk-input-attempt.ts",
+      "size": 948,
+      "sha256": "2b7465e44ea67a22287495b81f14a02d0bc9e01f1690327154fa17d10e4bd4b8"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/current-query-read.ts",
+      "size": 1123,
+      "sha256": "59c23955f3206c889eada2aaae3d897a61c9dfd00da84f5647f28c5f856ce482"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/dates.ts",
+      "size": 707,
+      "sha256": "d18d61035adb610f0bbbbf7108260a0465693ed819a1e4f55073016bc5e6bbf3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/funnel-lifetime.ts",
+      "size": 1557,
+      "sha256": "aa49eb5d947a5be70354b1c328461fba3634213a62afefa06c5a1478306fa385"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/funnel-routes.ts",
+      "size": 961,
+      "sha256": "4126aa44e48f4dfe16cc3216c3d56d9740803783ef2a74e946eccf90af91ef72"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/funnel-session-read.ts",
+      "size": 1112,
+      "sha256": "072036005da477ecff387e2b3e4aacbd059b88fa88ae45d2554338b978aa439d"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/funnel.ts",
+      "size": 1882,
+      "sha256": "557935bcb07dadd12d3e5552a999bd2ac5a4b09caab2837ca81cad92a797ada7"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/import-client-selection.ts",
+      "size": 1605,
+      "sha256": "848c7281690493897dbfa30c679c5ee9c265c3d5ef295c6acf92cfc7f88916d0"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/invite-sequence.ts",
+      "size": 1172,
+      "sha256": "f09dc050bcd30f68cd0943e27146260b9a922a602270122220cf5943652dbbd1"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/it-invite-intent.ts",
+      "size": 1264,
+      "sha256": "ce2ac8695999e967caa73d3ca0324c626a26558fab6a64fa3d743011a27b54d0"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/legal-review-lifetime.ts",
+      "size": 1704,
+      "sha256": "cabd6813f4fce9923db4d66d46b955a34ea28cb327a7a86106bbb523fbf902d9"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/registration-draft.ts",
+      "size": 5431,
+      "sha256": "39dfc4fbf0be8615e49c598f56a3dafe70328c3fd8550dd80a43e3dd0202348c"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/setup-overlay-lifetime.ts",
+      "size": 1735,
+      "sha256": "a61eee35f40fa96575410d76ee54545a4eb685dbd1f445bdc35e7c55465672e3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/setup-state-read.ts",
+      "size": 1021,
+      "sha256": "25e6c4dc8c28f21b8394d3af2c60e2cbadbd535a3e54e6529fdbd09df112014c"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/setup.ts",
+      "size": 1517,
+      "sha256": "85045d51ff174a5f4798b36ab460600b54a02b2251f62bec3fefc9bc095e7aba"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/stripe-confirmation.ts",
+      "size": 2282,
+      "sha256": "5af49dabbf76f9edf258803fc79fad5fd8a46382fda6b460227275a3f3ee798c"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/use-client-import.ts",
+      "size": 2586,
+      "sha256": "369a6c2dfe43df3bf5683230f8df5b89e19bb264327157c311b186a94c3eacfe"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/use-local-record.ts",
+      "size": 644,
+      "sha256": "451109ddf3da3d019a1abe12359b49eee0c0a7fbb3b1a687b83201813272c765"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+      "size": 1462,
+      "sha256": "db486436c047b54bb43d71aa22ab118366611553d60230f68421478537dcddc3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/use-team-invites.ts",
+      "size": 724,
+      "sha256": "e15fb1a6866f699b95787b8a69859294a046ae44a7f01460555a91c84d1f1ee9"
+    },
+    {
+      "file": "apps/web/src/features/onboard/navigation.tsx",
+      "size": 872,
+      "sha256": "588cfb033e42fbb997b4591f6fe9c0ff48b4127e20bb8687f91a766976d62fa3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/onboard.css",
+      "size": 4119,
+      "sha256": "89728d1a9a2eaa509f43ba30bd942914cb6ef29940d137b4981af7264dd02d3c"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/AdminsPage.tsx",
+      "size": 13362,
+      "sha256": "31ba277abbfa93f755a91213d114873b1aad7edf18fe915d12bc8b3ad82b57f2"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/BillingControls.tsx",
+      "size": 941,
+      "sha256": "3a2befbf8090a74376cbed9383c1e5ec9d545a74cbe315e237cc86f8c5dc4ec4"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/BillingPage.tsx",
+      "size": 394,
+      "sha256": "cbd24de2c20d71376a672d134f91106fb1c70f1f2f3dd816dcf51c88191f96d0"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/ClientsPage.tsx",
+      "size": 3786,
+      "sha256": "fd63e77302f67ce2b0e886127d663bf129f0adb21c1238f295d696523de7e365"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+      "size": 13692,
+      "sha256": "a1f5d7b34beee7243ee5d4c9c83dcff975fffcf88f4fde58eef90d8cbcbc45c4"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/FunnelStepGuard.tsx",
+      "size": 2907,
+      "sha256": "02147786a68357423bbb7b998fd67ed84dc58c2a80b73c64cee577ef554e3386"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/LegalDocumentBlock.tsx",
+      "size": 1834,
+      "sha256": "ae9ae98281410d99ac39cfd3fcebcc4d4ddbe4ce2ace08a659afb161995a0f44"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+      "size": 2308,
+      "sha256": "c22e71a8cbc01dc90fce2cc4fbff7a50b08b8d5d4987a970c2519530c535c74e"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/LegalReview.tsx",
+      "size": 12111,
+      "sha256": "3af1e67458d19ba2450de61ddeef608dc763827675df5236a75e0c315b006b03"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/OrgPage.tsx",
+      "size": 13244,
+      "sha256": "7877fb7c87bdce451d3b47120cfd4bb54b94601f42611f6edb30157e881b4e85"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/PaidBilling.tsx",
+      "size": 14736,
+      "sha256": "21d4d278bef2031c29ff0af4045607602425a716a73f44a1acd8209b24d316d8"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/PlanPage.tsx",
+      "size": 7052,
+      "sha256": "1f34801e3ed78006d704547e2684db1aba56a6f1d0e97846fac7e59c2cb4ff1b"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/RegisterPage.tsx",
+      "size": 11915,
+      "sha256": "f875d39d845d2251035f769f4bb584e093a46c57a4c6a905eedacab4deb74583"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/StripePayment.tsx",
+      "size": 5129,
+      "sha256": "f4765b2eb2b4968f525d38ca481be129d5c6a72991caedd0450a779f9d4a7457"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/TrialBilling.tsx",
+      "size": 11900,
+      "sha256": "a009499fa185ffdb66e597d04e333af355da2330fe0d81d3014166f3c7de4fe8"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/VerifyPage.tsx",
+      "size": 8544,
+      "sha256": "2192b6ff0c52e0cb5639a22f5aede0fabe4625e8740170f753a069c4c1b178b5"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/funnel/shared.tsx",
+      "size": 604,
+      "sha256": "d09549ce01ad85e880c7af1daab67367effbea058e7d3fdd22df481ceec403a7"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+      "size": 13438,
+      "sha256": "d1fe4827735c592eeaf3661f07cc402e1f9084eef273be82861fbf455cf3ec7b"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/it/ItDonePage.tsx",
+      "size": 3881,
+      "sha256": "94d0a7a479bfec03ae9c8cc23d82a99520abfcfdf207f5bf4bd24804063a5ba0"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/it/ItErrorPage.tsx",
+      "size": 2996,
+      "sha256": "a6c39e0a49d69737113eea49041dcc145e6ed2e7fcadc3b483b6189d64b1883f"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/AcceptInvitePage.tsx",
+      "size": 10803,
+      "sha256": "98eecd3a4c007f20e70db8cabfe82ca85543f9c7e1bf608dbaa01e3a2d98077b"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/AiSettingsOverlay.tsx",
+      "size": 10004,
+      "sha256": "7e23a4cca5ea963bc24e4161c55ffa6d8545a1b94919d32eeed79b8f42ab3938"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/ClientImportTask.tsx",
+      "size": 2997,
+      "sha256": "8a951c3ebbf21760d7c1b81cff1e4cc3f58275d57e8af754917ab1759e561043"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/EmailSetupTask.tsx",
+      "size": 4964,
+      "sha256": "95d6ceef5ac7ad5a26071745c11b483c723a003180a04e0c43b020a378f2227f"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/ExtShell.tsx",
+      "size": 5378,
+      "sha256": "5d0deb477e295b651bf664fc0fa1bb326e32513250c86c5bd1d7e5bcd84b1161"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/FirmRegistrantSearch.tsx",
+      "size": 6375,
+      "sha256": "d3bf1d8145b11c9724a3d2d878bb84c3a13ab861e130c5d18df10a99907e7f89"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/ImportCandidateRow.tsx",
+      "size": 3334,
+      "sha256": "32db205f692d2aefe3367d14824e54075946c59967bfd3eeb3e5c2f0cd20917d"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/ImportCandidateSelection.tsx",
+      "size": 8096,
+      "sha256": "8a70718651d57b8b5aa97e82b6b8eab4f4fe4302815509b1eb648cb7e6d6b6d1"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/ImportOverlay.tsx",
+      "size": 1662,
+      "sha256": "12a1125e5022404905a45a6c04f25e9e02f343e09d40c08ea7f3658d668858eb"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/InvitesOverlay.tsx",
+      "size": 10311,
+      "sha256": "173b2fa48e6ad960b35cc91c41be8145b64c26faa7c36d2d591c35c097b6a8e4"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/ManualClientForm.tsx",
+      "size": 5005,
+      "sha256": "10de9a98acba93f8c77d58b8dc572655297783eda0af50f712de83c61efcc6a5"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/SetupDashboardPage.tsx",
+      "size": 2751,
+      "sha256": "04939035fdceb8ded97f72e20ce50d3872845cecaf42b0e5133a3c01060e79fb"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/SetupWorkspace.tsx",
+      "size": 8535,
+      "sha256": "83a10f840b20de050e2970aa25ab6574d981f1759223493fd8b1bd1faf863bb5"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/WorkspaceMembership.tsx",
+      "size": 6066,
+      "sha256": "40727d3ad5243447027f47f71bb926412b35a88e90fc6176e60f6da0d9fe6da4"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/useImportWorkflow.ts",
+      "size": 7843,
+      "sha256": "7ac2809b316f83c337e8979b99b1d47f0d89b71876a61cc057ddcdac7ccae6a3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/setup/useSetupActions.ts",
+      "size": 3841,
+      "sha256": "47b8e5a4b74a0d835730cea73fd52b5bbf90975827eebf01c826eba6323be719"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/AttemptStatus.tsx",
+      "size": 1827,
+      "sha256": "5de8b068a409154f16dd0a8a77fe5e4e53c8d4e2370024d6b6f65e33c1fbdb0e"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/ImportOutcome.tsx",
+      "size": 1158,
+      "sha256": "d5e0b3cab4379a46ab4aaab543c5fce0ffc00b7bdaceccecb55d39498ca240b2"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/Modal.tsx",
+      "size": 2584,
+      "sha256": "5ec445ea808d939e0876129fbfc7e2e2106ccd69b47a7d7f1f757a36bb92a8ba"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/forms.tsx",
+      "size": 5799,
+      "sha256": "eb6b7d1fa91a31e2d7917a92eea55c2f6734c9b6b81ad70217a39156477db13a"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/icons.tsx",
+      "size": 4071,
+      "sha256": "afb9ec8e9ad0402e67d8de7ecebe1dad6d168b83b1b30a3468a577a170594dda"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/panels.tsx",
+      "size": 5539,
+      "sha256": "6cad0cd0e211e950fb5fc8b915cc2e48d12b721a4e60a0892b86f9efe047cf1f"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/primitives.tsx",
+      "size": 200,
+      "sha256": "7790d75f8da19ee74ecf915b4107adeae3f427849d5ec3df969006f9babc8272"
+    },
+    {
+      "file": "apps/web/src/features/onboard/ui/shell.tsx",
+      "size": 6027,
+      "sha256": "7bed19ac6fbb83e2dc9959dd6dca83337d2693e933e9d2db4d78e35b3b70f01a"
+    },
+    {
+      "file": "apps/web/src/features/onboard/useConfig.ts",
+      "size": 538,
+      "sha256": "807960da17deaab5d3099fc40abeef2412d511974ea969ebe930bdfdbf42aa9d"
+    },
+    {
+      "file": "apps/web/tests/onboard-attempt-journal.test.ts",
+      "size": 5113,
+      "sha256": "82ffaf0ab658c5046a0e0ec34fbb0852f7abbf29a5112b56ad8d24dc3b20a574"
+    },
+    {
+      "file": "apps/web/tests/onboard-funnel-current-read.test.ts",
+      "size": 9043,
+      "sha256": "faa4d2d03d459879b9a2a6c96b16da91f6e1b0f61b1ec2ab04f000859d4f6b12"
+    },
+    {
+      "file": "apps/web/tests/onboard-funnel-lifetime.test.ts",
+      "size": 4602,
+      "sha256": "e290570a3636875207cd200edb43db6c92d4f03e90f78452ba4439cdeb8b53ac"
+    },
+    {
+      "file": "apps/web/tests/onboard-import-recovery.test.ts",
+      "size": 1325,
+      "sha256": "ca6d927037677e5a8aaabeefb0da54b1791c6a59076dd73e19243fecaacc7d80"
+    },
+    {
+      "file": "apps/web/tests/onboard-input-refusal.test.ts",
+      "size": 2364,
+      "sha256": "20bb93688019473c4dfac37af005af67d1ad467297fb1e01510369a4f4b62f49"
+    },
+    {
+      "file": "apps/web/tests/onboard-invitation-recovery.test.ts",
+      "size": 3570,
+      "sha256": "281e482e0f2aa2817318350960173d6224a71a2a9af441613098f29de397e1e0"
+    },
+    {
+      "file": "apps/web/tests/onboard-it-current-invite.test.ts",
+      "size": 4337,
+      "sha256": "0ad1ae53445c7c71f441242ea0ae08aca0427b29b21ec479a285e25b285afff7"
+    },
+    {
+      "file": "apps/web/tests/onboard-it-return.test.ts",
+      "size": 1151,
+      "sha256": "69150f322efc13bb957082de0858c9d38262b9178dfa3fc59a1ff10e54b0db3a"
+    },
+    {
+      "file": "apps/web/tests/onboard-legal-review.test.ts",
+      "size": 6510,
+      "sha256": "9d61e67d9588e9cdd88d759b50b0749e9451d0af3bbb2acf6e51a749722fd912"
+    },
+    {
+      "file": "apps/web/tests/onboard-lifecycle.test.ts",
+      "size": 3373,
+      "sha256": "02cf10267053075c4e16a6af7fff3a803b1d7f55e09a64ddb6c903d594c30610"
+    },
+    {
+      "file": "apps/web/tests/onboard-registration-draft.test.ts",
+      "size": 7104,
+      "sha256": "3f4038f26afe663519ab47278d37f76b76cb6f78c5d83dd3da035150e2056ead"
+    },
+    {
+      "file": "apps/web/tests/onboard-setup-eligibility.test.ts",
+      "size": 11784,
+      "sha256": "840657a15f52007702ee148f9526ecde39d960e32e08f756de351f1f5e0db578"
+    },
+    {
+      "file": "apps/web/tests/onboard-stripe-confirmation.test.ts",
+      "size": 6757,
+      "sha256": "673277f01a75b85a75eeddc3a50590d338e874742244e90fbf2bd05aec4aacda"
+    }
+  ]
+}

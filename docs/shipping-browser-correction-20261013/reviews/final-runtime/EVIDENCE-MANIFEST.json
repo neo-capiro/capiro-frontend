@@ -1,0 +1,128 @@
+{
+  "sealedAtUTC": "2026-10-13T03:21:48.222710+00:00",
+  "files": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 5815,
+      "sha256": "a82ff5a02c28022aa417811269d1840dfd875d03ee7fadf2cbb05b8bff431039"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 21919,
+      "sha256": "61bab211c999db229192ffdc327bfe902c502ef067d6d66fd5bae0aa66d8e53b"
+    },
+    {
+      "path": "receipts/final-modules-browser-exit.json",
+      "bytes": 940,
+      "sha256": "e4cdef72eb8f9153b3019cdef117f46b2b7dd90e614dac91d11b82cb5945bc22"
+    },
+    {
+      "path": "receipts/final-modules-browser.log",
+      "bytes": 30977,
+      "sha256": "778a200407ba70c841d1a5d7c4ae9f0687a37f399d6941ae8b63be2ad093cf14"
+    },
+    {
+      "path": "receipts/final-portfolio-browser-v2-exit.json",
+      "bytes": 1066,
+      "sha256": "2f73c1a923451b24af94463403c95c3ce85bd851b2c54aae12f932d57d64fd39"
+    },
+    {
+      "path": "receipts/final-production/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "receipts/final-production/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    },
+    {
+      "path": "receipts/final-production/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "path": "receipts/final-production/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    },
+    {
+      "path": "receipts/final-production/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "path": "receipts/final-production/production-smoke.json",
+      "bytes": 3624,
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f"
+    },
+    {
+      "path": "receipts/final-production/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "receipts/final-production/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "receipts/final-production-build-exit.json",
+      "bytes": 785,
+      "sha256": "237e3a30cf2afcc8744dfd642e4e13858c9eba092494c5ca84d4a79f6e5dcb6c"
+    },
+    {
+      "path": "receipts/final-production-build.log",
+      "bytes": 2233,
+      "sha256": "c9185f5987e5eefa1684240118d7f5a58645189a8764f9538f68fd23ff7d2149"
+    },
+    {
+      "path": "receipts/final-production-server-exit.json",
+      "bytes": 908,
+      "sha256": "5e1f3818559bb4967bc64ae68ca782215b6a06e55c83ba0d53f2adb3bb9e7d83"
+    },
+    {
+      "path": "receipts/final-production-server.log",
+      "bytes": 4253,
+      "sha256": "342cfad9425c0402855d1ea0ea0487fdd1c2cb542715aae130b683409287dfd7"
+    },
+    {
+      "path": "reviewed-source/apps/web/playwright.config.ts",
+      "bytes": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "reviewed-source/apps/web/test/browser/playwright.config.ts",
+      "bytes": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    },
+    {
+      "path": "reviewed-source/docs/shipping-browser-correction-20261013/FROZEN-SOURCE-MANIFEST.json",
+      "bytes": 2140,
+      "sha256": "4798b1df374f43a7a04201771eb95be834a0413a684262888f280a541d944cff"
+    },
+    {
+      "path": "reviewed-source/docs/shipping-browser-correction-20261013/IMPLEMENTATION.md",
+      "bytes": 5479,
+      "sha256": "0dceb4daba4d6cc7355526809973d4d40053f91e2fa1cb71070be0cfec54e9ea"
+    },
+    {
+      "path": "reviewed-source/docs/shipping-browser-correction-20261013/qualify-frozen-source.sh",
+      "bytes": 4555,
+      "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac"
+    }
+  ],
+  "fileCount": 24,
+  "totalBytes": 202274,
+  "scope": "Bounded existing-receipt/source/image review; manifest excludes itself; previous packets untouched"
+}

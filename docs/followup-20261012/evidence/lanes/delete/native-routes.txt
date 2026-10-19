@@ -1,0 +1,63 @@
+apps/api/src/engagement/engagement.controller.ts @ 243248e726243c44bd4b9d24fd1ed220da18c56a; complete source SHA256 9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae
+2897:   @Get('attachments')
+2898:   attachments(
+2899:     @CurrentTenant() ctx: TenantContext,
+2900:     @Query('clientId') clientId?: string,
+2901:     @Query('meetingId') meetingId?: string,
+2902:     @Query('mailMessageId') mailMessageId?: string,
+2903:     @Query('unlinked') unlinked?: string,
+2904:     @Query('prospectId') prospectId?: string,
+2905:   ) {
+2906:     return this.service.listAttachments(ctx, {
+2907:       prospectId,
+2908:       clientId,
+2909:       meetingId,
+2910:       mailMessageId,
+2911:       // General (client-free) outreach library: files with no parent entity.
+2912:       unlinked: unlinked === 'true' || unlinked === '1',
+2913:     });
+2914:   }
+2915: 
+2916:   @Post('attachments/:id/extract-text')
+2917:   @EngagementRuntimeAction('attachment_external_read')
+2918:   extractAttachmentText(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+2919:     return this.service.extractAttachmentText(ctx, id);
+2920:   }
+2921: 
+2922:   @Post('attachments/:id/context-text')
+2923:   @EngagementRuntimeAction('attachment_external_read')
+2924:   extractAttachmentContext(
+2925:     @CurrentTenant() ctx: TenantContext,
+2926:     @Param('id') id: string,
+2927:     @Body() body: AttachmentContextReadDto,
+2928:   ) {
+2929:     return this.service.extractAttachmentText(ctx, id, {
+2930:       clientId: body.clientId,
+2931:       contextImport: true,
+2932:     });
+2933:   }
+2934: 
+2935:   @Post('attachments/:id/context-source')
+2936:   @EngagementRuntimeAction('attachment_external_read')
+2937:   async attachmentContextSource(
+2938:     @CurrentTenant() ctx: TenantContext,
+2939:     @Param('id') id: string,
+2940:     @Body() body: AttachmentContextReadDto,
+2941:   ) {
+2942:     const source = await this.service.extractAttachmentText(ctx, id, {
+2943:       clientId: body.clientId,
+2944:       contextSourceOnly: true,
+2945:     });
+2946:     return {
+2947:       attachmentId: source.attachmentId,
+2948:       clientId: body.clientId,
+2949:       fileName: source.fileName,
+2950:       contentType: source.contentType,
+2951:       contentHash: source.contentHash,
+2952:     };
+2953:   }
+2954: 
+2955:   @Delete('attachments/:id')
+2956:   deleteAttachment(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+2957:     return this.service.deleteAttachment(ctx, id);
+2958:   }

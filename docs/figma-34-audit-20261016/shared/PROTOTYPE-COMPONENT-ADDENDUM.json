@@ -1,0 +1,1030 @@
+{
+  "schemaVersion": 1,
+  "taskDate": "2026-10-16",
+  "title": "Prototype component identity addendum",
+  "scope": {
+    "fileKey": "zGvvF6V6hh7yweoplCdpdE",
+    "prototypePageId": "1064:140864",
+    "componentsPageId": "2:107",
+    "baselineInventorySourceCommit": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd"
+  },
+  "status": "IDENTITY_JOIN_COMPLETE; UNMATCHED_DEFINITION_REVIEW_PENDING",
+  "counts": {
+    "componentsUniqueDefinitions": 418,
+    "componentsNonMeriDefinitions": 348,
+    "componentsMeriOtherOwnerDefinitions": 70,
+    "visibleBodyMasterReferences": 69,
+    "visibleChromeMasterReferences": 5,
+    "visibleMasterReferenceUnion": 74,
+    "hiddenRootChromeAdditionalReferences": 4,
+    "allObservedDistinctMasterReferences": 78,
+    "exactComponentsDefinitionMatches": 44,
+    "knownPrototypeDefinitionMatches": 32,
+    "masterOwnerLocationUnresolved": 2,
+    "unmatchedObservedMasterReferences": 34,
+    "matchedComponentsFamilies": 17,
+    "prototypeStructuralFamiliesCatalogued": 18,
+    "prototypeStructuralDefinitionIds": 67,
+    "prototypeObservedAmongThese": 32,
+    "prototypeUnobservedSiblings": 35,
+    "prototypeNonMeriDefinitionIds": 64,
+    "prototypeMeriOtherOwnerDefinitionIds": 3,
+    "minimumKnownDefinitionIdsAcrossRetainedComponentsAndCataloguedPrototypeFamilies": 485,
+    "structuralRootFrames": 93,
+    "structuralComponentPatternFrames": 30,
+    "structuralReferenceFrames": 27,
+    "structuralMeriBoundaryFrames": 36,
+    "structuralPatternFramesWithEnumeratedFamilyDefinitions": 12,
+    "calendarScopeInstanceFrames": 3,
+    "otherPatternFramesPendingDescendantDefinitionJoin": 15
+  },
+  "arithmetic": [
+    "69 visible body + 5 disjoint visible chrome = 74 observed visible master references; 4 hidden-root chrome IDs give 78 distinct observed references.",
+    "44 exact Components matches + 32 known Modules Prototype master definitions + 2 unresolved owner/location references = 78.",
+    "32 observed Prototype definitions + 35 unobserved direct-symbol siblings = 67 definitions across 18 structural families; none overlaps the retained 418-symbol inventory.",
+    "418 mirrored Components definitions + 67 catalogued Modules Prototype definitions = 485 known definition IDs in these enumerated sets only. This is not the complete Prototype master universe; the 2 owner-unresolved references are excluded.",
+    "93 FRAME roots = 30 component/pattern + 27 reference/historical + 36 Meri boundary. They are not master IDs or extra screen/body acceptance credits."
+  ],
+  "evidence": {
+    "normalizedJoin": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/figma34/shared/PROTOTYPE-COMPONENT-JOIN-EVIDENCE.json",
+      "sha256": "0c2f93edc3db12d7d9dfb1044c3c4dbe6632a9dd793795f65845f3e8cd4453a7",
+      "bytes": 95865
+    },
+    "componentsInventory": {
+      "path": "COMPONENT-INVENTORY.json",
+      "sha256": "9711516c7c113c62cd12456bc95d3a4b291c8437c80089a3b34caf22d51d5e19"
+    },
+    "modulesVisibleInstanceProof": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/figma34/modules/control-audit-v2/INSTANCE-REUSE-PROOF.json",
+      "sha256": "8f7f6a234c6dbef290a17a45e362256bb2ba8b5baf5e4299745999336455ed0d"
+    },
+    "structuralRegister": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/figma34/modules/control-audit-v2/STRUCTURAL-EXCLUSION-REGISTER.json",
+      "sha256": "30c9044834a9f627e9ac07e0f852f8b528ee469a1f1d98d018a18b9facbed652"
+    },
+    "hierarchyCustody": "Modules auditor cached Prototype XML/index supplied exact parent/direct-symbol projection. Hidden4 and sibling67 are separately labelled in normalized evidence; do not attribute them to the visible-only proof.",
+    "mirroredMetadataEquivalenceSha256": "001338bbe1eeeb4115718e586a47103fe9caaba1c9ddbcbbb82b2e6444710767"
+  },
+  "matchedComponentsGroups": [
+    {
+      "familyId": "12:369",
+      "name": "v2 · Button",
+      "observedMasterIds": [
+        "12:370",
+        "12:376",
+        "12:382"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "packages/ui/src/shadcn/button.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-buttons.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SH-IMP-01_RADIUS_MISMATCH_FOR_MODULE_ACTIONBUTTON",
+      "testConfidence": "UNRUN; Future focused component rendering: primary/outline/ghost,36px/14px/10px; keyboard, disabled, no reaction while pending"
+    },
+    {
+      "familyId": "293:31360",
+      "name": "v2/Calendar event · Schedule-X",
+      "observedMasterIds": [
+        "293:31335",
+        "293:31340",
+        "293:31348",
+        "293:31353",
+        "293:31358"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-calendar-events.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "testConfidence": "UNRUN; Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "familyId": "29:405",
+      "name": "v2 · Source toggle",
+      "observedMasterIds": [
+        "29:406",
+        "29:416",
+        "29:426",
+        "29:436",
+        "29:446"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-source-toggles.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "testConfidence": "UNRUN; Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "familyId": "29:499",
+      "name": "v2 · Week event",
+      "observedMasterIds": [
+        "29:500",
+        "29:503"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-legacy-week-event.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "testConfidence": "UNRUN; Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "familyId": "313:32568",
+      "name": "v2/Calendar week event",
+      "observedMasterIds": [
+        "313:32560"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-calendar-week.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "testConfidence": "UNRUN; Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "familyId": "373:38394",
+      "name": "v2/Engagement · Outreach detail",
+      "observedMasterIds": [
+        "373:38394"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-outreach-detail.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "testConfidence": "UNRUN; Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "familyId": "394:41443",
+      "name": "v2/Engagement · Action button",
+      "observedMasterIds": [
+        "394:41441"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "packages/ui/src/shadcn/button.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-action-buttons.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SH-IMP-01_RADIUS_MISMATCH_FOR_MODULE_ACTIONBUTTON",
+      "testConfidence": "UNRUN; Future focused component rendering: primary/outline/ghost,36px/14px/10px; keyboard, disabled, no reaction while pending"
+    },
+    {
+      "familyId": "471:92866",
+      "name": "Capiro 3.1/Shared sidebar",
+      "observedMasterIds": [
+        "471:92355",
+        "471:92780",
+        "471:92526"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY",
+        "VISIBLE_CHROME"
+      ],
+      "sourcePaths": [
+        "apps/web/src/shared/shell/ModuleNavigation.tsx",
+        "apps/web/src/shared/shell/module-shell.module.css",
+        "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+        "apps/web/src/shared/portfolio/shell/shell.module.css"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-sidebar.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "DESKTOP232_TABLET72_EXIST_IN_SOURCE_RESPONSIVE_PARITY_PENDING",
+      "testConfidence": "UNRUN; Future: desktop/tablet current item, Settings bottom, client scope, tooltip/access name, scroll/keyboard; phone deferred"
+    },
+    {
+      "familyId": "526:43330",
+      "name": "v2/Document editor · Plate toolbar",
+      "observedMasterIds": [
+        "526:42837"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/rich-document.module.css"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-plate-toolbar.json",
+        "audit-evidence/figma34/shared/context-plan-editor.json",
+        "audit-evidence/figma34/shared/context-report-builder.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SH-IMP-05_DESIGNED_PLATE_COMPOSITION_VS_EXISTING_TIPTAP_SUBSET",
+      "testConfidence": "UNRUN; Existing prospect-rich-document-end.spec.ts and newsletter-document-lifecycle.spec.ts; future container-width toolbar, read-only rendering, source/saved payload parity. Suggesting/comments require owner contract"
+    },
+    {
+      "familyId": "542:43607",
+      "name": "v2/Planning · Kibo Gantt bar",
+      "observedMasterIds": [
+        "542:43599",
+        "542:43601",
+        "542:43603",
+        "542:43605"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-kibo-review.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "testConfidence": "UNRUN; Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "familyId": "542:43644",
+      "name": "v2/Planning · Kibo Kanban card",
+      "observedMasterIds": [
+        "542:43640",
+        "542:43641",
+        "542:43642",
+        "542:43643"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-kibo-review.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "testConfidence": "UNRUN; Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "familyId": "542:43701",
+      "name": "v2/Planning · Kibo group header",
+      "observedMasterIds": [
+        "542:43697",
+        "542:43698",
+        "542:43699",
+        "542:43700"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-kibo-review.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "testConfidence": "UNRUN; Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "familyId": "542:43784",
+      "name": "v2/Planning · Kibo milestone",
+      "observedMasterIds": [
+        "542:43781"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-kibo-review.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "testConfidence": "UNRUN; Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "familyId": "563:44165",
+      "name": "v2/Cascader · ReUI trigger",
+      "observedMasterIds": [
+        "563:44154"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/catalog.ts"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-cascader-trigger.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SINGLE_VALUE_EXISTING_NO_UNALLOCATED_MULTI_BROADENING",
+      "testConfidence": "UNRUN; Existing committee-picker.spec.ts/committee-catalog.test.ts; branch!=selection, Enter/Esc/arrows, empty/search/fullpath; future loading/retry/multi only for actual caller"
+    },
+    {
+      "familyId": "563:44221",
+      "name": "v2/Cascader · ReUI option",
+      "observedMasterIds": [
+        "563:44215"
+      ],
+      "observationScopes": [
+        "VISIBLE_BODY"
+      ],
+      "sourcePaths": [
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/catalog.ts"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-cascader-panels.json",
+        "audit-evidence/figma34/shared/context-cascader-options.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SINGLE_VALUE_EXISTING_NO_UNALLOCATED_MULTI_BROADENING",
+      "testConfidence": "UNRUN; Existing committee-picker.spec.ts/committee-catalog.test.ts; branch!=selection, Enter/Esc/arrows, empty/search/fullpath; future loading/retry/multi only for actual caller"
+    },
+    {
+      "familyId": "469:92041",
+      "name": "Capiro 3.1/Shared header",
+      "observedMasterIds": [
+        "469:91842",
+        "469:41552",
+        "469:41500"
+      ],
+      "observationScopes": [
+        "VISIBLE_CHROME"
+      ],
+      "sourcePaths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-header.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "testConfidence": "UNRUN; Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    },
+    {
+      "familyId": "34:405",
+      "name": "v2 · Top nav",
+      "observedMasterIds": [
+        "34:598",
+        "34:490",
+        "34:448",
+        "34:532"
+      ],
+      "observationScopes": [
+        "HIDDEN_ROOT_CHROME"
+      ],
+      "sourcePaths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "priorDesignEvidence": [
+        "audit-evidence/figma34/shared/context-legacy-top-nav.json"
+      ],
+      "sourceBaseline": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "status": "COVERED_BY_EXISTING_COMPONENTS_IDENTITY_INVENTORY; NOT_IMPLEMENTATION_ACCEPTANCE",
+      "existingAssessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "testConfidence": "UNRUN; Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    }
+  ],
+  "prototypeFamilies": [
+    {
+      "id": "1064:140881",
+      "name": "Info tip",
+      "sectionId": "1064:140866",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:140882",
+        "1064:140884"
+      ],
+      "observedMasterIds": [
+        "1064:140882"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:143884",
+      "name": "Meri/AI Elements/Sources",
+      "sectionId": "3003:300144",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "MERI_OTHER_OWNER",
+      "definitionIds": [
+        "1064:143885",
+        "1064:143889",
+        "1064:143894"
+      ],
+      "observedMasterIds": [
+        "1064:143889"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Meri/Fable lane; inventory referral only",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:178407",
+      "name": "v2/Engagement · Meeting workspace",
+      "sectionId": "3003:300144",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:178408",
+        "1064:178465",
+        "1064:178501",
+        "1064:178547",
+        "1064:178588",
+        "1064:178644",
+        "1064:178676",
+        "1064:178709"
+      ],
+      "observedMasterIds": [
+        "1064:178408"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267145",
+      "name": "LegiWatch/Hearing card",
+      "sectionId": "1064:267144",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267146",
+        "1064:267151",
+        "1064:267156",
+        "1064:267161",
+        "1064:267166",
+        "1064:267171",
+        "1064:267176"
+      ],
+      "observedMasterIds": [
+        "1064:267146",
+        "1064:267156",
+        "1064:267161",
+        "1064:267171"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267181",
+      "name": "LegiWatch/Committee card",
+      "sectionId": "1064:267144",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267182",
+        "1064:267187",
+        "1064:267192",
+        "1064:267197",
+        "1064:267202",
+        "1064:267207"
+      ],
+      "observedMasterIds": [
+        "1064:267182",
+        "1064:267187",
+        "1064:267197"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267212",
+      "name": "LegiWatch/Transcript segment",
+      "sectionId": "1064:267144",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267213",
+        "1064:267218",
+        "1064:267223",
+        "1064:267228",
+        "1064:267233"
+      ],
+      "observedMasterIds": [
+        "1064:267213",
+        "1064:267218",
+        "1064:267223",
+        "1064:267228"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267238",
+      "name": "LegiWatch/Evidence card",
+      "sectionId": "1064:267144",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267239",
+        "1064:267244",
+        "1064:267249",
+        "1064:267254"
+      ],
+      "observedMasterIds": [
+        "1064:267239",
+        "1064:267244"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267273",
+      "name": "Modules / MapLibre / District map",
+      "sectionId": "1064:267259",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267274",
+        "1064:267372",
+        "1064:267476",
+        "1064:267500"
+      ],
+      "observedMasterIds": [
+        "1064:267372"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267525",
+      "name": "Modules / Media Chrome / Hearing player",
+      "sectionId": "1064:267259",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267526",
+        "1064:267546",
+        "1064:267568",
+        "1064:267590",
+        "1064:267610",
+        "1064:267631"
+      ],
+      "observedMasterIds": [
+        "1064:267526",
+        "1064:267546",
+        "1064:267568"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267652",
+      "name": "Modules / Media Chrome / Audio coverage",
+      "sectionId": "1064:267259",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267653",
+        "1064:267665",
+        "1064:267677"
+      ],
+      "observedMasterIds": [
+        "1064:267653"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1064:267689",
+      "name": "Modules / coss / Collection card",
+      "sectionId": "1064:267259",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1064:267690",
+        "1064:267700",
+        "1064:267710",
+        "1064:267720",
+        "1064:267730"
+      ],
+      "observedMasterIds": [
+        "1064:267690"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1169:275470",
+      "name": "Capiro 3.4 / Newsletter / Field",
+      "sectionId": "1169:275453",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1169:275454",
+        "1169:275459",
+        "1169:275465"
+      ],
+      "observedMasterIds": [
+        "1169:275454",
+        "1169:275459",
+        "1169:275465"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1169:275489",
+      "name": "Capiro 3.4 / Newsletter / Email preview",
+      "sectionId": "1169:275453",
+      "kind": "DIRECT_SYMBOL",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1169:275489"
+      ],
+      "observedMasterIds": [
+        "1169:275489"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1171:274929",
+      "name": "Capiro 3.4 / Newsletter / Media example",
+      "sectionId": "1169:275453",
+      "kind": "DIRECT_SYMBOL",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1171:274929"
+      ],
+      "observedMasterIds": [
+        "1171:274929"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "1172:275850",
+      "name": "Capiro 3.4 / Newsletter / Toggle",
+      "sectionId": "1169:275453",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "1172:275838",
+        "1172:275844"
+      ],
+      "observedMasterIds": [
+        "1172:275838",
+        "1172:275844"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "3012:299240",
+      "name": "D34/Detail Card",
+      "sectionId": "3012:299239",
+      "kind": "DIRECT_SYMBOL",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "3012:299240"
+      ],
+      "observedMasterIds": [
+        "3012:299240"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "3012:299278",
+      "name": "D34/Person Row",
+      "sectionId": "3012:299239",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "3012:299266",
+        "3012:299272"
+      ],
+      "observedMasterIds": [
+        "3012:299266"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    },
+    {
+      "id": "3012:299287",
+      "name": "D34/Status",
+      "sectionId": "3012:299239",
+      "kind": "FRAME_WITH_DIRECT_SYMBOL_CHILDREN",
+      "boundary": "NON_MERI",
+      "definitionIds": [
+        "3012:299279",
+        "3012:299281",
+        "3012:299283",
+        "3012:299285"
+      ],
+      "observedMasterIds": [
+        "3012:299279"
+      ],
+      "review": "STRUCTURAL_METADATA_ONLY_DEFINITION_REVIEW_UNRUN",
+      "sourceBinding": "PENDING; see Modules ROW-CONTROL-CHECKLIST; appearance/state labels do not establish a native contract",
+      "sourceReference": "docs/figma-34-audit-20261016/modules/ROW-CONTROL-CHECKLIST.json",
+      "owner": "Modules family implementation owner via root; no new application allocation",
+      "authority": "No native capability, current availability, permission, capture or lifecycle semantics inferred from variant labels",
+      "testConfidence": "UNRUN; no new high-fidelity master/source/native/browser review"
+    }
+  ],
+  "unresolvedMasters": [
+    {
+      "id": "72:2968",
+      "observedName": "Client card",
+      "observationFileKey": "zGvvF6V6hh7yweoplCdpdE",
+      "ownerFileKey": null,
+      "location": null,
+      "status": "NEEDS_OWNER_FILE_AND_DEFINITION_RESOLUTION",
+      "sourcePaths": [],
+      "authority": "UNKNOWN",
+      "testConfidence": "UNRUN; name-equivalence prohibited"
+    },
+    {
+      "id": "73:3055",
+      "observedName": "Attention item",
+      "observationFileKey": "zGvvF6V6hh7yweoplCdpdE",
+      "ownerFileKey": null,
+      "location": null,
+      "status": "NEEDS_OWNER_FILE_AND_DEFINITION_RESOLUTION",
+      "sourcePaths": [],
+      "authority": "UNKNOWN",
+      "testConfidence": "UNRUN; name-equivalence prohibited"
+    }
+  ],
+  "specialFamilies": {
+    "D34PersonRow": {
+      "frameId": "3012:299278",
+      "definitionIds": [
+        "3012:299266",
+        "3012:299272"
+      ],
+      "observedMasterIds": [
+        "3012:299266"
+      ]
+    },
+    "D34Status": {
+      "frameId": "3012:299287",
+      "definitionIds": [
+        "3012:299279",
+        "3012:299281",
+        "3012:299283",
+        "3012:299285"
+      ],
+      "observedMasterIds": [
+        "3012:299279"
+      ]
+    },
+    "newsletterField": {
+      "frameId": "1169:275470",
+      "definitionIds": [
+        "1169:275454",
+        "1169:275459",
+        "1169:275465"
+      ],
+      "observedMasterIds": [
+        "1169:275454",
+        "1169:275459",
+        "1169:275465"
+      ]
+    },
+    "newsletterToggle": {
+      "frameId": "1172:275850",
+      "definitionIds": [
+        "1172:275838",
+        "1172:275844"
+      ],
+      "observedMasterIds": [
+        "1172:275838",
+        "1172:275844"
+      ]
+    },
+    "calendarScopeDropdowns": [
+      {
+        "frameId": "1064:270178",
+        "type": "FRAME",
+        "contains": "scope instances, not a component-master definition",
+        "masterAssociation": "PENDING_EXACT_INSTANCE_MAIN_COMPONENT_PROJECTION",
+        "masterAcceptance": "NOT_CREDITED"
+      },
+      {
+        "frameId": "1064:270183",
+        "type": "FRAME",
+        "contains": "scope instances, not a component-master definition",
+        "masterAssociation": "PENDING_EXACT_INSTANCE_MAIN_COMPONENT_PROJECTION",
+        "masterAcceptance": "NOT_CREDITED"
+      },
+      {
+        "frameId": "1064:270188",
+        "type": "FRAME",
+        "contains": "scope instances, not a component-master definition",
+        "masterAssociation": "PENDING_EXACT_INSTANCE_MAIN_COMPONENT_PROJECTION",
+        "masterAcceptance": "NOT_CREDITED"
+      }
+    ]
+  },
+  "structuralRemaining": {
+    "componentPatternFrameIdsPendingDescendantDefinitionJoin": [
+      "1103:280937",
+      "411:40617",
+      "762:146528",
+      "912:167629",
+      "912:167664",
+      "912:167694",
+      "912:167719",
+      "955:186700",
+      "955:186942",
+      "962:186613",
+      "1019:187927",
+      "1028:188271",
+      "1064:190303",
+      "1064:270380",
+      "1064:270517"
+    ],
+    "referencePolicy": "27 reference assets/historical selectors are not current product admission or 27 extra masters.",
+    "meriPolicy": "36 structural roots remain the Meri owner's boundary. No acceptance inferred from this lane's inventory.",
+    "phonePolicy": "Device=Phone/Breakpoint=Mobile remains deferred and unqualified. A frame named Phone verification is not a phone-viewport determination."
+  },
+  "remainingGaps": [
+    "34 observed master references need definition/source review beyond the existing Components audit: 31 known non-Meri Prototype definitions, 1 observed Meri Sources definition, and 2 owner-unresolved references.",
+    "The 35 unobserved direct-symbol siblings are metadata inventory only; neither observed instance review nor sibling state names supplies variant acceptance.",
+    "15 additional non-Meri structural pattern frames still need descendant-definition reconciliation; the 3 calendar dropdown frames require their exact instance-to-master association. Neither category adds master acceptance.",
+    "Existing Components CHECKLIST implementation, keyboard, empty/loading/error/permission and asset geometry gaps remain. Exact identity reuse transfers evidence references only.",
+    "Full Prototype definition inventory, live/native conformance, rendered parity, phone qualification and Meri implementation remain outside this addendum."
+  ],
+  "correctionsFromRoot": {
+    "facilityFocus": "ROOT_REPORTED_CLOSED; no new application readback in this join",
+    "strategicSourceFreshness": "ROOT_REPORTED_CLOSED; no new application readback in this join",
+    "note": "These source corrections do not change definition-identity arithmetic or create runtime qualification."
+  },
+  "qualification": {
+    "applicationEdits": false,
+    "newFigmaReads": 0,
+    "newFigmaWrites": 0,
+    "compiler": "UNRUN",
+    "browser": "UNRUN",
+    "tests": "UNRUN",
+    "nativeAuthority": "UNQUALIFIED",
+    "masterAcceptanceInheritedFromInstances": false,
+    "oldInventoryOrManifestMutated": false
+  },
+  "persistence": {
+    "transportInitiallyBlocked": true,
+    "recoveredAfterParentNotice": true,
+    "execution": "ordinary PowerShell file/hash reads only; no Node/Python/compiler/browser/install/cloud",
+    "originalFailure": "exec-server transport disconnected; recovery timed out after 25s"
+  }
+}
+

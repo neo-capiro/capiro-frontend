@@ -1,0 +1,244 @@
+{
+  "mode": "Pure source parser only; no application imports, tests or gate execution",
+  "reviewed": [
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+        "kind": "function",
+        "symbol": "createRichDocumentController",
+        "line": 77,
+        "nonblank": 303,
+        "fingerprint": "205beff7ca5c3ce57168f93e75cdc44bed8815565ad49a838e039adc1f009184"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+        "kind": "function",
+        "symbol": "createRichDocumentController",
+        "fingerprint": "205beff7ca5c3ce57168f93e75cdc44bed8815565ad49a838e039adc1f009184",
+        "reason": "Accept this cohesive document workflow owner. Its shared local draft/history, read candidate, saved baseline and pending execution must transition together; splitting these interlocks into independent owners risks old receipts overwriting new work. It delegates wire validation/transport, cross-navigation fencing, React subscription lifetime and HTML display to separate canonical modules. The synchronous active guard, ticket-before-dispatch ordering and repeated current-execution checks are reviewed explicitly. It does not add backend authorization, providers or durable storage.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 592,
+        "fingerprint": "fafebbc2da5988b802967aa49fc28836e2d3d73ec00a29fa308fbededda65b58"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "fingerprint": "fafebbc2da5988b802967aa49fc28836e2d3d73ec00a29fa308fbededda65b58",
+        "reason": "Accept the focused finite controller/QueryClient suite. Public factories plus the real shared adapter and intercepted fetch test actual protocol boundaries without a backend or unrelated graph. Five semantic groups share fixtures to compare full request bodies, current state, draft retention and disposal; original draft/browser assertions remain unchanged.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 149,
+        "nonblank": 93,
+        "fingerprint": "5d2383786cc185e1220b2a61012dcccc3f8a4aa03b65095885c5aff6a9ef3aed"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "fingerprint": "5d2383786cc185e1220b2a61012dcccc3f8a4aa03b65095885c5aff6a9ef3aed",
+        "reason": "Accept the grouped conflict/uncertainty controls: whole draft retention, exact CAS, explicit current read/adopt or rebase, malformed/wrong receipt refusal and creation noncausation. The group is one recovery boundary, not unrelated subsystems.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 243,
+        "nonblank": 113,
+        "fingerprint": "50f2f0619f1e0f8f3d35345f943247e0f6a942c10387723bea9378dc6ab0a460"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "fingerprint": "50f2f0619f1e0f8f3d35345f943247e0f6a942c10387723bea9378dc6ab0a460",
+        "reason": "Accept the grouped current-read, saved-preview and stage controls. They distinguish server-only preview from local content, deny stale actionable reads, preserve UUID-case identity and retain same-revision stage uncertainty through adoption.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 357,
+        "nonblank": 82,
+        "fingerprint": "afd8d9096671346de30ecff9e23a29c3692abbfb5235d3f06174791c30d5680d"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "fingerprint": "afd8d9096671346de30ecff9e23a29c3692abbfb5235d3f06174791c30d5680d",
+        "reason": "Accept the grouped late completion/disposal controls. Held create/save/stage/preview and 200/403/503 outcomes verify that a disposed execution cannot restore private material to a remounted owner.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #5",
+        "line": 440,
+        "nonblank": 159,
+        "fingerprint": "cb766c68b0291b1e5c5c0e5d0879fabbdfa8ecb9b54ecf4251755f73fbaa4e91"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #5",
+        "fingerprint": "cb766c68b0291b1e5c5c0e5d0879fabbdfa8ecb9b54ecf4251755f73fbaa4e91",
+        "reason": "Accept the grouped navigation-journal controls. Actual QueryClient and adapter observations verify pending-before-dispatch, same-cache fences, explicit save review, both cleanup orders, no refetch/GC and reentrant settlement disposal. Preserved failures demonstrate the regression assertions exercise real incorrect prior behavior.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/write-journal.ts",
+        "kind": "function",
+        "symbol": "createRichWriteJournal",
+        "line": 40,
+        "nonblank": 107,
+        "fingerprint": "fe8045f292468c9ae00676681c896159581a9982ec915e51d3204b441eac3662"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/write-journal.ts",
+        "kind": "function",
+        "symbol": "createRichWriteJournal",
+        "fingerprint": "fe8045f292468c9ae00676681c896159581a9982ec915e51d3204b441eac3662",
+        "reason": "Accept one feature-local adapter for one QueryClient journal. Begin, finish and explicit save review share the same attempt/status identity rules; keeping them together exposes the non-replay invariant. Exact document/revision pairs and case-insensitive UUID matching are distinct from server causality. The journal stores no draft/response/HTML, adds no fetcher/retry, and finish refuses to recreate a removed ticket. Canonical QueryClient replacement owns scope disposal.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
+        "kind": "function",
+        "symbol": "RichDocumentActions",
+        "line": 13,
+        "nonblank": 174,
+        "fingerprint": "405b864f4c3d3506f369d662cac42a381d6fd293fd95e8466edaf824cca5515a"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
+        "kind": "function",
+        "symbol": "RichDocumentActions",
+        "fingerprint": "405b864f4c3d3506f369d662cac42a381d6fd293fd95e8466edaf824cca5515a",
+        "reason": "Accept cohesive presentation of one saved-document lifecycle: action availability, read/adopt/rebase decision, draft/receipt distinction and truthful uncertainty text. It invokes the controller only and introduces neither transport nor inferred authorization. Stage routes are displayed as data; unsupported delivery/collaboration stays unavailable.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+        "kind": "function",
+        "symbol": "RichNewsletterEditor",
+        "line": 28,
+        "nonblank": 118,
+        "fingerprint": "b8c201eb9cc22c6a5d07df540f3b7fb3f95bc4e69e1577eccd03cffca0a5769c"
+      },
+      "review": {
+        "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+        "kind": "function",
+        "symbol": "RichNewsletterEditor",
+        "fingerprint": "b8c201eb9cc22c6a5d07df540f3b7fb3f95bc4e69e1577eccd03cffca0a5769c",
+        "reason": "Accept existing rich editor composition plus its local selection, display and close-confirmation state. Document/history transitions are delegated to the controller. Pending fieldsets are disabled/inert, and owner/editorRevision replacement resets transient or editor-local state. Wire/transport/cache/sanitization remain separately owned.",
+        "reviewedBy": "core_intake_review (independent)",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/shared/capiro/rich-newsletter.ts",
+        "kind": "function",
+        "symbol": "createRichNewsletterAdapter",
+        "line": 34,
+        "nonblank": 94,
+        "fingerprint": "9535f5a145d16624ec813b181b1896757ae04b7b4a15a87ae2576cb72589db14"
+      },
+      "review": {
+        "file": "apps/web/src/shared/capiro/rich-newsletter.ts",
+        "kind": "function",
+        "symbol": "createRichNewsletterAdapter",
+        "fingerprint": "9535f5a145d16624ec813b181b1896757ae04b7b4a15a87ae2576cb72589db14",
+        "reason": "Accept the single rich newsletter request/receipt boundary: eight fixed operations capture current document, client, revision and record bindings over the existing cancelling transport and canonical public parser. It owns no UI recovery, backend authority, persistence, generic provider routing or retries. Public DTO validation remains package-owned; local request normalization remains the fixed registry. Root reviewed the complete factory and independently hash-bound boundary review; keeping correlated operation bindings together is cohesive.",
+        "reviewedBy": "Codex root responsibility review with independent core_intake boundary review",
+        "reviewedOn": "2026-10-13"
+      }
+    },
+    {
+      "signal": {
+        "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 141,
+        "nonblank": 227,
+        "fingerprint": "886665df815ae5a4d34dac5f871cd8f29c9e742bd5f1f9523808acbb7a1af8fd"
+      },
+      "review": {
+        "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "fingerprint": "886665df815ae5a4d34dac5f871cd8f29c9e742bd5f1f9523808acbb7a1af8fd",
+        "reason": "Accept one finite receiving-contract suite using the real public parsers, fixed operation registry and canonical transport with intercepted fetch. Direct and mismatched envelopes, captured request bindings, nominal revision, preserved historical tests, stage separation and abort disposal exercise the same request/receipt boundary. Tests compare observable response/request behavior, preserve original controls, and include failing baselines for mutable expected bindings. No unrelated backend or feature graph is mocked.",
+        "reviewedBy": "Codex root responsibility review with independent core_intake boundary review",
+        "reviewedOn": "2026-10-13"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+      "sha256": "8f5097b4bb3296667ec7e0190e1ac90261f51990c50835df50b04f6e6bb73b67"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+      "sha256": "4d9bbf10922565b27cfd1b07e4b07bc27130a6e464df6ef59d42a0bf766fe8e4"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/write-journal.ts",
+      "sha256": "d131eb1e7bdb44c5053be257d6b3e3c2e749b16f9d2312502069045eef109a57"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
+      "sha256": "9afb178f9cf6ddf90f33d059803a716dc2192a099e16c9439fd52c15faeedada"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "sha256": "7ee5e694f88e58ec9a041f1d82a8052dcf35cee496697cd68857c459fec7e32b"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.ts",
+      "sha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "sha256": "e42be0734d1ab2911fb0dbd6d68e403846714bcd6371c5fbdf59ab05b19cf8d2"
+    }
+  ]
+}

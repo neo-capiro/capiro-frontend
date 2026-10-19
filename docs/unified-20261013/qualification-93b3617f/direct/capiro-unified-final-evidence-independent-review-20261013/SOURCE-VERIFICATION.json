@@ -1,0 +1,219 @@
+{
+  "observedUTC": "2026-10-13T06:52:22.997253+00:00",
+  "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "rootTree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+  "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+  "status": "",
+  "reviewerRuntimeExecution": false,
+  "deltaFromAccepted6a": [
+    "M\t.gitattributes",
+    "A\tapps/web/src/shared/shell/MeriMobileNavigation.tsx",
+    "M\tapps/web/src/shared/shell/ProductShell.tsx",
+    "M\tapps/web/src/shared/shell/shell.module.css",
+    "A\tapps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+    "A\tdocs/unified-20261013/MOBILE-NAVIGATION.md",
+    "A\tdocs/unified-20261013/mobile-navigation/MANIFEST.json",
+    "A\tdocs/unified-20261013/mobile-navigation/author-proposal/HANDOFF.md",
+    "A\tdocs/unified-20261013/mobile-navigation/author-proposal/MANIFEST.json",
+    "A\tdocs/unified-20261013/mobile-navigation/author-proposal/OUTLINE.md",
+    "A\tdocs/unified-20261013/mobile-navigation/author-proposal/SOURCE-REVIEW.json",
+    "A\tdocs/unified-20261013/mobile-navigation/author-proposal/meri-action-host-mobile-navigation.spec.ts",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/baseline-source.json",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/green-artifacts/.last-run.json",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/green-results.json",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/green.log",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/red-artifacts/.last-run.json",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/error-context.md",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/test-failed-1.png",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/red-results.json",
+    "A\tdocs/unified-20261013/mobile-navigation/root-regression/red.log"
+  ],
+  "ancestry": {
+    "portfolio": true,
+    "meri_original": true,
+    "modules_original": true,
+    "newsletter": true,
+    "shipping": true,
+    "onboard": true,
+    "meri_actions": true
+  },
+  "preservedTestFileBindings": {
+    "laneBoundRecords": 807,
+    "uniquePaths": 291,
+    "allExact": true,
+    "notTestCaseCounts": true
+  },
+  "preservedTrees": [
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/portfolio",
+      "tree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "identical": true,
+      "originalTree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "finalTree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "allExact": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/modules",
+      "tree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "identical": true,
+      "originalTree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "finalTree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "allExact": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/settings",
+      "tree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "identical": true,
+      "originalTree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "finalTree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "allExact": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/tests/browser",
+      "tree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "identical": true,
+      "originalTree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "finalTree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "allExact": true
+    },
+    {
+      "lane": "onboard",
+      "path": "apps/web/src/features/onboard",
+      "tree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "identical": true,
+      "originalTree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "finalTree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "allExact": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/features/meri",
+      "tree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "identical": true,
+      "originalTree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "finalTree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "allExact": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/shared/meri-actions",
+      "tree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "identical": true,
+      "originalTree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "finalTree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "allExact": true
+    }
+  ],
+  "publicBoundaryPreservation": {
+    "comparedPaths": 212,
+    "changedFromAccepted6a": [],
+    "lockSha256": "ed73c829a32a24cf3794eae3f61fbebe135af410b66d2a1723254aabbb956574",
+    "lockEntries": 936
+  },
+  "mobileReviewByteBindings": [
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "68379ce566220a205122e197e5c3ae8d211c0ab7f82afe3eeb6bead34e7a92fd",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "d7942d79955c8cbe1c1929f3d551118eef701c4b1ade6d92cbbd3858bdf3dad3",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/shell.module.css",
+      "sha256": "748440948fc9e9e997060bac6414c17e19ab0914c28dfea9272c9037a02c3171",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+      "sha256": "037150f3279724439b1d89b7d238840db7f233b51c05703fa57a8bf86c75d056",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "sha256": "cd1584326cabd10d95f86b11ba2421f0eef5465285d75cb82ceb17c12279dd80",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/session/SelectedClient.tsx",
+      "sha256": "9f08ff7be144494042a2147e84adb815d9e7a4e92e90b0bf5277cc44caab1a34",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/page.tsx",
+      "sha256": "b3da4c9cf8633b3e3044a19fb20e747a1af3f4ee1f4fd80722f64cb4beb3191c",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "sha256": "47eb6dab030eefcd0cb8b17627d1f10c6f0a2673964a9d060050687e9bee1f21",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-fixtures.ts",
+      "sha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7",
+      "matchesReviewed": true
+    },
+    {
+      "path": "packages/ui/src/shadcn/button.tsx",
+      "sha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1",
+      "matchesReviewed": true
+    }
+  ],
+  "rootPreservationReceiptMatches": true,
+  "referencedReviewManifests": [
+    {
+      "path": "/tmp/capiro-unified-integration-independent-review-20261013/MANIFEST.json",
+      "matchesRootReceipt": true,
+      "verifiedEntries": 20,
+      "allEntriesMatch": true
+    },
+    {
+      "path": "/tmp/capiro-unified-meri-composition-review-20261013/SHA256-MANIFEST.json",
+      "matchesRootReceipt": true,
+      "verifiedEntries": 5,
+      "allEntriesMatch": true
+    },
+    {
+      "path": "/tmp/capiro-meri-mobile-navigation-independent-review-20261013/SHA256-MANIFEST.json",
+      "matchesRootReceipt": true,
+      "verifiedEntries": 3,
+      "allEntriesMatch": true
+    },
+    {
+      "path": "/tmp/capiro-standalone-host-probe-review-20261013/MANIFEST.json",
+      "matchesRootReceipt": true,
+      "verifiedEntries": 25,
+      "allEntriesMatch": true
+    },
+    {
+      "path": "/tmp/capiro-meri-pr2449-compatibility-20261013/MANIFEST.json",
+      "matchesRootReceipt": true,
+      "verifiedEntries": 49,
+      "allEntriesMatch": true
+    }
+  ]
+}

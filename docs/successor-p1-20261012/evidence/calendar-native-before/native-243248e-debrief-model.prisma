@@ -1,0 +1,33 @@
+model MeetingDebrief {
+  id             String               @id @default(uuid()) @db.Uuid
+  tenantId       String               @map("tenant_id") @db.Uuid
+  meetingId      String               @map("meeting_id") @db.Uuid
+  clientId       String?              @map("client_id") @db.Uuid
+  authorUserId   String?              @map("author_user_id") @db.Uuid
+  bodyCiphertext String               @map("body_ciphertext")
+  iv             String
+  authTag        String               @map("auth_tag")
+  keyVersion     String?              @map("key_version")
+  confidential   Boolean              @default(true)
+  accessLevel    String               @default("tenant_members") @map("access_level")
+  // Meetings v2 (2026-07): debrief lifecycle mirroring MeetingPrep.status. Only
+  // an `approved` debrief reaches the Library / is shareable. Existing rows
+  // backfill to `generated` (see migration) — behavior unchanged until a user approves.
+  status         MeetingDebriefStatus @default(generated)
+  // Phase 2 §d (2026-08): sharing only — approval already exists via `status`
+  // above.
+  sharedAt       DateTime?            @map("shared_at") @db.Timestamptz(6)
+  sharedByUserId String?              @map("shared_by_user_id") @db.Uuid
+  createdAt      DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime             @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  tenant   Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  meeting  Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  client   Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  author   User?   @relation("MeetingDebriefAuthor", fields: [authorUserId], references: [id], onDelete: SetNull)
+  sharedBy User?   @relation("MeetingDebriefSharedBy", fields: [sharedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId, meetingId, createdAt], map: "meeting_debriefs_tenant_meeting_created_idx")
+  @@index([tenantId, sharedAt], map: "meeting_debriefs_tenant_shared_idx")
+  @@map("meeting_debriefs")
+}

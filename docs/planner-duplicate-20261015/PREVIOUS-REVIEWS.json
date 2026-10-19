@@ -1,0 +1,11 @@
+[
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "function",
+    "symbol": "TaskDetailSession",
+    "fingerprint": "f992253ece47f1307078839b66efea37a82ac1bdb453cee36882027a1a7b3a05",
+    "reason": "One task-id/version/access-owned detail session composes the canonical shared editor model/form, nested task actions, comments and current subtask owner. Inline and nested forms are mutually exclusive; parent pending fence owns conflicting commands. Mutation transport/generation remains canonical, no API or second editing controller.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  }
+]

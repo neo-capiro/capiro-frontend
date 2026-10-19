@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-12T15:00:08.997950+00:00",
+  "status": "PASS_OFFLINE_EXECUTION_RECIPE_REVIEW",
+  "authorTests": {
+    "passed": 39,
+    "failed": 0
+  },
+  "independentProbes": {
+    "passed": 59,
+    "failed": 0
+  },
+  "independentAuthorReplay": {
+    "passed": 35,
+    "failed": 0
+  },
+  "review": "evidence/independent/independent-review.json",
+  "reviewEvidenceFilesVerified": 17,
+  "scriptHashesMatchIndependentReview": true,
+  "inlineBuildspecHashMatch": true,
+  "actualArchiveLocalDigestAndLength": "PASS",
+  "offlinePreparationAndValidation": "PASS_WITH_EXPLICIT_TEST_ONLY_INPUTS",
+  "applicationSourceDiff": "NONE",
+  "applicationGatesRerun": false,
+  "cloudBuild": "NOT_RUN",
+  "dockerBuild": "NOT_RUN",
+  "pushScanDeployment": "NOT_RUN",
+  "requiredShippingInputs": [
+    "Coordinator-owned verified exact S3 custody/version",
+    "Coordinator-owned accepted image and output byte limits"
+  ],
+  "remainingSourceBlockers": [],
+  "funding": "USD2 operator allowance, not AWS-enforced cap",
+  "independentReviewCorrections": "See preserved initial receipts and final passing controls; no unresolved source failures",
+  "updatedAt": "2026-10-12T15:26:06.702880+00:00",
+  "latestIndependentProbes": {
+    "passed": 29,
+    "failed": 0,
+    "baselineControlsFailedAsExpected": 3
+  },
+  "latestIndependentAuthorReplay": {
+    "passed": 39,
+    "failed": 0
+  },
+  "latestIndependentReview": "evidence/control-review/independent-review.json",
+  "currentBuildspecSHA256": "c20e6c14bb2308d95b02f3906aece7318bff1ffe3779b29f035db60c79c0269f",
+  "nonUtcFullArchiveReproduction": "PASS_EXACT_ORIGINAL_HASH_LENGTH_AND_CRC",
+  "libraryTransfer": {
+    "status": "BLOCKED_BEFORE_UPLOAD",
+    "attempts": 2,
+    "error": "hosted apps tools/list request failed: network",
+    "libraryFileId": null,
+    "uploadSizeLimit": null,
+    "alternateRelayUsed": false
+  }
+}

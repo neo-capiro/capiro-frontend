@@ -1,0 +1,21 @@
+commit 850da33808dab050d2396a26233d3d3881d2fecf
+Author:     NEO MARTINEZ <neo@capiro.ai>
+AuthorDate: Mon Oct 12 21:45:07 2026 +0000
+Commit:     NEO MARTINEZ <neo@capiro.ai>
+CommitDate: Mon Oct 12 21:45:07 2026 +0000
+
+    test: assert retained rich message text after refusal
+
+diff --git a/apps/web/tests/browser/relationships.spec.ts b/apps/web/tests/browser/relationships.spec.ts
+index 7fe9387..e97534c 100644
+--- a/apps/web/tests/browser/relationships.spec.ts
++++ b/apps/web/tests/browser/relationships.spec.ts
+@@ -508,7 +508,7 @@ test("person-linked QuickLog retains its failed note and existing email provider
+   await confirmation
+     .getByRole("button", { name: "Close", exact: true })
+     .click();
+-  await expect(mail.getByLabel("Message", { exact: true })).toHaveValue(
++  await expect(mail.getByLabel("Message", { exact: true })).toHaveText(
+     "Synthetic message",
+   );
+   await expect(mail.getByText("Email sent.", { exact: true })).toHaveCount(0);

@@ -1,0 +1,20 @@
+{
+  "source": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "rootTree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "srcTree": "72751dc5027d4b4a09356676a206ee5addfb56a9",
+    "status": ""
+  },
+  "status": "PASS_SOURCE_PRESERVATION_ONLY_FINAL_QUALIFICATION_NOT_AUDITED",
+  "originalRecords": 807,
+  "originalUniquePaths": 291,
+  "unchangedTrees": 4,
+  "explicitlyChangedTrees": 3,
+  "productionFiles": 7,
+  "newTestHelperFiles": 10,
+  "publicGraphPathsCompared": 259,
+  "reviewManifestFiles": 27,
+  "all21SourcePinsMatch": true,
+  "lockDelta": "packages[apps/web].devDependencies[axe-core]=4.14.0"
+}

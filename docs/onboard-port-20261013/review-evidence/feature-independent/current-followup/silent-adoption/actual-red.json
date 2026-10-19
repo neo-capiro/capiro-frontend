@@ -1,0 +1,44 @@
+{
+  "atUTC": "2026-10-13T05:19:41.066Z",
+  "method": "Captured production helper transpiled to CJS; actual installed QueryClient; synthetic promise/status fixtures only. No React/browser/network/native request.",
+  "sourcePath": "/tmp/capiro-onboard-port-evidence-20261013/current-funnel-read-followup/before-signal-binding.ts",
+  "sourceSha256": "480ed30aaefe0a4f2a7953502eb3df659f5e4cd5c0226e34783cdaab9b949293",
+  "results": [
+    {
+      "staleOutcome": 200,
+      "oldContinuation": 1,
+      "oldResult": {
+        "value": {
+          "sessionId": "A",
+          "state": "legal_accepted",
+          "plan": "paid"
+        }
+      },
+      "current": {
+        "sessionId": "A",
+        "state": "legal_accepted",
+        "plan": "paid"
+      },
+      "expected": "Replacement read remains canonical but cannot satisfy superseded original deliberate read",
+      "pass": false
+    },
+    {
+      "staleOutcome": 403,
+      "oldContinuation": 1,
+      "oldResult": {
+        "value": {
+          "sessionId": "A",
+          "state": "legal_accepted",
+          "plan": "paid"
+        }
+      },
+      "current": {
+        "sessionId": "A",
+        "state": "legal_accepted",
+        "plan": "paid"
+      },
+      "expected": "Replacement read remains canonical but cannot satisfy superseded original deliberate read",
+      "pass": false
+    }
+  ]
+}

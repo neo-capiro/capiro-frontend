@@ -1,0 +1,36 @@
+--- baseline-source/host-controller.ts
++++ final-source/apps/web/src/shared/meri-actions/host-controller.ts
+@@ -21,6 +21,7 @@
+   private snapshot: Snapshot = Object.freeze({ status: "idle" });
+   private listeners = new Set<() => void>();
+   private active = false;
++  private clientAvailable = true;
+   private lifetime: AbortController | undefined;
+   private expiry: ReturnType<typeof setTimeout> | undefined;
+   private port: GovernedActionWorkflow | undefined;
+@@ -55,9 +56,17 @@
+       this.publish({ status: "idle" });
+     };
+   };
++  setClientAvailable(available: boolean) {
++    this.clientAvailable = available;
++  }
++  revoke() {
++    this.clear();
++    this.publish({ status: "expired" });
++  }
+   connect = async () => {
+     if (
+       !this.active ||
++      !this.clientAvailable ||
+       this.snapshot.status === "connecting" ||
+       this.snapshot.status === "ready"
+     )
+@@ -90,6 +99,7 @@
+         ),
+         journal: this.options.journal(session.context),
+         onAccessLost: expire,
++        isCurrent: () => this.clientAvailable,
+         now: this.now,
+       });
+       this.port = port;

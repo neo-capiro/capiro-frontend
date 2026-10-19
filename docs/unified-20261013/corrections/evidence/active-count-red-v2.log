@@ -1,0 +1,106 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=1 portfolio-active-count-contrast.spec.ts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=1 portfolio-active-count-contrast.spec.ts
+
+[WebServer] (node:1334785) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:1334804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 1440px light active profile counts retain readable contrast (3.6s)
+(node:1334941) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 1440px dark active profile counts retain readable contrast (3.4s)
+  ✘  3 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 390px light active profile counts retain readable contrast (2.4s)
+(node:1335134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 390px dark active profile counts retain readable contrast (2.8s)
+
+
+  1) tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 1440px light active profile counts retain readable contrast 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 4.5
+    Received:    2.484436491271581
+
+      70 |             contentType: "application/json",
+      71 |           });
+    > 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);
+         |                                          ^
+      73 |         }
+      74 |       }
+      75 |       expect(unexpected).toEqual([]);
+        at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 390px light active profile counts retain readable contrast 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 4.5
+    Received:    2.484436491271581
+
+      70 |             contentType: "application/json",
+      71 |           });
+    > 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);
+         |                                          ^
+      73 |         }
+      74 |       }
+      75 |       expect(unexpected).toEqual([]);
+        at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 1440px light active profile counts retain readable contrast 
+    tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 390px light active profile counts retain readable contrast 
+  2 passed (15.2s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /tmp/capiro-onboard-execution-20261013/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /tmp/capiro-onboard-execution-20261013/apps/web
+npm error command failed
+npm error command sh -c playwright test --workers=1 portfolio-active-count-contrast.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

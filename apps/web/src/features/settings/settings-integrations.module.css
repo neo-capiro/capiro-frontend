@@ -1,0 +1,78 @@
+.integrationIntro .integrationHeading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.integrationIntro > p {
+  margin-top: 12px;
+  font-size: 13px;
+}
+.integrationHeading [data-tone] > span {
+  background: rgb(31 58 95 / 12%);
+}
+.integrationGrid > div > section {
+  height: 100%;
+  padding: 18px 20px;
+}
+.integrationGrid > div > section > header {
+  margin-bottom: 14px;
+}
+.integrationGrid > div > section > header p {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.integrationGrid button {
+  height: 28px;
+}
+.integrationConnection {
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.integrationConnection [data-tone="success"] > span {
+  background: rgb(61 107 79 / 12%);
+  color: var(--foreground);
+}
+.integrationAccountRow {
+  align-items: flex-start;
+  gap: 8px;
+}
+.integrationAccountHeading {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.integrationAccountHeading h3 {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.integrationMeta {
+  overflow: hidden;
+}
+.integrationMeta p {
+  margin: 0;
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.integrationGrid .integrationPermissions {
+  height: auto;
+  min-height: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  text-decoration: underline;
+}
+.integrationActions {
+  gap: 6px;
+}

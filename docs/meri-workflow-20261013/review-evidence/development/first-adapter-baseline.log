@@ -1,0 +1,58 @@
+
+> @capiro/web@0.1.0 test
+> vitest run tests/meri-action-adapter.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ ❯ tests/meri-action-adapter.test.ts (4 tests | 2 failed) 87ms
+     × preserves the exact canonical chain, separate approver, pending refusal and explicit same-proposal replay 73ms
+     × captures editor intent before request awaits and retains exact reviewed draft 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-adapter.test.ts > governed action intent and retained wires > preserves the exact canonical chain, separate approver, pending refusal and explicit same-proposal replay
+Error: Expected admitted fixture: unknown
+ ❯ accepted tests/meri-action-fixtures.ts:35:24
+     33| export const clock = Date.parse(context.syntheticNow);
+     34| export function accepted<T>(reply: WorkflowReply<T>): T {
+     35|   if (!reply.ok) throw new Error(`Expected admitted fixture: ${reply.p…
+       |                        ^
+     36|   return reply.value;
+     37| }
+ ❯ prepared tests/meri-action-fixtures.ts:126:20
+ ❯ tests/meri-action-adapter.test.ts:13:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/meri-action-adapter.test.ts > governed action intent and retained wires > captures editor intent before request awaits and retains exact reviewed draft
+Error: Expected admitted fixture: unknown
+ ❯ accepted tests/meri-action-fixtures.ts:35:24
+     33| export const clock = Date.parse(context.syntheticNow);
+     34| export function accepted<T>(reply: WorkflowReply<T>): T {
+     35|   if (!reply.ok) throw new Error(`Expected admitted fixture: ${reply.p…
+       |                        ^
+     36|   return reply.value;
+     37| }
+ ❯ tests/meri-action-adapter.test.ts:80:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  05:05:44
+   Duration  360ms (transform 59ms, setup 0ms, import 156ms, tests 87ms, environment 0ms)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-meri-workflow-20261013/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-meri-workflow-20261013/apps/web
+npm error command failed
+npm error command sh -c vitest run tests/meri-action-adapter.test.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

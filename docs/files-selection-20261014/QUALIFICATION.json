@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "recordedUTC": "2026-10-14T02:35:26.198552+00:00",
+  "sourceCommit": "b8e81aafd0416f18b2e7706c3c8c301d76da7712",
+  "basePR27": "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+  "applicationTree": "04b19356b5c7f8e236d62e8dbb758d5b1c012755",
+  "runtimeTree": "2550a886910e4904bc9c8722971139204f28b53a",
+  "frozenPR25": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "ledgerRows": [
+    "CORE-053",
+    "CORE-062"
+  ],
+  "ledgerAcceptance": "No native rows accepted; both native ledgers unchanged",
+  "baseline": {
+    "source": "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+    "failed": 4,
+    "test": "files-browse-selection.red.spec.ts",
+    "report": "browser-red.json",
+    "record": "baseline.json"
+  },
+  "passed": {
+    "browser": {
+      "cases": 60,
+      "new": 5,
+      "existing": 55,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "log": "browser-qualified.log",
+      "report": "browser-qualified.json",
+      "config": "browser-qualified.config.mts",
+      "scope": "Mounted application, synthetic service fixtures"
+    },
+    "unit": {
+      "cases": 57,
+      "files": 7,
+      "log": "unit-final.log"
+    },
+    "rootControls": {
+      "cases": 111,
+      "log": "root-final.log"
+    },
+    "workspaceTypes": {
+      "log": "typecheck-final.log"
+    },
+    "webLint": {
+      "log": "lint-final.log",
+      "errors": 0,
+      "existingWarnings": 82
+    },
+    "format": {
+      "fullBeforeFinalRegionChange": "format.log",
+      "finalChangedFiles": "format-qualified.log"
+    },
+    "publicPackages": {
+      "log": "packages.log"
+    },
+    "architecture": {
+      "record": "architecture-qualified.json",
+      "signals": 488,
+      "reviewed": 467,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "errors": 0
+    },
+    "productionBuild": {
+      "command": "NEXT_TELEMETRY_DISABLED=1 npm run build",
+      "log": "build.log",
+      "buildId": "hEya6NW62qxM5iZisGL8M",
+      "imageBuilt": false
+    },
+    "actualServer": {
+      "log": "production.log",
+      "record": "production/production-smoke.json",
+      "rootRecord": "production/preview-root-smoke.json",
+      "pageErrors": 0,
+      "scope": "Unconfigured Next standalone, no native authentication or service requests"
+    },
+    "accessibility": {
+      "checks": [
+        {
+          "test": "partial visible selection is mixed and select-all changes only the visible subset",
+          "violations": 0,
+          "passes": 46
+        },
+        {
+          "test": "empty filtered results disclose and clear hidden selection without changing filters or writing",
+          "violations": 0,
+          "passes": 46
+        }
+      ],
+      "rulesDisabled": [],
+      "keyboard": "Selection, clear, All files and empty-table horizontal scrolling"
+    },
+    "visual": {
+      "figma": "Zc2dEN5aLU47dVdsewDmiJ:411:52484",
+      "widths": [
+        1440,
+        390
+      ],
+      "scope": "Bounded Files interaction comparison; no full-frame/native acceptance"
+    }
+  },
+  "preservedIntermediateFailures": [
+    {
+      "record": "browser-green.log",
+      "passed": 58,
+      "failed": 2,
+      "reason": "Storage exhausted saving screenshots"
+    },
+    {
+      "record": "browser-final.log",
+      "passed": 59,
+      "failed": 1,
+      "reason": "Empty mobile table scrollable-region-focusable; fixed without excluding axe rules"
+    },
+    {
+      "record": "architecture-before-review.json",
+      "reason": "Two changed fingerprints required review; existing exact records updated"
+    },
+    {
+      "record": "lint-qualified.log",
+      "reason": "Mistaken app-local CLI path; corrected workspace invocation passes"
+    }
+  ],
+  "unrun": [
+    "Fresh clean install",
+    "Container/image qualification",
+    "Live existing-account login/session expiry",
+    "Native service read/write persistence and tenant qualification",
+    "Full 337-row native acceptance"
+  ],
+  "backendDependency": "backend-dependency-update.json",
+  "ledgerPreservation": "ledger-preservation.json",
+  "noNativeSideEffects": true,
+  "deployment": false,
+  "mainMerged": false,
+  "generatedCustody": [
+    "pr27-next-preservation.json",
+    "pr28-browser-cache-preservation.json",
+    "pr27-dependency-dedup.json",
+    "qualified-build-dependency-dedup.json"
+  ]
+}

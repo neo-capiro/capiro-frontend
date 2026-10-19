@@ -8,6 +8,10 @@ import { fileURLToPath } from 'node:url';
 
 export const HERE = dirname(fileURLToPath(import.meta.url));
 export const BASELINE_SHA256 = 'd7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1';
+export const AI_ELEMENTS_COMMIT = 'bc871264341cf54a7ea1fee36d951688ed2a1ff7';
+export const SHADCN_COMMIT = '2d3f1cd436b18ea12f24130de4df781355925b08';
+const PROJECT_UI_SOURCES = ['src/markdown.tsx', 'src/output-block.tsx', 'src/streaming-text.tsx'];
+const ADDITION_LIMIT = 64;
 export const hash = raw => createHash('sha256').update(raw).digest('hex');
 export const slash = path => path.split(sep).join('/');
 export const workspaceRoot = root => resolve(root, '../..');
@@ -73,10 +77,64 @@ export function verifyPromotedSources(root = HERE) {
     assert.equal(hash(Buffer.from(text)), old.localSha256, 'only quoted module specifiers changed');
     assert.equal(Buffer.byteLength(text), old.localBytes);
   }
+  const additions = verifyAdditions(root, provenance, promoted);
   const actual = ownedFiles(root).filter(x => x.startsWith('packages/ui/src/')).map(x => x.slice('packages/ui/'.length));
-  assert.deepEqual(actual, [...promoted].sort(), 'single exact seventeen-file UI owner');
+  assert.deepEqual(actual, [...promoted, ...additions, ...PROJECT_UI_SOURCES].sort(), 'exact seventeen adopted, recorded additions and explicitly inventoried project UI sources');
   return provenance;
 }
+
+// Additions have no vendor copy: the inverse rewrite must hash to the recorded pinned upstream blob.
+function verifyAdditions(root, provenance, promoted) {
+  assert.equal(provenance.aiElementsCommit, AI_ELEMENTS_COMMIT);
+  assert.equal(provenance.shadcnCommit, SHADCN_COMMIT);
+  assert.ok(Array.isArray(provenance.additions) && provenance.additions.length <= ADDITION_LIMIT, 'bounded additions');
+  const upstreamPrefix = `https://raw.githubusercontent.com/vercel/ai-elements/${AI_ELEMENTS_COMMIT}/`;
+  const paths = [];
+  for (const row of provenance.additions) {
+    assert.ok(/^src\/(?:ai-elements|shadcn)\/[a-z-]+\.tsx$/.test(row.promotedPath));
+    assert.ok(!promoted.has(row.promotedPath) && !paths.includes(row.promotedPath), 'unique promoted path');
+    assert.equal(row.upstreamUrl, upstreamPrefix + row.upstreamPath);
+    assert.ok(/^packages\/(?:elements\/src|shadcn-ui\/components\/ui)\/[a-z-]+\.tsx$/.test(row.upstreamPath));
+    assert.equal(row.localSha256, row.upstreamSha256); assert.equal(row.localBytes, row.upstreamBytes);
+    const raw = readBounded(join(uiRoot(root), row.promotedPath));
+    assert.equal(raw.length, row.promotedBytes); assert.equal(hash(raw), row.promotedSha256);
+    let text = new TextDecoder('utf-8', { fatal: true }).decode(raw);
+    if (row.adaptation) {
+      assert.equal(row.adaptation.importsExports, 'Preserved');
+      assert.ok(typeof row.adaptation.owner === 'string' && typeof row.adaptation.reason === 'string');
+      assert.ok(text.startsWith('"use client";\n\n' + row.adaptation.notice), 'prominent owner change notice');
+      text = '"use client";\n\n' + text.slice('"use client";\n\n'.length + row.adaptation.notice.length);
+      assert.ok(row.adaptation.edits.length >= 1 && row.adaptation.edits.length <= 16);
+      for (const edit of [...row.adaptation.edits].reverse()) {
+        const occurrences = edit.occurrences ?? 1;
+        assert.ok(Number.isInteger(occurrences) && occurrences >= 1 && occurrences <= 8);
+        assert.equal(text.split(edit.to).length, occurrences + 1, 'exact recorded adaptation occurrences');
+        assert.equal(text.split(edit.from).length, 1, 'upstream text absent before inverse edit');
+        text = text.split(edit.to).join(edit.from);
+      }
+      assert.ok(row.adaptation.changes.includes('Prominent owner change notice'));
+    }
+    for (const item of row.importSpecifierChanges) {
+      assert.match(item.from, /^@repo\/shadcn-ui\/(?:components\/ui\/[a-z-]+|lib\/utils)$/);
+      assert.match(item.to, /^(?:\.\/|\.\.\/)(?:shadcn\/|lib\/)?[a-z-]+$/);
+      assert.equal(text.split('"' + item.to + '"').length, 2, 'one quoted import occurrence');
+      text = text.replace('"' + item.to + '"', '"' + item.from + '"');
+    }
+    const original = Buffer.from(text);
+    assert.equal(hash(original), row.upstreamSha256, 'only recorded specifiers and adaptation edits changed');
+    assert.equal(original.length, row.upstreamBytes);
+    assert.equal(createHash('sha1').update(`blob ${original.length}\0`).update(original).digest('hex'), row.upstreamBlobSha1);
+    paths.push(row.promotedPath);
+  }
+  return paths;
+}
+
+export function adoptedFiles(root = HERE) {
+  const provenance = verifyPromotedSources(root);
+  return [...provenance.sources, ...provenance.additions].map(x => x.promotedPath).sort();
+}
+
+export function projectUiSources() { return [...PROJECT_UI_SOURCES]; }
 
 export function computePins(root = HERE) {
   verifyPromotedSources(root);
@@ -85,6 +143,7 @@ export function computePins(root = HERE) {
     schema: 'capiro-elements-promotion/1',
     scope: 'Source/provenance inventory only; not browser/runtime/release qualification',
     baselineSha256: BASELINE_SHA256,
+    projectAuthoredUi: PROJECT_UI_SOURCES.map(path => record(`packages/ui/${path}`, readBounded(join(uiRoot(root), path)))),
     ownedFiles: [...names, 'packages/qualification-elements/promotion-pins.json'].sort(),
     artifacts: names.map(path => record(path, readSource(root, path))),
     selfHashExcluded: 'packages/qualification-elements/promotion-pins.json',

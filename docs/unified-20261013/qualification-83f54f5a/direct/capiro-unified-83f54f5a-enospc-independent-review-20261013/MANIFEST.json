@@ -1,0 +1,64 @@
+{
+  "sealedUTC": "2026-10-13T08:29:26.170005+00:00",
+  "source": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "status": "INITIAL_GATE_FAILED_ENOSPC_CONTINUATION_PENDING_READ_ONLY_AUDIT",
+  "fileCount": 11,
+  "bytes": 1376736,
+  "files": [
+    {
+      "path": "FAILED-CASE.json",
+      "bytes": 3195,
+      "sha256": "945c2fa79582cd2547b835894cefb6470b6e89a433e536392e2b6d5b565d76d3"
+    },
+    {
+      "path": "ORIGINAL-FAILED-PROGRESS.json",
+      "bytes": 31769,
+      "sha256": "07fbf30de51e7d6a7c42b07b5561c81deefc13d516e77d51445f2e0d0db2f540"
+    },
+    {
+      "path": "OWNED-CACHE-DUPLICATES.json",
+      "bytes": 1711,
+      "sha256": "137408157b6a8e5cd4cf13f5f12f12b029fab92fb24f8c2461954d4601962ba4"
+    },
+    {
+      "path": "OWNED-CACHE-INVENTORY.json",
+      "bytes": 96955,
+      "sha256": "a1c41be491b8fbbafbc778940ada903fb9c59e03039620a32a8b00dfacfdf572"
+    },
+    {
+      "path": "RAW-EVIDENCE-BINDINGS.json",
+      "bytes": 2259,
+      "sha256": "330a96fbdfd3d6fc76dd2e8ac73be71cf924482d19d4c0b1473df84b3ee50554"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6207,
+      "sha256": "04f761ba369993cc8c0e129f727a775bff0e3df8cc4cc2ce11a658b7c35c6624"
+    },
+    {
+      "path": "ROOT-ARCHIVE-RECEIPT-SNAPSHOT.json",
+      "bytes": 938169,
+      "sha256": "5de9511f1f20ce0b3cbfbf467602f64ed420a9600a2630effa55669da8ab820b"
+    },
+    {
+      "path": "TRACE-EVIDENCE.json",
+      "bytes": 251092,
+      "sha256": "96ffb3d6bd04939a4ea9e647ae47bde62b7c923cf7a703bf73679e58fa447a82"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 36265,
+      "sha256": "1b6f7ca2d9ab852c6dacedfe19d6ef464f5dc5f2c2d140be5f676676a86ac8ba"
+    },
+    {
+      "path": "inspect.log",
+      "bytes": 1404,
+      "sha256": "85abf779cfab9bb484c3e5a7304ddecbfe3a6727b90d103e860ebdbdc412e1ad"
+    },
+    {
+      "path": "inspect.py",
+      "bytes": 7710,
+      "sha256": "adcc0d3b625a31174cca91c3b22c0e428195b7c7f803c6560a3f87db3084c25e"
+    }
+  ]
+}

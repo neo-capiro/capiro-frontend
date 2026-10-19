@@ -1,0 +1,123 @@
+
+Running 14 tests using 1 worker
+
+(node:758382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/profile-presentation.spec.ts:92:7 › facilities manager shows saved cards and inline editable fields at 1440px (3.9s)
+  ✘   2 apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 1440px (8.3s)
+(node:758626) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 apps/web/tests/browser/profile-presentation.spec.ts:232:7 › Files source chips and folder cards retain native provenance at 1440px (2.8s)
+  ✓   4 apps/web/tests/browser/profile-presentation.spec.ts:92:7 › facilities manager shows saved cards and inline editable fields at 360px (2.7s)
+  ✘   5 apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 360px (30.2s)
+(node:759150) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 apps/web/tests/browser/profile-presentation.spec.ts:232:7 › Files source chips and folder cards retain native provenance at 360px (3.0s)
+  ✓   7 apps/web/tests/browser/profile-presentation.spec.ts:291:5 › facilities manager saves inline edits through the existing receipt contract (2.8s)
+  ✓   8 apps/web/tests/browser/profile-presentation.spec.ts:323:5 › facilities manager preserves the unknown create fence across close and reopen (3.0s)
+  ✓   9 apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after remote update (1.6s)
+  ✓  10 apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after uncertain applied edit (1.5s)
+  ✓  11 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through expand and return (2.9s)
+  ✓  12 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through native pinned regrouping (2.7s)
+  ✓  13 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:87:5 › pending activity stays fenced while its response is held across expand and return (2.7s)
+  ✓  14 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:138:5 › expanded Log activity reuses the existing Quick log uncertain creation owner (2.9s)
+
+
+  1) apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 1440px 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  getByRole('dialog', { name: 'Quick log', exact: true }).getByLabel('Title', { exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Quick log', exact: true }).getByLabel('Title', { exact: true })
+        14 × locator resolved to <input value="" required="" name="title" maxlength="300"/>
+           - unexpected value "inactive"
+
+
+      220 |       exact: true,
+      221 |     });
+    > 222 |     await expect(quickLog.getByLabel("Title", { exact: true })).toBeFocused();
+          |                                                                 ^
+      223 |     await page.keyboard.press("Escape");
+      224 |     await expect(quickLog).not.toBeVisible();
+      225 |     await expect(expanded).not.toBeVisible();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:222:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-dcc42-ing-filtered-feed-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-dcc42-ing-filtered-feed-at-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-dcc42-ing-filtered-feed-at-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-dcc42-ing-filtered-feed-at-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 360px 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Engagement timeline', exact: true }).getByRole('button', { name: 'Log activity', exact: true })
+        - locator resolved to <button class="button primary">Log activity</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - element is outside of the viewport
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - element is outside of the viewport
+        - retrying click action
+          - waiting 100ms
+        53 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - element is outside of the viewport
+         - retrying click action
+           - waiting 500ms
+
+
+      215 |     await expanded
+      216 |       .getByRole("button", { name: "Log activity", exact: true })
+    > 217 |       .click();
+          |        ^
+      218 |     const quickLog = page.getByRole("dialog", {
+      219 |       name: "Quick log",
+      220 |       exact: true,
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:217:8
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-4d972-ting-filtered-feed-at-360px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-4d972-ting-filtered-feed-at-360px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-4d972-ting-filtered-feed-at-360px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/final-presentation-green/final-presentation-timelin-4d972-ting-filtered-feed-at-360px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 1440px 
+    apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 360px 
+  12 passed (1.2m)

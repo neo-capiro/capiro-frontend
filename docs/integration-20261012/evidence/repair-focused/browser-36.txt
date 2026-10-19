@@ -1,0 +1,58 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test billing-summary.spec.ts billing-summary-integration.spec.ts review-billing-route.spec.ts capability-execution.spec.ts capability-fit-boundary.spec.ts capability-registration-execution.spec.ts capability-presentation-visual.spec.ts portfolio-index.spec.ts registrant-intake.spec.ts tracker-alert-preferences.spec.ts --grep billing|late capability|late fit computation does not|late registration receipt|Figma capability|wordmark|selection stops|unavailable Core Configure --workers=3
+
+[WebServer] (node:70995) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 36 tests using 3 workers
+
+(node:71042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:71043) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:71041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/browser/billing-summary.spec.ts:49:1 › eligible billing admin sees real supplied rows with responsive light/dark styling (8.1s)
+  ✓   1 tests/browser/capability-execution.spec.ts:51:5 › late capability save cannot refresh or close after actor changes (8.6s)
+  ✓   4 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/undefined makes no financial request (4.9s)
+  ✓   5 tests/browser/capability-execution.spec.ts:51:5 › late capability save cannot refresh or close after client changes (6.7s)
+  ✓   2 tests/browser/billing-summary-integration.spec.ts:25:1 › actual Add profile keeps creation reachable around an optional billing disclosure (17.9s)
+  ✓   6 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/false makes no financial request (5.7s)
+  ✓   7 tests/browser/capability-execution.spec.ts:51:5 › late capability save cannot refresh or close after unmount changes (7.1s)
+  ✓   9 tests/browser/billing-summary.spec.ts:107:3 › denied standard_user/true makes no financial request (6.0s)
+  ✓   8 tests/browser/billing-summary-integration.spec.ts:79:1 › actual chooser omits financial summary without billing permission while retaining profile intake (10.9s)
+  ✓  11 tests/browser/billing-summary.spec.ts:107:3 › denied client_portal_user/true makes no financial request (5.7s)
+  ✓  10 tests/browser/capability-execution.spec.ts:51:5 › late capability remove cannot refresh or close after actor changes (9.9s)
+  ✓  12 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after actor changes (3.6s)
+  ✓  13 tests/browser/billing-summary.spec.ts:124:1 › collapsed disclosure requests nothing; Enter/Space expand/collapse work (5.4s)
+  ✓  15 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after client changes (3.9s)
+  ✓  14 tests/browser/capability-execution.spec.ts:51:5 › late capability remove cannot refresh or close after client changes (7.6s)
+  ✓  17 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after role changes (3.8s)
+  ✓  16 tests/browser/billing-summary.spec.ts:148:1 › capiro_admin follows direct guard without the optional membership bit (5.6s)
+  ✓  19 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after invalidate changes (4.0s)
+  ✓  20 tests/browser/billing-summary.spec.ts:166:1 › failed GET shows no amounts; explicit retry alone restores server values (6.5s)
+  ✓  18 tests/browser/capability-execution.spec.ts:51:5 › late capability remove cannot refresh or close after unmount changes (8.3s)
+  ✓  22 tests/browser/billing-summary.spec.ts:190:1 › canonical403 refuses financial data and shows actual permission failure (6.4s)
+  ✓  23 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after actor (9.1s)
+  ✓  24 tests/browser/billing-summary.spec.ts:205:1 › permission loss and invalidation hide previously cached amounts (4.9s)
+  ✓  25 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after standard-role (6.5s)
+  ✓  26 tests/browser/billing-summary.spec.ts:234:1 › held previous-tenant response cannot appear in new tenant scope (5.0s)
+  ✓  28 tests/browser/billing-summary.spec.ts:262:1 › closed consumer hides a held summary response (5.5s)
+  ✓  27 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after invalidate (8.0s)
+  ✓  29 tests/browser/billing-summary.spec.ts:283:1 › no-plan values remain purchased slots and never invent paid or trial capacity (4.5s)
+  ✓  30 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after client (7.9s)
+  ✓  21 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at desktop-light (37.1s)
+  ✓  31 tests/browser/portfolio-index.spec.ts:40:1 › wordmark and workspace modes stay in the canonical shared application (6.9s)
+  ✓  34 tests/browser/review-billing-route.spec.ts:4:1 › Manage billing uses canonical local Settings (9.8s)
+  ✓  35 tests/browser/tracker-alert-preferences.spec.ts:574:1 › unavailable Core Configure keeps preferences visible and disabled without requesting Intel (4.9s)
+  ✓  33 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-light (15.3s)
+  ✓  36 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-dark (11.2s)
+  ✓  32 tests/browser/registrant-intake.spec.ts:659:1 › selection stops at100 and remains selected through filtering (39.8s)
+
+  36 passed (2.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

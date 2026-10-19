@@ -1,0 +1,96 @@
+{
+  "method": "Pure source AST parsing, not browser/test execution",
+  "modules": [
+    {
+      "file": "apps/web/test/browser/newsletter-document-fixtures.ts",
+      "sha256": "5ed745d2cf849a57e26afe7969eb973d7a852da31c917aa10b0a1de84c94291b",
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1
+        },
+        {
+          "specifier": "@capiro/shared/newsletter",
+          "line": 2
+        },
+        {
+          "specifier": "./fixtures",
+          "line": 7
+        },
+        {
+          "specifier": "./module-route-fixtures",
+          "line": 8
+        },
+        {
+          "specifier": "./next-modules-fixtures",
+          "line": 9
+        },
+        {
+          "specifier": "./next-modules-fixtures",
+          "line": 11
+        }
+      ],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [
+        {
+          "file": "apps/web/test/browser/newsletter-document-fixtures.ts",
+          "kind": "function",
+          "symbol": "documentFixture",
+          "line": 48,
+          "nonblank": 88,
+          "fingerprint": "fa9917a8ab1044cdfedb876d9a0bacb5223ba3c52e7e62a3bd2c4f40009e561c"
+        }
+      ],
+      "nonblank": 190
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+      "sha256": "ae30ac931db3243e61ebec3fbd9a7279303a5dff4ba877dde5ce9602b09b6d03",
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1
+        },
+        {
+          "specifier": "./newsletter-document-fixtures",
+          "line": 2
+        }
+      ],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 307
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-document-navigation.spec.ts",
+      "sha256": "b2985a16eecb80a8685b81428350fd43c3026cb1e3f4cf97c2a707d176105774",
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1
+        },
+        {
+          "specifier": "./newsletter-document-fixtures",
+          "line": 2
+        }
+      ],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 223
+    }
+  ],
+  "review": {
+    "file": "apps/web/test/browser/newsletter-document-fixtures.ts",
+    "kind": "function",
+    "symbol": "documentFixture",
+    "line": 48,
+    "nonblank": 88,
+    "fingerprint": "fa9917a8ab1044cdfedb876d9a0bacb5223ba3c52e7e62a3bd2c4f40009e561c",
+    "reviewedBy": "core_intake_review (independent)",
+    "reviewedOn": "2026-10-13",
+    "disposition": "accepted",
+    "reason": "One finite synthetic saved-document fixture composes existing local-network, operation and client-session fixture owners; captures complete request bodies and intercepted dispatch timing; queues bounded explicit response variants. It does not replace production parsers, controller/journal or application boundary. Colocated request capture, response queue and observable isolation records make late-settlement and CAS controls auditable. The two suites partition document transitions versus navigation/authority lifetime; no duplicate production validator or unrelated subsystem. Canonical architecture discovery omits browser tests, so this is an explicit manual review under the same size/semantic policy, not a guard waiver."
+  }
+}

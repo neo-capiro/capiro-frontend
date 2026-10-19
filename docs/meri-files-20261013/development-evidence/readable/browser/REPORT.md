@@ -1,0 +1,31 @@
+# Files browser verification
+
+**PASS: 27 cases / 27 attempts, zero skipped, unexpected, flaky or retried; exit 0.** Corrected source-bound run: 2026-10-13 09:02:17 UTC, 51.098 seconds, one worker, system Chromium, canonical component harness on port5197. `corrected-results.json`, `corrected.log`, `corrected-exit.txt` and `RUN-SUMMARIES.json` are primary receipts. No full Next build, install, production server, native service/provider/model call or commit was performed.
+
+The four newly owned browser files are `apps/web/test/browser/meri-files-{fixtures.ts,workflow.spec.ts,lifetime.spec.ts,navigation.spec.ts}`. The host, opaque-session controller, document adapter/transport/journal, UI controller and public0.1.2 receiver run unchanged; HTTP, Clerk/session/client reads, document receipts and byte storage are explicitly synthetic. `initial-source.json` and `final-source.json` show every captured production file unchanged across both browser runs. These bind an uncommitted source-in-progress candidate above base83f54f5, not a final frozen shipping claim. Shared pure public fixtures were authored by the independent unit owner and imported directly.
+
+## What the controls establish
+
+- DOCX and XLSX workflows at1440px and390px: no mount/edit dispatch, explicit connection, create, selected-version inspect, receiver-verified binary download, actual Blob link download and filename/byte equality, acknowledged complete-content revision and exact parent ID. Draft/Pending, unverified native rendering and Excel recalculation limits remain visible. Download URL is revoked on the next operation.
+- Six held-create cases cover user/session/organization replacement with late200 and401; an additional selected-client replacement cannot restore the old version. Explicit reconnection remains required. Current401/403 and idle expiry remove private fields/versions/URL resources; sign-out disposes them without background operations.
+- Same-client verification hides mounted private fields and version actions, then restores the exact typed body and known version after authorization succeeds. A write held across a successful same-client read remains pending and receives its valid completion without being aborted. A denied current-client refetch destroys private state.
+- Both unknown and in-flight create remain fenced across Modules Back/Forward and explicit reconnect; successful inspection of a known version does not clear the pending/uncertain write. The same create intent does not get a second delivery. A wrong download hash creates no object URL and removes the failed read's actions.
+- Desktop and phone keyboard navigation reaches Files and connection controls, preserves selected-client URLs and Back/Forward, and causes no automatic document request. Width checks find no horizontal document overflow. Disabled service and missing-client entry stay truthful and send no session/document requests.
+
+`TEST-MATRIX.json` lists exact source refs. `CAPTURES.json` indexes16 named captures: Word/Excel editor, revision and native-pending views at both widths; unavailable at both widths; keyboard at both widths. Additional focused keyboard screenshots/styles are preserved in Playwright attachments. This reviewer viewed phoneWord native-pending, desktopExcel native-pending and phoneExcel revision: content is painted, phone columns stack, identifiers wrap, revision acknowledgment and draft/native/recalculation notes remain visible. Parent independent visual acceptance remains separate.
+
+## Accessibility and native limits
+
+Six full default axe checks pass with zero violations. Three desktop reports retain an **incomplete** color-contrast node on the existing New conversation gradient control (`AXE-SUMMARY.json`, exact raw `axe-1..6.json`); this is not silently counted as a manual contrast pass. Phone reports have no incomplete nodes. Keyboard tests use actual Tab order, visible focus outline and Enter; they do not represent real assistive-technology, all-route, all-zoom or WCAG certification. Dark-mode visual parity, Figma pixel parity, native Clerk/RLS/current-run authority, artifact capability/storage/worker effects, Word opening/rendering and Excel recalculation remain unqualified.
+
+The shared synthetic binary fixture is18 UTF8 bytes, `Synthetic document`, for all formats. The UI and public receiver really verify/serve these bytes under synthetic DOCX/XLSX metadata; **the downloads are not native Office files**. This test proves header/hash/size/lifetime handling, not native document generation or semantic content preservation. Receiver success and synthetic currentBytesVerified do not establish live authority or native truth.
+
+## Preserved attempts and test-only corrections
+
+The initial launcher failed before collecting tests because the external Playwright config directory lacked ESM package metadata (`initial.log`, exit1). External metadata fixed loading; no application change.
+
+The first actual cohort was17passed/10failed (246.009 seconds), preserved intact under `candidate-*`. Eight failures came from exact getByLabel matching of populated label-wrapped textareas and the desktop link-only expectation; two came from a generic connect helper requiring editable fields while the expected unresolved-write fence correctly disabled them. Correction uses the exact textbox accessible name (same strings and assertions), existing desktop button/mobile link semantics, and explicit disabled-field assertion for fenced reconnects. No assertion, route/body/effect count or failure evidence was removed. The unchanged production then passed all27. These were observed test-harness assumptions, not claimed product defects or source failing-before evidence.
+
+Targeted ESLint passes, exit0. No full TypeScript or combined gate ran here. Three cohesive function size-review proposals are in `STRUCTURE-REVIEW-PROPOSAL.json`; registry unchanged. The independent root review owns acceptance.
+
+The canonical Playwright teardown exited both owned server processes. Port5197 returns ECONNREFUSED(111). PID records1405028/1407560 are exited zombies awaitingPID1 reaping, with empty command lines; neither is a running server. `LEASE-RELEASE.json` preserves the exact observation. No unrelated process was signalled.

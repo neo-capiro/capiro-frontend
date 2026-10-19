@@ -1,0 +1,54 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/activity-command.spec.ts tests/browser/overview-removal.spec.ts tests/browser/quick-log-meeting.spec.ts --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/activity-command.spec.ts tests/browser/overview-removal.spec.ts tests/browser/quick-log-meeting.spec.ts --workers=3
+
+[WebServer] (node:185163) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 23 tests using 3 workers
+
+(node:185184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:185183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:185182) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (8.9s)
+  ✓   1 tests/browser/overview-removal.spec.ts:31:1 › submission explicit confirmation, rejected request retry, exact removal and retained data (9.9s)
+  ✓   4 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (5.1s)
+  ✓   2 tests/browser/quick-log-meeting.spec.ts:34:3 › meeting handoff uses current client 10000000-0000-4000-8000-000000000001, carries no activity draft and sends no write (16.0s)
+  ✓   5 tests/browser/overview-removal.spec.ts:65:1 › wrong deletion receipt freezes across close/reopen and GET-only refresh (9.5s)
+  ✓   6 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (10.5s)
+  ✓   8 tests/browser/overview-removal.spec.ts:89:1 › fresh submission changes prevent DELETE (7.8s)
+  ✓   7 tests/browser/quick-log-meeting.spec.ts:34:3 › meeting handoff uses current client 10000000-0000-4000-8000-000000000002, carries no activity draft and sends no write (13.3s)
+  ✓   9 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (8.5s)
+  ✓  10 tests/browser/overview-removal.spec.ts:100:1 › closing held submission preflight aborts before DELETE (7.2s)
+  ✓  12 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (6.4s)
+  ✓  11 tests/browser/quick-log-meeting.spec.ts:109:1 › phone handoff wraps as designed and opens Calendar without satisfying activity validation (10.6s)
+  ✓  14 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (6.5s)
+  ✓  13 tests/browser/overview-removal.spec.ts:117:1 › Quick log Undo uses exact newly-created record rather than latest unrelated entry (11.6s)
+  ✓  15 tests/browser/quick-log-meeting.spec.ts:151:1 › an unsupported current role cannot navigate through the meeting handoff (7.6s)
+  ✓  16 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (9.1s)
+  ✓  17 tests/browser/overview-removal.spec.ts:136:1 › wrong creator create receipt offers no Undo and blocks duplicate create (9.8s)
+  ✓  18 tests/browser/quick-log-meeting.spec.ts:170:1 › a pending activity save blocks the handoff and preserves the original exact save receipt (8.3s)
+  ✓  20 tests/browser/quick-log-meeting.spec.ts:215:1 › an unknown activity result retains the draft, blocks the handoff and exposes no Undo (5.7s)
+  ✓  19 tests/browser/overview-removal.spec.ts:152:1 › lost Undo response stays uncertain and never replays deletion (5.8s)
+  ✓  21 tests/browser/overview-removal.spec.ts:167:1 › an unknown second create cannot leave the prior entry Undo visible (4.8s)
+  ✓  22 tests/browser/overview-removal.spec.ts:206:1 › mobile dark removal is responsive and retains confirmation (2.3s)
+  ✓  23 tests/browser/overview-removal.spec.ts:225:1 › unsupported role does not fetch history or offer mutation controls (5.2s)
+
+  23 passed (1.3m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

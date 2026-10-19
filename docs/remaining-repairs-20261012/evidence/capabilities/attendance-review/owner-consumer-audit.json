@@ -1,0 +1,96 @@
+{
+  "scope": "All browser spec text scanned for engagement/meetings, MeetingDetail, attendance labels, meeting deep links, Information/Preparation/Notes/Debriefs navigation and Calendar harness imports. 16 direct meeting-contract consumers plus two adjacent link/voice consumers inspected.",
+  "files": [
+    {
+      "file": "apps/web/tests/browser/attendance.spec.ts",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+      "classification": "Only implicit Information-only consumer; adapted shared helper and scoped initial attachment fixture; all 12 original scenarios/assertions retained."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06",
+      "classification": "Isolated MeetingArtifacts harness; no MeetingDetail lifecycle entry."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+      "sha256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f",
+      "classification": "Isolated MeetingForm harness; no MeetingDetail lifecycle entry."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-client-clear.spec.ts",
+      "sha256": "0171c3c5cec47c8c723531b4f63e5955c131cc0db772ed56f71d97318216cede",
+      "classification": "Isolated MeetingForm harness; no MeetingDetail lifecycle entry."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-boundary.spec.ts",
+      "sha256": "98b51e644314deaa4b5c2b92d14d95c5d0741fb8c11ff4f85c2e75e04017f248",
+      "classification": "Calendar feed/current-client/new-form checks; does not consume Information-only meeting content."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-preparation.spec.ts",
+      "sha256": "0e6e47a3e1d22d15078c2084e801a4449948988028a68429700595df13092317",
+      "classification": "Explicit Preparation button navigation."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+      "classification": "New intentional default-tab/identity controls; remains unchanged."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "classification": "Persistent Share/Edit actions and explicit Notes navigation; original attempt barrier remains unchanged."
+    },
+    {
+      "file": "apps/web/tests/browser/files.spec.ts",
+      "sha256": "8b192320d37c1abeeaa12c71aff379547e93f4cfeabd11055623af600fce3ac8",
+      "classification": "Calendar feed/view/scope preservation only; no meeting detail opened."
+    },
+    {
+      "file": "apps/web/tests/browser/manual-debrief.spec.ts",
+      "sha256": "baa61f651707935b274c9937cb1f45d7b8b893ac8af3db6901147cbb60705c79",
+      "classification": "Explicit Debriefs navigation in open helper."
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-documents-calendar.spec.ts",
+      "sha256": "2ad5faf8dd3099bcad520b8ffac1973fe30ad8cd34e429f6f460b9f379051062",
+      "classification": "Explicit chosen Preparation/Debriefs navigation in open helper."
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-documents.spec.ts",
+      "sha256": "bf101a0fa353ae785b8ce6035acb70ee59ac46b67fc863730870c906bd623d78",
+      "classification": "Isolated document action harness; no MeetingDetail lifecycle entry."
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-library.spec.ts",
+      "sha256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e",
+      "classification": "Detail visibility/close or persistent Client assignment action; Debriefs cases navigate explicitly."
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-preparation.spec.ts",
+      "sha256": "6f123f0a9c75b391f21e8d50d0d1d5a4acb5a663560da37778b2101cf38adac6",
+      "classification": "Explicit Preparation navigation in open helper."
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-review.spec.ts",
+      "sha256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331",
+      "classification": "Isolated review harness plus integration case with explicit Preparation/Debriefs navigation."
+    },
+    {
+      "file": "apps/web/tests/browser/voice-integration.spec.ts",
+      "sha256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4",
+      "classification": "Explicit Debriefs navigation."
+    },
+    {
+      "file": "apps/web/tests/browser/activity-actions.spec.ts",
+      "sha256": "07fa6ccaeb2b2523f7ba18f7ad947c13063281ea809d2ce7758260656cba19be",
+      "classification": "Only asserts meeting URL on a link; does not open meeting details."
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-voice.spec.ts",
+      "sha256": "7efc984fb732ee131e93c5501049a61088b713e6a346f5bc3baf188122deac82",
+      "classification": "Isolated debrief voice harness; no MeetingDetail lifecycle entry."
+    }
+  ],
+  "productionConclusion": "No runtime defect found. Attendance exists only in Information; upcoming lifecycle entry intentionally Preparation. Initial scoped attachment GET must return native current-meeting records, not unrelated generic client files."
+}

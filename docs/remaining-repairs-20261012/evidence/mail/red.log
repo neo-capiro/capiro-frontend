@@ -1,0 +1,121 @@
+
+Running 3 tests using 1 worker
+
+(node:709716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/mail-rich-compose.spec.ts:66:3 › rich Bold survives review and explicit send without signature duplication (30.2s)
+(node:709953) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/mail-rich-compose.spec.ts:82:1 › verified rewrite uses text and Undo restores the complete formatted draft (30.2s)
+(node:710679) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/mail-rich-compose.spec.ts:153:1 › keyboard formatting and mobile toolbar remain reachable (7.7s)
+
+
+  1) apps/web/tests/browser/mail-rich-compose.spec.ts:66:3 › rich Bold survives review and explicit send without signature duplication 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Bold', exact: true })
+
+
+      56 |   await message(page).fill(text);
+      57 |   await message(page).press("ControlOrMeta+a");
+    > 58 |   await page.getByRole("button", { name, exact: true }).click();
+         |                                                         ^
+      59 | }
+      60 | async function review(page: Page) {
+      61 |   await page.getByRole("button", { name: "Review email", exact: true }).click();
+        at format (/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:58:57)
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:68:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/mail-rich-compose.spec.ts:82:1 › verified rewrite uses text and Undo restores the complete formatted draft 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Bold', exact: true })
+
+
+      56 |   await message(page).fill(text);
+      57 |   await message(page).press("ControlOrMeta+a");
+    > 58 |   await page.getByRole("button", { name, exact: true }).click();
+         |                                                         ^
+      59 | }
+      60 | async function review(page: Page) {
+      61 |   await page.getByRole("button", { name: "Review email", exact: true }).click();
+        at format (/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:58:57)
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:84:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/mail-rich-compose.spec.ts:153:1 › keyboard formatting and mobile toolbar remain reachable 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Bold', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Bold', exact: true })
+
+
+      154 |   await page.setViewportSize({ width: 390, height: 844 });
+      155 |   const state = await setup(page);
+    > 156 |   await expect(page.getByRole("button", { name: "Bold", exact: true })).toBeVisible();
+          |                                                                         ^
+      157 |   await message(page).fill("Keyboard rich draft.");
+      158 |   await message(page).press("ControlOrMeta+a");
+      159 |   await message(page).press("ControlOrMeta+b");
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:156:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    apps/web/tests/browser/mail-rich-compose.spec.ts:66:3 › rich Bold survives review and explicit send without signature duplication 
+    apps/web/tests/browser/mail-rich-compose.spec.ts:82:1 › verified rewrite uses text and Undo restores the complete formatted draft 
+    apps/web/tests/browser/mail-rich-compose.spec.ts:153:1 › keyboard formatting and mobile toolbar remain reachable 

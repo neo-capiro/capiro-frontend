@@ -1,0 +1,18 @@
+{
+  "head": "3e7ad7c648b65b84c758388f9505b3b057e0c57f",
+  "srcTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "status": "",
+  "canonicalSHA256": "01f43f1b255ef9c7125872d995f6f3ad38d7bc098a4b8d669c17d56fc8870285",
+  "executedSHA256": "01f43f1b255ef9c7125872d995f6f3ad38d7bc098a4b8d669c17d56fc8870285",
+  "substitutions": [
+    {
+      "before": "from '/workspace/capiro-visual-closeout/apps/web/test/browser/fixtures'",
+      "after": "from '/workspace/capiro-visual-closeout/apps/web/test/browser/fixtures'"
+    },
+    {
+      "before": "from '/workspace/capiro-visual-closeout/apps/web/test/browser/module-route-fixtures'",
+      "after": "from '/workspace/capiro-visual-closeout/apps/web/test/browser/module-route-fixtures'"
+    }
+  ],
+  "assertionChanges": false
+}

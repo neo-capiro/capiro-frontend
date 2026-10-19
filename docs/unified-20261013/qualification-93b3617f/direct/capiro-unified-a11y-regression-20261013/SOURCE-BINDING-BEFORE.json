@@ -1,0 +1,46 @@
+{
+  "createdUTC": "2026-10-13T07:13:58.696280+00:00",
+  "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "status": "",
+  "files": [
+    {
+      "proposal": "/tmp/capiro-unified-a11y-tests-proposal-20261013/accessibility.ts",
+      "staged": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/test/accessibility.ts",
+      "intended": "apps/web/test/accessibility.ts",
+      "bytes": 697,
+      "sha256": "041d33331ffe2aacbf9c2ac5bc86fa00e4134342612c9ad5ba311aa3e543dcce"
+    },
+    {
+      "proposal": "/tmp/capiro-unified-a11y-tests-proposal-20261013/portfolio-home-accessibility.spec.ts",
+      "staged": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "intended": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "bytes": 914,
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2"
+    },
+    {
+      "proposal": "/tmp/capiro-unified-a11y-tests-proposal-20261013/shared-home-accessibility.spec.ts",
+      "staged": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "intended": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "bytes": 1006,
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf"
+    }
+  ],
+  "borrowedLinks": [
+    {
+      "path": "/tmp/capiro-unified-a11y-regression-20261013/node_modules",
+      "target": "/workspace/capiro-onboard-port-20261013/node_modules",
+      "use": "Read only; no mutation permission"
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/tests/browser/fixtures.ts",
+      "target": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/fixtures.ts",
+      "use": "Read only; no mutation permission"
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/test/browser/fixtures.ts",
+      "target": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/fixtures.ts",
+      "use": "Read only; no mutation permission"
+    }
+  ]
+}

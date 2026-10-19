@@ -1,0 +1,33 @@
+# Desktop Planner detail/scroll/pending-save successor
+
+Frozen parent PR45:20568813c9dc9ce161962e159e0a3751a196195c. Geometry code83ffa8c561b755689d256b3a5bdb022e4ec4cd4d then explicit no-ff merge of exactPR44bded987746d1f1a263bb4209c90b21ac5c978f40 producesb82f80e6a56ce600362a3913641f3d18c01d17d6. Both histories preserved. PR43 is absent; no mobile-only implementation/parity work resumed. PR45 remains frozen for shipping.
+
+Qualified code/test/review source: `8de8d0ebefa61b4c97e442c87ce9b6f3ec42f772`. Evidence-only successor has identical production/test bytes.
+
+## Release-critical behavior
+
+Actual1440light/dark local fixture baseline: PlannerNew/Edit/Detail all centeredx360 vsFigma3.1 rightdrawerx760/y0/w680/h1040. Feature-owned desktop CSS (min-width1024) now uses the existing Radix Modal via optionalclassName/stablebody slot, with fixed header, scrollable body and persistently visible right-aligned save/cancel footer. Full long detail descriptions are retained once in a bounded180px scrolling header so body actions remain reachable. Existing shared Modal defaults, scoped query/mutation/abort lifetimes, auth/client context and all API payloads remain canonical.
+
+PR44 necessity was reproduced separately: while a create request was held, submitted task name remained enabled onPR45. After this was reported the parent authorized integration. Exact synchronous duplicate-submit fence, native fieldset, all six explicit Radix disabled props, pending dismissal fence and identity-token cleanup are preserved with the drawer form layout. No second transport, API, DTO, serializer, session/authorization owner or lifecycle implementation. Required-name validation, actual held409 rejection, create/edit/versioned write/reload, nested edit/subtask focus restoration and fixed-footer disabling are source-bound local controls. These mutation guards and action reachability are release-critical frontend behavior.
+
+## Qualification and source boundary
+
+Combined76desktop/shared browser cases passed with0failures/skips/flaky, then11focusedcontrols passed including nested subtasks and two native resubmissions while a write remained held (one request only). Final combined selection on all final test bytes passed79cases with0failures/skips/flaky. Four Objective desktop captures passed; exact760/360columns confirmed for filled intake. Final merged npmcheck (public boundaries, types,113root/2367web/451Capiro/84transport/385newsletter+8declaration, lint/format/architecture) and production build passed. Standard credential-free standalone36superset observations+root/default-product smoke passed with0pageErrors; its existing unsplit route checks do not confer mobile/native acceptance. Final test-byte typecheck passed. Independent source/function review accepted both geometry and merged pending guards; exact final receipt/blob verification is recorded in the independent review.
+
+Retained diagnostics: frozen source7fail (six geometry + desktop pending field); helper-call attempt2pass4fail (new test argument error, corrected without product change); first selected regression63pass2fail (new capture expected wrong exact heading; canonicalEngagementManager now asserted); pre-integration65pass; initial integrated check stopped on duplicate accepted size-review metadata, corrected to one current record per symbol with prior records retained. Sparse merge removed checkout-only historical review docs: restored byte-exact from Git; no unreviewed source waiver. All failures remain evidence, not accepted results.
+
+## Exact desktop/shared selection
+
+`CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm run test:browser:modules --workspace @capiro/web -- desktop-task-drawer desktop-engagement-coverage next-modules-task-links next-modules-scope planner-engagement meeting-detail-current settings-scenes shared-home-accessibility shared-home-accessibility-interaction modules-home-design --grep-invert '390|360|320|phone|Phone|mobile|Mobile' --workers=2`
+
+All selected cases and terminal statuses are sealed with attachments. Default1440x1040 plus authored desktop/light/dark cases; names matching the documented mobile filter are excluded by Neo's scope. Existing mixed/shared cases remain unchanged. No skip/retry/threshold reduction. Primary capture: `npm run test:browser -- desktop-objective-detail-coverage --workers=2` (four1440light/darkcases). The focused parity scope covers the drawer container/header/body scrolling/footer and frontend pending safety; full task body pixel parity is not claimed.
+
+## Open design/functionality and owner gates
+
+Full-page Active Objective detail (Figma411:61442) remains explicitly open. Actual current ready-record route presents Edit objective drawer; these are different interaction states, not equivalent screenshots. This focused pass does not implement the full-page operational detail view. Filled intake geometry matches411:60728; owner-bound Meri question/cycle/profile content remains open pending canonical bindings/contract review. Blank reference411:60726 currently renders shell only and cannot qualify a blank intake form. No missing backend implementation is inferred: backendPR4a65ae3c8a9f1f0cf96d4f7d2ae30aad2fff172ff contains the API families; designated route/config/data and saved-layout binding mapping remain owner verification.
+
+Later desktop parity includes full task rich-description/field-grouping presentation and full-page Objective/Engagement content/state comparison. Existing task controls remain functional; no new rich-text serialization/Commitment UI or fabricated controls were added. Engagementoverview411:93988 and actual selected-meeting splitview are captured separately; no admitted full Modules selected-meeting frame was identified. Historical PortfolioCalendar cropped dialog nodes are not falsely reused as a Modules whole-frame acceptance target. See COVERAGE.json for exact reference/state provenance.
+
+Mobile and full responsive parity remain deferred. All337native rows remain open. SDK0.1.3/lock/pins are unchanged;0.1.5 requires explicit compatibility review. Production dependency audit from unchanged parent graph retains7low/0critical-high-moderate findings; this is not a clean-audit claim. No AWS, paid cloud build, deployment, live credentials/security or data-changing service tests. Native preview/new-image identity remains unverified.
+
+Review/integration sequence: PR45 remains the frozen candidate; this successor composes PR44 plus the focused drawer correction. Shipping owner may select this exact successor only after its evidence review and own release gates. No merge to main or deployment authorization is inferred.

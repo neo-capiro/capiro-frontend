@@ -1,0 +1,101 @@
+
+ RUN  v4.1.11 /workspace/capiro-next-delete/apps/web
+
+ ❯ tests/files-delete-recovery.test.ts (26 tests | 2 failed | 24 skipped) 148ms
+   × a silently superseded review returning 200 cannot replace or poison a newer successful collection 90ms
+   × a silently superseded review returning 403 cannot replace or poison a newer successful collection 55ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/files-delete-recovery.test.ts > a silently superseded review returning 200 cannot replace or poison a newer successful collection
+AssertionError: promise resolved "{ file: { …(20) } }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "file": {
++     "blockedReason": "scan_pending",
++     "byteSize": 512,
++     "clientId": "10000000-0000-4000-8000-000000000001",
++     "contentType": "application/pdf",
++     "createdAt": "2026-10-01T12:00:00Z",
++     "downloadUrl": null,
++     "extractionStatus": "pending",
++     "fileName": "Newer current collection.pdf",
++     "folder": "Reports",
++     "id": "60000000-0000-4000-8000-000000000001",
++     "indexedAt": null,
++     "lifecycleStatus": "quarantined",
++     "previewUrl": null,
++     "scanStatus": "pending",
++     "source": "manual",
++     "uploadedByName": "Test user",
++     "uploadedByUserId": null,
++     "usable": false,
++     "viewerMode": "all",
++     "viewerUserIds": [],
++   },
+  }
+
+ ❯ tests/files-delete-recovery.test.ts:306:36
+    304|     await expect(state.remove()).rejects.toMatchObject({ status: 503 }…
+    305|     const review = state.review();
+    306|     const rejected = expect(review).rejects.toMatchObject({ status: 40…
+       |                                    ^
+    307|     await vi.waitFor(() => expect(release).toBeDefined());
+    308|     const options = filesOptions(state.api, state.cache, clientId);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/files-delete-recovery.test.ts > a silently superseded review returning 403 cannot replace or poison a newer successful collection
+AssertionError: promise resolved "{ file: { …(20) } }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "file": {
++     "blockedReason": "scan_pending",
++     "byteSize": 512,
++     "clientId": "10000000-0000-4000-8000-000000000001",
++     "contentType": "application/pdf",
++     "createdAt": "2026-10-01T12:00:00Z",
++     "downloadUrl": null,
++     "extractionStatus": "pending",
++     "fileName": "Newer current collection.pdf",
++     "folder": "Reports",
++     "id": "60000000-0000-4000-8000-000000000001",
++     "indexedAt": null,
++     "lifecycleStatus": "quarantined",
++     "previewUrl": null,
++     "scanStatus": "pending",
++     "source": "manual",
++     "uploadedByName": "Test user",
++     "uploadedByUserId": null,
++     "usable": false,
++     "viewerMode": "all",
++     "viewerUserIds": [],
++   },
+  }
+
+ ❯ tests/files-delete-recovery.test.ts:306:36
+    304|     await expect(state.remove()).rejects.toMatchObject({ status: 503 }…
+    305|     const review = state.review();
+    306|     const rejected = expect(review).rejects.toMatchObject({ status: 40…
+       |                                    ^
+    307|     await vi.waitFor(() => expect(release).toBeDefined());
+    308|     const options = filesOptions(state.api, state.cache, clientId);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 24 skipped (26)
+   Start at  18:18:28
+   Duration  523ms (transform 116ms, setup 0ms, import 249ms, tests 148ms, environment 0ms)
+

@@ -1,0 +1,111 @@
+{
+  "reviewer": "/root/prospects_review",
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "assessmentCheckout": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "method": "Independent frozen-source comparison, existing diagnostic/canonical result inspection and actual saved Figma411:94827 screenshot inspection. No new browser runs or source edits.",
+  "summary": "Keep MS02–05 as P2 Modules source defects, scoped to the exact routes. Split MS06 functional join-link omission from its separate visual implementation gap. None demonstrates a canonical /calendar regression or authorization bypass. Normalize PROS-F01 to P2 alongside OWI-F01.",
+  "findings": [
+    {
+      "id": "MS02",
+      "disposition": "CONFIRMED_MODULES_SOURCE_DEFECT",
+      "severity": "P2",
+      "reason": "The shared architecture promises preserved verified-client selection. Modules useCalendar initializes its own clientId to an empty string and consequently queries unscoped accessible meetings even when the URL client was verified. This is incorrect scope presentation/selection, not a deliberately unavailable selector.",
+      "canonicalComparison": "Portfolio CalendarPage.tsx:49 consumes the URL clientId; :63–68 preserves other query fields on changes; :132–147 renders the selected scope. Canonical evidence passes scoped client/date/zone/view retention.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/calendar/useCalendar.ts:18",
+        "apps/web/src/features/modules/calendar/useCalendar.ts:29",
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:49",
+        "docs/ARCHITECTURE.md:9"
+      ],
+      "action": "Initialize and synchronize the Modules calendar scope from the verified selected-client boundary, then keep its selector and URL consistent. Preserve view/date when changing scope.",
+      "rowImpact": "Primarily the MCAL-003 scope-retention facet and Modules scope entry. MCAL-002 selector population itself is present; do not mark that entire criterion broken.",
+      "limit": "No evidence of widened backend permission. Master view still receives only the backend's accessible records."
+    },
+    {
+      "id": "MS03",
+      "disposition": "CONFIRMED_MODULES_SOURCE_OMISSION",
+      "severity": "P2",
+      "reason": "MCAL-009 explicitly requires scheduled and due dates. Modules plannerItems uses dueOn ?? startOn and one task key, dropping a distinct start occurrence that the same available data can represent. No missing backend capability is needed to fix this.",
+      "canonicalComparison": "Portfolio plannerCalendarItems independently projects start and due with distinct keys, suppressing only an identical same-time occurrence. The supplied canonical diagnostic passes both dates with meetings denied.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/calendar/agenda.ts:56",
+        "apps/web/src/features/portfolio/calendar/planner-feed.ts:12",
+        "apps/web/src/features/portfolio/calendar/planner-feed.ts:27"
+      ],
+      "action": "Project independently scheduled starts and dues, retain date/time precision, and deduplicate only genuinely identical occurrences.",
+      "rowImpact": "A Modules implementation failure of the scheduled/due facet. Keep the existing canonical /calendar MCAL-009 result intact.",
+      "limit": "Call this a confirmed source omission, not a temporal regression: this review did not establish an earlier good Modules revision."
+    },
+    {
+      "id": "MS04",
+      "disposition": "CONFIRMED_MODULES_FAILURE_ISOLATION_DEFECT",
+      "severity": "P2",
+      "reason": "CalendarEvents places the entire mixed Agenda under StatusPanel(meetings.error). StatusPanel returns early on a meetings error, so successfully loaded independent Planner items are hidden while their source counter remains. This breaks implemented composition and is not a planned unavailable source.",
+      "canonicalComparison": "Portfolio CalendarPage.tsx:70–75 combines successful feeds independently; :251–272 renders per-feed errors; :279–286 still renders available items. The canonical diagnostic confirms Planner survives denied meetings.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/calendar/CalendarCard.tsx:48",
+        "apps/web/src/shared/module-ui/layout.tsx:76",
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:70",
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:279"
+      ],
+      "action": "Render each source's loading/error state independently of the mixed available Agenda; a denied meetings source must not suppress a successful Planner source.",
+      "rowImpact": "Modules mixed-source availability facet related to MCAL-013. It does not demonstrate permission widening or invalidate canonical source-isolation acceptance.",
+      "limit": "No authorization bypass claim; the failure is loss of independently authorized visible content."
+    },
+    {
+      "id": "MS05",
+      "disposition": "CONFIRMED_MODULES_BROKEN_NAVIGATION_INTEGRATION",
+      "severity": "P2",
+      "reason": "The Agenda deliberately constructs a record-specific task link, but PlannerScreen never consumes its task parameter and TaskWorkspace initializes task to null. A user activating that link lands on generic My tasks. The task list/editor exist; the missing piece is the route-to-record binding.",
+      "canonicalComparison": "Canonical Portfolio Agenda does not create an equivalent internal Planner task link; plannerCalendarItems emits sourceId but no href and Agenda renders the task title as text. Therefore this is not a regression of canonical global-calendar navigation.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/calendar/agenda.ts:70",
+        "apps/web/src/features/modules/planner/PlannerScreen.tsx:37",
+        "apps/web/src/features/modules/planner/TaskWorkspace.tsx:59",
+        "apps/web/src/features/portfolio/calendar/Agenda.tsx:57"
+      ],
+      "action": "Either implement current-authorized record resolution and open the selected task from this parameter, or remove the successful-looking record link until that binding exists. Prefer the former because the current UI already offers drilldown.",
+      "rowImpact": "Track as a distinct shipped Modules navigation defect. MCAL-009's literal criterion is task/date display, so do not use this alone to fail its date facet.",
+      "limit": "No claim that Planner writing or task access is generally unavailable. No earlier good Modules route version was demonstrated."
+    },
+    {
+      "id": "MS06",
+      "disposition": "SPLIT_FUNCTIONAL_OMISSION_AND_VISUAL_IMPLEMENTATION_GAP",
+      "severity": "P2",
+      "functionalFinding": "The reviewed engagement schema retains joinLink, but shared Meetings MeetingDetail never consumes it. A safe supplied join link should be usable in the existing detail surface. This is an actionable source omission independent of paid generation or service integration.",
+      "visualFinding": "Actual Figma411:94827 shows a list/detail split view, attendee line, Join and prep panel; the current Modules surface is a table plus modal. Record that as a distinct unimplemented design/presentation criterion, not a runtime regression. Do not bundle missing Meri generation with the join-link fix.",
+      "canonicalComparison": "Portfolio MeetingDetail.tsx:97–106 safely renders Join and :110–120 renders attendees. It uses a drawer, so canonical functional support does not establish that it matches the Modules split-view design.",
+      "sourceRefs": [
+        "apps/web/src/shared/capiro/operations/engagement.ts:31",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx:29",
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:97",
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:110"
+      ],
+      "action": "First surface the safe current join URL in Modules detail. Keep the list/detail visual rebuild and attendee projection as separately bounded acceptance work; keep Meri generation explicitly disabled until its contract is available.",
+      "rowImpact": "The omitted join link directly affects Modules' MCAL-006-equivalent functional facet. Layout mismatch belongs to Figma411:94827 visual acceptance. Do not reopen the canonical /calendar Join/attendee facet without separate evidence.",
+      "limit": "Attendee availability in the Modules response was not independently established here; the current Modules schema does not declare attendees. Do not claim that attendee rendering needs no contract review."
+    }
+  ],
+  "severityConsistency": {
+    "ids": [
+      "PROS-F01",
+      "OWI-F01"
+    ],
+    "recommendation": "Normalize PROS-F01 from P1 to P2; retain OWI-F01 at P2.",
+    "reason": "Both show previously delivered cached records after a fresh list403. Objectives additionally opens an editor with old fields; Prospects opens a cached Pipeline. My prospect reproduction did not establish higher-impact exposure, another identity/tenant receiving data, a successful protected write, or server authorization bypass.",
+    "impact": "They still block current-access frontend acceptance for their respective surfaces and deserve a shared fix pattern: successful current read gating for records and dependent controls.",
+    "originalEvidencePreserved": "Original findings.json and report.md retain the initial P1 for audit traceability; this secondary recommendation supersedes that severity for root integration.",
+    "unrelatedDataLoss": "PROS-F02 is distinct: valid successful draft-save receipts trigger loss of text typed during the pending save. This severity review does not downgrade that finding."
+  },
+  "evidenceReviewed": [
+    "/tmp/capiro-remaining-assessment-20261012/modules_settings/findings.json",
+    "/tmp/capiro-remaining-assessment-20261012/modules_settings/canonical-results.json",
+    "/tmp/capiro-remaining-assessment-20261012/modules_settings/browser-results.json",
+    "/tmp/capiro-remaining-assessment-20261012/modules_settings/assigned-rows.json",
+    "/tmp/capiro-remaining-assessment-20261012/modules_settings/figma-engagement.png",
+    "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel/findings.json",
+    "/tmp/capiro-remaining-assessment-20261012/prospects/browser-results.json"
+  ],
+  "testEvidenceLimit": "Existing Modules diagnostic results:12 expected/0 unexpected. Canonical comparison:2 expected/0 unexpected. I inspected their result records and the corresponding source; I did not repeat those runs.",
+  "applicationChanges": false
+}

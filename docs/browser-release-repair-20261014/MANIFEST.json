@@ -1,0 +1,460 @@
+{
+  "baseSource": "ee9d872743f44f927fa924eebd764da8e093888c",
+  "qualifiedCodeSource": "50bb55586a77816c1b60b3b5edee4b9a41f5a8dd",
+  "manifestScope": "Exact staged Git blobs excluding this manifest; docs-only sealing successor has identical runtime/tests to qualified source",
+  "releaseAcceptanceScope": "desktop/shared local behavior; mobile/Figma/native acceptance deferred",
+  "nativeRowsAccepted": 0,
+  "nativeRowsOpen": 337,
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+      "bytes": 1181,
+      "sha256": "d069fe0b63ad3e1b35f43e8a3b5060993e2478a87be2f72f3538e036c87801bd"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "bytes": 3478,
+      "sha256": "608df5e9e5b1668c3f31bc36b649bfc2b03b24b079d0e92e3782407ec157a2b0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/attention.module.css",
+      "bytes": 2293,
+      "sha256": "f3058bea20feb9fe9d47057d1ee435007607aa96f3c7f2151f03833e0cfcec65"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "bytes": 10272,
+      "sha256": "9e58cf09dbbd56bf7ed483b8a4418716add2e2e4a0303282a0cb5e3c04a350d5"
+    },
+    {
+      "path": "apps/web/test/browser/acceptance-meri-icons.spec.ts",
+      "bytes": 1685,
+      "sha256": "697a2e02be17bec0ee85f25f4c633d167eb696787f808e1a45b9fa98e26e1852"
+    },
+    {
+      "path": "apps/web/test/browser/acceptance-meri-theme.spec.ts",
+      "bytes": 5318,
+      "sha256": "62891fe2416fb73c0a687b6200a32518e58906ef40684baaceb7a6d6331517c5"
+    },
+    {
+      "path": "apps/web/test/browser/acceptance-shared-incompletes.spec.ts",
+      "bytes": 3384,
+      "sha256": "047b788dcb9a1eaa97f41b14a284c2d2c1c16be6f5106fb3016086d6d8feaeff"
+    },
+    {
+      "path": "apps/web/test/browser/figma-parity.spec.ts",
+      "bytes": 6510,
+      "sha256": "7c59a9c7fdce69a5a0b8c4b31665df22988499bf83a82be7f968dad364bb17a9"
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+      "bytes": 5166,
+      "sha256": "fc3dfcad8adde949dd9d9b7154ae2ae5b8f711978ef679ac3370f39f61e4cd20"
+    },
+    {
+      "path": "apps/web/test/browser/modules-home-design.spec.ts",
+      "bytes": 4761,
+      "sha256": "2dd79e8e01a99695d82d80051e00d96981435d03d0c22a754d4db28d2b84121c"
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "bytes": 1229,
+      "sha256": "f84ffe73957a04b82b3bda77b1eafd8ebabe33ac98405f4483a852d7342896c4"
+    },
+    {
+      "path": "apps/web/test/rendered-contrast.ts",
+      "bytes": 5821,
+      "sha256": "b0ede9e13c98a9adb271afcb66bbd8d1d466cdd9f1257c0f6b83943cd47b08d1"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-portfolio-incompletes.spec.ts",
+      "bytes": 3145,
+      "sha256": "1413f517a029c71ed53ded3d0b77e9bb7ad02793f395cc77fa8f294990dccc1a"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "bytes": 2016,
+      "sha256": "cff0b6f06a786e8ffb65d40c8cc6b0275b17b05f9348c32a24c44db9c13ed263"
+    },
+    {
+      "path": "apps/web/tests/browser/rendered-contrast-composition.spec.ts",
+      "bytes": 1615,
+      "sha256": "1e3f5f7a8b9b7a0c2a103fcace46b5b65ae30a06c0242051db000bd1400c3964"
+    },
+    {
+      "path": "apps/web/tests/browser/visual-closeout.spec.ts",
+      "bytes": 10109,
+      "sha256": "ae8d8b4bafd72e0bf4a610ac96f441abf017f4bec444fcd74eab45c94e7f1703"
+    },
+    {
+      "path": "docs/acceptance-20261013/POST-BATCH-DELTA.json",
+      "bytes": 21545,
+      "sha256": "f79a0280ac414369a54df016f7be5831e67b2b3b07efd06b047e6ca19900a2e7"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/DESKTOP-RELEASE-SCOPE.md",
+      "bytes": 3200,
+      "sha256": "5cf72d47348cf33d66d7599648eddefbe1e78f3404a7beae10cac0f54694cb95"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/HANDOFF.md",
+      "bytes": 4728,
+      "sha256": "ab4a6c700cc4bf9189991652967b84940d9ed42f345902fe7515c6cd8699f5ed"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/INDEPENDENT-REVIEW.md",
+      "bytes": 4058,
+      "sha256": "bbf5603fe0f42cfe989b7498960ad74bf4412c936129d03af0d7a922472ea21a"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/LOSSLESS-RECEIPTS.json",
+      "bytes": 6976,
+      "sha256": "29a211af4481d9ba70be9db45fa205b31397b8be5d7e75d1598b0943700516c6"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/SECURITY-SCOPE.md",
+      "bytes": 1121,
+      "sha256": "d0ddd4d61c74c9d06dfe121dbba6eb84ce88fdaacaa0e3afa4470139e35bb828"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/SHIPPING-FAILURES.md",
+      "bytes": 1238,
+      "sha256": "ca491cc046e4a962c61fdae6283925f96cc6b6ad807424cc9a17604003ee6814"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/architecture-before-review.log.gz.json",
+      "bytes": 147241,
+      "sha256": "e9c2ce943404bcc2e83fcc500b89995bbf9ea5e28c51fbd05c081ec0c4df026f"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/before/acceptance-portfolio-incompletes.spec.ts",
+      "bytes": 2779,
+      "sha256": "dda6c730a9ce727dc1a1509722adc1d31cba7475afcc28e68524fb33f016d35d"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/before/browser.log.gz.json",
+      "bytes": 2960,
+      "sha256": "da83f4118bfb33816a2ae1f03054c9c7083b86052ab6c61335122315a4580370"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/before/failures.tar.gz",
+      "bytes": 4173758,
+      "sha256": "0955188df29aeca13019ae2759654d30223a8de59b98bd2139c0be00030e3baf"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/before/portfolio-home-accessibility.spec.ts",
+      "bytes": 914,
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/before/results.json.gz.json",
+      "bytes": 1267358,
+      "sha256": "5635829746ce0ebd94dfc4ee6c3ee2565ab78d38248022ceff392aa26db9265f"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/before/visual-closeout.spec.ts",
+      "bytes": 9787,
+      "sha256": "4f5648ba1039600934a08143b55fa3a9b9fb77e076e90e82194a6222c93cde6f"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/build.log.gz.json",
+      "bytes": 1407,
+      "sha256": "222197d1a678cf8f22d98624c538b2afa11f4d9bc0ee99b1d9d958f7e5eec93c"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/dependency-audit.json.gz.json",
+      "bytes": 1067,
+      "sha256": "602ba34f9c0770254aef5a3d8c24d3be635e9c189b5d6f484771d3d469368ac9"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/final-control/browser.log.gz.json",
+      "bytes": 1103,
+      "sha256": "fa498e02488d90e95d9a4960c2b582a751f8a6b94a4b1cf4ec838f987a1ca367"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/final-control/results.json.gz.json",
+      "bytes": 2231254,
+      "sha256": "82db3bd11add66683a42232d543e27a120802d76c1728742798ba67203b08e03"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/focus-first-attempt/browser.log.gz.json",
+      "bytes": 3407,
+      "sha256": "74f7055481fb3af862ef681fb78d88156153ea3bc27a1b4090af0e7620c53ca4"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/focus-first-attempt/failure.tar.gz",
+      "bytes": 893523,
+      "sha256": "99272ff544c8490da2d9a0c92d72f089879004e1257dd3adbc6458e0d236e802"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/focus-first-attempt/results.json.gz.json",
+      "bytes": 2066018,
+      "sha256": "507ad5d05e749f42c2b00e82116577735654570e4cca1ba79eb17cf32a9aff7b"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/format-final.log.gz.json",
+      "bytes": 474,
+      "sha256": "78341975d172fcfcee48432dd7cf6a746ba0ac782b32ed280c57d7e2e748f199"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/format-final2.log.gz.json",
+      "bytes": 474,
+      "sha256": "78341975d172fcfcee48432dd7cf6a746ba0ac782b32ed280c57d7e2e748f199"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/intermediate/browser.log.gz.json",
+      "bytes": 3776,
+      "sha256": "ab7453bc58b419500ab56268edef15bae08996fff70ff7cd1d9def370275d59d"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/intermediate/failures.tar.gz",
+      "bytes": 3086815,
+      "sha256": "2329e1023ac65485c8419d5c85357c5e6118c154435bfeae6921a723e9e02201"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/intermediate/results.json.gz.json",
+      "bytes": 1269510,
+      "sha256": "eb1b6463642d7fc9bcdcc9f4d181e4829e815c775c0186ccb8aa54c8c7df2737"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/lint-final.log.gz.json",
+      "bytes": 2896,
+      "sha256": "53dcdef14bdd34017b275d6a26007b6abc5e5d00b502ce1d9fe3c28116f39fe4"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/lint-final2.log.gz.json",
+      "bytes": 2896,
+      "sha256": "53dcdef14bdd34017b275d6a26007b6abc5e5d00b502ce1d9fe3c28116f39fe4"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-final/CASE-INDEX.json",
+      "bytes": 155561,
+      "sha256": "8b1c8b4456fc8bc8504e489843e4fe0316863880c4433557defab403638cd5eb"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-final/attachments.tar.gz",
+      "bytes": 7092646,
+      "sha256": "28d6a74465dd003f440522894cd9c14d0fa9b8ae03f812c9820feb61d4ae2370"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-final/browser.log.gz.json",
+      "bytes": 19772,
+      "sha256": "b08b27d7722af78eb3298ccd9a6f5f691f77f77e4c0c3d0b58c255dcddc1b750"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-final/results.json.gz.json",
+      "bytes": 9591915,
+      "sha256": "47c6b0f95924c99998521f688ebc0cdd7c4a8facd859849e97311b92b87de5cd"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-heading-attempt/browser.log.gz.json",
+      "bytes": 20616,
+      "sha256": "53c15eec3e7e3b9f03fee88c2f5dbff71aca9d2901707076d7c1bcd49fc68754"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-heading-attempt/failure-attachments.tar.gz",
+      "bytes": 5290724,
+      "sha256": "387839727e3a8a1c4aa2cad6e4f82e18dd90d2e708f5a811a485fd2eaa540aa3"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-complete-heading-attempt/results.json.gz.json",
+      "bytes": 9594483,
+      "sha256": "03d2d832dcebceda07854c7e78021853982cb214742f7093421192058404a2ef"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-control-first-attempt/browser.log.gz.json",
+      "bytes": 3580,
+      "sha256": "0d1d3ef588d4da681aba8933f8392210247c188dfe55999c0e058311aa7352a8"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-control-first-attempt/failures.tar.gz",
+      "bytes": 3421488,
+      "sha256": "356a31c030d3578860e6df05ecc6b76f88c4476203c133aa891adf0853fbf80a"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-control-first-attempt/results.json.gz.json",
+      "bytes": 3360458,
+      "sha256": "634aeef193bfe2b76737d2d6626ecb4530bbd01546879a95fcb935d7a9f7cd62"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-first-attempt/browser.log.gz.json",
+      "bytes": 1639,
+      "sha256": "5ba90464f3a738c091d1e6484b97dee0ca7ade30d0a7e9c3eb27c91d7834b57b"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/modules-first-attempt/failures.tar.gz",
+      "bytes": 8355747,
+      "sha256": "fa2b3431b2162aa6c54cd176281d99ebec10b39362ffa37c8571679ac3c5c118"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/npm-check.log.gz.json",
+      "bytes": 168818,
+      "sha256": "f4805654a89e5e4566cdcd49cae90ab9278a516d7c81fefdbbba8b46d38e1718"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-complete-final/CASE-INDEX.json",
+      "bytes": 398010,
+      "sha256": "e27f85ac84c552b68fa3c71267c54a105cd3f282f5d8f93a2523784c1a019487"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-complete-final/attachments.tar.gz",
+      "bytes": 17026066,
+      "sha256": "16d836469ed895efef6312fe9c40cae0805102bbb48792faa545218eacd4374b"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-complete-final/browser.log.gz.json",
+      "bytes": 54441,
+      "sha256": "77e7fc9be9fa13038236eeb79f75e0cc22e07992ccb34d62faa24ae5df17515a"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-complete-final/results.json.gz.json",
+      "bytes": 2969486,
+      "sha256": "40a73ade78e6361b50d5de639d15e5cea45e52c9f2bc314891b622a71fed149e"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-full-first-attempt/browser.log.gz.json",
+      "bytes": 56305,
+      "sha256": "8b363607fe762d090c9c9dfa52708a412dffabda297dd4ee7a29e3242c3bba92"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-full-first-attempt/failure-attachments.tar.gz",
+      "bytes": 69,
+      "sha256": "664916a1a919fb0fbb2ad68f6e0b589632db2da74ccfc4db3f3853a208cecc85"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/portfolio-full-first-attempt/results.json.gz.json",
+      "bytes": 2972290,
+      "sha256": "1d1c2ac3795eb4f3b3d4d45ede33bd8cb3c5ee7a736216926924a5a7f358fc1e"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/prior-size-reviews.json",
+      "bytes": 1396,
+      "sha256": "80d08464841575adcb2c69336382fc57bf8159314271ecf500c6836a2c8100ea"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/shared-controls-final/browser.log.gz.json",
+      "bytes": 1007,
+      "sha256": "654f3e780857e81421a4223df15241954e2dccae2ebe6013a7910f6d288073de"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/shared-controls-final/results.json.gz.json",
+      "bytes": 3199626,
+      "sha256": "109e2291759102e059357e1216a58419d6d9e206b487d5233578afcca46f3d4c"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone.log.gz.json",
+      "bytes": 1979,
+      "sha256": "51b2ff4c9c3b54fc4f193e9152ce99a64bc542bfe89011c31fe96bb1e3288253"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-1440-dark.png",
+      "bytes": 119855,
+      "sha256": "f7a4c614d007c14def4d8f6ae4a83ed69ed4a60188df916c067744d67f898267"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-1440-light.png",
+      "bytes": 51903,
+      "sha256": "c315862d3db98195343e3273e3cab3dd39c01479edc4a22f3ce88e285f165e43"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-390-dark.png",
+      "bytes": 52486,
+      "sha256": "1eece3d52085b716f3e73ae3311e65b17d2d944e7ed1a9ea217e2889d55a3ba3"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-390-light.png",
+      "bytes": 26099,
+      "sha256": "e634b78347bffa29323c5871d502eebdd0894757f25225ae403f22093e63c520"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-error-1440-dark.png",
+      "bytes": 204767,
+      "sha256": "d848d5e0714f7b3d1761efd60b8f4e5bf281d66a57cbad68e522ea0d57c3d310"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-error-1440-light.png",
+      "bytes": 111169,
+      "sha256": "c959d3c78d4d77a278382a7c3ad7f4a36cb6b687d08b279818cf7d52106ae567"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-error-390-dark.png",
+      "bytes": 129538,
+      "sha256": "c840b8ff7fe35b535922692082c6963fef3b30151d5fa2962c37a61c973f2a13"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-error-390-light.png",
+      "bytes": 82210,
+      "sha256": "e04b0fd3b2b3bbbc2a3c6002c71483c9029f78d9d904f9b5d0b7d0636a61a35d"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-files-1440-dark.png",
+      "bytes": 115536,
+      "sha256": "43719529c437ba5f14ff785b64ff761ebe1b7df88ae338edfb0ebd2181f5ecab"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-files-1440-light.png",
+      "bytes": 47660,
+      "sha256": "5748ba0ce40bf296dbcae86f1fea95c9c8344f54d8de3d9ef09fab8f18c4b8e5"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-files-390-dark.png",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/standalone-default.log",
+      "bytes": 147,
+      "sha256": "88b97c42ec7a31b4ac3d5acb8d365ca45669acef1a58e5dec51c0f6792d1709a"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/standalone/standalone-portfolio.log",
+      "bytes": 148,
+      "sha256": "350d2853040994a36f51770139fbfddc0135d9cef6c762be2240323e071dd208"
+    },
+    {
+      "path": "docs/browser-release-repair-20261014/types-final.log.gz.json",
+      "bytes": 526,
+      "sha256": "463d9f374955b5e65c7e5c9ae02c9bb3958edfb8dac8ea5ff05b19b2dad5ce96"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 210175,
+      "sha256": "b3700927d1f5258ba3f76812b6bafa4f3d4b59abd7522d7de33b6198a5a04b50"
+    }
+  ]
+}

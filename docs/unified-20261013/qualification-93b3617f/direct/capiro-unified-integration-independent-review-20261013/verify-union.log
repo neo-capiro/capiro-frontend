@@ -1,0 +1,109 @@
+fatal: path 'apps/web/public/newsletter-assets' does not exist in '46ebdd448ef55e88c7a4083fb4586322757a14f8'
+{
+  "final": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "rootTree": "482be7b361374bdff7ea7d9c577a2b3238e2a994",
+  "appTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "srcTree": "123a4305c770cc679cbe1a45d8062e1ca85821ac",
+  "applicationUnchanged": true,
+  "allArtifactBindingsMatch": true,
+  "lockNonDevFlagDrift": [],
+  "webDependencyUnionConflicts": [],
+  "webDependencyInputPreservation": [
+    {
+      "lane": "newsletter",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "newsletter",
+      "section": "devDependencies",
+      "allExact": true
+    },
+    {
+      "lane": "shipping",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "shipping",
+      "section": "devDependencies",
+      "allExact": true
+    },
+    {
+      "lane": "onboard",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "onboard",
+      "section": "devDependencies",
+      "allExact": true
+    },
+    {
+      "lane": "meri_actions",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "meri_actions",
+      "section": "devDependencies",
+      "allExact": true
+    }
+  ],
+  "extraWebDependencies": [],
+  "additionalTrees": [
+    {
+      "lane": "newsletter",
+      "path": "packages/qualification-newsletter",
+      "sourceTree": "8134dfd7ed9b8cb1764930679e86d41ff65840fe",
+      "finalTree": "8134dfd7ed9b8cb1764930679e86d41ff65840fe",
+      "identical": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/public/newsletter-assets",
+      "status": "PATH_ABSENT_DO_NOT_INFER_PRESERVATION"
+    },
+    {
+      "lane": "onboard",
+      "path": "apps/web/public/onboard",
+      "sourceTree": "8b93dd298af10823d0f94bbfb6344e9fd4d30ee6",
+      "finalTree": "8b93dd298af10823d0f94bbfb6344e9fd4d30ee6",
+      "identical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "packages/meri-client",
+      "sourceTree": "41e551a710d86cef2deb1b08e79db8cf9f99b7de",
+      "finalTree": "41e551a710d86cef2deb1b08e79db8cf9f99b7de",
+      "identical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "packages/qualification-transport",
+      "sourceTree": "bee971dc07c6c391a9190ae58d9b55c39103d999",
+      "finalTree": "bee971dc07c6c391a9190ae58d9b55c39103d999",
+      "identical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "packages/qualification-elements",
+      "sourceTree": "93257e608de459508167ea4a1660a3ae0d785fdd",
+      "finalTree": "93257e608de459508167ea4a1660a3ae0d785fdd",
+      "identical": true
+    }
+  ],
+  "workingHead": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "workingStatus": ""
+}
+{
+  "activeReviews": 240,
+  "removedExactlyArchived": true,
+  "remainingDuplicateKeys": [],
+  "inputMissing": {
+    "newsletter": 0,
+    "shipping": 0,
+    "onboard": 0,
+    "meri_actions": 0
+  }
+}

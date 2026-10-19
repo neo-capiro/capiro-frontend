@@ -1,0 +1,11 @@
+> npm run test:browser --workspace @capiro/web -- --workers=4 --output=/tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts
+> playwright test --workers=4 --output=/tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts
+Running 996 tests using 4 workers
+  ✘    4 tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (31.5s)
+  1) tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes 
+    ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/test-failed-1.png
+    Error Context: ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/error-context.md
+    ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/trace.zip
+        npx playwright show-trace ../../../../tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/trace.zip
+    tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes 
+npm error command sh -c playwright test --workers=4 --output=/tmp/capiro-successor-qualification/final-d5dd0be/portfolio-artifacts

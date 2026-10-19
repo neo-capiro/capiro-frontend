@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "bytes": 9875,
+      "sha256": "c8f597505aa4c02b4afc16f6f3896467403c3e607484067cbd4d83cea59d4f2d",
+      "file": "task-command-application.d.ts"
+    },
+    {
+      "bytes": 6353,
+      "sha256": "7c389504bdae043ceef3c638564a49f1ab942e79d8666cc7e0c2a64c96febd7b",
+      "file": "task-command-application.metadata.json"
+    },
+    {
+      "bytes": 260045,
+      "sha256": "5f020d8c5e53d3d3dfcd87fd379329385e1d70b86078184491e5fd177108d08b",
+      "file": "task-command-application.mjs"
+    },
+    {
+      "bytes": 14642,
+      "sha256": "7c932d10fa824723b3de6ea862d7b6c3791c9e00031be61b4e971631923e299c",
+      "file": "task-command-application.schema.json"
+    }
+  ],
+  "sourceCommit": "cc43d0004be59f315658207405ff1aea126adad5",
+  "schema": "meri-task-command-public-input/1",
+  "publicExport": "@capiro/meri-contracts/task-command-application",
+  "repository": "neo-capiro/meri-greenfield"
+}

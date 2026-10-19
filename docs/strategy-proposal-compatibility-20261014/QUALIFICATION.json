@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+  "branch": "repair/capiro-strategy-proposal-compatibility-20261014",
+  "syntheticOnly": true,
+  "status": "COMPLETED_SOURCE_AND_SYNTHETIC_ACCEPTANCE_LIVE_UNRUN",
+  "checks": [
+    {
+      "name": "Focused contract/unit suites",
+      "result": "PASS",
+      "tests": 32
+    },
+    {
+      "name": "Author desktop final",
+      "result": "PASS",
+      "tests": 16,
+      "seconds": 57.7
+    },
+    {
+      "name": "Independent desktop final",
+      "result": "PASS",
+      "tests": 16,
+      "seconds": 78
+    },
+    {
+      "name": "Required npm run check",
+      "result": "PASS",
+      "exitCode": 0,
+      "completedUTC": "2026-10-14T18:04:27Z",
+      "log": "evidence/ROOT-CHECK-ATTEMPT-1.txt",
+      "workerEnvironment": "VITEST_MAX_WORKERS=1; NODE_OPTIONS=--max-old-space-size=3072",
+      "phases": {
+        "rootControls": 113,
+        "transport": 84,
+        "frontend": {
+          "files": 161,
+          "tests": 2367
+        },
+        "capiro": {
+          "files": 38,
+          "tests": 483
+        },
+        "newsletter": 385,
+        "newsletterDeclarations": 8,
+        "lint": {
+          "errors": 0,
+          "warnings": 81
+        },
+        "format": "PASS",
+        "architecture": {
+          "errors": 0,
+          "blocking": 0,
+          "inheritedUnreviewed": 19
+        }
+      }
+    },
+    {
+      "name": "Default npm run build attempt1",
+      "result": "FAIL_RETAINED_ENVIRONMENT",
+      "exitCode": 1,
+      "log": "evidence/ROOT-BUILD-ATTEMPT-1.txt",
+      "reason": "Turbopack's explicit workspace root cannot resolve borrowed Next package symlink outside the owned checkout; source/build configuration unchanged."
+    },
+    {
+      "name": "Default npm run build attempt2",
+      "result": "FAIL_RETAINED_PENDING_ATTRIBUTION",
+      "exitCode": 1,
+      "log": "evidence/ROOT-BUILD-ATTEMPT-2.txt",
+      "compiled": true,
+      "typecheckPassed": true,
+      "reason": "Prerendering /_global-error failed with null useContext after task-local package copy. Checking cached CLI versus task-local CLI invocation; no source/config changes."
+    },
+    {
+      "name": "Default Next/Turbopack production build attempt3",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "evidence/ROOT-BUILD-ATTEMPT-3.txt",
+      "command": "node ../../node_modules/next/dist/bin/next build (apps/web cwd)",
+      "invocation": "Same next build default bundler through task-local exact-version CLI; preceding root Meri-client build passed; no build/source configuration changes.",
+      "compiledSeconds": 37,
+      "typecheckSeconds": 6.8,
+      "staticPages": 24,
+      "warnings": 93,
+      "qualification": "Warnings retained; task-local copy is not clean-install/image or native acceptance."
+    },
+    {
+      "name": "Repository credential-free production standalone",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": "evidence/PRODUCTION-STANDALONE-ATTEMPT-1.txt",
+      "command": "npm run test:production -- apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE",
+      "qualification": "Existing unconfigured loopback host, runtime configuration, browser/navigation/theme checks; live Clerk/account/backend operations unavailable and unrun."
+    }
+  ],
+  "pending": [],
+  "unrun": [
+    "Live Clerk/identity/tenant authorization or account writes",
+    "Deployed acceptance and AWS",
+    "Native database/RLS behavior",
+    "Provider sends and paid calls"
+  ],
+  "limits": [
+    "Unknown historical operation semantics are not aliased or migrated.",
+    "Current commands submit ID/indexes without an expected operation-content revision; frontend protects observed refreshes only."
+  ],
+  "independentSourceFilesVerified": 11,
+  "independentReceiptSHA256": "c22c15517fdc3f23e6c2200466545b88ae93c34b0186ab9b9452835261c255a2",
+  "environmentUpdate": {
+    "status": "Ready; owned branch/source and retained evidence verified intact",
+    "defaultSandboxRetry": "Same ENOSPC /tmp/.aws synthetic mount failure before command; approved bounded actions resumed."
+  },
+  "completedUTC": "2026-10-14T18:30:19.186890+00:00",
+  "independentReceiptScope": "Source/design/synthetic desktop; subsequent production gates are separately attributed to root."
+}

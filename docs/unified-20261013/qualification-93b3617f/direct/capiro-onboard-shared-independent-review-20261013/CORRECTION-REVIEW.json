@@ -1,0 +1,37 @@
+{
+  "observedAtUTC": "2026-10-13T04:25:35.144319+00:00",
+  "finding": "OBSH-01",
+  "staticStatus": "resolved by narrow Onboard adapter correction in these exact bytes; no shared Settings schema change",
+  "sourceFiles": [
+    {
+      "path": "apps/web/src/shared/capiro/onboard-core-api.ts",
+      "sha256": "c7fbf99299408ecc1e0508bf64c56c2eb5eb6938f93ab4e3d854d623e110bbcc",
+      "bytes": 4142
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+      "sha256": "e19db870c3467f568d1c4b1d44db35dcf3895541e87b4cb1befb47ab6dcdc187",
+      "bytes": 12487
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b",
+      "bytes": 4336
+    }
+  ],
+  "ownerLogs": [
+    {
+      "source": "/tmp/capiro-onboard-shared-boundary-20261013/client-creation-binding-red.log",
+      "sha256": "0694bda84f49c6c3ea9efd65ca33ccd6e1f01fb918d283d3157788269df6b8a4",
+      "bytes": 3363
+    },
+    {
+      "source": "/tmp/capiro-onboard-shared-boundary-20261013/client-creation-binding-green.log",
+      "sha256": "20e7a50896be672b07b9406d67860b2d7e62dd88d11c87a4be9482453590b237",
+      "bytes": 253
+    }
+  ],
+  "executionAttribution": "Root author executed; reviewer read logs only. Red3failed/39passed and corrected adapter+gateway55passed. No independently rerun baseline/green.",
+  "remaining": "Rendered UI confirmation that malformed creation cannot clear draft/count success remains a qualification control; final integrated source still WIP.",
+  "ApplicationBoundaryDelta": "Converts nested if conditions to conjunctions only; identity keys/public-path scope lifetime semantics unchanged."
+}

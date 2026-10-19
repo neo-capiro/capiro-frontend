@@ -1,0 +1,87 @@
+{
+  "width": 1440,
+  "states": [
+    {
+      "state": "rest",
+      "text": "1",
+      "pressed": "true",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": "10px",
+      "fontWeight": "500",
+      "background": "rgba(0, 0, 0, 0)",
+      "image": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+      "opacity": "1",
+      "buttonOpacity": "1",
+      "filter": "none",
+      "blend": "normal",
+      "hover": false,
+      "smallRect": {
+        "x": 301.65625,
+        "y": 330.9375,
+        "width": 4.0625,
+        "height": 12,
+        "top": 330.9375,
+        "right": 305.71875,
+        "bottom": 342.9375,
+        "left": 301.65625
+      },
+      "backgrounds": [
+        [
+          36,
+          36,
+          36
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "contrasts": [
+        15.522910417680388,
+        19.79814571052481
+      ],
+      "minimumContrast": 15.522910417680388
+    },
+    {
+      "state": "hover",
+      "text": "1",
+      "pressed": "true",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": "10px",
+      "fontWeight": "500",
+      "background": "rgb(52, 52, 52)",
+      "image": "none",
+      "opacity": "1",
+      "buttonOpacity": "1",
+      "filter": "none",
+      "blend": "normal",
+      "hover": true,
+      "smallRect": {
+        "x": 301.65625,
+        "y": 330.9375,
+        "width": 4.0625,
+        "height": 12,
+        "top": 330.9375,
+        "right": 305.71875,
+        "bottom": 342.9375,
+        "left": 301.65625
+      },
+      "backgrounds": [
+        [
+          52,
+          52,
+          52
+        ]
+      ],
+      "contrasts": [
+        12.449637244033978
+      ],
+      "minimumContrast": 12.449637244033978
+    }
+  ],
+  "remote": [],
+  "writes": [],
+  "errors": [],
+  "unexpected": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "base": "b680b65e14134be736942b29d715e49c2c6a8b19",
+  "passed": true,
+  "preservedLockRecords": 930,
+  "addedLockRecords": [
+    "node_modules/@capiro/qualification-newsletter",
+    "node_modules/@capiro/shared",
+    "packages/qualification-newsletter"
+  ],
+  "unchangedAssets": 179,
+  "unchangedAssetBytes": 486014,
+  "appSourceUnchanged": true,
+  "originalGuardAndPackageTestsPreserved": true,
+  "originalFixtures": [
+    {
+      "path": "packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba",
+      "bytes": 8823
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/original-C-renderer-golden.json",
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+      "bytes": 54405
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/consumer-positive.ts",
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021",
+      "bytes": 1503
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/consumer-negative.ts",
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c",
+      "bytes": 410
+    }
+  ],
+  "localOnlyBorrowedDependencySymlink": "packages/qualification-newsletter/node_modules",
+  "trackedSymlinksAdded": 0
+}

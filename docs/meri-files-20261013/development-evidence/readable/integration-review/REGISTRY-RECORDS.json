@@ -1,0 +1,47 @@
+[
+  {
+    "file": "apps/web/src/shared/shell/Sidebar.tsx",
+    "kind": "function",
+    "symbol": "Sidebar",
+    "fingerprint": "af7dddbeafb9ac899294288a3b05085e95324278d92ad109ebb832d537d00df8",
+    "reason": "The existing Meri navigation owns destinations, active-state presentation and client-scoped links. This change enables the existing Files destination and corrects current-route selection; other unavailable destinations stay disabled. It introduces no document state, transport or authority logic. A separate Files-specific navigation owner would duplicate this shell responsibility.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+    "kind": "function",
+    "symbol": "DocumentEditor",
+    "fingerprint": "9c3fcd3e8b4b1e5247388e7388354e7ece00083b2eabc6d12f1d9869741e6529",
+    "reason": "One Word input and full-replacement confirmation form owns its field labels, format choice, guidance and explicit submit. Draft mapping and request execution live in separate cohesive owners. Keeping its conditional form/acknowledgement together preserves visible context; there is no transport or authority logic to extract.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+    "kind": "function",
+    "symbol": "DocumentVersionPanel",
+    "fingerprint": "f396fcb588479ea6c4e81d2a0bd088910b2346657b6bc8e4b19f2cc77a43dd31",
+    "reason": "One selected immutable-version panel owns supplied-ID inspection, bounded view-local version selection, metadata and explicit version-bound controls. Structural inspection rendering is already separate, while the controller owns requests and Blob URL allocation. The JSX remains a cohesive presentation of one selected receipt; splitting to reduce line count would scatter its state-dependent controls.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+    "kind": "function",
+    "symbol": "WorkbookEditor",
+    "fingerprint": "30039d399185cfb28c3a6cbda741d69cb7bee43929cc82e0a251234dfaa40b69",
+    "reason": "One typed-workbook input form owns title, complete sheet JSON, example/help, replacement acknowledgement and explicit submit. It neither selects a different operation family nor validates the backend schema; local syntax guidance and public request admission remain separate. The contextual form stays together without duplicated state.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+    "kind": "function",
+    "symbol": "write",
+    "fingerprint": "88c0936120dc53e0d3947280754efbb93502e00f67ccdf930dd24bfab7372d0d",
+    "reason": "One reserved-write lifecycle claims the shared journal synchronously, fingerprints admitted immutable intent, dispatches once, correlates the returned receipt and settles conservatively. Post-hash/pre-dispatch/post-settlement ownership checks remain adjacent to the transitions they protect. HTTP receiving and cache-generation ownership are separate. Extracting steps merely to drop below80 would obscure reentrant cancellation and attempt fencing.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  }
+]

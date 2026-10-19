@@ -1,0 +1,70 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test prospect-files.spec.ts
+
+[WebServer] (node:189747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:189794) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/prospect-files.spec.ts:40:1 › current prospect files retain readiness and do not expose unsupported actions (3.6s)
+  ✓  2 tests/browser/prospect-files.spec.ts:63:1 › upload loss retains one exact intent and confirms without reuploading bytes (3.6s)
+  ✓  3 tests/browser/prospect-files.spec.ts:123:1 › wrong lineage suppresses file links and upload without broadening the request (2.9s)
+  ✓  4 tests/browser/prospect-files.spec.ts:148:1 › deletion requires confirmation and current list, with no uncertain automatic retry (3.3s)
+  ✘  5 tests/browser/prospect-files.spec.ts:177:1 › archived prospect retains historical files but cannot upload, including on mobile (7.2s)
+
+
+  1) tests/browser/prospect-files.spec.ts:177:1 › archived prospect retains historical files but cannot upload, including on mobile 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Prospect files', exact: true }).getByText('test.txt', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByText('test.txt', { exact: true })
+
+
+      185 |   await page.goto(`/portfolio/prospects/${prospectId}`);
+      186 |   const area = files(page);
+    > 187 |   await expect(area.getByText(record.fileName, { exact: true })).toBeVisible();
+          |                                                                  ^
+      188 |   await expect(area.getByLabel("Upload prospect file")).toHaveCount(0);
+      189 |   await expect(
+      190 |     area.getByRole("button", { name: "Upload file", exact: true }),
+        at /workspace/capiro-contracts/apps/web/tests/browser/prospect-files.spec.ts:187:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/prospect-files-archived-pr-4b4c9--upload-including-on-mobile/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/prospect-files-archived-pr-4b4c9--upload-including-on-mobile/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/prospect-files-archived-pr-4b4c9--upload-including-on-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/prospect-files-archived-pr-4b4c9--upload-including-on-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/prospect-files.spec.ts:177:1 › archived prospect retains historical files but cannot upload, including on mobile 
+  4 passed (22.2s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test prospect-files.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

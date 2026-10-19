@@ -1,0 +1,272 @@
+[
+  {
+    "title": "Files late create 200 cannot publish or revoke the replacement user",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 26,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files late create 401 cannot publish or revoke the replacement user",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 26,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files late create 200 cannot publish or revoke the replacement session",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 26,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files late create 401 cannot publish or revoke the replacement session",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 26,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files late create 200 cannot publish or revoke the replacement organization",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 26,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files late create 401 cannot publish or revoke the replacement organization",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 26,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files held create cannot restore details after selected-client replacement",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 70,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files expiry removes an idle draft, known version and owned download URL without reconnect",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 101,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files current 401 refusal clears known versions and download resources",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 135,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files current 403 refusal clears known versions and download resources",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 135,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files same-client held verification retains typed draft and known version after current success",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 176,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files authorized same-client verification does not abort an already held create",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 214,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files a denied same-client refresh destroys retained private state without new document requests",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 252,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files sign-out removes draft and verified download without a background operation",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "line": 287,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+    "line": 14,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+    "line": 14,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+    "line": 104,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+    "line": 104,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 19,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 19,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 19,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 19,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 133,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 133,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files repeated create intent is refused locally without a second delivery",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 159,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files incorrect download hash hides known version actions and releases no object URL",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 175,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  },
+  {
+    "title": "Files requires a selected client without bootstrapping from browser hints",
+    "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+    "line": 208,
+    "status": "expected",
+    "attempts": 1,
+    "retries": [
+      0
+    ]
+  }
+]

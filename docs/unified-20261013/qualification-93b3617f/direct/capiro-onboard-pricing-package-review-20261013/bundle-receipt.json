@@ -1,0 +1,48 @@
+{
+  "startedUTC": "2026-10-13T04:21:56.460Z",
+  "endedUTC": "2026-10-13T04:21:57.195Z",
+  "mode": "static Vite8.3.4 minified ES library bundle only; no application/server/browser or output evaluation",
+  "rows": [
+    {
+      "file": "pricing.mjs",
+      "bytes": 251757,
+      "gzipBytes": 75872,
+      "sha256": "50ca62510d5cf48b3acbfbd9a14d38f383a705cc56be9db36b21ec6226ebde12",
+      "imports": [],
+      "dynamicImports": [],
+      "moduleIds": [
+        "\u0000rolldown/runtime.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/funding-opportunities-v2.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/funding-opportunities-v2-detail.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/funding-opportunities-v2-workflow.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/meri-read-outcome.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/defense-budget-line.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/pe-source-coverage.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/funding-priorities.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/legislative-research.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/research-portfolios.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/defense-research.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/legiwatch-query.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/legiwatch-phase8.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/us-states.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/meri-document-request.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/schedule/time-zone.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/schedule/deadline.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/schedule/validate.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/schedule/synthesis.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/tenant-feature.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/client-memory-wall.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/prospect-resource-scope.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/workspace-saved-revision.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/client-objective-destination.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/time.js",
+        "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/index.js",
+        "/tmp/capiro-onboard-pricing-package-review-20261013/entry.js"
+      ],
+      "exports": [
+        "PRICE_CHANGE_COPY",
+        "PRICE_LOCK_COPY"
+      ]
+    }
+  ]
+}

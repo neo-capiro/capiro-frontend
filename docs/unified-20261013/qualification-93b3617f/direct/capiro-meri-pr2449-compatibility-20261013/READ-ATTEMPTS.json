@@ -1,0 +1,13 @@
+{
+  "localBackendObjectLookup": "60cf2e unavailable in mounted capirov2; exact GitHub fetch used",
+  "localMeriObjectLookup": "84c2ca unavailable in mounted meri-greenfield; exact GitHub fetch used",
+  "initialPackageTypesLookup": {
+    "status": "corrected read-path error",
+    "attempted": "package/action-application.d.ts",
+    "error": "KeyError: filename not found",
+    "correctedUsing": "package/package.json exports ./action-application types",
+    "actual": "package/dist/action-application.d.ts",
+    "effect": "No source/runtime mutation; initial verification script stopped before receipt write. Final source/blob/package verification completed."
+  },
+  "execution": "Read and hash only; no test or application module imported."
+}

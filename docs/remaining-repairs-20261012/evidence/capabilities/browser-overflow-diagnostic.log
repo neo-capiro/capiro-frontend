@@ -1,0 +1,40 @@
+
+Running 1 test using 1 worker
+
+(node:728028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards (2.7s)
+
+
+  1) tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      143 |       () => document.documentElement.scrollWidth <= innerWidth,
+      144 |     ),
+    > 145 |   ).toBe(true);
+          |     ^
+      146 |   await page.screenshot({
+      147 |     path: info.outputPath("compact-long-320.png"),
+      148 |     fullPage: true,
+        at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:145:5
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-overflow-diagnostic/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-capabilities-evidence/browser-overflow-diagnostic/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-overflow-diagnostic/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-capabilities-evidence/browser-overflow-diagnostic/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards 

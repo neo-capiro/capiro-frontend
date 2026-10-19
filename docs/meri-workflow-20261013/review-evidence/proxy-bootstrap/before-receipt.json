@@ -1,0 +1,151 @@
+{
+  "command": [
+    "npm",
+    "exec",
+    "--",
+    "vitest",
+    "run",
+    "tests/meri-action-proxy.test.ts",
+    "tests/meri-action-bootstrap.test.ts",
+    "--maxWorkers",
+    "1",
+    "--reporter=json",
+    "--outputFile=/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-results.json"
+  ],
+  "cwd": "/workspace/capiro-meri-workflow-20261013/apps/web",
+  "startedUTC": "2026-10-13T05:25:29.249269+00:00",
+  "endedUTC": "2026-10-13T05:25:30.484290+00:00",
+  "exitCode": 1,
+  "sourceBefore": [
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/bounded-json.ts",
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/correlation.ts",
+      "sha256": "2e23bdac5ac94aac57bedb74e7338106c1be110bdf88d93cc4d95333f81edef8"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/disposition.ts",
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/projection.ts",
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "sha256": "6e74aad143652d21ce8fbbf24d9dc58a55fc443f95198e6dc28931228dd52d51"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "sha256": "43f81fc541793d92cc5945621f6cfecd9715c24eb18b130a3a7660f3a4e6a9be"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-port.ts",
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "apps/web/tests/meri-action-proxy.test.ts",
+      "sha256": "bb7bd2340deba916f760c8a5f66ce8d29ea54652a96c908ffb19129cd53d5b06"
+    },
+    {
+      "path": "apps/web/tests/meri-action-bootstrap.test.ts",
+      "sha256": "33a818690e243612f8a5a1c1353b0bd0c3ad87609a6a5acba54b0c22d4010a30"
+    }
+  ],
+  "sourceAfter": [
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/bounded-json.ts",
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/correlation.ts",
+      "sha256": "2e23bdac5ac94aac57bedb74e7338106c1be110bdf88d93cc4d95333f81edef8"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/disposition.ts",
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/projection.ts",
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "sha256": "6e74aad143652d21ce8fbbf24d9dc58a55fc443f95198e6dc28931228dd52d51"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "sha256": "43f81fc541793d92cc5945621f6cfecd9715c24eb18b130a3a7660f3a4e6a9be"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-port.ts",
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "apps/web/tests/meri-action-proxy.test.ts",
+      "sha256": "bb7bd2340deba916f760c8a5f66ce8d29ea54652a96c908ffb19129cd53d5b06"
+    },
+    {
+      "path": "apps/web/tests/meri-action-bootstrap.test.ts",
+      "sha256": "33a818690e243612f8a5a1c1353b0bd0c3ad87609a6a5acba54b0c22d4010a30"
+    }
+  ]
+}

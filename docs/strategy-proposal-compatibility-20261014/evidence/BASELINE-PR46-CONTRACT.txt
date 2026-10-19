@@ -1,0 +1,24 @@
+{
+  "sourceHead": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+  "source": "apps/web/src/shared/capiro/operations/strategies-agents.ts",
+  "syntheticOnly": true,
+  "mixedQueueAccepted": false,
+  "issues": [
+    {
+      "path": [
+        "ops",
+        0,
+        "op"
+      ],
+      "code": "invalid_value"
+    }
+  ],
+  "validAccepted": true,
+  "approvedOpsPreserved": false,
+  "unchangedExecutableKinds": [
+    "add",
+    "update",
+    "remove",
+    "retime"
+  ]
+}

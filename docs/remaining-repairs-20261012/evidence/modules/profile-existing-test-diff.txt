@@ -1,0 +1,128 @@
+diff --git a/apps/web/tests/browser/profile-current-state.spec.ts b/apps/web/tests/browser/profile-current-state.spec.ts
+index 3b15eb3..9a072ec 100644
+--- a/apps/web/tests/browser/profile-current-state.spec.ts
++++ b/apps/web/tests/browser/profile-current-state.spec.ts
+@@ -240,16 +240,20 @@ test("unknown facility creation stays fenced after closing and reopening", async
+     json(route, { message: "Synthetic lost result" }, 503);
+   await page.goto("/profile-current-state.html?mode=facilities");
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+-  let dialog = page.getByRole("dialog", { name: "Add facility" });
++  let dialog = page.getByRole("dialog", {
++    name: "Facilities: Synthetic profile client",
++  });
+   await dialog.getByLabel("Facility name").fill("Uncertain new lab");
+-  await dialog.getByRole("button", { name: "Add facility" }).click();
++  await dialog.getByRole("button", { name: "Save facility" }).click();
+   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();
+   await dialog.getByRole("button", { name: "Close", exact: true }).click();
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+-  dialog = page.getByRole("dialog", { name: "Add facility" });
++  dialog = page.getByRole("dialog", {
++    name: "Facilities: Synthetic profile client",
++  });
+   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();
+   await expect(
+-    dialog.getByRole("button", { name: "Add facility", exact: true }),
++    dialog.getByRole("button", { name: "Save facility", exact: true }),
+   ).toBeDisabled();
+   expect(state.writes).toHaveLength(1);
+   expect(unexpected).toEqual([]);
+@@ -261,11 +265,13 @@ test("identity invalidation disables facility creation despite a cached role", a
+   const { state, unexpected } = await installProfileCurrentState(page);
+   await page.goto("/profile-current-state.html?mode=facilities");
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+-  const dialog = page.getByRole("dialog", { name: "Add facility" });
++  const dialog = page.getByRole("dialog", {
++    name: "Facilities: Synthetic profile client",
++  });
+   await dialog.getByLabel("Facility name").fill("Retained facility draft");
+   await profileEvent(page, "invalidate-identity");
+   await expect(
+-    dialog.getByRole("button", { name: "Add facility", exact: true }),
++    dialog.getByRole("button", { name: "Save facility", exact: true }),
+   ).toBeDisabled();
+   expect(state.writes).toEqual([]);
+   expect(unexpected).toEqual([]);
+diff --git a/apps/web/tests/browser/profile-write-lifetime.spec.ts b/apps/web/tests/browser/profile-write-lifetime.spec.ts
+index 61a7d6e..d521c4f 100644
+--- a/apps/web/tests/browser/profile-write-lifetime.spec.ts
++++ b/apps/web/tests/browser/profile-write-lifetime.spec.ts
+@@ -223,8 +223,8 @@ test("closing a pending facility create keeps the unknown fence when its view re
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+   await page.getByLabel("Facility name").fill("Late facility");
+   await page
+-    .getByRole("dialog", { name: "Add facility" })
+-    .getByRole("button", { name: "Add facility" })
++    .getByRole("dialog", { name: "Facilities: Synthetic profile client" })
++    .getByRole("button", { name: "Save facility" })
+     .click();
+   await expect.poll(() => state.writes.length).toBe(1);
+   await profileEvent(page, "unmount");
+@@ -234,10 +234,12 @@ test("closing a pending facility create keeps the unknown fence when its view re
+   release();
+   await profileEvent(page, "open");
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+-  const dialog = page.getByRole("dialog", { name: "Add facility" });
++  const dialog = page.getByRole("dialog", {
++    name: "Facilities: Synthetic profile client",
++  });
+   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();
+   await expect(
+-    dialog.getByRole("button", { name: "Add facility" }),
++    dialog.getByRole("button", { name: "Save facility" }),
+   ).toBeDisabled();
+   expect(state.writes).toHaveLength(1);
+   expect(unexpected).toEqual([]);
+@@ -251,9 +253,11 @@ test("a similar current facility cannot be claimed as an unknown creation receip
+     json(route, { message: "Lost create response" }, 503);
+   await page.goto("/profile-current-state.html?mode=facilities");
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+-  let dialog = page.getByRole("dialog", { name: "Add facility" });
++  let dialog = page.getByRole("dialog", {
++    name: "Facilities: Synthetic profile client",
++  });
+   await dialog.getByLabel("Facility name").fill("Similar facility");
+-  await dialog.getByRole("button", { name: "Add facility" }).click();
++  await dialog.getByRole("button", { name: "Save facility" }).click();
+   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();
+   state.facilities = [
+     ...state.facilities,
+@@ -266,12 +270,14 @@ test("a similar current facility cannot be claimed as an unknown creation receip
+     "Similar facility",
+   );
+   await expect(
+-    dialog.getByRole("button", { name: "Add facility" }),
++    dialog.getByRole("button", { name: "Save facility" }),
+   ).toBeDisabled();
+   await dialog
+     .getByRole("button", { name: "Start a separate facility entry" })
+     .click();
+-  dialog = page.getByRole("dialog", { name: "Add facility" });
++  dialog = page.getByRole("dialog", {
++    name: "Facilities: Synthetic profile client",
++  });
+   await expect(dialog.getByLabel("Facility name")).toHaveValue("");
+   expect(state.writes).toHaveLength(1);
+   expect(unexpected).toEqual([]);
+@@ -332,8 +338,8 @@ test("a late facility result cannot escape its original actor's unknown fence",
+   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+   await page.getByLabel("Facility name").fill("Old actor facility");
+   await page
+-    .getByRole("dialog", { name: "Add facility" })
+-    .getByRole("button", { name: "Add facility" })
++    .getByRole("dialog", { name: "Facilities: Synthetic profile client" })
++    .getByRole("button", { name: "Save facility" })
+     .click();
+   await expect.poll(() => state.writes.length).toBe(1);
+   await profileEvent(page, "identity", {
+@@ -346,8 +352,8 @@ test("a late facility result cannot escape its original actor's unknown fence",
+   await expect(page.getByText(/creation result is unknown/i)).toBeVisible();
+   await expect(
+     page
+-      .getByRole("dialog", { name: "Add facility" })
+-      .getByRole("button", { name: "Add facility" }),
++      .getByRole("dialog", { name: "Facilities: Synthetic profile client" })
++      .getByRole("button", { name: "Save facility" }),
+   ).toBeDisabled();
+   expect(state.writes).toHaveLength(1);
+   expect(unexpected).toEqual([]);

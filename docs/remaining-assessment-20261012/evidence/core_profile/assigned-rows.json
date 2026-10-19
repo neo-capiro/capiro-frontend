@@ -1,0 +1,2516 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "assessmentCheckout": "/workspace/capiro-acceptance-assessment",
+  "group": "core_profile",
+  "rows": [
+    {
+      "audit_id": "CORE-033",
+      "area": "Facilities",
+      "criterion": "Read client facilities / location pins",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58068"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read client facilities / location pins",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/facilities"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-033",
+        "historicalBlockerSnapshot": "Real D3 national map/coordinate pins and unprojected-territory list implemented; actual441-feature geometry test passed. Exact combined manage/hover visual details remain open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-033."
+    },
+    {
+      "audit_id": "CORE-034",
+      "area": "Facilities",
+      "criterion": "Add facility / location",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58068"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Add facility / location",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/facilities"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-034",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-034."
+    },
+    {
+      "audit_id": "CORE-035",
+      "area": "Facilities",
+      "criterion": "Edit facility details",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58068"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Edit facility details",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/facilities/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-035",
+        "historicalBlockerSnapshot": "Edit/explicit null clearing browser checked; scoped live own-fixture create/edit/list/delete PASS. Geocode/provider writes NOT RUN. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-035."
+    },
+    {
+      "audit_id": "CORE-036",
+      "area": "Facilities",
+      "criterion": "Delete facility",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58563"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Delete facility",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "DELETE",
+            "route": "/api/clients/:clientId/facilities/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-036",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-036."
+    },
+    {
+      "audit_id": "CORE-037",
+      "area": "Facilities",
+      "criterion": "Resolve congressional/state district from address",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58068"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Resolve congressional/state district from address",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/facilities/:id/resolve-district"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-037",
+        "historicalBlockerSnapshot": "Synchronous resolve-district composed with receipt checks. Stale-result CAS candidate PR2373 root96checksPASS; owner/native/provider acceptance pending, not deployed. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-037."
+    },
+    {
+      "audit_id": "CORE-038",
+      "area": "Facilities",
+      "criterion": "Retry address geocoding",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58068"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Retry address geocoding",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/facilities/:id/geocode"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-038",
+        "historicalBlockerSnapshot": "Asynchronous retry preserves truthful queued state. Background CAS candidate PR2373 root96checksPASS; live queue/provider/native acceptance pending. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-038."
+    },
+    {
+      "audit_id": "CORE-039",
+      "area": "Facilities",
+      "criterion": "Choose geocode address candidate",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58068"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Choose geocode address candidate",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/facilities/:id/geocode-candidate"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-039",
+        "historicalBlockerSnapshot": "Reviewed route requires opaque server snapshot revision; missing support disables selection,409reloads candidates, no legacyfallback. Frontend7browser and root96backend PGlite/regression PASS. PR2373 awaiting combined-source review/native/live acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-039."
+    },
+    {
+      "audit_id": "CORE-040",
+      "area": "Facilities map",
+      "criterion": "Read elected representation for facilities",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47694"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read elected representation for facilities",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/representation"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-040",
+        "historicalBlockerSnapshot": "Verified representation null/unresolved distinctions rendered; resolved representative reuses public AddGovernmentTargetButton and permission/duplicate/error behavior. Live writes NOT RUN. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-040."
+    },
+    {
+      "audit_id": "CORE-041",
+      "area": "Facilities map",
+      "criterion": "Read client District Nexus map / score data",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read client District Nexus map / score data",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/intelligence/clients/:clientId/district-nexus-v2"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-041",
+        "historicalBlockerSnapshot": "Source-backed nexus score/coverage/breakdown/provenance only; unknown scores remain unknown. No invented relationship strength or committee influence. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-041."
+    },
+    {
+      "audit_id": "CORE-042",
+      "area": "Facilities map",
+      "criterion": "Read district map boundaries manifest",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read district map boundaries manifest",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/intelligence/district-nexus/boundaries"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-042",
+        "historicalBlockerSnapshot": "Actual current boundary manifest validated against authorized service; public geometry test and source digest retained. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-042."
+    },
+    {
+      "audit_id": "CORE-043",
+      "area": "Facilities map",
+      "criterion": "Read district boundary GeoJSON",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read district boundary GeoJSON",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/intelligence/district-nexus/boundaries/:status/geojson"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-043",
+        "historicalBlockerSnapshot": "Actual441current district GeoJSON fetched and validated.436finite projected district paths,3synthetic mainland/AK/HIpins;PRretained in list. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-043."
+    },
+    {
+      "audit_id": "CORE-044",
+      "area": "Facilities map",
+      "criterion": "Pan / zoom / select map district or facility",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Pan / zoom / select map district or facility",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-044",
+        "historicalBlockerSnapshot": "Keyboard district/pin selection, pan/zoom/reset and responsive map dialogs browser checked. Remaining exact Figma hover/manage visual details open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-044."
+    },
+    {
+      "audit_id": "CORE-045",
+      "area": "Profile notes",
+      "criterion": "Read saved profile notes",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read saved profile notes",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-045",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-045."
+    },
+    {
+      "audit_id": "CORE-046",
+      "area": "Profile notes",
+      "criterion": "Save profile notes editor",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Save profile notes editor",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PUT",
+            "route": "/api/clients/:id/profile-notes"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-046",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-046."
+    },
+    {
+      "audit_id": "CORE-047",
+      "area": "Profile notes",
+      "criterion": "Append timestamped quick client note",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-42657"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Append timestamped quick client note",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:id/notes"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-047",
+        "historicalBlockerSnapshot": "Timeline quick note implemented; timestamp formatting/server read-back live check open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-047."
+    },
+    {
+      "audit_id": "CORE-048",
+      "area": "Overview timeline",
+      "criterion": "Read client activity timeline",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48800"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read client activity timeline",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/activity"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-048",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-048."
+    },
+    {
+      "audit_id": "CORE-049",
+      "area": "Overview timeline",
+      "criterion": "Log client activity / note / commitment",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49817"
+      ],
+      "boundedInteractionFacets": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "The implemented note and generic follow-up paths preserve original keys and bodies, reread current identity, retain uncertain outcomes, and expose deliberate recovery. Calendar handoff navigates without a write.",
+          "caseIds": [
+            "399819ac8b819e1a7027-bce5a1886c88c35966dc",
+            "399819ac8b819e1a7027-7b3aaa16e8b5dbad10ad",
+            "399819ac8b819e1a7027-b53cb4012f8ffa863642",
+            "399819ac8b819e1a7027-365af70e54863117fded",
+            "399819ac8b819e1a7027-e7b574f509b093934d4d",
+            "399819ac8b819e1a7027-820e5a0903fb8e6bf392",
+            "399819ac8b819e1a7027-2d5352de5cc1b90ef9f2",
+            "32e276a32477698dbc89-fe50f91146b348cae5f0",
+            "7f5d9a339a6e596125a3-1f48f9cd6f2d4ab3fd4e",
+            "3618e94a517d444449dc-317af2a2007f95b36677",
+            "3618e94a517d444449dc-bf94001c216998d47dda",
+            "3618e94a517d444449dc-27e5a3c7a1b6547fd84e",
+            "3618e94a517d444449dc-5614188aeced9a003be2",
+            "3618e94a517d444449dc-59bfbed2948443d58ffb",
+            "3618e94a517d444449dc-0af8561275e2b14de35d",
+            "3618e94a517d444449dc-44e17638c05406c19039",
+            "3618e94a517d444449dc-98d15ce909a4905ae8f1",
+            "961d39be20441557f2c3-8556bdb32cc176722915",
+            "961d39be20441557f2c3-798cdc2c7fab9347694d",
+            "961d39be20441557f2c3-c6495ec4d8df9eb340dc",
+            "961d39be20441557f2c3-2cc219635af7a0dac67d",
+            "961d39be20441557f2c3-4b80a9dbd4ee8d7ace28",
+            "961d39be20441557f2c3-c3696d682b4c94a038c7",
+            "961d39be20441557f2c3-1441bc860430b56d80da",
+            "b4c635822307d469ffa7-fd13ea060b2d42916f72",
+            "b4c635822307d469ffa7-3e918e4a868f3080775f",
+            "b4c635822307d469ffa7-14a4e5d5076e6f65bca6",
+            "b4c635822307d469ffa7-04fc02da32c7ee2aa1ee",
+            "b4c635822307d469ffa7-8a6edf7f0cb371411a71",
+            "b4c635822307d469ffa7-8ea7df95c4f6bc9b92d9",
+            "b4c635822307d469ffa7-18158d62313e37bf1e5b",
+            "b4c635822307d469ffa7-70ad3efde28d240db5ac",
+            "b4c635822307d469ffa7-7f047e89328b783d6ec7",
+            "b4c635822307d469ffa7-a2c2a9200c643d79781f",
+            "b4c635822307d469ffa7-867f83ebe104a223d429",
+            "b4c635822307d469ffa7-cafb6c1d348cb34445b1",
+            "b4c635822307d469ffa7-0dc96667febbc0e4ee8c",
+            "b4c635822307d469ffa7-7f38005969b2da93b6c8",
+            "b4c635822307d469ffa7-257f3c91ea19bcbd49c8",
+            "b4c635822307d469ffa7-359daa91e60995d57f2a",
+            "b4c635822307d469ffa7-ca30a3ce66d2905b285f",
+            "b4c635822307d469ffa7-49ae390a0c0b5f92f605",
+            "b4c635822307d469ffa7-97d0f4c00a6ffdffd0e4",
+            "b4c635822307d469ffa7-1c6ba11655a7f8bf097d",
+            "82c37187ffd7487e353a-a236da90d26eeef061af",
+            "82c37187ffd7487e353a-1a3d32cf7859d36269e7",
+            "82c37187ffd7487e353a-a69b51e7ebd106fadb0b",
+            "82c37187ffd7487e353a-9ac0e2c8409c19374130",
+            "82c37187ffd7487e353a-6c557d2506d76f57a8cf",
+            "82c37187ffd7487e353a-cd757fba27bf249cc35c"
+          ],
+          "remaining": "Native command migrations, role grants, atomicity and real persistence remain open. Commitment/Weowe/Theyowe/counterparty UI is explicitly excluded by the current owner instruction; no note/follow-up pass accepts that historical subcriterion."
+        }
+      ],
+      "relatedExecutedCaseIds": [
+        "399819ac8b819e1a7027-bce5a1886c88c35966dc",
+        "399819ac8b819e1a7027-7b3aaa16e8b5dbad10ad",
+        "399819ac8b819e1a7027-b53cb4012f8ffa863642",
+        "399819ac8b819e1a7027-365af70e54863117fded",
+        "399819ac8b819e1a7027-e7b574f509b093934d4d",
+        "399819ac8b819e1a7027-820e5a0903fb8e6bf392",
+        "399819ac8b819e1a7027-2d5352de5cc1b90ef9f2",
+        "32e276a32477698dbc89-fe50f91146b348cae5f0",
+        "7f5d9a339a6e596125a3-1f48f9cd6f2d4ab3fd4e",
+        "3618e94a517d444449dc-317af2a2007f95b36677",
+        "3618e94a517d444449dc-bf94001c216998d47dda",
+        "3618e94a517d444449dc-27e5a3c7a1b6547fd84e",
+        "3618e94a517d444449dc-5614188aeced9a003be2",
+        "3618e94a517d444449dc-59bfbed2948443d58ffb",
+        "3618e94a517d444449dc-0af8561275e2b14de35d",
+        "3618e94a517d444449dc-44e17638c05406c19039",
+        "3618e94a517d444449dc-98d15ce909a4905ae8f1",
+        "961d39be20441557f2c3-8556bdb32cc176722915",
+        "961d39be20441557f2c3-798cdc2c7fab9347694d",
+        "961d39be20441557f2c3-c6495ec4d8df9eb340dc",
+        "961d39be20441557f2c3-2cc219635af7a0dac67d",
+        "961d39be20441557f2c3-4b80a9dbd4ee8d7ace28",
+        "961d39be20441557f2c3-c3696d682b4c94a038c7",
+        "961d39be20441557f2c3-1441bc860430b56d80da",
+        "b4c635822307d469ffa7-fd13ea060b2d42916f72",
+        "b4c635822307d469ffa7-3e918e4a868f3080775f",
+        "b4c635822307d469ffa7-14a4e5d5076e6f65bca6",
+        "b4c635822307d469ffa7-04fc02da32c7ee2aa1ee",
+        "b4c635822307d469ffa7-8a6edf7f0cb371411a71",
+        "b4c635822307d469ffa7-8ea7df95c4f6bc9b92d9",
+        "b4c635822307d469ffa7-18158d62313e37bf1e5b",
+        "b4c635822307d469ffa7-70ad3efde28d240db5ac",
+        "b4c635822307d469ffa7-7f047e89328b783d6ec7",
+        "b4c635822307d469ffa7-a2c2a9200c643d79781f",
+        "b4c635822307d469ffa7-867f83ebe104a223d429",
+        "b4c635822307d469ffa7-cafb6c1d348cb34445b1",
+        "b4c635822307d469ffa7-0dc96667febbc0e4ee8c",
+        "b4c635822307d469ffa7-7f38005969b2da93b6c8",
+        "b4c635822307d469ffa7-257f3c91ea19bcbd49c8",
+        "b4c635822307d469ffa7-359daa91e60995d57f2a",
+        "b4c635822307d469ffa7-ca30a3ce66d2905b285f",
+        "b4c635822307d469ffa7-49ae390a0c0b5f92f605",
+        "b4c635822307d469ffa7-97d0f4c00a6ffdffd0e4",
+        "b4c635822307d469ffa7-1c6ba11655a7f8bf097d",
+        "82c37187ffd7487e353a-a236da90d26eeef061af",
+        "82c37187ffd7487e353a-1a3d32cf7859d36269e7",
+        "82c37187ffd7487e353a-a69b51e7ebd106fadb0b",
+        "82c37187ffd7487e353a-9ac0e2c8409c19374130",
+        "82c37187ffd7487e353a-6c557d2506d76f57a8cf",
+        "82c37187ffd7487e353a-cd757fba27bf249cc35c",
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Log client activity / note / commitment",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/activity"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-049",
+        "historicalBlockerSnapshot": "Simple activity/note submit only; commitments and follow-up orchestration still open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-049."
+    },
+    {
+      "audit_id": "CORE-050",
+      "area": "Overview timeline",
+      "criterion": "Edit / settle activity entry",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/",
+        "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx",
+        "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+        "apps/web/src/features/portfolio/client-profile/activity-change.ts"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49051"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Edit / settle activity entry",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/activity/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-050",
+        "historicalBlockerSnapshot": "Fresh bounded scoped preflight, minimal mutation, exact receipts, actor/lifetime and shared ambiguous-outcome lock/GET-only reconciliation tested. Recorded edits/settle/remove and note pin/unpin are integrated; derived sources remain immutable. Current backend lacks canonical wall check: PR2384 prepares it, unmerged/undeployed; root78PASS but owner/native/live acceptance required. Grant/write atomic fence and version CAS remain absent. Quick log Undo remains initiating-creator only in frontend, not server-enforced creator authorization."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-050."
+    },
+    {
+      "audit_id": "CORE-051",
+      "area": "Overview timeline",
+      "criterion": "Delete recorded activity entry",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/",
+        "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx",
+        "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+        "apps/web/src/features/portfolio/client-profile/activity-change.ts"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-50097"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Delete recorded activity entry",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "DELETE",
+            "route": "/api/clients/:clientId/activity/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-051",
+        "historicalBlockerSnapshot": "Fresh bounded scoped preflight, minimal mutation, exact receipts, actor/lifetime and shared ambiguous-outcome lock/GET-only reconciliation tested. Recorded edits/settle/remove and note pin/unpin are integrated; derived sources remain immutable. Current backend lacks canonical wall check: PR2384 prepares it, unmerged/undeployed; root78PASS but owner/native/live acceptance required. Grant/write atomic fence and version CAS remain absent. Quick log Undo remains initiating-creator only in frontend, not server-enforced creator authorization."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-051."
+    },
+    {
+      "audit_id": "CORE-052",
+      "area": "Client files",
+      "criterion": "Read client documents and smart-linked artifacts",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52484"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read client documents and smart-linked artifacts",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/engagement/attachments?clientId=:clientId"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-052",
+        "historicalBlockerSnapshot": "Canonical attachments implemented; Workspace/strategy artifact links remain in Work. Full smart-file composition open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-052."
+    },
+    {
+      "audit_id": "CORE-053",
+      "area": "Client files",
+      "criterion": "Read folder tree and counts",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-53189"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read folder tree and counts",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/files/folders"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-053",
+        "historicalBlockerSnapshot": "Counts derived from accessible records; no persisted empty-folder entity exists. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-053."
+    },
+    {
+      "audit_id": "CORE-054",
+      "area": "Client files",
+      "criterion": "Request file upload",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52718"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Request file upload",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/engagement/attachments/upload-url"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-054",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-054."
+    },
+    {
+      "audit_id": "CORE-055",
+      "area": "Client files",
+      "criterion": "Confirm uploaded file",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52718"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Confirm uploaded file",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/engagement/attachments/confirm"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-055",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-055."
+    },
+    {
+      "audit_id": "CORE-056",
+      "area": "Client files",
+      "criterion": "Move / file one or many files into folder",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-53579"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Move / file one or many files into folder",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/files/:attachmentId/folder"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-056",
+        "historicalBlockerSnapshot": "Single-file move only. Atomic multi-file backend contract still required. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-056."
+    },
+    {
+      "audit_id": "CORE-057",
+      "area": "Client files",
+      "criterion": "Read file access roster",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-54355"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read file access roster",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/files/:attachmentId/access"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-057",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-057."
+    },
+    {
+      "audit_id": "CORE-058",
+      "area": "Client files",
+      "criterion": "Manage one file's access",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-54355"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Manage one file's access",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/files/:attachmentId/access"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-058",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-058."
+    },
+    {
+      "audit_id": "CORE-059",
+      "area": "Client files",
+      "criterion": "Manage access of all files in folder",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-54355"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Manage access of all files in folder",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/files/access/folder"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-059",
+        "historicalBlockerSnapshot": "Applies to currently visible files in folder; does not imply future-file ACL inheritance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-059."
+    },
+    {
+      "audit_id": "CORE-060",
+      "area": "Client files",
+      "criterion": "Delete file",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-53857"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Delete file",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "DELETE",
+            "route": "/api/engagement/attachments/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-060",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-060."
+    },
+    {
+      "audit_id": "CORE-061",
+      "area": "Client files",
+      "criterion": "Preview / download file",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-54106"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Preview / download file",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-061",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-061."
+    },
+    {
+      "audit_id": "CORE-062",
+      "area": "Client files",
+      "criterion": "Search, filter, sort and select files",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52484"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Search, filter, sort and select files",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-062",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-062."
+    },
+    {
+      "audit_id": "CORE-063",
+      "area": "Client files",
+      "criterion": "Create a folder and file selected attachments",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-53327"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Create a folder and file selected attachments",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/files/:attachmentId/folder"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-063",
+        "historicalBlockerSnapshot": "New folder label requires a selected existing file; multiple-file/empty-folder semantics remain open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-063."
+    },
+    {
+      "audit_id": "CORE-064",
+      "area": "Profile enrichment",
+      "criterion": "Resume latest Fill with Meri review",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Resume latest Fill with Meri review",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/fill-with-meri/latest"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-064",
+        "historicalBlockerSnapshot": "Resumes canonical saved review in client menu drawer. Current actor/tenant cache scope, exact client binding and explicit read retry. Legacy latest GET can expire a stale v1 run as a maintenance side effect; no live GET performed in this pass. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-064."
+    },
+    {
+      "audit_id": "CORE-065",
+      "area": "Profile enrichment",
+      "criterion": "Start Fill with Meri research from selected sources/documents",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/ResearchSetup.tsx"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Start Fill with Meri research from selected sources/documents",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/runs"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-065",
+        "historicalBlockerSnapshot": "Preview-only staging candidate prepared in PR2382; strict preview start/retry remains503. Old core/completion workers lack version claim/recovery fences. Responsible owner must inventory/drain/upgrade both worker populations, schedules and recovery queues, agree historical-run handling and qualify deployed services before activation. No fallback to old start/retry. Existing reviewed apply remains versionless; signed-in acceptance open."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-065."
+    },
+    {
+      "audit_id": "CORE-066",
+      "area": "Profile enrichment",
+      "criterion": "Poll progress and review findings",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Poll progress and review findings",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/fill-with-meri/runs/:runId"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-066",
+        "historicalBlockerSnapshot": "Polls only a running saved run, shows actual source/task outcomes and typed finding evidence. Informational backend kinds cannot be selected for apply. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-066."
+    },
+    {
+      "audit_id": "CORE-067",
+      "area": "Profile enrichment",
+      "criterion": "Apply selected findings",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Apply selected findings",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/runs/:runId/apply"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-067",
+        "historicalBlockerSnapshot": "Current unchanged selected pending findings reviewed before POST. Displays only accepted statuses observed in full returned run; no inferred count fallback. Unknown outcome freezes intent across dialog close/reopen. Atomic revision/idempotency unavailable. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-067."
+    },
+    {
+      "audit_id": "CORE-068",
+      "area": "Profile enrichment",
+      "criterion": "Cancel enrichment run",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Cancel enrichment run",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/runs/:runId/cancel"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-068",
+        "historicalBlockerSnapshot": "Reviewed cancellation requires exact saved run/client and a cancelled receipt, current role/lifetime. No task retry or implied successful cancellation after invalid receipt. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-068."
+    },
+    {
+      "audit_id": "CORE-069",
+      "area": "Profile enrichment",
+      "criterion": "Retry one enrichment task",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/ResearchSetup.tsx"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Retry one enrichment task",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/runs/:runId/tasks/:taskId/retry"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-069",
+        "historicalBlockerSnapshot": "Preview-only staging candidate prepared in PR2382; strict preview start/retry remains503. Old core/completion workers lack version claim/recovery fences. Responsible owner must inventory/drain/upgrade both worker populations, schedules and recovery queues, agree historical-run handling and qualify deployed services before activation. No fallback to old start/retry. Existing reviewed apply remains versionless; signed-in acceptance open."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-069."
+    },
+    {
+      "audit_id": "CORE-070",
+      "area": "Profile enrichment",
+      "criterion": "Reject finding with reason",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Reject finding with reason",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/findings/:findingId/reject"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-070",
+        "historicalBlockerSnapshot": "Review reason and selected finding snapshot before reject; require expected rejected read-back. Actual server role restrictions retained. No lost-response automatic retry. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-070."
+    },
+    {
+      "audit_id": "CORE-071",
+      "area": "Profile enrichment",
+      "criterion": "Restore rejected finding",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Restore rejected finding",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/findings/:findingId/restore"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-071",
+        "historicalBlockerSnapshot": "Explicit restore confirmation, selected finding/current actor preflight and expected pending read-back. Unknown outcome remains unresolved without an operation receipt. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-071."
+    },
+    {
+      "audit_id": "CORE-072",
+      "area": "Profile enrichment",
+      "criterion": "Assign pending finding to an advocacy matter",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Assign pending finding to an advocacy matter",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/clients/:clientId/fill-with-meri/runs/:runId/findings/:findingId/assign-matter"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-072",
+        "historicalBlockerSnapshot": "Matter assignment is an immediate persisted action, separately reviewed from bulk apply. Exact selected client/finding/matter receipt and accepted read-back; new matter receipt must include a non-null ID. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-072."
+    },
+    {
+      "audit_id": "CORE-103",
+      "area": "Overview timeline",
+      "criterion": "Filter kinds / date range, search history and clear filters",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49451",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-60193"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Filter kinds / date range, search history and clear filters",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-103",
+        "historicalBlockerSnapshot": "Title/body search, exact service kinds, inclusive local civil-date ranges, Last 30 days and all dates presets, invalid range and clear implemented. Five domain/two browser checks and native Figma asset geometry pass. Positive live history and full expanded-dialog acceptance remain open; current designated-client live history was empty. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-103."
+    },
+    {
+      "audit_id": "CORE-104",
+      "area": "Overview timeline",
+      "criterion": "Pin / unpin a recorded note",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/activity-change.ts",
+        "apps/web/src/features/portfolio/client-profile/activity-mutations.ts"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49051"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Pin / unpin a recorded note",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/activity/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-104",
+        "historicalBlockerSnapshot": "Fresh bounded scoped preflight, minimal mutation, exact receipts, actor/lifetime and shared ambiguous-outcome lock/GET-only reconciliation tested. Recorded edits/settle/remove and note pin/unpin are integrated; derived sources remain immutable. Current backend lacks canonical wall check: PR2384 prepares it, unmerged/undeployed; root78PASS but owner/native/live acceptance required. Grant/write atomic fence and version CAS remain absent. Quick log Undo remains initiating-creator only in frontend, not server-enforced creator authorization."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-104."
+    },
+    {
+      "audit_id": "CORE-105",
+      "area": "Overview timeline",
+      "criterion": "Settle an open commitment",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Settle an open commitment",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/activity/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-105",
+        "historicalBlockerSnapshot": "Recorded due-item settle/reopen PATCH implemented with scoped receipt, required due date, retained denial and explicit retry. activity-actions browser and root91combinedPASS. Live settlement/privacy NOT RUN; no excluded Open commitments summary panel restored. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-105."
+    },
+    {
+      "audit_id": "CORE-106",
+      "area": "Overview timeline",
+      "criterion": "Load older activity beyond the latest 200",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Load older activity beyond the latest 200",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/activity?limit=:limit"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-106",
+        "historicalBlockerSnapshot": "Latest 500 feed entries; unbounded older-history pagination contract not available. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-106."
+    },
+    {
+      "audit_id": "CORE-107",
+      "area": "Overview timeline",
+      "criterion": "Expand synced email thread / show less",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/relationships/thread/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49051"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Expand synced email thread / show less",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/engagement/mail-threads/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-107",
+        "historicalBlockerSnapshot": "Server requested-client association proof for null/other-direct-client threads. Engagement/API owner integration and designated-account live acceptance required."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-107."
+    },
+    {
+      "audit_id": "CORE-108",
+      "area": "Overview timeline",
+      "criterion": "Reply / reply all to synced email",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/relationships/thread/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49051"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Reply / reply all to synced email",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/engagement/mail/send"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-108",
+        "historicalBlockerSnapshot": "Owner-pinned native reply metadata and durable ambiguous outcome receipt; email-integration approval required. Engagement/API owner integration and designated-account live acceptance required."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-108."
+    },
+    {
+      "audit_id": "CORE-109",
+      "area": "Overview timeline",
+      "criterion": "Open meeting / outreach / file source record",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Open meeting / outreach / file source record",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-109",
+        "historicalBlockerSnapshot": "Meeting/file source navigation implemented; synced email/outreach source drawer remains open. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-109."
+    },
+    {
+      "audit_id": "CORE-110",
+      "area": "Overview timeline",
+      "criterion": "Retry failed activity update",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49051",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-49508"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Retry failed activity update",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/activity/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-110",
+        "historicalBlockerSnapshot": "Recorded activity PATCH failure retains form/intent and offers explicit retry; false receipts never close or claim success. activity-actions browser and root91combinedPASS. Live activity mutation NOT RUN. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-110."
+    },
+    {
+      "audit_id": "CORE-111",
+      "area": "Overview analytics",
+      "criterion": "Read government registration details",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/capabilities/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47482"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde",
+        "8324bb52c49185e48ff4-ac3a02b6cf0d158dd1ca",
+        "8324bb52c49185e48ff4-b6288cb0e43ebc26d4bf",
+        "8324bb52c49185e48ff4-27545fe313dfebb418d7",
+        "8324bb52c49185e48ff4-3692d1474b9a193a2512",
+        "8324bb52c49185e48ff4-eb05515a833e0d7e4e34",
+        "8324bb52c49185e48ff4-15d5535d4ce951bccf52",
+        "8324bb52c49185e48ff4-858583e8c4724a030240",
+        "8324bb52c49185e48ff4-ef47de22bfdd5f9c0c0a",
+        "8324bb52c49185e48ff4-daec91d984a11c705dea",
+        "8324bb52c49185e48ff4-3a2841194781818fd45e",
+        "8324bb52c49185e48ff4-833a476c56e091904ab5",
+        "8324bb52c49185e48ff4-6adb703dad7a11ea09d9"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Read government registration details",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-111",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-111."
+    },
+    {
+      "audit_id": "CORE-112",
+      "area": "Overview analytics",
+      "criterion": "Federal footprint FY26 obligated / FY27 request by program",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47563"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Federal footprint FY26 obligated / FY27 request by program",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/intelligence/client-profile/:clientId"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-112",
+        "historicalBlockerSnapshot": "Verified federal-program financial definitions and source needed. Independent UI work continues. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-112."
+    },
+    {
+      "audit_id": "CORE-113",
+      "area": "Overview analytics",
+      "criterion": "Engagement health / touches / most contacted / waiting reply",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47620",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Engagement health / touches / most contacted / waiting reply",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-113",
+        "historicalBlockerSnapshot": "Define touches, health and reply-aware waiting state before calculating. Independent UI work continues. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-113."
+    },
+    {
+      "audit_id": "CORE-114",
+      "area": "Overview analytics",
+      "criterion": "Deadline stress heatmap from Planner dates and commitments",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Deadline stress heatmap from Planner dates and commitments",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-114",
+        "historicalBlockerSnapshot": "Define deadline stress measure; do not invent heatmap weights. Independent UI work continues. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-114."
+    },
+    {
+      "audit_id": "CORE-115",
+      "area": "Overview analytics",
+      "criterion": "Open requests by type and client / government audience",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Open requests by type and client / government audience",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-115",
+        "historicalBlockerSnapshot": "Define request kinds and audience/readiness source. Independent UI work continues. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-115."
+    },
+    {
+      "audit_id": "CORE-116",
+      "area": "Client files",
+      "criterion": "Display storage used / allowance / over-quota warning",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52964"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Display storage used / allowance / over-quota warning",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/engagement/attachments?clientId=:clientId"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-116",
+        "historicalBlockerSnapshot": "Visible record bytes only; server quota/allowance not available. No fixture quota displayed. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-116."
+    },
+    {
+      "audit_id": "CORE-117",
+      "area": "Client files",
+      "criterion": "Validate 25 MB upload limit / retry rejected upload",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52718"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Validate 25 MB upload limit / retry rejected upload",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "POST",
+            "route": "/api/engagement/attachments/upload-url"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-117",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-117."
+    },
+    {
+      "audit_id": "CORE-118",
+      "area": "Client files",
+      "criterion": "Display readable / partial visual text / no readable text states",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/files/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52484"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [
+        "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+        "1de639fdc719e2321283-be08d9b57421c24286a4"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Display readable / partial visual text / no readable text states",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/engagement/attachments?clientId=:clientId"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-118",
+        "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-118."
+    },
+    {
+      "audit_id": "CORE-119",
+      "area": "Client files",
+      "criterion": "Create with Meri from client Files",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-52484"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Create with Meri from client Files",
+        "verifiedHistoricalInterfaces": [],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-119",
+        "historicalBlockerSnapshot": "Meri/Files owners must define authorized ready selected-file references and editable intent handoff; new profile creation also requires preview-only research/apply lifecycle. Current owner older reliability work is paused; successor unknown."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-119."
+    },
+    {
+      "audit_id": "CORE-120",
+      "area": "Client files",
+      "criterion": "Move several files with all-or-nothing failure guarantee",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-53579"
+      ],
+      "boundedInteractionFacets": [],
+      "relatedExecutedCaseIds": [],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [],
+      "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Move several files with all-or-nothing failure guarantee",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "PATCH",
+            "route": "/api/clients/:clientId/files/:attachmentId/folder"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-120",
+        "historicalBlockerSnapshot": "Atomic multi-file move endpoint with transaction, per-file ACL and all-or-nothing tests required. Independent UI work continues. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-120."
+    },
+    {
+      "audit_id": "CORE-128",
+      "area": "Overview past performance",
+      "criterion": "Remove a saved submission from past performance",
+      "scope": "IN_SCOPE",
+      "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "canonicalFrontendPaths": [
+        "apps/web/src/features/portfolio/client-profile/past-performance/"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-58348"
+      ],
+      "boundedInteractionFacets": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current saved submissions, explicit removal review, interrupted-source fencing and exact authored desktop/phone component geometry pass.",
+          "caseIds": [
+            "ae8c7e7cf67caffb9de4-e9b3be325b1c5a2872e3",
+            "ae8c7e7cf67caffb9de4-c382435c3f2e47403e71",
+            "ae8c7e7cf67caffb9de4-563a226b380d1b3fd368",
+            "ae8c7e7cf67caffb9de4-631bb900986052c26970",
+            "ae8c7e7cf67caffb9de4-10fa9004e62cf49c30d5",
+            "ae8c7e7cf67caffb9de4-09209eb2a060ba8ea0b0",
+            "ae8c7e7cf67caffb9de4-d10201207a454bcad029",
+            "ae8c7e7cf67caffb9de4-ad3730ed399d369936de",
+            "7e0f9d0fa558ff5d7451-164353c3382c44d7921f",
+            "7e0f9d0fa558ff5d7451-929aa34ec463fd7317f7",
+            "7e0f9d0fa558ff5d7451-b9742c60e5b856a43785",
+            "7e0f9d0fa558ff5d7451-962b70330cf95ac7c717",
+            "7e0f9d0fa558ff5d7451-a34feb5f3ff3b8e61f16",
+            "7e0f9d0fa558ff5d7451-eba5b9ecaa738aac1978",
+            "73d13b93298b97ad0c66-5c90369b943010910bbb",
+            "73d13b93298b97ad0c66-b094f7d57309bf95ed55"
+          ],
+          "remaining": "Native versionless DELETE causality/concurrency, actual removal and cross-device durability remain open. This local readback cannot prove which request caused a server change."
+        }
+      ],
+      "relatedExecutedCaseIds": [
+        "ae8c7e7cf67caffb9de4-e9b3be325b1c5a2872e3",
+        "ae8c7e7cf67caffb9de4-c382435c3f2e47403e71",
+        "ae8c7e7cf67caffb9de4-563a226b380d1b3fd368",
+        "ae8c7e7cf67caffb9de4-631bb900986052c26970",
+        "ae8c7e7cf67caffb9de4-10fa9004e62cf49c30d5",
+        "ae8c7e7cf67caffb9de4-09209eb2a060ba8ea0b0",
+        "ae8c7e7cf67caffb9de4-d10201207a454bcad029",
+        "ae8c7e7cf67caffb9de4-ad3730ed399d369936de",
+        "7e0f9d0fa558ff5d7451-164353c3382c44d7921f",
+        "7e0f9d0fa558ff5d7451-929aa34ec463fd7317f7",
+        "7e0f9d0fa558ff5d7451-b9742c60e5b856a43785",
+        "7e0f9d0fa558ff5d7451-962b70330cf95ac7c717",
+        "7e0f9d0fa558ff5d7451-a34feb5f3ff3b8e61f16",
+        "7e0f9d0fa558ff5d7451-eba5b9ecaa738aac1978",
+        "73d13b93298b97ad0c66-5c90369b943010910bbb",
+        "73d13b93298b97ad0c66-b094f7d57309bf95ed55"
+      ],
+      "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+      "visualObservationIds": [
+        "V06"
+      ],
+      "visualStatus": "SCOPED_COMPARISON_RECORDED",
+      "native": {
+        "status": "NOT_RUN_NATIVE",
+        "criteria": "Establish native signed-in behavior for: Remove a saved submission from past performance",
+        "verifiedHistoricalInterfaces": [
+          {
+            "method": "GET",
+            "route": "/api/clients/:clientId/capabilities/submission-history"
+          },
+          {
+            "method": "DELETE",
+            "route": "/api/clients/:clientId/capabilities/submission-history/:id"
+          }
+        ],
+        "requiredEvidence": [
+          "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+          "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+          "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+        ],
+        "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-128",
+        "historicalBlockerSnapshot": "Current Overview411:47010 has no Past performance entry; current removal dialog retained. User placement question pending (Capabilities/Overview/legacy). Actual component is only in test harness; no product integration claimed. Saved capability/documents remain. Versionless deletion and missing scoped receipt remain limits; signed-in acceptance open."
+      },
+      "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for CORE-128."
+    }
+  ],
+  "priorScopedTargetNodes": [
+    "1019:187928",
+    "1028:188442",
+    "411:112533",
+    "411:119740",
+    "411:41421",
+    "411:41685",
+    "411:52106",
+    "411:55155",
+    "411:56471",
+    "411:60728",
+    "411:64863",
+    "411:95693",
+    "460:90798",
+    "999:51328"
+  ],
+  "doNotRepeatCompletedSevenRepairNodes": [
+    "411:41685",
+    "411:41421",
+    "411:55155",
+    "411:56471",
+    "460:90798"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "source formatting only",
+  "argv": [
+    "--max-old-space-size=128",
+    "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input\\node_modules\\prettier\\bin\\prettier.cjs",
+    "--write",
+    "apps/web/test/browser/meri-current-wordmark.spec.ts",
+    "apps/web/src/features/meri/home.module.css",
+    "apps/web/src/features/meri/ui/meri-ui.module.css",
+    "apps/web/src/features/meri/workspace/workspace.module.css"
+  ],
+  "cwd": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-initial-input",
+  "pid": 8568,
+  "startedAt": "2026-10-16T11:12:46.1462962+00:00",
+  "endedAt": "2026-10-16T11:12:46.4958300+00:00",
+  "exitCode": 0,
+  "rootExited": true,
+  "timedOut": false,
+  "memory": {
+    "availableMiB": 11382,
+    "commitHeadroomMiB": 1458
+  },
+  "processTreeAndRss": "not sampled; short source formatter only",
+  "testCompilerBrowserInstallBuild": false
+}

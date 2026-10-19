@@ -1,0 +1,56 @@
+{
+  "observedUTC": "2026-10-13T07:26:39.104512+00:00",
+  "status": "PASS_FROZEN93_PORTFOLIO1122_WITH_PRESERVED_OUTER_INFRASTRUCTURE_FAILURE",
+  "source": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "sourceDiff": ""
+  },
+  "sourceObjectsVerified": true,
+  "observedCheckout": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "status": "M apps/web/package.json\n M apps/web/src/app/globals.css\n M apps/web/src/features/meri/MeriSuggestions.tsx\n M apps/web/src/features/portfolio/index/ProfileResults.tsx\n M apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx\n M apps/web/src/features/portfolio/index/portfolio.module.css\n M apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx\n M apps/web/src/shared/shell/ProductShell.tsx\n M apps/web/test/browser/main.tsx\n M package-lock.json\n?? apps/web/test/accessibility.ts\n?? apps/web/test/browser/shared-home-accessibility.spec.ts\n?? apps/web/tests/browser/canonical-navigation.spec.ts\n?? apps/web/tests/browser/portfolio-home-accessibility.spec.ts"
+  },
+  "discovered": 1122,
+  "actualPassed": 1122,
+  "uniqueIds": 1122,
+  "duplicateIds": 0,
+  "missingIds": 0,
+  "unexpectedIds": 0,
+  "retries": 0,
+  "skips": 0,
+  "flaky": 0,
+  "resultErrors": 0,
+  "runnerErrors": 0,
+  "timeoutCounts": {
+    "30000": 1118,
+    "90000": 4
+  },
+  "sequentialShards": true,
+  "priorPackets": [
+    {
+      "packet": "/tmp/capiro-unified-final-evidence-independent-review-20261013",
+      "manifestSha256": "a0c4dc76e656a44bf848f054ce65d667dea11627c7fa53882d3e697a1b5a1883",
+      "verifiedFiles": 16,
+      "allUnchanged": true
+    },
+    {
+      "packet": "/tmp/capiro-unified-final-evidence-independent-review-20261013-shards12-addendum",
+      "manifestSha256": "cb465a5575d8621d1639886aece7882f6c37d49d2be48d0ea4f5f2313d02201c",
+      "verifiedFiles": 6,
+      "allUnchanged": true
+    }
+  ],
+  "outerFailure": {
+    "originalWrapperExit": 120,
+    "cause": "NOT_ESTABLISHED",
+    "originalProgressPreserved": true,
+    "productFailure": false,
+    "qualificationResumedOnlyShards": [
+      3,
+      4
+    ]
+  },
+  "reviewerRuntimeExecution": false
+}

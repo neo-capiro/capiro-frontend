@@ -1,0 +1,40 @@
+# Public0.1 run workspace source candidate
+
+Owner: Codex. Date:12 October2026 UTC. Branch:`task/meri-run-workspace-20261012`. Exact local base`3cc4645de01046c402af96ac381c16cfd5721e9e`, tree`9fb3ef9aa72010e87a173378e4d04150be41d6d3`, source equivalent to published frontend PR4`e141d68f8954ba6c76327bcbed94739d28e0a902`. Outline committed before implementation.
+
+## Delivered and canonical ownership
+
+Added one disconnected sample route, `/meri/fixture/run-activity`, inside the existing `apps/web`. Its thin page composes the unchanged ProductShell and feature fixture. No application/image/hostname, server route, provider/source access, remote publication or AWS action was added.
+
+`MeriRunWorkspace` composes feature presentation, `ConversationTranscript`, `RunActivityPanel` and the unchanged MeriComposer. The transcript actually uses the adopted public AI Elements Conversation/ConversationContent/EmptyState/ScrollButton and Message/MessageContent; Composer retains the existing PromptInput primitives. Only plain response text is qualified here; no custom Markdown parser or rich-plugin qualification is claimed.
+
+`workspace-view.ts` owns pure display grouping of already-accepted events by run, attempt, messageId and requestId. It neither authorizes, admits, reorders, deduplicates, persists nor transports events. The public0.1 ConversationProjection and browser validator exclusively own canonical admission/replay/gap/binding checks. The synthetic fixture uses those real public implementations, a fixed timestamp origin and manual sample controls; it contains no runtime scheduler or agent loop.
+
+The three architecture additions are exactly `@capiro/ui/conversation`, `@capiro/ui/message`, `@capiro/meri-client/projection`. One focused guard test retains rejection of private UI/client paths and the unallocated root/React client imports. All original architecture assertions survive unchanged.
+
+Actual supported displays: eight run states; message fragments; tool name/request/result-reference data; source/record/version/citation/timestamps/hash references; proposal/hash/expiry references; exact artifact/version IDs; checkpoint and usage IDs; canonical safe run errors. Tool completion is labelled “Result reference recorded”, never proof of coverage or business success. Missing starts display “Tool name unavailable”. Stop/Steer/Resume/Fork/Approve/Download and sending/attachments remain disabled. Plans, specialist assignments, coverage/counts/result tables, costs, filenames, previews/download endpoints, command outcomes and replacement-worker recovery are excluded rather than invented. All fixture identity/data are visibly synthetic and local.
+
+## Preservation and integration boundary
+
+Of1015 base tracked blobs,1013 remain byte-exact. Only `scripts/architecture.mjs` and its test changed; the former adds just the three approved imports. Every shared-shell, Home, cited-answer, Portfolio, package/lock, public0.1, existing asset/source/evidence blob remains unchanged. New code lives exclusively in the owned Meri workspace/fixture paths and thin route. Existing branches and main were not modified or merged.
+
+The human's latest deployment handoff still makes Portfolio continuation's reviewed `apps/web`/HeaderFrame consolidation the canonical combined frontend base. This is an independently reviewable Meri feature candidate against the preserved exact older source. Root must integrate after Portfolio's shared foundations are accepted; this task adds no shared-shell dependency edits or separate preview destination. No live runtime origin, G1/G4, signed-in, authorized data, recovery, security or release acceptance is inferred.
+
+## Design references and actual checks
+
+Captured high-fidelity Figma contexts/screenshots: file`Zc2dEN5aLU47dVdsewDmiJ`, Research content`443:82175` within screen`443:82027`, and Tool activity content`443:84463` within screen`443:84316`. These are content references for the explicit sparse-contract subset, not complete-screen parity. Their natural content size is1208×975; the returned captures are scaled references. Transient URLs are redacted. Existing local wordmark/shell assets remain exact; no replacement static assets were authored. Desktop/mobile implementation screenshots were visually inspected.
+
+- Node`v24.19.0`; complete `npm run check` PASS: public package byte pins, all workspace types,29 root tests (nine new view/fixture cases and one additional architecture case), architecture zero errors/signals, and all21 original transport tests. No assertion was deleted, skipped or weakened.
+- Clean actual Turbopack `npm run build` PASS: `/`, `/meri`, existing `/meri/fixture/cited-answer`, new `/meri/fixture/run-activity` and not-found statically generated. The final explicit-label repair was rebuilt from empty owned `.next` outputs, with actual typechecking; all source checks remain applicable.
+- Seven actual Playwright groups PASS: all eight status scenarios and safe errors; accessible log/status and disabled controls; incremental sample progression, canonical duplicate replay, escaped script-like text, unmatched tool and keyboard disclosure; adopted scroll-to-latest, local PromptInput and keyboard focus; two-run/two-attempt isolation with colliding request/message IDs; desktop/mobile geometry and all three labelled mode buttons; preserved Home/reset/Routines/suggestions/cited-answer interactions; zero page errors/external requests and GET-only fixture traffic.
+- Desktop1440px document width1440, heading x260, wordmark62×20. At390×844, document width390 including open reference disclosures. Actual scroll viewport360px and content1466px; upstream scroll-to-latest works after scrolling away. Root/historical fixtures remain reachable with their prior interactions.
+
+## Recorded failures, resources and evidence
+
+Initial human-readable fixture IDs failed the actual frozen UUID formats. They were corrected to stable sample UUIDs without changing schemas or weakening assertions. An initial generic correlated-type cast failed TypeScript; the fixture factory now returns the UIEvent narrowed by the existing public runtime validator, without that cast. Both failures are retained.
+
+The first clean build encountered host ENOSPC before compilation. Root explicitly approved removal of the previous author's unused task-owned cited-consolidation dependency copy and `.next` output. This agent checked no old cwd processes, no top-level symlinks, distinct physical new dependency files, and no tracked files in the targets, then removed only those two owned directories without following symlinks. Cleanup records916320256 allocated entry bytes across those old targets; all tracked/source/assets/evidence and runtime/other-owner/borrowed trees were preserved. The same full checks and clean build passed after cleanup. New task-owned installed dependency copies are retained for independent review; no install, version or lock changes occurred.
+
+The first browser run found implicit select labels included option text. Explicit htmlFor/id associations repaired actual accessibility; the unweakened label assertions then passed. The next run's safe-error locator also matched Next's separate route announcer; that test was narrowed to the intended main feature alert without changing its expected message. All original failed receipts are retained. Final server/browser share one bounded owner; `finally` stopped the owned server, and Playwright closed its browser/context. No background session remains owned by this task.
+
+Candidate evidence lives under `docs/qualification/candidates/run-workspace-20261012/`: exact design references, checks/logs, browser script/results/screenshots, geometry, resource ownership/cleanup and source preservation. Raw logs use evidence-only `*.log -text` so original progress CRLF/whitespace remains byte-bound. Final staged and committed evidence size/hash identities must pass before the head is returned. Authored source/coordination whitespace checks are separate from immutable raw CLI formatting. Independent review and publication remain root-owned.

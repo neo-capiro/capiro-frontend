@@ -1,0 +1,315 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-acceptance-baseline-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "tests/browser/acceptance-prospect-contacts.spec.ts",
+      "--workers=2",
+      "--output",
+      "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/tmp/capiro-acceptance-baseline-20261013/apps/web/playwright.config.ts",
+    "rootDir": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 2,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "acceptance-prospect-contacts.spec.ts",
+      "file": "acceptance-prospect-contacts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "contacts 403 current read removes cached contacts and editor through held recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9114,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:56:26",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                      "column": 26,
+                      "line": 56
+                    },
+                    "snippet": "  54 |       failureText(status),\n  55 |     );\n> 56 |     await expect(editor).toHaveCount(0);\n     |                          ^\n  57 |     await expect(\n  58 |       card.getByRole(\"button\", { name: /Synthetic current contact/ }),\n  59 |     ).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                        "column": 26,
+                        "line": 56
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  54 |       failureText(status),\n  55 |     );\n> 56 |     await expect(editor).toHaveCount(0);\n     |                          ^\n  57 |     await expect(\n  58 |       card.getByRole(\"button\", { name: /Synthetic current contact/ }),\n  59 |     ).toHaveCount(0);\n    at /tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:56:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:38:23.344Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-81f5b-ditor-through-held-recovery/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-81f5b-ditor-through-held-recovery/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-81f5b-ditor-through-held-recovery/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                    "column": 26,
+                    "line": 56
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "656827cfc887805fb434-a8de7f6e1d717c972a2a",
+          "file": "acceptance-prospect-contacts.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "contacts 503 current read removes cached contacts and editor through held recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9970,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:56:26",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                      "column": 26,
+                      "line": 56
+                    },
+                    "snippet": "  54 |       failureText(status),\n  55 |     );\n> 56 |     await expect(editor).toHaveCount(0);\n     |                          ^\n  57 |     await expect(\n  58 |       card.getByRole(\"button\", { name: /Synthetic current contact/ }),\n  59 |     ).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                        "column": 26,
+                        "line": 56
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  54 |       failureText(status),\n  55 |     );\n> 56 |     await expect(editor).toHaveCount(0);\n     |                          ^\n  57 |     await expect(\n  58 |       card.getByRole(\"button\", { name: /Synthetic current contact/ }),\n  59 |     ).toHaveCount(0);\n    at /tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:56:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:38:33.479Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-2660c-ditor-through-held-recovery/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-2660c-ditor-through-held-recovery/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-2660c-ditor-through-held-recovery/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                    "column": 26,
+                    "line": 56
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "656827cfc887805fb434-b769ba44156463f6e806",
+          "file": "acceptance-prospect-contacts.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "held contact recovery cannot resurrect an old editor after route replacement",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8169,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact' })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact' })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact' })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact' })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:103:66",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                      "column": 66,
+                      "line": 103
+                    },
+                    "snippet": "  101 |   await session.reread();\n  102 |   await expect(card.locator('[role=\"alert\"]')).toContainText(failureText(403));\n> 103 |   await expect(page.getByRole(\"dialog\", { name: contact.name })).toHaveCount(0);\n      |                                                                  ^\n  104 |   const release = read.holdRecovery(contacts(\"Later current contact\"));\n  105 |   const before = read.reads();\n  106 |   await card.getByRole(\"button\", { name: \"Retry\", exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                        "column": 66,
+                        "line": 103
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Synthetic current contact' })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic current contact' })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  101 |   await session.reread();\n  102 |   await expect(card.locator('[role=\"alert\"]')).toContainText(failureText(403));\n> 103 |   await expect(page.getByRole(\"dialog\", { name: contact.name })).toHaveCount(0);\n      |                                                                  ^\n  104 |   const release = read.holdRecovery(contacts(\"Later current contact\"));\n  105 |   const before = read.reads();\n  106 |   await card.getByRole(\"button\", { name: \"Retry\", exact: true }).click();\n    at /tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:103:66"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:38:44.287Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-baseline-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+                    "column": 66,
+                    "line": 103
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "656827cfc887805fb434-be0d63776951641e4e1c",
+          "file": "acceptance-prospect-contacts.spec.ts",
+          "line": 90,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T12:38:22.154Z",
+    "duration": 30795.186999999998,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

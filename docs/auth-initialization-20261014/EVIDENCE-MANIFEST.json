@@ -1,0 +1,353 @@
+{
+  "sourceCommit": "c047f5c899700a2e4d3b4f185e3d70d06a13eb51",
+  "archive": "evidence.tar.gz",
+  "archiveBytes": 3472227,
+  "archiveSha256": "5ba36bfd6fdb977c1cc7d53a62ab40f96a97ba98e16711b723a037cccb374654",
+  "members": [
+    {
+      "path": "architecture.json",
+      "bytes": 915341,
+      "sha256": "048b5293e871072007a80d30d1292d33d01588e78980e1b7e84c9ce3ed25abe5"
+    },
+    {
+      "path": "auth-final-replay-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "auth-final-replay-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/auth-loading-390.png",
+      "bytes": 19672,
+      "sha256": "2d5962968feacef6b26c649d05e8555f31ef6aac8ef046a7eff6619299e0e60f"
+    },
+    {
+      "path": "auth-final-replay-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/auth-loading-1440.png",
+      "bytes": 24437,
+      "sha256": "af7c050b915362d680317254c2c78b50409111fa2f93574642c6aefd25754827"
+    },
+    {
+      "path": "auth-final-replay-results.json",
+      "bytes": 184080,
+      "sha256": "c93640aba087c4014d4ac05e3419fbc02cc7dc6f41517b3096b07f489a982fa2"
+    },
+    {
+      "path": "baseline-artifacts/.last-run.json",
+      "bytes": 194,
+      "sha256": "a497bfbcb340f126c7b16d3a44d0189e06a79e61a94b1871e8028936f0cdd2ea"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-SDK-fa-74dcd--state-and-no-private-reads/error-context.md",
+      "bytes": 4987,
+      "sha256": "3f5ede332ddf7a6de430cc69dbefac30fe42560a70c2f80bf1a50a086cc247aa"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-SDK-fa-74dcd--state-and-no-private-reads/test-failed-1.png",
+      "bytes": 8811,
+      "sha256": "568890fc75bc388ae4ac43c7ab7622d7467a7ad3053b18db9f0a405bb14b3d8c"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-SDK-fa-74dcd--state-and-no-private-reads/trace.zip",
+      "bytes": 132498,
+      "sha256": "2ef0844648c03c96cb6225467e0acad7f5f0e547d9b73c859e0aef855b2f5a82"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/error-context.md",
+      "bytes": 4992,
+      "sha256": "4425602cf45acbe8c57b9158a6d6108fa7e9c5ea9e74f9b4e39f37d6611cf344"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/test-failed-1.png",
+      "bytes": 5127,
+      "sha256": "ac7cdcfb53ad9176e17cdc8afe41bed214aa49dc6aa7ad840b4119eb502f02a6"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/trace.zip",
+      "bytes": 132733,
+      "sha256": "e30667e753d9c8236c4f5489d5517e41edd4b752fb42ed17d892d04e5e5e6f8c"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/error-context.md",
+      "bytes": 4993,
+      "sha256": "583fb8ef784ec1b87da3af1b109707a4629a14a01ba9e5deadbc95b19850feb8"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/test-failed-1.png",
+      "bytes": 8551,
+      "sha256": "97d299160ed18dac1129acdb0716f49389c3d965124c4c6b08555cf87d10c1ad"
+    },
+    {
+      "path": "baseline-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/trace.zip",
+      "bytes": 131615,
+      "sha256": "8c69b3cef79ab3bcd8057ba4de5b53f14c2a72b36052e910eb073111db45333a"
+    },
+    {
+      "path": "baseline-results.json",
+      "bytes": 21645,
+      "sha256": "07cda2236ecb0d8b706f3c7d6e43e5d84b855bbab0560af809b469e1a822f6f4"
+    },
+    {
+      "path": "baseline-spec.ts.txt",
+      "bytes": 3569,
+      "sha256": "199ac7dd1f58efb2ac42b303f22df04e438624ce55868925c44a60b3c8eaf535"
+    },
+    {
+      "path": "baseline.log",
+      "bytes": 10951,
+      "sha256": "f1f30b9e8320c4dac84df90a860e6eee6c836f9a460dd85257179eb5cbd9ac58"
+    },
+    {
+      "path": "capiro-auth-build.log",
+      "bytes": 2681,
+      "sha256": "010876770fbbda1cd50a6587e27f11a6cd5c233d7589ddcd59bccac6ad934911"
+    },
+    {
+      "path": "capiro-auth-final-browser.log",
+      "bytes": 4054,
+      "sha256": "7114e99dd3debf63f7f843001afe69a8f70b61f4a338a6f9973af70c276223f2"
+    },
+    {
+      "path": "capiro-auth-final-replay.log",
+      "bytes": 1531,
+      "sha256": "2bf00df8ba44da360f7557f77f03769962d9aff2577917663eb1840f19cf83ce"
+    },
+    {
+      "path": "capiro-auth-format-final.log",
+      "bytes": 274,
+      "sha256": "773cff305e1e384801ea09129135096bc71e0b5f6fa6c8fd66938c0de01cafbe"
+    },
+    {
+      "path": "capiro-auth-format.log",
+      "bytes": 509,
+      "sha256": "4f22d5e1c062d30b3757563977f9e651b47ea7100a9322e7c4ba80dd525cb63d"
+    },
+    {
+      "path": "capiro-auth-green.log",
+      "bytes": 8170,
+      "sha256": "26c32dbc7ddf7f229413bceebd767f603c67f89a304fb838cc4404ad8aed5c60"
+    },
+    {
+      "path": "capiro-auth-install.log",
+      "bytes": 164,
+      "sha256": "0724bc231b20a5661fe7d2391f3fe1c34480ff7db8b79ae553d673148c1ca07a"
+    },
+    {
+      "path": "capiro-auth-lint.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "capiro-auth-packages.log",
+      "bytes": 2007,
+      "sha256": "6f3b01f08979a75f0ad0bab69de6cae8e573232ceedf91947f9f0fff22fd94d0"
+    },
+    {
+      "path": "capiro-auth-production.log",
+      "bytes": 8289,
+      "sha256": "f2b9d88668282e1b753f896b3d9ac24ddc79711194db06fa74e6f95545d13fce"
+    },
+    {
+      "path": "capiro-auth-red.log",
+      "bytes": 10951,
+      "sha256": "f1f30b9e8320c4dac84df90a860e6eee6c836f9a460dd85257179eb5cbd9ac58"
+    },
+    {
+      "path": "capiro-auth-root.log",
+      "bytes": 11470,
+      "sha256": "9695537a38927c6f6778b9e926f7e0d076be637ce5121cd4af3274c4279e5c20"
+    },
+    {
+      "path": "capiro-auth-types.log",
+      "bytes": 821,
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "first-candidate-artifacts/.last-run.json",
+      "bytes": 145,
+      "sha256": "1cb9343019f5b28ee4f5a63ea61b6d516c8a3b3009416821769345e2abd36514"
+    },
+    {
+      "path": "first-candidate-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/error-context.md",
+      "bytes": 2148,
+      "sha256": "3a1b64a612fcf14c161fd90900f9deaf89d6a5fd4a71a004aaddcecf1571ef0b"
+    },
+    {
+      "path": "first-candidate-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/test-failed-1.png",
+      "bytes": 20672,
+      "sha256": "8d0d5e7234664074deb9af34c7826e0da1cd5819b5175896f4c5ca8f54318ef2"
+    },
+    {
+      "path": "first-candidate-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/trace.zip",
+      "bytes": 787662,
+      "sha256": "6ebc6892e7ae23aced872149fa64fe33ea483a4b2e95a70355e25fe3b5a2c45d"
+    },
+    {
+      "path": "first-candidate-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/error-context.md",
+      "bytes": 2149,
+      "sha256": "02b92d300c70139821033fc87a8164fb31105a3750cecd55537d52f78105a6fb"
+    },
+    {
+      "path": "first-candidate-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/test-failed-1.png",
+      "bytes": 25217,
+      "sha256": "101707dcee8d19bca5af78aea5ff02ec0ee96a01cb90115e01d487ae4a319edd"
+    },
+    {
+      "path": "first-candidate-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/trace.zip",
+      "bytes": 789971,
+      "sha256": "5b313be825b7dde301feab7f0e8d87008fab0edbed6953ee0797b73a9c2277e3"
+    },
+    {
+      "path": "first-candidate-results.json",
+      "bytes": 191061,
+      "sha256": "9c093e16ec354d5903c1d127c501096fcde797f0a4b1a7ddbc48a230306b6b33"
+    },
+    {
+      "path": "first-candidate.log",
+      "bytes": 8170,
+      "sha256": "26c32dbc7ddf7f229413bceebd767f603c67f89a304fb838cc4404ad8aed5c60"
+    },
+    {
+      "path": "ledger-preservation.json",
+      "bytes": 479,
+      "sha256": "5b3561b059776b687e5ab39719efa30d8f9abe1585185bf89766b9f246c33b4b"
+    },
+    {
+      "path": "production/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "production/production-meri-1440-dark.png",
+      "bytes": 172515,
+      "sha256": "e206dbec06057dbd1dde0894ed8b986ee549e06784600f329a4803d323e070bf"
+    },
+    {
+      "path": "production/production-meri-1440-light.png",
+      "bytes": 86010,
+      "sha256": "6b8bbb83b23394c3f7c0084f641545c84919f11c32473fab36221f087ce6d2da"
+    },
+    {
+      "path": "production/production-meri-390-dark.png",
+      "bytes": 95164,
+      "sha256": "8f6f053b02111cea1449ebfa58f2f49c39d32369b711766b0ec5c4b658e3f14d"
+    },
+    {
+      "path": "production/production-meri-390-light.png",
+      "bytes": 56738,
+      "sha256": "82923566545170915a2b9e2183b57f2bfc89fd8fd2be0ac0cd516bd820450d32"
+    },
+    {
+      "path": "production/production-meri-error-1440-dark.png",
+      "bytes": 205851,
+      "sha256": "36127c24e41d3860254b95327cbfa45dddfd2aa962e2fc627330c6e727c65686"
+    },
+    {
+      "path": "production/production-meri-error-1440-light.png",
+      "bytes": 112386,
+      "sha256": "4ff4708f163070b406ec5068bf23041ca62a861a954d700a4de7a36a91dd4b97"
+    },
+    {
+      "path": "production/production-meri-error-390-dark.png",
+      "bytes": 131065,
+      "sha256": "2e586ebf8fb1048d297164c90babd1f0fd844ed9c5277a72c8751e7f469fa0f7"
+    },
+    {
+      "path": "production/production-meri-error-390-light.png",
+      "bytes": 83781,
+      "sha256": "fe2b521419885484bcdaaab3d3ea9c0ac5b02cdd2290b0c5563b7f49df411759"
+    },
+    {
+      "path": "production/production-meri-files-1440-dark.png",
+      "bytes": 120123,
+      "sha256": "7267c03461d67b46193ba1983ebc95efca60c3e38b39ae679a75da73fee9ac03"
+    },
+    {
+      "path": "production/production-meri-files-1440-light.png",
+      "bytes": 51117,
+      "sha256": "f843c80b08acd54d40151ea792879b669675ce305d29d7d1b13fa8db8b5b7ff3"
+    },
+    {
+      "path": "production/production-meri-files-390-dark.png",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "production/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "production/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "production/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "production/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "production/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "production/production-smoke.json",
+      "bytes": 7698,
+      "sha256": "30ccd231b9ede7e36af74854622fc0536c4f6e1326e44b87bbc224a70d6a8916"
+    },
+    {
+      "path": "production/standalone-default.log",
+      "bytes": 147,
+      "sha256": "3369c9ea9a42245d036e46f816e552863c8c52f214c0ad2be54b0b4d6155d95a"
+    },
+    {
+      "path": "production/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "88b97c42ec7a31b4ac3d5acb8d365ca45669acef1a58e5dec51c0f6792d1709a"
+    },
+    {
+      "path": "replay-cli-selection-error.log",
+      "bytes": 1088,
+      "sha256": "1b801979dd766e989c7bcdd746459b4b630be7f7bfd2a6da6c8e36d067daeec7"
+    },
+    {
+      "path": "second-candidate-results.json",
+      "bytes": 187531,
+      "sha256": "428de9a4ee949eb148a31eea4fc436e480ddf786670b8a308f69b040bc401a19"
+    },
+    {
+      "path": "second-candidate.log",
+      "bytes": 2029,
+      "sha256": "b02fcabf41a8a6829dd0f5a17805c98248145e252865ee6fdf986b8a70e4b943"
+    },
+    {
+      "path": "session-regression-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "session-regression-artifacts/auth-initialization-prolon-1c9e8-ng-private-content-at-390px/auth-loading-390.png",
+      "bytes": 19672,
+      "sha256": "2d5962968feacef6b26c649d05e8555f31ef6aac8ef046a7eff6619299e0e60f"
+    },
+    {
+      "path": "session-regression-artifacts/auth-initialization-prolon-91f6f-g-private-content-at-1440px/auth-loading-1440.png",
+      "bytes": 24437,
+      "sha256": "af7c050b915362d680317254c2c78b50409111fa2f93574642c6aefd25754827"
+    },
+    {
+      "path": "session-regression-results.json",
+      "bytes": 210919,
+      "sha256": "f7e03cd3be35c549b09ce325d99196ce477148d34857dcf0354873d0a5b76a07"
+    },
+    {
+      "path": "session-regression.log",
+      "bytes": 4054,
+      "sha256": "7114e99dd3debf63f7f843001afe69a8f70b61f4a338a6f9973af70c276223f2"
+    }
+  ]
+}

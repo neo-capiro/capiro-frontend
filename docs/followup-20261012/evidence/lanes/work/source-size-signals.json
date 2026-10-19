@@ -1,0 +1,333 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+    "imports": [
+      {
+        "specifier": "@/shared/portfolio/config/config",
+        "line": 2
+      },
+      {
+        "specifier": "temporal-polyfill",
+        "line": 3
+      },
+      {
+        "specifier": "@/shared/portfolio/ui/QueryState",
+        "line": 4
+      },
+      {
+        "specifier": "@/shared/capiro/queries",
+        "line": 5
+      },
+      {
+        "specifier": "./queries",
+        "line": 6
+      },
+      {
+        "specifier": "./contracts",
+        "line": 7
+      },
+      {
+        "specifier": "./owners",
+        "line": 8
+      },
+      {
+        "specifier": "./WorkspaceDocuments",
+        "line": 9
+      },
+      {
+        "specifier": "./WorkStrategyState",
+        "line": 10
+      },
+      {
+        "specifier": "./work.module.css",
+        "line": 15
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [
+      {
+        "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+        "kind": "function",
+        "symbol": "WorkPage",
+        "line": 16,
+        "nonblank": 226,
+        "fingerprint": "b17ef5e4ba4bd46f95cab84e38f19965fc48ca771295e97a124fe91295c0b82d"
+      }
+    ],
+    "nonblank": 247
+  },
+  {
+    "file": "apps/web/src/features/portfolio/work/owners.ts",
+    "imports": [
+      {
+        "specifier": "@/shared/capiro/contracts",
+        "line": 1
+      },
+      {
+        "specifier": "@/shared/capiro/registry",
+        "line": 2
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 16
+  },
+  {
+    "file": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+    "imports": [
+      {
+        "specifier": "@capiro/ui/button",
+        "line": 2
+      },
+      {
+        "specifier": "@/shared/portfolio/ui/QueryState",
+        "line": 3
+      },
+      {
+        "specifier": "@/features/portfolio/index/public",
+        "line": 4
+      },
+      {
+        "specifier": "@/shared/portfolio/config/config",
+        "line": 5
+      },
+      {
+        "specifier": "./contracts",
+        "line": 6
+      },
+      {
+        "specifier": "./queries",
+        "line": 7
+      },
+      {
+        "specifier": "./WorkspaceDocumentTable",
+        "line": 8
+      },
+      {
+        "specifier": "./owners",
+        "line": 9
+      },
+      {
+        "specifier": "./workspace-documents.module.css",
+        "line": 10
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 95
+  },
+  {
+    "file": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+    "imports": [
+      {
+        "specifier": "@capiro/ui/button",
+        "line": 2
+      },
+      {
+        "specifier": "./contracts",
+        "line": 3
+      },
+      {
+        "specifier": "./owners",
+        "line": 4
+      },
+      {
+        "specifier": "./workspace-documents.module.css",
+        "line": 5
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 97
+  },
+  {
+    "file": "apps/web/src/features/portfolio/work/work.module.css",
+    "imports": [],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 71
+  },
+  {
+    "file": "apps/web/tests/browser/work-owners.spec.ts",
+    "imports": [
+      {
+        "specifier": "@playwright/test",
+        "line": 1
+      },
+      {
+        "specifier": "./fixtures",
+        "line": 2
+      },
+      {
+        "specifier": "./work-boundary-fixtures",
+        "line": 3
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 321
+  },
+  {
+    "file": "apps/web/tests/browser/work-boundary-harness.tsx",
+    "imports": [
+      {
+        "specifier": "react",
+        "line": 1
+      },
+      {
+        "specifier": "react-dom/client",
+        "line": 2
+      },
+      {
+        "specifier": "@tanstack/react-query",
+        "line": 3
+      },
+      {
+        "specifier": "./portfolio-harness-providers",
+        "line": 4
+      },
+      {
+        "specifier": "@/features/portfolio/work/WorkPage",
+        "line": 5
+      },
+      {
+        "specifier": "@/features/portfolio/index/public",
+        "line": 6
+      },
+      {
+        "specifier": "@/app/globals.css",
+        "line": 7
+      },
+      {
+        "specifier": "@/shared/portfolio/styles.css",
+        "line": 8
+      },
+      {
+        "specifier": "./test-font.css",
+        "line": 9
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 79
+  },
+  {
+    "file": "apps/web/tests/browser/work-boundary-fixtures.ts",
+    "imports": [
+      {
+        "specifier": "@playwright/test",
+        "line": 1
+      },
+      {
+        "specifier": "@/features/portfolio/work/contracts",
+        "line": 2
+      },
+      {
+        "specifier": "./fixtures",
+        "line": 6
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 150
+  },
+  {
+    "file": "apps/web/tests/browser/work-owner-authority-harness.tsx",
+    "imports": [
+      {
+        "specifier": "react-dom/client",
+        "line": 1
+      },
+      {
+        "specifier": "next/navigation",
+        "line": 2
+      },
+      {
+        "specifier": "@/shared/session/ApplicationBoundary",
+        "line": 3
+      },
+      {
+        "specifier": "@/shared/session/SessionContext",
+        "line": 4
+      },
+      {
+        "specifier": "@/shared/session/SelectedClient",
+        "line": 5
+      },
+      {
+        "specifier": "@/features/portfolio/work/WorkPage",
+        "line": 6
+      },
+      {
+        "specifier": "@/app/globals.css",
+        "line": 7
+      },
+      {
+        "specifier": "@/shared/portfolio/styles.css",
+        "line": 8
+      },
+      {
+        "specifier": "./test-font.css",
+        "line": 9
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 31
+  },
+  {
+    "file": "apps/web/tests/browser/work-documents.spec.ts",
+    "imports": [
+      {
+        "specifier": "@playwright/test",
+        "line": 1
+      },
+      {
+        "specifier": "./fixtures",
+        "line": 2
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 112
+  },
+  {
+    "file": "apps/web/tests/work-owner-presentation.test.ts",
+    "imports": [
+      {
+        "specifier": "react",
+        "line": 1
+      },
+      {
+        "specifier": "react-dom/server",
+        "line": 2
+      },
+      {
+        "specifier": "vitest",
+        "line": 3
+      },
+      {
+        "specifier": "../src/features/portfolio/work/WorkspaceDocumentTable",
+        "line": 4
+      },
+      {
+        "specifier": "../src/features/portfolio/work/owners",
+        "line": 5
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 63
+  }
+]

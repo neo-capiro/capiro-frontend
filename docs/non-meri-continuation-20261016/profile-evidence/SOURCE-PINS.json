@@ -1,0 +1,57 @@
+{
+  "backendPin": "cd3c51e940f14e1b2a1040b0ffa445e85d68b332",
+  "nativeTypeFiles": [
+    {
+      "path": "apps/api/src/district-nexus/district-nexus.types.ts",
+      "canonicalBytes": 24905,
+      "canonicalSHA256": "db3cbddc8b3c2aa80ba38ca9ea5c33cb350e5658bc107cfcdc76bd0241f0156a",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/district-nexus-economic.types.ts",
+      "canonicalBytes": 7879,
+      "canonicalSHA256": "a75740816e34cdaefe550d98d12fe38ce963296593b17de780d93b8b1cb34e09",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/district-nexus-strategic.types.ts",
+      "canonicalBytes": 5097,
+      "canonicalSHA256": "4734390eca2bc0187fa914d87e77953fdd490c0467157f87d158cac9233e5622",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/district-nexus-strategic-weights.ts",
+      "canonicalBytes": 3761,
+      "canonicalSHA256": "09bbe118085134043c8c4a1e650cbe61e64857441910c157775ee3c9366f06cc",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/priority-intelligence/priority-intelligence.types.ts",
+      "canonicalBytes": 5677,
+      "canonicalSHA256": "8a1e34a7e944947af94439abfa0192486373b7bf94bebbb2cacf170b580af3b9",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/priority-intelligence/priority-intelligence-cpf-cds.ts",
+      "canonicalBytes": 16038,
+      "canonicalSHA256": "45db5a6d66738bc8b46db448c2eb082b116165636c048206bf98315bbb9b946c",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/priority-intelligence/priority-intelligence-sector.ts",
+      "canonicalBytes": 6921,
+      "canonicalSHA256": "a312f700a68ca3eed524de6b3cfc3156758813ddfb25f511d9241d35070dc06a",
+      "workingLFEqualsCanonical": true
+    },
+    {
+      "path": "apps/api/src/district-nexus/priority-intelligence/priority-intelligence-change-policy.ts",
+      "canonicalBytes": 4128,
+      "canonicalSHA256": "83fa236406bca83eac187dd1100656626d20e6bf875854cda106d74ea7e0db02",
+      "workingLFEqualsCanonical": true
+    }
+  ],
+  "auditReportedPin": "1b9fedc5bd476311d9234ca4b549ff3ebb14ab2d",
+  "auditParityIndependentlyRechecked": false,
+  "auditParityLimit": "Local store git show1b9 returned128, no object retrieval or alternate store access attempted; accepted audit reports byte parity. Availablecd3 source is independently verified here.",
+  "scope": "Read-only source byte provenance only; no live endpoint/flags/data qualification"
+}

@@ -1,0 +1,112 @@
+  async createMeetingNote(
+    ctx: TenantContext,
+    meetingId: string,
+    input: { body: string; confidential?: boolean; accessLevel?: string; approved?: boolean },
+  ) {
+    const encrypted = this.notesCrypto.encrypt(input.body);
+    return this.prisma.withTenant(
+      ctx.tenantId,
+      async (tx) => {
+        await this.lockMeetingClientAssignment(tx, ctx, meetingId);
+        const meeting = await tx.meeting.findFirst({
+          where: { id: meetingId, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+        });
+        if (!meeting) throw new NotFoundException('Meeting not found');
+        return tx.meetingNote.create({
+          data: {
+            tenantId: ctx.tenantId,
+            meetingId,
+            clientId: meeting.clientId,
+            authorUserId: ctx.userId,
+            bodyCiphertext: encrypted.bodyCiphertext,
+            iv: encrypted.iv,
+            authTag: encrypted.authTag,
+            keyVersion: encrypted.keyVersion,
+            confidential: input.confidential ?? true,
+            accessLevel: input.accessLevel ?? 'tenant_admins_and_author',
+            ...(input.approved
+              ? { status: 'approved', approvedAt: new Date(), approvedByUserId: ctx.userId }
+              : {}),
+          },
+          select: noteMetadataSelect(),
+        });
+      },
+      { timeoutMs: MEETING_CONTEXT_TX_TIMEOUT_MS },
+    );
+  }
+
+  async createMeetingDebrief(
+    ctx: TenantContext,
+    meetingId: string,
+    input: { body: string; confidential?: boolean; accessLevel?: string; approved?: boolean },
+  ) {
+    const encrypted = this.notesCrypto.encrypt(input.body);
+    return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      await this.lockMeetingClientAssignment(tx, ctx, meetingId);
+      const meeting = await tx.meeting.findFirst({
+        where: { id: meetingId, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+      });
+      if (!meeting) throw new NotFoundException('Meeting not found');
+      return tx.meetingDebrief.create({
+        data: {
+          tenantId: ctx.tenantId,
+          meetingId,
+          clientId: meeting.clientId,
+          authorUserId: ctx.userId,
+          bodyCiphertext: encrypted.bodyCiphertext,
+          iv: encrypted.iv,
+          authTag: encrypted.authTag,
+          keyVersion: encrypted.keyVersion,
+          confidential: input.confidential ?? true,
+          accessLevel: input.accessLevel ?? 'tenant_members',
+          ...(input.approved ? { status: MeetingDebriefStatus.approved } : {}),
+        },
+        select: debriefMetadataSelect(),
+      });
+    });
+  }
+
+function noteMetadataSelect() {
+  return {
+    id: true,
+    meetingId: true,
+    clientId: true,
+    authorUserId: true,
+    author: { select: { id: true, email: true, firstName: true, lastName: true } },
+    confidential: true,
+    accessLevel: true,
+    keyVersion: true,
+    // Phase 2 §d — lifecycle: decorateMeetings' notesApproved and
+    // libraryArtifactWhere both need `status` to tell existence from approval.
+    status: true,
+    approvedAt: true,
+    approvedByUserId: true,
+    sharedAt: true,
+    sharedByUserId: true,
+    createdAt: true,
+    updatedAt: true,
+  };
+}
+
+function debriefMetadataSelect() {
+  return {
+    id: true,
+    meetingId: true,
+    clientId: true,
+    authorUserId: true,
+    author: { select: { id: true, email: true, firstName: true, lastName: true } },
+    confidential: true,
+    accessLevel: true,
+    status: true,
+    keyVersion: true,
+    // Phase 2 §d — sharing only; approval already lives in `status` above.
+    sharedAt: true,
+    sharedByUserId: true,
+    createdAt: true,
+    updatedAt: true,
+  };
+}
+
+/**
+ * Additive optimistic concurrency for native clients. Legacy web callers omit
+ * expectedRevision and keep their existing behavior. Conflict responses expose

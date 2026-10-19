@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "status": "COMPLETE_DESKTOP_CONTROL_LEDGER; SEE_CHECKLIST_FOR_FINAL_COUNTS; RENDERED_PARITY_UNRUN",
+  "families": [
+    {
+      "key": "portfolio-index",
+      "label": "Portfolio index, filters, ownership and pulse",
+      "paths": [
+        "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+        "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx"
+      ],
+      "owner": "Portfolio frontend; Core aggregate/read owners",
+      "gaps": [
+        "PFG-01"
+      ],
+      "tests": [
+        "Apply owner/search/type filters without broadening client scope; unavailable owner catalog retains selected ID and retry.",
+        "Open each pulse drilldown only with a qualified aggregate/coverage contract; unknown totals stay unavailable.",
+        "Customize only current accessible profiles, preserve canonical ordering/CAS and restore on failure."
+      ]
+    },
+    {
+      "key": "quick-log",
+      "label": "Client/member Quick log and commitments",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+        "apps/web/src/features/portfolio/client-profile/quick-log/contracts.ts",
+        "apps/web/src/features/portfolio/client-profile/quick-log/command-contracts.ts"
+      ],
+      "owner": "Portfolio frontend; existing Core/Planner command owners",
+      "gaps": [
+        "PFG-06"
+      ],
+      "tests": [
+        "Client/member mode changes clear incompatible selection; select only current authorized targets.",
+        "Explicit log/commitment/follow-up actions use admitted owner contract; no automatic Meri linking or task creation is inferred from prototype copy.",
+        "Cancel/close performs no write; unknown reply preserves original command rather than fabricating success."
+      ]
+    },
+    {
+      "key": "profile-intake-billing",
+      "label": "Add profile, LDA intake and billing gates",
+      "paths": [
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
+        "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx",
+        "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx"
+      ],
+      "owner": "Portfolio frontend; Core billing/intake owner",
+      "gaps": [
+        "PFG-04"
+      ],
+      "tests": [
+        "Role/capacity failures disable applicable creation and preserve retry; no charge on opening a gate.",
+        "LDA selection retains original selected IDs, current capacity and scoped command; server revalidates matches.",
+        "Payment/ACH/non-admin request prototype paths require accepted owner commands; present explicit unavailable states while absent."
+      ]
+    },
+    {
+      "key": "client-overview",
+      "label": "Client overview, identity and widgets",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+        "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+        "apps/web/src/features/portfolio/client-profile/ProfileFacts.tsx"
+      ],
+      "owner": "Portfolio frontend; Core factual read owners",
+      "gaps": [
+        "PFG-02",
+        "PFG-01"
+      ],
+      "tests": [
+        "Do not substitute recent-activity length or team count for defined touch/awaiting-reply/deadline metrics.",
+        "Retain profile/team/activity loading and failures independently; missing is not zero.",
+        "Use the same verified client through every widget/modal and invalidate after actor/session/client replacement."
+      ]
+    },
+    {
+      "key": "government-location",
+      "label": "Combined government/federal entry and District Nexus",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+        "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilityMap.tsx"
+      ],
+      "owner": "Portfolio frontend; Core location/context owners",
+      "gaps": [
+        "PFG-02",
+        "DG-03",
+        "DG-04",
+        "DG-10"
+      ],
+      "tests": [
+        "Render one visible combined entry; hidden legacy Federal footprint node is not a second tile.",
+        "Each location list/marker opens that exact facility; keep all ten categories and independent current data coverage.",
+        "Apply GOVERNMENT-AND-LOCATION.json acceptance; preserve address evidence, period, ACS vintage, LODES absence, award attribution and public priority distinctions."
+      ]
+    },
+    {
+      "key": "timeline",
+      "label": "Timeline activity, expansion, update/removal",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx",
+        "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx"
+      ],
+      "owner": "Portfolio frontend; Core activity/mail owners",
+      "gaps": [
+        "DG-09"
+      ],
+      "tests": [
+        "Loading/empty/filtered-empty/error/update-error remain distinct; successful independent feed sections remain visible.",
+        "Expanded mail and remote links bind current record and client; no hidden-body or unrelated mail disclosure.",
+        "Remove/update use current version/authority and preserve original draft/unknown outcome; focus returns after dialog closure."
+      ]
+    },
+    {
+      "key": "objectives",
+      "label": "Objective intake, saved receiving and operational work",
+      "paths": [
+        "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+        "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
+        "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+        "apps/web/src/features/portfolio/objectives/ObjectiveGeneration.tsx",
+        "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx"
+      ],
+      "owner": "Portfolio frontend; Objective Core/Strategy/Planner owners",
+      "gaps": [
+        "PFG-03",
+        "DG-01",
+        "DG-02"
+      ],
+      "tests": [
+        "Keep exact five-field intake and four-field form readiness; do not invent semantic score, cycle verdict, horizon or automatic questions.",
+        "Preserve current/requested/Strategy-applied/Planner-applied distinction and multiple projects; no prototype one-project or task-cap policy.",
+        "Human links require existing622 commands, full source/version/set binding and immutable receipt recovery; current design has no authoring mockup.",
+        "Current receiving never casts ordinary navigation as generated/applied lineage; stale/partial/forbidden/unknown remain separate."
+      ]
+    },
+    {
+      "key": "advocacy",
+      "label": "Advocacy history, matters and correction dialogs",
+      "paths": [
+        "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx",
+        "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+        "apps/web/src/features/portfolio/advocacy/EditMatterDialog.tsx",
+        "apps/web/src/features/portfolio/advocacy/CorrectionDialog.tsx",
+        "apps/web/src/features/portfolio/advocacy/RecordDialog.tsx"
+      ],
+      "owner": "Portfolio frontend; Core advocacy owner",
+      "gaps": [
+        "DG-08"
+      ],
+      "tests": [
+        "Successful/partial/unsuccessful determinations remain explicitly human-confirmed; no inferred causation.",
+        "Retain confidence/source/date/mapping uncertainty for inferred/public/client-verified records.",
+        "Merge/reassign/detach/not-advocacy target exact current IDs and current authority; cancel has no mutation."
+      ]
+    },
+    {
+      "key": "relationships",
+      "label": "Government/organization relationships, contact and target flows",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+        "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+        "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+        "apps/web/src/features/portfolio/relationships/AddTargetDialog.tsx",
+        "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx"
+      ],
+      "owner": "Portfolio frontend; Core Directory/contact/mail owners",
+      "gaps": [
+        "DG-11"
+      ],
+      "tests": [
+        "Directory search/cascaders distinguish committee staff/personal office/member/state records and current client targets.",
+        "Contact edits, discard, note logging, email recipients/attachments and failed-send retention use canonical current command owners.",
+        "History loading/error/empty is independent; no fabricated address/committee assignment or source inference."
+      ]
+    },
+    {
+      "key": "client-work",
+      "label": "Client Work and Workspace document rows",
+      "paths": [
+        "apps/web/src/features/portfolio/work/WorkPage.tsx",
+        "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+        "apps/web/src/features/portfolio/work/queries.ts"
+      ],
+      "owner": "Portfolio frontend; Strategy/Workspace current-resource owners",
+      "gaps": [
+        "PFG-05"
+      ],
+      "tests": [
+        "Use current unified Strategy/Workspace navigation with exact resource/client re-read; preserve separate generated-version receiving.",
+        "Keep draft/completed document states and owner-name failures independent of successful document/task reads.",
+        "Partial Strategy details suppress aggregate claims; node action opens the exact selected node or reports current unavailability."
+      ]
+    },
+    {
+      "key": "files",
+      "label": "Files, folders, upload, preview and permissions",
+      "paths": [
+        "apps/web/src/features/portfolio/files/FilesPage.tsx",
+        "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+        "apps/web/src/features/portfolio/files/FilePreview.tsx",
+        "apps/web/src/features/portfolio/files/FileAccess.tsx",
+        "apps/web/src/features/portfolio/files/DeleteFile.tsx"
+      ],
+      "owner": "Portfolio frontend; Core document/storage owner",
+      "gaps": [],
+      "tests": [
+        "Selection, upload progress/failure, quota, extraction-state and empty/error design states are separately observable.",
+        "Smart links retain original entity/version identity; no duplicate file or falsely searchable state is invented.",
+        "Move/delete/access changes revalidate exact current IDs and permissions; unknown outcome never becomes success."
+      ]
+    },
+    {
+      "key": "capabilities",
+      "label": "Capabilities, fit, registrations and editor documents",
+      "paths": [
+        "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+        "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx"
+      ],
+      "owner": "Portfolio frontend; Core capability/fit owner",
+      "gaps": [],
+      "tests": [
+        "Loading/empty/thin/error/fit-refresh-failure stay distinct and keep saved profile edits.",
+        "Capability status, PE mapping and fit are returned facts, not inferred from a missing value.",
+        "Profile/documents/delete/registration actions bind current capability/client and permitted actor."
+      ]
+    },
+    {
+      "key": "opportunities",
+      "label": "Opportunities and relevant budget programs",
+      "paths": [
+        "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+        "apps/web/src/features/portfolio/opportunities/OpportunityResults.tsx",
+        "apps/web/src/features/portfolio/opportunities/RelevantPrograms.tsx"
+      ],
+      "owner": "Portfolio frontend; existing Intelligence/Opportunity owners",
+      "gaps": [
+        "PFG-07"
+      ],
+      "tests": [
+        "Flag-off/loading/empty/error states retain explicit availability and no inferred saved/eligibility count.",
+        "Unknown eligibility/deadline/value remain unknown; do not treat recommendations as awards.",
+        "Only current admitted destinations expose detail actions; absent deployment/config stays unavailable."
+      ]
+    },
+    {
+      "key": "bill-tracker",
+      "label": "Bill Tracker table/board, updates and watchlists",
+      "paths": [
+        "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+        "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+        "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+        "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx"
+      ],
+      "owner": "Portfolio frontend; Core/Legiwatch watchlist owners",
+      "gaps": [],
+      "tests": [
+        "Current tracked counts and loading/empty/error/flag-unavailable states are honest; material-change/coverage dashes are not zero.",
+        "Track/untrack/configuration and alert preferences require current client/role/version controls.",
+        "Pass likelihood and bill actions are owner-supplied facts; no inference from legislative stage."
+      ]
+    },
+    {
+      "key": "calendar-meetings",
+      "label": "Client Calendar, Meeting Library and meeting workspaces",
+      "paths": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+        "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+        "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+        "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+        "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
+        "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx"
+      ],
+      "owner": "Portfolio frontend; Core calendar/artifact owners; Meri attendance separately admitted",
+      "gaps": [],
+      "tests": [
+        "Month/week/agenda and library filters retain exact client/meeting/artifact current authority.",
+        "Upcoming/completed/empty/unavailable/preparing/debriefing/save-error/unsaved component variants bind actual source statuses.",
+        "Prep/email/share/unshare/assignment/source/upload/manual/PDF actions use exact current versions and explicit approvals; opening never sends.",
+        "Personal/private artifacts remain private until accepted sharing; no provider/attendance/generation grant inferred from navigation."
+      ]
+    },
+    {
+      "key": "prospects",
+      "label": "Prospect overview, pipeline, details and contacts",
+      "paths": [
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
+        "apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx",
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+        "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx"
+      ],
+      "owner": "Portfolio frontend; Core prospect/conversion/billing owners",
+      "gaps": [
+        "PFG-04",
+        "PFG-07"
+      ],
+      "tests": [
+        "Pipeline stages/owner/next-step/contact/notes operations preserve canonical current stage and scope.",
+        "Conversion cannot invent new billing/prospect carry-over; existing approved link flow differs from prototype automatic conversion.",
+        "Filter/search/current prospect ID/version and changed/revoked access fence every command."
+      ]
+    },
+    {
+      "key": "prospect-workspace",
+      "label": "Prospect brief, rich Workspace and proposals",
+      "paths": [
+        "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx",
+        "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx",
+        "apps/web/src/features/portfolio/files/ProspectFiles.tsx"
+      ],
+      "owner": "Portfolio/Workspace frontend; existing brief/proposal/mail owners",
+      "gaps": [
+        "PFG-07"
+      ],
+      "tests": [
+        "Editor/save/preview payload parity and intentional placeholders are preserved through rich text operations.",
+        "Create/send/shared/published prototype paths remain unavailable unless a concrete owner operation is admitted.",
+        "A missing record/feature error does not authorize a fresh send or generated result."
+      ]
+    },
+    {
+      "key": "profile-enrichment",
+      "label": "Fill with Meri Portfolio research/review states",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx",
+        "apps/web/src/features/portfolio/client-profile/enrichment/queries.ts"
+      ],
+      "owner": "Portfolio/Core profile-enrichment owner; Meri frontend separately owned",
+      "gaps": [
+        "PFG-06"
+      ],
+      "tests": [
+        "Setup/running/partial/admin/evidence/standard/confirm/result/rejected/assignment/refreshed/retryConfirm/success are distinct observed states.",
+        "Retry only admitted failed tasks and preserve completed findings; no ACS/LODES ingestion is implied.",
+        "Field findings/role actions/source evidence and unknown apply results require actual current backend semantics; no Fable runtime edits in this audit."
+      ]
+    }
+  ],
+  "gaps": [
+    {
+      "id": "PFG-01",
+      "class": "BACKEND_FACT_CONTRACT_GAP",
+      "summary": "Portfolio pulse aggregates/drilldowns and client touch/deadline/open-request widgets are depicted, but source intentionally uses unavailable placeholders or narrower actual counts.",
+      "nodes": [
+        "1064:153351",
+        "1064:153668",
+        "1064:159034",
+        "1064:159117"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx"
+      ],
+      "owner": "Core read owners + Portfolio frontend",
+      "next": "Verify aggregate definitions/scope/coverage with Core; do not derive factual totals from current-page rows or team/activity length."
+    },
+    {
+      "id": "PFG-02",
+      "class": "DEFINED_FRONTEND_INTEGRATION_AND_BACKEND_COVERAGE",
+      "summary": "Current Figma has one government/federal entry and all ten location context categories; existing frontend ClientDetails/GovernmentInfo and FacilityDetail surfaces need bounded source integration after exact owner contracts are verified.",
+      "nodes": [
+        "1064:158951",
+        "1064:159414",
+        "1064:159495",
+        "1064:159626"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+        "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx"
+      ],
+      "owner": "Separate frontend source audit/implementation owner; Core context owners",
+      "next": "Use GOVERNMENT-AND-LOCATION.json; retain map/list, exact location identity and independently unavailable categories."
+    },
+    {
+      "id": "PFG-03",
+      "class": "DEFINED_FRONTEND_IMPLEMENTATION_GAP_PLUS_DESIGN_GAP",
+      "summary": "PR56 exposes622 association descriptors and receipt validators, but complete human link/unlink authoring is absent; current3.4 has no picker/annotation/remove/lost-reply interface.",
+      "nodes": [
+        "1064:175923",
+        "1064:176009",
+        "1064:176048"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx",
+        "apps/web/src/shared/capiro/operations/objective-operational.ts"
+      ],
+      "owner": "Portfolio frontend + Objective Core owner",
+      "next": "Request DG-01 mockup. edit_objective + non-null set is conservative presentation only; backend POST independently authorizes."
+    },
+    {
+      "id": "PFG-04",
+      "class": "BACKEND_OR_PRODUCT_BOUNDARY",
+      "summary": "Billing/payment/ACH/request/conversion prototypes exceed admitted inline preview commands. Current UI truthfully states limits; opening a design flow is not charge authority.",
+      "nodes": [
+        "1064:157451",
+        "1064:157835",
+        "1064:158215",
+        "1064:180498"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx",
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx"
+      ],
+      "owner": "Core billing/conversion owners",
+      "next": "Keep unsupported payment/new-client conversion unavailable; qualify concrete commands before enabling."
+    },
+    {
+      "id": "PFG-05",
+      "class": "CONCRETE_FRONTEND_NAVIGATION_GAP",
+      "summary": "Client Work links remain conditional on destinations.existingApp and construct legacy /strategies and /strategies/:id?step paths rather than the unified current resource receiver.",
+      "nodes": [
+        "1064:166690"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/work/WorkPage.tsx"
+      ],
+      "owner": "Portfolio frontend with Strategy current-resource owner",
+      "next": "Use canonical current Modules navigation and exact client/resource/node receiving; preserve generated-version route distinction."
+    },
+    {
+      "id": "PFG-06",
+      "class": "OWNER_CONFORMANCE_PENDING",
+      "summary": "Quick-log automatic linkage/follow-up and14-step enrichment/retry/review prototype semantics need exact existing Core/Planner owners; descriptive UI alone grants no automatic pipeline, ingestion or authority.",
+      "nodes": [
+        "1064:154792",
+        "1126:274852",
+        "1126:274876"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/client-profile/quick-log/command-contracts.ts",
+        "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx"
+      ],
+      "owner": "Core/Planner/Portfolio enrichment owners; Meri runtime separately owned",
+      "next": "Compare exact accepted command/status contracts before UI edits; no fabricated values or Meri/Fable overlap."
+    },
+    {
+      "id": "PFG-07",
+      "class": "EXPLICIT_EXISTING_UNAVAILABILITY_NOT_PROVEN_UI_DEFECT",
+      "summary": "Some opportunity/proposal/prospect-send/detail destinations depend on absent accepted operations or configured deployment targets; source already presents unavailable states.",
+      "nodes": [
+        "1064:170699",
+        "1064:179917",
+        "1064:181371"
+      ],
+      "source": [
+        "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx"
+      ],
+      "owner": "Relevant Core/Workspace/Intelligence owner",
+      "next": "Preserve truthful unavailable boundaries until a separately accepted contract/integration exists."
+    }
+  ]
+}

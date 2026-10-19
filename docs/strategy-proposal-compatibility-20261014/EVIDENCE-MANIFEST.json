@@ -1,0 +1,583 @@
+{
+  "syntheticOnly": true,
+  "copiedByteForByte": true,
+  "logExtensionOnlyChange": "log to txt; scoped existing raw-evidence attributes preserve bytes",
+  "artifacts": [
+    {
+      "source": "apps/web/.qa/strategy-compatibility/ARCHITECTURE-AFTER-HYDRATION.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/ARCHITECTURE-AFTER-HYDRATION.json",
+      "bytes": 929531,
+      "sha256": "4d02d192662bd2a81a29bab569386b60c452e4a4777fdb5931ef21b1f13a01d2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/ARCHITECTURE-FINAL.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/ARCHITECTURE-FINAL.json",
+      "bytes": 931684,
+      "sha256": "c98d40ed0d8c82eb773562953efc2196379859c0e4c6248d3b2e9eaa031ce1c3"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/BASELINE-PR46-CONTRACT.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/BASELINE-PR46-CONTRACT.txt",
+      "bytes": 465,
+      "sha256": "b1b645c4618e83a14adbe13ba5460b498d73048ab085bdc6fcaa3f4f6120e557"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/EVIDENCE-INDEX.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/EVIDENCE-INDEX.json",
+      "bytes": 3017,
+      "sha256": "77666c029672ee82c1e20c73c191c5a785d270e057fe209ab6c7880105b7dd1c"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/FORMAT-ATTEMPT-1.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/FORMAT-ATTEMPT-1.txt",
+      "bytes": 153,
+      "sha256": "dba3eb4f2824d2d82e73349da2166d04eb878d2a7420fbad418202296695c046"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/LINT-ATTEMPT-1.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/LINT-ATTEMPT-1.txt",
+      "bytes": 20637,
+      "sha256": "2fbddcac8c4d0ef2964557fb9d0d72f6518e72b7a558532c42b767797cb260c6"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/OWNED-TEST-FORMAT.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/OWNED-TEST-FORMAT.txt",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-2.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-2.txt",
+      "bytes": 2716,
+      "sha256": "deaf5f6583fb08ab449c10e3c7673861323b5b7e709f1d1280c6393ec5c6628f"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/.last-run.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/.last-run.json",
+      "bytes": 733,
+      "sha256": "2cf7ee13c54a80e0e8ff7f1c47cbf328b0062d90c2c772159dd1794217174aaa"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/error-context.md",
+      "bytes": 6688,
+      "sha256": "2426765d58c78dce978295515893a9cf15e5ea2f5073c14f45a7c1c49c42f248"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/trace.zip",
+      "bytes": 41981,
+      "sha256": "a429d6b7173c67ea10b83014f82b760bb9a75ddfb71b601bc04b068938d46580"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-2f926-n-sends-one-pending-request/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-2f926-n-sends-one-pending-request/error-context.md",
+      "bytes": 10805,
+      "sha256": "bc071365f60e2949a49ae899927e04ff1c89cda755993047c471593b9c3ce2db"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-2f926-n-sends-one-pending-request/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-2f926-n-sends-one-pending-request/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-2f926-n-sends-one-pending-request/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-2f926-n-sends-one-pending-request/trace.zip",
+      "bytes": 50367,
+      "sha256": "49eebd90e39b5647b8b885ef6eaa5c3fdeb7caa14a2e23742d0349c36702d7eb"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/error-context.md",
+      "bytes": 8923,
+      "sha256": "09079e69d182b0cf7b5e8e44dbebffb72de5f8e82bf48f593801ff41943bc001"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip",
+      "bytes": 16466,
+      "sha256": "9ac1abb3f876a9ad666f7a4980865592a393e3da6e7544fe4bec64ca9c0ccbf8"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-4f705--never-retries-the-mutation/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-4f705--never-retries-the-mutation/error-context.md",
+      "bytes": 2985,
+      "sha256": "a167a6f935426af995b5f2d678695d5498a941cd0bb6a2c5dc3a4f9794f34dfe"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-4f705--never-retries-the-mutation/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-4f705--never-retries-the-mutation/trace.zip",
+      "bytes": 9701,
+      "sha256": "96440181e5acacbee1fb4a44d0a1d1e8b7bd536b2279769b40d45b48032f3ad6"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7b9a7--selection-and-confirmation/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7b9a7--selection-and-confirmation/error-context.md",
+      "bytes": 9627,
+      "sha256": "b0e329a206487f8ed85ad9507867e455aee784c7fa6ebd93820e9bdd9de32708"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7b9a7--selection-and-confirmation/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7b9a7--selection-and-confirmation/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7b9a7--selection-and-confirmation/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7b9a7--selection-and-confirmation/trace.zip",
+      "bytes": 42189,
+      "sha256": "e3b79bb60deee4dcdaa442ba689ea96b6bc6be79b704dc68692e8b19b694bdf3"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7c45e-ithout-executable-selection/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7c45e-ithout-executable-selection/error-context.md",
+      "bytes": 8933,
+      "sha256": "259c97e3fbc145b0e3883d45026a669dddc030da8c4e2778157513657874a09c"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7c45e-ithout-executable-selection/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-7c45e-ithout-executable-selection/trace.zip",
+      "bytes": 63945,
+      "sha256": "546ba4efe7ba5228d221d64751a24642fdc359c8cc667860df57e42814969890"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/error-context.md",
+      "bytes": 7906,
+      "sha256": "53cd809412091e02ce0933dbd033e13545ab59e93ee235ba8957f84c9840f4d6"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/trace.zip",
+      "bytes": 41797,
+      "sha256": "99727ec4ce1dcd91a20b58db5339243b19c06782d9b9aa6eba05eada877cc636"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-99672--selection-and-confirmation/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-99672--selection-and-confirmation/error-context.md",
+      "bytes": 9634,
+      "sha256": "e87f90fa7f8aba38eb4135115b5293df9cfa4a8613a26e216a5ffed34d92b3ad"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-99672--selection-and-confirmation/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-99672--selection-and-confirmation/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-99672--selection-and-confirmation/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-99672--selection-and-confirmation/trace.zip",
+      "bytes": 42605,
+      "sha256": "29c4187791fba19aebf5d3ef74980f66e156c1e456082f893e822353a96e082e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/error-context.md",
+      "bytes": 6692,
+      "sha256": "be0164eceea142eb5b0b9278099cac488f4f227ba316f4e558b7dc5315f4a3b3"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/trace.zip",
+      "bytes": 41568,
+      "sha256": "f6c8d448ea2bbaeff9c43865f91307e017cdbd7e809444a1723964693477fcd2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-ac81c--selection-and-confirmation/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-ac81c--selection-and-confirmation/error-context.md",
+      "bytes": 9623,
+      "sha256": "c23e6816787bbde2847c101d26551068414d6dd0d6494a03fd42943cc7874131"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-ac81c--selection-and-confirmation/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-ac81c--selection-and-confirmation/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-ac81c--selection-and-confirmation/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-ac81c--selection-and-confirmation/trace.zip",
+      "bytes": 42608,
+      "sha256": "d91f0a9552ff7600b3a205d6a1e16d30c626bcdef2bb4bd866d7f7812e5fb690"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-b8661--selection-and-confirmation/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-b8661--selection-and-confirmation/error-context.md",
+      "bytes": 9631,
+      "sha256": "15933b3d78c99f113c7ed04388229aa7c5bfe5953bcf0c9493d910e12afd4c52"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-b8661--selection-and-confirmation/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-b8661--selection-and-confirmation/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-b8661--selection-and-confirmation/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-b8661--selection-and-confirmation/trace.zip",
+      "bytes": 42172,
+      "sha256": "4d202ac8229fde9cee7287c275ed8d80fa6ab7a764fd48a552d77a397fee4fa4"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/error-context.md",
+      "bytes": 6700,
+      "sha256": "c6490f93f05fa88c02471851fea9636c22eab1bc3cfacd8519af5d5e2e68fd38"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/trace.zip",
+      "bytes": 41558,
+      "sha256": "9efe84f6df8d63b7e22582eddf19892884ca25fb47d0ad20ded4db6669bcf90e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/error-context.md",
+      "bytes": 6708,
+      "sha256": "f4cddcaff43cdb33cefcc10f362678fb9a4d0e0caa39fd67c9fd1b1a3108f858"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/trace.zip",
+      "bytes": 48947,
+      "sha256": "d3b9a7edcdad915ab26f4f848b0f9c937156ac2d20cfe34427b847c20ef1999d"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-d5ee6--selection-and-confirmation/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-d5ee6--selection-and-confirmation/error-context.md",
+      "bytes": 9626,
+      "sha256": "8be7a2a7eaf2ab4a43b9ab99187b066d5719b81924d84c94a6cfa47f87ee6890"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-d5ee6--selection-and-confirmation/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-d5ee6--selection-and-confirmation/test-failed-1.png",
+      "bytes": 27450,
+      "sha256": "d56c30b368ba22d40ebb2e523b7382a1a7f57952f32676f47a5de3af6a208215"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-d5ee6--selection-and-confirmation/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-artifacts/strategy-proposal-compatib-d5ee6--selection-and-confirmation/trace.zip",
+      "bytes": 42162,
+      "sha256": "c1b01592c484b875908a65fd0965ecd06954cf279a916793684a556ff81e6021"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-summary.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3-summary.json",
+      "bytes": 628,
+      "sha256": "5abe939a72e3bf8fdab9ad8be51396d8f96de821f5d34769215c50347b78c093"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-3.txt",
+      "bytes": 38646,
+      "sha256": "868f54f73e8ba53d7cbb06443baa9c71383dd84f660a9b3b50dcd7d476a561e4"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-artifacts/.last-run.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "e9bd37037ac747f22626e21401f66629042dd8327ba1653577a1636cf0e4d989"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/error-context.md",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/error-context.md",
+      "bytes": 13774,
+      "sha256": "02004ac55b7a34cff5b8e98ee22a829d159a1ea73d9f124d353eb5cb3e34db3b"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/test-failed-1.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/test-failed-1.png",
+      "bytes": 138570,
+      "sha256": "ec0ce293f3668a43ec1aedf8fb6569f8b493a4038f8efd9a6478256430997027"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip",
+      "bytes": 518215,
+      "sha256": "79c51c63d00483b23fd83b85c6f7ede873b794508d9c98b7b413ec33c7c08eea"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4-summary.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4-summary.json",
+      "bytes": 594,
+      "sha256": "851466599a93757668377e8115f25afb75841913b41eae80f75738543d20603a"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-4.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-4.txt",
+      "bytes": 6951,
+      "sha256": "71b104b10aa7447f41e77486c0b95d2a5b60055c8447641190f81126f0aed21c"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-5-artifacts/.last-run.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-5-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-5-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-5-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-5-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-5-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-5-summary.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-5-summary.json",
+      "bytes": 1190,
+      "sha256": "b4df8101b0a491de40f28029669a91aee29a255da2eb03e39fdeb1805afdd209"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-5.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PLAYWRIGHT-ATTEMPT-5.txt",
+      "bytes": 3610,
+      "sha256": "f15ea5538968c40b2e5f5affc44e3be61c1127a95dd65af20808327244810043"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRELIMINARY-ATTEMPTS.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRELIMINARY-ATTEMPTS.json",
+      "bytes": 2510,
+      "sha256": "e4a84796da7edd0e43739ad8a0f5693492e2693fa4fc2254afe7debd0334cd7e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/preview-root-smoke.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-1440-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-1440-dark.png",
+      "bytes": 123061,
+      "sha256": "a3e581c3a94babc97288886ed4cf175597ff7b93378e61e62657bce324975409"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-1440-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-1440-light.png",
+      "bytes": 59511,
+      "sha256": "d45f6759524acc07dff4ac6607eee51cb726a6cf5562b3182bc7d3fdbc84a399"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-390-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-390-dark.png",
+      "bytes": 55067,
+      "sha256": "823c348f63d71e520651d1f7cee42d0960cb1bdcdf2566fe544a8908ca898033"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-390-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-390-light.png",
+      "bytes": 30902,
+      "sha256": "c7f6062674cb5576dbd857dccd0b5735be4b4a849fdcce90c6a235007f0e783f"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-error-1440-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-error-1440-dark.png",
+      "bytes": 213053,
+      "sha256": "f0410284c61d0e7158c123cdcf6783e81e021e26689f65005f92f6e531fa54b8"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-error-1440-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-error-1440-light.png",
+      "bytes": 126673,
+      "sha256": "8801de18a025791acf2ecedbcb3c045fb4ffb62882bb7517808f635fd064e292"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-error-390-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-error-390-dark.png",
+      "bytes": 139569,
+      "sha256": "b2ad8dbbaab701547d66fe8b6fee332dcad021bd1f43b0b7850d4695e905520d"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-error-390-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-error-390-light.png",
+      "bytes": 95595,
+      "sha256": "1eb857ea3b217f8f0b0b405a3412872ff7911e31f2b34879197b73ba6d82af4e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-files-1440-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-files-1440-dark.png",
+      "bytes": 115995,
+      "sha256": "6095857f9157b9d57cc1eb225017af2d152efa91e55cd7a03aa69b8cf5b7a212"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-files-1440-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-files-1440-light.png",
+      "bytes": 52760,
+      "sha256": "c118acdc6a097f5e89578e8f2a31026c3e553f44ef84c3601f0c8c9a55b637e5"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-files-390-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-files-390-dark.png",
+      "bytes": 43458,
+      "sha256": "c14f64a07cc5cf8d91de4da7fd4a8e89de5c14f15684bde114725bb18e5b209e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-meri-files-390-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-meri-files-390-light.png",
+      "bytes": 22875,
+      "sha256": "b4f20026935a2fe0abb8935fe4874b99b688bce9f172d77e20c625f35f10d50f"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-portfolio-1440-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-portfolio-1440-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-portfolio-390-dark.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-portfolio-390-light.png",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/production-smoke.json",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/standalone-default.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/standalone-default.txt",
+      "bytes": 147,
+      "sha256": "453eda97029ba02df464276aa812e4f67d857e969d7570fd6f6d0e783eac1f60"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE/standalone-portfolio.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE/standalone-portfolio.txt",
+      "bytes": 147,
+      "sha256": "88b97c42ec7a31b4ac3d5acb8d365ca45669acef1a58e5dec51c0f6792d1709a"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/PRODUCTION-STANDALONE-ATTEMPT-1.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/PRODUCTION-STANDALONE-ATTEMPT-1.txt",
+      "bytes": 8782,
+      "sha256": "b5db5e3fb6755c2080808306ae726184aafc63830b044de729f50491beec6286"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/ROOT-BUILD-ATTEMPT-1.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/ROOT-BUILD-ATTEMPT-1.txt",
+      "bytes": 2168,
+      "sha256": "255d60bee0974db5eb6a80e0f122aa6d11959db94eb04558a239abf66b76e455"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/ROOT-BUILD-ATTEMPT-2.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/ROOT-BUILD-ATTEMPT-2.txt",
+      "bytes": 143216,
+      "sha256": "5afc6bdea23353ba06dc0e7215b1a46e8d27f00186af7a93c3cce95ca02fd9e5"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/ROOT-BUILD-ATTEMPT-3.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/ROOT-BUILD-ATTEMPT-3.txt",
+      "bytes": 143115,
+      "sha256": "1c9b168e81d931d97ddd1f4faa4a79186450bc733c46f383a51de7059e3b7ea0"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/ROOT-CHECK-ATTEMPT-1.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/ROOT-CHECK-ATTEMPT-1.txt",
+      "bytes": 1007248,
+      "sha256": "b721f107b8b23ec3340cfd3c056298a43ff181edebf91c6c4007c1856ea4f812"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/TYPECHECK-ATTEMPT-2.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/TYPECHECK-ATTEMPT-2.txt",
+      "bytes": 1219,
+      "sha256": "0af861f95d48f34d488718d38759a4d6b7cdf5921eeadc159fbe12e42e41c232"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/TYPECHECK-ATTEMPT-3.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/TYPECHECK-ATTEMPT-3.txt",
+      "bytes": 1185,
+      "sha256": "0139f482e70a131f5660a64b0601f7cd45195b402a06e65a4d28476de95478db"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/TYPECHECK-ATTEMPT-4.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/TYPECHECK-ATTEMPT-4.txt",
+      "bytes": 2231,
+      "sha256": "c57dc43a50124ed22a54520922d40d0e2f263b83dbb7db523dec27559ca97568"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/TYPECHECK-ATTEMPT-5.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/TYPECHECK-ATTEMPT-5.txt",
+      "bytes": 47,
+      "sha256": "3fd8cb2b1b32e1cc4188aba853fd2590e452eebbd7107907014cc8814b77da0a"
+    },
+    {
+      "source": "apps/web/.qa/strategy-compatibility/UNIT-CONTRACT-PASS.log",
+      "published": "docs/strategy-proposal-compatibility-20261014/evidence/UNIT-CONTRACT-PASS.txt",
+      "bytes": 260,
+      "sha256": "f011f942e6989690ac3ed23d437fa1953be9e499bec9ffc331762ec882ecb797"
+    }
+  ]
+}

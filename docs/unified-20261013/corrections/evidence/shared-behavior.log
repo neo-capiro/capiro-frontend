@@ -1,0 +1,29 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts shared-home-accessibility-interaction.spec.ts shared-home-accessibility.spec.ts
+
+[WebServer] (node:1329796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 1 worker
+
+(node:1330087) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/shared-home-accessibility-interaction.spec.ts:24:5 › Meri semantic correction: 1440px conversations footer exposes its unchanged notice within contentinfo (5.1s)
+  ✓   2 test/browser/shared-home-accessibility-interaction.spec.ts:24:5 › Meri semantic correction: 1440px actions footer exposes its unchanged notice within contentinfo (3.8s)
+  ✓   3 test/browser/shared-home-accessibility-interaction.spec.ts:24:5 › Meri semantic correction: 390px conversations footer exposes its unchanged notice within contentinfo (6.3s)
+  ✓   4 test/browser/shared-home-accessibility-interaction.spec.ts:24:5 › Meri semantic correction: 390px actions footer exposes its unchanged notice within contentinfo (5.2s)
+  ✓   5 test/browser/shared-home-accessibility-interaction.spec.ts:69:1 › Meri positive control: phone suggestion remains reachable by keyboard and creates only a local draft (5.9s)
+  ✓   6 test/browser/shared-home-accessibility-interaction.spec.ts:91:1 › Meri semantic correction: named suggestions group preserves three Start controls without becoming a focus stop (4.4s)
+  ✓   7 test/browser/shared-home-accessibility-interaction.spec.ts:113:1 › Modules semantic correction: fixture warning remains visible in a named complementary landmark (4.4s)
+  ✓   8 test/browser/shared-home-accessibility.spec.ts:7:5 › meri home retains full default axe checks at 1440px (4.7s)
+  ✓   9 test/browser/shared-home-accessibility.spec.ts:7:5 › modules home retains full default axe checks at 1440px (5.8s)
+  ✓  10 test/browser/shared-home-accessibility.spec.ts:7:5 › meri home retains full default axe checks at 390px (4.1s)
+  ✓  11 test/browser/shared-home-accessibility.spec.ts:7:5 › modules home retains full default axe checks at 390px (4.3s)
+
+  11 passed (1.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

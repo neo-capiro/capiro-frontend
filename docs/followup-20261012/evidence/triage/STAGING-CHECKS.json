@@ -1,0 +1,232 @@
+{
+  "status": "PLAN_ONLY_NOT_EXECUTED_OR_AUTHORIZED_FOR_LIVE_MUTATION",
+  "sourceGroup": "Nine bounded follow-up findings; successor source/image identity not yet supplied to this triage. Frozen d5dd remains separate.",
+  "preconditions": [
+    "After source qualification, record the exact new full commit, root/apps-web/src trees, verified archive SHA and deployed image digest/build receipt. Verify the staging origin serves that exact image; no inherited d5dd test/image acceptance transferred.",
+    "Read and record actual deployed Core/Strategy/Workspace versions and required schema/feature state. The inspected compatibility pin is243248e726243c44bd4b9d24fd1ed220da18c56a; no assumption that this version or its migrations is live. Use documented full service prefixes with approved existing origins, never guessed URLs.",
+    "Use pre-provisioned disposable test tenant T and isolated tenant U; current actors with normal read/write role, read-only role, explicit no-client/no-task access and separate actor. Verify actual native role and current tenant membership. Do not assign roles or change grants merely to create a test without explicit owner approval.",
+    "Keep client A/B, prospect, two Planner tasks, Strategy node, Workspace draft, signatures and two expendable files in a signed owner inventory. Prefer existing known fixtures for all read-first checks. No production/customer records or protected text in screenshots/logs.",
+    "Use Clerk designated capiro JWT and current org/client boundary through existing app transports. Do not export tokens, presigned URLs or full sensitive payloads. Capture request method/path/status, redacted scope IDs, relevant safe fields and image/source identity only.",
+    "Admin-only setup is separate from runtime read checks. GET /tenant-members has no endpoint admin requirement at inspected source; global current session/tenant membership still required. Core Engagement controller has standard_user RolesGuard, Planner and Workspace retain their native ACLs.",
+    "Keep provider email send/calendar sync/bot/attachment extraction/generation disabled or uninvoked. Open/review/search/read-only checks need no send. CR-11 paid native rewrite and CP-03 destructive storage deletion are separate explicit approvals, with finite call budget and stop-on-uncertainty.",
+    "Existing release manifest migration/native database/RLS/privilege requirements remain owner prerequisites; this triage neither applies nor claims them. Browser read flows may cause routine auth/audit bookkeeping; use already provisioned identities and do not mislabel read-only UI as literally zero server bookkeeping."
+  ],
+  "readFirst": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N07",
+    "N08"
+  ],
+  "localFixtureFirst": [
+    "N06"
+  ],
+  "explicitMutationApprovalRequired": [
+    "N09",
+    "N06 optional native rewrite",
+    "Any missing test-data/signature/role/membership setup"
+  ],
+  "optionalSetupContracts": [
+    {
+      "purpose": "Signature setup only if no pre-provisioned actor",
+      "service": "core",
+      "method": "PUT",
+      "path": "/api/me/email-signature",
+      "receipt": "html nullable/enabled; sanitize at native owner",
+      "approval": "Separate disposable-account settings mutation; retain previous state for authorized restore. No mail send."
+    },
+    {
+      "purpose": "Planner test tasks only if no known fixtures",
+      "service": "strategy",
+      "methods": [
+        "POST",
+        "PATCH"
+      ],
+      "paths": [
+        "/strategy-api/planner/tasks",
+        "/strategy-api/planner/tasks/:id"
+      ],
+      "input": "Existing {data}; update uses current version. Two finite task records; no imported command or Engagement task fallback.",
+      "approval": "Separate disposable task setup approval; version conflict/uncertainty stops, no blind replay."
+    },
+    {
+      "purpose": "Other Strategy/Workspace/prospect/files/signature/role fixture provisioning",
+      "owner": "Existing canonical staging owner",
+      "approval": "Use existing reviewed fixture inventory/owner procedures. This triage does not invent seeding routes or authorize upload, generate, member grants or arbitrary deletion."
+    }
+  ],
+  "checks": [
+    {
+      "id": "N01",
+      "findings": [
+        "MS02"
+      ],
+      "mode": "READ_ONLY_APPLICATION",
+      "setup": "Pre-provisioned readable client A, readable client B and known denied client; current verified actor/tenant.",
+      "steps": [
+        "Visit /modules/calendar?clientId=A and capture verified selected-client state and actual Core meeting query.",
+        "Switch Month/Week/Agenda once each without scope loss; select Master then B.",
+        "Attempt known denied/stale client hint using authorized test account; verify refusal/unavailable selection and no fallback that presents it as authorized."
+      ],
+      "pass": "Only current verified selected scope is shown/queried; actor/org replacement drops old data.",
+      "finiteLimit": "Three view transitions; two explicit scope changes; one denied hint. No record writes.",
+      "contracts": [
+        "identity_clients",
+        "meetings"
+      ]
+    },
+    {
+      "id": "N02",
+      "findings": [
+        "MS03"
+      ],
+      "mode": "READ_ONLY_APPLICATION",
+      "setup": "Two existing readable Planner tasks in bounded visible range: one distinct start/due, one same-day start/due or start-only; recorded timezone/date values.",
+      "steps": [
+        "Open Master Agenda and Planner filter; compare occurrences to canonical planner.tasks payload.",
+        "Inspect distinct start/due date/time/zone and same-occurrence deduplication; verify task identity attached to each occurrence."
+      ],
+      "pass": "Both distinct dates retained; no fabricated timestamp/UTC-midnight or missing start.",
+      "finiteLimit": "Two known tasks, one week/range; fixture dataset under one native Planner page. Do not page whole tenant unnecessarily.",
+      "contracts": [
+        "planner",
+        "master_feeds"
+      ]
+    },
+    {
+      "id": "N03",
+      "findings": [
+        "MS04"
+      ],
+      "mode": "READ_ONLY_WITH_CONTROLLED_READ_FAILURE",
+      "setup": "Existing Planner task plus native permitted Planner read; either a pre-provisioned role with actual meeting refusal or separately authorized client-side one-request failure interception.",
+      "steps": [
+        "Open Master Agenda with one meetings403/503 while Planner succeeds.",
+        "Verify source warning plus visible Planner occurrence and working source/search filters.",
+        "Remove read fault or use restored read access once and verify no stale denied data appears."
+      ],
+      "pass": "One failed source does not remove other successful authorized feeds.",
+      "finiteLimit": "One failed meeting response and one subsequent successful read; no native role mutation to induce it.",
+      "evidenceLimit": "Client-side intercepted error is synthetic resilience evidence against native successful feeds, not proof the server actually returned403. Label separately.",
+      "contracts": [
+        "meetings",
+        "planner",
+        "master_feeds"
+      ]
+    },
+    {
+      "id": "N04",
+      "findings": [
+        "MS05"
+      ],
+      "mode": "READ_ONLY_APPLICATION",
+      "setup": "Known readable task outside current My tasks/page plus one known denied/nonexistent task ID supplied by staging owner.",
+      "steps": [
+        "Click the Agenda occurrence and verify exact task ID via planner.task GET and displayed record.",
+        "Open denied/unavailable task link and verify unavailable state, no cached/alternate task or write."
+      ],
+      "pass": "Exact authorized task opened; current owner access respected outside list-page filtering.",
+      "finiteLimit": "Two task IDs, one open each; no status/comment/editor save.",
+      "contracts": [
+        "planner"
+      ]
+    },
+    {
+      "id": "N05",
+      "findings": [
+        "CR-07"
+      ],
+      "mode": "READ_ONLY_APPLICATION",
+      "setup": "Dedicated actor with pre-existing safe formatted signature and actor without signature; mailbox/read policy already provisioned. Use controlled non-delivering draft.",
+      "steps": [
+        "Open composer and review; compare visible signature to native GET html/enabled without sending.",
+        "Toggle append locally; inspect disabled/absent state and switch actor/client to confirm no stale signature.",
+        "Use offline malicious HTML/remote-resource fixtures for execution/resource suppression; do not store attack markup in shared native user data."
+      ],
+      "pass": "Signature is inspectable, policy-consistent, safe and current; no mail send/upload/rewrite request.",
+      "finiteLimit": "Two provisioned actors; one draft each; no provider POST.",
+      "contracts": [
+        "signature",
+        "identity_clients"
+      ]
+    },
+    {
+      "id": "N06",
+      "findings": [
+        "CR-11"
+      ],
+      "mode": "LOCAL_CONTROL_FIRST_OPTIONAL_PROVIDER_WRITE_LATER",
+      "setup": "For source closure use controlled verified rewrite response in isolated harness. Optional native run requires separately approved governed outreach_generate/LLM capability, disposable draft, bounded provider budget and non-sensitive text.",
+      "steps": [
+        "Submit one rewrite (fixture first; native only if separately approved), verify resulting body, then Undo and verify exact prior body locally.",
+        "Verify Undo dispatch count stays zero; cancelled/stale/unverified result and actor replacement cannot restore another draft."
+      ],
+      "pass": "Verified rewrite can be undone without another request; provenance/authority/pending protections retained.",
+      "finiteLimit": "Zero native calls by default. Optional approved native run: at most one rewrite POST, zero retry, zero mail send.",
+      "contracts": [
+        "rewrite"
+      ]
+    },
+    {
+      "id": "N07",
+      "findings": [
+        "OWI-F02"
+      ],
+      "mode": "READ_ONLY_APPLICATION",
+      "setup": "One readable Strategy node and Workspace draft with known owner clerkUserId in native active tenant-members; one unassigned/unresolved owner record already prepared.",
+      "steps": [
+        "Compare native strategies/detail, Workspace slim draft list, and settings.tenantMembers records; exact clerkUserId lookup only.",
+        "Inspect node owner/status and document owner; deny/fail roster read once with controlled read interception or pre-provisioned role; verify unresolved state rather than wrong name or Unassigned.",
+        "Switch to client B / actor B and verify prior owner/draft data is absent until current authorized reads succeed."
+      ],
+      "pass": "Current authorized identity or truthful unresolved/unassigned state; independent source errors and legacy client-name safeguards preserved.",
+      "finiteLimit": "Two known work records, one roster refusal, one scope change; no strategy/draft/membership writes.",
+      "contracts": [
+        "work",
+        "owner_members",
+        "identity_clients"
+      ]
+    },
+    {
+      "id": "N08",
+      "findings": [
+        "PROS-F03"
+      ],
+      "mode": "READ_ONLY_APPLICATION",
+      "setup": "Two existing authorized files in one disposable/readable prospect with distinctive names and one different denied prospect; records may include blocked readiness.",
+      "steps": [
+        "Read native exact prospect list; search mixed-case match, no match, then clear.",
+        "Confirm list actions/readiness apply only to filtered current records; changing prospect/actor or denied fresh read clears stale names/results."
+      ],
+      "pass": "Search affects loaded authorized collection only and clear restores that collection; no invented hidden corpus completeness.",
+      "finiteLimit": "One list, three local search states, one context replacement. No preview/download/upload/delete/research generation.",
+      "contracts": [
+        "prospect_files"
+      ]
+    },
+    {
+      "id": "N09",
+      "findings": [
+        "CP-03"
+      ],
+      "mode": "EXPLICITLY_APPROVED_DISPOSABLE_MUTATION_ONLY",
+      "setup": "Owner-approved disposable tenant/client and uploader/editor account; two known disposable attachment IDs whose entire object/index/content retention can be destroyed; existing read-only/no-access accounts. Real storage delete is unavoidable in this test and requires explicit authorization.",
+      "steps": [
+        "Read both current scoped file records and record non-sensitive IDs/lifecycle; confirm intended disposable object ownership.",
+        "DELETE first file once and verify valid receipt plus fresh scoped read; capture native lifecycle/current absence separately from physical storage/index erasure.",
+        "For second file, permit exactly one DELETE dispatch then suppress/drop only its response through an approved client-side fault control; verify uncertainty survives dialog reopen and no automatic repeat.",
+        "Perform explicit fresh GET reconciliation; current absence is not operation causality. If record remains pending/failed, preserve state. A deliberate same-ID retry is allowed only under a separate owner-approved recovery branch and current native authority; no new ID or fallback delete.",
+        "Use already denied/read-only role for read/control refusal; do not revoke real grants or probe arbitrary foreign IDs."
+      ],
+      "pass": "Uncertain completion is explicit; no blind automatic DELETE; scoped readback and any deliberate recovery preserve identity and authority. Native storage/lifecycle evidence reported separately.",
+      "finiteLimit": "Default approved branch two DELETE dispatches total (one per disposable file), two initial/readback collections. Optional deliberate retry at most one additional same-ID DELETE only when native record remains and owner explicitly approves; otherwise stop.",
+      "contracts": [
+        "client_delete"
+      ],
+      "providerBoundary": "This deletion reaches S3 through the existing Core owner; no direct AWS call. Cannot claim zero storage effects. Suppress unrelated mail/calendar/LLM/webhook/ingestion actions and use staging objects only."
+    }
+  ],
+  "acceptanceRecording": "Record each check as native pass/fail/unrun or mixed synthetic/native with exact scope. A read-only pass cannot accept mutation/provider facets; local source repair cannot close full row. Leave all337 original statuses unchanged until the separately authorized row-specific acceptance process."
+}

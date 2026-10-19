@@ -1,0 +1,257 @@
+{
+  "schema": "capiro-completed-evidence-content-addressed/1",
+  "records": [
+    {
+      "lane": "final-independent-audit",
+      "path": "BROWSER-ATTACHMENTS-AND-AXE.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/BROWSER-ATTACHMENTS-AND-AXE.json",
+      "kind": "file",
+      "bytes": 50105,
+      "sha256": "12362b39096a2f7c4bf954d8e3508390b29ea1f4500f3ec2d9b54156c87e6531",
+      "mode": 384,
+      "mtimeNs": 1791887957887822969,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/12362b39096a2f7c4bf954d8e3508390b29ea1f4500f3ec2d9b54156c87e6531"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "BROWSER-RECONCILIATION.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/BROWSER-RECONCILIATION.json",
+      "kind": "file",
+      "bytes": 631218,
+      "sha256": "f1f15a7f47d80b2e5c477c43d4afc029ba4168984be4506891e856e97ce7f39a",
+      "mode": 384,
+      "mtimeNs": 1791887957886939401,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/f1f15a7f47d80b2e5c477c43d4afc029ba4168984be4506891e856e97ce7f39a"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "COMPLETED-EARLY-GATES.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/COMPLETED-EARLY-GATES.json",
+      "kind": "file",
+      "bytes": 10418,
+      "sha256": "7345599eccf50837602b36af5924fa8c113ba84ea932049b58d6001429526c02",
+      "mode": 384,
+      "mtimeNs": 1791884957596121748,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/7345599eccf50837602b36af5924fa8c113ba84ea932049b58d6001429526c02"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "CONSOLE-OBSERVATIONS.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/CONSOLE-OBSERVATIONS.json",
+      "kind": "file",
+      "bytes": 13661,
+      "sha256": "150b298b719b07753f99f5c33151f57c9cf34cac4769f8d902fc899c29ffcff0",
+      "mode": 384,
+      "mtimeNs": 1791887957888008911,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/150b298b719b07753f99f5c33151f57c9cf34cac4769f8d902fc899c29ffcff0"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "ELEMENTS-ARCHIVE-AUDIT.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/ELEMENTS-ARCHIVE-AUDIT.json",
+      "kind": "file",
+      "bytes": 4319,
+      "sha256": "a0fd75b8384544fa5509bc52b084a71651688a44ccb46bc1c4549d9c866ce7f1",
+      "mode": 384,
+      "mtimeNs": 1791887818546992750,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/a0fd75b8384544fa5509bc52b084a71651688a44ccb46bc1c4549d9c866ce7f1"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "FINAL-SCOPE-AND-OBSERVATIONS.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/FINAL-SCOPE-AND-OBSERVATIONS.json",
+      "kind": "file",
+      "bytes": 9704,
+      "sha256": "ba9951b4db51e723c4441c8c6255e40822a2664597987b28867c32da48c7e45d",
+      "mode": 384,
+      "mtimeNs": 1791888020395880344,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/ba9951b4db51e723c4441c8c6255e40822a2664597987b28867c32da48c7e45d"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "HARNESS-COMPARISON.patch",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/HARNESS-COMPARISON.patch",
+      "kind": "file",
+      "bytes": 6911,
+      "sha256": "0907952239052c96a3bb6d176651d9a03d81b8970586adc4d052b5f5948d1c41",
+      "mode": 384,
+      "mtimeNs": 1791884857109116133,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/0907952239052c96a3bb6d176651d9a03d81b8970586adc4d052b5f5948d1c41"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "MANIFEST.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/MANIFEST.json",
+      "kind": "file",
+      "bytes": 3116,
+      "sha256": "8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c",
+      "mode": 384,
+      "mtimeNs": 1791888153694180384,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "PREPARATION-VERIFICATION.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/PREPARATION-VERIFICATION.json",
+      "kind": "file",
+      "bytes": 5659,
+      "sha256": "d66157656a068b8267923685df5d7aa252a5023c512ae7c672b5f86fbb2e5608",
+      "mode": 384,
+      "mtimeNs": 1791884857115601838,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/d66157656a068b8267923685df5d7aa252a5023c512ae7c672b5f86fbb2e5608"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "RAW-PRODUCER-BINDINGS.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/RAW-PRODUCER-BINDINGS.json",
+      "kind": "file",
+      "bytes": 16508,
+      "sha256": "107758c9f7392fca358e03c206bebde77c9e93943bf47796ce766abc776d2494",
+      "mode": 384,
+      "mtimeNs": 1791888085875313470,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/107758c9f7392fca358e03c206bebde77c9e93943bf47796ce766abc776d2494"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "REPORT.md",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REPORT.md",
+      "kind": "file",
+      "bytes": 5329,
+      "sha256": "6c65ff1f83bf1dbdb186d5610a68f2ffff205c84b614479af778a43a0730b0f2",
+      "mode": 384,
+      "mtimeNs": 1791888153496258978,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/6c65ff1f83bf1dbdb186d5610a68f2ffff205c84b614479af778a43a0730b0f2"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "REVIEW-PLAN.md",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REVIEW-PLAN.md",
+      "kind": "file",
+      "bytes": 3252,
+      "sha256": "ca6587b233de9fbb44d52f13659c9065db02965c0f1643489b3e17fa9b929b85",
+      "mode": 384,
+      "mtimeNs": 1791884819643666669,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/ca6587b233de9fbb44d52f13659c9065db02965c0f1643489b3e17fa9b929b85"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "SPARSE-RECOVERY-REVIEW.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/SPARSE-RECOVERY-REVIEW.json",
+      "kind": "file",
+      "bytes": 3001,
+      "sha256": "d759c105063b7850e954cc582ac093bec0c9d9a8b5d5cc99ba81372f2e30d29c",
+      "mode": 384,
+      "mtimeNs": 1791885010138348932,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/d759c105063b7850e954cc582ac093bec0c9d9a8b5d5cc99ba81372f2e30d29c"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "SUPPLEMENTAL-REVIEWS.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/SUPPLEMENTAL-REVIEWS.json",
+      "kind": "file",
+      "bytes": 1243,
+      "sha256": "455abcf77ee86c3a7d4d22495c3274020c7333c180fb1aa7ac534e064f076459",
+      "mode": 384,
+      "mtimeNs": 1791888085857113218,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/455abcf77ee86c3a7d4d22495c3274020c7333c180fb1aa7ac534e064f076459"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "after-sparse-recovery.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/after-sparse-recovery.json",
+      "kind": "file",
+      "bytes": 18113,
+      "sha256": "a4a9d15241ee28a0d882251a183d76f6b5860850bc9f1658b7df9cdef73754fc",
+      "mode": 384,
+      "mtimeNs": 1791885018297203383,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/a4a9d15241ee28a0d882251a183d76f6b5860850bc9f1658b7df9cdef73754fc"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "audit_receipts.py",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/audit_receipts.py",
+      "kind": "file",
+      "bytes": 8914,
+      "sha256": "72194fdd14c4ed99714f2d59473dd207f616518d259bb5fd2cb42459ddc99a68",
+      "mode": 384,
+      "mtimeNs": 1791885010790134155,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/72194fdd14c4ed99714f2d59473dd207f616518d259bb5fd2cb42459ddc99a68"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "final-receipts.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/final-receipts.json",
+      "kind": "file",
+      "bytes": 187156,
+      "sha256": "1e66416d3266ecd1be1cf1cdb93789b284d6dfc0f8d1945a24d98f4ece82f9a2",
+      "mode": 384,
+      "mtimeNs": 1791887672249653872,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/1e66416d3266ecd1be1cf1cdb93789b284d6dfc0f8d1945a24d98f4ece82f9a2"
+      }
+    },
+    {
+      "lane": "final-independent-audit",
+      "path": "preparation.json",
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/preparation.json",
+      "kind": "file",
+      "bytes": 13973,
+      "sha256": "8bf7e0ed431d3351a144bb4c7bd58fa2910f90d8f711d071fc474e24244c1a3e",
+      "mode": 384,
+      "mtimeNs": 1791884856873064879,
+      "storage": {
+        "archive": "final-audit-objects.zip",
+        "member": "sha256/8bf7e0ed431d3351a144bb4c7bd58fa2910f90d8f711d071fc474e24244c1a3e"
+      }
+    }
+  ]
+}

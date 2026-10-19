@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 1,
+  "reviewedBy": "/root/strategy_compatibility_independent_review",
+  "reviewedOn": "2026-10-14",
+  "sourceBase": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+  "branch": "repair/capiro-strategy-proposal-compatibility-20261014",
+  "decision": "ACCEPT_EXACT_SOURCE_DESIGN_AND_SYNTHETIC_DESKTOP",
+  "pending": [
+    "Root production default build and standalone acceptance; required full root npm check has passed. No live/deployment authorization or outcome inferred."
+  ],
+  "scope": "Frontend stored Strategy proposal compatibility only; no desktop parity, backend, API, auth, provider, AWS or data-write changes.",
+  "canonicalContracts": {
+    "backendRef": "91399fe1a205e37073cbeed2d7eb66a1fafd7fa2",
+    "planEditTypesBlob": "98652a1168ad5a913a367cbf0d4340e04e9e0a88",
+    "changeSetsServiceBlob": "d4c535f42d3582282b61362ff82a18e50aa47be1",
+    "executableVariants": [
+      "add",
+      "update",
+      "remove",
+      "retime"
+    ],
+    "executableValidator": "Extracted planEditSchema initializer independently equals deployed planEdit under the existing TypeScript printer; no aliases or relaxed discriminator.",
+    "storedOperationAnnotation": "const storedOperation: z.ZodType<unknown> = z.json(); the runtime schema remains z.json and only recursive static registry output typing is opaque.",
+    "approveBasis": "Original ops",
+    "applyBasis": "approvedOps ?? ops, including empty approvedOps without fallback",
+    "authority": "Backend tenant/user authorization, row locks, status, head pin, operation application validation and rollback are unchanged."
+  },
+  "findings": [
+    {
+      "severity": "material",
+      "finding": "Initial implementation preserved approvedOps values but did not expose approved-only unsupported raw entries/index in audit.",
+      "status": "RESOLVED",
+      "resolution": "Canonical ProposalOperationAudit is rendered under 'Stored application selection details' for every non-null approvedOps; the distinct effective basis preserves all indexes/raw values including unsupported entries and an empty array. New desktop case asserts an opaque approved-only entry and sends only effective index 1."
+    }
+  ],
+  "acceptedControls": [
+    "Shared list/approve/reject envelope keeps strict IDs, risk/status fields and array/JSON validity while retaining every stored operation rather than rejecting the entire queue for an unsupported executable shape.",
+    "Classifier safeParse uses the unchanged PlanEdit validator; raw entry/index stays intact and unsupported entries remain visibly disabled.",
+    "Nonempty, unique integer selections must name supported entries in the action-specific original/approved basis; UI never sends raw operations or infers authority.",
+    "Reject survives unsupported-only queues; Approve/Apply/Reject/Undo preserve backend-aligned status gates.",
+    "Same-ID record/content/status/pin/approved basis and availability changes replace the inner session, clear selections/confirmation, and use current list props.",
+    "Synchronous inFlight exclusion prevents duplicate confirmations before pending state renders; layout cleanup and existing mutation generation/abort controls retire stale completions without automatic retry."
+  ],
+  "limits": [
+    "Wire-shape support is not complete backend semantic/execution validity.",
+    "Frontend abort cannot prove a delivered write was cancelled; backend receipts/status/locks remain authoritative and no automatic replay is introduced.",
+    "Pinned source contracts do not identify the uncollected live invalid discriminator values.",
+    "Synthetic checks do not qualify actual Clerk/tenant authorization, live data, deployment or native backend behavior.",
+    "Observed frontend snapshots do not create a durable displayed-operation compare-and-set. Existing Approve/Apply command bodies contain id/opIndexes without an expected ops revision, and the pinned backend refreshProposedOps may rewrite a still-proposed operation array in place without moving the plan pin. An unobserved watcher refresh remains an existing backend-contract limitation; this compatibility slice does not add a new API or claim to resolve it."
+  ],
+  "independentEvidence": [
+    {
+      "check": "Owned checkout base",
+      "result": "PASS",
+      "observedHead": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5"
+    },
+    {
+      "check": "PlanEdit extraction initializer equality",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "Initial targeted compatibility suites",
+      "result": "PASS",
+      "tests": 32,
+      "files": 2,
+      "timeUTC": "17:34:27",
+      "exitCode": 0
+    },
+    {
+      "check": "Targeted suites after identity-transform typing attempt",
+      "result": "PASS",
+      "tests": 32,
+      "files": 2,
+      "timeUTC": "17:44:16",
+      "exitCode": 0
+    },
+    {
+      "check": "Existing value-free validation diagnostic regression",
+      "result": "PASS",
+      "tests": 9,
+      "files": 1,
+      "timeUTC": "17:44:49",
+      "exitCode": 0
+    },
+    {
+      "check": "Targeted suites after final ZodType annotation and corrected fixtures",
+      "result": "PASS",
+      "tests": 32,
+      "files": 2,
+      "timeUTC": "17:50:28",
+      "exitCode": 0
+    },
+    {
+      "check": "Initial unchanged full architecture scanner",
+      "result": "FAIL_RETAINED",
+      "exitCode": 1,
+      "dependencyErrors": 0,
+      "totalFindings": 494,
+      "blockingFindings": 233,
+      "qualification": "Sparse checkout omitted referenced baseline evidence; root subsequently reported exact base evidence hydration and only owned review signals remaining. This reviewer has not claimed full guard acceptance."
+    },
+    {
+      "check": "Independent desktop Strategy compatibility",
+      "result": "PASS",
+      "exitCode": 0,
+      "cases": 16,
+      "workers": 1,
+      "heapMiB": 1024,
+      "duration": "1.3m",
+      "command": "NODE_OPTIONS=--max-old-space-size=1024 TMPDIR=/dev/shm/capiro-strategy-test-tmp-20261014 CAPIRO_QA_CHROMIUM_EXECUTABLE=/workspace/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome node node_modules/@playwright/test/cli.js test --config apps/web/test/browser/playwright.config.ts apps/web/test/browser/strategy-proposal-compatibility.spec.ts --workers=1 --output=/dev/shm/capiro-strategy-independent-browser-20261014 --reporter=line",
+      "log": {
+        "path": "docs/strategy-proposal-compatibility-20261014/INDEPENDENT-DESKTOP.log",
+        "bytes": 3680,
+        "sha256": "b040998fb02cc55d24b347b3fc4e46a842e6878eb1f7963bdd6c3b973ee4b85c"
+      },
+      "screenshots": [
+        {
+          "path": "/dev/shm/capiro-strategy-independent-browser-20261014/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+          "bytes": 191255,
+          "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2",
+          "width": 1440,
+          "height": 1726
+        },
+        {
+          "path": "/dev/shm/capiro-strategy-independent-browser-20261014/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+          "bytes": 191255,
+          "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2",
+          "width": 1440,
+          "height": 1726
+        }
+      ],
+      "visualReview": "Reviewed the 1440px desktop image: original indexes/unsupported rows, approved application basis and separate raw-detail sections render clearly without altering inherited Modules styling. Light/dark preference runs produce byte-identical screenshots; no new theme-parity claim is made.",
+      "isolation": "All16cases assert no external requests and no page errors. Requests/writes are localhost synthetic fixtures only.",
+      "sourceVerification": [
+        {
+          "path": "apps/web/src/shared/capiro/operations/strategy-change-set.ts",
+          "sha256": "7ef4451236af25ff80de53f15a4cdf7ee04b575e1acf3a14fac4ac10b6ca8b1e",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/shared/capiro/operations/strategies-agents.ts",
+          "sha256": "309c5e9c9c13cf92fb61e87767d203983deeddf8b02c8311b6c27438a3756b2a",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/features/modules/strategies/review/proposal-operations.ts",
+          "sha256": "322920ef63944769174f9f98f8f53ae440249b0e1d38aeda833f86ee45692bea",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/features/modules/strategies/review/ProposalOperations.tsx",
+          "sha256": "39fe39603e70015054f4e45d44151336885c4db24822c7d9d986f1c6aebf1a9e",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+          "sha256": "cc8055b2b728dd9781b42834197bd82c529c4d2e6f665ec160a3c7e3d664ee68",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+          "sha256": "e9926f45cebf47b42956a0bf65b469570b49abacd3816d3004cbc55ef6ef2561",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/shared/capiro/strategy-proposal-compatibility-contracts.test.ts",
+          "sha256": "b4b92b4f1c5b0520f9ab27440d5661d1c2474f9e339390e7270da4b4edf696fe",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/src/features/modules/strategies/review/strategy-proposal-compatibility.test.ts",
+          "sha256": "a81e9a4a1dda3ba94666a7a067a8f9d59f16e559cc14b8054744d25e5b96d391",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/test/browser/ProposalRefreshProbe.tsx",
+          "sha256": "729ba494c067fca6a3d8c01c831094b3782f9922f4f917888e1fc170b83dcb59",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+          "sha256": "56dca23c5f364396fb6287d620624b4653734987b7497c05c6b90b7183e1eaee",
+          "unchanged": true
+        },
+        {
+          "path": "apps/web/test/browser/main.tsx",
+          "sha256": "0ac9475ac0be3fd53ecf52e27072b7b5604992c8ef85137770367624c3c79c41",
+          "unchanged": true
+        }
+      ]
+    }
+  ],
+  "retrievalFailures": [
+    {
+      "operation": "Default sandbox pwd in owned RAM checkout",
+      "result": "FAIL",
+      "exitCode": 101,
+      "reason": "Synthetic bubblewrap /tmp/.aws mount setup failed ENOSPC before command execution; no credential access. Subsequent approved narrow read/synthetic checks succeeded."
+    },
+    {
+      "operation": "Pinned read apps/api-strategy/src/agents/dto/change-set.dto.ts",
+      "result": "FAIL",
+      "reason": "GitHub404; guessed filename was not used as authority. Published change-sets service and Meri type files succeeded."
+    },
+    {
+      "operation": "Read scripts/architecture-reviewed-sizes.mjs",
+      "result": "FAIL",
+      "reason": "Nonexistent guessed filename; existing scripts/architecture/scan.mjs and reviews.mjs were read instead."
+    },
+    {
+      "operation": "Read missing test-results path during qualification startup",
+      "result": "FAIL",
+      "reason": "Artifacts not yet created; no existing evidence or source deleted."
+    },
+    {
+      "operation": "Read light screenshot while author rerun was starting",
+      "result": "FAIL",
+      "reason": "Transient author output path no longer existed during rerun; no deletion or alteration by reviewer. Visual inspection was pending at that earlier attempt.",
+      "status": "RESOLVED",
+      "resolution": "Completed independent light/dark screenshots were retained, exact-hashed and visually inspected. Final source/design/synthetic-desktop acceptance includes those images."
+    },
+    {
+      "operation": "Initial root-check log path lookup via rg --files",
+      "result": "FAIL",
+      "status": "RESOLVED",
+      "reason": "Root-level .qa path was absent and default discovery did not return the ignored apps/web/.qa log. Exact author-provided apps/web/.qa path was subsequently read successfully and hashed; this was discovery, not failed qualification."
+    }
+  ],
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "architecture": "x64",
+    "vitest": "4.1.11",
+    "dependencyInstallationByReviewer": false
+  },
+  "authoredWrites": [
+    "This new independent review receipt only"
+  ],
+  "prohibitedOperationsPerformed": false,
+  "files": [
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategy-change-set.ts",
+      "sha256": "7ef4451236af25ff80de53f15a4cdf7ee04b575e1acf3a14fac4ac10b6ca8b1e",
+      "bytes": 1525,
+      "findings": []
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-agents.ts",
+      "sha256": "309c5e9c9c13cf92fb61e87767d203983deeddf8b02c8311b6c27438a3756b2a",
+      "bytes": 10711,
+      "findings": []
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/proposal-operations.ts",
+      "sha256": "322920ef63944769174f9f98f8f53ae440249b0e1d38aeda833f86ee45692bea",
+      "bytes": 2549,
+      "findings": []
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/ProposalOperations.tsx",
+      "sha256": "39fe39603e70015054f4e45d44151336885c4db24822c7d9d986f1c6aebf1a9e",
+      "bytes": 3997,
+      "findings": []
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+      "sha256": "cc8055b2b728dd9781b42834197bd82c529c4d2e6f665ec160a3c7e3d664ee68",
+      "bytes": 9831,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+          "kind": "function",
+          "symbol": "ProposalReviewSession",
+          "line": 44,
+          "nonblank": 248,
+          "fingerprint": "1010534a879f871fa09a3950c3e2f4ea4c5635d7d2e0ab43ab501d80f68ea96f"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+      "sha256": "e9926f45cebf47b42956a0bf65b469570b49abacd3816d3004cbc55ef6ef2561",
+      "bytes": 6954,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+          "kind": "function",
+          "symbol": "StrategyReview",
+          "line": 21,
+          "nonblank": 186,
+          "fingerprint": "c1b1e6bf7c55c95f7d42ddfc59e26527b11abfd3c83a7ceee73b7f302f5b079a"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/capiro/strategy-proposal-compatibility-contracts.test.ts",
+      "sha256": "b4b92b4f1c5b0520f9ab27440d5661d1c2474f9e339390e7270da4b4edf696fe",
+      "bytes": 4237,
+      "findings": [
+        {
+          "file": "apps/web/src/shared/capiro/strategy-proposal-compatibility-contracts.test.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 46,
+          "nonblank": 88,
+          "fingerprint": "f043b1416328a4f7ebb1e7bdac42bbf121cb46915b4d2e89018cf56fdf18f131"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/strategy-proposal-compatibility.test.ts",
+      "sha256": "a81e9a4a1dda3ba94666a7a067a8f9d59f16e559cc14b8054744d25e5b96d391",
+      "bytes": 5768,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/strategies/review/strategy-proposal-compatibility.test.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 48,
+          "nonblank": 109,
+          "fingerprint": "e7ffd7a2ad4a5a0f709c11b74b386c31438fac3c0250d2369ef630ad45beca58"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/test/browser/ProposalRefreshProbe.tsx",
+      "sha256": "729ba494c067fca6a3d8c01c831094b3782f9922f4f917888e1fc170b83dcb59",
+      "bytes": 3181,
+      "findings": []
+    },
+    {
+      "path": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+      "sha256": "56dca23c5f364396fb6287d620624b4653734987b7497c05c6b90b7183e1eaee",
+      "bytes": 15918,
+      "findings": [
+        {
+          "file": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 439,
+          "fingerprint": "0191f6489715c14112a4501442cdc9d746ef1d72e1d1731fefeeca11fb04ad31"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sha256": "0ac9475ac0be3fd53ecf52e27072b7b5604992c8ef85137770367624c3c79c41",
+      "bytes": 7397,
+      "findings": [
+        {
+          "file": "apps/web/test/browser/main.tsx",
+          "kind": "function",
+          "symbol": "RoutedApp",
+          "line": 50,
+          "nonblank": 146,
+          "fingerprint": "62045414de6a3237a4b9469f0e597f6a6b7817341dabe8a2d046e159d75d810d"
+        }
+      ]
+    }
+  ],
+  "designReviews": [
+    {
+      "file": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+      "kind": "function",
+      "symbol": "ProposalReviewSession",
+      "line": 44,
+      "nonblank": 248,
+      "fingerprint": "1010534a879f871fa09a3950c3e2f4ea4c5635d7d2e0ab43ab501d80f68ea96f",
+      "decision": "ACCEPT_EXACT_FINGERPRINT",
+      "reviewedBy": "/root/strategy_compatibility_independent_review",
+      "reviewedOn": "2026-10-14",
+      "reason": "Accepted one cohesive proposal-review lifecycle: local selection/confirmation, four canonical mutation calls, pending/error view and completion disposal. Stored operation classification/action rules and raw audit presentation have separate canonical owners. It introduces no authorization, persistence or runtime business rules; backend refuses unsupported/stale work. Keeping this session together makes selection, pending state and confirmation ownership explicit instead of scattering it."
+    },
+    {
+      "file": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+      "kind": "function",
+      "symbol": "StrategyReview",
+      "line": 21,
+      "nonblank": 186,
+      "fingerprint": "c1b1e6bf7c55c95f7d42ddfc59e26527b11abfd3c83a7ceee73b7f302f5b079a",
+      "decision": "ACCEPT_EXACT_FINGERPRINT",
+      "reviewedBy": "/root/strategy_compatibility_independent_review",
+      "reviewedOn": "2026-10-14",
+      "reason": "Accepted the existing strategy review tab composition: proposals/firm-findings reads, risk/client presentation and current selected-proposal lifetime. This change only uses the canonical operation presenter and current list record/availability; existing firm-review interaction remains unchanged. It adds no backend policy, cross-domain service or parallel state owner."
+    },
+    {
+      "file": "apps/web/src/shared/capiro/strategy-proposal-compatibility-contracts.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 46,
+      "nonblank": 88,
+      "fingerprint": "f043b1416328a4f7ebb1e7bdac42bbf121cb46915b4d2e89018cf56fdf18f131",
+      "decision": "ACCEPT_EXACT_FINGERPRINT",
+      "reviewedBy": "/root/strategy_compatibility_independent_review",
+      "reviewedOn": "2026-10-14",
+      "reason": "Accepted one cohesive synthetic wire compatibility describe callback: lossless JSON/envelope preservation, list/approve/reject response agreement, unchanged executable vocabulary and strict index request envelopes. Assertions cover outcomes independently, without copying the production classifier or unrelated mocked services."
+    },
+    {
+      "file": "apps/web/src/features/modules/strategies/review/strategy-proposal-compatibility.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 48,
+      "nonblank": 109,
+      "fingerprint": "e7ffd7a2ad4a5a0f709c11b74b386c31438fac3c0250d2369ef630ad45beca58",
+      "decision": "ACCEPT_EXACT_FINGERPRINT",
+      "reviewedBy": "/root/strategy_compatibility_independent_review",
+      "reviewedOn": "2026-10-14",
+      "reason": "Accepted one cohesive local review boundary describe callback: raw/index preservation, original versus approved selection bases, invalid/duplicate indexes, empty approval, status gates and same-ID snapshot invalidation. These related admission/lifetime assertions share one fixture; no backend implementation or authority logic is duplicated."
+    },
+    {
+      "file": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 439,
+      "fingerprint": "0191f6489715c14112a4501442cdc9d746ef1d72e1d1731fefeeca11fb04ad31",
+      "decision": "ACCEPT_EXACT_FINGERPRINT",
+      "reviewedBy": "/root/strategy_compatibility_independent_review",
+      "reviewedOn": "2026-10-14",
+      "reason": "Accepted the larger test-only file as one Strategy compatibility workflow suite with one local fixture owner and 16 desktop cases: mixed queues, light/dark audit, selective original/approved indexes, unsupported-only Reject, opaque approved audit, stale refusal, synchronous duplicate exclusion, replacement/disposal and terminal statuses. Fixture responses are synthetic and every case rejects external requests/page errors. No unrelated feature behavior, production hooks or weakened existing assertion is introduced."
+    },
+    {
+      "file": "apps/web/test/browser/main.tsx",
+      "kind": "function",
+      "symbol": "RoutedApp",
+      "line": 50,
+      "nonblank": 146,
+      "fingerprint": "62045414de6a3237a4b9469f0e597f6a6b7817341dabe8a2d046e159d75d810d",
+      "decision": "ACCEPT_EXACT_FINGERPRINT",
+      "reviewedBy": "/root/strategy_compatibility_independent_review",
+      "reviewedOn": "2026-10-14",
+      "reason": "Accepted the existing synthetic browser route composition; the change adds one explicit test-only mount of the canonical review component for same-ID refresh/pending tests. Existing routes, production routing and application authority remain unchanged. This is test harness composition, not a production entry or new service."
+    }
+  ],
+  "amendments": [
+    {
+      "reviewedOn": "2026-10-14",
+      "previousReceiptSHA256": "a4860608a7b15ee945e0eb5995ab7885bc19964e90c89878b9fc5048c720f0e7",
+      "changedFile": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+      "previousFile": {
+        "path": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+        "sha256": "0aa5a2686e445dd5c888382e7544a7200d974def2fecf7ead9fd09ff9bb8a538",
+        "bytes": 15920,
+        "findings": [
+          {
+            "file": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 439,
+            "fingerprint": "e37480f1f060a2a8a70d0538202ea74ce5babec5669b15feb0d4cf7b49886685"
+          }
+        ]
+      },
+      "previousDesignReview": {
+        "file": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 439,
+        "fingerprint": "e37480f1f060a2a8a70d0538202ea74ce5babec5669b15feb0d4cf7b49886685",
+        "decision": "ACCEPT_EXACT_FINGERPRINT",
+        "reviewedBy": "/root/strategy_compatibility_independent_review",
+        "reviewedOn": "2026-10-14",
+        "reason": "Accepted the larger test-only file as one Strategy compatibility workflow suite with one local fixture owner and 16 desktop cases: mixed queues, light/dark audit, selective original/approved indexes, unsupported-only Reject, opaque approved audit, stale refusal, synchronous duplicate exclusion, replacement/disposal and terminal statuses. Fixture responses are synthetic and every case rejects external requests/page errors. No unrelated feature behavior, production hooks or weakened existing assertion is introduced."
+      },
+      "change": "Exactly two audit-heading locators use page.getByRole inside relative section filters instead of redundantly scoped modal.getByRole. All unsupported checkbox, raw JSON visibility, original audit, selective effective index and isolation assertions remain.",
+      "reviewDecision": "ACCEPT_EXACT_BROWSER_FILE_FINGERPRINT_DESKTOP_PENDING"
+    },
+    {
+      "reviewedOn": "2026-10-14",
+      "previousReceiptSHA256": "7945fc3f328bb328d604b08c1aa3812ea78b0af0b0a9ae36e6a5544c710fc2a4",
+      "change": "Independent desktop rerun completed16/16; exact11source hashes remain unchanged; final source/design/synthetic-desktop acceptance granted."
+    },
+    {
+      "reviewedOn": "2026-10-14",
+      "previousReceiptSHA256": "5a9c4d69723e1f68fded8633985be43bf559f144308c726d6e78d1a86ff35e8b",
+      "change": "Clarified that the earlier transient screenshot read failure is historical and resolved by final retained image inspection; no qualification remains pending for that read."
+    },
+    {
+      "reviewedOn": "2026-10-14",
+      "previousReceiptSHA256": "25271c41b5e5f46817830ed86dbfb014968d55f4cab54a2fe7f9a163f354ce5e",
+      "change": "Recorded the existing unobserved watcher-refresh/index-binding contract limit, distinct from newly added observed snapshot invalidation; no source finding or new API change requested."
+    },
+    {
+      "reviewedOn": "2026-10-14",
+      "previousReceiptSHA256": "bdf2da637886c6a98f4602a197a6c97ea2f2c45cb232e33d53262c36317c3e7a",
+      "change": "Attached root-reported required full check PASS and retained environmental default-build attempt1 failure separately from independent source/unit/desktop acceptance."
+    }
+  ],
+  "rootReportedEvidence": [
+    {
+      "check": "Full web TypeScript attempt5",
+      "result": "PASS",
+      "qualification": "Reported by root, not independently rerun by reviewer; 3GiB limit."
+    },
+    {
+      "check": "Author desktop attempt4",
+      "result": "FAIL_RETAINED",
+      "passingCases": 15,
+      "failingCases": 1,
+      "qualification": "Only remaining case was owned nested heading locator; audit heading/table/raw details were present. Correction changes scoping only; author attempt5 running."
+    },
+    {
+      "check": "Author desktop attempt5",
+      "result": "PASS",
+      "exitCode": 0,
+      "cases": 16,
+      "duration": "57.7s",
+      "evidenceRoot": "apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-5",
+      "qualification": "Author preserved own attempt3/4failures and finalreport/artifacts; independent rerun used separate output and line reporter, preserving author evidence."
+    },
+    {
+      "check": "Required full root npm check",
+      "result": "PASS",
+      "exitCode": 0,
+      "timeUTC": "18:04:27",
+      "heapMiB": 3072,
+      "vitestMaxWorkers": 1,
+      "log": {
+        "path": "apps/web/.qa/strategy-compatibility/ROOT-CHECK-ATTEMPT-1.log",
+        "bytes": 1007248,
+        "sha256": "b721f107b8b23ec3340cfd3c056298a43ff181edebf91c6c4007c1856ea4f812"
+      },
+      "reportedCounts": {
+        "rootControls": 113,
+        "transport": 84,
+        "frontend": {
+          "tests": 2367,
+          "files": 161
+        },
+        "capiro": {
+          "tests": 483,
+          "files": 38
+        },
+        "newsletter": 385,
+        "declarations": 8
+      },
+      "reportedArchitecture": {
+        "errors": 0,
+        "blocking": 0,
+        "inheritedUnreviewed": 19
+      },
+      "qualification": "Root executed the complete required check; reviewer inspected/hashes its retained log but did not independently rerun it. All required scopes reported passed, including type/lint/format/architecture."
+    },
+    {
+      "check": "Default production build attempt1",
+      "result": "FAIL_RETAINED",
+      "exitCode": 1,
+      "logPath": "apps/web/.qa/strategy-compatibility/ROOT-BUILD-ATTEMPT-1.log",
+      "qualification": "Root reported Turbopack refusing the borrowed cached Next package symlink outside explicit root. This is a qualification environment issue; source/config/rules unchanged. Root resolving through bounded exact cached package materialization and retrying the same default build; acceptance remains pending."
+    }
+  ]
+}

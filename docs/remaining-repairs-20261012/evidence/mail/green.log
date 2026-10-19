@@ -1,0 +1,63 @@
+
+Running 12 tests using 1 worker
+
+(node:711568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/mail-rich-compose.spec.ts:103:3 › rich Bold survives review and explicit send without signature duplication (6.7s)
+  ✓   2 apps/web/tests/browser/mail-rich-compose.spec.ts:103:3 › rich Italic survives review and explicit send without signature duplication (3.8s)
+  ✓   3 apps/web/tests/browser/mail-rich-compose.spec.ts:103:3 › rich Underline survives review and explicit send without signature duplication (3.1s)
+  ✓   4 apps/web/tests/browser/mail-rich-compose.spec.ts:103:3 › rich List survives review and explicit send without signature duplication (4.1s)
+  ✓   5 apps/web/tests/browser/mail-rich-compose.spec.ts:129:1 › verified rewrite uses text and Undo restores the complete formatted draft (3.7s)
+  ✓   6 apps/web/tests/browser/mail-rich-compose.spec.ts:149:1 › formatting-only edit revokes a held rewrite without replacing current formatting (3.2s)
+  ✓   7 apps/web/tests/browser/mail-rich-compose.spec.ts:172:3 › unverified rewrite preserves rich content (3.5s)
+  ✓   8 apps/web/tests/browser/mail-rich-compose.spec.ts:172:3 › unavailable rewrite preserves rich content (3.3s)
+  ✘   9 apps/web/tests/browser/mail-rich-compose.spec.ts:190:1 › paste keeps supported formatting while removing active markup and remote content (8.6s)
+(node:712283) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 apps/web/tests/browser/mail-rich-compose.spec.ts:229:1 › empty and oversized rich bodies cannot be reviewed, and typed text is retained (4.5s)
+  ✓  11 apps/web/tests/browser/mail-rich-compose.spec.ts:253:1 › keyboard formatting and mobile toolbar remain reachable (4.2s)
+  ✓  12 apps/web/tests/browser/mail-rich-compose.spec.ts:281:1 › identity invalidation revokes rich Undo without provider effects (4.6s)
+
+
+  1) apps/web/tests/browser/mail-rich-compose.spec.ts:190:1 › paste keeps supported formatting while removing active markup and remote content 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('textbox', { name: 'Message', exact: true }).locator('script,style,img,a,iframe,[onerror],[href]')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: 'Message', exact: true }).locator('script,style,img,a,iframe,[onerror],[href]')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      214 |   await expect(
+      215 |     message(page).locator("script,style,img,a,iframe,[onerror],[href]"),
+    > 216 |   ).toHaveCount(0);
+          |     ^
+      217 |   const reviewed = await review(page);
+      218 |   await expect(
+      219 |     reviewed.getByRole("region", { name: "Message preview" }).locator("strong"),
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:216:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/mail-rich-compose.spec.ts:190:1 › paste keeps supported formatting while removing active markup and remote content 
+  11 passed (56.5s)

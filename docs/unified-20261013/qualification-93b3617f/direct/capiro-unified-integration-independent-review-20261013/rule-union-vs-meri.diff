@@ -1,0 +1,217 @@
+diff --git a/apps/web/src/proxy.ts b/apps/web/src/proxy.ts
+index 31942e4..63b2dd4 100644
+--- a/apps/web/src/proxy.ts
++++ b/apps/web/src/proxy.ts
+@@ -9,6 +9,9 @@ import { responseHeaders } from "./shared/response-headers";
+ 
+ const clerk = clerkMiddleware();
+ export default function proxy(request: NextRequest, event: NextFetchEvent) {
++  // This namespace has its own closed public capability allowlist in the route.
++  if (request.nextUrl.pathname.startsWith("/api/capiro/public-onboard."))
++    return NextResponse.next();
+   if (request.nextUrl.pathname === "/settings") {
+     const destination = request.nextUrl.clone();
+     destination.pathname = "/settings/personal";
+@@ -32,6 +35,17 @@ export const config = {
+     "/modules/:path*",
+     "/settings/:path*",
+     "/sign-in/:path*",
++    "/register",
++    "/verify",
++    "/plan",
++    "/legal",
++    "/billing",
++    "/admins",
++    "/clients",
++    "/org",
++    "/confirm",
++    "/accept-invite",
++    "/setup",
+     "/api/capiro/:path*",
+     "/api/action-followthrough/:path*",
+   ],
+diff --git a/apps/web/test/browser/clerk.tsx b/apps/web/test/browser/clerk.tsx
+index 2edd1ac..d873083 100644
+--- a/apps/web/test/browser/clerk.tsx
++++ b/apps/web/test/browser/clerk.tsx
+@@ -5,6 +5,9 @@ type TestSession = {
+   userId: string | null;
+   sessionId: string | null;
+   orgId: string | null;
++  email?: string;
++  firstName?: string;
++  lastName?: string;
+ };
+ const initial: TestSession = {
+   isLoaded: true,
+@@ -26,7 +29,11 @@ const subscribe = (notify: () => void) => {
+   return () => listeners.delete(notify);
+ };
+ export function useAuth() {
+-  return useSyncExternalStore(subscribe, () => session);
++  const current = useSyncExternalStore(subscribe, () => session);
++  return {
++    ...current,
++    isSignedIn: current.isLoaded && Boolean(current.userId),
++  };
+ }
+ export function ClerkProvider({ children }: { children: ReactNode }) {
+   return <>{children}</>;
+@@ -50,3 +57,36 @@ export function UserButton() {
+     </button>
+   );
+ }
++
++/** Explicit synthetic identity only; no Clerk provider requests. */
++export function useUser() {
++  const current = useAuth();
++  return {
++    isLoaded: current.isLoaded,
++    user: current.userId
++      ? {
++          id: current.userId,
++          primaryEmailAddress: {
++            emailAddress: current.email ?? "synthetic@example.test",
++          },
++          firstName: current.firstName ?? "Synthetic",
++          lastName: current.lastName ?? "User",
++        }
++      : null,
++  };
++}
++export function useClerk() {
++  return {
++    signOut: async () => {
++      window.dispatchEvent(
++        new CustomEvent("test:session", {
++          detail: { userId: null, sessionId: null, orgId: null },
++        }),
++      );
++    },
++  };
++}
++export function useOrganizationList() {
++  const { isLoaded } = useAuth();
++  return { isLoaded, userMemberships: { data: [] }, setActive: undefined };
++}
+diff --git a/apps/web/test/browser/main.tsx b/apps/web/test/browser/main.tsx
+index 2a31473..74a2d5a 100644
+--- a/apps/web/test/browser/main.tsx
++++ b/apps/web/test/browser/main.tsx
+@@ -1,5 +1,9 @@
++import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
++import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
+ import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
+ import { IntegrationProbe } from "./IntegrationProbe";
++import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
++import { isOnboardPath } from "../../src/shared/session/onboard-route";
+ import { RequireSession } from "../../src/shared/session/SessionContext";
+ import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
+ import { ClientFrame } from "../../src/features/portfolio/client-profile/ClientFrame";
+@@ -41,6 +45,25 @@ function SessionProbe() {
+ function RoutedApp() {
+   const path = usePathname();
+   const search = useSearchParams();
++  if (isOnboardPath(path) && search.get("onboard-boundary") === "1")
++    return <OnboardBoundaryProbe />;
++  if (isOnboardPath(path)) {
++    const route =
++      path.startsWith("/it/") && !["/it/done", "/it/error"].includes(path)
++        ? "/it/:token"
++        : (path as OnboardRoute);
++    return (
++      <OnboardHost
++        route={route}
++        publishableKey="pk_test_YQ=="
++        serviceConfigured={search.get("service-unconfigured") !== "1"}
++        pricingCopy={{
++          lock: "Synthetic fixture price lock.",
++          change: "Synthetic fixture price change.",
++        }}
++      />
++    );
++  }
+   if (path === "/meri/actions")
+     return (
+       <ProductShell actionWorkflow>
+diff --git a/apps/web/test/browser/navigation.tsx b/apps/web/test/browser/navigation.tsx
+index b030ad3..5e9f016 100644
+--- a/apps/web/test/browser/navigation.tsx
++++ b/apps/web/test/browser/navigation.tsx
+@@ -51,3 +51,12 @@ export default function Link({
+     </a>
+   );
+ }
++
++export function useParams() {
++  const pathname = usePathname();
++  return {
++    token: pathname.startsWith("/it/")
++      ? decodeURIComponent(pathname.split("/")[2] ?? "")
++      : undefined,
++  };
++}
+diff --git a/apps/web/test/browser/server.mjs b/apps/web/test/browser/server.mjs
+index d441c30..637ce48 100644
+--- a/apps/web/test/browser/server.mjs
++++ b/apps/web/test/browser/server.mjs
+@@ -13,6 +13,8 @@ const configuration = {
+   resolve: {
+     alias: [
+       { find: "@", replacement: path.join(app, "src") },
++      { find: "@clerk/nextjs/legacy", replacement: local("clerk-legacy.ts") },
++      { find: "@clerk/nextjs/errors", replacement: local("clerk-errors.ts") },
+       { find: "@clerk/nextjs", replacement: local("clerk.tsx") },
+       { find: "next/link", replacement: local("navigation.tsx") },
+       { find: "next/navigation", replacement: local("navigation.tsx") },
+diff --git a/scripts/architecture/dependencies.mjs b/scripts/architecture/dependencies.mjs
+index e54ece6..f844249 100644
+--- a/scripts/architecture/dependencies.mjs
++++ b/scripts/architecture/dependencies.mjs
+@@ -6,6 +6,16 @@ const owner = name => name.match(/^(?:apps|packages)\/[^/]+(?=\/)/)?.[0];
+ const feature = name => name.match(/\/features\/([^/]+)\//)?.[1];
+ const portfolioArea = name => name.match(/\/features\/portfolio\/([^/]+)\//)?.[1] ?? '<portfolio>';
+ const publicEntry = name => /\/(?:public|[^/]+-public)\.ts$/.test(name);
++const pricingOwner = `${appSource}shared/capiro/onboard-pricing.server.ts`;
++const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
++
++function approvedPricingImport(file, module, entry) {
++  return file === pricingOwner && entry.specifier === '@capiro/shared'
++    && entry.kind === 'named' && entry.names.length === 2
++    && ['PRICE_LOCK_COPY', 'PRICE_CHANGE_COPY'].every(name => entry.names.includes(name))
++    && module.imports.some(item => item.specifier === 'server-only' && item.kind === 'side-effect')
++    && !module.directives.includes('use client');
++}
+ 
+ export const publicExports = new Set([
+   '@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/prompt-input',
+@@ -14,6 +24,7 @@ export const publicExports = new Set([
+   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
+   '@capiro/meri-contracts/action-application',
+   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
++  '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
+ ]);
+ 
+ export const serverAdapters = new Map([
+@@ -42,6 +53,7 @@ function resolveImport(from, specifier, files) {
+ }
+ 
+ function edgeViolation(from, to) {
++  if (to === pricingOwner && from !== pricingEntry) return `${from}: public pricing projection is allocated only to the Onboard server entry`;
+   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
+   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
+   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
+@@ -55,10 +67,11 @@ export function inspectDependencies(file, module, files, approvedExports = publi
+   const isRoute = /\/app\/(?:.*\/)?route\.[jt]sx?$/.test(file);
+   if (isRoute && !serverAdapters.has(file)) errors.push(`${file}: backend route handler is not allocated`);
+   if (serverAdapters.has(file) && module.nonblank > 80) errors.push(`${file}: server adapter must stay thin (at most 80 nonblank lines)`);
+-  for (const { specifier } of module.imports) {
++  for (const entry of module.imports) {
++    const { specifier } = entry;
+     if (specifier === null) { errors.push(`${file}: computed import forbidden`); continue; }
+     if (/meri-greenfield|capirov2|apps\/api|^https?:|^node:/.test(specifier)) errors.push(`${file}: restricted runtime/repository import ${specifier}`);
+-    if (specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
++    if (specifier === '@capiro/shared' ? !approvedPricingImport(file, module, entry) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
+     const { local, resolved } = resolveImport(file, specifier, files);
+     if (serverAdapters.has(file) && !serverAdapters.get(file).has(resolved ?? specifier)) errors.push(`${file}: server adapter dependency is not allocated: ${specifier}`);
+     if (!local) continue;

@@ -1,0 +1,877 @@
+{
+  "recordedAt": "2026-10-12T20:26:59.854705+00:00",
+  "verdict": "PASS_NO_BLOCKER_FOUND_WITHIN_REVIEW_SCOPE",
+  "source": {
+    "commit": "104495d4cdc8251640b922aea431fa0e169fe935",
+    "rootTree": "01e6c338048c507dab0d2f3ba6fafa02912bc003",
+    "appTree": "ad282f731750e1984790de2ec266ff9e311581c9",
+    "srcTree": "57fad76b58a59f8d3c2f35155201e7524d713539"
+  },
+  "baseline": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "laneComparisons": {
+    "intake": {
+      "referenceCommit": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+      "paths": 34,
+      "exactMatches": 34,
+      "files": [
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47740.svg",
+          "reviewedBytes": 528,
+          "finalBytes": 528,
+          "reviewedSHA256": "0f5b00e496281e87088dab6aaaedae9ddf3ae70aead75a0ba97d9c723d4cebb4",
+          "finalSHA256": "0f5b00e496281e87088dab6aaaedae9ddf3ae70aead75a0ba97d9c723d4cebb4",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47748.svg",
+          "reviewedBytes": 1315,
+          "finalBytes": 1315,
+          "reviewedSHA256": "377496c7625e259a5623d2b38e476fc1f2956be17c79603aa3ffde0c257d0fc1",
+          "finalSHA256": "377496c7625e259a5623d2b38e476fc1f2956be17c79603aa3ffde0c257d0fc1",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47762.svg",
+          "reviewedBytes": 290,
+          "finalBytes": 290,
+          "reviewedSHA256": "f9e8751e0bcf6119a54620ad6c6aa4acf41d792b399fd3146e95d639fba172e1",
+          "finalSHA256": "f9e8751e0bcf6119a54620ad6c6aa4acf41d792b399fd3146e95d639fba172e1",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47781.svg",
+          "reviewedBytes": 576,
+          "finalBytes": 576,
+          "reviewedSHA256": "acfe441af53e0dee05e88e6c3c95c561bec6ba2f37b12755d4ac4482ce3944a4",
+          "finalSHA256": "acfe441af53e0dee05e88e6c3c95c561bec6ba2f37b12755d4ac4482ce3944a4",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47795.svg",
+          "reviewedBytes": 1114,
+          "finalBytes": 1114,
+          "reviewedSHA256": "02a95d9232166978f9cb5995dbd5c1bb9d45a60e2fb1f46fa2d8ef4b2182270f",
+          "finalSHA256": "02a95d9232166978f9cb5995dbd5c1bb9d45a60e2fb1f46fa2d8ef4b2182270f",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47802.svg",
+          "reviewedBytes": 743,
+          "finalBytes": 743,
+          "reviewedSHA256": "800228139829df4d14e85ea3dc519c265f543921a4684903f5aea9ee92177c35",
+          "finalSHA256": "800228139829df4d14e85ea3dc519c265f543921a4684903f5aea9ee92177c35",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47809.svg",
+          "reviewedBytes": 483,
+          "finalBytes": 483,
+          "reviewedSHA256": "7bccb18350c3b634d7a9f50b4931803d657d4682f773d655243939f08037ee7a",
+          "finalSHA256": "7bccb18350c3b634d7a9f50b4931803d657d4682f773d655243939f08037ee7a",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47820.svg",
+          "reviewedBytes": 236,
+          "finalBytes": 236,
+          "reviewedSHA256": "36d7c7c2365b7f36c2b1ea80a6b690b250734881e1f9b6f4a1fe90321e8a0c3b",
+          "finalSHA256": "36d7c7c2365b7f36c2b1ea80a6b690b250734881e1f9b6f4a1fe90321e8a0c3b",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47828.svg",
+          "reviewedBytes": 1744,
+          "finalBytes": 1744,
+          "reviewedSHA256": "9f06a3c74a3ac14abe6eeea989c19480ea136d31128137ddc79a83bb33f8d781",
+          "finalSHA256": "9f06a3c74a3ac14abe6eeea989c19480ea136d31128137ddc79a83bb33f8d781",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/411-47837.svg",
+          "reviewedBytes": 623,
+          "finalBytes": 623,
+          "reviewedSHA256": "281c5a1d5d5e9154cd8ec0aa7d8fd6c09834f2e1edb148f4535864b07c871626",
+          "finalSHA256": "281c5a1d5d5e9154cd8ec0aa7d8fd6c09834f2e1edb148f4535864b07c871626",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/public/design/remaining-intake/PROVENANCE.json",
+          "reviewedBytes": 2700,
+          "finalBytes": 2700,
+          "reviewedSHA256": "90fb8536771614d207a4eda588cfe2dfbf7866ed4c98d16ba438d786748cd2e9",
+          "finalSHA256": "90fb8536771614d207a4eda588cfe2dfbf7866ed4c98d16ba438d786748cd2e9",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-intake/CompanyStep.tsx",
+          "reviewedBytes": 2075,
+          "finalBytes": 2075,
+          "reviewedSHA256": "feae7432c30d196aee4de0f474b162f3bbd77aa3e7f97a240f6391fda7277636",
+          "finalSHA256": "feae7432c30d196aee4de0f474b162f3bbd77aa3e7f97a240f6391fda7277636",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-intake/Fields.tsx",
+          "reviewedBytes": 3852,
+          "finalBytes": 3852,
+          "reviewedSHA256": "78954e865c182cf770b33e6192938a24f93af4e55ff76a98c23067e52684d213",
+          "finalSHA256": "78954e865c182cf770b33e6192938a24f93af4e55ff76a98c23067e52684d213",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+          "reviewedBytes": 2745,
+          "finalBytes": 2745,
+          "reviewedSHA256": "5ecf134f4d60947e9fd51d6a41c86812a1ebb565f6846291cde6b75e6589755f",
+          "finalSHA256": "5ecf134f4d60947e9fd51d6a41c86812a1ebb565f6846291cde6b75e6589755f",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-intake/SectorStep.tsx",
+          "reviewedBytes": 2646,
+          "finalBytes": 2646,
+          "reviewedSHA256": "791b1f5af28eca0253ad50160fb0fe96f94e48e89b79ab905d5bf82b5e57decd",
+          "finalSHA256": "791b1f5af28eca0253ad50160fb0fe96f94e48e89b79ab905d5bf82b5e57decd",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-intake/intake.module.css",
+          "reviewedBytes": 3354,
+          "finalBytes": 3354,
+          "reviewedSHA256": "e454948f7bc688ccc6242479b60f9f8f1ecd49249b356f32c3d34a6c4b1acaae",
+          "finalSHA256": "e454948f7bc688ccc6242479b60f9f8f1ecd49249b356f32c3d34a6c4b1acaae",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-intake/public.ts",
+          "reviewedBytes": 320,
+          "finalBytes": 320,
+          "reviewedSHA256": "dee8e997ecb53e5efa40d20e0b7369a21f5cf08812bcc7d6ff26937dfd8c5eb0",
+          "finalSHA256": "dee8e997ecb53e5efa40d20e0b7369a21f5cf08812bcc7d6ff26937dfd8c5eb0",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+          "reviewedBytes": 1680,
+          "finalBytes": 1680,
+          "reviewedSHA256": "d0386c92dd16767c321ed6c31f4785ab10ea2a2faaa3904f4599adddd01cb2de",
+          "finalSHA256": "d0386c92dd16767c321ed6c31f4785ab10ea2a2faaa3904f4599adddd01cb2de",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
+          "reviewedBytes": 3475,
+          "finalBytes": 3475,
+          "reviewedSHA256": "8d6c729b029281a97f50b46f67227a8c39ecf767274e87b777771dcc96ae3016",
+          "finalSHA256": "8d6c729b029281a97f50b46f67227a8c39ecf767274e87b777771dcc96ae3016",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+          "reviewedBytes": 7049,
+          "finalBytes": 7049,
+          "reviewedSHA256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+          "finalSHA256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+          "reviewedBytes": 5011,
+          "finalBytes": 5011,
+          "reviewedSHA256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+          "finalSHA256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+          "reviewedBytes": 2456,
+          "finalBytes": 2456,
+          "reviewedSHA256": "75c3f6df058f8f4e61473a9d5fc691a6421d6731e96f04fa3614ec303735ab65",
+          "finalSHA256": "75c3f6df058f8f4e61473a9d5fc691a6421d6731e96f04fa3614ec303735ab65",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/ProfileFacts.tsx",
+          "reviewedBytes": 922,
+          "finalBytes": 922,
+          "reviewedSHA256": "7ca8d7f63fa6e8945ae428e2954b67e3bb1dc1e545d5d4dca42f50c3b76c48e3",
+          "finalSHA256": "7ca8d7f63fa6e8945ae428e2954b67e3bb1dc1e545d5d4dca42f50c3b76c48e3",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+          "reviewedBytes": 4120,
+          "finalBytes": 4120,
+          "reviewedSHA256": "25b8c98561c2ef14a31c761f359eb2c9c78c38575fb1365f985ba95a465fcee8",
+          "finalSHA256": "25b8c98561c2ef14a31c761f359eb2c9c78c38575fb1365f985ba95a465fcee8",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx",
+          "reviewedBytes": 1822,
+          "finalBytes": 1822,
+          "reviewedSHA256": "5aa4e1feba524ede7d176e724de7d20d1d6bcd100733d253acbe255426740121",
+          "finalSHA256": "5aa4e1feba524ede7d176e724de7d20d1d6bcd100733d253acbe255426740121",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/TeamRoster.tsx",
+          "reviewedBytes": 1935,
+          "finalBytes": 1935,
+          "reviewedSHA256": "8662dcfd720ed62a28a927628a0de34713ed6d2f30b3cd8b5338579783b438a9",
+          "finalSHA256": "8662dcfd720ed62a28a927628a0de34713ed6d2f30b3cd8b5338579783b438a9",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/profile-details.module.css",
+          "reviewedBytes": 1017,
+          "finalBytes": 1017,
+          "reviewedSHA256": "f514d8ba39b7aeb01de3a6af8eef26b919345909420b8d26870ad6d20931c4af",
+          "finalSHA256": "f514d8ba39b7aeb01de3a6af8eef26b919345909420b8d26870ad6d20931c4af",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/team.module.css",
+          "reviewedBytes": 1870,
+          "finalBytes": 1870,
+          "reviewedSHA256": "c72abf1dfcb3f16e245fcbeebdc7ce9a47680552cb32403c90af898dbd7c4054",
+          "finalSHA256": "c72abf1dfcb3f16e245fcbeebdc7ce9a47680552cb32403c90af898dbd7c4054",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/useClientViewKeys.ts",
+          "reviewedBytes": 2026,
+          "finalBytes": 2026,
+          "reviewedSHA256": "1bcd921c2c8536d0e74a8701786ba1cad4acf4f24287fb951b0a49fe5621b0ed",
+          "finalSHA256": "1bcd921c2c8536d0e74a8701786ba1cad4acf4f24287fb951b0a49fe5621b0ed",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/view-switcher.module.css",
+          "reviewedBytes": 1829,
+          "finalBytes": 1829,
+          "reviewedSHA256": "f0f8fa317338dca5ac5653f5dc924308e35b789d64b692c90cf3a031df73523c",
+          "finalSHA256": "f0f8fa317338dca5ac5653f5dc924308e35b789d64b692c90cf3a031df73523c",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/shared/portfolio/shell/client-views.ts",
+          "reviewedBytes": 1658,
+          "finalBytes": 1658,
+          "reviewedSHA256": "9c55087415ff03d172119df9dedeb23709bbf89adbaa959f07a5177a5d7c7d37",
+          "finalSHA256": "9c55087415ff03d172119df9dedeb23709bbf89adbaa959f07a5177a5d7c7d37",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/browser/client-header.spec.ts",
+          "reviewedBytes": 1656,
+          "finalBytes": 1656,
+          "reviewedSHA256": "34fd645d4a91ef81f42a6f7179517c407fa3ce792a4271ffc196aad676ce89d2",
+          "finalSHA256": "34fd645d4a91ef81f42a6f7179517c407fa3ce792a4271ffc196aad676ce89d2",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/browser/remaining-intake.spec.ts",
+          "reviewedBytes": 13355,
+          "finalBytes": 13355,
+          "reviewedSHA256": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46",
+          "finalSHA256": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/client-view-navigation.test.ts",
+          "reviewedBytes": 797,
+          "finalBytes": 797,
+          "reviewedSHA256": "7c2284b0d0690398e7b0356337f14a393527ebcdec054d10e37dc3bbd824adc7",
+          "finalSHA256": "7c2284b0d0690398e7b0356337f14a393527ebcdec054d10e37dc3bbd824adc7",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        }
+      ]
+    },
+    "calendar": {
+      "referenceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+      "paths": 30,
+      "exactMatches": 28,
+      "files": [
+        {
+          "path": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+          "reviewedBytes": 13294,
+          "finalBytes": 13294,
+          "reviewedSHA256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+          "finalSHA256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/MeetingAgenda.tsx",
+          "reviewedBytes": 2571,
+          "finalBytes": 2571,
+          "reviewedSHA256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d",
+          "finalSHA256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+          "reviewedBytes": 5179,
+          "finalBytes": 5179,
+          "reviewedSHA256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c",
+          "finalSHA256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
+          "reviewedBytes": 3060,
+          "finalBytes": 3060,
+          "reviewedSHA256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f",
+          "finalSHA256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+          "reviewedBytes": 2876,
+          "finalBytes": 2876,
+          "reviewedSHA256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d",
+          "finalSHA256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/artifacts/metadata.ts",
+          "reviewedBytes": 591,
+          "finalBytes": 591,
+          "reviewedSHA256": "c2c6873c83adcaf1606fad800305bac2065b9391642baef2a5030b5a6221945e",
+          "finalSHA256": "c2c6873c83adcaf1606fad800305bac2065b9391642baef2a5030b5a6221945e",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+          "reviewedBytes": 3750,
+          "finalBytes": 3750,
+          "reviewedSHA256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+          "finalSHA256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/calendar.module.css",
+          "reviewedBytes": 2935,
+          "finalBytes": 2935,
+          "reviewedSHA256": "32a28c1f19eb80288225dae4058f009f1eb6cacb7e347d6d074ddb150e33a703",
+          "finalSHA256": "32a28c1f19eb80288225dae4058f009f1eb6cacb7e347d6d074ddb150e33a703",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/contracts.ts",
+          "reviewedBytes": 5164,
+          "finalBytes": 5164,
+          "reviewedSHA256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174",
+          "finalSHA256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/feeds.ts",
+          "reviewedBytes": 4742,
+          "finalBytes": 4742,
+          "reviewedSHA256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382",
+          "finalSHA256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+          "reviewedBytes": 4828,
+          "finalBytes": 4828,
+          "reviewedSHA256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+          "finalSHA256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/library/public.ts",
+          "reviewedBytes": 333,
+          "finalBytes": 333,
+          "reviewedSHA256": "8ddeec3df871810165d40d62d0c5ae0fd31edc2e400fd841ee8d31a47aa32fa7",
+          "finalSHA256": "8ddeec3df871810165d40d62d0c5ae0fd31edc2e400fd841ee8d31a47aa32fa7",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/lifecycle.ts",
+          "reviewedBytes": 2571,
+          "finalBytes": 2571,
+          "reviewedSHA256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491",
+          "finalSHA256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/preparation/schema.ts",
+          "reviewedBytes": 3878,
+          "finalBytes": 3878,
+          "reviewedSHA256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79",
+          "finalSHA256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/review/contracts.ts",
+          "reviewedBytes": 2804,
+          "finalBytes": 2804,
+          "reviewedSHA256": "9365a8ce200d7a6a7347a6a45933a58bf589c4b6fdf84ade68e3958b3d965553",
+          "finalSHA256": "9365a8ce200d7a6a7347a6a45933a58bf589c4b6fdf84ade68e3958b3d965553",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+          "reviewedBytes": 6078,
+          "finalBytes": 6078,
+          "reviewedSHA256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415",
+          "finalSHA256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/api.ts",
+          "reviewedBytes": 3006,
+          "finalBytes": 3006,
+          "reviewedSHA256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a",
+          "finalSHA256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/contracts.ts",
+          "reviewedBytes": 4039,
+          "finalBytes": 4039,
+          "reviewedSHA256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290",
+          "finalSHA256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/fence.ts",
+          "reviewedBytes": 489,
+          "finalBytes": 489,
+          "reviewedSHA256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99",
+          "finalSHA256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/sharing.module.css",
+          "reviewedBytes": 503,
+          "finalBytes": 503,
+          "reviewedSHA256": "d3f4f2498ab2a1c74fe0382565ce31c1d15b7811cb35ac35e863ed5ff9205a3f",
+          "finalSHA256": "d3f4f2498ab2a1c74fe0382565ce31c1d15b7811cb35ac35e863ed5ff9205a3f",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/targets.ts",
+          "reviewedBytes": 2828,
+          "finalBytes": 2828,
+          "reviewedSHA256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d",
+          "finalSHA256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+          "reviewedBytes": 3949,
+          "finalBytes": 3949,
+          "reviewedSHA256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c",
+          "finalSHA256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/useMeetingClock.ts",
+          "reviewedBytes": 384,
+          "finalBytes": 384,
+          "reviewedSHA256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe",
+          "finalSHA256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+          "reviewedBytes": 8967,
+          "finalBytes": 8967,
+          "reviewedSHA256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+          "finalSHA256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+          "reviewedBytes": 1328,
+          "finalBytes": 1741,
+          "reviewedSHA256": "7d51d8344009553e698a5fde447c62bfeb582c5e9d60116e0b6544208a94ec10",
+          "finalSHA256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+          "exactMatch": false,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/browser/calendar-sharing.html",
+          "reviewedBytes": 300,
+          "finalBytes": 300,
+          "reviewedSHA256": "3d8d847dca8e2fa5903d480f051756899678a9e324dc091d4a91f8ae8d604357",
+          "finalSHA256": "3d8d847dca8e2fa5903d480f051756899678a9e324dc091d4a91f8ae8d604357",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+          "reviewedBytes": 15006,
+          "finalBytes": 16606,
+          "reviewedSHA256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+          "finalSHA256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+          "exactMatch": false,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/calendar-lifecycle-contract.test.ts",
+          "reviewedBytes": 3979,
+          "finalBytes": 3979,
+          "reviewedSHA256": "a3ce8a8534e8158190a293a2a537547aa212dfb3cec03380bcaa25bc4f51c726",
+          "finalSHA256": "a3ce8a8534e8158190a293a2a537547aa212dfb3cec03380bcaa25bc4f51c726",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/calendar-sharing-fixtures.ts",
+          "reviewedBytes": 2900,
+          "finalBytes": 2900,
+          "reviewedSHA256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f",
+          "finalSHA256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        },
+        {
+          "path": "apps/web/tests/calendar-sharing.test.ts",
+          "reviewedBytes": 6985,
+          "finalBytes": 6985,
+          "reviewedSHA256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+          "finalSHA256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+          "exactMatch": true,
+          "workingTreeMatchesFinal": true
+        }
+      ]
+    }
+  },
+  "calendarApprovedTestDelta": {
+    "commit": "3195ffab57584054a714ff5bd025063fba363929",
+    "integratedCommit": "29f61166565f568045286baa49b4386f8836faf7",
+    "files": [
+      {
+        "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+        "sha256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+        "bytes": 1741,
+        "exactMatch": true
+      },
+      {
+        "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+        "bytes": 16606,
+        "exactMatch": true
+      }
+    ]
+  },
+  "architecturePolicyUnchanged": [
+    {
+      "path": "scripts/architecture/MIGRATION-RESULTS-2026-10-11.md",
+      "bytes": 18549,
+      "sha256": "8726883b9d7ab84ac2d8261bbcf61350c5cba2bc4a14ab73bdd1f97fa122e8d7",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture/README.md",
+      "bytes": 7350,
+      "sha256": "f9db8ca6da62fc245c1e13f69a989831f433ef417aeffd2caa31f63c5ff3c092",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture/dependencies.mjs",
+      "bytes": 4960,
+      "sha256": "a644654d835eaa79542d227a6eddd2d652e0fe85476a0ae7c862748c12ce6a9f",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture/portfolio-transfer-size-baseline.json",
+      "bytes": 49160,
+      "sha256": "2d2bd6894e280155344680a78b0a6eff484a66583db02475f35a405e0aec7a76",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture/reviews.mjs",
+      "bytes": 3423,
+      "sha256": "32c60a419ed3642b9e248da9a30e625cc9776906bcd543c30d16c492646fc124",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture/scan.mjs",
+      "bytes": 3881,
+      "sha256": "b6c0f4e872640db8c655797e86a177303c3c7eb53223ffbd5c29bc41f5ba937e",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture/transfer-baseline.mjs",
+      "bytes": 4269,
+      "sha256": "470c2aa581cd6dd7a7a6be9f101c30cdc3a1f8d4660ff256e3ff6610cfe33991",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture.mjs",
+      "bytes": 5497,
+      "sha256": "b5354d6a8e17c099ec1f7278ca2914192244880a7de17e0409c1830a64f29cea",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture.test.mjs",
+      "bytes": 21948,
+      "sha256": "cafcf2f4a996030425413f181bf145c0371a3bb8a90650a2eb4a02294f5183cd",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture-reviews.mjs",
+      "bytes": 1439,
+      "sha256": "38da8738e98d632b5d4c6e9dea1c71387563db090d39131c105e64e5beb0a6e4",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "scripts/architecture-reviews.test.mjs",
+      "bytes": 2235,
+      "sha256": "69f5a4edad39380c251db5d6a7706052007455004b10ad718ceaa848856fdf4d",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 2319,
+      "sha256": "3889dd45c593695fbdbb3c3935eb06b0ee48c38c17d9ba3fcce0c606e5cf4389",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "apps/web/AGENTS.md",
+      "bytes": 679,
+      "sha256": "063098f6cb31bb44c6f8fbea25b3876de7ee1e5f7d00a50dbab506f6415eb7f0",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "docs/IMPLEMENTATION-STANDARDS.md",
+      "bytes": 11082,
+      "sha256": "d4f10f964ee207187abacd967649a1cfc9bdd468072dc01f859268f08b719959",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "bytes": 9096,
+      "sha256": "63f00bf6913309476d70152cdd04761ccb69bb6059bd1d2f7d698bbcab517ee7",
+      "unchangedFromBaseline": true
+    }
+  ],
+  "exactIntakeCalendarReviewBindings": [
+    {
+      "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+      "kind": "function",
+      "symbol": "RegistrationStep",
+      "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12",
+      "fileSHA256": "5ecf134f4d60947e9fd51d6a41c86812a1ebb565f6846291cde6b75e6589755f",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+        "kind": "function",
+        "symbol": "RegistrationStep",
+        "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12",
+        "reason": "Cohesive existing registration form. The sole behavior-neutral addition selects the certifications presentation variant; fields, values, unknown-code preservation and payload owner are unchanged. Crossing 80 by one line does not justify splitting the form into arbitrary fragments.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "kind": "function",
+      "symbol": "ClientOverview",
+      "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857",
+      "fileSHA256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+        "kind": "function",
+        "symbol": "ClientOverview",
+        "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857",
+        "reason": "Existing overview composition retains read/query/error ownership and all prior child boundaries. Two-line change imports/inserts ClientDetails with current saved client and key=id. Detail field rendering and modal interaction live in cohesive new children; no new transport, writer or authority rule joins this container.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+      "kind": "function",
+      "symbol": "ClientViewSwitcher",
+      "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e",
+      "fileSHA256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+        "kind": "function",
+        "symbol": "ClientViewSwitcher",
+        "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e",
+        "reason": "Owns one searchable view-picker interaction: canonical descriptor filtering, active option, local open state, navigation, accessible combobox/listbox presentation and visibility scroll. Global key lifetime is separated into useClientViewKeys and metadata belongs to canonical clientViews. Uses adopted Radix Popover/Next navigation; no persistence, API, authority, custom overlay engine or speculative destination. Keeping option rendering with local filter state makes keyboard selection auditable without a speculative generic command abstraction.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "fingerprint": "1471eb1124a29fe24ebf21e91fad0d83cb4f1596cac88f9635dce47fad461a5e",
+      "fileSHA256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+        "kind": "file",
+        "symbol": "<module>",
+        "fingerprint": "1471eb1124a29fe24ebf21e91fad0d83cb4f1596cac88f9635dce47fad461a5e",
+        "reason": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "function",
+      "symbol": "CalendarPage",
+      "fingerprint": "f5e9238597077884681433f79e422929b1d82e7d06dae40549d5e3bc9e641549",
+      "fileSHA256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+        "kind": "function",
+        "symbol": "CalendarPage",
+        "fingerprint": "f5e9238597077884681433f79e422929b1d82e7d06dae40549d5e3bc9e641549",
+        "reason": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "kind": "function",
+      "symbol": "useArtifactMutation",
+      "fingerprint": "9073247d9809144bbb9ead2a98d24e1272748ae53edffb0b19163b63357caa97",
+      "fileSHA256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+        "kind": "function",
+        "symbol": "useArtifactMutation",
+        "fingerprint": "9073247d9809144bbb9ead2a98d24e1272748ae53edffb0b19163b63357caa97",
+        "reason": "The existing saved artifact attempt lifecycle now observes the canonical per-meeting sharing fence. The two owners prevent concurrent or uncertain write replay without moving receipt/transport concerns into UI.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+      "kind": "function",
+      "symbol": "SharedMeetings",
+      "fingerprint": "1366759cf36d89e80e3aad049b05ee7d80fad61210a8d0ca3d8c9c2d98e593d0",
+      "fileSHA256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+        "kind": "function",
+        "symbol": "SharedMeetings",
+        "fingerprint": "1366759cf36d89e80e3aad049b05ee7d80fad61210a8d0ca3d8c9c2d98e593d0",
+        "reason": "One current authorized client feed owns its keyed query and metadata-only rendering. It neither opens owner-only meeting details nor invents notes/debrief body or signed download capability.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+      "kind": "function",
+      "symbol": "MeetingSharing",
+      "fingerprint": "727cc3956153caa435c9011566317d7a6016e5549990240f930348ade5090cdf",
+      "fileSHA256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+        "kind": "function",
+        "symbol": "MeetingSharing",
+        "fingerprint": "727cc3956153caa435c9011566317d7a6016e5549990240f930348ade5090cdf",
+        "reason": "One explicit selected-artifact confirmation owns checkbox snapshots, current read states and the share/unshare confirmation. Native contracts, selection eligibility and dispatched attempt semantics are separate coherent modules.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+        "reviewedOn": "2026-10-12"
+      }
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+      "kind": "function",
+      "symbol": "useSharing",
+      "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
+      "fileSHA256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c",
+      "exactRegistryMatch": {
+        "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+        "kind": "function",
+        "symbol": "useSharing",
+        "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
+        "reason": "One actor/tenant/meeting/client-bound read and mutation lifetime owns the synchronous fence, cleanup, existing artifact coordination and invalidations. Native request/receipt validation lives in api/contracts, not UI.",
+        "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+        "reviewedOn": "2026-10-12"
+      }
+    }
+  ],
+  "protectedEvidenceDirectoriesUnchanged": {
+    "docs/remaining-assessment-20261012": true,
+    "docs/followup-20261012": true,
+    "docs/successor-p1-20261012": true
+  },
+  "d5ddPreserved": {
+    "commit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+    "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+    "appTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe"
+  },
+  "excludedCallbackCommit": "24ac231749b9e8dc9b778cf318f3f94e74d168ad",
+  "excludedCallbackCheck": "Integrated ClientOverview equals ced1d1b exactly; no onLog prop insertion. ActivityTimeline independently preserves current params and activates existing log=1 intent after close through router.replace scroll:false.",
+  "workingTreeStatusAtReview": "",
+  "executedTests": false,
+  "browserOrServerStarted": false,
+  "rootSourceEdited": false,
+  "nativeCalls": false,
+  "combinedQualification": "Parent-owned and pending; no acceptance claimed"
+}

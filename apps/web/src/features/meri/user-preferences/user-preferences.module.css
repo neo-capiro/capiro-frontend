@@ -1,0 +1,76 @@
+.workflow {
+  display: grid;
+  gap: 12px;
+}
+.workflow > button {
+  justify-self: start;
+  min-height: 44px;
+  white-space: normal;
+  text-align: left;
+}
+.unsupported {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
+.panel {
+  color-scheme: light;
+  color: #152338;
+  background: #fff;
+  border: 1px solid #c7ced8;
+  border-radius: 12px;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+.fields {
+  display: grid;
+  gap: 16px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.fields label {
+  display: grid;
+  gap: 6px;
+}
+.fields input,
+.fields select,
+.fields button {
+  min-height: 44px;
+  font: inherit;
+  padding: 8px 12px;
+  border: 1px solid #9ba8b8;
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  max-width: 100%;
+}
+.panel p {
+  margin: 0;
+}
+.panel[data-density="compact"] {
+  padding: 16px;
+  gap: 10px;
+}
+.panel[data-density="compact"] .fields {
+  gap: 10px;
+}
+.panel[data-theme="dark"] {
+  color-scheme: dark;
+  color: #eef2f7;
+  background: #172235;
+  border-color: #657187;
+}
+@media (prefers-color-scheme: dark) {
+  .panel[data-theme="system"] {
+    color-scheme: dark;
+    color: #eef2f7;
+    background: #172235;
+    border-color: #657187;
+  }
+}

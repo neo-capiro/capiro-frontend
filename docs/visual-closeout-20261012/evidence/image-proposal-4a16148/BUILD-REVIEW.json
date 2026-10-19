@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-10-12T12:38:16.510083+00:00",
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "reviewKind": "Author static binding review, separate from coordinator-relayed independent product review and designated shipping approval.",
+  "checks": {
+    "fiveRecipeAndLockInputsUnchangedFromPriorProposal": true,
+    "buildspecCopyByteIdenticalToArchiveSource": true,
+    "yamlCommandsAllStrings": 20,
+    "bashSyntax": "PASS",
+    "gatesPrecedeRegistryPush": true,
+    "portfolioFullSuiteWorkers": 3,
+    "modulesFullSuitePresent": true,
+    "actualStandaloneAndContainerSmokePresent": true,
+    "sourceCommitAndS3VersionAssertionsPresent": true,
+    "automaticRetryLimit": 0,
+    "archiveReproducedTwice": "PASS",
+    "allTrackedBlobsMatch": 4155,
+    "zipCRCs": "PASS",
+    "recipeHelpInvalidArgsAndExistingOutputChecks": "PASS"
+  },
+  "unexecuted": [
+    "S3 upload",
+    "CodeBuild start",
+    "container build/run",
+    "ECR push",
+    "image scan",
+    "deployment"
+  ],
+  "externalPreflight": "Coordinator-reported existing versioned key, Linux large 60-minute CodeBuild project and immutable basic scan-on-push ECR; not re-executed by this author."
+}

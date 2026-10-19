@@ -1,0 +1,687 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-delete/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-next-delete-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-next-delete-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-next-delete-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-delete-evidence/browser-preserved",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-next-delete-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "preservation.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-delete-evidence/browser-preserved.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "preservation.spec.ts",
+      "file": "preservation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "conflicting ACL receipt retains the draft and freezes repeat save until current GET review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2861,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:31.989Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-conflicting-A-20232-ve-until-current-GET-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-f17a882c07b0d5106d8c",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "a matching reordered restricted viewer set completes the save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:35.146Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-matching-re-c961a-ewer-set-completes-the-save/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-45a2f49f6317034b171b",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 80,
+          "column": 5
+        },
+        {
+          "title": "a definite access rejection retains an editable draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2406,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:37.591Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-definite-ac-89314-n-retains-an-editable-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b3dc44d014b3b8574a24",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 135,
+          "column": 5
+        },
+        {
+          "title": "a matching PATCH completing after actor replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1658,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:40.066Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-matching-PA-53613-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-e7b7a2974160de153d0f",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 7
+        },
+        {
+          "title": "a matching PATCH completing after client replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:41.792Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-matching-PA-f60ec-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-659ea018f3f5e26d7c35",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 7
+        },
+        {
+          "title": "a matching PATCH completing after unmount replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1394,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:43.220Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-matching-PA-a86ba-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5aca6055919bc29918e8",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 7
+        },
+        {
+          "title": "a review completing after actor replacement cannot clear the original unknown save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2040,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:44.654Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-review-comp-d5382-r-the-original-unknown-save/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1a385695a1ff35502617",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 214,
+          "column": 5
+        },
+        {
+          "title": "an unknown draft can recover even when the reopened access query fails",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3575,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:46.739Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-an-unknown-dr-12048-reopened-access-query-fails/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-2d856b190dafb916caac",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 256,
+          "column": 5
+        },
+        {
+          "title": "reopening access as another reader requests that reader's current ACL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1624,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:50.369Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-reopening-acc-73ef0-s-that-reader-s-current-ACL/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-95a53bd3958d4cba498f",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 307,
+          "column": 5
+        },
+        {
+          "title": "a contradictory folder receipt keeps the requested folder and needs current review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2694,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:52.037Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-a-contradicto-398da-er-and-needs-current-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b5a9bc0018768dc70c83",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 334,
+          "column": 5
+        },
+        {
+          "title": "unknown ACL save survives close/reopen and a failed review does not thaw it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:54.812Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-unknown-ACL-s-7fb07-led-review-does-not-thaw-it/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-2173c54a612f0d132cef",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 372,
+          "column": 5
+        },
+        {
+          "title": "disabled button keeps pending and unknown dialog focus at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2396,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:21:57.549Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-disabled-butt-9161b-known-dialog-focus-at-360px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-d83e11690234bb819816",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+          "line": 22,
+          "column": 9
+        },
+        {
+          "title": "disabled field keeps pending and unknown dialog focus at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3188,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:22:00.016Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-disabled-fiel-c12ba-known-dialog-focus-at-360px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-aff8ed7530376a3377e4",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+          "line": 22,
+          "column": 9
+        },
+        {
+          "title": "disabled button keeps pending and unknown dialog focus at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3513,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:22:03.274Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-disabled-butt-5463b-nown-dialog-focus-at-1440px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-231c39196ef574b46bf7",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+          "line": 22,
+          "column": 9
+        },
+        {
+          "title": "disabled field keeps pending and unknown dialog focus at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4440,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:22:06.974Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-preserved/preservation-disabled-fiel-b3626-nown-dialog-focus-at-1440px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-03ec3bf0c1307a2e37c0",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+          "line": 22,
+          "column": 9
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T18:21:31.378Z",
+    "duration": 40360.78200000001,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

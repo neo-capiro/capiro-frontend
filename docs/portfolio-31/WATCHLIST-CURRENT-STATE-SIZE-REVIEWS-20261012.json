@@ -1,0 +1,47 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+    "kind": "function",
+    "symbol": "WatchlistSession",
+    "fingerprint": "14d2609b43aa0b476423c1eb21103f2132158b80207c540df49bff685606d406",
+    "reason": "Composes one shared-targeting dialog, its current-read gate, the controlled form and an explicit read-only discard/reload confirmation. The personal entry only receives the configured backend and current-source disable state. Native transport, receipt projection, actor/client proof and the active request lifetime remain in separate owners; no service mutation or authentication policy is implemented in this container.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistForm.tsx",
+    "kind": "function",
+    "symbol": "WatchlistForm",
+    "fingerprint": "51ccf5cfe7979475803d5417a8da7085f59d14937a058698ffee38815d422605",
+    "reason": "Presents the existing Issue areas, Intel State coverage, optional profile suggestions and WatchlistTopics fields as one controlled targeting draft. It preserves the partial-rejection explanation and local correction flow, then composes explicit save/reload or unknown-result actions. Topic-specific field operations remain in WatchlistTopics; transport, current authority, cache effects and unknown fencing are excluded from this presentation owner.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
+    "kind": "function",
+    "symbol": "useWatchlistView",
+    "fingerprint": "1d9fa53813edfdfaaba836b0c1bc52261495c01af276fafca7a4b6200c2fcda6",
+    "reason": "Combines the exact current client and owner-specific targeting, taxonomy and jurisdiction reads for one Configure source boundary. Reader-key derivation and source validation are in watchlist-source, while canonical Profile actor/client primitives are reused through the narrow public facade and native targeting IO stays in watchlist-writer. The subscriptions and three query lifecycles must share this captured reader so a successful sibling feed cannot accidentally authorize stale targeting.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+    "kind": "function",
+    "symbol": "useWatchlistEditor",
+    "fingerprint": "2cc1d14d317e06ce727cc1cbd040a7f94329381b00e2aadde830c5cf2d10f58b",
+    "reason": "Owns one retained targeting draft and its explicit save/reload transaction. Native request projection and receipt parsing, current actor/client/source assertions, and synchronous interruption/uncertainty tracking have separate module owners. The remaining state and cache/UI effect sequence is one coupled editor lifetime: publishing a receipt, advancing the base version and retaining rejected edits must agree before closing this exact view.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+    "kind": "function",
+    "symbol": "useWatchlistEditor > execute",
+    "fingerprint": "4914c34f0a94cbff51f4dee37173c2710c0d855e293e85e2e32b30af1b669f99",
+    "reason": "Runs one selected save or read-only reload from a captured reviewed source through the same interruption latch, then checks the exact replacement source revision before each cache or UI effect. The two branches deliberately share lifetime and failure handling; native Core/Intel dispatch and receipt semantics are delegated to watchlist-writer. No unrelated service, global authorization owner or automatic retry flow is mixed into this transaction.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-12"
+  }
+]

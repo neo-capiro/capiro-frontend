@@ -1,0 +1,77 @@
+{
+  "reviewedAtUTC": "2026-10-13T05:32:19.101148+00:00",
+  "records": [
+    {
+      "file": "apps/web/tests/meri-action-proxy.test.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 403,
+      "fingerprint": "9ce12481d47b2d9e8d6c76b2321e1cff30ed63167273bf91494238468924f89c",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "One cohesive five-route server proxy contract fixture: configuration/admission, native versus opaque credential forwarding, bounded response handling and request disposal. Tiny request/deferred helpers are shared by these cases. Splitting would duplicate one transport fixture; no unrelated feature/provider mock or production algorithm is reproduced."
+    },
+    {
+      "file": "apps/web/tests/meri-action-proxy.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 42,
+      "nonblank": 90,
+      "fingerprint": "b9af5b36f5f757188b08bf5d8545fb92e2c79e963026f03e97c6ffe432954652",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "Describe declaration group for off-default configuration and literal POST/path/origin/encoding admission. Independent examples require no-auth/no-fetch refusals."
+    },
+    {
+      "file": "apps/web/tests/meri-action-proxy.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #3",
+      "line": 133,
+      "nonblank": 185,
+      "fingerprint": "a7c580f4e30ba47547daad81f30ec27ef4fbc4361c1b2dec74623bc900d246f0",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "Describe declaration group for bearer separation, header isolation, preserved outcomes, malformed/oversized bodies and response release, all on the same proxy boundary."
+    },
+    {
+      "file": "apps/web/tests/meri-action-proxy.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #4",
+      "line": 319,
+      "nonblank": 89,
+      "fingerprint": "fdfb1367fc9055cca78fb45c9e405981812fd6dbdb71fdc2dc46b4451cda5ae2",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "Describe declaration group for request lifetime: pre-abort, parked token, dispatched cancellation and stalled body deadline. Deterministic deferred barriers and fake time; no sleeps/retries."
+    },
+    {
+      "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 28,
+      "nonblank": 86,
+      "fingerprint": "eb3d9373979c7046c089b6ce501e64b5dd01528853b56e19dda6196f78fde8a3",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "Describe declaration group for same-origin bootstrap intent, optional strict hints, immutable server receipt and captured client/conversation/run correlation. Fixtures describe the published minimal receipt, not a second validator."
+    },
+    {
+      "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #3",
+      "line": 115,
+      "nonblank": 109,
+      "fingerprint": "7629ac2f7de3ccefce7ecbc8521a9c0138c8a7730e42852530ddac16fb114d92",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "Describe declaration group for receipt grammar/expiry, separate non200 session errors, UTF-8 streaming and body limits. Cases assert independent observable admission outcomes."
+    },
+    {
+      "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #4",
+      "line": 225,
+      "nonblank": 99,
+      "fingerprint": "b561f986fec284fc08df17ae2e72825302f53ec6c80a72cab6dc02279b3f3b03",
+      "review": "bounded cohesion accepted; parent owns final recording",
+      "rationale": "Describe declaration group for response cleanup, disposed lifetime, late receipt and fetch/body deadlines; directly observes stream cancellation and dispatch count."
+    }
+  ],
+  "individualTestOrHelperOver80": false,
+  "signalsAreDescribeGroupsAndOneCohesiveTestFile": true
+}

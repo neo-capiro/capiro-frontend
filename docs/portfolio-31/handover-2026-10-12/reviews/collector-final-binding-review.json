@@ -1,0 +1,63 @@
+{
+  "status": "PASS_FINAL_COLLECTOR_SOURCE_AND_BOUND_PACKAGE_RECEIPT",
+  "reviewedBy": "/root/portfolio_prospects_files",
+  "reviewedAt": "2026-10-12T01:48:06.763310+00:00",
+  "sourceReview": {
+    "path": "/workspace/scratch/158b6018a5d3/handover-preparation/collector-independent-review.json",
+    "sha256": "d7b6296e3107a49db8f2048c257877019c34712c3d07c5214bac62319b1e1fd2",
+    "unchanged": true
+  },
+  "toolManifest": {
+    "path": "/workspace/scratch/158b6018a5d3/handover-preparation/tools-final-manifest.json",
+    "sha256": "d05b3f3bdfd39e2527b01ba83d25ef9b383b42b4c043a25118ff90ae8ad411bf",
+    "allEightCurrentFileHashesAndSizesMatch": true,
+    "scope": "Collector/common/scanner/verifier/restorer/finalizer and updated tool guidance read. Synthetic helper is hash-bound; no self-check was rerun by this reviewer."
+  },
+  "package": {
+    "manifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "files": 35264,
+    "uniqueBlobs": 9729,
+    "packs": 166,
+    "metadataRecords": 202,
+    "sourceWorktrees": 14,
+    "symlinks": 0,
+    "compressedPackBytes": 330942983,
+    "initialManifestSha256": "901f0fc24c51bbb86df8d9523e0c0c9ef10931507670955790b32ed41700e03c",
+    "unchangedInitialFileRecords": 31432,
+    "unchangedInitialPackDescriptors": 152,
+    "additionalIgnoredContextPaths": 3832,
+    "additionalPacks": 14,
+    "allThirtyP4ContextLocationsRepresented": true,
+    "qualifiedPrimaryHistorySha256": "591d293dee1b903e31c70e8b659beae928b04d4c1ed87c8e7a6e27416eabc8af",
+    "qualifiedHistoryReceiptBytesMatchIndependentRootReceipt": true,
+    "generatedStagingAbsentOnFreshRead": true
+  },
+  "verificationReceipt": {
+    "path": "/workspace/scratch/158b6018a5d3/handover-preparation/context-verification-result.json",
+    "sha256": "17bbb656a1d8ff08d1907dade487d98e9754f4a2f199900a3a27c1d305819047",
+    "verified": {
+      "credentialReview": "ROOT_REVIEW_REQUIRED",
+      "files": 35264,
+      "historyBundleVerified": true,
+      "manifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+      "metadataFiles": 202,
+      "packs": 166,
+      "uniqueBlobs": 9729,
+      "verified": true
+    },
+    "qualification": "Independently read and checked exact final P3 every-blob/metadata/pack/bundle verification receipt against the frozen final manifest. No duplicate full verifier run by this reviewer."
+  },
+  "syntheticQualification": {
+    "finalEightCaseReceiptSha256": "ac27062d06b39205a583c4194e2bdf230f9b99002abab4868ceae2bbed023e8c",
+    "changedManifestRegressionReceiptSha256": "c5154dac505f4c79de4a3073efe7b517ff733c506430f98cab7d9c0caf31a646",
+    "separateCohortsNotAddedIntoProductTests": true
+  },
+  "blockingFindings": [],
+  "remainingCoordinatorActions": [
+    "Preserve root credential-candidate review/disposition alongside the two value-free scan reports. The source review itself is not a universal no-secret guarantee.",
+    "Publish the final exact context representation plus tools, receipts, direct-artifact review and separate history resolution.",
+    "If large packs are split only for connector delivery, preserve c23 final manifest and original pack digests, reassemble in a new target and verify before use; transport-helper review is separate and pending.",
+    "Existing application follow-ups and final build/production/full-browser/signed-in acceptance remain open."
+  ],
+  "sourceOrProductMutationPerformed": false
+}

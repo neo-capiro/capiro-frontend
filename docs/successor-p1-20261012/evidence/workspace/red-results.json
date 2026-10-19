@@ -1,0 +1,533 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-workspace/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-p1-workspace-20261012/playwright.config.mts",
+      "--grep",
+      "fields freeze"
+    ],
+    "configFile": "/tmp/capiro-p1-workspace-20261012/playwright.config.mts",
+    "rootDir": "/workspace/capiro-p1-workspace/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-workspace-20261012/red-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-p1-workspace/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/prospect-draft-pending-edit.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-workspace-20261012/red-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "prospect-draft-pending-edit.spec.ts",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "prospect fields freeze during held update; success preserves submitted text",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6580,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61",
+                    "location": {
+                      "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                      "column": 61,
+                      "line": 117
+                    },
+                    "snippet": "  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                        "column": 61,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:09:27.687Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-ecda0-ss-preserves-submitted-text/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-ecda0-ss-preserves-submitted-text/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-ecda0-ss-preserves-submitted-text/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                    "column": 61,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59a1a266aa647562453-a818300d797addc5b35d",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held update; failure preserves submitted text",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6645,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61",
+                    "location": {
+                      "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                      "column": 61,
+                      "line": 117
+                    },
+                    "snippet": "  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                        "column": 61,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:09:35.175Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-f70e3-re-preserves-submitted-text/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-f70e3-re-preserves-submitted-text/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-f70e3-re-preserves-submitted-text/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                    "column": 61,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59a1a266aa647562453-1f87d6262342322d5422",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held update; lost receipt preserves submitted text",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6484,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61",
+                    "location": {
+                      "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                      "column": 61,
+                      "line": 117
+                    },
+                    "snippet": "  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                        "column": 61,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:09:42.600Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-a215a-pt-preserves-submitted-text/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-a215a-pt-preserves-submitted-text/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-a215a-pt-preserves-submitted-text/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                    "column": 61,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59a1a266aa647562453-61a4f488ded5fba780cd",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held snapshot; success preserves submitted text",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6622,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61",
+                    "location": {
+                      "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                      "column": 61,
+                      "line": 117
+                    },
+                    "snippet": "  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                        "column": 61,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:09:49.826Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-f4e9d-ss-preserves-submitted-text/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-f4e9d-ss-preserves-submitted-text/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-f4e9d-ss-preserves-submitted-text/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                    "column": 61,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59a1a266aa647562453-039f2063c3767bcbf981",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held snapshot; failure preserves submitted text",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6426,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61",
+                    "location": {
+                      "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                      "column": 61,
+                      "line": 117
+                    },
+                    "snippet": "  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                        "column": 61,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:09:57.195Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-534e9-re-preserves-submitted-text/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-534e9-re-preserves-submitted-text/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-534e9-re-preserves-submitted-text/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                    "column": 61,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59a1a266aa647562453-cb18463f04e7a7893e64",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held snapshot; lost receipt preserves submitted text",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6354,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61",
+                    "location": {
+                      "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                      "column": 61,
+                      "line": 117
+                    },
+                    "snippet": "  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                        "column": 61,
+                        "line": 117
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <input maxlength=\"500\" data-slot=\"input\" id=\"workspace-document-title\" value=\"Submitted prospect title\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:c…/>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  115 |       await beginSave(page);\n  116 |       await expect.poll(control.started).toBe(true);\n> 117 |       for (const field of fields(page)) await expect(field).toBeDisabled();\n      |                                                             ^\n  118 |       await expectSubmitted(page);\n  119 |       control.release();\n  120 |       const save = page.getByRole(\"button\", {\n    at /workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts:117:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:10:04.344Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-b6b6f-pt-preserves-submitted-text/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-b6b6f-pt-preserves-submitted-text/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-workspace-20261012/red-artifacts/prospect-draft-pending-edi-b6b6f-pt-preserves-submitted-text/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-workspace/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+                    "column": 61,
+                    "line": 117
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f59a1a266aa647562453-6bb12538db0da5930d97",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:09:26.741Z",
+    "duration": 44331.744999999995,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}

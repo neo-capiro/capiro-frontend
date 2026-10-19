@@ -1,0 +1,26 @@
+{
+  "kind": "source formatting only",
+  "argv": [
+    "--max-old-space-size=128",
+    "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input\\node_modules\\prettier\\bin\\prettier.cjs",
+    "--write",
+    "apps/web/src/shared/shell/DesignIcon.tsx",
+    "apps/web/src/shared/shell/Header.tsx",
+    "apps/web/src/shared/shell/FixtureHeaderActions.tsx",
+    "apps/web/test/browser/meri-current-header-assets.spec.ts",
+    "apps/web/src/features/meri/home.module.css",
+    "apps/web/src/features/meri/ui/meri-ui.module.css",
+    "apps/web/src/features/meri/workspace/workspace.module.css"
+  ],
+  "cwd": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-initial-input",
+  "pid": 41544,
+  "startedAt": "2026-10-16T10:58:43.5620431+00:00",
+  "endedAt": "2026-10-16T10:58:43.9643101+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "memory": {
+    "availableMiB": 11379,
+    "commitHeadroomMiB": 1272
+  },
+  "testCompilerBrowserInstallBuild": false
+}

@@ -1,0 +1,64 @@
+{
+  "sourceCommit": "4a0966ed376d12dbf3d609f8939e92fc8eb1d6e3",
+  "basePR29": "247de58f00a1fea50c25a3400463103885014f4f",
+  "applicationTree": "11a3518d857ec1419a795c8f6ad181002b0dee7a",
+  "baseline": {
+    "failed": 2,
+    "passed": 0,
+    "source": "247de58f00a1fea50c25a3400463103885014f4f"
+  },
+  "passed": {
+    "browser": 40,
+    "newBrowser": 4,
+    "existingBrowser": 36,
+    "retries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "webUnit": 2255,
+    "capiroUnit": 442,
+    "rootControls": 111,
+    "workspaceTypes": true,
+    "packages": true,
+    "webLint": {
+      "errors": 0,
+      "warnings": 81
+    },
+    "webFormatting": true,
+    "architecture": {
+      "total": 489,
+      "reviewed": 468,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "errors": 0
+    },
+    "build": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "portfolioRootSmoke": true,
+    "axe": "Full-default desktop1440/mobile390 pending dialogs: zero violations"
+  },
+  "ledgers": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "bytes": 1438305,
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+      "byteIdenticalToPR29": true
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "bytes": 1332257,
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+      "byteIdenticalToPR29": true
+    }
+  ],
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "deployment": "Coordinator reports correct digest and healthy ALB; this frontend owner has not verified live host; browser access pending specific IP-ingress approval",
+  "limitations": [
+    "No native acceptance rows closed",
+    "No live/AWS/security/credential/data-changing tests",
+    "Ordinary legacy ambiguous-response replay and route-unmount semantics unchanged/unqualified",
+    "No container/image qualification or new shipping input",
+    "Existing Figma3.1/component baseline reused; no fresh whole-frame/design/AT acceptance",
+    "Meri0.1.3 unchanged; no0.1.5 adoption"
+  ]
+}

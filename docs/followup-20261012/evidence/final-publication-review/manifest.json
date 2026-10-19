@@ -1,0 +1,67 @@
+{
+  "createdUTC": "2026-10-12T19:11:13.798091+00:00",
+  "qualifiedSource": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+  "verdict": "PASS_AFTER_TWO_SUMMARY_WORDING_CORRECTIONS",
+  "files": [
+    {
+      "path": "audit-checks.json",
+      "bytes": 2988,
+      "sha256": "b88b7769b81e358bec90d5d91171d0769419231c3a452a78e45935afcc38744c"
+    },
+    {
+      "path": "final-README.md",
+      "bytes": 6163,
+      "sha256": "e1aebaabacc0c0d018a4f3a33d88d6ccd0f8cf90b16a1e264a1d524ed699bce1"
+    },
+    {
+      "path": "final-STATUS.json",
+      "bytes": 6172,
+      "sha256": "db073f0e85e0aa810cf1cf276827a049e3ba010b545b2e58193cd5a3c5f4fe7e"
+    },
+    {
+      "path": "final-input-hashes.json",
+      "bytes": 1609,
+      "sha256": "6b500493acb8645949200d1b524908e161baf86c64883e6ed010721694a0af93"
+    },
+    {
+      "path": "numeric-scope-checks.json",
+      "bytes": 1522,
+      "sha256": "dd50fba76e9cc91e512e8363a5966ef907606e7480d3c551a1372acb7aef7ad3"
+    },
+    {
+      "path": "report.md",
+      "bytes": 6333,
+      "sha256": "572abdd0c74defa89c24b29fa4c5496b6eeb87ebb2256ee42e3dc6ab8947f0e5"
+    },
+    {
+      "path": "snapshot-README.md",
+      "bytes": 5973,
+      "sha256": "72a6431df49d1834b27685e27c26bbfa41db90d3bd7710d140f06ae6f28d1660"
+    },
+    {
+      "path": "snapshot-REMAINING.md",
+      "bytes": 3116,
+      "sha256": "4b071cee1d28f7a77ddefb32116070b245fe991a9d2030eb533750f6e47d4e55"
+    },
+    {
+      "path": "snapshot-SCOPED-FACETS.json",
+      "bytes": 8996,
+      "sha256": "25497a8ce9285b5b2a5e5344f32c0061c5449b08334cde2c8d259b714fc242f4"
+    },
+    {
+      "path": "snapshot-SOURCE.json",
+      "bytes": 2875,
+      "sha256": "bbcfb1e16c1e8fb0004cd48da35b6389c194f6ddbab75081cc91cc909cb97db6"
+    },
+    {
+      "path": "snapshot-STATUS.json",
+      "bytes": 5829,
+      "sha256": "a32a5f0206f520bb3b357d0ea51d72f97d30a8c7e6cde7bd358887077409705a"
+    },
+    {
+      "path": "snapshot-VISUAL-SCOPE.md",
+      "bytes": 2293,
+      "sha256": "a91658d351f65a811d9946a3530c0431f42322ba5a3df2b3a1c695ce91315674"
+    }
+  ]
+}

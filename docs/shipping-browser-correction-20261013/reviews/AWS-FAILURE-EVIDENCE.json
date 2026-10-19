@@ -1,0 +1,421 @@
+{
+  "buildId": "capiro-portfolio-preview-build:69bdc818-0b1d-4570-98fa-91a00d21b280",
+  "sourceCommit": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+  "webTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+  "S3Version": "TI9jxVgFs.NUM7oErSyUtL4nufBA1AQH",
+  "archive": {
+    "bytes": 841126268,
+    "SHA256": "0feb5ef3a18f4dffa872da5f733bb16eede65c8e2d3f25c0d13c136d4985bff1"
+  },
+  "terminal": {
+    "status": "FAILED",
+    "AWSStartUTC": "2026-10-13T00:27:05.024Z",
+    "AWSEndUTC": "2026-10-13T00:48:02.638Z",
+    "durationSeconds": 1257.614,
+    "gate": "npm run test:browser -- --workers=3",
+    "resolvedPlaywrightCommand": "playwright test --workers=3",
+    "passed": 1116,
+    "failed": 2,
+    "total": 1118,
+    "suiteReportedDuration": "16.9m",
+    "imageBuilt": false,
+    "imagePushed": false,
+    "scanRun": false,
+    "deployment": false,
+    "fourthAttempt": false,
+    "historicOffsetCorrection": "Prior terminal receipt used UTC-named fields containing -04:00 timestamps. Original files preserved. Normalized UTC values appear here and in EARLY-CHECKPOINT.json."
+  },
+  "failures": [
+    {
+      "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "declarationLine": 372,
+      "assertionLine": 389,
+      "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+      "expected": "Verified rewrite. Added locally.",
+      "received": " Added locally.",
+      "observedAssertionTimeoutMs": 5000,
+      "observedLocatorResolutions": 14,
+      "progression": "Rewrite, bold, formatting Undo and restored rewrite-text assertions passed. After End and typing, only the typed suffix remained. Final Undo at line 390 was not reached.",
+      "hypothesesOnly": [
+        "Selection/caret behavior or editor history/state synchronization could account for replacement during typing. No selection or transaction trace was retrieved. Browser differences do not establish causation."
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/profile-tools-integration.spec.ts",
+      "declarationLine": 12,
+      "throwLine": 25,
+      "title": "Overview composes saved focus tags and updates the real profile cache",
+      "error": "The profile focus or ownership row is not visible",
+      "progression": "Saved focus text assertion passed. At least one of the subsequent Client focus tags / Account team boundingBox() results was null. The log does not identify which. Geometry comparison and cache-update interaction were not reached.",
+      "hypothesesOnly": [
+        "Visibility/layout readiness at the bounding-box reads could be involved. No screenshot/trace bytes establish visibility, timing, or the identity of the null box."
+      ]
+    }
+  ],
+  "AWSRuntime": {
+    "NodeObserved": "v24.19.0",
+    "npmObserved": "11.7.0",
+    "PlaywrightLocked": "1.61.1",
+    "PlaywrightVersionEvidence": "Exact frozen package-lock versions for @playwright/test, playwright and playwright-core; npm ci completed. No separate runtime --version output.",
+    "browserInstalledObserved": "Chrome for Testing and Chrome Headless Shell 149.0.7827.55, Playwright revision 1228",
+    "browserLaunchedExactVersion": "UNVERIFIED; installation logs retained, launch trace not retrieved",
+    "OSObserved": "APT repositories include Ubuntu noble; image aws/codebuild/standard:8.0. No /etc/os-release capture.",
+    "architectureObserved": "linux64 browser download and amd64 packages; no uname/runtime architecture capture. Planned docker --platform linux/amd64 was never reached.",
+    "knownRuntimeEnvironmentDeclarations": [],
+    "environmentDeclarationCaveat": "No metadata-declared PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH, CI, NODE_ENV, TZ, LANG, LC_ALL or LC_CTYPE. Inherited image/container values were not dumped or observed.",
+    "locale": "UNVERIFIED",
+    "timezone": "UNVERIFIED; AWS timestamps normalized to UTC, which does not establish container/browser timezone",
+    "workersObserved": 3,
+    "fullyParallelFromFrozenConfig": false,
+    "viewportFromFrozenConfig": {
+      "width": 1440,
+      "height": 1040
+    },
+    "testTimeout": "No explicit test timeout in frozen config or AWS command. Effective fallback not captured in persisted resolved AWS JSON. Failed text assertion independently reports 5000 ms.",
+    "retries": "No explicit retry setting in frozen config/AWS command; no retry annotations seen in failure summary. Effective resolved AWS retry value not captured.",
+    "server": "Vite test-only component server on 127.0.0.1:5191; reuseExistingServer false",
+    "runtimeAndCommandProgression": [
+      {
+        "UTC": "2026-10-13T00:27:29.701Z",
+        "line": "[Container] 2026/10/13 00:27:25.867875 Selecting 'nodejs' runtime version '24' based on manual selections..."
+      },
+      {
+        "UTC": "2026-10-13T00:28:29.810Z",
+        "line": "GATE aws"
+      },
+      {
+        "UTC": "2026-10-13T00:28:43.831Z",
+        "line": "GATE node"
+      },
+      {
+        "UTC": "2026-10-13T00:28:43.831Z",
+        "line": "v24.19.0"
+      },
+      {
+        "UTC": "2026-10-13T00:28:43.831Z",
+        "line": "GATE npm"
+      },
+      {
+        "UTC": "2026-10-13T00:28:43.831Z",
+        "line": "11.7.0"
+      },
+      {
+        "UTC": "2026-10-13T00:28:43.831Z",
+        "line": "GATE npm"
+      },
+      {
+        "UTC": "2026-10-13T00:28:53.896Z",
+        "line": "GATE npm"
+      },
+      {
+        "UTC": "2026-10-13T00:29:24.027Z",
+        "line": "Downloading Chrome for Testing 149.0.7827.55 (playwright chromium v1228) from https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-linux64.zip"
+      },
+      {
+        "UTC": "2026-10-13T00:29:28.069Z",
+        "line": "Chrome for Testing 149.0.7827.55 (playwright chromium v1228) downloaded to /root/.cache/ms-playwright/chromium-1228"
+      },
+      {
+        "UTC": "2026-10-13T00:29:28.069Z",
+        "line": "Downloading Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) from https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-headless-shell-linux64.zip"
+      },
+      {
+        "UTC": "2026-10-13T00:29:32.101Z",
+        "line": "Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) downloaded to /root/.cache/ms-playwright/chromium_headless_shell-1228"
+      },
+      {
+        "UTC": "2026-10-13T00:29:32.101Z",
+        "line": "GATE npm"
+      },
+      {
+        "UTC": "2026-10-13T00:31:00.546Z",
+        "line": "GATE bash"
+      },
+      {
+        "UTC": "2026-10-13T00:31:06.589Z",
+        "line": "GATE npm"
+      },
+      {
+        "UTC": "2026-10-13T00:31:06.589Z",
+        "line": "> npm run test:browser --workspace @capiro/web -- --workers=3"
+      },
+      {
+        "UTC": "2026-10-13T00:31:06.589Z",
+        "line": "> playwright test --workers=3"
+      },
+      {
+        "UTC": "2026-10-13T00:31:10.605Z",
+        "line": "Running 1118 tests using 3 workers"
+      },
+      {
+        "UTC": "2026-10-13T00:48:02.188Z",
+        "line": "  2 failed"
+      },
+      {
+        "UTC": "2026-10-13T00:48:02.188Z",
+        "line": "  1116 passed (16.9m)"
+      },
+      {
+        "UTC": "2026-10-13T00:48:02.188Z",
+        "line": "EXECUTION_FAILED: Gate npm failed with exit 1"
+      }
+    ]
+  },
+  "passingQualification": {
+    "sourceBefore": {
+      "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+      "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+      "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+      "sourceDiff": ""
+    },
+    "command": [
+      "env",
+      "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+      "npm",
+      "run",
+      "test:browser",
+      "--",
+      "--workers=3",
+      "--timeout=60000",
+      "--retries=0",
+      "--output=/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-artifacts"
+    ],
+    "startUTC": "2026-10-12T22:16:51.150Z",
+    "endUTC": "2026-10-12T22:53:01.934Z",
+    "durationSeconds": 2170.7839771459985,
+    "stats": {
+      "startTime": "2026-10-12T22:16:51.998Z",
+      "duration": 2169864.537,
+      "expected": 1118,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "resolvedWorkers": 3,
+    "resolvedTestTimeoutMs": 60000,
+    "resolvedRetries": 0,
+    "selectedPassingCases": [
+      {
+        "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+        "file": "mail-rich-compose.spec.ts",
+        "line": 372,
+        "column": 1,
+        "ok": true,
+        "tests": [
+          {
+            "timeout": 60000,
+            "annotations": [],
+            "expectedStatus": "passed",
+            "projectId": "",
+            "projectName": "",
+            "results": [
+              {
+                "workerIndex": 2,
+                "parallelIndex": 2,
+                "status": "passed",
+                "duration": 9109,
+                "errors": [],
+                "stdout": [],
+                "stderr": [],
+                "retry": 0,
+                "startTime": "2026-10-12T22:33:59.477Z",
+                "annotations": [],
+                "attachments": []
+              }
+            ],
+            "status": "expected"
+          }
+        ]
+      },
+      {
+        "title": "Overview composes saved focus tags and updates the real profile cache",
+        "file": "profile-tools-integration.spec.ts",
+        "line": 12,
+        "column": 1,
+        "ok": true,
+        "tests": [
+          {
+            "timeout": 60000,
+            "annotations": [],
+            "expectedStatus": "passed",
+            "projectId": "",
+            "projectName": "",
+            "results": [
+              {
+                "workerIndex": 1,
+                "parallelIndex": 1,
+                "status": "passed",
+                "duration": 7759,
+                "errors": [],
+                "stdout": [],
+                "stderr": [],
+                "retry": 0,
+                "startTime": "2026-10-12T22:41:54.095Z",
+                "annotations": [],
+                "attachments": []
+              }
+            ],
+            "status": "expected"
+          }
+        ]
+      }
+    ],
+    "environment": {
+      "Node": "v24.19.0",
+      "npm": "11.9.0",
+      "Playwright": "1.61.1",
+      "Chromium": "154.0.8037.57",
+      "executable": "/usr/bin/chromium",
+      "OS": "Debian 13",
+      "provenance": "Root reported an independent exact-document read of 3a83e874383d9129726689bb8fc66438c2f18f18:docs/remaining-repairs-20261012/evidence/qualification/final-1585438/ENVIRONMENT.json in trusted delegation. This local bare repository lacks that document object; no fetch performed. Published browser JSON independently confirms Playwright 1.61.1 and passing case/config values."
+    },
+    "proofBindings": [
+      {
+        "path": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-11\\i-am-running-three-builds-in\\work\\frontend-successor-attempt3-custody-readiness-20261012-r1\\publication-proofs\\evidence\\qualification\\final-1585438\\portfolio-browser-exit.json",
+        "bytes": 967,
+        "SHA256": "ea734bd1ec3251a9002ac6ab1ae19094ec6505d4ab0426845e46dc62043a49e4"
+      },
+      {
+        "path": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-11\\i-am-running-three-builds-in\\work\\frontend-successor-attempt3-custody-readiness-20261012-r1\\publication-proofs\\evidence\\qualification\\final-1585438\\portfolio-browser-results.json",
+        "bytes": 1230191,
+        "SHA256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f"
+      },
+      {
+        "path": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-11\\i-am-running-three-builds-in\\work\\frontend-successor-attempt3-custody-readiness-20261012-r1\\publication-proofs\\evidence\\qualification\\final-1585438\\PORTFOLIO-FINAL-SUMMARY.json",
+        "bytes": 764,
+        "SHA256": "c36a656d782893c5dc3107afe7ffc7c59ccb84fd1ede8ad5655e712f8e945015"
+      }
+    ]
+  },
+  "comparison": {
+    "knownMatches": [
+      "Same exact source/root/web trees and 1118-case suite.",
+      "Three workers; fullyParallel false; frozen config viewport, Vite server URL and reporter declarations match.",
+      "Node 24.19.0 per AWS runtime output and Root-read cloud environment. Playwright frozen lock 1.61.1 matches cloud resolved browser JSON."
+    ],
+    "knownDifferences": [
+      "AWS npm 11.7.0 vs passing cloud npm 11.9.0 (Root-read ENVIRONMENT).",
+      "AWS installed Playwright Chromium/headless-shell 149.0.7827.55; cloud explicitly selected system Chromium 154.0.8037.57. AWS launched executable/version not independently captured.",
+      "Cloud explicitly supplied PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium, which enables four custom launch flags in the frozen config. AWS runner supplied no such override and metadata declares none; inherited environment remains unverified.",
+      "Cloud supplied --timeout=60000 --retries=0 and custom --output. AWS supplied only --workers=3. Source config has no explicit test timeout/retry.",
+      "Both selected cases passed in cloud with one result/retry 0, durations 9109 ms and 7759 ms. AWS failed them at the assertions described."
+    ],
+    "unverified": [
+      "AWS resolved default test timeout/retry and exact launched browser.",
+      "Locale/timezone for either run; complete inherited runtime environment.",
+      "Exact AWS runtime architecture and OS release; comparable cloud compute/load."
+    ],
+    "causation": "No deterministic/flaky/environment-cause conclusion is supported by one differing run without the ephemeral artifacts or a controlled reproduction. No test replay performed."
+  },
+  "artifactRecovery": {
+    "status": "LOGPATH_ONLY_NOT_RETRIEVED",
+    "loggedWorkerPaths": [
+      "test-results/portfolio-browser/mail-rich-compose-ordinary-01a30-do-after-a-verified-rewrite/test-failed-1.png",
+      "test-results/portfolio-browser/mail-rich-compose-ordinary-01a30-do-after-a-verified-rewrite/error-context.md",
+      "test-results/portfolio-browser/mail-rich-compose-ordinary-01a30-do-after-a-verified-rewrite/trace.zip",
+      "test-results/portfolio-browser/profile-tools-integration--655bc-ates-the-real-profile-cache/test-failed-1.png",
+      "test-results/portfolio-browser/profile-tools-integration--655bc-ates-the-real-profile-cache/error-context.md",
+      "test-results/portfolio-browser/profile-tools-integration--655bc-ates-the-real-profile-cache/trace.zip"
+    ],
+    "JSONReporterWorkerPath": "apps/web/test-results/browser-results.json",
+    "metadataDeclaredArtifactLocation": {
+      "location": ""
+    },
+    "secondaryArtifacts": null,
+    "reportArns": null,
+    "S3Logs": null,
+    "finding": "No persisted destination declared. Screenshots, traces, error contexts and browser JSON were worker-local and were not retrieved. UPLOAD_ARTIFACTS success and report auto-discovery do not establish accessible artifact bytes.",
+    "broadBucketEnumeration": false
+  },
+  "sourceBindings": [
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "bytes": 14236,
+      "SHA256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/tests/browser/profile-tools-integration.spec.ts",
+      "bytes": 4757,
+      "SHA256": "a74ea49507fcc5c9a266fddb4ff721e361d9493af4078fd98efb0728314e45e0"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/playwright.config.ts",
+      "bytes": 1042,
+      "SHA256": "a85aa9952c8130f9a999c13e6bbd8aa630a2b8237189e6a79101516a6e908f82"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/package.json",
+      "bytes": 1815,
+      "SHA256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "package.json",
+      "bytes": 1762,
+      "SHA256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "package-lock.json",
+      "bytes": 510436,
+      "SHA256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "bytes": 4507,
+      "SHA256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "bytes": 14376,
+      "SHA256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "bytes": 7049,
+      "SHA256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
+      "bytes": 5909,
+      "SHA256": "c51b9f4be51ce0eb456a677f49b47517f44c8e0a36a3c80b98a792c537f4b4a5"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/tests/browser/profile-tools-fixtures.ts",
+      "bytes": 3493,
+      "SHA256": "aa1f112079b5dc5d6791325ddab655db00487a83f742a01acafd312d7ce67798"
+    },
+    {
+      "commit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "path": "apps/web/tests/browser/server.mjs",
+      "bytes": 1976,
+      "SHA256": "eedc3911d74e8159d105b2bea55c07ac935b05c90f71292b0138a00c6efae420"
+    }
+  ],
+  "scope": {
+    "AWSWritesDuringCollection": 0,
+    "testsReplayed": 0,
+    "sourceFetches": 0,
+    "sourceEdits": 0,
+    "runtimesInstalled": 0,
+    "externalCommentsOrMessages": 0,
+    "rawLogsAndPaginationTokensExported": false,
+    "preservedFileCount": 493
+  }
+}

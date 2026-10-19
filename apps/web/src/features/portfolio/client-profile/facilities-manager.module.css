@@ -1,0 +1,139 @@
+.manager.manager {
+  width: min(700px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+}
+.manager > header {
+  flex-shrink: 0;
+  padding: 16px 28px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.manager > header h2 {
+  font-size: 14px;
+}
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 28px;
+  display: grid;
+  gap: 12px;
+}
+.description,
+.facility > p {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.facilities {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.facility {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.facilityHeading,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.facilityHeading {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.facilityHeading h3 {
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.actions :global(.button) {
+  min-height: 31px;
+  padding: 5px 10px;
+  font-size: 13px;
+}
+.editor {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  gap: 8px;
+}
+.editor fieldset {
+  gap: 8px;
+}
+.editor label {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  gap: 6px;
+}
+.editor input,
+.editor select {
+  background: var(--card);
+  min-height: 40px;
+  border-radius: 8px;
+}
+.editor textarea {
+  min-height: 50px;
+  background: var(--card);
+}
+.locality {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.districts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.locality > *,
+.districts > * {
+  min-width: 0;
+  gap: 6px;
+}
+.locality input,
+.locality select {
+  min-width: 0;
+  width: 100%;
+}
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  background: var(--background);
+  padding: 16px 28px;
+}
+@media (max-width: 540px) {
+  .manager.manager {
+    max-height: calc(100dvh - 24px);
+  }
+  .manager > header,
+  .body,
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .locality,
+  .districts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .footer {
+    flex-wrap: wrap;
+  }
+}

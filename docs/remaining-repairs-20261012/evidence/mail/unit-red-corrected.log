@@ -1,0 +1,24 @@
+
+ RUN  v4.1.11 /workspace/capiro-remaining-mail/apps/web
+
+ ❯ tests/mail-body.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/mail-body.test.ts [ tests/mail-body.test.ts ]
+Error: Cannot find module '../src/features/portfolio/relationships/email/mail-body' imported from /workspace/capiro-remaining-mail/apps/web/tests/mail-body.test.ts
+ ❯ tests/mail-body.test.ts:2:1
+      1| import { describe, expect, it } from "vitest";
+      2| import { plainMailBody, mailBodyError } from "../src/features/portfoli…
+       | ^
+      3|
+      4| describe("local rich mail body contract", () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  19:30:56
+   Duration  249ms (transform 21ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)
+

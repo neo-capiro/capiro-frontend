@@ -1,0 +1,919 @@
+{
+  "atUTC": "2026-10-13T06:02:58.820871+00:00",
+  "source": "e22cd4c29d3d112486622051a4c1ea2424527221",
+  "rootTree": "116deb53a386cfbe0ecccc1fa0866ea83ea12e13",
+  "appTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "srcTree": "123a4305c770cc679cbe1a45d8062e1ca85821ac",
+  "method": "Read-only Git objects and JSON comparison; no application execution/install/test/build/browser/native calls",
+  "ancestry": {
+    "portfolio": true,
+    "meri_original": true,
+    "modules_original": true,
+    "newsletter": true,
+    "shipping": true,
+    "onboard": true,
+    "meri_actions": true
+  },
+  "declaredTestBindings": 807,
+  "allDeclaredTestBindingsMatch": true,
+  "featureTrees": [
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/portfolio",
+      "tree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "identical": true,
+      "observedSource": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "observedCurrent": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "verified": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/modules",
+      "tree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "identical": true,
+      "observedSource": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "observedCurrent": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "verified": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/settings",
+      "tree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "identical": true,
+      "observedSource": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "observedCurrent": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "verified": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/tests/browser",
+      "tree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "identical": true,
+      "observedSource": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "observedCurrent": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "verified": true
+    },
+    {
+      "lane": "onboard",
+      "path": "apps/web/src/features/onboard",
+      "tree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "identical": true,
+      "observedSource": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "observedCurrent": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "verified": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/features/meri",
+      "tree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "identical": true,
+      "observedSource": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "observedCurrent": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "verified": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/shared/meri-actions",
+      "tree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "identical": true,
+      "observedSource": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "observedCurrent": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "verified": true
+    }
+  ],
+  "independentActiveTestFileBindings": 1185,
+  "nonidenticalTests": [
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "sourceBlob": "0f510e714ed224e2a7b6da945ab37ce362775277",
+      "currentBlob": "70372a53e70af779647d70c60f605160b811bf21",
+      "same": false
+    },
+    {
+      "lane": "shipping",
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "sourceBlob": "0f510e714ed224e2a7b6da945ab37ce362775277",
+      "currentBlob": "70372a53e70af779647d70c60f605160b811bf21",
+      "same": false
+    },
+    {
+      "lane": "shipping",
+      "path": "scripts/architecture.test.mjs",
+      "sourceBlob": "9a4ee2d06c60ce8df56f44b8ccf061e94e708df0",
+      "currentBlob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "same": false
+    },
+    {
+      "lane": "onboard",
+      "path": "scripts/architecture.test.mjs",
+      "sourceBlob": "9a4ee2d06c60ce8df56f44b8ccf061e94e708df0",
+      "currentBlob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "same": false
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "sourceBlob": "0f510e714ed224e2a7b6da945ab37ce362775277",
+      "currentBlob": "70372a53e70af779647d70c60f605160b811bf21",
+      "same": false
+    },
+    {
+      "lane": "meri_actions",
+      "path": "scripts/architecture.test.mjs",
+      "sourceBlob": "9a4ee2d06c60ce8df56f44b8ccf061e94e708df0",
+      "currentBlob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "same": false
+    }
+  ],
+  "testCountsByLane": {
+    "newsletter": 296,
+    "shipping": 285,
+    "onboard": 306,
+    "meri_actions": 298
+  },
+  "lock": {
+    "newsletter": {
+      "beforeCount": 933,
+      "afterCount": 936,
+      "unchanged": 927,
+      "removed": [],
+      "changed": [
+        {
+          "path": "apps/web",
+          "before": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          },
+          "after": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+              "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@stripe/react-stripe-js": "3.10.0",
+              "@stripe/stripe-js": "5.10.0",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          }
+        },
+        {
+          "path": "node_modules/js-tokens",
+          "before": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+            "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+            "dev": true,
+            "license": "MIT"
+          },
+          "after": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+            "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+            "license": "MIT"
+          }
+        },
+        {
+          "path": "node_modules/loose-envify",
+          "before": {
+            "version": "1.4.0",
+            "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+            "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+            "dev": true,
+            "license": "MIT",
+            "dependencies": {
+              "js-tokens": "^3.0.0 || ^4.0.0"
+            },
+            "bin": {
+              "loose-envify": "cli.js"
+            }
+          },
+          "after": {
+            "version": "1.4.0",
+            "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+            "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+            "license": "MIT",
+            "dependencies": {
+              "js-tokens": "^3.0.0 || ^4.0.0"
+            },
+            "bin": {
+              "loose-envify": "cli.js"
+            }
+          }
+        },
+        {
+          "path": "node_modules/object-assign",
+          "before": {
+            "version": "4.1.1",
+            "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+            "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+            "dev": true,
+            "license": "MIT",
+            "engines": {
+              "node": ">=0.10.0"
+            }
+          },
+          "after": {
+            "version": "4.1.1",
+            "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+            "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+            "license": "MIT",
+            "engines": {
+              "node": ">=0.10.0"
+            }
+          }
+        },
+        {
+          "path": "node_modules/prop-types",
+          "before": {
+            "version": "15.8.1",
+            "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+            "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+            "dev": true,
+            "license": "MIT",
+            "dependencies": {
+              "loose-envify": "^1.4.0",
+              "object-assign": "^4.1.1",
+              "react-is": "^16.13.1"
+            }
+          },
+          "after": {
+            "version": "15.8.1",
+            "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+            "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+            "license": "MIT",
+            "dependencies": {
+              "loose-envify": "^1.4.0",
+              "object-assign": "^4.1.1",
+              "react-is": "^16.13.1"
+            }
+          }
+        },
+        {
+          "path": "node_modules/react-is",
+          "before": {
+            "version": "16.13.1",
+            "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+            "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+            "dev": true,
+            "license": "MIT"
+          },
+          "after": {
+            "version": "16.13.1",
+            "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+            "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+            "license": "MIT"
+          }
+        }
+      ],
+      "added": [
+        "apps/web/node_modules/@capiro/meri-contracts",
+        "node_modules/@stripe/react-stripe-js",
+        "node_modules/@stripe/stripe-js"
+      ]
+    },
+    "shipping": {
+      "beforeCount": 930,
+      "afterCount": 936,
+      "unchanged": 924,
+      "removed": [],
+      "changed": [
+        {
+          "path": "apps/web",
+          "before": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          },
+          "after": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+              "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@stripe/react-stripe-js": "3.10.0",
+              "@stripe/stripe-js": "5.10.0",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          }
+        },
+        {
+          "path": "node_modules/js-tokens",
+          "before": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+            "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+            "dev": true,
+            "license": "MIT"
+          },
+          "after": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+            "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+            "license": "MIT"
+          }
+        },
+        {
+          "path": "node_modules/loose-envify",
+          "before": {
+            "version": "1.4.0",
+            "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+            "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+            "dev": true,
+            "license": "MIT",
+            "dependencies": {
+              "js-tokens": "^3.0.0 || ^4.0.0"
+            },
+            "bin": {
+              "loose-envify": "cli.js"
+            }
+          },
+          "after": {
+            "version": "1.4.0",
+            "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+            "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+            "license": "MIT",
+            "dependencies": {
+              "js-tokens": "^3.0.0 || ^4.0.0"
+            },
+            "bin": {
+              "loose-envify": "cli.js"
+            }
+          }
+        },
+        {
+          "path": "node_modules/object-assign",
+          "before": {
+            "version": "4.1.1",
+            "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+            "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+            "dev": true,
+            "license": "MIT",
+            "engines": {
+              "node": ">=0.10.0"
+            }
+          },
+          "after": {
+            "version": "4.1.1",
+            "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+            "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+            "license": "MIT",
+            "engines": {
+              "node": ">=0.10.0"
+            }
+          }
+        },
+        {
+          "path": "node_modules/prop-types",
+          "before": {
+            "version": "15.8.1",
+            "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+            "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+            "dev": true,
+            "license": "MIT",
+            "dependencies": {
+              "loose-envify": "^1.4.0",
+              "object-assign": "^4.1.1",
+              "react-is": "^16.13.1"
+            }
+          },
+          "after": {
+            "version": "15.8.1",
+            "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+            "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+            "license": "MIT",
+            "dependencies": {
+              "loose-envify": "^1.4.0",
+              "object-assign": "^4.1.1",
+              "react-is": "^16.13.1"
+            }
+          }
+        },
+        {
+          "path": "node_modules/react-is",
+          "before": {
+            "version": "16.13.1",
+            "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+            "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+            "dev": true,
+            "license": "MIT"
+          },
+          "after": {
+            "version": "16.13.1",
+            "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+            "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+            "license": "MIT"
+          }
+        }
+      ],
+      "added": [
+        "apps/web/node_modules/@capiro/meri-contracts",
+        "node_modules/@capiro/qualification-newsletter",
+        "node_modules/@capiro/shared",
+        "node_modules/@stripe/react-stripe-js",
+        "node_modules/@stripe/stripe-js",
+        "packages/qualification-newsletter"
+      ]
+    },
+    "onboard": {
+      "beforeCount": 933,
+      "afterCount": 936,
+      "unchanged": 932,
+      "removed": [],
+      "changed": [
+        {
+          "path": "apps/web",
+          "before": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@stripe/react-stripe-js": "3.10.0",
+              "@stripe/stripe-js": "5.10.0",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          },
+          "after": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+              "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@stripe/react-stripe-js": "3.10.0",
+              "@stripe/stripe-js": "5.10.0",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          }
+        }
+      ],
+      "added": [
+        "apps/web/node_modules/@capiro/meri-contracts",
+        "node_modules/@capiro/qualification-newsletter",
+        "packages/qualification-newsletter"
+      ]
+    },
+    "meri_actions": {
+      "beforeCount": 931,
+      "afterCount": 936,
+      "unchanged": 925,
+      "removed": [],
+      "changed": [
+        {
+          "path": "apps/web",
+          "before": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          },
+          "after": {
+            "name": "@capiro/web",
+            "version": "0.1.0",
+            "dependencies": {
+              "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+              "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+              "@capiro/ui": "0.0.0",
+              "@clerk/nextjs": "7.9.14",
+              "@fontsource/newsreader": "5.3.0",
+              "@schedule-x/calendar": "4.9.1",
+              "@schedule-x/calendar-controls": "4.9.1",
+              "@schedule-x/react": "4.1.0",
+              "@schedule-x/theme-default": "4.9.1",
+              "@stripe/react-stripe-js": "3.10.0",
+              "@stripe/stripe-js": "5.10.0",
+              "@tanstack/react-query": "5.104.1",
+              "@tiptap/core": "3.31.4",
+              "@tiptap/extension-image": "3.31.4",
+              "@tiptap/pm": "3.31.4",
+              "@tiptap/react": "3.31.4",
+              "@tiptap/starter-kit": "3.31.4",
+              "@xyflow/react": "12.12.0",
+              "d3-geo": "3.1.1",
+              "dompurify": "3.4.16",
+              "geist": "1.7.2",
+              "lucide-react": "0.577.0",
+              "next": "16.4.0",
+              "radix-ui": "1.7.0",
+              "react": "19.3.0",
+              "react-dom": "19.3.0",
+              "temporal-polyfill": "0.3.2",
+              "zod": "4.6.5"
+            },
+            "devDependencies": {
+              "@playwright/test": "1.61.1",
+              "@types/d3-geo": "3.1.1",
+              "@types/node": "24.10.0",
+              "@types/react": "19.3.0",
+              "@types/react-dom": "19.3.0",
+              "eslint": "9.39.2",
+              "eslint-config-next": "16.4.0",
+              "prettier": "3.8.1",
+              "typescript": "5.9.3",
+              "vite": "8.3.4",
+              "vitest": "4.1.11"
+            },
+            "engines": {
+              "node": ">=24 <25"
+            }
+          }
+        },
+        {
+          "path": "node_modules/js-tokens",
+          "before": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+            "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+            "dev": true,
+            "license": "MIT"
+          },
+          "after": {
+            "version": "4.0.0",
+            "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+            "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+            "license": "MIT"
+          }
+        },
+        {
+          "path": "node_modules/loose-envify",
+          "before": {
+            "version": "1.4.0",
+            "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+            "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+            "dev": true,
+            "license": "MIT",
+            "dependencies": {
+              "js-tokens": "^3.0.0 || ^4.0.0"
+            },
+            "bin": {
+              "loose-envify": "cli.js"
+            }
+          },
+          "after": {
+            "version": "1.4.0",
+            "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz",
+            "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+            "license": "MIT",
+            "dependencies": {
+              "js-tokens": "^3.0.0 || ^4.0.0"
+            },
+            "bin": {
+              "loose-envify": "cli.js"
+            }
+          }
+        },
+        {
+          "path": "node_modules/object-assign",
+          "before": {
+            "version": "4.1.1",
+            "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+            "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+            "dev": true,
+            "license": "MIT",
+            "engines": {
+              "node": ">=0.10.0"
+            }
+          },
+          "after": {
+            "version": "4.1.1",
+            "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+            "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+            "license": "MIT",
+            "engines": {
+              "node": ">=0.10.0"
+            }
+          }
+        },
+        {
+          "path": "node_modules/prop-types",
+          "before": {
+            "version": "15.8.1",
+            "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+            "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+            "dev": true,
+            "license": "MIT",
+            "dependencies": {
+              "loose-envify": "^1.4.0",
+              "object-assign": "^4.1.1",
+              "react-is": "^16.13.1"
+            }
+          },
+          "after": {
+            "version": "15.8.1",
+            "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",
+            "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+            "license": "MIT",
+            "dependencies": {
+              "loose-envify": "^1.4.0",
+              "object-assign": "^4.1.1",
+              "react-is": "^16.13.1"
+            }
+          }
+        },
+        {
+          "path": "node_modules/react-is",
+          "before": {
+            "version": "16.13.1",
+            "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+            "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+            "dev": true,
+            "license": "MIT"
+          },
+          "after": {
+            "version": "16.13.1",
+            "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+            "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+            "license": "MIT"
+          }
+        }
+      ],
+      "added": [
+        "node_modules/@capiro/qualification-newsletter",
+        "node_modules/@capiro/shared",
+        "node_modules/@stripe/react-stripe-js",
+        "node_modules/@stripe/stripe-js",
+        "packages/qualification-newsletter"
+      ]
+    }
+  }
+}

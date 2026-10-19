@@ -1,5 +1,30 @@
 # Capiro 3.1 Portfolio row reconciliation
 
+## Current continuation
+
+The authoritative frontend repository is `neo-capiro/capiro-frontend`, and its
+active Portfolio source is now inside the shared **`apps/web`** application.
+The local continuation checkpoint `75409a9` adds bounded implementation evidence
+to **85 rows in 19 evidence groups**. The ledger's new `canonical_frontend_paths`,
+`continuation_deltas` and `current_continuation` fields describe that work without
+overwriting any historical packet row, authority field or earlier delta.
+
+The disposition is unchanged: **345 unique IDs, 337 open, seven pending packet
+exclusions, one owner exclusion (`CORE-018`), zero accepted complete**. Current
+source and verification, additional frontend work and publication status are in
+[CONTINUATION-2026-10-11.md](../CONTINUATION-2026-10-11.md). The branch is not yet
+published; no new PR, AWS shipment or signed-in acceptance is claimed.
+Documents, Advocacy and Saved submissions are integrated. The final phase
+mapping identified further supported Tracker shared-targeting and personal-alert
+UI work, now assigned to focused owners before the combined release gate.
+
+The report below is the earlier 18:58 checkpoint. Its Meri repository placement
+was later corrected by frontend transfer PR #2 and Meri removal PR #6, both
+merged. Its 728/459 test counts and earlier preview image remain historical
+evidence, not the verification result for the current source.
+
+## Historical reconciliation checkpoint
+
 Updated 2026-10-11T18:58:39Z. The Portfolio frontend is merged in [PR #4](https://github.com/neo-capiro/meri-greenfield/pull/4) at `abb4c72ee5775f64fca78341e067834d604fdc2f`; its isolated preview service is healthy with image `sha256:81e4e6e3662481fed23c3868b15dc6402802297ba18b603104607ae005b0a00c`. Clerk subdomain, traffic DNS and signed-in acceptance are pending. **No row has final acceptance.** The row-level deltas below were recorded on the earlier code checkpoint and are not a new full re-audit.
 
 The [complete 345-row ledger](./Portfolio-345-Row-Reconciliation-2026-10-11.json) preserves each phase-map and implementation-matrix row verbatim and adds a separate continuation delta, evidence scope, and acceptance state. Rows without a delta are the packet snapshot carried forward, not a fresh live re-audit.

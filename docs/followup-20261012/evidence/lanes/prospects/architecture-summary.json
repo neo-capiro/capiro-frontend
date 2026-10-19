@@ -1,0 +1,22 @@
+{
+  "errors": [],
+  "sizeSummary": {
+    "total": 413,
+    "reviewed": 388,
+    "inheritedUnreviewed": 24,
+    "blocking": 1
+  },
+  "blockingFindings": [
+    {
+      "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+      "kind": "function",
+      "symbol": "ProspectFileSession",
+      "line": 73,
+      "nonblank": 240,
+      "fingerprint": "6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true
+    }
+  ]
+}

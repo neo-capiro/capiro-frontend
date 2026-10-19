@@ -1,0 +1,157 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/email-compose.spec.ts tests/browser/mail-rewrite.spec.ts --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/email-compose.spec.ts tests/browser/mail-rewrite.spec.ts --workers=3
+
+[WebServer] (node:174084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 29 tests using 2 workers
+
+(node:174103) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:174104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 tests/browser/mail-rewrite.spec.ts:102:1 › a current verified rewrite preserves the native payload and plain-text review (6.1s)
+  ✓   1 tests/browser/email-compose.spec.ts:196:1 › explicit mailbox B is shown in review and confirmed by its exact sender receipt (7.2s)
+  ✓   3 tests/browser/mail-rewrite.spec.ts:126:1 › an unverified rewrite preserves the original draft (4.5s)
+  ✓   4 tests/browser/email-compose.spec.ts:243:1 › a removed reviewed mailbox is not replaced by another mailbox (6.6s)
+  ✓   5 tests/browser/mail-rewrite.spec.ts:144:1 › editing a pending draft discards the old result without clearing a newer attempt (6.0s)
+  ✓   6 tests/browser/email-compose.spec.ts:266:1 › an unavailable mailbox contract leaves the draft review disabled (4.8s)
+  ✓   7 tests/browser/mail-rewrite.spec.ts:175:1 › editing back to the original text still invalidates its earlier rewrite (5.1s)
+  ✓   8 tests/browser/email-compose.spec.ts:286:1 › overlay clicks respect context gestures and dismiss only the top email review (5.5s)
+  ✓   9 tests/browser/mail-rewrite.spec.ts:196:1 › closing and reopening the composer cannot accept an earlier response (5.8s)
+  ✓  10 tests/browser/email-compose.spec.ts:313:1 › invalidated successful idle identity refuses mail dispatch and retains draft (6.1s)
+  ✓  11 tests/browser/mail-rewrite.spec.ts:220:1 › changing and restoring recipients discards the old source without leaving pending status (6.0s)
+  ✓  12 tests/browser/email-compose.spec.ts:334:1 › invalidated successful idle identity refuses upload prepare dispatch (5.3s)
+  ✓  13 tests/browser/mail-rewrite.spec.ts:246:3 › invalidated mailbox identity discards an in-flight rewrite (5.9s)
+  ✓  14 tests/browser/email-compose.spec.ts:355:1 › contact picker and CC/BCC survive explicit review and send exact receipt (8.8s)
+  ✘  15 tests/browser/mail-rewrite.spec.ts:246:3 › actor mailbox identity discards an in-flight rewrite (5.0s)
+(node:174923) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 tests/browser/email-compose.spec.ts:397:1 › invalid/duplicate copied recipient retains draft and never sends (4.7s)
+  ✓  17 tests/browser/mail-rewrite.spec.ts:276:1 › invalidated idle authority refuses rewrite before dispatch (5.6s)
+  ✓  18 tests/browser/email-compose.spec.ts:411:1 › upload confirmation and scan readiness stay separate before send (4.8s)
+  ✓  19 tests/browser/email-compose.spec.ts:445:1 › confirmation retry reuses storage attempt without another byte upload (3.0s)
+  ✓  20 tests/browser/email-compose.spec.ts:466:1 › oversize file refuses before prepare and draft removal never deletes Files (3.3s)
+  ✓  21 tests/browser/email-compose.spec.ts:486:3 › uncertain or malformed receipt freezes send attempt (503) (3.5s)
+  ✓  22 tests/browser/email-compose.spec.ts:486:3 › uncertain or malformed receipt freezes send attempt (200) (3.4s)
+  ✓  23 tests/browser/email-compose.spec.ts:510:1 › actor change while prepare awaits causes zero storage/confirm/send (2.3s)
+  ✓  24 tests/browser/email-compose.spec.ts:526:1 › unmounted actor lifetime refuses delayed upload dispatch (2.1s)
+  ✓  25 tests/browser/email-compose.spec.ts:541:1 › reply to foreign-client thread refuses before mail send (2.3s)
+  ✓  26 tests/browser/email-compose.spec.ts:555:1 › read-only role cannot upload or send (2.4s)
+  ✓  27 tests/browser/email-compose.spec.ts:564:1 › mobile dark attachment strip fits, keyboard enters picker and removes recipient (2.2s)
+  ✘  28 tests/browser/email-compose.spec.ts:602:1 › prepared seed requires canonical availability and an explicit selected recipient (30.3s)
+(node:175495) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  29 tests/browser/email-compose.spec.ts:648:1 › actor change during send attachment preflight causes zero mail POST (4.3s)
+
+
+  1) tests/browser/email-compose.spec.ts:602:1 › prepared seed requires canonical availability and an explicit selected recipient 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Review email', exact: true })
+        - locator resolved to <button disabled class="button primary">Review email</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        53 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+      632 |     page.getByText("Ready to attach", { exact: true }),
+      633 |   ).toBeVisible();
+    > 634 |   await page.getByRole("button", { name: "Review email", exact: true }).click();
+          |                                                                         ^
+      635 |   await page.getByRole("button", { name: "Send email", exact: true }).click();
+      636 |   await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
+      637 |   expect(state.counts()).toMatchObject({
+        at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:634:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-prepared-see-1d676-explicit-selected-recipient/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/email-compose-prepared-see-1d676-explicit-selected-recipient/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-prepared-see-1d676-explicit-selected-recipient/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/email-compose-prepared-see-1d676-explicit-selected-recipient/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/mail-rewrite.spec.ts:246:3 › actor mailbox identity discards an in-flight rewrite 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/mailbox session changed or is unverified/)
+    Expected: visible
+    Error: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:
+        1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByText('Your mailbox session changed').first()
+        2) <p>Your mailbox session changed or is unverified. Re…</p> aka getByText('Your mailbox session changed').nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/mailbox session changed or is unverified/)
+
+
+      269 |     await expect(
+      270 |       page.getByText(/mailbox session changed or is unverified/),
+    > 271 |     ).toBeVisible();
+          |       ^
+      272 |     expect(state.sends()).toBe(0);
+      273 |   });
+      274 | }
+        at /workspace/capiro-contracts/apps/web/tests/browser/mail-rewrite.spec.ts:271:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/mail-rewrite-actor-mailbox-be644-scards-an-in-flight-rewrite/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/mail-rewrite-actor-mailbox-be644-scards-an-in-flight-rewrite/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/mail-rewrite-actor-mailbox-be644-scards-an-in-flight-rewrite/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/mail-rewrite-actor-mailbox-be644-scards-an-in-flight-rewrite/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/browser/email-compose.spec.ts:602:1 › prepared seed requires canonical availability and an explicit selected recipient 
+    tests/browser/mail-rewrite.spec.ts:246:3 › actor mailbox identity discards an in-flight rewrite 
+  27 passed (1.9m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test tests/browser/email-compose.spec.ts tests/browser/mail-rewrite.spec.ts --workers=3
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

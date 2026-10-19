@@ -1,0 +1,146 @@
+{
+  "source": "e22cd4c29d3d112486622051a4c1ea2424527221",
+  "rootTree": "116deb53a386cfbe0ecccc1fa0866ea83ea12e13",
+  "appTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "srcTree": "123a4305c770cc679cbe1a45d8062e1ca85821ac",
+  "ancestry": {
+    "portfolio": true,
+    "meri_original": true,
+    "modules_original": true,
+    "newsletter": true,
+    "shipping": true,
+    "onboard": true,
+    "meri_actions": true
+  },
+  "declaredTestBindings": 807,
+  "allDeclaredTestBindingsMatch": true,
+  "independentActiveTestFileBindings": 1185,
+  "nonidenticalTests": [
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "sourceBlob": "0f510e714ed224e2a7b6da945ab37ce362775277",
+      "currentBlob": "70372a53e70af779647d70c60f605160b811bf21",
+      "same": false
+    },
+    {
+      "lane": "shipping",
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "sourceBlob": "0f510e714ed224e2a7b6da945ab37ce362775277",
+      "currentBlob": "70372a53e70af779647d70c60f605160b811bf21",
+      "same": false
+    },
+    {
+      "lane": "shipping",
+      "path": "scripts/architecture.test.mjs",
+      "sourceBlob": "9a4ee2d06c60ce8df56f44b8ccf061e94e708df0",
+      "currentBlob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "same": false
+    },
+    {
+      "lane": "onboard",
+      "path": "scripts/architecture.test.mjs",
+      "sourceBlob": "9a4ee2d06c60ce8df56f44b8ccf061e94e708df0",
+      "currentBlob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "same": false
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "sourceBlob": "0f510e714ed224e2a7b6da945ab37ce362775277",
+      "currentBlob": "70372a53e70af779647d70c60f605160b811bf21",
+      "same": false
+    },
+    {
+      "lane": "meri_actions",
+      "path": "scripts/architecture.test.mjs",
+      "sourceBlob": "9a4ee2d06c60ce8df56f44b8ccf061e94e708df0",
+      "currentBlob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "same": false
+    }
+  ],
+  "testCountsByLane": {
+    "newsletter": 296,
+    "shipping": 285,
+    "onboard": 306,
+    "meri_actions": 298
+  }
+}
+{
+  "newsletter": {
+    "beforeCount": 933,
+    "afterCount": 936,
+    "unchanged": 927,
+    "removed": [],
+    "added": [
+      "apps/web/node_modules/@capiro/meri-contracts",
+      "node_modules/@stripe/react-stripe-js",
+      "node_modules/@stripe/stripe-js"
+    ],
+    "changed": [
+      "apps/web",
+      "node_modules/js-tokens",
+      "node_modules/loose-envify",
+      "node_modules/object-assign",
+      "node_modules/prop-types",
+      "node_modules/react-is"
+    ]
+  },
+  "shipping": {
+    "beforeCount": 930,
+    "afterCount": 936,
+    "unchanged": 924,
+    "removed": [],
+    "added": [
+      "apps/web/node_modules/@capiro/meri-contracts",
+      "node_modules/@capiro/qualification-newsletter",
+      "node_modules/@capiro/shared",
+      "node_modules/@stripe/react-stripe-js",
+      "node_modules/@stripe/stripe-js",
+      "packages/qualification-newsletter"
+    ],
+    "changed": [
+      "apps/web",
+      "node_modules/js-tokens",
+      "node_modules/loose-envify",
+      "node_modules/object-assign",
+      "node_modules/prop-types",
+      "node_modules/react-is"
+    ]
+  },
+  "onboard": {
+    "beforeCount": 933,
+    "afterCount": 936,
+    "unchanged": 932,
+    "removed": [],
+    "added": [
+      "apps/web/node_modules/@capiro/meri-contracts",
+      "node_modules/@capiro/qualification-newsletter",
+      "packages/qualification-newsletter"
+    ],
+    "changed": [
+      "apps/web"
+    ]
+  },
+  "meri_actions": {
+    "beforeCount": 931,
+    "afterCount": 936,
+    "unchanged": 925,
+    "removed": [],
+    "added": [
+      "node_modules/@capiro/qualification-newsletter",
+      "node_modules/@capiro/shared",
+      "node_modules/@stripe/react-stripe-js",
+      "node_modules/@stripe/stripe-js",
+      "packages/qualification-newsletter"
+    ],
+    "changed": [
+      "apps/web",
+      "node_modules/js-tokens",
+      "node_modules/loose-envify",
+      "node_modules/object-assign",
+      "node_modules/prop-types",
+      "node_modules/react-is"
+    ]
+  }
+}

@@ -1,0 +1,623 @@
+{
+  "sourceNode": "1064:144075",
+  "method": "Exact current downloads vs adopted files; metadata/root dimensions only, no asset redrawing or path rewriting. Runtime rendered slots still unrun.",
+  "rows": [
+    {
+      "name": "imgIconSparkle",
+      "url": "https://www.figma.com/api/mcp/asset/eec2547a-f22a-4d46-b181-4cd8aedeee0b.svg",
+      "candidateLocal": "apps/web/public/design/home/sparkle.svg",
+      "downloadFile": "imgIconSparkle.svg",
+      "downloaded": {
+        "bytes": 405,
+        "sha256": "4088ab1b463b5a492c28735e5caa45ce7175025d54da8289cb11eeee65680bc8",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 405,
+        "sha256": "4088ab1b463b5a492c28735e5caa45ce7175025d54da8289cb11eeee65680bc8",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgInk",
+      "url": "https://www.figma.com/api/mcp/asset/9b886a8b-41ec-4175-8ae6-e91e627c2433.png",
+      "candidateLocal": "apps/web/public/design/home/meri-wordmark.png",
+      "downloadFile": "imgInk.png",
+      "downloaded": {
+        "bytes": 1583,
+        "sha256": "880d2a37cd998583d9fec14a71ca340691ad3a3f25830c3cc72900d867219007",
+        "rootDimensions": {
+          "width": 124,
+          "height": 40
+        }
+      },
+      "candidate": {
+        "bytes": 23234,
+        "sha256": "1b9fc833853d4d9169e14d0a1746f491b1d9a574816ddef3156c83a24809fe49",
+        "rootDimensions": {
+          "width": 1024,
+          "height": 340
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": false,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgCapiro31ProfilePicture",
+      "url": "https://www.figma.com/api/mcp/asset/24972730-d40f-411f-ad8d-a0b61d7291f2.svg",
+      "candidateLocal": "apps/web/public/design/home/profile.svg",
+      "downloadFile": "imgCapiro31ProfilePicture.svg",
+      "downloaded": {
+        "bytes": 1123,
+        "sha256": "8663641d950df6c8a8eea4b43786383a59744c25cd12721fe5b082b629f12658",
+        "rootDimensions": {
+          "width": "32",
+          "height": "32",
+          "viewBox": "0 0 32 32"
+        }
+      },
+      "candidate": {
+        "bytes": 1123,
+        "sha256": "09423136724e7db2ff055fb452e5277469fa3a4166ca423d324359c9a8f1d2bb",
+        "rootDimensions": {
+          "width": "32",
+          "height": "32",
+          "viewBox": "0 0 32 32"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgCapiroWordmark",
+      "url": "https://www.figma.com/api/mcp/asset/e51a4bf7-8a57-4c17-8b3d-e98c027c6cbb.png",
+      "candidateLocal": "apps/web/public/design/home/wordmark.png",
+      "downloadFile": "imgCapiroWordmark.png",
+      "downloaded": {
+        "bytes": 63914,
+        "sha256": "c9adeac50cbb5350f62945e5afd35b48130ca883833c3ea7be460f0a6bfda095",
+        "rootDimensions": {
+          "width": 1920,
+          "height": 650
+        }
+      },
+      "candidate": {
+        "bytes": 63914,
+        "sha256": "c9adeac50cbb5350f62945e5afd35b48130ca883833c3ea7be460f0a6bfda095",
+        "rootDimensions": {
+          "width": 1920,
+          "height": 650
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon",
+      "url": "https://www.figma.com/api/mcp/asset/0342190b-c220-43b6-ad0b-8f1d96793655.svg",
+      "candidateLocal": "apps/web/public/design/home/mode-meri.svg",
+      "downloadFile": "imgIcon.svg",
+      "downloaded": {
+        "bytes": 397,
+        "sha256": "959bbe668d9bbcfa2444f8102a5902ae6b0f4047a5aea41292d64c12239b0f43",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 397,
+        "sha256": "959bbe668d9bbcfa2444f8102a5902ae6b0f4047a5aea41292d64c12239b0f43",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon1",
+      "url": "https://www.figma.com/api/mcp/asset/983954c8-e9fd-46ea-8515-b044b0081656.svg",
+      "candidateLocal": "apps/web/public/design/home/mode-portfolio.svg",
+      "downloadFile": "imgIcon1.svg",
+      "downloaded": {
+        "bytes": 1191,
+        "sha256": "b7fd54c8acb27b5f9621df8fa8807250e0d42801e71a3b06ed5856bb5e88ad2f",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 1191,
+        "sha256": "b7fd54c8acb27b5f9621df8fa8807250e0d42801e71a3b06ed5856bb5e88ad2f",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon2",
+      "url": "https://www.figma.com/api/mcp/asset/ac704fba-e7e0-4c1e-a4e7-63c681aa7135.svg",
+      "candidateLocal": "apps/web/public/design/home/mode-modules.svg",
+      "downloadFile": "imgIcon2.svg",
+      "downloaded": {
+        "bytes": 1344,
+        "sha256": "35aa4fbad8704bf7901e7557b13b31e8e54056ab031e939c75a6535239da76a2",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 1344,
+        "sha256": "35aa4fbad8704bf7901e7557b13b31e8e54056ab031e939c75a6535239da76a2",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon3",
+      "url": "https://www.figma.com/api/mcp/asset/b88c2108-fa47-4887-931e-1dc1c7ac1ede.svg",
+      "candidateLocal": "apps/web/public/design/home/quick-log.svg",
+      "downloadFile": "imgIcon3.svg",
+      "downloaded": {
+        "bytes": 565,
+        "sha256": "66c540f398751bbe854389f8c6004aa7a8a1298dbe4914d1d16654969f5e06e3",
+        "rootDimensions": {
+          "width": "18",
+          "height": "18",
+          "viewBox": "0 0 18 18"
+        }
+      },
+      "candidate": {
+        "bytes": 565,
+        "sha256": "04ea17884e4e6a4613e5616d13fbe5a95f937e7f39280f4d355da70d1f4ae1f5",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": false,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon4",
+      "url": "https://www.figma.com/api/mcp/asset/aea1455f-b6c8-48ef-986b-f350adfbd805.svg",
+      "candidateLocal": "apps/web/public/design/home/calendar.svg",
+      "downloadFile": "imgIcon4.svg",
+      "downloaded": {
+        "bytes": 604,
+        "sha256": "91f932f234af981e569c892fc53563a4a1aa03e599c6402103af4bc098f30af9",
+        "rootDimensions": {
+          "width": "18",
+          "height": "18",
+          "viewBox": "0 0 18 18"
+        }
+      },
+      "candidate": {
+        "bytes": 649,
+        "sha256": "f8b6197dfe0cfba1ba3d29a0f09c7d6cb80374a9788df8db156f3998b4e5d6b5",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": false,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon5",
+      "url": "https://www.figma.com/api/mcp/asset/f0c924b3-77b6-4985-9f36-54d320a567b3.svg",
+      "candidateLocal": "apps/web/public/design/home/search.svg",
+      "downloadFile": "imgIcon5.svg",
+      "downloaded": {
+        "bytes": 563,
+        "sha256": "7d3879394557c019b4bd6698f52decbf4779333a2b4cae5758300c0e3c1564fe",
+        "rootDimensions": {
+          "width": "18",
+          "height": "18",
+          "viewBox": "0 0 18 18"
+        }
+      },
+      "candidate": {
+        "bytes": 594,
+        "sha256": "c0cb3f5c62901adf14c63b346efcd1278d717fbef9e090d9b0ef4fd72f899f18",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": false,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon6",
+      "url": "https://www.figma.com/api/mcp/asset/fd280fe1-5154-4895-8645-04659a443e1e.svg",
+      "candidateLocal": "apps/web/public/design/home/updates.svg",
+      "downloadFile": "imgIcon6.svg",
+      "downloaded": {
+        "bytes": 760,
+        "sha256": "3e4784382d80efb9b45b8d081a9348287b1ebbe03a15d45239765bf02ad68572",
+        "rootDimensions": {
+          "width": "18",
+          "height": "18",
+          "viewBox": "0 0 18 18"
+        }
+      },
+      "candidate": {
+        "bytes": 837,
+        "sha256": "5abd1ce895aa5b56c1c365a97f5a5b42a515662aeff25a515e2a75bc82f24270",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": false,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIconPlus",
+      "url": "https://www.figma.com/api/mcp/asset/b0c90539-c0cd-4a68-b372-1c575726a4c0.svg",
+      "candidateLocal": "apps/web/public/design/home/plus.svg",
+      "downloadFile": "imgIconPlus.svg",
+      "downloaded": {
+        "bytes": 349,
+        "sha256": "b8bf391350eb51b99a5cb9f234b2cc1ff811372e9e3a5695edf69607817a80f2",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 351,
+        "sha256": "b63e0607615e12d17145b68218483c5ca711dcb87b13f25926a5d06ac43d9a3a",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon7",
+      "url": "https://www.figma.com/api/mcp/asset/ac6a4ff4-b8c3-43a5-b267-0454c1d14ff3.svg",
+      "candidateLocal": "apps/web/public/design/home/search.svg",
+      "downloadFile": "imgIcon7.svg",
+      "downloaded": {
+        "bytes": 594,
+        "sha256": "c0cb3f5c62901adf14c63b346efcd1278d717fbef9e090d9b0ef4fd72f899f18",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 594,
+        "sha256": "c0cb3f5c62901adf14c63b346efcd1278d717fbef9e090d9b0ef4fd72f899f18",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon8",
+      "url": "https://www.figma.com/api/mcp/asset/1ccd0c11-199b-47a3-8a8f-f8d89ddbcbe4.svg",
+      "candidateLocal": "apps/web/public/design/home/conversations.svg",
+      "downloadFile": "imgIcon8.svg",
+      "downloaded": {
+        "bytes": 586,
+        "sha256": "e046fd579f616e445762a9304e65bdb3676965ca80b338529d9f058e825bd278",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 586,
+        "sha256": "e046fd579f616e445762a9304e65bdb3676965ca80b338529d9f058e825bd278",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon9",
+      "url": "https://www.figma.com/api/mcp/asset/587b6302-cfd5-449e-8022-b3ed95cc5677.svg",
+      "candidateLocal": "apps/web/public/design/home/files.svg",
+      "downloadFile": "imgIcon9.svg",
+      "downloaded": {
+        "bytes": 838,
+        "sha256": "2fb5765030f0fe4a68d860b8a41e39eb4ec0bdc749a511fdce4a370acaac82cd",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 838,
+        "sha256": "2fb5765030f0fe4a68d860b8a41e39eb4ec0bdc749a511fdce4a370acaac82cd",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon10",
+      "url": "https://www.figma.com/api/mcp/asset/0d9caa33-76c1-4b91-91f1-f6572ab09292.svg",
+      "candidateLocal": "apps/web/public/design/home/runs.svg",
+      "downloadFile": "imgIcon10.svg",
+      "downloaded": {
+        "bytes": 732,
+        "sha256": "cbacde11d9a8a143d7d4d4bbd460b4b9e26ec65831e14b4810833a9ec79c9cbb",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 732,
+        "sha256": "6c2e7fbb5d3f9d30a30dfaf728cb4ca00c71a2ec658b498b7cc80946435361c0",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon11",
+      "url": "https://www.figma.com/api/mcp/asset/9665c1ef-4bdc-47e7-8f9d-dcc0d4ae7822.svg",
+      "candidateLocal": "apps/web/public/design/home/approvals.svg",
+      "downloadFile": "imgIcon11.svg",
+      "downloaded": {
+        "bytes": 328,
+        "sha256": "10cfaf5cd3569238daf9cd84d400c6785ba7c3567c207267df59aace56d246db",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 328,
+        "sha256": "10cfaf5cd3569238daf9cd84d400c6785ba7c3567c207267df59aace56d246db",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon12",
+      "url": "https://www.figma.com/api/mcp/asset/b307d53e-4208-463a-a87a-92dfc4d53920.svg",
+      "candidateLocal": "apps/web/public/design/home/memory.svg",
+      "downloadFile": "imgIcon12.svg",
+      "downloaded": {
+        "bytes": 708,
+        "sha256": "26ce13ccc841123c9be90f76fde9d2b3b3337563ed9429b8ec5dffd6f04a137e",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 708,
+        "sha256": "26ce13ccc841123c9be90f76fde9d2b3b3337563ed9429b8ec5dffd6f04a137e",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon13",
+      "url": "https://www.figma.com/api/mcp/asset/8e904242-1582-456a-a540-8ce2c5385ca0.svg",
+      "candidateLocal": "apps/web/public/design/home/routines.svg",
+      "downloadFile": "imgIcon13.svg",
+      "downloaded": {
+        "bytes": 560,
+        "sha256": "fa478b9aacaa3ae1ce30caa5bb382abc4173573183217e679212959b39b88081",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 525,
+        "sha256": "96f455607f2078282d76db28fa17dabc3c7028bf2efb159f26b18760791914e1",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": false,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon14",
+      "url": "https://www.figma.com/api/mcp/asset/8c822595-1d43-41fd-a4e0-9c2e44a6363d.svg",
+      "candidateLocal": "apps/web/public/design/home/data-access.svg",
+      "downloadFile": "imgIcon14.svg",
+      "downloaded": {
+        "bytes": 1423,
+        "sha256": "0102956be30d19e9d9a6be2826333db2ed8d50eb3af2a76e45afb7a8ed79b9df",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 1423,
+        "sha256": "0102956be30d19e9d9a6be2826333db2ed8d50eb3af2a76e45afb7a8ed79b9df",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon15",
+      "url": "https://www.figma.com/api/mcp/asset/3f2229f6-a097-4235-9626-38efce4633ae.svg",
+      "candidateLocal": "apps/web/public/design/home/chevron.svg",
+      "downloadFile": "imgIcon15.svg",
+      "downloaded": {
+        "bytes": 312,
+        "sha256": "f8a1302dd8f16333da9dd910088a6ad0c64f87295babb35045c6e1a92794c9b5",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 312,
+        "sha256": "f8a1302dd8f16333da9dd910088a6ad0c64f87295babb35045c6e1a92794c9b5",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIconPlus1",
+      "url": "https://www.figma.com/api/mcp/asset/aa5ee2c2-69d6-4a46-8eb2-9621a4ff3583.svg",
+      "candidateLocal": "apps/web/public/design/home/plus.svg",
+      "downloadFile": "imgIconPlus1.svg",
+      "downloaded": {
+        "bytes": 351,
+        "sha256": "b63e0607615e12d17145b68218483c5ca711dcb87b13f25926a5d06ac43d9a3a",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 351,
+        "sha256": "b63e0607615e12d17145b68218483c5ca711dcb87b13f25926a5d06ac43d9a3a",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    },
+    {
+      "name": "imgIcon16",
+      "url": "https://www.figma.com/api/mcp/asset/9c44c7dd-5872-41c3-babc-7f71eaaf0daa.svg",
+      "candidateLocal": "apps/web/public/design/home/send.svg",
+      "downloadFile": "imgIcon16.svg",
+      "downloaded": {
+        "bytes": 395,
+        "sha256": "e6c26574b421e2bf540fbd6db7316f51c459a54b65f42c00efe50246ae5bfd3f",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "candidate": {
+        "bytes": 395,
+        "sha256": "e6c26574b421e2bf540fbd6db7316f51c459a54b65f42c00efe50246ae5bfd3f",
+        "rootDimensions": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        }
+      },
+      "byteEqual": true,
+      "rootEqual": true,
+      "renderedGeometryChecked": false
+    }
+  ]
+}

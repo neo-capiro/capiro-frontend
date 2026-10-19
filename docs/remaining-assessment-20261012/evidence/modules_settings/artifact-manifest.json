@@ -1,0 +1,424 @@
+{
+  "files": [
+    {
+      "path": "assessment-metadata.json",
+      "sha256": "00655ad1d6aa25cdc5048b2508d980e6e8f47b423721bfdc3bedcd0e09af4d56",
+      "size": 483
+    },
+    {
+      "path": "assessment.spec.ts",
+      "sha256": "6475c8fcffd83068056cef8adcfa5ca7d6146016ac972f79793cda4bfbb67d2f",
+      "size": 10008
+    },
+    {
+      "path": "assigned-rows.json",
+      "sha256": "59b4de0df9af6afe6a3b5f54168280bb3461550621d221ab3123a83bfb53d9e9",
+      "size": 72909
+    },
+    {
+      "path": "backend-pin-billing.controller.ts",
+      "sha256": "4ea9ec86acf7de2ccf98a8cbf1831c5d270ad0af76d8013fa7536dfda99c8874",
+      "size": 2285
+    },
+    {
+      "path": "backend-pin-billing.service.ts",
+      "sha256": "5ce1534d7cc803321a11375b1a97291ff9d8ce84ae40d49dcc060292cde0297f",
+      "size": 12788
+    },
+    {
+      "path": "billing-active-add-profiles.png",
+      "sha256": "336d01a1084e5bbf9f96517734699404b106d2d7f70941ba75a631b7223e22bf",
+      "size": 116829
+    },
+    {
+      "path": "browser-engagement-desktop.png",
+      "sha256": "238f8e37e4019d22507815808d188e8c4268c543930b96ce7c6185b8c4b50105",
+      "size": 76726
+    },
+    {
+      "path": "browser-engagement-geometry.json",
+      "sha256": "9e228ce76e434cebda84503c8db4f970a8b86811fa9e9d29833da4c0a9311e9c",
+      "size": 1484
+    },
+    {
+      "path": "browser-engagement-phone.png",
+      "sha256": "f891457280299b464f459743ff4690a812df5f9e7039880707ff8c0167dae570",
+      "size": 47909
+    },
+    {
+      "path": "browser-engagement-text.txt",
+      "sha256": "fad3b5285ef3e6f32b9672acdbfe888524fffd4b529fda57fabef3bbe6a16979",
+      "size": 602
+    },
+    {
+      "path": "browser-form-error-desktop.png",
+      "sha256": "e6554047b1c19dea6f7c4abc43c4da3f7ede4e9228b61d48e65464525f6f6e09",
+      "size": 37811
+    },
+    {
+      "path": "browser-form-receipt-desktop.png",
+      "sha256": "6c33067b406c8a55d716e9a37b9923ec756d04a9a421b960c8c0202d3d6ab655",
+      "size": 26791
+    },
+    {
+      "path": "browser-hub-desktop.png",
+      "sha256": "838f08746fd63d5fa9ba799fc088cc22d01b181d45dbd3bba2ec8e8c0727ae99",
+      "size": 145397
+    },
+    {
+      "path": "browser-hub-geometry.json",
+      "sha256": "185623a47dd2d79d49eae3bde558aa755f4ec930a251d71a625787cc53bfda86",
+      "size": 56
+    },
+    {
+      "path": "browser-hub-phone.png",
+      "sha256": "0eb3d7e23c654a3366e9b04f53bd00dd4dbd61976e6647a6559d1bcf8c132091",
+      "size": 150313
+    },
+    {
+      "path": "browser-hub-text.txt",
+      "sha256": "4b33ccfdd78bb856f6c375c08ca01c098c0f391b3c9c0c02415fd8688f0415ae",
+      "size": 1754
+    },
+    {
+      "path": "browser-planner-desktop.png",
+      "sha256": "0bda595873a2b496adb6ee1d89b660105efdbc5e246891992fb9818eba2fc940",
+      "size": 84557
+    },
+    {
+      "path": "browser-planner-geometry.json",
+      "sha256": "bc9e3d57bcba4e4124030a18967d68f089b2b6a40dd4c4ccab0621ff00140397",
+      "size": 5873
+    },
+    {
+      "path": "browser-planner-phone.png",
+      "sha256": "0085f3fee9ced92121899b5a24c8c474f198044b4fac658ab5981493af534082",
+      "size": 50711
+    },
+    {
+      "path": "browser-planner-text.txt",
+      "sha256": "ba58add5f73dfaa57f8814412ec1e055a18ba04b0c059574cdfe9c1b7ed4a540",
+      "size": 752
+    },
+    {
+      "path": "browser-results.json",
+      "sha256": "c6b0994d7e10db071870da753f9195cd2e24f44680d621677e7aef715ecedb30",
+      "size": 14440
+    },
+    {
+      "path": "browser-settings-desktop.png",
+      "sha256": "ecce59cca77eadbe495dfbdafd3075913a7d22b9d02be3be52d5fbdc69cf0b7d",
+      "size": 139255
+    },
+    {
+      "path": "browser-settings-geometry.json",
+      "sha256": "185623a47dd2d79d49eae3bde558aa755f4ec930a251d71a625787cc53bfda86",
+      "size": 56
+    },
+    {
+      "path": "browser-settings-phone.png",
+      "sha256": "af57f62dba340aafb66cd254583da8ba9b2b350eaadf791f7866f2c0693cab09",
+      "size": 113702
+    },
+    {
+      "path": "browser-settings-text.txt",
+      "sha256": "5224d9185e0590c9596d94c2b8667dca7a044978ba4b922368746b15ca167e65",
+      "size": 1522
+    },
+    {
+      "path": "browser-strategies-desktop.png",
+      "sha256": "d706ac6767f61541fd0e6a584e04e9769218ecd83030aae5fb3149d1dec529a2",
+      "size": 91891
+    },
+    {
+      "path": "browser-strategies-geometry.json",
+      "sha256": "185623a47dd2d79d49eae3bde558aa755f4ec930a251d71a625787cc53bfda86",
+      "size": 56
+    },
+    {
+      "path": "browser-strategies-phone.png",
+      "sha256": "e50d3e6a2bfc5ba28b37b155b78afdd56a14922d31071e764f7bfe0b3ef90816",
+      "size": 64178
+    },
+    {
+      "path": "browser-strategies-text.txt",
+      "sha256": "c20aff6cddaf68a1ad92c548d916dc434e619aba48e8e35a2c773618f6880fde",
+      "size": 678
+    },
+    {
+      "path": "browser-workspace-desktop.png",
+      "sha256": "92ae1baeb8d61290ef1d1359e8c9a78357e03a4fd69119c8b96ab79cbdb6b31c",
+      "size": 95951
+    },
+    {
+      "path": "browser-workspace-geometry.json",
+      "sha256": "2a4872d0b4682654915f7aacc76e0b72249c3ca221031eb75d33f4a17514efc6",
+      "size": 2530
+    },
+    {
+      "path": "browser-workspace-phone.png",
+      "sha256": "3e3e6c877ebdf10d478104935b0ae9ce156eb3bd07b2bee7e2899863c35df784",
+      "size": 74638
+    },
+    {
+      "path": "browser-workspace-text.txt",
+      "sha256": "4c4f8d32f8243ecef85b278de6090f4b3286cceed35db6b1c415c4b7e1071ac6",
+      "size": 890
+    },
+    {
+      "path": "calendar-independent-feed-repro.png",
+      "sha256": "51abcfd4130fd2248a955c643c0f6a8077648193591e2b7698009be2f6f8e2be",
+      "size": 99248
+    },
+    {
+      "path": "calendar-scope-repro.json",
+      "sha256": "304fc7f9a6f1a40d5a3ba5925dea0a928fd53f0582dd703d62dbbd397b762e35",
+      "size": 105
+    },
+    {
+      "path": "calendar-scope-repro.png",
+      "sha256": "6357a5eef92291d0a6138ca05fbdd3b34c361232c7cf72912222a24b035dc8cd",
+      "size": 80959
+    },
+    {
+      "path": "calendar-task-occurrence-repro.png",
+      "sha256": "921a4585a4d220571433fb99960ed1623c66bd236842e809688e25cfc43e3af6",
+      "size": 97424
+    },
+    {
+      "path": "calendar-task-target-repro.png",
+      "sha256": "ea326b365b274a80134e821a10852b58b31c4c2967f9b6344f1ff3db334f21d7",
+      "size": 85988
+    },
+    {
+      "path": "canonical-agenda-feed-failure.png",
+      "sha256": "8217f7d32714b516fb108012e3c140dc75a46e4792d251dd045c7db137565074",
+      "size": 131301
+    },
+    {
+      "path": "canonical-calendar-client-retained.png",
+      "sha256": "ad5e6b4f5eef468028341e32db4b6e9ef8e7d6d9da26c3be282a246149405d60",
+      "size": 59637
+    },
+    {
+      "path": "canonical-results.json",
+      "sha256": "b08e9a0eaceb141b410409926771ee0998f374b3eff21af58f864e0b7091fc4e",
+      "size": 4256
+    },
+    {
+      "path": "canonical.config.ts",
+      "sha256": "d2bfe1f8f4f103ff3f25466dce0d52c2afd61a51bab36f20378e19055cc30820",
+      "size": 641
+    },
+    {
+      "path": "canonical.spec.ts",
+      "sha256": "e529b7a8ab29918d8c25e61c1dafc134cf2a44eebabf1d8de36f02f28c43502d",
+      "size": 2030
+    },
+    {
+      "path": "engagement-meeting-repro.png",
+      "sha256": "f9ba026401d4e9e14a83bb2e688c9ccfaafdf97a44695324df3387ec355fee54",
+      "size": 92405
+    },
+    {
+      "path": "figma-billing-context.json",
+      "sha256": "936a6e2a5a47f185fe1634fcbd487bba75535a94209aada9406ca1dff76bc4ac",
+      "size": 133159
+    },
+    {
+      "path": "figma-billing.png",
+      "sha256": "b637a799f982a9bcf72e2aff4c689337746c8c726dbb2e4b42ed38704656d341",
+      "size": 70650
+    },
+    {
+      "path": "figma-calendar-agenda-context.json",
+      "sha256": "41453b12501ac73b4234a2ab6f68b392764374281ecce3c98a3b7aa0e82b7ad6",
+      "size": 222063
+    },
+    {
+      "path": "figma-calendar-agenda.png",
+      "sha256": "aa79a7e885ab1bd7eac491ac86168205a6fe20e2f9770851c8cdbd00b30be2c4",
+      "size": 91196
+    },
+    {
+      "path": "figma-engagement-context.json",
+      "sha256": "778a86ee0841a544c0bf624aaeca00a58bbcf8ded9df4d082c52a3f086b88d60",
+      "size": 226442
+    },
+    {
+      "path": "figma-engagement-context.tsx.txt",
+      "sha256": "90e689c35dacc8c163f367051a7515d32738a6808bb4b371d8797c509a69d67c",
+      "size": 64095
+    },
+    {
+      "path": "figma-engagement.png",
+      "sha256": "984837edb3e6858f36dfc7e4433115a49c81309573ffb34a7e3abb73e7e01735",
+      "size": 115687
+    },
+    {
+      "path": "figma-form-context.json",
+      "sha256": "142e145060cd2f7226c581cb7672bea242c19d51bbe34431deaf8b2e13a2673f",
+      "size": 45667
+    },
+    {
+      "path": "figma-form.png",
+      "sha256": "0732f5b691abbadb1344f3a5b4a32010df424676f85014b83b9375f8138eab0d",
+      "size": 27963
+    },
+    {
+      "path": "figma-hub-context.json",
+      "sha256": "6e9618f907f14c306d0df81eb14f5cee3ba16c6a6178b61c7a9424362f14065c",
+      "size": 242649
+    },
+    {
+      "path": "figma-hub-context.tsx.txt",
+      "sha256": "a9a6924054ec223812a6cf5289994839939c95406feb6dfdb75fc3e8ac6bedd5",
+      "size": 71281
+    },
+    {
+      "path": "figma-hub.png",
+      "sha256": "74a1221e8dff8793a0de31ed4906da2a230e1d2dce51a0e31850dfb662f8ff12",
+      "size": 122484
+    },
+    {
+      "path": "figma-planner-context.json",
+      "sha256": "6b8d9f8619ab8c963af0b80adb3227322d8ea3481a44232cf4bb4bdf6182f3f9",
+      "size": 201952
+    },
+    {
+      "path": "figma-planner-context.tsx.txt",
+      "sha256": "58d951d86882dcb0ffa075a1f79e0047283a0457028de4f67614749920818d32",
+      "size": 72854
+    },
+    {
+      "path": "figma-planner.png",
+      "sha256": "c73cf124884d4489e52a505d8e32726d59359d5119a8a165d6f409dba4a556ca",
+      "size": 91352
+    },
+    {
+      "path": "figma-settings-context.json",
+      "sha256": "bb3c6148beb7889a37eb612289772faf19743c20dea2d09ef7d676db7e81878c",
+      "size": 140956
+    },
+    {
+      "path": "figma-settings-context.tsx.txt",
+      "sha256": "60ce9478945ebc5ec460345d7c1441ae6d9a67f99b1c4456bd859f18fbf4e3d2",
+      "size": 40066
+    },
+    {
+      "path": "figma-settings.png",
+      "sha256": "611b2bfab0057c986462151e6ca1e4db7a16fc96b8ed69b6a42bb892bca35e48",
+      "size": 71192
+    },
+    {
+      "path": "figma-strategies-context.json",
+      "sha256": "7070b3461aa57aff889aad49e4acbf4e65073bf01bb017813aa79a9ad8f5733b",
+      "size": 166362
+    },
+    {
+      "path": "figma-strategies-context.tsx.txt",
+      "sha256": "f3ef58e97f903532da7d539fb9eafc2d375002fb4c234e4acb11ae91523ca3e5",
+      "size": 52582
+    },
+    {
+      "path": "figma-strategies.png",
+      "sha256": "ce655daa81b868a58c2447649e5662c72356900f1de47c17f18fd1bbeee583bf",
+      "size": 79921
+    },
+    {
+      "path": "figma-workspace-context.json",
+      "sha256": "487be4af9951525dd3a428a67a62b10e4a42c5f181905d28916b52a7944afa76",
+      "size": 191477
+    },
+    {
+      "path": "figma-workspace-context.tsx.txt",
+      "sha256": "c64ee609c99637066e643e95c3953091fc22d1c351c44fbcca04a287f2c1c379",
+      "size": 66134
+    },
+    {
+      "path": "figma-workspace.png",
+      "sha256": "e7608095db75e5d0fd2c55ba2f1795a83ed9c7246053d397d7fd1379240bd8fc",
+      "size": 88048
+    },
+    {
+      "path": "findings.json",
+      "sha256": "d2b59932275db9d626b81fe4d3bbfab99297e69ea02fbd92dfe6fe8f7b2fb485",
+      "size": 15031
+    },
+    {
+      "path": "ledger-source-rows.json",
+      "sha256": "961bcc437a53863318d4571f4d35959c46e3bdf576b6c48acd62bd78cdd81d64",
+      "size": 69885
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "59816c054b13735580d86c35b4d1ce5c20c6fb4f3080bb84dfc3ea3fcefec671",
+      "size": 679
+    },
+    {
+      "path": "report.md",
+      "sha256": "38d4a31695d9f050925636ef55da8e3ef50233636dd9ce989db933c3138a8ee6",
+      "size": 5440
+    },
+    {
+      "path": "row-assessment.json",
+      "sha256": "9a03c487274e2b16af3996eb3c7634f4b2a7cd8f6a0fdcc9f26aa2490025f781",
+      "size": 25148
+    },
+    {
+      "path": "screen-assessment.json",
+      "sha256": "25d1522bf5ee142923d90cea47ec0a53d3a685234157f3e9fc15c7f0ab03c956",
+      "size": 196752
+    },
+    {
+      "path": "secondary-backend-artifact-contracts.txt",
+      "sha256": "5c98d8abe56b68e4d10cab7bd0bb7db959c6c61c23aad1059ed7a8607c761979",
+      "size": 5484
+    },
+    {
+      "path": "secondary-backend-artifact-sharing.txt",
+      "sha256": "ef6548ea37b48e46a28d57e38b7a613d08e809667c924b589d51d6d20e9775f0",
+      "size": 5394
+    },
+    {
+      "path": "secondary-backend-createMeetingNote.txt",
+      "sha256": "5dc4c56e32505c0070307d66f43f37bd8d888275851de869112641ab5fd1ff65",
+      "size": 4597
+    },
+    {
+      "path": "secondary-backend-deleteAttachmentGuarded.txt",
+      "sha256": "1b3becd01f45463e012f0c38777ab8e5c2d21b5aed3536232d8d08d678d57e22",
+      "size": 9301
+    },
+    {
+      "path": "secondary-backend-move.txt",
+      "sha256": "187b8ea4bdc79a0be924089453e5c1ff1dd1ef60ae8f8049851dd7065499beca",
+      "size": 4428
+    },
+    {
+      "path": "secondary-backend-setAccess.txt",
+      "sha256": "02894165514105d26a2f0350ac706d4c5e0b69c1ca0a8f548c45860a96949e05",
+      "size": 4278
+    },
+    {
+      "path": "secondary-backend-updateMeeting.txt",
+      "sha256": "9c7d87e88793090ec7be2ff1b542f381b9c4caab7b985c919733b564daba6aa8",
+      "size": 5199
+    },
+    {
+      "path": "secondary-review.json",
+      "sha256": "91667a4e9f324a055b2ee3d938ccadba6e1b5fa8af2f716dee0776e4a3b60bfb",
+      "size": 9907
+    },
+    {
+      "path": "secondary-update.py",
+      "sha256": "ede1889294dc7f733e26555b57f16b4da59c0d2efd1fc68defbe7f5b03eaf4e1",
+      "size": 14823
+    },
+    {
+      "path": "write-report.py",
+      "sha256": "3428d8ae74a088470f4665ffa565896ee6383cc4fe0805ee7833aba7c057f4e3",
+      "size": 24953
+    }
+  ]
+}

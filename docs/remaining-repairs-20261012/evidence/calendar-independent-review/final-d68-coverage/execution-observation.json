@@ -1,0 +1,49 @@
+{
+  "capturedAt": "2026-10-12T21:58:38.832072+00:00",
+  "sourceCommit": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "readOnlyAudit": true,
+  "newExecution": false,
+  "records": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/combined-check-exit.json",
+      "sha256": "8714858d2107274ab363adabc14a07c3decf49cc1781374025d5417f899b93a8",
+      "exitCode": 0,
+      "scope": null,
+      "sourceUnchanged": true,
+      "endUTC": "2026-10-12T21:51:53.549014+00:00",
+      "state": "completed receipt observed"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-server-exit.json",
+      "sha256": "e3ea2191eed73cb8016170881624cf519f546960995b1d259c83a51216aefc80",
+      "exitCode": 0,
+      "scope": null,
+      "sourceUnchanged": true,
+      "endUTC": "2026-10-12T21:52:21.668580+00:00",
+      "state": "completed receipt observed"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-smoke.json",
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+      "exitCode": null,
+      "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+      "sourceUnchanged": null,
+      "endUTC": null,
+      "state": "completed receipt observed"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-exit.json",
+      "sha256": "b229874ed95bea97571408484d854a844b05599ea629b24a934927a56f82366a",
+      "exitCode": 1,
+      "scope": null,
+      "sourceUnchanged": true,
+      "endUTC": "2026-10-12T21:58:15.579423+00:00",
+      "state": "completed receipt observed"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/portfolio-meri-browser-exit.json",
+      "state": "no completed exit receipt at audit cutoff"
+    }
+  ],
+  "portfolioStatus": "NOT_RUN \u2014 parent confirmation: not started, paused pending Modules failure diagnosis"
+}

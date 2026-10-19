@@ -1,0 +1,20 @@
+{
+  "schema": "capiro-independent-contract-review/1",
+  "disposition": "PASS_BOUNDED_PUBLIC_RECEIVING_DEPENDENCY",
+  "sourceDefectsFound": [],
+  "frontendImplementationAccepted": false,
+  "nativeAcceptance": false,
+  "historicalTestCorrectionPreserved": true,
+  "receivingBlockerClosed": true,
+  "artifactSha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+  "frontendComparisonSource": "7c87678730538958ace9762f824dc3e588bf445b",
+  "producerSource": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+  "producerPublication": "9ffab390ef444d7ea0bf4eb0d68224f810245e25",
+  "review": "REVIEW.md",
+  "remaining": [
+    "Exact frontend adapter qualification",
+    "Native current-route/schema/grant qualification",
+    "Explicit invitation-affecting read intent",
+    "Rich UI and full delivery qualification"
+  ]
+}

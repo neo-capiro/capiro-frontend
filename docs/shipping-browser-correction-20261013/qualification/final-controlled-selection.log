@@ -1,0 +1,21 @@
+[WebServer] (node:1042740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+Error: Cannot find module '@playwright/test'
+Require stack:
+- /tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts
+- /tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/specs/mail-rich-compose.spec.ts
+- /workspace/capiro-shipping-browser-20261013/node_modules/playwright/lib/common/index.js
+- /workspace/capiro-shipping-browser-20261013/node_modules/playwright/lib/program.js
+- /workspace/capiro-shipping-browser-20261013/node_modules/@playwright/test/cli.js
+
+   at ../diagnostics.ts:1
+
+> 1 | import { test } from "@playwright/test";
+    | ^
+  2 |
+  3 | test.beforeEach(async ({ page }) => {
+  4 |   const session = await page.context().newCDPSession(page);
+    at Object.<anonymous> (/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts:1:1)
+    at Object.<anonymous> (/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/specs/mail-rich-compose.spec.ts:1:1)
+Error: No tests found
+

@@ -1,0 +1,152 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-newsletter-port/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/config.mts"
+    ],
+    "configFile": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/config.mts",
+    "rootDir": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic",
+        "testIgnore": [],
+        "testMatch": [
+          "mobile.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node /tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/serve.mjs",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "mobile rich editor paints editable controls, structure and preview when scrolled after viewport replacement",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30103,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/mobile.spec.ts",
+                        "column": 66,
+                        "line": 28
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Rich preview', exact: true })\u001b[22m\n\n\n  26 |  await plain.scrollIntoViewIfNeeded(); await expect(plain).toContainText('Synthetic local heading');\n  27 |  await page.screenshot({path:info.outputPath('mobile-plain-preview-viewport.png')});\n> 28 |  await page.getByRole('button',{name:'Rich preview',exact:true}).click();\n     |                                                                  ^\n  29 |  const iframe=page.locator('iframe[title=\"Rich newsletter preview\"]');await iframe.scrollIntoViewIfNeeded();\n  30 |  await expect(page.frameLocator('iframe[title=\"Rich newsletter preview\"]').getByRole('heading',{name:'Synthetic local heading'})).toBeVisible();\n  31 |  await page.screenshot({path:info.outputPath('mobile-html-preview-viewport.png')});\n    at /tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/mobile.spec.ts:28:66"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T04:51:21.834Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/artifacts/mobile-mobile-rich-editor--d0a9b--after-viewport-replacement/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-newsletter-final-c8aa693e-20261013/mobile-visual-diagnostic/artifacts/mobile-mobile-rich-editor--d0a9b--after-viewport-replacement/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-df52f3914a4a2bf267b9",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T04:51:20.998Z",
+    "duration": 31403.355,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,22 @@
+--- verify-additions.mjs
++++ verify-additions-v2.mjs
+@@ -6,9 +6,9 @@
+ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+ import { join } from 'node:path';
+ const root='/workspace/capiro-onboard-port-20261013';
+-const output='/tmp/capiro-unified-final-93b3617f-20261013/actual-additions';
++const output='/tmp/capiro-unified-final-93b3617f-20261013/actual-additions-v2';
+ const {chromium}=createRequire(join(root,'package.json'))('@playwright/test');
+-const origin='http://127.0.0.1:5188';
++const origin='http://localhost:5188';
+ await mkdir(output,{recursive:false});
+ const env={...process.env,NODE_ENV:'production',PORT:'5188',HOSTNAME:'127.0.0.1',NEXT_TELEMETRY_DISABLED:'1',CAPIRO_DEFAULT_PRODUCT:''};
+ for(const name of ['NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY','CLERK_SECRET_KEY','TRACKER_BACKEND','CORE_API_BASE_URL','STRATEGY_API_BASE_URL','WORKSPACE_API_BASE_URL','INTELLIGENCE_API_BASE_URL','ONBOARD_API_BASE_URL','MERI_API_BASE_URL','MERI_ACTION_WORKFLOW_ENABLED','CAPIRO_EXISTING_APP_URL','CAPIRO_MERI_URL','CAPIRO_MODULES_URL','CAPIRO_WORKSPACE_URL']) env[name]='';
+@@ -27,6 +27,7 @@
+  for(const operation of ['session','query','draft','prepare','execute','approve']){
+   const path='/api/action-followthrough/'+operation;const response=await fetch(origin+path,{method:'POST',headers:{origin,'content-type':'application/json'},body:'{}',redirect:'error',signal:AbortSignal.timeout(10000)});assert.equal(response.status,operation==='approve'?404:503,path);assert.equal(response.headers.get('cache-control'),'no-store');assert.deepEqual(await response.json(),{error:{code:'FRONTEND_ACTION_UNAVAILABLE'}});results.http.push({path,status:response.status,noRemoteDisposition:true});
+  }
++ for(const foreignOrigin of ['http://127.0.0.1:5188','https://foreign.example.test']){const response=await fetch(origin+'/api/action-followthrough/session',{method:'POST',headers:{origin:foreignOrigin,'content-type':'application/json'},body:'{}',redirect:'error',signal:AbortSignal.timeout(10000)});assert.equal(response.status,400);results.http.push({path:'/api/action-followthrough/session',foreignOrigin,status:response.status,rejectedOrigin:true});}
+  async function visit(directory){for(const entry of await readdir(directory,{withFileTypes:true})){const file=join(directory,entry.name);if(entry.isDirectory())await visit(file);else{const bytes=await readFile(file);const path=file.slice(join(root,'apps/web/public').length);const response=await fetch(origin+path,{headers:{'Accept-Encoding':'identity'},signal:AbortSignal.timeout(10000)});const served=Buffer.from(await response.arrayBuffer());assert.equal(response.status,200,path);assert.deepEqual(served,bytes,path);results.assets.push({path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')})}}}
+  await visit(join(root,'apps/web/public/onboard'));assert.equal(results.assets.length,6);assert.equal(results.assets.reduce((s,x)=>s+x.bytes,0),458104);
+  browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--disable-dev-shm-usage']});results.browserVersion=browser.version();

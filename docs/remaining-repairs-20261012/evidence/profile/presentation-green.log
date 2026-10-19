@@ -1,0 +1,319 @@
+
+Running 8 tests using 1 worker
+
+(node:754842) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/profile-presentation.spec.ts:71:7 › facilities manager shows saved cards and inline editable fields at 1440px (30.6s)
+(node:755194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/profile-presentation.spec.ts:123:7 › timeline groups dates and expands the existing filtered feed at 1440px (7.4s)
+(node:755378) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/profile-presentation.spec.ts:212:7 › Files source chips and folder cards retain native provenance at 1440px (7.8s)
+(node:755688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 apps/web/tests/browser/profile-presentation.spec.ts:71:7 › facilities manager shows saved cards and inline editable fields at 360px (30.2s)
+(node:755874) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 apps/web/tests/browser/profile-presentation.spec.ts:123:7 › timeline groups dates and expands the existing filtered feed at 360px (7.3s)
+(node:756048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 apps/web/tests/browser/profile-presentation.spec.ts:212:7 › Files source chips and folder cards retain native provenance at 360px (7.6s)
+(node:756181) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  7 apps/web/tests/browser/profile-presentation.spec.ts:271:5 › facilities manager saves inline edits through the existing receipt contract (3.1s)
+(node:756331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  8 apps/web/tests/browser/profile-presentation.spec.ts:303:5 › facilities manager preserves the unknown create fence across close and reopen (3.4s)
+
+
+  1) apps/web/tests/browser/profile-presentation.spec.ts:71:7 › facilities manager shows saved cards and inline editable fields at 1440px 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.boundingBox: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByLabel('State / territory', { exact: true })
+
+
+      91 |     const state = await dialog
+      92 |       .getByLabel("State / territory", { exact: true })
+    > 93 |       .boundingBox();
+         |        ^
+      94 |     const zip = await dialog
+      95 |       .getByLabel("ZIP code", { exact: true })
+      96 |       .boundingBox();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:93:8
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-36852-e-editable-fields-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-36852-e-editable-fields-at-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-36852-e-editable-fields-at-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-36852-e-editable-fields-at-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/profile-presentation.spec.ts:123:7 › timeline groups dates and expands the existing filtered feed at 1440px 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })
+
+
+      134 |     await expect(
+      135 |       timeline.getByRole("heading", { name: "Today", exact: true }),
+    > 136 |     ).toBeVisible();
+          |       ^
+      137 |     await expect(
+      138 |       timeline.getByRole("heading", { name: "Yesterday", exact: true }),
+      139 |     ).toBeVisible();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:136:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/profile-presentation.spec.ts:212:7 › Files source chips and folder cards retain native provenance at 1440px 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('cell', { name: 'pdf Report.pdf', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('cell', { name: 'pdf Report.pdf', exact: true })
+
+
+      223 |     await expect(
+      224 |       page.getByRole("cell", { name: "pdf Report.pdf", exact: true }),
+    > 225 |     ).toBeVisible();
+          |       ^
+      226 |     await expect(
+      227 |       page.getByRole("cell", { name: "txt Capability.txt", exact: true }),
+      228 |     ).not.toBeVisible();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:225:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/tests/browser/profile-presentation.spec.ts:71:7 › facilities manager shows saved cards and inline editable fields at 360px 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.boundingBox: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByLabel('State / territory', { exact: true })
+
+
+      91 |     const state = await dialog
+      92 |       .getByLabel("State / territory", { exact: true })
+    > 93 |       .boundingBox();
+         |        ^
+      94 |     const zip = await dialog
+      95 |       .getByLabel("ZIP code", { exact: true })
+      96 |       .boundingBox();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:93:8
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) apps/web/tests/browser/profile-presentation.spec.ts:123:7 › timeline groups dates and expands the existing filtered feed at 360px 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })
+
+
+      134 |     await expect(
+      135 |       timeline.getByRole("heading", { name: "Today", exact: true }),
+    > 136 |     ).toBeVisible();
+          |       ^
+      137 |     await expect(
+      138 |       timeline.getByRole("heading", { name: "Yesterday", exact: true }),
+      139 |     ).toBeVisible();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:136:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) apps/web/tests/browser/profile-presentation.spec.ts:212:7 › Files source chips and folder cards retain native provenance at 360px 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('cell', { name: 'pdf Report.pdf', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('cell', { name: 'pdf Report.pdf', exact: true })
+
+
+      223 |     await expect(
+      224 |       page.getByRole("cell", { name: "pdf Report.pdf", exact: true }),
+    > 225 |     ).toBeVisible();
+          |       ^
+      226 |     await expect(
+      227 |       page.getByRole("cell", { name: "txt Capability.txt", exact: true }),
+      228 |     ).not.toBeVisible();
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:225:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-a2a86--native-provenance-at-360px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-a2a86--native-provenance-at-360px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-a2a86--native-provenance-at-360px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-Files-source-chips-a2a86--native-provenance-at-360px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) apps/web/tests/browser/profile-presentation.spec.ts:271:5 › facilities manager saves inline edits through the existing receipt contract 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "GET core/intelligence/district-nexus/boundaries",
+    + ]
+
+      299 |   ).not.toBeVisible();
+      300 |   expect(writes).toHaveLength(1);
+    > 301 |   expect(unexpected).toEqual([]);
+          |                      ^
+      302 | });
+      303 | test("facilities manager preserves the unknown create fence across close and reopen", async ({
+      304 |   page,
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:301:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-710dd-e-existing-receipt-contract/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-710dd-e-existing-receipt-contract/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-710dd-e-existing-receipt-contract/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-710dd-e-existing-receipt-contract/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) apps/web/tests/browser/profile-presentation.spec.ts:303:5 › facilities manager preserves the unknown create fence across close and reopen 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "GET core/intelligence/district-nexus/boundaries",
+    + ]
+
+      333 |   ).toBeDisabled();
+      334 |   expect(writes).toBe(1);
+    > 335 |   expect(unexpected).toEqual([]);
+          |                      ^
+      336 | });
+      337 |
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:335:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/presentation-green/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    apps/web/tests/browser/profile-presentation.spec.ts:71:7 › facilities manager shows saved cards and inline editable fields at 1440px 
+    apps/web/tests/browser/profile-presentation.spec.ts:123:7 › timeline groups dates and expands the existing filtered feed at 1440px 
+    apps/web/tests/browser/profile-presentation.spec.ts:212:7 › Files source chips and folder cards retain native provenance at 1440px 
+    apps/web/tests/browser/profile-presentation.spec.ts:71:7 › facilities manager shows saved cards and inline editable fields at 360px 
+    apps/web/tests/browser/profile-presentation.spec.ts:123:7 › timeline groups dates and expands the existing filtered feed at 360px 
+    apps/web/tests/browser/profile-presentation.spec.ts:212:7 › Files source chips and folder cards retain native provenance at 360px 
+    apps/web/tests/browser/profile-presentation.spec.ts:271:5 › facilities manager saves inline edits through the existing receipt contract 
+    apps/web/tests/browser/profile-presentation.spec.ts:303:5 › facilities manager preserves the unknown create fence across close and reopen 

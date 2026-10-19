@@ -1,0 +1,87 @@
+{
+  "checkedUTC": "2026-10-13T06:41:06.104991+00:00",
+  "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+  "inputs": [
+    {
+      "lane": "portfolio",
+      "head": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+      "remoteRefs": [
+        "refs/heads/codex/portfolio-continuation-20261011"
+      ],
+      "ancestor": true
+    },
+    {
+      "lane": "meri_original",
+      "head": "3cc30ff3182e8050d563516607866cf07efe2aef",
+      "remoteRefs": [
+        "refs/heads/task/meri-ui-publish-20261011"
+      ],
+      "ancestor": true
+    },
+    {
+      "lane": "modules_original",
+      "head": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a",
+      "remoteRefs": [
+        "refs/heads/task/modules-settings-20261011"
+      ],
+      "ancestor": true
+    },
+    {
+      "lane": "newsletter",
+      "head": "46ebdd448ef55e88c7a4083fb4586322757a14f8",
+      "remoteRefs": [
+        "refs/heads/integration/capiro-newsletter-port-20261012"
+      ],
+      "ancestor": true
+    },
+    {
+      "lane": "shipping",
+      "head": "6dacdaca3507bf75a472f5860ac72fc483377248",
+      "remoteRefs": [
+        "refs/heads/repair/capiro-shipping-browser-20261013"
+      ],
+      "ancestor": true
+    },
+    {
+      "lane": "onboard",
+      "head": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "remoteRefs": [
+        "refs/heads/integration/capiro-onboard-port-20261013"
+      ],
+      "ancestor": true
+    },
+    {
+      "lane": "meri_actions",
+      "head": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "remoteRefs": [
+        "refs/heads/integration/capiro-meri-workflow-20261013"
+      ],
+      "ancestor": true
+    }
+  ],
+  "remoteRefs": {
+    "refs/heads/assessment/capiro-remaining-20261012": "e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac",
+    "refs/heads/codex/portfolio-continuation-20261011": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+    "refs/heads/codex/portfolio-handover-closeout-20261011": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "refs/heads/codex/portfolio-repo-move-20261011": "8e8e6999c385beccd245e94e8f32a8a3120e8131",
+    "refs/heads/docs/portfolio-session-handover-20261012": "c953bc08a9cabc6e38fdacd019017d2e891a3284",
+    "refs/heads/integration/capiro-archive-diagnostics-20261012": "753eb6701e62f8f3f5ace16f86c967bdd372298b",
+    "refs/heads/integration/capiro-build-execution-20261012": "305180e53766387ff56b2689505b44272250217d",
+    "refs/heads/integration/capiro-contracts-20261012": "a397d45c461b24eb741afcd3b7cf28ca354d1e96",
+    "refs/heads/integration/capiro-followup-20261012": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+    "refs/heads/integration/capiro-meri-workflow-20261013": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+    "refs/heads/integration/capiro-newsletter-port-20261012": "46ebdd448ef55e88c7a4083fb4586322757a14f8",
+    "refs/heads/integration/capiro-onboard-port-20261013": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+    "refs/heads/integration/capiro-p1-successor-20261012": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+    "refs/heads/integration/capiro-remaining-20261012": "3a83e874383d9129726689bb8fc66438c2f18f18",
+    "refs/heads/integration/capiro-shared-20261012": "d393f08a551f00ee507636264a01657ff0f64655",
+    "refs/heads/integration/capiro-unified-20261013": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "refs/heads/integration/capiro-visual-closeout-20261012": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+    "refs/heads/main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "refs/heads/repair/capiro-shipping-browser-20261013": "6dacdaca3507bf75a472f5860ac72fc483377248",
+    "refs/heads/task/meri-cited-answer-20261011": "b697cfcba6589ef193de4e3bcb25aad773871125",
+    "refs/heads/task/meri-ui-publish-20261011": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "refs/heads/task/modules-settings-20261011": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+  }
+}

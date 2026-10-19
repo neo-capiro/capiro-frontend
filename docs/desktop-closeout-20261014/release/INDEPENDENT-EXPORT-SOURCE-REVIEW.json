@@ -1,0 +1,88 @@
+{
+  "status": "ACCEPTED_SOURCE_REVIEW_NO_BLOCKING_FINDINGS",
+  "workerCommit": "f5a0c7639b99b25cdca5c49b6977c5592313ab3e",
+  "parentCommit": "a94b9253ff766b0461ba28f3f701c2c96da58d29",
+  "registeredSuccessor": "77a5ca8033bbaf60c528b785e70436ebdc1706dc",
+  "scope": "Independent local source and test review; no browser runs, live calls, deployment or native acceptance.",
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+      "bytes": 6746,
+      "sha256": "a18cf9d855bae45c42064dfb43ddad9c07fefa103618a1e798f32bf7ce447587",
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+          "kind": "function",
+          "symbol": "TimeExportDialog",
+          "line": 17,
+          "nonblank": 189,
+          "fingerprint": "ce458bf74c3c263fbdfcdb4dec11320f87033171d46b2191a3a1258137311b05"
+        },
+        {
+          "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+          "kind": "function",
+          "symbol": "TimeExportDialog > run",
+          "line": 56,
+          "nonblank": 83,
+          "fingerprint": "060871eaf28a89f4d2cb9fe7e87cb1ff0f525771796c516ad85139c9b6d253fd"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/test/browser/planner-time-export-lifetime.spec.ts",
+      "bytes": 9705,
+      "sha256": "7605bb1f5c2ea8ebed4803e959ae845fc60e879e953055af2af3fbe4c767eac0",
+      "findings": [
+        {
+          "file": "apps/web/test/browser/planner-time-export-lifetime.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 55,
+          "nonblank": 91,
+          "fingerprint": "fedd38c18dd9596c4846223172004951f782683368955d33605afd66d5c28f4b"
+        }
+      ]
+    }
+  ],
+  "acceptedResponsibilities": [
+    {
+      "symbol": "TimeExportDialog",
+      "reason": "One existing canonical export form owns input state and a bounded read-pagination-to-CSV workflow. Pending controls, synchronous attempt identity, dependency retirement and cancellation govern the same operation. Canonical API still owns request/receipt validation and authentication; no parallel transport, schema or authority implementation."
+    },
+    {
+      "symbol": "TimeExportDialog > run",
+      "reason": "One export attempt captures render inputs, carries cursor/revision through at most 100 canonical page reads, and checks abort plus exact attempt identity after each await and immediately before CSV output. Identity-gated error/finally cannot clear or report into a reopened newer attempt. Existing CSV escaping, Blob download and URL disposal are preserved."
+    },
+    {
+      "file": "apps/web/test/browser/planner-time-export-lifetime.spec.ts",
+      "symbol": "<anonymous>",
+      "nonblank": 91,
+      "fingerprint": "fedd38c18dd9596c4846223172004951f782683368955d33605afd66d5c28f4b",
+      "reason": "One real CSV pagination/download control uses shared setup and asserts exact requests, native duplicate admission, escaped complete readback and filename. These assertions qualify one export result; separate helpers already own setup and burst. No unrelated workflow or mandatory arbitrary split."
+    }
+  ],
+  "sourceFindings": [
+    "Synchronous active ref admits only one native resubmission before React busy rendering.",
+    "Cancel, Escape and close abort the owned request; api/open/week/userId/timeAdmin changes retire it in layout cleanup. Existing scoped API lifetime remains in force.",
+    "All editable native export inputs freeze while pending. Cancel remains an explicit read cancellation.",
+    "Only current nonaborted attempt may append returned pages, emit download, close or report errors; stale cleanup cannot release newer pending state.",
+    "Only the two requested source/test paths changed at worker commit; successor adds only two exact review records."
+  ],
+  "testAssessment": {
+    "authoredCases": 6,
+    "coverage": [
+      "Native triple requestSubmit yields one initial request; exact personal/date queries and cursor/revision second page; actual complete escaped CSV and exact filename.",
+      "Three independent dismissal cases: Cancel/Escape/Close; actual request abortion, old settlement awaited, no old download and newer attempt remains disabled until its real download.",
+      "503 error visible, fields enabled and explicit successful retry yields real CSV.",
+      "Week replacement aborts held export and admits no CSV after settlement."
+    ],
+    "execution": "Worker six-pass evidence reported by parent, not independently rerun; root final154 combined and aggregate/build/standalone qualification pending."
+  },
+  "limits": [
+    "Unchanged export date draft state persists when week changes; the fix retires in-flight output rather than silently replacing user-selected dates.",
+    "Existing canonical owner is responsible for pagination revision consistency and authorization; no backend/native service proof was performed.",
+    "All337 native rows remain open; operational Objective mapping and deferred mobile parity remain outside this repair.",
+    "No Meri runtime, shipping gateway/origin/Docker/config or portability changes."
+  ],
+  "blockers": []
+}

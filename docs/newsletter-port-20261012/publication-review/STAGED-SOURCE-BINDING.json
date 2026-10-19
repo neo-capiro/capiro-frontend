@@ -1,0 +1,3791 @@
+{
+  "reviewedAt": "2026-10-12T21:38:13.278118+00:00",
+  "frontendBase": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "candidateCommit": null,
+  "branch": "integration/capiro-newsletter-port-20261012",
+  "indexSHA256": "c370e95815c4d63e982df14a4fcc2b982e3890b6f163e5b5b3ff0e669c9ade59",
+  "indexStableThroughReview": true,
+  "stagedCount": 300,
+  "assetCount": 179,
+  "documentationCount": 121,
+  "onlyAdditions": true,
+  "unstagedDiffEmpty": true,
+  "noOtherUntrackedChanges": true,
+  "sourceManifestPath": "docs/newsletter-port-20261012/PUBLICATION-MANIFEST.json",
+  "sourceManifestSHA256": "a5fce96a79c555cfbdb96be03467904b6c1885635561f20cc3e3b96fbcc4d797",
+  "manifestRecordsVerified": 299,
+  "manifestBytes": 6274468,
+  "runtimeSourceTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+  "savedVersionSourceChanged": false,
+  "sharedShellChanged": false,
+  "rootPackageOrLockChanged": false,
+  "checks": [
+    {
+      "path": "apps/web/public/newsletter/capitol.png",
+      "bytes": 31192,
+      "sha256": "f354a71c6fce886271809b0c5c73c7e0ee6012d73558bc23b5f5375756565312",
+      "gitBlob": "cebcd54d90c9056ba5707fe502a09f4a329d3cb7",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/capitol.svg",
+      "bytes": 1333,
+      "sha256": "65221548aa001bf52618eac9e4109e1cd644af431932457d0d59e8921e33e7a9",
+      "gitBlob": "73f25d45b29f5b023e00788c9ba10569ddb8bb2e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/newsroom.png",
+      "bytes": 55820,
+      "sha256": "169ade838cad34c618a6647adb4c6b6f07a5fb40bddd5ab111d53cf443ab8531",
+      "gitBlob": "da62db86f5f0ccaf87d3e6a9b8745a40990b0a3e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/newsroom.svg",
+      "bytes": 992,
+      "sha256": "a38871eedf905dcf79932e9b59f5beb9b94743af9054915d84702bf9368189dd",
+      "gitBlob": "9ed7052c6f65bd6b5d603aa0ba5af47587d2db51",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/policy-desk.png",
+      "bytes": 27879,
+      "sha256": "05d2175fb65fc3307bf8ae6a7e851fae617029887b90ba81910fbb0c78b15556",
+      "gitBlob": "273d8477db1f72f613a9f53ef7339ac0f07b195a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/policy-desk.svg",
+      "bytes": 1089,
+      "sha256": "d1cd4dc690d7ae35954b28ea9f4d1a2a9e2e3d1b010737025da96673f7b674db",
+      "gitBlob": "e807f7e4ad7d82383dc1de1553a65381c8f31826",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-color-white.png",
+      "bytes": 2310,
+      "sha256": "0b3c385b4f08354f562f3b5bda38ae02f6872fb6252cc4e1fb16ff5985180e9c",
+      "gitBlob": "9cbc4d422c6276096b26cd28e7f5ebd9dbc4e3dd",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-color.png",
+      "bytes": 1650,
+      "sha256": "57ea6baf35376dbf032b50720ae35514f483f6ae93b7a374f13d31d2b93e86f4",
+      "gitBlob": "cc20b3895777237ea87efbd7da18e50005dd1089",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-dark-white.png",
+      "bytes": 2446,
+      "sha256": "86a6518fb25adfebf24583fb6434c760efc1283b0bb1ce44742ee54bc90d0667",
+      "gitBlob": "f796318cb061de2b182e5ca4591ce00f67fb5a65",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-dark.png",
+      "bytes": 1662,
+      "sha256": "bfbf1edd9f6fe91a314b265a5424906bddd7d34648a7e5a3ddc72e05d60f857c",
+      "gitBlob": "64c982b7b14ee6c1631a8b2c786dcc59908b5d17",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-gray-black.png",
+      "bytes": 2357,
+      "sha256": "203ffa95129c9f29487b84b06361ca697492bfebd4459bc6af5831edbfa9886f",
+      "gitBlob": "66af27d8a771d22e4ceb0d9a3ac3cb271f81eafb",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-gray.png",
+      "bytes": 1654,
+      "sha256": "76425ad7fc9033efaf257403f9f4ec4ae1f05e976168b6144a4c0ea8d159d4f7",
+      "gitBlob": "ec51088fa371653ab9d4422b8d01c23e1b634285",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-light-black.png",
+      "bytes": 2321,
+      "sha256": "d1dfedff3f6f3d8593495fdac0a001499d9bfc994c86de0249982c78e30b09af",
+      "gitBlob": "715fe711912105ae60cbaa2afd11252d17d4d444",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-light.png",
+      "bytes": 1447,
+      "sha256": "1f2b6591af5c8d287dd14cc96cd0f1e4f2524cc1d0c0ae63dc92914cc19dd92a",
+      "gitBlob": "d2b6dba355034e9088aaa1acb7bac3e52dcca61e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-color-white.png",
+      "bytes": 2482,
+      "sha256": "89308182c2c88a3fd1071fe21daeb51e451b69452b76dc2b916505807108ce17",
+      "gitBlob": "af6a62558fa7f0fa6d16e1ce2930212fda4f8f0c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-color.png",
+      "bytes": 1821,
+      "sha256": "e520edcab7e85eff28476a342f6ee1eec0bc54ded5045142be8ec582968c1bca",
+      "gitBlob": "7981cefb48b95f70cdf855a067020c674c390efc",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-dark-white.png",
+      "bytes": 2409,
+      "sha256": "a5265c9d8a43d808cadaad971740ead1782c5c2951aecda9a7bf2049f49dbd2b",
+      "gitBlob": "cd9dca13b875997fe07b2eef953bf326b7ed4659",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-dark.png",
+      "bytes": 1629,
+      "sha256": "639681083e279b079c287e39e37bde0023e25f3a7f3165f753cd612035d85a7b",
+      "gitBlob": "04dc76de0fb5689a4641499f6db1c71a09e2f9a7",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-gray-black.png",
+      "bytes": 2291,
+      "sha256": "94b821a5ae06e7a802518054e376ac6abfca924b15c7dca32d58cb0945255a4d",
+      "gitBlob": "06f611382f891e3eb740bead666a49c585c25683",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-gray.png",
+      "bytes": 1643,
+      "sha256": "85a1018cb0056569143f7c0603c1473264209a7d4ca883ddd129bcd36920a368",
+      "gitBlob": "8139b9aa7e8e84924da62e114f0eb43fe3e4d012",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-light-black.png",
+      "bytes": 2269,
+      "sha256": "5f1c0fa5d40ed182f43b289a34bdd95f2286c1083bfe479756b2fda02c93063d",
+      "gitBlob": "e2fedb9661b3bdba0b5bb11dd8d1fc4b46aaf769",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-light.png",
+      "bytes": 1456,
+      "sha256": "7d273df8dce52a3ddab7ffd3addbb8820541fa688f0ab2d39f9142a538db7ef5",
+      "gitBlob": "c3aa7bb2ecd91e90895ac361ef13d3b4208a6b0f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-color-white.png",
+      "bytes": 2138,
+      "sha256": "f3f485f210e365dc3bd61af79eb6c1a821c66669497aa1dc6155d5cee70b3fed",
+      "gitBlob": "ed57ec26aad0f7a43608aa13bc382e57dcb0ac91",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-color.png",
+      "bytes": 1308,
+      "sha256": "129499f19fcf77754570e6a5fb24f7bc19437f5d4de37fca61a4dc2a5133ee30",
+      "gitBlob": "6991128b52d76cd98ba58946318bd35d25c60f07",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-dark-white.png",
+      "bytes": 1983,
+      "sha256": "4d4b7385e60e04cebb4841dfb1b13b7fb8481f0ca8a299c6fad567c92fa7bce3",
+      "gitBlob": "f71e59800706159ed2cd517be1159d212f83d7f5",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-dark.png",
+      "bytes": 1160,
+      "sha256": "c87d68267772106228730761e35f0fd29748c1f6a5a5037e79896992d92e2a55",
+      "gitBlob": "dbb5b09344151e2d1adcb12b61f89ca48061533b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-gray-black.png",
+      "bytes": 1948,
+      "sha256": "103b83fe42945603c2c1746a105b3159f7d51074e6cc402981fb020bd4c80a4e",
+      "gitBlob": "3a9227c6ab2891ee4beaa4067923b6e0c9b7a99a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-gray.png",
+      "bytes": 1172,
+      "sha256": "3e0f768fe342cf452d2613592142ed948d549a7e7632bb2e72c3ba93d60cc002",
+      "gitBlob": "298b27f897064d5043273b655fcd6c621485cd42",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-light-black.png",
+      "bytes": 1817,
+      "sha256": "6dae9248027e8144a17c93b5462b5be54985094ab7dde5e062a44ccde2668a17",
+      "gitBlob": "7bd30c937fbd453257cda0bddf9290af6b127436",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-light.png",
+      "bytes": 1019,
+      "sha256": "e5c4ac1468785680e45d5fa3d6543f85f533bd6ea9729c7e2b7784eef2fc0293",
+      "gitBlob": "38c8409358124c31ff18a786c3358d83f8325ce4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-color-white.png",
+      "bytes": 1867,
+      "sha256": "67d9a8abfb21af6e7a446be59553ac118ae1253f0ba157c669cba2e17dce8282",
+      "gitBlob": "c9e525fd896f34b0e89676dfc237573d0b794eca",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-color.png",
+      "bytes": 790,
+      "sha256": "6663e43fa3f23efa7152cfa793d4282a0ac753e622b0ccea2cfe12725dea45d7",
+      "gitBlob": "5ff3a0127caf7d665b05a9169ec1d18bb1d3a94b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-dark-white.png",
+      "bytes": 1717,
+      "sha256": "381250bbe91c193a66fc455126018444ce43d53b0fdc4bfbbfbbea038c2a2735",
+      "gitBlob": "40adb6bbbaad3d1bba1ae7a20789c28efc6ebc32",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-dark.png",
+      "bytes": 715,
+      "sha256": "b2b692659f3cad58a8065b38d43144ab7c4fbb6ead5a077c48631afdd56d7782",
+      "gitBlob": "31923f446c181e2c18d6f0b2a198630bd247f6d3",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-gray-black.png",
+      "bytes": 1706,
+      "sha256": "e0235b9f6d9b9359c9db866f44bb6fd088010a164d7110ddbb7b950f7526aabe",
+      "gitBlob": "e05b135af11a2b88af0137d1fd4d211d12e95050",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-gray.png",
+      "bytes": 731,
+      "sha256": "a915c51ce0e63b14750736ec079a1080a827019aba960bcd77a72460b1a253ed",
+      "gitBlob": "34368c9850677871af94fc8ac2534776cdb276f4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-light-black.png",
+      "bytes": 1556,
+      "sha256": "c6a3d59cbcaeaf779d0819333afea1241244fcb52662d16137158b7053abdce3",
+      "gitBlob": "da0dd14ba4fdfba6f9216ae1b46a7d4a74bcc5a6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-light.png",
+      "bytes": 625,
+      "sha256": "dc08d9cff42fde4e541e9030ba0fed335d6c3d11e449910dfd85d72c6f8e4935",
+      "gitBlob": "c4e162a205dd82cae6d36579264787b6a0f5b49c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-color-white.png",
+      "bytes": 2138,
+      "sha256": "f3f485f210e365dc3bd61af79eb6c1a821c66669497aa1dc6155d5cee70b3fed",
+      "gitBlob": "ed57ec26aad0f7a43608aa13bc382e57dcb0ac91",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-color.png",
+      "bytes": 1308,
+      "sha256": "129499f19fcf77754570e6a5fb24f7bc19437f5d4de37fca61a4dc2a5133ee30",
+      "gitBlob": "6991128b52d76cd98ba58946318bd35d25c60f07",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-dark-white.png",
+      "bytes": 1983,
+      "sha256": "4d4b7385e60e04cebb4841dfb1b13b7fb8481f0ca8a299c6fad567c92fa7bce3",
+      "gitBlob": "f71e59800706159ed2cd517be1159d212f83d7f5",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-dark.png",
+      "bytes": 1160,
+      "sha256": "c87d68267772106228730761e35f0fd29748c1f6a5a5037e79896992d92e2a55",
+      "gitBlob": "dbb5b09344151e2d1adcb12b61f89ca48061533b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-gray-black.png",
+      "bytes": 1948,
+      "sha256": "103b83fe42945603c2c1746a105b3159f7d51074e6cc402981fb020bd4c80a4e",
+      "gitBlob": "3a9227c6ab2891ee4beaa4067923b6e0c9b7a99a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-gray.png",
+      "bytes": 1172,
+      "sha256": "3e0f768fe342cf452d2613592142ed948d549a7e7632bb2e72c3ba93d60cc002",
+      "gitBlob": "298b27f897064d5043273b655fcd6c621485cd42",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-light-black.png",
+      "bytes": 1817,
+      "sha256": "6dae9248027e8144a17c93b5462b5be54985094ab7dde5e062a44ccde2668a17",
+      "gitBlob": "7bd30c937fbd453257cda0bddf9290af6b127436",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-light.png",
+      "bytes": 1019,
+      "sha256": "e5c4ac1468785680e45d5fa3d6543f85f533bd6ea9729c7e2b7784eef2fc0293",
+      "gitBlob": "38c8409358124c31ff18a786c3358d83f8325ce4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-icons-attribution.txt",
+      "bytes": 508,
+      "sha256": "3aadf1580c4a90dfac6895616a13241759ad253615091782edcd07b444f924a0",
+      "gitBlob": "5de712e2355b9246c070f14c345068920f0ca18e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-icons-license.txt",
+      "bytes": 7427,
+      "sha256": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced",
+      "gitBlob": "69403b25cdc6beb4fa65d13858e9e7aee7e2c672",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-color-white.png",
+      "bytes": 2890,
+      "sha256": "6b4e3b573b57848ea163ae403a62ebeb5bf01367d10997ff593beae9de38a4ef",
+      "gitBlob": "95be9e0978c5ceb588db83cd302887f1594b902c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-color.png",
+      "bytes": 2376,
+      "sha256": "90dae07d0fdea7d5c1d5cd4b778978be8103f84827ea18b597734a59561f13fc",
+      "gitBlob": "a84a17b7c62d926ce78523e4e741468c9fa7cf61",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-dark-white.png",
+      "bytes": 2785,
+      "sha256": "fb9bc16551337004984abc9236c31cda5e6e94f868a911f666a8d68bd9450568",
+      "gitBlob": "dd3c9a35d6ac31b2a4f71343172995c353fe40e7",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-dark.png",
+      "bytes": 2113,
+      "sha256": "4855c6de2962e3a101d293af1abded13491bd96ceb9f234d6293028e88e9faa5",
+      "gitBlob": "4d18bf8278247a0a66b5b900422ce83caea37b2e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-gray-black.png",
+      "bytes": 2566,
+      "sha256": "595de397df837eca6f2c14955c63d205fdb34a0fac33a6b07454da9051d311fd",
+      "gitBlob": "1d2bf9ec5c7610fb352ccd3ace5a29c5f94554ca",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-gray.png",
+      "bytes": 2128,
+      "sha256": "84ec1f1bc9fd7b93f9dd1a4343471b374071b517e188c9cfa0681b7819d1c084",
+      "gitBlob": "a688a7bb1f665312fdba9fdb42f998cc04e7901f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-light-black.png",
+      "bytes": 2646,
+      "sha256": "01d4a8feefd19c1f1f8dd11c2cb88e9bc2a645c5eaeb5bc94b2a20f73d082d28",
+      "gitBlob": "c1cade8a65816145d1d1ebe0fab6fb0e595a3b00",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-light.png",
+      "bytes": 1886,
+      "sha256": "879a9b410dfd0a3e15c51d839295025cec90c44c70573f8ef5f83662bc887ecf",
+      "gitBlob": "9ae122f36ab1db0c3e18a2e2f321acdb986ee2db",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-color-white.png",
+      "bytes": 1411,
+      "sha256": "cbe7a103b05095eaf9355f7078b67c75dfa83aef91b57baab97cfd115a2a645c",
+      "gitBlob": "a8b383500a120fca1c3468be1fdbfe632fd0b457",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-color.png",
+      "bytes": 315,
+      "sha256": "d6d0d6f3e773667754e5eea4bef60fcdcdee20eff8482d45d63a394898876116",
+      "gitBlob": "cab56ae3e7490fb79f9efb2f3866a2fcce014d37",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-dark-white.png",
+      "bytes": 1411,
+      "sha256": "cbe7a103b05095eaf9355f7078b67c75dfa83aef91b57baab97cfd115a2a645c",
+      "gitBlob": "a8b383500a120fca1c3468be1fdbfe632fd0b457",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-dark.png",
+      "bytes": 315,
+      "sha256": "d6d0d6f3e773667754e5eea4bef60fcdcdee20eff8482d45d63a394898876116",
+      "gitBlob": "cab56ae3e7490fb79f9efb2f3866a2fcce014d37",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-gray-black.png",
+      "bytes": 1425,
+      "sha256": "b203e0b47e8921ad9125bbac2ece6efc1f3294ee1d4478bfd8e802058a1d4306",
+      "gitBlob": "554a9223adf28ce61dbec035671fce04df5caeba",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-gray.png",
+      "bytes": 315,
+      "sha256": "3e9d5a4fa581f7cad89a2529ef773eada5b83cf3e60a060e972da4f6c67f9f57",
+      "gitBlob": "175e1cc0b5bfffa3a6d5dd2e666eb3d5302ddc6f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-light-black.png",
+      "bytes": 1247,
+      "sha256": "627cf0469dae946737183e43876292b45cbb04e1746adedfd891722c1db2aecd",
+      "gitBlob": "b04d633306b50587de75f9d32cad3b5107787a2b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-light.png",
+      "bytes": 289,
+      "sha256": "a693bdb89c13930c8987578871b7e999e8ff2fda7bff6e4761fabe539bb74e79",
+      "gitBlob": "f43badc71f31c70906e915805b253581f79d1123",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-color-white.png",
+      "bytes": 2053,
+      "sha256": "bc6a22e4e0ec5c8bfbc36b5350c571331930e9c560c7f349185a5de64c34af5a",
+      "gitBlob": "6643bdc158e1fecdd8bb91772e56e5a9e12b52c3",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-color.png",
+      "bytes": 963,
+      "sha256": "22b3688ae09f67ebde18d5704f0ec2c280fd66b30e3ade93663f563feb0176d3",
+      "gitBlob": "54c8eb14888fee6461ab7db53d463bcec1552729",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-dark-white.png",
+      "bytes": 1897,
+      "sha256": "a00056e733d43d567df49d92d9cf390d988f6f29099e8e03c1ee52bd6bc964cb",
+      "gitBlob": "8d215b8d116ca477cd5a954683686b96ec7efa76",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-dark.png",
+      "bytes": 854,
+      "sha256": "65c9ea02b894763b15403f854a5465ceb40184ff519b90d086b8d0b11195ed99",
+      "gitBlob": "fc0421a7ca73d640d0abb0d42d1d19fbb6f3eb7e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-gray-black.png",
+      "bytes": 1877,
+      "sha256": "7b5e16d9d1cb223727a6307973054c7fa7cbae1fce6fb3f8cb5c73ec56f48fa6",
+      "gitBlob": "cbd2e7e08e20e2f28fdad125919fd392eaf11642",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-gray.png",
+      "bytes": 861,
+      "sha256": "90e23ed7ea81bc7ec815cf4ce879d2de4352bd217dec3d10d64292f3b0370c9d",
+      "gitBlob": "b2634462f50cc3fbec0cc38e2b1597f61a0ce9eb",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-light-black.png",
+      "bytes": 1749,
+      "sha256": "c1d74753b0e8e601b0204f017e1caae1643ded51bf28761ea5ce63580fc64af4",
+      "gitBlob": "855fb90c46c050695e1c0e8276607a61aa263564",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-light.png",
+      "bytes": 747,
+      "sha256": "41695e34c6ef8ca47ad2346cb1570a978d685513120899ba49d508305f00f5aa",
+      "gitBlob": "abe14a2a68224d791fc44677ce0b9ec6123bb444",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-color-white.png",
+      "bytes": 2075,
+      "sha256": "1d0ead9a6caf784c669fea3f39c37b492d1a1d33b1f1412b2a09007a166f9d3c",
+      "gitBlob": "7a17c4242cb56ed696285b88a2b4860f70fdaa8d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-color.png",
+      "bytes": 1197,
+      "sha256": "2867ee10d25439468a0cca99a6c17bd97f55cfc72f542b34c155f71e52823a92",
+      "gitBlob": "0f8c12883648f27cd54ea510b53f8e8065d9f522",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-dark-white.png",
+      "bytes": 2075,
+      "sha256": "1d0ead9a6caf784c669fea3f39c37b492d1a1d33b1f1412b2a09007a166f9d3c",
+      "gitBlob": "7a17c4242cb56ed696285b88a2b4860f70fdaa8d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-dark.png",
+      "bytes": 1197,
+      "sha256": "2867ee10d25439468a0cca99a6c17bd97f55cfc72f542b34c155f71e52823a92",
+      "gitBlob": "0f8c12883648f27cd54ea510b53f8e8065d9f522",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-gray-black.png",
+      "bytes": 2051,
+      "sha256": "6a858ab503828e066f991193a93481268548c2a77e4fbb91d0e73a2300ac4598",
+      "gitBlob": "71bcf6849d69cb6f1d66722bf1007ca61341e4f8",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-gray.png",
+      "bytes": 1219,
+      "sha256": "e70ab6a706e93accb4e48d8f07b5d2f829199474d650611eacccc69749343937",
+      "gitBlob": "3f091427d0820642c2821b379fa5d06392bc5b89",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-light-black.png",
+      "bytes": 1938,
+      "sha256": "19978bf302dfb5af8ff2d265b624f289b14c15730b4533b78ebe2d3a95386e79",
+      "gitBlob": "c0372b540bcac4c6687c1a981ca8d1aea644e058",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-light.png",
+      "bytes": 1055,
+      "sha256": "a3332592c641c17b65ecda9aa22824f1e8ec93eb22b31ccc1433298b63acec21",
+      "gitBlob": "9880af1d70fd430c1a615b7c6de807525f832a77",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-color-white.png",
+      "bytes": 2700,
+      "sha256": "09c83407f18ef32e5fad185f4ddc2ecbbb25cf5dbb8e872963b026c44bd55b11",
+      "gitBlob": "170dd56cb818fe3a8e026ddcde4d9e407d4fed65",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-color.png",
+      "bytes": 1923,
+      "sha256": "d332b9eb060dbda2fbfc3425d79e6ab03ca437cfdb646977c3ac15ea75d07e49",
+      "gitBlob": "68b0d004d39e901ccd854aea73f6391297e90d31",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-dark-white.png",
+      "bytes": 2601,
+      "sha256": "29076f169ca1822edf14e8adf1f187c32df3fd254ad5020dda57e92c978dc9fd",
+      "gitBlob": "1242eb6a993da7ff65926aa776a868531de079df",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-dark.png",
+      "bytes": 1813,
+      "sha256": "5b9189168c0142122a31fe9f47bac9d0e6289d7e86c4be7155b1f483d48d7bc0",
+      "gitBlob": "94c28b4c755a46f1bfd097c8f295da63fc901d38",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-gray-black.png",
+      "bytes": 2446,
+      "sha256": "c92728fa6a4642748fe69c0d1a6d0e05068489b4d81f01c68e9ed7c25bfbcd50",
+      "gitBlob": "4b9fb8782efe1e44813daa89ea9eb790b411c6bd",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-gray.png",
+      "bytes": 1826,
+      "sha256": "1db3c76a12fa9c126b13ad0bafa7fa03f728dee316dc9022d25ab56ada0efd4d",
+      "gitBlob": "55fe6e840da3973955b130c40bd494174e57f9fb",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-light-black.png",
+      "bytes": 2458,
+      "sha256": "0a4b385853c343b6089267e3d199d9a03ee02faaffb4a013a81993010b7cbaf3",
+      "gitBlob": "89521f62741b5090eb0b84835ed3d5ed53160b21",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-light.png",
+      "bytes": 1625,
+      "sha256": "610a19bc386a34d04b851d061add3fcf3b6d0f8a682b0fde4841db46f529956b",
+      "gitBlob": "7d0059831637829f97813f52e720e03e2da12662",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-color-white.png",
+      "bytes": 2396,
+      "sha256": "8ebb780420ca7715ec77e6dc0609a1a484d927f00d1cb1d33da91e9b7826cee1",
+      "gitBlob": "d8051bae90bc948c214abcde73f79dab88a54bf5",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-color.png",
+      "bytes": 1791,
+      "sha256": "bb07a5506a9b40e9864413ad2717a3593004fc0120ed1bd74723df0ab9bd1e31",
+      "gitBlob": "a379ba8caefc53a2acad8e6ae038c56c6d0d4e8e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-dark-white.png",
+      "bytes": 2525,
+      "sha256": "d282b968b603233c5efcaa372ef764c177647e40b8cf8a41b4f859c962b474c5",
+      "gitBlob": "4f5258174f6ce5fa48650bd8f89fb101af978785",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-dark.png",
+      "bytes": 1806,
+      "sha256": "1bcd68d60a4c3cbb59e93e21320a790c530c284e27100f9eaca47c6d23efcda5",
+      "gitBlob": "ee5f252e979e88600ddd5720ccebb043235b5cf1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-gray-black.png",
+      "bytes": 2391,
+      "sha256": "b34c380e12cd9bc2f929a724c27e4f81d0916893d833ab7f6b5be8e5e0a8dcf2",
+      "gitBlob": "40b2a7acd5a2a9d381b845321fac09242f2fae86",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-gray.png",
+      "bytes": 1812,
+      "sha256": "c73f5c8e8da0b23d8536c9f82149939397ef5c29dadbe8e484c186660a2349f1",
+      "gitBlob": "24014097f1a8cf1158c336bf8db6ca98ced913b2",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-light-black.png",
+      "bytes": 2371,
+      "sha256": "38749ea14339cb782ec95662e07c7525cec8a828242fd0e3e842c2a92dc20d66",
+      "gitBlob": "c77523c176806955177b3ae9077512454224908a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-light.png",
+      "bytes": 1614,
+      "sha256": "9a7aaa38579d9b1c3db920349143af7de2c7651d8cfd6e2e47f83169d4b2b812",
+      "gitBlob": "76390638f171bae229f18f1e42b935fe8a937353",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-color-white.png",
+      "bytes": 2761,
+      "sha256": "4c3e03644f4362512307b10b1fdbfe676e5b9c67d63967187d03765afaea9cae",
+      "gitBlob": "e923ac212a2d98738bd2b0c5fd40769f9e1d4f83",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-color.png",
+      "bytes": 2127,
+      "sha256": "6dd67be1b3b71fba5f961e3902ced9ff84b77edf6cd4a2636a718898dcb7da40",
+      "gitBlob": "784d664dc36f567497a3a5a00f09638030ebbe1c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-dark-white.png",
+      "bytes": 2756,
+      "sha256": "4fcd3770e1b4b9140e49571bbfb168e40f1da9d2d7de1a62c3456583a4aeaac1",
+      "gitBlob": "dc0c7b14206fa0cc350e73ae45aa5da932298fde",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-dark.png",
+      "bytes": 2024,
+      "sha256": "419ac155675fdb991444a492242104d4991bd5b3cdcfd78aceae6167b42ce206",
+      "gitBlob": "b4397cf99b226a33851461d941db806def8604d6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-gray-black.png",
+      "bytes": 2568,
+      "sha256": "e8657e854432e6035b9148636ad853384f9cfb01d634698ab3827e1b6a08babd",
+      "gitBlob": "2fd06145e4baf3c79213727a09f295c4a8d8452b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-gray.png",
+      "bytes": 2031,
+      "sha256": "efc444fee08156bbbb01ebe0c7d9cad3ab7462086dc562e131911bcae86fe82c",
+      "gitBlob": "f43a287bbea3dbf962f7ec95a689bcf993bdc1d1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-light-black.png",
+      "bytes": 2606,
+      "sha256": "6e71bb3d70fd141456ed210b05bd21d82bb107d15a81ba007eb06c3cc068542f",
+      "gitBlob": "bdd052467bc68623b192e035af04918df96c2879",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-light.png",
+      "bytes": 1773,
+      "sha256": "fb4c46fc46330efd3e6a6b958a1b4ce84911e78e659d2c88a535388b2d065f4c",
+      "gitBlob": "52ec30411dc7ef1713429c322c00ea488f04e4f0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-color-white.png",
+      "bytes": 2858,
+      "sha256": "0a14961f567bb7e467a9f559e1bbad512818459eb0325b862f13c773215afb3d",
+      "gitBlob": "e84288d8974f947adcc6cba37d5150114e7caec9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-color.png",
+      "bytes": 2312,
+      "sha256": "faf6fc4c2befe5f381bbbddcbb62b5cadb320f3f7ac862acba7809e6c130e786",
+      "gitBlob": "26388b755a570f473dca3f2649a97d56fa571608",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-dark-white.png",
+      "bytes": 2701,
+      "sha256": "9b34ce740aa681e1034917352830a34e53b0e94244415756cc09cf85d51bbcd9",
+      "gitBlob": "07c5522a87a8c59db464030d3a59e5cc922c2dc4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-dark.png",
+      "bytes": 2054,
+      "sha256": "1cd04c75ec6dd796c2e0981505f92b5a0b3349201d8ddd33489a7192df12ac23",
+      "gitBlob": "2fc549bffe8d5dc6eacfd2485770cfabbef90331",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-gray-black.png",
+      "bytes": 2549,
+      "sha256": "fecd7eba0eaecaf5ce943e7e2162a93f670ff4abaaa54eb48a9a93235b4cc5e8",
+      "gitBlob": "8d70335261ae2815a3ff8948ae90fcb662b28c23",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-gray.png",
+      "bytes": 2048,
+      "sha256": "023b7a412119e973162ac0466e8c5cd16ab97d6be35ddab451dba6e1e110ef06",
+      "gitBlob": "646874280aa1c62a9d8ee816a6f2c530a562115d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-light-black.png",
+      "bytes": 2580,
+      "sha256": "73f495e7d2c6b27783eed95102245dcf562307513ff2d236aea0fe9b63711176",
+      "gitBlob": "f57ba4c02093285a54b7db8b041aea684e01110f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-light.png",
+      "bytes": 1819,
+      "sha256": "321c78f5663a946573db55449de497adfb86843b59e2841e2020a8f611007997",
+      "gitBlob": "099916ec53ba114fc3e3f8603bf41e65040d0971",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-color-white.png",
+      "bytes": 2505,
+      "sha256": "8188660492814077392a66e8ce94f32fd0ad6b13acad9c655e839a69229e33ee",
+      "gitBlob": "20fe3a1edd177de7c0e9549af718bc2d46f67caf",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-color.png",
+      "bytes": 1918,
+      "sha256": "0672d630debab71a45918790cd16ea39918c10682d794663e29f2feccd525cc1",
+      "gitBlob": "60a5da33a9f8be118bebe980de7b37ce3dbe530f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-dark-white.png",
+      "bytes": 2428,
+      "sha256": "779bf0a3d24b2e41e7d7396fce98c819f739041fa68472307f3eee1fdc7d8bbe",
+      "gitBlob": "c77dc53103ec57a5f6bdb55927f4be8eeeb7cb63",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-dark.png",
+      "bytes": 1727,
+      "sha256": "361d75b65a3e29ef05b26690b2354d2ab6c0042175a43967893c6a93dc38618d",
+      "gitBlob": "e7001bd975dd41d768b370b51df817ae87d0929c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-gray-black.png",
+      "bytes": 2325,
+      "sha256": "7cfd91ad58ec2c44a10240d126a3c054cd6a58116812f491bf432977ac27827b",
+      "gitBlob": "9632bbbf8fb021ec736e994c858f25412ac197e0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-gray.png",
+      "bytes": 1728,
+      "sha256": "5db15741d51610d6371527f95aa073c716c6c07a5d89c343b5043778b1f68f41",
+      "gitBlob": "2071c233002b1bf30bc19d423b5dc5560b0d5609",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-light-black.png",
+      "bytes": 2305,
+      "sha256": "ea6d9aef5608dbf03881e16b6bfe706995c2193217318d83b539b76783be0cf7",
+      "gitBlob": "e18fed3d04f681773a89e0898f7eb73baac1cf70",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-light.png",
+      "bytes": 1529,
+      "sha256": "7b516a39e95f1c742abc01bd2146ecede9aae62d4a23d7c3ada76b1a56cbe9b5",
+      "gitBlob": "30fbb9fcca8bd1ef16f1286ff39fc183be919160",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-color-white.png",
+      "bytes": 2906,
+      "sha256": "52f61238831c578b315ba29cd80c82968ef45264226fda2fb4f1956b175bdf89",
+      "gitBlob": "5849993b59c485880c4e99138b429d848442ff39",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-color.png",
+      "bytes": 2254,
+      "sha256": "1a7f413b1eb6b0b2fc1f61c3f029967dd5362f958ee7e1dff7462a3778ca712a",
+      "gitBlob": "cc595c85eeb3c8018f69b24149a72629d9f4fe4d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-dark-white.png",
+      "bytes": 2906,
+      "sha256": "52f61238831c578b315ba29cd80c82968ef45264226fda2fb4f1956b175bdf89",
+      "gitBlob": "5849993b59c485880c4e99138b429d848442ff39",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-dark.png",
+      "bytes": 2254,
+      "sha256": "1a7f413b1eb6b0b2fc1f61c3f029967dd5362f958ee7e1dff7462a3778ca712a",
+      "gitBlob": "cc595c85eeb3c8018f69b24149a72629d9f4fe4d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-gray-black.png",
+      "bytes": 2733,
+      "sha256": "5cba0b1abee34a73dcf931f2c7bcd207b99eac5ea394e76654cdd222bf045b2b",
+      "gitBlob": "51e372f5215360575f1e4025b57fdcf9764d765a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-gray.png",
+      "bytes": 2253,
+      "sha256": "3b8f2f24cc39bcecef7f2ce688846e970c95983ddccdee69e3584568d5fdef7f",
+      "gitBlob": "c317b5f17a2573ee4e2d035a4b7b09c066503c1f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-light-black.png",
+      "bytes": 2775,
+      "sha256": "0901e05135bc72682e3f02e4dfcdacc4aef078689fa342a9a1a20129e5724262",
+      "gitBlob": "0caffebbe466c839836a1e9b38c8a924501a3383",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-light.png",
+      "bytes": 2013,
+      "sha256": "4038d5e1898506d856ec1bbb7b2e3d7ad73647039dc66c57563db67f33fe6d0f",
+      "gitBlob": "7aabb2579ca7e2faffbf8187e35ab49544ab2fd6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-color-white.png",
+      "bytes": 2141,
+      "sha256": "635b18d8be4700147ba9ef750c71ae038f2acc5ac2a2eeaef99abba5e993b08a",
+      "gitBlob": "c8b1fdc8943966cbba08b437aa819bde2ef7e7f4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-color.png",
+      "bytes": 1276,
+      "sha256": "f11f5655e22ba636c967173bdad3e35f1cef9fa2f90699e12739dc2737c73c14",
+      "gitBlob": "9900ee3f6368d4696e6ca3b241635bb46ff59e63",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-dark-white.png",
+      "bytes": 2141,
+      "sha256": "635b18d8be4700147ba9ef750c71ae038f2acc5ac2a2eeaef99abba5e993b08a",
+      "gitBlob": "c8b1fdc8943966cbba08b437aa819bde2ef7e7f4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-dark.png",
+      "bytes": 1276,
+      "sha256": "f11f5655e22ba636c967173bdad3e35f1cef9fa2f90699e12739dc2737c73c14",
+      "gitBlob": "9900ee3f6368d4696e6ca3b241635bb46ff59e63",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-gray-black.png",
+      "bytes": 2072,
+      "sha256": "1bff7d2710e9cb57ef398b51cc9534a026dce4b2a85b45af9bad25471540ba6f",
+      "gitBlob": "fb1775b3e65686f4c690dee63f696e044856c11d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-gray.png",
+      "bytes": 1295,
+      "sha256": "b790a48b9d78cdea4b7d2bf509654d807bdd798ac5f346854f423f839545317d",
+      "gitBlob": "0e433bcb0faaaf89abc207acb6df15f1643cc51e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-light-black.png",
+      "bytes": 1974,
+      "sha256": "6ec67c4bb8cc4aed5566386c1044ce47532092f8e40f0ab0671a8e9ef637d11e",
+      "gitBlob": "c947b846cc7b0fca5ad863c0812e5a4dee0148f1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-light.png",
+      "bytes": 1151,
+      "sha256": "081fc38b655739c30376a3b061a2e889065e28d59ae42801261c0cb1df43f45c",
+      "gitBlob": "0ee89d7f04cc0afeb3389f5b5543dd84f820bc7a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-color-white.png",
+      "bytes": 1989,
+      "sha256": "3fcbeb94f93f6dd9ee56e0d780d002ae862e6bd3e1fe089a75513d74430f748b",
+      "gitBlob": "4d2ee18bfc729d772283b8ec0513dde9392ba63a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-color.png",
+      "bytes": 1086,
+      "sha256": "c3fcc913d05a197adda61cfd9087a176b786ee7e6d39c369d25ca8a9c6b8b2fc",
+      "gitBlob": "6f01526138a186f6de963e8440482fb9b4df83c9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-dark-white.png",
+      "bytes": 1984,
+      "sha256": "73490bf0008bb4e39f513aed7e278457880b1b0c7235e858317a87df30283f3c",
+      "gitBlob": "87e8b562110b49a24525827f869864f20397a235",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-dark.png",
+      "bytes": 1023,
+      "sha256": "3e7c9efe6125e8cd4a4e68178e52f548bb490109f269d8916ea0dc3093d3aab4",
+      "gitBlob": "32fd5ee41604c392ae34e69178b0b8c0dbc8e9c3",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-gray-black.png",
+      "bytes": 1942,
+      "sha256": "a0d10b9c6d0b4cbbe263df299934863ef79e50594d3c5085215e6ec827e3703c",
+      "gitBlob": "01da933cc5c5ed2a8c8f2b3dd4a35063f6a70fce",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-gray.png",
+      "bytes": 1033,
+      "sha256": "af2ecaabe264d33839e2f5cb2e9e2e827b0c75b17a41092fe5b8c269e761f3ec",
+      "gitBlob": "2f9f0cf41b6208f9ffa7c3e660c2018bb199d132",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-light-black.png",
+      "bytes": 1790,
+      "sha256": "b6386bcb4bca3338191ea4ccfc6578b621c3ec19deac616dc38902d98958e010",
+      "gitBlob": "1dbf856feea35de9b6fffd70cdf23b8eb2ba48ab",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-light.png",
+      "bytes": 917,
+      "sha256": "844b9b9dbb58a426f457bfc2e112e3c37173f3c2e51e783f44573a5e810ede7b",
+      "gitBlob": "5509d42abf1eb5dbde2f736d6003dc08640b7536",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-color-white.png",
+      "bytes": 2527,
+      "sha256": "8cf9471dabc3e27b79924ede2d4757d89644baa4eb73ed3f7369dfb3c366b4b6",
+      "gitBlob": "32796fd2eca68c7b83aad6695202626a30925fb7",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-color.png",
+      "bytes": 1566,
+      "sha256": "c5af90126682de59e86bbcd20f19202656f33af7d65436b73e2f3b9375e2e57d",
+      "gitBlob": "5a74d3b8f5787a5176521600d38023ea59fff97c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-dark-white.png",
+      "bytes": 2527,
+      "sha256": "8cf9471dabc3e27b79924ede2d4757d89644baa4eb73ed3f7369dfb3c366b4b6",
+      "gitBlob": "32796fd2eca68c7b83aad6695202626a30925fb7",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-dark.png",
+      "bytes": 1566,
+      "sha256": "c5af90126682de59e86bbcd20f19202656f33af7d65436b73e2f3b9375e2e57d",
+      "gitBlob": "5a74d3b8f5787a5176521600d38023ea59fff97c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-gray-black.png",
+      "bytes": 2350,
+      "sha256": "58e6c576494f4f3345bb2bdc565c1434eb015eaeac7afbc427266d0671078cbe",
+      "gitBlob": "94326c611da3185959c9fe7413e9e6fc6c09cae9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-gray.png",
+      "bytes": 1598,
+      "sha256": "f9596ef2e94b26695d47a3476550f9337d6643d18cb0a6bd769647a13e5dd405",
+      "gitBlob": "44f9f5e4827e56fd618c673c9c135752d8fc7be4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-light-black.png",
+      "bytes": 2381,
+      "sha256": "169bcb508869e16479d1dd10937cb3b1e04f369245ce2a2d9ef97d56458163b3",
+      "gitBlob": "55343c6c0c18c1abe254d22d5c95152dd7df4d5c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-light.png",
+      "bytes": 1382,
+      "sha256": "d19ef5a522cb75e1f93daf1affe24461e95d6b1aaef093704411b1ffa077915e",
+      "gitBlob": "b0e7af6d059ea285e9430a3f09820c5bd2ce5e65",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-update.png",
+      "bytes": 40618,
+      "sha256": "6d60daba33551a9011e94329ba6cb7f11de119e9273bd386a8719d03e3b616f0",
+      "gitBlob": "115a6a7ec2f212161b2e5f609abc408fe970c7a1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-update.svg",
+      "bytes": 890,
+      "sha256": "cb903be6b9a58d8beffd148b911805619ce3b99f9ca30c1895e76bfd412702ec",
+      "gitBlob": "1a1aeee066b358ff9dbf4381563a72bfe77aaf88",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-color-white.png",
+      "bytes": 3008,
+      "sha256": "5eb25284801c33ab0a7206ece87c9a82a12ea649a939b5f36608bdfaa456d363",
+      "gitBlob": "8a86b3cb67b41c1c9c13af1bfb1523159f5016fd",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-color.png",
+      "bytes": 2221,
+      "sha256": "b02e1d565a3356075c325eed876fd53fe3e303efe4f4b4b16f043fb589406579",
+      "gitBlob": "d0a68b40ac2d7cf62f2c6df29aa5d8ca126b0248",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-dark-white.png",
+      "bytes": 2855,
+      "sha256": "a00719634fbc3100faa492a0b262ec8190c9c55d60f687f49d6498faae9cacf5",
+      "gitBlob": "b31d50a5685e4391c903503f069287d8dc9a7ba3",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-dark.png",
+      "bytes": 1947,
+      "sha256": "a8e5fe6990557c8f7992ddaa01235b2d7c26cb1860440bd80c7a67d1806737a0",
+      "gitBlob": "80ea079ac7f4eb93037f8bd72e88d2ac5b794af9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-gray-black.png",
+      "bytes": 2582,
+      "sha256": "fdaca027657315c4c7922b51400a91a52bdbc6acbba6e824165e3e670d7b3efd",
+      "gitBlob": "874d42386d59024ce6af2b050333298fa1b075b1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-gray.png",
+      "bytes": 1977,
+      "sha256": "8db22bf3683e8c900b3d4757c45f3a552981643ecf07a7c2fae180f6adb81b37",
+      "gitBlob": "688b249ccb583b4981309431696e05c56889de14",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-light-black.png",
+      "bytes": 2725,
+      "sha256": "7fa75984c010b0db34b2aeacee79d074a77b6020f1d620f8781b5fcaf3d06868",
+      "gitBlob": "e9b15ae28b2ec5d949f52491f37a6cd53dd1a861",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-light.png",
+      "bytes": 1738,
+      "sha256": "29a36e11fada8a0cc25173eb80d635725107f65cd27807611371cc742d769a55",
+      "gitBlob": "30182eac564620b0249e4eb7c1a66c6b9ded79ab",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-color-white.png",
+      "bytes": 2973,
+      "sha256": "c0d3ed1110d5927cbe7fc5490b092b93f18078d8325045a2f31fc1d60f0663d6",
+      "gitBlob": "c6d33bee2abb9bc734bbbdca536dfde03cd337e9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-color.png",
+      "bytes": 2367,
+      "sha256": "69cc25e5b3f22e7b6e70f576729ba01cdcb505a6d9346f1f6a39aee5ecc17cf1",
+      "gitBlob": "f35247ff0d7b7cd4faaa816f8ddacf9cfb2f10d9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-dark-white.png",
+      "bytes": 2858,
+      "sha256": "283768ab2cad7c26a9d8a447fc9ec40b2ce7e971a94321c012aa7e4b7b0a8d8f",
+      "gitBlob": "6a4413a1ea159c7f1519e0507b6de56f881ef367",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-dark.png",
+      "bytes": 2138,
+      "sha256": "f0e518ada18fe673c6ea281cf148aea13c0291c2bab796a5fbb0923bd076776e",
+      "gitBlob": "bbfd8957b1e42ba351c2774d81700a9847174e22",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-gray-black.png",
+      "bytes": 2664,
+      "sha256": "955d3c09b6bcdd1d7ff5d2d26516b8e1219a65195ce0f76d6df4a62f38deb2d8",
+      "gitBlob": "13a1ae21a0c147138c872cc951c8a326308671b1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-gray.png",
+      "bytes": 2146,
+      "sha256": "c5284c7baeb9d296b63d1f9c3a4a0acea71242283e81152a3c38f718474e33c9",
+      "gitBlob": "64b1d27675e2b2b2580b567892ac9ddb14ff3625",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-light-black.png",
+      "bytes": 2708,
+      "sha256": "196883d58b0c63f339b957f4a97099d855f3b59fad8c1d1a6b43f94f9a4cfa44",
+      "gitBlob": "c464af610c21896099f0a8cc55020f517fc80f60",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-light.png",
+      "bytes": 1897,
+      "sha256": "e78dd49e46b3703ee9c9a8b1c553142b9089c02f0204c733203d19455009354c",
+      "gitBlob": "96c91a91a854357686d14ebc920c2c57ef4a72d1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-color-white.png",
+      "bytes": 1757,
+      "sha256": "2cb48501e44360174080667cb6b00b6c384f482f6d72fd128db8d7fc89ee4e19",
+      "gitBlob": "6b19db2a732a6eacadf4f75438db5fca33b53f8d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-color.png",
+      "bytes": 1005,
+      "sha256": "744dd35066821a0b93021453deef00f11a5c4dccb1b0bfc3fa4e15640dac93fe",
+      "gitBlob": "fd4ce005d8de35ef0a966186b714d1594691ba3f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-dark-white.png",
+      "bytes": 1987,
+      "sha256": "127f85e20ce0d08b921c8a23170a224b5bf8efcd96db86b0aa731b69e6b9ebf9",
+      "gitBlob": "7919a71b8dc79ead2526505d8e0d35c767c34baf",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-dark.png",
+      "bytes": 1152,
+      "sha256": "01bc77686cd48999b53e418d37e5a07d01d1831d0cd5e5347caef84cd071b8f7",
+      "gitBlob": "1d041314fb3de2118d83c11044e1706936f5cd5b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-gray-black.png",
+      "bytes": 1915,
+      "sha256": "b080ce553ec883e7a4e8ac139155875f0069781e1fdba9a228ddf72fc0186c62",
+      "gitBlob": "2386f1e1b4a111da0b3a682562721503eff7257e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-gray.png",
+      "bytes": 1151,
+      "sha256": "767feb2c16bd877e9dd92d735cd996fffec657fdbfd64198c5cee759759cd7b6",
+      "gitBlob": "5618d902d7942f1661dd0a45ccfbcebf79197507",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-light-black.png",
+      "bytes": 1831,
+      "sha256": "aa140b6595e6ad2db58263675f4e7983f608f504c53c775009cd91942229c804",
+      "gitBlob": "5feaa1d611705c4cc8cf2546baf3dc1295859948",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-light.png",
+      "bytes": 998,
+      "sha256": "3f84d9aea44d27b323d6b2b26529e3cd03fdd8b9ae7506065876e92b3fe4057f",
+      "gitBlob": "1e309556052514a0fa0ef38c231242f8d222119f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/public/newsletter/template-preview.svg",
+      "bytes": 1885,
+      "sha256": "90a97966db5b54dec83b99ec89da208245669b2a3a0cc1af248a14e9388dd1cd",
+      "gitBlob": "fc807f6848353ead90d50d957956d403d8e1f33f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/.gitattributes",
+      "bytes": 63,
+      "sha256": "9dc3eceb3be31bb4dca9c4c7e165ea51167da1422dd6aa48922236b0bbc32227",
+      "gitBlob": "146835178fbc5b430893e321c1229419d250f955",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/HANDOVER.md",
+      "bytes": 4649,
+      "sha256": "02e04e44bc9ec8a14c4d72b6a740dbd6bf38ac9b27761ff1a6deca3c2f3b8ded",
+      "gitBlob": "6fcdbba260679520cd4f27dc4f71d549945c406f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/PUBLICATION-REDACTIONS.json",
+      "bytes": 2858,
+      "sha256": "085fbd09de0067cc82c60b503688ffb8605eae0e23ee60fe87cb5624517afb8c",
+      "gitBlob": "0ede2b4e09ce91feb0078f78d2dec6f98a371403",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-preservation/ASSET-BYTE-VERIFICATION.json",
+      "bytes": 56360,
+      "sha256": "169e5a0294676f031cdea71634e9481f64105286610d2f682da91c231af79324",
+      "gitBlob": "de1385b1f078f4307b381d0e6c925c15d6653eee",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-preservation/extract-assets.py",
+      "bytes": 2387,
+      "sha256": "872a5a9e9c6c0ac2a8583685dbbeff7dacada0e6ff7ddd6ccac5dce469504ab7",
+      "gitBlob": "7bbea52fc0d4a0acbeb5897639abdf34b3a427d8",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/ASSET-VERIFICATION.json",
+      "bytes": 160827,
+      "sha256": "3883973266bcdb63fbacb2e82860372b310c08477d0a9dce22b0f0da106501e2",
+      "gitBlob": "97881698a8e78c4d690530b92c377f130b171391",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/DOCUMENTATION-OBSERVATION.json",
+      "bytes": 1424,
+      "sha256": "46b827b315c4f9739095d3c3286716c3592341032dcf67257f1b3790931ee805",
+      "gitBlob": "ac348c512fd609744e416b79391a6b430d8390f3",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/MANIFEST.json",
+      "bytes": 10229,
+      "sha256": "f02157e043679edf0c8bff38b2fcc5b24a0503799102c43b905c26a795ea33e1",
+      "gitBlob": "1fed57f02c68605328ab709b93a6225d6b7b33e3",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/SCOPE-AND-LICENSE.json",
+      "bytes": 13116,
+      "sha256": "da7dd1abada6df5f500bef937ade8278bd341a8a3d9e2eb71ba162a817396db5",
+      "gitBlob": "aceb19928a6247139193a25169080d66f6972074",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/URL-COVERAGE.json",
+      "bytes": 12708,
+      "sha256": "d0b86a3b621b2f0595d68efb5e3f38accdb265ef5e2cb985d088f3ee9a81d729",
+      "gitBlob": "4c28ac62f6e9174bf6b508f33a87576a82ea8d98",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/report.md",
+      "bytes": 3725,
+      "sha256": "a99d52d9e994c64a7f1bc2ac7f4a959ad675dadd61b7246017549cf77f4bbbe3",
+      "gitBlob": "2273bc58d62d4e75ca677e7d73b6211175e36a3c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/OUTLINE.md",
+      "bytes": 5020,
+      "sha256": "71ef916a5e8a9479f376657198345dee0d65eb2679cf8680a6db5f5028cdc5ec",
+      "gitBlob": "cae1c8a4e8d3c83568eacee317319dd34718496b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/README.md",
+      "bytes": 3405,
+      "sha256": "6676917168ada34eb9550026f331fae52e5f23f497b97df67042047b036e92d3",
+      "gitBlob": "c820635c15133b19fa90d6855ee4c9299b00d203",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/SHA256-INDEX.json",
+      "bytes": 19116,
+      "sha256": "5c4f56d20f20c1d58eec5fd83c9e749e1d8108355cc6d0f0dd8e94dc5d8e308d",
+      "gitBlob": "569306ddb7395de353534710a20901a4f5e9ba95",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/asset-extraction-manifest.json",
+      "bytes": 239733,
+      "sha256": "1cc360175bc8768ea8a8c0684954842a028b48a35ed67aff929f36193d05e091",
+      "gitBlob": "819d93d04cd7f6a973ad4902715872cdb819c453",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/asset-paths.txt",
+      "bytes": 9702,
+      "sha256": "d4637e0d99d89f31bdbbfce516a25d73c7f93a0f7b875b3f98bfbe897408b3f6",
+      "gitBlob": "cf70519dc53a0f39ef1a058677cca307a22ddd18",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/asset-url-coverage.json",
+      "bytes": 4484,
+      "sha256": "ea52baddea0f6a492d28ab3e85149d0c88850b1a0fc9bbe8a05a400be1060d0e",
+      "gitBlob": "cfc65184fa813da9b80174eb33d7ed25b1d439a9",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/App.tsx",
+      "bytes": 30256,
+      "sha256": "a7b1ff2a7cb9945af55ba58c5849cfe18cf5f89a47c195d99e7edac1fcbfe2cc",
+      "gitBlob": "24d75b1bd4d3e22d4eb0027b9412b33281a84c85",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/BACKEND-CONTRACT-DELTA.md",
+      "bytes": 7205,
+      "sha256": "fabbd6e0bc16bd1e901447df717c35939a389d1e1070f6214e6003357fbbadbf",
+      "gitBlob": "46b5efa6a9b380570f5af9420d2e288b0e4dae5d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/FRONTEND-BOUNDARY.md",
+      "bytes": 5025,
+      "sha256": "1342128757a22bc9301f52b16f4fcda8bc1c3b48ea2bb65ee74116d3ed0134f0",
+      "gitBlob": "7e0d2f27bfb73b597eb456dcf6fac25dcbdd783a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/HANDOFF.md",
+      "bytes": 17323,
+      "sha256": "5f428d03b503a8f18ac3f6293f64ac5cf64081cb2b1276b6969ee3ac47749713",
+      "gitBlob": "eb8b04d49b167e704268c3ba153ee837ec9f437e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/OWNERSHIP-MATRIX.md",
+      "bytes": 5376,
+      "sha256": "94756084eb3de9f277ad0339bd46be4f286134c416e43dc38a5968cf0da35af1",
+      "gitBlob": "81ee33a701c025d99a89b8767a9615de8dd389d8",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/SOURCE-MANIFEST.json",
+      "bytes": 20641,
+      "sha256": "9164ba06f5d8d8704f92d729c585191a692ff7776730f54f9451bca8d848179a",
+      "gitBlob": "f47f3f30681fc92e52cf0e1bb21227219b33e23a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/W-NewsletterEditor.test.tsx",
+      "bytes": 59719,
+      "sha256": "e3b8139d80e73a6b78fc85d2ce9a5ee53697c7599c78fe1fc0541c3364c8904d",
+      "gitBlob": "a315b682643e13eb12fd9a384f87c8d16b3f0cc4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/W-NewsletterOutreach.tsx",
+      "bytes": 22366,
+      "sha256": "5962b492b9e6b178adbfbac1fe3a808ef4092e3f6c3eddafb2fc5814fd258a04",
+      "gitBlob": "8e16079ecc2313d52ebb662129ca9d731324d510",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/backend-tsconfig.base.json",
+      "bytes": 471,
+      "sha256": "8ee4b594732f7ae6ffba44e3d591be59060a818720d2627fb14cfd3deec63aa7",
+      "gitBlob": "c88275ccf4b1b0c62627076781ce0022af22f259",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-fonts.catalog.ts",
+      "bytes": 94631,
+      "sha256": "7360c71bdfaedf091171ff704bdd1e38c68605614dda06c30dbf7958a0dedf1f",
+      "gitBlob": "897e9519b35b2d1da0eafc6c0f4baffa1b868c32",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-fonts.ts",
+      "bytes": 5766,
+      "sha256": "56db91870105d8268ad8f1699ad04a3c60062f45b4738ae8b4c892f3e58d4825",
+      "gitBlob": "98286f542da05527fb124a16dd1e831ae40cf558",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-outreach.controller.ts",
+      "bytes": 5292,
+      "sha256": "c7395dd8d1805d73ff5de5a82fdb83a5f4a85b855349cf607c68cdb3dd4b592d",
+      "gitBlob": "038cbd5db39bb9ce6235ec85c586542310b1f506",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-render.ts",
+      "bytes": 30096,
+      "sha256": "b143df93036c87dbce9dc49a0e01f1f4bd3a7b6cf562b64608940bdea97c3f3c",
+      "gitBlob": "75b44244e401b767a5a646d81da486279a2af9e0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-social-share.ts",
+      "bytes": 2068,
+      "sha256": "ddaeebbda2901158ccd809a2ec2c7e7515d213af043bef9524e1f707cb3e57a0",
+      "gitBlob": "a6c3eaa591e9499ad800b8a934573ca678bd0fb8",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.controller.ts",
+      "bytes": 16288,
+      "sha256": "ae8a6453c04d0bab8ea81d717415c3747dbee0edc4d5eff9299df3e97fa576c7",
+      "gitBlob": "7ec9136ff6f6d2e8d26934d8c2037e3482dc3725",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.service.ts",
+      "bytes": 86320,
+      "sha256": "4a2d4c6234dd12bda4b787ed52211d405728c81e6b824afbaaefe382a7977583",
+      "gitBlob": "95be4d637e3cfbeaaaea6455f80aefdb21db9923",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.ts",
+      "bytes": 36470,
+      "sha256": "f586855ffb43f7b4a014b0e27c8ae6be342fb843cb656a58b520b0ac1706c796",
+      "gitBlob": "c1b58fbc64883f6794a2928e9ee89613aea42742",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-EngagementPage.tsx",
+      "bytes": 185874,
+      "sha256": "1cff2ecf6f733f84b9d00020eed37a5f2f9d0691611d4e9cc7fc3bf4be210148",
+      "gitBlob": "f4e32224f15b700702c485a0c41e8bc1b96ad86a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAdvancedImageEditor.tsx",
+      "bytes": 7212,
+      "sha256": "2298f304d0530354954cbec1170d14dab2e153873169aa4848bb4bca8e0efbda",
+      "gitBlob": "7eb4cba5a351892e77c8e38527c7eb4a04d4bc0f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterApps.tsx",
+      "bytes": 8637,
+      "sha256": "84fc970435a13209b864df0ed64aa56e54f039e801706ad38256358020c55377",
+      "gitBlob": "6be0480976c4686fbddb6af8c9123d6aac7c507f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAssetDetails.tsx",
+      "bytes": 7079,
+      "sha256": "08a44d7c88aaf90310e27d34a0d2d395a43977ca70c08443cfc2de4f97ddfabe",
+      "gitBlob": "32e981e4d4f7dbec18c14b189cf71fb51e58262a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAssetFolders.tsx",
+      "bytes": 9961,
+      "sha256": "15cae77da5e1dbc27e9aae41a838aacbeb4aa7c82609a7d932530dc1daf27230",
+      "gitBlob": "6139df0ca28351b3796da592258b29c2f9c856b4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAssetRevisions.tsx",
+      "bytes": 3462,
+      "sha256": "f7e43573dbb217c225bdcaade7643a4614bd9f47f32534c14aa641d06a32c109",
+      "gitBlob": "e3f0f87882a1e3b186be0b349a893dc9feb8eb70",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterBrandKit.tsx",
+      "bytes": 23560,
+      "sha256": "d7ae5ae1d26330c8e693624e29726c430beffdaa5828a2cc0c7f48d910d78146",
+      "gitBlob": "2bd8fd5e35030649860295c4fbaecc274e8d650c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterBundledImage.test.ts",
+      "bytes": 2285,
+      "sha256": "0c66c83456018b43b1896f0a8db13f67f9f6e0cb38de586481db3294686f0e3a",
+      "gitBlob": "c0bc6c0ffdccbfb2397c53e0380259fd65ecb18d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterComments.tsx",
+      "bytes": 22618,
+      "sha256": "9a89cf7f95d73eee224cda8d20882d0ee9d02272cb1823375b9a54aa0c0d863a",
+      "gitBlob": "d23c4da5f367539037be843a0410d0abf7169aa1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterContentStudio.tsx",
+      "bytes": 25585,
+      "sha256": "ade74bd192ed7e8dd2492209180aafbe429306e35023ad87a8df5902982b8c87",
+      "gitBlob": "7dfede55db60516966f458c4e0accaf382512312",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterCreation.tsx",
+      "bytes": 265,
+      "sha256": "4ee2d544ed1d260fd9ff64ccdb72a332f3e8bfa19996e46241b0493205d181ca",
+      "gitBlob": "bbc61fbcf210ccc510e1d4020bb81aed5d67547d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterEditor.test.tsx",
+      "bytes": 59700,
+      "sha256": "82f9617bae59807020e04b84ced4d0e44b4cf5b67dc8b01d067e37448e8a331d",
+      "gitBlob": "902bbe86edd13a659b8cb231fd27425e1b36b33d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterEditor.tsx",
+      "bytes": 135143,
+      "sha256": "8041b051d2e2fa288a7af33bb177297d6e0b298930fdc8291768c354be6da587",
+      "gitBlob": "a279b6bde38f3e1a2a22f7145dc9c042930b8caa",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterFontPicker.tsx",
+      "bytes": 6561,
+      "sha256": "cd11420a1bead012662e7731e785ab703cb57414cf8f75948a44cc416e5099a6",
+      "gitBlob": "45f7e72226fa78ca4abe786538616da47d073c70",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageAi.tsx",
+      "bytes": 5661,
+      "sha256": "3756dfda17d4244ea5a0284441dc9653189185c177c5f8c1aba5fcf7646feb88",
+      "gitBlob": "842f8192d12a0ea5e8755757abcd7e7c59988f5a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageAltText.tsx",
+      "bytes": 3154,
+      "sha256": "a3a0db77f3a722458a334d01ea76ce318290cf65d070bdc3416921a041323914",
+      "gitBlob": "3c785923707b40675ac79f5aab05cc187202a958",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageControls.tsx",
+      "bytes": 4612,
+      "sha256": "a020311211b14ccfdfb70f36d3cf3e7c8c645babce165ef2ac9adfc82ce871aa",
+      "gitBlob": "fc093df961ecc1d4f85c96fd7819794c9375b8c5",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageCropOverlay.tsx",
+      "bytes": 6809,
+      "sha256": "398bcae5c30f1027886df854502d522c5337199d17f5d85223887cd6e45eb104",
+      "gitBlob": "74313249bb593b8b6a2fb5b926027377105ce8ba",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageEditor.tsx",
+      "bytes": 34144,
+      "sha256": "e2b1a87f66ff0d77d428bb6ff1c62963a3474fa04311049a6ded2d3cffd18d38",
+      "gitBlob": "51248a9b05fac8e4b9feb3eb7bccabe3b5431316",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageFocusOverlay.tsx",
+      "bytes": 6337,
+      "sha256": "a21410b5ed658782a47c2821206df992f5011f55a694968af95117bbbf58082c",
+      "gitBlob": "5f38fca81fbfab65532c9c75b8056fb389c347cc",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageReplaceMenu.tsx",
+      "bytes": 3678,
+      "sha256": "817d1a14a1be9733fcb777c03791be8d58d3bdb89aaadc1c83068c81d96003de",
+      "gitBlob": "23639502bdc2b084c154cbaa7149f9ddf187774c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageRotationRuler.tsx",
+      "bytes": 2114,
+      "sha256": "f47d74dfc81f2280831d1f797f26649aa385d8dd00a48dbfa6adbd7abefc2438",
+      "gitBlob": "5906c9bb30c2c3b94ccbcd236fabe0ebda7a648e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageTextOverlay.tsx",
+      "bytes": 14226,
+      "sha256": "91789438ff130362f92c42ff517eaf3be099fee656b629995dc9477c9f15c3eb",
+      "gitBlob": "850f9199bd7778d49805da0f1f4c964fefd16584",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterLinkChecker.tsx",
+      "bytes": 10040,
+      "sha256": "7ef48f2335da7dd9ee9fd9da1ab5ccd0a6382f2a3d848655e129074efdc1d53b",
+      "gitBlob": "c131e8be4367f71dc51af4ff5f5bd5d1cc35ec17",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterOutreach.test.tsx",
+      "bytes": 12430,
+      "sha256": "3729a76170729e832883e0e294276a54bb510d355ef924e51d0853444d7bd5d2",
+      "gitBlob": "37404cc426ab83a5ce4c3c002cbf1e772003b5c4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterOutreach.tsx",
+      "bytes": 22366,
+      "sha256": "5962b492b9e6b178adbfbac1fe3a808ef4092e3f6c3eddafb2fc5814fd258a04",
+      "gitBlob": "8e16079ecc2313d52ebb662129ca9d731324d510",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterQuickCrop.tsx",
+      "bytes": 13079,
+      "sha256": "a5cb31a31cfade84a60fd783df03f89ecafa0e59dafe68247dbe006913df510e",
+      "gitBlob": "9bfd86e7bc538f46d93d6ab37b90b2d6f51dcf2b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterReview.test.tsx",
+      "bytes": 1496,
+      "sha256": "10c333cf5103f1cfa1133ee045022532704e3a1b029a581e2e2e4f7e3a15d567",
+      "gitBlob": "d16d3c34b3bec65f1cf61db5091ada6675747515",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterReview.tsx",
+      "bytes": 2267,
+      "sha256": "93630762c0e7e1747ec9415580cdc7ff693abd0b2e73053df759f56726c2ddcd",
+      "gitBlob": "f61a9d17382e16bf78d374393794364f8c2a71b2",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSocialControls.tsx",
+      "bytes": 9687,
+      "sha256": "1a97b7902220a8000aeec7f631786ed2e4e8b1b8fb5aa4d3f311799438b065ff",
+      "gitBlob": "9e4eb1691940c2de9bd1a6d2431675f84930606e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSocialShareContent.tsx",
+      "bytes": 5927,
+      "sha256": "707b87fb1004a2100cf0bb4d5ff3f91fae041387a681a911d3d599e425241b8f",
+      "gitBlob": "8bd324b71c105689c717721ac8aed07defb2c973",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterStockImages.tsx",
+      "bytes": 10616,
+      "sha256": "8e2c0feffcd1eb448b73e44b180a2bde3cc9a5b566db95995184fd7b324ddabf",
+      "gitBlob": "48b15063807cf1b64e0ba2b9c4c567c9567342c6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyBuilder.tsx",
+      "bytes": 24668,
+      "sha256": "6fc54f5c249c061f517e0fe557ab6f60d6b2a921c997d8316b9625bcaa0c5bd1",
+      "gitBlob": "52c5fb071036c8d17903d21e2f4fd9c606bbbeca",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyDesign.tsx",
+      "bytes": 13409,
+      "sha256": "d1029cfffcd5e5c91cc446dbe48b25f94b49999046a81f06e26797d72a5246d7",
+      "gitBlob": "9d6a774c60066ee9ddd6b62fbe6e5aa78542b98b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyMedia.tsx",
+      "bytes": 5394,
+      "sha256": "652a2c56eef1b4658c036e1ba7a47d58554ae9caed5cd0d6f0f2496eb0f91411",
+      "gitBlob": "7a05dbb094e0174c97c1ea567d95da8a43dc84d4",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyPreview.tsx",
+      "bytes": 6159,
+      "sha256": "daafb2e3c34f6457259171fb73343f0142fe52d9b15b494eba2fe9928682659b",
+      "gitBlob": "9eddfe047b5e64fa692c52d1ca70d5a658a8870a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterTemplateChooser.test.tsx",
+      "bytes": 3823,
+      "sha256": "2d9b1fa7de85b29be6c162dee20fe48de0b45ab508abeaa14a046b09237a3dff",
+      "gitBlob": "09c38baa503844148be9e3d6808a599e2ca75196",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterTemplateChooser.tsx",
+      "bytes": 10547,
+      "sha256": "d50a86e7a51a38868a8736064a7e13740fb078238c1b8ed11f21698365001ac7",
+      "gitBlob": "47e81cf9ac78a03852b18a46affc77ca1c80198e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterThreadNotifications.tsx",
+      "bytes": 4408,
+      "sha256": "0eb5910c0396155698b8f027c8abe88c16a6d01caf5c16d2dcc441abad671d87",
+      "gitBlob": "b130061babfa55b3e49a2e50c00151708c035d92",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterVideoDesign.tsx",
+      "bytes": 10815,
+      "sha256": "1941fd805f6f5729ece5569dba9c320733f46326dc25b0b5d0509bfec26ab2ca",
+      "gitBlob": "ffc5ff461d3a9532bf49049fa34df71728792993",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterVideoUrlControl.tsx",
+      "bytes": 3290,
+      "sha256": "d9a49f6c6007505dc0ccb76df97f704099156f57ce5a8092174367d9b09c03e1",
+      "gitBlob": "2ac64c5c8adeb8c478f7af17cd54b50ed0665ad0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-OutreachView.tsx",
+      "bytes": 128551,
+      "sha256": "d11bb1216814783e831e73fa602f60d83fe0f60874706e2b0528e3b7de7ce8b6",
+      "gitBlob": "7dda1dd995d47bbe5c575186884c7dc4e6b35ec6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-VNextApp.tsx",
+      "bytes": 2952,
+      "sha256": "d26380dc16ae86a786de54fdce6db420b9cf504aacf64c5ad6f34bc9cc0ec77e",
+      "gitBlob": "1bb00a53e8da5409b2f30b1592ff195fdff83559",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-VNextRouter.tsx",
+      "bytes": 12194,
+      "sha256": "63e97e7c6a8e67709bcdc3e9fc4d6056db005363c96c1b91d9fd65c178d5381c",
+      "gitBlob": "691669f96a551e47f85cc12e9fee47e18803e024",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-WorkspaceRoutes.tsx",
+      "bytes": 1547,
+      "sha256": "ade8a5be84c74cca9ac464485e0115708b7d7eda35ef4ad7d50b08e411a8fb77",
+      "gitBlob": "633f628fc683fc78984843f6fbc85eda12b9a4ce",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-WorkspaceVNextRoutes.tsx",
+      "bytes": 11350,
+      "sha256": "e62ad8f36b4323346f5228509fd29f25490504e2215f5caf50bbc2b4a7a707c0",
+      "gitBlob": "920c80e2f3c1987ef47361858b2c9c0b3410c06d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-api.ts",
+      "bytes": 15407,
+      "sha256": "8ac4128acea79c92a6287a1b410fc65e9f76078bc60cc3e32122ecae5bcfa1e5",
+      "gitBlob": "7aad2c2f3e3df7d4535cd917d93de1375e1c5412",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-brand-context.tsx",
+      "bytes": 971,
+      "sha256": "e0be2e0450cf4e531648c0d6efbc8dcf2c3adc98bd83f65c253e5db8cbbeabf5",
+      "gitBlob": "4a09c64d97515c7ab2137e6ba74b48440544e944",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-controls.tsx",
+      "bytes": 20255,
+      "sha256": "33724c2cb8317415586b5b96e8f5348c915b41616b203b63e1b59812b691fec9",
+      "gitBlob": "10519bff5da506413a351b76446dfec9590be417",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-image-editor-crop.ts",
+      "bytes": 4074,
+      "sha256": "c0fe5799ee6835ab60f77691a389655fc3b212d97aaff8e1fa720a4aad73e458",
+      "gitBlob": "77c99ae2ca59886d444ca4bf83e86169775304fc",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-image-editor.ts",
+      "bytes": 18360,
+      "sha256": "80b6fc75e089c031148004fe6b2cf2bf4cdb420043bde5d307b59ebf38048ea1",
+      "gitBlob": "3caa82e82cd153ac5e86bbbae0396f80230c7de1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-main.tsx",
+      "bytes": 3816,
+      "sha256": "dcfb2e729bd2cff15cf1b44fd24dc78d3d344e5b2d36466c53154a26fe6802ce",
+      "gitBlob": "ab53d22daed3180ac2b0a4134da9b58a75b46859",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-model.test.ts",
+      "bytes": 1381,
+      "sha256": "6e84912628849e061d2a85aa96dfed121ce6ca5fe43dac352e7f30af9cae04b5",
+      "gitBlob": "baae1b8448579229b3077cf37c641c7575007f6b",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-model.ts",
+      "bytes": 9774,
+      "sha256": "e329c449060797f276265b7990f4f8eb1b59914a6c2c8bc00b4027fb9e605586",
+      "gitBlob": "56dd78f57a47c726ff6e47ab22abc3178f5fa61f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-newsletter-links.ts",
+      "bytes": 6031,
+      "sha256": "6e31c4e2041ea96e70cb65da01e0aa12065a0e58886356e078453409215a05f6",
+      "gitBlob": "407d15bc88a5dfd9003d7363431eacfbeb7b0206",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-newsletter-outreach.css",
+      "bytes": 2942,
+      "sha256": "69ed2d0b32310f10e1a54109e64e2691652e4e827ccc21d2f7d8e6faf559d4fa",
+      "gitBlob": "f10a013165c5760f959c852721d250716e31cd92",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-newsletter.css",
+      "bytes": 55397,
+      "sha256": "81ef24b7abbee605a7b7aa5c520adb161f801d4aaa5938fcb1954f8ed52bb3b3",
+      "gitBlob": "d52b1392b8ceccf5864783ff9b7b75e38e5d0a76",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-useNewsletterSurveySave.ts",
+      "bytes": 4749,
+      "sha256": "df44ee676e569f74c77b40b7cd564d4f17b66de714e8658679855821eefdc5be",
+      "gitBlob": "8034c4066ead7272bd5959305fb2307505eedcf0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/shared-package.json",
+      "bytes": 3761,
+      "sha256": "3ec63a174f34c80651c3ca3b7e82132857dabccaf94018bb7ff996a1b4297ddf",
+      "gitBlob": "1600eb5bc3ea85e6d41b563366e11b57d8aef2e6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/shared-tsconfig.json",
+      "bytes": 686,
+      "sha256": "89278950647f196ac9ae3c088f96a35f83e2fa45a7c28c563af3b2e2c059dab5",
+      "gitBlob": "cff5b3a8506d1a290987883f0ed773b2118da169",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/social-icons-attribution.txt",
+      "bytes": 508,
+      "sha256": "3aadf1580c4a90dfac6895616a13241759ad253615091782edcd07b444f924a0",
+      "gitBlob": "5de712e2355b9246c070f14c345068920f0ca18e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/social-icons-license.txt",
+      "bytes": 7427,
+      "sha256": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced",
+      "gitBlob": "69403b25cdc6beb4fa65d13858e9e7aee7e2c672",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/current-owner-map.json",
+      "bytes": 2550,
+      "sha256": "4bf89adb246d436927126860dd1e4c6fcac9d7947f4b9da80ed2771faca3208a",
+      "gitBlob": "ed0d889c140ebd5b7da360376b202115a4b02110",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/adbc-inventory-comparison.json",
+      "bytes": 69660,
+      "sha256": "0c7d4c9b305a9fdf66d537f83df1d2bfe0458d5789c04ee6bf79be0306a0b5a1",
+      "gitBlob": "e39d7b18240f1c58eb5f6c611103b357bd4089ca",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/controller-source.json",
+      "bytes": 17198,
+      "sha256": "cea389c53bc8fe5d76af415e415d99a534310933b24e220afc7883036f6fb829",
+      "gitBlob": "9e28e16036f4124de3d0991c3de595c686be90cb",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/dedicated-frontend-identity-comparison.json",
+      "bytes": 140329,
+      "sha256": "188bdd9434aae4941a507f13194803223cf6597fed48ef17d671d895eb6405ef",
+      "gitBlob": "dac28802da82335acab8fe723edb824843a190e0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/final-source-read-addendum.json",
+      "bytes": 387918,
+      "sha256": "9e5302aeb5a7ec0ffbb153de29f61329e28042a57e9275da476c2767abeea862",
+      "gitBlob": "11278f575b65c301978fdd570a7d1f3a848786ae",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/local-object-availability.json",
+      "bytes": 3255,
+      "sha256": "2b8b9f502eb8c53646276e74d2a9a27f04331ac9d3310803ded4c58525a0a2e6",
+      "gitBlob": "f57c62576e3a6fcc9cee0a1c5d3e44e86a7b4787",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterAssetDirectoryC.json",
+      "bytes": 238652,
+      "sha256": "68cc7a1bfc5893b24995552c724bc06f52aad3f4f6fce3901ea917c555af0ddd",
+      "gitBlob": "628a342050e667ab9b166f94bc87b92fa8e472b2",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterAssetDirectoryW.json",
+      "bytes": 238652,
+      "sha256": "685d13b0620ec1d6429b991ecd448ebdce66fb41b516179abb381af4486c379f",
+      "gitBlob": "6c429677548cdc47742e50a6a40496b27ea30678",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterPlanDirectory.json",
+      "bytes": 13295,
+      "sha256": "49624e6157685a768bd2e980d399b12a3782f3c39b417da79d51e0b13498cfbb",
+      "gitBlob": "644aaad60c692546971cd1b051549e9bd1f9bee6",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterPlanEvidenceDirectory.json",
+      "bytes": 45029,
+      "sha256": "1c4aa2dd50155f62840a4611593b45eff5e22c3416b11ff8836aad4a1df11b97",
+      "gitBlob": "f569c4be52e0f3b77e405a9b45c9705f247652cc",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterRuntimeDirectoryW.json",
+      "bytes": 113489,
+      "sha256": "dfed5354666969e38748293cdacaab630d102caaf6f04644b10e25c484d53771",
+      "gitBlob": "bb4a98017ace73b83038162b983c4ea72e14b1ad",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/pr2424-changed-files.json",
+      "bytes": 27920,
+      "sha256": "70015e9520509d829fbcbe2755492e5bed090a52ad480f23bc8ee8a86384f34e",
+      "gitBlob": "97653806ce8ac21550c8b47bdeb32ae2814ca84d",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/pr2424.json",
+      "bytes": 4382,
+      "sha256": "db91a5a6050ee60a62f5ed105630ca3d54c92a0a9587a168dc8e2791d14204d1",
+      "gitBlob": "4d5cb8ba4f5f10648579a5e4dfe31278bc96a19f",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/raw-source-addendum.json",
+      "bytes": 187829,
+      "sha256": "7bc4ec873d862324d9acf99f5a55e5c73ccfdc14e9103b3d42bf45e19c1bd2c4",
+      "gitBlob": "a77b000a8faf1e1f1edfe4f24a9a8f5614e3f3e0",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/raw-source-snapshots.json",
+      "bytes": 1358721,
+      "sha256": "2725c4db403f70537c279d25187ae9e704bc9c52f836cd70d84dc2dee13fca48",
+      "gitBlob": "fa5e15c84d9f00cec0e90804766ac01b610db15e",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/schema-assets-lock-receipt.json",
+      "bytes": 178447,
+      "sha256": "6e4a0d178311e32152dd35f908ce34e78e37ad8734c638d9013c97551662b520",
+      "gitBlob": "d7db3d76ceff2898a35469e5ff95d0fc8587b72a",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/source-dependency-receipt.json",
+      "bytes": 266486,
+      "sha256": "39af80400cbe9eb74bd9d9c45e5dffa4bbab091b2c82c194a06f8b95e6fc4fde",
+      "gitBlob": "dbb9f4461776ef99dcc3e6b27dabc1ff27d63547",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/make-scope-inventory.py",
+      "bytes": 15417,
+      "sha256": "1eda2831ee2a4199299eef02d8eb1e2ecca7480170571ae2b462985854766662",
+      "gitBlob": "79640caab2dda5da417acc9fd6c8473abacc4476",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/meaningful-test-map.json",
+      "bytes": 24071,
+      "sha256": "0ab45b29d9a8f2788bc15bb4dd1c5fd305331bf830410aa7fc4a3cb815ba0603",
+      "gitBlob": "3e5919716e61fe6700b04f4e43b1831fea2df64c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/package-boundary.json",
+      "bytes": 1292,
+      "sha256": "e61aeb2b9569f8294828d8128058cad1d0c525394e0483036a9521481b317795",
+      "gitBlob": "0bc7741317928a772aee553e7672398a170e155c",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/path-map.json",
+      "bytes": 321995,
+      "sha256": "640098960b17ecf2d8dd3f1fb748b1d56036a1b6f301f67bbd4334cdf341c2db",
+      "gitBlob": "6f7e4cf1e38e8798a1779c830ca1facc60531027",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/report.md",
+      "bytes": 21582,
+      "sha256": "88bc25d5415f8dadec56b909fb47a5b653ff29b5bac9de73c731dfd38b46e378",
+      "gitBlob": "0832504185365222f6d9678b48784d5dd9b75b82",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/scope-summary.json",
+      "bytes": 1692,
+      "sha256": "eebd7eea2050054b0edf6c1174f3597e4795dfaabfffe5a756a4c8840fb46e8c",
+      "gitBlob": "3388afbb7e14bbbfae96fb275a4e1682fc1d41eb",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/source-pins.json",
+      "bytes": 52243,
+      "sha256": "62b8dd937855837f0b82222e70ea94decc7be36feeffc86a51abf7349d4f62c0",
+      "gitBlob": "5bd0a90da93490230ac4cd1740bea541e4051ea1",
+      "mode": "100644",
+      "manifestMatches": true,
+      "worktreeMatches": true
+    }
+  ],
+  "assetChecks": [
+    {
+      "path": "apps/web/public/newsletter/capitol.png",
+      "sha256": "f354a71c6fce886271809b0c5c73c7e0ee6012d73558bc23b5f5375756565312",
+      "gitBlob": "cebcd54d90c9056ba5707fe502a09f4a329d3cb7",
+      "bytes": 31192
+    },
+    {
+      "path": "apps/web/public/newsletter/capitol.svg",
+      "sha256": "65221548aa001bf52618eac9e4109e1cd644af431932457d0d59e8921e33e7a9",
+      "gitBlob": "73f25d45b29f5b023e00788c9ba10569ddb8bb2e",
+      "bytes": 1333
+    },
+    {
+      "path": "apps/web/public/newsletter/newsroom.png",
+      "sha256": "169ade838cad34c618a6647adb4c6b6f07a5fb40bddd5ab111d53cf443ab8531",
+      "gitBlob": "da62db86f5f0ccaf87d3e6a9b8745a40990b0a3e",
+      "bytes": 55820
+    },
+    {
+      "path": "apps/web/public/newsletter/newsroom.svg",
+      "sha256": "a38871eedf905dcf79932e9b59f5beb9b94743af9054915d84702bf9368189dd",
+      "gitBlob": "9ed7052c6f65bd6b5d603aa0ba5af47587d2db51",
+      "bytes": 992
+    },
+    {
+      "path": "apps/web/public/newsletter/policy-desk.png",
+      "sha256": "05d2175fb65fc3307bf8ae6a7e851fae617029887b90ba81910fbb0c78b15556",
+      "gitBlob": "273d8477db1f72f613a9f53ef7339ac0f07b195a",
+      "bytes": 27879
+    },
+    {
+      "path": "apps/web/public/newsletter/policy-desk.svg",
+      "sha256": "d1cd4dc690d7ae35954b28ea9f4d1a2a9e2e3d1b010737025da96673f7b674db",
+      "gitBlob": "e807f7e4ad7d82383dc1de1553a65381c8f31826",
+      "bytes": 1089
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-color-white.png",
+      "sha256": "0b3c385b4f08354f562f3b5bda38ae02f6872fb6252cc4e1fb16ff5985180e9c",
+      "gitBlob": "9cbc4d422c6276096b26cd28e7f5ebd9dbc4e3dd",
+      "bytes": 2310
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-color.png",
+      "sha256": "57ea6baf35376dbf032b50720ae35514f483f6ae93b7a374f13d31d2b93e86f4",
+      "gitBlob": "cc20b3895777237ea87efbd7da18e50005dd1089",
+      "bytes": 1650
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-dark-white.png",
+      "sha256": "86a6518fb25adfebf24583fb6434c760efc1283b0bb1ce44742ee54bc90d0667",
+      "gitBlob": "f796318cb061de2b182e5ca4591ce00f67fb5a65",
+      "bytes": 2446
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-dark.png",
+      "sha256": "bfbf1edd9f6fe91a314b265a5424906bddd7d34648a7e5a3ddc72e05d60f857c",
+      "gitBlob": "64c982b7b14ee6c1631a8b2c786dcc59908b5d17",
+      "bytes": 1662
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-gray-black.png",
+      "sha256": "203ffa95129c9f29487b84b06361ca697492bfebd4459bc6af5831edbfa9886f",
+      "gitBlob": "66af27d8a771d22e4ceb0d9a3ac3cb271f81eafb",
+      "bytes": 2357
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-gray.png",
+      "sha256": "76425ad7fc9033efaf257403f9f4ec4ae1f05e976168b6144a4c0ea8d159d4f7",
+      "gitBlob": "ec51088fa371653ab9d4422b8d01c23e1b634285",
+      "bytes": 1654
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-light-black.png",
+      "sha256": "d1dfedff3f6f3d8593495fdac0a001499d9bfc994c86de0249982c78e30b09af",
+      "gitBlob": "715fe711912105ae60cbaa2afd11252d17d4d444",
+      "bytes": 2321
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-light.png",
+      "sha256": "1f2b6591af5c8d287dd14cc96cd0f1e4f2524cc1d0c0ae63dc92914cc19dd92a",
+      "gitBlob": "d2b6dba355034e9088aaa1acb7bac3e52dcca61e",
+      "bytes": 1447
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-color-white.png",
+      "sha256": "89308182c2c88a3fd1071fe21daeb51e451b69452b76dc2b916505807108ce17",
+      "gitBlob": "af6a62558fa7f0fa6d16e1ce2930212fda4f8f0c",
+      "bytes": 2482
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-color.png",
+      "sha256": "e520edcab7e85eff28476a342f6ee1eec0bc54ded5045142be8ec582968c1bca",
+      "gitBlob": "7981cefb48b95f70cdf855a067020c674c390efc",
+      "bytes": 1821
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-dark-white.png",
+      "sha256": "a5265c9d8a43d808cadaad971740ead1782c5c2951aecda9a7bf2049f49dbd2b",
+      "gitBlob": "cd9dca13b875997fe07b2eef953bf326b7ed4659",
+      "bytes": 2409
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-dark.png",
+      "sha256": "639681083e279b079c287e39e37bde0023e25f3a7f3165f753cd612035d85a7b",
+      "gitBlob": "04dc76de0fb5689a4641499f6db1c71a09e2f9a7",
+      "bytes": 1629
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-gray-black.png",
+      "sha256": "94b821a5ae06e7a802518054e376ac6abfca924b15c7dca32d58cb0945255a4d",
+      "gitBlob": "06f611382f891e3eb740bead666a49c585c25683",
+      "bytes": 2291
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-gray.png",
+      "sha256": "85a1018cb0056569143f7c0603c1473264209a7d4ca883ddd129bcd36920a368",
+      "gitBlob": "8139b9aa7e8e84924da62e114f0eb43fe3e4d012",
+      "bytes": 1643
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-light-black.png",
+      "sha256": "5f1c0fa5d40ed182f43b289a34bdd95f2286c1083bfe479756b2fda02c93063d",
+      "gitBlob": "e2fedb9661b3bdba0b5bb11dd8d1fc4b46aaf769",
+      "bytes": 2269
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-light.png",
+      "sha256": "7d273df8dce52a3ddab7ffd3addbb8820541fa688f0ab2d39f9142a538db7ef5",
+      "gitBlob": "c3aa7bb2ecd91e90895ac361ef13d3b4208a6b0f",
+      "bytes": 1456
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-color-white.png",
+      "sha256": "f3f485f210e365dc3bd61af79eb6c1a821c66669497aa1dc6155d5cee70b3fed",
+      "gitBlob": "ed57ec26aad0f7a43608aa13bc382e57dcb0ac91",
+      "bytes": 2138
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-color.png",
+      "sha256": "129499f19fcf77754570e6a5fb24f7bc19437f5d4de37fca61a4dc2a5133ee30",
+      "gitBlob": "6991128b52d76cd98ba58946318bd35d25c60f07",
+      "bytes": 1308
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-dark-white.png",
+      "sha256": "4d4b7385e60e04cebb4841dfb1b13b7fb8481f0ca8a299c6fad567c92fa7bce3",
+      "gitBlob": "f71e59800706159ed2cd517be1159d212f83d7f5",
+      "bytes": 1983
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-dark.png",
+      "sha256": "c87d68267772106228730761e35f0fd29748c1f6a5a5037e79896992d92e2a55",
+      "gitBlob": "dbb5b09344151e2d1adcb12b61f89ca48061533b",
+      "bytes": 1160
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-gray-black.png",
+      "sha256": "103b83fe42945603c2c1746a105b3159f7d51074e6cc402981fb020bd4c80a4e",
+      "gitBlob": "3a9227c6ab2891ee4beaa4067923b6e0c9b7a99a",
+      "bytes": 1948
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-gray.png",
+      "sha256": "3e0f768fe342cf452d2613592142ed948d549a7e7632bb2e72c3ba93d60cc002",
+      "gitBlob": "298b27f897064d5043273b655fcd6c621485cd42",
+      "bytes": 1172
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-light-black.png",
+      "sha256": "6dae9248027e8144a17c93b5462b5be54985094ab7dde5e062a44ccde2668a17",
+      "gitBlob": "7bd30c937fbd453257cda0bddf9290af6b127436",
+      "bytes": 1817
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-light.png",
+      "sha256": "e5c4ac1468785680e45d5fa3d6543f85f533bd6ea9729c7e2b7784eef2fc0293",
+      "gitBlob": "38c8409358124c31ff18a786c3358d83f8325ce4",
+      "bytes": 1019
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-color-white.png",
+      "sha256": "67d9a8abfb21af6e7a446be59553ac118ae1253f0ba157c669cba2e17dce8282",
+      "gitBlob": "c9e525fd896f34b0e89676dfc237573d0b794eca",
+      "bytes": 1867
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-color.png",
+      "sha256": "6663e43fa3f23efa7152cfa793d4282a0ac753e622b0ccea2cfe12725dea45d7",
+      "gitBlob": "5ff3a0127caf7d665b05a9169ec1d18bb1d3a94b",
+      "bytes": 790
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-dark-white.png",
+      "sha256": "381250bbe91c193a66fc455126018444ce43d53b0fdc4bfbbfbbea038c2a2735",
+      "gitBlob": "40adb6bbbaad3d1bba1ae7a20789c28efc6ebc32",
+      "bytes": 1717
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-dark.png",
+      "sha256": "b2b692659f3cad58a8065b38d43144ab7c4fbb6ead5a077c48631afdd56d7782",
+      "gitBlob": "31923f446c181e2c18d6f0b2a198630bd247f6d3",
+      "bytes": 715
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-gray-black.png",
+      "sha256": "e0235b9f6d9b9359c9db866f44bb6fd088010a164d7110ddbb7b950f7526aabe",
+      "gitBlob": "e05b135af11a2b88af0137d1fd4d211d12e95050",
+      "bytes": 1706
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-gray.png",
+      "sha256": "a915c51ce0e63b14750736ec079a1080a827019aba960bcd77a72460b1a253ed",
+      "gitBlob": "34368c9850677871af94fc8ac2534776cdb276f4",
+      "bytes": 731
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-light-black.png",
+      "sha256": "c6a3d59cbcaeaf779d0819333afea1241244fcb52662d16137158b7053abdce3",
+      "gitBlob": "da0dd14ba4fdfba6f9216ae1b46a7d4a74bcc5a6",
+      "bytes": 1556
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-light.png",
+      "sha256": "dc08d9cff42fde4e541e9030ba0fed335d6c3d11e449910dfd85d72c6f8e4935",
+      "gitBlob": "c4e162a205dd82cae6d36579264787b6a0f5b49c",
+      "bytes": 625
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-color-white.png",
+      "sha256": "f3f485f210e365dc3bd61af79eb6c1a821c66669497aa1dc6155d5cee70b3fed",
+      "gitBlob": "ed57ec26aad0f7a43608aa13bc382e57dcb0ac91",
+      "bytes": 2138
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-color.png",
+      "sha256": "129499f19fcf77754570e6a5fb24f7bc19437f5d4de37fca61a4dc2a5133ee30",
+      "gitBlob": "6991128b52d76cd98ba58946318bd35d25c60f07",
+      "bytes": 1308
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-dark-white.png",
+      "sha256": "4d4b7385e60e04cebb4841dfb1b13b7fb8481f0ca8a299c6fad567c92fa7bce3",
+      "gitBlob": "f71e59800706159ed2cd517be1159d212f83d7f5",
+      "bytes": 1983
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-dark.png",
+      "sha256": "c87d68267772106228730761e35f0fd29748c1f6a5a5037e79896992d92e2a55",
+      "gitBlob": "dbb5b09344151e2d1adcb12b61f89ca48061533b",
+      "bytes": 1160
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-gray-black.png",
+      "sha256": "103b83fe42945603c2c1746a105b3159f7d51074e6cc402981fb020bd4c80a4e",
+      "gitBlob": "3a9227c6ab2891ee4beaa4067923b6e0c9b7a99a",
+      "bytes": 1948
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-gray.png",
+      "sha256": "3e0f768fe342cf452d2613592142ed948d549a7e7632bb2e72c3ba93d60cc002",
+      "gitBlob": "298b27f897064d5043273b655fcd6c621485cd42",
+      "bytes": 1172
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-light-black.png",
+      "sha256": "6dae9248027e8144a17c93b5462b5be54985094ab7dde5e062a44ccde2668a17",
+      "gitBlob": "7bd30c937fbd453257cda0bddf9290af6b127436",
+      "bytes": 1817
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-light.png",
+      "sha256": "e5c4ac1468785680e45d5fa3d6543f85f533bd6ea9729c7e2b7784eef2fc0293",
+      "gitBlob": "38c8409358124c31ff18a786c3358d83f8325ce4",
+      "bytes": 1019
+    },
+    {
+      "path": "apps/web/public/newsletter/social-icons-attribution.txt",
+      "sha256": "3aadf1580c4a90dfac6895616a13241759ad253615091782edcd07b444f924a0",
+      "gitBlob": "5de712e2355b9246c070f14c345068920f0ca18e",
+      "bytes": 508
+    },
+    {
+      "path": "apps/web/public/newsletter/social-icons-license.txt",
+      "sha256": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced",
+      "gitBlob": "69403b25cdc6beb4fa65d13858e9e7aee7e2c672",
+      "bytes": 7427
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-color-white.png",
+      "sha256": "6b4e3b573b57848ea163ae403a62ebeb5bf01367d10997ff593beae9de38a4ef",
+      "gitBlob": "95be9e0978c5ceb588db83cd302887f1594b902c",
+      "bytes": 2890
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-color.png",
+      "sha256": "90dae07d0fdea7d5c1d5cd4b778978be8103f84827ea18b597734a59561f13fc",
+      "gitBlob": "a84a17b7c62d926ce78523e4e741468c9fa7cf61",
+      "bytes": 2376
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-dark-white.png",
+      "sha256": "fb9bc16551337004984abc9236c31cda5e6e94f868a911f666a8d68bd9450568",
+      "gitBlob": "dd3c9a35d6ac31b2a4f71343172995c353fe40e7",
+      "bytes": 2785
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-dark.png",
+      "sha256": "4855c6de2962e3a101d293af1abded13491bd96ceb9f234d6293028e88e9faa5",
+      "gitBlob": "4d18bf8278247a0a66b5b900422ce83caea37b2e",
+      "bytes": 2113
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-gray-black.png",
+      "sha256": "595de397df837eca6f2c14955c63d205fdb34a0fac33a6b07454da9051d311fd",
+      "gitBlob": "1d2bf9ec5c7610fb352ccd3ace5a29c5f94554ca",
+      "bytes": 2566
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-gray.png",
+      "sha256": "84ec1f1bc9fd7b93f9dd1a4343471b374071b517e188c9cfa0681b7819d1c084",
+      "gitBlob": "a688a7bb1f665312fdba9fdb42f998cc04e7901f",
+      "bytes": 2128
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-light-black.png",
+      "sha256": "01d4a8feefd19c1f1f8dd11c2cb88e9bc2a645c5eaeb5bc94b2a20f73d082d28",
+      "gitBlob": "c1cade8a65816145d1d1ebe0fab6fb0e595a3b00",
+      "bytes": 2646
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-light.png",
+      "sha256": "879a9b410dfd0a3e15c51d839295025cec90c44c70573f8ef5f83662bc887ecf",
+      "gitBlob": "9ae122f36ab1db0c3e18a2e2f321acdb986ee2db",
+      "bytes": 1886
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-color-white.png",
+      "sha256": "cbe7a103b05095eaf9355f7078b67c75dfa83aef91b57baab97cfd115a2a645c",
+      "gitBlob": "a8b383500a120fca1c3468be1fdbfe632fd0b457",
+      "bytes": 1411
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-color.png",
+      "sha256": "d6d0d6f3e773667754e5eea4bef60fcdcdee20eff8482d45d63a394898876116",
+      "gitBlob": "cab56ae3e7490fb79f9efb2f3866a2fcce014d37",
+      "bytes": 315
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-dark-white.png",
+      "sha256": "cbe7a103b05095eaf9355f7078b67c75dfa83aef91b57baab97cfd115a2a645c",
+      "gitBlob": "a8b383500a120fca1c3468be1fdbfe632fd0b457",
+      "bytes": 1411
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-dark.png",
+      "sha256": "d6d0d6f3e773667754e5eea4bef60fcdcdee20eff8482d45d63a394898876116",
+      "gitBlob": "cab56ae3e7490fb79f9efb2f3866a2fcce014d37",
+      "bytes": 315
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-gray-black.png",
+      "sha256": "b203e0b47e8921ad9125bbac2ece6efc1f3294ee1d4478bfd8e802058a1d4306",
+      "gitBlob": "554a9223adf28ce61dbec035671fce04df5caeba",
+      "bytes": 1425
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-gray.png",
+      "sha256": "3e9d5a4fa581f7cad89a2529ef773eada5b83cf3e60a060e972da4f6c67f9f57",
+      "gitBlob": "175e1cc0b5bfffa3a6d5dd2e666eb3d5302ddc6f",
+      "bytes": 315
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-light-black.png",
+      "sha256": "627cf0469dae946737183e43876292b45cbb04e1746adedfd891722c1db2aecd",
+      "gitBlob": "b04d633306b50587de75f9d32cad3b5107787a2b",
+      "bytes": 1247
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-light.png",
+      "sha256": "a693bdb89c13930c8987578871b7e999e8ff2fda7bff6e4761fabe539bb74e79",
+      "gitBlob": "f43badc71f31c70906e915805b253581f79d1123",
+      "bytes": 289
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-color-white.png",
+      "sha256": "bc6a22e4e0ec5c8bfbc36b5350c571331930e9c560c7f349185a5de64c34af5a",
+      "gitBlob": "6643bdc158e1fecdd8bb91772e56e5a9e12b52c3",
+      "bytes": 2053
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-color.png",
+      "sha256": "22b3688ae09f67ebde18d5704f0ec2c280fd66b30e3ade93663f563feb0176d3",
+      "gitBlob": "54c8eb14888fee6461ab7db53d463bcec1552729",
+      "bytes": 963
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-dark-white.png",
+      "sha256": "a00056e733d43d567df49d92d9cf390d988f6f29099e8e03c1ee52bd6bc964cb",
+      "gitBlob": "8d215b8d116ca477cd5a954683686b96ec7efa76",
+      "bytes": 1897
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-dark.png",
+      "sha256": "65c9ea02b894763b15403f854a5465ceb40184ff519b90d086b8d0b11195ed99",
+      "gitBlob": "fc0421a7ca73d640d0abb0d42d1d19fbb6f3eb7e",
+      "bytes": 854
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-gray-black.png",
+      "sha256": "7b5e16d9d1cb223727a6307973054c7fa7cbae1fce6fb3f8cb5c73ec56f48fa6",
+      "gitBlob": "cbd2e7e08e20e2f28fdad125919fd392eaf11642",
+      "bytes": 1877
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-gray.png",
+      "sha256": "90e23ed7ea81bc7ec815cf4ce879d2de4352bd217dec3d10d64292f3b0370c9d",
+      "gitBlob": "b2634462f50cc3fbec0cc38e2b1597f61a0ce9eb",
+      "bytes": 861
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-light-black.png",
+      "sha256": "c1d74753b0e8e601b0204f017e1caae1643ded51bf28761ea5ce63580fc64af4",
+      "gitBlob": "855fb90c46c050695e1c0e8276607a61aa263564",
+      "bytes": 1749
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-light.png",
+      "sha256": "41695e34c6ef8ca47ad2346cb1570a978d685513120899ba49d508305f00f5aa",
+      "gitBlob": "abe14a2a68224d791fc44677ce0b9ec6123bb444",
+      "bytes": 747
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-color-white.png",
+      "sha256": "1d0ead9a6caf784c669fea3f39c37b492d1a1d33b1f1412b2a09007a166f9d3c",
+      "gitBlob": "7a17c4242cb56ed696285b88a2b4860f70fdaa8d",
+      "bytes": 2075
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-color.png",
+      "sha256": "2867ee10d25439468a0cca99a6c17bd97f55cfc72f542b34c155f71e52823a92",
+      "gitBlob": "0f8c12883648f27cd54ea510b53f8e8065d9f522",
+      "bytes": 1197
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-dark-white.png",
+      "sha256": "1d0ead9a6caf784c669fea3f39c37b492d1a1d33b1f1412b2a09007a166f9d3c",
+      "gitBlob": "7a17c4242cb56ed696285b88a2b4860f70fdaa8d",
+      "bytes": 2075
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-dark.png",
+      "sha256": "2867ee10d25439468a0cca99a6c17bd97f55cfc72f542b34c155f71e52823a92",
+      "gitBlob": "0f8c12883648f27cd54ea510b53f8e8065d9f522",
+      "bytes": 1197
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-gray-black.png",
+      "sha256": "6a858ab503828e066f991193a93481268548c2a77e4fbb91d0e73a2300ac4598",
+      "gitBlob": "71bcf6849d69cb6f1d66722bf1007ca61341e4f8",
+      "bytes": 2051
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-gray.png",
+      "sha256": "e70ab6a706e93accb4e48d8f07b5d2f829199474d650611eacccc69749343937",
+      "gitBlob": "3f091427d0820642c2821b379fa5d06392bc5b89",
+      "bytes": 1219
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-light-black.png",
+      "sha256": "19978bf302dfb5af8ff2d265b624f289b14c15730b4533b78ebe2d3a95386e79",
+      "gitBlob": "c0372b540bcac4c6687c1a981ca8d1aea644e058",
+      "bytes": 1938
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-light.png",
+      "sha256": "a3332592c641c17b65ecda9aa22824f1e8ec93eb22b31ccc1433298b63acec21",
+      "gitBlob": "9880af1d70fd430c1a615b7c6de807525f832a77",
+      "bytes": 1055
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-color-white.png",
+      "sha256": "09c83407f18ef32e5fad185f4ddc2ecbbb25cf5dbb8e872963b026c44bd55b11",
+      "gitBlob": "170dd56cb818fe3a8e026ddcde4d9e407d4fed65",
+      "bytes": 2700
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-color.png",
+      "sha256": "d332b9eb060dbda2fbfc3425d79e6ab03ca437cfdb646977c3ac15ea75d07e49",
+      "gitBlob": "68b0d004d39e901ccd854aea73f6391297e90d31",
+      "bytes": 1923
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-dark-white.png",
+      "sha256": "29076f169ca1822edf14e8adf1f187c32df3fd254ad5020dda57e92c978dc9fd",
+      "gitBlob": "1242eb6a993da7ff65926aa776a868531de079df",
+      "bytes": 2601
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-dark.png",
+      "sha256": "5b9189168c0142122a31fe9f47bac9d0e6289d7e86c4be7155b1f483d48d7bc0",
+      "gitBlob": "94c28b4c755a46f1bfd097c8f295da63fc901d38",
+      "bytes": 1813
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-gray-black.png",
+      "sha256": "c92728fa6a4642748fe69c0d1a6d0e05068489b4d81f01c68e9ed7c25bfbcd50",
+      "gitBlob": "4b9fb8782efe1e44813daa89ea9eb790b411c6bd",
+      "bytes": 2446
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-gray.png",
+      "sha256": "1db3c76a12fa9c126b13ad0bafa7fa03f728dee316dc9022d25ab56ada0efd4d",
+      "gitBlob": "55fe6e840da3973955b130c40bd494174e57f9fb",
+      "bytes": 1826
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-light-black.png",
+      "sha256": "0a4b385853c343b6089267e3d199d9a03ee02faaffb4a013a81993010b7cbaf3",
+      "gitBlob": "89521f62741b5090eb0b84835ed3d5ed53160b21",
+      "bytes": 2458
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-light.png",
+      "sha256": "610a19bc386a34d04b851d061add3fcf3b6d0f8a682b0fde4841db46f529956b",
+      "gitBlob": "7d0059831637829f97813f52e720e03e2da12662",
+      "bytes": 1625
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-color-white.png",
+      "sha256": "8ebb780420ca7715ec77e6dc0609a1a484d927f00d1cb1d33da91e9b7826cee1",
+      "gitBlob": "d8051bae90bc948c214abcde73f79dab88a54bf5",
+      "bytes": 2396
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-color.png",
+      "sha256": "bb07a5506a9b40e9864413ad2717a3593004fc0120ed1bd74723df0ab9bd1e31",
+      "gitBlob": "a379ba8caefc53a2acad8e6ae038c56c6d0d4e8e",
+      "bytes": 1791
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-dark-white.png",
+      "sha256": "d282b968b603233c5efcaa372ef764c177647e40b8cf8a41b4f859c962b474c5",
+      "gitBlob": "4f5258174f6ce5fa48650bd8f89fb101af978785",
+      "bytes": 2525
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-dark.png",
+      "sha256": "1bcd68d60a4c3cbb59e93e21320a790c530c284e27100f9eaca47c6d23efcda5",
+      "gitBlob": "ee5f252e979e88600ddd5720ccebb043235b5cf1",
+      "bytes": 1806
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-gray-black.png",
+      "sha256": "b34c380e12cd9bc2f929a724c27e4f81d0916893d833ab7f6b5be8e5e0a8dcf2",
+      "gitBlob": "40b2a7acd5a2a9d381b845321fac09242f2fae86",
+      "bytes": 2391
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-gray.png",
+      "sha256": "c73f5c8e8da0b23d8536c9f82149939397ef5c29dadbe8e484c186660a2349f1",
+      "gitBlob": "24014097f1a8cf1158c336bf8db6ca98ced913b2",
+      "bytes": 1812
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-light-black.png",
+      "sha256": "38749ea14339cb782ec95662e07c7525cec8a828242fd0e3e842c2a92dc20d66",
+      "gitBlob": "c77523c176806955177b3ae9077512454224908a",
+      "bytes": 2371
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-light.png",
+      "sha256": "9a7aaa38579d9b1c3db920349143af7de2c7651d8cfd6e2e47f83169d4b2b812",
+      "gitBlob": "76390638f171bae229f18f1e42b935fe8a937353",
+      "bytes": 1614
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-color-white.png",
+      "sha256": "4c3e03644f4362512307b10b1fdbfe676e5b9c67d63967187d03765afaea9cae",
+      "gitBlob": "e923ac212a2d98738bd2b0c5fd40769f9e1d4f83",
+      "bytes": 2761
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-color.png",
+      "sha256": "6dd67be1b3b71fba5f961e3902ced9ff84b77edf6cd4a2636a718898dcb7da40",
+      "gitBlob": "784d664dc36f567497a3a5a00f09638030ebbe1c",
+      "bytes": 2127
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-dark-white.png",
+      "sha256": "4fcd3770e1b4b9140e49571bbfb168e40f1da9d2d7de1a62c3456583a4aeaac1",
+      "gitBlob": "dc0c7b14206fa0cc350e73ae45aa5da932298fde",
+      "bytes": 2756
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-dark.png",
+      "sha256": "419ac155675fdb991444a492242104d4991bd5b3cdcfd78aceae6167b42ce206",
+      "gitBlob": "b4397cf99b226a33851461d941db806def8604d6",
+      "bytes": 2024
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-gray-black.png",
+      "sha256": "e8657e854432e6035b9148636ad853384f9cfb01d634698ab3827e1b6a08babd",
+      "gitBlob": "2fd06145e4baf3c79213727a09f295c4a8d8452b",
+      "bytes": 2568
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-gray.png",
+      "sha256": "efc444fee08156bbbb01ebe0c7d9cad3ab7462086dc562e131911bcae86fe82c",
+      "gitBlob": "f43a287bbea3dbf962f7ec95a689bcf993bdc1d1",
+      "bytes": 2031
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-light-black.png",
+      "sha256": "6e71bb3d70fd141456ed210b05bd21d82bb107d15a81ba007eb06c3cc068542f",
+      "gitBlob": "bdd052467bc68623b192e035af04918df96c2879",
+      "bytes": 2606
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-light.png",
+      "sha256": "fb4c46fc46330efd3e6a6b958a1b4ce84911e78e659d2c88a535388b2d065f4c",
+      "gitBlob": "52ec30411dc7ef1713429c322c00ea488f04e4f0",
+      "bytes": 1773
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-color-white.png",
+      "sha256": "0a14961f567bb7e467a9f559e1bbad512818459eb0325b862f13c773215afb3d",
+      "gitBlob": "e84288d8974f947adcc6cba37d5150114e7caec9",
+      "bytes": 2858
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-color.png",
+      "sha256": "faf6fc4c2befe5f381bbbddcbb62b5cadb320f3f7ac862acba7809e6c130e786",
+      "gitBlob": "26388b755a570f473dca3f2649a97d56fa571608",
+      "bytes": 2312
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-dark-white.png",
+      "sha256": "9b34ce740aa681e1034917352830a34e53b0e94244415756cc09cf85d51bbcd9",
+      "gitBlob": "07c5522a87a8c59db464030d3a59e5cc922c2dc4",
+      "bytes": 2701
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-dark.png",
+      "sha256": "1cd04c75ec6dd796c2e0981505f92b5a0b3349201d8ddd33489a7192df12ac23",
+      "gitBlob": "2fc549bffe8d5dc6eacfd2485770cfabbef90331",
+      "bytes": 2054
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-gray-black.png",
+      "sha256": "fecd7eba0eaecaf5ce943e7e2162a93f670ff4abaaa54eb48a9a93235b4cc5e8",
+      "gitBlob": "8d70335261ae2815a3ff8948ae90fcb662b28c23",
+      "bytes": 2549
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-gray.png",
+      "sha256": "023b7a412119e973162ac0466e8c5cd16ab97d6be35ddab451dba6e1e110ef06",
+      "gitBlob": "646874280aa1c62a9d8ee816a6f2c530a562115d",
+      "bytes": 2048
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-light-black.png",
+      "sha256": "73f495e7d2c6b27783eed95102245dcf562307513ff2d236aea0fe9b63711176",
+      "gitBlob": "f57ba4c02093285a54b7db8b041aea684e01110f",
+      "bytes": 2580
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-light.png",
+      "sha256": "321c78f5663a946573db55449de497adfb86843b59e2841e2020a8f611007997",
+      "gitBlob": "099916ec53ba114fc3e3f8603bf41e65040d0971",
+      "bytes": 1819
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-color-white.png",
+      "sha256": "8188660492814077392a66e8ce94f32fd0ad6b13acad9c655e839a69229e33ee",
+      "gitBlob": "20fe3a1edd177de7c0e9549af718bc2d46f67caf",
+      "bytes": 2505
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-color.png",
+      "sha256": "0672d630debab71a45918790cd16ea39918c10682d794663e29f2feccd525cc1",
+      "gitBlob": "60a5da33a9f8be118bebe980de7b37ce3dbe530f",
+      "bytes": 1918
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-dark-white.png",
+      "sha256": "779bf0a3d24b2e41e7d7396fce98c819f739041fa68472307f3eee1fdc7d8bbe",
+      "gitBlob": "c77dc53103ec57a5f6bdb55927f4be8eeeb7cb63",
+      "bytes": 2428
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-dark.png",
+      "sha256": "361d75b65a3e29ef05b26690b2354d2ab6c0042175a43967893c6a93dc38618d",
+      "gitBlob": "e7001bd975dd41d768b370b51df817ae87d0929c",
+      "bytes": 1727
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-gray-black.png",
+      "sha256": "7cfd91ad58ec2c44a10240d126a3c054cd6a58116812f491bf432977ac27827b",
+      "gitBlob": "9632bbbf8fb021ec736e994c858f25412ac197e0",
+      "bytes": 2325
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-gray.png",
+      "sha256": "5db15741d51610d6371527f95aa073c716c6c07a5d89c343b5043778b1f68f41",
+      "gitBlob": "2071c233002b1bf30bc19d423b5dc5560b0d5609",
+      "bytes": 1728
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-light-black.png",
+      "sha256": "ea6d9aef5608dbf03881e16b6bfe706995c2193217318d83b539b76783be0cf7",
+      "gitBlob": "e18fed3d04f681773a89e0898f7eb73baac1cf70",
+      "bytes": 2305
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-light.png",
+      "sha256": "7b516a39e95f1c742abc01bd2146ecede9aae62d4a23d7c3ada76b1a56cbe9b5",
+      "gitBlob": "30fbb9fcca8bd1ef16f1286ff39fc183be919160",
+      "bytes": 1529
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-color-white.png",
+      "sha256": "52f61238831c578b315ba29cd80c82968ef45264226fda2fb4f1956b175bdf89",
+      "gitBlob": "5849993b59c485880c4e99138b429d848442ff39",
+      "bytes": 2906
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-color.png",
+      "sha256": "1a7f413b1eb6b0b2fc1f61c3f029967dd5362f958ee7e1dff7462a3778ca712a",
+      "gitBlob": "cc595c85eeb3c8018f69b24149a72629d9f4fe4d",
+      "bytes": 2254
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-dark-white.png",
+      "sha256": "52f61238831c578b315ba29cd80c82968ef45264226fda2fb4f1956b175bdf89",
+      "gitBlob": "5849993b59c485880c4e99138b429d848442ff39",
+      "bytes": 2906
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-dark.png",
+      "sha256": "1a7f413b1eb6b0b2fc1f61c3f029967dd5362f958ee7e1dff7462a3778ca712a",
+      "gitBlob": "cc595c85eeb3c8018f69b24149a72629d9f4fe4d",
+      "bytes": 2254
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-gray-black.png",
+      "sha256": "5cba0b1abee34a73dcf931f2c7bcd207b99eac5ea394e76654cdd222bf045b2b",
+      "gitBlob": "51e372f5215360575f1e4025b57fdcf9764d765a",
+      "bytes": 2733
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-gray.png",
+      "sha256": "3b8f2f24cc39bcecef7f2ce688846e970c95983ddccdee69e3584568d5fdef7f",
+      "gitBlob": "c317b5f17a2573ee4e2d035a4b7b09c066503c1f",
+      "bytes": 2253
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-light-black.png",
+      "sha256": "0901e05135bc72682e3f02e4dfcdacc4aef078689fa342a9a1a20129e5724262",
+      "gitBlob": "0caffebbe466c839836a1e9b38c8a924501a3383",
+      "bytes": 2775
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-light.png",
+      "sha256": "4038d5e1898506d856ec1bbb7b2e3d7ad73647039dc66c57563db67f33fe6d0f",
+      "gitBlob": "7aabb2579ca7e2faffbf8187e35ab49544ab2fd6",
+      "bytes": 2013
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-color-white.png",
+      "sha256": "635b18d8be4700147ba9ef750c71ae038f2acc5ac2a2eeaef99abba5e993b08a",
+      "gitBlob": "c8b1fdc8943966cbba08b437aa819bde2ef7e7f4",
+      "bytes": 2141
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-color.png",
+      "sha256": "f11f5655e22ba636c967173bdad3e35f1cef9fa2f90699e12739dc2737c73c14",
+      "gitBlob": "9900ee3f6368d4696e6ca3b241635bb46ff59e63",
+      "bytes": 1276
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-dark-white.png",
+      "sha256": "635b18d8be4700147ba9ef750c71ae038f2acc5ac2a2eeaef99abba5e993b08a",
+      "gitBlob": "c8b1fdc8943966cbba08b437aa819bde2ef7e7f4",
+      "bytes": 2141
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-dark.png",
+      "sha256": "f11f5655e22ba636c967173bdad3e35f1cef9fa2f90699e12739dc2737c73c14",
+      "gitBlob": "9900ee3f6368d4696e6ca3b241635bb46ff59e63",
+      "bytes": 1276
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-gray-black.png",
+      "sha256": "1bff7d2710e9cb57ef398b51cc9534a026dce4b2a85b45af9bad25471540ba6f",
+      "gitBlob": "fb1775b3e65686f4c690dee63f696e044856c11d",
+      "bytes": 2072
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-gray.png",
+      "sha256": "b790a48b9d78cdea4b7d2bf509654d807bdd798ac5f346854f423f839545317d",
+      "gitBlob": "0e433bcb0faaaf89abc207acb6df15f1643cc51e",
+      "bytes": 1295
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-light-black.png",
+      "sha256": "6ec67c4bb8cc4aed5566386c1044ce47532092f8e40f0ab0671a8e9ef637d11e",
+      "gitBlob": "c947b846cc7b0fca5ad863c0812e5a4dee0148f1",
+      "bytes": 1974
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-light.png",
+      "sha256": "081fc38b655739c30376a3b061a2e889065e28d59ae42801261c0cb1df43f45c",
+      "gitBlob": "0ee89d7f04cc0afeb3389f5b5543dd84f820bc7a",
+      "bytes": 1151
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-color-white.png",
+      "sha256": "3fcbeb94f93f6dd9ee56e0d780d002ae862e6bd3e1fe089a75513d74430f748b",
+      "gitBlob": "4d2ee18bfc729d772283b8ec0513dde9392ba63a",
+      "bytes": 1989
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-color.png",
+      "sha256": "c3fcc913d05a197adda61cfd9087a176b786ee7e6d39c369d25ca8a9c6b8b2fc",
+      "gitBlob": "6f01526138a186f6de963e8440482fb9b4df83c9",
+      "bytes": 1086
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-dark-white.png",
+      "sha256": "73490bf0008bb4e39f513aed7e278457880b1b0c7235e858317a87df30283f3c",
+      "gitBlob": "87e8b562110b49a24525827f869864f20397a235",
+      "bytes": 1984
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-dark.png",
+      "sha256": "3e7c9efe6125e8cd4a4e68178e52f548bb490109f269d8916ea0dc3093d3aab4",
+      "gitBlob": "32fd5ee41604c392ae34e69178b0b8c0dbc8e9c3",
+      "bytes": 1023
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-gray-black.png",
+      "sha256": "a0d10b9c6d0b4cbbe263df299934863ef79e50594d3c5085215e6ec827e3703c",
+      "gitBlob": "01da933cc5c5ed2a8c8f2b3dd4a35063f6a70fce",
+      "bytes": 1942
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-gray.png",
+      "sha256": "af2ecaabe264d33839e2f5cb2e9e2e827b0c75b17a41092fe5b8c269e761f3ec",
+      "gitBlob": "2f9f0cf41b6208f9ffa7c3e660c2018bb199d132",
+      "bytes": 1033
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-light-black.png",
+      "sha256": "b6386bcb4bca3338191ea4ccfc6578b621c3ec19deac616dc38902d98958e010",
+      "gitBlob": "1dbf856feea35de9b6fffd70cdf23b8eb2ba48ab",
+      "bytes": 1790
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-light.png",
+      "sha256": "844b9b9dbb58a426f457bfc2e112e3c37173f3c2e51e783f44573a5e810ede7b",
+      "gitBlob": "5509d42abf1eb5dbde2f736d6003dc08640b7536",
+      "bytes": 917
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-color-white.png",
+      "sha256": "8cf9471dabc3e27b79924ede2d4757d89644baa4eb73ed3f7369dfb3c366b4b6",
+      "gitBlob": "32796fd2eca68c7b83aad6695202626a30925fb7",
+      "bytes": 2527
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-color.png",
+      "sha256": "c5af90126682de59e86bbcd20f19202656f33af7d65436b73e2f3b9375e2e57d",
+      "gitBlob": "5a74d3b8f5787a5176521600d38023ea59fff97c",
+      "bytes": 1566
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-dark-white.png",
+      "sha256": "8cf9471dabc3e27b79924ede2d4757d89644baa4eb73ed3f7369dfb3c366b4b6",
+      "gitBlob": "32796fd2eca68c7b83aad6695202626a30925fb7",
+      "bytes": 2527
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-dark.png",
+      "sha256": "c5af90126682de59e86bbcd20f19202656f33af7d65436b73e2f3b9375e2e57d",
+      "gitBlob": "5a74d3b8f5787a5176521600d38023ea59fff97c",
+      "bytes": 1566
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-gray-black.png",
+      "sha256": "58e6c576494f4f3345bb2bdc565c1434eb015eaeac7afbc427266d0671078cbe",
+      "gitBlob": "94326c611da3185959c9fe7413e9e6fc6c09cae9",
+      "bytes": 2350
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-gray.png",
+      "sha256": "f9596ef2e94b26695d47a3476550f9337d6643d18cb0a6bd769647a13e5dd405",
+      "gitBlob": "44f9f5e4827e56fd618c673c9c135752d8fc7be4",
+      "bytes": 1598
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-light-black.png",
+      "sha256": "169bcb508869e16479d1dd10937cb3b1e04f369245ce2a2d9ef97d56458163b3",
+      "gitBlob": "55343c6c0c18c1abe254d22d5c95152dd7df4d5c",
+      "bytes": 2381
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-light.png",
+      "sha256": "d19ef5a522cb75e1f93daf1affe24461e95d6b1aaef093704411b1ffa077915e",
+      "gitBlob": "b0e7af6d059ea285e9430a3f09820c5bd2ce5e65",
+      "bytes": 1382
+    },
+    {
+      "path": "apps/web/public/newsletter/social-update.png",
+      "sha256": "6d60daba33551a9011e94329ba6cb7f11de119e9273bd386a8719d03e3b616f0",
+      "gitBlob": "115a6a7ec2f212161b2e5f609abc408fe970c7a1",
+      "bytes": 40618
+    },
+    {
+      "path": "apps/web/public/newsletter/social-update.svg",
+      "sha256": "cb903be6b9a58d8beffd148b911805619ce3b99f9ca30c1895e76bfd412702ec",
+      "gitBlob": "1a1aeee066b358ff9dbf4381563a72bfe77aaf88",
+      "bytes": 890
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-color-white.png",
+      "sha256": "5eb25284801c33ab0a7206ece87c9a82a12ea649a939b5f36608bdfaa456d363",
+      "gitBlob": "8a86b3cb67b41c1c9c13af1bfb1523159f5016fd",
+      "bytes": 3008
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-color.png",
+      "sha256": "b02e1d565a3356075c325eed876fd53fe3e303efe4f4b4b16f043fb589406579",
+      "gitBlob": "d0a68b40ac2d7cf62f2c6df29aa5d8ca126b0248",
+      "bytes": 2221
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-dark-white.png",
+      "sha256": "a00719634fbc3100faa492a0b262ec8190c9c55d60f687f49d6498faae9cacf5",
+      "gitBlob": "b31d50a5685e4391c903503f069287d8dc9a7ba3",
+      "bytes": 2855
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-dark.png",
+      "sha256": "a8e5fe6990557c8f7992ddaa01235b2d7c26cb1860440bd80c7a67d1806737a0",
+      "gitBlob": "80ea079ac7f4eb93037f8bd72e88d2ac5b794af9",
+      "bytes": 1947
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-gray-black.png",
+      "sha256": "fdaca027657315c4c7922b51400a91a52bdbc6acbba6e824165e3e670d7b3efd",
+      "gitBlob": "874d42386d59024ce6af2b050333298fa1b075b1",
+      "bytes": 2582
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-gray.png",
+      "sha256": "8db22bf3683e8c900b3d4757c45f3a552981643ecf07a7c2fae180f6adb81b37",
+      "gitBlob": "688b249ccb583b4981309431696e05c56889de14",
+      "bytes": 1977
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-light-black.png",
+      "sha256": "7fa75984c010b0db34b2aeacee79d074a77b6020f1d620f8781b5fcaf3d06868",
+      "gitBlob": "e9b15ae28b2ec5d949f52491f37a6cd53dd1a861",
+      "bytes": 2725
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-light.png",
+      "sha256": "29a36e11fada8a0cc25173eb80d635725107f65cd27807611371cc742d769a55",
+      "gitBlob": "30182eac564620b0249e4eb7c1a66c6b9ded79ab",
+      "bytes": 1738
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-color-white.png",
+      "sha256": "c0d3ed1110d5927cbe7fc5490b092b93f18078d8325045a2f31fc1d60f0663d6",
+      "gitBlob": "c6d33bee2abb9bc734bbbdca536dfde03cd337e9",
+      "bytes": 2973
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-color.png",
+      "sha256": "69cc25e5b3f22e7b6e70f576729ba01cdcb505a6d9346f1f6a39aee5ecc17cf1",
+      "gitBlob": "f35247ff0d7b7cd4faaa816f8ddacf9cfb2f10d9",
+      "bytes": 2367
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-dark-white.png",
+      "sha256": "283768ab2cad7c26a9d8a447fc9ec40b2ce7e971a94321c012aa7e4b7b0a8d8f",
+      "gitBlob": "6a4413a1ea159c7f1519e0507b6de56f881ef367",
+      "bytes": 2858
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-dark.png",
+      "sha256": "f0e518ada18fe673c6ea281cf148aea13c0291c2bab796a5fbb0923bd076776e",
+      "gitBlob": "bbfd8957b1e42ba351c2774d81700a9847174e22",
+      "bytes": 2138
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-gray-black.png",
+      "sha256": "955d3c09b6bcdd1d7ff5d2d26516b8e1219a65195ce0f76d6df4a62f38deb2d8",
+      "gitBlob": "13a1ae21a0c147138c872cc951c8a326308671b1",
+      "bytes": 2664
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-gray.png",
+      "sha256": "c5284c7baeb9d296b63d1f9c3a4a0acea71242283e81152a3c38f718474e33c9",
+      "gitBlob": "64b1d27675e2b2b2580b567892ac9ddb14ff3625",
+      "bytes": 2146
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-light-black.png",
+      "sha256": "196883d58b0c63f339b957f4a97099d855f3b59fad8c1d1a6b43f94f9a4cfa44",
+      "gitBlob": "c464af610c21896099f0a8cc55020f517fc80f60",
+      "bytes": 2708
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-light.png",
+      "sha256": "e78dd49e46b3703ee9c9a8b1c553142b9089c02f0204c733203d19455009354c",
+      "gitBlob": "96c91a91a854357686d14ebc920c2c57ef4a72d1",
+      "bytes": 1897
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-color-white.png",
+      "sha256": "2cb48501e44360174080667cb6b00b6c384f482f6d72fd128db8d7fc89ee4e19",
+      "gitBlob": "6b19db2a732a6eacadf4f75438db5fca33b53f8d",
+      "bytes": 1757
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-color.png",
+      "sha256": "744dd35066821a0b93021453deef00f11a5c4dccb1b0bfc3fa4e15640dac93fe",
+      "gitBlob": "fd4ce005d8de35ef0a966186b714d1594691ba3f",
+      "bytes": 1005
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-dark-white.png",
+      "sha256": "127f85e20ce0d08b921c8a23170a224b5bf8efcd96db86b0aa731b69e6b9ebf9",
+      "gitBlob": "7919a71b8dc79ead2526505d8e0d35c767c34baf",
+      "bytes": 1987
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-dark.png",
+      "sha256": "01bc77686cd48999b53e418d37e5a07d01d1831d0cd5e5347caef84cd071b8f7",
+      "gitBlob": "1d041314fb3de2118d83c11044e1706936f5cd5b",
+      "bytes": 1152
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-gray-black.png",
+      "sha256": "b080ce553ec883e7a4e8ac139155875f0069781e1fdba9a228ddf72fc0186c62",
+      "gitBlob": "2386f1e1b4a111da0b3a682562721503eff7257e",
+      "bytes": 1915
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-gray.png",
+      "sha256": "767feb2c16bd877e9dd92d735cd996fffec657fdbfd64198c5cee759759cd7b6",
+      "gitBlob": "5618d902d7942f1661dd0a45ccfbcebf79197507",
+      "bytes": 1151
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-light-black.png",
+      "sha256": "aa140b6595e6ad2db58263675f4e7983f608f504c53c775009cd91942229c804",
+      "gitBlob": "5feaa1d611705c4cc8cf2546baf3dc1295859948",
+      "bytes": 1831
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-light.png",
+      "sha256": "3f84d9aea44d27b323d6b2b26529e3cd03fdd8b9ae7506065876e92b3fe4057f",
+      "gitBlob": "1e309556052514a0fa0ef38c231242f8d222119f",
+      "bytes": 998
+    },
+    {
+      "path": "apps/web/public/newsletter/template-preview.svg",
+      "sha256": "90a97966db5b54dec83b99ec89da208245669b2a3a0cc1af248a14e9388dd1cd",
+      "gitBlob": "fc807f6848353ead90d50d957956d403d8e1f33f",
+      "bytes": 1885
+    }
+  ]
+}

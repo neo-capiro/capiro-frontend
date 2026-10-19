@@ -1,0 +1,14 @@
+usage: verify-publication.py [-h] [--originals] directory
+
+Verify prepared publication bytes and optionally original local evidence.
+
+positional arguments:
+  directory
+
+options:
+  -h, --help   show this help message and exit
+  --originals  Also rehash retained source files at recorded absolute local
+               paths.
+
+Exit 0: verified; 1: validation/I/O failure; 2: invalid arguments. Writes no
+evidence or source files.

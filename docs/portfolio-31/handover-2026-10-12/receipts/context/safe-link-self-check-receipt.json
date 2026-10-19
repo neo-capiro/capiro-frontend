@@ -1,0 +1,14 @@
+{
+  "browserBuildProviderOrNetworkCalls": false,
+  "checks": [
+    "chained symlink target refused",
+    "self-referential symlink target refused",
+    "direct contained parent-relative target accepted"
+  ],
+  "passed": 3,
+  "productSourceTouched": false,
+  "scope": "supplementary preservation-restorer self-check only",
+  "sourceFiles": [
+    "restore_context.py"
+  ]
+}

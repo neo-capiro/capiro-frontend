@@ -1,0 +1,44 @@
+{
+  "sealedAt": "2026-10-12T22:54:23.325222+00:00",
+  "sourceCommit": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+  "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+  "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "readOnly": true,
+  "sourceOrIndexChanges": false,
+  "newRuntime": false,
+  "priorPacketImmutable": true,
+  "priorManifestSHA256": "69e00ca8d7f0a51627c3610bafb202407840d0a156a68b4c9f34f2783d3466bd",
+  "sourceReferenceCount": 46,
+  "allSourceReferencesReverified": true,
+  "portfolio": {
+    "status": "PASS",
+    "testCount": 1118,
+    "attemptCount": 1118,
+    "attemptStatuses": {
+      "passed": 1118
+    },
+    "retryValues": [
+      0
+    ],
+    "statistics": {
+      "startTime": "2026-10-12T22:16:51.998Z",
+      "duration": 2169864.537,
+      "expected": 1118,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": [],
+    "workers": 3,
+    "startedUTC": "2026-10-12T22:16:51.150257+00:00",
+    "endedUTC": "2026-10-12T22:53:01.934206+00:00",
+    "wallDurationSeconds": 2170.7839771459985,
+    "resultsSHA256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f",
+    "exitCode": 0,
+    "sourceUnchanged": true,
+    "server5191ClosedPerRootReceipt": true
+  },
+  "coverageLimitsUnchanged": true,
+  "preparedFilesRetainedAsHistorical": true
+}

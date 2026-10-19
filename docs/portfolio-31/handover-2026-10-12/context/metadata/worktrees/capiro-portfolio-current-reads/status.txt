@@ -1,0 +1,32 @@
+## codex/portfolio-current-reads-20261011
+ M apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx
+ M apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+ M apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx
+ M apps/web/src/features/portfolio/capabilities/Registrations.tsx
+ M apps/web/src/features/portfolio/capabilities/capabilities.module.css
+ M apps/web/src/features/portfolio/capabilities/queries.ts
+ M apps/web/src/features/portfolio/capabilities/registration-mutations.ts
+ M apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx
+ M docs/portfolio-31/ARCHITECTURE-REVIEW-P4-PROFILE.md
+?? apps/web/src/features/portfolio/capabilities/execution.ts
+?? apps/web/src/features/portfolio/capabilities/mutations.ts
+?? apps/web/src/features/portfolio/capabilities/registration-writer.ts
+?? apps/web/src/features/portfolio/capabilities/writer.ts
+?? apps/web/tests/browser/capability-boundary-fixtures.ts
+?? apps/web/tests/browser/capability-boundary-harness.tsx
+?? apps/web/tests/browser/capability-boundary.html
+?? apps/web/tests/browser/capability-boundary.spec.ts
+?? apps/web/tests/browser/capability-execution.spec.ts
+?? apps/web/tests/browser/capability-fit-boundary.spec.ts
+?? apps/web/tests/browser/capability-opportunity-visual.spec.ts
+?? apps/web/tests/browser/capability-registration-boundary.spec.ts
+?? apps/web/tests/browser/capability-registration-concurrency.spec.ts
+?? apps/web/tests/browser/capability-registration-execution.spec.ts
+?? apps/web/tests/browser/capability-registration-fixtures.ts
+?? apps/web/tests/browser/capability-registration-reads.spec.ts
+?? apps/web/tests/browser/capability-registration-visual.spec.ts
+?? apps/web/tests/browser/opportunity-boundary.spec.ts
+?? apps/web/tests/capability-writer.test.ts
+?? apps/web/tests/registration-writer.test.ts
+?? docs/portfolio-31/ARCHITECTURE-REVIEW-P6-CURRENT-READS.json
+?? docs/portfolio-31/P6-CAPABILITY-OPPORTUNITY-CURRENT-READS.md

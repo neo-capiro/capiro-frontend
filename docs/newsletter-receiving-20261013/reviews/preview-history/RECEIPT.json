@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "reviewedUTC": "2026-10-13T03:54:44.376881+00:00",
+  "verdict": "PASS_BOUNDED_STATIC_REVIEW_AND_AUTHOR_BROWSER_EVIDENCE",
+  "head": "977cf7b3b6bb4924c85d1cc5be5b31d93d94e026",
+  "binding": "Current uncommitted file hashes, not merge HEAD runtime qualification",
+  "scope": [
+    "RichPreview exact history correction",
+    "two root adapter size reviews",
+    "all eleven applied size fingerprint consistency only"
+  ],
+  "minimalDelta": {
+    "addedKeys": 2,
+    "addedCommentLines": 2,
+    "allOtherBytesIdenticalToPreservedBefore": true
+  },
+  "historyEvidence": {
+    "firstSuite": {
+      "passed": 10,
+      "failed": 2,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "cdpIndexSequence": [
+      1,
+      2,
+      2,
+      3,
+      3,
+      2
+    ],
+    "nativeBackRetainedEditorUrl": true,
+    "classification": "Real iframe srcdoc joint-session-history defect, not a flaky test",
+    "newHistoryLengthBaseline": {
+      "passed": 0,
+      "failed": 1,
+      "expected": 2,
+      "actual": 3
+    }
+  },
+  "sizeBindings": {
+    "independentParser": "Pure scanModule source parse; no application import/test/build",
+    "allElevenAppliedFingerprintsMatchRegistryAndSource": true,
+    "adapter": {
+      "symbol": "createRichNewsletterAdapter",
+      "nonblank": 94,
+      "fingerprint": "9535f5a145d16624ec813b181b1896757ae04b7b4a15a87ae2576cb72589db14"
+    },
+    "test": {
+      "symbol": "<anonymous> #2",
+      "nonblank": 227,
+      "fingerprint": "886665df815ae5a4d34dac5f871cd8f29c9e742bd5f1f9523808acbb7a1af8fd"
+    },
+    "adapterAndTestsUnchangedSinceIndependentBoundaryReview": true,
+    "authorWholeScanSummary": {
+      "total": 439,
+      "reviewed": 415,
+      "inheritedUnreviewed": 24,
+      "blocking": 0
+    },
+    "authorWholeScanErrors": []
+  },
+  "sanitization": "Sanitizer, CSP, sandbox, no-referrer, allowed image policy and plain-text rendering byte-unchanged by correction",
+  "lifetime": "Only iframe child identity keyed to final sanitized document string; parent editor/controller/QueryClient write journal unchanged",
+  "accessibility": "Descriptive iframe titles and plain-text alternatives retained. Replacing an inert display may reset its own focus/scroll; does not reset parent draft or input focus. No new accessibility/Figma certification.",
+  "limits": [
+    "No reviewer browsers/tests/install/build/native calls",
+    "No backend/native/provider/deployment acceptance",
+    "Size review does not waive boundaries or globally accept inherited unreviewed findings"
+  ],
+  "references": [
+    {
+      "path": "/workspace/capiro-newsletter-port/apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "bytes": 4471,
+      "sha256": "617d3c8ca4f9194cae14312192cfa4252405670a61782a3aaff3428a17c7a60f"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-preview-history-fix-20261013/RichPreview.before.tsx",
+      "bytes": 4263,
+      "sha256": "e869fe2a804e593afb00eec4b32c472848f90f88ef3f88486ddc88309f901a8b"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3887,
+      "sha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "bytes": 12244,
+      "sha256": "e42be0734d1ab2911fb0dbd6d68e403846714bcd6371c5fbdf59ab05b19cf8d2"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/scripts/architecture/reviewed-size-findings.json",
+      "bytes": 140690,
+      "sha256": "eadaef2856175be69ccfb288b3899d2a85e3e398a9c7d70f5a1eff01ccd52da1"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/scripts/architecture/scan.mjs",
+      "bytes": 3881,
+      "sha256": "b6c0f4e872640db8c655797e86a177303c3c7eb53223ffbd5c29bc41f5ba937e"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/scripts/architecture/reviews.mjs",
+      "bytes": 3423,
+      "sha256": "32c60a419ed3642b9e248da9a30e625cc9776906bcd543c30d16c492646fc124"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/docs/newsletter-receiving-20261013/reviews/APPLIED-SIZE-REVIEWS.json",
+      "bytes": 8113,
+      "sha256": "ca05371ad2e16e440fbfba11eb22a1c01a5dbb0a6eece878f5c5680480a8fe2e"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts",
+      "bytes": 8411,
+      "sha256": "b2985a16eecb80a8685b81428350fd43c3026cb1e3f4cf97c2a707d176105774"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+      "bytes": 11143,
+      "sha256": "ae30ac931db3243e61ebec3fbd9a7279303a5dff4ba877dde5ce9602b09b6d03"
+    },
+    {
+      "path": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-fixtures.ts",
+      "bytes": 6410,
+      "sha256": "5ed745d2cf849a57e26afe7969eb973d7a852da31c917aa10b0a1de84c94291b"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-inspection.json",
+      "bytes": 6690,
+      "sha256": "7eba2eb43f1dd3e1fc2792debabb11a06ca9fd4d8cc8090661353d5dfd5c2e41"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-diagnostic.spec.ts",
+      "bytes": 2222,
+      "sha256": "50c5666a52bf2d345620d98335b570ce7fbbd59bb67b4a929d32c662bc60a2fb"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-results.json",
+      "bytes": 19896,
+      "sha256": "8237d20519ee8efaae825d0456aaf9fdf7787a54f78f2a14794dfeb9f82b4c68"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-browser.log",
+      "bytes": 7712,
+      "sha256": "75370ad93a1fa7ec8c508ee44907c48048b70673da386bfbc963c9e7d7499548"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red-results.json",
+      "bytes": 7162,
+      "sha256": "fe0ccea57fc5222a347ac081a06b8ea054a90f4bccac652070632688bf986025"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red.log",
+      "bytes": 3079,
+      "sha256": "836334d98d58c86caac68abed43e1f91c322c86514c324523c8f0efd96ee2f7f"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-receiving-38fec5c8-20261013/development-architecture-after.json",
+      "bytes": 804530,
+      "sha256": "c02ce2d29549b6f0e4d96755976510aa8a749c2f75585e489aa9050bca16cea1"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/green-results.json",
+      "bytes": 15420,
+      "sha256": "30b7ddc7fefc8dbedd92f688b9335a3ef16b8b39f8a1db6ca10efe44eb89dfe4"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/green-browser.log",
+      "bytes": 2247,
+      "sha256": "2c75826eb4262877bc4d0ae82f74696576ce13ffd8e5dfed2eb3f8e325e4b202"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/TEST-SOURCE-REVIEW.json",
+      "bytes": 3210,
+      "sha256": "2bf8d3735e33b5a2b774c593ffd8300663925d079620d072dda968fbc4eb894d"
+    }
+  ],
+  "authorReplay": {
+    "stats": {
+      "startTime": "2026-10-13T03:50:32.360Z",
+      "duration": 20450.029,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workers": 1,
+    "retries": 0,
+    "allCasesOnePassedResult": true,
+    "testSourceHashesMatchAuthorReceipt": true,
+    "reviewerExecutedBrowser": false,
+    "cases": [
+      "rich document create is explicit, preserves local content and stages only a confirmed full save",
+      "rich library detail requires explicit adoption and sends the complete reviewed CAS document",
+      "rich save 409 retains edits until deliberate owner review and full rebase",
+      "rich save 503 retains edits until deliberate owner review and full rebase",
+      "rich explicit adoption replaces uncertain local edits without attributing the owner state",
+      "rich saved preview excludes local edits and sanitizes active HTML without remote requests",
+      "rich pending create remains fenced after history close/reopen and an empty library",
+      "rich pending stage stays fenced across history navigation and late 200",
+      "rich pending stage stays fenced across history navigation and late 503",
+      "rich unknown save after reopen needs a successful owner read and separate adoption",
+      "rich held save cannot restore prior private material after client replacement",
+      "rich held save cannot restore prior private material after session replacement"
+    ]
+  },
+  "additionalScopeNote": "The new browser documentFixture has a separate 88-line signal fa9917a8ab1044cdfedb876d9a0bacb5223ba3c52e7e62a3bd2c4f40009e561c. Independently accepted in BROWSER-TEST-STRUCTURE.json alongside semantic review of both suites. Canonical discovery remains apps/web/src plus packages/meri-client/src; the earlier 439-signal whole scan excludes these browser tests. Manual review meets the size policy without a scanner exemption or broader gate claim."
+}

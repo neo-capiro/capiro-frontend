@@ -1,0 +1,89 @@
+{
+  "sealedUTC": "2026-10-13T06:55:18.938824+00:00",
+  "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "status": "SEALED_PASS_BOUNDED_PORTFOLIO_PENDING",
+  "fileCount": 16,
+  "bytes": 546724,
+  "files": [
+    {
+      "path": "BOUNDED-RESULTS.json",
+      "bytes": 18412,
+      "sha256": "dea04d32e6861d94d26dddac563bc675a016525237135174670619347b5e8b86"
+    },
+    {
+      "path": "CHECK-COUNTS.json",
+      "bytes": 550,
+      "sha256": "8302da0b4c503aa06351b896eef60393ec8a41e24400479e7eb9672265c2f907"
+    },
+    {
+      "path": "FINAL-SOURCE-BINDING.json",
+      "bytes": 281,
+      "sha256": "99a6393a8c0f035ba0492cd3e03c157e9ccad77604c013c68a41e3249b373989"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 509,
+      "sha256": "c3d50299ce3b4d523254bf0ed47ccc5424cd13f07cae9f85ea7295095b3078d9"
+    },
+    {
+      "path": "GATE-RECEIPTS.json",
+      "bytes": 10987,
+      "sha256": "e396182555ec34a945750c9544e4bfff782780acd74f587cddbf23ac1078106b"
+    },
+    {
+      "path": "MODULES-VERIFICATION.json",
+      "bytes": 103925,
+      "sha256": "a3b443f2bf855be81125bde31962b933895e7f2d516f12787ef46dd343276b43"
+    },
+    {
+      "path": "PACKAGE-RECHECK.json",
+      "bytes": 5048,
+      "sha256": "45736170746abbaba2cae9598d806fbcd302fec3cb03228b44bc2ac059b9125c"
+    },
+    {
+      "path": "PORTFOLIO-CHECKPOINT.json",
+      "bytes": 118462,
+      "sha256": "cf7e9d4b71750aba6545766f666112f5767c725190835b5618fcfa237d1a1bbe"
+    },
+    {
+      "path": "PRESERVED-TEST-FILE-BINDINGS.json",
+      "bytes": 166858,
+      "sha256": "132061507538307cbd066b53304adfea5908fe42fc99a242223f5431aca78d9b"
+    },
+    {
+      "path": "READ-EVIDENCE-HASHES.json",
+      "bytes": 80520,
+      "sha256": "53082c3f1b25d19d804148f71963afa2a026a3e637e8119decba5d6b97e5d7bc"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 7035,
+      "sha256": "ecd0f16f832d13348b2a1db3885b017a5d1a5c081debe5fd402d909fcad46fcd"
+    },
+    {
+      "path": "REVIEWER-HARNESS-ATTEMPTS.json",
+      "bytes": 298,
+      "sha256": "194486f1f6db5896a2b5c6d07ec8b206118780af8438d80d7c746469f47a91ff"
+    },
+    {
+      "path": "SOURCE-VERIFICATION.json",
+      "bytes": 8643,
+      "sha256": "014fea81984aa3343fa256eadf2e396c66b76ad6a97f62aba1d150f9502dd318"
+    },
+    {
+      "path": "audit-completed.log",
+      "bytes": 498,
+      "sha256": "a8362e8b1a91fdbaf25ec494dc7afdb5e40fba8cda22fd123092badad26e25ed"
+    },
+    {
+      "path": "audit-initial.py",
+      "bytes": 12327,
+      "sha256": "7df4e1068ecc4cbdcb2d4d368d47cc97bba645e96326550f308c349c7b598c04"
+    },
+    {
+      "path": "audit.py",
+      "bytes": 12371,
+      "sha256": "3a9759aaf5790f617af00f78d5c0ccf1e192d18c322c1a6360daec8104b5c34e"
+    }
+  ]
+}

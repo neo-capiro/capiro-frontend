@@ -1,0 +1,52 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/portfolio.spec.ts tests/browser/government.spec.ts tests/browser/relationships.spec.ts --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/portfolio.spec.ts tests/browser/government.spec.ts tests/browser/relationships.spec.ts --workers=3
+
+[WebServer] (node:177320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 21 tests using 3 workers
+
+(node:177339) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:177340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:177341) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/browser/relationships.spec.ts:16:1 › contact deep link, search empty state and keyboard close retain organization scope (8.0s)
+  ✓   2 tests/browser/portfolio.spec.ts:12:1 › four-field readiness persists once, transitions, and refreshes the list (13.1s)
+  ✓   1 tests/browser/government.spec.ts:13:1 › directory feeds fail independently, paginate, and retain a failed add for explicit retry (13.6s)
+  ✓   4 tests/browser/relationships.spec.ts:37:1 › create retains a rejected draft, refuses duplicate pending submits and refreshes the roster after verified save (10.6s)
+  ✓   5 tests/browser/portfolio.spec.ts:60:1 › facility creation uses the selected client's endpoint and refreshes the map list (11.6s)
+  ✓   6 tests/browser/government.spec.ts:123:1 › committee selection fetches every taxonomy page and preserves current/former staff (11.6s)
+  ✓   7 tests/browser/relationships.spec.ts:121:1 › edit rejects a foreign receipt without closing or losing inputs, then saves only through the scoped core route (8.6s)
+  ✓  10 tests/browser/relationships.spec.ts:162:1 › dirty drawer confirms discard, preserves edits when cancelled and restores keyboard focus (11.3s)
+  ✓   8 tests/browser/portfolio.spec.ts:100:1 › mail is reviewed and a provider error remains visible without automatic retry (14.1s)
+  ✓   9 tests/browser/government.spec.ts:206:1 › state target details preserve encoded identity; tier clearing, reviewed mail and failed removal retain state (17.7s)
+  ✓  12 tests/browser/portfolio.spec.ts:134:1 › capability edits invalidate the list and retain unrelated registration codes (10.0s)
+  ✓  11 tests/browser/relationships.spec.ts:189:1 › remove requires confirmation and a deleted:true receipt; failure retains the contact (10.7s)
+  ✓  14 tests/browser/relationships.spec.ts:225:1 › unknown create completion retains draft and prevents a blind duplicate creation (5.3s)
+  ✓  13 tests/browser/portfolio.spec.ts:173:1 › navigation, permissions, session expiry and mobile layout use real feature components (11.4s)
+  ✓  15 tests/browser/relationships.spec.ts:253:1 › read-only identity cannot save, remove or change hierarchy (5.8s)
+  ✓  16 tests/browser/relationships.spec.ts:279:1 › wrong-client roster fails closed and an expired session uses the shared sign-in recovery (3.4s)
+  ✓  17 tests/browser/relationships.spec.ts:307:1 › desktop and mobile drawer keep actions visible while content scrolls in light and dark themes (7.8s)
+  ✓  18 tests/browser/relationships.spec.ts:351:1 › identity pending and stale-data refresh failures both refuse contact writes (2.7s)
+  ✓  19 tests/browser/relationships.spec.ts:396:1 › hierarchy saves stay separate from contact details and fence competing controls while pending (3.3s)
+  ✓  20 tests/browser/relationships.spec.ts:454:1 › person-linked QuickLog retains its failed note and existing email provider refusal remains visible (7.8s)
+  ✓  21 tests/browser/relationships.spec.ts:520:1 › existing client-filtered email history opens the permitted full thread from the contact drawer (3.2s)
+
+  21 passed (1.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

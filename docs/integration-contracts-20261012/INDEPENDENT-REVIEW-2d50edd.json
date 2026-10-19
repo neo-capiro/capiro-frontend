@@ -1,0 +1,43 @@
+{
+  "receivedAt": "2026-10-12T11:04:00Z",
+  "timestampPrecision": "minute; coordinator message received before 11:04:28 UTC clock read",
+  "sourceThreadId": "01a0ff18-26cd-7609-beba-87726d0300c6",
+  "provenance": "Coordinator-relayed independent reviewer result; raw independent execution artifacts were not supplied in this message and are not represented as locally reproduced.",
+  "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+  "appTree": "faf8af48ba71d9152cbd2e2010ddb950fd8e2bfb",
+  "result": "PASS_BOUNDED_SOURCE_REVIEW",
+  "blockingFindings": 0,
+  "browserPassed": 40,
+  "unitPassed": 13,
+  "otherChecks": [
+    "Types",
+    "Architecture",
+    "Public packages"
+  ],
+  "verifiedEvidenceEntries": {
+    "current": 64,
+    "prior": 262
+  },
+  "reviewed": [
+    "Fixed owner GET, URL and result binding",
+    "Fresh resolution on history, reload and recheck",
+    "Revoked and stale content hiding",
+    "No ordinary editor or write fallback",
+    "Held Workspace revision and Planner cancellation controls",
+    "Prior critical regressions preserved",
+    "Three destination renders and saved Figma references inspected"
+  ],
+  "retainedSetupFailures": {
+    "count": 2,
+    "classification": "Reviewer fixture setup failures",
+    "resolution": "Fixture fixes; no product source changes",
+    "rawArtifacts": "Not supplied in coordinator message; retained as reported failures, not recategorized as passing executions."
+  },
+  "notAccepted": [
+    "Broad visual acceptance",
+    "Native acceptance",
+    "Image acceptance"
+  ],
+  "coordinatorInstruction": "Record source acceptance separately and finish the new full qualification. Preserve the two reviewer fixture setup failures as such; their fixes did not change product source."
+}

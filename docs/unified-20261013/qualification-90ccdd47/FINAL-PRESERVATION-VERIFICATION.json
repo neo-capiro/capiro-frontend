@@ -1,0 +1,2685 @@
+{
+  "utc": "2026-10-13T10:44:07.519311+00:00",
+  "sourceAtSeal": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "status": ""
+  },
+  "originalRecords": 511,
+  "originalBytes": 38198796,
+  "symlinks": 0,
+  "allOriginalBytesReopenedEqual": true,
+  "allReadableCopiesExact": true,
+  "directFiles": 144,
+  "archives": [
+    {
+      "path": "completed-objects.zip",
+      "bytes": 6517930,
+      "sha256": "e2b2f5671f55e10ee0301d700ad4dec873a632f189cd0b3ee57a823b9f26faab",
+      "members": 133
+    },
+    {
+      "path": "final-audit-objects.zip",
+      "bytes": 184388,
+      "sha256": "818339b6533f60bbdd6ea920b409a0a6e2891a72ec7f9070d428b8a2ea478e3a",
+      "members": 18
+    },
+    {
+      "path": "released-1-objects.zip",
+      "bytes": 1928702,
+      "sha256": "bdba7ff9ae9ce63c4478af6f5631e870c8d386640a9134191ffa80c5382f6580",
+      "members": 47
+    },
+    {
+      "path": "released-2-objects.zip",
+      "bytes": 4973870,
+      "sha256": "f2f0bd8c35c74912f4c28c558060007fe02537fccc5864e9126291a3a2f386f3",
+      "members": 77
+    },
+    {
+      "path": "released-3-objects.zip",
+      "bytes": 3395745,
+      "sha256": "38fd292dd4a5aadf2bdacc19f025881e626282e6e6795df7a4435d8c4738cce5",
+      "members": 47
+    },
+    {
+      "path": "released-4-objects.zip",
+      "bytes": 7155100,
+      "sha256": "217bc586a7b1c93f58eee65e2cc4f521aa1d4ceaaf8013f835ad28591d91a4cb",
+      "members": 126
+    },
+    {
+      "path": "review-objects.zip",
+      "bytes": 181561,
+      "sha256": "7cfce58e0b3f390e3321da1953453bbd1b6b350711873b56064ecd9434d678a7",
+      "members": 30
+    }
+  ],
+  "ownerManifests": [
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/MANIFEST.json",
+      "sha256": "8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c",
+      "memberRecords": 17,
+      "reverified": true
+    },
+    {
+      "path": "/workspace/capiro-final-storage-addendum-20261013/MANIFEST.json",
+      "sha256": "7facf7523946960e7c2cecf1a7dc012ab898c91af542ff128c3da3521220daea",
+      "memberRecords": 18,
+      "reverified": true
+    },
+    {
+      "path": "/workspace/capiro-final-storage-files-elements-20261013/MANIFEST.json",
+      "sha256": "f4ee7a62323e3ed084d13f50dc2ed3a922cf3bed22ace7d6fa7a66504018187a",
+      "memberRecords": 15,
+      "reverified": true
+    },
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/MANIFEST.json",
+      "sha256": "19fd6fc8e2cef4dd6c95d952c55c8c9c28999ccedea5b4fb41a527c679b194c0",
+      "memberRecords": 15,
+      "reverified": true
+    },
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/MANIFEST.json",
+      "sha256": "4283aa5a6908a8d02961306c8fbabacb7754b675d52a5c7a45f5aed591363620",
+      "memberRecords": 25,
+      "reverified": true
+    }
+  ],
+  "runtimeRoots": [
+    {
+      "root": "/workspace/capiro-unified-files-corrected-20261013",
+      "regularFilesAndSymlinks": 98,
+      "missing": []
+    },
+    {
+      "root": "/workspace/capiro-unified-files-final-20261013",
+      "regularFilesAndSymlinks": 21,
+      "missing": []
+    },
+    {
+      "root": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts",
+      "regularFilesAndSymlinks": 50,
+      "missing": []
+    },
+    {
+      "root": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts",
+      "regularFilesAndSymlinks": 26,
+      "missing": []
+    },
+    {
+      "root": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts",
+      "regularFilesAndSymlinks": 77,
+      "missing": []
+    },
+    {
+      "root": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts",
+      "regularFilesAndSymlinks": 41,
+      "missing": []
+    },
+    {
+      "root": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts",
+      "regularFilesAndSymlinks": 103,
+      "missing": []
+    }
+  ],
+  "verification": [
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/BROWSER-ATTACHMENTS-AND-AXE.json",
+      "sha256": "12362b39096a2f7c4bf954d8e3508390b29ea1f4500f3ec2d9b54156c87e6531",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/BROWSER-RECONCILIATION.json",
+      "sha256": "f1f15a7f47d80b2e5c477c43d4afc029ba4168984be4506891e856e97ce7f39a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/COMPLETED-EARLY-GATES.json",
+      "sha256": "7345599eccf50837602b36af5924fa8c113ba84ea932049b58d6001429526c02",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/CONSOLE-OBSERVATIONS.json",
+      "sha256": "150b298b719b07753f99f5c33151f57c9cf34cac4769f8d902fc899c29ffcff0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/ELEMENTS-ARCHIVE-AUDIT.json",
+      "sha256": "a0fd75b8384544fa5509bc52b084a71651688a44ccb46bc1c4549d9c866ce7f1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/FINAL-SCOPE-AND-OBSERVATIONS.json",
+      "sha256": "ba9951b4db51e723c4441c8c6255e40822a2664597987b28867c32da48c7e45d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/HARNESS-COMPARISON.patch",
+      "sha256": "0907952239052c96a3bb6d176651d9a03d81b8970586adc4d052b5f5948d1c41",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/MANIFEST.json",
+      "sha256": "8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/PREPARATION-VERIFICATION.json",
+      "sha256": "d66157656a068b8267923685df5d7aa252a5023c512ae7c672b5f86fbb2e5608",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/RAW-PRODUCER-BINDINGS.json",
+      "sha256": "107758c9f7392fca358e03c206bebde77c9e93943bf47796ce766abc776d2494",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REPORT.md",
+      "sha256": "6c65ff1f83bf1dbdb186d5610a68f2ffff205c84b614479af778a43a0730b0f2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REVIEW-PLAN.md",
+      "sha256": "ca6587b233de9fbb44d52f13659c9065db02965c0f1643489b3e17fa9b929b85",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/SPARSE-RECOVERY-REVIEW.json",
+      "sha256": "d759c105063b7850e954cc582ac093bec0c9d9a8b5d5cc99ba81372f2e30d29c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/SUPPLEMENTAL-REVIEWS.json",
+      "sha256": "455abcf77ee86c3a7d4d22495c3274020c7333c180fb1aa7ac534e064f076459",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/after-sparse-recovery.json",
+      "sha256": "a4a9d15241ee28a0d882251a183d76f6b5860850bc9f1658b7df9cdef73754fc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/audit_receipts.py",
+      "sha256": "72194fdd14c4ed99714f2d59473dd207f616518d259bb5fd2cb42459ddc99a68",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/final-receipts.json",
+      "sha256": "1e66416d3266ecd1be1cf1cdb93789b284d6dfc0f8d1945a24d98f4ece82f9a2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/preparation.json",
+      "sha256": "8bf7e0ed431d3351a144bb4c7bd58fa2910f90d8f711d071fc474e24244c1a3e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/clean-install-exit.json",
+      "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/clean-install-running.json",
+      "sha256": "75021e57d215019f592723805732976cd1a4ebf26b57404c2d6016eb39022ff0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/clean-install.log",
+      "sha256": "5b651265a93e8c8c054339344af9aec3bf013165be762488a7b700535383dafe",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/check-exit.json",
+      "sha256": "8a0a4416f7f3d8a56325bdfb8024a5356a0a131a43dca140b75349cdab67dccf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/check-running.json",
+      "sha256": "9c46dbd9ed688f0a3bfe14e67fcf36f516674ef07f5c8bb1383fe693b5c45a0f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/check.log",
+      "sha256": "0b8ede961c555ddb8ff3286a41551f4c1d814ba09bd7e40fdcb5a9188c2443db",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/elements-exit.json",
+      "sha256": "c0d1ab46eca5ee4c9bd41f5dd92b7b735df76a2da7084f07642dad72e6a4dc45",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/elements-running.json",
+      "sha256": "35bf0bc3f1051c90e58765ca0e1c1623204cde32af0fd01fd9f3d0fb5f77f334",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/elements.log",
+      "sha256": "0af6290b70d708e5f856817410aa500316335e970bdc9af6e53a26ae00ee79b6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser-exit.json",
+      "sha256": "9e36293f7ed9084b7e71f08f90fed06c21d0f97dbba8c4096515fcd0b044b57e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser-running.json",
+      "sha256": "842744d1e3e448be39e306e2504bbd285f0687d88cb5082126ac439a006b43f2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser.log",
+      "sha256": "fe0595bad831384eb2dba9fbc4704af90ca6fe5ea0d5bb0b31ca49d9009b6f15",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build-exit.json",
+      "sha256": "0eececc6f8f937fc6b76533bf29af5b06a00ddd1696cd4a521544897bce4acbc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build-running.json",
+      "sha256": "d37e18f793c01e1badb524af4e33633df1cb2145b1e11991015355d08fb15406",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build.log",
+      "sha256": "74f7aa82e9247ccd2b935d7ded9650d4dd5f7ec6a780b22b7a16be443bba5d73",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production-exit.json",
+      "sha256": "dddb8c989c9a4496aa29bb0dd867930ef989404ececccb27416237fb6c10938e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production-running.json",
+      "sha256": "ab66b1cc35b5e228653b17afed21c2004c92753d9ea88c30c5d9d3e17bb1ab58",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production.log",
+      "sha256": "338466bbf5db5e8b0e9c521f4ea72db27386e0fbf9cb55b2950d791c09f85d96",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-exit.json",
+      "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-running.json",
+      "sha256": "61384be2c6dc9baeb2b34efd8a1c8205a581a6e870616078f5585ee9ce7c47e7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets.log",
+      "sha256": "595d42bdf734b3abcd4cb0f1b91c568c5c93adb517a736ffa5ff32e030e1ca58",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input-exit.json",
+      "sha256": "ee291e137237c4d6d14ab568b9388e5a4d646da383e14af6355111121e4295c2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input-running.json",
+      "sha256": "c43ca1a540e0b91cac2dadd1c3e3b2bb5b2e079f165f9ada1822861ad248fac7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input.log",
+      "sha256": "2777bbb9b07ca4e82699254218e97e91a35cfddec924392fca90c6d2bc779bb7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-exit.json",
+      "sha256": "7225525a3091d37979689fa1cb1c1c3e3455221fc08a9c398aa384d0684d6cac",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-running.json",
+      "sha256": "1d43b30de9a34de8db0a66c187a8fcfeb642d476c30bebca6c0505cc714032e1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions.log",
+      "sha256": "382445da77d013e284317b639d09caa5481911c8e990d3c9ef4fb9ff7df8a30d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/modules-browser-exit.json",
+      "sha256": "9ce9cb2acb359560038ac9b0aef48002ba3f373dc62777592ecb3f4bf5d94137",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/modules-browser-running.json",
+      "sha256": "f30d3c5cf65d2faecb7622f398dfbf26859d322f52e99dbd38ae72b749f9e712",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/modules-browser.log",
+      "sha256": "fba608e87c8c8b7c5b01f71da88a54b28abd7431e82f21bb8449e0933b99a7e4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery-exit.json",
+      "sha256": "1314dd51723d20e4572d9111028b2eb63a6f7a8fc65580ffb146bfb5519b4859",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery-running.json",
+      "sha256": "b9045443730a0a1f1a3f5faeb59354720e9cb2a66b3fc807bffd1c79e6b51849",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery.log",
+      "sha256": "5c6e52c93c09051aaf388bc98804463e3d01cd77d02e0e5d2bf4ffcb19a80efd",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/FROZEN-SOURCE.json",
+      "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/SPARSE-INPUT-RESTORATION.json",
+      "sha256": "82646a440f1e4e4499eae8300b0a1363292f673c0a742844a052bb07184b9d14",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/ROOT-ACTUAL-RENDER-REVIEW.json",
+      "sha256": "1f11deb83f45864627ea93f198119ba207b261a3ec5d29a2deaa776ae0a79146",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HARNESS-ADAPTATION.json",
+      "sha256": "e639837905883473ebfc2a9972d07abe55b9ed6ca679a4b7de27ee0eafa3afb3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/continue-after-sparse-input.py",
+      "sha256": "35a0c5dbb9002fdf5ba4e4eaa8f67c4ef269815c8ce7d2fec7771f1db525fc5b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/qualify-successor.py",
+      "sha256": "810ab1f04786bfd0243c5a03195a0c9f0ad6976060c7fc2e7a16fe09344fbae2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/run-gate.py",
+      "sha256": "d84a1f239cf259713f158c3b6495c73df53f1603a6a1f7bd2add734dbabf377c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/run-portfolio-shards.py",
+      "sha256": "29894e006793d2510d166c07bb9403048b856d3e1f6005acfc0387bba9d7fd2c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/verify-additions-v2.mjs",
+      "sha256": "f454541edf2b4a5881896ff0a781a8085e928ca9fe52c78fb979ea04b2cdce57",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/verify-assets.mjs",
+      "sha256": "794aab8cbb0a10da0de149d8bd411eadde38fde0cd461c1c921fd44f3bd1fd15",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build-cache-retirement.json",
+      "sha256": "0927950a7241b784a9a95fc38b342ad142395766f761f13591d55ffde3e9045d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/download-cache-retirement.json",
+      "sha256": "d7d0de3e58b91bd0e21e33b210606ddf9283c30497a4d6d2d3c4c8cd8324cb3a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/modules-browser-results.json",
+      "sha256": "4c4be4783affcdb4e78334e438f5d0d2d5b4a183acb41868b6fe61b9c44f1af1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery.json",
+      "sha256": "73a72b3efdf6040d9467c8c4b5d7115b0307c312266580e37c72918cf964c241",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/preview-root-smoke.json",
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-meri-files-1440-dark.png",
+      "sha256": "4da887995f880d1b8f1f5a3a9e5eb4de6043995c8580e09b5490d0fdffda99f7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-meri-files-1440-light.png",
+      "sha256": "4da887995f880d1b8f1f5a3a9e5eb4de6043995c8580e09b5490d0fdffda99f7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-meri-files-390-dark.png",
+      "sha256": "94fb62fe646da005137daac06ffdb5bbc49d061d45c0c915ba7161643c569864",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-meri-files-390-light.png",
+      "sha256": "94fb62fe646da005137daac06ffdb5bbc49d061d45c0c915ba7161643c569864",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-portfolio-1440-dark.png",
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-portfolio-1440-light.png",
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-portfolio-390-dark.png",
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-portfolio-390-light.png",
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-smoke.json",
+      "sha256": "da8f4592ea41108c6bfb3341b1e51f7a79f4eed10d055b9270f6a09ea9c939da",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/standalone-default.log",
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/standalone-portfolio.log",
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-v2/onboard-unconfigured-1440.png",
+      "sha256": "02cd925333ee6a1c19525420fa8251a90c0e67359cd10b18fe503cdb3d2dcbe6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-v2/onboard-unconfigured-375.png",
+      "sha256": "ebfb7deef22ab14db6e0aaf26373fba4c6a790eae74c30e526372ed5ed9e4537",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-v2/results.json",
+      "sha256": "d4267a9648fdd0cc216c52ec6a1672bcdaea50fdff4ea55a23c0574eeb06c43a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-v2/standalone.log",
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-module-graph.json",
+      "sha256": "7790a0c137243ec15c0bcf6bd2878db1081e0cadcf83c7d6431520a2d1e0f016",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-public-namespace.json",
+      "sha256": "7ca882476a59bb89e8a927014b7f718db5563f98de19f55152f925c684b6c5f4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-receiving-results.json",
+      "sha256": "5f7b54dddb62cd00923717d5a904fe5c20b379c921600bae917d4b9ad2890263",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-renderer-results.json",
+      "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-results.json",
+      "sha256": "5b2155c6ff3a8d2a3788f609be2141f148b7901e6dec60d886e00c37b9503f46",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/bundle/newsletter.js",
+      "sha256": "b8f67dddab8f2986676f0fda40e0b9fffeb596fdb6d1fded4baaef5dbcde8af9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/bundle/newsletter.js.map",
+      "sha256": "b66daf9de37edfa27276b67ac6ee5d8722d946d792c8f4b091b2c309c951fc48",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-served-assets/asset-results.json",
+      "sha256": "7e82efee1a69f5ddfa6ff76cf5f899e082ab554e2538a4f6549389ad3d61e955",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-served-assets/standalone.log",
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/FROZEN-SOURCE.json",
+      "sha256": "b2f0e133129317f7ddcbbbb600774b49b5940633ef6bd2b88ded50c1f85a2f22",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/HARNESS-ADAPTATION.json",
+      "sha256": "a8400d11ee0984e1268be30b5c73bd80c4dd90d69fc221604f966806c55eef30",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/INTEGRATION-RESOLUTION.json",
+      "sha256": "e61dd2e55f3a326efb47726cfeb6395e182236863a60b5405d675aabb3df07f7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/check-exit.json",
+      "sha256": "b38b935f5cf8bdfa5666d138fd9296a32ee626f09059278ff69750c00553c143",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/check-running.json",
+      "sha256": "4ace851cd7917a33741ddc7838eb78c917e90d593b0a5b70bf1ed5329734c5e9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/check.log",
+      "sha256": "eaf8912d460b5ce6455ade04dad31dabfbd4354716d53da9ceea03df186858c2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/clean-install-exit.json",
+      "sha256": "fea97ba31349fd3a3a8691b31a0891ae9f3b3882449469b0c133d7974924a9c3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/clean-install-running.json",
+      "sha256": "2c06b1e0afcee88c8a00cc80ae4dab7ed6df806cdea3ae8d6c7fa3525ef02e97",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/clean-install.log",
+      "sha256": "5b651265a93e8c8c054339344af9aec3bf013165be762488a7b700535383dafe",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/download-cache-retirement.json",
+      "sha256": "5b0ef7e42add1f1df70d165e668485c8a6505e2795676db89d6c43651da505cc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/files-development-harness-preservation.json",
+      "sha256": "3fca1cec5977aa471c7722f60c9133ca7443d889fe91cfb5b124475fb37cf785",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/identity-fixture-format.log",
+      "sha256": "2edc152217802df5e313e35fb048adc12c7b11d1e0cef32e298af85352cba68a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/identity-fixture-typecheck-green.log",
+      "sha256": "a8386620a241fc3fc10374b84593ecf62455007071d45d984927d69156436d01",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/qualify-successor.py",
+      "sha256": "566d3ceaa750b352699881f22a8f55556863b209804deda051b0ffcbd2df1786",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/run-gate.py",
+      "sha256": "d84a1f239cf259713f158c3b6495c73df53f1603a6a1f7bd2add734dbabf377c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/run-portfolio-shards.py",
+      "sha256": "c84e35b58dc7f4e387f36e70b3b57dc6bf9244725713741cdc684e02f97dcde6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/verify-additions-v2.mjs",
+      "sha256": "cb19a631d8367b792350509fe9ad9541ba32ef21555d818126c41d739523d0b0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/verify-assets.mjs",
+      "sha256": "944bc1c875c4f03a432197a5d502793ef3d58b70f06d422e9086b7633c91838f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/__pycache__/qualify-successor.cpython-312.pyc",
+      "sha256": "4c15f6303179e417a3f252d037345e61bd8c9ea78c4ad8fd190cb0c267852183",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/__pycache__/run-gate.cpython-312.pyc",
+      "sha256": "ee3876e6e66d229245a63af8bc2a407de6e3163d24b56e0107c87e3157657220",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-final-20261013/__pycache__/run-portfolio-shards.cpython-312.pyc",
+      "sha256": "0006504669dc065a083c280ab9e780a9ce8faaa301e8fef782d863df09ef678f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/next-modules-scope-Calenda-696ed-orts-partial-empty-coverage/independent-feeds.png",
+      "sha256": "219c7b05350c7d65c1cfbbdadf3b72723b2d2ea900a8da0191fd2c84c976f03b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-navigation-File-768b9-d-zero-automatic-operations/files-keyboard-390.png",
+      "sha256": "21036ea4ef5793438c104fd6f4af2ebf910ad6da9fc3ce32cffd26607d02e30a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-action-host-workflow--6f4f9-oard-operable-and-fit-375px/meri-actions-375.png",
+      "sha256": "a8721a4b57f08bfe8566bdbbe766f487deef5f1589f388785c4e091730fbdccb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/onboard-host-funnel-actual-18ee4--without-overflow-at-1440px/plan-keyboard-1440.png",
+      "sha256": "68ac518aa4105228007197eb04e3bfb61abe8d2331c011d6409dbc74cec3320e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-editor.png",
+      "sha256": "4cfac0897710ffb0850c8385b9cb01cf9ad8bdfa62b85210f2365fedc503b5c6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-native-pending.png",
+      "sha256": "814f36d2e4120d8f272a1baa70c1a99ff211327f2dcec9595acb6716cd81cfee",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-revision.png",
+      "sha256": "cae4ef7f3afbd6fa6da6e19fc0e1da0516917f029cd79cb56f2ab30ba7347f97",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/synthetic-receiver-bytes.docx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/billing-flow-active-subscr-b2db1-h-the-portal-never-checkout/billing-existing-subscription.png",
+      "sha256": "669d5d487ecd12491ed51223bdff1579fe3bcb5fa4de6c8b8eeb70f56ac46729",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-destination-82943-ut-ordinary-reads-or-writes/workspace-desktop.png",
+      "sha256": "5ae502d6f80365d48859c6e6f0c26c363669c14aa108324d06a8ad21bdd2f2ca",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-destination-82943-ut-ordinary-reads-or-writes/workspace-mobile.png",
+      "sha256": "12e11c6a49a7df01e5c1641c7d852e309444bd1e44b1a80d0712bf73b421d67b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-editor.png",
+      "sha256": "0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-native-pending.png",
+      "sha256": "6492af32a359f977799713576d2c98f253e8e84d098763749e72e9c24eb8f1eb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-revision.png",
+      "sha256": "9c66ae65c666ba34a0a431ee3df3952efa6015b0c0b53c585c4fe455f3395064",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/synthetic-receiver-bytes.docx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/workspace-filters-desktop.png",
+      "sha256": "2fed9b9d5ad62ee316075baa8ed4eb822af68847a5b11e6e1452ed21586c251a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/workspace-filters-phone.png",
+      "sha256": "883524318f53f20c9c5c15acefc601885f82e1e868d958ce442642f597c30aaa",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/synthetic-receiver-bytes.xlsx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-editor.png",
+      "sha256": "5ff635b0dc9ca2f3b254611400b9872217a4f342934c63bf1220368ffb8b7c0d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-native-pending.png",
+      "sha256": "4a53157b0582e44e8c5aef425f3ab0360577be929c3b7f651d155045f1ae1b54",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-revision.png",
+      "sha256": "59a012fd2bb3cefb30a86f40bae69cda7485d091e41f04a513460247ea0e8bf0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--c3df1-thful-unavailable-rendering/files-unavailable-390.png",
+      "sha256": "6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/files-keyboard-1440.png",
+      "sha256": "cc5f7b1ae4b051bd4219d5cc36bdd4c53f89c70f35194fd9a4adbc2cb0dab0fc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-destination-0d8c8-ut-ordinary-reads-or-writes/strategies-desktop.png",
+      "sha256": "e67e9ca09273a5aa73b05d0099a617d71b31cddbb8a255d90296f0cdb46a9458",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-destination-0d8c8-ut-ordinary-reads-or-writes/strategies-mobile.png",
+      "sha256": "50d98021d25f02e145f94bd3a65a0fabea9f0f78c08468ec006f36732a8f23a3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/onboard-host-funnel-actual-4aaad-n-without-overflow-at-375px/plan-keyboard-375.png",
+      "sha256": "19e460ac3b67a74eb0f99858163f726ba4f9d02d0f2b7e811c25131254beadd9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/public-form-error-desktop.png",
+      "sha256": "3863ca839ed0cef31e97da2edae0b2c38fe463d040787961cb28c3843ceaa47e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/public-form-error-phone.png",
+      "sha256": "036a88252bbb4c281c65c972e58433b04c26cbc1d0cb1a01b2a5ef2c3335e7ce",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-action-host-workflow--fb422-ard-operable-and-fit-1440px/meri-actions-1440.png",
+      "sha256": "863ea0fbcec0302f455d10dfb514a1e37296e0984fb4651c46908a1edbb49a17",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/newsletter-staging-mobile--63cdc-ts-keyboard-acknowledgement/newsletter-staging-mobile.png",
+      "sha256": "59133ad9d5ff6d330c80a7e72faa571945fe6d844eb2525949426f23388984fb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/effective-dates-Modules-ma-bdcd2-enance-and-partial-coverage/effective-date-mobile.png",
+      "sha256": "b34d574a388812edb0decfb841d47c8e3e56b3eae963a74771ce9e455294fe10",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-destination-434fd-ut-ordinary-reads-or-writes/planner-desktop.png",
+      "sha256": "d3f68fade8a5f346f1df60acfe085beaea45cabd7cd2f3fbc12513a0205a84a4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-destination-434fd-ut-ordinary-reads-or-writes/planner-mobile.png",
+      "sha256": "58545b27b3973c0f54af20ca80c28194139df174ce7f95af15062b81465d3921",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "sha256": "f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-destination-each-3e2e9-an-unbound-session-fallback/objective-destination-desktop.png",
+      "sha256": "119936499d995a9a54359dcedfff971eddbb15dca4927a77414e12b62c1e99ff",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-destination-each-3e2e9-an-unbound-session-fallback/objective-destination-mobile.png",
+      "sha256": "752c586fcaa36882df09b3bb1192ffdf745e67d21183081ccfe978c14e79bc14",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/synthetic-receiver-bytes.xlsx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-editor.png",
+      "sha256": "157c891337b5d3cbb09ed88307477756d36343c7db86ebea92a248c8859fa019",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-native-pending.png",
+      "sha256": "5bb390206f5ec4f6342ecdff30230427b09d6766cd28f54a433523887b56b0d2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-revision.png",
+      "sha256": "90091be9759021838edeca28ef01511c21d49b36c9e145aac432ea8eaab5e84e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/planner-client-groups-desktop.png",
+      "sha256": "179b76d43340a23c41e9d849a9bc2ab620114ce4d184b80175e7f3cf1a8a0ac7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/calendar-desktop-after.png",
+      "sha256": "d3e4a2ed8cad2e04557d1a3d8418037d770c1aec197b7b75923a3f262b525190",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/calendar-mobile-after.png",
+      "sha256": "62cf8494e6cead941c6188ee0e0ae3710c5213fa15df88ae62d77c5d09ab8867",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/newsletter-rich-local-rich-24c78-d-plain-text-without-writes/rich-editor-desktop.png",
+      "sha256": "19e917ec22cad5a83da74d3557e3e619808faa644dc823788fb68cebb9eb0dd8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/newsletter-rich-local-rich-24c78-d-plain-text-without-writes/rich-editor-mobile.png",
+      "sha256": "805810ded7efdbeceb5f9e4798b8f51d0f0c31023fe7e0227f969bf5aaad811f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/newsletter-staging-explici-1d93f--opens-the-selected-session/newsletter-staging-desktop.png",
+      "sha256": "d97e6d48f9f32487fdd844435437c48492989c411c8cbd3018c6ebe45192beaf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/objective-work-navigation--033c9-working-draft-automatically/saved-workspace-picker-mobile.png",
+      "sha256": "14f8f4438c6fe0e5af9f272802e6286a27fb859dced5a434df4678d1b2aa3caa",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/next-modules-task-links-ag-56488--and-respects-viewer-access/linked-task-detail.png",
+      "sha256": "12d647e416767862ad57af44e890b0a651c48dad7829cd3e69a615a98712df05",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/planner-client-groups-phone.png",
+      "sha256": "503d99496c056576e093d27fa3a6b28ab31027bbb9c850f4b06dbd2b94d24379",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-running.json",
+      "sha256": "43d6f90597fa5ddd2e409a0f204a7bd301dc6923d28b73857cadf2fb3de22fab",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-exit.json",
+      "sha256": "44aa78ee5a1fc37bd4f2a74f98183508f6102b0fe2c9506fcd4b14fe0827d625",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-results.json",
+      "sha256": "643899af29f296d7cb644543c861ee612d5dbd5147096ae11638a2c332e6f71e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1.log",
+      "sha256": "53902f3c31367ddd594a0da784964fbee1b23fe9b0ddfe8957831a26e755c128",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/alert-channel-visual-phone-bae83-d-remain-keyboard-reachable/alert-channels-phone-dark.png",
+      "sha256": "3f9df5d6a930f71252c85b37a1bf40369af635a5ff169cf8485cdb6c2f50d53c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/alert-channel-visual-deskt-8daca-d-remain-keyboard-reachable/alert-channels-desktop-dark.png",
+      "sha256": "f1d94fa2b12ed15cd2e802bd1f11e136899a593a6ef1c4455d55c3bc5d4f382d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-sharing-sharing-m-2e585-al-desktop-and-mobile-sizes/sharing-1440.png",
+      "sha256": "53cbd92ab5615bfa28b873ae79f1f86cc71813e33b5023db654c6d4f88fff4cd",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-sharing-sharing-m-2e585-al-desktop-and-mobile-sizes/sharing-390.png",
+      "sha256": "73997bd171dbdf8c7a8cd713a242f7743beade2639494066fcb559634aa69346",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/agenda-1440.png",
+      "sha256": "8c9167efbd2044426026c476d490e9a0d0edcb782c8d19cc52a52180942ff233",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/agenda-390.png",
+      "sha256": "09c415fa6321601de9034d13720eb26f4e51859f45fef4e42b3b01b9c0b14990",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/meeting-mobile.png",
+      "sha256": "576feb294e4dc8428a4f54ba8af04a5f6a20d96d27d699fa736739f74db8f702",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/billing-summary-eligible-b-f5775-sponsive-light-dark-styling/billing-summary-desktop-light.png",
+      "sha256": "d0a5b059f2dfce52b4086df1d49952c33cebfb2e29f6521605a2368a103974bc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/billing-summary-eligible-b-f5775-sponsive-light-dark-styling/billing-summary-mobile-dark.png",
+      "sha256": "f19a0b20df8372149866b021454b655382ad3bd762f12be9fb4a0f06b3b30668",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-sync-integration--d38e6-view-changes-without-replay/client-calendar-unknown-mobile-dark.png",
+      "sha256": "fa1a856078d00a2219737ee84f71a171c9b1219a3384df0fdb02d42d7b49602a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/alert-channel-visual-deskt-ae329-d-remain-keyboard-reachable/alert-channels-desktop-light.png",
+      "sha256": "f443dcb772e9ac5a1934d09ed3bd3d3b8fb1d3f4385444d47d04a1ec2b6653ef",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/advocacy-history-edit-time-60427--with-keyboard-cancellation/advocacy-outcome-phone.png",
+      "sha256": "2c0e4e368ec7fb3e67b4504be7002fbf9b822d71e2ed61f40f4127cb770423e7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/advocacy-history-edit-time-60427--with-keyboard-cancellation/advocacy-timeline-phone.png",
+      "sha256": "1b67d05c0172eea36f5dd3b58dc3bdc4da07a695473ac8c27ce445f93ad7ddc8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/advocacy-history-edit-base-653d7--preserves-undated-evidence/advocacy-timeline-desktop.png",
+      "sha256": "3e77d9278bad7b0fc73f22a7fe5b791f01e2863e47f949229349233e4f53c999",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/activity-command-reopen-a--a7c69-d-fresh-authority-completes/reopened-before-current-authority.png",
+      "sha256": "af9157c87f7ec69143a4d9b4d9d95f3c803cb2daf56d73c29db2df5c89ccdc0b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-sync-integration--3749a-tains-client-view-date-zone/master-calendar-window.png",
+      "sha256": "f3eed012fb0c11355ba15ae18474ea31fb621eec36d1c60501c4a87797b18dd3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/activity-command-a-date-re-4c15f--has-no-commitment-controls/generic-follow-up-mobile.png",
+      "sha256": "3008c4708d3b46de35f9580f4e46d9b5cd1723644240be9d134a252e55ae4772",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-sync-mobile-dark--82f95-ometry-and-keyboard-closure/calendar-sync-mobile-dark.png",
+      "sha256": "a727e25a89b2e5cecf0d7d64ffebf4621a9945dca9a968883b95a3d94227e673",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/advocacy-history-edit-desk-928c6-xact-Figma-frame-dimensions/advocacy-outcome-desktop.png",
+      "sha256": "7cf3416063451448e6258d52eebc956148306887a4ae4e4d97004d5ab3f6e91c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/billing-summary-integratio-cdc6a-optional-billing-disclosure/billing-chooser-desktop.png",
+      "sha256": "4f1df0c25c39dfce0583cd104055daae38d8f4305a19a2a371db7666f37d61e9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/billing-summary-integratio-cdc6a-optional-billing-disclosure/billing-chooser-mobile-dark.png",
+      "sha256": "9771410aaea1e1a9df6e1232ef53759a1f736e58c1ae31cc47ef7c0b6d7ad369",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/advocacy-timeline-dark-dar-f96a1-ble-at-their-exact-geometry/advocacy-timeline-phone-dark.png",
+      "sha256": "de78d163e17a0b695c8b96dcd64d490d149c1c742e68d8d577b867edc2df1139",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/calendar-sync-Cancel-stops-00636--erase-the-dispatched-fence/calendar-sync-desktop-light.png",
+      "sha256": "494cb0049d5a4ee44c48a6e12d645b3eba2a7f0d735a8a8819e5ff8eef076677",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/alert-channel-visual-phone-92fa6-d-remain-keyboard-reachable/alert-channels-phone-light.png",
+      "sha256": "6be9fc5db325b7e1cdd6a19e3cac36b03d832ae31aaf1aa10557786ffdf732e8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/advocacy-timeline-dark-dar-38c24-ble-at-their-exact-geometry/advocacy-timeline-desktop-dark.png",
+      "sha256": "b91c9b016ce56170a8197ee52e7c87c7e022ce84cf058d7abf1e2f8f0d782aee",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/ELEMENTS83-ARCHIVE-LOCATION.json",
+      "sha256": "bd700355e2ca66118f4ef7fec5f020100db49ec9a56fe42f98aff78a94403a08",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/MANIFEST.json",
+      "sha256": "7facf7523946960e7c2cecf1a7dc012ab898c91af542ff128c3da3521220daea",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/README.md",
+      "sha256": "a21e4ad943eab3a64ab99d4886f10e081f8094848efcbade5a3b6981d17ea703",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-archive-verification.json",
+      "sha256": "c6eeb918ca9e208ad33c8e761b5632ee0fd2594ce957013745b22d307214294a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-before-archive.json",
+      "sha256": "283e94525936808053ca54a96eb6ac4f1651475d4ac2a5e9a87b55753aad57b2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-initial-failure.json",
+      "sha256": "949907854b3ebc4af497e2c8814136c67a76369d67b8111f654cf774a578a8a2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-initial-stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-retirement.json",
+      "sha256": "e694688dbb351648ba0ba078f451c8f3b07a71d09079ab6cb21146364c8c8da7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-v2.log",
+      "sha256": "def7e9abf0d9d4357cf5503a477c145f0502279ca8ab391de4d37c7a2d8b2e82",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/help.txt",
+      "sha256": "38ca07bb555b8666870943752dbc556180110766e1dedd157fbbc3dcec7955bb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/publication-before-retirement.json",
+      "sha256": "d5f187ba9b8435e9f660bd808ff34a7439cffa389b41d8b33b2337fdaf8d3340",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/publication-retirement.json",
+      "sha256": "29957dfd8ec1486fbd93be656bde0c365f50fe4a469ab9e5f32d3208a3a5dfee",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/publication.log",
+      "sha256": "ad9a049a14249d623ef06988a5a7d56e576e4a64c33551c6736a350be4744bdf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/recover-historical-storage.initial.py",
+      "sha256": "a1078af5f6d0bbb8dfb603944475b16fe17838df2b51aef49c7a2ebb26dcb9e1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/recover-historical-storage.py",
+      "sha256": "8e0bb77bc3e78452717bcf9e0b5ad0ad5fa64e70becd784eebc92742bc322ceb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/frozen83-reference/OMITTED-LOCAL-GRAPH.json",
+      "sha256": "092e785d3c6c8ff023c057747b0a50cfe78bbb061839da316aa713bc286b1c08",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/frozen83-reference/PUBLICATION-MANIFEST.json",
+      "sha256": "fe793fae01d20e40bf5b2057ac433550408f1fbcd193af93053bfd44b4f68fbd",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-addendum-20261013/frozen83-reference/SOURCE-FILES.json",
+      "sha256": "549c4b45b9ccc031170d1b8c15b447c0942a0d55b518b1033669e968daf82959",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-running.json",
+      "sha256": "c594073782920c6829e305037aea3e052adfc3648e9fcb7d0acc2d7705d2d698",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-exit.json",
+      "sha256": "7add78a95531075a628f2710b925683b5c31d23887b66c61e5995ccaca5e7531",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-results.json",
+      "sha256": "53060828cff7fea8e0ce92bf8b5807979b3f1cab5dd2a618df58ab13cea1c548",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2.log",
+      "sha256": "88f307130781e3c8fea4b1760efdda15e78fe2b882bab5826dd2ce817b149a43",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/compact-list-dark.png",
+      "sha256": "bf575cdf9ee952d08ec6e594560a26dd7aa385a4a6d886fc2175f457f39cee0a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-a9ff4-states-render-at-phone-dark/capability-create-phone-dark.png",
+      "sha256": "6f21bb2210d6b0cd444aafd6e6af54ee9ac6921755004e463605a626bcd8376f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-a9ff4-states-render-at-phone-dark/capability-editor-actions-phone-dark.png",
+      "sha256": "e6afbc1601451970e89709b34d3eb0d086461025cb969f6315aafa5be65f75f9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-a9ff4-states-render-at-phone-dark/capability-editor-phone-dark.png",
+      "sha256": "05c93ecbbc69a65a16c3b076c9ae9cdeab18b5bc3c7f12c3554658d84b7d12c2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-a9ff4-states-render-at-phone-dark/capability-read-error-phone-dark.png",
+      "sha256": "dd8e442225c2cdf7a5db32ae4554fb96965f681316dd8c681e00b9b5c372d0cb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-a9ff4-states-render-at-phone-dark/opportunity-read-error-phone-dark.png",
+      "sha256": "0594f06305373ae6476715e198020a9c0c513a9ba36254b17189c1775437db98",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/current-projection-failed--a6960-es-and-cards-until-recovery/catalog-recovered-503.png",
+      "sha256": "3af01a3dee13c1cc1698ae1e1a99e94282ebfa59d1488a18320f82b03d138649",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/compact-list-light.png",
+      "sha256": "799a0e90e87e6a12b89fc76fcfbf164141182aa258e5439f58f8fbd5c36f5d81",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "sha256": "327b8a8573d874a83eb42a3a939d3404a832d4c0d89e17befe1b47a561d4fedb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "sha256": "38e4b0e61bbe08f6a6d81c97dd60a7f660eb531b651d4f23dc3099504b57fea2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-02748--document-access-is-pending/documents-loading-phone.png",
+      "sha256": "5c237e266b5e650a302f0cf399d61b1a492cdedfa0108d94070aa8c9d22ca5db",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/meeting-documents-debrief--76815-nd-light-reference-geometry/debrief-desktop-light.png",
+      "sha256": "28da1a0769d1509b95de0f126e5d6f4d3c057c804644f040aedf99fe0b5f241e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/conflicting-acl.png",
+      "sha256": "f0836eeb89f4992da50d593ecd1a85196f4c583d48effce5b6e73123d8928ea2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-ae29b-tus-variants-at-phone-light/documents-empty-phone-light.png",
+      "sha256": "643d587caf9348617f2dfc59feb9c3d39d2f9a11ba25f55bb529cd88fc6f596c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-ae29b-tus-variants-at-phone-light/documents-error-phone-light.png",
+      "sha256": "1f492480440fac4a357316a32fb2ecbe262f230085cdd271cee066069de94c28",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-ae29b-tus-variants-at-phone-light/documents-ready-phone-light.png",
+      "sha256": "88a5a90efa14851c36a41f09eaae22063c627cd219d9b7519e0b44aa0be7bf89",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/files-delete-recovery-unkn-cab48-view-and-a-new-confirmation/delete-unknown-desktop.png",
+      "sha256": "2ebc947b7c45be7f35c8813c05aa10b5f3b1f2eb05b07587b7154d870dba1657",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/effective-dates-master-Age-7698d-ithout-shifting-civil-dates/effective-date-desktop.png",
+      "sha256": "9c5bd84f8af44e3890e0361c49ad8850b9a5c9dd851ad411ce26615c0c712ec5",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/effective-dates-master-Age-7698d-ithout-shifting-civil-dates/effective-date-mobile.png",
+      "sha256": "69c86d669006a73ed52adbbaf728a72ef74c39f043bb48c368e1b8a44819dfba",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "sha256": "1bef83cb011193fa4c57229b51cd29e5266614d5f5df3aa18ad78680af3cff99",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-registration-vi-b9547-states-render-at-phone-dark/registration-edit-error-phone-dark.png",
+      "sha256": "e29c9db064387893f26b8ded0270654f6c087b6f894f28cdb46df71c3da2b34c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-registration-vi-b9547-states-render-at-phone-dark/registration-read-error-phone-dark.png",
+      "sha256": "3173793c332cbd32dc97c3351ec158beaf11d6d8057b5e32c1c13143c8e8ffb9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-registration-vi-b9547-states-render-at-phone-dark/registration-read-phone-dark.png",
+      "sha256": "86369d3a91e4439cdb7c52bdacec387ec374b978990f2beef7634b7ab0deecdc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/meeting-documents-preparat-915cc-ntent-and-safe-source-links/preparation-desktop-light.png",
+      "sha256": "a2b391b9a233a7bc1b30c11a73f393d197b140cf4a8982188466acf56f782d36",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/linked-file-arrival-a-miss-c96f4-g-another-file-or-replaying/linked-file-unavailable.png",
+      "sha256": "e42d4aa34dfc6110f60002cd6d044a3ff0d48fb49539ae5873e7ddb28358f77f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-14a25-tes-render-at-desktop-light/capability-create-desktop-light.png",
+      "sha256": "ef3934f13975303aeb3f76270798c3dde9b7de7b582087e459ededc95fa4c586",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-14a25-tes-render-at-desktop-light/capability-editor-actions-desktop-light.png",
+      "sha256": "2412d468def2f43a779c339ab191d62c4bfcdb072173e51902b47d706b6c0f73",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-14a25-tes-render-at-desktop-light/capability-editor-desktop-light.png",
+      "sha256": "6ce73f0c677f7320a3893aa10412e534cce1af60788094924f50e81d695a2f3d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-14a25-tes-render-at-desktop-light/capability-read-error-desktop-light.png",
+      "sha256": "66c33787791fc20ea10bd1ddf158d6a31f7f2b468b7565f444a354cc0ba7f59c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-opportunity-vis-14a25-tes-render-at-desktop-light/opportunity-read-error-desktop-light.png",
+      "sha256": "154455252065c9c96fedccf0050dc4a5218bb3a09bbd1ceba77e6747d39b6c2c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/files-delete-recovery-an-a-0a9cc-not-a-deletion-confirmation/delete-absent-mobile.png",
+      "sha256": "18e5fd80bee498e1a84fd6ca56f2264d755341bfe50f663e1e0e66154384c6f0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/meeting-documents-mobile-d-27378-ts-viewport-and-loads-Geist/preparation-mobile-dark.png",
+      "sha256": "5ead8ff1a0d2c231b7f4ab48ff5772f89b226be14bf956d2b70bad385b40c837",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/desktop-rich.png",
+      "sha256": "83b1c976fe15db7f1ae71446b39d3ec1e8d32b263313602085258bca79608e07",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/manual-debrief-manual-debr-82218-submit-and-saves-separately/manual-desktop.png",
+      "sha256": "10c8a7ea1d684e0f8424420dec50485fe99215596389a47b3f9f360afdb835ef",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-7609e-s-variants-at-desktop-light/documents-empty-desktop-light.png",
+      "sha256": "2944839a9a08695f089d6d76dfb1dbfcd0866f28f7240caab0a727a4993d0e3f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-7609e-s-variants-at-desktop-light/documents-error-desktop-light.png",
+      "sha256": "64a6bc824402cceeaf19eea2d14fb7bdbfb6605713252765c4d635b2180a8c3c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-7609e-s-variants-at-desktop-light/documents-ready-desktop-light.png",
+      "sha256": "64b12a3132f03fa793537f303472596b5064ac57fa59991d96c5251377c16aac",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-5cd4f--EIN-review-states-on-phone/registrations-long-dark-phone.png",
+      "sha256": "766fff9a3ce53133741c74916bca161e9efa3c0c28b247a0ac8d4f06cf0080ec",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/compact-long-320.png",
+      "sha256": "972bdd0cc38046a2702baa0f0e069e2c9ce41c06f4f5bce29a88331470641aaf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/desktop-retained-card.png",
+      "sha256": "d31046745bb016c05546ffb1cec08ac9b8053e1cbe96fe04a6c4da9790313cb8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/current-projection-failed--74590-ds-limit-and-overview-count/activity-unavailable-phone-dark.png",
+      "sha256": "47cb5ee7526a0e879d00f45455d65776ef91ccd0b1cd9169ae8c6c47bbb4f9bc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-68bdb-us-variants-at-desktop-dark/documents-empty-desktop-dark.png",
+      "sha256": "14a88be1d46beca7907944fd1fdd31b80417c906a3b26ed0c5512183e51ed319",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-68bdb-us-variants-at-desktop-dark/documents-error-desktop-dark.png",
+      "sha256": "54a8d07ed47e8194a5c78767cfbf6acd5b91c11d4372d732aed9109836712b84",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-68bdb-us-variants-at-desktop-dark/documents-ready-desktop-dark.png",
+      "sha256": "265beb698b70da2634aee699e87b8253c1d43db648bfddc501f779a69f0e5766",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-a1117-atus-variants-at-phone-dark/documents-empty-phone-dark.png",
+      "sha256": "6fa325ffbe182f8eb0406912fae93ebfcc8d4681b7705a1f8a90f17c4a184720",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-a1117-atus-variants-at-phone-dark/documents-error-phone-dark.png",
+      "sha256": "c442e6568b2a1de1b0ddac970c60363e435868f20cc503e9118f8b364496b432",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-documents-visua-a1117-atus-variants-at-phone-dark/documents-ready-phone-dark.png",
+      "sha256": "af95e8b180244eadff1801c75081e511b20ae09c92d2ae67dd691ac3a9faabe0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/registrations-divided-desktop.png",
+      "sha256": "949fdc90ab6410e996cac708c1eeeeb9742b91681cd5d1ddebfdc6a23b2f5699",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-create-details-phone-light.png",
+      "sha256": "671dad70db3c52dafef12aebc2501788e373711ecc7d5495ab76eb7d1ac96f1a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-create-phone-light.png",
+      "sha256": "cf6bc3354725b45a69c1a3ef32c5a809475d605a648138cb636253cafc8b53e8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-details-phone-light.png",
+      "sha256": "22de3dd2df3a82daa428d924876579fcd043fd75552711d24a070c10dc0807f2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-documents-phone-light.png",
+      "sha256": "ee1b3dfd34d33195018630ec5a5f399343eb6f8abaf9f97fbef3ab7a6cce4c01",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-profile-phone-light.png",
+      "sha256": "3407bac5e7f49adf9f6ed40ca41fa2765c5e63221ce0ec0b099392a7d8c713e9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-save-error-phone-light.png",
+      "sha256": "62d055a5f38c958dad4f14a2bb78942952913c1d815616828e71406637134a12",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-33830-eate-surfaces-at-phone-dark/capability-create-details-phone-dark.png",
+      "sha256": "013dd21f6ab692e115914c2526b55e66ab6ca426272d44c594617555cfcc973a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-33830-eate-surfaces-at-phone-dark/capability-create-phone-dark.png",
+      "sha256": "6f21bb2210d6b0cd444aafd6e6af54ee9ac6921755004e463605a626bcd8376f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-33830-eate-surfaces-at-phone-dark/capability-details-phone-dark.png",
+      "sha256": "40a195e730c1d52bd07b5a5c6d69ff70498973bb111a24209e04840ab68177bd",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-33830-eate-surfaces-at-phone-dark/capability-documents-phone-dark.png",
+      "sha256": "0fc7792ea0c9af42b242cfe776be12dd474b81849a72a284d04235f77cc07588",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-33830-eate-surfaces-at-phone-dark/capability-profile-phone-dark.png",
+      "sha256": "87ad44d9782aa70e859127c68f214f1b1e1b4e7556bebea125d035ca8b660685",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-33830-eate-surfaces-at-phone-dark/capability-save-error-phone-dark.png",
+      "sha256": "7e91f5aed89c61596b4fdada2a9bfca04cd213c9883ea2ded30f95b4e3b80ca7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/linked-file-arrival-a-dire-e4116-oard-and-geometry-at-1440px/linked-file-1440.png",
+      "sha256": "4009261541dce38f8b14448352afab6cdb1cb0d83f0803fd6f2ac5e67857145f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-list-registrati-02bd7-including-its-shared-header/whole-capability-page-320.png",
+      "sha256": "531200c9c5718cc3a66dd1d4da05026a8f5e815fac0093d64ec6fe83e49881e9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/current-projection-failed--6de84-es-and-cards-until-recovery/catalog-recovered-403.png",
+      "sha256": "3af01a3dee13c1cc1698ae1e1a99e94282ebfa59d1488a18320f82b03d138649",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/manual-debrief-manual-sour-9f881-ile-dark-reference-geometry/manual-mobile-dark.png",
+      "sha256": "0c0db5aed218ff2a6cb5c3717824a911e1989d4498a94f1a60c993185b3fbde9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-create-desktop-light.png",
+      "sha256": "0faeeda7281cc7cccabaf4386673174e5fc2d0221729f526ca78f8fbfb97bfd7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-create-details-desktop-light.png",
+      "sha256": "45cc7dce5342f030078612a9283be7a51d7b6d1f57b19ecc98c866e9a522d576",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-details-desktop-light.png",
+      "sha256": "0734e81bd41a12702597c4572101f1233cf58881fdbe544d89d7f381de57fcb2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-documents-desktop-light.png",
+      "sha256": "bd530c01829a7e024ebad1eb57452dd3978c51b6decc0f9cac34a3c2c1e868a5",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-profile-desktop-light.png",
+      "sha256": "f06115f575eaefe7f89cd1a5fc39fe5a6587f8589c51112c3b43032d3506c372",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-save-error-desktop-light.png",
+      "sha256": "48d504dac37611a6aa3dffaa34c4b88b5b6367b673c0c4ffcaa82494ad975e63",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-registration-vi-c2512-tes-render-at-desktop-light/registration-edit-error-desktop-light.png",
+      "sha256": "d8728e39d9faeb0e0b9279b1f702906fff5c30d7a675b6a98d664e28d30765a7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-registration-vi-c2512-tes-render-at-desktop-light/registration-read-desktop-light.png",
+      "sha256": "949fdc90ab6410e996cac708c1eeeeb9742b91681cd5d1ddebfdc6a23b2f5699",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/capability-registration-vi-c2512-tes-render-at-desktop-light/registration-read-error-desktop-light.png",
+      "sha256": "905be304b5dcf4aa2925923591eab75b58fcfe13d847d268634555cd54cdaac8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/facility-action-lifetime-a-b9473-fore-a-new-explicit-request/address-action-unknown-desktop.png",
+      "sha256": "74ea1d0a95be6ee7aade03f26d271e79ec86bc0e15b85c2bb8567225c9ac0f39",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/facility-action-lifetime-a-b9473-fore-a-new-explicit-request/address-action-unknown-phone.png",
+      "sha256": "e5d88ea63fe37faf43c2c31e74e6b1b64f91a8d84e0fd9883f8aa158840f056e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/linked-file-arrival-a-dire-652ee-board-and-geometry-at-390px/linked-file-390.png",
+      "sha256": "e08faf29bad41aa70e3a286dbb00881052960d1dc2801d86bafbd64cb2d4cf71",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-running.json",
+      "sha256": "2fa143cd8d3dade37f9ffc19b80afe316a7b239cd305fbbaa16a19ad9e81becf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-exit.json",
+      "sha256": "a1a0f8c59e1042fc7c441c46cfc9dbd3929bd606d7cab42b279bfb07ec9254f6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-results.json",
+      "sha256": "8091a2843f3acb3e6ddda175b09ce2a300fca057afb885012aa0ec90e7168ad3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3.log",
+      "sha256": "3eaff11d53befcb811f7201dd68dbc929fbe3bcb9f04e432fecd0204a082ef5b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-integration--655bc-ates-the-real-profile-cache/overview-focus-desktop.png",
+      "sha256": "28cd1ae22cc1b09994376e4a18ad6c9e8ee9e2666ad48ebec02478ff51967140",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/ordered-owners-four-ranked-9d7d3-ve-and-preserve-exact-order/ordered-owners-mobile.png",
+      "sha256": "f0384550e831417e89ff3ff18cefaafa85f2a8ace2b1ea96a58bbad2e1a4d5e4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-timel-aae79-ing-filtered-feed-at-1440px/timeline-default-1440.png",
+      "sha256": "5b2c9afc5af972e31d2dff94ef0885717f9304a78edb07fc7e779270873b5964",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-timel-aae79-ing-filtered-feed-at-1440px/timeline-expanded-1440.png",
+      "sha256": "a16aaacc0d84e2b71b544d7d9332ee3c75ba16711d7c8ac5b9141a91cbe9445f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-dialog-layout-curr-86a07-ss-component-render-updates/facilities-390.png",
+      "sha256": "f601e5e6584ef248d14a3120a44c454fcd80c1462748075519b63f9a604d8948",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-dialog-layout-curr-86a07-ss-component-render-updates/notes-390.png",
+      "sha256": "20e42515f5c0202330d795e5b0024f1e52f00e38b367152c9a707ade99714f07",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-dialog-layout-curr-86a07-ss-component-render-updates/team-390.png",
+      "sha256": "5fa735f804ea7c7804945d1c61f1b0282833eead7d169b14b5f63b9da84dcdd3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-mobile-dark--5d023-logs-remain-within-viewport/csv-mobile-dark.png",
+      "sha256": "9fa3d64ae96825a994754ce276f1238b1be1ae5dbde90e9d936a30f864a42ef1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-mobile-dark--5d023-logs-remain-within-viewport/export-mobile-dark.png",
+      "sha256": "b9982912b66d939e37e6f20d80c7097daec7799773dfa6483545ed5524234742",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-review-actual-clie-c6f82-ration-without-losing-scope/calendar-attachment-review.png",
+      "sha256": "623bb41dd0576ab78741bf0acf9c7158de2d5d0d01066f4799b0f2c822c5b17b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-Files-da8b5--native-provenance-at-360px/files-folders-360.png",
+      "sha256": "7e760f1d24b8ce105632e31b97ebfa61173b0d036228775a8fe776749ca1c338",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-Files-da8b5--native-provenance-at-360px/files-table-360.png",
+      "sha256": "3a49c3240df2fa4a919a833d3b895deafb1b2c44aebccd4dc1e137732d8c7752",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-facil-86196-ne-editable-fields-at-360px/facilities-360.png",
+      "sha256": "f6a06a1c9ed716ebbb85622c69c1789efdd505390221aed72da04bb6d3a145b3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-desktop.png",
+      "sha256": "336bc61766d2760b40d9421194ba4a6bbb5995304d2dba79f63aeb4d8b4c11b3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-mobile-dark.png",
+      "sha256": "42788f3eb8193c37267ee0fe5773ef2d1b7f359855130fc0181cabfdb38706e1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-Files-a146a-native-provenance-at-1440px/files-folders-1440.png",
+      "sha256": "b98e3889e4217ff29ed0bf466b6e7733853cc928d4f9be875ec0b3834385f625",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-Files-a146a-native-provenance-at-1440px/files-table-1440.png",
+      "sha256": "1251d1755ea7384fedf9a642580e78107fe4d5d6ced41b96e3496f507a16f343",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-voice-voice-source-4ba48-eometry-and-runtime-refusal/voice-mobile-dark.png",
+      "sha256": "9d4c8e40bd56ae0faa4076b9cbf86f9fbd074ce1364d65ad87372b3895b591a4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-timel-74ca9-ting-filtered-feed-at-360px/timeline-default-360.png",
+      "sha256": "0a6cd2b9f4941359674fc36d26331c19b65748b9e0a7592e7155dd320520af00",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-timel-74ca9-ting-filtered-feed-at-360px/timeline-expanded-360.png",
+      "sha256": "b647a7f79028a0bfa81e54f7fbf082660615a30d166879d576515927a408c31a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-integration--d866e-e-token-based-pulse-surface/overview-focus-mobile-dark.png",
+      "sha256": "7106f1c3b5bdf1448ed84df50f0a4e9b671a65516436dd998d5ad04065ae8df4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-review-saved-note--cde76-ing-editor-saves-separately/saved-note-desktop.png",
+      "sha256": "5d920f84b153643c9098a6cba007e74d9f5bab42e79bd222f1358a447afd03bf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/facilities-1440.png",
+      "sha256": "2ec9f205f7f326910e9ceba54e41080b30058ea3b1bc27c82c99278179cbae11",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/notes-1440.png",
+      "sha256": "da854bcf5174fa957b6256fcc4c2f17fe2d794bea403883d3998c63876ca6af3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+      "sha256": "6adedacb39e67b8247eb531b539aa49677064c2ef9dc4cdd124b440b6b7e8dd8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-profile-expo-e9251-act-sources-and-attribution/export-desktop.png",
+      "sha256": "e5b87525f0ec36a986cc1946dd1c72fecc8b2d0ad7b21ebdfd87f3cd23ec55c7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-profile-expo-e9251-act-sources-and-attribution/synthetic-profile.json",
+      "sha256": "f167619494eaf7ddfbffd5b83c363abedd2af8cf387114341cfa513d600bbbee",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-CSV-review-s-1b4e8--and-created-client-receipt/csv-partial-desktop.png",
+      "sha256": "3eebc0a472baf8c3ac02ab17d35a43a5fc00387fe21410f378c23dd2d4062046",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/objective-current-read-cac-f8087-fter-403-on-a-stale-remount/objectives-current-error-403.png",
+      "sha256": "6f18c4eb03f8b27576a08c6ac7fc1c5e28c33212ddcba03901f194a8b7ab3c1a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-review-approval-re-7b03e-no-scan-extraction-or-share/attachment-approval-desktop.png",
+      "sha256": "87197a742a99171b03974e94d3f98592bb2b11bdb9fcc052299e01ce8bd015ea",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-presentation-facil-bff42-e-editable-fields-at-1440px/facilities-1440.png",
+      "sha256": "7b612716e3f2929e715ad2561ef02befc06610282a230fe7ec51608b995cd344",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-voice-audio-source-9134d-n-preview-URLs-are-released/voice-desktop-light.png",
+      "sha256": "ef4e953a5d0cd8f316d73b0ab7173d63a524cb764bc1129f5718d79309bad309",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-voice-audio-source-9134d-n-preview-URLs-are-released/voice-desktop-transcript-review.png",
+      "sha256": "993720e47cd9f9014f8ae4a6e1bf7b542e34a49f4c25c271ba4a160cedcb875c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/objective-current-read-cac-e6567-fter-503-on-a-stale-remount/objectives-current-error-503.png",
+      "sha256": "768ed04698fade7fd9e11b81917bc7b1aa45a73c5a2900bf950b473faa0effa2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-capacity-tenant-sl-b4b0d--and-LDA-browsing-reachable/profile-capacity-desktop.png",
+      "sha256": "2db22a97969848a08f5af1dc3bc13934b1599cfc24155566691832a91271523b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-capacity-tenant-sl-b4b0d--and-LDA-browsing-reachable/profile-capacity-mobile-dark.png",
+      "sha256": "e79a5a70ea5d7bd5bbfe5934c37738251b7fc2cfc236c22ead15bb32ac50e1d9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-integration--08d4f-ce-JSON-then-restores-focus/overview-export-desktop.png",
+      "sha256": "7065bee85b93e2c15f33b781ee135b1856e9d635679c26f4aef964bad3fed8f9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-integration--08d4f-ce-JSON-then-restores-focus/overview-profile.json",
+      "sha256": "f4fa489420a4de7fb914f0f233806e49b210b7fc06b8148e63d4d0d801a62e95",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/meeting-review-mobile-dark-30441-and-actions-within-viewport/saved-note-mobile-dark.png",
+      "sha256": "a275c6be6e04ed9b7c81d084598eee70843da3f10afea190861dfe25ed8a272c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-focus-tag-us-30606-s-and-refreshes-saved-chips/focus-tags-desktop.png",
+      "sha256": "1b559c00ca6b0f9bcfa216bfd8726f82c00c92c654d20c4508fa286fe953ea13",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/INHERITED-CONSOLE-OBSERVATION.json",
+      "sha256": "a0533914076f37da2c0f9832297c6b33228e5de67b4eb582078cec904328ffba",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HISTORICAL-ARCHIVE-RELOCATION.json",
+      "sha256": "213199ae53ee4d76e7c233cc4da012c7daef3ab481c02b7e6a1e1ec4b2138193",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HISTORICAL-93-ARCHIVE-RELOCATION.json",
+      "sha256": "bc243a7c091e83f55434b45ae59ac0df8bae5f7c008613166fb7b0bf65eb01ab",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-running.json",
+      "sha256": "519e72dc96c25ff732aa2feb1d719a9e67d5d670b33ef040ad76bb9dfcbf687c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-exit.json",
+      "sha256": "ead47e0765aa7291fa6263df4872fcb716f77d01f242e35840289ef5148f8be4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-results.json",
+      "sha256": "a11da549867441da4cbb655f6463eb8234fa6c13d583e88c79676dbfdaa74ecb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4.log",
+      "sha256": "84d4c0bae5b82fd4c3688410b69f64b9acb1b75364a3353527c365044f15ef1f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/government-standard-reader.png",
+      "sha256": "cb7ffece57f15bdf0ed858d708e194439dfe1edadc444b1daa6a47adf31d2ab2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-02-vie-890ae-onical-current-client-route/view-search.png",
+      "sha256": "85ddcd438dd8bb362f6a96729ea8e15664e97995a711f0f8695dacc29bc5afcb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/registrant-intake-mobile-d-b0aca-flow-and-accessible-actions/registrant-review-mobile-dark.png",
+      "sha256": "65fc9030d181270dce859b1913f94c475e040086ba67569d114b610f8f23c1d8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-capa-b4146-top-mobile-and-in-dark-mode/capabilities-desktop.png",
+      "sha256": "9c52192b49bfce65c019a9e909ab096cfa4481e1d3e5db072d5382374d0185e8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-capa-b4146-top-mobile-and-in-dark-mode/capabilities-mobile-dark.png",
+      "sha256": "f3a82d989c0b5c428bf80b41bd14efbb6cd10123929f3809e2aebfaa5c2c27bd",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/account-team-desktop.png",
+      "sha256": "842092a998be20019d0caa0141b56a73624c5cd5dfb8ef534fc1034df4a87a71",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/company-choices.png",
+      "sha256": "4c87404f7e117e273eb8920c267dc0a71ec0f2743977e9010c6dd1184618b757",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/registration-choices.png",
+      "sha256": "dd08bb277db1ceba957cfdeeb4a3f6cd9c728c877a14eb49a8e4267b7be36931",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/track-choices.png",
+      "sha256": "7ac2b0877cfa0f73806d9e55658fb69fc589db984f92b76eb18e106319f67dad",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/prospect-current-read-a-40-b8e5f-ds-until-a-successful-retry/current-read-403.png",
+      "sha256": "cf622ea89b5cc6dce328bd4fa520048cf86732551ffd025b4159ba73ebdef9a2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/public-event-mobile-dark-k-72a9c-ssets-and-readable-wrapping/public-event-mobile-dark.png",
+      "sha256": "cd82910cb8ef03aaccabd349c161304914cd56ca271581b25deb0e37409356a7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/registrant-intake-desktop--0aa61-t-and-keyboard-dialog-focus/registrant-review-desktop-light.png",
+      "sha256": "919b29dd732c02c868ebb974dd93dbade34a572951ea2c1de2e4f224b533e844",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/view-switcher-mobile-dark.png",
+      "sha256": "96099f2c6b5d089aec0fa68467f3efc2fa2590916e416b97a056e70ca7c0f34c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-work-3925c-top-mobile-and-in-dark-mode/work-desktop.png",
+      "sha256": "486627359fea45910621371e318601c8f6cbd46eb084343911d376bc47b32d5d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-work-3925c-top-mobile-and-in-dark-mode/work-mobile-dark.png",
+      "sha256": "ba80d4134cca44b5800b877cf8a4c1902ada8a334435be07c5fbafd2df659cd1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "sha256": "130ad9129993bf073dcb37c24a8684f51af41c0decb6c97b5e434da031efd2f8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-gove-24243-top-mobile-and-in-dark-mode/government-desktop.png",
+      "sha256": "22745aebb2d7d99de36155e737bb1ef442f3c94ae5ec8cafb36d1488ce6923b7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-gove-24243-top-mobile-and-in-dark-mode/government-mobile-dark.png",
+      "sha256": "107d032e8c87a83439cd5debb01c26fa62998bfcd764f05b4f8238d00ef60e67",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-04-all-6695d-rizontal-overflow-on-mobile/1-choices-mobile.png",
+      "sha256": "692715b8de989a51ae78fb47bb3808887ce9952aa20b12299f36b27feb1e9de9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-04-all-6695d-rizontal-overflow-on-mobile/2-choices-mobile.png",
+      "sha256": "dafae1734d43d395bb562cf35c3104b00d8cd591ba675844eeafef7f94bd8c59",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-04-all-6695d-rizontal-overflow-on-mobile/3-choices-mobile.png",
+      "sha256": "68531d1530ae807251e476bb47f188a1e88fd3b6175097e9b3db65d0be0858e5",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-compa-46b8a--overlay-and-focus-on-phone/dialog-layout.png",
+      "sha256": "cb143dae6c8c5df321c1ec2901cf8b424fab1c491bbe36db4c20618920259d61",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "sha256": "f55e173f0c3890045f8f9a54233e3462177effde398b3fdf62d1fd1da7192a51",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/token-input-layout-existin-99b14-a-blur-and-removal-behavior/canonical-stacked-tokens.png",
+      "sha256": "2603e4896c19e729d03e58c14746933b2921be3e0e36ec258d6321fcbceb63ef",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/public-event-read-only-eve-421f6-e-and-canonical-destination/public-event-desktop-light.png",
+      "sha256": "472f187d6e8ae8d91cdbf5accaadca5e91a1de60b6fe2d416b5617120f78489d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/prospect-overview-overview-ec720-and-filters-actual-activity/prospect-overview-desktop.png",
+      "sha256": "6c95fb45048206b9ff11484c1162455991e8095618bd0a1cd8c7fb39dd797563",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/prospect-overview-overview-ec720-and-filters-actual-activity/prospect-overview-mobile.png",
+      "sha256": "145e5dd9fa2ddbc9584ebe847e952900167d05a043ff716ed5b0813a72ebbcf7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/voice-integration-Calendar-f8555--draft-and-saves-separately/calendar-voice-generated-review.png",
+      "sha256": "ee517956459c90ba108f0a2b9f919727d2a99f99aecc24058e6a82118fbf6712",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-presentation-phone-St-dfd23--and-healthy-document-cards/work-permission-phone.png",
+      "sha256": "5e43b0fcdb41042950594aa5cae22c28f2fb785e4904622db9e99307b981b270",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-p-66bf0-load-and-fits-its-container/configure-phone-unconfirmed-card.png",
+      "sha256": "34e1ba38c29349ff1591d365d81db529d94028f9564c3f010e2969f0cf0eeb68",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-p-66bf0-load-and-fits-its-container/configure-phone-unconfirmed-dialog.png",
+      "sha256": "1828e9f5ec743757370102c6301fec405e1bae1489ed51c64b63349df72fd182",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-presentation-desktop--2ecb6--exact-native-icon-geometry/workspace-desktop-table.png",
+      "sha256": "c637e6402553accfc631900608efb2a5c0d48a3d7cd3f0b9f53543094b47fe6c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-wide--2fd18--overlay-and-focus-on-phone/dialog-layout.png",
+      "sha256": "973ef585d40600bb48db0fb4b8c7699f126786665c52ff9e510bfad04b50086f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/prospect-current-read-a-50-0a7fd-ds-until-a-successful-retry/current-read-503.png",
+      "sha256": "9506a095d43826aa35757c0ff6734d829d88a5b94fb5ca29379ffa74d4c119c0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-obje-d4813-top-mobile-and-in-dark-mode/objectives-desktop.png",
+      "sha256": "2817d24cfcd8f589ddac44fc6138974dc8ebd9dae296d93d67bfe8be06566dc1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-obje-d4813-top-mobile-and-in-dark-mode/objectives-mobile-dark.png",
+      "sha256": "30639713caa232b933d494fc068cbf0af4e371cf041a75c54423f815f8513b96",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-owner-card-3c309-cel-and-nested-focus-return/owners-desktop-after.png",
+      "sha256": "336cd09c36812faf5055d31210765b1fa8da65708fe8808aca80810c58761ad8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-owner-card-3c309-cel-and-nested-focus-return/owners-mobile-dark-after.png",
+      "sha256": "2ae57b90c872878385c1bc729326c5f8bee2761460c5998bd8e078c032a439de",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/token-input-layout-inline--fdb8b-g-delete-controls-in-labels/canonical-inline-tokens-phone.png",
+      "sha256": "3513dbe1c3f27206988cd0762decefe4c9426c51617a4a40acd9f49bfe8a55ae",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-d-2b4fc-nd-conceals-retained-fields/configure-desktop-unavailable-card.png",
+      "sha256": "3602d24b303c7230ddb374119af334cd1c9545d9163e024a3a276d3de3083014",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-d-2b4fc-nd-conceals-retained-fields/configure-desktop-unavailable-dialog.png",
+      "sha256": "6123bfe68a4e24200a86c23ce7a4622798e79cf7ba8de74e9aa1145347bd81a3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/saved-submissions-visual-t-92f00-s-its-authored-Figma-layout/saved-submissions-desktop-page.png",
+      "sha256": "7e0a6766416df5246c8ade57ea89356713642f7038c0bbd62e13a5329c2b059a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/saved-submissions-visual-t-92f00-s-its-authored-Figma-layout/saved-submissions-desktop.png",
+      "sha256": "5f8e5492b68079d9bfe477a2b56492cd0a9926dcdb79cacc9950dc35435c75b9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-01-gov-c0bcb-eeps-absent-values-explicit/government-mobile.png",
+      "sha256": "8f1b26819f3770eceb43d1380275bf4a58e280f482ef762305dca4dc6ba244fa",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-drawe-037bd--overlay-and-focus-on-phone/dialog-layout.png",
+      "sha256": "440bdffb982a6bec97f631d30404b929c1943376e393073758f98e1ac3df6644",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-d-3f1ee-load-and-fits-its-container/configure-desktop-unconfirmed-card.png",
+      "sha256": "ce9cb67a95b4682c9be9c8c13a7de846f024a0208e893af9ea6af4e78f36e26d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-d-3f1ee-load-and-fits-its-container/configure-desktop-unconfirmed-dialog.png",
+      "sha256": "ba68a1b716afd5901e84fe6139cb7f17f334e011d09b083a1594f7e599481d5f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-rela-70311-top-mobile-and-in-dark-mode/relationships-desktop.png",
+      "sha256": "e94577ab5d200b9c430e11dda15ea4bf1374607aedead70a45ee8feff251285c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-rela-70311-top-mobile-and-in-dark-mode/relationships-mobile-dark.png",
+      "sha256": "aeb84920550be380c3a60200813416d50caf62dcf19416a1f377df38cdb4d1ce",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-documents-client-Work-94768--the-canonical-editor-route/client-work-desktop.png",
+      "sha256": "576231e76559dacea5268be18e278306d91a5352c2dd65f5528c547eff13493c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-documents-client-Work-94768--the-canonical-editor-route/client-work-mobile-dark.png",
+      "sha256": "e76bc516f93ad6067a21b679431751b266a9469265ac3514329e5892c9244b7a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-owners-supplied-nativ-43600-l-node-projections-at-390px/work-owners-390.png",
+      "sha256": "0e6c3feb9d825a4839498fce4313718bca55c9d5ade7ea279775d45e2a8e096f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-wide--2a9b1-verlay-and-focus-on-desktop/dialog-layout.png",
+      "sha256": "66c89df790a4f9dbf3194f8f29df1fb340696b818b336c2842dc767a60014cc2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-p-a73a0--access-within-the-viewport/configure-phone-footer.png",
+      "sha256": "e736e20ffd2124b89216a36d2d3646306ee966a7866c83642d10647476d3216c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-p-a73a0--access-within-the-viewport/configure-phone-top.png",
+      "sha256": "ca9521e1dc9683cf6896022807724f6160a963c78419580c2a60cd234845dee7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-presentation-an-unava-8021b-ile-documents-remain-usable/work-unavailable-band.png",
+      "sha256": "57992e720a2e16e9a19392e85252db317a4b1dca71f2335fba50ef43de2cd0c2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-presentation-an-unava-8021b-ile-documents-remain-usable/work-unavailable-card.png",
+      "sha256": "066d8428e0a573c8d4d34a6c9cf5f8918fdc4f6e11597325562bf2ee1c4806f1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/tracker-alert-preferences--9c46b-remains-keyboard-accessible/tracker-preferences-phone.png",
+      "sha256": "74cea6eabecfdcfa458f13abfa0470a20fb020c6af72405c40b3e22219fa1a0c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/public-event-actual-Master-35e7b-thout-losing-calendar-state/public-event-master-agenda-light.png",
+      "sha256": "5c3dfea81f65feadbd60c36f6f4d14a7e5dc15dd3f0c6935d67c244aea41cc9f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-boundary-a-failed-403-6926d-ntent-but-retains-documents/work-failed-strategies-desktop.png",
+      "sha256": "c699f5dd7f602dd9062a0b35d8ae474f58e0e389a9dd80a03e5d4e425109d481",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-boundary-a-failed-403-6926d-ntent-but-retains-documents/work-failed-strategies-phone.png",
+      "sha256": "5e43b0fcdb41042950594aa5cae22c28f2fb785e4904622db9e99307b981b270",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-pros-ada30-top-mobile-and-in-dark-mode/prospects-desktop.png",
+      "sha256": "2e4c677397e01df7d20fde6eb65a4b7872f2d0e612e244aff9561f7b88e754d3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-pros-ada30-top-mobile-and-in-dark-mode/prospects-mobile-dark.png",
+      "sha256": "031d828b66a34b854bb4b617675d55596a51db5c759ec859c20eb9c14657bdd7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-presentation-phone-Wo-52eb0-ithout-horizontal-scrolling/workspace-phone-cards.png",
+      "sha256": "7204b6bb5ec3fe8a6be8fe3289305e5ffd03a39a453f9a4a3d967c80a9c020a4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-inde-2c61f-top-mobile-and-in-dark-mode/index-desktop.png",
+      "sha256": "77bb0647761b7c8cf9f9042df693e9778f13160e13092180c486b85c77583eef",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-inde-2c61f-top-mobile-and-in-dark-mode/index-mobile-dark.png",
+      "sha256": "9e4314805790aa396a9c812ab98880df940cf2c669549fab94b7668e3c7d1582",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-bill-511b7-top-mobile-and-in-dark-mode/bills-desktop.png",
+      "sha256": "6ae1d48a54d7d6bb5069b219e6267a01745566dcf28ba236d3c0dbfe4d1c4aa1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-bill-511b7-top-mobile-and-in-dark-mode/bills-mobile-dark.png",
+      "sha256": "d743bf4e7e3cd95286bf59f4e3bfdfefb2a0b20a544b624956db2d4e374fcaaa",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/search-desktop.png",
+      "sha256": "0ec18cf9c5990fca41b76831c0e339c87088b0afba4eafd298987d4eef822b2c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/search-mobile.png",
+      "sha256": "31c779db4ddab775425f23481062720638764520a4ab1d518aa24e4bf346aa92",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-capability-d5259-ired-marker-and-sharp-scrim/capability-create-after.png",
+      "sha256": "605667d33fef3e85f874fbdd0d1686c9cce03122259ac660da5785d218e810eb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-file-40010-top-mobile-and-in-dark-mode/files-desktop.png",
+      "sha256": "ec6920998b1722042d8784c6244469aa5a76d45366f0e96193d9d1719fc7c8f8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-file-40010-top-mobile-and-in-dark-mode/files-mobile-dark.png",
+      "sha256": "fc43b6cc5baea3ca2e201f660ff617680836ed48286bdcc8c4111b3760fff053",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "sha256": "390338a3689d6077eb4675ab1a7a7e37602b615d7f12bff584daed38966e1ed1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-1000-5d35a-top-mobile-and-in-dark-mode/10000000-0000-4000-8000-000000000001-desktop.png",
+      "sha256": "5ea15c39bc58e321931cc7fabc77f2aed8c92235395b3296cba8c0a6e5d75861",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-1000-5d35a-top-mobile-and-in-dark-mode/10000000-0000-4000-8000-000000000001-mobile-dark.png",
+      "sha256": "57f6b09a7c06098d473fde7084472c041da36c40fd15c4a5cc4d70a1125eaf8d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop/dialog-layout.png",
+      "sha256": "f7de90da786eff8982f53eaae3c9626fe3fbb57b0f585818d4c45081521aa6df",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop/dialog-layout.png",
+      "sha256": "88d7f007716ead8947d0d1ade94fc85851c1345347495f309bf92d7772cdbd64",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-presentation-narrow-d-bfa45-and-retain-readable-actions/workspace-narrow-dark-cards.png",
+      "sha256": "d4b3a69f75d512b60df1b8fb939b956052d6f5a99a82a8bd7b8007df2d274074",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/work-owners-supplied-nativ-dc422--node-projections-at-1088px/work-owners-1088.png",
+      "sha256": "9c1b963b1c2bacd55d7ede5fc0caf761c4fb015e0ce645475569062d5da9e53c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/saved-submissions-visual-t-4a7bc-s-its-authored-Figma-layout/saved-submissions-phone-page.png",
+      "sha256": "cd5bfe815fab8599a7d6a8972266c17ea58a7de9ea8c062082cc2f57b12425fb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/saved-submissions-visual-t-4a7bc-s-its-authored-Figma-layout/saved-submissions-phone.png",
+      "sha256": "95bc95772840bcfcaa7036868331006829338fce1677f63cd5fbbcfbc1da5e61",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-p-fe57e-nd-conceals-retained-fields/configure-phone-unavailable-card.png",
+      "sha256": "c82a8a1ba48cbd8039697900299d7d366a858f38ae4dba550069fb4f264048ee",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-p-fe57e-nd-conceals-retained-fields/configure-phone-unavailable-dialog.png",
+      "sha256": "24c6fc0312ea3ee14415902e616eb05db58147d13a9a0318fbc50280f09b0c3c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-compa-cd76a-verlay-and-focus-on-desktop/dialog-layout.png",
+      "sha256": "61767d611b42bb6a50f7c5165773b9f2644c150a42921872b85dd04371bbb6fc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-d-4f027--access-within-the-viewport/configure-desktop-footer.png",
+      "sha256": "56bf3650ff7188237a2b999646c1df910aa90aa760c1d54123ab4f7341732497",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/watchlist-current-visual-d-4f027--access-within-the-viewport/configure-desktop-top.png",
+      "sha256": "9977eeabf56110eb1a17ebe7ed052624bb118aa6632bd92cd7afb1702ac3767d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-7000-013dc-top-mobile-and-in-dark-mode/70000000-0000-4000-8000-000000000001-desktop.png",
+      "sha256": "a7fdebe8050723a94bd46ee8097b4d95531b3a4b0d16be670d79bca3df6be816",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-7000-013dc-top-mobile-and-in-dark-mode/70000000-0000-4000-8000-000000000001-mobile-dark.png",
+      "sha256": "cf58cc80bd6e8e641599c4b64dfd35e6f77e8be77ef0c470017ffe328891d230",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/tracker-alert-preferences--a5b4b-remains-keyboard-accessible/tracker-preferences-desktop.png",
+      "sha256": "b5a0ec02a8f87e6827139a13151c121827f0d3ed9353b49d8ad5b7be3bc54c5c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/registrant-intake-search-e-32d6d--review-and-partial-receipt/registrant-partial-receipt-desktop-light.png",
+      "sha256": "dc53b0e713026556d4439705a40b9f0841417e240b234241f5e231b5b14cd2ec",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/registrant-intake-search-e-32d6d--review-and-partial-receipt/registrant-search-desktop-light.png",
+      "sha256": "ca7b9e8ae2e15b98fd7341aaa81ba7548facb3313d5f88a75b32734e568d4d3c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-oppo-10122-top-mobile-and-in-dark-mode/opportunities-desktop.png",
+      "sha256": "e441980d0af508a9cc634ef1e2c8ed51c1ec81fbbd894346cbd63e72156dbbda",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-representative-oppo-10122-top-mobile-and-in-dark-mode/opportunities-mobile-dark.png",
+      "sha256": "fd6562ef3173cb4a41f6083975442615a6e02a92e54a1a1e14520d1edf878c3f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/remaining-intake-CI-02-key-b71c3-and-dialog-input-boundaries/view-switcher-full.png",
+      "sha256": "c70d18779da18e90c9ab1f0aab68d62c394c4176cda84f924da2a739ee73dff7",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/shared-dialog-layout-stand-82421--overlay-and-focus-on-phone/dialog-layout.png",
+      "sha256": "b6e19852e370db51f58576cfb01ac1db00038edd1e2bbd051f939f19229097b6",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "sha256": "91a6e09192d4c5f746da6c799381679271ada97b6e38e67f70b8f1e6876c81fd",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "sha256": "e9d1b34d1f38f46b748a62981869be078532e292c699b07bb3c14397064a3b98",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-Portfolio--e6c27-keyboard-accessible-filters/index-mobile-filters-after.png",
+      "sha256": "3cd41991694fa38a8416cd431a123acfc2ed469d76a258d60bf5e575620b1d78",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-Portfolio--e6c27-keyboard-accessible-filters/index-unavailable-after.png",
+      "sha256": "77bb0647761b7c8cf9f9042df693e9778f13160e13092180c486b85c77583eef",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-Bill-Track-bdadd-e-its-compact-results-frame/bills-desktop-after.png",
+      "sha256": "ef2fc487b9b853d3b6c9ab8d761955fb9ee2001debc9cc3342ffa6eb8010de5f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/visual-closeout-Bill-Track-bdadd-e-its-compact-results-frame/bills-mobile-after.png",
+      "sha256": "bbea13df47b3c8afc25644e639916dd0c95dac316ceb043b5358d6dda296667c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-progress.json",
+      "sha256": "9d3a979c236b448c8cc4145b9706b387fe59c77ff4ca405e92db3cc2c43cec70",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-aggregate.json",
+      "sha256": "49cb12bd9c47eb7ec54aff224b735a1c465da0407e894f01ffeb86e615573463",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/ALL-GATES-COMPLETE.json",
+      "sha256": "85c69e385716d2a0a5312f2f197cb4a18efbce7c0c85fae0eff425d36427a074",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/INPUT-HEAD-REFRESH.json",
+      "sha256": "dcca2b67ea5cf612c38010ad6a0d71aa014db1cd5567c63e62cd6edc993de1ad",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/FINAL-SOURCE-CONFIRMATION.json",
+      "sha256": "c74c5aee5b63de031f16aa6432f54474b420b389b912d7667941a325d58f8d8d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/CONTINUATION.md",
+      "sha256": "3869c20183cc14e6b8b0bb81dbee5135d51c5aa42dd0f9c4c1540c42a89089b3",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/ARCHIVE-LOCATION.json",
+      "sha256": "dc43cada4654ca76d2dc17bc0bcde4bb2488ebd1eeda0256f35856dc7f431e13",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/HELPER-PROVENANCE.json",
+      "sha256": "63e7809744c10878175b415ca58917675bacb9399c79f6230b053f1b051cc797",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/MANIFEST.json",
+      "sha256": "f4ee7a62323e3ed084d13f50dc2ed3a922cf3bed22ace7d6fa7a66504018187a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/README.md",
+      "sha256": "d11ca15ec692202746ed16d34a1d5aadb17c3d0fec1fc0c97925e83d2ebeae98",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/archive-completed-elements.initial.py",
+      "sha256": "7acfc42ad34a40711500d2b8915b13ac63f60b41e7868d5d0b1514bd8438611e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/archive-completed-elements.py",
+      "sha256": "775dcb11edb3350fae45296de8bcfeae0c5f114aa20ce52be079e39d8bac13c5",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/archive-v2.log",
+      "sha256": "534a954c8f1059debcd0af6c9d929ba0d8db8621cc01ab5e556edcef62afa5ec",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/archive-verification.json",
+      "sha256": "aaa7ef981e76ab05cb07042f03cf8e9ae94d927b6d4bc1aac50729c3b1042747",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/archive.log",
+      "sha256": "8a7329487e3018c5f5281cf9bf0fd99fb8c089bfe72191e480c5f1605b5be30d",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/before-archive.json",
+      "sha256": "f277f0a5ea8b2ca640bad596bd0f0e8b99ec2978d2075f5794e8b395744856b8",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/consumers-before-retirement.json",
+      "sha256": "9a48a5be0889ebd521274698607ba8a32656592f229f0981cdb611bfcb9df79a",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/consumers-before.json",
+      "sha256": "4c0bca60351a6ea82f9a31f12da13feebb62c43d081ed1c6b5e9a82bac2ca93f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/consumers-initial.json",
+      "sha256": "82ba1585342c8ebff139da73200a111ca0d67065a409b494af2389ac63ec8a85",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/help.txt",
+      "sha256": "3a56f8ec441bc259947720e75bc806a9cea77ebfe0bc4f83801ac9366c6598fb",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/out-of-sandbox-consumer-check.json",
+      "sha256": "9a08fd0547929bbbbf4385a26b169bc63437c9e68064cccbbe912a940996cfb1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/retirement.json",
+      "sha256": "63ccabd0acaafe696d81d99035cfe3c7238baea7a84044cae27119aee14219a9",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/6150-TO-90CC-DELTA.json",
+      "sha256": "8e6d41a0211d9e6f5d4925714745bd2a66597197a32b7f99e3c03c67f856dd1c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/ALL-807-ORIGINAL-BINDINGS.json",
+      "sha256": "a6075a2afada6fa76d95fd86a80641049f8d147760cae15a78ac1645e9bf91cc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/BASE83-TEST-PRESERVATION.json",
+      "sha256": "e1065f5646e006fe0718335257b742439bf5caeea2910b67bd5476d2cef7242f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/FAILED6150-INPUT-MANIFEST.json",
+      "sha256": "7155eebcf4a222d4519b524ee88fb6addce0ca854c6ad15a90028be36f3554fa",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/FILES-INTEGRATION-SOURCE-COMPARISON.json",
+      "sha256": "e9b5c9f4cc981311bbada8e1548f2b0dce898e8f45b7f5c58adee08e17bea844",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/FILES-REVIEWED-SOURCE-COMPARISON.json",
+      "sha256": "ca21430e36d3973ff1d0cb5650afa20776f8c3c6e55d5456b793f059b3245b29",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/MANIFEST.json",
+      "sha256": "19fd6fc8e2cef4dd6c95d952c55c8c9c28999ccedea5b4fb41a527c679b194c0",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/PRIOR83-EVIDENCE-PRESERVATION.json",
+      "sha256": "c3cca22f56016c1e6a78eda63f2668c050df3c31d93040080321cbe272c0ed8c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/PUBLIC-PACKAGE-LOCK.json",
+      "sha256": "5accafaf86b5b4f5759f183beb2e827bd69c050d2070b540e5b2cdc4d2013da1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/READ-BINDINGS.json",
+      "sha256": "151a048999f05e9e3d8b2cf6dcfdcbb6c02846ce3284f12160237ac0fb148a02",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/REPORT.md",
+      "sha256": "1e4a251d0fca2404bb5e2cd5eb39d1b136dbc1cd9de5c82939543456a3db16f4",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/SOURCE-VERIFICATION.json",
+      "sha256": "29b19cb8374568b77856f8229ea4803dfa51b4231bbed7d2ff92196ced62984e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/TYPING-CORRECTION-PROOF.json",
+      "sha256": "8a9ad0eef933772afa23bebd6fc564092c79fdd3b9e1659bfd5325a8c6126ba2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/audit.py",
+      "sha256": "f835a54b8b4def6c0d39423be087bf61025ed95ffeaabbce3dd56576b1b369ff",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/observed-FROZEN-SOURCE.json",
+      "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/observed-clean-install-exit.json",
+      "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/ADDITIONAL-READ-BINDINGS.json",
+      "sha256": "a84c10c4b2ea8b706d61071afa3a4620e087519191f000162eef7088a25b651f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/CLERK-SDK-LITERAL-PROVENANCE.json",
+      "sha256": "f00690263d1734f6931edbd9efafc94b7e48079642cf471f2ef7e94180b4a980",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/CLIENT-SERVER-BOUNDARY.json",
+      "sha256": "12f72274a6f421882cb56e67ec2631bab3767c965aa4b198f677e0f09db176bc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/FINAL-REVIEW-RECEIPT.json",
+      "sha256": "115c5bfcd8d9189bcea37d37d9b8f9e2d26dc010dc5892d94133d5dbbdbf0b1f",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/INITIAL-MARKER-PROBE.json",
+      "sha256": "3b0b5ee42dc83dfe46d4b348d89a1e5b5a531d983b996c2e0bfc65a5d3de01f2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/MANIFEST.json",
+      "sha256": "4283aa5a6908a8d02961306c8fbabacb7754b675d52a5c7a45f5aed591363620",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/MAPPED-FIRST-PARTY-SOURCE.json",
+      "sha256": "36718fc930df741a644bd83f03ac7bdda1a96f7e4e605b2714fc6d643708d32c",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/PUBLIC-PACKAGE-EMISSION.json",
+      "sha256": "396f5d04a55e088b3132c6544f74712decacebadc887e3ab426abe6585e46946",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/RAW-RECEIPT-BINDINGS.json",
+      "sha256": "60d7dd9b379d8845c2d119cdeb64f274754ebf4095f88933a1998f84ebbe8099",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/REPORT.md",
+      "sha256": "cfe1650f4a90009602c2b58307b57d98c9f00d5f651f1c3ab9a6ebf252ab9d84",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/SERVED-ASSET-COMPARISON.json",
+      "sha256": "a2885da5cbfcf92505c1ba59b85f239520411c53bb51d8b936538253bfa99cbf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/SOURCE-BUILD-BINDING.json",
+      "sha256": "d8534744c11993c18d95ebc27d385fcb78cc62e46c4cb87bc67a8332d7819f04",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/STANDALONE-TRACES.json",
+      "sha256": "b07913b06c3db528f89ceb944121e6f12849352fbd9546151178985be33df44b",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/audit-initial-marker-probe.py",
+      "sha256": "1f6b2ef3368e08e1613ec82b405d571cf4af077f0b2f91d0bc0a7e3a8001a3e1",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/audit.py",
+      "sha256": "a3cb7df86454141123489a62d5bf7af9f3558010ed16dfcbe6c178aff39998fc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/FROZEN-SOURCE.json",
+      "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/actual-served-assets__asset-results.json",
+      "sha256": "7e82efee1a69f5ddfa6ff76cf5f899e082ab554e2538a4f6549389ad3d61e955",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/build-exit.json",
+      "sha256": "0eececc6f8f937fc6b76533bf29af5b06a00ddd1696cd4a521544897bce4acbc",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/check-exit.json",
+      "sha256": "8a0a4416f7f3d8a56325bdfb8024a5356a0a131a43dca140b75349cdab67dccf",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/clean-install-exit.json",
+      "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/production-exit.json",
+      "sha256": "dddb8c989c9a4496aa29bb0dd867930ef989404ececccb27416237fb6c10938e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/production__preview-root-smoke.json",
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/production__production-smoke.json",
+      "sha256": "da8f4592ea41108c6bfb3341b1e51f7a79f4eed10d055b9270f6a09ea9c939da",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/served-newsletter-assets-exit.json",
+      "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/served-newsletter-assets-restored-input-exit.json",
+      "sha256": "ee291e137237c4d6d14ab568b9388e5a4d646da383e14af6355111121e4295c2",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/served-newsletter-assets.log",
+      "sha256": "595d42bdf734b3abcd4cb0f1b91c568c5c93adb517a736ffa5ff32e030e1ca58",
+      "bytesEqualAfterReopen": true
+    },
+    {
+      "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HISTORICAL-EVIDENCE-MATERIALIZATION.json",
+      "sha256": "dde309ee00a4e89576a727644a810919a3ccf569aa552d7e6d969e236b3b4705",
+      "bytesEqualAfterReopen": true
+    }
+  ]
+}

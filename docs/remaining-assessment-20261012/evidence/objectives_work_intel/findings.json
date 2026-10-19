@@ -1,0 +1,187 @@
+{
+  "sourceCommit": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "assessmentHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "findings": [
+    {
+      "id": "OWI-F01",
+      "severity": "P2",
+      "type": "FRONTEND_CURRENT_READ_DEFECT",
+      "title": "Objectives renders and opens cached records after a current read is denied",
+      "rowIds": [
+        "OBJ-12"
+      ],
+      "frameIds": [
+        "411:60560"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+          "line": 25
+        },
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+          "line": 32
+        },
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+          "line": 87
+        },
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx",
+          "line": 25
+        }
+      ],
+      "reproduction": [
+        "Load the client Objectives page with a successful list response.",
+        "Advance the cache clock by31 seconds, navigate to Capabilities, then back to Objectives.",
+        "Return403 for the second Objectives list GET.",
+        "The permission alert appears beside the cached Test outcome card. Clicking that cached card opens Edit objective with the old fields."
+      ],
+      "expected": "A denied current read must conceal old record content and prevent opening a current editor, while retaining a truthful retry state.",
+      "observed": "Two list reads are recorded; the second returns403, but the old outcome, problem, minimum win and edit drawer remain visible.",
+      "evidence": [
+        "review.spec.ts:35",
+        "results.json",
+        "artifacts/review-objective-current-list-after-denied-stale-remount/objective-denied-stale-list.png",
+        "artifacts/review-objective-current-list-after-denied-stale-remount/objective-denied-stale-editor.png"
+      ],
+      "requirementsEvidence": [
+        "docs/ARCHITECTURE.md:19",
+        "docs/portfolio-31/ADVOCACY-FILTERS-OUTCOMES-CONTINUATION.md:80",
+        "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx:29"
+      ],
+      "deploymentImpact": "Blocks current-access frontend acceptance of Objectives. This demonstrates stale denied-data presentation, not a server authorization bypass; no protected write or native access was attempted.",
+      "certainty": "Confirmed by an isolated browser reproduction against the real frozen components. The analogous ObjectiveSummary pattern is source-confirmed only."
+    },
+    {
+      "id": "OWI-F02",
+      "severity": "P2",
+      "type": "FRONTEND_PRESENTATION_OMISSION",
+      "title": "Work discards supplied owner identities in its document and node projections",
+      "rowIds": [
+        "WORK-03",
+        "WORK-08"
+      ],
+      "frameIds": [
+        "411:52106",
+        "411:86349"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/portfolio/work/contracts.ts",
+          "line": 18
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/contracts.ts",
+          "line": 45
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 136
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 161
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+          "line": 49
+        }
+      ],
+      "reproduction": [
+        "Supply a strategy node ownerUserId and Workspace draft ownerId through the existing fixtures.",
+        "Open Client work and inspect the node and document rows.",
+        "Compare the Workspace row to mobile Figma86349, where the product subtitle includes the owner name."
+      ],
+      "expected": "Show the supplied authorized owner through the existing member display contract, or a truthful unresolved-owner state.",
+      "observed": "The parsed ownerUserId/ownerId fields are never consumed anywhere in Work presentation. The screenshot shows product-only document subtitles and ownerless nodes; the upcoming projection also omits each individual node status.",
+      "evidence": [
+        "review.spec.ts:27",
+        "results.json",
+        "artifacts/review-work-owner-and-upcoming-status-source-facts/work-owners.png",
+        "figma/411-86349.json",
+        "figma/411-86349.png"
+      ],
+      "deploymentImpact": "Blocks the remaining Work owner-display facet, not the previously accepted source isolation, destination, or legacy-name refusal behavior. Native member identity completeness still needs signed-in acceptance.",
+      "certainty": "Owner omission confirmed in source and rendered fixture. New Figma comparison is the mobile document owner subtitle; prior52106 capture is not repeated."
+    },
+    {
+      "id": "OWI-F03",
+      "severity": "P2",
+      "type": "FRONTEND_VISUAL_MISMATCH",
+      "title": "Registrations dialog omits the authored divided row layout",
+      "rowIds": [
+        "CAP-08"
+      ],
+      "frameIds": [
+        "411:55825"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+          "line": 201
+        },
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+          "line": 203
+        }
+      ],
+      "reproduction": [
+        "Open Capabilities and Registrations & codes at1440\u00d71040 with a valid registration response.",
+        "Measure the eight rendered dl rows and compare with Figma55825."
+      ],
+      "expected": "Figma55944 uses a680px dialog and55953 onward use two aligned columns,10px vertical row padding and bottom dividers.",
+      "observed": "The composed dialog is640px wide; each row is20.296875px high with0px padding and0px bottom border. Values are right-justified via the generic row-between class, producing a compressed unruled list.",
+      "evidence": [
+        "followup.spec.ts:7",
+        "results-followup.json",
+        "artifacts-followup/followup-mobile-capability-d9cb2-strations-lack-divided-rows/registrations-composed.png",
+        "figma/411-55825.txt",
+        "figma/411-55825.png"
+      ],
+      "deploymentImpact": "Blocks CAP-08 visual acceptance. Data read/write authorization is a separate dependency; this geometry mismatch needs no backend change.",
+      "certainty": "Confirmed by fresh Figma context, image inspection and measured browser geometry."
+    },
+    {
+      "id": "OWI-F04",
+      "severity": "P2",
+      "type": "FRONTEND_RESPONSIVE_VISUAL_MISMATCH",
+      "title": "Mobile capabilities retains full desktop cards instead of the compact authored list",
+      "rowIds": [
+        "CAP-01"
+      ],
+      "frameIds": [
+        "411:86453"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+          "line": 73
+        },
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+          "line": 6
+        },
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+          "line": 35
+        }
+      ],
+      "reproduction": [
+        "At390\u00d7844 return four capability records and open Capabilities.",
+        "Compare the area list against Figma86453."
+      ],
+      "expected": "The phone design uses compact divided rows with name and maturity on one line and PE/fallback below, with no desktop avatar/description block.",
+      "observed": "The phone CSS changes only grid column count. The first card measures172.53125px high; all cards retain a large circular icon, description, spacing and rounded individual borders. Four records consume almost800px before the fit panel.",
+      "evidence": [
+        "followup.spec.ts:7",
+        "results-followup.json",
+        "artifacts-followup/followup-mobile-capability-d9cb2-strations-lack-divided-rows/capabilities-mobile-list.png",
+        "figma/411-86453.json",
+        "figma/411-86453.png"
+      ],
+      "deploymentImpact": "Blocks remaining phone visual acceptance for CAP-01. This does not reopen the repaired capability Name/type/sector/scrim scope.",
+      "certainty": "Confirmed with real components and fresh390px design reference."
+    }
+  ]
+}

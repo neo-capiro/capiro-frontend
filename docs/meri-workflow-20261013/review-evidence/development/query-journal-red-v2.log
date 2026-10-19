@@ -1,0 +1,41 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ ❯ tests/meri-action-lifetime.test.ts (12 tests | 1 failed) 110ms
+     × retains an interrupted lookup through a reopened view without issuing a replacement 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-lifetime.test.ts > durable lookup attempt ownership > retains an interrupted lookup through a reopened view without issuing a replacement
+AssertionError: expected { status: 'idle' } to deeply equal { status: 'unresolved', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "problem": "read-unavailable",
+-   "status": "unresolved",
++   "status": "idle",
+  }
+
+ ❯ tests/meri-action-lifetime.test.ts:162:30
+    160|     h.port.dispose();
+    161|     expect(await pending).toEqual({ ok: false, problem: "read-unavaila…
+    162|     expect(h.journal.read()).toEqual({ status: "unresolved", problem: …
+       |                              ^
+    163|     const reopened = harness(h.journal);
+    164|     reopened.queue.push("query");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 passed (12)
+   Start at  05:21:28
+   Duration  372ms (transform 63ms, setup 0ms, import 140ms, tests 110ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

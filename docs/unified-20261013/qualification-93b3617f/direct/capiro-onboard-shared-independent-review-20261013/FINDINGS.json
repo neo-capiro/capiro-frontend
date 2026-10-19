@@ -1,0 +1,70 @@
+[
+  {
+    "id": "OBSH-01",
+    "severity": "P2",
+    "classification": "confirmed source acceptance gap; no native execution and no claimed observed backend bad receipt",
+    "source": "apps/web/src/shared/capiro/onboard-core-api.ts",
+    "line": 31,
+    "supportingSources": [
+      {
+        "path": "apps/web/src/shared/capiro/operations/settings-admin/schemas.ts",
+        "line": 112
+      },
+      {
+        "path": "apps/web/src/features/onboard/pages/setup/ImportOverlay.tsx",
+        "line": 217
+      }
+    ],
+    "summary": "Manual client creation accepts a receipt with an empty/non-UUID identifier or a different client name, then treats it as this successful creation.",
+    "sourceReason": "Adapter simply returns existing settings.profiles.create; reused clientSchema has z.string id/name. On successful resolution feature increments manualAdded, invokes onImported(1), then clears retained draft.",
+    "native": "Pinned Core Client.id is UUID; create stores submitted name without normalization and returns that client plus logoUrl. See NATIVE-CLIENT-CREATE-PINS.json. Shared Settings owner remains broad; narrow only Onboard admission.",
+    "proposedCorrection": "Capture submitted name before await. Require native UUID id and exact captured submitted name before resolving Onboard createClient. Malformed/conflicting receipt rejects as uncertain, without replay, success-count increment or clearing draft. Do not require stripped tenantId or change shared Settings schema.",
+    "reproductionPlan": {
+      "execution": "NOT_RUN; deterministic consumer regression requested",
+      "request": {
+        "body": {
+          "name": "Requested firm"
+        }
+      },
+      "malformedReceipt": {
+        "id": "",
+        "name": "Requested firm",
+        "profileStatus": "ACTIVE",
+        "status": "active"
+      },
+      "foreignReceipt": {
+        "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "name": "Other firm",
+        "profileStatus": "ACTIVE",
+        "status": "active"
+      },
+      "currentSourceOutcome": "Promise resolves under current shape schema and direct adapter forwarding; visible success path becomes reachable.",
+      "expected": "CapiroApiError502, one transport call only; journal unknown fence retains draft."
+    },
+    "disposition": "Resolved statically in corrective-snapshot; initial source finding preserved. See CORRECTION-REVIEW.json for author evidence and exact updated hash."
+  },
+  {
+    "id": "OBSH-02",
+    "severity": "P3",
+    "classification": "confirmed static route mismatch; feature owner already notified",
+    "source": "apps/web/src/features/onboard/pages/setup/ImportOverlay.tsx",
+    "line": 838,
+    "supportingSources": [
+      {
+        "path": "apps/web/src/app/_onboard/OnboardHost.tsx",
+        "line": 83
+      }
+    ],
+    "summary": "Subscription CTA targets an unimplemented local legacy route after host rewrites appBaseUrl to current origin.",
+    "sourceReason": "CTA assigns appBaseUrl+/onboarding/subscribe. Host supplies current origin, but current Next inventory contains no /onboarding/subscribe route. Existing /billing is the purchaser funnel, not automatically the equivalent post-setup upgrade operation.",
+    "proposedCorrection": "Use an explicitly approved current upgrade destination if supported, otherwise render unavailable guidance. Do not silently point at initial funnel billing or revive external config as navigation authority.",
+    "reproductionPlan": {
+      "execution": "NOT_RUN; source inventory and string composition only",
+      "fixture": "Trial plan, current billingAdmin true, cap reached, unimported clients remain, no selected ids and no current error/pending attempt",
+      "action": "View subscription options",
+      "currentDestination": "<current-origin>/onboarding/subscribe",
+      "expected": "Supported deliberate destination or clear unavailable control; preserve remaining cap/selection/refusal assertions."
+    },
+    "disposition": "Open at reviewed snapshot; feature owner/root already notified. No destination guessed."
+  }
+]

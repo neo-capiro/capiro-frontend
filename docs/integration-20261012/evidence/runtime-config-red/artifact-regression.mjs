@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+const root='/workspace/capiro-integration/apps/web';
+const manifest=JSON.parse(await readFile(`${root}/.next/prerender-manifest.json`,'utf8'));
+const entries=['/','/meri','/meri/fixture/cited-answer','/meri/fixture/run-activity','/modules','/portfolio','/settings','/settings/personal','/sign-in'];
+const captured=entries.filter(route=>Object.hasOwn(manifest.routes,route));
+const html=await readFile(`${root}/.next/server/app/meri.html`,'utf8');
+const keyMarker=html.match(/publishableKey.{0,45}/)?.[0];
+console.log(JSON.stringify({source:'e1bcf60030007edaab610b069c6fb885fc5265dc',scope:'Production artifact regression only; no credentials, provider request or live auth acceptance.',staticSharedAuthRoutes:captured,serializedMeriBoundary:keyMarker},null,2));
+assert.deepEqual(captured,[],'Shared auth entry routes must resolve deployment configuration per request.');

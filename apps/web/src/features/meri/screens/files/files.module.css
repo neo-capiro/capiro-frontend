@@ -1,0 +1,298 @@
+/* Figma 3.4 04 · Files: attachment, extraction, filing, download and revision surfaces. */
+.screen :where(h2, h3, p, ol, ul) {
+  margin: 0;
+}
+.screen :where(ol, ul),
+.optionList,
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.small {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.small p {
+  margin: 0;
+}
+.lede {
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.075px;
+  font-weight: 400;
+  color: var(--foreground);
+}
+.mono {
+  font-family: var(--font-geist-mono), monospace;
+}
+.full {
+  width: 100%;
+}
+.filingScreen input:read-only {
+  background: var(--card);
+}
+.sheetTitle {
+  width: 100%;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.44px;
+  font-weight: 600;
+}
+/* Attachments · Drop zone (04.01). */
+.dropZone {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.dropZone > :where(h3, p) {
+  align-self: stretch;
+}
+.dropIcon {
+  width: 28px;
+  height: 28px;
+}
+.draft {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* Adopted Attachments element: inline chips with a labelled remove action. */
+.attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.attachment {
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px 0 10px;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.attachmentIcon {
+  display: inline-flex;
+}
+.attachmentIcon svg {
+  width: 14px;
+  height: 14px;
+}
+.attachmentName {
+  min-width: 0;
+  max-width: 420px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.attachmentRemove {
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.attachmentRemove svg {
+  width: 14px;
+  height: 14px;
+}
+.attachmentRemove:hover {
+  background: var(--card);
+}
+.selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+/* Row with leading icon, title and detail: download formats and pipeline steps. */
+.optionList,
+.steps {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.option,
+.step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.option > button {
+  margin-left: auto;
+  margin-right: 44px;
+}
+.rowIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rowCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.option .rowCopy {
+  flex: 0 1 530px;
+}
+.rowTitle {
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  font-weight: 500;
+}
+.rowDetail {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--border);
+}
+/* File status cards (04.03) and the bordered panels of 04.06 and 04.07. */
+.card,
+.panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.panel {
+  gap: 16px;
+  padding: 24px;
+}
+.cardHeader {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.cardHeader .rowCopy {
+  gap: 4px;
+}
+.fileIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.pillSlot > span {
+  min-width: 150px;
+}
+.track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--muted);
+  overflow: hidden;
+}
+.track > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #242424, #0a0a0a);
+}
+.stackActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.toastStack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* Artifact preview actions with the recorded-activity group beside them. */
+.flowBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: center;
+}
+@media (max-width: 680px) {
+  .option {
+    flex-wrap: wrap;
+  }
+  .option > button {
+    margin: 0 0 0 30px;
+  }
+  .attachmentName {
+    max-width: 200px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .track > span {
+    background: #f5f5f4;
+  }
+}
+/* 04.08: contributing source scopes retained by the artifact version. */
+.scopes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.scopes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.scopeLabel {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+/* 04.08 read-only values are textareas so they wrap on a phone; they never resize. */
+.sharing textarea {
+  resize: none;
+}
+/* Figma 10.35 phone and 10.36 tablet artifact sharing: a full-width dialog with card fields. */
+@media (max-width: 1100px) {
+  .sharing > section[data-raised] {
+    max-width: none;
+  }
+  .sharing section textarea:read-only {
+    background: var(--card);
+  }
+}
+@media (max-width: 680px) {
+  .sharing > section[data-raised] {
+    padding: 24px;
+  }
+}

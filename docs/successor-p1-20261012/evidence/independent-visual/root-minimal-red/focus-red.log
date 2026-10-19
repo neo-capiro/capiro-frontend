@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+(node:495904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../tmp/capiro-successor-visual-review/focus-regression.spec.ts:3:5 › unknown folder save keeps settled Tab focus inside its modal (4.1s)
+
+
+  1) ../../tmp/capiro-successor-visual-review/focus-regression.spec.ts:3:5 › unknown folder save keeps settled Tab focus inside its modal 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    Call Log:
+    - Timeout 1500ms exceeded while waiting on the predicate
+
+      16 |   await page.keyboard.press('Tab');
+      17 |   try {
+    > 18 |     await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement)), { timeout: 1500 }).toBe(true);
+         |                                                                                                            ^
+      19 |     await page.keyboard.press('Shift+Tab');
+      20 |     await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement)), { timeout: 1500 }).toBe(true);
+      21 |   } finally {
+        at /tmp/capiro-successor-visual-review/focus-regression.spec.ts:18:108
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../tmp/capiro-successor-visual-review/focus-regression.spec.ts:3:5 › unknown folder save keeps settled Tab focus inside its modal 

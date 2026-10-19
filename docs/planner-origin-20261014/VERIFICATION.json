@@ -1,0 +1,77 @@
+{
+  "base": "cc73ead8f591b31b2f2cfc8bb008913408d7a5e0",
+  "status": "LOCAL_PROPOSED_FIX_PENDING_EXACT_PIN_REVIEW",
+  "runtimeReproduction": "PASS: actual NextNodeServer attachRequestMeta plus NextRequestAdapter and gateway; synthetic standalone fields and loopback HTTP",
+  "reproductionBoundary": "Not a full production Next build/server, real Clerk/browser or deployed causal proof",
+  "tests": {
+    "filesPassed": 9,
+    "passed": 108,
+    "failed": 0,
+    "newAdapterCases": 25,
+    "rawLog": "TEST-LOG.txt"
+  },
+  "strictTargetedTypeScript": "PASS",
+  "targetedLint": "PASS",
+  "prettier": "PASS",
+  "architecture": "PASS; zero errors/blockers;19 inherited-unreviewed findings retained",
+  "dependencyProvenance": [
+    {
+      "package": "next",
+      "version": "16.4.0",
+      "integrityMatchesSourceLock": true
+    },
+    {
+      "package": "react",
+      "version": "19.3.0",
+      "integrityMatchesSourceLock": true
+    },
+    {
+      "package": "react-dom",
+      "version": "19.3.0",
+      "integrityMatchesSourceLock": true
+    },
+    {
+      "package": "zod",
+      "version": "4.6.5",
+      "integrityMatchesSourceLock": true
+    },
+    {
+      "package": "vitest",
+      "version": "4.1.11",
+      "integrityMatchesSourceLock": true
+    },
+    {
+      "package": "typescript",
+      "version": "5.9.3",
+      "integrityMatchesSourceLock": true
+    }
+  ],
+  "unchanged": [
+    "package.json",
+    "package-lock.json",
+    "apps/web/Dockerfile",
+    "apps/web/next.config.ts",
+    "apps/web/src/app/api/capiro/[operation]/route.ts",
+    "apps/web/src/shared/capiro/http.ts",
+    "apps/web/src/features/modules/planner/TaskEditor.tsx"
+  ],
+  "review": "Working-diff security/source and exact proxy size fingerprint accepted by /root/runtime_review; exact pin review pending",
+  "retainedEnvironmentFindings": [
+    "Initial sandbox Vitest rename EPERM; author local run outside sandbox passed",
+    "Reviewer24/25 passed; loopback blocked sandbox EACCES, no skips",
+    "Initial task dependency lacked immutable shared tarball and custom @ alias; installed tarball and restored alias; no assertion weakened",
+    "Initial Portfolio config field was misplaced; regression caught403 and source wiring corrected before final108PASS"
+  ],
+  "liveMetadataUnavailable": [
+    "Actual rejected request Origin",
+    "Host/forwarded headers",
+    "derived server request origin"
+  ],
+  "liveWrites": 0,
+  "liveConfigurationChanges": 0,
+  "credentialInspection": false,
+  "publication": "NOT_AUTHORIZED; local only",
+  "proposedPreviewEnvironment": {
+    "CAPIRO_REQUEST_ORIGIN": "https://portfolio-preview.app.capiro.ai"
+  }
+}

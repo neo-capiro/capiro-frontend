@@ -1,0 +1,36 @@
+{
+  "oldFileSHA256": "42f9b3532b3c02c9eeb274e2e6d80e308f0d03f7a36b4eb913b08993b0270710",
+  "newFileSHA256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+  "changes": [
+    {
+      "tag": "insert",
+      "old": [
+        58,
+        58
+      ],
+      "new": [
+        58,
+        67
+      ]
+    },
+    {
+      "tag": "insert",
+      "old": [
+        101,
+        101
+      ],
+      "new": [
+        110,
+        115
+      ]
+    }
+  ],
+  "removedOrReplacedLines": 0,
+  "allOriginalSourceLinesRetainedInOrder": true,
+  "originalTestCount": 12,
+  "newTestCount": 12,
+  "addedAssertions": [
+    "Exact scoped attachment fixture only accepts GET"
+  ],
+  "productionDiffVersus104495d": ""
+}

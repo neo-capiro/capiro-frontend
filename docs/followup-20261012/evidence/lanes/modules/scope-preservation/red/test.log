@@ -1,0 +1,142 @@
+
+Running 4 tests using 1 worker
+
+(node:638102) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Month and chosen date across client, Master and history (6.3s)
+(node:638361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Week and chosen date across client, Master and history (6.7s)
+(node:638688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Agenda and chosen date across client, Master and history (6.7s)
+(node:638917) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 apps/web/test/browser/next-modules-view-persistence.spec.ts:54:1 › invalid Calendar URL selection falls back to valid defaults before any date request (1.9s)
+
+
+  1) apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Month and chosen date across client, Master and history 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('button', { name: 'Choose calendar date', exact: true })
+    Expected: "February 2027"
+    Received: "October 2026"
+    Timeout:  4000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 4000ms
+      - waiting for getByRole('button', { name: 'Choose calendar date', exact: true })
+        12 × locator resolved to <button type="button" aria-expanded="false" class="_title_1xqwp_106" aria-label="Choose calendar date">October 2026</button>
+           - unexpected value "October 2026"
+
+
+      24 |       await expect(
+      25 |         page.getByRole("button", { name: "Choose calendar date", exact: true }),
+    > 26 |       ).toHaveText(title!);
+         |         ^
+      27 |       await page
+      28 |         .getByRole("button", { name: "Choose calendar date", exact: true })
+      29 |         .click();
+        at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:26:9)
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Week and chosen date across client, Master and history 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('button', { name: 'Week', exact: true })
+    Expected: "true"
+    Received: "false"
+    Timeout:  4000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 4000ms
+      - waiting for getByRole('button', { name: 'Week', exact: true })
+        12 × locator resolved to <button type="button" aria-pressed="false">Week</button>
+           - unexpected value "false"
+
+
+      21 |       await expect(
+      22 |         page.getByRole("button", { name: view, exact: true }),
+    > 23 |       ).toHaveAttribute("aria-pressed", "true");
+         |         ^
+      24 |       await expect(
+      25 |         page.getByRole("button", { name: "Choose calendar date", exact: true }),
+      26 |       ).toHaveText(title!);
+        at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:23:9)
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Agenda and chosen date across client, Master and history 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('button', { name: 'Agenda', exact: true })
+    Expected: "true"
+    Received: "false"
+    Timeout:  4000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 4000ms
+      - waiting for getByRole('button', { name: 'Agenda', exact: true })
+        12 × locator resolved to <button type="button" aria-pressed="false">Agenda</button>
+           - unexpected value "false"
+
+
+      21 |       await expect(
+      22 |         page.getByRole("button", { name: view, exact: true }),
+    > 23 |       ).toHaveAttribute("aria-pressed", "true");
+         |         ^
+      24 |       await expect(
+      25 |         page.getByRole("button", { name: "Choose calendar date", exact: true }),
+      26 |       ).toHaveText(title!);
+        at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:23:9)
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Month and chosen date across client, Master and history 
+    apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Week and chosen date across client, Master and history 
+    apps/web/test/browser/next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Agenda and chosen date across client, Master and history 
+  1 passed (26.0s)

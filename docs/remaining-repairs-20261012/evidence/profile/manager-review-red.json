@@ -1,0 +1,235 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/manager-review-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "manager-review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/manager-review-red.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "manager-review.spec.ts",
+      "file": "manager-review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "inline facility recovery adopts the reviewed record after remote update",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6927,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\nExpected: \u001b[32m\"\u001b[7mAuthoritative current\u001b[27m note\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mSaved facility\u001b[27m note\u001b[7ms\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea id=\"_r_8_\" name=\"notes\">Saved facility notes</textarea>\u001b[22m\n\u001b[2m       - unexpected value \"Saved facility notes\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\nExpected: \u001b[32m\"\u001b[7mAuthoritative current\u001b[27m note\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mSaved facility\u001b[27m note\u001b[7ms\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea id=\"_r_8_\" name=\"notes\">Saved facility notes</textarea>\u001b[22m\n\u001b[2m       - unexpected value \"Saved facility notes\"\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts:57:64",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+                      "column": 64,
+                      "line": 57
+                    },
+                    "snippet": "  55 |       .getByRole(\"button\", { name: \"Use the reviewed facility\", exact: true })\n  56 |       .click();\n> 57 |     await expect(manager.getByLabel(\"Notes\", { exact: true })).toHaveValue(\n     |                                                                ^\n  58 |       \"Authoritative current note\",\n  59 |     );\n  60 |     await expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+                        "column": 64,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\nExpected: \u001b[32m\"\u001b[7mAuthoritative current\u001b[27m note\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mSaved facility\u001b[27m note\u001b[7ms\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea id=\"_r_8_\" name=\"notes\">Saved facility notes</textarea>\u001b[22m\n\u001b[2m       - unexpected value \"Saved facility notes\"\u001b[22m\n\n\n  55 |       .getByRole(\"button\", { name: \"Use the reviewed facility\", exact: true })\n  56 |       .click();\n> 57 |     await expect(manager.getByLabel(\"Notes\", { exact: true })).toHaveValue(\n     |                                                                ^\n  58 |       \"Authoritative current note\",\n  59 |     );\n  60 |     await expect(\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts:57:64"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:05:52.943Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+                    "column": 64,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31afa5086acb78fedb35-4de9f333b1f91bb468c6",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "inline facility recovery adopts the reviewed record after uncertain applied edit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6771,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\nExpected: \u001b[32m\"\u001b[7mAuthoritative current\u001b[27m note\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mSaved facility\u001b[27m note\u001b[7ms\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea id=\"_r_8_\" name=\"notes\">Saved facility notes</textarea>\u001b[22m\n\u001b[2m       - unexpected value \"Saved facility notes\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\nExpected: \u001b[32m\"\u001b[7mAuthoritative current\u001b[27m note\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mSaved facility\u001b[27m note\u001b[7ms\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea id=\"_r_8_\" name=\"notes\">Saved facility notes</textarea>\u001b[22m\n\u001b[2m       - unexpected value \"Saved facility notes\"\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts:57:64",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+                      "column": 64,
+                      "line": 57
+                    },
+                    "snippet": "  55 |       .getByRole(\"button\", { name: \"Use the reviewed facility\", exact: true })\n  56 |       .click();\n> 57 |     await expect(manager.getByLabel(\"Notes\", { exact: true })).toHaveValue(\n     |                                                                ^\n  58 |       \"Authoritative current note\",\n  59 |     );\n  60 |     await expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+                        "column": 64,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\nExpected: \u001b[32m\"\u001b[7mAuthoritative current\u001b[27m note\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mSaved facility\u001b[27m note\u001b[7ms\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea id=\"_r_8_\" name=\"notes\">Saved facility notes</textarea>\u001b[22m\n\u001b[2m       - unexpected value \"Saved facility notes\"\u001b[22m\n\n\n  55 |       .getByRole(\"button\", { name: \"Use the reviewed facility\", exact: true })\n  56 |       .click();\n> 57 |     await expect(manager.getByLabel(\"Notes\", { exact: true })).toHaveValue(\n     |                                                                ^\n  58 |       \"Authoritative current note\",\n  59 |     );\n  60 |     await expect(\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts:57:64"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:06:00.704Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+                    "column": 64,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31afa5086acb78fedb35-85653f9f2e762e3655de",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+          "line": 10,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:05:52.415Z",
+    "duration": 15553.863,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

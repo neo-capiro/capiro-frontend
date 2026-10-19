@@ -1,0 +1,23 @@
+{
+  "timeUTC": "2026-10-13T08:51:09.230705+00:00",
+  "sourcePinsMatch": true,
+  "meaningfulRedTestBytesUnchanged": true,
+  "finalTests": {
+    "passed": 32,
+    "failed": 0,
+    "files": 4,
+    "workers": 1
+  },
+  "sourcePinSHA256": "69b081ed08c26ceb7633ce9e7165651118214c2334552143de52303a16df5cde",
+  "unrun": [
+    "browser",
+    "server",
+    "build",
+    "full typecheck",
+    "full architecture",
+    "full suite",
+    "native services",
+    "provider/model effects"
+  ],
+  "noCommit": true
+}

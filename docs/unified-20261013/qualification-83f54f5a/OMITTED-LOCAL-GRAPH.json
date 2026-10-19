@@ -1,0 +1,30 @@
+{
+  "limitation": "This publication preserves evidence, not a runnable dependency installation. Symlink targets are not inventoried recursively or copied.",
+  "links": [
+    {
+      "linkTextSha256": "6f2f26ef496221ea1d187341ce75bd5666c4ae0e1330bc79a72952a2e353ada3",
+      "logicalPath": "capiro-unified-elements-83f54f5a-20261013/ssr/negative-G830qY/workspace/node_modules",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/workspace/capiro-unified-elements-83f54f5a-20261013/ssr/negative-G830qY/workspace/node_modules",
+      "target": "/tmp/capiro-onboard-execution-20261013/node_modules"
+    }
+  ],
+  "regularFiles": [
+    {
+      "bytes": 4741809,
+      "group": "elements_qualification",
+      "logicalPath": "capiro-unified-elements-83f54f5a-20261013/tool/linux-x64/archive.tgz",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "9573bb2233aab0f9ea7647d5cca9726113cc1768de61d66b17267f4db84488f6",
+      "source": "/workspace/capiro-unified-elements-83f54f5a-20261013/tool/linux-x64/archive.tgz"
+    },
+    {
+      "bytes": 11427952,
+      "group": "elements_qualification",
+      "logicalPath": "capiro-unified-elements-83f54f5a-20261013/tool/linux-x64/esbuild",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+      "source": "/workspace/capiro-unified-elements-83f54f5a-20261013/tool/linux-x64/esbuild"
+    }
+  ]
+}

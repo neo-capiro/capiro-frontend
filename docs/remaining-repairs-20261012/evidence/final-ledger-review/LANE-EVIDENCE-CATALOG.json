@@ -1,0 +1,117 @@
+{
+  "intake": {
+    "owner": "core_intake_review",
+    "sources": [
+      "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-intake-evidence/report.md",
+      "/tmp/capiro-remaining-intake-evidence/source-binding-verification.json",
+      "/tmp/capiro-remaining-intake-evidence/popup-green-results.json",
+      "/tmp/capiro-remaining-intake-evidence/focused-results.json"
+    ],
+    "verification": "4 intended PR14 reds;46 focused cases before the last popup refinement;10 final popup cases at delivered source;60 units. Earlier setup/source attempts preserved; no claim that46 was rerun after popup-only correction.",
+    "design": "Original Figma contexts/screens and exact icon exports preserved. Added read-only profile fields are functional completion; full Overview/shell pixel parity is not claimed."
+  },
+  "profile": {
+    "owner": "core_profile_review",
+    "sources": [
+      "12c007a465acfdf81b68b2ffe03f531f1bbf270a",
+      "b7ba794b4b0f371a635f66e5d35970873b37b610",
+      "5291c717e77c8b3ffdc995a4e20080c4964483fd",
+      "a5202a066d0a0bd29fd5158b1d8380d4a5736768",
+      "ecf34dfac16e36b22df1a1da9b6e86b785699dbb"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-profile-evidence/REPORT.md",
+      "/tmp/capiro-remaining-profile-evidence/FINAL-SOURCE-RECEIPT.json",
+      "/tmp/capiro-remaining-profile-evidence/NATIVE-AND-DESIGN-LIMITS.md",
+      "/tmp/capiro-remaining-profile-evidence/final-complete-green.json",
+      "/tmp/capiro-remaining-modules-evidence/independent-profile-final-review.json"
+    ],
+    "verification": "8 corrected PR14 presentation reds;6 recovery reds on5291;2 hover-contrast reds;16 final new/recovery controls pass.67 preservation passed on a520 before CSS-only ecf;104 units. Invalid clock/mock attempts and real recovery/geometry/focus failures remain preserved.",
+    "design": "Original contexts and exported icons preserved; inline timeline411:48826 screenshot is ancestor-clipped, supplemented by context and unoccluded expanded411:60524. No full pixel-parity claim.",
+    "nativeSourceInspection": "Read-only243248e attachment upload/confirmation DTOs lack folder field; no live geocoder/files/history acceptance."
+  },
+  "calendar": {
+    "owner": "calendar_relationships_review",
+    "sources": [
+      "16fb50f9578cca86189b2e303f0918ddebc60413",
+      "3195ffab57584054a714ff5bd025063fba363929"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-calendar-evidence/REPORT.md",
+      "/tmp/capiro-remaining-calendar-evidence/manifest.json",
+      "/tmp/capiro-remaining-calendar-evidence/native-pin-comparison.json",
+      "/tmp/capiro-remaining-calendar-evidence/visual-review.json",
+      "/tmp/capiro-remaining-calendar-evidence/preflight-completion-followup/REPORT.md"
+    ],
+    "verification": "6 lifecycle unit reds and4 valid PR14 browser reds;98 units pass.62/64 browser cohort plus2 corrected setup-control passes cover64 distinct cases including43 unchanged existing cases; not one final64/64 run. Three same-scope held-refresh controls are positive only: before-fix browser NOT_RUN. Final test-only completion-barrier follow-up passes1/1 with original attempt refused and zero writes.",
+    "design": "Original lifecycle/context frames Git-preserved;4 sharing frames captured with raw context/screens.1440/390 views inspected; bounded responsive/functional coverage, not full shell or exact pixel parity. CR09 has no assigned Figma frame.",
+    "nativeSourceInspection": "Original4be13b0 compared per-symbol with243248e; relevant meeting/share/feed symbols byte-identical, full services differ. No live behavior acceptance."
+  },
+  "mail": {
+    "owner": "prospects_review",
+    "sources": [
+      "685e55039d5d3945c76085513cde8bc6c33cb55d"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-mail-evidence/report.md",
+      "/tmp/capiro-remaining-mail-evidence/history-green-results.json",
+      "/tmp/capiro-remaining-mail-evidence/history-red-results.json",
+      "/tmp/capiro-remaining-mail-evidence/figma-baseline-manifest.json",
+      "/tmp/capiro-remaining-calendar-evidence/independent-mail-review.md"
+    ],
+    "verification": "Final exact baseline spec:3 intended missing-toolbar reds plus1 preserved Undo positive. Final history correction passes45 changed-owner controls (15 rich,21 local-draft,9 rewrite);79 earlier affected passes predate that narrow history correction.72 units.24 existing text assertions use equivalent semantic textarea/contenteditable adapter with same expected values.",
+    "design": "Four formatting controls are supported by full design context. Isolated435:82802 screenshot is1\u00d71 and parent viewport clips compose child; full rendered composer pixel parity remains unassessed, not repaired by an alternate design.",
+    "nativeSourceInspection": "HTML-subset source evidence cited by owner at4be13b0; no live native send/delivery acceptance or current deployment proof inferred."
+  },
+  "capabilities": {
+    "owner": "objectives_work_intel_review",
+    "sources": [
+      "e3d1cbb91a31cadff90898fcf2143ff5ce17318e"
+    ],
+    "dependencies": [
+      "98d18058263289293c8acf82aaeb4534d7e93317"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-capabilities-evidence/REPORT.md",
+      "/tmp/capiro-remaining-capabilities-evidence/repair-report.json",
+      "/tmp/capiro-remaining-capabilities-evidence/NATIVE-LIMITS.md",
+      "/tmp/capiro-remaining-capabilities-evidence/design-mapping.json"
+    ],
+    "verification": "3 intended geometry reds;5 feature cases and42 original cases pass before root header correction;6 final feature+root-header cases pass including full-page320px and7 enabled header-control keyboard order.34 writer units. Root shared header fix is separately mapped.",
+    "design": "Original contexts/screens preserved. Registration divided rows and compact phone list are bounded facets; additional authored classification/LDA/contracts rows, NAICS descriptive labels, decorative info/footer variant and whole-page fidelity remain outside this repair.",
+    "nativeSourceInspection": "Read-only243248e client/capability contracts; synthetic returned projections only."
+  },
+  "modules": {
+    "owner": "modules_settings_review",
+    "sources": [
+      "b5eaadd031580edca79e9d99de2c0ab14d59997c"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-modules-evidence/report.md",
+      "/tmp/capiro-remaining-modules-evidence/final-source-and-checks.json",
+      "/tmp/capiro-remaining-modules-evidence/design-baseline.json",
+      "/tmp/capiro-remaining-modules-evidence/browser-red-final.json",
+      "/tmp/capiro-remaining-modules-evidence/browser-final.json",
+      "/tmp/capiro-remaining-modules-evidence/browser-preservation.json"
+    ],
+    "verification": "3 exact eventual-spec PR14 reds;additional grouped-width red179.66px;11 final controls plus25 unchanged preservation controls and16 units pass. Final desktop/phone screenshots inspected.",
+    "design": "Original Workspace411:112533,Planner411:95475,PublicForm411:108618 contexts/screens preserved. Bounded geometry and presentation; existing shared shell/canonical input behavior retained. Public-form screenshot fixture has1 text field; complete prototype field set not claimed."
+  },
+  "ms06": {
+    "owner": "root",
+    "sources": [
+      "24641d784f36dbb1d8ca558ed41ad4c6e22bf9ab"
+    ],
+    "evidence": [
+      "/tmp/capiro-remaining-root-evidence/MS06-REPORT.json",
+      "/tmp/capiro-remaining-root-evidence/ms06-browser-source.json",
+      "/tmp/capiro-remaining-root-evidence/red-browser-results.json",
+      "/tmp/capiro-remaining-root-evidence/green-browser-results.json"
+    ],
+    "verification": "2 intended PR14 reds for missing join link and modal-only selection;21 final controls pass (15 new,6 preserved),0 failures/skips/retries. Independent source review and desktop/phone visual inspection recorded.",
+    "design": "Persistent selectable280px desktop meeting list and inline Prep detail; stacked phone layout, heading focus/Escape. Related Modules variant of MCAL006 only; complete Portfolio criterion and full-screen visual acceptance remain open."
+  }
+}

@@ -1,0 +1,524 @@
+{
+  "schema": "capiro-figma-parity-candidate/1",
+  "parentCommit": "d034866de50ac006a9cf49607f6d9e9d63c9b150",
+  "preservedIntegration": "348c98dfe1962fac962157eb785732281a282d06",
+  "nativeAcceptance": "all337 rows open; no deployment or live data-changing test",
+  "figma": {
+    "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+    "desktop": [
+      "442:81437",
+      "411:41421",
+      "411:93787"
+    ],
+    "phone": [
+      "411:85068",
+      "411:86805"
+    ],
+    "meriPhone": "responsive only; authored frame unresolved"
+  },
+  "qualification": {
+    "fullCheck": 0,
+    "build": 0,
+    "standalone": 36,
+    "modulesBrowser": 21,
+    "portfolioBrowser": 15,
+    "focusedDiagnosticSubset": 9,
+    "architecture": {
+      "errors": 0,
+      "blocking": 0,
+      "inheritedUnreviewed": 19
+    }
+  },
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/hub/ModuleHub.tsx",
+      "bytes": 7272,
+      "sha256": "243827057c80f2c6b96d2b771bd4875920f979243182434f7cb6abe84d39aaba"
+    },
+    {
+      "path": "apps/web/src/features/modules/hub/hub.module.css",
+      "bytes": 5131,
+      "sha256": "9f340588c4dc8e986a951ebf1b86c25c18c5f23f224bbfb013e7d35029be517b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+      "bytes": 11289,
+      "sha256": "0fefa43e0c37cb3b6ece923eecece09ca808a7bf492e118de64a39b4ab609617"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+      "bytes": 1078,
+      "sha256": "92848c150e65f9c80951e456fd99c03931491b69a545a2eedfb399fbb9c7cd4b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "bytes": 10183,
+      "sha256": "cee65dd1973ff1802dd5d92018636ee043bd54cc736a6d45912e5f471f3f987c"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.ts",
+      "bytes": 10780,
+      "sha256": "e7aecb93042bdea91f4dd033a3f48b758a4d4dacde9c55e8906eb93868772548"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/strategy-validation-diagnostic.test.ts",
+      "bytes": 7035,
+      "sha256": "bfc2b45a50ad3c200b9715f05d2b0818b5624aa8bca306ad32751be8c878487d"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/strategy-validation-diagnostic.ts",
+      "bytes": 4229,
+      "sha256": "83c0cddfcc72ec2823399a016ec8c5ffdb81799cfa789de58d62d50c34845e86"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/layout.tsx",
+      "bytes": 2511,
+      "sha256": "dc777e67ba672d470f665fd6f334b611a69a12c7745089a519db43d31b54f6f7"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/Shell.tsx",
+      "bytes": 3821,
+      "sha256": "7e1e59e3b950dd0868868f333e6e6d944f5f73fe7366d480e4bfd6b4e5c6ef8a"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/WorkspaceSwitcher.tsx",
+      "bytes": 1034,
+      "sha256": "df9aca8eb054601402b0e94201e2c1fb9b6470b2492b2294be3ed37b8ae3c3a1"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/shell.module.css",
+      "bytes": 3165,
+      "sha256": "8a1713cfe9d1a746832e92ded1c5252c33f5b0c9318f9aeb5eb1a4293888d0c8"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleNavigation.tsx",
+      "bytes": 2163,
+      "sha256": "e3c80450f5a8ab4a414b2885bafa7237966f2c9c60773e98115df24c7a89d77f"
+    },
+    {
+      "path": "apps/web/src/shared/shell/module-shell.module.css",
+      "bytes": 4359,
+      "sha256": "ed603af5ba0df4a7cdded46653f6d33b4a49a104dfd99df9358e817f7635699c"
+    },
+    {
+      "path": "apps/web/test/browser/figma-parity.spec.ts",
+      "bytes": 6497,
+      "sha256": "61a490283b5ded84d1051416335f2a7fbf81da1ce8a0fe07ed0bdae596590053"
+    },
+    {
+      "path": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+      "bytes": 11437,
+      "sha256": "e37306c16961f6a987ac0caa2761275a74d90d2232d1300a03dfa834ea858294"
+    },
+    {
+      "path": "docs/figma-parity-20261014/HANDOFF.md",
+      "bytes": 7969,
+      "sha256": "a8eda526ebac11093213e3d4e3e2cff2fb8fe0dc8c116e6b90dfbfa8f35873ee"
+    },
+    {
+      "path": "docs/figma-parity-20261014/INDEPENDENT-REVIEW.md",
+      "bytes": 2821,
+      "sha256": "7fe445b432a1c2e7d5061d7bc2a05de39bf1a7fc7a53d814ad3c9ed240d0268a"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/browser-results.json",
+      "bytes": 19379,
+      "sha256": "548ad1eaf9ff3f16c70f22eb72dedd1dd2e17d26f6c74d2a77d4a3ffb9b24356"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/geometry.json",
+      "bytes": 46570,
+      "sha256": "c1021fd2816476aabbe6b7bd3932de3713fa936a5faba75ca5c921b5a59ca7c5"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/meri-442-81437.context.txt",
+      "bytes": 39661,
+      "sha256": "cdd568b7cb9d1e26098eeba88e86fdcaed52d8ff852e9fb7e979c214d9f0f509"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/modules-411-93787.context.txt",
+      "bytes": 76843,
+      "sha256": "d6c4809fd6112a7ad2d9748771f870779add32745275ce0f28900c19c8b9761d"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/modules-browser-results.json",
+      "bytes": 77921,
+      "sha256": "465949e6f347a5020ed9dc0191531a65b9b07ebae3573c4154bf4986f0c60e5d"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/modules-mobile-411-86805.context.txt",
+      "bytes": 47603,
+      "sha256": "aa36300d8c19be1039396bf50ad0ae9e8a0770cf36a353e01367eeb910b6f8f6"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/portfolio-411-41421.context.txt",
+      "bytes": 123588,
+      "sha256": "d70651cb427e8fa165acf6530f9bc5125470bfb81fcba632642c0bd52c13ee54"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/portfolio-mobile-411-85068.context.txt",
+      "bytes": 74093,
+      "sha256": "7ecb7abda5523bcbbead7b9b8d343afb9cb3688c968b51b255455fe8fd6a1664"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-after.log.raw.json",
+      "bytes": 6598,
+      "sha256": "f24e061d40cd6682fe9999abdb351bc57373dc5fb54d9cbf0b9898493595d37e"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-after2.log.raw.json",
+      "bytes": 6598,
+      "sha256": "6c5d0591a10b9d05751ce4468b83a9e30b0c30934b5304019fa1b5512b7dd43d"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-after3.log.raw.json",
+      "bytes": 2822,
+      "sha256": "30bd48aed0d2fdf29b490f5a8137d6130688954f383d1a6268b2678d4081ab4e"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-architecture-final-pre-review.log.raw.json",
+      "bytes": 1235196,
+      "sha256": "c1fac6a866519a55cdcc6c6668ca159a6e211aaefe7f3a24b282b18a240946fb"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-architecture-initial.log.raw.json",
+      "bytes": 1235196,
+      "sha256": "93c95cf99bb68f1572c5c4846a32f40473490c616ed3f69cf05ea997b850f3aa"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-architecture-qualified.log.raw.json",
+      "bytes": 1237664,
+      "sha256": "b4fdbbcdc51efead287c43dcc838b94bb7abb4db0551658dd05ac1f66f18c865"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-before-complete.log.raw.json",
+      "bytes": 2822,
+      "sha256": "000cf95ed67c3efe362c5cbf17a8ca3d63d578e23fc604dc0da99dca74b8bd16"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-before.log.raw.json",
+      "bytes": 10482,
+      "sha256": "4bbd023844276e7fd363dbdb8ba7c00bdf619b92902c93454af83698c084f05b"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-build.log.raw.json",
+      "bytes": 3798,
+      "sha256": "6ac749cff4238f043d0a87177ae3999da1daaf84d737868fc0b8c0e1ae0165bc"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-format.log.raw.json",
+      "bytes": 621,
+      "sha256": "3c9220c1d46909a6da89a7e95a066b9cbaa4aeb7d6be4ba60efbc123f5d68e41"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-full-check.log.raw.json",
+      "bytes": 1341733,
+      "sha256": "7ddc4a980c8aed4d7b43b04063496ea7c5f6a1a10afc389858ab4b9980038ae2"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-lint.log.raw.json",
+      "bytes": 27551,
+      "sha256": "458c9166e7f6010311eb5c8c989a4cf8d6dad62005954e54873172850d08600c"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-modules-regression.log.raw.json",
+      "bytes": 5690,
+      "sha256": "ec643ff5c5620b3de45690226b3fa2403f9dd3a21d28a93f4bc8736fbf3bd285"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-portfolio-regression.log.raw.json",
+      "bytes": 5038,
+      "sha256": "921c61d7f87424ffb137b1589b506975e29d10d4d1270ce890414fefcbdbe7c8"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-qualified-browser.log.raw.json",
+      "bytes": 2822,
+      "sha256": "c10a433c960521cd3d3a94852367049f19e7ec38b302236155e23f494ebb200c"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-root-diagnostic.log.raw.json",
+      "bytes": 925,
+      "sha256": "4bad5c7bffa60ae9320fb945ddadf7f4fec53416679e3efde2a93564c318e034"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-standalone.log.raw.json",
+      "bytes": 12098,
+      "sha256": "4c230f6130075ef73e0f3c9014dd461a580683b1c1dd260922a68aa8a80735bd"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-figma-parity-types.log.raw.json",
+      "bytes": 1233,
+      "sha256": "6e6761218bd0dd509a9c18ce493f8f7326b8cc4efea3e449ae7ca12636328bdc"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-focused-final.log.raw.json",
+      "bytes": 749,
+      "sha256": "694781a5c041105c2170b360e2110d033edd424ef4420052d71bf08e0849892d"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-focused-qualified.log.raw.json",
+      "bytes": 749,
+      "sha256": "746aa230e37d8816ebfe4064d1e8f1407571dc5ecc5edf35211210b9244ecc06"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-focused.log.raw.json",
+      "bytes": 793,
+      "sha256": "b68d02cc3e49c69a5bc61edf45b6202ba598e703ae82d681680e9f832862ad49"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-json-focused.log.raw.json",
+      "bytes": 749,
+      "sha256": "1fcabe3ecb9484eae40c2566b63eac6c95dcf44ba1f87b232f88c2f6d843f088"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-json-lint.log.raw.json",
+      "bytes": 417,
+      "sha256": "12c9e769808fc014d29935a00cd393b9d5458828b0bf6cdc474b6458bb77efd6"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-json-types.log.raw.json",
+      "bytes": 417,
+      "sha256": "12c9e769808fc014d29935a00cd393b9d5458828b0bf6cdc474b6458bb77efd6"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-lint.log.raw.json",
+      "bytes": 417,
+      "sha256": "12c9e769808fc014d29935a00cd393b9d5458828b0bf6cdc474b6458bb77efd6"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-registry.log.raw.json",
+      "bytes": 757,
+      "sha256": "2208901a8e4d29f0678a0932162fece4b01ae37e9d8294623df32c348813143f"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-types-final.log.raw.json",
+      "bytes": 417,
+      "sha256": "12c9e769808fc014d29935a00cd393b9d5458828b0bf6cdc474b6458bb77efd6"
+    },
+    {
+      "path": "docs/figma-parity-20261014/evidence/raw/capiro-strategy-diagnostic-types.log.raw.json",
+      "bytes": 1674,
+      "sha256": "5f3fde2f95dd9094755bc15fe786954eceb02114f1e5caabc35cd150a8603eca"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-figma-parity-portfolio-144-188b8-on-and-existing-interaction.png",
+      "bytes": 115074,
+      "sha256": "11c099e646409c601ab3908233cef9682fc05a15eaa89c1073490d75abab1f42"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-figma-parity-portfolio-390-dbaed-on-and-existing-interaction.png",
+      "bytes": 54006,
+      "sha256": "be89470f770bc14c11a9840d12449bf02c3a7295510e788441f0c3a4a25c64a4"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-meri-1440.png",
+      "bytes": 84734,
+      "sha256": "8c98d73af6d10d45547a1d0fa1bfb5f9035d5808a2f0297d97e3a3e4533e1dbe"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-meri-390.png",
+      "bytes": 49483,
+      "sha256": "14a539f6609e838fa762e3b2a698e8ac05c73d044fad60a1cba891c940d59c73"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-meri-fixture-1440.png",
+      "bytes": 97752,
+      "sha256": "952b9db4b1fe09ead032c8461ef77e5e82dda90546e741f16276819af9c95fa3"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-meri-fixture-390.png",
+      "bytes": 64347,
+      "sha256": "b7529d27af6ae67afc1a43ee72d38e47a3de90a6b25be5c7435af92f0844de39"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-modules-1440.png",
+      "bytes": 147901,
+      "sha256": "08ab7f768f6437f2ddc0182514a52ae26a52bd3b6551c44930e19552521b79df"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-modules-390.png",
+      "bytes": 151056,
+      "sha256": "dbf38d6938682a86e45d4b8444d775b889aea2da0f33ba16debbd79cbc669aec"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-portfolio-1440.png",
+      "bytes": 115151,
+      "sha256": "780b4b11b419b58b626d9dcec3f4c6f3b8a32952545a76723936f7ba6148c6b2"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/before-portfolio-390.png",
+      "bytes": 93239,
+      "sha256": "d1cefa8c45737e390e9d66810f73dc42c6ae579c37fd8d64e669bd725dbdacca"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/figma-meri-442-81437.png",
+      "bytes": 59320,
+      "sha256": "cc87941679e05a961dd25cf171c6b704a11e1f43f0a5605f03218e0111a6a192"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/figma-modules-411-93787.png",
+      "bytes": 122484,
+      "sha256": "74a1221e8dff8793a0de31ed4906da2a230e1d2dce51a0e31850dfb662f8ff12"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/figma-modules-mobile-411-86805.png",
+      "bytes": 56536,
+      "sha256": "34d5daf72bb876c2762a86057113807bf775ff03dc4d494974e55fada01c68e2"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/figma-portfolio-411-41421.png",
+      "bytes": 150719,
+      "sha256": "b968ece8f8d493ff208b5f1119d1961d34bc93147f615dac528b849774723a98"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/figma-portfolio-mobile-411-85068.png",
+      "bytes": 75127,
+      "sha256": "e875e260b7aac73ce32bca2255033300669b12c5edf8876d64711b47eb961f15"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/meri-1440.png",
+      "bytes": 72632,
+      "sha256": "344bcd46e5dbb9f6b97886107924b9a27f6d3a1353ea7009c683084ed935ff06"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/meri-390.png",
+      "bytes": 40659,
+      "sha256": "da2f28d99850f79d7ca8cacd303b5e17e378b04832c2388623b51447c16ccf13"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/meri-fixture-1440.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/meri-fixture-390.png",
+      "bytes": 56506,
+      "sha256": "fa4986a0b87bea910246ff7cb38b60c0b421948736283dc34aa12c6f76158029"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/modules-1440.png",
+      "bytes": 127021,
+      "sha256": "a4267a0f118b385837a530cc659cbc576e53bc9604f471014d85ee015012e865"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/modules-390.png",
+      "bytes": 112325,
+      "sha256": "bbf79998b1f455366415f4a81b5626168025abd27a9807bfc6441dd86ed44e97"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/portfolio-1440.png",
+      "bytes": 106576,
+      "sha256": "55b49a35211344d206498a0c15984b5fcd44233a36718c5f83587dd321597475"
+    },
+    {
+      "path": "docs/figma-parity-20261014/screenshots/portfolio-390.png",
+      "bytes": 79977,
+      "sha256": "de96ef99441e52818de9c8cf7549b85a2da1827de530302f53c250acde6588ca"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-1440-dark.png",
+      "bytes": 119855,
+      "sha256": "f7a4c614d007c14def4d8f6ae4a83ed69ed4a60188df916c067744d67f898267"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-1440-light.png",
+      "bytes": 51903,
+      "sha256": "c315862d3db98195343e3273e3cab3dd39c01479edc4a22f3ce88e285f165e43"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-390-dark.png",
+      "bytes": 52486,
+      "sha256": "1eece3d52085b716f3e73ae3311e65b17d2d944e7ed1a9ea217e2889d55a3ba3"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-390-light.png",
+      "bytes": 26099,
+      "sha256": "e634b78347bffa29323c5871d502eebdd0894757f25225ae403f22093e63c520"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-error-1440-dark.png",
+      "bytes": 204775,
+      "sha256": "973aaf7cdbd7ed00ed058d3e795f78b7fcc927d63d1af5f2965bb2808668f842"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-error-1440-light.png",
+      "bytes": 111180,
+      "sha256": "f60e96decea825b96a2de45765a0e28c3ad3a8d9c81b8d5494ff0be45ca7f6b5"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-error-390-dark.png",
+      "bytes": 129538,
+      "sha256": "c840b8ff7fe35b535922692082c6963fef3b30151d5fa2962c37a61c973f2a13"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-error-390-light.png",
+      "bytes": 82210,
+      "sha256": "e04b0fd3b2b3bbbc2a3c6002c71483c9029f78d9d904f9b5d0b7d0636a61a35d"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-files-1440-dark.png",
+      "bytes": 115536,
+      "sha256": "43719529c437ba5f14ff785b64ff761ebe1b7df88ae338edfb0ebd2181f5ecab"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-files-1440-light.png",
+      "bytes": 47660,
+      "sha256": "5748ba0ce40bf296dbcae86f1fea95c9c8344f54d8de3d9ef09fab8f18c4b8e5"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-files-390-dark.png",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "docs/figma-parity-20261014/standalone/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 209709,
+      "sha256": "e1683208f53ad6dc021f5eec182e70f41bf40efc381bad0affd408f9567cbd40"
+    }
+  ]
+}

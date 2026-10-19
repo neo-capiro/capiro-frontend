@@ -1,0 +1,13 @@
+- dialog "New folder":
+  - banner:
+    - heading "New folder" [level=2]
+    - button "Close"
+  - paragraph: File organization for Test report.pdf.
+  - text: Folder name
+  - textbox "Folder name" [disabled]: Quarterly reports and supporting evidence
+  - paragraph: Folders are shared labels on files. No physical copy is created. Empty folders are not persisted.
+  - alert:
+    - paragraph: The service returned an unexpected response. Please retry or contact support.
+  - paragraph: The save outcome is unknown. Your draft is retained. Review the current file before deciding whether to save again.
+  - button "Review current file"
+  - button "Create folder & move file" [disabled]

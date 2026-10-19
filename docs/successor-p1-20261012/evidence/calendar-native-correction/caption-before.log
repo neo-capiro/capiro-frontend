@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:546093) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:358:1 › artifact captions distinguish omitted sharing metadata from explicit privacy (6.6s)
+
+
+  1) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:358:1 › artifact captions distinguish omitted sharing metadata from explicit privacy 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })
+
+
+      398 |       .getByRole("article")
+      399 |       .filter({ hasText: `Synthetic ${id} debrief` });
+    > 400 |     await expect(artifact.getByText(caption, { exact: true })).toBeVisible();
+          |                                                                ^
+      401 |     if (id === "unknown") {
+      402 |       await expect(artifact.getByText("Private", { exact: true })).toHaveCount(
+      403 |         0,
+        at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:400:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:358:1 › artifact captions distinguish omitted sharing metadata from explicit privacy 

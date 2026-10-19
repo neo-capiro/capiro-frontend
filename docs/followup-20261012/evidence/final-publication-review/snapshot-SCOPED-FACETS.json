@@ -1,0 +1,194 @@
+{
+  "source": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+  "findingCount": 9,
+  "distinctRows": 11,
+  "originalLedger": "Preserved byte-for-byte; no blanket status rewrite",
+  "facets": [
+    {
+      "finding": "MS02",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "MCAL-002",
+          "criterion": "Populate the Master / client scope selector",
+          "relationship": "related_modules_variant_only"
+        },
+        {
+          "id": "MCAL-003",
+          "criterion": "Select Master view, Anduril or NACD while retaining Month / Week / Agenda",
+          "relationship": "related_modules_variant_only"
+        }
+      ],
+      "boundedRequirement": "Verified client survives Modules Calendar entry and explicit scope/view transitions.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Modules /modules/calendar entry only; canonical /calendar selector/source checks retained; no broad Calendar repair.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "MS03",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "MCAL-009",
+          "criterion": "Show Planner tasks and their scheduled / due dates in Master Agenda",
+          "relationship": "related_modules_variant_only"
+        }
+      ],
+      "boundedRequirement": "Master Agenda retains distinct Planner scheduled-start and due occurrences, without duplicate identical occurrence or date/zone invention.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Modules projection only; same MCAL-009 also has separate MS05. Preserve canonical /calendar prior pass and existing pagination coverage.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "MS04",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "MCAL-013",
+          "criterion": "Compose the mixed Master Agenda without widening source permissions",
+          "relationship": "related_modules_variant_only"
+        }
+      ],
+      "boundedRequirement": "A failed meetings read leaves independently successful Master Agenda sources visible with source-specific error/coverage state.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Do not turn one denied source into a client/tenant-wide authorization fallback or hide independent successful sources.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "MS05",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "MCAL-009",
+          "criterion": "Show Planner tasks and their scheduled / due dates in Master Agenda",
+          "relationship": "related_modules_variant_only"
+        }
+      ],
+      "boundedRequirement": "Modules Calendar task link opens that exact currently authorized canonical Planner task.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Navigation/read facet only; no new task writer, no old Engagement task route; missing/denied/foreign task must not open cached or alternate task.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "CR-07",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "ENG-email_send",
+          "criterion": "Send client/contact email or reply (To/Cc/Bcc/signature/attachments)",
+          "relationship": "direct_bounded_facet"
+        },
+        {
+          "id": "ENG-email_signature",
+          "criterion": "Display saved user email signature",
+          "relationship": "direct_bounded_facet"
+        }
+      ],
+      "boundedRequirement": "Show saved current-user signature safely in composer/review with applied/disabled/absent state reflecting existing contract.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "ENG-email_send signature-preview facet only; rich-text CR-10, sender/reply/provider delivery and attachments remain separate.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "CR-11",
+      "priority": "P3",
+      "rows": [
+        {
+          "id": "ENG-email_rewrite",
+          "criterion": "Rewrite email with Meri",
+          "relationship": "direct_bounded_facet"
+        }
+      ],
+      "boundedRequirement": "After verified rewrite, explicit Undo restores the captured prior body locally; no previous actor/client/attempt result can rewrite current draft.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Local undo facet only; no paid call or email send required for local source proof; preserve pending/edit authority protections.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "OWI-F02",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "WORK-03",
+          "criterion": "Upcoming work / timeline / node owner, status and date",
+          "relationship": "direct_bounded_facet"
+        },
+        {
+          "id": "WORK-08",
+          "criterion": "Workspace documents: display client drafts and completed work",
+          "relationship": "direct_bounded_facet"
+        }
+      ],
+      "boundedRequirement": "Display native node/document owner from exact authorized identity mapping, or truthful unresolved/unassigned state; preserve per-node status on upcoming rows as recorded in WORK-03.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Owner/status presentation only; no strategy/Workspace authority expansion, rich creation promise, or legacy-name guessing. Node owner strings without exact authorized clerk mapping remain unresolved.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "PROS-F03",
+      "priority": "P2",
+      "rows": [
+        {
+          "id": "PROS-019",
+          "criterion": "Prospect Files: list, search and open uploaded/research documents",
+          "relationship": "direct_bounded_facet"
+        }
+      ],
+      "boundedRequirement": "Search the loaded authorized Prospect Files collection and recover full collection when cleared.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "Only PROS-019 search facet; preserve implemented upload/readiness/open; no synthetic full-storage completeness claim.",
+      "qualificationReference": "STATUS.json"
+    },
+    {
+      "finding": "CP-03",
+      "priority": "P3",
+      "rows": [
+        {
+          "id": "CORE-060",
+          "criterion": "Delete file",
+          "relationship": "direct_bounded_facet"
+        }
+      ],
+      "boundedRequirement": "On dispatched DELETE with uncertain/malformed/failed outcome, retain explicit uncertainty and selected context; reconcile by fresh scoped read before any deliberate same-ID retry.",
+      "sourceStatus": "IMPLEMENTED_AND_INDEPENDENTLY_REVIEWED",
+      "targetedControls": "PASSED_WITH_REDS_PRESERVED",
+      "combinedQualification": "PASSED_ON_EE01BE3",
+      "nativeStatus": "NOT_RUN_FOR_THIS_FACET",
+      "fullRowAcceptance": "NO_NEW_FULL_ROW_ACCEPTANCE",
+      "limits": "P3 interrupted-delete recovery; repeat dispatch evidence, not proved duplicate destruction. Never infer 404/omitted row alone is successful erasure. No automatic retry or invented durable command/CAS.",
+      "qualificationReference": "STATUS.json"
+    }
+  ]
+}

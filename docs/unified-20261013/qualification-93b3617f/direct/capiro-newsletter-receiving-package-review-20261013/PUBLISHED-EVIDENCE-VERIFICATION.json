@@ -1,0 +1,45 @@
+{
+  "sourceHead": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+  "sourceTree": "b5aef300e56fae9b523d7525f1abd0f9c6baec75",
+  "artifact": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+  "all187MemberModesSizesHashesMatchPublishedManifest": true,
+  "members": 187,
+  "unpackedBytes": 2318419,
+  "cjsEsmBrowserResultsEqual": true,
+  "parserCases": 130,
+  "historicalTestCase": {
+    "name": "historical tests survive current-version filtering without becoming current approval",
+    "passed": true
+  },
+  "goldenBytesEqual": true,
+  "goldenCases": 116,
+  "goldenSha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+  "publishedIndexVerifiedPaths": [
+    "CONSUMER-QUALIFICATION.json",
+    "FINAL-QUALIFICATION.json",
+    "PACKED-MANIFEST.json",
+    "artifact/capiro-shared-0.0.0.tgz",
+    "evidence/consumer-attempt-1/browser-metafile.json",
+    "evidence/consumer-attempt-1/packed-esm-imports.command.json",
+    "evidence/consumer-attempt-1/browser-parser-results.json",
+    "evidence/consumer-attempt-1/packed-esm-imports.log",
+    "evidence/consumer-attempt-1/packed-cjs-parser-results.json",
+    "evidence/consumer-attempt-1/original-C-renderer-golden.json",
+    "evidence/consumer-attempt-1/packed-renderer-results.json",
+    "evidence/consumer-attempt-1/browser-renderer-results.json"
+  ],
+  "testExecutionByThisReviewer": false,
+  "nativeExecution": false,
+  "browserUIExecution": false,
+  "publishedBrowserMetafile": {
+    "packageModules": [
+      "node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js",
+      "node_modules/@capiro/shared/dist/newsletter-fonts.js",
+      "node_modules/@capiro/shared/dist/newsletter-receiving.js",
+      "node_modules/@capiro/shared/dist/newsletter.js",
+      "node_modules/@capiro/shared/dist/newsletter-social-share.js",
+      "node_modules/@capiro/shared/dist/newsletter-render.js"
+    ],
+    "externalImports": []
+  }
+}

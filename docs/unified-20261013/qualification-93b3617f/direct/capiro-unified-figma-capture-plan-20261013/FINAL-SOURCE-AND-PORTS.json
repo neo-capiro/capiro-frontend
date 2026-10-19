@@ -1,0 +1,13 @@
+{
+  "observedUTC": "2026-10-13T06:52:17.774234+00:00",
+  "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+  "status": "",
+  "ports": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      0          127.0.0.1:5191      0.0.0.0:*          \n",
+  "ownedPortsClosed": [
+    5188,
+    5197
+  ],
+  "borrowedPortNeverStopped": 5191
+}

@@ -1,0 +1,336 @@
+import { test, expect, type Page } from "@playwright/test";
+import { clientId, installFixtures, json } from "./fixtures";
+import { facility } from "../facility-map-fixtures";
+import type { Activity } from "../../src/features/portfolio/client-profile/contracts";
+
+const activity = (id: string, kind: string, occurredAt: string): Activity => ({
+  id,
+  kind,
+  occurredAt,
+  title: `${kind} ${id}`,
+  body: "Synthetic activity detail",
+  origin: "recorded",
+  sourceId: null,
+  sourceType: null,
+  dueAt: null,
+  settledAt: null,
+  pinned: false,
+});
+const activities = [
+  activity("today", "call", "2026-10-12T12:00:00Z"),
+  activity("yesterday", "note", "2026-10-11T12:00:00Z"),
+];
+const file = {
+  id: "60000000-0000-4000-8000-000000000001",
+  clientId,
+  fileName: "Report.pdf",
+  contentType: "application/pdf",
+  byteSize: 512,
+  source: "manual",
+  folder: "Reports",
+  viewerMode: "all",
+  viewerUserIds: [],
+  uploadedByUserId: null,
+  createdAt: "2026-10-01T12:00:00Z",
+  lifecycleStatus: "active",
+  scanStatus: "clean",
+  extractionStatus: "extracted",
+  indexedAt: null,
+};
+async function setup(page: Page) {
+  const unexpected = await installFixtures(page);
+  await page.route(`**/clients/${clientId}/facilities`, (route) =>
+    json(route, [facility]),
+  );
+  await page.route(`**/clients/${clientId}/activity*`, (route) =>
+    json(route, activities),
+  );
+  await page.route("**/engagement/attachments?**", (route) =>
+    json(route, [
+      file,
+      {
+        ...file,
+        id: "60000000-0000-4000-8000-000000000002",
+        fileName: "Capability.txt",
+        contentType: "text/plain",
+        source: "capability:40000000-0000-4000-8000-000000000001",
+        folder: null,
+      },
+    ]),
+  );
+  return unexpected;
+}
+async function fit(page: Page) {
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+}
+for (const width of [1440, 360]) {
+  test(`facilities manager shows saved cards and inline editable fields at ${width}px`, async ({
+    page,
+  }, info) => {
+    await page.setViewportSize({ width, height: 1040 });
+    const unexpected = await setup(page);
+    await page.goto(`/portfolio/${clientId}`);
+    await page
+      .getByRole("button", { name: "Add facility", exact: true })
+      .click();
+    const dialog = page.getByRole("dialog", {
+      name: "Facilities: Test Aerospace",
+      exact: true,
+    });
+    await expect(
+      dialog.getByRole("list", { name: "Saved facilities" }),
+    ).toContainText("Synthetic lab");
+    await expect(
+      dialog.getByRole("combobox", { name: "State / territory" }),
+    ).toBeVisible();
+    const city = await dialog.getByLabel("City", { exact: true }).boundingBox();
+    const state = await dialog
+      .getByLabel("State / territory", { exact: true })
+      .boundingBox();
+    const zip = await dialog
+      .getByLabel("ZIP code", { exact: true })
+      .boundingBox();
+    if (width === 1440) {
+      expect((await dialog.boundingBox())!.width).toBe(700);
+      expect(city!.y).toBe(state!.y);
+      expect(state!.y).toBe(zip!.y);
+    } else expect(state!.y).toBeGreaterThan(city!.y);
+    await dialog.getByRole("button", { name: "Edit", exact: true }).click();
+    await expect(
+      dialog.getByLabel("Facility name", { exact: true }),
+    ).toHaveValue(facility.name);
+    await expect(
+      dialog.getByLabel("State / territory", { exact: true }),
+    ).toHaveValue("CA");
+    await dialog.getByRole("button", { name: "Done", exact: true }).focus();
+    await page.keyboard.press("Tab");
+    expect(
+      await dialog.evaluate((element) =>
+        element.contains(document.activeElement),
+      ),
+    ).toBe(true);
+    await page.screenshot({
+      path: info.outputPath(`facilities-${width}.png`),
+      fullPage: true,
+    });
+    await fit(page);
+    expect(unexpected).toEqual([]);
+  });
+  test(`timeline groups dates and expands the existing filtered feed at ${width}px`, async ({
+    page,
+  }, info) => {
+    await page.setViewportSize({ width, height: 1040 });
+    await page.clock.setFixedTime(new Date("2026-10-12T18:00:00Z"));
+    const unexpected = await setup(page);
+    await page.goto(`/portfolio/${clientId}`);
+    const timeline = page.getByRole("region", {
+      name: "Activity timeline",
+      exact: true,
+    });
+    await expect(
+      timeline.getByRole("heading", { name: "Today", exact: true }),
+    ).toBeVisible();
+    await expect(
+      timeline.getByRole("heading", { name: "Yesterday", exact: true }),
+    ).toBeVisible();
+    await expect(timeline.locator("ol > li").first()).toHaveCSS(
+      "min-height",
+      "70px",
+    );
+    await timeline.screenshot({
+      path: info.outputPath(`timeline-default-${width}.png`),
+    });
+    await timeline
+      .getByRole("searchbox", { name: "Search activity", exact: true })
+      .fill("call");
+    await timeline
+      .getByRole("button", { name: "Expand timeline ↗", exact: true })
+      .click();
+    const expanded = page.getByRole("dialog", {
+      name: "Engagement timeline",
+      exact: true,
+    });
+    await expect(
+      expanded.getByRole("searchbox", { name: "Search activity", exact: true }),
+    ).toHaveValue("call");
+    await expect(
+      expanded.getByText("call today", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      expanded.getByText("note yesterday", { exact: true }),
+    ).not.toBeVisible();
+    const icon = expanded.locator('img[src$="phone.svg"]');
+    await expect(icon).toHaveJSProperty("complete", true);
+    expect(
+      await icon.evaluate(
+        (element) =>
+          element instanceof HTMLImageElement &&
+          element.complete &&
+          element.naturalWidth === 16,
+      ),
+    ).toBe(true);
+    await expanded
+      .getByRole("searchbox", { name: "Search activity", exact: true })
+      .fill("");
+    await expect(
+      expanded.getByRole("button", {
+        name: "Activity actions: note yesterday",
+        exact: true,
+      }),
+    ).toHaveCount(0);
+    await page.screenshot({
+      path: info.outputPath(`timeline-expanded-${width}.png`),
+      fullPage: true,
+    });
+    await page.keyboard.press("Tab");
+    expect(
+      await expanded.evaluate((element) =>
+        element.contains(document.activeElement),
+      ),
+    ).toBe(true);
+    await expanded
+      .getByRole("button", { name: "Log activity", exact: true })
+      .click();
+    const quickLog = page.getByRole("dialog", {
+      name: "Quick log",
+      exact: true,
+    });
+    await expect(quickLog.getByLabel("Title", { exact: true })).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(quickLog).not.toBeVisible();
+    await expect(expanded).not.toBeVisible();
+    await expect(
+      timeline.getByText("note yesterday", { exact: true }),
+    ).toBeVisible();
+    await fit(page);
+    expect(unexpected).toEqual([]);
+  });
+  test(`Files source chips and folder cards retain native provenance at ${width}px`, async ({
+    page,
+  }, info) => {
+    await page.setViewportSize({ width, height: 1040 });
+    const unexpected = await setup(page);
+    await page.goto(`/portfolio/${clientId}/files`);
+    const sources = page.getByRole("group", {
+      name: "File source",
+      exact: true,
+    });
+    await sources.getByRole("button", { name: "manual", exact: true }).click();
+    await expect(
+      page.getByRole("cell", { name: "pdf Report.pdf", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: "txt Capability.txt", exact: true }),
+    ).not.toBeVisible();
+    await sources.getByRole("button", { name: "All", exact: true }).click();
+    await page
+      .getByRole("group", { name: "File view" })
+      .getByRole("button", { name: "Folders", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "Open folder Reports", exact: true }),
+    ).toContainText("1 file");
+    await page.screenshot({
+      path: info.outputPath(`files-folders-${width}.png`),
+      fullPage: true,
+    });
+    await page
+      .getByRole("button", { name: "Open folder Reports", exact: true })
+      .click();
+    const result = page.getByRole("region", {
+      name: "Folder Reports",
+      exact: true,
+    });
+    await expect(
+      result.getByRole("button", { name: "Upload here", exact: true }),
+    ).toBeDisabled();
+    await expect(result).toContainText(
+      "Uploads cannot be placed directly in a named folder",
+    );
+    await expect(
+      result.getByRole("checkbox", { name: "Select Report.pdf", exact: true }),
+    ).toBeVisible();
+    await result
+      .getByRole("button", { name: "Test Aerospace", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "Upload here", exact: true }),
+    ).toBeEnabled();
+    await page.screenshot({
+      path: info.outputPath(`files-table-${width}.png`),
+      fullPage: true,
+    });
+    await fit(page);
+    expect(unexpected).toEqual([]);
+  });
+}
+test("facilities manager saves inline edits through the existing receipt contract", async ({
+  page,
+}) => {
+  const unexpected = await setup(page);
+  let current = { ...facility };
+  const writes: unknown[] = [];
+  await page.route(`**/clients/${clientId}/facilities**`, (route) => {
+    if (route.request().method() === "GET") return json(route, [current]);
+    writes.push(route.request().postDataJSON());
+    current = { ...current, ...route.request().postDataJSON() };
+    return json(route, { ...current, tenantId: "tenant-test" });
+  });
+  await page.goto(`/portfolio/${clientId}`);
+  await page.getByRole("button", { name: "Add facility", exact: true }).click();
+  const dialog = page.getByRole("dialog", {
+    name: "Facilities: Test Aerospace",
+    exact: true,
+  });
+  await dialog.getByRole("button", { name: "Edit", exact: true }).click();
+  await dialog.getByLabel("Facility name", { exact: true }).fill("Updated lab");
+  await dialog
+    .getByRole("button", { name: "Save facility", exact: true })
+    .click();
+  await expect(
+    dialog.getByRole("heading", { name: "Updated lab", exact: true }),
+  ).toBeVisible();
+  await expect(
+    dialog.getByLabel("Facility name", { exact: true }),
+  ).not.toBeVisible();
+  expect(writes).toHaveLength(1);
+  expect(unexpected).toEqual([]);
+});
+test("facilities manager preserves the unknown create fence across close and reopen", async ({
+  page,
+}) => {
+  const unexpected = await setup(page);
+  let writes = 0;
+  await page.route(`**/clients/${clientId}/facilities`, (route) => {
+    if (route.request().method() === "GET") return json(route, [facility]);
+    writes++;
+    return json(route, { message: "Synthetic ambiguous facility save" }, 503);
+  });
+  await page.goto(`/portfolio/${clientId}`);
+  await page.getByRole("button", { name: "Add facility", exact: true }).click();
+  const dialog = page.getByRole("dialog", {
+    name: "Facilities: Test Aerospace",
+    exact: true,
+  });
+  await dialog
+    .getByLabel("Facility name", { exact: true })
+    .fill("Uncertain new lab");
+  await dialog
+    .getByRole("button", { name: "Save facility", exact: true })
+    .click();
+  await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();
+  await expect(
+    dialog.getByRole("button", { name: "Save facility", exact: true }),
+  ).toBeDisabled();
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
+  await page.getByRole("button", { name: "Add facility", exact: true }).click();
+  await expect(
+    dialog.getByRole("button", { name: "Save facility", exact: true }),
+  ).toBeDisabled();
+  expect(writes).toBe(1);
+  expect(unexpected).toEqual([]);
+});

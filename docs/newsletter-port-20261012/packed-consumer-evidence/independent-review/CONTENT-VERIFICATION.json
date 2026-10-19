@@ -1,0 +1,115 @@
+{
+  "verifiedAt": "2026-10-12T23:22:37.987195+00:00",
+  "status": "PASS",
+  "sealedEvidenceFilesUnchanged": 256,
+  "sealedManifestSHA256": "871fdf273c65172b2f11e0b139d5e427cb52300abc526ffc94db4d016b11bf1a",
+  "artifactBytes": 510772,
+  "artifactSHA256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+  "artifactIntegrity": "sha512-CK2DLxUPCTs+PkBwx8GOjRLfh6jssTddIX2zgxiFw2hjVcHLF65oA8vJJ+LIR00r9XBnxFdYYoD2ZAkgY698Sw==",
+  "installedTarEntriesByteIdentical": 182,
+  "publicRuntimeDeclarationBindings": 10,
+  "producerFixtures": [
+    {
+      "name": "renderer-characterizations.cjs",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba"
+    },
+    {
+      "name": "original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "name": "consumer-positive.ts",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021"
+    },
+    {
+      "name": "consumer-negative.ts",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c"
+    }
+  ],
+  "goldenCaseCount": 116,
+  "browserSavedResultsEqualGolden": true,
+  "existingLockRecordsUnchanged": 930,
+  "addedLockRecords": {
+    "node_modules/@capiro/qualification-newsletter": {
+      "resolved": "packages/qualification-newsletter",
+      "link": true
+    },
+    "node_modules/@capiro/shared": {
+      "version": "0.0.0",
+      "resolved": "file:vendor/capiro-shared-0.0.0.tgz",
+      "integrity": "sha512-CK2DLxUPCTs+PkBwx8GOjRLfh6jssTddIX2zgxiFw2hjVcHLF65oA8vJJ+LIR00r9XBnxFdYYoD2ZAkgY698Sw=="
+    },
+    "packages/qualification-newsletter": {
+      "name": "@capiro/qualification-newsletter",
+      "version": "0.0.0",
+      "dependencies": {
+        "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0.tgz"
+      },
+      "devDependencies": {
+        "@playwright/test": "1.61.1",
+        "typescript": "5.9.3",
+        "vite": "8.3.4"
+      },
+      "engines": {
+        "node": ">=24 <25"
+      }
+    }
+  },
+  "otherLockFieldsUnchanged": true,
+  "browserGraph": [
+    {
+      "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-render.js",
+      "imports": [
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js",
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-social-share.js"
+      ]
+    },
+    {
+      "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/browser-entry.mjs",
+      "imports": [
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js",
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-render.js",
+        "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+        "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixed-clock.mjs"
+      ]
+    },
+    {
+      "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js",
+      "imports": [
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.js"
+      ]
+    },
+    {
+      "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+      "imports": [
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js"
+      ]
+    },
+    {
+      "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "imports": []
+    },
+    {
+      "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-social-share.js",
+      "imports": [
+        "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js"
+      ]
+    },
+    {
+      "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js",
+      "imports": []
+    },
+    {
+      "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixed-clock.mjs",
+      "imports": []
+    }
+  ],
+  "newApplicationFilesOrEdits": false,
+  "sourceSnapshotFiles": 24,
+  "reviewerExecuted": "Hash/content verification and CLI smoke only; no package consumer/browser/compiler/install rerun"
+}

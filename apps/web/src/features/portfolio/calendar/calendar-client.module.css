@@ -1,0 +1,395 @@
+/* The client calendar's Month/Week frames keep the calendar controls inside one card. */
+.clientPage {
+  max-width: none;
+}
+.clientHeader {
+  margin-bottom: 12px;
+}
+.clientBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 16px;
+  margin-bottom: 4px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.clientBreadcrumb a {
+  display: inline-flex;
+  align-items: center;
+}
+.clientBreadcrumb a:hover {
+  color: var(--foreground);
+}
+.clientHeader h1 {
+  margin: 0 0 2px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.55px;
+}
+.clientHeader p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.clientActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.clientCalendarCard {
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 2px 6px #0c0a090d;
+}
+.clientCalendarToolbar {
+  display: grid;
+  gap: 24px;
+  padding: 16px 20px 0;
+}
+.clientCalendarTop,
+.clientCalendarTopRight,
+.clientPeriodNavigation,
+.clientAgendaToolbar,
+.clientSourceRow {
+  display: flex;
+  align-items: center;
+}
+.clientCalendarTop,
+.clientSourceRow {
+  justify-content: space-between;
+}
+.clientCalendarTopRight {
+  gap: 16px;
+}
+.clientPeriodNavigation {
+  gap: 16px;
+  min-width: 0;
+}
+.clientPeriodButtons {
+  display: inline-flex;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.clientPeriodButtons button {
+  display: grid;
+  place-items: center;
+  min-width: 39px;
+  padding: 0 10px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: var(--card);
+  font-size: 12px;
+}
+.clientPeriodButtons button:last-child {
+  border-right: 0;
+}
+.clientPeriodButtons button:hover,
+.clientViewPicker button:hover {
+  background: var(--accent);
+}
+.clientPeriodLabel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.clientPeriodLabel input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.clientCalendarCount {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.clientCalendarCount select {
+  border: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  appearance: none;
+  cursor: pointer;
+}
+.clientViewPicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 10px;
+  background: var(--muted);
+}
+.clientViewPicker button {
+  min-width: 68px;
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 14px;
+  font-weight: 500;
+}
+.clientViewPicker button[aria-pressed="true"] {
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.clientSourceRow {
+  min-height: 40px;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+.clientSourceRow > span {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  text-align: right;
+}
+.clientMeetingToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: #edf2fa;
+  color: #2d4564;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.clientMeetingToggle[aria-pressed="false"] {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+.clientMeetingCheck {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #49688d;
+  border-radius: 4px;
+  background: #49688d;
+  color: white;
+  font-size: 12px;
+  line-height: 1;
+}
+.clientMeetingToggle[aria-pressed="false"] .clientMeetingCheck {
+  background: transparent;
+}
+.clientGrid {
+  height: 620px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+}
+.clientGrid[data-view="month"] {
+  display: flex;
+  flex-direction: column;
+}
+.clientMonthWeekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  flex: 0 0 36px;
+  align-items: center;
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
+.clientMonthWeekdays span {
+  padding-left: 12px;
+}
+.clientGrid[data-view="week"] {
+  position: relative;
+  height: 668px;
+  --sx-calendar-week-grid-padding-left: 63px;
+}
+.clientWeekZoneLabel {
+  position: absolute;
+  z-index: 10;
+  top: 30px;
+  left: 20px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+}
+.clientGrid :global(.sx__calendar) {
+  border: 0;
+  box-shadow: none;
+}
+.clientGrid[data-view="month"] :global(.sx-react-calendar-wrapper) {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+}
+.clientGrid[data-view="month"] :global(.sx__month-grid-day__header-day-name) {
+  display: none;
+}
+.clientGrid[data-view="month"] :global(.sx__month-grid-day__header) {
+  align-items: flex-start;
+  padding-left: 8px;
+}
+.clientGrid[data-view="month"] :global(.sx__month-grid-day) {
+  padding: 2px 0;
+}
+.clientGrid[data-view="month"] :global(.sx__month-grid-day__header-date) {
+  height: 20px;
+  margin-bottom: 0;
+}
+.clientGrid[data-view="month"] :global(.sx__month-grid-day__events) {
+  padding: 0 5px;
+}
+.clientGrid[data-view="month"] :global(.sx__month-grid-day:nth-child(n + 6)) {
+  background: var(--muted);
+}
+.clientGrid[data-view="week"] :global(.sx__week-grid__date-number) {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+}
+.clientGrid[data-view="week"] :global(.sx__week-grid__hour:first-child) {
+  visibility: visible;
+}
+.clientGrid[data-view="week"]
+  :global(.sx__week-grid__hour:first-child .sx__week-grid__hour-text) {
+  top: 8px;
+}
+.clientGrid[data-view="week"] :global(.sx__week-grid__time-axis) {
+  width: calc(100% - 63px);
+}
+.clientGrid[data-view="week"] :global(.sx__week-grid__hour-text) {
+  left: -31px;
+}
+.clientGrid[data-view="week"] :global(.sx__week-grid__date:nth-child(n + 6)),
+.clientGrid[data-view="week"] :global(.sx__time-grid-day:nth-child(n + 7)) {
+  background: var(--muted);
+}
+.clientGrid[data-view="week"] :global(.sx__week-grid__time-axis) {
+  z-index: 1;
+  pointer-events: none;
+}
+.clientGrid :global(.sx__month-grid-event),
+.clientGrid :global(.sx__time-grid-event) {
+  border-radius: 5px;
+  font-size: 12px;
+}
+.clientGrid :global(.sx__month-grid-event) {
+  min-height: 28px;
+}
+.clientGrid :global(.sx__month-grid-day__header-day-name),
+.clientGrid :global(.sx__week-grid__day-name) {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.clientAgendaToolbar {
+  justify-content: flex-start;
+  gap: 76px;
+  margin-bottom: 13px;
+}
+.clientAgendaToolbar .clientPeriodButtons {
+  border: 0;
+  box-shadow: none;
+}
+.clientAgendaToolbar .clientPeriodButtons button:first-child,
+.clientAgendaToolbar .clientPeriodButtons button:last-child {
+  display: none;
+}
+.clientAgendaToolbar .clientPeriodButtons button {
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.clientAgendaToolbar .clientPeriodLabel {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.clientAgendaToolbar .clientViewPicker {
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+}
+.clientAgendaToolbar .clientViewPicker button {
+  height: 36px;
+  min-width: 72px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.clientAgendaFilters {
+  margin-bottom: 16px;
+}
+.clientAgendaFilters > div {
+  gap: 8px;
+}
+.clientAgendaFilters button {
+  min-height: 36px;
+}
+.clientAgendaFilters button[aria-pressed="true"] {
+  border-color: var(--border);
+  background: var(--card);
+}
+.clientAgendaNote {
+  margin: 16px 0 0;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.clientPage table {
+  table-layout: fixed;
+}
+.clientPage table th,
+.clientPage table td {
+  height: 75px;
+}
+.clientPage table thead th {
+  height: 50px;
+}
+.clientPage table th:nth-child(1) {
+  width: 15%;
+}
+.clientPage table th:nth-child(2) {
+  width: 35%;
+}
+.clientPage table th:nth-child(3) {
+  width: 12.5%;
+}
+.clientPage table th:nth-child(4) {
+  width: 16%;
+}
+.clientPage table th:nth-child(5) {
+  width: 21.5%;
+}
+.clientPage table caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+.clientPage table tbody th {
+  color: var(--foreground);
+}
+.clientPage table tbody th button {
+  font-weight: 500;
+}
+.clientPage table tbody td:first-child {
+  font-size: 12px;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}

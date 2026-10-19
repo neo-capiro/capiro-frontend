@@ -1,0 +1,725 @@
+{
+  "createdAt": "2026-10-12T17:12:23.948691+00:00",
+  "source": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "appsWebTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+  "sourceTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "entryCount": 143,
+  "totalBytes": 13647409,
+  "entries": [
+    {
+      "path": "FINAL-SOURCE.json",
+      "bytes": 910,
+      "sha256": "8817c4e700303c666ccf03e1bac8bbad91df11530504d6590a563025a2694725"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 1077,
+      "sha256": "3ff664951599a68c54dee3268c638169689e9c3b936688445d51b108d33451d3"
+    },
+    {
+      "path": "LAYOUT-AND-FOCUS.json",
+      "bytes": 49122,
+      "sha256": "257d899139cc40661f24d366864e560b59b0b97f9502bb419b557837564ba114"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 534,
+      "sha256": "f31ada66ced4a84651c362b94e7a7de059e756e3a86e710d4ccac29914e08de5"
+    },
+    {
+      "path": "PREPARED-SOURCE.json",
+      "bytes": 1498,
+      "sha256": "2b374eb912b1e7eea0f7c7eeb4c6f70d28d53deef810633268019ac1022e1f0b"
+    },
+    {
+      "path": "PRIOR-EVIDENCE.json",
+      "bytes": 398,
+      "sha256": "a89b8f04d36ff279b339c2a46789599b5cf77f5acaec369d8954cdc5f0e833f5"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6450,
+      "sha256": "9727fc49e083d140b92bc70de46b36b2401d23f51b0b89ced01daadf85d0f455"
+    },
+    {
+      "path": "REVIEWED-SOURCE-HASHES.json",
+      "bytes": 17167,
+      "sha256": "cec4c0ba043322340b1017fc18049ca96075aa99795437aa589dfe438fac59f3"
+    },
+    {
+      "path": "RUN-START-SOURCE.json",
+      "bytes": 1619,
+      "sha256": "e745046f4238e22be36dbc259774d40333d6c69e31d68b2fb43af29634a3226a"
+    },
+    {
+      "path": "SCREENSHOT-INSPECTION.json",
+      "bytes": 2871,
+      "sha256": "8d10fb84d323022d0531dccb030e8dfe8732adfebb6e61921a04ed805d401494"
+    },
+    {
+      "path": "artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-pending-top.png",
+      "bytes": 46766,
+      "sha256": "6ed7283ce05db257e0ac21b603d10ad1330f3fdc789db231ae0bc856e2b61456"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-pending.aria.txt",
+      "bytes": 423,
+      "sha256": "af8b1d8523e8fc7c97263fea7e2b51713d39b0587fb4b0942b99e734a7aeec06"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-pending.focus.json",
+      "bytes": 1123,
+      "sha256": "f61f4e9e604f101c2d2148711f2e21d0e667f4c7b4976c964c34e468425c9e62"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-pending.geometry.json",
+      "bytes": 286,
+      "sha256": "b8c0061859daed0216dda39edae9b69f2c75d188248265ba66702d7ba7118558"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-unknown-top.png",
+      "bytes": 69402,
+      "sha256": "5ae23c849efaa87c98f2003f3f37fda5eede36beca1ada3b2df4ca9da1c719dc"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-unknown.aria.txt",
+      "bytes": 616,
+      "sha256": "8c135df05b72cb1e4b804c74b51befa362416b89cf15ace79665c397afe57d6a"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-unknown.focus.json",
+      "bytes": 1030,
+      "sha256": "624e1be1ef760d8e5929090ca1108733165ed59009ad66f4efa75c69271329be"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/debriefs-unknown.geometry.json",
+      "bytes": 286,
+      "sha256": "1629cede71102899f143222e80495bb37348f6b332ce494e74c8056641234d22"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-1440/trace.zip",
+      "bytes": 528131,
+      "sha256": "1ed0899d3c3418eb56864f1c9475b2c8cde47c8f180dfe24bc70569f53923545"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-pending-top.png",
+      "bytes": 31768,
+      "sha256": "a188ecb5fa91a89ce562383b05bd7c47ce563f48ff1fb0017976f5711b8bebee"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-pending.aria.txt",
+      "bytes": 423,
+      "sha256": "af8b1d8523e8fc7c97263fea7e2b51713d39b0587fb4b0942b99e734a7aeec06"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-pending.focus.json",
+      "bytes": 1123,
+      "sha256": "f61f4e9e604f101c2d2148711f2e21d0e667f4c7b4976c964c34e468425c9e62"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-pending.geometry.json",
+      "bytes": 275,
+      "sha256": "56004061e2c74750c083e3929907d1986abe6114ee8b6bd6834c82d820ee7b47"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-unknown-top.png",
+      "bytes": 39922,
+      "sha256": "3f5aac0f32d3635669c265bc87cea28537ffd4aebe6d3161c75fb9f232479152"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-unknown.aria.txt",
+      "bytes": 616,
+      "sha256": "8c135df05b72cb1e4b804c74b51befa362416b89cf15ace79665c397afe57d6a"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-unknown.focus.json",
+      "bytes": 1030,
+      "sha256": "624e1be1ef760d8e5929090ca1108733165ed59009ad66f4efa75c69271329be"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-unknown.geometry.json",
+      "bytes": 282,
+      "sha256": "6312bb7bbae151a36fd9ba9256e2eb18f69e3b5dba37d265748d8ccf5144017a"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/trace.zip",
+      "bytes": 557517,
+      "sha256": "83d26f19ba868d12a449375c28e80c23a01e6fa91c305d2b20ce96dddc27690b"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-pending-top.png",
+      "bytes": 46463,
+      "sha256": "245db5b6efa90f5cd358e007d04d15233b31c02da86c82033612db4f5e35d4de"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-pending.aria.txt",
+      "bytes": 411,
+      "sha256": "8c183d9991ffcb774d1c0b59ec788bb9f4331087e20dbbc3db05075a1c79b741"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-pending.focus.json",
+      "bytes": 1123,
+      "sha256": "a0d18fd3da9cf300838556bca30da954d7d48ef144dd91c9a19db16c381c11e2"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-pending.geometry.json",
+      "bytes": 286,
+      "sha256": "73b405033b146b1a6aa334f2e3358c9c4320480d4f70c164ba382f68a8dd9cfb"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-unknown-top.png",
+      "bytes": 69293,
+      "sha256": "5af7d9ef83d761046aa22ecf057f13d143fa0fd09e6429b99ce70fbeb5ec7f42"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-unknown.aria.txt",
+      "bytes": 604,
+      "sha256": "dc3f96c84b529f5e925f7c698c7c42aec4123d8c0305ddd8cf877cb467adb58a"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-unknown.focus.json",
+      "bytes": 1030,
+      "sha256": "624e1be1ef760d8e5929090ca1108733165ed59009ad66f4efa75c69271329be"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-unknown.geometry.json",
+      "bytes": 286,
+      "sha256": "21910cc23aa36f52f90034879eaa05c65f7650175fbb3cef0b08e66307a3efcf"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/trace.zip",
+      "bytes": 534474,
+      "sha256": "8f707c5bf74bcade5579cfb14884b8945a393b962dfd6b12d1a4f467584a3afe"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-pending-top.png",
+      "bytes": 31226,
+      "sha256": "a07f9d4ba0e661c132093af1bd7c9903d2d9f08aaca1bf7d2afb24c80694bd22"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-pending.aria.txt",
+      "bytes": 411,
+      "sha256": "8c183d9991ffcb774d1c0b59ec788bb9f4331087e20dbbc3db05075a1c79b741"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-pending.focus.json",
+      "bytes": 1123,
+      "sha256": "a0d18fd3da9cf300838556bca30da954d7d48ef144dd91c9a19db16c381c11e2"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-pending.geometry.json",
+      "bytes": 275,
+      "sha256": "46f2edaa29b8021d43be51bbe02b84ec853bdcdbd8421f5cf753d8465311aee1"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-unknown-top.png",
+      "bytes": 39412,
+      "sha256": "6f1416d62eaae24010002b4c37cd94e1f3618c5e1f5b16e5984231bdf8c7f6da"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-unknown.aria.txt",
+      "bytes": 604,
+      "sha256": "dc3f96c84b529f5e925f7c698c7c42aec4123d8c0305ddd8cf877cb467adb58a"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-unknown.focus.json",
+      "bytes": 1030,
+      "sha256": "624e1be1ef760d8e5929090ca1108733165ed59009ad66f4efa75c69271329be"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-unknown.geometry.json",
+      "bytes": 282,
+      "sha256": "10f69b4053001f259f27c0ef44094e32d1337479c4d85b9d73d17ac9a6879f63"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/trace.zip",
+      "bytes": 527461,
+      "sha256": "f1e6272c1a58e3fe0a539d1d7f168e5305e4dacdb2d0fc3900f614a9b35300da"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-pending-top.png",
+      "bytes": 118770,
+      "sha256": "ff3701f1592760cd95f531e497a92eb6251590af5c38f2dbab62abdb519567eb"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-pending.aria.txt",
+      "bytes": 788,
+      "sha256": "af014a4e4340761a69e2a472ce6a64e134609f21a20992f67af3fcbd14f8ad0a"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-pending.focus.json",
+      "bytes": 1006,
+      "sha256": "0461c6bd6363bd18b9d6e5f444030109acc2b29c8654cf6df132b2675404031b"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-pending.geometry.json",
+      "bytes": 284,
+      "sha256": "08faeefcea5649cdf5f042aeea89331ff74040ef747323cb79f4cf188cc7c51a"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-reviewed-top.png",
+      "bytes": 132360,
+      "sha256": "267fd777d7afdcd4b9ead42eb4a9d874c297793bc7e948bf5bbe4a662b5137a9"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-reviewed.aria.txt",
+      "bytes": 1033,
+      "sha256": "4aeeb71adc90d3200806bb623a4b954def6354503ef1740e3e64c37e57bf76b5"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-reviewed.focus.json",
+      "bytes": 1588,
+      "sha256": "8dd03b2570341c7c44a8efd32f3b9356300b8e1f9b825df5526f744c3ff86139"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-reviewed.geometry.json",
+      "bytes": 284,
+      "sha256": "ce5b83e56efc7f2abd5cb02062943620891d0efbdb251d83ee518fdbca36b7dc"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-unknown-top.png",
+      "bytes": 135783,
+      "sha256": "5291f59303e5bc3ac1649da497c743c63a9a9d234595bc63b6705ba310b2bd73"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-unknown.aria.txt",
+      "bytes": 1058,
+      "sha256": "103ec55f65b7a884f78ebba5de426877584a115963b767770ff5c9c8fc191b95"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-unknown.focus.json",
+      "bytes": 1090,
+      "sha256": "dcd49ab491044f17549743a09ec9230a7765a080cc639124215c12e759bed5c9"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-unknown.geometry.json",
+      "bytes": 286,
+      "sha256": "f7c057d822898df21ef15b740b28c1f44a8e42463729f296f43e073eb583b040"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip",
+      "bytes": 1413292,
+      "sha256": "f01c5d812d1214feedcb6d3ae150609a1fd1a0a31066fac27df0173813555cb3"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-pending-top.png",
+      "bytes": 47596,
+      "sha256": "8e8ac615e992780b3b064d192896655a5659269b32cc20fb339f4e9012dd39aa"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-pending.aria.txt",
+      "bytes": 788,
+      "sha256": "af014a4e4340761a69e2a472ce6a64e134609f21a20992f67af3fcbd14f8ad0a"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-pending.focus.json",
+      "bytes": 1006,
+      "sha256": "0461c6bd6363bd18b9d6e5f444030109acc2b29c8654cf6df132b2675404031b"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-pending.geometry.json",
+      "bytes": 281,
+      "sha256": "09ce001545732b43ef0a1b807cf338227d3785004338e4eced6ea969bdbbb27b"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-reviewed-top.png",
+      "bytes": 54847,
+      "sha256": "79270cef3cdff80a9d0dd593188a41dfae436f89108fdc41f67fd4e4fcafef5c"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-reviewed.aria.txt",
+      "bytes": 1033,
+      "sha256": "4aeeb71adc90d3200806bb623a4b954def6354503ef1740e3e64c37e57bf76b5"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-reviewed.focus.json",
+      "bytes": 1862,
+      "sha256": "3e013ee769b10f61020bea92b250de6a1e4ed9e943d634de82be27f1947f0c09"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-reviewed.geometry.json",
+      "bytes": 282,
+      "sha256": "7e7441c21eba90d8580a653b70181cc1bdb80c836e21b72145b95d18c061064d"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-unknown-bottom.png",
+      "bytes": 53957,
+      "sha256": "239c9e5d6ae41c9f878c0fd35fb09518a3bb052d54a82651a8db663c85add5f2"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-unknown-top.png",
+      "bytes": 54354,
+      "sha256": "a7437c97687993b55b8a4c7aade458c8270b9e312011e3ec19879ebd95892a46"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-unknown.aria.txt",
+      "bytes": 1058,
+      "sha256": "103ec55f65b7a884f78ebba5de426877584a115963b767770ff5c9c8fc191b95"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-unknown.focus.json",
+      "bytes": 1090,
+      "sha256": "dcd49ab491044f17549743a09ec9230a7765a080cc639124215c12e759bed5c9"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-unknown.geometry.json",
+      "bytes": 267,
+      "sha256": "d385ced0c124df0606710a52693aae15075066e45787c9e6aeb510eb5645bb0d"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/trace.zip",
+      "bytes": 1211952,
+      "sha256": "bc9e961d6541319fd99bba786a962e655afc762e80d7a678225027b6bf77c90e"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-reviewed-top.png",
+      "bytes": 119408,
+      "sha256": "35c1f956071a3fc907259d342073e0e32cde935e3f7ccc226fdc612b9db549c4"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-reviewed.aria.txt",
+      "bytes": 581,
+      "sha256": "93c792146ce789eeb552a5f07978007106cf4ca6279e8790b571b6e4c07f9b42"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-reviewed.focus.json",
+      "bytes": 1268,
+      "sha256": "6cbb6fb64bb00041baf6a08220a51a9f23b616fc3bd159fb3c4bd1b745693e09"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-reviewed.geometry.json",
+      "bytes": 284,
+      "sha256": "26bd01019a993452c75f292475902ce3c8bbb8fb3f89aac5cf0e1ffd5ad55778"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-unknown-top.png",
+      "bytes": 125074,
+      "sha256": "824512c2975560ebdba79ae82414b505f5c4898531b3241160bf45eb03e38621"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-unknown.aria.txt",
+      "bytes": 681,
+      "sha256": "0484c6c1cc6c3ecbe5a1c27a63cd27b1e8350c6cf09d5cf8d27acd004412d84c"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-unknown.focus.json",
+      "bytes": 1168,
+      "sha256": "862d85e2a9275d53ae823fb11546fc20c91dbf22abb05c18d4f240f18b052a60"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/files-folder-unknown.geometry.json",
+      "bytes": 284,
+      "sha256": "670d30970dbf3ab566bafa78db008640a75b0d11bcc193602c7b1347823ddaf4"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-1440/trace.zip",
+      "bytes": 1066707,
+      "sha256": "2acd51570848bd8da0813a50bcd5f74f2a3c95ee7fe541ea7e9275a09b2fa1c0"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-reviewed-top.png",
+      "bytes": 51625,
+      "sha256": "1feb2bb01b85b2ccf1c95bdafa9af9bae986ed047cd401acad61755b6eb1bafd"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-reviewed.aria.txt",
+      "bytes": 581,
+      "sha256": "93c792146ce789eeb552a5f07978007106cf4ca6279e8790b571b6e4c07f9b42"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-reviewed.focus.json",
+      "bytes": 1268,
+      "sha256": "6cbb6fb64bb00041baf6a08220a51a9f23b616fc3bd159fb3c4bd1b745693e09"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-reviewed.geometry.json",
+      "bytes": 279,
+      "sha256": "919bd8b2d2b328d534a02943b2b21af044f62f458e48b065e5980dc35cff3de8"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-unknown-top.png",
+      "bytes": 49482,
+      "sha256": "41d8d9eaff0b4b07ac95c3e36fe90dc3a67d0d6289b11a444f9b71ce20c82b3e"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-unknown.aria.txt",
+      "bytes": 681,
+      "sha256": "0484c6c1cc6c3ecbe5a1c27a63cd27b1e8350c6cf09d5cf8d27acd004412d84c"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-unknown.focus.json",
+      "bytes": 1168,
+      "sha256": "862d85e2a9275d53ae823fb11546fc20c91dbf22abb05c18d4f240f18b052a60"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-unknown.geometry.json",
+      "bytes": 281,
+      "sha256": "22fc776baa450ac65ff137c0e61554cea05955de7af20d64873f966ac35121cf"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/trace.zip",
+      "bytes": 931034,
+      "sha256": "0033f9bc0c50bb325258a1240ec09a9d24f7f88f6e9c078bae1863928c9d2363"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-pending-top.png",
+      "bytes": 41312,
+      "sha256": "85128f9b5aff919d68445cb63c2553a18ecc6c9d73e92122c0680f83046c5d22"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-pending.aria.txt",
+      "bytes": 513,
+      "sha256": "8a712211121f9bf6c5b87e7b95f016b1fc73ecd707b2b53c897b0eeb1b62ae02"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-pending.focus.json",
+      "bytes": 1578,
+      "sha256": "46a370221d506204a95b448f787826ddd1d3770cfce07aa970db9ceba4f93e89"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-pending.geometry.json",
+      "bytes": 286,
+      "sha256": "2c17950ba281c545720356a818c86ccff6d7899525db21ceb7e14146e09a68d0"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-unknown-top.png",
+      "bytes": 56294,
+      "sha256": "877b2688b58da976f9bd9da9fa93ce4c0e0806ea3d938b96f4aa5f82b36a9a8c"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-unknown.aria.txt",
+      "bytes": 687,
+      "sha256": "ab4685d1beb56bb1cd966650c97c9fa569d12ffe68bd87c948ef5c0e6eba9e61"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-unknown.focus.json",
+      "bytes": 1462,
+      "sha256": "e3191b3379b4a671a243317a9a0d0471d4ff9b912e35d051f4ddbfb4c7527b6f"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-unknown.geometry.json",
+      "bytes": 286,
+      "sha256": "a42c32d5810bb76ae5a29cd49ebeef8a43458e23fa411f0b7c68ed5b1533d799"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/trace.zip",
+      "bytes": 533859,
+      "sha256": "45634324f9b78d6c79c99e3ddb416659ff2d1be1947d6b30b5da7eebf74884d3"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-pending-top.png",
+      "bytes": 34478,
+      "sha256": "c3726db94be57e3ceb41e26963a6b4503e7f3704c0a5fbd9a1d95cebc3dedeae"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-pending.aria.txt",
+      "bytes": 513,
+      "sha256": "8a712211121f9bf6c5b87e7b95f016b1fc73ecd707b2b53c897b0eeb1b62ae02"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-pending.focus.json",
+      "bytes": 1578,
+      "sha256": "46a370221d506204a95b448f787826ddd1d3770cfce07aa970db9ceba4f93e89"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-pending.geometry.json",
+      "bytes": 278,
+      "sha256": "cbbfa3794b9680ccd2ac9bb74e30fc5730596c311a1f65625950a030ec72a5aa"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown-bottom.png",
+      "bytes": 38990,
+      "sha256": "44569d1d7649f61a6d3d2c4b16db9944ccc92d88e8f9947903ea84eb5d324476"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown-top.png",
+      "bytes": 41120,
+      "sha256": "a0716a120ec7ea00b39ddc2a5c25d72df20f53f7791d7470e9bda3881f72fa9c"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown.aria.txt",
+      "bytes": 687,
+      "sha256": "ab4685d1beb56bb1cd966650c97c9fa569d12ffe68bd87c948ef5c0e6eba9e61"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown.focus.json",
+      "bytes": 1462,
+      "sha256": "e3191b3379b4a671a243317a9a0d0471d4ff9b912e35d051f4ddbfb4c7527b6f"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown.geometry.json",
+      "bytes": 267,
+      "sha256": "9015afcf11b66a0e3312834be8864ea48c77b70533abf4b708747ae0759ebc2e"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/trace.zip",
+      "bytes": 630595,
+      "sha256": "b1938820f7c14049789c6a54b0827b20b93c30dc6be068688915b35441def097"
+    },
+    {
+      "path": "figma-reference/figma-411-53327.json",
+      "bytes": 252416,
+      "sha256": "490467bd2ebaca4138d118bbe7691a186253f3778a8170d2fbb20eb2d830f426"
+    },
+    {
+      "path": "figma-reference/figma-411-53327.png",
+      "bytes": 114978,
+      "sha256": "503f6a6cc0b19021c8859240ba4ade6c6115d04de2e8bdf55bb815f93abaff6d"
+    },
+    {
+      "path": "figma-reference/figma-411-53579.json",
+      "bytes": 266591,
+      "sha256": "73e7183f8af1b79065d3c349bcfc66b1d88e35aebd358b5045727c34c625715c"
+    },
+    {
+      "path": "figma-reference/figma-411-53579.png",
+      "bytes": 120928,
+      "sha256": "41d63f14e61824f7c6a404a7a20cc5ec02d125974a804c810397aea0dd0149a9"
+    },
+    {
+      "path": "figma-reference/figma-411-54355.json",
+      "bytes": 265242,
+      "sha256": "c47e5f45f8db57fe85c68e74faab9dd08a53f064da647e81e2643971e70f7e97"
+    },
+    {
+      "path": "figma-reference/figma-411-54355.png",
+      "bytes": 121561,
+      "sha256": "277b5b187ed7f8719410f09be80f3f6978e7cbd294b6c4faf52ecf2c124d2cb4"
+    },
+    {
+      "path": "figma-reference/figma-680-142683.json",
+      "bytes": 61226,
+      "sha256": "1ce9324c03c8d7ec1fa1c756d910a7f7270ed05f2104d3151d963ac463cc68d2"
+    },
+    {
+      "path": "figma-reference/figma-680-142683.png",
+      "bytes": 35095,
+      "sha256": "09694bdb729449754617bf399c188f021fb1ad6bbec25794580498c86282e9ac"
+    },
+    {
+      "path": "focus-field-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "focus-field-artifacts/dialog-disabled-focus-disa-4e89d-nown-dialog-focus-at-1440px/trace.zip",
+      "bytes": 663181,
+      "sha256": "7944ec94af2dfdc41959fcb65ed55a3ab7cc0bd361531e7ad152ad170d789125"
+    },
+    {
+      "path": "focus-field-artifacts/dialog-disabled-focus-disa-539d0-known-dialog-focus-at-360px/trace.zip",
+      "bytes": 492890,
+      "sha256": "218f3b8fba772fc433b40088d8cb7a69cfd45812ddf41a71ec493279b23610c0"
+    },
+    {
+      "path": "focus-field-artifacts/dialog-disabled-focus-disa-7b941-known-dialog-focus-at-360px/trace.zip",
+      "bytes": 500705,
+      "sha256": "9389b6eee80092b117800958101d6417583db8fb5510b7101ad5d4c15a0eff05"
+    },
+    {
+      "path": "focus-field-artifacts/dialog-disabled-focus-disa-cdb72-nown-dialog-focus-at-1440px/trace.zip",
+      "bytes": 615563,
+      "sha256": "59483fc22707ae3d12fc960eeaa141833c276431719170c5bd019973e43307f3"
+    },
+    {
+      "path": "focus-field-results.json",
+      "bytes": 7554,
+      "sha256": "ec0c11ae1c89650c88ac6dff9cd0a2b050257ab2830ba46fa8cd7dcbb7f9a9e3"
+    },
+    {
+      "path": "focus-field-run.log",
+      "bytes": 786,
+      "sha256": "e835026eeb440ad97e57910ef321203d900353dd6631b627ba4b17c1ba22afb4"
+    },
+    {
+      "path": "focus-fields.config.ts",
+      "bytes": 448,
+      "sha256": "98b020c59e470fe89c05e15be6fc2cdd8639098f49158ba3118976a65b96d4d8"
+    },
+    {
+      "path": "focus-regression-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/trace.zip",
+      "bytes": 473426,
+      "sha256": "efc3ddd6998ac560ba6c25af41cd5ac9273db44057f4f20755b0bf97bb2378f4"
+    },
+    {
+      "path": "focus-regression-results.json",
+      "bytes": 3676,
+      "sha256": "1e1252c0a394fd8ce68e26cfcc936db1cc6ea4442d78c52cba363f95d85ac5de"
+    },
+    {
+      "path": "focus-regression.spec.ts",
+      "bytes": 2009,
+      "sha256": "411838b98b535d56fc7744df7e450b65ee53e8745bd1a006d73544a29a3769ff"
+    },
+    {
+      "path": "focus-run.log",
+      "bytes": 365,
+      "sha256": "538eaaa152560bfc0904651ba5b0b9f1256c050f995be4b95323cf9b20acb814"
+    },
+    {
+      "path": "focus.config.ts",
+      "bytes": 389,
+      "sha256": "cb10035fcc161410b167533de2048f536b2cfc9825d0c33a978ae6e6ac7d1a31"
+    },
+    {
+      "path": "playwright.config.ts",
+      "bytes": 556,
+      "sha256": "484417c12d47288eabc5adfee7963e622e5792b55b410d9488cbd9fd7d32f7ea"
+    },
+    {
+      "path": "results.json",
+      "bytes": 15015,
+      "sha256": "e61ea46e55686fa7c9b7886cd532dc8a6cbaa04c222732ad8c52eeee06fb5719"
+    },
+    {
+      "path": "review.spec.ts",
+      "bytes": 9244,
+      "sha256": "cfba23c20d9b4da984e74c8badcd965600bf0d384d1005fa01f7a43fbf60bfb6"
+    },
+    {
+      "path": "source-reviewed/Dialog.tsx",
+      "bytes": 3688,
+      "sha256": "97f46e6cfdb61055c53966d27e6bdd7b24fca30b5e3f1287ebdba002874a940b"
+    },
+    {
+      "path": "source-reviewed/MeetingArtifacts.tsx",
+      "bytes": 9615,
+      "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809"
+    },
+    {
+      "path": "source-reviewed/MeetingForm.tsx",
+      "bytes": 6431,
+      "sha256": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc"
+    },
+    {
+      "path": "source-reviewed/contracts.ts",
+      "bytes": 3356,
+      "sha256": "8d272d709972ecac8e2134ad24099f6321e316f565bb28e7b7eb5b8c8a71adf3"
+    },
+    {
+      "path": "source-reviewed/dialog-disabled-focus.spec.ts",
+      "bytes": 2467,
+      "sha256": "392b460ccc2c70f18f577897cfa31e9b575fa2f5b4c758901931880b1f728355"
+    },
+    {
+      "path": "source-reviewed/dialog-focus.ts",
+      "bytes": 1924,
+      "sha256": "0dda1e8377cc7d8be416d5d991240cd6c16229f43e4cb5dc41c80f3163a6a5af"
+    },
+    {
+      "path": "visual-run.log",
+      "bytes": 1396,
+      "sha256": "7ef5d2725724cecd95b85f99c43ca1b72801650d2f6bdb175cafe7248527f276"
+    }
+  ]
+}

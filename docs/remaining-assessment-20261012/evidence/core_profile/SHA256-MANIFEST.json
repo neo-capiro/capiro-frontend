@@ -1,0 +1,564 @@
+{
+  "files": [
+    {
+      "path": "assessment.spec.ts",
+      "bytes": 5859,
+      "sha256": "0892c8c96d44f2b7df9c6978c906cba77382b604909546fbb1f6566a5a971dc6"
+    },
+    {
+      "path": "assigned-rows.json",
+      "bytes": 152831,
+      "sha256": "9b671474877eae1f4b51a11e7072d930223fd5c6e7e928e2ab2425a1f0ac8900"
+    },
+    {
+      "path": "browser-output/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "browser-output/assessment-DEFECT-ambiguou-2ab48-its-immediate-repeat-delete/trace.zip",
+      "bytes": 565744,
+      "sha256": "f5dab1f543fa861e1b75e75ad6c036ec232d50a200f07e53f23e869b3e3f6d15"
+    },
+    {
+      "path": "browser-output/assessment-DEFECT-same-id--16d71-pt-dismisses-requested-move/trace.zip",
+      "bytes": 542930,
+      "sha256": "64b24cb17ce6246258522c5d2c1c8f079c28c1c11f54f5bbeb4152e518b0bd65"
+    },
+    {
+      "path": "browser-output/assessment-DEFECT-same-id--5e63f-isses-requested-restriction/trace.zip",
+      "bytes": 570903,
+      "sha256": "9699737ea1b909b494dc61b8f360b0515b0dff86020c879330a600709d25c4d9"
+    },
+    {
+      "path": "browser-output/assessment-capture-Files-and-upload-dialog/trace.zip",
+      "bytes": 447469,
+      "sha256": "f79345d7080ae63dded60133a23c4e26180ace428d602d60f75da681f971c176"
+    },
+    {
+      "path": "browser-output/assessment-capture-enrichment-saved-review/trace.zip",
+      "bytes": 790937,
+      "sha256": "448798acbdbb22f79451a7584c161573c80cef21bda856e6844213555e20bd72"
+    },
+    {
+      "path": "browser-output/assessment-capture-overview-and-independent-facility-form/trace.zip",
+      "bytes": 796033,
+      "sha256": "ab94d59b65cfb6bb6621ab651edeb7f467fd931ccc0aa5138e2ef1db17a24898"
+    },
+    {
+      "path": "browser-results.json",
+      "bytes": 10270,
+      "sha256": "01236b92f0837d966e2c9f26956d49353b14b64861495201020cc456e8d03044"
+    },
+    {
+      "path": "build-row-assessment.py",
+      "bytes": 30852,
+      "sha256": "85d29444b672073f733197f5b0db483d63b908fd7c06dfaaf625f819df486ecd"
+    },
+    {
+      "path": "defect-repeat-delete.png",
+      "bytes": 100183,
+      "sha256": "ce29b0a7732f8d11ee2bce13ca36c768bb122dd9c1f5d1a3a19b822015f43e68"
+    },
+    {
+      "path": "defect-wrong-access-receipt.png",
+      "bytes": 92570,
+      "sha256": "a092b0aba68434ab730bbe5e06ddb77a1d08bf839d341fca21b1bfa2c94f42fd"
+    },
+    {
+      "path": "defect-wrong-folder-receipt.png",
+      "bytes": 91941,
+      "sha256": "19ff8b1252352bc56a40e0c43cd5975b405e736efdbd7eac8b2d2589e50b1c61"
+    },
+    {
+      "path": "figma-411-42657.json",
+      "bytes": 321883,
+      "sha256": "f5c5158384b8fb3d7ec06cb1b738f2a21a658e53ae748ac1a39da77d838cfcb7"
+    },
+    {
+      "path": "figma-411-42657.png",
+      "bytes": 151539,
+      "sha256": "9bde316f08d3f1047ba6d67da56c5b99a526d8474bfb09680d6c99b139406bac"
+    },
+    {
+      "path": "figma-411-47010.json",
+      "bytes": 66427,
+      "sha256": "a51bbd1bc4a868cdac0851a469cff5e6d17f48f08b9ddd85add8bd1b3bfdb1c7"
+    },
+    {
+      "path": "figma-411-47010.png",
+      "bytes": 286823,
+      "sha256": "afe6c5f560991d8be220e9eb4fb5bd1c59cfaf76558de881f69f272a2a73cab3"
+    },
+    {
+      "path": "figma-411-47066.json",
+      "bytes": 125839,
+      "sha256": "77eceb62556b2996f3018985630a4e550d8cf51bfeb44762bf78256b70e6bac4"
+    },
+    {
+      "path": "figma-411-47066.png",
+      "bytes": 76586,
+      "sha256": "06d14cb75a11da44f8baef6e300db219f9a3ee46ba4a5e67b0292226cf208673"
+    },
+    {
+      "path": "figma-411-47229.json",
+      "bytes": 79552,
+      "sha256": "099969aa9d4c680292078a3fe19b4fa2946c025a5c9a77dfba32f19ec28a9e98"
+    },
+    {
+      "path": "figma-411-47229.png",
+      "bytes": 38720,
+      "sha256": "1f9a31f27e49831ef12d75f5ca27aa245b082a3532b30d0877226013c23e6b03"
+    },
+    {
+      "path": "figma-411-47482.json",
+      "bytes": 115223,
+      "sha256": "1d113814f67eed9fb5f421c924c791692e875022f5ab6796ce0ae73da86c8de4"
+    },
+    {
+      "path": "figma-411-47482.png",
+      "bytes": 67361,
+      "sha256": "cff8330d7b3d079903a374dfd68d922ad2bd2ec6ec829b70da5401f41720d694"
+    },
+    {
+      "path": "figma-411-47563.json",
+      "bytes": 90052,
+      "sha256": "44a4fcd34f23dd4529901dc37742c792536d9882d56a91082393fc743a6030b0"
+    },
+    {
+      "path": "figma-411-47563.png",
+      "bytes": 54435,
+      "sha256": "fff52c18aed81043672dfbed63541bdae5973305c9fb15206257779fb1e46149"
+    },
+    {
+      "path": "figma-411-47620.json",
+      "bytes": 111457,
+      "sha256": "866df10386f4f59da43af6c3c065f338fada11c9037d370bf5e19cfe6c8f82ed"
+    },
+    {
+      "path": "figma-411-47620.png",
+      "bytes": 67061,
+      "sha256": "3c8a424b7ad0909ecb8ff6b85e017fbc3732189b977162ef8de7b444d3377dc6"
+    },
+    {
+      "path": "figma-411-47694.json",
+      "bytes": 91492,
+      "sha256": "3aeb6a72d2eb9c0c6ddd102e7d946140351b60bf6a5e50ba6415fef9650a2e49"
+    },
+    {
+      "path": "figma-411-47694.png",
+      "bytes": 56662,
+      "sha256": "ad4ae2edb2bd7e8443d9d4ff7c8133e0216e41f8a87655238da3c5bc75184085"
+    },
+    {
+      "path": "figma-411-48361.json",
+      "bytes": 54177,
+      "sha256": "911cd064adccb4382ef32b31d147ff49747137102b178560b1968a62b25c2e23"
+    },
+    {
+      "path": "figma-411-48361.png",
+      "bytes": 211385,
+      "sha256": "620c3842d8cbd63eb310f6a608786236ca8660477f4392c5b019ede9b596fb67"
+    },
+    {
+      "path": "figma-411-48691.json",
+      "bytes": 152618,
+      "sha256": "c739c6859887913b895ac0df9a791c021efbcee857c35328f2f1fc3b54db0efa"
+    },
+    {
+      "path": "figma-411-48691.png",
+      "bytes": 92897,
+      "sha256": "e49f31e8664d39b2f9a03c591dfa7590f0de69d97a4a2f9d68a4bb8cc408f06f"
+    },
+    {
+      "path": "figma-411-48800.json",
+      "bytes": 66161,
+      "sha256": "a2353cf15516291b057e13d8d08102b7dd748d952f797e6cdec58c19df4a934a"
+    },
+    {
+      "path": "figma-411-48800.png",
+      "bytes": 282515,
+      "sha256": "a1131960226226e4ecd7886be61e529aa4adbd9f988cd9e6ba867ea61b215bcf"
+    },
+    {
+      "path": "figma-411-48826.json",
+      "bytes": 57277,
+      "sha256": "0e482841cc004897ba7dd34e67d05dfe067e6d118ee89dfe209e535fa40ca57a"
+    },
+    {
+      "path": "figma-411-48826.png",
+      "bytes": 4538,
+      "sha256": "6cd4db2539c7cbbd152d728e3520725fb387e209c467c6335b63bee3f041dc0e"
+    },
+    {
+      "path": "figma-411-49051.json",
+      "bytes": 69371,
+      "sha256": "df02290aefcc1275d933deaa3f2664308843987760dff1d7a412d1bc38085f46"
+    },
+    {
+      "path": "figma-411-49051.png",
+      "bytes": 286641,
+      "sha256": "0a93bbddced2afb23bfb680052143061847fd5eeadf060eb26b458eac5aefc95"
+    },
+    {
+      "path": "figma-411-49157.json",
+      "bytes": 7088,
+      "sha256": "50d3206dc0df5ec9d1b8f2416672d8762167f897f7ba18159e55935f8b7de2ef"
+    },
+    {
+      "path": "figma-411-49157.png",
+      "bytes": 117,
+      "sha256": "e6e88d37182b112dd0ac819d23c3ce3a293cd626204988b0031336b897abcbff"
+    },
+    {
+      "path": "figma-411-49451.json",
+      "bytes": 389826,
+      "sha256": "8daacd7fcd5890a66bef21c292b530e2f256420bde649633bc50ae83e9477ea6"
+    },
+    {
+      "path": "figma-411-49451.png",
+      "bytes": 188903,
+      "sha256": "02a1a8e9d28b4671a5408755559c575d30fe61cb909c3d7ba9832988847f2bcf"
+    },
+    {
+      "path": "figma-411-49508.json",
+      "bytes": 389621,
+      "sha256": "2b8d0e892b3be04ba57f654a023bd9b74445a26cd95366e5635cdede13aa61d2"
+    },
+    {
+      "path": "figma-411-49508.png",
+      "bytes": 188764,
+      "sha256": "0874208f0b519e944884bffddc0b5e8b2c6fbc82e2987c88ae2d0490fdf3afc4"
+    },
+    {
+      "path": "figma-411-49817.json",
+      "bytes": 71899,
+      "sha256": "5f969e6a717dbfe0f838e6a5d5556e777fc7533f30ec42a3b0f7699b45f02fbf"
+    },
+    {
+      "path": "figma-411-49817.png",
+      "bytes": 280186,
+      "sha256": "7200cde12da053b6643730b2cab16430b33dc7062fce485a673a85f876bfde64"
+    },
+    {
+      "path": "figma-411-50061.json",
+      "bytes": 117250,
+      "sha256": "63f87f717188644813c2bee14646f73d78d914ee204ec83d527052f36a707954"
+    },
+    {
+      "path": "figma-411-50061.png",
+      "bytes": 78876,
+      "sha256": "ee11df9d7a512bf88159829ce234a7a83f4d83c7096db16fd160b99f30b666ec"
+    },
+    {
+      "path": "figma-411-50097.json",
+      "bytes": 69683,
+      "sha256": "c907381b899b637d234026ea163cd7e511f48f8ec696e7bb0eae126700a53109"
+    },
+    {
+      "path": "figma-411-50097.png",
+      "bytes": 295619,
+      "sha256": "835c31d7655332b470924cb24de764e730efeb37f1f59d2538167935e151836c"
+    },
+    {
+      "path": "figma-411-50341.json",
+      "bytes": 80021,
+      "sha256": "c3ea3f8e60b7daf37008ab5a7ae5e9f603817a2d57251592df00b9ac0ed00ba0"
+    },
+    {
+      "path": "figma-411-50341.png",
+      "bytes": 55019,
+      "sha256": "1fd1125872f329bd4e6c694ede1d781a70c6488f1f159ab1dd8e35efa9905b27"
+    },
+    {
+      "path": "figma-411-52484.json",
+      "bytes": 224371,
+      "sha256": "d54c2cab963a5da308064f844a8966c05a26455f68a0a64e7a22911b5dd97445"
+    },
+    {
+      "path": "figma-411-52484.png",
+      "bytes": 98950,
+      "sha256": "1ae2ec18cda41820d06b20debf41adacb51003c799e051b431215026fbb089da"
+    },
+    {
+      "path": "figma-411-52718.json",
+      "bytes": 230695,
+      "sha256": "f5d34a92a73b04bcabde11ef7debf97faf658a385eeb7ad4a211141646cbf63b"
+    },
+    {
+      "path": "figma-411-52718.png",
+      "bytes": 101369,
+      "sha256": "cbfee5178ee4cf76cb15678e56f1a7694a0c1deb9f533d5fc9e7d12eb660ad37"
+    },
+    {
+      "path": "figma-411-52964.json",
+      "bytes": 158265,
+      "sha256": "a711b7ee8b568a25223efcda37b8e40fbed12e6f89bec77059cf61da730691a9"
+    },
+    {
+      "path": "figma-411-52964.png",
+      "bytes": 70636,
+      "sha256": "c607784dd50d6878b552a21036c2f69d844f243783c08a8c8a8169ba79746eb4"
+    },
+    {
+      "path": "figma-411-53189.json",
+      "bytes": 153253,
+      "sha256": "c5bdada060f706cdf87e9f864bfbf76f7dda60ef64fe8865d622764bf23bbf66"
+    },
+    {
+      "path": "figma-411-53189.png",
+      "bytes": 65411,
+      "sha256": "291b5a6eeddf2a68a602388ccc5c27ca805f2c93e687e281be20a243a82778d8"
+    },
+    {
+      "path": "figma-411-53327.json",
+      "bytes": 252416,
+      "sha256": "490467bd2ebaca4138d118bbe7691a186253f3778a8170d2fbb20eb2d830f426"
+    },
+    {
+      "path": "figma-411-53327.png",
+      "bytes": 114978,
+      "sha256": "503f6a6cc0b19021c8859240ba4ade6c6115d04de2e8bdf55bb815f93abaff6d"
+    },
+    {
+      "path": "figma-411-53579.json",
+      "bytes": 266591,
+      "sha256": "73e7183f8af1b79065d3c349bcfc66b1d88e35aebd358b5045727c34c625715c"
+    },
+    {
+      "path": "figma-411-53579.png",
+      "bytes": 120928,
+      "sha256": "41d63f14e61824f7c6a404a7a20cc5ec02d125974a804c810397aea0dd0149a9"
+    },
+    {
+      "path": "figma-411-53857.json",
+      "bytes": 252652,
+      "sha256": "4a5a1029346035763295a3f9bb017abf811158b18a41e18a0d88f1a7e713ffe6"
+    },
+    {
+      "path": "figma-411-53857.png",
+      "bytes": 115742,
+      "sha256": "8659fdf162b6d67cccf191a2df25a18e0a3762d95569333091b1ca1391b431a6"
+    },
+    {
+      "path": "figma-411-54106.json",
+      "bytes": 241429,
+      "sha256": "e29a5aa90df2951415d0a7354853b6fa69c60aa0e48961acbd2d44dd17775d80"
+    },
+    {
+      "path": "figma-411-54106.png",
+      "bytes": 107321,
+      "sha256": "41a0edc35d9ab69d6273a57e39383af03740a8624ba1afd5c2ae3c741892331c"
+    },
+    {
+      "path": "figma-411-54355.json",
+      "bytes": 265242,
+      "sha256": "c47e5f45f8db57fe85c68e74faab9dd08a53f064da647e81e2643971e70f7e97"
+    },
+    {
+      "path": "figma-411-54355.png",
+      "bytes": 121561,
+      "sha256": "277b5b187ed7f8719410f09be80f3f6978e7cbd294b6c4faf52ecf2c124d2cb4"
+    },
+    {
+      "path": "figma-411-58068.json",
+      "bytes": 77705,
+      "sha256": "11e5712f06ee7f6fc058e3d347692d6f3ac482d1cb20673b7942f3278e2ef575"
+    },
+    {
+      "path": "figma-411-58068.png",
+      "bytes": 274434,
+      "sha256": "8831e591788efa8fca7004c34437887ce2c321f5d1260886bb23240341c320df"
+    },
+    {
+      "path": "figma-411-58269.json",
+      "bytes": 202486,
+      "sha256": "69d265a9a227d6cd5e6f10b449cff3eadc313b66aceaca76ff5c3471c7f92d65"
+    },
+    {
+      "path": "figma-411-58269.png",
+      "bytes": 133919,
+      "sha256": "1e26eb4ed2e69015c36e738e4b7f17cbd0695665fb5395b3a8881a8e7846fa4e"
+    },
+    {
+      "path": "figma-411-58348.json",
+      "bytes": 70311,
+      "sha256": "313eb573341e22934395479b350a6d934ec000a9e1b813ab6279cfa033bcba7f"
+    },
+    {
+      "path": "figma-411-58348.png",
+      "bytes": 302099,
+      "sha256": "7f5e69385d725254d7462ea071d98058cabb3fb952ee1926d1520df498ebfae9"
+    },
+    {
+      "path": "figma-411-58549.json",
+      "bytes": 73739,
+      "sha256": "05e5786dc126f4bab7254a87c163feb2d3400108874ee6ba9696e6edb985b634"
+    },
+    {
+      "path": "figma-411-58549.png",
+      "bytes": 50594,
+      "sha256": "47140c640948ffdf3a3351c823c4dc6dc1d886eee1fec90fa9db0ba75d6a8384"
+    },
+    {
+      "path": "figma-411-58563.json",
+      "bytes": 69966,
+      "sha256": "fc48ff8db7427686a0ee98879088aaea94cdc9956a582c55756813888d92ae2a"
+    },
+    {
+      "path": "figma-411-58563.png",
+      "bytes": 288726,
+      "sha256": "1baa2787b79aa5d26be00acbfbf3107dd7916e85e7f5c716115799d356dbc33d"
+    },
+    {
+      "path": "figma-411-58764.json",
+      "bytes": 52422,
+      "sha256": "32e3155db8c99ac5369db893096efe14544a6488b143519a04ebeaea60e76422"
+    },
+    {
+      "path": "figma-411-58764.png",
+      "bytes": 35104,
+      "sha256": "d014635baeebd29be306db511674b8d613f1e20358299bf62c8246ea3266f7d7"
+    },
+    {
+      "path": "figma-411-60193.json",
+      "bytes": 46734,
+      "sha256": "a717411d6ba0663a200de1353605830da3f95686f6c34e7d95e69ec4a4709fd7"
+    },
+    {
+      "path": "figma-411-60193.png",
+      "bytes": 241120,
+      "sha256": "0f55777f12977f154e8502c25d274e79d71f1143e978e6e3ec0637402f5c4751"
+    },
+    {
+      "path": "figma-411-60524.json",
+      "bytes": 231998,
+      "sha256": "3da250b9cc347150b49a24d0de4d03d8b6f8e80a6dc6d895816d36fefee693c4"
+    },
+    {
+      "path": "figma-411-60524.png",
+      "bytes": 142829,
+      "sha256": "2d30e1f1888371cc95d90970d873db2fbaf94dbfced5689197b0271991e33da4"
+    },
+    {
+      "path": "findings.json",
+      "bytes": 13649,
+      "sha256": "7a274c26c2e31ce3e79002160c7981ac0fb50dc2d49865a062ba31d6f9ae651c"
+    },
+    {
+      "path": "playwright.config.ts",
+      "bytes": 611,
+      "sha256": "80d6babb8a4887a39c8008356ddaf3c37cecc836d829a065d5b264aa0969d244"
+    },
+    {
+      "path": "rendered-enrichment.png",
+      "bytes": 163406,
+      "sha256": "0a689048e782cbc14f4d99e27b383d1e30e7ed2c83da3c682769ec6d484d4abd"
+    },
+    {
+      "path": "rendered-facility-add.png",
+      "bytes": 137640,
+      "sha256": "61992c324a208b7f13b0df8359c1d08c457ebf0817e4229169949091406e9c25"
+    },
+    {
+      "path": "rendered-files.png",
+      "bytes": 99182,
+      "sha256": "4d1e81e745d568e9f132cadeb6e360f2d39d10c3f8f36a389653b4f8261f368e"
+    },
+    {
+      "path": "rendered-overview.png",
+      "bytes": 124349,
+      "sha256": "56a875d405c1f5c928a2230723bed51d5f6f738d417842cc6d6799f011518bf4"
+    },
+    {
+      "path": "rendered-timeline.png",
+      "bytes": 17559,
+      "sha256": "2da990512f2dd52656df4efd165267c41fabfb8fe144c358cb42dba995ea2c96"
+    },
+    {
+      "path": "rendered-upload.png",
+      "bytes": 104360,
+      "sha256": "48849e4401f2183ed2d601a877f2719c79cf7470aa656ef595cc4b2b00ea624a"
+    },
+    {
+      "path": "report.md",
+      "bytes": 8536,
+      "sha256": "92ee46fcb4592549c6e88d6313c54f4a70112967e0e24fa7e61d00d74997af13"
+    },
+    {
+      "path": "row-assessment.json",
+      "bytes": 107518,
+      "sha256": "afd5a4e3dc50b211eeda3f27c274e45f05cec67f426361bba3e6e14eb2ead7fb"
+    },
+    {
+      "path": "screenshot-411-47010.json",
+      "bytes": 730,
+      "sha256": "206aeb69e802631842b0ca93fb40b30e16a3e4291123908cf2ef4f06135955db"
+    },
+    {
+      "path": "screenshot-411-48361.json",
+      "bytes": 730,
+      "sha256": "143f07f36fe75188b774114a5c61bf449cce592c1cf3a0e66d7eb165d63f1001"
+    },
+    {
+      "path": "screenshot-411-48800.json",
+      "bytes": 730,
+      "sha256": "fa27d8298f3f51a4041f1ef2026479ad8b59da8e85b6b7a0be282ef854dc68cc"
+    },
+    {
+      "path": "screenshot-411-58068.json",
+      "bytes": 730,
+      "sha256": "286f96e16e2b09007631f3dbcb569cc6ad796923e9715ba4204cc29b64c00ec0"
+    },
+    {
+      "path": "screenshot-base64-411-47010.json",
+      "bytes": 383355,
+      "sha256": "c8e0b6eb3e4ee6e9bc7e3d5782b9718b53655ed3e3b293849ac52433c4cc68a5"
+    },
+    {
+      "path": "screenshot-base64-411-48361.json",
+      "bytes": 282771,
+      "sha256": "b7258e70f7abd7b800d0ca71f11e1086c7fae7b1ccc3d98f48bc86eb2f59636f"
+    },
+    {
+      "path": "screenshot-base64-411-48800.json",
+      "bytes": 377611,
+      "sha256": "c3dc3cb1231787f9208f2d198a3e96794ea5c21e5542724a678b941abeaf2e2e"
+    },
+    {
+      "path": "screenshot-base64-411-49051.json",
+      "bytes": 383111,
+      "sha256": "9fba9fbf65ed648a6b999b13554945f151decb057bb3bce33fa1afbd007d4350"
+    },
+    {
+      "path": "screenshot-base64-411-49817.json",
+      "bytes": 374507,
+      "sha256": "a4a495642399c5f18a14437390c5681e9871f9e76038f9e4ab1dcb1a67c4285b"
+    },
+    {
+      "path": "screenshot-base64-411-50097.json",
+      "bytes": 395083,
+      "sha256": "819a6c041aeecdac5a4ac46a55d0711812f0495dbff51b61d62e79f3ea4fa7cd"
+    },
+    {
+      "path": "screenshot-base64-411-58068.json",
+      "bytes": 366835,
+      "sha256": "45aa904409372d7dd17d8fef50d693e4fbfc2f3b72d324c53afdc192bc6cb8f1"
+    },
+    {
+      "path": "screenshot-base64-411-58348.json",
+      "bytes": 403723,
+      "sha256": "5ec23256a015c9e4fcb4b9d3c5d752fe4c2dff264e01da6a8eaeca0912e51f4f"
+    },
+    {
+      "path": "screenshot-base64-411-58563.json",
+      "bytes": 385891,
+      "sha256": "0ec805546ae8f3b24101e9155ed9a4c0cecfded7d9a113efeab869b3fe2fb4a2"
+    },
+    {
+      "path": "screenshot-base64-411-60193.json",
+      "bytes": 322419,
+      "sha256": "62743be4c86d574462744ced7f7ae4118034a0d7e3c040931d40506d32f6608e"
+    }
+  ]
+}

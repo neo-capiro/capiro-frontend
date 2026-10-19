@@ -1,0 +1,297 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-onboard-port-20261013/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-unified-figma-capture-plan-20261013/playwright.config.mjs",
+      "--project=actual",
+      "--project=portfolio-fixture"
+    ],
+    "configFile": "/tmp/capiro-unified-figma-capture-plan-20261013/playwright.config.mjs",
+    "rootDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "actual",
+        "name": "actual",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "portfolio-fixture",
+        "name": "portfolio-fixture",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "modules-fixture",
+        "name": "modules-fixture",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-unified-figma-capture-plan-20261013/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "capture.spec.ts",
+      "file": "capture.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "actual standalone /",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "actual",
+              "projectName": "actual",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:17.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-1e101679926f6179aa4d",
+          "file": "capture.spec.ts",
+          "line": 132,
+          "column": 7
+        },
+        {
+          "title": "actual standalone /meri",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "actual",
+              "projectName": "actual",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3914,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:21.223Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-3a7ee3d6a9a181da33fd",
+          "file": "capture.spec.ts",
+          "line": 132,
+          "column": 7
+        },
+        {
+          "title": "actual standalone /modules",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "actual",
+              "projectName": "actual",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2569,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:25.159Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-492ea441e4bdb001cae8",
+          "file": "capture.spec.ts",
+          "line": 132,
+          "column": 7
+        },
+        {
+          "title": "Portfolio source fixture canonical /",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "portfolio-fixture",
+              "projectName": "portfolio-fixture",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7349,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n\n    at capture (/tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts:83:88)\n    at /tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts:140:3",
+                    "location": {
+                      "file": "/tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts",
+                      "column": 88,
+                      "line": 83
+                    },
+                    "snippet": "  81 |     await expect(page.getByLabel(\"Message draft\", { exact: true })).toHaveValue(\"\");\n  82 |   } else if (target.fixture === \"portfolio\") {\n> 83 |     await expect(page.getByRole(\"link\", { name: \"Open Test Aerospace\", exact: true })).toBeVisible();\n     |                                                                                        ^\n  84 |   } else if (target.fixture === \"modules\") {\n  85 |     await expect(page.getByRole(\"heading\", { name: \"Everything in Capiro, across the whole firm\", exact: true })).toBeVisible();\n  86 |     await expect(page.getByLabel(\"Client profile scope\", { exact: true })).toBeEnabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts",
+                        "column": 88,
+                        "line": 83
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n\n\n  81 |     await expect(page.getByLabel(\"Message draft\", { exact: true })).toHaveValue(\"\");\n  82 |   } else if (target.fixture === \"portfolio\") {\n> 83 |     await expect(page.getByRole(\"link\", { name: \"Open Test Aerospace\", exact: true })).toBeVisible();\n     |                                                                                        ^\n  84 |   } else if (target.fixture === \"modules\") {\n  85 |     await expect(page.getByRole(\"heading\", { name: \"Everything in Capiro, across the whole firm\", exact: true })).toBeVisible();\n  86 |     await expect(page.getByLabel(\"Client profile scope\", { exact: true })).toBeEnabled();\n    at capture (/tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts:83:88)\n    at /tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts:140:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:28.803Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts/capture-Portfolio-source-fixture-canonical--portfolio-fixture/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts/capture-Portfolio-source-fixture-canonical--portfolio-fixture/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts/capture-Portfolio-source-fixture-canonical--portfolio-fixture/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-unified-figma-capture-plan-20261013/capture.spec.ts",
+                    "column": 88,
+                    "line": 83
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-f8d408c1ec408424cea6",
+          "file": "capture.spec.ts",
+          "line": 139,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T06:43:16.305Z",
+    "duration": 20864.755,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

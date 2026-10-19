@@ -1,0 +1,84 @@
+{
+  "sealedUTC": "2026-10-13T10:26:45.617740+00:00",
+  "status": "COMPLETED_ELEMENTS_GENERATED_ROOT_ARCHIVED_AND_VERIFIED_BEFORE_RETIREMENT",
+  "fileCount": 15,
+  "bytes": 211996,
+  "files": [
+    {
+      "path": "ARCHIVE-LOCATION.json",
+      "bytes": 658,
+      "sha256": "dc43cada4654ca76d2dc17bc0bcde4bb2488ebd1eeda0256f35856dc7f431e13"
+    },
+    {
+      "path": "HELPER-PROVENANCE.json",
+      "bytes": 410,
+      "sha256": "63e7809744c10878175b415ca58917675bacb9399c79f6230b053f1b051cc797"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3360,
+      "sha256": "d11ca15ec692202746ed16d34a1d5aadb17c3d0fec1fc0c97925e83d2ebeae98"
+    },
+    {
+      "path": "archive-completed-elements.initial.py",
+      "bytes": 7986,
+      "sha256": "7acfc42ad34a40711500d2b8915b13ac63f60b41e7868d5d0b1514bd8438611e"
+    },
+    {
+      "path": "archive-completed-elements.py",
+      "bytes": 8773,
+      "sha256": "775dcb11edb3350fae45296de8bcfeae0c5f114aa20ce52be079e39d8bac13c5"
+    },
+    {
+      "path": "archive-v2.log",
+      "bytes": 377,
+      "sha256": "534a954c8f1059debcd0af6c9d929ba0d8db8621cc01ab5e556edcef62afa5ec"
+    },
+    {
+      "path": "archive-verification.json",
+      "bytes": 20425,
+      "sha256": "aaa7ef981e76ab05cb07042f03cf8e9ae94d927b6d4bc1aac50729c3b1042747"
+    },
+    {
+      "path": "archive.log",
+      "bytes": 1373,
+      "sha256": "8a7329487e3018c5f5281cf9bf0fd99fb8c089bfe72191e480c5f1605b5be30d"
+    },
+    {
+      "path": "before-archive.json",
+      "bytes": 20290,
+      "sha256": "f277f0a5ea8b2ca640bad596bd0f0e8b99ec2978d2075f5794e8b395744856b8"
+    },
+    {
+      "path": "consumers-before-retirement.json",
+      "bytes": 64683,
+      "sha256": "9a48a5be0889ebd521274698607ba8a32656592f229f0981cdb611bfcb9df79a"
+    },
+    {
+      "path": "consumers-before.json",
+      "bytes": 61128,
+      "sha256": "4c0bca60351a6ea82f9a31f12da13feebb62c43d081ed1c6b5e9a82bac2ca93f"
+    },
+    {
+      "path": "consumers-initial.json",
+      "bytes": 1050,
+      "sha256": "82ba1585342c8ebff139da73200a111ca0d67065a409b494af2389ac63ec8a85"
+    },
+    {
+      "path": "help.txt",
+      "bytes": 348,
+      "sha256": "3a56f8ec441bc259947720e75bc806a9cea77ebfe0bc4f83801ac9366c6598fb"
+    },
+    {
+      "path": "out-of-sandbox-consumer-check.json",
+      "bytes": 498,
+      "sha256": "9a08fd0547929bbbbf4385a26b169bc63437c9e68064cccbbe912a940996cfb1"
+    },
+    {
+      "path": "retirement.json",
+      "bytes": 20637,
+      "sha256": "63ccabd0acaafe696d81d99035cfe3c7238baea7a84044cae27119aee14219a9"
+    }
+  ],
+  "manifestSelfExcluded": true
+}

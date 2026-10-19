@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "buildID": "HW5M0_NcA2YohM1f7uUwZ",
+  "inspected": [
+    {
+      "path": "production-portfolio-390-light.png",
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "path": "production-portfolio-1440-dark.png",
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    }
+  ],
+  "finding": "Credential-free setup states are legible, contained and correctly themed at mobile390 and desktop1440. No clipping observed. These screenshots do not establish configured/native feature or Figma acceptance.",
+  "fourViewportGeometryChecks": "production-smoke.json"
+}

@@ -1,0 +1,13 @@
+[WebServer] (node:1514013) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:1514065) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/acceptance-meri-theme.spec.ts:28:3 › Meri authored dark workspace keeps the shared header light at 1440px (3.5s)
+  ✓  2 test/browser/acceptance-meri-theme.spec.ts:80:3 › Meri Files theme follows preference through scoped navigation and history at 1440px (2.7s)
+  ✓  3 test/browser/acceptance-meri-theme.spec.ts:28:3 › Meri authored dark workspace keeps the shared header light at 390px (2.8s)
+  ✓  4 test/browser/acceptance-meri-theme.spec.ts:80:3 › Meri Files theme follows preference through scoped navigation and history at 390px (2.5s)
+
+  4 passed (14.5s)

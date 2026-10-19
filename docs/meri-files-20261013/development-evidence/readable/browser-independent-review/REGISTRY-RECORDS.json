@@ -1,0 +1,29 @@
+[
+  {
+    "file": "apps/web/test/browser/meri-files-fixtures.ts",
+    "kind": "function",
+    "symbol": "filesFixture",
+    "fingerprint": "c553ce58544088d3207f3a12ec11c127349f0b17c191f8ec55c48e6fcf7b5395",
+    "reason": "One document HTTP fixture combines public request admission, finite synthetic replies, request/effect audit, held-request completion and observation-only Blob URL instrumentation. It reuses the existing session/client boundary and shared public fixtures; it does not simulate the production journal/receiver algorithm or grant native authority. The held request observes actual finished/aborted completion before assertions. Keeping one fixture owner makes all intercepted operations and effects reviewable.",
+    "reviewedBy": "Codex independent Meri Files browser review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/meri-files-workflow.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "225ff7109c6fd3eb2e52d698230396f0a94c65aa2e74334cf1a1da3f6432cf95",
+    "reason": "One parameterized observable document lifecycle follows explicit connect/create/inspect/verified-download/acknowledged-revision and resource disposal at two widths for each family. Effect counts, immutable base, download bytes and native-limit captions remain adjacent to the actions that establish them. Existing helpers handle setup/input; splitting the causal scenario merely to reduce108 lines would scatter shared state and acceptance checks. Synthetic bytes are explicitly not Office-generation evidence.",
+    "reviewedBy": "Codex independent Meri Files browser review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/meri-files-navigation.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "f9299e646d79d349074f36ba77490d3db60e95b1569e0c7be981de47b5545d45",
+    "reason": "One uncertain-delivery lifecycle follows the same pending/unknown write through Modules navigation, history, explicit reconnect, and successful inspection. The callback owns the held request and exact call counts, proving the fence survives all transitions and reads cannot settle it. No unrelated subsystem implementation, automatic retry, sleeps or hidden authority stub is embedded.",
+    "reviewedBy": "Codex independent Meri Files browser review",
+    "reviewedOn": "2026-10-13"
+  }
+]

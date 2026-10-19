@@ -1,0 +1,52 @@
+{
+  "commit": "3195ffab57584054a714ff5bd025063fba363929",
+  "tree": "a26f5a33576ec52e3158b1607203e0ef23c3722f",
+  "parent": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "recordedAt": "2026-10-12T20:16:05.327377+00:00",
+  "productionChanges": false,
+  "files": [
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "bytes": 16606,
+      "nonblank": 469
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "sha256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+      "bytes": 1741,
+      "nonblank": 54
+    }
+  ],
+  "checks": {
+    "focusedBrowser": {
+      "passed": 1,
+      "failed": 0,
+      "workers": 1,
+      "retries": 0,
+      "report": "revised-results.json"
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": "lint-corrected.log",
+      "initialWrongCwdAttempt": "lint.log"
+    },
+    "format": {
+      "exitCode": 0,
+      "log": "format.log"
+    },
+    "diffCheck": {
+      "exitCode": 0,
+      "log": "diff-check.log"
+    },
+    "fullTsc": "NOT_RUN per bounded task",
+    "build": "NOT_RUN per bounded task"
+  },
+  "observed": {
+    "url": "http://127.0.0.1:5191/api/backend/core/engagement/meetings/91000000-0000-4000-8000-000000000001",
+    "network": "aborted",
+    "originalAttempt": "refused",
+    "writes": []
+  },
+  "sizeReview": "Existing cohesive Calendar sharing test scenario module; the added assertions belong to the already-present actor-replacement scenario. No production function/file signal changed. Independent reviewer objectives_work_intel_review accepted the two-file correction."
+}

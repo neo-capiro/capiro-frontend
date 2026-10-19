@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "rootNodeTests": 59,
+  "transportTests": 21,
+  "portfolioUnitTests": 1275,
+  "capiroUnitTests": 117,
+  "combinedTests": 1472,
+  "lintErrors": 0,
+  "lintWarnings": 76,
+  "architectureBoundaryErrors": [],
+  "architectureSize": {
+    "total": 427,
+    "reviewed": 403,
+    "inheritedUnreviewed": 24,
+    "blocking": 0
+  },
+  "typescript": "All configured workspaces passed",
+  "format": "All checked files passed",
+  "publicPackages": "Passed; exact exports/pins/provenance validated"
+}

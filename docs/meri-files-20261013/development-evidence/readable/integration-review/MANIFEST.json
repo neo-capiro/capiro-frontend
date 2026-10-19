@@ -1,0 +1,71 @@
+{
+  "sealedAt": "2026-10-13T08:58:59.014243+00:00",
+  "scope": "Independent bounded static source/responsibility review; no runtime execution or repository mutation",
+  "files": [
+    {
+      "path": "ASSERTION-PRESERVATION.json",
+      "bytes": 425,
+      "sha256": "ca15b609cd11f36968536e972198d6c0d85e2d68f8c9f9bda2d4425bc324a4d4"
+    },
+    {
+      "path": "FINAL-SOURCE-CHECK.json",
+      "bytes": 191,
+      "sha256": "ce4997fe125f2ff8be6d52cc69822fbd9fed1177719c9519135e1f63eb6190af"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 753,
+      "sha256": "1baeae4ebc14591e42234cf44e922c065c1dd3355f17a43b07b9819a7db867d7"
+    },
+    {
+      "path": "INTERIM.md",
+      "bytes": 7277,
+      "sha256": "e56dd90103e44ee6657a61a2c2b98a5994e9a135ba736a5ea6e2c2855a9de0b8"
+    },
+    {
+      "path": "OWNER-RECEIPTS.json",
+      "bytes": 1759,
+      "sha256": "bb638cec694e831673378fe6642cef606c6f24419abd2699482cdc1d04d8677c"
+    },
+    {
+      "path": "REGISTRY-RECORDS.json",
+      "bytes": 3567,
+      "sha256": "12423c3d6f1a18a7de0eb40f38abfed84c2e2225d0b6b1207eaf039c688ac581"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 11060,
+      "sha256": "b7aec4d2ba54188f496611c19f537f9e511dbf3e23f3120343b5c875021a1529"
+    },
+    {
+      "path": "SOURCE-PINS.json",
+      "bytes": 16713,
+      "sha256": "c017f25f32daa08d0f9f5d95fbe8fff0348ff6e275eed0bb92c74b3878297096"
+    },
+    {
+      "path": "SOURCE-REVIEW-RECORDS.json",
+      "bytes": 4776,
+      "sha256": "e063f5526e1205d02a3041a20e5a2fbb040b11b398cc3c954d7c472270c389e9"
+    },
+    {
+      "path": "TEST-STRUCTURE-REVIEW.json",
+      "bytes": 10558,
+      "sha256": "941aa31c36d1bb6857936e8d0d0be0f7450b6d3e00ee59d8d2e6615016980b6a"
+    },
+    {
+      "path": "checkpoint-source.json",
+      "bytes": 15930,
+      "sha256": "fa2e35567da2cb42e2c6b6979a0f02782132fcd996f2f6c71317c891f3500c50"
+    },
+    {
+      "path": "public-package-verification.json",
+      "bytes": 3346,
+      "sha256": "4d754c0d8bed0dd5bfd2366f2ce25bfef67d7cf6fad0b22205f96ca61eae7b4f"
+    },
+    {
+      "path": "tracked-diff.patch",
+      "bytes": 22102,
+      "sha256": "db1491bb016bdd360b1fb8fe12fefdf75660721c3dcf2cb4ce1ec60ec3a509c2"
+    }
+  ]
+}

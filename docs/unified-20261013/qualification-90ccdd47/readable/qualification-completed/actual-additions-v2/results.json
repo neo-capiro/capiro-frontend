@@ -1,0 +1,189 @@
+{
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "startedUTC": "2026-10-13T09:48:44.581Z",
+  "scope": "Unconfigured actual Next standalone, no service interception or real identity/provider execution",
+  "http": [
+    {
+      "path": "/register",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/verify",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/plan",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/legal",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/billing",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/admins",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/clients",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/org",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/confirm",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/accept-invite",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/setup",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/it/synthetic-local-capability",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-store"
+    },
+    {
+      "path": "/it/done",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-store"
+    },
+    {
+      "path": "/it/error",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-store"
+    },
+    {
+      "path": "/meri/actions",
+      "status": 200,
+      "explicitSetup": true,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "path": "/api/action-followthrough/session",
+      "status": 503,
+      "noRemoteDisposition": true
+    },
+    {
+      "path": "/api/action-followthrough/query",
+      "status": 503,
+      "noRemoteDisposition": true
+    },
+    {
+      "path": "/api/action-followthrough/draft",
+      "status": 503,
+      "noRemoteDisposition": true
+    },
+    {
+      "path": "/api/action-followthrough/prepare",
+      "status": 503,
+      "noRemoteDisposition": true
+    },
+    {
+      "path": "/api/action-followthrough/execute",
+      "status": 503,
+      "noRemoteDisposition": true
+    },
+    {
+      "path": "/api/action-followthrough/approve",
+      "status": 404,
+      "noRemoteDisposition": true
+    },
+    {
+      "path": "/api/action-followthrough/session",
+      "foreignOrigin": "http://127.0.0.1:5188",
+      "status": 400,
+      "rejectedOrigin": true
+    },
+    {
+      "path": "/api/action-followthrough/session",
+      "foreignOrigin": "https://foreign.example.test",
+      "status": 400,
+      "rejectedOrigin": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "/onboard/favicon.svg",
+      "bytes": 310,
+      "sha256": "6b853e45dfd9c0b5de548d2d1fa779330c09f6cda89f52c1d1bf6b3ca44904c4"
+    },
+    {
+      "path": "/onboard/fonts/hanken-grotesk-latin.woff2",
+      "bytes": 34704,
+      "sha256": "e9201eddf1d41d0b62253295d869ce3cf65768f7102b797f02c7f8c876b4a9d5"
+    },
+    {
+      "path": "/onboard/fonts/jetbrains-mono-latin.woff2",
+      "bytes": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+    },
+    {
+      "path": "/onboard/fonts/newsreader-latin.woff2",
+      "bytes": 132000,
+      "sha256": "6e4f2958c3a7c4a80acde4e5a679abe7e01bc1e30b92be3c7a8b696ef401d101"
+    },
+    {
+      "path": "/onboard/legal-docs/Capiro-Subscription-Agreement.pdf",
+      "bytes": 201149,
+      "sha256": "2ae1437094f9310c9e9cf49c71aa1725e06823c02fba6cb546d40e3cedd33ff5"
+    },
+    {
+      "path": "/onboard/legal-docs/Capiro-Terms-of-Service.pdf",
+      "bytes": 58509,
+      "sha256": "94e03031d00eaf759c7e55795aa89edfa5429bf667c3ce9f975f8f2b69b6d5d2"
+    }
+  ],
+  "browser": [
+    {
+      "width": 1440,
+      "meriNavigationAndHistory": true,
+      "onboardPublicSetup": true
+    },
+    {
+      "width": 375,
+      "meriNavigationAndHistory": true,
+      "onboardPublicSetup": true
+    }
+  ],
+  "pageErrors": [],
+  "remoteRequests": [],
+  "browserVersion": "154.0.8037.57",
+  "endedUTC": "2026-10-13T09:48:48.034Z",
+  "success": true,
+  "error": null
+}

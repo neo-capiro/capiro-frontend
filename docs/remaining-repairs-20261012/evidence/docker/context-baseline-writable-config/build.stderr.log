@@ -1,0 +1,21 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 67B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 356B done
+#2 DONE 0.0s
+
+#3 [internal] load build context
+#3 transferring context: 1.03kB done
+#3 DONE 0.0s
+
+#4 [1/1] COPY . /context/
+#4 DONE 0.0s
+
+#5 exporting to client directory
+#5 copying files 1.15kB done
+#5 DONE 0.0s
+WARNING: current commit information was not captured by the build: failed to read current commit information with git rev-parse --is-inside-work-tree

@@ -1,0 +1,25 @@
+{
+  "name": "final-elements",
+  "command": [
+    "node",
+    "apps/web/deployment/portfolio/qualify-elements.mjs",
+    "/tmp/capiro-shipping-browser-correction-20261013/final-elements-work"
+  ],
+  "startedUTC": "2026-10-13T01:48:59.534995+00:00",
+  "endedUTC": "2026-10-13T01:49:06.726431+00:00",
+  "durationSeconds": 7.19149369400111,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

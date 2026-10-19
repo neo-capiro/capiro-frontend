@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/capiro-unified-83f54f5a-final-gate-independent-review-20261013/verify.py", line 145, in <module>
+    png=bound(screens[0]); b=png.read_bytes();assert b[:8]==b'\x89PNG\r\n\x1a\n'; dimensions=struct.unpack('>II',b[16:24]);assert dimensions==(360,800),dimensions
+                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (390, 844)

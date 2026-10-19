@@ -1,0 +1,74 @@
+.dialog.dialog {
+  border-radius: 14px;
+}
+.dialog > header {
+  flex-wrap: nowrap;
+}
+.form {
+  min-width: 0;
+}
+.form :global(fieldset.card) {
+  min-width: 0;
+  margin: 0;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: none;
+}
+.form :global(fieldset.card) > legend {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.choices {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+.choices legend {
+  padding: 0;
+  margin-bottom: 12px;
+}
+.choices small {
+  flex-basis: 100%;
+}
+.notice {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.notice h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+.notice p {
+  color: var(--muted-foreground);
+  line-height: 1.45;
+}
+.noticeAction:global(.button) {
+  height: 36px;
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+@media (max-width: 680px) {
+  .actions {
+    flex-direction: column;
+  }
+  .actions > button {
+    width: 100%;
+  }
+}

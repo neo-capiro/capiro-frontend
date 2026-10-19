@@ -1,0 +1,32 @@
+[WebServer] (node:1530445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 21 tests using 2 workers
+
+(node:1530472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1530473) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/acceptance-folder-access-recovery.spec.ts:15:1 › explicit current folder review preserves intent and permits only a separate deliberate save (5.1s)
+  ✓   2 tests/browser/acceptance-prospect-brief-current.spec.ts:19:3 › brief history 403 current read hides cached selection until held recovery succeeds (6.0s)
+  ✓   3 tests/browser/acceptance-folder-access-recovery.spec.ts:58:1 › failed current folder review keeps uncertainty through collection recovery and reopen (5.2s)
+  ✓   4 tests/browser/acceptance-prospect-brief-current.spec.ts:68:3 › selected brief version 403 current read withholds its cached document through held recovery (5.3s)
+  ✓   5 tests/browser/acceptance-folder-access-recovery.spec.ts:102:1 › a held folder review cannot clear the original fence after actor replacement (3.8s)
+  ✓   6 tests/browser/acceptance-prospect-brief-current.spec.ts:135:3 › brief refresh 403 current read removes prior comparison through held recovery (5.9s)
+  ✓   7 tests/browser/acceptance-prospect-client-link.spec.ts:32:3 › existing-client 403 current read revokes old selection and requires fresh confirmation after held recovery (6.4s)
+  ✓   8 tests/browser/acceptance-prospect-brief-current.spec.ts:184:3 › brief source 403 current read withholds current evidence while retaining immutable citation facts (5.8s)
+  ✓   9 tests/browser/acceptance-prospect-client-link.spec.ts:32:3 › existing-client 503 current read revokes old selection and requires fresh confirmation after held recovery (7.1s)
+  ✓  10 tests/browser/acceptance-prospect-brief-current.spec.ts:19:3 › brief history 503 current read hides cached selection until held recovery succeeds (5.6s)
+  ✓  11 tests/browser/acceptance-prospect-client-link.spec.ts:77:1 › changing client search cannot dispatch a confirmation from a previous result set (4.8s)
+  ✓  12 tests/browser/acceptance-prospect-brief-current.spec.ts:68:3 › selected brief version 503 current read withholds its cached document through held recovery (7.6s)
+  ✓  13 tests/browser/acceptance-prospect-contacts.spec.ts:33:3 › contacts 403 current read removes cached contacts and editor through held recovery (5.8s)
+  ✓  14 tests/browser/acceptance-prospect-brief-current.spec.ts:135:3 › brief refresh 503 current read removes prior comparison through held recovery (7.2s)
+  ✓  15 tests/browser/acceptance-prospect-contacts.spec.ts:33:3 › contacts 503 current read removes cached contacts and editor through held recovery (6.7s)
+  ✓  17 tests/browser/acceptance-prospect-contacts.spec.ts:90:1 › held contact recovery cannot resurrect an old editor after route replacement (5.7s)
+  ✓  16 tests/browser/acceptance-prospect-brief-current.spec.ts:184:3 › brief source 503 current read withholds current evidence while retaining immutable citation facts (7.3s)
+  ✓  18 tests/browser/acceptance-prospect-create-intent.spec.ts:113:1 › unknown prospect creation cannot bind edited input to the original request identity (6.0s)
+  ✓  19 tests/browser/acceptance-prospect-write-preservation.spec.ts:36:1 › pending contact creation survives denied current read and retains the same request after an unknown reply (7.0s)
+  ✓  20 tests/browser/acceptance-prospect-create-intent.spec.ts:140:1 › definite prospect creation refusal permits correction and an explicit editable retry (7.1s)
+  ✓  21 tests/browser/acceptance-prospect-write-preservation.spec.ts:134:1 › pending brief save survives selected-version denial and retries only its retained unknown SaveInput (7.0s)
+
+  21 passed (1.1m)

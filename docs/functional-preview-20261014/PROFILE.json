@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "profile": "functional-preview-existing-services",
+  "status": "shipping-input-not-applied",
+  "configurationKind": "overlay-existing-preview-frontend-container",
+  "frontendOrigin": "https://portfolio-preview.app.capiro.ai",
+  "sourceCommit": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "sourceArchive": "https://github.com/neo-capiro/capiro-frontend/blob/23df0b04fe643ba7ab64395d7a471ddb20172db6/docs/preview-receiving-20261013/build-inputs/preview-receiving-build-inputs-5ca420493258.tar.gz",
+  "sourceArchiveSha256": "a94c27e22552602cb79743c1905c7bb21903c811217456165a19d7107a6a5dae",
+  "sourceArchiveBytes": 6011816,
+  "dockerfile": "apps/web/Dockerfile",
+  "platform": "linux/amd64",
+  "buildContext": "archive root",
+  "applicationSecretsRequiredAtBuild": false,
+  "environment": {
+    "CAPIRO_PREVIEW_READ_ONLY": "false",
+    "CAPIRO_DEFAULT_PRODUCT": "portfolio",
+    "CORE_API_BASE_URL": "https://os.capiro.ai/api",
+    "STRATEGY_API_BASE_URL": "https://os.capiro.ai/strategy-api",
+    "WORKSPACE_API_BASE_URL": "https://os.capiro.ai/workspace-api",
+    "INTELLIGENCE_API_BASE_URL": "https://os.capiro.ai/intel-api",
+    "TRACKER_BACKEND": "intelligence",
+    "CAPIRO_EXISTING_APP_URL": "https://os.capiro.ai"
+  },
+  "secretReferences": {
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/publishable-key-rAfesC",
+    "CLERK_SECRET_KEY": "arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/secret-key-FT67tM"
+  },
+  "existingClerkKmsKeyReference": "arn:aws:kms:us-east-1:967807252336:key/f47b4c53-b9c0-4d91-ad57-4d882f87767e",
+  "secretReferenceProvenance": "Owner current preview stack readback 2026-10-13T23:15:57Z, Sentinel_db7986c3cd588191802765d396dafbf7; identified by Neo as production Clerk",
+  "serviceOriginProvenance": "Recorded existing origins in docs/portfolio-31/IMPLEMENTATION-CHECKPOINT.md and handover-2026-10-11/references/HANDOVER.md; live availability not rechecked here",
+  "preserveUnlistedContainerConfiguration": true,
+  "preserveExistingLoginAndTenantPermissions": true,
+  "newPreviewAuthorizationOrTenantIsolation": false,
+  "separatePreviewApiRequired": false,
+  "newDatabaseRoleOrVpcRequired": false,
+  "currentServiceBindingsVerifiedHere": false,
+  "imageUri": null,
+  "imageDigest": null,
+  "deploymentPerformed": false
+}

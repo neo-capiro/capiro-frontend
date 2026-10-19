@@ -1,0 +1,48 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts objective-destination.spec.ts objective-navigation.spec.ts objective-work-destinations.spec.ts objective-work-navigation.spec.ts
+
+[WebServer] (node:316885) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 1 worker
+
+(node:316979) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/objective-destination.spec.ts:43:1 › each Objective-bound open/reload calls the canonical owner without an unbound session fallback (2.4s)
+  ✓   2 test/browser/objective-destination.spec.ts:96:3 › owner refusal404 clears bound content and never falls back (1.4s)
+  ✓   3 test/browser/objective-destination.spec.ts:96:3 › owner refusal409 clears bound content and never falls back (1.2s)
+  ✓   4 test/browser/objective-destination.spec.ts:122:1 › mismatched binding and malformed Objective query never expose session content (2.1s)
+  ✓   5 test/browser/objective-destination.spec.ts:141:1 › a replaced Objective query hides the old observation and ignores its late response (1.1s)
+  ✓   6 test/browser/objective-navigation.spec.ts:28:1 › Objective navigation resolves the exact saved version through Core before opening its local destination (1.7s)
+  ✓   7 test/browser/objective-navigation.spec.ts:93:1 › unsaved edits and stale Objective resolver never navigate using old campaign text (1.6s)
+  ✓   8 test/browser/objective-work-destinations.spec.ts:61:3 › strategies rechecks the owner on open, reload, history and explicit review without ordinary reads or writes (2.5s)
+  ✓   9 test/browser/objective-work-destinations.spec.ts:161:5 › strategies owner404 removes the prior observation with no fallback or automatic retry (1.3s)
+  ✓  10 test/browser/objective-work-destinations.spec.ts:161:5 › strategies owner409 removes the prior observation with no fallback or automatic retry (1.2s)
+  ✓  11 test/browser/objective-work-destinations.spec.ts:161:5 › strategies owner503 removes the prior observation with no fallback or automatic retry (1.3s)
+  ✓  12 test/browser/objective-work-destinations.spec.ts:194:3 › strategies refuses changed and malformed bindings before exposing resource content (2.7s)
+  ✓  13 test/browser/objective-work-destinations.spec.ts:61:3 › planner rechecks the owner on open, reload, history and explicit review without ordinary reads or writes (2.5s)
+  ✓  14 test/browser/objective-work-destinations.spec.ts:161:5 › planner owner404 removes the prior observation with no fallback or automatic retry (1.2s)
+  ✓  15 test/browser/objective-work-destinations.spec.ts:161:5 › planner owner409 removes the prior observation with no fallback or automatic retry (1.3s)
+  ✓  16 test/browser/objective-work-destinations.spec.ts:161:5 › planner owner503 removes the prior observation with no fallback or automatic retry (1.2s)
+  ✓  17 test/browser/objective-work-destinations.spec.ts:194:3 › planner refuses changed and malformed bindings before exposing resource content (2.8s)
+  ✓  18 test/browser/objective-work-destinations.spec.ts:61:3 › workspace rechecks the owner on open, reload, history and explicit review without ordinary reads or writes (2.7s)
+  ✓  19 test/browser/objective-work-destinations.spec.ts:161:5 › workspace owner404 removes the prior observation with no fallback or automatic retry (1.2s)
+  ✓  20 test/browser/objective-work-destinations.spec.ts:161:5 › workspace owner409 removes the prior observation with no fallback or automatic retry (1.3s)
+  ✓  21 test/browser/objective-work-destinations.spec.ts:161:5 › workspace owner503 removes the prior observation with no fallback or automatic retry (1.3s)
+  ✓  22 test/browser/objective-work-destinations.spec.ts:194:3 › workspace refuses changed and malformed bindings before exposing resource content (2.5s)
+  ✓  23 test/browser/objective-work-destinations.spec.ts:220:1 › replacement query and session scope hide old or late Strategy observations (1.3s)
+  ✓  24 test/browser/objective-work-destinations.spec.ts:294:1 › Planner401 expires the shared session without replay or retained task content (1.3s)
+  ✓  25 test/browser/objective-work-destinations.spec.ts:323:1 › a changed Workspace client hint clears the saved snapshot and rechecks its owner (1.1s)
+  ✓  26 test/browser/objective-work-navigation.spec.ts:83:3 › strategies Portfolio handoff resolves exact saved Objective then resolves again at destination (1.4s)
+  ✓  27 test/browser/objective-work-navigation.spec.ts:83:3 › planner Portfolio handoff resolves exact saved Objective then resolves again at destination (1.4s)
+  ✓  28 test/browser/objective-work-navigation.spec.ts:83:3 › workspace Portfolio handoff resolves exact saved Objective then resolves again at destination (1.4s)
+  ✓  29 test/browser/objective-work-navigation.spec.ts:124:1 › saved Workspace selection is explicit and never opens the current working draft automatically (1.3s)
+  ✓  30 test/browser/objective-work-navigation.spec.ts:183:1 › unsaved edits and close interrupt Strategy resolution without late navigation (1.3s)
+
+  30 passed (52.4s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,110 @@
+{
+  "errors": [],
+  "reviews": [
+    {
+      "file": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "kind": "function",
+      "symbol": "PlannerScreen",
+      "line": 38,
+      "nonblank": 106,
+      "fingerprint": "57813e1b39f4f72abb93ef35c9edaa202f75af19cb2d73c2ffe6f5fa30dd1512",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "Planner route composition owns section/project selection, current bootstrap and optional All tasks client catalog. The new picker isolates URL scope interaction in PlannerClientScope; grouping and table presentation remain outside this controller. No authorization/transport orchestration added.",
+      "sourceSha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5"
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/PublicForm.tsx",
+      "kind": "function",
+      "symbol": "PublicFormQuestions",
+      "line": 70,
+      "nonblank": 107,
+      "fingerprint": "a7a26690af5fbe967346f1521c034446524cc5380a628837b3bd810b2cc55176",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "Existing public submit state, conditional displayed answers and attachment collection remain one cohesive form lifecycle. This patch changes only card headings, fieldset styling and alert/button placement; transport validation, abort lifetime, in-flight guard and input retention stay canonical and unchanged.",
+      "sourceSha256": "ed102f7fec21c728f1d049b83142223482ed300c97e162461531a110b28f9a5e"
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskViews.tsx",
+      "kind": "function",
+      "symbol": "TaskList",
+      "line": 148,
+      "nonblank": 135,
+      "fingerprint": "4295c87c0dc68cb1365a311ef4618d40272161c9debae37e3e389a174e44ca6e",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "Single table column definition still owns selection, task opening and completion presentation for flat/grouped views. Grouped rows add current project labels and omit time totals; no duplicate task-row implementation or new dispatch behavior. Native operations remain TaskWorkspace responsibility.",
+      "sourceSha256": "87bef46fbafa2e42329fd9461de0400655b771270d1299cec9da34831228dd71"
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 409,
+      "fingerprint": "9fe1f5ae60d391811c53f6941a83155bea222664839da27a0b2300f49227c4ba",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "One task workspace composes its query/filter model, toolbar, selection, results and existing dialogs. This patch adds only local Group by state and calls the separate typed presentation grouping helper. Existing fixed-operation dispatch, scope predicate and dialog owners remain unchanged. No additional native lifecycle or unrelated domain added.",
+      "sourceSha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23"
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "kind": "function",
+      "symbol": "useTaskWorkspace",
+      "line": 45,
+      "nonblank": 90,
+      "fingerprint": "69926c8737f091eab2a6482ffcc3383b48a88389393e1dec364f6e9733fc1d79",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "Existing task-page local model owns query, filters, selection and task actions. New groupBy is presentation-only local state; no persistence or transport field is invented. Current read disposal remains useCapiroQuery/ApplicationBoundary.",
+      "sourceSha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23"
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "kind": "function",
+      "symbol": "TaskFilters",
+      "line": 176,
+      "nonblank": 101,
+      "fingerprint": "ce0163b89f8baf02defa428fe41c863f924725cf6c951b7fc99ed436daa49a5b",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "One bounded task toolbar uses canonical SelectInput/Tabs/actions. The sole added control switches All tasks list grouping. Existing controls and handlers remain unchanged; no duplicated filtering algorithm.",
+      "sourceSha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23"
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/planner.module.css",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 441,
+      "fingerprint": "72f00bce86914994c7bec4e41d065d2cea30bf40755cc319a61a822f02f0242f",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "Canonical Planner presentation stylesheet gains only client group card/header/table geometry. Public form card styling is in its own public-form.module.css owner because its public page differs from authenticated Planner. No global/common override.",
+      "sourceSha256": "302518640ab5df03246b1de0fc062ca9ecc46bb7ed84fc2ce90868850e02f20e"
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/workspace.module.css",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 791,
+      "fingerprint": "b483dc4ca834aab99865d7083c416aba49e65aa3f5316990f06d6a92f82f5e40",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "proposedResponsibilityReview": "Existing Workspace feature stylesheet remains canonical. Exactly owned filter rules now target actual Radix combobox triggers plus phone wrapping; all editor/workflow rules remain unchanged. A broad CSS extraction would be unrelated to this bounded repair.",
+      "sourceSha256": "48fd2aae2553a13ed60b9cf5936f86f0884b58e16ee051c02b529fdc37e21c3c"
+    }
+  ],
+  "note": "Proposed exact-source responsibility review only; root owns registry acceptance. No scanner/registry edits."
+}

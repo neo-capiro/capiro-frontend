@@ -1,0 +1,392 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-acceptance-batch-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "tests/browser/acceptance-activity-authority.spec.ts",
+      "tests/browser/acceptance-prospect-create-intent.spec.ts",
+      "--workers=2",
+      "--output",
+      "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/playwright.config.ts",
+    "rootDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 2,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "acceptance-activity-authority.spec.ts",
+      "file": "acceptance-activity-authority.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a dispatched activity write cannot invalidate the replacement actor's feed",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6492,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts:60:52",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts",
+                      "column": 52,
+                      "line": 60
+                    },
+                    "snippet": "  58 |       // actual cache lifetime before asserting absence of a late refresh.\n  59 |       await expectSettled(page);\n> 60 |       expect((await snapshot(page)).invalidations).toBe(before.invalidations);\n     |                                                    ^\n  61 |       expect(fixture.reads.length).toBe(readsBefore);\n  62 |       await expect(activityAction(page)).toBeEnabled();\n  63 |       await expect(activityReview(page)).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts",
+                        "column": 52,
+                        "line": 60
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\n  58 |       // actual cache lifetime before asserting absence of a late refresh.\n  59 |       await expectSettled(page);\n> 60 |       expect((await snapshot(page)).invalidations).toBe(before.invalidations);\n     |                                                    ^\n  61 |       expect(fixture.reads.length).toBe(readsBefore);\n  62 |       await expect(activityAction(page)).toBeEnabled();\n  63 |       await expect(activityReview(page)).toHaveCount(0);\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts:60:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:18:17.808Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts",
+                    "column": 52,
+                    "line": 60
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ab3928541e544df4cd5e-f3c58cb1289a040abe1d",
+          "file": "acceptance-activity-authority.spec.ts",
+          "line": 25,
+          "column": 3
+        },
+        {
+          "title": "a dispatched activity write cannot invalidate the replacement tenant's feed",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6268,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts:60:52",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts",
+                      "column": 52,
+                      "line": 60
+                    },
+                    "snippet": "  58 |       // actual cache lifetime before asserting absence of a late refresh.\n  59 |       await expectSettled(page);\n> 60 |       expect((await snapshot(page)).invalidations).toBe(before.invalidations);\n     |                                                    ^\n  61 |       expect(fixture.reads.length).toBe(readsBefore);\n  62 |       await expect(activityAction(page)).toBeEnabled();\n  63 |       await expect(activityReview(page)).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts",
+                        "column": 52,
+                        "line": 60
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\n  58 |       // actual cache lifetime before asserting absence of a late refresh.\n  59 |       await expectSettled(page);\n> 60 |       expect((await snapshot(page)).invalidations).toBe(before.invalidations);\n     |                                                    ^\n  61 |       expect(fixture.reads.length).toBe(readsBefore);\n  62 |       await expect(activityAction(page)).toBeEnabled();\n  63 |       await expect(activityReview(page)).toHaveCount(0);\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts:60:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:18:25.777Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts",
+                    "column": 52,
+                    "line": 60
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ab3928541e544df4cd5e-1e67dda457ac0c5e6b5b",
+          "file": "acceptance-activity-authority.spec.ts",
+          "line": 25,
+          "column": 3
+        },
+        {
+          "title": "same-actor filtering still refreshes a dispatched activity write without replay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4534,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:18:33.287Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ab3928541e544df4cd5e-9335b5b1bb513b6657b0",
+          "file": "acceptance-activity-authority.spec.ts",
+          "line": 79,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "acceptance-prospect-create-intent.spec.ts",
+      "file": "acceptance-prospect-create-intent.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unknown prospect creation cannot bind edited input to the original request identity",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 9115,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"email\": null,\u001b[22m\n\u001b[32m-   \"name\": \"Synthetic exact creation intent\",\u001b[39m\n\u001b[31m+   \"name\": \"Changed after an unknown creation\",\u001b[39m\n\u001b[2m    \"notes\": \"Synthetic submitted source note\",\u001b[22m\n\u001b[2m    \"phone\": null,\u001b[22m\n\u001b[2m    \"requestId\": \"532522d6-7cd0-4e34-8687-3499a0695555\",\u001b[22m\n\u001b[2m    \"title\": \"Original submitted title\",\u001b[22m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"email\": null,\u001b[22m\n\u001b[32m-   \"name\": \"Synthetic exact creation intent\",\u001b[39m\n\u001b[31m+   \"name\": \"Changed after an unknown creation\",\u001b[39m\n\u001b[2m    \"notes\": \"Synthetic submitted source note\",\u001b[22m\n\u001b[2m    \"phone\": null,\u001b[22m\n\u001b[2m    \"requestId\": \"532522d6-7cd0-4e34-8687-3499a0695555\",\u001b[22m\n\u001b[2m    \"title\": \"Original submitted title\",\u001b[22m\n\u001b[2m  }\u001b[22m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-create-intent.spec.ts:133:29",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-create-intent.spec.ts",
+                      "column": 29,
+                      "line": 133
+                    },
+                    "snippet": "  131 |   expect(control.bodies).toHaveLength(2);\n  132 |   expect(control.bodies[1]!.requestId).toBe(control.bodies[0]!.requestId);\n> 133 |   expect(control.bodies[1]).toEqual(control.bodies[0]);\n      |                             ^\n  134 |   await expect(\n  135 |     control.card.getByRole(\"button\", { name: new RegExp(originalName) }),\n  136 |   ).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-create-intent.spec.ts",
+                        "column": 29,
+                        "line": 133
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"email\": null,\u001b[22m\n\u001b[32m-   \"name\": \"Synthetic exact creation intent\",\u001b[39m\n\u001b[31m+   \"name\": \"Changed after an unknown creation\",\u001b[39m\n\u001b[2m    \"notes\": \"Synthetic submitted source note\",\u001b[22m\n\u001b[2m    \"phone\": null,\u001b[22m\n\u001b[2m    \"requestId\": \"532522d6-7cd0-4e34-8687-3499a0695555\",\u001b[22m\n\u001b[2m    \"title\": \"Original submitted title\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  131 |   expect(control.bodies).toHaveLength(2);\n  132 |   expect(control.bodies[1]!.requestId).toBe(control.bodies[0]!.requestId);\n> 133 |   expect(control.bodies[1]).toEqual(control.bodies[0]);\n      |                             ^\n  134 |   await expect(\n  135 |     control.card.getByRole(\"button\", { name: new RegExp(originalName) }),\n  136 |   ).toBeVisible();\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-create-intent.spec.ts:133:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:18:17.765Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-create-intent.spec.ts",
+                    "column": 29,
+                    "line": 133
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7fc7e9cb00b82658baa0-cb9454f14779aa9ad7f4",
+          "file": "acceptance-prospect-create-intent.spec.ts",
+          "line": 113,
+          "column": 1
+        },
+        {
+          "title": "definite prospect creation refusal permits correction and an explicit editable retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7212,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T12:18:28.749Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7fc7e9cb00b82658baa0-5b34473773d3a8a65040",
+          "file": "acceptance-prospect-create-intent.spec.ts",
+          "line": 140,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T12:18:16.490Z",
+    "duration": 21830.601,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

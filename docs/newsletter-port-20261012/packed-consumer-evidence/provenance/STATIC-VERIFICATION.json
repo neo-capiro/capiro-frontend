@@ -1,0 +1,277 @@
+{
+  "capturedAt": "2026-10-12T23:06:33.204947+00:00",
+  "status": "PASS_STATIC_PROVENANCE_AND_CONTENT_ONLY",
+  "backendCommit": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+  "backendTree": "57166408367b1395c70e5872809501268b04e7d1",
+  "artifactSourceCommit": "fe50dc1c2de1660a036e338cf81acdcf0f2fb26a",
+  "artifactSHA256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+  "artifactBytes": 510772,
+  "artifactGitBlob": "04ea25adba740eca8f677c0259e45211b73c5f2e",
+  "integrity": "sha512-CK2DLxUPCTs+PkBwx8GOjRLfh6jssTddIX2zgxiFw2hjVcHLF65oA8vJJ+LIR00r9XBnxFdYYoD2ZAkgY698Sw==",
+  "tarEntries": 182,
+  "unpackedBytes": 2223132,
+  "allRegular": true,
+  "duplicateOrUnsafePaths": [],
+  "entryModes": {
+    "0o600": 144,
+    "0o644": 38
+  },
+  "packageName": "@capiro/shared",
+  "packageVersion": "0.0.0",
+  "packagePrivate": true,
+  "packageMetadataMatchesPinnedBackend": true,
+  "declarations": 36,
+  "mapsResolveInsidePackedSources": 72,
+  "distFiles": 144,
+  "canonicalSourceAndCompilerFilesMatchPinnedTree": 39,
+  "downloadedBackendFilesGitVerified": 12,
+  "publicExportTargets": [
+    {
+      "export": "./ai-model-policy",
+      "condition": "types",
+      "target": "./dist/ai-model-policy.d.ts"
+    },
+    {
+      "export": "./ai-model-policy",
+      "condition": "require",
+      "target": "./dist/ai-model-policy.js"
+    },
+    {
+      "export": "./ai-model-policy",
+      "condition": "import",
+      "target": "./dist/ai-model-policy.js"
+    },
+    {
+      "export": "./ai-model-policy",
+      "condition": "default",
+      "target": "./dist/ai-model-policy.js"
+    },
+    {
+      "export": "./client-registration-integrity",
+      "condition": "types",
+      "target": "./dist/client-registration-integrity.d.ts"
+    },
+    {
+      "export": "./client-registration-integrity",
+      "condition": "require",
+      "target": "./dist/client-registration-integrity.js"
+    },
+    {
+      "export": "./client-registration-integrity",
+      "condition": "import",
+      "target": "./dist/client-registration-integrity.js"
+    },
+    {
+      "export": "./client-registration-integrity",
+      "condition": "default",
+      "target": "./dist/client-registration-integrity.js"
+    },
+    {
+      "export": ".",
+      "condition": "types",
+      "target": "./dist/index.d.ts"
+    },
+    {
+      "export": ".",
+      "condition": "require",
+      "target": "./dist/index.js"
+    },
+    {
+      "export": ".",
+      "condition": "import",
+      "target": "./dist/index.js"
+    },
+    {
+      "export": ".",
+      "condition": "default",
+      "target": "./dist/index.js"
+    },
+    {
+      "export": "./money",
+      "condition": "types",
+      "target": "./dist/money.d.ts"
+    },
+    {
+      "export": "./money",
+      "condition": "require",
+      "target": "./dist/money.js"
+    },
+    {
+      "export": "./money",
+      "condition": "import",
+      "target": "./dist/money.js"
+    },
+    {
+      "export": "./money",
+      "condition": "default",
+      "target": "./dist/money.js"
+    },
+    {
+      "export": "./funding-claim",
+      "condition": "types",
+      "target": "./dist/funding-claim.d.ts"
+    },
+    {
+      "export": "./funding-claim",
+      "condition": "require",
+      "target": "./dist/funding-claim.js"
+    },
+    {
+      "export": "./funding-claim",
+      "condition": "import",
+      "target": "./dist/funding-claim.js"
+    },
+    {
+      "export": "./funding-claim",
+      "condition": "default",
+      "target": "./dist/funding-claim.js"
+    },
+    {
+      "export": "./defense-budget-line",
+      "condition": "types",
+      "target": "./dist/defense-budget-line.d.ts"
+    },
+    {
+      "export": "./defense-budget-line",
+      "condition": "require",
+      "target": "./dist/defense-budget-line.js"
+    },
+    {
+      "export": "./defense-budget-line",
+      "condition": "import",
+      "target": "./dist/defense-budget-line.js"
+    },
+    {
+      "export": "./defense-budget-line",
+      "condition": "default",
+      "target": "./dist/defense-budget-line.js"
+    },
+    {
+      "export": "./pe-source-coverage",
+      "condition": "types",
+      "target": "./dist/pe-source-coverage.d.ts"
+    },
+    {
+      "export": "./pe-source-coverage",
+      "condition": "require",
+      "target": "./dist/pe-source-coverage.js"
+    },
+    {
+      "export": "./pe-source-coverage",
+      "condition": "import",
+      "target": "./dist/pe-source-coverage.js"
+    },
+    {
+      "export": "./pe-source-coverage",
+      "condition": "default",
+      "target": "./dist/pe-source-coverage.js"
+    },
+    {
+      "export": "./meri-skills",
+      "condition": "types",
+      "target": "./dist/meri-skills.d.ts"
+    },
+    {
+      "export": "./meri-skills",
+      "condition": "require",
+      "target": "./dist/meri-skills.js"
+    },
+    {
+      "export": "./meri-skills",
+      "condition": "import",
+      "target": "./dist/meri-skills.js"
+    },
+    {
+      "export": "./meri-skills",
+      "condition": "default",
+      "target": "./dist/meri-skills.js"
+    },
+    {
+      "export": "./meri-read-outcome",
+      "condition": "types",
+      "target": "./dist/meri-read-outcome.d.ts"
+    },
+    {
+      "export": "./meri-read-outcome",
+      "condition": "require",
+      "target": "./dist/meri-read-outcome.js"
+    },
+    {
+      "export": "./meri-read-outcome",
+      "condition": "import",
+      "target": "./dist/meri-read-outcome.js"
+    },
+    {
+      "export": "./meri-read-outcome",
+      "condition": "default",
+      "target": "./dist/meri-read-outcome.js"
+    },
+    {
+      "export": "./market-title",
+      "condition": "types",
+      "target": "./dist/market-title.d.ts"
+    },
+    {
+      "export": "./market-title",
+      "condition": "require",
+      "target": "./dist/market-title.js"
+    },
+    {
+      "export": "./market-title",
+      "condition": "import",
+      "target": "./dist/market-title.js"
+    },
+    {
+      "export": "./market-title",
+      "condition": "default",
+      "target": "./dist/market-title.js"
+    },
+    {
+      "export": "./newsletter",
+      "condition": "types",
+      "target": "./dist/newsletter.d.ts"
+    },
+    {
+      "export": "./newsletter",
+      "condition": "require",
+      "target": "./dist/newsletter.js"
+    },
+    {
+      "export": "./newsletter",
+      "condition": "import",
+      "target": "./dist/newsletter.js"
+    },
+    {
+      "export": "./newsletter",
+      "condition": "default",
+      "target": "./dist/newsletter.js"
+    },
+    {
+      "export": "./newsletter-render",
+      "condition": "types",
+      "target": "./dist/newsletter-render.d.ts"
+    },
+    {
+      "export": "./newsletter-render",
+      "condition": "require",
+      "target": "./dist/newsletter-render.js"
+    },
+    {
+      "export": "./newsletter-render",
+      "condition": "import",
+      "target": "./dist/newsletter-render.js"
+    },
+    {
+      "export": "./newsletter-render",
+      "condition": "default",
+      "target": "./dist/newsletter-render.js"
+    }
+  ],
+  "installPackageExecutionCompilerBuildBrowserProviderRun": false,
+  "frontendAndPriorEvidenceEdits": false,
+  "limits": [
+    "Static evidence inspection only; backend import/compiler/bundle/VM/116 characterization results are reported producer/reviewer evidence, not rerun here.",
+    "Only newsletter/newsletter-render browser closure is scoped for adoption; full root export is not browser-qualified.",
+    "Runtime source maps being present is not frontend installation, visual, asset-serving or native authority acceptance."
+  ]
+}

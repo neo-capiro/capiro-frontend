@@ -1,0 +1,52 @@
+export default function PageHeader() {
+  return (
+    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-start relative size-full" data-node-id="848:153536" data-name="Page header">
+      <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[var(--theme(spacing.3),12px)] items-start leading-[1.45] min-w-px overflow-clip relative" data-node-id="848:153537" data-name="Title and description">
+        <p className="font-['Geist:SemiBold'] font-semibold relative shrink-0 text-[28px] text-[color:var(--foreground,#0a0a0a)] w-full" data-node-id="848:153538">
+          FY27 counter-UAS posture
+        </p>
+        <p className="font-['Geist:Regular'] font-normal relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] w-full" data-node-id="848:153539">
+          Goal · Secure a funded counter-UAS demonstration and a clear path to adoption.
+        </p>
+      </div>
+      <div className="content-stretch cursor-pointer flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-[267px]" data-node-id="848:153540" data-name="Header actions">
+        <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="848:153541" data-name="Action · Export">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I848:153541;12:379">
+            Export
+          </p>
+        </a>
+        <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="848:153547" data-name="Action · History">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I848:153547;12:379">
+            History
+          </p>
+        </a>
+        <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="848:153553" data-name="Action · Ask Meri">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I848:153553;12:379">
+            Ask Meri
+          </p>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: Modules/Typography/Geist/SemiBold/28 · PERCENT 145 · 0: Font(family: "Geist", style: SemiBold, size: 28, weight: 600, lineHeight: 1.4500000476837158, letterSpacing: 0), LegiWatch/Typography/Geist/Regular/14: Font(family: "Geist", style: Regular, size: 14, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: 0), v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/shadow-xs: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 1), radius: 2, spread: 0).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+Images and SVGs will be stored as constants, e.g. const image = '[temporary Figma asset URL omitted]'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

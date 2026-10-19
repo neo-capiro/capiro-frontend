@@ -1,0 +1,128 @@
+{
+  "cases": [
+    {
+      "name": "Idempotent split preserves existing descriptor and every part",
+      "passed": true
+    },
+    {
+      "allPackageFiles": 370,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/materialized"
+      ],
+      "exitCode": 0,
+      "materializedPackRecords": [
+        {
+          "path": "packs/context-00005.tar.gz",
+          "sha256": "930a0d1bc7ab99ba06996a35a65d3af0dce1466e28d495f218c2e2704c4aa8ac",
+          "size": 20401940
+        },
+        {
+          "path": "packs/context-00132.tar.gz",
+          "sha256": "3d4b12a71d25920ebb8e652a93dd897139e4bc329fed35b9da6e26a909070c02",
+          "size": 19860818
+        }
+      ],
+      "name": "Real published layout reconstructs both large packs and all ordinary package bytes",
+      "passed": true,
+      "seconds": 0.7670089370003552,
+      "stderr": "",
+      "stdout": "{\n  \"manifestSha256\": \"c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575\",\n  \"nextStep\": \"Run the existing verify_context.py against this target and the trusted manifest hash.\",\n  \"ordinaryFilesCopied\": 368,\n  \"packsReassembled\": 2,\n  \"target\": \"/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/materialized\"\n}\n"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/verify_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/materialized",
+        "--expected-manifest-sha256",
+        "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+        "--history-bundle",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle"
+      ],
+      "exitCode": 0,
+      "name": "Existing unchanged verifier accepts the materialized full package and history binding",
+      "passed": true,
+      "seconds": 5.005634994999127,
+      "stderr": "",
+      "stdout": "{\"credentialReview\": \"ROOT_REVIEW_REQUIRED\", \"files\": 35264, \"historyBundleVerified\": true, \"manifestSha256\": \"c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575\", \"metadataFiles\": 202, \"packs\": 166, \"uniqueBlobs\": 9729, \"verified\": true}\n"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/materialized"
+      ],
+      "exitCode": 1,
+      "name": "Existing target is refused",
+      "passed": true,
+      "seconds": 0.03716416799943545,
+      "stderr": "Preparation refused: Target must be a NEW directory: /workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/materialized. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/traversal-target"
+      ],
+      "exitCode": 1,
+      "name": "Original path traversal is refused before creating the target",
+      "passed": true,
+      "seconds": 0.03329902400218998,
+      "stderr": "Preparation refused: Absolute, dot or traversal path is not allowed. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/symlink-target"
+      ],
+      "exitCode": 1,
+      "name": "Ordinary source symlink is refused before creating the target",
+      "passed": true,
+      "seconds": 0.03696712699820637,
+      "stderr": "Preparation refused: Symlink ancestor is not allowed: /workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/published/context/unsafe-link. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    },
+    {
+      "name": "Appended oversized pack adds records without changing earlier parts",
+      "passed": true
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/split_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85/append-fixture"
+      ],
+      "exitCode": 1,
+      "name": "Differing existing part is refused without overwriting it or the descriptor",
+      "passed": true,
+      "seconds": 0.08931584299716633,
+      "stderr": "Split refused: File integrity mismatch: context-00001.tar.gz.part-00001\n",
+      "stdout": ""
+    }
+  ],
+  "deliverySha256": "fae8e3661df3c26dbe501193f1fe5cfa9d009568ccbdf60fa4a6276d584ce875",
+  "originalContextManifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+  "originalContextUnchanged": true,
+  "originalPackageFileCount": 370,
+  "passed": true,
+  "scope": "Transport preservation only; no product/runtime qualification",
+  "sourceHelpers": {
+    "context_common.py": "8633a0f83cc28e54ea65c9bb99300090861fbfe35d0a16efd40d5e15e3d0c800",
+    "context_delivery.py": "e88191af82509b399deb76fbe9b6350d50efdef6ac4f53bc060b46c84cb55f9d",
+    "prepare_context.py": "0e51b827dd3237127eec8d47461f6ef4d294c210406f707ec797d1f8be0f34a4",
+    "split_context.py": "c021be358e96b1f182ecfb6d759d06805a0e3b0d5e50a8ea2c015f5491963c55"
+  },
+  "work": "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85"
+}

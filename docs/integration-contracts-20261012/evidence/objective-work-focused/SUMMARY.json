@@ -1,0 +1,6 @@
+{
+  "baseline": "Three expected failures on d825528 (application source f4e9e1f) establish missing bound destinations. Exact same feature-control bytes pass 3/3 on the new working-tree delta.",
+  "focused": "30/30 browser tests and 11/11 targeted unit tests passed; types, lint, format and architecture pass. These are development evidence, not exact frozen combined qualification.",
+  "preservedAttempts": "The initial types failure and initial architecture size-review findings are retained. They were resolved before the focused passing checks. No historical control or meaningful existing assertion was relaxed.",
+  "limitation": "Synthetic fixtures only. Native database, live identity/providers and 337-row native acceptance remain unrun."
+}

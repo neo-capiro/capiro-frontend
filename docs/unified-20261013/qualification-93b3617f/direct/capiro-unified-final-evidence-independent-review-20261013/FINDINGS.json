@@ -1,0 +1,19 @@
+{
+  "status": "PASS_BOUNDED",
+  "newFindings": [],
+  "pending": [
+    "Portfolio shards2\u20134; all1122 unique discovered cases must complete before aggregate acceptance"
+  ],
+  "historicalFailuresPreserved": [
+    "Initial actual-additions400 origin mismatch",
+    "Diagnosticv1 instrumentation500 responses"
+  ],
+  "exclusions": [
+    "Native337",
+    "Full Figma/accessibility",
+    "Provider/task/payment effects",
+    "Target musl/image/ABI",
+    "AWS/deploy"
+  ],
+  "reviewerRuntimeExecution": false
+}

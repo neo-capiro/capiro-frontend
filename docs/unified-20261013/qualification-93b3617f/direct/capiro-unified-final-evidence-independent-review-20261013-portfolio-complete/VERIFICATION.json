@@ -1,0 +1,314 @@
+{
+  "observedUTC": "2026-10-13T07:26:39.104512+00:00",
+  "status": "PASS_FROZEN93_PORTFOLIO1122_WITH_PRESERVED_OUTER_INFRASTRUCTURE_FAILURE",
+  "source": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "sourceDiff": ""
+  },
+  "sourceObjectsVerified": true,
+  "observedCheckout": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "status": "M apps/web/package.json\n M apps/web/src/app/globals.css\n M apps/web/src/features/meri/MeriSuggestions.tsx\n M apps/web/src/features/portfolio/index/ProfileResults.tsx\n M apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx\n M apps/web/src/features/portfolio/index/portfolio.module.css\n M apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx\n M apps/web/src/shared/shell/ProductShell.tsx\n M apps/web/test/browser/main.tsx\n M package-lock.json\n?? apps/web/test/accessibility.ts\n?? apps/web/test/browser/shared-home-accessibility.spec.ts\n?? apps/web/tests/browser/canonical-navigation.spec.ts\n?? apps/web/tests/browser/portfolio-home-accessibility.spec.ts"
+  },
+  "discovered": 1122,
+  "actualPassed": 1122,
+  "uniqueIds": 1122,
+  "duplicateIds": 0,
+  "missingIds": 0,
+  "unexpectedIds": 0,
+  "retries": 0,
+  "skips": 0,
+  "flaky": 0,
+  "resultErrors": 0,
+  "runnerErrors": 0,
+  "timeoutCounts": {
+    "30000": 1118,
+    "90000": 4
+  },
+  "sequentialShards": true,
+  "shards": [
+    {
+      "shard": 1,
+      "count": 283,
+      "gate": {
+        "name": "portfolio-shard-1",
+        "command": [
+          "env",
+          "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+          "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-1-results.json",
+          "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+          "npm",
+          "run",
+          "test:browser",
+          "--",
+          "--workers=3",
+          "--shard=1/4",
+          "--output=/workspace/capiro-unified-runtime-tmp-20261013/portfolio-shard-1-artifacts"
+        ],
+        "startedUTC": "2026-10-13T06:35:17.505956+00:00",
+        "endedUTC": "2026-10-13T06:43:31.929741+00:00",
+        "durationSeconds": 494.42381875400315,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "stats": {
+        "startTime": "2026-10-13T06:35:18.601Z",
+        "duration": 493275.134,
+        "expected": 283,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 3,
+      "retries": 0,
+      "actualResults": {
+        "passed": 283
+      },
+      "timeouts": {
+        "30000": 283
+      },
+      "errors": [],
+      "retainedPriorReceipt": true
+    },
+    {
+      "shard": 2,
+      "count": 298,
+      "gate": {
+        "name": "portfolio-shard-2",
+        "command": [
+          "env",
+          "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+          "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-2-results.json",
+          "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+          "npm",
+          "run",
+          "test:browser",
+          "--",
+          "--workers=3",
+          "--shard=2/4",
+          "--output=/workspace/capiro-unified-runtime-tmp-20261013/portfolio-shard-2-artifacts"
+        ],
+        "startedUTC": "2026-10-13T06:43:31.989757+00:00",
+        "endedUTC": "2026-10-13T06:54:41.932862+00:00",
+        "durationSeconds": 669.9431381119939,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "stats": {
+        "startTime": "2026-10-13T06:43:32.850Z",
+        "duration": 669027.047,
+        "expected": 298,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 3,
+      "retries": 0,
+      "actualResults": {
+        "passed": 298
+      },
+      "timeouts": {
+        "30000": 295,
+        "90000": 3
+      },
+      "errors": [],
+      "retainedPriorReceipt": true
+    },
+    {
+      "shard": 3,
+      "count": 270,
+      "gate": {
+        "name": "portfolio-shard-3",
+        "command": [
+          "env",
+          "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+          "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-3-results.json",
+          "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+          "npm",
+          "run",
+          "test:browser",
+          "--",
+          "--workers=3",
+          "--shard=3/4",
+          "--output=/workspace/capiro-unified-runtime-tmp-20261013/portfolio-shard-3-artifacts"
+        ],
+        "startedUTC": "2026-10-13T06:59:04.349038+00:00",
+        "endedUTC": "2026-10-13T07:10:15.687588+00:00",
+        "durationSeconds": 671.338585414007,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "stats": {
+        "startTime": "2026-10-13T06:59:05.239Z",
+        "duration": 670389.856,
+        "expected": 270,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 3,
+      "retries": 0,
+      "actualResults": {
+        "passed": 270
+      },
+      "timeouts": {
+        "30000": 270
+      },
+      "errors": [],
+      "retainedPriorReceipt": false
+    },
+    {
+      "shard": 4,
+      "count": 271,
+      "gate": {
+        "name": "portfolio-shard-4",
+        "command": [
+          "env",
+          "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+          "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-4-results.json",
+          "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+          "npm",
+          "run",
+          "test:browser",
+          "--",
+          "--workers=3",
+          "--shard=4/4",
+          "--output=/workspace/capiro-unified-runtime-tmp-20261013/portfolio-shard-4-artifacts"
+        ],
+        "startedUTC": "2026-10-13T07:10:15.742621+00:00",
+        "endedUTC": "2026-10-13T07:19:34.812637+00:00",
+        "durationSeconds": 559.070045970002,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+          "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+          "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:10:16.713Z",
+        "duration": 558048.046,
+        "expected": 271,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 3,
+      "retries": 0,
+      "actualResults": {
+        "passed": 271
+      },
+      "timeouts": {
+        "30000": 270,
+        "90000": 1
+      },
+      "errors": [],
+      "retainedPriorReceipt": false
+    }
+  ],
+  "priorPackets": [
+    {
+      "packet": "/tmp/capiro-unified-final-evidence-independent-review-20261013",
+      "manifestSha256": "a0c4dc76e656a44bf848f054ce65d667dea11627c7fa53882d3e697a1b5a1883",
+      "verifiedFiles": 16,
+      "allUnchanged": true
+    },
+    {
+      "packet": "/tmp/capiro-unified-final-evidence-independent-review-20261013-shards12-addendum",
+      "manifestSha256": "cb465a5575d8621d1639886aece7882f6c37d49d2be48d0ea4f5f2313d02201c",
+      "verifiedFiles": 6,
+      "allUnchanged": true
+    }
+  ],
+  "retainedOriginalEvidence": [
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-discovery.json",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-progress.json",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-1-results.json",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-1-exit.json",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-1.log",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-2-results.json",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-2-exit.json",
+      "unchangedSinceShards12Review": true
+    },
+    {
+      "path": "/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-2.log",
+      "unchangedSinceShards12Review": true
+    }
+  ],
+  "outerFailure": {
+    "originalWrapperExit": 120,
+    "cause": "NOT_ESTABLISHED",
+    "originalProgressPreserved": true,
+    "productFailure": false,
+    "qualificationResumedOnlyShards": [
+      3,
+      4
+    ]
+  },
+  "reviewerRuntimeExecution": false
+}

@@ -1,0 +1,33 @@
+{
+  "source": "49f6609c7277ce8701b0d38c3ba163860633e668",
+  "findings": [
+    {
+      "id": "SV-01",
+      "severity": "P2",
+      "classification": "CONFIRMED_INHERITED_ACCESSIBILITY_DEFECT_RESOLVED_BY_ROOT",
+      "title": "A save that disables the focused control could leave keyboard focus outside an open modal",
+      "beforeSource": "2b0511a7efe2047028c31269626140829db33541",
+      "afterSource": "49f6609c7277ce8701b0d38c3ba163860633e668",
+      "sourceOwner": "apps/web/src/shared/portfolio/ui/Dialog.tsx:65; apps/web/src/shared/portfolio/ui/dialog-focus.ts:10",
+      "reproduction": [
+        "Open client Files; select Test report.pdf; open New folder.",
+        "Fill Reviewed destination and submit while the native folder PATCH returns the original same-ID Reports receipt.",
+        "Wait for unknown-outcome copy and disabled Save, then press Tab and allow the focus to settle."
+      ],
+      "beforeEvidence": [
+        "focus-settled-artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-pending.focus.json",
+        "focus-settled-artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-unknown.focus.json",
+        "before-fix-artifacts/review-Files-folder-unknown-review-at-1440/files-folder-unknown.focus.json"
+      ],
+      "rootMinimalRedEvidence": "root-minimal-red/focus-red-results.json",
+      "afterEvidence": [
+        "focus-regression-results.json",
+        "results.json",
+        "focus-field-results.json"
+      ],
+      "result": "Original unchanged settled regression passes; all10 desktop/mobile visual+keyboard cases and4 pending button/field focus controls pass. React capture remembers initial portal autoFocus; disabled-attribute observer restores only this top dialog after its previously focused control becomes disabled. Radix retains modal focus trapping.",
+      "scopeNote": "Dialog and vendor primitive were unchanged by earlier successor feature repairs; independently discovered current behavior is inherited, not proven introduced by CP01/CP02. No vendor edit or application edit performed by reviewer."
+    }
+  ],
+  "remainingBlockingFindingsInReviewedScope": []
+}

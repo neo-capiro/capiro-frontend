@@ -1,0 +1,26 @@
+{
+  "sourceAnalysisReceipt": "initial-ui-structure.result.json",
+  "fullExternalRaw": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\evidence\\initial-ui-source-structure.json",
+  "fullExternalSha256": "8d0e33779fc9e73250fa6b19aebbffe4c8fa137eabb4efd6ae32e840a54c15fa",
+  "errors": [],
+  "sizeSummary": {
+    "total": 502,
+    "reviewed": 482,
+    "inheritedUnreviewed": 19,
+    "blocking": 1
+  },
+  "blocking": [
+    {
+      "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+      "kind": "function",
+      "symbol": "MeriLiveConversation",
+      "line": 57,
+      "nonblank": 83,
+      "fingerprint": "8ae0b0a4a422bc83679906338a0f5e6d40b925a8fb1d10d31338316c3663f3bd",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true
+    }
+  ],
+  "note": "Initial stdout used an incorrect status-field filter and printed an empty blocking array; sizeSummary/blocking1 and full raw finding are preserved. Fixed reporting uses the actual blocking boolean. Product scanner/review DATA unchanged."
+}

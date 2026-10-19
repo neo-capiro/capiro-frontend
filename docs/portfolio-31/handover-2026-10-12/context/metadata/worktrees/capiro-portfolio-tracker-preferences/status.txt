@@ -1,0 +1,24 @@
+## codex/portfolio-tracker-preferences-20261011
+ M apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx
+ M apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx
+ M apps/web/src/features/portfolio/bill-tracker/queries.ts
+?? apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/queries.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts
+?? apps/web/src/features/portfolio/bill-tracker/current-data.ts
+?? apps/web/tests/browser/tracker-alert-preferences.spec.ts
+?? apps/web/tests/browser/tracker-boundary-harness.tsx
+?? apps/web/tests/browser/tracker-boundary.html
+?? apps/web/tests/browser/tracker-current-data.spec.ts
+?? apps/web/tests/tracker-alert-preferences.test.ts
+?? apps/web/tests/tracker-current-data.test.ts
+?? apps/web/tests/tracker-preference-fixtures.ts
+?? docs/portfolio-31/P6-TRACKER-PREFERENCES-20261011.md
+?? docs/portfolio-31/P6-TRACKER-PREFERENCES-PATCH-20261011.json
+?? docs/portfolio-31/P6-TRACKER-PREFERENCES-SIZE-REVIEWS-20261011.json

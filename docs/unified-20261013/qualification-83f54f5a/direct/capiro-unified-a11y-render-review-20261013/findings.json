@@ -1,0 +1,41 @@
+[
+  {
+    "id": "AR-01",
+    "severity": "P2",
+    "status": "CONFIRMED_OPEN",
+    "title": "Active Portfolio profile-type count has insufficient light-mode contrast",
+    "sourceRefs": [
+      "apps/web/src/shared/portfolio/styles.css:134",
+      "apps/web/src/features/portfolio/index/IndexNavigation.tsx:39",
+      "apps/web/src/app/globals.css:6"
+    ],
+    "selector": ".primary > small",
+    "foreground": "rgb(117,110,105)",
+    "background": "linear-gradient(173deg,rgb(36,36,36),rgb(10,10,10))",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": "1 on element and all ancestors",
+    "minimumContrast": 3.0977356477519926,
+    "maximumContrast": 3.9508970983319927,
+    "expectedMinimum": 4.5,
+    "observedWidths": [
+      1440,
+      390,
+      320
+    ],
+    "darkControl": {
+      "foreground": "rgb(170,162,156)",
+      "minimumContrast": 6.1776761032155605,
+      "maximumContrast": 7.87909794960765
+    },
+    "evidence": [
+      "captures/portfolio-1440-light/computed.json",
+      "captures/portfolio-390-light/lower.png",
+      "captures/portfolio-320-light/lower.png",
+      "computed-contrast.json"
+    ],
+    "cause": "The global small muted color wins over the active dark-gradient button inherited white; axe marks short text incomplete. The case was not covered by a violations-only assertion.",
+    "recommendation": "Owner should add a narrowly scoped active profile-type tab count color rule and verify both All/Clients active states light/dark. No global muted-token broadening.",
+    "notClaimed": "No evidence of native or provider defect; no assertion that this contrast issue was introduced by the current patch."
+  }
+]

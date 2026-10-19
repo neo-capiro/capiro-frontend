@@ -1,0 +1,16 @@
+{
+  "disposition": "accepted bounded source correction",
+  "files": [
+    {
+      "path": "apps/web/src/shared/meetings/MeetingPreparation.tsx",
+      "sha256": "f24d4205970353406377d90ed88d052192da41a91045ae46f53814f5156be305"
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    }
+  ],
+  "reason": "engagementMeeting.preps is optional; undefined means omitted, not a confirmed empty list. New caption preserves that distinction, [] retains prior no-preparation text, nonempty rendering is unchanged. Both missing and empty continue the existing disabled generation action; no invented native fetch/metadata.",
+  "tests": "Added owner browser control inspected; root owns execution.",
+  "remainingSourceFindings": []
+}

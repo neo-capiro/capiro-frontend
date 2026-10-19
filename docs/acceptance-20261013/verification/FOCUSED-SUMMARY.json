@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-13T12:42:10.113455+00:00",
+  "baseApplication": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "baseline104": {
+    "pass": 26,
+    "confirmedProductFailures": 78
+  },
+  "latestFocusedResults": {
+    "uniquePortfolioBrowserCases": 127,
+    "passing": 127,
+    "composition": "125/127 frozen initial candidate plus21/21 corrected replay; not one final-source combined qualification",
+    "original78FailuresNowPassing": 78,
+    "newUnitControls": 100,
+    "meriFocused": 26
+  },
+  "preservedFailures": [
+    "initial104:24PASS80FAIL before native optional-parent/403 expectation corrections",
+    "phase-b-browser-1:53PASS1execution-context interruption",
+    "phase-b-all-browser:125PASS2test-flow failures",
+    "phase-b-lint:5errors, subsequently corrected"
+  ],
+  "nativeRowsAccepted": 0,
+  "nativeRowsRemaining": 337,
+  "finalCombinedQualification": "PENDING after exact source commit and clean install"
+}

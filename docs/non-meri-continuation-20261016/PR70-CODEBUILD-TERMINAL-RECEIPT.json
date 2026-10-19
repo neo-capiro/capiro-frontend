@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "observedAtUtc": "2026-10-17T05:32:09Z",
+  "sourceCommit": "31a140cddf798c32b5cc45ad22e7b672312b3ca3",
+  "sourceTree": "377fea359c5d744384592dfa6ce9c89c35ee300d",
+  "sourceS3VersionId": "h5.al8rvug2KtdxlWKFIKxiOuqrDTR9h",
+  "archiveSha256": "f9a1f4b012cd8348bc8a05cc4b3b8b01429df5189cead93d5cd58b2b60cf799d",
+  "buildId": "capiro-portfolio-preview-build:4391e1c2-d21c-4c46-b446-502aace947db",
+  "startedAtUtc": "2026-10-17T05:23:33.074Z",
+  "endedAtUtc": "2026-10-17T05:27:24.062Z",
+  "status": "FAILED",
+  "phaseResults": {
+    "SUBMITTED": "SUCCEEDED",
+    "QUEUED": "SUCCEEDED",
+    "PROVISIONING": "SUCCEEDED",
+    "DOWNLOAD_SOURCE": "SUCCEEDED",
+    "INSTALL": "SUCCEEDED",
+    "PRE_BUILD": "SUCCEEDED",
+    "BUILD": "FAILED",
+    "POST_BUILD": "SUCCEEDED",
+    "UPLOAD_ARTIFACTS": "SUCCEEDED",
+    "FINALIZING": "SUCCEEDED"
+  },
+  "failure": {
+    "statusCode": "COMMAND_EXECUTION_ERROR",
+    "command": "npm run architecture",
+    "exitCode": 1,
+    "architectureBlockingCount": 1,
+    "firstBlockingFinding": {
+      "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+      "kind": "function",
+      "symbol": "MeriConversationHost",
+      "line": 20,
+      "nonblankLines": 84,
+      "fingerprint": "6056bf65ed132090737b083f9892a902004af27b369ff142e6a56aa82fcf4efc",
+      "reviewStatus": "unreviewed"
+    }
+  },
+  "autoRetryLimit": 0,
+  "autoRetryNumber": 0,
+  "exactTagPublished": false,
+  "exactTagReadback": "ImageNotFoundException",
+  "imageDigest": null,
+  "scanStatus": "NOT_RUN",
+  "logGroup": "/capiro/portfolio-preview/build",
+  "logStream": "4391e1c2-d21c-4c46-b446-502aace947db",
+  "note": "Read-only terminal and ECR evidence. No retry or AWS mutation was performed during monitoring."
+}

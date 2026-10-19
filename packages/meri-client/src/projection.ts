@@ -11,6 +11,7 @@
 // exposed as a mutable reference.
 
 import type { RunStatusState, UIEvent, RunBinding } from './types.js';
+import { stableStringify } from './json-identity.js';
 
 export type ProjectionStatus = 'accepted' | 'duplicate' | 'conflict' | 'gap' | 'out-of-scope';
 
@@ -60,17 +61,6 @@ export function acceptOrReject(projection: ConversationProjection, event: UIEven
     throw new ProjectionRejectionError(result);
   }
   return result;
-}
-
-/** Deterministic, key-sorted canonical string for immutable payload dedup. */
-function stableStringify(value: unknown): string {
-  if (value === null || typeof value !== 'object') return JSON.stringify(value) ?? 'null';
-  if (Array.isArray(value)) return `[${value.map(stableStringify).join(',')}]`;
-  const record = value as Record<string, unknown>;
-  return `{${Object.keys(record)
-    .sort()
-    .map((key) => `${JSON.stringify(key)}:${stableStringify(record[key])}`)
-    .join(',')}}`;
 }
 
 /** Recursively freezes a JSON-ish value and returns it. */

@@ -1,0 +1,44 @@
+{
+  "records": [
+    {
+      "path": "apps/control/document-application/README.md",
+      "bytes": 5698,
+      "gitBlob": "4c0b91550e01ebbc5d0d69036bd925b0000513da",
+      "sha256": "bc81faaca0a40c1771e4806f063291e915bceadea4a59e133297bde686bb22ef"
+    },
+    {
+      "path": "docs/coordination/reports/CODEX-DOCUMENT-CONTRACT-INTEGRATION-20261013.md",
+      "bytes": 3749,
+      "gitBlob": "879bfa803f726e54683f74ebc54f135ab1f8493c",
+      "sha256": "69c05ea49f1d3c50f80dae65623e8aa0123eadd119454de9fa1306bf65b150ea"
+    },
+    {
+      "path": "packages/contracts/document-application/receive.mjs",
+      "bytes": 2698,
+      "gitBlob": "9b4ffae2f496b4f5b569e5d2a58734eebb9b7566",
+      "sha256": "95f3c2ced717a5e607d3cf1b083a6bc5a8041aa584a221ac2f99fa8c3d35f42e"
+    },
+    {
+      "path": "packages/contracts/document-application/download.mjs",
+      "bytes": 3435,
+      "gitBlob": "80cf0877cf3f7f1c0c199073758826333732d1d7",
+      "sha256": "fd74698f6d0245381ca504300dabe1cfba2b7ed4ed6bc2054d805aaeadf02246"
+    },
+    {
+      "path": "packages/contracts/document-application/boundary.mjs",
+      "bytes": 2216,
+      "gitBlob": "02dad0cceaaa3b3ccbbd237de8c41bd94fdf5fc1",
+      "sha256": "6a82c49b1db426d2435d751eaf754731658ac1d448750e1a8f060fdada869982"
+    },
+    {
+      "path": "packages/contracts/dist/document-application.metadata.json",
+      "bytes": 1996,
+      "gitBlob": "c33416393c13b17a30b6811f822e2a458d42c089",
+      "sha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f"
+    }
+  ],
+  "packagedMetadataExact": true,
+  "schemaSHA256Verified": "712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51",
+  "runtimeInspection": "Static reading of the exact distributed browser ESM, public source receive/download/boundary, declarations and schema; nothing imported or executed.",
+  "sourceReadsNoPrivateBackendImplementation": true
+}

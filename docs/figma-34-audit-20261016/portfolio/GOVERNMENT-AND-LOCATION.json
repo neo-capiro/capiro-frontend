@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "fileKey": "mpXWnySldUFzdVna8i69Ki",
+  "sourceBase": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "auditType": "DESIGN_AND_SOURCE_READING_ONLY_NO_RENDERED_PARITY",
+  "consolidation": {
+    "entry": {
+      "nodeId": "1064:158951",
+      "name": "Government & federal profile · Combined summary",
+      "visible": true,
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-158951",
+      "onClick": "1064:159414"
+    },
+    "legacyFederalEntry": {
+      "nodeId": "1064:158952",
+      "visible": false,
+      "rule": "Do not duplicate or re-enable the hidden legacy tile."
+    },
+    "identityModal": {
+      "nodeId": "1064:159414",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-159414"
+    },
+    "federalActivityTab": {
+      "nodeId": "1064:159495",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-159495"
+    },
+    "designStatus": "PRESENT_ONE_VISIBLE_ENTRY_TWO_TABS"
+  },
+  "districtNexus": {
+    "nodeId": "1064:158954",
+    "visible": true,
+    "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-158954",
+    "preserveMapAndLocations": true,
+    "locations": [
+      {
+        "name": "Headquarters",
+        "markerId": "1064:159001",
+        "detailId": "1118:278629",
+        "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-278629",
+        "prototypeNavigation": "OVERLAY",
+        "highFidelityReviewed": true
+      },
+      {
+        "name": "Arsenal-1",
+        "markerId": "1064:159005",
+        "detailId": "1064:159626",
+        "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-159626",
+        "prototypeNavigation": "OVERLAY",
+        "highFidelityReviewed": true
+      },
+      {
+        "name": "Huntsville office",
+        "markerId": "1064:159002",
+        "detailId": "1118:279240",
+        "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279240",
+        "prototypeNavigation": "OVERLAY",
+        "highFidelityReviewed": false
+      },
+      {
+        "name": "Lexington office",
+        "markerId": "1064:159004",
+        "detailId": "1118:279545",
+        "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279545",
+        "prototypeNavigation": "OVERLAY",
+        "highFidelityReviewed": false
+      },
+      {
+        "name": "Washington office",
+        "markerId": "1064:159003",
+        "detailId": "1118:279850",
+        "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279850",
+        "prototypeNavigation": "OVERLAY",
+        "highFidelityReviewed": false
+      }
+    ]
+  },
+  "categories": [
+    {
+      "key": "facility_district_geography",
+      "title": "Locations and districts",
+      "nodeId": "1118:278964",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-278964",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Saved facility/address, House/state districts, resolution method and evidence; incomplete address must not imply verified geography.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "client_economic_footprint",
+      "title": "Client economic footprint",
+      "nodeId": "1118:279012",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279012",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Planned/estimated/current employment remain distinct. Period, currency, geographic basis and supporting record accompany payroll/investment/tax/supplier/spend measures.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "acs_unemployment",
+      "title": "Unemployment",
+      "nodeId": "1118:279051",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279051",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "ACS five-year district estimates require dataset year, unemployed population, civilian labor force, rate and retrieval/coverage; district figures are not client employment.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "lodes_workforce_commuting",
+      "title": "Workforce and commuting",
+      "nodeId": "1118:279074",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279074",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Validated district aggregates only; absent LODES is explicitly unavailable, not inferred from facility staff previews.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "representation_committees",
+      "title": "Representation and committees",
+      "nodeId": "1118:278989",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-278989",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Current representative/senators and committees follow verified geography and source freshness.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "contracts_grants_vs_opportunities",
+      "title": "Contracts and grants",
+      "nodeId": "1118:279088",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279088",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Require recipient identity and geographic attribution; show DoD-contract/all-agency-assistance coverage. Opportunities remain separate potential funding.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "strategic_relevance",
+      "title": "Strategic relevance",
+      "nodeId": "1118:279116",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279116",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Use actual linked Objective/capability/PE/bill/target/Strategy references; physical presence alone creates no score or policy alignment.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "cpf_cds_public_vs_client",
+      "title": "Member priorities",
+      "nodeId": "1118:279104",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279104",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Public office/fiscal-year/project/request-outcome stage/source; public priority is not automatically a client award.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "engagement_context",
+      "title": "Engagement context",
+      "nodeId": "1118:279132",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279132",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Only matched office relationships/outreach/shared meetings/next actions; general client activity must not be attributed to the location.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    },
+    {
+      "key": "changes_evidence_freshness",
+      "title": "Changes and evidence",
+      "nodeId": "1118:279153",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1118-279153",
+      "designStatus": "PRESENT_HIGH_FIDELITY_IN_ARSENAL_DETAIL",
+      "acceptance": "Keep observation, reporting period, retrieval date and review status distinct; missing is not zero; stale values preserve period; conflicts require review.",
+      "backendAvailability": "NOT_VERIFIED_BY_THIS_DESIGN_AUDIT"
+    }
+  ],
+  "missingDesignStates": [
+    {
+      "id": "LOC-STATE-01",
+      "nearest": "1064:159626",
+      "request": "Show loading; whole-modal failure+retry; independently failed/unavailable section; permission-revoked or location moved while open. Preserve map selection and do not reveal a forbidden record."
+    },
+    {
+      "id": "LOC-STATE-02",
+      "nearest": "1064:159626",
+      "request": "Show one verified populated example plus stale, conflicting and manual-review cases with reporting period, dataset vintage, retrievedAt and geographic basis separately. Use clearly synthetic examples."
+    },
+    {
+      "id": "LOC-ECON-01",
+      "nearest": "1118:279012",
+      "request": "Supply the structured economic evidence entry/edit/import-review/error/unknown-save dialog or drawer referenced by Add supported figures copy. Current inspected frames provide descriptive text, not a complete form workflow."
+    },
+    {
+      "id": "GOV-STATE-01",
+      "nearest": "1064:159414",
+      "request": "Supply consolidated identity/federal-tab loading, no authorized match, source failure, partial coverage, stale/conflicting identity match and permission states. Keep program funding context distinct from attributed awards."
+    }
+  ],
+  "scopeLimits": [
+    "No ingestion/data aggregation/native API fact verification by this lane.",
+    "No claims that ACS/LODES/source data exist or are complete.",
+    "No production Figma mutation, frontend source edit, browser/compiler/test or live product call."
+  ]
+}

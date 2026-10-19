@@ -1,0 +1,16 @@
+apps/web/src/features/modules/calendar/useCalendar.ts 67ms
+apps/web/src/features/modules/calendar/CalendarScreen.tsx 14ms (unchanged)
+apps/web/src/features/modules/calendar/agenda.ts 31ms
+apps/web/src/features/modules/calendar/CalendarCard.tsx 15ms
+apps/web/src/features/modules/planner/PlannerScreen.tsx 20ms
+apps/web/src/features/modules/planner/LinkedTaskDetail.tsx 7ms
+apps/web/src/features/modules/planner/task-client-scope.ts 2ms
+apps/web/src/features/modules/planner/TaskWorkspace.tsx 29ms (unchanged)
+apps/web/test/browser/next-modules-baseline.spec.ts 14ms
+apps/web/test/browser/next-modules-fixtures.ts 8ms
+apps/web/test/browser/next-modules-baseline.spec.ts 60ms (unchanged)
+apps/web/test/browser/next-modules-fixtures.ts 20ms (unchanged)
+apps/web/test/browser/next-modules-scope.spec.ts 29ms
+apps/web/test/browser/next-modules-task-links.spec.ts 29ms
+apps/web/src/features/modules/calendar/planner-occurrences.test.ts 62ms
+apps/web/test/browser/calendar.spec.ts 33ms

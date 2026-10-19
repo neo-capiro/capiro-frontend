@@ -1,0 +1,27 @@
+{
+  "production": [
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 21,
+      "nonblank": 361,
+      "fingerprint": "024c124c331a351cede7aef7a9eac568dd49edcf28ebea0130511dab6f78d256",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "independent acceptance requested",
+      "blocking": true,
+      "sha256": "7e31e5655e2d9a2340aa2c0bf041f9d4cf8ed13b5b6f0dfbc2dde60154437ae7",
+      "responsibility": "The existing composer owns draft-to-review snapshot presentation. This correction uses one query-current predicate for composer and review, captures only display status, and leaves signature sanitation, native resolver, append choice, authority, transport, and rewrite lifetime in their canonical existing owners. No new domain or shared interface."
+    }
+  ],
+  "test": {
+    "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+    "kind": "test module",
+    "nonblank": 480,
+    "sha256": "e0225fbaed91849f066ec68bc09110c80a966685935c98a3b7769a18fe868024",
+    "responsibility": "Existing synthetic mail draft fixture owner; adds three cached-success/refetch-negative cases without removing original assertions. Tests assert visible absence/status and exact body/append payloads; a held native signature read is only synthetic. Shared setup naturally serves the existing signature facet. No extra production API or test harness interface."
+  },
+  "boundaryErrors": [],
+  "unchangedRewriteFingerprint": "6798b98e516658cb4532c155035dd9a15a15ca0aa1bae5b49b61b4ef72b22bfa",
+  "registryOwner": "root"
+}

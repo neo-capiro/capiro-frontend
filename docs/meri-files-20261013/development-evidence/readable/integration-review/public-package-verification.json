@@ -1,0 +1,123 @@
+{
+  "capturedAt": "2026-10-13T08:49:43.691581+00:00",
+  "sourceCommit": "70516e5c9681917ce493bbc50e3023494f2e1209",
+  "PR56DocsConfirmation": "25e0d29d6f0b6c3de284d13e86bc5f1aa0c00d21",
+  "archiveBytes": 228048,
+  "archiveSha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+  "sha512Integrity": "sha512-JvT7OeRN3T5HMsmuyeG9ZTBsM7CZaidWlRgYzgJqqhvqcxZE05Ze1p6K2GAVoqpdBnAFAHUYjHYkSFOhrDfjkg==",
+  "entryCount": 19,
+  "changedPriorMembers": [
+    "package/package.json",
+    "package/README.md"
+  ],
+  "newMembers": [
+    "package/dist/document-application.metadata.json",
+    "package/dist/document-application.schema.json",
+    "package/dist/document-application.mjs",
+    "package/dist/document-application.d.ts"
+  ],
+  "changedLockEntries": [
+    "apps/web/node_modules/@capiro/meri-contracts",
+    "apps/web"
+  ],
+  "rootFrozenContractUnchanged": true,
+  "installedOverlayPath": "/tmp/capiro-meri-files-execution-20261013/apps/web/node_modules/@capiro/meri-contracts",
+  "installedMembers": [
+    {
+      "member": "package/dist/action-application.metadata.json",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/action-application.schema.json",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/document-application.metadata.json",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/document-application.schema.json",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/meri.schema.json",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/package.json",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/README.md",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/THIRD-PARTY-NOTICES.md",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/action-application.mjs",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/browser.mjs",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/document-application.mjs",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/metadata.mjs",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/validate.mjs",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/action-application.d.ts",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/browser.d.ts",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/contracts.d.ts",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/document-application.d.ts",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/index.d.ts",
+      "installedExists": true,
+      "matches": true
+    },
+    {
+      "member": "package/dist/metadata.d.ts",
+      "installedExists": true,
+      "matches": true
+    }
+  ],
+  "limits": "Static archive/lock/overlay comparison only; no install or qualification execution."
+}

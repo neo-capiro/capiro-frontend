@@ -1,0 +1,133 @@
+{
+  "sourceCommit": "8f07bead475a186e470eb0b50f2e4fb03d4c40f5",
+  "backendHead": "be12f4a2a2ecec43b5d02ea279d9448763415e24",
+  "backendTree": "657902eb63067e1d44e02c908552dd7d93c85170",
+  "backendCompatibility": "Sourcecompatible; no frontend defect found; independent Codex review agrees",
+  "backend110Tests": "Ownerreported, not replayed here",
+  "applicationTree": "e3fb7ca4c3ba29c0bbcbbe37bf1a8e76ee910fd1",
+  "runtimeTree": "d38e105031e013720afcec64cc9c8bd2291b6113",
+  "completedAt": "2026-10-14T05:26:29.995106+00:00",
+  "passed": {
+    "fullRepositoryCheck": true,
+    "rootControls": 111,
+    "transportCases": 84,
+    "webUnit": 2257,
+    "capiroUnit": 442,
+    "newsletterCases": 385,
+    "newsletterDeclarations": true,
+    "workspaceTypes": true,
+    "publicPackages": true,
+    "fullWebLint": {
+      "errors": 0,
+      "warnings": 81
+    },
+    "fullWebFormatting": true,
+    "architecture": {
+      "total": 489,
+      "reviewed": 470,
+      "inheritedUnreviewed": 19,
+      "blocking": 0,
+      "boundaryErrors": 0
+    },
+    "distinctBrowserCases": 240,
+    "layoutCustomizeCasesIncluded": 30,
+    "focusedCasesNotAddedAgain": true,
+    "browserStats": {
+      "portfolio": {
+        "startTime": "2026-10-14T05:17:21.819Z",
+        "duration": 479838.88999999996,
+        "expected": 118,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "modules": {
+        "startTime": "2026-10-14T05:17:21.309Z",
+        "duration": 416140.78599999996,
+        "expected": 122,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "productionBuild": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "portfolioRootSmoke": true
+  },
+  "dependencyInstall": "Reused unchanged fresh PR33 task install; lifecycle scripts had been disabled; no new clean install in this receiving comparison",
+  "ancestry": [
+    {
+      "pr": 25,
+      "head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 26,
+      "head": "348bf98481268a5f06e26a924f0985b242265cbb",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 27,
+      "head": "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 28,
+      "head": "38c53fb0c8f05f598d835122c0ce7fd0f30a04fc",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 29,
+      "head": "247de58f00a1fea50c25a3400463103885014f4f",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 30,
+      "head": "93ad8792a95bfc1a15a691c608b5fe98f0ca7956",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 31,
+      "head": "3059abec94e2d6b9790758bb9563afdb8091b143",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 32,
+      "head": "6eeac2b95f5775447e9dd8ec25b9c556686d39e4",
+      "ancestorOfCandidate": true
+    },
+    {
+      "pr": 33,
+      "head": "8f07bead475a186e470eb0b50f2e4fb03d4c40f5",
+      "ancestorOfCandidate": true
+    }
+  ],
+  "ledgerHashes": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "bytes": 1438305,
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "bytes": 1332257,
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8"
+    }
+  ],
+  "sourceChanges": "Qualification/compatibility documentation only; production/tests/packages/scripts/vendor/lock unchanged from exactPR33",
+  "migration": "20261014050000_user_portfolio_layout authored source only; unexecuted; no deployment/live-save acceptance",
+  "nativeAccepted": 0,
+  "nativeRowsStillOpen": 337,
+  "frozenPR25Head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "remaining": [
+    "Receiving Core origin/image/config/schema and database-role qualification",
+    "Actual current session/grant/wall revocation, persistence/CAS/interrupted-save/restart acceptance",
+    "BackendMeetings regression owned separately, not accepted by layout comparison",
+    "Clerk sign-in passes percoordinator; Neo task-owned Chrome authentication/acceptance remains with native owner",
+    "Classic merge requirements remain unverified; no retry/bypass",
+    "No Docker/image/AWS/security/credentials/data-changing live tests, migration, merge or deployment",
+    "No fresh whole-frame Figma/manual assistive-technology certification; existing successor defaultaxe assertions retained"
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "authoringBaselineSpecs": 26,
+  "headBaselineSpecs": 26,
+  "scopeNote": "The actual captured and HEAD browser spec inventory has 26 pre-existing specs, not 27. All are verified; no 27th spec is inferred.",
+  "changed": [],
+  "headChanged": [],
+  "checked": [
+    {
+      "file": "apps/web/test/browser/billing-flow.spec.ts",
+      "expected": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea",
+      "actual": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea"
+    },
+    {
+      "file": "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+      "expected": "a6bf2c41c8eeec5f77945e7c2044cc83d23201f4d414ef0897f0b06edd388d04",
+      "actual": "a6bf2c41c8eeec5f77945e7c2044cc83d23201f4d414ef0897f0b06edd388d04"
+    },
+    {
+      "file": "apps/web/test/browser/calendar.spec.ts",
+      "expected": "1dfc4146efe3f8dd2852922aa2d5821b3df5197ad4a1e0462e72334eb504bb84",
+      "actual": "1dfc4146efe3f8dd2852922aa2d5821b3df5197ad4a1e0462e72334eb504bb84"
+    },
+    {
+      "file": "apps/web/test/browser/effective-dates.spec.ts",
+      "expected": "6e6afb14bfa4ee2096664b01685f54f71a9fe283660af903cef77b57d5c4bac2",
+      "actual": "6e6afb14bfa4ee2096664b01685f54f71a9fe283660af903cef77b57d5c4bac2"
+    },
+    {
+      "file": "apps/web/test/browser/integration.spec.ts",
+      "expected": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c",
+      "actual": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "file": "apps/web/test/browser/legiwatch.spec.ts",
+      "expected": "eee2ae597c42810bbb3d7817b93e414dbd0cd2db5fdf429c66ac4c9ca422c7b1",
+      "actual": "eee2ae597c42810bbb3d7817b93e414dbd0cd2db5fdf429c66ac4c9ca422c7b1"
+    },
+    {
+      "file": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "expected": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85",
+      "actual": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    },
+    {
+      "file": "apps/web/test/browser/modules.spec.ts",
+      "expected": "0eda1954d2b3281927bed161c90d3fb2b914d132c1124fc12f68aaf74e16203a",
+      "actual": "0eda1954d2b3281927bed161c90d3fb2b914d132c1124fc12f68aaf74e16203a"
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "expected": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e",
+      "actual": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-baseline.spec.ts",
+      "expected": "6db57ed51a21b2bda512f1763abc317cd92533feb6be6422f8a2ff724d597132",
+      "actual": "6db57ed51a21b2bda512f1763abc317cd92533feb6be6422f8a2ff724d597132"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "expected": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4",
+      "actual": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-task-links.spec.ts",
+      "expected": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6",
+      "actual": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "expected": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0",
+      "actual": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0"
+    },
+    {
+      "file": "apps/web/test/browser/objective-destination.spec.ts",
+      "expected": "d6a286c0a5cba33136fe7658021acb9d688f91621b501148a3ebff77a75c3265",
+      "actual": "d6a286c0a5cba33136fe7658021acb9d688f91621b501148a3ebff77a75c3265"
+    },
+    {
+      "file": "apps/web/test/browser/objective-navigation.spec.ts",
+      "expected": "f1b406cbe0438a34297433daa3110a2ac0dee8969cc17856f03af7153c4b15bd",
+      "actual": "f1b406cbe0438a34297433daa3110a2ac0dee8969cc17856f03af7153c4b15bd"
+    },
+    {
+      "file": "apps/web/test/browser/objective-work-destinations.spec.ts",
+      "expected": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289",
+      "actual": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289"
+    },
+    {
+      "file": "apps/web/test/browser/objective-work-navigation.spec.ts",
+      "expected": "a46c22d708483544981721bc483064119e3bd0a1e84419ea864af0f8ee73a091",
+      "actual": "a46c22d708483544981721bc483064119e3bd0a1e84419ea864af0f8ee73a091"
+    },
+    {
+      "file": "apps/web/test/browser/planner-engagement.spec.ts",
+      "expected": "c5323b8cfb64bc75dca4dad233d96cebb0895a5e299832005d8bbbf234f653cb",
+      "actual": "c5323b8cfb64bc75dca4dad233d96cebb0895a5e299832005d8bbbf234f653cb"
+    },
+    {
+      "file": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "expected": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978",
+      "actual": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    },
+    {
+      "file": "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "expected": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d",
+      "actual": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d"
+    },
+    {
+      "file": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "expected": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756",
+      "actual": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756"
+    },
+    {
+      "file": "apps/web/test/browser/public-forms.spec.ts",
+      "expected": "9a2a2e1a89755d5c649098c931ea4ef0bd11bb2f9d13c37b37c647e8dce988b6",
+      "actual": "9a2a2e1a89755d5c649098c931ea4ef0bd11bb2f9d13c37b37c647e8dce988b6"
+    },
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "expected": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+      "actual": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994"
+    },
+    {
+      "file": "apps/web/test/browser/session.spec.ts",
+      "expected": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817",
+      "actual": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817"
+    },
+    {
+      "file": "apps/web/test/browser/settings-scenes.spec.ts",
+      "expected": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11",
+      "actual": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11"
+    },
+    {
+      "file": "apps/web/test/browser/settings.spec.ts",
+      "expected": "a0407f3d7f5a75067552335381c23692110af8b5e7cbe158b11a5cef65a616d1",
+      "actual": "a0407f3d7f5a75067552335381c23692110af8b5e7cbe158b11a5cef65a616d1"
+    }
+  ],
+  "headChecked": [
+    {
+      "file": "apps/web/test/browser/billing-flow.spec.ts",
+      "head": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea",
+      "actual": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea"
+    },
+    {
+      "file": "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+      "head": "a6bf2c41c8eeec5f77945e7c2044cc83d23201f4d414ef0897f0b06edd388d04",
+      "actual": "a6bf2c41c8eeec5f77945e7c2044cc83d23201f4d414ef0897f0b06edd388d04"
+    },
+    {
+      "file": "apps/web/test/browser/calendar.spec.ts",
+      "head": "1dfc4146efe3f8dd2852922aa2d5821b3df5197ad4a1e0462e72334eb504bb84",
+      "actual": "1dfc4146efe3f8dd2852922aa2d5821b3df5197ad4a1e0462e72334eb504bb84"
+    },
+    {
+      "file": "apps/web/test/browser/effective-dates.spec.ts",
+      "head": "6e6afb14bfa4ee2096664b01685f54f71a9fe283660af903cef77b57d5c4bac2",
+      "actual": "6e6afb14bfa4ee2096664b01685f54f71a9fe283660af903cef77b57d5c4bac2"
+    },
+    {
+      "file": "apps/web/test/browser/integration.spec.ts",
+      "head": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c",
+      "actual": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "file": "apps/web/test/browser/legiwatch.spec.ts",
+      "head": "eee2ae597c42810bbb3d7817b93e414dbd0cd2db5fdf429c66ac4c9ca422c7b1",
+      "actual": "eee2ae597c42810bbb3d7817b93e414dbd0cd2db5fdf429c66ac4c9ca422c7b1"
+    },
+    {
+      "file": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "head": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85",
+      "actual": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    },
+    {
+      "file": "apps/web/test/browser/modules.spec.ts",
+      "head": "0eda1954d2b3281927bed161c90d3fb2b914d132c1124fc12f68aaf74e16203a",
+      "actual": "0eda1954d2b3281927bed161c90d3fb2b914d132c1124fc12f68aaf74e16203a"
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "head": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e",
+      "actual": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-baseline.spec.ts",
+      "head": "6db57ed51a21b2bda512f1763abc317cd92533feb6be6422f8a2ff724d597132",
+      "actual": "6db57ed51a21b2bda512f1763abc317cd92533feb6be6422f8a2ff724d597132"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "head": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4",
+      "actual": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-task-links.spec.ts",
+      "head": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6",
+      "actual": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6"
+    },
+    {
+      "file": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "head": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0",
+      "actual": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0"
+    },
+    {
+      "file": "apps/web/test/browser/objective-destination.spec.ts",
+      "head": "d6a286c0a5cba33136fe7658021acb9d688f91621b501148a3ebff77a75c3265",
+      "actual": "d6a286c0a5cba33136fe7658021acb9d688f91621b501148a3ebff77a75c3265"
+    },
+    {
+      "file": "apps/web/test/browser/objective-navigation.spec.ts",
+      "head": "f1b406cbe0438a34297433daa3110a2ac0dee8969cc17856f03af7153c4b15bd",
+      "actual": "f1b406cbe0438a34297433daa3110a2ac0dee8969cc17856f03af7153c4b15bd"
+    },
+    {
+      "file": "apps/web/test/browser/objective-work-destinations.spec.ts",
+      "head": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289",
+      "actual": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289"
+    },
+    {
+      "file": "apps/web/test/browser/objective-work-navigation.spec.ts",
+      "head": "a46c22d708483544981721bc483064119e3bd0a1e84419ea864af0f8ee73a091",
+      "actual": "a46c22d708483544981721bc483064119e3bd0a1e84419ea864af0f8ee73a091"
+    },
+    {
+      "file": "apps/web/test/browser/planner-engagement.spec.ts",
+      "head": "c5323b8cfb64bc75dca4dad233d96cebb0895a5e299832005d8bbbf234f653cb",
+      "actual": "c5323b8cfb64bc75dca4dad233d96cebb0895a5e299832005d8bbbf234f653cb"
+    },
+    {
+      "file": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "head": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978",
+      "actual": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    },
+    {
+      "file": "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "head": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d",
+      "actual": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d"
+    },
+    {
+      "file": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "head": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756",
+      "actual": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756"
+    },
+    {
+      "file": "apps/web/test/browser/public-forms.spec.ts",
+      "head": "9a2a2e1a89755d5c649098c931ea4ef0bd11bb2f9d13c37b37c647e8dce988b6",
+      "actual": "9a2a2e1a89755d5c649098c931ea4ef0bd11bb2f9d13c37b37c647e8dce988b6"
+    },
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "head": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+      "actual": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994"
+    },
+    {
+      "file": "apps/web/test/browser/session.spec.ts",
+      "head": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817",
+      "actual": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817"
+    },
+    {
+      "file": "apps/web/test/browser/settings-scenes.spec.ts",
+      "head": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11",
+      "actual": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11"
+    },
+    {
+      "file": "apps/web/test/browser/settings.spec.ts",
+      "head": "a0407f3d7f5a75067552335381c23692110af8b5e7cbe158b11a5cef65a616d1",
+      "actual": "a0407f3d7f5a75067552335381c23692110af8b5e7cbe158b11a5cef65a616d1"
+    }
+  ]
+}

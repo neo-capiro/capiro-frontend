@@ -1,0 +1,73 @@
+{
+  "finding": "OWI-F01",
+  "priority": "Release-blocking current-read repair as directed by parent",
+  "commit": "24400fb5133d9b75bf78240774426aeb0a583941",
+  "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "branch": "repair/capiro-objective-current-read-20261012",
+  "worktree": "/workspace/capiro-objective-current-read",
+  "productionFiles": [
+    "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+    "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx"
+  ],
+  "impact": "After a current Objective list read fails, the page and overview summary conceal cached objective content and editing entry points. Selected editors and create forms unmount; failed-read URL intents and delete state clear. Error/retry remains, and only a successful current read restores records. Status filters and independent Advocacy history remain intact.",
+  "reproduction": "Load a successful client Objectives list, age the cache31seconds, leave for Capabilities and return while list GET returns403. Before repair cached outcome remains visible/openable; after repair it is concealed and New objective is disabled. Equivalent503, direct refresh, open editor and summary cases are covered.",
+  "sharedChanges": false,
+  "cacheAbstractionAdded": false,
+  "contractChanges": false,
+  "backendCalls": false,
+  "providerCalls": false,
+  "frozenArchivesEdited": false,
+  "validation": {
+    "baseline": "One expected regression failure: stale Test outcome remains after403 (before-results.json and before-artifacts).",
+    "browser": {
+      "startTime": "2026-10-12T15:26:24.540Z",
+      "duration": 120041.38,
+      "expected": 26,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browserBreakdown": "11new current-read cases +15existing Objective intake/readiness/receipt cases",
+    "typecheck": "tsc --noEmit --project apps/web/tsconfig.json PASS",
+    "lint": "Focused four TypeScript/TSX files PASS",
+    "format": "Focused five changed files PASS",
+    "diffCheck": "PASS",
+    "architecture": {
+      "boundaryErrors": [],
+      "exitCode": 1,
+      "pendingSizeReviews": [
+        {
+          "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+          "kind": "function",
+          "symbol": "ObjectivesPage",
+          "line": 18,
+          "nonblank": 208,
+          "fingerprint": "5f1c21710a260ec6edb31ab366fdb048eeff1d28e1f149b7c7e4a80367bb4163",
+          "provenance": "changed-since-transfer",
+          "reviewStatus": "changed-since-review",
+          "blocking": true
+        }
+      ]
+    },
+    "initialTestCorrection": "The initial new-form test used a label-exact selector that included the existing decorative required marker; replaced it with the accessible textbox role/name. No product change was made to satisfy that locator."
+  },
+  "architectureReviewProposal": "ObjectivesPage remains the cohesive client Objective list/selection screen. Records are projected only from the current successful query. Local delete selection clears on client/error changes; current-read failure removes objective/new URL intents. Existing ObjectiveEditor and NewObjectivePage retain their editing/mutation responsibilities. Summary uses the same established current-read check locally. No HTTP, backend authorization, shared cache abstraction or separate domain responsibility was introduced. Root owns the exact shared review record.",
+  "limits": [
+    "Synthetic browser fixtures only; no native Objective authorization, service persistence or provider actions were attempted.",
+    "Read visibility changes are not proof of or repair for a backend authorization bypass.",
+    "Architecture remains exit1 solely pending an independent review record for the changed208line ObjectivesPage fingerprint.",
+    "Production build and integrated gates belong to root; no full application gates were rerun."
+  ],
+  "evidence": [
+    "before-results.json",
+    "before-artifacts/",
+    "results.json",
+    "results/",
+    "existing-work-artifacts/",
+    "typecheck.txt",
+    "lint.txt",
+    "format.txt",
+    "architecture.txt",
+    "source-hashes.json"
+  ]
+}

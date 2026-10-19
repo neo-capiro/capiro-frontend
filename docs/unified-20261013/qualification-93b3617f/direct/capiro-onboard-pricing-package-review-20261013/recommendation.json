@@ -1,0 +1,19 @@
+{
+  "status": "Accept exact server-only two-string projection; reject broad browser-root adoption",
+  "canonicalOwner": "apps/web/src/shared/capiro/onboard-pricing.server.ts",
+  "allowedImport": "@capiro/shared",
+  "allowedSymbols": [
+    "PRICE_LOCK_COPY",
+    "PRICE_CHANGE_COPY"
+  ],
+  "context": "Root-selected OnboardEntry -> OnboardHost -> feature config serialization",
+  "noExternalNodeProviderInitialization": true,
+  "rootClosureModules": 25,
+  "rootClosureJSBytes": 387706,
+  "minimalBrowserBundleBytes": 251757,
+  "minimalBrowserGzipBytes": 75872,
+  "remainingProof": "Final Next client bundle excludes root closure and legacy registries; no consumer build performed by this review",
+  "sourceEdited": false,
+  "dependencyGraphEdited": false,
+  "packageRuntimeEvaluated": false
+}

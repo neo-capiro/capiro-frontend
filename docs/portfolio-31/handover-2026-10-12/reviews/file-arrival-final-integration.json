@@ -1,0 +1,105 @@
+{
+  "integratedAtUtc": "2026-10-12T00:48:36.018485+00:00",
+  "rootPreIntegrationHead": "85aa5c0a816f52e23a0def34e91353ba41eda163",
+  "manifestPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/handoff/manifest.json",
+  "manifestSha256": "cf821235e4c577b336d7eb502e2e6b94cd5f7f99f3ff422bc7b7b1e7c50d73e0",
+  "files": [
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/files/page.tsx",
+      "base_sha256": "efd06db642a454990ce7b62b007019fe84bfe43bfa31e931d9b2689f2ef906dc",
+      "sha256": "28063d2b7f4725d9c40b3dd3a8e991971b3f9ed5a9a1ab5b7eba511c80c3266a",
+      "bytes": 573,
+      "root_before_sha256": "efd06db642a454990ce7b62b007019fe84bfe43bfa31e931d9b2689f2ef906dc"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "base_sha256": "ebd565bce5609f24197a67435b1a0c2278a5c35eb6448e6dd41afde39dd914c8",
+      "sha256": "cf28df9273213d6a67b30d43736c6e55d319f392e3d8902e6c99725ad348f16a",
+      "bytes": 9628,
+      "root_before_sha256": "ebd565bce5609f24197a67435b1a0c2278a5c35eb6448e6dd41afde39dd914c8"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/linked-arrival.ts",
+      "base_sha256": null,
+      "sha256": "d773ccc53e6c44bb24f748646db4bc2baa5f690a58a41b7dfcb3589b3039745e",
+      "bytes": 2221,
+      "root_before_sha256": null
+    },
+    {
+      "path": "apps/web/tests/browser/linked-file-arrival-harness.tsx",
+      "base_sha256": null,
+      "sha256": "8fac89e80b2ff4d64022946e690cc71343390929b7d7b7bccb6a19c77687daf5",
+      "bytes": 3818,
+      "root_before_sha256": null
+    },
+    {
+      "path": "apps/web/tests/browser/linked-file-arrival.html",
+      "base_sha256": null,
+      "sha256": "bfd6c0e41c600490a5df7222fe66e59799bda7f29b498c323faa5c750477f651",
+      "bytes": 368,
+      "root_before_sha256": null
+    },
+    {
+      "path": "apps/web/tests/browser/linked-file-arrival.spec.ts",
+      "base_sha256": null,
+      "sha256": "7ac9cc1674a848a3202b4e95c2c3ea46868a08e1b84b8bd0ba1e7aba1610d1e3",
+      "bytes": 13353,
+      "root_before_sha256": null
+    },
+    {
+      "path": "docs/portfolio-31/CORE-109-FILE-ARRIVAL-20261012.md",
+      "base_sha256": null,
+      "sha256": "116132753c9048d6c8480de0ede9fe5dc9afbc8a43d82a2f967509b745f2e2ca",
+      "bytes": 15437,
+      "root_before_sha256": null
+    }
+  ],
+  "unchangedOriginals": [
+    {
+      "path": "apps/web/tests/browser/files.spec.ts",
+      "sha256": "09daac7348aa8f23a551ce54d7db47637ee82e52e329687b415ecee84dc84264"
+    },
+    {
+      "path": "apps/web/tests/browser/files-boundary.spec.ts",
+      "sha256": "3d53ae6404a3be7bdc7e4ee2f454cb0879e7e2ecb70111b6df09efccf36e42a7"
+    },
+    {
+      "path": "apps/web/tests/browser/files-reader-selection.spec.ts",
+      "sha256": "8942f7c69dd333ffc320851929655396c8c2f5eb7e32bd76d4e9769b330ca7a6"
+    },
+    {
+      "path": "apps/web/tests/browser/fixtures.ts",
+      "sha256": "78ab1f843182dca8e810364b8425c0d6066cc3aba1b45d1914a480cb3e53762b"
+    }
+  ],
+  "rawBrowserReportPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/browser-candidate-01/test-results/browser-results.json",
+  "rawBrowserReportSha256": "e85f2dbda78f88a2a29b6c68c0ccc07dfae336892442169738f12eb41133f538",
+  "browserStats": {
+    "startTime": "2026-10-12T00:36:55.869Z",
+    "duration": 52759.166,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "reviewFileSha256": "4ed99797e1e2394f457ee746d271e46ad4617a4170d41015bd3b1033c178054d",
+  "registryBeforeSha256": "1cf0a4da4a7cafe1847488fe58d8d2e02931527fbb5dcd625169fe3203f27d93",
+  "registryAfterSha256": "3f5e3a63276317d0799c633b49ed99f6a89fb4cf994283bb3a27995ef3823377",
+  "rootInspectedCaptures": [
+    "linked-file-1440.png",
+    "linked-file-390.png",
+    "linked-file-unavailable.png"
+  ],
+  "limits": [
+    "Bounded source integration only; root architecture/combined gates and signed-in acceptance remain separate.",
+    "No new file endpoint/provider action; canonical existing preview owners retained."
+  ],
+  "rootIntegrationCommit": "d4c613985b69bc80cd3af28ed2c48c29335c770d",
+  "architectureSha256": "b60f1032015bb0f80c800711ea5209e0e152b0716db995d40dda015a11c809e9",
+  "architectureSummary": {
+    "total": 144,
+    "reviewed": 116,
+    "inheritedUnreviewed": 28,
+    "blocking": 0
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "observedUTC": "2026-10-13T09:45:21.047203+00:00",
+  "status": "PASS_COMMITTED_SOURCE_PRESERVATION_ONLY",
+  "source": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "rootTree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "appTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "srcTree": "8d3cb77ba96da3656877bc73a2eb51d58af94675",
+    "status": ""
+  },
+  "ancestry": {
+    "portfolio": {
+      "head": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+      "ancestor": true
+    },
+    "meri_original": {
+      "head": "3cc30ff3182e8050d563516607866cf07efe2aef",
+      "ancestor": true
+    },
+    "modules_original": {
+      "head": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a",
+      "ancestor": true
+    },
+    "newsletter": {
+      "head": "46ebdd448ef55e88c7a4083fb4586322757a14f8",
+      "ancestor": true
+    },
+    "shipping": {
+      "head": "6dacdaca3507bf75a472f5860ac72fc483377248",
+      "ancestor": true
+    },
+    "onboard": {
+      "head": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "ancestor": true
+    },
+    "meri_actions": {
+      "head": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "ancestor": true
+    },
+    "qualified83": {
+      "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+      "ancestor": true
+    },
+    "failed6150": {
+      "head": "6150e49ce69e8d73609ed974d6f3be796b152bdd",
+      "ancestor": true
+    },
+    "filesSource": {
+      "head": "4e5aaaabf250d0394522875995028da8ac79dce8",
+      "ancestor": true
+    },
+    "filesPublication": {
+      "head": "78135e4e1ba8cb54a746c14c1a19c7a8518218fb",
+      "ancestor": true
+    },
+    "typingCorrection": {
+      "head": "206a25fec13cbde4a307f917812b4cdfc27d8c6a",
+      "ancestor": true
+    }
+  },
+  "originalBindings": 807,
+  "uniqueOriginalPaths": 291,
+  "allOriginalExact": true,
+  "base83TestCount": 306,
+  "colocatedTestCount": 29,
+  "allOldTestsExact": true,
+  "runtimeUnchangedFrom6150": true,
+  "sourceExceptions": [
+    "apps/web/test/browser/meri-files-lifetime.spec.ts"
+  ],
+  "qualification": "RUNNING_NOT_AUDITED",
+  "emittedBuild": "PENDING_ROOT_BUILD_COMPLETION",
+  "reviewerRuntimeExecution": false
+}

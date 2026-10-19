@@ -1,0 +1,28 @@
+{
+  "command": "npm exec -- vitest run tests/meri-action-transport.test.ts tests/meri-action-session.test.ts --reporter=verbose --reporter=json --outputFile=<named-results>",
+  "cwd": "/workspace/capiro-meri-workflow-20261013/apps/web",
+  "exitCode": 1,
+  "numTotalTests": 75,
+  "numPassedTests": 71,
+  "numFailedTests": 4,
+  "failures": [
+    {
+      "name": "Meri fixed authenticated action transport refuses forged route ../session before dispatch",
+      "status": "failed"
+    },
+    {
+      "name": "Meri fixed authenticated action transport refuses forged route execute?approve=true before dispatch",
+      "status": "failed"
+    },
+    {
+      "name": "Meri fixed authenticated action transport refuses forged route https://example.test before dispatch",
+      "status": "failed"
+    },
+    {
+      "name": "Meri fixed authenticated action transport refuses forged route approve before dispatch",
+      "status": "failed"
+    }
+  ],
+  "logSha256": "3349a066bb1204af381b8554c93b8edba86d911f3dfbba65ac728f959ce885d2",
+  "resultsSha256": "da8cf0825120189ed46b2013a7d078acde0ec9452413153c02e54b4d0e6bff0a"
+}

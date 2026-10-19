@@ -1,0 +1,329 @@
+{
+  "recordedAt": "2026-10-12T01:15:21.754359+00:00",
+  "reviewer": "portfolio_calendar_relationships",
+  "status": "OPEN finding; provisional review of immutable Watchlist candidate01, preserved without any source correction or new test execution",
+  "auditIds": [
+    "BILL-11",
+    "BILL-12"
+  ],
+  "scope": {
+    "sourceWrites": false,
+    "testsRun": false,
+    "browserBuildProviderAwsCredentialActions": false,
+    "snapshotInputsHashVerified": 22,
+    "nativeBlobsHashVerified": 6,
+    "finalP2ManifestReviewed": false,
+    "excludedPresentationIssue": "Root already owns topic-card geometry; not re-reviewed here"
+  },
+  "candidateManifest": {
+    "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/manifest.json",
+    "sha256": "edcd2246a31bc3520c52b2d4896540c1378f89a38f6a775438e2b9a14995fff4"
+  },
+  "inputHashes": [
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "sha256": "b809b603e2ab24978215568ce850d0b5f4d10354a349ab7234c649a6459be826"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistForm.tsx",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/WatchlistForm.tsx",
+      "sha256": "6c3eb918223265fffd7aa9abbc2e31f57055f7dbe343983f069f925eb7a51060"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistNotice.tsx",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/WatchlistNotice.tsx",
+      "sha256": "2b2af439919a9314fdab275d511d18242a4b780973d4b5a98205a372b533af4f"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
+      "sha256": "8208a440f9bee968e28c671c383bae9ce81c185f059711a579977bb6a0c186ec"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
+      "sha256": "91a55b47e044d01a1ee1509045b5d479bae9ad4cb6221c63b2ae5bc999d34f07"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-source.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/watchlist-source.ts",
+      "sha256": "8d7c832a016764631003f4fc43655d81c788e2d3107c458048d22ad9625a3c23"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+      "sha256": "d726c48521f7fb7a9b4b1943f09581a5ddd54a1252db162573a0072427487f76"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-session.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/watchlist-session.ts",
+      "sha256": "88fb7d28822e8fdc5bd5bad8b7261ce36d333ee266a4b8ad04c389f059ff86fe"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+      "sha256": "8e9c1e6939cd0ef683140ab457c81e00aa973a7a9abc16d31fdd4fe0770eec1c"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist.module.css",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/bill-tracker/watchlist.module.css",
+      "sha256": "b3d600188bac5f012fa00e92cddc0371f0ca43d0c1c5e7246d4771e596d26e3d"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/read-public.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/src/features/portfolio/client-profile/read-public.ts",
+      "sha256": "8f100f3edcc44446c309a55318d357aea5b4d6f7ffc84bd5be5dcfb21c400b3d"
+    },
+    {
+      "file": "apps/web/tests/watchlist-current-fixtures.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/watchlist-current-fixtures.ts",
+      "sha256": "0041dd5fc517a45a55abb329ff969cd122a4fcfb2d7091dd19fe478e6511ca52"
+    },
+    {
+      "file": "apps/web/tests/watchlist-current-source.test.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/watchlist-current-source.test.ts",
+      "sha256": "dd3a2a256a5e0ed67e452712fe61236c8ba0b6f3a1424975f92b160eb0b318b1"
+    },
+    {
+      "file": "apps/web/tests/watchlist-current-writer.test.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/watchlist-current-writer.test.ts",
+      "sha256": "eb43ddee110078de3a33a00553924c6ca277c982fdf734e60234202b14924948"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-behavior.spec.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-current-behavior.spec.ts",
+      "sha256": "1adbbb5e08320fe9c4dd58a3310db455334dbb2d56c1564001fb8e8a317b16a5"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-fixtures.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-current-fixtures.ts",
+      "sha256": "4cadee12fa682447a478013541be82ffa21c06ff811399d8c3301787c8bd9e32"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-harness.tsx",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-current-harness.tsx",
+      "sha256": "ba4a7755354101b34f3c6965dbf96ff87014a939b42dea2b91a80e8b5ca2e63d"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-visual.spec.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-current-visual.spec.ts",
+      "sha256": "f9c2881a21a474bb4b7408469a85488a070c0830a17c4e291e1a47a74c44c106"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current.html",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-current.html",
+      "sha256": "a1475c8d6bcf1f9de827af8355406036f1b855dba86573c333847b5944c8eab3"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current.spec.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-current.spec.ts",
+      "sha256": "56de1fc25e9691caed791e96bfa8f6a2d166eef8ceb763876cfe6fa250e720d0"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-preference-entry.spec.ts",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/apps/web/tests/browser/watchlist-preference-entry.spec.ts",
+      "sha256": "5826eab42e000f5bfe2b4035dbe3505d1caf667995adc2787e27f7c122960da9"
+    },
+    {
+      "file": "docs/portfolio-31/WATCHLIST-CURRENT-STATE-CONTINUATION.md",
+      "snapshotPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/fixed-candidate-01/docs/portfolio-31/WATCHLIST-CURRENT-STATE-CONTINUATION.md",
+      "sha256": "a6583a1780d0cc2299fe37f79df4f721c713ef4f1513f5e9529a8956a04875ef"
+    }
+  ],
+  "sharedReadHashes": [
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/profile-access.ts",
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/apps/web/src/features/portfolio/client-profile/profile-access.ts",
+      "sha256": "80d7a49f7170e52765e40c5ab0679bb3fd9b131175c0c47c88be247cd06ccf42"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/profile-read-queries.ts",
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/apps/web/src/features/portfolio/client-profile/profile-read-queries.ts",
+      "sha256": "f41421d63d266aceecf46f766215e3387f8c577474e84a2472bdebe7bd0ff351"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/profile-keys.ts",
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/apps/web/src/features/portfolio/client-profile/profile-keys.ts",
+      "sha256": "bc7d6ff4dcd242e04f3e34087a174b597f5d8674a8af00c71aaec6d75ed0efd9"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/profile-source.ts",
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/apps/web/src/features/portfolio/client-profile/profile-source.ts",
+      "sha256": "c145e7cfd4a93af616bec7a456ec40bc01394df6dcda342d0e04855ae56726df"
+    },
+    {
+      "file": "apps/web/src/shared/portfolio/auth/client-writer.ts",
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/apps/web/src/shared/portfolio/auth/client-writer.ts",
+      "sha256": "c3ecec73ff8c7d0b6a4e9ebb8e862870c7f0da9af0939e742263027d4a2d1bff"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistTopics.tsx",
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/apps/web/src/features/portfolio/bill-tracker/WatchlistTopics.tsx",
+      "sha256": "89d933da6e197ef543a3136fe99d665158eb6b39a7b017fb4f9ebf50bd9839c6"
+    }
+  ],
+  "nativeReferences": [
+    {
+      "file": "apps/api/src/tracker/tracker.controller.ts",
+      "localPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/native/apps/api/src/tracker/tracker.controller.ts",
+      "sha256": "96eb99b7bf48efc535619ff475015b168e929b159e214fad846b2f64d178a713",
+      "gitBlobSha": "fd0a75926c16863f71d7b717669b509859bb2522",
+      "url": "https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/api/src/tracker/tracker.controller.ts"
+    },
+    {
+      "file": "apps/api/src/tracker/tracker.service.ts",
+      "localPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/native/apps/api/src/tracker/tracker.service.ts",
+      "sha256": "0e46bc1557cf02e3ce9ea936e23bbfac2bd6463b34bbceb24e2859d8fbd0d3bc",
+      "gitBlobSha": "2d6d0d9ec630079708929b7991dbd3524f6cfd69",
+      "url": "https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/api/src/tracker/tracker.service.ts"
+    },
+    {
+      "file": "apps/api/src/tracker/tracker.dto.ts",
+      "localPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/native/apps/api/src/tracker/tracker.dto.ts",
+      "sha256": "3cb2e9f0119f6e4c1b5b2a29e36b230907def8b914f4a17f522a3f0d356d5a1c",
+      "gitBlobSha": "7bea855aa067df75c629b5fc48e801bfb6e125af",
+      "url": "https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/api/src/tracker/tracker.dto.ts"
+    },
+    {
+      "file": "apps/intel-api/src/tracker/tracker-watchlist.controller.ts",
+      "localPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/native/apps/intel-api/src/tracker/tracker-watchlist.controller.ts",
+      "sha256": "ef29ac362ca6a6d0e0083ae5becd644b4143762f6978024e56f7ba82adfb02b0",
+      "gitBlobSha": "d77ebd6887e14dfb9fe189f0ab344cc78a39ac4f",
+      "url": "https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/intel-api/src/tracker/tracker-watchlist.controller.ts"
+    },
+    {
+      "file": "apps/intel-api/src/tracker/tracker-watchlist.service.ts",
+      "localPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/native/apps/intel-api/src/tracker/tracker-watchlist.service.ts",
+      "sha256": "349f849d9bb5f967df1477a7143d9637e32ac907e79cbf96442982f5c1a82277",
+      "gitBlobSha": "62017ecbb1f4edfa2fb56920fee808c970ffeecf",
+      "url": "https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/intel-api/src/tracker/tracker-watchlist.service.ts"
+    },
+    {
+      "file": "apps/intel-api/src/tracker/tracker.dto.ts",
+      "localPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/native/apps/intel-api/src/tracker/tracker.dto.ts",
+      "sha256": "7c8b325f03c8e9781fd391ea33e8a8b3df63c51476a19afaa2e332e5e1da0290",
+      "gitBlobSha": "a871723a8c3d8190c7237fc9ceec6ef5626b41f7",
+      "url": "https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/intel-api/src/tracker/tracker.dto.ts"
+    }
+  ],
+  "finding": {
+    "id": "BILL-11/12-INTEL-ACCEPTED-PROJECTION",
+    "state": "OPEN_UNIMPLEMENTED_UNTESTED",
+    "frontend": [
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+        "symbol": "writeWatchlist",
+        "lines": [
+          105,
+          121
+        ]
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+        "symbol": "useWatchlistEditor > execute",
+        "lines": [
+          120,
+          157
+        ]
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
+        "symbol": "intelWatchlistForClient / rejectionSchema"
+      }
+    ],
+    "native": [
+      {
+        "file": "apps/intel-api/src/tracker/tracker-watchlist.service.ts",
+        "symbol": "getWatchlist",
+        "anchors": [
+          "head query begins at204",
+          "topics query begins at243",
+          "terms query follows at261"
+        ]
+      },
+      {
+        "file": "apps/intel-api/src/tracker/tracker-watchlist.service.ts",
+        "symbol": "putWatchlist",
+        "anchors": [
+          "transaction ends before688",
+          "line688 calls getWatchlist after transaction",
+          "line689 spreads that view with actual rejection details"
+        ]
+      }
+    ],
+    "staticCounterexample": "With unchanged local actor/client/read sources, submit expectedVersion7 and topics:[]; accept a shape-valid exact-client response with version8, one retained topic and rejected:{topics:[],terms:[]}. The current parser checks only association and next version; execute then clears the unknown fence, caches the contradictory targeting and closes. This is a source-derived counterexample, not an executed browser reproduction.",
+    "nativeInference": "Because native getWatchlist reads the head and topic/term projections in separate withTenant calls after the write transaction, an intervening writer can change topic data between those reads. A next-version head alone does not prove the topic projection belongs to this submitted replacement. This concurrency mechanism is inferred from the retrieved code, not observed in a live environment.",
+    "boundedRestart": [
+      "Preserve this exact source/evidence checkpoint and add a synthetic remove-all-topics/retained-topic next-version baseline; also characterize simple edited-label/old-projection handling. Do not send live writes.",
+      "Keep exact client and next-version checks, but require the returned accepted targeting projection to be attributable to the submitted full replacement using the published normalization and actual rejection details. Preserve native topic index/termType rejection association fields where needed; do not invent IDs or a transaction receipt.",
+      "A contradictory or unattributable receipt must retain the current draft and unknown fence, avoid success-close and accepted-target cache publication, and offer only the existing explicit saved-value reload. Reload does not prove rollback or permit automatic replay.",
+      "Retain all existing Core projection, Intel version conflict/428, rename/partial-rejection, actor/source/lifetime/close and no-replay assertions. Add correct normalized/empty replacement and existing legitimate partial-rejection acceptance alongside the mismatch regressions. Run only focused affected cases before the eventual final combined gate."
+    ],
+    "reviewedSoundBoundaries": [
+      "Core standard_user is retained; Intel admin write guard is distinct from read access, with native membership enforcement unchanged.",
+      "Canonical actor/client/source proof is reused through a pure export facade; reader revisions isolate stale cache scopes.",
+      "Synchronous cache interruption aborts a captured session even when source authority is restored before React observes it.",
+      "Failed/invalidated/fetching data do not authorize the combined form or preference entry; draft concealment and actor/client/owner keying are present.",
+      "Core compares actual complete normalized response fields without invented identity/version echoes.",
+      "Unknown session state survives closure and remains fenced through explicit read-only reload, with no automatic replay."
+    ]
+  },
+  "alertPreservation": {
+    "ownedFrozenAndWorkingFilesVerified": 32,
+    "manifestPath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/frozen-manifest.json",
+    "manifestSha256": "c1162e5fc5f9f8fa759017480530e941d0ed32f0a63b37a72cf1a75f82fc67fc",
+    "archivePath": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/handoffs/portfolio-alert-channels-20261012.tar.gz",
+    "archiveSha256": "556d1ad25f301946212bda9c706e7ca4ef43c5569e17be325d50aff8cfef40a9",
+    "phoneVerificationCopyCorrection": "OPEN/unapplied. Root proposed showing ready intro only without a current visible challenge (or unknown) and appending the explicit confirming-enables-SMS sentence to the challenge acknowledgement. The P3 frozen source and archive remain verbatim. Root owns separate source/visual qualification after preservation."
+  },
+  "contextRoots": [
+    "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/AGENTS.md",
+    "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/IMPLEMENTATION-STANDARDS.md",
+    "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31",
+    "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence",
+    "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011",
+    "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/tracker-alert-contracts-20261012",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-tracker-preferences/docs/portfolio-31",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-tracker-preferences/outputs/evidence/portfolio-tracker-preferences-20261011",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-profile-current-state/docs/portfolio-31",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-profile-current-state/outputs/evidence/core-profile-current-state-20261011",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-profile-current-state/outputs/evidence/core-profile-actions-20261011",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-profile-current-state/outputs/evidence/core-facility-actions-20261011",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/docs/portfolio-31",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/docs/portfolio-31",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/handoffs",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/watchlist-review-preservation-20261012",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/docs/portfolio-31",
+    "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011",
+    "/workspace/scratch/158b6018a5d3/upload/Capiro-3.1-Portfolio-Audit (1).xlsx",
+    "/workspace/scratch/158b6018a5d3/browser-runtime"
+  ],
+  "cloudDesignContexts": {
+    "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+    "page": "411:40601",
+    "alert": [
+      "1027:188159",
+      "1028:188273",
+      "1028:188442",
+      "1028:188271",
+      "1028:188272"
+    ],
+    "watchlist": [
+      "1029:188497",
+      "1030:188498",
+      "1030:188650",
+      "1030:188540",
+      "1030:188692"
+    ],
+    "skills": [
+      "c19/figma-design-to-code",
+      "c19/figma-use",
+      "c19/figma-generate-design",
+      "c19/figma-generate-library"
+    ],
+    "note": "Original Figma contexts/build scripts/receipts and exact PNGs are in each lane evidence root. Cloud skill source must be reread through skills.read in the next environment."
+  }
+}

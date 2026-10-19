@@ -1,0 +1,1069 @@
+{
+  "reviewer": "/root/prospects_review",
+  "utc": "2026-10-13T11:04:27.678412+00:00",
+  "source": {
+    "application": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "published": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "worktree": "/workspace/capiro-onboard-port-20261013",
+    "observed_head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "application_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "published_application_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "production_diff": "",
+    "worktree_status": ""
+  },
+  "input_sha256": {
+    "MAPPING-INSTRUCTIONS.md": "478486e51f759f541ac826c3e42f522fbe4975a37c3e869787f64b5748138ba5",
+    "MAPPING-SNAPSHOT.json": "7fd2cd5b7843d2a74cd16dfdbf304e6b50197cae94e955893519fdae2a4841f7",
+    "inputs/prospects.json": "bb8a4d7b2bce1cb0a5d0b62dc9cfc3d79ef1d73ed4cbf8a26047819573b52d44",
+    "inputs/PHASED-PLAN.md": "9430fb6c01266bcf0778aee6f9a5084502f7f2e0f9f5f16c3e8d6cfc7c59a94e",
+    "inputs/reconciliation-ledger.json": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf",
+    "inputs/figma-screen-index.csv": "ffb9be58b8e96e26a849ee0292e1e600e2cdf79a94cdcaa61db92143df59076c"
+  },
+  "assigned_ids": [
+    "PROS-001",
+    "PROS-002",
+    "PROS-003",
+    "PROS-004",
+    "PROS-005",
+    "PROS-006",
+    "PROS-007",
+    "PROS-008",
+    "PROS-009",
+    "PROS-010",
+    "PROS-011",
+    "PROS-012",
+    "PROS-013",
+    "PROS-014",
+    "PROS-015",
+    "PROS-016",
+    "PROS-017",
+    "PROS-018",
+    "PROS-019",
+    "PROS-020",
+    "PROS-021",
+    "PROS-022",
+    "PROS-023",
+    "PROS-024",
+    "PROS-025",
+    "PROS-026",
+    "PROS-027",
+    "PROS-028",
+    "PROS-029",
+    "PROS-030",
+    "PROS-031",
+    "PROS-032",
+    "PROS-033",
+    "PROS-034",
+    "PROS-035",
+    "PROS-036",
+    "PROS-037",
+    "PROS-038",
+    "PROS-039",
+    "PROS-040"
+  ],
+  "covered_ids": [
+    "PROS-001",
+    "PROS-002",
+    "PROS-003",
+    "PROS-004",
+    "PROS-005",
+    "PROS-006",
+    "PROS-007",
+    "PROS-008",
+    "PROS-009",
+    "PROS-010",
+    "PROS-011",
+    "PROS-012",
+    "PROS-013",
+    "PROS-014",
+    "PROS-015",
+    "PROS-016",
+    "PROS-017",
+    "PROS-018",
+    "PROS-019",
+    "PROS-020",
+    "PROS-021",
+    "PROS-022",
+    "PROS-023",
+    "PROS-024",
+    "PROS-025",
+    "PROS-026",
+    "PROS-027",
+    "PROS-028",
+    "PROS-029",
+    "PROS-030",
+    "PROS-031",
+    "PROS-032",
+    "PROS-033",
+    "PROS-034",
+    "PROS-035",
+    "PROS-036",
+    "PROS-037",
+    "PROS-038",
+    "PROS-039",
+    "PROS-040"
+  ],
+  "counts": {
+    "existing_behavior_missing_evidence": 12,
+    "authentic_backend_provider_dependency": 24,
+    "actual_missing_implementation": 4,
+    "selected_figma31_mismatch": 0
+  },
+  "acceptance_counts": {
+    "OPEN_FINAL_ACCEPTANCE": 40,
+    "accepted": 0
+  },
+  "source_fix_candidates": [
+    {
+      "id": "PROS-MAP-S01",
+      "audit_ids": [
+        "PROS-017"
+      ],
+      "severity": "P2 source-review candidate",
+      "title": "Cached Contacts and editor admission survive a failed newer contact read",
+      "evidence": [
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+          "symbol": "export function ProspectContacts",
+          "line": 10,
+          "git_blob": "e4878e218b108e5bd55a3d6b8cc34116cf2cfc27",
+          "sha256": "eaf347a54fb5ad097717038321fb69a8b7e745991c91c251808f554eba7c8029"
+        },
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/contacts/queries.ts",
+          "symbol": "export function useContacts",
+          "line": 8,
+          "git_blob": "1cb7a040accf4af171152156e3a7a8c3f6029d54",
+          "sha256": "db468f4ebc339caa956b797da9c4bf2826e8a517b138369f11f0d0b835c4c069"
+        },
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+          "symbol": "export function ContactEditor",
+          "line": 11,
+          "git_blob": "ecfa4ee39e35be20377af45149e4ab56675a9ffe",
+          "sha256": "d35e6650af46ae407ff3d613ffb8adf331ed2ea83e003d077e6512273c36a13b"
+        }
+      ],
+      "observation": "editable checks cached role/data/readOnly but not current query success/error; contact cards and an existing editor render from retained data. useContacts rethrows 403/503 without clearing retained success data. ContactEditor accepts readOnly from this stale projection.",
+      "reproduction_to_run": "Load editable contacts successfully; open a contact; cause exact contact query refresh to return403 or503; assert old cards/editor/action admission are removed and held continuation cannot dispatch. Then require successful explicit recovery before reopening; include actor/tenant/prospect replacement.",
+      "not_claimed": "No browser reproduction performed in this mapping; no native access or backend authorization bypass claimed."
+    },
+    {
+      "id": "PROS-MAP-S02",
+      "audit_ids": [
+        "PROS-032"
+      ],
+      "severity": "P2 source-review candidate",
+      "title": "Existing-client link choices and confirmation outlive a failed current search",
+      "evidence": [
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+          "symbol": "function ClientLinkDialog",
+          "line": 54,
+          "git_blob": "e27ed148818803d092b8a9211e46b49fd5f8adeb",
+          "sha256": "c2fbae7929101537f33d80e9efc2e660205e759320036bea069a1fc39e596449"
+        },
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/conversion/queries.ts",
+          "symbol": "export function useLinkClients",
+          "line": 8,
+          "git_blob": "146072f3df6e00ea7c2ce91701e87eb87d498743",
+          "sha256": "236f63437201e75a7269d3e1d88e1dff9ba1535d0e15236105afdad4dea909e4"
+        },
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/conversion/api.ts",
+          "symbol": "export function linkProspectClient",
+          "line": 30,
+          "git_blob": "3c57adc91d1a7d39dc783b73a1d3c4ddf60d8219",
+          "sha256": "adee9fa468e4d2c22b63a69e364d757596656839e7b064c32dbc6e7e1bacfb6b"
+        }
+      ],
+      "observation": "ClientLinkDialog renders query.data even when query.error is present; selected/confirmed survive search changes and failed current reads. Submit checks selected+confirmed+pending only, so current-read failure does not fence that UI intent.",
+      "reproduction_to_run": "Read matches successfully, select client and confirm; make a newer same-search read403/503 and hold recovery; verify stale choices/confirmation cannot dispatch convert. Successful current recovery must require current selection/confirmation, with no duplicate POST after an unknown result.",
+      "not_claimed": "No native conversion, billing or authorization bypass. Backend same-tenant/active/identity checks remain authoritative."
+    },
+    {
+      "id": "PROS-MAP-S03",
+      "audit_ids": [
+        "PROS-023"
+      ],
+      "severity": "P2 source-review candidate",
+      "title": "Subordinate brief reads display retained success alongside newer failure",
+      "evidence": [
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+          "symbol": "export function BriefViewer",
+          "line": 16,
+          "git_blob": "26103457d004ee38d09b640412100e13aed10394",
+          "sha256": "cf144bfe67726eee84565967ed6fa8edb5f9b359820c0184a9d6a1797a39deb5"
+        },
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/brief/BriefHistory.tsx",
+          "symbol": "export function BriefHistory",
+          "line": 7,
+          "git_blob": "d585235b2aeaba6ffd82a775281a549dbb9c0c5a",
+          "sha256": "02b72615c2f72dcf5fdcb02a06f0e02cd93dfd7399ce2c2454820b28cbd32f0c"
+        },
+        {
+          "repository": "neo-capiro/capiro-frontend",
+          "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "path": "apps/web/src/features/portfolio/prospects/brief/BriefRefresh.tsx",
+          "symbol": "export function BriefRefresh",
+          "line": 9,
+          "git_blob": "9ea8aa6e74e52503e36a713f7c9c115f1d07cb23",
+          "sha256": "2145a5190701e76586b2b49296359baa791789435010001c73b46e90d0e0d821"
+        }
+      ],
+      "observation": "BriefHistory renders history.data versions, BriefRefresh renders proposal.data, and BriefViewer chooses historical.data without success/error gates. Current root brief uses current.isSuccess; this candidate concerns subordinate reads only.",
+      "reproduction_to_run": "Load version history/historical version/refresh comparison, then fail each exact read403/503; verify stale text/source selection and any edit path are withheld until deliberate successful recovery. Keep valid current brief and saved-version identity assertions.",
+      "not_claimed": "No runtime reproduction in this mapping; no new refresh-accept capability or native evidence claim."
+    }
+  ],
+  "inspected_paths": [
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+      "symbol": "export function ProspectsIndex",
+      "line": 23,
+      "git_blob": "bba38a638c0d481222f5a005a0bf543bab662fc2",
+      "sha256": "2e559c408c5f0db2b89bf5f7b1fa13ec05e49d5ed3eeabb0953c6d24be68cfed"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
+      "symbol": "export function ProspectDetail",
+      "line": 30,
+      "git_blob": "3e700850e12e31d86523b3d5e526a352a2c527f3",
+      "sha256": "c333ac6ec4b923c43f65d697556d6e24c8344d8127e22c9857a46bae7b36804f"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+      "symbol": "export function ProspectEditor",
+      "line": 9,
+      "git_blob": "417daca6d2cae2683c48bde38cf7b4303de5228e",
+      "sha256": "c495e59d7bfc99bffbf3c9046acd607d8821188066c2463394ae721a092ec118"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/contracts.ts",
+      "symbol": "export const prospectSchema",
+      "line": 54,
+      "git_blob": "ff595dc3913a489ce846a3d3f53d07281715a3d9",
+      "sha256": "268cfeb29356875e4dc7b73b474be1bbdebfb62c591a1f5552a1805ea6242b8a"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/queries.ts",
+      "symbol": "export function useProspects",
+      "line": 34,
+      "git_blob": "e51d0c5a3f83b1636be8c76f7082af68f1665ad7",
+      "sha256": "be991fedfb9af416834677771aa52458821dade8b3f1c993e44aba24d3f49410"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/mutations.ts",
+      "symbol": "export function useSaveProspect",
+      "line": 29,
+      "git_blob": "2f461d03f6273b6649b00f5fc1c9ccc99a18d352",
+      "sha256": "91367a2b051d2417b9946acc078ac2376b3d643b062005756a236e20ba86a073"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx",
+      "symbol": "export function NextStepEditor",
+      "line": 12,
+      "git_blob": "3349079e7e741842ec3f04950d4519008810ee98",
+      "sha256": "e0339f4d279e5ac77b3741000641121e68d6cefa8741712cd5626bf65ed19e31"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/StageEditor.tsx",
+      "symbol": "export function StageEditor",
+      "line": 12,
+      "git_blob": "6f1f5c4aef071643dc7a186eadb9295da72ff2db",
+      "sha256": "27ec909f1773b2189ae5c4dbddb9d68759330bce9d86d8432cbbdeb9566d8e08"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/ProspectHistory.tsx",
+      "symbol": "export function ProspectHistory",
+      "line": 13,
+      "git_blob": "692ea9aa4c67d24d470ca303b5340cab7daea923",
+      "sha256": "d12aad4742461e05f54acb218ed8ad58b58d58b40b1fd838c153925dd0cfffb4"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/ProspectNotes.tsx",
+      "symbol": "export function ProspectNotes",
+      "line": 11,
+      "git_blob": "8b6577432db10e849ed98cc0a8c9524f8050f794",
+      "sha256": "f57afa748067d49b76667318660647f57fb374b1164826f4d242667832771c96"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+      "symbol": "export function ProspectContacts",
+      "line": 10,
+      "git_blob": "e4878e218b108e5bd55a3d6b8cc34116cf2cfc27",
+      "sha256": "eaf347a54fb5ad097717038321fb69a8b7e745991c91c251808f554eba7c8029"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/contacts/api.ts",
+      "symbol": "export async function readContacts",
+      "line": 12,
+      "git_blob": "2faad126a6db6842ff1825bbd35fa79809f562c4",
+      "sha256": "a1dc2dc87b052a0df1dbb39bd983685d47d905f48f57812d7305fe6849883b11"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+      "symbol": "export function ContactEditor",
+      "line": 11,
+      "git_blob": "ecfa4ee39e35be20377af45149e4ab56675a9ffe",
+      "sha256": "d35e6650af46ae407ff3d613ffb8adf331ed2ea83e003d077e6512273c36a13b"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/contacts/queries.ts",
+      "symbol": "export function useContacts",
+      "line": 8,
+      "git_blob": "1cb7a040accf4af171152156e3a7a8c3f6029d54",
+      "sha256": "db468f4ebc339caa956b797da9c4bf2826e8a517b138369f11f0d0b835c4c069"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+      "symbol": "export function ProspectFiles",
+      "line": 22,
+      "git_blob": "56ee96cb5dc4abad7c727b3b092e51c094745307",
+      "sha256": "45b12448e5849095afc5b3cd575824a590289d12329238fecf0333cf76154160"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/files/prospect-files.ts",
+      "symbol": "export async function readProspectFiles",
+      "line": 29,
+      "git_blob": "f815276404c3df0b231e31ed7f481712a5f42464",
+      "sha256": "fd5417785c90f2057449afc5a1176d6c34ece2a2e3fec3ecf87bc15d8d49e5a5"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/files/useProspectUpload.ts",
+      "symbol": "export function useProspectUpload",
+      "line": 30,
+      "git_blob": "f119a6322a27b72d660e19e4643841c8788a4a2c",
+      "sha256": "6c1075d6429b891b07723b1142555c25301e5d8a583f70475bdf1a77d5fd34dc"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/files/prospect-upload.ts",
+      "symbol": "export",
+      "line": 17,
+      "git_blob": "dd31fa69aa88c3349299db12960fc41f1a79a1aa",
+      "sha256": "19b9d751e3b752e342553687871be90bb6cab0f89b45a2c30301f83bb864c6bc"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx",
+      "symbol": "export function ProspectWorkspace",
+      "line": 8,
+      "git_blob": "389c73ebe9af267b200f5d19db86ae0e9ba9434f",
+      "sha256": "1f0ab120a964f5054d5ffedefc30deaf9ca9b9180cd3ae90726e7a4b5bcf5e2b"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "symbol": "function DraftEditor",
+      "line": 28,
+      "git_blob": "31b76b4a39d011f34a18a2a5e5ae3e33ff10d549",
+      "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+      "symbol": "export function useProspectDraftSave",
+      "line": 43,
+      "git_blob": "658ffd6677c408c1cf66d2ac007ec37663a6de93",
+      "sha256": "73e7b0473bccc679674f9404106ab98134c82e966d29bd70921f4d58909c7cdd"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/modules/workspace/prospects/ProspectDraftCreate.tsx",
+      "symbol": "export function ProspectDraftCreate",
+      "line": 26,
+      "git_blob": "4c08acd41874e04bb7c7d94a47ad5cd49736d151",
+      "sha256": "0feb727599f3a644281260e4add82d50e9261d42588147fbd067419200a5acb0"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/modules/workspace/prospects/ProspectDraftExport.tsx",
+      "symbol": "export function ProspectDraftExport",
+      "line": 7,
+      "git_blob": "49edde0fb12da147e9df941a7c1347f40c7df386",
+      "sha256": "707fddf47f15a85bae38528cb16dce2dd7573644cead9a97e81beba844c06fad"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx",
+      "symbol": "export function ProspectBrief",
+      "line": 12,
+      "git_blob": "e0e6591344b0aa6094ca2e59dc0e91398dfd8e98",
+      "sha256": "04a4d4bc7c939b13c8beb841d7fcdfb4c39ca0c06abfba4c538d5d9c324f82ad"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/api.ts",
+      "symbol": "export",
+      "line": 16,
+      "git_blob": "74d283bd0e2aab61291fa822dd897446727a9408",
+      "sha256": "cc2627ec8b1555a8ef5ad33dacf81da606caf84d8af2feddc38fcef54c980bbb"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
+      "symbol": "export function BriefEditor",
+      "line": 14,
+      "git_blob": "8c50005a1fe1f8cb153abedde60e239d02cab44b",
+      "sha256": "f2ff36d8caea4686485bdc136ad625ce687b05b2815c80a3da99cf7423758051"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+      "symbol": "export function BriefViewer",
+      "line": 16,
+      "git_blob": "26103457d004ee38d09b640412100e13aed10394",
+      "sha256": "cf144bfe67726eee84565967ed6fa8edb5f9b359820c0184a9d6a1797a39deb5"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/BriefHistory.tsx",
+      "symbol": "export function BriefHistory",
+      "line": 7,
+      "git_blob": "d585235b2aeaba6ffd82a775281a549dbb9c0c5a",
+      "sha256": "02b72615c2f72dcf5fdcb02a06f0e02cd93dfd7399ce2c2454820b28cbd32f0c"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/BriefRefresh.tsx",
+      "symbol": "export function BriefRefresh",
+      "line": 9,
+      "git_blob": "9ea8aa6e74e52503e36a713f7c9c115f1d07cb23",
+      "sha256": "2145a5190701e76586b2b49296359baa791789435010001c73b46e90d0e0d821"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/brief/contracts.ts",
+      "symbol": "export",
+      "line": 3,
+      "git_blob": "c251a53b999cf4ad1e3e3bcea9ee1e0f2b248dfa",
+      "sha256": "17d147e42b323497d59af171ea86cf68c415798dc0b88ebb108659faef12b0eb"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx",
+      "symbol": "export function ProspectProposals",
+      "line": 8,
+      "git_blob": "4f2d977fbff0ff02629c4cb0d2119aa1fc14c7b0",
+      "sha256": "08da25f32fcae54c335565ca5368cda0d99041da907a30a9c24f6555d2309fc9"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/proposals/TemplateCatalog.tsx",
+      "symbol": "export function TemplateCatalog",
+      "line": 11,
+      "git_blob": "dd68a293f4fcdf792d5f57f942c38433288ee35d",
+      "sha256": "409386032d05def93395c9a02716d23a3c9a233c03891d9c1369a02f2a9ed530"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/proposals/api.ts",
+      "symbol": "export const readTemplateLibrary",
+      "line": 4,
+      "git_blob": "4bfd8144340c6cdce479bbe7322c0a44e4cf7408",
+      "sha256": "140633b233403c905fa8da6d79c0eb87b5601b96d8a81c6a234672baee58af99"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/proposals/persistence-contract.ts",
+      "symbol": "export const proposalCandidateVersion",
+      "line": 5,
+      "git_blob": "c1cb59842a027a803b7975d95773ce7614af40ab",
+      "sha256": "c4bd9d4e1ac19c447e081510dc126d9e94fd34a1d713353bcea4f3556849a178"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+      "symbol": "export function TemplateStudio",
+      "line": 25,
+      "git_blob": "6518c09f89a3540f28ed22916bb825604a8fc855",
+      "sha256": "199024cf602e9b793570c5dbac6923fc7550803bcc0ffa3f1712d25ed56877f3"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+      "symbol": "function ClientLinkDialog",
+      "line": 54,
+      "git_blob": "e27ed148818803d092b8a9211e46b49fd5f8adeb",
+      "sha256": "c2fbae7929101537f33d80e9efc2e660205e759320036bea069a1fc39e596449"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/conversion/api.ts",
+      "symbol": "export function linkProspectClient",
+      "line": 30,
+      "git_blob": "3c57adc91d1a7d39dc783b73a1d3c4ddf60d8219",
+      "sha256": "adee9fa468e4d2c22b63a69e364d757596656839e7b064c32dbc6e7e1bacfb6b"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/features/portfolio/prospects/conversion/queries.ts",
+      "symbol": "export function useLinkClients",
+      "line": 8,
+      "git_blob": "146072f3df6e00ea7c2ce91701e87eb87d498743",
+      "sha256": "236f63437201e75a7269d3e1d88e1dff9ba1535d0e15236105afdad4dea909e4"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/shared/portfolio/shell/Shell.tsx",
+      "symbol": "export function Shell",
+      "line": 14,
+      "git_blob": "aeb3554f1bc3c8990461443b5f86dace163bc083",
+      "sha256": "8a46e1e666ed8ed8405b1ec0ee2f767a15d5055312ac77aa1dc1462fbe2e37d9"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "symbol": "export function PortfolioNavigation",
+      "line": 10,
+      "git_blob": "c9666b0ef79975bfb13f430e5ffe40fc9bd37ce5",
+      "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/shared/shell/ModeLink.tsx",
+      "symbol": "export function ModeLink",
+      "line": 6,
+      "git_blob": "8213a8910c5bd749921602453a4b78df08745dbd",
+      "sha256": "7d35bbfc8b0ad328149dbdf3c15464d7f599a5f7b6e0bbdc618f5b657302dceb"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/shared/capiro/operations/workspace-prospects.ts",
+      "symbol": "export const workspaceProspectOperations",
+      "line": 43,
+      "git_blob": "2bc8cb9cdf430518995789420f27861c2cf82dd5",
+      "sha256": "6ff24314724157a6e0c621874896be4047d7945ff916c83fc744d63dab041a17"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/shared/capiro/operations/workspace-exports.ts",
+      "symbol": "\"workspace.draft.pdf\"",
+      "line": 77,
+      "git_blob": "a925c3a0957d41ba78413d56cece318b92c71ce5",
+      "sha256": "9edd75f76e7c20c775b5199e2b6392aae612613c7546eab38d9940ce28bab069"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "d2337c6e99ecd8a564c072f46d05a89106dd7624",
+      "sha256": "4f957ec7172a17cabb3d5f61c982e291228bdfc1aeba335a849d731706ba9852"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "75260523cda6ecb0988950e07c5d93a303f88057",
+      "sha256": "272e3ebe1a1116860a94d9cbf6d084e1b7c4bcd95706540f3765363fcad011b9"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "827ff80f58379bbd429d21e737fa5ae901b1718b",
+      "sha256": "e2c326a68a8b6b7f4cf0ff0b5689c23c25fcbddf738beae7ea37c570ef7b9634"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/portfolio-31/P4-PROSPECT-FILES-CONTINUATION.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "a61a90025a7ff12489084ec9a0658d5f389955ff",
+      "sha256": "e991f5b638b790c1d463ee8c71e6ee6893ab08e9f0e79f1daffca1b36319e022"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/portfolio-31/PROPOSAL-PERSISTENCE-CHECKPOINT.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "0035c17903f901d02595ebe4f3a916df03e93e03",
+      "sha256": "7fd186d1d4a5d413cf82b53d3fa87cdc960616b7d5d5b6df5c8ac0bf23ce5023"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/portfolio-31/PROPOSAL-PERSISTENCE-CONTRACT.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "0c12b350f38ca4aa43595479c0c5a310af90ec2e",
+      "sha256": "fa5ce8dfe00e86d775ac8874ac2c4ce4a29a8cab3b2838dbe9420dd446e6f439"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "795ac49d01d078fc0bc83db484ed3d59c7e2c02c",
+      "sha256": "50cb476a06f4e52ad872f730c467c89ffa0df43773460d1ec81a28e0f70e3fb9"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/followup-20261012/evidence/lanes/prospects/report.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "cce7f5f4245640d00def244e8297285cf02c30d3",
+      "sha256": "7460813cd2b8ee72a9f2ab2230fbe08e5600fd51fc570b5cd0821df87c5800df"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "docs/successor-p1-20261012/evidence/prospects/report.md",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "fea6c70b5b42c9beaa7c756f17e5f3033edb01a6",
+      "sha256": "bc2a7e30ec57013b6afa2481e24cdfd2de970839a407144066f5bd4459d68082"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "apps/api/src/business-development/business-development.dto.ts",
+      "symbol": "export class UpdateProspectDto",
+      "line": 262,
+      "git_blob": "3e925c60401ceb6c4616359e642ef1fc389bec54",
+      "sha256": "ee097c345c2304fc99ccf57e0a33ffa8c0c526a5e9b2caae27c94f177212422c"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "apps/api/src/business-development/business-development.service.ts",
+      "symbol": "async convert(",
+      "line": 936,
+      "git_blob": "ac30a777bc2aa6b91f5d59b824fd2673817fadba",
+      "sha256": "937537b9995643a755ef0df6c8e57c7f0f259978fed71e7c5997f1a0aff07d97"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "apps/api/src/business-development/business-development.controller.ts",
+      "symbol": "@Get('prospect-stages')",
+      "line": 91,
+      "git_blob": "64c47c6c6bf75b05779c89bba0b6065c2ead684f",
+      "sha256": "cf49b8fa4f00dab39a04d4084d28152967177f2c1e548c989e747a052c94c787"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "apps/api/src/business-development/prospect-stages.ts",
+      "symbol": "export function prospectStageCatalog",
+      "line": 29,
+      "git_blob": "bf427fe32dc4c9eba033fb2baff495fafe7865c3",
+      "sha256": "e2b34f552364c887480391d6ce0b4c9bf8ae82d468f376bb3214bffc386536a5"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "apps/api/src/business-development/business-development.module.ts",
+      "symbol": "imports: [ClientsModule",
+      "line": 48,
+      "git_blob": "5b96b2c5eabc64d4755107669f7889ba4f9dd379",
+      "sha256": "da067a87965c970c9c23b879b27609c0f6a9deb62184a734cf613426361b853c"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "docs/portfolio-prospect-contacts/CONTRACT.md",
+      "symbol": "## Proposed API",
+      "line": 15,
+      "git_blob": "9c9b9f87bb9da0cec8bdc5ab740e169a70d86be1",
+      "sha256": "c784e5af9b94ea7adca03308ff0c6951acacabacd60f92157a91e2eb1734b6cd"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "docs/prospect-resources-20261012/CONTRACT.md",
+      "symbol": "## Canonical authority",
+      "line": 8,
+      "git_blob": "b5c6c59b34879dd8b23733e9ad06497faae66802",
+      "sha256": "09aa77071cd004b2712d187db8b1aac07f8d6aa500f63310af3d853256ebcaf2"
+    },
+    {
+      "repository": "neo-capiro/capirov2",
+      "ref": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "path": "docs/prospect-resources-20261012/DEPENDENCIES.md",
+      "symbol": "## Resource and authority",
+      "line": 9,
+      "git_blob": "ff4c450b5357d15eb2a82af06af801ca18b18fd4",
+      "sha256": "2095737d4769109000712077e58c1a03bccd0e339f58d93ebfc1cbd0b83580c8"
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospects.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "c26e3cad2ab73ae81dcac5770041a8b572e5869c",
+      "sha256": "7307b551cf6d08d1707b6bd10ddd90825c7477341aad9c12fb5d118ce194baf4",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-current-read.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "6f4f8eadce25439a9e71d3b9a06eb51ea1059c5c",
+      "sha256": "84eb51196c433cf32261a4a9202b4df2d73d073c4d04218f92b215e1c174096f",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-overview.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "5abf8928e2c12865a949aaeb8d38ebca993fb525",
+      "sha256": "90d074ceb7c8e0201fd4041e30fcf045e67feecd1aff109bba1f7546c4d1c93c",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-overview.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "6ec05eb1919ba964a32d62ff02fa6adfc48870f4",
+      "sha256": "2c4f9822786825cd1c2762b256c19dc6017911768881ad0aef03789719009705",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-contacts.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "afbd380da419e256ef52fea47fc27bd917ee7b95",
+      "sha256": "c848c6f181fb3143e1729b885d2826763e8b58421691631404c51f3dbe7325a2",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-files.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "4eaffa699ad0f085dbb17e3aa78a8f6923040fee",
+      "sha256": "4593cf3f5ff26a8ba76f075ad6c04b9963ea78af2bc62722cf35724781e8b36f",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-contacts.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "ea414569764c5484b8873c43dc6067a874500b85",
+      "sha256": "e56e5d18901abddc4ef2fd767a850d20d2215a40b7dc11cfadfad8c5a92a81b8",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-files-local-search.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "b2452a06984963324675fc1b027eb8617e7fb489",
+      "sha256": "ad59ea80af69fcc89cdf62c5195b3fbc1a10bd2de526ac245d697980738cc41c",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-files.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "da185b9399087722493b2da9dedef62146325571",
+      "sha256": "15da40d688e16cac82dc7fca760def9891f77b0d2e2c979abcaaf3cd7fab4ad7",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "e3b247b5455dec58888c5d4aebbb27a5a3b89d58",
+      "sha256": "a3b4a62a6adee256e17bb63569650eb8435cf6f4090483370c41238eb45c0f9c",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "336af557d08be617dcc1471dd0865ac6cf43e089",
+      "sha256": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "7be2c87a8517c27f7fee9afdbfd83cce7cbdce60",
+      "sha256": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-workspace.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "f9c4388f25a3ce3843d16501d573ef2b220501cc",
+      "sha256": "7041d50b4eda858e104bbc72fe7363bc5dabb8946bfecb8d49642355e1644c05",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-brief.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "e743e8cc8ff9f924abbdf34d709e048308d12bc4",
+      "sha256": "63834c5de27caaf138b6059facb01235b99a293ddc6f5833fff35a9d9575099d",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-brief.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "1ff75ae01f84f1b1eec5123cb79618b0f78ad9f1",
+      "sha256": "ef73077e2d9b76fc3b2aea78165b0dc3df4d1a64d9143f7c20b14d46417b4c4a",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "5275cb5e85cdf577db7a8cc25706b02921116f3e",
+      "sha256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-proposals.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "3fdeae4750539a3d6156831aacc0e302c245f1c4",
+      "sha256": "8a9463118a445572db35064679ae52e63b1025c888e1f069ade3ee40c0858fe1",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-proposals.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "a24e62ffa7dbe45e566dd9210d8f925187eaac26",
+      "sha256": "a618d3192e9c8f4af1c17fdcd79a78b26a8bc5fa447f45689adfd98f050d5f40",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-proposal-contract.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "9f1294f6ca46a093ed1b86bb49a5b2563dccdc5b",
+      "sha256": "92332e3447caed037b4a0f835b7de4728d8d72cc2e96f8890785bf4dc74d16fd",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/prospect-conversion.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "d436b4ed31f90c5fb65f2cb172446a7113b532be",
+      "sha256": "a4ef6492d8e343c8a4416292c785b23e885cda67281fad6d844bba46423daa4c",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/prospect-conversion.test.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "188f5da36c9a70827a94504801b60d9a7186fc57",
+      "sha256": "c464e7b1471ba35f1fd472860c2f65d17aeda755724f4d7e8c7dee64680f8880",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/tests/browser/canonical-navigation.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "9fb8f857f5f2d416f92880612b5cea2a81f11a49",
+      "sha256": "7410470d25693de2880577c98f442b0fcd3cb47f161c78a435ec5049024ea47d",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/test/browser/session.spec.ts",
+      "symbol": "file",
+      "line": 1,
+      "git_blob": "999926fc11354f4f7ca7d0b53833ff02cea6746a",
+      "sha256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817",
+      "proves": "Current test source contains focused synthetic contract/interaction assertions for this facet. Not run in this mapping; does not prove native service/provider behavior."
+    },
+    {
+      "repository": "neo-capiro/capiro-frontend",
+      "ref": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "symbol": "export function productHref",
+      "line": 24,
+      "git_blob": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8"
+    }
+  ],
+  "backend_scope": {
+    "mounted_head": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+    "reviewed_composition": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "frontend_compatible_source": "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md",
+    "later_reference_check": {
+      "repository": "neo-capiro/capirov2",
+      "ref": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "path": "apps/api/src/business-development/business-development.dto.ts",
+      "lines": [
+        170,
+        356
+      ],
+      "git_blob": "04dc181cc66f46ed0bf6298525602a47a49b21f4",
+      "method": "GitHub fetch_file read-only; returned native bounded DTO lacks rich company fields",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/business-development/business-development.dto.ts"
+    },
+    "limits": "No live/default-branch state, deployment, flags, native migrations, roles, provider availability or billing candidate activation inferred from these source refs."
+  },
+  "historical_corrections": [
+    "PROS-F01 current list read repaired; not reopened wholesale.",
+    "PROS-F02 manual pending-save input freeze implemented; rich toolbar still separate.",
+    "PROS-F03 local file search implemented; source-only facet, not native acceptance.",
+    "Contacts registration composed and DDL allocated; native application unproved.",
+    "Resource immutable origin survives conversion; no blanket copy/carryover claim."
+  ],
+  "runtime_actions": [],
+  "source_edits": [],
+  "native_actions": [],
+  "visual_comparison": "NOT RUN: selected index mappings retained; all confirmed_mismatch null",
+  "limits": [
+    "Read-only source/test/evidence review.",
+    "No tests, server, browser, build, install or native/provider calls.",
+    "Source candidate reproduction plans are not executed proof.",
+    "All40 native acceptance rows remain open.",
+    "P7 whole-row native/final visual criteria cannot be transferred from fixture qualification.",
+    "Only requested3 reviewer files written; canonical ledger untouched."
+  ],
+  "deliverable_hashes": {
+    "rows.json": "676d5909733aacb783627f95e8cf1d85bc7b2e7ebb1854b1c90d9512c0ccf653",
+    "summary.md": "f2362793bf46a89decefa1f6164954cd2dd9c4a9821071b3f49076dda16ffce2"
+  },
+  "review_method": "Current production symbols inspected with relevant callers/contracts; test names and selected assertion bodies reviewed, not every fixture line. Source hashes index referenced bytes, not a claim of exhaustive code audit. Static candidates are source-supported reproduction requests; no tests were run.",
+  "final_validation": {
+    "exact_ids": true,
+    "one_category_each": true,
+    "native_acceptance_open": true,
+    "all_source_references_bound": true,
+    "all_confirmed_mismatch_null": true,
+    "no_source_diff": true
+  }
+}

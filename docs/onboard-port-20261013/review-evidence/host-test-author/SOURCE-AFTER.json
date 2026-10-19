@@ -1,0 +1,35 @@
+{
+  "file": "apps/web/test/browser/onboard-host-funnel.spec.ts",
+  "sha256": "2f8cb71e52b0194380b705ee0d920b6dd9e91ae0961f36581705c27045cf38f6",
+  "syntax": [],
+  "imports": [
+    {
+      "specifier": "@playwright/test",
+      "line": 1,
+      "kind": "named",
+      "names": [
+        "test",
+        "expect"
+      ]
+    },
+    {
+      "specifier": "./onboard-host-fixtures",
+      "line": 2,
+      "kind": "named",
+      "names": [
+        "hostFixture",
+        "nativeSession",
+        "navigateHost",
+        "trialName",
+        "expectPlan",
+        "expectHostIsolated",
+        "expectHorizontalFit"
+      ]
+    }
+  ],
+  "directives": [],
+  "anyLines": [],
+  "remoteOriginLines": [],
+  "sizeFindings": [],
+  "nonblank": 193
+}

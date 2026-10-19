@@ -1,0 +1,48 @@
+{
+  "atUTC": "2026-10-13T05:10:55.708Z",
+  "method": "Exact captured useAdvanceSession, createFunnelLifetime and attempt-journal functions; actual QueryClient; synthetic hook getters/API rejection and synthetic effect counter only. No React mount, network or provider.",
+  "bindings": [
+    {
+      "file": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+      "sha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/funnel-lifetime.ts",
+      "sha256": "d4aee604fc739b3f297fcc03828b39105ccd3a0b6cc87fd2404f914c72429ea2"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/funnel.ts",
+      "sha256": "87dffe73c7a5e93fc86af4dc8733a37224b68405c3cc927edd28c3bebd8473c6"
+    }
+  ],
+  "results": [
+    {
+      "status": 403,
+      "before": "success",
+      "error": {
+        "status": 403,
+        "message": "Current native session unavailable"
+      },
+      "after": "success",
+      "cachedSessionId": "A",
+      "ownerCurrentAfterDeniedRead": true,
+      "syntheticDifferentActionDispatches": 1,
+      "expected": "Failed current read makes prior session unavailable for another action until a new successful current read",
+      "pass": false
+    },
+    {
+      "status": 503,
+      "before": "success",
+      "error": {
+        "status": 503,
+        "message": "Current native session unavailable"
+      },
+      "after": "success",
+      "cachedSessionId": "A",
+      "ownerCurrentAfterDeniedRead": true,
+      "syntheticDifferentActionDispatches": 1,
+      "expected": "Failed current read makes prior session unavailable for another action until a new successful current read",
+      "pass": false
+    }
+  ]
+}

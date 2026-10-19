@@ -1,0 +1,164 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-modules/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/playwright.config.mjs",
+      "--workers=1",
+      "--timeout=60000",
+      "--retries=0"
+    ],
+    "configFile": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-modules/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-modules/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "/remaining-modules.spec.ts/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "remaining-modules.spec.ts",
+      "file": "remaining-modules.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "MS08 scope and grouping controls remain keyboard operable at phone width",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6476,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Planner client scope' })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Planner client scope' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Planner client scope' })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Planner client scope' })\u001b[22m\n\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:288:23",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                      "column": 23,
+                      "line": 288
+                    },
+                    "snippet": "  286 |   await expect(scope).toBeFocused();\n  287 |   await page.keyboard.press(\"Enter\");\n> 288 |   await expect(scope).toHaveAttribute(\"aria-expanded\", \"true\");\n      |                       ^\n  289 |   await expect(page.getByRole(\"listbox\")).toBeVisible();\n  290 |   await expect(\n  291 |     page.getByRole(\"option\", { name: \"Scope · All clients\", exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                        "column": 23,
+                        "line": 288
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Planner client scope' })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Planner client scope' })\u001b[22m\n\n\n  286 |   await expect(scope).toBeFocused();\n  287 |   await page.keyboard.press(\"Enter\");\n> 288 |   await expect(scope).toHaveAttribute(\"aria-expanded\", \"true\");\n      |                       ^\n  289 |   await expect(page.getByRole(\"listbox\")).toBeVisible();\n  290 |   await expect(\n  291 |     page.getByRole(\"option\", { name: \"Scope · All clients\", exact: true }),\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:288:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T22:04:19.601Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                    "column": 23,
+                    "line": 288
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23bf3c282ea554de4104-daae22d660e76922e280",
+          "file": "remaining-modules.spec.ts",
+          "line": 277,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T22:04:19.071Z",
+    "duration": 7399.635,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

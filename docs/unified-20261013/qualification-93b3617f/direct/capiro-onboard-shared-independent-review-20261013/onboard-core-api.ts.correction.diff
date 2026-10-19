@@ -1,0 +1,41 @@
+--- initial/apps/web/src/shared/capiro/onboard-core-api.ts
++++ corrected/apps/web/src/shared/capiro/onboard-core-api.ts
+@@ -1,3 +1,4 @@
++import { z } from "zod";
+ import type { OperationRequest } from "./contracts";
+ import { CapiroApiError, type CapiroApi } from "./http";
+ import type { capiroOperations } from "./registry";
+@@ -8,6 +9,7 @@
+ type MemoryType = OperationRequest<
+   Registry["onboard.core.memoryRead"]
+ >["params"]["type"];
++const nativeClientId = z.uuid();
+ 
+ /** Onboard-specific receipt bindings; existing me/client/invitation owners survive. */
+ export function createOnboardCoreApi(api: CapiroApi<Registry>) {
+@@ -28,8 +30,23 @@
+       return result;
+     },
+     getImportCandidates: () => api.request("onboard.core.importCandidates", {}),
+-    createClient: (body: Body<"settings.profiles.create">) =>
+-      api.request("settings.profiles.create", { body }),
++    async createClient(body: Body<"settings.profiles.create">) {
++      const submitted = { ...body };
++      const result = await api.request("settings.profiles.create", {
++        body: submitted,
++      });
++      // Native Core creates a UUID and stores the submitted name unchanged.
++      // This receipt binds observation, never backend tenant authorization.
++      if (
++        !nativeClientId.safeParse(result.id).success ||
++        result.name !== submitted.name
++      )
++        throw new CapiroApiError(
++          502,
++          "The creation response does not match the submitted client.",
++        );
++      return result;
++    },
+     async importClientChunk(ldaClientIds: number[]) {
+       const submitted = [...ldaClientIds];
+       const expected = new Set(submitted);

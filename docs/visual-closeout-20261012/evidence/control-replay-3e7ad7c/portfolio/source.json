@@ -1,0 +1,22 @@
+{
+  "head": "3e7ad7c648b65b84c758388f9505b3b057e0c57f",
+  "srcTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "status": "",
+  "canonicalSHA256": "47a8faecfb55bea520d43748663014e64a12e684666486f49c14cc0edece25ea",
+  "executedSHA256": "47a8faecfb55bea520d43748663014e64a12e684666486f49c14cc0edece25ea",
+  "substitutions": [
+    {
+      "before": "from \"/workspace/capiro-visual-closeout/apps/web/tests/browser/fixtures\"",
+      "after": "from \"/workspace/capiro-visual-closeout/apps/web/tests/browser/fixtures\""
+    },
+    {
+      "before": "from \"/workspace/capiro-visual-closeout/apps/web/tests/browser/profile-current-state-fixtures\"",
+      "after": "from \"/workspace/capiro-visual-closeout/apps/web/tests/browser/profile-current-state-fixtures\""
+    },
+    {
+      "before": "from \"/workspace/capiro-visual-closeout/apps/web/tests/browser/capability-presentation-fixtures\"",
+      "after": "from \"/workspace/capiro-visual-closeout/apps/web/tests/browser/capability-presentation-fixtures\""
+    }
+  ],
+  "assertionChanges": false
+}

@@ -1,0 +1,81 @@
+{
+  "finding": "PROS-F01",
+  "decision": "accepted bounded frontend repair",
+  "source": {
+    "commit": "e7e62353c62d91fd7f234016db4ce7283b38bfcd",
+    "tree": "d08ea02cefa0717a18fae42e87bc15fb2dbdab77",
+    "files": [
+      {
+        "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+        "sha256": "2e559c408c5f0db2b89bf5f7b1fa13ec05e49d5ed3eeabb0953c6d24be68cfed"
+      },
+      {
+        "path": "apps/web/src/features/portfolio/prospects/queries.ts",
+        "sha256": "be991fedfb9af416834677771aa52458821dade8b3f1c993e44aba24d3f49410"
+      },
+      {
+        "path": "apps/web/tests/browser/prospect-current-read.spec.ts",
+        "sha256": "84eb51196c433cf32261a4a9202b4df2d73d073c4d04218f92b215e1c174096f"
+      }
+    ]
+  },
+  "reviewedAt": "2026-10-12T15:38:49.754456+00:00",
+  "independentCasesPassed": 6,
+  "ownerCasesReplayedPassed": 12,
+  "totalDistinctCasesPassed": 18,
+  "evidence": [
+    "prospects-independent-results.json",
+    "prospects-detail-corrected-results.json",
+    "prospects-replay-results.json",
+    "prospects-reviewed.patch",
+    "prospects-architecture.json"
+  ],
+  "sourceFindings": [
+    {
+      "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:38",
+      "reason": "isSuccess + isFetchedAfterMount + no error govern counts, cards, totals, pipeline and create dialogs/actions. New/filter mount cannot present an earlier cached success before a current successful read."
+    },
+    {
+      "path": "apps/web/src/features/portfolio/prospects/queries.ts:39",
+      "reason": "Local staleTime:0 ensures returning to an earlier still-fresh filter actually reads. It combines with fetched-after-mount gating to close the cached-filter bypass without a shared cache framework."
+    },
+    {
+      "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:44",
+      "reason": "Failure clears new/pipeline URL intents; same-key successful background refresh does not unmount a draft."
+    },
+    {
+      "path": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:49",
+      "reason": "Existing unchanged detail read gate also hides record/editor on 403/503. Retry mounts a new editor only from the newly successful record; independent controls verify the old input is absent."
+    }
+  ],
+  "controls": [
+    "403/503 detail failure with an open editor removes headings/actions/input; held retry remains hidden; successful retry editor contains new current values, and closing it reveals current heading.",
+    "Explicit pipeline URL after navigation to a client and back fails closed on 503, removes intent, hides totals/cards and disables pipeline.",
+    "Successful same-key background list refresh preserves a typed creation draft.",
+    "After filter B fails with 403/503, returning to a previously successful filter A without advancing the clock withholds cache, totals and actions through a held new read; only the new response restores cards.",
+    "Fresh 12-case replay covers remount/filter errors, held retry, current pipeline stage/create teardown, client navigation and draft preservation."
+  ],
+  "architectureReview": {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+    "kind": "function",
+    "symbol": "ProspectsIndex",
+    "line": 23,
+    "nonblank": 189,
+    "fingerprint": "d0be79ab36b07635085df1e03a891890f55b36a345cb0ac4a199caf5e3552d84",
+    "provenance": "changed-since-transfer",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+    "reviewedOn": "2026-10-12",
+    "decision": "accepted exact responsibility and fingerprint within this repair scope",
+    "rationale": "ProspectsIndex remains the list presentation and URL interaction owner for filters, counts, cards and creation/pipeline dialogs. Every data-backed branch now uses one successful fetched-after-mount gate; failed reads clear only existing new/pipeline URL intents. The canonical useProspects query hook owns the local staleTime:0 needed for filter-key/remount rereads. Same-key successful background refresh retains drafts. No global cache framework, new authority, persistence, backend semantics or mutation owner is introduced. The cohesive 189-line page keeps the read invariant auditable; splitting solely for line count would obscure it.",
+    "rootAction": "Record this exact fingerprint in the root-owned architecture review registry; unchanged inherited findings are not approved by this review."
+  },
+  "limitations": [
+    "Synthetic localhost fixtures exercise production frontend presentation/query contracts. No native/backend authorization, provider operation, paid model, AWS, deployment, real data write or live session acceptance is claimed.",
+    "The Portfolio fixture uses canonical DataProvider but not the complete ApplicationBoundary. Client navigation and explicit provider replacement controls prove bounded UI/cache disposal; shared production user/session/organization/client authority replacement remains root combined qualification.",
+    "Root must record the exact accepted size fingerprints and qualify the combined integrated successor. Inherited unrelated size findings remain unreviewed.",
+    "No application, shared registry, frozen source, approved archive, prior 42-case evidence, or prior manifest was edited."
+  ],
+  "newProductFindings": []
+}

@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+  "gitSubtrees": {
+    "apps/web": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "apps/web/src": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e"
+  },
+  "archiveBytes": 498171732,
+  "archiveSHA256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+  "trackedBlobs": 5006,
+  "zipMembers": 5007,
+  "trackedPayloadBytes": 589105597,
+  "perMemberInventorySHA256": "1ac06b53762855f60f8a1d4fc1343e51ce373711cee5ac8479bd26a0e2a73139",
+  "receiptSHA256": "5fcbdf8819003e3eb51a9d8395eb70db0a10c728efb7aaf6b8c301afa0210cd9",
+  "verifierBindings": {
+    "source_archive.py": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+    "zip_layout.py": "1666011cab053d93ddd7feb2d95cb8283c069444cc507cc0f62d79f57fef1179",
+    "verify-source-zip.py": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2"
+  },
+  "qualification": "PASSED_BOUNDED_OFFLINE_GATES",
+  "sourceCommitIsNotLaterEvidencePRHead": true,
+  "transfer": {
+    "libraryID": null,
+    "status": "Not transferred; original helper tools/list network failures occurred before any upload mutation.",
+    "sizeLimitFailure": false,
+    "supportedRoute": "Exact Git source commit with accepted offline creator and full manifest verification; separately bind any newly produced archive identity."
+  },
+  "nativeWindowsExecution": false,
+  "cloudActions": [],
+  "qualificationReceipt": "../../QUALIFICATION.json",
+  "nativePortfolioRowsAccepted": 0,
+  "nativePortfolioRowsHeld": 337,
+  "shippingAuthorized": false
+}

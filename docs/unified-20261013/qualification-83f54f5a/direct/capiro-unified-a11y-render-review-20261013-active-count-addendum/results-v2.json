@@ -1,0 +1,155 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-onboard-port-20261013/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/playwright.config.mjs"
+    ],
+    "configFile": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/playwright.config.mjs",
+    "rootDir": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum",
+        "testIgnore": [],
+        "testMatch": [
+          "count.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/results-v2.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "count.spec.ts",
+      "file": "count.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light active All count at 1440px has actual rest and hover contrast",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:44:49.092Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2c39b9d2b96390187b37-3cfb7549ee4fb82177f4",
+          "file": "count.spec.ts",
+          "line": 8,
+          "column": 36
+        },
+        {
+          "title": "light active All count at 390px has actual rest and hover contrast",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2431,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:44:53.053Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2c39b9d2b96390187b37-6ae713e7b67b000e5653",
+          "file": "count.spec.ts",
+          "line": 8,
+          "column": 36
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T07:44:48.586Z",
+    "duration": 6991.449,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

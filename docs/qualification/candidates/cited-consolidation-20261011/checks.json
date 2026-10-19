@@ -1,0 +1,37 @@
+{
+  "node": "v24.19.0",
+  "environmentOverrides": {
+    "NPM_CONFIG_OFFLINE": "true",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NEXT_IGNORE_INCORRECT_LOCKFILE": "1",
+    "CI": "true",
+    "__NEXT_AGENT_UPGRADE": "security"
+  },
+  "offlineReason": "prevent Next automatic lock edit and online agent upgrade assessment in constrained CI; installed native Linux SWC16.4.0 and original package/lock checks retained; dependencies are now owned copies; diagnostic monkey-patch not used for accepted check/build",
+  "commands": [
+    {
+      "label": "check-final",
+      "argv": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 40.763,
+      "bytes": 9540,
+      "sha256": "2e2a8b5897dc5f7d3e3bc6de5a87d06ccf2a91de4a7ad1b9561a709fd6cd5ae4"
+    },
+    {
+      "label": "clean production build final; removed only owned .next outputs to eliminate stale incremental CSS route binding",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 8.568,
+      "bytes": 1335,
+      "sha256": "9fd259ddcfe9db34e4338147d74b24e81e8805e712d3a7018ba9b1764955d7ec"
+    }
+  ]
+}

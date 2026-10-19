@@ -1,0 +1,337 @@
+diff --git a/apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx b/apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx
+index 6c156d1eb6da6bdbf6bd2e57b154d6136277ad1c..09dc35dc3f802baa6f9542592f71b98bc07cc03c 100644
+--- a/apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx
++++ b/apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx
+@@ -11,11 +11,29 @@ import { MatterDetail } from "./MatterDetail";
+ import { CorrectionDialog, type CorrectionContext } from "./CorrectionDialog";
+ import { UnassignedRecords } from "./UnassignedRecords";
+ import { useAdvocacyAccess } from "./access";
+-import type { Matter } from "./contracts";
++import { canAdminister } from "@/shared/portfolio/auth/identity";
++import { AdvocacyBrowser } from "./AdvocacyBrowser";
++import { AdvocacyReadState } from "./AdvocacyReadState";
++import { EditMatterDialog } from "./EditMatterDialog";
++import { captureMatterEdit, type MatterEditReview } from "./matter-edit-scope";
++import { currentAdvocacyActor, useAdvocacyRevision } from "./read-state";
+ import styles from "./advocacy.module.css";
+ 
+ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+-  const { identity, canRead, canEdit } = useAdvocacyAccess();
++  const { identity } = useAdvocacyAccess();
++  const scope = JSON.stringify([
++    clientId,
++    identity.data?.tenant?.id,
++    identity.data?.user.id,
++  ]);
++  return <ClientAdvocacyHistory key={scope} clientId={clientId} />;
++}
++function ClientAdvocacyHistory({ clientId }: { clientId: string }) {
++  const { identity, canRead: accessCanRead } = useAdvocacyAccess();
++  const cache = useAdvocacyRevision(clientId);
++  const actor = currentAdvocacyActor(cache);
++  const canRead = accessCanRead && Boolean(actor);
++  const canEdit = canRead && canAdminister(actor?.role);
+   const matters = useMatters(clientId, canRead);
+   const params = useSearchParams();
+   const [selected, setSelected] = useState<string | null>(() =>
+@@ -23,7 +41,7 @@ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+   );
+   const detail = useMatter(clientId, selected, canRead);
+   const [creating, setCreating] = useState(false);
+-  const [editing, setEditing] = useState<Matter>();
++  const [editing, setEditing] = useState<MatterEditReview>();
+   const [addRecord, setAddRecord] = useState(false);
+   const [correction, setCorrection] = useState<CorrectionContext>();
+   const [notice, setNotice] = useState("");
+@@ -35,11 +53,10 @@ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+     >
+       <header className="row between">
+         <div>
+-          <p className="eyebrow">Institutional memory</p>
+           <h2>Advocacy history</h2>
+         </div>
+         <button
+-          className="button"
++          className="button primary"
+           disabled={!canEdit}
+           onClick={() => setCreating(true)}
+         >
+@@ -47,6 +64,9 @@ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+           New matter
+         </button>
+       </header>
++      <p className="muted">
++        Advocacy records and linked events for this client.
++      </p>
+       <QueryState
+         pending={identity.isPending || identity.isFetching}
+         error={identity.error}
+@@ -65,33 +85,7 @@ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+       )}
+       {canRead && (
+         <>
+-          <QueryState
+-            pending={matters.isPending}
+-            error={matters.error}
+-            retry={() => void matters.refetch()}
+-          />
+-          {!matters.error &&
+-            matters.data?.map((matter) => (
+-              <button
+-                className={`button ghost stack ${styles.matterButton}`}
+-                key={matter.id}
+-                onClick={() => setSelected(matter.id)}
+-              >
+-                <span className="row between">
+-                  <strong>{matter.title}</strong>
+-                  <span className="chip">
+-                    {matter.status.replaceAll("_", " ")}
+-                  </span>
+-                </span>
+-                <small>
+-                  {matter.recordCount} records · {matter.outcomeCount} outcomes
+-                </small>
+-                {matter.summary && <p className="muted">{matter.summary}</p>}
+-              </button>
+-            ))}
+-          {!matters.error && matters.data?.length === 0 && (
+-            <p className="empty">No advocacy matters yet.</p>
+-          )}
++          <AdvocacyBrowser clientId={clientId} onSelect={setSelected} />
+           <UnassignedRecords
+             clientId={clientId}
+             canEdit={canEdit}
+@@ -100,19 +94,27 @@ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+         </>
+       )}
+       <MatterEditor
+-        key={editing?.id ?? "new"}
+         clientId={clientId}
+-        matter={editing}
+-        open={creating || Boolean(editing)}
++        open={creating}
+         onOpenChange={(open) => {
+           if (!open) {
+             setCreating(false);
+-            setEditing(undefined);
+           }
+         }}
+       />
++      {editing && (
++        <EditMatterDialog
++          key={`${clientId}:${editing.matter.id}`}
++          review={editing}
++          onClose={() => setEditing(undefined)}
++          onSaved={(message) => {
++            setEditing(undefined);
++            setNotice(message);
++          }}
++        />
++      )}
+       <Dialog
+-        open={Boolean(selected) && !correction}
++        open={Boolean(selected) && !correction && !editing}
+         onOpenChange={(open) => {
+           if (!open) setSelected(null);
+         }}
+@@ -121,16 +123,28 @@ export function AdvocacyHistory({ clientId }: { clientId: string }) {
+       >
+         {canRead ? (
+           <>
+-            <QueryState
+-              pending={detail.isPending}
++            <AdvocacyReadState
++              label="matter details"
++              current={detail.isCurrent}
++              pending={detail.isPending || detail.isFetching}
+               error={detail.error}
+               retry={() => void detail.refetch()}
+             />
+             {current && (
+               <MatterDetail
+                 matter={current}
+-                canEdit={canEdit && !matters.error}
+-                onEdit={() => setEditing(current)}
++                canEdit={canEdit && matters.isCurrent}
++                onEdit={() => {
++                  try {
++                    setEditing(captureMatterEdit(cache, clientId, current));
++                  } catch (error) {
++                    setNotice(
++                      error instanceof Error
++                        ? error.message
++                        : "Reload current advocacy details before editing.",
++                    );
++                  }
++                }}
+                 onAdd={() => setAddRecord(true)}
+                 onCorrect={setCorrection}
+               />
+diff --git a/apps/web/src/features/portfolio/advocacy/advocacy.module.css b/apps/web/src/features/portfolio/advocacy/advocacy.module.css
+index fe6acdbcad88dde08662e6fa2202af0a86dabe38..f81f76f4dc088c05397db367af103f331c377b62 100644
+--- a/apps/web/src/features/portfolio/advocacy/advocacy.module.css
++++ b/apps/web/src/features/portfolio/advocacy/advocacy.module.css
+@@ -1,5 +1,20 @@
+-.history {
++.history:global(.card) {
+   min-width: 0;
++  padding: 20px;
++  border-radius: 12px;
++  align-content: start;
++}
++.history > header h2 {
++  font-size: 14px;
++  letter-spacing: -0.07px;
++}
++.history > header > button {
++  min-height: 32px;
++  padding: 7px 12px;
++  font-size: 12px;
++}
++.history > p {
++  font-size: 13px;
+ }
+ .history .matterButton {
+   display: grid;
+diff --git a/apps/web/src/features/portfolio/advocacy/contracts.ts b/apps/web/src/features/portfolio/advocacy/contracts.ts
+index 3062f597456491bd8a93d559e6c335ca6de90402..87f52b63242228b5a9883c75224b4d3db508b271 100644
+--- a/apps/web/src/features/portfolio/advocacy/contracts.ts
++++ b/apps/web/src/features/portfolio/advocacy/contracts.ts
+@@ -5,6 +5,8 @@ export const matterSchema = z.object({
+   matterType: z.string(),
+   status: z.string(),
+   summary: z.string().nullable(),
++  primaryPeCode: z.string().nullable().optional(),
++  primaryBillId: z.string().nullable().optional(),
+   openedAt: z.string().nullable(),
+   lastActivityAt: z.string().nullable(),
+   recordCount: z.number(),
+diff --git a/apps/web/src/features/portfolio/advocacy/queries.ts b/apps/web/src/features/portfolio/advocacy/queries.ts
+index 12ed691985960a2eb2809d4c7181d0ae93381c9c..15a1e042f285a8a4ef770de93f5bd56241b133a6 100644
+--- a/apps/web/src/features/portfolio/advocacy/queries.ts
++++ b/apps/web/src/features/portfolio/advocacy/queries.ts
+@@ -4,6 +4,11 @@ import { useQuery } from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
+ import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
+ import { useAdvocacyAccess } from "./access";
++import {
++  currentAdvocacyActor,
++  currentAdvocacyRead,
++  useAdvocacyRevision,
++} from "./read-state";
+ import {
+   matterSchema,
+   matterDetailSchema,
+@@ -52,59 +57,80 @@ export async function loadMatter(
+     );
+   return result;
+ }
+-export function loadTimeline(
++export async function loadTimeline(
+   api: ApiClient,
+   clientId: string,
+   signal?: AbortSignal,
+ ) {
+-  return api.request(
++  const rows = await api.request(
+     "core",
+     `${advocacyPath(clientId)}/timeline`,
+     z.array(timelineEntrySchema).max(500),
+     { signal },
+   );
++  if (new Set(rows.map((row) => `${row.kind}:${row.id}`)).size !== rows.length)
++    throw new ApiError(
++      502,
++      "The timeline returned duplicate event identities.",
++    );
++  return rows;
+ }
+ export const mattersKey = (clientId: string) =>
+   ["advocacy", clientId, "matters"] as const;
+ export function useMatters(clientId: string, enabled = true) {
+   const api = useApi();
+   const { identity, canRead } = useAdvocacyAccess();
+-  return useQuery({
+-    queryKey: [
+-      ...mattersKey(clientId),
+-      identity.data?.tenant?.id,
+-      identity.data?.user.id,
+-    ],
++  const cache = useAdvocacyRevision(clientId);
++  const key = [
++    ...mattersKey(clientId),
++    identity.data?.tenant?.id,
++    identity.data?.user.id,
++  ];
++  const query = useQuery({
++    queryKey: key,
+     enabled: enabled && canRead,
+     queryFn: ({ signal }) => loadMatters(api, clientId, signal),
+   });
++  const isCurrent =
++    Boolean(currentAdvocacyActor(cache)) && currentAdvocacyRead(cache, key);
++  return { ...query, data: isCurrent ? query.data : undefined, isCurrent };
+ }
+ export function useMatter(clientId: string, id: string | null, enabled = true) {
+   const api = useApi();
+   const { identity, canRead } = useAdvocacyAccess();
+-  return useQuery({
+-    queryKey: [
+-      ...matterKey(clientId, id),
+-      identity.data?.tenant?.id,
+-      identity.data?.user.id,
+-    ],
++  const cache = useAdvocacyRevision(clientId);
++  const key = [
++    ...matterKey(clientId, id),
++    identity.data?.tenant?.id,
++    identity.data?.user.id,
++  ];
++  const query = useQuery({
++    queryKey: key,
+     enabled: Boolean(id) && enabled && canRead,
+     queryFn: ({ signal }) => {
+       if (!id) throw new ApiError(400, "Select a matter.");
+       return loadMatter(api, clientId, id, signal);
+     },
+   });
++  const isCurrent =
++    Boolean(currentAdvocacyActor(cache)) && currentAdvocacyRead(cache, key);
++  return { ...query, data: isCurrent ? query.data : undefined, isCurrent };
+ }
+ export function useAdvocacyTimeline(clientId: string, enabled: boolean) {
+   const api = useApi();
+   const { identity, canRead } = useAdvocacyAccess();
+-  return useQuery({
+-    queryKey: [
+-      ...timelineKey(clientId),
+-      identity.data?.tenant?.id,
+-      identity.data?.user.id,
+-    ],
++  const cache = useAdvocacyRevision(clientId);
++  const key = [
++    ...timelineKey(clientId),
++    identity.data?.tenant?.id,
++    identity.data?.user.id,
++  ];
++  const query = useQuery({
++    queryKey: key,
+     enabled: enabled && canRead,
+     queryFn: ({ signal }) => loadTimeline(api, clientId, signal),
+   });
++  const isCurrent =
++    Boolean(currentAdvocacyActor(cache)) && currentAdvocacyRead(cache, key);
++  return { ...query, data: isCurrent ? query.data : undefined, isCurrent };
+ }
+diff --git a/apps/web/tests/browser/fixtures.ts b/apps/web/tests/browser/fixtures.ts
+index 5a715915e138f5d7b5b4ab444ed655adf107f437..b19d3da0e0a95ea9cad2bde6bbfbaf9b608fbe05 100644
+--- a/apps/web/tests/browser/fixtures.ts
++++ b/apps/web/tests/browser/fixtures.ts
+@@ -234,6 +234,7 @@ export async function installFixtures(page: Page) {
+       [`core/clients/${clientId}/facilities`]: [],
+       [`core/clients/${clientId}/objectives`]: [objective],
+       [`core/clients/${clientId}/advocacy-matters`]: [],
++      [`core/clients/${clientId}/advocacy-matters/timeline`]: [],
+       [`core/clients/${clientId}/capabilities`]: [capability],
+       [`core/clients/${clientId}/capability-fit`]: {
+         status: "empty",

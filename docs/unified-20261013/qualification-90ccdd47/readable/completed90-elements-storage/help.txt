@@ -1,0 +1,10 @@
+usage: archive-completed-elements.py [-h]
+
+Archive only the completed90cc Elements output; never follow borrowed links.
+
+options:
+  -h, --help  show this help message and exit
+
+Exit0: archived/verified/retired; exit1: validation, consumer, capacity or I/O
+failure before unverified retirement; exit2: invalid CLI. No gate or
+application execution.

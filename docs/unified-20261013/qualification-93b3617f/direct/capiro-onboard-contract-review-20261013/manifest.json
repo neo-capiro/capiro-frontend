@@ -1,0 +1,51 @@
+{
+  "sealedAt": "2026-10-13T02:48:41.182316+00:00",
+  "sourceCommit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+  "repository": "neo-capiro/capirov2",
+  "operationCount": 36,
+  "reviewedOwnerArtifacts": 27,
+  "readOnly": true,
+  "repositoryChanges": false,
+  "implementationCopiedOrImported": false,
+  "nativeProviderCalls": false,
+  "testsBuildInstallBrowserServerRun": false,
+  "status": "Static contract review complete; native/evolving-port runtime acceptance not performed. Exact response mismatches and gateway requirements communicated to owners.",
+  "files": [
+    {
+      "path": "findings.json",
+      "sha256": "3a16c61826fa893e72d3c7343f41b10f5f2b8132bf1f03e154159e94c7f22d55",
+      "bytes": 3954
+    },
+    {
+      "path": "frontend-source-pins.json",
+      "sha256": "fedf0ef9b0980371c1e89d1e019e43583b69d604ac5cdf8bf997269beee92f03",
+      "bytes": 2231
+    },
+    {
+      "path": "operation-matrix.json",
+      "sha256": "2eb029aa1781f90bb1e776467bd5b6a0133431c97bdf23ddf508153a479e6402",
+      "bytes": 29533
+    },
+    {
+      "path": "operation-matrix.md",
+      "sha256": "7bbe20d4844dfe4aaef3b8408574ba175ff130f6fe403a6552b27b537404384d",
+      "bytes": 15115
+    },
+    {
+      "path": "pending-review-source-pin.json",
+      "sha256": "b04308f8698514dd443b562195a93c4bd0fea1c5ccb4cba8b2a85a3905fae9bf",
+      "bytes": 444
+    },
+    {
+      "path": "review.md",
+      "sha256": "707882fb40dc036765bf0b12a041f1426def6db54a227ab492ba29439d31dbe9",
+      "bytes": 15583
+    },
+    {
+      "path": "source-pins.json",
+      "sha256": "78f766d2aa4c3732235fc20c3c01c8ccd6a63cd49d091bdbfc1bd060673e77a9",
+      "bytes": 12289
+    }
+  ],
+  "citationPositionsVerifiedBeforeHandoff": true
+}

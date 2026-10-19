@@ -1,0 +1,94 @@
+[
+  {
+    "source": "943d90c",
+    "reportPath": "/tmp/capiro-successor-qualification/final-943d90c/portfolio-results.json",
+    "suite": {
+      "title": "activity-command-reopen.spec.ts",
+      "file": "activity-command-reopen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a continuously mounted Quick log hides its retained body until reopened fresh authority completes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 26394,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:47:50.517Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "32e276a32477698dbc89-fe50f91146b348cae5f0",
+          "file": "activity-command-reopen.spec.ts",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  },
+  {
+    "source": "49f6609",
+    "reportPath": "/tmp/capiro-successor-qualification/final-49f6609/portfolio-results.json",
+    "suite": {
+      "title": "activity-command-reopen.spec.ts",
+      "file": "activity-command-reopen.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a continuously mounted Quick log hides its retained body until reopened fresh authority completes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 22148,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:04:41.560Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "32e276a32477698dbc89-fe50f91146b348cae5f0",
+          "file": "activity-command-reopen.spec.ts",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  }
+]

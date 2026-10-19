@@ -1,0 +1,59 @@
+{
+  "result": "PASS \u2014 bounded independent source acceptance; runtime replay not performed",
+  "commit": "850da33808dab050d2396a26233d3d3881d2fecf",
+  "parent": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "reviewedAt": "2026-10-12T21:46:15.500655+00:00",
+  "frozenFailureSource": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "changedFiles": [
+    "apps/web/tests/browser/relationships.spec.ts"
+  ],
+  "changedMatcher": {
+    "line": 511,
+    "before": "toHaveValue",
+    "after": "toHaveText",
+    "expected": "Synthetic message",
+    "locator": "mail.getByLabel(\"Message\", { exact: true })"
+  },
+  "fileSha256": "ad299c87f68dee52a5123e2cc215415de3879cc5d65a6c1f252ac1e83a6662ec",
+  "productionTreeBefore": "093b9e7a128cec8ac6164fb11742d1ed848f9a7e",
+  "productionTreeAfter": "093b9e7a128cec8ac6164fb11742d1ed848f9a7e",
+  "originalFailure": {
+    "path": "/tmp/capiro-remaining-qualification/final-adbc84b/portfolio-browser-artifacts/relationships-person-linke-a977e-der-refusal-remains-visible/error-context.md",
+    "sha256": "ab08826eda614e732a311269756900433e855fef8e54adde70c42ad7e60439d7",
+    "cause": "Not an input element",
+    "observedRetainedText": "textbox Message > paragraph Synthetic message"
+  },
+  "ast": {
+    "equalAfterOnlyExactMatcherIdentifierNormalization": true,
+    "all472CallExpressionsPreserved": true,
+    "all261StringLiteralsPreserved": true
+  },
+  "cohesion": {
+    "file": {
+      "physicalLines": 573,
+      "nonblank": 560,
+      "accepted": true,
+      "reason": "One existing Relationships integration suite owns contact drawer/roster/hierarchy lifetimes and person-linked activity/mail/history actions using common fixtures. One matcher adapter changes no responsibility or test organization."
+    },
+    "functions": [
+      {
+        "title": "create retains a rejected draft, refuses duplicate pending submits and refreshes the roster after verified save",
+        "line": 37,
+        "nonblankBodyLines": 81,
+        "nonblankFunctionLines": 83,
+        "sourceSha256": "c9dffe417d395d9f749bb79d5102a12bbcb0f92ecc4c9cf3a1ff07e6c38713be"
+      }
+    ],
+    "functionReview": "The unchanged83-line create callback at37 owns one create attempt sequence: validation refusal, retained draft, held valid request, synchronous duplicate prevention and verified roster result. Shared local rows/attempt counter/release belong to that single scenario; splitting would obscure its causal verification. Accepted at exact c9dffe... source hash."
+  },
+  "assertionsPreserved": [
+    "Mock409 provider refusal and visible Mailbox not connected",
+    "Exact retained Synthetic message text on the labelled editor",
+    "No Email sent success claim",
+    "Exactly one note and one send",
+    "Unexpected request list remains empty",
+    "All fixture handlers, navigation, consent/review/send calls and other tests"
+  ],
+  "runtime": "NOT_RUN \u2014 no browser/server/build/typecheck authorized; root owns frozen-source replay",
+  "diffCheckExit": 0
+}

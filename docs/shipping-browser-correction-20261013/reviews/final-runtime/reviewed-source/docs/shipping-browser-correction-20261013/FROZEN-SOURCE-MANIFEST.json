@@ -1,0 +1,57 @@
+{
+  "sourceCommit": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "rootTree": "401cadde371b91606e3346243aaca6b6225aafcb",
+  "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+  "gitTreeManifest": {
+    "path": "FROZEN-GIT-TREE.txt",
+    "entries": 9199,
+    "bytes": 1461207,
+    "sha256": "3543e51118452efafcf64b8c8c75e1067b7d3f520827bc39a728f4a4448ea360"
+  },
+  "criticalInputs": [
+    {
+      "path": "package.json",
+      "size": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49"
+    },
+    {
+      "path": "package-lock.json",
+      "size": 510436,
+      "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802"
+    },
+    {
+      "path": "apps/web/package.json",
+      "size": 1815,
+      "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14"
+    },
+    {
+      "path": "apps/web/Dockerfile",
+      "size": 855,
+      "sha256": "03225dcc94257dfd919f3b889f0886d4981156890897fee579e50d644959cbe1"
+    },
+    {
+      "path": "apps/web/deployment/portfolio/buildspec.yml",
+      "size": 1380,
+      "sha256": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6"
+    },
+    {
+      "path": "apps/web/playwright.config.ts",
+      "size": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "apps/web/test/browser/playwright.config.ts",
+      "size": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    }
+  ],
+  "recipe": {
+    "path": "qualify-frozen-source.sh",
+    "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac",
+    "executed": false,
+    "shellSyntaxCheck": "passed"
+  },
+  "staging": "Fetch exact GitHub source on NEOMART or the designated shipping runner; no new source archive created here.",
+  "runtime": "TZ=UTC; record actual launched browser, Node/npm/Playwright; no browser version inferred from install logs.",
+  "authority": "Qualification recipe does not create AWS resources, build/push images or deploy. Designated shipping session owns separately authorized shipping actions."
+}

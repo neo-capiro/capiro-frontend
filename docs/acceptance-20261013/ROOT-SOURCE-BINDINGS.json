@@ -1,0 +1,3138 @@
+[
+  {
+    "path": "apps/web/src/features/portfolio/index/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "71d075d210a7749e8e48a39d6653303d9534ce7a",
+    "sha256": "a6d6f751ce82bb536e3441d16cd509b69a379ca4c7d8e40ec88b34ccd8c643f3",
+    "bytes": 1633
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "219063ce9560cf26c5897ff5c5f03ed2781b53c2",
+    "sha256": "3c65e7ede3175aae11e619fef76b30435376e1a70e2d8767f07647cfe853a035",
+    "bytes": 10354
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/filter.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "56bd8611e3313ddb34dbd246f314e58027ff03e1",
+    "sha256": "051119310261726f5514c71140779e99136ef11accfe2497b35407d6f83796a3",
+    "bytes": 3297
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7c533a8bc53db81c078fd119d852c1cc4b499e2b",
+    "sha256": "a9d63570a294ba08fb41c1b3229c71f2736d092a01aa697cebc90b9185d58cf7",
+    "bytes": 2619
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/IndexNavigation.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5237129c6c3c479e1f76a4b271015b38f483216c",
+    "sha256": "25142e36b61258616f72ee03e4768518dc362a546a09c30b7d7b6f62c798ac7f",
+    "bytes": 2317
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/IndexFilters.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e3aee4875ec5df95835d5d7173d8ffd9b8fbc3e6",
+    "sha256": "791bd48e7b2a75b8537d5e11e7068853efd5dd7986acafb18671a61d5a967fe4",
+    "bytes": 2980
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "57218ac80ed4ff454285d67b3b4a667c746be01e",
+    "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+    "bytes": 4234
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ClientFrame.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ea85544cfa9e72e51c4f347592fff7b68331dd3d",
+    "sha256": "03510bd5d720f83d6148fdb675c1912ab0a601a7cc8b6e2224883e5a932c1b4c",
+    "bytes": 1543
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8367795833e3f5c48c4dd6f4b0103e47ad84d2b8",
+    "sha256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+    "bytes": 7049
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "68f6c1d29ae763f8b6eda4855c2ade3d7d3a018c",
+    "sha256": "019cb0be54db257700ac6085f7fc0e02b0a2e2f49cf1788a4123cee3224d2428",
+    "bytes": 962
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/attention/query.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e2a08ac33049ede2e36235fb224a80b27ec40ce0",
+    "sha256": "35eeffe9425d3c6328f819de617617af9eb67a68a718684328ce666b7b2ec26b",
+    "bytes": 1347
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7377f1ecd7476f6b0a96bbd7a57a8e69facccaa0",
+    "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09",
+    "bytes": 3478
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/attention/model.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5b8b0e03aee60fc1e8fbfe3defa81815b83bb5e1",
+    "sha256": "636e4b79adca66d25e4b311e3fb34bb92a4a368c448c9c783b99e76ee55a586a",
+    "bytes": 1165
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "fc46ea297fc39aa581d3ba3d868a771bf8dafa0b",
+    "sha256": "e7795326e30f7d4a29bd0608f404696a0ad77846603763dd10e65bbd32689b72",
+    "bytes": 11625
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/profile-api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "253bc534cd26af9c8d2dcaa697ce68a9c456fc54",
+    "sha256": "4709965df2adb1af06398055a7a6b27c43e7268684ba6aa4c1b710f48556e3ed",
+    "bytes": 1908
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9ea6b110f661dbf404492d451f747611a1143936",
+    "sha256": "fa65c742616577e873bd51a310e1908156a12a8ebcf45a0e51d5cfff28a4b1b8",
+    "bytes": 3435
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e9e33a2199c0f4d595fc9e0c248ce5b1d645f89f",
+    "sha256": "d0386c92dd16767c321ed6c31f4785ab10ea2a2faaa3904f4599adddd01cb2de",
+    "bytes": 1680
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "29bb35161742e9db1bf1f6f29042ae96eb2d6d82",
+    "sha256": "75c3f6df058f8f4e61473a9d5fc691a6421d6731e96f04fa3614ec303735ab65",
+    "bytes": 2456
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/form.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5c549a759aae9720a2538e841d8cda40f241ab7b",
+    "sha256": "bf5a324caee3896c6630e962673abfcbe4e76b98837ee9f738174d620fa11cb5",
+    "bytes": 8846
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/ArchiveClientDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "96d6e391bf8b273b755495cecdce9fd93ea4229c",
+    "sha256": "0c38f60dab10ff9293fb7f9b9487bd13e136fa358e27a2ce2521b6032b0290ff",
+    "bytes": 2055
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/logo.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2bc9fb44b0631bd4e64a7fd175874db94d27fe9c",
+    "sha256": "b9b715cfaeab8808b090351271ca43d93b66efa84f454047dcb1fed87035ae19",
+    "bytes": 2942
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-intake/authority.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c13b54ba63c67a9456cf565019709b356feef894",
+    "sha256": "ddb9cc2be1cf16a13bca4f54d141acb70c3fb85d58b9e1e9b34531a0426cd6c5",
+    "bytes": 1635
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "91efed2d5f6c7ac256b079e67ae24a1787c79261",
+    "sha256": "6d92cb90f58b916b0b51e51370cc73948e94d37b1caa8a08399874276a800615",
+    "bytes": 3059
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/FirmSearch.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f544c446b12c17442b6b209fe5a1f57d941ac51e",
+    "sha256": "d9d1a85b256efb6c9d2ee164a01d13413b546744e13c303bdf56f88dba5c1964",
+    "bytes": 3060
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "627b6f9bdcb79d428c8971c1342ec570aa422883",
+    "sha256": "604dfe67c77c77882a9a6dbdd99b1e8f28a22c6516c5ca37f2c0d7c2a7e8301e",
+    "bytes": 9741
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/useFirmLink.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "98d81a8da32b564c45b4b76cbfc74587867fe06e",
+    "sha256": "5461cac3055591ac37a2171d402efa152a5fbbdc45818f5c4cccf368c2e3b013",
+    "bytes": 1634
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/domain.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1bfc7d54388c6bb7e3171cfc10c3144e3dfda577",
+    "sha256": "2145679a891f073ab84d601f5734fe97187b67c33c1d10254e6944edbf33ed2b",
+    "bytes": 2080
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "babc7249f5e580a55cfd5dd1e2d5e1ddce634aa0",
+    "sha256": "fbcf2c89e731f2a9774af7de5b4cba2cc5d572693a3674b10753590952b97a59",
+    "bytes": 4278
+  },
+  {
+    "path": "apps/web/src/features/portfolio/intake/registrant/useImportAttempt.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "490b8807f46dc075c5df1cc17cda6060fdecf69c",
+    "sha256": "258ee1eb6f3ec6f7e502fdbb1e0ed0068a0fbec51d428aeaf7cf2519d1698da4",
+    "bytes": 2968
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/tags/actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d36e2285b381e2d70c1be209e1d2e0e1524aad7b",
+    "sha256": "358f3d3ea74bf5bebdda73a95da85cc37eba39ace3576f82dd7099aa08d9fe1d",
+    "bytes": 2733
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "bfc68f712a53ed1c3f6a6a6ea35d961495a14890",
+    "sha256": "c51b9f4be51ce0eb456a677f49b47517f44c8e0a36a3c80b98a792c537f4b4a5",
+    "bytes": 5909
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/export/actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8e96aa205e0117bb4f2f921c3a79cb73db04962a",
+    "sha256": "382e3f60db1ef823df017b15e01ec92e946a73a7f4d560b61c9814cd6ccbdbb3",
+    "bytes": 3895
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e53e020886cb9449a9574101f92c52f5832ff728",
+    "sha256": "454f5d3d7862226505b840c698bc704ea6aa281bee3a36e4fe877d10c3b56165",
+    "bytes": 3443
+  },
+  {
+    "path": "apps/web/src/shared/portfolio/domain/website.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d480cb72e9e33a8b30886763faea293bbd0bb920",
+    "sha256": "0b8bf9ce604593547a7e7773cd22d001d9a737253a4713ffdcb663c51e5bb462",
+    "bytes": 382
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9b5df19a4f94e22c5b3bd3121621e60b92b35227",
+    "sha256": "b3a3cd94140099d7f27a9836fee8df4cc0afb7fb40675bf9d263caa40524eeff",
+    "bytes": 2990
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ordered-owners.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9e5ad142f998702a3b52c5346d3d69c56e7cc22a",
+    "sha256": "aec82574e47b177ffab365fb1b36e1078718281cf3561effff38db05afb21795",
+    "bytes": 4851
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/profile-read-queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "333a63069235c6974355fff0cbe5b1dd45d24d80",
+    "sha256": "f41421d63d266aceecf46f766215e3387f8c577474e84a2472bdebe7bd0ff351",
+    "bytes": 2247
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/team-writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ae32ff756d3530811efc90f6a98a1f035907743c",
+    "sha256": "316a2298853da070b7b93def3cf88697bb7953b00dbeb9c31ae331f06718433f",
+    "bytes": 2684
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/useOrderedOwners.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a3a1a797c1eac1bbe93c8f8d208351478adbf28b",
+    "sha256": "a745f806073cdb8480768812fff08fd264eb6f2a2e2525b73806bb8090def8d4",
+    "bytes": 7066
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/OwnerCards.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ac2dd3dfb67870e1f069c9e8a0136eeb52c275f2",
+    "sha256": "66b5136ab9266b10041a6afa3be6b3704e30e67c8d07b0aad97a1b3bf8083d03",
+    "bytes": 5422
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/TeamRoster.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8fb18f171f3f97d87333599252c06ad62be1a445",
+    "sha256": "8662dcfd720ed62a28a927628a0de34713ed6d2f30b3cd8b5338579783b438a9",
+    "bytes": 1935
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ff8ae390d6ba08cdfd09598892601e31c06a47e6",
+    "sha256": "25b8c98561c2ef14a31c761f359eb2c9c78c38575fb1365f985ba95a465fcee8",
+    "bytes": 4120
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "34526533975afc54f919366b6da8dd8b864952d0",
+    "sha256": "5aa4e1feba524ede7d176e724de7d20d1d6bcd100733d253acbe255426740121",
+    "bytes": 1822
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e3b4f5b6e650ace5b9194507e35cda8d430d9390",
+    "sha256": "bdac21bd8bc3eea8fa0801e3a32dc9336c6e59c055b20ae2515fe947edba0512",
+    "bytes": 3834
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityMap.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "820bf501a3775fed49a099ac8d86d4b652b1059b",
+    "sha256": "6e9db2652d2c4b56e59651d4d4ef173c4b1782240eb20fea92c7cd76fb15ab2c",
+    "bytes": 4997
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a9e4b28eccc8b6500afab6942a9fa21accb747ed",
+    "sha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844",
+    "bytes": 5330
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2aa24f0b39ae5c7d37d1c0865edf3ee95f0d48f3",
+    "sha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b",
+    "bytes": 5896
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/facility-writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "08dba511ba70993f1c38949ebeb6031d4cc16077",
+    "sha256": "5aa47cab64130fac65d269ca6c899f8df3a84ca62a612719083fd60600ce5c07",
+    "bytes": 3229
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "32002cb991a4ccd75b10c8401183a66f728fc3be",
+    "sha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960",
+    "bytes": 3252
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9d671ef1f7c5ca1f534ed686c78c80187e87e1f2",
+    "sha256": "c49006d0aa6b04746c6c4b76f7debcd2f3915c1be6cd861cb4124c99964f4307",
+    "bytes": 2739
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityRemoveDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "92f6b185b5b641a42373f9a68edfd108887292e1",
+    "sha256": "fc5d10f318fad37454c46770e58f1c964831d3019afe063b1fd423eefc8d5804",
+    "bytes": 2360
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/facility-action-writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c8581eb70388d5ca9208ff772ae195eb81082fb9",
+    "sha256": "d623889097fae3ae7eb8ace336583aedaa94762c1e96df96ad391cd816e562c8",
+    "bytes": 4073
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1ba5d522c2af02b5023d02c3755920ef9d697ad7",
+    "sha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5",
+    "bytes": 4881
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/facility-map-queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1098bc1c8e2317f07789e13d628a1d32fb8a708a",
+    "sha256": "0ec428b2e79de0d01fa3427342fc06cf4c7335d8d31d0a60b93d210a44245bd4",
+    "bytes": 3064
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityRepresentation.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3b51afdb5cbe9d8aca7ea760957c237a1b7f6cf7",
+    "sha256": "1263593da1e3999859bb0acd9b678f505afbf5639334a5af6ade0f00ea8d21b6",
+    "bytes": 1369
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d34c4b1d5ef300671b102d2bd68e9aefd883046e",
+    "sha256": "91492c786853feaa1430b5a4b93e4b97bc3f9d7046cdedcde4ae1befe58f2655",
+    "bytes": 4562
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/facility-map-projection.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b4976fcf609ca44415e403a2a44e9a2b811f88ce",
+    "sha256": "d1361636a3c1db0b7fd3f6d3215f6226ad3774e592b2e2353ae63e1be49b7038",
+    "bytes": 2084
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/facility-map-view.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6c9702c312d108da3635902ddd0589e3cc6144ad",
+    "sha256": "91da4f8282694842396c0d05eafe0f5634b08439281b1d1df2a251d8ce862c41",
+    "bytes": 2823
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityMapControls.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5b65de4651f8b159ca530e8e0d473977b12a8833",
+    "sha256": "4ac219eedc39d507e229f9c271d1627bf988b974e9b93cc513ab183ade7a0dfc",
+    "bytes": 1007
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/NotesDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "188be31c0bd4a73cd7bec78c30b82aeabfe8cb47",
+    "sha256": "304410d3f006ea989a9b8693b268889465b7be6920ddb34146b486107e8ce29f",
+    "bytes": 3237
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/useProfileNotesEditor.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b81af2a5c931243eb14e71a1f77d829cb44bc7fc",
+    "sha256": "80813f523bfdb66ef36abfba7a56072d7077aa6444cd64063f26f7e49dbdb07c",
+    "bytes": 3595
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/notes-writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1c5c662b32c333c905d29af730d533f61e3aa1e7",
+    "sha256": "1c33617a195f0d6f5e5aefbe4b067972061c6e3d5c710d4ad05b77f1ab7604b2",
+    "bytes": 1324
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "539a6d21f08cd0b99bb193d79b2dd6c2b2260b1c",
+    "sha256": "a0a3a2cfd0b56932e7823ef78864984afe0f0be15524ad135d5a14b6085f7111",
+    "bytes": 3313
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7254551021bf1f9ee6c0c949cecaba054b3b57da",
+    "sha256": "37fe52d04d1d73a10a7ea973c0df083697f4d8472f7be4b5ba2fac35f3db40b7",
+    "bytes": 919
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7d9bdff95b7d46d14a73b531d517c0c1af9a38df",
+    "sha256": "78c1b144587cc1aad6e290e8266e5e982cf4974fb93ba12bb0dcf4dfc8057916",
+    "bytes": 8092
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "da9f21d6f5607ea52efa31d900be3763dc0c48b3",
+    "sha256": "e3968866a9f7527a59b54693d8bd8bd114ba682ae6a2c187ef5bd3dfd56328ab",
+    "bytes": 4481
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/activity-filters.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b921210b8a0185ee09e44e4d1fb1a377830e7d5a",
+    "sha256": "1b09e41b63abedd343728da77d07383030b8640d04cbb8f91e2b3efcca9b1314",
+    "bytes": 1489
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6a0a8d99888bf8c8813f5e0698b4c08bedcd5ea0",
+    "sha256": "6880089b9ed1a1d03a49aa7ffe072873ab2021ba515f73f1b8ffc933b5502538",
+    "bytes": 3242
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8b1038e040446b4e6eb929ee83aba563d0b3e0d9",
+    "sha256": "3e3d9896f75910190eddb7f1950c22e5ab078c7c795bd04634e00bacb930175b",
+    "bytes": 3910
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/activity-change.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f3a6e0dda33929fd29b38f01288a7f6eb7ce377a",
+    "sha256": "263ec3fd114f1a07c743ed6fc653825461a05fcbe6fef14735c24acd46a2bf0b",
+    "bytes": 4179
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ddcd1e61a0473cee748fae48d0de97c4843f6d76",
+    "sha256": "41d575b4ce099d0ea1a24136bb71b8e2d6db52cec6e8e585ed98e5cc290da49c",
+    "bytes": 4693
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "895db47e3338b7120eec55097fc346198b4d7e66",
+    "sha256": "5f053626b14e1f74ac4b89d8392a6a4e19f05f4ba62917f9ba11d853d131dfb6",
+    "bytes": 4226
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "33627e6e47e759fa474213b442d69ee9e021472e",
+    "sha256": "834280a6a10e5e3bd50fe163222b5bffb8e9591838c7f8737977e49d938984ed",
+    "bytes": 6066
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9739ef4b7027141c954d10f6b60cef324beb01e7",
+    "sha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd",
+    "bytes": 11776
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "806d13de228543d4a81a3bfe157d2da513b6c832",
+    "sha256": "d4bfab2b114044fb1068dae1211a5ea9340f1f514116aa21559aa1e0b3803716",
+    "bytes": 2791
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/linked-arrival.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5a6b439cb99c25b6cce531738d9fb2f44eddf11b",
+    "sha256": "d773ccc53e6c44bb24f748646db4bc2baa5f690a58a41b7dfcb3589b3039745e",
+    "bytes": 2221
+  },
+  {
+    "path": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "41556d336c98854086610f5be250fe9d653dc05d",
+    "sha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+    "bytes": 3279
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/FolderCards.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "96fbad2215550a0c64e7e57fa5caf2851d7729bb",
+    "sha256": "b4b077ba3e9d65cd8a3f4c47364bd28a9033753e3314ce5907e8bd3eafff2f16",
+    "bytes": 1805
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/upload.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4149e81e64c944fc983520950ec6ffc50484c9e9",
+    "sha256": "38c381a94475cefb8582eb29dc40b6cfbe6d5a6f6e7efc7ad07322d0da7ae883",
+    "bytes": 4694
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "245fdeaca03bd092757511c685f00cd659c77674",
+    "sha256": "a537b6190672a6f038df074ccc9e5e364efeb9fff23bb6b2463555204b1ec238",
+    "bytes": 4936
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "965ba6532eafa9cb0519001c679b255b94eced35",
+    "sha256": "b6489db3880eae0df2cf176920e76dcf9225cde5d668aade87b90e7a10dedc51",
+    "bytes": 5419
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/metadata-actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1ad5d184068a97c0a8aeaf4ec1b72852f4d322f8",
+    "sha256": "e1a54f98a41189396e1e135efb0c333933e826fe7c0f2aacca0b9b49d96fd3d7",
+    "bytes": 3234
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/MoveFile.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d13aa23ba9de3aec0ee3f5f8cc04a78aebdd9ac8",
+    "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0",
+    "bytes": 3025
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/FileAccess.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3cb753fc9b7ddc90c007942a9715680349c42a3b",
+    "sha256": "f7d7802180dc955eb34bbbd7b4a8cb619d40c96d6b57c9f36c9d8c9cabe9f6a9",
+    "bytes": 5140
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/useFileMetadataChange.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "fcca07844c12b6bdecc62fc0658d2c3f6b5ac286",
+    "sha256": "3b7b374daf12df45e096a7c3db737d33d3f4378559fedbdc7425a4bf833b8fd5",
+    "bytes": 2925
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "792d59eec5e8053cf20049ad97a68ea87a4058ee",
+    "sha256": "9a531e2e772095680371b089e1b35e7d2e250e6f238576202f2ff6826e0940eb",
+    "bytes": 1196
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/deletion.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "056e670ff6b83eb899336c438224a74ff2597db0",
+    "sha256": "51402c45adc651e34f5d3d38f566dc7f054efc73f5fee4b6c7dca3661c93f0d3",
+    "bytes": 5547
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/DeleteFile.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c2a742b4417bd400a44a888390fa01b811aa13d3",
+    "sha256": "6af9a574f8bd8dd8af08de849c3610557d3ff80bcea89c916f3c6d947dccd861",
+    "bytes": 2841
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/navigation.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c2bb4dce2ecd736af4e5ac406104eda23b325853",
+    "sha256": "10ae50cba8aea08c8117f4ea78a51be0d0f3dcd5c0b58f2e45c938c8d5b04aa1",
+    "bytes": 5325
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/FilePreview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2d32e6d05569748795f90b7573ed368c72498d47",
+    "sha256": "d4e75d262099ed3967722595d95525d0a3c76baed899a2cd087a20d147d5e07a",
+    "bytes": 3774
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/FileToolbar.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9389df4bb1e15a238f511d2cb1f619b174883a22",
+    "sha256": "f4333e48b3818aca8e74587f5bf732858bc031c9a7c7f014ccdd1307d909d3d7",
+    "bytes": 1370
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a3fdd5abfd11f5b60115bd449a1f3cbc048fa567",
+    "sha256": "eeeee76b0639d7081b8ea76b42ace9a83669c33a61b075fbd3841ee6dfdd02e1",
+    "bytes": 3213
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4c3a819cbebc417124972e1f42793b8720bd063f",
+    "sha256": "af91ef6c2916e9b5e6316c1b7ad3a368cbdfe7ebf34eebc539223d43a5bda152",
+    "bytes": 11208
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/ResearchSetup.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4e1b47b18560e80623f4845fe3ad55d608311a73",
+    "sha256": "c61dd163b43e2358f8887515286c4e27239a536a804592bb023a17e3c007fb6e",
+    "bytes": 2552
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "db9741fa1bf8bf11a0699915040a279f713a05be",
+    "sha256": "dca68213d5b0386314bffe0e72f31cc6539033dd49e68c96612955516fe2fbfb",
+    "bytes": 4951
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/RunLedger.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f6da99f2a656ad8968755c0e6465b1d740312ecc",
+    "sha256": "1f6fe95650a71ebe78f922358dc423c4c7fb1b22c0450bcf0e0a2bcebaa0fa69",
+    "bytes": 3057
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/FindingReview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "47a596d993e5cd262a09974f2cc594883f71f8d9",
+    "sha256": "a641913416ae11801a6b975b975775b63c18aff6250d364a9a4dd4b0dca2b4d7",
+    "bytes": 8447
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "cb73fcb300c3fc9e2e4759dea4155515a8f4c00b",
+    "sha256": "a74079b97a90c8e7b60f2b5b0fd4e758dbe2425ef1be9eb171cef3fea0236762",
+    "bytes": 5803
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/enrichment/useReviewAction.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5fc24e130e49e02d35355944b614860465b0d4fb",
+    "sha256": "ea57cbab6f64d76addc2cc88b732b0ea9f6cef2a3cb7c62e0a2086950e7b6acf",
+    "bytes": 4694
+  },
+  {
+    "path": "apps/api/src/clients/client-profile-fill.controller.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "a060e49bd15c89a96b653c2ff83acbaa08f4734e",
+    "sha256": "2c4d3bc3e659ca80f4ac1aa98df7cab0b707ca9008eaf2fac7f7db7613ebb4b8",
+    "bytes": 8955
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/useProfileCapacity.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e820f47e31e34b062076689ae9ce12fc8860b962",
+    "sha256": "ad124414d705d46950867d32712d8667f73bc88de5bf17fdd8a4e51c1f3658ae",
+    "bytes": 1839
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a5f7aa7f76b5717ce0783c7faf360e0f51dd73bd",
+    "sha256": "162dd9ac8a22c5e25c8fc789fe4f6902f338f611598b413dc41b8254b0aa99eb",
+    "bytes": 1221
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4bafbca53321ebdd4e2c302489b95c281e8b7570",
+    "sha256": "79a74272d8044615d93520516731ee2b429374958fa9c2ff89c4b6680fabc963",
+    "bytes": 4342
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/summary-authority.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "cd6c0a22d84d206aef8b39bdc83a7ea58abf4ff7",
+    "sha256": "11e3fb628c84092d9a5f3318ea988ca1dcee996fec4202eaaf2c977a7fb4e388",
+    "bytes": 1262
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/summary-api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e67de2d2cf8fe15f65a414bd6cbf370240aed919",
+    "sha256": "8f1a83ed9261705f3576b87927547356d9a72e11d870ea8a55870c6e2c6aac92",
+    "bytes": 805
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "190933077dd92403692f770939f623fdd406d1ed",
+    "sha256": "b86a333d4dce5266d648b91cbfbdf0e83b2b1a2a10f93f88140dab626bf0f288",
+    "bytes": 5881
+  },
+  {
+    "path": "apps/web/src/features/settings/billingFlow.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "97a620bbe017cee793a7d8c55d09924aef8264ab",
+    "sha256": "283de53c92e183bf9da301c102d8c191b7d0036b97032a55c5f2aad4da415897",
+    "bytes": 2448
+  },
+  {
+    "path": "apps/web/src/features/settings/BillingSettings.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4aa5959d36f8a692cca9b7cb0f24932fa7ad49a4",
+    "sha256": "7a64a5917f672d5064c75795e34cdfdcc465de8953c40d3cc4b2c529601a3838",
+    "bytes": 11417
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "fe8ed1c5cd340f4830fada49f0a9ff2b3b7f3879",
+    "sha256": "ac58ce75ca7125b761e728af3c75a1e1e37001ad2ad7950f26f293a9cff92d02",
+    "bytes": 729
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/summary-contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "aa01c8d8a42743d5d196d678a083e31e26c4ebb5",
+    "sha256": "2837fb097af5e5a70386b0bb885029fc3441ea3a7dd22b90ee0a0b685aa5b5c6",
+    "bytes": 682
+  },
+  {
+    "path": "apps/web/src/features/portfolio/billing/capacity.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d3627d163723241f8b4a6a3cfb4a873b29c8baa1",
+    "sha256": "f8008e5a9a705f60c5576c8a7265f046e779269c6918d1bb38d3805fb4cf834e",
+    "bytes": 1899
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/IndexOwnerFilter.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b7310522e0a8648840846b5b2a51d164b9656585",
+    "sha256": "3ef0363c5371f2f4a692fc4d760ee6cb85e6da1c5647da4a609732bfba469796",
+    "bytes": 1522
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3e269a17c7ff896173236a54618ee81b13b9640d",
+    "sha256": "c77e5378973e869fbf6cd8de8b9d864cac313d519f456c3220105ba81584c327",
+    "bytes": 3012
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/member-notes/MemberQuickLog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "070c91c02e1e1908ca0501daee1d47feb50ebe07",
+    "sha256": "1419b564851e4a6201cc0e65f19e276e58c5e07ad3b505317e8eb17d4dcdcdc5",
+    "bytes": 5977
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6b61aca37a4d68615480a62b04b156d03bb1b419",
+    "sha256": "d3c24380be51be928531e2b4ed4543c88d428ec83b15f85230a8ceb65102c409",
+    "bytes": 6302
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/member-notes/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0512a8fefa7fa654dd717d237a655b488b547a83",
+    "sha256": "7be23ab0cc0f3bdd605ec719e25c7af2afa39d9b27feb8a2446997cfd907dc48",
+    "bytes": 1752
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3252e63b73daf6d1fa40483d9dcb58d0d51ab1c4",
+    "sha256": "2b7c6067168d05c6d611e5c9366e0cbfa7c00e17129d6ebf9b7555749809bb8a",
+    "bytes": 5328
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-recovery.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d8d09c59d3a41254a8d568d7ca18b2f26ddf5512",
+    "sha256": "38d3f16eb59d286b8793c183bab538f771f91d962df0e4a0804786f5ee80e107",
+    "bytes": 2361
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "409377c0903585a75344141f001cd7b857f5e457",
+    "sha256": "2581d88a746cd1c45dd5d5dacc86ed8239b728797e34c8220ce79b7273ca70e7",
+    "bytes": 8534
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/layout/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6991341ec7c9def7cb645b34e54d557bfa74a032",
+    "sha256": "dfb25d0b044ce8d4a8e0f52bda5b66f090f51e77b64345c57b0643a2342e8657",
+    "bytes": 2467
+  },
+  {
+    "path": "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "55318b962c5768f963becb63a36f6e3cb8c58398",
+    "sha256": "2842464b82e2b7e8e69708d0f0b0a7c3f8822a3b893ecd696e5b7d90427a0d57",
+    "bytes": 1834
+  },
+  {
+    "path": "apps/api/src/clients/client-activity.service.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "84d0adc9786f4a63d1074c048319d54d5554031c",
+    "sha256": "799ba0cea21195d432789d6f86f079a38f2d1bfac27d34621848b32e173f788f",
+    "bytes": 13570
+  },
+  {
+    "path": "apps/api/src/clients/client-activity.controller.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "e1397d0402b669db286b8a8ba9c15f41dad95818",
+    "sha256": "1698caf9ea82a7329cd14645a53bf9d52cec6d7c7cb7cccbc13a820c772390fc",
+    "bytes": 2879
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "61f71b49efd7c0d3baacddb4284c2f35ab99c76b",
+    "sha256": "109613b7ab6adc563570804d1a83d35e452810fd6ac117c6f79a813e7185acc6",
+    "bytes": 4830
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/thread/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "85d87223ab9fe15c102197064fa59f26032bde59",
+    "sha256": "5db3e665065e0982e1bd5b91f0025f4efb29094a1c2a21411f0bb3db33f7c6dc",
+    "bytes": 1814
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "bb21ef3e7d81e76c421760715d090dea45bd0b06",
+    "sha256": "e880690e7fd6d30a4fd3ecb3860814716aa4e742e5feb724a6aee8745a029091",
+    "bytes": 5704
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f79d100554d6146e86263851b7b765db06e9eee6",
+    "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5",
+    "bytes": 5925
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4aad7447dd06cd39645e7591ab5fbfd8762e556e",
+    "sha256": "e2795611b5783cdf5e7f616f6fa7201d914a664bb88703f23e86bf90427fbe73",
+    "bytes": 11121
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8295c0adde22683904241890aa3f5783fd2ed403",
+    "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8",
+    "bytes": 11049
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/extraction.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ec72f1c578a418e056c15f149a790bd5f250753c",
+    "sha256": "c23bb4d6e032e6503dee9054797307b7802d3fe0b6f00fd53f35a52288fb7ee0",
+    "bytes": 4311
+  },
+  {
+    "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6c071980630b019b864a593560b5a591808876ad",
+    "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+    "bytes": 3870
+  },
+  {
+    "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7be9958c579d050fff37039625fbb91df91711a1",
+    "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+    "bytes": 13082
+  },
+  {
+    "path": "apps/api/src/clients/client-files.controller.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "a4b499084ff6b6392d55cc24a893a253bd0647b5",
+    "sha256": "9b983bc5ecbf7810ebf054c3e55c6d6343220eb7f3832057469e0c21da8dcfa2",
+    "bytes": 11302
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "532b4dc1956d895f9f57f8ecc20f5b3bd3f15e14",
+    "sha256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+    "bytes": 5011
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/useClientViewKeys.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "db56e8932dd00837fb7671b8c83eab8ff1fafeeb",
+    "sha256": "1bcd921c2c8536d0e74a8701786ba1cad4acf4f24287fb951b0a49fe5621b0ed",
+    "bytes": 2026
+  },
+  {
+    "path": "apps/web/src/shared/portfolio/shell/client-views.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "64c833bc1ddd483d15f0d469a8f22a3524249e71",
+    "sha256": "9c55087415ff03d172119df9dedeb23709bbf89adbaa959f07a5177a5d7c7d37",
+    "bytes": 1658
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e86a8ac32f28da4c69a2c51970b3c1a8f77b82e2",
+    "sha256": "e115fe1976fb399f4aa2cfb1a7933568517ce872dbd73706cc7cf19061ad85fd",
+    "bytes": 3209
+  },
+  {
+    "path": "apps/web/src/features/meri/MeriHome.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "94431141c21253c904f4b88cc4b87b83660dfc74",
+    "sha256": "a10b355ffae83dd189bd1a17332a1dca6ee07a56922b7e88d3b50da90f9d5158",
+    "bytes": 1921
+  },
+  {
+    "path": "apps/web/src/features/meri/MeriComposer.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6153c695b9971882b16a6c98a2b177990d8e3a92",
+    "sha256": "1abcdd338fde7735699e91d60ffb3e8e4097828ab2eb8c0addae019f1d5771b8",
+    "bytes": 2804
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "69169ccbf5b5ad01d89dd9efe8c0780faa310d36",
+    "sha256": "cb3f34f06eabae0d71dfa25d8ff6e61a4955f487f956dd471453f45e7b2ce344",
+    "bytes": 7127
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/attendance/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "766b1643693fcdc4871918900dd75c01fe32163f",
+    "sha256": "beb8aff51e89c6412086495af364e56fac676506abfcc6612bed03d71055449a",
+    "bytes": 5328
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/attendance/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1e98179edae14d419e2897d4a26245d85c2f174e",
+    "sha256": "b5233e53bb5bb0bab65d3f493311b92390e45215827549536652e8e2a4b5d142",
+    "bytes": 2190
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d595e249d98213478861a9ec4b53f6af6fcb26b0",
+    "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5",
+    "bytes": 4946
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/past-performance/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3408a940a5ba4280590740d2ecbd3b77d0df785f",
+    "sha256": "9726effe450e65b8b3b808d2887def4afe5457aa1e86d7f976ca9f55a452c95c",
+    "bytes": 1889
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/past-performance/actions.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "062d16b6a25a5e9fd2790780282fcf674bda5f28",
+    "sha256": "e2df52eef0bdc72922e3ba8e6ccc86a3af9950e9e602eb2743d8d56e42f36e95",
+    "bytes": 1004
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/past-performance/useSubmissionRemoval.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6d8a5ed24a424187413ccedd0f7fa88988d467a4",
+    "sha256": "658638a7a6adfc1ef8c9bcf92cc443170b2eeafc5b2734802651a0ef0611cc32",
+    "bytes": 6674
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogUndo.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ccd615f979149bfdfadc4a05e01c529438c685d1",
+    "sha256": "226eeda5be197c04001342339e85bd70194ed3c5f76b4bbb29221145e817c6eb",
+    "bytes": 3571
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "541dc22bb99105eb1440df5b181ef4e0558dfd91",
+    "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+    "bytes": 13294
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "174016fb3ee7cb8e0166a180ea0cd7d02c6570cf",
+    "sha256": "01e9553c6a4ef2cb11171b6d61bf4d6229ab10c4cb786b39671de443f7df735c",
+    "bytes": 2632
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/feeds.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "cf37b4e908a8d976b9ff8654571f6ea6b01ae1e1",
+    "sha256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382",
+    "bytes": 4742
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e028f8a00b135cf7d564cfa088a5101d6e0aec80",
+    "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c",
+    "bytes": 5179
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "654fa7600d6bf50954b9791e462befe0296ea7f4",
+    "sha256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f",
+    "bytes": 3060
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/lifecycle.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "12f264c660ce3a278de71ee435661bdb02ef78aa",
+    "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491",
+    "bytes": 2571
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2acd20091b226c54f970cb394101ac5b78e37ea5",
+    "sha256": "c9ab6e6d412063559f6d492ba2afaa1c427a315ba197d74a1534a32cb62c4a0f",
+    "bytes": 8701
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8987f4a75f8fa1fb16450798ab346911501fd61e",
+    "sha256": "6992b8eba9211b0e6376f9296867075adb446c5de9628169f216a2cd67cd6d4d",
+    "bytes": 2715
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1ba9eb5d8bb35eb58204d96ca81c3d6de8be2e7f",
+    "sha256": "2a65531cb5207e2d8ade98ca8146a8670e80d0147d2a6db7b6d19e534b8bf882",
+    "bytes": 3243
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/hooks.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "91a9409290ab97cbea111898308715ed3a8367ec",
+    "sha256": "3a343e5969d21497e2b2199c87426f01dd7b71d53b1a806c02ca7af65aaafb74",
+    "bytes": 896
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "594140323b82af98f33db82335ab109a7a87f97e",
+    "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+    "bytes": 4828
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sharing/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "350ee8c9ae2d3b77dfead4d2505f3e311de4c685",
+    "sha256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290",
+    "bytes": 4039
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/MeetingAssignment.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2f239d513d4d4e888ccb0d6cc16cae86326b8ed9",
+    "sha256": "c8bc380f3de3b63882e3804e026e162507e5121ba31fbd981a0264b925cbe330",
+    "bytes": 7389
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "855f5a9e4f525f16d7c20bd778f303495041149a",
+    "sha256": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc",
+    "bytes": 6431
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/meeting-save.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e4db390faaec22ef23e8eb7b7ca62017b3b8cc4d",
+    "sha256": "2a777f94c992ab6b6947e5306088415b2c61e0de8a9103eb50af9c83ec87a85f",
+    "bytes": 1447
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "50472e82940445f03790ccf792b8d0de821d077b",
+    "sha256": "f60e03a9e739e364a54123486abee3e5eb649cf765e2b5977d847f3782056d4e",
+    "bytes": 3070
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sharing/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2da13d52ffd66de1047bfb65f2b3b785f8471d95",
+    "sha256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a",
+    "bytes": 3006
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sharing/targets.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "09ab606b96a63b292eb8fabe7fa17915c4476d09",
+    "sha256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d",
+    "bytes": 2828
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sharing/fence.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b5d7a84596e6ed998c3416ad7321f402dca7ce38",
+    "sha256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99",
+    "bytes": 489
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "29fcea23f403fc5ffefd3fd92c1319622ce68af2",
+    "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809",
+    "bytes": 9615
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8090e90cae163eab745a1321816ecef12ee29c77",
+    "sha256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174",
+    "bytes": 5164
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/artifacts/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "32734e35d6057bbf09013fae6a64c7d994b1609e",
+    "sha256": "cee1fe8a5b7c8ace24b7fa5125e3c7c12e0cda7b391e3c6fdd868654556ad3cb",
+    "bytes": 2881
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1c53bfc9489864b54ee7ef4edf8a04ba2e65ef5b",
+    "sha256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d",
+    "bytes": 2876
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "97cd1e669cd410dbb182b949f799ebb8004315dd",
+    "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+    "bytes": 3750
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1923e3ff43f0615b87476b343cdfc914da902715",
+    "sha256": "44cd0e5e3cb18669419a5705dc8019817370a3ac67283644a670e6b9e547f05c",
+    "bytes": 6707
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/debrief/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "616dc7a19c5db617e7eff7ed16d5345e53292562",
+    "sha256": "e22c29a3c4f5860901dc78dda868718b146578743299d4661e3e92143772bbf5",
+    "bytes": 1505
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/review/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "670e834c417e5c9ee649c1c09bc9beddc6fe63e7",
+    "sha256": "7da383ee0c1df9e963d596b8704b2ae53af0e46667315ff6b3d070f26d8c9360",
+    "bytes": 5314
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/review/useAttachmentApproval.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6d7566d14f20d0eea10085f05019860956cecef0",
+    "sha256": "ab1d32e82658f432ab32012cdfd2a8efe209a0d9d8204a3dd5e767dc371fe5e1",
+    "bytes": 3868
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/review/MeetingAttachmentApprovals.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dae506061d23799f760fe3df539e88d23e5c7ea5",
+    "sha256": "d2c32ba9d6805f5bf43880041f2235128ed5efcc27c96854e80ee0a790e4da31",
+    "bytes": 4813
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a2013ab283e75fcc5f458a160e437aa42273a84b",
+    "sha256": "f7b5703197b25e2af9f2a4f2badd567961e3a91e790b6011d5be700ddf9ffbc8",
+    "bytes": 13638
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d88704ffdf083ac6e0c625693455a28b7ea41cae",
+    "sha256": "35259352dbf411d939e2ddb587afb6282b8265a5ac0b329c8743397c048a7173",
+    "bytes": 4440
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/hooks.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0350d5e7c45f3f5ca7a242544b4ee25b226a1e07",
+    "sha256": "0a3c7097cd2a1fb0c9c3b903ac890cecdf316cf6d4b5e8de5923bf883f2db0a1",
+    "bytes": 2581
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/PreparationProgress.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "621d327c6904eb68826779eea6d4cde99c5683dc",
+    "sha256": "c2e60ed865483d4e3c638e27fab7959237e3a40480f3f81b1de9b3c525633c8d",
+    "bytes": 1101
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/PreparationEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f2fd2567e84a2aaa9b437fbd07a51cb27f3ee855",
+    "sha256": "9efed2684aa971d0d5144caa1b7b8c7ed1f80da2c4d8619425d2b783fa8d760e",
+    "bytes": 4941
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/editing.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "86339a07737a315eabfaf0cb4e4fad034f3cb63c",
+    "sha256": "7ad87f29b95e27b7f030ac29e8fd22e216517457a5530a64c5f489b959dfc8ec",
+    "bytes": 2340
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/PreparationSettings.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b1a0a5eb35f2232305a6afc6a7dcb5640e0056bc",
+    "sha256": "10fc88f0740cb86db3b181cda97f2843a4c2565f9c9a65c98c8b8895c7440f88",
+    "bytes": 6222
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/attendance/MeetingAttendance.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "18bc7c4976e32a650abf465ab2fd900b14408cb2",
+    "sha256": "c4da236b2956d03f8738ab516122940363cbea3a782a1879ac9cda3d3eea9b57",
+    "bytes": 7424
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/attendance/SendMeriDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3e9fe72858bc2fc3706eec37ca67c9da94c0e92b",
+    "sha256": "a7a947adba2092b904017b0130c304c4142b28fac468ef23096d49d41cb28e7d",
+    "bytes": 4975
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/library/MeetingTranscriptUpload.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1ae15390a98ced61404aa3880a1a4e359d9b070f",
+    "sha256": "f082f0b62d43af4e258127e35d1a0119e661f7847baf424958fc62d23649b66e",
+    "bytes": 8595
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/documents/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7740720c0169f89f3fd070f5fc7f14c1ae026827",
+    "sha256": "4953182d30e8be9bc709b797c0b8c4f58c5c920704dfbd15d9f5a32e01aa2006",
+    "bytes": 4270
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/documents/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "db1a27bfb534d9e5aeec1f4b5753dae512123fca",
+    "sha256": "3295a810f2d38ff530f56150d0617e2348d310e765e19f87c07aebf0862ba496",
+    "bytes": 3020
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/documents/PreparationPdfAttachmentReview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "bdc4d90dde3af2adb2d79c51b2145f7447fca737",
+    "sha256": "b0d708d0015a8f57c6002a5134b81be5cef63ba60c30f46c20ede99f3f421e58",
+    "bytes": 6743
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/PreparationDocumentActions.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e81a7022a80b7da38477f9b65b103195fdd3be07",
+    "sha256": "47eb4d64a155534fe011c95b0994f9218a43b671d1fd15131053a785f1f1c35d",
+    "bytes": 2197
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/documents/useSavedDocument.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9a64605f5ee6b293e5890757d39bac1cb766b980",
+    "sha256": "2f5e36053d585cb281be667f2f3a38d93ec719cdc564afa9f631c75aceeeeb48",
+    "bytes": 1369
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/documents/SavedMeetingDocumentPreview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "487d94613bf1effdc910797c516a1d8389dae651",
+    "sha256": "b0a3baaafc390bcd3cfc7cb06ac15f6cc6c42962a005ea31c3232c7cece98dd5",
+    "bytes": 4241
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/documents/print.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f353dc17eeee1cef2360f3cedbbf602dbdc41525",
+    "sha256": "a506a588f3cb058f22db000fd982a7e9a27c2c67f5d5ab69d3cd6b3d50fc1194",
+    "bytes": 2704
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/range.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "14d04f01d484136887f48f7836001158a2ddbdca",
+    "sha256": "63855d51fd5d0474f3c7a012b4d9076f442b7dc462211913592d2d1e380e119a",
+    "bytes": 1951
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sync/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "555f88d4cd12e4675c4e52631f8689b76e128ae6",
+    "sha256": "b84accc74cf679915839bb42e0da9823b9bfb8828bf75462b406fb6ea4cf5c0f",
+    "bytes": 3099
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sync/useCalendarSync.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ec963ccbcdafafd5c7c999ac5a13d8d2fb0409e8",
+    "sha256": "9aaadc53e740a02a660c447d1d45d3acd0632f25045c84e27da8e94ae1a900be",
+    "bytes": 5006
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/sync/CalendarSyncDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "22a0b5116a96b7594ef12ce353d652c6297dc0c9",
+    "sha256": "71b740b23317b1dacfc29f922aa50ecb874657c1371b6f33348f6cb0bc61385b",
+    "bytes": 9319
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e0331eb4f51aad7e831579f47090b83ebd091d82",
+    "sha256": "582ba7cd2e2b7af511170578b78c509072bde256c1229a61f30163c8824859d0",
+    "bytes": 2154
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3ee10919b0b929f75fd4f8c336f212d2c7294e55",
+    "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+    "bytes": 14376
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/mailboxes.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0bcacaa7f98c5c3d2138053a8884196de1987622",
+    "sha256": "631b2e6f00b01fd8a4d5868c9989d3b80e47446e7c5db09d4e80714ecc3659c6",
+    "bytes": 1929
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/send.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "acfea1acc11f4a41ea091e2d5e416c43c54daa05",
+    "sha256": "df67ec63ab32167ce6b60f28c4b8902700ae735b534936021ec9dcfe7f881aaa",
+    "bytes": 4791
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingAgenda.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "469d6247b291502fad7acc688cd9cb8443503171",
+    "sha256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d",
+    "bytes": 2571
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/useMeetingClock.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e2fe86bf7ca19926ec001dd727b4de05023827b0",
+    "sha256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe",
+    "bytes": 384
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/access/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6271ca83bdb652edb8167599ec453b4fd8ac0085",
+    "sha256": "c18cccb4455f0db9ec543acea4b72b46595cf4962b6db8f62ccae80f32cdb7d9",
+    "bytes": 515
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/access/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d2c63b590e56720b7c8344b24219ffb1a8722bfc",
+    "sha256": "45a2680fb440fbd0b49fd35c1e558de3b8212701dfae2103132d9952bff2d1e7",
+    "bytes": 386
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/access/useDispatchGuard.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0825b11de86b95bbc6b2e871ee425bfd07539590",
+    "sha256": "402bf5d0d4d825f3cfcae7b32597ee13d9236ec5ea5eb5b412dd0a616a2d9c71",
+    "bytes": 1866
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/PreparationContent.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "47dbb28b1a09f6a4e3fda9073d86cb07d4008015",
+    "sha256": "8f048c5b2591ae2963537bcc575179f287632baf9761e1ce809a5a3561e1a32c",
+    "bytes": 7026
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/schema.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "12786ad379882e579465cf631aad61e8fc1ae478",
+    "sha256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79",
+    "bytes": 3878
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/preparation/email-evidence.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a134c833b3bd0f107856768a1f5e7a2bc3fe1e7d",
+    "sha256": "72e36ba2bd0bb6aa8730d5453e3afe76daf972e284668800570c0ae9d4dc6fe3",
+    "bytes": 574
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/debrief/voice/VoiceMemoSource.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3d4812df76951582fe1a8a73ab0bc80a397e4c5a",
+    "sha256": "a78bd321fa28f85aac62ce46b8d8131b07e3df7e5dc798344d18b526fd3924e9",
+    "bytes": 7017
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/debrief/voice/source.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "90848a46e0960d2eccc004941576c6987b9bf033",
+    "sha256": "5db13f05bcb17857ac10ab3fade485f76cc639b48ebc11a03b84a478e3cfaff2",
+    "bytes": 4466
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/debrief/voice/useVoiceSource.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f6fb2dbb477ac7c169a07fb6473a5d9bea9aef1e",
+    "sha256": "2bc0bf562618386709c5106d2ca10545d6ce5d5f9a49d4fa9e8c7cc754025679",
+    "bytes": 4373
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/debrief/ManualDebriefSource.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5fa3037662086156dba655d3e374590bde16e16a",
+    "sha256": "c63ebf64e830d8febc1f00ec1ef3e5080ed2fb0b6385a04d0ad9ff4670ee82f4",
+    "bytes": 1793
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/review/useSavedMeetingNotes.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1f3ff8c9ff21219a23a2c2d70def366da4222dfd",
+    "sha256": "e4ed036333544508ebb56cd217c5c5c36a4bb5c5b1577a5c8e4d6b1b6a871623",
+    "bytes": 2323
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/review/SavedMeetingNotesSource.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a2c4143a64ff4684d411360a3e3655f567d8fa8f",
+    "sha256": "b4c5d6eb5fa6275f00764d4a92c529d2c7287cb842ebdb9ac441891f0261c79b",
+    "bytes": 4441
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/public-event/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2850f0538aa5eca08d6417b3cd847dc51330f60f",
+    "sha256": "7a45af06800cd3398a8c83726bd136766d0e7f115ff11038c7a66d7ae53a563d",
+    "bytes": 1089
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/public-event/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7ba0eb10e0aec73b655fe25bf5608f5c1e8dcb96",
+    "sha256": "49de43123fd0224bfd5763c7ef52c4978f15cb0eab7deafa21b60dbb7f014bfe",
+    "bytes": 3011
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/public-event/PublicEventDetail.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f7c3f55bcd852d6101e1010a2fea1467e5e10dd2",
+    "sha256": "bbfac9596a6a0c8fa2e5b6e5b5c738220d2ba1658cd9af0a02cafed52bfe35f2",
+    "bytes": 5874
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/public-event/usePublicEvent.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b5ab7d08a2e68b5e48c12e5aa871a28146054a7d",
+    "sha256": "f3c7ef33fbb5feb0f5ca80be658828fd6d9f8bbde85c09ac1707feb0ad621062",
+    "bytes": 2626
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/public-event/presentation.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ca32d3e8b4b4176ab8d0a4041fe927d88a8e6e98",
+    "sha256": "fc86085e8385eb8474fa26f593da87ac9aad40e8f8d1f7f9b3eebfcfcb2b326f",
+    "bytes": 2894
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/planner-feed.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "130dd5b994f01185a9b0c68944c317f80d8af9d0",
+    "sha256": "b0c2c5b9268b9177facbb6c51a8a8b433201fac3a7595f95259610ecfcfd98cb",
+    "bytes": 1644
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/calendar.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7508823aa6323e6a0bf6960c48f32daa29dddd94",
+    "sha256": "f577c3312cf45048325434190473b127428204bed6f453e81c3d95f071890ec2",
+    "bytes": 844
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/intelligence-funding.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "adaa54b57dc32e159171727fd8a08f75b5e1bb6e",
+    "sha256": "f141ae1ed29eafdec74b63092021ac2cf83bb8d8eccd282d7b675f8847183bbb",
+    "bytes": 6078
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/effective-feed.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9e15c79341f8a70da3adee43789ae943594effcf",
+    "sha256": "c05279d875a8646ab83fdd711f274eaa59fa163249bc693f5889fbcd90e18dd0",
+    "bytes": 1304
+  },
+  {
+    "path": "apps/web/src/shared/federal-register/effective-dates.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "883de369e99b816166d457d22d1cee2401b9862b",
+    "sha256": "b009dc8484c12f3b310ca20271259b84829cd4003d84024d507227060effab42",
+    "bytes": 6483
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/calendar-effective-dates.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d89dfced1f25cc1417d8901a5cb06ca9adfaef85",
+    "sha256": "8ec01102244660f64239ca96442fb83ed5565d9d6c83dd8357ae14e76be55711",
+    "bytes": 641
+  },
+  {
+    "path": "apps/web/src/shared/portfolio/shell/Shell.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "aeb3554f1bc3c8990461443b5f86dace163bc083",
+    "sha256": "8a46e1e666ed8ed8405b1ec0ee2f767a15d5055312ac77aa1dc1462fbe2e37d9",
+    "bytes": 3799
+  },
+  {
+    "path": "apps/web/src/shared/shell/Header.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2f75695d001af3d6a6b742c355ee405e54946cce",
+    "sha256": "0a27a2e588a599d366894183bd585450ccbc107f5ec0936fb5519b7e08166c12",
+    "bytes": 2926
+  },
+  {
+    "path": "apps/web/src/shared/shell/ModuleHeader.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8d19745fa495db9b1ec65f66937c90f01fc10620",
+    "sha256": "b6bd1fd354ab88304dbf9967fa403940a050c6a421d2abf7bf9161b0fee92268",
+    "bytes": 2554
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4ceb260d0c4fef6748f5c455fd50d3ee4f5cc5cb",
+    "sha256": "1207aa4f1dafd379b5063e9570241c2dccd00e59df6d6df4401881a8e9df1f57",
+    "bytes": 7233
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/contact-api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4a7b1f5c35f5ced79b6a3b149948a0cc7508b864",
+    "sha256": "60f4ba62bd3ff43f41ebf3167a440de05e3d32e4792972874277a1bcec90ebda",
+    "bytes": 3422
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/OrganizationChart.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "fabe4014095ccfa909f8ac4b54210110287b22d5",
+    "sha256": "b2046ea66a1a5aeb91d7f1b2b2c2ec5a835ea9231de25a87d858fc3443f4b213",
+    "bytes": 4102
+  },
+  {
+    "path": "apps/api/src/clients/client-people.controller.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "398027cd2e77e0cdf61f36e339fcbd49656cac63",
+    "sha256": "197c5276753c5b524a920ddc5fea50638c578ffa4510d6320622b1346cf1415b",
+    "bytes": 3281
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/ContactForm.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "10889e8f7dc9baa684866a417fb141591d70e971",
+    "sha256": "c1fb7bd010c567d2ab3212c8146a6614008f4c44504e95877a637dec683f0e59",
+    "bytes": 3164
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4165b6cb83469da9ca5bad0d853c6d91756c1e94",
+    "sha256": "2f81ff6fce7e0dd1cece124a4379bb3a5b766c1c949ded9a9ba33a3c2b6b751f",
+    "bytes": 7056
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4f4f9c1f4f0e92d1f7fa1a27e608facfd1711d9d",
+    "sha256": "3942fbad8bbf8b7f85d4675e72e664ff278e2e2e90cba5532e69b4d0078cb626",
+    "bytes": 2135
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/HierarchyEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "33a196397814362f9ea95c91304e0ae75270ac5e",
+    "sha256": "74a7dbc98346c271e713505045d17bdd416c45c627c2e02e024fc49cfbfd1ea3",
+    "bytes": 3501
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dbded86fd76000808e4308a7202f9ad728773b5a",
+    "sha256": "38eec18cb3ab79a11bc470f824553d46b1edfb031fb1df761e1a04760c6892e3",
+    "bytes": 1799
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ce2ebc4bf3457bed29cbcbd2e98d553aacca7310",
+    "sha256": "1bd961dc6d117f32c3487ffb73da80f6dd6edc6825ab3432851f63283e237fcd",
+    "bytes": 3461
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/useQuickLog.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "885f0420fe04cad5bf8d6608088e521806b676c4",
+    "sha256": "6eb13e68e818ff63e6edc53473822db1e2a9970193d9c1e6b3cac9119f4e957c",
+    "bytes": 2748
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "16fbb2b564e78931992b5d72a9561bc8239e7ec4",
+    "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a",
+    "bytes": 4144
+  },
+  {
+    "path": "apps/api/src/engagement/engagement.service.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "6eb8259f7eb77f64c6ab41d403480ac1ea3f1e82",
+    "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+    "bytes": 506538
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dad54a296ea9b8471a4599d0a1b6de3f7ca7e5a3",
+    "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+    "bytes": 5535
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/rewrite.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3ad03dc948db99dd271346bad7a1068bc7fa5700",
+    "sha256": "820d5170b72e6ef91fefe8e0f832ba38e69f6b6aa4262ba8bcd10404eac4c4b3",
+    "bytes": 1171
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5186370222e0e920c3a1f6836f4b700daf382ff6",
+    "sha256": "ad04d1b4d8e3b8f7506d9cf92faf44b4f690f91a0d70d180499a4c7d14471f78",
+    "bytes": 4621
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/SignaturePreview.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2f2c05585087c0759ad4614ddf60945255cc9996",
+    "sha256": "95028a72f8c80148ea0548b5415353b3bb92ab39f969b1558d2495a1183f7645",
+    "bytes": 1859
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "aab81890f6bacd1b787b9e60b9f49ac937102ef6",
+    "sha256": "0daa4a7c5f2b9551f81751a4168418e0a21a9c78862ce0520f0c0e499f7b9344",
+    "bytes": 6185
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/target-queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "876cc64da89e480d332a9cc608815d301b8e11bb",
+    "sha256": "fc5cfa722292d44bf0b401ce42edfa766b4c522accef8a979e6118e6af544ae8",
+    "bytes": 3402
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/PriorityTarget.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "605d7ccd06aa09f1f9b4407f6255a1bf72278361",
+    "sha256": "01857ff6d6cdb9a1ef2da3b87b83847a54010a7c108c2b1489e0fa38d22c11e5",
+    "bytes": 2129
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3d4a29090cc0f723120e51aa6b76c000ee43baf9",
+    "sha256": "7c964dbda4ad7df72e058d4fb920e56ea952a28944a9c044edcfcef1f63f2d21",
+    "bytes": 6033
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/AddTargetDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e8748aed1b7d2885187c4a8f03a8b0d8c309ae0b",
+    "sha256": "e3fb355434932aa0029c349eaef67f32ab6ce2d23a6492210db1274259e2068a",
+    "bytes": 3800
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3a327f5bce0868dd04f8a3328a1d8d99c290023c",
+    "sha256": "0f052a72dd64e944fe4c01fcea5b0f05619c41ab92762fe976fe6bf87519c556",
+    "bytes": 3550
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/TargetRecommendations.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "72db959170d0b6382603428376350d88f718814f",
+    "sha256": "403fe493c9ffd8b70db76e934f9c2e2014586edcaf91de12a7fc457da9fdd326",
+    "bytes": 2787
+  },
+  {
+    "path": "apps/api/src/clients/client-target-recommendations.service.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "08db8e423a0b4f17719bcd3c07093df607418a93",
+    "sha256": "e30e648de0e334dd92cf40d224f21b351cbafdebe92a77438ab0b7b671a99d24",
+    "bytes": 3359
+  },
+  {
+    "path": "apps/api/src/clients/client-target-recommendations.controller.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "f3a615dca402fbd70fde1537045a196050961ed4",
+    "sha256": "23c7e92816db3a3310af193d49628952d66bbd08dc2473ccca3599836b2e420c",
+    "bytes": 1399
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/target-contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "050a7990b77a717cd62bd3a50350fe76c92e0f64",
+    "sha256": "dc6e2fdececc6af30a83dd028889cff3e02c15ea85d15a5e4db8935130076adf",
+    "bytes": 2051
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/committee/catalog.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c2f43ca5c7febb53b7270e2a9681c35ba623200b",
+    "sha256": "d8d734ff435296e2ce1237f5868193e5bfbe4f47d129351b8d00715b8a13ac6f",
+    "bytes": 2974
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6a068da9f60990b46ea245b38155fdc81b3610c7",
+    "sha256": "138a22cc740cbe3d9a67c758922fb042090d2430f825b1db1781aaa94fb06edc",
+    "bytes": 2028
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "78f22333b499d784d8b973fc981e43ef4847f8b0",
+    "sha256": "d10c68525350807dc8aaeb11cc5fd5103f5f81e38749b2037257b9f1fe0dca7f",
+    "bytes": 7565
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "672f2d2f5bb8333ad004b30ce90c7dac98bbd507",
+    "sha256": "3724646bf80b8872e365259d61d5bf4862bcfe2e50c4aa11ea374e4275117035",
+    "bytes": 10274
+  },
+  {
+    "path": "apps/api/src/clients/activity-commands/activity-command.input.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "2be87c7018ec4b06a1a1038b4f12f9d834d73c8f",
+    "sha256": "d1b1c484e6a79383dbaa19a0c50422773886b5a3ab9e046921942bcf36de2db1",
+    "bytes": 3298
+  },
+  {
+    "path": "apps/api/src/clients/activity-commands/activity-command.planner.ts",
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "repo": "/workspace/capirov2",
+    "git_blob": "58235e55c1fa31604152f2d6d7f0f743d0742408",
+    "sha256": "dedeed02b27e93bf5935d5dda4e2ead0d2935bc5f5a80db48cd53e1ae25f12b7",
+    "bytes": 4022
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7af8fb77044cc23e548e7fe71ee094df81c31e27",
+    "sha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+    "bytes": 11629
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/task-client-scope.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "239bbc27132b9aba1e25cd4e8ef8264ba2c183d7",
+    "sha256": "34e66c1850a3a75ef30b58bfb59939fb05ad562d386294121b380d36d9f5821a",
+    "bytes": 562
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0b1acd7bad2bb95950e3f42e43072eae6074681f",
+    "sha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5",
+    "bytes": 6917
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9696e1402377038f5c1b2ec15371683ac22ed020",
+    "sha256": "1d52c7aebe2c152fbffcd6e5a2d787fdfd2174ec78d9cd7d97475f812fd12809",
+    "bytes": 3295
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f167068e6188e924c120cdafc7cb6dce6e6e31d3",
+    "sha256": "d17c8c4e548367517466f5d0fc2ce42f2ad4029e9659461f82390ca0c32c1e1a",
+    "bytes": 9822
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/LinkedTaskDetail.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ea75f2db8c934b18bbe71285855701ded0a9185e",
+    "sha256": "e9a0b4b7c5b0e6ceb7b79d046d174063c540f93577239515128b385f9b268e5a",
+    "bytes": 2029
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/planner-tasks.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "caa71d328db45a40781602453507880be087500e",
+    "sha256": "2947c9a845cce772519e8c87fbafda24b2755ff68e866e6d93a726b0db08818c",
+    "bytes": 3971
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/RecipientFields.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "007e750aef3c6037470b987826de2e6cb52a02c8",
+    "sha256": "a3a7dc33bd047baa10091e1d0a42cd7855e1892959e4ed9b608108a064176660",
+    "bytes": 4700
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/recipients.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dec977843000ffef2433de92b708a4343825782f",
+    "sha256": "51f398374dc10a96d9a23ea0c42a1dd8b20fa49350b3de8dd64a922895c12797",
+    "bytes": 1045
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ad07493fcd9209fd5f2768ce085dd45824a23dae",
+    "sha256": "bcd252a1eace95f7f0ee780afb75cf820c0f957361bf33e7b56ac556227e91ad",
+    "bytes": 4067
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/attachments.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b244d8561df70fe3691df890cc6d11f3fa562dc9",
+    "sha256": "d34ce7beb76020ba7887ed6ae3f12072f98aa91ee2403d4b5017c9a1cbf0fc1f",
+    "bytes": 1681
+  },
+  {
+    "path": "apps/web/src/features/portfolio/relationships/email/authority.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e5ebde3e5b4a74186977ac0b9572e60f6dae7d17",
+    "sha256": "4c0c7ddcf460b88df84652ab88a8983a8e4a453fd1797bd0f1331dd484d785b8",
+    "bytes": 2391
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "09dc35dc3f802baa6f9542592f71b98bc07cc03c",
+    "sha256": "9d20f1e94526d1bb1433f2fe1c28932990acde524c17dcde8632965659c8980c",
+    "bytes": 6033
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/AdvocacyBrowser.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d2b83125d438dcadd6cb928aab856f974b460b9d",
+    "sha256": "550cded9457503319dd42dcbd74d2f58b85627fa7365c9070a92a03a69d83841",
+    "bytes": 3505
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "15a1e042f285a8a4ef770de93f5bd56241b133a6",
+    "sha256": "641f874f183ed5d702b231c1426b771ed0cc8c6565c2d20948c09e561aa0ac02",
+    "bytes": 4210
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "87f52b63242228b5a9883c75224b4d3db508b271",
+    "sha256": "8cc147b6c719ddf7e56a23bbc1e84eac2dc5451cc244eaf9c9e0384a70c93dd5",
+    "bytes": 2425
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "80d8af3a4211c5f5d3cbf65e90cd36fdce72bac1",
+    "sha256": "e36c7a7835188c233c8097fd654c99aa6e63e9c32c7d3de6845500661e2efb87",
+    "bytes": 3331
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "79cdeff77cefcd062b521aadff6150a1b4fa469f",
+    "sha256": "4923827109f433296703408459646f13776cf947f40793285af5a62543400c85",
+    "bytes": 3299
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d1390720f29d1b3fb89c8a8f8e23d21cc0315997",
+    "sha256": "b27bc75bf99079562498fa7f048b7a930e43a23bc14005fee8ffaaec002a504e",
+    "bytes": 1271
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/MatterDetail.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c1bcc7c4d0a6edcce2e4ac1107c41907556fb959",
+    "sha256": "67a1705cc1e127b0d3b0f2eb5c285f0217f43ca41a2ad7177fba1ae20f52b299",
+    "bytes": 1647
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/RecordCard.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0741f6faf4c430b21a11aca35ec4c2b13cb9a6c0",
+    "sha256": "939a60fb942cb3d45ba1af2d316a38cb74e85aaf363bf1ee34ddad407758e500",
+    "bytes": 2993
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/EditMatterDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "86076740524a0a4ad7e1034b37e78a832f5077c3",
+    "sha256": "b23fc25566cc8cc5c5cf110351e4bb200198850780fa4065db6df3e9868da74e",
+    "bytes": 4827
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/matter-edit-request.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c2e11f3ffbe7ad45171517b6944fe0a7236f9dbb",
+    "sha256": "90e0b949afb247b19ddd3cc06e8be260344b7d72e0f3067e612614542973dd73",
+    "bytes": 2632
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/correction.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d24b729a48f9efd6df1c6700600ca0d036a86d35",
+    "sha256": "9414961279d05f701df5ba60d60cdab38fb8ff9bca87a49a626a59348d3317a4",
+    "bytes": 5331
+  },
+  {
+    "path": "apps/web/src/features/portfolio/advocacy/source.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c4841183c77ebb12d5c7d74efe7129e69a2de1ad",
+    "sha256": "fb8d1a5ee4ca1d85c8d6d93579a46bd39f99771039386fe85dc5e797a06740d1",
+    "bytes": 509
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f90e4386960b33becd93dbe0e20dd1a873d66628",
+    "sha256": "340c34b174f70d1598bab76660a3f5814986f901e1db20ff1e6bdb58eb4d51b0",
+    "bytes": 3475
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "aeba6a6ace40731b431afb9105035287dea048a6",
+    "sha256": "12adf15153a9e3e45c8d53690132eda492b20030fd1dad6435e6da4682e84ef8",
+    "bytes": 7947
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "53bf135c596706bc9e7f9a08b84ca1e310f151f2",
+    "sha256": "d0f77b6de37012533762c86439279d792af80f95d0d00832c61a638a3c88dd05",
+    "bytes": 1853
+  },
+  {
+    "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "064ed0544c4af0b8e200b74fbde16b6b071c8fe0",
+    "sha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+    "bytes": 9095
+  },
+  {
+    "path": "apps/web/src/features/portfolio/work/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "cf7d6875e200c25ea49c28d0b32ae461cf9a1f6a",
+    "sha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68",
+    "bytes": 1545
+  },
+  {
+    "path": "apps/web/src/features/portfolio/work/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a866c6fcc5e12c0f739b0bf0b5558053f189c3aa",
+    "sha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+    "bytes": 3095
+  },
+  {
+    "path": "apps/web/src/features/portfolio/work/owners.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ba90c1c6ac72c2ce6fdbd48abf7adfefd64b3841",
+    "sha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+    "bytes": 719
+  },
+  {
+    "path": "apps/web/src/shared/portfolio/config/config.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "28551f81aa072dc5904f76a8f3287ddb77017a33",
+    "sha256": "e37e67bbf2a8306358d8d5925975392e9dd334c1bc4dc6689047003102004ea0",
+    "bytes": 3421
+  },
+  {
+    "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d1eb7a82f7d9ab99412fcd43050f2b8520b3be2a",
+    "sha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+    "bytes": 3445
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "83fbadb8f34a87f5b5f8ee0d814d4b992144febf",
+    "sha256": "84e7f0b3c84ae67e150a787427c519cb6dfa47104d3001606b4333efe9c9af05",
+    "bytes": 2719
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e36f71cbeecb8fa771429887def78eee9635443e",
+    "sha256": "a2109a5d7c1a526d1eecc9cb554e01af84bb84a7f4e5681f7218f2885ab6ed99",
+    "bytes": 2086
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d3f53c54006e1a45c9d8af8afea8abc8e9508eb2",
+    "sha256": "aa94f4613726140f25b9977666fde8a97af221ae0ec57cc2691decac881c7ad2",
+    "bytes": 4325
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e315764ddc711de839812771265e1e2ee277193f",
+    "sha256": "def7df57f8fabe22109634cd369f8e2eccf2bd23d0c700c8cfed39e0bb2c0e9f",
+    "bytes": 4812
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "631bb34b579313feba684a2fc547d86534f10a6c",
+    "sha256": "bd5a6f0889830738251e86b5dbac38d690b2a372f7a40ddc88181a73b9c36e0d",
+    "bytes": 4788
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "12ab145b672c84fee785d6471936dc386e34056f",
+    "sha256": "57673f64929a04872ea8b6e8be65aa497bf6591c6e3f4e5fe215e0988b3b7bbd",
+    "bytes": 1908
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4cd4bcac4642de838eec130791f500988b6ed4c6",
+    "sha256": "cc925948dfc5d538f3d27d3cacf4799d10e233a9743d3e29822399ac879520ef",
+    "bytes": 4137
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4a3d41988669a1252d6a68812c6b2e96aa6d2672",
+    "sha256": "5245aa0d98a2e82a97b61fc9dd2515447d5a9fa97f2135f0fa255daa592a43b4",
+    "bytes": 8445
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/registrations.module.css",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "43bf69b18e4a623290925ea926b768075b78d9fc",
+    "sha256": "751999781d4e23050d94853c98d2c86470e00523eb10eef26687b69654e88b63",
+    "bytes": 1631
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/registration-writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "53b0ed2d6eed58a0b5f9b3786f6ca5b90267c973",
+    "sha256": "2841c9689d86141bf7a1305b894b8b0c2e45980bcc6ddb2ad98ee7149feb036f",
+    "bytes": 1122
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8b90b4d3ee1e97bd577b08e04db816794ed3440e",
+    "sha256": "1bd9e6f698d789cc26a29a6fba7547419c78dbb096ce03f1b6253892cb7c9ac2",
+    "bytes": 2215
+  },
+  {
+    "path": "apps/web/src/features/portfolio/capabilities/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c621a0a8a83e10744b0c490836d40e971133756d",
+    "sha256": "35bcf53bf3afbdbde0c38db690f0cb8e5e41c7ea93df0f75aa2484fa5c80a1ae",
+    "bytes": 905
+  },
+  {
+    "path": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "10be0d3157d03d3c0cfb43bf53a0549f3718c498",
+    "sha256": "2ea45ddbf61ffc2dd109e084872fb654d888ec4e9fa40609777a58d599ff8c37",
+    "bytes": 6497
+  },
+  {
+    "path": "apps/web/src/features/portfolio/opportunities/OpportunityResults.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "181f9c0237ce7aab131c592d2646b66d38fffaba",
+    "sha256": "19c2bdfcb2f38d49a2fc1971fb2b28967068b9a1e2e153eb95848bb4fa92dcb0",
+    "bytes": 2886
+  },
+  {
+    "path": "apps/web/src/features/portfolio/opportunities/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "bb4fd980e47d2ed35cf6f7099b55b2ad167a65f1",
+    "sha256": "d9fa64b4683b9b243124d9083e301e78967ea5fba53bd65d2007669ec795c7cf",
+    "bytes": 4035
+  },
+  {
+    "path": "apps/web/src/features/portfolio/opportunities/presentation.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "38d1bace9735db9247675b3631275ed32bfc6800",
+    "sha256": "feb843dc01d72bf1ea699054abdaef896aee00a199144d012af6ffe50d455fbb",
+    "bytes": 1783
+  },
+  {
+    "path": "apps/web/src/features/portfolio/opportunities/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ea4a927b1d6cf133700b2497f301339994949e73",
+    "sha256": "4d9a4bfebe3637646a1c61b9998bdff6576f655f598e3a492197d4632ca5548e",
+    "bytes": 1323
+  },
+  {
+    "path": "apps/web/src/features/portfolio/opportunities/RelevantPrograms.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5c4bd61b535c0ba7607455c716b1634b6f692227",
+    "sha256": "7f60f2926cae19aeb59bd70c808d43a06bf55691134cfcab831d590a56baf41c",
+    "bytes": 1521
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e4281aa12d78f5edc0f2f84f09eed10c1cc5cc57",
+    "sha256": "1dd545b2bdac2396b74ea75be40ed02b4df340e21845830a8c4f8df6857f1bf6",
+    "bytes": 4327
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveFields.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3afa47a49a629c104aabbd5d5a7023c0b5ee9848",
+    "sha256": "aa92f4a26b38dd50ee940b8b639bbac7c8a525a8f03ea35ad462b4cbf9946c8c",
+    "bytes": 4274
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "97953aa087049ac216465c55858ce6bb19aa2984",
+    "sha256": "f67e06088f541adb3f9b6efd175caffeb1a2cd061b5f1c3c572e2449202514c2",
+    "bytes": 6368
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/objective-work-destinations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0435cd5a31c663afc0fc2dcdbe3643e666a4f05c",
+    "sha256": "28d438a1b566822fc2a9cb6c7b4eb764ea60ab86209dcf3db0b85ddb4e717627",
+    "bytes": 4166
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditorControls.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2ec4f38e7d9ff62ea557272af92d3bd30ad3ff00",
+    "sha256": "202f7057b472a043bd6228f58b7bd6410fd4e2e4c473d0bac0ac5a7f54e150fd",
+    "bytes": 3069
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ba940539c3281f19dab0cec0a020ab55792ec0b6",
+    "sha256": "e5589c2914ee9c30c93a9272a0733d07acf728a6bde485768c79fe4410649835",
+    "bytes": 4662
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/useObjectiveEditorSession.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1ee007ba2c41379d5c0120c750779e11f1383937",
+    "sha256": "cb1bbb7c4ca5f49ef637a4d164cefd38ab9fd71f98e52d158dd3e389fd5118a2",
+    "bytes": 2007
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+    "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c",
+    "bytes": 2667
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveOutreach.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f2c3487396fac6f5fa76a59510bc512338cf3150",
+    "sha256": "95885c2b10f73878de5c9b245377765216e40d559801b8f0a738f1c353ce206d",
+    "bytes": 5847
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a299647a4cf9665787f027d41873e30e6bcc01ad",
+    "sha256": "28d2d3bba0822afe758104acc5acb335979efebb65a2fd4664b77a434efc5dd4",
+    "bytes": 8331
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4afb06f9da0551a1d940f97be7842c752fec6def",
+    "sha256": "f05666b22480a0ebfacadd304332982429816affcc576a4df74eab89b2641897",
+    "bytes": 6450
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c99b099fcde38c52020b7361d533bea44896b956",
+    "sha256": "9f1aa845a705962be859794f76fde1ca767beb538305a94b0316dfa8962203c4",
+    "bytes": 3386
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "7416559a63528e87f76fe1e7dc280789d0c92539",
+    "sha256": "2553e57d99f11255c902b6bd53208513c1e1451142ad5c1ce757521a63070c9c",
+    "bytes": 4079
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "b06caf617be9ead9ddbc38ae21698f8f17a76fc1",
+    "sha256": "4d99ab96bd14c833932bf58a4e701df5d8b581ed5d2714d677d755407e51e2ec",
+    "bytes": 2788
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "addcf2e237dc415db6540ac5bde03339213bd5e2",
+    "sha256": "ef4756b671bad754b15ecfbb4dde7d111691db22318836c2b434d50683702475",
+    "bytes": 1845
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "97ed7e117887b0dd6cea5f7eaeebfa857603c97a",
+    "sha256": "16f4b34a9d3de181c21cbf388a225fb6c0e022a4a41d1387f9f6f8a401b34ec3",
+    "bytes": 3141
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4683844ab1a035ef6952ea95907c9f20088e7b1a",
+    "sha256": "d7f9f5e01296986bc266c6c4821b4b7561ccea0db5ea8e87c664ed4efa662935",
+    "bytes": 4091
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "49f08fe17e1db99444248d7f580d8dc78e24e16c",
+    "sha256": "b167054f7cfaf7a034edfdb9bdcc21f687631c8f3560b1d98a8656ee31006d22",
+    "bytes": 5256
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/BillHearings.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3ac1abbe03ffcae15144a9bce4852c044ca7f501",
+    "sha256": "3815302ab3cc75486dee7bf34d3d8638236ef74393920c38aec26f0a8220adaa",
+    "bytes": 4034
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/hearings.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0b0579ec4bccf6efec6b19a8cac2783ecf67690b",
+    "sha256": "053733dca2dfad06d015341113efe053d21831481f9de1d04d2877491db6d073",
+    "bytes": 3307
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/useObjectiveWorkDestination.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "857e06b173cf1cf8c525ad1a9cfd012f74b4fa16",
+    "sha256": "5c995cfe1ccaeb253c71d6ad06991e275c390c2d6e56fb54a209a505b9586b25",
+    "bytes": 1884
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dbc9b09cbefb8a27988a94a13833359e78607dea",
+    "sha256": "1cc6f11d55b69e912d1f9bef89f7ac25c07f82c1eeb46ce7e2c8cdcca1ccc72a",
+    "bytes": 4161
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/objective-destination-binding.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "0f0c6b59078d908f63f841e9b249544e273368a7",
+    "sha256": "d318bbf791b86f3b8b30c394deeff0e668e24ca523d29fcb53a5a7a4c06a8f71",
+    "bytes": 2333
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/engagement-objective-destination.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d8b0278d1ac83acc6326d6e4b4419620e9433934",
+    "sha256": "0ac4fb45b29963753ea1bee379ed3a5765e2c9ea15a9a7c7665219a89b186d26",
+    "bytes": 2222
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "937085220a7e1f1659d21c3ceabbdabee8d7ee82",
+    "sha256": "b809b603e2ab24978215568ce850d0b5f4d10354a349ab7234c649a6459be826",
+    "bytes": 4467
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "5ea9c943e1292ad3ad3878e1f96a6a1b175d5ba3",
+    "sha256": "5317212fcb6bf6e430c124f2c331cd273331ccb3bc6f9c2a4f0e437f62706fc7",
+    "bytes": 4244
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/watchlist-source.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "efea48bacaff63ab46c4da618cd33ba0d7b47bc5",
+    "sha256": "8d7c832a016764631003f4fc43655d81c788e2d3107c458048d22ad9625a3c23",
+    "bytes": 5002
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e358c6070f945fdbce5ffef08d9f7c6f6b41beb6",
+    "sha256": "02bc816e685da6eca9f7de25ca5e6ff307283bd7b3e07f96652c362b14aca8f4",
+    "bytes": 3848
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a6e53d6e690439491cbb8f2aef1f081f080e918f",
+    "sha256": "a3bb2bbfb7af103de98375f354c485ea58ba11b77437e2d8a9c5ca87ea99788b",
+    "bytes": 6895
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "16ca4df6db2f6277b2d47083c99d595c82ceff9c",
+    "sha256": "05aa4f94c7d5ac6256e2955cdee723a403d615e0f5da8bfeb5fd9f5f3b21422f",
+    "bytes": 6501
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6e82f7a6f7190812742a9e2d0f2d285bea28f49a",
+    "sha256": "f3dd07593cf8afa30f383552176576d46ab381078e9ce4d462da3e5c0333ed11",
+    "bytes": 3055
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "14524584186ff9446f2e56237517d9c6b33d1004",
+    "sha256": "9c18b9593b7c750acac457e589f565705a13bd611e4fcc20856eef65e205ee54",
+    "bytes": 2336
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "afad8d84e9d95a4611c30630e67389e79e16820a",
+    "sha256": "3c41848c87dfeb20f43b861cc28e2ccc4bdf7c7565da91c8c2fcaaa2ab018d7f",
+    "bytes": 7835
+  },
+  {
+    "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "993ec479014dc7a2efe07c6c87a9e436e75ef2ad",
+    "sha256": "2ee978654d1252bbc92e216dfa9428c50de14b5dbbc501d6bdbd4cc93a623c42",
+    "bytes": 4347
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveReadiness.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2df541ca1fdbe21b4be11d577d14f9b04c132444",
+    "sha256": "9f98e7671ef08d0200dc6df5128fa0587b12ec37b8a2bfc770d9c1c26872cc6e",
+    "bytes": 1692
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "bba38a638c0d481222f5a005a0bf543bab662fc2",
+    "sha256": "2e559c408c5f0db2b89bf5f7b1fa13ec05e49d5ed3eeabb0953c6d24be68cfed",
+    "bytes": 7220
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e51d0c5a3f83b1636be8c76f7082af68f1665ad7",
+    "sha256": "be991fedfb9af416834677771aa52458821dade8b3f1c993e44aba24d3f49410",
+    "bytes": 1898
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ff595dc3913a489ce846a3d3f53d07281715a3d9",
+    "sha256": "268cfeb29356875e4dc7b73b474be1bbdebfb62c591a1f5552a1805ea6242b8a",
+    "bytes": 4087
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3e700850e12e31d86523b3d5e526a352a2c527f3",
+    "sha256": "c333ac6ec4b923c43f65d697556d6e24c8344d8127e22c9857a46bae7b36804f",
+    "bytes": 10202
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "417daca6d2cae2683c48bde38cf7b4303de5228e",
+    "sha256": "c495e59d7bfc99bffbf3c9046acd607d8821188066c2463394ae721a092ec118",
+    "bytes": 3531
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/mutations.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2f461d03f6273b6649b00f5fc1c9ccc99a18d352",
+    "sha256": "91367a2b051d2417b9946acc078ac2376b3d643b062005756a236e20ba86a073",
+    "bytes": 3854
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e4878e218b108e5bd55a3d6b8cc34116cf2cfc27",
+    "sha256": "eaf347a54fb5ad097717038321fb69a8b7e745991c91c251808f554eba7c8029",
+    "bytes": 3247
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/contacts/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2faad126a6db6842ff1825bbd35fa79809f562c4",
+    "sha256": "a1dc2dc87b052a0df1dbb39bd983685d47d905f48f57812d7305fe6849883b11",
+    "bytes": 2470
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "56ee96cb5dc4abad7c727b3b092e51c094745307",
+    "sha256": "45b12448e5849095afc5b3cd575824a590289d12329238fecf0333cf76154160",
+    "bytes": 10038
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/prospect-files.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f815276404c3df0b231e31ed7f481712a5f42464",
+    "sha256": "fd5417785c90f2057449afc5a1176d6c34ece2a2e3fec3ecf87bc15d8d49e5a5",
+    "bytes": 2071
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/ProspectNotes.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8b6577432db10e849ed98cc0a8c9524f8050f794",
+    "sha256": "f57afa748067d49b76667318660647f57fb374b1164826f4d242667832771c96",
+    "bytes": 2594
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3349079e7e741842ec3f04950d4519008810ee98",
+    "sha256": "e0339f4d279e5ac77b3741000641121e68d6cefa8741712cd5626bf65ed19e31",
+    "bytes": 3653
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/StageEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6f1f5c4aef071643dc7a186eadb9295da72ff2db",
+    "sha256": "27ec909f1773b2189ae5c4dbddb9d68759330bce9d86d8432cbbdeb9566d8e08",
+    "bytes": 2535
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/ProspectHistory.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "692ea9aa4c67d24d470ca303b5340cab7daea923",
+    "sha256": "d12aad4742461e05f54acb218ed8ad58b58d58b40b1fd838c153925dd0cfffb4",
+    "bytes": 3414
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/contacts/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "1cb7a040accf4af171152156e3a7a8c3f6029d54",
+    "sha256": "db468f4ebc339caa956b797da9c4bf2826e8a517b138369f11f0d0b835c4c069",
+    "bytes": 2150
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "ecfa4ee39e35be20377af45149e4ab56675a9ffe",
+    "sha256": "d35e6650af46ae407ff3d613ffb8adf331ed2ea83e003d077e6512273c36a13b",
+    "bytes": 9733
+  },
+  {
+    "path": "apps/web/src/shared/shell/ModeLink.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8213a8910c5bd749921602453a4b78df08745dbd",
+    "sha256": "7d35bbfc8b0ad328149dbdf3c15464d7f599a5f7b6e0bbdc618f5b657302dceb",
+    "bytes": 546
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e0e6591344b0aa6094ca2e59dc0e91398dfd8e98",
+    "sha256": "04a4d4bc7c939b13c8beb841d7fcdfb4c39ca0c06abfba4c538d5d9c324f82ad",
+    "bytes": 5496
+  },
+  {
+    "path": "apps/web/src/shared/session/client-route.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+    "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8",
+    "bytes": 1296
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/useProspectUpload.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "f119a6322a27b72d660e19e4643841c8788a4a2c",
+    "sha256": "6c1075d6429b891b07723b1142555c25301e5d8a583f70475bdf1a77d5fd34dc",
+    "bytes": 5441
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/prospect-upload.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dd31fa69aa88c3349299db12960fc41f1a79a1aa",
+    "sha256": "19b9d751e3b752e342553687871be90bb6cab0f89b45a2c30301f83bb864c6bc",
+    "bytes": 5477
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "389c73ebe9af267b200f5d19db86ae0e9ba9434f",
+    "sha256": "1f0ab120a964f5054d5ffedefc30deaf9ca9b9180cd3ae90726e7a4b5bcf5e2b",
+    "bytes": 3919
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/prospects/ProspectDraftCreate.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4c08acd41874e04bb7c7d94a47ad5cd49736d151",
+    "sha256": "0feb727599f3a644281260e4add82d50e9261d42588147fbd067419200a5acb0",
+    "bytes": 5393
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/workspace-prospects.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "2bc8cb9cdf430518995789420f27861c2cf82dd5",
+    "sha256": "6ff24314724157a6e0c621874896be4047d7945ff916c83fc744d63dab041a17",
+    "bytes": 2128
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "31b76b4a39d011f34a18a2a5e5ae3e33ff10d549",
+    "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207",
+    "bytes": 9582
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "74d283bd0e2aab61291fa822dd897446727a9408",
+    "sha256": "cc2627ec8b1555a8ef5ad33dacf81da606caf84d8af2feddc38fcef54c980bbb",
+    "bytes": 3764
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/contracts.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c251a53b999cf4ad1e3e3bcea9ee1e0f2b248dfa",
+    "sha256": "17d147e42b323497d59af171ea86cf68c415798dc0b88ebb108659faef12b0eb",
+    "bytes": 6239
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "26103457d004ee38d09b640412100e13aed10394",
+    "sha256": "cf144bfe67726eee84565967ed6fa8edb5f9b359820c0184a9d6a1797a39deb5",
+    "bytes": 4519
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/BriefHistory.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "d585235b2aeaba6ffd82a775281a549dbb9c0c5a",
+    "sha256": "02b72615c2f72dcf5fdcb02a06f0e02cd93dfd7399ce2c2454820b28cbd32f0c",
+    "bytes": 1541
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/BriefRefresh.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "9ea8aa6e74e52503e36a713f7c9c115f1d07cb23",
+    "sha256": "2145a5190701e76586b2b49296359baa791789435010001c73b46e90d0e0d821",
+    "bytes": 2312
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "8c50005a1fe1f8cb153abedde60e239d02cab44b",
+    "sha256": "f2ff36d8caea4686485bdc136ad625ce687b05b2815c80a3da99cf7423758051",
+    "bytes": 9490
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "658ffd6677c408c1cf66d2ac007ec37663a6de93",
+    "sha256": "73e7b0473bccc679674f9404106ab98134c82e966d29bd70921f4d58909c7cdd",
+    "bytes": 6661
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4f2d977fbff0ff02629c4cb0d2119aa1fc14c7b0",
+    "sha256": "08da25f32fcae54c335565ca5368cda0d99041da907a30a9c24f6555d2309fc9",
+    "bytes": 2093
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/prospects/ProspectDraftExport.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "49edde0fb12da147e9df941a7c1347f40c7df386",
+    "sha256": "707fddf47f15a85bae38528cb16dce2dd7573644cead9a97e81beba844c06fad",
+    "bytes": 1961
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/workspace-exports.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "a925c3a0957d41ba78413d56cece318b92c71ce5",
+    "sha256": "9edd75f76e7c20c775b5199e2b6392aae612613c7546eab38d9940ce28bab069",
+    "bytes": 3778
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/proposals/TemplateCatalog.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "dd68a293f4fcdf792d5f57f942c38433288ee35d",
+    "sha256": "409386032d05def93395c9a02716d23a3c9a233c03891d9c1369a02f2a9ed530",
+    "bytes": 4580
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/proposals/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "4bfd8144340c6cdce479bbe7322c0a44e4cf7408",
+    "sha256": "140633b233403c905fa8da6d79c0eb87b5601b96d8a81c6a234672baee58af99",
+    "bytes": 688
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "6518c09f89a3540f28ed22916bb825604a8fc855",
+    "sha256": "199024cf602e9b793570c5dbac6923fc7550803bcc0ffa3f1712d25ed56877f3",
+    "bytes": 10206
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/proposals/persistence-contract.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c1cb59842a027a803b7975d95773ce7614af40ab",
+    "sha256": "c4bd9d4e1ac19c447e081510dc126d9e94fd34a1d713353bcea4f3556849a178",
+    "bytes": 5736
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "e27ed148818803d092b8a9211e46b49fd5f8adeb",
+    "sha256": "c2fbae7929101537f33d80e9efc2e660205e759320036bea069a1fc39e596449",
+    "bytes": 5419
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/conversion/api.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "3c57adc91d1a7d39dc783b73a1d3c4ddf60d8219",
+    "sha256": "adee9fa468e4d2c22b63a69e364d757596656839e7b064c32dbc6e7e1bacfb6b",
+    "bytes": 1465
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/conversion/queries.ts",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "146072f3df6e00ea7c2ce91701e87eb87d498743",
+    "sha256": "236f63437201e75a7269d3e1d88e1dff9ba1535d0e15236105afdad4dea909e4",
+    "bytes": 1357
+  },
+  {
+    "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+    "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "repo": "/workspace/capiro-onboard-port-20261013",
+    "git_blob": "c9666b0ef79975bfb13f430e5ffe40fc9bd37ce5",
+    "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417",
+    "bytes": 2345
+  }
+]

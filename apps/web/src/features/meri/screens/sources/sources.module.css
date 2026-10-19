@@ -1,0 +1,73 @@
+/* Figma 3.4 05 · Sources: evidence, coverage, freshness and access screens. */
+.evidenceLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 450fr) minmax(0, 682fr);
+  gap: 20px;
+  align-items: start;
+  width: 100%;
+}
+.sourceList {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
+}
+.sourceList > button {
+  align-self: flex-start;
+}
+.sourceMore {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* Layout-neutral wrapper that lets the evidence fields stack on a phone. */
+.fields {
+  display: contents;
+}
+.quote {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.075px;
+}
+.statusWide {
+  --pill-width: 150px;
+}
+section.capabilities {
+  gap: 12px;
+  padding: 20px;
+  width: 100%;
+}
+.historical {
+  width: 100%;
+}
+.recovery {
+  width: min(800px, 100%);
+}
+.recovery > svg {
+  width: 24px;
+  height: 24px;
+}
+.funding {
+  width: 100%;
+}
+@media (max-width: 1100px) {
+  .evidenceLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.sourceList[data-state="open"] [data-when="closed"],
+.sourceList[data-state="closed"] [data-when="open"] {
+  display: none;
+}
+/* 05.21–05.22 loading and unavailable source states. */
+section.state {
+  gap: 10px;
+  padding: 16px;
+  width: 100%;
+}
+.compactStatus > span {
+  height: auto;
+  min-width: 0;
+}

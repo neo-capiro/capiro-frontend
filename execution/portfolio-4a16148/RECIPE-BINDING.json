@@ -1,0 +1,51 @@
+{
+  "createdAt": "2026-10-12T14:58:06.899764+00:00",
+  "scope": "Execution override only; frozen application source and source ZIP unchanged",
+  "applicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "applicationTree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "webSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "archiveSHA256": "252ccdf0d91d94a6b53e4a9d905534f2b4e325ef231481774154daa96bfacbf5",
+  "archiveBytes": 451977924,
+  "recipeSHA256": {
+    "runner.py": "f908e7bf7f7901f5215f902fdc87cdecdd95ba447536722aee4df1cd06bb1a0c",
+    "prepare.py": "7ba0358e89473bac1bdb2058f88e7669292fb6a0669573c7fe78dffa0bee6242",
+    "supervise.py": "1690197ae8790d6ae239736da74cd9945b91447d0d8d0a7abe987d23b2a9dd0a",
+    "reproduce-source.py": "7e56d86db8ce7445b2e9e7e5a08ee543e91c18cdd078b463cd98755fbb82c18f",
+    "buildspec.override.json": "c20e6c14bb2308d95b02f3906aece7318bff1ffe3779b29f035db60c79c0269f",
+    "tests/test_execution.py": "094b91f652ee9e796ef19ab176064d3513fb1fef3fc9bdced8b7c8cb59bea522",
+    "tests/test_control_gate.py": "e805d91474a6ad52fddaf981d635d9f6d6439385b2f5b12f98318379dd22b54c"
+  },
+  "buildspecBytes": 14767,
+  "bootstrapCommandBytes": 14589,
+  "requiredShippingInputs": {
+    "verifiedS3Version": null,
+    "acceptedMaximumImageBytes": null,
+    "acceptedMaximumCommandLogBytes": null
+  },
+  "parameterStatus": "Shipping coordinator binds already accepted limits and verified S3 version; no per-attempt shipping request generated here",
+  "cloudExecution": "NOT_RUN",
+  "imageBuild": "NOT_RUN",
+  "imagePush": "NOT_RUN",
+  "scan": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "wholeLifecycleTargetSeconds": 4200,
+  "cancelAfterSeconds": 3900,
+  "attempts": 1,
+  "spendingControl": "USD2 operator allowance; not an AWS-enforced cap",
+  "remoteHeads": {
+    "refs/heads/assessment/capiro-remaining-20261012": "e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac",
+    "refs/heads/codex/portfolio-continuation-20261011": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+    "refs/heads/integration/capiro-visual-closeout-20261012": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+    "refs/heads/main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "refs/heads/task/meri-ui-publish-20261011": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "refs/heads/task/modules-settings-20261011": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+  },
+  "updatedAt": "2026-10-12T15:26:06.702880+00:00",
+  "controlGate": {
+    "schemaVersion": 1,
+    "stage": "pre_push",
+    "maximumRecordBytes": 4096,
+    "byteCounters": "stdout includes complete receipt and newline; stderr separately counted; shared cap continues through push"
+  },
+  "latestIndependentReview": "evidence/control-review/independent-review.json"
+}

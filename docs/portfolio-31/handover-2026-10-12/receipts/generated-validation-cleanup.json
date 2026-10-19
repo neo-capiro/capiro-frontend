@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-12T01:57:45.330151+00:00",
+  "reason": "Filesystem reached ENOSPC while copying a generated publication-plan receipt and while preparing a duplicate materialization validation tree. Original source, frozen context and parts were not affected.",
+  "removed": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-qualification-_mf49n85",
+      "kind": "generated duplicate validation layout, explicitly released by producing agent; no unique source or receipts"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-manifest-qualification-t2ahoghz",
+      "kind": "generated duplicate validation layout, explicitly released by producing agent; no unique source or receipts"
+    }
+  ],
+  "preserved": [
+    "original context and every immutable pack",
+    "context-parts",
+    "all helper and qualification receipts including earlier packs-only success",
+    "all source worktrees and raw evidence"
+  ],
+  "authorization": "Routine cleanup of task-generated reproducible duplicate validation trees; producing agent confirmed no active materializer and exact safe paths."
+}

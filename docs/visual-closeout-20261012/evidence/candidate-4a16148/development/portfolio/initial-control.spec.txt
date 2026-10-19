@@ -1,0 +1,40 @@
+import { expect, test } from "@playwright/test";
+import { installFixtures, clientId } from "/workspace/capiro-visual-closeout/apps/web/tests/browser/fixtures";
+import { installProfileCurrentState } from "/workspace/capiro-visual-closeout/apps/web/tests/browser/profile-current-state-fixtures";
+import { installCapabilityPresentation } from "/workspace/capiro-visual-closeout/apps/web/tests/browser/capability-presentation-fixtures";
+test("VD01 dedicated Owners dialog presents ordered cards",async({page},info)=>{
+ await installProfileCurrentState(page);await page.goto('/profile-current-state.html?mode=team');
+ await page.screenshot({path:info.outputPath('owners-before.png')});
+ await page.getByRole('button',{name:'Manage owners',exact:true}).click({timeout:2000});
+ await expect(page.getByRole('dialog',{name:'Owners',exact:true})).toBeVisible();
+ await expect(page.getByRole('list',{name:'Ordered account owners'})).toBeVisible();
+});
+test("VD02 unavailable ordering never promises drag or saved layout",async({page},info)=>{
+ await installFixtures(page);await page.goto('/portfolio');
+ await expect(page.getByText('Saved profile ordering is unavailable',{exact:false})).toBeVisible();
+ await page.screenshot({path:info.outputPath('index-unavailable-before.png')});
+ await expect(page.getByText('Drag any card to rearrange · your layout is saved to your profile',{exact:true})).toHaveCount(0);
+});
+test("VD03 Portfolio title toolbar contains Owner and Customize",async({page},info)=>{
+ await installFixtures(page);await page.goto('/portfolio');await page.screenshot({path:info.outputPath('index-before.png')});
+ const header=page.locator('header').filter({has:page.getByRole('heading',{name:/Portfolio/})});
+ await expect(header.getByRole('button',{name:'Customize',exact:true})).toBeVisible();
+ await expect(header.getByLabel('Account owner',{exact:true})).toBeVisible();
+});
+test("VD04 capability create marks required name and retains editable choices",async({page},info)=>{
+ await installCapabilityPresentation(page);await page.goto(`/portfolio/${clientId}/capabilities`);await page.getByRole('button',{name:'Add capability',exact:true}).click();
+ const dialog=page.getByRole('dialog',{name:'New capability'});await page.screenshot({path:info.outputPath('capability-before.png')});
+ await expect(dialog.locator('label').filter({has:dialog.locator('input[name=name]')})).toContainText('*');
+ await expect(dialog.getByLabel('Type',{exact:true})).toHaveAttribute('list',/.+/);
+ await expect(dialog.getByLabel('Sector',{exact:true})).toHaveAttribute('list',/.+/);
+});
+test("VD05 Bill Tracker has compact heading and an inner results frame",async({page},info)=>{
+ await installFixtures(page);await page.goto(`/portfolio/${clientId}/bills`);await page.screenshot({path:info.outputPath('bills-before.png')});
+ await expect(page.getByRole('heading',{name:'Bill Tracker',exact:true})).toHaveCSS('font-size','20px');
+ await expect(page.getByRole('region',{name:'Tracked bill results',exact:true})).toBeVisible();
+});
+test("VD07 Portfolio modal scrim does not blur the underlying page",async({page},info)=>{
+ await installCapabilityPresentation(page);await page.goto(`/portfolio/${clientId}/capabilities`);await page.getByRole('button',{name:'Add capability',exact:true}).click();
+ await page.screenshot({path:info.outputPath('scrim-before.png')});
+ await expect(page.locator('[data-slot=dialog-overlay]')).toHaveCSS('backdrop-filter','none');
+});

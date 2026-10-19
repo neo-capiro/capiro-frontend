@@ -1,0 +1,996 @@
+{
+  "assessmentCheckout": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "shippingSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "shippingTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "appsTreeVerifiedEqual": "5e3ece11c1ca8901af700063c21e1b7e5de1debc",
+  "assignedCount": 40,
+  "actualFigmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+  "readOnlyApplicationReview": true,
+  "rowAssessments": [
+    {
+      "audit_id": "PROS-001",
+      "criterion": "List/search prospects and filter by owner/stage; stage totals",
+      "assessment": "CONFIRMED_DEFECT",
+      "observed": "Search, owner/stage/visibility filtering and service totals exist; current 403 incorrectly retains cached cards/totals. Truncation above the 200-record fetch cap is disclosed.",
+      "remaining": "PROS-F01 must be repaired. Native scoped search, owner/stage completeness and revocation remain unrun.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:24",
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:123",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:129"
+      ],
+      "findingIds": [
+        "PROS-F01"
+      ],
+      "currentFigmaFramesInspected": [
+        "411:44335"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [
+        "411:44124"
+      ],
+      "evidence": [
+        "review.spec.ts:43",
+        "browser-results.json",
+        "browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-list.png"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-002",
+      "criterion": "Switch list/pipeline presentation and open a prospect",
+      "assessment": "CONFIRMED_DEFECT",
+      "observed": "The Pipeline dialog and prospect links work with fixture records. It remains available with cached records after the parent list is denied.",
+      "remaining": "PROS-F01 affects the list-to-pipeline path. Native navigation/access was not exercised.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx:18",
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:190"
+      ],
+      "findingIds": [
+        "PROS-F01"
+      ],
+      "currentFigmaFramesInspected": [
+        "411:44335"
+      ],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [
+        "411:44124"
+      ],
+      "evidence": [
+        "review.spec.ts:43",
+        "browser-results.json",
+        "browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-list.png"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-003",
+      "criterion": "Create a prospect from Add profile",
+      "assessment": "BOUNDED_IMPLEMENTED",
+      "observed": "Add prospect opens a usable form; creation is a distinct Business Development POST with explicit catalog createStage. Missing catalog disables Create and explains why.",
+      "remaining": "Native created-record persistence and the Add profile entry frame411:45185 are unassessed; rich intake is evaluated separately in PROS-006\u2013009.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:26",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:37"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:121532"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [
+        "411:45185"
+      ],
+      "evidence": [
+        "review.spec.ts:6",
+        "browser-results-locator-correction.json",
+        "browser-artifacts-locator-correction/review-capture-previously--97be8--editor-and-pipeline-frames/prospect-editor-1440.png",
+        "browser-artifacts-locator-correction/review-capture-previously--97be8--editor-and-pipeline-frames/prospect-editor-390.png"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-004",
+      "criterion": "Read prospect overview / Company details",
+      "assessment": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "observed": "Overview renders name, description, safe website, service hypothesis, owner, next step, activity, contacts/files/brief sections. Actual 516:120388 includes a separate rich Company details layout absent from the current detail page.",
+      "remaining": "Rich legal/contact/registration/sector fields need their prospect-specific owner contracts; no equivalence to Client intake is assumed. Native read completeness is unrun.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:64",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:111",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:51"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "516:120388"
+      ],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-004"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-005",
+      "criterion": "Edit company legal name, website and description",
+      "assessment": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "observed": "Company display name, website and description can be edited in the existing dialog. It calls the field Company name rather than claiming a distinct legal-name property.",
+      "remaining": "The separate legal-name contract required by517:121532 is absent. Native update/receipt persistence is unrun.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:49",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:106",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:42"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:121532"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "review.spec.ts:6",
+        "browser-results-locator-correction.json",
+        "browser-artifacts-locator-correction/review-capture-previously--97be8--editor-and-pipeline-frames/prospect-editor-1440.png",
+        "browser-artifacts-locator-correction/review-capture-previously--97be8--editor-and-pipeline-frames/prospect-editor-390.png"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-006",
+      "criterion": "Edit company email, phone, primary POC and business classification",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Actual 517:121532/516:120388 show company email, phone and classification. The prospect input/schema has no such fields; the current form does not pretend to save them.",
+      "remaining": "Business Development owner must supply canonical company email/phone/primary POC/classification persistence and authorization. Contact CRUD is a separate resource, not evidence that these properties work.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/contracts.ts:51",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:106",
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:49"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:121532",
+        "516:120388"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-006"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-007",
+      "criterion": "Upload / replace prospect company logo",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Actual 517:121532 includes Upload logo and accepted image formats. ProspectEditor has no logo input, and the prospect schema has no logo association.",
+      "remaining": "A prospect-logo contract must define association, scan/readiness and replacement semantics before enabling this action; ordinary prospect attachment upload is not logo support.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:49",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:51",
+        "apps/web/src/features/portfolio/files/ProspectFiles.tsx:216"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:121532"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-007"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-008",
+      "criterion": "Edit Government Registration: CAGE, UEI, SAM status/expiry, LDA, EIN, NAICS, PSC, organization types, set-asides",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Actual 517:121876 contains the full registration step. Prospect input has none of the registration fields; the current form has no registration step or fake values.",
+      "remaining": "Prospect-specific CAGE/UEI/SAM/LDA/EIN/NAICS/PSC/type/set-aside persistence remains required. Client fields cannot be silently repurposed.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/contracts.ts:106",
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:26"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:121876",
+        "516:120388"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-008"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-009",
+      "criterion": "Edit sector priorities, submission tracks, LDA issue codes, engagement start and internal notes",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Actual 517:122239 shows sector tags, funding priorities, tracks, issue codes, engagement start and internal notes. Current source exposes only serviceHypothesis/geography among related company fields.",
+      "remaining": "Owner-defined prospect sector/track/issue/start-date schema and validation remain missing. Shared firm notes do not supply all intake notes semantics.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/contracts.ts:106",
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:87",
+        "apps/web/src/features/portfolio/prospects/ProspectNotes.tsx:39"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:122239"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-009"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-010",
+      "criterion": "Select / change prospect account owner",
+      "assessment": "BOUNDED_IMPLEMENTED",
+      "observed": "Prospect owner is edited with Next step & ownership using active tenant-member options, with a current-owner fallback when the owner is absent from the options. Overview displays the resulting owner separately.",
+      "remaining": "Owner persistence and active-membership authorization need native verification. The Figma rich-intake placement differs, but the owner-change interaction exists.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx:87",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:89",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:44"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "516:120388",
+        "517:121532"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-010"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-011",
+      "criterion": "Change pipeline stage",
+      "assessment": "BOUNDED_IMPLEMENTED_CAPABILITY_GATED",
+      "observed": "StageEditor uses the returned seven-stage catalog and explicitly blocks legacy transitions unless the catalog permits them. Closed outcomes state that conversion/billing are separate actions.",
+      "remaining": "Native catalog release and owner-approved legacy-stage mapping remain dependencies. No automatic won-to-charge behavior is inferred.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/StageEditor.tsx:27",
+        "apps/web/src/features/portfolio/prospects/StageEditor.tsx:83",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:69"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [
+        "411:65685"
+      ],
+      "evidence": [
+        "assigned-rows.json#PROS-011"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-012",
+      "criterion": "Archive / hide a prospect from pipeline",
+      "assessment": "BOUNDED_IMPLEMENTED",
+      "observed": "Archive/restore requires an explicit confirmation; POST dismiss/restore validates the exact prospect identity, refreshes queries and returns to the index.",
+      "remaining": "Native archival, permission/revocation and durable history retention remain unrun. Archived-vs-active filtering has source support.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:213",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:237",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:123"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [
+        "411:65685"
+      ],
+      "evidence": [
+        "assigned-rows.json#PROS-012"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-013",
+      "criterion": "Next step: text, due date and assigned prospect owner",
+      "assessment": "BOUNDED_IMPLEMENTED",
+      "observed": "Next-step text, local due datetime and prospect owner submit together; Temporal rejects nonexistent or ambiguous local times instead of silently shifting them.",
+      "remaining": "Native task persistence and owner authorization remain unrun. No independent task-assignee contract is claimed.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx:23",
+        "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx:41",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:89"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-013"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-014",
+      "criterion": "Read prospect activity and notes",
+      "assessment": "BOUNDED_IMPLEMENTED",
+      "observed": "Activity renders actual returned kinds, sorts by date/ID and filters from the returned kind set. Notes are projected independently from note events. Earlier V08 and bounded overview tests remain relevant.",
+      "remaining": "Native history completeness, provenance and visibility remain unrun; arbitrary email/meeting logging is evaluated separately in PROS-016.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectHistory.tsx:16",
+        "apps/web/src/features/portfolio/prospects/overview.ts:9",
+        "apps/web/src/features/portfolio/prospects/ProspectNotes.tsx:19"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-014"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-015",
+      "criterion": "Add a private prospect note",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "The implemented note control explicitly says Shared with your firm and saves to firm prospect history. It does not label the note private.",
+      "remaining": "Per-user private-note visibility/authorization is undefined; firm notes do not meet the private-note criterion. Preserve current honest labeling.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectNotes.tsx:39",
+        "apps/web/src/features/portfolio/prospects/ProspectNotes.tsx:64",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:108"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-015"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-016",
+      "criterion": "Log arbitrary prospect activity or email/meeting record",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Activity supports read/filter/refresh; the only added history input is a note. No control claims to log arbitrary email or meetings on the prospect.",
+      "remaining": "Owner-defined supported activity kinds, permissions and provider provenance are needed for arbitrary logging. Global Quicklog is not accepted as prospect logging.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectHistory.tsx:16",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:108",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:158"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-016"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-017",
+      "criterion": "Add / maintain prospect contacts",
+      "assessment": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "observed": "Contacts CRUD is implemented with exact prospect identity, role/readOnly guards, conflict handling and same-request creation retry. The baseline unavailable contact service visibly disables Add. The coordinated backend manifest includes the Contacts route/service; unavailable fixture behavior does not establish absent source registration.",
+      "remaining": "Backend contact source registration is composed at 243248e726243c44bd4b9d24fd1ed220da18c56a. The allocated Contacts migration remains source-only/unapplied; native deployment, enabled-service behavior and database/RLS acceptance were not run. Durable Contacts recovery and conversion carry-over remain unproven. Prior contact-browser cases are bounded fixture evidence.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx:18",
+        "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx:1",
+        "apps/web/src/features/portfolio/prospects/contacts/api.ts:1",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json:351",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json:414",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md:15",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md:23"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-017",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json:351",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json:414",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md:15",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md:23"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance.",
+      "backendSource": "243248e726243c44bd4b9d24fd1ed220da18c56a"
+    },
+    {
+      "audit_id": "PROS-018",
+      "criterion": "Ask Meri / open prospect research in Meri",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Current prospect detail has no unsafe prompt-bearing Ask Meri action. Actual 65258 contains Ask Meri, but the supported brief UI does not imply that handoff exists.",
+      "remaining": "Native Meri must define authorized prospect/context intent that stays editable and waits for Send. Shared mode navigation alone does not satisfy research handoff.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:1",
+        "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx:64"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65258"
+      ],
+      "priorFigmaFramesReused": [
+        "411:64863"
+      ],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-018"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-019",
+      "criterion": "Prospect Files: list, search and open uploaded/research documents",
+      "assessment": "CONFIRMED_PRODUCT_GAP_WITH_IMPLEMENTED_FACETS",
+      "observed": "Current scoped uploaded-file list and usable-only HTTPS Preview/Download are present and browser-confirmed. The Figma Search files interaction is entirely absent. Research/proposal source aggregation is not claimed.",
+      "remaining": "PROS-F03 blocks the search facet. Native storage and researcher/source completeness remain unrun; missing research federation is a separate dependency.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/files/ProspectFiles.tsx:164",
+        "apps/web/src/features/portfolio/files/prospect-files.ts:23"
+      ],
+      "findingIds": [
+        "PROS-F03"
+      ],
+      "currentFigmaFramesInspected": [
+        "411:65071"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "review.spec.ts:27",
+        "browser-artifacts-locator-correction/review-Figma-files-search--9fd2d--file-records-are-available/prospect-files-current.png",
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-020",
+      "criterion": "Upload prospect files",
+      "assessment": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "observed": "Prospect upload uses exact tenant/prospect lineage, SHA-256 metadata, original request/storage key, and restart recovery. UI allows fresh upload only for active/current prospects and withheld file links until usable.",
+      "remaining": "Reuse prior focused Files/restart evidence. Real storage delivery, scan readiness, owner authorization and native concurrent conversion remain unrun. Text import is legitimately disabled.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/files/prospect-upload.ts:34",
+        "apps/web/src/features/portfolio/files/prospect-upload.ts:66",
+        "apps/web/src/features/portfolio/files/ProspectFiles.tsx:216",
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md:17"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65071"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "review.spec.ts:27",
+        "browser-artifacts-locator-correction/review-Figma-files-search--9fd2d--file-records-are-available/prospect-files-current.png",
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-021",
+      "criterion": "Prospect Workspace landing / open drafts",
+      "assessment": "BOUNDED_IMPLEMENTED_WITH_VISUAL_DIFFERENCE",
+      "observed": "Exact prospect UUID links from Portfolio to Modules Workspace. The manual-document landing lists scoped documents and opens drafts; it is an explicit current implementation, beyond the historical queued snapshot.",
+      "remaining": "Actual 65188 uses two document-type cards; current Modules landing is a different layout and does not create proposal documents. Native list/open permissions and conversion-origin preservation remain unrun.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:167",
+        "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx:9",
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md:22"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65188"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-022",
+      "criterion": "Generate federal strategy brief",
+      "assessment": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "observed": "Generate from dossier calls the prospect brief service with a frozen explicit retry key; unavailable404 is distinct from an empty saved brief and successful projection requires a bound brief/version.",
+      "remaining": "Live model generation was not run or authorized. Dossier/source completeness, native durable generation and mapping into Workspace remain owner acceptance tasks.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx:57",
+        "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx:133",
+        "apps/web/src/features/portfolio/prospects/brief/api.ts:1"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65188",
+        "411:65258"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-022"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-023",
+      "criterion": "Read / save / version prospect brief",
+      "assessment": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "observed": "Saved brief reader/editor/history retain section provenance and citations; conflicts require review/rebase and unknown saves expose same-key retry. Historical sources are kept separate from current indexes.",
+      "remaining": "Native brief persistence/source resolution and durability remain unrun. Rich toolbar and actual proposal version binding are separate unmet criteria, not implied by this section editor.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx:20",
+        "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx:17",
+        "apps/web/src/features/portfolio/prospects/brief/BriefDocument.tsx:5"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65258"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-023"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-024",
+      "criterion": "Rich document editing: undo/redo, text format, link, lists, table, insert and preview",
+      "assessment": "CONFIRMED_DEFECT_AND_RICH_EDITOR_GAP",
+      "observed": "Current manual draft text editor demonstrably loses typing made during a pending successful save. Actual 65258/65367 show undo/redo, formatting, link/list/table/insert controls; neither the brief section editor nor the manual textarea implements those rich controls.",
+      "remaining": "PROS-F02 must be repaired before manual drafting deployment. Rich-document editing remains a distinct implementation/contract acceptance gap; generic exports and textareas do not satisfy that toolbar.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:150",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:241",
+        "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx:141"
+      ],
+      "findingIds": [
+        "PROS-F02"
+      ],
+      "currentFigmaFramesInspected": [
+        "411:65258",
+        "411:65367"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md",
+        "workspace-review.spec.ts:5",
+        "workspace-results.json",
+        "workspace-artifacts/workspace-review-prospect--082e8-ntly-discards-it-on-success/typing-during-pending-save.png",
+        "workspace-artifacts/workspace-review-prospect--082e8-ntly-discards-it-on-success/later-edits-lost-after-save.png"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-025",
+      "criterion": "Brief/proposal comments and document sharing",
+      "assessment": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "observed": "Actual brief/proposal frames expose Share and Comments; prospect Workspace deliberately disables Sharing and the brief viewer supplies no comment workflow.",
+      "remaining": "Native comment/share permission, invitation and document version binding are unsupported. Do not enable generic sharing against prospect documents as a substitute.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx:120",
+        "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx:64",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:180"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65258",
+        "411:65367"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-025"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-026",
+      "criterion": "Export / preview prospect brief or proposal",
+      "assessment": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "observed": "Manual prospect documents offer saved PDF/DOCX exports after a current exact draft/origin check. BriefViewer itself has no export control and proposals remain unavailable.",
+      "remaining": "Existing manual-export fixture evidence is reused. Native exports of actual brief/proposal versions, rich Preview and artifact equivalence remain unrun/unsupported; manual documents are not automatically brief/proposal exports.",
+      "sourceRefs": [
+        "apps/web/src/features/modules/workspace/prospects/ProspectDraftExport.tsx:21",
+        "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx:64",
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:24"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65258",
+        "411:65367"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-027",
+      "criterion": "Select proposal template / manage and create firm template",
+      "assessment": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "observed": "Tenant-visible generic Workspace catalog has search/product filters and exact-ID structure previews. Actual 66653 instead binds firm/Capiro proposal templates and versioned choices with manage/new-template actions.",
+      "remaining": "Generic template browsing is bounded implemented behavior. Prospect proposal-specific template binding and management workflow are not present; native catalog evidence does not prove generation.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/proposals/TemplateCatalog.tsx:20",
+        "apps/web/src/features/portfolio/prospects/proposals/TemplateCatalog.tsx:119",
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:24"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:66653"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-027"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-028",
+      "criterion": "Generate and save proposal with scope, fee, start date, team and optional brief appendix",
+      "assessment": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "observed": "The Proposal section explicitly states that creating/sending for this prospect is unavailable. The fee/start/team/brief-binding types reside only in an inactive candidate module with no enabled adapter.",
+      "remaining": "Native Workspace/BusinessDevelopment/Engagement must agree immutable prospect, brief, template, commercial terms/team and generated-version binding before this workflow can be accepted.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:24",
+        "apps/web/src/features/portfolio/prospects/proposals/persistence-contract.ts:3"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:66653",
+        "411:65367"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-028"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-029",
+      "criterion": "Send proposal email to contacts with PDF/appendix",
+      "assessment": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "observed": "Actual 66790 contains recipients, subject, message,PDF and optional brief. CurrentProposal section clearly marks sending unavailable and has no send button.",
+      "remaining": "An authorized native send contract must bind the selected contacts and exact PDF/appendix versions and record durable outcome. No email/provider activity was performed.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:24",
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:53"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:66790"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-029"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-030",
+      "criterion": "On successful proposal send automatically move stage to Proposal and log send; undo stage change",
+      "assessment": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "observed": "Actual 66790 states sending moves stage and logs the email. Current stage changes and existing-client links remain explicit separate actions; proposal sending is unavailable.",
+      "remaining": "Transactional send-receipt/stage/log semantics and a governed undo are missing. Source does not fabricate a stage success or attempt an email.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:24",
+        "apps/web/src/features/portfolio/prospects/StageEditor.tsx:83",
+        "apps/web/src/features/portfolio/prospects/mutations.ts:61"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:66790"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [
+        "411:66899"
+      ],
+      "evidence": [
+        "assigned-rows.json#PROS-030"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-031",
+      "criterion": "Remind me in 5 days only if there is no reply",
+      "assessment": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "observed": "Actual 66790 includes Remind me in 5 days if there is no reply. Current unavailable proposal workflow has no reminder toggle or scheduling promise.",
+      "remaining": "Native reply correlation, recipient/thread provenance and cancellation-aware reminder contract are required; no generic timer was substituted.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/proposals/ProspectProposals.tsx:24"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:66790"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-031"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-032",
+      "criterion": "Explicitly convert or link prospect to client",
+      "assessment": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "observed": "Explicit existing-client linking searches current accessible clients, requires checkbox confirmation and validates an exact created:false receipt. It clearly states that no new client is created and no charge occurs.",
+      "remaining": "New-client conversion shown in65934/66181/66430 remains unavailable. Prior failed/lost/mismatched linking evidence is reused; native lock/association persistence is unrun.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:63",
+        "apps/web/src/features/portfolio/prospects/conversion/api.ts:30",
+        "apps/web/src/features/portfolio/prospects/conversion/queries.ts:28"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65934",
+        "411:66181",
+        "411:66430"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-032"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-033",
+      "criterion": "Conversion billing gate: exact proration, payment confirmation, charge and receipt",
+      "assessment": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "observed": "Actual conversion frames quote proration, identify payment method, require billing consent and end with a charge receipt. The implemented path only links an existing client and explicitly makes no charge.",
+      "remaining": "Native paid conversion, actual-invoice consent, recovery/compensation/SCA/webhook/grants and policy acceptance remain owner dependencies. No billing or provider execution was authorized or run.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:75",
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:143",
+        "apps/web/src/features/portfolio/prospects/conversion/api.ts:30"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65934",
+        "411:66181",
+        "411:66430"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-033"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-034",
+      "criterion": "Conversion carries contacts, files, research and proposal versions into new client Workspace",
+      "assessment": "PARTIAL_ORIGIN_RETENTION_NOT_CARRY_OVER",
+      "observed": "Files/manual drafts retain immutable prospect origin and support backend-governed converted-client access. Link dialog states that file/research/contact carry-over is unavailable.",
+      "remaining": "Origin retention is not the 66181 promise of transactional contacts/files/research/proposal-version carry-over. Native conversion mapping and durable access constraints remain unrun.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:143",
+        "apps/web/src/features/portfolio/files/prospect-files.ts:7",
+        "apps/web/src/features/modules/workspace/prospects/manual-draft.ts:15",
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md:17"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:66181"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "docs/integration-contracts-20261012/PROSPECT-RESOURCES.md"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-035",
+      "criterion": "Conversion turns brief candidate objectives into three draft objectives",
+      "assessment": "DEPENDENCY_UNAVAILABLE",
+      "observed": "Actual 66181 promises strategy brief becomes 3 draft objectives. Brief UI explicitly says candidate objectives require separate supported workflows; no extraction/action is present.",
+      "remaining": "Owner-approved brief-to-objective mapping and native reviewed draft creation remain required. The sample count 3 is not a license to invent objectives.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx:149",
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:143"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65258",
+        "411:66181",
+        "411:66430"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-035"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-036",
+      "criterion": "Unlock full modules/templates when prospect becomes client",
+      "assessment": "PARTIAL_LINK_NAVIGATION_NATIVE_ENTITLEMENT_UNASSESSED",
+      "observed": "An already linked prospect gets an Open linked client link. Actual 65425 lists locked client views and 66430 claims unlocked modules; current prospect source does not infer entitlements from a stage value.",
+      "remaining": "Real converted-client authorization/entitlements and full-module/template availability need native service proof. The existing link only proves navigation, not paid feature activation.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:26",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:167"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:65188",
+        "411:65425",
+        "411:66430"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-036"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-037",
+      "criterion": "Editor Next/Back/Cancel, dropdowns, chips, dialogs and responsive layout",
+      "assessment": "PARTIAL_IMPLEMENTED_WITH_VISUAL_GAPS",
+      "observed": "Current company form opens/closes and stays within390 px in the fresh browser capture. Actual 517steps haveNext/Back/Cancel, logo, chips and rich fields; current dialog is a single basic form with close and save.",
+      "remaining": "Three-step rich intake remains tied to missing field contracts; its navigation/chips cannot be claimed accepted. Full responsive review of all dialogs remains unassessed.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:26",
+        "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx:122"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "517:121532",
+        "517:121876",
+        "517:122239",
+        "411:65425"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "review.spec.ts:6",
+        "browser-results-locator-correction.json",
+        "browser-artifacts-locator-correction/review-capture-previously--97be8--editor-and-pipeline-frames/prospect-editor-1440.png",
+        "browser-artifacts-locator-correction/review-capture-previously--97be8--editor-and-pipeline-frames/prospect-editor-390.png"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-038",
+      "criterion": "Shared shell: Meri/Portfolio/Modules, Master calendar, search, updates, avatar, client tabs and back navigation",
+      "assessment": "REUSED_SCOPED_SHELL_PARTIAL",
+      "observed": "Shared Shell composes canonical mode links, Master calendar, Portfolio search and Clerk avatar; prospect breadcrumb works in the new browser capture. Updates is explicitly unavailable. Existing V01 is reused.",
+      "remaining": "Actual prospect view picker 65425 is absent; full shared-shell target variants 47010/80302/85416 and live Clerk remain outside this bounded pass. Root shared-shell review owns broader acceptance.",
+      "sourceRefs": [
+        "apps/web/src/shared/portfolio/shell/Shell.tsx:54",
+        "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx:64"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [],
+      "priorFigmaFramesReused": [
+        "411:41421"
+      ],
+      "targetFramesNotNewlyInspected": [
+        "411:47010",
+        "411:80302",
+        "411:85416"
+      ],
+      "evidence": [
+        "assigned-rows.json#PROS-038"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-039",
+      "criterion": "Weighted pipeline valuation ($1.1M)",
+      "assessment": "PRODUCT_DEFINITION_DEPENDENCY",
+      "observed": "Pipeline footer explicitly says pipeline value unavailable. Actual 44335 displays a sample weighted $1.1M, but the prospect/list contracts carry no monetary value/probability fields.",
+      "remaining": "Product owner must define stage probabilities, value/currency units and authorized source before a weighted metric can be accepted. The sample design number must not be hardcoded.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx:148",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:51",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:81"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:44335"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-039"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    },
+    {
+      "audit_id": "PROS-040",
+      "criterion": "Win rate over the trailing 12 months (38%)",
+      "assessment": "PRODUCT_DEFINITION_DEPENDENCY",
+      "observed": "Pipeline footer explicitly says win rate unavailable. Actual 44335 displays 38% trailing 12 months; the current list counts have no defined won/lost cohort or historical-period projection.",
+      "remaining": "Product owner must define denominator, date boundaries and legacy-stage treatment, with native historical data. No ratio can safely be inferred from currently loaded cards.",
+      "sourceRefs": [
+        "apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx:148",
+        "apps/web/src/features/portfolio/prospects/contracts.ts:81"
+      ],
+      "findingIds": [],
+      "currentFigmaFramesInspected": [
+        "411:44335"
+      ],
+      "priorFigmaFramesReused": [],
+      "targetFramesNotNewlyInspected": [],
+      "evidence": [
+        "assigned-rows.json#PROS-040"
+      ],
+      "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+      "acceptanceLimit": "Source/fixture assessment only; this entry does not transfer source or visual evidence into native service acceptance."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "beforeAssertions": 34,
+  "afterAssertions": 43,
+  "removedAssertions": [],
+  "addedAssertions": [
+    "await expect( page.getByRole(\"button\", { name: \"Check current status\", exact: true }), ).toBeDisabled();",
+    "expect(fixture.calls(\"onboard.funnel.session\")).toHaveLength(2);",
+    "await expect(page.getByRole(\"status\")).toContainText( \"Submission outcome unknown\", );",
+    "await expect( page.getByRole(\"button\", { name: \"Check current status\", exact: true }), ).toBeEnabled();",
+    "await expect( page.getByRole(\"button\", { name: \"Continue\", exact: true }), ).toBeDisabled();",
+    "expect(fixture.calls(\"onboard.funnel.session\")).toHaveLength(2);",
+    "expect(fixture.writes()).toHaveLength(1);",
+    "expect(fixture.writes()).toHaveLength(1);",
+    "await expect( page.getByRole(\"button\", { name: \"Continue\", exact: true }), ).toBeDisabled();"
+  ],
+  "otherNativeWriteCaseByteIdentical": true,
+  "bothViewportCasesByteIdentical": true,
+  "otherSources": [
+    {
+      "file": "apps/web/test/browser/onboard-host-config.spec.ts",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/test/browser/onboard-host-fixtures.ts",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/test/browser/onboard-host-public.spec.ts",
+      "unchanged": true
+    }
+  ]
+}

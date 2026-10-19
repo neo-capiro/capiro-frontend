@@ -1,0 +1,647 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "guarded.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "guarded.spec.ts",
+      "file": "guarded.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "facilities manager shows saved cards and inline editable fields at 1440px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8407,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\nExpected substring: \u001b[32m\"Synthetic lab\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\nExpected substring: \u001b[32m\"Synthetic lab\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:107:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                      "column": 7,
+                      "line": 107
+                    },
+                    "snippet": "  105 |     await expect(\n  106 |       dialog.getByRole(\"list\", { name: \"Saved facilities\" }),\n> 107 |     ).toContainText(\"Synthetic lab\");\n      |       ^\n  108 |     await expect(\n  109 |       dialog.getByRole(\"combobox\", { name: \"State / territory\" }),\n  110 |     ).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 7,
+                        "line": 107
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\nExpected substring: \u001b[32m\"Synthetic lab\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\u001b[22m\n\n\n  105 |     await expect(\n  106 |       dialog.getByRole(\"list\", { name: \"Saved facilities\" }),\n> 107 |     ).toContainText(\"Synthetic lab\");\n      |       ^\n  108 |     await expect(\n  109 |       dialog.getByRole(\"combobox\", { name: \"State / territory\" }),\n  110 |     ).toBeVisible();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:107:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:11:16.224Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-36852-e-editable-fields-at-1440px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-36852-e-editable-fields-at-1440px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-36852-e-editable-fields-at-1440px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                    "column": 7,
+                    "line": 107
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-e4380d2b110e5d8df90c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 92,
+          "column": 7
+        },
+        {
+          "title": "timeline groups dates and expands the existing filtered feed at 1440px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7392,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:156:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                      "column": 7,
+                      "line": 156
+                    },
+                    "snippet": "  154 |     await expect(\n  155 |       timeline.getByRole(\"heading\", { name: \"Today\", exact: true }),\n> 156 |     ).toBeVisible();\n      |       ^\n  157 |     await expect(\n  158 |       timeline.getByRole(\"heading\", { name: \"Yesterday\", exact: true }),\n  159 |     ).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 7,
+                        "line": 156
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\u001b[22m\n\n\n  154 |     await expect(\n  155 |       timeline.getByRole(\"heading\", { name: \"Today\", exact: true }),\n> 156 |     ).toBeVisible();\n      |       ^\n  157 |     await expect(\n  158 |       timeline.getByRole(\"heading\", { name: \"Yesterday\", exact: true }),\n  159 |     ).toBeVisible();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:156:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:11:25.521Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-timeline-groups-da-01145-ing-filtered-feed-at-1440px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                    "column": 7,
+                    "line": 156
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-954ce7a90214139e8600",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 144,
+          "column": 7
+        },
+        {
+          "title": "Files source chips and folder cards retain native provenance at 1440px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30162,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 72,
+                        "line": 242
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('group', { name: 'File source', exact: true }).getByRole('button', { name: 'manual', exact: true })\u001b[22m\n\n\n  240 |       exact: true,\n  241 |     });\n> 242 |     await sources.getByRole(\"button\", { name: \"manual\", exact: true }).click();\n      |                                                                        ^\n  243 |     await expect(\n  244 |       page.getByRole(\"button\", { name: \"pdf Report.pdf\", exact: true }),\n  245 |     ).toBeVisible();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:242:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:11:33.842Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-Files-source-chips-8ad96-native-provenance-at-1440px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-cedb33e7bc627e58f089",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 232,
+          "column": 7
+        },
+        {
+          "title": "facilities manager shows saved cards and inline editable fields at 360px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7818,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\nExpected substring: \u001b[32m\"Synthetic lab\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\nExpected substring: \u001b[32m\"Synthetic lab\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:107:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                      "column": 7,
+                      "line": 107
+                    },
+                    "snippet": "  105 |     await expect(\n  106 |       dialog.getByRole(\"list\", { name: \"Saved facilities\" }),\n> 107 |     ).toContainText(\"Synthetic lab\");\n      |       ^\n  108 |     await expect(\n  109 |       dialog.getByRole(\"combobox\", { name: \"State / territory\" }),\n  110 |     ).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 7,
+                        "line": 107
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\nExpected substring: \u001b[32m\"Synthetic lab\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('list', { name: 'Saved facilities' })\u001b[22m\n\n\n  105 |     await expect(\n  106 |       dialog.getByRole(\"list\", { name: \"Saved facilities\" }),\n> 107 |     ).toContainText(\"Synthetic lab\");\n      |       ^\n  108 |     await expect(\n  109 |       dialog.getByRole(\"combobox\", { name: \"State / territory\" }),\n  110 |     ).toBeVisible();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:107:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:12:04.774Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-dc1b0-ne-editable-fields-at-360px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                    "column": 7,
+                    "line": 107
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-978982e0cc16be564e8c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 92,
+          "column": 7
+        },
+        {
+          "title": "timeline groups dates and expands the existing filtered feed at 360px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7369,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:156:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                      "column": 7,
+                      "line": 156
+                    },
+                    "snippet": "  154 |     await expect(\n  155 |       timeline.getByRole(\"heading\", { name: \"Today\", exact: true }),\n> 156 |     ).toBeVisible();\n      |       ^\n  157 |     await expect(\n  158 |       timeline.getByRole(\"heading\", { name: \"Yesterday\", exact: true }),\n  159 |     ).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 7,
+                        "line": 156
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('heading', { name: 'Today', exact: true })\u001b[22m\n\n\n  154 |     await expect(\n  155 |       timeline.getByRole(\"heading\", { name: \"Today\", exact: true }),\n> 156 |     ).toBeVisible();\n      |       ^\n  157 |     await expect(\n  158 |       timeline.getByRole(\"heading\", { name: \"Yesterday\", exact: true }),\n  159 |     ).toBeVisible();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:156:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:12:13.474Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-timeline-groups-da-b0a3f-ting-filtered-feed-at-360px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                    "column": 7,
+                    "line": 156
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-cf27b45ab03663f578ee",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 144,
+          "column": 7
+        },
+        {
+          "title": "Files source chips and folder cards retain native provenance at 360px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30115,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 72,
+                        "line": 242
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('group', { name: 'File source', exact: true }).getByRole('button', { name: 'manual', exact: true })\u001b[22m\n\n\n  240 |       exact: true,\n  241 |     });\n> 242 |     await sources.getByRole(\"button\", { name: \"manual\", exact: true }).click();\n      |                                                                        ^\n  243 |     await expect(\n  244 |       page.getByRole(\"button\", { name: \"pdf Report.pdf\", exact: true }),\n  245 |     ).toBeVisible();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:242:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:12:21.689Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-Files-source-chips-a2a86--native-provenance-at-360px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-Files-source-chips-a2a86--native-provenance-at-360px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-Files-source-chips-a2a86--native-provenance-at-360px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-48c19a4d46072d78dccb",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 232,
+          "column": 7
+        },
+        {
+          "title": "facilities manager saves inline edits through the existing receipt contract",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30319,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 67,
+                        "line": 309
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByRole('button', { name: 'Edit', exact: true })\u001b[22m\n\n\n  307 |     exact: true,\n  308 |   });\n> 309 |   await dialog.getByRole(\"button\", { name: \"Edit\", exact: true }).click();\n      |                                                                   ^\n  310 |   await dialog.getByLabel(\"Facility name\", { exact: true }).fill(\"Updated lab\");\n  311 |   await dialog\n  312 |     .getByRole(\"button\", { name: \"Save facility\", exact: true })\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:309:67"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:12:52.603Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-710dd-e-existing-receipt-contract/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-710dd-e-existing-receipt-contract/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-710dd-e-existing-receipt-contract/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-64128443c6d5d5b8a0bb",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 291,
+          "column": 5
+        },
+        {
+          "title": "facilities manager preserves the unknown create fence across close and reopen",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30311,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+                        "column": 6,
+                        "line": 341
+                      },
+                      "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Facilities: Test Aerospace', exact: true }).getByLabel('Facility name', { exact: true })\u001b[22m\n\n\n  339 |   await dialog\n  340 |     .getByLabel(\"Facility name\", { exact: true })\n> 341 |     .fill(\"Uncertain new lab\");\n      |      ^\n  342 |   await dialog\n  343 |     .getByRole(\"button\", { name: \"Save facility\", exact: true })\n  344 |     .click();\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts:341:6"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:13:23.827Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/presentation-corrected-baseline-red/guarded-facilities-manager-f5fcb-nce-across-close-and-reopen/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-29caefcc5b991f489701",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 323,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:11:15.673Z",
+    "duration": 159095.94300000003,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

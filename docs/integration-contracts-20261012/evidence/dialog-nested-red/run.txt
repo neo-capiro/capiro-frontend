@@ -1,0 +1,178 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/email-compose.spec.ts --grep overlay clicks|invalidated successful idle identity refuses mail dispatch|uncertain or malformed receipt freezes send attempt --repeat-each=3 --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/email-compose.spec.ts --grep overlay clicks|invalidated successful idle identity refuses mail dispatch|uncertain or malformed receipt freezes send attempt --repeat-each=3 --workers=3
+
+[WebServer] (node:165854) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 12 tests using 3 workers
+
+(node:165874) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:165875) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:165873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review (12.8s)
+  ✘   1 tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review (12.8s)
+(node:166279) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:166287) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review (13.4s)
+(node:166382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 tests/browser/email-compose.spec.ts:214:1 › invalidated successful idle identity refuses mail dispatch and retains draft (9.5s)
+  ✓   6 tests/browser/email-compose.spec.ts:214:1 › invalidated successful idle identity refuses mail dispatch and retains draft (8.7s)
+  ✓   5 tests/browser/email-compose.spec.ts:214:1 › invalidated successful idle identity refuses mail dispatch and retains draft (10.7s)
+  ✓   7 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (503) (9.2s)
+  ✓   8 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (503) (9.3s)
+  ✓   9 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (503) (8.9s)
+  ✓  10 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (200) (8.8s)
+  ✓  11 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (200) (11.2s)
+  ✓  12 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (200) (11.0s)
+
+
+  1) tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  getByRole('button', { name: 'Review email', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Review email', exact: true })
+        14 × locator resolved to <button class="button primary">Review email</button>
+           - unexpected value "inactive"
+
+
+      209 |   await expect(
+      210 |     page.getByRole("button", { name: "Review email", exact: true }),
+    > 211 |   ).toBeFocused();
+          |     ^
+      212 |   expect(state.sent).toHaveLength(0);
+      213 | });
+      214 | test("invalidated successful idle identity refuses mail dispatch and retains draft", async ({
+        at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  getByRole('button', { name: 'Review email', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Review email', exact: true })
+        14 × locator resolved to <button class="button primary">Review email</button>
+           - unexpected value "inactive"
+
+
+      209 |   await expect(
+      210 |     page.getByRole("button", { name: "Review email", exact: true }),
+    > 211 |   ).toBeFocused();
+          |     ^
+      212 |   expect(state.sent).toHaveLength(0);
+      213 | });
+      214 | test("invalidated successful idle identity refuses mail dispatch and retains draft", async ({
+        at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator:  getByRole('button', { name: 'Review email', exact: true })
+    Expected: focused
+    Received: inactive
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Review email', exact: true })
+        14 × locator resolved to <button class="button primary">Review email</button>
+           - unexpected value "inactive"
+
+
+      209 |   await expect(
+      210 |     page.getByRole("button", { name: "Review email", exact: true }),
+    > 211 |   ).toBeFocused();
+          |     ^
+      212 |   expect(state.sent).toHaveLength(0);
+      213 | });
+      214 | test("invalidated successful idle identity refuses mail dispatch and retains draft", async ({
+        at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review 
+    tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review 
+    tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review 
+  9 passed (46.4s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test tests/browser/email-compose.spec.ts --grep 'overlay clicks|invalidated successful idle identity refuses mail dispatch|uncertain or malformed receipt freezes send attempt' --repeat-each=3 --workers=3
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

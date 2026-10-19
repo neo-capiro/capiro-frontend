@@ -1,0 +1,986 @@
+{
+  "status": "COMPLETE_READ_ONLY_MAPPING_NOT_NATIVE_ACCEPTANCE",
+  "generated_at": "2026-10-13T11:07:21.102001+00:00",
+  "lane": "relationships",
+  "assigned_ids": [
+    "ENG-org_read",
+    "ENG-org_create",
+    "ENG-org_edit",
+    "ENG-org_hierarchy",
+    "ENG-org_delete",
+    "ENG-org_drawer",
+    "ENG-org_log_note",
+    "ENG-email_history",
+    "ENG-email_thread",
+    "ENG-email_send",
+    "ENG-email_rewrite",
+    "ENG-email_signature",
+    "ENG-targets_read",
+    "ENG-targets_add",
+    "ENG-target_recommendations",
+    "ENG-target_recommendations_refresh",
+    "ENG-targets_member_search",
+    "ENG-targets_staff_search",
+    "ENG-target_profile_navigation",
+    "ENG-targets_state_search",
+    "ENG-target_committee_source",
+    "ENG-target_committee_staff",
+    "ENG-tasks_create",
+    "ENG-tasks_list",
+    "ENG-tasks_update",
+    "ENG-org_chart_search",
+    "ENG-org_chart_viewport",
+    "ENG-org_chart_review",
+    "ENG-contact_discard",
+    "ENG-email_contact_picker",
+    "ENG-email_attachment_prepare",
+    "ENG-email_attachment_confirm",
+    "ENG-email_failure_retention"
+  ],
+  "row_count": 33,
+  "categories": {
+    "actual_missing_implementation": 10,
+    "existing_behavior_missing_evidence": 14,
+    "authentic_backend_provider_dependency": 9,
+    "selected_figma31_mismatch": 0
+  },
+  "all_acceptance_states": "OPEN_FINAL_ACCEPTANCE",
+  "unblocked_offline_next_steps": 23,
+  "source": {
+    "repository": "/workspace/capiro-onboard-port-20261013",
+    "application_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "published_commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "root_tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "app_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "source_tree": "8d3cb77ba96da3656877bc73a2eb51d58af94675",
+    "published_app_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "source_and_tests_delta_90cc_to_5875": []
+  },
+  "backend_reference": {
+    "repository": "/workspace/capirov2",
+    "inspected_git_object": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "checkout_head": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+    "limit": "Available pinned contract source only. No deployment/activation/newer-backend or provider claim."
+  },
+  "instruction_binding": {
+    "path": "/workspace/capiro-portfolio-acceptance-map-20261013/MAPPING-INSTRUCTIONS.md",
+    "sha256": "478486e51f759f541ac826c3e42f522fbe4975a37c3e869787f64b5748138ba5"
+  },
+  "ledger_bindings": {
+    "relationships.json": {
+      "sha256": "e218af29620f625d508a699821e728acfca38ea96d119e46132f8506cf44240a",
+      "bytes": 111056
+    },
+    "PHASED-PLAN.md": {
+      "sha256": "9430fb6c01266bcf0778aee6f9a5084502f7f2e0f9f5f16c3e8d6cfc7c59a94e",
+      "bytes": 43148
+    },
+    "implementation-matrix.json": {
+      "sha256": "f7aa626b1b9b49d0d2a6e04b88c6043defdaea146124ae7ce5a240e4431612b3",
+      "bytes": 1044295
+    },
+    "phase-audit-map.json": {
+      "sha256": "e467390358afe47efe70438335d23fe3aaad7e8d9535627f4a7d11ef05b920c9",
+      "bytes": 336228
+    },
+    "reconciliation-ledger.json": {
+      "sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf",
+      "bytes": 1332566
+    },
+    "figma-screen-index.csv": {
+      "sha256": "ffb9be58b8e96e26a849ee0292e1e600e2cdf79a94cdcaa61db92143df59076c",
+      "bytes": 230733
+    },
+    "HANDOVER.md": {
+      "sha256": "5d5e7842df16a2be17a5c428d57546a99916889241433ec4dd9437c9555b4068",
+      "bytes": 24323
+    },
+    "open-337.json": {
+      "sha256": "0f1917498c9db0d1de0af17415f1cdc39aab91a48bbb8e032b954052df724956",
+      "bytes": 1274353
+    }
+  },
+  "inspected_paths": [
+    {
+      "path": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+      "symbol": "OrganizationRelationships",
+      "line": 31,
+      "git_blob": "4ceb260d0c4fef6748f5c455fd50d3ee4f5cc5cb",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "1207aa4f1dafd379b5063e9570241c2dccd00e59df6d6df4401881a8e9df1f57",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+      "symbol": "ContactDrawer",
+      "line": 18,
+      "git_blob": "4165b6cb83469da9ca5bad0d853c6d91756c1e94",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "2f81ff6fce7e0dd1cece124a4379bb3a5b766c1c949ded9a9ba33a3c2b6b751f",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/contact-api.ts",
+      "symbol": "readPeople",
+      "line": 31,
+      "git_blob": "4a7b1f5c35f5ced79b6a3b149948a0cc7508b864",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "60f4ba62bd3ff43f41ebf3167a440de05e3d32e4792972874277a1bcec90ebda",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/mutations.ts",
+      "symbol": "usePersonMutation",
+      "line": 15,
+      "git_blob": "4f4f9c1f4f0e92d1f7fa1a27e608facfd1711d9d",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "3942fbad8bbf8b7f85d4675e72e664ff278e2e2e90cba5532e69b4d0078cb626",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/OrganizationChart.tsx",
+      "symbol": "OrganizationChart",
+      "line": 61,
+      "git_blob": "fabe4014095ccfa909f8ac4b54210110287b22d5",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "b2046ea66a1a5aeb91d7f1b2b2c2ec5a835ea9231de25a87d858fc3443f4b213",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/contracts.ts",
+      "symbol": "reportingCycle",
+      "line": 37,
+      "git_blob": "dbded86fd76000808e4308a7202f9ad728773b5a",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "38eec18cb3ab79a11bc470f824553d46b1edfb031fb1df761e1a04760c6892e3",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/HierarchyEditor.tsx",
+      "symbol": "HierarchyEditor",
+      "line": 11,
+      "git_blob": "33a196397814362f9ea95c91304e0ae75270ac5e",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "74a7dbc98346c271e713505045d17bdd416c45c627c2e02e024fc49cfbfd1ea3",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/ContactForm.tsx",
+      "symbol": "ContactForm",
+      "line": 6,
+      "git_blob": "10889e8f7dc9baa684866a417fb141591d70e971",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "c1fb7bd010c567d2ab3212c8146a6614008f4c44504e95877a637dec683f0e59",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+      "symbol": "GovernmentRelationships",
+      "line": 14,
+      "git_blob": "aab81890f6bacd1b787b9e60b9f49ac937102ef6",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "0daa4a7c5f2b9551f81751a4168418e0a21a9c78862ce0520f0c0e499f7b9344",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/target-queries.ts",
+      "symbol": "useRefreshTargetRecommendations",
+      "line": 97,
+      "git_blob": "876cc64da89e480d332a9cc608815d301b8e11bb",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "fc5cfa722292d44bf0b401ce42edfa766b4c522accef8a979e6118e6af544ae8",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+      "symbol": "TargetDrawer",
+      "line": 17,
+      "git_blob": "3d4a29090cc0f723120e51aa6b76c000ee43baf9",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "7c964dbda4ad7df72e058d4fb920e56ea952a28944a9c044edcfcef1f63f2d21",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+      "symbol": "DirectoryResults",
+      "line": 16,
+      "git_blob": "3a327f5bce0868dd04f8a3328a1d8d99c290023c",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "0f052a72dd64e944fe4c01fcea5b0f05619c41ab92762fe976fe6bf87519c556",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
+      "symbol": "useCommittees",
+      "line": 121,
+      "git_blob": "6b61aca37a4d68615480a62b04b156d03bb1b419",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "d3c24380be51be928531e2b4ed4543c88d428ec83b15f85230a8ceb65102c409",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/TargetRecommendations.tsx",
+      "symbol": "TargetRecommendations",
+      "line": 10,
+      "git_blob": "72db959170d0b6382603428376350d88f718814f",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "403fe493c9ffd8b70db76e934f9c2e2014586edcaf91de12a7fc457da9fdd326",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+      "symbol": "ContactMail",
+      "line": 8,
+      "git_blob": "ce2ebc4bf3457bed29cbcbd2e98d553aacca7310",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "1bd961dc6d117f32c3487ffb73da80f6dd6edc6825ab3432851f63283e237fcd",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email.ts",
+      "symbol": "useSendMail",
+      "line": 96,
+      "git_blob": "16fbb2b564e78931992b5d72a9561bc8239e7ec4",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "symbol": "MailCompose",
+      "line": 21,
+      "git_blob": "3ee10919b0b929f75fd4f8c336f212d2c7294e55",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/send.ts",
+      "symbol": "sendReviewedMail",
+      "line": 36,
+      "git_blob": "acfea1acc11f4a41ea091e2d5e416c43c54daa05",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "df67ec63ab32167ce6b60f28c4b8902700ae735b534936021ec9dcfe7f881aaa",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/api/src/clients/client-people.controller.ts",
+      "symbol": "ClientPeopleController",
+      "line": 101,
+      "git_blob": "398027cd2e77e0cdf61f36e339fcbd49656cac63",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "197c5276753c5b524a920ddc5fea50638c578ffa4510d6320622b1346cf1415b",
+      "repository": "/workspace/capirov2",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/tests/relationships.test.ts",
+      "symbol": "requires the actual deleted:true",
+      "line": 109,
+      "git_blob": "a15700ab1dc27ce103d6199e44136db71dd74509",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "84384c880e4cb53abbd005b5ea0e0ed75becf21ffdb26646edeb2065aca69a53",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/tests/domain-behavior.test.ts",
+      "symbol": "rejects self-management",
+      "line": 180,
+      "git_blob": "946b80dc30fd84b18ae14eaedf4e53c7d0f56fb9",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "9abad4d7734cc9e825ac6aabe98131d1b5101c8aaa5c10b24e108585c6775e85",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+      "symbol": "QuickLog",
+      "line": 17,
+      "git_blob": "7d9bdff95b7d46d14a73b531d517c0c1af9a38df",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "78c1b144587cc1aad6e290e8266e5e982cf4974fb93ba12bb0dcf4dfc8057916",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+      "symbol": "createQuickLog",
+      "line": 11,
+      "git_blob": "539a6d21f08cd0b99bb193d79b2dd6c2b2260b1c",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "a0a3a2cfd0b56932e7823ef78864984afe0f0be15524ad135d5a14b6085f7111",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/useQuickLog.ts",
+      "symbol": "useQuickLog",
+      "line": 14,
+      "git_blob": "885f0420fe04cad5bf8d6608088e521806b676c4",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "6eb13e68e818ff63e6edc53473822db1e2a9970193d9c1e6b3cac9119f4e957c",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/api/src/engagement/engagement.service.ts",
+      "symbol": "loadGraphAttachments",
+      "line": 8799,
+      "git_blob": "6eb8259f7eb77f64c6ab41d403480ac1ea3f1e82",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+      "repository": "/workspace/capirov2",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
+      "symbol": "ThreadSession",
+      "line": 56,
+      "git_blob": "bb21ef3e7d81e76c421760715d090dea45bd0b06",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "e880690e7fd6d30a4fd3ecb3860814716aa4e742e5feb724a6aee8745a029091",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mailboxes.ts",
+      "symbol": "confirmReviewedMailbox",
+      "line": 22,
+      "git_blob": "0bcacaa7f98c5c3d2138053a8884196de1987622",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "631b2e6f00b01fd8a4d5868c9989d3b80e47446e7c5db09d4e80714ecc3659c6",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "symbol": "useMailRewrite",
+      "line": 25,
+      "git_blob": "dad54a296ea9b8471a4599d0a1b6de3f7ca7e5a3",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/rewrite.ts",
+      "symbol": "requestMailRewrite",
+      "line": 11,
+      "git_blob": "3ad03dc948db99dd271346bad7a1068bc7fa5700",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "820d5170b72e6ef91fefe8e0f832ba38e69f6b6aa4262ba8bcd10404eac4c4b3",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "symbol": "RichMailEditor",
+      "line": 12,
+      "git_blob": "5186370222e0e920c3a1f6836f4b700daf382ff6",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "ad04d1b4d8e3b8f7506d9cf92faf44b4f690f91a0d70d180499a4c7d14471f78",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/SignaturePreview.tsx",
+      "symbol": "SignaturePreview",
+      "line": 47,
+      "git_blob": "2f2c05585087c0759ad4614ddf60945255cc9996",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "95028a72f8c80148ea0548b5415353b3bb92ab39f969b1558d2495a1183f7645",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/PriorityTarget.tsx",
+      "symbol": "PriorityTarget",
+      "line": 4,
+      "git_blob": "605d7ccd06aa09f1f9b4407f6255a1bf72278361",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "01857ff6d6cdb9a1ef2da3b87b83847a54010a7c108c2b1489e0fa38d22c11e5",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/AddTargetDialog.tsx",
+      "symbol": "AddTargetDialog",
+      "line": 11,
+      "git_blob": "e8748aed1b7d2885187c4a8f03a8b0d8c309ae0b",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "e3fb355434932aa0029c349eaef67f32ab6ce2d23a6492210db1274259e2068a",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/api/src/clients/client-target-recommendations.service.ts",
+      "symbol": "getRecommendations",
+      "line": 44,
+      "git_blob": "08db8e423a0b4f17719bcd3c07093df607418a93",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "e30e648de0e334dd92cf40d224f21b351cbafdebe92a77438ab0b7b671a99d24",
+      "repository": "/workspace/capirov2",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/api/src/clients/client-target-recommendations.controller.ts",
+      "symbol": "ClientTargetRecommendationsController",
+      "line": 20,
+      "git_blob": "f3a615dca402fbd70fde1537045a196050961ed4",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "23c7e92816db3a3310af193d49628952d66bbd08dc2473ccca3599836b2e420c",
+      "repository": "/workspace/capirov2",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/target-contracts.ts",
+      "symbol": "targetProfileLink",
+      "line": 34,
+      "git_blob": "050a7990b77a717cd62bd3a50350fe76c92e0f64",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "dc6e2fdececc6af30a83dd028889cff3e02c15ea85d15a5e4db8935130076adf",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/committee/catalog.ts",
+      "symbol": "validateCommitteeCatalog",
+      "line": 14,
+      "git_blob": "c2f43ca5c7febb53b7270e2a9681c35ba623200b",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "d8d734ff435296e2ce1237f5868193e5bfbe4f47d129351b8d00715b8a13ac6f",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+      "symbol": "CommitteePicker",
+      "line": 8,
+      "git_blob": "6a068da9f60990b46ea245b38155fdc81b3610c7",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "138a22cc740cbe3d9a67c758922fb042090d2430f825b1db1781aaa94fb06edc",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+      "symbol": "CommitteePickerPanel",
+      "line": 18,
+      "git_blob": "78f22333b499d784d8b973fc981e43ef4847f8b0",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "d10c68525350807dc8aaeb11cc5fd5103f5f81e38749b2037257b9f1fe0dca7f",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+      "symbol": "useFollowUpCommand",
+      "line": 47,
+      "git_blob": "672f2d2f5bb8333ad004b30ce90c7dac98bbd507",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "3724646bf80b8872e365259d61d5bf4862bcfe2e50c4aa11ea374e4275117035",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts",
+      "symbol": "createActivityCommand",
+      "line": 19,
+      "git_blob": "6a0a8d99888bf8c8813f5e0698b4c08bedcd5ea0",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "6880089b9ed1a1d03a49aa7ffe072873ab2021ba515f73f1b8ffc933b5502538",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/api/src/clients/activity-commands/activity-command.input.ts",
+      "symbol": "plannerPayload",
+      "line": 91,
+      "git_blob": "2be87c7018ec4b06a1a1038b4f12f9d834d73c8f",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "d1b1c484e6a79383dbaa19a0c50422773886b5a3ab9e046921942bcf36de2db1",
+      "repository": "/workspace/capirov2",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/api/src/clients/activity-commands/activity-command.planner.ts",
+      "symbol": "ActivityCommandPlanner",
+      "line": 31,
+      "git_blob": "58235e55c1fa31604152f2d6d7f0f743d0742408",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "dedeed02b27e93bf5935d5dda4e2ead0d2935bc5f5a80db48cd53e1ae25f12b7",
+      "repository": "/workspace/capirov2",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-client-scope.ts",
+      "symbol": "taskMatchesClient",
+      "line": 7,
+      "git_blob": "239bbc27132b9aba1e25cd4e8ef8264ba2c183d7",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "34e66c1850a3a75ef30b58bfb59939fb05ad562d386294121b380d36d9f5821a",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "symbol": "changeStatus",
+      "line": 88,
+      "git_blob": "7af8fb77044cc23e548e7fe71ee094df81c31e27",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "symbol": "PlannerScreen",
+      "line": 38,
+      "git_blob": "0b1acd7bad2bb95950e3f42e43072eae6074681f",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
+      "symbol": "FollowUpStatus",
+      "line": 4,
+      "git_blob": "9696e1402377038f5c1b2ec15371683ac22ed020",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "1d52c7aebe2c152fbffcd6e5a2d787fdfd2174ec78d9cd7d97475f812fd12809",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+      "symbol": "TaskForm",
+      "line": 48,
+      "git_blob": "f167068e6188e924c120cdafc7cb6dce6e6e31d3",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "d17c8c4e548367517466f5d0fc2ce42f2ad4029e9659461f82390ca0c32c1e1a",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/LinkedTaskDetail.tsx",
+      "symbol": "LinkedTaskDetail",
+      "line": 22,
+      "git_blob": "ea75f2db8c934b18bbe71285855701ded0a9185e",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "e9a0b4b7c5b0e6ceb7b79d046d174063c540f93577239515128b385f9b268e5a",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-tasks.ts",
+      "symbol": "plannerTaskOperations",
+      "line": 33,
+      "git_blob": "caa71d328db45a40781602453507880be087500e",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "2947c9a845cce772519e8c87fbafda24b2755ff68e866e6d93a726b0db08818c",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/RecipientFields.tsx",
+      "symbol": "RecipientFields",
+      "line": 8,
+      "git_blob": "007e750aef3c6037470b987826de2e6cb52a02c8",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "a3a7dc33bd047baa10091e1d0a42cd7855e1892959e4ed9b608108a064176660",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/recipients.ts",
+      "symbol": "recipients",
+      "line": 15,
+      "git_blob": "dec977843000ffef2433de92b708a4343825782f",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "51f398374dc10a96d9a23ea0c42a1dd8b20fa49350b3de8dd64a922895c12797",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/upload.ts",
+      "symbol": "uploadParentFile",
+      "line": 43,
+      "git_blob": "4149e81e64c944fc983520950ec6ffc50484c9e9",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "38c381a94475cefb8582eb29dc40b6cfbe6d5a6f6e7efc7ad07322d0da7ae883",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
+      "symbol": "useMailAttachments",
+      "line": 28,
+      "git_blob": "ad07493fcd9209fd5f2768ce085dd45824a23dae",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "bcd252a1eace95f7f0ee780afb75cf820c0f957361bf33e7b56ac556227e91ad",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/attachments.ts",
+      "symbol": "mailFileValidation",
+      "line": 10,
+      "git_blob": "b244d8561df70fe3691df890cc6d11f3fa562dc9",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "d34ce7beb76020ba7887ed6ae3f12072f98aa91ee2403d4b5017c9a1cbf0fc1f",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/authority.ts",
+      "symbol": "guardedMailApi",
+      "line": 64,
+      "git_blob": "e5ebde3e5b4a74186977ac0b9572e60f6dae7d17",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "sha256": "4c0c7ddcf460b88df84652ab88a8983a8e4a453fd1797bd0f1331dd484d785b8",
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "inspection": "read-only source/contract inspection; no execution"
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "AGENTS.md",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e13c8fc2cf81ed5d7a7cc309e3eee25c858ac199",
+      "sha256": "3889dd45c593695fbdbb3c3935eb06b0ee48c38c17d9ba3fcce0c606e5cf4389",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "docs/IMPLEMENTATION-STANDARDS.md",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "7f680395e07d1114667a800f3f8ed77010a3eac2",
+      "sha256": "d4f10f964ee207187abacd967649a1cfc9bdd468072dc01f859268f08b719959",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "docs/ARCHITECTURE.md",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "3b2d185efba96945cb1af00471952ed7c51fcae9",
+      "sha256": "ea0a5f89a39fe2c11dcce897be1f9da7ca826590f75b40bc1f271fb642ba7967",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e2a61f24fdef5faaf12c9f099e6f88427b1eb607",
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/src/shared/capiro/queries.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "33abb6c00d2b60b083f601f11ce88a3e47b47a4d",
+      "sha256": "451a8381928451c2ab27357ccf0634e3008f313bbfa6a14cc6107ed585b95143",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/relationships.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e97534c3f9bef254b20e60c149c64dfae87691bd",
+      "sha256": "ad299c87f68dee52a5123e2cc215415de3879cc5d65a6c1f252ac1e83a6662ec",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/government.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "945dc2bc440fb661912e3327392fca89cf0bac1a",
+      "sha256": "9dda934445f94851c3b77154698e584f20c0c879c340cd70a2e172088416b193",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/committee-picker.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "d5698a4a1a277b45447240b6c50ba69a1e5b2a88",
+      "sha256": "3332a565fb0b75cfe708c11d3bc0d481e7d4d4e41aeb0e9576a8565b5f07281d",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9ef2551a7cacadde78316c2e5289f96f23296817",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/thread-mail.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9328e7af87572f9045346148c7fac3de2abb58c0",
+      "sha256": "b9cc49c891495c25eee6f3cf335216d10c3eeb21fa802f842c7afe4b73cfae3b",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "b01997ffa13b25e52a73a45cb3e53ec9528edf30",
+      "sha256": "951ebd3832e87e4acee814ef1660b758f76d83443d6b01a57a3d4b24daa43674",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/mail-rewrite.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "a7a52dc095460d499e04aa6278c5a83c4e18a2bc",
+      "sha256": "bd52995e9deefa7342dc463d5a573c157ef499a156a5145735764036e3e9e84d",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "1fcb0c0075db40bdc1079ca0309e662af084e31c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/activity-command.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "cdf0b57d8e7dde254b4fb90013152dddf9c45e47",
+      "sha256": "eb336075c93f6002112b38896cfbfe515ca36966878fc05111cffeb1651287ff",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "06ed17c9406029336c2a28e085a0c858b29af4ba",
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/test/browser/remaining-modules.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "700a39a8a0169f633abb1e0e22b3d25c96187e84",
+      "sha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/test/browser/next-modules-task-links.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "2ac4ba68b80eaa27ec663b7a194e19dc07ba359d",
+      "sha256": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    },
+    {
+      "repository": "/workspace/capiro-onboard-port-20261013",
+      "path": "apps/web/test/browser/planner-engagement.spec.ts",
+      "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "36e86379f8cee86045534a04668505728a3772d2",
+      "sha256": "c5323b8cfb64bc75dca4dad233d96cebb0895a5e299832005d8bbbf234f653cb",
+      "inspection": "Read relevant source/test assertions or recorded case metadata; no execution."
+    }
+  ],
+  "browser_reporter_bindings": {
+    "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-results.json": {
+      "sha256": "643899af29f296d7cb644543c861ee612d5dbd5147096ae11638a2c332e6f71e",
+      "bytes": 316579
+    },
+    "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-results.json": {
+      "sha256": "53060828cff7fea8e0ce92bf8b5807979b3f1cab5dd2a618df58ab13cea1c548",
+      "bytes": 330154
+    },
+    "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-results.json": {
+      "sha256": "8091a2843f3acb3e6ddda175b09ce2a300fca057afb885012aa0ec90e7168ad3",
+      "bytes": 1821581
+    },
+    "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-results.json": {
+      "sha256": "a11da549867441da4cbb655f6463eb8234fa6c13d583e88c79676dbfdaa74ecb",
+      "bytes": 314691
+    },
+    "/workspace/capiro-unified-files-corrected-20261013/modules-browser-results.json": {
+      "sha256": "4c4be4783affcdb4e78334e438f5d0d2d5b4a183acb41868b6fe61b9c44f1af1",
+      "bytes": 5339214
+    }
+  },
+  "independent_qualification_review": {
+    "path": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REPORT.md",
+    "sha256": "6c65ff1f83bf1dbdb186d5610a68f2ffff205c84b614479af778a43a0730b0f2",
+    "scope": "Existing frozen offline gates; no native rows accepted."
+  },
+  "source_fix_candidates": [
+    {
+      "id": "REL-01",
+      "severity": "P1 candidate for current-read concealment, runtime regression not yet executed",
+      "observation": "Cached query.data remains in roster/government/directory/recommendation display after same-scope current query error; controls may remain usable. No observed native/privacy/provider effect.",
+      "evidence_paths": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+          "symbol": "OrganizationRelationships",
+          "line": 31,
+          "git_blob": "4ceb260d0c4fef6748f5c455fd50d3ee4f5cc5cb",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "1207aa4f1dafd379b5063e9570241c2dccd00e59df6d6df4401881a8e9df1f57"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+          "symbol": "GovernmentRelationships",
+          "line": 14,
+          "git_blob": "aab81890f6bacd1b787b9e60b9f49ac937102ef6",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "0daa4a7c5f2b9551f81751a4168418e0a21a9c78862ce0520f0c0e499f7b9344"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/TargetRecommendations.tsx",
+          "symbol": "TargetRecommendations",
+          "line": 10,
+          "git_blob": "72db959170d0b6382603428376350d88f718814f",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "403fe493c9ffd8b70db76e934f9c2e2014586edcaf91de12a7fc457da9fdd326"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+          "symbol": "DirectoryResults",
+          "line": 16,
+          "git_blob": "3a327f5bce0868dd04f8a3328a1d8d99c290023c",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "0f052a72dd64e944fe4c01fcea5b0f05619c41ab92762fe976fe6bf87519c556"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+          "symbol": "TargetDrawer",
+          "line": 17,
+          "git_blob": "3d4a29090cc0f723120e51aa6b76c000ee43baf9",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "7c964dbda4ad7df72e058d4fb920e56ea952a28944a9c044edcfcef1f63f2d21"
+        }
+      ],
+      "next": "Meaningful success\u2192403/503 and held retry/replacement red controls before bounded feature repair."
+    },
+    {
+      "id": "REL-02",
+      "severity": "P1 candidate for receipt/display admission, runtime regression not yet executed",
+      "observation": "ContactMail does not require current success or returned id==requested thread before displaying stored message text. Native list association is direct client OR contact-email match; stored clientId inequality alone is not proof of a foreign thread. Send preflight is stricter and does not cure prior display.",
+      "evidence_paths": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+          "symbol": "ContactMail",
+          "line": 8,
+          "git_blob": "ce2ebc4bf3457bed29cbcbd2e98d553aacca7310",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "1bd961dc6d117f32c3487ffb73da80f6dd6edc6825ab3432851f63283e237fcd"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/email.ts",
+          "symbol": "useMailThread",
+          "line": 66,
+          "git_blob": "16fbb2b564e78931992b5d72a9561bc8239e7ec4",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/email.ts",
+          "symbol": "useContactThreads",
+          "line": 49,
+          "git_blob": "16fbb2b564e78931992b5d72a9561bc8239e7ec4",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+        },
+        {
+          "path": "apps/api/src/engagement/engagement.service.ts",
+          "symbol": "clientMailThreadAssociationWhere",
+          "line": 8980,
+          "git_blob": "6eb8259f7eb77f64c6ab41d403480ac1ea3f1e82",
+          "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+          "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9"
+        }
+      ],
+      "next": "Wrong-thread-ID and stale cached failure controls plus positive recipient-derived null/other-client history characterization; obtain exact detail association semantics before client-predicate changes."
+    },
+    {
+      "id": "REL-03",
+      "severity": "Known recovery limitation, contract-dependent",
+      "observation": "useSendMail uncertainty stored in mounted refs, lost on composer unmount. No durable SingleMail intent readback is exposed.",
+      "evidence_paths": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/email.ts",
+          "symbol": "useSendMail",
+          "line": 96,
+          "git_blob": "16fbb2b564e78931992b5d72a9561bc8239e7ec4",
+          "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+          "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+        },
+        {
+          "path": "apps/api/src/engagement/engagement.service.ts",
+          "symbol": "sendSingleMail",
+          "line": 9262,
+          "git_blob": "6eb8259f7eb77f64c6ab41d403480ac1ea3f1e82",
+          "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+          "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9"
+        }
+      ],
+      "next": "Offline close/reopen characterization; separate local fence from backend durable provider outcome contract."
+    }
+  ],
+  "limits": [
+    "No new tests/browser/server/build/typecheck/install or native/provider/model calls.",
+    "No source/index/branch/ledger mutation; only assigned three reviewer files written.",
+    "Read-only source inference is not observed native privacy breach or provider side effect.",
+    "Selected Figma IDs are historical selected3.1 mappings; no new live design retrieval/render comparison, accessibility pass or mismatch claim.",
+    "Contract source presence is not native activation; specific provider/semantic gaps remain per row.",
+    "All33 assigned and all337 root native acceptance rows remain open;7 exclusions and CORE018 outside337 unchanged.",
+    "Some referenced test source was inspected by title/case metadata plus relevant neighboring assertions; current final raw reporters establish execution, not service proof."
+  ],
+  "output_bindings": {
+    "rows.json": {
+      "sha256": "924423c9bab3da18ccfa43de1b861c53424da2c38eee83b4898dee43d0365913",
+      "bytes": 247714
+    },
+    "summary.md": {
+      "sha256": "332c5f08fed9f2b467c43025bcbd47e611d6df96a5c39659f12903c9fc0ddc05",
+      "bytes": 5858
+    }
+  },
+  "self_validation": {
+    "at": "2026-10-13T11:09:16.769643+00:00",
+    "unique_assigned_ids": 33,
+    "required_keys_present": true,
+    "all_states_open": true,
+    "category_count_sum": 33,
+    "physical_frontend_files_matching_frozen_git_bytes": 68,
+    "same_backend_file_additional_symbol_review": {
+      "path": "apps/api/src/engagement/engagement.service.ts",
+      "symbol": "clientMailThreadAssociationWhere",
+      "line": 8980,
+      "git_blob": "6eb8259f7eb77f64c6ab41d403480ac1ea3f1e82",
+      "source_commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9"
+    },
+    "notes": "No tests executed. JSON/schema/source/hash consistency check only."
+  }
+}

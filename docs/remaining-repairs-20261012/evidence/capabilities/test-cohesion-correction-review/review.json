@@ -1,0 +1,70 @@
+{
+  "createdAtUtc": "2026-10-12T20:16:42.200341+00:00",
+  "issue": "TCR-01",
+  "disposition": "closed for the inspected source and targeted owner replay",
+  "commit": "3195ffab57584054a714ff5bd025063fba363929",
+  "sources": [
+    {
+      "file": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "sha256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+      "workingMatchesCommit": true,
+      "sizeSignals": []
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "workingMatchesCommit": true,
+      "sizeSignals": [
+        {
+          "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 469,
+          "fingerprint": "062206c3277a4a8e3cde4ddef011c7bca486457f523ff3c5fbfccfdbc8b68b29"
+        },
+        {
+          "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+          "kind": "function",
+          "symbol": "setup",
+          "line": 17,
+          "nonblank": 81,
+          "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125"
+        }
+      ]
+    }
+  ],
+  "reason": "The exact held preflight request is captured before confirmation. The same original actor/meeting/client attempt must be pending before actor replacement. After releasing the route, the test waits for that exact request to finish or explicitly report ERR_ABORTED, then waits for the same original attempt to become refused. Only then does it perform the retained dialog-absence and zero-write assertions. It cannot pass by observing the replacement actor's idle attempt or merely missing data. The getter reuses canonical sharingAttemptKey only to observe real query state; it does not mock the guard or terminal result.",
+  "cohesion": "The 47 added nonblank spec lines strengthen a single existing asynchronous negative. All prior assertions remain; no new domain, framework, arbitrary sleep or production behavior is introduced. Calendar sharing file469 remains one sharing/feed acceptance owner; unchanged setup81 retains its exact fingerprint. Harness54 has no size trigger.",
+  "verification": {
+    "independent": "Read-only exact commit/source diff and source-only AST scan; no independent browser execution.",
+    "ownerResult": {
+      "stats": {
+        "startTime": "2026-10-12T20:14:47.528Z",
+        "duration": 2949.439,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "name": "",
+          "retries": 0
+        }
+      ]
+    },
+    "observedCompletion": {
+      "url": "http://127.0.0.1:5191/api/backend/core/engagement/meetings/91000000-0000-4000-8000-000000000001",
+      "network": "aborted",
+      "originalAttempt": "refused",
+      "writes": []
+    }
+  },
+  "remainingLimits": [
+    "Identity is deliberately replaced in the Portfolio cache under DataProvider; this proves local lifetime/guard behavior, not full Clerk/ApplicationBoundary replacement.",
+    "Root owns integration and final combined qualification. Prior 422-line signal report remains immutable historical evidence; use the 469-line fingerprint from this correction."
+  ],
+  "remainingIssues": []
+}

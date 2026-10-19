@@ -1,0 +1,2769 @@
+{
+  "source": "PR11 overlay copied byte-for-byte as PORTFOLIO-337-REMAINING-ASSESSMENT.json; d5dd bounded repairs separately copied in D5DD-FINDING-DISPOSITIONS.json",
+  "assignedRows": 345,
+  "inScope": 337,
+  "excluded": 8,
+  "statusWrites": 0,
+  "rows": [
+    {
+      "auditId": "CORE-001",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/0"
+    },
+    {
+      "auditId": "CORE-002",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/1"
+    },
+    {
+      "auditId": "CORE-003",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/2"
+    },
+    {
+      "auditId": "CORE-004",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/3"
+    },
+    {
+      "auditId": "CORE-005",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/4"
+    },
+    {
+      "auditId": "CORE-006",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/5"
+    },
+    {
+      "auditId": "CORE-007",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/6"
+    },
+    {
+      "auditId": "CORE-008",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/7"
+    },
+    {
+      "auditId": "CORE-009",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/8"
+    },
+    {
+      "auditId": "CORE-010",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/9"
+    },
+    {
+      "auditId": "CORE-011",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/10"
+    },
+    {
+      "auditId": "CORE-012",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/11"
+    },
+    {
+      "auditId": "CORE-013",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/12"
+    },
+    {
+      "auditId": "CORE-014",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/13"
+    },
+    {
+      "auditId": "CORE-015",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/14"
+    },
+    {
+      "auditId": "CORE-016",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/15"
+    },
+    {
+      "auditId": "CORE-017",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/16"
+    },
+    {
+      "auditId": "CORE-018",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/17"
+    },
+    {
+      "auditId": "CORE-019",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/18"
+    },
+    {
+      "auditId": "CORE-020",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/19"
+    },
+    {
+      "auditId": "CORE-021",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/20"
+    },
+    {
+      "auditId": "CORE-022",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/21"
+    },
+    {
+      "auditId": "CORE-023",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/22"
+    },
+    {
+      "auditId": "CORE-024",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/23"
+    },
+    {
+      "auditId": "CORE-025",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/24"
+    },
+    {
+      "auditId": "CORE-026",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/25"
+    },
+    {
+      "auditId": "CORE-027",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/26"
+    },
+    {
+      "auditId": "CORE-028",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/27"
+    },
+    {
+      "auditId": "CORE-029",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/28"
+    },
+    {
+      "auditId": "CORE-030",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/29"
+    },
+    {
+      "auditId": "CORE-031",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/30"
+    },
+    {
+      "auditId": "CORE-032",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/31"
+    },
+    {
+      "auditId": "CORE-074",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/32"
+    },
+    {
+      "auditId": "CORE-075",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/33"
+    },
+    {
+      "auditId": "CORE-076",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/34"
+    },
+    {
+      "auditId": "CORE-077",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_CONTRACT_MISMATCH_REFER_TO_MS01",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/35"
+    },
+    {
+      "auditId": "CORE-078",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_HOSTED_FLOW_NATIVE_UNASSESSED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/36"
+    },
+    {
+      "auditId": "CORE-079",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/37"
+    },
+    {
+      "auditId": "CORE-080",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/38"
+    },
+    {
+      "auditId": "CORE-081",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/39"
+    },
+    {
+      "auditId": "CORE-082",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/40"
+    },
+    {
+      "auditId": "CORE-083",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/41"
+    },
+    {
+      "auditId": "CORE-084",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/42"
+    },
+    {
+      "auditId": "CORE-085",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/43"
+    },
+    {
+      "auditId": "CORE-086",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/44"
+    },
+    {
+      "auditId": "CORE-087",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/45"
+    },
+    {
+      "auditId": "CORE-088",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/46"
+    },
+    {
+      "auditId": "CORE-089",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/47"
+    },
+    {
+      "auditId": "CORE-090",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/48"
+    },
+    {
+      "auditId": "CORE-097",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/49"
+    },
+    {
+      "auditId": "CORE-098",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/50"
+    },
+    {
+      "auditId": "CORE-099",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/51"
+    },
+    {
+      "auditId": "CORE-121",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/52"
+    },
+    {
+      "auditId": "CORE-122",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/53"
+    },
+    {
+      "auditId": "CORE-123",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/54"
+    },
+    {
+      "auditId": "CORE-124",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/55"
+    },
+    {
+      "auditId": "CORE-125",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/56"
+    },
+    {
+      "auditId": "CORE-126",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/57"
+    },
+    {
+      "auditId": "CORE-127",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/58"
+    },
+    {
+      "auditId": "CORE-033",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/59"
+    },
+    {
+      "auditId": "CORE-034",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/60"
+    },
+    {
+      "auditId": "CORE-035",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/61"
+    },
+    {
+      "auditId": "CORE-036",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/62"
+    },
+    {
+      "auditId": "CORE-037",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/63"
+    },
+    {
+      "auditId": "CORE-038",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/64"
+    },
+    {
+      "auditId": "CORE-039",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/65"
+    },
+    {
+      "auditId": "CORE-040",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/66"
+    },
+    {
+      "auditId": "CORE-041",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/67"
+    },
+    {
+      "auditId": "CORE-042",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/68"
+    },
+    {
+      "auditId": "CORE-043",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/69"
+    },
+    {
+      "auditId": "CORE-044",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/70"
+    },
+    {
+      "auditId": "CORE-045",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/71"
+    },
+    {
+      "auditId": "CORE-046",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/72"
+    },
+    {
+      "auditId": "CORE-047",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/73"
+    },
+    {
+      "auditId": "CORE-048",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/74"
+    },
+    {
+      "auditId": "CORE-049",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/75"
+    },
+    {
+      "auditId": "CORE-050",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/76"
+    },
+    {
+      "auditId": "CORE-051",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/77"
+    },
+    {
+      "auditId": "CORE-052",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/78"
+    },
+    {
+      "auditId": "CORE-053",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/79"
+    },
+    {
+      "auditId": "CORE-054",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/80"
+    },
+    {
+      "auditId": "CORE-055",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/81"
+    },
+    {
+      "auditId": "CORE-056",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_DEFECT_AND_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/82"
+    },
+    {
+      "auditId": "CORE-057",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/83"
+    },
+    {
+      "auditId": "CORE-058",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/84"
+    },
+    {
+      "auditId": "CORE-059",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTATION_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/85"
+    },
+    {
+      "auditId": "CORE-060",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/86"
+    },
+    {
+      "auditId": "CORE-061",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/87"
+    },
+    {
+      "auditId": "CORE-062",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/88"
+    },
+    {
+      "auditId": "CORE-063",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_DEFECT_AND_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/89"
+    },
+    {
+      "auditId": "CORE-064",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/90"
+    },
+    {
+      "auditId": "CORE-065",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/91"
+    },
+    {
+      "auditId": "CORE-066",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/92"
+    },
+    {
+      "auditId": "CORE-067",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/93"
+    },
+    {
+      "auditId": "CORE-068",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/94"
+    },
+    {
+      "auditId": "CORE-069",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/95"
+    },
+    {
+      "auditId": "CORE-070",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/96"
+    },
+    {
+      "auditId": "CORE-071",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/97"
+    },
+    {
+      "auditId": "CORE-072",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/98"
+    },
+    {
+      "auditId": "CORE-103",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/99"
+    },
+    {
+      "auditId": "CORE-104",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/100"
+    },
+    {
+      "auditId": "CORE-105",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/101"
+    },
+    {
+      "auditId": "CORE-106",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/102"
+    },
+    {
+      "auditId": "CORE-107",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/103"
+    },
+    {
+      "auditId": "CORE-108",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/104"
+    },
+    {
+      "auditId": "CORE-109",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/105"
+    },
+    {
+      "auditId": "CORE-110",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/106"
+    },
+    {
+      "auditId": "CORE-111",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTATION_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/107"
+    },
+    {
+      "auditId": "CORE-112",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/108"
+    },
+    {
+      "auditId": "CORE-113",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/109"
+    },
+    {
+      "auditId": "CORE-114",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/110"
+    },
+    {
+      "auditId": "CORE-115",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/111"
+    },
+    {
+      "auditId": "CORE-116",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/112"
+    },
+    {
+      "auditId": "CORE-117",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/113"
+    },
+    {
+      "auditId": "CORE-118",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/114"
+    },
+    {
+      "auditId": "CORE-119",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/115"
+    },
+    {
+      "auditId": "CORE-120",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/116"
+    },
+    {
+      "auditId": "CORE-128",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_NATIVE_OPEN",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/117"
+    },
+    {
+      "auditId": "CORE-091",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/118"
+    },
+    {
+      "auditId": "CORE-092",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/119"
+    },
+    {
+      "auditId": "CORE-093",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/120"
+    },
+    {
+      "auditId": "CORE-094",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/121"
+    },
+    {
+      "auditId": "CORE-095",
+      "scope": "IN_SCOPE",
+      "classification": "UNAVAILABLE_CONTRACT_FACET",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/122"
+    },
+    {
+      "auditId": "CORE-096",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/123"
+    },
+    {
+      "auditId": "CORE-100",
+      "scope": "IN_SCOPE",
+      "classification": "UNAVAILABLE_CONTRACT_FACET",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/124"
+    },
+    {
+      "auditId": "CORE-101",
+      "scope": "IN_SCOPE",
+      "classification": "UNAVAILABLE_CONTRACT_FACET",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/125"
+    },
+    {
+      "auditId": "CORE-102",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/126"
+    },
+    {
+      "auditId": "CORE-129",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/127"
+    },
+    {
+      "auditId": "ENG-calendar_list",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/128"
+    },
+    {
+      "auditId": "ENG-meeting_details",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/129"
+    },
+    {
+      "auditId": "ENG-meeting_library",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/130"
+    },
+    {
+      "auditId": "ENG-meeting_shared_feed",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/131"
+    },
+    {
+      "auditId": "ENG-meeting_assign",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/132"
+    },
+    {
+      "auditId": "ENG-meeting_edit",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/133"
+    },
+    {
+      "auditId": "ENG-meeting_share_legacy",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/134"
+    },
+    {
+      "auditId": "ENG-meeting_unshare_legacy",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/135"
+    },
+    {
+      "auditId": "ENG-meeting_share_artifacts",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/136"
+    },
+    {
+      "auditId": "ENG-meeting_unshare_artifacts",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/137"
+    },
+    {
+      "auditId": "ENG-notes_list",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/138"
+    },
+    {
+      "auditId": "ENG-notes_add",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/139"
+    },
+    {
+      "auditId": "ENG-notes_edit",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/140"
+    },
+    {
+      "auditId": "ENG-notes_approve",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/141"
+    },
+    {
+      "auditId": "ENG-debrief_list",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/142"
+    },
+    {
+      "auditId": "ENG-debrief_draft",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/143"
+    },
+    {
+      "auditId": "ENG-debrief_create",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/144"
+    },
+    {
+      "auditId": "ENG-debrief_edit",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/145"
+    },
+    {
+      "auditId": "ENG-debrief_approve",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/146"
+    },
+    {
+      "auditId": "ENG-attachment_approve",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/147"
+    },
+    {
+      "auditId": "ENG-prep_generate",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/148"
+    },
+    {
+      "auditId": "ENG-prep_progress",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/149"
+    },
+    {
+      "auditId": "ENG-prep_cancel",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/150"
+    },
+    {
+      "auditId": "ENG-prep_refine",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/151"
+    },
+    {
+      "auditId": "ENG-prep_monday_read",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/152"
+    },
+    {
+      "auditId": "ENG-prep_monday_save",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/153"
+    },
+    {
+      "auditId": "ENG-meri_session",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/154"
+    },
+    {
+      "auditId": "ENG-meri_dispatch",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/155"
+    },
+    {
+      "auditId": "ENG-meri_remove",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/156"
+    },
+    {
+      "auditId": "ENG-upload_prepare",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/157"
+    },
+    {
+      "auditId": "ENG-upload_confirm",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/158"
+    },
+    {
+      "auditId": "ENG-upload_extract",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/159"
+    },
+    {
+      "auditId": "ENG-meeting_create",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/160"
+    },
+    {
+      "auditId": "ENG-prep_pdf_attachment",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/161"
+    },
+    {
+      "auditId": "ENG-prep_export",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/162"
+    },
+    {
+      "auditId": "ENG-debrief_export",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/163"
+    },
+    {
+      "auditId": "ENG-calendar_navigation",
+      "scope": "IN_SCOPE",
+      "classification": "REQUIREMENT_RECONCILIATION",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/164"
+    },
+    {
+      "auditId": "ENG-calendar_sync_ms_window",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/165"
+    },
+    {
+      "auditId": "ENG-calendar_sync_ms",
+      "scope": "IN_SCOPE",
+      "classification": "REQUIREMENT_RECONCILIATION",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/166"
+    },
+    {
+      "auditId": "ENG-calendar_sync_google",
+      "scope": "IN_SCOPE",
+      "classification": "REQUIREMENT_RECONCILIATION",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/167"
+    },
+    {
+      "auditId": "ENG-org_read",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/168"
+    },
+    {
+      "auditId": "ENG-org_create",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/169"
+    },
+    {
+      "auditId": "ENG-org_edit",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/170"
+    },
+    {
+      "auditId": "ENG-org_hierarchy",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/171"
+    },
+    {
+      "auditId": "ENG-org_delete",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/172"
+    },
+    {
+      "auditId": "ENG-org_drawer",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/173"
+    },
+    {
+      "auditId": "ENG-org_log_note",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/174"
+    },
+    {
+      "auditId": "ENG-email_history",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/175"
+    },
+    {
+      "auditId": "ENG-email_thread",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/176"
+    },
+    {
+      "auditId": "ENG-email_send",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/177"
+    },
+    {
+      "auditId": "ENG-email_rewrite",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/178"
+    },
+    {
+      "auditId": "ENG-email_signature",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/179"
+    },
+    {
+      "auditId": "ENG-targets_read",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/180"
+    },
+    {
+      "auditId": "ENG-targets_add",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/181"
+    },
+    {
+      "auditId": "ENG-target_recommendations",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/182"
+    },
+    {
+      "auditId": "ENG-target_recommendations_refresh",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/183"
+    },
+    {
+      "auditId": "ENG-targets_member_search",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/184"
+    },
+    {
+      "auditId": "ENG-targets_staff_search",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/185"
+    },
+    {
+      "auditId": "ENG-target_profile_navigation",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/186"
+    },
+    {
+      "auditId": "ENG-targets_state_search",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/187"
+    },
+    {
+      "auditId": "ENG-target_committee_source",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/188"
+    },
+    {
+      "auditId": "ENG-target_committee_staff",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/189"
+    },
+    {
+      "auditId": "ENG-tasks_create",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/190"
+    },
+    {
+      "auditId": "ENG-tasks_list",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/191"
+    },
+    {
+      "auditId": "ENG-tasks_update",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/192"
+    },
+    {
+      "auditId": "ENG-calendar_week",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/193"
+    },
+    {
+      "auditId": "ENG-org_chart_search",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/194"
+    },
+    {
+      "auditId": "ENG-org_chart_viewport",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/195"
+    },
+    {
+      "auditId": "ENG-org_chart_review",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/196"
+    },
+    {
+      "auditId": "ENG-contact_discard",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/197"
+    },
+    {
+      "auditId": "ENG-email_contact_picker",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/198"
+    },
+    {
+      "auditId": "ENG-email_attachment_prepare",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/199"
+    },
+    {
+      "auditId": "ENG-email_attachment_confirm",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/200"
+    },
+    {
+      "auditId": "ENG-email_failure_retention",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/201"
+    },
+    {
+      "auditId": "ENG-prep_sender_select",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/202"
+    },
+    {
+      "auditId": "ENG-meeting_attendees",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/203"
+    },
+    {
+      "auditId": "ENG-meeting_join",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/204"
+    },
+    {
+      "auditId": "ENG-meeting_filters",
+      "scope": "IN_SCOPE",
+      "classification": "FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/205"
+    },
+    {
+      "auditId": "ENG-meeting_capabilities",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/206"
+    },
+    {
+      "auditId": "ENG-prep_sources",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/207"
+    },
+    {
+      "auditId": "ENG-debrief_voice",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/208"
+    },
+    {
+      "auditId": "ENG-debrief_source_manual",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/209"
+    },
+    {
+      "auditId": "ENG-debrief_source_notes",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/210"
+    },
+    {
+      "auditId": "ENG-legacy_engagement_waves",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/211"
+    },
+    {
+      "auditId": "ENG-legacy_dc_windows",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/212"
+    },
+    {
+      "auditId": "ENG-legacy_plan_visit",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/213"
+    },
+    {
+      "auditId": "ENG-public_event_detail",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/214"
+    },
+    {
+      "auditId": "ENG-public_event_follow_state",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/215"
+    },
+    {
+      "auditId": "ENG-public_event_capture_state",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/216"
+    },
+    {
+      "auditId": "ENG-public_event_open",
+      "scope": "IN_SCOPE",
+      "classification": "SUPPORTED_BOUNDED_FRONTEND",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/217"
+    },
+    {
+      "auditId": "OBJ-01",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_DESIGN_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/218"
+    },
+    {
+      "auditId": "OBJ-02",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/219"
+    },
+    {
+      "auditId": "OBJ-03",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/220"
+    },
+    {
+      "auditId": "OBJ-04",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/221"
+    },
+    {
+      "auditId": "OBJ-05",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_DESIGN_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/222"
+    },
+    {
+      "auditId": "OBJ-06",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/223"
+    },
+    {
+      "auditId": "OBJ-07",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_DURABILITY_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/224"
+    },
+    {
+      "auditId": "OBJ-08",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_DURABILITY_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/225"
+    },
+    {
+      "auditId": "OBJ-09",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_DURABILITY_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/226"
+    },
+    {
+      "auditId": "OBJ-10",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_DURABILITY_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/227"
+    },
+    {
+      "auditId": "OBJ-11",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/228"
+    },
+    {
+      "auditId": "OBJ-12",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/229"
+    },
+    {
+      "auditId": "WORK-01",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/230"
+    },
+    {
+      "auditId": "WORK-02",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/231"
+    },
+    {
+      "auditId": "WORK-03",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_FRONTEND_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/232"
+    },
+    {
+      "auditId": "WORK-04",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/233"
+    },
+    {
+      "auditId": "WORK-05",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/234"
+    },
+    {
+      "auditId": "WORK-06",
+      "scope": "IN_SCOPE",
+      "classification": "NATIVE_FEATURE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/235"
+    },
+    {
+      "auditId": "WORK-08",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_FRONTEND_DEFECT_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/236"
+    },
+    {
+      "auditId": "WORK-09",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/237"
+    },
+    {
+      "auditId": "CAP-01",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_FRONTEND_VISUAL_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/238"
+    },
+    {
+      "auditId": "CAP-02",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/239"
+    },
+    {
+      "auditId": "CAP-03",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/240"
+    },
+    {
+      "auditId": "CAP-04",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/241"
+    },
+    {
+      "auditId": "CAP-05",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/242"
+    },
+    {
+      "auditId": "CAP-06",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/243"
+    },
+    {
+      "auditId": "CAP-07",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/244"
+    },
+    {
+      "auditId": "CAP-08",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_FRONTEND_VISUAL_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/245"
+    },
+    {
+      "auditId": "CAP-09",
+      "scope": "IN_SCOPE",
+      "classification": "NATIVE_CONCURRENCY_AND_POLICY_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/246"
+    },
+    {
+      "auditId": "CAP-10",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/247"
+    },
+    {
+      "auditId": "CAP-11",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/248"
+    },
+    {
+      "auditId": "CAP-12",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/249"
+    },
+    {
+      "auditId": "OPP-01",
+      "scope": "IN_SCOPE",
+      "classification": "DESIGN_AUDIT_RECONCILIATION_AND_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/250"
+    },
+    {
+      "auditId": "OPP-02",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/251"
+    },
+    {
+      "auditId": "OPP-03",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/252"
+    },
+    {
+      "auditId": "OPP-04",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/253"
+    },
+    {
+      "auditId": "OPP-05",
+      "scope": "IN_SCOPE",
+      "classification": "NATIVE_DESTINATION_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/254"
+    },
+    {
+      "auditId": "OPP-06",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/255"
+    },
+    {
+      "auditId": "OPP-07",
+      "scope": "IN_SCOPE",
+      "classification": "NATIVE_DESTINATION_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/256"
+    },
+    {
+      "auditId": "OBJ-13",
+      "scope": "IN_SCOPE",
+      "classification": "PRODUCT_AND_MERI_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/257"
+    },
+    {
+      "auditId": "OBJ-14",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/258"
+    },
+    {
+      "auditId": "OBJ-15",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/259"
+    },
+    {
+      "auditId": "OBJ-16",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/260"
+    },
+    {
+      "auditId": "OBJ-17",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_DESIGN_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/261"
+    },
+    {
+      "auditId": "OBJ-18",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/262"
+    },
+    {
+      "auditId": "OBJ-19",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/263"
+    },
+    {
+      "auditId": "OBJ-20",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/264"
+    },
+    {
+      "auditId": "BILL-01",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/265"
+    },
+    {
+      "auditId": "BILL-02",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/266"
+    },
+    {
+      "auditId": "BILL-03",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/267"
+    },
+    {
+      "auditId": "BILL-04",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_FIGMA_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/268"
+    },
+    {
+      "auditId": "BILL-05",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/269"
+    },
+    {
+      "auditId": "BILL-06",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/270"
+    },
+    {
+      "auditId": "BILL-07",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/271"
+    },
+    {
+      "auditId": "BILL-08",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/272"
+    },
+    {
+      "auditId": "BILL-09",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_AND_NATIVE_DESTINATION_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/273"
+    },
+    {
+      "auditId": "OBJ-21",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/274"
+    },
+    {
+      "auditId": "OBJ-22",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_AND_PRODUCT_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/275"
+    },
+    {
+      "auditId": "OBJ-23",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/276"
+    },
+    {
+      "auditId": "OBJ-24",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/277"
+    },
+    {
+      "auditId": "OBJ-25",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/278"
+    },
+    {
+      "auditId": "OBJ-26",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/279"
+    },
+    {
+      "auditId": "OBJ-27",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/280"
+    },
+    {
+      "auditId": "CAP-13",
+      "scope": "IN_SCOPE",
+      "classification": "SOURCE_REVIEW_NATIVE_PENDING",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/281"
+    },
+    {
+      "auditId": "CAP-14",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "nativeStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/282"
+    },
+    {
+      "auditId": "BILL-11",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/283"
+    },
+    {
+      "auditId": "BILL-12",
+      "scope": "IN_SCOPE",
+      "classification": "NATIVE_PROVIDER_AND_CONCURRENCY_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/284"
+    },
+    {
+      "auditId": "BILL-13",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_SEMANTICS_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/285"
+    },
+    {
+      "auditId": "BILL-14",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_SEMANTICS_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/286"
+    },
+    {
+      "auditId": "OBJ-28",
+      "scope": "IN_SCOPE",
+      "classification": "PRODUCT_AND_MERI_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/287"
+    },
+    {
+      "auditId": "OBJ-29",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_AND_MERI_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/288"
+    },
+    {
+      "auditId": "OBJ-30",
+      "scope": "IN_SCOPE",
+      "classification": "PRODUCT_DECISION_AND_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/289"
+    },
+    {
+      "auditId": "OBJ-31",
+      "scope": "IN_SCOPE",
+      "classification": "BACKEND_CONTRACT_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/290"
+    },
+    {
+      "auditId": "PROS-001",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/291"
+    },
+    {
+      "auditId": "PROS-002",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_DEFECT",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/292"
+    },
+    {
+      "auditId": "PROS-003",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/293"
+    },
+    {
+      "auditId": "PROS-004",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/294"
+    },
+    {
+      "auditId": "PROS-005",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/295"
+    },
+    {
+      "auditId": "PROS-006",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/296"
+    },
+    {
+      "auditId": "PROS-007",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/297"
+    },
+    {
+      "auditId": "PROS-008",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/298"
+    },
+    {
+      "auditId": "PROS-009",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/299"
+    },
+    {
+      "auditId": "PROS-010",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/300"
+    },
+    {
+      "auditId": "PROS-011",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED_CAPABILITY_GATED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/301"
+    },
+    {
+      "auditId": "PROS-012",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/302"
+    },
+    {
+      "auditId": "PROS-013",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/303"
+    },
+    {
+      "auditId": "PROS-014",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/304"
+    },
+    {
+      "auditId": "PROS-015",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/305"
+    },
+    {
+      "auditId": "PROS-016",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/306"
+    },
+    {
+      "auditId": "PROS-017",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/307"
+    },
+    {
+      "auditId": "PROS-018",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/308"
+    },
+    {
+      "auditId": "PROS-019",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_PRODUCT_GAP_WITH_IMPLEMENTED_FACETS",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/309"
+    },
+    {
+      "auditId": "PROS-020",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/310"
+    },
+    {
+      "auditId": "PROS-021",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED_WITH_VISUAL_DIFFERENCE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/311"
+    },
+    {
+      "auditId": "PROS-022",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/312"
+    },
+    {
+      "auditId": "PROS-023",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/313"
+    },
+    {
+      "auditId": "PROS-024",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_DEFECT_AND_RICH_EDITOR_GAP",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/314"
+    },
+    {
+      "auditId": "PROS-025",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/315"
+    },
+    {
+      "auditId": "PROS-026",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/316"
+    },
+    {
+      "auditId": "PROS-027",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/317"
+    },
+    {
+      "auditId": "PROS-028",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/318"
+    },
+    {
+      "auditId": "PROS-029",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/319"
+    },
+    {
+      "auditId": "PROS-030",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/320"
+    },
+    {
+      "auditId": "PROS-031",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/321"
+    },
+    {
+      "auditId": "PROS-032",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/322"
+    },
+    {
+      "auditId": "PROS-033",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_DISABLED_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/323"
+    },
+    {
+      "auditId": "PROS-034",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_ORIGIN_RETENTION_NOT_CARRY_OVER",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/324"
+    },
+    {
+      "auditId": "PROS-035",
+      "scope": "IN_SCOPE",
+      "classification": "DEPENDENCY_UNAVAILABLE",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/325"
+    },
+    {
+      "auditId": "PROS-036",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_LINK_NAVIGATION_NATIVE_ENTITLEMENT_UNASSESSED",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/326"
+    },
+    {
+      "auditId": "PROS-037",
+      "scope": "IN_SCOPE",
+      "classification": "PARTIAL_IMPLEMENTED_WITH_VISUAL_GAPS",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/327"
+    },
+    {
+      "auditId": "PROS-038",
+      "scope": "IN_SCOPE",
+      "classification": "REUSED_SCOPED_SHELL_PARTIAL",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/328"
+    },
+    {
+      "auditId": "PROS-039",
+      "scope": "IN_SCOPE",
+      "classification": "PRODUCT_DEFINITION_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/329"
+    },
+    {
+      "auditId": "PROS-040",
+      "scope": "IN_SCOPE",
+      "classification": "PRODUCT_DEFINITION_DEPENDENCY",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/330"
+    },
+    {
+      "auditId": "MCAL-001",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/331"
+    },
+    {
+      "auditId": "MCAL-002",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/332"
+    },
+    {
+      "auditId": "MCAL-003",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/333"
+    },
+    {
+      "auditId": "MCAL-004",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/334"
+    },
+    {
+      "auditId": "MCAL-005",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/335"
+    },
+    {
+      "auditId": "MCAL-006",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/336"
+    },
+    {
+      "auditId": "MCAL-007",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SHARED_MUTATION_RECEIPT_GAP",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/337"
+    },
+    {
+      "auditId": "MCAL-008",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/338"
+    },
+    {
+      "auditId": "MCAL-009",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/339"
+    },
+    {
+      "auditId": "MCAL-010",
+      "scope": "IN_SCOPE",
+      "classification": "partial-source-coverage",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/340"
+    },
+    {
+      "auditId": "MCAL-012",
+      "scope": "IN_SCOPE",
+      "classification": "partial-with-contract-dependency",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/341"
+    },
+    {
+      "auditId": "MCAL-013",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/342"
+    },
+    {
+      "auditId": "MCAL-014",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/343"
+    },
+    {
+      "auditId": "MCAL-015",
+      "scope": "IN_SCOPE",
+      "classification": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "nativeStatus": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "originalAssessmentReference": "PORTFOLIO-337-REMAINING-ASSESSMENT.json#/rows/344"
+    }
+  ]
+}

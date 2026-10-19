@@ -1,0 +1,62 @@
+{
+  "commit": "57ad7722d72f9cd609df4908381e4b284b634081",
+  "parent": "c9647ce40adf401cdbe8fb499b915612a8ffad16",
+  "tree": "a7e55c48dd648c0a88cc81934fbbd4ddc5e82d0d",
+  "files": {
+    "apps/web/src/features/portfolio/relationships/MailCompose.tsx": "7e31e5655e2d9a2340aa2c0bf041f9d4cf8ed13b5b6f0dfbc2dde60154437ae7",
+    "apps/web/tests/browser/mail-local-draft.spec.ts": "e0225fbaed91849f066ec68bc09110c80a966685935c98a3b7769a18fe868024"
+  },
+  "before": {
+    "startTime": "2026-10-12T18:11:27.433Z",
+    "duration": 27024.254,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "after": {
+    "startTime": "2026-10-12T18:13:15.417Z",
+    "duration": 164534.886,
+    "expected": 65,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": {
+    "typecheck": 0,
+    "eslint": 0,
+    "prettier": 0,
+    "diff": 0,
+    "architectureBoundaryErrors": 0,
+    "architectureReviewSignals": 2
+  },
+  "unchangedRegressionSpec": true,
+  "supplementalVisual": {
+    "startTime": "2026-10-12T18:16:06.426Z",
+    "duration": 4883.808,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cleanup": {
+    "pid": 641118,
+    "ownedCmdline": "node apps/web/tests/browser/server.mjs ",
+    "ownedParentPid": 641115,
+    "ownedParentCmdline": "/bin/bash -lc node apps/web/tests/browser/server.mjs > /tmp/capiro-next-mail-evidence/signature-current/server.log 2>&1 ",
+    "execSession": 81156,
+    "signal": "SIGTERM",
+    "pidAbsent": true,
+    "port5191ConnectEx": 111,
+    "borrowedLinkRemoved": true
+  },
+  "evidence": {
+    "before-source.json": "5d24717ff08c303f7a4641acd5199e90b3068483d0ced4c420bf90adff6f84c8",
+    "before-results.json": "b06fe7e25ec5c15490cc7569b7e8e30fcf22791214795c361a234f45897e57a3",
+    "after-results.json": "750ca5e621ce2c1510b531dbe943221c04fe69e330996b1ea143c2c38917ceea",
+    "visual-results.json": "cac559332da1db11d7f400889a80c813bd5a7fed61f49847b089fda1f6887f1e",
+    "unavailable-review.png": "f766b46c4f155088418b2fe62de97c3b6d66ab1bcc44833f1269645332351d65",
+    "structure-review-proposal.json": "f15c7acc27be59a49e966b71b80077f800381b14a4d6fd1668b2f25a17da9511",
+    "REPORT.md": "e1b2ba90d7d66deb06f92812a8f9cd51103945d3e2db44ead14769904cbcc642"
+  }
+}

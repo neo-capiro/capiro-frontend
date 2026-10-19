@@ -1,0 +1,311 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-modules/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-modules-evidence/playwright.config.mjs",
+      "--grep",
+      "regression:"
+    ],
+    "configFile": "/tmp/capiro-remaining-modules-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-modules/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-modules-evidence/browser-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-modules/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "/remaining-modules.spec.ts/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-modules-evidence/browser-red.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "remaining-modules.spec.ts",
+      "file": "remaining-modules.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "MS08 regression: All tasks defaults to named client groups and current-page counts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6144,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Current Aerospace tasks', exact: true })\nExpected substring: \u001b[32m\"2 shown · 2 open\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Current Aerospace tasks', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Current Aerospace tasks', exact: true })\nExpected substring: \u001b[32m\"2 shown · 2 open\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Current Aerospace tasks', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:72:23",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                      "column": 23,
+                      "line": 72
+                    },
+                    "snippet": "  70 |     exact: true,\n  71 |   });\n> 72 |   await expect(alpha).toContainText(\"2 shown · 2 open\");\n     |                       ^\n  73 |   await expect(alpha).toContainText(\"Direct client work\");\n  74 |   await expect(alpha).toContainText(\"Project client work\");\n  75 |   await expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                        "column": 23,
+                        "line": 72
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Current Aerospace tasks', exact: true })\nExpected substring: \u001b[32m\"2 shown · 2 open\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Current Aerospace tasks', exact: true })\u001b[22m\n\n\n  70 |     exact: true,\n  71 |   });\n> 72 |   await expect(alpha).toContainText(\"2 shown · 2 open\");\n     |                       ^\n  73 |   await expect(alpha).toContainText(\"Direct client work\");\n  74 |   await expect(alpha).toContainText(\"Project client work\");\n  75 |   await expect(\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:72:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:31.157Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                    "column": 23,
+                    "line": 72
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23bf3c282ea554de4104-5ec7a3ef86021115e814",
+          "file": "remaining-modules.spec.ts",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "title": "MS07 regression: Workspace filters share a compact desktop row and wrap on phones",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1650,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m8\u001b[39m\nReceived:   \u001b[31m150.59375\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m8\u001b[39m\nReceived:   \u001b[31m150.59375\u001b[39m\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:337:5",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                      "column": 5,
+                      "line": 337
+                    },
+                    "snippet": "  335 |     Math.max(...boxes.map((box) => box!.y)) -\n  336 |       Math.min(...boxes.map((box) => box!.y)),\n> 337 |   ).toBeLessThan(8);\n      |     ^\n  338 |   expect(boxes.slice(1).every((box) => box!.width <= 190)).toBe(true);\n  339 |   await choose(page, \"Filter documents by client\", client.name);\n  340 |   await expect(page.getByRole(\"table\")).toContainText(row.name);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                        "column": 5,
+                        "line": 337
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m8\u001b[39m\nReceived:   \u001b[31m150.59375\u001b[39m\n\n  335 |     Math.max(...boxes.map((box) => box!.y)) -\n  336 |       Math.min(...boxes.map((box) => box!.y)),\n> 337 |   ).toBeLessThan(8);\n      |     ^\n  338 |   expect(boxes.slice(1).every((box) => box!.width <= 190)).toBe(true);\n  339 |   await choose(page, \"Filter documents by client\", client.name);\n  340 |   await expect(page.getByRole(\"table\")).toContainText(row.name);\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:337:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:38.069Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                    "column": 5,
+                    "line": 337
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23bf3c282ea554de4104-16d170a869e43df91281",
+          "file": "remaining-modules.spec.ts",
+          "line": 306,
+          "column": 1
+        },
+        {
+          "title": "MS09 regression: public form uses bounded card hierarchy and keeps input on styled error",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5933,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { name: 'Request a briefing', exact: true })\nExpected: \u001b[32m\"\u001b[7m40\u001b[27mpx\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m15\u001b[27mpx\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Request a briefing', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <h2>Request a briefing</h2>\u001b[22m\n\u001b[2m       - unexpected value \"15px\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { name: 'Request a briefing', exact: true })\nExpected: \u001b[32m\"\u001b[7m40\u001b[27mpx\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m15\u001b[27mpx\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Request a briefing', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <h2>Request a briefing</h2>\u001b[22m\n\u001b[2m       - unexpected value \"15px\"\u001b[22m\n\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:398:23",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                      "column": 23,
+                      "line": 398
+                    },
+                    "snippet": "  396 |   await page.goto(`/forms/${token}`);\n  397 |   const title = page.getByRole(\"heading\", { name: form.name, exact: true });\n> 398 |   await expect(title).toHaveCSS(\"font-size\", \"40px\");\n      |                       ^\n  399 |   const submit = page.getByRole(\"button\", {\n  400 |     name: \"Submit request\",\n  401 |     exact: true,"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                        "column": 23,
+                        "line": 398
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { name: 'Request a briefing', exact: true })\nExpected: \u001b[32m\"\u001b[7m40\u001b[27mpx\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m15\u001b[27mpx\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Request a briefing', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <h2>Request a briefing</h2>\u001b[22m\n\u001b[2m       - unexpected value \"15px\"\u001b[22m\n\n\n  396 |   await page.goto(`/forms/${token}`);\n  397 |   const title = page.getByRole(\"heading\", { name: form.name, exact: true });\n> 398 |   await expect(title).toHaveCSS(\"font-size\", \"40px\");\n      |                       ^\n  399 |   const submit = page.getByRole(\"button\", {\n  400 |     name: \"Submit request\",\n  401 |     exact: true,\n    at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:398:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:40.477Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-modules-evidence/browser-red/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts",
+                    "column": 23,
+                    "line": 398
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23bf3c282ea554de4104-dad9e9924ee22b7fe16a",
+          "file": "remaining-modules.spec.ts",
+          "line": 376,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:55:30.664Z",
+    "duration": 16051.726,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

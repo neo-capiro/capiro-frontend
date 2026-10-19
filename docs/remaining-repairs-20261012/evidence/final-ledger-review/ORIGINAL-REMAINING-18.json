@@ -1,0 +1,1076 @@
+{
+  "count": 18,
+  "meaning": "The 27 open findings minus this nine-finding group. No finding is reclassified solely as backend-blocked to hide a source/design omission. Native and owner prerequisites are tracked separately.",
+  "primaryCounts": {
+    "SOURCE": 4,
+    "SOURCE_AND_DESIGN": 4,
+    "DESIGN": 10,
+    "BACKEND_ONLY": 0
+  },
+  "findings": [
+    {
+      "findingId": "CI-01",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Saved client detail fields have no on-screen read-only profile surface",
+      "rows": [
+        {
+          "auditId": "CORE-013",
+          "criterion": "View client identity, description, contact and profile fields",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_SOURCE_FEATURE_GAP",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "DESKTOP_REVIEWED_WITH_CI-01",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/12"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:47010",
+        "411:47482",
+        "411:47030"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:75",
+        "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx:23",
+        "apps/web/src/features/portfolio/client-intake/form.ts:95"
+      ],
+      "originalEvidence": [
+        "review.spec.ts:26",
+        "browser-results.json",
+        "browser-artifacts/review-observe-saved-profi-e80c6--to-standard-user-read-path/profile-standard-user.png",
+        "figma-411-47010.png",
+        "figma-411-47482.png",
+        "figma-411-47030.json"
+      ],
+      "originalAuthorEvidence": "evidence/core_intake/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/0",
+      "primaryClassification": "SOURCE",
+      "localGap": "Missing read-only saved profile/government/contact fields; existing client record supplies fields.",
+      "separateNativeOrContractPrerequisite": "Native completeness and read-role visibility still unrun; no new endpoint required for supplied data.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CI-02",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Client view switcher omits search and the specified per-view keyboard shortcuts",
+      "rows": [
+        {
+          "auditId": "CORE-121",
+          "criterion": "View switcher, keyboard shortcuts, client tabs and Overview Objectives links",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_SOURCE_FEATURE_GAP",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "DESKTOP_REVIEWED_WITH_CI-02",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/52"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:47736"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:20",
+        "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:60",
+        "apps/web/src/shared/portfolio/shell/client-views.ts:2"
+      ],
+      "originalEvidence": [
+        "review.spec.ts:4",
+        "browser-results.json",
+        "browser-artifacts/review-observe-view-switch-27fbf-uts-against-Figma-411-47736/view-switcher.png",
+        "figma-411-47736.json",
+        "figma-411-47736.png"
+      ],
+      "originalAuthorEvidence": "evidence/core_intake/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/1",
+      "primaryClassification": "SOURCE",
+      "localGap": "Missing search/per-view keyboard shortcuts to existing client views.",
+      "separateNativeOrContractPrerequisite": "Native route/client authorization remains unrun; do not invent Timeline/Outreach routes.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CI-03",
+      "priority": "P3",
+      "originalAuthorPriority": "P3",
+      "title": "Account team retains a generic stacked form instead of the designed roster",
+      "rows": [
+        {
+          "auditId": "CORE-028",
+          "criterion": "Read account owner / team candidate options",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/27"
+        },
+        {
+          "auditId": "CORE-030",
+          "criterion": "Read account team roster",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/29"
+        },
+        {
+          "auditId": "CORE-031",
+          "criterion": "Add team member with role",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/30"
+        },
+        {
+          "auditId": "CORE-032",
+          "criterion": "Remove team member",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/31"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:51801"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:31",
+        "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:72",
+        "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx:30"
+      ],
+      "originalEvidence": [
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+        "figma-411-51801.json",
+        "figma-411-51801.png"
+      ],
+      "originalAuthorEvidence": "evidence/core_intake/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/2",
+      "primaryClassification": "DESIGN",
+      "localGap": "Account team roster composition, available email, avatars/row separators and inline controls.",
+      "separateNativeOrContractPrerequisite": "Native roster and existing membership writes/concurrency/owner refusal remain separate. Completed ordered Owners repair stays closed.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CI-04",
+      "priority": "P3",
+      "originalAuthorPriority": "P3",
+      "title": "Intake choice groups use one three-column grid for distinct designed layouts",
+      "rows": [
+        {
+          "auditId": "CORE-012",
+          "criterion": "Create client",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "DESKTOP_REVIEWED_WITH_CI-04",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/11"
+        },
+        {
+          "auditId": "CORE-014",
+          "criterion": "Edit client and all intake wizard fields",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "DESKTOP_REVIEWED_WITH_CI-04",
+          "originalDetailedEvidence": "evidence/core_intake/row-assessment.json",
+          "originalRowJsonPointer": "/rows/13"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "517:121532",
+        "517:121876",
+        "517:122239"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/client-intake/intake.module.css:109",
+        "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx:76",
+        "apps/web/src/features/portfolio/client-intake/SectorStep.tsx:43"
+      ],
+      "originalEvidence": [
+        "captures.spec.ts:4",
+        "capture-results.json",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-1.png",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-2.png",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-3.png",
+        "figma-517-121532.png",
+        "figma-517-121876.png",
+        "figma-517-122239.png",
+        "docs/portfolio-31/INTAKE-CHECKPOINT.md:31"
+      ],
+      "originalAuthorEvidence": "evidence/core_intake/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/3",
+      "primaryClassification": "DESIGN",
+      "localGap": "Distinct intake choice-group layouts use one generic grid.",
+      "separateNativeOrContractPrerequisite": "Native create/capacity/persistence and non-CAS edit remain separate; no data model change implied.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CP-04",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Facilities entry opens a standalone editor instead of the designed management dialog",
+      "rows": [
+        {
+          "auditId": "CORE-033",
+          "criterion": "Read client facilities / location pins",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/59"
+        },
+        {
+          "auditId": "CORE-034",
+          "criterion": "Add facility / location",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/60"
+        },
+        {
+          "auditId": "CORE-035",
+          "criterion": "Edit facility details",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/61"
+        },
+        {
+          "auditId": "CORE-037",
+          "criterion": "Resolve congressional/state district from address",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/63"
+        },
+        {
+          "auditId": "CORE-038",
+          "criterion": "Retry address geocoding",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/64"
+        },
+        {
+          "auditId": "CORE-039",
+          "criterion": "Choose geocode address candidate",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/65"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:58068",
+        "411:58269"
+      ],
+      "originalSourceEvidence": [
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+          "line": 73
+        },
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+          "line": 33
+        },
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+          "line": 28
+        }
+      ],
+      "originalEvidence": [
+        "figma-411-58068.json",
+        "figma-411-58068.png",
+        "figma-411-58269.json",
+        "figma-411-58269.png",
+        "rendered-facility-add.png"
+      ],
+      "originalAuthorEvidence": "evidence/core_profile/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/7",
+      "primaryClassification": "DESIGN",
+      "localGap": "Facilities manager composition/workflow differs from management dialog.",
+      "separateNativeOrContractPrerequisite": "Existing add/edit/geocode contracts are independently implemented; actual provider geocoding/candidate resolution requires native/provider acceptance.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CP-05",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Overview timeline retains a generic dot list instead of the designed grouped activity feed",
+      "rows": [
+        {
+          "auditId": "CORE-048",
+          "criterion": "Read client activity timeline",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/74"
+        },
+        {
+          "auditId": "CORE-103",
+          "criterion": "Filter kinds / date range, search history and clear filters",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/99"
+        },
+        {
+          "auditId": "CORE-104",
+          "criterion": "Pin / unpin a recorded note",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/100"
+        },
+        {
+          "auditId": "CORE-105",
+          "criterion": "Settle an open commitment",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/101"
+        },
+        {
+          "auditId": "CORE-107",
+          "criterion": "Expand synced email thread / show less",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/103"
+        },
+        {
+          "auditId": "CORE-110",
+          "criterion": "Retry failed activity update",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/106"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:48800",
+        "411:48826",
+        "411:49051",
+        "411:60193"
+      ],
+      "originalSourceEvidence": [
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+          "line": 55
+        },
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+          "line": 59
+        }
+      ],
+      "originalEvidence": [
+        "figma-411-48800.png",
+        "figma-411-48826.json",
+        "figma-411-48826.png",
+        "figma-411-60524.json",
+        "rendered-timeline.png",
+        "figma-411-60524.png"
+      ],
+      "originalAuthorEvidence": "evidence/core_profile/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/8",
+      "primaryClassification": "DESIGN",
+      "localGap": "Overview timeline grouping and activity-row composition.",
+      "separateNativeOrContractPrerequisite": "Filtering/actions retain their individual statuses; native history completeness, settlement and update concurrency remain unrun. No resurrected Quick log Commitment authoring.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CP-06",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Files toolbar and results header do not follow the supplied Files composition",
+      "rows": [
+        {
+          "auditId": "CORE-052",
+          "criterion": "Read client documents and smart-linked artifacts",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/78"
+        },
+        {
+          "auditId": "CORE-053",
+          "criterion": "Read folder tree and counts",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/79"
+        },
+        {
+          "auditId": "CORE-062",
+          "criterion": "Search, filter, sort and select files",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "CONFIRMED_SCOPED_MISMATCH",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/88"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:52484",
+        "411:53189"
+      ],
+      "originalSourceEvidence": [
+        {
+          "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+          "line": 106
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+          "line": 200
+        }
+      ],
+      "originalEvidence": [
+        "figma-411-52484.json",
+        "figma-411-52484.png",
+        "rendered-files.png",
+        "figma-411-53189.json",
+        "figma-411-53189.png"
+      ],
+      "originalAuthorEvidence": "evidence/core_profile/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/9",
+      "primaryClassification": "DESIGN",
+      "localGap": "Files toolbar/results/folder presentation differs.",
+      "separateNativeOrContractPrerequisite": "Broader CORE-052 smart-artifact union and CORE-053 empty-folder/tree/source taxonomy are explicit owner/contract prerequisites; CSS repair cannot close them.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CR-05",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Client Agenda omits lifecycle triage filters and state columns",
+      "rows": [
+        {
+          "auditId": "ENG-calendar_list",
+          "criterion": "Read client meetings/date range",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/128"
+        },
+        {
+          "auditId": "ENG-meeting_filters",
+          "criterion": "Filter All meetings / Needs prep / Needs debrief",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/205"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:63431"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:198",
+        "apps/web/src/features/portfolio/calendar/feeds.ts:31",
+        "apps/web/src/features/portfolio/calendar/Agenda.tsx:38"
+      ],
+      "originalEvidence": [
+        "calendar-agenda.png",
+        "figma-411-63431.png",
+        "figma-411-63431.json",
+        "review.spec.ts"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/14",
+      "primaryClassification": "SOURCE_AND_DESIGN",
+      "localGap": "Client Agenda lifecycle filters and state columns missing.",
+      "separateNativeOrContractPrerequisite": "Existing meeting reads support frontend triage; provider/native data completeness remains separate.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CR-06",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Meeting workspace loses identity context across tabs and always enters Information",
+      "rows": [
+        {
+          "auditId": "ENG-meeting_details",
+          "criterion": "Open meeting details / attendees / location / prep summary",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/129"
+        },
+        {
+          "auditId": "ENG-meeting_attendees",
+          "criterion": "Display meeting attendees",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "SUPPORTED_BOUNDED_FRONTEND",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/203"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "679:142262",
+        "679:142349"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:32",
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:85"
+      ],
+      "originalEvidence": [
+        "meeting-information.png",
+        "meeting-notes.png",
+        "figma-679-142262.png",
+        "figma-679-142262.json",
+        "figma-679-142349.png",
+        "review.spec.ts"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/15",
+      "primaryClassification": "SOURCE_AND_DESIGN",
+      "localGap": "Meeting identity context across tabs and entry tab behavior.",
+      "separateNativeOrContractPrerequisite": "Native authorized attendees/detail/prep provenance remains unrun; no backend blocker to local composition/navigation.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CR-08",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Prep and attachment share/unshare are missing",
+      "rows": [
+        {
+          "auditId": "ENG-meeting_share_artifacts",
+          "criterion": "Select and share approved prep/note/debrief/attachment",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/136"
+        },
+        {
+          "auditId": "ENG-meeting_unshare_artifacts",
+          "criterion": "Unshare selected materials",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/137"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "682:142827",
+        "698:142722",
+        "683:142902",
+        "698:142952"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/calendar/mutations.ts:67",
+        "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx:330",
+        "apps/web/src/features/portfolio/calendar/review/MeetingAttachmentApprovals.tsx:34"
+      ],
+      "originalEvidence": [
+        "backend-artifact-shared-contract-excerpt.txt"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/17",
+      "primaryClassification": "SOURCE",
+      "localGap": "Missing prep/attachment facets of per-artifact share/unshare.",
+      "separateNativeOrContractPrerequisite": "Core POST /api/engagement/meetings/:id/artifacts/share and /unshare already exist (controller2114/2123); ENGAGEMENT_ARTIFACT_SHARING_V2 and approved-artifact authorization/native metadata/DB persistence are prerequisites. Whole-meeting legacy sharing remains excluded. Previously repaired note/debrief receipts are not reopened.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CR-09",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Client-shared meeting materials feed has no Portfolio consumer",
+      "rows": [
+        {
+          "auditId": "ENG-meeting_shared_feed",
+          "criterion": "Read client-shared meeting materials",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/131"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/calendar/feeds.ts:23",
+        "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx:94"
+      ],
+      "originalEvidence": [
+        "backend-artifact-shared-contract-excerpt.txt"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/18",
+      "primaryClassification": "SOURCE",
+      "localGap": "Missing consumer of client-shared materials feed, distinct from current-user approved library.",
+      "separateNativeOrContractPrerequisite": "Core GET /api/engagement/shared-meetings?clientId already exists (controller2408); current native client wall/visibility and feature behavior unaccepted. No new backend route needed.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "CR-10",
+      "priority": "P3",
+      "originalAuthorPriority": "P3",
+      "title": "Email composer omits the designed rich-text formatting controls",
+      "rows": [
+        {
+          "auditId": "ENG-email_send",
+          "criterion": "Send client/contact email or reply (To/Cc/Bcc/signature/attachments)",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "PARTIAL_FRONTEND",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/177"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "435:82147",
+        "435:82656",
+        "435:82802"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/relationships/MailCompose.tsx:172",
+        "apps/web/src/features/portfolio/relationships/email.ts:58"
+      ],
+      "originalEvidence": [
+        "review.spec.ts",
+        "browser-results-initial.json",
+        "mail-compose-signature-hidden.png",
+        "figma-435-82802.json"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/19",
+      "primaryClassification": "DESIGN",
+      "localGap": "Rich-text toolbar/editor formatting controls absent; plain-text send exists.",
+      "separateNativeOrContractPrerequisite": "No proof delivery fails. Child screenshot clipped: exact pixel parity unassessed. Real mail send remains separately authorized/provider-qualified.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "OWI-F03",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Registrations dialog omits the authored divided row layout",
+      "rows": [
+        {
+          "auditId": "CAP-08",
+          "criterion": "Registrations and codes display / modal",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_FRONTEND_VISUAL_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+          "originalDetailedEvidence": "evidence/objectives_work_intel/row-assessment.json",
+          "originalRowJsonPointer": "/rows/245"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:55825"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+          "line": 201
+        },
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+          "line": 203
+        }
+      ],
+      "originalEvidence": [
+        "followup.spec.ts:7",
+        "results-followup.json",
+        "artifacts-followup/followup-mobile-capability-d9cb2-strations-lack-divided-rows/registrations-composed.png",
+        "figma/411-55825.txt",
+        "figma/411-55825.png"
+      ],
+      "originalAuthorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/23",
+      "primaryClassification": "DESIGN",
+      "localGap": "Registrations divided row geometry/padding, separate from data persistence.",
+      "separateNativeOrContractPrerequisite": "Native capability/registration read/write authority still individual row prerequisite.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "OWI-F04",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Mobile capabilities retains full desktop cards instead of the compact authored list",
+      "rows": [
+        {
+          "auditId": "CAP-01",
+          "criterion": "Capability areas list / summary cards / editor selection",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_FRONTEND_VISUAL_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+          "originalDetailedEvidence": "evidence/objectives_work_intel/row-assessment.json",
+          "originalRowJsonPointer": "/rows/238"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:86453"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+          "line": 73
+        },
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+          "line": 6
+        },
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+          "line": 35
+        }
+      ],
+      "originalEvidence": [
+        "followup.spec.ts:7",
+        "results-followup.json",
+        "artifacts-followup/followup-mobile-capability-d9cb2-strations-lack-divided-rows/capabilities-mobile-list.png",
+        "figma/411-86453.json",
+        "figma/411-86453.png"
+      ],
+      "originalAuthorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/24",
+      "primaryClassification": "DESIGN",
+      "localGap": "Phone capability list retains large desktop cards.",
+      "separateNativeOrContractPrerequisite": "Native capability data remains separate; repaired capability naming/type/sector/scrim scope is not reopened.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "MS06",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Modules meeting detail omits supplied join link and designed split view",
+      "rows": [
+        {
+          "auditId": "MCAL-006",
+          "criterion": "Open a meeting and show attendees, location, join link and preparation summary",
+          "scope": "IN_SCOPE",
+          "relationship": "related_modules_variant_only",
+          "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+          "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+          "originalRowJsonPointer": "/rows/336"
+        }
+      ],
+      "originalDisposition": "Separate the functional omission of a supplied safe join URL from remaining split-view visual parity. Do not infer missing backend join data or Meri generation authority.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:94827"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+          "line": 29
+        },
+        {
+          "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+          "line": 34
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+          "line": 107
+        }
+      ],
+      "originalEvidence": [
+        "engagement-meeting-repro.png",
+        "figma-engagement.png",
+        "figma-engagement-context.json",
+        "browser-results.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/33",
+      "primaryClassification": "SOURCE_AND_DESIGN",
+      "localGap": "Supplied safe meeting joinLink omitted plus missing split-view composition.",
+      "separateNativeOrContractPrerequisite": "Existing schema already has joinLink. Do not infer missing backend data or authorize Meri prep generation; canonical Portfolio join behavior remains separate.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "Only listed original row facets; broader requirements unchanged."
+    },
+    {
+      "findingId": "MS07",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Workspace desktop filters expand to three full-width rows",
+      "rows": [],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:112533"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+          "line": 50
+        },
+        {
+          "path": "apps/web/src/shared/module-ui/module-ui.module.css",
+          "line": 75
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+          "line": 175
+        }
+      ],
+      "originalEvidence": [
+        "browser-workspace-desktop.png",
+        "figma-workspace.png",
+        "figma-workspace-context.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/34",
+      "primaryClassification": "DESIGN",
+      "localGap": "Workspace desktop Radix filters wrap into full-width rows.",
+      "separateNativeOrContractPrerequisite": "No original337 row assigned: Modules-only supplementary design finding. Workspace native document authority remains separately open.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "No original337 row allocated; preserve as supplementary Modules finding."
+    },
+    {
+      "findingId": "MS08",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Planner All tasks lacks the authored client grouping and scope controls",
+      "rows": [],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:95475"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+          "line": 82
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+          "line": 185
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+          "line": 113
+        }
+      ],
+      "originalEvidence": [
+        "browser-planner-desktop.png",
+        "figma-planner.png",
+        "figma-planner-context.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/35",
+      "primaryClassification": "SOURCE_AND_DESIGN",
+      "localGap": "Planner All tasks client grouping/scope presentation missing.",
+      "separateNativeOrContractPrerequisite": "No original337 row assigned. Existing canonical task client/project data can support authorized local grouping; no invented native client/date filter or widening ACL.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "No original337 row allocated; preserve as supplementary Modules finding."
+    },
+    {
+      "findingId": "MS09",
+      "priority": "P3",
+      "originalAuthorPriority": "P3",
+      "title": "Public Planner form loses the designed title and validation hierarchy",
+      "rows": [],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:108618"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+          "line": 63
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+          "line": 143
+        }
+      ],
+      "originalEvidence": [
+        "browser-form-error-desktop.png",
+        "browser-form-receipt-desktop.png",
+        "figma-form.png",
+        "figma-form-context.json",
+        "browser-results.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/36",
+      "primaryClassification": "DESIGN",
+      "localGap": "Public Planner form title/error/submit hierarchy differs.",
+      "separateNativeOrContractPrerequisite": "No original337 row assigned. Existing synthetic receipt/input retention do not prove native anonymous token/submit/storage behavior. No public submission in triage.",
+      "backendOnlyFinding": false,
+      "rowMappingLimit": "No original337 row allocated; preserve as supplementary Modules finding."
+    }
+  ]
+}

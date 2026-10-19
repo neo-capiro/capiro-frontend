@@ -1,0 +1,41 @@
+{
+  "atUTC": "2026-10-13T05:19:13.492Z",
+  "method": "Captured production helper transpiled to CJS; actual installed QueryClient; synthetic promise/status fixtures only. No React/browser/network/native request.",
+  "sourceSha256": "2efb194e7056caadcd48c13ecf49ab17f6111ce8c974bfe1b2fad52fe9290af3",
+  "results": [
+    {
+      "staleOutcome": 200,
+      "oldContinuation": 0,
+      "oldResult": {
+        "error": {
+          "name": "AbortError",
+          "message": "This current-session read was replaced."
+        }
+      },
+      "current": {
+        "sessionId": "A",
+        "state": "legal_accepted",
+        "plan": "paid"
+      },
+      "expected": "Replacement read remains canonical but cannot satisfy superseded original deliberate read",
+      "pass": false
+    },
+    {
+      "staleOutcome": 403,
+      "oldContinuation": 0,
+      "oldResult": {
+        "error": {
+          "name": "AbortError",
+          "message": "This current-session read was replaced."
+        }
+      },
+      "current": {
+        "sessionId": "A",
+        "state": "legal_accepted",
+        "plan": "paid"
+      },
+      "expected": "Replacement read remains canonical but cannot satisfy superseded original deliberate read",
+      "pass": false
+    }
+  ]
+}

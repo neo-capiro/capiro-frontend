@@ -1,0 +1,30 @@
+{
+  "validatedAt": "2026-10-12T14:43:29.952048+00:00",
+  "result": "PASS_DOCUMENTATION_PACKET_CHECKS",
+  "rows": 345,
+  "inScope": 337,
+  "excluded": 8,
+  "findings": 37,
+  "severityCounts": {
+    "P1": 5,
+    "P2": 26,
+    "P3": 6
+  },
+  "fullRowsNewlyAccepted": 0,
+  "assignedIdCoverage": "exact, unique, no omissions or extras",
+  "rowFindingReferences": "all resolved globally; Modules variants separately identified",
+  "rowReasons": "all nonempty, preserved from reviewed lane ledgers",
+  "copiedRawFiles": 551,
+  "rawCopiesByteIdentical": true,
+  "missingTopLevelMarkdownLinks": [],
+  "applicationDiffAgainstFrozenSource": "none in apps/packages/scripts/package.json/package-lock.json",
+  "browserGatesRerun": false,
+  "applicationEdits": false,
+  "commitOrPush": false,
+  "notes": [
+    "Root raw replays include preserved setup failures; these are not new source failures.",
+    "Top-level manifest is generated after this check and every listed digest is then verified.",
+    "Nested original manifests/reports remain immutable snapshots and may predate added secondary/audit files. The top-level manifest covers the complete assembled packet."
+  ],
+  "stagedByteIdentity": "Git text conversion initially changed CSV line endings; packet-wide -text preserves every manifest byte. Staged verification follows."
+}

@@ -1,0 +1,82 @@
+{
+  "atUTC": "2026-10-13T05:09:19.854Z",
+  "method": "Independent static AST and byte comparison; no application execution",
+  "moves": [
+    {
+      "from": "F1PayTrial",
+      "to": "TrialBilling",
+      "equalFunctionBodyAST": true
+    },
+    {
+      "from": "F1PayPaid",
+      "to": "PaidBilling",
+      "equalFunctionBodyAST": true
+    },
+    {
+      "from": "ImportOverlay controller",
+      "to": "useImportWorkflow",
+      "oldStatements": 37,
+      "newStatements": 37,
+      "equalStatementAST": true
+    }
+  ],
+  "originalTests": {
+    "source": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/src/lib/funnel.draft.test.ts",
+    "sourceSha256": "14ea70114fed3575d88eabc9343b62d24a35948c345565540278194a7b747946",
+    "newFile": "/tmp/capiro-onboard-feature-independent-review-20261013/initial-source/apps/web/tests/onboard-registration-draft.test.ts",
+    "newSha256": "3f4038f26afe663519ab47278d37f76b76cb6f78c5d83dd3da035150e2056ead",
+    "originalGroups": 4,
+    "currentGroups": 5,
+    "originalGroupASTsPreserved": true
+  },
+  "assets": [
+    {
+      "path": "apps/web/public/onboard/favicon.svg",
+      "producerPath": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/public/favicon.svg",
+      "bytes": 310,
+      "sha256": "6b853e45dfd9c0b5de548d2d1fa779330c09f6cda89f52c1d1bf6b3ca44904c4",
+      "sameProducerBytes": true,
+      "sameAuthorHash": true
+    },
+    {
+      "path": "apps/web/public/onboard/fonts/hanken-grotesk-latin.woff2",
+      "producerPath": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/src/assets/fonts/hanken-grotesk-latin.woff2",
+      "bytes": 34704,
+      "sha256": "e9201eddf1d41d0b62253295d869ce3cf65768f7102b797f02c7f8c876b4a9d5",
+      "sameProducerBytes": true,
+      "sameAuthorHash": true
+    },
+    {
+      "path": "apps/web/public/onboard/fonts/jetbrains-mono-latin.woff2",
+      "producerPath": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/src/assets/fonts/jetbrains-mono-latin.woff2",
+      "bytes": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be",
+      "sameProducerBytes": true,
+      "sameAuthorHash": true
+    },
+    {
+      "path": "apps/web/public/onboard/fonts/newsreader-latin.woff2",
+      "producerPath": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/src/assets/fonts/newsreader-latin.woff2",
+      "bytes": 132000,
+      "sha256": "6e4f2958c3a7c4a80acde4e5a679abe7e01bc1e30b92be3c7a8b696ef401d101",
+      "sameProducerBytes": true,
+      "sameAuthorHash": true
+    },
+    {
+      "path": "apps/web/public/onboard/legal-docs/Capiro-Subscription-Agreement.pdf",
+      "producerPath": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/public/legal-docs/Capiro-Subscription-Agreement.pdf",
+      "bytes": 201149,
+      "sha256": "2ae1437094f9310c9e9cf49c71aa1725e06823c02fba6cb546d40e3cedd33ff5",
+      "sameProducerBytes": true,
+      "sameAuthorHash": true
+    },
+    {
+      "path": "apps/web/public/onboard/legal-docs/Capiro-Terms-of-Service.pdf",
+      "producerPath": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web/public/legal-docs/Capiro-Terms-of-Service.pdf",
+      "bytes": 58509,
+      "sha256": "94e03031d00eaf759c7e55795aa89edfa5429bf667c3ce9f975f8f2b69b6d5d2",
+      "sameProducerBytes": true,
+      "sameAuthorHash": true
+    }
+  ]
+}

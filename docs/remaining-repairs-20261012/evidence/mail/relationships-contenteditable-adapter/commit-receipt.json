@@ -1,0 +1,20 @@
+{
+  "commit": "850da33808dab050d2396a26233d3d3881d2fecf",
+  "parent": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "changedPaths": [
+    "apps/web/tests/browser/relationships.spec.ts"
+  ],
+  "sourceTreeBefore": "093b9e7a128cec8ac6164fb11742d1ed848f9a7e",
+  "sourceTreeAfter": "093b9e7a128cec8ac6164fb11742d1ed848f9a7e",
+  "testGitBlobBefore": "7fe93876b560208cccacd089297a82f8721b1fdf",
+  "testGitBlobAfter": "e97534c3f9bef254b20e60c149c64dfae87691bd",
+  "beforeSHA256": "ca439b6a7c7494a879a508382cff343a3e514c76091f8feca803c351fb56b9d4",
+  "afterSHA256": "ad299c87f68dee52a5123e2cc215415de3879cc5d65a6c1f252ac1e83a6662ec",
+  "sameExceptSingleMatcher": true,
+  "testNonblankLines": 65,
+  "fileNonblankLinesBefore": 560,
+  "fileNonblankLinesAfter": 560,
+  "gitDiffCheckExitCode": 0,
+  "browserBuildTypecheckRun": false,
+  "preexistingUntrackedNodeModulesPreserved": true
+}

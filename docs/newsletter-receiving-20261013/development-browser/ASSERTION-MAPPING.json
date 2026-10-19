@@ -1,0 +1,45 @@
+{
+  "existingFiles": "All 43 tracked Modules browser files are byte-unchanged from HEAD",
+  "newTests": [
+    {
+      "file": "apps/web/test/browser/newsletter-document-fixtures.ts",
+      "first": {
+        "assertionCalls": 9,
+        "sha256": "5ed745d2cf849a57e26afe7969eb973d7a852da31c917aa10b0a1de84c94291b"
+      },
+      "final": {
+        "assertionCalls": 9,
+        "sha256": "5ed745d2cf849a57e26afe7969eb973d7a852da31c917aa10b0a1de84c94291b"
+      }
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+      "first": {
+        "assertionCalls": 54,
+        "sha256": "c2c027162d3790a7e8eedcf60dea5988f2314103455e0a488a11b8fc18fabb85"
+      },
+      "final": {
+        "assertionCalls": 59,
+        "sha256": "ae30ac931db3243e61ebec3fbd9a7279303a5dff4ba877dde5ce9602b09b6d03"
+      }
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-document-navigation.spec.ts",
+      "first": {
+        "assertionCalls": 43,
+        "sha256": "b8481304dd4714006ebc456fa0ef7d066b190173d8678877b7f264c07ccb103f"
+      },
+      "final": {
+        "assertionCalls": 48,
+        "sha256": "b2985a16eecb80a8685b81428350fd43c3026cb1e3f4cf97c2a707d176105774"
+      }
+    }
+  ],
+  "changesAfterFirstRun": [
+    "All original Back calls and result/fence assertions remain.",
+    "Explicit intercepted create/stage/save entry barriers added before disposal.",
+    "Reopening after Back now uses Forward instead of a new open-button push; this strengthens history coverage.",
+    "Saved preview adds history length checks and a second explicit preview; expected preview requests are now exactly two matching envelopes.",
+    "No sleeps, timeout changes, retries, sidebar substitution or product-source change by this lane."
+  ]
+}

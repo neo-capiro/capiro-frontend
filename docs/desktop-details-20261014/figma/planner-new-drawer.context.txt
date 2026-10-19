@@ -1,0 +1,465 @@
+      <div className="absolute bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[10px] items-start left-[1060px] overflow-clip px-[18px] py-[16px] rounded-[var(--radius-xl,12px)] shadow-[0px_1px_2px_0px_rgba(12,10,9,0.05)] top-[972px] w-[360px]" data-node-id="819:146465" data-name="Running timer widget">
+        <div className="[word-break:break-word] content-stretch flex font-['Geist:Medium'] font-medium gap-[8px] items-center leading-[1.45] overflow-clip relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146466" data-name="Head">
+          <p className="relative shrink-0" data-node-id="819:146467">
+            ◷
+          </p>
+          <p className="relative shrink-0" data-node-id="819:146468">
+            Running timer
+          </p>
+        </div>
+        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146469">
+          Prep Fallon staff call
+        </p>
+        <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[22px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.44px] whitespace-nowrap" data-node-id="819:146470">
+          00:20:41
+        </p>
+        <div className="content-stretch flex gap-[8px] items-start overflow-clip relative shrink-0" data-node-id="819:146471" data-name="Actions">
+          <div className="content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146472" style={{ backgroundImage: "linear-gradient(171.94957751594262deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} data-name="Stop and log time">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--primary-foreground,white)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146473">
+              Stop and log time
+            </p>
+          </div>
+          <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146474" data-name="Discard timer">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146475">
+              Discard timer
+            </p>
+          </div>
+        </div>
+        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[320px]" data-node-id="819:146476">
+          Time is logged in whole minutes, rounded up once. Discard stops this session without logging time.
+        </p>
+      </div>
+      <a className="absolute bg-[rgba(10,10,10,0.45)] block cursor-pointer h-[1040px] left-0 top-0 w-[1440px]" data-node-id="819:146477" data-name="Scrim (click to close)" />
+      <div className="absolute bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col h-[1040px] items-start left-[760px] overflow-x-clip overflow-y-auto shadow-[0px_16px_40px_-12px_rgba(12,10,9,0.18),0px_2px_6px_0px_rgba(12,10,9,0.05)] top-0 w-[680px]" data-node-id="819:146478" data-name="Drawer">
+        <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col items-start overflow-clip pb-[14px] pt-[22px] px-[28px] relative shrink-0 w-full" data-node-id="819:146479" data-name="Header">
+          <a className="[word-break:break-word] content-stretch cursor-pointer flex items-center justify-between overflow-clip relative shrink-0 text-[14px] text-left tracking-[-0.07px] w-full whitespace-nowrap" data-node-id="819:146480" data-name="Row">
+            <p className="font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[color:var(--foreground,#0a0a0a)]" data-node-id="819:146481">
+              New task
+            </p>
+            <div className="font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[color:var(--muted-foreground,#78716c)]" data-node-id="819:146482">
+              <p className="leading-[1.45]">✕</p>
+            </div>
+          </a>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[16px] items-start min-h-px overflow-x-clip overflow-y-auto px-[28px] py-[18px] relative w-full" data-node-id="819:146483" data-name="Body">
+          <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146484" data-name="Field · Task name">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146485">
+              Task name
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146486" data-name="Input">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146487">
+                Enter a task name
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[14px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146488" data-name="Grid">
+            <div className="content-stretch flex flex-[1_0_0] flex-col gap-[14px] items-start min-w-px overflow-clip relative" data-node-id="819:146489" data-name="C1">
+              <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146490" data-name="Field · Assignee">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146491">
+                  Assignee
+                </p>
+                <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146492" data-name="Input">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146493">
+                    Unassigned
+                  </p>
+                  <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146494" data-name="Spacer" />
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146495">
+                    ▾
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146496" data-name="Field · Priority">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146497">
+                  Priority
+                </p>
+                <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146498" data-name="Input">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146499">
+                    none
+                  </p>
+                  <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146500" data-name="Spacer" />
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146501">
+                    ▾
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] flex-col gap-[14px] items-start min-w-px overflow-clip relative" data-node-id="819:146502" data-name="C2">
+              <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146503" data-name="Field · Status">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146504">
+                  Status
+                </p>
+                <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146505" data-name="Input">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146506">
+                    To do
+                  </p>
+                  <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146507" data-name="Spacer" />
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146508">
+                    ▾
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146509" data-name="Field · Task type">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146510">
+                  Task type
+                </p>
+                <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146511" data-name="Input">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146512">
+                    Task
+                  </p>
+                  <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146513" data-name="Spacer" />
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146514">
+                    ▾
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[12px] items-start overflow-clip px-[16px] py-[14px] relative rounded-[10px] shrink-0 w-full" data-node-id="819:146515" data-name="Fieldset · Schedule">
+            <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146516">
+              Schedule
+            </p>
+            <div className="content-stretch flex gap-[14px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146517" data-name="Grid">
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[14px] items-start min-w-px overflow-clip relative" data-node-id="819:146518" data-name="C1">
+                <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146519" data-name="Field · Start date">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146520">
+                    Start date
+                  </p>
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146521" data-name="Input">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146522">
+                      Choose a start date
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146523" data-name="Field · Start time">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146524">
+                    Start time
+                  </p>
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146525" data-name="Input">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146526">
+                      —
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146527" data-name="Field · Time zone">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146528">
+                    Time zone
+                  </p>
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146529" data-name="Input">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146530">
+                      America/New_York
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[14px] items-start min-w-px overflow-clip relative" data-node-id="819:146531" data-name="C2">
+                <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146532" data-name="Field · Due date">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146533">
+                    Due date
+                  </p>
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146534" data-name="Input">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146535">
+                      Choose a due date
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146536" data-name="Field · Due time">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146537">
+                    Due time
+                  </p>
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146538" data-name="Input">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146539">
+                      —
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146540" data-name="Field · Repeat">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146541">
+                    Repeat
+                  </p>
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146542" data-name="Input">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146543">
+                      Does not repeat
+                    </p>
+                    <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146544" data-name="Spacer" />
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146545">
+                      ▾
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[560px]" data-node-id="819:146546">
+              Times follow America/New_York. During daylight saving changes, skipped times move forward and repeated times use their first occurrence.
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146547" data-name="Rich text">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146548">
+              Description
+            </p>
+            <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="819:146549" data-name="Toolbar">
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146550" data-name="B">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146551">
+                  B
+                </p>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146552" data-name="I">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146553">
+                  I
+                </p>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146554" data-name="Heading">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146555">
+                  Heading
+                </p>
+              </div>
+              <a className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch cursor-pointer flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146556" data-name="List">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146557">
+                  List
+                </p>
+              </a>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146558" data-name="Checklist">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146559">
+                  Checklist
+                </p>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146560" data-name="Link">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146561">
+                  Link
+                </p>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146562" data-name="Preview">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146563">
+                  Preview
+                </p>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-start overflow-clip px-[12px] py-[10px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146564" data-name="Textarea">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-[560px]" data-node-id="819:146565">
+                Describe the work…
+              </p>
+            </div>
+          </div>
+          <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146566">{`Projects & sections`}</p>
+          <div className="content-stretch flex flex-col gap-[8px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146567" data-name="Projects">
+            <div className="content-stretch flex gap-[10px] items-center overflow-clip relative shrink-0" data-node-id="819:146568" data-name="Row">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146569">
+                ☐
+              </p>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal h-[16px] leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[180px]" data-node-id="819:146570">
+                HAC-D ask
+              </p>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-start overflow-clip px-[10px] py-[6px] relative rounded-[8px] shrink-0" data-node-id="819:146571" data-name="Section">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-pre" data-node-id="819:146572">{`In progress  ▾`}</p>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[10px] items-center overflow-clip relative shrink-0" data-node-id="819:146573" data-name="Row">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146574">
+                ☐
+              </p>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal h-[16px] leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[180px]" data-node-id="819:146575">
+                FY27 posture
+              </p>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-start overflow-clip px-[10px] py-[6px] relative rounded-[8px] shrink-0" data-node-id="819:146576" data-name="Section">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-pre" data-node-id="819:146577">{`Unsectioned  ▾`}</p>
+              </div>
+            </div>
+            <div className="content-stretch flex items-start overflow-clip relative shrink-0" data-node-id="819:146578" data-name="Row">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-pre" data-node-id="819:146579">{`☐  Army PEO`}</p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146580" data-name="Field · Client priority">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146581">
+              Client priority
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146582" data-name="Input">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146583">
+                Not set
+              </p>
+              <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146584" data-name="Spacer" />
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146585">
+                ▾
+              </p>
+            </div>
+          </div>
+          <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146586">
+            Dependencies
+          </p>
+          <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146587" data-name="Field · Search dependencies across Planner">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146588">
+              Search dependencies across Planner
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146589" data-name="Input">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146590">
+                Find a task in any project…
+              </p>
+            </div>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex flex-col font-['Geist:Regular'] font-normal gap-[6px] items-start leading-[1.45] overflow-clip relative shrink-0 text-[13px] tracking-[-0.039px] w-full" data-node-id="819:146591" data-name="Listbox · Dependencies">
+            <p className="relative shrink-0 text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="819:146592">
+              Dependencies
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex flex-col gap-[4px] items-start overflow-clip px-[10px] py-[8px] relative rounded-[var(--radius-xl,12px)] shadow-[0px_1px_2px_0px_rgba(12,10,9,0.05)] shrink-0 w-full whitespace-pre" data-node-id="819:146593" data-name="Options">
+              <p className="relative shrink-0 text-[color:var(--accent,#0a0a0a)]" data-node-id="819:146594">{`☐  Pull PE 0604134A deltas`}</p>
+              <p className="relative shrink-0 text-[color:var(--accent,#0a0a0a)]" data-node-id="819:146595">{`☐  Send HAC-D restoration ask`}</p>
+              <p className="relative shrink-0 text-[color:var(--foreground,#0a0a0a)]" data-node-id="819:146596">{`☐  Book Rogers staff meeting`}</p>
+            </div>
+          </div>
+          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="819:146597">
+            Hold Ctrl or Command to select several tasks.
+          </p>
+          <a className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch cursor-pointer flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146598" data-name="Load more dependencies">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146599">
+              Load more dependencies
+            </p>
+          </a>
+          <div className="[word-break:break-word] content-stretch flex flex-col font-['Geist:Regular'] font-normal gap-[6px] items-start leading-[1.45] overflow-clip relative shrink-0 text-[13px] tracking-[-0.039px] w-full" data-node-id="819:146600" data-name="Listbox · Collaborators">
+            <p className="relative shrink-0 text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="819:146601">
+              Collaborators
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex flex-col gap-[4px] items-start overflow-clip px-[10px] py-[8px] relative rounded-[var(--radius-xl,12px)] shadow-[0px_1px_2px_0px_rgba(12,10,9,0.05)] shrink-0 w-full whitespace-pre" data-node-id="819:146602" data-name="Options">
+              <p className="relative shrink-0 text-[color:var(--accent,#0a0a0a)]" data-node-id="819:146603">{`☐  Nia Marcus`}</p>
+              <p className="relative shrink-0 text-[color:var(--foreground,#0a0a0a)]" data-node-id="819:146604">{`☐  Ravi Patel`}</p>
+              <p className="relative shrink-0 text-[color:var(--foreground,#0a0a0a)]" data-node-id="819:146605">{`☐  Ana Reyes`}</p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146606" data-name="Field · Tags">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146607">
+              Tags
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146608" data-name="Input">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146609">
+                Add tags
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146610" data-name="Field · Estimated minutes">
+            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146611">
+              Estimated minutes
+            </p>
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146612" data-name="Input">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146613">
+                0
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[14px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146614" data-name="Grid">
+            <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px overflow-clip relative" data-node-id="819:146615" data-name="C1">
+              <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146616" data-name="Field · Linked client">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146617">
+                  Linked client
+                </p>
+                <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146618" data-name="Input">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146619">
+                    No client
+                  </p>
+                  <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146620" data-name="Spacer" />
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146621">
+                    ▾
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px overflow-clip relative" data-node-id="819:146622" data-name="C2">
+              <div className="content-stretch flex flex-col gap-[6px] items-start overflow-clip relative shrink-0 w-full" data-node-id="819:146623" data-name="Field · Linked meeting">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146624">
+                  Linked meeting
+                </p>
+                <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center overflow-clip px-[12px] py-[9px] relative rounded-[8px] shrink-0 w-full" data-node-id="819:146625" data-name="Input">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="819:146626">
+                    No meeting
+                  </p>
+                  <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146627" data-name="Spacer" />
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146628">
+                    ▾
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[var(--muted,#f5f5f4)] border-[var(--border,#e7e5e4)] border-solid border-t content-stretch flex gap-[10px] items-center overflow-clip px-[28px] py-[16px] relative shrink-0 w-full" data-node-id="819:146629" data-name="Footer">
+          <a className="block cursor-pointer h-[31px] relative shrink-0 w-[96px]" data-node-id="819:146630" data-name="Left" />
+          <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="819:146635" data-name="Spacer" />
+          <a className="content-stretch cursor-pointer flex gap-[10px] items-start overflow-clip relative shrink-0" data-node-id="819:146636" data-name="Right">
+            <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146637" data-name="Close">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146638">
+                Close
+              </p>
+            </div>
+            <div className="content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="819:146639" style={{ backgroundImage: "linear-gradient(168.76449468078215deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} data-name="Save task">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="819:146640">
+                Create task
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: v2/shadow-xs: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 1), radius: 2, spread: 0), v2/Eyebrow: Font(family: "Geist", style: Medium, size: 11, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: 6), v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/Body: Font(family: "Geist", style: Regular, size: 14, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.5), v2/Small: Font(family: "Geist", style: Regular, size: 13, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.30000001192092896), Modules/Typography/Page title: Font(family: "Geist", style: SemiBold, size: 24, weight: 600, lineHeight: 1.2999999523162842, letterSpacing: -1), v2/Caption: Font(family: "Geist", style: Regular, size: 12, weight: 400, lineHeight: 1.399999976158142, letterSpacing: 0), v2/Body medium: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.4500000476837158, letterSpacing: -0.5), v2/Title L: Font(family: "Geist", style: Medium, size: 20, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: -1.5), v2/Black gradient: , Modules/Typography/Geist/Medium/12 · PERCENT 130 · 3: Font(family: "Geist", style: Medium, size: 12, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: 0), v2/Stat: Font(family: "Geist", style: SemiBold, size: 22, weight: 600, lineHeight: 1.2000000476837158, letterSpacing: -2), v2/Title S: Font(family: "Geist", style: SemiBold, size: 14, weight: 600, lineHeight: 1.350000023841858, letterSpacing: -0.5), v2/shadow-lift: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 2), radius: 6, spread: 0); Effect(type: DROP_SHADOW, color: #0C0A092E, offset: (0, 16), radius: 40, spread: -12).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Device=Desktop, Mode=Modules
+**Node ID:** 469:41552
+
+Shared Capiro 3.1 Desktop header with Modules selected. Logo returns to Dashboard; three modes are Meri, Portfolio and Modules. Native portrait is a neutral illustration. Wire navigation on page-local instances.
+
+## Capiro 3.1/Shared header
+**Node ID:** 469:92041
+
+Shared Capiro navigation with Meri, Portfolio and Modules modes; Master calendar, Search, Updates and Profile actions. Desktop uses action labels; tablet and phone use icons. Prototype actions are mapped on screen instances to same-device destinations. Compact icon-only mode switcher: sparkle = Meri; briefcase = Portfolio; grid = Modules. Selected tile retains a visible surface and outline. Preserve semantic labels, accessible mode names and current-section navigation when implemented.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+## icon/sparkle
+**Node ID:** 4:9
+
+Lucide-style sparkle icon. Recolor via the vector stroke.
+
+## icon/layout-grid
+**Node ID:** 4:26
+
+Lucide-style layout-grid icon. Recolor via the vector stroke.
+
+## icon/search
+**Node ID:** 4:13
+
+Lucide-style search icon. Recolor via the vector stroke.
+
+## icon/bell
+**Node ID:** 4:17
+
+Lucide-style bell icon. Recolor via the vector stroke.
+
+## Capiro 3.1/Profile picture
+**Node ID:** 469:41439
+
+Neutral editable portrait illustration used for the current-user profile control in the prototype. Replace with the signed-in user image in implementation.
+
+## Device=Desktop, Context=Modules
+**Node ID:** 471:92526
+
+Capiro3.1 Modules Desktop navigation. Labels and native icons. Current item is a default highlight; override selected fills in screen instances. Reactions are wired on the prototype-page instances.
+
+## Capiro 3.1/Shared sidebar
+**Node ID:** 471:92866
+
+Shared Capiro3.1 application navigation. Contexts are Portfolio, Client and Modules; Desktop232px and Tablet72px widths. Client default scope is Anduril. Settings remains a bottom action. Settings pages retain their existing settings rail. Wire native navigation reactions on page-local instances.
+
+## icon/settings · Capiro 3.1
+**Node ID:** 471:92354
+
+Native editable settings cog, matching the local 16px line icon system.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

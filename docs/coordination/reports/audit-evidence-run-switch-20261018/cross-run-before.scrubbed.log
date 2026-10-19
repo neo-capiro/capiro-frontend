@@ -1,0 +1,89 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:57) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:94) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/test/browser/meri-initial-reconnect.spec.ts:205:1 › synthetic a same-prompt successor acknowledgement cannot consume the first run's retained draft (10.2s)
+(node:173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/test/browser/meri-initial-reconnect.spec.ts:233:1 › synthetic a retained initial guard from an earlier run cannot swallow a later next-turn send (9.6s)
+
+
+  1) apps/web/test/browser/meri-initial-reconnect.spec.ts:205:1 › synthetic a same-prompt successor acknowledgement cannot consume the first run's retained draft 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('Meri message', { exact: true })
+    Expected: "Original initial message"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Meri message', { exact: true })
+        14 × locator resolved to <textarea name="message" maxlength="8000" aria-describedby="_r_6_" aria-label="Meri message" data-slot="input-group-control" placeholder="Ask Meri to research, analyze, or create something…" class="border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex w-full px-3 text-base transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:…></textarea>
+           - unexpected value ""
+
+
+      227 |     }),
+      228 |   ).toHaveCount(0);
+    > 229 |   await expect(composer(page)).toHaveValue(prompt);
+          |                                ^
+      230 |   expect(fixture.unexpected).toEqual([]);
+      231 | });
+      232 |
+        at <frontend-worktree>/apps/web/test/browser/meri-initial-reconnect.spec.ts:229:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1e7c0--first-run-s-retained-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1e7c0--first-run-s-retained-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1e7c0--first-run-s-retained-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1e7c0--first-run-s-retained-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/test/browser/meri-initial-reconnect.spec.ts:233:1 › synthetic a retained initial guard from an earlier run cannot swallow a later next-turn send 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      246 |   await expect(sendButton(page)).toBeEnabled();
+      247 |   await sendButton(page).click();
+    > 248 |   await expect.poll(() => reservations.length).toBe(1);
+          |                                                ^
+      249 |   expect(reservations[0]!.sourceRunId).toBe(nextBinding.runId);
+      250 |   expect(fixture.unexpected).toEqual([]);
+      251 | });
+        at <frontend-worktree>/apps/web/test/browser/meri-initial-reconnect.spec.ts:248:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1d0fb-llow-a-later-next-turn-send/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1d0fb-llow-a-later-next-turn-send/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1d0fb-llow-a-later-next-turn-send/trace.zip
+    Usage:
+
+        npx playwright show-trace apps/web/test-results/modules-browser/meri-initial-reconnect-syn-1d0fb-llow-a-later-next-turn-send/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/test/browser/meri-initial-reconnect.spec.ts:205:1 › synthetic a same-prompt successor acknowledgement cannot consume the first run's retained draft 
+    apps/web/test/browser/meri-initial-reconnect.spec.ts:233:1 › synthetic a retained initial guard from an earlier run cannot swallow a later next-turn send 

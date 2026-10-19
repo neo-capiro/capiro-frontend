@@ -1,0 +1,278 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "applicationTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "assessmentHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "readOnly": true,
+  "findings": [
+    {
+      "id": "CP-01",
+      "severity": "P1",
+      "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+      "title": "File access editor silently completes when receipt contradicts requested restriction",
+      "rowIds": [
+        "CORE-058"
+      ],
+      "figmaFrames": [
+        "411:54355"
+      ],
+      "source": [
+        {
+          "file": "apps/web/src/features/portfolio/files/contracts.ts",
+          "line": 48
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/mutations.ts",
+          "line": 47
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/mutations.ts",
+          "line": 61
+        }
+      ],
+      "reproduction": {
+        "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'same-id wrong-access'",
+        "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:43",
+        "steps": [
+          "Open client Files and Manage access for Test report.pdf.",
+          "Select Specific people with no selected users (UI says uploader-only).",
+          "Submit PATCH {viewerMode:'restricted',viewerUserIds:[]} to the file access endpoint.",
+          "Return the original same-ID fixture with viewerMode:'all',viewerUserIds:[]; keep subsequent list/roster reads unchanged."
+        ],
+        "actual": "Editor closes, no alert is shown, and no assertion requires returned viewerMode/viewerUserIds to match the requested restriction.",
+        "expected": "Retain the review and expose a conflicting or unverified result until exact requested ACL is acknowledged. A same-ID response alone is insufficient.",
+        "fixture": "apps/web/tests/browser/fixtures.ts exported file; attachment 60000000-0000-4000-8000-000000000001, client 10000000-0000-4000-8000-000000000001."
+      },
+      "evidence": [
+        "browser-results.json",
+        "defect-wrong-access-receipt.png",
+        "browser-output/assessment-DEFECT-same-id--5e63f-isses-requested-restriction/trace.zip"
+      ],
+      "deploymentImpact": "Blocks acceptance of file access management and is recommended as a release blocker for a product exposing this control. No cross-tenant disclosure or backend authorization bypass was demonstrated; the confirmed risk is false completion of a confidentiality change."
+    },
+    {
+      "id": "CP-02",
+      "severity": "P2",
+      "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+      "title": "Folder change discards the draft when the same-ID receipt still names the old folder",
+      "rowIds": [
+        "CORE-056",
+        "CORE-063"
+      ],
+      "figmaFrames": [
+        "411:53579",
+        "411:53327"
+      ],
+      "source": [
+        {
+          "file": "apps/web/src/features/portfolio/files/contracts.ts",
+          "line": 48
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/mutations.ts",
+          "line": 36
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/mutations.ts",
+          "line": 61
+        }
+      ],
+      "reproduction": {
+        "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'same-id wrong-folder'",
+        "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:34",
+        "steps": [
+          "Select Test report.pdf in Reports; click New folder.",
+          "Enter Reviewed destination, submit PATCH {folder:'Reviewed destination'}.",
+          "Return the same file with folder:'Reports'; list readback also remains Reports."
+        ],
+        "actual": "Dialog closes and no error appears; Reports remains in the table.",
+        "expected": "Keep the requested folder draft and flag unverified/conflicting confirmation."
+      },
+      "evidence": [
+        "browser-results.json",
+        "defect-wrong-folder-receipt.png"
+      ],
+      "deploymentImpact": "Blocks row acceptance for verified move/new-folder saves. Distinct from the known absence of atomic multi-file moves."
+    },
+    {
+      "id": "CP-03",
+      "severity": "P2",
+      "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+      "title": "Ambiguous file deletion response immediately re-enables the destructive confirmation",
+      "rowIds": [
+        "CORE-060"
+      ],
+      "figmaFrames": [
+        "411:53857"
+      ],
+      "source": [
+        {
+          "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+          "line": 259
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/mutations.ts",
+          "line": 29
+        }
+      ],
+      "reproduction": {
+        "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'ambiguous delete'",
+        "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:51",
+        "steps": [
+          "Open Delete file for Test report.pdf and confirm.",
+          "Return HTTP 503 after the DELETE was dispatched.",
+          "Click Confirm delete again."
+        ],
+        "actual": "The button is enabled immediately and a second DELETE is sent. The dialog has a generic failure only and no unknown-outcome state/reconciliation.",
+        "expected": "Disclose that the dispatched outcome is unknown and require current-state/operation reconciliation before presenting a renewed destructive intent."
+      },
+      "evidence": [
+        "browser-results.json",
+        "defect-repeat-delete.png"
+      ],
+      "deploymentImpact": "Blocks acceptance of interrupted-delete recovery. The browser proves repeat dispatch only; backend idempotency and duplicate effects were not tested. Lower priority than CP-01."
+    },
+    {
+      "id": "CP-04",
+      "severity": "P2",
+      "classification": "CONFIRMED_VISUAL_AND_WORKFLOW_MISMATCH",
+      "title": "Facilities entry opens a standalone editor instead of the designed management dialog",
+      "rowIds": [
+        "CORE-033",
+        "CORE-034",
+        "CORE-035",
+        "CORE-037",
+        "CORE-038",
+        "CORE-039"
+      ],
+      "figmaFrames": [
+        "411:58068",
+        "411:58269"
+      ],
+      "source": [
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+          "line": 73
+        },
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+          "line": 33
+        },
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+          "line": 28
+        }
+      ],
+      "reproduction": {
+        "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'capture overview'",
+        "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:6",
+        "steps": [
+          "Load overview with the existing synthetic facility fixture.",
+          "Click the plus Add facility control in District nexus."
+        ],
+        "actual": "A 640px standalone Add facility form opens; the existing facility list, inline Edit/Remove controls and inline geocode candidates are absent from this dialog. State is a free-text input and address fields use the generic two-column grid.",
+        "expected": "Figma 411:58068/58269 specifies a 700px Facilities: client manager with saved facility cards above an inline add/edit form, City/State/ZIP in three columns, and footer Add facility/Done."
+      },
+      "evidence": [
+        "figma-411-58068.json",
+        "figma-411-58068.png",
+        "figma-411-58269.json",
+        "figma-411-58269.png",
+        "rendered-facility-add.png"
+      ],
+      "deploymentImpact": "Blocks exact design/workflow acceptance for the facility manager, not the validity of existing guarded add/edit/geocode adapters. Recomposition is frontend work; provider/native qualification stays separate. The map error visible behind this capture is an intentionally unstubbed fixture contract and is not a product finding."
+    },
+    {
+      "id": "CP-05",
+      "severity": "P2",
+      "classification": "CONFIRMED_VISUAL_MISMATCH",
+      "title": "Overview timeline retains a generic dot list instead of the designed grouped activity feed",
+      "rowIds": [
+        "CORE-048",
+        "CORE-103",
+        "CORE-104",
+        "CORE-105",
+        "CORE-107",
+        "CORE-110"
+      ],
+      "figmaFrames": [
+        "411:48800",
+        "411:48826",
+        "411:49051",
+        "411:60193"
+      ],
+      "source": [
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+          "line": 55
+        },
+        {
+          "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+          "line": 59
+        }
+      ],
+      "reproduction": {
+        "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'capture overview'",
+        "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:6",
+        "steps": [
+          "Open overview with one recorded note in the existing activity contract.",
+          "Compare timeline markup and capture against full context for 411:48826."
+        ],
+        "actual": "Each item uses the same grey dot/vertical connector, raw kind on a separate line and full timestamp. CSS limits the internal list to 420px. No date-group headers or kind-specific icon tiles are rendered.",
+        "expected": "The supplied default timeline has dated groups, 70px bordered feed rows, 32px kind icon tiles, compact metadata and row-level status/action positions. Expanded dialog 411:60193 is also not mounted by the current overview."
+      },
+      "evidence": [
+        "figma-411-48800.png",
+        "figma-411-48826.json",
+        "figma-411-48826.png",
+        "figma-411-60524.json",
+        "rendered-timeline.png",
+        "figma-411-60524.png"
+      ],
+      "deploymentImpact": "Blocks exact timeline visual acceptance. Existing filtering and guarded actions remain independently implemented; no pagination or native-history completeness is claimed.",
+      "evidenceLimit": "The 411:48826 and 411:49157 child raster exports are ancestor-clipped. Dated group/icon/70px row geometry is established by full returned design context; 411:60524 supplies an unobscured timeline visual. The owner-excluded Open commitments summary is not part of this defect."
+    },
+    {
+      "id": "CP-06",
+      "severity": "P2",
+      "classification": "CONFIRMED_VISUAL_MISMATCH",
+      "title": "Files toolbar and results header do not follow the supplied Files composition",
+      "rowIds": [
+        "CORE-052",
+        "CORE-053",
+        "CORE-062"
+      ],
+      "figmaFrames": [
+        "411:52484",
+        "411:53189"
+      ],
+      "source": [
+        {
+          "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+          "line": 106
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+          "line": 200
+        }
+      ],
+      "reproduction": {
+        "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'capture Files'",
+        "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:20",
+        "steps": [
+          "Open client Files with the existing two-file fixture and wait for fonts/table.",
+          "Compare structural controls with Figma 411:52484."
+        ],
+        "actual": "Source and sort are adjacent native selects after search; result count and Move to folder form a detached toolbar above the table. The table has no enclosing folder header/breadcrumb or Upload here action. The alternate Folders card-grid view shown in 411:53189 is also absent; only the sidebar/table view is implemented.",
+        "expected": "Figma uses an inline source-chip row, right-aligned Sort Created, and a table card with folder breadcrumb/name/count and Upload here header. Differences in fixture file count, names and unavailable quotas are excluded from this finding."
+      },
+      "evidence": [
+        "figma-411-52484.json",
+        "figma-411-52484.png",
+        "rendered-files.png",
+        "figma-411-53189.json",
+        "figma-411-53189.png"
+      ],
+      "deploymentImpact": "Blocks exact Files presentation acceptance. Smart-link composition and source-taxonomy definitions remain separate owner dependencies; do not invent unavailable records/categories."
+    }
+  ]
+}

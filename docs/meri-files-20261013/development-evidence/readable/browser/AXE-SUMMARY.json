@@ -1,0 +1,65 @@
+[
+  {
+    "test": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "path": "axe-1.json",
+    "violations": 0,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "._newConversation_sgeic_65"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "test": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "path": "axe-2.json",
+    "violations": 0,
+    "incomplete": []
+  },
+  {
+    "test": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "path": "axe-3.json",
+    "violations": 0,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            "._newConversation_sgeic_65"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "test": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+    "path": "axe-4.json",
+    "violations": 0,
+    "incomplete": []
+  },
+  {
+    "test": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+    "path": "axe-5.json",
+    "violations": 0,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".bg-primary"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "test": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+    "path": "axe-6.json",
+    "violations": 0,
+    "incomplete": []
+  }
+]

@@ -1,0 +1,181 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/api/src/engagement/engagement.service.ts
+ 8377   private async deleteAttachmentGuarded(
+ 8378     ctx: TenantContext,
+ 8379     id: string,
+ 8380     guard?: SyntheticDocumentDeletionGuard,
+ 8381   ) {
+ 8382     let attachment = await this.prisma.withTenant(ctx.tenantId, async (tx) => {
+ 8383       const row = await tx.engagementAttachment.findFirst({
+ 8384         where: { id, tenantId: ctx.tenantId },
+ 8385       });
+ 8386       if (!row) throw new NotFoundException('Attachment not found');
+ 8387       return row;
+ 8388     });
+ 8389     await assertProspectAttachmentAccess(this.prisma, ctx, attachment, 'delete');
+ 8390     await this.validateAttachmentParents(ctx, {
+ 8391       prospectId: attachment.prospectId ?? undefined,
+ 8392       clientId: attachment.clientId ?? undefined,
+ 8393       meetingId: attachment.meetingId ?? undefined,
+ 8394       mailMessageId: attachment.mailMessageId ?? undefined,
+ 8395     });
+ 8396 
+ 8397     // 1. Record the intent FIRST. From this moment the file is unusable and
+ 8398     //    undownloadable even if the steps below fail or the process dies.
+ 8399     //    Phase 2 §d: unshare-before-delete — a shared attachment must stop
+ 8400     //    surfacing in the client-facing shared feed the moment its deletion is
+ 8401     //    recorded, even while the row lingers in delete_pending/delete_failed
+ 8402     //    for S3 retry. Clearing is unconditional (a harmless no-op when the
+ 8403     //    attachment was already private).
+ 8404     let fixtureIntent: string | undefined;
+ 8405     if (guard) {
+ 8406       const claimed = await this.prisma.withTenantUser(ctx.tenantId, ctx.userId, (tx) =>
+ 8407         guardSyntheticDocumentDeletionInTx(tx, ctx, id, guard, this.bucket, 'claim'),
+ 8408       );
+ 8409       if (!claimed.attachment) throw new ForbiddenException('Synthetic document claim is missing');
+ 8410       attachment = claimed.attachment;
+ 8411       fixtureIntent = claimed.intent;
+ 8412     } else
+ 8413       await this.prisma.withTenant(ctx.tenantId, async (tx) => {
+ 8414         await assertProspectAttachmentInTx(tx, ctx, attachment, 'delete');
+ 8415         return tx.engagementAttachment.updateMany({
+ 8416           where: { id, tenantId: ctx.tenantId },
+ 8417           data: { lifecycleStatus: 'delete_pending', sharedAt: null, sharedByUserId: null },
+ 8418         });
+ 8419       });
+ 8420 
+ 8421     // 2. Delete the object OUTSIDE any transaction.
+ 8422     if (this.bucket) {
+ 8423       try {
+ 8424         await this.s3.send(new DeleteObjectCommand({ Bucket: this.bucket, Key: attachment.s3Key }));
+ 8425       } catch (e) {
+ 8426         // 3b. Retain the row for reconciliation. Never expose the object.
+ 8427         await this.prisma
+ 8428           .withTenant(ctx.tenantId, async (tx) => {
+ 8429             if (fixtureIntent)
+ 8430               await tx.$executeRaw`UPDATE engagement_attachments SET lifecycle_status='delete_failed',
+ 8431                 extraction_metadata_jsonb=extraction_metadata_jsonb || ${JSON.stringify({ deleteError: (e as Error).message.slice(0, 300), deleteFailedAt: new Date().toISOString() })}::jsonb
+ 8432                 WHERE tenant_id=${ctx.tenantId}::uuid AND id=${id}::uuid AND lifecycle_status='delete_pending'
+ 8433                   AND extraction_metadata_jsonb->>'syntheticFixtureDeleteIntent'=${fixtureIntent}`;
+ 8434             else
+ 8435               await tx.engagementAttachment.updateMany({
+ 8436                 where: { id, tenantId: ctx.tenantId },
+ 8437                 data: {
+ 8438                   lifecycleStatus: 'delete_failed',
+ 8439                   extractionMetadata: {
+ 8440                     deleteError: (e as Error).message.slice(0, 300),
+ 8441                     deleteFailedAt: new Date().toISOString(),
+ 8442                   } as unknown as Prisma.InputJsonValue,
+ 8443                 },
+ 8444               });
+ 8445           })
+ 8446           .catch((markErr) =>
+ 8447             this.logger.error(
+ 8448               `could not mark attachment ${id} delete_failed: ${(markErr as Error).message}`,
+ 8449             ),
+ 8450           );
+ 8451         this.logger.error(
+ 8452           `attachment ${id} S3 delete FAILED; row retained as delete_failed for retry: ${
+ 8453             (e as Error).message
+ 8454           }`,
+ 8455         );
+ 8456         throw new ServiceUnavailableException({
+ 8457           statusCode: HttpStatus.SERVICE_UNAVAILABLE,
+ 8458           error: 'ATTACHMENT_DELETE_FAILED',
+ 8459           message:
+ 8460             'The file could not be removed from storage. It has been made inaccessible and the deletion will be retried — no download link remains valid.',
+ 8461         });
+ 8462       }
+ 8463     }
+ 8464 
+ 8465     // 3a. Object gone: drop the row and purge KB chunks.
+ 8466     if (guard) {
+ 8467       await this.prisma.withTenantUser(ctx.tenantId, ctx.userId, async (tx) => {
+ 8468         await guardSyntheticDocumentDeletionInTx(tx, ctx, id, guard, this.bucket, 'finish');
+ 8469         // A fixture reset must not acknowledge deletion while searchable chunks
+ 8470         // survive. Index writers use this same attachment lock and recheck its
+ 8471         // lifecycle, so purge and row deletion commit or roll back together.
+ 8472         await this.clientKb.purgeAttachmentChunks(tx, ctx.tenantId, id);
+ 8473         await tx.engagementAttachment.delete({ where: { id } });
+ 8474       });
+ 8475     } else
+ 8476       await this.prisma.withTenant(ctx.tenantId, (tx) =>
+ 8477         tx.engagementAttachment.delete({ where: { id } }),
+ 8478       );
+ 8479     // Client KB (F5): deleting a document removes its chunks from retrieval.
+ 8480     if (attachment.clientId && !guard) {
+ 8481       this.clientKb.purgeFireAndForget(ctx.tenantId, 'client_doc_chunk', id);
+ 8482     }
+ 8483     return { ok: true };
+ 8484   }
+ 8485 
+ 8486   /** Internal reset readback: current object and index absence, never a write. */
+ 8487   async inspectSyntheticFixtureAttachmentDeletion(
+ 8488     ctx: TenantContext,
+ 8489     id: string,
+ 8490     guard: SyntheticDocumentDeletionGuard,
+ 8491   ) {
+ 8492     const inspect = () =>
+ 8493       this.prisma.withTenantUser(ctx.tenantId, ctx.userId, async (tx) => {
+ 8494         const result = await guardSyntheticDocumentDeletionInTx(
+ 8495           tx,
+ 8496           ctx,
+ 8497           id,
+ 8498           guard,
+ 8499           this.bucket,
+ 8500           'inspect',
+ 8501         );
+ 8502         if (
+ 8503           result.state === 'absent' &&
+ 8504           (await this.clientKb.hasAttachmentChunks(tx, ctx.tenantId, id))
+ 8505         )
+ 8506           throw new ConflictException('Synthetic document index cleanup is incomplete');
+ 8507         return result;
+ 8508       });
+ 8509     const before = await inspect();
+ 8510     if (before.state !== 'absent')
+ 8511       return {
+ 8512         state: before.state,
+ 8513         rowVersion: before.rowVersion,
+ 8514         originalRowVersion: before.state === 'pending' ? guard.expectedRowVersion : null,
+ 8515       };
+ 8516     let absent = false;
+ 8517     try {
+ 8518       await this.s3.send(new HeadObjectCommand({ Bucket: this.bucket, Key: before.s3Key }));
+ 8519     } catch (error) {
+ 8520       const failure = error as { name?: string; $metadata?: { httpStatusCode?: number } };
+ 8521       if (
+ 8522         failure?.$metadata?.httpStatusCode === 404 &&
+ 8523         ['NotFound', 'NoSuchKey'].includes(failure.name ?? '')
+ 8524       )
+ 8525         absent = true;
+ 8526       else throw error;
+ 8527     }
+ 8528     if (!absent) throw new ConflictException('Synthetic document storage cleanup is incomplete');
+ 8529     const after = await inspect();
+ 8530     if (after.state !== 'absent')
+ 8531       throw new ConflictException('Synthetic document changed during cleanup readback');
+ 8532     return {
+ 8533       state: 'absent' as const,
+ 8534       rowVersion: null,
+ 8535       originalRowVersion: null,
+ 8536       currentObjectAbsent: true,
+ 8537       indexedChunksAbsent: true,
+ 8538     };
+ 8539   }
+ 8540 
+ 8541   /**
+ 8542    * System-driven counterpart to {@link deleteAttachment} for age/policy-based
+ 8543    * retention sweeps (e.g. NotetakerService.reconcileExpiredTranscripts) that
+ 8544    * erase by attachment id with no authenticated user in the loop. Mirrors
+ 8545    * deleteAttachment's recoverable S3-then-row erasure (see its comment for why
+ 8546    * that ordering avoids leaving an orphaned S3 object), scoped by tenantId
+ 8547    * (like reconcileFailedAttachmentDeletes below) rather than a TenantContext,
+ 8548    * and via withSystem since callers sweep across tenants.
+ 8549    *
+ 8550    * Deliberately skips deleteAttachment's validateAttachmentParents →
+ 8551    * ensureOwnMeeting check. That check requires the caller to OWN the
+ 8552    * attachment's parent meeting, which is right for a user-initiated delete but
+ 8553    * wrong here: a retention sweep isn't acting on anyone's behalf, so there is
+ 8554    * no user to authorize against — and ownMeetingWhere() deliberately excludes
+ 8555    * a meeting calendar sync soft-deleted (status='deleted'). That meeting row
+ 8556    * (and its FK-cascaded attachments) still exists, so the exclusion is

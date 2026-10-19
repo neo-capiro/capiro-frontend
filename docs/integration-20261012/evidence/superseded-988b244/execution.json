@@ -1,0 +1,22 @@
+{
+  "source": "988b2440af43eb0696906c8f686aeb59898ee963",
+  "tree": "c55f7c2ba96fdb63eecc34984a3f6920ff5b767a",
+  "steps": [
+    {
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--fund=false",
+        "--cache",
+        "/tmp/capiro-npm-cache"
+      ],
+      "started": "2026-10-12T04:01:54.664779+00:00",
+      "log": "/tmp/capiro-sync-qualification/clean-install.txt",
+      "finished": "2026-10-12T04:02:06.028130+00:00",
+      "exit": 0
+    }
+  ]
+}

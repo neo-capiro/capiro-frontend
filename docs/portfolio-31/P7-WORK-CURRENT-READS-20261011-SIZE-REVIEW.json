@@ -1,0 +1,22 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+    "kind": "function",
+    "symbol": "WorkPage",
+    "nonblank": 168,
+    "fingerprint": "9e2690b40c548ae27d296fcc9913f732facac3f840fa250c37468a65093ba26f",
+    "reason": "WorkPage composes one client-scoped read-only view of Strategy summaries and their verified details. Its successful-read gate determines the same cards, upcoming rows, risks and existing-application links; completeness determines the aggregate counts. Native validation and projection remain in contracts.ts, request keys and cancellation in queries.ts, and legacy document association in WorkspaceDocuments. The remaining JSX presents those coupled projections without transport, mutation, editor state or a second service owner. Extracting that JSX only to shorten the function would not separate a mixed responsibility.",
+    "reviewedBy": "portfolio_objectives",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceDocuments",
+    "nonblank": 102,
+    "fingerprint": "c76a27aafcf0edda0804f0486f4fef0c0fdf639968e875aad19667ed0ddf0205",
+    "reason": "WorkspaceDocuments owns one document-list association gate: current Workspace read, exact current Client response, and current accessible client catalog must all succeed before rows or document links can appear. Its loading, error, retry, duplicate-name explanation and table branches are the presentation of that same gate. Exact legacy-name matching is isolated in contracts.ts, fetching stays in query owners, and document editing remains in the existing Workspace application. Keeping the gate around the table prevents cached denied or mismatched reads from remaining actionable; no unrelated persistence or selection lifecycle is mixed into the component.",
+    "reviewedBy": "portfolio_objectives",
+    "reviewedOn": "2026-10-11"
+  }
+]

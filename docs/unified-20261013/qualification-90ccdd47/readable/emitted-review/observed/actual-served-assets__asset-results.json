@@ -1,0 +1,1446 @@
+{
+  "startedUTC": "2026-10-13T09:48:43.356Z",
+  "endedUTC": "2026-10-13T09:48:44.175Z",
+  "runtime": "v24.19.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "glibc": "2.41",
+  "count": 179,
+  "bytes": 486014,
+  "success": true,
+  "error": null,
+  "entries": [
+    {
+      "path": "/newsletter/capitol.png",
+      "status": 200,
+      "bytes": 31192,
+      "sha256": "f354a71c6fce886271809b0c5c73c7e0ee6012d73558bc23b5f5375756565312",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/capitol.svg",
+      "status": 200,
+      "bytes": 1333,
+      "sha256": "65221548aa001bf52618eac9e4109e1cd644af431932457d0d59e8921e33e7a9",
+      "contentType": "image/svg+xml",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/newsroom.png",
+      "status": 200,
+      "bytes": 55820,
+      "sha256": "169ade838cad34c618a6647adb4c6b6f07a5fb40bddd5ab111d53cf443ab8531",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/newsroom.svg",
+      "status": 200,
+      "bytes": 992,
+      "sha256": "a38871eedf905dcf79932e9b59f5beb9b94743af9054915d84702bf9368189dd",
+      "contentType": "image/svg+xml",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/policy-desk.png",
+      "status": 200,
+      "bytes": 27879,
+      "sha256": "05d2175fb65fc3307bf8ae6a7e851fae617029887b90ba81910fbb0c78b15556",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/policy-desk.svg",
+      "status": 200,
+      "bytes": 1089,
+      "sha256": "d1cd4dc690d7ae35954b28ea9f4d1a2a9e2e3d1b010737025da96673f7b674db",
+      "contentType": "image/svg+xml",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-color-white.png",
+      "status": 200,
+      "bytes": 2310,
+      "sha256": "0b3c385b4f08354f562f3b5bda38ae02f6872fb6252cc4e1fb16ff5985180e9c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-color.png",
+      "status": 200,
+      "bytes": 1650,
+      "sha256": "57ea6baf35376dbf032b50720ae35514f483f6ae93b7a374f13d31d2b93e86f4",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-dark-white.png",
+      "status": 200,
+      "bytes": 2446,
+      "sha256": "86a6518fb25adfebf24583fb6434c760efc1283b0bb1ce44742ee54bc90d0667",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-dark.png",
+      "status": 200,
+      "bytes": 1662,
+      "sha256": "bfbf1edd9f6fe91a314b265a5424906bddd7d34648a7e5a3ddc72e05d60f857c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-gray-black.png",
+      "status": 200,
+      "bytes": 2357,
+      "sha256": "203ffa95129c9f29487b84b06361ca697492bfebd4459bc6af5831edbfa9886f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-gray.png",
+      "status": 200,
+      "bytes": 1654,
+      "sha256": "76425ad7fc9033efaf257403f9f4ec4ae1f05e976168b6144a4c0ea8d159d4f7",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-light-black.png",
+      "status": 200,
+      "bytes": 2321,
+      "sha256": "d1dfedff3f6f3d8593495fdac0a001499d9bfc994c86de0249982c78e30b09af",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-bluesky-light.png",
+      "status": 200,
+      "bytes": 1447,
+      "sha256": "1f2b6591af5c8d287dd14cc96cd0f1e4f2524cc1d0c0ae63dc92914cc19dd92a",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-color-white.png",
+      "status": 200,
+      "bytes": 2482,
+      "sha256": "89308182c2c88a3fd1071fe21daeb51e451b69452b76dc2b916505807108ce17",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-color.png",
+      "status": 200,
+      "bytes": 1821,
+      "sha256": "e520edcab7e85eff28476a342f6ee1eec0bc54ded5045142be8ec582968c1bca",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-dark-white.png",
+      "status": 200,
+      "bytes": 2409,
+      "sha256": "a5265c9d8a43d808cadaad971740ead1782c5c2951aecda9a7bf2049f49dbd2b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-dark.png",
+      "status": 200,
+      "bytes": 1629,
+      "sha256": "639681083e279b079c287e39e37bde0023e25f3a7f3165f753cd612035d85a7b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-gray-black.png",
+      "status": 200,
+      "bytes": 2291,
+      "sha256": "94b821a5ae06e7a802518054e376ac6abfca924b15c7dca32d58cb0945255a4d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-gray.png",
+      "status": 200,
+      "bytes": 1643,
+      "sha256": "85a1018cb0056569143f7c0603c1473264209a7d4ca883ddd129bcd36920a368",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-light-black.png",
+      "status": 200,
+      "bytes": 2269,
+      "sha256": "5f1c0fa5d40ed182f43b289a34bdd95f2286c1083bfe479756b2fda02c93063d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-discord-light.png",
+      "status": 200,
+      "bytes": 1456,
+      "sha256": "7d273df8dce52a3ddab7ffd3addbb8820541fa688f0ab2d39f9142a538db7ef5",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-color-white.png",
+      "status": 200,
+      "bytes": 2138,
+      "sha256": "f3f485f210e365dc3bd61af79eb6c1a821c66669497aa1dc6155d5cee70b3fed",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-color.png",
+      "status": 200,
+      "bytes": 1308,
+      "sha256": "129499f19fcf77754570e6a5fb24f7bc19437f5d4de37fca61a4dc2a5133ee30",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-dark-white.png",
+      "status": 200,
+      "bytes": 1983,
+      "sha256": "4d4b7385e60e04cebb4841dfb1b13b7fb8481f0ca8a299c6fad567c92fa7bce3",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-dark.png",
+      "status": 200,
+      "bytes": 1160,
+      "sha256": "c87d68267772106228730761e35f0fd29748c1f6a5a5037e79896992d92e2a55",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-gray-black.png",
+      "status": 200,
+      "bytes": 1948,
+      "sha256": "103b83fe42945603c2c1746a105b3159f7d51074e6cc402981fb020bd4c80a4e",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-gray.png",
+      "status": 200,
+      "bytes": 1172,
+      "sha256": "3e0f768fe342cf452d2613592142ed948d549a7e7632bb2e72c3ba93d60cc002",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-light-black.png",
+      "status": 200,
+      "bytes": 1817,
+      "sha256": "6dae9248027e8144a17c93b5462b5be54985094ab7dde5e062a44ccde2668a17",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-email-light.png",
+      "status": 200,
+      "bytes": 1019,
+      "sha256": "e5c4ac1468785680e45d5fa3d6543f85f533bd6ea9729c7e2b7784eef2fc0293",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-color-white.png",
+      "status": 200,
+      "bytes": 1867,
+      "sha256": "67d9a8abfb21af6e7a446be59553ac118ae1253f0ba157c669cba2e17dce8282",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-color.png",
+      "status": 200,
+      "bytes": 790,
+      "sha256": "6663e43fa3f23efa7152cfa793d4282a0ac753e622b0ccea2cfe12725dea45d7",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-dark-white.png",
+      "status": 200,
+      "bytes": 1717,
+      "sha256": "381250bbe91c193a66fc455126018444ce43d53b0fdc4bfbbfbbea038c2a2735",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-dark.png",
+      "status": 200,
+      "bytes": 715,
+      "sha256": "b2b692659f3cad58a8065b38d43144ab7c4fbb6ead5a077c48631afdd56d7782",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-gray-black.png",
+      "status": 200,
+      "bytes": 1706,
+      "sha256": "e0235b9f6d9b9359c9db866f44bb6fd088010a164d7110ddbb7b950f7526aabe",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-gray.png",
+      "status": 200,
+      "bytes": 731,
+      "sha256": "a915c51ce0e63b14750736ec079a1080a827019aba960bcd77a72460b1a253ed",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-light-black.png",
+      "status": 200,
+      "bytes": 1556,
+      "sha256": "c6a3d59cbcaeaf779d0819333afea1241244fcb52662d16137158b7053abdce3",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-facebook-light.png",
+      "status": 200,
+      "bytes": 625,
+      "sha256": "dc08d9cff42fde4e541e9030ba0fed335d6c3d11e449910dfd85d72c6f8e4935",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-color-white.png",
+      "status": 200,
+      "bytes": 2138,
+      "sha256": "f3f485f210e365dc3bd61af79eb6c1a821c66669497aa1dc6155d5cee70b3fed",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-color.png",
+      "status": 200,
+      "bytes": 1308,
+      "sha256": "129499f19fcf77754570e6a5fb24f7bc19437f5d4de37fca61a4dc2a5133ee30",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-dark-white.png",
+      "status": 200,
+      "bytes": 1983,
+      "sha256": "4d4b7385e60e04cebb4841dfb1b13b7fb8481f0ca8a299c6fad567c92fa7bce3",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-dark.png",
+      "status": 200,
+      "bytes": 1160,
+      "sha256": "c87d68267772106228730761e35f0fd29748c1f6a5a5037e79896992d92e2a55",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-gray-black.png",
+      "status": 200,
+      "bytes": 1948,
+      "sha256": "103b83fe42945603c2c1746a105b3159f7d51074e6cc402981fb020bd4c80a4e",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-gray.png",
+      "status": 200,
+      "bytes": 1172,
+      "sha256": "3e0f768fe342cf452d2613592142ed948d549a7e7632bb2e72c3ba93d60cc002",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-light-black.png",
+      "status": 200,
+      "bytes": 1817,
+      "sha256": "6dae9248027e8144a17c93b5462b5be54985094ab7dde5e062a44ccde2668a17",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-forward-light.png",
+      "status": 200,
+      "bytes": 1019,
+      "sha256": "e5c4ac1468785680e45d5fa3d6543f85f533bd6ea9729c7e2b7784eef2fc0293",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-icons-attribution.txt",
+      "status": 200,
+      "bytes": 508,
+      "sha256": "3aadf1580c4a90dfac6895616a13241759ad253615091782edcd07b444f924a0",
+      "contentType": "text/plain; charset=UTF-8",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-icons-license.txt",
+      "status": 200,
+      "bytes": 7427,
+      "sha256": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced",
+      "contentType": "text/plain; charset=UTF-8",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-color-white.png",
+      "status": 200,
+      "bytes": 2890,
+      "sha256": "6b4e3b573b57848ea163ae403a62ebeb5bf01367d10997ff593beae9de38a4ef",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-color.png",
+      "status": 200,
+      "bytes": 2376,
+      "sha256": "90dae07d0fdea7d5c1d5cd4b778978be8103f84827ea18b597734a59561f13fc",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-dark-white.png",
+      "status": 200,
+      "bytes": 2785,
+      "sha256": "fb9bc16551337004984abc9236c31cda5e6e94f868a911f666a8d68bd9450568",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-dark.png",
+      "status": 200,
+      "bytes": 2113,
+      "sha256": "4855c6de2962e3a101d293af1abded13491bd96ceb9f234d6293028e88e9faa5",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-gray-black.png",
+      "status": 200,
+      "bytes": 2566,
+      "sha256": "595de397df837eca6f2c14955c63d205fdb34a0fac33a6b07454da9051d311fd",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-gray.png",
+      "status": 200,
+      "bytes": 2128,
+      "sha256": "84ec1f1bc9fd7b93f9dd1a4343471b374071b517e188c9cfa0681b7819d1c084",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-light-black.png",
+      "status": 200,
+      "bytes": 2646,
+      "sha256": "01d4a8feefd19c1f1f8dd11c2cb88e9bc2a645c5eaeb5bc94b2a20f73d082d28",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instagram-light.png",
+      "status": 200,
+      "bytes": 1886,
+      "sha256": "879a9b410dfd0a3e15c51d839295025cec90c44c70573f8ef5f83662bc887ecf",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-color-white.png",
+      "status": 200,
+      "bytes": 1411,
+      "sha256": "cbe7a103b05095eaf9355f7078b67c75dfa83aef91b57baab97cfd115a2a645c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-color.png",
+      "status": 200,
+      "bytes": 315,
+      "sha256": "d6d0d6f3e773667754e5eea4bef60fcdcdee20eff8482d45d63a394898876116",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-dark-white.png",
+      "status": 200,
+      "bytes": 1411,
+      "sha256": "cbe7a103b05095eaf9355f7078b67c75dfa83aef91b57baab97cfd115a2a645c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-dark.png",
+      "status": 200,
+      "bytes": 315,
+      "sha256": "d6d0d6f3e773667754e5eea4bef60fcdcdee20eff8482d45d63a394898876116",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-gray-black.png",
+      "status": 200,
+      "bytes": 1425,
+      "sha256": "b203e0b47e8921ad9125bbac2ece6efc1f3294ee1d4478bfd8e802058a1d4306",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-gray.png",
+      "status": 200,
+      "bytes": 315,
+      "sha256": "3e9d5a4fa581f7cad89a2529ef773eada5b83cf3e60a060e972da4f6c67f9f57",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-light-black.png",
+      "status": 200,
+      "bytes": 1247,
+      "sha256": "627cf0469dae946737183e43876292b45cbb04e1746adedfd891722c1db2aecd",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-instapaper-light.png",
+      "status": 200,
+      "bytes": 289,
+      "sha256": "a693bdb89c13930c8987578871b7e999e8ff2fda7bff6e4761fabe539bb74e79",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-color-white.png",
+      "status": 200,
+      "bytes": 2053,
+      "sha256": "bc6a22e4e0ec5c8bfbc36b5350c571331930e9c560c7f349185a5de64c34af5a",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-color.png",
+      "status": 200,
+      "bytes": 963,
+      "sha256": "22b3688ae09f67ebde18d5704f0ec2c280fd66b30e3ade93663f563feb0176d3",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-dark-white.png",
+      "status": 200,
+      "bytes": 1897,
+      "sha256": "a00056e733d43d567df49d92d9cf390d988f6f29099e8e03c1ee52bd6bc964cb",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-dark.png",
+      "status": 200,
+      "bytes": 854,
+      "sha256": "65c9ea02b894763b15403f854a5465ceb40184ff519b90d086b8d0b11195ed99",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-gray-black.png",
+      "status": 200,
+      "bytes": 1877,
+      "sha256": "7b5e16d9d1cb223727a6307973054c7fa7cbae1fce6fb3f8cb5c73ec56f48fa6",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-gray.png",
+      "status": 200,
+      "bytes": 861,
+      "sha256": "90e23ed7ea81bc7ec815cf4ce879d2de4352bd217dec3d10d64292f3b0370c9d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-light-black.png",
+      "status": 200,
+      "bytes": 1749,
+      "sha256": "c1d74753b0e8e601b0204f017e1caae1643ded51bf28761ea5ce63580fc64af4",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-linkedin-light.png",
+      "status": 200,
+      "bytes": 747,
+      "sha256": "41695e34c6ef8ca47ad2346cb1570a978d685513120899ba49d508305f00f5aa",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-color-white.png",
+      "status": 200,
+      "bytes": 2075,
+      "sha256": "1d0ead9a6caf784c669fea3f39c37b492d1a1d33b1f1412b2a09007a166f9d3c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-color.png",
+      "status": 200,
+      "bytes": 1197,
+      "sha256": "2867ee10d25439468a0cca99a6c17bd97f55cfc72f542b34c155f71e52823a92",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-dark-white.png",
+      "status": 200,
+      "bytes": 2075,
+      "sha256": "1d0ead9a6caf784c669fea3f39c37b492d1a1d33b1f1412b2a09007a166f9d3c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-dark.png",
+      "status": 200,
+      "bytes": 1197,
+      "sha256": "2867ee10d25439468a0cca99a6c17bd97f55cfc72f542b34c155f71e52823a92",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-gray-black.png",
+      "status": 200,
+      "bytes": 2051,
+      "sha256": "6a858ab503828e066f991193a93481268548c2a77e4fbb91d0e73a2300ac4598",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-gray.png",
+      "status": 200,
+      "bytes": 1219,
+      "sha256": "e70ab6a706e93accb4e48d8f07b5d2f829199474d650611eacccc69749343937",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-light-black.png",
+      "status": 200,
+      "bytes": 1938,
+      "sha256": "19978bf302dfb5af8ff2d265b624f289b14c15730b4533b78ebe2d3a95386e79",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-patreon-light.png",
+      "status": 200,
+      "bytes": 1055,
+      "sha256": "a3332592c641c17b65ecda9aa22824f1e8ec93eb22b31ccc1433298b63acec21",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-color-white.png",
+      "status": 200,
+      "bytes": 2700,
+      "sha256": "09c83407f18ef32e5fad185f4ddc2ecbbb25cf5dbb8e872963b026c44bd55b11",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-color.png",
+      "status": 200,
+      "bytes": 1923,
+      "sha256": "d332b9eb060dbda2fbfc3425d79e6ab03ca437cfdb646977c3ac15ea75d07e49",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-dark-white.png",
+      "status": 200,
+      "bytes": 2601,
+      "sha256": "29076f169ca1822edf14e8adf1f187c32df3fd254ad5020dda57e92c978dc9fd",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-dark.png",
+      "status": 200,
+      "bytes": 1813,
+      "sha256": "5b9189168c0142122a31fe9f47bac9d0e6289d7e86c4be7155b1f483d48d7bc0",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-gray-black.png",
+      "status": 200,
+      "bytes": 2446,
+      "sha256": "c92728fa6a4642748fe69c0d1a6d0e05068489b4d81f01c68e9ed7c25bfbcd50",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-gray.png",
+      "status": 200,
+      "bytes": 1826,
+      "sha256": "1db3c76a12fa9c126b13ad0bafa7fa03f728dee316dc9022d25ab56ada0efd4d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-light-black.png",
+      "status": 200,
+      "bytes": 2458,
+      "sha256": "0a4b385853c343b6089267e3d199d9a03ee02faaffb4a013a81993010b7cbaf3",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-pinterest-light.png",
+      "status": 200,
+      "bytes": 1625,
+      "sha256": "610a19bc386a34d04b851d061add3fcf3b6d0f8a682b0fde4841db46f529956b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-color-white.png",
+      "status": 200,
+      "bytes": 2396,
+      "sha256": "8ebb780420ca7715ec77e6dc0609a1a484d927f00d1cb1d33da91e9b7826cee1",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-color.png",
+      "status": 200,
+      "bytes": 1791,
+      "sha256": "bb07a5506a9b40e9864413ad2717a3593004fc0120ed1bd74723df0ab9bd1e31",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-dark-white.png",
+      "status": 200,
+      "bytes": 2525,
+      "sha256": "d282b968b603233c5efcaa372ef764c177647e40b8cf8a41b4f859c962b474c5",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-dark.png",
+      "status": 200,
+      "bytes": 1806,
+      "sha256": "1bcd68d60a4c3cbb59e93e21320a790c530c284e27100f9eaca47c6d23efcda5",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-gray-black.png",
+      "status": 200,
+      "bytes": 2391,
+      "sha256": "b34c380e12cd9bc2f929a724c27e4f81d0916893d833ab7f6b5be8e5e0a8dcf2",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-gray.png",
+      "status": 200,
+      "bytes": 1812,
+      "sha256": "c73f5c8e8da0b23d8536c9f82149939397ef5c29dadbe8e484c186660a2349f1",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-light-black.png",
+      "status": 200,
+      "bytes": 2371,
+      "sha256": "38749ea14339cb782ec95662e07c7525cec8a828242fd0e3e842c2a92dc20d66",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-reddit-light.png",
+      "status": 200,
+      "bytes": 1614,
+      "sha256": "9a7aaa38579d9b1c3db920349143af7de2c7651d8cfd6e2e47f83169d4b2b812",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-color-white.png",
+      "status": 200,
+      "bytes": 2761,
+      "sha256": "4c3e03644f4362512307b10b1fdbfe676e5b9c67d63967187d03765afaea9cae",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-color.png",
+      "status": 200,
+      "bytes": 2127,
+      "sha256": "6dd67be1b3b71fba5f961e3902ced9ff84b77edf6cd4a2636a718898dcb7da40",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-dark-white.png",
+      "status": 200,
+      "bytes": 2756,
+      "sha256": "4fcd3770e1b4b9140e49571bbfb168e40f1da9d2d7de1a62c3456583a4aeaac1",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-dark.png",
+      "status": 200,
+      "bytes": 2024,
+      "sha256": "419ac155675fdb991444a492242104d4991bd5b3cdcfd78aceae6167b42ce206",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-gray-black.png",
+      "status": 200,
+      "bytes": 2568,
+      "sha256": "e8657e854432e6035b9148636ad853384f9cfb01d634698ab3827e1b6a08babd",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-gray.png",
+      "status": 200,
+      "bytes": 2031,
+      "sha256": "efc444fee08156bbbb01ebe0c7d9cad3ab7462086dc562e131911bcae86fe82c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-light-black.png",
+      "status": 200,
+      "bytes": 2606,
+      "sha256": "6e71bb3d70fd141456ed210b05bd21d82bb107d15a81ba007eb06c3cc068542f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-snapchat-light.png",
+      "status": 200,
+      "bytes": 1773,
+      "sha256": "fb4c46fc46330efd3e6a6b958a1b4ce84911e78e659d2c88a535388b2d065f4c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-color-white.png",
+      "status": 200,
+      "bytes": 2858,
+      "sha256": "0a14961f567bb7e467a9f559e1bbad512818459eb0325b862f13c773215afb3d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-color.png",
+      "status": 200,
+      "bytes": 2312,
+      "sha256": "faf6fc4c2befe5f381bbbddcbb62b5cadb320f3f7ac862acba7809e6c130e786",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-dark-white.png",
+      "status": 200,
+      "bytes": 2701,
+      "sha256": "9b34ce740aa681e1034917352830a34e53b0e94244415756cc09cf85d51bbcd9",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-dark.png",
+      "status": 200,
+      "bytes": 2054,
+      "sha256": "1cd04c75ec6dd796c2e0981505f92b5a0b3349201d8ddd33489a7192df12ac23",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-gray-black.png",
+      "status": 200,
+      "bytes": 2549,
+      "sha256": "fecd7eba0eaecaf5ce943e7e2162a93f670ff4abaaa54eb48a9a93235b4cc5e8",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-gray.png",
+      "status": 200,
+      "bytes": 2048,
+      "sha256": "023b7a412119e973162ac0466e8c5cd16ab97d6be35ddab451dba6e1e110ef06",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-light-black.png",
+      "status": 200,
+      "bytes": 2580,
+      "sha256": "73f495e7d2c6b27783eed95102245dcf562307513ff2d236aea0fe9b63711176",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-spotify-light.png",
+      "status": 200,
+      "bytes": 1819,
+      "sha256": "321c78f5663a946573db55449de497adfb86843b59e2841e2020a8f611007997",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-color-white.png",
+      "status": 200,
+      "bytes": 2505,
+      "sha256": "8188660492814077392a66e8ce94f32fd0ad6b13acad9c655e839a69229e33ee",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-color.png",
+      "status": 200,
+      "bytes": 1918,
+      "sha256": "0672d630debab71a45918790cd16ea39918c10682d794663e29f2feccd525cc1",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-dark-white.png",
+      "status": 200,
+      "bytes": 2428,
+      "sha256": "779bf0a3d24b2e41e7d7396fce98c819f739041fa68472307f3eee1fdc7d8bbe",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-dark.png",
+      "status": 200,
+      "bytes": 1727,
+      "sha256": "361d75b65a3e29ef05b26690b2354d2ab6c0042175a43967893c6a93dc38618d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-gray-black.png",
+      "status": 200,
+      "bytes": 2325,
+      "sha256": "7cfd91ad58ec2c44a10240d126a3c054cd6a58116812f491bf432977ac27827b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-gray.png",
+      "status": 200,
+      "bytes": 1728,
+      "sha256": "5db15741d51610d6371527f95aa073c716c6c07a5d89c343b5043778b1f68f41",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-light-black.png",
+      "status": 200,
+      "bytes": 2305,
+      "sha256": "ea6d9aef5608dbf03881e16b6bfe706995c2193217318d83b539b76783be0cf7",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-telegram-light.png",
+      "status": 200,
+      "bytes": 1529,
+      "sha256": "7b516a39e95f1c742abc01bd2146ecede9aae62d4a23d7c3ada76b1a56cbe9b5",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-color-white.png",
+      "status": 200,
+      "bytes": 2906,
+      "sha256": "52f61238831c578b315ba29cd80c82968ef45264226fda2fb4f1956b175bdf89",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-color.png",
+      "status": 200,
+      "bytes": 2254,
+      "sha256": "1a7f413b1eb6b0b2fc1f61c3f029967dd5362f958ee7e1dff7462a3778ca712a",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-dark-white.png",
+      "status": 200,
+      "bytes": 2906,
+      "sha256": "52f61238831c578b315ba29cd80c82968ef45264226fda2fb4f1956b175bdf89",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-dark.png",
+      "status": 200,
+      "bytes": 2254,
+      "sha256": "1a7f413b1eb6b0b2fc1f61c3f029967dd5362f958ee7e1dff7462a3778ca712a",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-gray-black.png",
+      "status": 200,
+      "bytes": 2733,
+      "sha256": "5cba0b1abee34a73dcf931f2c7bcd207b99eac5ea394e76654cdd222bf045b2b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-gray.png",
+      "status": 200,
+      "bytes": 2253,
+      "sha256": "3b8f2f24cc39bcecef7f2ce688846e970c95983ddccdee69e3584568d5fdef7f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-light-black.png",
+      "status": 200,
+      "bytes": 2775,
+      "sha256": "0901e05135bc72682e3f02e4dfcdacc4aef078689fa342a9a1a20129e5724262",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-threads-light.png",
+      "status": 200,
+      "bytes": 2013,
+      "sha256": "4038d5e1898506d856ec1bbb7b2e3d7ad73647039dc66c57563db67f33fe6d0f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-color-white.png",
+      "status": 200,
+      "bytes": 2141,
+      "sha256": "635b18d8be4700147ba9ef750c71ae038f2acc5ac2a2eeaef99abba5e993b08a",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-color.png",
+      "status": 200,
+      "bytes": 1276,
+      "sha256": "f11f5655e22ba636c967173bdad3e35f1cef9fa2f90699e12739dc2737c73c14",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-dark-white.png",
+      "status": 200,
+      "bytes": 2141,
+      "sha256": "635b18d8be4700147ba9ef750c71ae038f2acc5ac2a2eeaef99abba5e993b08a",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-dark.png",
+      "status": 200,
+      "bytes": 1276,
+      "sha256": "f11f5655e22ba636c967173bdad3e35f1cef9fa2f90699e12739dc2737c73c14",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-gray-black.png",
+      "status": 200,
+      "bytes": 2072,
+      "sha256": "1bff7d2710e9cb57ef398b51cc9534a026dce4b2a85b45af9bad25471540ba6f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-gray.png",
+      "status": 200,
+      "bytes": 1295,
+      "sha256": "b790a48b9d78cdea4b7d2bf509654d807bdd798ac5f346854f423f839545317d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-light-black.png",
+      "status": 200,
+      "bytes": 1974,
+      "sha256": "6ec67c4bb8cc4aed5566386c1044ce47532092f8e40f0ab0671a8e9ef637d11e",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-tiktok-light.png",
+      "status": 200,
+      "bytes": 1151,
+      "sha256": "081fc38b655739c30376a3b061a2e889065e28d59ae42801261c0cb1df43f45c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-color-white.png",
+      "status": 200,
+      "bytes": 1989,
+      "sha256": "3fcbeb94f93f6dd9ee56e0d780d002ae862e6bd3e1fe089a75513d74430f748b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-color.png",
+      "status": 200,
+      "bytes": 1086,
+      "sha256": "c3fcc913d05a197adda61cfd9087a176b786ee7e6d39c369d25ca8a9c6b8b2fc",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-dark-white.png",
+      "status": 200,
+      "bytes": 1984,
+      "sha256": "73490bf0008bb4e39f513aed7e278457880b1b0c7235e858317a87df30283f3c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-dark.png",
+      "status": 200,
+      "bytes": 1023,
+      "sha256": "3e7c9efe6125e8cd4a4e68178e52f548bb490109f269d8916ea0dc3093d3aab4",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-gray-black.png",
+      "status": 200,
+      "bytes": 1942,
+      "sha256": "a0d10b9c6d0b4cbbe263df299934863ef79e50594d3c5085215e6ec827e3703c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-gray.png",
+      "status": 200,
+      "bytes": 1033,
+      "sha256": "af2ecaabe264d33839e2f5cb2e9e2e827b0c75b17a41092fe5b8c269e761f3ec",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-light-black.png",
+      "status": 200,
+      "bytes": 1790,
+      "sha256": "b6386bcb4bca3338191ea4ccfc6578b621c3ec19deac616dc38902d98958e010",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitch-light.png",
+      "status": 200,
+      "bytes": 917,
+      "sha256": "844b9b9dbb58a426f457bfc2e112e3c37173f3c2e51e783f44573a5e810ede7b",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-color-white.png",
+      "status": 200,
+      "bytes": 2527,
+      "sha256": "8cf9471dabc3e27b79924ede2d4757d89644baa4eb73ed3f7369dfb3c366b4b6",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-color.png",
+      "status": 200,
+      "bytes": 1566,
+      "sha256": "c5af90126682de59e86bbcd20f19202656f33af7d65436b73e2f3b9375e2e57d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-dark-white.png",
+      "status": 200,
+      "bytes": 2527,
+      "sha256": "8cf9471dabc3e27b79924ede2d4757d89644baa4eb73ed3f7369dfb3c366b4b6",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-dark.png",
+      "status": 200,
+      "bytes": 1566,
+      "sha256": "c5af90126682de59e86bbcd20f19202656f33af7d65436b73e2f3b9375e2e57d",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-gray-black.png",
+      "status": 200,
+      "bytes": 2350,
+      "sha256": "58e6c576494f4f3345bb2bdc565c1434eb015eaeac7afbc427266d0671078cbe",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-gray.png",
+      "status": 200,
+      "bytes": 1598,
+      "sha256": "f9596ef2e94b26695d47a3476550f9337d6643d18cb0a6bd769647a13e5dd405",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-light-black.png",
+      "status": 200,
+      "bytes": 2381,
+      "sha256": "169bcb508869e16479d1dd10937cb3b1e04f369245ce2a2d9ef97d56458163b3",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-twitter-light.png",
+      "status": 200,
+      "bytes": 1382,
+      "sha256": "d19ef5a522cb75e1f93daf1affe24461e95d6b1aaef093704411b1ffa077915e",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-update.png",
+      "status": 200,
+      "bytes": 40618,
+      "sha256": "6d60daba33551a9011e94329ba6cb7f11de119e9273bd386a8719d03e3b616f0",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-update.svg",
+      "status": 200,
+      "bytes": 890,
+      "sha256": "cb903be6b9a58d8beffd148b911805619ce3b99f9ca30c1895e76bfd412702ec",
+      "contentType": "image/svg+xml",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-color-white.png",
+      "status": 200,
+      "bytes": 3008,
+      "sha256": "5eb25284801c33ab0a7206ece87c9a82a12ea649a939b5f36608bdfaa456d363",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-color.png",
+      "status": 200,
+      "bytes": 2221,
+      "sha256": "b02e1d565a3356075c325eed876fd53fe3e303efe4f4b4b16f043fb589406579",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-dark-white.png",
+      "status": 200,
+      "bytes": 2855,
+      "sha256": "a00719634fbc3100faa492a0b262ec8190c9c55d60f687f49d6498faae9cacf5",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-dark.png",
+      "status": 200,
+      "bytes": 1947,
+      "sha256": "a8e5fe6990557c8f7992ddaa01235b2d7c26cb1860440bd80c7a67d1806737a0",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-gray-black.png",
+      "status": 200,
+      "bytes": 2582,
+      "sha256": "fdaca027657315c4c7922b51400a91a52bdbc6acbba6e824165e3e670d7b3efd",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-gray.png",
+      "status": 200,
+      "bytes": 1977,
+      "sha256": "8db22bf3683e8c900b3d4757c45f3a552981643ecf07a7c2fae180f6adb81b37",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-light-black.png",
+      "status": 200,
+      "bytes": 2725,
+      "sha256": "7fa75984c010b0db34b2aeacee79d074a77b6020f1d620f8781b5fcaf3d06868",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-website-light.png",
+      "status": 200,
+      "bytes": 1738,
+      "sha256": "29a36e11fada8a0cc25173eb80d635725107f65cd27807611371cc742d769a55",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-color-white.png",
+      "status": 200,
+      "bytes": 2973,
+      "sha256": "c0d3ed1110d5927cbe7fc5490b092b93f18078d8325045a2f31fc1d60f0663d6",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-color.png",
+      "status": 200,
+      "bytes": 2367,
+      "sha256": "69cc25e5b3f22e7b6e70f576729ba01cdcb505a6d9346f1f6a39aee5ecc17cf1",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-dark-white.png",
+      "status": 200,
+      "bytes": 2858,
+      "sha256": "283768ab2cad7c26a9d8a447fc9ec40b2ce7e971a94321c012aa7e4b7b0a8d8f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-dark.png",
+      "status": 200,
+      "bytes": 2138,
+      "sha256": "f0e518ada18fe673c6ea281cf148aea13c0291c2bab796a5fbb0923bd076776e",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-gray-black.png",
+      "status": 200,
+      "bytes": 2664,
+      "sha256": "955d3c09b6bcdd1d7ff5d2d26516b8e1219a65195ce0f76d6df4a62f38deb2d8",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-gray.png",
+      "status": 200,
+      "bytes": 2146,
+      "sha256": "c5284c7baeb9d296b63d1f9c3a4a0acea71242283e81152a3c38f718474e33c9",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-light-black.png",
+      "status": 200,
+      "bytes": 2708,
+      "sha256": "196883d58b0c63f339b957f4a97099d855f3b59fad8c1d1a6b43f94f9a4cfa44",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-whatsapp-light.png",
+      "status": 200,
+      "bytes": 1897,
+      "sha256": "e78dd49e46b3703ee9c9a8b1c553142b9089c02f0204c733203d19455009354c",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-color-white.png",
+      "status": 200,
+      "bytes": 1757,
+      "sha256": "2cb48501e44360174080667cb6b00b6c384f482f6d72fd128db8d7fc89ee4e19",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-color.png",
+      "status": 200,
+      "bytes": 1005,
+      "sha256": "744dd35066821a0b93021453deef00f11a5c4dccb1b0bfc3fa4e15640dac93fe",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-dark-white.png",
+      "status": 200,
+      "bytes": 1987,
+      "sha256": "127f85e20ce0d08b921c8a23170a224b5bf8efcd96db86b0aa731b69e6b9ebf9",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-dark.png",
+      "status": 200,
+      "bytes": 1152,
+      "sha256": "01bc77686cd48999b53e418d37e5a07d01d1831d0cd5e5347caef84cd071b8f7",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-gray-black.png",
+      "status": 200,
+      "bytes": 1915,
+      "sha256": "b080ce553ec883e7a4e8ac139155875f0069781e1fdba9a228ddf72fc0186c62",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-gray.png",
+      "status": 200,
+      "bytes": 1151,
+      "sha256": "767feb2c16bd877e9dd92d735cd996fffec657fdbfd64198c5cee759759cd7b6",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-light-black.png",
+      "status": 200,
+      "bytes": 1831,
+      "sha256": "aa140b6595e6ad2db58263675f4e7983f608f504c53c775009cd91942229c804",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/social-youtube-light.png",
+      "status": 200,
+      "bytes": 998,
+      "sha256": "3f84d9aea44d27b323d6b2b26529e3cd03fdd8b9ae7506065876e92b3fe4057f",
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0"
+    },
+    {
+      "path": "/newsletter/template-preview.svg",
+      "status": 200,
+      "bytes": 1885,
+      "sha256": "90a97966db5b54dec83b99ec89da208245669b2a3a0cc1af248a14e9388dd1cd",
+      "contentType": "image/svg+xml",
+      "cacheControl": "public, max-age=0"
+    }
+  ]
+}

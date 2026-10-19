@@ -1,0 +1,2471 @@
+{
+  "utc": "2026-10-13T11:12:43.319753+00:00",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "publication": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "root_tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+  "application_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+  "application_packages_scripts_vendor_root_manifest_delta_to_publication": [],
+  "assigned_ids": [
+    "CORE-001",
+    "CORE-002",
+    "CORE-003",
+    "CORE-004",
+    "CORE-005",
+    "CORE-006",
+    "CORE-007",
+    "CORE-008",
+    "CORE-009",
+    "CORE-011",
+    "CORE-012",
+    "CORE-013",
+    "CORE-014",
+    "CORE-015",
+    "CORE-016",
+    "CORE-017",
+    "CORE-019",
+    "CORE-020",
+    "CORE-021",
+    "CORE-022",
+    "CORE-023",
+    "CORE-024",
+    "CORE-025",
+    "CORE-026",
+    "CORE-027",
+    "CORE-028",
+    "CORE-029",
+    "CORE-030",
+    "CORE-031",
+    "CORE-032",
+    "CORE-033",
+    "CORE-034",
+    "CORE-035",
+    "CORE-036",
+    "CORE-037",
+    "CORE-038",
+    "CORE-039",
+    "CORE-040",
+    "CORE-041",
+    "CORE-042",
+    "CORE-043",
+    "CORE-044",
+    "CORE-045",
+    "CORE-046",
+    "CORE-047",
+    "CORE-048",
+    "CORE-049",
+    "CORE-050",
+    "CORE-051",
+    "CORE-052",
+    "CORE-053",
+    "CORE-054",
+    "CORE-055",
+    "CORE-056",
+    "CORE-057",
+    "CORE-058",
+    "CORE-059",
+    "CORE-060",
+    "CORE-061",
+    "CORE-062",
+    "CORE-063",
+    "CORE-064",
+    "CORE-065"
+  ],
+  "assigned_count": 63,
+  "group_counts": {
+    "actual_missing_implementation": 1,
+    "existing_behavior_missing_evidence": 42,
+    "authentic_backend_provider_dependency": 20,
+    "selected_figma31_mismatch": 0
+  },
+  "accepted": 0,
+  "acceptance_state": "OPEN_FINAL_ACCEPTANCE",
+  "outside_assignment": [
+    "CORE-010",
+    "CORE-018"
+  ],
+  "scope": "63 assigned CORE-001\u2013065 rows only; all seven packet legacy exclusions plus CORE-018 remain outside337; no change to other274 held rows.",
+  "inputs": [
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/MAPPING-INSTRUCTIONS.md",
+      "bytes": 3529,
+      "sha256": "478486e51f759f541ac826c3e42f522fbe4975a37c3e869787f64b5748138ba5"
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/MAPPING-SNAPSHOT.json",
+      "bytes": 600,
+      "sha256": "7fd2cd5b7843d2a74cd16dfdbf304e6b50197cae94e955893519fdae2a4841f7"
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/core_intake.json",
+      "bytes": 281518,
+      "sha256": "0dd454c3bc4984116b30864dabb75afbc266d3a45700fe8d6ae28a93ab07d3bc"
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/reconciliation-ledger.json",
+      "bytes": 1332566,
+      "sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf"
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/PHASED-PLAN.md",
+      "bytes": 43148,
+      "sha256": "9430fb6c01266bcf0778aee6f9a5084502f7f2e0f9f5f16c3e8d6cfc7c59a94e"
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/figma-screen-index.csv",
+      "bytes": 230733,
+      "sha256": "ffb9be58b8e96e26a849ee0292e1e600e2cdf79a94cdcaa61db92143df59076c"
+    }
+  ],
+  "inspected_paths": [
+    {
+      "path": "apps/web/src/features/portfolio/index/queries.ts",
+      "bytes": 1633,
+      "git_blob": "71d075d210a7749e8e48a39d6653303d9534ce7a",
+      "sha256": "a6d6f751ce82bb536e3441d16cd509b69a379ca4c7d8e40ec88b34ccd8c643f3",
+      "symbols": [
+        {
+          "name": "clientsKey",
+          "line": 6
+        },
+        {
+          "name": "clientKey",
+          "line": 7
+        },
+        {
+          "name": "useClients",
+          "line": 8
+        },
+        {
+          "name": "useClient",
+          "line": 25
+        },
+        {
+          "name": "useAccountOwners",
+          "line": 35
+        },
+        {
+          "name": "useMemberOptions",
+          "line": 43
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+      "bytes": 10354,
+      "git_blob": "219063ce9560cf26c5897ff5c5f03ed2781b53c2",
+      "sha256": "3c65e7ede3175aae11e619fef76b30435376e1a70e2d8767f07647cfe853a035",
+      "symbols": [
+        {
+          "name": "PortfolioIndex",
+          "line": 28
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-index.spec.ts",
+      "bytes": 13395,
+      "git_blob": "4d8307a6922cce7adbb28475661094f2dc4acd18",
+      "sha256": "59412d3a62a0e5f0c1cb4543e75c14801dafed1069af486ab18156375bda21d2",
+      "symbols": [
+        {
+          "name": "indexFixtures",
+          "line": 31
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/filter.ts",
+      "bytes": 3297,
+      "git_blob": "56bd8611e3313ddb34dbd246f314e58027ff03e1",
+      "sha256": "051119310261726f5514c71140779e99136ef11accfe2497b35407d6f83796a3",
+      "symbols": [
+        {
+          "name": "PortfolioFilter",
+          "line": 9
+        },
+        {
+          "name": "unassignedOwner",
+          "line": 15
+        },
+        {
+          "name": "PortfolioIndexState",
+          "line": 16
+        },
+        {
+          "name": "readPortfolioState",
+          "line": 22
+        },
+        {
+          "name": "portfolioHref",
+          "line": 40
+        },
+        {
+          "name": "clearPortfolioFilters",
+          "line": 52
+        },
+        {
+          "name": "sortClients",
+          "line": 61
+        },
+        {
+          "name": "filterClients",
+          "line": 76
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/contracts.ts",
+      "bytes": 2619,
+      "git_blob": "7c533a8bc53db81c078fd119d852c1cc4b499e2b",
+      "sha256": "a9d63570a294ba08fb41c1b3229c71f2736d092a01aa697cebc90b9185d58cf7",
+      "symbols": [
+        {
+          "name": "clientSectors",
+          "line": 6
+        },
+        {
+          "name": "clientSectorLabel",
+          "line": 17
+        },
+        {
+          "name": "clientLocation",
+          "line": 21
+        },
+        {
+          "name": "memberSchema",
+          "line": 30
+        },
+        {
+          "name": "Member",
+          "line": 36
+        },
+        {
+          "name": "ownerSchema",
+          "line": 37
+        },
+        {
+          "name": "ownersSchema",
+          "line": 41
+        },
+        {
+          "name": "memberName",
+          "line": 42
+        },
+        {
+          "name": "initials",
+          "line": 47
+        },
+        {
+          "name": "createProfileSchema",
+          "line": 57
+        },
+        {
+          "name": "CreateProfile",
+          "line": 73
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/IndexNavigation.tsx",
+      "bytes": 2317,
+      "git_blob": "5237129c6c3c479e1f76a4b271015b38f483216c",
+      "sha256": "25142e36b61258616f72ee03e4768518dc362a546a09c30b7d7b6f62c798ac7f",
+      "symbols": [
+        {
+          "name": "IndexNavigation",
+          "line": 9
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/IndexFilters.tsx",
+      "bytes": 2980,
+      "git_blob": "e3aee4875ec5df95835d5d7173d8ffd9b8fbc3e6",
+      "sha256": "791bd48e7b2a75b8537d5e11e7068853efd5dd7986acafb18671a61d5a967fe4",
+      "symbols": [
+        {
+          "name": "IndexFilters",
+          "line": 8
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "bytes": 4234,
+      "git_blob": "57218ac80ed4ff454285d67b3b4a667c746be01e",
+      "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+      "symbols": [
+        {
+          "name": "ProfileResults",
+          "line": 16
+        },
+        {
+          "name": "ProfileCard",
+          "line": 89
+        },
+        {
+          "name": "ProfileLogo",
+          "line": 141
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientFrame.tsx",
+      "bytes": 1543,
+      "git_blob": "ea85544cfa9e72e51c4f347592fff7b68331dd3d",
+      "sha256": "03510bd5d720f83d6148fdb675c1912ab0a601a7cc8b6e2224883e5a932c1b4c",
+      "symbols": [
+        {
+          "name": "ClientFrame",
+          "line": 10
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "bytes": 7049,
+      "git_blob": "8367795833e3f5c48c4dd6f4b0103e47ad84d2b8",
+      "sha256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+      "symbols": [
+        {
+          "name": "ClientOverview",
+          "line": 24
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+      "bytes": 962,
+      "git_blob": "68f6c1d29ae763f8b6eda4855c2ade3d7d3a018c",
+      "sha256": "019cb0be54db257700ac6085f7fc0e02b0a2e2f49cf1788a4123cee3224d2428",
+      "symbols": [
+        {
+          "name": "PortfolioPulse",
+          "line": 3
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/query.ts",
+      "bytes": 1347,
+      "git_blob": "e2a08ac33049ede2e36235fb224a80b27ec40ce0",
+      "sha256": "35eeffe9425d3c6328f819de617617af9eb67a68a718684328ce666b7b2ec26b",
+      "symbols": [
+        {
+          "name": "loadPortfolioAlerts",
+          "line": 8
+        },
+        {
+          "name": "usePortfolioAttention",
+          "line": 17
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "bytes": 3478,
+      "git_blob": "7377f1ecd7476f6b0a96bbd7a57a8e69facccaa0",
+      "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09",
+      "symbols": [
+        {
+          "name": "PortfolioAttention",
+          "line": 9
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/model.ts",
+      "bytes": 1165,
+      "git_blob": "5b8b0e03aee60fc1e8fbfe3defa81815b83bb5e1",
+      "sha256": "636e4b79adca66d25e4b311e3fb34bb92a4a368c448c9c783b99e76ee55a586a",
+      "symbols": [
+        {
+          "name": "accessibleAlerts",
+          "line": 12
+        },
+        {
+          "name": "alertCategory",
+          "line": 23
+        },
+        {
+          "name": "alertClientHref",
+          "line": 27
+        },
+        {
+          "name": "alertTiming",
+          "line": 31
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-attention.spec.ts",
+      "bytes": 11844,
+      "git_blob": "afcaf33fb514e5f0689a75a144a9ca77eb130219",
+      "sha256": "0914b2413858bb84308803185c0f80a976dbcfb53c1c58e22b4c1f2b6f731420",
+      "symbols": [
+        {
+          "name": "fixtures",
+          "line": 52
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+      "bytes": 11625,
+      "git_blob": "fc46ea297fc39aa581d3ba3d868a771bf8dafa0b",
+      "sha256": "e7795326e30f7d4a29bd0608f404696a0ad77846603763dd10e65bbd32689b72",
+      "symbols": [
+        {
+          "name": "ClientIntakeDialogProps",
+          "line": 31
+        },
+        {
+          "name": "ClientIntakeDialog",
+          "line": 38
+        },
+        {
+          "name": "IntakeSession",
+          "line": 41
+        },
+        {
+          "name": "validate",
+          "line": 103
+        },
+        {
+          "name": "submit",
+          "line": 119
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/profile-api.ts",
+      "bytes": 1908,
+      "git_blob": "253bc534cd26af9c8d2dcaa697ce68a9c456fc54",
+      "sha256": "4709965df2adb1af06398055a7a6b27c43e7268684ba6aa4c1b710f48556e3ed",
+      "symbols": [
+        {
+          "name": "clientReceipt",
+          "line": 5
+        },
+        {
+          "name": "ClientProfileAttemptError",
+          "line": 11
+        },
+        {
+          "name": "saveClientProfile",
+          "line": 21
+        },
+        {
+          "name": "archiveClient",
+          "line": 52
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/mutations.ts",
+      "bytes": 3435,
+      "git_blob": "9ea6b110f661dbf404492d451f747611a1143936",
+      "sha256": "fa65c742616577e873bd51a310e1908156a12a8ebcf45a0e51d5cfff28a4b1b8",
+      "symbols": [
+        {
+          "name": "useSaveIntake",
+          "line": 22
+        },
+        {
+          "name": "useUploadLogo",
+          "line": 74
+        },
+        {
+          "name": "useArchiveClient",
+          "line": 107
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/client-intake.spec.ts",
+      "bytes": 14439,
+      "git_blob": "d1fa1d1ef09a0ddf013d540bd2fd231d4bdf81d5",
+      "sha256": "6bd59151ea4ec41ad22de50181f574b980fdac71be2961c84a1a60422536da7a",
+      "symbols": [
+        {
+          "name": "openCreate",
+          "line": 37
+        },
+        {
+          "name": "company",
+          "line": 49
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+      "bytes": 1680,
+      "git_blob": "e9e33a2199c0f4d595fc9e0c248ce5b1d645f89f",
+      "sha256": "d0386c92dd16767c321ed6c31f4785ab10ea2a2faaa3904f4599adddd01cb2de",
+      "symbols": [
+        {
+          "name": "ClientDetails",
+          "line": 13
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+      "bytes": 2456,
+      "git_blob": "29bb35161742e9db1bf1f6f29042ae96eb2d6d82",
+      "sha256": "75c3f6df058f8f4e61473a9d5fc691a6421d6731e96f04fa3614ec303735ab65",
+      "symbols": [
+        {
+          "name": "GovernmentInfo",
+          "line": 19
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/remaining-intake.spec.ts",
+      "bytes": 13355,
+      "git_blob": "64b7c2f37df8b8bde98f7665b017ab166584e1ef",
+      "sha256": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/form.ts",
+      "bytes": 8846,
+      "git_blob": "5c549a759aae9720a2538e841d8cda40f241ab7b",
+      "sha256": "bf5a324caee3896c6630e962673abfcbe4e76b98837ee9f738174d620fa11cb5",
+      "symbols": [
+        {
+          "name": "intakeFormSchema",
+          "line": 7
+        },
+        {
+          "name": "IntakeForm",
+          "line": 44
+        },
+        {
+          "name": "IntakeField",
+          "line": 45
+        },
+        {
+          "name": "stepFields",
+          "line": 46
+        },
+        {
+          "name": "clientToIntake",
+          "line": 86
+        },
+        {
+          "name": "validateIntake",
+          "line": 126
+        },
+        {
+          "name": "ClientProfileInput",
+          "line": 160
+        },
+        {
+          "name": "intakePayload",
+          "line": 187
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/ArchiveClientDialog.tsx",
+      "bytes": 2055,
+      "git_blob": "96d6e391bf8b273b755495cecdce9fd93ea4229c",
+      "sha256": "0c38f60dab10ff9293fb7f9b9487bd13e136fa358e27a2ce2521b6032b0290ff",
+      "symbols": [
+        {
+          "name": "ArchiveClientDialog",
+          "line": 8
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/logo.ts",
+      "bytes": 2942,
+      "git_blob": "2bc9fb44b0631bd4e64a7fd175874db94d27fe9c",
+      "sha256": "b9b715cfaeab8808b090351271ca43d93b66efa84f454047dcb1fed87035ae19",
+      "symbols": [
+        {
+          "name": "logoTypes",
+          "line": 5
+        },
+        {
+          "name": "maxLogoBytes",
+          "line": 11
+        },
+        {
+          "name": "LogoAttempt",
+          "line": 25
+        },
+        {
+          "name": "validateLogo",
+          "line": 30
+        },
+        {
+          "name": "uploadClientLogo",
+          "line": 40
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/authority.ts",
+      "bytes": 1635,
+      "git_blob": "c13b54ba63c67a9456cf565019709b356feef894",
+      "sha256": "ddb9cc2be1cf16a13bca4f54d141acb70c3fb85d58b9e1e9b34531a0426cd6c5",
+      "symbols": [
+        {
+          "name": "IntakeWriteScope",
+          "line": 14
+        },
+        {
+          "name": "useIntakeAuthority",
+          "line": 19
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/api.ts",
+      "bytes": 3059,
+      "git_blob": "91efed2d5f6c7ac256b079e67ae24a1787c79261",
+      "sha256": "6d92cb90f58b916b0b51e51370cc73948e94d37b1caa8a08399874276a800615",
+      "symbols": [
+        {
+          "name": "ImportAttemptError",
+          "line": 10
+        },
+        {
+          "name": "fetchRegistrant",
+          "line": 19
+        },
+        {
+          "name": "fetchCandidates",
+          "line": 22
+        },
+        {
+          "name": "searchRegistrants",
+          "line": 37
+        },
+        {
+          "name": "linkRegistrant",
+          "line": 52
+        },
+        {
+          "name": "importClients",
+          "line": 65
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/FirmSearch.tsx",
+      "bytes": 3060,
+      "git_blob": "f544c446b12c17442b6b209fe5a1f57d941ac51e",
+      "sha256": "d9d1a85b256efb6c9d2ee164a01d13413b546744e13c303bdf56f88dba5c1964",
+      "symbols": [
+        {
+          "name": "FirmSearch",
+          "line": 7
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/registrant-intake.spec.ts",
+      "bytes": 23164,
+      "git_blob": "a5d7678339e84c5c009483e4ee190ad9596c9562",
+      "sha256": "046b4a5b7163f9271965915da50bcd0121b6afbc4c7971afcb87852107c2f6bb",
+      "symbols": [
+        {
+          "name": "setup",
+          "line": 21
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx",
+      "bytes": 9741,
+      "git_blob": "627b6f9bdcb79d428c8971c1342ec570aa422883",
+      "sha256": "604dfe67c77c77882a9a6dbdd99b1e8f28a22c6516c5ca37f2c0d7c2a7e8301e",
+      "symbols": [
+        {
+          "name": "RegistrantImportDialogProps",
+          "line": 23
+        },
+        {
+          "name": "RegistrantImportDialog",
+          "line": 30
+        },
+        {
+          "name": "RegistrantSession",
+          "line": 33
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/useFirmLink.ts",
+      "bytes": 1634,
+      "git_blob": "98d81a8da32b564c45b4b76cbfc74587867fe06e",
+      "sha256": "5461cac3055591ac37a2171d402efa152a5fbbdc45818f5c4cccf368c2e3b013",
+      "symbols": [
+        {
+          "name": "useFirmLink",
+          "line": 7
+        },
+        {
+          "name": "confirm",
+          "line": 23
+        },
+        {
+          "name": "refresh",
+          "line": 44
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/domain.ts",
+      "bytes": 2080,
+      "git_blob": "1bfc7d54388c6bb7e3171cfc10c3144e3dfda577",
+      "sha256": "2145679a891f073ab84d601f5734fe97187b67c33c1d10254e6944edbf33ed2b",
+      "symbols": [
+        {
+          "name": "groupCandidates",
+          "line": 3
+        },
+        {
+          "name": "validateSelection",
+          "line": 17
+        },
+        {
+          "name": "receiptMatches",
+          "line": 37
+        },
+        {
+          "name": "observedSelection",
+          "line": 49
+        },
+        {
+          "name": "canReadRegistrant",
+          "line": 57
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx",
+      "bytes": 4278,
+      "git_blob": "babc7249f5e580a55cfd5dd1e2d5e1ddce634aa0",
+      "sha256": "fbcf2c89e731f2a9774af7de5b4cba2cc5d572693a3674b10753590952b97a59",
+      "symbols": [
+        {
+          "name": "CandidateReview",
+          "line": 17
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/intake/registrant/useImportAttempt.ts",
+      "bytes": 2968,
+      "git_blob": "490b8807f46dc075c5df1cc17cda6060fdecf69c",
+      "sha256": "258ee1eb6f3ec6f7e502fdbb1e0ed0068a0fbec51d428aeaf7cf2519d1698da4",
+      "symbols": [
+        {
+          "name": "FrozenImport",
+          "line": 9
+        },
+        {
+          "name": "useImportAttempt",
+          "line": 14
+        },
+        {
+          "name": "apply",
+          "line": 36
+        },
+        {
+          "name": "readback",
+          "line": 65
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/tags/actions.ts",
+      "bytes": 2733,
+      "git_blob": "d36e2285b381e2d70c1be209e1d2e0e1524aad7b",
+      "sha256": "358f3d3ea74bf5bebdda73a95da85cc37eba39ace3576f82dd7099aa08d9fe1d",
+      "symbols": [
+        {
+          "name": "focusTagSchema",
+          "line": 8
+        },
+        {
+          "name": "focusTags",
+          "line": 13
+        },
+        {
+          "name": "assertTagWriter",
+          "line": 29
+        },
+        {
+          "name": "addFocusTag",
+          "line": 35
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
+      "bytes": 5909,
+      "git_blob": "bfc68f712a53ed1c3f6a6a6ea35d961495a14890",
+      "sha256": "c51b9f4be51ce0eb456a677f49b47517f44c8e0a36a3c80b98a792c537f4b4a5",
+      "symbols": [
+        {
+          "name": "FocusTags",
+          "line": 20
+        },
+        {
+          "name": "FocusTagSession",
+          "line": 28
+        },
+        {
+          "name": "save",
+          "line": 55
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-tools.spec.ts",
+      "bytes": 16696,
+      "git_blob": "8881778080c986f48333033612a522e6d0caeb55",
+      "sha256": "8ea2c93e3270f1fcdf591dd06527e66f1018421b880b0529e117c98cacdc75fd",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/export/actions.ts",
+      "bytes": 3895,
+      "git_blob": "8e96aa205e0117bb4f2f921c3a79cb73db04962a",
+      "sha256": "382e3f60db1ef823df017b15e01ec92e946a73a7f4d560b61c9814cd6ccbdbb3",
+      "symbols": [
+        {
+          "name": "exportClientSchema",
+          "line": 8
+        },
+        {
+          "name": "exportIntelligenceSchema",
+          "line": 15
+        },
+        {
+          "name": "prepareProfileExport",
+          "line": 44
+        },
+        {
+          "name": "ProfileExport",
+          "line": 108
+        },
+        {
+          "name": "downloadProfileExport",
+          "line": 109
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
+      "bytes": 3443,
+      "git_blob": "e53e020886cb9449a9574101f92c52f5832ff728",
+      "sha256": "454f5d3d7862226505b840c698bc704ea6aa281bee3a36e4fe877d10c3b56165",
+      "symbols": [
+        {
+          "name": "ClientProfileActions",
+          "line": 15
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/queries.ts",
+      "bytes": 2990,
+      "git_blob": "9b5df19a4f94e22c5b3bd3121621e60b92b35227",
+      "sha256": "b3a3cd94140099d7f27a9836fee8df4cc0afb7fb40675bf9d263caa40524eeff",
+      "symbols": [
+        {
+          "name": "useActivity",
+          "line": 11
+        },
+        {
+          "name": "useFacilities",
+          "line": 24
+        },
+        {
+          "name": "useTeam",
+          "line": 63
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ordered-owners.ts",
+      "bytes": 4851,
+      "git_blob": "9e5ad142f998702a3b52c5346d3d69c56e7cc22a",
+      "sha256": "aec82574e47b177ffab365fb1b36e1078718281cf3561effff38db05afb21795",
+      "symbols": [
+        {
+          "name": "ownerLabels",
+          "line": 9
+        },
+        {
+          "name": "OrderedOwners",
+          "line": 49
+        },
+        {
+          "name": "orderedOwnersSchema",
+          "line": 50
+        },
+        {
+          "name": "ownerIds",
+          "line": 56
+        },
+        {
+          "name": "sameOwnerOrder",
+          "line": 58
+        },
+        {
+          "name": "ownerReplacementSchema",
+          "line": 60
+        },
+        {
+          "name": "OwnerAttempt",
+          "line": 69
+        },
+        {
+          "name": "ownerReplacementReceipt",
+          "line": 70
+        },
+        {
+          "name": "readOrderedOwners",
+          "line": 82
+        },
+        {
+          "name": "replaceOrderedOwners",
+          "line": 100
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/ordered-owners.spec.ts",
+      "bytes": 9570,
+      "git_blob": "be5069e31606eb2ab6d05a258bdc2753f1700aa5",
+      "sha256": "0d795c3e4e4272154dc44203b52d53b980fc24b07991c0ab990546f859409e1c",
+      "symbols": [
+        {
+          "name": "receipt",
+          "line": 22
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/profile-read-queries.ts",
+      "bytes": 2247,
+      "git_blob": "333a63069235c6974355fff0cbe5b1dd45d24d80",
+      "sha256": "f41421d63d266aceecf46f766215e3387f8c577474e84a2472bdebe7bd0ff351",
+      "symbols": [
+        {
+          "name": "useProfileClient",
+          "line": 12
+        },
+        {
+          "name": "useProfileMemberOptions",
+          "line": 41
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/team-writer.ts",
+      "bytes": 2684,
+      "git_blob": "ae32ff756d3530811efc90f6a98a1f035907743c",
+      "sha256": "316a2298853da070b7b93def3cf88697bb7953b00dbeb9c31ae331f06718433f",
+      "symbols": [
+        {
+          "name": "TeamWriteContext",
+          "line": 12
+        },
+        {
+          "name": "assertTeamChange",
+          "line": 18
+        },
+        {
+          "name": "writeTeamChange",
+          "line": 64
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "bytes": 13448,
+      "git_blob": "d521c4f967b3caef5030a91d299db3e5204b5b28",
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54",
+      "symbols": [
+        {
+          "name": "settleProfileView",
+          "line": 15
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/useOrderedOwners.ts",
+      "bytes": 7066,
+      "git_blob": "a3a1a797c1eac1bbe93c8f8d208351478adbf28b",
+      "sha256": "a745f806073cdb8480768812fff08fd264eb6f2a2e2525b73806bb8090def8d4",
+      "symbols": [
+        {
+          "name": "useOrderedOwners",
+          "line": 35
+        },
+        {
+          "name": "edit",
+          "line": 97
+        },
+        {
+          "name": "save",
+          "line": 109
+        },
+        {
+          "name": "reorder",
+          "line": 174
+        },
+        {
+          "name": "review",
+          "line": 196
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/OwnerCards.tsx",
+      "bytes": 5422,
+      "git_blob": "ac2dd3dfb67870e1f069c9e8a0136eeb52c275f2",
+      "sha256": "66b5136ab9266b10041a6afa3be6b3704e30e67c8d07b0aad97a1b3bf8083d03",
+      "symbols": [
+        {
+          "name": "OwnerCards",
+          "line": 8
+        },
+        {
+          "name": "move",
+          "line": 22
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/TeamRoster.tsx",
+      "bytes": 1935,
+      "git_blob": "8fb18f171f3f97d87333599252c06ad62be1a445",
+      "sha256": "8662dcfd720ed62a28a927628a0de34713ed6d2f30b3cd8b5338579783b438a9",
+      "symbols": [
+        {
+          "name": "TeamRoster",
+          "line": 8
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+      "bytes": 4120,
+      "git_blob": "ff8ae390d6ba08cdfd09598892601e31c06a47e6",
+      "sha256": "25b8c98561c2ef14a31c761f359eb2c9c78c38575fb1365f985ba95a465fcee8",
+      "symbols": [
+        {
+          "name": "TeamDialog",
+          "line": 17
+        },
+        {
+          "name": "ProfileTeamEditor",
+          "line": 54
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx",
+      "bytes": 1822,
+      "git_blob": "34526533975afc54f919366b6da8dd8b864952d0",
+      "sha256": "5aa4e1feba524ede7d176e724de7d20d1d6bcd100733d253acbe255426740121",
+      "symbols": [
+        {
+          "name": "TeamMemberFields",
+          "line": 6
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts",
+      "bytes": 3834,
+      "git_blob": "e3b4f5b6e650ace5b9194507e35cda8d430d9390",
+      "sha256": "bdac21bd8bc3eea8fa0801e3a32dc9336c6e59c055b20ae2515fe947edba0512",
+      "symbols": [
+        {
+          "name": "useProfileTeamEditor",
+          "line": 15
+        },
+        {
+          "name": "change",
+          "line": 38
+        },
+        {
+          "name": "review",
+          "line": 89
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityMap.tsx",
+      "bytes": 4997,
+      "git_blob": "820bf501a3775fed49a099ac8d86d4b652b1059b",
+      "sha256": "6e9db2652d2c4b56e59651d4d4ef173c4b1782240eb20fea92c7cd76fb15ab2c",
+      "symbols": [
+        {
+          "name": "FacilityMap",
+          "line": 12
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+      "bytes": 5330,
+      "git_blob": "a9e4b28eccc8b6500afab6942a9fa21accb747ed",
+      "sha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844",
+      "symbols": [
+        {
+          "name": "FacilitiesManager",
+          "line": 21
+        },
+        {
+          "name": "CurrentFacilitiesManager",
+          "line": 31
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/facility-map.spec.ts",
+      "bytes": 17771,
+      "git_blob": "aa806c7b4f3f83e0fbc082b939cbbe2c1371ff72",
+      "sha256": "6beaddc2275a0d344166690207cc9275938338f2402856fe43f3192053111777",
+      "symbols": [
+        {
+          "name": "mapFixtures",
+          "line": 5
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "bytes": 5896,
+      "git_blob": "2aa24f0b39ae5c7d37d1c0865edf3ee95f0d48f3",
+      "sha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b",
+      "symbols": [
+        {
+          "name": "FacilitiesCard",
+          "line": 15
+        },
+        {
+          "name": "CurrentFacilitiesCard",
+          "line": 31
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facility-writer.ts",
+      "bytes": 3229,
+      "git_blob": "08dba511ba70993f1c38949ebeb6031d4cc16077",
+      "sha256": "5aa47cab64130fac65d269ca6c899f8df3a84ca62a612719083fd60600ce5c07",
+      "symbols": [
+        {
+          "name": "facilityDraftRevision",
+          "line": 23
+        },
+        {
+          "name": "facilitySaveReceipt",
+          "line": 29
+        },
+        {
+          "name": "FacilityWriteContext",
+          "line": 41
+        },
+        {
+          "name": "FacilityCommand",
+          "line": 47
+        },
+        {
+          "name": "assertFacilityWrite",
+          "line": 50
+        },
+        {
+          "name": "writeFacility",
+          "line": 83
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+      "bytes": 3252,
+      "git_blob": "32002cb991a4ccd75b10c8401183a66f728fc3be",
+      "sha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960",
+      "symbols": [
+        {
+          "name": "FacilityFields",
+          "line": 10
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityEditor.tsx",
+      "bytes": 2739,
+      "git_blob": "9d671ef1f7c5ca1f534ed686c78c80187e87e1f2",
+      "sha256": "c49006d0aa6b04746c6c4b76f7debcd2f3915c1be6cd861cb4124c99964f4307",
+      "symbols": [
+        {
+          "name": "FacilityEditor",
+          "line": 11
+        },
+        {
+          "name": "submit",
+          "line": 36
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityRemoveDialog.tsx",
+      "bytes": 2360,
+      "git_blob": "92f6b185b5b641a42373f9a68edfd108887292e1",
+      "sha256": "fc5d10f318fad37454c46770e58f1c964831d3019afe063b1fd423eefc8d5804",
+      "symbols": [
+        {
+          "name": "FacilityRemoveDialog",
+          "line": 14
+        },
+        {
+          "name": "FacilityRemovalEditor",
+          "line": 53
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facility-action-writer.ts",
+      "bytes": 4073,
+      "git_blob": "c8581eb70388d5ca9208ff772ae195eb81082fb9",
+      "sha256": "d623889097fae3ae7eb8ace336583aedaa94762c1e96df96ad391cd816e562c8",
+      "symbols": [
+        {
+          "name": "FacilityAction",
+          "line": 12
+        },
+        {
+          "name": "FacilityActionContext",
+          "line": 20
+        },
+        {
+          "name": "facilityActionRevision",
+          "line": 27
+        },
+        {
+          "name": "assertFacilityAction",
+          "line": 50
+        },
+        {
+          "name": "writeFacilityAction",
+          "line": 101
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+      "bytes": 4881,
+      "git_blob": "1ba5d522c2af02b5023d02c3755920ef9d697ad7",
+      "sha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5",
+      "symbols": [
+        {
+          "name": "FacilityGeocoding",
+          "line": 12
+        },
+        {
+          "name": "CurrentFacilityGeocoding",
+          "line": 35
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facility-map-queries.ts",
+      "bytes": 3064,
+      "git_blob": "1098bc1c8e2317f07789e13d628a1d32fb8a708a",
+      "sha256": "0ec428b2e79de0d01fa3427342fc06cf4c7335d8d31d0a60b93d210a44245bd4",
+      "symbols": [
+        {
+          "name": "useFacilityRepresentation",
+          "line": 13
+        },
+        {
+          "name": "useFacilityNexus",
+          "line": 42
+        },
+        {
+          "name": "useFacilityBoundaries",
+          "line": 75
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityRepresentation.tsx",
+      "bytes": 1369,
+      "git_blob": "3b51afdb5cbe9d8aca7ea760957c237a1b7f6cf7",
+      "sha256": "1263593da1e3999859bb0acd9b678f505afbf5639334a5af6ade0f00ea8d21b6",
+      "symbols": [
+        {
+          "name": "FacilityRepresentation",
+          "line": 4
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
+      "bytes": 4562,
+      "git_blob": "d34c4b1d5ef300671b102d2bd68e9aefd883046e",
+      "sha256": "91492c786853feaa1430b5a4b93e4b97bc3f9d7046cdedcde4ae1befe58f2655",
+      "symbols": [
+        {
+          "name": "FacilityDetailDialog",
+          "line": 16
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facility-map-projection.ts",
+      "bytes": 2084,
+      "git_blob": "b4976fcf609ca44415e403a2a44e9a2b811f88ce",
+      "sha256": "d1361636a3c1db0b7fd3f6d3215f6226ad3774e592b2e2353ae63e1be49b7038",
+      "symbols": [
+        {
+          "name": "sphericalBoundaries",
+          "line": 7
+        },
+        {
+          "name": "projectFacilityMap",
+          "line": 35
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facility-map-view.ts",
+      "bytes": 2823,
+      "git_blob": "6c9702c312d108da3635902ddd0589e3cc6144ad",
+      "sha256": "91da4f8282694842396c0d05eafe0f5634b08439281b1d1df2a251d8ce862c41",
+      "symbols": [
+        {
+          "name": "useFacilityMapView",
+          "line": 17
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityMapControls.tsx",
+      "bytes": 1007,
+      "git_blob": "5b65de4651f8b159ca530e8e0d473977b12a8833",
+      "sha256": "4ac219eedc39d507e229f9c271d1627bf988b974e9b93cc513ab183ade7a0dfc",
+      "symbols": [
+        {
+          "name": "FacilityMapControls",
+          "line": 3
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/NotesDialog.tsx",
+      "bytes": 3237,
+      "git_blob": "188be31c0bd4a73cd7bec78c30b82aeabfe8cb47",
+      "sha256": "304410d3f006ea989a9b8693b268889465b7be6920ddb34146b486107e8ce29f",
+      "symbols": [
+        {
+          "name": "NotesDialog",
+          "line": 13
+        },
+        {
+          "name": "ProfileNotesEditor",
+          "line": 37
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/useProfileNotesEditor.ts",
+      "bytes": 3595,
+      "git_blob": "b81af2a5c931243eb14e71a1f77d829cb44bc7fc",
+      "sha256": "80813f523bfdb66ef36abfba7a56072d7077aa6444cd64063f26f7e49dbdb07c",
+      "symbols": [
+        {
+          "name": "useProfileNotesEditor",
+          "line": 13
+        },
+        {
+          "name": "save",
+          "line": 50
+        },
+        {
+          "name": "review",
+          "line": 94
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "bytes": 10763,
+      "git_blob": "9a072ec4c9371735903d524a2c86614592b4da72",
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/notes-writer.ts",
+      "bytes": 1324,
+      "git_blob": "1c5c662b32c333c905d29af730d533f61e3aa1e7",
+      "sha256": "1c33617a195f0d6f5e5aefbe4b067972061c6e3d5c710d4ad05b77f1ab7604b2",
+      "symbols": [
+        {
+          "name": "writeProfileNotes",
+          "line": 6
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+      "bytes": 3313,
+      "git_blob": "539a6d21f08cd0b99bb193d79b2dd6c2b2260b1c",
+      "sha256": "a0a3a2cfd0b56932e7823ef78864984afe0f0be15524ad135d5a14b6085f7111",
+      "symbols": [
+        {
+          "name": "createQuickLog",
+          "line": 11
+        },
+        {
+          "name": "undoQuickLog",
+          "line": 52
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/contracts.ts",
+      "bytes": 919,
+      "git_blob": "7254551021bf1f9ee6c0c949cecaba054b3b57da",
+      "sha256": "37fe52d04d1d73a10a7ea973c0df083697f4d8472f7be4b5ba2fac35f3db40b7",
+      "symbols": [
+        {
+          "name": "quickLogInputSchema",
+          "line": 2
+        },
+        {
+          "name": "QuickLogInput",
+          "line": 8
+        },
+        {
+          "name": "quickLogReceiptSchema",
+          "line": 9
+        },
+        {
+          "name": "QuickLogReceipt",
+          "line": 26
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+      "bytes": 8092,
+      "git_blob": "7d9bdff95b7d46d14a73b531d517c0c1af9a38df",
+      "sha256": "78c1b144587cc1aad6e290e8266e5e982cf4974fb93ba12bb0dcf4dfc8057916",
+      "symbols": [
+        {
+          "name": "QuickLog",
+          "line": 17
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/activity.spec.ts",
+      "bytes": 5617,
+      "git_blob": "68a078965e8ff5ee840cf186a412393efdd998f2",
+      "sha256": "1115f96b3600251cc4f6f87f83cc3873947b294be591ad3335e5ee107b27c986",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "bytes": 4481,
+      "git_blob": "da9f21d6f5607ea52efa31d900be3763dc0c48b3",
+      "sha256": "e3968866a9f7527a59b54693d8bd8bd114ba682ae6a2c187ef5bd3dfd56328ab",
+      "symbols": [
+        {
+          "name": "ActivityTimeline",
+          "line": 17
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-filters.ts",
+      "bytes": 1489,
+      "git_blob": "b921210b8a0185ee09e44e4d1fb1a377830e7d5a",
+      "sha256": "1b09e41b63abedd343728da77d07383030b8640d04cbb8f91e2b3efcca9b1314",
+      "symbols": [
+        {
+          "name": "ActivityFilters",
+          "line": 5
+        },
+        {
+          "name": "emptyActivityFilters",
+          "line": 11
+        },
+        {
+          "name": "recentActivityRange",
+          "line": 18
+        },
+        {
+          "name": "activityRangeError",
+          "line": 26
+        },
+        {
+          "name": "filterActivity",
+          "line": 33
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts",
+      "bytes": 3242,
+      "git_blob": "6a0a8d99888bf8c8813f5e0698b4c08bedcd5ea0",
+      "sha256": "6880089b9ed1a1d03a49aa7ffe072873ab2021ba515f73f1b8ffc933b5502538",
+      "symbols": [
+        {
+          "name": "CommandContext",
+          "line": 13
+        },
+        {
+          "name": "createActivityCommand",
+          "line": 19
+        },
+        {
+          "name": "readActivityCommand",
+          "line": 57
+        },
+        {
+          "name": "resumeActivityCommand",
+          "line": 80
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-contracts.ts",
+      "bytes": 3910,
+      "git_blob": "8b1038e040446b4e6eb929ee83aba563d0b3e0d9",
+      "sha256": "3e3d9896f75910190eddb7f1950c22e5ab078c7c795bd04634e00bacb930175b",
+      "symbols": [
+        {
+          "name": "followUpInputSchema",
+          "line": 17
+        },
+        {
+          "name": "FollowUpInput",
+          "line": 33
+        },
+        {
+          "name": "activityCommandInputSchema",
+          "line": 34
+        },
+        {
+          "name": "ActivityCommandInput",
+          "line": 41
+        },
+        {
+          "name": "activityCommandReceiptSchema",
+          "line": 52
+        },
+        {
+          "name": "ActivityCommandReceipt",
+          "line": 90
+        },
+        {
+          "name": "CommandIdentity",
+          "line": 93
+        },
+        {
+          "name": "scopedCommandReceipt",
+          "line": 99
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command.spec.ts",
+      "bytes": 9866,
+      "git_blob": "cdf0b57d8e7dde254b4fb90013152dddf9c45e47",
+      "sha256": "eb336075c93f6002112b38896cfbfe515ca36966878fc05111cffeb1651287ff",
+      "symbols": [
+        {
+          "name": "compose",
+          "line": 14
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-change.ts",
+      "bytes": 4179,
+      "git_blob": "f3a6e0dda33929fd29b38f01288a7f6eb7ce377a",
+      "sha256": "263ec3fd114f1a07c743ed6fc653825461a05fcbe6fef14735c24acd46a2bf0b",
+      "symbols": [
+        {
+          "name": "ActivityChange",
+          "line": 11
+        },
+        {
+          "name": "readActivityForChange",
+          "line": 40
+        },
+        {
+          "name": "changeActivity",
+          "line": 56
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+      "bytes": 4693,
+      "git_blob": "ddcd1e61a0473cee748fae48d0de97c4843f6d76",
+      "sha256": "41d575b4ce099d0ea1a24136bb71b8e2d6db52cec6e8e585ed98e5cc290da49c",
+      "symbols": [
+        {
+          "name": "useChangeActivity",
+          "line": 19
+        },
+        {
+          "name": "ActivityMutationState",
+          "line": 168
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+      "bytes": 4226,
+      "git_blob": "895db47e3338b7120eec55097fc346198b4d7e66",
+      "sha256": "5f053626b14e1f74ac4b89d8392a6a4e19f05f4ba62917f9ba11d853d131dfb6",
+      "symbols": [
+        {
+          "name": "ActivityActions",
+          "line": 13
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-actions.spec.ts",
+      "bytes": 11416,
+      "git_blob": "eb08522240c591d11cbf7bcbc1c458c9b0d712c5",
+      "sha256": "07fa6ccaeb2b2523f7ba18f7ad947c13063281ea809d2ce7758260656cba19be",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx",
+      "bytes": 6066,
+      "git_blob": "33627e6e47e759fa474213b442d69ee9e021472e",
+      "sha256": "834280a6a10e5e3bd50fe163222b5bffb8e9591838c7f8737977e49d938984ed",
+      "symbols": [
+        {
+          "name": "EditActivity",
+          "line": 16
+        },
+        {
+          "name": "RemoveActivity",
+          "line": 96
+        },
+        {
+          "name": "ActivityMutationStatus",
+          "line": 138
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "bytes": 11776,
+      "git_blob": "9739ef4b7027141c954d10f6b60cef324beb01e7",
+      "sha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd",
+      "symbols": [
+        {
+          "name": "FilesPage",
+          "line": 19
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/queries.ts",
+      "bytes": 2791,
+      "git_blob": "806d13de228543d4a81a3bfe157d2da513b6c832",
+      "sha256": "d4bfab2b114044fb1068dae1211a5ea9340f1f514116aa21559aa1e0b3803716",
+      "symbols": [
+        {
+          "name": "filesOptions",
+          "line": 19
+        },
+        {
+          "name": "useFiles",
+          "line": 40
+        },
+        {
+          "name": "useFileAccess",
+          "line": 73
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/linked-arrival.ts",
+      "bytes": 2221,
+      "git_blob": "5a6b439cb99c25b6cce531738d9fb2f44eddf11b",
+      "sha256": "d773ccc53e6c44bb24f748646db4bc2baa5f690a58a41b7dfcb3589b3039745e",
+      "symbols": [
+        {
+          "name": "useLinkedFileArrival",
+          "line": 18
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+      "bytes": 3279,
+      "git_blob": "41556d336c98854086610f5be250fe9d653dc05d",
+      "sha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+      "symbols": [
+        {
+          "name": "WorkspaceDocuments",
+          "line": 11
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/files-boundary.spec.ts",
+      "bytes": 4130,
+      "git_blob": "33d2886444aacd5671977c18e96afd47f57d8d8c",
+      "sha256": "3d53ae6404a3be7bdc7e4ee2f454cb0879e7e2ecb70111b6df09efccf36e42a7",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FolderCards.tsx",
+      "bytes": 1805,
+      "git_blob": "96fbad2215550a0c64e7e57fa5caf2851d7729bb",
+      "sha256": "b4b077ba3e9d65cd8a3f4c47364bd28a9033753e3314ce5907e8bd3eafff2f16",
+      "symbols": [
+        {
+          "name": "FolderCards",
+          "line": 4
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/files.spec.ts",
+      "bytes": 3695,
+      "git_blob": "2030a6bbe186a0b18884ae8b933ad9d3d74af5b8",
+      "sha256": "8b192320d37c1abeeaa12c71aff379547e93f4cfeabd11055623af600fce3ac8",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/upload.ts",
+      "bytes": 4694,
+      "git_blob": "4149e81e64c944fc983520950ec6ffc50484c9e9",
+      "sha256": "38c381a94475cefb8582eb29dc40b6cfbe6d5a6f6e7efc7ad07322d0da7ae883",
+      "symbols": [
+        {
+          "name": "UploadAttempt",
+          "line": 11
+        },
+        {
+          "name": "UploadParent",
+          "line": 19
+        },
+        {
+          "name": "uploadFile",
+          "line": 23
+        },
+        {
+          "name": "uploadParentFile",
+          "line": 43
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+      "bytes": 4936,
+      "git_blob": "245fdeaca03bd092757511c685f00cd659c77674",
+      "sha256": "a537b6190672a6f038df074ccc9e5e364efeb9fff23bb6b2463555204b1ec238",
+      "symbols": [
+        {
+          "name": "UploadDialog",
+          "line": 24
+        },
+        {
+          "name": "UploadFiles",
+          "line": 29
+        },
+        {
+          "name": "run",
+          "line": 51
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/client-enrichment.spec.ts",
+      "bytes": 14300,
+      "git_blob": "42690b6e6a8489c413bd94fba7499549188cc6a7",
+      "sha256": "b68178cfbd787ddd0fdf4a0447475fc2cc582b56e0cd1c323a9c14dcd26cb472",
+      "symbols": [
+        {
+          "name": "openReview",
+          "line": 9
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/contracts.ts",
+      "bytes": 5419,
+      "git_blob": "965ba6532eafa9cb0519001c679b255b94eced35",
+      "sha256": "b6489db3880eae0df2cf176920e76dcf9225cde5d668aade87b90e7a10dedc51",
+      "symbols": [
+        {
+          "name": "attachmentSchema",
+          "line": 2
+        },
+        {
+          "name": "Attachment",
+          "line": 25
+        },
+        {
+          "name": "clientFilesSchema",
+          "line": 26
+        },
+        {
+          "name": "accessSchema",
+          "line": 35
+        },
+        {
+          "name": "fileAccessForIdSchema",
+          "line": 43
+        },
+        {
+          "name": "FileMetadataChange",
+          "line": 48
+        },
+        {
+          "name": "fileChangeForIdSchema",
+          "line": 59
+        },
+        {
+          "name": "uploadTicketSchema",
+          "line": 76
+        },
+        {
+          "name": "UploadTicket",
+          "line": 81
+        },
+        {
+          "name": "MAX_BYTES",
+          "line": 82
+        },
+        {
+          "name": "contentType",
+          "line": 98
+        },
+        {
+          "name": "fileValidation",
+          "line": 114
+        },
+        {
+          "name": "signedUrl",
+          "line": 123
+        },
+        {
+          "name": "fileStatus",
+          "line": 134
+        },
+        {
+          "name": "filterFiles",
+          "line": 144
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/metadata-actions.ts",
+      "bytes": 3234,
+      "git_blob": "1ad5d184068a97c0a8aeaf4ec1b72852f4d322f8",
+      "sha256": "e1a54f98a41189396e1e135efb0c333933e826fe7c0f2aacca0b9b49d96fd3d7",
+      "symbols": [
+        {
+          "name": "currentFile",
+          "line": 20
+        },
+        {
+          "name": "saveFileMetadata",
+          "line": 38
+        },
+        {
+          "name": "reviewFileMetadata",
+          "line": 86
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/MoveFile.tsx",
+      "bytes": 3025,
+      "git_blob": "d13aa23ba9de3aec0ee3f5f8cc04a78aebdd9ac8",
+      "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0",
+      "symbols": [
+        {
+          "name": "MoveFile",
+          "line": 7
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/files-metadata-receipts.spec.ts",
+      "bytes": 14728,
+      "git_blob": "77d6638a7572150a0d90283b471155c85da94153",
+      "sha256": "3964338e9f0760a99b107a6901ca61c67dae04686e0530223e340ddb460c5429",
+      "symbols": [
+        {
+          "name": "openAccess",
+          "line": 11
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FileAccess.tsx",
+      "bytes": 5140,
+      "git_blob": "3cb753fc9b7ddc90c007942a9715680349c42a3b",
+      "sha256": "f7d7802180dc955eb34bbbd7b4a8cb619d40c96d6b57c9f36c9d8c9cabe9f6a9",
+      "symbols": [
+        {
+          "name": "FileAccess",
+          "line": 14
+        },
+        {
+          "name": "AccessForm",
+          "line": 97
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/useFileMetadataChange.ts",
+      "bytes": 2925,
+      "git_blob": "fcca07844c12b6bdecc62fc0658d2c3f6b5ac286",
+      "sha256": "3b7b374daf12df45e096a7c3db737d33d3f4378559fedbdc7425a4bf833b8fd5",
+      "symbols": [
+        {
+          "name": "useFileMetadataChange",
+          "line": 18
+        },
+        {
+          "name": "run",
+          "line": 30
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/mutations.ts",
+      "bytes": 1196,
+      "git_blob": "792d59eec5e8053cf20049ad97a68ea87a4058ee",
+      "sha256": "9a531e2e772095680371b089e1b35e7d2e250e6f238576202f2ff6826e0940eb",
+      "symbols": [
+        {
+          "name": "FileChange",
+          "line": 6
+        },
+        {
+          "name": "useFileChange",
+          "line": 12
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/deletion.ts",
+      "bytes": 5547,
+      "git_blob": "056e670ff6b83eb899336c438224a74ff2597db0",
+      "sha256": "51402c45adc651e34f5d3d38f566dc7f054efc73f5fee4b6c7dca3661c93f0d3",
+      "symbols": [
+        {
+          "name": "FileDeletionContext",
+          "line": 13
+        },
+        {
+          "name": "FileDeletionAttempt",
+          "line": 19
+        },
+        {
+          "name": "fileDeletionKey",
+          "line": 23
+        },
+        {
+          "name": "settle",
+          "line": 37
+        },
+        {
+          "name": "deleteClientFile",
+          "line": 53
+        },
+        {
+          "name": "reviewFileDeletion",
+          "line": 109
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/DeleteFile.tsx",
+      "bytes": 2841,
+      "git_blob": "c2a742b4417bd400a44a888390fa01b811aa13d3",
+      "sha256": "6af9a574f8bd8dd8af08de849c3610557d3ff80bcea89c916f3c6d947dccd861",
+      "symbols": [
+        {
+          "name": "DeleteFile",
+          "line": 7
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "bytes": 14019,
+      "git_blob": "0d38971eaea2da4ee72aadc839a9177cfe928c02",
+      "sha256": "31bd8876d7edb4ed73a4412a629b2b6a63197a54fae43552f17865e5aec3f7a4",
+      "symbols": [
+        {
+          "name": "openDelete",
+          "line": 11
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/navigation.ts",
+      "bytes": 5325,
+      "git_blob": "c2bb4dce2ecd736af4e5ac406104eda23b325853",
+      "sha256": "10ae50cba8aea08c8117f4ea78a51be0d0f3dcd5c0b58f2e45c938c8d5b04aa1",
+      "symbols": [
+        {
+          "name": "FileNavigation",
+          "line": 11
+        },
+        {
+          "name": "currentFileDestination",
+          "line": 14
+        },
+        {
+          "name": "useFileNavigation",
+          "line": 87
+        },
+        {
+          "name": "navigate",
+          "line": 98
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilePreview.tsx",
+      "bytes": 3774,
+      "git_blob": "2d32e6d05569748795f90b7573ed368c72498d47",
+      "sha256": "d4e75d262099ed3967722595d95525d0a3c76baed899a2cd087a20d147d5e07a",
+      "symbols": [
+        {
+          "name": "FilePreview",
+          "line": 8
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FileToolbar.tsx",
+      "bytes": 1370,
+      "git_blob": "9389df4bb1e15a238f511d2cb1f619b174883a22",
+      "sha256": "f4333e48b3818aca8e74587f5bf732858bc031c9a7c7f014ccdd1307d909d3d7",
+      "symbols": [
+        {
+          "name": "FileToolbar",
+          "line": 3
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/files-reader-selection.spec.ts",
+      "bytes": 2510,
+      "git_blob": "8adf2621c017e042d3b775dfe3a7c0a813fa92da",
+      "sha256": "8942f7c69dd333ffc320851929655396c8c2f5eb7e32bd76d4e9769b330ca7a6",
+      "symbols": [],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/queries.ts",
+      "bytes": 3213,
+      "git_blob": "a3fdd5abfd11f5b60115bd449a1f3cbc048fa567",
+      "sha256": "eeeee76b0639d7081b8ea76b42ace9a83669c33a61b075fbd3841ee6dfdd02e1",
+      "symbols": [
+        {
+          "name": "enrichmentKey",
+          "line": 7
+        },
+        {
+          "name": "latestReviewKey",
+          "line": 9
+        },
+        {
+          "name": "setupKey",
+          "line": 14
+        },
+        {
+          "name": "enrichmentPath",
+          "line": 19
+        },
+        {
+          "name": "loadRun",
+          "line": 21
+        },
+        {
+          "name": "useEnrichmentAccess",
+          "line": 37
+        },
+        {
+          "name": "useLatestReview",
+          "line": 55
+        },
+        {
+          "name": "useEnrichmentSetup",
+          "line": 80
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx",
+      "bytes": 11208,
+      "git_blob": "4c3a819cbebc417124972e1f42793b8720bd063f",
+      "sha256": "af91ef6c2916e9b5e6316c1b7ad3a368cbdfe7ebf34eebc539223d43a5bda152",
+      "symbols": [
+        {
+          "name": "ClientEnrichmentDialog",
+          "line": 22
+        },
+        {
+          "name": "ClientEnrichmentReview",
+          "line": 45
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/ResearchSetup.tsx",
+      "bytes": 2552,
+      "git_blob": "4e1b47b18560e80623f4845fe3ad55d608311a73",
+      "sha256": "c61dd163b43e2358f8887515286c4e27239a536a804592bb023a17e3c007fb6e",
+      "symbols": [
+        {
+          "name": "ResearchSetup",
+          "line": 7
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/contracts.ts",
+      "bytes": 4951,
+      "git_blob": "db9741fa1bf8bf11a0699915040a279f713a05be",
+      "sha256": "dca68213d5b0386314bffe0e72f31cc6539033dd49e68c96612955516fe2fbfb",
+      "symbols": [
+        {
+          "name": "sources",
+          "line": 5
+        },
+        {
+          "name": "findingSchema",
+          "line": 13
+        },
+        {
+          "name": "runSchema",
+          "line": 39
+        },
+        {
+          "name": "setupSchema",
+          "line": 115
+        },
+        {
+          "name": "FillRun",
+          "line": 123
+        },
+        {
+          "name": "Finding",
+          "line": 124
+        },
+        {
+          "name": "Setup",
+          "line": 125
+        },
+        {
+          "name": "JsonValue",
+          "line": 126
+        },
+        {
+          "name": "canSelectFinding",
+          "line": 139
+        },
+        {
+          "name": "safeEvidenceUrl",
+          "line": 141
+        },
+        {
+          "name": "previewOnlyDependency",
+          "line": 153
+        }
+      ],
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d"
+    },
+    {
+      "path": "apps/web/tests/browser/quick-log-meeting.spec.ts",
+      "git_blob": "c66d045c9f280adecd0f32ae4831f03321086cb6",
+      "sha256": "99f932d3f47743a636710683a5f4f2a6058f7d8e908ef3431db3dd4549e36b27",
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "bytes": 8880
+    },
+    {
+      "path": "apps/web/tests/browser/overview-removal.spec.ts",
+      "git_blob": "a648239eb8750b28ae55f40a89af3a9f291e0179",
+      "sha256": "a33c3ade53e228397906e4214cadf782fb21a262a20e3e2578aaddfcbf50c8d3",
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "bytes": 9110
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/domain/website.ts",
+      "git_blob": "d480cb72e9e33a8b30886763faea293bbd0bb920",
+      "sha256": "0b8bf9ce604593547a7e7773cd22d001d9a737253a4713ffdcb663c51e5bb462",
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "bytes": 382,
+      "symbols": [
+        {
+          "name": "safeWebsite",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "read_browser_evidence": [
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-results.json",
+      "bytes": 316579,
+      "sha256": "643899af29f296d7cb644543c861ee612d5dbd5147096ae11638a2c332e6f71e",
+      "stats": {
+        "startTime": "2026-10-13T09:54:18.244Z",
+        "duration": 500896.126,
+        "expected": 285,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-results.json",
+      "bytes": 330154,
+      "sha256": "53060828cff7fea8e0ce92bf8b5807979b3f1cab5dd2a618df58ab13cea1c548",
+      "stats": {
+        "startTime": "2026-10-13T10:02:40.115Z",
+        "duration": 660862.2609999999,
+        "expected": 298,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-results.json",
+      "bytes": 1821581,
+      "sha256": "8091a2843f3acb3e6ddda175b09ce2a300fca057afb885012aa0ec90e7168ad3",
+      "stats": {
+        "startTime": "2026-10-13T10:13:41.978Z",
+        "duration": 659767.9619999999,
+        "expected": 273,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-results.json",
+      "bytes": 314691,
+      "sha256": "a11da549867441da4cbb655f6463eb8234fa6c13d583e88c79676dbfdaa74ecb",
+      "stats": {
+        "startTime": "2026-10-13T10:24:42.749Z",
+        "duration": 564380.472,
+        "expected": 283,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "method": "Read-only current Git implementation/functions, focused test sources and per-spec records in frozen90cc Portfolio shards. Historical P7/row descriptions retained; no broad passing cohort is treated as native acceptance.",
+  "unblocked_definition": "Only the concrete next offline acceptance sub-step is executable now under this session. Real native batches require separately bound service/identity/effect scope. Parent confirmed this definition.",
+  "limits": [
+    "No application/source/index/branch modification or runtime test/build/install/browser/server/native/provider/model action.",
+    "No live Figma fetch or fresh screenshot comparison: selected target index supplies references only.",
+    "Historical backend issues are retained as unresolved dependencies where no current native closure evidence exists, not asserted as newly re-proven deployed bugs.",
+    "CORE-059 is source-confirmed missing frontend protections using an existing preserved receipt; bounded runtime reproduction belongs to root. No backend authorization bypass is claimed.",
+    "Native folder receipt pin243248e is historical source evidence, not deployed service qualification."
+  ],
+  "source_candidate": {
+    "id": "CORE059-FOLDER-ACL-BOUNDARY",
+    "row": "CORE-059",
+    "files": [
+      "apps/web/src/features/portfolio/files/mutations.ts:12",
+      "apps/web/src/features/portfolio/files/mutations.ts:25",
+      "apps/web/src/features/portfolio/files/mutations.ts:29",
+      "apps/web/src/features/portfolio/files/FileAccess.tsx:57"
+    ],
+    "observation": "Only updated:number accepted; lost PATCH can re-enable save; no scope/lifetime guard on completion or unknown journal. Existing native receipt includes normalized folder/viewerMode/viewerUserIds. Per-file path provides counterexample/precedent.",
+    "reproduced_runtime": false,
+    "backend_auth_bypass": false,
+    "severity": "Unranked source finding pending root reproduction and impact disposition; affected folder ACL only."
+  },
+  "reference_gaps": {
+    "missing_tests": [],
+    "empty_selected_specs": []
+  },
+  "rows_sha256": "f76c7804b46713cac10202ec54f9a7210e507937cf722f151502036924ab1f14",
+  "output_bindings": [
+    {
+      "path": "rows.json",
+      "bytes": 410320,
+      "sha256": "f76c7804b46713cac10202ec54f9a7210e507937cf722f151502036924ab1f14"
+    },
+    {
+      "path": "summary.md",
+      "bytes": 8442,
+      "sha256": "0d67a5b5e3a392fa8898f918aec4a8a77e8ac716dc062f6333eb4db8c71fea27"
+    }
+  ],
+  "validation": {
+    "required_keys": [
+      "audit_id",
+      "functionality",
+      "primary_category",
+      "current_behavior",
+      "current_source_evidence",
+      "original_criteria",
+      "criteria_evidence",
+      "remaining_native_criteria",
+      "blockers",
+      "selected_figma_nodes",
+      "confirmed_mismatch",
+      "recommended_acceptance_work",
+      "unblocked_now",
+      "no_native_actions_needed_for_next_step",
+      "acceptance_state",
+      "confidence",
+      "evidence_group"
+    ],
+    "rows": 63,
+    "unique_ids": 63,
+    "groups": {
+      "existing_behavior_missing_evidence": 42,
+      "authentic_backend_provider_dependency": 20,
+      "actual_missing_implementation": 1
+    },
+    "all_open": true,
+    "unblocked_offline_next_steps": 43,
+    "native_actions": 0,
+    "newly_confirmed_figma_mismatches": 0
+  }
+}

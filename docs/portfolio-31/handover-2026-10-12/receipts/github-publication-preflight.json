@@ -1,0 +1,51 @@
+{
+  "recordedAt": "2026-10-12T01:10:32Z",
+  "request": "User explicitly requested committing all work to GitHub and detailed handover. Existing merge and AWS deployment holds remain.",
+  "branchSearch": {
+    "branches": [],
+    "cursor": null
+  },
+  "meriPr4": {
+    "url": "https://github.com/neo-capiro/capiro-frontend/pull/4",
+    "number": 4,
+    "state": "open",
+    "merged": false,
+    "mergeable": true,
+    "draft": true,
+    "body": "Preserves Meri Home/Routines and cited-answer PR #1, then adds an explicit disconnected run workspace at /meri/fixture/run-activity in the existing apps/web application. The workspace actually reuses adopted Conversation, Message and PromptInput plus the canonical public0.1 validator/projection. Eight run states and sparse tool/source/artifact/approval/checkpoint/usage references render without invented coverage, business outcomes, filenames, costs or executable actions.\n\nExact candidate `e4133397e9d4a9ce835828b0c2db4e6eb5f11e01`, tree `37d7f4e6930660bfe877e2db02bb7bff318d5710`, source-equivalent local `f31354934bbd7119511fe0243688dcae170f3d76`. Original cited PR #1 ancestry, all22 exact assets, existing shared-shell/Home/cited/Portfolio/package/lock/public0.1 source remain preserved. Only the three approved architecture public imports and their guard test changed among existing paths.\n\nSOURCE_PRESERVATION_ONLY acceptance. Run-workspace author:29root+21transport checks, all types/package/architecture, clean actual production build and seven actual desktop/mobile browser groups PASS. Primary:17focused/architecture tests and seven actual browser groups PASS;36author evidence payloads independently exact; borrowed reviewed build/dependencies read-only. Fresh Figma content443:84463 exactly matches committed design-reference blob67c231c07d5036c19aa9cbcde7d7f5b1888ebe33. Home/cited earlier source/browser/Figma acceptance retained. Original build disk-space, label/locator and reviewer binary-path failures are preserved.\n\nThis is a contract-backed feature subset, not full-screen parity or live Meri. No transport/reducer/model loop/authorization duplicated. Run actions and send/download remain disabled. Local UI preview browser does not establish deployment sandbox/isolation.\n\nFinal shared integration must follow Portfolio continuation into the single canonical apps/web/HeaderFrame and one combined existing Portfolio preview image. Newer Portfolio continuation source remains unpublished on observed branches. Do not ship this candidate alone or create a separate Meri app/image/hostname. Public transport remains0.1.0. Shared-owner agreement, live backend wiring and G1/G4/runtime/release acceptance remain pending. No branches deleted, main merge, AWS action or source activation.",
+    "title": "Preserve Meri Figma UI and add reviewed AI Elements run workspace",
+    "base": "main",
+    "base_sha": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "head": "task/meri-ui-publish-20261011",
+    "head_sha": "e4133397e9d4a9ce835828b0c2db4e6eb5f11e01",
+    "head_repo_id": 1413425685,
+    "head_repo_full_name": "neo-capiro/capiro-frontend",
+    "merge_commit_sha": "cfb1d01d409bc2cf131e515f7d8b0e4a96fff316",
+    "user": {
+      "login": "neo-capiro",
+      "name": "neo-capiro",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/276034435?v=4",
+      "id": 276034435
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-11T21:40:23Z",
+    "updated_at": "2026-10-12T00:49:01Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 7,
+    "changed_files": 198,
+    "additions": 11937,
+    "deletions": 23,
+    "display_url": "https://github.com/neo-capiro/capiro-frontend/pull/4",
+    "display_title": "Preserve Meri Figma UI and add reviewed AI Elements run workspace"
+  },
+  "branchCreation": {
+    "branch": "codex/portfolio-continuation-20261011"
+  },
+  "status": "Branch creation succeeded through existing connector; source tree/commit upload and draft PR pending. No new authentication flow initiated."
+}
+

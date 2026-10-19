@@ -1,0 +1,51 @@
+{
+  "sourcePin": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+  "appsWebTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+  "appsWebSrcTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "archiveBytes": 498171732,
+  "archiveSHA256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+  "originalFindingIDsTitlesSeveritiesPreserved": 37,
+  "sourceRepairDispositions": 10,
+  "unchangedRemainingDispositions": 27,
+  "remainingHoldsTableRows": 27,
+  "nativeRowsAccepted": 0,
+  "nativeRowsHeld": 337,
+  "exclusions": 8,
+  "historicalFailuresPreserved": [
+    "49f:671passed4failed3interrupted314unrun",
+    "943d:111PortfolioPassed4interrupted881unrun;50ModulesPassed1interrupted106unrun;architecture-link check failed",
+    "d5dd first30s:144passed1timedOut4interrupted847unrun"
+  ],
+  "verifiedPassedGates": {
+    "combinedTests": 1386,
+    "combinedBreakdown": [
+      58,
+      21,
+      1213,
+      94
+    ],
+    "elements": 15,
+    "modules": 157,
+    "visual": 15,
+    "productionBuildID": "HW5M0_NcA2YohM1f7uUwZ",
+    "productionHTTPChecks": 11,
+    "productionViewportChecks": 4,
+    "productionHistoryChecks": 2,
+    "productionPageErrors": 0
+  },
+  "sourceVersusEvidencePRHeadDistinction": "Correctly explicit in d5dd binding; current route link issue recorded separately.",
+  "libraryClaim": "No confirmed ID, upload, size-limit rejection or alternate relay claimed. Two pre-mutation network failures are consistent with preserved parent-reported history; live app calls not repeated.",
+  "intentionallyExcludedPendingFiles": [
+    "QUALIFICATION.json",
+    "PACKET-MANIFEST.json"
+  ],
+  "remainingExecutionGate": "Full996 Portfolio run; not complete and not qualified by this audit",
+  "reviewActions": {
+    "sourceEdits": 0,
+    "tests": 0,
+    "browserActions": 0,
+    "dependencyChanges": 0,
+    "cloudActions": []
+  }
+}

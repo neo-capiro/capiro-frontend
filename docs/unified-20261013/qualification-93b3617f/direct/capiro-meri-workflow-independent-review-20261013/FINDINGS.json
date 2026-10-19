@@ -1,0 +1,52 @@
+[
+  {
+    "id": "MWF-01",
+    "severity": "P2 before workflow activation",
+    "state": "CORRECTED_SOURCE_REVIEW_ACCEPTED; original defect retained; browser not run",
+    "title": "Undefined focus token overrides the canonical keyboard outline",
+    "path": "apps/web/src/features/meri/actions/workflow.module.css",
+    "lines": [
+      98,
+      99,
+      100,
+      101
+    ],
+    "originalSourceSha256": "692cf3f5ec282a291ece77f57d85d1334e0f9b09e8781f508bd2ead125b500c2",
+    "correctedSourceSha256": "f4a68e2aebbcd541c83eea43cf2b6a8b8dd3c5b868afa1300f23213dbf229eee",
+    "observedCorrection": "The five-line local focus override was removed; current controls inherit the existing canonical globals.css outline. No shared style or controller/test changed.",
+    "evidence": "The owned selectors .button:focus-visible and .field input:focus-visible set outline:2px solid var(--ring). No --ring definition exists in application/UI CSS. RootLayout imports globals.css, whose valid blue focus rules have lower specificity. An unresolved var invalidates the winning outline at computed-value time, resetting the noninherited outline to its initial value, not falling back to the earlier declaration.",
+    "impact": "Keyboard buttons and inputs lose the intended visible focus outline when composed under current app styles. Inactive today; does not affect PR17 shipping source.",
+    "minimumCorrection": "Remove the unnecessary owned outline override to inherit the canonical focus styles, or use an explicitly defined token/fallback. Do not edit shared UI or invent a global design token for this bounded correction.",
+    "futureVerification": "At a leased browser gate, Tab through workflow buttons/title/date in current host styles and require an actual visible outline. Preserve native disabled state and pending/unknown fences."
+  },
+  {
+    "id": "MWF-02",
+    "severity": "P2 before workflow activation",
+    "state": "CORRECTED_SOURCE_REVIEW_ACCEPTED; meaningful author red/green reviewed",
+    "title": "An old approval refusal remains visible after a newer execution becomes uncertain",
+    "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+    "lines": [
+      92,
+      99,
+      108,
+      112,
+      222,
+      235
+    ],
+    "relatedPath": "apps/web/src/features/meri/actions/ProposalPanel.tsx",
+    "relatedLines": [
+      49,
+      53
+    ],
+    "sourceSha256": "c45f4c358f35e07da3de7e2c14c2e15540dbe03e40558cde12192f497d6793e9",
+    "reproduction": "Prepare proposal; execute returns approval-pending, setting approvalRefused=true; a separate service then grants approval; next deliberate execute dispatches but returns unknown/result-withheld/stored-withheld or throws. #fail sets blocked/problem but retains approvalRefused=true. ProposalPanel still says Current approval is still required next to the newer failure.",
+    "impact": "Incorrect current-approval messaging from an earlier request. The unknown fence remains intact; this finding does not claim unauthorized execution or duplicate effects.",
+    "minimumCorrection": "Retire the previous refusal when a new execute operation is actually admitted and do not carry it into a newer failure. Preserve pending refusal for its own response and synchronous duplicate request guards.",
+    "requiredRegression": "Chained approval-pending -> external fixture approval -> held newer execution -> uncertain/withheld/thrown result. Verify stale flag is cleared, exact proposal handle is retained and unknown fence blocks further dispatch. Existing separate pending and unknown tests do not cover this sequence.",
+    "reviewerRuntime": "Not executed; confirmed by source transition trace.",
+    "correctedSourceSha256": "0fd4ed003290038d919472cc11a1736e3dab94e3047c9c761bdcf7a3bcb267e4",
+    "correction": "#run retires old approvalRefused only after active/busy/problem admission for execute; #fail also clears it. A new approval-pending reply still records its own refusal.",
+    "regressionEvidence": "Five unchanged chained cases fail before (21 pass/5 fail), pass after (26/26); assertions check both held and settled snapshots, same opaque handle, duplicate suppression, blocked retries and private error omission.",
+    "testSha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742"
+  }
+]

@@ -1,0 +1,196 @@
+{
+  "members": [
+    {
+      "path": "BASELINE-DISPOSITION.json",
+      "bytes": 27419,
+      "sha256": "36b1712479b2ba0fe6e6a6dec83e9c38b9eabe3b8cd06d2381d6b265c1e8b7e8"
+    },
+    {
+      "path": "FOCUSED-SUMMARY.json",
+      "bytes": 929,
+      "sha256": "a2146e505d0cb6d3586910c4a1dd31c32fe23fdd876a6d12a83d4d082540fc92"
+    },
+    {
+      "path": "MERI-RENDERED-REVIEW.json",
+      "bytes": 2062,
+      "sha256": "41335d74ebfd1fa91cf2a999cf3382dca9341d3241272a29773aaf6c03b5ab20"
+    },
+    {
+      "path": "bill-corrected-baseline/results.json",
+      "bytes": 31793,
+      "sha256": "8081859e54cae28055dd7d9f6c5d0251d37629945e92129b4d72b5ea45a8c6d6"
+    },
+    {
+      "path": "bill-corrected-baseline/run.json",
+      "bytes": 933,
+      "sha256": "bfaf64003d487e4289e87a70a4db05f136c5f7d9ef414942a5e87d12d191a3e2"
+    },
+    {
+      "path": "bill-corrected-baseline/run.log",
+      "bytes": 14398,
+      "sha256": "618380a1f902d8411b65dedffc195acac7126bf30fa2a71e84c52b727ebc0e9b"
+    },
+    {
+      "path": "calendar-corrected-baseline/results.json",
+      "bytes": 90963,
+      "sha256": "802ff48f3e8d44dd05af901e0f0f3ac21e3a6b7063639181059a85171f200111"
+    },
+    {
+      "path": "calendar-corrected-baseline/run.json",
+      "bytes": 951,
+      "sha256": "336fd1ddaac9e5a4b4c3bab5621c7846a5fa0519db4234523d434751441c4288"
+    },
+    {
+      "path": "calendar-corrected-baseline/run.log",
+      "bytes": 49017,
+      "sha256": "d21c05274b37a7fdd4c484bf9e36b27f7742b996ed6312b82a930884d138bd5c"
+    },
+    {
+      "path": "calendar-unit-correction.log",
+      "bytes": 242,
+      "sha256": "2fc2536645b7e8a8a29fc53b1d0f0570ca3075837881956b3573f83436110b5a"
+    },
+    {
+      "path": "followup-before-fix/results.json",
+      "bytes": 21491,
+      "sha256": "17433014db4508033f8e1e0359d4859d7e17f0d3df3b362ddeb775ed7c2de4d2"
+    },
+    {
+      "path": "followup-before-fix/run.json",
+      "bytes": 1046,
+      "sha256": "cd1a7f9074e4660d02f7cd37f3b17c898847cb878298d7fd2ab814efae89d2f7"
+    },
+    {
+      "path": "followup-before-fix/run.log",
+      "bytes": 10518,
+      "sha256": "b7b25fdaa624d2c7445fdafded6ebbc5e492657dfbb336a111fa6a7d9569f7c2"
+    },
+    {
+      "path": "lint-corrections.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "lint-initial-failure.log",
+      "bytes": 7006,
+      "sha256": "e69dd803493a310cfb58345d0baffef47417d445bbac588af816100c03ab91bc"
+    },
+    {
+      "path": "meri-final-focused/results.json",
+      "bytes": 5628555,
+      "sha256": "cc4ae2b100148a8bca5c86a864e24efd8c115e864d04b96921cf8811b73f20c9"
+    },
+    {
+      "path": "meri-final-focused/run.json",
+      "bytes": 1094,
+      "sha256": "d4758aac3e3bee8e2f350db538e6f87d7e59ec18df0cf523202ed632474ce7ed"
+    },
+    {
+      "path": "meri-final-focused/run.log",
+      "bytes": 3891,
+      "sha256": "f21594c591e637e919c02e5549b39830c480221ac47077f114f95893e03685b1"
+    },
+    {
+      "path": "meri-gradient-review/results.json",
+      "bytes": 2022661,
+      "sha256": "a599b17f6bc6f9183257cb1676b61c443b2866f1ebbc3e331daf72906ea82656"
+    },
+    {
+      "path": "meri-gradient-review/run.json",
+      "bytes": 942,
+      "sha256": "b25b9366a037dbf148525fa42ebf64ce21b9349b1bdf0eab46ddcc12ed71f782"
+    },
+    {
+      "path": "meri-gradient-review/run.log",
+      "bytes": 985,
+      "sha256": "50ba8113b0d8efd799e70d02998963cc681f3a7704dc2fc241783709a139942b"
+    },
+    {
+      "path": "meri-theme-corrected-baseline/results.json",
+      "bytes": 22687,
+      "sha256": "f85d520504ed0378d940534a5c7abe38952d964694c2162ccff7465ed52b2d24"
+    },
+    {
+      "path": "meri-theme-corrected-baseline/run.json",
+      "bytes": 959,
+      "sha256": "d4f34deb2f841d36905db6647429a04d65b2f6fda15d9d534cda71bd2e18b599"
+    },
+    {
+      "path": "meri-theme-corrected-baseline/run.log",
+      "bytes": 12320,
+      "sha256": "4d5e15e65a6c6eb4823c97914d07f674a099fc6103b2f43d06676e9ef8cb573c"
+    },
+    {
+      "path": "phase-b-all-browser/results.json",
+      "bytes": 2454261,
+      "sha256": "000259dad8c6ec8a525564b24f000c4689b86922e2cdb51ed5214b439b3bb1d7"
+    },
+    {
+      "path": "phase-b-all-browser/run.json",
+      "bytes": 2357,
+      "sha256": "e2a325bb4d2474a78bfe295dddf93ce3552a0b3502ea33ac528c5c3e931ffd16"
+    },
+    {
+      "path": "phase-b-all-browser/run.log",
+      "bytes": 27637,
+      "sha256": "489ed0612e8190e959570d945eb6852bc0a9a5bdbdfafcd9bb7f88bd4a18def0"
+    },
+    {
+      "path": "phase-b-all-unit/run.json",
+      "bytes": 1104,
+      "sha256": "e99455a49fc6b5b416c84a729ca54c27e7817b37f25bf936c419d0b500afd251"
+    },
+    {
+      "path": "phase-b-all-unit/run.log",
+      "bytes": 245,
+      "sha256": "7c50e995e8ea1e4a5fca3cc3c79a031cead1d4548630c86a08a92fd974d93e0c"
+    },
+    {
+      "path": "phase-b-corrected-replay/results.json",
+      "bytes": 26782,
+      "sha256": "6da173e9f5b31faf1460079145b6a5b15a38a88ffe4ef3c361d771d64806af34"
+    },
+    {
+      "path": "phase-b-corrected-replay/run.json",
+      "bytes": 1305,
+      "sha256": "2dda3dc79b682b8f80a7c90ca96f6fbe2d43b476aab305784f88b33c99ab5f1b"
+    },
+    {
+      "path": "phase-b-corrected-replay/run.log",
+      "bytes": 4166,
+      "sha256": "c8d7bf66aefc022bdf42147ae8a32d55d8ddcc249184810ff8ff37e9ce8f5205"
+    },
+    {
+      "path": "portfolio-baseline-exact/results.json",
+      "bytes": 2815348,
+      "sha256": "70ee7b85563b8a32dd3e433b155a41b50860a4dea2d585d03af4b13a8aa2daa6"
+    },
+    {
+      "path": "portfolio-baseline-exact/run.json",
+      "bytes": 1724,
+      "sha256": "0cfc3bb6936824e4476351b92e333de27bf16fe018532562d7d57bd7d1cd055d"
+    },
+    {
+      "path": "portfolio-baseline-exact/run.log",
+      "bytes": 280242,
+      "sha256": "40687a412b05edfc007d53f6ab66b351a5ddfac76d9da317522fcabde2d264c3"
+    },
+    {
+      "path": "prospect-navigation-corrected-baseline/results.json",
+      "bytes": 20528,
+      "sha256": "a02bed91d208fa0881d48e53aed8c073a6839055f1be1ebb360e3a419c4d5b5d"
+    },
+    {
+      "path": "prospect-navigation-corrected-baseline/run.json",
+      "bytes": 1009,
+      "sha256": "dbacb14121a889df5908d7bc7dc9fc2875331de8c14201dba33a017efb3b3fed"
+    },
+    {
+      "path": "prospect-navigation-corrected-baseline/run.log",
+      "bytes": 10409,
+      "sha256": "64b69888f405fb6b7ac77aff3a9ed4426f2a2205e058042a637fb0b0636e489e"
+    }
+  ],
+  "rawEvidenceRoot": "/workspace/capiro-acceptance-batch-evidence-20261013",
+  "note": "Raw traces, screenshots, source bindings, preimages and original failed runs remain preserved at the evidence root; these copied logs/receipts expose the verdict and failure assertions."
+}

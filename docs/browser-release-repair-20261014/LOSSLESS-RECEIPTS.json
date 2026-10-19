@@ -1,0 +1,191 @@
+{
+  "note": "Decode gzip+base64 then verify original length andSHA256; no terminal normalization",
+  "receipts": [
+    {
+      "path": "standalone.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 8980,
+      "originalSha256": "f1a3766cadf152c96233eca207e840c2c69ee83a0701cebd908565613c6a45b1"
+    },
+    {
+      "path": "build.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 2742,
+      "originalSha256": "4cd1242b097c07fece504ff75f192aec15e442748822204b77108bf4dc59946f"
+    },
+    {
+      "path": "lint-final2.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 20593,
+      "originalSha256": "3c3b8942811ba3680ab998b72b4aa792344a62115d71d69d16ea420a1b123d91"
+    },
+    {
+      "path": "architecture-before-review.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 927667,
+      "originalSha256": "6899fb94476fc6aacaa5d28d6f5465ebd4f733aa60d58453727f1d5e1a11db95"
+    },
+    {
+      "path": "npm-check.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 1006081,
+      "originalSha256": "09f1a7ba1b6f9166fef5e45c9930c0dc47d0cc2b5ef8ebb77bcfb153ba270545"
+    },
+    {
+      "path": "dependency-audit.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 3054,
+      "originalSha256": "94a23f2179a3c611a261728a0a8203950eaf64506c1a3796b1230b11107071b4"
+    },
+    {
+      "path": "format-final.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 361,
+      "originalSha256": "f86e15128a29fa1161d0d608257c360045d993746eff56a3f0a031d96ee087e4"
+    },
+    {
+      "path": "lint-final.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 20593,
+      "originalSha256": "3c3b8942811ba3680ab998b72b4aa792344a62115d71d69d16ea420a1b123d91"
+    },
+    {
+      "path": "format-final2.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 361,
+      "originalSha256": "f86e15128a29fa1161d0d608257c360045d993746eff56a3f0a031d96ee087e4"
+    },
+    {
+      "path": "types-final.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 821,
+      "originalSha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "modules-complete-heading-attempt/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 83920,
+      "originalSha256": "8d664a415531f4397968d53c4b47207ed9aa0ec9c2c8f9df15f96ba010eb29fc"
+    },
+    {
+      "path": "modules-complete-heading-attempt/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 21925393,
+      "originalSha256": "d9cbaf73df12ea5c4bcc838a7b3d04332f84a792cd7d64f57dd804d08bff00df"
+    },
+    {
+      "path": "final-control/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 2168,
+      "originalSha256": "76f00fafb1d0991a5bb47f39210d3c7c1ab368e3c6b6c9a9e8d592dce3cdec76"
+    },
+    {
+      "path": "final-control/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 3392737,
+      "originalSha256": "9ab66bab854781b95421622caef6ed797a335310813742ecbdba34d7d2a42aba"
+    },
+    {
+      "path": "modules-first-attempt/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 4652,
+      "originalSha256": "21bfd50925bb889ee70d5283eefad0be045ceced4f36457026d7682674dab14c"
+    },
+    {
+      "path": "portfolio-full-first-attempt/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 202173,
+      "originalSha256": "d66c555057797046de377c6e6f88308ca17bdfa632e29a1ba207980acea63af9"
+    },
+    {
+      "path": "portfolio-full-first-attempt/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 6617408,
+      "originalSha256": "e6398b5ce15264155ef2b03804acbda9bdaa6ff483add22942d8faf16bab6965"
+    },
+    {
+      "path": "focus-first-attempt/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 9562,
+      "originalSha256": "f2dfbaa96e7bf08eaa5b0535a29a9195036cbb6ba79353596310d90873daa07a"
+    },
+    {
+      "path": "focus-first-attempt/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 2830712,
+      "originalSha256": "772bb99323b8fa4791452389c61c21d779f54fd6b74abb67aca1583e7efc64d6"
+    },
+    {
+      "path": "modules-complete-final/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 75453,
+      "originalSha256": "2900c4eae3de28abb87949605f54b5f11a827746b217b0fec96a1533cd774ada"
+    },
+    {
+      "path": "modules-complete-final/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 21913216,
+      "originalSha256": "95ad9dd5d7c1ec9b0d3a191ba1d6adde574479b7e6a69f4db5aec00292050f95"
+    },
+    {
+      "path": "before/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 16751,
+      "originalSha256": "34cfe4bdd5b591867e45d883e1fc1e55c894b51108be6534ed55df8cf01d07ee"
+    },
+    {
+      "path": "before/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 2320318,
+      "originalSha256": "8e1339fbe0c11bc7cab617aece45cc964e8da463266a25a77b87d99b21625d33"
+    },
+    {
+      "path": "portfolio-complete-final/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 194806,
+      "originalSha256": "9002c5987ae6211264093f03fa11f68a5b37e7f4d0860aa82bd216939fb50244"
+    },
+    {
+      "path": "portfolio-complete-final/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 6603070,
+      "originalSha256": "adf7e4a3230d4360791e1dffeedc5f9591da1f7f3386fa610e4513546a78c8c1"
+    },
+    {
+      "path": "intermediate/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 14585,
+      "originalSha256": "3f5a4b3aed5e2fadcd899e2c085f2a182524c21791e489e5e7eb94ea52537f6d"
+    },
+    {
+      "path": "intermediate/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 2342818,
+      "originalSha256": "c953a5f6fd7aeee7089c26a6330bd63716573c61734ec7f3235f424dbb913a6a"
+    },
+    {
+      "path": "modules-control-first-attempt/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 24596,
+      "originalSha256": "eebb4b68bbcb9cfd4d4c47a0f773c210decd1a86d3afc8b4fdfed6ebff68278d"
+    },
+    {
+      "path": "modules-control-first-attempt/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 6538226,
+      "originalSha256": "c5872d65fb9431b4a47597ab1e7fd5e2692077e8a2e0b408982a391eb8754fab"
+    },
+    {
+      "path": "shared-controls-final/browser.log.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 3218,
+      "originalSha256": "3c53ab480e4d01a5f0bd6c196d19174651ee3f4c5819fc04dd106fa3ae5f485a"
+    },
+    {
+      "path": "shared-controls-final/results.json.gz.json",
+      "encoding": "gzip+base64",
+      "originalBytes": 3452209,
+      "originalSha256": "32985c7cb8011658d5c1179c0833f5e7421f4019ea77ab1726ddc80309edca67"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "backendEvidencePR": "https://github.com/neo-capiro/capiro-backend/pull/3",
+  "backendEvidenceHead": "96a32150553c423ca182cc3fb345113f5993f016",
+  "backendEvidenceTree": "5b477c36de1b70f335dbc5751cdcc8935c80d259",
+  "backendProductSource": "111f269d749cae0249c2141779bd6d7deb93f45c",
+  "backendProductTree": "719c8292fc0c9cf4e8242b8d58efb2d004ad0a1f",
+  "changedFiles": [
+    "docs/preview-readonly-native-20261013/HANDOFF.md",
+    "docs/preview-readonly-native-20261013/INDEPENDENT-REVIEW.md",
+    "docs/preview-readonly-native-20261013/RUNTIME-ENTRYPOINT-CORRECTION.md",
+    "docs/preview-readonly-native-20261013/RUNTIME-PERMISSIONS-CORRECTION.md",
+    "docs/preview-readonly-native-20261013/evidence/OWNED-TARGET-PLAN.json",
+    "docs/preview-readonly-native-20261013/evidence/SHA256-INDEX.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-catalog-native-connect.strace",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-catalog-native-results.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-catalog-native.stderr",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-catalog-native.stdout",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-entrypoint-emit-receipt.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-entrypoint-emit.stderr.raw.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-entrypoint-emit.stdout",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-entrypoint-source-hygiene.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-launcher-receipt.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-liveness-command.json",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-liveness.stderr",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-liveness.stdout",
+    "docs/preview-readonly-native-20261013/evidence/attempt0-publication-seal-repair.json",
+    "docs/preview-readonly-native-20261013/evidence/catalog-after.json",
+    "docs/preview-readonly-native-20261013/evidence/catalog-after.raw.txt",
+    "docs/preview-readonly-native-20261013/evidence/catalog-before.json",
+    "docs/preview-readonly-native-20261013/evidence/catalog-before.raw.txt",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native-command.json",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native-connect.strace",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native-probe.cjs",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native-query-events.json",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native-results.json",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native.stderr",
+    "docs/preview-readonly-native-20261013/evidence/catalog-native.stdout",
+    "docs/preview-readonly-native-20261013/evidence/container-capacity.txt",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-emit-command.json",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-emit-results.json",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-emit.cjs",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-emit.stderr",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-emit.stdout",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-emitted.js.txt",
+    "docs/preview-readonly-native-20261013/evidence/entrypoint-runtime-retirement.json",
+    "docs/preview-readonly-native-20261013/evidence/fixture-projection.json",
+    "docs/preview-readonly-native-20261013/evidence/fixture-schema.sql",
+    "docs/preview-readonly-native-20261013/evidence/fixture-seed.sql",
+    "docs/preview-readonly-native-20261013/evidence/liveness-command.json",
+    "docs/preview-readonly-native-20261013/evidence/liveness-probe.cjs",
+    "docs/preview-readonly-native-20261013/evidence/liveness-results.json",
+    "docs/preview-readonly-native-20261013/evidence/liveness.stderr",
+    "docs/preview-readonly-native-20261013/evidence/liveness.stdout",
+    "docs/preview-readonly-native-20261013/evidence/owned-runtime-retirement.json",
+    "docs/preview-readonly-native-20261013/evidence/path-shared-build.log",
+    "docs/preview-readonly-native-20261013/evidence/prepare-fixture.cjs",
+    "docs/preview-readonly-native-20261013/evidence/preservation.json",
+    "docs/preview-readonly-native-20261013/evidence/preview-container-invocation.json",
+    "docs/preview-readonly-native-20261013/evidence/privacy-review.json",
+    "docs/preview-readonly-native-20261013/evidence/runtime-path-source-bindings.json",
+    "docs/preview-readonly-native-20261013/evidence/shared-build.log",
+    "docs/preview-readonly-native-20261013/evidence/source-and-network-preservation.json",
+    "docs/preview-readonly-native-20261013/evidence/source-hygiene.json"
+  ],
+  "allChangesAreDocumentationOrEvidence": true,
+  "routeSourceBlobComparison": [
+    {
+      "ref": "111f269d749cae0249c2141779bd6d7deb93f45c",
+      "path": "apps/api/src/preview-readonly/preview.route-policy.ts",
+      "sha": "1b630768036465a11ff18f56b4623fce40e80cc7"
+    },
+    {
+      "ref": "111f269d749cae0249c2141779bd6d7deb93f45c",
+      "path": "apps/api/src/preview-readonly/preview.controller.ts",
+      "sha": "0804b20dda32f6a4bd43b9f59def4ed10d554f60"
+    },
+    {
+      "ref": "96a32150553c423ca182cc3fb345113f5993f016",
+      "path": "apps/api/src/preview-readonly/preview.route-policy.ts",
+      "sha": "1b630768036465a11ff18f56b4623fce40e80cc7"
+    },
+    {
+      "ref": "96a32150553c423ca182cc3fb345113f5993f016",
+      "path": "apps/api/src/preview-readonly/preview.controller.ts",
+      "sha": "0804b20dda32f6a4bd43b9f59def4ed10d554f60"
+    }
+  ],
+  "receivedDocuments": [
+    {
+      "url": "https://github.com/neo-capiro/capiro-backend/blob/96a32150553c423ca182cc3fb345113f5993f016/docs/preview-readonly-native-20261013/RUNTIME-ENTRYPOINT-CORRECTION.md",
+      "blob": "8d83838ad8e959e82a20fdd325d2b853674cfddc"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-backend/blob/96a32150553c423ca182cc3fb345113f5993f016/docs/preview-readonly-native-20261013/RUNTIME-PERMISSIONS-CORRECTION.md",
+      "blob": "5d5ff2719e5020031b2f9568110afc05e5025d37"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capiro-backend/blob/96a32150553c423ca182cc3fb345113f5993f016/docs/preview-readonly-native-20261013/evidence/preview-container-invocation.json",
+      "blob": "d8cf2c0d009a6a8d2cfb1c464e9f57be486a8298"
+    }
+  ],
+  "frontendQualifiedSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "frontendPreviousPublication": "e926c44da4e37ada14c3dfaab8a1e3af9c50ea2d",
+  "frontendApplicationTree": "dbd6aebbae52b5ded5611b21c3ff057b881cf92f",
+  "backendRuntimeInvocation": {
+    "entryPoint": ["/usr/bin/dumb-init", "--", "node"],
+    "command": ["/app/apps/api/dist/preview-readonly/preview-main.js"],
+    "workingDirectory": "/app/apps/api",
+    "targetGroupLiveness": {
+      "path": "/api/__preview_liveness",
+      "method": "GET",
+      "successCodes": "403",
+      "meaning": "listening only; no auth or database access on the probe",
+      "nativeReadiness": false
+    },
+    "ordinaryImageCommandNotUsed": "serve",
+    "sourceHead": "111f269d749cae0249c2141779bd6d7deb93f45c",
+    "notExecutedOrRegistered": true
+  },
+  "backendPermissionCorrection": {
+    "table": "tenants",
+    "physicalColumn": "settings_jsonb",
+    "grantExecuted": false
+  },
+  "frontendRuntimeChange": false,
+  "frontendRebuildPerformed": false,
+  "nativeBusinessRlsAccepted": false,
+  "activationAllowed": false
+}

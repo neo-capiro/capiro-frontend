@@ -1,0 +1,12 @@
+file:///workspace/capiro-meri-workflow-20261013/apps/web/node_modules/@capiro/meri-contracts/dist/action-application.mjs:19680
+  throw new ActionResponseError(code);
+        ^
+
+ActionResponseError: ACTION_RESPONSE_SHAPE
+    at fail (file:///workspace/capiro-meri-workflow-20261013/apps/web/node_modules/@capiro/meri-contracts/dist/action-application.mjs:19680:9)
+    at receiveActionResponse (file:///workspace/capiro-meri-workflow-20261013/apps/web/node_modules/@capiro/meri-contracts/dist/action-application.mjs:19741:32)
+    at file:///tmp/capiro-meri-adapter-independent-review-20261013/probe-query-intent.mjs:48:26 {
+  code: 'ACTION_RESPONSE_SHAPE'
+}
+
+Node.js v24.19.0

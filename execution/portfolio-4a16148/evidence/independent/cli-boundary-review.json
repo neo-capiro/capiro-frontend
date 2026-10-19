@@ -1,0 +1,217 @@
+{
+  "superviseSHA256": "1690197ae8790d6ae239736da74cd9945b91447d0d8d0a7abe987d23b2a9dd0a",
+  "awsCalls": 0,
+  "passed": 8,
+  "total": 8,
+  "cases": [
+    {
+      "case": "bounded argv and retry/pager config",
+      "passed": true,
+      "errorClass": null,
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 0.5,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    },
+    {
+      "case": "call deadline clamps15seconds",
+      "passed": true,
+      "errorClass": null,
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 15,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    },
+    {
+      "case": "zero remaining no process",
+      "passed": true,
+      "errorClass": "TimeoutError",
+      "calls": []
+    },
+    {
+      "case": "CLI failure excludes stderr secret",
+      "passed": true,
+      "errorClass": "RuntimeError",
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 0.5,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    },
+    {
+      "case": "stdout postcapture allowance",
+      "passed": true,
+      "errorClass": "RuntimeError",
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 0.5,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    },
+    {
+      "case": "stderr postcapture allowance",
+      "passed": true,
+      "errorClass": "RuntimeError",
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 0.5,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    },
+    {
+      "case": "malformed JSON fails",
+      "passed": true,
+      "errorClass": "JSONDecodeError",
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 0.5,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    },
+    {
+      "case": "process timeout propagates",
+      "passed": true,
+      "errorClass": "TimeoutExpired",
+      "calls": [
+        {
+          "argv": [
+            "aws",
+            "codebuild",
+            "batch-get-builds",
+            "--ids",
+            "offline-fixture",
+            "--region",
+            "us-east-1",
+            "--output",
+            "json",
+            "--cli-connect-timeout",
+            "5",
+            "--cli-read-timeout",
+            "10"
+          ],
+          "timeout": 0.5,
+          "capture_output": true,
+          "retry": "1",
+          "pager": "",
+          "prompt": "off"
+        }
+      ]
+    }
+  ]
+}

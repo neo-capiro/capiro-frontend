@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "inspectedAt": "2026-10-12T20:10:34.203118+00:00",
+  "captures": [
+    {
+      "file": "candidate-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/agenda-1440.png",
+      "sha256": "69378c4a917239a9269d8a901bc5864307cb335226b1a897e42a2781c2de016d",
+      "bytes": 79251
+    },
+    {
+      "file": "candidate-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/agenda-390.png",
+      "sha256": "a4d827ba0a05a9ec9f9182bf0ba56b88c34f1530fda1e8460bee9beb1a1b6cda",
+      "bytes": 87374
+    },
+    {
+      "file": "candidate-artifacts/calendar-lifecycle-meeting-f2273-top-without-losing-controls/meeting-mobile.png",
+      "sha256": "5cdb6a49b12e997109f5f5059d80076cf02a75ef8b63ab87c7683e054f38442e",
+      "bytes": 83613
+    },
+    {
+      "file": "candidate-artifacts/calendar-sharing-sharing-m-2e585-al-desktop-and-mobile-sizes/sharing-1440.png",
+      "sha256": "2f299d4edcf4d11829b14bbe59eb4b90140e4912b505cfe7fc614fb4c8b5d8cc",
+      "bytes": 127986
+    },
+    {
+      "file": "candidate-artifacts/calendar-sharing-sharing-m-2e585-al-desktop-and-mobile-sizes/sharing-390.png",
+      "sha256": "135a76d3fe1f22ca96b64f0dcceb300c9be38d2f4b49d17ae914ecb668550a70",
+      "bytes": 59274
+    }
+  ],
+  "observations": [
+    "Desktop lifecycle table and mobile labelled cards preserve meeting/status controls without horizontal overflow.",
+    "Persistent mobile meeting context, attendees, lifecycle tab and actions remain legible.",
+    "Sharing desktop and mobile show all four native artifact kinds, review copy and available controls; keyboard selection and width tests passed."
+  ],
+  "limits": [
+    "No full shell or pixel parity claim.",
+    "CR09 has no assigned design frame.",
+    "Original Figma capture tools did not return version IDs."
+  ]
+}

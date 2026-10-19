@@ -1,0 +1,62 @@
+test_child_stderr_has_separate_counter_and_shared_limit (test_control_gate.ControlGateTests.test_child_stderr_has_separate_counter_and_shared_limit) ... ERROR
+test_control_receipt_binds_identity_limits_and_completed_output (test_control_gate.ControlGateTests.test_control_receipt_binds_identity_limits_and_completed_output) ... FAIL
+test_guard_cannot_exceed_remaining_output_allowance (test_control_gate.ControlGateTests.test_guard_cannot_exceed_remaining_output_allowance) ... ok
+test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) ... 
+  test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CAPIRO_EXECUTION_ID': ''}) ... FAIL
+  test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CAPIRO_EXECUTION_ID': 'foreign'}) ... FAIL
+  test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CODEBUILD_BUILD_ID': ''}) ... FAIL
+  test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CODEBUILD_BUILD_ID': 'other-project:fake'}) ... FAIL
+
+======================================================================
+ERROR: test_child_stderr_has_separate_counter_and_shared_limit (test_control_gate.ControlGateTests.test_child_stderr_has_separate_counter_and_shared_limit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/capiro-build-execution/execution/portfolio-4a16148/tests/test_control_gate.py", line 78, in test_child_stderr_has_separate_counter_and_shared_limit
+    self.assertEqual(budget.stderr_bytes, 5)
+                     ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'OutputBudget' object has no attribute 'stderr_bytes'
+
+======================================================================
+FAIL: test_control_receipt_binds_identity_limits_and_completed_output (test_control_gate.ControlGateTests.test_control_receipt_binds_identity_limits_and_completed_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/capiro-build-execution/execution/portfolio-4a16148/tests/test_control_gate.py", line 44, in test_control_receipt_binds_identity_limits_and_completed_output
+    self.assertIsNone(error)
+AssertionError: AssertionError('b\'CAPIRO_CONTROL_GATE \' not found in b\'{"imageSizeBytes": 100, "maximumBytes": 100, "metric": "docker.image.Size", "prePushGate": "PASS"}\\n\'') is not None
+
+======================================================================
+FAIL: test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CAPIRO_EXECUTION_ID': ''})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/capiro-build-execution/execution/portfolio-4a16148/tests/test_control_gate.py", line 64, in test_missing_or_foreign_execution_identity_stops_before_gates
+    self.assertIsInstance(error, ValueError)
+AssertionError: AssertionError('b\'CAPIRO_CONTROL_GATE \' not found in b\'{"imageSizeBytes": 100, "maximumBytes": 100, "metric": "docker.image.Size", "prePushGate": "PASS"}\\n\'') is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CAPIRO_EXECUTION_ID': 'foreign'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/capiro-build-execution/execution/portfolio-4a16148/tests/test_control_gate.py", line 64, in test_missing_or_foreign_execution_identity_stops_before_gates
+    self.assertIsInstance(error, ValueError)
+AssertionError: AssertionError('b\'CAPIRO_CONTROL_GATE \' not found in b\'{"imageSizeBytes": 100, "maximumBytes": 100, "metric": "docker.image.Size", "prePushGate": "PASS"}\\n\'') is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CODEBUILD_BUILD_ID': ''})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/capiro-build-execution/execution/portfolio-4a16148/tests/test_control_gate.py", line 64, in test_missing_or_foreign_execution_identity_stops_before_gates
+    self.assertIsInstance(error, ValueError)
+AssertionError: AssertionError('b\'CAPIRO_CONTROL_GATE \' not found in b\'{"imageSizeBytes": 100, "maximumBytes": 100, "metric": "docker.image.Size", "prePushGate": "PASS"}\\n\'') is not an instance of <class 'ValueError'>
+
+======================================================================
+FAIL: test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) (changes={'CODEBUILD_BUILD_ID': 'other-project:fake'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/capiro-build-execution/execution/portfolio-4a16148/tests/test_control_gate.py", line 64, in test_missing_or_foreign_execution_identity_stops_before_gates
+    self.assertIsInstance(error, ValueError)
+AssertionError: AssertionError('b\'CAPIRO_CONTROL_GATE \' not found in b\'{"imageSizeBytes": 100, "maximumBytes": 100, "metric": "docker.image.Size", "prePushGate": "PASS"}\\n\'') is not an instance of <class 'ValueError'>
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.027s
+
+FAILED (failures=5, errors=1)

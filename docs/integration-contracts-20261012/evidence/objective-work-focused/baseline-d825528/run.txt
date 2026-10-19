@@ -1,0 +1,131 @@
+
+Running 3 tests using 1 worker
+
+  ✘  1 ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing strategies Objective link mounts its bound read instead of the ordinary editor (4.2s)
+  ✘  2 ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing planner Objective link mounts its bound read instead of the ordinary editor (4.2s)
+  ✘  3 ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing workspace Objective link mounts its bound read instead of the ordinary editor (4.2s)
+
+
+  1) ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing strategies Objective link mounts its bound read instead of the ordinary editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Objective Strategy destination', exact: true })
+    Expected: visible
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 3000ms
+      - waiting for getByRole('heading', { name: 'Objective Strategy destination', exact: true })
+
+
+      18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);
+      19 |     try {
+    > 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});
+         |                                                                       ^
+      21 |       expect(keys).toContain(operation);
+      22 |     } finally {
+      23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});
+        at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing planner Objective link mounts its bound read instead of the ordinary editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Objective Planner task destination', exact: true })
+    Expected: visible
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 3000ms
+      - waiting for getByRole('heading', { name: 'Objective Planner task destination', exact: true })
+
+
+      18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);
+      19 |     try {
+    > 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});
+         |                                                                       ^
+      21 |       expect(keys).toContain(operation);
+      22 |     } finally {
+      23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});
+        at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing workspace Objective link mounts its bound read instead of the ordinary editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })
+    Expected: visible
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 3000ms
+      - waiting for getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })
+
+
+      18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);
+      19 |     try {
+    > 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});
+         |                                                                       ^
+      21 |       expect(keys).toContain(operation);
+      22 |     } finally {
+      23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});
+        at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing strategies Objective link mounts its bound read instead of the ordinary editor 
+    ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing planner Objective link mounts its bound read instead of the ordinary editor 
+    ../../../../tmp/objective-work-baseline-d825528/control.spec.ts:12:3 › existing workspace Objective link mounts its bound read instead of the ordinary editor 
+[WebServer] (node:313809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:313836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:313962) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:314089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

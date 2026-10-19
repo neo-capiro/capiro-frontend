@@ -1,0 +1,116 @@
+{
+  "sealedAt": "2026-10-12T22:54:23.325222+00:00",
+  "sourceCommit": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+  "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+  "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "readOnly": true,
+  "sourceOrIndexChanges": false,
+  "newRuntime": false,
+  "coverageReferences": 46,
+  "priorManifestSHA256": "69e00ca8d7f0a51627c3610bafb202407840d0a156a68b4c9f34f2783d3466bd",
+  "priorPacketAllHashesVerifiedUnchanged": true,
+  "finalStatus": "Coverage addendum sealed. Portfolio 1118/1118 and Modules 208/208 passed; native, provider, identity, Meri workspace, Figma/accessibility and deployment limits remain explicit. Docker image build exit 1 remains unqualified.",
+  "files": [
+    {
+      "path": "completed-receipts/BUILD-IDENTITY.json",
+      "sha256": "9bab5f88efd0ee22c8ec539a2082e94b64b415ac7a5a416a751a9aa8fe3726e7",
+      "bytes": 428
+    },
+    {
+      "path": "completed-receipts/PORTFOLIO-FINAL-SUMMARY.json",
+      "sha256": "c36a656d782893c5dc3107afe7ffc7c59ccb84fd1ede8ad5655e712f8e945015",
+      "bytes": 764
+    },
+    {
+      "path": "completed-receipts/clean-install-exit.json",
+      "sha256": "1813f0bfc88b3e777f35ac6e5b3fd1f3b05467734931284ae040617bc778558c",
+      "bytes": 776
+    },
+    {
+      "path": "completed-receipts/combined-check-exit.json",
+      "sha256": "1e1b3c1fe73f399cfb944ab715fea299bc9d4b712e5a76c539cc4b1e39266d7d",
+      "bytes": 776
+    },
+    {
+      "path": "completed-receipts/docker-build-exit.json",
+      "sha256": "78c1eb82c96f1a25af2429e74a38dba6493557ddf7220ba614583c2a41155d1d",
+      "bytes": 900
+    },
+    {
+      "path": "completed-receipts/docker-context-exit.json",
+      "sha256": "6c5ff22e2552ed4d96bf67c370ad2aa963e269cda185407648313888200158de",
+      "bytes": 898
+    },
+    {
+      "path": "completed-receipts/elements-check-exit.json",
+      "sha256": "664440a7ec07e20652fa0b223fe90442b4d72322c17abe40e334b8456efc82a2",
+      "bytes": 1060
+    },
+    {
+      "path": "completed-receipts/elements-prepare-exit.json",
+      "sha256": "7e47177ec8dc7502a1ee296d437d37888f14101ff612ae6304b82f5bdbe11194",
+      "bytes": 855
+    },
+    {
+      "path": "completed-receipts/modules-browser-exit.json",
+      "sha256": "6f074b687aba8936f12639adac955a0b916312604809b29a9f1b3338fe55b9b1",
+      "bytes": 1002
+    },
+    {
+      "path": "completed-receipts/portfolio-browser-exit.json",
+      "sha256": "ea734bd1ec3251a9002ac6ab1ae19094ec6505d4ab0426845e46dc62043a49e4",
+      "bytes": 967
+    },
+    {
+      "path": "completed-receipts/portfolio-browser-results.json",
+      "sha256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f",
+      "bytes": 1230191
+    },
+    {
+      "path": "completed-receipts/production-artifacts/production-smoke.json",
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+      "bytes": 3624
+    },
+    {
+      "path": "completed-receipts/production-build-exit.json",
+      "sha256": "c2770fc52e329bc8c38f0d8f4eb3bf695f45b99f7f8b4dbfb3a36608ab136cbb",
+      "bytes": 778
+    },
+    {
+      "path": "completed-receipts/production-server-exit.json",
+      "sha256": "afcc2925fa4bc95bdc5a9b7c4f86810e202b9c42fc4c5caf35151d7d9d6d585d",
+      "bytes": 893
+    },
+    {
+      "path": "completed-receipts.json",
+      "sha256": "595037e577687622ced2d250c64bfecce7c382310484cb222ffa53b23992ec9a",
+      "bytes": 4518
+    },
+    {
+      "path": "coverage-and-limits.DRAFT.md",
+      "sha256": "fd1403f97711aacbd3c7ab60a3b03edf1a13d30da547bef5174dbbf1666120dc",
+      "bytes": 4393
+    },
+    {
+      "path": "coverage-and-limits.md",
+      "sha256": "d3ec93d28aece253933301e6ddd8c0248af738a490c10f924c868dd7afc5c511",
+      "bytes": 5126
+    },
+    {
+      "path": "final-binding.json",
+      "sha256": "cc9163aee08608c73326dafe85459d3d5725636239d73beadfbdfe56b5248594",
+      "bytes": 1397
+    },
+    {
+      "path": "final-receipts.json",
+      "sha256": "9e4ffbac5955c795c8484289ebb4138c574c11af3cd4db6f8a8e52b1f6e6483a",
+      "bytes": 5538
+    },
+    {
+      "path": "source-and-reference-binding.json",
+      "sha256": "668aa414e9a6dbff8f6b1955bbf21d871e278f4873585f8b09b4d3d5108f8b61",
+      "bytes": 21695
+    }
+  ]
+}

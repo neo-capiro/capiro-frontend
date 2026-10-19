@@ -1,0 +1,17 @@
+{
+  "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+  "statusAtStart": "",
+  "command": [
+    "node",
+    "/tmp/replay-positive-control.mjs",
+    "/workspace/capiro-contracts",
+    "/tmp/capiro-candidate-2d50edd/immutable-reviewer-positive"
+  ],
+  "startedAt": "2026-10-12T10:19:19.638209+00:00",
+  "state": "finished",
+  "exitCode": 1,
+  "finishedAt": "2026-10-12T10:19:22.441563+00:00",
+  "headAtFinish": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "statusAtFinish": ""
+}

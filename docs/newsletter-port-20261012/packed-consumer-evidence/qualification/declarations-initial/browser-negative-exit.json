@@ -1,0 +1,13 @@
+{
+  "name": "browser-negative",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/workspace/capiro-remaining/node_modules/typescript/bin/tsc",
+    "-p",
+    "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-negative.json"
+  ],
+  "exitCode": 2,
+  "signal": null,
+  "spawnError": null,
+  "expectedExit": 2
+}

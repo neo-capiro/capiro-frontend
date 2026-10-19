@@ -1,0 +1,21 @@
+{
+  "stage": "structure",
+  "argv": [
+    "--max-old-space-size=256",
+    "../evidence/check-meri-initial-ui-structure.mjs"
+  ],
+  "outerDeadlineSeconds": 60,
+  "freshNormalMemory": {
+    "availableMiB": 11053,
+    "commitHeadroomMiB": 2787
+  },
+  "pid": 8112,
+  "startedAt": "2026-10-16T05:49:54.3513752+00:00",
+  "endedAt": "2026-10-16T05:49:56.3717956+00:00",
+  "exit": 0,
+  "terminal": true,
+  "timeout": false,
+  "sampledPeakWorkingSetBytes": 134856704,
+  "compilerBrowserInstallDatabaseProvider": false,
+  "sourceAnalysisOnly": true
+}

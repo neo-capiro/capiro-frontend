@@ -1,0 +1,33 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=1 portfolio-active-count-contrast.spec.ts portfolio-home-accessibility.spec.ts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=1 portfolio-active-count-contrast.spec.ts portfolio-home-accessibility.spec.ts
+
+[WebServer] (node:1335409) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:1335428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 1440px light active profile counts retain readable contrast (3.4s)
+  ✓  2 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 1440px dark active profile counts retain readable contrast (2.7s)
+  ✓  3 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 390px light active profile counts retain readable contrast (2.6s)
+  ✓  4 tests/browser/portfolio-active-count-contrast.spec.ts:17:5 › Portfolio 390px dark active profile counts retain readable contrast (2.6s)
+  ✓  5 tests/browser/portfolio-home-accessibility.spec.ts:6:3 › Portfolio home preserves accessible names, descriptions and default axe checks at 1440px (2.9s)
+  ✓  6 tests/browser/portfolio-home-accessibility.spec.ts:6:3 › Portfolio home preserves accessible names, descriptions and default axe checks at 390px (2.8s)
+
+  6 passed (18.5s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,29 @@
+{
+  "command": "node scripts/architecture.mjs",
+  "exitCode": 0,
+  "errors": [],
+  "sizeSummary": {
+    "total": 507,
+    "reviewed": 488,
+    "inheritedUnreviewed": 19,
+    "blocking": 0
+  },
+  "changedFindings": [
+    {
+      "file": "apps/web/src/features/modules/engagement/TeamView.tsx",
+      "kind": "function",
+      "symbol": "TeamView",
+      "line": 10,
+      "nonblank": 83,
+      "fingerprint": "2d7f42cbbca10c24a3222ab963e7fb51f39b64a6b089dbdf8669d38d9b8d2762",
+      "provenance": "new",
+      "reviewStatus": "reviewed",
+      "blocking": false,
+      "review": {
+        "reason": "One follow-up workload table with task and member-name read-status presentation. Canonical query/UI modules retain transport, authorization and persistence. The bounded delta filters existing open tasks before owner grouping and independently reports name lookup failures; it introduces no assignment or plan policy.",
+        "reviewedBy": "Codex independent patch_review and source owner",
+        "reviewedOn": "2026-10-15"
+      }
+    }
+  ]
+}

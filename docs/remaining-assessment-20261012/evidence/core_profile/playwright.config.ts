@@ -1,0 +1,3 @@
+import { defineConfig } from "/workspace/capiro-acceptance-assessment/node_modules/@playwright/test";
+import base from "/workspace/capiro-acceptance-assessment/apps/web/playwright.config";
+export default defineConfig({ ...base, testDir: "/tmp/capiro-remaining-assessment-20261012/core_profile", testMatch: "assessment.spec.ts", outputDir: "/tmp/capiro-remaining-assessment-20261012/core_profile/browser-output", webServer: undefined, workers: 1, reporter: [["list"], ["json", { outputFile: "/tmp/capiro-remaining-assessment-20261012/core_profile/browser-results.json" }]], use: { ...base.use, trace: "on" } });

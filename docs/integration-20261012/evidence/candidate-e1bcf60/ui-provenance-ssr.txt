@@ -1,0 +1,66 @@
+
+> capiro-frontend@0.1.0 check:elements
+> npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements
+
+
+> @capiro/qualification-elements@0.0.0 pins:check
+> node generate-pins.mjs --check
+
+{"check":true,"bytes":10724}
+
+> @capiro/qualification-elements@0.0.0 check
+> npm run typecheck && npm test
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> @capiro/qualification-elements@0.0.0 test
+> node --test qualification.test.mjs
+
+✔ SSR harness caches its first success or failure without launching again (1.357073ms)
+✔ SSR harness diagnostics retain only bounded phase counts and no raw payloads (0.675852ms)
+✔ all adopted value exports remain present in the frozen static inventory (59.796438ms)
+✔ elapsed deadline refuses a starved timer and real guards refuse restricted operations (64.883445ms)
+✔ real receipt rejects wrong identity, missing or changed source and changed output before execution (402.295978ms)
+✔ immutable vendor blob identities and one exact owner adaptation (6.895253ms)
+✔ actual import graph is a closed seventeen-file display source; no runtime AI orchestration (32.946732ms)
+✔ allocated package closure and every non-self artifact hash match actual files (9.256395ms)
+✔ strict compiler checks remain enabled for every actual adopted source (0.387146ms)
+✔ exact dependency lock uses registry integrities and actual installed package versions (17.768536ms)
+✔ license/notice inventory checks actual package files and retains complete Apache terms (52.255056ms)
+✔ real Conversation, Message and PromptInput server-render deterministically without network/DOM/provider/native calls (891.415479ms)
+ℹ {"elapsedMs":610.6324070000001,"loadedModules":8,"buildInputs":2807,"deniedAttempts":0}
+✔ hostile HTML, URLs, Markdown and diagram syntax remain escaped plain text in all display slots (0.357461ms)
+✔ fixture enables no Markdown, attachment, screenshot, speech, model or durable command control (42.903067ms)
+✔ CSS records real Tailwind4/Streamdown sources while leaving browser styling unqualified (0.362959ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1881.936129
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+{"qualified":true,"receiptPath":"/tmp/capiro-reviewed-elements/ssr/receipt.json","expectedSha256":"6161aa9b923b831afc737357abe1c6095d2413887f7d2c309e252f6676e8e836","bundleBytes":20518628,"inputCount":2807,"dependencyRecords":3155}

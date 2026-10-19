@@ -1,0 +1,49 @@
+[
+  {
+    "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-render.js",
+    "imports": [
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js",
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-social-share.js"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/browser-entry.mjs",
+    "imports": [
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js",
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-render.js",
+      "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixed-clock.mjs"
+    ]
+  },
+  {
+    "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js",
+    "imports": [
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.js"
+    ]
+  },
+  {
+    "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+    "imports": [
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+    "imports": []
+  },
+  {
+    "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-social-share.js",
+    "imports": [
+      "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter.js"
+    ]
+  },
+  {
+    "id": "/tmp/capiro-newsletter-consumer-install/node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js",
+    "imports": []
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixed-clock.mjs",
+    "imports": []
+  }
+]

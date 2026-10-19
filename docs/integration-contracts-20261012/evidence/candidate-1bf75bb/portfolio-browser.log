@@ -1,0 +1,545 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=2
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=2
+
+[WebServer] (node:251965) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 928 tests using 2 workers
+
+(node:251984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:251985) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    2 tests/browser/activity-command-recovery.spec.ts:11:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (13.8s)
+  ✓    1 tests/browser/activity-actions.spec.ts:27:1 › recorded edits retain failed input, reject blank titles and refresh the scoped feed (14.9s)
+  ✓    3 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core actor never sees or dispatches the retained body after reload (8.0s)
+  ✓    4 tests/browser/activity-actions.spec.ts:133:1 › settlement requires a due date, retains permission errors, prevents duplicate writes and reopens (8.0s)
+  ✓    5 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core tenant never sees or dispatches the retained body after reload (7.0s)
+  ✓    7 tests/browser/activity-command-recovery.spec.ts:89:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (6.1s)
+  ✓    6 tests/browser/activity-actions.spec.ts:209:1 › removal is confirmed, retains service errors and rejects a false success response (14.1s)
+  ✓    8 tests/browser/activity-command-recovery.spec.ts:109:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (7.5s)
+  ✓    9 tests/browser/activity-actions.spec.ts:301:1 › expired authentication during removal uses the shared session boundary (7.3s)
+  ✓   10 tests/browser/activity-command-recovery.spec.ts:132:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (8.2s)
+  ✓   11 tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (15.2s)
+  ✓   12 tests/browser/activity-command-recovery.spec.ts:152:1 › closing the document and opening another tab recovers the journal without an automatic command call (8.6s)
+  ✓   13 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (7.4s)
+  ✓   14 tests/browser/activity-command-storage.spec.ts:9:3 › localStorage unavailable after response loss blocks replacement commands across reload (9.0s)
+  ✓   15 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (7.0s)
+  ✓   16 tests/browser/activity-command-storage.spec.ts:9:3 › indexedDB unavailable after response loss blocks replacement commands across reload (8.0s)
+  ✓   17 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (4.2s)
+  ✓   18 tests/browser/activity-command-storage.spec.ts:9:3 › locks unavailable after response loss blocks replacement commands across reload (8.0s)
+  ✓   19 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (6.8s)
+  ✓   20 tests/browser/activity-command-storage.spec.ts:47:3 › fence corruption cannot become an empty form or a replacement key (7.3s)
+  ✓   21 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (7.1s)
+  ✓   23 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (5.3s)
+  ✓   22 tests/browser/activity-command-storage.spec.ts:47:3 › missing-fence corruption cannot become an empty form or a replacement key (6.2s)
+  ✓   24 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (4.8s)
+  ✓   25 tests/browser/activity-command-storage.spec.ts:47:3 › missing-record corruption cannot become an empty form or a replacement key (6.0s)
+  ✓   26 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (5.8s)
+  ✓   27 tests/browser/activity-command-storage.spec.ts:47:3 › ciphertext corruption cannot become an empty form or a replacement key (6.4s)
+  ✓   28 tests/browser/activity-pin.spec.ts:25:1 › pin/unpin persists only the note field, displays inline state and returns keyboard focus (6.5s)
+  ✓   29 tests/browser/activity-command-storage.spec.ts:97:1 › retained browser storage contains opaque ciphertext and a nonextractable key, never plaintext draft fields (5.8s)
+  ✓   30 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong client receipt and requires review before retry (5.0s)
+  ✓   31 tests/browser/activity.spec.ts:28:1 › history search, kind, inclusive local dates, invalid range and clear use the existing feed (7.3s)
+  ✓   32 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong tenant receipt and requires review before retry (4.4s)
+  ✓   34 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong record receipt and requires review before retry (4.9s)
+  ✓   33 tests/browser/activity.spec.ts:137:1 › history failure and retry retain entered filters (5.2s)
+  ✓   35 tests/browser/activity-pin.spec.ts:83:3 › pin refuses false pinned result receipt and requires review before retry (5.3s)
+  ✓   36 tests/browser/advocacy-corrections.spec.ts:64:1 › Objectives preserves history left/current objectives right and New matter; saved source identity stays explicit (6.5s)
+  ✓   37 tests/browser/activity-pin.spec.ts:131:1 › readonly identity cannot open activity mutations (4.3s)
+  ✓   38 tests/browser/advocacy-corrections.spec.ts:111:1 › merge explicitly reviews source into kept destination, guards pending and verifies transferred evidence (9.2s)
+  ✓   39 tests/browser/activity-pin.spec.ts:152:1 › a changed note at preflight stops before PATCH and preserves edit input (8.6s)
+  ✓   41 tests/browser/activity-pin.spec.ts:205:1 › unmount during held preflight prevents PATCH after the read returns (14.9s)
+  ✓   40 tests/browser/advocacy-corrections.spec.ts:171:1 › reassign moves exact reviewed record and refreshes both matter views (20.0s)
+  ✓   42 tests/browser/activity-pin.spec.ts:241:1 › a lost pin response is reconciled by an explicit read without replaying the write (11.3s)
+  ✓   43 tests/browser/advocacy-corrections.spec.ts:199:1 › detach preserves a scoped unassigned record that can be reassigned later (14.5s)
+  ✓   44 tests/browser/activity-pin.spec.ts:279:1 › session expiry at preflight dispatches no activity write (6.4s)
+  ✓   46 tests/browser/advocacy-history-edit.spec.ts:41:1 › baseline: dated timeline reveals only withheld loaded events and preserves undated evidence (3.8s)
+  ✓   47 tests/browser/advocacy-history-edit.spec.ts:77:1 › baseline: search and status operate on native title summary PE and bill fields (3.5s)
+  ✓   45 tests/browser/advocacy-corrections.spec.ts:237:1 › not advocacy reviews optional bounded reason and refreshes the visible history (8.8s)
+  ✓   48 tests/browser/advocacy-history-edit.spec.ts:108:1 › baseline: failed timeline refresh conceals retained events while current matters stay reachable (3.5s)
+  ✓   50 tests/browser/advocacy-history-edit.spec.ts:128:1 › failed matter reads conceal retained rows but preserve independently current unfiltered events (4.4s)
+  ✓   49 tests/browser/advocacy-corrections.spec.ts:271:1 › lost response preserves submitted state and uses read-only reconciliation without repost (8.3s)
+  ✓   51 tests/browser/advocacy-history-edit.spec.ts:157:1 › a selected status cannot join stale matter data after catalog failure (4.7s)
+  ✓   53 tests/browser/advocacy-history-edit.spec.ts:187:1 › exact requested detail remains independent of a failed timeline and refuses another matter receipt (6.8s)
+  ✓   52 tests/browser/advocacy-corrections.spec.ts:292:1 › unapplied failed request remains unconfirmed and cannot silently repeat (11.3s)
+  ✓   54 tests/browser/advocacy-history-edit.spec.ts:215:1 › invalidated timeline success is not displayed as current (3.0s)
+  ✓   55 tests/browser/advocacy-corrections.spec.ts:311:1 › leaving the feature during preflight aborts the review and prevents a late POST (9.1s)
+  ✓   56 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final successful requires explicit judgment and exact native confirmation body (8.3s)
+  ✓   58 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final partially_successful requires explicit judgment and exact native confirmation body (8.5s)
+  ✓   57 tests/browser/advocacy-corrections.spec.ts:344:1 › lost not-advocacy acknowledgement remains unconfirmed even when the bounded history is empty (10.5s)
+  ✓   59 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final unsuccessful requires explicit judgment and exact native confirmation body (7.0s)
+  ✓   60 tests/browser/advocacy-corrections.spec.ts:375:1 › concurrent matter changes require reload/review while preserving reason before any write (11.7s)
+  ✓   61 tests/browser/advocacy-history-edit.spec.ts:266:3 › linked status edit follows native outcome evidence semantics (7.4s)
+  ✓   63 tests/browser/advocacy-history-edit.spec.ts:266:3 › unchanged-final status edit follows native outcome evidence semantics (6.2s)
+  ✓   62 tests/browser/advocacy-corrections.spec.ts:406:1 › standard user retains source reads and New matter label but correction writes are unavailable (8.4s)
+  ✓   64 tests/browser/advocacy-history-edit.spec.ts:304:1 › legacy current status remains editable without offering other legacy transitions (5.4s)
+  ✓   65 tests/browser/advocacy-corrections.spec.ts:435:1 › unsafe or missing source does not become guessed source navigation (7.9s)
+  ✓   66 tests/browser/advocacy-history-edit.spec.ts:325:1 › fresh native source changes retain the draft and stop dispatch (7.4s)
+  ✓   67 tests/browser/advocacy-corrections.spec.ts:450:3 › empty user identity fails closed before history writes (4.9s)
+  ✓   69 tests/browser/advocacy-corrections.spec.ts:450:3 › empty tenant identity fails closed before history writes (5.2s)
+  ✓   68 tests/browser/advocacy-history-edit.spec.ts:360:1 › a definite native refusal allows an explicit retry without a false success (7.4s)
+  ✓   71 tests/browser/advocacy-history-edit.spec.ts:381:1 › unexpected acknowledgement remains unknown and reconciles by GET without replay (6.3s)
+  ✓   70 tests/browser/advocacy-corrections.spec.ts:481:1 › mobile dark correction keeps draft, readable review and keyboard cancel within viewport (13.0s)
+  ✓   72 tests/browser/advocacy-history-edit.spec.ts:411:1 › void acknowledgement cannot replace wrong-field readback with a success claim (6.8s)
+  ✓   73 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark desktop timeline keeps loaded Figma icons legible at their exact geometry (3.9s)
+  ✓   74 tests/browser/advocacy-history-edit.spec.ts:438:1 › another matter returned after PATCH remains unknown without late invalidation (4.7s)
+  ✓   75 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark phone timeline keeps loaded Figma icons legible at their exact geometry (3.1s)
+  ✓   76 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after actor changes (6.1s)
+  ✓   77 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown start attempt survives close and requires deliberate review before another dispatch (8.0s)
+  ✓   78 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after role changes (5.7s)
+  ✓   79 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown test attempt survives close and requires deliberate review before another dispatch (6.7s)
+  ✓   80 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after source changes (7.2s)
+  ✓   81 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after actor change (5.0s)
+  ✓   83 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after client change (4.7s)
+  ✓   82 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after client changes (7.5s)
+  ✓   84 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after owner change (4.5s)
+  ✓   85 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after unmount changes (5.0s)
+  ✓   86 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after close change (4.3s)
+  ✓   88 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after actor change (4.9s)
+  ✓   87 tests/browser/advocacy-history-edit.spec.ts:511:1 › closing after dispatch preserves the original attempt across reopen and does not replay (9.6s)
+  ✓   89 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after client change (5.2s)
+  ✓   91 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after owner change (5.2s)
+  ✓   90 tests/browser/advocacy-history-edit.spec.ts:554:1 › a late role response cannot refresh or clear the initiating actor's uncertain save (8.3s)
+  ✓   92 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after close change (3.8s)
+  ✓   93 tests/browser/advocacy-history-edit.spec.ts:590:1 › timeline and outcome review match phone geometry with keyboard cancellation (5.9s)
+  ✓   94 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback identity interruption even after the source is restored (5.7s)
+  ✓   96 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback client interruption even after the source is restored (4.7s)
+  ✓   95 tests/browser/advocacy-history-edit.spec.ts:630:1 › desktop outcome review uses the exact Figma frame dimensions (7.6s)
+  ✓   97 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback preferences interruption even after the source is restored (4.6s)
+  ✓   98 tests/browser/advocacy-history-edit.spec.ts:649:1 › interrupted actor lifetime prevents a held save after same-callback identity restoration (5.8s)
+  ✓   99 tests/browser/alert-channel-lifetime.spec.ts:153:1 › a late confirmation cannot trigger a saved-state read after the client lifetime ends (6.7s)
+  ✓  100 tests/browser/advocacy-history-edit.spec.ts:669:1 › interrupted actor lifetime prevents a held result check after same-callback role restoration (7.2s)
+  ✓  101 tests/browser/alert-channel-lifetime.spec.ts:199:1 › a pending channel action disables preference edits and other channel effects (4.9s)
+  ✓  102 tests/browser/advocacy-history-edit.spec.ts:699:1 › interrupted actor lifetime prevents a held review reload after same-callback identity restoration (5.8s)
+  ✓  104 tests/browser/alert-channels.spec.ts:16:1 › baseline: Core preferences use database identity and preserve the full native no-echo PUT (4.4s)
+  ✓  103 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop light alert controls match the authored Figma fields and remain keyboard reachable (7.3s)
+  ✓  105 tests/browser/alert-channels.spec.ts:46:1 › baseline: Core phone edits clear the submitted verification flag without losing native criteria (4.8s)
+  ✓  106 tests/browser/alert-channel-visual.spec.ts:9:5 › phone light alert controls match the authored Figma fields and remain keyboard reachable (6.3s)
+  ✓  107 tests/browser/alert-channels.spec.ts:72:3 › baseline: core verification uses exact explicit requests and reads the resulting SMS opt-in (4.8s)
+  ✓  108 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop dark alert controls match the authored Figma fields and remain keyboard reachable (7.6s)
+  ✓  109 tests/browser/alert-channels.spec.ts:123:3 › baseline: core test alerts use saved channels and distinguish provider acceptance from delivery (5.5s)
+  ✓  110 tests/browser/alert-channel-visual.spec.ts:9:5 › phone dark alert controls match the authored Figma fields and remain keyboard reachable (6.7s)
+  ✓  111 tests/browser/alert-channels.spec.ts:72:3 › baseline: intelligence verification uses exact explicit requests and reads the resulting SMS opt-in (6.3s)
+  ✓  113 tests/browser/alert-channels.spec.ts:123:3 › baseline: intelligence test alerts use saved channels and distinguish provider acceptance from delivery (5.0s)
+  ✓  114 tests/browser/alert-channels.spec.ts:158:1 › Core defaults cannot authorize preferences when the separate current client read is refused (5.2s)
+  ✓  112 tests/browser/attendance.spec.ts:126:1 › Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance (15.6s)
+  ✓  115 tests/browser/alert-channels.spec.ts:180:3 › core unsaved destinations disable verification and test actions without implicit saves (5.4s)
+  ✓  117 tests/browser/alert-channels.spec.ts:180:3 › intelligence unsaved destinations disable verification and test actions without implicit saves (6.6s)
+  ✓  116 tests/browser/attendance.spec.ts:171:1 › Server validation retains the join URL and confirmations for explicit correction (13.3s)
+  ✓  118 tests/browser/alert-channels.spec.ts:206:1 › a changed current saved phone conceals the old challenge and requires explicit reload (7.1s)
+  ✓  120 tests/browser/alert-channels.spec.ts:248:1 › Core dormant acknowledgement displays only an actually returned development code (4.4s)
+  ✓  121 tests/browser/alert-channels.spec.ts:274:3 › a preference PUT cannot publish after a same-callback client interruption and restoration (4.8s)
+  ✓  119 tests/browser/attendance.spec.ts:201:1 › A foreign success receipt is uncertain and cannot be resent automatically or from the same form (13.4s)
+  ✓  122 tests/browser/alert-channels.spec.ts:274:3 › a preference PUT cannot publish after a same-callback preferences interruption and restoration (4.5s)
+  ✓  124 tests/browser/alert-channels.spec.ts:309:1 › a Core no-echo PUT with different returned settings remains unconfirmed (4.6s)
+  ✓  125 tests/browser/alert-channels.spec.ts:329:1 › a failed client refresh conceals old fields and blocks every changed operation until a current reload (5.0s)
+  ✓  123 tests/browser/attendance.spec.ts:234:1 › Explicit removal handles a still-dispatching error and then accepts the actual removed receipt (11.1s)
+  ✓  126 tests/browser/alert-channels.spec.ts:367:3 › a native 403 start refusal stays on the configured owner without a delivery claim or retry (5.3s)
+  ✓  127 tests/browser/attendance.spec.ts:282:1 › Client preference saves consent once, preserves Off/stopping, and retries only DELETE (9.9s)
+  ✓  128 tests/browser/alert-channels.spec.ts:367:3 › a native 404 test refusal stays on the configured owner without a delivery claim or retry (4.6s)
+  ✓  130 tests/browser/alert-channels.spec.ts:402:1 › a mismatched phone confirmation is unknown and cannot fabricate verification or auto-read success (8.2s)
+  ✓  129 tests/browser/attendance.spec.ts:309:1 › A concurrent preference change requires refresh and preserves the unsaved affirmations (8.4s)
+  ✓  131 tests/browser/alert-channels.spec.ts:448:1 › an accepted phone confirmation with an unavailable saved read cannot claim SMS opt-in (5.8s)
+  ✓  132 tests/browser/attendance.spec.ts:330:1 › Runtime disabled keeps real session status visible and forbids external actions (6.9s)
+  ✓  133 tests/browser/alert-channels.spec.ts:492:3 › a missing test result is unknown without inferred success or automatic replay (4.7s)
+  ✓  134 tests/browser/attendance.spec.ts:353:1 › Read-only role does not fetch private attendance or expose dispatch controls (6.2s)
+  ✓  135 tests/browser/alert-channels.spec.ts:492:3 › a duplicate test result is unknown without inferred success or automatic replay (4.0s)
+  ✓  137 tests/browser/alert-channels.spec.ts:492:3 › a unrequested test result is unknown without inferred success or automatic replay (4.1s)
+  ✓  136 tests/browser/attendance.spec.ts:383:1 › Meeting privacy errors and session expiry never expose a successful-looking attendance control (6.2s)
+  ✓  138 tests/browser/alert-channels.spec.ts:514:1 › a settled verification acknowledgement cannot survive a later saved phone change (4.6s)
+  ✓  140 tests/browser/alert-channels.spec.ts:557:1 › Core retains native optional email and string quiet-hours values during an unrelated edit (4.5s)
+  ✓  139 tests/browser/attendance.spec.ts:410:1 › Unmounting during held dispatch preflight prevents the later POST (8.8s)
+  ✓  141 tests/browser/alert-channels.spec.ts:589:1 › Core verification binds the normalized receipt to the exact saved legacy phone value (4.3s)
+  ✓  142 tests/browser/attendance.spec.ts:447:1 › Leaving the client during held preference preflight prevents the later enable POST (6.4s)
+  ✓  143 tests/browser/bill-hearings.spec.ts:62:1 › lazy linked hearing evidence uses canonical IDs and preserves board client scope and supplied latest details (5.2s)
+  ✓  144 tests/browser/attendance.spec.ts:489:1 › Mobile dark Send Meri dialog fits the viewport and retains accessible consent and actions (6.1s)
+  ✓  145 tests/browser/bill-hearings.spec.ts:113:1 › owner-disabled refusal stays visible and retry does not switch backend or claim empty (4.9s)
+  ✓  147 tests/browser/bill-hearings.spec.ts:141:1 › in-flight, empty and unavailable hearing states are distinct (5.7s)
+  ✓  146 tests/browser/billing-summary-integration.spec.ts:25:1 › actual Add profile keeps creation reachable around an optional billing disclosure (8.2s)
+  ✓  148 tests/browser/bill-hearings.spec.ts:169:1 › Core owner never requests Intel hearings and retains its own board details (5.2s)
+  ✓  149 tests/browser/billing-summary-integration.spec.ts:79:1 › actual chooser omits financial summary without billing permission while retaining profile intake (5.4s)
+  ✓  150 tests/browser/bill-hearings.spec.ts:215:1 › missing canonical hearing IDs keep evidence readable without session substitution and encrypted pointers remain unavailable (4.9s)
+  ✓  151 tests/browser/billing-summary.spec.ts:49:1 › eligible billing admin sees real supplied rows with responsive light/dark styling (4.1s)
+  ✓  153 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/undefined makes no financial request (3.3s)
+  ✓  152 tests/browser/bill-hearings.spec.ts:268:1 › malformed hearing receipts refuse links; retry can establish a genuine empty response (6.6s)
+  ✓  154 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/false makes no financial request (3.0s)
+  ✓  156 tests/browser/billing-summary.spec.ts:107:3 › denied standard_user/true makes no financial request (4.0s)
+  ✓  155 tests/browser/bill-hearings.spec.ts:300:1 › hearing session expiry uses the shared sign-in recovery (4.2s)
+  ✓  157 tests/browser/billing-summary.spec.ts:107:3 › denied client_portal_user/true makes no financial request (4.0s)
+  ✓  158 tests/browser/bill-hearings.spec.ts:317:1 › changing client scope closes the prior bill and refuses a denied hearing read without cached evidence (6.1s)
+  ✓  159 tests/browser/billing-summary.spec.ts:124:1 › collapsed disclosure requests nothing; Enter/Space expand/collapse work (3.9s)
+  ✓  161 tests/browser/billing-summary.spec.ts:148:1 › capiro_admin follows direct guard without the optional membership bit (3.2s)
+  ✓  162 tests/browser/billing-summary.spec.ts:166:1 › failed GET shows no amounts; explicit retry alone restores server values (3.8s)
+  ✓  160 tests/browser/bill-hearings.spec.ts:365:1 › bill update dialog matches desktop sizing and remains scrollable in mobile dark mode (9.7s)
+  ✓  163 tests/browser/billing-summary.spec.ts:190:1 › canonical403 refuses financial data and shows actual permission failure (3.7s)
+  ✓  165 tests/browser/billing-summary.spec.ts:205:1 › permission loss and invalidation hide previously cached amounts (3.6s)
+  ✓  164 tests/browser/bills.spec.ts:3:1 › intel search, tracking and paging retain client scope; failed untrack stays reviewable (9.4s)
+  ✓  166 tests/browser/billing-summary.spec.ts:234:1 › held previous-tenant response cannot appear in new tenant scope (3.1s)
+  ✓  168 tests/browser/billing-summary.spec.ts:262:1 › closed consumer hides a held summary response (3.7s)
+  ✓  169 tests/browser/billing-summary.spec.ts:283:1 › no-plan values remain purchased slots and never invent paid or trial capacity (3.6s)
+  ✓  167 tests/browser/bills.spec.ts:123:1 › facility edit clears optional values instead of omitting them (9.9s)
+  ✘  170 tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained meeting and preserves other feeds (3.7s)
+(node:263257) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  171 tests/browser/calendar-planner.spec.ts:17:1 › Master Agenda retains scheduled starts and due dates while client Calendar stays meeting-scoped (2.6s)
+  ✘  172 tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained hearing and preserves other feeds (3.6s)
+(node:263433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  173 tests/browser/calendar-planner.spec.ts:87:1 › invalid timed Planner source is a visible feed error (4.7s)
+(node:263566) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  174 tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained task and preserves other feeds (2.9s)
+(node:263703) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  175 tests/browser/calendar-preparation.spec.ts:4:1 › Master calendar accepts saved structured prep and renders its text without object coercion (5.8s)
+  ✘  176 tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained deadline and preserves other feeds (3.4s)
+(node:263868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  178 tests/browser/calendar-boundary.spec.ts:109:1 › failed client refresh removes cached names from the Calendar scope picker (2.9s)
+  ✓  177 tests/browser/calendar-sync-integration.spec.ts:8:1 › actual Master Calendar imports only the reviewed DST window and retains client/view/date/zone (7.0s)
+  ✓  179 tests/browser/calendar-boundary.spec.ts:137:1 › meeting client selection survives failed refresh without a silent association change (5.4s)
+  ✓  180 tests/browser/calendar-sync-integration.spec.ts:64:1 › actual client Calendar retains uncertain import across view changes without replay (7.2s)
+  ✓  181 tests/browser/calendar-boundary.spec.ts:190:1 › a master Calendar client link cannot save after its selected client becomes unavailable (4.8s)
+  ✓  182 tests/browser/calendar-sync.spec.ts:13:1 › explicit Microsoft calendar-only completion with truthful processing receipt (4.0s)
+  ✓  184 tests/browser/calendar-sync.spec.ts:39:1 › reviewed window is explicit and twelve-page partial results cannot claim resume (3.7s)
+  ✘  183 tests/browser/calendar-boundary.spec.ts:230:1 › unavailable Calendar feeds do not become a successful empty-state claim (8.7s)
+(node:264295) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  185 tests/browser/calendar-sync.spec.ts:66:1 › Google does not offer the Microsoft range and excludes mail (4.5s)
+  ✓  186 tests/browser/capability-boundary.spec.ts:10:1 › capability refresh failure removes cached cards, counts and the open editor (4.7s)
+  ✓  188 tests/browser/capability-boundary.spec.ts:46:1 › fit read failure removes cached targets and computed count (2.4s)
+  ✓  187 tests/browser/calendar-sync.spec.ts:86:1 › unknown result survives close, route remount and returning to the initiating actor (5.9s)
+  ✓  189 tests/browser/capability-boundary.spec.ts:71:1 › editing rejects a receipt for another capability without closing the draft (4.3s)
+  ✓  190 tests/browser/calendar-sync.spec.ts:114:1 › Cancel stops waiting and cannot erase the dispatched fence (5.8s)
+  ✓  191 tests/browser/capability-boundary.spec.ts:99:1 › late fit refresh cannot update the cache after the view unmounts (2.3s)
+  ✓  193 tests/browser/capability-documents-download.spec.ts:13:1 › an authorized reader keeps keyboard download access without gaining upload access (4.1s)
+  ✓  192 tests/browser/calendar-sync.spec.ts:143:1 › identity invalidation during preflight prevents POST (4.7s)
+  ✓  194 tests/browser/capability-documents-download.spec.ts:57:3 › the current denied list refuses a formerly available download (4.8s)
+  ✓  195 tests/browser/calendar-sync.spec.ts:164:1 › identity invalidation after dispatch freezes rather than accepting late success (5.8s)
+  ✓  196 tests/browser/capability-documents-download.spec.ts:57:3 › the current failed list refuses a formerly available download (4.6s)
+  ✓  197 tests/browser/calendar-sync.spec.ts:182:1 › disabled runtime and unavailable connection cannot start sync (4.2s)
+  ✓  198 tests/browser/capability-documents-download.spec.ts:57:3 › the current removed list refuses a formerly available download (3.9s)
+  ✓  199 tests/browser/calendar-sync.spec.ts:194:1 › mobile dark pending matches dialog geometry and keyboard closure (4.0s)
+  ✓  200 tests/browser/capability-documents-download.spec.ts:57:3 › the current wrong-client list refuses a formerly available download (4.6s)
+  ✓  201 tests/browser/calendar-sync.spec.ts:234:1 › actual actor change while dispatched hides late receipt and preserves original actor fence (4.7s)
+  ✓  202 tests/browser/capability-documents-download.spec.ts:57:3 › the current wrong-source list refuses a formerly available download (4.1s)
+  ✓  203 tests/browser/calendar-sync.spec.ts:254:1 › rapid duplicate consent does not dispatch a second provider request (5.7s)
+  ✓  204 tests/browser/capability-documents-download.spec.ts:57:3 › the current quarantined list refuses a formerly available download (4.3s)
+  ✓  205 tests/browser/calendar-sync.spec.ts:272:1 › disconnected accounts are honestly unavailable without reconnect controls (4.4s)
+  ✓  206 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its actor changes (4.2s)
+  ✓  207 tests/browser/calendar-sync.spec.ts:290:1 › identity invalidation while idle immediately disables consent with no request (4.6s)
+  ✓  208 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its tenant changes (4.2s)
+  ✓  210 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its client changes (4.6s)
+  ✓  209 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its actor (5.5s)
+  ✓  211 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its source changes (4.4s)
+  ✓  212 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its client (5.5s)
+  ✓  213 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its unmount changes (3.8s)
+  ✓  214 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its source (4.6s)
+  ✓  216 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its unmount (4.8s)
+  ✓  215 tests/browser/capability-documents-download.spec.ts:175:1 › closing a preview while its current read is held closes the reserved blank tab (7.2s)
+  ✓  217 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its tenant (4.6s)
+  ✓  218 tests/browser/capability-documents-readers.spec.ts:13:3 › a replacement actor hides old filenames, preview and extracted text before its fresh authorized list (4.9s)
+  ✓  220 tests/browser/capability-documents-readers.spec.ts:13:3 › a replacement tenant hides old filenames, preview and extracted text before its fresh authorized list (5.6s)
+  ✓  219 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its role (6.8s)
+  ✓  221 tests/browser/capability-documents-readers.spec.ts:13:3 › a replacement role hides old filenames, preview and extracted text before its fresh authorized list (6.0s)
+  ✓  222 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its invalidate (5.7s)
+  ✘  223 tests/browser/capability-documents-readers.spec.ts:75:1 › revoked identity immediately removes cached document names and preview text without another file request (3.3s)
+  ✘  224 tests/browser/capability-documents-execution.spec.ts:69:1 › a late upload receipt cannot refresh files or announce success for another actor (3.4s)
+
+
+  1) tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained meeting and preserves other feeds 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Retry' })
+    Expected: visible
+    Error: strict mode violation: getByRole('button', { name: 'Retry' }) resolved to 2 elements:
+        1) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).first()
+        2) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Retry' })
+
+
+      87 |       await window.__calendarBoundary.refreshFeeds();
+      88 |     });
+    > 89 |     await expect(page.getByRole("button", { name: "Retry" })).toBeVisible();
+         |                                                               ^
+      90 |     expect(
+      91 |       await page.evaluate(() => window.__calendarBoundary?.snapshots()),
+      92 |     ).toContainEqual({ status: "error", retained: true });
+        at /workspace/capiro-contracts/apps/web/tests/browser/calendar-boundary.spec.ts:89:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-db7e2-g-and-preserves-other-feeds/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/calendar-boundary-failed-r-db7e2-g-and-preserves-other-feeds/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-db7e2-g-and-preserves-other-feeds/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/calendar-boundary-failed-r-db7e2-g-and-preserves-other-feeds/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained hearing and preserves other feeds 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Retry' })
+    Expected: visible
+    Error: strict mode violation: getByRole('button', { name: 'Retry' }) resolved to 2 elements:
+        1) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).first()
+        2) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Retry' })
+
+
+      87 |       await window.__calendarBoundary.refreshFeeds();
+      88 |     });
+    > 89 |     await expect(page.getByRole("button", { name: "Retry" })).toBeVisible();
+         |                                                               ^
+      90 |     expect(
+      91 |       await page.evaluate(() => window.__calendarBoundary?.snapshots()),
+      92 |     ).toContainEqual({ status: "error", retained: true });
+        at /workspace/capiro-contracts/apps/web/tests/browser/calendar-boundary.spec.ts:89:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-cc6a5-g-and-preserves-other-feeds/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/calendar-boundary-failed-r-cc6a5-g-and-preserves-other-feeds/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-cc6a5-g-and-preserves-other-feeds/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/calendar-boundary-failed-r-cc6a5-g-and-preserves-other-feeds/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained task and preserves other feeds 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Retry' })
+    Expected: visible
+    Error: strict mode violation: getByRole('button', { name: 'Retry' }) resolved to 2 elements:
+        1) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).first()
+        2) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Retry' })
+
+
+      87 |       await window.__calendarBoundary.refreshFeeds();
+      88 |     });
+    > 89 |     await expect(page.getByRole("button", { name: "Retry" })).toBeVisible();
+         |                                                               ^
+      90 |     expect(
+      91 |       await page.evaluate(() => window.__calendarBoundary?.snapshots()),
+      92 |     ).toContainEqual({ status: "error", retained: true });
+        at /workspace/capiro-contracts/apps/web/tests/browser/calendar-boundary.spec.ts:89:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-37c24-k-and-preserves-other-feeds/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/calendar-boundary-failed-r-37c24-k-and-preserves-other-feeds/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-37c24-k-and-preserves-other-feeds/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/calendar-boundary-failed-r-37c24-k-and-preserves-other-feeds/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained deadline and preserves other feeds 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Retry' })
+    Expected: visible
+    Error: strict mode violation: getByRole('button', { name: 'Retry' }) resolved to 2 elements:
+        1) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).first()
+        2) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Retry' })
+
+
+      87 |       await window.__calendarBoundary.refreshFeeds();
+      88 |     });
+    > 89 |     await expect(page.getByRole("button", { name: "Retry" })).toBeVisible();
+         |                                                               ^
+      90 |     expect(
+      91 |       await page.evaluate(() => window.__calendarBoundary?.snapshots()),
+      92 |     ).toContainEqual({ status: "error", retained: true });
+        at /workspace/capiro-contracts/apps/web/tests/browser/calendar-boundary.spec.ts:89:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-8b079-e-and-preserves-other-feeds/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/calendar-boundary-failed-r-8b079-e-and-preserves-other-feeds/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-failed-r-8b079-e-and-preserves-other-feeds/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/calendar-boundary-failed-r-8b079-e-and-preserves-other-feeds/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/browser/calendar-boundary.spec.ts:230:1 › unavailable Calendar feeds do not become a successful empty-state claim 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('button', { name: 'Retry' })
+    Expected: 4
+    Received: 5
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Retry' })
+        14 × locator resolved to 5 elements
+           - unexpected value "5"
+
+
+      251 |     await window.__calendarBoundary.refreshFeeds();
+      252 |   });
+    > 253 |   await expect(page.getByRole("button", { name: "Retry" })).toHaveCount(4);
+          |                                                             ^
+      254 |   for (const feed of feeds)
+      255 |     await expect(
+      256 |       page.getByRole("heading", { name: new RegExp(feed.name) }),
+        at /workspace/capiro-contracts/apps/web/tests/browser/calendar-boundary.spec.ts:253:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-unavaila-6eb5e-uccessful-empty-state-claim/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/calendar-boundary-unavaila-6eb5e-uccessful-empty-state-claim/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-boundary-unavaila-6eb5e-uccessful-empty-state-claim/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/calendar-boundary-unavaila-6eb5e-uccessful-empty-state-claim/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/browser/calendar-planner.spec.ts:87:1 › invalid timed Planner source is a visible feed error 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'Retry', exact: true })
+    Expected: visible
+    Error: strict mode violation: getByRole('button', { name: 'Retry', exact: true }) resolved to 2 elements:
+        1) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).first()
+        2) <button class="button">Retry</button> aka getByRole('button', { name: 'Retry' }).nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Retry', exact: true })
+
+
+      101 |   await expect(
+      102 |     page.getByRole("button", { name: "Retry", exact: true }),
+    > 103 |   ).toBeVisible();
+          |     ^
+      104 |   await expect(
+      105 |     page.getByRole("heading", { name: "Master Calendar", exact: true }),
+      106 |   ).toBeVisible();
+        at /workspace/capiro-contracts/apps/web/tests/browser/calendar-planner.spec.ts:103:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-planner-invalid-t-e8d14-rce-is-a-visible-feed-error/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/calendar-planner-invalid-t-e8d14-rce-is-a-visible-feed-error/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/calendar-planner-invalid-t-e8d14-rce-is-a-visible-feed-error/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/calendar-planner-invalid-t-e8d14-rce-is-a-visible-feed-error/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/browser/capability-documents-execution.spec.ts:69:1 › a late upload receipt cannot refresh files or announce success for another actor 
+
+    Test was interrupted.
+
+    Error: locator.setInputFiles: Target page, context or browser has been closed
+
+       at capability-documents-fixtures.ts:87
+
+      85 |     exact: true,
+      86 |   });
+    > 87 |   await dialog.getByLabel("Select files", { exact: true }).setInputFiles({
+         |   ^
+      88 |     name: "source.txt",
+      89 |     mimeType: "text/plain",
+      90 |     buffer: Buffer.from("hello"),
+        at chooseUpload (/workspace/capiro-contracts/apps/web/tests/browser/capability-documents-fixtures.ts:87:3)
+        at /workspace/capiro-contracts/apps/web/tests/browser/capability-documents-execution.spec.ts:89:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-documents-execu-86c01-e-success-for-another-actor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/capability-documents-execu-86c01-e-success-for-another-actor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-documents-execu-86c01-e-success-for-another-actor/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/capability-documents-execu-86c01-e-success-for-another-actor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained meeting and preserves other feeds 
+    tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained hearing and preserves other feeds 
+    tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained task and preserves other feeds 
+    tests/browser/calendar-boundary.spec.ts:66:3 › failed refresh removes Synthetic retained deadline and preserves other feeds 
+    tests/browser/calendar-boundary.spec.ts:230:1 › unavailable Calendar feeds do not become a successful empty-state claim 
+    tests/browser/calendar-planner.spec.ts:87:1 › invalid timed Planner source is a visible feed error 
+  2 interrupted
+    tests/browser/capability-documents-execution.spec.ts:69:1 › a late upload receipt cannot refresh files or announce success for another actor 
+    tests/browser/capability-documents-readers.spec.ts:75:1 › revoked identity immediately removes cached document names and preview text without another file request 
+  704 did not run
+  216 passed (11.7m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 130
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test --workers=2
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

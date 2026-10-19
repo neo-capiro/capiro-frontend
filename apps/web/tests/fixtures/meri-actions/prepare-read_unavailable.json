@@ -1,0 +1,13 @@
+{
+  "name": "prepare-read_unavailable",
+  "route": "prepare",
+  "httpStatus": 502,
+  "response": {
+    "error": {
+      "code": "REQUEST_FAILED",
+      "outcome": "READ_UNAVAILABLE"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Keep exact disposition; no rollback, absence or retry inference."
+}

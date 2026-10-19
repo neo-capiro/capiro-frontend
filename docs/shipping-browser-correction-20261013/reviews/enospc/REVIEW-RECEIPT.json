@@ -1,0 +1,197 @@
+{
+  "recordedUTC": "2026-10-13T02:31:43.084758+00:00",
+  "scope": "Completion addendum to already sealed initial PR17 review; no prior packet edits",
+  "sourceBinding": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "gateStatus": "FAILED",
+  "stats": {
+    "startTime": "2026-10-13T01:50:59.322Z",
+    "duration": 2249447.227,
+    "expected": 1121,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "exitCode": 1,
+  "endedUTC": "2026-10-13T02:28:28.853603+00:00",
+  "failure": {
+    "file": "portfolio-layout-integration.spec.ts",
+    "title": "actual index saves the complete canonical catalog and restores it after reload",
+    "status": "unexpected",
+    "results": [
+      {
+        "workerIndex": 1,
+        "parallelIndex": 1,
+        "status": "failed",
+        "duration": 10889,
+        "error": {
+          "message": "Error: ENOSPC: no space left on device, write",
+          "stack": "Error: ENOSPC: no space left on device, write\n    at /workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts:71:3",
+          "location": {
+            "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+            "column": 3,
+            "line": 71
+          },
+          "snippet": "  69 |   await page.reload();\n  70 |   await expect.poll(() => positions(page)).toEqual([clientId, secondId]);\n> 71 |   await page.screenshot({\n     |   ^\n  72 |     path: testInfo.outputPath(\"portfolio-saved-order-desktop.png\"),\n  73 |     fullPage: true,\n  74 |   });"
+        },
+        "errors": [
+          {
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+              "column": 3,
+              "line": 71
+            },
+            "message": "Error: ENOSPC: no space left on device, write\n\n  69 |   await page.reload();\n  70 |   await expect.poll(() => positions(page)).toEqual([clientId, secondId]);\n> 71 |   await page.screenshot({\n     |   ^\n  72 |     path: testInfo.outputPath(\"portfolio-saved-order-desktop.png\"),\n  73 |     fullPage: true,\n  74 |   });\n    at /workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts:71:3"
+          },
+          {
+            "message": "Error: apiRequestContext._wrapApiCall: ENOSPC: no space left on device, write"
+          },
+          {
+            "message": "Error: ENOSPC: no space left on device, write"
+          },
+          {
+            "message": "Error: End of central directory record signature not found. Either not a zip file, or file is truncated."
+          }
+        ],
+        "stdout": [],
+        "stderr": [],
+        "retry": 0,
+        "startTime": "2026-10-13T02:14:33.906Z",
+        "annotations": [],
+        "attachments": [],
+        "errorLocation": {
+          "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+          "column": 3,
+          "line": 71
+        }
+      }
+    ]
+  },
+  "classification": "Artifact-writing infrastructure failure: screenshot ENOSPC and subsequent truncated trace error. No product defect established; full gate did not pass.",
+  "testSource": {
+    "path": "apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+    "sha256": "3f021e5d35710def2b27c2c809ca4337376c98e98102224d20316003f86a0a9e"
+  },
+  "precedingAssertions": "Sequential code reached screenshot line71 after saved ordering assertion line70. Assertions after screenshot were not reached and cannot be credited.",
+  "focusedObservedPasses": [
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich Bold survives review and explicit send without signature duplication",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich Italic survives review and explicit send without signature duplication",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich Underline survives review and explicit send without signature duplication",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich List survives review and explicit send without signature duplication",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "verified rewrite uses text and Undo restores the complete formatted draft",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "formatting-only edit revokes a held rewrite without replacing current formatting",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "unverified rewrite preserves rich content",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "unavailable rewrite preserves rich content",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "paste keeps supported formatting while removing active markup and remote content",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "empty and oversized rich bodies cannot be reviewed, and typed text is retained",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "keyboard formatting and mobile toolbar remain reachable",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "identity invalidation revokes rich Undo without provider effects",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "source replacement retires editor history and rich Meri Undo",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "toolbar Attach file opens the existing attachment picker with no extra request",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "ordinary formatting and typing keep native Undo after a verified rewrite with delayed selection observation",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "intentional all selection still replaces text and supports Undo",
+      "status": "expected"
+    },
+    {
+      "file": "mail-rich-compose.spec.ts",
+      "title": "intentional partial selection still replaces text and supports Undo",
+      "status": "expected"
+    },
+    {
+      "file": "profile-identity-layout.spec.ts",
+      "title": "profile identity resolution replaces stale focus ownership and preserves editable layout",
+      "status": "expected"
+    },
+    {
+      "file": "profile-tools-integration.spec.ts",
+      "title": "Overview composes saved focus tags and updates the real profile cache",
+      "status": "expected"
+    },
+    {
+      "file": "profile-tools-integration.spec.ts",
+      "title": "profile menu prepares and explicitly downloads exact source JSON, then restores focus",
+      "status": "expected"
+    },
+    {
+      "file": "profile-tools-integration.spec.ts",
+      "title": "mobile dark Overview retains focus editing and the token-based pulse surface",
+      "status": "expected"
+    }
+  ],
+  "requiredFollowup": "Restore artifact-storage headroom, then rerun complete unchanged-source gate; preserve original failure.",
+  "priorPacket": "/tmp/capiro-pr17-initial-receipt-review-20261013",
+  "priorManifestSHA256": "7f28bcb5ce047ec324656d3cb725c7e5791b633959dc68879207d4ca4c94f913",
+  "reviewerRuntimeActions": 0,
+  "browserLimit": "Local observed Chromium154; AWS installed149 and actual launch version unverified."
+}

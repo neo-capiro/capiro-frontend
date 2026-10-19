@@ -1,0 +1,532 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-calendar/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-p1-calendar-evidence/review.playwright.ts",
+      "--timeout=8000"
+    ],
+    "configFile": "/tmp/capiro-p1-calendar-evidence/review.playwright.ts",
+    "rootDir": "/workspace/capiro-p1-calendar/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-calendar-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-p1-calendar/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "calendar-artifact-receipts.spec.ts"
+        ],
+        "timeout": 8000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-calendar-evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-artifact-receipts.spec.ts",
+      "file": "calendar-artifact-receipts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "notes: malformed receipt preserves draft and fences repeat creation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6789,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Content', { exact: true })\nExpected: \u001b[32m\"Retain this synthetic draft\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Content', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Content', { exact: true })\nExpected: \u001b[32m\"Retain this synthetic draft\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Content', { exact: true })\u001b[22m\n\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:29:57",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 57,
+                      "line": 29
+                    },
+                    "snippet": "  27 |   const state = await setup(page, kind); state.receipt = {};\n  28 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 29 |   await expect(page.getByLabel(\"Content\",{exact:true})).toHaveValue(\"Retain this synthetic draft\");\n     |                                                         ^\n  30 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n  31 |   await expect(page.getByText(/may have completed/).first()).toBeVisible();\n  32 |   expect(state.writes).toBe(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 57,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Content', { exact: true })\nExpected: \u001b[32m\"Retain this synthetic draft\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Content', { exact: true })\u001b[22m\n\n\n  27 |   const state = await setup(page, kind); state.receipt = {};\n  28 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 29 |   await expect(page.getByLabel(\"Content\",{exact:true})).toHaveValue(\"Retain this synthetic draft\");\n     |                                                         ^\n  30 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n  31 |   await expect(page.getByText(/may have completed/).first()).toBeVisible();\n  32 |   expect(state.writes).toBe(1);\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:29:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:12:00.078Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 57,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-1b23e87e808b0de5f644",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 26,
+          "column": 2
+        },
+        {
+          "title": "notes: uncertain creation cannot be repeated after remount",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6332,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Save note' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Save note' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save note</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Save note' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Save note' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save note</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:37:68",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 68,
+                      "line": 37
+                    },
+                    "snippet": "  35 |   const state = await setup(page, kind); state.status = 503;\n  36 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 37 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n     |                                                                    ^\n  38 |   await page.keyboard.press(\"Escape\");\n  39 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();\n  40 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 68,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Save note' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Save note' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save note</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  35 |   const state = await setup(page, kind); state.status = 503;\n  36 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 37 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n     |                                                                    ^\n  38 |   await page.keyboard.press(\"Escape\");\n  39 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();\n  40 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:37:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:12:07.627Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 68,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-79be9c3db534285f026f",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 34,
+          "column": 2
+        },
+        {
+          "title": "notes: synchronous submit guard sends one creation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1619,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:51:24",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 24,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await expect.poll(()=>state.writes).toBeGreaterThan(0);\n  50 |   pending.release(); await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n> 51 |   expect(state.writes).toBe(1);\n     |                        ^\n  52 |  });\n  53 | }\n  54 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 24,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\n  49 |   await expect.poll(()=>state.writes).toBeGreaterThan(0);\n  50 |   pending.release(); await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n> 51 |   expect(state.writes).toBe(1);\n     |                        ^\n  52 |  });\n  53 | }\n  54 |\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:51:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:12:14.909Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 24,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-075ec3fa5bcfb63afe48",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 45,
+          "column": 2
+        },
+        {
+          "title": "debriefs: malformed receipt preserves draft and fences repeat creation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6996,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Content', { exact: true })\nExpected: \u001b[32m\"Retain this synthetic draft\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Content', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Content', { exact: true })\nExpected: \u001b[32m\"Retain this synthetic draft\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Content', { exact: true })\u001b[22m\n\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:29:57",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 57,
+                      "line": 29
+                    },
+                    "snippet": "  27 |   const state = await setup(page, kind); state.receipt = {};\n  28 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 29 |   await expect(page.getByLabel(\"Content\",{exact:true})).toHaveValue(\"Retain this synthetic draft\");\n     |                                                         ^\n  30 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n  31 |   await expect(page.getByText(/may have completed/).first()).toBeVisible();\n  32 |   expect(state.writes).toBe(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 57,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Content', { exact: true })\nExpected: \u001b[32m\"Retain this synthetic draft\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Content', { exact: true })\u001b[22m\n\n\n  27 |   const state = await setup(page, kind); state.receipt = {};\n  28 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 29 |   await expect(page.getByLabel(\"Content\",{exact:true})).toHaveValue(\"Retain this synthetic draft\");\n     |                                                         ^\n  30 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n  31 |   await expect(page.getByText(/may have completed/).first()).toBeVisible();\n  32 |   expect(state.writes).toBe(1);\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:29:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:12:17.372Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 57,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-82bf4f539a1755602165",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 26,
+          "column": 2
+        },
+        {
+          "title": "debriefs: uncertain creation cannot be repeated after remount",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6836,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Save debrief' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Save debrief' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save debrief</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Save debrief' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Save debrief' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save debrief</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:37:68",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 68,
+                      "line": 37
+                    },
+                    "snippet": "  35 |   const state = await setup(page, kind); state.status = 503;\n  36 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 37 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n     |                                                                    ^\n  38 |   await page.keyboard.press(\"Escape\");\n  39 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();\n  40 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 68,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Save debrief' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Save debrief' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save debrief</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  35 |   const state = await setup(page, kind); state.status = 503;\n  36 |   await draft(page,singular); await page.getByRole(\"button\",{name:`Save ${singular}`}).click();\n> 37 |   await expect(page.getByRole(\"button\",{name:`Save ${singular}`})).toBeDisabled();\n     |                                                                    ^\n  38 |   await page.keyboard.press(\"Escape\");\n  39 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();\n  40 |   await page.getByRole(\"button\",{name:\"Toggle artifacts\"}).click();\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:37:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:12:25.269Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 68,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-e2e34c79f93acd5401f8",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 34,
+          "column": 2
+        },
+        {
+          "title": "debriefs: synchronous submit guard sends one creation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1873,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:51:24",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 24,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await expect.poll(()=>state.writes).toBeGreaterThan(0);\n  50 |   pending.release(); await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n> 51 |   expect(state.writes).toBe(1);\n     |                        ^\n  52 |  });\n  53 | }\n  54 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 24,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\n  49 |   await expect.poll(()=>state.writes).toBeGreaterThan(0);\n  50 |   pending.release(); await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n> 51 |   expect(state.writes).toBe(1);\n     |                        ^\n  52 |  });\n  53 | }\n  54 |\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:51:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:12:33.108Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 24,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-f1e7142c676586de95eb",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 45,
+          "column": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:11:59.579Z",
+    "duration": 35793.101,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}

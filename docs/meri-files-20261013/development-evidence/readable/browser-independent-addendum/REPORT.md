@@ -1,0 +1,9 @@
+# Files browser review publication addendum
+
+The independent review remains accepted with no unresolved material finding. Its original sealed packet is unchanged: `/tmp/capiro-meri-files-browser-independent-review-20261013`, manifest SHA256 `00dfb7c6a6d0c5b06a1797a9fb600fa3adf7fc5dc49aff775e7e85c1b2a3860e`. All ten manifest members were rechecked before this addendum.
+
+The browser owner's separate `ADDENDUM.md` has the expected SHA256 `fd147f79087274ce3ed82401e2f8f0c25869ed2ca30f83bfb91406fa5563af5e`. Its correction accurately reflects the inspected test diff: the invalid desktop anchor/href expectation was replaced with the existing Files button semantics; phone href remains asserted. Both widths still test exact client-scoped keyboard navigation, focus, current state, history and zero automatic document calls. Textarea locators retain exact accessible names, and fenced reconnect explicitly requires disabled inputs. This is a justified semantic correction, not a claim that every original assertion remained byte-identical. The original 148-file owner index and historical failures remain untouched.
+
+Root's rendered review accurately separates six inspected captures from full visual/accessibility qualification and retains the three desktop axe contrast incompletes, synthetic Office-byte limit, native/backend limits and 337 unaccepted Portfolio rows. The copied root review is provenance for its own observations; this reviewer independently inspected the four captures recorded in the original packet rather than claiming to have viewed all six root selections.
+
+The original three exact records in `REGISTRY-RECORDS.json` are ready for root registration. The full-file records assume root publishes the independent report at `docs/meri-files-20261013/BROWSER-INDEPENDENT-REVIEW.md`. No source, test, registry, browser, server, build or runtime changes were made by this addendum. Final frozen-source qualification remains outside this acceptance.

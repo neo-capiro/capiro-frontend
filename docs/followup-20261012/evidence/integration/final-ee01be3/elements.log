@@ -1,0 +1,153 @@
+
+> capiro-frontend@0.1.0 check:elements
+> npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements
+
+
+> @capiro/qualification-elements@0.0.0 pins:check
+> node generate-pins.mjs --check
+
+{"check":true,"bytes":10724}
+
+> @capiro/qualification-elements@0.0.0 check
+> npm run typecheck && npm test
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> @capiro/qualification-elements@0.0.0 test
+> node --test qualification.test.mjs
+
+✔ SSR harness caches its first success or failure without launching again (3.093115ms)
+✔ SSR harness diagnostics retain only bounded phase counts and no raw payloads (0.669464ms)
+✔ all adopted value exports remain present in the frozen static inventory (54.172604ms)
+✔ elapsed deadline refuses a starved timer and real guards refuse restricted operations (67.379158ms)
+✖ real receipt rejects wrong identity, missing or changed source and changed output before execution (1.409755ms)
+✔ immutable vendor blob identities and one exact owner adaptation (17.21891ms)
+✔ actual import graph is a closed seventeen-file display source; no runtime AI orchestration (36.093049ms)
+✔ allocated package closure and every non-self artifact hash match actual files (11.798891ms)
+✔ strict compiler checks remain enabled for every actual adopted source (0.345704ms)
+✔ exact dependency lock uses registry integrities and actual installed package versions (21.415748ms)
+✔ license/notice inventory checks actual package files and retains complete Apache terms (55.986456ms)
+✖ real Conversation, Message and PromptInput server-render deterministically without network/DOM/provider/native calls (0.646309ms)
+✖ hostile HTML, URLs, Markdown and diagram syntax remain escaped plain text in all display slots (0.139992ms)
+✔ fixture enables no Markdown, attachment, screenshot, speech, model or durable command control (53.118487ms)
+✔ CSS records real Tailwind4/Streamdown sources while leaving browser styling unqualified (0.491354ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 12
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 647.935297
+
+✖ failing tests:
+
+test at qualification.test.mjs:184:3
+✖ real receipt rejects wrong identity, missing or changed source and changed output before execution (1.409755ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'string'
+  
+      at TestContext.<anonymous> (file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:187:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'string',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at qualification.test.mjs:319:3
+✖ real Conversation, Message and PromptInput server-render deterministically without network/DOM/provider/native calls (0.646309ms)
+  AssertionError [ERR_ASSERTION]: prepare an exclusive SSR artifact first
+  + actual - expected
+  
+  + 'undefined'
+  - 'string'
+  
+      at file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:116:12
+      at file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:59:42
+      at TestContext.<anonymous> (file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:320:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'string',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at qualification.test.mjs:336:3
+✖ hostile HTML, URLs, Markdown and diagram syntax remain escaped plain text in all display slots (0.139992ms)
+  AssertionError [ERR_ASSERTION]: prepare an exclusive SSR artifact first
+  + actual - expected
+  
+  + 'undefined'
+  - 'string'
+  
+      at file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:116:12
+      at file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:59:42
+      at TestContext.<anonymous> (file:///workspace/capiro-followup/packages/qualification-elements/qualification.test.mjs:320:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'string',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-followup/packages/qualification-elements
+npm error workspace @capiro/qualification-elements@0.0.0
+npm error location /workspace/capiro-followup/packages/qualification-elements
+npm error command failed
+npm error command sh -c node --test qualification.test.mjs
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm error Lifecycle script `check` failed with error:
+npm error code 1
+npm error path /workspace/capiro-followup/packages/qualification-elements
+npm error workspace @capiro/qualification-elements@0.0.0
+npm error location /workspace/capiro-followup/packages/qualification-elements
+npm error command failed
+npm error command sh -c npm run typecheck && npm test
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

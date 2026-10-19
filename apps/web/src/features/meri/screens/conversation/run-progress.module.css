@@ -1,0 +1,221 @@
+/* Figma 3.4 run screens in the conversation lane: 02.01, 02.02 and 02.07. */
+.workspace {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.card,
+.specialist,
+.toolCard {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.plan {
+  flex: 1 1 660px;
+}
+.cardTitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  font-weight: 500;
+}
+.overview {
+  flex: 0 1 472px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.overview > div {
+  align-self: stretch;
+}
+.card {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+}
+.caption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.small {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.body {
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+}
+.specialists {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+.specialist {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+}
+.cardTop {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cardIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.details {
+  height: 28px;
+}
+.specialistName {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  font-weight: 500;
+}
+.taskContent {
+  width: 100%;
+}
+.taskContent > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+}
+.taskItem {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.panel > a,
+.panel > button,
+.toolContent > a,
+.toolContent > button {
+  align-self: flex-start;
+}
+.panelTitle {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+}
+.mono {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+}
+.toolCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+.toolHeading {
+  margin: 0;
+  font: inherit;
+}
+.toolTrigger {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+.toolTrigger .cardIcon {
+  width: 18px;
+  height: 18px;
+}
+.toolTitle {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+}
+.chevron {
+  width: 16px;
+  height: 16px;
+  margin-top: 8px;
+  transition: transform 120ms;
+}
+.toolCard[data-state="open"] .chevron {
+  transform: rotate(180deg);
+}
+.toolContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.label {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.request {
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+@media (max-width: 1100px) {
+  .workspace {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .plan,
+  .overview {
+    flex-basis: auto;
+  }
+  .specialists {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .specialists {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .card,
+  .specialist,
+  .toolCard {
+    background: linear-gradient(163deg, #242424, #0a0a0a);
+  }
+}

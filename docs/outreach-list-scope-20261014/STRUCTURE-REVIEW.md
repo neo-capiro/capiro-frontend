@@ -1,0 +1,11 @@
+# Ordinary Outreach scope-admission review
+
+Independent reviewer: Codex `outreach_review`, 14 October 2026. No blocking findings against PR28 `38c53fb0c8f05f598d835122c0ce7fd0f30a04fc`.
+
+`OutreachView` remains the owner of ordinary Outreach list, current-record admission, selection and destination composition. The existing `useOutreachRecords` port replaces an identical inline invocation. One local predicate is shared by list and deep-link admission; no DTO, endpoint, authorization, transport, persistence or send owner is added. Campaign/list rendering, type selection and the unchanged ordinary form retain their existing named functions. The existing query and keyed parent own read replacement and client/session lifetime. Rich newsletter editing remains with its existing destination.
+
+The exact function is 136 nonblank lines, fingerprint `fa7f3eaf4558905785dc8a8590577d9676eb675e36c593c2053e6cad2937f4b3`. The containing module is 402 nonblank lines, fingerprint `56281213a60eeaaf2d46e865c63c57b037de62bd462dc5bf8e8782847be46481`. Both size signals received a full-source responsibility review. The bounded admission check adds no separate lifecycle or domain responsibility, so another module would fragment this existing workflow. `OutreachForm` remains byte-identical and its previous 88-line review remains intact. Previous records are preserved in the evidence packet; guard policy is unchanged.
+
+The entire scoped receipt is checked before search/type filtering. Foreign, null and omitted associations withhold all rows and expose the existing retry control, matching the existing direct-link contract. Empty client scope preserves all-clients behavior. Tests assert concealed rows/editors, exact scoped reads, recovery, keyboard retry, full-default accessibility, and absence of writes/errors. The reviewer inspected the 3-failure/1-pass baseline and first 34-pass candidate; root ran the final 36-case suite including the later keyboard/accessibility cases. The reviewer did not independently rerun browser tests. Additional omitted-association coverage for the all-clients control was suggested as nonblocking; the unchanged predicate already admits it.
+
+This checks browser receipt consistency. Trusted backend authorization, native behavior, provider delivery and deployment remain outside this review.

@@ -1,0 +1,201 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-onboard-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "meri-action-host-mobile-navigation.spec.ts",
+      "--output=/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts"
+    ],
+    "configFile": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "meri-action-host-mobile-navigation.spec.ts",
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6188,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'Conversations', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Conversations', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'Conversations', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Conversations', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n    at expectMobileRoute (/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts:55:22)\n    at /tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts:80:3",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+                      "column": 22,
+                      "line": 55
+                    },
+                    "snippet": "  53 |     exact: true,\n  54 |   });\n> 55 |   await expect(home).toHaveCount(1);\n     |                      ^\n  56 |   await expect(actions).toHaveCount(1);\n  57 |   await expect(home).toBeVisible();\n  58 |   await expect(actions).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+                        "column": 22,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'Conversations', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Conversations', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  53 |     exact: true,\n  54 |   });\n> 55 |   await expect(home).toHaveCount(1);\n     |                      ^\n  56 |   await expect(actions).toHaveCount(1);\n  57 |   await expect(home).toBeVisible();\n  58 |   await expect(actions).toBeVisible();\n    at expectMobileRoute (/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts:55:22)\n    at /tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts:80:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:14:34.094Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+                    "column": 22,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "210100993445155c5ca9-157f142aa5fd31de63e4",
+          "file": "meri-action-host-mobile-navigation.spec.ts",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "title": "1440px Meri retains one visible sidebar destination per route without duplicate mobile links",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1821,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:14:40.984Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "210100993445155c5ca9-1f10f6e706f95ac527b3",
+          "file": "meri-action-host-mobile-navigation.spec.ts",
+          "line": 103,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T06:14:31.774Z",
+    "duration": 11343.307999999999,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

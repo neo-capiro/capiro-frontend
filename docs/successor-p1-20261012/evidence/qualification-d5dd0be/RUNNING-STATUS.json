@@ -1,0 +1,21 @@
+{
+  "source": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "recordedUTC": "2026-10-12T17:04:02.214040+00:00",
+  "qualificationComplete": false,
+  "elements": {
+    "passed": 15,
+    "failed": 0
+  },
+  "portfolioObservedFailure": "Original4worker30s run preserved:144pass,1timedOut,4interrupted,847unrun. Independent trace review confirms global budget exhaustion with semantic checks completing. Full same-source3worker60s/retries0 run active; no final browser admission yet.",
+  "remaining": [
+    "full browser completion",
+    "production build",
+    "actual-server gate"
+  ],
+  "nativePortfolioRowsAccepted": 0,
+  "combinedCheck": {
+    "passed": 1386,
+    "failed": 0,
+    "lintWarnings": 76
+  }
+}

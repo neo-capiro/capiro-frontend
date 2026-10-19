@@ -1,0 +1,9 @@
+{
+  "firstActualBrowserAttempt": "browser-green.log",
+  "result": "1 failed, 0 passed",
+  "failure": "New expanded-state assertion could not locate background combobox through normal accessible-role query.",
+  "traceProof": "after@call@76 and before@call@78 show #root aria-hidden=true while the listbox is open and Scope \u00b7 All clients selected.",
+  "correction": "Only the two new expanded-state attribute assertions use includeHidden:true; original trigger and result assertions and visible option focus assertions are unchanged.",
+  "nextAttempt": "browser-focus-corrected.log",
+  "sourceBehaviorChange": false
+}

@@ -2,6 +2,23 @@
   "schema": "capiro-elements-promotion/1",
   "scope": "Source/provenance inventory only; not browser/runtime/release qualification",
   "baselineSha256": "d7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1",
+  "projectAuthoredUi": [
+    {
+      "path": "packages/ui/src/markdown.tsx",
+      "bytes": 2409,
+      "sha256": "f198a320d4cf969eaf039cf9188a14e712f04898fd433c45d22127f123f75204"
+    },
+    {
+      "path": "packages/ui/src/output-block.tsx",
+      "bytes": 770,
+      "sha256": "cc8ccb31747a11f223f72b78ab7676014f81856e9b7be893f48068be3dc5aaa3"
+    },
+    {
+      "path": "packages/ui/src/streaming-text.tsx",
+      "bytes": 726,
+      "sha256": "3dde56dfc6cff54c5ca53814120978b6f191872aae90fc674ffa976ce370956b"
+    }
+  ],
   "ownedFiles": [
     "packages/qualification-elements/.gitignore",
     "packages/qualification-elements/README.md",
@@ -33,23 +50,42 @@
     "packages/ui/notices/strictdom.LICENSE",
     "packages/ui/package.json",
     "packages/ui/provenance.json",
+    "packages/ui/src/ai-elements/artifact.tsx",
+    "packages/ui/src/ai-elements/attachments.tsx",
+    "packages/ui/src/ai-elements/checkpoint.tsx",
+    "packages/ui/src/ai-elements/confirmation.tsx",
     "packages/ui/src/ai-elements/conversation.tsx",
+    "packages/ui/src/ai-elements/file-tree.tsx",
     "packages/ui/src/ai-elements/message.tsx",
+    "packages/ui/src/ai-elements/plan.tsx",
     "packages/ui/src/ai-elements/prompt-input.tsx",
+    "packages/ui/src/ai-elements/queue.tsx",
+    "packages/ui/src/ai-elements/sources.tsx",
+    "packages/ui/src/ai-elements/task.tsx",
+    "packages/ui/src/ai-elements/tool.tsx",
+    "packages/ui/src/ai-elements/web-preview.tsx",
     "packages/ui/src/lib/utils.ts",
+    "packages/ui/src/markdown.tsx",
+    "packages/ui/src/output-block.tsx",
+    "packages/ui/src/shadcn/alert.tsx",
+    "packages/ui/src/shadcn/badge.tsx",
     "packages/ui/src/shadcn/button-group.tsx",
     "packages/ui/src/shadcn/button.tsx",
+    "packages/ui/src/shadcn/card.tsx",
+    "packages/ui/src/shadcn/collapsible.tsx",
     "packages/ui/src/shadcn/command.tsx",
     "packages/ui/src/shadcn/dialog.tsx",
     "packages/ui/src/shadcn/dropdown-menu.tsx",
     "packages/ui/src/shadcn/hover-card.tsx",
     "packages/ui/src/shadcn/input-group.tsx",
     "packages/ui/src/shadcn/input.tsx",
+    "packages/ui/src/shadcn/scroll-area.tsx",
     "packages/ui/src/shadcn/select.tsx",
     "packages/ui/src/shadcn/separator.tsx",
     "packages/ui/src/shadcn/spinner.tsx",
     "packages/ui/src/shadcn/textarea.tsx",
     "packages/ui/src/shadcn/tooltip.tsx",
+    "packages/ui/src/streaming-text.tsx",
     "packages/ui/tsconfig.json"
   ],
   "artifacts": [
@@ -60,8 +96,8 @@
     },
     {
       "path": "packages/qualification-elements/README.md",
-      "bytes": 2450,
-      "sha256": "41d9a2b009482d0babbfd6b10d73bcf78d92815dbfddafa504b033d79c4ab6c4"
+      "bytes": 2722,
+      "sha256": "9be79d39c593fe343ee4c47e1b2001c5ad12e47fab9f737d1dc9d4a96e7229c3"
     },
     {
       "path": "packages/qualification-elements/baseline/component-pins.json",
@@ -95,13 +131,13 @@
     },
     {
       "path": "packages/qualification-elements/qualification.test.mjs",
-      "bytes": 26644,
-      "sha256": "22a071d944d90265fc6b7fe7a82229f5764f9ea870c1c34f680f698feda2f7f4"
+      "bytes": 35276,
+      "sha256": "37837b3b91c5b8f5f4cd6cbfda3e682a40fa0c00d4bc79a69c29296aa0dff934"
     },
     {
       "path": "packages/qualification-elements/sources.mjs",
-      "bytes": 5195,
-      "sha256": "75c5f947086a882c6f40c5093fcdfaeff607a6548184ea5d4b93926ac6a02322"
+      "bytes": 9132,
+      "sha256": "4e73aa2885c991718b4066f55a78c37aa82d70046339b8548adceae6921dcd9e"
     },
     {
       "path": "packages/qualification-elements/ssr-build.mjs",
@@ -145,8 +181,8 @@
     },
     {
       "path": "packages/ui/README.md",
-      "bytes": 1684,
-      "sha256": "9819b82f6fc329b3b652f2866dd938b1d841b3d7871708ee8697910d76ecb9b8"
+      "bytes": 3489,
+      "sha256": "776afe4e67f1ae942d6dd0501e15bdb6535650d01ad352ad5c2b5617b796e030"
     },
     {
       "path": "packages/ui/THIRD-PARTY-NOTICES.md",
@@ -190,13 +226,33 @@
     },
     {
       "path": "packages/ui/package.json",
-      "bytes": 1239,
-      "sha256": "21964304553c853ab2ba44ecdcf0fb4a62e26088bafd52d8ce241dc31e527915"
+      "bytes": 2448,
+      "sha256": "3babdbb821c3c1ed0609efa5b23f15d2882c99121b2500715e275ea5d2ba605d"
     },
     {
       "path": "packages/ui/provenance.json",
-      "bytes": 18745,
-      "sha256": "3f229d18afa3f4b5a625cac2961ebf6c41f1510034369ae47a96271f438ea650"
+      "bytes": 66953,
+      "sha256": "d6402ff8b18db0c325abc9274dec7ccab789201bc34bb79f6da734d5b3f337d1"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/artifact.tsx",
+      "bytes": 3351,
+      "sha256": "248edad66d9ddfc1eb77110a63ed76a32d3694b9f83015f2f973c9b0088be4b1"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/attachments.tsx",
+      "bytes": 11600,
+      "sha256": "afef2be1e393351e1f81b6f5c3ab2a5d4d9325aec11ce8795ba0c241404322c6"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/checkpoint.tsx",
+      "bytes": 1610,
+      "sha256": "b381d7331086c257518b3d356ed9c1a1ea0c844d8fe241c56f9fe1175ccf2904"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/confirmation.tsx",
+      "bytes": 3866,
+      "sha256": "5324e7bc00e3ee376c4981a8f3818d6f151ef40bf119e785b435a05191953e31"
     },
     {
       "path": "packages/ui/src/ai-elements/conversation.tsx",
@@ -204,9 +260,19 @@
       "sha256": "7ef993ea4a950d2448d9adbdc28a06863e7dbbb0d09b74547678c170443fe997"
     },
     {
+      "path": "packages/ui/src/ai-elements/file-tree.tsx",
+      "bytes": 12557,
+      "sha256": "4c1601e0558e9ab3b64262b5f58e3a28eceff06aef726fed977ebd488b20f45e"
+    },
+    {
       "path": "packages/ui/src/ai-elements/message.tsx",
       "bytes": 8537,
       "sha256": "49d93e770848ce4f4222b2ef9667cc3d4d0b7957bd5e3c5f5122671a22f62767"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/plan.tsx",
+      "bytes": 3790,
+      "sha256": "061fbcccbcde4cdff5a57b41315abb1e129602dcf1099c71e03bddc1618d7918"
     },
     {
       "path": "packages/ui/src/ai-elements/prompt-input.tsx",
@@ -214,9 +280,54 @@
       "sha256": "2745f684e0e8676528b667d76d5340e68e871fb274bb9fb306dfcc9fdc8a087d"
     },
     {
+      "path": "packages/ui/src/ai-elements/queue.tsx",
+      "bytes": 6221,
+      "sha256": "cd35e4a35ebaf4e0d6d3e5c6abe7236bde4cdc353640553f52f888472f8394ac"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/sources.tsx",
+      "bytes": 1853,
+      "sha256": "81db9ff918731bff2b6ddc5a90a158edde7d73c4c09d6224fbeb8627551f5c9e"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/task.tsx",
+      "bytes": 2340,
+      "sha256": "24e55ce774d5c05a7ab9136cb828e5f4653ccdc21d9d903bf6aab2d481d87bf5"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/tool.tsx",
+      "bytes": 5205,
+      "sha256": "1c1b0746e097b103e3c25e6a8fdcff68102abb67007eeee21dc70386c1fc9670"
+    },
+    {
+      "path": "packages/ui/src/ai-elements/web-preview.tsx",
+      "bytes": 7059,
+      "sha256": "cac455f95a20f030d83142c2af13cca46cc12b507e5f545fe8394ebe6f907df0"
+    },
+    {
       "path": "packages/ui/src/lib/utils.ts",
       "bytes": 166,
       "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d"
+    },
+    {
+      "path": "packages/ui/src/markdown.tsx",
+      "bytes": 2409,
+      "sha256": "f198a320d4cf969eaf039cf9188a14e712f04898fd433c45d22127f123f75204"
+    },
+    {
+      "path": "packages/ui/src/output-block.tsx",
+      "bytes": 770,
+      "sha256": "cc8ccb31747a11f223f72b78ab7676014f81856e9b7be893f48068be3dc5aaa3"
+    },
+    {
+      "path": "packages/ui/src/shadcn/alert.tsx",
+      "bytes": 1615,
+      "sha256": "bea5460b74dd83fc95c481843f6d5a9f31deb62dd86cbf7383f5158d29fa7193"
+    },
+    {
+      "path": "packages/ui/src/shadcn/badge.tsx",
+      "bytes": 1653,
+      "sha256": "fd2c161026e28debea5a19da1f2a5d63ccefa0c1d7fe5f0c6b03451d1cc82235"
     },
     {
       "path": "packages/ui/src/shadcn/button-group.tsx",
@@ -227,6 +338,16 @@
       "path": "packages/ui/src/shadcn/button.tsx",
       "bytes": 2162,
       "sha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1"
+    },
+    {
+      "path": "packages/ui/src/shadcn/card.tsx",
+      "bytes": 1988,
+      "sha256": "83e0b1501b765c26c84b0f2b0636c10a95a91b1bf357130ec176af2c128f42df"
+    },
+    {
+      "path": "packages/ui/src/shadcn/collapsible.tsx",
+      "bytes": 795,
+      "sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b"
     },
     {
       "path": "packages/ui/src/shadcn/command.tsx",
@@ -259,6 +380,11 @@
       "sha256": "313da1cd9a309d996eb182d5491bbb3f47428d0271be846845b5de82bfa3d80e"
     },
     {
+      "path": "packages/ui/src/shadcn/scroll-area.tsx",
+      "bytes": 1640,
+      "sha256": "5e4ea1181bf03acd5f2c4338664ea7ce2198ee973ae7db12f125e35736fdba9e"
+    },
+    {
       "path": "packages/ui/src/shadcn/select.tsx",
       "bytes": 6291,
       "sha256": "23e46864ece159592bc70c18901c3f366b56438457c8715715c391c255107b67"
@@ -282,6 +408,11 @@
       "path": "packages/ui/src/shadcn/tooltip.tsx",
       "bytes": 1888,
       "sha256": "0ff01dcc2396975619d64ed8819048ea3ebd66f8baf6a63d11433a8754905ced"
+    },
+    {
+      "path": "packages/ui/src/streaming-text.tsx",
+      "bytes": 726,
+      "sha256": "3dde56dfc6cff54c5ca53814120978b6f191872aae90fc674ffa976ce370956b"
     },
     {
       "path": "packages/ui/tsconfig.json",

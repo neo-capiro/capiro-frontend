@@ -1,0 +1,22 @@
+
+Running 15 tests using 1 worker
+
+(node:1330399) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › portfolio-1440-light rendered manual observations (18.0s)
+  ✓   2 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › portfolio-1440-dark rendered manual observations (11.7s)
+  ✓   3 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › portfolio-390-light rendered manual observations (8.2s)
+  ✓   4 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › portfolio-390-dark rendered manual observations (8.2s)
+  ✓   5 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › portfolio-320-light rendered manual observations (6.4s)
+  ✓   6 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › meri-1440-light rendered manual observations (3.6s)
+  ✓   7 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › meri-1440-dark rendered manual observations (2.5s)
+  ✓   8 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › meri-390-light rendered manual observations (2.1s)
+  ✓   9 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › meri-390-dark rendered manual observations (1.9s)
+  ✓  10 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › meri-320-light rendered manual observations (1.7s)
+  ✓  11 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › modules-1440-light rendered manual observations (2.7s)
+  ✓  12 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › modules-1440-dark rendered manual observations (2.6s)
+  ✓  13 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › modules-390-light rendered manual observations (2.0s)
+  ✓  14 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › modules-390-dark rendered manual observations (2.1s)
+  ✓  15 ../capiro-unified-a11y-render-review-20261013/render.spec.ts:12:11 › modules-320-light rendered manual observations (1.9s)
+
+  15 passed (1.3m)

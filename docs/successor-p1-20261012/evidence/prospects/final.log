@@ -1,0 +1,22 @@
+
+Running 15 tests using 1 worker
+
+(node:471430) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/prospect-current-read.spec.ts:160:3 › a 403 current read on remount withholds cached records until a successful retry (3.1s)
+  ✓   2 apps/web/tests/browser/prospect-current-read.spec.ts:179:3 › a 403 failed cached filter read cannot expose its earlier list or pipeline (2.1s)
+  ✓   3 apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 403 filtered failure requires a new read even when the earlier filter cache is fresh (4.0s)
+  ✓   4 apps/web/tests/browser/prospect-current-read.spec.ts:229:5 › a 403 current read failure discards the open pipeline editor (6.1s)
+  ✓   5 apps/web/tests/browser/prospect-current-read.spec.ts:229:5 › a 403 current read failure discards the open create editor (6.6s)
+  ✓   6 apps/web/tests/browser/prospect-current-read.spec.ts:160:3 › a 503 current read on remount withholds cached records until a successful retry (6.4s)
+  ✓   7 apps/web/tests/browser/prospect-current-read.spec.ts:179:3 › a 503 failed cached filter read cannot expose its earlier list or pipeline (5.6s)
+  ✓   8 apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 503 filtered failure requires a new read even when the earlier filter cache is fresh (5.0s)
+  ✓   9 apps/web/tests/browser/prospect-current-read.spec.ts:229:5 › a 503 current read failure discards the open pipeline editor (6.1s)
+  ✓  10 apps/web/tests/browser/prospect-current-read.spec.ts:229:5 › a 503 current read failure discards the open create editor (6.2s)
+  ✓  11 apps/web/tests/browser/prospect-current-read.spec.ts:279:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return (5.2s)
+  ✓  12 apps/web/tests/browser/prospect-current-read.spec.ts:306:1 › a successful background reread preserves an active creation draft (4.8s)
+  ✓  13 apps/web/tests/browser/prospects.spec.ts:26:1 › old backend preserves reads and company edits while new creates stay unavailable (2.9s)
+  ✓  14 apps/web/tests/browser/prospects.spec.ts:58:1 › new catalog creates identified and closed won changes only stage, then refreshes pipeline (2.7s)
+  ✓  15 apps/web/tests/browser/prospects.spec.ts:118:1 › legacy stages remain unmapped and note failures preserve entered text (2.6s)
+
+  15 passed (1.2m)

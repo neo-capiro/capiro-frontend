@@ -1,0 +1,30 @@
+{
+  "syntheticOnly": true,
+  "sourceBase": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+  "typecheckAttempt1": {
+    "chunk_id": "3e1832",
+    "wall_time_seconds": 4.9958e-05,
+    "exit_code": 137,
+    "original_token_count": 135,
+    "output": "Killed\nnpm error Lifecycle script `typecheck` failed with error:\nnpm error code 137\nnpm error path /dev/shm/capiro-strategy-compatibility-20261014/apps/web\nnpm error workspace @capiro/web@0.1.0\nnpm error location /dev/shm/capiro-strategy-compatibility-20261014/apps/web\nnpm error command failed\nnpm error command sh -c tsc --noEmit\nnpm notice\nnpm notice New major version of npm available! 11.9.0 -> 12.2.0\nnpm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0\nnpm notice To update run: npm install -g npm@12.2.0\nnpm notice\n"
+  },
+  "lockedMaterializationInitialAttempt": {
+    "chunk_id": "f1715f",
+    "wall_time_seconds": 2.7394e-05,
+    "exit_code": 1,
+    "original_token_count": 300,
+    "output": "Traceback (most recent call last):\n  File \"<string>\", line 35, in <module>\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py\", line 619, in result_iterator\n    yield _result_or_cancel(fs.pop())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py\", line 317, in _result_or_cancel\n    return fut.result(timeout)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py\", line 456, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/concurrent/futures/thread.py\", line 59, in run\n    result = self.fn(*self.args, **self.kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 24, in fetch\nRuntimeError: unsafe locked archive @types/use-sync-external-store\n"
+  },
+  "otherRetainedAttemptNotes": [
+    {
+      "operation": "Initial functions orchestration for local dependency setup",
+      "result": "JavaScript SyntaxError before nested tool execution; no filesystem actions",
+      "rawOutputAvailable": false
+    },
+    {
+      "operation": "Initial architecture review registration append",
+      "result": "Refused duplicate existing RoutedApp key before writing records; matching independently reviewed key updated on retry; unchanged guard rerun passes",
+      "rawOutput": "AssertionError: ('apps/web/test/browser/main.tsx', 'function', 'RoutedApp')"
+    }
+  ]
+}

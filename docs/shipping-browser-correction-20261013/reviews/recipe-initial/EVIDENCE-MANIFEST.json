@@ -1,0 +1,93 @@
+{
+  "sealedAtUTC": "2026-10-13T03:13:02.742456+00:00",
+  "files": [
+    {
+      "path": "FINDINGS.json",
+      "bytes": 2795,
+      "sha256": "d2e824c8fef26ac60b7e702c8f59f2d96e40fde002a9b06742630436c46e6644"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 5887,
+      "sha256": "66c2f6e0c69e6f6e4653c177d126e91379108ec359b03c5358c3943a33275546"
+    },
+    {
+      "path": "UPSTREAM-EXCERPTS.json",
+      "bytes": 2201,
+      "sha256": "9a3aaa7e3ac56237c5c8ca34530a49988ae631f199be83ec2ae8b931226f51cf"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 6791,
+      "sha256": "2316c0c73fc91eadd3e0505c36123621c9478a2810a71e2af9ad14d27b179f5a"
+    },
+    {
+      "path": "reviewed/apps/web/deployment/portfolio/qualify-elements.mjs",
+      "bytes": 5784,
+      "sha256": "7a933f851f36bd47bca3b8ca371845c6a65ba43335543dda94a7390401c47215"
+    },
+    {
+      "path": "reviewed/apps/web/package.json",
+      "bytes": 1815,
+      "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14"
+    },
+    {
+      "path": "reviewed/apps/web/playwright.config.ts",
+      "bytes": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "reviewed/apps/web/test/browser/playwright.config.ts",
+      "bytes": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    },
+    {
+      "path": "reviewed/apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21"
+    },
+    {
+      "path": "reviewed/apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    },
+    {
+      "path": "reviewed/docs/shipping-browser-correction-20261013/FROZEN-SOURCE-MANIFEST.json",
+      "bytes": 2140,
+      "sha256": "4798b1df374f43a7a04201771eb95be834a0413a684262888f280a541d944cff"
+    },
+    {
+      "path": "reviewed/docs/shipping-browser-correction-20261013/IMPLEMENTATION.md",
+      "bytes": 5407,
+      "sha256": "f4d2024be7241e79f10e59c1720c0df98a262d075a4dfd67dea40a77284006cd"
+    },
+    {
+      "path": "reviewed/docs/shipping-browser-correction-20261013/qualify-frozen-source.sh",
+      "bytes": 4555,
+      "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac"
+    },
+    {
+      "path": "reviewed/docs/shipping-browser-correction-20261013/reviews/AWS-FAILURE-EVIDENCE.json",
+      "bytes": 18324,
+      "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7"
+    },
+    {
+      "path": "reviewed/docs/shipping-browser-correction-20261013/reviews/REVIEW-RECEIPT.json",
+      "bytes": 3860,
+      "sha256": "77f93ae09ee590412e4b4647e37be12d7cecd376775fc0fca048bcf00e6b52e1"
+    },
+    {
+      "path": "reviewed/docs/shipping-browser-correction-20261013/reviews/profile-REVIEW.md",
+      "bytes": 4897,
+      "sha256": "9231c0a4f3a7482c74b03903b5753375223577d18099d7d64a7f78adb33ea877"
+    },
+    {
+      "path": "reviewed/package.json",
+      "bytes": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49"
+    }
+  ],
+  "fileCount": 17,
+  "totalBytes": 81176,
+  "scope": "Static recipe/manifest and DOC-01 review; excludes manifest self hash; prior packets unchanged"
+}

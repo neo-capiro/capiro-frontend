@@ -1,0 +1,1363 @@
+diff --git a/apps/web/src/features/portfolio/files/FileAccess.tsx b/apps/web/src/features/portfolio/files/FileAccess.tsx
+index 061a01b..3cb753f 100644
+--- a/apps/web/src/features/portfolio/files/FileAccess.tsx
++++ b/apps/web/src/features/portfolio/files/FileAccess.tsx
+@@ -8,6 +8,8 @@ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useFileAccess } from "./queries";
+ import { useFileChange } from "./mutations";
++import { useFileMetadataChange } from "./useFileMetadataChange";
++import { FileMetadataStatus } from "./FileMetadataStatus";
+ import type { Attachment } from "./contracts";
+ export function FileAccess({
+   clientId,
+@@ -23,42 +25,51 @@ export function FileAccess({
+   const query = useFileAccess(clientId, file?.id);
+   const members = useMemberOptions();
+   const change = useFileChange(clientId, onClose);
++  const metadata = useFileMetadataChange(clientId, file?.id ?? "", onClose);
++  const pending = file ? metadata.isPending : change.isPending;
++  const draft = metadata.draft;
++  const initial =
++    draft?.kind === "access"
++      ? draft
++      : (metadata.current ?? (query.error ? undefined : query.data));
+   return (
+     <Dialog
+       open
+       title={`Access: ${file?.fileName ?? folder ?? "Unfiled"}`}
+       description="Choose who on your team can view these files. The uploader retains access."
+       onOpenChange={(open) => {
+-        if (!open && !change.isPending) onClose();
++        if (!open && !pending) onClose();
+       }}
+     >
+       <QueryState
+         pending={Boolean(file) && query.isPending}
+-        error={query.error ?? members.error}
++        error={(metadata.current ? null : query.error) ?? members.error}
+         retry={() => {
+           void query.refetch();
+           void members.refetch();
+         }}
+       />
+-      {(!file || (query.isSuccess && !query.error)) && (
++      {(!file || initial) && (
+         <AccessForm
+-          key={query.data?.id ?? "folder"}
+-          initial={query.data}
++          key={file?.id ?? "folder"}
++          initial={initial}
+           members={members.isSuccess && !members.error ? members.data : []}
+           pending={
+-            change.isPending || !members.isSuccess || Boolean(members.error)
++            (file
++              ? metadata.blocked || Boolean(query.error && !metadata.current)
++              : change.isPending) ||
++            !members.isSuccess ||
++            Boolean(members.error)
+           }
+           onSave={(viewerMode, viewerUserIds) =>
+-            change.mutate(
+-              file
+-                ? { kind: "access", id: file.id, viewerMode, viewerUserIds }
+-                : {
+-                    kind: "folder-access",
+-                    folder: folder ?? null,
+-                    viewerMode,
+-                    viewerUserIds,
+-                  },
+-            )
++            file
++              ? metadata.mutate({ kind: "access", viewerMode, viewerUserIds })
++              : change.mutate({
++                  kind: "folder-access",
++                  folder: folder ?? null,
++                  viewerMode,
++                  viewerUserIds,
++                })
+           }
+         />
+       )}
+@@ -68,7 +79,18 @@ export function FileAccess({
+           do not inherit this setting.
+         </small>
+       )}
+-      <QueryState error={change.error} />
++      {file ? (
++        <FileMetadataStatus
++          change={metadata}
++          kind="access"
++          viewerLabels={metadata.current?.viewerUserIds.map((id) => {
++            const member = members.data?.find((item) => item.id === id);
++            return member ? memberName(member) : "Unavailable team member";
++          })}
++        />
++      ) : (
++        <QueryState error={change.error} />
++      )}
+     </Dialog>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/files/FileMetadataStatus.tsx b/apps/web/src/features/portfolio/files/FileMetadataStatus.tsx
+new file mode 100644
+index 0000000..299bcb0
+--- /dev/null
++++ b/apps/web/src/features/portfolio/files/FileMetadataStatus.tsx
+@@ -0,0 +1,61 @@
++"use client";
++import { QueryState } from "@/shared/portfolio/ui/QueryState";
++import type { useFileMetadataChange } from "./useFileMetadataChange";
++
++export function FileMetadataStatus({
++  change,
++  kind,
++  viewerLabels,
++}: {
++  change: ReturnType<typeof useFileMetadataChange>;
++  kind: "access" | "move";
++  viewerLabels?: string[];
++}) {
++  return (
++    <div className="stack">
++      <QueryState error={change.error} />
++      {change.attempt?.status === "unknown" && (
++        <>
++          <p>
++            The save outcome is unknown. Your draft is retained. Review the
++            current file before deciding whether to save again.
++          </p>
++          <button
++            type="button"
++            className="button"
++            disabled={!change.canReview}
++            onClick={change.review}
++          >
++            Review current file
++          </button>
++        </>
++      )}
++      {change.current && (
++        <div className="stack" role="status">
++          {kind === "access" ? (
++            <>
++              <p>
++                Current saved access:{" "}
++                {change.current.viewerMode === "all"
++                  ? "All team members"
++                  : "Specific people"}
++              </p>
++              {change.current.viewerMode === "restricted" && (
++                <p>
++                  Current selected viewers:{" "}
++                  {viewerLabels?.join(", ") || "None (uploader only)"}
++                </p>
++              )}
++            </>
++          ) : (
++            <p>Current saved folder: {change.current.folder ?? "Unfiled"}</p>
++          )}
++          <small>
++            This is the current saved state. It does not confirm the earlier
++            save. Review your retained draft before saving again.
++          </small>
++        </div>
++      )}
++    </div>
++  );
++}
+diff --git a/apps/web/src/features/portfolio/files/MoveFile.tsx b/apps/web/src/features/portfolio/files/MoveFile.tsx
+index efcf039..d13aa23 100644
+--- a/apps/web/src/features/portfolio/files/MoveFile.tsx
++++ b/apps/web/src/features/portfolio/files/MoveFile.tsx
+@@ -1,8 +1,8 @@
+ "use client";
+ import { useState } from "react";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+-import { QueryState } from "@/shared/portfolio/ui/QueryState";
+-import { useFileChange } from "./mutations";
++import { useFileMetadataChange } from "./useFileMetadataChange";
++import { FileMetadataStatus } from "./FileMetadataStatus";
+ import type { Attachment } from "./contracts";
+ export function MoveFile({
+   clientId,
+@@ -17,9 +17,16 @@ export function MoveFile({
+   onClose: () => void;
+   creating?: boolean;
+ }) {
+-  const [folder, setFolder] = useState(creating ? "" : (file.folder ?? ""));
++  const move = useFileMetadataChange(clientId, file.id, onClose);
++  const draft = move.attempt?.change;
++  const [folder, setFolder] = useState(
++    draft?.kind === "move"
++      ? (draft.folder ?? "")
++      : creating
++        ? ""
++        : (file.folder ?? ""),
++  );
+   const [search, setSearch] = useState("");
+-  const move = useFileChange(clientId, onClose);
+   return (
+     <Dialog
+       open
+@@ -33,9 +40,9 @@ export function MoveFile({
+         className="stack"
+         onSubmit={(event) => {
+           event.preventDefault();
++          if (move.blocked) return;
+           move.mutate({
+             kind: "move",
+-            id: file.id,
+             folder: folder.trim() || null,
+           });
+         }}
+@@ -47,6 +54,7 @@ export function MoveFile({
+               required
+               autoFocus
+               maxLength={120}
++              disabled={move.blocked}
+               value={folder}
+               onChange={(event) => setFolder(event.target.value)}
+             />
+@@ -59,7 +67,7 @@ export function MoveFile({
+               value={search}
+               onChange={(event) => setSearch(event.target.value)}
+             />
+-            <fieldset>
++            <fieldset disabled={move.blocked}>
+               <legend>Destination</legend>
+               {["", ...folders]
+                 .filter((name) =>
+@@ -83,10 +91,10 @@ export function MoveFile({
+           Folders are shared labels on files. No physical copy is created. Empty
+           folders are not persisted.
+         </p>
+-        <QueryState error={move.error} />
++        <FileMetadataStatus change={move} kind="move" />
+         <button
+           className="button primary"
+-          disabled={move.isPending || (creating && !folder.trim())}
++          disabled={move.blocked || (creating && !folder.trim())}
+         >
+           {creating ? "Create folder & move file" : "Move file"}
+         </button>
+diff --git a/apps/web/src/features/portfolio/files/contracts.ts b/apps/web/src/features/portfolio/files/contracts.ts
+index f71d073..965ba65 100644
+--- a/apps/web/src/features/portfolio/files/contracts.ts
++++ b/apps/web/src/features/portfolio/files/contracts.ts
+@@ -45,10 +45,34 @@ export const fileAccessForIdSchema = (id: string) =>
+     (file) => file.id === id,
+     "Unexpected attachment identity",
+   );
+-export const fileChangeForIdSchema = (id: string) =>
++export type FileMetadataChange =
++  | { kind: "move"; folder: string | null }
++  | {
++      kind: "access";
++      viewerMode: "all" | "restricted";
++      viewerUserIds: string[];
++    };
++const viewerSet = (ids: string[]) =>
++  JSON.stringify(
++    [...new Set(ids.map((id) => id.trim()).filter(Boolean))].sort(),
++  );
++export const fileChangeForIdSchema = (
++  id: string,
++  change?: FileMetadataChange,
++) =>
+   accessSchema
+     .omit({ uploadedByUserId: true })
+-    .refine((file) => file.id === id, "Unexpected attachment identity");
++    .refine((file) => file.id === id, "Unexpected attachment identity")
++    .refine((file) => {
++      if (!change) return true;
++      if (change.kind === "move")
++        return file.folder === (change.folder?.trim() || null);
++      return (
++        file.viewerMode === change.viewerMode &&
++        (change.viewerMode === "all" ||
++          viewerSet(file.viewerUserIds) === viewerSet(change.viewerUserIds))
++      );
++    }, "The attachment receipt does not confirm the requested change");
+ export const uploadTicketSchema = z.object({
+   url: z.string(),
+   fields: z.record(z.string(), z.string()),
+diff --git a/apps/web/src/features/portfolio/files/metadata-actions.ts b/apps/web/src/features/portfolio/files/metadata-actions.ts
+new file mode 100644
+index 0000000..1ad5d18
+--- /dev/null
++++ b/apps/web/src/features/portfolio/files/metadata-actions.ts
+@@ -0,0 +1,110 @@
++import type { QueryClient } from "@tanstack/react-query";
++import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
++import { ambiguousClientWrite } from "@/shared/portfolio/auth/client-writer";
++import {
++  fileAccessForIdSchema,
++  fileChangeForIdSchema,
++  type Attachment,
++  type FileMetadataChange,
++} from "./contracts";
++import { currentFilesKey } from "./file-reader";
++import type { FileExecution } from "./file-scope";
++import {
++  fileMetadataAttemptKey,
++  nextFileMetadataAttempt,
++  setFileMetadataAttempt,
++  settleFileMetadataAttempt,
++  type FileMetadataAttempt,
++} from "./metadata-attempt";
++
++function currentFile(
++  cache: QueryClient,
++  clientId: string,
++  id: string,
++  execution: FileExecution,
++) {
++  execution.guard();
++  if (
++    !cache
++      .getQueryData<Attachment[]>(currentFilesKey(cache, clientId))
++      ?.some((file) => file.id === id)
++  )
++    throw new ApiError(
++      409,
++      "Refresh the client files before changing this file.",
++    );
++}
++
++export async function saveFileMetadata(
++  api: ApiClient,
++  cache: QueryClient,
++  clientId: string,
++  id: string,
++  change: FileMetadataChange,
++  execution: FileExecution,
++) {
++  currentFile(cache, clientId, id, execution);
++  const key = fileMetadataAttemptKey(clientId, id, execution.actor);
++  if (cache.getQueryData<FileMetadataAttempt | null>(key))
++    throw new ApiError(409, "Review the current file before saving again.");
++  const token = nextFileMetadataAttempt();
++  setFileMetadataAttempt(cache, key, { token, status: "pending", change });
++  let received = false;
++  try {
++    const result = await api.request(
++      "core",
++      `clients/${clientId}/files/${id}/${change.kind === "move" ? "folder" : "access"}`,
++      fileChangeForIdSchema(id, change),
++      {
++        method: "PATCH",
++        signal: execution.signal,
++        body:
++          change.kind === "move"
++            ? { folder: change.folder }
++            : {
++                viewerMode: change.viewerMode,
++                viewerUserIds: change.viewerUserIds,
++              },
++      },
++    );
++    received = true;
++    currentFile(cache, clientId, id, execution);
++    settleFileMetadataAttempt(cache, key, token, false);
++    return result;
++  } catch (error) {
++    settleFileMetadataAttempt(
++      cache,
++      key,
++      token,
++      received || execution.signal.aborted || ambiguousClientWrite(error),
++    );
++    throw error;
++  }
++}
++
++// A GET establishes current state only; it cannot prove which PATCH produced it.
++export async function reviewFileMetadata(
++  api: ApiClient,
++  cache: QueryClient,
++  clientId: string,
++  id: string,
++  execution: FileExecution,
++) {
++  currentFile(cache, clientId, id, execution);
++  const key = fileMetadataAttemptKey(clientId, id, execution.actor);
++  const attempt = cache.getQueryData<FileMetadataAttempt | null>(key);
++  if (attempt?.status !== "unknown")
++    throw new ApiError(
++      409,
++      "Wait for the file save to finish before reviewing it.",
++    );
++  const current = await api.request(
++    "core",
++    `clients/${clientId}/files/${id}/access`,
++    fileAccessForIdSchema(id),
++    { signal: execution.signal },
++  );
++  currentFile(cache, clientId, id, execution);
++  settleFileMetadataAttempt(cache, key, attempt.token, false);
++  return current;
++}
+diff --git a/apps/web/src/features/portfolio/files/metadata-attempt.ts b/apps/web/src/features/portfolio/files/metadata-attempt.ts
+new file mode 100644
+index 0000000..2cb48f9
+--- /dev/null
++++ b/apps/web/src/features/portfolio/files/metadata-attempt.ts
+@@ -0,0 +1,78 @@
++"use client";
++import { useMemo, useSyncExternalStore } from "react";
++import {
++  useQueryClient,
++  type QueryClient,
++  type QueryKey,
++} from "@tanstack/react-query";
++import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
++import type { FileMetadataChange } from "./contracts";
++import { useFileReader } from "./file-reader";
++
++// Cache-local replay protection, not a durable native operation receipt.
++export type FileMetadataAttempt = {
++  token: number;
++  status: "pending" | "unknown";
++  change: FileMetadataChange;
++};
++let sequence = 0;
++export const nextFileMetadataAttempt = () => ++sequence;
++export const fileMetadataAttemptKey = (
++  clientId: string,
++  id: string,
++  actor?: ClientWriter,
++) =>
++  [
++    "file-metadata-attempt",
++    actor?.tenantId ?? "",
++    actor?.userId ?? "",
++    clientId,
++    id,
++  ] as const;
++export function setFileMetadataAttempt(
++  cache: QueryClient,
++  key: QueryKey,
++  attempt: FileMetadataAttempt | null,
++) {
++  cache.setQueryDefaults(key, { gcTime: Infinity });
++  cache.setQueryData(key, attempt);
++}
++export function settleFileMetadataAttempt(
++  cache: QueryClient,
++  key: QueryKey,
++  token: number,
++  unknown: boolean,
++) {
++  const attempt = cache.getQueryData<FileMetadataAttempt | null>(key);
++  if (attempt?.token === token)
++    setFileMetadataAttempt(
++      cache,
++      key,
++      unknown ? { ...attempt, status: "unknown" } : null,
++    );
++}
++export function useFileMetadataAttempt(clientId: string, id: string) {
++  const cache = useQueryClient();
++  const reader = useFileReader();
++  const tenantId = reader?.tenantId;
++  const userId = reader?.userId;
++  const key = useMemo(
++    () =>
++      fileMetadataAttemptKey(
++        clientId,
++        id,
++        tenantId && userId ? { tenantId, userId } : undefined,
++      ),
++    [clientId, id, tenantId, userId],
++  );
++  const encoded = JSON.stringify(key);
++  const attempt = useSyncExternalStore(
++    (notify) =>
++      cache.getQueryCache().subscribe((event) => {
++        if (JSON.stringify(event.query.queryKey) === encoded) notify();
++      }),
++    () => cache.getQueryData<FileMetadataAttempt | null>(key) ?? null,
++    () => null,
++  );
++  return { key, attempt };
++}
+diff --git a/apps/web/src/features/portfolio/files/mutations.ts b/apps/web/src/features/portfolio/files/mutations.ts
+index 8714bcb..67acb01 100644
+--- a/apps/web/src/features/portfolio/files/mutations.ts
++++ b/apps/web/src/features/portfolio/files/mutations.ts
+@@ -3,17 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
+ import { z } from "zod";
+ import { useApi } from "@/shared/portfolio/api/provider";
+ import { acknowledged } from "@/shared/portfolio/api/http";
+-import { fileChangeForIdSchema } from "./contracts";
+ import { filesKey } from "./queries";
+ export type FileChange =
+-  | { kind: "move"; id: string; folder: string | null }
+   | { kind: "delete"; id: string }
+-  | {
+-      kind: "access";
+-      id: string;
+-      viewerMode: "all" | "restricted";
+-      viewerUserIds: string[];
+-    }
+   | {
+       kind: "folder-access";
+       folder: string | null;
+@@ -33,30 +25,16 @@ export function useFileChange(clientId: string, onSaved?: () => void) {
+           acknowledged,
+           { method: "DELETE" },
+         );
+-      if (change.kind === "move")
+-        return api.request(
+-          "core",
+-          `${base}/${change.id}/folder`,
+-          fileChangeForIdSchema(change.id),
+-          { method: "PATCH", body: { folder: change.folder } },
+-        );
+       const body = {
+         viewerMode: change.viewerMode,
+         viewerUserIds: change.viewerUserIds,
+       };
+-      return change.kind === "access"
+-        ? api.request(
+-            "core",
+-            `${base}/${change.id}/access`,
+-            fileChangeForIdSchema(change.id),
+-            { method: "PATCH", body },
+-          )
+-        : api.request(
+-            "core",
+-            `${base}/access/folder`,
+-            z.object({ updated: z.number() }),
+-            { method: "PATCH", body: { ...body, folder: change.folder } },
+-          );
++      return api.request(
++        "core",
++        `${base}/access/folder`,
++        z.object({ updated: z.number() }),
++        { method: "PATCH", body: { ...body, folder: change.folder } },
++      );
+     },
+     onSuccess: async () => {
+       await Promise.all([
+diff --git a/apps/web/src/features/portfolio/files/queries.ts b/apps/web/src/features/portfolio/files/queries.ts
+index d8602a1..806d13d 100644
+--- a/apps/web/src/features/portfolio/files/queries.ts
++++ b/apps/web/src/features/portfolio/files/queries.ts
+@@ -72,15 +72,28 @@ export function useFiles(clientId: string) {
+ }
+ export function useFileAccess(clientId: string, id?: string) {
+   const api = useApi();
++  const cache = useQueryClient();
++  const reader = useFileReader();
+   return useQuery({
+-    queryKey: ["file-access", clientId, id],
+-    enabled: Boolean(id),
+-    queryFn: ({ signal }) =>
+-      api.request(
++    queryKey: [
++      "file-access",
++      clientId,
++      id,
++      reader?.tenantId,
++      reader?.userId,
++      reader?.revision,
++    ],
++    enabled: Boolean(id && reader),
++    queryFn: async ({ signal }) => {
++      assertFileReader(cache, reader);
++      const access = await api.request(
+         "core",
+         `clients/${encodeURIComponent(clientId)}/files/${encodeURIComponent(id ?? "")}/access`,
+         fileAccessForIdSchema(id ?? ""),
+         { signal },
+-      ),
++      );
++      assertFileReader(cache, reader);
++      return access;
++    },
+   });
+ }
+diff --git a/apps/web/src/features/portfolio/files/useFileMetadataChange.ts b/apps/web/src/features/portfolio/files/useFileMetadataChange.ts
+new file mode 100644
+index 0000000..fcca078
+--- /dev/null
++++ b/apps/web/src/features/portfolio/files/useFileMetadataChange.ts
+@@ -0,0 +1,83 @@
++"use client";
++import { useRef, useState } from "react";
++import { useQueryClient } from "@tanstack/react-query";
++import { useApi } from "@/shared/portfolio/api/provider";
++import type { FileMetadataChange } from "./contracts";
++import { useFileScope, type FileExecution } from "./file-scope";
++import { filesKey } from "./file-reader";
++import { useFileMetadataAttempt } from "./metadata-attempt";
++import { reviewFileMetadata, saveFileMetadata } from "./metadata-actions";
++
++type MetadataState = {
++  scope: string;
++  pending?: boolean;
++  error?: Error;
++  current?: Awaited<ReturnType<typeof reviewFileMetadata>>;
++  draft?: FileMetadataChange;
++};
++export function useFileMetadataChange(
++  clientId: string,
++  id: string,
++  onSaved: () => void,
++) {
++  const api = useApi();
++  const cache = useQueryClient();
++  const scope = useFileScope(clientId, `metadata:${id}`);
++  const { attempt } = useFileMetadataAttempt(clientId, id);
++  const operation = useRef<FileExecution | null>(null);
++  const [state, setState] = useState<MetadataState>();
++  const visible = state?.scope === scope.key ? state : undefined;
++  async function run(change?: FileMetadataChange) {
++    if (operation.current && !operation.current.signal.aborted) return;
++    let execution: FileExecution | undefined;
++    try {
++      execution = scope.capture(Boolean(change));
++      operation.current = execution;
++      const draft = change ?? attempt?.change;
++      setState({ scope: scope.key, pending: true, draft });
++      if (!change) {
++        const current = await reviewFileMetadata(
++          api,
++          cache,
++          clientId,
++          id,
++          execution,
++        );
++        setState({ scope: scope.key, current, draft });
++        return;
++      }
++      await saveFileMetadata(api, cache, clientId, id, change, execution);
++      await Promise.all([
++        cache.invalidateQueries({ queryKey: filesKey(clientId) }),
++        cache.invalidateQueries({ queryKey: ["file-access", clientId, id] }),
++      ]);
++      execution.guard();
++      setState({ scope: scope.key });
++      onSaved();
++    } catch (error) {
++      if (!execution?.signal.aborted)
++        setState({
++          scope: scope.key,
++          draft: change ?? attempt?.change,
++          error:
++            error instanceof Error
++              ? error
++              : new Error("The file change could not be confirmed."),
++        });
++    } finally {
++      if (operation.current === execution) operation.current = null;
++    }
++  }
++  return {
++    attempt,
++    draft: visible?.draft ?? attempt?.change,
++    error: visible?.error,
++    current: visible?.current,
++    isPending: Boolean(visible?.pending) || attempt?.status === "pending",
++    blocked: !scope.canWrite || Boolean(visible?.pending) || Boolean(attempt),
++    canReview:
++      scope.canRead && !visible?.pending && attempt?.status === "unknown",
++    mutate: (change: FileMetadataChange) => void run(change),
++    review: () => void run(),
++  };
++}
+diff --git a/apps/web/tests/browser/files-metadata-receipts.spec.ts b/apps/web/tests/browser/files-metadata-receipts.spec.ts
+new file mode 100644
+index 0000000..77d6638
+--- /dev/null
++++ b/apps/web/tests/browser/files-metadata-receipts.spec.ts
+@@ -0,0 +1,411 @@
++import { expect, test, type Page } from "@playwright/test";
++import { installFixtures, json, clientId, client, file } from "./fixtures";
++import {
++  changeDocumentView,
++  holdResponse,
++  installDocumentFixtures,
++  nativeFile,
++  settleDocumentRequests,
++} from "./capability-documents-fixtures";
++
++async function openAccess(page: Page, name = file.fileName) {
++  await page.getByRole("button", { name: `Actions for ${name}` }).click();
++  await page
++    .getByRole("menuitem", { name: "Manage access", exact: true })
++    .click();
++  const dialog = page.getByRole("dialog", {
++    name: `Access: ${name}`,
++    exact: true,
++  });
++  await expect(
++    dialog.getByRole("radio", { name: "All team members" }),
++  ).toBeVisible();
++  return dialog;
++}
++
++test("conflicting ACL receipt retains the draft and freezes repeat save until current GET review", async ({
++  page,
++}, info) => {
++  const unexpected = await installFixtures(page);
++  let patches = 0;
++  let reads = 0;
++  await page.route("**/engagement/attachments?**", (r) => json(r, [file]));
++  await page.route(`**/files/${file.id}/access`, (r) => {
++    if (r.request().method() === "GET") {
++      reads++;
++      return json(r, file);
++    }
++    patches++;
++    expect(r.request().postDataJSON()).toEqual({
++      viewerMode: "restricted",
++      viewerUserIds: [],
++    });
++    return json(
++      r,
++      patches === 1 ? file : { ...file, viewerMode: "restricted" },
++    );
++  });
++  await page.goto(`/portfolio/${clientId}/files`);
++  const dialog = await openAccess(page);
++  await dialog.getByRole("radio", { name: "Specific people" }).check();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog.getByRole("alert")).toContainText("unexpected response");
++  await expect(
++    dialog.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  await expect(
++    dialog.getByRole("button", { name: "Save access" }),
++  ).toBeDisabled();
++  await expect(dialog.getByText(/save outcome is unknown/i)).toBeVisible();
++  await page.screenshot({ path: info.outputPath("conflicting-acl.png") });
++  const priorReads = reads;
++  await dialog.getByRole("button", { name: "Review current file" }).click();
++  await expect.poll(() => reads).toBeGreaterThan(priorReads);
++  await expect(
++    dialog.getByText(/Current saved access: All team members/),
++  ).toBeVisible();
++  await expect(
++    dialog.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  await expect(
++    dialog.getByRole("button", { name: "Save access" }),
++  ).toBeEnabled();
++  expect(patches).toBe(1);
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog).toHaveCount(0);
++  expect(patches).toBe(2);
++  expect(unexpected).toEqual([]);
++});
++
++test("a matching reordered restricted viewer set completes the save", async ({
++  page,
++}) => {
++  const unexpected = await installFixtures(page);
++  const ids = [
++    "00000000-0000-4000-8000-000000000001",
++    "00000000-0000-4000-8000-000000000002",
++  ];
++  let saved = false;
++  await page.route("**/core/client-account-owners/options", (r) =>
++    json(
++      r,
++      ids.map((id, index) => ({
++        id,
++        email: `viewer${index}@example.test`,
++        firstName: `Viewer ${index}`,
++        lastName: "Test",
++      })),
++    ),
++  );
++  await page.route("**/engagement/attachments?**", (r) =>
++    json(r, [
++      saved ? { ...file, viewerMode: "restricted", viewerUserIds: ids } : file,
++    ]),
++  );
++  await page.route(`**/files/${file.id}/access`, (r) => {
++    if (r.request().method() === "GET")
++      return json(
++        r,
++        saved
++          ? { ...file, viewerMode: "restricted", viewerUserIds: ids }
++          : file,
++      );
++    expect(r.request().postDataJSON()).toEqual({
++      viewerMode: "restricted",
++      viewerUserIds: ids,
++    });
++    saved = true;
++    return json(r, {
++      ...file,
++      viewerMode: "restricted",
++      viewerUserIds: [...ids].reverse(),
++    });
++  });
++  await page.goto(`/portfolio/${clientId}/files`);
++  const dialog = await openAccess(page);
++  await dialog.getByRole("radio", { name: "Specific people" }).check();
++  await dialog.getByRole("checkbox", { name: /Viewer 0 Test/ }).check();
++  await dialog.getByRole("checkbox", { name: /Viewer 1 Test/ }).check();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog).toHaveCount(0);
++  expect(saved).toBe(true);
++  expect(unexpected).toEqual([]);
++});
++
++test("a definite access rejection retains an editable draft", async ({
++  page,
++}) => {
++  const unexpected = await installFixtures(page);
++  await page.route("**/engagement/attachments?**", (r) => json(r, [file]));
++  await page.route(`**/files/${file.id}/access`, (r) =>
++    r.request().method() === "GET"
++      ? json(r, file)
++      : json(r, { message: "Synthetic invalid viewer" }, 422),
++  );
++  await page.goto(`/portfolio/${clientId}/files`);
++  const dialog = await openAccess(page);
++  await dialog.getByRole("radio", { name: "Specific people" }).check();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog.getByRole("alert")).toContainText(
++    "Synthetic invalid viewer",
++  );
++  await expect(
++    dialog.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  await expect(
++    dialog.getByRole("button", { name: "Save access" }),
++  ).toBeEnabled();
++  await expect(
++    dialog.getByRole("button", { name: "Review current file" }),
++  ).toHaveCount(0);
++  expect(unexpected).toEqual([]);
++});
++
++for (const boundary of ["actor", "client", "unmount"] as const) {
++  test(`a matching PATCH completing after ${boundary} replacement cannot close or update the replacement view`, async ({
++    page,
++  }) => {
++    const unexpected = await installDocumentFixtures(page);
++    await page.route(
++      "**/core/clients/10000000-0000-4000-8000-000000000002",
++      (r) => json(r, { ...client, id: "10000000-0000-4000-8000-000000000002" }),
++    );
++    await page.route(`**/files/${nativeFile.id}/access`, (r) =>
++      json(r, nativeFile),
++    );
++    await page.goto("/capability-documents.html?files");
++    const dialog = await openAccess(page, nativeFile.fileName);
++    const held = await holdResponse(
++      page,
++      `**/files/${nativeFile.id}/access`,
++      "PATCH",
++      { ...nativeFile, viewerMode: "restricted" },
++    );
++    try {
++      await dialog.getByRole("radio", { name: "Specific people" }).check();
++      await dialog.getByRole("button", { name: "Save access" }).click();
++      await held.started;
++      await changeDocumentView(page, boundary);
++      await expect(dialog).toHaveCount(0);
++    } finally {
++      held.release();
++    }
++    await held.settled;
++    await settleDocumentRequests(page);
++    expect(held.calls()).toBe(1);
++    await expect(page.getByText(/Current saved access:/)).toHaveCount(0);
++    if (boundary === "actor") {
++      await changeDocumentView(page, "restore-actor");
++      const reopened = await openAccess(page, nativeFile.fileName);
++      await expect(
++        reopened.getByRole("radio", { name: "Specific people" }),
++      ).toBeChecked();
++      await expect(
++        reopened.getByRole("button", { name: "Save access" }),
++      ).toBeDisabled();
++      await expect(
++        reopened.getByRole("button", { name: "Review current file" }),
++      ).toBeEnabled();
++    }
++    expect(unexpected).toEqual([]);
++  });
++}
++
++test("a review completing after actor replacement cannot clear the original unknown save", async ({
++  page,
++}) => {
++  const unexpected = await installDocumentFixtures(page);
++  await page.route(`**/files/${nativeFile.id}/access`, (r) =>
++    json(r, nativeFile),
++  );
++  await page.goto("/capability-documents.html?files");
++  const dialog = await openAccess(page, nativeFile.fileName);
++  await dialog.getByRole("radio", { name: "Specific people" }).check();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog.getByText(/save outcome is unknown/i)).toBeVisible();
++  const held = await holdResponse(
++    page,
++    `**/files/${nativeFile.id}/access`,
++    "GET",
++    nativeFile,
++  );
++  try {
++    await dialog.getByRole("button", { name: "Review current file" }).click();
++    await held.started;
++    await changeDocumentView(page, "actor");
++    await expect(dialog).toHaveCount(0);
++  } finally {
++    held.release();
++  }
++  await held.settled;
++  await settleDocumentRequests(page);
++  await changeDocumentView(page, "restore-actor");
++  const reopened = await openAccess(page, nativeFile.fileName);
++  await expect(
++    reopened.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  await expect(
++    reopened.getByRole("button", { name: "Save access" }),
++  ).toBeDisabled();
++  await expect(
++    reopened.getByRole("button", { name: "Review current file" }),
++  ).toBeEnabled();
++  expect(unexpected).toEqual([]);
++});
++
++test("an unknown draft can recover even when the reopened access query fails", async ({
++  page,
++}) => {
++  const unexpected = await installDocumentFixtures(page);
++  let failReads = false;
++  let writes = 0;
++  await page.route(`**/files/${nativeFile.id}/access`, (r) => {
++    if (r.request().method() === "GET")
++      return failReads
++        ? json(r, { message: "Synthetic read failure" }, 503)
++        : json(r, nativeFile);
++    writes++;
++    return json(
++      r,
++      writes === 1 ? nativeFile : { ...nativeFile, viewerMode: "restricted" },
++    );
++  });
++  await page.goto("/capability-documents.html?files");
++  let dialog = await openAccess(page, nativeFile.fileName);
++  await dialog.getByRole("radio", { name: "Specific people" }).check();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog.getByText(/save outcome is unknown/i)).toBeVisible();
++  await dialog.getByRole("button", { name: "Close", exact: true }).click();
++  failReads = true;
++  await changeDocumentView(page, "actor");
++  await settleDocumentRequests(page);
++  await changeDocumentView(page, "restore-actor");
++  dialog = await openAccess(page, nativeFile.fileName);
++  await expect(dialog.getByRole("alert")).toContainText(
++    "Synthetic read failure",
++  );
++  await expect(
++    dialog.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  failReads = false;
++  await dialog.getByRole("button", { name: "Review current file" }).click();
++  await expect(
++    dialog.getByText(/Current saved access: All team members/),
++  ).toBeVisible();
++  await expect(
++    dialog.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  await expect(
++    dialog.getByRole("button", { name: "Save access" }),
++  ).toBeEnabled();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog).toHaveCount(0);
++  expect(writes).toBe(2);
++  expect(unexpected).toEqual([]);
++});
++
++test("reopening access as another reader requests that reader's current ACL", async ({
++  page,
++}) => {
++  const unexpected = await installDocumentFixtures(page);
++  let reads = 0;
++  await page.route(`**/files/${nativeFile.id}/access`, (r) => {
++    reads++;
++    return json(
++      r,
++      reads === 1 ? nativeFile : { ...nativeFile, viewerMode: "restricted" },
++    );
++  });
++  await page.goto("/capability-documents.html?files");
++  const original = await openAccess(page, nativeFile.fileName);
++  await expect(
++    original.getByRole("radio", { name: "All team members" }),
++  ).toBeChecked();
++  await original.getByRole("button", { name: "Close", exact: true }).click();
++  await changeDocumentView(page, "actor");
++  const current = await openAccess(page, nativeFile.fileName);
++  await expect(
++    current.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  expect(reads).toBe(2);
++  expect(unexpected).toEqual([]);
++});
++
++test("a contradictory folder receipt keeps the requested folder and needs current review", async ({
++  page,
++}) => {
++  const unexpected = await installFixtures(page);
++  let patches = 0;
++  await page.route("**/engagement/attachments?**", (r) => json(r, [file]));
++  await page.route(`**/files/${file.id}/access`, (r) => json(r, file));
++  await page.route(`**/files/${file.id}/folder`, (r) => {
++    patches++;
++    return json(r, file);
++  });
++  await page.goto(`/portfolio/${clientId}/files`);
++  await page.getByRole("checkbox", { name: `Select ${file.fileName}` }).check();
++  await page.getByRole("button", { name: "New folder", exact: true }).click();
++  const dialog = page.getByRole("dialog", { name: "New folder", exact: true });
++  await dialog.getByLabel("Folder name").fill("Reviewed destination");
++  await dialog
++    .getByRole("button", { name: "Create folder & move file" })
++    .click();
++  await expect(dialog.getByRole("alert")).toContainText("unexpected response");
++  await expect(dialog.getByLabel("Folder name")).toHaveValue(
++    "Reviewed destination",
++  );
++  await expect(
++    dialog.getByRole("button", { name: "Create folder & move file" }),
++  ).toBeDisabled();
++  await dialog.getByRole("button", { name: "Review current file" }).click();
++  await expect(dialog.getByText("Current saved folder: Reports")).toBeVisible();
++  await expect(dialog.getByLabel("Folder name")).toHaveValue(
++    "Reviewed destination",
++  );
++  await expect(
++    dialog.getByRole("button", { name: "Create folder & move file" }),
++  ).toBeEnabled();
++  expect(patches).toBe(1);
++  expect(unexpected).toEqual([]);
++});
++
++test("unknown ACL save survives close/reopen and a failed review does not thaw it", async ({
++  page,
++}) => {
++  await installFixtures(page);
++  let patches = 0;
++  let refuseRead = false;
++  await page.route("**/engagement/attachments?**", (r) => json(r, [file]));
++  await page.route(`**/files/${file.id}/access`, (r) => {
++    if (r.request().method() === "GET")
++      return refuseRead
++        ? json(r, { message: "Synthetic review unavailable" }, 503)
++        : json(r, file);
++    patches++;
++    return json(r, { message: "Synthetic ambiguous patch" }, 503);
++  });
++  await page.goto(`/portfolio/${clientId}/files`);
++  let dialog = await openAccess(page);
++  await dialog.getByRole("radio", { name: "Specific people" }).check();
++  await dialog.getByRole("button", { name: "Save access" }).click();
++  await expect(dialog.getByRole("alert")).toContainText(
++    "Synthetic ambiguous patch",
++  );
++  await dialog.getByRole("button", { name: "Close", exact: true }).click();
++  dialog = await openAccess(page);
++  await expect(
++    dialog.getByRole("radio", { name: "Specific people" }),
++  ).toBeChecked();
++  await expect(
++    dialog.getByRole("button", { name: "Save access" }),
++  ).toBeDisabled();
++  refuseRead = true;
++  await dialog.getByRole("button", { name: "Review current file" }).click();
++  await expect(
++    dialog.getByText("Synthetic review unavailable", { exact: false }),
++  ).toBeVisible();
++  await expect(
++    dialog.getByRole("button", { name: "Save access" }),
++  ).toBeDisabled();
++  expect(patches).toBe(1);
++});
+diff --git a/apps/web/tests/files-metadata-actions.test.ts b/apps/web/tests/files-metadata-actions.test.ts
+new file mode 100644
+index 0000000..3e13da9
+--- /dev/null
++++ b/apps/web/tests/files-metadata-actions.test.ts
+@@ -0,0 +1,184 @@
++import { QueryClient } from "@tanstack/react-query";
++import { describe, expect, it, vi } from "vitest";
++import { ApiError, createApiClient } from "../src/shared/portfolio/api/http";
++import { assertClientWriter } from "../src/shared/portfolio/auth/client-writer";
++import {
++  assertFileReader,
++  currentFileReader,
++  currentFilesKey,
++} from "../src/features/portfolio/files/file-reader";
++import {
++  reviewFileMetadata,
++  saveFileMetadata,
++} from "../src/features/portfolio/files/metadata-actions";
++import { fileMetadataAttemptKey } from "../src/features/portfolio/files/metadata-attempt";
++import { clientId, file } from "./browser/fixtures";
++
++const restricted = {
++  kind: "access",
++  viewerMode: "restricted",
++  viewerUserIds: [],
++} as const;
++const change = () => ({ ...restricted, viewerUserIds: [] });
++const receipt = { ...file, viewerMode: "restricted" };
++function setup(
++  respond: (options?: RequestInit) => Response | Promise<Response>,
++) {
++  const cache = new QueryClient({
++    defaultOptions: { queries: { retry: false } },
++  });
++  cache.setQueryData(["identity"], {
++    user: { id: "user-test", email: "synthetic@example.test" },
++    tenant: { id: "tenant-test", name: "Synthetic tenant" },
++    role: "standard_user",
++  });
++  cache.setQueryData(currentFilesKey(cache, clientId), [file]);
++  const actor = currentFileReader(cache)!;
++  const controller = new AbortController();
++  const execution = {
++    actor,
++    signal: controller.signal,
++    guard() {
++      controller.signal.throwIfAborted();
++      assertFileReader(cache, actor);
++      assertClientWriter(cache, actor);
++    },
++  };
++  const fetcher = vi.fn((_url: RequestInfo | URL, options?: RequestInit) =>
++    Promise.resolve(respond(options)),
++  );
++  const api = createApiClient(fetcher);
++  const key = fileMetadataAttemptKey(clientId, file.id, actor);
++  return {
++    cache,
++    execution,
++    controller,
++    fetcher,
++    api,
++    key,
++    save: () =>
++      saveFileMetadata(api, cache, clientId, file.id, change(), execution),
++    review: () => reviewFileMetadata(api, cache, clientId, file.id, execution),
++  };
++}
++const json = (value: unknown, status = 200) =>
++  new Response(JSON.stringify(value), { status });
++
++describe("single-file metadata write lifetime and review", () => {
++  it("freezes a contradictory receipt; only explicit current GET review permits a deliberate new save", async () => {
++    let current = file;
++    let confirmed = false;
++    const state = setup((options) =>
++      json(options?.method === "PATCH" && confirmed ? receipt : current),
++    );
++    await expect(state.save()).rejects.toMatchObject({ status: 502 });
++    expect(state.cache.getQueryData(state.key)).toMatchObject({
++      status: "unknown",
++      change: change(),
++    });
++    await expect(state.save()).rejects.toMatchObject({ status: 409 });
++    expect(state.fetcher).toHaveBeenCalledTimes(1);
++    current = { ...file, id: "00000000-0000-4000-8000-000000000099" };
++    await expect(state.review()).rejects.toMatchObject({ status: 502 });
++    expect(state.cache.getQueryData(state.key)).toMatchObject({
++      status: "unknown",
++    });
++    current = file;
++    await expect(state.review()).resolves.toMatchObject({ viewerMode: "all" });
++    expect(state.cache.getQueryData(state.key)).toBeNull();
++    confirmed = true;
++    await expect(state.save()).resolves.toMatchObject({
++      viewerMode: "restricted",
++    });
++    expect(
++      state.fetcher.mock.calls.map(([, options]) => options?.method ?? "GET"),
++    ).toEqual(["PATCH", "GET", "GET", "PATCH"]);
++  });
++  it("permits correction after an explicit native rejection", async () => {
++    let reject = true;
++    const state = setup(() =>
++      reject ? json({ message: "Invalid member" }, 422) : json(receipt),
++    );
++    await expect(state.save()).rejects.toMatchObject({ status: 422 });
++    expect(state.cache.getQueryData(state.key)).toBeNull();
++    reject = false;
++    await expect(state.save()).resolves.toMatchObject({
++      viewerMode: "restricted",
++    });
++    expect(state.fetcher).toHaveBeenCalledTimes(2);
++  });
++  it("blocks double dispatch while the first PATCH is pending", async () => {
++    let release!: (response: Response) => void;
++    const state = setup(
++      () =>
++        new Promise((resolve) => {
++          release = resolve;
++        }),
++    );
++    const first = state.save();
++    await expect(state.save()).rejects.toMatchObject({ status: 409 });
++    await expect(state.review()).rejects.toMatchObject({ status: 409 });
++    expect(state.fetcher).toHaveBeenCalledTimes(1);
++    release(json(receipt));
++    await first;
++  });
++  it.each(["actor", "abort"])(
++    "does not accept a late matching PATCH after %s replacement",
++    async (boundary) => {
++      let release!: (response: Response) => void;
++      const state = setup(
++        () =>
++          new Promise((resolve) => {
++            release = resolve;
++          }),
++      );
++      const first = state.save();
++      if (boundary === "abort") state.controller.abort();
++      else
++        state.cache.setQueryData(["identity"], {
++          user: { id: "another-user", email: "synthetic@example.test" },
++          tenant: { id: "tenant-test", name: "Synthetic tenant" },
++          role: "standard_user",
++        });
++      release(json(receipt));
++      await expect(first).rejects.toBeInstanceOf(Error);
++      expect(state.cache.getQueryData(state.key)).toMatchObject({
++        status: "unknown",
++        change: change(),
++      });
++      expect(
++        state.cache.getQueryData(
++          fileMetadataAttemptKey(clientId, file.id, {
++            userId: "another-user",
++            tenantId: "tenant-test",
++          }),
++        ),
++      ).toBeUndefined();
++    },
++  );
++  it("does not release uncertainty from a GET completing after the view is replaced", async () => {
++    let release!: (response: Response) => void;
++    const state = setup((options) =>
++      options?.method === "PATCH"
++        ? json(file)
++        : new Promise((resolve) => {
++            release = resolve;
++          }),
++    );
++    await expect(state.save()).rejects.toBeInstanceOf(ApiError);
++    const review = state.review();
++    state.controller.abort();
++    release(json(receipt));
++    await expect(review).rejects.toBeInstanceOf(Error);
++    expect(state.cache.getQueryData(state.key)).toMatchObject({
++      status: "unknown",
++    });
++  });
++  it("does not dispatch a file missing from the current client collection", async () => {
++    const state = setup(() => json(receipt));
++    state.cache.setQueryData(currentFilesKey(state.cache, clientId), []);
++    await expect(state.save()).rejects.toMatchObject({ status: 409 });
++    expect(state.fetcher).not.toHaveBeenCalled();
++    expect(state.cache.getQueryData(state.key)).toBeUndefined();
++  });
++});
+diff --git a/apps/web/tests/files-metadata-receipts.test.ts b/apps/web/tests/files-metadata-receipts.test.ts
+new file mode 100644
+index 0000000..3d504e8
+--- /dev/null
++++ b/apps/web/tests/files-metadata-receipts.test.ts
+@@ -0,0 +1,80 @@
++import { describe, expect, it } from "vitest";
++import { fileChangeForIdSchema } from "../src/features/portfolio/files/contracts";
++import { file } from "./browser/fixtures";
++
++describe("reviewed single-file metadata receipts", () => {
++  it("rejects a same-file receipt that did not restrict access", () => {
++    const schema = fileChangeForIdSchema(file.id, {
++      kind: "access",
++      viewerMode: "restricted",
++      viewerUserIds: [],
++    });
++    expect(schema.safeParse(file).success).toBe(false);
++  });
++  it("requires the exact restricted viewer set, rejecting missing and extra viewers", () => {
++    const schema = fileChangeForIdSchema(file.id, {
++      kind: "access",
++      viewerMode: "restricted",
++      viewerUserIds: ["viewer-a", "viewer-b"],
++    });
++    for (const ids of [["viewer-a"], ["viewer-a", "viewer-b", "viewer-c"]])
++      expect(
++        schema.safeParse({
++          ...file,
++          viewerMode: "restricted",
++          viewerUserIds: ids,
++        }).success,
++      ).toBe(false);
++  });
++  it("compares normalized viewer sets independently of order", () => {
++    const schema = fileChangeForIdSchema(file.id, {
++      kind: "access",
++      viewerMode: "restricted",
++      viewerUserIds: [" viewer-b ", "viewer-a", "viewer-a", " "],
++    });
++    expect(
++      schema.safeParse({
++        ...file,
++        viewerMode: "restricted",
++        viewerUserIds: ["viewer-a", "viewer-b"],
++      }).success,
++    ).toBe(true);
++  });
++  it("compares all-mode semantically while still requiring its returned mode", () => {
++    const schema = fileChangeForIdSchema(file.id, {
++      kind: "access",
++      viewerMode: "all",
++      viewerUserIds: ["prior-viewer"],
++    });
++    expect(schema.safeParse(file).success).toBe(true);
++    expect(
++      schema.safeParse({ ...file, viewerMode: "restricted", viewerUserIds: [] })
++        .success,
++    ).toBe(false);
++  });
++  it("rejects an unchanged folder and accepts native normalized folder or unfiled", () => {
++    const schema = fileChangeForIdSchema(file.id, {
++      kind: "move",
++      folder: "  Reviewed destination  ",
++    });
++    expect(schema.safeParse(file).success).toBe(false);
++    expect(
++      schema.safeParse({ ...file, folder: "Reviewed destination" }).success,
++    ).toBe(true);
++    expect(
++      fileChangeForIdSchema(file.id, { kind: "move", folder: " " }).safeParse({
++        ...file,
++        folder: null,
++      }).success,
++    ).toBe(true);
++  });
++  it("keeps receipt identity binding even when the effect matches", () => {
++    expect(
++      fileChangeForIdSchema(file.id, {
++        kind: "move",
++        folder: "Reports",
++      }).safeParse({ ...file, id: "60000000-0000-4000-8000-000000000009" })
++        .success,
++    ).toBe(false);
++  });
++});

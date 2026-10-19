@@ -1,0 +1,81 @@
+{
+  "source": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+  "completedUTC": "2026-10-13T08:47:31.508536+00:00",
+  "status": "offline-gates-completed-with-documented-infrastructure-recovery",
+  "portfolio": {
+    "uniqueSuccessfulCoverage": 1139,
+    "firstAttemptPassed": 1138,
+    "originalEnospcFailures": 1,
+    "successfulCaseReruns": 1,
+    "zeroTestSelectorAttempts": 1
+  },
+  "otherBrowserPassed": 297,
+  "receipts": [
+    {
+      "file": "actual-additions-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "build-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "check-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "clean-install-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "elements-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "modules-browser-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "portfolio-discovery-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "portfolio-enospc-case-rerun-exit.json",
+      "exitCode": 1
+    },
+    {
+      "file": "portfolio-enospc-case-rerun-v2-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "portfolio-shard-1-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "portfolio-shard-2-exit.json",
+      "exitCode": 1
+    },
+    {
+      "file": "portfolio-shard-3-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "portfolio-shard-4-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "production-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "public-newsletter-browser-exit.json",
+      "exitCode": 0
+    },
+    {
+      "file": "served-newsletter-assets-exit.json",
+      "exitCode": 0
+    }
+  ],
+  "scope": "Offline combined gates on unchanged83; not native,337-row acceptance,full Figma/AT,musl image or deployment qualification."
+}

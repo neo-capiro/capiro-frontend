@@ -1,0 +1,74 @@
+"use client";
+
+import { ScopedLink } from "./ScopedLink";
+import { useRef, useState } from "react";
+import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
+import styles from "./module-shell.module.css";
+import { ModuleAsset } from "./ModuleAsset";
+
+export function ModuleNavigation({
+  active,
+  readOnlyPreview = false,
+}: {
+  active?: ModuleSlug | "hub";
+  readOnlyPreview?: boolean;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  return (
+    <>
+      <button
+        type="button"
+        ref={toggle}
+        className={styles.mobileNavToggle}
+        aria-expanded={expanded}
+        aria-controls="module-navigation"
+        onClick={() => setExpanded(!expanded)}
+      >
+        Modules menu
+      </button>
+      <aside
+        className={`${styles.navigation} ${expanded ? styles.expanded : ""}`}
+        id="module-navigation"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            setExpanded(false);
+            toggle.current?.focus();
+          }
+        }}
+      >
+        <p className={styles.navEyebrow}>Modules</p>
+        <nav aria-label="Modules">
+          <ScopedLink
+            href="/modules"
+            onClick={() => setExpanded(false)}
+            className={active === "hub" ? styles.current : ""}
+            aria-current={active === "hub" ? "page" : undefined}
+          >
+            <ModuleAsset name="modules" />
+            <span>Module hub</span>
+          </ScopedLink>
+          {!readOnlyPreview &&
+            moduleCatalog.map((item) => (
+              <ScopedLink
+                key={item.slug}
+                href={moduleHref(item.slug)}
+                className={active === item.slug ? styles.current : ""}
+                aria-current={active === item.slug ? "page" : undefined}
+                onClick={() => setExpanded(false)}
+              >
+                <ModuleAsset name={item.icon} />
+                <span>{item.label}</span>
+              </ScopedLink>
+            ))}
+        </nav>
+        {!readOnlyPreview && (
+          <ScopedLink href="/settings/personal" className={styles.settings}>
+            <ModuleAsset name="settings" />
+            <span>Settings</span>
+          </ScopedLink>
+        )}
+      </aside>
+    </>
+  );
+}

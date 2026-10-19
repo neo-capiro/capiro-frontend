@@ -1,0 +1,77 @@
+{
+  "archive": {
+    "originalLogicalRoot": "/workspace/capiro-unified-elements-files-corrected-20261013",
+    "archive": "/tmp/capiro-preserved-elements-files-corrected-20261013.tar.gz",
+    "archiveRootMember": "capiro-unified-elements-files-corrected-20261013",
+    "archiveBytes": 23856291,
+    "archiveSha256": "e5ba33b37ca7e06e31d5e19fede44b9a54a18fb59dd7b54255b075eb88d4a552",
+    "verificationReceipt": "/workspace/capiro-final-storage-files-elements-20261013/archive-verification.json",
+    "access": "Preserved archive and exact inventory; extract only to a new empty owned destination if later needed. No current runtime or borrowed dependencies were traversed or changed."
+  },
+  "archiveRehashed": true,
+  "storageManifestMembersVerified": 15,
+  "archiveMembersReadAndVerified": 94,
+  "regularFileBytesVerified": 86234584,
+  "extractedFiles": 0,
+  "symlinksNotFollowed": true,
+  "qualifiedReceipt": {
+    "receiptPath": "/workspace/capiro-unified-elements-files-corrected-20261013/ssr/receipt.json",
+    "expectedSha256": "3a287cadf49b09f9275ac05c6a9f5f45cae3b180e13e0e2e09b1ba92f0bd0ff3",
+    "bundleBytes": 20518628,
+    "inputCount": 2807,
+    "dependencyRecords": 3155
+  },
+  "runtimeProcess": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-onboard-execution-20261013/packages/qualification-elements/ssr-runtime.mjs",
+      "/workspace/capiro-unified-elements-files-corrected-20261013/ssr/receipt.json",
+      "3a287cadf49b09f9275ac05c6a9f5f45cae3b180e13e0e2e09b1ba92f0bd0ff3"
+    ],
+    "cwd": "/tmp/capiro-onboard-execution-20261013/packages/qualification-elements",
+    "environment": {
+      "PATH": "/tmp/capiro-onboard-execution-20261013/packages/qualification-elements/node_modules/.bin:/tmp/capiro-onboard-execution-20261013/packages/node_modules/.bin:/tmp/capiro-onboard-execution-20261013/node_modules/.bin:/tmp/node_modules/.bin:/node_modules/.bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/tmp/capiro-onboard-execution-20261013/packages/qualification-elements/node_modules/.bin:/tmp/capiro-onboard-execution-20261013/packages/node_modules/.bin:/tmp/capiro-onboard-execution-20261013/node_modules/.bin:/tmp/node_modules/.bin:/node_modules/.bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/tmp/capiro-onboard-execution-20261013/node_modules/.bin:/tmp/node_modules/.bin:/node_modules/.bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback",
+      "SystemRoot": "",
+      "NODE_ENV": "production",
+      "TZ": "UTC",
+      "NODE_DISABLE_COMPILE_CACHE": "1"
+    },
+    "startUtc": "2026-10-13T09:45:01.520Z",
+    "endUtc": "2026-10-13T09:45:02.225Z",
+    "durationMs": 705.1186030000001,
+    "timeoutMs": 25000,
+    "maxBuffer": 524288,
+    "status": 0,
+    "signal": null,
+    "error": null,
+    "shell": false,
+    "streams": {
+      "stdout": {
+        "bytes": 168952,
+        "sha256": "6e804aa18c23d76c4063aa2d7b66c75b5d65d3c4f6e7ee1e7b69ae469e0c453b"
+      },
+      "stderr": {
+        "bytes": 644,
+        "sha256": "a159aadc9dbc35a176421387845d100aa49928be13e7c61b0e5ac804e1ce0d66"
+      }
+    }
+  },
+  "receiptKeys": [
+    "schema",
+    "scope",
+    "node",
+    "tool",
+    "entry",
+    "sources",
+    "inputs",
+    "dependencies",
+    "outputs",
+    "externalImports",
+    "discovery",
+    "build",
+    "resolverMetadataRecords"
+  ],
+  "receiptSHA256": "3a287cadf49b09f9275ac05c6a9f5f45cae3b180e13e0e2e09b1ba92f0bd0ff3",
+  "storageManifestSha256": "f4ee7a62323e3ed084d13f50dc2ed3a922cf3bed22ace7d6fa7a66504018187a",
+  "storageVerificationSha256": "aaa7ef981e76ab05cb07042f03cf8e9ae94d927b6d4bc1aac50729c3b1042747"
+}

@@ -1,0 +1,11 @@
+{
+  "head": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "files": {
+    "apps/web/src/features/portfolio/files/ProspectFiles.tsx": "74ba6db95df2864f978403a2e3a38a5c87028abbb83c94327a69f337ffeacdc1",
+    "apps/web/tests/browser/prospect-files-local-search.spec.ts": "e941e878b32fe0c726bf2d13d24ecd3f0f6d53af5259d0083bf1e5e2157c2508",
+    "apps/web/tests/browser/server.mjs": "eedc3911d74e8159d105b2bea55c07ac935b05c90f71292b0138a00c6efae420"
+  },
+  "sourceMatchesBaseline": true,
+  "port": 5299,
+  "adaptation": "External copy resolves its imports/app to this worktree because of relocation; sole runtime behavior change is test server port5191\u21925299. Synthetic destinations in production/harness source are unchanged and cross-port requests are blocked by new tests."
+}

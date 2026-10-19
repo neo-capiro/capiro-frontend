@@ -1,0 +1,32 @@
+version: 0.2
+env:
+  shell: bash
+phases:
+  install:
+    runtime-versions:
+      nodejs: 24
+    commands:
+      - set -euo pipefail
+      - node --version
+      - npm --version
+      - npm ci --ignore-scripts --no-audit --no-fund
+      - npm exec --workspace @capiro/web -- playwright install --with-deps chromium
+  build:
+    commands:
+      - set -euo pipefail
+      - test -n "${EXPECTED_SHA:-}"
+      - test "$(cat source-commit.txt)" = "$EXPECTED_SHA"
+      - test "$CODEBUILD_SOURCE_VERSION" = "$EXPECTED_S3_VERSION"
+      - npm run check
+      - node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"
+      - npm run test:browser:modules --workspace @capiro/web -- --grep 'unknown Meri input|a finished run accepts|Stop requests|a foreign native actor|an uncertain reserved-turn|navigation keeps the uncertain|selected conversation reload|cited-answer uses|document workspace reuses|synthetic partial history|synthetic lost reservation|synthetic desktop held admission|synthetic desktop interrupted initial|synthetic desktop hard reload'
+      - npm run test:browser -- --workers=3 tests/browser/facility-action-lifetime.spec.ts tests/browser/facility-map.spec.ts tests/browser/mail-rich-compose.spec.ts tests/browser/profile-current-state.spec.ts tests/browser/work-boundary.spec.ts tests/browser/work-documents.spec.ts
+      - npm run test:browser -- --workers=3
+      - npm run test:browser:modules
+      - npm run build
+      - npm run test:production
+      - docker build --pull --platform linux/amd64 -f apps/web/Dockerfile -t "$REPOSITORY_URI:$EXPECTED_SHA" .
+      - bash apps/web/deployment/portfolio/smoke.sh "$REPOSITORY_URI:$EXPECTED_SHA"
+      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "${REPOSITORY_URI%%/*}"
+      - docker push "$REPOSITORY_URI:$EXPECTED_SHA"
+      - aws ecr describe-images --repository-name capiro/portfolio-preview --image-ids "imageTag=$EXPECTED_SHA" --query 'imageDetails[0].{imageDigest:imageDigest,imageTags:imageTags,imageScanStatus:imageScanStatus}' --output json

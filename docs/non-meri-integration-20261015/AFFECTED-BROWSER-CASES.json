@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "applicationCheckpoint": "631c5952bbeb5fa163231facca5adf39ed34d86d",
+  "scope": "Only accepted PR53 Settings/comment, PR54Team and PR55meeting changed surfaces; targetLinux execution not implied",
+  "expectedCaseCount": 50,
+  "files": {
+    "desktop-detail-content.spec.ts": 1,
+    "engagement-team-workload.spec.ts": 2,
+    "meeting-detail-current.spec.ts": 14,
+    "planner-comments-formatting.spec.ts": 8,
+    "planner-markdown.spec.ts": 6,
+    "selected-meeting-desktop-parity.spec.ts": 4,
+    "settings-mutations.spec.ts": 11,
+    "unified-task-detail.spec.ts": 4
+  },
+  "idSetSHA256": "5fc066d005427e5fb034584b01b2d051cae232d6cdd25684665cc813f04e9b97",
+  "cases": [
+    {
+      "id": "39ebdd717d68f6bf55a9-0671a2b684eecd6bc571|",
+      "file": "desktop-detail-content.spec.ts",
+      "line": 196,
+      "title": "Desktop Engagement task denial leaves the independent office report readable"
+    },
+    {
+      "id": "f8bfe2682ec42963cd12-03a61be76b8d93a578dd|",
+      "file": "engagement-team-workload.spec.ts",
+      "line": 24,
+      "title": "Team groups only open follow-ups and preserves returned owners and overdue counts"
+    },
+    {
+      "id": "f8bfe2682ec42963cd12-61eb3b75fabbffd4f79e|",
+      "file": "engagement-team-workload.spec.ts",
+      "line": 97,
+      "title": "Team retains workload while member names load or fail and retries only the member read"
+    },
+    {
+      "id": "8480014ebeae5db125ca-04933dc4d4a0ad2a1c85|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 44,
+      "title": "MS06 baseline: current supplied link appears with safe external-link attributes"
+    },
+    {
+      "id": "8480014ebeae5db125ca-8dd833895b1c1cad7a29|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 56,
+      "title": "MS06 baseline: meetings retain selectable list beside current detail with Prep entry"
+    },
+    {
+      "id": "8480014ebeae5db125ca-8876ef8a2a82fa7dbec8|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 83,
+      "title": "MS06 absent preparation metadata is unavailable rather than a claimed empty collection"
+    },
+    {
+      "id": "8480014ebeae5db125ca-a3448ca079d5d9902aff|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: null"
+    },
+    {
+      "id": "8480014ebeae5db125ca-5242757b0904d5aadd24|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: "
+    },
+    {
+      "id": "8480014ebeae5db125ca-3be122ab14f5300ce4b5|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: javascript:alert(1)"
+    },
+    {
+      "id": "8480014ebeae5db125ca-58abc40675b823deac63|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: data:text/html,hello"
+    },
+    {
+      "id": "8480014ebeae5db125ca-9c1743e567c73ef75a8c|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: https://name:secret@meet.example.test/"
+    },
+    {
+      "id": "8480014ebeae5db125ca-c5fd509830f04a07fff4|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: //meet.example.test/alpha"
+    },
+    {
+      "id": "8480014ebeae5db125ca-cade961638ff74958614|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 123,
+      "title": "MS06 loading and denied detail never activate summary link or read its materials"
+    },
+    {
+      "id": "8480014ebeae5db125ca-be15e78288e5dedd84bb|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000002:30000000-0000-4000-8000-000000000001"
+    },
+    {
+      "id": "8480014ebeae5db125ca-085a4136d75a0fde585c|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000001:30000000-0000-4000-8000-000000000002"
+    },
+    {
+      "id": "8480014ebeae5db125ca-19c82c61bf4f8e338541|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 183,
+      "title": "MS06 replaced detail cannot publish its late link"
+    },
+    {
+      "id": "8480014ebeae5db125ca-2caa1907af5c677a85ac|",
+      "file": "meeting-detail-current.spec.ts",
+      "line": 239,
+      "title": "MS06 client replacement clears selection before a new list can expose the prior link"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-09ec03d21347e56ff0a5|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 74,
+      "title": "Desktop comment composer previews formatting and posts only the existing kind/text contract"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-582e145e9501cc0ba675|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 147,
+      "title": "Desktop stored comments remain literal until explicit safe preview and other activity stays literal"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-1aa11ff047bea5d70f6a|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 204,
+      "title": "Desktop comment keyboard formatting retains selection and native undo without writes"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-444c4c4571c7a680c9e4|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 242,
+      "title": "Desktop formatted comment held success fences formatting and native duplicate submission"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-31ac268b485f87d1957d|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 242,
+      "title": "Desktop formatted comment held refusal fences formatting and native duplicate submission"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-39e6a50341da5eb9486c|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 306,
+      "title": "Desktop receipt replacement retires a held formatted comment before its late completion"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-597a2cd21b868ba99f60|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 349,
+      "title": "Desktop comment receipt replacement discards open and queued link drafts and respects viewer access"
+    },
+    {
+      "id": "1c2a9cde88f260cac370-26511ac236a33e726498|",
+      "file": "planner-comments-formatting.spec.ts",
+      "line": 398,
+      "title": "Desktop comment limit and empty preview validation never dispatch invalid comments"
+    },
+    {
+      "id": "2934dd0b83188b49704a-d6fcf6f3ae0950568b2b|",
+      "file": "planner-markdown.spec.ts",
+      "line": 13,
+      "title": "preview renders Markdown/GFM safely and an unchanged save preserves every stored byte"
+    },
+    {
+      "id": "2934dd0b83188b49704a-3a7ad5ce9e39f148c586|",
+      "file": "planner-markdown.spec.ts",
+      "line": 67,
+      "title": "toolbar and shortcuts retain selection and native undo/redo without HTML conversion"
+    },
+    {
+      "id": "2934dd0b83188b49704a-0e4573cd6bbe6148276d|",
+      "file": "planner-markdown.spec.ts",
+      "line": 129,
+      "title": "link insertion rejects unsafe URLs, restores selection for native undo, and refuses oversize formatting"
+    },
+    {
+      "id": "2934dd0b83188b49704a-fba5089e0aa93017478c|",
+      "file": "planner-markdown.spec.ts",
+      "line": 181,
+      "title": "linked Objective task description uses the same safe Markdown reader"
+    },
+    {
+      "id": "2934dd0b83188b49704a-a792c51b5d527bd47364|",
+      "file": "planner-markdown.spec.ts",
+      "line": 219,
+      "title": "readonly description rendering and receipt replacement never retain a former link draft"
+    },
+    {
+      "id": "2934dd0b83188b49704a-34505e2075e95cf51854|",
+      "file": "planner-markdown.spec.ts",
+      "line": 257,
+      "title": "pending save synchronously fences formatting and link changes"
+    },
+    {
+      "id": "2cc2482edfc8904b2c2d-edf9f90a15ac902d1332|",
+      "file": "selected-meeting-desktop-parity.spec.ts",
+      "line": 155,
+      "title": "Selected meeting populated Prep baseline at 1440 light"
+    },
+    {
+      "id": "2cc2482edfc8904b2c2d-b1aea469b78939f4cf9e|",
+      "file": "selected-meeting-desktop-parity.spec.ts",
+      "line": 155,
+      "title": "Selected meeting populated Prep baseline at 1440 dark"
+    },
+    {
+      "id": "2cc2482edfc8904b2c2d-b7e1881d85228862377a|",
+      "file": "selected-meeting-desktop-parity.spec.ts",
+      "line": 280,
+      "title": "Selected meeting parity preserves library modal Notes default and close focus"
+    },
+    {
+      "id": "2cc2482edfc8904b2c2d-9cd6ffcf8084d111a76f|",
+      "file": "selected-meeting-desktop-parity.spec.ts",
+      "line": 280,
+      "title": "Selected meeting parity preserves queue modal Notes default and close focus"
+    },
+    {
+      "id": "70318a143c525e47ad9e-ec0d0f4a9acdb0f9bb5e|",
+      "file": "settings-mutations.spec.ts",
+      "line": 19,
+      "title": "Contact saves once while pending and renders the validated current read-back"
+    },
+    {
+      "id": "70318a143c525e47ad9e-68da532a09aa4dfd138b|",
+      "file": "settings-mutations.spec.ts",
+      "line": 70,
+      "title": "Contact refuses failed writes without losing the draft and keeps standard users read-only"
+    },
+    {
+      "id": "70318a143c525e47ad9e-d983291f19bfede6fb09|",
+      "file": "settings-mutations.spec.ts",
+      "line": 109,
+      "title": "Contact discards a late successful receipt after session replacement"
+    },
+    {
+      "id": "70318a143c525e47ad9e-dfd559deb315add7746f|",
+      "file": "settings-mutations.spec.ts",
+      "line": 145,
+      "title": "Branding name save refuses errors then uses a fresh canonical read"
+    },
+    {
+      "id": "70318a143c525e47ad9e-682691f501ebaa7c3fb8|",
+      "file": "settings-mutations.spec.ts",
+      "line": 178,
+      "title": "Branding validates logo bytes and confirms only a completed synthetic upload"
+    },
+    {
+      "id": "70318a143c525e47ad9e-66c2c71899596131bab5|",
+      "file": "settings-mutations.spec.ts",
+      "line": 243,
+      "title": "Profiles create, archive and restore through exact current records with refusal retained"
+    },
+    {
+      "id": "70318a143c525e47ad9e-4040016218c75c6abbed|",
+      "file": "settings-mutations.spec.ts",
+      "line": 317,
+      "title": "Profiles reject another record or an unachieved status instead of confirming archive or restore"
+    },
+    {
+      "id": "70318a143c525e47ad9e-52281231b7a9e4706f61|",
+      "file": "settings-mutations.spec.ts",
+      "line": 364,
+      "title": "Integrations require configured capability, keep IMAP unavailable and constrain hosted destinations"
+    },
+    {
+      "id": "70318a143c525e47ad9e-13ba51e659cf005dbfb1|",
+      "file": "settings-mutations.spec.ts",
+      "line": 421,
+      "title": "Integration reconnect refuses an OAuth receipt for another registered account"
+    },
+    {
+      "id": "70318a143c525e47ad9e-0a783914be1968348a21|",
+      "file": "settings-mutations.spec.ts",
+      "line": 449,
+      "title": "Integration sync dispatches once and refuses failed-record or wrong-account receipts"
+    },
+    {
+      "id": "70318a143c525e47ad9e-96ba3206fa0b5fe553be|",
+      "file": "settings-mutations.spec.ts",
+      "line": 491,
+      "title": "Integration disconnect retains refusal and requires a matching affirmative receipt"
+    },
+    {
+      "id": "ef33795f79c53025fc53-d37b7e32d71bb136f2e5|",
+      "file": "unified-task-detail.spec.ts",
+      "line": 21,
+      "title": "Desktop task comment success freezes the captured draft and sends one request"
+    },
+    {
+      "id": "ef33795f79c53025fc53-f8ca03445ad32388ce1f|",
+      "file": "unified-task-detail.spec.ts",
+      "line": 21,
+      "title": "Desktop task comment rejection freezes the captured draft and sends one request"
+    },
+    {
+      "id": "ef33795f79c53025fc53-7b117fef255bb7e862a4|",
+      "file": "unified-task-detail.spec.ts",
+      "line": 81,
+      "title": "Desktop native comment resubmission cannot dispatch while the first post is held"
+    },
+    {
+      "id": "ef33795f79c53025fc53-1d50d3f2e40730244667|",
+      "file": "unified-task-detail.spec.ts",
+      "line": 124,
+      "title": "Desktop comment completion after task replacement cannot clear the replacement draft"
+    }
+  ]
+}

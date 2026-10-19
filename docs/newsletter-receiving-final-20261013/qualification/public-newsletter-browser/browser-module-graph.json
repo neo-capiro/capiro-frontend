@@ -1,0 +1,66 @@
+[
+  {
+    "id": "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-social-share.js",
+    "imports": [
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter.js"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/browser-entry.mjs",
+    "imports": [
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter.js",
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-render.js",
+      "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/newsletter-receiving-corpus.cjs",
+      "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixed-clock.mjs",
+      "/workspace/capiro-newsletter-port/packages/qualification-newsletter/public-namespace.mjs"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-render.js",
+    "imports": [
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter.js",
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-social-share.js"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js",
+    "imports": []
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/public-namespace.mjs",
+    "imports": []
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter.js",
+    "imports": [
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-receiving.js"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/newsletter-receiving-corpus.cjs",
+    "imports": []
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+    "imports": []
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-fonts.js",
+    "imports": [
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-fonts.catalog.js"
+    ]
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/packages/qualification-newsletter/fixed-clock.mjs",
+    "imports": []
+  },
+  {
+    "id": "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter-receiving.js",
+    "imports": [
+      "/workspace/capiro-newsletter-port/node_modules/@capiro/shared/dist/newsletter.js"
+    ]
+  }
+]

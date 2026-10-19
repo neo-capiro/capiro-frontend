@@ -1,0 +1,1024 @@
+diff --git a/apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx b/apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx
+index d4dfb0fe19c686f63a1037b173640381a1957581..e78fd53de528d4a84aebaaf97c04e586b4fe6c01 100644
+--- a/apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx
++++ b/apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx
+@@ -23,7 +23,8 @@ export function CapabilitiesPage({
+   const path = usePathname();
+   const [codes, setCodes] = useState(false);
+   const selected = params.get("capability");
+-  const capability = query.data?.find((cap) => cap.id === selected);
++  const records = query.isSuccess && !query.error ? query.data : undefined;
++  const capability = records?.find((cap) => cap.id === selected);
+   const open = (id: string | null) => {
+     const next = new URLSearchParams(params);
+     if (id) next.set("capability", id);
+@@ -35,7 +36,11 @@ export function CapabilitiesPage({
+       <header className="row between">
+         <h1>Capabilities</h1>
+         <div className="row">
+-          <button className="button" onClick={() => open("new")}>
++          <button
++            className="button"
++            disabled={!records || query.isFetching}
++            onClick={() => open("new")}
++          >
+             Add capability
+           </button>
+           <button className="button" onClick={() => setCodes(true)}>
+@@ -48,24 +53,22 @@ export function CapabilitiesPage({
+         error={query.error}
+         retry={() => void query.refetch()}
+       />
+-      {query.data && (
++      {records && (
+         <section className="card stack">
+           <header className="row between">
+             <p className="eyebrow">Capability areas</p>
+             <small>
+-              {query.data.length} areas ·{" "}
+-              {
+-                query.data.filter((cap) => maturity(cap.trl) === "Fielded")
+-                  .length
+-              }{" "}
++              {records.length} areas ·{" "}
++              {records.filter((cap) => maturity(cap.trl) === "Fielded").length}{" "}
+               fielded
+             </small>
+           </header>
+           <div className={styles.grid}>
+-            {query.data.map((cap) => (
++            {records.map((cap) => (
+               <button
+                 key={cap.id}
+                 className={styles.card}
++                disabled={query.isFetching}
+                 onClick={() => open(cap.id)}
+               >
+                 <span className="monogram">▦</span>
+@@ -82,7 +85,7 @@ export function CapabilitiesPage({
+               </button>
+             ))}
+           </div>
+-          {query.data.length === 0 && (
++          {records.length === 0 && (
+             <p className="empty">
+               Add a capability area to describe what this client can deliver.
+             </p>
+@@ -99,18 +102,23 @@ export function CapabilitiesPage({
+           Advocacy history ↗
+         </Link>
+       </p>
+-      <CapabilityEditor
+-        key={selected ?? "closed"}
+-        clientId={clientId}
+-        capability={capability}
+-        open={selected === "new" || Boolean(capability)}
+-        onClose={() => open(null)}
+-      />
+-      <Registrations
+-        clientId={clientId}
+-        open={codes}
+-        onClose={() => setCodes(false)}
+-      />
++      {records && (selected === "new" || capability) && (
++        <CapabilityEditor
++          key={`${clientId}:${selected}`}
++          clientId={clientId}
++          capability={capability}
++          open={selected === "new" || Boolean(capability)}
++          onClose={() => open(null)}
++        />
++      )}
++      {codes && (
++        <Registrations
++          key={clientId}
++          clientId={clientId}
++          open={codes}
++          onClose={() => setCodes(false)}
++        />
++      )}
+     </div>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx b/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+index 716b38d613e957aee0b97845eff93a4d42f95d97..d31535e105e1cd66c0eed44314b93e3616681d3d 100644
+--- a/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
++++ b/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+@@ -6,7 +6,8 @@ import { TokenInput } from "@/shared/portfolio/ui/TokenInput";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { type Capability } from "./contracts";
+ import { EntityDocuments } from "@/features/portfolio/files/public";
+-import { useSaveCapability, useDeleteCapability } from "./queries";
++import { useCapabilityMutation } from "./mutations";
++import styles from "./capabilities.module.css";
+ export function CapabilityEditor({
+   clientId,
+   capability,
+@@ -29,13 +30,18 @@ export function CapabilityEditor({
+   const [keywords, setKeywords] = useState(capability?.keywords ?? []);
+   const [trl, setTrl] = useState(capability?.trl ?? null);
+   const [remove, setRemove] = useState(false);
+-  const save = useSaveCapability(clientId, onClose);
+-  const deletion = useDeleteCapability(clientId, onClose);
++  const mutation = useCapabilityMutation(
++    clientId,
++    capability?.id,
++    open,
++    onClose,
++  );
++  const saving = mutation.isPending && mutation.variables?.type === "save";
+   return (
+     <Dialog
+       open={open}
+       onOpenChange={(value) => {
+-        if (!value && !save.isPending && !deletion.isPending) onClose();
++        if (!value && !mutation.isPending) onClose();
+       }}
+       title={capability ? `Capability: ${capability.name}` : "New capability"}
+     >
+@@ -44,8 +50,8 @@ export function CapabilityEditor({
+         onSubmit={(event) => {
+           event.preventDefault();
+           const form = new FormData(event.currentTarget);
+-          save.mutate({
+-            id: capability?.id,
++          mutation.mutate({
++            type: "save",
+             body: {
+               name: String(form.get("name")).trim(),
+               type: String(form.get("type")),
+@@ -62,115 +68,128 @@ export function CapabilityEditor({
+           });
+         }}
+       >
+-        <label>
+-          Name
+-          <input
+-            name="name"
+-            required
+-            defaultValue={capability?.name}
+-            autoFocus
+-            maxLength={300}
+-          />
+-        </label>
+-        <div className="grid two">
++        <fieldset
++          className={`stack ${styles.editorFields}`}
++          disabled={!mutation.canWrite || mutation.isPending}
++        >
+           <label>
+-            Type
++            Name
+             <input
+-              name="type"
+-              defaultValue={capability?.type ?? "product"}
+-              maxLength={120}
++              name="name"
++              required
++              defaultValue={capability?.name}
++              autoFocus
++              maxLength={300}
+             />
+           </label>
++          <div className={`formGrid ${styles.typeSector}`}>
++            <label>
++              Type
++              <input
++                name="type"
++                defaultValue={capability?.type ?? "product"}
++                maxLength={120}
++              />
++            </label>
++            <label>
++              Sector
++              <input
++                name="sector"
++                defaultValue={capability?.sector ?? ""}
++                maxLength={120}
++              />
++            </label>
++          </div>
++          <fieldset>
++            <legend>Technology Readiness Level · {trl ?? "Not set"}</legend>
++            <div className="row">
++              {Array.from({ length: 9 }, (_, i) => i + 1).map((level) => (
++                <button
++                  type="button"
++                  key={level}
++                  className={`button ${trl !== null && level <= trl ? "primary" : ""}`}
++                  aria-label={`TRL ${level}`}
++                  aria-pressed={trl === level}
++                  onClick={() => setTrl(level)}
++                >
++                  {level}
++                </button>
++              ))}
++              <button
++                type="button"
++                className="button ghost"
++                onClick={() => setTrl(null)}
++              >
++                Clear TRL
++              </button>
++            </div>
++          </fieldset>
+           <label>
+-            Sector
+-            <input
+-              name="sector"
+-              defaultValue={capability?.sector ?? ""}
+-              maxLength={120}
+-            />
++            Manufacturing Readiness Level
++            <select name="mrl" defaultValue={capability?.mrl ?? ""}>
++              <option value="">Not set</option>
++              {Array.from({ length: 10 }, (_, i) => i + 1).map((level) => (
++                <option key={level}>{level}</option>
++              ))}
++            </select>
+           </label>
+-        </div>
+-        <fieldset>
+-          <legend>Technology Readiness Level · {trl ?? "Not set"}</legend>
+-          <div className="row">
+-            {Array.from({ length: 9 }, (_, i) => i + 1).map((level) => (
++          <TokenInput label="Tags" value={tags} onChange={setTags} />
++          {capability && (
++            <>
++              <TokenInput label="PE numbers" value={pes} onChange={setPes} />
++              <TokenInput
++                label="Match keywords"
++                value={keywords}
++                onChange={setKeywords}
++              />
++            </>
++          )}
++          <TextareaField
++            label="Description"
++            name="description"
++            defaultValue={capability?.description ?? ""}
++            maxLength={20000}
++          />
++          <TextareaField
++            label="Notes"
++            name="notes"
++            defaultValue={capability?.notes ?? ""}
++            maxLength={20000}
++          />
++          {!capability && (
++            <small>
++              Save first to add PE numbers, match keywords and documents to the
++              saved record.
++            </small>
++          )}
++          <QueryState
++            error={
++              mutation.variables?.type === "save" ? mutation.error : undefined
++            }
++          />
++          <div className="formActions">
++            {capability && (
+               <button
+                 type="button"
+-                key={level}
+-                className={`button ${trl !== null && level <= trl ? "primary" : ""}`}
+-                aria-label={`TRL ${level}`}
+-                aria-pressed={trl === level}
+-                onClick={() => setTrl(level)}
++                className="button ghost"
++                disabled={!mutation.canWrite || mutation.isPending}
++                onClick={() => setRemove(true)}
+               >
+-                {level}
++                Remove capability
+               </button>
+-            ))}
++            )}
+             <button
+-              type="button"
+-              className="button ghost"
+-              onClick={() => setTrl(null)}
++              className="button primary"
++              disabled={!mutation.canWrite || mutation.isPending}
+             >
+-              Clear TRL
++              {saving
++                ? "Saving…"
++                : capability
++                  ? "Save capability"
++                  : "Add capability"}
+             </button>
+           </div>
+         </fieldset>
+-        <label>
+-          Manufacturing Readiness Level
+-          <select name="mrl" defaultValue={capability?.mrl ?? ""}>
+-            <option value="">Not set</option>
+-            {Array.from({ length: 10 }, (_, i) => i + 1).map((level) => (
+-              <option key={level}>{level}</option>
+-            ))}
+-          </select>
+-        </label>
+-        <TokenInput label="Tags" value={tags} onChange={setTags} />
+-        {capability && (
+-          <>
+-            <TokenInput label="PE numbers" value={pes} onChange={setPes} />
+-            <TokenInput
+-              label="Match keywords"
+-              value={keywords}
+-              onChange={setKeywords}
+-            />
+-          </>
+-        )}
+-        <TextareaField
+-          label="Description"
+-          name="description"
+-          defaultValue={capability?.description ?? ""}
+-          maxLength={20000}
+-        />
+-        <TextareaField
+-          label="Notes"
+-          name="notes"
+-          defaultValue={capability?.notes ?? ""}
+-          maxLength={20000}
+-        />
+-        {!capability && (
+-          <small>
+-            Save first to add PE numbers, match keywords and documents to the
+-            saved record.
+-          </small>
+-        )}
+-        <QueryState error={save.error} />
+-        <div className="formActions">
+-          {capability && (
+-            <button
+-              type="button"
+-              className="button ghost"
+-              onClick={() => setRemove(true)}
+-            >
+-              Remove capability
+-            </button>
+-          )}
+-          <button className="button primary" disabled={save.isPending}>
+-            {save.isPending
+-              ? "Saving…"
+-              : capability
+-                ? "Save capability"
+-                : "Add capability"}
+-          </button>
+-        </div>
+       </form>
+       {capability && (
+         <EntityDocuments
+@@ -180,16 +199,22 @@ export function CapabilityEditor({
+       )}
+       <Dialog
+         open={remove}
+-        onOpenChange={setRemove}
++        onOpenChange={(value) => {
++          if (!mutation.isPending) setRemove(value);
++        }}
+         title="Remove capability"
+         description="Remove this capability from the client profile?"
+       >
+-        <QueryState error={deletion.error} />
++        <QueryState
++          error={
++            mutation.variables?.type === "remove" ? mutation.error : undefined
++          }
++        />
+         <button
+           className="button primary"
+-          disabled={deletion.isPending}
++          disabled={!mutation.canWrite || mutation.isPending}
+           onClick={() => {
+-            if (capability) deletion.mutate(capability.id);
++            if (capability) mutation.mutate({ type: "remove" });
+           }}
+         >
+           Confirm remove
+diff --git a/apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx b/apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx
+index 0c343c9e6abe2bb1c6b4fc9b98f76bbbfaed7d3a..8b90b4d3ee1e97bd577b08e04db816794ed3440e 100644
+--- a/apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx
++++ b/apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+-import { useCapabilityFit, useRefreshFit } from "./queries";
++import { useCapabilityFit } from "./queries";
++import { useRefreshFit } from "./mutations";
+ import { fitLink } from "./contracts";
+ export function CapabilityFit({
+   clientId,
+@@ -10,21 +11,20 @@ export function CapabilityFit({
+   existingApp?: string;
+ }) {
+   const query = useCapabilityFit(clientId);
+-  const refresh = useRefreshFit(clientId);
++  const result = query.isSuccess && !query.error ? query.data : undefined;
++  const refresh = useRefreshFit(clientId, Boolean(result));
+   return (
+     <section className="card stack">
+       <header className="row between">
+         <div>
+           <p className="eyebrow">Where capabilities create fit</p>
+           <h3>
+-            {query.data
+-              ? `${query.data.matches.length} fit matches`
+-              : "Capability fit"}
++            {result ? `${result.matches.length} fit matches` : "Capability fit"}
+           </h3>
+         </div>
+         <button
+           className="button"
+-          disabled={refresh.isPending}
++          disabled={!refresh.canWrite || refresh.isPending || query.isFetching}
+           onClick={() => refresh.mutate()}
+         >
+           {refresh.isPending ? "Refreshing…" : "Refresh"}
+@@ -35,17 +35,17 @@ export function CapabilityFit({
+         error={query.error ?? refresh.error}
+         retry={() => void query.refetch()}
+       />
+-      {query.data && (
++      {result && (
+         <>
+           <small>
+-            {query.data.status === "stale"
++            {result.status === "stale"
+               ? "Profile changed; refresh these matches. "
+               : ""}
+-            {query.data.computedAt
+-              ? `Computed ${new Date(query.data.computedAt).toLocaleString()}`
++            {result.computedAt
++              ? `Computed ${new Date(result.computedAt).toLocaleString()}`
+               : "Not computed yet"}
+           </small>
+-          {query.data.matches.map((match) => (
++          {result.matches.map((match) => (
+             <article key={match.id} className="stack">
+               <div className="row">
+                 <strong>{match.target}</strong>
+@@ -57,8 +57,8 @@ export function CapabilityFit({
+               )}
+             </article>
+           ))}
+-          {query.data.matches.length === 0 && (
+-            <p>{query.data.emptyReason ?? "No matches available."}</p>
++          {result.matches.length === 0 && (
++            <p>{result.emptyReason ?? "No matches available."}</p>
+           )}
+         </>
+       )}
+diff --git a/apps/web/src/features/portfolio/capabilities/Registrations.tsx b/apps/web/src/features/portfolio/capabilities/Registrations.tsx
+index 3230d2cb0ea2a383a6fc437299d07f7e7da29352..6cf549ce7109850c63eb1fdf63a01dd917d81c6c 100644
+--- a/apps/web/src/features/portfolio/capabilities/Registrations.tsx
++++ b/apps/web/src/features/portfolio/capabilities/Registrations.tsx
+@@ -1,11 +1,13 @@
+ "use client";
+ import { useState } from "react";
+ import { useClient } from "@/features/portfolio/index/public";
+-import { useIdentity, canAdminister } from "@/shared/portfolio/auth/identity";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
++import { ApiError } from "@/shared/portfolio/api/http";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useSaveRegistrations } from "./registration-mutations";
+ import { certifications } from "@/features/portfolio/client-intake/public";
++import styles from "./capabilities.module.css";
+ const tokens = (value: FormDataEntryValue | null) => [
+   ...new Set(
+     String(value ?? "")
+@@ -26,9 +28,21 @@ export function Registrations({
+   const client = useClient(clientId);
+   const identity = useIdentity();
+   const [editing, setEditing] = useState(false);
+-  const save = useSaveRegistrations(clientId, () => setEditing(false));
+-  const editable = canAdminister(identity.data?.role);
+-  const data = client.data;
++  const save = useSaveRegistrations(clientId, open && editing, () =>
++    setEditing(false),
++  );
++  const mismatch = client.isSuccess && client.data?.id !== clientId;
++  const data =
++    client.isSuccess && !client.error && !mismatch ? client.data : undefined;
++  // A changed registration snapshot replaces uncontrolled inputs. Changes to
++  // unrelated profile notes do not discard this five-field registration draft.
++  const draftKey = JSON.stringify([
++    data?.uei,
++    data?.cageCode,
++    data?.naicsCodes,
++    data?.pscCodes,
++    data?.setAsideCertifications,
++  ]);
+   const intakeValue = (key: string) => {
+     const value = data?.intakeData?.[key];
+     return typeof value === "string" ? value : null;
+@@ -53,15 +67,29 @@ export function Registrations({
+     >
+       <QueryState
+         pending={client.isPending}
+-        error={client.error}
++        error={
++          client.error ??
++          (mismatch
++            ? new ApiError(
++                502,
++                "The service returned registrations for another client. Retry this client read.",
++              )
++            : null)
++        }
+         retry={() => void client.refetch()}
+       />
++      <QueryState
++        error={identity.error}
++        retry={() => void identity.refetch()}
++      />
+       {data &&
+         (editing ? (
+           <form
++            key={draftKey}
+             className="stack"
+             onSubmit={(event) => {
+               event.preventDefault();
++              if (save.isPending) return;
+               const form = new FormData(event.currentTarget);
+               save.mutate({
+                 uei: String(form.get("uei")).trim(),
+@@ -74,68 +102,90 @@ export function Registrations({
+               });
+             }}
+           >
+-            <label>
+-              UEI
+-              <input name="uei" maxLength={12} defaultValue={data.uei ?? ""} />
+-            </label>
+-            <label>
+-              CAGE
+-              <input
+-                name="cage"
+-                maxLength={5}
+-                defaultValue={data.cageCode ?? ""}
+-              />
+-            </label>
+-            <label>
+-              NAICS codes (comma separated)
+-              <input
+-                name="naics"
+-                defaultValue={data.naicsCodes?.join(", ") ?? ""}
+-              />
+-            </label>
+-            <label>
+-              PSC codes (comma separated)
+-              <input
+-                name="psc"
+-                defaultValue={data.pscCodes?.join(", ") ?? ""}
+-              />
+-            </label>
+-            <fieldset>
+-              <legend>Held certifications</legend>
+-              {data.setAsideCertifications
+-                ?.filter(
+-                  (code) => !certifications.some((known) => known === code),
+-                )
+-                .map((code) => (
+-                  <div key={code}>
+-                    <input type="hidden" name="certification" value={code} />
+-                    <small>{code} · Existing code retained</small>
+-                  </div>
++            <fieldset
++              className={`stack ${styles.editorFields}`}
++              disabled={!save.canWrite || save.isPending}
++            >
++              <label>
++                UEI
++                <input
++                  name="uei"
++                  maxLength={12}
++                  defaultValue={data.uei ?? ""}
++                />
++              </label>
++              <label>
++                CAGE
++                <input
++                  name="cage"
++                  maxLength={5}
++                  defaultValue={data.cageCode ?? ""}
++                />
++              </label>
++              <label>
++                NAICS codes (comma separated)
++                <input
++                  name="naics"
++                  defaultValue={data.naicsCodes?.join(", ") ?? ""}
++                />
++              </label>
++              <label>
++                PSC codes (comma separated)
++                <input
++                  name="psc"
++                  defaultValue={data.pscCodes?.join(", ") ?? ""}
++                />
++              </label>
++              <fieldset>
++                <legend>Held certifications</legend>
++                {data.setAsideCertifications
++                  ?.filter(
++                    (code) => !certifications.some((known) => known === code),
++                  )
++                  .map((code) => (
++                    <div key={code}>
++                      <input type="hidden" name="certification" value={code} />
++                      <small>{code} · Existing code retained</small>
++                    </div>
++                  ))}
++                {certifications.map((code) => (
++                  <label className="row" key={code}>
++                    <input
++                      type="checkbox"
++                      name="certification"
++                      value={code}
++                      defaultChecked={data.setAsideCertifications?.includes(
++                        code,
++                      )}
++                    />
++                    {code}
++                  </label>
+                 ))}
+-              {certifications.map((code) => (
+-                <label className="row" key={code}>
+-                  <input
+-                    type="checkbox"
+-                    name="certification"
+-                    value={code}
+-                    defaultChecked={data.setAsideCertifications?.includes(code)}
+-                  />
+-                  {code}
+-                </label>
+-              ))}
++              </fieldset>
++              <small>
++                EIN, primary NAICS and registry details require a targeted
++                update contract to preserve concurrent profile notes and intake
++                edits.
++              </small>
+             </fieldset>
+-            <small>
+-              EIN, primary NAICS and registry details require a targeted update
+-              contract to preserve concurrent profile notes and intake edits.
+-            </small>
+             <QueryState error={save.error} />
++            {!save.canWrite && !save.isPending && (
++              <small>
++                Saving requires current client details and an administrator
++                session.
++              </small>
++            )}
+             <div className="row">
+-              <button className="button primary" disabled={save.isPending}>
++              <button
++                className="button primary"
++                disabled={!save.canWrite || save.isPending}
++              >
+                 Save registrations
+               </button>
+               <button
+                 className="button"
+                 type="button"
++                disabled={save.isPending}
+                 onClick={() => setEditing(false)}
+               >
+                 Cancel
+@@ -166,13 +216,16 @@ export function Registrations({
+                   digits.
+                 </p>
+               )}
+-            {editable && (
++            {save.canEdit && (
+               <button className="button" onClick={() => setEditing(true)}>
+                 Edit registrations
+               </button>
+             )}
+-            {!editable && (
+-              <small>Registration edits require an administrator.</small>
++            {!save.canEdit && (
++              <small>
++                Registration edits require current client details and an
++                administrator session.
++              </small>
+             )}
+           </div>
+         ))}
+diff --git a/apps/web/src/features/portfolio/capabilities/capabilities.module.css b/apps/web/src/features/portfolio/capabilities/capabilities.module.css
+index fb7504ff7321f6ea7ce5c86954a0ade32d041110..f49382ac17d8d91d9818ad7c5253659b24c17b9e 100644
+--- a/apps/web/src/features/portfolio/capabilities/capabilities.module.css
++++ b/apps/web/src/features/portfolio/capabilities/capabilities.module.css
+@@ -22,6 +22,18 @@
+ .card :global(.monogram) {
+   border-radius: 50%;
+ }
++.typeSector:global(.formGrid) {
++  gap: 12px;
++}
++.typeSector > label {
++  min-width: 0;
++}
++.editorFields {
++  border: 0;
++  margin: 0;
++  padding: 0;
++  min-width: 0;
++}
+ @media (max-width: 1100px) {
+   .grid {
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+diff --git a/apps/web/src/features/portfolio/capabilities/queries.ts b/apps/web/src/features/portfolio/capabilities/queries.ts
+index 6f117c8840f1e9881f91eb3cf04163c4bca0f04b..c621a0a8a83e10744b0c490836d40e971133756d 100644
+--- a/apps/web/src/features/portfolio/capabilities/queries.ts
++++ b/apps/web/src/features/portfolio/capabilities/queries.ts
+@@ -1,14 +1,8 @@
+ "use client";
+-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
++import { useQuery } from "@tanstack/react-query";
+ import { z } from "zod";
+ import { useApi } from "@/shared/portfolio/api/provider";
+-import { acknowledged } from "@/shared/portfolio/api/http";
+-import {
+-  capabilitySchema,
+-  capabilityInputSchema,
+-  fitSchema,
+-  type CapabilityInput,
+-} from "./contracts";
++import { capabilitySchema, fitSchema } from "./contracts";
+ export const capabilitiesKey = (id: string) => ["capabilities", id] as const;
+ export const fitKey = (id: string) => ["capability-fit", id] as const;
+ export function useCapabilities(id: string) {
+@@ -34,60 +28,3 @@ export function useCapabilityFit(id: string) {
+       }),
+   });
+ }
+-export function useSaveCapability(clientId: string, onSaved: () => void) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: ({ id, body }: { id?: string; body: CapabilityInput }) =>
+-      api.request(
+-        "core",
+-        `clients/${clientId}/capabilities${id ? `/${id}` : ""}`,
+-        capabilitySchema,
+-        {
+-          method: id ? "PATCH" : "POST",
+-          body: capabilityInputSchema.parse(body),
+-        },
+-      ),
+-    onSuccess: async () => {
+-      await Promise.all([
+-        cache.invalidateQueries({ queryKey: capabilitiesKey(clientId) }),
+-        cache.invalidateQueries({ queryKey: fitKey(clientId) }),
+-      ]);
+-      onSaved();
+-    },
+-  });
+-}
+-export function useDeleteCapability(clientId: string, onDeleted: () => void) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: (id: string) =>
+-      api.request(
+-        "core",
+-        `clients/${clientId}/capabilities/${id}`,
+-        acknowledged,
+-        { method: "DELETE" },
+-      ),
+-    onSuccess: async () => {
+-      await Promise.all([
+-        cache.invalidateQueries({ queryKey: capabilitiesKey(clientId) }),
+-        cache.invalidateQueries({ queryKey: fitKey(clientId) }),
+-      ]);
+-      onDeleted();
+-    },
+-  });
+-}
+-export function useRefreshFit(clientId: string) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: () =>
+-      api.request(
+-        "core",
+-        `clients/${clientId}/capability-fit/refresh`,
+-        fitSchema,
+-        { method: "POST" },
+-      ),
+-    onSuccess: (data) => cache.setQueryData(fitKey(clientId), data),
+-  });
+-}
+diff --git a/apps/web/src/features/portfolio/capabilities/registration-mutations.ts b/apps/web/src/features/portfolio/capabilities/registration-mutations.ts
+index 8a18a3e7f6cafaaca9f22309e1852ebeda275f53..f2186e11831c8aadc6ecf89b192ccc464c9bfd21 100644
+--- a/apps/web/src/features/portfolio/capabilities/registration-mutations.ts
++++ b/apps/web/src/features/portfolio/capabilities/registration-mutations.ts
+@@ -1,34 +1,84 @@
+ "use client";
++import { useSyncExternalStore } from "react";
+ import { useMutation, useQueryClient } from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
++import { ApiError } from "@/shared/portfolio/api/http";
++import { clientKey, clientsKey } from "@/features/portfolio/index/public";
++import type { Client } from "@/features/portfolio/index/contracts-public";
++import { useCapabilityExecution } from "./execution";
++import { fitKey } from "./queries";
+ import {
+-  clientSchema,
+-  clientKey,
+-  clientsKey,
+-} from "@/features/portfolio/index/public";
+-export type RegistrationInput = {
+-  uei: string;
+-  cageCode: string;
+-  naicsCodes: string[];
+-  pscCodes: string[];
+-  setAsideCertifications: string[];
+-};
+-export function useSaveRegistrations(clientId: string, onSaved: () => void) {
++  saveRegistrations,
++  type RegistrationInput,
++} from "./registration-writer";
++
++export function useSaveRegistrations(
++  clientId: string,
++  editing: boolean,
++  onSaved: () => void,
++) {
+   const api = useApi();
+   const cache = useQueryClient();
+-  return useMutation({
++  const scope = useCapabilityExecution(
++    clientId,
++    "registrations",
++    editing,
++    true,
++  );
++  useSyncExternalStore(
++    (notify) => cache.getQueryCache().subscribe(notify),
++    () => cache.getQueryState<Client>(clientKey(clientId)),
++    () => undefined,
++  );
++  const currentClient = () => {
++    const state = cache.getQueryState<Client>(clientKey(clientId));
++    return state?.status === "success" &&
++      !state.error &&
++      !state.isInvalidated &&
++      state.fetchStatus === "idle" &&
++      state.data?.id === clientId
++      ? state
++      : undefined;
++  };
++  const mutation = useMutation({
+     mutationFn: (body: RegistrationInput) =>
+-      api.request("core", `clients/${clientId}`, clientSchema, {
+-        method: "PUT",
+-        body,
++      scope.run(async (execution) => {
++        const initial = currentClient();
++        if (!initial)
++          throw new ApiError(
++            409,
++            "Refresh this client's registrations before saving.",
++          );
++        const receipt = await saveRegistrations(api, clientId, body, {
++          ...execution,
++          guard: () => {
++            execution.guard();
++            if (currentClient()?.dataUpdateCount !== initial.dataUpdateCount)
++              throw new ApiError(
++                409,
++                "Registration details changed while saving. Review the current client before retrying.",
++              );
++          },
++        });
++        execution.guard();
++        await Promise.all([
++          cache.invalidateQueries({ queryKey: clientKey(clientId) }),
++          cache.invalidateQueries({ queryKey: clientsKey }),
++          cache.invalidateQueries({ queryKey: fitKey(clientId) }),
++        ]);
++        execution.guard();
++        if (!currentClient())
++          throw new ApiError(
++            409,
++            "The save was acknowledged, but current registrations could not be loaded. Retry the client read before making another change.",
++          );
++        onSaved();
++        return receipt;
+       }),
+-    onSuccess: async () => {
+-      await Promise.all([
+-        cache.invalidateQueries({ queryKey: clientKey(clientId) }),
+-        cache.invalidateQueries({ queryKey: clientsKey }),
+-        cache.invalidateQueries({ queryKey: ["capability-fit", clientId] }),
+-      ]);
+-      onSaved();
+-    },
+   });
++  return {
++    ...mutation,
++    canEdit: scope.hasWriter && Boolean(currentClient()),
++    canWrite: scope.canWrite && Boolean(currentClient()),
++  };
+ }
+diff --git a/apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx b/apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx
+index 21c812ddb2615f3f7239b5bc54cd24488be1cf82..10be0d3157d03d3c0cfb43bf53a0549f3718c498 100644
+--- a/apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx
++++ b/apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx
+@@ -37,7 +37,12 @@ export function OpportunitiesPage({
+       scroll: false,
+     });
+   }
+-  const result = opportunities.data;
++  const result =
++    opportunities.isSuccess && !opportunities.error
++      ? opportunities.data
++      : undefined;
++  const programResult =
++    programs.isSuccess && !programs.error ? programs.data : undefined;
+   const workflows = result
+     ? pageWorkflowCounts(result.opportunities)
+     : undefined;
+@@ -61,7 +66,7 @@ export function OpportunitiesPage({
+           [result?.counts.active ?? "—", "Active matched opportunities"],
+           [workflows?.pursuing ?? "—", "Pursuing · this page"],
+           [workflows?.saved ?? "—", "Saved · this page"],
+-          [programs.data?.data.length ?? "—", "Programs shown"],
++          [programResult?.data.length ?? "—", "Programs shown"],
+           [
+             result?.opportunities.length
+               ? opportunityDate(result.opportunities[0]?.deadline ?? null)
+@@ -79,7 +84,7 @@ export function OpportunitiesPage({
+         <section className="card stack" aria-label="Matched opportunities">
+           <header className="row between">
+             <h2>Opportunities</h2>
+-            {base && (
++            {base && result && (
+               <a href={opportunityLink(base, clientId)}>Open recommendations</a>
+             )}
+           </header>
+@@ -128,21 +133,23 @@ export function OpportunitiesPage({
+         <section className="card stack" aria-label="Relevant budget programs">
+           <header className="row between">
+             <h2>Relevant budget programs</h2>
+-            {base && <a href={`${base}/program-elements`}>Open budget</a>}
++            {base && programResult && (
++              <a href={`${base}/program-elements`}>Open budget</a>
++            )}
+           </header>
+           <QueryState
+             pending={programs.isPending}
+             error={programs.error}
+             retry={() => void programs.refetch()}
+           />
+-          {programs.data && (
++          {programResult && (
+             <>
+-              <RelevantPrograms data={programs.data} base={base} />
++              <RelevantPrograms data={programResult} base={base} />
+               <PageControls
+                 page={programPage}
+-                rows={programs.data.data.length}
+-                total={programs.data.total}
+-                pageSize={programs.data.limit}
++                rows={programResult.data.length}
++                total={programResult.total}
++                pageSize={programResult.limit}
+                 onChange={(value) => set({ programPage: String(value) })}
+               />
+             </>
+diff --git a/docs/portfolio-31/ARCHITECTURE-REVIEW-P4-PROFILE.md b/docs/portfolio-31/ARCHITECTURE-REVIEW-P4-PROFILE.md
+index a6e60a92d2116ed33d74d8916daefb20e3c8fe9f..6c4a7195fdeda23180c8b1c8280cc65d424c7fb4 100644
+--- a/docs/portfolio-31/ARCHITECTURE-REVIEW-P4-PROFILE.md
++++ b/docs/portfolio-31/ARCHITECTURE-REVIEW-P4-PROFILE.md
+@@ -42,15 +42,15 @@ Root requested a second, independent source review of the integration after the
+ 
+ The review found a real desktop dialog layout regression introduced by composing the canonical primitive. Root corrected it before the integrated browser run. No new session or backend authorization regression was found in the inspected integration. The following dispositions are specific to the current source, rather than a blanket approval of shared components.
+ 
+-| Area                           | Source reviewed and finding                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Disposition and remaining verification                                                                                                                                                                                                                                                                                                                                                                                                  |
+-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+-| Shared header composition      | `shared/shell/HeaderFrame.tsx` owns the 65px flex geometry and mobile spacing. Portfolio's `shared/portfolio/shell/Shell.tsx` supplies its navigation toggle, brand, workspace switcher and action group in the original order; its local CSS retains sticky positioning, sidebar behavior, tablet collapse and phone controls. The frame imports no product data/provider module. The generic header consumes the same geometry while keeping its existing separate content.                                                                                                                                                            | Retain this composition. No missing Portfolio action, duplicate header or new service ownership was found. Root's desktop and phone screenshots should verify the intended Figma spacing after CSS bundling.                                                                                                                                                                                                                            |
+-| Canonical dialog wrapper       | `packages/ui/src/shadcn/dialog.tsx` supplies the Radix root, portal, overlay, content and accessibility primitives. `shared/portfolio/ui/Dialog.tsx` preserves controlled open state, focus callbacks, accessible title/description, the original close button, and standard/drawer/wide classes; `showCloseButton={false}` prevents a second close control. The canonical content also adds the literal `grid` class, which accidentally matched Portfolio's three-column `.grid` rule.                                                                                                                                                 | Root added `.content[data-slot="dialog-content"]` with `grid-template-columns: minmax(0, 1fr)` and `gap: 20px` to `shared/portfolio/ui/dialog.module.css`. Its higher specificity restores a single content column and the original dialog spacing at every breakpoint regardless of stylesheet order. Both corrections were inspected in current source. Root owns rendered standard/drawer/wide geometry and focus regression checks. |
+-| Scoped global styles           | `shared/portfolio/styles.css` attaches Portfolio tokens and utility/element rules to `:where(body:has([data-portfolio-root]))`. `app/(portfolio)/layout.tsx` always mounts the marker, including loading, setup and sign-in states. The body anchor covers portalled dialogs and menus outside the marker's descendants. Removing the Portfolio route layout removes the condition even if Next retains the stylesheet after navigation. Shared light tokens match the checkpoint; the route-specific body owns Portfolio dark tokens and typography.                                                                                    | The scope is coherent for the current nonparallel route tree. No unscoped Portfolio token or page-utility block was found; the remaining global font-face declarations register fonts without applying them to other pages. Root should verify a real Next navigation from Portfolio to `/` and back, in light and dark modes, because the Vite fixture permanently carries the marker and cannot prove route teardown.                 |
+-| Route and provider composition | The root layout keeps document markup and both Geist font variables. `app/(portfolio)/layout.tsx` retains dynamic rendering and config-driven `AuthenticationProvider` composition; `(product)/layout.tsx` displays setup issues before mounting `SessionBoundary`. `AuthenticationProvider` keeps loaded/loading/failed branches. `SessionBoundary` only mounts `DataProvider` for a loaded signed-in user, keyed by user, session and organization. `DataProvider` retains a separate cache per mounted scope and replaces product content after an expired API session.                                                               | No new unguarded product rendering or cache reuse across an authenticated scope change was found. Existing sign-in and session expiry tests remain necessary. Source inspection does not establish acceptance against the designated live Clerk application.                                                                                                                                                                            |
+-| Request/session boundary       | `proxy.ts` narrows Clerk middleware matching to the actual Portfolio `/portfolio`, `/calendar`, `/sign-in` and `/api/backend` surfaces, including their descendants. All current Portfolio page routes and the API proxy fit those paths. The backend route independently calls Clerk `auth()` and obtains the existing `capiro` token. `shared/portfolio/api/proxy.ts` rejects incomplete configuration and absent/failed sessions, limits services/paths/methods, checks mutation origin and forwards only the configured server request with a no-store response. The API enforcement remains independent of the client session gate. | No added proxy bypass or relaxed API authority check was found. Root's unchanged proxy/session tests and route build should verify integration mechanics; existing-service and signed-in acceptance remain separate evidence.                                                                                                                                                                                                           |
+-
+-The important browser follow-ups are one-column dialog geometry with the original spacing, portal overlay/focus behavior, responsive Portfolio header layout, and removal/restoration of scoped styles across real Next navigation. The installed Next guide explicitly notes that global stylesheets remain loaded during navigation and that production CSS ordering can differ from development; the marker scope and the specific dialog override address those concrete integration risks. Root owns the integrated browser batch, build and any signed-in acceptance. The feature-level evidence below predates this integration and does not substitute for those checks.
++| Area                           | Source reviewed and finding                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Disposition and remaining verification                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
++| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
++| Shared header composition      | `shared/shell/HeaderFrame.tsx` owns the 65px flex geometry and mobile spacing. Portfolio's `shared/portfolio/shell/Shell.tsx` supplies its navigation toggle, brand, workspace switcher and action group in the original order; its local CSS retains sticky positioning, sidebar behavior, tablet collapse and phone controls. The frame imports no product data/provider module. The generic header consumes the same geometry while keeping its existing separate content.                                                                                                                                                            | Retain this composition. No missing Portfolio action, duplicate header or new service ownership was found. Root's desktop and phone screenshots should verify the intended Figma spacing after CSS bundling.                                                                                                                                                                                                                                                                                                                                                                              |
++| Canonical dialog wrapper       | `packages/ui/src/shadcn/dialog.tsx` supplies the Radix root, portal, overlay, content and accessibility primitives. `shared/portfolio/ui/Dialog.tsx` preserves controlled open state, focus callbacks, accessible title/description, the original close button, and standard/drawer/wide classes; `showCloseButton={false}` prevents a second close control. The canonical content also adds the literal `grid` class, which accidentally matched Portfolio's three-column `.grid` rule.                                                                                                                                                 | The final correction belongs to the utility owner: all three global Portfolio grid rules use `.grid:where(:not([data-slot="dialog-content"]))`. The dialog `.content` owns its default single column and 20px gap. Root removed the interim high-specificity gap override because it incorrectly overrode the compact ContactEditor drawer's deliberate flex layout and zero gap. The utility exclusion preserves ordinary page-grid specificity and feature dialog overrides. These final rules were inspected in `ee39c2f`; root owns the rendered standard/drawer/wide/compact checks. |
++| Scoped global styles           | `shared/portfolio/styles.css` attaches Portfolio tokens and utility/element rules to `:where(body:has([data-portfolio-root]))`. `app/(portfolio)/layout.tsx` always mounts the marker, including loading, setup and sign-in states. The body anchor covers portalled dialogs and menus outside the marker's descendants. Removing the Portfolio route layout removes the condition even if Next retains the stylesheet after navigation. Shared light tokens match the checkpoint; the route-specific body owns Portfolio dark tokens and typography.                                                                                    | The scope is coherent for the current nonparallel route tree. No unscoped Portfolio token or page-utility block was found; the remaining global font-face declarations register fonts without applying them to other pages. Root should verify a real Next navigation from Portfolio to `/` and back, in light and dark modes, because the Vite fixture permanently carries the marker and cannot prove route teardown.                                                                                                                                                                   |
++| Route and provider composition | The root layout keeps document markup and both Geist font variables. `app/(portfolio)/layout.tsx` retains dynamic rendering and config-driven `AuthenticationProvider` composition; `(product)/layout.tsx` displays setup issues before mounting `SessionBoundary`. `AuthenticationProvider` keeps loaded/loading/failed branches. `SessionBoundary` only mounts `DataProvider` for a loaded signed-in user, keyed by user, session and organization. `DataProvider` retains a separate cache per mounted scope and replaces product content after an expired API session.                                                               | No new unguarded product rendering or cache reuse across an authenticated scope change was found. Existing sign-in and session expiry tests remain necessary. Source inspection does not establish acceptance against the designated live Clerk application.                                                                                                                                                                                                                                                                                                                              |
++| Request/session boundary       | `proxy.ts` narrows Clerk middleware matching to the actual Portfolio `/portfolio`, `/calendar`, `/sign-in` and `/api/backend` surfaces, including their descendants. All current Portfolio page routes and the API proxy fit those paths. The backend route independently calls Clerk `auth()` and obtains the existing `capiro` token. `shared/portfolio/api/proxy.ts` rejects incomplete configuration and absent/failed sessions, limits services/paths/methods, checks mutation origin and forwards only the configured server request with a no-store response. The API enforcement remains independent of the client session gate. | No added proxy bypass or relaxed API authority check was found. Root's unchanged proxy/session tests and route build should verify integration mechanics; existing-service and signed-in acceptance remain separate evidence.                                                                                                                                                                                                                                                                                                                                                             |
++
++The important browser follow-ups are one-column standard/drawer/wide geometry with the original spacing, preserved zero-gap compact drawer layout, portal overlay/focus behavior, responsive Portfolio header layout, and removal/restoration of scoped styles across real Next navigation. The installed Next guide explicitly notes that global stylesheets remain loaded during navigation and that production CSS ordering can differ from development; the marker scope and grid utility exclusion address those concrete integration risks. Root owns the integrated browser batch, build and any signed-in acceptance. The feature-level evidence below predates this integration and does not substitute for those checks.
+ 
+ ## Prospects — 14 flagged functions
+ 

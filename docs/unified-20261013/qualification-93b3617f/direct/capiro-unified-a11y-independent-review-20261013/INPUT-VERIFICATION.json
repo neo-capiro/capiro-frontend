@@ -1,0 +1,491 @@
+{
+  "reviewUTC": "2026-10-13T07:18:25.961521+00:00",
+  "sourceHead": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "sourceAppTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "sourceChecks": [
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sourceSha256": "367d86b9cc092ef568865e1c2cafea9e0ca59e195f534619dc58e0fc97253cdd",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 71
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sourceSha256": "d7942d79955c8cbe1c1929f3d551118eef701c4b1ade6d92cbbd3858bdf3dad3",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "65e4754e186893f8956d6bf3e0580f6a8e0b1e5c782ceefc88d282208859b4d1",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 54
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "sourceSha256": "eed2354e2a105d16a151c48814cc4c30bb0e48977cae2b2328cd0ad76decb605",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 152
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "sourceSha256": "ba90259ff3c7a52e8d330f4eb6bfe2255634badd8934981df90d434d13971a3b",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "7f2eaa718ee225f0ccb77f5043c65d0c3fe6ea18dc4b5b7838d102295b3bcb05",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 487
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sourceSha256": "6e3d15d564a2914d804f09e5120579970898b5a386d6c5187a1f4088f6716460",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "8e450fb7a59fc6d9b3a2e6ee784e3188ffb8251badc47672fb382f2d2e82029c",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 163
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "sourceSha256": "1e4b5b89cb2c8d75d62d50baa007dd81763d86c4c5ca0c6c38b39c68744e84fb",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "98408cf322ae10295b4926cf6a293c79ae640aa3ab0bc61d157d1d225bf106f2",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 66
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "sourceSha256": "c560ca0e5bf6fa474656927803d6c6f6fea468e29d1d1e9348bc6938af56d15c",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true,
+      "candidateSha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09",
+      "candidateMatchesPinned": true,
+      "candidateNonblank": 99
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/styles.css",
+      "sourceSha256": "bd34a401be0625c70d09f2be7767205599092f009c5535553aa8ea4ca6ec4061",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/shell.module.css",
+      "sourceSha256": "748440948fc9e9e997060bac6414c17e19ab0914c28dfea9272c9037a02c3171",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/hub/hub.module.css",
+      "sourceSha256": "f05747a8435190f9d159e26b312b24f5464b79a66c44dc34badbe2746eb135f1",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio.spec.ts",
+      "sourceSha256": "ea288c75629bc8156dde4ef25eada45fb7968141938355a793d46e943fb8c66b",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-attention.spec.ts",
+      "sourceSha256": "0914b2413858bb84308803185c0f80a976dbcfb53c1c58e22b4c1f2b6f731420",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+      "sourceSha256": "037150f3279724439b1d89b7d238840db7f233b51c05703fa57a8bf86c75d056",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/test/browser/fixtures.ts",
+      "sourceSha256": "ba90445f2f1cb6fb1786362cd434bd58a2ee8940a5334f1a76b6c5c4c5531467",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/tests/browser/fixtures.ts",
+      "sourceSha256": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/tests/browser/clerk.tsx",
+      "sourceSha256": "4d33465d536a14f819e1596f9563e168a02538a545f388b60ee3ef7a58a946ce",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    },
+    {
+      "path": "apps/web/test/browser/font.css",
+      "sourceSha256": "5a360a3b08787b40537f4592061d2bb7478dcdcd8d2de7a64f44b619ea72ba39",
+      "sourceMatchesPinned": true,
+      "sourceMatchesGit": true
+    }
+  ],
+  "authorManifestChecks": [
+    {
+      "file": "01-confirmed-product.patch",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "02-fixture-landmarks.patch",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "03-incomplete-semantic-followup.patch",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "ALL-PROPOSED.patch",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "BASELINE-RUNNER-PINS.json",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "CONTRAST-ARITHMETIC.json",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "FINAL-READ-ONLY-RECEIPT.json",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "INCOMPLETE-DISPOSITIONS.json",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "RAW-AUDIT-INVENTORY.json",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "REPORT.md",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "SOURCE-PINS.json",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "VERIFICATION-PLAN.md",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/src/app/globals.css",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/src/features/meri/MeriSuggestions.tsx",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/src/features/portfolio/index/portfolio.module.css",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/src/shared/shell/ProductShell.tsx",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "candidate/apps/web/test/browser/main.tsx",
+      "matches": true,
+      "bytesMatch": true
+    },
+    {
+      "file": "prepare-proposal.py",
+      "matches": true,
+      "bytesMatch": true
+    }
+  ],
+  "authorManifest": {
+    "path": "/tmp/capiro-unified-a11y-proposal-20261013/MANIFEST.json",
+    "bytes": 3538,
+    "sha256": "d3ad62a388c1aa1f89b749e14b8b7b4548aea0c481b3ba18f3a276c2d0ab9963"
+  },
+  "rawAudits": [
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-1440x1040.json",
+        "bytes": 369078,
+        "sha256": "1941dce4c5652721b7422072c88d1e176b441976ee5143171d69cecbf06ccf59"
+      },
+      "screenshot": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-1440x1040.png",
+        "bytes": 86524,
+        "sha256": "35fc3b2d4d4d05b55f45338fb56b8181e6a50155af95d36f67ce1a81b5808705"
+      },
+      "sourceStable": true,
+      "before": {
+        "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+        "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+        "diff": ""
+      },
+      "axeVersion": "4.14.0",
+      "emptyIsolationFailures": true,
+      "screenshotHashMatches": true,
+      "rules": {
+        "violations": {
+          "aria-allowed-role": 1,
+          "color-contrast": 3,
+          "region": 1
+        },
+        "incomplete": {
+          "aria-prohibited-attr": 1,
+          "color-contrast": 1
+        }
+      }
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-390x844.json",
+        "bytes": 318732,
+        "sha256": "f66c00f37dc792aeb45ff394e575198b1f23dda6b5cd6c42ead6277f94c6c7e8"
+      },
+      "screenshot": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-390x844.png",
+        "bytes": 43447,
+        "sha256": "32b239e586f893a37587993d40d42e80afe01fb6091c34f1956bcc33baf0c308"
+      },
+      "sourceStable": true,
+      "before": {
+        "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+        "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+        "diff": ""
+      },
+      "axeVersion": "4.14.0",
+      "emptyIsolationFailures": true,
+      "screenshotHashMatches": true,
+      "rules": {
+        "violations": {
+          "aria-allowed-role": 1,
+          "color-contrast": 1,
+          "region": 1
+        },
+        "incomplete": {
+          "aria-prohibited-attr": 1
+        }
+      }
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-1440x1040.json",
+        "bytes": 516010,
+        "sha256": "6c551a90497cf57881d71cdeb9c250a5c9fca295594392fe1b2157e0cc075150"
+      },
+      "screenshot": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-1440x1040.png",
+        "bytes": 138698,
+        "sha256": "78e20049017aadda44b347455114bd4551d77da935f3069f60d7362ab9cd94c1"
+      },
+      "sourceStable": true,
+      "before": {
+        "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+        "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+        "diff": ""
+      },
+      "axeVersion": "4.14.0",
+      "emptyIsolationFailures": true,
+      "screenshotHashMatches": true,
+      "rules": {
+        "violations": {
+          "color-contrast": 31,
+          "region": 1
+        },
+        "incomplete": {
+          "color-contrast": 2
+        }
+      }
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-390x844.json",
+        "bytes": 467080,
+        "sha256": "b581f35af7a44b4300c7bc00a9e695fe5c04c0996300b5c136794fbe86bdedce"
+      },
+      "screenshot": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-390x844.png",
+        "bytes": 56009,
+        "sha256": "399a96110948ea455b99dbcb4522cc7447df57d50ce099de906fa73d829607eb"
+      },
+      "sourceStable": true,
+      "before": {
+        "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+        "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+        "diff": ""
+      },
+      "axeVersion": "4.14.0",
+      "emptyIsolationFailures": true,
+      "screenshotHashMatches": true,
+      "rules": {
+        "violations": {
+          "color-contrast": 31,
+          "region": 1
+        },
+        "incomplete": {
+          "color-contrast": 1
+        }
+      }
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+        "bytes": 447590,
+        "sha256": "3ba6493245308d63c6951152fbc7e2f6a2a496c39908081fc17fc411272da8e1"
+      },
+      "screenshot": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.png",
+        "bytes": 106796,
+        "sha256": "670f6706013c3a61ed6dd82f56fa49701f71d325bae0786ef68b40f7493eb543"
+      },
+      "sourceStable": true,
+      "before": {
+        "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+        "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+        "diff": ""
+      },
+      "axeVersion": "4.14.0",
+      "emptyIsolationFailures": true,
+      "screenshotHashMatches": true,
+      "rules": {
+        "violations": {
+          "color-contrast": 2,
+          "heading-order": 1,
+          "label-content-name-mismatch": 1
+        },
+        "incomplete": {
+          "aria-prohibited-attr": 3,
+          "color-contrast": 13,
+          "label-content-name-mismatch": 1
+        }
+      }
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+        "bytes": 373801,
+        "sha256": "43848f358da3fd341e0fd21228c391f841cee88bd277006042475fe3f122eacb"
+      },
+      "screenshot": {
+        "path": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.png",
+        "bytes": 52311,
+        "sha256": "e31abee36efef84582e081ab6b770c783c874573232ae565c4ec88c944f51c81"
+      },
+      "sourceStable": true,
+      "before": {
+        "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+        "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+        "diff": ""
+      },
+      "axeVersion": "4.14.0",
+      "emptyIsolationFailures": true,
+      "screenshotHashMatches": true,
+      "rules": {
+        "violations": {
+          "color-contrast": 2,
+          "heading-order": 1,
+          "label-content-name-mismatch": 1
+        },
+        "incomplete": {
+          "aria-prohibited-attr": 3,
+          "color-contrast": 13,
+          "label-content-name-mismatch": 1
+        }
+      }
+    }
+  ],
+  "violationNodeInstances": 80,
+  "incompleteNodeInstances": 40,
+  "mappedIncompleteNodeInstances": 40,
+  "incompleteExactMultisetMatch": true,
+  "incompleteDispositionCounts": {
+    "source-supported semantic proposal; rendered/AT verification unrun": 8,
+    "manual contrast review outstanding; source arithmetic only": 30,
+    "manual review outstanding": 2
+  },
+  "contrastNodePairs": [
+    {
+      "foreground": "#78716c",
+      "background": "#f5f5f4",
+      "count": 70
+    }
+  ],
+  "contrastRecalculated": {
+    "oldOnMuted": 4.39773360683,
+    "newOnMuted": 4.59341287788919,
+    "newOnWhite": 5.011050710200293
+  },
+  "axeDependency": {
+    "currentDirectWebDeclaration": null,
+    "lockedPackage": {
+      "version": "4.14.0",
+      "resolved": "https://registry.npmjs.org/axe-core/-/axe-core-4.14.0.tgz",
+      "integrity": "sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==",
+      "dev": true,
+      "license": "MPL-2.0",
+      "engines": {
+        "node": ">=4"
+      }
+    },
+    "installedPackage": {
+      "path": "/workspace/capiro-onboard-port-20261013/node_modules/axe-core/package.json",
+      "bytes": 7001,
+      "sha256": "486715407f3c8c7d1de882bacc2622acb0adf1ec0f21807fc1251aed64bf9001"
+    },
+    "installedAxeJS": {
+      "path": "/workspace/capiro-onboard-port-20261013/node_modules/axe-core/axe.js",
+      "bytes": 1477661,
+      "sha256": "aae0b8b36278089962105b2351ea64f4da7d3d440b54e162e21616d597aa0d6f"
+    }
+  },
+  "testProposalInputs": [
+    {
+      "path": "/tmp/capiro-unified-a11y-tests-proposal-20261013/accessibility.ts",
+      "bytes": 697,
+      "sha256": "041d33331ffe2aacbf9c2ac5bc86fa00e4134342612c9ad5ba311aa3e543dcce"
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-tests-proposal-20261013/portfolio-home-accessibility.spec.ts",
+      "bytes": 914,
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2"
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-tests-proposal-20261013/shared-home-accessibility.spec.ts",
+      "bytes": 1006,
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf"
+    }
+  ],
+  "runtimeOrTestsRun": false,
+  "applicationOrAuthorPacketWrites": false
+}

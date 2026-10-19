@@ -1,0 +1,13 @@
+{
+  "name": "execute-refusal-wrong-status",
+  "route": "execute",
+  "httpStatus": 403,
+  "response": {
+    "error": {
+      "code": "COMMAND_APPROVAL_REFUSED",
+      "outcome": "NOT_DISPATCHED"
+    }
+  },
+  "expected": "receiver_reject",
+  "note": "Approval refusal code requires its canonical HTTP409."
+}

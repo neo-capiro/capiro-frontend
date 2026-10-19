@@ -1,0 +1,25 @@
+{
+  "finalCounts": [
+    {
+      "file": "/workspace/capiro-meri-workflow-20261013/apps/web/tests/meri-action-bootstrap.test.ts",
+      "passed": 38,
+      "failed": 0
+    },
+    {
+      "file": "/workspace/capiro-meri-workflow-20261013/apps/web/tests/meri-action-proxy.test.ts",
+      "passed": 48,
+      "failed": 0
+    }
+  ],
+  "initialTotal": 82,
+  "initialPassed": 81,
+  "initialFailed": 1,
+  "finalTotal": 86,
+  "finalPassed": 86,
+  "staticRouteReview": "Thin POST adapter uses auth(), session.userId and exactly session.getToken({template:\"capiro\"}); no template change/browser native-token forwarding. Static only, no Clerk/native runtime qualification.",
+  "unrun": [
+    "full typecheck (root owns)",
+    "Next/browser/runtime/source-native/provider gates"
+  ],
+  "testScope": "Injected fetch/token callbacks, native Request/Response/ReadableStream and fake timers; zero network calls"
+}

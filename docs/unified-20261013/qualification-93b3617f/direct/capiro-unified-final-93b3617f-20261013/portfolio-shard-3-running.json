@@ -1,0 +1,23 @@
+{
+  "pid": 1301113,
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-93b3617f-20261013/portfolio-shard-3-results.json",
+    "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=3",
+    "--shard=3/4",
+    "--output=/workspace/capiro-unified-runtime-tmp-20261013/portfolio-shard-3-artifacts"
+  ],
+  "startedUTC": "2026-10-13T06:59:04.349038+00:00",
+  "source": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "sourceDiff": ""
+  }
+}

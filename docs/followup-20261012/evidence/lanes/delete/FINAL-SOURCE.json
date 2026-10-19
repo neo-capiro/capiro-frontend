@@ -1,0 +1,20 @@
+{
+  "time": "2026-10-12T18:19:43.373971+00:00",
+  "head": "274a7d876d36a964aedf8081dc83225078fe092c",
+  "appTree": "d67f99d2fadb4cb1735dea9910c0c096b5eb0395",
+  "files": {
+    "apps/web/src/features/portfolio/files/DeleteFile.tsx": "6af9a574f8bd8dd8af08de849c3610557d3ff80bcea89c916f3c6d947dccd861",
+    "apps/web/src/features/portfolio/files/FilesPage.tsx": "f653edde31a3d6f020f46dc80a9015354d4fff72195c658e325f3d39b8019422",
+    "apps/web/src/features/portfolio/files/deletion.ts": "51402c45adc651e34f5d3d38f566dc7f054efc73f5fee4b6c7dca3661c93f0d3",
+    "apps/web/src/features/portfolio/files/mutations.ts": "9a531e2e772095680371b089e1b35e7d2e250e6f238576202f2ff6826e0940eb",
+    "apps/web/src/features/portfolio/files/useFileDeletion.ts": "db4bf033c957345368c1baf106b84509ed29749e3ea2b7e69d79504fbded7a60",
+    "apps/web/tests/browser/files-delete-recovery.spec.ts": "31bd8876d7edb4ed73a4412a629b2b6a63197a54fae43552f17865e5aec3f7a4",
+    "apps/web/tests/files-delete-recovery.test.ts": "a21cf371f77ba974560fc875223ce246e73e14b1065ce4b51bad15b588594004"
+  },
+  "checks": {
+    "unit": 39,
+    "typecheck": 0,
+    "lint": 0,
+    "architecture": "errors[]; FilesPage review pending root registry"
+  }
+}

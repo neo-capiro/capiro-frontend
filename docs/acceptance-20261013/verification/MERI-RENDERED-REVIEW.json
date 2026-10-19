@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-13T11:57:07.876799+00:00",
+  "result_sha256": "a599b17f6bc6f9183257cb1676b61c443b2866f1ebbc3e331daf72906ea82656",
+  "scope": "Meri Home and pre-connection Files at1440/390 dark; actual rendered foreground and opaque grayscale gradient stops/ancestor effects, preserving original axe incompletes. Not native service, full WCAG, screen reader, or whole Figma acceptance.",
+  "visual_review": "Root viewed exact Figma448:89992 and rendered Home screenshots at1440/390. Authored light header, dark gradients, light primary controls, existing assets and responsive stacking retained. Samples, draft/focus state, added available Actions destination and disconnected notice differ intentionally from static reference. No image edits or screenshot baseline replacement.",
+  "cases": [
+    {
+      "test": "Meri authored dark workspace keeps the shared header light at 1440px",
+      "status": "passed",
+      "automated_violations": 0,
+      "axe_incomplete_nodes": 23,
+      "rendered_bounds_reviewed": 23,
+      "lowest_contrast": 6.493671271962192,
+      "unsupported_compositing": 0
+    },
+    {
+      "test": "Meri Files theme follows preference through scoped navigation and history at 1440px",
+      "status": "passed",
+      "automated_violations": 0,
+      "axe_incomplete_nodes": 9,
+      "rendered_bounds_reviewed": 9,
+      "lowest_contrast": 6.493671271962192,
+      "unsupported_compositing": 0
+    },
+    {
+      "test": "Meri authored dark workspace keeps the shared header light at 390px",
+      "status": "passed",
+      "automated_violations": 0,
+      "axe_incomplete_nodes": 20,
+      "rendered_bounds_reviewed": 20,
+      "lowest_contrast": 6.493671271962192,
+      "unsupported_compositing": 0
+    },
+    {
+      "test": "Meri Files theme follows preference through scoped navigation and history at 390px",
+      "status": "passed",
+      "automated_violations": 0,
+      "axe_incomplete_nodes": 6,
+      "rendered_bounds_reviewed": 6,
+      "lowest_contrast": 14.229178816680411,
+      "unsupported_compositing": 0
+    }
+  ]
+}

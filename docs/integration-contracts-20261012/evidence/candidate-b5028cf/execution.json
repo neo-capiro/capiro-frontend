@@ -1,0 +1,95 @@
+{
+  "source": "b5028cf033e019e14943940f287ad12a1192554a",
+  "tree": "8c77d32c6c89332e96b7f5d8799b5d9f3e35edee",
+  "updatedAt": "2026-10-12T06:41:56.817212+00:00",
+  "status": "FAILED_INDEPENDENT_RELOAD_DUPLICATION_REVIEW",
+  "gates": {
+    "cleanInstall": {
+      "exitCode": 0,
+      "packages": 847
+    },
+    "combinedCheck": {
+      "exitCode": 0,
+      "rootTests": 58,
+      "portfolioUnitTests": 1099,
+      "gatewayUnitTests": 94,
+      "transportTests": 21,
+      "lintErrors": 0,
+      "lintWarnings": 76,
+      "architectureBlocking": 0,
+      "inheritedUnreviewed": 25
+    },
+    "modulesBrowser": {
+      "exitCode": 0,
+      "startTime": "2026-10-12T06:20:46.543Z",
+      "duration": 102985.685,
+      "expected": 72,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "productionBuild": {
+      "exitCode": 0
+    },
+    "actualStandalone": {
+      "exitCode": 0,
+      "pageErrors": []
+    },
+    "directElementsWithoutReceipt": {
+      "exitCode": 1,
+      "pass": 12,
+      "fail": 3,
+      "reason": "Mandatory fresh SSR receipt was not supplied; source unchanged."
+    },
+    "shippingElements": {
+      "exitCode": 0,
+      "pass": 15,
+      "fail": 0,
+      "receiptSha256": "9e9deb188b7abf5df782bfd3d17c4d43960603869bbf66eae218e94ed31901c1"
+    },
+    "actualMeri": {
+      "exitCode": 0,
+      "viewports": [
+        1440,
+        390
+      ],
+      "runStates": 8,
+      "pageErrors": [],
+      "serviceCalls": 0
+    },
+    "portfolioBrowser": {
+      "exitCode": 130,
+      "status": "interrupted_for_confirmed_P1",
+      "stats": {
+        "startTime": "2026-10-12T06:24:04.702Z",
+        "duration": 994115.351,
+        "expected": 341,
+        "skipped": 562,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "reason": "Parent independent reviewer reproduced two activity/task pairs after lost response plus reload. Remaining suite stopped deliberately; not a full qualification pass.",
+      "breakdown": {
+        "passed": 341,
+        "failed": 1,
+        "interrupted": 1,
+        "unrun": 561
+      },
+      "failure": "capability-presentation.spec.ts:195 keyboard Details/Name focus, first lost-focus expectation at line241"
+    },
+    "container": {
+      "status": "blocked",
+      "reason": "Official Alpine package index returned HTTP403 through existing proxy at 06:21 UTC."
+    },
+    "nativeLive": {
+      "status": "unrun",
+      "portfolioRowsUnaccepted": 337
+    }
+  },
+  "authorization": "No merge/deploy/AWS/resource/credential/security/database/provider/billing/paid-model action.",
+  "independentReview": {
+    "status": "fail",
+    "finding": "P1 reload loses in-memory original command and permits a new key, duplicating activity and task. Parent-reported expected one pair, actual two.",
+    "otherResults": "Member Commitment exclusion and ordered-owner checks passed; 138 units and 21 browsers passed; one adversarial failed; prospect changes not yet reviewed."
+  }
+}

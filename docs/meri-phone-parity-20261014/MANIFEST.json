@@ -1,0 +1,660 @@
+{
+  "schema": "capiro-meri-phone-parity/1",
+  "parentFrozenReleaseCommit": "ee9d872743f44f927fa924eebd764da8e093888c",
+  "parentFrozenReleaseTree": "f17576deac06e97e0dfc9404a13844baa0c4cce4",
+  "figma": {
+    "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+    "nodeId": "449:88256",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "qualification": {
+    "aggregateExit": 0,
+    "buildExit": 0,
+    "standalone": 36,
+    "standalonePageErrors": [],
+    "sealedBrowserCases": 54,
+    "dedicatedCasesSubset": 8,
+    "existingDraftActionsKeyboardQualified": 6,
+    "architectureErrors": 0,
+    "architectureBlocking": 0,
+    "inheritedUnreviewed": 19,
+    "desktopPNGsByteIdentical": [
+      "light",
+      "dark"
+    ]
+  },
+  "intentionalVisualDifferences": [
+    "38px retained workspace navigation",
+    "third Analyze card and extra draft actions through scrolling",
+    "disabled sending",
+    "explicit synthetic footer",
+    "no fake recent-conversation action"
+  ],
+  "nativeAcceptance": "unperformed; all337 rows remain open",
+  "deployed": false,
+  "files": [
+    {
+      "path": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "bytes": 2590,
+      "sha256": "7acb8c6c26f6df641d18821c62a35a7070486a2ab04c42c2857e23c7abdafd65"
+    },
+    {
+      "path": "apps/web/src/features/meri/fixtures/MeriHomeFixture.tsx",
+      "bytes": 2196,
+      "sha256": "62d0bffc85a6dc42bf8d1e33266746b768f834e88797be2a81619b78a15f3e5d"
+    },
+    {
+      "path": "apps/web/src/features/meri/home.module.css",
+      "bytes": 6100,
+      "sha256": "403362e2175145f99eaf2d4b2e2b7d66af69f2239d27e1457cacfa9e8bbff3dd"
+    },
+    {
+      "path": "apps/web/src/shared/shell/shell.module.css",
+      "bytes": 4017,
+      "sha256": "65ccb4d9b010889fb596a61e62d10c97d8e497f744e821613588246116d331cd"
+    },
+    {
+      "path": "apps/web/test/browser/acceptance-meri-theme.spec.ts",
+      "bytes": 5318,
+      "sha256": "62891fe2416fb73c0a687b6200a32518e58906ef40684baaceb7a6d6331517c5"
+    },
+    {
+      "path": "apps/web/test/browser/figma-parity.spec.ts",
+      "bytes": 6650,
+      "sha256": "1e2293bb7e86ac82382b5949ee5d676806fdba9dfa29c2495874c4f781ac459c"
+    },
+    {
+      "path": "apps/web/test/browser/meri-phone-parity.spec.ts",
+      "bytes": 6873,
+      "sha256": "35fe77d3225291dc486c2e29956d5055d105b3891aae1a16dc017694bea7d780"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/HANDOFF.md",
+      "bytes": 6304,
+      "sha256": "95283f530c32802cf5751bfe49efb5e4215ca3e6c088ec9c28216a39da572a4e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/INDEPENDENT-REVIEW.md",
+      "bytes": 1684,
+      "sha256": "431ff56814afd08bef34a3e658f338dd97c61f0819d9fe69c7cca88d1fac3d1f"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/geometry.json",
+      "bytes": 14050,
+      "sha256": "e94688221411ab8667360b7c5ae35ca2205feccb663cf97291214e0e371e0eb0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-1440.png",
+      "bytes": 72632,
+      "sha256": "344bcd46e5dbb9f6b97886107924b9a27f6d3a1353ea7009c683084ed935ff06"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-390.png",
+      "bytes": 39347,
+      "sha256": "84cd1a7180799cfae81f6ca4f31815ae5a597d5d766a65f4eff1f005e02757b0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-conversation-mobile.png",
+      "bytes": 64787,
+      "sha256": "c098fd72c9cc17b07c41d0d89c8f2d2e9fea4b2e26444437dbdcf165bb30bd67"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-dark-1440.png",
+      "bytes": 209370,
+      "sha256": "634f4bd2c54a8914ad9292b13b7d7d58accef52a1dcdbd4617b0ac9eb0321031"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-dark-390.png",
+      "bytes": 80707,
+      "sha256": "88d8dc900bf3be126f2c437986072fba433034080591dc20086e2ae051522436"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-1440-dark.png",
+      "bytes": 211051,
+      "sha256": "3cd0218aeac4b65e8647137fa14bfe9366fc8b2072e476e8e8e9edb2803bcc26"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-1440-light.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-1440.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-320-dark.png",
+      "bytes": 82510,
+      "sha256": "d0918e9610186cfb88ca0c354450384a8685fa95daec2784879c2dc2a32a27d9"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-320-light.png",
+      "bytes": 44792,
+      "sha256": "a1aba92c656e7a2bd6f907e665b52524007a1e9ba33ae1c851bc263754799f9e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-390-dark.png",
+      "bytes": 82262,
+      "sha256": "d785c0411f91c16b96a7e0e984672bbc499e3801b52f650ff5b1a37e33e6e7ac"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-390-light.png",
+      "bytes": 44229,
+      "sha256": "6bb81a134b2f65f44fcdbb574365ef04767f26dfbcb95559c913f4f6392d3bc5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-fixture-390.png",
+      "bytes": 44229,
+      "sha256": "6bb81a134b2f65f44fcdbb574365ef04767f26dfbcb95559c913f4f6392d3bc5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-ordinary-390-dark.png",
+      "bytes": 83708,
+      "sha256": "11ca22466715eb090f59e467e74061b82f3b77a7bead0b190eb1b78bd305c36c"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-ordinary-390-light.png",
+      "bytes": 39347,
+      "sha256": "84cd1a7180799cfae81f6ca4f31815ae5a597d5d766a65f4eff1f005e02757b0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/meri-real-context-mobile.png",
+      "bytes": 39576,
+      "sha256": "205c18ff068d541dca05545cd4466afd350c4bec92a5dc99ac037a3b2a872ed2"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/after/results.json",
+      "bytes": 4739760,
+      "sha256": "8c7c32b97389c8a7392b8fb5f31a72763754e72e5309721d2f1efdd4c90fb577"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/geometry.json",
+      "bytes": 12844,
+      "sha256": "abbac05f6170df138813ce76a948d0727285822c025399107142f800f7f15ca3"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-fixture-1440-dark.png",
+      "bytes": 211051,
+      "sha256": "3cd0218aeac4b65e8647137fa14bfe9366fc8b2072e476e8e8e9edb2803bcc26"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-fixture-1440-light.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-fixture-320-dark.png",
+      "bytes": 104727,
+      "sha256": "08a8e12aa63d6b2197062cd66000574d766f668b1cee03aba5af924367e2c402"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-fixture-320-light.png",
+      "bytes": 57321,
+      "sha256": "0bd728c8efa518a58064e956a6b2592758d4eaef323c7bbd7d1bda2a916bbb2d"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-fixture-390-dark.png",
+      "bytes": 101291,
+      "sha256": "4d26ebe44efa61759a4ec8240ed84592d43edd550fa3bc88920d9172221898ae"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-fixture-390-light.png",
+      "bytes": 56506,
+      "sha256": "fa4986a0b87bea910246ff7cb38b60c0b421948736283dc34aa12c6f76158029"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-ordinary-390-dark.png",
+      "bytes": 87068,
+      "sha256": "8a88fceaae431923bdef72e9b20e3df5892f22c818fd48699d2bd8d6a6b80af6"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/meri-ordinary-390-light.png",
+      "bytes": 40659,
+      "sha256": "da2f28d99850f79d7ca8cacd303b5e17e378b04832c2388623b51447c16ccf13"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/before/results.json",
+      "bytes": 25171,
+      "sha256": "b7beb8813e9018ae8b9f6bf6fdb3f08248e3cfef262b64af438eb771a4fd56ed"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/desktop-comparison.json",
+      "bytes": 638,
+      "sha256": "9e3aa7966cd6d3757bd22a140677157b789f13e6a39fbede670dcd3973fd9dba"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-after.log.raw.json",
+      "bytes": 2834,
+      "sha256": "b6865a918b24ba34eabb37b5cc107af6dd3dca311fbf1afcdc522e05fdfe3849"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-architecture.log.raw.json",
+      "bytes": 1237664,
+      "sha256": "b4fdbbcdc51efead287c43dcc838b94bb7abb4db0551658dd05ac1f66f18c865"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-before.log.raw.json",
+      "bytes": 2834,
+      "sha256": "7cc8d22537c6b2aa71f53727acf2b1496ab659a6bdc9a0f74665c12a50b63ec6"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-browser-final.log.raw.json",
+      "bytes": 25451,
+      "sha256": "04243cb9daa5e66c7f6dd027dbe1c35b8abac9e30f1a027cd81072bd2b8d32fc"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-browser-qualified-final.log.raw.json",
+      "bytes": 26631,
+      "sha256": "4732764294166bf316eb1875519d998b5ed01f969d1c1a10303fc048cf7f3948"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-browser-sealed.log.raw.json",
+      "bytes": 12322,
+      "sha256": "3b80efdbfc7b35fd6761df645005660e4a9045365747834697b627495cda175d"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-build.log.raw.json",
+      "bytes": 3798,
+      "sha256": "9f69e302423766601b126107ce4ee5779e1a0ae0995d1d01121c7f599c00c354"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-full-check.log.raw.json",
+      "bytes": 1342249,
+      "sha256": "7ffc22784b8abe61709bd9e5be8fd177fec3324cbacf7af3bb18da81107ba5cc"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-keyboard-qualified.log.raw.json",
+      "bytes": 20943,
+      "sha256": "59b361ebc8848e89b69c4c0133b8c48b1490ac3a1dcd38d22cb0daa0a33df217"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-qualified-browser.log.raw.json",
+      "bytes": 40083,
+      "sha256": "7d1c810b8c131d6a09247f777790fa9d702e42a1ffd1954e2984113958ef443f"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-standalone.log.raw.json",
+      "bytes": 12106,
+      "sha256": "98aa55dcea5869c7c76ae34c3b9b8750317dc3c054faa4b972ac6753ec332586"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/evidence/capiro-meri-phone-types.log.raw.json",
+      "bytes": 1233,
+      "sha256": "6e6761218bd0dd509a9c18ce493f8f7326b8cc4efea3e449ae7ca12636328bdc"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/figma-449-88256.context.txt",
+      "bytes": 21360,
+      "sha256": "09773907a122f90ab8b831591a4d7f6fa90f1dcc2325d11e82da1c63e061360b"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/figma-449-88256.png",
+      "bytes": 36394,
+      "sha256": "72eee8b77605c46a06959c4a8c08c30885125a472da950182db75d9cabf2fe7c"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-1440.png",
+      "bytes": 72632,
+      "sha256": "344bcd46e5dbb9f6b97886107924b9a27f6d3a1353ea7009c683084ed935ff06"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-390.png",
+      "bytes": 39347,
+      "sha256": "84cd1a7180799cfae81f6ca4f31815ae5a597d5d766a65f4eff1f005e02757b0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-dark-1440.png",
+      "bytes": 209370,
+      "sha256": "634f4bd2c54a8914ad9292b13b7d7d58accef52a1dcdbd4617b0ac9eb0321031"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-dark-390.png",
+      "bytes": 80707,
+      "sha256": "88d8dc900bf3be126f2c437986072fba433034080591dc20086e2ae051522436"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-1440-dark.png",
+      "bytes": 211051,
+      "sha256": "3cd0218aeac4b65e8647137fa14bfe9366fc8b2072e476e8e8e9edb2803bcc26"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-1440-light.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-1440.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-320-dark.png",
+      "bytes": 82510,
+      "sha256": "d0918e9610186cfb88ca0c354450384a8685fa95daec2784879c2dc2a32a27d9"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-320-light.png",
+      "bytes": 44792,
+      "sha256": "a1aba92c656e7a2bd6f907e665b52524007a1e9ba33ae1c851bc263754799f9e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-390-dark.png",
+      "bytes": 82262,
+      "sha256": "d785c0411f91c16b96a7e0e984672bbc499e3801b52f650ff5b1a37e33e6e7ac"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-390-light.png",
+      "bytes": 44229,
+      "sha256": "6bb81a134b2f65f44fcdbb574365ef04767f26dfbcb95559c913f4f6392d3bc5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-fixture-390.png",
+      "bytes": 44229,
+      "sha256": "6bb81a134b2f65f44fcdbb574365ef04767f26dfbcb95559c913f4f6392d3bc5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-ordinary-390-dark.png",
+      "bytes": 83708,
+      "sha256": "11ca22466715eb090f59e467e74061b82f3b77a7bead0b190eb1b78bd305c36c"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/meri-ordinary-390-light.png",
+      "bytes": 39347,
+      "sha256": "84cd1a7180799cfae81f6ca4f31815ae5a597d5d766a65f4eff1f005e02757b0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/results.json.gz",
+      "bytes": 1764553,
+      "sha256": "1f231f8a5ff53daecffaeaac381a718097d42b570cbe80c359c461c0b2f747f7"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-failure/results.json.hash.json",
+      "bytes": 154,
+      "sha256": "506ac6a5fe6e5e1f8dd4b011f0ae153f672920eb1278154769cb0e4f408aee69"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-1440.png",
+      "bytes": 72632,
+      "sha256": "344bcd46e5dbb9f6b97886107924b9a27f6d3a1353ea7009c683084ed935ff06"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-390.png",
+      "bytes": 40801,
+      "sha256": "a5ac7403897d72dc338b3df3fd35acf40e0c23358c9cc1ac4bf004aa603b08cb"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-conversation-mobile.png",
+      "bytes": 64787,
+      "sha256": "c098fd72c9cc17b07c41d0d89c8f2d2e9fea4b2e26444437dbdcf165bb30bd67"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-dark-1440.png",
+      "bytes": 209370,
+      "sha256": "634f4bd2c54a8914ad9292b13b7d7d58accef52a1dcdbd4617b0ac9eb0321031"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-dark-390.png",
+      "bytes": 86579,
+      "sha256": "dfdff5a56d27cc313a7e3aed50532cfcb054b4465715913e85cdba71e57b2e25"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-1440-dark.png",
+      "bytes": 211051,
+      "sha256": "3cd0218aeac4b65e8647137fa14bfe9366fc8b2072e476e8e8e9edb2803bcc26"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-1440-light.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-1440.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-320-dark.png",
+      "bytes": 87526,
+      "sha256": "6a829ef9524be2a27d339cc3c7c532656803c822e154d5f0109184f0968c6bf7"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-320-light.png",
+      "bytes": 46037,
+      "sha256": "eccae245a2097e8b1e614633adf38f74985746b68e38021e1cf25360f1b4544e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-390-dark.png",
+      "bytes": 88045,
+      "sha256": "3c4f305186255144761edd362d31c6beccb06b7e2974d19d2d48eae486184d96"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-390-light.png",
+      "bytes": 45696,
+      "sha256": "e29d6f9e369eb60dd175543b81fe3f669ef4d3ee40c7e890d5fc9c273d72bec1"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-fixture-390.png",
+      "bytes": 45696,
+      "sha256": "e29d6f9e369eb60dd175543b81fe3f669ef4d3ee40c7e890d5fc9c273d72bec1"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-ordinary-390-dark.png",
+      "bytes": 87127,
+      "sha256": "a16ac6ec0a67f313a189b87ca9620d6f7087be905f15454e25b14b0e5b9a8e0e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-ordinary-390-light.png",
+      "bytes": 40801,
+      "sha256": "a5ac7403897d72dc338b3df3fd35acf40e0c23358c9cc1ac4bf004aa603b08cb"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/meri-real-context-mobile.png",
+      "bytes": 41031,
+      "sha256": "336e998b01e5959511f5ca85643a21942c6bde7560af976f8d53fb9d3e9dfaa6"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/results.json.gz",
+      "bytes": 645933,
+      "sha256": "1c1fab04efe25e06685928a9060b5968761fa1a67323dfe27ac2205113daf8a8"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/keyboard-initial/results.json.hash.json",
+      "bytes": 154,
+      "sha256": "702b724ddceab89ad6016ef8cd8670cd2e46f462a400af3529f33626df44b147"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-1440.png",
+      "bytes": 72632,
+      "sha256": "344bcd46e5dbb9f6b97886107924b9a27f6d3a1353ea7009c683084ed935ff06"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-390.png",
+      "bytes": 39347,
+      "sha256": "84cd1a7180799cfae81f6ca4f31815ae5a597d5d766a65f4eff1f005e02757b0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-conversation-mobile.png",
+      "bytes": 64787,
+      "sha256": "c098fd72c9cc17b07c41d0d89c8f2d2e9fea4b2e26444437dbdcf165bb30bd67"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-dark-1440.png",
+      "bytes": 209370,
+      "sha256": "634f4bd2c54a8914ad9292b13b7d7d58accef52a1dcdbd4617b0ac9eb0321031"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-dark-390.png",
+      "bytes": 80707,
+      "sha256": "88d8dc900bf3be126f2c437986072fba433034080591dc20086e2ae051522436"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-1440-dark.png",
+      "bytes": 211051,
+      "sha256": "3cd0218aeac4b65e8647137fa14bfe9366fc8b2072e476e8e8e9edb2803bcc26"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-1440-light.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-1440.png",
+      "bytes": 87422,
+      "sha256": "db3704d858e06f0023d13437f19a9b3f7ca2d30a4780205c3d9104b6dfa7d44e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-320-dark.png",
+      "bytes": 82510,
+      "sha256": "d0918e9610186cfb88ca0c354450384a8685fa95daec2784879c2dc2a32a27d9"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-320-light.png",
+      "bytes": 44792,
+      "sha256": "a1aba92c656e7a2bd6f907e665b52524007a1e9ba33ae1c851bc263754799f9e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-390-dark.png",
+      "bytes": 82262,
+      "sha256": "d785c0411f91c16b96a7e0e984672bbc499e3801b52f650ff5b1a37e33e6e7ac"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-390-light.png",
+      "bytes": 44229,
+      "sha256": "6bb81a134b2f65f44fcdbb574365ef04767f26dfbcb95559c913f4f6392d3bc5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-fixture-390.png",
+      "bytes": 44229,
+      "sha256": "6bb81a134b2f65f44fcdbb574365ef04767f26dfbcb95559c913f4f6392d3bc5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-ordinary-390-dark.png",
+      "bytes": 83708,
+      "sha256": "11ca22466715eb090f59e467e74061b82f3b77a7bead0b190eb1b78bd305c36c"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-ordinary-390-light.png",
+      "bytes": 39347,
+      "sha256": "84cd1a7180799cfae81f6ca4f31815ae5a597d5d766a65f4eff1f005e02757b0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/meri-real-context-mobile.png",
+      "bytes": 39576,
+      "sha256": "205c18ff068d541dca05545cd4466afd350c4bec92a5dc99ac037a3b2a872ed2"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/results.json.gz",
+      "bytes": 2246075,
+      "sha256": "1f70d12edf842a6263f16f88af73b495925725d20233ecc74caba2b4ea811bff"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/iterations/nearest-focus-failure/results.json.hash.json",
+      "bytes": 154,
+      "sha256": "6cd2dec42f8c96f856564eb9dfa13b8b1bb9b33498312a44b4243e578a4f35bc"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-1440-dark.png",
+      "bytes": 119855,
+      "sha256": "f7a4c614d007c14def4d8f6ae4a83ed69ed4a60188df916c067744d67f898267"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-1440-light.png",
+      "bytes": 51903,
+      "sha256": "c315862d3db98195343e3273e3cab3dd39c01479edc4a22f3ce88e285f165e43"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-390-dark.png",
+      "bytes": 46653,
+      "sha256": "c54eb0d75801f61d4193f06f21e912a4b314c0b042823cb32f4ea81b92392e49"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-390-light.png",
+      "bytes": 24956,
+      "sha256": "0c23be8625dc78ddc8f2e0a5085231e1b92a1162e6ae225ebad58df605ce0122"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-error-1440-dark.png",
+      "bytes": 204767,
+      "sha256": "d848d5e0714f7b3d1761efd60b8f4e5bf281d66a57cbad68e522ea0d57c3d310"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-error-1440-light.png",
+      "bytes": 111180,
+      "sha256": "f60e96decea825b96a2de45765a0e28c3ad3a8d9c81b8d5494ff0be45ca7f6b5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-error-390-dark.png",
+      "bytes": 129538,
+      "sha256": "c840b8ff7fe35b535922692082c6963fef3b30151d5fa2962c37a61c973f2a13"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-error-390-light.png",
+      "bytes": 82210,
+      "sha256": "e04b0fd3b2b3bbbc2a3c6002c71483c9029f78d9d904f9b5d0b7d0636a61a35d"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-files-1440-dark.png",
+      "bytes": 115536,
+      "sha256": "43719529c437ba5f14ff785b64ff761ebe1b7df88ae338edfb0ebd2181f5ecab"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-files-1440-light.png",
+      "bytes": 47660,
+      "sha256": "5748ba0ce40bf296dbcae86f1fea95c9c8344f54d8de3d9ef09fab8f18c4b8e5"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-files-390-dark.png",
+      "bytes": 42049,
+      "sha256": "3fc7784761d37410ea86af1285652f798bb4f952aef3c68348bd34e46c7a32f0"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "docs/meri-phone-parity-20261014/standalone/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    }
+  ]
+}

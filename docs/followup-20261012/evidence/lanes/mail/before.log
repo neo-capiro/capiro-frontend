@@ -1,0 +1,551 @@
+
+Running 15 tests using 1 worker
+
+(node:619205) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 apps/web/tests/browser/mail-local-draft.spec.ts:54:38 › saved signature display preserves append=true without copying HTML into the body (8.0s)
+(node:619375) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 apps/web/tests/browser/mail-local-draft.spec.ts:54:38 › saved signature display preserves append=false without copying HTML into the body (7.0s)
+(node:619579) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 apps/web/tests/browser/mail-local-draft.spec.ts:69:1 › saved signature preview blocks active markup and automatic remote content (7.0s)
+(node:619773) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 apps/web/tests/browser/mail-local-draft.spec.ts:84:32 › empty signature null has no misleading preview (1.9s)
+  ✓   5 apps/web/tests/browser/mail-local-draft.spec.ts:84:32 › empty signature  has no misleading preview (1.9s)
+  ✘   6 apps/web/tests/browser/mail-local-draft.spec.ts:91:1 › signature read failure remains distinct from empty and can be retried deliberately (6.9s)
+(node:620050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 apps/web/tests/browser/mail-local-draft.spec.ts:102:1 › local Undo restores exactly the body preceding the latest verified rewrite with no extra requests (7.0s)
+(node:620181) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 apps/web/tests/browser/mail-local-draft.spec.ts:110:1 › manual edits retire Undo and the next rewrite snapshots the new local draft (6.9s)
+(node:620329) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 apps/web/tests/browser/mail-local-draft.spec.ts:120:1 › repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits (7.1s)
+(node:620471) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 apps/web/tests/browser/mail-local-draft.spec.ts:134:37 › unverified subsequent rewrite retains the prior valid Undo (7.2s)
+(node:620793) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 apps/web/tests/browser/mail-local-draft.spec.ts:134:37 › failed subsequent rewrite retains the prior valid Undo (8.6s)
+(node:621328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › recipients replacement retires an earlier Undo snapshot (7.5s)
+(node:621707) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › actor replacement retires an earlier Undo snapshot (9.5s)
+(node:622045) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › invalidated replacement retires an earlier Undo snapshot (8.5s)
+(node:622291) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  15 apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › close replacement retires an earlier Undo snapshot (7.4s)
+
+
+  1) apps/web/tests/browser/mail-local-draft.spec.ts:54:38 › saved signature display preserves append=true without copying HTML into the body 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title="Saved signature preview"]').contentFrame().getByText('Synthetic Sender', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title="Saved signature preview"]').contentFrame().getByText('Synthetic Sender', { exact: true })
+
+
+      55 |   const state = await setup(page, { html: savedHtml, enabled }); await open(page);
+      56 |   const editor = page.getByRole("dialog", { name: "New email", exact: true });
+    > 57 |   await expect(editor.frameLocator('iframe[title="Saved signature preview"]').getByText("Synthetic Sender", { exact: true })).toBeVisible();
+         |                                                                                                                               ^
+      58 |   await expect(page.getByLabel("Append my saved signature")).toBeChecked({ checked: enabled });
+      59 |   await page.getByRole("button", { name: "Review email", exact: true }).click();
+      60 |   const review = page.getByRole("dialog", { name: "Send email", exact: true });
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:57:127
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/mail-local-draft.spec.ts:54:38 › saved signature display preserves append=false without copying HTML into the body 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title="Saved signature preview"]').contentFrame().getByText('Synthetic Sender', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title="Saved signature preview"]').contentFrame().getByText('Synthetic Sender', { exact: true })
+
+
+      55 |   const state = await setup(page, { html: savedHtml, enabled }); await open(page);
+      56 |   const editor = page.getByRole("dialog", { name: "New email", exact: true });
+    > 57 |   await expect(editor.frameLocator('iframe[title="Saved signature preview"]').getByText("Synthetic Sender", { exact: true })).toBeVisible();
+         |                                                                                                                               ^
+      58 |   await expect(page.getByLabel("Append my saved signature")).toBeChecked({ checked: enabled });
+      59 |   await page.getByRole("button", { name: "Review email", exact: true }).click();
+      60 |   const review = page.getByRole("dialog", { name: "Send email", exact: true });
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:57:127
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/mail-local-draft.spec.ts:69:1 › saved signature preview blocks active markup and automatic remote content 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('iframe[title="Saved signature preview"]').contentFrame().getByText('Synthetic Sender', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('iframe[title="Saved signature preview"]').contentFrame().getByText('Synthetic Sender', { exact: true })
+
+
+      75 |   await open(page);
+      76 |   const preview = page.frameLocator('iframe[title="Saved signature preview"]');
+    > 77 |   await expect(preview.getByText("Synthetic Sender", { exact: true })).toBeVisible();
+         |                                                                        ^
+      78 |   await expect(preview.getByAltText("Inline logo")).toBeVisible();
+      79 |   await expect(preview.locator("script,iframe,form,a[href],img[src^='https:'],[onerror]")).toHaveCount(0);
+      80 |   await expect(page.locator('iframe[title="Saved signature preview"]')).toHaveAttribute("sandbox", "");
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:77:72
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/tests/browser/mail-local-draft.spec.ts:91:1 › signature read failure remains distinct from empty and can be retried deliberately 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('region', { name: 'Saved signature' }).getByRole('alert')
+    Expected substring: "Signature temporarily unavailable"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Saved signature' }).getByRole('alert')
+
+
+      92 |   const state = await setup(page); state.signatureStatus = 503; await open(page);
+      93 |   const signature = page.getByRole("region", { name: "Saved signature" });
+    > 94 |   await expect(signature.getByRole("alert")).toContainText("Signature temporarily unavailable");
+         |                                              ^
+      95 |   await expect(page.getByText("No saved signature is available.", { exact: true })).toHaveCount(0);
+      96 |   state.signatureStatus = 200;
+      97 |   await signature.getByRole("button", { name: "Retry signature" }).click();
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:94:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) apps/web/tests/browser/mail-local-draft.spec.ts:102:1 › local Undo restores exactly the body preceding the latest verified rewrite with no extra requests 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:103:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) apps/web/tests/browser/mail-local-draft.spec.ts:110:1 › manual edits retire Undo and the next rewrite snapshots the new local draft 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:111:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) apps/web/tests/browser/mail-local-draft.spec.ts:120:1 › repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:121:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) apps/web/tests/browser/mail-local-draft.spec.ts:134:37 › unverified subsequent rewrite retains the prior valid Undo 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:135:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) apps/web/tests/browser/mail-local-draft.spec.ts:134:37 › failed subsequent rewrite retains the prior valid Undo 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:135:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › recipients replacement retires an earlier Undo snapshot 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › actor replacement retires an earlier Undo snapshot 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › invalidated replacement retires an earlier Undo snapshot 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › close replacement retires an earlier Undo snapshot 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })
+
+
+      49 |   await page.getByRole("button", { name: "Rewrite with Meri", exact: true }).click();
+      50 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue("Verified rewritten draft.");
+    > 51 |   await expect(page.getByRole("button", { name: "Undo Meri rewrite", exact: true })).toBeEnabled();
+         |                                                                                      ^
+      52 | }
+      53 |
+      54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {
+        at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13 failed
+    apps/web/tests/browser/mail-local-draft.spec.ts:54:38 › saved signature display preserves append=true without copying HTML into the body 
+    apps/web/tests/browser/mail-local-draft.spec.ts:54:38 › saved signature display preserves append=false without copying HTML into the body 
+    apps/web/tests/browser/mail-local-draft.spec.ts:69:1 › saved signature preview blocks active markup and automatic remote content 
+    apps/web/tests/browser/mail-local-draft.spec.ts:91:1 › signature read failure remains distinct from empty and can be retried deliberately 
+    apps/web/tests/browser/mail-local-draft.spec.ts:102:1 › local Undo restores exactly the body preceding the latest verified rewrite with no extra requests 
+    apps/web/tests/browser/mail-local-draft.spec.ts:110:1 › manual edits retire Undo and the next rewrite snapshots the new local draft 
+    apps/web/tests/browser/mail-local-draft.spec.ts:120:1 › repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits 
+    apps/web/tests/browser/mail-local-draft.spec.ts:134:37 › unverified subsequent rewrite retains the prior valid Undo 
+    apps/web/tests/browser/mail-local-draft.spec.ts:134:37 › failed subsequent rewrite retains the prior valid Undo 
+    apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › recipients replacement retires an earlier Undo snapshot 
+    apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › actor replacement retires an earlier Undo snapshot 
+    apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › invalidated replacement retires an earlier Undo snapshot 
+    apps/web/tests/browser/mail-local-draft.spec.ts:144:80 › close replacement retires an earlier Undo snapshot 
+  2 passed (1.9m)

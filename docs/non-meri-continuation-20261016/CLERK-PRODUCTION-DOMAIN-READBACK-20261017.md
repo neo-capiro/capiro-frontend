@@ -1,0 +1,10 @@
+# Capiro Clerk production domain readback
+
+Read-only observation on 17 October 2026 for the held frontend [PR #67](https://github.com/neo-capiro/capiro-frontend/pull/67) and Core first-chat integration. This is a source/configuration note, not a live admission or image qualification receipt.
+
+- An existing authenticated Clerk Dashboard session selected the **Capiro** application and its **Production** instance. No new sign-in or application selection is needed for this check.
+- The production instance lists `app.capiro.ai` as its verified primary domain. Its verified Frontend API DNS name is `clerk.app`, establishing `https://clerk.app.capiro.ai` as that instance's Frontend API issuer domain. This matches the issuer pinned by the held Core preview configuration and frontend PR #67's conditional dev-key configuration.
+- The same production instance lists a `capiro` JWT template. Native session tokens are still required for Meri session issuance and history membership reads as corrected in PR #67; template presence does not make a custom template token session-bound.
+- Read-only AWS Secrets Manager metadata for the configured `/capiro/dev/clerk/publishable-key-rAfesC` and `/capiro/dev/clerk/secret-key-FT67tM` references shows `pk_live`/`sk_live` descriptions, the same `Capiro-dev-Secrets` stack, and the same KMS key. It exposes no Clerk application/instance ID or key fingerprint. **The values behind those references have not been proved to match the Capiro Production instance.**
+
+The authorized Clerk/AWS owner should compare those two configured values privately with **Capiro > Production > Instance API keys** and report only whether both match. Do not send key or token values. PR #67's single allocated frontend image seal remains held for that answer. After a healthy Core service exists, an authorized native session must separately prove issuer, live session, active tenant/member and selected client through Core identity/context before first-chat activation. This note changes no service, source pin, credential, or access policy; Fable's Meri files and image remain separate.

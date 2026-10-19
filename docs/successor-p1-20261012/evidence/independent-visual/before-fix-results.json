@@ -1,0 +1,759 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-successor-visual-review/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-successor-visual-review/playwright.config.ts",
+    "rootDir": "/tmp/capiro-successor-visual-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-successor-visual-review/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-successor-visual-review",
+        "testIgnore": [],
+        "testMatch": [
+          "review.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-successor-visual-review/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "review.spec.ts",
+      "file": "review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Files ACL pending unknown review at 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:47:37.972Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-259ed4d424883032cab1",
+          "file": "review.spec.ts",
+          "line": 19,
+          "column": 6
+        },
+        {
+          "title": "Files folder unknown review at 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12855,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:01.982Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-b06483ccf72d1b3a142a",
+          "file": "review.spec.ts",
+          "line": 28,
+          "column": 6
+        },
+        {
+          "title": "Meeting pending unknown at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 308,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-meeting-receipts.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-meeting-receipts.html\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-meeting-receipts.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-meeting-receipts.html\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:32:295",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 295,
+                      "line": 32
+                    },
+                    "snippet": "  30 |  });\n  31 |  test(`Meeting pending unknown at ${width}`,async({page},info)=>{\n> 32 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;await page.route('**/core/engagement/meetings/meeting-one',async r=>{writes++;await hold.promise;return json(r,{...meeting,id:'foreign'});});await page.goto('/calendar-meeting-receipts.html');const d=page.getByRole('dialog',{name:'Edit meeting'});await d.getByRole('button',{name:'Save meeting'}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Subject',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,'meeting-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,'meeting-unknown');await expect(d.getByRole('button',{name:'Save meeting'})).toBeDisabled();expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                       ^\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n  35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 295,
+                        "line": 32
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-meeting-receipts.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-meeting-receipts.html\", waiting until \"load\"\u001b[22m\n\n\n  30 |  });\n  31 |  test(`Meeting pending unknown at ${width}`,async({page},info)=>{\n> 32 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;await page.route('**/core/engagement/meetings/meeting-one',async r=>{writes++;await hold.promise;return json(r,{...meeting,id:'foreign'});});await page.goto('/calendar-meeting-receipts.html');const d=page.getByRole('dialog',{name:'Edit meeting'});await d.getByRole('button',{name:'Save meeting'}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Subject',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,'meeting-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,'meeting-unknown');await expect(d.getByRole('button',{name:'Save meeting'})).toBeDisabled();expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                       ^\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n  35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n    at /tmp/capiro-successor-visual-review/review.spec.ts:32:295"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:14.922Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 295,
+                    "line": 32
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-549cca217471727a266e",
+          "file": "review.spec.ts",
+          "line": 31,
+          "column": 6
+        },
+        {
+          "title": "Calendar notes pending unknown at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 388,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 405,
+                      "line": 35
+                    },
+                    "snippet": "  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 405,
+                        "line": 35
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\", waiting until \"load\"\u001b[22m\n\n\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:15.729Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 405,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-77ba200e31a0f9c78492",
+          "file": "review.spec.ts",
+          "line": 34,
+          "column": 45
+        },
+        {
+          "title": "Calendar debriefs pending unknown at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 367,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 405,
+                      "line": 35
+                    },
+                    "snippet": "  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 405,
+                        "line": 35
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\", waiting until \"load\"\u001b[22m\n\n\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:16.772Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 405,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-911989ab9afb3d70a698",
+          "file": "review.spec.ts",
+          "line": 34,
+          "column": 45
+        },
+        {
+          "title": "Files ACL pending unknown review at 360",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 364,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:24:14",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 14,
+                      "line": 24
+                    },
+                    "snippet": "  22 |   await page.route('**/core/client-account-owners/options',r=>json(r,members));await page.route('**/engagement/attachments?**',r=>json(r,[file]));\n  23 |   await page.route(`**/files/${file.id}/access`,async r=>{if(r.request().method()==='GET')return json(r,review?{...file,viewerMode:'restricted',viewerUserIds:members.map(m=>m.id)}:file);writes++;await hold.promise;return json(r,file);});\n> 24 |   await page.goto(`/portfolio/${clientId}/files`);await page.getByRole('button',{name:`Actions for ${file.fileName}`}).click();await page.getByRole('menuitem',{name:'Manage access',exact:true}).click();const d=page.getByRole('dialog',{name:`Access: ${file.fileName}`});await d.getByRole('radio',{name:'Specific people'}).check();await d.getByRole('button',{name:'Save access'}).click();await expect.poll(()=>writes).toBe(1);\n     |              ^\n  25 |   await inspect(page,d,info,'files-access-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/save outcome is unknown/)).toBeVisible();await expect(d.getByRole('button',{name:'Save access'})).toBeDisabled();await inspect(page,d,info,'files-access-unknown');review=true;\n  26 |   await d.getByRole('button',{name:'Review current file'}).focus();await page.keyboard.press('Enter');await expect(d.getByText(/Current selected viewers/)).toBeVisible();await expect(d.getByRole('button',{name:'Save access'})).toBeEnabled();await inspect(page,d,info,'files-access-reviewed');await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n  27 |  });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 14,
+                        "line": 24
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\", waiting until \"load\"\u001b[22m\n\n\n  22 |   await page.route('**/core/client-account-owners/options',r=>json(r,members));await page.route('**/engagement/attachments?**',r=>json(r,[file]));\n  23 |   await page.route(`**/files/${file.id}/access`,async r=>{if(r.request().method()==='GET')return json(r,review?{...file,viewerMode:'restricted',viewerUserIds:members.map(m=>m.id)}:file);writes++;await hold.promise;return json(r,file);});\n> 24 |   await page.goto(`/portfolio/${clientId}/files`);await page.getByRole('button',{name:`Actions for ${file.fileName}`}).click();await page.getByRole('menuitem',{name:'Manage access',exact:true}).click();const d=page.getByRole('dialog',{name:`Access: ${file.fileName}`});await d.getByRole('radio',{name:'Specific people'}).check();await d.getByRole('button',{name:'Save access'}).click();await expect.poll(()=>writes).toBe(1);\n     |              ^\n  25 |   await inspect(page,d,info,'files-access-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/save outcome is unknown/)).toBeVisible();await expect(d.getByRole('button',{name:'Save access'})).toBeDisabled();await inspect(page,d,info,'files-access-unknown');review=true;\n  26 |   await d.getByRole('button',{name:'Review current file'}).focus();await page.keyboard.press('Enter');await expect(d.getByText(/Current selected viewers/)).toBeVisible();await expect(d.getByRole('button',{name:'Save access'})).toBeEnabled();await inspect(page,d,info,'files-access-reviewed');await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n  27 |  });\n    at /tmp/capiro-successor-visual-review/review.spec.ts:24:14"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:17.798Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 14,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-8416193e7a0688ad72f9",
+          "file": "review.spec.ts",
+          "line": 19,
+          "column": 6
+        },
+        {
+          "title": "Files folder unknown review at 360",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 345,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:29:316",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 316,
+                      "line": 29
+                    },
+                    "snippet": "  27 |  });\n  28 |  test(`Files folder unknown review at ${width}`,async({page},info)=>{\n> 29 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);await page.route('**/engagement/attachments?**',r=>json(r,[file]));await page.route(`**/files/${file.id}/access`,r=>json(r,file));await page.route(`**/files/${file.id}/folder`,r=>json(r,file));await page.goto(`/portfolio/${clientId}/files`);await page.getByRole('checkbox',{name:`Select ${file.fileName}`}).check();await page.getByRole('button',{name:'New folder',exact:true}).click();const d=page.getByRole('dialog',{name:'New folder',exact:true});await d.getByLabel('Folder name').fill('Quarterly reports and supporting evidence');await d.getByRole('button',{name:'Create folder & move file'}).click();await expect(d.getByText(/save outcome is unknown/)).toBeVisible();await inspect(page,d,info,'files-folder-unknown');await d.getByRole('button',{name:'Review current file'}).focus();await page.keyboard.press('Enter');await expect(d.getByText('Current saved folder: Reports')).toBeVisible();await inspect(page,d,info,'files-folder-reviewed');await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                            ^\n  30 |  });\n  31 |  test(`Meeting pending unknown at ${width}`,async({page},info)=>{\n  32 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;await page.route('**/core/engagement/meetings/meeting-one',async r=>{writes++;await hold.promise;return json(r,{...meeting,id:'foreign'});});await page.goto('/calendar-meeting-receipts.html');const d=page.getByRole('dialog',{name:'Edit meeting'});await d.getByRole('button',{name:'Save meeting'}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Subject',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,'meeting-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,'meeting-unknown');await expect(d.getByRole('button',{name:'Save meeting'})).toBeDisabled();expect(writes).toBe(1);expect(unexpected).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 316,
+                        "line": 29
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio/10000000-0000-4000-8000-000000000001/files\", waiting until \"load\"\u001b[22m\n\n\n  27 |  });\n  28 |  test(`Files folder unknown review at ${width}`,async({page},info)=>{\n> 29 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);await page.route('**/engagement/attachments?**',r=>json(r,[file]));await page.route(`**/files/${file.id}/access`,r=>json(r,file));await page.route(`**/files/${file.id}/folder`,r=>json(r,file));await page.goto(`/portfolio/${clientId}/files`);await page.getByRole('checkbox',{name:`Select ${file.fileName}`}).check();await page.getByRole('button',{name:'New folder',exact:true}).click();const d=page.getByRole('dialog',{name:'New folder',exact:true});await d.getByLabel('Folder name').fill('Quarterly reports and supporting evidence');await d.getByRole('button',{name:'Create folder & move file'}).click();await expect(d.getByText(/save outcome is unknown/)).toBeVisible();await inspect(page,d,info,'files-folder-unknown');await d.getByRole('button',{name:'Review current file'}).focus();await page.keyboard.press('Enter');await expect(d.getByText('Current saved folder: Reports')).toBeVisible();await inspect(page,d,info,'files-folder-reviewed');await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                            ^\n  30 |  });\n  31 |  test(`Meeting pending unknown at ${width}`,async({page},info)=>{\n  32 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;await page.route('**/core/engagement/meetings/meeting-one',async r=>{writes++;await hold.promise;return json(r,{...meeting,id:'foreign'});});await page.goto('/calendar-meeting-receipts.html');const d=page.getByRole('dialog',{name:'Edit meeting'});await d.getByRole('button',{name:'Save meeting'}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Subject',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,'meeting-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,'meeting-unknown');await expect(d.getByRole('button',{name:'Save meeting'})).toBeDisabled();expect(writes).toBe(1);expect(unexpected).toEqual([]);\n    at /tmp/capiro-successor-visual-review/review.spec.ts:29:316"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:18.850Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-360/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-360/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-360/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 316,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-4997e8d23b7fabdcbe71",
+          "file": "review.spec.ts",
+          "line": 28,
+          "column": 6
+        },
+        {
+          "title": "Meeting pending unknown at 360",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 358,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-meeting-receipts.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-meeting-receipts.html\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-meeting-receipts.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-meeting-receipts.html\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:32:295",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 295,
+                      "line": 32
+                    },
+                    "snippet": "  30 |  });\n  31 |  test(`Meeting pending unknown at ${width}`,async({page},info)=>{\n> 32 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;await page.route('**/core/engagement/meetings/meeting-one',async r=>{writes++;await hold.promise;return json(r,{...meeting,id:'foreign'});});await page.goto('/calendar-meeting-receipts.html');const d=page.getByRole('dialog',{name:'Edit meeting'});await d.getByRole('button',{name:'Save meeting'}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Subject',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,'meeting-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,'meeting-unknown');await expect(d.getByRole('button',{name:'Save meeting'})).toBeDisabled();expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                       ^\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n  35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 295,
+                        "line": 32
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-meeting-receipts.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-meeting-receipts.html\", waiting until \"load\"\u001b[22m\n\n\n  30 |  });\n  31 |  test(`Meeting pending unknown at ${width}`,async({page},info)=>{\n> 32 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;await page.route('**/core/engagement/meetings/meeting-one',async r=>{writes++;await hold.promise;return json(r,{...meeting,id:'foreign'});});await page.goto('/calendar-meeting-receipts.html');const d=page.getByRole('dialog',{name:'Edit meeting'});await d.getByRole('button',{name:'Save meeting'}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Subject',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,'meeting-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,'meeting-unknown');await expect(d.getByRole('button',{name:'Save meeting'})).toBeDisabled();expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                       ^\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n  35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n    at /tmp/capiro-successor-visual-review/review.spec.ts:32:295"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:19.842Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-360/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-360/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-360/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 295,
+                    "line": 32
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-b9be69514a2e10197af2",
+          "file": "review.spec.ts",
+          "line": 31,
+          "column": 6
+        },
+        {
+          "title": "Calendar notes pending unknown at 360",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 353,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 405,
+                      "line": 35
+                    },
+                    "snippet": "  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 405,
+                        "line": 35
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=notes\", waiting until \"load\"\u001b[22m\n\n\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:20.843Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-360/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-360/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-360/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 405,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-e806d7a395ee09864ada",
+          "file": "review.spec.ts",
+          "line": 34,
+          "column": 45
+        },
+        {
+          "title": "Calendar debriefs pending unknown at 360",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 376,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\", waiting until \"load\"\u001b[22m\n\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 405,
+                      "line": 35
+                    },
+                    "snippet": "  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 405,
+                        "line": 35
+                      },
+                      "message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/calendar-artifact-receipts.html?kind=debriefs\", waiting until \"load\"\u001b[22m\n\n\n  33 |  });\n  34 |  for(const kind of ['notes','debriefs'])test(`Calendar ${kind} pending unknown at ${width}`,async({page},info)=>{\n> 35 |   await page.setViewportSize({width,height:width===360?800:1040});const unexpected=await installFixtures(page);const hold=held();let writes=0;const singular=kind==='notes'?'note':'debrief';await page.route('**/core/engagement/meetings/**',async r=>{if(r.request().method()==='GET')return json(r,r.request().url().endsWith('/'+kind)?[]:meeting);writes++;await hold.promise;return json(r,{});});await page.goto('/calendar-artifact-receipts.html?kind='+kind);await page.getByRole('button',{name:'Add '+singular,exact:true}).click();const d=page.getByRole('dialog',{name:'Add '+singular});await d.getByLabel('Content',{exact:true}).fill('Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.');await d.getByRole('button',{name:'Save '+singular}).click();await expect.poll(()=>writes).toBe(1);await expect(d.getByLabel('Content',{exact:true})).toHaveAttribute('readonly','');await inspect(page,d,info,kind+'-pending');await page.keyboard.press('Escape');await expect(d).toBeVisible();hold.release();await expect(d.getByText(/may have completed/)).toBeVisible();await inspect(page,d,info,kind+'-unknown');await expect(d.getByRole('button',{name:'Save '+singular})).toBeDisabled();await page.keyboard.press('Escape');await expect(d).toHaveCount(0);expect(writes).toBe(1);expect(unexpected).toEqual([]);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                     ^\n  36 |  });\n  37 | }\n  38 |\n    at /tmp/capiro-successor-visual-review/review.spec.ts:35:405"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:48:21.820Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-360/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-360/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-360/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 405,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-8ba550bed2c19481978b",
+          "file": "review.spec.ts",
+          "line": 34,
+          "column": 45
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:47:36.396Z",
+    "duration": 46116.606,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

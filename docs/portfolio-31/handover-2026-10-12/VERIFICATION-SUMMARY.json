@@ -1,0 +1,37 @@
+{
+  "sourceHead": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+  "publishedEquivalentHead": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+  "sourceTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+  "command": "npm run check",
+  "exitCode": 0,
+  "durationSeconds": 62.487664,
+  "portfolioTests": 998,
+  "portfolioTestFiles": 66,
+  "foundationTests": 32,
+  "transportTests": 21,
+  "packageChecks": "passed",
+  "typecheck": "passed",
+  "lint": {
+    "errors": 0,
+    "existingNextImageWarnings": 11
+  },
+  "format": "passed",
+  "architecture": {
+    "errors": [],
+    "moduleCount": 505,
+    "routeCount": 22,
+    "sizeSummary": {
+      "total": 153,
+      "reviewed": 126,
+      "inheritedUnreviewed": 27,
+      "blocking": 0
+    }
+  },
+  "sourceChangedDuringCheck": [],
+  "finalCombinedBuild": "not run after final source",
+  "finalCombinedProductionBrowser": "not run after final source",
+  "finalCombinedFullBrowser": "not run after final source",
+  "signedInHostedAcceptance": "not accepted",
+  "receipt": "verification/root-check/receipt.json",
+  "log": "verification/root-check/gate.log"
+}

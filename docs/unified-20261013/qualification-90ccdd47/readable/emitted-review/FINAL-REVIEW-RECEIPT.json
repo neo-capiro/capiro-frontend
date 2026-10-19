@@ -1,0 +1,22 @@
+{
+  "atUTC": "2026-10-13T10:00:09.619696+00:00",
+  "verdict": "PASS_BOUNDED_READ_ONLY_PRESERVATION",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "trackedStatus": "clean",
+  "sourceOnlyPacketManifestSha256": "19fd6fc8e2cef4dd6c95d952c55c8c9c28999ccedea5b4fb41a527c679b194c0",
+  "buildId": "ryO7DKtR0WbApwqxzAn9j",
+  "traces": [
+    128,
+    164
+  ],
+  "clientJsScanned": 475,
+  "publicPackageMembers": 19,
+  "exactMappedFirstPartySources": 21,
+  "assets": {
+    "count": 179,
+    "bytes": 486014
+  },
+  "nativeAccepted": false,
+  "fullBrowserGateCompletionClaimed": false,
+  "reviewerApplicationRuntimeActions": 0
+}

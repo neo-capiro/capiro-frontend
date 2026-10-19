@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "sealedAt": "2026-10-13T06:33:53.751815+00:00",
+  "files": 49,
+  "bytes": 1114360,
+  "records": [
+    {
+      "path": "READ-ATTEMPTS.json",
+      "bytes": 744,
+      "sha256": "61883c851d90a2fa1220ce4d93ff72280ab12f2cbfaeb6bb594c5dfea8cf4167"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 7231,
+      "sha256": "e6660d5d3e8ac204799cf99ab4fcfbaf8c3372e94085abb51dde22e7596bc646"
+    },
+    {
+      "path": "SOURCE-VERIFICATION.json",
+      "bytes": 15230,
+      "sha256": "755b7f3559fd8c14adf4e9acbf40eaddb3dc4ea7ba143ae9f19b508bce942af1"
+    },
+    {
+      "path": "VERDICT.json",
+      "bytes": 825,
+      "sha256": "5123b166c05b700cead4fa6413cd82424d0d95d679f24c2e75222cb5b75925a4"
+    },
+    {
+      "path": "github-source-records.json",
+      "bytes": 456003,
+      "sha256": "506770325db759c67bc4881267927b7190c9a3ef9090f2bb35c9f7424015696c"
+    },
+    {
+      "path": "github-wiring-records.json",
+      "bytes": 70729,
+      "sha256": "f91a759666686d6056407688742dc8654ca4014263fb58c4fa24487ae5c8c5c9"
+    },
+    {
+      "path": "public-receiver/action-application.d.ts",
+      "bytes": 17721,
+      "sha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762"
+    },
+    {
+      "path": "public-receiver/package.json",
+      "bytes": 1754,
+      "sha256": "693564eebec85be85ab3e5fd94b2de6620207f841f411b7cd5d4f29f250706c9"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/package.json",
+      "bytes": 2050,
+      "sha256": "6de6b086942388fbdad21eca2f12bc1ba9f3a73f8ce9259249c46ffac3903134"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "bytes": 589,
+      "sha256": "a6f35fcd97672184101b6d77a609e6470c8f73da620a6ca1e8ecc39024154d26"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/correlation.ts",
+      "bytes": 4131,
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/host-controller.ts",
+      "bytes": 3597,
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/proxy.ts",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/query-journal.ts",
+      "bytes": 1241,
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "bytes": 8265,
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "bytes": 2038,
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b"
+    },
+    {
+      "path": "source/capiro-frontend/apps/web/src/shared/portfolio/config/config.ts",
+      "bytes": 3421,
+      "sha256": "e37e67bbf2a8306358d8d5925975392e9dd334c1bc4dc6689047003102004ea0"
+    },
+    {
+      "path": "source/capiro-frontend/vendor/meri-public-packages.json",
+      "bytes": 1840,
+      "sha256": "61f3faca8efc23e0ebe215ea99ff098d68346c28cf02f0d9d9a6a8450a5d54de"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/auth/application-authority.spec.ts",
+      "bytes": 28650,
+      "sha256": "b738b2dbc1917255b062af225b08063f5092551c75fceddfff2542ed5bf9338c"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/auth/application-authority.ts",
+      "bytes": 9325,
+      "sha256": "80d7913e68d63cfec1c15f9a76ebe0657baeb107f1880725c4ba3db567aa7309"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/auth/clerk.service.ts",
+      "bytes": 8258,
+      "sha256": "c49fdba20da5152a5eadb1dca864e6f789c943ad1b1ca560a529edad4f343191"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/auth/roles.guard.ts",
+      "bytes": 2703,
+      "sha256": "18e23d68f96a565b1994131b9affe7e4463e47e4979f22d897c7beaf450e6aa9"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/bootstrap/configure-api-http-app.ts",
+      "bytes": 7342,
+      "sha256": "ec2e02dff274b150d1594783249628927ca0e854916e8577c01b5503b2ba041c"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/context/context-security-scope.service.ts",
+      "bytes": 7013,
+      "sha256": "2de05899ac1fd82af13eead5956b8cbe23a237714a4b645839d5a955f7bdab24"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/context/context.module.ts",
+      "bytes": 2627,
+      "sha256": "6c74d843772f14864fc4d563b8fdb625479d84e6b5c553e18e27ef5abc2d66d9"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/main.ts",
+      "bytes": 1600,
+      "sha256": "58a7473c17e116dfe3c13197f124ed2c5fa1e9bb4ea708aa3092268bb92bbd36"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/meri/meri.controller.ts",
+      "bytes": 45695,
+      "sha256": "5b33f8e8f538731f783bb014d9cfd8c8b10fdca9d45b876157ef2cf03c5b0467"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/meri/meri.module.ts",
+      "bytes": 12478,
+      "sha256": "0556ee521e5208eac4e1566c8e69847859b8a12c64699ad6ae281233f8673c67"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/meri/meri.service.ts",
+      "bytes": 295936,
+      "sha256": "71c40abfd50a0fa124946ce5fb589aab875af23242a37f4438af78be4a5f6595"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/meri/meriv3-runtime.proxy.ts",
+      "bytes": 11027,
+      "sha256": "34abf99eb804afba2b598d430d4ed4d9806f4bb35b0254b9ccda1b1ef5f956e5"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/tenant/tenant-context.middleware.ts",
+      "bytes": 30010,
+      "sha256": "250df8d46a94f84239e99f46ce0dec5858cc06082c430ec4551d666491b83c0b"
+    },
+    {
+      "path": "source/capirov2/apps/api/src/tenant/tenant.module.ts",
+      "bytes": 358,
+      "sha256": "6858db17104b4f12a91c69a766bb6c93fc0d0d5cad8ebaf2f04503c9f4131616"
+    },
+    {
+      "path": "source/capirov2/docs/meri-application-authority-reviewed-publication-20261013/COMPOSITION.json",
+      "bytes": 1786,
+      "sha256": "6453e9577b33b36678e974924c302b463708a6e8a4d126163e2f7c425be2c270"
+    },
+    {
+      "path": "source/capirov2/docs/meri-application-authority-reviewed-publication-20261013/README.md",
+      "bytes": 2617,
+      "sha256": "f7b9e0ecc6f100e02be5adf7cb780660f60a46f153fa641c2bf0719790c8142e"
+    },
+    {
+      "path": "source/capirov2/docs/meri-application-authority-reviewed-publication-20261013/SOURCE-BINDINGS.json",
+      "bytes": 1596,
+      "sha256": "dcfb7f30227e39fb909db6be1f0474040ed5774bb2d6b0dc88b6c5c5498ad5ae"
+    },
+    {
+      "path": "source/meri-greenfield/apps/control/action-host/application-adapters/README.md",
+      "bytes": 7313,
+      "sha256": "bd6a9efd068af110a878508e36c96501036253b5c1b40aaf8037b5ad70adf559"
+    },
+    {
+      "path": "source/meri-greenfield/apps/control/action-host/application-adapters/authority-http.mjs",
+      "bytes": 4673,
+      "sha256": "744a3a648ca293242f4cb1ba43501bb3ffb76733911d14f97e2462457ccbeff4"
+    },
+    {
+      "path": "source/meri-greenfield/apps/control/action-host/application-adapters/context-adapter.mjs",
+      "bytes": 6198,
+      "sha256": "766dfedd4277ec855d8e92c4e8e33c1fc48c2ca8a5be41249499833b43f88afb"
+    },
+    {
+      "path": "source/meri-greenfield/apps/control/action-host/session/http.mjs",
+      "bytes": 3396,
+      "sha256": "2403d12bf43147aeea9b6fd040ca1dd662d4f30d3dd19e263187e2bc38b69542"
+    },
+    {
+      "path": "source/meri-greenfield/apps/control/action-host/session/owner.mjs",
+      "bytes": 9632,
+      "sha256": "7239a73d05784f492d1d7c68a371ab1ca5c94fada71fc74a20b8c3f372769084"
+    },
+    {
+      "path": "source/meri-greenfield/packages/contracts/action-authority-0.2/validate.mjs",
+      "bytes": 1880,
+      "sha256": "40fa36caeedb7ec17bef27119c846feb372bf5e1c6678032d5bcd0ab540ebd79"
+    }
+  ]
+}

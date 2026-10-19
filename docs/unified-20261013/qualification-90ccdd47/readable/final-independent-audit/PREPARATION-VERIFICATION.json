@@ -1,0 +1,148 @@
+{
+  "observedUTC": "2026-10-13T09:47:37.111966+00:00",
+  "harnessComparisons": [
+    {
+      "name": "qualify-successor.py",
+      "oldSha256": "566d3ceaa750b352699881f22a8f55556863b209804deda051b0ffcbd2df1786",
+      "newSha256": "810ab1f04786bfd0243c5a03195a0c9f0ad6976060c7fc2e7a16fe09344fbae2",
+      "onlyRecordedOutputPathsChange": true
+    },
+    {
+      "name": "run-gate.py",
+      "oldSha256": "d84a1f239cf259713f158c3b6495c73df53f1603a6a1f7bd2add734dbabf377c",
+      "newSha256": "d84a1f239cf259713f158c3b6495c73df53f1603a6a1f7bd2add734dbabf377c",
+      "onlyRecordedOutputPathsChange": true
+    },
+    {
+      "name": "run-portfolio-shards.py",
+      "oldSha256": "c84e35b58dc7f4e387f36e70b3b57dc6bf9244725713741cdc684e02f97dcde6",
+      "newSha256": "29894e006793d2510d166c07bb9403048b856d3e1f6005acfc0387bba9d7fd2c",
+      "onlyRecordedOutputPathsChange": true
+    },
+    {
+      "name": "verify-assets.mjs",
+      "oldSha256": "944bc1c875c4f03a432197a5d502793ef3d58b70f06d422e9086b7633c91838f",
+      "newSha256": "794aab8cbb0a10da0de149d8bd411eadde38fde0cd461c1c921fd44f3bd1fd15",
+      "onlyRecordedOutputPathsChange": true
+    },
+    {
+      "name": "verify-additions-v2.mjs",
+      "oldSha256": "cb19a631d8367b792350509fe9ad9541ba32ef21555d818126c41d739523d0b0",
+      "newSha256": "f454541edf2b4a5881896ff0a781a8085e928ca9fe52c78fb979ea04b2cdce57",
+      "onlyRecordedOutputPathsChange": true
+    }
+  ],
+  "typingReviewMembersVerified": [
+    {
+      "path": "FAILED-GATE-REFERENCES.json",
+      "sha256": "8b55b4b96a9e44cb73d912ef3e29d5e7e68dce465b4a689e03feae04b0fd5970",
+      "bytes": 370
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "7ae73b3a9e1a170eeb57867469da3635c29456b2ee712d87bde0aaf1ae373e7c",
+      "bytes": 2123
+    },
+    {
+      "path": "RESULT.json",
+      "sha256": "4e262a055a885511942a9b36fff82429d9d5a6695bb85e9975f05be9a0ae1580",
+      "bytes": 1225
+    },
+    {
+      "path": "after-emitted.mjs",
+      "sha256": "a1cafb1b24a8b2ecbcc3ce35b515c8f6966bc91fa2159c82a0ded7cb507e9fd2",
+      "bytes": 10876
+    },
+    {
+      "path": "after.ts",
+      "sha256": "791c8aa55576e1fcf17eda307e63c0d0751c9ce1be39bbdcf2ac8156386f429d",
+      "bytes": 10748
+    },
+    {
+      "path": "before-emitted.mjs",
+      "sha256": "5efb29a2379a0a33278748c9440c2d3588073262c85779bcb4209a7778f8a84a",
+      "bytes": 10845
+    },
+    {
+      "path": "before.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytes": 10654
+    },
+    {
+      "path": "normalized-after.mjs",
+      "sha256": "7359ebf13811bf68d7115ebc6c1a87cbf26b565aa7eec71958f9030ab12a6c81",
+      "bytes": 10841
+    },
+    {
+      "path": "verify.cjs",
+      "sha256": "a05c0641b89c675c659d2ed9b760feb535c155721a40ec2c1dc6edef586a54b6",
+      "bytes": 4819
+    }
+  ],
+  "historicalFailureReferencesVerified": [
+    {
+      "path": "/workspace/capiro-unified-files-final-20261013/check.log",
+      "sha256": "eaf8912d460b5ce6455ade04dad31dabfbd4354716d53da9ceea03df186858c2",
+      "bytes": 4091
+    },
+    {
+      "path": "/workspace/capiro-unified-files-final-20261013/check-exit.json",
+      "sha256": "b38b935f5cf8bdfa5666d138fd9296a32ee626f09059278ff69750c00553c143",
+      "bytes": 711
+    }
+  ],
+  "historicalFailureExit": {
+    "name": "check",
+    "command": [
+      "npm",
+      "run",
+      "check"
+    ],
+    "startedUTC": "2026-10-13T09:35:11.030057+00:00",
+    "endedUTC": "2026-10-13T09:35:29.751038+00:00",
+    "durationSeconds": 18.721012972993776,
+    "exitCode": 2,
+    "sourceBefore": {
+      "head": "6150e49ce69e8d73609ed974d6f3be796b152bdd",
+      "tree": "cc6c5ecc19793448ffb2580c162eb2ea21e6ab17",
+      "applicationTree": "5d8d35f1781593382b6cde092bc542bceb698cb6",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "6150e49ce69e8d73609ed974d6f3be796b152bdd",
+      "tree": "cc6c5ecc19793448ffb2580c162eb2ea21e6ab17",
+      "applicationTree": "5d8d35f1781593382b6cde092bc542bceb698cb6",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "historicalBuildReceiptPresent": false,
+  "historicalBuildLogPresent": false,
+  "successorExecutableSourceDelta": [
+    "apps/web/test/browser/meri-files-lifetime.spec.ts"
+  ],
+  "currentFixtureSha256": "791c8aa55576e1fcf17eda307e63c0d0751c9ce1be39bbdcf2ac8156386f429d",
+  "applicationSourceTreeUnchanged": true,
+  "typingProof": {
+    "status": "PASS",
+    "at": "2026-10-13T09:39:58.994Z",
+    "typescript": "5.9.3",
+    "head": "6150e49ce69e8d73609ed974d6f3be796b152bdd",
+    "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+    "beforeSha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+    "afterSha256": "791c8aa55576e1fcf17eda307e63c0d0751c9ce1be39bbdcf2ac8156386f429d",
+    "beforeEmittedSha256": "5efb29a2379a0a33278748c9440c2d3588073262c85779bcb4209a7778f8a84a",
+    "afterEmittedSha256": "a1cafb1b24a8b2ecbcc3ce35b515c8f6966bc91fa2159c82a0ded7cb507e9fd2",
+    "exactEmittedBytesEqual": false,
+    "explanation": "Emitted JS differs only by immediate local array binding followed by the same for-of. Inlining that literal and removing its sole declaration yields identical printed JS.",
+    "identityArrayValuesOrderEqual": true,
+    "identityIdentifierUses": 2,
+    "initializerImmediatelyPrecedesLoop": true,
+    "normalizedEmittedProgramEqual": true,
+    "normalizedProgramSha256": "7359ebf13811bf68d7115ebc6c1a87cbf26b565aa7eec71958f9030ab12a6c81",
+    "allCallExpressionsEqual": true,
+    "callExpressionCount": 251,
+    "scope": "Static transpile/AST review only; no app execution, browser, build, install or independent full typecheck."
+  },
+  "finalAcceptance": false
+}

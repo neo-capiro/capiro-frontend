@@ -1,0 +1,61 @@
+{
+  "baseHead": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "candidate": "uncommitted initial snapshot",
+  "bindings": [
+    {
+      "file": "apps/web/src/shared/capiro/operations/newsletter-routing.ts",
+      "sha256": "8e6fff50996b8af6e7c6c261bef64d816f36a861696125009adccf591a240c91",
+      "bytes": 567,
+      "nonblank": 19
+    },
+    {
+      "file": "apps/web/src/shared/capiro/operations/engagement.ts",
+      "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8",
+      "bytes": 11049,
+      "nonblank": 395
+    },
+    {
+      "file": "apps/web/src/shared/capiro/newsletter-routing.test.ts",
+      "sha256": "53b14d2f350e19a16130f02f5883deb1cb6acc13ee834b19eb7e20efaf54f74e",
+      "bytes": 1956,
+      "nonblank": 68
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/newsletter-route.ts",
+      "sha256": "1516f39fe9aa3f936429f18cd57fc30d8084754b458d4d5e72ca3deac287f717",
+      "bytes": 1666,
+      "nonblank": 45
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+      "sha256": "3f50d27c9893de488a9538f699ddbc36a60cf6f4f20525bc7c87b024b449127b",
+      "bytes": 1896,
+      "nonblank": 63
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+      "sha256": "ba03aeb178620b4b79e2a41328300f04e4516203b89d61cecb08e27287c08726",
+      "bytes": 1446,
+      "nonblank": 42
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5",
+      "bytes": 5925,
+      "nonblank": 173
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "sha256": "5c9ba25e7e0041391af642b93abd2b7b30b2e1ee092f9f092bc2d0ea02d611bb",
+      "bytes": 11053,
+      "nonblank": 390
+    },
+    {
+      "file": "apps/web/src/app/engagement/outreach/page.tsx",
+      "sha256": "045f081f8751bcf45a4ad737de30d3b9c616b30e054425694799facbbdcc35e4",
+      "bytes": 411,
+      "nonblank": 10
+    }
+  ],
+  "sourceEditedByReviewer": false
+}

@@ -1,0 +1,1051 @@
+{
+  "sha": "5be29b56305184fcfa72117c7c2bde0b96b7e2fe",
+  "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/5be29b56305184fcfa72117c7c2bde0b96b7e2fe",
+  "tree": [
+    {
+      "path": "DISCOVERY-NOTES.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d69e8ff94516d27943f6c9efeac5ab1d4a63a19",
+      "size": 1889,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/4d69e8ff94516d27943f6c9efeac5ab1d4a63a19"
+    },
+    {
+      "path": "PACKED-MANIFEST-INITIAL.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d79fb60d3ec11aec734a45e05bcaed1ef78d11ac",
+      "size": 84647,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d79fb60d3ec11aec734a45e05bcaed1ef78d11ac"
+    },
+    {
+      "path": "SHA256-INDEX-INITIAL.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be95382c041d508f485aaa3d8f309fcbaef7a424",
+      "size": 24939,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/be95382c041d508f485aaa3d8f309fcbaef7a424"
+    },
+    {
+      "path": "attempt-1",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4b66b428d46e5ab33ae0fada2f8f6562806fc0c3",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/4b66b428d46e5ab33ae0fada2f8f6562806fc0c3"
+    },
+    {
+      "path": "attempt-1/FAILURE.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c3093a03442432177c632088822308378fdf0064",
+      "size": 253,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c3093a03442432177c632088822308378fdf0064"
+    },
+    {
+      "path": "attempt-1/consumer-qualification.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3091fb324671dbbd2e58c5311a550a9b7b0b6ed4",
+      "size": 814,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/3091fb324671dbbd2e58c5311a550a9b7b0b6ed4"
+    },
+    {
+      "path": "attempt-1/consumer-qualification.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-1/packed-esm-imports.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b7bc1a5a3297dd5a37fe992e5f163516bdd5f871",
+      "size": 181,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/b7bc1a5a3297dd5a37fe992e5f163516bdd5f871"
+    },
+    {
+      "path": "attempt-1/packed-esm-imports.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05e50f0e3528dbaa2e67c4337c37e292094e2c51",
+      "size": 68,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/05e50f0e3528dbaa2e67c4337c37e292094e2c51"
+    },
+    {
+      "path": "attempt-1/packed-extraction.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f63338e36f26face974123b912f4b13dd28d7acc",
+      "size": 910,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/f63338e36f26face974123b912f4b13dd28d7acc"
+    },
+    {
+      "path": "attempt-1/packed-extraction.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c87641df91baec2e5d2162ca259b89fd0ba2da60",
+      "size": 93,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c87641df91baec2e5d2162ca259b89fd0ba2da60"
+    },
+    {
+      "path": "attempt-1/packed-types-browser-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f59b0175c4bf303c27a4dfccbfea54680b4874a",
+      "size": 268,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/4f59b0175c4bf303c27a4dfccbfea54680b4874a"
+    },
+    {
+      "path": "attempt-1/packed-types-browser-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "attempt-1/packed-types-browser-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ce8548c1701881750e4720dc162bdb86d9c4be5",
+      "size": 259,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5ce8548c1701881750e4720dc162bdb86d9c4be5"
+    },
+    {
+      "path": "attempt-1/packed-types-browser-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-1/packed-types-node-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aed87d898106edc11cd60468b8dd6041e0385072",
+      "size": 265,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/aed87d898106edc11cd60468b8dd6041e0385072"
+    },
+    {
+      "path": "attempt-1/packed-types-node-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "attempt-1/packed-types-node-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4ab60db59eb2b163c200ca03997a194621678b6",
+      "size": 256,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/f4ab60db59eb2b163c200ca03997a194621678b6"
+    },
+    {
+      "path": "attempt-1/packed-types-node-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-1/qualify-packed-consumer.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b07058868e2b9bbf904a7e4a6d3a4ae8c8efec1",
+      "size": 16680,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/3b07058868e2b9bbf904a7e4a6d3a4ae8c8efec1"
+    },
+    {
+      "path": "attempt-1/renderer-characterizations.cjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f1513d2caf613fb9739e81427de88382768ab348",
+      "size": 8607,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/f1513d2caf613fb9739e81427de88382768ab348"
+    },
+    {
+      "path": "attempt-2",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "659bbc78b876543476d0a7465879cec16e944a76",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/659bbc78b876543476d0a7465879cec16e944a76"
+    },
+    {
+      "path": "attempt-2/FAILURE.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5312170472a7d7da5b2b3963828a230bfb91e95f",
+      "size": 383,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5312170472a7d7da5b2b3963828a230bfb91e95f"
+    },
+    {
+      "path": "attempt-2/browser-bundle.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "adef0337b7128de192be6e18721cbadfcedd12bc",
+      "size": 189282,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/adef0337b7128de192be6e18721cbadfcedd12bc"
+    },
+    {
+      "path": "attempt-2/browser-bundle.js.map",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "71f19e4da38f66e729d020db59efa035ec4a210e",
+      "size": 288057,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/71f19e4da38f66e729d020db59efa035ec4a210e"
+    },
+    {
+      "path": "attempt-2/browser-metafile.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2f6dbe2a115c971d3d563b0d865718c94ad3f653",
+      "size": 3919,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/2f6dbe2a115c971d3d563b0d865718c94ad3f653"
+    },
+    {
+      "path": "attempt-2/browser-renderer-results.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59ee2c3c1e55fee5924697248d912d099c6c83bd",
+      "size": 54439,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/59ee2c3c1e55fee5924697248d912d099c6c83bd"
+    },
+    {
+      "path": "attempt-2/consumer-qualification.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f0b334ac9cece21fc022b5caa5a0efc8419fffa",
+      "size": 41482,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5f0b334ac9cece21fc022b5caa5a0efc8419fffa"
+    },
+    {
+      "path": "attempt-2/consumer-qualification.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-2/original-C-renderer-golden.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "attempt-2/packed-esm-imports.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9597a3a5c726edcb55b3b59991154a471cad9185",
+      "size": 191,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/9597a3a5c726edcb55b3b59991154a471cad9185"
+    },
+    {
+      "path": "attempt-2/packed-esm-imports.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05e50f0e3528dbaa2e67c4337c37e292094e2c51",
+      "size": 68,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/05e50f0e3528dbaa2e67c4337c37e292094e2c51"
+    },
+    {
+      "path": "attempt-2/packed-extraction.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "44aeb1373a2b9c15b0c00e209b6ce0c59c2a523e",
+      "size": 930,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/44aeb1373a2b9c15b0c00e209b6ce0c59c2a523e"
+    },
+    {
+      "path": "attempt-2/packed-extraction.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c87641df91baec2e5d2162ca259b89fd0ba2da60",
+      "size": 93,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c87641df91baec2e5d2162ca259b89fd0ba2da60"
+    },
+    {
+      "path": "attempt-2/packed-renderer-results.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "attempt-2/packed-types-browser-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "029afffd84f68b743b3bfc60713677ba546a69d2",
+      "size": 278,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/029afffd84f68b743b3bfc60713677ba546a69d2"
+    },
+    {
+      "path": "attempt-2/packed-types-browser-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "attempt-2/packed-types-browser-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58d08d1058c793ab73d5fb32bf80abdc7185bb47",
+      "size": 269,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/58d08d1058c793ab73d5fb32bf80abdc7185bb47"
+    },
+    {
+      "path": "attempt-2/packed-types-browser-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-2/packed-types-node-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f418c789516fa329542928b76fd21434f8dd835c",
+      "size": 275,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/f418c789516fa329542928b76fd21434f8dd835c"
+    },
+    {
+      "path": "attempt-2/packed-types-node-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "attempt-2/packed-types-node-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a47ed2c0791da07ee4e364c3eaf4fa2cf2d5502a",
+      "size": 266,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a47ed2c0791da07ee4e364c3eaf4fa2cf2d5502a"
+    },
+    {
+      "path": "attempt-2/packed-types-node-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-2/qualify-packed-consumer.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b94229e74abad3014937d35688b1baec3ab86aa",
+      "size": 16721,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/9b94229e74abad3014937d35688b1baec3ab86aa"
+    },
+    {
+      "path": "attempt-2/renderer-characterizations.cjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5bbfe05c521b47c18164b87a7521d1d31ce1a535",
+      "size": 8668,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5bbfe05c521b47c18164b87a7521d1d31ce1a535"
+    },
+    {
+      "path": "attempt-3",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "87471e6deb8523513ca100148ca1071648e25242",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/87471e6deb8523513ca100148ca1071648e25242"
+    },
+    {
+      "path": "attempt-3/FAILURE.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4b518d2e3715634458d27ad4a42806919aeba18",
+      "size": 374,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d4b518d2e3715634458d27ad4a42806919aeba18"
+    },
+    {
+      "path": "attempt-3/browser-bundle.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d663a69716d95116ee10638bfb4eca03c76836e1",
+      "size": 189356,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d663a69716d95116ee10638bfb4eca03c76836e1"
+    },
+    {
+      "path": "attempt-3/browser-bundle.js.map",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e4c28315044275df073c4f000ee1607fbc8883eb",
+      "size": 288263,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e4c28315044275df073c4f000ee1607fbc8883eb"
+    },
+    {
+      "path": "attempt-3/browser-metafile.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36cf979890c81dfc00167c0aba15dbbe2371f2b1",
+      "size": 3919,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/36cf979890c81dfc00167c0aba15dbbe2371f2b1"
+    },
+    {
+      "path": "attempt-3/browser-renderer-results.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "attempt-3/consumer-qualification.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a663aa38538fb49211b89613040d7d36bfea24b",
+      "size": 826,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5a663aa38538fb49211b89613040d7d36bfea24b"
+    },
+    {
+      "path": "attempt-3/consumer-qualification.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-3/original-C-renderer-golden.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "attempt-3/packed-esm-imports.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0262bfa4fdcf7d0048eea365fa9845628651808e",
+      "size": 191,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0262bfa4fdcf7d0048eea365fa9845628651808e"
+    },
+    {
+      "path": "attempt-3/packed-esm-imports.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05e50f0e3528dbaa2e67c4337c37e292094e2c51",
+      "size": 68,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/05e50f0e3528dbaa2e67c4337c37e292094e2c51"
+    },
+    {
+      "path": "attempt-3/packed-extraction.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fed4f8266ff8ad3659afdc5a8d0a544f6a77f558",
+      "size": 930,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/fed4f8266ff8ad3659afdc5a8d0a544f6a77f558"
+    },
+    {
+      "path": "attempt-3/packed-extraction.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c87641df91baec2e5d2162ca259b89fd0ba2da60",
+      "size": 93,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c87641df91baec2e5d2162ca259b89fd0ba2da60"
+    },
+    {
+      "path": "attempt-3/packed-renderer-results.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "attempt-3/packed-types-browser-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "25e22426b7a1cc5ff6c2046969ccf0daf17419c8",
+      "size": 278,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/25e22426b7a1cc5ff6c2046969ccf0daf17419c8"
+    },
+    {
+      "path": "attempt-3/packed-types-browser-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "attempt-3/packed-types-browser-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13bb006f9137b8d2f0593aab7cbe4f269438362a",
+      "size": 269,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/13bb006f9137b8d2f0593aab7cbe4f269438362a"
+    },
+    {
+      "path": "attempt-3/packed-types-browser-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-3/packed-types-node-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f14bf0d2a8fb156d34d7329d84d4b9bfa57049a",
+      "size": 275,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/4f14bf0d2a8fb156d34d7329d84d4b9bfa57049a"
+    },
+    {
+      "path": "attempt-3/packed-types-node-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "attempt-3/packed-types-node-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0a7eebe0b24cbc55ac0559bb7df5d7993ed47148",
+      "size": 266,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0a7eebe0b24cbc55ac0559bb7df5d7993ed47148"
+    },
+    {
+      "path": "attempt-3/packed-types-node-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "attempt-3/qualify-packed-consumer.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b94229e74abad3014937d35688b1baec3ab86aa",
+      "size": 16721,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/9b94229e74abad3014937d35688b1baec3ab86aa"
+    },
+    {
+      "path": "attempt-3/renderer-characterizations.cjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "338d81d47474a27df95b83cc08d263655c320b0a",
+      "size": 8823,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/338d81d47474a27df95b83cc08d263655c320b0a"
+    },
+    {
+      "path": "browser-bundle.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d663a69716d95116ee10638bfb4eca03c76836e1",
+      "size": 189356,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d663a69716d95116ee10638bfb4eca03c76836e1"
+    },
+    {
+      "path": "browser-bundle.js.map",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e4c28315044275df073c4f000ee1607fbc8883eb",
+      "size": 288263,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e4c28315044275df073c4f000ee1607fbc8883eb"
+    },
+    {
+      "path": "browser-metafile.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36cf979890c81dfc00167c0aba15dbbe2371f2b1",
+      "size": 3919,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/36cf979890c81dfc00167c0aba15dbbe2371f2b1"
+    },
+    {
+      "path": "browser-renderer-results.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "canonical-source-binding.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bc9d4a49fffed78cbf18d5ce0fd0dcc91f3ed9d0",
+      "size": 15498,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/bc9d4a49fffed78cbf18d5ce0fd0dcc91f3ed9d0"
+    },
+    {
+      "path": "canonical-source-binding.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "consumer-negative.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47bff7f621411c980c0802e6097ae85dd2b24fdb",
+      "size": 410,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/47bff7f621411c980c0802e6097ae85dd2b24fdb"
+    },
+    {
+      "path": "consumer-positive.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ec08ad04413d3093f0296eb17b19742af7518b64",
+      "size": 1503,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/ec08ad04413d3093f0296eb17b19742af7518b64"
+    },
+    {
+      "path": "consumer-qualification.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "consumer-qualification.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8092629cee8552025885e84eeb4d431cb23ce8c9",
+      "size": 249,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/8092629cee8552025885e84eeb4d431cb23ce8c9"
+    },
+    {
+      "path": "effective-shared-tsconfig.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54fdd27db28f2f72b84e9d5ef27c94521ee9569a",
+      "size": 2641,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/54fdd27db28f2f72b84e9d5ef27c94521ee9569a"
+    },
+    {
+      "path": "finalize-notifier-correction.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "434ada7abe32b4ad89a4220e423bfc78b9e9af3b",
+      "size": 3203,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/434ada7abe32b4ad89a4220e423bfc78b9e9af3b"
+    },
+    {
+      "path": "frontend-pr16-handover.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d04a362b0fca22c9a1b5c5aff26eb857d76e0f7",
+      "size": 5108,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/3d04a362b0fca22c9a1b5c5aff26eb857d76e0f7"
+    },
+    {
+      "path": "notifier-disabled-attempt-1",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6bae08a02e56c097c840b7b44f72060c10391296",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/6bae08a02e56c097c840b7b44f72060c10391296"
+    },
+    {
+      "path": "notifier-disabled-attempt-1/FAILURE.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "809f261c5c46ee9864f8a8af7177719c476f9e7c",
+      "size": 219,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/809f261c5c46ee9864f8a8af7177719c476f9e7c"
+    },
+    {
+      "path": "notifier-disabled-attempt-1/npm-pack-3.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93cf267939c634cd53b3f6c1f0f76925a6b692e6",
+      "size": 117,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/93cf267939c634cd53b3f6c1f0f76925a6b692e6"
+    },
+    {
+      "path": "notifier-disabled-attempt-1/npm-pack-3.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "notifier-disabled-attempt-1/pack-canonical-package.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a44a0c99a53c8945800ecb1826cad12bffd23493",
+      "size": 5174,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a44a0c99a53c8945800ecb1826cad12bffd23493"
+    },
+    {
+      "path": "notifier-disabled-attempt-1/pack-notifier-disabled-summary.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "notifier-disabled-attempt-1/pack-notifier-disabled-summary.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24d5365ae188f3775fe806d9d2b71f172437b2d1",
+      "size": 296,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/24d5365ae188f3775fe806d9d2b71f172437b2d1"
+    },
+    {
+      "path": "notifier-disabled-effective-config.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a7f0c33776085dfdb65805bf1e37b16db394a22e",
+      "size": 55,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a7f0c33776085dfdb65805bf1e37b16db394a22e"
+    },
+    {
+      "path": "notifier-disabled-effective-config.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "notifier-receipt-attempt-1.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf1b954d061d845ce10b5d79a9e35938c94cfc4d",
+      "size": 525,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/cf1b954d061d845ce10b5d79a9e35938c94cfc4d"
+    },
+    {
+      "path": "npm-notifier-disabled-2026-10-12T22_22_41_544Z-debug-0.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "919648ee417ce2eec9318aea631885cb12245915",
+      "size": 1720,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/919648ee417ce2eec9318aea631885cb12245915"
+    },
+    {
+      "path": "npm-notifier-disabled-2026-10-12T22_22_42_517Z-debug-0.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5340f46ac1d3a4fa2cd5d1d8e7dafd1e08933e91",
+      "size": 1720,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5340f46ac1d3a4fa2cd5d1d8e7dafd1e08933e91"
+    },
+    {
+      "path": "npm-original-2026-10-12T22_09_46_397Z-debug-0.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c0bda8f7df34129a3843cc4239623817c16c40e",
+      "size": 1637,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/9c0bda8f7df34129a3843cc4239623817c16c40e"
+    },
+    {
+      "path": "npm-original-2026-10-12T22_09_47_545Z-debug-0.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8c2dc1c4eb65feb24fba1caab51eefe02c569f3",
+      "size": 1329,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/f8c2dc1c4eb65feb24fba1caab51eefe02c569f3"
+    },
+    {
+      "path": "npm-pack-1.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "64720b515d43b03c7f4ddcfd13d669e106a834c2",
+      "size": 208,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/64720b515d43b03c7f4ddcfd13d669e106a834c2"
+    },
+    {
+      "path": "npm-pack-1.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f6aa7ef8a8b8e34f465008545408d7af73bbe44",
+      "size": 19847,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/7f6aa7ef8a8b8e34f465008545408d7af73bbe44"
+    },
+    {
+      "path": "npm-pack-2.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "npm-pack-2.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f6aa7ef8a8b8e34f465008545408d7af73bbe44",
+      "size": 19847,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/7f6aa7ef8a8b8e34f465008545408d7af73bbe44"
+    },
+    {
+      "path": "npm-pack-3.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93cf267939c634cd53b3f6c1f0f76925a6b692e6",
+      "size": 117,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/93cf267939c634cd53b3f6c1f0f76925a6b692e6"
+    },
+    {
+      "path": "npm-pack-3.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "npm-pack-4.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "npm-pack-4.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f6aa7ef8a8b8e34f465008545408d7af73bbe44",
+      "size": 19847,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/7f6aa7ef8a8b8e34f465008545408d7af73bbe44"
+    },
+    {
+      "path": "npm-pack-5.stderr.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "npm-pack-5.stdout.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f6aa7ef8a8b8e34f465008545408d7af73bbe44",
+      "size": 19847,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/7f6aa7ef8a8b8e34f465008545408d7af73bbe44"
+    },
+    {
+      "path": "original-C-renderer-golden.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "pack-canonical-package.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "838aada34e222a2dd96071ec70cd842366d46e1e",
+      "size": 5487,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/838aada34e222a2dd96071ec70cd842366d46e1e"
+    },
+    {
+      "path": "pack-notifier-disabled-summary.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3ce04e2a28d23acc366b4620082bb4f44dee307",
+      "size": 309,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a3ce04e2a28d23acc366b4620082bb4f44dee307"
+    },
+    {
+      "path": "pack-notifier-disabled-summary.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "pack-summary.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3ce04e2a28d23acc366b4620082bb4f44dee307",
+      "size": 309,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a3ce04e2a28d23acc366b4620082bb4f44dee307"
+    },
+    {
+      "path": "pack-summary.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "packed-esm-imports.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b643daca18d78572209283220d0dabc26dddf252",
+      "size": 191,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/b643daca18d78572209283220d0dabc26dddf252"
+    },
+    {
+      "path": "packed-esm-imports.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05e50f0e3528dbaa2e67c4337c37e292094e2c51",
+      "size": 68,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/05e50f0e3528dbaa2e67c4337c37e292094e2c51"
+    },
+    {
+      "path": "packed-extraction.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0d7c2cd2dda3c415c4292cf791a6661d9c659604",
+      "size": 930,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0d7c2cd2dda3c415c4292cf791a6661d9c659604"
+    },
+    {
+      "path": "packed-extraction.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c87641df91baec2e5d2162ca259b89fd0ba2da60",
+      "size": 93,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c87641df91baec2e5d2162ca259b89fd0ba2da60"
+    },
+    {
+      "path": "packed-renderer-results.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "size": 54405,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/90f04f24b95c2bcd676a5db33ea717a819bdb84c"
+    },
+    {
+      "path": "packed-types-browser-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c46d85cafec8bed3619ba3b70d22cba31c35595e",
+      "size": 278,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c46d85cafec8bed3619ba3b70d22cba31c35595e"
+    },
+    {
+      "path": "packed-types-browser-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "packed-types-browser-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d6ac96168e0421008e8bf5f03261b3e7517e56be",
+      "size": 269,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d6ac96168e0421008e8bf5f03261b3e7517e56be"
+    },
+    {
+      "path": "packed-types-browser-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "packed-types-node-negative.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f285be9bad98e4d369230db3366c64abc1d300c",
+      "size": 275,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/5f285be9bad98e4d369230db3366c64abc1d300c"
+    },
+    {
+      "path": "packed-types-node-negative.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "size": 589,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/0633455e53720028ab712a0ef5dd1a3f20758c0e"
+    },
+    {
+      "path": "packed-types-node-positive.command.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e385e8605e1e4c8011c0f943f13230cd68c2c1d0",
+      "size": 266,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e385e8605e1e4c8011c0f943f13230cd68c2c1d0"
+    },
+    {
+      "path": "packed-types-node-positive.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "prepare-canonical-package.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b505006ae0763ea80232bc4dcc84276e3f67a823",
+      "size": 2559,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/b505006ae0763ea80232bc4dcc84276e3f67a823"
+    },
+    {
+      "path": "pristine-shared-build.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "published-backend-shared-continuity.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e12d082823fd357afbbdcb5d30921173479e3e7",
+      "size": 5252,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/1e12d082823fd357afbbdcb5d30921173479e3e7"
+    },
+    {
+      "path": "qualify-packed-consumer.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+      "size": 16868,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/ca85ca766be3826bd794f589dcc3d9b842182f7d"
+    },
+    {
+      "path": "renderer-characterizations.cjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "338d81d47474a27df95b83cc08d263655c320b0a",
+      "size": 8823,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/338d81d47474a27df95b83cc08d263655c320b0a"
+    },
+    {
+      "path": "static-five-module-closure.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb7cbd58d56735266c20edcb1f57b29190b54aaa",
+      "size": 2671,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/fb7cbd58d56735266c20edcb1f57b29190b54aaa"
+    }
+  ],
+  "truncated": false
+}

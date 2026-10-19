@@ -9,10 +9,35 @@
     "node": ">=24 <25"
   },
   "exports": {
+    "./markdown": "./src/markdown.tsx",
     "./button": "./src/shadcn/button.tsx",
+    "./dialog": "./src/shadcn/dialog.tsx",
+    "./tooltip": "./src/shadcn/tooltip.tsx",
+    "./input": "./src/shadcn/input.tsx",
+    "./textarea": "./src/shadcn/textarea.tsx",
+    "./select": "./src/shadcn/select.tsx",
+    "./dropdown-menu": "./src/shadcn/dropdown-menu.tsx",
     "./conversation": "./src/ai-elements/conversation.tsx",
     "./message": "./src/ai-elements/message.tsx",
-    "./prompt-input": "./src/ai-elements/prompt-input.tsx"
+    "./prompt-input": "./src/ai-elements/prompt-input.tsx",
+    "./tool": "./src/ai-elements/tool.tsx",
+    "./artifact": "./src/ai-elements/artifact.tsx",
+    "./attachments": "./src/ai-elements/attachments.tsx",
+    "./confirmation": "./src/ai-elements/confirmation.tsx",
+    "./plan": "./src/ai-elements/plan.tsx",
+    "./sources": "./src/ai-elements/sources.tsx",
+    "./queue": "./src/ai-elements/queue.tsx",
+    "./checkpoint": "./src/ai-elements/checkpoint.tsx",
+    "./file-tree": "./src/ai-elements/file-tree.tsx",
+    "./task": "./src/ai-elements/task.tsx",
+    "./web-preview": "./src/ai-elements/web-preview.tsx",
+    "./badge": "./src/shadcn/badge.tsx",
+    "./collapsible": "./src/shadcn/collapsible.tsx",
+    "./alert": "./src/shadcn/alert.tsx",
+    "./card": "./src/shadcn/card.tsx",
+    "./scroll-area": "./src/shadcn/scroll-area.tsx",
+    "./output-block": "./src/output-block.tsx",
+    "./streaming-text": "./src/streaming-text.tsx"
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json"

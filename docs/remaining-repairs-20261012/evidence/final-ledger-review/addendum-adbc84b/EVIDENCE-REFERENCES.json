@@ -1,0 +1,61 @@
+{
+  "readOnlyInspection": true,
+  "files": [
+    {
+      "path": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/REPORT.md",
+      "bytes": 3696,
+      "sha256": "1833b0d947cedaa3d8164bc90d3d9c135f0089e1ce9f8253bdb9fca3ce5ad143"
+    },
+    {
+      "path": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/candidate-results.json",
+      "bytes": 23840,
+      "sha256": "50360935ad145584ac7561feb5045e67fa12322d3dd5524c45616f8343a44b63"
+    },
+    {
+      "path": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/assertion-preservation.json",
+      "bytes": 707,
+      "sha256": "e39e20196afda9dac3b798535e9d6086e3303292499d6dfdc9e35df51976f15f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup/manifest.json",
+      "bytes": 5718,
+      "sha256": "44db96f3d87f62ab17b6d0a028da64f1eb27c41057edc33b297885a32e6d109e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/report.json",
+      "bytes": 9770,
+      "sha256": "b8125973a69cc7377eb08731fb7774a5a4d1bf79c3abb048ec0f36267c726cf4"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/report.json",
+      "bytes": 10492,
+      "sha256": "6ac0cb81772243c71a1f1083781433054198bf67c05d46bb774374ec6e9671f1"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/cli-final-script-tests.log",
+      "bytes": 434,
+      "sha256": "bc9230ef035efbff6c28d3e780ebe321e546f06858ad2461608e2bbd44205e89"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-independent-review/report.md",
+      "bytes": 5584,
+      "sha256": "ee989a4fa7a93703559b05535cb7d1b82c9c85a1231f686dc634a4d7a1c12f24"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-independent-review/final-source-binding.json",
+      "bytes": 1213,
+      "sha256": "1a55583563d14e0de3ad5d05ed1ef03d71a979a7661d5d1c034b4622358ec7e2"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-independent-review/final-evidence-binding.json",
+      "bytes": 2468,
+      "sha256": "382850a30173208b474ab9c298f536e7c802bc92d5323866bdda8fb2628e84e2"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/SOURCE.json",
+      "bytes": 343,
+      "sha256": "38fc9d3065808a2cdfa9eaf270bce2c44e38d7fff697b0923982146b5b9fa6e6"
+    }
+  ],
+  "independentDockerReviewInterpretation": "Initial report preserves two CLI correction requests; final-source-binding and final-evidence-binding explicitly close them at the committed bytes. Earlier attempts remain historical."
+}

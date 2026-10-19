@@ -1,0 +1,49 @@
+{
+  "classification": "Read and hashed existing owner receipts; reviewer performed no runtime execution. These are scoped results, not a final clean integrated gate.",
+  "receipts": [
+    {
+      "name": "original action characterization",
+      "path": "/tmp/capiro-meri-files-development-20261013/action-lifecycle.json",
+      "sha256": "af1220a3e907a991eec142355bdae43e048a537552c94f1575b53c52e6a07e4b",
+      "startTime": 1791880313726,
+      "success": true,
+      "numTotalTests": 191,
+      "numPassedTests": 191,
+      "numFailedTests": 0,
+      "numPendingTests": 0
+    },
+    {
+      "name": "document proxy and byte bounds",
+      "path": "/tmp/capiro-meri-document-proxy-tests-20261013/final-results.json",
+      "sha256": "db17325896a7d8c55df7d74dd5841aea22f25c382fadfe7da63c59debc134da6",
+      "startTime": 1791880974819,
+      "success": true,
+      "numTotalTests": 86,
+      "numPassedTests": 86,
+      "numFailedTests": 0,
+      "numPendingTests": 0
+    },
+    {
+      "name": "document adapter final sealed",
+      "path": "/tmp/capiro-meri-files-adapter-20261013/sealed-results.json",
+      "sha256": "46cfdd2cdb6f2af50901d1bfeba2c58f7555b09576fbb3bcdaa1bd3346f91b93",
+      "startTime": 1791881330316,
+      "success": true,
+      "numTotalTests": 77,
+      "numPassedTests": 77,
+      "numFailedTests": 0,
+      "numPendingTests": 0
+    },
+    {
+      "name": "feature presentation pure",
+      "path": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results-final.json",
+      "sha256": "3dc44caa1524ca46a810a53dbcc9a84cd674950b8e12b99d30f8932fa4721e41",
+      "startTime": 1791881279788,
+      "success": true,
+      "numTotalTests": 32,
+      "numPassedTests": 32,
+      "numFailedTests": 0,
+      "numPendingTests": 0
+    }
+  ]
+}

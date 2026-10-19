@@ -1,0 +1,243 @@
+/* Shared Meri workspace page primitives (Figma 3.4 02 · Meri inner pages). */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+}
+.heading {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.headingCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.headingCopy h1 {
+  font-size: 26px;
+  line-height: 39px;
+  font-weight: 600;
+}
+.headingCopy p,
+.muted {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.headingAside {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.headingAside > :not(.wordmark) {
+  align-self: center;
+}
+.wordmark {
+  width: 62px;
+  height: 20px;
+  margin-top: 10px;
+  flex-shrink: 0;
+  background: var(--foreground);
+  mask: url("/design/cited-answer/meri-ink.png") center / 62px 20px no-repeat;
+}
+.actionDivider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.primary,
+.outline,
+.ghost {
+  height: 36px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.primary {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(166deg, #242424, #0a0a0a);
+  box-shadow:
+    0 1px 2px #0c0a0924,
+    inset 0 1px #ffffff24;
+}
+.outline {
+  border: 1px solid var(--input);
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.ghost {
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+}
+.primary svg,
+.outline svg,
+.ghost svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.tableFrame {
+  /* Shrinks inside flex columns so the phone rule below can scroll it. */
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.table th {
+  height: 40px;
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.table td {
+  height: 44px;
+  padding: 10px;
+  vertical-align: top;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  overflow-wrap: anywhere;
+}
+.table tbody tr:nth-child(odd) {
+  background: var(--card);
+}
+.table tbody tr:nth-child(even) {
+  background: var(--background);
+}
+.table tbody tr[aria-selected="true"] {
+  box-shadow: inset 3px 0 var(--foreground);
+}
+.table tbody tr[data-selectable] {
+  cursor: pointer;
+}
+.table tbody tr:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--muted);
+}
+.notice h2 {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.notice[data-tone="success"] {
+  background: var(--success-subtle);
+}
+.notice[data-tone="success"] h2 {
+  color: var(--success);
+}
+/* Toned backgrounds need body text nearer the foreground for 4.5:1 contrast. */
+.notice[data-tone="success"] .muted,
+.notice[data-tone="warning"] .muted,
+.notice[data-tone="danger"] .muted {
+  color: color-mix(in srgb, var(--muted-foreground) 80%, var(--foreground));
+}
+.notice[data-tone="warning"] {
+  background: var(--warning-subtle);
+}
+.notice[data-tone="warning"] h2 {
+  color: var(--warning-text);
+}
+.notice[data-tone="danger"] {
+  background: var(--destructive-subtle);
+}
+.notice[data-tone="danger"] h2 {
+  color: var(--destructive-text);
+}
+.status {
+  height: 32px;
+  min-width: 64px;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.status[data-tone="success"] {
+  background: var(--success-subtle);
+  color: var(--success);
+}
+.status[data-tone="warning"] {
+  background: var(--warning-subtle);
+  color: var(--warning-text);
+}
+.status[data-tone="danger"] {
+  background: var(--destructive-subtle);
+  color: var(--destructive-text);
+}
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+.tabs [role="tab"][aria-selected="true"] {
+  color: #fff;
+  background: linear-gradient(163deg, #242424, #0a0a0a);
+  box-shadow:
+    0 1px 2px #0c0a0924,
+    inset 0 1px #ffffff24;
+}
+@media (max-width: 680px) {
+  .page {
+    padding: 20px 16px;
+  }
+  /* The phone shell header carries the brand, so the heading drops the wordmark;
+     the title keeps its 26px desktop size (Figma 10.19-10.35). */
+  .wordmark,
+  .actionDivider {
+    display: none;
+  }
+  .tableFrame {
+    overflow-x: auto;
+  }
+  .table {
+    min-width: 640px;
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "capturedUTC": "2026-10-13T06:43:24.970Z",
+  "browserVersion": "154.0.8037.57",
+  "target": {
+    "name": "actual-meri-1440x1040-light",
+    "origin": "http://127.0.0.1:5188",
+    "path": "/meri",
+    "frame": "442:81437",
+    "classification": "Actual compiled disconnected synthetic Meri Home; no signed-in identity"
+  },
+  "before": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+    "trackedDiff": "",
+    "buildId": "alGa7bLzyzdg3BJpx8qe2",
+    "standaloneServerSha256": "4612ed561f5f2f1d336b86307f01896461661c09215508f02ea52fa8b9f44200",
+    "buildExitSha256": "38357a5ab25ef14ca4c97e94f2742cb205e5e1563c593d75ab0bad5e03a0f1bb"
+  },
+  "after": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+    "trackedDiff": "",
+    "buildId": "alGa7bLzyzdg3BJpx8qe2",
+    "standaloneServerSha256": "4612ed561f5f2f1d336b86307f01896461661c09215508f02ea52fa8b9f44200",
+    "buildExitSha256": "38357a5ab25ef14ca4c97e94f2742cb205e5e1563c593d75ab0bad5e03a0f1bb"
+  },
+  "metrics": {
+    "url": "http://127.0.0.1:5188/meri",
+    "title": "Capiro",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "dpr": 1,
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "documentSize": {
+      "width": 1440,
+      "height": 1093
+    },
+    "bodyFont": "GeistSans, \"GeistSans Fallback\", Arial, sans-serif",
+    "headings": [
+      {
+        "text": "Recent",
+        "font": "GeistSans, \"GeistSans Fallback\", Arial, sans-serif",
+        "size": "11px"
+      },
+      {
+        "text": "Good morning, Jordan.",
+        "font": "GeistSans, \"GeistSans Fallback\", Arial, sans-serif",
+        "size": "40px"
+      },
+      {
+        "text": "Research",
+        "font": "GeistSans, \"GeistSans Fallback\", Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Create a brief",
+        "font": "GeistSans, \"GeistSans Fallback\", Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Analyze a file",
+        "font": "GeistSans, \"GeistSans Fallback\", Arial, sans-serif",
+        "size": "14px"
+      }
+    ],
+    "fontStatus": "loaded",
+    "fonts": [
+      {
+        "family": "GeistSans",
+        "status": "loaded",
+        "weight": "100 900"
+      },
+      {
+        "family": "GeistSans Fallback",
+        "status": "unloaded",
+        "weight": "normal"
+      },
+      {
+        "family": "GeistMono",
+        "status": "unloaded",
+        "weight": "100 900"
+      },
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "400"
+      },
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "400"
+      },
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "400"
+      }
+    ],
+    "images": [
+      {
+        "src": "/design/home/wordmark.png",
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 650
+      },
+      {
+        "src": "/design/home/mode-meri.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/mode-portfolio.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/mode-modules.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/quick-log.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/calendar.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/search.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/updates.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/profile.svg",
+        "complete": true,
+        "naturalWidth": 32,
+        "naturalHeight": 32
+      },
+      {
+        "src": "/design/home/plus.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/search.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/conversations.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/files.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/runs.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/approvals.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/memory.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/routines.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/data-access.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/chevron.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/plus.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/chevron.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/send.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/sparkle.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/sparkle.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/home/sparkle.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      }
+    ],
+    "designTargets": [
+      "442:81437"
+    ],
+    "visibleNotices": [
+      "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only."
+    ]
+  },
+  "screenshot": {
+    "path": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-meri-1440x1040-light.png",
+    "sha256": "c67a1a739e5a34a70117fc5bad80000a80e28ba68f7043b52a4232f828ebe1ee",
+    "viewportOnly": true,
+    "width": 1440,
+    "height": 1040,
+    "colorScheme": "light",
+    "animations": "disabled",
+    "locale": "en-US",
+    "timezone": "UTC"
+  },
+  "api": [],
+  "remote": [],
+  "blocked": [],
+  "unexpected": [],
+  "errors": [],
+  "limitations": "Supplemental composition capture; no authentication, backend, provider, Figma acceptance or full visual/accessibility gate. Fixture authority is synthetic. Existing notices remain untouched; no CSS/DOM overlay or content replacement."
+}

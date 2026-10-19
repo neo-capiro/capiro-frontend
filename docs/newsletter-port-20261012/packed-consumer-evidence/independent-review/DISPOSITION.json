@@ -1,0 +1,37 @@
+{
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "status": "ACCEPT_BOUNDED_PACKED_CONSUMER",
+  "blockingFindings": [],
+  "independentChecks": {
+    "artifactAndInstalledFiles": 182,
+    "producerFixturesByteExact": 4,
+    "goldenCases": 116,
+    "priorLockEntriesUnchanged": 930,
+    "lockAdditions": 3,
+    "cliSmoke": {
+      "passed": 2,
+      "failed": 0,
+      "log": "cli-final-source.log"
+    },
+    "sourceAndStructureReview": "PASS"
+  },
+  "ownerFinalEvidenceInspected": {
+    "nodeTests": 120,
+    "architecturePackageCliTests": 35,
+    "declarationControls": 4,
+    "browserCharacterizations": 116,
+    "publicPackages": true,
+    "workspaceTypes": true,
+    "architecture": true,
+    "authoredLint": true,
+    "format": true,
+    "diff": true
+  },
+  "limits": [
+    "No independent compiler/browser/package-consumer/install execution; CLI smoke independently executed only.",
+    "Full clean root install, combined application/build/native/UI/Figma/accessibility qualification not transferred or inferred.",
+    "Acceptance applies only to the recorded source commit and package-consumption scope."
+  ],
+  "writesConfinedTo": "/tmp/capiro-newsletter-consumer-review",
+  "priorEvidenceModified": false
+}

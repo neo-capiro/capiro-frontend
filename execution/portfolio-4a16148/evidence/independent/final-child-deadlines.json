@@ -1,0 +1,22 @@
+{
+  "runnerSHA256": "f568a0481a1cdca232e197739d76bcd855b89bfa2e1386ccc9c67735ba8f970c",
+  "awsCalls": 0,
+  "passed": 2,
+  "total": 2,
+  "cases": [
+    {
+      "case": "departed leader descendant cleanup",
+      "passed": true,
+      "descendantState": "Z",
+      "elapsedSeconds": 0.2614051799973822
+    },
+    {
+      "case": "nonreading child16KB input4KB pipe",
+      "passed": true,
+      "elapsedSeconds": 0.2522453720011981,
+      "pipeSizes": [
+        4096
+      ]
+    }
+  ]
+}

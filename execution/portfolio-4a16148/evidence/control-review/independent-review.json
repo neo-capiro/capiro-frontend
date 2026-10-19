@@ -1,0 +1,102 @@
+{
+  "decision": "PASS_OFFLINE_CONTROL_PROTOCOL_AND_ARCHIVE_PRODUCER_REVIEW",
+  "applicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "candidateBindings": {
+    "runner.py": {
+      "sha256": "f908e7bf7f7901f5215f902fdc87cdecdd95ba447536722aee4df1cd06bb1a0c",
+      "bytes": 10687
+    },
+    "prepare.py": {
+      "sha256": "7ba0358e89473bac1bdb2058f88e7669292fb6a0669573c7fe78dffa0bee6242",
+      "bytes": 4591
+    },
+    "supervise.py": {
+      "sha256": "1690197ae8790d6ae239736da74cd9945b91447d0d8d0a7abe987d23b2a9dd0a",
+      "bytes": 12688
+    },
+    "reproduce-source.py": {
+      "sha256": "7e56d86db8ce7445b2e9e7e5a08ee543e91c18cdd078b463cd98755fbb82c18f",
+      "bytes": 2602
+    },
+    "tests/test_control_gate.py": {
+      "sha256": "e805d91474a6ad52fddaf981d635d9f6d6439385b2f5b12f98318379dd22b54c",
+      "bytes": 4498
+    },
+    "tests/test_execution.py": {
+      "sha256": "094b91f652ee9e796ef19ab176064d3513fb1fef3fc9bdced8b7c8cb59bea522",
+      "bytes": 17512
+    },
+    "CONTROL-GATE.md": {
+      "sha256": "68c2b16b56bc90931b2a9fd9bed731f05b2ca4592d93369f9ed9e0eef8d4f3a3",
+      "bytes": 3397
+    },
+    "ARCHIVE-FORMAT.md": {
+      "sha256": "46b9767d6c74fe95b8e8bd31a93581131aa3a63a4df950cac4f0d6eae9395345",
+      "bytes": 3528
+    },
+    "generated buildspec.override.json": {
+      "sha256": "c20e6c14bb2308d95b02f3906aece7318bff1ffe3779b29f035db60c79c0269f",
+      "bytes": 14767
+    }
+  },
+  "openSourceDefects": [],
+  "independentTests": {
+    "candidatePassed": 29,
+    "candidateTotal": 29,
+    "baselineRed": 3,
+    "baselineTotal": 3,
+    "result": "protocol-review-results.json",
+    "script": "protocol-review.py"
+  },
+  "authorSuiteIndependentReplay": {
+    "passed": 39,
+    "failed": 0,
+    "log": "author-suite-independent-replay.log"
+  },
+  "protocolAssessment": {
+    "schema": "Exact required 13 fields, schemaVersion integer 1, stage pre_push, guardPass boolean true, imageMeasure docker.image.Size",
+    "order": "All 12 qualification gates including image build/smoke, then image inspect/positive accepted size, then receipt, then ECR authentication/login/push. Failures before receipt cannot publish.",
+    "counting": "Child stdout and stderr drain separately under one shared cap; receipt includes its own full prefixed line/newline in stdoutBytes; whole record capacity is checked before emission; secret capture is separately bounded across both streams and emits no credential bytes.",
+    "identity": "Existing environment names preserved; source/version/repository/region/execution/build/deadline checked before gates. Shipping must compare receipt identities/limits with submission record.",
+    "limits": "Receipt maximum 4096 bytes. Counts exclude platform/bootstrap/daemon logs and separately bounded failure footer. Pre-push snapshot proves neither completed push nor cloud termination/cost cap."
+  },
+  "archiveAssessment": {
+    "frozenSHA256": "252ccdf0d91d94a6b53e4a9d905534f2b4e325ef231481774154daa96bfacbf5",
+    "frozenBytes": 451977924,
+    "reportedWindowsSHA256": "9f3bf0962f5fa78595f87f78ac735b1ea23b2a9f18d6574771e30a179c060479",
+    "exactWindowsDigestExplainedBy": "All 4939 Git local and central DOS timestamps shift UTC to UTC-04:00, plus appended marker creator-system byte 3 to 0; 9879 metadata positions; no payload/compression/CRC/size changes.",
+    "reviewedCorrection": "Process-local Git TZ=UTC0 and explicit marker.create_system=3; create-new output and strict frozen digest/size validation.",
+    "independentFullArchiveCheck": "archive-independent-rehash.json"
+  },
+  "designReview": {
+    "newRunner": "No function exceeds 80 nonblank lines and file under 400 nonblank lines; stream accounting and atomic receipt generation have distinct helpers.",
+    "supervisor": "Unchanged hash from previous explicit cohesive >80-line supervise() review; no new supervisor behavior claimed.",
+    "runnerFunctionNonblankLines": {
+      "terminate_group": 15,
+      "run": 61,
+      "positive_integer": 4,
+      "assert_image_size": 9,
+      "emit_control_gate": 19,
+      "gates": 13,
+      "execute": 30,
+      "__init__": 7,
+      "emit": 12
+    }
+  },
+  "remainingDependencies": [
+    "Actual Windows reproduction must match exact frozen SHA before its custody is accepted.",
+    "Library transfer unconfirmed; supported helper network preflight failed before upload preparation (parent report), so no size-limit or successful-upload claim.",
+    "Actual accepted byte limits and verified S3 custody/version remain shipping inputs; this offline review does not approve cloud execution.",
+    "AWS/Docker/native execution and external watchdog consumption were not exercised.",
+    "Application release blockers are tracked separately; this review makes no application acceptance or release claim."
+  ],
+  "activity": {
+    "awsCalls": 0,
+    "dockerCalls": 0,
+    "applicationEdits": 0,
+    "commits": 0,
+    "pushes": 0,
+    "sourceDiffEmpty": true
+  },
+  "evidenceDirectory": "/tmp/capiro-build-control-review"
+}

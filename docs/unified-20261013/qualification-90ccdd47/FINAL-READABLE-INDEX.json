@@ -1,0 +1,866 @@
+[
+  {
+    "path": "readable/final-independent-audit/BROWSER-ATTACHMENTS-AND-AXE.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/BROWSER-ATTACHMENTS-AND-AXE.json",
+    "sha256": "12362b39096a2f7c4bf954d8e3508390b29ea1f4500f3ec2d9b54156c87e6531",
+    "bytes": 50105
+  },
+  {
+    "path": "readable/final-independent-audit/COMPLETED-EARLY-GATES.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/COMPLETED-EARLY-GATES.json",
+    "sha256": "7345599eccf50837602b36af5924fa8c113ba84ea932049b58d6001429526c02",
+    "bytes": 10418
+  },
+  {
+    "path": "readable/final-independent-audit/CONSOLE-OBSERVATIONS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/CONSOLE-OBSERVATIONS.json",
+    "sha256": "150b298b719b07753f99f5c33151f57c9cf34cac4769f8d902fc899c29ffcff0",
+    "bytes": 13661
+  },
+  {
+    "path": "readable/final-independent-audit/ELEMENTS-ARCHIVE-AUDIT.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/ELEMENTS-ARCHIVE-AUDIT.json",
+    "sha256": "a0fd75b8384544fa5509bc52b084a71651688a44ccb46bc1c4549d9c866ce7f1",
+    "bytes": 4319
+  },
+  {
+    "path": "readable/final-independent-audit/FINAL-SCOPE-AND-OBSERVATIONS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/FINAL-SCOPE-AND-OBSERVATIONS.json",
+    "sha256": "ba9951b4db51e723c4441c8c6255e40822a2664597987b28867c32da48c7e45d",
+    "bytes": 9704
+  },
+  {
+    "path": "readable/final-independent-audit/MANIFEST.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/MANIFEST.json",
+    "sha256": "8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c",
+    "bytes": 3116
+  },
+  {
+    "path": "readable/final-independent-audit/PREPARATION-VERIFICATION.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/PREPARATION-VERIFICATION.json",
+    "sha256": "d66157656a068b8267923685df5d7aa252a5023c512ae7c672b5f86fbb2e5608",
+    "bytes": 5659
+  },
+  {
+    "path": "readable/final-independent-audit/RAW-PRODUCER-BINDINGS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/RAW-PRODUCER-BINDINGS.json",
+    "sha256": "107758c9f7392fca358e03c206bebde77c9e93943bf47796ce766abc776d2494",
+    "bytes": 16508
+  },
+  {
+    "path": "readable/final-independent-audit/REPORT.md",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REPORT.md",
+    "sha256": "6c65ff1f83bf1dbdb186d5610a68f2ffff205c84b614479af778a43a0730b0f2",
+    "bytes": 5329
+  },
+  {
+    "path": "readable/final-independent-audit/REVIEW-PLAN.md",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/REVIEW-PLAN.md",
+    "sha256": "ca6587b233de9fbb44d52f13659c9065db02965c0f1643489b3e17fa9b929b85",
+    "bytes": 3252
+  },
+  {
+    "path": "readable/final-independent-audit/SPARSE-RECOVERY-REVIEW.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/SPARSE-RECOVERY-REVIEW.json",
+    "sha256": "d759c105063b7850e954cc582ac093bec0c9d9a8b5d5cc99ba81372f2e30d29c",
+    "bytes": 3001
+  },
+  {
+    "path": "readable/final-independent-audit/SUPPLEMENTAL-REVIEWS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/SUPPLEMENTAL-REVIEWS.json",
+    "sha256": "455abcf77ee86c3a7d4d22495c3274020c7333c180fb1aa7ac534e064f076459",
+    "bytes": 1243
+  },
+  {
+    "path": "readable/final-independent-audit/after-sparse-recovery.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/after-sparse-recovery.json",
+    "sha256": "a4a9d15241ee28a0d882251a183d76f6b5860850bc9f1658b7df9cdef73754fc",
+    "bytes": 18113
+  },
+  {
+    "path": "readable/final-independent-audit/preparation.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/preparation.json",
+    "sha256": "8bf7e0ed431d3351a144bb4c7bd58fa2910f90d8f711d071fc474e24244c1a3e",
+    "bytes": 13973
+  },
+  {
+    "path": "readable/qualification-completed/clean-install-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/clean-install-exit.json",
+    "bytes": 816,
+    "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922"
+  },
+  {
+    "path": "readable/qualification-completed/clean-install-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/clean-install-running.json",
+    "bytes": 443,
+    "sha256": "75021e57d215019f592723805732976cd1a4ebf26b57404c2d6016eb39022ff0"
+  },
+  {
+    "path": "readable/qualification-completed/check-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/check-exit.json",
+    "bytes": 711,
+    "sha256": "8a0a4416f7f3d8a56325bdfb8024a5356a0a131a43dca140b75349cdab67dccf"
+  },
+  {
+    "path": "readable/qualification-completed/check-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/check-running.json",
+    "bytes": 346,
+    "sha256": "9c46dbd9ed688f0a3bfe14e67fcf36f516674ef07f5c8bb1383fe693b5c45a0f"
+  },
+  {
+    "path": "readable/qualification-completed/elements-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/elements-exit.json",
+    "bytes": 816,
+    "sha256": "c0d1ab46eca5ee4c9bd41f5dd92b7b735df76a2da7084f07642dad72e6a4dc45"
+  },
+  {
+    "path": "readable/qualification-completed/elements-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/elements-running.json",
+    "bytes": 448,
+    "sha256": "35bf0bc3f1051c90e58765ca0e1c1623204cde32af0fd01fd9f3d0fb5f77f334"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser-exit.json",
+    "bytes": 922,
+    "sha256": "9e36293f7ed9084b7e71f08f90fed06c21d0f97dbba8c4096515fcd0b044b57e"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser-running.json",
+    "bytes": 538,
+    "sha256": "842744d1e3e448be39e306e2504bbd285f0687d88cb5082126ac439a006b43f2"
+  },
+  {
+    "path": "readable/qualification-completed/build-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build-exit.json",
+    "bytes": 1129,
+    "sha256": "0eececc6f8f937fc6b76533bf29af5b06a00ddd1696cd4a521544897bce4acbc"
+  },
+  {
+    "path": "readable/qualification-completed/build-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build-running.json",
+    "bytes": 765,
+    "sha256": "d37e18f793c01e1badb524af4e33633df1cb2145b1e11991015355d08fb15406"
+  },
+  {
+    "path": "readable/qualification-completed/production-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production-exit.json",
+    "bytes": 1003,
+    "sha256": "dddb8c989c9a4496aa29bb0dd867930ef989404ececccb27416237fb6c10938e"
+  },
+  {
+    "path": "readable/qualification-completed/production-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production-running.json",
+    "bytes": 634,
+    "sha256": "ab66b1cc35b5e228653b17afed21c2004c92753d9ea88c30c5d9d3e17bb1ab58"
+  },
+  {
+    "path": "readable/qualification-completed/served-newsletter-assets-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-exit.json",
+    "bytes": 783,
+    "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81"
+  },
+  {
+    "path": "readable/qualification-completed/served-newsletter-assets-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-running.json",
+    "bytes": 399,
+    "sha256": "61384be2c6dc9baeb2b34efd8a1c8205a581a6e870616078f5585ee9ce7c47e7"
+  },
+  {
+    "path": "readable/qualification-completed/served-newsletter-assets-restored-input-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input-exit.json",
+    "bytes": 798,
+    "sha256": "ee291e137237c4d6d14ab568b9388e5a4d646da383e14af6355111121e4295c2"
+  },
+  {
+    "path": "readable/qualification-completed/served-newsletter-assets-restored-input-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input-running.json",
+    "bytes": 399,
+    "sha256": "c43ca1a540e0b91cac2dadd1c3e3b2bb5b2e079f165f9ada1822861ad248fac7"
+  },
+  {
+    "path": "readable/qualification-completed/actual-additions-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-exit.json",
+    "bytes": 853,
+    "sha256": "7225525a3091d37979689fa1cb1c1c3e3455221fc08a9c398aa384d0684d6cac"
+  },
+  {
+    "path": "readable/qualification-completed/actual-additions-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-running.json",
+    "bytes": 477,
+    "sha256": "1d43b30de9a34de8db0a66c187a8fcfeb642d476c30bebca6c0505cc714032e1"
+  },
+  {
+    "path": "readable/qualification-completed/modules-browser-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/modules-browser-exit.json",
+    "bytes": 1149,
+    "sha256": "9ce9cb2acb359560038ac9b0aef48002ba3f373dc62777592ecb3f4bf5d94137"
+  },
+  {
+    "path": "readable/qualification-completed/modules-browser-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/modules-browser-running.json",
+    "bytes": 775,
+    "sha256": "f30d3c5cf65d2faecb7622f398dfbf26859d322f52e99dbd38ae72b749f9e712"
+  },
+  {
+    "path": "readable/qualification-completed/portfolio-discovery-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery-exit.json",
+    "bytes": 878,
+    "sha256": "1314dd51723d20e4572d9111028b2eb63a6f7a8fc65580ffb146bfb5519b4859"
+  },
+  {
+    "path": "readable/qualification-completed/portfolio-discovery-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery-running.json",
+    "bytes": 499,
+    "sha256": "b9045443730a0a1f1a3f5faeb59354720e9cb2a66b3fc807bffd1c79e6b51849"
+  },
+  {
+    "path": "readable/qualification-completed/FROZEN-SOURCE.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/FROZEN-SOURCE.json",
+    "bytes": 923,
+    "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83"
+  },
+  {
+    "path": "readable/qualification-completed/SPARSE-INPUT-RESTORATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/SPARSE-INPUT-RESTORATION.json",
+    "bytes": 611,
+    "sha256": "82646a440f1e4e4499eae8300b0a1363292f673c0a742844a052bb07184b9d14"
+  },
+  {
+    "path": "readable/qualification-completed/ROOT-ACTUAL-RENDER-REVIEW.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/ROOT-ACTUAL-RENDER-REVIEW.json",
+    "bytes": 1192,
+    "sha256": "1f11deb83f45864627ea93f198119ba207b261a3ec5d29a2deaa776ae0a79146"
+  },
+  {
+    "path": "readable/qualification-completed/HARNESS-ADAPTATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HARNESS-ADAPTATION.json",
+    "bytes": 473,
+    "sha256": "e639837905883473ebfc2a9972d07abe55b9ed6ca679a4b7de27ee0eafa3afb3"
+  },
+  {
+    "path": "readable/qualification-completed/build-cache-retirement.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/build-cache-retirement.json",
+    "bytes": 6535,
+    "sha256": "0927950a7241b784a9a95fc38b342ad142395766f761f13591d55ffde3e9045d"
+  },
+  {
+    "path": "readable/qualification-completed/production/preview-root-smoke.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/preview-root-smoke.json",
+    "bytes": 101,
+    "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+  },
+  {
+    "path": "readable/qualification-completed/production/production-smoke.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/production/production-smoke.json",
+    "bytes": 5298,
+    "sha256": "da8f4592ea41108c6bfb3341b1e51f7a79f4eed10d055b9270f6a09ea9c939da"
+  },
+  {
+    "path": "readable/qualification-completed/actual-additions-v2/results.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-v2/results.json",
+    "bytes": 5178,
+    "sha256": "d4267a9648fdd0cc216c52ec6a1672bcdaea50fdff4ea55a23c0574eeb06c43a"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser/browser-module-graph.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-module-graph.json",
+    "bytes": 2985,
+    "sha256": "7790a0c137243ec15c0bcf6bd2878db1081e0cadcf83c7d6431520a2d1e0f016"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser/browser-public-namespace.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-public-namespace.json",
+    "bytes": 1509,
+    "sha256": "7ca882476a59bb89e8a927014b7f718db5563f98de19f55152f925c684b6c5f4"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser/browser-receiving-results.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-receiving-results.json",
+    "bytes": 13043,
+    "sha256": "5f7b54dddb62cd00923717d5a904fe5c20b379c921600bae917d4b9ad2890263"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser/browser-renderer-results.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-renderer-results.json",
+    "bytes": 54404,
+    "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103"
+  },
+  {
+    "path": "readable/qualification-completed/public-newsletter-browser/browser-results.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-results.json",
+    "bytes": 1961,
+    "sha256": "5b2155c6ff3a8d2a3788f609be2141f148b7901e6dec60d886e00c37b9503f46"
+  },
+  {
+    "path": "readable/qualification-completed/actual-served-assets/asset-results.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/actual-served-assets/asset-results.json",
+    "bytes": 48855,
+    "sha256": "7e82efee1a69f5ddfa6ff76cf5f899e082ab554e2538a4f6549389ad3d61e955"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/FROZEN-SOURCE.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/FROZEN-SOURCE.json",
+    "bytes": 702,
+    "sha256": "b2f0e133129317f7ddcbbbb600774b49b5940633ef6bd2b88ded50c1f85a2f22"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/HARNESS-ADAPTATION.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/HARNESS-ADAPTATION.json",
+    "bytes": 657,
+    "sha256": "a8400d11ee0984e1268be30b5c73bd80c4dd90d69fc221604f966806c55eef30"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/INTEGRATION-RESOLUTION.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/INTEGRATION-RESOLUTION.json",
+    "bytes": 456,
+    "sha256": "e61dd2e55f3a326efb47726cfeb6395e182236863a60b5405d675aabb3df07f7"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/check-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/check-exit.json",
+    "bytes": 711,
+    "sha256": "b38b935f5cf8bdfa5666d138fd9296a32ee626f09059278ff69750c00553c143"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/check-running.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/check-running.json",
+    "bytes": 346,
+    "sha256": "4ace851cd7917a33741ddc7838eb78c917e90d593b0a5b70bf1ed5329734c5e9"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/clean-install-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/clean-install-exit.json",
+    "bytes": 806,
+    "sha256": "fea97ba31349fd3a3a8691b31a0891ae9f3b3882449469b0c133d7974924a9c3"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/clean-install-running.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/clean-install-running.json",
+    "bytes": 433,
+    "sha256": "2c06b1e0afcee88c8a00cc80ae4dab7ed6df806cdea3ae8d6c7fa3525ef02e97"
+  },
+  {
+    "path": "readable/first-attempt-6150e49/files-development-harness-preservation.json",
+    "originalPath": "/workspace/capiro-unified-files-final-20261013/files-development-harness-preservation.json",
+    "bytes": 68163,
+    "sha256": "3fca1cec5977aa471c7722f60c9133ca7443d889fe91cfb5b124475fb37cf785"
+  },
+  {
+    "path": "readable/modules-artifacts/.last-run.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/.last-run.json",
+    "bytes": 45,
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+  },
+  {
+    "path": "readable/portfolio-shard-1/portfolio-shard-1-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-running.json",
+    "sha256": "43d6f90597fa5ddd2e409a0f204a7bd301dc6923d28b73857cadf2fb3de22fab",
+    "bytes": 758
+  },
+  {
+    "path": "readable/portfolio-shard-1/portfolio-shard-1-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-exit.json",
+    "sha256": "44aa78ee5a1fc37bd4f2a74f98183508f6102b0fe2c9506fcd4b14fe0827d625",
+    "bytes": 1134
+  },
+  {
+    "path": "readable/portfolio-shard-1-artifacts/.last-run.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts/.last-run.json",
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  {
+    "path": "readable/storage-addendum/ELEMENTS83-ARCHIVE-LOCATION.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/ELEMENTS83-ARCHIVE-LOCATION.json",
+    "sha256": "bd700355e2ca66118f4ef7fec5f020100db49ec9a56fe42f98aff78a94403a08",
+    "bytes": 730
+  },
+  {
+    "path": "readable/storage-addendum/MANIFEST.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/MANIFEST.json",
+    "sha256": "7facf7523946960e7c2cecf1a7dc012ab898c91af542ff128c3da3521220daea",
+    "bytes": 3141
+  },
+  {
+    "path": "readable/storage-addendum/README.md",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/README.md",
+    "sha256": "a21e4ad943eab3a64ab99d4886f10e081f8094848efcbade5a3b6981d17ea703",
+    "bytes": 3878
+  },
+  {
+    "path": "readable/storage-addendum/elements83-archive-verification.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-archive-verification.json",
+    "sha256": "c6eeb918ca9e208ad33c8e761b5632ee0fd2594ce957013745b22d307214294a",
+    "bytes": 21116
+  },
+  {
+    "path": "readable/storage-addendum/elements83-before-archive.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-before-archive.json",
+    "sha256": "283e94525936808053ca54a96eb6ac4f1651475d4ac2a5e9a87b55753aad57b2",
+    "bytes": 20976
+  },
+  {
+    "path": "readable/storage-addendum/elements83-initial-failure.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-initial-failure.json",
+    "sha256": "949907854b3ebc4af497e2c8814136c67a76369d67b8111f654cf774a578a8a2",
+    "bytes": 793
+  },
+  {
+    "path": "readable/storage-addendum/elements83-retirement.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/elements83-retirement.json",
+    "sha256": "e694688dbb351648ba0ba078f451c8f3b07a71d09079ab6cb21146364c8c8da7",
+    "bytes": 21337
+  },
+  {
+    "path": "readable/storage-addendum/help.txt",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/help.txt",
+    "sha256": "38ca07bb555b8666870943752dbc556180110766e1dedd157fbbc3dcec7955bb",
+    "bytes": 451
+  },
+  {
+    "path": "readable/storage-addendum/publication-before-retirement.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/publication-before-retirement.json",
+    "sha256": "d5f187ba9b8435e9f660bd808ff34a7439cffa389b41d8b33b2337fdaf8d3340",
+    "bytes": 70998
+  },
+  {
+    "path": "readable/storage-addendum/publication-retirement.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/publication-retirement.json",
+    "sha256": "29957dfd8ec1486fbd93be656bde0c365f50fe4a469ab9e5f32d3208a3a5dfee",
+    "bytes": 71337
+  },
+  {
+    "path": "readable/storage-addendum/frozen83-reference/OMITTED-LOCAL-GRAPH.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/frozen83-reference/OMITTED-LOCAL-GRAPH.json",
+    "sha256": "092e785d3c6c8ff023c057747b0a50cfe78bbb061839da316aa713bc286b1c08",
+    "bytes": 1674
+  },
+  {
+    "path": "readable/storage-addendum/frozen83-reference/PUBLICATION-MANIFEST.json",
+    "originalPath": "/workspace/capiro-final-storage-addendum-20261013/frozen83-reference/PUBLICATION-MANIFEST.json",
+    "sha256": "fe793fae01d20e40bf5b2057ac433550408f1fbcd193af93053bfd44b4f68fbd",
+    "bytes": 43784
+  },
+  {
+    "path": "readable/portfolio-shard-2/portfolio-shard-2-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-running.json",
+    "sha256": "c594073782920c6829e305037aea3e052adfc3648e9fcb7d0acc2d7705d2d698",
+    "bytes": 758
+  },
+  {
+    "path": "readable/portfolio-shard-2/portfolio-shard-2-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-exit.json",
+    "sha256": "7add78a95531075a628f2710b925683b5c31d23887b66c61e5995ccaca5e7531",
+    "bytes": 1134
+  },
+  {
+    "path": "readable/portfolio-shard-2-artifacts/.last-run.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts/.last-run.json",
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  {
+    "path": "readable/portfolio-shard-3/portfolio-shard-3-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-running.json",
+    "sha256": "2fa143cd8d3dade37f9ffc19b80afe316a7b239cd305fbbaa16a19ad9e81becf",
+    "bytes": 758
+  },
+  {
+    "path": "readable/portfolio-shard-3/portfolio-shard-3-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-exit.json",
+    "sha256": "a1a0f8c59e1042fc7c441c46cfc9dbd3929bd606d7cab42b279bfb07ec9254f6",
+    "bytes": 1134
+  },
+  {
+    "path": "readable/portfolio-shard-3-artifacts/.last-run.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/.last-run.json",
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  {
+    "path": "readable/portfolio-shard-3-artifacts/profile-tools-profile-expo-e9251-act-sources-and-attribution/synthetic-profile.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-profile-expo-e9251-act-sources-and-attribution/synthetic-profile.json",
+    "sha256": "f167619494eaf7ddfbffd5b83c363abedd2af8cf387114341cfa513d600bbbee",
+    "bytes": 1626
+  },
+  {
+    "path": "readable/portfolio-shard-3-artifacts/profile-tools-integration--08d4f-ce-JSON-then-restores-focus/overview-profile.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts/profile-tools-integration--08d4f-ce-JSON-then-restores-focus/overview-profile.json",
+    "sha256": "f4fa489420a4de7fb914f0f233806e49b210b7fc06b8148e63d4d0d801a62e95",
+    "bytes": 1626
+  },
+  {
+    "path": "readable/inherited-console-and-archive-relocation/INHERITED-CONSOLE-OBSERVATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/INHERITED-CONSOLE-OBSERVATION.json",
+    "sha256": "a0533914076f37da2c0f9832297c6b33228e5de67b4eb582078cec904328ffba",
+    "bytes": 990
+  },
+  {
+    "path": "readable/inherited-console-and-archive-relocation/HISTORICAL-ARCHIVE-RELOCATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HISTORICAL-ARCHIVE-RELOCATION.json",
+    "sha256": "213199ae53ee4d76e7c233cc4da012c7daef3ab481c02b7e6a1e1ec4b2138193",
+    "bytes": 503
+  },
+  {
+    "path": "readable/inherited-console-and-archive-relocation/HISTORICAL-93-ARCHIVE-RELOCATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HISTORICAL-93-ARCHIVE-RELOCATION.json",
+    "sha256": "bc243a7c091e83f55434b45ae59ac0df8bae5f7c008613166fb7b0bf65eb01ab",
+    "bytes": 503
+  },
+  {
+    "path": "readable/portfolio-shard-4/portfolio-shard-4-running.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-running.json",
+    "sha256": "519e72dc96c25ff732aa2feb1d719a9e67d5d670b33ef040ad76bb9dfcbf687c",
+    "bytes": 758
+  },
+  {
+    "path": "readable/portfolio-shard-4/portfolio-shard-4-exit.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-exit.json",
+    "sha256": "ead47e0765aa7291fa6263df4872fcb716f77d01f242e35840289ef5148f8be4",
+    "bytes": 1134
+  },
+  {
+    "path": "readable/portfolio-shard-4-artifacts/.last-run.json",
+    "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts/.last-run.json",
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  {
+    "path": "readable/final-runtime-receipts/portfolio-progress.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-progress.json",
+    "sha256": "9d3a979c236b448c8cc4145b9706b387fe59c77ff4ca405e92db3cc2c43cec70",
+    "bytes": 62036
+  },
+  {
+    "path": "readable/final-runtime-receipts/portfolio-aggregate.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/portfolio-aggregate.json",
+    "sha256": "49cb12bd9c47eb7ec54aff224b735a1c465da0407e894f01ffeb86e615573463",
+    "bytes": 62158
+  },
+  {
+    "path": "readable/final-runtime-receipts/ALL-GATES-COMPLETE.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/ALL-GATES-COMPLETE.json",
+    "sha256": "85c69e385716d2a0a5312f2f197cb4a18efbce7c0c85fae0eff425d36427a074",
+    "bytes": 401
+  },
+  {
+    "path": "readable/final-runtime-receipts/INPUT-HEAD-REFRESH.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/INPUT-HEAD-REFRESH.json",
+    "sha256": "dcca2b67ea5cf612c38010ad6a0d71aa014db1cd5567c63e62cd6edc993de1ad",
+    "bytes": 3710
+  },
+  {
+    "path": "readable/final-runtime-receipts/FINAL-SOURCE-CONFIRMATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/FINAL-SOURCE-CONFIRMATION.json",
+    "sha256": "c74c5aee5b63de031f16aa6432f54474b420b389b912d7667941a325d58f8d8d",
+    "bytes": 872
+  },
+  {
+    "path": "readable/final-runtime-receipts/CONTINUATION.md",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/CONTINUATION.md",
+    "sha256": "3869c20183cc14e6b8b0bb81dbee5135d51c5aa42dd0f9c4c1540c42a89089b3",
+    "bytes": 2879
+  },
+  {
+    "path": "readable/completed90-elements-storage/ARCHIVE-LOCATION.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/ARCHIVE-LOCATION.json",
+    "sha256": "dc43cada4654ca76d2dc17bc0bcde4bb2488ebd1eeda0256f35856dc7f431e13",
+    "bytes": 658
+  },
+  {
+    "path": "readable/completed90-elements-storage/HELPER-PROVENANCE.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/HELPER-PROVENANCE.json",
+    "sha256": "63e7809744c10878175b415ca58917675bacb9399c79f6230b053f1b051cc797",
+    "bytes": 410
+  },
+  {
+    "path": "readable/completed90-elements-storage/MANIFEST.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/MANIFEST.json",
+    "sha256": "f4ee7a62323e3ed084d13f50dc2ed3a922cf3bed22ace7d6fa7a66504018187a",
+    "bytes": 2574
+  },
+  {
+    "path": "readable/completed90-elements-storage/README.md",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/README.md",
+    "sha256": "d11ca15ec692202746ed16d34a1d5aadb17c3d0fec1fc0c97925e83d2ebeae98",
+    "bytes": 3360
+  },
+  {
+    "path": "readable/completed90-elements-storage/archive-verification.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/archive-verification.json",
+    "sha256": "aaa7ef981e76ab05cb07042f03cf8e9ae94d927b6d4bc1aac50729c3b1042747",
+    "bytes": 20425
+  },
+  {
+    "path": "readable/completed90-elements-storage/before-archive.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/before-archive.json",
+    "sha256": "f277f0a5ea8b2ca640bad596bd0f0e8b99ec2978d2075f5794e8b395744856b8",
+    "bytes": 20290
+  },
+  {
+    "path": "readable/completed90-elements-storage/consumers-before-retirement.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/consumers-before-retirement.json",
+    "sha256": "9a48a5be0889ebd521274698607ba8a32656592f229f0981cdb611bfcb9df79a",
+    "bytes": 64683
+  },
+  {
+    "path": "readable/completed90-elements-storage/consumers-before.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/consumers-before.json",
+    "sha256": "4c0bca60351a6ea82f9a31f12da13feebb62c43d081ed1c6b5e9a82bac2ca93f",
+    "bytes": 61128
+  },
+  {
+    "path": "readable/completed90-elements-storage/consumers-initial.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/consumers-initial.json",
+    "sha256": "82ba1585342c8ebff139da73200a111ca0d67065a409b494af2389ac63ec8a85",
+    "bytes": 1050
+  },
+  {
+    "path": "readable/completed90-elements-storage/help.txt",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/help.txt",
+    "sha256": "3a56f8ec441bc259947720e75bc806a9cea77ebfe0bc4f83801ac9366c6598fb",
+    "bytes": 348
+  },
+  {
+    "path": "readable/completed90-elements-storage/out-of-sandbox-consumer-check.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/out-of-sandbox-consumer-check.json",
+    "sha256": "9a08fd0547929bbbbf4385a26b169bc63437c9e68064cccbbe912a940996cfb1",
+    "bytes": 498
+  },
+  {
+    "path": "readable/completed90-elements-storage/retirement.json",
+    "originalPath": "/workspace/capiro-final-storage-files-elements-20261013/retirement.json",
+    "sha256": "63ccabd0acaafe696d81d99035cfe3c7238baea7a84044cae27119aee14219a9",
+    "bytes": 20637
+  },
+  {
+    "path": "readable/source-preservation-review/6150-TO-90CC-DELTA.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/6150-TO-90CC-DELTA.json",
+    "bytes": 6352,
+    "sha256": "8e6d41a0211d9e6f5d4925714745bd2a66597197a32b7f99e3c03c67f856dd1c"
+  },
+  {
+    "path": "readable/source-preservation-review/BASE83-TEST-PRESERVATION.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/BASE83-TEST-PRESERVATION.json",
+    "bytes": 123238,
+    "sha256": "e1065f5646e006fe0718335257b742439bf5caeea2910b67bd5476d2cef7242f"
+  },
+  {
+    "path": "readable/source-preservation-review/FAILED6150-INPUT-MANIFEST.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/FAILED6150-INPUT-MANIFEST.json",
+    "bytes": 3634,
+    "sha256": "7155eebcf4a222d4519b524ee88fb6addce0ca854c6ad15a90028be36f3554fa"
+  },
+  {
+    "path": "readable/source-preservation-review/FILES-INTEGRATION-SOURCE-COMPARISON.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/FILES-INTEGRATION-SOURCE-COMPARISON.json",
+    "bytes": 521,
+    "sha256": "e9b5c9f4cc981311bbada8e1548f2b0dce898e8f45b7f5c58adee08e17bea844"
+  },
+  {
+    "path": "readable/source-preservation-review/FILES-REVIEWED-SOURCE-COMPARISON.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/FILES-REVIEWED-SOURCE-COMPARISON.json",
+    "bytes": 20416,
+    "sha256": "ca21430e36d3973ff1d0cb5650afa20776f8c3c6e55d5456b793f059b3245b29"
+  },
+  {
+    "path": "readable/source-preservation-review/MANIFEST.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/MANIFEST.json",
+    "bytes": 2640,
+    "sha256": "19fd6fc8e2cef4dd6c95d952c55c8c9c28999ccedea5b4fb41a527c679b194c0"
+  },
+  {
+    "path": "readable/source-preservation-review/PRIOR83-EVIDENCE-PRESERVATION.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/PRIOR83-EVIDENCE-PRESERVATION.json",
+    "bytes": 97,
+    "sha256": "c3cca22f56016c1e6a78eda63f2668c050df3c31d93040080321cbe272c0ed8c"
+  },
+  {
+    "path": "readable/source-preservation-review/PUBLIC-PACKAGE-LOCK.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/PUBLIC-PACKAGE-LOCK.json",
+    "bytes": 4603,
+    "sha256": "5accafaf86b5b4f5759f183beb2e827bd69c050d2070b540e5b2cdc4d2013da1"
+  },
+  {
+    "path": "readable/source-preservation-review/READ-BINDINGS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/READ-BINDINGS.json",
+    "bytes": 1473,
+    "sha256": "151a048999f05e9e3d8b2cf6dcfdcbb6c02846ce3284f12160237ac0fb148a02"
+  },
+  {
+    "path": "readable/source-preservation-review/REPORT.md",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/REPORT.md",
+    "bytes": 4161,
+    "sha256": "1e4a251d0fca2404bb5e2cd5eb39d1b136dbc1cd9de5c82939543456a3db16f4"
+  },
+  {
+    "path": "readable/source-preservation-review/SOURCE-VERIFICATION.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/SOURCE-VERIFICATION.json",
+    "bytes": 2134,
+    "sha256": "29b19cb8374568b77856f8229ea4803dfa51b4231bbed7d2ff92196ced62984e"
+  },
+  {
+    "path": "readable/source-preservation-review/TYPING-CORRECTION-PROOF.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/TYPING-CORRECTION-PROOF.json",
+    "bytes": 2782,
+    "sha256": "8a9ad0eef933772afa23bebd6fc564092c79fdd3b9e1659bfd5325a8c6126ba2"
+  },
+  {
+    "path": "readable/source-preservation-review/observed-FROZEN-SOURCE.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/observed-FROZEN-SOURCE.json",
+    "bytes": 923,
+    "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83"
+  },
+  {
+    "path": "readable/source-preservation-review/observed-clean-install-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/observed-clean-install-exit.json",
+    "bytes": 816,
+    "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922"
+  },
+  {
+    "path": "readable/emitted-review/ADDITIONAL-READ-BINDINGS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/ADDITIONAL-READ-BINDINGS.json",
+    "bytes": 974,
+    "sha256": "a84c10c4b2ea8b706d61071afa3a4620e087519191f000162eef7088a25b651f"
+  },
+  {
+    "path": "readable/emitted-review/CLERK-SDK-LITERAL-PROVENANCE.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/CLERK-SDK-LITERAL-PROVENANCE.json",
+    "bytes": 1536,
+    "sha256": "f00690263d1734f6931edbd9efafc94b7e48079642cf471f2ef7e94180b4a980"
+  },
+  {
+    "path": "readable/emitted-review/CLIENT-SERVER-BOUNDARY.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/CLIENT-SERVER-BOUNDARY.json",
+    "bytes": 110555,
+    "sha256": "12f72274a6f421882cb56e67ec2631bab3767c965aa4b198f677e0f09db176bc"
+  },
+  {
+    "path": "readable/emitted-review/FINAL-REVIEW-RECEIPT.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/FINAL-REVIEW-RECEIPT.json",
+    "bytes": 629,
+    "sha256": "115c5bfcd8d9189bcea37d37d9b8f9e2d26dc010dc5892d94133d5dbbdbf0b1f"
+  },
+  {
+    "path": "readable/emitted-review/INITIAL-MARKER-PROBE.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/INITIAL-MARKER-PROBE.json",
+    "bytes": 472,
+    "sha256": "3b0b5ee42dc83dfe46d4b348d89a1e5b5a531d983b996c2e0bfc65a5d3de01f2"
+  },
+  {
+    "path": "readable/emitted-review/MANIFEST.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/MANIFEST.json",
+    "bytes": 4287,
+    "sha256": "4283aa5a6908a8d02961306c8fbabacb7754b675d52a5c7a45f5aed591363620"
+  },
+  {
+    "path": "readable/emitted-review/MAPPED-FIRST-PARTY-SOURCE.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/MAPPED-FIRST-PARTY-SOURCE.json",
+    "bytes": 12980,
+    "sha256": "36718fc930df741a644bd83f03ac7bdda1a96f7e4e605b2714fc6d643708d32c"
+  },
+  {
+    "path": "readable/emitted-review/PUBLIC-PACKAGE-EMISSION.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/PUBLIC-PACKAGE-EMISSION.json",
+    "bytes": 6565,
+    "sha256": "396f5d04a55e088b3132c6544f74712decacebadc887e3ab426abe6585e46946"
+  },
+  {
+    "path": "readable/emitted-review/RAW-RECEIPT-BINDINGS.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/RAW-RECEIPT-BINDINGS.json",
+    "bytes": 2240,
+    "sha256": "60d7dd9b379d8845c2d119cdeb64f274754ebf4095f88933a1998f84ebbe8099"
+  },
+  {
+    "path": "readable/emitted-review/REPORT.md",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/REPORT.md",
+    "bytes": 5473,
+    "sha256": "cfe1650f4a90009602c2b58307b57d98c9f00d5f651f1c3ab9a6ebf252ab9d84"
+  },
+  {
+    "path": "readable/emitted-review/SERVED-ASSET-COMPARISON.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/SERVED-ASSET-COMPARISON.json",
+    "bytes": 42324,
+    "sha256": "a2885da5cbfcf92505c1ba59b85f239520411c53bb51d8b936538253bfa99cbf"
+  },
+  {
+    "path": "readable/emitted-review/SOURCE-BUILD-BINDING.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/SOURCE-BUILD-BINDING.json",
+    "bytes": 544,
+    "sha256": "d8534744c11993c18d95ebc27d385fcb78cc62e46c4cb87bc67a8332d7819f04"
+  },
+  {
+    "path": "readable/emitted-review/STANDALONE-TRACES.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/STANDALONE-TRACES.json",
+    "bytes": 98516,
+    "sha256": "b07913b06c3db528f89ceb944121e6f12849352fbd9546151178985be33df44b"
+  },
+  {
+    "path": "readable/emitted-review/observed/FROZEN-SOURCE.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/FROZEN-SOURCE.json",
+    "bytes": 923,
+    "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83"
+  },
+  {
+    "path": "readable/emitted-review/observed/actual-served-assets__asset-results.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/actual-served-assets__asset-results.json",
+    "bytes": 48855,
+    "sha256": "7e82efee1a69f5ddfa6ff76cf5f899e082ab554e2538a4f6549389ad3d61e955"
+  },
+  {
+    "path": "readable/emitted-review/observed/build-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/build-exit.json",
+    "bytes": 1129,
+    "sha256": "0eececc6f8f937fc6b76533bf29af5b06a00ddd1696cd4a521544897bce4acbc"
+  },
+  {
+    "path": "readable/emitted-review/observed/check-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/check-exit.json",
+    "bytes": 711,
+    "sha256": "8a0a4416f7f3d8a56325bdfb8024a5356a0a131a43dca140b75349cdab67dccf"
+  },
+  {
+    "path": "readable/emitted-review/observed/clean-install-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/clean-install-exit.json",
+    "bytes": 816,
+    "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922"
+  },
+  {
+    "path": "readable/emitted-review/observed/production-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/production-exit.json",
+    "bytes": 1003,
+    "sha256": "dddb8c989c9a4496aa29bb0dd867930ef989404ececccb27416237fb6c10938e"
+  },
+  {
+    "path": "readable/emitted-review/observed/production__preview-root-smoke.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/production__preview-root-smoke.json",
+    "bytes": 101,
+    "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+  },
+  {
+    "path": "readable/emitted-review/observed/production__production-smoke.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/production__production-smoke.json",
+    "bytes": 5298,
+    "sha256": "da8f4592ea41108c6bfb3341b1e51f7a79f4eed10d055b9270f6a09ea9c939da"
+  },
+  {
+    "path": "readable/emitted-review/observed/served-newsletter-assets-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/served-newsletter-assets-exit.json",
+    "bytes": 783,
+    "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81"
+  },
+  {
+    "path": "readable/emitted-review/observed/served-newsletter-assets-restored-input-exit.json",
+    "originalPath": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/observed/served-newsletter-assets-restored-input-exit.json",
+    "bytes": 798,
+    "sha256": "ee291e137237c4d6d14ab568b9388e5a4d646da383e14af6355111121e4295c2"
+  },
+  {
+    "path": "readable/historical-link-restoration/HISTORICAL-EVIDENCE-MATERIALIZATION.json",
+    "originalPath": "/workspace/capiro-unified-files-corrected-20261013/HISTORICAL-EVIDENCE-MATERIALIZATION.json",
+    "bytes": 159172,
+    "sha256": "dde309ee00a4e89576a727644a810919a3ccf569aa552d7e6d969e236b3b4705"
+  }
+]

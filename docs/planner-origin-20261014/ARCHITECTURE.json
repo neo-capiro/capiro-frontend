@@ -1,0 +1,28 @@
+{
+  "exitCode": 0,
+  "errors": [],
+  "sizeSummary": {
+    "total": 496,
+    "reviewed": 477,
+    "inheritedUnreviewed": 19,
+    "blocking": 0
+  },
+  "changedProxyFinding": [
+    {
+      "file": "apps/web/src/shared/portfolio/api/proxy.ts",
+      "kind": "function",
+      "symbol": "proxyRequest",
+      "line": 30,
+      "nonblank": 128,
+      "fingerprint": "e2978996c95f2ccc411e88e154035f882899f04e2a51ebf7f59f42520327e9ca",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "reviewed",
+      "blocking": false,
+      "review": {
+        "reason": "Independent review: fixed-service request validation, authentication, bounded forwarding and response normalization remain cohesive. Delta only delegates origin equality to the shared comparator; no new auth, route-policy or dispatch responsibility. Approval applies only to this fingerprint; inherited signals remain visible.",
+        "reviewedBy": "Codex independent /root/runtime_review",
+        "reviewedOn": "2026-10-14"
+      }
+    }
+  ]
+}

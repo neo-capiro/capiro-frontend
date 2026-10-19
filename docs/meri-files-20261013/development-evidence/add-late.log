@@ -1,0 +1,21 @@
+{
+  "originalRecords": 424,
+  "originalBytes": 37534068,
+  "archives": [
+    {
+      "path": "objects.zip",
+      "bytes": 17009705,
+      "sha256": "f00bdda0256d017ec59f70a9aa7e6e1597d8f017d9d6786cbffa03be8764a725",
+      "uniqueMembers": 277
+    },
+    {
+      "path": "late-objects.zip",
+      "bytes": 1481435,
+      "sha256": "9d0b3d0558fe0e1db228cdd3b0c702b8ef787fa36ffe7fb12efbc7f5e9006293",
+      "uniqueMembers": 52
+    }
+  ],
+  "newRecords": 57,
+  "directFiles": 160,
+  "pendingSourceCommitBindingOnly": true
+}

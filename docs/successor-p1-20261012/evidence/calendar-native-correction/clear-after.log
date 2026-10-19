@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:542049) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 apps/web/tests/browser/calendar-client-clear.spec.ts:20:3 › existing meeting No client sends explicit null and accepts native clear receipt (1.2s)
+  ✓  2 apps/web/tests/browser/calendar-client-clear.spec.ts:20:3 › existing meeting No client sends explicit null and rejects old association (1.1s)
+  ✓  3 apps/web/tests/browser/calendar-client-clear.spec.ts:46:1 › new unscoped meeting omits clientId and accepts backend association (961ms)
+
+  3 passed (4.0s)

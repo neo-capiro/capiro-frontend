@@ -1,0 +1,319 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: control.spec.ts >> a continuously mounted Quick log hides its retained body until reopened fresh authority completes
+- Location: ../../../../tmp/r3-reopen-167e306-red/control.spec.ts:5:1
+
+# Error details
+
+```
+Error: expect(locator).toHaveCount(expected) failed
+
+Locator:  getByLabel('Title', { exact: true })
+Expected: 0
+Received: 1
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveCount" with timeout 5000ms
+  - waiting for getByLabel('Title', { exact: true })
+    14 × locator resolved to 1 element
+       - unexpected value "1"
+
+```
+
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - link:
+      - /url: "#main"
+      - text: Skip to content
+    - banner:
+      - link:
+        - /url: /
+        - img
+      - navigation:
+        - link:
+          - /url: /meri
+        - link:
+          - /url: /
+        - link:
+          - /url: /modules
+      - navigation:
+        - link:
+          - /url: /portfolio/10000000-0000-4000-8000-000000000001?log=1
+        - link:
+          - /url: /calendar
+        - link:
+          - /url: /portfolio?search=1
+        - button [disabled]
+        - generic:
+          - button: T
+    - generic:
+      - complementary:
+        - paragraph: Portfolio
+        - navigation:
+          - link:
+            - /url: /portfolio
+            - generic: Overview
+          - link:
+            - /url: /portfolio?type=CLIENT
+            - generic: Clients
+          - link:
+            - /url: /portfolio/prospects
+            - generic: Prospects
+        - separator
+        - paragraph: Test Aerospace
+        - navigation:
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001
+            - generic: Overview
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives
+            - generic: Objectives
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+            - generic: Calendar
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/relationships
+            - generic: Relationships
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/work
+            - generic: Work
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/capabilities
+            - generic: Capabilities
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/bills
+            - generic: Bill Tracker
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/opportunities
+            - generic: Opportunities
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/files
+            - generic: Files
+        - generic:
+          - link:
+            - /url: /settings
+            - text: Settings
+      - main:
+        - generic:
+          - generic:
+            - navigation:
+              - link:
+                - /url: /portfolio
+              - link:
+                - /url: /portfolio
+                - text: Portfolio
+              - generic: /
+              - link:
+                - /url: /portfolio/10000000-0000-4000-8000-000000000001
+                - text: Test Aerospace
+              - generic: /
+              - button: Overview
+            - generic:
+              - button:
+                - generic: Quick add
+              - button:
+                - generic: Meri actions
+              - button:
+                - img
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - paragraph: Client profile
+                - heading [level=1]: Overview
+              - generic:
+                - button:
+                  - img
+                  - text: Notes
+                - link:
+                  - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives?new=1
+                  - text: New objective
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: TA
+                    - generic:
+                      - generic:
+                        - heading [level=1]: Test Aerospace
+                        - generic: ACTIVE
+                      - generic:
+                        - text: Aerospace ·
+                        - link:
+                          - /url: https://example.test/
+                          - text: https://example.test
+                  - paragraph: Synthetic organization for isolated UI validation.
+                  - generic:
+                    - generic: Focus
+                    - button:
+                      - text: + Add
+                      - generic: focus tag
+                  - generic:
+                    - generic: Owner Unassigned
+                    - button:
+                      - img
+                      - text: Account team · 0
+                - region:
+                  - generic:
+                    - heading [level=2]: Engagement pulse
+                    - link:
+                      - /url: "#activity-timeline"
+                      - text: Open timeline →
+                  - generic:
+                    - generic:
+                      - strong: "0"
+                      - paragraph: Recent activity items
+                    - generic:
+                      - strong: "0"
+                      - paragraph: Account team
+                    - generic:
+                      - strong: —
+                      - paragraph: Objective coverage unavailable
+                - generic:
+                  - generic:
+                    - heading [level=2]: Objectives
+                    - link:
+                      - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives?new=1
+                      - img
+                  - link:
+                    - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives?objective=30000000-0000-4000-8000-000000000001
+                    - generic:
+                      - strong: Test outcome
+                      - generic: Draft
+                    - paragraph: Test minimum win
+                  - link:
+                    - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives
+                    - text: View objectives
+                    - img
+              - generic:
+                - region:
+                  - generic:
+                    - generic:
+                      - heading [level=2]: District nexus
+                      - paragraph: 0 locations · 0 states · 0 districts
+                    - generic:
+                      - button
+                      - button
+                  - generic:
+                    - generic:
+                      - img
+                  - paragraph: No facilities yet. Add a location with the plus action.
+                - generic:
+                  - generic:
+                    - heading [level=2]: Client calendar
+                    - link:
+                      - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+                      - img
+                  - paragraph: Meetings, preparation, notes and debriefs for this client.
+                  - link:
+                    - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+                    - text: Open calendar
+            - region:
+              - generic:
+                - generic:
+                  - paragraph: Relationship history
+                  - heading [level=2]: Activity timeline
+              - generic:
+                - generic:
+                  - generic: Search activity
+                  - searchbox
+                - button: All activity
+                - button: All dates
+              - paragraph: No activity to show.
+  - dialog "Quick log" [ref=e2]:
+    - banner [ref=e3]:
+      - heading "Quick log" [level=2] [ref=e4]
+      - button "Close" [active] [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+    - paragraph [ref=e9]: Record activity for Test Aerospace.
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - text: Activity type
+        - combobox "Activity type" [disabled] [ref=e12]:
+          - option "Note" [selected]
+          - option "Call"
+          - option "Logged email"
+          - option "Decision"
+          - option "Request"
+      - generic [ref=e13]:
+        - button "Record a meeting" [disabled] [ref=e14]
+        - generic [ref=e15]: Enter the required start and end times in Calendar.
+      - generic [ref=e16]:
+        - text: Title
+        - textbox "Title" [disabled] [ref=e17]: Private restart activity
+      - generic [ref=e18]:
+        - generic [ref=e19]: Details
+        - textbox "Details" [disabled] [ref=e20]: Private restart details
+      - generic [ref=e21]: Logged email records history; it does not send a message.
+      - generic [ref=e22]:
+        - checkbox "Add generic follow-up" [checked] [disabled] [ref=e23]
+        - text: Add generic follow-up
+      - group "Generic follow-up" [ref=e24]:
+        - generic [ref=e25]: Generic follow-up
+        - paragraph [ref=e26]: Creates “Follow up on logged activity” in Planner. The task includes an assignee and optional schedule; activity text and client or person details are not copied.
+        - generic [ref=e27]:
+          - text: Follow-up assignee
+          - combobox "Follow-up assignee" [disabled] [ref=e28]:
+            - option "Choose a current member" [disabled]
+            - option "Synthetic Assignee" [disabled] [selected]
+        - generic [ref=e29]:
+          - text: Follow-up date (optional)
+          - textbox "Follow-up date (optional)" [disabled] [ref=e30]
+        - generic [ref=e31]:
+          - text: Follow-up time (optional)
+          - textbox "Follow-up time (optional)" [disabled] [ref=e32]
+        - generic [ref=e33]:
+          - text: Follow-up IANA time zone
+          - textbox "Follow-up IANA time zone" [disabled] [ref=e34]:
+            - /placeholder: America/New_York
+        - generic [ref=e35]: A date requires an explicit time zone. Leave all schedule fields empty for an unscheduled follow-up.
+      - region "Activity and follow-up result" [ref=e36]:
+        - paragraph [ref=e37]:
+          - text: "Retained activity:"
+          - strong [ref=e38]: Private restart activity
+        - paragraph [ref=e39]:
+          - text: "Request:"
+          - code [ref=e40]: 7e7dcbaa-f86c-4248-af00-cea946eb208f
+        - status [ref=e41]: The save result is not confirmed. The original request is retained. Read it before recovery; an unavailable receipt does not mean nothing was saved.
+        - button "Read saved command" [ref=e43] [cursor=pointer]
+      - button "Save activity and follow-up" [disabled] [ref=e45]
+```
+
+# Test source
+
+```ts
+  1  | import {test,expect} from '@playwright/test';
+  2  | import {retainedCommand,expectRetained} from "/workspace/capiro-control-167e306/apps/web/tests/browser/activity-command-recovery-fixtures";
+  3  | import {commandClientId} from "/workspace/capiro-control-167e306/apps/web/tests/activity-command-fixtures";
+  4  | import {json} from "/workspace/capiro-control-167e306/apps/web/tests/browser/fixtures";
+  5  | test('a continuously mounted Quick log hides its retained body until reopened fresh authority completes',async({page},info)=>{
+  6  |  const saved=await retainedCommand(page);
+  7  |  await page.goto(`/portfolio/${commandClientId}?log=1`);
+  8  |  await expectRetained(page,saved.original.requestId);
+  9  |  await page.getByRole('dialog',{name:'Quick log',exact:true}).getByRole('button',{name:'Close',exact:true}).click();
+  10 |  await expect(page.getByRole('dialog',{name:'Quick log',exact:true})).toHaveCount(0);
+  11 |  let reads=0,release!:()=>void;
+  12 |  const held=new Promise<void>(resolve=>release=resolve);
+  13 |  await page.route('**/api/backend/core/me',async route=>{reads++;await held;return json(route,saved.state.identity).catch(()=>{});});
+  14 |  try{
+  15 |   await page.getByRole('link',{name:'Quick log',exact:true}).click();
+  16 |   await expect.poll(()=>reads).toBeGreaterThan(0);
+  17 |   expect(saved.posts()).toHaveLength(1);
+  18 |   await page.screenshot({path:info.outputPath('reopened-before-current-authority.png')});
+> 19 |   await expect(page.getByLabel('Title',{exact:true})).toHaveCount(0);
+     |                                                       ^ Error: expect(locator).toHaveCount(expected) failed
+  20 |   await expect(page.getByText(saved.original.requestId,{exact:true})).toHaveCount(0);
+  21 |  }finally{release();}
+  22 | });
+  23 | 
+```

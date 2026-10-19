@@ -1,0 +1,34 @@
+{
+  "name": "modules-browser",
+  "command": [
+    "env",
+    "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+    "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-83f54f5a-20261013/modules-browser-results.json",
+    "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+    "npm",
+    "run",
+    "test:browser:modules",
+    "--workspace",
+    "@capiro/web",
+    "--",
+    "--workers=2",
+    "--output=/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-modules-browser-artifacts"
+  ],
+  "startedUTC": "2026-10-13T07:53:55.917344+00:00",
+  "endedUTC": "2026-10-13T07:58:50.471370+00:00",
+  "durationSeconds": 294.5540581450041,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

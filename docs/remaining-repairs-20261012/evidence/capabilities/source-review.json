@@ -1,0 +1,59 @@
+{
+  "sourceBase": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "stage": "Final feature commit, qualified alongside separately owned root header correction",
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5",
+      "nonblank": 141
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "sha256": "5245aa0d98a2e82a97b61fc9dd2515447d5a9fa97f2135f0fa255daa592a43b4",
+      "nonblank": 241
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+      "sha256": "84e7f0b3c84ae67e150a787427c519cb6dfa47104d3001606b4333efe9c9af05",
+      "nonblank": 136
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registrations.module.css",
+      "sha256": "751999781d4e23050d94853c98d2c86470e00523eb10eef26687b69654e88b63",
+      "nonblank": 86
+    }
+  ],
+  "sizeReviewRequests": [
+    {
+      "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "kind": "function",
+      "symbol": "CapabilitiesPage",
+      "line": 14,
+      "nonblank": 122,
+      "fingerprint": "f637c27f71b03629f672fe313f55353bd71023c6732d40f7b35fd28dc5e05f56",
+      "rationale": "Single capability-list projection and URL-selected editor owner. New markup connects existing records/maturity to responsive feature CSS; state, query, selection, fit and native mutations are unchanged. Extracting a second mobile projection would duplicate record rendering; no second state owner or shared-layer dependency was added.",
+      "reviewRequestedFrom": "root independent reviewer; no registry edits made"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "kind": "function",
+      "symbol": "Registrations",
+      "line": 20,
+      "nonblank": 214,
+      "fingerprint": "d36d58ddb6eb1d1aa322e018072b563bff95fea938c9bb02aa989036053e66e8",
+      "rationale": "One native client registration read/edit modal, current client/identity/save gates remain local and unchanged. Changes add feature-local layout classes/body wrapper and preserve the five-field edit/write path. Added CSS is isolated to registration presentation; no DTO, query or lifetime abstraction added.",
+      "reviewRequestedFrom": "root independent reviewer; no registry edits made"
+    }
+  ],
+  "boundaries": "architecture scan has zero errors; two changed production function fingerprints require explicit root review; no source file >400 lines",
+  "featureCommit": "e3d1cbb91a31cadff90898fcf2143ff5ce17318e",
+  "combinedBrowserCommit": "31ce56f6f3e7edde47fcb83b7f5f81c31b5d9862",
+  "rootHeaderCommit": "98d18058263289293c8acf82aaeb4534d7e93317",
+  "testFile": {
+    "path": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+    "sha256": "c8973d36bb4b7332d7a7b0e99dd4083e07e004a9448502be5be3b78d8a292902",
+    "nonblank": 293
+  },
+  "independentReview": "root-static-review.json; four feature production hashes verified identical below",
+  "rootReviewedBytesMatch": true
+}
