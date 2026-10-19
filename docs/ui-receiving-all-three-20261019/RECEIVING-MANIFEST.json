@@ -1,0 +1,230 @@
+{
+  "base": "816b0f1470efe978d22856beee9c8133055ab5bd",
+  "predecessor": "6da70dc3d968360d296eaf191462b15f7978dd30",
+  "sourceCommit": "ea2659a00b3d5b2fa4f5bd403ced3dc441453be3",
+  "sourceTree": "95b26dd70c4cbfc4ac2b34b64015e24abd64bd0f",
+  "inputs": [
+    {
+      "pr": 106,
+      "head": "553b848303a94b206c3c2efafc0c29c2cb40414a",
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/106",
+      "ancestor": true
+    },
+    {
+      "pr": 107,
+      "head": "ace46f896c98c8285e5da9231e813885d7979a7b",
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/107",
+      "ancestor": true
+    },
+    {
+      "pr": 108,
+      "head": "4dc8727f73da851a52c36a17f99589f6391df8b1",
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/108",
+      "ancestor": true
+    }
+  ],
+  "priorReceiverPreserved": true,
+  "changedPathsFromBase": [
+    "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+    "apps/web/src/features/modules/planner/ResourceCatalog.tsx",
+    "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+    "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+    "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
+    "apps/web/src/features/portfolio/calendar/mutations.ts",
+    "apps/web/src/features/portfolio/index/queries.ts",
+    "apps/web/src/features/settings/InviteMember.tsx",
+    "apps/web/src/features/settings/RegisterAccount.tsx",
+    "apps/web/test/browser/explorer-dataset-selection.spec.ts",
+    "apps/web/test/browser/planner-resource-context.spec.ts",
+    "apps/web/test/browser/planner-resource-dialog-context.spec.ts",
+    "apps/web/test/browser/settings-form-pending.spec.ts",
+    "apps/web/test/browser/workspace-ownership-state.spec.ts",
+    "apps/web/tests/browser/calendar-boundary-harness.tsx",
+    "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+    "apps/web/tests/browser/calendar-meeting-recovery.spec.ts",
+    "apps/web/tests/portfolio-client-query.test.ts",
+    "docs/architecture-size-reviews.json",
+    "docs/modules-context-20261019/README.md",
+    "docs/modules-context-20261019/proposed-size-reviews.json",
+    "docs/portfolio-ui-continuity-20261019/README.md",
+    "docs/portfolio-ui-continuity-20261019/meeting-refresh-recovery.png",
+    "docs/portfolio-ui-continuity-20261019/portfolio-typecheck.tsconfig.json",
+    "docs/portfolio-ui-continuity-20261019/proposed-size-reviews.json",
+    "docs/settings-pending-20261019/README.md",
+    "docs/settings-pending-20261019/invitation-pending.png",
+    "docs/settings-pending-20261019/proposed-size-reviews.json",
+    "docs/settings-pending-20261019/registration-pending.png",
+    "docs/ui-receiving-20261019/README.md",
+    "docs/ui-receiving-20261019/RECEIVING-MANIFEST.json",
+    "docs/ui-receiving-20261019/evidence/architecture-summary.json",
+    "docs/ui-receiving-20261019/evidence/receiving-client-query-unit.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-next-typegen-workspace.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-next-typegen.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-npm-ci.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-portfolio-browser.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-settings-browser.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-web-typecheck-final.txt",
+    "docs/ui-receiving-20261019/evidence/receiving-web-typecheck.txt",
+    "scripts/architecture/reviewed-size-findings.json"
+  ],
+  "addedPathsFromPredecessor": [
+    "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+    "apps/web/src/features/modules/planner/ResourceCatalog.tsx",
+    "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+    "apps/web/test/browser/explorer-dataset-selection.spec.ts",
+    "apps/web/test/browser/planner-resource-context.spec.ts",
+    "apps/web/test/browser/planner-resource-dialog-context.spec.ts",
+    "apps/web/test/browser/workspace-ownership-state.spec.ts",
+    "docs/architecture-size-reviews.json",
+    "docs/modules-context-20261019/README.md",
+    "docs/modules-context-20261019/proposed-size-reviews.json"
+  ],
+  "reviewComposition": {
+    "totalModulesSettingsRecords": 235,
+    "replacements": [
+      {
+        "pr": 106,
+        "path": "apps/web/src/features/settings/InviteMember.tsx",
+        "sha256": "e34f1e892993e5cf3fc728e04ca07124eef37eb596faedefa3842a6284647647",
+        "reviewer": "Codex independent Modules/Settings review",
+        "reviewedAt": "2026-10-19",
+        "evidence": "docs/settings-pending-20261019/README.md#settings-dialogs",
+        "rationale": "InviteMember owns one invitation dialog's draft fields, fixed-operation submission, response feedback and close/reset behavior. Pending locks enforce that same lifecycle; transport, validation, authority and single-flight state remain delegated. Keeping coupled field/dismissal state together is justified.",
+        "functions": [
+          {
+            "name": "InviteMember",
+            "nonblankLines": 106
+          }
+        ],
+        "signals": [
+          "apps/web/src/features/settings/InviteMember.tsx: function over80 nonblank lines requires review"
+        ]
+      },
+      {
+        "pr": 106,
+        "path": "apps/web/src/features/settings/RegisterAccount.tsx",
+        "sha256": "9c52765242f8a1f8d3693197f58c7a796e424f1a1499159ae9163392f08f8788",
+        "reviewer": "Codex independent Modules/Settings review",
+        "reviewedAt": "2026-10-19",
+        "evidence": "docs/settings-pending-20261019/README.md#settings-dialogs",
+        "rationale": "RegisterAccount owns one provider-account registration dialog's display, two draft fields, fixed-operation submission, feedback and close/reset behavior. Pending locks add no separate responsibility; provider metadata, transport, authority and action lifecycle retain their canonical owners.",
+        "functions": [
+          {
+            "name": "RegisterAccount",
+            "nonblankLines": 86
+          }
+        ],
+        "signals": [
+          "apps/web/src/features/settings/RegisterAccount.tsx: function over80 nonblank lines requires review"
+        ]
+      },
+      {
+        "pr": 108,
+        "path": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+        "sha256": "87e538c76a15fc4b46a328155a66f19278b844e761d82b2ef16a95505b9c9f7f",
+        "reviewer": "Codex independent Modules behavior review",
+        "reviewedAt": "2026-10-19",
+        "evidence": "docs/modules-context-20261019/README.md#module-context",
+        "rationale": "DataExplorer owns one explorer screen's dataset selection, query filters, pagination and selected-record presentation. Clearing the record when entering Comment Deadlines enforces the existing dataset-selection lifetime without resetting filters. Operation mapping, validation, transport and authorization retain their canonical shared owners. Keeping the selection handlers beside this view remains cohesive; no new domain or lifecycle responsibility is added.",
+        "functions": [
+          {
+            "name": "DataExplorer",
+            "nonblankLines": 307
+          }
+        ],
+        "signals": [
+          "apps/web/src/features/modules/intelligence/DataExplorer.tsx: function over80 nonblank lines requires review"
+        ]
+      },
+      {
+        "pr": 108,
+        "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+        "sha256": "c42038498099b979ffdc92e82955f94c69e6d3f9904c0074732004f7be819b7d",
+        "reviewer": "Codex independent Modules behavior review",
+        "reviewedAt": "2026-10-19",
+        "evidence": "docs/modules-context-20261019/README.md#module-context",
+        "rationale": "DocumentsLibrary owns one paged document list, its local ownership/search/client/template/status filters and result feedback. Identity-dependent loading, errors and footer visibility project the existing read states while preserving the filter and cursor draft. Identity validation, transport, authorization and document access remain in their canonical shared/backend owners. Keeping the ownership predicate, status gate and displayed counts together is justified; the change adds no separate service or workflow.",
+        "functions": [
+          {
+            "name": "DocumentsLibrary",
+            "nonblankLines": 185
+          }
+        ],
+        "signals": [
+          "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx: function over80 nonblank lines requires review"
+        ]
+      }
+    ],
+    "otherEntriesPreserved": 231,
+    "portfolioRegistryUnchangedFromPR107": true,
+    "portfolioReviews": [
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+        "kind": "function",
+        "symbol": "MeetingWorkspace",
+        "fingerprint": "997e4d9113ddb09b9e7ae75f6da8103063d0a9ddd22efab3ba89332dc8d9d4f1",
+        "reason": "One meeting workspace owns tab selection and its edit, assignment and sharing dialogs. Passing the existing read freshness and retry action into its editor preserves that single workspace lifecycle; feature-specific panels remain delegated.",
+        "reviewedBy": "Codex independent pr_overlap_audit",
+        "reviewedOn": "2026-10-19"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+        "kind": "function",
+        "symbol": "MeetingForm",
+        "fingerprint": "92c55dfd8e1b1d1428c171e9375926053c52b125026f63090d7e3f79a521c771",
+        "reason": "This form owns one meeting draft, local validation and save feedback. Read freshness and a refresh action govern that same draft, while useSaveMeeting owns dispatch, receipt validation and uncertainty. Splitting fields solely for line count would fragment one transaction.",
+        "reviewedBy": "Codex independent pr_overlap_audit",
+        "reviewedOn": "2026-10-19"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
+        "kind": "function",
+        "symbol": "MeetingWorkspacePage",
+        "fingerprint": "e440fd6e13d7206114fcb74f702c8a7a1c6e34e2c11d573728e68e248b59bc73",
+        "reason": "One selected-meeting page presents the monthly meeting sidebar and selected detail. The empty-state predicate uses its existing feed statuses, keeping loading, error and empty presentation together without adding another data owner.",
+        "reviewedBy": "Codex independent pr_overlap_audit",
+        "reviewedOn": "2026-10-19"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
+        "kind": "function",
+        "symbol": "useSaveMeeting",
+        "fingerprint": "2aa3f92cc30eae04465f5048d3d5a7c359ecae2a8acfa263ddc7a9a512d20fde",
+        "reason": "One editor save lifecycle owns live-read admission, single-flight state, abort, response verification and cache invalidation. The original client association is independent of the selected reassignment destination. Schemas and canonical identity policy remain delegated; this guard adds no separate workflow.",
+        "reviewedBy": "Codex independent pr_overlap_audit",
+        "reviewedOn": "2026-10-19"
+      }
+    ]
+  },
+  "checks": {
+    "newModulesBrowser": {
+      "passed": 16,
+      "workers": 1,
+      "port": 5291
+    },
+    "combinedFullWebTypecheck": {
+      "exitCode": 0,
+      "incremental": false,
+      "heapLimitMiB": 4096
+    },
+    "combinedArchitecture": {
+      "exitCode": 0,
+      "total": 534,
+      "reviewed": 516,
+      "inheritedUnreviewed": 18,
+      "blocking": 0
+    },
+    "retainedPredecessorChecks": {
+      "portfolioBrowser": 11,
+      "settingsBrowser": 7,
+      "clientQueryUnit": 3,
+      "repeated": false
+    }
+  },
+  "packageLockBlob": "e92f43c615808857f9c09c60a45049db3574a5ca",
+  "dependencyProcedure": "../ui-receiving-20261019/README.md#dependency-failure-classification",
+  "deploymentFilesChanged": false,
+  "mainMergePerformed": false,
+  "deploymentPerformed": false
+}
