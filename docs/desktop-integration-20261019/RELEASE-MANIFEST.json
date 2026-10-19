@@ -1,0 +1,196 @@
+{
+  "schema": "capiro.three-repository-source-manifest.v1",
+  "asOf": "2026-10-19",
+  "status": "SOURCE_ONLY_RELEASE_HOLD",
+  "deploymentPerformed": false,
+  "frontend": {
+    "repository": "https://github.com/neo-capiro/capiro-frontend",
+    "branch": "codex/desktop-integration-20261019",
+    "pullRequest": "https://github.com/neo-capiro/capiro-frontend/pull/105",
+    "sourceCommit": "f32ed6ff32df0af36f04b5933a0e9ea356d22526",
+    "sourceTree": "ab06c86a5b49e92b5e518493834c58b08f5b5e0d",
+    "localEquivalentCommit": "f813b9a584d1c5d33ae7daa7e566f3df21bdce72",
+    "applicationSourceTree": "643af0cd2562e7612c33a3eb2a2a4645c7099b4d",
+    "rootLockBlob": "e92f43c615808857f9c09c60a45049db3574a5ca",
+    "documentation": "Final documentation/evidence is a descendant of sourceCommit; it changes no application bytes."
+  },
+  "core": {
+    "repository": "https://github.com/neo-capiro/capiro-backend",
+    "baseBranch": "backend-import",
+    "integrationPullRequest": "https://github.com/neo-capiro/capiro-backend/pull/96",
+    "integrationPrHead": "784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb",
+    "rosterIdentitySuccessor": "138c04373b18bb730b1ad0f8f9338342f628b8c6",
+    "sourceCandidate": "b841544adef13ab5f129339cf7c4d813dd67bad4",
+    "sourceBranch": "codex/core-producer-context-20261019",
+    "servingSource": null,
+    "servingImageDigest": null,
+    "owner": "dot/Core shipping",
+    "qualification": "Source inspected; no live serving or migration-ledger claim."
+  },
+  "meri": {
+    "repository": "https://github.com/neo-capiro/meri-greenfield",
+    "owner": "dot/Fable",
+    "modified": false,
+    "frozenRepairReference": "993f52a97e5d9edcf65c9f89423c097aa52831c7",
+    "receivingReportReference": "98d3c96a2c944a8211856e98b5bd62e824b4b5f7",
+    "imageSourceReference": "34851020aa0d73fead4db59ba6e26a098e2d0313",
+    "readToolsReference": "e82d199fc88f8493fab6845770218a8ded29d41d",
+    "selectedServingSource": null,
+    "selectedServingImageDigest": null,
+    "qualification": "References from PR175/188/189 only. Shipping owner must choose and qualify a serving cohort; no runtime source selected by UI lane."
+  },
+  "includedFrontendInputs": {
+    "PR97": "d9959a9cee267365d1f13a72351802a66c6dbfe2",
+    "PR98": "5c784e3e46114816ba57db17ad7a2c2013a8d81a",
+    "PR99": "f13dae4d6ab696f2fedde53ea18f0ed2018e9bf6",
+    "PR100": "6b758cb22ee718e1198c8ebfafe6ba1fe401dbb7",
+    "PR101": "4814e642dc11df6815f01ac9f64c4ac0b24a1251",
+    "campaignCreation": "3e6c0a9e39b858fb47eb6cad9ca79008963619aa",
+    "PR103": "442f188c6636ee4d34566e92aad34261d2dd402a",
+    "PR104": "336a093e9debd3b067468510403219731820ee4d"
+  },
+  "excludedConcurrentInputs": [
+    {
+      "pullRequest": "https://github.com/neo-capiro/capiro-frontend/pull/102",
+      "observedHead": "3a23d8b1d0f155fb13768c2955e79d37d9cecda5",
+      "owner": "Fable",
+      "reason": "Intents adoption owns conversation/vendor/export files. Remains separate from this receiving candidate and frozen first-chat inputs."
+    }
+  ],
+  "contracts": {
+    "meriApplicationContracts": {
+      "version": "0.1.10",
+      "file": "vendor/capiro-meri-contracts-0.1.10.tgz",
+      "producer": "c16bfbf1b9a2f8d075913ff1d362ad78e3043bcc",
+      "sha256": "10b0c233c1c0f94d837ae178897db46fd9f6a65d375a85c8897b07ea7f95c77d"
+    },
+    "rootQualificationContractsVersion": "0.1.0",
+    "meriUiStreamVersion": "0.1.0",
+    "corePublicShared": {
+      "version": "0.0.0",
+      "file": "vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+      "producer": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5"
+    },
+    "nativeCoreApi": "No global API version asserted; route/schema/source pins are in API-WIRING.md.",
+    "fixedRegistryOperationCount": 588
+  },
+  "unchangedHeldPreviewBindings": {
+    "coreReadSource": "6542f5b089656b6d255465edd464d06c2a0b408f",
+    "coreReadApi": "https://first-chat-preview.app-dev.capiro.ai/api",
+    "coreBootstrapSource": "c64f0005cf14d69683aabafa11def4964d766832",
+    "rosterSourceMarker": "b97a3286487abcda6a7424cf1dc2812d93b65b3d",
+    "rosterApi": "https://core-roster-preview.capiro.ai/api",
+    "rosterTemplateSourceAllowlist": "blank-only; not activated",
+    "meriSourceMarker": "176a8811a9b05d8613282e70bd7a57ebd75ca201",
+    "meriImageMarker": "sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8",
+    "important": "Checked-in historical qualification markers are not claims of current serving source. UI lane did not re-pin frozen inputs. Dot must reconcile final source/image/config before future activation."
+  },
+  "requiredConfigurationNames": [
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+    "CLERK_SECRET_KEY",
+    "CAPIRO_REQUEST_ORIGIN",
+    "CORE_API_BASE_URL",
+    "STRATEGY_API_BASE_URL",
+    "WORKSPACE_API_BASE_URL",
+    "INTELLIGENCE_API_BASE_URL",
+    "ONBOARD_API_BASE_URL",
+    "TRACKER_BACKEND",
+    "CAPIRO_EXISTING_APP_URL"
+  ],
+  "featureCohortPrerequisites": {
+    "roster": [
+      "CORE_ROSTER_PREVIEW_ENABLED",
+      "PREVIEW_NATIVE_GETS_ENABLED",
+      "exact qualified serving source/image/Host and frontend roster source/URL admission"
+    ],
+    "outreachV3": [
+      "OUTREACH_V3_STATE_ENABLED",
+      "qualified Engagement API mount behind configured core-service routing; not standard Core app.module"
+    ],
+    "quickLogPlanner": [
+      "QUICK_LOG_PLANNER_ORIGIN",
+      "qualified Planner task-create-command contract"
+    ],
+    "meetingPrep": [
+      "MEETING_PREP_COMPREHENSIVE_ENABLED",
+      "engagement capabilities and runtime qualification"
+    ],
+    "governedObjective": [
+      "Keep governedPlannerReadEnabled/governedStrategyIntakeEnabled and server governed flags off until Core authority and Meri custody qualify."
+    ]
+  },
+  "migrations": {
+    "executed": false,
+    "liveLedgerVerified": false,
+    "featurePrerequisites": [
+      "20260816235000_add_client_account_owner",
+      "20261014050000_user_portfolio_layout",
+      "20281012010000_client_activity_commands",
+      "20281012020000_client_ordered_owners",
+      "20281012030000_prospect_resource_origin",
+      "20281012060000_federal_register_effective_evidence",
+      "20260908010000_outreach_v3_campaign_state"
+    ],
+    "heldObjectiveCohort": [
+      "20281011010000_client_objectives",
+      "20281015010000_client_objective_work_intents",
+      "20281015020000_client_objective_canonical_plans",
+      "20281015030000_client_objective_operational_links",
+      "20281015050000_client_objective_work_reconsent",
+      "20281016010000_client_objective_workload_delegations",
+      "20281017010000_client_objective_strategy_intake"
+    ],
+    "retainedHistory": ["20281015040000_engagement_plans"],
+    "newUiMigrations": [],
+    "caution": "Presence does not prove application. Reconcile exact ledger/constraints/privileges and relevant successor migrations with dot; this is not an execution recipe."
+  },
+  "releaseOrder": [
+    "Review PR105 exact source and its included input ancestry; do not re-merge overlapping PR97\u2013104 blindly.",
+    "Dot qualifies one Core serving source/image, native authority, ledger and explicit required routes; preserve first-chat source/Host/config.",
+    "Dot/Fable qualify their Meri source/image/contracts independently; reconcile Fable PR102 and later document adoption only under their ownership.",
+    "Deployment owner reconciles approved server environment and separate roster pair; current held markers cannot be activated by this manifest.",
+    "Perform authenticated tenant/client/role/mutation/no-store E2E with exact serving cohort and external-action capabilities. Local fixture checks do not satisfy it.",
+    "Deployment owner performs a separately authorized coordinated release with recorded old and new source/image/config pins. This assignment performs no deployment or protected merge."
+  ],
+  "rollback": {
+    "application": "Retain previous exact frontend/Core/Meri image and config pins; decide compatibility with in-flight workflows before any later release.",
+    "data": "No destructive down-migration, receipt/history deletion or source re-ingestion. No schema was changed here.",
+    "features": "Use existing qualified feature gates/explicit unavailable states; do not fall back to synthetic data or older weaker authorization."
+  },
+  "liveQualification": {
+    "authenticatedOsReference": false,
+    "reason": "os.capiro.ai reached Sign in to Capiro; no authenticated Engagement interaction available.",
+    "core": false,
+    "meri": false,
+    "provider": false,
+    "database": false,
+    "deployment": false
+  },
+  "validation": {
+    "report": "VALIDATION.md",
+    "productionBuild": "passed-283-pages",
+    "webUnit": {
+      "files": 217,
+      "passed": 2952
+    },
+    "fixedOperationUnit": {
+      "files": 52,
+      "passed": 549
+    },
+    "transport": {
+      "passed": 112
+    },
+    "portfolioDesktop": {
+      "initialPassed": 57,
+      "initialFailed": 1,
+      "affectedPassed": 1
+    },
+    "modulesDesktop": {
+      "initialPassed": 213,
+      "initialFailed": 5,
+      "affectedPassed": 9
+    },
+    "liveVerified": false
+  }
+}

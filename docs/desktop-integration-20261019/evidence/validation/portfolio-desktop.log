@@ -1,0 +1,121 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test:browser
+> playwright test figma34-portfolio-home.spec.ts figma34-portfolio-overview.spec.ts figma34-portfolio-overlays.spec.ts figma34-portfolio-objectives.spec.ts figma34-portfolio-pipeline.spec.ts figma34-capabilities.spec.ts figma34-calendar.spec.ts figma34-quick-log-contract.spec.ts figma34-quick-log-commitment.spec.ts quick-log-meeting.spec.ts government.spec.ts government-location-profile.spec.ts calendar-meeting-receipts.spec.ts meeting-library.spec.ts objective-meeting-destination.spec.ts --grep-invert 390|phone|mobile|tablet
+
+[WebServer] (node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 58 tests using 1 worker
+
+(node:68) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/calendar-meeting-receipts.spec.ts:23:3 › foreign meeting receipt retains editor: {"id":"foreign"} (2.7s)
+  ✓   2 tests/browser/calendar-meeting-receipts.spec.ts:23:3 › foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} (5.2s)
+  ✓   3 tests/browser/calendar-meeting-receipts.spec.ts:41:1 › native normalized meeting receipt succeeds and an empty location is explicitly cleared (2.7s)
+  ✓   4 tests/browser/calendar-meeting-receipts.spec.ts:62:1 › pending meeting fields cannot accept a newer unsaved draft before a valid receipt (3.6s)
+  ✓   5 tests/browser/figma34-calendar.spec.ts:259:1 › client calendar desktop views follow the Portfolio 3.4 frames (21.2s)
+  ✓   6 tests/browser/figma34-calendar.spec.ts:353:1 › Escape from a nested meeting editor leaves the client workspace open (10.7s)
+  ✓   7 tests/browser/figma34-calendar.spec.ts:383:1 › Escape cannot discard a nested meeting editor during its pending save (10.6s)
+  ✓   8 tests/browser/figma34-capabilities.spec.ts:94:1 › desktop capabilities frame composes six source cards with fit and saved history (7.0s)
+  ✘   9 tests/browser/figma34-portfolio-home.spec.ts:134:1 › desktop All grid joins source-backed clients and active prospects after the client layout (13.5s)
+(node:296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 tests/browser/figma34-portfolio-home.spec.ts:189:1 › failed prospect read leaves client cards and an independent retry (6.3s)
+  ✓  11 tests/browser/figma34-portfolio-home.spec.ts:207:1 › core-only prospects remain reachable and linked core prospects use the BD card (4.3s)
+  ✓  12 tests/browser/figma34-portfolio-home.spec.ts:259:1 › capped BD results disclose truncation and keep the combined title unknown (5.2s)
+  ✓  13 tests/browser/figma34-portfolio-home.spec.ts:290:1 › Pipeline opens above the Portfolio Prospects tab and closes in place (5.3s)
+  ✓  14 tests/browser/figma34-portfolio-objectives.spec.ts:4:1 › desktop objectives list follows the Portfolio 3.4 frame (4.3s)
+  ✓  15 tests/browser/figma34-portfolio-overlays.spec.ts:5:1 › Add profile chooser desktop frame (4.7s)
+  ✓  16 tests/browser/figma34-portfolio-overlays.spec.ts:28:1 › Quick log global chooser and inline client form desktop frames (5.7s)
+  ✓  17 tests/browser/figma34-portfolio-overlays.spec.ts:79:1 › global Quick log keeps its verified Undo after saving above the index (5.3s)
+  ✓  18 tests/browser/figma34-portfolio-overview.spec.ts:4:1 › desktop client overview keeps one government entry and client meetings (5.7s)
+  ✓  19 tests/browser/figma34-portfolio-pipeline.spec.ts:65:1 › Portfolio pipeline matches the desktop overlay geometry with source-backed prospect cards (6.3s)
+  ✓  20 tests/browser/figma34-quick-log-commitment.spec.ts:22:1 › commitment sends Core's supported occurrence and due fields and retains exact Undo (14.8s)
+  ✓  21 tests/browser/figma34-quick-log-commitment.spec.ts:69:1 › a commitment receipt with a different due date freezes retry and Undo (7.5s)
+  ✓  22 tests/browser/figma34-quick-log-commitment.spec.ts:101:1 › blank When explicitly records at save time without sending a stale timestamp (12.3s)
+  ✓  23 tests/browser/figma34-quick-log-contract.spec.ts:15:1 › direct Quick Log sends selected current Objective and verifies rich receipt (7.6s)
+  ✓  24 tests/browser/figma34-quick-log-contract.spec.ts:79:1 › compound commitment keeps rich activity and generic Planner result separate (4.3s)
+  ✓  25 tests/browser/figma34-quick-log-contract.spec.ts:175:1 › a command with missing canonical details retains its key and does not claim completion (2.3s)
+  ✓  26 tests/browser/government-location-profile.spec.ts:461:1 › one Government profile entry preserves thirteen saved fields and keeps FY context separate from actual client awards (6.0s)
+  ✓  27 tests/browser/government-location-profile.spec.ts:532:1 › a saved map location exposes ten areas, retains the existing editor and returns to its map (11.3s)
+  ✓  28 tests/browser/government-location-profile.spec.ts:603:1 › a location awaiting address verification follows the desktop location hierarchy (8.5s)
+  ✓  29 tests/browser/government-location-profile.spec.ts:655:3 › a 403 economic rail failure is not an empty result and leaves independent evidence readable (5.2s)
+  ✓  30 tests/browser/government-location-profile.spec.ts:655:3 › a 404 economic rail failure is not an empty result and leaves independent evidence readable (5.0s)
+  ✓  31 tests/browser/government-location-profile.spec.ts:683:1 › mixed vintages, real zero and null values retain client, district and review provenance (5.0s)
+  ✓  32 tests/browser/government-location-profile.spec.ts:764:1 › committee loading is on demand, identity-correlated and limited to current associations in its snapshot (5.9s)
+  ✓  33 tests/browser/government-location-profile.spec.ts:806:1 › a held old-client location response cannot surface after selecting another client (5.6s)
+  ✓  34 tests/browser/government-location-profile.spec.ts:846:1 › an old actor's held location completion cannot become the replacement actor's evidence (3.0s)
+  ✓  35 tests/browser/government.spec.ts:13:1 › directory feeds fail independently, paginate, and retain a failed add for explicit retry (6.4s)
+  ✓  36 tests/browser/government.spec.ts:123:1 › committee selection fetches every taxonomy page and preserves current/former staff (5.9s)
+  ✓  37 tests/browser/government.spec.ts:206:1 › state target details preserve encoded identity; tier clearing, reviewed mail and failed removal retain state (5.9s)
+  ✓  38 tests/browser/meeting-library.spec.ts:81:1 › Library uses real page/filter contract, historical qualification and calendar-preserving deep links (5.3s)
+  ✓  39 tests/browser/meeting-library.spec.ts:139:1 › Library surfaces failure/retry, empty results, scoped receipt rejection and session expiry (7.2s)
+  ✓  40 tests/browser/meeting-library.spec.ts:185:1 › Library responsive dark layout keeps metadata and scope accessible (4.2s)
+  ✓  41 tests/browser/meeting-library.spec.ts:216:1 › Assignment requires explicit move/revoke review, retains chosen draft on conflict and retries only after review (8.1s)
+  ✓  42 tests/browser/meeting-library.spec.ts:258:1 › Assignment rejects wrong successful receipt and preserves unsaved selection (5.3s)
+  ✓  43 tests/browser/meeting-library.spec.ts:284:1 › Read-only identity cannot assign or list caller archive (10.0s)
+  ✓  44 tests/browser/meeting-library.spec.ts:308:1 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation (7.9s)
+  ✓  45 tests/browser/meeting-library.spec.ts:480:1 › Lost storage reply retries same-key confirmation; wrong parent receipt cannot reach extraction (5.1s)
+  ✓  46 tests/browser/meeting-library.spec.ts:590:1 › Leaving the meeting during assignment preflight prevents a later PUT (4.9s)
+  ✓  47 tests/browser/meeting-library.spec.ts:630:3 › Leaving the meeting while ticket is pending prevents subsequent upload or extraction dispatch (4.6s)
+  ✓  48 tests/browser/meeting-library.spec.ts:630:3 › Leaving the meeting while storage is pending prevents subsequent upload or extraction dispatch (5.3s)
+  ✓  49 tests/browser/meeting-library.spec.ts:630:3 › Leaving the meeting while confirm is pending prevents subsequent upload or extraction dispatch (4.9s)
+  ✓  50 tests/browser/objective-meeting-destination.spec.ts:24:1 › linked Objective meeting opens the current Portfolio detail (6.3s)
+  ✓  51 tests/browser/objective-meeting-destination.spec.ts:45:1 › malformed and duplicate Objective selectors do not read a meeting (16.1s)
+  ✓  52 tests/browser/objective-meeting-destination.spec.ts:71:1 › foreign Portfolio meeting receipt withholds its workspace (5.9s)
+  ✓  53 tests/browser/quick-log-meeting.spec.ts:34:3 › meeting handoff uses current client 10000000-0000-4000-8000-000000000001, carries no activity draft and sends no write (11.4s)
+  ✓  54 tests/browser/quick-log-meeting.spec.ts:34:3 › meeting handoff uses current client 10000000-0000-4000-8000-000000000002, carries no activity draft and sends no write (6.9s)
+  ✓  55 tests/browser/quick-log-meeting.spec.ts:151:1 › an unsupported current role cannot navigate through the meeting handoff (5.4s)
+  ✓  56 tests/browser/quick-log-meeting.spec.ts:170:1 › a pending activity save blocks the handoff and preserves the original exact save receipt (6.0s)
+  ✓  57 tests/browser/quick-log-meeting.spec.ts:215:1 › an unknown activity result retains the draft, blocks the handoff and exposes no Undo (5.9s)
+  ✓  58 tests/browser/quick-log-meeting.spec.ts:250:1 › a direct save locks its captured draft and a refusal restores the same editable fields (5.9s)
+
+
+  1) tests/browser/figma34-portfolio-home.spec.ts:134:1 › desktop All grid joins source-backed clients and active prospects after the client layout
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Portfolio 14' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Portfolio 14' })
+
+
+      181 |   await expect(
+      182 |     page.getByRole("heading", { name: "Portfolio 14" }),
+    > 183 |   ).toBeVisible();
+          |     ^
+      184 |   await page.getByRole("button", { name: "All 14" }).click();
+      185 |   await expect(page.getByRole("article")).toHaveCount(8);
+      186 |   expect(unexpected).toEqual([]);
+        at /workspace/scratch/639ce8240192/capiro-frontend/apps/web/tests/browser/figma34-portfolio-home.spec.ts:183:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/figma34-portfolio-home-des-c208f-cts-after-the-client-layout/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/figma34-portfolio-home-des-c208f-cts-after-the-client-layout/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/figma34-portfolio-home-des-c208f-cts-after-the-client-layout/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/figma34-portfolio-home-des-c208f-cts-after-the-client-layout/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/figma34-portfolio-home.spec.ts:134:1 › desktop All grid joins source-backed clients and active prospects after the client layout
+  57 passed (6.8m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/scratch/639ce8240192/capiro-frontend/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/639ce8240192/capiro-frontend/apps/web
+npm error command failed
+npm error command sh -c playwright test figma34-portfolio-home.spec.ts figma34-portfolio-overview.spec.ts figma34-portfolio-overlays.spec.ts figma34-portfolio-objectives.spec.ts figma34-portfolio-pipeline.spec.ts figma34-capabilities.spec.ts figma34-calendar.spec.ts figma34-quick-log-contract.spec.ts figma34-quick-log-commitment.spec.ts quick-log-meeting.spec.ts government.spec.ts government-location-profile.spec.ts calendar-meeting-receipts.spec.ts meeting-library.spec.ts objective-meeting-destination.spec.ts --grep-invert '390|phone|mobile|tablet'

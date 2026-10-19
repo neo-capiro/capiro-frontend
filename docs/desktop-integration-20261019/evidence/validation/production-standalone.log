@@ -1,0 +1,362 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 test:production
+> node apps/web/tests/production/run-standalone.mjs /workspace/scratch/639ce8240192/standalone-evidence
+
+{"runtimeConfigEntries":["/","/portfolio","/meri","/meri/fixture/home","/meri/fixture/cited-answer","/meri/fixture/run-activity","/modules","/settings","/settings/personal","/sign-in"],"cached":[]}
+{
+  "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+  "browserVersion": "153.0.8010.0",
+  "results": [
+    {
+      "path": "/healthz",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 308,
+      "headers": "passed"
+    },
+    {
+      "path": "/portfolio",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/calendar",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/meri/files",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/sign-in",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/api/backend/core/clients",
+      "status": 503,
+      "headers": "passed"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/modules",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/settings",
+      "status": 307,
+      "headers": "passed"
+    },
+    {
+      "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+      "status": 307,
+      "headers": "passed"
+    },
+    {
+      "path": "/settings/personal",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/api/capiro/me.read",
+      "status": 503,
+      "headers": "passed"
+    },
+    {
+      "path": "/api/documents/create",
+      "status": 503,
+      "configured": false
+    },
+    {
+      "path": "/api/documents/revise",
+      "status": 503,
+      "configured": false
+    },
+    {
+      "path": "/api/documents/inspect",
+      "status": 503,
+      "configured": false
+    },
+    {
+      "path": "/api/documents/download",
+      "status": 503,
+      "configured": false
+    },
+    {
+      "path": "/api/conversations/submit",
+      "status": 502,
+      "configured": false
+    },
+    {
+      "path": "/api/conversations/history",
+      "status": 502,
+      "configured": false
+    },
+    {
+      "path": "/api/conversations/cancel",
+      "status": 502,
+      "configured": false
+    },
+    {
+      "path": "/api/conversations/events",
+      "status": 502,
+      "configured": false
+    },
+    {
+      "path": "/api/conversations/events/30000000-0000-4000-8000-000000000003/stream",
+      "status": 502,
+      "configured": false
+    },
+    {
+      "meriTheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "workspace": {
+        "foreground": "#0a0a0a",
+        "card": "#fff",
+        "scheme": "normal",
+        "background": "none",
+        "color": "rgb(10, 10, 10)"
+      },
+      "header": {
+        "foreground": "#0a0a0a",
+        "background": "rgb(255, 255, 255)"
+      },
+      "error": {
+        "text": "The assistant service is temporarily unavailable.",
+        "color": "rgb(10, 10, 10)",
+        "background": "rgb(255, 247, 247)"
+      }
+    },
+    {
+      "colorScheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "portfolio": {
+        "background": "rgb(245, 245, 244)",
+        "color": "rgb(10, 10, 10)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "none"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "documentFiles": "actual unconfigured host",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "colorScheme": "light",
+      "navigation": "Meri/Files/back/forward/Conversations",
+      "sameDocument": true,
+      "nativeOperations": "unavailable"
+    },
+    {
+      "meriTheme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "workspace": {
+        "foreground": "#0a0a0a",
+        "card": "#fff",
+        "scheme": "normal",
+        "background": "none",
+        "color": "rgb(10, 10, 10)"
+      },
+      "header": {
+        "foreground": "#0a0a0a",
+        "background": "rgb(255, 255, 255)"
+      },
+      "error": {
+        "text": "The assistant service is temporarily unavailable.",
+        "color": "rgb(10, 10, 10)",
+        "background": "rgb(255, 247, 247)"
+      }
+    },
+    {
+      "colorScheme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "portfolio": {
+        "background": "rgb(245, 245, 244)",
+        "color": "rgb(10, 10, 10)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "none"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "documentFiles": "actual unconfigured host",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "light",
+      "navigation": "Meri/Files/back/forward/Conversations",
+      "sameDocument": true,
+      "nativeOperations": "unavailable"
+    },
+    {
+      "crossMode": "Meri/Portfolio/Modules/Settings",
+      "history": "back/forward",
+      "sameDocument": true
+    },
+    {
+      "meriTheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "workspace": {
+        "foreground": "#f5f5f4",
+        "card": "#0a0a0a",
+        "scheme": "dark",
+        "background": "linear-gradient(153.8deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+        "color": "rgb(245, 245, 244)"
+      },
+      "header": {
+        "foreground": "#0a0a0a",
+        "background": "rgb(255, 255, 255)"
+      },
+      "error": {
+        "text": "The assistant service is temporarily unavailable.",
+        "color": "rgb(10, 10, 10)",
+        "background": "rgb(255, 247, 247)"
+      }
+    },
+    {
+      "colorScheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "portfolio": {
+        "background": "rgb(18, 18, 18)",
+        "color": "rgb(250, 250, 249)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "invert(1)"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "documentFiles": "actual unconfigured host",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "colorScheme": "dark",
+      "navigation": "Meri/Files/back/forward/Conversations",
+      "sameDocument": true,
+      "nativeOperations": "unavailable"
+    },
+    {
+      "meriTheme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "workspace": {
+        "foreground": "#f5f5f4",
+        "card": "#0a0a0a",
+        "scheme": "dark",
+        "background": "linear-gradient(153.8deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+        "color": "rgb(245, 245, 244)"
+      },
+      "header": {
+        "foreground": "#0a0a0a",
+        "background": "rgb(255, 255, 255)"
+      },
+      "error": {
+        "text": "The assistant service is temporarily unavailable.",
+        "color": "rgb(10, 10, 10)",
+        "background": "rgb(255, 247, 247)"
+      }
+    },
+    {
+      "colorScheme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "portfolio": {
+        "background": "rgb(18, 18, 18)",
+        "color": "rgb(250, 250, 249)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "invert(1)"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "documentFiles": "actual unconfigured host",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "colorScheme": "dark",
+      "navigation": "Meri/Files/back/forward/Conversations",
+      "sameDocument": true,
+      "nativeOperations": "unavailable"
+    },
+    {
+      "crossMode": "Meri/Portfolio/Modules/Settings",
+      "history": "back/forward",
+      "sameDocument": true
+    }
+  ],
+  "pageErrors": []
+}
+{"defaultProduct":"portfolio","rootStatus":200,"location":"/","followedSetup":true}

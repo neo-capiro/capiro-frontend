@@ -1,0 +1,19 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 1 worker
+
+(node:68) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/modules.spec.ts:16:3 › Engagement primary route renders through the canonical session/API boundary (3.9s)
+  ✓  2 test/browser/objective-operational-navigation.spec.ts:94:1 › current Strategy link opens the real working timeline after its exact current read (4.2s)
+  ✓  3 test/browser/objective-operational-navigation.spec.ts:119:1 › current project link opens its real task workspace with the exact project query (5.3s)
+  ✓  4 test/browser/objective-operational-navigation.spec.ts:147:1 › current Strategy link refuses foreign IDs and foreign client receipts (7.5s)
+  ✓  5 test/browser/objective-operational-navigation.spec.ts:178:1 › current project link refuses missing, foreign, archived and duplicate bootstrap targets without a catalog fallback (16.4s)
+  ✓  6 test/browser/objective-operational-navigation.spec.ts:242:1 › replacing a current Strategy URL suppresses the held previous target (6.4s)
+  ✓  7 test/browser/outreach-list-scope.spec.ts:67:3 › scoped Outreach refuses other-client list receipts and recovers with a current matching read (10.0s)
+  ✓  8 test/browser/outreach-list-scope.spec.ts:67:3 › scoped Outreach refuses null-client list receipts and recovers with a current matching read (6.8s)
+  ✓  9 test/browser/outreach-list-scope.spec.ts:67:3 › scoped Outreach refuses missing-client list receipts and recovers with a current matching read (8.8s)
+
+  9 passed (1.4m)

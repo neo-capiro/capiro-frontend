@@ -1,0 +1,30 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+
+<--- Last few GCs --->
+
+[43:0x1f40b000]   119692 ms: Scavenge (interleaved) 2035.5 (2050.3) -> 2033.3 (2058.8) MB, pooled: 0 MB, 11.37 / 0.00 ms  (average mu = 0.325, current mu = 0.287) allocation failure;
+[43:0x1f40b000]   121077 ms: Mark-Compact (reduce) 2040.5 (2058.8) -> 2027.5 (2040.0) MB, pooled: 0 MB, 551.87 / 0.04 ms  (+ 594.2 ms in 114 steps since start of marking, biggest step 13.3 ms, walltime since start of marking 1213 ms) (average mu = 0.285,
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x75356c node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0xc52cd0  [node]
+ 3: 0xc52dbf  [node]
+ 4: 0xef6695  [node]
+ 5: 0xef66c2  [node]
+ 6: 0xef69ba  [node]
+ 7: 0xf076ba  [node]
+ 8: 0xf0ba60  [node]
+ 9: 0x199e0d1  [node]
+Aborted
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 134
+npm error path /workspace/scratch/639ce8240192/capiro-frontend/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/639ce8240192/capiro-frontend/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit

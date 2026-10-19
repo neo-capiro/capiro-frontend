@@ -1,0 +1,790 @@
+{
+  "schema": "capiro.desktop-evidence.v1",
+  "sourceCommit": "f32ed6ff32df0af36f04b5933a0e9ea356d22526",
+  "files": [
+    {
+      "path": "API-WIRING.md",
+      "bytes": 49045,
+      "sha256": "a860f6106deb3a22920699adb23fdd5f197ee0d5e9e63c8de4bd90f9b3d8b407"
+    },
+    {
+      "path": "FIXED-OPERATIONS.json",
+      "bytes": 346106,
+      "sha256": "a11435c61e24b735b5133460ffb83ba67d5514726193cdd35429398d8409ee2f"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 8334,
+      "sha256": "70348f52ed94459f4d676b62b768fc03d5871dbe3d56898ada9c4f1ee9607a9e"
+    },
+    {
+      "path": "IMPLEMENTATION.md",
+      "bytes": 2334,
+      "sha256": "5522abb2e0b7e5fce4b33e5ac9042626e9de2be6685dc3022a567b769ad1f057"
+    },
+    {
+      "path": "PARITY-CHECKLIST.md",
+      "bytes": 27981,
+      "sha256": "2dc72a288725e0989df1f3f75856faefb6f5fe6ae5c95b7a8a008eb7da0178fa"
+    },
+    {
+      "path": "PARITY-INVENTORY.csv",
+      "bytes": 308067,
+      "sha256": "d6ad62e2537cf734d56d669266127e90659f3015b1ef1db769f884a9840e1cac"
+    },
+    {
+      "path": "PARITY-INVENTORY.json",
+      "bytes": 603637,
+      "sha256": "1eea2db01dd80efdc6c109a4de9b8fda6c9287a5810536cb1b3acf7e0c1bba39"
+    },
+    {
+      "path": "RELEASE-MANIFEST.json",
+      "bytes": 9134,
+      "sha256": "b8ce0bd586015b8b518dab561b7450c322fdfff3bfdb72f8c103210a4e509e12"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 13520,
+      "sha256": "0a95ff98bee121da946e03be6bed39929f4b2ffa86ab3fedb167ae9ffc4d4912"
+    },
+    {
+      "path": "evidence/SCREENSHOTS.md",
+      "bytes": 5212,
+      "sha256": "b91a9d12c60832ccd664b264b66f63005e8d71af4c139adc58b4fb42ac91c6cf"
+    },
+    {
+      "path": "evidence/VISUAL-REVIEW.md",
+      "bytes": 6486,
+      "sha256": "0c30f3eb022d20ba5462dff37f0ab503b89ec021fb6fb7455a99f028308793f8"
+    },
+    {
+      "path": "evidence/browser/campaign-rejection-1440x1040.png",
+      "bytes": 75379,
+      "sha256": "329cc0828050dbda6af30e3f9650fdaab622fbea275df6cc7c07d0f0f752de62"
+    },
+    {
+      "path": "evidence/browser/campaign-success-1440x1040.png",
+      "bytes": 75379,
+      "sha256": "329cc0828050dbda6af30e3f9650fdaab622fbea275df6cc7c07d0f0f752de62"
+    },
+    {
+      "path": "evidence/browser/meeting-edit-pending-1440x1040.png",
+      "bytes": 151320,
+      "sha256": "91b98a525b4a4ea9be4dde062f86ebae17c42740ea8710ec10d9c4f362999cb8"
+    },
+    {
+      "path": "evidence/browser/modules-1440x1040.png",
+      "bytes": 130821,
+      "sha256": "ffc61da5a748c3105aa89e4f4e7792077362e026bbb374eade3fd12b155a9884"
+    },
+    {
+      "path": "evidence/browser/outreach-1440x1040.png",
+      "bytes": 80930,
+      "sha256": "6bcf76903f72d6e87fcec44921d961c5c5ca648d1e0886fc756dc7f11b03e7d0"
+    },
+    {
+      "path": "evidence/browser/portfolio-home-1440x1040.png",
+      "bytes": 179368,
+      "sha256": "ae4f5d6e577c14da72b908d48ff9611b2dbbbc990bfdf1239ad15b80e7e7ec3b"
+    },
+    {
+      "path": "evidence/browser/portfolio-overview-1440x1040.png",
+      "bytes": 143097,
+      "sha256": "be14f620c10fa622a72bc2aedea74602f7993287194d0400f2408f3ce91de01c"
+    },
+    {
+      "path": "evidence/browser/quick-log-fields-1440x1040.png",
+      "bytes": 164005,
+      "sha256": "7e5b1e4e2c9d5805d7a83ccde54b5b4c34d1cd6bbf315a18c4237115b8fe39f1"
+    },
+    {
+      "path": "evidence/browser/quick-log-pending-1440x1040.png",
+      "bytes": 154655,
+      "sha256": "2fcc32e06c64d90046e44ccd9944517993c8914c26a14d7a10ae4137046653b2"
+    },
+    {
+      "path": "evidence/browser/settings-billing-1440x1040.png",
+      "bytes": 100429,
+      "sha256": "b333b422c750060509c839507bcb38056125f7b9b854977faf038e33d342d595"
+    },
+    {
+      "path": "evidence/browser/settings-personal-1440x1040.png",
+      "bytes": 95991,
+      "sha256": "9970c78fded2e1e55ab310651938bda66c63ce21fd612c287a2648f2323169b7"
+    },
+    {
+      "path": "evidence/browser/settings-profiles-1440x1040.png",
+      "bytes": 127389,
+      "sha256": "3bc97f56ccb11148e241dea8479126607a110b2aac65291c350b856312fa8149"
+    },
+    {
+      "path": "evidence/browser/settings-verified-client-1440x1040.png",
+      "bytes": 91458,
+      "sha256": "476099336aa1b3e1728f97e51ab76cc942f67a05dc25173969b9d262145079f4"
+    },
+    {
+      "path": "evidence/figma/government-federal-1440x1040.png",
+      "bytes": 101194,
+      "sha256": "2c2a61f59af3e96b2dffdffca40fe2d69a9d3798da8a3ee4a2f5c0560b7ee40a"
+    },
+    {
+      "path": "evidence/figma/government-identity-1440x1040.png",
+      "bytes": 91719,
+      "sha256": "21fb64c93dacdd72611860f502cf8d8c481de6a1abd7dd93a1fcb7f28e09e9c4"
+    },
+    {
+      "path": "evidence/figma/meeting-prep-1440x1040.png",
+      "bytes": 148103,
+      "sha256": "8a7a6b1aee61f67af9e2e1ea472710f17ae7367c3e6ce8246efb76ff9825f435"
+    },
+    {
+      "path": "evidence/figma/outreach-1440x1040.png",
+      "bytes": 124432,
+      "sha256": "442438a73b77f516a06055b05811192ce5258663925db82b91aa94c45ccc380c"
+    },
+    {
+      "path": "evidence/figma/portfolio-home-1440x1040.png",
+      "bytes": 225669,
+      "sha256": "9d14c78563cbf69ac0454b2f97eb81fd921282fdccb2add8228b73be90644a6b"
+    },
+    {
+      "path": "evidence/figma/portfolio-profile-1440x1040.png",
+      "bytes": 281141,
+      "sha256": "8968cf13c49999cda20ed0907c72d5b99c855fce82a0427a03677c20a000d9c2"
+    },
+    {
+      "path": "evidence/figma/settings-personal-1440x1040.png",
+      "bytes": 102209,
+      "sha256": "838255328a3a6a13f454675af9626c2e6f8e8f056ef18476446cd8be4fd63a0f"
+    },
+    {
+      "path": "evidence/portfolio-worker/nested-escape-green-results.json",
+      "bytes": 4415,
+      "sha256": "91af3941864af2e5f23e90b18a8107b612eff3490ad01f21308d73ad2f0b5234"
+    },
+    {
+      "path": "evidence/portfolio-worker/original-handler-red.txt",
+      "bytes": 727,
+      "sha256": "90418e0a9384708c2fd42fad0035d9603b8fa19fe589c54d1066f8186571025f"
+    },
+    {
+      "path": "evidence/portfolio-worker/original-pending-escape-failed-1440x1040.png",
+      "bytes": 111588,
+      "sha256": "d25537c24d936a2b8f11cce0cf23e9fb62fa9f7e6e6b875595ee39d36c127e4c"
+    },
+    {
+      "path": "evidence/portfolio-worker/original-pending-save-check.txt",
+      "bytes": 3700,
+      "sha256": "87884193e8cbcda68a12ea2e2cd8f6d5221f765a0a47b229ecd4b655f8957db5"
+    },
+    {
+      "path": "evidence/portfolio-worker/pending-edit-1440x1040.png",
+      "bytes": 144828,
+      "sha256": "49218b84859f14cc3ff32403979ab892f389920c37788b7b0fd9d430949f611b"
+    },
+    {
+      "path": "evidence/portfolio-worker/pending-quick-log-1440x1040.png",
+      "bytes": 154523,
+      "sha256": "39828f9cf6c9bb90568e379d53a39d84fa915d77764adce0e2268f39986b24a4"
+    },
+    {
+      "path": "evidence/portfolio-worker/quick-log-green-results.json",
+      "bytes": 3377,
+      "sha256": "d64e8484d28cc5c1e6be776b50d889ace7abb2a845d17b76a7688de08d91b700"
+    },
+    {
+      "path": "evidence/portfolio-worker/quick-log-original-red-results.json",
+      "bytes": 8471,
+      "sha256": "bfe0a370959cf9ba4754b6ef0abc97397613613251e6380a54efb1e9880b9b3a"
+    },
+    {
+      "path": "evidence/portfolio-worker/quick-log-original-unlocked-1440x1040.png",
+      "bytes": 163002,
+      "sha256": "f32f56e7f70d83ecbd399eb3c40c49bf3b9dbfb6e005bae5d3c70cc41f1ce01a"
+    },
+    {
+      "path": "evidence/validation/RUN-RESULTS.json",
+      "bytes": 1286,
+      "sha256": "89927fc685ae2c90d15e796700f62a5f0eec4f6ce3e5cadc92c7dcb21dc7c281"
+    },
+    {
+      "path": "evidence/validation/architecture-summary.json",
+      "bytes": 289,
+      "sha256": "05916bc2a066a3240334cb70b2590b7dc8087ba8b28549d27153e0069d81b4e3"
+    },
+    {
+      "path": "evidence/validation/capiro-feature-unit.interrupted.log",
+      "bytes": 296,
+      "sha256": "0d59c6f6be1fe1b68eae42b1d0db3af2c89cb5a822bf5f2f1c85ebb39b6b80db"
+    },
+    {
+      "path": "evidence/validation/capiro-feature-unit.log",
+      "bytes": 473,
+      "sha256": "35b1e70d5c1f09bf66cc31a6e0779378d72af376b5d74fe248855c690ed84aed"
+    },
+    {
+      "path": "evidence/validation/modules-affected.log",
+      "bytes": 1923,
+      "sha256": "a641ac34e43c51f03ec44bb922dd459d05054da44421ab905845a57fb936fa19"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/modules-Engagement-Manager-bcc87-onical-session-API-boundary/error-context.md",
+      "bytes": 5809,
+      "sha256": "5a22c288c186dd91b7708e4ca042ccf4610d824926797a9ff7350c9796dc4c6c"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/modules-Engagement-Manager-bcc87-onical-session-API-boundary/test-failed-1.png",
+      "bytes": 80930,
+      "sha256": "6bcf76903f72d6e87fcec44921d961c5c5ca648d1e0886fc756dc7f11b03e7d0"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/objective-operational-navi-68fd8-ith-the-exact-project-query/error-context.md",
+      "bytes": 11018,
+      "sha256": "ce9b1559c278b68f339c7d6b1e4653f6ea00b823080965f29af2b03db262634c"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/objective-operational-navi-68fd8-ith-the-exact-project-query/test-failed-1.png",
+      "bytes": 52847,
+      "sha256": "e4a91435f822f0dd5f509693c52ae366e8f0341df9bef6ad06c7f50bad748465"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/error-context.md",
+      "bytes": 13612,
+      "sha256": "52d275b30166feb2c6ca8a29b6f67b6938105d799f86bcf999762dd2d8ce1ec5"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/test-failed-1.png",
+      "bytes": 93254,
+      "sha256": "9bc748d623a85154a264fc77242f192149e853ba02f37f24e9fd85071525b24e"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/error-context.md",
+      "bytes": 13613,
+      "sha256": "e669e2acf6aa4230d3761cab4191c2347670faed1acb012ff88276b567110d1d"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/test-failed-1.png",
+      "bytes": 93254,
+      "sha256": "9bc748d623a85154a264fc77242f192149e853ba02f37f24e9fd85071525b24e"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/error-context.md",
+      "bytes": 13615,
+      "sha256": "f21f6e09eb73d456642f973d2e78e6fdb3ff68958a484b8c5b0b2418192e5320"
+    },
+    {
+      "path": "evidence/validation/modules-initial-artifacts/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/test-failed-1.png",
+      "bytes": 93254,
+      "sha256": "9bc748d623a85154a264fc77242f192149e853ba02f37f24e9fd85071525b24e"
+    },
+    {
+      "path": "evidence/validation/modules-initial.log",
+      "bytes": 49466,
+      "sha256": "a36828929e043d74df75d8e9080c2f676f575017ed62d69b47da336c8afab3ad"
+    },
+    {
+      "path": "evidence/validation/native-preferences-affected.log",
+      "bytes": 491,
+      "sha256": "7862f2423b437bc41cb6a447176b6f8750a7dab146099f4f986556e253ec02bd"
+    },
+    {
+      "path": "evidence/validation/portfolio-desktop.log",
+      "bytes": 13542,
+      "sha256": "67165adedf03c9b781029d52c5eede4be30f174af833ecd0e9897b5da073ac24"
+    },
+    {
+      "path": "evidence/validation/portfolio-home-affected.log",
+      "bytes": 767,
+      "sha256": "e622444413413a657c41ce6baeca402fddca8e25b893e1a4b099f3bc332ee993"
+    },
+    {
+      "path": "evidence/validation/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "evidence/validation/production-build.log",
+      "bytes": 2587,
+      "sha256": "71a4d1b099cef69bf36d4d7a0d4ac39000225d0e4c85e91ebb2697421fccefc3"
+    },
+    {
+      "path": "evidence/validation/production-smoke.json",
+      "bytes": 8347,
+      "sha256": "ddbdf4ad39b70b07bc316ba75e78e6dfe51608a5e284928f7ee8bf712cee36a5"
+    },
+    {
+      "path": "evidence/validation/production-standalone.log",
+      "bytes": 8874,
+      "sha256": "e98c9bbd7b8f5ebec83213a71738ee548e548d91b342a89a625864a61c6a94db"
+    },
+    {
+      "path": "evidence/validation/public-packages.log",
+      "bytes": 3384,
+      "sha256": "d6b419beab1bdf07b2f17cca2f139b8530ac9da8f4a815e8a72cac7c9de50f73"
+    },
+    {
+      "path": "evidence/validation/receiving-typecheck.log",
+      "bytes": 145,
+      "sha256": "2945475291160e43896fea46950b4d5fde1127107c8ff1202c8c618be5d11e15"
+    },
+    {
+      "path": "evidence/validation/root-node.log",
+      "bytes": 20546,
+      "sha256": "5391cc397ad458100e355c7d093dde62661c1a276d01f12db306e431277a9ffa"
+    },
+    {
+      "path": "evidence/validation/scoped-format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "evidence/validation/scoped-lint.log",
+      "bytes": 883,
+      "sha256": "3f16ab373e97e07b323752df016c100fd2e1b0c3fc436031cdd03650e49adf97"
+    },
+    {
+      "path": "evidence/validation/settings-route-unit.log",
+      "bytes": 335,
+      "sha256": "337d6850546953508e9e023e19f2d0ef134ed317ef305e0f046d36d554fbac12"
+    },
+    {
+      "path": "evidence/validation/shared-focused-browser.log",
+      "bytes": 1721,
+      "sha256": "4783c6bff9157864074349ef8865ee1933778092877251633bb3d57b5fb3bc4a"
+    },
+    {
+      "path": "evidence/validation/test-correction-lint.log",
+      "bytes": 99,
+      "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+    },
+    {
+      "path": "evidence/validation/test-correction-typecheck-heap-limit.log",
+      "bytes": 1326,
+      "sha256": "9e342fac2fcda95852588d67a0a16f1078d017cd003d647568d2deeecc4e531c"
+    },
+    {
+      "path": "evidence/validation/test-correction-typecheck.log",
+      "bytes": 145,
+      "sha256": "2945475291160e43896fea46950b4d5fde1127107c8ff1202c8c618be5d11e15"
+    },
+    {
+      "path": "evidence/validation/transport.log",
+      "bytes": 11923,
+      "sha256": "e40f0e280a963f748030df69ea05ecfb16cac60fdc0ebfaccfc563fbd7c50cd9"
+    },
+    {
+      "path": "evidence/validation/web-unit.log",
+      "bytes": 686,
+      "sha256": "b476d92f41e343701eff4c637d72236564fd8752228c45678f5c34c9d32ae7be"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "browser/campaign-rejection-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/campaign-success-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/meeting-edit-pending-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/modules-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/outreach-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/portfolio-home-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/portfolio-overview-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/quick-log-fields-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/quick-log-pending-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/settings-billing-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/settings-personal-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/settings-profiles-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "browser/settings-verified-client-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/government-federal-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/government-identity-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/meeting-prep-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/outreach-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/portfolio-home-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/portfolio-profile-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "figma/settings-personal-1440x1040.png",
+      "kind": "native Figma design render",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "portfolio-worker/original-pending-escape-failed-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "portfolio-worker/pending-edit-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "portfolio-worker/pending-quick-log-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "portfolio-worker/quick-log-original-unlocked-1440x1040.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "validation/modules-initial-artifacts/modules-Engagement-Manager-bcc87-onical-session-API-boundary/test-failed-1.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "validation/modules-initial-artifacts/objective-operational-navi-68fd8-ith-the-exact-project-query/test-failed-1.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "validation/modules-initial-artifacts/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/test-failed-1.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "validation/modules-initial-artifacts/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/test-failed-1.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    },
+    {
+      "path": "validation/modules-initial-artifacts/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/test-failed-1.png",
+      "kind": "synthetic Playwright browser capture",
+      "viewport": [
+        1440,
+        1040
+      ],
+      "pngDimensions": [
+        1440,
+        1040
+      ],
+      "fullPageMayExceedViewport": true,
+      "liveVerified": false
+    }
+  ],
+  "liveVerified": false
+}
