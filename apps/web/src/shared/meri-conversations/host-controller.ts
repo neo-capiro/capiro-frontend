@@ -29,14 +29,16 @@ export class ConversationHostController extends OpaqueSessionController<MeriConv
     now?: () => number;
     origin?: string;
     onBound?: (context: ActionContext) => void;
+    retryDelaysMs?: readonly number[];
   }) {
     const hints = actionSessionHints.parse(options.hints);
     const account = Object.freeze({ ...options.account });
-    const { fetcher, now, origin, onBound } = options;
+    const { fetcher, now, origin, onBound, retryDelaysMs } = options;
     super({
       hints,
       fetcher,
       now,
+      ...(retryDelaysMs ? { retryDelaysMs } : {}),
       createPort: ({ session, signal, ...lifetime }) => {
         // Core PR15 readCurrentApplicationAuthority returns native user.id, not Clerk subject.
         if (
