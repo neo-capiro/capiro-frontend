@@ -9,6 +9,13 @@ export const actionSessionHints = z.strictObject({
   clientId: actionUuid.optional(),
 });
 export type ActionSessionHints = z.infer<typeof actionSessionHints>;
+
+/** The issuance answered without a session; its HTTP status is kept so a caller can tell a transient answer apart. */
+export class ActionSessionUnavailable extends Error {
+  constructor(readonly status: number) {
+    super("Action session unavailable");
+  }
+}
 export async function bootstrapActionSession(
   hints: ActionSessionHints,
   lifetime: AbortSignal,
@@ -27,7 +34,8 @@ export async function bootstrapActionSession(
       signal,
     });
     const text = await boundedJsonText(response, signal, 4096);
-    if (response.status !== 200) throw new Error("Action session unavailable");
+    if (response.status !== 200)
+      throw new ActionSessionUnavailable(response.status);
     const receipt = receiveSessionReceipt(text, now());
     if (
       (captured.clientId &&

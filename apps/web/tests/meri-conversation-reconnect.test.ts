@@ -124,3 +124,88 @@ it("a refused first account cannot install reconnect hints", async () => {
     detach();
   }
 });
+
+function refused(status: number) {
+  return Response.json({ error: { code: "SESSION_REFUSED" } }, { status });
+}
+function firstConnect(fetcher: typeof fetch) {
+  return new ConversationHostController({
+    hints: exactHints,
+    account,
+    fetcher,
+    retryDelaysMs: [1_000, 3_000],
+  });
+}
+
+it("a transient first issuance refusal is asked again after a bounded wait and then connects", async () => {
+  clock();
+  let calls = 0;
+  const fetcher = vi.fn<typeof fetch>(async () =>
+    ++calls === 1 ? refused(401) : session(context, 60_000),
+  );
+  const host = firstConnect(fetcher);
+  const detach = host.attach();
+  try {
+    const connecting = host.connect();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(host.getSnapshot().status).toBe("connecting");
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(1_000);
+    await connecting;
+    expect(fetcher).toHaveBeenCalledTimes(2);
+    expect(host.getSnapshot().status).toBe("ready");
+  } finally {
+    detach();
+  }
+});
+
+it("a refusal that persists still ends unavailable after the bounded attempts", async () => {
+  clock();
+  const fetcher = vi.fn<typeof fetch>(async () => refused(401));
+  const host = firstConnect(fetcher);
+  const detach = host.attach();
+  try {
+    const connecting = host.connect();
+    await vi.advanceTimersByTimeAsync(4_000);
+    await connecting;
+    expect(fetcher).toHaveBeenCalledTimes(3);
+    expect(host.getSnapshot().status).toBe("unavailable");
+    await vi.advanceTimersByTimeAsync(10_000);
+    expect(fetcher).toHaveBeenCalledTimes(3);
+  } finally {
+    detach();
+  }
+});
+
+for (const [label, answer] of [
+  ["a request refusal (400)", () => refused(400)],
+  ["a mismatched receipt", () => session({ ...context, actorId: "foreign-user" })],
+] as const)
+  it(`${label} is never asked again automatically`, async () => {
+    clock();
+    const fetcher = vi.fn<typeof fetch>(async () => answer());
+    const host = firstConnect(fetcher);
+    const detach = host.attach();
+    try {
+      await host.connect();
+      await vi.advanceTimersByTimeAsync(10_000);
+      expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(host.getSnapshot().status).toBe("unavailable");
+    } finally {
+      detach();
+    }
+  });
+
+it("detaching during the wait stops further issuance", async () => {
+  clock();
+  const fetcher = vi.fn<typeof fetch>(async () => refused(503));
+  const host = firstConnect(fetcher);
+  const detach = host.attach();
+  const connecting = host.connect();
+  await vi.advanceTimersByTimeAsync(0);
+  detach();
+  await vi.advanceTimersByTimeAsync(10_000);
+  await connecting;
+  expect(fetcher).toHaveBeenCalledTimes(1);
+  expect(host.getSnapshot().status).toBe("idle");
+});
