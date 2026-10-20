@@ -80,6 +80,8 @@ Unchanged: the Clerk session and its `capiro` native token are used only server-
 | `apps/web` vitest | 172 files, 2509 tests pass (new: `meri-conversation-live`, `meri-document-links`, `meri-unavailable-resources`) |
 | `apps/web` lint | 0 errors (81 existing warnings, none in changed files) |
 | `apps/web` format check | pass |
-| Meri Playwright specs (`test/browser`, Chromium 1194) | see below |
+| Meri Playwright specs (`test/browser`, Chromium 1194: `acceptance-meri`, `combined-successor`, `meri-*`, `settings*`, `shared-home*`) | 147 / 147 pass |
+| `npm run build` (meri-client + Next production build) | pass; `/api/documents/links/[action]` listed as a dynamic route |
+| `check:elements` | not run: `packages/ui` and its pins are unchanged |
 
 New and rewritten browser specs: `meri-conversation-host.spec.ts` (22 cases: transcript and cursor resume, multi-turn, early stream end, stalled reconnect, Stop and receipt semantics, 401/403/502, foreign receipt, uncertain submit and retry, navigation retention, session and client replacement, expiry and reconnect, approvals, unavailable titles), `meri-conversation-artifacts.spec.ts` (3: preview and signed-link download with byte check, link refusal, inspect refusal) and the updated conversation case in `combined-successor.spec.ts`.
