@@ -75,6 +75,27 @@ it("turn two typed while turn one is still settling is reserved once Meri stops 
   expect(retained.requestId).toBe("60000000-0000-4000-8000-000000000001");
 });
 
+it("a previous run that reaches ECS STOPPED two minutes later still lets turn two through", async () => {
+  vi.useFakeTimers();
+  const journal = setup();
+  const settledAt = Date.now() + 120_000;
+  const reserve = vi.fn(async () => {
+    if (Date.now() < settledAt) throw settling();
+    return {
+      schema: "x",
+      sourceBinding: source,
+      targetBinding: target,
+    } as never;
+  });
+  const reserving = reserveTurnWhenSettled(
+    journal,
+    reserve,
+    new AbortController().signal,
+  );
+  await vi.advanceTimersByTimeAsync(120_000);
+  expect((await reserving).state).toBe("ready");
+});
+
 it("only the definite not-dispatched conflict is asked again, and only for the settle window", async () => {
   vi.useFakeTimers();
   for (const error of [

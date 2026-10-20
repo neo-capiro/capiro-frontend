@@ -8,10 +8,11 @@ import {
 
 /**
  * Meri refuses a next turn with 409 CONVERSATION_TURN_CONFLICT, outcome NOT_DISPATCHED, while the previous run is
- * still being stopped and retired (its reconcile runs up to 85 s). Nothing was reserved, so the same intent is
- * asked again at this cadence until this long has passed, then the refusal stands.
+ * still being stopped and retired: retirement waits for the ECS task to reach STOPPED (its 60 s stopTimeout plus
+ * deprovisioning; the reconcile retries for up to 240 s). Nothing was reserved, so the same intent is asked again at
+ * this cadence until this long has passed, then the refusal stands and the recovery controls take over.
  */
-export const TURN_SETTLE_WAIT_MS = 90_000;
+export const TURN_SETTLE_WAIT_MS = 150_000;
 export const TURN_SETTLE_RETRY_MS = 3_000;
 
 /** Nonsecret immutable submit identity exists before reservation dispatch, not after its ACK. */
