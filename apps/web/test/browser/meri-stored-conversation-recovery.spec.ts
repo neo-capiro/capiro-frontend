@@ -57,15 +57,15 @@ test("a transient stored-session failure keeps the Core conversation, draft and 
   expect(bootstrap).toHaveLength(1);
   const originalRequestId = bootstrap[0]!.requestId;
 
-  let failNextSession = true;
+  // Issuance keeps failing until the test clears it, outlasting the automatic retries (after 1 s and 3 s).
+  let sessionsFail = true;
   await page.route("**/api/action-followthrough/session", (route) => {
-    if (!failNextSession) return route.fallback();
-    failNextSession = false;
+    if (!sessionsFail) return route.fallback();
     return reply(route, { message: "Temporary service failure" }, 503);
   });
   await page.reload();
   const retry = page.getByRole("button", { name: "Try again", exact: true });
-  await expect(retry).toBeVisible();
+  await expect(retry).toBeVisible({ timeout: 10_000 });
   await expect(
     page.getByRole("heading", { name: "Conversation connection unavailable" }),
   ).toBeVisible();
@@ -76,15 +76,19 @@ test("a transient stored-session failure keeps the Core conversation, draft and 
     { schemaVersion: 1, requestId: originalRequestId, clientId },
   ]);
 
+  const failedIssuances = sessionHints.length - 1;
+  expect(failedIssuances).toBeGreaterThan(1);
+  sessionsFail = false;
   await retry.click();
-  await expect.poll(() => sessionHints.length).toBe(3);
+  await expect.poll(() => sessionHints.length).toBe(failedIssuances + 2);
   await expect(page.getByText("Saved answer", { exact: true })).toBeVisible();
   await expect(composer(page)).toHaveValue("Keep this unsent draft");
   expect(bootstrap).toHaveLength(2);
-  expect(sessionHints).toEqual([
-    { clientId, conversationId: binding.conversationId },
-    { clientId, conversationId: binding.conversationId },
-    { clientId, conversationId: binding.conversationId },
-  ]);
+  expect(sessionHints).toEqual(
+    Array.from({ length: failedIssuances + 2 }, () => ({
+      clientId,
+      conversationId: binding.conversationId,
+    })),
+  );
   expect(fixture.unexpected).toEqual([]);
 });
