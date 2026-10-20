@@ -172,16 +172,17 @@ describe("observeUntilSettled", () => {
     expect(phases).toEqual(["live", "live", "live"]);
   });
 
-  it("reads as reconnecting only after an attempt that admitted nothing", async () => {
+  it("reads as reconnecting only after an attempt that failed without progress", async () => {
     let cursor = 0,
       calls = 0;
     const phases: string[] = [];
     const outcome = await observeUntilSettled({
       attempt: async () => {
         calls++;
-        // Progress, an empty window, then progress to settled.
+        // Progress, a failed attempt, then progress to settled.
         if (calls === 1) cursor = 2;
-        if (calls === 3) cursor = 6;
+        else if (calls === 3) cursor = 6;
+        else throw new Error("subscription-unavailable");
       },
       settled: () => cursor >= 6,
       progress: () => cursor,
@@ -222,7 +223,8 @@ describe("observeUntilSettled", () => {
         calls++;
         // Fail twice, progress, fail twice, then settle.
         if (calls === 3) cursor++;
-        if (calls === 6) cursor = 99;
+        else if (calls === 6) cursor = 99;
+        else throw new Error("subscription-unavailable");
       },
       settled: () => cursor === 99,
       progress: () => cursor,
@@ -234,6 +236,33 @@ describe("observeUntilSettled", () => {
     });
     expect(outcome).toBe("settled");
     expect(waits).toEqual([1, 2, 1, 2]);
+  });
+
+  it("keeps watching through clean empty windows before the run starts, without stalling", async () => {
+    let calls = 0,
+      cursor = 0;
+    const phases: string[] = [],
+      waits: number[] = [];
+    const outcome = await observeUntilSettled({
+      attempt: async () => {
+        calls++;
+        // Eight clean 30 s windows with no event (about four minutes before `starting`), then the run's events.
+        if (calls === 9) cursor = 5;
+        if (calls === 10) cursor = 9;
+      },
+      settled: () => cursor === 9,
+      progress: () => cursor,
+      signal: new AbortController().signal,
+      onPhase: (phase) => phases.push(phase),
+      delays: [10, 20, 40],
+      wait: async (ms) => {
+        waits.push(ms);
+      },
+    });
+    expect(outcome).toBe("settled");
+    expect(calls).toBe(10);
+    expect(phases.every((phase) => phase === "live")).toBe(true);
+    expect(waits).toEqual(Array(8).fill(10));
   });
 
   it("aborting stops observation without another attempt", async () => {

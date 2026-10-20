@@ -22,7 +22,20 @@ type Options<P> = {
   now?: () => number;
   /** Waits before re-asking after a transient issuance answer; its length bounds the extra attempts. */
   retryDelaysMs?: readonly number[];
+  /**
+   * Opts in to renewing before the cap: true while the port has a write or read in flight that ending the session
+   * now would cut. Without it the session ends at its cap.
+   */
+  busy?: (port: P) => boolean;
 };
+
+/**
+ * Meri never extends a session past its issued cap (it is bound to the native credential it was issued with), so the
+ * session ends itself early instead: this long before the cap, once no request is in flight, for the owner's usual
+ * renewal. It exceeds the 30 s budget of one request, so nothing started before it runs into the cap.
+ */
+export const RENEW_LEAD_MS = 45_000;
+const RENEW_RECHECK_MS = 1_000;
 
 /**
  * Issuance answers that can clear on their own: Meri reports an authority owner that did not answer (for example
@@ -46,6 +59,7 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
   private clientAvailable = true;
   private lifetime: AbortController | undefined;
   private expiry: ReturnType<typeof setTimeout> | undefined;
+  private renewal: ReturnType<typeof setTimeout> | undefined;
   private port: P | undefined;
   private now: () => number;
   constructor(private readonly options: Options<P>) {
@@ -67,6 +81,8 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
     this.lifetime = undefined;
     clearTimeout(this.expiry);
     this.expiry = undefined;
+    clearTimeout(this.renewal);
+    this.renewal = undefined;
     this.port?.dispose();
     this.port = undefined;
   }
@@ -146,6 +162,14 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
       });
       this.port = port;
       this.expiry = setTimeout(expire, session.expiresAtMs - this.now());
+      const busy = this.options.busy;
+      const renew = () => {
+        if (!current()) return;
+        if (busy?.(port)) this.renewal = setTimeout(renew, RENEW_RECHECK_MS);
+        else expire();
+      };
+      const renewIn = session.expiresAtMs - RENEW_LEAD_MS - this.now();
+      if (busy && renewIn > 0) this.renewal = setTimeout(renew, renewIn);
       this.publish({
         status: "ready",
         port,

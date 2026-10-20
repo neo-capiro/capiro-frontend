@@ -21,9 +21,10 @@ const pause = (milliseconds: number, signal: AbortSignal) =>
 /**
  * Keeps observing one run until its authoritative status settles. A stream ending is not
  * completion: the loop resumes from the receiver's accepted cursor. Attempts that admit new
- * events reset the failure budget; consecutive attempts without progress back off and then stop
- * as "stalled" so the person can reconnect explicitly. Aborting stops observation only; it never
- * cancels the run.
+ * events reset the failure budget; consecutive failed attempts without progress back off and then
+ * stop as "stalled" so the person can reconnect explicitly. A window that Meri closed cleanly
+ * without new events is not a failure: before the run starts there can be minutes of them, so the
+ * loop keeps watching after a short pause. Aborting stops observation only; it never cancels the run.
  */
 export async function observeUntilSettled({
   attempt,
@@ -52,15 +53,23 @@ export async function observeUntilSettled({
     // interruption. Only an attempt that admitted nothing reads as reconnecting.
     onPhase?.(failures === 0 ? "live" : "reconnecting");
     const before = progress();
+    let failed = false;
     try {
       await attempt(first);
     } catch {
       // The failure budget below decides whether to resume.
+      failed = true;
     }
     first = false;
     if (signal.aborted) break;
     if (settled()) return "settled";
-    failures = progress() > before ? 0 : failures + 1;
+    if (progress() > before) failures = 0;
+    else if (failed) failures++;
+    else {
+      // A clean, empty window: still live; pause before the next one so a window that closes at once cannot spin.
+      await wait(delays[0] ?? 0, signal);
+      continue;
+    }
     if (failures > delays.length) return "stalled";
     if (failures > 0) {
       onPhase?.("reconnecting");
