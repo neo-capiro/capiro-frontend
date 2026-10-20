@@ -12,6 +12,29 @@ import { installInitialInput } from "./meri-initial-input-fixtures";
 
 const url = `/meri?clientId=${clientId}`;
 
+test("synthetic desktop accepted first prompt clears the composer and Enter cannot resend it", async ({
+  page,
+}) => {
+  const f = await setupConversation(page),
+    native = await installInitialInput(page);
+  await page.goto(url);
+  await composer(page).fill("Original initial message");
+  await composer(page).press("Enter");
+  await expect(
+    page.getByText("Initial synthetic answer", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("You: Original initial message", { exact: true }),
+  ).toHaveCount(1);
+  await expect(composer(page)).toHaveValue("");
+  await expect(sendButton(page)).toBeDisabled();
+  await composer(page).press("Enter");
+  expect(native.calls.allocate).toHaveLength(1);
+  expect(native.calls.admit).toHaveLength(1);
+  expect(native.calls.submit).toHaveLength(1);
+  expect(f.unexpected).toEqual([]);
+});
+
 test("synthetic desktop held admission rejects repeated keyboard dispatch while preserving editable draft and linked help", async ({
   page,
 }) => {
@@ -88,6 +111,7 @@ test("synthetic desktop lost allocation ACK retries exact retained identity thro
     .waitFor();
   expect(native.calls.admit).toEqual([]);
   expect(native.calls.submit).toEqual([]);
+  await expect(composer(page)).toHaveValue("Retained allocation input");
   await composer(page).fill("A different draft");
   await page
     .getByRole("button", { name: "Retry same request", exact: true })

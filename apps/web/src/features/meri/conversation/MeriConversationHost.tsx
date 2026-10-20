@@ -10,11 +10,7 @@ import {
   canBeginNewChatAfterConflict,
   resolveFirstChatConversation,
 } from "../../../shared/meri-conversations/first-chat-bootstrap";
-import {
-  storedConversationConfirmed,
-  useBeginNewChat,
-  useStoredConversationRecovery,
-} from "../../../shared/meri-conversations/stored-conversation-recovery";
+import { useBeginNewChat } from "../../../shared/meri-conversations/stored-conversation-recovery";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { MeriLiveConversation } from "./MeriLiveConversation";
@@ -143,7 +139,7 @@ function ClientIneligibleNotice({ reason }: { reason: Ineligibility }) {
 
 type CoreResolution =
   | { state: "pending" }
-  | { state: "ready"; conversationId: string; reused: boolean }
+  | { state: "ready"; conversationId: string }
   | { state: "error"; canBeginNew: boolean };
 
 /** The Core receipt is verified before mounting a component that can issue a Meri session. */
@@ -170,7 +166,6 @@ function CoreResolvedConversation({
   );
   useEffect(() => {
     const controller = new AbortController();
-    const reused = storedConversationConfirmed({ tenantId, actorId, clientId });
     void Promise.resolve()
       .then(() =>
         resolveFirstChatConversation({
@@ -183,7 +178,7 @@ function CoreResolvedConversation({
       )
       .then(({ conversationId }) => {
         if (!controller.signal.aborted)
-          setResolution({ state: "ready", conversationId, reused });
+          setResolution({ state: "ready", conversationId });
       })
       .catch((error: unknown) => {
         if (!controller.signal.aborted)
@@ -228,7 +223,6 @@ function CoreResolvedConversation({
       clientId={clientId}
       scope={scope}
       conversationId={resolution.conversationId}
-      onStoredRefused={resolution.reused ? beginNew : undefined}
     />
   );
 }
@@ -254,21 +248,14 @@ function ConnectedConversation({
   clientId,
   scope,
   conversationId,
-  onStoredRefused,
 }: {
   account: ConversationAccount;
   clientId: string;
   scope: string;
   conversationId?: string | undefined;
-  onStoredRefused?: (() => void) | undefined;
 }) {
   const session = useConversationSession(account, clientId, conversationId);
   const { ready, connection } = session;
-  useStoredConversationRecovery(
-    connection?.state?.status ?? "idle",
-    onStoredRefused !== undefined,
-    onStoredRefused,
-  );
   if (!ready || session.latestTarget)
     return <ConnectionPending session={session} scope={scope} />;
   return (
