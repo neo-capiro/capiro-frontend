@@ -168,7 +168,29 @@ describe("observeUntilSettled", () => {
     });
     expect(outcome).toBe("settled");
     expect(firsts).toEqual([true, false, false]);
-    expect(phases).toEqual(["live", "reconnecting", "reconnecting"]);
+    // Windows that admitted events and then ended are ordinary rollovers, not interruptions.
+    expect(phases).toEqual(["live", "live", "live"]);
+  });
+
+  it("reads as reconnecting only after an attempt that admitted nothing", async () => {
+    let cursor = 0,
+      calls = 0;
+    const phases: string[] = [];
+    const outcome = await observeUntilSettled({
+      attempt: async () => {
+        calls++;
+        // Progress, an empty window, then progress to settled.
+        if (calls === 1) cursor = 2;
+        if (calls === 3) cursor = 6;
+      },
+      settled: () => cursor >= 6,
+      progress: () => cursor,
+      signal: new AbortController().signal,
+      onPhase: (phase) => phases.push(phase),
+      wait: instant,
+    });
+    expect(outcome).toBe("settled");
+    expect(phases).toEqual(["live", "live", "reconnecting", "reconnecting"]);
   });
 
   it("backs off on attempts without progress and stalls after the budget", async () => {

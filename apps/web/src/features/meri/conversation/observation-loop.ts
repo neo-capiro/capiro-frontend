@@ -48,7 +48,9 @@ export async function observeUntilSettled({
     failures = 0;
   while (!signal.aborted) {
     if (settled()) return "settled";
-    onPhase?.(first && failures === 0 ? "live" : "reconnecting");
+    // Meri closes every window within 30 s, so a window that admitted events and then ended is a normal rollover, not an
+    // interruption. Only an attempt that admitted nothing reads as reconnecting.
+    onPhase?.(failures === 0 ? "live" : "reconnecting");
     const before = progress();
     try {
       await attempt(first);

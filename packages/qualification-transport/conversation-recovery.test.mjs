@@ -184,13 +184,20 @@ test('unfinished UTF8 at original wire EOF fails before any event admission', as
   assert.equal(f.client.getSnapshot().observation.after, 2);
 });
 
-test('request deadline ends a held observation while keeping its last admitted cursor recoverable', { timeout: 5000 }, async t => {
+test('the observation lease outlasts Meri\'s 30 s window, then ends a held observation with its cursor recoverable', { timeout: 5000 }, async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });
-  const f = setup(t); await f.submit(); const held = heldStream(t);
+  const f = setup(t, { ttlMs: 120_000 }); await f.submit(); const held = heldStream(t);
   f.override = c => c.path.endsWith('/events') ? held.response : undefined;
   const { chat } = f.client.openChat(), first = observed(f, 1);
   const pending = chat.sendMessage({ text: 'observe' }); await first;
-  t.mock.timers.tick(30_000); await pending; held.release();
+  // Meri itself closes a window within 30 s of its own start; the browser must not cut it first.
+  const observation = f.calls.at(-1);
+  t.mock.timers.tick(30_000); await new Promise(setImmediate);
+  assert.equal(observation.signal.aborted, false); assert.notEqual(chat.status, 'error');
+  t.mock.timers.tick(39_999); await new Promise(setImmediate);
+  assert.equal(observation.signal.aborted, false);
+  t.mock.timers.tick(1); await pending; held.release();
+  assert.equal(observation.signal.aborted, true);
   assert.equal(chat.status, 'error'); assert.equal(f.client.getSnapshot().observation.after, 1);
   assert.equal(f.accessLost, 0); noDurableCancel(f);
   f.override = undefined; await chat.resumeStream();
