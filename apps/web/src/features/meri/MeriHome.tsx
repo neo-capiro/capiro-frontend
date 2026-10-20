@@ -7,15 +7,19 @@ import { useSelectedClient } from "../../shared/session/SelectedClient";
 import { scopedHref } from "../../shared/session/client-route";
 import styles from "./home.module.css";
 import { MeriConversationHost } from "./conversation/MeriConversationHost";
+import { IntentApprovalsEnabled } from "./conversation/intents/approvals-enabled";
 import { MeriClientSelector } from "./MeriClientSelector";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
   conversationEnabled = false,
+  intentApprovalsEnabled = false,
   firstChatBootstrapEnabled = false,
   firstChatBootstrapClientId,
 }: {
   conversationEnabled?: boolean;
+  /** Server-decided (readIntentsConfig); approvals stay dark unless true. */
+  intentApprovalsEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
   firstChatBootstrapClientId?: string;
 }) {
@@ -62,16 +66,18 @@ export function MeriHome({
           )}
           <Link href="/">Open Portfolio</Link>
         </section>
-        <MeriConversationHost
-          enabled={conversationEnabled}
-          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
-          firstChatBootstrapClientId={firstChatBootstrapClientId}
-          account={
-            current?.tenant?.id
-              ? { tenantId: current.tenant.id, actorId: current.user.id }
-              : undefined
-          }
-        />
+        <IntentApprovalsEnabled.Provider value={intentApprovalsEnabled}>
+          <MeriConversationHost
+            enabled={conversationEnabled}
+            firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+            firstChatBootstrapClientId={firstChatBootstrapClientId}
+            account={
+              current?.tenant?.id
+                ? { tenantId: current.tenant.id, actorId: current.user.id }
+                : undefined
+            }
+          />
+        </IntentApprovalsEnabled.Provider>
         <MeriWorkspaceLinks clientId={clientId} />
       </div>
     </div>
