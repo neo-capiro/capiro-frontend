@@ -3,6 +3,11 @@ import { readFileSync, statSync } from 'node:fs';
 const origin = 'https://portfolio-preview.app.capiro.ai';
 const corePreviewApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
+// Reviewed roster source only. The template keeps this pair undeployable until
+// the composed Core image and serving RELEASE_SHA are independently qualified.
+const qualifiedCoreRosterSource = 'b97a3286487abcda6a7424cf1dc2812d93b65b3d';
+const coreRosterPreviewOrigin = 'https://core-roster-preview.capiro.ai';
+const coreRosterPreviewApi = `${coreRosterPreviewOrigin}/api`;
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
 const meriImageSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
@@ -12,6 +17,7 @@ const canonicalUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{
 const nonMeriHosts = new Set([
   'capiro.ai', 'app.capiro.ai', 'os.capiro.ai', 'api.capiro.ai',
   'portfolio-preview.app.capiro.ai', 'first-chat-preview.app-dev.capiro.ai',
+  'core-roster-preview.capiro.ai',
 ]);
 const fixedParameters = Object.freeze({
   CoreApiBaseUrl: `${origin}/api`,
@@ -24,6 +30,7 @@ const fixedParameters = Object.freeze({
 const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const optionalBindings = [
   'previewReadEnabled', 'firstChatBootstrapEnabled', 'firstChatClientId',
+  'qualifiedCoreClientRosterApiBaseUrl',
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
   'meriRuntimeSource', 'meriRuntimeImageDigest',
 ];
@@ -99,6 +106,18 @@ function readFirstChatConfiguration(bindings, meri) {
   return { readEnabled, bootstrapEnabled, clientId };
 }
 
+function readQualifiedCoreRosterApi(bindings, firstChat, meri) {
+  const target = Object.hasOwn(bindings, 'qualifiedCoreClientRosterApiBaseUrl')
+    ? bindings.qualifiedCoreClientRosterApiBaseUrl : '';
+  if (typeof target !== 'string' || (target !== '' && target !== coreRosterPreviewApi))
+    throw Error('PREVIEW_CORE_ROSTER_ORIGIN_INVALID');
+  if (!target) return '';
+  if (meri.baseUrl === coreRosterPreviewOrigin) throw Error('PREVIEW_CORE_ROSTER_ORIGIN_INVALID');
+  // Selected-client verification and Meri keep the original reviewed read pair.
+  if (!firstChat.readEnabled) throw Error('PREVIEW_CORE_ROSTER_DEPENDENCY_HELD');
+  return target;
+}
+
 /** Public metadata only. This does not read credentials or establish application authority. */
 export function renderPreviewConfiguration(bindings) {
   closedRecord(bindings, Object.keys(patterns), 'PREVIEW_BINDINGS_SHAPE', optionalBindings);
@@ -111,12 +130,15 @@ export function renderPreviewConfiguration(bindings) {
   }
   const meri = readMeriConfiguration(bindings);
   const firstChat = readFirstChatConfiguration(bindings, meri);
+  const qualifiedCoreRosterApi = readQualifiedCoreRosterApi(bindings, firstChat, meri);
   const values = {
     ...fixedParameters,
     CapiroRequestOrigin: origin,
     CapiroPreviewReadOnly: 'true',
     CapiroPreviewReadBackendSource: firstChat.readEnabled ? coreReadSource : '',
     CapiroPreviewReadApiBaseUrl: firstChat.readEnabled ? corePreviewApi : '',
+    CapiroPreviewClientRosterBackendSource: qualifiedCoreRosterApi ? qualifiedCoreRosterSource : '',
+    CapiroPreviewClientRosterApiBaseUrl: qualifiedCoreRosterApi,
     MeriFirstChatBootstrapEnabled: String(firstChat.bootstrapEnabled),
     MeriFirstChatClientId: firstChat.clientId,
     CapiroPreviewFirstChatBackendSource: firstChat.bootstrapEnabled ? coreBootstrapSource : '',
@@ -155,6 +177,8 @@ export function renderPreviewConfiguration(bindings) {
       CAPIRO_PREVIEW_READ_ONLY: 'true',
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: values.CapiroPreviewReadBackendSource,
       CAPIRO_PREVIEW_READ_API_BASE_URL: values.CapiroPreviewReadApiBaseUrl,
+      CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: values.CapiroPreviewClientRosterBackendSource,
+      CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: values.CapiroPreviewClientRosterApiBaseUrl,
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: values.MeriFirstChatBootstrapEnabled,
       MERI_FIRST_CHAT_CLIENT_ID: values.MeriFirstChatClientId,
       CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: values.CapiroPreviewFirstChatBackendSource,

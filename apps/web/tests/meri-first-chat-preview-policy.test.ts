@@ -110,6 +110,32 @@ it("continues through Clerk and sends the sole preview write to the pinned Core 
   expect(new Headers(sent.headers).has("cookie")).toBe(false);
 });
 
+it("keeps the pinned first-chat write with a separate qualified roster binding", async () => {
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_READ_BACKEND_SOURCE",
+    "6542f5b089656b6d255465edd464d06c2a0b408f",
+  );
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_READ_API_BASE_URL",
+    "https://first-chat-preview.app-dev.capiro.ai/api",
+  );
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE",
+    "b97a3286487abcda6a7424cf1dc2812d93b65b3d",
+  );
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL",
+    "https://core-roster-preview.capiro.ai/api",
+  );
+
+  const response = await POST(request(), context);
+  expect(response.status).toBe(200);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(
+    `${previewTarget}/clio/conversations/bootstrap`,
+  );
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
+});
+
 it.each([
   ["MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "false"],
   ["MERI_FIRST_CHAT_CLIENT_ID", ""],

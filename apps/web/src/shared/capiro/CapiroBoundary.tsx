@@ -59,9 +59,12 @@ export function CapiroDataProvider({
 export function CapiroBoundary({
   config,
   children,
+  clientScopeRequired = true,
 }: {
   config: CapiroPublicConfig;
   children: ReactNode;
+  /** Account-wide Settings can verify a navigation hint without requiring it. */
+  clientScopeRequired?: boolean;
 }) {
   if (!config.configured)
     return (
@@ -75,7 +78,11 @@ export function CapiroBoundary({
     );
   return (
     <RequireSession>
-      <SelectedClientGate>{children}</SelectedClientGate>
+      {clientScopeRequired ? (
+        <SelectedClientGate>{children}</SelectedClientGate>
+      ) : (
+        children
+      )}
     </RequireSession>
   );
 }

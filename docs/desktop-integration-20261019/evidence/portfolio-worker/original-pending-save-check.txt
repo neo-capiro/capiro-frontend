@@ -1,0 +1,61 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test:browser
+> playwright test figma34-calendar.spec.ts --grep Escape cannot
+
+[WebServer] (node:32) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:57) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/figma34-calendar.spec.ts:383:1 › Escape cannot discard a nested meeting editor during its pending save (11.2s)
+
+
+  1) tests/browser/figma34-calendar.spec.ts:383:1 › Escape cannot discard a nested meeting editor during its pending save
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Edit meeting', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Edit meeting', exact: true })
+
+
+      429 |   await expect(editor.getByRole("button", { name: "Saving…" })).toBeDisabled();
+      430 |   await page.keyboard.press("Escape");
+    > 431 |   await expect(editor).toBeVisible();
+          |                        ^
+      432 |   await expect(editor.getByLabel("Subject", { exact: true })).toHaveValue(
+      433 |     "Pending local edit",
+      434 |   );
+        at /workspace/scratch/639ce8240192/portfolio-worker/apps/web/tests/browser/figma34-calendar.spec.ts:431:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/figma34-calendar-Escape-ca-1b062-tor-during-its-pending-save/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/figma34-calendar-Escape-ca-1b062-tor-during-its-pending-save/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/figma34-calendar-Escape-ca-1b062-tor-during-its-pending-save/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/figma34-calendar-Escape-ca-1b062-tor-during-its-pending-save/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/figma34-calendar.spec.ts:383:1 › Escape cannot discard a nested meeting editor during its pending save
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/scratch/639ce8240192/portfolio-worker/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/639ce8240192/portfolio-worker/apps/web
+npm error command failed
+npm error command sh -c playwright test figma34-calendar.spec.ts --grep 'Escape cannot'

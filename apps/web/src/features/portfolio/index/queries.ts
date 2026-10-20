@@ -10,23 +10,31 @@ export function useClient(id: string) {
   return useQuery({
     queryKey: clientKey(id),
     queryFn: ({ signal }) =>
-      api.request("core", `clients/${encodeURIComponent(id)}`, clientSchema, {
-        signal,
-      }),
+      api.request(
+        "core",
+        `clients/${encodeURIComponent(id)}`,
+        clientSchema.refine(
+          (client) => client.id === id,
+          "Client association mismatch",
+        ),
+        { signal },
+      ),
   });
 }
-export function useAccountOwners() {
+export function useAccountOwners(options?: { enabled?: boolean }) {
   const api = useApi();
   return useQuery({
     queryKey: ["account-owners"],
+    enabled: options?.enabled !== false,
     queryFn: ({ signal }) =>
       api.request("core", "client-account-owners", ownersSchema, { signal }),
   });
 }
-export function useMemberOptions() {
+export function useMemberOptions(options?: { enabled?: boolean }) {
   const api = useApi();
   return useQuery({
     queryKey: ["member-options"],
+    enabled: options?.enabled !== false,
     queryFn: ({ signal }) =>
       api.request(
         "core",

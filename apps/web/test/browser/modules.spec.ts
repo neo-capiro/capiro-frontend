@@ -3,7 +3,7 @@ import { operationFixtures, onlyLocalRequests } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
 
 const routes = [
-  { slug: "engagement", heading: "Engagement Manager" },
+  { slug: "engagement", heading: "Engagement" },
   { slug: "planner", heading: "Planner" },
   { slug: "calendar", heading: "Master calendar" },
   { slug: "workspace", heading: "Workspace" },

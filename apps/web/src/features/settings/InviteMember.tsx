@@ -31,7 +31,9 @@ export function InviteMember({
   return (
     <SettingsDialog
       open={open}
-      onClose={onClose}
+      onClose={() => {
+        if (!action.busy) onClose();
+      }}
       title="Add team member"
       description="Invite someone to join your workspace."
       footer={
@@ -79,6 +81,7 @@ export function InviteMember({
         <div className={`${styles.grid} ${styles.two}`}>
           <SettingField label="First name">
             <TextInput
+              disabled={action.busy}
               value={firstName}
               maxLength={100}
               onChange={(event) => setFirstName(event.target.value)}
@@ -86,6 +89,7 @@ export function InviteMember({
           </SettingField>
           <SettingField label="Last name">
             <TextInput
+              disabled={action.busy}
               value={lastName}
               maxLength={100}
               onChange={(event) => setLastName(event.target.value)}
@@ -96,6 +100,7 @@ export function InviteMember({
           <TextInput
             type="email"
             required
+            disabled={action.busy}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -103,6 +108,7 @@ export function InviteMember({
         <SettingField label="Role">
           <select
             className={styles.input}
+            disabled={action.busy}
             value={role}
             onChange={(event) => setRole(event.target.value as typeof role)}
           >

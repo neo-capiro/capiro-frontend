@@ -1,0 +1,21 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts settings-client-continuity.spec.ts meeting-material-pending.spec.ts
+
+[WebServer] (node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:68) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/meeting-material-pending.spec.ts:6:5 › notes success protects the submitted draft and meeting dismissal while saving (5.3s)
+  ✓  2 test/browser/meeting-material-pending.spec.ts:6:5 › notes failure protects the submitted draft and meeting dismissal while saving (6.1s)
+  ✓  3 test/browser/meeting-material-pending.spec.ts:6:5 › debrief success protects the submitted draft and meeting dismissal while saving (5.8s)
+  ✓  4 test/browser/meeting-material-pending.spec.ts:6:5 › debrief failure protects the submitted draft and meeting dismissal while saving (5.2s)
+  ✓  5 test/browser/settings-client-continuity.spec.ts:24:1 › verified client survives Modules, Settings sections and all product destinations (4.8s)
+  ✓  6 test/browser/settings-client-continuity.spec.ts:69:1 › unavailable client never blocks account Settings or escapes in mode links (4.9s)
+  ✓  7 test/browser/settings-client-continuity.spec.ts:94:1 › Settings client replacement hides former scope until the replacement is verified (3.1s)
+
+  7 passed (57.2s)

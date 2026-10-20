@@ -1,0 +1,25 @@
+[WebServer] (node:22028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node24 --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 1 worker
+
+(node:19316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node24 --trace-warnings ...` to show where the warning was created)
+  ok  1 test\browser\explorer-dataset-selection.spec.ts:21:1 ΓÇ║ Comment Deadlines clears the prior dataset selection while preserving search and bill filters (2.6s)
+  ok  2 test\browser\modules.spec.ts:16:3 ΓÇ║ Planner primary route renders through the canonical session/API boundary (1.8s)
+  ok  3 test\browser\modules.spec.ts:16:3 ΓÇ║ Workspace primary route renders through the canonical session/API boundary (1.8s)
+  ok  4 test\browser\modules.spec.ts:16:3 ΓÇ║ Intelligence Center primary route renders through the canonical session/API boundary (1.7s)
+  ok  5 test\browser\planner-resource-context.spec.ts:38:1 ΓÇ║ Planner resource tabs contain the opened dashboard and editor kind across repeated switches (2.2s)
+  ok  6 test\browser\planner-resource-context.spec.ts:72:3 ΓÇ║ Planner preserves existing dashboard draft and captured write target through history (2.1s)
+  ok  7 test\browser\planner-resource-context.spec.ts:72:3 ΓÇ║ Planner preserves new dashboard draft and captured write target through history (2.1s)
+  ok  8 test\browser\planner-resource-dialog-context.spec.ts:16:1 ΓÇ║ Open Planner form keeps unsaved answers and file selection through resource history (2.0s)
+  ok  9 test\browser\planner-resource-dialog-context.spec.ts:79:1 ΓÇ║ Open Planner template copy keeps its project draft through resource history (1.9s)
+  ok 10 test\browser\remaining-modules.spec.ts:339:1 ΓÇ║ MS07 regression: Workspace filters share a compact desktop row and wrap on phones (2.0s)
+  ok 11 test\browser\workspace-ownership-state.spec.ts:132:3 ΓÇ║ Mine waits for identity while Everyone, filters and pagination remain usable (2.6s)
+  ok 12 test\browser\workspace-ownership-state.spec.ts:172:3 ΓÇ║ Mine exposes identity failure and keyboard retry without clearing filters (2.4s)
+  ok 13 test\browser\workspace-ownership-state.spec.ts:132:3 ΓÇ║ Shared with me waits for identity while Everyone, filters and pagination remain usable (2.6s)
+  ok 14 test\browser\workspace-ownership-state.spec.ts:172:3 ΓÇ║ Shared with me exposes identity failure and keyboard retry without clearing filters (2.4s)
+  ok 15 test\browser\workspace-ownership-state.spec.ts:220:1 ΓÇ║ history remount waits for the current identity and ignores a former library read (3.1s)
+  ok 16 test\browser\workspace-ownership-state.spec.ts:266:1 ΓÇ║ Everyone retains document failure and retries documents independently of identity (1.8s)
+
+  16 passed (43.2s)

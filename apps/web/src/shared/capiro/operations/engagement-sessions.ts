@@ -108,6 +108,20 @@ const commands = z.union([
   ),
 ]);
 export const engagementSessionOperations = {
+  "engagement.session.create": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/engagement/outreach-v3/sessions",
+    request: z
+      .object({
+        body: z
+          .object({ title: z.string().trim().min(1).max(240).optional() })
+          .strict(),
+      })
+      .strict(),
+    response: detail,
+    source,
+  }),
   "engagement.sessions": defineOperation({
     service: "core",
     method: "GET",

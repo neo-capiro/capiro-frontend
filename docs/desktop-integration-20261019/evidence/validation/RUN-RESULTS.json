@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "f32ed6ff32df0af36f04b5933a0e9ea356d22526",
+  "scope": "local source/fixture verification only",
+  "finalAffectedBrowser": {
+    "command": "CAPIRO_QA_CHROMIUM_EXECUTABLE=/workspace/scratch/e6e7fb63a383/mockup-qa/chromium npx playwright test --config test/browser/playwright.config.ts modules.spec.ts objective-operational-navigation.spec.ts outreach-list-scope.spec.ts --grep 'Engagement primary route|scoped Outreach refuses|current Strategy|current project|replacing a current'",
+    "cwd": "apps/web",
+    "exitCode": 0,
+    "passed": 9
+  },
+  "finalAffectedTypecheck": {
+    "command": "NODE_OPTIONS=--max-old-space-size=4096 npm run typecheck",
+    "cwd": "apps/web",
+    "exitCode": 0
+  },
+  "defaultHeapTypecheckAttempt": {
+    "exitCode": 134,
+    "reason": "Node JavaScript heap limit",
+    "log": "test-correction-typecheck-heap-limit.log"
+  },
+  "finalAffectedLint": {
+    "command": "npx eslint test/browser/modules.spec.ts test/browser/outreach-list-scope.spec.ts test/browser/objective-operational-navigation.spec.ts",
+    "cwd": "apps/web",
+    "exitCode": 0
+  },
+  "boundaryDiffs": {
+    "meriVsReceivedPr98": "empty",
+    "frozenInputsVsPr101": "empty"
+  },
+  "productionBuild": {
+    "exitCode": 0,
+    "pages": 283
+  },
+  "liveVerified": false
+}

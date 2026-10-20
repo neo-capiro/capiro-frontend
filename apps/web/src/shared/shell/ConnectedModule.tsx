@@ -9,15 +9,21 @@ export function ConnectedModule({
   children,
   active,
   settings = false,
+  readOnlyPreview = false,
 }: {
   children: ReactNode;
   active?: ModuleSlug | "hub";
   settings?: boolean;
+  readOnlyPreview?: boolean;
 }) {
   const config = publicCapiroConfig(readCapiroConfig(process.env));
   return (
-    <ModuleShell active={active} settings={settings}>
-      <CapiroBoundary config={config}>
+    <ModuleShell
+      active={active}
+      settings={settings}
+      readOnlyPreview={readOnlyPreview}
+    >
+      <CapiroBoundary config={config} clientScopeRequired={!settings}>
         <Suspense fallback={<p role="status">Loading view…</p>}>
           {children}
         </Suspense>

@@ -741,7 +741,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -885,7 +885,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each job\u2019s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u2019s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each job’s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload’s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -1131,10 +1131,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLog",
-    "fingerprint": "6e65e83a40d922201dfb33d108220460161361ad0d27dfee70864c4ba6206b6e",
-    "reason": "One activity form composes supported direct and generic follow-up fields with retained recovery and Undo presentation. Submission validation captures one input while useQuickLog and useFollowUpCommand own the direct mutation and saga; the view holds no service authority.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "ea36a1f5f6321725ff59874409c84faba8da1d153ddd9a89891af3e5f5bdfd6e",
+    "reason": "Existing Quick Log form composition retains canonical direct mutation, durable follow-up, detail-field and receipt owners. One fieldsLocked value consistently applies direct pending, uncertain outcome and retained-command state to the captured inputs. No activity domain rule, transaction owner or recovery state machine is added. The render length is existing structural debt; this bounded change adds no unrelated responsibility.",
+    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
+    "reviewedOn": "2026-10-19"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
@@ -1420,7 +1420,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2365,7 +2365,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2508,10 +2508,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "639f600f496520d0d3076e50db17d2f6cb221783a63fd0ba6dec6390e768852a",
-    "reason": "The 630-line module retains named children for the existing ordinary draft form and campaign session, and adds only list/filter presentation with Core reads. Removed Engagement tabs do not leave imported owners here. This module does not add a send path or new authority. Independent review and limits: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
-    "reviewedBy": "Codex independent Engagement source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "0fa8a3fb90005b27c3f7d336009d29764e5577df2bcee82e93bd1979ba08f90d",
+    "reason": "The 634-line module adds only a campaign-create child to the existing owner-wide list header. The write state, form and Core operation stay isolated in CampaignCreate; no send path or new authority is added. Independent review and limits: docs/outreach-campaign-create-20261018/STRUCTURE-REVIEW.md#outreach-view.",
+    "reviewedBy": "Codex independent /root/outreach_create_review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
@@ -2571,18 +2571,27 @@
     "file": "apps/web/src/features/modules/hub/ModuleHub.tsx",
     "kind": "function",
     "symbol": "ModuleHub",
-    "fingerprint": "923d94036a7ecb123752a0d0710f5ccad80764f08ca16545904caea47ba805b3",
-    "reason": "One module catalogue view binds the available-client read, selected-client URL hint, fixed group order and page heading. Cards and relationship visuals are separate components; the new frame target and copy introduce no second state or workflow.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "2b6d8e2cfdda43104450cba21d8bf61bcc8b02556eae24df34ce6fefa7b7bc8e",
+    "reason": "One Modules hub owns the client-scope presentation and fixed module catalog. The limited preview uses the existing fixed clients.list operation, masks stale/error data, lists visible profiles without selecting an unqualified detail route, and holds module destinations. The ordinary branch keeps its existing selector; transport and authority remain separate.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "function",
     "symbol": "PortfolioIndex",
-    "fingerprint": "085ac0fc0e4ac8013bf7e0eff82bd5e0129293cfa23f69455d710bc14dbd8afc",
-    "reason": "This one Portfolio page reads URL filters and four scoped queries, then composes header, results, empty/error and customization states. Linked Core/BD deduplication, filtering and capped-count policy now belong to the pure catalog-projection module with focused tests; IndexNavigation, PortfolioProfiles, ProspectResults, PortfolioAttention, GlobalQuickLog and dialogs retain their respective surfaces. No persistence or business rule is hidden in this route renderer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "8c9e687baf07154d496c1502e91bf16dc154c802e18e8fe7e28847a904ca9a05",
+    "reason": "This ordinary Portfolio page composes scoped Core, owner, identity and BD queries with navigation, results, empty/error and customization states; projection and child surfaces remain separate. The changed query gate stops BD reads and cached BD data on the Clients tab without adding transport, persistence, or another authority owner.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PreviewClientCatalog.tsx",
+    "kind": "function",
+    "symbol": "PreviewClientCatalog",
+    "fingerprint": "b1f493aea8a1da758ac1f75de6f5eda6f3c46f3c58de47dc5f9e59da454c4304",
+    "reason": "One limited Portfolio client-list presentation reads the existing fixed clients.list operation and offers local search. It does not mount client selection, owner, layout, alert, prospect, profile-detail or write controls; the shell, query error component and filter rule retain their respective ownership.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
   {
@@ -2598,10 +2607,10 @@
     "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
     "kind": "function",
     "symbol": "Shell",
-    "fingerprint": "74ff011f5a56e14bc4e013e6063db13526bd052a14e170431093960f4bdc6af4",
-    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
-    "reviewedOn": "2026-10-14",
-    "reason": "Existing Portfolio header/navigation/session composition. Shared HeaderFrame owns geometry; canonical ModeLink owns scoped product routes; existing global actions and mobile navigation stay reachable. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+    "fingerprint": "dcfe808822c6c881e9bcd05e7b79dbd0b81808e30378ba5477204007296fb890",
+    "reason": "One existing Portfolio shell composition. Settings now uses the canonical ScopedLink to retain a service-verified navigation hint. Client admission, data mutations and server authority remain with their existing owners.",
+    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
+    "reviewedOn": "2026-10-19"
   },
   {
     "file": "apps/web/test/rendered-contrast.ts",
@@ -3039,10 +3048,10 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
     "kind": "function",
     "symbol": "MeetingWorkspace",
-    "fingerprint": "5945312430892d503218ad5cb0e13c2f57839d5c4ce937b21edcb31afa877a9a",
-    "reason": "One selected meeting workspace owns its tab and edit, assign and share dialog lifetime. Current-data gating and the child write owners remain separate; the expanded presentation does not introduce another meeting workflow.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "997e4d9113ddb09b9e7ae75f6da8103063d0a9ddd22efab3ba89332dc8d9d4f1",
+    "reason": "One meeting workspace owns tab selection and its edit, assignment and sharing dialogs. Passing the existing read freshness and retry action into its editor preserves that single workspace lifecycle; feature-specific panels remain delegated.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
@@ -3057,10 +3066,10 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
     "kind": "function",
     "symbol": "MeetingWorkspacePage",
-    "fingerprint": "3b82e43497f4fd55d6b762ccfa1a3a1af19cf747a8e820a9b08c76abbdfc354e",
-    "reason": "One client-scoped month list is bound to the selected meeting detail with the same client and date scope. The detail component and query module own their respective presentation and read behavior.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "e440fd6e13d7206114fcb74f702c8a7a1c6e34e2c11d573728e68e248b59bc73",
+    "reason": "One selected-meeting page presents the monthly meeting sidebar and selected detail. The empty-state predicate uses its existing feed statuses, keeping loading, error and empty presentation together without adding another data owner.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityLocationFacts.tsx",
@@ -3138,8 +3147,8 @@
     "file": "apps/web/src/shared/capiro/operations/settings.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "e38a3a57357aaaf7e15e7f96c67b8dd20b6e13aee1a187e876bc8550b9cb1dac",
-    "reason": "This is the declarative fixed settings-operation catalogue: each descriptor has a bounded path, strict request/response schema and controller provenance. New account-owner and Microsoft subscription descriptors add no HTTP dispatch, browser authority or UI state; splitting this catalogue would fragment the canonical operation registry.",
+    "fingerprint": "937d7de1d3d37d84e60a158cb205a5ac4de63a8024d3d94c63e96adc3f46b551",
+    "reason": "This declarative fixed settings-operation catalogue keeps each bounded path, request and response schema, and controller provenance together. The existing clients.list response now retains Core's optional profileType field for the limited Portfolio roster filter; no new dispatch, browser authority or UI state was added. Splitting this catalogue would fragment the canonical operation registry.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -3147,9 +3156,9 @@
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7cb93c9e40f94d91067247ad1b20b9291d4ab91736ca93ab6d266c701b60bc8a",
-    "reason": "This one Portfolio index route composes Core, Business Development, owner and identity reads with header, results, empty/error and customization views. Linked-record deduplication, filtering and capped-count policy were extracted to catalog-projection.ts and tested for mixed, linked and capped data; remaining components own navigation, cards, alerts, dialogs and mutations. Its length is the route's conditional presentation, not an additional authority owner.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "4e92a17763ad0bb2e4ed574aecf220a8975771d685e817821908f733ad4175fd",
+    "reason": "The file keeps the ordinary Portfolio route composition and week label together while catalog projection, navigation, cards, attention, dialogs and mutations stay in their existing owners. The added Clients-tab query gate reduces unneeded BD work and does not add a second workflow or backend authority.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
   {
@@ -3178,5 +3187,59 @@
     "reason": "This hook composes one selected conversation lifetime: connection, saved-history view, draft and next-turn intent. Selecting a newly bound accepted run retires only the predecessor draft capture while retaining typed text; replacement sessions for the same run retain its capture. Request/run matching lives in initial-draft.ts and command identity remains in the canonical journal. Independent cross_run_review found no additional responsibility requiring extraction.",
     "reviewedBy": "Codex root and independent cross_run_review",
     "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/shared/meetings/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "useArtifacts",
+    "fingerprint": "b5a074c2717bbbd256088f6bd59ac392a3e782126d74aa185fffbf52645ffbef",
+    "reason": "One meeting-material editing/approval lifecycle. Notes and debrief preserve separate registered operations and canonical transport/authority. The synchronous reservation and parent notification protect the same draft operation. Independent source review found no additional responsibility; focused fixture coverage proves create success/failure, duplicate submission and Escape, not update/approval/disposal or live policy.",
+    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+    "kind": "function",
+    "symbol": "MeetingDetail",
+    "fingerprint": "dc1aeb8c9614cf4cbc44fe46fde9cb9b544cee8b27618ff18121790ded9420cb",
+    "reason": "One current meeting workspace presentation: detail association, material tab, header and modal/inline dismissal. Pending state and its synchronous ref protect the same active operation across local exits; separate header and materials owners remain. Independently reviewed without introducing a writer or authority policy.",
+    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
+    "kind": "function",
+    "symbol": "SessionEditor",
+    "fingerprint": "6d0d2c049d5931964936780cd6c038baef557ae3ab8ce9e336b760802da8fdb6",
+    "reason": "One admitted campaign-state presentation: readiness, six editable decision fields, error/pending state and existing unavailable workflow actions. Busy state is consumed consistently; no API, authority, generation or send responsibility is added. CampaignGoal remains the cohesive goal-field presenter.",
+    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
+    "kind": "function",
+    "symbol": "useSessionEditor",
+    "fingerprint": "e2c0ca193d25f12532c892595d8289cfcbc6193bc676afa981a074d7a80f70bd",
+    "reason": "One existing campaign decision-save lifecycle owns six local fields, explicit SET commands, stable batch identity and registered request settlement. The synchronous reservation prevents same-task duplicate submission and informs parent navigation during the same attempt. Native authorization, command execution and persistence remain outside; successful observation triggers a fresh selected-session read.",
+    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "kind": "function",
+    "symbol": "MeetingForm",
+    "fingerprint": "92c55dfd8e1b1d1428c171e9375926053c52b125026f63090d7e3f79a521c771",
+    "reason": "This form owns one meeting draft, local validation and save feedback. Read freshness and a refresh action govern that same draft, while useSaveMeeting owns dispatch, receipt validation and uncertainty. Splitting fields solely for line count would fragment one transaction.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
+    "kind": "function",
+    "symbol": "useSaveMeeting",
+    "fingerprint": "2aa3f92cc30eae04465f5048d3d5a7c359ecae2a8acfa263ddc7a9a512d20fde",
+    "reason": "One editor save lifecycle owns live-read admission, single-flight state, abort, response verification and cache invalidation. The original client association is independent of the selected reassignment destination. Schemas and canonical identity policy remain delegated; this guard adds no separate workflow.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
   }
 ]

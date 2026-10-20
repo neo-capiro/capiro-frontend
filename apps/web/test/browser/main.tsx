@@ -230,6 +230,7 @@ function RoutedApp() {
         ) : (
           <CapiroBoundary
             config={{ publishableKey: "pk_test_YQ==", configured }}
+            clientScopeRequired={!isSettings}
           >
             {path === "/__test/task-detail-refresh" ? (
               <TaskDetailRefreshProbe />

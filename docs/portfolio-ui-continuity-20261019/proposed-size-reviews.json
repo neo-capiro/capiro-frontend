@@ -1,0 +1,38 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+    "kind": "function",
+    "symbol": "MeetingWorkspace",
+    "fingerprint": "997e4d9113ddb09b9e7ae75f6da8103063d0a9ddd22efab3ba89332dc8d9d4f1",
+    "reason": "One meeting workspace owns tab selection and its edit, assignment and sharing dialogs. Passing the existing read freshness and retry action into its editor preserves that single workspace lifecycle; feature-specific panels remain delegated.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "kind": "function",
+    "symbol": "MeetingForm",
+    "fingerprint": "92c55dfd8e1b1d1428c171e9375926053c52b125026f63090d7e3f79a521c771",
+    "reason": "This form owns one meeting draft, local validation and save feedback. Read freshness and a refresh action govern that same draft, while useSaveMeeting owns dispatch, receipt validation and uncertainty. Splitting fields solely for line count would fragment one transaction.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
+    "kind": "function",
+    "symbol": "MeetingWorkspacePage",
+    "fingerprint": "e440fd6e13d7206114fcb74f702c8a7a1c6e34e2c11d573728e68e248b59bc73",
+    "reason": "One selected-meeting page presents the monthly meeting sidebar and selected detail. The empty-state predicate uses its existing feed statuses, keeping loading, error and empty presentation together without adding another data owner.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
+    "kind": "function",
+    "symbol": "useSaveMeeting",
+    "fingerprint": "2aa3f92cc30eae04465f5048d3d5a7c359ecae2a8acfa263ddc7a9a512d20fde",
+    "reason": "One editor save lifecycle owns live-read admission, single-flight state, abort, response verification and cache invalidation. The original client association is independent of the selected reassignment destination. Schemas and canonical identity policy remain delegated; this guard adds no separate workflow.",
+    "reviewedBy": "Codex independent pr_overlap_audit",
+    "reviewedOn": "2026-10-19"
+  }
+]

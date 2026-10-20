@@ -66,6 +66,16 @@ Parameters:
     Type: String
     Default: ""
     AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/api"]
+  CapiroPreviewClientRosterBackendSource:
+    Type: String
+    Default: ""
+    AllowedValues: [""]
+    Description: Reviewed Core source b97a3286487abcda6a7424cf1dc2812d93b65b3d; held until combined serving image and digest are qualified
+  CapiroPreviewClientRosterApiBaseUrl:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "https://core-roster-preview.capiro.ai/api"]
+    Description: Dedicated roster origin; cannot be staged while the source is held
   MeriFirstChatBootstrapEnabled:
     Type: String
     Default: "false"
@@ -128,6 +138,20 @@ Rules:
     Assertions:
       - Assert: !Equals [!Ref CapiroPreviewReadApiBaseUrl, ""]
         AssertDescription: A Core read target cannot be staged without the reviewed source
+  PreviewClientRosterRequiresPairedTarget:
+    RuleCondition: !Not [!Equals [!Ref CapiroPreviewClientRosterBackendSource, ""]]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewClientRosterApiBaseUrl, "https://core-roster-preview.capiro.ai/api"]
+        AssertDescription: Reviewed Core roster source requires its exact dedicated API target
+      - Assert: !Equals [!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"]
+        AssertDescription: Core roster requires the reviewed preview read source
+      - Assert: !Equals [!Ref CapiroPreviewReadApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/api"]
+        AssertDescription: Core roster requires the reviewed preview read target
+  PreviewClientRosterHeldWithoutSource:
+    RuleCondition: !Equals [!Ref CapiroPreviewClientRosterBackendSource, ""]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewClientRosterApiBaseUrl, ""]
+        AssertDescription: A Core roster target cannot be staged without the reviewed source
   FirstChatRequiresCurrentBindings:
     RuleCondition: !Equals [!Ref MeriFirstChatBootstrapEnabled, "true"]
     Assertions:
@@ -416,6 +440,10 @@ Resources:
               Value: !Ref CapiroPreviewReadBackendSource
             - Name: CAPIRO_PREVIEW_READ_API_BASE_URL
               Value: !Ref CapiroPreviewReadApiBaseUrl
+            - Name: CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE
+              Value: !Ref CapiroPreviewClientRosterBackendSource
+            - Name: CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL
+              Value: !Ref CapiroPreviewClientRosterApiBaseUrl
             - Name: MERI_FIRST_CHAT_BOOTSTRAP_ENABLED
               Value: !Ref MeriFirstChatBootstrapEnabled
             - Name: MERI_FIRST_CHAT_CLIENT_ID

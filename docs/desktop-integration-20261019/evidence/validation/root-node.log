@@ -1,0 +1,233 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 test
+> node --test scripts/*.test.mjs apps/web/test/*.test.mjs --test-concurrency=2
+
+✔ query, selection and edited review prepare an immutable pending proposal without execution (14.823307ms)
+✔ an edit invalidates a reviewed draft and preparation cannot use its former handle (0.586772ms)
+✔ held draft locks the exact submitted edits and synchronous duplicate requests (2.105163ms)
+✔ execution refusal stays pending; later deliberate execution and replay use the identical handle (1.459031ms)
+✔ held execution admits only one click until its response settles (8.953196ms)
+✔ a newer unknown execution retires the former approval refusal and fences repetition (4.181428ms)
+✔ a newer result-withheld execution retires the former approval refusal and fences repetition (1.45563ms)
+✔ a newer stored-withheld execution retires the former approval refusal and fences repetition (0.337353ms)
+✔ a newer indeterminate execution retires the former approval refusal and fences repetition (0.524ms)
+✔ a newer thrown execution retires the former approval refusal and fences repetition (0.850868ms)
+✔ unknown does not schedule or admit a repeat and never claims successful execution (0.44062ms)
+✔ result-withheld does not schedule or admit a repeat and never claims successful execution (0.200597ms)
+✔ stored-withheld does not schedule or admit a repeat and never claims successful execution (0.173379ms)
+✔ not-stored does not schedule or admit a repeat and never claims successful execution (0.102284ms)
+✔ read-unavailable does not schedule or admit a repeat and never claims successful execution (0.104836ms)
+✔ invalid-response does not schedule or admit a repeat and never claims successful execution (0.200212ms)
+✔ not-dispatched does not schedule or admit a repeat and never claims successful execution (0.133086ms)
+✔ acknowledged indeterminate result and thrown transport error both withhold success and further requests (0.377354ms)
+✔ lost current authority removes all former recommendations, editable inputs and proposal details (0.16684ms)
+✔ a denied current reread removes prior recommendation cards instead of treating their cache as current (0.126098ms)
+✔ actor lifetime disposal aborts local observation and rejects a late former proposal (0.210809ms)
+✔ tenant lifetime disposal aborts local observation and rejects a late former proposal (0.216497ms)
+✔ session lifetime disposal aborts local observation and rejects a late former proposal (0.264132ms)
+✔ client lifetime disposal aborts local observation and rejects a late former proposal (0.165292ms)
+✔ reattachment never resurrects a request from before disposal (0.325224ms)
+✔ failed observed receipt is displayed as failure, never converted into task creation success (3.996037ms)
+✔ all nineteen exact design assets are local, nonempty, hash-bound and retain intrinsic SVG dimensions (36.45836ms)
+✔ the new Meri wordmark is separately provenanced, local and uses its exact alpha-mask bytes (1.234518ms)
+✔ Routines adopts the separately exported exact SVG and preserves its intrinsic dimensions (1.099085ms)
+✔ no application source retains temporary Figma asset URLs or screenshot implementation imagery (0.464992ms)
+✔ all22 cited-answer Figma assets retain their exact local bytes and intrinsic geometry (44.6519ms)
+✔ cited-answer source and styling use local assets without screenshot implementation imagery (0.50055ms)
+✔ synthetic: explicit conversation selection never inherits the previous conversation run hint (12.718972ms)
+✔ synthetic: ordinary current selection and explicit selection retain independent exact hints (0.479504ms)
+✔ synthetic: replaced canonical cache cannot be repopulated by a former selection owner (0.321087ms)
+✔ synthetic: actor, tenant and selected-client replacements never inherit a selected run (0.465318ms)
+✔ synthetic: an explicit canonical conversation selector survives reload as the same hint (4.323283ms)
+✔ synthetic: absent selector permits current selection while empty/malformed selectors never broaden (1.165739ms)
+✔ synthetic: duplicate conversation selectors fail closed even when equal (0.298777ms)
+✔ every registered fixture screen is a distinct audited Figma 3.4 frame (59.513575ms)
+✔ each area file is registered and fixture links only target registered screens (39.623374ms)
+✔ every decision-outcome approval count names a registered fixture screen (3.035142ms)
+✔ synthetic: discovery omits other clients but rejects another actor even in an omitted row (2.082952ms)
+✔ synthetic: repeated discovery rows cannot be silently merged across pages (0.178815ms)
+✔ synthetic: conversation sequence continuity never overwrites original run-local sequence (0.744623ms)
+✔ synthetic: page gaps and duplicated immutable event IDs fail closed (2.230984ms)
+✔ synthetic: changed stored prompt, binding and final sequence range fail across page boundaries (0.549529ms)
+✔ synthetic: resumed prompt lineage must correlate across pages, without text deduplication (0.287992ms)
+✔ synthetic: a resume cannot rewrite prompt or optional window presence across separate pages (2.596001ms)
+✔ synthetic: adjacent saved ranges cannot overlap or leave a gap across pages (0.3326ms)
+✔ synthetic: resumed run segments share one logical prompt while distinct submissions remain distinct (1.970485ms)
+✔ synthetic: fork identity is conversation-local even if logical request identifiers coincide (0.245086ms)
+✔ synthetic: absent lineage never hides a prompt based on earlier missing lineage (0.395953ms)
+✔ synthetic: reserve UNKNOWN retains the immutable prompt, submit ID and source before dispatch (21.007287ms)
+✔ synthetic: recovery replays the original source even when its target was accepted (0.781692ms)
+✔ synthetic: a changed target after the original receipt is rejected (1.14942ms)
+✔ synthetic: stale reservation completion cannot restore an identity after canonical cache replacement (1.429621ms)
+✔ synthetic: hard reload and a different client never reconstruct first-submit identity from RESERVED (1.244628ms)
+✔ synthetic: foreign source binding is rejected and only the accepted successor can begin the next intent (0.985954ms)
+✔ synthetic: late recovery of an older source cannot replace a successor command identity (1.292193ms)
+✔ synthetic: the retained receipt snapshots bindings instead of keeping a caller-mutable target (1.812774ms)
+✔ Modules shared assets retain exact native export bytes and intrinsic SVG roots (23.464285ms)
+✔ every API handler applies preview admission before any route work (88.152664ms)
+✔ preview policy stays in server entry points with no request-derived configuration (3909.12703ms)
+✔ all eight canonical run states display explicit labels without inferred completion (41.906677ms)
+✔ fixture events all validate with the public browser contract; unknown scenarios fail (18.972039ms)
+✔ selected run and attempt isolate colliding message and tool request IDs (2.369428ms)
+✔ message fragments concatenate in accepted order; sparse references stay exact (8.358283ms)
+✔ unmatched completion never invents a tool name, arguments or business success (16.611681ms)
+✔ canonical safe error rendering never exposes raw text or prototype-looking codes (9.31364ms)
+✔ canonical projection owns replay and sequence repair before presentation (2.267569ms)
+✔ fixture canonical admission rejects cross-view and immutable-event conflicts (0.732343ms)
+✔ presentation does not mutate accepted events or include unsupported metadata (9.939339ms)
+✔ Settings presentation never exposes HQ or workspace management to customer standard roles (0.949259ms)
+✔ Billing mirrors both the user admin role and independent billing-admin grant (0.234985ms)
+✔ Hosted account navigation rejects unsafe schemes, misleading hosts and credentials (0.416226ms)
+✔ Bulk intelligence review excludes award-bearing, PAC, unknown, resolved and weak mappings (0.205517ms)
+✔ Work Strategy and step links are internal exact-client selectors (1.896224ms)
+✔ New strategy opens the existing creation owner with a client hint (1.460063ms)
+✔ view/client navigation replaces owned selectors and preserves unrelated query context (0.595451ms)
+✔ query selection is read afresh rather than retained from an earlier URL (0.291045ms)
+✔ duplicate clientId selectors fail closed (0.338163ms)
+✔ duplicate strategy selectors fail closed (0.174338ms)
+✔ duplicate step selectors fail closed (0.342844ms)
+✔ duplicate view selectors fail closed (0.231343ms)
+✔ duplicate create selectors fail closed (0.229418ms)
+✔ orphan step and conflicting or unknown create commands fail closed (0.863028ms)
+✔ a step resolves only by unique current membership in the admitted Strategy (0.47753ms)
+✔ six local suggestions produce distinct editable draft text without executable authority (7.044487ms)
+✔ task update controller dispatches only explicit choices and locks the immutable prepared patch (9.819807ms)
+✔ a late prepared response cannot repopulate a disposed/replaced view (0.566113ms)
+✔ uncertain disposition fences new writes and causes no automatic retry (0.634376ms)
+✔ conversation receiving admits its two deliberate public seams (17.65744ms)
+✔ conversation receiving does not admit private service, cursor or schema entry points (9.282338ms)
+✔ conversation proxy does not allocate an additional per-operation server route (3.927544ms)
+✔ conversation catch-all route remains allocated only to auth, preview, config and fixed proxy owners (4.300789ms)
+✔ action route is allocated only to the existing auth and narrow adapter owners (55.539285ms)
+✔ action route allocation does not admit another endpoint or a large handler (24.738004ms)
+✔ action receiver is public while private runtime ownership stays forbidden (0.665071ms)
+✔ document routes retain exact auth/config/proxy ownership (73.454537ms)
+✔ document allocation does not admit upload/list routes or a large handler (33.658684ms)
+✔ only published document package exports cross the receiving boundary (2.453359ms)
+✔ signed download links get exactly one thin route over their own fixed proxy (6.077211ms)
+✔ only the allocated receiving owner may use the exact public snapshot producer (102.968411ms)
+✔ only the explicit server pricing owner may receive the two public copy exports (28.485246ms)
+✔ server pricing admission refuses missing marker, client use, namespaces, require and broader symbols (5.029516ms)
+✔ the server pricing projection cannot be imported directly by feature or client foundations (6.539078ms)
+✔ preview policy is allocated only to the existing backend entries and Next proxy (95.810101ms)
+✔ preview policy cannot leak into client features, foundations, pages or unallocated routes (4.844552ms)
+✔ all preview internals are server allocated, including through client foundations (31.006246ms)
+✔ only the two server-rendered preview pages may read the qualified UI mode (24.856197ms)
+✔ first-chat gateway is allocated only to the Capiro server route (1.522644ms)
+✔ an exact reviewed source retains all signals and records their disposition (7.18516ms)
+✔ changed bytes, new signals, absent evidence and incomplete rationale require another review (0.694547ms)
+✔ reviews cannot waive boundary failures and duplicate records fail (25.689824ms)
+✔ task command routing admits only thin canonical-auth/proxy composition (38.562314ms)
+✔ private or unapproved task contract paths remain unavailable (5.826926ms)
+✔ Hub can reuse the canonical adopted tooltip without access to private UI paths (23.919456ms)
+✔ personal settings has exactly its thin native-auth server allocation (27.088397ms)
+✔ only deliberate supplemental package export crosses the preferences boundary (1.377004ms)
+✖ real route retains preview containment before native token acquisition (2.307521ms)
+✔ personal page opt-in remains literal and existing preferences alias reaches canonical panel (0.321765ms)
+✔ discovers real route composition and accepts directed local imports (13.514102ms)
+✔ run workspace admits only its three approved additional public seams (1.720709ms)
+✔ rejects cycles, feature-private crossing, private package and external repository paths (1.128342ms)
+✔ rejects computed loading and undeclared server endpoints (2.529506ms)
+✔ an unallocated backend route cannot bypass the guard by changing source extension (5.494884ms)
+✔ allocated Modules and Settings may use shared adapters and the narrow Capiro gateway (1.396217ms)
+✔ size and function thresholds require explicit review instead of silent exceptions (21.284231ms)
+✔ authored stylesheets retain the same file-size review threshold (43.314398ms)
+✔ browser client resolves emitted JS imports and refuses server or Node contract entries (1.196916ms)
+✔ resolved relative imports cannot cross application and package ownership in either direction (8.516302ms)
+✔ same-owner relative edges and explicitly approved public package imports stay valid (0.562126ms)
+✔ all assigned product features are allocated (18.059516ms)
+✔ relative and alias imports cannot reverse foundation or route composition direction (13.395514ms)
+✔ Portfolio domains cross only deliberate public entries while routes compose views (4.874247ms)
+✔ Portfolio and Meri keep private feature boundaries in both directions (4.343516ms)
+✔ aliases resolve emitted JS and expose cycles or cross-owner access (1.004193ms)
+✔ only the allocated thin server adapters can import their narrow dependencies (19.441429ms)
+✔ Portfolio keeps typed boundaries and configured origins across feature, foundation and route sources (1.405552ms)
+✔ remote origins cannot hide behind template literals or deceptive localhost authorities (1.622801ms)
+✔ type imports, require calls and computed loads preserve package and feature boundaries (0.974813ms)
+✔ inherited unchanged size findings stay reported and unreviewed without pretending approval (3.070534ms)
+✔ provenance cannot approve a new path, different commit or unrelated Meri source (3.90056ms)
+✔ explicit size reviews bind one exact function and reopen after a body or signature change (6.455042ms)
+✔ file reviews never approve an unreviewed oversized function within the file (5.465868ms)
+✔ duplicate or incomplete review evidence fails instead of silently choosing an allowance (2.027248ms)
+✔ an invalidated explicit review is not silently replaced by unchanged transfer provenance (1.595318ms)
+✔ transfer canonicalization changes only the exact agreed module paths (0.81251ms)
+✔ newsletter browser boundary admits only its two governed public subpaths (0.437132ms)
+✔ shipping SSR entry is import-safe and refuses invalid/reused output before download (1120.937275ms)
+✔ container smoke documents exits and rejects invalid input before Docker allocation (51.933103ms)
+✔ Docker context regression is import-safe and refuses invalid or reused outputs before allocation (1949.199549ms)
+✔ newsletter declarations import/help and invalid arguments allocate no qualification resources (1646.075524ms)
+✔ newsletter browser-check import/help and invalid arguments allocate no qualification resources (1197.898091ms)
+✔ preview proposes held Meri defaults while unavailable services stay disabled (7.970105ms)
+✔ Meri opt-in requires an explicit canonical HTTPS root origin (2.401194ms)
+✔ explicit Meri origin and opt-in form one exact, reviewable parameter proposal (2.128178ms)
+✔ Core read and first chat remain held until all exact bindings are supplied together (1.436571ms)
+✔ qualified Core roster adds a separate pair without switching first-chat reads or bootstrap (11.136954ms)
+✔ preview rejects unknown, missing, credential-valued and mismatched Clerk bindings (1.010773ms)
+✔ preview rejects retained or overridden production parameters and ambiguous sets (2.177862ms)
+✔ preview template constrains every explicit configuration value and keeps held services blank (17.523887ms)
+✔ roster template rejects an origin until the reviewed Core source is pinned (2.293014ms)
+✔ PR70 one-shot override covers changed first-chat behavior and exact image/scan gates (4.169037ms)
+✔ preview CLI is import-safe, ignores hostile ambient values and never echoes rejected secrets (2204.829922ms)
+✔ package binding detects byte corruption independently of filename/version (5.212285ms)
+✔ untrusted artifact paths and malformed bindings fail before file reads (0.426394ms)
+✔ file, commit and hash reject coercible nonstrings before any artifact read (1.950102ms)
+✔ all record shapes are validated before reads, including a malformed later binding (1.227717ms)
+✔ validated primitive snapshots survive reader mutation of a later input record (2.147474ms)
+✔ retained task-command public generated input matches producing source and deliberate export (5.532347ms)
+✔ task-command snapshot refuses missing, duplicate, substituted and changed file bytes (4.145444ms)
+✔ supplemental user preferences export binds all immutable producing-source bytes (5.131798ms)
+✔ public provenance refuses substituted bytes, filenames and export paths (4.029511ms)
+ℹ tests 175
+ℹ suites 0
+ℹ pass 174
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6201.860177
+
+✖ failing tests:
+
+test at scripts/architecture-user-preferences.test.mjs:29:1
+✖ real route retains preview containment before native token acquisition (2.307521ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /getToken\(\{ template: "capiro" \}\)/. Input:
+
+  'import { auth } from "@clerk/nextjs/server";\n' +
+    'import { previewBackendRejection } from "../../../../../shared/preview/backend-policy.server";\n' +
+    'import { readUserPreferencesConfig } from "../../../../../shared/meri-user-preferences/config";\n' +
+    'import { proxyUserPreferencesRequest } from "../../../../../shared/meri-user-preferences/proxy";\n' +
+    '\n' +
+    'export async function POST(\n' +
+    '  request: Request,\n' +
+    '  context: { params: Promise<{ operation: string }> },\n' +
+    ') {\n' +
+    '  const held = previewBackendRejection(process.env);\n' +
+    '  if (held) return held;\n' +
+    '  const { operation } = await context.params;\n' +
+    '  return proxyUserPreferencesRequest(\n' +
+    '    request,\n' +
+    '    operation,\n' +
+    '    readUserPreferencesConfig(process.env),\n' +
+    '    async () => {\n' +
+    '      const session = await auth();\n' +
+    '      // Meri checks Core identity/membership with this bearer; Core requires the native session `sid`.\n' +
+    '      return session.userId ? session.getToken() : null;\n' +
+    '    },\n' +
+    '  );\n' +
+    '}\n'
+
+      at TestContext.<anonymous> (file:///workspace/scratch/639ce8240192/capiro-frontend/scripts/architecture-user-preferences.test.mjs:32:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'import { auth } from "@clerk/nextjs/server";\nimport { previewBackendRejection } from "../../../../../shared/preview/backend-policy.server";\nimport { readUserPreferencesConfig } from "../../../../../shared/meri-user-preferences/config";\nimport { proxyUserPreferencesRequest } from "../../../../../shared/meri-user-preferences/proxy";\n\nexport async function POST(\n  request: Request,\n  context: { params: Promise<{ operation: string }> },\n) {\n  const held = previewBackendRejection(process.env);\n  if (held) return held;\n  const { operation } = await context.params;\n  return proxyUserPreferencesRequest(\n    request,\n    operation,\n    readUserPreferencesConfig(process.env),\n    async () => {\n      const session = await auth();\n      // Meri checks Core identity/membership with this bearer; Core requires the native session `sid`.\n      return session.userId ? session.getToken() : null;\n    },\n  );\n}\n',
+    expected: /getToken\(\{ template: "capiro" \}\)/,
+    operator: 'match',
+    diff: 'simple'
+  }

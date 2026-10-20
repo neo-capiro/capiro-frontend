@@ -1,0 +1,4 @@
+Recorded command: node --max-old-space-size=4096 node_modules/typescript/bin/tsc --noEmit --incremental false --project apps/web/tsconfig.json
+Working directory: repository root
+Observed exit code: 0
+Compiler output: none

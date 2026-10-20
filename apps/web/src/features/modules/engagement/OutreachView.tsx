@@ -15,6 +15,7 @@ import {
   UnavailableAction,
 } from "../../../shared/module-ui";
 import { CampaignSession } from "./CampaignSession";
+import { CampaignCreate } from "./CampaignCreate";
 import { NewsletterDestination } from "./NewsletterDestination";
 import { newsletterRecordKind } from "./newsletter-route";
 import styles from "./engagement.module.css";
@@ -370,7 +371,10 @@ function CampaignList({
       onRetry={sessions.reload}
     >
       <section className={styles.stack} aria-label="Campaign drafts">
-        <h2>Campaign drafts</h2>
+        <div className={styles.tools}>
+          <h2>Campaign drafts</h2>
+          <CampaignCreate onCreated={setSession} />
+        </div>
         <CampaignTable
           rows={drafts}
           onSelect={setSession}

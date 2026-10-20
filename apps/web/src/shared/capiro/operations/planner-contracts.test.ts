@@ -71,6 +71,23 @@ describe("Planner and engagement wire boundaries", () => {
 });
 
 describe("Engagement campaign decision boundary", () => {
+  it("creates a versioned campaign through the fixed Core session operation", () => {
+    const create = engagementOperations["engagement.session.create"];
+    expect(create.service).toBe("core");
+    expect(create.method).toBe("POST");
+    expect(create.path).toBe("/engagement/outreach-v3/sessions");
+    expect(
+      create.request.safeParse({ body: { title: "Campaign" } }).success,
+    ).toBe(true);
+    expect(create.request.safeParse({ body: {} }).success).toBe(true);
+    expect(
+      create.request.safeParse({ body: { title: "x".repeat(241) } }).success,
+    ).toBe(false);
+    expect(
+      create.request.safeParse({ body: { title: "Campaign", tenantId: id } })
+        .success,
+    ).toBe(false);
+  });
   it("does not permit send commands through the campaign decision operation", () => {
     const base = {
       params: { sessionId: id },

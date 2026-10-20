@@ -1,0 +1,483 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts modules.spec.ts modules-home-design.spec.ts module-shared-shell.spec.ts portfolio-shared-shell.spec.ts figma-parity.spec.ts desktop-closeout.spec.ts settings-scenes.spec.ts settings.spec.ts settings-mutations.spec.ts settings-disconnect-lifetime.spec.ts settings-client-continuity.spec.ts engagement-outreach-only.spec.ts campaign-session-safety.spec.ts outreach-pending.spec.ts outreach-list-scope.spec.ts calendar.spec.ts calendar-visual-closeout.spec.ts next-modules-scope.spec.ts next-modules-baseline.spec.ts auth-initialization.spec.ts auth-readiness-navigation.spec.ts integration.spec.ts session.spec.ts service-error-feedback.spec.ts remaining-modules.spec.ts work-strategy-navigation.spec.ts objective-navigation.spec.ts objective-operational-navigation.spec.ts objective-work-destinations.spec.ts planner-engagement.spec.ts legiwatch.spec.ts meeting-material-pending.spec.ts meri-initial-reconnect.spec.ts --grep-invert 390|phone|mobile|tablet
+
+[WebServer] (node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 218 tests using 1 worker
+
+(node:68) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 test/browser/auth-initialization.spec.ts:13:3 › prolonged sign-in loading offers keyboard reload without admitting private content at 1440px (13.6s)
+  ✓    2 test/browser/auth-initialization.spec.ts:62:1 › SDK ready disposes delayed loading state and permits only the existing protected path (6.3s)
+  ✓    3 test/browser/auth-initialization.spec.ts:87:1 › SDK failed replaces delayed loading with the existing failure state and no private reads (5.5s)
+  ✓    4 test/browser/auth-initialization.spec.ts:126:1 › returning to SDK loading starts a fresh feedback window and conceals the previous private view (6.4s)
+  ✓    5 test/browser/auth-readiness-navigation.spec.ts:9:1 › delayed SDK readiness survives navigation and reload without admitting backend reads early (2.4s)
+  ✓    6 test/browser/auth-readiness-navigation.spec.ts:64:1 › provider loaded and auth loaded remain separate; backend refusal still expires the session (2.3s)
+  ✓    7 test/browser/auth-readiness-navigation.spec.ts:106:1 › ClerkLoaded fixture follows loaded independently of status (2.5s)
+  ✓    8 test/browser/calendar.spec.ts:43:1 › month and week retain client scope and query end-exclusive Eastern ranges (5.4s)
+  ✓    9 test/browser/calendar.spec.ts:98:1 › client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow (4.6s)
+  ✓   10 test/browser/calendar.spec.ts:139:1 › fixed Date retains native formatting and advancing browser timers (4.0s)
+  ✓   11 test/browser/campaign-session-safety.spec.ts:6:3 › campaign session mismatch never admits a writable editor (3.0s)
+  ✓   12 test/browser/campaign-session-safety.spec.ts:6:3 › campaign state-version mismatch never admits a writable editor (2.5s)
+  ✓   13 test/browser/campaign-session-safety.spec.ts:54:3 › campaign success keeps one submitted draft frozen until the write settles (3.1s)
+  ✓   14 test/browser/campaign-session-safety.spec.ts:54:3 › campaign rejection keeps one submitted draft frozen until the write settles (4.0s)
+  ✓   15 test/browser/comment-calendar.spec.ts:11:3 › Modules comment calendar advances empty candidate pages and retains civil dates at 360px (3.6s)
+  ✓   16 test/browser/comment-calendar.spec.ts:11:3 › Modules comment calendar advances empty candidate pages and retains civil dates at 1440px (3.8s)
+  ✓   17 test/browser/desktop-closeout.spec.ts:53:3 › Desktop detail edits directly, saves the versioned membership and reads back light (8.0s)
+  ✓   18 test/browser/desktop-closeout.spec.ts:53:3 › Desktop detail edits directly, saves the versioned membership and reads back dark (7.6s)
+  ✓   19 test/browser/desktop-closeout.spec.ts:122:3 › Desktop inline success holds one save and fences comment, archive and dismissal (3.3s)
+  ✓   20 test/browser/desktop-closeout.spec.ts:122:3 › Desktop inline rejection holds one save and fences comment, archive and dismissal (3.8s)
+  ✓   21 test/browser/desktop-closeout.spec.ts:187:1 › Desktop nested editor reuses inline draft; cancel resets and a breakpoint retains current fields (4.0s)
+  ✓   22 test/browser/desktop-closeout.spec.ts:215:1 › Desktop held save cannot close or erase a replacement task draft (6.5s)
+  ✓   23 test/browser/desktop-closeout.spec.ts:257:1 › Desktop same-ID receipt replacement discards the former draft before saving the fresh version (3.2s)
+  ✓   24 test/browser/desktop-closeout.spec.ts:302:1 › Desktop same-ID receipt replacement retires the held save and its completion callbacks (3.8s)
+  ✓   25 test/browser/desktop-closeout.spec.ts:354:3 › Desktop held planner.task.comment prevents native inline save (4.3s)
+  ✓   26 test/browser/desktop-closeout.spec.ts:354:3 › Desktop held planner.task.update prevents native inline save (4.7s)
+  ✓   27 test/browser/engagement-outreach-only.spec.ts:15:1 › Engagement opens directly to Outreach with no obsolete sections or meeting action (7.0s)
+  ✓   28 test/browser/engagement-outreach-only.spec.ts:45:1 › legacy non-meeting view hints still show Outreach, and client selection keeps its scope (3.9s)
+  ✓   29 test/browser/engagement-outreach-only.spec.ts:65:1 › draft and create deep links remain available in the Outreach-only screen (11.9s)
+  ✓   30 test/browser/engagement-outreach-only.spec.ts:89:1 › existing campaign session link still opens its current Outreach editor (3.2s)
+  ✓   31 test/browser/engagement-outreach-only.spec.ts:107:1 › creates a distinct versioned campaign and opens its saved session (3.5s)
+  ✓   32 test/browser/engagement-outreach-only.spec.ts:179:1 › known Core refusal leaves the campaign title available for correction (3.5s)
+  ✓   33 test/browser/engagement-outreach-only.spec.ts:212:1 › an uncertain campaign creation cannot be replayed from the same view (3.4s)
+  ✓   34 test/browser/engagement-outreach-only.spec.ts:244:1 › newsletter and Objective destination hints keep their dedicated route guards (6.2s)
+  ✓   35 test/browser/engagement-outreach-only.spec.ts:269:1 › old Modules meeting link points to scoped Portfolio Calendar without reading meeting detail (3.4s)
+  ✓   36 test/browser/engagement-outreach-only.spec.ts:296:1 › saved meeting-library link leads to the selected client's Portfolio library (4.1s)
+  ✓   37 test/browser/engagement-outreach-only.spec.ts:314:1 › stale Meetings view hint cannot displace draft, session, or create Outreach intents (10.6s)
+  ✓   38 test/browser/engagement-outreach-only.spec.ts:352:1 › selected-client V3 outreach record remains visible without mounting the plain draft editor (5.2s)
+  ✓   39 test/browser/engagement-outreach-only.spec.ts:375:1 › Outreach date filters send UTC start and exclusive end for the chosen inclusive dates (3.2s)
+  ✓   40 test/browser/engagement-outreach-only.spec.ts:405:1 › an inverted Outreach date window hides rows without issuing a read for that range (3.4s)
+  ✓   41 test/browser/engagement-outreach-only.spec.ts:440:1 › Show deleted requests deleted-only rows and never opens a deleted draft (3.5s)
+  ✓   42 test/browser/engagement-outreach-only.spec.ts:476:1 › client scope does not fetch or show owner-only campaign sessions (3.3s)
+  ✓   43 test/browser/figma-parity.spec.ts:33:5 › portfolio 1440 approved comparison and existing interaction (3.8s)
+  ✓   44 test/browser/figma-parity.spec.ts:33:5 › modules 1440 approved comparison and existing interaction (3.6s)
+  ✓   45 test/browser/figma-parity.spec.ts:33:5 › meri 1440 approved comparison and existing interaction (3.5s)
+  ✓   46 test/browser/figma-parity.spec.ts:33:5 › meri-fixture 1440 approved comparison and existing interaction (3.8s)
+  ✓   47 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 200 cannot outlive user replacement (3.4s)
+  ✓   48 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 401 cannot outlive user replacement (3.4s)
+  ✓   49 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 200 cannot outlive session replacement (4.3s)
+  ✓   50 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 401 cannot outlive session replacement (3.9s)
+  ✓   51 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 200 cannot outlive organization replacement (3.4s)
+  ✓   52 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 401 cannot outlive organization replacement (3.2s)
+  ✓   53 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 200 cannot outlive sign-out replacement (3.2s)
+  ✓   54 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 401 cannot outlive sign-out replacement (3.3s)
+  ✓   55 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 200 cannot outlive client replacement (3.2s)
+  ✓   56 test/browser/funding-calendar-session.spec.ts:160:5 › funding detail late 401 cannot outlive client replacement (3.3s)
+  ✓   57 test/browser/funding-calendar-session.spec.ts:267:1 › displayed funding clears across every boundary and returns only after the current detail read (5.0s)
+  ✓   58 test/browser/integration.spec.ts:37:1 › shared product navigation and history preserve verified client hints and scoped styles (5.9s)
+  ✓   59 test/browser/integration.spec.ts:120:1 › client replacement interrupts a write and organization replacement clears drafts and revalidates (3.5s)
+  ✓   60 test/browser/integration.spec.ts:169:1 › Core expiry clears the application, does not replay and cannot be escaped by changing client (3.3s)
+  ✓   61 test/browser/legiwatch.spec.ts:21:3 › LegiWatch News evidence renders a real connected view (3.8s)
+  ✓   62 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Florida Budget renders a real connected view (4.4s)
+  ✓   63 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research evidence renders a real connected view (4.9s)
+  ✓   64 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Monitoring renders a real connected view (3.5s)
+  ✓   65 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Client briefings renders a real connected view (3.2s)
+  ✓   66 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Reports renders a real connected view (3.2s)
+  ✓   67 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Trends renders a real connected view (3.1s)
+  ✓   68 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Legacy digest renders a real connected view (3.2s)
+  ✓   69 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Import review renders a real connected view (2.9s)
+  ✓   70 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research import review renders a real connected view (3.2s)
+  ✓   71 test/browser/legiwatch.spec.ts:21:3 › LegiWatch LegiWatch settings renders a real connected view (3.0s)
+  ✓   72 test/browser/legiwatch.spec.ts:48:1 › research continues past an empty matched page using the retained-source cursor (3.0s)
+  ✓   73 test/browser/legiwatch.spec.ts:96:1 › workflow changes invalidate a reviewed preview and enqueue only its exact current hash (3.5s)
+  ✓   74 test/browser/meeting-material-pending.spec.ts:6:5 › notes success protects the submitted draft and meeting dismissal while saving (4.1s)
+  ✓   75 test/browser/meeting-material-pending.spec.ts:6:5 › notes failure protects the submitted draft and meeting dismissal while saving (3.7s)
+  ✓   76 test/browser/meeting-material-pending.spec.ts:6:5 › debrief success protects the submitted draft and meeting dismissal while saving (5.1s)
+  ✓   77 test/browser/meeting-material-pending.spec.ts:6:5 › debrief failure protects the submitted draft and meeting dismissal while saving (6.5s)
+  ✓   78 test/browser/meri-initial-reconnect.spec.ts:73:1 › synthetic expiry and reconnect consume the acknowledged first draft without resending it (6.3s)
+  ✓   79 test/browser/meri-initial-reconnect.spec.ts:101:3 › synthetic reconnect preserves the newer disconnected draft "New question while disconnected" (5.9s)
+  ✓   80 test/browser/meri-initial-reconnect.spec.ts:101:3 › synthetic reconnect preserves the newer disconnected draft "Original initial message" (6.3s)
+  ✓   81 test/browser/meri-initial-reconnect.spec.ts:122:1 › synthetic refused renewal cannot release a late acknowledgement or dispatch the retained input (6.4s)
+  ✓   82 test/browser/meri-initial-reconnect.spec.ts:211:1 › synthetic a same-prompt successor acknowledgement cannot consume the first run's retained draft (6.9s)
+  ✓   83 test/browser/meri-initial-reconnect.spec.ts:239:1 › synthetic a retained initial guard from an earlier run cannot swallow a later next-turn send (5.9s)
+  ✓   84 test/browser/module-shared-shell.spec.ts:14:1 › ordinary Modules hub keeps its viewport rail and functional desktop toggle (3.6s)
+  ✓   85 test/browser/module-shared-shell.spec.ts:92:1 › ordinary Personal Settings toggle controls the authorized Settings rail (3.6s)
+  ✓   86 test/browser/modules-home-design.spec.ts:25:1 › Figma Modules landscape keeps the authored wide card (3.1s)
+  ✓   87 test/browser/modules-home-design.spec.ts:39:1 › Figma 3.4 desktop hub keeps its hierarchy and Outreach-only entry (2.8s)
+  ✓   88 test/browser/modules-home-design.spec.ts:71:1 › Figma Modules card SVGs preserve native rendered geometry (2.7s)
+  ✓   89 test/browser/modules-home-design.spec.ts:102:3 › Figma Modules information is available by keyboard at 1440px light without changing the heading (5.7s)
+  ✓   90 test/browser/modules-home-design.spec.ts:102:3 › Figma Modules information is available by keyboard at 1440px dark without changing the heading (5.3s)
+  ✓   91 test/browser/modules-home-design.spec.ts:102:3 › Figma Modules information is available by keyboard at 320px light without changing the heading (4.5s)
+  ✘   92 test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary (9.2s)
+(node:1533) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   93 test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary (3.2s)
+  ✓   94 test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary (3.1s)
+  ✓   95 test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary (4.9s)
+  ✓   96 test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary (4.6s)
+  ✓   97 test/browser/modules.spec.ts:16:3 › Directory primary route renders through the canonical session/API boundary (3.4s)
+  ✓   98 test/browser/modules.spec.ts:16:3 › Intelligence Center primary route renders through the canonical session/API boundary (3.4s)
+  ✓   99 test/browser/modules.spec.ts:16:3 › Research Portfolios primary route renders through the canonical session/API boundary (4.1s)
+  ✓  100 test/browser/next-modules-baseline.spec.ts:5:1 › MS02 verified Calendar entry dispatches only the selected client scope (4.5s)
+  ✓  101 test/browser/next-modules-baseline.spec.ts:28:1 › MS03 agenda preserves both Planner start and due occurrences (4.4s)
+  ✓  102 test/browser/next-modules-baseline.spec.ts:54:1 › MS04 meeting failure leaves successful agenda feeds visible (3.4s)
+  ✓  103 test/browser/next-modules-baseline.spec.ts:75:1 › MS05 linked task resolves beyond the current list and opens its detail (3.2s)
+  ✓  104 test/browser/next-modules-scope.spec.ts:13:1 › Calendar picker and history share verified scope and discard a held former-client read (3.9s)
+  ✓  105 test/browser/next-modules-scope.spec.ts:67:3 › Calendar denied client verification never falls back to master reads (4.1s)
+  ✓  106 test/browser/next-modules-scope.spec.ts:67:3 › Calendar wrong-client client verification never falls back to master reads (6.1s)
+  ✓  107 test/browser/next-modules-scope.spec.ts:91:1 › Calendar current scope label survives optional picker-list failure (5.0s)
+  ✓  108 test/browser/next-modules-scope.spec.ts:106:1 › Calendar meeting retry preserves other feeds and reports partial empty coverage (4.1s)
+  ✓  109 test/browser/next-modules-scope.spec.ts:144:1 › Calendar tenant replacement and failed current read hide prior agenda rows (3.9s)
+  ✓  110 test/browser/objective-navigation.spec.ts:28:1 › Objective navigation resolves the exact saved version through Core before opening its local destination (3.3s)
+  ✓  111 test/browser/objective-navigation.spec.ts:93:1 › unsaved edits and stale Objective resolver never navigate using old campaign text (2.9s)
+  ✓  112 test/browser/objective-operational-navigation.spec.ts:78:1 › current Strategy link opens the real working timeline after its exact current read (2.9s)
+  ✘  113 test/browser/objective-operational-navigation.spec.ts:103:1 › current project link opens its real task workspace with the exact project query (7.8s)
+(node:1921) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  114 test/browser/objective-operational-navigation.spec.ts:131:1 › current Strategy link refuses foreign IDs and foreign client receipts (6.0s)
+  ✓  115 test/browser/objective-operational-navigation.spec.ts:162:1 › current project link refuses missing, foreign, archived and duplicate bootstrap targets without a catalog fallback (16.2s)
+  ✓  116 test/browser/objective-operational-navigation.spec.ts:218:1 › replacing a current Strategy URL suppresses the held previous target (6.9s)
+  ✓  117 test/browser/objective-work-destinations.spec.ts:61:3 › strategies rechecks the owner on open, reload, history and explicit review without ordinary reads or writes (15.8s)
+  ✓  118 test/browser/objective-work-destinations.spec.ts:161:5 › strategies owner404 removes the prior observation with no fallback or automatic retry (6.3s)
+  ✓  119 test/browser/objective-work-destinations.spec.ts:161:5 › strategies owner409 removes the prior observation with no fallback or automatic retry (10.2s)
+  ✓  120 test/browser/objective-work-destinations.spec.ts:161:5 › strategies owner503 removes the prior observation with no fallback or automatic retry (4.9s)
+  ✓  121 test/browser/objective-work-destinations.spec.ts:194:3 › strategies refuses changed and malformed bindings before exposing resource content (8.9s)
+  ✓  122 test/browser/objective-work-destinations.spec.ts:61:3 › planner rechecks the owner on open, reload, history and explicit review without ordinary reads or writes (6.0s)
+  ✓  123 test/browser/objective-work-destinations.spec.ts:161:5 › planner owner404 removes the prior observation with no fallback or automatic retry (3.6s)
+  ✓  124 test/browser/objective-work-destinations.spec.ts:161:5 › planner owner409 removes the prior observation with no fallback or automatic retry (4.0s)
+  ✓  125 test/browser/objective-work-destinations.spec.ts:161:5 › planner owner503 removes the prior observation with no fallback or automatic retry (5.8s)
+  ✓  126 test/browser/objective-work-destinations.spec.ts:194:3 › planner refuses changed and malformed bindings before exposing resource content (10.1s)
+  ✓  127 test/browser/objective-work-destinations.spec.ts:61:3 › workspace rechecks the owner on open, reload, history and explicit review without ordinary reads or writes (6.2s)
+  ✓  128 test/browser/objective-work-destinations.spec.ts:161:5 › workspace owner404 removes the prior observation with no fallback or automatic retry (2.8s)
+  ✓  129 test/browser/objective-work-destinations.spec.ts:161:5 › workspace owner409 removes the prior observation with no fallback or automatic retry (2.9s)
+  ✓  130 test/browser/objective-work-destinations.spec.ts:161:5 › workspace owner503 removes the prior observation with no fallback or automatic retry (9.1s)
+  ✓  131 test/browser/objective-work-destinations.spec.ts:194:3 › workspace refuses changed and malformed bindings before exposing resource content (9.0s)
+  ✓  132 test/browser/objective-work-destinations.spec.ts:220:1 › replacement query and session scope hide old or late Strategy observations (3.4s)
+  ✓  133 test/browser/objective-work-destinations.spec.ts:294:1 › Planner401 expires the shared session without replay or retained task content (7.0s)
+  ✓  134 test/browser/objective-work-destinations.spec.ts:323:1 › a changed Workspace client hint clears the saved snapshot and rechecks its owner (7.0s)
+  ✓  135 test/browser/outreach-list-scope.spec.ts:14:3 › Outreach scope-error keyboard retry conceals rows during the held read at 1440px (3.8s)
+  ✘  136 test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses other-client list receipts and recovers with a current matching read (3.2s)
+(node:2339) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  137 test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses null-client list receipts and recovers with a current matching read (3.2s)
+(node:2421) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  138 test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses missing-client list receipts and recovers with a current matching read (5.2s)
+(node:2503) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  139 test/browser/outreach-list-scope.spec.ts:117:1 › all permitted clients Outreach retains matching, other-client and unassigned records (10.3s)
+  ✓  140 test/browser/outreach-pending.spec.ts:6:3 › ordinary Outreach successful save preserves the exact submitted text at 1440px (8.2s)
+  ✓  141 test/browser/outreach-pending.spec.ts:61:3 › ordinary Outreach create holds the submitted draft until a rejected save settles (6.9s)
+  ✓  142 test/browser/outreach-pending.spec.ts:61:3 › ordinary Outreach update holds the submitted draft until a rejected save settles (4.7s)
+  ✓  143 test/browser/planner-engagement.spec.ts:91:1 › Planner modes use the same permitted task data and exact board assets (5.3s)
+  ✓  144 test/browser/planner-engagement.spec.ts:142:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields (22.0s)
+  ✓  145 test/browser/planner-engagement.spec.ts:246:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 1440 (8.9s)
+  ✓  146 test/browser/planner-engagement.spec.ts:344:1 › A template session deep link keeps the server state version and sends no mail (4.7s)
+  ✓  147 test/browser/portfolio-shared-shell.spec.ts:4:1 › Portfolio desktop shell matches Figma rail anchors and keeps its toggle usable (25.0s)
+  ✓  148 test/browser/remaining-modules.spec.ts:64:1 › MS08 regression: All tasks defaults to named client groups and current-page counts (5.6s)
+  ✓  149 test/browser/remaining-modules.spec.ts:106:1 › MS08 scope picker preserves All tasks, disposes drafts and restores scope through history (4.8s)
+  ✓  150 test/browser/remaining-modules.spec.ts:149:1 › MS08 failed current clients list removes former labels and disables picker until retry (5.0s)
+  ✓  151 test/browser/remaining-modules.spec.ts:181:1 › MS08 failed current task page hides groups and recovers without inventing filters (3.6s)
+  ✓  152 test/browser/remaining-modules.spec.ts:215:3 › MS08 independently verified client remains named when picker is empty (2.7s)
+  ✓  153 test/browser/remaining-modules.spec.ts:215:3 › MS08 independently verified client remains named when picker is unavailable (3.6s)
+  ✓  154 test/browser/remaining-modules.spec.ts:237:1 › MS08 replacement rejects held former task read and unverified selected client (4.4s)
+  ✓  155 test/browser/remaining-modules.spec.ts:409:1 › MS09 regression: public form uses bounded card hierarchy and keeps input on styled error (2.7s)
+  ✓  156 test/browser/remaining-modules.spec.ts:468:1 › MS09 preserves malformed-receipt and replaced-token controls (2.4s)
+  ✓  157 test/browser/service-error-feedback.spec.ts:29:1 › saved layout404 reports unavailable while retaining actual ordinary profiles and refusing reorder writes (3.3s)
+  ✓  158 test/browser/service-error-feedback.spec.ts:60:1 › Objectives404 shows the explicit error and never opens stale records or a new-objective editor (3.4s)
+  ✓  159 test/browser/service-error-feedback.spec.ts:92:3 › strategies.proposals failure does not invent counts; proposals failure retries only the existing read (3.3s)
+  ✓  160 test/browser/service-error-feedback.spec.ts:92:3 › strategies.list failure does not invent counts; proposals failure retries only the existing read (3.3s)
+  ✓  161 test/browser/session.spec.ts:7:1 › missing configuration renders setup without issuing service requests (3.2s)
+  ✓  162 test/browser/session.spec.ts:20:1 › org/session change clears prior records and sign-out removes all protected content (2.5s)
+  ✓  163 test/browser/session.spec.ts:53:1 › 401 removes protected content and asks for sign-in without replaying a request (2.8s)
+  ✓  164 test/browser/session.spec.ts:69:1 › development StrictMode remount establishes a valid request scope before child reads (5.5s)
+  ✓  165 test/browser/settings-client-continuity.spec.ts:24:1 › verified client survives Modules, Settings sections and all product destinations (4.4s)
+  ✓  166 test/browser/settings-client-continuity.spec.ts:69:1 › unavailable client never blocks account Settings or escapes in mode links (5.4s)
+  ✓  167 test/browser/settings-client-continuity.spec.ts:94:1 › Settings client replacement hides former scope until the replacement is verified (3.9s)
+  ✓  168 test/browser/settings-disconnect-lifetime.spec.ts:24:1 › pending disconnect keeps its confirmation through dismissals and a failed response (4.2s)
+  ✓  169 test/browser/settings-mutations.spec.ts:19:1 › Contact saves once while pending and renders the validated current read-back (4.1s)
+  ✓  170 test/browser/settings-mutations.spec.ts:70:1 › Contact refuses failed writes without losing the draft and keeps standard users read-only (8.5s)
+  ✓  171 test/browser/settings-mutations.spec.ts:109:1 › Contact discards a late successful receipt after session replacement (3.3s)
+  ✓  172 test/browser/settings-mutations.spec.ts:145:1 › Branding name save refuses errors then uses a fresh canonical read (2.7s)
+  ✓  173 test/browser/settings-mutations.spec.ts:178:1 › Branding validates logo bytes and confirms only a completed synthetic upload (3.1s)
+  ✓  174 test/browser/settings-mutations.spec.ts:243:1 › Profiles create, archive and restore through exact current records with refusal retained (4.0s)
+  ✓  175 test/browser/settings-mutations.spec.ts:317:1 › Profiles keep the exact create and archive dialogs open while their writes are pending (2.8s)
+  ✓  176 test/browser/settings-mutations.spec.ts:371:1 › Profiles reject another record or an unachieved status instead of confirming archive or restore (9.6s)
+  ✓  177 test/browser/settings-mutations.spec.ts:418:1 › Integrations require configured capability, keep IMAP unavailable and constrain hosted destinations (2.5s)
+  ✓  178 test/browser/settings-mutations.spec.ts:475:1 › Integration reconnect refuses an OAuth receipt for another registered account (2.8s)
+  ✓  179 test/browser/settings-mutations.spec.ts:503:1 › Integration sync dispatches once and refuses failed-record or wrong-account receipts (3.7s)
+  ✓  180 test/browser/settings-mutations.spec.ts:545:1 › Integration disconnect retains refusal and requires a matching affirmative receipt (12.1s)
+  ✓  181 test/browser/settings-scenes.spec.ts:33:3 › Settings personal renders compatible responses without runtime failures (8.4s)
+  ✓  182 test/browser/settings-scenes.spec.ts:33:3 › Settings contact-info renders compatible responses without runtime failures (4.4s)
+  ✓  183 test/browser/settings-scenes.spec.ts:33:3 › Settings branding renders compatible responses without runtime failures (4.3s)
+  ✓  184 test/browser/settings-scenes.spec.ts:33:3 › Settings team renders compatible responses without runtime failures (6.8s)
+  ✓  185 test/browser/settings-scenes.spec.ts:33:3 › Settings integrations renders compatible responses without runtime failures (6.9s)
+  ✓  186 test/browser/settings-scenes.spec.ts:33:3 › Settings memory renders compatible responses without runtime failures (4.1s)
+  ✓  187 test/browser/settings-scenes.spec.ts:33:3 › Settings meri-preferences renders compatible responses without runtime failures (5.0s)
+  ✓  188 test/browser/settings-scenes.spec.ts:33:3 › Settings billing renders compatible responses without runtime failures (5.8s)
+  ✓  189 test/browser/settings-scenes.spec.ts:33:3 › Settings ai-usage renders compatible responses without runtime failures (6.5s)
+  ✓  190 test/browser/settings-scenes.spec.ts:33:3 › Settings profiles renders compatible responses without runtime failures (3.7s)
+  ✓  191 test/browser/settings-scenes.spec.ts:33:3 › Settings intelligence-mappings renders compatible responses without runtime failures (6.5s)
+  ✓  192 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-tenants renders compatible responses without runtime failures (4.4s)
+  ✓  193 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-customers renders compatible responses without runtime failures (4.6s)
+  ✓  194 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-ai-keys renders compatible responses without runtime failures (4.8s)
+  ✓  195 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-broadcasts renders compatible responses without runtime failures (3.3s)
+  ✓  196 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-personnel renders compatible responses without runtime failures (3.6s)
+  ✓  197 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-reconciliation renders compatible responses without runtime failures (3.7s)
+  ✓  198 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-matches renders compatible responses without runtime failures (5.6s)
+  ✓  199 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-analyst renders compatible responses without runtime failures (4.0s)
+  ✓  200 test/browser/settings-scenes.spec.ts:88:1 › Settings action columns keep accessible names with visually hidden labels (4.7s)
+  ✓  201 test/browser/settings-scenes.spec.ts:107:1 › All analyst queues and Meri preference screens are reachable with explicit unavailable contracts (5.9s)
+  ✓  202 test/browser/settings-scenes.spec.ts:143:1 › Settings dialogs trap focus and Escape closes an unsent invitation (2.7s)
+  ✓  203 test/browser/settings-scenes.spec.ts:160:1 › Figma 3.4 Profiles desktop renders a populated table without toolbar overlap (2.7s)
+  ✓  204 test/browser/settings.spec.ts:10:1 › Personal saves the title only after a validated response and keeps signature uploads separate (2.8s)
+  ✓  205 test/browser/settings.spec.ts:48:1 › Team does not fetch private records for a standard user (2.4s)
+  ✓  206 test/browser/settings.spec.ts:66:1 › Team prevents self-removal and failed invitations remain editable without success feedback (3.4s)
+  ✓  207 test/browser/settings.spec.ts:120:1 › Team role select saves a non-self member through the adopted control (2.9s)
+  ✓  208 test/browser/settings.spec.ts:171:1 › Connected Microsoft account configures realtime subscriptions (3.3s)
+  ✓  209 test/browser/work-strategy-navigation.spec.ts:62:1 › Work's step destination opens exactly the current verified Strategy node and survives reload (5.7s)
+  ✓  210 test/browser/work-strategy-navigation.spec.ts:93:3 › missing requested step shows unavailable rather than opening a different surface (5.6s)
+  ✓  211 test/browser/work-strategy-navigation.spec.ts:93:3 › foreign requested step shows unavailable rather than opening a different surface (2.7s)
+  ✓  212 test/browser/work-strategy-navigation.spec.ts:93:3 › archived requested step shows unavailable rather than opening a different surface (3.8s)
+  ✓  213 test/browser/work-strategy-navigation.spec.ts:93:3 › duplicate requested step shows unavailable rather than opening a different surface (2.6s)
+  ✓  214 test/browser/work-strategy-navigation.spec.ts:114:1 › malformed and duplicate step selectors do not issue a Strategy detail read (4.4s)
+  ✓  215 test/browser/work-strategy-navigation.spec.ts:137:1 › view/client navigation is reflected by URL, history and reload; library opens an exact-client detail (7.9s)
+  ✓  216 test/browser/work-strategy-navigation.spec.ts:213:1 › Context library without a selected client starts in All clients scope (3.4s)
+  ✓  217 test/browser/work-strategy-navigation.spec.ts:248:1 › New strategy consumes the current catalog-backed client hint and routes only after acknowledgement (3.3s)
+  ✓  218 test/browser/work-strategy-navigation.spec.ts:291:1 › a client hint missing from the current creation catalog cannot enable Create (3.1s)
+
+
+  1) test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Engagement Manager', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Engagement Manager', exact: true })
+
+
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+    > 32 |     ).toBeVisible();
+         |       ^
+      33 |     await expect(page.getByRole("main")).not.toContainText("Loading…");
+      34 |     await expect(page.getByRole("main").getByRole("alert")).toHaveCount(0);
+      35 |     expect(failures).toEqual([]);
+        at /workspace/scratch/639ce8240192/capiro-frontend/apps/web/test/browser/modules.spec.ts:32:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/objective-operational-navigation.spec.ts:103:1 › current project link opens its real task workspace with the exact project query
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Synthetic linked current project', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Synthetic linked current project', exact: true })
+
+
+      116 |   await expect(
+      117 |     page.getByRole("heading", { name: project.name, exact: true }),
+    > 118 |   ).toBeVisible();
+          |     ^
+      119 |   await expect(
+      120 |     page.getByRole("button", { name: projectTask.name, exact: true }),
+      121 |   ).toBeVisible();
+        at /workspace/scratch/639ce8240192/capiro-frontend/apps/web/test/browser/objective-operational-navigation.spec.ts:118:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-operational-navi-68fd8-ith-the-exact-project-query/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/objective-operational-navi-68fd8-ith-the-exact-project-query/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-operational-navi-68fd8-ith-the-exact-project-query/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/objective-operational-navi-68fd8-ith-the-exact-project-query/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses other-client list receipts and recovers with a current matching read
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 6
+
+      Array [
+        Object {
+          "query": Object {
+            "clientId": "10000000-0000-4000-8000-000000000001",
+    +       "deleted": "false",
+    +       "from": "2025-10-19T00:00:00.000Z",
+            "limit": 500,
+    +       "to": "2026-10-20T00:00:00.000Z",
+          },
+        },
+        Object {
+          "query": Object {
+            "clientId": "10000000-0000-4000-8000-000000000001",
+    +       "deleted": "false",
+    +       "from": "2025-10-19T00:00:00.000Z",
+            "limit": 500,
+    +       "to": "2026-10-20T00:00:00.000Z",
+          },
+        },
+      ]
+
+      110 |       record.body,
+      111 |     );
+    > 112 |     expect(inputs).toEqual(Array(2).fill({ query: { clientId, limit: 500 } }));
+          |                    ^
+      113 |     assertNoEffects(observed);
+      114 |   });
+      115 | }
+        at /workspace/scratch/639ce8240192/capiro-frontend/apps/web/test/browser/outreach-list-scope.spec.ts:112:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/outreach-list-scope-scoped-522f2-ith-a-current-matching-read/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses null-client list receipts and recovers with a current matching read
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 6
+
+      Array [
+        Object {
+          "query": Object {
+            "clientId": "10000000-0000-4000-8000-000000000001",
+    +       "deleted": "false",
+    +       "from": "2025-10-19T00:00:00.000Z",
+            "limit": 500,
+    +       "to": "2026-10-20T00:00:00.000Z",
+          },
+        },
+        Object {
+          "query": Object {
+            "clientId": "10000000-0000-4000-8000-000000000001",
+    +       "deleted": "false",
+    +       "from": "2025-10-19T00:00:00.000Z",
+            "limit": 500,
+    +       "to": "2026-10-20T00:00:00.000Z",
+          },
+        },
+      ]
+
+      110 |       record.body,
+      111 |     );
+    > 112 |     expect(inputs).toEqual(Array(2).fill({ query: { clientId, limit: 500 } }));
+          |                    ^
+      113 |     assertNoEffects(observed);
+      114 |   });
+      115 | }
+        at /workspace/scratch/639ce8240192/capiro-frontend/apps/web/test/browser/outreach-list-scope.spec.ts:112:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/outreach-list-scope-scoped-0126d-ith-a-current-matching-read/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses missing-client list receipts and recovers with a current matching read
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 6
+
+      Array [
+        Object {
+          "query": Object {
+            "clientId": "10000000-0000-4000-8000-000000000001",
+    +       "deleted": "false",
+    +       "from": "2025-10-19T00:00:00.000Z",
+            "limit": 500,
+    +       "to": "2026-10-20T00:00:00.000Z",
+          },
+        },
+        Object {
+          "query": Object {
+            "clientId": "10000000-0000-4000-8000-000000000001",
+    +       "deleted": "false",
+    +       "from": "2025-10-19T00:00:00.000Z",
+            "limit": 500,
+    +       "to": "2026-10-20T00:00:00.000Z",
+          },
+        },
+      ]
+
+      110 |       record.body,
+      111 |     );
+    > 112 |     expect(inputs).toEqual(Array(2).fill({ query: { clientId, limit: 500 } }));
+          |                    ^
+      113 |     assertNoEffects(observed);
+      114 |   });
+      115 | }
+        at /workspace/scratch/639ce8240192/capiro-frontend/apps/web/test/browser/outreach-list-scope.spec.ts:112:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/outreach-list-scope-scoped-d06c2-ith-a-current-matching-read/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary
+    test/browser/objective-operational-navigation.spec.ts:103:1 › current project link opens its real task workspace with the exact project query
+    test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses other-client list receipts and recovers with a current matching read
+    test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses null-client list receipts and recovers with a current matching read
+    test/browser/outreach-list-scope.spec.ts:62:3 › scoped Outreach refuses missing-client list receipts and recovers with a current matching read
+  213 passed (18.5m)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 1
+npm error path /workspace/scratch/639ce8240192/capiro-frontend/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/639ce8240192/capiro-frontend/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts modules.spec.ts modules-home-design.spec.ts module-shared-shell.spec.ts portfolio-shared-shell.spec.ts figma-parity.spec.ts desktop-closeout.spec.ts settings-scenes.spec.ts settings.spec.ts settings-mutations.spec.ts settings-disconnect-lifetime.spec.ts settings-client-continuity.spec.ts engagement-outreach-only.spec.ts campaign-session-safety.spec.ts outreach-pending.spec.ts outreach-list-scope.spec.ts calendar.spec.ts calendar-visual-closeout.spec.ts next-modules-scope.spec.ts next-modules-baseline.spec.ts auth-initialization.spec.ts auth-readiness-navigation.spec.ts integration.spec.ts session.spec.ts service-error-feedback.spec.ts remaining-modules.spec.ts work-strategy-navigation.spec.ts objective-navigation.spec.ts objective-operational-navigation.spec.ts objective-work-destinations.spec.ts planner-engagement.spec.ts legiwatch.spec.ts meeting-material-pending.spec.ts meri-initial-reconnect.spec.ts --grep-invert '390|phone|mobile|tablet'

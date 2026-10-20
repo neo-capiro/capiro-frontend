@@ -1,0 +1,197 @@
+{
+  "base": "816b0f1470efe978d22856beee9c8133055ab5bd",
+  "sourceCommit": "3c231a1854200d8ad06232a1f97a80fcdb523800",
+  "sourceTree": "4d6e64eb620a0bfa3aa3f3e7eb9484c3a58c601e",
+  "inputs": [
+    {
+      "pr": 107,
+      "head": "ace46f896c98c8285e5da9231e813885d7979a7b",
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/107",
+      "ancestor": true
+    },
+    {
+      "pr": 106,
+      "head": "553b848303a94b206c3c2efafc0c29c2cb40414a",
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/106",
+      "ancestor": true
+    }
+  ],
+  "sourceDeltaIsExactDisjointUnion": true,
+  "inputPathCount": 22,
+  "changedPaths": [
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "pr": 107,
+      "treeEntry": "100644 blob 1a785a7fe57ca168690cba7e564af9f44d7f9bcb\tapps/web/src/features/portfolio/calendar/MeetingDetail.tsx"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "pr": 107,
+      "treeEntry": "100644 blob fb764ecd8ae63569012f32828855df6415ba4238\tapps/web/src/features/portfolio/calendar/MeetingForm.tsx"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
+      "pr": 107,
+      "treeEntry": "100644 blob b6cd3ca772de97b4cfff6fd9ca6d6bababd228fe\tapps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/mutations.ts",
+      "pr": 107,
+      "treeEntry": "100644 blob 0b0eaa89df0723155faa8cf6fd29e26f761eb119\tapps/web/src/features/portfolio/calendar/mutations.ts"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/queries.ts",
+      "pr": 107,
+      "treeEntry": "100644 blob 92f5f93c853a7b22747bec00c20c1ac1c240f883\tapps/web/src/features/portfolio/index/queries.ts"
+    },
+    {
+      "path": "apps/web/src/features/settings/InviteMember.tsx",
+      "pr": 106,
+      "treeEntry": "100644 blob 5696737099f162918a1ee848447401eb0f96acb1\tapps/web/src/features/settings/InviteMember.tsx"
+    },
+    {
+      "path": "apps/web/src/features/settings/RegisterAccount.tsx",
+      "pr": 106,
+      "treeEntry": "100644 blob 9fe48fa29e1c3281cd264abc5afcbabfd96f444e\tapps/web/src/features/settings/RegisterAccount.tsx"
+    },
+    {
+      "path": "apps/web/test/browser/settings-form-pending.spec.ts",
+      "pr": 106,
+      "treeEntry": "100644 blob ef9cea9834a90374e265c4aeeaebbcf2657d770c\tapps/web/test/browser/settings-form-pending.spec.ts"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-boundary-harness.tsx",
+      "pr": 107,
+      "treeEntry": "100644 blob a42a24d07adbd581d7eb87e9a10eb5f527b7a5c9\tapps/web/tests/browser/calendar-boundary-harness.tsx"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+      "pr": 107,
+      "treeEntry": "100644 blob b4c99b6b8ba7233d50142048c9265b2380972520\tapps/web/tests/browser/calendar-meeting-receipts-harness.tsx"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-meeting-recovery.spec.ts",
+      "pr": 107,
+      "treeEntry": "100644 blob ba95261b29cc2805be317b9b5d0bc3b9e3bbe33d\tapps/web/tests/browser/calendar-meeting-recovery.spec.ts"
+    },
+    {
+      "path": "apps/web/tests/portfolio-client-query.test.ts",
+      "pr": 107,
+      "treeEntry": "100644 blob 2d48f61509503e9c02496477da89a4bc2e808fec\tapps/web/tests/portfolio-client-query.test.ts"
+    },
+    {
+      "path": "docs/architecture-size-reviews.json",
+      "pr": 106,
+      "treeEntry": "100644 blob 36af10697d3adca88bb37a40d0fa462d3c7133b7\tdocs/architecture-size-reviews.json"
+    },
+    {
+      "path": "docs/portfolio-ui-continuity-20261019/meeting-refresh-recovery.png",
+      "pr": 107,
+      "treeEntry": "100644 blob 2e4acb309b242c259d5742a9772017fca805ad45\tdocs/portfolio-ui-continuity-20261019/meeting-refresh-recovery.png"
+    },
+    {
+      "path": "docs/portfolio-ui-continuity-20261019/portfolio-typecheck.tsconfig.json",
+      "pr": 107,
+      "treeEntry": "100644 blob 6ca042310414873a8ae2e2ee0647c584e926dc7e\tdocs/portfolio-ui-continuity-20261019/portfolio-typecheck.tsconfig.json"
+    },
+    {
+      "path": "docs/portfolio-ui-continuity-20261019/proposed-size-reviews.json",
+      "pr": 107,
+      "treeEntry": "100644 blob 9ff4e28b0684e0ec7c65225eadf76e3d76f9d08f\tdocs/portfolio-ui-continuity-20261019/proposed-size-reviews.json"
+    },
+    {
+      "path": "docs/portfolio-ui-continuity-20261019/README.md",
+      "pr": 107,
+      "treeEntry": "100644 blob 9755aee082cc9013ae74d981a13afb7351a3c688\tdocs/portfolio-ui-continuity-20261019/README.md"
+    },
+    {
+      "path": "docs/settings-pending-20261019/invitation-pending.png",
+      "pr": 106,
+      "treeEntry": "100644 blob c52025a7bf05e92b05a1fa099c8dc3ffa27ec546\tdocs/settings-pending-20261019/invitation-pending.png"
+    },
+    {
+      "path": "docs/settings-pending-20261019/proposed-size-reviews.json",
+      "pr": 106,
+      "treeEntry": "100644 blob 533a3b44d901505aed2bbe8e5464087840bcf5a6\tdocs/settings-pending-20261019/proposed-size-reviews.json"
+    },
+    {
+      "path": "docs/settings-pending-20261019/README.md",
+      "pr": 106,
+      "treeEntry": "100644 blob 3c6cfef807b6b0aec63f4179f70620021beed8a0\tdocs/settings-pending-20261019/README.md"
+    },
+    {
+      "path": "docs/settings-pending-20261019/registration-pending.png",
+      "pr": 106,
+      "treeEntry": "100644 blob 78f1039b2d8026d38f5e650e2f6f7a5d4fde80a5\tdocs/settings-pending-20261019/registration-pending.png"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "pr": 107,
+      "treeEntry": "100644 blob f08358ba1b25e2ee06a7e5e5ff421865968ee433\tscripts/architecture/reviewed-size-findings.json"
+    }
+  ],
+  "packageLock": {
+    "gitBlob": "e92f43c615808857f9c09c60a45049db3574a5ca",
+    "sha256": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234",
+    "unchangedFromBase": true
+  },
+  "node": "v24.0.0",
+  "npm": "11.9.0",
+  "dependencyLayouts": [
+    {
+      "location": "node_modules/@capiro/meri-contracts",
+      "version": "0.1.0"
+    },
+    {
+      "location": "apps/web/node_modules/@capiro/meri-contracts",
+      "version": "0.1.10"
+    },
+    {
+      "location": "packages/meri-client/node_modules/@capiro/meri-contracts",
+      "version": "0.1.10"
+    }
+  ],
+  "checks": {
+    "portfolioBrowser": {
+      "passed": 11,
+      "workers": 1
+    },
+    "settingsBrowser": {
+      "passed": 7,
+      "workers": 1
+    },
+    "clientQueryUnit": {
+      "passed": 3,
+      "workers": 1
+    },
+    "nextTypegen": {
+      "cwd": "apps/web",
+      "exitCode": 0
+    },
+    "fullWebTypecheckWithGeneratedRoutes": {
+      "exitCode": 0,
+      "incremental": false,
+      "heapLimitMiB": 4096
+    },
+    "architecture": {
+      "exitCode": 0,
+      "total": 534,
+      "reviewed": 516,
+      "inheritedUnreviewed": 18,
+      "blocking": 0
+    }
+  },
+  "excluded": [
+    "Active separate Modules followup branch",
+    "Meri intents PR102",
+    "Deployment and main merge"
+  ],
+  "triggerAudit": {
+    "sourceFilesChanged": false,
+    "githubWorkflows": 0,
+    "repositoryWebhooks": 0,
+    "githubPages": false,
+    "checkedInCodeBuildSource": "Explicit versioned S3 archive; no checked-in automatic event trigger",
+    "liveAwsAndExternalAppConfigurationInspected": false
+  }
+}

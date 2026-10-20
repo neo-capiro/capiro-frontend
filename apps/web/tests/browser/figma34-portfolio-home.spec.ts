@@ -179,10 +179,19 @@ test("desktop All grid joins source-backed clients and active prospects after th
   });
   await page.getByRole("button", { name: "Clients 8" }).click();
   await expect(
+    page.getByRole("heading", { name: "Portfolio —" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Open prospect / })).toHaveCount(
+    0,
+  );
+  await page.getByRole("button", { name: "All —", exact: true }).click();
+  await expect(
     page.getByRole("heading", { name: "Portfolio 14" }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "All 14" }).click();
   await expect(page.getByRole("article")).toHaveCount(8);
+  await expect(page.getByRole("link", { name: /^Open prospect / })).toHaveCount(
+    6,
+  );
   expect(unexpected).toEqual([]);
 });
 

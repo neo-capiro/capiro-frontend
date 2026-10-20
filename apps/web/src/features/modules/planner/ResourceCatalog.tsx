@@ -27,12 +27,16 @@ type Props = {
   onOpenProject: (id: string) => void;
 };
 type Model = ReturnType<typeof useCatalog>;
+type EditorTarget = {
+  kind: PlannerResource["kind"];
+  resource?: PlannerResource;
+};
 function useCatalog({ section }: Props) {
   const api = useCapiro();
   const query = useCapiroQuery("planner.resources", {});
   const [search, setSearch] = useState(""),
     [archived, setArchived] = useState(false),
-    [edit, setEdit] = useState<PlannerResource | "new" | null>(null),
+    [edit, setEdit] = useState<EditorTarget | null>(null),
     [opened, setOpened] = useState<PlannerResource | null>(null),
     [template, setTemplate] = useState<PlannerResource | null>(null),
     [error, setError] = useState<string>(),
@@ -76,6 +80,8 @@ function useCatalog({ section }: Props) {
     setArchived,
     edit,
     setEdit,
+    openEditor: (resource?: PlannerResource) =>
+      setEdit({ kind: resource?.kind ?? kind, resource }),
     opened,
     setOpened,
     template,
@@ -89,70 +95,72 @@ function useCatalog({ section }: Props) {
 }
 export function ResourceCatalog(props: Props) {
   const m = useCatalog(props);
-  if (m.opened?.kind === "dashboard")
-    return (
-      <ReportingDashboard
-        dashboard={m.opened}
-        onBack={() => m.setOpened(null)}
-        onEdit={() => m.setEdit(m.opened)}
-        onReload={m.query.reload}
-        editor={<ResourceDialogs props={props} model={m} />}
-      />
-    );
   return (
-    <div className={styles.stack}>
-      <div className={styles.tools}>
-        <TextInput
-          aria-label={`Search ${props.section}`}
-          type="search"
-          placeholder={`Search ${props.section}…`}
-          value={m.search}
-          onChange={(event) => m.setSearch(event.target.value)}
+    <>
+      {m.kind === "dashboard" && m.opened?.kind === "dashboard" ? (
+        <ReportingDashboard
+          dashboard={m.opened}
+          onBack={() => m.setOpened(null)}
+          onEdit={() => m.openEditor(m.opened!)}
+          onReload={m.query.reload}
+          editor={null}
         />
-        <label className={styles.checkbox}>
-          <input
-            type="checkbox"
-            checked={m.archived}
-            onChange={(event) => m.setArchived(event.target.checked)}
-          />
-          Archived
-        </label>
-        <ActionButton
-          primary
-          className={styles.toolbarEnd}
-          onClick={() => m.setEdit("new")}
-        >
-          + New {m.kind === "dashboard" ? "dashboard" : m.kind}
-        </ActionButton>
-      </div>
-      {m.error && (
-        <p className={styles.error} role="alert">
-          {m.error}
-        </p>
-      )}
-      <StatusPanel
-        loading={m.query.loading}
-        error={m.query.error}
-        onRetry={m.query.reload}
-        empty={
-          m.query.data && m.rows.length === 0
-            ? `No ${props.section} in this view`
-            : undefined
-        }
-      >
-        <div className={styles.cards}>
-          {m.rows.map((resource) => (
-            <ResourceCard
-              key={resource.id}
-              resource={resource}
-              props={props}
-              model={m}
+      ) : (
+        <div className={styles.stack}>
+          <div className={styles.tools}>
+            <TextInput
+              aria-label={`Search ${props.section}`}
+              type="search"
+              placeholder={`Search ${props.section}…`}
+              value={m.search}
+              onChange={(event) => m.setSearch(event.target.value)}
             />
-          ))}
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={m.archived}
+                onChange={(event) => m.setArchived(event.target.checked)}
+              />
+              Archived
+            </label>
+            <ActionButton
+              primary
+              className={styles.toolbarEnd}
+              onClick={() => m.openEditor()}
+            >
+              + New {m.kind === "dashboard" ? "dashboard" : m.kind}
+            </ActionButton>
+          </div>
+          {m.error && (
+            <p className={styles.error} role="alert">
+              {m.error}
+            </p>
+          )}
+          <StatusPanel
+            loading={m.query.loading}
+            error={m.query.error}
+            onRetry={m.query.reload}
+            empty={
+              m.query.data && m.rows.length === 0
+                ? `No ${props.section} in this view`
+                : undefined
+            }
+          >
+            <div className={styles.cards}>
+              {m.rows.map((resource) => (
+                <ResourceCard
+                  key={resource.id}
+                  resource={resource}
+                  props={props}
+                  model={m}
+                />
+              ))}
+            </div>
+          </StatusPanel>
         </div>
-      </StatusPanel>
+      )}
       <ResourceDialogs props={props} model={m} />
-    </div>
+    </>
   );
 }
 function ResourceCard({
@@ -251,7 +259,7 @@ function ResourceActions({
         ))}
       <ActionButton
         disabled={!["admin", "editor"].includes(resource.access)}
-        onClick={() => m.setEdit(resource)}
+        onClick={() => m.openEditor(resource)}
       >
         {resource.kind === "goal" ? "Goal details" : "Edit"}
       </ActionButton>
@@ -281,10 +289,10 @@ function ResourceDialogs({ props, model: m }: { props: Props; model: Model }) {
   return (
     <>
       <ResourceEditor
-        key={`${m.kind}:${m.edit && typeof m.edit === "object" ? m.edit.id : "new"}`}
+        key={`${m.edit?.kind ?? m.kind}:${m.edit?.resource?.id ?? "new"}`}
         open={m.edit !== null}
-        kind={m.kind}
-        resource={typeof m.edit === "object" && m.edit ? m.edit : undefined}
+        kind={m.edit?.kind ?? m.kind}
+        resource={m.edit?.resource}
         people={props.people}
         projects={props.projects}
         onClose={() => m.setEdit(null)}
