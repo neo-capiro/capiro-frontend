@@ -27,6 +27,12 @@ export class ConversationUnavailable extends Error {
 
 const STREAM_BYTES = 8 * 1024 * 1024;
 const REQUEST_MS = 30_000;
+/**
+ * One observation. Meri closes each window cleanly within 30 s of its own start; the same-origin proxy waits up to
+ * REQUEST_MS for Meri's headers and bounds the stream 35 s past them. This lease sits past both, so Meri's clean end, not
+ * this timer, ends a healthy window; it only catches a stream that neither server ended.
+ */
+const OBSERVATION_MS = 70_000;
 const discard = (response: Response) => { void response.body?.cancel().catch(() => {}); };
 
 /** Strict UTF-8 and finite allocation before the SDK's own SSE parser. No SSE parsing here. */
@@ -127,12 +133,13 @@ export class ConversationNetwork {
     this.owner.abort(); this.stopObservation(); this.onDispose();
   };
   stopObservation() { this.stream?.abort(); this.stream = undefined; }
-  private lease(observation: boolean, caller?: AbortSignal | null, milliseconds = REQUEST_MS) {
+  private lease(observation: boolean, caller?: AbortSignal | null, milliseconds?: number) {
     this.check();
     const local = new AbortController();
     if (observation) { this.stopObservation(); this.stream = local; }
     const signal = AbortSignal.any([local.signal, this.owner.signal, this.options.signal, ...(caller ? [caller] : [])]);
-    const timer = setTimeout(() => local.abort(), Math.min(REQUEST_MS, milliseconds));
+    const limit = observation ? OBSERVATION_MS : REQUEST_MS;
+    const timer = setTimeout(() => local.abort(), Math.min(limit, milliseconds ?? limit));
     const done = () => { clearTimeout(timer); if (this.stream === local) this.stream = undefined; };
     return { signal, done };
   }

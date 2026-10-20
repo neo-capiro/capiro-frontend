@@ -22,6 +22,11 @@ const responseHeaders = [
   "x-accel-buffering",
   "retry-after",
 ];
+/**
+ * Meri closes each observation window cleanly within 30 s of its own start, which precedes its response headers. Measured
+ * from the headers, this bound therefore only catches a stream that outlives Meri's window; it never races a healthy close.
+ */
+const STREAM_BOUND_MS = 35_000;
 const unavailable = (status: number) =>
   Response.json(
     {
@@ -72,7 +77,6 @@ async function receivedConversation(
   signal: AbortSignal,
   transport: AbortController,
   requestSignal: AbortSignal,
-  started: number,
 ) {
   signal.throwIfAborted();
   if (response.redirected || response.headers.has("content-encoding"))
@@ -105,7 +109,7 @@ async function receivedConversation(
       response,
       AbortSignal.any([requestSignal, transport.signal]),
       () => transport.abort(),
-      30_000 - (Date.now() - started),
+      STREAM_BOUND_MS,
     );
     return new Response(body, { status: response.status, headers });
   }
@@ -165,7 +169,6 @@ export async function proxyConversationRequest(
   const abort = () => transport.abort();
   request.signal.addEventListener("abort", abort, { once: true });
   if (request.signal.aborted) abort();
-  const started = Date.now();
   try {
     return await withActionDeadline(
       [request.signal, transport.signal],
@@ -208,7 +211,6 @@ export async function proxyConversationRequest(
             signal,
             transport,
             request.signal,
-            started,
           );
         } finally {
           if (!response.bodyUsed)

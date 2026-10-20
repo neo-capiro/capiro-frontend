@@ -533,9 +533,42 @@ it("stream deadline remains active after headers and cancels a held reader", asy
   );
   const receiving = response.text();
   const rejected = expect(receiving).rejects.toThrow("interrupted");
-  await vi.advanceTimersByTimeAsync(30_000);
+  await vi.advanceTimersByTimeAsync(34_999);
+  expect(cancelled).not.toHaveBeenCalled();
+  await vi.advanceTimersByTimeAsync(1);
   await rejected;
   expect(cancelled).toHaveBeenCalledOnce();
+  expect(vi.getTimerCount()).toBe(0);
+});
+
+it("Meri's own 30 s window close after slow headers reaches the browser as a clean end", async () => {
+  vi.useFakeTimers();
+  const bytes = new TextEncoder().encode('data: {"type":"finish"}\n\n');
+  const response = proxyConversationRequest(
+    request("events"),
+    "events",
+    config,
+    nativeToken,
+    async () => {
+      // Meri's window starts before its headers; here they arrive 5 s into the request.
+      await new Promise((resolve) => setTimeout(resolve, 5_000));
+      return new Response(
+        new ReadableStream({
+          start(c) {
+            setTimeout(() => {
+              c.enqueue(bytes);
+              c.close();
+            }, 30_000);
+          },
+        }),
+        { headers: { "Content-Type": "text/event-stream" } },
+      );
+    },
+  );
+  await vi.advanceTimersByTimeAsync(5_000);
+  const receiving = (await response).arrayBuffer();
+  await vi.advanceTimersByTimeAsync(30_000);
+  expect(new Uint8Array(await receiving)).toEqual(bytes);
   expect(vi.getTimerCount()).toBe(0);
 });
 

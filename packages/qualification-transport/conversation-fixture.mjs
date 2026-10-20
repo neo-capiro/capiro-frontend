@@ -15,7 +15,7 @@ export async function drain(source) {
   try { for (;;) { const next = await reader.read(); if (next.done) return items; items.push(next.value); } }
   finally { reader.releaseLock(); }
 }
-export function fixture({ count = 2 } = {}) {
+export function fixture({ count = 2, ttlMs = 60_000 } = {}) {
   const lifetime = new AbortController();
   const f = { calls: [], events: Array.from({ length: count }, (_, i) => event(i + 1)), now: Date.now(), current: true, accessLost: 0, lifetime, stored: { requestId: id(6), prompt: 'Hello', windowRequest: null, window: null, skill: null } };
   f.fetchImpl = async (url, init) => {
@@ -47,7 +47,7 @@ export function fixture({ count = 2 } = {}) {
   };
   f.client = createMeriConversation({
     context: { tenantId: binding.tenantId, actorId: binding.actorId, conversationId: binding.conversationId, runId: binding.runId, selectedClientId: id(5) },
-    credential: `action_session_${'s'.repeat(43)}`, expiresAtMs: f.now + 60_000, signal: lifetime.signal,
+    credential: `action_session_${'s'.repeat(43)}`, expiresAtMs: f.now + ttlMs, signal: lifetime.signal,
     isCurrent: () => f.current, onAccessLost: () => { f.accessLost++; }, now: () => f.now,
     origin: 'https://meri.invalid', fetchImpl: (...args) => f.fetchImpl(...args),
   });
