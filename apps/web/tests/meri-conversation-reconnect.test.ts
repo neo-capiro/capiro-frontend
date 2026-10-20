@@ -179,7 +179,10 @@ it("a refusal that persists still ends unavailable after the bounded attempts", 
 
 for (const [label, answer] of [
   ["a request refusal (400)", () => refused(400)],
-  ["a mismatched receipt", () => session({ ...context, actorId: "foreign-user" })],
+  [
+    "a mismatched receipt",
+    () => session({ ...context, actorId: "foreign-user" }),
+  ],
 ] as const)
   it(`${label} is never asked again automatically`, async () => {
     clock();
@@ -195,6 +198,73 @@ for (const [label, answer] of [
       detach();
     }
   });
+
+function capped(held?: Promise<Response>) {
+  return vi.fn<typeof fetch>(async (url) =>
+    String(url).endsWith("/api/action-followthrough/session")
+      ? session(context, 300_000)
+      : (held ?? Promise.reject(new Error("unexpected request"))),
+  );
+}
+function heldResponse() {
+  let release!: (response: Response) => void;
+  const held = new Promise<Response>((resolve) => {
+    release = resolve;
+  });
+  return { held, release };
+}
+
+it("an idle session renews itself 45 s before Meri's cap instead of running into it", async () => {
+  clock();
+  const host = new ConversationHostController({
+    hints: exactHints,
+    account,
+    fetcher: capped(),
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    expect(host.getSnapshot().status).toBe("ready");
+    await vi.advanceTimersByTimeAsync(300_000 - 45_000 - 1);
+    expect(host.getSnapshot().status).toBe("ready");
+    await vi.advanceTimersByTimeAsync(1);
+    expect(host.getSnapshot().status).toBe("expired");
+  } finally {
+    detach();
+  }
+});
+
+it("a request in flight defers the early renewal until it settles", async () => {
+  clock();
+  const history = heldResponse();
+  const host = new ConversationHostController({
+    hints: exactHints,
+    account,
+    fetcher: capped(history.held),
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const snapshot = host.getSnapshot();
+    if (snapshot.status !== "ready") throw new Error("not ready");
+    // The read starts 5 s before the renewal point and is still held 10 s after it (inside its own 30 s budget).
+    await vi.advanceTimersByTimeAsync(300_000 - 45_000 - 5_000);
+    const reading = snapshot.port.history().catch(() => undefined);
+    await vi.advanceTimersByTimeAsync(15_000);
+    expect(host.getSnapshot().status).toBe("ready");
+    history.release(
+      Response.json(
+        { error: { code: "CONVERSATION_UNAVAILABLE" } },
+        { status: 503 },
+      ),
+    );
+    await reading;
+    await vi.advanceTimersByTimeAsync(1_000);
+    expect(host.getSnapshot().status).toBe("expired");
+  } finally {
+    detach();
+  }
+});
 
 it("detaching during the wait stops further issuance", async () => {
   clock();

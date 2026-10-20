@@ -7,7 +7,7 @@ import { reserveConversationTurn } from "../../../shared/meri-conversations/hist
 import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
 import {
   conversationTurnJournal,
-  recoverConversationTurn,
+  reserveTurnWhenSettled,
   type TurnIntent,
 } from "../../../shared/meri-conversations/turn-journal";
 import { useCommandGate } from "./useCommandGate";
@@ -102,8 +102,10 @@ export function useConversationTurn(
         } else {
           if (source && prompt)
             journal.start(source, prompt, crypto.randomUUID());
-          const retained = await recoverConversationTurn(journal, (input) =>
-            reserveConversationTurn(input, controller.signal),
+          const retained = await reserveTurnWhenSettled(
+            journal,
+            (input) => reserveConversationTurn(input, controller.signal),
+            controller.signal,
           );
           controller.signal.throwIfAborted();
           if (!journal.current()) throw new Error("Conversation scope changed");

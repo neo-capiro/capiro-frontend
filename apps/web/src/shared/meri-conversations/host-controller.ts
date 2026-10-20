@@ -39,6 +39,15 @@ export class ConversationHostController extends OpaqueSessionController<MeriConv
       fetcher,
       now,
       ...(retryDelaysMs ? { retryDelaysMs } : {}),
+      // A Send, a Stop or a history read in flight finishes on this session before it is renewed.
+      busy: (port) => {
+        const snapshot = port.getSnapshot();
+        return (
+          snapshot.submit === "pending" ||
+          snapshot.cancel === "pending" ||
+          snapshot.status === "loading"
+        );
+      },
       createPort: ({ session, signal, ...lifetime }) => {
         // Core PR15 readCurrentApplicationAuthority returns native user.id, not Clerk subject.
         if (
