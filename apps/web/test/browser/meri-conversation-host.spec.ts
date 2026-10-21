@@ -42,7 +42,7 @@ test("connects the exact account/client, loads the admitted transcript and resum
   const calls: string[] = [];
   await page.route("**/api/conversations/history", (r) => {
     calls.push("history");
-    expect(r.request().postDataJSON()).toEqual({ limit: 100 });
+    expect(r.request().postDataJSON()).toEqual({ after: 0, limit: 100 });
     return reply(r, history());
   });
   await page.route(
@@ -57,7 +57,6 @@ test("connects the exact account/client, loads the admitted transcript and resum
     },
   );
   await connect(page);
-  expect(fixture.hints).toEqual([{ clientId }]);
   const turn = page.getByRole("article", { name: "Current turn" });
   await expect(turn.getByText("Previously stored request")).toBeVisible();
   await expect(
@@ -66,6 +65,8 @@ test("connects the exact account/client, loads the admitted transcript and resum
     }),
   ).toBeVisible();
   await expect(turn.getByText("Completed", { exact: true })).toBeVisible();
+  // connect() waits only for the heading; the automatic session request is settled once the transcript renders.
+  expect(fixture.hints).toEqual([{ clientId }]);
   expect(calls).toEqual(["history", "reconnect"]);
   await expect(sendButton(page)).toBeDisabled();
   await expect(composer(page)).toBeEnabled();

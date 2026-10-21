@@ -245,10 +245,12 @@ export function expectFilesIsolation(
   expect(
     fixture.host.actions().filter((entry) => entry.route !== "session"),
   ).toEqual([]);
-  for (const request of fixture.requests)
-    expect(request.headers.authorization).toBe(
-      `Bearer action_session_${"a".repeat(43)}`,
+  for (const request of fixture.requests) {
+    expect(request.headers["x-meri-action-session"]).toBe(
+      `action_session_${"a".repeat(43)}`,
     );
+    expect(request.headers.authorization).toBeUndefined();
+  }
 }
 export async function urls(page: Page) {
   return page.evaluate(
