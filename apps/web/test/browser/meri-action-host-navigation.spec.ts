@@ -51,7 +51,7 @@ for (const state of ["unknown", "in-flight"] as const) {
     );
     await expect(
       page.getByRole("heading", {
-        name: "Everything in Capiro, across the whole firm",
+        name: "Work in Capiro, across your modules",
       }),
     ).toBeVisible();
     await page.goBack();
@@ -80,7 +80,7 @@ for (const state of ["unknown", "in-flight"] as const) {
     await page.goForward();
     await expect(
       page.getByRole("heading", {
-        name: "Everything in Capiro, across the whole firm",
+        name: "Work in Capiro, across your modules",
       }),
     ).toBeVisible();
     await page.goBack();
