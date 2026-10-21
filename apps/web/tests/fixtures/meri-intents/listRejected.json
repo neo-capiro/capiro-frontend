@@ -1,0 +1,76 @@
+{
+  "route": "list",
+  "request": {
+    "conversationId": "00000000-0000-4000-8000-000000000001"
+  },
+  "httpStatus": 200,
+  "response": {
+    "conversationId": "00000000-0000-4000-8000-000000000001",
+    "intents": [
+      {
+        "deliveryId": "sdk:0000000000000000000000000000000000000000000000000000000000000001",
+        "createdAt": "2026-10-12T20:00:00.000Z",
+        "operation": {
+          "id": "create_task",
+          "version": "0.2.0"
+        },
+        "state": "prepared",
+        "kind": "proposal",
+        "proposal": {
+          "proposalId": "00000000-0000-4000-8000-000000000102",
+          "command": {
+            "contractVersion": "0.1.0",
+            "commandId": "00000000-0000-4000-8000-000000000100",
+            "binding": {
+              "tenantId": "tenant",
+              "actorId": "actor",
+              "conversationId": "00000000-0000-4000-8000-000000000001",
+              "runId": "00000000-0000-4000-8000-000000000002",
+              "attemptId": "00000000-0000-4000-8000-000000000003",
+              "workerId": "00000000-0000-4000-8000-000000000004",
+              "writerFence": 1
+            },
+            "action": "task.create",
+            "arguments": {
+              "title": "Task",
+              "clientId": null,
+              "dueDate": null
+            },
+            "attachments": [],
+            "scopes": [
+              {
+                "tenantId": "tenant",
+                "kind": "tenant",
+                "resourceId": "tenant",
+                "policyRevision": "p1"
+              }
+            ],
+            "idempotencyKey": "00000000-0000-4000-8000-000000000101"
+          },
+          "commandSha256": "7b064e00443462f446d0bc3abf2709e41fe618368c111ab3138a22b31023e69f",
+          "createdAt": "2026-10-12T20:00:00.000Z",
+          "expiresAt": "2026-10-12T20:00:45.000Z",
+          "requiredApprover": {
+            "tenantId": "tenant",
+            "actorId": "actor"
+          }
+        },
+        "decision": {
+          "proposalId": "00000000-0000-4000-8000-000000000102",
+          "commandSha256": "7b064e00443462f446d0bc3abf2709e41fe618368c111ab3138a22b31023e69f",
+          "decision": "rejected",
+          "decidedAt": "2026-10-12T20:00:00.000Z",
+          "expiresAt": "2026-10-12T20:00:40.000Z",
+          "approver": {
+            "tenantId": "tenant",
+            "actorId": "actor"
+          },
+          "policyRevision": "p1"
+        },
+        "execution": null,
+        "phase": "rejected"
+      }
+    ],
+    "next": null
+  }
+}

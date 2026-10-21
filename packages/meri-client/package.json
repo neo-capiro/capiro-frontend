@@ -9,7 +9,8 @@
     "dist",
     "README.md",
     "vendor/task-command-application/0.1.0",
-    "vendor/user-preferences-application/0.1.0"
+    "vendor/user-preferences-application/0.1.0",
+    "vendor/intents-application/0.1.0"
   ],
   "exports": {
     "./user-preferences": {
@@ -31,6 +32,10 @@
     "./task-commands": {
       "types": "./vendor/task-command-application/0.1.0/task-command-application.d.ts",
       "default": "./vendor/task-command-application/0.1.0/task-command-application.mjs"
+    },
+    "./intents": {
+      "types": "./vendor/intents-application/0.1.0/intents-application.d.ts",
+      "default": "./vendor/intents-application/0.1.0/intents-application.mjs"
     },
     "./conversation": {
       "types": "./dist/conversation-client.d.ts",

@@ -1,11 +1,12 @@
 import { Message, MessageContent } from "@capiro/ui/message";
-import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import { unavailableResources } from "../../../shared/meri-resources/unavailable";
+import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import { UserMessage } from "../screens/conversation/UserMessage";
 import { Notice } from "../ui/Notice";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import { runStateLabels } from "../workspace/workspace-view";
 import type { TurnView } from "./conversation-view";
+import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
 import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
 
@@ -109,6 +110,7 @@ export function ConversationTurn({
 
 /** Approval requests, run errors and the service reason code published for the run. */
 function TurnNotices({ turn }: { turn: TurnView }) {
+  const approvals = useIntentApprovalsEnabled();
   return (
     <>
       {turn.approvals.map((approval) => (
@@ -117,11 +119,19 @@ function TurnNotices({ turn }: { turn: TurnView }) {
           tone="warning"
           title="Approval required"
         >
-          <p>
-            Meri is waiting for an approval that expires{" "}
-            {time(approval.expiresAt)}. Decisions cannot be made here yet.{" "}
-            {unavailableResources.approvals.missing}
-          </p>
+          {approvals ? (
+            <p>
+              Meri is waiting for an approval that expires{" "}
+              {time(approval.expiresAt)}. Review and decide it under “Actions
+              for your approval”; nothing happens unless you approve it there.
+            </p>
+          ) : (
+            <p>
+              Meri is waiting for an approval that expires{" "}
+              {time(approval.expiresAt)}. Decisions cannot be made here yet.{" "}
+              {unavailableResources.approvals.missing}
+            </p>
+          )}
         </Notice>
       ))}
       {turn.errors.map((error, index) => (

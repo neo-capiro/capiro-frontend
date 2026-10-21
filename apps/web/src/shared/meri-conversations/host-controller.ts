@@ -3,6 +3,10 @@ import {
   createArtifactAccess,
   type ArtifactAccess,
 } from "../meri-documents/artifact-access";
+import {
+  createIntentsAccess,
+  type IntentsAccess,
+} from "../meri-intents/access";
 import { OpaqueSessionController } from "../meri-actions/opaque-session-controller";
 import {
   actionSessionHints,
@@ -14,6 +18,8 @@ export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
   readonly context: ActionContext;
   /** Read-only artifact preview/download under the same session lifetime. */
   readonly artifacts: ArtifactAccess;
+  /** Prepared-action list and decisions, checked by the public receiver under the same session lifetime. */
+  readonly intents: IntentsAccess;
 };
 export type ConversationAccount = Readonly<{
   tenantId: string;
@@ -71,6 +77,7 @@ export class ConversationHostController extends OpaqueSessionController<MeriConv
           }),
           context: session.context,
           artifacts: createArtifactAccess(session.credential, signal, fetcher),
+          intents: createIntentsAccess(session.credential, signal, fetcher),
         });
         try {
           onBound?.(session.context);
