@@ -16,6 +16,7 @@ const runKey = (context: ActionContext) =>
 
 /** Local draft consumption follows the conversation lifetime, including replacement sessions. */
 export function createInitialDraftOwner() {
+  let editRevision = 0;
   let pending: {
     run: string;
     request: string;
@@ -27,12 +28,13 @@ export function createInitialDraftOwner() {
       context: ActionContext,
       request: ConversationSubmitRequest,
       draft: string,
+      capturedRevision = editRevision,
     ) {
       pending = {
         run: runKey(context),
         request: submissionIdentity(request),
         draft,
-        edited: false,
+        edited: capturedRevision !== editRevision,
       };
     },
     select(context: ActionContext) {
@@ -41,7 +43,13 @@ export function createInitialDraftOwner() {
       if (pending && pending.run !== runKey(context)) pending = null;
     },
     edit() {
+      editRevision++;
       if (pending) pending.edited = true;
+    },
+    revision: () => editRevision,
+    reset() {
+      pending = null;
+      editRevision++;
     },
     hasPending: (context: ActionContext) => pending?.run === runKey(context),
     acknowledge(

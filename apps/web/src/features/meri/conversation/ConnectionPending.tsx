@@ -7,18 +7,64 @@ import type { useConversationSession } from "./useConversationSession";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
 
-/** Saved reading remains available when no current writer session can be issued. */
+type Session = ReturnType<typeof useConversationSession>;
+
+/** Connection recovery presents the same exact-run retry while private content stays hidden. */
+function ConnectionStatus({
+  session,
+  waiting,
+}: {
+  session: Session;
+  waiting: boolean;
+}) {
+  const { connection } = session;
+  const status = connection.state.status;
+  return (
+    <section role="status" className={styles.status}>
+      <h2>
+        {session.latestTarget
+          ? "A newer accepted turn is available"
+          : status === "expired"
+            ? "Conversation session expired"
+            : waiting
+              ? "Connecting to Meri."
+              : "Conversation connection unavailable"}
+      </h2>
+      <p className={styles.muted}>
+        {status === "unavailable"
+          ? "The service could not verify this conversation. No sample transcript was substituted."
+          : "The service rechecks your account, client and exact conversation before issuing a short-lived connection."}
+      </p>
+      {!waiting && !session.latestTarget && (
+        <Button
+          type="button"
+          variant="outline"
+          className={ui.outline}
+          onClick={() => {
+            connection.retry();
+            session.history.refresh();
+          }}
+        >
+          {status === "expired" ? "Reconnect" : "Try again"}
+        </Button>
+      )}
+    </section>
+  );
+}
+
+/** Saved reading is hidden after access loss until the exact session is reauthorized. */
 export function ConnectionPending({
   session,
   scope,
 }: {
-  session: ReturnType<typeof useConversationSession>;
+  session: Session;
   scope: string;
 }) {
   const { connection, earlier } = session;
   const status = connection.state.status,
     waiting = status === "idle" || status === "connecting";
   const pending =
+    !session.accessLost &&
     connection.pending &&
     !earlier.some(
       (turn) =>
@@ -30,8 +76,12 @@ export function ConnectionPending({
   return (
     <ConversationFrame
       scope={scope}
-      earlier={earlier}
-      historyStatus={<ConversationHistoryStatus session={session} />}
+      earlier={session.accessLost ? [] : earlier}
+      historyStatus={
+        session.accessLost ? null : (
+          <ConversationHistoryStatus session={session} />
+        )
+      }
       current={
         pending ? (
           <article
@@ -46,39 +96,9 @@ export function ConnectionPending({
           </article>
         ) : null
       }
-      status={
-        <section role="status" className={styles.status}>
-          <h2>
-            {session.latestTarget
-              ? "A newer accepted turn is available"
-              : status === "expired"
-                ? "Conversation session expired"
-                : waiting
-                  ? "Connecting to Meri."
-                  : "Conversation connection unavailable"}
-          </h2>
-          <p className={styles.muted}>
-            {status === "unavailable"
-              ? "The service could not verify this conversation. No sample transcript was substituted."
-              : "The service rechecks your account, client and exact conversation before issuing a short-lived connection."}
-          </p>
-          {!waiting && !session.latestTarget && (
-            <Button
-              type="button"
-              variant="outline"
-              className={ui.outline}
-              onClick={() => {
-                connection.retry();
-                session.history.refresh();
-              }}
-            >
-              {status === "expired" ? "Reconnect" : "Try again"}
-            </Button>
-          )}
-        </section>
-      }
+      status={<ConnectionStatus session={session} waiting={waiting} />}
       files={null}
-      draft={session.draft}
+      draft={session.accessLost ? "" : session.draft}
       onDraft={session.setDraft}
       textareaRef={session.textarea}
       running={false}

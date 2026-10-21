@@ -1,5 +1,11 @@
 "use client";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import {
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+  type QueryClient,
+} from "@tanstack/react-query";
 import { conversationHistoryMetadata as protocol } from "@capiro/meri-contracts/conversation-history";
 import type { ConversationAccount } from "./host-controller";
 import {
@@ -50,12 +56,35 @@ async function scopedTranscript(
   return page;
 }
 
+/** Revoke only private read material; exact command/selection identities retain their existing owners. */
+export function clearConversationReads(
+  cache: QueryClient,
+  account: ConversationAccount,
+  clientId: string,
+) {
+  const filters = {
+    predicate: (query: { queryKey: readonly unknown[] }) => {
+      const [kind, tenant, actor, client] = query.queryKey;
+      return (
+        (kind === "meri-conversation-transcript" ||
+          kind === "meri-conversation-list") &&
+        tenant === account.tenantId &&
+        actor === account.actorId &&
+        client === clientId
+      );
+    },
+  };
+  void cache.cancelQueries(filters);
+  cache.removeQueries(filters);
+}
+
 /** Read the latest run's lineage even when earlier conversation pages remain unloaded. */
 function useLatestTranscript(
   account: ConversationAccount,
   clientId: string,
   conversationId: string | undefined,
   after: number | undefined,
+  enabled: boolean,
 ) {
   return useQuery({
     queryKey: [
@@ -63,7 +92,7 @@ function useLatestTranscript(
       "latest",
       after,
     ],
-    enabled: after !== undefined,
+    enabled: enabled && after !== undefined,
     queryFn: ({ signal }) =>
       scopedTranscript(account, clientId, conversationId, after, signal),
     retry: false,
@@ -121,10 +150,17 @@ export function useConversationHistory(
   account: ConversationAccount,
   clientId: string,
   conversationId?: string,
+  enabled = true,
 ) {
+  const cache = useQueryClient();
+  const { tenantId, actorId } = account;
+  useEffect(() => {
+    if (!enabled)
+      clearConversationReads(cache, { tenantId, actorId }, clientId);
+  }, [cache, tenantId, actorId, clientId, enabled]);
   const query = useInfiniteQuery({
     queryKey: transcriptKey(account, clientId, conversationId),
-    enabled: !!conversationId,
+    enabled: enabled && !!conversationId,
     initialPageParam: protocol.defaults.after as number,
     queryFn: ({ pageParam: after, signal }) =>
       scopedTranscript(account, clientId, conversationId, after, signal),
@@ -135,7 +171,7 @@ export function useConversationHistory(
   });
   let saved: ReturnType<typeof transcriptPages> | undefined,
     invalid = false;
-  if (query.data && !query.error && !query.isRefetching) {
+  if (enabled && query.data && !query.error && !query.isRefetching) {
     try {
       saved = transcriptPages(query.data.pages, account, clientId);
     } catch {
@@ -148,10 +184,12 @@ export function useConversationHistory(
     clientId,
     conversationId,
     latestBase,
+    enabled,
   );
   const current =
     saved && !tail.error && !tail.isFetching ? tail.data : undefined;
-  const denied = accessDenied(query.error) || accessDenied(tail.error);
+  const denied =
+    enabled && (accessDenied(query.error) || accessDenied(tail.error));
   const empty = !!conversationId && historyNotStarted(query.error);
   return {
     query,
@@ -164,8 +202,8 @@ export function useConversationHistory(
     empty,
     unavailable: (!!query.error && !empty) || invalid || denied,
     refresh: () => {
-      if (conversationId) void query.refetch();
-      if (latestBase !== undefined) void tail.refetch();
+      if (enabled && conversationId) void query.refetch();
+      if (enabled && latestBase !== undefined) void tail.refetch();
     },
   };
 }

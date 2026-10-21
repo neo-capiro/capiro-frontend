@@ -15,7 +15,7 @@ import {
 import { conversationSelectionOwner } from "../../../shared/meri-conversations/query-journal";
 import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
 
-/** A naturally expired session renews once on its own; a quick loss needs an explicit reconnect. */
+/** A short hard expiry needs explicit reconnect; proactive renewal already has timer evidence. */
 const renewAfterMs = 60_000;
 type Hints = ConstructorParameters<
   typeof ConversationHostController
@@ -43,6 +43,53 @@ function boundContext() {
       last = Object.freeze({ context, at });
     },
     last: () => last,
+  };
+}
+
+/** Renewal and access loss share the last exact binding, but a denial never renews itself. */
+function useSessionRenewal({
+  host,
+  status,
+  bound,
+  reopen,
+  now,
+}: {
+  host: ConversationHostController;
+  status: ReturnType<ConversationHostController["getSnapshot"]>["status"];
+  bound: ReturnType<typeof boundContext>;
+  reopen: (options?: Reopening) => void;
+  now: () => number;
+}) {
+  // Keep private data hidden through explicit retry until a fresh receipt is validated.
+  const [denied, setDenied] = useState(false);
+  const revoked = host.getExpirationReason() === "access-lost";
+  if (revoked && !denied) setDenied(true);
+  else if (status === "ready" && denied) setDenied(false);
+  const accessLost = revoked || (denied && status !== "ready");
+
+  const renewed = useRef<string | null>(null);
+  useEffect(() => {
+    const last = bound.last();
+    if (status !== "expired" || !last) return;
+    const reason = host.getExpirationReason();
+    if (reason === "access-lost") return;
+    const key = JSON.stringify(last.context) + last.at;
+    if (
+      renewed.current === key ||
+      (reason !== "renewal" && now() - last.at < renewAfterMs)
+    )
+      return;
+    renewed.current = key;
+    reopen();
+  }, [status, reopen, bound, now, host]);
+
+  return {
+    accessLost,
+    revoke: useCallback(() => {
+      const last = bound.last();
+      if (last) renewed.current = JSON.stringify(last.context) + last.at;
+      host.revoke();
+    }, [host, bound]),
   };
 }
 
@@ -112,25 +159,19 @@ export function useConversationConnection(
     [clientId, create, selection, bound],
   );
 
-  const renewed = useRef<string | null>(null);
-  useEffect(() => {
-    const last = bound.last();
-    if (state.status !== "expired" || !last) return;
-    const key = JSON.stringify(last.context) + last.at;
-    if (renewed.current === key || now() - last.at < renewAfterMs) return;
-    renewed.current = key;
-    reopen();
-  }, [state.status, reopen, bound, now]);
+  const renewal = useSessionRenewal({
+    host,
+    status: state.status,
+    bound,
+    reopen,
+    now,
+  });
 
   return {
     state,
+    ...renewal,
     conversationId: opening.hints.conversationId,
     pending: opening.pending,
-    revoke: useCallback(() => {
-      const last = bound.last();
-      if (last) renewed.current = JSON.stringify(last.context) + last.at;
-      host.revoke();
-    }, [host, bound]),
     /** Reopen the same run after expiry; otherwise retry the same selectors, never broader ones. */
     retry: () =>
       state.status === "expired"

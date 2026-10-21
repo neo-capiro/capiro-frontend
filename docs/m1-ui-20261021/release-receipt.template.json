@@ -1,0 +1,74 @@
+{
+  "schema": "meri.m1.release/1",
+  "deployment": {
+    "origin": "https://portfolio-preview.app.capiro.ai",
+    "profile": "restricted-preview",
+    "testOnly": true,
+    "operatorApprovalReceiptId": null,
+    "sourceAndConfigurationReceiptId": null
+  },
+  "sources": {
+    "frontend": { "commit": null, "image": null },
+    "meri": { "commit": null, "image": null },
+    "core": { "commit": null, "image": null }
+  },
+  "contracts": {
+    "applicationPackage": "0.1.10",
+    "eventWire": "0.1.0",
+    "lifecycleWire": "0.1.0",
+    "installedHashesReceiptId": null
+  },
+  "identity": {
+    "issuer": null,
+    "audience": null,
+    "nativeSubject": null,
+    "actorId": null,
+    "tenantId": null,
+    "clientId": null,
+    "otherClientId": null,
+    "mappingReceiptId": null
+  },
+  "prerequisites": {
+    "migrationsAndGrants": [],
+    "workerCompositionReceiptId": null,
+    "secretReferenceInventoryReceiptId": null,
+    "rollbackReceiptId": null
+  },
+  "slices": [
+    {
+      "id": "conversation",
+      "enabled": true,
+      "positiveReceiptIds": [],
+      "negativeReceiptIds": [],
+      "unknownRecoveryReceiptIds": []
+    },
+    {
+      "id": "lifecycle",
+      "enabled": false,
+      "positiveReceiptIds": [],
+      "negativeReceiptIds": [],
+      "unknownRecoveryReceiptIds": []
+    },
+    {
+      "id": "approvals",
+      "enabled": false,
+      "positiveReceiptIds": [],
+      "negativeReceiptIds": [],
+      "unknownRecoveryReceiptIds": []
+    },
+    {
+      "id": "documents",
+      "enabled": false,
+      "positiveReceiptIds": [],
+      "negativeReceiptIds": [],
+      "unknownRecoveryReceiptIds": []
+    },
+    {
+      "id": "memory",
+      "enabled": false,
+      "positiveReceiptIds": [],
+      "negativeReceiptIds": [],
+      "unknownRecoveryReceiptIds": []
+    }
+  ]
+}

@@ -50,6 +50,7 @@ const transientIssuance = (error: unknown) =>
     error.status === 429 ||
     error.status >= 500);
 const defaultRetryDelaysMs = Object.freeze([1_000, 3_000]);
+type ExpirationReason = "renewal" | "expiry" | "access-lost";
 
 /** Owns one in-memory connection and observation lifetime; never admits a run. */
 export class OpaqueSessionController<P extends { dispose(): void }> {
@@ -61,11 +62,14 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
   private expiry: ReturnType<typeof setTimeout> | undefined;
   private renewal: ReturnType<typeof setTimeout> | undefined;
   private port: P | undefined;
+  private expirationReason: ExpirationReason | undefined;
   private now: () => number;
   constructor(private readonly options: Options<P>) {
     this.now = options.now ?? Date.now;
   }
   getSnapshot = () => this.snapshot;
+  /** Local lifetime evidence only; a timer ending a session is not a membership refusal. */
+  getExpirationReason = () => this.expirationReason;
   subscribe = (listener: () => void) => {
     this.listeners.add(listener);
     return () => {
@@ -98,6 +102,7 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
     this.clientAvailable = available;
   }
   revoke() {
+    this.expirationReason = "access-lost";
     this.clear();
     this.publish({ status: "expired" });
   }
@@ -140,6 +145,7 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
     )
       return;
     this.clear();
+    this.expirationReason = undefined;
     const lifetime = new AbortController();
     this.lifetime = lifetime;
     this.publish({ status: "connecting" });
@@ -148,25 +154,31 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
     try {
       const session = await this.issue(lifetime.signal, current);
       if (!current()) return;
-      const expire = () => {
+      const expire = (reason: ExpirationReason) => {
         if (!current()) return;
+        this.expirationReason = reason;
         this.clear();
         this.publish({ status: "expired" });
       };
       const port = this.options.createPort({
         session,
         signal: lifetime.signal,
-        onAccessLost: expire,
+        // The port's own expiry timer can run before this owner's timer.
+        onAccessLost: () =>
+          expire(this.now() >= session.expiresAtMs ? "expiry" : "access-lost"),
         isCurrent: () => this.clientAvailable,
         now: this.now,
       });
       this.port = port;
-      this.expiry = setTimeout(expire, session.expiresAtMs - this.now());
+      this.expiry = setTimeout(
+        () => expire("expiry"),
+        session.expiresAtMs - this.now(),
+      );
       const busy = this.options.busy;
       const renew = () => {
         if (!current()) return;
         if (busy?.(port)) this.renewal = setTimeout(renew, RENEW_RECHECK_MS);
-        else expire();
+        else expire("renewal");
       };
       const renewIn = session.expiresAtMs - RENEW_LEAD_MS - this.now();
       if (busy && renewIn > 0) this.renewal = setTimeout(renew, renewIn);
@@ -175,8 +187,13 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
         port,
         lifetimeKey: JSON.stringify(session.context),
       });
-    } catch {
+    } catch (error) {
       if (!current()) return;
+      if (
+        error instanceof ActionSessionUnavailable &&
+        [401, 403].includes(error.status)
+      )
+        this.expirationReason = "access-lost";
       this.clear();
       this.publish({ status: "unavailable" });
     }

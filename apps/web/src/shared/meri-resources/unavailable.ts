@@ -1,15 +1,14 @@
 /**
- * Meri resources the backend does not serve to the browser yet. Each entry is that resource's
- * client adapter until a public route exists: it reports "not available yet" with the exact missing
- * route or contract and its owner, and it never returns records. Replace an entry with a real
- * adapter when `neo-capiro/meri-greenfield` publishes the route through a versioned contract.
+ * Explanations for unavailable controls, including source-supported slices that are held by
+ * configuration or lack an ordinary consumer. Existing server routes and validated configuration
+ * own activation; source reception alone never means a workspace is enabled.
  */
 export type UnavailableResource = Readonly<{
   /** Short user-facing name of the resource. */
   label: string;
   /** One sentence for people: what is missing and what still works. */
   summary: string;
-  /** The exact route or contract that does not exist yet. */
+  /** Precise remaining dependency; do not claim published contracts are absent. */
   missing: string;
   /** Repository area that owns the missing route. */
   owner: string;
@@ -29,40 +28,41 @@ export const unavailableResources = Object.freeze({
   conversationHistory: {
     label: "Earlier turns",
     summary:
-      "Turns from before this page was opened are not shown. Turns sent here stay visible until you leave.",
+      "Saved history requires a verified conversation connection. Reconnect to read earlier turns.",
     missing:
-      "Conversation-wide history across runs. POST /api/conversations/history returns only the run bound to the current session.",
+      "Current access and serving configuration for the published conversation transcript and run-history routes.",
     owner: `${conversations} (conversation-wide history lane)`,
   },
   newConversation: {
     label: "New conversation",
     summary:
-      "Starting a separate conversation is not available yet. The service chooses the current conversation for this client.",
+      "Starting a separate conversation requires an enabled connection and a permitted configured client.",
     missing:
-      "A create-conversation selector. POST /api/action-followthrough/session accepts only conversationId, runId and clientId hints that must match the service's own choice.",
+      "Qualified Core bootstrap and current Meri admission. The idempotent new-conversation consumer already exists; opening or reconnecting does not create a new conversation.",
     owner: "neo-capiro/meri-greenfield apps/control/action-host/session",
   },
   runs: {
     label: "Runs",
     summary:
-      "A list of runs is not available yet. The current run's status and Stop are shown in the conversation.",
+      "A list of runs is not available yet. Current runs can be reviewed within an enabled conversation.",
     missing:
-      "A run list route. Steer, pause, resume and fork use the private POST /api/conversations/control, which has no public contract export.",
+      "A public run-list consumer. conversation-lifecycle/0.1.0 already exports control and checkpoint inspection; activation and safe recovery remain separately qualified.",
     owner: `${conversations}/lifecycle`,
   },
   approvals: {
     label: "Approvals",
     summary:
-      "The approval center is not available yet. Approval requests published in the current conversation are shown there, without decisions.",
+      "The approval center is not available yet. Enabled proposal decisions are reviewed within their conversation.",
     missing:
-      "An approval list route and a browser approval decision route. Only approval.required conversation events are published.",
+      "A workspace-wide approval inbox. Versioned conversation intent list and decision consumers already exist behind their deployment gate.",
     owner: "neo-capiro/meri-greenfield apps/control (approval owner)",
   },
   memory: {
     label: "Memory",
-    summary: "Institutional memory and memory proposals are not available yet.",
+    summary:
+      "Full institutional memory is not available yet. Personal owner review is a separately enabled workspace.",
     missing:
-      "Memory recall, memory proposal and memory review routes. No browser memory route or event type exists.",
+      "The complete recall/proposal/governance composition. The personal owner-memory review route already exists and requires its current Core connection.",
     owner: "neo-capiro/meri-greenfield governed memory owner",
   },
   routines: {
@@ -82,9 +82,9 @@ export const unavailableResources = Object.freeze({
   preferences: {
     label: "Meri preferences",
     summary:
-      "Meri preferences cannot be read or saved yet. Nothing on this page is stored.",
+      "Personal Meri preferences can be saved when their connection is enabled. Other settings remain unavailable unless separately connected.",
     missing:
-      "Meri settings read and write routes (preferences, connectors, limits, skills, notifications, privacy).",
+      "Activation of the published user-preferences read/save consumer. Connector grants, limits, skills, notifications and privacy have separate owners and remaining dependencies.",
     owner: "neo-capiro/meri-greenfield settings owner",
   },
   attachments: {

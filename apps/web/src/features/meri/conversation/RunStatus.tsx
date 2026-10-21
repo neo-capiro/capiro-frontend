@@ -3,6 +3,7 @@ import type { useLiveRun } from "./useLiveRun";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
+import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
 
 /** Connection, delivery and stop feedback for the current run; never a run outcome by itself. */
 export function RunStatus({
@@ -73,20 +74,43 @@ export function RunStatus({
           </Button>
         )}
       {active && <ObservationStatus run={run} />}
+      <StopStatus run={run} />
+      {active && (
+        <p className={styles.muted}>
+          Leaving this page stops watching and does not cancel the run. Use Stop
+          to request cancellation.
+        </p>
+      )}
+      <RunLifecycleControls />
+    </>
+  );
+}
+
+/** A fence receipt and a terminal conversation record are distinct backend evidence. */
+function StopStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
+  const { snapshot, intent } = run;
+  return (
+    <>
+      {intent.cancel === "pending" && (
+        <p role="status" className={styles.muted}>
+          Stopping: requesting a cancellation fence.
+        </p>
+      )}
       {snapshot.cancelReceipt && (
         <p role="status" className={styles.muted}>
-          Stop request answered: run {snapshot.cancelReceipt.state}.
+          Stop fence recorded. This acknowledges cancellation, not completion of
+          cleanup.
+        </p>
+      )}
+      {snapshot.observation?.runState === "cancelled" && (
+        <p role="status" className={styles.muted}>
+          Stopped in the conversation record. Meri must confirm cleanup before
+          starting your next message.
         </p>
       )}
       {intent.cancel === "unknown" && !snapshot.cancelReceipt && (
         <p role="status" className={styles.muted}>
           The stop request may not have reached Meri. Press Stop again to retry.
-        </p>
-      )}
-      {active && (
-        <p className={styles.muted}>
-          Leaving this page stops watching and does not cancel the run. Use Stop
-          to request cancellation.
         </p>
       )}
     </>

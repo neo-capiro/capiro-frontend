@@ -1,12 +1,42 @@
 "use client";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { useConversationHistory } from "../../../shared/meri-conversations/history-queries";
 import { useConversationConnection } from "./useConversationConnection";
-import { useConversationTurn } from "./useConversationTurn";
+import {
+  useConversationTurn,
+  type ConversationTurnTarget,
+} from "./useConversationTurn";
 import { sessionHistoryState } from "./saved-turns";
 import type { TurnView } from "./conversation-view";
-import { createInitialDraftOwner } from "./initial-draft";
+import { useConversationLocalState } from "./useConversationLocalState";
+
+/** Bind the captured input to the reserved target before opening its exact authorized session. */
+function useTurnOpening(
+  account: ConversationAccount,
+  clientId: string,
+  reopen: ReturnType<typeof useConversationConnection>["reopen"],
+  bindNext: ReturnType<typeof useConversationLocalState>["bindNext"],
+) {
+  return useCallback(
+    (target: ConversationTurnTarget) => {
+      bindNext(
+        {
+          ...account,
+          selectedClientId: clientId,
+          conversationId: target.conversationId,
+          runId: target.runId,
+        },
+        { requestId: target.requestId, prompt: target.pending },
+      );
+      reopen({
+        target: { conversationId: target.conversationId, runId: target.runId },
+        pending: target.pending,
+      });
+    },
+    [reopen, bindNext, account, clientId],
+  );
+}
 
 /** Screen lifetime composition: saved reads, exact session selection and retained next-turn intent. */
 export function useConversationSession(
@@ -26,61 +56,49 @@ export function useConversationSession(
     conversationId ??
     boundReady?.port.context.conversationId ??
     connection.conversationId;
-  const history = useConversationHistory(account, clientId, selectedId);
-  const ready = history.denied ? undefined : boundReady;
-  useEffect(() => {
-    if (history.denied && boundReady) connection.revoke();
-  }, [history.denied, boundReady, connection.revoke]);
-  const [draft, setDraft] = useState("");
-  const [initialDraft] = useState(createInitialDraftOwner);
-  useEffect(() => {
-    if (boundReady) initialDraft.select(boundReady.port.context);
-  }, [boundReady, initialDraft]);
-  const updateDraft = useCallback(
-    (value: string) => {
-      initialDraft.edit();
-      setDraft(value);
-    },
-    [initialDraft],
-  );
-  const [localTurns, setLocalTurns] = useState<readonly TurnView[]>([]);
-  const textarea = useRef<HTMLTextAreaElement>(null);
-  const openTarget = useCallback(
-    (target: { conversationId: string; runId: string; pending: string }) => {
-      connection.reopen({ target, pending: target.pending });
-    },
-    [connection.reopen],
-  );
-  const continuation = useConversationTurn(
+  const history = useConversationHistory(
     account,
     clientId,
     selectedId,
+    !connection.accessLost,
+  );
+  const accessLost = connection.accessLost || history.denied;
+  const ready = accessLost ? undefined : boundReady;
+  const { revoke, reopen } = connection;
+  useEffect(() => {
+    if (history.denied) revoke();
+  }, [history.denied, revoke]);
+  const local = useConversationLocalState(boundReady?.port.context, accessLost);
+  const { bindNext } = local;
+  const textarea = useRef<HTMLTextAreaElement>(null);
+  const openTarget = useTurnOpening(account, clientId, reopen, bindNext);
+  const continuation = useConversationTurn(
+    account,
+    clientId,
+    accessLost ? undefined : selectedId,
     openTarget,
   );
   const view = sessionHistoryState(
     history,
     ready?.port.context.runId,
-    localTurns,
-    continuation.intent,
+    local.turns,
+    accessLost ? undefined : continuation.intent,
     continuation.busy,
   );
   const startNext = (prompt: string, finished: TurnView) => {
     if (!view.source || view.nextBlocked || !prompt) return;
-    setLocalTurns((turns) => [
-      ...turns.filter((turn) => turn.runId !== finished.runId),
-      finished,
-    ]);
-    setDraft("");
+    local.retainNext(finished);
     void continuation.start(view.source, prompt);
   };
   return {
     connection,
+    accessLost,
     ready,
     history,
     continuation,
-    draft,
-    setDraft: updateDraft,
-    initialDraft,
+    draft: local.draft,
+    setDraft: local.setDraft,
+    initialDraft: local.initialDraft,
     textarea,
     ...view,
     startNext,

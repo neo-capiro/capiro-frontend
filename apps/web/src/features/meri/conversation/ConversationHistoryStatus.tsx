@@ -41,10 +41,18 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
       )}
       {continuation.failed && (
         <p role="alert">
-          Turn recovery unavailable. No replacement turn was requested.
+          {continuation.notReady
+            ? "Meri is not ready for your next message yet. The previous run is still being retired. Retry the same turn when cleanup finishes."
+            : "Turn recovery unavailable. No replacement turn was requested."}
           {continuation.intent
             ? " The original request identity is retained."
             : ""}
+        </p>
+      )}
+      {continuation.busy && (
+        <p role="status">
+          Checking whether Meri is ready for your next message. Your original
+          request is retained.
         </p>
       )}
     </>
