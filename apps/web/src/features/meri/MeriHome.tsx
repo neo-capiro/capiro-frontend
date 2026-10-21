@@ -14,12 +14,15 @@ import { MeriClientSelector } from "./MeriClientSelector";
 export function MeriHome({
   conversationEnabled = false,
   intentApprovalsEnabled = false,
+  memoryReviewEnabled = false,
   firstChatBootstrapEnabled = false,
   firstChatBootstrapClientId,
 }: {
   conversationEnabled?: boolean;
   /** Server-decided (readIntentsConfig); approvals stay dark unless true. */
   intentApprovalsEnabled?: boolean;
+  /** Server-decided (MERI_MEMORY_OWNER_REVIEW_ENABLED); the memory link stays hidden unless true. */
+  memoryReviewEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
   firstChatBootstrapClientId?: string;
 }) {
@@ -78,14 +81,23 @@ export function MeriHome({
             }
           />
         </IntentApprovalsEnabled.Provider>
-        <MeriWorkspaceLinks clientId={clientId} />
+        <MeriWorkspaceLinks
+          clientId={clientId}
+          memoryReviewEnabled={memoryReviewEnabled}
+        />
       </div>
     </div>
   );
 }
 
 /** Keep additional real workflows reachable without shifting the designed sidebar. */
-function MeriWorkspaceLinks({ clientId }: { clientId?: string }) {
+function MeriWorkspaceLinks({
+  clientId,
+  memoryReviewEnabled,
+}: {
+  clientId?: string;
+  memoryReviewEnabled: boolean;
+}) {
   return (
     <section aria-label="Available Meri workspaces">
       <Link href={scopedHref("/meri/files", clientId)}>
@@ -96,8 +108,13 @@ function MeriWorkspaceLinks({ clientId }: { clientId?: string }) {
       </Link>{" "}
       <Link href={scopedHref("/meri/task-updates", clientId)}>
         Open task updates
-      </Link>{" "}
-      <Link href="/meri/memory">Review personal memory</Link>
+      </Link>
+      {memoryReviewEnabled ? (
+        <>
+          {" "}
+          <Link href="/meri/memory">Review personal memory</Link>
+        </>
+      ) : null}
       <p>Each workspace reports its connection status when opened.</p>
     </section>
   );
