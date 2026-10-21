@@ -48,7 +48,7 @@ for (const width of [1440, 390]) {
         else if (view === "modules")
           await expect(
             page.getByRole("heading", {
-              name: /^Everything in Capiro/,
+              name: /^Work in Capiro/,
             }),
           ).toBeVisible();
         else if (view !== "unavailable")

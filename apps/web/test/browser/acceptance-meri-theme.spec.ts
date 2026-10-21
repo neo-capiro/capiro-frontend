@@ -125,7 +125,7 @@ for (const width of [1440, 390]) {
       .click();
     await expect(
       page.getByRole("heading", {
-        name: /^Everything in Capiro/,
+        name: /^Work in Capiro/,
       }),
     ).toBeVisible();
     expect((await style(page.getByRole("banner"))).foreground).toBe("#0a0a0a");
@@ -191,7 +191,7 @@ for (const width of [1440, 390]) {
       .click();
     await expect(
       page.getByRole("heading", {
-        name: /^Everything in Capiro/,
+        name: /^Work in Capiro/,
       }),
     ).toBeVisible();
     expect((await style(page.getByRole("banner"))).foreground).toBe("#0a0a0a");
