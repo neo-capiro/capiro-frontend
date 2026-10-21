@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { unavailableTitle } from "../meri-resources/unavailable";
+import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
 import { DesignIcon } from "./DesignIcon";
 import {
   preferencesHref,
@@ -31,6 +32,7 @@ export function Sidebar({
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
+  const capabilities = useMeriCapabilities();
   const pathname = usePathname();
   const router = useRouter();
   const resetFixture = () => {
@@ -57,8 +59,13 @@ export function Sidebar({
         <LiveNewConversation
           assetSet={assetSet}
           className={styles.newConversation}
-          conversationEnabled={conversationEnabled}
-          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          conversationEnabled={
+            conversationEnabled && capabilities.conversations.status === "on"
+          }
+          firstChatBootstrapEnabled={
+            firstChatBootstrapEnabled &&
+            capabilities.newConversation.status === "on"
+          }
           firstChatBootstrapClientId={firstChatBootstrapClientId}
         />
       )}
@@ -88,7 +95,12 @@ export function Sidebar({
         section={section}
         pendingApprovals={pendingApprovals}
       />
-      <SidebarRecents fixture={fixture} enabled={conversationEnabled} />
+      <SidebarRecents
+        fixture={fixture}
+        enabled={
+          conversationEnabled && capabilities.conversations.status === "on"
+        }
+      />
       <SidebarPreferences fixture={fixture} section={section} />
     </aside>
   );
@@ -103,20 +115,25 @@ function SidebarPreferences({
   section?: MeriSection | undefined;
 }) {
   const current = section === "preferences";
+  const capabilities = useMeriCapabilities();
+  const href = preferencesHref(fixture, capabilities);
   return (
     <div className={styles.preferences}>
       <div className={styles.divider} />
       <Button
-        asChild
+        asChild={Boolean(href)}
         variant="ghost"
+        disabled={!href}
+        title={href ? undefined : capabilities.preferences.reason}
         className={`${styles.navButton} ${current ? styles.currentDestination : ""}`}
       >
-        <Link
-          href={preferencesHref(fixture)}
-          aria-current={current ? "page" : undefined}
-        >
-          Preferences
-        </Link>
+        {href ? (
+          <Link href={href} aria-current={current ? "page" : undefined}>
+            Preferences
+          </Link>
+        ) : (
+          "Preferences"
+        )}
       </Button>
       <p>Capiro · Your authorized workspace</p>
     </div>

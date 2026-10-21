@@ -1,11 +1,5 @@
 "use client";
-import {
-  useEffect,
-  useRef,
-  type ComponentProps,
-  type ReactNode,
-  type RefObject,
-} from "react";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
@@ -113,18 +107,67 @@ function composerAvailability(
   };
 }
 
-/** Current run evidence and local next-message availability share the existing status-card presentation. */
+/** Only an exact positive acknowledgement may consume an unchanged captured draft. */
+function useDraftAcknowledgement(
+  initialDraft: InitialDraftOwner,
+  port: MeriConversationPort,
+  submit: ReturnType<typeof useLiveRun>["intent"]["submit"],
+  draft: string,
+  onDraft: (value: string) => void,
+) {
+  useEffect(() => {
+    // Only a positively observed submit can consume the text that was sent. A late ACK must
+    // leave newer edits alone, including edits made while this session was disconnected.
+    try {
+      if (initialDraft.acknowledge(port.context, submit, draft)) onDraft("");
+    } catch {
+      initialDraft.fail();
+    }
+  }, [initialDraft, port.context, submit, draft, onDraft]);
+}
+
+/** Refresh saved history once this mounted run reaches a terminal state. */
+function useSettledRefresh(finished: boolean, onSettled: () => void) {
+  const announced = useRef(false);
+  useEffect(() => {
+    if (finished && !announced.current) {
+      announced.current = true;
+      onSettled();
+    }
+  }, [finished, onSettled]);
+}
+
+/** Storage uncertainty disables mutation controls while the transcript remains readable. */
 function CurrentRunStatus({
+  run,
+  retentionError,
+  active,
+  acceptedRequest,
+  savedCurrent,
   readyForNext,
   onCompose,
-  ...status
-}: ComponentProps<typeof RunStatus> & {
+}: {
+  run: ReturnType<typeof useLiveRun>;
+  retentionError: string | undefined;
+  active: boolean;
+  acceptedRequest: ConversationStoredRequest | undefined;
+  savedCurrent: TurnView | undefined;
   readyForNext: boolean;
   onCompose: () => void;
 }) {
   return (
     <>
-      <RunStatus {...status} />
+      {retentionError && (
+        <p role="alert" className={styles.muted}>
+          {retentionError}
+        </p>
+      )}
+      <RunStatus
+        run={{ ...run, busy: run.busy || !!retentionError }}
+        active={active}
+        acceptedRequest={acceptedRequest}
+        savedCurrent={savedCurrent}
+      />
       {readyForNext && (
         <section className={styles.stopCard} aria-label="Next message status">
           <h3>Ready</h3>
@@ -146,21 +189,6 @@ function CurrentRunStatus({
   );
 }
 
-/** Acknowledgement consumes only the captured draft revision; presentation never decides delivery. */
-function useDraftAcknowledgement(
-  initialDraft: InitialDraftOwner,
-  context: MeriConversationPort["context"],
-  intent: ReturnType<typeof useLiveRun>["intent"],
-  draft: string,
-  onDraft: (value: string) => void,
-) {
-  useEffect(() => {
-    // Only a positively observed submit can consume the text that was sent. A late ACK must
-    // leave newer edits alone, including edits made while this session was disconnected.
-    if (initialDraft.acknowledge(context, intent.submit, draft)) onDraft("");
-  }, [initialDraft, context, intent.submit, draft, onDraft]);
-}
-
 /** The session-bound run, with every turn already shown in this page above it. */
 export function MeriLiveConversation({
   port,
@@ -180,6 +208,7 @@ export function MeriLiveConversation({
   onSettled,
   savedCurrent,
   acceptedRequest,
+  storageError,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -200,6 +229,7 @@ export function MeriLiveConversation({
   onSettled: () => void;
   savedCurrent?: TurnView | undefined;
   acceptedRequest?: ConversationStoredRequest | undefined;
+  storageError?: string | undefined;
 }) {
   const run = useLiveRun(port, initialPrompt);
   const { snapshot, intent } = run;
@@ -212,14 +242,8 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
-  useDraftAcknowledgement(initialDraft, port.context, intent, draft, onDraft);
-  const announced = useRef(false);
-  useEffect(() => {
-    if (finished && !announced.current) {
-      announced.current = true;
-      onSettled();
-    }
-  }, [finished, onSettled]);
+  useDraftAcknowledgement(initialDraft, port, intent.submit, draft, onDraft);
+  useSettledRefresh(finished, onSettled);
   const availability = composerAvailability(
     run,
     turn,
@@ -230,7 +254,10 @@ export function MeriLiveConversation({
     nextTurnVerified,
     initialDraft.hasPending(port.context),
   );
+  const retentionError =
+    storageError ?? initialDraft.error() ?? run.storageError;
   const send = () => {
+    if (retentionError) return;
     const prompt = draft.trim();
     if (availability.initial) {
       void run.submitInitial(prompt, (request) =>
@@ -253,10 +280,11 @@ export function MeriLiveConversation({
       status={
         <CurrentRunStatus
           run={run}
+          retentionError={retentionError}
           active={active}
-          savedCurrent={savedCurrent}
           acceptedRequest={acceptedRequest}
-          readyForNext={availability.readyForNext}
+          savedCurrent={savedCurrent}
+          readyForNext={availability.readyForNext && !retentionError}
           onCompose={() => textareaRef.current?.focus()}
         />
       }
@@ -268,8 +296,8 @@ export function MeriLiveConversation({
       composer={{
         onSend: send,
         onStop: () => void run.cancel(),
-        sendBlocked: availability.sendBlocked,
-        stopBlocked: availability.stopBlocked,
+        sendBlocked: retentionError ?? availability.sendBlocked,
+        stopBlocked: retentionError ?? availability.stopBlocked,
         scope,
         attachUnavailable: unavailableTitle("attachments"),
       }}

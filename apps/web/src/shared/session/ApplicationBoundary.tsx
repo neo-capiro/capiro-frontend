@@ -5,6 +5,10 @@ import { useCallback, useState, type ReactNode } from "react";
 import { AuthenticationProvider } from "../portfolio/auth/AuthenticationProvider";
 import { DataProvider } from "../portfolio/api/provider";
 import { CapiroDataProvider } from "../capiro/CapiroBoundary";
+import {
+  MeriTabSessionGate,
+  useMeriTabSession,
+} from "../meri-conversations/MeriTabSession";
 import { SessionContext } from "./SessionContext";
 import { SelectedClientProvider } from "./SelectedClient";
 import { routeClientId } from "./client-route";
@@ -34,12 +38,17 @@ function PublicSessionData({
 function SessionData({
   children,
   clientId,
+  onSessionExpired,
 }: {
   children: ReactNode;
   clientId?: string;
+  onSessionExpired: () => void;
 }) {
   const [expired, setExpired] = useState(false);
-  const expire = useCallback(() => setExpired(true), []);
+  const expire = useCallback(() => {
+    onSessionExpired();
+    setExpired(true);
+  }, [onSessionExpired]);
   if (expired)
     return (
       <SessionContext.Provider value="expired">
@@ -69,26 +78,41 @@ function CurrentSession({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const search = useSearchParams();
   const clientId = routeClientId(pathname, search);
+  const identity = !isLoaded
+    ? undefined
+    : userId
+      ? JSON.stringify([userId, sessionId, orgId])
+      : null;
+  const tabSession = useMeriTabSession(identity);
+  const content = (
+    <MeriTabSessionGate
+      pathname={pathname}
+      identity={identity}
+      status={tabSession.status}
+    >
+      {children}
+    </MeriTabSessionGate>
+  );
   if (!isLoaded && isOnboardPath(pathname))
     return (
       <PublicSessionData key="loading-onboard" state="loading">
-        {children}
+        {content}
       </PublicSessionData>
     );
   if (!isLoaded)
     return (
       <SessionContext.Provider value="loading">
-        {children}
+        {content}
       </SessionContext.Provider>
     );
   if (!userId && isOnboardPath(pathname))
     return (
-      <PublicSessionData key="signed-out-onboard">{children}</PublicSessionData>
+      <PublicSessionData key="signed-out-onboard">{content}</PublicSessionData>
     );
   if (!userId)
     return (
       <SessionContext.Provider key="signed-out" value="signed-out">
-        {children}
+        {content}
       </SessionContext.Provider>
     );
   // Identity AND client replacement dispose queries, drafts, pending writes and selection.
@@ -96,8 +120,9 @@ function CurrentSession({ children }: { children: ReactNode }) {
     <SessionData
       key={JSON.stringify([userId, sessionId, orgId])}
       clientId={clientId}
+      onSessionExpired={tabSession.expire}
     >
-      {children}
+      {content}
     </SessionData>
   );
 }

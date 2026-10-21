@@ -1,10 +1,36 @@
+import { z } from "zod";
 import {
   submissionIdentity,
   type ConversationIntent,
 } from "../../../shared/meri-conversations/query-journal";
+import {
+  tabRecord,
+  TabJournalUnavailable,
+  type TabScope,
+  type TabStorage,
+} from "../../../shared/meri-conversations/tab-journal";
 import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 
+const capture = z.strictObject({
+  draft: z.string(),
+  revision: z.number().int().nonnegative().safe(),
+});
+const draftState = z.strictObject({
+  draft: z.string(),
+  revision: z.number().int().nonnegative().safe(),
+  pending: capture
+    .extend({ run: z.string(), request: z.string(), continuation: z.boolean() })
+    .nullable(),
+  reserved: capture.extend({ request: z.string() }).nullable(),
+});
+type DraftState = z.infer<typeof draftState>;
+const empty = (): DraftState => ({
+  draft: "",
+  revision: 0,
+  pending: null,
+  reserved: null,
+});
 const runKey = (context: ActionContext) =>
   JSON.stringify([
     context.tenantId,
@@ -14,64 +40,184 @@ const runKey = (context: ActionContext) =>
     context.runId,
   ]);
 
-/** Local draft consumption follows the conversation lifetime, including replacement sessions. */
-export function createInitialDraftOwner() {
-  let editRevision = 0;
-  let pending: {
-    run: string;
-    request: string;
-    draft: string;
-    edited: boolean;
-  } | null = null;
-  return {
-    begin(
-      context: ActionContext,
-      request: ConversationSubmitRequest,
-      draft: string,
-      capturedRevision = editRevision,
-    ) {
-      pending = {
-        run: runKey(context),
-        request: submissionIdentity(request),
-        draft,
-        edited: capturedRevision !== editRevision,
-      };
-    },
-    select(context: ActionContext) {
-      // A new accepted run retires the old local capture, never the person's draft text.
-      // Replacement sessions for the same run keep the exact pending acknowledgement.
-      if (pending && pending.run !== runKey(context)) pending = null;
-    },
-    edit() {
-      editRevision++;
-      if (pending) pending.edited = true;
-    },
-    revision: () => editRevision,
-    reset() {
-      pending = null;
-      editRevision++;
-    },
-    hasPending: (context: ActionContext) => pending?.run === runKey(context),
-    acknowledge(
-      context: ActionContext,
-      submit: ConversationIntent["submit"],
-      draft: string,
-    ) {
-      if (
-        !pending ||
-        submit?.state !== "observed" ||
-        pending.run !== runKey(context)
-      )
-        return false;
-      const request = { ...submit };
-      Reflect.deleteProperty(request, "state");
-      Reflect.deleteProperty(request, "workflow");
-      if (submissionIdentity(request) !== pending.request) return false;
-      const clear = !pending.edited && draft === pending.draft;
-      pending = null;
-      return clear;
-    },
+/** One atomic draft/capture record; retained bytes never establish request acceptance. */
+class DraftOwner {
+  private state = empty();
+  private version = 0;
+  private listeners = new Set<() => void>();
+  snapshot = () => this.version;
+  subscribe = (notify: () => void) => {
+    this.listeners.add(notify);
+    return () => {
+      this.listeners.delete(notify);
+    };
   };
+  private changed() {
+    this.version++;
+    for (const notify of this.listeners) notify();
+  }
+  private record: ReturnType<typeof tabRecord<DraftState>> | undefined;
+  private blocked = false;
+  constructor(
+    private scope?: TabScope,
+    storage?: TabStorage,
+  ) {
+    if (!scope) return;
+    try {
+      this.record = tabRecord(
+        scope,
+        "draft",
+        (value) => draftState.parse(value),
+        "",
+        storage ?? null,
+      );
+      this.state = this.record.read() ?? empty();
+    } catch {
+      this.blocked = true;
+    }
+  }
+  error = () =>
+    this.blocked || this.record?.current() === false
+      ? new TabJournalUnavailable().message
+      : undefined;
+  fail = () => {
+    if (this.blocked) return;
+    this.blocked = true;
+    this.changed();
+  };
+  draft = () => this.state.draft;
+  revision = () => this.state.revision;
+  private check(context?: ActionContext) {
+    if (
+      this.error() ||
+      (context &&
+        this.scope &&
+        (context.tenantId !== this.scope.tenantId ||
+          context.actorId !== this.scope.actorId ||
+          context.selectedClientId !== this.scope.clientId ||
+          context.conversationId !== this.scope.conversationId))
+    )
+      throw new TabJournalUnavailable();
+  }
+  private save(next: DraftState) {
+    try {
+      this.check();
+      this.record?.write(next);
+      this.state = next;
+      this.changed();
+    } catch {
+      this.blocked = true;
+      this.changed();
+      throw new TabJournalUnavailable();
+    }
+  }
+  /** Typing survives a storage error in the mounted page; commands remain blocked. */
+  edit(value = this.state.draft) {
+    const next = {
+      ...this.state,
+      draft: value,
+      revision: this.state.revision + 1,
+    };
+    try {
+      this.save(next);
+    } catch (error) {
+      this.state = next;
+      this.changed();
+      throw error;
+    }
+  }
+  begin(
+    context: ActionContext,
+    request: ConversationSubmitRequest,
+    draft: string,
+    capturedRevision = this.state.revision,
+    continuation = false,
+  ) {
+    this.check(context);
+    const pending = {
+      run: runKey(context),
+      request: submissionIdentity(request),
+      draft,
+      revision: capturedRevision,
+      continuation,
+    };
+    if (
+      this.state.pending?.run === pending.run &&
+      this.state.pending.request !== pending.request
+    )
+      throw new TabJournalUnavailable();
+    this.save({ ...this.state, pending, reserved: null });
+  }
+  select(context: ActionContext) {
+    this.check(context);
+    if (
+      this.state.pending &&
+      !this.state.pending.continuation &&
+      this.state.pending.run !== runKey(context)
+    )
+      this.save({ ...this.state, pending: null });
+  }
+  reserve(draft: string, request: ConversationSubmitRequest) {
+    this.save({
+      ...this.state,
+      reserved: {
+        draft,
+        revision: this.state.revision,
+        request: submissionIdentity(request),
+      },
+    });
+  }
+  bindNext(context: ActionContext, request: ConversationSubmitRequest) {
+    const captured = this.state.reserved;
+    if (captured && captured.request !== submissionIdentity(request)) return;
+    if (captured)
+      this.begin(context, request, captured.draft, captured.revision, true);
+    else if (
+      this.state.pending &&
+      (this.state.pending.run !== runKey(context) ||
+        this.state.pending.request !== submissionIdentity(request))
+    )
+      throw new TabJournalUnavailable();
+  }
+  /** Revocation already removed the exact scope; never recreate its record from a late response. */
+  reset() {
+    this.state = empty();
+    this.blocked = true;
+    this.changed();
+  }
+  hasPending = (context: ActionContext) =>
+    this.state.pending?.run === runKey(context);
+  acknowledge(
+    context: ActionContext,
+    submit: ConversationIntent["submit"],
+    draft: string,
+  ) {
+    const pending = this.state.pending;
+    if (
+      !pending ||
+      submit?.state !== "observed" ||
+      pending.run !== runKey(context)
+    )
+      return false;
+    this.check(context);
+    const request = { ...submit };
+    Reflect.deleteProperty(request, "state");
+    Reflect.deleteProperty(request, "workflow");
+    if (submissionIdentity(request) !== pending.request) return false;
+    const clear =
+      pending.revision === this.state.revision && draft === pending.draft;
+    this.save({
+      ...this.state,
+      draft: clear ? "" : this.state.draft,
+      pending: null,
+    });
+    return clear;
+  }
 }
 
+/** Local draft consumption follows the conversation lifetime, including replacement sessions. */
+export const createInitialDraftOwner = (
+  scope?: TabScope,
+  storage?: TabStorage,
+) => new DraftOwner(scope, storage);
 export type InitialDraftOwner = ReturnType<typeof createInitialDraftOwner>;

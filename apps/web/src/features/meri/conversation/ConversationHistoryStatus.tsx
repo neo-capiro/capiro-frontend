@@ -81,6 +81,7 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
   const loading = history.query.isPending || history.query.isRefetching;
   return (
     <section aria-label="Saved conversation history" className={styles.muted}>
+      {session.storageError && <p role="alert">{session.storageError}</p>}
       {!history.selected ? (
         <p>A verified conversation is required to read saved history.</p>
       ) : loading ? (

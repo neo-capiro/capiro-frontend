@@ -1,5 +1,7 @@
 # M1 frontend acceptance and release matrix
 
+> Historical PR119 snapshot. Current approved integration and verification are tracked in [INTEGRATION-VALIDATION.md](INTEGRATION-VALIDATION.md) and [APPROVAL-AND-HANDOFF.md](APPROVAL-AND-HANDOFF.md). Earlier pending-policy and skipped-draft statements below describe that frozen snapshot.
+
 **Status: authorized snapshot retains MF-02/MF-06/MF-21, disabled lifecycle UI and source-aware unavailable copy. Lifecycle SDK/API, capability shell/layout integration and all MF-07 persistence are parked pending Neo confirmation. Live acceptance NOT RUN.**
 
 This is the MF-21 receiving matrix, not a second release owner. Fable attaches its completed release receipt to the existing MX-01 status record. Exact source baselines and ownership are in `IMPLEMENTATION.md`.

@@ -7,13 +7,12 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import {
   ConversationHostController,
   type ConversationAccount,
 } from "../../../shared/meri-conversations/host-controller";
-import { conversationSelectionOwner } from "../../../shared/meri-conversations/query-journal";
 import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
+import { useConversationSelection } from "./useConversationSelection";
 
 /** A short hard expiry needs explicit reconnect; proactive renewal already has timer evidence. */
 const renewAfterMs = 60_000;
@@ -93,55 +92,46 @@ function useSessionRenewal({
   };
 }
 
-/**
- * Owns a short-lived opaque session. New-turn admission supplies an exact target; neither
- * reconnect nor session issuance is allowed to select a broader successor on its own.
- */
-export function useConversationConnection(
+/** Exact selectors and explicit opening intent stay separate from mounted host/renewal resources. */
+function useConversationOpening(
   account: ConversationAccount,
   clientId: string,
-  now: () => number = Date.now,
-  conversationId?: string,
+  conversationId: string | undefined,
+  now: () => number,
+  bound: ReturnType<typeof boundContext>,
+  retention: Pick<
+    ReturnType<typeof useConversationSelection>,
+    "selection" | "storageError" | "record"
+  >,
 ) {
-  const cache = useQueryClient();
-  const [selection] = useState(() =>
-    conversationSelectionOwner(cache, account, clientId, conversationId),
-  );
-  const [bound] = useState(boundContext);
+  const { selection, storageError, record } = retention;
   const create = useCallback(
     (hints: Hints) =>
       new ConversationHostController({
         account,
         hints,
         onBound: (context) => {
-          selection.record(context);
+          record(context);
           bound.record(context, now());
         },
       }),
-    [account, selection, bound, now],
+    [account, record, bound, now],
   );
   const [opening, setOpening] = useState<Opening>(() => ({
-    host: create(selection.hints),
-    hints: selection.hints,
+    host: create(
+      selection?.hints ?? {
+        clientId,
+        ...(conversationId ? { conversationId } : {}),
+      },
+    ),
+    hints: selection?.hints ?? {
+      clientId,
+      ...(conversationId ? { conversationId } : {}),
+    },
   }));
-  const { host } = opening;
-  useLayoutEffect(() => {
-    host.setClientAvailable(true);
-    return () => host.setClientAvailable(false);
-  }, [host]);
-  useEffect(() => {
-    const detach = host.attach();
-    void host.connect();
-    return detach;
-  }, [host]);
-  const state = useSyncExternalStore(
-    host.subscribe,
-    host.getSnapshot,
-    host.getSnapshot,
-  );
-
   const reopen = useCallback(
     (options: Reopening = {}) => {
+      if (!selection || storageError) return;
       const target = options.target ?? exactTarget(bound.last()?.context);
       const hints = target
         ? {
@@ -156,7 +146,61 @@ export function useConversationConnection(
         ...(options.pending ? { pending: options.pending } : {}),
       });
     },
-    [clientId, create, selection, bound],
+    [clientId, create, selection, bound, storageError],
+  );
+
+  return {
+    opening,
+    reopen,
+    retry: (status: string) =>
+      status === "expired"
+        ? reopen({
+            target: exactTarget(opening.hints),
+            pending: opening.pending,
+          })
+        : setOpening({ ...opening, host: create(opening.hints) }),
+  };
+}
+
+/**
+ * Owns a short-lived opaque session. New-turn admission supplies an exact target; neither
+ * reconnect nor session issuance is allowed to select a broader successor on its own.
+ */
+export function useConversationConnection(
+  account: ConversationAccount,
+  clientId: string,
+  now: () => number = Date.now,
+  conversationId?: string,
+) {
+  const { selection, storageError, record, clear } = useConversationSelection(
+    account,
+    clientId,
+    conversationId,
+  );
+  const [bound] = useState(boundContext);
+  const { opening, reopen, retry } = useConversationOpening(
+    account,
+    clientId,
+    conversationId,
+    now,
+    bound,
+    { selection, storageError, record },
+  );
+  const { host } = opening;
+  useLayoutEffect(() => {
+    host.setClientAvailable(!storageError);
+    return () => host.setClientAvailable(false);
+  }, [host, storageError]);
+  useEffect(() => {
+    if (storageError) return;
+    const detach = host.attach();
+    void host.connect();
+    return detach;
+  }, [host, storageError]);
+  const state = useSyncExternalStore(
+    host.subscribe,
+    host.getSnapshot,
+    host.getSnapshot,
   );
 
   const renewal = useSessionRenewal({
@@ -166,20 +210,28 @@ export function useConversationConnection(
     reopen,
     now,
   });
+  useEffect(() => {
+    if (!renewal.accessLost) return;
+    const exactConversation =
+      bound.last()?.context.conversationId ??
+      conversationId ??
+      opening.hints.conversationId;
+    clear(exactConversation);
+  }, [
+    renewal.accessLost,
+    bound,
+    conversationId,
+    opening.hints.conversationId,
+    clear,
+  ]);
 
   return {
-    state,
+    state: storageError ? { status: "unavailable" as const } : state,
+    storageError,
     ...renewal,
     conversationId: opening.hints.conversationId,
     pending: opening.pending,
-    /** Reopen the same run after expiry; otherwise retry the same selectors, never broader ones. */
-    retry: () =>
-      state.status === "expired"
-        ? reopen({
-            target: exactTarget(opening.hints),
-            pending: opening.pending,
-          })
-        : setOpening({ ...opening, host: create(opening.hints) }),
+    retry: () => retry(state.status),
     reopen,
   };
 }

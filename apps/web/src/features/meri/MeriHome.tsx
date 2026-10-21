@@ -5,6 +5,9 @@ import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
 import { useSelectedClient } from "../../shared/session/SelectedClient";
 import { scopedHref } from "../../shared/session/client-route";
+import { useMeriCapabilities } from "../../shared/meri-resources/CapabilityContext";
+import { meriCapabilityHref } from "../../shared/meri-resources/capabilities";
+import { Button } from "@capiro/ui/button";
 import styles from "./home.module.css";
 import { MeriConversationHost } from "./conversation/MeriConversationHost";
 import { IntentApprovalsEnabled } from "./conversation/intents/approvals-enabled";
@@ -26,6 +29,9 @@ export function MeriHome({
   firstChatBootstrapEnabled?: boolean;
   firstChatBootstrapClientId?: string;
 }) {
+  const capabilities = useMeriCapabilities();
+  const conversationAvailable =
+    conversationEnabled && capabilities.conversations.status === "on";
   const identity = useIdentity();
   const selected = useSelectedClient();
   const current =
@@ -44,7 +50,7 @@ export function MeriHome({
         <span className={styles.meriWordmark} role="img" aria-label="Meri" />
       </div>
       <div
-        className={`${styles.welcomeGroup} ${conversationEnabled ? styles.connectedGroup : ""}`}
+        className={`${styles.welcomeGroup} ${conversationAvailable ? styles.connectedGroup : ""}`}
       >
         <div className={styles.welcome}>
           <h1>Meri</h1>
@@ -69,10 +75,18 @@ export function MeriHome({
           )}
           <Link href="/">Open Portfolio</Link>
         </section>
-        <IntentApprovalsEnabled.Provider value={intentApprovalsEnabled}>
+        <IntentApprovalsEnabled.Provider
+          value={
+            intentApprovalsEnabled &&
+            capabilities.conversationApprovals.status === "on"
+          }
+        >
           <MeriConversationHost
-            enabled={conversationEnabled}
-            firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+            enabled={conversationAvailable}
+            firstChatBootstrapEnabled={
+              firstChatBootstrapEnabled &&
+              capabilities.newConversation.status === "on"
+            }
             firstChatBootstrapClientId={firstChatBootstrapClientId}
             account={
               current?.tenant?.id
@@ -98,24 +112,39 @@ function MeriWorkspaceLinks({
   clientId?: string;
   memoryReviewEnabled: boolean;
 }) {
+  const capabilities = useMeriCapabilities();
   return (
     <section aria-label="Available Meri workspaces">
-      <Link href={scopedHref("/meri/files", clientId)}>
-        Open document files
-      </Link>{" "}
-      <Link href={scopedHref("/meri/actions", clientId)}>
-        Open recommendation actions
-      </Link>{" "}
-      <Link href={scopedHref("/meri/task-updates", clientId)}>
-        Open task updates
-      </Link>
-      {memoryReviewEnabled ? (
-        <>
-          {" "}
-          <Link href="/meri/memory">Review personal memory</Link>
-        </>
-      ) : null}
-      <p>Each workspace reports its connection status when opened.</p>
+      {(
+        [
+          ["files", "Open document files"],
+          ["actions", "Open recommendation actions"],
+          ["taskUpdates", "Open task updates"],
+          ...(memoryReviewEnabled
+            ? ([["memory", "Review personal memory"]] as const)
+            : []),
+        ] as const
+      ).map(([id, label]) => {
+        const href = meriCapabilityHref(id, capabilities);
+        return href ? (
+          <Link key={id} href={scopedHref(href, clientId)}>
+            {label}{" "}
+          </Link>
+        ) : (
+          <Button
+            key={id}
+            type="button"
+            variant="ghost"
+            disabled
+            title={capabilities[id].reason}
+          >
+            {label}
+          </Button>
+        );
+      })}
+      <p>
+        Some workspaces are not available yet. Disabled controls explain why.
+      </p>
     </section>
   );
 }

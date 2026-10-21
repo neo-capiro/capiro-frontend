@@ -125,6 +125,24 @@ it("verified terminal history offers Ready and focuses the composer without disp
 
 const readinessBlockers: Array<[string, (props: LiveProps) => void]> = [
   [
+    "session storage failure",
+    (props) => {
+      props.storageError = "Draft retention unavailable";
+    },
+  ],
+  [
+    "draft storage failure",
+    (props) => {
+      props.initialDraft.fail();
+    },
+  ],
+  [
+    "run journal storage failure",
+    () => {
+      harness.run!.storageError = "Command retention unavailable";
+    },
+  ],
+  [
     "missing verification",
     (props) => {
       delete props.nextTurnVerified;

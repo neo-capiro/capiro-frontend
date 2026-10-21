@@ -38,18 +38,13 @@ function useTurnOpening(
   );
 }
 
-/** Screen lifetime composition: saved reads, exact session selection and retained next-turn intent. */
-export function useConversationSession(
+/** Read exact selected history and revoke the same connection on membership denial. */
+function useSelectedHistory(
   account: ConversationAccount,
   clientId: string,
-  conversationId?: string,
+  conversationId: string | undefined,
+  connection: ReturnType<typeof useConversationConnection>,
 ) {
-  const connection = useConversationConnection(
-    account,
-    clientId,
-    undefined,
-    conversationId,
-  );
   const boundReady =
     connection.state.status === "ready" ? connection.state : undefined;
   const selectedId =
@@ -64,11 +59,35 @@ export function useConversationSession(
   );
   const accessLost = connection.accessLost || history.denied;
   const ready = accessLost ? undefined : boundReady;
-  const { revoke, reopen } = connection;
+  const { revoke } = connection;
   useEffect(() => {
     if (history.denied) revoke();
   }, [history.denied, revoke]);
-  const local = useConversationLocalState(boundReady?.port.context, accessLost);
+  return { boundReady, selectedId, history, accessLost, ready };
+}
+
+/** Screen lifetime composition: saved reads, exact session selection and retained next-turn intent. */
+export function useConversationSession(
+  account: ConversationAccount,
+  clientId: string,
+  conversationId?: string,
+) {
+  const connection = useConversationConnection(
+    account,
+    clientId,
+    undefined,
+    conversationId,
+  );
+  const { boundReady, selectedId, history, accessLost, ready } =
+    useSelectedHistory(account, clientId, conversationId, connection);
+  const { reopen } = connection;
+  const local = useConversationLocalState(
+    boundReady?.port.context,
+    accessLost,
+    selectedId
+      ? { ...account, clientId, conversationId: selectedId }
+      : undefined,
+  );
   const { bindNext } = local;
   const textarea = useRef<HTMLTextAreaElement>(null);
   const openTarget = useTurnOpening(account, clientId, reopen, bindNext);
@@ -86,12 +105,15 @@ export function useConversationSession(
     continuation.busy,
   );
   const startNext = (prompt: string, finished: TurnView) => {
-    if (!view.source || view.nextBlocked || !prompt) return;
-    local.retainNext(finished);
-    void continuation.start(view.source, prompt);
+    if (!view.source || view.nextBlocked || !prompt || local.storageError)
+      return;
+    void continuation.start(view.source, prompt, (request) =>
+      local.retainNext(finished, request),
+    );
   };
   return {
     connection,
+    selectedId,
     accessLost,
     ready,
     history,
@@ -99,6 +121,10 @@ export function useConversationSession(
     draft: local.draft,
     setDraft: local.setDraft,
     initialDraft: local.initialDraft,
+    storageError:
+      local.storageError ??
+      connection.storageError ??
+      continuation.storageError,
     textarea,
     ...view,
     startNext,

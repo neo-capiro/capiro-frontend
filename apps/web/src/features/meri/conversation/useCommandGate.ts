@@ -1,11 +1,14 @@
 "use client";
 import { useRef, useState } from "react";
 import { ConversationUnavailable } from "@capiro/meri-client/conversation";
+import { TabJournalUnavailable } from "../../../shared/meri-conversations/tab-journal";
 
 const code = (cause: unknown) =>
-  cause instanceof ConversationUnavailable
-    ? cause.code
-    : "CONVERSATION_UNAVAILABLE";
+  cause instanceof TabJournalUnavailable
+    ? cause.message
+    : cause instanceof ConversationUnavailable
+      ? cause.code
+      : "CONVERSATION_UNAVAILABLE";
 
 /**
  * Runs one explicit command at a time and reports its closed failure code. Commands issued while

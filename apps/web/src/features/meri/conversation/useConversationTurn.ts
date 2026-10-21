@@ -8,6 +8,7 @@ import {
 } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
+import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { reserveConversationTurn } from "../../../shared/meri-conversations/history-client";
 import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
@@ -18,6 +19,10 @@ import {
   type TurnIntent,
 } from "../../../shared/meri-conversations/turn-journal";
 import { useCommandGate } from "./useCommandGate";
+import {
+  requireMeriTabStorage,
+  TabJournalUnavailable,
+} from "../../../shared/meri-conversations/tab-journal";
 
 export type ConversationTurnTarget = {
   conversationId: string;
@@ -33,13 +38,17 @@ function prepareTarget(
   retained: TurnIntent,
 ): ConversationTurnTarget {
   const binding = retained.receipt!.targetBinding;
-  const commands = conversationIntentJournal(cache, {
-    tenantId: binding.tenantId,
-    actorId: binding.actorId,
-    conversationId: binding.conversationId,
-    runId: binding.runId,
-    selectedClientId: clientId,
-  });
+  const commands = conversationIntentJournal(
+    cache,
+    {
+      tenantId: binding.tenantId,
+      actorId: binding.actorId,
+      conversationId: binding.conversationId,
+      runId: binding.runId,
+      selectedClientId: clientId,
+    },
+    requireMeriTabStorage(),
+  );
   const previous = commands.read();
   if (
     previous.submit &&
@@ -64,32 +73,89 @@ function prepareTarget(
   };
 }
 
-/** Owns reservation/recovery only; canonical session issuance and SDK submit retain their owners. */
-export function useConversationTurn(
+/** Resolve one retained reservation before exposing its exact target to session issuance. */
+async function requestTurn(
+  journal: ReturnType<typeof conversationTurnJournal>,
+  controller: AbortController,
+  options: {
+    source?: RunBinding | undefined;
+    prompt?: string | undefined;
+    readOnly: boolean;
+    capture?: (request: ConversationSubmitRequest) => void;
+  },
+) {
+  const { source, prompt, readOnly, capture } = options;
+  if (readOnly && source) {
+    await reserveConversationTurn(
+      { conversationId: source.conversationId, sourceRunId: source.runId },
+      controller.signal,
+    );
+    return undefined;
+  }
+  if (source && prompt) {
+    const request = { requestId: crypto.randomUUID(), prompt };
+    capture?.(request);
+    journal.start(source, request.prompt, request.requestId);
+  }
+  const retained = await recoverConversationTurn(
+    journal,
+    (input) => reserveConversationTurn(input, controller.signal),
+    controller.signal,
+  );
+  controller.signal.throwIfAborted();
+  if (!journal.current()) throw new TabJournalUnavailable();
+  return retained;
+}
+
+/** Restore hints without issuing a reservation or accepting a persisted target as authority. */
+function useRetainedTurn(
+  cache: ReturnType<typeof useQueryClient>,
   account: ConversationAccount,
   clientId: string,
-  conversationId: string | undefined,
-  open: (target: ConversationTurnTarget) => void,
+  conversationId?: string,
 ) {
-  const cache = useQueryClient();
-  const journal = useMemo(
-    () =>
-      conversationId
-        ? conversationTurnJournal(cache, account, clientId, conversationId)
-        : undefined,
+  const retention = useMemo(
+    () => {
+      try {
+        return {
+          journal: conversationId
+            ? conversationTurnJournal(
+                cache,
+                account,
+                clientId,
+                conversationId,
+                requireMeriTabStorage(),
+              )
+            : undefined,
+          error: undefined,
+        };
+      } catch {
+        return {
+          journal: undefined,
+          error: new TabJournalUnavailable().message,
+        };
+      }
+    },
     // Identity values, rather than the presentation object's allocation, define this lifetime.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [cache, account.tenantId, account.actorId, clientId, conversationId],
   );
+  const journal = retention.journal;
   const intent = useSyncExternalStore(
     (notify) => cache.getQueryCache().subscribe(notify),
     () => journal?.read(),
     () => undefined,
   );
+  return { journal, intent, error: retention.error };
+}
+
+/** Cancel only the current reservation when its exact journal owner leaves the screen. */
+function useTurnLifetime(
+  journal: ReturnType<typeof conversationTurnJournal> | undefined,
+) {
   const active = useRef<AbortController | null>(null);
   const alive = useRef(true);
   const gate = useCommandGate(alive, () => undefined);
-  const [notReady, setNotReady] = useState(false);
   useEffect(() => {
     alive.current = true;
     return () => {
@@ -98,34 +164,43 @@ export function useConversationTurn(
       active.current = null;
     };
   }, [journal]);
-  const perform = (source?: RunBinding, prompt?: string, readOnly = false) =>
+  return { active, alive, gate };
+}
+
+/** Owns reservation/recovery only; canonical session issuance and SDK submit retain their owners. */
+export function useConversationTurn(
+  account: ConversationAccount,
+  clientId: string,
+  conversationId: string | undefined,
+  open: (target: ConversationTurnTarget) => void,
+) {
+  const cache = useQueryClient();
+  const {
+    journal,
+    intent,
+    error: retentionError,
+  } = useRetainedTurn(cache, account, clientId, conversationId);
+  const { active, alive, gate } = useTurnLifetime(journal);
+  const [notReady, setNotReady] = useState(false);
+  const perform = (
+    source?: RunBinding,
+    prompt?: string,
+    readOnly = false,
+    capture?: (request: ConversationSubmitRequest) => void,
+  ) =>
     gate.perform(async () => {
-      if (!journal?.current()) throw new Error("Conversation scope changed");
+      if (!journal?.current()) throw new TabJournalUnavailable();
       const controller = new AbortController();
       active.current = controller;
       setNotReady(false);
       try {
-        if (readOnly && source) {
-          // Mapping recovery without a known submit identity never opens an input-capable target.
-          await reserveConversationTurn(
-            {
-              conversationId: source.conversationId,
-              sourceRunId: source.runId,
-            },
-            controller.signal,
-          );
-        } else {
-          if (source && prompt)
-            journal.start(source, prompt, crypto.randomUUID());
-          const retained = await recoverConversationTurn(
-            journal,
-            (input) => reserveConversationTurn(input, controller.signal),
-            controller.signal,
-          );
-          controller.signal.throwIfAborted();
-          if (!journal.current()) throw new Error("Conversation scope changed");
-          open(prepareTarget(cache, clientId, retained));
-        }
+        const retained = await requestTurn(journal, controller, {
+          source,
+          prompt,
+          readOnly,
+          ...(capture ? { capture } : {}),
+        });
+        if (retained) open(prepareTarget(cache, clientId, retained));
       } catch (cause) {
         if (!readOnly && conversationTurnNotReady(cause)) {
           if (alive.current) setNotReady(true);
@@ -141,7 +216,17 @@ export function useConversationTurn(
     busy: gate.busy,
     failed: !!gate.error,
     notReady,
-    start: (source: RunBinding, prompt: string) => perform(source, prompt),
+    storageError:
+      retentionError ??
+      (journal?.recoveryBlocked ||
+      gate.error === new TabJournalUnavailable().message
+        ? new TabJournalUnavailable().message
+        : undefined),
+    start: (
+      source: RunBinding,
+      prompt: string,
+      capture: (request: ConversationSubmitRequest) => void,
+    ) => perform(source, prompt, false, capture),
     retry: () => perform(),
     readMapping: (source: RunBinding) => perform(source, undefined, true),
   };

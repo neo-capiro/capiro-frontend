@@ -1,6 +1,12 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { createInitialDraftOwner } from "../src/features/meri/conversation/initial-draft";
+import {
+  requireMeriTabStorage,
+  syncMeriTabIdentity,
+  type TabStorage,
+} from "../src/shared/meri-conversations/tab-journal";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as historyClient from "../src/shared/meri-conversations/history-client";
 import { useConversationTurn } from "../src/features/meri/conversation/useConversationTurn";
@@ -38,12 +44,36 @@ const request = {
   prompt: "Second question",
   requestId: "60000000-0000-4000-8000-000000000001",
 };
+function primeStorage() {
+  const values = new Map<string, string>();
+  const storage: TabStorage = {
+    get length() {
+      return values.size;
+    },
+    key: (index) => [...values.keys()][index] ?? null,
+    getItem: (key) => values.get(key) ?? null,
+    setItem: (key, value) => {
+      values.set(key, value);
+    },
+    removeItem: (key) => {
+      values.delete(key);
+    },
+  };
+  vi.stubGlobal("window", { sessionStorage: storage });
+  syncMeriTabIdentity("synthetic-native-session", storage);
+  return storage;
+}
+beforeEach(() => {
+  primeStorage();
+});
 function setup(cache = new QueryClient()) {
+  const storage = primeStorage();
   const journal = conversationTurnJournal(
     cache,
     account,
     clientId,
     source.conversationId,
+    storage,
   );
   journal.start(source, request.prompt, request.requestId);
   return journal;
@@ -62,6 +92,7 @@ function command(cache: QueryClient, open = vi.fn()) {
 afterEach(() => {
   vi.useRealTimers();
   vi.restoreAllMocks();
+  vi.unstubAllGlobals();
 });
 
 it("one explicit reservation stops at a cleanup refusal without timer-driven resends", async () => {
@@ -83,16 +114,51 @@ it("the command handles not-ready without failure and only an explicit retry reu
   vi.useFakeTimers();
   const cache = new QueryClient(),
     { turn, open } = command(cache);
+  const storage = requireMeriTabStorage()!;
+  const scope = { ...account, clientId, conversationId: source.conversationId };
+  const draft = createInitialDraftOwner(scope, storage);
+  draft.edit(request.prompt);
+  const capture = vi.fn((input: typeof request) => {
+    expect(
+      conversationTurnJournal(
+        new QueryClient(),
+        account,
+        clientId,
+        source.conversationId,
+        storage,
+      ).read(),
+    ).toBeUndefined();
+    draft.reserve(draft.draft(), input);
+  });
+  let attempts = 0;
   const reserve = vi
     .spyOn(historyClient, "reserveConversationTurn")
-    .mockRejectedValueOnce(settling())
-    .mockResolvedValue(receipt);
-  expect(await turn.start(source, request.prompt)).toBe(true);
+    .mockImplementation(async () => {
+      expect(capture).toHaveBeenCalledOnce();
+      const saved = conversationTurnJournal(
+        new QueryClient(),
+        account,
+        clientId,
+        source.conversationId,
+        storage,
+      ).read();
+      expect(saved).toMatchObject({
+        ...capture.mock.calls[0]![0],
+        state: "unknown",
+      });
+      expect(createInitialDraftOwner(scope, storage).draft()).toBe(
+        request.prompt,
+      );
+      if (++attempts === 1) throw settling();
+      return receipt;
+    });
+  expect(await turn.start(source, request.prompt, capture)).toBe(true);
   const journal = conversationTurnJournal(
     cache,
     account,
     clientId,
     source.conversationId,
+    storage,
   );
   const captured = journal.read()!;
   expect(captured).toMatchObject({
@@ -204,6 +270,7 @@ it("a mapping-only refusal stays a recovery failure without claiming a saved mes
       account,
       clientId,
       source.conversationId,
+      requireMeriTabStorage(),
     ).read(),
   ).toBeUndefined();
   expect(open).not.toHaveBeenCalled();

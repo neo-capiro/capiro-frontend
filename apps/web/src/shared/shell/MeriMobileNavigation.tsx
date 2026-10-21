@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
+import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
+import { meriCapabilityHref } from "../meri-resources/capabilities";
 import { DesignIcon } from "./DesignIcon";
 import {
   destinationHref,
@@ -130,6 +132,53 @@ function MobileNewConversation({
   );
 }
 
+/** Supplemental workflow and preference links use the same capability snapshot as the destinations. */
+function MobileWorkflowLinks({
+  fixture,
+  clientId,
+  onNavigate,
+}: Pick<MenuProps, "fixture" | "clientId" | "onNavigate">) {
+  const pathname = usePathname();
+  const capabilities = useMeriCapabilities();
+  return (
+    <>
+      {(
+        [
+          ["actions", "Recommendation actions", "workflow-request"],
+          ["taskUpdates", "Task updates", "draft-client-task"],
+          ["preferences", "Preferences", "personal-preferences"],
+        ] as const
+      ).map(([id, label, screen]) => {
+        const href = fixture
+          ? `/meri/fixture/${screen}`
+          : meriCapabilityHref(id, capabilities);
+        return href ? (
+          <Link
+            key={id}
+            href={scopedHref(href, clientId)}
+            className={styles.mobileItem}
+            aria-current={pathname === href ? "page" : undefined}
+            onClick={onNavigate}
+            title={fixture ? "Open disconnected synthetic fixture" : undefined}
+          >
+            {label}
+          </Link>
+        ) : (
+          <button
+            key={id}
+            type="button"
+            className={styles.mobileItem}
+            disabled
+            title={capabilities[id].reason}
+          >
+            {label}
+          </button>
+        );
+      })}
+    </>
+  );
+}
+
 /** Figma 10.08 phone menu: every Meri destination, preferences and recents. */
 function MobileMenu({
   id,
@@ -144,14 +193,13 @@ function MobileMenu({
   onNavigate,
 }: MenuProps) {
   const pathname = usePathname();
+  const capabilities = useMeriCapabilities();
   const current = (href: string, itemSection?: MeriSection) =>
     section
       ? itemSection === section
       : href === "/meri"
         ? pathname === "/meri"
         : href === pathname;
-  const actionsHref = "/meri/actions";
-  const taskUpdatesHref = "/meri/task-updates";
   return (
     <nav id={id} className={styles.mobileMenu} aria-label="Meri sections">
       <MobileNewConversation
@@ -163,7 +211,7 @@ function MobileMenu({
         onNavigate={onNavigate}
       />
       {destinations.map((item) => {
-        const href = destinationHref(item, fixture);
+        const href = destinationHref(item, fixture, capabilities);
         const label = destinationLabel(item.label, pendingApprovals);
         const icon = <DesignIcon name={item.icon} assetSet={assetSet} />;
         return href ? (
@@ -183,37 +231,18 @@ function MobileMenu({
             type="button"
             className={styles.mobileItem}
             disabled
-            title={unavailableDestinationTitle(item)}
+            title={unavailableDestinationTitle(item, capabilities)}
           >
             {icon}
             {label}
           </button>
         );
       })}
-      <Link
-        href={scopedHref(actionsHref, clientId)}
-        className={styles.mobileItem}
-        aria-current={pathname === actionsHref ? "page" : undefined}
-        onClick={onNavigate}
-      >
-        Recommendation actions
-      </Link>
-      <Link
-        href={scopedHref(taskUpdatesHref, clientId)}
-        className={styles.mobileItem}
-        aria-current={pathname === taskUpdatesHref ? "page" : undefined}
-        onClick={onNavigate}
-      >
-        Task updates
-      </Link>
-      <Link
-        href="/settings/preferences"
-        className={styles.mobileItem}
-        onClick={onNavigate}
-      >
-        <DesignIcon name="mode-modules" assetSet={assetSet} />
-        Preferences
-      </Link>
+      <MobileWorkflowLinks
+        fixture={fixture}
+        clientId={clientId}
+        onNavigate={onNavigate}
+      />
       <MobileRecents
         fixture={fixture}
         conversationEnabled={conversationEnabled}
@@ -241,6 +270,7 @@ export function MeriMobileNavigation({
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
+  const capabilities = useMeriCapabilities();
   const pathname = usePathname();
   const selected = useSelectedClient();
   const clientId =
@@ -278,8 +308,13 @@ export function MeriMobileNavigation({
           id={menuId}
           assetSet={assetSet}
           fixture={fixture}
-          conversationEnabled={conversationEnabled}
-          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          conversationEnabled={
+            conversationEnabled && capabilities.conversations.status === "on"
+          }
+          firstChatBootstrapEnabled={
+            firstChatBootstrapEnabled &&
+            capabilities.newConversation.status === "on"
+          }
           firstChatBootstrapClientId={firstChatBootstrapClientId}
           section={section}
           pendingApprovals={pendingApprovals}

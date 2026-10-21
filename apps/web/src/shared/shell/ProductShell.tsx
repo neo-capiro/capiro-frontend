@@ -1,4 +1,5 @@
 import { SelectedClientGate } from "../session/SelectedClient";
+import { MeriCapabilityRouteGuard } from "../meri-resources/CapabilityRouteGuard";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 import type { MeriSection } from "./SidebarDestinations";
@@ -62,9 +63,13 @@ export function ProductShell({
             />
             <main id="main-content" className={styles.main}>
               {actionWorkflow || documentWorkflow ? (
-                children
+                <MeriCapabilityRouteGuard>{children}</MeriCapabilityRouteGuard>
               ) : (
-                <SelectedClientGate>{children}</SelectedClientGate>
+                <SelectedClientGate>
+                  <MeriCapabilityRouteGuard>
+                    {children}
+                  </MeriCapabilityRouteGuard>
+                </SelectedClientGate>
               )}
             </main>
           </MeriSidebarWorkspace>

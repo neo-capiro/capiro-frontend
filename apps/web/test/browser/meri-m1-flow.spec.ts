@@ -19,13 +19,9 @@ for (const viewport of [
   { width: 390, height: 844 },
 ]) {
   for (const recoverDraft of [false, true]) {
-    test(`M1 composed synthetic ${recoverDraft ? "HELD draft recovery" : "core flow"} at ${viewport.width}px: send, reload, Stop, second turn and client isolation`, async ({
+    test(`M1 composed synthetic ${recoverDraft ? "draft recovery" : "core flow"} at ${viewport.width}px: send, reload, Stop, second turn and client isolation`, async ({
       page,
     }) => {
-      test.skip(
-        recoverDraft,
-        "MF-07 same-tab draft recovery belongs to the separate stacked PR; this PR does not implement persistence",
-      );
       test.setTimeout(60_000);
       await page.setViewportSize(viewport);
       const flow = await installM1Flow(page);

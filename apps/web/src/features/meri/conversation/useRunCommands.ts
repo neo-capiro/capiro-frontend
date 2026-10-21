@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
-import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
+import {
+  useRunCommandJournal,
+  type TranscriptState,
+} from "./useRunCommandJournal";
+export type { TranscriptState } from "./useRunCommandJournal";
 import {
   historyNotStarted,
   recoverRequest,
@@ -13,12 +15,8 @@ import type {
   ConversationStoredRequest,
   ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
-import { useCommandGate } from "./useCommandGate";
 import type { useRunObservation } from "./useRunObservation";
 import { isSettled } from "./conversation-view";
-
-/** `empty`: the conversation has no run yet, so there is no transcript to show. */
-export type TranscriptState = "loading" | "loaded" | "empty" | "unavailable";
 
 /** Reads the run's transcript; false when the conversation has no run yet to observe. */
 async function readTranscript(
@@ -51,30 +49,18 @@ export function useRunCommands(
     "observe" | "stop" | "restart"
   >,
 ) {
-  const cache = useQueryClient();
-  const [journal] = useState(() =>
-    conversationIntentJournal(cache, port.context),
-  );
-  const [intent, setIntent] = useState(journal.read);
-  // An uncertain request is retried explicitly before any transcript is read for it.
-  const [transcript, setTranscript] = useState<TranscriptState>(() =>
-    initialPrompt
-      ? "loaded"
-      : journal.read().submit?.state === "unknown"
-        ? "unavailable"
-        : "loading",
-  );
-  const { busy, error, perform, active } = useCommandGate(alive, () =>
-    setIntent(journal.read()),
-  );
-  const record = {
-    read: journal.read,
-    write: (value: ReturnType<typeof journal.read>) => {
-      if (!alive.current || !journal.write(value))
-        throw new Error("Conversation scope changed");
-      setIntent(value);
-    },
-  };
+  const {
+    journal,
+    intent,
+    transcript,
+    setTranscript,
+    record,
+    storageError,
+    busy,
+    error,
+    perform,
+    active,
+  } = useRunCommandJournal(port, initialPrompt, alive);
   const thenObserve = (done: boolean) => {
     if (done && alive.current) observation.observe();
   };
@@ -117,6 +103,7 @@ export function useRunCommands(
     intent,
     busy,
     error,
+    storageError,
     transcript,
     history,
     submit,

@@ -268,6 +268,7 @@ function ConnectedConversation({
       draft={session.draft}
       onDraft={session.setDraft}
       initialDraft={session.initialDraft}
+      storageError={session.storageError}
       textareaRef={session.textarea}
       onNextTurn={session.startNext}
       nextTurnBlocked={session.nextBlocked}

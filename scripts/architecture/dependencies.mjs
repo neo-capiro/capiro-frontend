@@ -9,6 +9,7 @@ const publicEntry = name => /\/(?:public|[^/]+-public)\.ts$/.test(name);
 const pricingOwner = `${appSource}shared/capiro/onboard-pricing.server.ts`;
 const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
 const previewPolicy = `${appSource}shared/preview/backend-policy.server.ts`;
+const meriCapabilityReader = `${appSource}shared/meri-resources/capabilities.server.ts`;
 const previewOwner = `${appSource}shared/preview/`;
 const previewReadProxy = `${previewOwner}read-proxy.server.ts`;
 const previewReadConfig = `${previewOwner}read-config.server.ts`;
@@ -128,11 +129,15 @@ function resolveImport(from, specifier, files) {
   return { local, resolved: candidates.flatMap(candidate => extensions.map(extension => candidate + extension)).find(candidate => files.has(candidate)) };
 }
 
-function edgeViolation(from, to, entry) {
+function edgeViolation(from, to, entry, module) {
   if (to.startsWith(previewOwner) && !from.startsWith(previewOwner)
       && !(previewUiPages.has(from) && to === previewReadConfig
         && entry.kind === 'named' && entry.names.length === 1
         && entry.names[0] === 'isQualifiedCorePreviewReadEnabled')
+      && !(from === meriCapabilityReader && to === previewPolicy
+        && entry.kind === 'named' && entry.names.length === 1
+        && entry.names[0] === 'previewBackendRejection'
+        && !module.directives.includes('use client'))
       && !(to === previewPolicy && from === `${appSource}proxy.ts`)
       && !(to === previewMemoryOwnerRoute && from === memoryOwnerProxy)
       && !serverAdapters.get(from)?.has(to)) return `${from}: preview policy and receiving code are allocated only to reviewed backend server entries`;
@@ -159,7 +164,7 @@ export function inspectDependencies(file, module, files, approvedExports = publi
     if (serverAdapters.has(file) && !serverAdapters.get(file).has(resolved ?? specifier)) errors.push(`${file}: server adapter dependency is not allocated: ${specifier}`);
     if (!local) continue;
     if (!resolved) { errors.push(`${file}: unresolved or outside-app import ${specifier}`); continue; }
-    const violation = edgeViolation(file, resolved, entry);
+    const violation = edgeViolation(file, resolved, entry, module);
     if (violation) errors.push(violation);
     edges.push(resolved);
   }

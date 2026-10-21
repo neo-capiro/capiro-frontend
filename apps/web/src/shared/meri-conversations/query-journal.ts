@@ -4,7 +4,16 @@ import {
   type ConversationStoredRequest,
   type ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
-import type { ActionContext } from "../meri-actions/session-receipt";
+import {
+  actionUuid,
+  type ActionContext,
+} from "../meri-actions/session-receipt";
+import { z } from "zod";
+import {
+  tabRecord,
+  TabJournalUnavailable,
+  type TabStorage,
+} from "./tab-journal";
 export type ConversationIntent = Readonly<{
   submit?: Readonly<
     ConversationSubmitRequest & {
@@ -57,10 +66,37 @@ function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   if (copy.skill) Object.freeze(copy.skill);
   return Object.freeze(copy);
 }
-/** Nonsecret command uncertainty follows this exact observed context in canonical scope memory. */
+/** Only canonical request fields and local uncertainty survive reload; no receipt grants authority. */
+function receiveIntent(value: unknown): ConversationIntent {
+  const raw = z
+    .strictObject({
+      submit: z.unknown().optional(),
+      cancel: z.enum(["pending", "unknown", "observed"]).optional(),
+    })
+    .parse(value);
+  if (raw.submit === undefined) return raw as ConversationIntent;
+  const { state, workflow, ...input } = raw.submit as Record<string, unknown>;
+  z.enum(["pending", "unknown", "observed"]).parse(state);
+  z.literal("initial").optional().parse(workflow);
+  const request = receiveConversationRequest(
+    "submit",
+    new TextEncoder().encode(JSON.stringify(input)),
+  );
+  return {
+    ...raw,
+    submit: {
+      ...request,
+      state: "unknown",
+      ...(workflow ? { workflow: "initial" } : {}),
+    },
+  };
+}
+
+/** Nonsecret command uncertainty follows this exact observed context in same-tab recovery. */
 export function conversationIntentJournal(
   client: QueryClient,
   context: ActionContext,
+  storage?: TabStorage,
 ) {
   const key = [
     "meri-conversation-intent",
@@ -71,13 +107,36 @@ export function conversationIntentJournal(
     context.selectedClientId,
   ];
   client.setQueryDefaults(key, { gcTime: Infinity });
-  client.setQueryData<ConversationIntent>(key, (previous) => previous ?? {});
+  let persistence: ReturnType<typeof tabRecord<ConversationIntent>> | undefined;
+  let recoveryBlocked = false;
+  let recovered: ConversationIntent = {};
+  try {
+    persistence = tabRecord(
+      { ...context, clientId: context.selectedClientId },
+      "request",
+      receiveIntent,
+      context.runId,
+      storage ?? null,
+    );
+    recovered = persistence.read() ?? {};
+    if (recovered.cancel) recovered = { ...recovered, cancel: "unknown" };
+  } catch {
+    recoveryBlocked = true;
+  }
+  client.setQueryData<ConversationIntent>(
+    key,
+    (previous) => previous ?? recovered,
+  );
   const cache = client.getQueryCache(),
     owned = cache.find({ queryKey: key, exact: true });
   const current = () =>
-    owned !== undefined && cache.find({ queryKey: key, exact: true }) === owned;
+    !recoveryBlocked &&
+    (persistence?.current() ?? true) &&
+    owned !== undefined &&
+    cache.find({ queryKey: key, exact: true }) === owned;
   return {
     current,
+    recoveryBlocked,
     read(): ConversationIntent {
       if (!current()) return {};
       const value = client.getQueryData<ConversationIntent>(key) ?? {};
@@ -90,7 +149,10 @@ export function conversationIntentJournal(
       };
     },
     write(value: ConversationIntent) {
+      if (recoveryBlocked || (persistence && !persistence.current()))
+        throw new TabJournalUnavailable();
       if (current()) {
+        persistence?.write(value);
         client.setQueryData(
           key,
           Object.freeze({
@@ -111,6 +173,7 @@ export function conversationSelectionOwner(
   account: { tenantId: string; actorId: string },
   clientId: string,
   conversationId?: string,
+  storage?: TabStorage,
 ) {
   const key = [
     "meri-conversation-selection",
@@ -120,20 +183,49 @@ export function conversationSelectionOwner(
     ...(conversationId ? [conversationId] : []),
   ];
   client.setQueryDefaults(key, { gcTime: Infinity });
+  const persistence = tabRecord(
+    { ...account, clientId, conversationId: conversationId ?? "" },
+    "selection",
+    (value) => {
+      const selected = z
+        .strictObject({ conversationId: actionUuid, runId: actionUuid })
+        .parse(value);
+      if (conversationId && selected.conversationId !== conversationId)
+        throw new TabJournalUnavailable();
+      return selected;
+    },
+    "",
+    storage ?? null,
+  );
+  const recovered = persistence.read();
   client.setQueryData<{ conversationId?: string; runId?: string }>(
     key,
-    (previous) => previous ?? (conversationId ? { conversationId } : {}),
+    (previous) =>
+      previous ?? recovered ?? (conversationId ? { conversationId } : {}),
   );
   const cache = client.getQueryCache(),
     owned = cache.find({ queryKey: key, exact: true });
   const current = () =>
-    owned !== undefined && cache.find({ queryKey: key, exact: true }) === owned;
+    persistence.current() &&
+    owned !== undefined &&
+    cache.find({ queryKey: key, exact: true }) === owned;
   const remembered =
     client.getQueryData<{ conversationId?: string; runId?: string }>(key) ?? {};
   return {
     hints: { ...remembered, clientId },
     record(context: ActionContext) {
-      if (current())
+      if (
+        context.tenantId !== account.tenantId ||
+        context.actorId !== account.actorId ||
+        context.selectedClientId !== clientId ||
+        (conversationId && context.conversationId !== conversationId)
+      )
+        throw new TabJournalUnavailable();
+      if (current()) {
+        persistence.write({
+          conversationId: context.conversationId,
+          runId: context.runId,
+        });
         client.setQueryData(
           key,
           Object.freeze({
@@ -141,6 +233,7 @@ export function conversationSelectionOwner(
             runId: context.runId,
           }),
         );
+      }
     },
   };
 }

@@ -1,5 +1,7 @@
 # M1 source validation receipts
 
+> Historical PR119 snapshot. Current approved integration and verification are tracked in [INTEGRATION-VALIDATION.md](INTEGRATION-VALIDATION.md) and [APPROVAL-AND-HANDOFF.md](APPROVAL-AND-HANDOFF.md). Earlier pending-policy and skipped-draft statements below describe that frozen snapshot.
+
 **Preview/native/provider acceptance: NOT RUN.** Fable owns deployment and live qualification. This file records source checks only; final integrated validation is reported in the PR.
 
 The authorized snapshot retains MF-02/MF-06/MF-21, disabled lifecycle UI and source-aware unavailable copy. Lifecycle SDK/API integration, capability shell/layout integration and all MF-07 persistence are parked. Results for parked candidates must not be counted as validation of this snapshot; final integrated results are pending the root owner's run.

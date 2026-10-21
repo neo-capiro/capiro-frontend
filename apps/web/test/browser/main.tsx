@@ -1,4 +1,5 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
+import { SyntheticMeriCapabilities } from "./meri-capability-profile";
 import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
 import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
@@ -285,7 +286,9 @@ createRoot(document.getElementById("root")!).render(<App />);
 function App() {
   return (
     <ApplicationBoundary publishableKey="pk_test_YQ==">
-      <RoutedApp />
+      <SyntheticMeriCapabilities>
+        <RoutedApp />
+      </SyntheticMeriCapabilities>
       {sessionStorage.getItem("integration-probe") && (
         <RequireSession>
           <IntegrationProbe />

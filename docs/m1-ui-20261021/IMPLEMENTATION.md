@@ -1,5 +1,7 @@
 # Agent 4 — M1 chat UI implementation
 
+> Historical PR119 snapshot. Current approved integration and verification are tracked in [INTEGRATION-VALIDATION.md](INTEGRATION-VALIDATION.md) and [APPROVAL-AND-HANDOFF.md](APPROVAL-AND-HANDOFF.md). Earlier pending-policy and skipped-draft statements below describe that frozen snapshot.
+
 ## Assignment and source baseline
 
 The latest relay distinguishes Fable's planning confirmation from Neo's approval. Agent 4 is lane U (Meri UI and Core-for-Meri); Fable reviews, merges, deploys and performs live acceptance. Shared-file expansion beyond the original lane directories and MF-07 persistence policy remain pending Neo's explicit confirmation. Preserve the prepared candidates without activating or claiming approval for those changes. No AWS, provider action, GitHub Actions change or merge is part of this source task.

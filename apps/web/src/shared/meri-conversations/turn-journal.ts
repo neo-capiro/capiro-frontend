@@ -1,5 +1,7 @@
 import type { QueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
+import { recoverPersistedTurn } from "./turn-persistence";
+import { TabJournalUnavailable, type TabStorage } from "./tab-journal";
 import type { ConversationAccount } from "./host-controller";
 import {
   ConversationHistoryUnavailable,
@@ -8,7 +10,11 @@ import {
 
 /** Nonsecret immutable submit identity exists before reservation dispatch, not after its ACK. */
 export type TurnIntent = Readonly<{
-  source: RunBinding;
+  source: Pick<
+    RunBinding,
+    "tenantId" | "actorId" | "conversationId" | "runId"
+  > &
+    Partial<RunBinding>;
   requestId: string;
   prompt: string;
   state: "reserving" | "unknown" | "ready";
@@ -31,12 +37,30 @@ function snapshotIntent(intent: TurnIntent) {
   });
 }
 
-/** Scope memory only. A hard reload loses this identity and must show the server reservation barrier. */
+/** The next input may advance only from the target of the already retained turn. */
+function requirePreviousTarget(
+  previous: TurnIntent | undefined,
+  source: RunBinding,
+) {
+  if (
+    previous &&
+    (!previous.receipt ||
+      Object.keys(source).some(
+        (key) =>
+          previous.receipt!.targetBinding[key as keyof RunBinding] !==
+          source[key as keyof RunBinding],
+      ))
+  )
+    throw new Error("Recover the retained turn first");
+}
+
+/** Same-tab identity survives reload; the reservation mapping must still be recovered explicitly. */
 export function conversationTurnJournal(
   cache: QueryClient,
   account: ConversationAccount,
   clientId: string,
   conversationId: string,
+  storage?: TabStorage,
 ) {
   const key = [
     "meri-conversation-turn",
@@ -46,13 +70,21 @@ export function conversationTurnJournal(
     conversationId,
   ];
   cache.setQueryDefaults(key, { gcTime: Infinity, structuralSharing: false });
+  const retained = recoverPersistedTurn(
+    { ...account, clientId, conversationId },
+    storage,
+  );
   cache.setQueryData<{ intent?: TurnIntent }>(
     key,
-    (previous) => previous ?? {},
+    (previous) =>
+      previous ??
+      (retained.intent ? { intent: snapshotIntent(retained.intent) } : {}),
   );
   const queries = cache.getQueryCache(),
     owned = queries.find({ queryKey: key, exact: true });
   const current = () =>
+    !retained.blocked &&
+    (retained.record?.current() ?? true) &&
     owned !== undefined &&
     queries.find({ queryKey: key, exact: true }) === owned;
   const read = () =>
@@ -60,7 +92,9 @@ export function conversationTurnJournal(
       ? cache.getQueryData<{ intent?: TurnIntent }>(key)?.intent
       : undefined;
   const store = (intent: TurnIntent) => {
+    if (retained.blocked) throw new TabJournalUnavailable();
     if (!current()) return false;
+    retained.record?.write(intent);
     cache.setQueryData(key, Object.freeze({ intent: snapshotIntent(intent) }));
     return true;
   };
@@ -77,6 +111,7 @@ export function conversationTurnJournal(
   };
   return {
     current,
+    recoveryBlocked: retained.blocked,
     read,
     write,
     start(source: RunBinding, prompt: string, requestId: string) {
@@ -87,17 +122,7 @@ export function conversationTurnJournal(
         source.conversationId !== conversationId
       )
         throw new Error("Turn scope changed");
-      const previous = read();
-      if (
-        previous &&
-        (!previous.receipt ||
-          Object.keys(source).some(
-            (key) =>
-              previous.receipt!.targetBinding[key as keyof RunBinding] !==
-              source[key as keyof RunBinding],
-          ))
-      )
-        throw new Error("Recover the retained turn first");
+      requirePreviousTarget(read(), source);
       const intent: TurnIntent = Object.freeze({
         source: Object.freeze({ ...source }),
         prompt,
@@ -139,12 +164,20 @@ export async function recoverConversationTurn(
       "writerFence",
     ] as const)
       if (
-        receipt.sourceBinding[key] !== intent.source[key] ||
+        (intent.source[key] !== undefined &&
+          receipt.sourceBinding[key] !== intent.source[key]) ||
         (intent.receipt &&
           receipt.targetBinding[key] !== intent.receipt.targetBinding[key])
       )
         throw new Error("Turn binding changed");
-    if (!journal.write({ ...intent, receipt, state: "ready" }))
+    if (
+      !journal.write({
+        ...intent,
+        source: receipt.sourceBinding,
+        receipt,
+        state: "ready",
+      })
+    )
       throw new Error("Turn scope changed");
     return journal.read()!;
   } catch (cause) {

@@ -4,10 +4,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@capiro/ui/button";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
+import { type UnavailableResourceId } from "../meri-resources/unavailable";
+import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
 import {
-  unavailableTitle,
-  type UnavailableResourceId,
-} from "../meri-resources/unavailable";
+  heldMeriCapabilities,
+  meriCapabilityHref,
+  type MeriCapabilities,
+  type MeriCapabilityId,
+} from "../meri-resources/capabilities";
 import { DesignIcon } from "./DesignIcon";
 import styles from "./shell.module.css";
 
@@ -28,20 +32,21 @@ export const destinations = [
     label: "Conversations",
     icon: "conversations",
     section: "conversations",
-    href: "/meri",
+    capability: "conversations",
     fixture: "home",
   },
   {
     label: "Files",
     icon: "files",
     section: "files",
-    href: "/meri/files",
+    capability: "files",
     fixture: "workspace-files",
   },
   {
     label: "Runs",
     icon: "runs",
     section: "runs",
+    capability: "runs",
     fixture: "background-runs",
     unavailable: "runs",
   },
@@ -49,6 +54,7 @@ export const destinations = [
     label: "Approvals",
     icon: "approvals",
     section: "approvals",
+    capability: "approvals",
     fixture: "approval-center",
     unavailable: "approvals",
   },
@@ -56,6 +62,7 @@ export const destinations = [
     label: "Memory",
     icon: "memory",
     section: "memory",
+    capability: "memory",
     fixture: "memory-recall",
     unavailable: "memory",
   },
@@ -63,6 +70,7 @@ export const destinations = [
     label: "Routines",
     icon: "routines",
     section: "routines",
+    capability: "routines",
     fixture: "routines",
     unavailable: "routines",
   },
@@ -70,6 +78,7 @@ export const destinations = [
     label: "Data access",
     icon: "data-access",
     section: "data-access",
+    capability: "dataAccess",
     fixture: "data-coverage",
     unavailable: "dataAccess",
   },
@@ -77,7 +86,7 @@ export const destinations = [
   label: string;
   icon: string;
   section: MeriSection;
-  href?: string;
+  capability: MeriCapabilityId;
   fixture?: string;
   /** Ordinary routes: the missing service that keeps this destination disabled. */
   unavailable?: UnavailableResourceId;
@@ -85,24 +94,27 @@ export const destinations = [
 /** Tooltip for a destination with no ordinary route. */
 export const unavailableDestinationTitle = (
   item: (typeof destinations)[number],
+  capabilities: MeriCapabilities = heldMeriCapabilities,
 ) =>
-  "unavailable" in item
-    ? unavailableTitle(item.unavailable)
-    : "Unavailable: no connected service";
+  `${capabilities[item.capability].status === "unavailable" ? "Not available yet" : "Not enabled"}: ${capabilities[item.capability].reason}`;
 /** Fixture mode links a destination to its synthetic Figma screen when one exists. */
 export const destinationHref = (
   item: (typeof destinations)[number],
   fixture: boolean,
+  capabilities: MeriCapabilities = heldMeriCapabilities,
 ): string | undefined =>
   fixture && "fixture" in item
     ? `/meri/fixture/${item.fixture}`
-    : "href" in item
-      ? item.href
-      : undefined;
+    : meriCapabilityHref(item.capability, capabilities);
 
 /** Preferences opens the Figma 09.01 synthetic Settings page in fixture mode. */
-export const preferencesHref = (fixture: boolean) =>
-  fixture ? "/meri/fixture/personal-preferences" : "/settings/preferences";
+export const preferencesHref = (
+  fixture: boolean,
+  capabilities: MeriCapabilities = heldMeriCapabilities,
+) =>
+  fixture
+    ? "/meri/fixture/personal-preferences"
+    : meriCapabilityHref("preferences", capabilities);
 
 /** A destination label; Approvals carries the pending count when one is supplied. */
 export const destinationLabel = (label: string, pendingApprovals?: number) =>
@@ -123,6 +135,7 @@ export function SidebarDestinations({
   pendingApprovals?: number | undefined;
 }) {
   const pathname = usePathname();
+  const capabilities = useMeriCapabilities();
   const selected = useSelectedClient();
   const router = useRouter();
   const isCurrent = (item: (typeof destinations)[number], href?: string) =>
@@ -134,7 +147,7 @@ export function SidebarDestinations({
   return (
     <nav className={styles.destinations} aria-label="Meri workspace">
       {destinations.map((item) => {
-        const href = destinationHref(item, fixture);
+        const href = destinationHref(item, fixture, capabilities);
         return (
           <Button
             key={item.label}
@@ -158,12 +171,12 @@ export function SidebarDestinations({
             }
             title={
               href
-                ? item.label === "Files"
-                  ? "Open document files"
-                  : fixture
-                    ? "Open local fixture"
-                    : "Open Meri"
-                : unavailableDestinationTitle(item)
+                ? fixture
+                  ? "Open disconnected synthetic fixture"
+                  : item.label === "Files"
+                    ? "Open document files"
+                    : `Open ${item.label.toLowerCase()}`
+                : unavailableDestinationTitle(item, capabilities)
             }
           >
             {<DesignIcon name={item.icon} assetSet={assetSet} />}

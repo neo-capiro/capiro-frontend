@@ -20,3 +20,19 @@ The existing local status presentation is extracted cohesively inside `MeriLiveC
 - Browser scenarios are prepared for Fable, including terminal-history Ready followed by 409, no dispatch beyond the old timer cadence, explicit retry/double activation, retained request identity and newer-draft protection. No browser body, browser mutation, production build or live acceptance is claimed here.
 
 Historical receipts and the earlier interpretation hold in `REVIEW-119-R1.md` remain historical; this clarification supplies the current copy interpretation. Publication remains held for the re-review verdict.
+
+## Local stack rehearsal with the preserved PR120 integration
+
+The unpublished PR119 correction is local commit `aa95d8f68903d50be21f136d702bf1fc33e3d616`, tree `0cf0f3e3da7310854a3166d8341defec48070054`. The existing PR120 integration from local `ba27333274c5bcfce1c7e3484f8f41620be0d337` is reapplied on that correction in a separate local branch. The remote PR119 and PR120 heads above were rechecked and remain unchanged; this rehearsal is not publication or a PR120 verdict.
+
+All 55 integration paths remain present. Comparing the added/removed lines of the original integration with this reapplication shows 53 unchanged paths. Only `MeriLiveConversation.tsx` and `useConversationTurn.ts` required resolution: saved history and the Ready card are forwarded through the existing storage-aware presentation, and the persisted reservation helper calls the one-attempt recovery owner. Storage failure still blocks Ready and commands. Capture still precedes journal persistence and reservation dispatch. Capabilities, identity priming, exact scope cleanup and defaults are unchanged.
+
+The stack adds three storage-failure exclusions to the readiness presentation table and adapts the new turn test to the existing mandatory capture signature and real primed tab storage. Fresh journal/draft owners verify that both retained records exist before dispatch. Those test adaptations and this receipt are the only additional paths beyond the 55 preserved integration paths.
+
+- Combined Meri suite: **69 files / 918 tests passed**, using `--configLoader runner --no-cache`.
+- The adapted turn test passes **5/5**. Two additional ordering mutants are killed: capture after journal write, and omitted capture. These supplement the 33 correction mutants above; no browser mutation is claimed.
+- Changed overlap/test lint and formatting pass. Architecture remains **0 errors / 0 blocking**, 539 total, 521 reviewed, 18 inherited signals. No rule or review exemption changed.
+- Full web TypeScript passed with no diagnostics (`tsc --noEmit --incremental false`, Node `--max-old-space-size=4096`). The initial default-heap attempt terminated at the 2 GB Node heap limit, so it is not counted as a completed check. The successful rerun changed only the process memory allowance; compiler checks and source were unchanged.
+- Independent source review found no product regression in readiness/storage gating, saved-history Stop state, persistence ordering, immutable explicit retry, scope fencing or persisted-source recovery.
+
+Chromium and the production build remain Fable's qualification gates. PR119 publication remains held for the re-review verdict; PR120 and Core107 have not been pushed. Core migration cleanup remains separate and requires the exact live ledger and resolution of the already-reported source/default-off conflict.

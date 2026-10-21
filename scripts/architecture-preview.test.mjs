@@ -63,3 +63,30 @@ test('first-chat gateway is allocated only to the Capiro server route', () => {
     assert.ok(inspectSources(rejected).errors.length, entry);
   }
 });
+
+test('Meri capability projection has only the exact named server preview-policy dependency', () => {
+  const reader = 'apps/web/src/shared/meri-resources/capabilities.server.ts';
+  const named = "import { previewBackendRejection } from '@/shared/preview/backend-policy.server';";
+  const inspect = (from, source, target = policy) => inspectSources(new Map([
+    [from, source], [target, implementation],
+  ])).errors;
+  assert.deepEqual(inspect(reader, named), []);
+  for (const source of [
+    "import '@/shared/preview/backend-policy.server';",
+    "import * as policy from '@/shared/preview/backend-policy.server';",
+    "import policy from '@/shared/preview/backend-policy.server';",
+    "import { previewHeldResponse } from '@/shared/preview/backend-policy.server';",
+    "import { previewBackendRejection, previewHeldResponse } from '@/shared/preview/backend-policy.server';",
+    `'use client'; ${named}`,
+  ]) assert.ok(inspect(reader, source).some(error => /preview policy/.test(error)), source);
+  for (const from of [
+    'apps/web/src/shared/meri-resources/other.server.ts',
+    'apps/web/src/features/meri/MeriHome.tsx',
+    'apps/web/src/app/meri/layout.tsx',
+  ]) assert.ok(inspect(from, named).some(error => /preview policy/.test(error)), from);
+  for (const module of ['read-config.server', 'read-proxy.server', 'first-chat-gateway.server']) {
+    const source = `import { previewBackendRejection } from '@/shared/preview/${module}';`;
+    const target = `apps/web/src/shared/preview/${module}.ts`;
+    assert.ok(inspect(reader, source, target).some(error => /preview policy/.test(error)), module);
+  }
+});

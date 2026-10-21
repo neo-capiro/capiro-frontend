@@ -22,6 +22,8 @@ export type LiveComposer = Readonly<{
   onStop?: () => void;
   /** Why Send is unavailable right now; the draft stays editable either way. */
   sendBlocked?: string | undefined;
+  /** Exact conversation selection is required before a durable draft can be entered. */
+  draftBlocked?: string | undefined;
   /** Why Stop is unavailable right now. */
   stopBlocked?: string | undefined;
   /** Verified client scope shown on the scope chip. */
@@ -47,7 +49,12 @@ export function MeriComposer({
   live?: LiveComposer;
 }) {
   const helpId = useId();
-  const canSend = !!live && !running && !live.sendBlocked && !!draft.trim();
+  const canSend =
+    !!live &&
+    !running &&
+    !live.sendBlocked &&
+    !live.draftBlocked &&
+    !!draft.trim();
   return (
     <section
       className={styles.composerFrame}
@@ -67,7 +74,10 @@ export function MeriComposer({
             ref={textareaRef}
             className={styles.textarea}
             value={draft}
-            onChange={(event) => onDraft(event.currentTarget.value)}
+            readOnly={!!live?.draftBlocked}
+            onChange={(event) => {
+              if (!live?.draftBlocked) onDraft(event.currentTarget.value);
+            }}
             onKeyDown={(event) => {
               // A blocked send must not reach the form: its reset would clear the kept draft.
               if (
@@ -97,7 +107,7 @@ export function MeriComposer({
           />
         </PromptInputFooter>
         <p className={styles.keyboardHint} id={helpId}>
-          Enter to send · Shift + Enter for a new line
+          {live?.draftBlocked ?? "Enter to send · Shift + Enter for a new line"}
           <span className="sr-only">
             {!live
               ? ". Sending is currently unavailable in this disconnected synthetic fixture."

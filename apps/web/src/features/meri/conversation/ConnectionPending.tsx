@@ -114,11 +114,15 @@ export function ConnectionPending({
       running={false}
       composer={{
         onSend: () => undefined,
+        draftBlocked: !session.selectedId
+          ? "Confirming this conversation before saving a draft."
+          : undefined,
         sendBlocked: session.accessLost
           ? "Verify access to this conversation before sending."
-          : waiting
-            ? "Connecting to Meri."
-            : "Reconnect to Meri before sending.",
+          : (session.storageError ??
+            (waiting
+              ? "Connecting to Meri."
+              : "Reconnect to Meri before sending.")),
         scope,
         attachUnavailable: unavailableTitle("attachments"),
       }}

@@ -761,7 +761,7 @@ test("ordinary sidebar destinations explain held consumers and failed current re
   await expect(approvals).toBeDisabled();
   await expect(approvals).toHaveAttribute(
     "title",
-    /workspace-wide approval inbox/,
+    /approval center is not available/,
   );
   await expect(
     nav.getByRole("link", { name: "Approvals", exact: true }),
