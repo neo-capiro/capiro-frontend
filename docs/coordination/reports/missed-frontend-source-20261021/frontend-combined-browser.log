@@ -1,0 +1,21 @@
+[WebServer] (node:29132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 12 tests using 1 worker
+
+(node:11276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 test\browser\meri-conversation-artifacts.spec.ts:55:3 ΓÇ║ conversation docx files inspect and download through a signed link (2.4s)
+  ok  2 test\browser\meri-conversation-artifacts.spec.ts:55:3 ΓÇ║ conversation txt files inspect and download through a signed link (2.1s)
+  ok  3 test\browser\meri-conversation-artifacts.spec.ts:55:3 ΓÇ║ conversation xlsx files inspect and download through a signed link (2.1s)
+  ok  4 test\browser\meri-conversation-artifacts.spec.ts:55:3 ΓÇ║ conversation pptx files inspect and download through a signed link (2.1s)
+  ok  5 test\browser\meri-conversation-artifacts.spec.ts:55:3 ΓÇ║ conversation pdf files inspect and download through a signed link (2.1s)
+  ok  6 test\browser\meri-conversation-artifacts.spec.ts:55:3 ΓÇ║ conversation zip files inspect and download through a signed link (2.1s)
+  ok  7 test\browser\meri-conversation-artifacts.spec.ts:136:1 ΓÇ║ a closed download-link refusal is reported and nothing is downloaded (1.9s)
+  ok  8 test\browser\meri-conversation-artifacts.spec.ts:160:1 ΓÇ║ a refused inspection leaves the file without invented details (1.8s)
+  ok  9 test\browser\meri-files-workflow.spec.ts:19:5 ΓÇ║ Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible (3.4s)
+  ok 10 test\browser\meri-memory-owner-review.spec.ts:38:1 ΓÇ║ disabled owner review makes no memory request (1.6s)
+  ok 11 test\browser\meri-memory-owner-review.spec.ts:54:1 ΓÇ║ pending correction freezes its captured draft and confirms review without changing active memory (1.8s)
+  ok 12 test\browser\meri-memory-owner-review.spec.ts:106:1 ΓÇ║ uncertain correction keeps its draft and prevents resubmission after reload (3.1s)
+
+  12 passed (46.8s)

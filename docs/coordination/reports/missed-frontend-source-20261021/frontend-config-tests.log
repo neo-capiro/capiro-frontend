@@ -1,0 +1,28 @@
+Γ£ö every API handler applies preview admission before any route work (27.361ms)
+Γ£ö preview policy stays in server entry points with no request-derived configuration (1011.5259ms)
+Γ£ö preview policy is allocated only to the existing backend entries and Next proxy (12.0975ms)
+Γ£ö preview policy cannot leak into client features, foundations, pages or unallocated routes (2.4033ms)
+Γ£ö all preview internals are server allocated, including through client foundations (3.89ms)
+Γ£ö only the two server-rendered preview pages may read the qualified UI mode (2.1088ms)
+Γ£ö first-chat gateway is allocated only to the Capiro server route (0.9023ms)
+Γ£ö preview proposes held Meri defaults while unavailable services stay disabled (2.509ms)
+Γ£ö memory preview is held until a listener-compatible Core successor is pinned (0.5876ms)
+Γ£ö Meri opt-in requires an explicit canonical HTTPS root origin (0.617ms)
+Γ£ö explicit Meri origin and opt-in form one exact, reviewable parameter proposal (0.6602ms)
+Γ£ö Core read and first chat remain held until all exact bindings are supplied together (0.6263ms)
+Γ£ö qualified Core roster adds a separate pair without switching first-chat reads or bootstrap (0.8029ms)
+Γ£ö roster pin agrees across runtime and public metadata while deployment remains held (0.7722ms)
+Γ£ö preview rejects unknown, missing, credential-valued and mismatched Clerk bindings (0.422ms)
+Γ£ö preview rejects retained or overridden production parameters and ambiguous sets (0.4567ms)
+Γ£ö preview template constrains every explicit configuration value and keeps held services blank (2.7718ms)
+Γ£ö roster template rejects an origin until the reviewed Core source is pinned (0.3635ms)
+Γ£ö PR70 one-shot override covers changed first-chat behavior and exact image/scan gates (0.2519ms)
+Γ£ö preview CLI is import-safe, ignores hostile ambient values and never echoes rejected secrets (765.307ms)
+Γä╣ tests 20
+Γä╣ suites 0
+Γä╣ pass 20
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 1469.9286

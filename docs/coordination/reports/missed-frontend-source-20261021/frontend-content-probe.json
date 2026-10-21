@@ -1,0 +1,4074 @@
+[
+  {
+    "sha": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+    "subject": "docs(preview): publish qualified frontend image and held rollout receipt",
+    "files": [
+      {
+        "file": "docs/desktop-integration-20261019/CORE-ROSTER-PIN.md",
+        "blob": "4fac104b1c42f13e7aff1927b9f131388f7baa9f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/FRONTEND-BUILD-RECEIPT.json",
+        "blob": "ff8b3a45a4c8b410e821ff3dd331ef574e855e5d",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/FRONTEND-BUILD-RECEIPT.md",
+        "blob": "174c401dfc26039e1072aa47fa691ce9f94c7143",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/FRONTEND-BUILD-RECIPE.yml",
+        "blob": "c5075d4001cc499593a49ac6bc54e365c3b64fed",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/FRONTEND-IMAGE-ONLY-PROPOSAL.json",
+        "blob": "68b02f57b0ed21b27bbc9bfedb7ec1cbb2bb590b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/FRONTEND-IMAGE-ONLY-PROPOSAL.md",
+        "blob": "2dc03494f231e8fdca1eba73abcb8137798940bc",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/PREVIEW-FEATURE-CHECKLIST.md",
+        "blob": "ab157502aeb36234a734b8b9d5059d3aef55ca75",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "e6180219b589ae8fced7155d1c451840c8663d94",
+    "subject": "docs(preview): publish bounded roster readiness checklist",
+    "files": [
+      {
+        "file": "docs/desktop-integration-20261019/CORE-ROSTER-PIN.md",
+        "blob": "813228b0bbae58408b1e297ad123d4d301941b80",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/PREVIEW-FEATURE-CHECKLIST.md",
+        "blob": "b3245083d1a4b6c4c36c112845e60c02efe3252f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+    "subject": "fix(preview): advance held Core roster source pin",
+    "files": [
+      {
+        "file": "apps/web/deployment/portfolio/preview-config.mjs",
+        "blob": "24480c0dec1e5eecdf6c0889059222241a5e098a",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/deployment/portfolio/service.yml",
+        "blob": "d58809d868999d76dea446f327585d20e4720eda",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/preview/read-config.server.ts",
+        "blob": "acd8ea055e6775d3dc67a2c0aab04d0a29f720df",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-first-chat-preview-policy.test.ts",
+        "blob": "e087cc424d624eeaef950dd90828dd77cc934bca",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/preview-read-receiving.test.ts",
+        "blob": "d4e2258b2bdb6772bdd1a0cfe54a0cfbd1845e65",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/CORE-ROSTER-PIN.json",
+        "blob": "0d152ad9dee37895230b9c4acd907b29c65d0acb",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/desktop-integration-20261019/CORE-ROSTER-PIN.md",
+        "blob": "e63522f5cbd7956909fd8682112a4786338d27b5",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "scripts/preview-config.test.mjs",
+        "blob": "3bdfd6b4c9c47ddba5d34d3fe1c1878aa917ff2d",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "88bf4005621dd1a10fce6888269097cb0d9cc8c0",
+    "subject": "Align held memory preview paths with Core listener",
+    "files": [
+      {
+        "file": "apps/web/deployment/portfolio/README.md",
+        "blob": "78e7e419bb40efb59095042a668515d333ec58c7",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/preview/memory-owner-route.server.ts",
+        "blob": "681b4bafa4e406af46c302af5a310fb79c40d650",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-preview-policy.test.ts",
+        "blob": "2fb0752aefcfea816ffc69fbc29810e3b9293277",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "0f058a825a632bfe00ac8ec50da750f44842c46e",
+    "subject": "Allocate held preview routing for memory owner review",
+    "files": [
+      {
+        "file": "apps/web/deployment/portfolio/README.md",
+        "blob": "da404cc5ab81d411815c3b68ffb5bf9121a19bef",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/deployment/portfolio/preview-config.mjs",
+        "blob": "1878d9a5a5074e6b096775ca3d51fc09538a7458",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/deployment/portfolio/service.yml",
+        "blob": "7629094a8134a2fdd2e8b4fcc339d4bdcb3c1350",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
+        "blob": "7fb627aef405cf3174f1161a7cbd36f0889b1aa2",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/proxy.ts",
+        "blob": "fabf02c42a0d82b330ef4aae2694509feb5042a9",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/preview/backend-policy.server.ts",
+        "blob": "ef10b7c8bd1427ad13693fac6b0825c724e2eab2",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/preview/memory-owner-route.server.ts",
+        "blob": "f69599342e929d985b95bcfe8287f94e656db3a0",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/shared/preview/meri-conversation-route.server.ts",
+        "blob": "795d56a01fe6bc9624fe41c1492f983b5c2bd5fd",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/preview-backend-boundary.test.mjs",
+        "blob": "c3cdbd78f52a0f76b7e777e0be8dd2e0901640dc",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-review-proxy.test.ts",
+        "blob": "08c5eeb9ac01ab8cb768765207fc05333c4e594c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-preview-policy.test.ts",
+        "blob": "2b90f2022aef48ef534d1fb14d27045a90c5b579",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-preview-route-activation.test.ts",
+        "blob": "5fa58c3b82eebb0e2693c9629ed1c619549b0653",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "scripts/architecture/dependencies.mjs",
+        "blob": "3916082540432d427527f158f81637c9bc128ab4",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "scripts/preview-config.test.mjs",
+        "blob": "24d6ab9dbb8318bfe482f4c1cf6c1a62bcf8d875",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "e44146865ffbeb865358473dd3d4ceda38545a1c",
+    "subject": "Add canonical personal memory correction review flow",
+    "files": [
+      {
+        "file": "apps/web/src/app/api/memory/owner/items/[id]/corrections/route.ts",
+        "blob": "f5411447477c6c81742c15ab1a2fd729034e7850",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/app/api/memory/owner/items/route.ts",
+        "blob": "565bc55463bf9fb76be857905459e1afa5a6dfae",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/app/meri/memory/page.tsx",
+        "blob": "225e2fe5cb2ee03332b83cb1e97b2deca1c67f62",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/MemoryCorrectionComposer.tsx",
+        "blob": "dabc87f35ba93a7d0b3419c6436fe844700a614e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-correction.ts",
+        "blob": "dd99d83614238603270d36dd03a5b8a49916059e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
+        "blob": "37353789bcee8f52b9f1811ede07ad0329a40d10",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review.module.css",
+        "blob": "06d0d8f572af4bb8757e2944332ec62a3cd9b446",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review.ts",
+        "blob": "641f3fad46ba9939ba90ecfdebfd842ac5e14e18",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/useOwnerCorrection.ts",
+        "blob": "9e293ef5507864c275c83428819912e9f03ff64e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-decision-hold.test.ts",
+        "blob": "e470a44381d3a7301072e964464fd4b80cd1cde9",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-review-proxy.test.ts",
+        "blob": "e286adada654298111a26fe6faa86d8b96289ce9",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-review-route.test.ts",
+        "blob": "eaee10c305ea34352552d5bb6f44e30e7bcfb4d6",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "10be7a5ff300f712d8214df512c03bbae663c3f8",
+    "subject": "Page owner memory inbox and reconcile uncertain decisions",
+    "files": [
+      {
+        "file": "apps/web/src/app/api/memory/owner/candidates/[id]/status/route.ts",
+        "blob": "6278cd31fe76d60ed3ec5f3c1e3a1e267088700f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/app/api/memory/owner/candidates/route.ts",
+        "blob": "70e70bbe83412d219c77464ea828c1163230dd44",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/MemoryOwnerInbox.tsx",
+        "blob": "4ff07e8a0371cca1f61ee63fa3cf9b65682217c9",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-inbox-proxy.server.ts",
+        "blob": "20b97757e8f0b1a58843bdd7c70d705069405e06",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
+        "blob": "bb41faf56abb6c52eb2e2cd2cb89fc1378101150",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review.ts",
+        "blob": "6a1a74caa1559d5ab0be2150a4567a3a2fa083df",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/useOwnerMemoryInbox.ts",
+        "blob": "73b1af53e6541f6ce5142fcc0b511b1fb572c475",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-inbox-pagination.test.ts",
+        "blob": "e07c50a6e85b83bfd0733c31a1b890070cb2abe4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-review-route.test.ts",
+        "blob": "d5cc4a4257c6eb23877757d9492fce1ec379b1b1",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "9f132c0d27a7d45c97f39f6d96c20c21a3326c80",
+    "subject": "Add Core-backed personal memory review workspace",
+    "files": [
+      {
+        "file": "apps/web/src/app/api/memory/owner/candidates/[id]/decision/route.ts",
+        "blob": "a14e636d3f8d37ced8f20ca31e301d2f651a4441",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/app/api/memory/owner/candidates/[id]/version-decision/route.ts",
+        "blob": "fa8447617f83bce80daa8f3a0b7182ed2c92d674",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/app/api/memory/owner/candidates/route.ts",
+        "blob": "7254cc067ebca1e874ec5c02b683faedd40774da",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/app/meri/memory/page.tsx",
+        "blob": "c403f2c57d7231f0ccc7dde51d449645e8723a95",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/MeriHome.tsx",
+        "blob": "581137344c5d659c17fe784289acbae1c2389d5b",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/MemoryOwnerInbox.tsx",
+        "blob": "cb2eb0e63b3bb0ff9dba237c057236ec946acce7",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-decision-hold.ts",
+        "blob": "2c046a8af6da0f8a48fe421766e3a2f379c42299",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
+        "blob": "533bd5372b29a58da6af6db13e04353bd47e3b39",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review.module.css",
+        "blob": "02cd4854d57e6e778547c86c369663ee73701d37",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/owner-review.ts",
+        "blob": "509362c506f90d1bec35e41c5e4e4e58ffb70662",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/memory-review/useOwnerMemoryInbox.ts",
+        "blob": "aae5443721f7b2137c2f3aae9870fdbcef1bc74a",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-decision-hold.test.ts",
+        "blob": "9343665cfbbf975f571fc45525cec6dc5f3d1730",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-review-proxy.test.ts",
+        "blob": "420fdacf278380c1545cd0d7e8b131492335ca26",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-memory-owner-review-route.test.ts",
+        "blob": "6894bc5205f24605e3cf914efdfc961c464026e6",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "481c25593bd77c2c96c219c1dd3e16ff21cee8d3",
+    "subject": "Route Settings memory review to native owner inbox",
+    "files": [
+      {
+        "file": "apps/web/src/app/settings/[section]/page.tsx",
+        "blob": "56999d225e84876947613c34f004d130fd9b85bd",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/settings/MemorySettings.tsx",
+        "blob": "3f1486734b03b286bf3a068845f91013e5d5f9b3",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/settings/SettingsScreen.tsx",
+        "blob": "4319630628b83349f817dffe0ec26b86ecb4d95c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/tests/memory-settings-review.test.ts",
+        "blob": "4a61af48c905898baefb3724dec9c8806b151d35",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "788a08f3fd83bf63efd3d4f6a14d4a0b4ca700c5",
+    "subject": "Document visual integration across chat and feature successors",
+    "files": [
+      {
+        "file": "docs/coordination/reports/CODEX-MERI-VISUAL-INTEGRATION-20261018.md",
+        "blob": "1e396e2c8258c302b7bb0867dff9273f40fca6fb",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "e4ffe7be58d9b05847fb164a81458622002eb0c9",
+    "subject": "Merge Portfolio shared shell into chat successor visuals",
+    "files": []
+  },
+  {
+    "sha": "680518865bc0e3c04de094c71381c38b50f11454",
+    "subject": "test(meri): cover selector roster in ordinary navigation fixtures",
+    "files": [
+      {
+        "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+        "blob": "79abdc4ece29451c67f50d526a2709310fa80b47",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-task-command-fixtures.ts",
+        "blob": "de3e4a0c5a039e7a811dfd6593a04c229b322b3a",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "64c76075dc095c210430c83ed04c939f92f6a6f1",
+    "subject": "Merge Meri desktop visuals with chat selector successor",
+    "files": []
+  },
+  {
+    "sha": "8a9c7da1562364ecfba4a233b9a8f3d4aaded75c",
+    "subject": "docs: complete 3.1 to 3.4 component and behavior comparison",
+    "files": [
+      {
+        "file": "docs/figma-34-gaps-20261016/MERI-31-34-PARITY.csv",
+        "blob": "a9bd502c2298567aacc8d1f8ad9afcf81a82d968",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/MERI-RESIDUAL-COMPLETION.md",
+        "blob": "876ca19ff0c9e00699846b7a95c105ccf2999aa8",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/MODULES-RESIDUAL-COMPLETION.md",
+        "blob": "b7cf71178dca9b57963c51eaaeadba8b008687c3",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/PORTFOLIO-COMPONENT-PARITY.csv",
+        "blob": "59d3336d062d9d6dfdab0322b0cfe5af511ca8a5",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/PORTFOLIO-RESIDUAL-COMPLETION.md",
+        "blob": "e61e65cd16f865365bce1ee0e45f050485b70265",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/README.md",
+        "blob": "f186d95e7971d9d40d33eeeedbfd7b66fc9597c0",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/RESIDUAL-COMPARISON.md",
+        "blob": "bc12292be6f793b31996a6c517dac45c2265dc0e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "0ca9bf75d73467c605995bf76b60e231cc1d5b5d",
+    "subject": "docs: record 3.4 coverage and split-file navigation",
+    "files": [
+      {
+        "file": "docs/figma-34-gaps-20261016/MODULES-31-34-PARITY.csv",
+        "blob": "297e25f72d122a9c14a747eaf1a582c5a81cca55",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/PARITY-AND-NAVIGATION.md",
+        "blob": "966b157297141b0f157eabc3a6eb339068a0568a",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/PORTFOLIO-31-34-PARITY.csv",
+        "blob": "a24f60eb234f6f9d4e14ed3563d8ce5311aecf73",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/PORTFOLIO-34-SCREEN-DIRECTORY.csv",
+        "blob": "c703418ef957035e5b6c989fcd863603d2152197",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/README.md",
+        "blob": "ea2a1306ca5870d73206e3b297283f63a8f8b5b8",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "696392f3dca807288f451067259b154557cc6333",
+    "subject": "docs: hand off verified Meri Portfolio and Modules Figma gaps",
+    "files": [
+      {
+        "file": "docs/figma-34-gaps-20261016/MODULES-COMPLETION.md",
+        "blob": "83e67c22f8694d92954763371a09d4e43520eeb2",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/PORTFOLIO-COMPLETION.md",
+        "blob": "860d68eabd7d4b97e8c77bffcc6c167a06c70c79",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/figma-34-gaps-20261016/README.md",
+        "blob": "a618689de5d96e25e3de3390e8ad398583ee6ee5",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/DESIGN-GAPS.md",
+        "blob": "65e2567500395268a6e5d3952824559b2e3496cc",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/FIGMA-GAPS-COMPLETION.md",
+        "blob": "2f9b2dd757bc04aacf7c612d90aae47e67a1034c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "3930e36593960966edaa39f8f7f25faa14f9654a",
+    "subject": "Map current Meri desktop designs and preserve qualification gaps",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261016/AUDIT.md",
+        "blob": "50245766d8b727b5afc643cb13fd1d49ad3fde89",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/COMPONENT-STATE-MAP.json",
+        "blob": "711aab7b64415676986af10a50a8b47313393d15",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/COMPONENT-STATE-MAP.md",
+        "blob": "42f24ef4bb090fba6662150cbd0d96f146223933",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/CURRENT-INVENTORY.json",
+        "blob": "413831b4e0e623d854fb83f6a5111498eb4db3f9",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/DESIGN-GAPS.md",
+        "blob": "37249361335f3052e794418907479815fb095f1e",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/EVIDENCE-INDEX.json",
+        "blob": "ef027def36f48bd0b9902d07a15ac6508ca965d4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/IMPLEMENTATION-GAPS.md",
+        "blob": "5f4dc7ce73d0bebbfd330d47488e6602d15fa6b4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/SCREEN-STATE-MAP.md",
+        "blob": "0b4a7aebbee9a5e6bc194796285b5d5ada948e44",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/.gitattributes",
+        "blob": "4e8986c4382b50587c237bf4931912d7817b9f3d",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/SOURCE-ASSEMBLY-NOTES.md",
+        "blob": "8c75a2f3bc788feca27dd0aea453d34678856eb9",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/SOURCE-EVIDENCE-CHECKS.json",
+        "blob": "226519141cdb4eebec180d2e331d0149a503abba",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/build-inventory.py",
+        "blob": "8a3d9baef1277650ce8ce77aea69fd6989c4389e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/cited-answer-design-context-6.png",
+        "blob": "29a9e6ac94dd762ca9c5783061e195ea8b08cea5",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/cited-answer-design-context.json",
+        "blob": "2328ecb28fc736d0d720f288a883a8b9f5da9410",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/client-context-design-context-6.png",
+        "blob": "440512e6b8174a280e0730a1176f144374af8645",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/client-context-design-context.json",
+        "blob": "a4d2b9c6f4eaa7af5f8a8a9cd58965d3bd89b838",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-canonical-meri-components.json",
+        "blob": "ef62d243d903475c9e841d1105db796625a37985",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-components-and-edge-sample.json",
+        "blob": "e4f4e237fafafee955bcfeec03f077ea2ef0e1ff",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-desktop-identities.json",
+        "blob": "fc1a9d46652880422c4727e5adb55f98d054161d",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-figma-assets-format.result.json",
+        "blob": "0fb9e7e9cd62a37ff802154d411621672b47a7a4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-figma-assets-format.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-figma-assets-format.stdout.log",
+        "blob": "ba439e25d52709bf399bc40ec015d2b3956cad70",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-group-counts.json",
+        "blob": "08aa547ef97c3a2c585629538be9ef884e8303ae",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-mask-format.result.json",
+        "blob": "7ee9c380afc9aa6cc62e6f5927cd1b988ddcd154",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-mask-format.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-mask-format.stdout.log",
+        "blob": "421639c87962cc89c27839b62265e55f4e4455f8",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-page.xml.gz",
+        "blob": "77ace5e10a1212d39bf143e31712209be63863e5",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-pages.json",
+        "blob": "32a26da822c751e8c2ff0ebf5aa651bf75493b73",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/current-prototype-patterns.json",
+        "blob": "595c1caea57124e21d2353e002d1744690176291",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/history-design-context-6.png",
+        "blob": "98b9dd33e70058507112733623fcfd756dc7a887",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/history-design-context.json",
+        "blob": "d82ac185f8fadb8921e0bb9b250338b3772072e1",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/home-asset-binding-comparison.json",
+        "blob": "d5dee242f8cd8f8bb501ce1a03c389098d4f3f1b",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/home-design-context.json",
+        "blob": "9245eefe3372b3f7fc96583aea3fe12fe2c8b0c4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/home-design-target-0.png",
+        "blob": "800ef50e22ada6115fb07ea54e831a519de13848",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/home-motion-context.json",
+        "blob": "3d48e3335c6564b8fe9f0e8be3074e0bd9c22b9b",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/initial-input-design-state-search.json",
+        "blob": "41a6c7664e707e721c8a236e77fe1566e81d8650",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/run-states-design-context-6.png",
+        "blob": "295eef88f96ceaf2e99fcab70f14082fab3c1309",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/run-states-design-context.json",
+        "blob": "88304cbfefcd0c1a0175e0084cc2e623286904fb",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/session-states-design-context-6.png",
+        "blob": "e4f2d481e738ee7e6ed1c16b8276babb06b63191",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/session-states-design-context.json",
+        "blob": "b2f50302b5f2a6ee5e94f2606016d27a5ae80262",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/workflow-setup-groups.json",
+        "blob": "4f848e25bfb95e1b876cd0925e37b7ab41e045a7",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "790983844a2ff002e186ec99b8f4f0cda7c2dfdd",
+    "subject": "Reuse current Meri wordmark across owned desktop masks",
+    "files": [
+      {
+        "file": "apps/web/src/features/meri/home.module.css",
+        "blob": "205d115daa321e0220933135e3a15297cfb7dfac",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/ui/meri-ui.module.css",
+        "blob": "cba7b12ef9d9b831d8602d7137d68b8f42d1ce91",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/workspace/workspace.module.css",
+        "blob": "add490d6dc646b7d1b1fad88c63ed85dd19eeaa8",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-current-wordmark.spec.ts",
+        "blob": "8f72cbba0cffc1d892636be4845394957c3d83cc",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/WORDMARK-CANDIDATE.md",
+        "blob": "83400343e70432575932ac7edeb4cb20b323d2c8",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/evidence/wordmark-binding.json",
+        "blob": "5237c5520eed87795650d48b4cc9ae6e7d7eafad",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "aecec5813d51f2b3f0386130bb350edbb04e3c53",
+    "subject": "fix(meri): bind current Figma header action assets",
+    "files": [
+      {
+        "file": "apps/web/public/design/header-34-20261016/PROVENANCE.json",
+        "blob": "5650a7770e61dca1e84ca6b4d0cc3d27b06e25f7",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/public/design/header-34-20261016/calendar.svg",
+        "blob": "ba9506265fbf9afb1b9bb9e6e1e9443fd7fcf14f",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/public/design/header-34-20261016/quick-log.svg",
+        "blob": "9c017cb296c1ff135fc766200672856528a11d9e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/public/design/header-34-20261016/search.svg",
+        "blob": "40b927107ebdc8151df55d90cd0465ea625a0b0c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/public/design/header-34-20261016/updates.svg",
+        "blob": "5932a1e9ea206b9ce6ba03991ff761b327b862f6",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/DesignIcon.tsx",
+        "blob": "77689eb656b6c42a1cff413a99b76281359bfb2d",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/FixtureHeaderActions.tsx",
+        "blob": "eab94b0729e683cda53c0b5129f847043ec8230b",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/Header.tsx",
+        "blob": "50e703e4fb0faf9d3f545e23fbc854ac8b773279",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-current-header-assets.spec.ts",
+        "blob": "4b2cb39721b78f57272c5eef05e9b7b2f09e681d",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261016/SHARED-HEADER-ASSET-CANDIDATE.md",
+        "blob": "3478d7fc4e4df8c0460df10f47525f4e61ed981f",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+    "subject": "Attach exact retry-pin source-analysis evidence",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/.gitattributes",
+        "blob": "bd2de00cda30e433943ceb23971ade38d5a3fc86",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/ASSEMBLY-DIAGNOSTIC.txt",
+        "blob": "46b766536c3b4cc40b233b28b032a0574954d206",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/DELTA.json",
+        "blob": "c454753a84be95a66dd2bd173e2797957783bf38",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/check-meri-initial-retry-pin.mjs",
+        "blob": "8dc619d936a1585cef2b18a1aad7b023cc84fb86",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/initial-ui-retry-pin-retry.result.json",
+        "blob": "7d190291a3687421ad6e18ad8633124add62f490",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/initial-ui-retry-pin-retry.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/initial-ui-retry-pin-retry.stdout.log",
+        "blob": "a87c39e41ef3522fcf6b7d039c2fd6f939bef77c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/initial-ui-retry-pin-source.json",
+        "blob": "13ef1a9f4bb050caeeb03f11cd2cefc6f0361326",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-retry-pin-evidence/run-meri-initial-ui-analysis.ps1",
+        "blob": "fe21b49d21943e32448dac6db85825eb7bcc22d2",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+    "subject": "Pin repeated initial allocation before replacing retained receipt",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/INITIAL-INPUT-RETRY-PIN-CORRECTION-20261016.md",
+        "blob": "20aa66c8fc99bb694ac3346eac51eb6dea26e5a2",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "packages/meri-client/src/conversation-client.ts",
+        "blob": "c9f59c3812ba70fb0605e9ed72478cef9d61b617",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "4465c270695d59a24c1e11e3bfbd69782f44138d",
+    "subject": "Prepare conditional Meri initial-input consumer and interrupted-flow controls",
+    "files": [
+      {
+        "file": "apps/web/src/features/meri/MeriComposer.tsx",
+        "blob": "0e1e9eeb750564a1f81f2939db88590504476b9e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+        "blob": "92bf91e62ee3e9590065ec65b048935551f49b5d",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+        "blob": "213f59cb5c91a1dfed44458c0a0bf47370d97c4b",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/run-commands.ts",
+        "blob": "9d76b1a42b42e8f785e46fe2cacd718437f29fd5",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
+        "blob": "42f6264cc8ee0bff6d13654c570cc4f9e9695359",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+        "blob": "b40d7da6ade6012b5ba52199bd91e7cc7202975f",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/input.ts",
+        "blob": "dd2ee15d4ef6885cd4b64231621627bf95b469d8",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/proxy.ts",
+        "blob": "98ea30c279c3244f9d88370d50759e9e085d094b",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+        "blob": "12fe9d8146d75ad72b385599e5f4bb3b62cc7cd2",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-conversation-fixtures.ts",
+        "blob": "40d7016fc2a5750040f82d6544bea5eac542846c",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-history.spec.ts",
+        "blob": "b53d4570112a6a81e897196b3578981cec774459",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-initial-input-fixtures.ts",
+        "blob": "06b0c04672d0d23ec72b6c080b93dc144ff31ec4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-initial-input.spec.ts",
+        "blob": "de7718ef60cecdb4c47da1930dbdb2b757da4639",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-conversation-proxy.test.ts",
+        "blob": "29d125079384f854ff9e99bc7cce584131775a07",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-initial-input-proxy.test.ts",
+        "blob": "7605d7fc6b6c3bf9a7ec6256d00fa616001594bd",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-input-recovery.test.ts",
+        "blob": "9de2b4a113bf71026625b350316568b4a9a431dd",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/INITIAL-INPUT-ACCESSIBILITY-INSPECTION-20261016.md",
+        "blob": "080e6166f8c3a9923a91d460583ff47ec3c9bae8",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/INITIAL-INPUT-CONSUMER-OUTLINE-20261016.md",
+        "blob": "a5dff6105cd2b725a87162806ae3e26bbeb521e1",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/INITIAL-INPUT-PREPARATION-CHECKPOINT-20261016.md",
+        "blob": "a9917713f4daa4211b56466dd42579e643bc856d",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/.gitattributes",
+        "blob": "bd2de00cda30e433943ceb23971ade38d5a3fc86",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/FIRST-SIZE-FINDING.json",
+        "blob": "15113b2946965c53198b408552d54436b49f436f",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/PREPARATION-EVIDENCE.json",
+        "blob": "0bf30255c9171a64d7e8fb74f1edc3c3c60f5ed9",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/check-meri-initial-ui-structure.first-finding.mjs",
+        "blob": "9b50b51c443459a9400b794874a43dded508da2c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/check-meri-initial-ui-structure.mjs",
+        "blob": "09c64147886f51cc608edaffde98a4ccd740ddbf",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-after-availability-format.result.json",
+        "blob": "ddfd422f8f1aa998cc275afec84a7e5c411d0f30",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-after-availability-format.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-after-availability-format.stdout.log",
+        "blob": "cd9eb42248103d853b20042cccbb706cbddf0caa",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-after-availability-structure.result.json",
+        "blob": "2f64c9e15301de9c505718b06f644aea7712c1b9",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-after-availability-structure.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-after-availability-structure.stdout.log",
+        "blob": "f91570ee28d77cab716d37f000872720a1821497",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-format.result.json",
+        "blob": "f3996126defc5bd35c745ca4cd3b832b283b00f6",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-format.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-format.stdout.log",
+        "blob": "56ccc238f603df9cf251b3cd79abd46ed60bfef0",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-pending-feedback-format.result.json",
+        "blob": "a3efd64f562d9665cd9739affea853a7ead50774",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-pending-feedback-format.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-pending-feedback-format.stdout.log",
+        "blob": "9f32e3df96b356e035c4f3fb8194413f2ca883e6",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-pending-feedback-structure.result.json",
+        "blob": "b12de6065766e6dbc74d3c4284b18b83ced1b2f1",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-pending-feedback-structure.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-pending-feedback-structure.stdout.log",
+        "blob": "d390db1bc22b4618793e2c0793ce498bca3920e9",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-preparation-syntax.result.json",
+        "blob": "a92b094cfaf21b913238711579367da2d367459f",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-preparation-syntax.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-preparation-syntax.stdout.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-structure.result.json",
+        "blob": "7b8f0b2efbb9062e5973149aab48479c74feed74",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-structure.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/initial-ui-structure.stdout.log",
+        "blob": "1aa3bb0dbb666c328a485d69706eaa69a44918b6",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/run-meri-initial-ui-analysis.first.ps1",
+        "blob": "8539dcee5cd98afed5e0447e0dcc11dce44cb3dc",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/initial-input-preparation-evidence/run-meri-initial-ui-analysis.ps1",
+        "blob": "5b2037b8d5e1cd0213d2c97f1f29e73fac75f861",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "packages/meri-client/src/conversation-client.ts",
+        "blob": "92dba770c9585839d3f9e7bf4da333059ffa827a",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/meri-client/src/conversation-network.ts",
+        "blob": "e7e03ba90a5fe4a1fe1b3869b25dff86193be5d4",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/qualification-transport/conversation-initial-input.test.mjs",
+        "blob": "ff8fdf704d39de3b1653985fb64bade08b1316e4",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "scripts/architecture/dependencies.mjs",
+        "blob": "db15f21bce5b66c27771e9e6011c1ef224b82e15",
+        "present_in_main_history": true,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+    "subject": "Preserve raw stdout and stderr in input runtime evidence",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-install.stderr.log",
+        "blob": "d14245e5786c397c65bbbbe035c85a4a4c0ec5ba",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-install.stdout.log",
+        "blob": "a5b969244465811d25ec7733649aff6069f245a3",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk-runtime.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk-runtime.stdout.log",
+        "blob": "6e245a8229982625e22295d677e79076f5447f40",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk.stdout.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-ui-runtime.stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-ui-runtime.stdout.log",
+        "blob": "6b2d6d46cf9860a417b6786af3afd7efd3dd0550",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+    "subject": "Seal Meri input SDK emission and focused runtime evidence",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/INPUT-RUNTIME-QUALIFICATION-20261016.md",
+        "blob": "654fffadd0820a92c05d17005ef0c06495da21dc",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/.gitattributes",
+        "blob": "bd2de00cda30e433943ceb23971ade38d5a3fc86",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/INPUT-845ceb-CHANGED-PROOF.json",
+        "blob": "d3ab5942930a9340211329bfac0d9d5d01d9e62e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/MERI-INPUT-845-CHANGED-RUNTIME-SEALED.json",
+        "blob": "1440cfcd670b1da49b1b7e526e2d30f1f90ff04a",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/RUNTIME-TERMINAL.json",
+        "blob": "83d70b57cdb38ce4e60e8719045501858f3d0ac2",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/check-input845-installed-bytes.py",
+        "blob": "3d643567e1d3ec02dbdbc89ac2a0c651fc3f7fb7",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-install.capacity.json",
+        "blob": "db38c6067a6f4bc670c9cfa0e92070e65db7dd35",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-install.result.json",
+        "blob": "5743d859d54a9b63dbf404b6bdda99d03e705bbb",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-installed-consumer-bytes.json",
+        "blob": "b4d51dfa30475bb784b2470b7b4e64d043be9892",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk-runtime.capacity.json",
+        "blob": "6320aa9a9a3a87e402375101d195e5f67f04acf0",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk-runtime.result.json",
+        "blob": "de4c56dc2c3c59fcd38388ed18ee9ccdd1f02bdb",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk.capacity.json",
+        "blob": "6c0faaeb588b83873eebed400eb5f302eff20776",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-sdk.result.json",
+        "blob": "08fa19a80ad213afb84663a7cd8f650ceca3e0b1",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-ui-runtime.capacity.json",
+        "blob": "fb04d9260fea9a2da88721e325ea865438141562",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/input845-ui-runtime.result.json",
+        "blob": "30544bfcc3712de24904162bd0ea096eda3f7d2c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/meri-input-ui-845.json",
+        "blob": "6b52ef13ddf6693509362c81f52a924c1047c200",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/run-meri-input-845-stage.SEALED-HOLD.ps1",
+        "blob": "8fab8b481bd976495cb19c9b5eb9c3d04926d4c4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/run-meri-input-845-stage.ps1",
+        "blob": "193f00dba1dd18068cd3d67c755b6ebe00d41cd1",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/input-runtime-evidence-845ceb/seal-input845-runtime.py",
+        "blob": "c1dd8e2f8736318559d7eb6f937d16e76a4f6b9b",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "packages/meri-client/dist/conversation-client.js",
+        "blob": "9d75d476e3a4a3db4e24d0e501ab5f84e839373f",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "845cebade818b8ceef1568574662196d813d14d0",
+    "subject": "feat(meri): admit retained conversation input before dispatch",
+    "files": [
+      {
+        "file": "apps/web/package.json",
+        "blob": "839a5310e27d22f7882d4ff1679f1bbcc273247c",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+        "blob": "dacc565426ca53af7ab542a989648f9cf7369093",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+        "blob": "201dade2c3fbaebd9c271dd492cd43e2e5f16d96",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/RunStatus.tsx",
+        "blob": "45399e9b747951a07978b2de01468bc986dfd13a",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/run-commands.ts",
+        "blob": "7a6969bf6a135c19c98b5e4908ca47f1b8762a05",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
+        "blob": "b7977817c93a856f390b4e4440d3020b826e6f8f",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+        "blob": "8a5d612edd7ece4ea4c340d9d37b187a8094ab4e",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/input.ts",
+        "blob": "36b116a6840392fdfc901bfd88946f9417aa239b",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+        "blob": "62b373ee15d5d9a550251414ae32b2a10f41ff57",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/combined-successor.spec.ts",
+        "blob": "54fa3d12a88504a532543815fa8e0c560d9f4e44",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-conversation-fixtures.ts",
+        "blob": "cb4f18ebf927e15672c1e17b49e9379c45e6251a",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-history-fixtures.ts",
+        "blob": "8ae5b42ccd04e1dfdce9ce3e8c60a79db0a4d2b5",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/tests/meri-conversation-proxy.test.ts",
+        "blob": "87f840c0f24c20e4d331ae5a896be536e507b75b",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-input-recovery.test.ts",
+        "blob": "c059a5832ae009f15db5213182492966c083e944",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/INPUT-INTEGRATION-CHECKPOINT-20261016.md",
+        "blob": "49aeb632f6229fecf1d86ea78a954d5016c3e187",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "package-lock.json",
+        "blob": "efaf8195dc9c45f940a98ba621b75786c2e0baf8",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/meri-client/README.md",
+        "blob": "e90959d993c2eb09f8706b9d7dd688924993b1e0",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/meri-client/package.json",
+        "blob": "dd365008693f727fec230cadb0727cdacf5169c4",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/meri-client/src/conversation-client.ts",
+        "blob": "098d4bb01aeb8fd64b89c1337bc71ce5179b7e8a",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/qualification-transport/conversation-cross-repository.mjs",
+        "blob": "918837c4524c6947edf476aad041e28855bb8813",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "packages/qualification-transport/conversation-fixture.mjs",
+        "blob": "a4361e21f1e45d07dce9a167f1d5fbf29e750db4",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/qualification-transport/conversation-input.test.mjs",
+        "blob": "f81be29134cdb7f09f5f1de522f8a571d30f5a06",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "packages/qualification-transport/conversation.test.mjs",
+        "blob": "8fdee415eca55a6a003d5b608a71066bf9d97ad0",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "scripts/architecture/dependencies.mjs",
+        "blob": "e05fe56aaf328c6dedea36a8447cd97a951aa859",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "vendor/capiro-meri-contracts-0.1.7.tgz",
+        "blob": "ddb8eb7a6ac2d9acd6d3925bac907b0539b5ad58",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "vendor/meri-public-packages.json",
+        "blob": "ee9d5c8621380c280523ea9c0d8af502ab158f0c",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+    "subject": "fix(meri): retain current prompt while lineage is unavailable",
+    "files": [
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+        "blob": "e55045f00e85a196a3fc398872d410ca6cc6426b",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-history.spec.ts",
+        "blob": "0c4274bed99a49d549eb50f32fa3487af6823290",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/meri-prompt-identity.test.mjs",
+        "blob": "fbd27682bbf89b8faf5b97d07eedb41b63817e3e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/HISTORY-INTEGRATION-CHECKPOINT-20261016.md",
+        "blob": "5edf718da5ca714130c19528ac2c274b35f9b281",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "108e5abdae8b3c59407ddfa5c3821be366a1f085",
+    "subject": "feat(meri): wire native history and immutable turn recovery",
+    "files": [
+      {
+        "file": "apps/web/package.json",
+        "blob": "484e2f7eefa9533e18e083260e518f6bcbfbd996",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/app/api/conversations/[...path]/route.ts",
+        "blob": "f9d89106651f5d71e13a98ac95133fa44bbb916b",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/app/meri/page.tsx",
+        "blob": "087f300f119b5f3a5051a2c950ce1b94d7d17046",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/ConnectionPending.tsx",
+        "blob": "74a15011e95f67bb17d2792af592c96775c8166b",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/ConversationFrame.tsx",
+        "blob": "1e583c8e16cbe6bec35a02d6755eb6c86cef8574",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/ConversationHistoryStatus.tsx",
+        "blob": "43246fb9c7e1ccdb34110b1f7fc5818eb1dd505c",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/ConversationTurn.tsx",
+        "blob": "1b5fddd097fd2ca45571497ceaa76571c75a5508",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+        "blob": "6aca97628a9ce91f63bf5c25d93478a44c0d4cd9",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+        "blob": "0d5c94f5f2aa92d126fa251ac4fd20fa1d903c5d",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/conversation-view.ts",
+        "blob": "5b886484d9cdf52e8421b6dc3d42492d8cd4dcc4",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
+        "blob": "6eea4b9733ef8a12dac4328bef4055a2fcec0086",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
+        "blob": "d59472ff9ccbcdadb1f7e1619ac39515bcc44d93",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
+        "blob": "401bc08fbf38325d7d9c1cbab59aec13cc0ec59b",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useConversationTurn.ts",
+        "blob": "0f25a627d471cf725b099d5ea7740e50e4708033",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
+        "blob": "d102954723b29dceaeb609742810f56494243900",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+        "blob": "6bae37612277ecdfa51ef5bcfdd1d36b4fc78810",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/history-client.ts",
+        "blob": "ab0bfd9d33acb441e391ca86dfe4b613dd309e1c",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/history-pages.ts",
+        "blob": "172ee77c135f8aaeebdda5fa9cb1d73d5e026efe",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/history-proxy.ts",
+        "blob": "5bdcb1c85f3c00fcbb92f4c303c9f4ee782429e6",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/history-queries.ts",
+        "blob": "1a64cb9024e8894e1328f232e4f0e92b60dea6d7",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+        "blob": "fbfccdcae6be9a763d28506f4113634b55faf28b",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/turn-journal.ts",
+        "blob": "666fc268be3a1a0944c279a216d684c0e9ff4897",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/ConversationRecents.tsx",
+        "blob": "63e6756aab5936d6f663c83a1f989e5cffa2e1f3",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+        "blob": "5e28ee6f59e342575d886ca1988defee7103f11c",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/ProductShell.tsx",
+        "blob": "31c9231fbc30c832f6f3aacab27a56c41b59e068",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/Sidebar.tsx",
+        "blob": "de81f68ff7bdf8bad7bb5a2b91e9565948fd308a",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/shell/SidebarRecents.tsx",
+        "blob": "1cb8dcf14240aaf12f29cf07de8ee5f3bd76a74f",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/browser/combined-successor.spec.ts",
+        "blob": "81251def33b1cf2398795e6f42c29c442f6f42cf",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/main.tsx",
+        "blob": "d2189b5ce00eb72e206f86e967151918bac9cca2",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-conversation-fixtures.ts",
+        "blob": "b9b57f75b725be2fd7b0a8e984c8e6038613fe9f",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-conversation-host.spec.ts",
+        "blob": "f7ddca02e508b897da6f0c43410b3a92370a3e5b",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-history-fixtures.ts",
+        "blob": "36bd9e464218ae42161b7c0cdd9c4f4e8a479a46",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-history.spec.ts",
+        "blob": "c903bc0ee4080aee6a4a12904fb9f69485a69325",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/meri-history-pages.test.mjs",
+        "blob": "57fdf389adb02a5233102a2b113f9c5847a38452",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/meri-turn-recovery.test.mjs",
+        "blob": "af544450fdf05ad01ad93e9ff223f8b87cd8ee1e",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/tests/meri-conversation-live.test.ts",
+        "blob": "05c45c0ec9a558a96bf762983a6d8028d9e5f704",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/tests/meri-history-proxy.test.ts",
+        "blob": "d98a03b3f9b5f3b2646c7e35ce7c265d578c93bb",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/HISTORY-INTEGRATION-CHECKPOINT-20261016.md",
+        "blob": "92596de09024c828cc4591bf84292032fe9bfb7e",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "package-lock.json",
+        "blob": "068d99eff1be3353a4471252d184b10d7058d76e",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/meri-client/README.md",
+        "blob": "5d6bf1de625ae273ab72be936f86cadd38540046",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "packages/meri-client/package.json",
+        "blob": "9a8c4fdbb43a51793ae2cd564265017dd5c29b9e",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "scripts/architecture/dependencies.mjs",
+        "blob": "eb2c1ad2b0081a518b13991847b26de80087e04c",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "vendor/capiro-meri-contracts-0.1.6.tgz",
+        "blob": "1e9c450b986010426203f3348924f737fb78f9ff",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "vendor/meri-public-packages.json",
+        "blob": "c84cbe76efd0d2375ed57ca61dfdc3f416d494bf",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "68619614f23116d3735e5634a466243303cc4acd",
+    "subject": "feat(meri): prepare exact conversation selection and logical prompt display",
+    "files": [
+      {
+        "file": "apps/web/src/features/meri/conversation/ConversationFrame.tsx",
+        "blob": "dbf9f06b028b562a766c677ad89a7775d76d61fd",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/ConversationTurn.tsx",
+        "blob": "7db39cba79b60f7089246d311497842029dd327f",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+        "blob": "3457a993d159c87dce185c76ed66942ba74855f5",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+        "blob": "29eb731e9937b1d176c9ae5cc03155d5b3686e3b",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/conversation-view.ts",
+        "blob": "b62889d32429e32ab400d99d6b37e55951a45222",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/prompt-identity.ts",
+        "blob": "127283320391354a3a94816090179a1a26dcefa7",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
+        "blob": "353dd7718bf30de78513fdfd12544dc24d7ce33e",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+        "blob": "f8494e7090e5521ee4495ef6b2e99af5c364a28a",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/shared/meri-conversations/selection.ts",
+        "blob": "652a89679e71ad4661b257fadda1d5f9dc0a94cd",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-conversation-selection.spec.ts",
+        "blob": "a83ec598fe2345d247bb5785080a6bdd974a27f0",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/meri-conversation-selection-journal.test.mjs",
+        "blob": "c43141ba512e3a0558655751d8367c06652528c4",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/meri-conversation-selection.test.mjs",
+        "blob": "bfd3ea9b2ef723d52381e19b2168c6cdd6f93ecf",
+        "present_in_main_history": true,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/meri-prompt-identity.test.mjs",
+        "blob": "757303a6b5a18f4d545472175140a6533855e229",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/HISTORY-INTEGRATION-20261016.md",
+        "blob": "061170903dbd09a742eaea312a26513c21a23c12",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+    "subject": "docs(meri): retain architecture negatives and source review",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/UI-FOLLOWUP-20261016.md",
+        "blob": "e5444856cbc676d62cbf7f1a7212cc96ba73d28b",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/UI-QUALIFICATION-REQUEST-20261016.md",
+        "blob": "29b814d9540cecfb9d699d6cd7fcbe23c772eb2d",
+        "present_in_main_history": true,
+        "state": "identical in main"
+      }
+    ]
+  },
+  {
+    "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+    "subject": "refactor(meri): separate run command state from observation lifetime",
+    "files": [
+      {
+        "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
+        "blob": "c020dfb8b69eff0efad20aa5964876e3c9129a83",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+        "blob": "91d1e686396a9b484089b8be3d7a1b5324efae95",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/LIVE-WIRING-20261016.md",
+        "blob": "adf8ce123860265d603a5a4ab73577e9a4ee0ebd",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/UI-FOLLOWUP-20261016.md",
+        "blob": "3c70fd0ad70e3db6114ef075e40bee79b56be8dc",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "2dc47441789f61e55a6371d9a30310d11c65b27e",
+    "subject": "docs: clarify governed Meri host and remaining desktop controls",
+    "files": [
+      {
+        "file": "README.md",
+        "blob": "12d48bbab8d418502b29b7db96177479de27be22",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/followup-20261012/REMAINING.md",
+        "blob": "fbee865c53060c3eb8eec3ea977d0fb8171d0715",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "docs/meri-conversation-status-20261015/STATUS.md",
+        "blob": "57a0bc62ed32700cf8d9da5da3facd52b74037d4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "packages/meri-client/README.md",
+        "blob": "db2ffa79a81845043f0d9d386bc1c57fc470d29d",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "b6336be53c3515115122578ad22f659cc2fd6ab5",
+    "subject": "test(meri): expect the scoped Modules hub heading in action host navigation",
+    "files": [
+      {
+        "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+        "blob": "60f17766f615e44c6453cf474b740a23607f20f7",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "4a381f8d683864812780d9d20a60d0f4f407bf22",
+    "subject": "test(meri): serve the Core client roster in the action host fixture",
+    "files": [
+      {
+        "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+        "blob": "de65ee1f8d0d90533881b2e86118118d5ff37ebd",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "aa0a9df1bd165a47f550e41fc1f5812a724e6784",
+    "subject": "test(meri): expect the scoped Modules hub heading",
+    "files": [
+      {
+        "file": "apps/web/test/browser/acceptance-meri-theme.spec.ts",
+        "blob": "1940c9656c478b7bdec89874cbc4bbb3cddb86e6",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/acceptance-shared-incompletes.spec.ts",
+        "blob": "a02987ee3aa61feb7fa693bb3ee898f027d426a1",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-files-navigation.spec.ts",
+        "blob": "de3223ea5e5f65d3f8f0f0d8621641c40c4bafad",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "dc9a18d28ea934f5e655d13ea1e8686225bb4d73",
+    "subject": "test(meri): check the conversation session hint after the transcript renders",
+    "files": [
+      {
+        "file": "apps/web/test/browser/meri-conversation-host.spec.ts",
+        "blob": "d9012e8854b6dbcad2c3c13088ab2d672b4f5984",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "8c5f53bcac05d2822a50154dec34b93eeaf01974",
+    "subject": "test(meri): match browser specs to the current session-header and history contracts",
+    "files": [
+      {
+        "file": "apps/web/test/browser/meri-conversation-host.spec.ts",
+        "blob": "5137907fcbc6092811cde6ea793ef9d054d0757d",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-files-fixtures.ts",
+        "blob": "3393e999c7a8009273ad01e1972200627d2d95c8",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-task-command-fixtures.ts",
+        "blob": "bd54f24fc6878a3becdd49e40a4c73d7f05bb917",
+        "present_in_main_history": false,
+        "state": "different in main"
+      },
+      {
+        "file": "apps/web/test/browser/meri-task-command-workflow.spec.ts",
+        "blob": "9e3db8554bd55cc5ba2577f8dbde15e253154a22",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "753eb6701e62f8f3f5ace16f86c967bdd372298b",
+    "subject": "Document exact source archive timezone mismatch and UTC reproduction",
+    "files": [
+      {
+        "file": "docs/archive-1585438-diagnostics/COMPARATOR-CLI-CHECK.json",
+        "blob": "6793d9bf208b3eb5cb4241fe3e5ba56a1838f00e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/MANIFEST.json",
+        "blob": "57d963fc821fc94cba17a13274e91bd6850edb75",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/PRODUCER-SELF-COMPARISON.json",
+        "blob": "8d688fe0406f0c1582262f78447bddde50020f39",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/PRODUCER-SELF-COMPARISON.stderr",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/README.md",
+        "blob": "037e8cd910d0f54b3e326f99b47a957236d3d8a3",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/compare_zip.py",
+        "blob": "553ee7ccfb5cd30bd930af68fb9c326e6f1e274a",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/CURRENT-RUNTIME-AND-RECIPE.json",
+        "blob": "6c8bd7dfca657bfdb5eb04ea3a13775bf077975b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/INSPECTED-ROOT-UTC-REPRODUCTION.json",
+        "blob": "98eec48b3bba097e8eeaf6a616827dc9c13170de",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/MANIFEST.json",
+        "blob": "499f069287da8a89309ce2379bd2f37a7ace7e9d",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/MANIFEST.sha256",
+        "blob": "4420a39e7e49bfe02d2e47bb913fa31f49c524b7",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/PRODUCER-RECEIPT-SUMMARY.json",
+        "blob": "a26ac1958727570d12dffff2e71801576e5fbd70",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/PRODUCER-ZIP-METADATA.json",
+        "blob": "542fd6ab8a79faa7aa59050540f7df29d1925376",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/REPORT.md",
+        "blob": "d68e9df0193b96b0abfa48c76a6a19a399803d0c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/SINGLE-MEMBER-COMPRESSED-CONTINUITY.json",
+        "blob": "13505a7023981f6f287fe45900be8aa4bedc7b5b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/TZ-BYTE-DIFF.json",
+        "blob": "021f3b3fc56e9a20254f81e9d5eb07fdd1752fb2",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/TZ-SINGLE-MEMBER-PROBES.json",
+        "blob": "0fba0a243b065c037fa2d036302a8674434586bc",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/independent/producer-recipe-readonly-copy.py",
+        "blob": "db26d412ef274207bad5b1c4663ffad83dfa237d",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/original-create-source-archive.py",
+        "blob": "db26d412ef274207bad5b1c4663ffad83dfa237d",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/CENTRAL-DIRECTORY-AND-END.bin",
+        "blob": "f6b3b3d317826413e64637971ef7df57b10a1aeb",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/DOS-TIMESTAMP-HYPOTHESIS.json",
+        "blob": "7b0b7219313925e5ce230c5d18c2ccfd95440e5d",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/GIT-UTC-REPRODUCTION.json",
+        "blob": "57665a00cfbf402eb9b841d77616ba7a8807ba57",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/LOCAL-HEADERS.bin",
+        "blob": "cc7729f54f6892fe4d87ed425e2adb4e3780bafe",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/RUNTIME-AND-TRANSFER.json",
+        "blob": "6e76d747f47e46aa7a7ff0c765b7e651f35f2b5c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/ZIP-ENTRIES.json",
+        "blob": "cbcc7460a4da494c78e62fa80949ef2fded3fd6c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/producer/reproduction-stderr.log",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/MANIFEST.json",
+        "blob": "af7294731b7b41c41bbfd8db9167d3a6f94c6357",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/MANIFEST.sha256",
+        "blob": "911a09235fc358cd019acb5362f47dc67d99bca2",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/PATCH-OFFSETS.jsonl",
+        "blob": "b14b5d51441c1d1024abe7bc4e65b97cb0eeb05e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/PROOF.json",
+        "blob": "58eac8e73492e1dba29859bf14da0257ae74bcb1",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/REPORT.md",
+        "blob": "d5ae256bcb2373a0860cac763984db22ca459268",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/verification.log",
+        "blob": "58eac8e73492e1dba29859bf14da0257ae74bcb1",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/archive-1585438-diagnostics/timestamp-proof-review/verify.py",
+        "blob": "dfa19c2649274790c9ccc6f4a65a287da0370e1a",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "59be1a24239c9c1af2c174cdddad59882b98db23",
+    "subject": "Add portable Meri frontend qualification evidence for c7e06000",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/README.md",
+        "blob": "2593bff7a9189605843fb02cfb9da3142fbd2fdd",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/SHA256SUMS",
+        "blob": "36df1cc90a8075de5397756073b1d40b7b8d0540",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/dependencies/bound-dependency-files.tar.gz",
+        "blob": "989cf4f6c54cffb3ae14479ae093da6964ab75b4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/dependencies/bound-dependency-manifest.tsv",
+        "blob": "75c58b9b44c645cac827e6443374d8693a5df286",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/dependencies/npm-ls-qualification-elements.trimmed.json",
+        "blob": "3aab72f34b18362c62840d811894917304110c7c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/dependencies/npm-ls.exit.txt",
+        "blob": "2ff8a9384d3bbf57eb275136bfcde5c0a672c898",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/dependencies/npm-ls.stderr.txt",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/architecture-json.cmd.txt",
+        "blob": "45bbb3f6722ff804a8f6753b048a192b23646e8f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/architecture.json",
+        "blob": "1ee3028e1523a6c7c7105817ca6091e124b07a4b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/architecture.stderr.txt",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/architecture.txt",
+        "blob": "878364677d172be99f26d48e5318493478a9bd80",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/check-packages.txt",
+        "blob": "b34264266a4ffb0aa26d881b54137f3f79cceed2",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/environment.txt",
+        "blob": "8248a69a68e184cd40f8b4838599ab701af82b9d",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/receipt-comparison.txt",
+        "blob": "7f507aee72995f9cbc91f8e8387b4e34aaf5d0ea",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-0-toolroot-sha256.txt",
+        "blob": "161dd2bb220b314603bfbc566534749ecdfba0ed",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-1-pins-check.txt",
+        "blob": "a27089d39f0daa972cd67d4d684a4623a80391aa",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-2-typecheck.txt",
+        "blob": "0a3503e3144bbb38ce86988424e0cc0f5a3054be",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-3-build.txt",
+        "blob": "16203ed52c49d634aa91a911275272722cbf3220",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-4-check-elements.txt",
+        "blob": "dae09bc04c1babf1941a990d4fee477e0dca2212",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-4-env.txt",
+        "blob": "54fbba76f073cf447500b82080514d2daaadbca4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/ssr-5-offline-verify.txt",
+        "blob": "c03b43c1765f574c2b1bb45126429f6130e8f5f9",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/architecture-npm.txt",
+        "blob": "c32cd25549909fce91923b1d3a54ac087568bbf7",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/architecture.cmd.txt",
+        "blob": "feb6b58e7e03ca29f59fa6b00f640063bb4ec510",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/architecture.json",
+        "blob": "1ee3028e1523a6c7c7105817ca6091e124b07a4b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/architecture.stderr.txt",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/check-packages.txt",
+        "blob": "d5ea908a233ce112a991bb4081dc7075c62ffeba",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/environment.txt",
+        "blob": "476f45f5d2695b7dc4a71e6dc94ccce855ed2c12",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/ssr-0-toolroot-sha256.txt",
+        "blob": "161dd2bb220b314603bfbc566534749ecdfba0ed",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/ssr-1-pins-check.txt",
+        "blob": "93622db5b7930962aeb4a4d789b5cfecc7391c60",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/ssr-2-typecheck.txt",
+        "blob": "ca37bb3a8c1a5287da624c1b5933c44512e6002e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/ssr-3-build.txt",
+        "blob": "1ac67ff70503d5b14d0d2bcf8c8ed8b2ff4cee8f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/typecheck.txt",
+        "blob": "5716615dc8f48942f0d247edcf0dc9a01941ff8f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/unit-test-apps-web-subset.txt",
+        "blob": "6a66b792e4b7d3a6adf86ebce60d9b7b63930050",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/superseded-symlink-attempt/unit-test.txt",
+        "blob": "ac94acfa2f3eeeba32e13e8c05fdbf42332e4cfc",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/typecheck.txt",
+        "blob": "c8b5701d20003fcd0bc1f65cc21a8048fc512b07",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/unit-test-apps-web-subset.txt",
+        "blob": "da66d7252414b7fa87f70bade5f73255a836db23",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/logs/unit-test.txt",
+        "blob": "aebb489ef0ddebe648244aaae3ddfb4089786264",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/01-acceptance-meri-theme-meri-authored-dark-fixture-keeps-the-shared-header-light-at-1440px.json",
+        "blob": "466b1e3eb9e2ca81b128d9daf4d3e3e36392c592",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/02-acceptance-meri-theme-meri-files-theme-follows-preference-through-scoped-navigation-and-hi.json",
+        "blob": "f31d3f2f77106e6de21b997b870e37b33dc72506",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/03-acceptance-meri-theme-meri-fixture-files-theme-follows-preference-through-scoped-navigatio.json",
+        "blob": "060117b7966508e1da1822d71f38850b13e92165",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/04-acceptance-meri-theme-meri-authored-dark-fixture-keeps-the-shared-header-light-at-390px.json",
+        "blob": "d5e95ee7bd719a03721facec2383135d4ef71244",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/05-acceptance-meri-theme-meri-files-theme-follows-preference-through-scoped-navigation-and-hi.json",
+        "blob": "db972165858cb9aad14f1ab30ad947baebdd9ff3",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/06-acceptance-meri-theme-meri-fixture-files-theme-follows-preference-through-scoped-navigatio.json",
+        "blob": "2d9588106b19cc0e219442db42fe3e1726db89a1",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/07-meri-adopted-disclosures-meri-tool-activity-disclosure-is-keyboard-operable-in-light-at-14.json",
+        "blob": "df8054a4d26a5624db4581a3b93e18eee859d91c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/08-meri-adopted-disclosures-meri-specialist-task-details-expand-and-collapse-by-keyboard-in-l.json",
+        "blob": "bb81102dfa9d27048a24e42ea6c0908fd3343e34",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/09-meri-adopted-disclosures-meri-run-plan-card-renders-its-queue-steps-and-keyboard-link-in-l.json",
+        "blob": "837f12315f6824616f7d876535cb837c4267be9d",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/10-meri-adopted-disclosures-meri-tool-activity-disclosure-is-keyboard-operable-in-dark-at-144.json",
+        "blob": "f96a7375d0fe879551fd2bcf2be0fd9dd94f1481",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/11-meri-adopted-disclosures-meri-specialist-task-details-expand-and-collapse-by-keyboard-in-d.json",
+        "blob": "33855124b25205a2db373432d630db68741f250a",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/12-meri-adopted-disclosures-meri-run-plan-card-renders-its-queue-steps-and-keyboard-link-in-d.json",
+        "blob": "9a86b0223fda80f710561d413d56ac11f6f1ef78",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/13-meri-adopted-elements-meri-proposal-confirmation-and-receipts-expose-named-regions-and-key.json",
+        "blob": "f2e0a1918c720c1169120a6f45c9a3b0892733e1",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/14-meri-adopted-elements-meri-checkpoint-restore-renders-the-checkpoint-and-its-keyboard-fork.json",
+        "blob": "aafbf3e3947e76668812d0764b014f5371acad63",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/15-meri-adopted-elements-meri-cited-sources-select-evidence-by-keyboard-in-light-at-1440px.json",
+        "blob": "6c521223191272aba1ad2b2cdc2656ab41f92df0",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/16-meri-adopted-elements-meri-artifact-cards-name-their-file-and-actions-in-light-at-1440px.json",
+        "blob": "092b7751188cb75eeed494b00dd7c02d1f918a29",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/17-meri-adopted-elements-meri-draft-attachments-are-removable-by-keyboard-in-light-at-1440px.json",
+        "blob": "9b0ff18bcd0891f88146336769a86f896b2db668",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/18-meri-adopted-elements-meri-webpreview-controls-are-named-and-keyboard-operable-in-light-at.json",
+        "blob": "94a48db1b03e6bdab669753baadc40ff18e93f37",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/19-meri-adopted-elements-meri-proposal-confirmation-and-receipts-expose-named-regions-and-key.json",
+        "blob": "88d386b1a9b5c527346b30c540d8a6ab8c605514",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/20-meri-adopted-elements-meri-checkpoint-restore-renders-the-checkpoint-and-its-keyboard-fork.json",
+        "blob": "eeb374f69fcbc603608e94d085d372739c1e15f3",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/21-meri-adopted-elements-meri-cited-sources-select-evidence-by-keyboard-in-dark-at-1440px.json",
+        "blob": "decb6609f3498b72cf1423a676200a6a146650ca",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/22-meri-adopted-elements-meri-artifact-cards-name-their-file-and-actions-in-dark-at-1440px.json",
+        "blob": "853cf457aec3cbf5d2b24afe8ea361cc5e48ec1f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/23-meri-adopted-elements-meri-draft-attachments-are-removable-by-keyboard-in-dark-at-1440px.json",
+        "blob": "60372c396e54c4d0ab7e0f8b38305a9abacd5f5c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/24-meri-adopted-elements-meri-webpreview-controls-are-named-and-keyboard-operable-in-dark-at-.json",
+        "blob": "a28cb4568e1891995bd1f3a2e6670fd6c566d427",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/25-meri-file-tree-keyboard-meri-workspace-filetree-implements-the-keyboard-tree-pattern-in-li.json",
+        "blob": "6ee2aa6ab4345862c867b2c5dabe2f5a7f7b571a",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/26-meri-file-tree-keyboard-meri-workspace-filetree-implements-the-keyboard-tree-pattern-in-da.json",
+        "blob": "e42baf37bbfbaebd1d646aadeec2f2bdcd5613eb",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/27-meri-files-workflow-files-docx-1440px-creates-revises-inspects-and-verifies-synthetic-byte.json",
+        "blob": "05cb2b6853414928b00ecbf5386445ac5d9a6820",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/28-meri-files-workflow-files-docx-390px-creates-revises-inspects-and-verifies-synthetic-bytes.json",
+        "blob": "85d6040e7c530d0a7ce0e53ee18885fa23fa3ec9",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/29-meri-files-workflow-files-xlsx-1440px-creates-revises-inspects-and-verifies-synthetic-byte.json",
+        "blob": "2fa9d7fafc6e0db2c115464f461893669f4aef6b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/30-meri-files-workflow-files-xlsx-390px-creates-revises-inspects-and-verifies-synthetic-bytes.json",
+        "blob": "7e41d29174eca259557126a2ed9b66c22bdc1aa4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/31-meri-files-workflow-files-disabled-1440px-makes-no-session-document-calls-and-retains-trut.json",
+        "blob": "d7269161eea4c149acdac8bb16d1137051f756bd",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/32-meri-files-workflow-files-disabled-390px-makes-no-session-document-calls-and-retains-truth.json",
+        "blob": "45837785692b2f7eb6f9acadadb58067c5f5d95c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/33-shared-home-accessibility-meri-home-retains-full-default-axe-checks-at-1440px.json",
+        "blob": "d01abae1ec200c98a1bad86dd86b0ea2d5c2616c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/34-shared-home-accessibility-modules-home-retains-full-default-axe-checks-at-1440px.json",
+        "blob": "7a276abc32a75e80944f1fc61f6bf90a719095d7",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/35-shared-home-accessibility-meri-home-retains-full-default-axe-checks-at-390px.json",
+        "blob": "65fddc600f18de82856848fcecb2b6e4d496bcc4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/36-shared-home-accessibility-modules-home-retains-full-default-axe-checks-at-390px.json",
+        "blob": "2ff4fb29c2db3d6fe0306279ef06597a5d0347a6",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/axe/axe-summary.json",
+        "blob": "8367ba568c382b2a966c91f8d98571d4a329cdb2",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/list-output.txt",
+        "blob": "80fd949ab0a3366adccdee23eacd522406fe9a5f",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/report.json",
+        "blob": "9bc30696835c6032bd997910d69e003e85176175",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/spec-list.txt",
+        "blob": "815a0813ad4577c861c439677cfc8493152f691b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/playwright/tests-summary.json",
+        "blob": "76539be5d100d69733842c0f7e7bcb5e41922a15",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/scripts/extract-axe.cjs",
+        "blob": "6cc474473711d01c35ae05e9836b71c15ecb4b59",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/scripts/offline-verify.sh",
+        "blob": "d91fca98e225ebcb0b3183e90e976da8ebaee0d9",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/scripts/run-checks.sh",
+        "blob": "e9d0005d48f2578679861cfe37e2da652476e959",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/scripts/run-playwright.sh",
+        "blob": "02ee06510ed2df6729b72c13f8f51742e592fb75",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/build.process.json",
+        "blob": "0611ee2e83cd491204c2c9c737ce1d2228525ecf",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/build.stderr.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/build.stdout.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/discovery/build.process.json",
+        "blob": "c537a540d5fa1dc44cb0f0700664d605b5156180",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/discovery/build.stderr.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/discovery/build.stdout.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/discovery/fixture.cjs",
+        "blob": "94b7eb5e93400bfdc699661a8619def48f817c22",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/discovery/fixture.cjs.LEGAL.txt",
+        "blob": "3da0b95fe6514f373048ac930c7fa5a74e1a0fac",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/discovery/metafile.json",
+        "blob": "c035604cfd215003b5432ac43158c35fd02724ca",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/fixture.cjs",
+        "blob": "94b7eb5e93400bfdc699661a8619def48f817c22",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/fixture.cjs.LEGAL.txt",
+        "blob": "3da0b95fe6514f373048ac930c7fa5a74e1a0fac",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/metafile.json",
+        "blob": "2b20fbba0921c74a4a359c54b33c374d140cd0f4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/fixture.cjs",
+        "blob": "94b7eb5e93400bfdc699661a8619def48f817c22",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/fixture.cjs.LEGAL.txt",
+        "blob": "3da0b95fe6514f373048ac930c7fa5a74e1a0fac",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/metafile.json",
+        "blob": "2b20fbba0921c74a4a359c54b33c374d140cd0f4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/omitted-input.json",
+        "blob": "daafc785239412fa1d731ec9759ea3538752ad11",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/output.json",
+        "blob": "e0d5dd462e60c4553e72a0b8b704f31db0872789",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/tool.json",
+        "blob": "7c5971b3647f9bf3459c3cc7e868bd22c4652292",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/.gitignore",
+        "blob": "c2658d7d1b31848c3b71960543cb0368e56cd4c7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/README.md",
+        "blob": "40ef8bd8b01f84d9c19b9528e45854f5d1f369f9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/baseline/component-pins.json",
+        "blob": "4a933c5a4ba9bf3f8c73482e41be72c2185901db",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/baseline/package-lock.json",
+        "blob": "23d1daa9372835e49ee1f9b4d335bed6e670258d",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/generate-pins.mjs",
+        "blob": "4f93c120f2f1a2a68eb7a0e4802ef1346556206f",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/migration-map.json",
+        "blob": "e1ee9157c246ae4acbddd0f11935aca9967f957c",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/package.json",
+        "blob": "7bda33b1dd198f7b2f32a7041cbd2d6da6191f40",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/promotion-pins.json",
+        "blob": "5d864144485a53d06966207a4940e6817e8f750b",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/qualification.test.mjs",
+        "blob": "05806536ccc9a938d3186290aa3efddb23f72d01",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/sources.mjs",
+        "blob": "76833de82dd283cb9cbb1ff17bda242c098dbf5a",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/ssr-build.mjs",
+        "blob": "76c263bebc91cbf4f2a0e0f9dd46d347a443c55a",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/ssr-runtime.mjs",
+        "blob": "e33971a5827143d99eef4ecaa1f9e070c9b31f16",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/styles.css",
+        "blob": "e7fb488c930a08c025c681b5fb56c0c44d1d7883",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/toolchain-pins.json",
+        "blob": "a58669b7df5f1fe00ac1f7a0512052c4c7dc2e75",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/qualification-elements/tsconfig.json",
+        "blob": "66895d34f3bdfc9ed46c4f506626aa5092118261",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/.gitignore",
+        "blob": "c2658d7d1b31848c3b71960543cb0368e56cd4c7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/LICENSE-AI-ELEMENTS",
+        "blob": "6c16c29f41168411dbf6e3ba3a063ce789c27334",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/LICENSE-SHADCN",
+        "blob": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/README.md",
+        "blob": "4907b9e969e53c74ff0b250048d3035cc83bb81e",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/THIRD-PARTY-NOTICES.md",
+        "blob": "fd350300672a7fe981aa50a87ad034ee302f3bdc",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/UI-NOTICE-SUPPLEMENT.md",
+        "blob": "6dbf72397ded145dd1b8884a0e0109216de290a7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/fastdom.LICENSE",
+        "blob": "4088c761cc5b374500ad022611c27617bb6119e8",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/khroma.LICENSE",
+        "blob": "433a5ecd4cb7c687f6a6ec968da740d490b1f776",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/manifest.json",
+        "blob": "9dddf11378d5b0c4980ad5bb56fd02bdcb235a8c",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/provider-utils.LICENSE",
+        "blob": "10aa4a128aeca1e95249c78142284236c2ef6bec",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/remark-math.LICENSE",
+        "blob": "ea3803784aa58da6fa7cd6e196948608def87bf9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/notices/strictdom.LICENSE",
+        "blob": "4b721964d9f8a790242b7f2668f90ba88dc4ad10",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/package.json",
+        "blob": "2135dba2c373df3cd2ac239ed713fe70520d43ea",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/provenance.json",
+        "blob": "78027b8dc9d73e20071e9d1c606b4a4f97ca59a9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/artifact.tsx",
+        "blob": "0e7114dfbd41e89c9e40838e5244026979d2bb54",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/attachments.tsx",
+        "blob": "8b0be70f2f8df29817b21e379c64e85704364059",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/checkpoint.tsx",
+        "blob": "c54b8385d0777ed8207fd4bd9dfc48bf824c7028",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/confirmation.tsx",
+        "blob": "477ccc3043582fd85bf6db529c769765f347f467",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/conversation.tsx",
+        "blob": "b9481d4c560204f88f35aa3f49d502ede4e5b014",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/file-tree.tsx",
+        "blob": "7a7259abd87b4e69c8386b8c0560618446322088",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/message.tsx",
+        "blob": "db8ffd5391ac0ef49aafb0fdb391e59b0cbd2316",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/plan.tsx",
+        "blob": "16e871169e648ffe58274a4e5e64db1867a1ba1d",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/prompt-input.tsx",
+        "blob": "1f189167625eedfa06accab7d8f74e1b3dcc67b7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/queue.tsx",
+        "blob": "c891b66891eb3c160aa9b24c0473249f1cc24da2",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/sources.tsx",
+        "blob": "f64953c116a66d1403185f3c7c8dfe3648bf1bb7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/task.tsx",
+        "blob": "94beb3924f44efcd220ff79055d3c1824f3fa880",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/tool.tsx",
+        "blob": "56c56d134cb19da5814d2ad1c54121ad0cd19483",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/ai-elements/web-preview.tsx",
+        "blob": "aff975e1d123422b02991bf698e0d5105189da96",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/lib/utils.ts",
+        "blob": "bd0c391ddd1088e9067844c48835bf4abcd61783",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/markdown.tsx",
+        "blob": "0d8183b7d0e0ebd1872c9587323e24b6b18b740f",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/output-block.tsx",
+        "blob": "a6d037b89df2aaabc68bc97a3c64e07305df82f3",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/alert.tsx",
+        "blob": "f89f6638d54f60d1bfe8f65ec4e77426b025272f",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/badge.tsx",
+        "blob": "9a12bfbaa163b01f1cdbe534ead96d8b94a1b579",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/button-group.tsx",
+        "blob": "a482bcdee91dedbe9509f50afc283ab03fe1099c",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/button.tsx",
+        "blob": "a2474fa84509eb0560f021139a67f54ff9579f63",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/card.tsx",
+        "blob": "fc10a13a35017f4488efb7add70f53d104e779fe",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/collapsible.tsx",
+        "blob": "2f7a4e7fc64a8874373c1584646a63f28cd63c47",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/command.tsx",
+        "blob": "27c8c7e6c4ab10789ab27ab36fb660ad21a5e1de",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/dialog.tsx",
+        "blob": "d47232c116d9e3512a9c5fe261d27e8268048d11",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/dropdown-menu.tsx",
+        "blob": "f96c83ae3f25387ba39f159c11025b393b51f8d4",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/hover-card.tsx",
+        "blob": "e46a4dbc967e234640f1ea4e143724247f21f5e6",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/input-group.tsx",
+        "blob": "d51b4d9222108dca7fe032ea2ff8a189c9bcf79e",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/input.tsx",
+        "blob": "a16ed8ac1c937b9b77b699c3abd6b812cb891880",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/scroll-area.tsx",
+        "blob": "640802d31fb1c19b2e12f24909cb655ce49974a5",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/select.tsx",
+        "blob": "96590c0382a742985b2ef9ab8dc3b733874428fb",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/separator.tsx",
+        "blob": "4fc30b97dcbf3d126f347ed66df17a16ff39a9ce",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/spinner.tsx",
+        "blob": "e21ce0265645d36f46fab565c8b7726965271b5b",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/textarea.tsx",
+        "blob": "438d640c9ae29a0be09b06b95face8157d215af3",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/shadcn/tooltip.tsx",
+        "blob": "00696ff1d696a9a3eef793c10b104130246b99e9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/src/streaming-text.tsx",
+        "blob": "6d4d16e7c9e9ac40c56832bd9f9fb6ff60527693",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/negative-k1FtgP/workspace/packages/ui/tsconfig.json",
+        "blob": "50f473c9667acf74052a7949c0096ef357692724",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/receipt.json",
+        "blob": "1d7ae3e73002216f1611ad5ef7fe5aa3e316cc1a",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/version.stderr.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/c7e06000/version.stdout.bin",
+        "blob": "a37255a85b9f006788bc34d9f098a5235c3e36a2",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/build.process.json",
+        "blob": "0ee946d514f26b9821f8101c5f103cd28a7fd351",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/build.stderr.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/build.stdout.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/discovery/build.process.json",
+        "blob": "0ad74ba75447701e90a45b0561ef8df62eef060e",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/discovery/build.stderr.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/discovery/build.stdout.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/discovery/fixture.cjs",
+        "blob": "94b7eb5e93400bfdc699661a8619def48f817c22",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/discovery/fixture.cjs.LEGAL.txt",
+        "blob": "3da0b95fe6514f373048ac930c7fa5a74e1a0fac",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/discovery/metafile.json",
+        "blob": "fa2d9bec2d16f5b1c750783f6b8669c81b03d2e4",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/fixture.cjs",
+        "blob": "94b7eb5e93400bfdc699661a8619def48f817c22",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/fixture.cjs.LEGAL.txt",
+        "blob": "3da0b95fe6514f373048ac930c7fa5a74e1a0fac",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/metafile.json",
+        "blob": "43efa2c4fe503506c97367a6f4681da7e2bf0cce",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/fixture.cjs",
+        "blob": "94b7eb5e93400bfdc699661a8619def48f817c22",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/fixture.cjs.LEGAL.txt",
+        "blob": "3da0b95fe6514f373048ac930c7fa5a74e1a0fac",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/metafile.json",
+        "blob": "43efa2c4fe503506c97367a6f4681da7e2bf0cce",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/omitted-input.json",
+        "blob": "6f537141a8bbef53448d22088b8ff899ff2cfe9b",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/output.json",
+        "blob": "93dadd7510db67250ce5f37ff4561c8ab040b1c8",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/tool.json",
+        "blob": "58be003aaaed7d4686261ae56b1b0dc72241581d",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/.gitignore",
+        "blob": "c2658d7d1b31848c3b71960543cb0368e56cd4c7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/README.md",
+        "blob": "4fd0d69ee861d34963a7605af2eff9ad6eff76e6",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/baseline/component-pins.json",
+        "blob": "4a933c5a4ba9bf3f8c73482e41be72c2185901db",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/baseline/package-lock.json",
+        "blob": "23d1daa9372835e49ee1f9b4d335bed6e670258d",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/generate-pins.mjs",
+        "blob": "4f93c120f2f1a2a68eb7a0e4802ef1346556206f",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/migration-map.json",
+        "blob": "e1ee9157c246ae4acbddd0f11935aca9967f957c",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/package.json",
+        "blob": "7bda33b1dd198f7b2f32a7041cbd2d6da6191f40",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/promotion-pins.json",
+        "blob": "7ead7f6630432c7d462048b927e7ae0c6e089b91",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/qualification.test.mjs",
+        "blob": "05806536ccc9a938d3186290aa3efddb23f72d01",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/sources.mjs",
+        "blob": "76833de82dd283cb9cbb1ff17bda242c098dbf5a",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/ssr-build.mjs",
+        "blob": "76c263bebc91cbf4f2a0e0f9dd46d347a443c55a",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/ssr-runtime.mjs",
+        "blob": "e33971a5827143d99eef4ecaa1f9e070c9b31f16",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/styles.css",
+        "blob": "e7fb488c930a08c025c681b5fb56c0c44d1d7883",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/toolchain-pins.json",
+        "blob": "a58669b7df5f1fe00ac1f7a0512052c4c7dc2e75",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/qualification-elements/tsconfig.json",
+        "blob": "66895d34f3bdfc9ed46c4f506626aa5092118261",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/.gitignore",
+        "blob": "c2658d7d1b31848c3b71960543cb0368e56cd4c7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/LICENSE-AI-ELEMENTS",
+        "blob": "6c16c29f41168411dbf6e3ba3a063ce789c27334",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/LICENSE-SHADCN",
+        "blob": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/README.md",
+        "blob": "4907b9e969e53c74ff0b250048d3035cc83bb81e",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/THIRD-PARTY-NOTICES.md",
+        "blob": "fd350300672a7fe981aa50a87ad034ee302f3bdc",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/UI-NOTICE-SUPPLEMENT.md",
+        "blob": "6dbf72397ded145dd1b8884a0e0109216de290a7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/fastdom.LICENSE",
+        "blob": "4088c761cc5b374500ad022611c27617bb6119e8",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/khroma.LICENSE",
+        "blob": "433a5ecd4cb7c687f6a6ec968da740d490b1f776",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/manifest.json",
+        "blob": "9dddf11378d5b0c4980ad5bb56fd02bdcb235a8c",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/provider-utils.LICENSE",
+        "blob": "10aa4a128aeca1e95249c78142284236c2ef6bec",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/remark-math.LICENSE",
+        "blob": "ea3803784aa58da6fa7cd6e196948608def87bf9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/notices/strictdom.LICENSE",
+        "blob": "4b721964d9f8a790242b7f2668f90ba88dc4ad10",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/package.json",
+        "blob": "2135dba2c373df3cd2ac239ed713fe70520d43ea",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/provenance.json",
+        "blob": "78027b8dc9d73e20071e9d1c606b4a4f97ca59a9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/artifact.tsx",
+        "blob": "0e7114dfbd41e89c9e40838e5244026979d2bb54",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/attachments.tsx",
+        "blob": "8b0be70f2f8df29817b21e379c64e85704364059",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/checkpoint.tsx",
+        "blob": "c54b8385d0777ed8207fd4bd9dfc48bf824c7028",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/confirmation.tsx",
+        "blob": "477ccc3043582fd85bf6db529c769765f347f467",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/conversation.tsx",
+        "blob": "b9481d4c560204f88f35aa3f49d502ede4e5b014",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/file-tree.tsx",
+        "blob": "7a7259abd87b4e69c8386b8c0560618446322088",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/message.tsx",
+        "blob": "db8ffd5391ac0ef49aafb0fdb391e59b0cbd2316",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/plan.tsx",
+        "blob": "16e871169e648ffe58274a4e5e64db1867a1ba1d",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/prompt-input.tsx",
+        "blob": "1f189167625eedfa06accab7d8f74e1b3dcc67b7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/queue.tsx",
+        "blob": "c891b66891eb3c160aa9b24c0473249f1cc24da2",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/sources.tsx",
+        "blob": "f64953c116a66d1403185f3c7c8dfe3648bf1bb7",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/task.tsx",
+        "blob": "94beb3924f44efcd220ff79055d3c1824f3fa880",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/tool.tsx",
+        "blob": "56c56d134cb19da5814d2ad1c54121ad0cd19483",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/ai-elements/web-preview.tsx",
+        "blob": "aff975e1d123422b02991bf698e0d5105189da96",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/lib/utils.ts",
+        "blob": "bd0c391ddd1088e9067844c48835bf4abcd61783",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/markdown.tsx",
+        "blob": "0d8183b7d0e0ebd1872c9587323e24b6b18b740f",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/output-block.tsx",
+        "blob": "a6d037b89df2aaabc68bc97a3c64e07305df82f3",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/alert.tsx",
+        "blob": "f89f6638d54f60d1bfe8f65ec4e77426b025272f",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/badge.tsx",
+        "blob": "9a12bfbaa163b01f1cdbe534ead96d8b94a1b579",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/button-group.tsx",
+        "blob": "a482bcdee91dedbe9509f50afc283ab03fe1099c",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/button.tsx",
+        "blob": "a2474fa84509eb0560f021139a67f54ff9579f63",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/card.tsx",
+        "blob": "fc10a13a35017f4488efb7add70f53d104e779fe",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/collapsible.tsx",
+        "blob": "2f7a4e7fc64a8874373c1584646a63f28cd63c47",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/command.tsx",
+        "blob": "27c8c7e6c4ab10789ab27ab36fb660ad21a5e1de",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/dialog.tsx",
+        "blob": "d47232c116d9e3512a9c5fe261d27e8268048d11",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/dropdown-menu.tsx",
+        "blob": "f96c83ae3f25387ba39f159c11025b393b51f8d4",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/hover-card.tsx",
+        "blob": "e46a4dbc967e234640f1ea4e143724247f21f5e6",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/input-group.tsx",
+        "blob": "d51b4d9222108dca7fe032ea2ff8a189c9bcf79e",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/input.tsx",
+        "blob": "a16ed8ac1c937b9b77b699c3abd6b812cb891880",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/scroll-area.tsx",
+        "blob": "640802d31fb1c19b2e12f24909cb655ce49974a5",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/select.tsx",
+        "blob": "96590c0382a742985b2ef9ab8dc3b733874428fb",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/separator.tsx",
+        "blob": "4fc30b97dcbf3d126f347ed66df17a16ff39a9ce",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/spinner.tsx",
+        "blob": "e21ce0265645d36f46fab565c8b7726965271b5b",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/textarea.tsx",
+        "blob": "438d640c9ae29a0be09b06b95face8157d215af3",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/shadcn/tooltip.tsx",
+        "blob": "00696ff1d696a9a3eef793c10b104130246b99e9",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/src/streaming-text.tsx",
+        "blob": "6d4d16e7c9e9ac40c56832bd9f9fb6ff60527693",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/negative-PcmBsm/workspace/packages/ui/tsconfig.json",
+        "blob": "50f473c9667acf74052a7949c0096ef357692724",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/receipt.json",
+        "blob": "06f76dd40bb7cbd911a39957fe6b7522a6ddb354",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/version.stderr.bin",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      },
+      {
+        "file": "docs/meri-figma-34-20261015/evidence/c7e06000/ssr/historical-78b1c126/version.stdout.bin",
+        "blob": "a37255a85b9f006788bc34d9f098a5235c3e36a2",
+        "present_in_main_history": true,
+        "state": "missing in main"
+      }
+    ]
+  },
+  {
+    "sha": "0b026499187c8379f8f307a06c353cdd166b9c3f",
+    "subject": "Record final browser and build check counts in the live wiring report",
+    "files": [
+      {
+        "file": "docs/meri-figma-34-20261015/LIVE-WIRING-20261016.md",
+        "blob": "3a6ee807ab3a24f214367d93db4923ba471c2ee2",
+        "present_in_main_history": false,
+        "state": "different in main"
+      }
+    ]
+  },
+  {
+    "sha": "3703d08a89ee91e495985fa5b56cbbd8c8006c7b",
+    "subject": "test: prepare scoped Meri discovery paging state",
+    "files": [
+      {
+        "file": "apps/web/src/shared/meri-conversations/discovery-state.ts",
+        "blob": "2360b5d78139c08347c14361ca2388d0a39129f5",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      },
+      {
+        "file": "apps/web/tests/meri-conversation-discovery-state.test.ts",
+        "blob": "94f4d9ee3c2fa6bdd3fc6abcc8bcce3d71cc149c",
+        "present_in_main_history": false,
+        "state": "missing in main"
+      }
+    ]
+  }
+]
