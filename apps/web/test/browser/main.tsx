@@ -21,6 +21,8 @@ import { MeriCitedAnswer } from "../../src/features/meri/MeriCitedAnswer";
 import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
 import { pendingApprovals } from "../../src/features/meri/fixtures/screens/approval-counts";
 import { MeriHome } from "../../src/features/meri/MeriHome";
+import { MemoryOwnerInbox } from "../../src/features/meri/memory-review/MemoryOwnerInbox";
+import { MemoryCorrectionComposer } from "../../src/features/meri/memory-review/MemoryCorrectionComposer";
 import { clientId as testClientId } from "../../tests/browser/fixtures";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
@@ -151,6 +153,18 @@ function RoutedApp() {
         <fixtureScreen.Screen />
       </ProductShell>
     );
+  if (path === "/meri/memory") {
+    const enabled =
+      sessionStorage.getItem("memory-owner-review-enabled") === "true";
+    return (
+      <ProductShell section="memory">
+        <RequireSession>
+          <MemoryOwnerInbox enabled={enabled} />
+          <MemoryCorrectionComposer enabled={enabled} />
+        </RequireSession>
+      </ProductShell>
+    );
+  }
   if (path === "/meri")
     return (
       <ProductShell

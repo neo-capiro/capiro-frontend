@@ -35,6 +35,7 @@ test("every API handler applies preview admission before any route work", () => 
       "app/api/backend/[service]/[...path]/route.ts",
       "app/api/capiro/[operation]/route.ts",
       "app/api/conversations/[...path]/route.ts",
+      "app/api/conversations/intents/[operation]/route.ts",
       "app/api/documents/[operation]/route.ts",
       "app/api/documents/links/[action]/route.ts",
       "app/api/memory/owner/candidates/[id]/decision/route.ts",
@@ -111,7 +112,8 @@ test("every API handler applies preview admission before any route work", () => 
       const route = relative(source, path).replaceAll("\\", "/");
       const receivesReads = /\/api\/(?:backend|capiro)\//.test(route);
       const receivesMeriConversation =
-        /\/api\/(?:action-followthrough|conversations)\//.test(route);
+        route === "app/api/action-followthrough/[operation]/route.ts" ||
+        route === "app/api/conversations/[...path]/route.ts";
       const receivesOwnerMemory = route.includes("/api/memory/owner/");
       assert.deepEqual(
         declaration.initializer.arguments.map((arg) => arg.getText(ast)),

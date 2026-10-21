@@ -166,6 +166,7 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                       className={styles.reason}
                       value={draft}
                       maxLength={8_000}
+                      disabled={workingId !== null}
                       onChange={(event) => setDraft(event.target.value)}
                     />
                   </label>
