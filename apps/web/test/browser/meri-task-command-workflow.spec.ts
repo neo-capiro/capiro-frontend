@@ -74,7 +74,8 @@ test("desktop task update uses explicit connection, immutable preparation and se
       .filter((call) => call.route !== "session")
       .every(
         (call) =>
-          call.authorization === `Bearer action_session_${"a".repeat(43)}`,
+          call.actionSession === `action_session_${"a".repeat(43)}` &&
+          call.authorization === undefined,
       ),
   ).toBe(true);
   await page.evaluate(() => document.fonts.ready.then(() => undefined));

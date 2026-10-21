@@ -32,7 +32,12 @@ export async function taskHostFixture(page: Page) {
   await page.clock.install({ time: new Date(context.syntheticNow) });
   await page.clock.setFixedTime(new Date(context.syntheticNow));
   await onlyLocalRequests(page);
-  const calls: { route: string; body: unknown; authorization?: string }[] = [];
+  const calls: {
+    route: string;
+    body: unknown;
+    authorization?: string;
+    actionSession?: string;
+  }[] = [];
   const errors: string[] = [],
     unexpected: string[] = [],
     remote: string[] = [];
@@ -67,6 +72,7 @@ export async function taskHostFixture(page: Page) {
       route: "session",
       body,
       authorization: headers.authorization,
+      actionSession: headers["x-meri-action-session"],
     });
     await route.fulfill({
       json: {
@@ -90,6 +96,7 @@ export async function taskHostFixture(page: Page) {
       route: operation,
       body: request.postDataJSON(),
       authorization: headers.authorization,
+      actionSession: headers["x-meri-action-session"],
     });
     const wire = taskWire(operation === "prepare" ? "prepare" : execute);
     await route.fulfill({ status: wire.httpStatus, json: wire.response });

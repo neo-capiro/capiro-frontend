@@ -42,7 +42,7 @@ test("connects the exact account/client, loads the admitted transcript and resum
   const calls: string[] = [];
   await page.route("**/api/conversations/history", (r) => {
     calls.push("history");
-    expect(r.request().postDataJSON()).toEqual({ limit: 100 });
+    expect(r.request().postDataJSON()).toEqual({ after: 0, limit: 100 });
     return reply(r, history());
   });
   await page.route(
