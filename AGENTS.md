@@ -1,6 +1,6 @@
 # Capiro frontend implementation rules
 
-Read and apply [the human owner's complete implementation standards](docs/IMPLEMENTATION-STANDARDS.md), the [ownership outline](docs/ARCHITECTURE.md), and the assigned bounded handoff before editing. User instructions take precedence. Codex owns implementation and independent acceptance; G0/G1 work is Codex-only, with no Hermes or recursive delegation.
+Read and apply [the human owner's complete implementation standards](docs/IMPLEMENTATION-STANDARDS.md), the [ownership outline](docs/ARCHITECTURE.md), and the assigned bounded handoff before editing. User instructions take precedence. Neo's agents own implementation in their assigned lanes. Fable (Claude) plans phases, reviews, merges and deploys, and owns independent acceptance; Fable writes no product code. Neo decides scope. dot is no longer an owner. No recursive delegation.
 
 This is a new private frontend, independent from current Capiro/Meri. Do not import or copy the old application's UI, agent, retrieval, queues or infrastructure. The NEW `neo-capiro/meri-greenfield` repository is the sole owner of Meri shared wire contracts, trusted server event production, authorization, control, agent runtime and infrastructure. Use deliberate versioned public package exports, never another repository's private source paths or a second hand-maintained DTO definition.
 
