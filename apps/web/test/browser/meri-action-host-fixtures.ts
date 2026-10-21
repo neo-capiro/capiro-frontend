@@ -100,6 +100,11 @@ export async function actionHostFixture(page: Page) {
     expect(route.request().method()).toBe("GET");
     return route.fulfill({ json: testIdentity });
   });
+  // The Meri home client selector reads Core's visible-client roster.
+  await page.route("**/api/backend/core/clients", (route) => {
+    expect(route.request().method()).toBe("GET");
+    return route.fulfill({ json: [actionClient, otherActionClient] });
+  });
   const receive = async (route: Route, name: string, fallback: Reply) => {
     const request = route.request();
     requests.push({
