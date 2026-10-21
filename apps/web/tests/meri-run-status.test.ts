@@ -38,6 +38,10 @@ it.each(["queued", "running"] as const)(
       "The current run status is unknown. Reconnect to check for updates.",
     );
     expect(markup).not.toContain("The run continues on the service.");
+    expect(markup).not.toContain("the run keeps going");
+    expect(markup).toContain(
+      "Leaving this page stops watching and does not cancel the run. Use Stop to request cancellation.",
+    );
     expect(markup).toMatch(/<button[^>]*>Reconnect<\/button>/);
   },
 );

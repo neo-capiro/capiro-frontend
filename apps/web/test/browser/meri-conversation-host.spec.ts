@@ -214,13 +214,24 @@ test("repeated failed reconnects stop with an explicit Reconnect that resumes th
   await connect(page);
   await expect(
     page.getByText(
-      "Updates stopped arriving. The run continues on the service.",
+      "Updates stopped arriving. The current run status is unknown. Reconnect to check for updates.",
     ),
   ).toBeVisible({ timeout: 20_000 });
   expect(attempts).toBe(4);
+  await expect(
+    page.getByText("the run keeps going", { exact: false }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText(
+      "Leaving this page stops watching and does not cancel the run. Use Stop to request cancellation.",
+    ),
+  ).toBeVisible();
   recover = true;
   await page.getByRole("button", { name: "Reconnect", exact: true }).click();
   await expect(page.getByText("Recovered", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("The current run status is unknown.", { exact: false }),
+  ).toHaveCount(0);
   expect(f.unexpected).toEqual([]);
 });
 

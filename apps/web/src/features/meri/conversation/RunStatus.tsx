@@ -85,8 +85,8 @@ export function RunStatus({
       )}
       {active && (
         <p className={styles.muted}>
-          Leaving this page stops watching; the run keeps going unless you press
-          Stop.
+          Leaving this page stops watching and does not cancel the run. Use Stop
+          to request cancellation.
         </p>
       )}
     </>
