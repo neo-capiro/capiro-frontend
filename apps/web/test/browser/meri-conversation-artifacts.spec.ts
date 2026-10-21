@@ -1,9 +1,9 @@
 import { test, expect, type Page } from "@playwright/test";
+import { ids, inspected } from "../../tests/meri-document-public-fixtures";
 import {
-  created,
-  ids,
-  inspected,
-} from "../../tests/meri-document-public-fixtures";
+  accessFormats,
+  accessInspection,
+} from "../../tests/meri-document-access-fixtures";
 import {
   setupConversation,
   connect,
@@ -51,68 +51,87 @@ async function withArtifact(page: Page) {
   return { f, seen, card };
 }
 
-test("conversation files preview through canonical inspection and download through a signed link", async ({
-  page,
-}, info) => {
-  const { f, seen, card } = await withArtifact(page);
-  await page.route("**/api/documents/inspect", (r) => reply(r, inspected()));
-  await page.route("**/api/documents/links/issue", (r) =>
-    reply(r, {
-      versionId: ids.version,
-      token,
-      expiresAtMs: Date.now() + 60_000,
-    }),
-  );
-  await page.route("**/api/documents/links/redeem", (r) =>
-    r.fulfill({
-      status: 200,
-      headers: {
-        "content-type": created().version.mimeType,
-        "content-disposition": 'attachment; filename="Synthetic.txt"',
-        "content-length": String(fileBytes.length),
-        "cache-control": "no-store",
-        "x-content-type-options": "nosniff",
-        "referrer-policy": "no-referrer",
-      },
-      body: fileBytes,
-    }),
-  );
-  await card.getByRole("button", { name: "Preview", exact: true }).click();
-  const file = page.getByRole("group", { name: "Synthetic.txt" });
-  await expect(file.getByText("Generation: draft")).toBeVisible();
-  await expect(file.getByText("Preview: pending")).toBeVisible();
-  await expect(
-    file.getByText("Native opening and rendering have not been verified", {
-      exact: false,
-    }),
-  ).toBeVisible();
-  const download = page.waitForEvent("download");
-  await file.getByRole("button", { name: "Download", exact: true }).click();
-  const saved = await download;
-  expect(saved.suggestedFilename()).toBe("Synthetic.txt");
-  const path = await saved.path();
-  const { readFile } = await import("node:fs/promises");
-  expect(await readFile(path!, "utf8")).toBe(fileBytes);
-  await expect(
-    file.getByText(
-      "Downloaded Synthetic.txt; its bytes matched the inspected version.",
-    ),
-  ).toBeVisible();
-  expect(seen.map((item) => item.path)).toEqual([
-    "/api/documents/inspect",
-    "/api/documents/inspect",
-    "/api/documents/links/issue",
-    "/api/documents/links/redeem",
-  ]);
-  expect(seen[2]!.body).toEqual({ versionId: ids.version });
-  expect(seen[3]!.body).toEqual({ token });
-  expect(seen.every((item) => !item.url.includes(token))).toBe(true);
-  await page.screenshot({
-    path: info.outputPath("meri-conversation-files.png"),
-    fullPage: true,
+for (const format of accessFormats)
+  test(`conversation ${format} files inspect and download through a signed link`, async ({
+    page,
+  }, info) => {
+    const { f, seen, card } = await withArtifact(page);
+    const receipt = accessInspection(format);
+    const filename = receipt.version.filename;
+    await page.route("**/api/documents/inspect", (r) => reply(r, receipt));
+    await page.route("**/api/documents/links/issue", (r) =>
+      reply(r, {
+        versionId: ids.version,
+        token,
+        expiresAtMs: Date.now() + 60_000,
+      }),
+    );
+    await page.route("**/api/documents/links/redeem", (r) =>
+      r.fulfill({
+        status: 200,
+        headers: {
+          "content-type": receipt.version.mimeType,
+          "content-disposition": `attachment; filename="${filename}"`,
+          "content-length": String(fileBytes.length),
+          "cache-control": "no-store",
+          "x-content-type-options": "nosniff",
+          "referrer-policy": "no-referrer",
+        },
+        body: fileBytes,
+      }),
+    );
+    await card.getByRole("button", { name: "Preview", exact: true }).click();
+    const file = page.getByRole("group", { name: filename });
+    await expect(file.getByText("Generation: draft")).toBeVisible();
+    await expect(file.getByText("Preview: pending")).toBeVisible();
+    await expect(
+      file.getByText("Native opening and rendering have not been verified", {
+        exact: false,
+      }),
+    ).toBeVisible();
+    if (format !== "txt")
+      await expect(file.getByText("UTF-8 text", { exact: false })).toHaveCount(
+        0,
+      );
+    if (format === "pptx")
+      await expect(
+        file.getByText("Visual inspection", { exact: true }),
+      ).toBeVisible();
+    if (format === "pdf")
+      await expect(
+        file.getByText("Render inspection", { exact: true }),
+      ).toBeVisible();
+    if (format === "zip")
+      await expect(
+        file.getByText("Archive rows", { exact: true }),
+      ).toBeVisible();
+    const download = page.waitForEvent("download");
+    await file.getByRole("button", { name: "Download", exact: true }).click();
+    const saved = await download;
+    expect(saved.suggestedFilename()).toBe(filename);
+    const path = await saved.path();
+    const { readFile } = await import("node:fs/promises");
+    expect(await readFile(path!, "utf8")).toBe(fileBytes);
+    await expect(
+      file.getByText(
+        `Downloaded ${filename}; its bytes matched the inspected version.`,
+      ),
+    ).toBeVisible();
+    expect(seen.map((item) => item.path)).toEqual([
+      "/api/documents/inspect",
+      "/api/documents/inspect",
+      "/api/documents/links/issue",
+      "/api/documents/links/redeem",
+    ]);
+    expect(seen[2]!.body).toEqual({ versionId: ids.version });
+    expect(seen[3]!.body).toEqual({ token });
+    expect(seen.every((item) => !item.url.includes(token))).toBe(true);
+    await page.screenshot({
+      path: info.outputPath(`meri-conversation-${format}-files.png`),
+      fullPage: true,
+    });
+    expect(f.unexpected).toEqual([]);
   });
-  expect(f.unexpected).toEqual([]);
-});
 
 test("a closed download-link refusal is reported and nothing is downloaded", async ({
   page,

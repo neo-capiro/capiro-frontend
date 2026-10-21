@@ -1,0 +1,28 @@
+{
+  "schema": "meri-document-access-public-input/1",
+  "repository": "neo-capiro/meri-greenfield",
+  "sourceCommit": "8eab537a8c60bf086afb56b2ceb24b79f6260b6b",
+  "publicExport": "@capiro/meri-contracts/document-access-application",
+  "files": [
+    {
+      "file": "document-access-application.d.ts",
+      "bytes": 11560,
+      "sha256": "f3c8468cdb4bb741c0f7fb3a5c2f94841aad2447abe96fba23ebbc8c2289ef4e"
+    },
+    {
+      "file": "document-access-application.metadata.json",
+      "bytes": 7601,
+      "sha256": "730fba715709a035da58ff25d4a20f9d09e29dd3af1e3f1c4cbc4788ce0fc9ed"
+    },
+    {
+      "file": "document-access-application.mjs",
+      "bytes": 334736,
+      "sha256": "1d1cbe6b2c5c6f20a5643faa52aa3c78a0c7446ecf002acc598a84c4b566392a"
+    },
+    {
+      "file": "document-access-application.schema.json",
+      "bytes": 23800,
+      "sha256": "8db4444d1d8731baf91e3d1e862d18b2a1017130b62fc6a26f68e536b75d69d6"
+    }
+  ]
+}

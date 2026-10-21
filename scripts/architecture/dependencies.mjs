@@ -48,6 +48,7 @@ export const publicExports = new Set([
   '@capiro/meri-client/conversation',
   '@capiro/meri-client/task-commands',
   '@capiro/meri-client/intents',
+  '@capiro/meri-client/document-access',
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
