@@ -22,20 +22,26 @@ function ConnectionStatus({
   return (
     <section role="status" className={styles.status}>
       <h2>
-        {session.latestTarget
-          ? "A newer accepted turn is available"
-          : status === "expired"
-            ? "Conversation session expired"
-            : waiting
-              ? "Connecting to Meri."
-              : "Conversation connection unavailable"}
+        {session.accessLost
+          ? waiting
+            ? "Checking conversation access…"
+            : "Conversation access unavailable"
+          : session.latestTarget
+            ? "A newer accepted turn is available"
+            : status === "expired"
+              ? "Conversation session expired"
+              : waiting
+                ? "Connecting to Meri."
+                : "Conversation connection unavailable"}
       </h2>
       <p className={styles.muted}>
-        {status === "unavailable"
-          ? "The service could not verify this conversation. No sample transcript was substituted."
-          : "The service rechecks your account, client and exact conversation before issuing a short-lived connection."}
+        {session.accessLost
+          ? "The service could not verify your access to this conversation. It must recheck your account, client and exact conversation before reopening it."
+          : status === "unavailable"
+            ? "The service could not verify this conversation. No sample transcript was substituted."
+            : "The service rechecks your account, client and exact conversation before issuing a short-lived connection."}
       </p>
-      {!waiting && !session.latestTarget && (
+      {!waiting && (session.accessLost || !session.latestTarget) && (
         <Button
           type="button"
           variant="outline"
@@ -45,7 +51,11 @@ function ConnectionStatus({
             session.history.refresh();
           }}
         >
-          {status === "expired" ? "Reconnect" : "Try again"}
+          {session.accessLost
+            ? "Check access again"
+            : status === "expired"
+              ? "Reconnect"
+              : "Try again"}
         </Button>
       )}
     </section>
@@ -104,9 +114,11 @@ export function ConnectionPending({
       running={false}
       composer={{
         onSend: () => undefined,
-        sendBlocked: waiting
-          ? "Connecting to Meri."
-          : "Reconnect to Meri before sending.",
+        sendBlocked: session.accessLost
+          ? "Verify access to this conversation before sending."
+          : waiting
+            ? "Connecting to Meri."
+            : "Reconnect to Meri before sending.",
         scope,
         attachUnavailable: unavailableTitle("attachments"),
       }}

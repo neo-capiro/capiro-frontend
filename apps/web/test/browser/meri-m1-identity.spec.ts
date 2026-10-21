@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Route } from "@playwright/test";
 import {
   binding,
   clientId,
@@ -112,7 +112,7 @@ test("M1 fixture: definitive access loss hides private content and never renews 
   await page.clock.runFor(2_000);
   await expect(
     page.getByRole("heading", {
-      name: "Conversation session expired",
+      name: "Conversation access unavailable",
       exact: true,
     }),
   ).toBeVisible();
@@ -122,17 +122,41 @@ test("M1 fixture: definitive access loss hides private content and never renews 
   await expect(composer(page)).toHaveValue("");
   await page.clock.runFor(5_000);
   expect(fixture.hints).toEqual([{ clientId }]);
-  await page.route("**/api/action-followthrough/session", async (route) => {
+  let checking: Route | undefined;
+  await page.route("**/api/action-followthrough/session", (route) => {
     fixture.hints.push(route.request().postDataJSON());
-    return reply(route, {
-      credential: `action_session_${"s".repeat(43)}`,
-      expiresAtMs: (await page.evaluate(() => Date.now())) + 60_000,
-      context: { ...context, actorId: "foreign-native-actor" },
-    });
+    checking = route;
   });
-  await page.getByRole("button", { name: "Reconnect", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Check access again", exact: true })
+    .click();
   await expect(
-    page.getByRole("button", { name: "Try again", exact: true }),
+    page.getByRole("heading", {
+      name: "Checking conversation access…",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /^(Check access again|Reconnect)$/ }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText("Private accepted answer", { exact: true }),
+  ).toHaveCount(0);
+  await expect(composer(page)).toHaveValue("");
+  await expect.poll(() => checking !== undefined).toBe(true);
+  await reply(checking!, {
+    credential: `action_session_${"s".repeat(43)}`,
+    expiresAtMs: (await page.evaluate(() => Date.now())) + 60_000,
+    context: { ...context, actorId: "foreign-native-actor" },
+  });
+  await expect(
+    page.getByRole("button", { name: "Check access again", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Conversation access unavailable",
+      exact: true,
+    }),
   ).toBeVisible();
   expect(fixture.hints).toEqual([{ clientId }, exact]);
   await expect(

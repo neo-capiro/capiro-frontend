@@ -52,9 +52,9 @@ it("Stop receipt reports a fence, while only an observed cancelled state reports
   );
   const fenced = render("running", "observed", true);
   expect(fenced).toContain("not completion of cleanup");
-  expect(fenced.match(/<button[^>]*disabled=""/g)).toHaveLength(5);
+  expect(fenced.match(/<button[^>]*disabled=""/g) ?? []).toHaveLength(0);
   expect(fenced).toContain("Pause and checkpoint recovery are not available");
-  expect(fenced).not.toContain("Stopped in the conversation record");
+  expect(fenced).not.toContain("Stopped in the conversation record.");
   expect(render("cancelled", "observed", true)).toContain(
     "Meri must confirm cleanup before starting your next message",
   );

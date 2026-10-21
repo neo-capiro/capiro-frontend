@@ -85,6 +85,26 @@
   flex-direction: column;
   gap: 8px;
 }
+.stopCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: min(368px, 100%);
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.stopCard h3 {
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+}
+.stopCard > span {
+  min-width: 130px;
+}
 .statusRow {
   display: flex;
   flex-wrap: wrap;

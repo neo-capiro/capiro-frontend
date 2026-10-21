@@ -232,11 +232,11 @@ it("the denied view hides saved, pending and draft content through connecting an
     );
     expect(html).not.toContain("Private");
     expect(html).toContain(
-      status === "expired"
-        ? "Conversation session expired"
-        : status === "connecting"
-          ? "Connecting to Meri."
-          : "Conversation connection unavailable",
+      status === "connecting"
+        ? "Checking conversation access…"
+        : "Conversation access unavailable",
     );
+    expect(html).not.toContain("Conversation session expired");
+    expect(html).not.toContain(">Reconnect<");
   }
 });

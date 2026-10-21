@@ -275,13 +275,6 @@ test("Stop requests durable cancellation and the run status, not the receipt, en
   const cancels: unknown[] = [];
   await page.route("**/api/conversations/cancel", (r) => {
     cancels.push(r.request().postDataJSON());
-    cancelled = true;
-    native.turns[0] = {
-      ...native.turns[0]!,
-      run: runFor("cancelled"),
-      lastSequence: 3,
-    };
-    native.events = records;
     return reply(r, { state: "cancelled" });
   });
   await connect(page);
@@ -291,10 +284,48 @@ test("Stop requests durable cancellation and the run status, not the receipt, en
     page.getByRole("button", { name: "Send message", exact: true }),
   ).toHaveCount(0);
   await stopButton(page).click();
+  const stop = page.getByRole("region", { name: "Stop status", exact: true });
   await expect(
-    page.getByText("Stop request answered: run cancelled."),
+    stop.getByRole("heading", { name: "Cancelling", exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("Cancelled", { exact: true })).toBeVisible();
+  await expect(stop.getByText("Attention", { exact: true })).toBeVisible();
+  await expect(
+    stop.getByText(
+      "Meri is finishing the current safe step before stopping. Stop fence recorded. This acknowledges cancellation, not completion of cleanup.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  const current = page.getByRole("article", {
+    name: "Current turn",
+    exact: true,
+  });
+  await expect(current.getByText("Cancelled", { exact: true })).toHaveCount(0);
+  const reverified = page.waitForResponse(async (response) => {
+    if (
+      !response.url().endsWith("/api/conversations/transcript") ||
+      !response.ok()
+    )
+      return false;
+    const value = await response.json();
+    return (
+      value.latestRun?.binding.runId === binding.runId &&
+      value.latestRun.state === "cancelled" &&
+      value.lastSequence === 3
+    );
+  });
+  native.turns[0] = {
+    ...native.turns[0]!,
+    run: runFor("cancelled"),
+    lastSequence: 3,
+  };
+  native.events = records;
+  cancelled = true;
+  await expect(current.getByText("Cancelled", { exact: true })).toBeVisible();
+  await reverified;
+  await expect(
+    stop.getByRole("heading", { name: "Cancelled", exact: true }),
+  ).toBeVisible();
+  await expect(stop.getByText("Complete", { exact: true })).toBeVisible();
   expect(cancels).toEqual([{}]);
   await expect(composer(page)).toHaveValue("Draft while running");
   await expect(sendButton(page)).toBeEnabled();
@@ -319,11 +350,25 @@ test("a completed cancel receipt never pretends the run was cancelled", async ({
   });
   await connect(page);
   await stopButton(page).click();
+  const stop = page.getByRole("region", { name: "Stop status", exact: true });
   await expect(
-    page.getByText("Stop request answered: run completed."),
+    stop.getByRole("heading", { name: "Run already completed", exact: true }),
+  ).toBeVisible();
+  await expect(stop.getByText("Complete", { exact: true })).toBeVisible();
+  await expect(
+    stop.getByText(
+      "The run had already completed when the stop request arrived.",
+      { exact: true },
+    ),
   ).toBeVisible();
   await expect(page.getByText("Completed", { exact: true })).toBeVisible();
   await expect(page.getByText("Cancelled", { exact: true })).toHaveCount(0);
+  await expect(
+    stop.getByText(/Stop fence recorded|acknowledges cancellation|cleanup/),
+  ).toHaveCount(0);
+  await expect(
+    stop.getByRole("button", { name: "Reload transcript", exact: true }),
+  ).toBeVisible();
   expect(f.unexpected).toEqual([]);
 });
 
@@ -355,7 +400,7 @@ for (const status of [401, 403, 502])
     } else
       await expect(
         page.getByRole("heading", {
-          name: "Conversation session expired",
+          name: "Conversation access unavailable",
           exact: true,
         }),
       ).toBeVisible();
@@ -687,7 +732,7 @@ test("approval requests are shown without a decision control", async ({
   expect(f.unexpected).toEqual([]);
 });
 
-test("ordinary sidebar destinations name the exact missing service", async ({
+test("ordinary sidebar destinations explain held consumers and failed current reads", async ({
   page,
 }) => {
   const f = await setupConversation(page);
@@ -698,13 +743,25 @@ test("ordinary sidebar destinations name the exact missing service", async ({
   const nav = page.getByRole("navigation", { name: "Meri workspace" });
   const approvals = nav.getByRole("button", { name: "Approvals", exact: true });
   await expect(approvals).toBeDisabled();
-  await expect(approvals).toHaveAttribute("title", /approval list route/);
+  await expect(approvals).toHaveAttribute(
+    "title",
+    /workspace-wide approval inbox/,
+  );
+  await expect(
+    nav.getByRole("link", { name: "Approvals", exact: true }),
+  ).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "New conversation", exact: true }),
-  ).toHaveAttribute("title", /Not available yet/);
+  ).toHaveAttribute(
+    "title",
+    /enabled connection and a permitted configured client/,
+  );
   await expect(
     page.getByText("Recent conversations unavailable"),
-  ).toHaveAttribute("title", /conversation list/);
+  ).toHaveAttribute(
+    "title",
+    /conversation list could not be verified for the current account and client/,
+  );
   await expect(
     page.getByRole("button", { name: "Attach", exact: true }),
   ).toBeDisabled();

@@ -385,16 +385,29 @@ test("synthetic membership revocation removes saved output and closes the prior 
   await installCurrentRun(page, native);
   await page.goto(selectedUrl);
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  await composer(page).fill("Private draft before membership denial");
   native.denied = true;
   await page
     .getByRole("button", { name: "Reload saved history", exact: true })
     .click();
   await expect(
-    page.getByText(
-      "Saved conversation history unavailable. No sample transcript was substituted.",
-    ),
+    page.getByRole("heading", {
+      name: "Conversation access unavailable",
+      exact: true,
+    }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Check access again", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("region", {
+      name: "Saved conversation history",
+      exact: true,
+    }),
+  ).toHaveCount(0);
   await expect(page.getByText("First answer", { exact: true })).toHaveCount(0);
+  await expect(composer(page)).toHaveValue("");
   await expect(sendButton(page)).toBeDisabled();
+  expect(f.hints).toHaveLength(1);
   expect(f.unexpected).toEqual([]);
 });

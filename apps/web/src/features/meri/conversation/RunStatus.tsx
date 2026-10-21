@@ -2,6 +2,7 @@ import { Button } from "@capiro/ui/button";
 import type { useLiveRun } from "./useLiveRun";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import ui from "../ui/meri-ui.module.css";
+import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
 
@@ -86,34 +87,88 @@ export function RunStatus({
   );
 }
 
-/** A fence receipt and a terminal conversation record are distinct backend evidence. */
-function StopStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
+/** Receipt state is evidence of the outcome at Stop; it never proves physical cleanup. */
+function stopFeedback(run: ReturnType<typeof useLiveRun>): {
+  title: string;
+  tone: StatusTone;
+  status: string;
+  message: string;
+} | null {
   const { snapshot, intent } = run;
+  const receipt = snapshot.cancelReceipt?.state;
+  if (receipt === "completed")
+    return {
+      title: "Run already completed",
+      tone: "success",
+      status: "Complete",
+      message: "The run had already completed when the stop request arrived.",
+    };
+  if (receipt === "failed")
+    return {
+      title: "Run already failed",
+      tone: "danger",
+      status: "Attention",
+      message: "The run had already failed when the stop request arrived.",
+    };
+  if (snapshot.observation?.runState === "cancelled")
+    return {
+      title: "Cancelled",
+      tone: "success",
+      status: "Complete",
+      message:
+        "Stopped in the conversation record. Meri must confirm cleanup before starting your next message.",
+    };
+  if (receipt === "cancelled")
+    return {
+      title: "Cancelling",
+      tone: "warning",
+      status: "Attention",
+      message:
+        "Meri is finishing the current safe step before stopping. Stop fence recorded. This acknowledges cancellation, not completion of cleanup.",
+    };
+  if (intent.cancel === "pending")
+    return {
+      title: "Cancelling",
+      tone: "warning",
+      status: "Attention",
+      message: "Stopping: requesting a cancellation fence.",
+    };
+  if (intent.cancel === "unknown")
+    return {
+      title: "Stop request uncertain",
+      tone: "warning",
+      status: "Attention",
+      message:
+        "The stop request may not have reached Meri. Retry Stop to check the same request.",
+    };
+  return null;
+}
+
+/** Figma 450:88742/450:88754, qualified by the evidence the current public contract supplies. */
+function StopStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
+  const feedback = stopFeedback(run);
+  if (!feedback) return null;
+  const retry =
+    run.intent.cancel === "unknown" &&
+    !run.snapshot.cancelReceipt &&
+    run.snapshot.observation?.runState !== "cancelled";
   return (
-    <>
-      {intent.cancel === "pending" && (
-        <p role="status" className={styles.muted}>
-          Stopping: requesting a cancellation fence.
-        </p>
-      )}
-      {snapshot.cancelReceipt && (
-        <p role="status" className={styles.muted}>
-          Stop fence recorded. This acknowledges cancellation, not completion of
-          cleanup.
-        </p>
-      )}
-      {snapshot.observation?.runState === "cancelled" && (
-        <p role="status" className={styles.muted}>
-          Stopped in the conversation record. Meri must confirm cleanup before
-          starting your next message.
-        </p>
-      )}
-      {intent.cancel === "unknown" && !snapshot.cancelReceipt && (
-        <p role="status" className={styles.muted}>
-          The stop request may not have reached Meri. Press Stop again to retry.
-        </p>
-      )}
-    </>
+    <section className={styles.stopCard} aria-label="Stop status">
+      <h3>{feedback.title}</h3>
+      <StatusPill tone={feedback.tone}>{feedback.status}</StatusPill>
+      <p role="status" className={styles.muted}>
+        {feedback.message}
+      </p>
+      <Button
+        type="button"
+        variant="outline"
+        className={ui.outline}
+        disabled={run.busy}
+        onClick={() => void (retry ? run.cancel() : run.history())}
+      >
+        {retry ? "Retry Stop" : "Reload transcript"}
+      </Button>
+    </section>
   );
 }
 

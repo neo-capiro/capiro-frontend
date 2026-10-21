@@ -24,7 +24,7 @@ for (const viewport of [
     }) => {
       test.skip(
         recoverDraft,
-        "HELD: MF-07 same-tab draft persistence requires Neo confirmation; Fable planning approval is not sufficient",
+        "MF-07 same-tab draft recovery belongs to the separate stacked PR; this PR does not implement persistence",
       );
       test.setTimeout(60_000);
       await page.setViewportSize(viewport);
@@ -60,8 +60,37 @@ for (const viewport of [
       });
       await expect(current.getByText(/^(Cancelled|Stopped)$/)).toHaveCount(0);
       expect(flow.calls.reservations).toEqual([]);
+      let terminalReadbacks = 0;
+      const reverified = page.waitForResponse(async (response) => {
+        if (
+          !response.url().endsWith("/api/conversations/transcript") ||
+          !response.ok()
+        )
+          return false;
+        const request = response.request().postDataJSON();
+        const value = await response.json();
+        const exactTail =
+          request.conversationId === binding.conversationId &&
+          request.after === 0 &&
+          value.latestRun?.binding.runId === binding.runId &&
+          value.latestRun.state === "cancelled" &&
+          value.latestSequenceBase === 0 &&
+          value.lastSequence === 4;
+        // This fixture's saved-page and latest-tail requests both start at zero.
+        // Both must finish revalidation before the composer may admit a next turn.
+        return exactTail && ++terminalReadbacks === 2;
+      });
       flow.retire();
       await expect(current.getByText(/^(Cancelled|Stopped)$/)).toBeVisible();
+      await reverified;
+      await expect(
+        page
+          .getByRole("region", {
+            name: "Saved conversation history",
+            exact: true,
+          })
+          .getByText("Saved conversation history loaded.", { exact: true }),
+      ).toBeVisible();
       await composer(page).fill("M1 second question");
       await expect(sendButton(page)).toBeEnabled();
       await sendButton(page).dblclick();
@@ -89,16 +118,17 @@ for (const viewport of [
         .locator("summary")
         .filter({ hasText: "Pause and recovery" })
         .click();
-      for (const name of [
-        "Pause",
-        "Steer",
-        "Resume from checkpoint",
-        "Retry from checkpoint",
-        "Fork conversation",
-      ])
-        await expect(
-          page.getByRole("button", { name, exact: true }),
-        ).toBeDisabled();
+      await expect(
+        page.getByText(
+          "Pause and checkpoint recovery are not available for this conversation yet.",
+          { exact: true },
+        ),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("button", {
+          name: /^(Pause|Steer|Resume from checkpoint|Retry from checkpoint|Fork conversation)$/,
+        }),
+      ).toHaveCount(0);
       expect(flow.calls.lifecycle).toEqual([]);
       await composer(page).fill("Private draft for first client");
       await page
