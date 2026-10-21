@@ -9,14 +9,12 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
-import {
-  ConversationHistoryUnavailable,
-  reserveConversationTurn,
-} from "../../../shared/meri-conversations/history-client";
+import { reserveConversationTurn } from "../../../shared/meri-conversations/history-client";
 import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
 import {
   conversationTurnJournal,
-  reserveTurnWhenSettled,
+  recoverConversationTurn,
+  conversationTurnNotReady,
   type TurnIntent,
 } from "../../../shared/meri-conversations/turn-journal";
 import { useCommandGate } from "./useCommandGate";
@@ -119,7 +117,7 @@ export function useConversationTurn(
         } else {
           if (source && prompt)
             journal.start(source, prompt, crypto.randomUUID());
-          const retained = await reserveTurnWhenSettled(
+          const retained = await recoverConversationTurn(
             journal,
             (input) => reserveConversationTurn(input, controller.signal),
             controller.signal,
@@ -129,14 +127,10 @@ export function useConversationTurn(
           open(prepareTarget(cache, clientId, retained));
         }
       } catch (cause) {
-        if (
-          alive.current &&
-          cause instanceof ConversationHistoryUnavailable &&
-          cause.status === 409 &&
-          cause.code === "CONVERSATION_TURN_CONFLICT" &&
-          cause.outcome === "NOT_DISPATCHED"
-        )
-          setNotReady(true);
+        if (!readOnly && conversationTurnNotReady(cause)) {
+          if (alive.current) setNotReady(true);
+          return;
+        }
         throw cause;
       } finally {
         if (active.current === controller) active.current = null;

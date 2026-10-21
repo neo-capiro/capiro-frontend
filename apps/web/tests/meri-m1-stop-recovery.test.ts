@@ -7,8 +7,7 @@ import { createInitialDraftOwner } from "../src/features/meri/conversation/initi
 import { ConversationHistoryUnavailable } from "../src/shared/meri-conversations/history-client";
 import {
   conversationTurnJournal,
-  reserveTurnWhenSettled,
-  TURN_SETTLE_WAIT_MS,
+  recoverConversationTurn,
 } from "../src/shared/meri-conversations/turn-journal";
 
 const context = {
@@ -30,11 +29,23 @@ const request = {
 };
 afterEach(() => vi.useRealTimers());
 
-it("Stop receipt reports a fence, while only an observed cancelled state reports the terminal record", () => {
-  const render = (state: string, cancel: string, receipt: boolean) =>
+it("Stop receipt shows Cancelling while only saved cancelled history reports Stopped", () => {
+  const render = (
+    state: string,
+    cancel: string,
+    receipt: boolean,
+    saved = false,
+  ) =>
     renderToStaticMarkup(
       createElement(RunStatus, {
         active: state === "running",
+        ...(saved
+          ? {
+              savedCurrent: { runState: "cancelled" } as NonNullable<
+                ComponentProps<typeof RunStatus>["savedCurrent"]
+              >,
+            }
+          : {}),
         run: {
           snapshot: {
             observation: { runState: state },
@@ -51,16 +62,22 @@ it("Stop receipt reports a fence, while only an observed cancelled state reports
     "Stopping: requesting a cancellation fence.",
   );
   const fenced = render("running", "observed", true);
-  expect(fenced).toContain("not completion of cleanup");
+  expect(fenced).toContain("<h3>Cancelling</h3>");
+  expect(fenced).toContain(
+    "Meri is finishing the current safe step before stopping.",
+  );
   expect(fenced.match(/<button[^>]*disabled=""/g) ?? []).toHaveLength(0);
   expect(fenced).toContain("Pause and checkpoint recovery are not available");
-  expect(fenced).not.toContain("Stopped in the conversation record.");
-  expect(render("cancelled", "observed", true)).toContain(
-    "Meri must confirm cleanup before starting your next message",
+  expect(fenced).not.toContain("<h3>Stopped</h3>");
+  expect(render("cancelled", "observed", true)).not.toContain(
+    "<h3>Stopped</h3>",
+  );
+  expect(render("cancelled", "observed", true, true)).toContain(
+    "Stopped. Completed steps remain recorded.",
   );
 });
 
-it("cleanup beyond the retry window preserves the same next-turn request for an explicit retry", async () => {
+it("cleanup refusal retains the captured draft and same request until an explicit retry", async () => {
   vi.useFakeTimers();
   const cache = new QueryClient();
   const journal = conversationTurnJournal(
@@ -93,16 +110,22 @@ it("cleanup beyond the retry window preserves the same next-turn request for an 
       } as never;
     },
   );
-  const first = reserveTurnWhenSettled(
-    journal,
-    reserve,
-    new AbortController().signal,
+  const draft = createInitialDraftOwner();
+  draft.begin(context, request, request.prompt);
+  await expect(recoverConversationTurn(journal, reserve)).rejects.toMatchObject(
+    {
+      code: "CONVERSATION_TURN_CONFLICT",
+    },
   );
-  const refused = expect(first).rejects.toMatchObject({
-    code: "CONVERSATION_TURN_CONFLICT",
-  });
-  await vi.advanceTimersByTimeAsync(TURN_SETTLE_WAIT_MS + 1);
-  await refused;
+  expect(reserve).toHaveBeenCalledOnce();
+  expect(
+    draft.acknowledge(
+      context,
+      { ...request, state: "unknown" },
+      request.prompt,
+    ),
+  ).toBe(false);
+  expect(draft.hasPending(context)).toBe(true);
   expect(journal.read()).toMatchObject({
     ...request,
     source,
@@ -110,15 +133,12 @@ it("cleanup beyond the retry window preserves the same next-turn request for an 
   });
   expect(journal.read()?.receipt).toBeUndefined();
   const count = reserve.mock.calls.length;
-  await vi.advanceTimersByTimeAsync(30_000);
+  await vi.advanceTimersByTimeAsync(600_000);
   expect(reserve).toHaveBeenCalledTimes(count);
   retired = true;
-  const recovered = await reserveTurnWhenSettled(
-    journal,
-    reserve,
-    new AbortController().signal,
-  );
+  const recovered = await recoverConversationTurn(journal, reserve);
   expect(recovered).toMatchObject({ ...request, state: "ready" });
+  expect(draft.hasPending(context)).toBe(true);
   expect(reserve).toHaveBeenCalledTimes(count + 1);
   expect(reserve.mock.calls.map(([input]) => input)).toEqual(
     Array.from({ length: count + 1 }, () => ({

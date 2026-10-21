@@ -271,6 +271,7 @@ function ConnectedConversation({
       textareaRef={session.textarea}
       onNextTurn={session.startNext}
       nextTurnBlocked={session.nextBlocked}
+      nextTurnVerified={!!session.source && !session.nextBlocked}
       initialBlocked={session.initialBlocked}
       promptKey={session.logicalKey}
       savedCurrent={session.savedCurrent}

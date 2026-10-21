@@ -1,136 +1,210 @@
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, expect, it, vi } from "vitest";
-import { QueryClient } from "@tanstack/react-query";
-import { ConversationHistoryUnavailable } from "../src/shared/meri-conversations/history-client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import * as historyClient from "../src/shared/meri-conversations/history-client";
+import { useConversationTurn } from "../src/features/meri/conversation/useConversationTurn";
 import {
   conversationTurnJournal,
-  reserveTurnWhenSettled,
-  TURN_SETTLE_RETRY_MS,
-  TURN_SETTLE_WAIT_MS,
+  conversationTurnNotReady,
+  recoverConversationTurn,
 } from "../src/shared/meri-conversations/turn-journal";
 
 const account = { tenantId: "synthetic-tenant", actorId: "synthetic-user" };
 const clientId = "10000000-0000-4000-8000-000000000001";
 const source = {
-  tenantId: account.tenantId,
-  actorId: account.actorId,
+  ...account,
   conversationId: "20000000-0000-4000-8000-000000000001",
   runId: "30000000-0000-4000-8000-000000000001",
   attemptId: "40000000-0000-4000-8000-000000000001",
   workerId: "50000000-0000-4000-8000-000000000001",
   writerFence: 1,
-} as never;
-const target = {
-  ...(source as object),
-  runId: "30000000-0000-4000-8000-000000000002",
-} as never;
+};
+const target = { ...source, runId: "30000000-0000-4000-8000-000000000002" };
+const receipt = {
+  schema: "meri.conversation-turn/1" as const,
+  sourceBinding: source,
+  targetBinding: target,
+  state: "RESERVED" as const,
+  replayed: false,
+};
 const settling = () =>
-  new ConversationHistoryUnavailable(
+  new historyClient.ConversationHistoryUnavailable(
     409,
     "CONVERSATION_TURN_CONFLICT",
     "NOT_DISPATCHED",
   );
-function setup() {
+const request = {
+  prompt: "Second question",
+  requestId: "60000000-0000-4000-8000-000000000001",
+};
+function setup(cache = new QueryClient()) {
   const journal = conversationTurnJournal(
-    new QueryClient(),
+    cache,
     account,
     clientId,
-    (source as { conversationId: string }).conversationId,
+    source.conversationId,
   );
-  journal.start(
-    source,
-    "Second question",
-    "60000000-0000-4000-8000-000000000001",
-  );
+  journal.start(source, request.prompt, request.requestId);
   return journal;
 }
-afterEach(() => vi.useRealTimers());
-
-it("turn two typed while turn one is still settling is reserved once Meri stops refusing it, with the same intent", async () => {
-  vi.useFakeTimers();
-  const journal = setup();
-  let calls = 0;
-  const reserve = vi.fn(
-    async (input: { conversationId: string; sourceRunId: string }) => {
-      if (++calls <= 2) throw settling();
-      return {
-        schema: "x",
-        sourceBinding: source,
-        targetBinding: target,
-        input,
-      } as never;
-    },
+function command(cache: QueryClient, open = vi.fn()) {
+  let turn!: ReturnType<typeof useConversationTurn>;
+  function Probe() {
+    turn = useConversationTurn(account, clientId, source.conversationId, open);
+    return null;
+  }
+  renderToStaticMarkup(
+    createElement(QueryClientProvider, { client: cache }, createElement(Probe)),
   );
-  const reserving = reserveTurnWhenSettled(
-    journal,
-    reserve,
-    new AbortController().signal,
-  );
-  await vi.advanceTimersByTimeAsync(2 * TURN_SETTLE_RETRY_MS);
-  const retained = await reserving;
-  expect(reserve).toHaveBeenCalledTimes(3);
-  expect(
-    new Set(reserve.mock.calls.map(([input]) => JSON.stringify(input))).size,
-  ).toBe(1);
-  expect(retained.state).toBe("ready");
-  expect(retained.requestId).toBe("60000000-0000-4000-8000-000000000001");
+  return { turn, open };
+}
+afterEach(() => {
+  vi.useRealTimers();
+  vi.restoreAllMocks();
 });
 
-it("a previous run that reaches ECS STOPPED two minutes later still lets turn two through", async () => {
+it("one explicit reservation stops at a cleanup refusal without timer-driven resends", async () => {
   vi.useFakeTimers();
-  const journal = setup();
-  const settledAt = Date.now() + 120_000;
+  const journal = setup(),
+    refused = settling();
   const reserve = vi.fn(async () => {
-    if (Date.now() < settledAt) throw settling();
-    return {
-      schema: "x",
-      sourceBinding: source,
-      targetBinding: target,
-    } as never;
+    throw refused;
   });
-  const reserving = reserveTurnWhenSettled(
-    journal,
-    reserve,
-    new AbortController().signal,
-  );
-  await vi.advanceTimersByTimeAsync(120_000);
-  expect((await reserving).state).toBe("ready");
+  await expect(recoverConversationTurn(journal, reserve)).rejects.toBe(refused);
+  expect(reserve).toHaveBeenCalledOnce();
+  expect(journal.read()).toEqual({ ...request, source, state: "unknown" });
+  await vi.advanceTimersByTimeAsync(600_000);
+  expect(reserve).toHaveBeenCalledOnce();
+  expect(vi.getTimerCount()).toBe(0);
 });
 
-it("only the definite not-dispatched conflict is asked again, and only for the settle window", async () => {
+it("the command handles not-ready without failure and only an explicit retry reuses its immutable identity", async () => {
   vi.useFakeTimers();
+  const cache = new QueryClient(),
+    { turn, open } = command(cache);
+  const reserve = vi
+    .spyOn(historyClient, "reserveConversationTurn")
+    .mockRejectedValueOnce(settling())
+    .mockResolvedValue(receipt);
+  expect(await turn.start(source, request.prompt)).toBe(true);
+  const journal = conversationTurnJournal(
+    cache,
+    account,
+    clientId,
+    source.conversationId,
+  );
+  const captured = journal.read()!;
+  expect(captured).toMatchObject({
+    source,
+    prompt: request.prompt,
+    state: "unknown",
+  });
+  expect(open).not.toHaveBeenCalled();
+  await vi.advanceTimersByTimeAsync(600_000);
+  expect(reserve).toHaveBeenCalledOnce();
+  expect(await turn.retry()).toBe(true);
+  expect(reserve).toHaveBeenCalledTimes(2);
+  expect(reserve.mock.calls.map(([input]) => input)).toEqual(
+    Array(2).fill({
+      conversationId: source.conversationId,
+      sourceRunId: source.runId,
+    }),
+  );
+  expect(open).toHaveBeenCalledExactlyOnceWith({
+    conversationId: source.conversationId,
+    runId: target.runId,
+    requestId: captured.requestId,
+    pending: captured.prompt,
+  });
+  expect(journal.read()).toMatchObject({ ...captured, state: "ready" });
+});
+
+it("only the exact definite cleanup refusal is not-ready while uncertain errors remain command failures", async () => {
+  expect(conversationTurnNotReady(settling())).toBe(true);
   for (const error of [
-    new ConversationHistoryUnavailable(
+    new historyClient.ConversationHistoryUnavailable(
       502,
       "CONVERSATION_UNAVAILABLE",
       "UNKNOWN",
     ),
-    new ConversationHistoryUnavailable(409, "CONVERSATION_TURN_CONFLICT"),
+    new historyClient.ConversationHistoryUnavailable(
+      409,
+      "CONVERSATION_TURN_CONFLICT",
+    ),
+    new historyClient.ConversationHistoryUnavailable(
+      409,
+      "CONVERSATION_TURN_CONFLICT",
+      "UNKNOWN",
+    ),
+    new historyClient.ConversationHistoryUnavailable(
+      409,
+      "MEMBERSHIP_CHANGED",
+      "NOT_DISPATCHED",
+    ),
+    new historyClient.ConversationHistoryUnavailable(
+      502,
+      "CONVERSATION_TURN_CONFLICT",
+      "NOT_DISPATCHED",
+    ),
+    new Error("unavailable"),
   ]) {
-    const reserve = vi.fn(async () => {
-      throw error;
-    });
-    await expect(
-      reserveTurnWhenSettled(setup(), reserve, new AbortController().signal),
-    ).rejects.toBe(error);
-    expect(reserve).toHaveBeenCalledTimes(1);
+    expect(conversationTurnNotReady(error)).toBe(false);
+    const cache = new QueryClient(),
+      journal = setup(cache),
+      { turn, open } = command(cache);
+    const reserve = vi
+      .spyOn(historyClient, "reserveConversationTurn")
+      .mockRejectedValue(error);
+    expect(await turn.retry()).toBe(false);
+    expect(reserve).toHaveBeenCalledOnce();
+    expect(journal.read()).toEqual({ ...request, source, state: "unknown" });
+    expect(open).not.toHaveBeenCalled();
+    reserve.mockRestore();
   }
-  const reserve = vi.fn(async () => {
-    throw settling();
+});
+
+it("aborted reservations never dispatch or adopt a late target and retain the original request", async () => {
+  const before = new AbortController(),
+    first = setup(),
+    unused = vi.fn(async () => receipt);
+  before.abort(new Error("scope left"));
+  await expect(
+    recoverConversationTurn(first, unused, before.signal),
+  ).rejects.toThrow("scope left");
+  expect(unused).not.toHaveBeenCalled();
+  expect(first.read()).toEqual({ ...request, source, state: "unknown" });
+  const during = new AbortController(),
+    second = setup();
+  const late = vi.fn(async () => {
+    during.abort(new Error("scope left"));
+    return receipt;
   });
-  const journal = setup();
-  const reserving = reserveTurnWhenSettled(
-    journal,
-    reserve,
-    new AbortController().signal,
+  await expect(
+    recoverConversationTurn(second, late, during.signal),
+  ).rejects.toThrow("scope left");
+  expect(late).toHaveBeenCalledOnce();
+  expect(second.read()).toEqual({ ...request, source, state: "unknown" });
+});
+
+it("a mapping-only refusal stays a recovery failure without claiming a saved message", async () => {
+  const cache = new QueryClient(),
+    { turn, open } = command(cache);
+  const reserve = vi
+    .spyOn(historyClient, "reserveConversationTurn")
+    .mockRejectedValue(settling());
+  expect(await turn.readMapping(source)).toBe(false);
+  expect(reserve).toHaveBeenCalledExactlyOnceWith(
+    { conversationId: source.conversationId, sourceRunId: source.runId },
+    expect.any(AbortSignal),
   );
-  const refused = expect(reserving).rejects.toMatchObject({
-    code: "CONVERSATION_TURN_CONFLICT",
-  });
-  await vi.advanceTimersByTimeAsync(TURN_SETTLE_WAIT_MS);
-  await refused;
-  // Asked at 0, 3 s, …, 90 s; the last refusal stands.
-  expect(reserve.mock.calls.length).toBe(
-    TURN_SETTLE_WAIT_MS / TURN_SETTLE_RETRY_MS + 1,
-  );
-  expect(journal.read()?.state).toBe("unknown");
+  expect(
+    conversationTurnJournal(
+      cache,
+      account,
+      clientId,
+      source.conversationId,
+    ).read(),
+  ).toBeUndefined();
+  expect(open).not.toHaveBeenCalled();
 });

@@ -290,16 +290,18 @@ test("Stop requests durable cancellation and the run status, not the receipt, en
   ).toBeVisible();
   await expect(stop.getByText("Attention", { exact: true })).toBeVisible();
   await expect(
-    stop.getByText(
-      "Meri is finishing the current safe step before stopping. Stop fence recorded. This acknowledges cancellation, not completion of cleanup.",
-      { exact: true },
-    ),
+    stop.getByText("Meri is finishing the current safe step before stopping.", {
+      exact: true,
+    }),
   ).toBeVisible();
   const current = page.getByRole("article", {
     name: "Current turn",
     exact: true,
   });
   await expect(current.getByText("Cancelled", { exact: true })).toHaveCount(0);
+  await expect(
+    page.getByRole("region", { name: "Next message status", exact: true }),
+  ).toHaveCount(0);
   const reverified = page.waitForResponse(async (response) => {
     if (
       !response.url().endsWith("/api/conversations/transcript") ||
@@ -323,9 +325,23 @@ test("Stop requests durable cancellation and the run status, not the receipt, en
   await expect(current.getByText("Cancelled", { exact: true })).toBeVisible();
   await reverified;
   await expect(
-    stop.getByRole("heading", { name: "Cancelled", exact: true }),
+    stop.getByRole("heading", { name: "Stopped", exact: true }),
   ).toBeVisible();
   await expect(stop.getByText("Complete", { exact: true })).toBeVisible();
+  await expect(stop.getByRole("status")).toHaveText(
+    "Stopped. Completed steps remain recorded.",
+  );
+  const ready = page.getByRole("region", {
+    name: "Next message status",
+    exact: true,
+  });
+  await expect(
+    ready.getByRole("heading", { name: "Ready", exact: true }),
+  ).toBeVisible();
+  await expect(ready.getByText("Complete", { exact: true })).toBeVisible();
+  await expect(
+    ready.getByText("You can send your next message.", { exact: true }),
+  ).toBeVisible();
   expect(cancels).toEqual([{}]);
   await expect(composer(page)).toHaveValue("Draft while running");
   await expect(sendButton(page)).toBeEnabled();

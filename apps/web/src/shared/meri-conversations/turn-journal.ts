@@ -6,15 +6,6 @@ import {
   type ConversationTurnReceipt,
 } from "./history-client";
 
-/**
- * Meri refuses a next turn with 409 CONVERSATION_TURN_CONFLICT, outcome NOT_DISPATCHED, while the previous run is
- * still being stopped and retired: retirement waits for the ECS task to reach STOPPED (its 60 s stopTimeout plus
- * deprovisioning; the reconcile retries for up to 240 s). Nothing was reserved, so the same intent is asked again at
- * this cadence until this long has passed, then the refusal stands and the recovery controls take over.
- */
-export const TURN_SETTLE_WAIT_MS = 150_000;
-export const TURN_SETTLE_RETRY_MS = 3_000;
-
 /** Nonsecret immutable submit identity exists before reservation dispatch, not after its ACK. */
 export type TurnIntent = Readonly<{
   source: RunBinding;
@@ -119,22 +110,25 @@ export function conversationTurnJournal(
   };
 }
 
-/** Reservation retries always replay the original source, even after UNKNOWN or an accepted target. */
+/** One explicit command attempts one reservation of the retained source, including after UNKNOWN. */
 export async function recoverConversationTurn(
   journal: ReturnType<typeof conversationTurnJournal>,
   reserve: (input: {
     conversationId: string;
     sourceRunId: string;
   }) => Promise<ConversationTurnReceipt>,
+  signal?: AbortSignal,
 ) {
   const intent = journal.read();
   if (!intent || !journal.current())
     throw new Error("Immutable turn identity unavailable");
   try {
+    signal?.throwIfAborted();
     const receipt = await reserve({
       conversationId: intent.source.conversationId,
       sourceRunId: intent.source.runId,
     });
+    signal?.throwIfAborted();
     for (const key of [
       "tenantId",
       "actorId",
@@ -159,44 +153,9 @@ export async function recoverConversationTurn(
   }
 }
 
-const sourceSettling = (error: unknown) =>
+/** Only this explicit refusal proves that no next turn was dispatched. */
+export const conversationTurnNotReady = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   error.status === 409 &&
   error.code === "CONVERSATION_TURN_CONFLICT" &&
   error.outcome === "NOT_DISPATCHED";
-
-const pause = (milliseconds: number, signal: AbortSignal) =>
-  new Promise<void>((resolve, reject) => {
-    if (signal.aborted) return reject(signal.reason);
-    const stop = () => {
-      clearTimeout(timer);
-      reject(signal.reason);
-    };
-    const timer = setTimeout(() => {
-      signal.removeEventListener("abort", stop);
-      resolve();
-    }, milliseconds);
-    signal.addEventListener("abort", stop, { once: true });
-  });
-
-/** recoverConversationTurn, asked again while Meri reports that the previous run is still settling. */
-export async function reserveTurnWhenSettled(
-  journal: ReturnType<typeof conversationTurnJournal>,
-  reserve: Parameters<typeof recoverConversationTurn>[1],
-  signal: AbortSignal,
-  now: () => number = Date.now,
-) {
-  const started = now();
-  for (;;) {
-    try {
-      return await recoverConversationTurn(journal, reserve);
-    } catch (error) {
-      if (
-        !sourceSettling(error) ||
-        now() - started + TURN_SETTLE_RETRY_MS > TURN_SETTLE_WAIT_MS
-      )
-        throw error;
-    }
-    await pause(TURN_SETTLE_RETRY_MS, signal);
-  }
-}

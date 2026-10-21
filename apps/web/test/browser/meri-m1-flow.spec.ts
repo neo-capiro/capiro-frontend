@@ -54,11 +54,28 @@ for (const viewport of [
       await expect(stopButton(page)).toBeEnabled();
       await stopButton(page).click();
       await expect.poll(() => flow.calls.cancel).toBe(1);
+      const stop = page.getByRole("region", {
+        name: "Stop status",
+        exact: true,
+      });
+      await expect(
+        stop.getByRole("heading", { name: "Cancelling", exact: true }),
+      ).toBeVisible();
+      await expect(stop.getByRole("status")).toHaveText(
+        "Meri is finishing the current safe step before stopping.",
+      );
       const current = page.getByRole("article", {
         name: "Current turn",
         exact: true,
       });
-      await expect(current.getByText(/^(Cancelled|Stopped)$/)).toHaveCount(0);
+      await expect(current.getByText("Cancelled", { exact: true })).toHaveCount(
+        0,
+      );
+      const ready = page.getByRole("region", {
+        name: "Next message status",
+        exact: true,
+      });
+      await expect(ready).toHaveCount(0);
       expect(flow.calls.reservations).toEqual([]);
       let terminalReadbacks = 0;
       const reverified = page.waitForResponse(async (response) => {
@@ -81,7 +98,9 @@ for (const viewport of [
         return exactTail && ++terminalReadbacks === 2;
       });
       flow.retire();
-      await expect(current.getByText(/^(Cancelled|Stopped)$/)).toBeVisible();
+      await expect(
+        current.getByText("Cancelled", { exact: true }),
+      ).toBeVisible();
       await reverified;
       await expect(
         page
@@ -91,6 +110,26 @@ for (const viewport of [
           })
           .getByText("Saved conversation history loaded.", { exact: true }),
       ).toBeVisible();
+      await expect(
+        stop.getByRole("heading", { name: "Stopped", exact: true }),
+      ).toBeVisible();
+      await expect(stop.getByText("Complete", { exact: true })).toBeVisible();
+      await expect(stop.getByRole("status")).toHaveText(
+        "Stopped. Completed steps remain recorded.",
+      );
+      await expect(
+        ready.getByRole("heading", { name: "Ready", exact: true }),
+      ).toBeVisible();
+      await expect(ready.getByText("Complete", { exact: true })).toBeVisible();
+      await expect(
+        ready.getByText("You can send your next message.", { exact: true }),
+      ).toBeVisible();
+      await ready
+        .getByRole("button", { name: "Write next message", exact: true })
+        .click();
+      await expect(composer(page)).toBeFocused();
+      expect(flow.calls.reservations).toEqual([]);
+      expect(flow.calls.successors).toEqual([]);
       await composer(page).fill("M1 second question");
       await expect(sendButton(page)).toBeEnabled();
       await sendButton(page).dblclick();

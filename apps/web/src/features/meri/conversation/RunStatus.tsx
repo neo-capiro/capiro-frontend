@@ -1,5 +1,6 @@
 import { Button } from "@capiro/ui/button";
 import type { useLiveRun } from "./useLiveRun";
+import { isTerminal, type TurnView } from "./conversation-view";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import ui from "../ui/meri-ui.module.css";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
@@ -11,11 +12,14 @@ export function RunStatus({
   run,
   active,
   acceptedRequest,
+  savedCurrent,
 }: {
   run: ReturnType<typeof useLiveRun>;
   /** The run has not reached a terminal status. */
   active: boolean;
   acceptedRequest?: ConversationStoredRequest | undefined;
+  /** The current run projected from admitted saved history, never the live stream. */
+  savedCurrent?: TurnView | undefined;
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
@@ -75,7 +79,7 @@ export function RunStatus({
           </Button>
         )}
       {active && <ObservationStatus run={run} />}
-      <StopStatus run={run} />
+      <StopStatus run={run} savedCurrent={savedCurrent} />
       {active && (
         <p className={styles.muted}>
           Leaving this page stops watching and does not cancel the run. Use Stop
@@ -88,7 +92,10 @@ export function RunStatus({
 }
 
 /** Receipt state is evidence of the outcome at Stop; it never proves physical cleanup. */
-function stopFeedback(run: ReturnType<typeof useLiveRun>): {
+function stopFeedback(
+  run: ReturnType<typeof useLiveRun>,
+  savedCurrent: TurnView | undefined,
+): {
   title: string;
   tone: StatusTone;
   status: string;
@@ -110,25 +117,24 @@ function stopFeedback(run: ReturnType<typeof useLiveRun>): {
       status: "Attention",
       message: "The run had already failed when the stop request arrived.",
     };
-  if (snapshot.observation?.runState === "cancelled")
+  if (savedCurrent?.runState === "cancelled")
     return {
-      title: "Cancelled",
+      title: "Stopped",
       tone: "success",
       status: "Complete",
-      message:
-        "Stopped in the conversation record. Meri must confirm cleanup before starting your next message.",
+      message: "Stopped. Completed steps remain recorded.",
     };
+  if (isTerminal(savedCurrent?.runState)) return null;
   if (receipt === "cancelled")
     return {
       title: "Cancelling",
       tone: "warning",
       status: "Attention",
-      message:
-        "Meri is finishing the current safe step before stopping. Stop fence recorded. This acknowledges cancellation, not completion of cleanup.",
+      message: "Meri is finishing the current safe step before stopping.",
     };
   if (intent.cancel === "pending")
     return {
-      title: "Cancelling",
+      title: "Requesting stop",
       tone: "warning",
       status: "Attention",
       message: "Stopping: requesting a cancellation fence.",
@@ -145,13 +151,19 @@ function stopFeedback(run: ReturnType<typeof useLiveRun>): {
 }
 
 /** Figma 450:88742/450:88754, qualified by the evidence the current public contract supplies. */
-function StopStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
-  const feedback = stopFeedback(run);
+function StopStatus({
+  run,
+  savedCurrent,
+}: {
+  run: ReturnType<typeof useLiveRun>;
+  savedCurrent: TurnView | undefined;
+}) {
+  const feedback = stopFeedback(run, savedCurrent);
   if (!feedback) return null;
   const retry =
     run.intent.cancel === "unknown" &&
     !run.snapshot.cancelReceipt &&
-    run.snapshot.observation?.runState !== "cancelled";
+    !isTerminal(savedCurrent?.runState);
   return (
     <section className={styles.stopCard} aria-label="Stop status">
       <h3>{feedback.title}</h3>

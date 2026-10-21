@@ -10,40 +10,56 @@ function TurnRecoveryStatus({ session }: { session: Session }) {
   const { continuation } = session;
   return (
     <>
-      {(session.recoveryNeeded || session.unknownReservation) && (
+      {continuation.notReady && continuation.intent ? (
         <div role="status">
           <p>
-            A turn may already be in flight. Sending another message is blocked
-            until it can be recovered.
+            Meri is still finishing up. Your message is saved; try again in a
+            moment.
           </p>
-          {session.unknownReservation && (
-            <p>
-              The original message identity is unavailable after reopening this
-              page. A reserved run alone does not establish that no message was
-              sent.
-            </p>
-          )}
           <Button
             type="button"
             variant="outline"
             className={ui.outline}
             disabled={continuation.busy}
-            onClick={() => {
-              if (session.recoveryNeeded) void continuation.retry();
-              else void session.readReservation();
-            }}
+            onClick={() => void continuation.retry()}
           >
-            {session.recoveryNeeded
-              ? "Recover same turn"
-              : "Check reserved turn"}
+            Retry same turn
           </Button>
         </div>
+      ) : (
+        (session.recoveryNeeded || session.unknownReservation) && (
+          <div role="status">
+            <p>
+              A turn may already be in flight. Sending another message is
+              blocked until it can be recovered.
+            </p>
+            {session.unknownReservation && (
+              <p>
+                The original message identity is unavailable after reopening
+                this page. A reserved run alone does not establish that no
+                message was sent.
+              </p>
+            )}
+            <Button
+              type="button"
+              variant="outline"
+              className={ui.outline}
+              disabled={continuation.busy}
+              onClick={() => {
+                if (session.recoveryNeeded) void continuation.retry();
+                else void session.readReservation();
+              }}
+            >
+              {session.recoveryNeeded
+                ? "Recover same turn"
+                : "Check reserved turn"}
+            </Button>
+          </div>
+        )
       )}
-      {continuation.failed && (
+      {continuation.failed && !continuation.notReady && (
         <p role="alert">
-          {continuation.notReady
-            ? "Meri is not ready for your next message yet. The previous run is still being retired. Retry the same turn when cleanup finishes."
-            : "Turn recovery unavailable. No replacement turn was requested."}
+          Turn recovery unavailable. No replacement turn was requested.
           {continuation.intent
             ? " The original request identity is retained."
             : ""}
