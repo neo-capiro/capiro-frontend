@@ -3,7 +3,7 @@ type Environment = Record<string, string | undefined>;
 /** Source binding is deployment intent, not proof of a running service's identity. */
 export const previewBackendSource = "6542f5b089656b6d255465edd464d06c2a0b408f";
 export const qualifiedCorePreviewBackendSource =
-  "b97a3286487abcda6a7424cf1dc2812d93b65b3d";
+  "50475125275853299798fc40f8cb119f0b865464";
 const firstChatPreviewApi = "https://first-chat-preview.app-dev.capiro.ai/api";
 const coreRosterPreviewApi = "https://core-roster-preview.capiro.ai/api";
 const dnsHost =

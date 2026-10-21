@@ -58,5 +58,6 @@ export const config = {
     "/api/documents/:path*",
     "/api/task-commands/:path*",
     "/api/settings/:path*",
+    "/api/memory/owner/:path*",
   ],
 };

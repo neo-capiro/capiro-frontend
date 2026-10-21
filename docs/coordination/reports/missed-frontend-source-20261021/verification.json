@@ -1,0 +1,103 @@
+{
+  "sourceHead": "4d285a827df8c01f1ca3a5a9852d8533f3f84add",
+  "node": "24.10.0",
+  "npm": "11.9.0",
+  "lockSha256": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234",
+  "runtime": "local synthetic only",
+  "records": [
+    {
+      "cwd": "apps/web",
+      "invocation": "vitest run tests/meri-memory-owner-decision-hold.test.ts tests/meri-memory-owner-review-proxy.test.ts tests/meri-memory-owner-review-route.test.ts tests/meri-memory-owner-inbox-pagination.test.ts tests/meri-memory-preview-policy.test.ts tests/meri-preview-route-activation.test.ts --maxWorkers=1",
+      "exit": 0,
+      "counts": {
+        "files": 6,
+        "passed": 71
+      },
+      "log": "frontend-memory-tests.log"
+    },
+    {
+      "cwd": "apps/web",
+      "invocation": "vitest run tests/preview-read-receiving.test.ts tests/preview-backend-containment.test.ts tests/meri-first-chat-preview-policy.test.ts tests/first-chat-bootstrap.test.ts tests/first-chat-intent.test.ts tests/meri-first-chat-core.test.ts tests/meri-first-chat-host.test.ts tests/meri-first-chat-route.test.ts tests/memory-settings-review.test.ts tests/modules-core-preview-hub.test.ts --maxWorkers=1",
+      "exit": 0,
+      "counts": {
+        "files": 10,
+        "passed": 190
+      },
+      "log": "frontend-roster-regression.log"
+    },
+    {
+      "cwd": ".",
+      "invocation": "node --test scripts/preview-config.test.mjs scripts/architecture-preview.test.mjs apps/web/test/preview-backend-boundary.test.mjs",
+      "exit": 0,
+      "counts": {
+        "passed": 20
+      },
+      "log": "frontend-config-tests.log"
+    },
+    {
+      "cwd": "apps/web",
+      "invocation": "vitest run tests/meri-document-access.test.ts tests/meri-document-transport.test.ts tests/meri-document-links.test.ts --maxWorkers=1",
+      "exit": 0,
+      "counts": {
+        "files": 3,
+        "passed": 81
+      },
+      "log": "frontend-combined-b2-tests.log"
+    },
+    {
+      "cwd": ".",
+      "invocation": "node --test scripts/document-access-public-input.test.mjs scripts/architecture-meri-documents.test.mjs",
+      "exit": 0,
+      "counts": {
+        "passed": 6
+      },
+      "log": "frontend-combined-b2-scripts.log"
+    },
+    {
+      "cwd": "apps/web",
+      "invocation": "playwright test --config test/browser/playwright.config.ts test/browser/meri-memory-owner-review.spec.ts test/browser/meri-conversation-artifacts.spec.ts test/browser/meri-files-workflow.spec.ts --grep 'disabled owner review|pending correction|uncertain correction|artifact|Files docx 1440px'",
+      "exit": 0,
+      "counts": {
+        "passed": 12,
+        "failed": 0,
+        "flaky": 0
+      },
+      "log": "frontend-combined-browser.log"
+    },
+    {
+      "cwd": ".",
+      "invocation": "npm run build",
+      "exit": 0,
+      "counts": {
+        "generatedPages": 286
+      },
+      "log": "frontend-combined-build.log"
+    },
+    {
+      "cwd": "apps/web",
+      "invocation": "tsc --noEmit --incremental false",
+      "exit": 0,
+      "counts": {},
+      "log": "frontend-combined-typecheck.log"
+    },
+    {
+      "cwd": ".",
+      "invocation": "node scripts/public-packages.mjs",
+      "exit": 0,
+      "counts": {},
+      "log": "frontend-combined-packages.log"
+    },
+    {
+      "cwd": ".",
+      "invocation": "node scripts/architecture.mjs",
+      "exit": 0,
+      "counts": {
+        "total": 541,
+        "reviewed": 523,
+        "inheritedUnreviewed": 18,
+        "blocking": 0
+      },
+      "log": "architecture-summary.json"
+    }
+  ]
+}

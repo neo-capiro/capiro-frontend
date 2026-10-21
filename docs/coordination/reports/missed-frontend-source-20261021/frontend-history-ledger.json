@@ -1,0 +1,2761 @@
+{
+  "baseline": "4f9a7e8dcaa9ba03494dc5a49559daf70cea5100",
+  "refs": [
+    {
+      "ref": "refs/remotes/origin/assessment/capiro-remaining-20261012",
+      "head": "e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/desktop-integration-20261019",
+      "head": "3a34ab25a6cc0929294901039aeed0baa609f289",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/frontend-build-receipt-20261019",
+      "head": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+      "ancestry": "non-ancestor",
+      "merge_base": "5cd5f20d0f2919dce915a67a46487ce81f3e4f15",
+      "ahead_commits": [
+        {
+          "sha": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+          "subject": "docs(preview): publish qualified frontend image and held rollout receipt"
+        },
+        {
+          "sha": "e6180219b589ae8fced7155d1c451840c8663d94",
+          "subject": "docs(preview): publish bounded roster readiness checklist"
+        },
+        {
+          "sha": "3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+          "subject": "fix(preview): advance held Core roster source pin"
+        }
+      ],
+      "cherry": [
+        "+ 3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+        "+ e6180219b589ae8fced7155d1c451840c8663d94",
+        "+ cfabbc30c88f5d0078e95ac8062116fc636c13a9"
+      ],
+      "status": "integrate",
+      "reason": "No current receiver/active-owner evidence. Receive the historical PR112 build and held image-only proposal records without claiming they qualify the newer consolidated source or executing rollout. Includes PR111 predecessors.",
+      "source_lane_head": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/origin/codex/frontend-core-roster-pin-20261019",
+      "head": "e6180219b589ae8fced7155d1c451840c8663d94",
+      "ancestry": "non-ancestor",
+      "merge_base": "5cd5f20d0f2919dce915a67a46487ce81f3e4f15",
+      "ahead_commits": [
+        {
+          "sha": "e6180219b589ae8fced7155d1c451840c8663d94",
+          "subject": "docs(preview): publish bounded roster readiness checklist"
+        },
+        {
+          "sha": "3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+          "subject": "fix(preview): advance held Core roster source pin"
+        }
+      ],
+      "cherry": [
+        "+ 3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+        "+ e6180219b589ae8fced7155d1c451840c8663d94"
+      ],
+      "status": "integrate",
+      "reason": "No current receiver/active-owner evidence. Receive PR111 held Core source pin and bounded readiness docs with current defaults/holds preserved; backend pin compatibility remains a coordinated prerequisite.",
+      "source_lane_head": "e6180219b589ae8fced7155d1c451840c8663d94",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/origin/codex/frontend-source-receiving-20261018",
+      "head": "d9959a9cee267365d1f13a72351802a66c6dbfe2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/memory-review-ui-20261018",
+      "head": "88bf4005621dd1a10fce6888269097cb0d9cc8c0",
+      "ancestry": "non-ancestor",
+      "merge_base": "271a267da93aa952a89b208d1f42eed0ffb080c2",
+      "ahead_commits": [
+        {
+          "sha": "88bf4005621dd1a10fce6888269097cb0d9cc8c0",
+          "subject": "Align held memory preview paths with Core listener"
+        },
+        {
+          "sha": "0f058a825a632bfe00ac8ec50da750f44842c46e",
+          "subject": "Allocate held preview routing for memory owner review"
+        },
+        {
+          "sha": "e44146865ffbeb865358473dd3d4ceda38545a1c",
+          "subject": "Add canonical personal memory correction review flow"
+        },
+        {
+          "sha": "10be7a5ff300f712d8214df512c03bbae663c3f8",
+          "subject": "Page owner memory inbox and reconcile uncertain decisions"
+        },
+        {
+          "sha": "9f132c0d27a7d45c97f39f6d96c20c21a3326c80",
+          "subject": "Add Core-backed personal memory review workspace"
+        }
+      ],
+      "cherry": [
+        "+ 9f132c0d27a7d45c97f39f6d96c20c21a3326c80",
+        "+ 10be7a5ff300f712d8214df512c03bbae663c3f8",
+        "+ e44146865ffbeb865358473dd3d4ceda38545a1c",
+        "+ 0f058a825a632bfe00ac8ec50da750f44842c46e",
+        "+ 88bf4005621dd1a10fce6888269097cb0d9cc8c0"
+      ],
+      "status": "integrate",
+      "reason": "Five genuinely absent owner-inbox/correction/proxy/held-preview commits. Old donor existence is not current receiver evidence. Receive compatible source while preserving default-disabled activation, canonical Core authority, and fail-closed routing.",
+      "source_lane_head": "88bf4005621dd1a10fce6888269097cb0d9cc8c0",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/origin/codex/memory-settings-review-20261018",
+      "head": "481c25593bd77c2c96c219c1dd3e16ff21cee8d3",
+      "ancestry": "non-ancestor",
+      "merge_base": "271a267da93aa952a89b208d1f42eed0ffb080c2",
+      "ahead_commits": [
+        {
+          "sha": "481c25593bd77c2c96c219c1dd3e16ff21cee8d3",
+          "subject": "Route Settings memory review to native owner inbox"
+        },
+        {
+          "sha": "88bf4005621dd1a10fce6888269097cb0d9cc8c0",
+          "subject": "Align held memory preview paths with Core listener"
+        },
+        {
+          "sha": "0f058a825a632bfe00ac8ec50da750f44842c46e",
+          "subject": "Allocate held preview routing for memory owner review"
+        },
+        {
+          "sha": "e44146865ffbeb865358473dd3d4ceda38545a1c",
+          "subject": "Add canonical personal memory correction review flow"
+        },
+        {
+          "sha": "10be7a5ff300f712d8214df512c03bbae663c3f8",
+          "subject": "Page owner memory inbox and reconcile uncertain decisions"
+        },
+        {
+          "sha": "9f132c0d27a7d45c97f39f6d96c20c21a3326c80",
+          "subject": "Add Core-backed personal memory review workspace"
+        }
+      ],
+      "cherry": [
+        "+ 9f132c0d27a7d45c97f39f6d96c20c21a3326c80",
+        "+ 10be7a5ff300f712d8214df512c03bbae663c3f8",
+        "+ e44146865ffbeb865358473dd3d4ceda38545a1c",
+        "+ 0f058a825a632bfe00ac8ec50da750f44842c46e",
+        "+ 88bf4005621dd1a10fce6888269097cb0d9cc8c0",
+        "- 481c25593bd77c2c96c219c1dd3e16ff21cee8d3"
+      ],
+      "status": "integrate",
+      "reason": "Receive the five missing memory predecessors from 88bf4005. Do not duplicate Settings commit 481c2559: its four changed files are identical to main and its patch is equivalent to PR93. No current receiver evidence for the five predecessors.",
+      "source_lane_head": "481c25593bd77c2c96c219c1dd3e16ff21cee8d3",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-desktop-visual-audit",
+      "head": "8894f279419d93540c993dc5a62c8263943823a6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-desktop-visual-on-chat-20261018",
+      "head": "788a08f3fd83bf63efd3d4f6a14d4a0b4ca700c5",
+      "ancestry": "non-ancestor",
+      "merge_base": "8894f279419d93540c993dc5a62c8263943823a6",
+      "ahead_commits": [
+        {
+          "sha": "788a08f3fd83bf63efd3d4f6a14d4a0b4ca700c5",
+          "subject": "Document visual integration across chat and feature successors"
+        },
+        {
+          "sha": "e4ffe7be58d9b05847fb164a81458622002eb0c9",
+          "subject": "Merge Portfolio shared shell into chat successor visuals"
+        },
+        {
+          "sha": "680518865bc0e3c04de094c71381c38b50f11454",
+          "subject": "test(meri): cover selector roster in ordinary navigation fixtures"
+        },
+        {
+          "sha": "64c76075dc095c210430c83ed04c939f92f6a6f1",
+          "subject": "Merge Meri desktop visuals with chat selector successor"
+        }
+      ],
+      "cherry": [
+        "- 680518865bc0e3c04de094c71381c38b50f11454",
+        "+ 788a08f3fd83bf63efd3d4f6a14d4a0b4ca700c5"
+      ],
+      "status": "superseded",
+      "reason": "Visual parents received through combined PR97. Fixture commit 68051886 is patch-equivalent to c0d8ab28 and both changed files are identical to main. The missing 11-line intermediate receipt 788a08f3 is superseded by combined and main-receiving reports, which preserve newer fixes and qualified scope.",
+      "covered_by": "d9959a9cee267365d1f13a72351802a66c6dbfe2"
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-figma34-combined-20261018",
+      "head": "58e3c035d74b188e31e76de404a12541a34b603e",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-product-features-handoff-task6-20261017",
+      "head": "b12978025858aac65169661e3bf04f13c3ab3faa",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-task-update-desktop-task6-20261016",
+      "head": "bd9e0d03c54ef4fbb57010c3b97cfb3d77bdf2b9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-user-preferences-production-task6-20261017",
+      "head": "1c0c059466963a3a5b4757d05f44701eb2007347",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/meri-user-preferences-task6-20261017",
+      "head": "9e6d80843b0a46a862f7613b4ab9b08d925d7b17",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/modules-context-state-20261019",
+      "head": "4dc8727f73da851a52c36a17f99589f6391df8b1",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/modules-desktop-safety-20261019",
+      "head": "442f188c6636ee4d34566e92aad34261d2dd402a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/modules-settings-figma34-20261018",
+      "head": "e1de3f1d41f508629a79c198a21b71103e17c245",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/modules-settings-state-fixes-20261019",
+      "head": "553b848303a94b206c3c2efafc0c29c2cb40414a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/non-meri-core-preview-slice-20261018",
+      "head": "f13dae4d6ab696f2fedde53ea18f0ed2018e9bf6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/non-meri-functional-gap-20261018",
+      "head": "3e6c0a9e39b858fb47eb6cad9ca79008963619aa",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-continuation-20261011",
+      "head": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-core-contracts-20261018",
+      "head": "45528667db95f805660d2ded5f7a20b5c91c909b",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-desktop-safety-20261019",
+      "head": "336a093e9debd3b067468510403219731820ee4d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-figma34-desktop-20261018",
+      "head": "88088d9ca86dc9c2f8ea9b2e42507348ca7652b1",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-handover-closeout-20261011",
+      "head": "02c02d95bdf3949662b9123f425271c6491ffdab",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-meeting-continuity-20261019",
+      "head": "ace46f896c98c8285e5da9231e813885d7979a7b",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/portfolio-repo-move-20261011",
+      "head": "8e8e6999c385beccd245e94e8f32a8a3120e8131",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/ui-receiving-20261019",
+      "head": "6da70dc3d968360d296eaf191462b15f7978dd30",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/codex/ui-receiving-all-three-20261019",
+      "head": "043c1102c322098b01173e223ca7a33a1f4c08fb",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/docs/clerk-production-domain-readback-20261017",
+      "head": "a841d5aa8f683c8f1497685c1a6d96f3afe577a6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/docs/figma34-gaps-20261016",
+      "head": "8a9c7da1562364ecfba4a233b9a8f3d4aaded75c",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "8a9c7da1562364ecfba4a233b9a8f3d4aaded75c",
+          "subject": "docs: complete 3.1 to 3.4 component and behavior comparison"
+        },
+        {
+          "sha": "0ca9bf75d73467c605995bf76b60e231cc1d5b5d",
+          "subject": "docs: record 3.4 coverage and split-file navigation"
+        },
+        {
+          "sha": "696392f3dca807288f451067259b154557cc6333",
+          "subject": "docs: hand off verified Meri Portfolio and Modules Figma gaps"
+        },
+        {
+          "sha": "3930e36593960966edaa39f8f7f25faa14f9654a",
+          "subject": "Map current Meri desktop designs and preserve qualification gaps"
+        },
+        {
+          "sha": "790983844a2ff002e186ec99b8f4f0cda7c2dfdd",
+          "subject": "Reuse current Meri wordmark across owned desktop masks"
+        },
+        {
+          "sha": "aecec5813d51f2b3f0386130bb350edbb04e3c53",
+          "subject": "fix(meri): bind current Figma header action assets"
+        },
+        {
+          "sha": "8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+          "subject": "Attach exact retry-pin source-analysis evidence"
+        },
+        {
+          "sha": "e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+          "subject": "Pin repeated initial allocation before replacing retained receipt"
+        },
+        {
+          "sha": "4465c270695d59a24c1e11e3bfbd69782f44138d",
+          "subject": "Prepare conditional Meri initial-input consumer and interrupted-flow controls"
+        },
+        {
+          "sha": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+          "subject": "Preserve raw stdout and stderr in input runtime evidence"
+        },
+        {
+          "sha": "fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+          "subject": "Seal Meri input SDK emission and focused runtime evidence"
+        },
+        {
+          "sha": "845cebade818b8ceef1568574662196d813d14d0",
+          "subject": "feat(meri): admit retained conversation input before dispatch"
+        },
+        {
+          "sha": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+          "subject": "fix(meri): retain current prompt while lineage is unavailable"
+        },
+        {
+          "sha": "108e5abdae8b3c59407ddfa5c3821be366a1f085",
+          "subject": "feat(meri): wire native history and immutable turn recovery"
+        },
+        {
+          "sha": "68619614f23116d3735e5634a466243303cc4acd",
+          "subject": "feat(meri): prepare exact conversation selection and logical prompt display"
+        },
+        {
+          "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+          "subject": "docs(meri): retain architecture negatives and source review"
+        },
+        {
+          "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+          "subject": "refactor(meri): separate run command state from observation lifetime"
+        }
+      ],
+      "cherry": [
+        "+ 92ae83cdbf165f36a77280d061b23b329f1b90ca",
+        "+ 36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+        "+ 68619614f23116d3735e5634a466243303cc4acd",
+        "+ 108e5abdae8b3c59407ddfa5c3821be366a1f085",
+        "+ 033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+        "+ 845cebade818b8ceef1568574662196d813d14d0",
+        "+ fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+        "+ b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+        "+ 4465c270695d59a24c1e11e3bfbd69782f44138d",
+        "+ e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+        "+ 8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+        "+ aecec5813d51f2b3f0386130bb350edbb04e3c53",
+        "+ 790983844a2ff002e186ec99b8f4f0cda7c2dfdd",
+        "+ 3930e36593960966edaa39f8f7f25faa14f9654a",
+        "+ 696392f3dca807288f451067259b154557cc6333",
+        "+ 0ca9bf75d73467c605995bf76b60e231cc1d5b5d",
+        "+ 8a9c7da1562364ecfba4a233b9a8f3d4aaded75c"
+      ],
+      "status": "already consolidated",
+      "reason": "Final Figma comparison records are byte-identical via selective receipt 92d8cd16. Older Dot source chain is reconciled in existing integration ledger section 8; intermediate contract 0.1.7 forms are superseded.",
+      "covered_by": "92d8cd16"
+    },
+    {
+      "ref": "refs/remotes/origin/docs/meri-host-status-correction",
+      "head": "2dc47441789f61e55a6371d9a30310d11c65b27e",
+      "ancestry": "non-ancestor",
+      "merge_base": "4e1421054df0d32c564f7c9bc75cbd5e5366b428",
+      "ahead_commits": [
+        {
+          "sha": "2dc47441789f61e55a6371d9a30310d11c65b27e",
+          "subject": "docs: clarify governed Meri host and remaining desktop controls"
+        }
+      ],
+      "cherry": [
+        "+ 2dc47441789f61e55a6371d9a30310d11c65b27e"
+      ],
+      "status": "superseded",
+      "reason": "Existing integration ledger section 8 explicitly excludes the 15 October status correction because README/REMAINING were rewritten; its missing status document describes controls now implemented.",
+      "covered_by": "docs/integration/FRONTEND-INTEGRATION-LEDGER.md#8-lines-not-merged-with-evidence"
+    },
+    {
+      "ref": "refs/remotes/origin/docs/portfolio-session-handover-20261012",
+      "head": "c953bc08a9cabc6e38fdacd019017d2e891a3284",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/docs/pr81-image-terminal-20261017",
+      "head": "2c7e73b16e565c6c9c8d1f120a854fee153a667c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/dot/fe-roster-reviewed-core-source-20261018",
+      "head": "78cb98163379830cba2ca81283d7e3833a9a23d5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/dot/fe-roster-service-config-20261018",
+      "head": "6b758cb22ee718e1198c8ebfafe6ba1fe401dbb7",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-desktop-parity-20261016",
+      "head": "3930e36593960966edaa39f8f7f25faa14f9654a",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "3930e36593960966edaa39f8f7f25faa14f9654a",
+          "subject": "Map current Meri desktop designs and preserve qualification gaps"
+        },
+        {
+          "sha": "790983844a2ff002e186ec99b8f4f0cda7c2dfdd",
+          "subject": "Reuse current Meri wordmark across owned desktop masks"
+        },
+        {
+          "sha": "aecec5813d51f2b3f0386130bb350edbb04e3c53",
+          "subject": "fix(meri): bind current Figma header action assets"
+        },
+        {
+          "sha": "8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+          "subject": "Attach exact retry-pin source-analysis evidence"
+        },
+        {
+          "sha": "e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+          "subject": "Pin repeated initial allocation before replacing retained receipt"
+        },
+        {
+          "sha": "4465c270695d59a24c1e11e3bfbd69782f44138d",
+          "subject": "Prepare conditional Meri initial-input consumer and interrupted-flow controls"
+        },
+        {
+          "sha": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+          "subject": "Preserve raw stdout and stderr in input runtime evidence"
+        },
+        {
+          "sha": "fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+          "subject": "Seal Meri input SDK emission and focused runtime evidence"
+        },
+        {
+          "sha": "845cebade818b8ceef1568574662196d813d14d0",
+          "subject": "feat(meri): admit retained conversation input before dispatch"
+        },
+        {
+          "sha": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+          "subject": "fix(meri): retain current prompt while lineage is unavailable"
+        },
+        {
+          "sha": "108e5abdae8b3c59407ddfa5c3821be366a1f085",
+          "subject": "feat(meri): wire native history and immutable turn recovery"
+        },
+        {
+          "sha": "68619614f23116d3735e5634a466243303cc4acd",
+          "subject": "feat(meri): prepare exact conversation selection and logical prompt display"
+        },
+        {
+          "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+          "subject": "docs(meri): retain architecture negatives and source review"
+        },
+        {
+          "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+          "subject": "refactor(meri): separate run command state from observation lifetime"
+        }
+      ],
+      "cherry": [
+        "+ 92ae83cdbf165f36a77280d061b23b329f1b90ca",
+        "+ 36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+        "+ 68619614f23116d3735e5634a466243303cc4acd",
+        "+ 108e5abdae8b3c59407ddfa5c3821be366a1f085",
+        "+ 033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+        "+ 845cebade818b8ceef1568574662196d813d14d0",
+        "+ fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+        "+ b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+        "+ 4465c270695d59a24c1e11e3bfbd69782f44138d",
+        "+ e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+        "+ 8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+        "+ aecec5813d51f2b3f0386130bb350edbb04e3c53",
+        "+ 790983844a2ff002e186ec99b8f4f0cda7c2dfdd",
+        "+ 3930e36593960966edaa39f8f7f25faa14f9654a"
+      ],
+      "status": "already consolidated",
+      "reason": "Dot source chain is fully received by content, not ancestry; integration ledger section 8 records 49 source paths: 30 identical, 16 earlier main-history versions, 3 older intermediates. Figma evidence received at 92d8cd16; later 3.4 shell supersedes old geometry.",
+      "covered_by": "92d8cd16"
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-memory-settings-receive-20261018",
+      "head": "b39ab841aad18cc06613f5aa1e6acbc930b8b6bd",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-new-chat-selector-20261018",
+      "head": "67fdf56b8f63f25c95dd2c0a2ff0139dcfe3cfb8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-ui-followup-20261016",
+      "head": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+          "subject": "docs(meri): retain architecture negatives and source review"
+        },
+        {
+          "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+          "subject": "refactor(meri): separate run command state from observation lifetime"
+        }
+      ],
+      "cherry": [
+        "+ 92ae83cdbf165f36a77280d061b23b329f1b90ca",
+        "+ 36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e"
+      ],
+      "status": "already consolidated",
+      "reason": "Canonical useRunCommands/useLiveRun separation and historical documentation are present. Existing integration ledger section 8 explicitly reconciles this source chain; evolved content is not an unmerged feature.",
+      "covered_by": "docs/integration/FRONTEND-INTEGRATION-LEDGER.md#8-lines-not-merged-with-evidence"
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-ui-history-20261016",
+      "head": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+          "subject": "fix(meri): retain current prompt while lineage is unavailable"
+        },
+        {
+          "sha": "108e5abdae8b3c59407ddfa5c3821be366a1f085",
+          "subject": "feat(meri): wire native history and immutable turn recovery"
+        },
+        {
+          "sha": "68619614f23116d3735e5634a466243303cc4acd",
+          "subject": "feat(meri): prepare exact conversation selection and logical prompt display"
+        },
+        {
+          "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+          "subject": "docs(meri): retain architecture negatives and source review"
+        },
+        {
+          "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+          "subject": "refactor(meri): separate run command state from observation lifetime"
+        }
+      ],
+      "cherry": [
+        "+ 92ae83cdbf165f36a77280d061b23b329f1b90ca",
+        "+ 36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+        "+ 68619614f23116d3735e5634a466243303cc4acd",
+        "+ 108e5abdae8b3c59407ddfa5c3821be366a1f085",
+        "+ 033a9862d1b4f3c2b98ac560d8737e2d8240d4a3"
+      ],
+      "status": "already consolidated",
+      "reason": "History/selection/prompt lineage source received and evolved; exact retained evidence and current history-queries/history-pages owners corroborate integration ledger section 8. Do not restore intermediate versions.",
+      "covered_by": "docs/integration/FRONTEND-INTEGRATION-LEDGER.md#8-lines-not-merged-with-evidence"
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-ui-initial-input-20261016",
+      "head": "8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "8c50fc49ee1f125bd841d3eb3b8959d7d5daec45",
+          "subject": "Attach exact retry-pin source-analysis evidence"
+        },
+        {
+          "sha": "e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+          "subject": "Pin repeated initial allocation before replacing retained receipt"
+        },
+        {
+          "sha": "4465c270695d59a24c1e11e3bfbd69782f44138d",
+          "subject": "Prepare conditional Meri initial-input consumer and interrupted-flow controls"
+        },
+        {
+          "sha": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+          "subject": "Preserve raw stdout and stderr in input runtime evidence"
+        },
+        {
+          "sha": "fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+          "subject": "Seal Meri input SDK emission and focused runtime evidence"
+        },
+        {
+          "sha": "845cebade818b8ceef1568574662196d813d14d0",
+          "subject": "feat(meri): admit retained conversation input before dispatch"
+        },
+        {
+          "sha": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+          "subject": "fix(meri): retain current prompt while lineage is unavailable"
+        },
+        {
+          "sha": "108e5abdae8b3c59407ddfa5c3821be366a1f085",
+          "subject": "feat(meri): wire native history and immutable turn recovery"
+        },
+        {
+          "sha": "68619614f23116d3735e5634a466243303cc4acd",
+          "subject": "feat(meri): prepare exact conversation selection and logical prompt display"
+        },
+        {
+          "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+          "subject": "docs(meri): retain architecture negatives and source review"
+        },
+        {
+          "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+          "subject": "refactor(meri): separate run command state from observation lifetime"
+        }
+      ],
+      "cherry": [
+        "+ 92ae83cdbf165f36a77280d061b23b329f1b90ca",
+        "+ 36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+        "+ 68619614f23116d3735e5634a466243303cc4acd",
+        "+ 108e5abdae8b3c59407ddfa5c3821be366a1f085",
+        "+ 033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+        "+ 845cebade818b8ceef1568574662196d813d14d0",
+        "+ fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+        "+ b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+        "+ 4465c270695d59a24c1e11e3bfbd69782f44138d",
+        "+ e8d848e13b60dcc0b52da520a5af742a86e8eed5",
+        "+ 8c50fc49ee1f125bd841d3eb3b8959d7d5daec45"
+      ],
+      "status": "already consolidated",
+      "reason": "Initial-input source received under newer contracts 0.1.10. Retry-pin source and nine evidence files are exact main blobs; older 0.1.7/0.1.8 preparation is superseded as documented by HISTORICAL-STATUS-20261018.md.",
+      "covered_by": "docs/meri-figma-34-20261015/HISTORICAL-STATUS-20261018.md"
+    },
+    {
+      "ref": "refs/remotes/origin/dot/meri-ui-input-20261016",
+      "head": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+          "subject": "Preserve raw stdout and stderr in input runtime evidence"
+        },
+        {
+          "sha": "fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+          "subject": "Seal Meri input SDK emission and focused runtime evidence"
+        },
+        {
+          "sha": "845cebade818b8ceef1568574662196d813d14d0",
+          "subject": "feat(meri): admit retained conversation input before dispatch"
+        },
+        {
+          "sha": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+          "subject": "fix(meri): retain current prompt while lineage is unavailable"
+        },
+        {
+          "sha": "108e5abdae8b3c59407ddfa5c3821be366a1f085",
+          "subject": "feat(meri): wire native history and immutable turn recovery"
+        },
+        {
+          "sha": "68619614f23116d3735e5634a466243303cc4acd",
+          "subject": "feat(meri): prepare exact conversation selection and logical prompt display"
+        },
+        {
+          "sha": "36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+          "subject": "docs(meri): retain architecture negatives and source review"
+        },
+        {
+          "sha": "92ae83cdbf165f36a77280d061b23b329f1b90ca",
+          "subject": "refactor(meri): separate run command state from observation lifetime"
+        }
+      ],
+      "cherry": [
+        "+ 92ae83cdbf165f36a77280d061b23b329f1b90ca",
+        "+ 36974aa470d9e1ae5b6cd89c16b8e19dc77e2b6e",
+        "+ 68619614f23116d3735e5634a466243303cc4acd",
+        "+ 108e5abdae8b3c59407ddfa5c3821be366a1f085",
+        "+ 033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+        "+ 845cebade818b8ceef1568574662196d813d14d0",
+        "+ fdd3f07abc14a662e808b16b75b59c6b530e5cab",
+        "+ b2c7dab2bfd159b2d54e2b0149226811c593fb4e"
+      ],
+      "status": "already consolidated",
+      "reason": "Input SDK/UI received under newer 0.1.10 contracts. Raw runtime evidence is byte-identical; older intermediate builds are superseded, not missing. Existing integration ledger section 8 gives the source disposition.",
+      "covered_by": "docs/integration/FRONTEND-INTEGRATION-LEDGER.md#8-lines-not-merged-with-evidence"
+    },
+    {
+      "ref": "refs/remotes/origin/fable/adj-d3-first-connect-20261020",
+      "head": "87d804bc3cecab69fb2cabe887d78c5cb81f9daf",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/adj-fe-first-connect-release-20261020",
+      "head": "87d804bc3cecab69fb2cabe887d78c5cb81f9daf",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/adj-g-stream-window-20261020",
+      "head": "6043b76e28d0fedf99b184c9b7cbd6fb3cd6baca",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/consolidate-preview-onto-main-20261020",
+      "head": "2abf9cdd9e402f7961d04f7136f1810c6eb69da5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "PR113 ancestry marker is reachable, but 2abf9cdd records the serving preview line with an unchanged tree (ours-style provenance merge). Ancestry alone is not proof every parent file won; its known fixes are represented by main successors 804c4383, 843063ad, 7e988fd6 and e6ed58f8. Source receipt/semantic supersession remains authoritative.",
+      "covered_by": "main@4f9a7e8dcaa9ba03494dc5a49559daf70cea5100"
+    },
+    {
+      "ref": "refs/remotes/origin/fable/fe-intents-20261019",
+      "head": "496f9b6c7fcb72af086e49b9230a5008f2339fa8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/frontend-integration-20261018",
+      "head": "271a267da93aa952a89b208d1f42eed0ffb080c2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/meri-everything-heading-specs-20261021",
+      "head": "b6336be53c3515115122578ad22f659cc2fd6ab5",
+      "ancestry": "non-ancestor",
+      "merge_base": "87d804bc3cecab69fb2cabe887d78c5cb81f9daf",
+      "ahead_commits": [
+        {
+          "sha": "b6336be53c3515115122578ad22f659cc2fd6ab5",
+          "subject": "test(meri): expect the scoped Modules hub heading in action host navigation"
+        },
+        {
+          "sha": "4a381f8d683864812780d9d20a60d0f4f407bf22",
+          "subject": "test(meri): serve the Core client roster in the action host fixture"
+        },
+        {
+          "sha": "aa0a9df1bd165a47f550e41fc1f5812a724e6784",
+          "subject": "test(meri): expect the scoped Modules hub heading"
+        },
+        {
+          "sha": "dc9a18d28ea934f5e655d13ea1e8686225bb4d73",
+          "subject": "test(meri): check the conversation session hint after the transcript renders"
+        },
+        {
+          "sha": "8c5f53bcac05d2822a50154dec34b93eeaf01974",
+          "subject": "test(meri): match browser specs to the current session-header and history contracts"
+        }
+      ],
+      "cherry": [
+        "+ 8c5f53bcac05d2822a50154dec34b93eeaf01974",
+        "+ dc9a18d28ea934f5e655d13ea1e8686225bb4d73",
+        "+ aa0a9df1bd165a47f550e41fc1f5812a724e6784",
+        "+ 4a381f8d683864812780d9d20a60d0f4f407bf22",
+        "+ b6336be53c3515115122578ad22f659cc2fd6ab5"
+      ],
+      "status": "integrate",
+      "reason": "PARTIAL: receive only history-body/session-hint timing and Files session-header corrections in two files (8c5f53bc selected paths plus dc9a18d2). Heading-only aa0a9df1/b6336be5 contradict newer Figma3.4 main heading restored in 1d94c922; 4a381f8d roster already exists; task-command donor assertions are weaker than main. See frontend-browser-spec-review.md.",
+      "source_lane_head": "b6336be53c3515115122578ad22f659cc2fd6ab5",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/origin/fable/meri-host-archived-client-guard-20261017",
+      "head": "31a140cddf798c32b5cc45ad22e7b672312b3ca3",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/meri-host-size-split-20261017",
+      "head": "4ea553fe71682b22192ab09cc6663b97971c21df",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fable/meri-stale-browser-specs-20261020",
+      "head": "dc9a18d28ea934f5e655d13ea1e8686225bb4d73",
+      "ancestry": "non-ancestor",
+      "merge_base": "87d804bc3cecab69fb2cabe887d78c5cb81f9daf",
+      "ahead_commits": [
+        {
+          "sha": "dc9a18d28ea934f5e655d13ea1e8686225bb4d73",
+          "subject": "test(meri): check the conversation session hint after the transcript renders"
+        },
+        {
+          "sha": "8c5f53bcac05d2822a50154dec34b93eeaf01974",
+          "subject": "test(meri): match browser specs to the current session-header and history contracts"
+        }
+      ],
+      "cherry": [
+        "+ 8c5f53bcac05d2822a50154dec34b93eeaf01974",
+        "+ dc9a18d28ea934f5e655d13ea1e8686225bb4d73"
+      ],
+      "status": "integrate",
+      "reason": "PARTIAL: 8c5f53bc history-body + Files header paths and dc9a18d2 timing are unreceived. Preserve main task-command direct header capture/count and navigation test. Same two-file delta is contained by b6336be5; receive once.",
+      "source_lane_head": "dc9a18d28ea934f5e655d13ea1e8686225bb4d73",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/origin/feat/capiro-directory-objective-20261014",
+      "head": "0a023523456a1f8fbaa61aec4f34a27a8d19a59a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/capiro-meri-conversations-20261014",
+      "head": "f8eadc87adb187fbb3d9593ef873f2520fcf2177",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/capiro-objective-resource-choices-20261014",
+      "head": "6eacf3459d1191b5544b337ed00288bec55f257d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/governed-objective-output-receiver-20261017",
+      "head": "f81f75974d314a25043bb4073e64c756dae1ffd5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/governed-objective-planner-current-read-ui-20261017",
+      "head": "8278c2d487624910a4878eaa37822771c4f9cf23",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/governed-objective-read-adapter-20261017",
+      "head": "57efa4afca37b1708e8cad2c5d7b670c91c0fb60",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/governed-objective-strategy-intake-ui-20261017",
+      "head": "de59687eb0067b19cc4ff2ffceddb19419ae9d8e",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/governed-objective-ui-plan-20261017",
+      "head": "aceb18ea56bd99a48e0ca527ce0f3e7559092c05",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/meri-first-chat-bootstrap-preview-20261016",
+      "head": "8fd2c4c4556e5fed37da012293a4f1b4d2088d14",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/meri-non-meri-desktop-integration-20261016",
+      "head": "2a6b817fb27aa9524ab5036a5b8e1bf0955a26c8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-coherent-desktop-read-20261017",
+      "head": "ddffefc67d68da0acee4b52ef4e3cbad278b0895",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-desktop-continuation-20261016",
+      "head": "d7b6d182356649214e956707e72672464320d699",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-desktop-product-fixes-20261017",
+      "head": "f3e248252cc9860665300ee1765d1e2702969ced",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-desktop-strategy-integration-20261017",
+      "head": "36e6b70b9c086ba46bf24568865c50ba3a455ca9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-next-shipment-receiving-20261017",
+      "head": "de587eec44f2dc45565bfbe8bd4a10bb0d301fde",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-objective-plan-bindings",
+      "head": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/non-meri-url-state-personnel-20261017",
+      "head": "7e0ca0ffeee8e49b628776ffeb4bce0bd568fde3",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/objective-generation-receiving",
+      "head": "9cef177eb294167ea3fbc46289cabbd8c6b8f7c9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/objective-planner-receiving",
+      "head": "ee5f04469c1fbf0e14842785e345ab5964770086",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/planner-markdown-toolbar",
+      "head": "f86895e185a099d7bd655d7fcf5481cdb237e6b1",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/portfolio-commitment-due-day-20261017",
+      "head": "009430af25c6a5a97f74a5ae18a0c3a0b1749ecd",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/pr60-existing-clerk-issuer-handoff-20261017",
+      "head": "4f820f588386e6b023f55714c0e6c11091ecef63",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/pr64-native-session-authority-20261017",
+      "head": "77d3fdd3ce050540003219836a0c3bfb1f6eafbb",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/pr70-first-chat-architecture-recovery-20261017",
+      "head": "01cf1df981250841d40df5fe0389f47168593cce",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/pr70-first-chat-preview-config-20261017",
+      "head": "7e0c5da4e8319b0ca3e34824d22b30b02abd2b14",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/pr82-research-card-figma-20261017",
+      "head": "f6261d706a4253373c0baf8928c8e17c0c25b2be",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/research-create-intent-retry-20261017",
+      "head": "fc358a9183066381ec3cb04719e2a451e31c2957",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/research-create-reload-persistence-20261017",
+      "head": "eee2791a63a9bd6b5ef0f8ea3b50bf52f5f3fc92",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/feat/settings-profile-dialog-write-lifetime-20261017",
+      "head": "2220a4a6b2295b8420639587123b69d72ac2ff84",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/desktop-export-on-checkpoint",
+      "head": "f5a0c7639b99b25cdca5c49b6977c5592313ab3e",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/desktop-time-pending-catalog",
+      "head": "af68cd562227befba4f0dab67df4cd8ff56b218e",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/engagement-workload-contract-closeout",
+      "head": "2758775ddf0e3b17898370be61540498344a9f57",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/meri-audit-recovery-20261018",
+      "head": "5c784e3e46114816ba57db17ad7a2c2013a8d81a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/meri-exact-run-reconnect",
+      "head": "c060f0462acd79feabe4d4ca5818abf00380189e",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/non-meri-settings-comment-closure",
+      "head": "e9df91d876eaad05d13fdd0707c1fe39d5affb62",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/planner-canonical-request-origin",
+      "head": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/planner-qualification-successor",
+      "head": "4c852b9477801d2671f436af7aa15ec5882f49c3",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/portable-desktop-test-harness",
+      "head": "74a2008a86ad54ce303f5f58e5529803fa096aa5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/rich-document-boundary-keyboard",
+      "head": "4e1421054df0d32c564f7c9bc75cbd5e5366b428",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/fix/selected-meeting-desktop-parity",
+      "head": "9b7e087ca1e7cc9c6dbbf60fe4e4c7eba4c1cb66",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-archive-diagnostics-20261012",
+      "head": "753eb6701e62f8f3f5ace16f86c967bdd372298b",
+      "ancestry": "non-ancestor",
+      "merge_base": "3a83e874383d9129726689bb8fc66438c2f18f18",
+      "ahead_commits": [
+        {
+          "sha": "753eb6701e62f8f3f5ace16f86c967bdd372298b",
+          "subject": "Document exact source archive timezone mismatch and UTC reproduction"
+        }
+      ],
+      "cherry": [
+        "+ 753eb6701e62f8f3f5ace16f86c967bdd372298b"
+      ],
+      "status": "intentional exclusion",
+      "reason": "Historical ZIP timezone diagnostics only (32 files, about 420k lines), no missing executable product source. Existing integration ledger section 8 deliberately keeps this archive on its branch.",
+      "covered_by": "753eb6701e62f8f3f5ace16f86c967bdd372298b"
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-build-execution-20261012",
+      "head": "305180e53766387ff56b2689505b44272250217d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-contracts-20261012",
+      "head": "a397d45c461b24eb741afcd3b7cf28ca354d1e96",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-followup-20261012",
+      "head": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-functional-preview-20261014",
+      "head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-input-accessibility-20261013",
+      "head": "bbf1b1b42b213cf971681fde79931afade0804a9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-layout-received-candidate-20261014",
+      "head": "6505e5014886625cad7dacd70fb11f607445791a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-meri-workflow-20261013",
+      "head": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-newsletter-port-20261012",
+      "head": "46ebdd448ef55e88c7a4083fb4586322757a14f8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-onboard-port-20261013",
+      "head": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-p1-successor-20261012",
+      "head": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-preview-candidate-20261014",
+      "head": "ee9d872743f44f927fa924eebd764da8e093888c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-preview-read-only-20261013",
+      "head": "6780c114a1d216fa857182a62f9b3610b9d76121",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-preview-receiving-20261013",
+      "head": "23df0b04fe643ba7ab64395d7a471ddb20172db6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-preview-visual-20261013",
+      "head": "c045668da6fc3b630e6d83432e608c9d20c86afe",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-receiving-20261014",
+      "head": "348c98dfe1962fac962157eb785732281a282d06",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-remaining-20261012",
+      "head": "3a83e874383d9129726689bb8fc66438c2f18f18",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-shared-20261012",
+      "head": "d393f08a551f00ee507636264a01657ff0f64655",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-successor-candidate-20261014",
+      "head": "72b6e1279506f0a38d7d34794c7cc9ba17744043",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-unified-20261013",
+      "head": "890a993a26dcee66ca3190ee6af4611e33171240",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-unified-desktop-20261014",
+      "head": "cc73ead8f591b31b2f2cfc8bb008913408d7a5e0",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/integration/capiro-visual-closeout-20261012",
+      "head": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/main",
+      "head": "4f9a7e8dcaa9ba03494dc5a49559daf70cea5100",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/meri/f34-evidence-c7e06000",
+      "head": "59be1a24239c9c1af2c174cdddad59882b98db23",
+      "ancestry": "non-ancestor",
+      "merge_base": "c7e060007f5cd5a9b786442d0cc168a73c5565a8",
+      "ahead_commits": [
+        {
+          "sha": "59be1a24239c9c1af2c174cdddad59882b98db23",
+          "subject": "Add portable Meri frontend qualification evidence for c7e06000"
+        }
+      ],
+      "cherry": [
+        "+ 59be1a24239c9c1af2c174cdddad59882b98db23"
+      ],
+      "status": "intentional exclusion",
+      "reason": "Portable qualification evidence for historical c7e06000 only (256 files, about 2.27M lines), not new product source or current acceptance. Existing integration ledger section 8 deliberately keeps it on its branch.",
+      "covered_by": "59be1a24239c9c1af2c174cdddad59882b98db23"
+    },
+    {
+      "ref": "refs/remotes/origin/meri/figma-34-ui",
+      "head": "c7e060007f5cd5a9b786442d0cc168a73c5565a8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/meri/live-wiring-20261016",
+      "head": "0b026499187c8379f8f307a06c353cdd166b9c3f",
+      "ancestry": "non-ancestor",
+      "merge_base": "2acbd89cf70a2d8bc70fa5be7059abb8d79ca6b2",
+      "ahead_commits": [
+        {
+          "sha": "0b026499187c8379f8f307a06c353cdd166b9c3f",
+          "subject": "Record final browser and build check counts in the live wiring report"
+        }
+      ],
+      "cherry": [
+        "+ 0b026499187c8379f8f307a06c353cdd166b9c3f"
+      ],
+      "status": "superseded",
+      "reason": "Only count-claim doc update 0b026499 is absent. It would conflict with main’s explicit historical correction (architecture FAIL, browser INCOMPLETE, build UNRUN). No independently bound evidence was established in this audit to replace the correction.",
+      "covered_by": "docs/meri-figma-34-20261015/HISTORICAL-STATUS-20261018.md"
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-auth-initialization-20261014",
+      "head": "6eeac2b95f5775447e9dd8ec25b9c556686d39e4",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-authorized-layout-20261014",
+      "head": "8f07bead475a186e470eb0b50f2e4fb03d4c40f5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-browser-release-20261014",
+      "head": "20568813c9dc9ce161962e159e0a3751a196195c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-customize-entry-20261014",
+      "head": "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-desktop-closeout-20261014",
+      "head": "0b6c7ecf2c3f0f66dee5a0e88cb67528a6cc5fc2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-desktop-content-20261014",
+      "head": "882c7b51d79c6d20ace685fb32b5c76a1ef312bf",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-desktop-detail-content-20261014",
+      "head": "7d7bf4c550e8d906c6ef3498ff79327820519daa",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-desktop-details-20261014",
+      "head": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-existing-api-feedback-20261014",
+      "head": "348bf98481268a5f06e26a924f0985b242265cbb",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-figma-parity-20261014",
+      "head": "6dcb3923cec125be94fc72e80e31bec635687cd2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-files-selection-20261014",
+      "head": "38c53fb0c8f05f598d835122c0ce7fd0f30a04fc",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-meri-phone-parity-20261014",
+      "head": "d542239d13fd1af674c1fecf8130d68f3f6849ed",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-next-functional-20261014",
+      "head": "247de58f00a1fea50c25a3400463103885014f4f",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-outreach-pending-20261014",
+      "head": "93ad8792a95bfc1a15a691c608b5fe98f0ca7956",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-portfolio-modules-acceptance-20261014",
+      "head": "bded987746d1f1a263bb4209c90b21ac5c978f40",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-preview-favicon-20261014",
+      "head": "a2d210a728a8ec6d2f1f2137b1c3b8ea8dbb2b82",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-production-data-20261014",
+      "head": "7e170defb9442aa3ce0fd1d5b14060af831ce8d0",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-service-error-feedback-20261014",
+      "head": "d034866de50ac006a9cf49607f6d9e9d63c9b150",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-shipping-browser-20261013",
+      "head": "6dacdaca3507bf75a472f5860ac72fc483377248",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-strategy-proposal-compatibility-20261014",
+      "head": "038ee79e93e9b4d1a371a5d38e17dd339b1af859",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/repair/capiro-workspace-admission-20261014",
+      "head": "3059abec94e2d6b9790758bb9563afdb8091b143",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/review/capiro-sdk-015-20261014",
+      "head": "98c6eefea0953fbecccd88de43161c6bc809f300",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/task/meri-cited-answer-20261011",
+      "head": "b697cfcba6589ef193de4e3bcb25aad773871125",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/task/meri-ui-publish-20261011",
+      "head": "3cc30ff3182e8050d563516607866cf07efe2aef",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/task/modules-settings-20261011",
+      "head": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/test/meri-discovery-state",
+      "head": "3703d08a89ee91e495985fa5b56cbbd8c8006c7b",
+      "ancestry": "non-ancestor",
+      "merge_base": "c060f0462acd79feabe4d4ca5818abf00380189e",
+      "ahead_commits": [
+        {
+          "sha": "3703d08a89ee91e495985fa5b56cbbd8c8006c7b",
+          "subject": "test: prepare scoped Meri discovery paging state"
+        }
+      ],
+      "cherry": [
+        "+ 3703d08a89ee91e495985fa5b56cbbd8c8006c7b"
+      ],
+      "status": "superseded",
+      "reason": "Unconsumed preparatory reducer superseded by canonical useConversationDiscovery in shared/meri-conversations/history-queries.ts and scope-checked history-pages.ts. Existing integration ledger section 8 explicitly excludes it; adding it creates a second owner.",
+      "covered_by": "docs/integration/FRONTEND-INTEGRATION-LEDGER.md#8-lines-not-merged-with-evidence"
+    },
+    {
+      "ref": "refs/remotes/origin/test/pr52-auth-readiness-controls",
+      "head": "4ac87e7554eaab5defde9abd43ee843b54029a53",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/work/engagement-outreach-only-20261017",
+      "head": "b57072a5e3bb3e2028e64ce55bca9cf576f6f014",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/work/first-chat-preview-native-gets-20261017",
+      "head": "411c0cf0335fcfc047e2c61be8525a31a48171b2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/work/first-chat-proxy-origin-20261017",
+      "head": "b071de88231654f699dc2baee0ddd255bfa4643a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/work/meri-task-command-root-origin-20261017",
+      "head": "0936b4b66c9305c3e358d6b94ec888349f62888d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/origin/work/pr87-pr90-local-receiving-20261017",
+      "head": "143c20a178665e0eb5c830acb3cb7d60351e5f29",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/1",
+      "head": "b697cfcba6589ef193de4e3bcb25aad773871125",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/10",
+      "head": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/100",
+      "head": "6b758cb22ee718e1198c8ebfafe6ba1fe401dbb7",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/101",
+      "head": "78cb98163379830cba2ca81283d7e3833a9a23d5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/102",
+      "head": "496f9b6c7fcb72af086e49b9230a5008f2339fa8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/103",
+      "head": "442f188c6636ee4d34566e92aad34261d2dd402a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/104",
+      "head": "336a093e9debd3b067468510403219731820ee4d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/105",
+      "head": "3a34ab25a6cc0929294901039aeed0baa609f289",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/106",
+      "head": "553b848303a94b206c3c2efafc0c29c2cb40414a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/107",
+      "head": "ace46f896c98c8285e5da9231e813885d7979a7b",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/108",
+      "head": "4dc8727f73da851a52c36a17f99589f6391df8b1",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/109",
+      "head": "6da70dc3d968360d296eaf191462b15f7978dd30",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/11",
+      "head": "e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/110",
+      "head": "043c1102c322098b01173e223ca7a33a1f4c08fb",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/111",
+      "head": "e6180219b589ae8fced7155d1c451840c8663d94",
+      "ancestry": "non-ancestor",
+      "merge_base": "5cd5f20d0f2919dce915a67a46487ce81f3e4f15",
+      "ahead_commits": [
+        {
+          "sha": "e6180219b589ae8fced7155d1c451840c8663d94",
+          "subject": "docs(preview): publish bounded roster readiness checklist"
+        },
+        {
+          "sha": "3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+          "subject": "fix(preview): advance held Core roster source pin"
+        }
+      ],
+      "cherry": [
+        "+ 3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+        "+ e6180219b589ae8fced7155d1c451840c8663d94"
+      ],
+      "status": "integrate",
+      "reason": "No current receiver/active-owner evidence. Receive PR111 held Core source pin and bounded readiness docs with current defaults/holds preserved; backend pin compatibility remains a coordinated prerequisite.",
+      "source_lane_head": "e6180219b589ae8fced7155d1c451840c8663d94",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/pr/112",
+      "head": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+      "ancestry": "non-ancestor",
+      "merge_base": "5cd5f20d0f2919dce915a67a46487ce81f3e4f15",
+      "ahead_commits": [
+        {
+          "sha": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+          "subject": "docs(preview): publish qualified frontend image and held rollout receipt"
+        },
+        {
+          "sha": "e6180219b589ae8fced7155d1c451840c8663d94",
+          "subject": "docs(preview): publish bounded roster readiness checklist"
+        },
+        {
+          "sha": "3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+          "subject": "fix(preview): advance held Core roster source pin"
+        }
+      ],
+      "cherry": [
+        "+ 3dcfc03f69cd8ab9286960b20a2dae2f28d6a3c3",
+        "+ e6180219b589ae8fced7155d1c451840c8663d94",
+        "+ cfabbc30c88f5d0078e95ac8062116fc636c13a9"
+      ],
+      "status": "integrate",
+      "reason": "No current receiver/active-owner evidence. Receive the historical PR112 build and held image-only proposal records without claiming they qualify the newer consolidated source or executing rollout. Includes PR111 predecessors.",
+      "source_lane_head": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+      "current_receiver": null
+    },
+    {
+      "ref": "refs/remotes/pr/113",
+      "head": "2abf9cdd9e402f7961d04f7136f1810c6eb69da5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "PR113 ancestry marker is reachable, but 2abf9cdd records the serving preview line with an unchanged tree (ours-style provenance merge). Ancestry alone is not proof every parent file won; its known fixes are represented by main successors 804c4383, 843063ad, 7e988fd6 and e6ed58f8. Source receipt/semantic supersession remains authoritative.",
+      "covered_by": "main@4f9a7e8dcaa9ba03494dc5a49559daf70cea5100"
+    },
+    {
+      "ref": "refs/remotes/pr/12",
+      "head": "305180e53766387ff56b2689505b44272250217d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/13",
+      "head": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/14",
+      "head": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/15",
+      "head": "3a83e874383d9129726689bb8fc66438c2f18f18",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/16",
+      "head": "46ebdd448ef55e88c7a4083fb4586322757a14f8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/17",
+      "head": "6dacdaca3507bf75a472f5860ac72fc483377248",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/18",
+      "head": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/19",
+      "head": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/2",
+      "head": "8e8e6999c385beccd245e94e8f32a8a3120e8131",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/20",
+      "head": "890a993a26dcee66ca3190ee6af4611e33171240",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/21",
+      "head": "c045668da6fc3b630e6d83432e608c9d20c86afe",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/22",
+      "head": "bbf1b1b42b213cf971681fde79931afade0804a9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/23",
+      "head": "6780c114a1d216fa857182a62f9b3610b9d76121",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/24",
+      "head": "23df0b04fe643ba7ab64395d7a471ddb20172db6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/25",
+      "head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/26",
+      "head": "348bf98481268a5f06e26a924f0985b242265cbb",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/27",
+      "head": "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/28",
+      "head": "38c53fb0c8f05f598d835122c0ce7fd0f30a04fc",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/29",
+      "head": "247de58f00a1fea50c25a3400463103885014f4f",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/3",
+      "head": "02c02d95bdf3949662b9123f425271c6491ffdab",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/30",
+      "head": "93ad8792a95bfc1a15a691c608b5fe98f0ca7956",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/31",
+      "head": "3059abec94e2d6b9790758bb9563afdb8091b143",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/32",
+      "head": "6eeac2b95f5775447e9dd8ec25b9c556686d39e4",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/33",
+      "head": "8f07bead475a186e470eb0b50f2e4fb03d4c40f5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/34",
+      "head": "a2d210a728a8ec6d2f1f2137b1c3b8ea8dbb2b82",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/35",
+      "head": "0a023523456a1f8fbaa61aec4f34a27a8d19a59a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/36",
+      "head": "7e170defb9442aa3ce0fd1d5b14060af831ce8d0",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/37",
+      "head": "f8eadc87adb187fbb3d9593ef873f2520fcf2177",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/38",
+      "head": "6eacf3459d1191b5544b337ed00288bec55f257d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/39",
+      "head": "348c98dfe1962fac962157eb785732281a282d06",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/4",
+      "head": "3cc30ff3182e8050d563516607866cf07efe2aef",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/40",
+      "head": "d034866de50ac006a9cf49607f6d9e9d63c9b150",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/41",
+      "head": "6dcb3923cec125be94fc72e80e31bec635687cd2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/42",
+      "head": "ee9d872743f44f927fa924eebd764da8e093888c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/43",
+      "head": "d542239d13fd1af674c1fecf8130d68f3f6849ed",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/44",
+      "head": "bded987746d1f1a263bb4209c90b21ac5c978f40",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/45",
+      "head": "20568813c9dc9ce161962e159e0a3751a196195c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/46",
+      "head": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/47",
+      "head": "882c7b51d79c6d20ace685fb32b5c76a1ef312bf",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/48",
+      "head": "038ee79e93e9b4d1a371a5d38e17dd339b1af859",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/49",
+      "head": "7d7bf4c550e8d906c6ef3498ff79327820519daa",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/5",
+      "head": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/50",
+      "head": "cc73ead8f591b31b2f2cfc8bb008913408d7a5e0",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/51",
+      "head": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/52",
+      "head": "0b6c7ecf2c3f0f66dee5a0e88cb67528a6cc5fc2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/53",
+      "head": "e9df91d876eaad05d13fdd0707c1fe39d5affb62",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/54",
+      "head": "2758775ddf0e3b17898370be61540498344a9f57",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/55",
+      "head": "9b7e087ca1e7cc9c6dbbf60fe4e4c7eba4c1cb66",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/56",
+      "head": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/57",
+      "head": "d7b6d182356649214e956707e72672464320d699",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/58",
+      "head": "4e1421054df0d32c564f7c9bc75cbd5e5366b428",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/59",
+      "head": "2a6b817fb27aa9524ab5036a5b8e1bf0955a26c8",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/6",
+      "head": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/60",
+      "head": "8fd2c4c4556e5fed37da012293a4f1b4d2088d14",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/61",
+      "head": "bd9e0d03c54ef4fbb57010c3b97cfb3d77bdf2b9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/62",
+      "head": "9e6d80843b0a46a862f7613b4ab9b08d925d7b17",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/63",
+      "head": "1c0c059466963a3a5b4757d05f44701eb2007347",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/64",
+      "head": "4f820f588386e6b023f55714c0e6c11091ecef63",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/65",
+      "head": "b12978025858aac65169661e3bf04f13c3ab3faa",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/66",
+      "head": "aceb18ea56bd99a48e0ca527ce0f3e7559092c05",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/67",
+      "head": "77d3fdd3ce050540003219836a0c3bfb1f6eafbb",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/68",
+      "head": "57efa4afca37b1708e8cad2c5d7b670c91c0fb60",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/69",
+      "head": "f81f75974d314a25043bb4073e64c756dae1ffd5",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/7",
+      "head": "c953bc08a9cabc6e38fdacd019017d2e891a3284",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/70",
+      "head": "31a140cddf798c32b5cc45ad22e7b672312b3ca3",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/71",
+      "head": "a841d5aa8f683c8f1497685c1a6d96f3afe577a6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/72",
+      "head": "009430af25c6a5a97f74a5ae18a0c3a0b1749ecd",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/73",
+      "head": "2220a4a6b2295b8420639587123b69d72ac2ff84",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/74",
+      "head": "fc358a9183066381ec3cb04719e2a451e31c2957",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/75",
+      "head": "8278c2d487624910a4878eaa37822771c4f9cf23",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/76",
+      "head": "eee2791a63a9bd6b5ef0f8ea3b50bf52f5f3fc92",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/77",
+      "head": "ddffefc67d68da0acee4b52ef4e3cbad278b0895",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/78",
+      "head": "7e0ca0ffeee8e49b628776ffeb4bce0bd568fde3",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/79",
+      "head": "7e0c5da4e8319b0ca3e34824d22b30b02abd2b14",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/8",
+      "head": "d393f08a551f00ee507636264a01657ff0f64655",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/80",
+      "head": "de59687eb0067b19cc4ff2ffceddb19419ae9d8e",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/81",
+      "head": "01cf1df981250841d40df5fe0389f47168593cce",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/82",
+      "head": "36e6b70b9c086ba46bf24568865c50ba3a455ca9",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/83",
+      "head": "f6261d706a4253373c0baf8928c8e17c0c25b2be",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/84",
+      "head": "2c7e73b16e565c6c9c8d1f120a854fee153a667c",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/85",
+      "head": "f3e248252cc9860665300ee1765d1e2702969ced",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/86",
+      "head": "de587eec44f2dc45565bfbe8bd4a10bb0d301fde",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/87",
+      "head": "b57072a5e3bb3e2028e64ce55bca9cf576f6f014",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/88",
+      "head": "411c0cf0335fcfc047e2c61be8525a31a48171b2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/89",
+      "head": "0936b4b66c9305c3e358d6b94ec888349f62888d",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/9",
+      "head": "a397d45c461b24eb741afcd3b7cf28ca354d1e96",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/90",
+      "head": "b071de88231654f699dc2baee0ddd255bfa4643a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/91",
+      "head": "143c20a178665e0eb5c830acb3cb7d60351e5f29",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/92",
+      "head": "271a267da93aa952a89b208d1f42eed0ffb080c2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/93",
+      "head": "b39ab841aad18cc06613f5aa1e6acbc930b8b6bd",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/94",
+      "head": "e1de3f1d41f508629a79c198a21b71103e17c245",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/95",
+      "head": "88088d9ca86dc9c2f8ea9b2e42507348ca7652b1",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/96",
+      "head": "45528667db95f805660d2ded5f7a20b5c91c909b",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/97",
+      "head": "d9959a9cee267365d1f13a72351802a66c6dbfe2",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/98",
+      "head": "5c784e3e46114816ba57db17ad7a2c2013a8d81a",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/remotes/pr/99",
+      "head": "f13dae4d6ab696f2fedde53ea18f0ed2018e9bf6",
+      "ancestry": "ancestor",
+      "ahead_commits": [],
+      "status": "already consolidated",
+      "reason": "Exact head is reachable from refreshed main."
+    }
+  ],
+  "local_refs": [
+    {
+      "ref": "refs/heads/codex/frontend-build-receipt-20261019",
+      "head": "cfabbc30c88f5d0078e95ac8062116fc636c13a9",
+      "status": "intentional exclusion",
+      "reason": "Duplicates an existing published lane; preserve and do not create competing source."
+    },
+    {
+      "ref": "refs/heads/codex/frontend-core-roster-pin-20261019",
+      "head": "e6180219b589ae8fced7155d1c451840c8663d94",
+      "status": "intentional exclusion",
+      "reason": "Duplicates an existing published lane; preserve and do not create competing source."
+    },
+    {
+      "ref": "refs/heads/codex/meri-stalled-status-20261019",
+      "head": "0e4a9d748591774e838592ab9bccf89706392e59",
+      "status": "integrate",
+      "reason": "Only additional unpublished product-source candidate in the cloned local refs: honest unknown-run status after observation stalls, with behavior test. Frontend owner received it as -x supplemental commit 180ca0be on codex/missed-stalled-status-20261021, then continued a companion footer correction; final head/testing owned by parent."
+    },
+    {
+      "ref": "refs/heads/codex/portfolio-continuity-20261019",
+      "head": "5cd5f20d0f2919dce915a67a46487ce81f3e4f15",
+      "status": "already consolidated",
+      "reason": "Exact local head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/heads/codex/portfolio-meeting-continuity-20261019",
+      "head": "ace46f896c98c8285e5da9231e813885d7979a7b",
+      "status": "already consolidated",
+      "reason": "Exact local head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/heads/codex/ui-receiving-20261019",
+      "head": "6da70dc3d968360d296eaf191462b15f7978dd30",
+      "status": "already consolidated",
+      "reason": "Exact local head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/heads/codex/ui-receiving-all-three-20261019",
+      "head": "043c1102c322098b01173e223ca7a33a1f4c08fb",
+      "status": "already consolidated",
+      "reason": "Exact local head is reachable from refreshed main."
+    },
+    {
+      "ref": "refs/heads/main",
+      "head": "816b0f1470efe978d22856beee9c8133055ab5bd",
+      "status": "already consolidated",
+      "reason": "Exact local head is reachable from refreshed main."
+    }
+  ],
+  "scope": "Read-only inventory of all 151 fetched remote branches and 113 PR heads plus local heads retained in the isolated clone. Corrected scope: skip only work demonstrably covered by an identified current consolidation receiver or active owner at an exact head; old donor/PR existence alone is insufficient. No merge, push, checkout mutation, runtime enablement, or deployment by this auditor.",
+  "method": [
+    "Exact main ancestry for every fetched head.",
+    "git cherry patch equivalence for non-ancestor heads.",
+    "Per-file Git blob comparison for 40 distinct non-ancestor commits (including two merge commits); main reachable-object membership distinguishes evolved files from absent bytes. Merge composition was reconciled through documented source receipt, not an empty diff-tree result.",
+    "Manual semantic comparison and existing integration ledger section 8 for squashed, superseded, and intentionally separate history.",
+    "Local refs checked separately; only 0e4a9d74 adds unpublished product source beyond the known published lanes."
+  ],
+  "caveats": [
+    "Reference coverage is complete for the fetched snapshot, not deleted/unadvertised remote refs or every unrelated local checkout.",
+    "An ancestor may have been recorded by an ours merge or later reverted. This audit uses documented/content reconciliation for known provenance-only mergers (especially PR113), not ancestry as universal proof of current behavior.",
+    "Existing donor branches do not prove a current receiver/active owner. Known memory, PR111/112, and partial browser gaps are integrate until exact receiving evidence exists.",
+    "No new functional, browser, visual, live, or deployment acceptance is claimed by this history audit."
+  ],
+  "unique_nonancestor_commit_count": 40,
+  "source_content_probe": "frontend-content-probe.json"
+}

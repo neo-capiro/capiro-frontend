@@ -9,6 +9,10 @@ import {
   type DocumentRoute,
 } from "@capiro/meri-contracts/document-application";
 import {
+  receiveDocumentResponse as receiveDocumentAccessResponse,
+  type AdmittedDocumentRequest as AdmittedAccessRequest,
+} from "@capiro/meri-client/document-access";
+import {
   boundedJsonBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
@@ -41,12 +45,12 @@ function discard(response: Response) {
   }
 }
 
-/** Fixed routes; public receiving owns schemas, request correlation and binary integrity. */
-export function documentTransport(
+/** One HTTP owner for document writes and artifact reads; receivers own admission. */
+function documentReceiver(
   credential: string,
   lifetime: AbortSignal,
-  fetcher: typeof fetch = fetch,
-): DocumentTransport {
+  fetcher: typeof fetch,
+) {
   let currentCredential = lifetime.aborted ? "" : credential;
   lifetime.addEventListener(
     "abort",
@@ -55,7 +59,7 @@ export function documentTransport(
     },
     { once: true },
   );
-  async function receive<T>(
+  return async function receive<T>(
     route: DocumentRoute,
     request: unknown,
     caller: AbortSignal,
@@ -94,7 +98,16 @@ export function documentTransport(
         throw new DocumentAccessUnavailable("Document access unavailable");
       throw error;
     }
-  }
+  };
+}
+
+/** Fixed routes; public receiving owns schemas, request correlation and binary integrity. */
+export function documentTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+): DocumentTransport {
+  const receive = documentReceiver(credential, lifetime, fetcher);
   return {
     request: (route, request, signal) =>
       receive(route, request, signal, async (response, current) =>
@@ -122,5 +135,25 @@ export function documentTransport(
             ),
       );
     },
+  };
+}
+
+/** Artifact inspection uses the same B2 receiver instance as signed-link byte admission. */
+export function documentAccessTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const receive = documentReceiver(credential, lifetime, fetcher);
+  return {
+    inspect: (request: AdmittedAccessRequest<"inspect">, signal: AbortSignal) =>
+      receive("inspect", request, signal, async (response, current) =>
+        receiveDocumentAccessResponse(
+          "inspect",
+          response.status,
+          await boundedJsonBytes(response, current, 16 * 1024 * 1024),
+          request,
+        ),
+      ),
   };
 }

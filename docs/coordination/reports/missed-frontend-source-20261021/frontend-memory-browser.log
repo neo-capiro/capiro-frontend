@@ -1,0 +1,12 @@
+[WebServer] (node:21832) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:18580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 test\browser\meri-memory-owner-review.spec.ts:38:1 ΓÇ║ disabled owner review makes no memory request (2.4s)
+  ok 2 test\browser\meri-memory-owner-review.spec.ts:54:1 ΓÇ║ pending correction freezes its captured draft and confirms review without changing active memory (2.7s)
+  ok 3 test\browser\meri-memory-owner-review.spec.ts:103:1 ΓÇ║ uncertain correction keeps its draft and prevents resubmission after reload (4.1s)
+
+  3 passed (48.1s)

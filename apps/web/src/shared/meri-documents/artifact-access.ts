@@ -2,14 +2,15 @@ import {
   receiveDocumentDownload,
   receiveDocumentRequest,
   type AdmittedDocumentVersion,
-} from "@capiro/meri-contracts/document-application";
+  type DocumentInspectionResponse,
+} from "@capiro/meri-client/document-access";
 import { withActionDeadline } from "../meri-actions/bounded-json";
 import { createLinkTransport } from "./link-transport";
 import {
   DocumentAccessUnavailable,
-  documentTransport,
+  documentAccessTransport,
 } from "./workflow-transport";
-import type { DocumentInspection } from "./workflow-port";
+type ArtifactInspection = DocumentInspectionResponse["inspection"];
 
 export type ArtifactPreview = Readonly<{
   versionId: string;
@@ -20,7 +21,7 @@ export type ArtifactPreview = Readonly<{
   createdAt: string;
   generationStatus: AdmittedDocumentVersion["generationStatus"];
   previewStatus: AdmittedDocumentVersion["previewStatus"];
-  inspection: DocumentInspection;
+  inspection: ArtifactInspection;
 }>;
 export type ArtifactFile = Readonly<{
   filename: string;
@@ -53,7 +54,7 @@ const failed = (error: unknown, fallback: string) =>
   );
 const preview = (
   version: AdmittedDocumentVersion,
-  inspection: DocumentInspection,
+  inspection: ArtifactInspection,
 ): ArtifactPreview =>
   Object.freeze({
     versionId: version.versionId,
@@ -77,14 +78,14 @@ export function createArtifactAccess(
   lifetime: AbortSignal,
   fetcher: typeof fetch = fetch,
 ): ArtifactAccess {
-  const documents = documentTransport(credential, lifetime, fetcher);
+  const documents = documentAccessTransport(credential, lifetime, fetcher);
   const links = createLinkTransport(credential, lifetime, fetcher);
   async function inspected(versionId: string, signal: AbortSignal) {
     const request = receiveDocumentRequest(
       "inspect",
       new TextEncoder().encode(JSON.stringify({ versionId })),
     );
-    const { value } = await documents.request("inspect", request, signal);
+    const { value } = await documents.inspect(request, signal);
     if ("error" in value) return failure(value.error.code);
     if (value.version.versionId !== versionId)
       return failure("VERSION_MISMATCH");

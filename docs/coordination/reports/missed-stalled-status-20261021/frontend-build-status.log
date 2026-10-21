@@ -1,0 +1,89 @@
+
+> capiro-frontend@0.1.0 build
+> npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web
+
+
+> @capiro/meri-client@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @capiro/web@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.4.0 (Turbopack)
+Γ£ô Running next.config.ts took 673ms
+- Experiments (use with caution):
+  Γ¿» turbopackFileSystemCacheForBuild
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 17.9s
+  Running TypeScript ...
+  Finished TypeScript in 38.9s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/283) ...
+  Generating static pages using 15 workers (70/283) 
+  Generating static pages using 15 workers (141/283) 
+  Generating static pages using 15 workers (212/283) 
+Γ£ô Generating static pages using 15 workers (283/283) in 1345ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî ╞Æ /
+Γö£ ╞Æ /_not-found
+Γö£ ╞Æ /accept-invite
+Γö£ ╞Æ /admins
+Γö£ ╞Æ /api/action-followthrough/[operation]
+Γö£ ╞Æ /api/backend/[service]/[...path]
+Γö£ ╞Æ /api/capiro/[operation]
+Γö£ ╞Æ /api/conversations/[...path]
+Γö£ ╞Æ /api/conversations/intents/[operation]
+Γö£ ╞Æ /api/documents/[operation]
+Γö£ ╞Æ /api/documents/links/[action]
+Γö£ ╞Æ /api/settings/user/[operation]
+Γö£ ╞Æ /api/task-commands/[operation]
+Γö£ ╞Æ /billing
+Γö£ ╞Æ /calendar
+Γö£ ╞Æ /clients
+Γö£ ╞Æ /confirm
+Γö£ ╞Æ /engagement/outreach
+Γö£ ╞Æ /forms/[token]
+Γö£ ╞Æ /healthz
+Γö£ ╞Æ /it/[token]
+Γö£ ╞Æ /it/done
+Γö£ ╞Æ /it/error
+Γö£ ╞Æ /legal
+Γö£ ╞Æ /meri
+Γö£ ╞Æ /meri/actions
+Γö£ ╞Æ /meri/files
+Γö£ ╞Æ /meri/fixture/[screen]
+Γö£ ╞Æ /meri/fixture/cited-answer
+Γö£ ╞Æ /meri/fixture/home
+Γö£ ╞Æ /meri/fixture/run-activity
+Γö£ ╞Æ /meri/task-updates
+Γö£ ╞Æ /modules
+Γö£ ╞Æ /modules/[module]
+Γö£ ╞Æ /org
+Γö£ ╞Æ /plan
+Γö£ ╞Æ /portfolio
+Γö£ ╞Æ /portfolio/[clientId]
+Γö£ ╞Æ /portfolio/[clientId]/bills
+Γö£ ╞Æ /portfolio/[clientId]/calendar
+Γö£ ╞Æ /portfolio/[clientId]/capabilities
+Γö£ ╞Æ /portfolio/[clientId]/files
+Γö£ ╞Æ /portfolio/[clientId]/objectives
+Γö£ ╞Æ /portfolio/[clientId]/opportunities
+Γö£ ╞Æ /portfolio/[clientId]/relationships
+Γö£ ╞Æ /portfolio/[clientId]/work
+Γö£ ╞Æ /portfolio/prospects
+Γö£ ╞Æ /portfolio/prospects/[prospectId]
+Γö£ ╞Æ /register
+Γö£ ╞Æ /settings/[section]
+Γö£ ╞Æ /setup
+Γö£ ╞Æ /sign-in/[[...sign-in]]
+Γöö ╞Æ /verify
+
+
+╞Æ Proxy (Middleware)
+
+╞Æ  (Dynamic)  server-rendered on demand
+

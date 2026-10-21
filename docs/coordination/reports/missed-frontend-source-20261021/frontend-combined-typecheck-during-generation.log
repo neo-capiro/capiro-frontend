@@ -1,0 +1,40 @@
+.next/types/validator.ts(652,52): error TS2344: Type '"/meri/memory"' does not satisfy the constraint 'AppRoutes'.
+.next/types/validator.ts(659,88): error TS2339: Property '/meri/memory' does not exist on type 'ParamMap'.
+.next/types/validator.ts(858,57): error TS2344: Type '"/api/memory/owner/candidates/[id]/decision"' does not satisfy the constraint 'AppRouteHandlerRoutes'.
+.next/types/validator.ts(860,31): error TS2344: Type 'typeof import("C:/Users/Administrator/Documents/Codex/2026-10-21/task/frontend-consolidation/apps/web/src/app/api/memory/owner/candidates/[id]/decision/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/memory/owner/candidates/[id]/decision">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: Request, context: { params: Promise<{ id: string; }>; }) => Promise<Response>' is not assignable to type '(request: NextRequest, context: { params: Promise<unknown>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters 'context' and 'context' are incompatible.
+        Type '{ params: Promise<unknown>; }' is not assignable to type '{ params: Promise<{ id: string; }>; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<unknown>' is not assignable to type 'Promise<{ id: string; }>'.
+              Type 'unknown' is not assignable to type '{ id: string; }'.
+.next/types/validator.ts(868,57): error TS2344: Type '"/api/memory/owner/candidates/[id]/status"' does not satisfy the constraint 'AppRouteHandlerRoutes'.
+.next/types/validator.ts(870,31): error TS2344: Type 'typeof import("C:/Users/Administrator/Documents/Codex/2026-10-21/task/frontend-consolidation/apps/web/src/app/api/memory/owner/candidates/[id]/status/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/memory/owner/candidates/[id]/status">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: Request, context: { params: Promise<{ id: string; }>; }) => Promise<Response>' is not assignable to type '(request: NextRequest, context: { params: Promise<unknown>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters 'context' and 'context' are incompatible.
+        Type '{ params: Promise<unknown>; }' is not assignable to type '{ params: Promise<{ id: string; }>; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<unknown>' is not assignable to type 'Promise<{ id: string; }>'.
+              Type 'unknown' is not assignable to type '{ id: string; }'.
+.next/types/validator.ts(878,57): error TS2344: Type '"/api/memory/owner/candidates/[id]/version-decision"' does not satisfy the constraint 'AppRouteHandlerRoutes'.
+.next/types/validator.ts(880,31): error TS2344: Type 'typeof import("C:/Users/Administrator/Documents/Codex/2026-10-21/task/frontend-consolidation/apps/web/src/app/api/memory/owner/candidates/[id]/version-decision/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/memory/owner/candidates/[id]/version-decision">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: Request, context: { params: Promise<{ id: string; }>; }) => Promise<Response>' is not assignable to type '(request: NextRequest, context: { params: Promise<unknown>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters 'context' and 'context' are incompatible.
+        Type '{ params: Promise<unknown>; }' is not assignable to type '{ params: Promise<{ id: string; }>; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<unknown>' is not assignable to type 'Promise<{ id: string; }>'.
+              Type 'unknown' is not assignable to type '{ id: string; }'.
+.next/types/validator.ts(888,57): error TS2344: Type '"/api/memory/owner/candidates"' does not satisfy the constraint 'AppRouteHandlerRoutes'.
+.next/types/validator.ts(898,57): error TS2344: Type '"/api/memory/owner/items/[id]/corrections"' does not satisfy the constraint 'AppRouteHandlerRoutes'.
+.next/types/validator.ts(900,31): error TS2344: Type 'typeof import("C:/Users/Administrator/Documents/Codex/2026-10-21/task/frontend-consolidation/apps/web/src/app/api/memory/owner/items/[id]/corrections/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/memory/owner/items/[id]/corrections">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: Request, context: { params: Promise<{ id: string; }>; }) => Promise<Response>' is not assignable to type '(request: NextRequest, context: { params: Promise<unknown>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters 'context' and 'context' are incompatible.
+        Type '{ params: Promise<unknown>; }' is not assignable to type '{ params: Promise<{ id: string; }>; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<unknown>' is not assignable to type 'Promise<{ id: string; }>'.
+              Type 'unknown' is not assignable to type '{ id: string; }'.
+.next/types/validator.ts(908,57): error TS2344: Type '"/api/memory/owner/items"' does not satisfy the constraint 'AppRouteHandlerRoutes'.

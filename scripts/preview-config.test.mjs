@@ -19,7 +19,7 @@ const template = readFileSync('apps/web/deployment/portfolio/service.yml', 'utf8
 const qualification = readFileSync('apps/web/deployment/portfolio/PR70-FIRST-CHAT-IMAGE-QUALIFICATION.buildspec.yml', 'utf8');
 const coreApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
-const qualifiedCoreRosterSource = 'b97a3286487abcda6a7424cf1dc2812d93b65b3d';
+const qualifiedCoreRosterSource = '50475125275853299798fc40f8cb119f0b865464';
 const qualifiedCoreRosterApi = 'https://core-roster-preview.capiro.ai/api';
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 const meriSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
@@ -50,11 +50,14 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
     'CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL', 'CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN',
     'CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE', 'CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST',
     'CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION']) assert.equal(p.environment[name], '', name);
-  for (const name of ['MERI_FIRST_CHAT_BOOTSTRAP_ENABLED', 'CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED']) assert.equal(p.environment[name], 'false', name);
-  assert.equal(p.parameters.length, 26);
+  for (const name of ['CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE', 'CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL']) assert.equal(p.environment[name], '', name);
+  for (const name of ['MERI_FIRST_CHAT_BOOTSTRAP_ENABLED', 'CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED',
+    'MERI_MEMORY_OWNER_REVIEW_ENABLED', 'CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED']) assert.equal(p.environment[name], 'false', name);
+  assert.equal(p.parameters.length, 30);
   assert.deepEqual(p.parameters.filter(item => item.ParameterKey.startsWith('Meri')), [
     { ParameterKey: 'MeriFirstChatBootstrapEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriFirstChatClientId', ParameterValue: '' },
+    { ParameterKey: 'MeriMemoryOwnerReviewEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriApiBaseUrl', ParameterValue: '' },
     { ParameterKey: 'MeriConversationWorkflowEnabled', ParameterValue: 'false' },
   ]);
@@ -63,6 +66,18 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   assert.equal(Object.hasOwn(p.environment, 'CLERK_SECRET_KEY'), false);
   assert.equal(p.secretReferences.CLERK_SECRET_KEY, bindings.clerkSecretArn);
   validatePreviewParameters(p.parameters.toReversed(), bindings);
+});
+
+test('memory preview is held until a listener-compatible Core successor is pinned', () => {
+  assert.throws(() => renderPreviewConfiguration({ ...bindings, memoryOwnerReviewEnabled: true }),
+    /PREVIEW_MEMORY_LISTENER_UNQUALIFIED/);
+  for (const value of [null, 'true', 1]) {
+    assert.throws(() => renderPreviewConfiguration({ ...bindings, memoryOwnerReviewEnabled: value }),
+      /PREVIEW_MEMORY_FLAG_INVALID/);
+  }
+  const held = renderPreviewConfiguration({ ...bindings, memoryOwnerReviewEnabled: false });
+  assert.equal(held.environment.MERI_MEMORY_OWNER_REVIEW_ENABLED, 'false');
+  assert.equal(held.environment.CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL, '');
 });
 
 test('Meri opt-in requires an explicit canonical HTTPS root origin', () => {
@@ -176,6 +191,29 @@ test('qualified Core roster adds a separate pair without switching first-chat re
     meriApiBaseUrl: 'https://core-roster-preview.capiro.ai' }), /PREVIEW_MERI_ORIGIN_INVALID/);
 });
 
+test('roster pin agrees across runtime and public metadata while deployment remains held', () => {
+  const runtime = readFileSync('apps/web/src/shared/preview/read-config.server.ts', 'utf8');
+  const metadata = JSON.parse(readFileSync('docs/desktop-integration-20261019/CORE-ROSTER-PIN.json', 'utf8'));
+  assert.equal(runtime.match(/export const qualifiedCorePreviewBackendSource =\s*"([a-f0-9]{40})"/)?.[1], qualifiedCoreRosterSource);
+  assert.equal(metadata.coreSource, qualifiedCoreRosterSource);
+  assert.equal(metadata.status, 'source-reviewed-runtime-held');
+  assert.deepEqual(metadata.environmentProposal, {
+    CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: qualifiedCoreRosterSource,
+    CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: qualifiedCoreRosterApi,
+  });
+  assert.deepEqual(metadata.runtimeEvidence, { releaseSource: null, imageDigest: null });
+  const proposed = { ...bindings, previewReadEnabled: true,
+    qualifiedCoreClientRosterApiBaseUrl: qualifiedCoreRosterApi };
+  const p = renderPreviewConfiguration(proposed);
+  for (const retiredOrChangedPin of [metadata.previousCoreSource,
+    '50475125275853299798fc40f8cb119f0b865465']) {
+    assert.notEqual(retiredOrChangedPin, qualifiedCoreRosterSource);
+    const changed = p.parameters.map(item => item.ParameterKey === 'CapiroPreviewClientRosterBackendSource'
+      ? { ...item, ParameterValue: retiredOrChangedPin } : item);
+    assert.throws(() => validatePreviewParameters(changed, proposed), /PREVIEW_PARAMETER_MISMATCH/);
+  }
+});
+
 test('preview rejects unknown, missing, credential-valued and mismatched Clerk bindings', () => {
   for (const invalid of [null, [], {}, { ...bindings, extra: 'value' }, { ...bindings, clerkIssuer: 'https://synthetic-preview.clerk.accounts.dev' },
     { ...bindings, clerkSecretArn: 'sk_live_synthetic' }, { ...bindings, clerkSecretArn: bindings.clerkSecretArn.replace('/dev/', '/preview/') },
@@ -214,7 +252,8 @@ test('preview template constrains every explicit configuration value and keeps h
     ['CapiroPreviewMeriContractPackageVersion', '0.1.10'],
   ]);
   const optionalBooleans = new Set(['MeriConversationWorkflowEnabled', 'MeriFirstChatBootstrapEnabled',
-    'CapiroPreviewMeriConversationRoutesEnabled']);
+    'CapiroPreviewMeriConversationRoutesEnabled', 'MeriMemoryOwnerReviewEnabled',
+    'CapiroPreviewMemoryOwnerRoutesEnabled']);
   for (const item of p.parameters) {
     const block = template.match(new RegExp(`^  ${item.ParameterKey}:\\n([\\s\\S]*?)(?=^  \\w+:|^Resources:)`, 'm'))?.[1];
     assert.ok(block, item.ParameterKey);
@@ -266,6 +305,8 @@ test('preview template constrains every explicit configuration value and keeps h
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: 'CapiroPreviewClientRosterBackendSource',
       CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: 'CapiroPreviewClientRosterApiBaseUrl',
       CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: 'CapiroPreviewFirstChatBackendSource', CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL: 'CapiroPreviewFirstChatApiBaseUrl',
+      MERI_MEMORY_OWNER_REVIEW_ENABLED: 'MeriMemoryOwnerReviewEnabled', CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED: 'CapiroPreviewMemoryOwnerRoutesEnabled',
+      CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE: 'CapiroPreviewMemoryCoreBackendSource', CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL: 'CapiroPreviewMemoryCoreApiBaseUrl',
       CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: 'CapiroPreviewMeriConversationRoutesEnabled',
       CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN: 'CapiroPreviewMeriRuntimeOrigin', CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: 'CapiroPreviewMeriRuntimeSource',
       CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST: 'CapiroPreviewMeriRuntimeImageDigest',
@@ -279,6 +320,8 @@ test('preview template constrains every explicit configuration value and keeps h
   assert.match(template, /PreviewClientRosterRequiresPairedTarget:/);
   assert.match(template, /PreviewClientRosterHeldWithoutSource:/);
   assert.match(template, /MeriRouteHeldWithoutWorkflow:/);
+  assert.match(template, /MemoryReviewRequiresQualifiedCore:/);
+  assert.match(template, /MemoryReviewHeldWithoutFlag:/);
 });
 
 test('roster template rejects an origin until the reviewed Core source is pinned', () => {

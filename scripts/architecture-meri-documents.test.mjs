@@ -31,10 +31,10 @@ test('document allocation does not admit upload/list routes or a large handler',
 });
 test('only published document package exports cross the receiving boundary', () => {
   const file = 'apps/web/src/shared/meri-documents/fixture.ts';
-  for (const specifier of ['@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema']) {
+  for (const specifier of ['@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema', '@capiro/meri-client/document-access']) {
     assert.deepEqual(inspectSources(new Map([[file, `import '${specifier}';`]])).errors, []);
   }
-  for (const specifier of ['@capiro/meri-contracts/document-application/download.mjs', 'meri-greenfield/apps/control/document-application']) {
+  for (const specifier of ['@capiro/meri-contracts/document-application/download.mjs', '@capiro/meri-client/vendor/document-access-application/0.1.0/document-access-application.mjs', 'meri-greenfield/apps/control/document-application']) {
     assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.length > 0);
   }
 });

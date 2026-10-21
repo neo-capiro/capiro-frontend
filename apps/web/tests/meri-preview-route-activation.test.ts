@@ -98,6 +98,16 @@ it("admits only the closed public Meri conversation route family", () => {
   expect(previewBackendRejection(environment, reconnect)).toBeNull();
 });
 
+it("keeps the Meri runtime origin separate from the Core memory preview target", () => {
+  const env = {
+    ...environment,
+    CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL: `${meriOrigin}/api`,
+  };
+  const current = request("/api/conversations/history");
+  expect(previewMeriConversationRoute(env, current)).toBe(false);
+  expect(previewBackendRejection(env, current)?.status).toBe(503);
+});
+
 it("admits the configured public origin when Next sees only its bind address", () => {
   const current = new Request(
     "https://0.0.0.0:5188/api/action-followthrough/session",

@@ -145,6 +145,9 @@ test("1440px Meri reaches actions from the scoped Home workspace link", async ({
   await expect(actions).toHaveCount(1);
   await expect(actions).toBeVisible();
   await expect(actions).toHaveAttribute("href", actionUrl());
+  await expect(
+    workspace.getByRole("link", { name: "Review personal memory" }),
+  ).toHaveCount(0);
   await expect(taskUpdates).toHaveAttribute(
     "href",
     `/meri/task-updates?clientId=${actionClient.id}`,

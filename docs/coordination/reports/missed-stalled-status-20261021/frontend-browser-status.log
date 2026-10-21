@@ -1,0 +1,21 @@
+[WebServer] (node:8332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] [PLUGIN_TIMINGS] JavaScript callbacks ran for 3.9s of this 22.3s build (18%).
+[WebServer] The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+[WebServer]   - plugin vite:build-import-analysis generateBundle (11%, 2.5s, 1 call)
+[WebServer] Additional callback time came from the callbacks below and from callbacks under 1s.
+[WebServer] 2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+[WebServer]   - plugin vite:build-html transform (2 calls)
+[WebServer]   - plugin vite:asset-import-meta-url transform (2 calls)
+[WebServer] See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+[WebServer] 
+
+Running 3 tests using 1 worker
+
+(node:24256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 test\browser\meri-conversation-host.spec.ts:194:1 ΓÇ║ repeated failed reconnects stop with an explicit Reconnect that resumes the cursor (9.6s)
+  ok 2 test\browser\meri-conversation-host.spec.ts:238:1 ΓÇ║ Stop requests durable cancellation and the run status, not the receipt, ends the run (2.8s)
+  ok 3 test\browser\meri-conversation-host.spec.ts:303:1 ΓÇ║ a completed cancel receipt never pretends the run was cancelled (2.5s)
+
+  3 passed (2.5m)

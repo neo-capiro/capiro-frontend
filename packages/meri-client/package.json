@@ -10,9 +10,14 @@
     "README.md",
     "vendor/task-command-application/0.1.0",
     "vendor/user-preferences-application/0.1.0",
-    "vendor/intents-application/0.1.0"
+    "vendor/intents-application/0.1.0",
+    "vendor/document-access-application/0.1.0"
   ],
   "exports": {
+    "./document-access": {
+      "types": "./vendor/document-access-application/0.1.0/document-access-application.d.ts",
+      "default": "./vendor/document-access-application/0.1.0/document-access-application.mjs"
+    },
     "./user-preferences": {
       "types": "./vendor/user-preferences-application/0.1.0/user-preferences-application.d.ts",
       "default": "./vendor/user-preferences-application/0.1.0/user-preferences-application.mjs"

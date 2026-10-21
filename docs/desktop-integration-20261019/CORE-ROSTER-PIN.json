@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "status": "source-reviewed-runtime-held",
+  "frontendBaseSource": "5cd5f20d0f2919dce915a67a46487ce81f3e4f15",
+  "coreRepository": "neo-capiro/capiro-backend",
+  "previousCoreSource": "b97a3286487abcda6a7424cf1dc2812d93b65b3d",
+  "coreSource": "50475125275853299798fc40f8cb119f0b865464",
+  "coreTree": "c01138fed2e0e89e50f0f54f35c0ff4d4415c9b4",
+  "environmentProposal": {
+    "CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE": "50475125275853299798fc40f8cb119f0b865464",
+    "CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL": "https://core-roster-preview.capiro.ai/api"
+  },
+  "runtimeEvidence": {
+    "releaseSource": null,
+    "imageDigest": null
+  },
+  "review": "CORE-ROSTER-PIN.md"
+}

@@ -16,6 +16,8 @@ const previewUiPages = new Set([
   `${appSource}app/(portfolio)/(product)/portfolio/page.tsx`,
   `${appSource}app/modules/page.tsx`,
 ]);
+const previewMemoryOwnerRoute = `${previewOwner}memory-owner-route.server.ts`;
+const memoryOwnerProxy = `${appSource}features/meri/memory-review/owner-review-proxy.server.ts`;
 const objectiveSnapshotOwner = `${appSource}shared/capiro/operations/objective-workspace-receiving.ts`;
 function approvedSnapshotImport(file, entry) {
   return file === objectiveSnapshotOwner && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
@@ -46,12 +48,31 @@ export const publicExports = new Set([
   '@capiro/meri-client/conversation',
   '@capiro/meri-client/task-commands',
   '@capiro/meri-client/intents',
+  '@capiro/meri-client/document-access',
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/memory/owner/candidates/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
+  ])],
+  [`${appSource}app/api/memory/owner/candidates/[id]/status/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
+  ])],
+  [`${appSource}app/api/memory/owner/candidates/[id]/decision/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
+  [`${appSource}app/api/memory/owner/candidates/[id]/version-decision/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
+  [`${appSource}app/api/memory/owner/items/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
+  [`${appSource}app/api/memory/owner/items/[id]/corrections/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
   [`${appSource}app/api/task-commands/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-task-commands/config.ts`, `${appSource}shared/meri-task-commands/proxy.ts`,
@@ -113,6 +134,7 @@ function edgeViolation(from, to, entry) {
         && entry.kind === 'named' && entry.names.length === 1
         && entry.names[0] === 'isQualifiedCorePreviewReadEnabled')
       && !(to === previewPolicy && from === `${appSource}proxy.ts`)
+      && !(to === previewMemoryOwnerRoute && from === memoryOwnerProxy)
       && !serverAdapters.get(from)?.has(to)) return `${from}: preview policy and receiving code are allocated only to reviewed backend server entries`;
   if (to === pricingOwner && from !== pricingEntry) return `${from}: public pricing projection is allocated only to the Onboard server entry`;
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;

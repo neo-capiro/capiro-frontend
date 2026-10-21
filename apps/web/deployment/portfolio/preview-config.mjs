@@ -5,10 +5,13 @@ const corePreviewApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
 // Reviewed roster source only. The template keeps this pair undeployable until
 // the composed Core image and serving RELEASE_SHA are independently qualified.
-const qualifiedCoreRosterSource = 'b97a3286487abcda6a7424cf1dc2812d93b65b3d';
+const qualifiedCoreRosterSource = '50475125275853299798fc40f8cb119f0b865464';
 const coreRosterPreviewOrigin = 'https://core-roster-preview.capiro.ai';
 const coreRosterPreviewApi = `${coreRosterPreviewOrigin}/api`;
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
+// Re-pin only to a Core successor with the complete memory route packet and
+// qualified preview listener. The reviewed memory source alone is insufficient.
+const coreMemorySource = '';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
 const meriImageSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
 const meriImageDigest = 'sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8';
@@ -33,6 +36,7 @@ const optionalBindings = [
   'qualifiedCoreClientRosterApiBaseUrl',
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
   'meriRuntimeSource', 'meriRuntimeImageDigest',
+  'memoryOwnerReviewEnabled',
 ];
 const patterns = Object.freeze({
   clerkIssuer: /^https:\/\/clerk\.app\.capiro\.ai$/,
@@ -118,6 +122,14 @@ function readQualifiedCoreRosterApi(bindings, firstChat, meri) {
   return target;
 }
 
+function readMemoryConfiguration(bindings) {
+  const enabled = Object.hasOwn(bindings, 'memoryOwnerReviewEnabled')
+    ? bindings.memoryOwnerReviewEnabled : false;
+  if (typeof enabled !== 'boolean') throw Error('PREVIEW_MEMORY_FLAG_INVALID');
+  if (enabled && !coreMemorySource) throw Error('PREVIEW_MEMORY_LISTENER_UNQUALIFIED');
+  return { enabled };
+}
+
 /** Public metadata only. This does not read credentials or establish application authority. */
 export function renderPreviewConfiguration(bindings) {
   closedRecord(bindings, Object.keys(patterns), 'PREVIEW_BINDINGS_SHAPE', optionalBindings);
@@ -131,6 +143,7 @@ export function renderPreviewConfiguration(bindings) {
   const meri = readMeriConfiguration(bindings);
   const firstChat = readFirstChatConfiguration(bindings, meri);
   const qualifiedCoreRosterApi = readQualifiedCoreRosterApi(bindings, firstChat, meri);
+  const memory = readMemoryConfiguration(bindings);
   const values = {
     ...fixedParameters,
     CapiroRequestOrigin: origin,
@@ -143,6 +156,10 @@ export function renderPreviewConfiguration(bindings) {
     MeriFirstChatClientId: firstChat.clientId,
     CapiroPreviewFirstChatBackendSource: firstChat.bootstrapEnabled ? coreBootstrapSource : '',
     CapiroPreviewFirstChatApiBaseUrl: firstChat.bootstrapEnabled ? corePreviewApi : '',
+    MeriMemoryOwnerReviewEnabled: String(memory.enabled),
+    CapiroPreviewMemoryOwnerRoutesEnabled: String(memory.enabled),
+    CapiroPreviewMemoryCoreBackendSource: memory.enabled ? coreMemorySource : '',
+    CapiroPreviewMemoryCoreApiBaseUrl: memory.enabled ? corePreviewApi : '',
     MeriApiBaseUrl: meri.baseUrl,
     MeriConversationWorkflowEnabled: String(meri.enabled),
     CapiroPreviewMeriConversationRoutesEnabled: String(meri.routesEnabled),
@@ -183,6 +200,10 @@ export function renderPreviewConfiguration(bindings) {
       MERI_FIRST_CHAT_CLIENT_ID: values.MeriFirstChatClientId,
       CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: values.CapiroPreviewFirstChatBackendSource,
       CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL: values.CapiroPreviewFirstChatApiBaseUrl,
+      MERI_MEMORY_OWNER_REVIEW_ENABLED: values.MeriMemoryOwnerReviewEnabled,
+      CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED: values.CapiroPreviewMemoryOwnerRoutesEnabled,
+      CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE: values.CapiroPreviewMemoryCoreBackendSource,
+      CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL: values.CapiroPreviewMemoryCoreApiBaseUrl,
       CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: values.CapiroPreviewMeriConversationRoutesEnabled,
       CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN: values.CapiroPreviewMeriRuntimeOrigin,
       CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: values.CapiroPreviewMeriRuntimeSource,
