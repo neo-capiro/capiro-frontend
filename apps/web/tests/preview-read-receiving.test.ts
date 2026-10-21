@@ -14,7 +14,7 @@ vi.mock("@clerk/nextjs/server", () => ({
 const origin = "https://frontend.synthetic.invalid";
 const target = "https://first-chat-preview.app-dev.capiro.ai/api";
 const source = "6542f5b089656b6d255465edd464d06c2a0b408f";
-const qualifiedSource = "b97a3286487abcda6a7424cf1dc2812d93b65b3d";
+const qualifiedSource = "50475125275853299798fc40f8cb119f0b865464";
 const qualifiedTarget = "https://core-roster-preview.capiro.ai/api";
 const id = "10000000-0000-4000-8000-000000000001";
 const client = {
@@ -274,7 +274,14 @@ it("holds a qualified Core target that shares the configured Meri origin", async
   await denied(await receive("capiro/clients.list"));
 });
 
-it.each([undefined, "", "wrong-source", source])(
+it.each([
+  undefined,
+  "",
+  "wrong-source",
+  source,
+  "b97a3286487abcda6a7424cf1dc2812d93b65b3d",
+  "50475125275853299798fc40f8cb119f0b865465",
+])(
   "holds qualified roster with an absent or wrong source %s",
   async (value) => {
     vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", value);
@@ -378,6 +385,9 @@ it("rejects expired identity before dispatch", async () => {
   expect(fetcher).not.toHaveBeenCalled();
 });
 it("keeps every other registered operation held with candidate bindings present", async () => {
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(true);
   for (const [operation, descriptor] of Object.entries(capiroOperations)) {
     if (["me.read", "clients.list"].includes(operation)) continue;
     await denied(

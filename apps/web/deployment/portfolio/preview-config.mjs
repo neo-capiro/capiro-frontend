@@ -5,7 +5,7 @@ const corePreviewApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
 // Reviewed roster source only. The template keeps this pair undeployable until
 // the composed Core image and serving RELEASE_SHA are independently qualified.
-const qualifiedCoreRosterSource = 'b97a3286487abcda6a7424cf1dc2812d93b65b3d';
+const qualifiedCoreRosterSource = '50475125275853299798fc40f8cb119f0b865464';
 const coreRosterPreviewOrigin = 'https://core-roster-preview.capiro.ai';
 const coreRosterPreviewApi = `${coreRosterPreviewOrigin}/api`;
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';

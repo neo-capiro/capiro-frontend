@@ -19,7 +19,7 @@ const template = readFileSync('apps/web/deployment/portfolio/service.yml', 'utf8
 const qualification = readFileSync('apps/web/deployment/portfolio/PR70-FIRST-CHAT-IMAGE-QUALIFICATION.buildspec.yml', 'utf8');
 const coreApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
-const qualifiedCoreRosterSource = 'b97a3286487abcda6a7424cf1dc2812d93b65b3d';
+const qualifiedCoreRosterSource = '50475125275853299798fc40f8cb119f0b865464';
 const qualifiedCoreRosterApi = 'https://core-roster-preview.capiro.ai/api';
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 const meriSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
@@ -174,6 +174,29 @@ test('qualified Core roster adds a separate pair without switching first-chat re
     qualifiedCoreClientRosterApiBaseUrl: target }), /PREVIEW_CORE_ROSTER_ORIGIN_INVALID/);
   assert.throws(() => renderPreviewConfiguration({ ...qualified, ...meriEnabled,
     meriApiBaseUrl: 'https://core-roster-preview.capiro.ai' }), /PREVIEW_MERI_ORIGIN_INVALID/);
+});
+
+test('roster pin agrees across runtime and public metadata while deployment remains held', () => {
+  const runtime = readFileSync('apps/web/src/shared/preview/read-config.server.ts', 'utf8');
+  const metadata = JSON.parse(readFileSync('docs/desktop-integration-20261019/CORE-ROSTER-PIN.json', 'utf8'));
+  assert.equal(runtime.match(/export const qualifiedCorePreviewBackendSource =\s*"([a-f0-9]{40})"/)?.[1], qualifiedCoreRosterSource);
+  assert.equal(metadata.coreSource, qualifiedCoreRosterSource);
+  assert.equal(metadata.status, 'source-reviewed-runtime-held');
+  assert.deepEqual(metadata.environmentProposal, {
+    CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: qualifiedCoreRosterSource,
+    CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: qualifiedCoreRosterApi,
+  });
+  assert.deepEqual(metadata.runtimeEvidence, { releaseSource: null, imageDigest: null });
+  const proposed = { ...bindings, previewReadEnabled: true,
+    qualifiedCoreClientRosterApiBaseUrl: qualifiedCoreRosterApi };
+  const p = renderPreviewConfiguration(proposed);
+  for (const retiredOrChangedPin of [metadata.previousCoreSource,
+    '50475125275853299798fc40f8cb119f0b865465']) {
+    assert.notEqual(retiredOrChangedPin, qualifiedCoreRosterSource);
+    const changed = p.parameters.map(item => item.ParameterKey === 'CapiroPreviewClientRosterBackendSource'
+      ? { ...item, ParameterValue: retiredOrChangedPin } : item);
+    assert.throws(() => validatePreviewParameters(changed, proposed), /PREVIEW_PARAMETER_MISMATCH/);
+  }
 });
 
 test('preview rejects unknown, missing, credential-valued and mismatched Clerk bindings', () => {
