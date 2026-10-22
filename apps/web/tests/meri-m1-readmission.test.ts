@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { createElement } from "react";
+import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createMeriConversation } from "@capiro/meri-client/conversation";
@@ -11,6 +11,8 @@ import {
   type TabStorage,
 } from "../src/shared/meri-conversations/tab-journal";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
+import type { Page, Route } from "@playwright/test";
+import { installInitialInput } from "../test/browser/meri-initial-input-fixtures";
 import {
   binding,
   context,
@@ -21,9 +23,24 @@ import {
 
 const harness = vi.hoisted(() => ({
   effects: [] as Array<() => void>,
+  buttons: [] as Array<{
+    children: ReactNode;
+    disabled?: boolean;
+    onClick: () => void;
+  }>,
   observe: vi.fn(),
   stop: vi.fn(),
   restart: vi.fn(),
+}));
+vi.mock("@capiro/ui/button", () => ({
+  Button: (props: (typeof harness.buttons)[number]) => {
+    harness.buttons.push(props);
+    return createElement(
+      "button",
+      { disabled: props.disabled },
+      props.children,
+    );
+  },
 }));
 vi.mock("react", async (original) => ({
   ...(await original<typeof import("react")>()),
@@ -61,6 +78,7 @@ const retained = {
 const dispose: Array<() => void> = [];
 beforeEach(() => {
   harness.effects = [];
+  harness.buttons = [];
   harness.observe.mockClear();
   harness.stop.mockClear();
   harness.restart.mockClear();
@@ -70,16 +88,32 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-function mount(response: () => Response) {
+function mount(
+  response: () => Response,
+  navigation?: {
+    initial: boolean;
+    reload?: boolean;
+    fetchImpl: NonNullable<
+      Parameters<typeof createMeriConversation>[0]["fetchImpl"]
+    >;
+  },
+) {
   const storage = memoryStorage();
   syncMeriTabIdentity("synthetic-readmission-session", storage);
   vi.stubGlobal("window", { sessionStorage: storage });
   const oldCache = new QueryClient();
   conversationIntentJournal(oldCache, context, storage).write({
-    submit: { ...retained, state: "observed" },
+    submit: navigation
+      ? {
+          requestId: request.requestId,
+          prompt: request.prompt,
+          state: "unknown",
+          ...(navigation.initial ? { workflow: "initial" as const } : {}),
+        }
+      : { ...retained, state: "observed" },
   });
-  oldCache.clear();
-  const cache = new QueryClient();
+  if (!navigation || navigation.reload) oldCache.clear();
+  const cache = navigation && !navigation.reload ? oldCache : new QueryClient();
   const calls: string[] = [];
   const sdk = createMeriConversation({
     context,
@@ -88,8 +122,9 @@ function mount(response: () => Response) {
     signal: new AbortController().signal,
     isCurrent: () => true,
     onAccessLost: vi.fn(),
-    fetchImpl: async (url) => {
+    fetchImpl: async (url, init) => {
       calls.push(String(url));
+      if (navigation) return navigation.fetchImpl(url, init);
       if (String(url).endsWith("/history")) return response();
       if (String(url).endsWith("/cancel"))
         return Response.json({ state: "cancelled" });
@@ -116,8 +151,156 @@ function mount(response: () => Response) {
     );
   render();
   const journal = conversationIntentJournal(cache, context, storage);
-  return { run, port, calls, journal, render };
+  return {
+    get run() {
+      return run;
+    },
+    port,
+    calls,
+    journal,
+    render,
+  };
 }
+
+/** Invoke the existing pinned browser fixture's handlers without a browser or network. */
+async function acceptedInputFixture(submitted = true) {
+  const handlers = new Map<string, (route: Route) => unknown>();
+  const native = await installInitialInput({
+    route: async (path: string, handler: (route: Route) => unknown) => {
+      handlers.set(path.replace("**", ""), handler);
+    },
+  } as unknown as Page);
+  const input = JSON.stringify({
+    requestId: request.requestId,
+    prompt: request.prompt,
+  });
+  const route = (body: string) =>
+    ({
+      request: () => ({
+        postData: () => body,
+        postDataJSON: () => JSON.parse(body),
+      }),
+    }) as unknown as Route;
+  // The service accepted the original bytes before its response was lost.
+  native.allocationResponse(route(input));
+  native.admissionResponse(route(input));
+  if (submitted) native.submitResponse(route(input));
+  const fetchImpl: NonNullable<
+    Parameters<typeof createMeriConversation>[0]["fetchImpl"]
+  > = async (url, init) => {
+    let response: Response | undefined;
+    const handler = handlers.get(String(url));
+    if (!handler) throw new Error(`Unexpected fixture operation ${url}`);
+    await handler({
+      ...route(String(init?.body)),
+      fulfill: async (value: Parameters<Route["fulfill"]>[0]) => {
+        if (!value) throw new Error("Missing fixture fulfillment");
+        response = new Response(value.body as string, {
+          status: value.status ?? 200,
+          headers: { "content-type": value.contentType ?? "application/json" },
+        });
+      },
+    } as unknown as Route);
+    if (!response) throw new Error(`Missing fixture response ${url}`);
+    return response;
+  };
+  return { ...native, input, fetchImpl };
+}
+
+it.each([false, true])(
+  "navigation retains explicit exact retry after a lost ACK (initial workflow: %s)",
+  async (initial) => {
+    const fixture = await acceptedInputFixture();
+    const mounted = mount(() => Response.json(history()), {
+      initial,
+      fetchImpl: fixture.fetchImpl,
+    });
+    const original = structuredClone(mounted.journal.read().submit);
+    for (const effect of harness.effects.splice(0)) effect();
+    await Promise.resolve();
+    expect(mounted.calls).toEqual([]);
+    expect(mounted.journal.read().submit).toEqual(original);
+    expect(mounted.port.getSnapshot().observation).toBeNull();
+    renderToStaticMarkup(
+      createElement(RunStatus, {
+        run: mounted.run,
+        active: true,
+        acceptedRequest: request,
+      }),
+    );
+    const retry = harness.buttons.find(
+      (button) => button.children === "Retry same request",
+    );
+    expect(retry).toBeDefined();
+    expect(retry!.disabled).toBe(false);
+    retry!.onClick();
+    await vi.waitFor(() =>
+      expect(mounted.journal.read().submit?.state).toBe("observed"),
+    );
+    expect(mounted.calls).toEqual([
+      ...(initial ? ["/api/conversations/input/allocate"] : []),
+      "/api/conversations/input/admit",
+      "/api/conversations/submit",
+      "/api/conversations/history",
+    ]);
+    expect(fixture.calls.allocate).toHaveLength(initial ? 2 : 1);
+    expect(fixture.calls.admit).toHaveLength(2);
+    expect(fixture.calls.submit).toHaveLength(2);
+    expect(
+      new Set([
+        ...fixture.calls.allocate,
+        ...fixture.calls.admit,
+        ...fixture.calls.submit,
+      ]),
+    ).toEqual(new Set([fixture.input]));
+    expect(mounted.journal.read().submit).toEqual({
+      ...original,
+      state: "observed",
+    });
+  },
+);
+
+it("reload of a lost admission reads queued history and continues only on the explicit same-input action", async () => {
+  const fixture = await acceptedInputFixture(false);
+  const mounted = mount(() => Response.json(history()), {
+    initial: true,
+    reload: true,
+    fetchImpl: fixture.fetchImpl,
+  });
+  for (const effect of harness.effects.splice(0)) effect();
+  await vi.waitFor(() =>
+    expect(mounted.port.getSnapshot().status).toBe("ready"),
+  );
+  mounted.render();
+  harness.effects.at(-1)!();
+  expect(mounted.calls).toEqual(["/api/conversations/history"]);
+  expect(mounted.journal.read().submit?.state).toBe("unknown");
+  renderToStaticMarkup(
+    createElement(RunStatus, {
+      run: mounted.run,
+      active: true,
+      acceptedRequest: request,
+    }),
+  );
+  const continuation = harness.buttons.find(
+    (button) => button.children === "Continue accepted request",
+  );
+  expect(continuation).toBeDefined();
+  expect(continuation!.disabled).toBe(false);
+  expect(fixture.calls.submit).toEqual([]);
+  continuation!.onClick();
+  await vi.waitFor(() =>
+    expect(mounted.journal.read().submit?.state).toBe("observed"),
+  );
+  expect(fixture.calls.allocate).toEqual([fixture.input]);
+  expect(fixture.calls.admit).toEqual([fixture.input, fixture.input]);
+  expect(fixture.calls.submit).toEqual([fixture.input]);
+  expect(
+    mounted.port
+      .getSnapshot()
+      .observation?.events.map((event) => event.binding),
+  ).toEqual([binding]);
+});
 
 it("reload reads exact-run SDK history before explicit Stop without replaying the stored input", async () => {
   const mounted = mount(() => Response.json(history([status(1, "running")])));

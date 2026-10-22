@@ -123,6 +123,11 @@ export function conversationIntentJournal(
   } catch {
     recoveryBlocked = true;
   }
+  // A reload needs fresh SDK admission; an existing-cache uncertain command keeps its
+  // original explicit retry workflow. This is provenance, never request authority.
+  const restoredFromStorage =
+    client.getQueryData<ConversationIntent>(key) === undefined &&
+    recovered.submit !== undefined;
   client.setQueryData<ConversationIntent>(
     key,
     (previous) => previous ?? recovered,
@@ -137,6 +142,7 @@ export function conversationIntentJournal(
   return {
     current,
     recoveryBlocked,
+    restoredFromStorage,
     read(): ConversationIntent {
       if (!current()) return {};
       const value = client.getQueryData<ConversationIntent>(key) ?? {};

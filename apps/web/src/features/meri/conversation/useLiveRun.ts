@@ -41,9 +41,10 @@ export function useLiveRun(
       // Fresh next-turn admission records identity before reservation; reconnect reuses it exactly.
       if (initialPrompt && retained && retained.state !== "observed")
         void commands.submit(retained.prompt, true);
-      // A recovered command is uncertain, not authority. Re-read through the SDK so
-      // its exact session-bound view is admitted before observation or explicit Stop.
-      else void commands.history();
+      // Reloaded storage needs SDK readmission. Navigation keeps a genuinely uncertain
+      // cached command for explicit retry, including its original initial-input workflow.
+      else if (retained?.state !== "unknown" || journal.restoredFromStorage)
+        void commands.history();
     } else if (!active.current) observation.observe();
     return () => {
       alive.current = false;
