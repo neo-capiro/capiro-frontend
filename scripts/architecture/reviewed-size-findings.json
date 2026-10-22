@@ -1257,10 +1257,10 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "function",
     "symbol": "NewsletterWorkflow",
-    "fingerprint": "44a06826b092fe420cba3ad9297469d61388792849d8665a054632582628b787",
-    "reason": "The established Newsletter builder retains its template/editor/preview/comment/save behavior. Its former unavailable staging placeholder now delegates to the cohesive NewsletterStaging component. No wire contract, persistence or write lifecycle was added to the builder. The existing panel and actions remain its presentation responsibility.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "7961cd8d1736147113f121d7fd685387443b9eb2d79a77fffe6418360ad05e04",
+    "reason": "Retain this function as the renderer and navigation composition for one newsletter draft. Its step branches consume a single useNewsletter result and route explicit events back to that hook; desktop/mobile preview, undo/redo buttons, save status and discard confirmation all present the same editing session. The function delegates comments, paper rendering, templates, staging and binding to named components rather than duplicating their state machines. Its client-binding addition passes only the current draft, pending state and the hook's adoption callback, preserving unsaved editor fields in the hook. The stage button and stage branch both reflect the held flag, while the trusted backend remains responsible for access. A new step controller or generic workflow abstraction would duplicate the existing canonical hook instead of clarifying ownership.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
@@ -2418,10 +2418,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "0333c6d6868b89f4a76f6d5d643fd41af559ddfe1f82dd4f010d5f263be64837",
-    "reason": "Independent Codex outreach_review inspected the complete existing 203-line Workspace editor. The ordinary section textarea now consumes its canonical PATCH/snapshot pending state, matching title and rich-section admission. No payload, writer, transport, persistence or unrelated responsibility is added. Current record admission remains in WorkspaceDraft; canonical mutation/prospect hooks retain lifecycle ownership. See docs/workspace-admission-20261014/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "caa02f35b94dab13410db0c0c48a8966e104078c1b51afc66efe4aa9685ec465",
+    "reason": "Retain this function as the manual draft editor composition. It owns the editable title/section buffers, history visibility and ordinary PATCH-then-snapshot action for the displayed draft. Prospect identity admission remains in WorkspaceDraft/assertProspectDraft, retained prospect-save reconciliation remains in useProspectDraftSave, rich content rendering/export remains in named components, and copied source tabs remain in CopiedTabs. The A1 binding change stores only the confirmed bound draft for association presentation and passes onBound directly to setBoundDraft; it deliberately leaves title/sections intact instead of reloading the editor and losing unsaved work. Ordinary and prospect paths keep their established different save semantics while sharing the same editing presentation. Extracting their common JSX into a new generic editor abstraction would not remove an independent domain responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-document/DocumentLink.tsx",
@@ -2490,10 +2490,10 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
     "kind": "function",
     "symbol": "useNewsletter",
-    "fingerprint": "5d3d8a2c411df85a16dc9b7974d9ac1b34514927b26a103146edc57aa8fd8837",
-    "reason": "Existing newsletter edit/undo/save lifecycle keeps its responsibility. The narrow delta excludes bound Core copies consistently from initialization, target selection and returned document identity. It neither implements copied-tab mutation nor projects bound rich bodies into legacy updates. Exact independent review: docs/workspace-brief-copy-20261013/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent calendar_relationships_review; root integrated exact reviewed source",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "445e20866f94852ffd471190411a41e12c477e83e76281f00a776e7e84daea29",
+    "reason": "Retain this hook as the owner of one newsletter editing session and its ordered save attempt. Title/body, undo/redo, selected client, current draft, saved status and the save-in-progress ref are coupled by the invariant that a save uses one draft and client scope through create, primary-document update, metadata update and snapshot. The scope generation checks after awaited writes and confirmed-client adoption must update that same session; separating them into unrelated hooks would make stale-save rejection and unsaved-edit preservation harder to follow. Pure preset/content conversion remains in newsletter-model, fixed requests and cancellation in shared Capiro queries, visual composition in NewsletterWorkflow, and Outreach staging in its own hook/component. It explicitly excludes sourceBriefVersion documents from ordinary newsletter initialization and update selection rather than absorbing copied-tab editing.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
@@ -2847,31 +2847,328 @@
     "reviewedOn": "2026-10-15"
   },
   {
+    "file": "apps/web/src/features/modules/workspace/DraftClientAssociation.tsx",
+    "kind": "function",
+    "symbol": "DraftClientAssociation",
+    "fingerprint": "9e5a4424aeadc6877b517e2436750ffe60918bcf4c721b2be3a37bfec4eec2e7",
+    "reason": "Retain this feature-local component as the single held-draft association interaction. Its client query, selected UUID, write exclusion, draft-lifetime counter, exact returned draft/client checks and refusal rendering all belong to one explicit binding attempt. It calls the existing workspace.draft.update operation and returns the confirmed draft through onBound; it does not write editor content, own the editor save sequence, infer an association from a display name, or implement server authorization. Keeping receipt validation beside the callback prevents consumers from adopting an unconfirmed binding. Ordinary and newsletter editors both reuse this component, avoiding two binding implementations. Extracting its small form or moving its attempt state into a generic helper would add indirection without separating an independent responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+    "kind": "function",
+    "symbol": "DocumentsLibrary",
+    "fingerprint": "2d75301592dc14979a988f9c8f9456b73afa4c8a02e7e5fef966862d3561ba97",
+    "reason": "Retain this function as the read-only Workspace document-list interaction. Query parameters, current page cursor, local search/ownership/template/client filters, loading/refusal state, table columns and open callbacks all operate on one admitted result page. The fixed workspace.documents schema/transport owns receipt parsing and requests; the backend owns visibility, while the optional clientId is sent as the existing server query scope. The A1 additions suppress held rows from client-scoped views/options and show the explicit recovery label without adding a write path, association inference or new store. The local client-name selector filters already-returned display rows and does not establish client identity or change bindings. Extracting columns or each filter into separate files would mainly split presentation configuration, not create a clearer ownership boundary.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "fe25e0d517a5f699138f7aee1af29dbcf5ca4a369d0d4b3715b57beb257377f9",
+    "reason": "Retain this file as the newsletter workflow presentation owner. Its only local helper, BuilderTools, adds bounded newsletter blocks through an onChange callback; NewsletterWorkflow composes template, builder, review and staging views of the same draft. Editing state and the create/PATCH/snapshot sequence already live in useNewsletter, content rendering in NewsletterPaper, comments in NewsletterComments, destination staging in NewsletterStaging, template selection in NewsletterTemplates, and held-client recovery in DraftClientAssociation. The file neither embeds those service lifecycles nor imports an unrelated feature's private implementation. The added recovery panel and two held-state staging branches connect an existing child boundary to the same draft. Splitting out each JSX step solely to reduce this file's line count would disperse one view composition without moving a distinct authority, persistence or transport owner.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/InviteMember.tsx",
+    "kind": "function",
+    "symbol": "InviteMember",
+    "fingerprint": "9c771ec64d1237e2101b9f5dccd0de918a9926d0639f9b56882623858f417c77",
+    "reason": "One invitation dialog owns its four input fields, visible role choices, one captured submission and the success reset/close sequence. Shared SettingsDialog handles busy dismissal; useSettingsMutation owns uncertain outcome fencing, request capture and receipt validation. The remaining size is labelled form/footer/error composition for that same invitation, with no separate transport or authorization lifecycle to extract.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/AliasManager.tsx",
+    "kind": "function",
+    "symbol": "AliasManager",
+    "fingerprint": "47757a1a730f064934d6764423feac046dfe720075533434ff0dc5df53b30aa6",
+    "reason": "Retain as the program-alias screen coordinator. Program search and selection identify the alias list; the duplicate-alias view supplies options to the already separate MergePrograms transaction. Add/edit draft fields are already owned by AliasEditor. This function owns list presentation, delete confirmation and the three dependent list refreshes; it does not normalize aliases, infer duplicate identity or execute merges itself. Its length is principally table columns and modal composition, and further splitting those declarations would pass the same selected program and refresh boundary between files without removing another responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/AliasManager.tsx",
+    "kind": "function",
+    "symbol": "AliasEditor",
+    "fingerprint": "bb8660c88203fadbc934967118a235822f6624587a50c5235b1355367e3d3bca",
+    "reason": "Retain as one alias form lifecycle. Initial alias state selects the existing-record PATCH or new-program-alias POST; alias/type fields are shared, while source is editable only on creation because the update contract excludes it. A single submit owns the draft, busy/error display, refresh and close. The operation-specific branch preserves meaningful contract differences and does not justify a generic editor abstraction or separate submit service.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+    "kind": "function",
+    "symbol": "AnalystAuditLog",
+    "fingerprint": "bd6d61962409ecc621536a1400b973f230a9052889df2038ac706e6a9c8836e5",
+    "reason": "Retain as a read-only audit inspection view. Draft filters become applied filters only on form submission and reset pagination; table row selection opens that same audit record before/after detail. One list operation and one selected-record lifetime account for all state. It neither emits audit records nor shares mutation state with the separately exported QuarantineQueue, so splitting filter/table/detail solely for length would fragment a single read workflow.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+    "kind": "function",
+    "symbol": "QuarantineQueue",
+    "fingerprint": "ba78f3de043fb89b6e022158f007ddb67a16020628d5c696593449d2927d7bce",
+    "reason": "Retain as one quarantined-record review workflow. Type/source/page select the queue; raw detail, reprocess and explicit discard all operate on a row from that queue and refresh the same read. Reprocessing acceptance is displayed from the returned receipt rather than locally inferred. Two narrow modals present or confirm the selected record, while useSettingsMutation owns write fencing and recovery; there is no ingestion/reprocessing algorithm in this function.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/MergePrograms.tsx",
+    "kind": "function",
+    "symbol": "MergePrograms",
+    "fingerprint": "533ce5c4b640bb7d755d62008df8f006710f052f629082c89996be0ccf2964c6",
+    "reason": "Retain as a single explicit two-program merge confirmation. Deduplicating caller-provided choices by programId only builds select options; the function captures keep/merge IDs, refuses an empty or identical pair in the UI, invokes one fixed merge operation and reports aliasesCopied from its receipt. Canonical program/alias movement remains server-owned. Keeping the paired selects and destructive confirmation together makes the directional choice reviewable without a separate controller.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+    "kind": "function",
+    "symbol": "PersonCandidateQueue",
+    "fingerprint": "d0e3a9339e22dbc003b2dd89c19c6397701145c58568eb0f87b15f65641f9f74",
+    "reason": "Retain as one paginated person-to-program candidate decision view. The table presents the proposed person, PE, score and match basis; its only writes are confirm/reject on the displayed candidate ID, followed by the same queue reload. The UI does not resolve identity or create the relationship locally. Column markup and the two intentionally distinct decision payloads explain the size; sharing it with other analyst queues would obscure their different contracts and outcomes.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+    "kind": "function",
+    "symbol": "PersonnelMergeQueue",
+    "fingerprint": "895eee43cc205d6347432dafdd3df706c9994f43474ec1880b2ecdf3c2d31f61",
+    "reason": "Retain as a personnel-pair review lifecycle. The queue and selected {item, decision} share one record context; PersonRecord already owns repeated side-by-side person/source presentation. Four explicit decisions use one typed operation and a single notes/confirmation dialog, with reset-on-open and close/reload-on-success. The component does not calculate similarity or merge personnel data, so an additional generic queue or decision service would not remove a separate domain responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx",
+    "kind": "function",
+    "symbol": "ProgramMatchQueue",
+    "fingerprint": "10625c96d3e4514acf5a732ca5617912248337e84c1c10002c0e9af696e9365c",
+    "reason": "Retain as the PE-to-program review screen. Status/page state selects the queue; per-row notes, evidence detail and accept/quarantine/reject all concern a displayed match. The local decide closure centralizes the single write shape while the service remains responsible for confidence, evidence tier and actual linkage. Table presentation and evidence modal are dependent views of that same row, not independent provider or matching workflows.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+    "kind": "function",
+    "symbol": "ReconciliationQueue",
+    "fingerprint": "1c9b21e5f1ca08beddd4eaa3c4649887ec11fb358d663bfd38cb628ebbd3ae25",
+    "reason": "Retain the structural boundary as one reconciliation queue: canonical/conflicting/manual choices, the selected manual draft and second-administrator status all concern the same row lifecycle and one resolve payload owner. Exact decimal input stays a string, pending versus resolved success is read from the backend receipt, and the confirmation/dialog/table use existing primitives. There is no provider integration, persistence or second policy owner to extract. This cohesion decision is not behavioral acceptance: the separately recorded inherited cancelled-notes defect needs disposition and a targeted characterization; moving JSX alone would not fix it.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "039619eb360d1492f9c7146aef6aea36b751e0408f4deabd68b16b350a25c797",
+    "reason": "Retain this file as the HQ tenant AI usage and credential-management feature. It contains a read-only tenant overview and its private TenantKeyDrawer, with the component boundary already separating range/list selection from the selected tenant's credential interaction. Both views use the same range and explicit refresh callback; the only other local definitions format money/tokens and name the existing credential schema. Fixed operations and schemas remain in settings-admin/hq, reads in useCapiroQuery, and write exclusion, receipts and recovery in useSettingsMutation and its security-write modules. The file does not implement provider calls, credential storage or backend authorization. Moving the private drawer to another file would change placement without uncovering a missing responsibility boundary; no second consumer or separate lifecycle requires that move in this snapshot.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+    "kind": "function",
+    "symbol": "AiKeysSettings",
+    "fingerprint": "c7c082a3b756b625a73fd9cda9bb700f65189dacd3ec56ce543eb785de9f7e66",
+    "reason": "Retain the overview function as one read-only selection interaction. The chosen 7/30/90-day period produces the query range used by both the tenant usage table and the selected tenant drawer; selecting a row captures its tenant ID/name and closing it clears that selection. Table columns present the same admitted usage rows, and the child refresh callback reloads their source query. No mutation dispatch, credential form state or recovery state is owned here. Extracting the range control or columns would mostly separate closely coupled view configuration, while a new controller hook would only relocate three small pieces of local selection state.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+    "kind": "function",
+    "symbol": "TenantKeyDrawer",
+    "fingerprint": "db93c03e5ae828be7f7070eb1a1f320f7086d13a2e85aadd0378fb21e29f78ae",
+    "reason": "Retain the drawer as the interaction owner for one selected tenant's AI credential lifecycle. Add/replace, supported-model change and remove-confirmation act on the same tenant/provider records, use one tenant-scoped mutation owner and lock, and refresh the credential list, tenant usage and overview together. The raw key remains local form state and is cleared on acknowledged save or drawer close; shared snapshot/journal helpers remove credentials from recovery metadata. The usage metrics and workflow table are read-only context for that same tenant/range, with no separate editing lifecycle. Splitting each credential action into state-owning hooks would fragment the common exclusion and confirmation state; extracting the read-only metrics alone would not resolve an ownership defect.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/BroadcastDetail.tsx",
+    "kind": "function",
+    "symbol": "BroadcastDetail",
+    "fingerprint": "cffd933b7e98620dbac9aa1447d70f5f875a8fcc013fa321718476ab8a08fc7a",
+    "reason": "Retain this function as a single broadcast detail and archival interaction. Its title/body, creator/time, acknowledgement totals and recipients table all derive from the same detail query keyed by the supplied broadcast ID. Archive is the sole write: the fixed operation uses that ID and, only after the shared mutation owner accepts the result, reloads the detail and parent list. Dialog busy state, the archive/close controls and recovery notice describe that same attempt. Broadcast composition and tenant/recipient selection already live outside this function in BroadcastSettings. Splitting the recipient columns or archive footer would not separate an independent lifecycle or authority.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/BroadcastSettings.tsx",
+    "kind": "function",
+    "symbol": "BroadcastSettings",
+    "fingerprint": "a99ef011fce6a54c19081b437bbba14e010883c902df04f056ff90ec67ce0fb5",
+    "reason": "Retain this function as the selected-tenant broadcast composition workflow. Tenant selection determines the active-member query, sent-broadcast query, recipient options and displayed confirmation target; changing it clears selected recipients, confirmation and detail selection together. Title/body/audience/recipient state feeds one deliberate confirmation and one fixed send operation, whose acknowledged result clears the composer and reloads the tenant's sent list. The list is the immediate record of this workflow, while the independently selected detail/archive interaction is already delegated to BroadcastDetail. Transport, durable uncertainty handling and semantic receipt checks remain shared. A new generic form/controller split would redistribute this single target-and-confirmation state without removing a separate domain responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/CustomerSettings.tsx",
+    "kind": "function",
+    "symbol": "CustomerSettings",
+    "fingerprint": "de94ed1775a38023737e2a04a2fe1c6e8e4b6dc933844a4a3748ba3c4416ca11",
+    "reason": "Retain this function as the HQ customer billing overview and its single complimentary-access interaction. Summary totals, status filter and table are projections of the same server-returned customer rows; the selected row supplies the tenant ID and desired comp/uncomp state for one confirmation dialog. The write uses the existing onboard operation, and shared mutation handling requires the semantic receipt plus exact-tenant customer readback before the local selection is cleared and the list reloads. The function does not calculate billing policy, call Stripe or implement a managed-import queue; that unavailable contract is only disclosed. Splitting metrics, filters or table cells would disperse one list presentation without isolating an independent state or trust boundary.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/TenantDialogs.tsx",
+    "kind": "function",
+    "symbol": "CreateTenant",
+    "fingerprint": "e1ad8e29500c01a19b2965aeee3c2d11ef336e30e97a33a778552737108c3b91",
+    "reason": "Retain CreateTenant as one tenant-and-initial-admin creation form. Its five fields are one payload for the existing create operation; optional administrator names are omitted when blank, and the same form ID connects the dialog footer submit control to that payload. The pending lock freezes fields and cancellation while the shared mutation owner captures the attempt and qualifies the returned tenant/invitation. Only the accepted result triggers parent refresh, close and form reset. Tenant detail/resend already has its own sibling component and mutation scope. Extracting each field, submission callback or success reset would split a single form lifecycle rather than establish a missing feature boundary.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/hq/TenantSettings.tsx",
+    "kind": "function",
+    "symbol": "TenantSettings",
+    "fingerprint": "c592bdfec1c7072240456f400cb5ad112eaf5b546dbe3b011267848a3929ea91",
+    "reason": "Retain this function as the HQ tenant-list interaction coordinator. One selected tenant and mode determine detail, deletion confirmation or the explicit unavailable impersonation notice; selecting a row resets the confirmation text. Creation and membership detail/resend are already delegated to CreateTenant and TenantDetails. The only mutation owned here is confirmed deletion of the selected tenant using the fixed operation, with current-tenant protection reflected in the controls and receipt/recovery behavior delegated to useSettingsMutation. Impersonation contains no dispatch or hidden alternate authority path. Extracting the list columns or deletion footer would split one selection/confirmation lifecycle, while implementing a new impersonation controller would exceed the existing unavailable contract.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/mappings/AttachFederalRecord.tsx",
+    "kind": "function",
+    "symbol": "AttachFederalRecord",
+    "fingerprint": "f00704627b5907b1cca22a5b94e0e83c99a4e7b1daaa63b1f679dcb639dabd96",
+    "reason": "Retain as one manual mapping transaction from chosen client/source to selected external record. SourceSearch already owns source-specific querying and record presentation; presentation.ts derives allowed relationship values and award-decision applicability. This dialog owns the selected record, explicit relationship/roll-up inputs and one manual-attachment payload. Client/source/search changes invalidate selection, and source changes reset award choices. Its JSX implements a dependent form sequence, not another entity resolver or transport owner.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
+    "kind": "function",
+    "symbol": "ContractorIdentity",
+    "fingerprint": "0480e39d83f970855eaac9afdbe6c09aff1c4f7ae69355c0f24d68d975877f3c",
+    "reason": "Retain as a client-scoped contractor identity review. The outer drawer discovers/displays candidates and refreshes them; its selected candidate supplies the nested evidence and explicit relationship/award decision. Existing candidates are confirmed by mapping ID, while unmapped candidates use the manual operation, and rejection preserves its distinct contract. These branches are the same selected-identity decision, share the mutation fence and refresh boundary, and do not implement matching or award aggregation. Fact tables explain much of the length; a standalone generic resolver/controller would blur those contract differences.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/mappings/MappingReview.tsx",
+    "kind": "function",
+    "symbol": "MappingReview",
+    "fingerprint": "d5ceeaf83ff529574ac4d77ef52a93b27019339148e8a7b237dea6b53b99d91c",
+    "reason": "Retain as one existing-mapping review form. The mapping prop supplies the immutable reviewed identity; its ID scopes the mutation hook and request path. Initial relationship/roll-up values, optional rejection reason, and confirm/reject payload differences stay within that single decision. Award applicability and enum vocabulary are imported, while actual receipt validation and authority stay outside. Splitting confirmation and rejection would duplicate the same record facts and form lifetime.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+    "kind": "function",
+    "symbol": "MappingSettings",
+    "fingerprint": "391699df69ecd67e4f37cef76eaf63b2c40f53314f73a0d5f4818d582bd2dad8",
+    "reason": "Retain as the mapping index coordinator. It owns display filters, selected review/attach/identity view, and summary refreshes. The three independently editable workflows are already separated into MappingReview, AttachFederalRecord and ContractorIdentity; bulk eligibility and sequential frozen-ID confirmation already have a dedicated bulkReview owner. The remaining bulk dialog confirms exactly the filtered eligible set and the fixed discovery actions only display backend summaries. Moving the large filter/table declarations into generic helpers would reduce line count without removing another policy, transport or persistence responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-action.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #10",
+    "fingerprint": "11b0e181bf4c3f759b0f583e03e3cc60ad5fa49bf42d8edc4d7ec21e6c9a77cd",
+    "reason": "This describe callback registers the Settings dispatch-lifetime scenarios against one Node/SSR probe: double-submit/frozen input, wrong receipt persistence, scope cancellation, refused readback, read-only reconciliation and definite rejection. Harness state/effect/cache mechanics are already separate helpers; the callback itself registers tests and has no application execution role. Keeping the cases together preserves their common attempt-lifetime contract and explicit assertions without splitting a coherent suite to satisfy the function metric.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-write-reconciliation.ts",
+    "kind": "function",
+    "symbol": "reconcileSettingsWrite",
+    "fingerprint": "7f9bd5f36daaf654fdcd6c04a604bca4dad5b27f657f81b62fe80c4a90d55a57",
+    "reason": "This is the Settings readback policy owner: each branch identifies the authoritative read and target/result evidence required to confirm the requested current state for one retained SettingsWrite. It never dispatches a write, checks cancellation, bounds queue/audit traversal to20pages and refuses creation/send/rotation operations without sufficient attempt evidence. Receipt validation and metadata storage are separate modules; splitting branches into per-screen callbacks would scatter the fail-closed default and make no-replay review harder. Additional unrelated workflow execution would require a new review.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-writes.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "f5c1cfd24f62cd927c33ab8e923e28388eb8f2a9478f32ac944fe1792e5aeca5",
+    "reason": "This test module covers one Settings write-safety boundary across receipt binding, read-only reconciliation and nonreplayable recovery metadata. The long negative-receipt fixture table and explicit target/value/cancellation cases are data and assertions, while snapshot, journal, reconciliation and bulk-review implementations stay imported from their existing owners. Keeping the fixture table with these cases makes the operation-to-evidence contract auditable; it introduces no production orchestration.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-writes.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "74cef3d01e94965fe3bd625dc8c57594a40c578b1fea6fe3bcee76db066823c8",
+    "reason": "The first describe registers the receipt-boundary matrix and adjacent readback checks: forbidden branding fields, mismatched targets/values, exact paginated queue rows, cancelled reads, unsupported recovery and definite-versus-uncertain rejection. Executing cases are separate callbacks and the data table is outside the registration function. Its size represents related test declarations rather than a multi-responsibility runtime function.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-writes.ts",
+    "kind": "function",
+    "symbol": "assertSettingsReceipt",
+    "fingerprint": "05a085db86711e33613d73863484cb29d447581d818d3c1bd67117094cb629f7",
+    "reason": "This is the single semantic receiver for Settings write receipts after transport shape validation. Explicit branches compare captured target/value where the receipt supplies them; flag-only removal/queue/customer/key receipts and returned invitation IDs depend on the separate required readback before success. It records the invitation ID or reprocess result needed for that readback and rejects unmatched/default cases with the uncertainty fence. Dispatch, storage and readback already have separate owners; the operation matrix keeps those differing confirmation contracts visible without a generic success fallback or authorization engine.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/useSettingsMutation.ts",
+    "kind": "function",
+    "symbol": "useSettingsMutation",
+    "fingerprint": "32ab728a1b8667a9900c6fed614df81c75241c57578a5035d0ef2b7429aadd4a",
+    "reason": "This hook owns one section-and-auth-scoped Settings attempt lifecycle and its React Query/journal projection. It connects existing action cancellation, snapshot/receipt policy, nonreplayable storage and read-only reconciliation helpers rather than implementing those policies twice. Stable scope keys, subscription state and local lock all describe that same attempt; extracting them into independent hooks would risk separate lifetimes without another caller or responsibility.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/useSettingsMutation.ts",
+    "kind": "function",
+    "symbol": "useSettingsMutation > <anonymous> #4",
+    "fingerprint": "2667e9b561afa523e783b9c68a945b6d9b022362b9b0fd96738eaf5ca73c4b6b",
+    "reason": "This useMemo factory exposes one scoped API facade, preserving raw methods while wrapping only request for the Settings mutation contract. Its large size is the nested request sequence reviewed separately; the factory has no second lifecycle or policy. Keeping the facade and its explicit raw/cache/journal/scope dependencies together makes stale-scope behavior inspectable.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/settings/useSettingsMutation.ts",
+    "kind": "function",
+    "symbol": "useSettingsMutation > <anonymous> > request",
+    "fingerprint": "ef3233c8ba701a8b0f63d21ffb6aeb9d6fbc9cb37c86e9824c44be2a3580cd36",
+    "reason": "This callback sequences one captured Settings write: permit read-through, require signed-in scope, reject an occupied journal, clone input, persist metadata before dispatch, validate receipt/readback and clear only the matching attempt. Its dispatched/accepted flags keep definite pre-dispatch or definite API rejection separate from post-acceptance uncertainty. Snapshot, storage and receipt/readback policies are delegated; splitting this try/catch across helpers would obscure the ordering that prevents replay after an ambiguous write.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings",
-    "fingerprint": "4aef2aff6925c163633c2d25fe5107a0512acddec02b50529b9f3a2136c1e9c0",
-    "reason": "One account-integration lifetime owns provider capability reads, registered connections, selected account dialogs and fixed connect, sync and disconnect commands. The Microsoft Realtime control targets the same selected connection; operation validation and mutation serialization remain delegated. Provider and connection callbacks are reviewed separately, rather than excused by the screen review.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "d4d2ddb780ca576f62c7589b8d973944194f29afc1927abe0beaf098a1ba8df6",
+    "reason": "This function coordinates one integration-settings page: list/capability queries, the selected registration/detail/disconnect record, fixed-operation callbacks and matching status views. The disconnect journal is owned by useSettingsMutation, account registration by RegisterAccount, and URL admission by settingsDestination; server OAuth and sync internals are absent. The large portion is provider/connection markup, separately reviewed below, so a new controller layer would currently duplicate the same selected-account lifetime.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous>",
-    "fingerprint": "da12b71f1b9dc251e00a5da08353b7333562a60aa4de3e6945d967918f98d02f",
-    "reason": "The provider mapping presents one provider card from its registered accounts and capability loading/error/configuration state, with register/connect actions. It does not fetch, authorize or persist independently. Extraction would pass the same screen callbacks through a component without a separate lifecycle today.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "c16af860e506f16911adcff6ef3427e3305960236e4cb334fd269b9d34e67f17",
+    "reason": "This providers.map callback is one provider-card projection: it filters the supplied connection list for the provider, selects that provider capability query, and renders configuration state, empty state and provider-specific action labels. Account rows remain a nested pure JSX projection; actual requests are parent callbacks or fixed API operations. The provider discriminator is presentation/capability selection, not a second provider implementation.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous> > <anonymous> #2",
-    "fingerprint": "fcd3e7988ca1dd738141b8e46b31e3c126f8c47fb78d5fbccd9930221885eb5e",
-    "reason": "The connection mapping presents one connection identity, sync age, status, error and controls for permissions, sync, reconnect, Realtime or disconnect. Each control targets the same connection ID and delegates its write to the enclosing fixed-command owner; no row-local state or independent service is hidden here.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "20fc2749d2e875e0b39f50226d56a9c259aa3458c5bd771f87428c75cf75fabd",
+    "reason": "This rows.map callback renders one connection identity, health/error, permission affordance and available account actions against the same connection/provider/capability values. It does not own a separate hook, subscription or persisted state; callbacks reuse parent action handling and selected-record setters. Keeping status and action eligibility together makes the displayed account and dispatched connection ID directly reviewable.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
@@ -3120,10 +3417,10 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "b8e790eb14c4a3962b0056eb7705a577faee752254a66e438503f3b818f6641b",
-    "reason": "This module contains the integration screen, its provider/connection types and local sync-age formatter. The three provider cards share one list, capability and action lifecycle; fixed operations, schemas and OAuth destination validation remain in separate owners. The nested render callbacks are reviewed individually below.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "533315bfc2efc666b350a1f4a9969dd5e54717e3e5ffc3b51d159a95b6a805b0",
+    "reason": "This module presents the existing integration-account settings surface: provider cards, connection status/actions, selected-account permissions and disconnect confirmation. Provider metadata, account registration, destination validation and uncertain-write lifecycle already have separate owners; the only file-local helper formats sync age. It contains fixed API calls and view state, not OAuth/token exchange, mailbox sync algorithms or authority enforcement. Retaining these mutually related views avoids distributing selected connection and disconnect state merely to reduce line count.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
@@ -3138,19 +3435,19 @@
     "file": "apps/web/src/features/settings/TeamSettings.tsx",
     "kind": "function",
     "symbol": "TeamSettings",
-    "fingerprint": "be35eb5f2014ba0860a2aeaa633c600f58a30c6b36afd1b31296c6e930a0dd4c",
-    "reason": "One tenant-team screen keeps members and invitations as tabs with a shared refresh/action lifetime, invite dialog and member removal confirmation. Row controls target the displayed member or invitation and server operations enforce roles; the new Actions headers preserve accessible names without adding policy.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "bdbcd28dc2c8cc7fde7027f22e8122ef85d5b6bc647c40c35d87601ce61ce36a",
+    "reason": "The component composes membership and invitation projections of one team roster, including role/billing controls, invitation resend and selected-member removal confirmation. Both list reloads deliberately share the same refresh and team mutation scope; InviteMember already owns invitation-entry state, while query, mutation, table and dialog primitives own their respective mechanics. Column definitions and modal markup account for the size; no backend membership policy or separate persistence subsystem is implemented here.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/shared/capiro/operations/settings.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "937d7de1d3d37d84e60a158cb205a5ac4de63a8024d3d94c63e96adc3f46b551",
-    "reason": "This declarative fixed settings-operation catalogue keeps each bounded path, request and response schema, and controller provenance together. The existing clients.list response now retains Core's optional profileType field for the limited Portfolio roster filter; no new dispatch, browser authority or UI state was added. Splitting this catalogue would fragment the canonical operation registry.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "692c8cc4863eb59fbfeb7db9aa18518506f47481feb98f9de5d6eb22eb9135ae",
+    "reason": "This is the existing declarative Settings gateway-operation catalog: fixed service/method/path, strict request schemas and response-shape validation, explicit limits and backend source attribution. Reusable wire schemas already live in settings-schemas and request execution in the gateway/http owners; the file contains no transport execution, provider implementation or authorization decisions. Keeping the catalog export together preserves a single typed registry owner and makes the branding name-only contract auditable without introducing a parallel registry.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
