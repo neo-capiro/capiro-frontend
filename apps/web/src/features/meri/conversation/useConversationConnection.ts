@@ -34,7 +34,7 @@ const exactTarget = (hints: Hints | ActionContext | undefined) =>
     ? { conversationId: hints.conversationId, runId: hints.runId }
     : undefined;
 
-/** The last context the service bound, kept for exact reopening; never read to render. */
+/** Last service binding: an exact reopening/draft selector, never current authority. */
 function boundContext() {
   let last: Readonly<{ context: ActionContext; at: number }> | null = null;
   return {
@@ -229,7 +229,8 @@ export function useConversationConnection(
     state: storageError ? { status: "unavailable" as const } : state,
     storageError,
     ...renewal,
-    conversationId: opening.hints.conversationId,
+    conversationId:
+      bound.last()?.context.conversationId ?? opening.hints.conversationId,
     pending: opening.pending,
     retry: () => retry(state.status),
     reopen,

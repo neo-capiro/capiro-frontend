@@ -6,6 +6,7 @@ import {
 } from "../src/shared/meri-conversations/query-journal";
 import {
   recoverRequest,
+  reconcileStoredRequest,
   sendRequest,
 } from "../src/features/meri/conversation/run-commands";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
@@ -234,5 +235,92 @@ it("initial capture receives the exact journaled request before allocation and n
   await sendRequest(port, journal, "A later draft", true, true, capture);
   expect(submitInitial).toHaveBeenCalledTimes(2);
   expect(capture).toHaveBeenCalledOnce();
+  cache.clear();
+});
+
+it("matching admitted non-queued history resolves retained input without dispatching or changing request bytes", async () => {
+  const cache = new QueryClient();
+  const journal = conversationIntentJournal(cache, context);
+  const input = {
+    ...storedSubmission(stored),
+    state: "unknown" as const,
+    workflow: "initial" as const,
+  };
+  journal.write({ submit: input, cancel: "unknown" });
+  const port = {
+    getSnapshot: () => ({
+      status: "ready",
+      observation: { runState: "running" },
+    }),
+    submit: vi.fn(),
+    submitInitial: vi.fn(),
+    retrySubmit: vi.fn(),
+    cancel: vi.fn(),
+  } as unknown as MeriConversationPort;
+  await reconcileStoredRequest(port, journal, stored);
+  expect(journal.read()).toEqual({
+    submit: { ...input, state: "observed" },
+    cancel: "unknown",
+  });
+  for (const operation of [
+    port.submit,
+    port.submitInitial,
+    port.retrySubmit,
+    port.cancel,
+  ])
+    expect(operation).not.toHaveBeenCalled();
+  cache.clear();
+});
+
+it("missing, failed or queued SDK history cannot acknowledge a retained request", async () => {
+  const cache = new QueryClient();
+  const journal = conversationIntentJournal(cache, context);
+  const input = {
+    ...storedSubmission(stored),
+    state: "unknown" as const,
+    workflow: "initial" as const,
+  };
+  journal.write({ submit: input });
+  for (const snapshot of [
+    { status: "idle", observation: null },
+    { status: "unavailable", observation: { runState: "running" } },
+    { status: "ready", observation: null },
+    { status: "ready", observation: { runState: "queued" } },
+  ]) {
+    await reconcileStoredRequest(
+      { getSnapshot: () => snapshot } as unknown as MeriConversationPort,
+      journal,
+      stored,
+    );
+    expect(journal.read().submit).toEqual(input);
+  }
+  cache.clear();
+});
+
+it("history with changed request identity, prompt, requested window or selected skill leaves uncertainty intact", async () => {
+  const cache = new QueryClient();
+  const journal = conversationIntentJournal(cache, context);
+  const input = { ...storedSubmission(stored), state: "unknown" as const };
+  journal.write({ submit: input });
+  const port = {
+    getSnapshot: () => ({
+      status: "ready",
+      observation: { runState: "completed" },
+    }),
+  } as unknown as MeriConversationPort;
+  for (const changed of [
+    { ...stored, requestId: context.runId },
+    { ...stored, prompt: "Other accepted prompt" },
+    {
+      ...stored,
+      windowRequest: { ...stored.windowRequest, offset: -1 as const },
+    },
+    { ...stored, skill: { ...stored.skill, skillVersion: "2.0.0" } },
+  ]) {
+    await expect(
+      reconcileStoredRequest(port, journal, changed),
+    ).rejects.toMatchObject({ code: "retained-submit-mismatch" });
+    expect(journal.read().submit).toEqual(input);
+  }
   cache.clear();
 });

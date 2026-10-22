@@ -249,8 +249,12 @@ test("sign-out removes identity and prevents reads after client navigation", asy
     ),
   );
   await expect(
-    page.getByRole("heading", { name: "Sign in to Capiro", exact: true }),
+    page.getByRole("status").getByText("Sign in to continue.", { exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Sign in", exact: true }),
+  ).toHaveAttribute("href", "/sign-in");
+  await expect(page.getByText(/^Welcome/)).toHaveCount(0);
   await noSamples(page);
   const before = reads;
   await page.evaluate((id) => {
@@ -258,7 +262,7 @@ test("sign-out removes identity and prevents reads after client navigation", asy
     dispatchEvent(new PopStateEvent("popstate"));
   }, clientId);
   await expect(
-    page.getByRole("heading", { name: "Sign in to Capiro", exact: true }),
+    page.getByRole("status").getByText("Sign in to continue.", { exact: true }),
   ).toBeVisible();
   expect(reads).toBe(before);
   expect(unexpected).toEqual([]);

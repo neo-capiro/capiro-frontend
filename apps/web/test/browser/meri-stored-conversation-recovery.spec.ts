@@ -17,9 +17,22 @@ test("a transient stored-session failure keeps the Core conversation, draft and 
 }) => {
   const fixture = await setupConversation(page, undefined, [context]);
   const sessionHints: object[] = [];
+  const effects: string[] = [];
   page.on("request", (request) => {
-    if (new URL(request.url()).pathname === "/api/action-followthrough/session")
+    const path = new URL(request.url()).pathname;
+    if (path === "/api/action-followthrough/session")
       sessionHints.push(request.postDataJSON());
+    if (
+      request.method() === "POST" &&
+      [
+        "/api/conversations/input/allocate",
+        "/api/conversations/input/admit",
+        "/api/conversations/submit",
+        "/api/conversations/next-turn",
+        "/api/conversations/cancel",
+      ].includes(path)
+    )
+      effects.push(path);
   });
   await page.addInitScript(() =>
     sessionStorage.setItem("meri-first-chat-enabled", "true"),
@@ -84,11 +97,14 @@ test("a transient stored-session failure keeps the Core conversation, draft and 
   await expect(page.getByText("Saved answer", { exact: true })).toBeVisible();
   await expect(composer(page)).toHaveValue("Keep this unsent draft");
   expect(bootstrap).toHaveLength(2);
-  expect(sessionHints).toEqual(
-    Array.from({ length: failedIssuances + 2 }, () => ({
+  expect(sessionHints).toEqual([
+    { clientId, conversationId: binding.conversationId },
+    ...Array.from({ length: failedIssuances + 1 }, () => ({
       clientId,
       conversationId: binding.conversationId,
+      runId: binding.runId,
     })),
-  );
+  ]);
+  expect(effects).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
 });

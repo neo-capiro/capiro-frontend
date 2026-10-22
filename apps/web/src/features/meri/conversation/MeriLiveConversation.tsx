@@ -103,7 +103,9 @@ function composerAvailability(
     stopBlocked:
       busy || intent.cancel === "pending"
         ? "Meri is handling your last command."
-        : undefined,
+        : run.snapshot.status !== "ready" || !run.snapshot.observation
+          ? "Verify the current run before requesting Stop."
+          : undefined,
   };
 }
 
@@ -231,7 +233,11 @@ export function MeriLiveConversation({
   acceptedRequest?: ConversationStoredRequest | undefined;
   storageError?: string | undefined;
 }) {
-  const run = useLiveRun(port, initialPrompt);
+  const run = useLiveRun(
+    port,
+    initialPrompt,
+    savedCurrent?.runId === port.context.runId ? acceptedRequest : undefined,
+  );
   const { snapshot, intent } = run;
   const observed = snapshot.observation
     ? {

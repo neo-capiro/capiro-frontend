@@ -40,13 +40,22 @@ test("disabled owner review makes no memory request", async ({ page }) => {
   await page.goto("/meri/memory");
   await expect(
     page.getByRole("heading", {
-      name: "Memory review unavailable",
+      name: "Personal memory review unavailable",
       exact: true,
     }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Correction creation unavailable" }),
-  ).toBeVisible();
+    page
+      .getByRole("region", { name: "Personal memory review", exact: true })
+      .getByRole("status"),
+  ).toHaveText("Not enabled or not configured for this workspace.");
+  await expect(page.getByLabel("Corrected text")).toHaveCount(0);
+  await expect(
+    page.getByRole("button", {
+      name: "Submit correction for review",
+      exact: true,
+    }),
+  ).toHaveCount(0);
   expect(fixture.reads).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
 });

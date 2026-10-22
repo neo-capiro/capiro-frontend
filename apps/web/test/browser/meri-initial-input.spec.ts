@@ -271,9 +271,16 @@ test("synthetic desktop hard reload recovers positively stored initial input wit
     .getByRole("button", { name: "Retry same request", exact: true })
     .waitFor();
   await page.reload();
-  await page
-    .getByRole("button", { name: "Continue accepted request", exact: true })
-    .click();
+  const continueRequest = page.getByRole("button", {
+    name: "Continue accepted request",
+    exact: true,
+  });
+  await expect(continueRequest).toBeEnabled();
+  // The reload only re-admits history. Continuing still needs the person's click.
+  expect(native.calls.allocate).toHaveLength(1);
+  expect(native.calls.admit).toHaveLength(1);
+  expect(native.calls.submit).toHaveLength(0);
+  await continueRequest.click();
   await expect(
     page.getByText("Initial synthetic answer", { exact: true }),
   ).toBeVisible();

@@ -15,6 +15,7 @@ type ButtonProps = {
 const harness = vi.hoisted(() => ({
   run: undefined as ReturnType<typeof useLiveRun> | undefined,
   buttons: [] as ButtonProps[],
+  composer: undefined as { stopBlocked?: string | undefined } | undefined,
 }));
 vi.mock("../src/features/meri/conversation/useLiveRun", () => ({
   useLiveRun: () => harness.run,
@@ -33,10 +34,15 @@ vi.mock("../src/features/meri/conversation/ConversationFrame", () => ({
   ConversationFrame: ({
     status,
     current,
+    composer,
   }: {
     status: ReactNode;
     current: ReactNode;
-  }) => createElement("main", null, current, status),
+    composer: { stopBlocked?: string | undefined };
+  }) => {
+    harness.composer = composer;
+    return createElement("main", null, current, status);
+  },
 }));
 vi.mock("../src/features/meri/conversation/ConversationPanels", () => ({
   ConversationPanels: () => null,
@@ -97,6 +103,7 @@ function resetRun() {
     reconnect: vi.fn(),
   } as unknown as ReturnType<typeof useLiveRun>;
   harness.buttons.length = 0;
+  harness.composer = undefined;
 }
 beforeEach(resetRun);
 const renderLive = (props: LiveProps) =>
@@ -225,6 +232,44 @@ it("Ready stays absent until verification, terminal state and all write uncertai
     expect(html, reason).not.toContain('aria-label="Next message status"');
     expect(button("Write next message"), reason).toBeUndefined();
   }
+});
+
+it("saved running history cannot enable Stop until the SDK admits the exact current run", () => {
+  const props = liveProps();
+  props.savedCurrent = turnFromEvents(
+    [],
+    context,
+    request.prompt,
+    "running",
+    false,
+  );
+  for (const status of ["idle", "loading", "unavailable", "ready"] as const) {
+    harness.run!.snapshot = {
+      ...harness.run!.snapshot,
+      status,
+      observation: null,
+    };
+    renderLive(props);
+    expect(harness.composer?.stopBlocked).toBe(
+      "Verify the current run before requesting Stop.",
+    );
+    expect(harness.run!.cancel).not.toHaveBeenCalled();
+  }
+  harness.run!.snapshot = {
+    ...harness.run!.snapshot,
+    status: "ready",
+    observation: {
+      after: 0,
+      omittedPrefix: false,
+      hasMore: false,
+      events: [],
+      runState: "running",
+      prompt: request.prompt,
+    },
+  };
+  renderLive(props);
+  expect(harness.composer?.stopBlocked).toBeUndefined();
+  expect(harness.run!.cancel).not.toHaveBeenCalled();
 });
 
 function historySession(notReady: boolean, busy = false): Session {

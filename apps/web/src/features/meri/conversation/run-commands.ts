@@ -24,6 +24,43 @@ export type IntentRecord = Readonly<{
   write: (value: ConversationIntent) => void;
 }>;
 
+/** Match every original request field; normalized execution fields are not retry identity. */
+export function matchesStoredRequest(
+  retained: ConversationIntent["submit"],
+  stored: ConversationStoredRequest,
+) {
+  if (!retained) return false;
+  const request = { ...retained };
+  Reflect.deleteProperty(request, "state");
+  Reflect.deleteProperty(request, "workflow");
+  return (
+    submissionIdentity(request) === submissionIdentity(storedSubmission(stored))
+  );
+}
+
+/** Positive exact-run history can resolve delivery uncertainty without sending anything. */
+export async function reconcileStoredRequest(
+  port: MeriConversationPort,
+  intent: IntentRecord,
+  stored: ConversationStoredRequest,
+) {
+  const retained = intent.read().submit;
+  const snapshot = port.getSnapshot();
+  if (
+    retained?.state !== "unknown" ||
+    snapshot.status !== "ready" ||
+    !snapshot.observation ||
+    snapshot.observation.runState === "queued"
+  )
+    return;
+  if (!matchesStoredRequest(retained, stored))
+    throw new ConversationUnavailable("retained-submit-mismatch");
+  intent.write({
+    ...intent.read(),
+    submit: { ...retained, state: "observed" },
+  });
+}
+
 /**
  * Sends the run's single request, or retries the exact retained one. A failure after dispatch is
  * recorded as uncertain so the same request id and prompt are retried, never a new request.
@@ -72,11 +109,8 @@ export async function recoverRequest(
 ) {
   const request = storedSubmission(stored),
     retained = intent.read().submit;
-  if (retained) {
-    const { state: _state, workflow: _workflow, ...previous } = retained;
-    if (submissionIdentity(previous) !== submissionIdentity(request))
-      throw new ConversationUnavailable("retained-submit-mismatch");
-  }
+  if (retained && !matchesStoredRequest(retained, stored))
+    throw new ConversationUnavailable("retained-submit-mismatch");
   // Canonical stored input already exists. A recreated port can use ordinary admission;
   // a still-live unknown SDK operation retains and retries its own exact original workflow.
   intent.write({ ...intent.read(), submit: { ...request, state: "unknown" } });

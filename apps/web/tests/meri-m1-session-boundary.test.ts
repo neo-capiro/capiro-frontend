@@ -178,6 +178,27 @@ it("canonical confirmed signout on registration purges retained content and fenc
   expect(() => draft.write("Late response")).toThrow();
 });
 
+it("navigation between Meri routes preserves the same identity's exact draft and writer", () => {
+  syncMeriTabIdentity(identity);
+  const draft = tabRecord(scope, "draft", String);
+  draft.write("Private unfinished draft");
+  harness.snapshot = { identity, status: "ready" };
+  for (const pathname of ["/meri", "/meri/history", "/meri/files", "/meri"]) {
+    harness.pathname = pathname;
+    expect(render(createElement("p", null, draft.read()))).toContain(
+      "Private unfinished draft",
+    );
+    flushEffects();
+    expect(storage.getItem(marker)).toBe(identity);
+    expect(draft.current()).toBe(true);
+    expect(draft.read()).toBe("Private unfinished draft");
+  }
+  draft.write("Edited after navigation");
+  expect(tabRecord(scope, "draft", String).read()).toBe(
+    "Edited after navigation",
+  );
+});
+
 it("canonical identity replacement hides the previous ready Meri view before its new identity effect", () => {
   syncMeriTabIdentity(identity);
   const draft = tabRecord(scope, "draft", String);

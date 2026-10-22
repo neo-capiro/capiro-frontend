@@ -6,6 +6,7 @@ import ui from "../ui/meri-ui.module.css";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
 import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
+import { matchesStoredRequest } from "./run-commands";
 
 /** Connection, delivery and stop feedback for the current run; never a run outcome by itself. */
 export function RunStatus({
@@ -23,6 +24,11 @@ export function RunStatus({
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
+  const canContinue =
+    acceptedRequest &&
+    snapshot.observation?.runState === "queued" &&
+    (!intent.submit ||
+      (uncertain && matchesStoredRequest(intent.submit, acceptedRequest)));
   return (
     <>
       {run.error && (
@@ -52,7 +58,7 @@ export function RunStatus({
           </Button>
         </div>
       )}
-      {uncertain && (
+      {uncertain && !canContinue && (
         <div className={styles.statusRow}>
           <Button
             type="button"
@@ -65,19 +71,17 @@ export function RunStatus({
           </Button>
         </div>
       )}
-      {!intent.submit &&
-        acceptedRequest &&
-        snapshot.observation?.runState === "queued" && (
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            disabled={busy}
-            onClick={() => void run.recover(acceptedRequest)}
-          >
-            Continue accepted request
-          </Button>
-        )}
+      {canContinue && (
+        <Button
+          type="button"
+          variant="outline"
+          className={ui.outline}
+          disabled={busy}
+          onClick={() => void run.recover(acceptedRequest!)}
+        >
+          Continue accepted request
+        </Button>
+      )}
       {active && <ObservationStatus run={run} />}
       <StopStatus run={run} savedCurrent={savedCurrent} />
       {active && (

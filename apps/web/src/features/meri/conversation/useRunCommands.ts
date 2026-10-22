@@ -8,6 +8,7 @@ export type { TranscriptState } from "./useRunCommandJournal";
 import {
   historyNotStarted,
   recoverRequest,
+  reconcileStoredRequest,
   requestStop,
   sendRequest,
 } from "./run-commands";
@@ -91,6 +92,10 @@ export function useRunCommands(
   ) => send(() => sendRequest(port, record, prompt, false, true, onRecorded));
   const recover = (stored: ConversationStoredRequest) =>
     send(() => recoverRequest(port, record, stored));
+  const reconcile = (stored: ConversationStoredRequest) => {
+    if (journal.read().submit?.state !== "unknown" || active.current) return;
+    return perform(() => reconcileStoredRequest(port, record, stored));
+  };
   // The receipt is not the run's status; keep observing for run.status either way.
   const cancel = () =>
     perform(() => requestStop(port, record)).then(() => {
@@ -109,6 +114,7 @@ export function useRunCommands(
     submit,
     submitInitial,
     recover,
+    reconcile,
     cancel,
   };
 }

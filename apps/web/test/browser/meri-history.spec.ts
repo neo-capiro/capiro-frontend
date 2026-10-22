@@ -63,6 +63,7 @@ test("synthetic native discovery pages through other permitted clients and prese
   expect(f.hints.at(-1)).toEqual({
     clientId,
     conversationId: binding.conversationId,
+    runId: binding.runId,
   });
   expect(calls.list.length).toBeGreaterThanOrEqual(2);
   await page.setViewportSize({ width: 390, height: 844 });

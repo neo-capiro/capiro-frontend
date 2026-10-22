@@ -12,6 +12,22 @@ test("synthetic: selected conversation reload keeps the exact selector and admit
   page,
 }) => {
   const fixture = await setupConversation(page);
+  const effects: string[] = [];
+  page.on("request", (request) => {
+    const path = new URL(request.url()).pathname;
+    if (
+      request.method() === "POST" &&
+      [
+        "/api/capiro/meri.conversation.bootstrap",
+        "/api/conversations/input/allocate",
+        "/api/conversations/input/admit",
+        "/api/conversations/submit",
+        "/api/conversations/next-turn",
+        "/api/conversations/cancel",
+      ].includes(path)
+    )
+      effects.push(path);
+  });
   await page.route("**/api/conversations/history", (route) =>
     reply(route, history([status(1, "completed")], { state: "completed" })),
   );
@@ -30,8 +46,13 @@ test("synthetic: selected conversation reload keeps the exact selector and admit
   ).toBeVisible();
   expect(fixture.hints).toEqual([
     { clientId, conversationId: binding.conversationId },
-    { clientId, conversationId: binding.conversationId },
+    {
+      clientId,
+      conversationId: binding.conversationId,
+      runId: binding.runId,
+    },
   ]);
+  expect(effects).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
 });
 

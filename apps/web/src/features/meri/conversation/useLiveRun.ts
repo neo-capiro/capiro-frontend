@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
+import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { useRunCommands } from "./useRunCommands";
 import { useRunObservation } from "./useRunObservation";
 
@@ -15,6 +16,7 @@ export type { TranscriptState } from "./useRunCommands";
 export function useLiveRun(
   port: MeriConversationPort,
   initialPrompt: string | undefined,
+  acceptedRequest?: ConversationStoredRequest,
 ) {
   const alive = useRef(true),
     started = useRef(false);
@@ -39,8 +41,9 @@ export function useLiveRun(
       // Fresh next-turn admission records identity before reservation; reconnect reuses it exactly.
       if (initialPrompt && retained && retained.state !== "observed")
         void commands.submit(retained.prompt, true);
-      else if (!retained || retained.state === "observed")
-        void commands.history();
+      // A recovered command is uncertain, not authority. Re-read through the SDK so
+      // its exact session-bound view is admitted before observation or explicit Stop.
+      else void commands.history();
     } else if (!active.current) observation.observe();
     return () => {
       alive.current = false;
@@ -49,6 +52,26 @@ export function useLiveRun(
     // Runs once per mounted port; later commands are explicit.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (
+      acceptedRequest &&
+      snapshot.status === "ready" &&
+      snapshot.observation &&
+      snapshot.observation.runState !== "queued" &&
+      !commands.busy &&
+      !commands.error
+    )
+      void commands.reconcile(acceptedRequest);
+    // Reconcile only positive server history; never resend a restored command.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    acceptedRequest,
+    snapshot.status,
+    snapshot.observation?.runState,
+    commands.busy,
+    commands.error,
+  ]);
 
   return {
     snapshot,
