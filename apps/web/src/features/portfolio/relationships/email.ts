@@ -109,6 +109,15 @@ export type MailContact = {
   title: string | null;
   email: string | null;
 };
+const sendIntentReceipt = z.object({
+  intentId: z.uuid(),
+  requestKey: z.uuid(),
+  state: z.enum(["pending", "sending", "unknown", "accepted", "failed"]),
+  ok: z.literal(true).optional(),
+  threadId: z.uuid().optional(),
+  messageId: z.uuid().optional(),
+});
+type SendIntentReceipt = z.infer<typeof sendIntentReceipt>;
 export function useSendMail(clientId: string, entity: string) {
   const api = useApi();
   const cache = useQueryClient();
@@ -124,7 +133,7 @@ export function useSendMail(clientId: string, entity: string) {
   const [recoveryError, setRecoveryError] = useState<MailSendError | null>(
     null,
   );
-  const recovery = useQuery({
+  const recovery = useQuery<SendIntentReceipt>({
     queryKey: ["mail-send-recovery", ...key, attempt?.token],
     enabled: Boolean(attempt?.token),
     retry: false,
@@ -138,25 +147,10 @@ export function useSendMail(clientId: string, entity: string) {
     queryFn: async ({ signal }) => {
       const token = attempt!.token;
       const assert = authority.capture();
-      const receipt = await api.request(
+      const receipt = await api.request<SendIntentReceipt>(
         "core",
         `engagement/mail/send-intents/${token}`,
-        z
-          .object({
-            intentId: z.uuid(),
-            requestKey: z.uuid(),
-            state: z.enum([
-              "pending",
-              "sending",
-              "unknown",
-              "accepted",
-              "failed",
-            ]),
-            ok: z.literal(true).optional(),
-            threadId: z.uuid().optional(),
-            messageId: z.uuid().optional(),
-          })
-          .refine((row) => row.requestKey === token),
+        sendIntentReceipt.refine((row) => row.requestKey === token),
         { signal },
       );
       assert();
