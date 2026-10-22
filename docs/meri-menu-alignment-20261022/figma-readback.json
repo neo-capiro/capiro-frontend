@@ -1,0 +1,364 @@
+{
+  "capturedAt": "2026-10-22T16:14:12.452Z",
+  "source": "Figma connector readback after user manual overlay update",
+  "fileKey": "IXJzJUkXcUTkySHir5JNea",
+  "readback": {
+    "fileKey": "IXJzJUkXcUTkySHir5JNea",
+    "pageId": "1064:140864",
+    "hostId": "1064:144425",
+    "nodes": [
+      {
+        "id": "1064:144425",
+        "name": "01.04 · Conversation history",
+        "type": "FRAME",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 1040
+        },
+        "local": {
+          "x": 4740,
+          "y": 1153
+        },
+        "reactions": [],
+        "layoutMode": "VERTICAL",
+        "counterAxisAlignItems": "MIN",
+        "primaryAxisSizingMode": "FIXED",
+        "counterAxisSizingMode": "FIXED",
+        "itemSpacing": 0,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "minWidth": null,
+        "overlayPositionType": "CENTER",
+        "childCount": 5
+      },
+      {
+        "id": "1064:144467",
+        "name": "Search and filters",
+        "type": "FRAME",
+        "bounds": {
+          "x": 260,
+          "y": 177,
+          "width": 1032,
+          "height": 64
+        },
+        "local": {
+          "x": 28,
+          "y": 112
+        },
+        "reactions": [],
+        "layoutMode": "HORIZONTAL",
+        "counterAxisAlignItems": "MAX",
+        "primaryAxisSizingMode": "FIXED",
+        "counterAxisSizingMode": "AUTO",
+        "itemSpacing": 12,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "minWidth": null,
+        "overlayPositionType": "CENTER",
+        "childCount": 3
+      },
+      {
+        "id": "1064:144468",
+        "name": "Field · Search",
+        "type": "FRAME",
+        "bounds": {
+          "x": 260,
+          "y": 177,
+          "width": 752,
+          "height": 64
+        },
+        "local": {
+          "x": 0,
+          "y": 0
+        },
+        "reactions": [],
+        "layoutMode": "VERTICAL",
+        "counterAxisAlignItems": "MIN",
+        "primaryAxisSizingMode": "AUTO",
+        "counterAxisSizingMode": "FIXED",
+        "itemSpacing": 6,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "minWidth": null,
+        "overlayPositionType": "CENTER",
+        "childCount": 2
+      },
+      {
+        "id": "1064:144472",
+        "name": "Action · All clients",
+        "type": "INSTANCE",
+        "bounds": {
+          "x": 1024,
+          "y": 205,
+          "width": 120,
+          "height": 36
+        },
+        "local": {
+          "x": 764,
+          "y": 28
+        },
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "3034:37582",
+              "overlayRelativePosition": {
+                "x": 664,
+                "y": 247
+              },
+              "navigation": "OVERLAY",
+              "transition": {
+                "type": "DISSOLVE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.18000000715255737
+              },
+              "resetVideoPosition": false,
+              "resetScrollPosition": false
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "3034:37582",
+                "overlayRelativePosition": {
+                  "x": 664,
+                  "y": 247
+                },
+                "navigation": "OVERLAY",
+                "transition": {
+                  "type": "DISSOLVE",
+                  "easing": {
+                    "type": "EASE_OUT"
+                  },
+                  "duration": 0.18000000715255737
+                },
+                "resetVideoPosition": false,
+                "resetScrollPosition": false
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ],
+        "layoutMode": "HORIZONTAL",
+        "counterAxisAlignItems": "CENTER",
+        "primaryAxisSizingMode": "AUTO",
+        "counterAxisSizingMode": "FIXED",
+        "itemSpacing": 8,
+        "paddingLeft": 14,
+        "paddingRight": 14,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "minWidth": 120,
+        "overlayPositionType": "CENTER",
+        "childCount": 2
+      },
+      {
+        "id": "1064:144473",
+        "name": "Action · All statuses",
+        "type": "INSTANCE",
+        "bounds": {
+          "x": 1156,
+          "y": 205,
+          "width": 136,
+          "height": 36
+        },
+        "local": {
+          "x": 896,
+          "y": 28
+        },
+        "reactions": [
+          {
+            "action": {
+              "type": "NODE",
+              "destinationId": "3034:37596",
+              "overlayRelativePosition": {
+                "x": 812,
+                "y": 247
+              },
+              "navigation": "OVERLAY",
+              "transition": {
+                "type": "DISSOLVE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.18000000715255737
+              },
+              "resetVideoPosition": false,
+              "resetScrollPosition": false
+            },
+            "actions": [
+              {
+                "type": "NODE",
+                "destinationId": "3034:37596",
+                "overlayRelativePosition": {
+                  "x": 812,
+                  "y": 247
+                },
+                "navigation": "OVERLAY",
+                "transition": {
+                  "type": "DISSOLVE",
+                  "easing": {
+                    "type": "EASE_OUT"
+                  },
+                  "duration": 0.18000000715255737
+                },
+                "resetVideoPosition": false,
+                "resetScrollPosition": false
+              }
+            ],
+            "trigger": {
+              "type": "ON_CLICK"
+            }
+          }
+        ],
+        "layoutMode": "HORIZONTAL",
+        "counterAxisAlignItems": "CENTER",
+        "primaryAxisSizingMode": "AUTO",
+        "counterAxisSizingMode": "FIXED",
+        "itemSpacing": 8,
+        "paddingLeft": 14,
+        "paddingRight": 14,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "minWidth": 136,
+        "overlayPositionType": "CENTER",
+        "childCount": 2
+      },
+      {
+        "id": "3034:37582",
+        "name": "13.21 · Conversation client filter menu",
+        "type": "FRAME",
+        "bounds": {
+          "x": 9360,
+          "y": 28739,
+          "width": 480,
+          "height": 292
+        },
+        "local": {
+          "x": 14100,
+          "y": 29892
+        },
+        "reactions": [],
+        "layoutMode": "VERTICAL",
+        "counterAxisAlignItems": "MIN",
+        "primaryAxisSizingMode": "AUTO",
+        "counterAxisSizingMode": "FIXED",
+        "itemSpacing": 12,
+        "paddingLeft": 20,
+        "paddingRight": 20,
+        "paddingTop": 20,
+        "paddingBottom": 20,
+        "minWidth": null,
+        "overlayPositionType": "MANUAL",
+        "childCount": 8
+      },
+      {
+        "id": "3034:37596",
+        "name": "13.22 · Conversation status filter menu",
+        "type": "FRAME",
+        "bounds": {
+          "x": 10900,
+          "y": 28739,
+          "width": 480,
+          "height": 340
+        },
+        "local": {
+          "x": 15640,
+          "y": 29892
+        },
+        "reactions": [],
+        "layoutMode": "VERTICAL",
+        "counterAxisAlignItems": "MIN",
+        "primaryAxisSizingMode": "AUTO",
+        "counterAxisSizingMode": "FIXED",
+        "itemSpacing": 12,
+        "paddingLeft": 20,
+        "paddingRight": 20,
+        "paddingTop": 20,
+        "paddingBottom": 20,
+        "minWidth": null,
+        "overlayPositionType": "MANUAL",
+        "childCount": 9
+      },
+      {
+        "id": "3034:37584",
+        "name": "Monday meeting preparation · Past outputs follow",
+        "type": "TEXT",
+        "bounds": {
+          "x": 9381,
+          "y": 28799,
+          "width": 432,
+          "height": 19
+        },
+        "local": {
+          "x": 21,
+          "y": 60
+        },
+        "reactions": [],
+        "minWidth": null,
+        "fontName": {
+          "family": "Geist",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "fontSize": 13,
+        "lineHeight": {
+          "unit": "PIXELS",
+          "value": 19
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": -0.30000001192092896
+        },
+        "characters": "Choose the scope of the conversation list."
+      },
+      {
+        "id": "3034:37598",
+        "name": "Monday meeting preparation · Past outputs follow",
+        "type": "TEXT",
+        "bounds": {
+          "x": 10921,
+          "y": 28799,
+          "width": 432,
+          "height": 19
+        },
+        "local": {
+          "x": 21,
+          "y": 60
+        },
+        "reactions": [],
+        "minWidth": null,
+        "fontName": {
+          "family": "Geist",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "fontSize": 13,
+        "lineHeight": {
+          "unit": "PIXELS",
+          "value": 19
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": -0.30000001192092896
+        },
+        "characters": "Choose the state of the conversation list."
+      }
+    ]
+  }
+}

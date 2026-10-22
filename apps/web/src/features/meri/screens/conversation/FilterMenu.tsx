@@ -22,6 +22,7 @@ export function FilterMenu({
   options,
   value,
   onChange,
+  triggerClassName = "",
   defaultOpen = false,
 }: {
   title: string;
@@ -31,13 +32,14 @@ export function FilterMenu({
   options: readonly string[];
   value: string;
   onChange: (value: string) => void;
+  triggerClassName?: string | undefined;
   /** Fixture frames that show the menu open render it open on load. */
   defaultOpen?: boolean;
 }) {
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
       <DropdownMenuTrigger
-        className={`${ui.outline} ${styles.trigger}`}
+        className={`${ui.outline} ${styles.trigger} ${triggerClassName}`}
         aria-label={`${title}: ${value || allLabel}`}
       >
         {icon}

@@ -64,6 +64,7 @@ export function HistoryFilters({
       />
       <FilterMenu
         title="Filter by client"
+        triggerClassName={styles.clientFilter}
         description="Choose the scope of the conversation list."
         allLabel="All clients"
         icon={<ChevronDown aria-hidden />}
@@ -74,6 +75,7 @@ export function HistoryFilters({
       />
       <FilterMenu
         title="Filter by status"
+        triggerClassName={styles.statusFilter}
         description="Choose the state of the conversation list."
         allLabel="All statuses"
         icon={<ListFilter aria-hidden />}

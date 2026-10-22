@@ -1,4 +1,8 @@
 /* Figma 3.4 13.21 / 13.22 conversation filter menus (480px panel). */
+.trigger {
+  flex-shrink: 0;
+  line-height: 1.2;
+}
 .trigger[data-state="open"] {
   color: white;
   border-color: transparent;
@@ -28,9 +32,9 @@
   font-weight: 500;
 }
 .description {
-  margin-top: -4px;
+  margin: 0;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 19px;
   letter-spacing: -0.039px;
   color: var(--muted-foreground);
 }
@@ -43,6 +47,7 @@
 .option {
   cursor: default;
   outline: none;
+  line-height: 1.2;
 }
 /* The chosen value is shown by the trigger and this border; the radio dot is not part of the design. */
 .option > span:first-child {

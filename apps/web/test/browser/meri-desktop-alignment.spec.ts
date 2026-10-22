@@ -65,12 +65,27 @@ test("13.21–22 conversation filters open at the Figma desktop anchors", async 
     "conversation-history",
     "light",
   );
-  for (const [name, x] of [
-    ["Filter by client: All clients", 662],
-    ["Filter by status: All statuses", 804],
+  // Verified 2026-10-22 Figma readback and exports: docs/meri-menu-alignment-20261022.
+  // Manual overlays are right-aligned, 6px below the bottom-aligned trigger row.
+  for (const [name, x, width, height] of [
+    ["Filter by client: All clients", 664, 120, 292],
+    ["Filter by status: All statuses", 812, 136, 340],
   ] as const) {
     // Radix marks the rest of the page aria-hidden while its modal menu is open.
     const trigger = page.locator(`button[aria-label="${name}"]`);
+    const inputBox = await page
+      .getByRole("textbox", { name: "Search", exact: true })
+      .boundingBox();
+    const triggerBox = await trigger.boundingBox();
+    expect(inputBox).toBeTruthy();
+    expect(triggerBox).toBeTruthy();
+    expect(Math.abs(triggerBox!.width - width)).toBeLessThanOrEqual(1);
+    expect(Math.abs(triggerBox!.height - 36)).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(
+        triggerBox!.y + triggerBox!.height - inputBox!.y - inputBox!.height,
+      ),
+    ).toBeLessThanOrEqual(1);
     await trigger.click();
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
     await expect(trigger).toHaveCSS("color", "rgb(255, 255, 255)");
@@ -78,8 +93,15 @@ test("13.21–22 conversation filters open at the Figma desktop anchors", async 
     const box = await menu.boundingBox();
     expect(box).toBeTruthy();
     expect(Math.abs(box!.x - x)).toBeLessThanOrEqual(3);
-    expect(Math.abs(box!.y - 219)).toBeLessThanOrEqual(3);
+    expect(Math.abs(box!.y - 247)).toBeLessThanOrEqual(3);
     expect(Math.abs(box!.width - 480)).toBeLessThanOrEqual(1);
+    expect(Math.abs(box!.height - height)).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(box!.x + box!.width - triggerBox!.x - triggerBox!.width),
+    ).toBeLessThanOrEqual(1);
+    expect(
+      Math.abs(box!.y - triggerBox!.y - triggerBox!.height - 6),
+    ).toBeLessThanOrEqual(1);
     await page.screenshot({
       path: info.outputPath(
         name.startsWith("Filter by client")

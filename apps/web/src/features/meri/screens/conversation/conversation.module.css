@@ -35,16 +35,23 @@
   line-height: 1.5;
   letter-spacing: -0.075px;
 }
-/* 01.04 history search and filters */
+/* 01.04 history, Figma 1064:144467 (2026-10-22): align with the search input. */
 .filters {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 12px;
 }
 .searchField {
   flex: 0 1 752px;
   min-width: 240px;
+}
+/* Minimums stabilize default anchors while selected labels can still grow. */
+.clientFilter {
+  min-width: 120px;
+}
+.statusFilter {
+  min-width: 136px;
 }
 /* 01.04H: with no selected conversation every action is visibly unavailable. */
 .historyActions[data-selection="none"] > button {
