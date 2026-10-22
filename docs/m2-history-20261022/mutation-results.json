@@ -1,0 +1,90 @@
+[
+  {
+    "name": "bypass-feature-gate",
+    "check": "unit",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "use-refetching-identity",
+    "check": "unit",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "admit-archived-client",
+    "check": "unit",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "lose-list-client-route",
+    "check": "unit",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "lose-list-client-route",
+    "check": "browser",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "old-capability-destination",
+    "check": "unit",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "lose-conversation-selector",
+    "check": "browser",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "hide-history-error",
+    "check": "browser",
+    "exit": 1,
+    "failedTests": 3,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "ignore-foreign-owner",
+    "check": "browser",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "freeze-prior-actor",
+    "check": "browser",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  },
+  {
+    "name": "drop-stored-draft",
+    "check": "browser",
+    "exit": 1,
+    "failedTests": 1,
+    "assertionFailure": true,
+    "killed": true
+  }
+]

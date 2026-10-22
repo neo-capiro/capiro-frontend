@@ -3,6 +3,7 @@ import {
   clientId,
   setupConversation,
   reply,
+  composer,
 } from "./meri-conversation-fixtures";
 import {
   conversation,
@@ -11,6 +12,7 @@ import {
   selectedUrl,
 } from "./meri-history-fixtures";
 import { client, json } from "../../tests/browser/fixtures";
+import { testIdentity } from "./fixtures";
 
 const listUrl = `/meri/conversations?clientId=${clientId}`;
 const secondClientId = "10000000-0000-4000-8000-000000000002";
@@ -184,5 +186,115 @@ test("client switching retires loaded results and filters without bootstrap or s
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+  expect(f.unexpected).toEqual([]);
+});
+
+test("a delayed list response from the prior identity cannot replace the current account's results", async ({
+  page,
+}) => {
+  const f = await setupConversation(page);
+  await installHistory(page);
+  await page.goto(listUrl);
+  const list = page.getByRole("region", { name: "Saved conversations" });
+  await expect(list.getByRole("option")).toHaveCount(1);
+  let release!: () => void;
+  const delayed = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let started!: () => void;
+  const requested = new Promise<void>((resolve) => {
+    started = resolve;
+  });
+  let finished!: () => void;
+  const settled = new Promise<void>((resolve) => {
+    finished = resolve;
+  });
+  let first = true;
+  const nextActorId = "10000000-0000-4000-8000-000000000099";
+  const nextConversation = {
+    ...conversation,
+    conversationId: "30000000-0000-4000-8000-000000000099",
+    owner: { ...conversation.owner, actorId: nextActorId },
+  };
+  await page.route("**/api/conversations/list", async (route) => {
+    const priorIdentity = first;
+    first = false;
+    if (priorIdentity) {
+      started();
+      await delayed;
+    }
+    await reply(route, {
+      schema: "meri.conversation-list/1",
+      conversations: [priorIdentity ? conversation : nextConversation],
+      nextBefore: null,
+    });
+    if (priorIdentity) finished();
+  });
+  await list.getByRole("button", { name: "Reload conversation list" }).click();
+  await requested;
+  await expect(list.getByRole("option")).toHaveCount(0);
+  await page.route("**/api/backend/core/me", (route) =>
+    json(route, {
+      ...testIdentity,
+      user: {
+        ...testIdentity.user,
+        id: nextActorId,
+        clerkUserId: "synthetic-next-user",
+      },
+    }),
+  );
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new CustomEvent("test:session", {
+        detail: {
+          userId: "synthetic-next-user",
+          sessionId: "synthetic-next-session",
+        },
+      }),
+    ),
+  );
+  await expect(list.getByRole("option")).toContainText(
+    nextConversation.conversationId,
+  );
+  release();
+  await settled;
+  await expect(list.getByRole("option")).toHaveCount(1);
+  await expect(list.getByRole("option")).not.toContainText(
+    conversation.conversationId,
+  );
+  expect(f.hints).toEqual([]);
+  expect(f.unexpected).toEqual([]);
+});
+
+test("visiting the list and returning restores only the selected conversation's unsent draft", async ({
+  page,
+}) => {
+  const f = await setupConversation(page);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  const effects: string[] = [];
+  page.on("request", (request) => {
+    if (
+      /\/conversations\/(submit|next-turn|input\/|cancel)/.test(request.url())
+    )
+      effects.push(request.url());
+  });
+  await page.goto(selectedUrl);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  const draft = "Synthetic unsent draft kept while browsing history";
+  await composer(page).fill(draft);
+  await page
+    .getByRole("link", { name: "Find conversations", exact: true })
+    .click();
+  await expect(page).toHaveURL(listUrl);
+  const list = page.getByRole("region", { name: "Saved conversations" });
+  await expect(list.getByRole("option")).toHaveCount(1);
+  await expect(composer(page)).toHaveCount(0);
+  await expect(page.getByText(draft, { exact: true })).toHaveCount(0);
+  await list.getByRole("option").click();
+  await expect(page).toHaveURL(selectedUrl);
+  await expect(composer(page)).toHaveValue(draft);
+  await expect(page.getByText("First answer", { exact: true })).toBeVisible();
+  expect(effects).toEqual([]);
   expect(f.unexpected).toEqual([]);
 });
