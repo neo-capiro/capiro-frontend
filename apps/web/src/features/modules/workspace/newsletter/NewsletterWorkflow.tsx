@@ -21,6 +21,7 @@ import { NewsletterPaper } from "./NewsletterPaper";
 import { SelectTemplate } from "./NewsletterTemplates";
 import { useNewsletter } from "./use-newsletter";
 import { NewsletterStaging } from "./NewsletterStaging";
+import { DraftClientAssociation } from "../DraftClientAssociation";
 
 function BuilderTools({
   body,
@@ -109,6 +110,7 @@ export function NewsletterWorkflow({
     redo,
     save,
     documentId,
+    acceptClientAssociation,
   } = useNewsletter({ onClose, existing, initialClientId });
   return (
     <fieldset
@@ -171,12 +173,23 @@ export function NewsletterWorkflow({
                 Edit newsletter
               </ActionButton>
             )}
-            <ActionButton primary onClick={() => setStep("stage")}>
+            <ActionButton
+              primary
+              disabled={draft?.clientAssociation === "held"}
+              onClick={() => setStep("stage")}
+            >
               Stage in Outreach
             </ActionButton>
           </div>
         )}
       </header>
+      {draft && (
+        <DraftClientAssociation
+          draft={draft}
+          disabled={pending}
+          onBound={acceptClientAssociation}
+        />
+      )}
       {error && (
         <p role="alert" className={styles.error}>
           {error.message}
@@ -344,7 +357,9 @@ export function NewsletterWorkflow({
                 </Panel>
                 <Panel title="Delivery">Outreach</Panel>
               </div>
-              {draft ? (
+              {draft?.clientAssociation === "held" ? (
+                <p>Choose a client to continue.</p>
+              ) : draft ? (
                 <NewsletterStaging draftId={draft.id} saved={saved} />
               ) : (
                 <p>

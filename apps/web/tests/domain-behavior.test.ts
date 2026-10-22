@@ -129,15 +129,11 @@ describe("Work associations and date windows", () => {
     status: "draft",
     updatedAt: "2026-10-01",
   };
-  it("withholds name-based Workspace matches when accessible names collide", () => {
+  it("requires canonical UUID and ignores name collisions", () => {
     const client = { id, name: "Client" };
-    expect(clientDrafts([draft], client, [client])).toEqual([draft]);
-    expect(
-      clientDrafts([draft], client, [client, { id: "other", name: "Client" }]),
-    ).toEqual([]);
-    expect(
-      clientDrafts([{ ...draft, client: null }], client, [client]),
-    ).toEqual([]);
+    expect(clientDrafts([draft], client, [client])).toEqual([]);
+    const canonical = { ...draft, clientId: id };
+    expect(clientDrafts([canonical], client, [client, { id: "other", name: "Client" }])).toEqual([canonical]);
   });
   it("uses a half-open 30-day window and excludes completed work from live items", () => {
     const node = {

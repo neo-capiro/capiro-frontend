@@ -260,6 +260,7 @@ test("a unique same-name catalog row for another client cannot supply current-cl
   page,
 }) => {
   const { state, unexpected } = await installWorkFixtures(page);
+  state.drafts = workDrafts.map((draft) => ({ ...draft, clientId: undefined }));
   state.clients = [{ ...client, id: otherClientId }];
   await openWork(page);
   await expect(

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   Badge,
@@ -16,11 +15,14 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { QueuePagination } from "./QueuePagination";
 
 export function ProgramMatchQueue() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    "analyst-program-matches",
+  );
   const [status, setStatus] = useState("candidate");
   const [page, setPage] = useState(1);
   const [notes, setNotes] = useState<Record<string, string>>({});
@@ -28,14 +30,17 @@ export function ProgramMatchQueue() {
   const query = useCapiroQuery("settings.analyst.programMatches.list", {
     query: { status, page, limit: 25 },
   });
-  const action = useSettingsAction();
   const decide = (id: string, decision: "accept" | "quarantine" | "reject") =>
     action.run(
-      () =>
-        api.request("settings.analyst.programMatches.decide", {
-          params: { id },
-          body: { decision, ...(notes[id] ? { notes: notes[id] } : {}) },
-        }),
+      (signal) =>
+        api.request(
+          "settings.analyst.programMatches.decide",
+          {
+            params: { id },
+            body: { decision, ...(notes[id] ? { notes: notes[id] } : {}) },
+          },
+          { signal },
+        ),
       "Program match review was recorded.",
       query.reload,
     );
@@ -46,6 +51,7 @@ export function ProgramMatchQueue() {
         description="Machine-proposed PE→Program links awaiting review. Nothing is applied automatically; every decision is audit-logged."
         action={
           <select
+            disabled={locked}
             className={styles.input}
             aria-label="Program match status"
             value={status}
@@ -121,6 +127,7 @@ export function ProgramMatchQueue() {
                 label: "Evidence",
                 render: (row) => (
                   <SettingsButton
+                    disabled={locked}
                     small
                     onClick={() => setEvidence(row.evidence)}
                   >
@@ -138,6 +145,7 @@ export function ProgramMatchQueue() {
                 label: "Notes",
                 render: (row) => (
                   <TextInput
+                    disabled={locked}
                     aria-label={`Notes for ${row.peCode} ${row.program?.canonicalName ?? row.id}`}
                     maxLength={10000}
                     value={notes[row.id] ?? ""}
@@ -159,14 +167,14 @@ export function ProgramMatchQueue() {
                     <SettingsButton
                       primary
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => void decide(row.id, "accept")}
                     >
                       Accept
                     </SettingsButton>
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => void decide(row.id, "quarantine")}
                     >
                       Quarantine
@@ -174,7 +182,7 @@ export function ProgramMatchQueue() {
                     <SettingsButton
                       danger
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => void decide(row.id, "reject")}
                     >
                       Reject
@@ -194,6 +202,11 @@ export function ProgramMatchQueue() {
           )}
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Program match action failed" error>
           {action.error}
@@ -201,6 +214,7 @@ export function ProgramMatchQueue() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={evidence !== undefined}
         onClose={() => setEvidence(undefined)}
         title="Program match evidence"

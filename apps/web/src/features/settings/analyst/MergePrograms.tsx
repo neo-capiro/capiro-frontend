@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import {
   SettingField,
   SettingsButton,
@@ -8,7 +7,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 export type MergeOption = {
   programId: string;
   canonicalName: string | null;
@@ -24,7 +24,8 @@ export function MergePrograms({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("analyst-merge");
   const unique = options.filter(
     (option, index) =>
       options.findIndex((item) => item.programId === option.programId) ===
@@ -36,32 +37,36 @@ export function MergePrograms({
   const [mergeProgramId, setMergeProgramId] = useState(
     unique[1]?.programId ?? "",
   );
-  const action = useSettingsAction();
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       onClose={onClose}
       title="Merge programs"
       description="Keep one canonical program and move the duplicate’s linked records and aliases to it."
       footer={
         <>
-          <SettingsButton disabled={action.busy} onClick={onClose}>
+          <SettingsButton disabled={locked} onClick={onClose}>
             Cancel
           </SettingsButton>
           <SettingsButton
             danger
             disabled={
-              action.busy ||
+              locked ||
               !keepProgramId ||
               !mergeProgramId ||
               keepProgramId === mergeProgramId
             }
             onClick={() =>
               void action.run(
-                () =>
-                  api.request("settings.analyst.programs.merge", {
-                    body: { keepProgramId, mergeProgramId },
-                  }),
+                (signal) =>
+                  api.request(
+                    "settings.analyst.programs.merge",
+                    {
+                      body: { keepProgramId, mergeProgramId },
+                    },
+                    { signal },
+                  ),
                 (result) =>
                   `Programs merged. ${result.aliasesCopied} aliases copied.`,
                 () => {
@@ -90,6 +95,7 @@ export function MergePrograms({
       ].map((field) => (
         <SettingField label={field.label} key={field.label}>
           <select
+            disabled={locked}
             className={styles.input}
             value={field.value}
             onChange={(event) => field.update(event.target.value)}
@@ -102,6 +108,11 @@ export function MergePrograms({
           </select>
         </SettingField>
       ))}
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Programs could not be merged" error>
           {action.error}

@@ -88,7 +88,12 @@ export const hqOperations = {
           .strict(),
       })
       .strict(),
-    response: z.object({ invitationId: z.string() }),
+    response: z.object({
+      invitationId: z.string().min(1),
+      tenantId: z.string(),
+      email: z.email(),
+      role: z.literal("user_admin"),
+    }),
     source,
   }),
   "settings.hq.customers.list": defineOperation({

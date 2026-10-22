@@ -299,8 +299,6 @@ export const settingsOperations = {
         body: z
           .object({
             name: z.string().min(2).optional(),
-            logoS3Key: z.string().optional(),
-            logoContentType: z.string().optional(),
           })
           .strict(),
       })

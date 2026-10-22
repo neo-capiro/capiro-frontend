@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-22",
+  "baseline": "f7b42d819f1440c95a7da2489145c1bc2696ae43",
+  "scope": "New gateway verification only; no production source changes.",
+  "results": [
+    {
+      "name": "joined frontend",
+      "exitCode": 0,
+      "success": true,
+      "passed": 34,
+      "failed": 0,
+      "pending": 0,
+      "runtimeErrorSuites": null,
+      "receiptSha256": "5244f01d229cdcfe9533888bb55c742ee0cfcd9e7213da09fae888b9328f910c"
+    },
+    {
+      "name": "joined wrapper",
+      "exitCode": 0,
+      "success": true,
+      "passed": 1,
+      "failed": 0,
+      "pending": 0,
+      "runtimeErrorSuites": 0,
+      "receiptSha256": "deb78a98d70ef468ef733c0546bd9a11807b67ec921eedd69f84732357348194"
+    },
+    {
+      "name": "direct Workspace",
+      "exitCode": 0,
+      "success": true,
+      "passed": 267,
+      "failed": 0,
+      "pending": 0,
+      "runtimeErrorSuites": 0,
+      "receiptSha256": "500ebd2a699b32c0950facb40266d596f9a0282a1e9e3ce76f0c7121dee7eab5"
+    }
+  ],
+  "typecheck": {
+    "command": "node --max-old-space-size=4096 node_modules/typescript/bin/tsc --noEmit --tsBuildInfoFile <temporary-cache> --pretty false",
+    "cwd": "apps/web",
+    "exitCode": 0,
+    "diagnostics": 0,
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "lint": {
+    "command": "eslint tests/workspace-descendant-gateway.test.ts",
+    "cwd": "apps/web",
+    "exitCode": 0
+  },
+  "newTestSha256": "b77e4f01e6f9ef6c26e4ef70f762c2a2ba4afdea236eac477627ccc407b45c5a",
+  "joinedCommand": "WS03_FRONTEND_CHECKOUT=<frontend checkout> WS03_GATEWAY_REPORT=<temporary report> NODE_OPTIONS=--max-old-space-size=4096 NODE_PATH=<existing Workspace dependency cache> node node_modules/jest/bin/jest.js --config apps/workspace/jest.config.cjs --testMatch **/test/support/ws03-gateway-authority.ts --runTestsByPath apps/workspace/test/support/ws03-gateway-authority.ts --runInBand",
+  "limitations": [
+    "Reused partial install, not clean frozen-install qualification",
+    "Synthetic trusted identity and Prisma seam; no native SQL/JWT/provider/browser",
+    "18 joined cases are skipped in the ordinary frontend runner; explicit joined receipt has zero skipped",
+    "No repeated production build/full-unit suite for test-only addition",
+    "Existing deployment and qualification holds remain"
+  ]
+}

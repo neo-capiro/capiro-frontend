@@ -1,0 +1,49 @@
+{
+  "base": "24316f913e6082cf33fb0049c1187dc64097975f",
+  "green": {
+    "suites": 3,
+    "tests": 17
+  },
+  "new_tests": [
+    {
+      "name": "Workspace canonical client association holds name-only legacy content even when the name is unique",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    },
+    {
+      "name": "Workspace canonical client association does not transfer a same-name document with a different UUID",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    },
+    {
+      "name": "Workspace canonical client association retains UUID-bound documents through rename and duplicate names",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    },
+    {
+      "name": "Workspace canonical client association keeps prospect content out even if client UUID is supplied",
+      "baseline": "passed",
+      "remove_prospect_exclusion": "failed"
+    },
+    {
+      "name": "newsletter client authority creates with the selected UUID despite duplicate names",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    },
+    {
+      "name": "newsletter client authority holds a removed client before create",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    },
+    {
+      "name": "newsletter client authority reopens using the saved UUID and refuses reassignment",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    },
+    {
+      "name": "newsletter client authority discards a pending create after the local client changes",
+      "baseline": "failed",
+      "remove_prospect_exclusion": "passed"
+    }
+  ]
+}

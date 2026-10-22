@@ -1,0 +1,207 @@
+{
+  "scope": "Read-only audit; no tests run and no repository changes. Current Fable 741/36 is operator-reported; raw CodeBuild JSON not supplied. Exact 36 names reconciled from earlier author canonical raw JSON and unchanged current source.",
+  "head117": "353d4743a1cca73a2a504a15489bc9e549f045da",
+  "head118": "248baf5dad008ff0f50fa31c61d791a3363da083",
+  "sourceEvidence": "/dev/shm/a1-fe-step0-evidence/117-web.json",
+  "skippedTotal": 36,
+  "skippedFiles": [
+    {
+      "file": "tests/workspace-descendant-gateway.test.ts",
+      "count": 36,
+      "tests": [
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'same-tenant unrelated member' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'foreign tenant' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'missing draft' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'removed member' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'inactive tenant' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'inactive client' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'revoked client wall' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'removed collaborator' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'held draft collaborator' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission 'revoked prospect capability' receives 404 with no descendant read or side effect through both gateways",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized 'owner' access",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized 'editor' access",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized 'viewer' access",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized 'held owner' access",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized 'prospect owner' access",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized typed 'workspace.comments' success",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized typed 'workspace.comment.create' success",
+          "status": "skipped"
+        },
+        {
+          "name": "actual gateway to local Workspace HTTP admission preserves authorized typed 'workspace.comment.resolve' success",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'same-tenant unrelated member' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'foreign tenant' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'missing draft' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'removed member' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'inactive tenant' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'inactive client' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'revoked client wall' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'removed collaborator' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'held draft collaborator' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway 'revoked prospect capability' has no protected descendant payload/read/effect",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves owner role predicates",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves editor role predicates",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves reviewer role predicates",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves commenter role predicates",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves viewer role predicates",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves 'held owner' and the existing prospect transfer refusal",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway preserves 'prospect owner' and the existing prospect transfer refusal",
+          "status": "skipped"
+        },
+        {
+          "name": "classified WS-03 corrections through the actual gateway refuses forged draft IDs before protected reads or effects",
+          "status": "skipped"
+        }
+      ]
+    }
+  ],
+  "skipCondition": {
+    "file": "apps/web/tests/workspace-descendant-gateway.test.ts",
+    "lines": [
+      210,
+      211,
+      212,
+      213,
+      214,
+      279,
+      399
+    ],
+    "condition": "describe.skipIf(!Boolean(process.env.WS03_WORKSPACE_TEST_URL && process.env.WS03_WORKSPACE_CONTROL_URL))",
+    "why": "Joined backend Workspace admission fixtures are absent from ordinary standalone frontend unit run; requires explicit HTTP loopback service/control endpoints. Not a jsdom guard.",
+    "sourceSha256": "b64b1fb9ca518a5f2d7e71c9656a0b9af0d9f83208fbfa96c21c54216e9d1957",
+    "gitBlob": "cf5f3a5c2ca1d8b6f633d64dbf093d16187322f9"
+  },
+  "joinedRunner": {
+    "file": "apps/workspace/test/support/ws03-gateway-authority.ts (capiro-backend)",
+    "command": "WS03_FRONTEND_CHECKOUT=/absolute/exact/frontend/checkout pnpm --filter @capiro/workspace exec jest --config jest.config.cjs --runInBand --testMatch '**/test/support/ws03-gateway-authority.ts'",
+    "mechanism": "Existing runner starts synthetic Workspace HTTP and control servers on 127.0.0.1; spawns canonical frontend Vitest for this one file with both required env vars; asserts 0 failed and 0 pending. No database, external provider, Clerk session or production service.",
+    "expectedCases": 57,
+    "expectedJoined": 36,
+    "existingStandalone": 21,
+    "execution": "Not run in this audit. Fable-owned gate; do not duplicate existing native qualification. Prior PG16 37/37 receipt includes 7 selected frozen-gateway cases, not execution of all 36 synthetic joined cases."
+  },
+  "forms": {
+    "file": "apps/web/src/features/settings/security-form.test.tsx",
+    "tests": [
+      "all dismiss paths are ignored while a security dialog is busy",
+      "tenant creation freezes fields and close controls until the exact receipt is accepted"
+    ],
+    "count": 2,
+    "executed": 0,
+    "excludedBy": [
+      "apps/web/vitest.config.ts includes tests/**/*.test.ts only",
+      "apps/web/src/shared/capiro/vitest.config.mts includes **/*.test.ts and ../../features/**/*.test.ts only"
+    ],
+    "startupFailure": "Explicit collection requests @vitest-environment jsdom, which is not declared or locked; prior direct collection failed before either test executed.",
+    "notPartOf36": true,
+    "sourceSha256": "c4c7a907d3c4a9591b440d60850f0aa440cb3d360f859a7c45e74ba9aebd5fa8",
+    "gitBlob": "59000e95adef69d7a20b9d2af23f9506e32b3be4",
+    "proposal": "Use existing locked Playwright/Vite browser runner (apps/web/tests/browser + apps/web/playwright.config.ts) for dedicated SettingsDialog/CreateTenant DOM harness, preserving both original scenarios/assertions. Existing Chromium CodeBuild stage can execute without adding jsdom/dependencies. Keep old excluded tests documented until explicit replacement/coverage mapping reviewed; proposal only, no files created."
+  },
+  "qualificationLimits": [
+    "Fable operator reported 44 files/741 pass/36 skip, unchanged attribution.",
+    "No new test execution by this auditor.",
+    "Build, smoke and scan remain unrun in failed composed gate."
+  ]
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "mutant": "branding-object-fields",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "generic branding writes",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "receipt-target-bypass",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "rejects a mismatched|canonicalized invitation|HQ resend binds|unqualified security",
+    "failedTests": 19,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "member-readback-value",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "readback confirms the exact member",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "queue-absence-is-success",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "requires exact resolved queue",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "cancelled-readback-dispatch",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "refuses cancelled readback",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "unsupported-reconciliation-unlocks",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "never treats absence of a durable",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "ambiguous-errors-unlock",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "only definite API rejection",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "snapshot-reference",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "captures a frozen request",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "persistent-payload-leak",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "retains only exact target IDs",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "corrupt-journal-unlocks",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "corrupt recovery records",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "resend-address-not-bound",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "a resend requires the returned",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "old-completion-clears-new",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "a late completion cannot erase",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "bulk-continuation-after-cancel",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "a bulk decision freezes",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "dispatch-input-reference",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "double submission dispatches once",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "lost-reload-fence",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "a mismatched successful receipt stays",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "late-scope-success",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "scope change cancels",
+    "failedTests": 5,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "readback-denial-replays",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "a readback denial after an accepted",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "reconciliation-wrong-value",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "read-only reconciliation unlocks",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "definitive-denial-stays-held",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "a definitive rejected write clears",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "busy-dialog-dismiss",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "all dismiss paths are ignored",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  },
+  {
+    "mutant": "pending-form-editable",
+    "killed": true,
+    "returncode": 1,
+    "pattern": "tenant creation freezes fields",
+    "failedTests": 1,
+    "result": "Expected behavioral assertion failure; production source restored"
+  }
+]

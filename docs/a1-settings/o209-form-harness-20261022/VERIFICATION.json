@@ -1,0 +1,73 @@
+{
+  "parentRemoteHead": "89cb85da3c23154b124c366157fcc6dd5b6ea7a6",
+  "parentTree": "f07a8b4634e3dee43189d19814ea6fac05a7d87a",
+  "original": {
+    "path": "apps/web/src/features/settings/security-form.test.tsx",
+    "sha256": "c4c7a907d3c4a9591b440d60850f0aa440cb3d360f859a7c45e74ba9aebd5fa8",
+    "byteEqual": true
+  },
+  "sourceSha256": {
+    "apps/web/tests/browser/settings-security-form.html": "1534bfb57dd595694bbe244d888ceaffae7c3f0a608b1155ef21c07c0626fe31",
+    "apps/web/tests/browser/settings-security-form-harness.tsx": "2a4be692948b4195435b7c370acf3e81881ca89100c7f05de73dfb017d89a623",
+    "apps/web/tests/browser/settings-security-form.spec.ts": "d01c4cd47fdfe3965414148dcda6aea9bc7de423f46c33a3885e9fe1a460e57a"
+  },
+  "names": [
+    "all dismiss paths are ignored while a security dialog is busy",
+    "tenant creation freezes fields and close controls until the exact receipt is accepted"
+  ],
+  "assertionMapCount": 8,
+  "trackedFilesChangedBeforeAddingNewFiles": [],
+  "checks": {
+    "collection": {
+      "exit": 0,
+      "scenarios": 2
+    },
+    "lint": {
+      "exit": 0,
+      "diagnostics": 0
+    },
+    "focusedTypecheck": {
+      "exit": 0,
+      "diagnostics": 0,
+      "config": {
+        "extends": "/dev/shm/a1-fe-step0-117/apps/web/tsconfig.json",
+        "compilerOptions": {
+          "incremental": false
+        },
+        "include": [
+          "/dev/shm/a1-fe-step0-117/apps/web/next-env.d.ts",
+          "/dev/shm/a1-fe-step0-117/apps/web/tests/browser/settings-security-form-harness.tsx",
+          "/dev/shm/a1-fe-step0-117/apps/web/tests/browser/settings-security-form.spec.ts"
+        ]
+      }
+    },
+    "browser": {
+      "exit": 1,
+      "launchFailures": 2,
+      "scenariosExecuted": 0,
+      "assertionsExecuted": 0,
+      "reason": "Playwright Chromium executable absent; not a pass",
+      "rawReport": "browser-results.json"
+    }
+  },
+  "dependencies": {
+    "install": "reused matching-lock; no installation",
+    "node": "24.19.0",
+    "playwright": "1.61.1",
+    "typescript": "5.9.3",
+    "packageLockSha256": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234"
+  },
+  "notExecuted": [
+    "full composed CodeBuild gate",
+    "57-identity joined run (Fable-owned)",
+    "live/native/provider/backend tests"
+  ],
+  "holds": [
+    "dot exact-head review",
+    "Fable composed browser qualification",
+    "Fable isolated 57-identity run",
+    "backend-live/cutover",
+    "A2 HOLD",
+    "STOP2/6"
+  ]
+}

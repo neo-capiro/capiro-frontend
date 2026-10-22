@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   Badge,
@@ -17,7 +16,9 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
+import { confirmReviewedMappings } from "./bulkReview";
 import { AttachFederalRecord } from "./AttachFederalRecord";
 import { ContractorIdentity } from "./ContractorIdentity";
 import { MappingReview } from "./MappingReview";
@@ -29,7 +30,8 @@ import {
 } from "./presentation";
 
 export function MappingSettings() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("mappings");
   const query = useCapiroQuery("settings.mappings.list", {});
   const clients = useCapiroQuery("clients.list", {});
   const [clientId, setClientId] = useState("");
@@ -41,7 +43,6 @@ export function MappingSettings() {
   const [attach, setAttach] = useState(false);
   const [bulk, setBulk] = useState(false);
   const [identity, setIdentity] = useState<string>();
-  const action = useSettingsAction();
   const rows = (query.data ?? []).filter(
     (row) =>
       (!clientId || row.clientId === clientId) &&
@@ -59,25 +60,22 @@ export function MappingSettings() {
     needsReview: number;
   }) =>
     `${result.mappingsCreated} mappings found; ${result.autoConfirmed} exact matches confirmed; ${result.needsReview} need review.`;
-  async function confirmEligible() {
-    let confirmed = 0;
-    for (const row of eligible) {
-      try {
-        const result = await api.request(
-          "settings.mappings.confirmIndividual",
-          { params: { mappingId: row.id }, body: { confirmed: true } },
-        );
-        if (!result.confirmed)
-          throw new Error("The service did not confirm this record.");
-        confirmed += 1;
-      } catch (cause) {
-        query.reload();
-        throw new Error(
-          `${confirmed} mappings confirmed before the request stopped. ${cause instanceof Error ? cause.message : "Review the remaining candidates."}`,
-        );
-      }
+  async function confirmEligible(signal: AbortSignal) {
+    try {
+      return await confirmReviewedMappings(
+        eligible,
+        signal,
+        (mappingId, currentSignal) =>
+          api.request(
+            "settings.mappings.confirmIndividual",
+            { params: { mappingId }, body: { confirmed: true } },
+            { signal: currentSignal },
+          ),
+      );
+    } catch (cause) {
+      if (!signal.aborted) query.reload();
+      throw cause;
     }
-    return confirmed;
   }
   return (
     <div className={styles.stack} data-design-target="411:74020">
@@ -85,14 +83,19 @@ export function MappingSettings() {
         title="Intelligence Mappings"
         action={
           <div className={`${styles.row} ${styles.wrap}`}>
-            <SettingsButton onClick={() => setAttach(true)}>
+            <SettingsButton disabled={locked} onClick={() => setAttach(true)}>
               Add mapping manually
             </SettingsButton>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() =>
                 void action.run(
-                  () => api.request("settings.mappings.exactIdentifiers", {}),
+                  (signal) =>
+                    api.request(
+                      "settings.mappings.exactIdentifiers",
+                      {},
+                      { signal },
+                    ),
                   summary,
                   query.reload,
                 )
@@ -102,10 +105,11 @@ export function MappingSettings() {
             </SettingsButton>
             <SettingsButton
               primary
-              disabled={action.busy}
+              disabled={locked}
               onClick={() =>
                 void action.run(
-                  () => api.request("settings.mappings.resolveAll", {}),
+                  (signal) =>
+                    api.request("settings.mappings.resolveAll", {}, { signal }),
                   summary,
                   query.reload,
                 )
@@ -120,6 +124,7 @@ export function MappingSettings() {
         <div className={styles.grid}>
           <SettingField label="Client">
             <select
+              disabled={locked}
               className={styles.input}
               value={clientId}
               onChange={(event) => setClientId(event.target.value)}
@@ -134,6 +139,7 @@ export function MappingSettings() {
           </SettingField>
           <SettingField label="Search">
             <TextInput
+              disabled={locked}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search client or external name…"
@@ -141,6 +147,7 @@ export function MappingSettings() {
           </SettingField>
           <SettingField label="Source">
             <select
+              disabled={locked}
               className={styles.input}
               value={source}
               onChange={(event) => setSource(event.target.value)}
@@ -158,6 +165,7 @@ export function MappingSettings() {
           </SettingField>
           <SettingField label="Match basis">
             <select
+              disabled={locked}
               className={styles.input}
               value={basis}
               onChange={(event) => setBasis(event.target.value)}
@@ -178,6 +186,7 @@ export function MappingSettings() {
           </SettingField>
           <SettingField label="Status">
             <select
+              disabled={locked}
               className={styles.input}
               value={status}
               onChange={(event) => setStatus(event.target.value)}
@@ -195,7 +204,7 @@ export function MappingSettings() {
         </div>
         <div className={styles.row}>
           <SettingsButton
-            disabled={action.busy || !eligible.length}
+            disabled={locked || !eligible.length}
             onClick={() => setBulk(true)}
           >
             Confirm All ≥ 60%
@@ -224,6 +233,7 @@ export function MappingSettings() {
                 label: "Client",
                 render: (row) => (
                   <SettingsButton
+                    disabled={locked}
                     small
                     onClick={() => setIdentity(row.clientId)}
                   >
@@ -260,7 +270,11 @@ export function MappingSettings() {
                 key: "review",
                 label: "Confirmed",
                 render: (row) => (
-                  <SettingsButton small onClick={() => setReview(row)}>
+                  <SettingsButton
+                    disabled={locked}
+                    small
+                    onClick={() => setReview(row)}
+                  >
                     <Badge
                       tone={
                         row.confirmed
@@ -292,6 +306,11 @@ export function MappingSettings() {
             {eligible.length} bulk-review eligible
           </p>
         </StatusPanel>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Mapping action failed" error>
             {action.error}
@@ -321,21 +340,19 @@ export function MappingSettings() {
         />
       )}
       <SettingsDialog
+        busy={action.busy}
         open={bulk}
         onClose={() => setBulk(false)}
         title={`Confirm ${eligible.length} mappings?`}
         description="Only the eligible candidates currently shown by your filters are included. Each confirmation is a separate reviewed backend request."
         footer={
           <>
-            <SettingsButton
-              disabled={action.busy}
-              onClick={() => setBulk(false)}
-            >
+            <SettingsButton disabled={locked} onClick={() => setBulk(false)}>
               Cancel
             </SettingsButton>
             <SettingsButton
               primary
-              disabled={action.busy || !eligible.length}
+              disabled={locked || !eligible.length}
               onClick={() =>
                 void action.run(
                   confirmEligible,
@@ -356,6 +373,11 @@ export function MappingSettings() {
           Contractor, assistance-recipient and PAC-committee records are
           excluded.
         </p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Bulk review stopped" error>
             {action.error}

@@ -12,57 +12,25 @@ const draft: WorkspaceDraft = {
   id: "94000000-0000-4000-8000-000000000001",
   docTitle: "Synthetic current document",
   client: current.name,
+  clientId: current.id,
   product: null,
   ownerId: "synthetic-owner",
   status: "draft",
   updatedAt: "2026-10-11T10:00:00Z",
 };
 
-describe("Workspace legacy client association", () => {
-  it("does not substitute a unique same-name catalog entry for the absent current client", () => {
-    expect(
-      clientDrafts([draft], current, [
-        { ...current, id: "10000000-0000-4000-8000-000000000002" },
-      ]),
-    ).toEqual([]);
+describe("Workspace canonical client association", () => {
+  it("holds name-only legacy content even when the name is unique", () => {
+    expect(clientDrafts([{ ...draft, clientId: undefined }], current, [current])).toEqual([]);
   });
-
-  it("retains the exact current client's unique-name documents and native order", () => {
-    const completed = {
-      ...draft,
-      id: "94000000-0000-4000-8000-000000000002",
-      status: "complete" as const,
-    };
-    expect(clientDrafts([completed, draft], current, [current])).toEqual([
-      completed,
-      draft,
-    ]);
+  it("does not transfer a same-name document with a different UUID", () => {
+    expect(clientDrafts([{ ...draft, clientId: "10000000-0000-4000-8000-000000000002" }], current, [current])).toEqual([]);
   });
-
-  it("refuses duplicate names, including duplicate catalog rows", () => {
-    expect(clientDrafts([draft], current, [current, current])).toEqual([]);
-    expect(
-      clientDrafts([draft], current, [
-        current,
-        { ...current, id: "10000000-0000-4000-8000-000000000002" },
-      ]),
-    ).toEqual([]);
+  it("retains UUID-bound documents through rename and duplicate names", () => {
+    const renamed = { ...draft, client: "Former name" };
+    expect(clientDrafts([renamed], current, [current, {...current, id: "other"}])).toEqual([renamed]);
   });
-
-  it("does not infer renamed, missing or differently cased associations", () => {
-    expect(
-      clientDrafts(
-        [
-          { ...draft, client: null },
-          { ...draft, client: current.name.toUpperCase() },
-          { ...draft, client: "Former client name" },
-        ],
-        current,
-        [current],
-      ),
-    ).toEqual([]);
-    expect(
-      clientDrafts([draft], current, [{ ...current, name: "Renamed client" }]),
-    ).toEqual([]);
+  it("keeps prospect content out even if client UUID is supplied", () => {
+    expect(clientDrafts([{ ...draft, prospectId: "prospect" }], current, [current])).toEqual([]);
   });
 });
