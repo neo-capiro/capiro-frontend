@@ -21,16 +21,20 @@ vi.mock("../../shared/capiro/registry", () => ({
     "settings.team.list": { method: "GET" },
   },
 }));
-let current: ReturnType<typeof useSettingsMutation>;
+const capture = vi.fn<(view: ReturnType<typeof useSettingsMutation>) => void>();
+function current() {
+  return capture.mock.lastCall![0];
+}
 let root: Root;
 let cache: QueryClient;
 const after = vi.fn();
 function Harness({ section = "team" }: { section?: string }) {
-  current = useSettingsMutation(section);
+  const view = useSettingsMutation(section);
+  capture(view);
   return createElement(
     "output",
     null,
-    current.action.message ?? current.action.error ?? "",
+    view.action.message ?? view.action.error ?? "",
   );
 }
 async function mount(section = "team") {
@@ -50,9 +54,9 @@ async function mount(section = "team") {
 }
 const input = { params: { userId: "target" }, body: { billingAdmin: true } };
 function dispatch() {
-  return current.action.run(
+  return current().action.run(
     (signal) =>
-      current.api.request("settings.team.setBillingAdmin", input, { signal }),
+      current().api.request("settings.team.setBillingAdmin", input, { signal }),
     "Saved",
     after,
   );
@@ -76,6 +80,7 @@ beforeEach(() => {
   state.auth = { userId: "actor-a", sessionId: "session-a", orgId: "org-a" };
   state.api.request.mockReset();
   after.mockReset();
+  capture.mockClear();
   sessionStorage.clear();
 });
 afterEach(async () => {
@@ -100,9 +105,9 @@ describe("Settings dispatch lifetime", () => {
     };
     let first!: Promise<void>;
     await act(async () => {
-      first = current.action.run(
+      first = current().action.run(
         (signal) =>
-          current.api.request("settings.team.setBillingAdmin", changing, {
+          current().api.request("settings.team.setBillingAdmin", changing, {
             signal,
           }),
         "Saved",
@@ -112,14 +117,14 @@ describe("Settings dispatch lifetime", () => {
       void dispatch();
     });
     await until(() => state.api.request.mock.calls.length === 1);
-    expect(current.locked).toBe(true);
+    expect(current().locked).toBe(true);
     expect(state.api.request.mock.calls[0]?.[1]).toEqual(input);
     await act(async () => {
       finish({ userId: "target", billingAdmin: true });
       await first;
     });
     expect(after).toHaveBeenCalledTimes(1);
-    expect(current.locked).toBe(false);
+    expect(current().locked).toBe(false);
   });
   it("a mismatched successful receipt stays fenced across navigation and reload", async () => {
     state.api.request.mockResolvedValue({
@@ -130,18 +135,18 @@ describe("Settings dispatch lifetime", () => {
     await act(async () => {
       await dispatch();
     });
-    expect(current.action.message).toBeUndefined();
-    expect(current.pending?.state).toBe("unknown");
+    expect(current().action.message).toBeUndefined();
+    expect(current().pending?.state).toBe("unknown");
     expect(after).not.toHaveBeenCalled();
     await act(async () => root.unmount());
     cache.clear();
     await mount();
-    expect(current.locked).toBe(true);
+    expect(current().locked).toBe(true);
     await act(async () => {
       await dispatch();
     });
     expect(state.api.request).toHaveBeenCalledTimes(1);
-    expect(current.action.error).toContain("not confirmed");
+    expect(current().action.error).toContain("not confirmed");
   });
   it.each(["target", "client", "actor", "organization", "session"])(
     "scope change cancels the request lifetime and suppresses late success: %s",
@@ -183,9 +188,9 @@ describe("Settings dispatch lifetime", () => {
         await first;
       });
       expect(after).not.toHaveBeenCalled();
-      expect(current.action.message).toBeUndefined();
-      if (kind === "client") expect(current.pending?.state).toBe("unknown");
-      else expect(current.pending).toBeUndefined();
+      expect(current().action.message).toBeUndefined();
+      if (kind === "client") expect(current().pending?.state).toBe("unknown");
+      else expect(current().pending).toBeUndefined();
     },
   );
   it("a readback denial after an accepted write never unlocks it for replay", async () => {
@@ -196,9 +201,9 @@ describe("Settings dispatch lifetime", () => {
       );
     await mount();
     await act(async () => {
-      await current.action.run(
+      await current().action.run(
         (signal) =>
-          current.api.request(
+          current().api.request(
             "settings.team.remove",
             { params: { userId: "target" } },
             { signal },
@@ -207,8 +212,8 @@ describe("Settings dispatch lifetime", () => {
         after,
       );
     });
-    expect(current.pending?.state).toBe("unknown");
-    expect(current.locked).toBe(true);
+    expect(current().pending?.state).toBe("unknown");
+    expect(current().locked).toBe(true);
     expect(after).not.toHaveBeenCalled();
   });
   it("read-only reconciliation unlocks only the recorded target and never dispatches again", async () => {
@@ -221,16 +226,16 @@ describe("Settings dispatch lifetime", () => {
       { userId: "target", billingAdmin: false },
     ]);
     await act(async () => {
-      await current.reconcile();
+      await current().reconcile();
     });
-    expect(current.locked).toBe(true);
+    expect(current().locked).toBe(true);
     state.api.request.mockResolvedValueOnce([
       { userId: "target", billingAdmin: true },
     ]);
     await act(async () => {
-      await current.reconcile();
+      await current().reconcile();
     });
-    expect(current.locked).toBe(false);
+    expect(current().locked).toBe(false);
     expect(
       state.api.request.mock.calls.map(([operation]) => operation),
     ).toEqual([
@@ -246,8 +251,8 @@ describe("Settings dispatch lifetime", () => {
     await act(async () => {
       await dispatch();
     });
-    expect(current.pending).toBeUndefined();
-    expect(current.action.error).toBe("denied");
+    expect(current().pending).toBeUndefined();
+    expect(current().action.error).toBe("denied");
     expect(after).not.toHaveBeenCalled();
     expect(sessionStorage.length).toBe(0);
   });

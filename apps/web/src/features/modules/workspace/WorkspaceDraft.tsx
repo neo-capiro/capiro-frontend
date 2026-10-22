@@ -29,6 +29,7 @@ import { SectionPreview } from "./rich-document/SectionPreview";
 import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
+import { DraftClientAssociation } from "./DraftClientAssociation";
 
 function DraftEditor({
   draft,
@@ -44,6 +45,8 @@ function DraftEditor({
   const initial = prospectSave?.retained?.input ?? manualDraftInput(draft);
   const [title, setTitle] = useState(initial.title);
   const [sections, setSections] = useState(initial.sections);
+  const [boundDraft, setBoundDraft] = useState<WorkspaceDraftDocument>();
+  const currentDraft = boundDraft ?? draft;
   const names = initial.names;
   const [history, setHistory] = useState(false);
   const update = useCapiroMutation("workspace.draft.update");
@@ -86,7 +89,8 @@ function DraftEditor({
           <ActionButton onClick={onClose}>← Workspace</ActionButton>
           <h1>{draft.docTitle}</h1>
           <p>
-            {draft.product ?? "Document"} · {draft.client ?? "Firm"}
+            {currentDraft.product ?? "Document"} ·{" "}
+            {currentDraft.client ?? "Firm"}
           </p>
         </div>
         <div className={styles.actions}>
@@ -110,7 +114,12 @@ function DraftEditor({
           </ActionButton>
         </div>
       </header>
-      <CopiedTabs draft={draft} />
+      <DraftClientAssociation
+        draft={currentDraft}
+        disabled={pending}
+        onBound={setBoundDraft}
+      />
+      <CopiedTabs draft={currentDraft} />
       {draft.prospectId && prospectSave && (
         <>
           <p>

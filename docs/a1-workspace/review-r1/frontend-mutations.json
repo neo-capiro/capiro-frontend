@@ -1,0 +1,123 @@
+[
+  {
+    "mutant": "uuid-created",
+    "exit": 1,
+    "failedTests": [
+      "newsletter client authority creates with the selected UUID despite duplicate names"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "missing-client",
+    "exit": 1,
+    "failedTests": [
+      "newsletter client authority holds a removed client before create"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "saved-client",
+    "exit": 1,
+    "failedTests": [
+      "newsletter client authority reopens using the saved UUID and refuses reassignment"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "reassignment",
+    "exit": 1,
+    "failedTests": [
+      "newsletter client authority reopens using the saved UUID and refuses reassignment"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "stale-create",
+    "exit": 1,
+    "failedTests": [
+      "newsletter client authority discards a pending create after the local client changes"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "held-schema",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery receives held flags and validates an explicit UUID binding request"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "held-only",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery shows recovery only for a held row and binds the selected UUID"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "binding-input",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery shows recovery only for a held row and binds the selected UUID"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "server-refusal",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery keeps the draft held and displays a server wall refusal",
+      "held draft client recovery rejects a successful response for a different client"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "binding-receipt",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery rejects a successful response for a different client"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "newsletter-binding",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery keeps unsaved newsletter edits when its held association is confirmed"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "held-filter",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery labels held library rows and excludes them from a client-filtered surface"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "held-stage",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery refuses to mount staging for a held newsletter even on the stage view"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "held-stage-control",
+    "exit": 1,
+    "failedTests": [
+      "held draft client recovery refuses to mount staging for a held newsletter even on the stage view"
+    ],
+    "stderr": ""
+  },
+  {
+    "mutant": "ordinary-edit-recovery",
+    "exit": 1,
+    "failedTests": [
+      "adopts a confirmed client without reloading or losing unsaved ordinary draft edits"
+    ],
+    "stderr": ""
+  }
+]

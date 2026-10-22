@@ -1,0 +1,85 @@
+{
+  "command": "npm test --workspace @capiro/web -- --maxWorkers=2 --reporter=json --outputFile=/dev/shm/a1-fe-locked-unit.json",
+  "exit": 0,
+  "files": 232,
+  "tests": 3064,
+  "passed": 3064,
+  "failed": 0,
+  "pending": 0,
+  "mutations": {
+    "killed": 15,
+    "total": 15
+  },
+  "focused": {
+    "files": 2,
+    "tests": 12,
+    "passed": 12
+  },
+  "scopedLint": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 3
+  },
+  "typecheck": {
+    "command": "NODE_OPTIONS=--max-old-space-size=5120 npm run typecheck --workspace @capiro/web -- --incremental false",
+    "sourceCommit": "bf932dd71cda22cbf437afff7304643b4cac4cad",
+    "exit": 0,
+    "durationSeconds": 208,
+    "diagnostics": 0
+  },
+  "build": {
+    "command": "NODE_OPTIONS=--max-old-space-size=5120 NEXT_TELEMETRY_DISABLED=1 npm run build",
+    "exit": 0,
+    "durationSeconds": 309,
+    "result": "pass; Meri client build, default Turbopack production compilation, TypeScript and route collection completed",
+    "configurationChanged": false,
+    "sourceTree": "29a2d4f8d6e45f3ceaf08f031090362ef1750211",
+    "layout": "isolated runtime/configuration copy with identical installed dependencies physically within project root; historical docs evidence omitted",
+    "cleanInstall": false
+  },
+  "lint": {
+    "command": "npm run lint --workspace @capiro/web",
+    "exit": 0,
+    "errors": 0,
+    "warnings": 87,
+    "scope": "Full source before the final dialog JSX correction; corrected file checked separately"
+  },
+  "settingsSourceTests": {
+    "includedInCanonicalUnit": false,
+    "reason": "src/features/settings tests are outside tests/**/*.test.ts; jsdom absent from declared installation",
+    "verification": "lint corrections verified; DOM behavior and mutations not rerun"
+  },
+  "correctedFileLint": {
+    "file": "apps/web/src/features/settings/security-form.test.tsx",
+    "exit": 0,
+    "errors": 0,
+    "warnings": 1
+  },
+  "typecheckAttempts": [
+    {
+      "command": "npm run typecheck --workspace @capiro/web -- --incremental false",
+      "exit": 134,
+      "result": "Node/V8 heap out of memory at approximately 2049MB; no compiler diagnostics; not qualified"
+    },
+    {
+      "command": "NODE_OPTIONS=--max-old-space-size=5120 npm run typecheck --workspace @capiro/web -- --incremental false",
+      "exit": 2,
+      "diagnostics": [
+        "TS2352 security-form.test.ts:108 required children props cast"
+      ],
+      "correction": "Use ordinary JSX children in renamed security-form.test.tsx; finalTypecheck confirms correction"
+    },
+    {
+      "command": "NODE_OPTIONS=--max-old-space-size=5120 npm run typecheck --workspace @capiro/web -- --incremental false",
+      "sourceCommit": "bf932dd71cda22cbf437afff7304643b4cac4cad",
+      "exit": 0,
+      "durationSeconds": 208,
+      "diagnostics": 0
+    }
+  ],
+  "initialBuildAttempt": {
+    "command": "NEXT_TELEMETRY_DISABLED=1 npm run build --workspace @capiro/web",
+    "exit": 1,
+    "result": "Turbopack rejected apps/web/node_modules symlink leaving its filesystem root; no build qualification or config workaround"
+  }
+}

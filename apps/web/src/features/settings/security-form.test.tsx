@@ -103,13 +103,9 @@ afterEach(async () => {
 it("all dismiss paths are ignored while a security dialog is busy", async () => {
   await act(async () =>
     root.render(
-      createElement(SettingsDialog, {
-        open: true,
-        busy: true,
-        title: "Delete",
-        onClose: close,
-        children: "Target",
-      }),
+      <SettingsDialog open busy title="Delete" onClose={close}>
+        Target
+      </SettingsDialog>,
     ),
   );
   await act(async () => {

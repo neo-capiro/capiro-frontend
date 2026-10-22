@@ -23,9 +23,16 @@ export function useNewsletter({
   );
   const me = useCapiroQuery("me.read", {});
   const clients = useCapiroQuery("workspace.clients", {});
-  const [clientId, updateClientId] = useState(existing ? existing.clientId ?? "" : initialClientId);
+  const [clientId, updateClientId] = useState(
+    existing ? (existing.clientId ?? "") : initialClientId,
+  );
   const scopeGeneration = useRef(0);
-  useEffect(() => () => { scopeGeneration.current += 1; }, [existing?.id, initialClientId]);
+  useEffect(
+    () => () => {
+      scopeGeneration.current += 1;
+    },
+    [existing?.id, initialClientId],
+  );
   function setClientId(next: string) {
     if (next !== clientId) scopeGeneration.current += 1;
     updateClientId(next);
@@ -101,9 +108,14 @@ export function useNewsletter({
     try {
       let record = draft;
       const client = clients.data?.items.find((value) => value.id === clientId);
-      if (clientId && !client) throw new Error("The selected client is unavailable. Refresh before saving.");
+      if (clientId && !client)
+        throw new Error(
+          "The selected client is unavailable. Refresh before saving.",
+        );
       if (record && (record.clientId ?? null) !== (clientId || null))
-        throw new Error("This saved newsletter belongs to a different client. Open it in its original client scope.");
+        throw new Error(
+          "This saved newsletter belongs to a different client. Open it in its original client scope.",
+        );
       if (!record) {
         record = await create.run({
           body: {
@@ -143,14 +155,27 @@ export function useNewsletter({
       setSaved(true);
       if (exit) onClose();
     } catch (failure) {
-      if (scope === scopeGeneration.current) setLocalError(
-        failure instanceof Error
-          ? failure
-          : new Error("Newsletter save could not be completed."),
-      );
+      if (scope === scopeGeneration.current)
+        setLocalError(
+          failure instanceof Error
+            ? failure
+            : new Error("Newsletter save could not be completed."),
+        );
     } finally {
       saving.current = false;
     }
+  }
+  function acceptClientAssociation(bound: WorkspaceDraftDocument) {
+    if (
+      !draft ||
+      bound.id !== draft.id ||
+      !bound.clientId ||
+      bound.clientAssociation === "held"
+    )
+      return;
+    scopeGeneration.current += 1;
+    setDraft(bound);
+    updateClientId(bound.clientId);
   }
   const documentId = (
     draft?.documents.find(
@@ -183,5 +208,6 @@ export function useNewsletter({
     redo,
     save,
     documentId,
+    acceptClientAssociation,
   };
 }

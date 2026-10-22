@@ -95,7 +95,9 @@ export function DocumentsLibrary({
   const rows = (documents.data?.items ?? []).filter(
     (row) =>
       row.name.toLowerCase().includes(search.toLowerCase()) &&
-      (!client || row.client === client) &&
+      (!clientId || row.clientAssociation !== "held") &&
+      (!client ||
+        (row.clientAssociation !== "held" && row.client === client)) &&
       (!template || row.kind === template) &&
       (scope === "all" ||
         (ownerId !== undefined &&
@@ -106,7 +108,7 @@ export function DocumentsLibrary({
   const clients = [
     ...new Set(
       (documents.data?.items ?? []).flatMap((row) =>
-        row.client ? [row.client] : [],
+        row.client && row.clientAssociation !== "held" ? [row.client] : [],
       ),
     ),
   ];
@@ -207,7 +209,10 @@ export function DocumentsLibrary({
             {
               key: "client",
               label: "CLIENT",
-              render: (row) => row.client ?? "Firm",
+              render: (row) =>
+                row.clientAssociation === "held"
+                  ? "Choose a client to continue"
+                  : (row.client ?? "Firm"),
             },
             {
               key: "template",
