@@ -1,0 +1,54 @@
+{
+  "parentRemote": "ef412274af6e02b2ec90d5fc45886584ba11591f",
+  "pr118": "248baf5dad008ff0f50fa31c61d791a3363da083",
+  "changedTest": "apps/web/tests/browser/settings-security-form.spec.ts",
+  "changedTestSha256": "7a3b19a7b9e4152152c52b4ef8b17dd3817248c0a7ac557c0604a79a21a53751",
+  "originalFormSha256": "c4c7a907d3c4a9591b440d60850f0aa440cb3d360f859a7c45e74ba9aebd5fa8",
+  "composition": {
+    "base117": "ef412274af6e02b2ec90d5fc45886584ba11591f",
+    "base118": "248baf5dad008ff0f50fa31c61d791a3363da083",
+    "baselineComposedTree": "9bd59332467616082c645229b6702d452e016432",
+    "verifiedBlobCount": 2317,
+    "restoredToBaseline": [
+      "apps/web/tests/browser/settings-security-form-harness.tsx",
+      "apps/web/tests/browser/settings-security-form.html",
+      "apps/web/tests/browser/settings-security-form.spec.ts",
+      "package-lock.json"
+    ],
+    "candidateOnlyPath": "apps/web/tests/browser/settings-security-form.spec.ts",
+    "candidateSha256": "7a3b19a7b9e4152152c52b4ef8b17dd3817248c0a7ac557c0604a79a21a53751"
+  },
+  "checks": {
+    "collection": {
+      "exit": 0,
+      "cases": 2
+    },
+    "lint": {
+      "exit": 0
+    },
+    "focusedTypecheck": {
+      "exit": 0
+    },
+    "browser": {
+      "exit": 1,
+      "launchFailures": 2,
+      "scenariosExecuted": 0,
+      "assertionsExecuted": 0
+    }
+  },
+  "requestEvidence": {
+    "source": "https://github.com/neo-capiro/capiro-frontend/pull/117#issuecomment-6352133815",
+    "updatedAt": "2026-10-22T21:53:05Z",
+    "attribution": "Fable local Docker browser reproduction, not author-observed",
+    "method": "GET",
+    "url": "http://127.0.0.1:5191/@fs/w/apps/web/src/shared/portfolio/api/provider.tsx",
+    "codeBuildTraceAvailable": false
+  },
+  "remaining": [
+    "dot exact-head review",
+    "Fable fresh composed Chromium gate",
+    "coordinating release process",
+    "A2 HOLD",
+    "STOP2/6"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "assertionsUnchanged": 8,
+  "namesUnchanged": [
+    "all dismiss paths are ignored while a security dialog is busy",
+    "tenant creation freezes fields and close controls until the exact receipt is accepted"
+  ],
+  "exactPostAndPathConditionUnchanged": true,
+  "matcher": "(url) => url.pathname.startsWith(\"/api/\")",
+  "predicateCases": [
+    {
+      "url": "http://127.0.0.1:5191/api/capiro/settings.hq.tenants.create",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "url": "http://127.0.0.1:5191/api/capiro/settings.hq.tenants.list?input=%7B%7D",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "url": "http://127.0.0.1:5191/api/backend/me",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "url": "http://127.0.0.1:5191/api/unknown.tsx",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "url": "http://127.0.0.1:5191/src/shared/portfolio/api/provider.tsx",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "url": "http://127.0.0.1:5191/@fs/app/src/shared/portfolio/api/http.ts",
+      "expected": false,
+      "actual": false
+    }
+  ],
+  "limit": "AST assertion/guard parity and pure predicate execution only; no browser or CI request reproduction"
+}

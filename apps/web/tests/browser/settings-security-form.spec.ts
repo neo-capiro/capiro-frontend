@@ -52,20 +52,24 @@ test("tenant creation freezes fields and close controls until the exact receipt 
   const pending = new Promise<Route>((resolve) => {
     capture = resolve;
   });
-  await page.route("**/api/**", async (route) => {
-    if (
-      new URL(route.request().url()).pathname !==
-        "/api/capiro/settings.hq.tenants.create" ||
-      route.request().method() !== "POST"
-    ) {
-      await route.abort();
-      throw new Error(
-        "Unexpected API request in isolated Settings form harness",
-      );
-    }
-    requests += 1;
-    capture(route);
-  });
+  // Vite source imports may contain /api/; intercept application endpoints only.
+  await page.route(
+    (url) => url.pathname.startsWith("/api/"),
+    async (route) => {
+      if (
+        new URL(route.request().url()).pathname !==
+          "/api/capiro/settings.hq.tenants.create" ||
+        route.request().method() !== "POST"
+      ) {
+        await route.abort();
+        throw new Error(
+          `Unexpected API request in isolated Settings form harness: ${route.request().method()} ${route.request().url()}`,
+        );
+      }
+      requests += 1;
+      capture(route);
+    },
+  );
   await page.goto("/settings-security-form.html");
   const dialog = page.getByRole("dialog", {
     name: "Create tenant + invite admin",
