@@ -134,8 +134,13 @@ it.each(["renewed", "expired", "revoked", "superseded"])(
     if (state === "revoked") value.accessLost = true;
     if (state === "superseded")
       value.latestTarget = {
+        tenantId: context.tenantId,
+        actorId: context.actorId,
         conversationId: context.conversationId,
         runId: "new-run",
+        attemptId: "synthetic-next-attempt",
+        workerId: "synthetic-next-worker",
+        writerFence: 2,
       };
     const html = render(channel, value);
     expect(sendButton(html)).toMatch(/\sdisabled(?:=|\s|>)/i);
