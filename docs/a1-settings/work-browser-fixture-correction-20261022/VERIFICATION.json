@@ -1,0 +1,130 @@
+{
+  "source117": "353d4743a1cca73a2a504a15489bc9e549f045da",
+  "source118": "248baf5dad008ff0f50fa31c61d791a3363da083",
+  "base": "87a8495138f0af5303bc93397438238c6cc5081b",
+  "scope": "Three browser fixture files only, plus this evidence packet. Product, all existing assertions/selectors/test names, dependency/configuration, registry/evaluator/threshold/baseline and skipped-test source are unchanged.",
+  "productOrTestAssertionChange": false,
+  "files": [
+    {
+      "path": "apps/web/tests/browser/work-boundary-fixtures.ts",
+      "sha256": "5109b9ed46efeb0ced29dbb2020bd67c7b9ceec0d51407cbf79b23577ba15017",
+      "beforeBlob": "dc63dc8e67dd8c779e0ebeb6cf0abf25292115a7",
+      "afterBlob": "e6f22224e2de93e2303bd70ab75005fd14f24f30"
+    },
+    {
+      "path": "apps/web/tests/browser/work-boundary.spec.ts",
+      "sha256": "e75dadbf0fb5902bbe261c525a30b33fe9b8fc3969275250259d82c2ede2872b",
+      "beforeBlob": "5aef65ca6d30c047d53297f9f526fabf1c165705",
+      "afterBlob": "dfe7d184168da85eafc679f785d00c3dc11b9915"
+    },
+    {
+      "path": "apps/web/tests/browser/work-documents.spec.ts",
+      "sha256": "983cf430adfbe53ecc210129df884fdfaf054ad114627b6232efe0e44f29e535",
+      "beforeBlob": "c5a133acede0d2d0c58d9a664e889eee01a969e9",
+      "afterBlob": "13e542ce147b869f81fcaeb4bb06ed0004aa9b08"
+    }
+  ],
+  "composedSource": {
+    "base": "87a8495138f0af5303bc93397438238c6cc5081b",
+    "pr117": "353d4743a1cca73a2a504a15489bc9e549f045da",
+    "pr118": "248baf5dad008ff0f50fa31c61d791a3363da083",
+    "verifiedBlobs": 2670
+  },
+  "browser": {
+    "command": "npm run test:browser -- --workers=1 tests/browser/work-boundary.spec.ts tests/browser/work-documents.spec.ts",
+    "exit": 1,
+    "collected": 18,
+    "executed": 0,
+    "launchFailures": 18,
+    "skipped": 0,
+    "reason": "Chromium executable absent; no browser body or assertion ran. Raw JSON contains all 18 failures. No browser PASS or reproduction of the reported DOM failure is claimed."
+  },
+  "unit": {
+    "command": "npm test --workspace @capiro/web -- tests/work-associations.test.ts tests/domain-behavior.test.ts --maxWorkers=1 --reporter=json --outputFile=<receipt>",
+    "exit": 0,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Canonical association and domain tests on composed source; does not qualify browser interactions."
+  },
+  "lint": {
+    "command": "node ../../node_modules/eslint/bin/eslint.js tests/browser/work-boundary-fixtures.ts tests/browser/work-boundary.spec.ts tests/browser/work-documents.spec.ts",
+    "cwd": "apps/web",
+    "exit": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "typecheck": {
+    "command": "NODE_OPTIONS=--max-old-space-size=2048 node node_modules/typescript/bin/tsc --noEmit --project apps/web/node_modules/.a1-work-browser-tsconfig.json",
+    "exit": 0,
+    "diagnostics": 0,
+    "scope": "Scratch configuration extends unchanged apps/web/tsconfig.json, incremental false; includes next-env.d.ts, the three touched files and existing work-boundary-harness.tsx for its Window declaration. Not full repository typecheck."
+  },
+  "setupFailuresPreserved": {
+    "lint": "Initial root-cwd invocation exit2, no root eslint config. Corrected cwd only; no config change.",
+    "typecheck": "Initial narrow config omitted work-boundary-harness.tsx Window declaration; exit2, 11 diagnostics. Added that existing file to scratch include; repository config/source unchanged."
+  },
+  "operatorGate": {
+    "sourceComment": 6350271684,
+    "codeBuild": "capiro-portfolio-preview-build:8a369283",
+    "composition": "f6427c42",
+    "unitFiles": 44,
+    "unitPassed": 741,
+    "unitSkipped": 36,
+    "portfolioBrowserPassed": 22,
+    "portfolioBrowserFailed": 16,
+    "architectureBlocking": 0,
+    "build": "not reached",
+    "smoke": "not reached",
+    "scan": "not reached",
+    "attribution": "Fable reported; raw gate artifacts not supplied or rerun here."
+  },
+  "holds": [
+    "Browser rerun required in Fable Chromium runner; current local execution blocked.",
+    "Two jsdom form tests remain zero executed, separate from 36 guarded integration skips.",
+    "Fable owns full composed qualification; build/smoke/scan remain unrun.",
+    "Backend-live/cutover prerequisite; no ship request; A2 HOLD; STOP2/6."
+  ],
+  "receipts": [
+    {
+      "file": "browser.log",
+      "sha256": "d44e522235c266db25e2fcd65e7f6d6083646e2a2fbe28ee9075a7bc928d8b83",
+      "bytes": 45253
+    },
+    {
+      "file": "unit.json",
+      "sha256": "dc6f41cbf9e7c71cc6761209159e55c176bf33d1e42f25aa7af55eb1f18ee285",
+      "bytes": 4241
+    },
+    {
+      "file": "unit.log",
+      "sha256": "d352442d045895346ef34d87136b9cbed8c96510e7538710dc5116e53e13f84e",
+      "bytes": 346
+    },
+    {
+      "file": "assertion-parity.json",
+      "sha256": "bee404ba50007696b13daa2cb219fdbe5dc7a2f239cb8fdebe136ff1e51a286c",
+      "bytes": 420
+    },
+    {
+      "file": "lint.log",
+      "sha256": "857e2947e893f4b44e8c0ea617d43fa41dcf956932e978c5ecedbe14d8a12256",
+      "bytes": 502
+    },
+    {
+      "file": "lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "typecheck.log",
+      "sha256": "ae7fb48e04712f7a7d8c12a63eddf6230dbf824b26aa9db0baf208bafe1527e5",
+      "bytes": 1521
+    },
+    {
+      "file": "typecheck-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

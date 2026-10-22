@@ -14,6 +14,7 @@ const drafts = [
     id: draftId,
     docTitle: "Synthetic briefing draft",
     client: client.name,
+    clientId,
     product: "Briefing",
     ownerId: "synthetic-user",
     status: "draft",
@@ -23,6 +24,7 @@ const drafts = [
     id: completeId,
     docTitle: "Synthetic completed letter",
     client: client.name,
+    clientId,
     product: "Letter",
     ownerId: "synthetic-user",
     status: "complete",
@@ -42,6 +44,7 @@ test("client Work opens typed Workspace drafts through the canonical editor rout
           ...drafts[0],
           id: "91000000-0000-4000-8000-000000000003",
           client: null,
+          clientId: null,
         },
       ],
     }),
@@ -95,7 +98,9 @@ test("client Work withholds legacy name matches when accessible clients collide"
 }) => {
   const unexpected = await installFixtures(page);
   await page.route("**/workspace/drafts?scope=all", (route) =>
-    json(route, { drafts }),
+    json(route, {
+      drafts: drafts.map((draft) => ({ ...draft, clientId: null })),
+    }),
   );
   await page.route("**/core/clients", (route) =>
     json(route, [
