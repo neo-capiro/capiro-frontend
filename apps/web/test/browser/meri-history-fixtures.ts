@@ -1,5 +1,6 @@
 import type { Page } from "@playwright/test";
 import type { UIEvent } from "@capiro/meri-contracts";
+import { conversationHistoryMetadata } from "@capiro/meri-contracts/conversation-history";
 import type {
   ConversationListPage,
   ConversationTranscriptPage,
@@ -118,7 +119,7 @@ export async function installHistory(
       : 0;
     const conversations = native.conversations.slice(
       start,
-      start + input.limit,
+      start + (input.limit ?? conversationHistoryMetadata.defaults.limit),
     );
     const last = conversations.at(-1);
     return reply(route, {

@@ -104,8 +104,11 @@ test("null account names and no client selection use neutral state, never sample
   await page.goto("/meri");
   await expect(page.getByText("Welcome.", { exact: true })).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "No client selected", exact: true }),
+    page.locator("summary").filter({ hasText: /^Choose client$/ }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Current client", exact: true }),
+  ).toContainText("Choose a permitted client above to work in its scope.");
   await noSamples(page);
   expect(unexpected).toEqual([]);
 });
