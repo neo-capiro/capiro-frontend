@@ -16,6 +16,7 @@ export function useSaveMeeting(
   meeting: Meeting | undefined,
   onSaved: () => void,
   clientId?: string,
+  readClientId?: string,
 ) {
   const api = useApi();
   const cache = useQueryClient();
@@ -33,7 +34,7 @@ export function useSaveMeeting(
     const controller = new AbortController();
     lifetime.current = controller;
     return () => controller.abort();
-  }, [meetingId, originalClientId, clientId, userId, tenantId]);
+  }, [meetingId, originalClientId, clientId, readClientId, userId, tenantId]);
   const mutation = useMutation({
     mutationFn: async (body: MeetingInput) => {
       const input = meetingInputSchema.parse(body);
@@ -44,14 +45,15 @@ export function useSaveMeeting(
         controller.signal.throwIfAborted();
         guard();
         if (meetingId) {
-          const saved = cache.getQueryState<Meeting>(["meeting", meetingId]);
+          const saved = cache.getQueryState<Meeting>(["meeting", meetingId, readClientId ?? null]);
           if (
             saved?.status !== "success" ||
             saved.fetchStatus !== "idle" ||
             saved.isInvalidated ||
             saved.error ||
             saved.data?.id !== meetingId ||
-            (saved.data.client?.id ?? null) !== originalClientId
+            (saved.data.client?.id ?? null) !== originalClientId ||
+            (meeting?.updatedAt !== undefined && saved.data.updatedAt !== meeting.updatedAt)
           )
             throw new ApiError(
               409,
@@ -93,6 +95,7 @@ export function useSaveMeeting(
     onSuccess: () => {
       void cache.invalidateQueries({ queryKey: ["calendar", "meetings"] });
       void cache.invalidateQueries({ queryKey: ["meeting", meetingId] });
+      void cache.invalidateQueries({ queryKey: ["meeting-library"] });
       onSaved();
     },
     onSettled: () => {

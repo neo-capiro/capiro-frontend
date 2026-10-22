@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { EffectiveDateRecord } from "@/shared/federal-register/effective-dates";
 import { validDay } from "@/shared/portfolio/date/civil";
 import { preparationSchema } from "./preparation/schema";
-import { artifactMetadataSchema } from "./artifacts/metadata";
+import { artifactActorSchema, artifactMetadataSchema } from "./artifacts/metadata";
 const lifecycleArtifactSchema = artifactMetadataSchema
   .pick({ id: true, meetingId: true, clientId: true, status: true })
   .partial({ meetingId: true, clientId: true, status: true });
@@ -11,6 +11,7 @@ export const meetingSchema = z
   .object({
     id: z.string(),
     subject: z.string(),
+    updatedAt: z.iso.datetime().optional(),
     description: z.string().nullable(),
     location: z.string().nullable(),
     startsAt: z.string(),
@@ -173,6 +174,18 @@ export const noteSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   sharedAt: z.string().nullable().optional(),
+  metadataVersion: z.literal(1).optional(),
+  revision: z.iso.datetime().optional(),
+  sharingKnown: z.boolean().optional(),
+  approvalKnown: z.boolean().optional(),
+  approvedAt: z.iso.datetime().nullable().optional(),
+  approvedByUserId: z.string().nullable().optional(),
+  sharedByUserId: z.string().nullable().optional(),
+  authorUserId: z.string().nullable().optional(),
+  author: artifactActorSchema.optional(),
+  approvedBy: artifactActorSchema.optional(),
+  sharedBy: artifactActorSchema.optional(),
+  capabilities: z.object({ edit: z.boolean(), approve: z.boolean(), share: z.boolean(), unshare: z.boolean() }).optional(),
 });
 export function meetingArtifactListSchema(
   meetingId: string | null,

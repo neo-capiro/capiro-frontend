@@ -187,7 +187,7 @@ function ArtifactEditor({
             <small>
               {item.confidential
                 ? "Confidential"
-                : item.sharedAt === undefined
+                : item.sharingKnown === false || item.sharedAt === undefined
                   ? "Sharing status unavailable"
                   : item.sharedAt
                     ? "Shared with client team"
@@ -219,7 +219,7 @@ function ArtifactEditor({
                 )}
                 <button
                   className="button"
-                  disabled={blocked}
+                  disabled={blocked || item.capabilities?.edit === false}
                   onClick={() => {
                     const selected = readableRows()?.find(
                       (row) => row.id === item.id && !row.restricted,
@@ -237,7 +237,7 @@ function ArtifactEditor({
                 {item.status !== "approved" && (
                   <button
                     className="button"
-                    disabled={blocked}
+                    disabled={blocked || item.capabilities?.approve === false}
                     onClick={() =>
                       changeArtifact({
                         action: "approve",
@@ -251,7 +251,7 @@ function ArtifactEditor({
                 {item.status === "approved" &&
                   meeting.client &&
                   !item.confidential &&
-                  !item.sharedAt && (
+                  !item.sharedAt && item.sharingKnown !== false && item.capabilities?.share !== false && (
                     <button
                       className="button"
                       disabled={blocked}
@@ -272,10 +272,10 @@ function ArtifactEditor({
                       Share
                     </button>
                   )}
-                {item.sharedAt && (
+                {item.sharedAt && item.sharingKnown !== false && (
                   <button
                     className="button"
-                    disabled={blocked}
+                    disabled={blocked || item.capabilities?.unshare === false}
                     onClick={() =>
                       changeArtifact({
                         action: "unshare",
