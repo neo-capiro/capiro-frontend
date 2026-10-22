@@ -93,7 +93,7 @@ test("M1 retention: exact conversation revocation purges its draft while a neigh
   native.deny(binding.conversationId);
   await expect(
     page.getByRole("heading", {
-      name: "Conversation session expired",
+      name: "Conversation access unavailable",
       exact: true,
     }),
   ).toBeVisible({ timeout: 15_000 });
