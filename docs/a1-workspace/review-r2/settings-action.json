@@ -1,0 +1,83 @@
+{
+  "sourceSha256": "e6e1f4684c028faf32d8fdd670cecf25bfd23358be1a80c71db412dd5705a607",
+  "testCases": 10,
+  "assertions": 27,
+  "canonical": {
+    "command": "npm run test:capiro --workspace @capiro/web -- --maxWorkers=1",
+    "exit": 0,
+    "filesPassed": 54,
+    "testsPassed": 590,
+    "unhandledWorkerErrors": 0,
+    "durationSeconds": 65.37
+  },
+  "mutations": {
+    "mutants": [
+      {
+        "name": "scope-abort-removed",
+        "exit": 1,
+        "total": 10,
+        "failed": 5,
+        "failedNames": [
+          "Settings dispatch lifetime scope change cancels the request lifetime and suppresses late success: target",
+          "Settings dispatch lifetime scope change cancels the request lifetime and suppresses late success: client",
+          "Settings dispatch lifetime scope change cancels the request lifetime and suppresses late success: actor",
+          "Settings dispatch lifetime scope change cancels the request lifetime and suppresses late success: organization",
+          "Settings dispatch lifetime scope change cancels the request lifetime and suppresses late success: session"
+        ],
+        "unhandledErrors": []
+      },
+      {
+        "name": "input-freeze-removed",
+        "exit": 1,
+        "total": 10,
+        "failed": 1,
+        "failedNames": [
+          "Settings dispatch lifetime double submission dispatches once, freezes the captured input and validates the target"
+        ],
+        "unhandledErrors": []
+      },
+      {
+        "name": "receipt-validation-removed",
+        "exit": 1,
+        "total": 10,
+        "failed": 1,
+        "failedNames": [
+          "Settings dispatch lifetime a mismatched successful receipt stays fenced across navigation and reload"
+        ],
+        "unhandledErrors": []
+      }
+    ],
+    "restored": true,
+    "sourceSha256": {
+      "apps/web/src/features/settings/useSettingsAction.ts": "2160616069862f9932fadf387e9486e6b16b558cb5f3bd51b110c9209fa586a0",
+      "apps/web/src/features/settings/useSettingsMutation.ts": "44dbcb21d0f7cd0cfe2f7d360fef0f68896537035fe5f8345e414e3f795d895c"
+    }
+  },
+  "reviewedParent": "ceeecdf7066ca7ed9cc17f8a8e86a32ef6d29b6e",
+  "scope": "Only Settings action test harness; production source, dependencies and configuration unchanged.",
+  "assertionRetention": "Independent TypeScript AST comparison: all 27 complete expect expressions in order, all case declarations and it.each inputs identical;10 expanded tests.",
+  "typecheck": {
+    "command": "NODE_OPTIONS=--max-old-space-size=5120 npm run typecheck",
+    "exit": 0,
+    "diagnostics": 0,
+    "scope": "All configured workspaces"
+  },
+  "lint": {
+    "command": "node ../../node_modules/eslint/bin/eslint.js src/features/settings/security-action.test.ts",
+    "cwd": "apps/web",
+    "exit": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "dependencyQualification": {
+    "method": "Reused existing installation with identical lockfile, plus already installed pinned nested contracts; no install or dependency/configuration change.",
+    "lockSha256": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234",
+    "node": "v24.19.0"
+  },
+  "limits": [
+    "Synchronous Node/SSR hook probe only; not DOM, StrictMode, concurrent React or external-store tearing qualification.",
+    "security-form.test.tsx remains excluded by the Capiro *.test.ts glob and its DOM behavior is not qualified.",
+    "No fresh install, repeated production build, browser, provider or native test run is claimed.",
+    "Existing web-unit/build/lint receipts remain attributed to the earlier source snapshot."
+  ]
+}

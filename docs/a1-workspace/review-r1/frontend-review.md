@@ -88,3 +88,8 @@ After committing the corrected source (`bf932dd71cda22cbf437afff7304643b4cac4cad
 The root `npm run build` passed with exit **0** in **309 seconds**: Meri client TypeScript build, default Next/Turbopack compilation, Next TypeScript check and route collection completed. Runtime heap was `NODE_OPTIONS=--max-old-space-size=5120`; telemetry was disabled. No webpack switch, gate suppression or tracked configuration change was used.
 
 To resolve the earlier external-symlink layout failure, copied the exact runtime/configuration tree `29a2d4f8d6e45f3ceaf08f031090362ef1750211` into an isolated directory and copied the existing matching-lock installed dependencies physically inside its root, including both nested dependency locations. All copied symlinks resolved within that root. Only historical `docs/` evidence was omitted from the build copy; no runtime source or configuration was changed. This is still a reused-install receipt, not a fresh install or browser/live qualification.
+
+
+## R2 correction to the test-glob statement
+
+The R1 statements above describe the general web `tests/**/*.test.ts` run but did not account for the separate Capiro configuration. That configuration **does include** `security-action.test.ts`, and at published `ceeecdf7` its undeclared jsdom environment caused a new worker startup failure. R2 converts it to Node/SSR while retaining every assertion and records the exact Capiro command's exit 0/54 files/ 590 tests in `../review-r2/settings-action.{md,json}`. `security-form.test.tsx` is still excluded by that configuration's `*.test.ts` glob; its DOM behavior remains unqualified. This correction does not retroactively turn the earlier web-suite pass into Capiro qualification.

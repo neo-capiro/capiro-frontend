@@ -1,14 +1,95 @@
-// @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { act, createElement } from "react";
-import { createRoot, type Root } from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { QueryClient } from "@tanstack/react-query";
 import { webcrypto } from "node:crypto";
 import { CapiroApiError } from "../../shared/capiro/http";
 import { useSettingsMutation } from "./useSettingsMutation";
+
+type Dependencies = readonly unknown[] | undefined;
+type Effect = () => void | (() => void);
 const state = vi.hoisted(() => ({
   auth: { userId: "actor-a", sessionId: "session-a", orgId: "org-a" },
   api: { request: vi.fn(), upload: vi.fn(), download: vi.fn() },
+}));
+const hooks = vi.hoisted(() => ({
+  values: [] as unknown[],
+  refs: [] as { current: unknown }[],
+  memos: [] as { value: unknown; deps: Dependencies }[],
+  effects: [] as { deps: Dependencies; cleanup: void | (() => void) }[],
+  pending: [] as { index: number; deps: Dependencies; effect: Effect }[],
+  stateIndex: 0,
+  refIndex: 0,
+  memoIndex: 0,
+  effectIndex: 0,
+  dirty: false,
+}));
+function sameDependencies(a: Dependencies, b: Dependencies) {
+  return (
+    !!a && !!b && a.length === b.length && a.every((v, i) => Object.is(v, b[i]))
+  );
+}
+function memo(value: () => unknown, deps: Dependencies) {
+  const index = hooks.memoIndex++;
+  if (!sameDependencies(hooks.memos[index]?.deps, deps))
+    hooks.memos[index] = { value: value(), deps };
+  return hooks.memos[index]!.value;
+}
+function effect(callback: Effect, deps: Dependencies) {
+  const index = hooks.effectIndex++;
+  if (!sameDependencies(hooks.effects[index]?.deps, deps))
+    hooks.pending.push({ index, deps, effect: callback });
+}
+// Same Node/SSR hook-probe pattern as newsletter-client-authority. Unlike a
+// presentation-only probe, this retains memo/ref/state cells, real QueryCache
+// subscriptions and effect cleanups, including scope changes and unmount.
+vi.mock("react", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react")>();
+  return {
+    ...actual,
+    useState: (initial?: unknown) => {
+      const index = hooks.stateIndex++;
+      const values = hooks.values;
+      if (index === values.length)
+        values.push(typeof initial === "function" ? initial() : initial);
+      return [
+        values[index],
+        (next: unknown) => {
+          const value = typeof next === "function" ? next(values[index]) : next;
+          if (!Object.is(value, values[index])) {
+            values[index] = value;
+            if (values === hooks.values) hooks.dirty = true;
+          }
+        },
+      ];
+    },
+    useRef: (initial: unknown) => {
+      const index = hooks.refIndex++;
+      if (index === hooks.refs.length) hooks.refs.push({ current: initial });
+      return hooks.refs[index];
+    },
+    useMemo: memo,
+    useCallback: (callback: unknown, deps: Dependencies) =>
+      memo(() => callback, deps),
+    useEffect: effect,
+    useSyncExternalStore: (
+      subscribe: (notify: () => void) => () => void,
+      snapshot: () => unknown,
+    ) => {
+      effect(
+        () =>
+          subscribe(() => {
+            hooks.dirty = true;
+          }),
+        [subscribe],
+      );
+      return snapshot();
+    },
+  };
+});
+vi.mock("@tanstack/react-query", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@tanstack/react-query")>()),
+  useQueryClient: () => cache,
 }));
 vi.mock("@clerk/nextjs", () => ({ useAuth: () => state.auth }));
 vi.mock("../../shared/capiro/CapiroBoundary", () => ({
@@ -25,10 +106,10 @@ const capture = vi.fn<(view: ReturnType<typeof useSettingsMutation>) => void>();
 function current() {
   return capture.mock.lastCall![0];
 }
-let root: Root;
+let root: ReturnType<typeof createProbeRoot>;
 let cache: QueryClient;
 const after = vi.fn();
-function Harness({ section = "team" }: { section?: string }) {
+function Harness({ section }: { section: string }) {
   const view = useSettingsMutation(section);
   capture(view);
   return createElement(
@@ -37,20 +118,57 @@ function Harness({ section = "team" }: { section?: string }) {
     view.action.message ?? view.action.error ?? "",
   );
 }
+function createProbeRoot() {
+  let section = "team";
+  let mounted = true;
+  return {
+    render(next: string) {
+      section = next;
+      hooks.dirty = true;
+    },
+    flush() {
+      for (let pass = 0; mounted && hooks.dirty; pass++) {
+        if (pass === 20) throw new Error("Settings hook probe did not settle");
+        hooks.dirty = false;
+        hooks.stateIndex =
+          hooks.refIndex =
+          hooks.memoIndex =
+          hooks.effectIndex =
+            0;
+        hooks.pending = [];
+        renderToStaticMarkup(createElement(Harness, { section }));
+        // Render-phase state updates settle before committing effects.
+        if (hooks.dirty) continue;
+        for (const change of hooks.pending)
+          hooks.effects[change.index]?.cleanup?.();
+        for (const change of hooks.pending)
+          hooks.effects[change.index] = {
+            deps: change.deps,
+            cleanup: change.effect(),
+          };
+      }
+    },
+    unmount() {
+      if (!mounted) return;
+      mounted = false;
+      for (const retained of hooks.effects) retained?.cleanup?.();
+      hooks.values = [];
+      hooks.refs = [];
+      hooks.memos = [];
+      hooks.effects = [];
+      hooks.pending = [];
+      hooks.dirty = false;
+    },
+  };
+}
+async function act(work: () => unknown) {
+  await work();
+  root?.flush();
+}
 async function mount(section = "team") {
   cache = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  const node = document.createElement("div");
-  document.body.append(node);
-  root = createRoot(node);
-  await act(async () =>
-    root.render(
-      createElement(
-        QueryClientProvider,
-        { client: cache },
-        createElement(Harness, { section }),
-      ),
-    ),
-  );
+  root = createProbeRoot();
+  await act(() => root.render(section));
 }
 const input = { params: { userId: "target" }, body: { billingAdmin: true } };
 function dispatch() {
@@ -69,24 +187,33 @@ async function until(test: () => boolean) {
   expect(test()).toBe(true);
 }
 beforeEach(() => {
-  Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
-    value: true,
-    configurable: true,
-  });
-  Object.defineProperty(globalThis, "crypto", {
-    value: webcrypto,
-    configurable: true,
-  });
+  const values = new Map<string, string>();
+  const storage = {
+    get length() {
+      return values.size;
+    },
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      values.set(key, value);
+    },
+    removeItem: (key: string) => {
+      values.delete(key);
+    },
+    clear: () => values.clear(),
+  };
+  vi.stubGlobal("crypto", webcrypto);
+  vi.stubGlobal("sessionStorage", storage);
+  vi.stubGlobal("window", { sessionStorage: storage });
   state.auth = { userId: "actor-a", sessionId: "session-a", orgId: "org-a" };
   state.api.request.mockReset();
   after.mockReset();
   capture.mockClear();
   sessionStorage.clear();
 });
-afterEach(async () => {
-  if (root) await act(async () => root.unmount());
+afterEach(() => {
+  root?.unmount();
   cache?.clear();
-  document.body.replaceChildren();
+  vi.unstubAllGlobals();
 });
 
 describe("Settings dispatch lifetime", () => {
@@ -172,15 +299,7 @@ describe("Settings dispatch lifetime", () => {
       if (kind === "session")
         state.auth = { ...state.auth, sessionId: "session-b" };
       await act(async () =>
-        root.render(
-          createElement(
-            QueryClientProvider,
-            { client: cache },
-            createElement(Harness, {
-              section: kind === "target" ? "other-target" : "team",
-            }),
-          ),
-        ),
+        root.render(kind === "target" ? "other-target" : "team"),
       );
       expect(signal.aborted).toBe(true);
       await act(async () => {
