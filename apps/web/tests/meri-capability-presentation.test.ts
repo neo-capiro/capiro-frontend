@@ -2,6 +2,7 @@ import { createElement, useContext } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, expect, it, vi } from "vitest";
 import MeriLayout from "../src/app/meri/layout";
+import MeriFilesPage from "../src/app/meri/files/page";
 import { ProductShell } from "../src/shared/shell/ProductShell";
 import { MeriHome } from "../src/features/meri/MeriHome";
 import { IntentApprovalsEnabled } from "../src/features/meri/conversation/intents/approvals-enabled";
@@ -86,7 +87,7 @@ function renderRoute(
 }
 afterEach(() => vi.unstubAllEnvs());
 
-it("the actual Meri layout and shell guard direct ordinary routes using the same serving profile", () => {
+it("the actual layout preserves existing destinations and holds opt-in routes", () => {
   for (const path of [
     "/meri/files",
     "/meri/actions",
@@ -96,8 +97,12 @@ it("the actual Meri layout and shell guard direct ordinary routes using the same
     for (const env of [disabled, previewCapabilitiesEnv]) {
       const html = renderRoute(env, path);
       expect(html, path).toContain("Shell header");
-      expect(html, path).toContain(" unavailable</h1>");
-      expect(html, path).not.toContain("Connected workspace body");
+      if (path === "/meri/memory") {
+        expect(html, path).toContain(" unavailable</h1>");
+        expect(html, path).not.toContain("Connected workspace body");
+      } else {
+        expect(html, path).toContain("Connected workspace body");
+      }
     }
     expect(renderRoute(allCapabilitiesEnv, path), path).toContain(
       "Connected workspace body",
@@ -141,9 +146,34 @@ it("home controls and workspace links follow server capability holds even when r
       "/meri/task-updates",
       "/meri/memory",
     ]) {
-      if (env === allCapabilitiesEnv) expect(html).toContain(`href="${href}"`);
+      if (env === allCapabilitiesEnv || href !== "/meri/memory")
+        expect(html).toContain(`href="${href}"`);
       else expect(html).not.toContain(`href="${href}"`);
     }
     expect(html).not.toContain('href="/kit');
   }
+});
+
+it("the unconfigured Files page retains enabled navigation and the canonical setup surface", () => {
+  for (const key of Object.keys(allCapabilitiesEnv)) vi.stubEnv(key, "");
+  navigation.pathname = "/meri/files";
+  const html = renderToStaticMarkup(
+    createElement(
+      SessionContext.Provider,
+      { value: "unconfigured" },
+      createElement(MeriLayout, null, createElement(MeriFilesPage)),
+    ),
+  );
+  const buttons = html.match(/<button\b[^>]*>[\s\S]*?<\/button>/g) ?? [];
+  for (const label of ["Files", "Conversations"]) {
+    const button = buttons.find((element) =>
+      element.endsWith(`${label}</button>`),
+    );
+    expect(button, label).toBeDefined();
+    expect(button, label).not.toMatch(/\sdisabled(?:=|\s|>)/);
+  }
+  expect(html).toContain('href="/settings/preferences"');
+  expect(html).toContain("Connection setup required");
+  expect(html).not.toContain("Connect document service");
+  expect(html).not.toContain("Document files unavailable");
 });

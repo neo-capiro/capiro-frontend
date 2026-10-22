@@ -19,7 +19,7 @@ export function MeriCapabilityRouteGuard({
       definition.ordinaryRoute?.startsWith("/meri/") &&
       definition.ordinaryRoute === pathname,
   );
-  if (!entry || capabilities[entry[0] as MeriCapabilityId].status === "on")
+  if (!entry || capabilities[entry[0] as MeriCapabilityId].navigation === "on")
     return children;
   const [id, definition] = entry;
   return (

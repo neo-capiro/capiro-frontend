@@ -108,7 +108,7 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-it("ordinary disabled capabilities and their actual API routes both hold before authentication", async () => {
+it("existing navigation never unlocks disabled native APIs or bypasses authentication", async () => {
   const env = {
     ...allCapabilitiesEnv,
     ...Object.fromEntries(
@@ -119,7 +119,15 @@ it("ordinary disabled capabilities and their actual API routes both hold before 
   const state = readMeriCapabilities(env);
   for (const route of routes) {
     expect(state[route.id].status, route.id).toBe("off");
-    expect(meriCapabilityHref(route.id, state), route.id).toBeUndefined();
+    expect(Boolean(meriCapabilityHref(route.id, state)), route.id).toBe(
+      [
+        "conversations",
+        "files",
+        "actions",
+        "taskUpdates",
+        "preferences",
+      ].includes(route.id),
+    );
     expect(
       (await route.invoke(requestFor(route, env.CAPIRO_REQUEST_ORIGIN!)))
         .status,

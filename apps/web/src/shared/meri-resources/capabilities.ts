@@ -12,6 +12,8 @@ type CapabilityDefinition = Readonly<{
   runtimeOwner: string;
   requiredReceipt: string;
   unavailableReason?: string;
+  /** Existing connection-status destinations remain reachable while operations are off. */
+  navigationWhenUnconfigured?: true;
 }>;
 
 /** Reviewed source inventory. These records never turn on a service or grant authority. */
@@ -19,6 +21,7 @@ export const meriCapabilityTable = {
   conversations: {
     label: "Conversations",
     ordinaryRoute: "/meri",
+    navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
     publicContract:
       "conversation-application/0.1.0 + conversation-history/1.0.0",
@@ -41,6 +44,7 @@ export const meriCapabilityTable = {
   files: {
     label: "Document files",
     ordinaryRoute: "/meri/files",
+    navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_DOCUMENT_WORKFLOW_ENABLED",
     publicContract: "document-application/0.1.0",
     sourcePin: contractSource,
@@ -51,6 +55,7 @@ export const meriCapabilityTable = {
   actions: {
     label: "Recommendation actions",
     ordinaryRoute: "/meri/actions",
+    navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_ACTION_WORKFLOW_ENABLED",
     publicContract: "action-application/0.1.0",
     sourcePin: contractSource,
@@ -61,6 +66,7 @@ export const meriCapabilityTable = {
   taskUpdates: {
     label: "Task updates",
     ordinaryRoute: "/meri/task-updates",
+    navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_TASK_COMMAND_WORKFLOW_ENABLED",
     publicContract: "task-command-application/0.1.0",
     sourcePin: "cc43d0004be59f315658207405ff1aea126adad5",
@@ -92,6 +98,7 @@ export const meriCapabilityTable = {
   preferences: {
     label: "Personal Meri preferences",
     ordinaryRoute: "/settings/preferences",
+    navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_USER_PREFERENCES_ENABLED",
     publicContract: "user-preferences-application/0.1.0",
     sourcePin: "9fe0b0857f0284cf460effab34b17fda21c5621d",
@@ -151,6 +158,8 @@ export type MeriCapabilityId = keyof typeof meriCapabilityTable;
 export type MeriCapabilityState = Readonly<{
   status: "on" | "off" | "unavailable";
   reason: string;
+  /** Page access is presentation only, never permission to call a service. */
+  navigation: "on" | "off";
 }>;
 export type MeriCapabilities = Readonly<
   Record<MeriCapabilityId, MeriCapabilityState>
@@ -165,7 +174,7 @@ export function resolveMeriCapabilities(
     Object.fromEntries(
       Object.entries(meriCapabilityTable).map(([id, definition]) => {
         const key = id as MeriCapabilityId;
-        const state: MeriCapabilityState =
+        const operation: Omit<MeriCapabilityState, "navigation"> =
           "unavailableReason" in definition
             ? { status: "unavailable", reason: definition.unavailableReason }
             : served[key] === true
@@ -180,6 +189,15 @@ export function resolveMeriCapabilities(
                     held[key] ??
                     "Not enabled or not configured for this workspace.",
                 };
+        const state: MeriCapabilityState = {
+          ...operation,
+          navigation:
+            definition.ordinaryRoute !== null &&
+            (operation.status === "on" ||
+              "navigationWhenUnconfigured" in definition)
+              ? "on"
+              : "off",
+        };
         return [key, Object.freeze(state)];
       }),
     ) as Record<MeriCapabilityId, MeriCapabilityState>,
@@ -188,12 +206,12 @@ export function resolveMeriCapabilities(
 
 export const heldMeriCapabilities = resolveMeriCapabilities({});
 
-/** An implemented but held route is not advertised as a working destination. */
+/** Existing destinations may explain connection holds without activating operations. */
 export function meriCapabilityHref(
   id: MeriCapabilityId,
   state: MeriCapabilities,
 ) {
-  return state[id].status === "on"
+  return state[id].navigation === "on"
     ? (meriCapabilityTable[id].ordinaryRoute ?? undefined)
     : undefined;
 }

@@ -55,7 +55,7 @@ it("inventory distinguishes implemented ordinary routes from missing workspace c
   expect(Object.isFrozen(state.conversations)).toBe(true);
 });
 
-it("all 256 deployment flag combinations advertise only their complete serving prerequisites", () => {
+it("all 256 flag combinations preserve operation prerequisites and existing navigation", () => {
   const ids = Object.keys(capabilityFlags) as (keyof typeof capabilityFlags)[];
   for (let bits = 0; bits < 256; bits++) {
     const flags = ids.map((_, index) => (bits & (1 << index)) !== 0);
@@ -81,7 +81,14 @@ it("all 256 deployment flag combinations advertise only their complete serving p
         expected[index] ? "on" : "off",
       );
       expect(Boolean(meriCapabilityHref(id, state)), `${bits}:${id} link`).toBe(
-        expected[index],
+        expected[index] ||
+          [
+            "conversations",
+            "files",
+            "actions",
+            "taskUpdates",
+            "preferences",
+          ].includes(id),
       );
     });
   }
@@ -155,7 +162,9 @@ it("preview holds are deployment reasons even when the public source and ordinar
     expect(state[id].reason, id).toContain(
       "held in the current preview deployment",
     );
-    expect(meriCapabilityHref(id, state), id).toBeUndefined();
+    expect(Boolean(meriCapabilityHref(id, state)), id).toBe(
+      ["files", "actions", "taskUpdates", "preferences"].includes(id),
+    );
   }
   for (const changes of [
     { CAPIRO_PREVIEW_READ_ONLY: "TRUE" },
@@ -184,9 +193,9 @@ function CapabilityProbe() {
   );
 }
 
-it("the client context is held without a server value and reflects an explicit synthetic profile", () => {
+it("the client context keeps operations held without hiding existing connection destinations", () => {
   expect(renderToStaticMarkup(createElement(CapabilityProbe))).toBe(
-    "<output>off:held</output>",
+    "<output>off:/meri/files</output>",
   );
   const children = createElement(CapabilityProbe);
   expect(
@@ -210,7 +219,7 @@ it("the client context is held without a server value and reflects an explicit s
         children,
       ),
     ),
-  ).toBe("<output>off:held</output>");
+  ).toBe("<output>off:/meri/files</output>");
 });
 
 it("unavailable copy preserves source reception and does not claim personal preferences are unstored", () => {
