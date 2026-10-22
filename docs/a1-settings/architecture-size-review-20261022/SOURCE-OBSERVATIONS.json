@@ -1,0 +1,73 @@
+[
+  {
+    "file": "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+    "symbol": "ReconciliationQueue",
+    "classification": "inherited-base-defect-source-only",
+    "baseCommit": "24316f913e6082cf33fb0049c1187dc64097975f",
+    "headCommit": "08101169fa086a20a0d269fc6970c7bc11b71304",
+    "claim": "Cancelling or closing the manual correction dialog leaves notes state populated; a later Keep/Accept row action includes those cancelled notes because decide() adds notes for every decision.",
+    "currentCallsites": [
+      {
+        "line": 41,
+        "source": "const [notes, setNotes] = useState(\"\");"
+      },
+      {
+        "line": 55,
+        "source": "...(notes ? { notes } : {}),"
+      },
+      {
+        "line": 151,
+        "source": "onClick={() => void decide(row, \"keep_current\")}"
+      },
+      {
+        "line": 159,
+        "source": "onClick={() => void decide(row, \"accept_conflicting\")}"
+      },
+      {
+        "line": 225,
+        "source": "onClose={() => setManual(undefined)}"
+      },
+      {
+        "line": 231,
+        "source": "onClick={() => setManual(undefined)}"
+      }
+    ],
+    "baseCallsites": [
+      {
+        "line": 39,
+        "source": "const [notes, setNotes] = useState(\"\");"
+      },
+      {
+        "line": 52,
+        "source": "...(notes ? { notes } : {}),"
+      },
+      {
+        "line": 145,
+        "source": "onClick={() => void decide(row, \"keep_current\")}"
+      },
+      {
+        "line": 153,
+        "source": "onClick={() => void decide(row, \"accept_conflicting\")}"
+      },
+      {
+        "line": 212,
+        "source": "onClose={() => setManual(undefined)}"
+      },
+      {
+        "line": 218,
+        "source": "onClick={() => setManual(undefined)}"
+      }
+    ],
+    "scenario": [
+      "Open Manual for row A.",
+      "Enter notes; cancel or close the dialog without submitting.",
+      "Choose Keep or Accept for row B.",
+      "The request body includes the retained row A notes."
+    ],
+    "sourceEvidence": "Both base and current decide bodies condition manualValue on manual_value but include notes whenever nonempty. Both close paths only setManual(undefined). A1 changes add fencing/signals/notices/disabled controls without altering this dataflow.",
+    "impact": "Incorrect reviewer notes may be attributed to another reconciliation decision. No cross-tenant or backend authorization claim is made.",
+    "suggestedCharacterization": "Exercise Cancel and close separately, then Keep/Accept on another row and assert no cancelled notes. Also assert successful Manual submission retains its exact value and own notes.",
+    "limits": "Source inference only; no test/browser/service run and no code changes. Cohesion retention is separate from behavioral acceptance. Hold for coordinating owner disposition; A2 remains held.",
+    "sourceHead": "367f9298a3c75f4a20e30ed1a52aa678b5c03da3"
+  }
+]
