@@ -76,7 +76,12 @@ function ArtifactEditor({
     if (
       !allowed ||
       !rows ||
-      (change.id && (!selected || selected.restricted)) ||
+      (change.id &&
+        (!selected ||
+          selected.restricted ||
+          selected.capabilities?.[
+            change.action === "save" ? "edit" : change.action
+          ] === false)) ||
       (change.action === "share" &&
         (!meeting.client ||
           selected?.status !== "approved" ||
@@ -117,11 +122,17 @@ function ArtifactEditor({
   const editingCurrent =
     current &&
     (!editing?.id ||
-      rows.some((item) => item.id === editing.id && !item.restricted));
+      rows.some(
+        (item) =>
+          item.id === editing.id &&
+          !item.restricted &&
+          item.capabilities?.edit !== false,
+      ));
   const sharingCurrent = rows?.some(
     (item) =>
       item.id === sharing &&
       !item.restricted &&
+      item.capabilities?.share !== false &&
       !item.confidential &&
       item.status === "approved",
   );
@@ -224,7 +235,11 @@ function ArtifactEditor({
                     const selected = readableRows()?.find(
                       (row) => row.id === item.id && !row.restricted,
                     );
-                    if (!blocked && selected)
+                    if (
+                      !blocked &&
+                      selected &&
+                      selected.capabilities?.edit !== false
+                    )
                       setEditing({
                         id: selected.id,
                         body: selected.body ?? "",
@@ -262,6 +277,7 @@ function ArtifactEditor({
                             (row) =>
                               row.id === item.id &&
                               !row.restricted &&
+                              row.capabilities?.share !== false &&
                               !row.confidential &&
                               row.status === "approved",
                           )

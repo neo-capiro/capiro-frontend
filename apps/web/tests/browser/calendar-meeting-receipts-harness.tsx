@@ -15,6 +15,7 @@ const meeting: Meeting = {
   location: "Old location",
   startsAt: "2026-10-10T14:00:00Z",
   endsAt: "2026-10-10T15:00:00Z",
+  updatedAt: "2026-10-10T13:00:00Z",
   status: "scheduled",
   joinLink: null,
   visibility: "private",
@@ -27,6 +28,8 @@ const meeting: Meeting = {
 function Harness() {
   const [open, setOpen] = useState(true);
   const mode = new URLSearchParams(location.search).get("mode");
+  const readClientId =
+    mode === "clear" || mode === "create" ? undefined : "client-one";
   const currentMeeting =
     mode === "create"
       ? undefined
@@ -35,7 +38,7 @@ function Harness() {
         : meeting;
   // This receipt-only harness starts from an already confirmed meeting read.
   useQuery({
-    queryKey: ["meeting", meeting.id],
+    queryKey: ["meeting", meeting.id, readClientId ?? null],
     queryFn: skipToken,
     initialData: currentMeeting,
     enabled: false,
@@ -46,9 +49,7 @@ function Harness() {
       <MeetingForm
         open={open}
         onOpenChange={setOpen}
-        clientId={
-          mode === "clear" || mode === "create" ? undefined : "client-one"
-        }
+        clientId={readClientId}
         zone="UTC"
         meeting={currentMeeting}
       />

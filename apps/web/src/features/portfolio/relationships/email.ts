@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
@@ -123,13 +123,35 @@ export function useSendMail(clientId: string, entity: string) {
   const cache = useQueryClient();
   const authority = useMailAuthority(clientId);
   const identity = useIdentity();
-  const key = mailAttemptKey(
-    identity.data?.tenant?.id ?? "",
-    identity.data?.user.id ?? "",
-    clientId,
-    entity,
+  const key = useMemo(
+    () =>
+      mailAttemptKey(
+        identity.data?.tenant?.id ?? "",
+        identity.data?.user.id ?? "",
+        clientId,
+        entity,
+      ),
+    [identity.data?.tenant?.id, identity.data?.user.id, clientId, entity],
   );
+  const lifetime = useRef({ active: false, sequence: 0 });
+  const [acceptedRecovery, setAcceptedRecovery] = useState<{
+    key: typeof key;
+    token: string;
+  } | null>(null);
+  useEffect(() => {
+    const current = { active: true, sequence: 0 };
+    lifetime.current = current;
+    return () => {
+      current.active = false;
+    };
+  }, [key]);
   const attempt = useMailAttempt(key);
+  if (
+    acceptedRecovery &&
+    (acceptedRecovery.key !== key ||
+      (attempt && attempt.token !== acceptedRecovery.token))
+  )
+    setAcceptedRecovery(null);
   const [recoveryError, setRecoveryError] = useState<MailSendError | null>(
     null,
   );
@@ -160,8 +182,12 @@ export function useSendMail(clientId: string, entity: string) {
   useEffect(() => {
     const row = recovery.data;
     if (!attempt || !row) return;
+    const current = lifetime.current;
+    const sequence = current.sequence;
     void recoverMailAttempt(cache, key, row).then((terminal) => {
+      if (!current.active || current.sequence !== sequence) return;
       if (terminal === "failed") {
+        setAcceptedRecovery(null);
         setRecoveryError(
           new MailSendError(
             "The original send was rejected without delivery. Review the email before sending again.",
@@ -170,6 +196,8 @@ export function useSendMail(clientId: string, entity: string) {
         );
       }
       if (terminal === "accepted") {
+        setRecoveryError(null);
+        setAcceptedRecovery({ key, token: row.requestKey });
         void cache.invalidateQueries({ queryKey: ["contact-mail"] });
         void cache.invalidateQueries({ queryKey: ["mail-thread"] });
       }
@@ -178,6 +206,8 @@ export function useSendMail(clientId: string, entity: string) {
   const mutation = useMutation({
     retry: false,
     mutationFn: async (body: SendInput) => {
+      lifetime.current.sequence += 1;
+      setAcceptedRecovery(null);
       setRecoveryError(null);
       if (body.clientId !== clientId)
         throw new MailSendError("This email belongs to another client.", false);
@@ -201,9 +231,17 @@ export function useSendMail(clientId: string, entity: string) {
       ]);
     },
   });
+  const recovered = acceptedRecovery?.key === key && !attempt;
   return {
     ...mutation,
-    isPending: mutation.isPending || attempt?.status === "pending",
-    error: attempt?.error ?? recoveryError ?? mutation.error,
+    isSuccess: recovered || mutation.isSuccess,
+    isIdle: !recovered && mutation.isIdle,
+    isError: !recovered && mutation.isError,
+    status: recovered ? ("success" as const) : mutation.status,
+    isPending:
+      !recovered && (mutation.isPending || attempt?.status === "pending"),
+    error: recovered
+      ? null
+      : (attempt?.error ?? recoveryError ?? mutation.error),
   };
 }
