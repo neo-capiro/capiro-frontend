@@ -113,12 +113,15 @@ test("mixed-client discovery checks every owner before rendering any result", as
   const f = await setupConversation(page);
   await installHistory(page, {
     conversations: [
-      conversation,
       {
         ...conversation,
         conversationId: "30000000-0000-4000-8000-000000000099",
         owner: { ...conversation.owner, actorId: "synthetic-foreign-actor" },
         scopes: [{ ...conversation.scopes[0]!, resourceId: secondClientId }],
+      },
+      {
+        ...conversation,
+        owner: { ...conversation.owner, actorId: "synthetic-foreign-actor" },
       },
     ],
   });

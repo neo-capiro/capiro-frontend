@@ -28,6 +28,15 @@ Reference: [01.05 search and command palette](https://www.figma.com/design/IXJzJ
 
 ## Allocations and gates
 
-Parent approved exact exceptions: `apps/web/src/shared/shell/ConversationRecents.tsx`, `Sidebar.tsx`, `MeriMobileNavigation.tsx`; new `apps/web/src/app/meri/conversations/page.tsx`; `packages/ui/package.json` adding only `./command`. Mobile navigation currently receives the destination through the existing capability table and needs no direct edit.
+Parent approved exact exceptions: `apps/web/src/shared/shell/ConversationRecents.tsx`, `Sidebar.tsx`, `MeriMobileNavigation.tsx`; new `apps/web/src/app/meri/conversations/page.tsx`; `packages/ui/package.json` adding only `./command`; `scripts/architecture/dependencies.mjs` adding only its existing primitive public-export entry; `apps/web/test/browser/main.tsx` adding only the synthetic list route. Mobile navigation currently receives the destination through the existing capability table and needs no direct edit.
 
 Local source/unit/type/browser and mutation evidence will be recorded before review. Docker Linux, PostgreSQL 16, AWS/CodeBuild, native service, provider and live acceptance are Fable-run and NOT RUN. Acceptance remains STOPPED 2/6. No merges, deployment, database operations, provider effects or live chats occurred.
+
+## Local checkpoint before host restart, 22 October 2026
+
+- Web typecheck passed before the final presentation/test-only changes; final recheck pending.
+- Focused unit checks: 73 tests in 10 files passed, including discovery gating, selector, recents, capabilities, history proxy, conversation host, first-chat bootstrap and immutable intent.
+- Synthetic browser checks: all 6 new discovery scenarios and 7 existing native-history scenarios passed (13 total). Covers loaded-page filtering/pagination, keyboard selection and reload, 401/403/503 denial without cached/empty substitution, mixed-client wrong-owner rejection, client switching without session creation, transcript and request recovery.
+- Architecture: zero errors after the exact public primitive allowlist entry. Scoped ESLint previously had zero errors; final warnings cleanup recheck pending.
+- Desktop and 390px phone screenshots inspected. Follow-up presentation fix reuses the shared Meri outline button class and moves the input focus outline to its wrapper. Long IDs wrap within the phone view.
+- Still pending before review/push: targeted mutation checks; explicit list-route delayed-identity response and unsent draft round-trip coverage; final source/type/lint/package checks; staged diff audit; complete evidence record and draft PR. No mutation or source process should run during the host restart.

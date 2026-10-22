@@ -56,6 +56,9 @@
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
+.command input:focus-visible {
+  outline: none;
+}
 .list {
   max-height: 420px;
   overflow-y: auto;

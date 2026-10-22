@@ -17,6 +17,7 @@ import {
   conversationLabel,
 } from "../../../shared/meri-conversations/conversation-navigation";
 import styles from "./conversations.module.css";
+import ui from "../ui/meri-ui.module.css";
 
 /** A cmdk view over verified loaded pages; it does not claim server-side history search. */
 export function ConversationList({
@@ -64,6 +65,7 @@ export function ConversationList({
         <Button
           type="button"
           variant="outline"
+          className={ui.outline}
           disabled={query.isFetching}
           onClick={() => void query.refetch()}
         >
@@ -73,6 +75,7 @@ export function ConversationList({
           <Button
             type="button"
             variant="outline"
+            className={ui.outline}
             disabled={query.isFetching}
             onClick={() => void query.fetchNextPage()}
           >
@@ -132,6 +135,8 @@ function LoadedConversations({
                 )
               }
             >
+              {/* This exact 18px Figma SVG needs no raster optimization. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/design/m2-conversations/conversation.svg"
                 alt=""

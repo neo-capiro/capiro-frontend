@@ -24,7 +24,7 @@ const synthetic = vi.hoisted(() => ({
       status: "active",
     },
   },
-  list: vi.fn((_props: unknown) => "Admitted synthetic list"),
+  list: vi.fn<(props: unknown) => string>(() => "Admitted synthetic list"),
 }));
 vi.mock("../src/shared/portfolio/auth/identity", () => ({
   useIdentity: () => synthetic.identity,
