@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { OperationResponse } from "../../../shared/capiro/contracts";
 import type { mappingOperations } from "../../../shared/capiro/operations/settings-admin/mappings";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -20,7 +19,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import {
   basisLabel,
   mappingRelationships,
@@ -40,7 +40,9 @@ export function ContractorIdentity({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    "contractor-identity",
+  );
   const query = useCapiroQuery("settings.mappings.contractorCandidates", {
     params: { clientId },
   });
@@ -50,13 +52,13 @@ export function ContractorIdentity({
   );
   const [rollUp, setRollUp] = useState<"yes" | "no" | "">("");
   const [reason, setReason] = useState("");
-  const action = useSettingsAction();
   const reload = () => {
     query.reload();
     refresh();
   };
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       side="right"
       onClose={onClose}
@@ -77,13 +79,17 @@ export function ContractorIdentity({
               ]}
             />
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() =>
                 void action.run(
-                  () =>
-                    api.request("settings.mappings.resolveClient", {
-                      params: { clientId },
-                    }),
+                  (signal) =>
+                    api.request(
+                      "settings.mappings.resolveClient",
+                      {
+                        params: { clientId },
+                      },
+                      { signal },
+                    ),
                   "Client candidate search completed.",
                   reload,
                 )
@@ -123,6 +129,7 @@ export function ContractorIdentity({
                   label: "Actions",
                   render: (row) => (
                     <SettingsButton
+                      disabled={locked}
                       small
                       onClick={() => {
                         setCandidate(row);
@@ -141,6 +148,11 @@ export function ContractorIdentity({
           </>
         )}
       </StatusPanel>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Identity action failed" error>
           {action.error}
@@ -148,6 +160,7 @@ export function ContractorIdentity({
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={!!candidate}
         onClose={() => setCandidate(undefined)}
         title={candidate?.contractorName ?? "Contractor candidate"}
@@ -155,18 +168,19 @@ export function ContractorIdentity({
         footer={
           <>
             <SettingsButton
+              disabled={locked}
               onClick={() => setCandidate(undefined)}
-              disabled={action.busy}
+              disabled={locked}
             >
               Cancel
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (candidate)
                   void action.run(
-                    () =>
+                    (signal) =>
                       api.request(
                         "settings.mappings.rejectContractorCandidate",
                         {
@@ -178,6 +192,7 @@ export function ContractorIdentity({
                             ...(reason ? { reason } : {}),
                           },
                         },
+                        { signal },
                       ),
                     "Contractor candidate was rejected.",
                     () => {
@@ -191,32 +206,40 @@ export function ContractorIdentity({
             </SettingsButton>
             <SettingsButton
               primary
-              disabled={action.busy || !relationship || !rollUp}
+              disabled={locked || !relationship || !rollUp}
               onClick={() => {
                 if (candidate)
                   void action.run(
-                    () =>
+                    (signal) =>
                       candidate.mapping
-                        ? api.request("settings.mappings.confirmIndividual", {
-                            params: { mappingId: candidate.mapping.id },
-                            body: {
-                              confirmed: true,
-                              relationshipType:
-                                relationship as MappingRelationship,
-                              rollUpAwards: rollUp === "yes",
+                        ? api.request(
+                            "settings.mappings.confirmIndividual",
+                            {
+                              params: { mappingId: candidate.mapping.id },
+                              body: {
+                                confirmed: true,
+                                relationshipType:
+                                  relationship as MappingRelationship,
+                                rollUpAwards: rollUp === "yes",
+                              },
                             },
-                          })
-                        : api.request("settings.mappings.manual", {
-                            params: { clientId },
-                            body: {
-                              source: "contracting",
-                              externalId: candidate.contractorId,
-                              externalName: candidate.contractorName,
-                              relationshipType:
-                                relationship as MappingRelationship,
-                              rollUpAwards: rollUp === "yes",
+                            { signal },
+                          )
+                        : api.request(
+                            "settings.mappings.manual",
+                            {
+                              params: { clientId },
+                              body: {
+                                source: "contracting",
+                                externalId: candidate.contractorId,
+                                externalName: candidate.contractorName,
+                                relationshipType:
+                                  relationship as MappingRelationship,
+                                rollUpAwards: rollUp === "yes",
+                              },
                             },
-                          }),
+                            { signal },
+                          ),
                     (result) =>
                       result.confirmed
                         ? "Contractor identity was confirmed."
@@ -273,6 +296,7 @@ export function ContractorIdentity({
         </SettingsCard>
         <SettingField label="Relationship to client">
           <select
+            disabled={locked}
             className={styles.input}
             value={relationship}
             onChange={(event) =>
@@ -289,6 +313,7 @@ export function ContractorIdentity({
         </SettingField>
         <SettingField label="Roll up federal awards into this client?">
           <select
+            disabled={locked}
             className={styles.input}
             value={rollUp}
             onChange={(event) => setRollUp(event.target.value as typeof rollUp)}
@@ -300,11 +325,17 @@ export function ContractorIdentity({
         </SettingField>
         <SettingField label="Rejection reason (optional)">
           <TextArea
+            disabled={locked}
             maxLength={1000}
             value={reason}
             onChange={(event) => setReason(event.target.value)}
           />
         </SettingField>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Contractor review failed" error>
             {action.error}

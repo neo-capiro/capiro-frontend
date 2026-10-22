@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { OperationResponse } from "../../../shared/capiro/contracts";
 import type { analystOperations } from "../../../shared/capiro/operations/settings-admin/analyst";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -14,7 +13,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { QueuePagination } from "./QueuePagination";
 
 type Audit = OperationResponse<
@@ -153,7 +153,8 @@ export function AnalystAuditLog() {
 }
 
 export function QuarantineQueue() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("analyst-quarantine");
   const [type, setType] = useState<"program_element" | "acquisition_personnel">(
     "program_element",
   );
@@ -170,7 +171,6 @@ export function QuarantineQueue() {
       limit: 25,
     },
   });
-  const action = useSettingsAction();
   return (
     <div className={styles.stack} data-design-target="411:78602">
       <SettingsCard title="Quarantine">
@@ -184,6 +184,7 @@ export function QuarantineQueue() {
         >
           <SettingField label="Type">
             <select
+              disabled={locked}
               className={styles.input}
               value={type}
               onChange={(event) => {
@@ -199,13 +200,14 @@ export function QuarantineQueue() {
           </SettingField>
           <SettingField label="Source">
             <TextInput
+              disabled={locked}
               maxLength={200}
               placeholder="Filter by source…"
               value={source}
               onChange={(event) => setSource(event.target.value)}
             />
           </SettingField>
-          <SettingsButton primary type="submit">
+          <SettingsButton disabled={locked} primary type="submit">
             Apply filter
           </SettingsButton>
         </form>
@@ -234,7 +236,11 @@ export function QuarantineQueue() {
                 key: "raw",
                 label: "Raw record",
                 render: (row) => (
-                  <SettingsButton small onClick={() => setDetail(row)}>
+                  <SettingsButton
+                    disabled={locked}
+                    small
+                    onClick={() => setDetail(row)}
+                  >
                     View
                   </SettingsButton>
                 ),
@@ -246,13 +252,14 @@ export function QuarantineQueue() {
                   <div className={styles.row}>
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
-                          () =>
+                          (signal) =>
                             api.request(
                               "settings.analyst.quarantine.reprocess",
                               { params: { type, id: row.id } },
+                              { signal },
                             ),
                           (result) =>
                             result.accepted
@@ -267,7 +274,7 @@ export function QuarantineQueue() {
                     <SettingsButton
                       danger
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => {
                         setDiscard(row);
                         action.clear();
@@ -290,6 +297,11 @@ export function QuarantineQueue() {
           )}
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Quarantine action failed" error>
           {action.error}
@@ -297,6 +309,7 @@ export function QuarantineQueue() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={!!detail}
         onClose={() => setDetail(undefined)}
         title="Raw record"
@@ -309,6 +322,7 @@ export function QuarantineQueue() {
         </pre>
       </SettingsDialog>
       <SettingsDialog
+        busy={action.busy}
         open={!!discard}
         onClose={() => setDiscard(undefined)}
         title="Discard quarantined record?"
@@ -316,21 +330,26 @@ export function QuarantineQueue() {
         footer={
           <>
             <SettingsButton
+              disabled={locked}
               onClick={() => setDiscard(undefined)}
-              disabled={action.busy}
+              disabled={locked}
             >
               Cancel
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (discard)
                   void action.run(
-                    () =>
-                      api.request("settings.analyst.quarantine.discard", {
-                        params: { type, id: discard.id },
-                      }),
+                    (signal) =>
+                      api.request(
+                        "settings.analyst.quarantine.discard",
+                        {
+                          params: { type, id: discard.id },
+                        },
+                        { signal },
+                      ),
                     "The quarantined record was discarded.",
                     () => {
                       setDiscard(undefined);
@@ -347,6 +366,11 @@ export function QuarantineQueue() {
         <p>
           {discard?.source} · {discard?.reason}
         </p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Discard failed" error>
             {action.error}

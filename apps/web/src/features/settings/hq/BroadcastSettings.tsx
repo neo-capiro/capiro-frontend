@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   Badge,
@@ -19,11 +18,13 @@ import {
   SettingsTabs,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { BroadcastDetail } from "./BroadcastDetail";
 
 export function BroadcastSettings() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("hq-broadcasts");
   const tenants = useCapiroQuery("settings.hq.tenants.list", {});
   const [tenantId, setTenantId] = useState("");
   const [title, setTitle] = useState("");
@@ -42,7 +43,6 @@ export function BroadcastSettings() {
     { query: { tenantId } },
     { enabled: !!tenantId },
   );
-  const action = useSettingsAction();
   const tenant = tenants.data?.find((item) => item.id === tenantId);
   const activeMembers = (members.data ?? []).filter(
     (member) => member.status === "active",
@@ -72,6 +72,7 @@ export function BroadcastSettings() {
           onRetry={tenants.reload}
         >
           <select
+            disabled={locked}
             className={styles.input}
             aria-label="Broadcast tenant"
             value={tenantId}
@@ -104,6 +105,7 @@ export function BroadcastSettings() {
             >
               <SettingField label="Title *">
                 <TextInput
+                  disabled={locked}
                   required
                   maxLength={200}
                   value={title}
@@ -113,6 +115,7 @@ export function BroadcastSettings() {
               </SettingField>
               <SettingField label={`Message * · ${body.length} / 5000`}>
                 <TextArea
+                  disabled={locked}
                   required
                   maxLength={5000}
                   value={body}
@@ -124,7 +127,9 @@ export function BroadcastSettings() {
               <SettingsTabs
                 label="Broadcast recipients"
                 value={audience}
-                onChange={setAudience}
+                onChange={(value) => {
+                  if (!locked) setAudience(value);
+                }}
                 items={[
                   {
                     id: "all_users",
@@ -142,6 +147,7 @@ export function BroadcastSettings() {
                   activeMembers.map((member) => (
                     <label key={member.userId} className={styles.check}>
                       <input
+                        disabled={locked}
                         type="checkbox"
                         checked={userIds.includes(member.userId)}
                         onChange={(event) =>
@@ -172,7 +178,7 @@ export function BroadcastSettings() {
                   primary
                   type="submit"
                   disabled={
-                    action.busy || !count || members.loading || !!members.error
+                    locked || !count || members.loading || !!members.error
                   }
                 >
                   Send broadcast
@@ -183,7 +189,11 @@ export function BroadcastSettings() {
           <SettingsCard
             title="Sent broadcasts"
             action={
-              <SettingsButton small onClick={broadcasts.reload}>
+              <SettingsButton
+                disabled={locked}
+                small
+                onClick={broadcasts.reload}
+              >
                 Refresh
               </SettingsButton>
             }
@@ -248,7 +258,11 @@ export function BroadcastSettings() {
                     key: "view",
                     label: "Actions",
                     render: (row) => (
-                      <SettingsButton small onClick={() => setSelected(row.id)}>
+                      <SettingsButton
+                        disabled={locked}
+                        small
+                        onClick={() => setSelected(row.id)}
+                      >
                         View
                       </SettingsButton>
                     ),
@@ -259,6 +273,11 @@ export function BroadcastSettings() {
           </SettingsCard>
         </div>
       )}
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Broadcast action failed" error>
           {action.error}
@@ -266,33 +285,35 @@ export function BroadcastSettings() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={confirm}
         onClose={() => setConfirm(false)}
         title={`Send to ${count} users of ${tenant?.name ?? "this tenant"}?`}
         description="This message will appear at their next sign-in and remain until each person acknowledges it."
         footer={
           <>
-            <SettingsButton
-              disabled={action.busy}
-              onClick={() => setConfirm(false)}
-            >
+            <SettingsButton disabled={locked} onClick={() => setConfirm(false)}>
               Cancel
             </SettingsButton>
             <SettingsButton
               primary
-              disabled={action.busy || !count}
+              disabled={locked || !count}
               onClick={() =>
                 void action.run(
-                  () =>
-                    api.request("settings.hq.broadcasts.send", {
-                      body: {
-                        tenantId,
-                        title,
-                        body,
-                        audience: audience as "all_users" | "selected_users",
-                        ...(audience === "selected_users" ? { userIds } : {}),
+                  (signal) =>
+                    api.request(
+                      "settings.hq.broadcasts.send",
+                      {
+                        body: {
+                          tenantId,
+                          title,
+                          body,
+                          audience: audience as "all_users" | "selected_users",
+                          ...(audience === "selected_users" ? { userIds } : {}),
+                        },
                       },
-                    }),
+                      { signal },
+                    ),
                   "Broadcast was sent.",
                   () => {
                     setConfirm(false);
@@ -311,6 +332,11 @@ export function BroadcastSettings() {
       >
         <h3>{title}</h3>
         <p style={{ whiteSpace: "pre-wrap" }}>{body}</p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Broadcast could not be sent" error>
             {action.error}

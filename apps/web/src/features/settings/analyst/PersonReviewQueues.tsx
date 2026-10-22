@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { OperationResponse } from "../../../shared/capiro/contracts";
 import type { analystOperations } from "../../../shared/capiro/operations/settings-admin/analyst";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -20,7 +19,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { QueuePagination } from "./QueuePagination";
 
 type MergeItem = OperationResponse<
@@ -35,12 +35,12 @@ const decisions = [
 ] as const;
 
 export function PersonCandidateQueue() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("analyst-people");
   const [page, setPage] = useState(1);
   const query = useCapiroQuery("settings.analyst.personCandidates.list", {
     query: { status: "candidate", page, limit: 25 },
   });
-  const action = useSettingsAction();
   return (
     <div className={styles.stack} data-design-target="411:78250">
       <SettingsCard
@@ -97,16 +97,17 @@ export function PersonCandidateQueue() {
                     <SettingsButton
                       primary
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
-                          () =>
+                          (signal) =>
                             api.request(
                               "settings.analyst.personCandidates.decide",
                               {
                                 params: { id: row.id },
                                 body: { decision: "confirm" },
                               },
+                              { signal },
                             ),
                           (result) =>
                             result.linked
@@ -121,16 +122,17 @@ export function PersonCandidateQueue() {
                     <SettingsButton
                       danger
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
-                          () =>
+                          (signal) =>
                             api.request(
                               "settings.analyst.personCandidates.decide",
                               {
                                 params: { id: row.id },
                                 body: { decision: "reject" },
                               },
+                              { signal },
                             ),
                           "Personnel candidate was rejected.",
                           query.reload,
@@ -154,6 +156,11 @@ export function PersonCandidateQueue() {
           )}
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Personnel review failed" error>
           {action.error}
@@ -202,7 +209,8 @@ function PersonRecord({ person, title }: { person: Person; title: string }) {
 }
 
 export function PersonnelMergeQueue() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("analyst-people");
   const [page, setPage] = useState(1);
   const query = useCapiroQuery("settings.analyst.personnelMerge.list", {
     query: { status: "open", page, limit: 10 },
@@ -212,13 +220,12 @@ export function PersonnelMergeQueue() {
     decision: (typeof decisions)[number][0];
   }>();
   const [notes, setNotes] = useState("");
-  const action = useSettingsAction();
   return (
     <div className={styles.stack} data-design-target="411:76239">
       <SettingsCard
         title="Personnel Merge Queue"
         action={
-          <SettingsButton small onClick={query.reload}>
+          <SettingsButton disabled={locked} small onClick={query.reload}>
             Refresh
           </SettingsButton>
         }
@@ -256,7 +263,7 @@ export function PersonnelMergeQueue() {
                       key={decision}
                       primary={decision === "merge"}
                       danger={decision.startsWith("reject")}
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => {
                         setReview({ item, decision });
                         setNotes("");
@@ -282,6 +289,11 @@ export function PersonnelMergeQueue() {
           )}
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Personnel merge review failed" error>
           {action.error}
@@ -289,6 +301,7 @@ export function PersonnelMergeQueue() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={!!review}
         onClose={() => setReview(undefined)}
         title={`${decisions.find(([id]) => id === review?.decision)?.[1] ?? "Review"} personnel records?`}
@@ -296,25 +309,30 @@ export function PersonnelMergeQueue() {
         footer={
           <>
             <SettingsButton
+              disabled={locked}
               onClick={() => setReview(undefined)}
-              disabled={action.busy}
+              disabled={locked}
             >
               Cancel
             </SettingsButton>
             <SettingsButton
               primary
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (review)
                   void action.run(
-                    () =>
-                      api.request("settings.analyst.personnelMerge.decide", {
-                        params: { id: review.item.id },
-                        body: {
-                          decision: review.decision,
-                          ...(notes ? { notes } : {}),
+                    (signal) =>
+                      api.request(
+                        "settings.analyst.personnelMerge.decide",
+                        {
+                          params: { id: review.item.id },
+                          body: {
+                            decision: review.decision,
+                            ...(notes ? { notes } : {}),
+                          },
                         },
-                      }),
+                        { signal },
+                      ),
                     "Personnel review decision was recorded.",
                     () => {
                       setReview(undefined);
@@ -334,11 +352,17 @@ export function PersonnelMergeQueue() {
         </p>
         <SettingField label="Notes (optional)">
           <TextArea
+            disabled={locked}
             maxLength={10000}
             value={notes}
             onChange={(event) => setNotes(event.target.value)}
           />
         </SettingField>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Review could not be saved" error>
             {action.error}

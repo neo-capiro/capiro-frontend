@@ -1,10 +1,10 @@
 "use client";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { DataTable, StatusPanel } from "../../../shared/module-ui";
 import { SettingsButton, SettingsDialog, SettingsNotice } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 
 export function BroadcastDetail({
   id,
@@ -15,13 +15,15 @@ export function BroadcastDetail({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    "hq-broadcast-detail",
+  );
   const query = useCapiroQuery("settings.hq.broadcasts.detail", {
     params: { id },
   });
-  const action = useSettingsAction();
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       onClose={onClose}
       title={query.data?.title ?? "Broadcast detail"}
@@ -29,13 +31,17 @@ export function BroadcastDetail({
         <>
           {query.data && !query.data.archivedAt && (
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() =>
                 void action.run(
-                  () =>
-                    api.request("settings.hq.broadcasts.archive", {
-                      params: { id },
-                    }),
+                  (signal) =>
+                    api.request(
+                      "settings.hq.broadcasts.archive",
+                      {
+                        params: { id },
+                      },
+                      { signal },
+                    ),
                   "Broadcast was archived.",
                   () => {
                     query.reload();
@@ -47,7 +53,9 @@ export function BroadcastDetail({
               Archive
             </SettingsButton>
           )}
-          <SettingsButton onClick={onClose}>Close</SettingsButton>
+          <SettingsButton disabled={locked} onClick={onClose}>
+            Close
+          </SettingsButton>
         </>
       }
     >
@@ -101,6 +109,11 @@ export function BroadcastDetail({
           </>
         )}
       </StatusPanel>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Archive failed" error>
           {action.error}

@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { maskedCredentialSchema } from "../../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -20,7 +19,8 @@ import {
   SettingsTabs,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 
 const money = (value: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
@@ -137,7 +137,9 @@ function TenantKeyDrawer({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    `hq-keys:${tenant.id}`,
+  );
   const credentials = useCapiroQuery("settings.hq.ai.credentials", {
     params: { tenantId: tenant.id },
   });
@@ -149,7 +151,6 @@ function TenantKeyDrawer({
   const [key, setKey] = useState("");
   const [model, setModel] = useState("");
   const [remove, setRemove] = useState<Credential>();
-  const action = useSettingsAction();
   const reload = () => {
     credentials.reload();
     usage.reload();
@@ -157,6 +158,7 @@ function TenantKeyDrawer({
   };
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       side="right"
       onClose={() => {
@@ -186,7 +188,7 @@ function TenantKeyDrawer({
                 danger
                 small
                 disabled={
-                  action.busy ||
+                  locked ||
                   !["openai", "anthropic"].includes(credential.provider)
                 }
                 onClick={() => setRemove(credential)}
@@ -196,21 +198,25 @@ function TenantKeyDrawer({
               {credential.provider === "openai" && credential.updatedAt && (
                 <SettingsButton
                   small
-                  disabled={action.busy}
+                  disabled={locked}
                   onClick={() =>
                     void action.run(
-                      () =>
-                        api.request("settings.hq.ai.updateModel", {
-                          params: { tenantId: tenant.id },
-                          body: {
-                            provider: "openai",
-                            ...(credential.modelOverride === "gpt-6.1-sol"
-                              ? { restoreDefault: true }
-                              : { modelOverride: "gpt-6.1-sol" }),
-                            expectedModelOverride: credential.modelOverride,
-                            expectedUpdatedAt: credential.updatedAt!,
+                      (signal) =>
+                        api.request(
+                          "settings.hq.ai.updateModel",
+                          {
+                            params: { tenantId: tenant.id },
+                            body: {
+                              provider: "openai",
+                              ...(credential.modelOverride === "gpt-6.1-sol"
+                                ? { restoreDefault: true }
+                                : { modelOverride: "gpt-6.1-sol" }),
+                              expectedModelOverride: credential.modelOverride,
+                              expectedUpdatedAt: credential.updatedAt!,
+                            },
                           },
-                        }),
+                          { signal },
+                        ),
                       "Provider model was updated.",
                       reload,
                     )
@@ -229,15 +235,19 @@ function TenantKeyDrawer({
           onSubmit={(event) => {
             event.preventDefault();
             void action.run(
-              () =>
-                api.request("settings.hq.ai.setCredential", {
-                  params: { tenantId: tenant.id },
-                  body: {
-                    provider,
-                    apiKey: key,
-                    ...(model ? { modelOverride: model } : {}),
+              (signal) =>
+                api.request(
+                  "settings.hq.ai.setCredential",
+                  {
+                    params: { tenantId: tenant.id },
+                    body: {
+                      provider,
+                      apiKey: key,
+                      ...(model ? { modelOverride: model } : {}),
+                    },
                   },
-                }),
+                  { signal },
+                ),
               "Provider key was validated and saved.",
               () => {
                 setKey("");
@@ -249,6 +259,7 @@ function TenantKeyDrawer({
           <div className={`${styles.grid} ${styles.two}`}>
             <SettingField label="Provider">
               <select
+                disabled={locked}
                 className={styles.input}
                 value={provider}
                 onChange={(event) =>
@@ -261,6 +272,7 @@ function TenantKeyDrawer({
             </SettingField>
             <SettingField label="API key">
               <TextInput
+                disabled={locked}
                 type="password"
                 autoComplete="off"
                 required
@@ -274,6 +286,7 @@ function TenantKeyDrawer({
           </div>
           <SettingField label="Model override">
             <TextInput
+              disabled={locked}
               maxLength={80}
               value={model}
               placeholder="Default model"
@@ -284,11 +297,16 @@ function TenantKeyDrawer({
             Leave blank to use the platform default for this provider.
           </p>
           <div>
-            <SettingsButton primary type="submit" disabled={action.busy}>
+            <SettingsButton primary type="submit" disabled={locked}>
               {action.busy ? "Validating…" : "Validate & save"}
             </SettingsButton>
           </div>
         </form>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Provider key action failed" error>
             {action.error}
@@ -353,28 +371,36 @@ function TenantKeyDrawer({
         )}
       </StatusPanel>
       <SettingsDialog
+        busy={action.busy}
         open={!!remove}
         onClose={() => setRemove(undefined)}
         title="Remove provider key?"
         description="Future generations will use the configured shared provider key."
         footer={
           <>
-            <SettingsButton onClick={() => setRemove(undefined)}>
+            <SettingsButton
+              disabled={locked}
+              onClick={() => setRemove(undefined)}
+            >
               Cancel
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (remove && ["openai", "anthropic"].includes(remove.provider))
                   void action.run(
-                    () =>
-                      api.request("settings.hq.ai.removeCredential", {
-                        params: {
-                          tenantId: tenant.id,
-                          provider: remove.provider as "openai" | "anthropic",
+                    (signal) =>
+                      api.request(
+                        "settings.hq.ai.removeCredential",
+                        {
+                          params: {
+                            tenantId: tenant.id,
+                            provider: remove.provider as "openai" | "anthropic",
+                          },
                         },
-                      }),
+                        { signal },
+                      ),
                     "Provider key was removed.",
                     () => {
                       setRemove(undefined);
@@ -391,6 +417,11 @@ function TenantKeyDrawer({
         <p>
           {remove?.provider} · •••• {remove?.last4}
         </p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Key removal failed" error>
             {action.error}

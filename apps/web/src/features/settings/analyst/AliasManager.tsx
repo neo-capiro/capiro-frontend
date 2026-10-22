@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import {
   aliasType,
   type aliasSchema,
@@ -22,14 +21,16 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { MergePrograms, type MergeOption } from "./MergePrograms";
 
 type Alias = z.infer<typeof aliasSchema>;
 type AliasType = z.infer<typeof aliasType>;
 
 export function AliasManager() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("analyst-alias");
   const [search, setSearch] = useState("");
   const [q, setQ] = useState("");
   const programs = useCapiroQuery("settings.analyst.programs.search", {
@@ -45,7 +46,6 @@ export function AliasManager() {
   const [editor, setEditor] = useState<{ alias?: Alias }>();
   const [remove, setRemove] = useState<Alias>();
   const [merge, setMerge] = useState<MergeOption[]>();
-  const action = useSettingsAction();
   const reload = () => {
     aliases.reload();
     duplicates.reload();
@@ -62,14 +62,18 @@ export function AliasManager() {
           }}
         >
           <TextInput
+            disabled={locked}
             className={styles.search}
             value={search}
             aria-label="Search programs"
             placeholder="Search programs by name or alias…"
             onChange={(event) => setSearch(event.target.value)}
           />
-          <SettingsButton type="submit">Search</SettingsButton>
+          <SettingsButton disabled={locked} type="submit">
+            Search
+          </SettingsButton>
           <select
+            disabled={locked}
             className={styles.input}
             aria-label="Selected program"
             value={programId}
@@ -133,12 +137,18 @@ export function AliasManager() {
                 render: (row) => (
                   <div className={styles.row}>
                     <SettingsButton
+                      disabled={locked}
                       small
                       onClick={() => setEditor({ alias: row })}
                     >
                       Edit
                     </SettingsButton>
-                    <SettingsButton danger small onClick={() => setRemove(row)}>
+                    <SettingsButton
+                      disabled={locked}
+                      danger
+                      small
+                      onClick={() => setRemove(row)}
+                    >
                       Delete
                     </SettingsButton>
                   </div>
@@ -185,6 +195,11 @@ export function AliasManager() {
           )}
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Alias action failed" error>
           {action.error}
@@ -200,27 +215,33 @@ export function AliasManager() {
         />
       )}
       <SettingsDialog
+        busy={action.busy}
         open={!!remove}
         onClose={() => setRemove(undefined)}
         title="Delete alias?"
         footer={
           <>
             <SettingsButton
+              disabled={locked}
               onClick={() => setRemove(undefined)}
-              disabled={action.busy}
+              disabled={locked}
             >
               Cancel
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (remove)
                   void action.run(
-                    () =>
-                      api.request("settings.analyst.aliases.delete", {
-                        params: { id: remove.id },
-                      }),
+                    (signal) =>
+                      api.request(
+                        "settings.analyst.aliases.delete",
+                        {
+                          params: { id: remove.id },
+                        },
+                        { signal },
+                      ),
                     "Alias was deleted.",
                     () => {
                       setRemove(undefined);
@@ -235,6 +256,11 @@ export function AliasManager() {
         }
       >
         <p>{remove?.alias}</p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Alias deletion failed" error>
             {action.error}
@@ -263,7 +289,8 @@ function AliasEditor({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("analyst-alias");
   const [alias, setAlias] = useState(initial?.alias ?? "");
   const [type, setType] = useState<AliasType>(
     aliasType.safeParse(initial?.aliasType).success
@@ -271,22 +298,22 @@ function AliasEditor({
       : "canonical",
   );
   const [source, setSource] = useState(initial?.source ?? "");
-  const action = useSettingsAction();
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       onClose={onClose}
       title={initial ? "Edit alias" : "Add alias"}
       footer={
         <>
-          <SettingsButton disabled={action.busy} onClick={onClose}>
+          <SettingsButton disabled={locked} onClick={onClose}>
             Cancel
           </SettingsButton>
           <SettingsButton
             primary
             type="submit"
             form="program-alias-editor"
-            disabled={action.busy}
+            disabled={locked}
           >
             Save alias
           </SettingsButton>
@@ -299,20 +326,28 @@ function AliasEditor({
         onSubmit={(event) => {
           event.preventDefault();
           void action.run(
-            () =>
+            (signal) =>
               initial
-                ? api.request("settings.analyst.aliases.update", {
-                    params: { id: initial.id },
-                    body: { alias, aliasType: type },
-                  })
-                : api.request("settings.analyst.aliases.add", {
-                    params: { programId },
-                    body: {
-                      alias,
-                      aliasType: type,
-                      ...(source ? { source } : {}),
+                ? api.request(
+                    "settings.analyst.aliases.update",
+                    {
+                      params: { id: initial.id },
+                      body: { alias, aliasType: type },
                     },
-                  }),
+                    { signal },
+                  )
+                : api.request(
+                    "settings.analyst.aliases.add",
+                    {
+                      params: { programId },
+                      body: {
+                        alias,
+                        aliasType: type,
+                        ...(source ? { source } : {}),
+                      },
+                    },
+                    { signal },
+                  ),
             "Alias was saved.",
             () => {
               refresh();
@@ -323,6 +358,7 @@ function AliasEditor({
       >
         <SettingField label="Alias">
           <TextInput
+            disabled={locked}
             required
             maxLength={1000}
             value={alias}
@@ -331,6 +367,7 @@ function AliasEditor({
         </SettingField>
         <SettingField label="Type">
           <select
+            disabled={locked}
             className={styles.input}
             value={type}
             onChange={(event) => setType(event.target.value as AliasType)}
@@ -350,6 +387,11 @@ function AliasEditor({
             onChange={(event) => setSource(event.target.value)}
           />
         </SettingField>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Alias could not be saved" error>
             {action.error}

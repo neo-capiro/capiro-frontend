@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { DataTable, StatusPanel, TextInput } from "../../../shared/module-ui";
 import {
@@ -10,7 +9,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 
 export function CreateTenant({
   open,
@@ -21,7 +21,8 @@ export function CreateTenant({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("hq-tenant-dialogs");
   const [form, setForm] = useState({
     slug: "",
     name: "",
@@ -29,22 +30,22 @@ export function CreateTenant({
     adminFirstName: "",
     adminLastName: "",
   });
-  const action = useSettingsAction();
   return (
     <SettingsDialog
+      busy={action.busy}
       open={open}
       onClose={onClose}
       title="Create tenant + invite admin"
       footer={
         <>
-          <SettingsButton onClick={onClose} disabled={action.busy}>
+          <SettingsButton onClick={onClose} disabled={locked}>
             Cancel
           </SettingsButton>
           <SettingsButton
             primary
             form="create-capiro-tenant"
             type="submit"
-            disabled={action.busy}
+            disabled={locked}
           >
             Create + send invite
           </SettingsButton>
@@ -58,14 +59,18 @@ export function CreateTenant({
           event.preventDefault();
           const { adminFirstName, adminLastName, ...required } = form;
           void action.run(
-            () =>
-              api.request("settings.hq.tenants.create", {
-                body: {
-                  ...required,
-                  ...(adminFirstName ? { adminFirstName } : {}),
-                  ...(adminLastName ? { adminLastName } : {}),
+            (signal) =>
+              api.request(
+                "settings.hq.tenants.create",
+                {
+                  body: {
+                    ...required,
+                    ...(adminFirstName ? { adminFirstName } : {}),
+                    ...(adminLastName ? { adminLastName } : {}),
+                  },
                 },
-              }),
+                { signal },
+              ),
             "Tenant was created and invitation was sent.",
             () => {
               refresh();
@@ -92,6 +97,7 @@ export function CreateTenant({
         ).map(([key, label]) => (
           <SettingField key={key} label={label}>
             <TextInput
+              disabled={locked}
               value={form[key]}
               required={["slug", "name", "adminEmail"].includes(key)}
               type={key === "adminEmail" ? "email" : "text"}
@@ -110,6 +116,11 @@ export function CreateTenant({
         <p className={styles.description}>
           An onboarding invitation email is sent to this address.
         </p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Tenant could not be created" error>
             {action.error}
@@ -127,13 +138,15 @@ export function TenantDetails({
   tenantId: string;
   onClose: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    `hq-tenant-details:${tenantId}`,
+  );
   const query = useCapiroQuery("settings.hq.tenants.detail", {
     params: { tenantId },
   });
-  const action = useSettingsAction();
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       onClose={onClose}
       title={query.data?.name ?? "Tenant details"}
@@ -165,14 +178,18 @@ export function TenantDetails({
                 row.status === "invited" && (
                   <SettingsButton
                     small
-                    disabled={action.busy}
+                    disabled={locked}
                     onClick={() =>
                       void action.run(
-                        () =>
-                          api.request("settings.hq.tenants.resendInvitation", {
-                            params: { tenantId },
-                            body: { email: row.user.email },
-                          }),
+                        (signal) =>
+                          api.request(
+                            "settings.hq.tenants.resendInvitation",
+                            {
+                              params: { tenantId },
+                              body: { email: row.user.email },
+                            },
+                            { signal },
+                          ),
                         "Admin invitation was resent.",
                       )
                     }
@@ -182,6 +199,11 @@ export function TenantDetails({
                 ),
             },
           ]}
+        />
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
         />
         {action.error && (
           <SettingsNotice title="Invitation action failed" error>

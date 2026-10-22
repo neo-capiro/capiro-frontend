@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { tenantListSchema } from "../../../shared/capiro/operations/settings-admin/schemas";
 import type { CapiroMe } from "../../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -21,13 +20,15 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { CreateTenant, TenantDetails } from "./TenantDialogs";
 
 type Tenant = z.infer<typeof tenantListSchema>;
 
 export function TenantSettings({ identity }: { identity: CapiroMe }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("hq-tenants");
   const query = useCapiroQuery("settings.hq.tenants.list", {});
   const [create, setCreate] = useState(false);
   const [selected, setSelected] = useState<Tenant>();
@@ -35,7 +36,6 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
     "detail",
   );
   const [confirmation, setConfirmation] = useState("");
-  const action = useSettingsAction();
   const choose = (tenant: Tenant, next: typeof mode) => {
     setSelected(tenant);
     setMode(next);
@@ -47,7 +47,11 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
       <SettingsCard
         title="Tenants"
         action={
-          <SettingsButton primary onClick={() => setCreate(true)}>
+          <SettingsButton
+            disabled={locked}
+            primary
+            onClick={() => setCreate(true)}
+          >
             + Create tenant
           </SettingsButton>
         }
@@ -105,6 +109,7 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
                 render: (row) => (
                   <div className={styles.row}>
                     <SettingsButton
+                      disabled={locked}
                       small
                       onClick={() => choose(row, "impersonate")}
                     >
@@ -125,6 +130,11 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
           />
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Tenant action failed" error>
           {action.error}
@@ -137,6 +147,7 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
         refresh={query.reload}
       />
       <SettingsDialog
+        busy={action.busy}
         open={!!selected && mode === "delete"}
         onClose={() => setSelected(undefined)}
         title="Permanently delete tenant"
@@ -144,7 +155,7 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
         footer={
           <>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => setSelected(undefined)}
             >
               Cancel
@@ -152,17 +163,21 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
             <SettingsButton
               danger
               disabled={
-                action.busy ||
+                locked ||
                 confirmation !== "DELETE" ||
                 selected?.id === identity.tenant.id
               }
               onClick={() => {
                 if (selected && confirmation === "DELETE")
                   void action.run(
-                    () =>
-                      api.request("settings.hq.tenants.delete", {
-                        params: { tenantId: selected.id },
-                      }),
+                    (signal) =>
+                      api.request(
+                        "settings.hq.tenants.delete",
+                        {
+                          params: { tenantId: selected.id },
+                        },
+                        { signal },
+                      ),
                     "Tenant was deleted.",
                     () => {
                       setSelected(undefined);
@@ -182,11 +197,17 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
         </p>
         <SettingField label="Type DELETE to confirm">
           <TextInput
+            disabled={locked}
             autoComplete="off"
             value={confirmation}
             onChange={(event) => setConfirmation(event.target.value)}
           />
         </SettingField>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Deletion failed" error>
             {action.error}
@@ -194,16 +215,20 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
         )}
       </SettingsDialog>
       <SettingsDialog
+        busy={action.busy}
         open={!!selected && mode === "impersonate"}
         onClose={() => setSelected(undefined)}
         title={`Impersonate ${selected?.slug ?? "tenant"}`}
         description="The reason is recorded in the audit log alongside your user ID."
         footer={
           <>
-            <SettingsButton onClick={() => setSelected(undefined)}>
+            <SettingsButton
+              disabled={locked}
+              onClick={() => setSelected(undefined)}
+            >
               Cancel
             </SettingsButton>
-            <SettingsButton primary disabled>
+            <SettingsButton disabled={locked} primary disabled>
               Start impersonation
             </SettingsButton>
           </>
@@ -211,6 +236,7 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
       >
         <SettingField label="Reason">
           <TextArea
+            disabled={locked}
             placeholder="Investigating ticket #1234, invitation flow"
             minLength={10}
             maxLength={500}

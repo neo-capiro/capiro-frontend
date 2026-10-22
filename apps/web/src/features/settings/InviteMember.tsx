@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import { TextInput } from "../../shared/module-ui";
 import {
   SettingField,
@@ -9,7 +8,8 @@ import {
   SettingsNotice,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 export function InviteMember({
   open,
@@ -20,16 +20,17 @@ export function InviteMember({
   onClose: () => void;
   onDone: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("team-invite");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState<"standard_user" | "user_admin">(
     "standard_user",
   );
-  const action = useSettingsAction();
   return (
     <SettingsDialog
+      busy={action.busy}
       open={open}
       onClose={() => {
         if (!action.busy) onClose();
@@ -38,14 +39,14 @@ export function InviteMember({
       description="Invite someone to join your workspace."
       footer={
         <>
-          <SettingsButton disabled={action.busy} onClick={onClose}>
+          <SettingsButton disabled={locked} onClick={onClose}>
             Cancel
           </SettingsButton>
           <SettingsButton
             form="invite-team-member"
             primary
             type="submit"
-            disabled={action.busy}
+            disabled={locked}
           >
             {action.busy ? "Sending…" : "Send invitation"}
           </SettingsButton>
@@ -58,15 +59,19 @@ export function InviteMember({
         onSubmit={(event) => {
           event.preventDefault();
           void action.run(
-            () =>
-              api.request("settings.team.invite", {
-                body: {
-                  email,
-                  role,
-                  ...(firstName ? { firstName } : {}),
-                  ...(lastName ? { lastName } : {}),
+            (signal) =>
+              api.request(
+                "settings.team.invite",
+                {
+                  body: {
+                    email,
+                    role,
+                    ...(firstName ? { firstName } : {}),
+                    ...(lastName ? { lastName } : {}),
+                  },
                 },
-              }),
+                { signal },
+              ),
             "Invitation was sent.",
             () => {
               onDone();
@@ -81,7 +86,7 @@ export function InviteMember({
         <div className={`${styles.grid} ${styles.two}`}>
           <SettingField label="First name">
             <TextInput
-              disabled={action.busy}
+              disabled={locked}
               value={firstName}
               maxLength={100}
               onChange={(event) => setFirstName(event.target.value)}
@@ -89,7 +94,7 @@ export function InviteMember({
           </SettingField>
           <SettingField label="Last name">
             <TextInput
-              disabled={action.busy}
+              disabled={locked}
               value={lastName}
               maxLength={100}
               onChange={(event) => setLastName(event.target.value)}
@@ -100,7 +105,7 @@ export function InviteMember({
           <TextInput
             type="email"
             required
-            disabled={action.busy}
+            disabled={locked}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -108,7 +113,7 @@ export function InviteMember({
         <SettingField label="Role">
           <select
             className={styles.input}
-            disabled={action.busy}
+            disabled={locked}
             value={role}
             onChange={(event) => setRole(event.target.value as typeof role)}
           >
@@ -116,6 +121,11 @@ export function InviteMember({
             <option value="user_admin">User admin</option>
           </select>
         </SettingField>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Invitation could not be sent" error>
             {action.error}

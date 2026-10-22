@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { StatusPanel, TextInput } from "../../../shared/module-ui";
 import {
@@ -11,7 +10,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import {
   mappingRelationships,
   mappingSources,
@@ -30,7 +30,8 @@ export function AttachFederalRecord({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("mapping-attach");
   const clients = useCapiroQuery("clients.list", {});
   const [clientId, setClientId] = useState(initialClientId);
   const [source, setSource] = useState<SearchableMappingSource>("lda");
@@ -41,23 +42,23 @@ export function AttachFederalRecord({
     "",
   );
   const [rollUp, setRollUp] = useState<"yes" | "no" | "">("");
-  const action = useSettingsAction();
   const award = requiresAwardDecision(source);
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       onClose={onClose}
       title="Attach a federal record"
       description="Select the client, source and external record. This is an explicit identity decision."
       footer={
         <>
-          <SettingsButton onClick={onClose} disabled={action.busy}>
+          <SettingsButton onClick={onClose} disabled={locked}>
             Cancel
           </SettingsButton>
           <SettingsButton
             primary
             disabled={
-              action.busy ||
+              locked ||
               !selected ||
               !clientId ||
               (award && (!relationship || !rollUp))
@@ -65,22 +66,26 @@ export function AttachFederalRecord({
             onClick={() => {
               if (selected)
                 void action.run(
-                  () =>
-                    api.request("settings.mappings.manual", {
-                      params: { clientId },
-                      body: {
-                        source,
-                        externalId: selected.id,
-                        externalName: selected.name,
-                        ...(award
-                          ? {
-                              relationshipType:
-                                relationship as MappingRelationship,
-                              rollUpAwards: rollUp === "yes",
-                            }
-                          : {}),
+                  (signal) =>
+                    api.request(
+                      "settings.mappings.manual",
+                      {
+                        params: { clientId },
+                        body: {
+                          source,
+                          externalId: selected.id,
+                          externalName: selected.name,
+                          ...(award
+                            ? {
+                                relationshipType:
+                                  relationship as MappingRelationship,
+                                rollUpAwards: rollUp === "yes",
+                              }
+                            : {}),
+                        },
                       },
-                    }),
+                      { signal },
+                    ),
                   "Federal record was attached.",
                   () => {
                     refresh();
@@ -101,6 +106,7 @@ export function AttachFederalRecord({
       >
         <SettingField label="Client">
           <select
+            disabled={locked}
             className={styles.input}
             value={clientId}
             onChange={(event) => {
@@ -119,6 +125,7 @@ export function AttachFederalRecord({
       </StatusPanel>
       <SettingField label="Source">
         <select
+          disabled={locked}
           className={styles.input}
           value={source}
           onChange={(event) => {
@@ -148,6 +155,7 @@ export function AttachFederalRecord({
         <div className={styles.grow}>
           <SettingField label="Search by name or supported identifier">
             <TextInput
+              disabled={locked}
               maxLength={1000}
               required
               value={search}
@@ -155,7 +163,9 @@ export function AttachFederalRecord({
             />
           </SettingField>
         </div>
-        <SettingsButton type="submit">Search</SettingsButton>
+        <SettingsButton disabled={locked} type="submit">
+          Search
+        </SettingsButton>
       </form>
       <SourceSearch source={source} q={q} choose={setSelected} />
       {selected && (
@@ -167,6 +177,7 @@ export function AttachFederalRecord({
         <>
           <SettingField label="Relationship to client">
             <select
+              disabled={locked}
               className={styles.input}
               value={relationship}
               onChange={(event) =>
@@ -183,6 +194,7 @@ export function AttachFederalRecord({
           </SettingField>
           <SettingField label="Roll up federal awards into this client?">
             <select
+              disabled={locked}
               className={styles.input}
               value={rollUp}
               onChange={(event) =>
@@ -196,6 +208,11 @@ export function AttachFederalRecord({
           </SettingField>
         </>
       )}
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Federal record could not be attached" error>
           {action.error}

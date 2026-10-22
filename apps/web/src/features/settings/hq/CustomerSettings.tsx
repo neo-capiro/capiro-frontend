@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { customerSchema } from "../../../shared/capiro/operations/settings-admin/schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { Badge, DataTable, StatusPanel } from "../../../shared/module-ui";
@@ -13,7 +12,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 
 const money = (value: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
@@ -22,11 +22,11 @@ const money = (value: number) =>
 type Customer = z.infer<typeof customerSchema>;
 
 export function CustomerSettings() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("hq-customers");
   const query = useCapiroQuery("settings.hq.customers.list", {});
   const [status, setStatus] = useState("all");
   const [selected, setSelected] = useState<Customer>();
-  const action = useSettingsAction();
   const customers = query.data ?? [];
   const rows = customers.filter(
     (customer) => status === "all" || customer.status === status,
@@ -76,6 +76,7 @@ export function CustomerSettings() {
           title="Customers"
           action={
             <select
+              disabled={locked}
               className={styles.input}
               aria-label="Customer billing status"
               value={status}
@@ -146,7 +147,7 @@ export function CustomerSettings() {
                 render: (row) => (
                   <SettingsButton
                     small
-                    disabled={action.busy}
+                    disabled={locked}
                     onClick={() => {
                       setSelected(row);
                       action.clear();
@@ -160,6 +161,11 @@ export function CustomerSettings() {
           />
         </SettingsCard>
       </StatusPanel>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Customer action failed" error>
           {action.error}
@@ -167,6 +173,7 @@ export function CustomerSettings() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={!!selected}
         onClose={() => setSelected(undefined)}
         title={
@@ -178,22 +185,26 @@ export function CustomerSettings() {
         footer={
           <>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => setSelected(undefined)}
             >
               Cancel
             </SettingsButton>
             <SettingsButton
               primary
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (selected)
                   void action.run(
-                    () =>
-                      api.request("settings.hq.customers.comp", {
-                        params: { tenantId: selected.tenantId },
-                        body: { comped: selected.status !== "comped" },
-                      }),
+                    (signal) =>
+                      api.request(
+                        "settings.hq.customers.comp",
+                        {
+                          params: { tenantId: selected.tenantId },
+                          body: { comped: selected.status !== "comped" },
+                        },
+                        { signal },
+                      ),
                     "Customer billing status was updated.",
                     () => {
                       setSelected(undefined);
@@ -210,6 +221,11 @@ export function CustomerSettings() {
         <p>
           {selected?.name} · {selected?.slug}
         </p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Billing status change failed" error>
             {action.error}
