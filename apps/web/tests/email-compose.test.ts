@@ -10,10 +10,16 @@ import {
   attachmentRefusal,
 } from "../src/features/portfolio/relationships/email/attachments";
 import {
-  sendReviewedMail,
+  sendReviewedMail as dispatchReviewedMail,
   type SendInput,
 } from "../src/features/portfolio/relationships/email/send";
 import { guardedMailApi } from "../src/features/portfolio/relationships/email/authority";
+const requestKey = "44444444-4444-4444-8444-444444444444";
+const sendReviewedMail = (
+  api: Parameters<typeof dispatchReviewedMail>[0],
+  input: Parameters<typeof dispatchReviewedMail>[1],
+  assert: Parameters<typeof dispatchReviewedMail>[2],
+) => dispatchReviewedMail(api, input, assert, requestKey);
 const clientId = "10000000-0000-4000-8000-000000000001";
 const id = "20000000-0000-4000-8000-000000000001";
 const other = "20000000-0000-4000-8000-000000000002";
@@ -146,7 +152,14 @@ describe("explicit send dispatch", () => {
         createApiClient(async (_url, options) => {
           if (options?.method !== "POST") return response([file]);
           active = false;
-          return response({ ok: true, threadId: other, messageId: id });
+          return response({
+            ok: true,
+            intentId: requestKey,
+            requestKey,
+            state: "accepted",
+            threadId: other,
+            messageId: id,
+          });
         }),
         input,
         () => {
@@ -170,7 +183,14 @@ describe("explicit send dispatch", () => {
         expect(JSON.parse(String(options.body)).to[0]).not.toHaveProperty(
           "personId",
         );
-        return response({ ok: true, threadId: other, messageId: id });
+        return response({
+          ok: true,
+          intentId: requestKey,
+          requestKey,
+          state: "accepted",
+          threadId: other,
+          messageId: id,
+        });
       }),
       input,
       () => {},
@@ -230,7 +250,7 @@ describe("explicit send dispatch", () => {
     ).rejects.toMatchObject({ uncertain: false });
     expect(posts).toBe(0);
   });
-  it.each([400, 404, 500, 502, 503])(
+  it.each([400, 401, 403, 404, 500, 502, 503])(
     "HTTP%i after POST remains uncertain with no retry",
     async (status) => {
       let posts = 0;
@@ -261,7 +281,7 @@ describe("explicit send dispatch", () => {
       ),
     ).rejects.toMatchObject({ uncertain: true });
   });
-  it("known forbidden response retains its reason as a safe error", async () => {
+  it("access revoked after provider acceptance keeps the send uncertain", async () => {
     await expect(
       sendReviewedMail(
         createApiClient(async (_url, options) =>
@@ -272,8 +292,34 @@ describe("explicit send dispatch", () => {
         input,
         () => {},
       ),
-    ).rejects.toMatchObject({ uncertain: false, message: "Mailbox forbidden" });
+    ).rejects.toMatchObject({ uncertain: true, message: "Mailbox forbidden" });
   });
+  it.each([requestKey, other])(
+    "only an exact typed durable rejection releases the send (%s)",
+    async (receiptKey) => {
+      await expect(
+        sendReviewedMail(
+          createApiClient(async (_url, options) =>
+            options?.method === "POST"
+              ? response(
+                  {
+                    message: "Provider refused",
+                    error: "MAIL_SEND_REJECTED",
+                    requestKey: receiptKey,
+                    intentId: id,
+                    state: "failed",
+                    retryable: false,
+                  },
+                  400,
+                )
+              : response([file]),
+          ),
+          input,
+          () => {},
+        ),
+      ).rejects.toMatchObject({ uncertain: receiptKey !== requestKey });
+    },
+  );
   it("upload wrapper refuses resumed dispatch after lifetime revocation", async () => {
     let active = true;
     let calls = 0;
