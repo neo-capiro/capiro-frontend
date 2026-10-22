@@ -41,6 +41,7 @@ export const workspaceDraftSchema = z.object({
   prospectId: z.uuid().nullable().optional(),
   docTitle: z.string(),
   client: z.string().nullable(),
+  clientId: z.uuid().nullable().optional(),
   product: z.string().nullable(),
   ownerId: z.string(),
   status: z.enum(["draft", "complete"]),
@@ -49,19 +50,13 @@ export const workspaceDraftSchema = z.object({
 export type StrategyDetail = z.infer<typeof strategyDetailSchema>;
 export type WorkspaceDraft = z.infer<typeof workspaceDraftSchema>;
 
-// Workspace currently persists the client's display name. Never guess a match
-// between same-name clients, or interpret a missing association as this client.
+// Client names are presentation only; held legacy rows never infer association.
 export function clientDrafts(
   drafts: WorkspaceDraft[],
   client: { id: string; name: string },
-  clients: { id: string; name: string }[],
+  _clients: { id: string; name: string }[],
 ) {
-  const matches = clients.filter((candidate) => candidate.name === client.name);
-  return matches.length === 1 && matches[0]?.id === client.id
-    ? drafts.filter(
-        (draft) => !draft.prospectId && draft.client === client.name,
-      )
-    : [];
+  return drafts.filter((draft) => !draft.prospectId && draft.clientId === client.id);
 }
 export function workProjection(strategies: StrategyDetail[], today: string) {
   const date = new Date(`${today}T00:00:00Z`);

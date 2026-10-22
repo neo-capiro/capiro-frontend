@@ -87,6 +87,7 @@ export const workspaceDraft = z.object({
   ownerId: z.string(),
   docTitle: z.string(),
   client: z.string().nullable(),
+  clientId: workspaceId.nullable().optional(),
   product: z.string().nullable(),
   industry: z.string().nullable(),
   status: z.enum(["draft", "complete"]),
@@ -94,6 +95,7 @@ export const workspaceDraft = z.object({
   createdAt: z.string(),
   documents: z.array(draftDocument),
   config: z.object({
+    clientId: workspaceId.nullable().optional(),
     sections: z.array(z.string()).optional(),
     sectionContent: z.record(z.string(), z.string()).optional(),
     tone: z.string().optional(),
@@ -127,6 +129,7 @@ export const workspaceDocumentOperations = {
             industry: z.string().max(200).optional(),
             product: z.string().max(200).optional(),
             client: z.string().max(200).optional(),
+            clientId: workspaceId.nullable().optional(),
             docTitle: z.string().min(1).max(500).optional(),
           })
           .strict(),

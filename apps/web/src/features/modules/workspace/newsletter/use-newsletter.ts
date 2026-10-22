@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type {
   NewsletterBody,
   WorkspaceDraftDocument,
@@ -23,7 +23,13 @@ export function useNewsletter({
   );
   const me = useCapiroQuery("me.read", {});
   const clients = useCapiroQuery("workspace.clients", {});
-  const [clientId, setClientId] = useState(initialClientId);
+  const [clientId, updateClientId] = useState(existing ? existing.clientId ?? "" : initialClientId);
+  const scopeGeneration = useRef(0);
+  useEffect(() => () => { scopeGeneration.current += 1; }, [existing?.id, initialClientId]);
+  function setClientId(next: string) {
+    if (next !== clientId) scopeGeneration.current += 1;
+    updateClientId(next);
+  }
   const [title, setTitle] = useState(
     existing?.docTitle ?? "Weekly policy newsletter",
   );
@@ -86,18 +92,28 @@ export function useNewsletter({
   async function save(exit = false) {
     if (saving.current) return;
     saving.current = true;
+    const scope = scopeGeneration.current;
+    const requireCurrentScope = () => {
+      if (scope !== scopeGeneration.current)
+        throw new Error("The client view changed. Reload before saving again.");
+    };
     setLocalError(undefined);
     try {
       let record = draft;
       const client = clients.data?.items.find((value) => value.id === clientId);
+      if (clientId && !client) throw new Error("The selected client is unavailable. Refresh before saving.");
+      if (record && (record.clientId ?? null) !== (clientId || null))
+        throw new Error("This saved newsletter belongs to a different client. Open it in its original client scope.");
       if (!record) {
         record = await create.run({
           body: {
             product: "Newsletter",
             client: client?.name,
+            clientId: client?.id ?? null,
             docTitle: title,
           },
         });
+        requireCurrentScope();
         setDraft(record);
       }
       const document =
@@ -113,18 +129,21 @@ export function useNewsletter({
           body: { blocks: newsletterDocumentBlocks(body), newsletter: body },
         },
       });
+      requireCurrentScope();
       await saveMetadata.run({
         params: { id: record.id },
         body: { docTitle: title },
       });
+      requireCurrentScope();
       await snapshot.run({
         params: { draftId: record.id },
         body: { label: "Newsletter revision" },
       });
+      requireCurrentScope();
       setSaved(true);
       if (exit) onClose();
     } catch (failure) {
-      setLocalError(
+      if (scope === scopeGeneration.current) setLocalError(
         failure instanceof Error
           ? failure
           : new Error("Newsletter save could not be completed."),

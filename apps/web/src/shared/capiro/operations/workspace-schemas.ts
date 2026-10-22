@@ -14,6 +14,7 @@ export const libraryDocument = z.object({
   name: z.string(),
   blueprint: z.string(),
   client: z.string().nullable(),
+  clientId: workspaceId.nullable().optional(),
   status: z.string(),
   updatedAt: z.string(),
   owner: z.object({ id: z.string(), name: z.string(), initials: z.string() }),
