@@ -85,8 +85,18 @@ test("synthetic: a mismatched selected-conversation session cannot dispatch hist
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=30000000-0000-4000-8000-000000000099`,
   );
+  // The initial account/client-loading notice shares this heading. Wait for
+  // the native refusal surface before asserting its exact request and no reads.
+  const refused = page.getByRole("status").filter({
+    has: page.getByText(
+      "The service could not verify this conversation. No sample transcript was substituted.",
+      { exact: true },
+    ),
+  });
   await expect(
-    page.getByRole("heading", { name: "Conversation connection unavailable" }),
+    refused.getByRole("heading", {
+      name: "Conversation connection unavailable",
+    }),
   ).toBeVisible();
   expect(fixture.hints).toEqual([
     { clientId, conversationId: "30000000-0000-4000-8000-000000000099" },

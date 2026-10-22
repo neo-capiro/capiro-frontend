@@ -73,11 +73,11 @@ function RecentLinks({
               onClick={onNavigate}
             >
               Conversation ·{" "}
-              {new Intl.DateTimeFormat("en", {
+              {new Date(conversation.createdAt).toLocaleString("en", {
                 dateStyle: "medium",
                 timeStyle: "short",
                 timeZone: "UTC",
-              }).format(new Date(conversation.createdAt))}{" "}
+              })}{" "}
               UTC
             </Link>
           ))}
