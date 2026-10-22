@@ -214,6 +214,7 @@ const control = process.env.WS03_WORKSPACE_CONTROL_URL;
 const joined = Boolean(service && control);
 type Manifest = {
   routes: Route[];
+  adjacentRoutes: Route[];
   ids: {
     documentId: string;
     draftId: string;
@@ -345,5 +346,158 @@ describe.skipIf(!joined)(
         expect(await response.json()).not.toEqual(unavailable);
       },
     );
+  },
+);
+
+// These cases extend the same gateway/fixture boundary to the three classified
+// WS-03 findings. Versions intentionally retain their existing 403 admission.
+const adjacentRoutes: Route[] = [
+  {
+    name: "documents list",
+    method: "GET",
+    path: `drafts/${draftId}/documents`,
+  },
+  {
+    name: "quality fix",
+    method: "POST",
+    path: `drafts/${draftId}/agent/quality/issues/missing-context/fix`,
+    body: { expectedRevision: 0, instruction: "Synthetic fix" },
+  },
+  { name: "version list", method: "GET", path: `drafts/${draftId}/versions` },
+  {
+    name: "version create",
+    method: "POST",
+    path: `drafts/${draftId}/versions`,
+    body: { label: "Synthetic revision" },
+  },
+  {
+    name: "version restore",
+    method: "POST",
+    path: `drafts/${draftId}/versions/00000000-0000-4000-8000-00000000000b/restore`,
+  },
+];
+it.each(adjacentRoutes)(
+  "generic $name preserves opaque upstream 404",
+  async (route) => {
+    const base = "https://workspace.synthetic.invalid/workspace-api";
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(
+        Response.json(
+          { message: "PRIVATE_DESCENDANT_CONTENT" },
+          { status: 404 },
+        ),
+      );
+    await assertOpaque(await generic(route, base, fetcher));
+    assertDispatch(fetcher, base, route);
+  },
+);
+const adjacentOwnerControls: Array<{ name: string; state: State }> = [
+  { name: "held owner", state: { held: true } },
+  { name: "prospect owner", state: { prospect: true } },
+];
+describe.skipIf(!joined)(
+  "classified WS-03 corrections through the actual gateway",
+  () => {
+    beforeAll(async () => {
+      loopback(service!);
+      manifest = (await fixture("manifest")) as Manifest;
+      expect(
+        manifest.adjacentRoutes
+          .map((route) => `${route.method.toUpperCase()} ${route.path}`)
+          .sort(),
+      ).toEqual(
+        adjacentRoutes.map((route) => `${route.method} ${route.path}`).sort(),
+      );
+    });
+    it.each(denied)(
+      "$name has no protected descendant payload/read/effect",
+      async ({ state }) => {
+        const authority = {
+          ...state,
+          ...(state.tenantId ? { tenantId: manifest.ids.foreignTenantId } : {}),
+        };
+        for (const route of manifest.adjacentRoutes) {
+          await fixture("reset", authority);
+          const fetcher = vi.fn<typeof fetch>(fetch);
+          const response = await generic(route, service!, fetcher);
+          const version = route.name.startsWith("version");
+          const status =
+            version && state.exists !== false && !state.tenantId ? 403 : 404;
+          expect(response.status, route.name).toBe(status);
+          if (status === 404) await assertOpaque(response);
+          else
+            expect(JSON.stringify(await response.json())).not.toContain(
+              "PRIVATE_DESCENDANT_CONTENT",
+            );
+          expect(response.headers.get("cache-control")).toBe("no-store");
+          assertDispatch(fetcher, service!, route);
+          await noDescendants();
+        }
+      },
+    );
+    it.each(["owner", "editor", "reviewer", "commenter", "viewer"])(
+      "preserves %s role predicates",
+      async (role) => {
+        for (const route of manifest.adjacentRoutes) {
+          await fixture("reset", { actorId: `user_${role}` });
+          const allowed =
+            route.policy === "read" || ["owner", "editor"].includes(role);
+          const response = await generic(route, service!, fetch);
+          expect(response.status, route.name).toBe(
+            allowed ? route.status : 403,
+          );
+          const payload: unknown = await response.json();
+          if (allowed) {
+            expect(payload).not.toEqual(unavailable);
+            const observed = (await fixture("observations")) as {
+              reads: string[];
+              effects: string[];
+            };
+            expect(
+              observed.reads.length + observed.effects.length,
+            ).toBeGreaterThan(0);
+          } else {
+            expect(JSON.stringify(payload)).not.toContain(
+              "PRIVATE_DESCENDANT_CONTENT",
+            );
+            await noDescendants();
+          }
+        }
+      },
+    );
+    it.each(adjacentOwnerControls)(
+      "preserves $name and the existing prospect transfer refusal",
+      async ({ state }) => {
+        for (const route of manifest.adjacentRoutes) {
+          await fixture("reset", state);
+          const refused = state.prospect && route.name === "quality fix";
+          const response = await generic(route, service!, fetch);
+          expect(response.status, route.name).toBe(
+            refused ? 403 : route.status,
+          );
+          if (refused) await noDescendants();
+        }
+      },
+    );
+    it("refuses forged draft IDs before protected reads or effects", async () => {
+      for (const route of manifest.adjacentRoutes) {
+        await fixture("reset", {});
+        await assertOpaque(
+          await generic(
+            {
+              ...route,
+              path: route.path.replace(
+                draftId,
+                "00000000-0000-4000-8000-000000000008",
+              ),
+            },
+            service!,
+            fetch,
+          ),
+        );
+        await noDescendants();
+      }
+    });
   },
 );
