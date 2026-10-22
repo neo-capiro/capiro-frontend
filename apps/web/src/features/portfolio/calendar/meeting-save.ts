@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { meetingSchema } from "./contracts";
+import { meetingSchema, type Meeting } from "./contracts";
 
 export const meetingInputSchema = z.object({
   subject: z.string(),
@@ -8,6 +8,7 @@ export const meetingInputSchema = z.object({
   startsAt: z.string(),
   endsAt: z.string(),
   clientId: z.string().nullable().optional(),
+  expectedRevision: z.string().datetime().optional(),
 });
 export type MeetingInput = z.infer<typeof meetingInputSchema>;
 
@@ -34,4 +35,12 @@ export function meetingSaveReceiptSchema(
         (row.client?.id ?? null) === input.clientId),
     "The saved meeting does not match the submitted meeting and client.",
   );
+}
+
+/** Preserve automatic/internal provenance unless the reviewed association changes. */
+export function meetingAssignmentFields(meeting: Meeting | undefined, target: string | null) {
+  if (!meeting) return target ? { clientId: target } : {};
+  if ((meeting.client?.id ?? null) === target) return {};
+  if (!meeting.updatedAt) throw new Error("Refresh the meeting before changing its client.");
+  return { clientId: target, expectedRevision: meeting.updatedAt };
 }

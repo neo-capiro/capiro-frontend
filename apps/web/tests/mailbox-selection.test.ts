@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { createApiClient } from "../src/shared/portfolio/api/http";
-import { sendReviewedMail } from "../src/features/portfolio/relationships/email/send";
+import { sendReviewedMail as dispatchReviewedMail } from "../src/features/portfolio/relationships/email/send";
 import { sendingMailboxesSchema } from "../src/features/portfolio/relationships/email/mailboxes";
+const requestKey = "44444444-4444-4444-8444-444444444444";
+const sendReviewedMail = (
+  api: Parameters<typeof dispatchReviewedMail>[0],
+  input: Parameters<typeof dispatchReviewedMail>[1],
+  assert: Parameters<typeof dispatchReviewedMail>[2],
+) => dispatchReviewedMail(api, input, assert, requestKey);
 const a = "10000000-0000-4000-8000-000000000001";
 const b = "10000000-0000-4000-8000-000000000002";
 const clientId = "20000000-0000-4000-8000-000000000001";
@@ -25,6 +31,9 @@ const input = {
 };
 const receipt = {
   ok: true,
+  intentId: requestKey,
+  requestKey,
+  state: "accepted",
   threadId,
   messageId: a,
   senderConnectionId: b,

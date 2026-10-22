@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { ApiError } from "../src/shared/portfolio/api/http";
 import {
@@ -16,6 +16,17 @@ import {
   settleContactCreate,
 } from "../src/features/portfolio/relationships/contact-create-attempt";
 
+beforeEach(() => {
+  const values = new Map<string, string>();
+  vi.stubGlobal("navigator", {
+    locks: { request: async (_key: string, run: () => unknown) => run() },
+  });
+  vi.stubGlobal("localStorage", {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => values.set(key, value),
+    removeItem: (key: string) => values.delete(key),
+  });
+});
 const caches: QueryClient[] = [];
 function scope() {
   const cache = new QueryClient();
@@ -42,57 +53,67 @@ const change = {
   },
 };
 
-describe("mail send scope survives presentation disposal", () => {
-  it("reserves synchronously and retains submitted input rather than later mutable draft", () => {
+describe("mail send scope survives presentation disposal", async () => {
+  it("reserves under the browser lock and retains submitted input rather than later mutable draft", async () => {
     const cache = scope();
     const key = mailAttemptKey("tenant", "actor", input.clientId, "person:one");
     const draft = structuredClone(input);
-    beginMailAttempt(cache, key, draft);
+    await beginMailAttempt(cache, key, draft);
     draft.subject = "Later draft";
     expect(cache.getQueryData(key)).toMatchObject({
       status: "pending",
       input: { subject: input.subject },
     });
-    expect(() => beginMailAttempt(cache, key, draft)).toThrow(/pending/);
+    await expect(beginMailAttempt(cache, key, draft)).rejects.toThrow(
+      /pending/,
+    );
   });
-  it("retains uncertainty through observer replacement and unrelated successful reads", () => {
+  it("retains uncertainty through observer replacement and unrelated successful reads", async () => {
     const cache = scope();
     const key = mailAttemptKey("tenant", "actor", input.clientId, "person:one");
-    const token = beginMailAttempt(cache, key, input);
-    settleMailAttempt(
+    const token = await beginMailAttempt(cache, key, input);
+    await settleMailAttempt(
       cache,
       key,
       token,
       new MailSendError("No delivery receipt", true),
     );
     cache.setQueryData(["contact-mail", input.clientId], []);
-    expect(() => beginMailAttempt(cache, [...key], input)).toThrow(/uncertain/);
+    await expect(beginMailAttempt(cache, [...key], input)).rejects.toThrow(
+      /uncertain/,
+    );
     expect(cache.getQueryData(key)).toMatchObject({ status: "unknown" });
   });
-  it("releases only verified success or definite rejection for another deliberate attempt", () => {
+  it("releases only verified success or definite rejection for another deliberate attempt", async () => {
     const cache = scope();
     const key = mailAttemptKey("tenant", "actor", input.clientId, "person:one");
-    let token = beginMailAttempt(cache, key, input);
-    settleMailAttempt(
+    let token = await beginMailAttempt(cache, key, input);
+    await settleMailAttempt(
       cache,
       key,
       token,
       new MailSendError("Preflight refused", false),
     );
     expect(cache.getQueryData(key)).toBeNull();
-    token = beginMailAttempt(cache, key, input);
-    settleMailAttempt(cache, key, token);
+    token = await beginMailAttempt(cache, key, input);
+    await settleMailAttempt(cache, key, token);
     expect(cache.getQueryData(key)).toBeNull();
   });
-  it("does not revive a cleared scope or settle a newer attempt", () => {
+  it("does not revive a cleared scope or settle a newer attempt", async () => {
     const cache = scope();
     const key = mailAttemptKey("tenant", "actor", input.clientId, "person:one");
-    const old = beginMailAttempt(cache, key, input);
+    const old = await beginMailAttempt(cache, key, input);
     cache.clear();
-    settleMailAttempt(cache, key, old, new MailSendError("Late", true));
+    await settleMailAttempt(cache, key, old, new MailSendError("Late", true));
     expect(cache.getQueryData(key)).toBeUndefined();
-    const current = beginMailAttempt(cache, key, input);
-    settleMailAttempt(cache, key, old);
+    await expect(beginMailAttempt(cache, key, input)).rejects.toThrow(
+      /uncertain/,
+    );
+    // Recover the original cache projection, then settle the known receipt.
+    cache.setQueryData(key, { token: old, status: "unknown" });
+    await settleMailAttempt(cache, key, old);
+    const current = await beginMailAttempt(cache, key, input);
+    await settleMailAttempt(cache, key, old);
     expect(cache.getQueryData(key)).toMatchObject({
       token: current,
       status: "pending",
@@ -105,20 +126,20 @@ describe("mail send scope survives presentation disposal", () => {
     ["tenant", "actor", input.clientId, "thread:two"],
   ])(
     "does not borrow another scope's attempt: %s/%s/%s/%s",
-    (tenant, actor, client, entity) => {
+    async (tenant, actor, client, entity) => {
       const cache = scope();
-      beginMailAttempt(
+      await beginMailAttempt(
         cache,
         mailAttemptKey("tenant", "actor", input.clientId, "person:one"),
         input,
       );
-      expect(() =>
+      await expect(
         beginMailAttempt(
           cache,
           mailAttemptKey(tenant, actor, client, entity),
           input,
         ),
-      ).not.toThrow();
+      ).resolves.toEqual(expect.any(String));
     },
   );
 });

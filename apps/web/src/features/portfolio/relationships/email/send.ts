@@ -37,6 +37,7 @@ export async function sendReviewedMail(
   api: ApiClient,
   input: SendInput,
   assert: () => void,
+  requestKey: string,
 ) {
   let body: SendInput;
   let sender: SendingMailbox | undefined;
@@ -69,7 +70,7 @@ export async function sendReviewedMail(
           .refine(
             (thread) =>
               thread.id === body.threadId &&
-              thread.clientId === body.clientId &&
+              (thread.clientId === body.clientId || thread.clientId === null) &&
               (!sender || thread.connectionId === sender.id),
           ),
       );
@@ -99,6 +100,9 @@ export async function sendReviewedMail(
       z
         .object({
           ok: z.literal(true),
+          intentId: z.uuid(),
+          requestKey: z.uuid(),
+          state: z.literal("accepted"),
           threadId: z.uuid(),
           messageId: z.uuid(),
           senderConnectionId: z.uuid().optional(),
@@ -109,6 +113,7 @@ export async function sendReviewedMail(
         })
         .refine(
           (receipt) =>
+            receipt.requestKey === requestKey &&
             (!body.threadId || receipt.threadId === body.threadId) &&
             (!sender ||
               (senderReceiptMatches(receipt, sender) &&
@@ -118,6 +123,7 @@ export async function sendReviewedMail(
         method: "POST",
         body: {
           ...body,
+          requestKey,
           to: body.to.map(({ email, name }) => ({ email, name })),
           cc: body.cc?.map(({ email, name }) => ({ email, name })),
           bcc: body.bcc?.map(({ email, name }) => ({ email, name })),
@@ -135,13 +141,22 @@ export async function sendReviewedMail(
     return receipt;
   } catch (error) {
     if (error instanceof MailSendError) throw error;
+    const rejection = z
+      .object({
+        error: z.literal("MAIL_SEND_REJECTED"),
+        requestKey: z.uuid(),
+        intentId: z.uuid(),
+        state: z.literal("failed"),
+        retryable: z.literal(false),
+      })
+      .safeParse(error instanceof ApiError ? error.details : undefined);
     throw new MailSendError(
       error instanceof Error
         ? error.message
         : "Email delivery could not be confirmed.",
-      // Reply persistence can return404 after the provider already sent. Only
-      // verified auth guard statuses establish a pre-provider refusal here.
-      !(error instanceof ApiError) || ![401, 403].includes(error.status),
+      // Access may be revoked after acceptance. HTTP status alone never proves
+      // non-delivery; only the exact intent's durable rejection can release it.
+      !rejection.success || rejection.data.requestKey !== requestKey,
     );
   }
 }

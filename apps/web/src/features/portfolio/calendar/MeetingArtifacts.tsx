@@ -76,7 +76,12 @@ function ArtifactEditor({
     if (
       !allowed ||
       !rows ||
-      (change.id && (!selected || selected.restricted)) ||
+      (change.id &&
+        (!selected ||
+          selected.restricted ||
+          selected.capabilities?.[
+            change.action === "save" ? "edit" : change.action
+          ] === false)) ||
       (change.action === "share" &&
         (!meeting.client ||
           selected?.status !== "approved" ||
@@ -117,11 +122,17 @@ function ArtifactEditor({
   const editingCurrent =
     current &&
     (!editing?.id ||
-      rows.some((item) => item.id === editing.id && !item.restricted));
+      rows.some(
+        (item) =>
+          item.id === editing.id &&
+          !item.restricted &&
+          item.capabilities?.edit !== false,
+      ));
   const sharingCurrent = rows?.some(
     (item) =>
       item.id === sharing &&
       !item.restricted &&
+      item.capabilities?.share !== false &&
       !item.confidential &&
       item.status === "approved",
   );
@@ -187,7 +198,7 @@ function ArtifactEditor({
             <small>
               {item.confidential
                 ? "Confidential"
-                : item.sharedAt === undefined
+                : item.sharingKnown === false || item.sharedAt === undefined
                   ? "Sharing status unavailable"
                   : item.sharedAt
                     ? "Shared with client team"
@@ -219,12 +230,16 @@ function ArtifactEditor({
                 )}
                 <button
                   className="button"
-                  disabled={blocked}
+                  disabled={blocked || item.capabilities?.edit === false}
                   onClick={() => {
                     const selected = readableRows()?.find(
                       (row) => row.id === item.id && !row.restricted,
                     );
-                    if (!blocked && selected)
+                    if (
+                      !blocked &&
+                      selected &&
+                      selected.capabilities?.edit !== false
+                    )
                       setEditing({
                         id: selected.id,
                         body: selected.body ?? "",
@@ -237,7 +252,7 @@ function ArtifactEditor({
                 {item.status !== "approved" && (
                   <button
                     className="button"
-                    disabled={blocked}
+                    disabled={blocked || item.capabilities?.approve === false}
                     onClick={() =>
                       changeArtifact({
                         action: "approve",
@@ -251,7 +266,7 @@ function ArtifactEditor({
                 {item.status === "approved" &&
                   meeting.client &&
                   !item.confidential &&
-                  !item.sharedAt && (
+                  !item.sharedAt && item.sharingKnown !== false && item.capabilities?.share !== false && (
                     <button
                       className="button"
                       disabled={blocked}
@@ -262,6 +277,7 @@ function ArtifactEditor({
                             (row) =>
                               row.id === item.id &&
                               !row.restricted &&
+                              row.capabilities?.share !== false &&
                               !row.confidential &&
                               row.status === "approved",
                           )
@@ -272,10 +288,10 @@ function ArtifactEditor({
                       Share
                     </button>
                   )}
-                {item.sharedAt && (
+                {item.sharedAt && item.sharingKnown !== false && (
                   <button
                     className="button"
-                    disabled={blocked}
+                    disabled={blocked || item.capabilities?.unshare === false}
                     onClick={() =>
                       changeArtifact({
                         action: "unshare",

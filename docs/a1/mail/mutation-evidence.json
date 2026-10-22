@@ -1,0 +1,106 @@
+{
+  "requiredCases": 9,
+  "baseline": {
+    "passed": 35,
+    "suites": 5
+  },
+  "mutants": [
+    {
+      "name": "ignore-durable-other-tab-reservation",
+      "source": "src/features/portfolio/relationships/email/send-attempt.ts",
+      "killedBy": [
+        "single-mail durable browser identity two tabs reserve one identity and a fresh cache retains the uncertain send without storing content"
+      ]
+    },
+    {
+      "name": "old-receipt-clears-newer-storage",
+      "source": "src/features/portfolio/relationships/email/send-attempt.ts",
+      "killedBy": [
+        "single-mail durable browser identity a delayed old success or uncertain receipt never replaces a newer tab's durable request"
+      ]
+    },
+    {
+      "name": "old-uncertain-receipt-overwrites-newer-storage",
+      "source": "src/features/portfolio/relationships/email/send-attempt.ts",
+      "killedBy": [
+        "single-mail durable browser identity a delayed old success or uncertain receipt never replaces a newer tab's durable request"
+      ]
+    },
+    {
+      "name": "reserve-despite-storage-refusal",
+      "source": "src/features/portfolio/relationships/email/send-attempt.ts",
+      "killedBy": [
+        "single-mail durable browser identity storage refusal makes zero send reservations"
+      ]
+    },
+    {
+      "name": "release-nonterminal-recovery",
+      "source": "src/features/portfolio/relationships/email/send-attempt.ts",
+      "killedBy": [
+        "single-mail durable browser identity recovered failed intent releases its identity while unknown and incomplete acceptance remain held"
+      ]
+    },
+    {
+      "name": "hold-definite-failed-recovery",
+      "source": "src/features/portfolio/relationships/email/send-attempt.ts",
+      "killedBy": [
+        "single-mail durable browser identity recovered failed intent releases its identity while unknown and incomplete acceptance remain held"
+      ]
+    },
+    {
+      "name": "trust-auth-http-status-as-nondelivery",
+      "source": "src/features/portfolio/relationships/email/send.ts",
+      "killedBy": [
+        "explicit send dispatch HTTP401 after POST remains uncertain with no retry",
+        "explicit send dispatch HTTP403 after POST remains uncertain with no retry",
+        "explicit send dispatch access revoked after provider acceptance keeps the send uncertain"
+      ]
+    },
+    {
+      "name": "reject-exact-durable-failure-proof",
+      "source": "src/features/portfolio/relationships/email/send.ts",
+      "killedBy": [
+        "explicit send dispatch only an exact typed durable rejection releases the send (44444444-4444-4444-8444-444444444444)"
+      ]
+    },
+    {
+      "name": "accept-another-request-rejection",
+      "source": "src/features/portfolio/relationships/email/send.ts",
+      "killedBy": [
+        "explicit send dispatch only an exact typed durable rejection releases the send (20000000-0000-4000-8000-000000000002)"
+      ]
+    }
+  ],
+  "coverage": {
+    "single-mail durable browser identity two tabs reserve one identity and a fresh cache retains the uncertain send without storing content": [
+      "ignore-durable-other-tab-reservation"
+    ],
+    "single-mail durable browser identity a delayed old success or uncertain receipt never replaces a newer tab's durable request": [
+      "old-receipt-clears-newer-storage",
+      "old-uncertain-receipt-overwrites-newer-storage"
+    ],
+    "single-mail durable browser identity storage refusal makes zero send reservations": [
+      "reserve-despite-storage-refusal"
+    ],
+    "single-mail durable browser identity recovered failed intent releases its identity while unknown and incomplete acceptance remain held": [
+      "release-nonterminal-recovery",
+      "hold-definite-failed-recovery"
+    ],
+    "explicit send dispatch HTTP401 after POST remains uncertain with no retry": [
+      "trust-auth-http-status-as-nondelivery"
+    ],
+    "explicit send dispatch HTTP403 after POST remains uncertain with no retry": [
+      "trust-auth-http-status-as-nondelivery"
+    ],
+    "explicit send dispatch access revoked after provider acceptance keeps the send uncertain": [
+      "trust-auth-http-status-as-nondelivery"
+    ],
+    "explicit send dispatch only an exact typed durable rejection releases the send (44444444-4444-4444-8444-444444444444)": [
+      "reject-exact-durable-failure-proof"
+    ],
+    "explicit send dispatch only an exact typed durable rejection releases the send (20000000-0000-4000-8000-000000000002)": [
+      "accept-another-request-rejection"
+    ]
+  },
+  "restored": true
+}

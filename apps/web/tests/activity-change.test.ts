@@ -148,7 +148,7 @@ describe("recorded activity changes", () => {
   it.each([null, "not-a-date"])(
     "rejects a false settled receipt %s",
     async (settledAt) => {
-      const request = { ...note, dueAt: "2026-10-11T12:00:00Z" };
+      const request = { ...note, kind: "request" as const, dueAt: "2026-10-11T12:00:00Z" };
       const test = setup([request], {
         ...request,
         settledAt,
@@ -161,7 +161,7 @@ describe("recorded activity changes", () => {
     },
   );
   it("preserves settle and reopen semantics", async () => {
-    const open = { ...note, dueAt: "2026-10-11T12:00:00Z" };
+    const open = { ...note, kind: "commitment" as const, dueAt: "2026-10-11T12:00:00Z" };
     const settled = { ...open, settledAt: "2026-10-11T13:00:00Z" };
     await setup([open], { ...settled, clientId, tenantId: actor.tenantId }).run(
       { action: "settle", settled: true },
@@ -173,7 +173,7 @@ describe("recorded activity changes", () => {
     );
   });
   it("rejects a settled receipt for a different due date", async () => {
-    const request = { ...note, dueAt: "2026-10-11T12:00:00Z" };
+    const request = { ...note, kind: "request" as const, dueAt: "2026-10-11T12:00:00Z" };
     const test = setup([request], {
       ...request,
       dueAt: "2026-10-12T12:00:00Z",

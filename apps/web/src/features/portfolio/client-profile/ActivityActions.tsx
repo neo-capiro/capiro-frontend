@@ -46,7 +46,7 @@ export function ActivityActions({
         {item.kind === "note" && item.pinned && (
           <span className={styles.pinned}>★ Pinned</span>
         )}
-        {item.dueAt && (
+        {(item.kind === "commitment" || item.kind === "request") && (
           <button
             className="button"
             disabled={mutation.isPending || state.reviewing || !state.canWrite}

@@ -33,7 +33,7 @@ export function MeetingDetail({
   clientId?: string;
   inline?: boolean;
 }) {
-  const query = useMeeting(id);
+  const query = useMeeting(id, clientId);
   const identity = useIdentity();
   const meeting = query.data;
   const inScope = !clientId || meeting?.client?.id === clientId;

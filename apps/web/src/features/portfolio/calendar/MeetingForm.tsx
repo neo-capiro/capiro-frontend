@@ -1,6 +1,7 @@
 "use client";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { useSaveMeeting } from "./mutations";
+import { meetingAssignmentFields } from "./meeting-save";
 import { useState } from "react";
 import { Temporal } from "temporal-polyfill";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
@@ -44,6 +45,7 @@ export function MeetingForm({
     meeting,
     () => onOpenChange(false),
     clientId ?? selectedClientId,
+    clientId,
   );
   const locked = mutation.isPending || mutation.uncertain;
   const local = (instant: string | undefined) =>
@@ -86,11 +88,11 @@ export function MeetingForm({
         description: String(form.get("description") ?? ""),
         startsAt,
         endsAt,
-        ...(scope ? { clientId: scope } : meeting ? { clientId: null } : {}),
+        ...meetingAssignmentFields(meeting, scope || null),
         location,
       });
-    } catch {
-      setValidation("Enter valid start and end date/times.");
+    } catch (error) {
+      setValidation(error instanceof Error ? error.message : "Enter valid start and end date/times.");
     }
   }
   return (
