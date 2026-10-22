@@ -309,7 +309,6 @@ export function PersonnelMergeQueue() {
         footer={
           <>
             <SettingsButton
-              disabled={locked}
               onClick={() => setReview(undefined)}
               disabled={locked}
             >

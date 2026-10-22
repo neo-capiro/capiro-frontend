@@ -228,7 +228,7 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
             >
               Cancel
             </SettingsButton>
-            <SettingsButton disabled={locked} primary disabled>
+            <SettingsButton primary disabled>
               Start impersonation
             </SettingsButton>
           </>
@@ -236,7 +236,6 @@ export function TenantSettings({ identity }: { identity: CapiroMe }) {
       >
         <SettingField label="Reason">
           <TextArea
-            disabled={locked}
             placeholder="Investigating ticket #1234, invitation flow"
             minLength={10}
             maxLength={500}

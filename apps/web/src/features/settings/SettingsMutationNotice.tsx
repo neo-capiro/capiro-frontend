@@ -8,6 +8,7 @@ const labels: Record<string, string> = {
   "settings.team.setRole": "Member role change",
   "settings.team.setBillingAdmin": "Billing access change",
   "settings.hq.tenants.create": "Tenant creation",
+  "settings.hq.tenants.resendInvitation": "Administrator invitation resend",
   "settings.hq.tenants.delete": "Tenant deletion",
   "settings.hq.customers.comp": "Complimentary access change",
   "settings.hq.ai.setCredential": "Provider key change",

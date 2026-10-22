@@ -168,7 +168,6 @@ export function ContractorIdentity({
         footer={
           <>
             <SettingsButton
-              disabled={locked}
               onClick={() => setCandidate(undefined)}
               disabled={locked}
             >

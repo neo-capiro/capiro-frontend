@@ -381,6 +381,7 @@ export function IntegrationSettings() {
         refresh={connections.reload}
       />
       <SettingsDialog
+        busy={action.busy}
         open={!!disconnect}
         onClose={() => {
           if (!action.busy) setDisconnect(undefined);

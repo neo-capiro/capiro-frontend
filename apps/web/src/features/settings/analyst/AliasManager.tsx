@@ -89,7 +89,7 @@ export function AliasManager() {
           </select>
           <SettingsButton
             primary
-            disabled={!programId}
+            disabled={locked || !programId}
             onClick={() => setEditor({})}
           >
             Add alias
@@ -180,6 +180,7 @@ export function AliasManager() {
                 <SettingsButton
                   small
                   disabled={
+                    locked ||
                     new Set(
                       duplicate.programs.map((program) => program.programId),
                     ).size < 2
@@ -222,7 +223,6 @@ export function AliasManager() {
         footer={
           <>
             <SettingsButton
-              disabled={locked}
               onClick={() => setRemove(undefined)}
               disabled={locked}
             >
@@ -383,7 +383,7 @@ function AliasEditor({
           <TextInput
             maxLength={1000}
             value={source}
-            disabled={!!initial}
+            disabled={locked || !!initial}
             onChange={(event) => setSource(event.target.value)}
           />
         </SettingField>

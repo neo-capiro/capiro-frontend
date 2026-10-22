@@ -330,7 +330,6 @@ export function QuarantineQueue() {
         footer={
           <>
             <SettingsButton
-              disabled={locked}
               onClick={() => setDiscard(undefined)}
               disabled={locked}
             >

@@ -143,39 +143,51 @@ describe("Settings dispatch lifetime", () => {
     expect(state.api.request).toHaveBeenCalledTimes(1);
     expect(current.action.error).toContain("not confirmed");
   });
-  it("scope change cancels the request lifetime and suppresses late success", async () => {
-    let finish!: (value: unknown) => void;
-    state.api.request.mockImplementation(
-      () =>
-        new Promise((resolve) => {
-          finish = resolve;
-        }),
-    );
-    await mount();
-    let first!: Promise<void>;
-    await act(async () => {
-      first = dispatch();
-    });
-    await until(() => state.api.request.mock.calls.length === 1);
-    const signal = state.api.request.mock.calls[0]?.[2].signal as AbortSignal;
-    await act(async () =>
-      root.render(
-        createElement(
-          QueryClientProvider,
-          { client: cache },
-          createElement(Harness, { section: "other-target" }),
+  it.each(["target", "client", "actor", "organization", "session"])(
+    "scope change cancels the request lifetime and suppresses late success: %s",
+    async (kind) => {
+      let finish!: (value: unknown) => void;
+      state.api.request.mockImplementation(
+        () =>
+          new Promise((resolve) => {
+            finish = resolve;
+          }),
+      );
+      await mount();
+      let first!: Promise<void>;
+      await act(async () => {
+        first = dispatch();
+      });
+      await until(() => state.api.request.mock.calls.length === 1);
+      const signal = state.api.request.mock.calls[0]?.[2].signal as AbortSignal;
+      if (kind === "client") state.api = { ...state.api };
+      if (kind === "actor") state.auth = { ...state.auth, userId: "actor-b" };
+      if (kind === "organization")
+        state.auth = { ...state.auth, orgId: "org-b" };
+      if (kind === "session")
+        state.auth = { ...state.auth, sessionId: "session-b" };
+      await act(async () =>
+        root.render(
+          createElement(
+            QueryClientProvider,
+            { client: cache },
+            createElement(Harness, {
+              section: kind === "target" ? "other-target" : "team",
+            }),
+          ),
         ),
-      ),
-    );
-    expect(signal.aborted).toBe(true);
-    await act(async () => {
-      finish({ userId: "target", billingAdmin: true });
-      await first;
-    });
-    expect(after).not.toHaveBeenCalled();
-    expect(current.action.message).toBeUndefined();
-    expect(current.pending).toBeUndefined();
-  });
+      );
+      expect(signal.aborted).toBe(true);
+      await act(async () => {
+        finish({ userId: "target", billingAdmin: true });
+        await first;
+      });
+      expect(after).not.toHaveBeenCalled();
+      expect(current.action.message).toBeUndefined();
+      if (kind === "client") expect(current.pending?.state).toBe("unknown");
+      else expect(current.pending).toBeUndefined();
+    },
+  );
   it("a readback denial after an accepted write never unlocks it for replay", async () => {
     state.api.request
       .mockResolvedValueOnce({ ok: true })
