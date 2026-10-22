@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient } from "@tanstack/react-query";
-import { webcrypto } from "node:crypto";
 import { CapiroApiError } from "../../shared/capiro/http";
 import { useSettingsMutation } from "./useSettingsMutation";
 
@@ -201,7 +200,6 @@ beforeEach(() => {
     },
     clear: () => values.clear(),
   };
-  vi.stubGlobal("crypto", webcrypto);
   vi.stubGlobal("sessionStorage", storage);
   vi.stubGlobal("window", { sessionStorage: storage });
   state.auth = { userId: "actor-a", sessionId: "session-a", orgId: "org-a" };

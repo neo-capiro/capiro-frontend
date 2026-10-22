@@ -3,7 +3,6 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { act, createElement, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { webcrypto } from "node:crypto";
 import { CreateTenant } from "./hq/TenantDialogs";
 import { SettingsDialog } from "./components";
 const state = vi.hoisted(() => ({
@@ -81,10 +80,6 @@ const refresh = vi.fn();
 beforeEach(() => {
   Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
     value: true,
-    configurable: true,
-  });
-  Object.defineProperty(globalThis, "crypto", {
-    value: webcrypto,
     configurable: true,
   });
   close.mockReset();
