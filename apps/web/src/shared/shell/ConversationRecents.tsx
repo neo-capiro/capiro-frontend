@@ -6,6 +6,10 @@ import { SessionContext } from "../session/SessionContext";
 import { useSelectedClient } from "../session/SelectedClient";
 import { useConversationDiscovery } from "../meri-conversations/history-queries";
 import type { ConversationAccount } from "../meri-conversations/host-controller";
+import {
+  conversationHref,
+  conversationLabel,
+} from "../meri-conversations/conversation-navigation";
 
 type Props = {
   enabled: boolean;
@@ -69,16 +73,10 @@ function RecentLinks({
             <Link
               key={conversation.conversationId}
               className={className}
-              href={`/meri?${new URLSearchParams({ clientId, conversationId: conversation.conversationId })}`}
+              href={conversationHref(clientId, conversation.conversationId)}
               onClick={onNavigate}
             >
-              Conversation ·{" "}
-              {new Date(conversation.createdAt).toLocaleString("en", {
-                dateStyle: "medium",
-                timeStyle: "short",
-                timeZone: "UTC",
-              })}{" "}
-              UTC
+              {conversationLabel(conversation.createdAt)}
             </Link>
           ))}
           {!conversations.length && (

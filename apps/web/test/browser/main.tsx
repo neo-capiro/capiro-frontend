@@ -22,6 +22,7 @@ import { MeriCitedAnswer } from "../../src/features/meri/MeriCitedAnswer";
 import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
 import { pendingApprovals } from "../../src/features/meri/fixtures/screens/approval-counts";
 import { MeriHome } from "../../src/features/meri/MeriHome";
+import { MeriConversationList } from "../../src/features/meri/conversations/MeriConversationList";
 import { MemoryOwnerInbox } from "../../src/features/meri/memory-review/MemoryOwnerInbox";
 import { MemoryCorrectionComposer } from "../../src/features/meri/memory-review/MemoryCorrectionComposer";
 import { clientId as testClientId } from "../../tests/browser/fixtures";
@@ -166,6 +167,31 @@ function RoutedApp() {
       </ProductShell>
     );
   }
+  if (path === "/meri/conversations")
+    return (
+      <ProductShell
+        section="conversations"
+        conversationEnabled={
+          sessionStorage.getItem("meri-conversation-enabled") === "true"
+        }
+        firstChatBootstrapEnabled={
+          sessionStorage.getItem("meri-first-chat-enabled") === "true"
+        }
+        firstChatBootstrapClientId={testClientId}
+      >
+        <RequireSession>
+          <MeriConversationList
+            enabled={
+              sessionStorage.getItem("meri-conversation-enabled") === "true"
+            }
+            firstChatBootstrapEnabled={
+              sessionStorage.getItem("meri-first-chat-enabled") === "true"
+            }
+            firstChatBootstrapClientId={testClientId}
+          />
+        </RequireSession>
+      </ProductShell>
+    );
   if (path === "/meri")
     return (
       <ProductShell

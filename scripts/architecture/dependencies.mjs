@@ -40,7 +40,7 @@ export const publicExports = new Set([
   '@capiro/ui/tool', '@capiro/ui/artifact', '@capiro/ui/attachments', '@capiro/ui/confirmation',
   '@capiro/ui/plan', '@capiro/ui/sources', '@capiro/ui/queue', '@capiro/ui/checkpoint', '@capiro/ui/file-tree',
   '@capiro/ui/task', '@capiro/ui/web-preview', '@capiro/ui/badge', '@capiro/ui/collapsible', '@capiro/ui/alert',
-  '@capiro/ui/card', '@capiro/ui/scroll-area',
+  '@capiro/ui/card', '@capiro/ui/scroll-area', '@capiro/ui/command',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',

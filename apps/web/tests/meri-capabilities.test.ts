@@ -35,6 +35,7 @@ it("inventory distinguishes implemented ordinary routes from missing workspace c
     return meriCapabilityHref(id as MeriCapabilityId, state);
   });
   expect([...new Set(routes.filter(Boolean))]).toEqual([
+    "/meri/conversations",
     "/meri",
     "/meri/files",
     "/meri/actions",
