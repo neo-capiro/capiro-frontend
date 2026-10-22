@@ -13,10 +13,8 @@ import {
 import { useBeginNewChat } from "../../../shared/meri-conversations/stored-conversation-recovery";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
-import { MeriLiveConversation } from "./MeriLiveConversation";
 import { useConversationSession } from "./useConversationSession";
-import { ConversationHistoryStatus } from "./ConversationHistoryStatus";
-import { ConnectionPending } from "./ConnectionPending";
+import { ConversationView } from "./ConversationView";
 
 export function MeriConversationHost({
   enabled,
@@ -255,30 +253,5 @@ function ConnectedConversation({
   conversationId?: string | undefined;
 }) {
   const session = useConversationSession(account, clientId, conversationId);
-  const { ready, connection } = session;
-  if (!ready || session.latestTarget)
-    return <ConnectionPending session={session} scope={scope} />;
-  return (
-    <MeriLiveConversation
-      key={ready.lifetimeKey}
-      port={ready.port}
-      initialPrompt={connection.pending}
-      earlier={session.earlier}
-      scope={scope}
-      draft={session.draft}
-      onDraft={session.setDraft}
-      initialDraft={session.initialDraft}
-      storageError={session.storageError}
-      textareaRef={session.textarea}
-      onNextTurn={session.startNext}
-      nextTurnBlocked={session.nextBlocked}
-      nextTurnVerified={!!session.source && !session.nextBlocked}
-      initialBlocked={session.initialBlocked}
-      promptKey={session.logicalKey}
-      savedCurrent={session.savedCurrent}
-      acceptedRequest={session.acceptedRequest}
-      onSettled={session.refresh}
-      historyStatus={<ConversationHistoryStatus session={session} />}
-    />
-  );
+  return <ConversationView session={session} scope={scope} />;
 }

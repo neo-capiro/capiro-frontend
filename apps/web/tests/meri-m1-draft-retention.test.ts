@@ -1,7 +1,7 @@
 import { expect, it, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ConnectionPending } from "../src/features/meri/conversation/ConnectionPending";
+import { ConversationView } from "../src/features/meri/conversation/ConversationView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useConversationTurn } from "../src/features/meri/conversation/useConversationTurn";
 import * as historyClient from "../src/shared/meri-conversations/history-client";
@@ -448,10 +448,10 @@ it("holds draft entry until exact conversation selection while storage failure k
     textarea: { current: null },
     history: { query: { isPending: true }, tail: {}, selected: false },
     continuation: { busy: false, failed: false },
-  } as unknown as Parameters<typeof ConnectionPending>[0]["session"];
+  } as unknown as Parameters<typeof ConversationView>[0]["session"];
   const render = (patch: Partial<typeof session>) =>
     renderToStaticMarkup(
-      createElement(ConnectionPending, {
+      createElement(ConversationView, {
         session: { ...session, ...patch },
         scope: "Synthetic client",
       }),

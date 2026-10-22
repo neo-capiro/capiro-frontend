@@ -1,7 +1,7 @@
 import { createElement, type ComponentProps, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, expect, it, vi } from "vitest";
-import { ConnectionPending } from "../src/features/meri/conversation/ConnectionPending";
+import { ConversationView } from "../src/features/meri/conversation/ConversationView";
 
 const buttons = vi.hoisted(
   () => [] as Array<{ onClick: () => void; children: ReactNode }>,
@@ -13,15 +13,18 @@ vi.mock("@capiro/ui/button", () => ({
   },
 }));
 vi.mock("../src/features/meri/conversation/ConversationFrame", () => ({
-  ConversationFrame: (props: {
-    status: ReactNode;
-    composer: { sendBlocked: string };
-  }) => createElement("main", null, props.status, props.composer.sendBlocked),
+  ConversationFrame: (props: { children: ReactNode; composer: ReactNode }) =>
+    createElement("main", null, props.children, props.composer),
+  ConversationBody: (props: { status: ReactNode }) => props.status,
+}));
+vi.mock("../src/features/meri/MeriComposer", () => ({
+  MeriComposer: ({ live }: { live: { sendBlocked: string } }) =>
+    live.sendBlocked,
 }));
 beforeEach(() => {
   buttons.length = 0;
 });
-type Session = ComponentProps<typeof ConnectionPending>["session"];
+type Session = ComponentProps<typeof ConversationView>["session"];
 function session(status: string, accessLost = false): Session {
   return {
     accessLost,
@@ -36,7 +39,7 @@ function session(status: string, accessLost = false): Session {
 }
 const render = (value: Session) =>
   renderToStaticMarkup(
-    createElement(ConnectionPending, { session: value, scope: "Client" }),
+    createElement(ConversationView, { session: value, scope: "Client" }),
   );
 
 it("access loss takes priority over a newer target and explicitly retries only the existing connection selectors", () => {

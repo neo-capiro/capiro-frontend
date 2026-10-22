@@ -1,6 +1,7 @@
 import { createElement, type ComponentProps, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, expect, it, vi } from "vitest";
+import { createConversationComposer } from "../src/features/meri/conversation/conversation-composer";
 import { MeriLiveConversation } from "../src/features/meri/conversation/MeriLiveConversation";
 import { ConversationHistoryStatus } from "../src/features/meri/conversation/ConversationHistoryStatus";
 import { createInitialDraftOwner } from "../src/features/meri/conversation/initial-draft";
@@ -31,18 +32,13 @@ vi.mock("@capiro/ui/button", () => ({
   },
 }));
 vi.mock("../src/features/meri/conversation/ConversationFrame", () => ({
-  ConversationFrame: ({
+  ConversationBody: ({
     status,
     current,
-    composer,
   }: {
     status: ReactNode;
     current: ReactNode;
-    composer: { stopBlocked?: string | undefined };
-  }) => {
-    harness.composer = composer;
-    return createElement("main", null, current, status);
-  },
+  }) => createElement("main", null, current, status),
 }));
 vi.mock("../src/features/meri/conversation/ConversationPanels", () => ({
   ConversationPanels: () => null,
@@ -50,6 +46,21 @@ vi.mock("../src/features/meri/conversation/ConversationPanels", () => ({
 vi.mock("../src/features/meri/conversation/ConversationTurn", () => ({
   ConversationTurn: () => null,
 }));
+
+vi.mock(
+  "../src/features/meri/conversation/conversation-composer",
+  async (original) => ({
+    ...(await original<
+      typeof import("../src/features/meri/conversation/conversation-composer")
+    >()),
+    useLiveComposer: (
+      _channel: unknown,
+      view: { controls: { stopBlocked?: string | undefined } },
+    ) => {
+      harness.composer = view.controls;
+    },
+  }),
+);
 
 type LiveProps = ComponentProps<typeof MeriLiveConversation>;
 type Session = ComponentProps<typeof ConversationHistoryStatus>["session"];
@@ -67,6 +78,7 @@ const request = {
 function liveProps(): LiveProps {
   return {
     port: { context } as LiveProps["port"],
+    composer: createConversationComposer(),
     initialPrompt: undefined,
     earlier: [],
     scope: "Client",

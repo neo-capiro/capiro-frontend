@@ -3,7 +3,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useConversationSession } from "../src/features/meri/conversation/useConversationSession";
-import { ConnectionPending } from "../src/features/meri/conversation/ConnectionPending";
+import { ConversationView } from "../src/features/meri/conversation/ConversationView";
 import { createInitialDraftOwner } from "../src/features/meri/conversation/initial-draft";
 import {
   syncMeriTabIdentity,
@@ -63,7 +63,7 @@ let session: ReturnType<typeof useConversationSession>;
 function render() {
   function Probe() {
     session = useConversationSession(scope, scope.clientId);
-    return createElement(ConnectionPending, { session, scope: "Synthetic" });
+    return createElement(ConversationView, { session, scope: "Synthetic" });
   }
   return renderToStaticMarkup(
     createElement(

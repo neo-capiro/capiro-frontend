@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, type ReactNode, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
@@ -8,7 +8,11 @@ import { Button } from "@capiro/ui/button";
 import { StatusPill } from "../ui/StatusPill";
 import ui from "../ui/meri-ui.module.css";
 import { ConversationPanels } from "./ConversationPanels";
-import { ConversationFrame } from "./ConversationFrame";
+import { ConversationBody } from "./ConversationFrame";
+import {
+  useLiveComposer,
+  type ConversationComposerChannel,
+} from "./conversation-composer";
 import { ConversationTurn } from "./ConversationTurn";
 import { RunStatus } from "./RunStatus";
 import {
@@ -205,7 +209,7 @@ export function MeriLiveConversation({
   nextTurnBlocked,
   nextTurnVerified = false,
   initialBlocked,
-  historyStatus,
+  composer,
   promptKey,
   onSettled,
   savedCurrent,
@@ -226,7 +230,7 @@ export function MeriLiveConversation({
   /** Current exact-run history is re-verified and permits a client-side next-turn attempt. */
   nextTurnVerified?: boolean | undefined;
   initialBlocked?: string | undefined;
-  historyStatus?: ReactNode;
+  composer: ConversationComposerChannel;
   promptKey?: string | undefined;
   onSettled: () => void;
   savedCurrent?: TurnView | undefined;
@@ -277,11 +281,21 @@ export function MeriLiveConversation({
     )
       onNextTurn(prompt, turn);
   };
+  useLiveComposer(composer, {
+    port,
+    running: active,
+    controls: {
+      onSend: send,
+      onStop: () => void run.cancel(),
+      sendBlocked: retentionError ?? availability.sendBlocked,
+      stopBlocked: retentionError ?? availability.stopBlocked,
+      scope,
+      attachUnavailable: unavailableTitle("attachments"),
+    },
+  });
   return (
-    <ConversationFrame
-      scope={scope}
+    <ConversationBody
       earlier={earlier}
-      historyStatus={historyStatus}
       current={<LiveTurn turn={turn} intent={intent} earlier={earlier} />}
       status={
         <CurrentRunStatus
@@ -295,18 +309,6 @@ export function MeriLiveConversation({
         />
       }
       files={<ConversationPanels port={port} turn={turn} earlier={earlier} />}
-      draft={draft}
-      onDraft={onDraft}
-      textareaRef={textareaRef}
-      running={active}
-      composer={{
-        onSend: send,
-        onStop: () => void run.cancel(),
-        sendBlocked: retentionError ?? availability.sendBlocked,
-        stopBlocked: retentionError ?? availability.stopBlocked,
-        scope,
-        attachUnavailable: unavailableTitle("attachments"),
-      }}
     />
   );
 }

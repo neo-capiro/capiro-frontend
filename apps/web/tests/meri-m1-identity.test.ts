@@ -3,20 +3,8 @@ import { createElement, type ComponentProps } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient } from "@tanstack/react-query";
 import { clearConversationReads } from "../src/shared/meri-conversations/history-queries";
-import { ConnectionPending } from "../src/features/meri/conversation/ConnectionPending";
+import { ConversationView } from "../src/features/meri/conversation/ConversationView";
 
-vi.mock("../src/features/meri/conversation/ConversationFrame", () => ({
-  ConversationFrame: (props: Record<string, unknown>) =>
-    createElement(
-      "main",
-      null,
-      JSON.stringify(props.earlier),
-      props.draft as string,
-      props.current as never,
-      props.status as never,
-      props.historyStatus as never,
-    ),
-}));
 import { ConversationHostController } from "../src/shared/meri-conversations/host-controller";
 
 const context = {
@@ -226,9 +214,9 @@ it("the denied view hides saved, pending and draft content through connecting an
       continuation: {},
       setDraft: () => undefined,
       textarea: { current: null },
-    } as unknown as ComponentProps<typeof ConnectionPending>["session"];
+    } as unknown as ComponentProps<typeof ConversationView>["session"];
     const html = renderToStaticMarkup(
-      createElement(ConnectionPending, { session, scope: "Client" }),
+      createElement(ConversationView, { session, scope: "Client" }),
     );
     expect(html).not.toContain("Private");
     expect(html).toContain(

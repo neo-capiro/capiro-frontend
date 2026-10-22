@@ -32,8 +32,8 @@ vi.mock("../src/shared/capiro/CapiroBoundary", () => ({
 vi.mock("../src/features/meri/conversation/useConversationSession", () => ({
   useConversationSession: mocks.session,
 }));
-vi.mock("../src/features/meri/conversation/ConnectionPending", () => ({
-  ConnectionPending: () => "Meri session pending",
+vi.mock("../src/features/meri/conversation/ConversationView", () => ({
+  ConversationView: () => "Meri session pending",
 }));
 
 const account = {

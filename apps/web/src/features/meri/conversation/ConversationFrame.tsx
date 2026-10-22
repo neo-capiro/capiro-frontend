@@ -1,11 +1,10 @@
-import type { ReactNode, RefObject } from "react";
+import type { ReactNode } from "react";
 import {
   Conversation,
   ConversationContent,
   ConversationScrollButton,
 } from "@capiro/ui/conversation";
 import { unavailableResources } from "../../../shared/meri-resources/unavailable";
-import { MeriComposer, type LiveComposer } from "../MeriComposer";
 import { ConversationTurn } from "./ConversationTurn";
 import type { TurnView } from "./conversation-view";
 import { shouldShowPrompt } from "./prompt-identity";
@@ -13,33 +12,18 @@ import styles from "./live.module.css";
 
 /**
  * Figma 01.02 conversation layout for the ordinary route: heading, the turns shown in this page,
- * connection status, files and the composer. The draft belongs to the caller and survives
- * session changes; this frame owns no service state.
+ * connection status, files and the composer. The composer has a stable position while
+ * session-bound children change; this frame owns no service state.
  */
 export function ConversationFrame({
   scope,
-  earlier,
-  current,
-  status,
-  files,
-  draft,
-  onDraft,
-  textareaRef,
+  children,
   composer,
-  running,
   historyStatus,
 }: {
   scope: string;
-  earlier: readonly TurnView[];
-  /** The current run's turn, or a pending request while it is being sent. */
-  current: ReactNode;
-  status: ReactNode;
-  files: ReactNode;
-  draft: string;
-  onDraft: (value: string) => void;
-  textareaRef: RefObject<HTMLTextAreaElement | null>;
-  composer: LiveComposer;
-  running: boolean;
+  children: ReactNode;
+  composer: ReactNode;
   historyStatus?: ReactNode;
 }) {
   return (
@@ -53,6 +37,26 @@ export function ConversationFrame({
           {unavailableResources.conversationHistory.summary}
         </p>
       )}
+      {children}
+      {composer}
+    </section>
+  );
+}
+
+/** Session-bound transcript, status and files may remount without replacing the composer. */
+export function ConversationBody({
+  earlier,
+  current,
+  status,
+  files,
+}: {
+  earlier: readonly TurnView[];
+  current: ReactNode;
+  status: ReactNode;
+  files: ReactNode;
+}) {
+  return (
+    <>
       <Conversation
         className={styles.log}
         aria-label="Conversation turns"
@@ -76,14 +80,6 @@ export function ConversationFrame({
         {status}
       </div>
       {files}
-      <MeriComposer
-        draft={draft}
-        onDraft={onDraft}
-        textareaRef={textareaRef}
-        assetSet="cited-answer"
-        running={running}
-        live={composer}
-      />
-    </section>
+    </>
   );
 }

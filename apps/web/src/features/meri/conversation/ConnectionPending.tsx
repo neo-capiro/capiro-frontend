@@ -1,13 +1,37 @@
 import { Button } from "@capiro/ui/button";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import { UserMessage } from "../screens/conversation/UserMessage";
-import { ConversationFrame } from "./ConversationFrame";
-import { ConversationHistoryStatus } from "./ConversationHistoryStatus";
+import type { LiveComposer } from "../MeriComposer";
+import { ConversationBody } from "./ConversationFrame";
 import type { useConversationSession } from "./useConversationSession";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
 
 type Session = ReturnType<typeof useConversationSession>;
+
+/** Keep the selected draft editable while sends wait for current session/run controls. */
+export function pendingConversationComposer(
+  session: Session,
+  scope: string,
+): LiveComposer {
+  const status = session.connection.state.status;
+  return {
+    onSend: () => undefined,
+    draftBlocked: !session.selectedId
+      ? "Confirming this conversation before saving a draft."
+      : undefined,
+    sendBlocked: session.accessLost
+      ? "Verify access to this conversation before sending."
+      : (session.storageError ??
+        (status === "idle" ||
+        status === "connecting" ||
+        (status === "ready" && !session.latestTarget)
+          ? "Connecting to Meri."
+          : "Reconnect to Meri before sending.")),
+    scope,
+    attachUnavailable: unavailableTitle("attachments"),
+  };
+}
 
 /** Connection recovery presents the same exact-run retry while private content stays hidden. */
 function ConnectionStatus({
@@ -63,13 +87,7 @@ function ConnectionStatus({
 }
 
 /** Saved reading is hidden after access loss until the exact session is reauthorized. */
-export function ConnectionPending({
-  session,
-  scope,
-}: {
-  session: Session;
-  scope: string;
-}) {
+export function ConnectionPending({ session }: { session: Session }) {
   const { connection, earlier } = session;
   const status = connection.state.status,
     waiting = status === "idle" || status === "connecting";
@@ -84,14 +102,8 @@ export function ConnectionPending({
       ? connection.pending
       : undefined;
   return (
-    <ConversationFrame
-      scope={scope}
+    <ConversationBody
       earlier={session.accessLost ? [] : earlier}
-      historyStatus={
-        session.accessLost ? null : (
-          <ConversationHistoryStatus session={session} />
-        )
-      }
       current={
         pending ? (
           <article
@@ -108,24 +120,6 @@ export function ConnectionPending({
       }
       status={<ConnectionStatus session={session} waiting={waiting} />}
       files={null}
-      draft={session.accessLost ? "" : session.draft}
-      onDraft={session.setDraft}
-      textareaRef={session.textarea}
-      running={false}
-      composer={{
-        onSend: () => undefined,
-        draftBlocked: !session.selectedId
-          ? "Confirming this conversation before saving a draft."
-          : undefined,
-        sendBlocked: session.accessLost
-          ? "Verify access to this conversation before sending."
-          : (session.storageError ??
-            (waiting
-              ? "Connecting to Meri."
-              : "Reconnect to Meri before sending.")),
-        scope,
-        attachUnavailable: unavailableTitle("attachments"),
-      }}
     />
   );
 }
