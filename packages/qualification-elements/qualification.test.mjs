@@ -270,7 +270,7 @@ const ADDITION_EXPORTS = { './tool': './src/ai-elements/tool.tsx', './artifact':
     const closure = inspectClosure(sources); assert.deepEqual(closure.files, vendorFiles());
     const p = json('../ui/package.json');
     const declared = { ...p.dependencies, ...p.peerDependencies };
-    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx', ...ADDITION_EXPORTS });
+    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './command': './src/shadcn/command.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx', ...ADDITION_EXPORTS });
     assert.equal(json('package.json').dependencies['@capiro/ui'], '0.0.0');
     for (const name of closure.external) assert.ok(Object.hasOwn(declared, name), `undeclared dependency ${name}`);
     const bad = new Map(sources); bad.set('src/ai-elements/conversation.tsx', sources.get('src/ai-elements/conversation.tsx') + '\nimport {generateText} from "ai";');

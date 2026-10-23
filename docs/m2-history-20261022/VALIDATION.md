@@ -62,3 +62,29 @@ From `apps/web`, `node ../../node_modules/next/dist/bin/next build` compiled suc
 ## Unrun and held
 
 Docker/Linux, PostgreSQL 16, native service, AWS/CodeBuild/image scanning, provider and live acceptance gates were not run. No database, provider or live-chat operation occurred. S2 acceptance remains the prerequisite for Wave 2 deployment and Core migrations. General bootstrap/runtime/schema compatibility, MG-05 context, MG-02 selected workflow lifecycle, MF-19/PF-02 cross-module receipt handshake, and MF-09 management mutations remain open as recorded in [STATUS](STATUS.md).
+
+## Split-package qualification correction — 2026-10-23
+
+Source: PR #123 at `e24e8f425ee8173757163065fcc2b6b10a46f685`; bounded correction requested in comment 6354522322.
+
+The existing MF-09 list imports `@capiro/ui/command`, so the package export is retained. The unchanged repository generator `node packages/qualification-elements/generate-pins.mjs` regenerates `promotion-pins.json`. The full qualifier also exposed one stale exact-export assertion: its expected map omitted `./command: ./src/shadcn/command.tsx`. That single mapping is added; strict equality, closure checks, negative cases, deadlines and all 18 declarations remain. The final generated diff contains only the manifest record and the test-file record. No manual hash edit, component/provenance change, dependency change or gate bypass.
+
+This Linux workspace recovered the complete UI and qualification package sources, workspace manifests, active lock and required vendored archives from the exact published head, verifying Git blob identities. It is a targeted qualification checkout, not a full application-build checkout.
+
+Commands and actual results (Node 24.19.0, npm 11.9.0):
+- `npm ci --ignore-scripts --no-audit --no-fund --workspace @capiro/qualification-elements --workspace @capiro/ui --include-workspace-root`: exit 0, 371 packages installed from the unchanged root lock.
+- `node packages/qualification-elements/generate-pins.mjs`: exit 0.
+- `node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"`: **exit 0; 18/18 PASS, 0 skipped**, including generator check mode, qualification TypeScript, pinned esbuild/SSR receipt verification, dependency/notice closure and negative checks. Full output: [qualify-elements-20261023.log](./qualify-elements-20261023.log).
+- `git diff --check`: exit 0.
+
+The initial local qualifier attempt stopped at missing `node_modules`. After the exact locked install, an intermediate run reached 17/18 with the missing command-export mapping above. Those attempts are not passes. The final run followed that bounded correction; no blind retry.
+
+Final pins SHA-256: `ea363fc6982d7d0d4db68b8f029d9630ab210b294e47dbea229a2aa793167bf0`.
+SSR receipt SHA-256: `70360eec91dbac9a4b3d6d15eb0b04e74e2a9b448aa0e56f4b8192601e2d30f2` (receipt paths in the log are local evidence, not a portable build).
+The verified manifest at this source is 2493 bytes / `cdca27609c5c8406a1198b9e8ec57e1e5b07d0de2a9e9cea56b2e5a0cf28e6fd`; its stale pin was 2448 bytes / `3babdbb821c3c1ed0609efa5b23f15d2882c99121b2500715e275ea5d2ba605d`. This is the source-verified direction of the pin update.
+
+### Remaining holds
+
+The earlier Windows `SecurityFatalError` is **unresolved**. Its raw log and exact message/stack are absent from this recovered workspace and were not committed. The historical report above is a summary, not a verbatim error. The sanitized original message/stack was requested from dot/Fable in PR comment 6354917558; no environmental classification is established. CodeBuild 8a3ca423 stopped at qualify-elements and did not reproduce or clear the Next failure.
+
+No application build, browser comparison, smoke, scan, native service, provider or live acceptance gate was repeated here. Fable's full exact-head production qualification and dot's re-review remain required. The two historical raw-Node module-load failures remain open. No dependency/advisory bypass, migration, deployment or merge. Wave 2 deployment remains held pending verified S2 acceptance; STOP2/6 remains.
