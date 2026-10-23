@@ -77,6 +77,23 @@ export async function settingsFixture(page: Page) {
     invitations: [structuredClone(invitation)],
     state: structuredClone(billingState),
     summary: structuredClone(billingSummary),
+    signature: {
+      html: "<p>Original signature</p>" as string | null,
+      enabled: false,
+    },
+    contact: {
+      name: "Synthetic organization",
+      email: "office@example.test",
+      phone: "5550100",
+      mailingStreet1: "1 Synthetic Street",
+      mailingStreet2: "",
+      mailingCity: "Test City",
+      mailingStateZip: "DC 00000",
+      permanentStreet1: "2 Synthetic Street",
+      permanentStreet2: "",
+      permanentCity: "Test City",
+      permanentStateZip: "DC 00000",
+    },
   };
   const requests: { operation: string; method: string; input: unknown }[] = [];
   const unexpected: string[] = [];
@@ -99,6 +116,8 @@ export async function settingsFixture(page: Page) {
     }
     const reads: Record<string, unknown> = {
       "me.read": data.identity,
+      "me.emailSignature.read": data.signature,
+      "settings.contact.read": data.contact,
       "settings.team.list": data.members,
       "settings.team.invitations": data.invitations,
       "settings.billing.state": data.state,
@@ -118,7 +137,14 @@ export async function settingsFixture(page: Page) {
   const open = async (section = "team") => {
     await page.goto(`/a2-settings.html?section=${section}`);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      section === "team" ? "Team" : "Billing",
+      (
+        {
+          team: "Team",
+          billing: "Billing",
+          personal: "Personal",
+          "contact-info": "Contact info",
+        } as Record<string, string>
+      )[section] ?? "Settings",
     );
   };
   return { data, handlers, requests, writes, unexpected, open };

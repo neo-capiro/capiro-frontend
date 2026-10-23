@@ -25,74 +25,13 @@ export function PersonalSettings({
   refresh: () => void;
   readOnlyPreview?: boolean;
 }) {
-  const mutation = useSettingsMutation("personal", identity.user.id);
-  const { api, action, locked } = mutation;
-  const [title, setTitle] = useState(identity.user.title ?? "");
   return (
     <div className={styles.stack} data-design-target="411:67666">
-      <SettingsCard
-        title="Profile"
-        description={
-          "Shown under your name in the top-right menu, for example “Sr. Government Affairs Lead”."
-        }
-      >
-        <form
-          className={`${styles.row} ${styles.formRow}`}
-          onSubmit={(event) => {
-            event.preventDefault();
-            void action.run(
-              async (signal) => {
-                if (readOnlyPreview)
-                  throw new Error(
-                    "Profile editing is unavailable in read-only preview.",
-                  );
-                const result = await api.request(
-                  "me.update",
-                  { body: { title } },
-                  { signal },
-                );
-                if (
-                  result.user.id !== identity.user.id ||
-                  result.user.title !== (title.trim() || null)
-                )
-                  throw new Error(
-                    "The response did not confirm this profile. Reload before making another change.",
-                  );
-                return result;
-              },
-              "Your title was saved.",
-              refresh,
-            );
-          }}
-        >
-          <div className={styles.grow}>
-            <SettingField label="Title">
-              <TextInput
-                className={styles.input}
-                value={title}
-                maxLength={120}
-                disabled={readOnlyPreview || locked}
-                onChange={(event) => setTitle(event.target.value)}
-                placeholder="Add your title"
-              />
-            </SettingField>
-          </div>
-          <SettingsButton
-            primary
-            type="submit"
-            disabled={readOnlyPreview || locked}
-          >
-            {action.busy ? "Saving…" : "Save"}
-          </SettingsButton>
-        </form>
-        {action.error && (
-          <SettingsNotice title="Title could not be saved" error>
-            {action.error}
-          </SettingsNotice>
-        )}
-        {action.message && <SettingsNotice title={action.message} />}
-        <SettingsMutationNotice {...mutation} busy={action.busy} />
-      </SettingsCard>
+      <PersonalTitle
+        identity={identity}
+        refresh={refresh}
+        readOnlyPreview={readOnlyPreview}
+      />
       <SettingsCard title="Account">
         <SettingFacts
           items={[
@@ -131,5 +70,85 @@ export function PersonalSettings({
         </Link>
       </p>
     </div>
+  );
+}
+
+/** The title form owns its draft and existing receipt/recovery lifecycle. */
+function PersonalTitle({
+  identity,
+  refresh,
+  readOnlyPreview,
+}: {
+  identity: CapiroMe;
+  refresh: () => void;
+  readOnlyPreview: boolean;
+}) {
+  const mutation = useSettingsMutation("personal", identity.user.id);
+  const { api, action, locked } = mutation;
+  const [title, setTitle] = useState(identity.user.title ?? "");
+  return (
+    <SettingsCard
+      title="Profile"
+      description={
+        "Shown under your name in the top-right menu, for example “Sr. Government Affairs Lead”."
+      }
+    >
+      <form
+        className={`${styles.row} ${styles.formRow}`}
+        onSubmit={(event) => {
+          event.preventDefault();
+          void action.run(
+            async (signal) => {
+              if (readOnlyPreview)
+                throw new Error(
+                  "Profile editing is unavailable in read-only preview.",
+                );
+              const result = await api.request(
+                "me.update",
+                { body: { title } },
+                { signal },
+              );
+              if (
+                result.user.id !== identity.user.id ||
+                result.user.title !== (title.trim() || null)
+              )
+                throw new Error(
+                  "The response did not confirm this profile. Reload before making another change.",
+                );
+              return result;
+            },
+            "Your title was saved.",
+            refresh,
+          );
+        }}
+      >
+        <div className={styles.grow}>
+          <SettingField label="Title">
+            <TextInput
+              className={styles.input}
+              value={title}
+              maxLength={120}
+              disabled={readOnlyPreview || locked}
+              onChange={(event) => setTitle(event.target.value)}
+              placeholder="Add your title"
+            />
+          </SettingField>
+        </div>
+        <SettingsButton
+          primary
+          type="submit"
+          disabled={readOnlyPreview || locked}
+        >
+          {action.busy ? "Saving…" : "Save"}
+        </SettingsButton>
+      </form>
+      {action.error && (
+        <SettingsNotice title="Title could not be saved" error>
+          {action.error}
+        </SettingsNotice>
+      )}
+      {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice {...mutation} busy={action.busy} />
+    </SettingsCard>
   );
 }

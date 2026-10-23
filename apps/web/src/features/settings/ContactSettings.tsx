@@ -57,21 +57,6 @@ function ContactForm({
   const mutation = useSettingsMutation("contact");
   const { api, action, locked } = mutation;
   const [form, setForm] = useState(initial);
-  function input(key: keyof ContactInfo, label: string) {
-    return (
-      <SettingField label={label}>
-        <TextInput
-          className={styles.input}
-          value={form[key] ?? ""}
-          disabled={!canEdit || locked}
-          type={key === "email" ? "email" : key === "phone" ? "tel" : "text"}
-          onChange={(event) =>
-            setForm((current) => ({ ...current, [key]: event.target.value }))
-          }
-        />
-      </SettingField>
-    );
-  }
   return (
     <form
       className={styles.stack}
@@ -99,23 +84,13 @@ function ContactForm({
         );
       }}
     >
-      <SettingsCard title="Organization contact">
-        <div className={styles.grid}>
-          {organizationFields.map(([key, label]) => (
-            <div key={key}>{input(key, label)}</div>
-          ))}
-        </div>
-      </SettingsCard>
-      {addresses.map((address) => (
-        <SettingsCard key={address.title} title={address.title}>
-          {input(address.keys[0], "Street 1")}
-          {input(address.keys[1], "Street 2")}
-          <div className={`${styles.grid} ${styles.two}`}>
-            {input(address.keys[2], "City")}
-            {input(address.keys[3], "State / ZIP")}
-          </div>
-        </SettingsCard>
-      ))}
+      <ContactFields
+        form={form}
+        disabled={!canEdit || locked}
+        onChange={(key, value) =>
+          setForm((current) => ({ ...current, [key]: value }))
+        }
+      />
       {action.error && (
         <SettingsNotice title="Contact information could not be saved" error>
           {action.error}
@@ -156,5 +131,50 @@ export function ContactSettings({ identity }: { identity: CapiroMe }) {
         )}
       </StatusPanel>
     </div>
+  );
+}
+
+function ContactFields({
+  form,
+  disabled,
+  onChange,
+}: {
+  form: ContactInfo;
+  disabled: boolean;
+  onChange: (key: keyof ContactInfo, value: string) => void;
+}) {
+  function input(key: keyof ContactInfo, label: string) {
+    return (
+      <SettingField label={label}>
+        <TextInput
+          className={styles.input}
+          value={form[key] ?? ""}
+          disabled={disabled}
+          type={key === "email" ? "email" : key === "phone" ? "tel" : "text"}
+          onChange={(event) => onChange(key, event.target.value)}
+        />
+      </SettingField>
+    );
+  }
+  return (
+    <>
+      <SettingsCard title="Organization contact">
+        <div className={styles.grid}>
+          {organizationFields.map(([key, label]) => (
+            <div key={key}>{input(key, label)}</div>
+          ))}
+        </div>
+      </SettingsCard>
+      {addresses.map((address) => (
+        <SettingsCard key={address.title} title={address.title}>
+          {input(address.keys[0], "Street 1")}
+          {input(address.keys[1], "Street 2")}
+          <div className={`${styles.grid} ${styles.two}`}>
+            {input(address.keys[2], "City")}
+            {input(address.keys[3], "State / ZIP")}
+          </div>
+        </SettingsCard>
+      ))}
+    </>
   );
 }
