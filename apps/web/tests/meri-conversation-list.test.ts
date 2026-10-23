@@ -26,6 +26,9 @@ const synthetic = vi.hoisted(() => ({
   },
   list: vi.fn<(props: unknown) => string>(() => "Admitted synthetic list"),
 }));
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams(),
+}));
 vi.mock("../src/shared/portfolio/auth/identity", () => ({
   useIdentity: () => synthetic.identity,
 }));
@@ -38,8 +41,8 @@ vi.mock("../src/shared/portfolio/api/clients", () => ({
 vi.mock("../src/shared/shell/LiveNewConversation", () => ({
   LiveNewConversation: () => null,
 }));
-vi.mock("../src/features/meri/conversations/ConversationList", () => ({
-  ConversationList: synthetic.list,
+vi.mock("../src/features/meri/conversations/ManagedConversationPanel", () => ({
+  ManagedConversationPanel: synthetic.list,
 }));
 
 function render(enabled = true, served = true) {
@@ -67,12 +70,8 @@ beforeEach(() => {
   synthetic.list.mockClear();
 });
 
-it("mounts discovery only for current identity, verified active client and served capability", () => {
+it("mounts owner-scoped discovery only for current identity and served capability", () => {
   expect(render()).toContain("Admitted synthetic list");
-  expect(synthetic.list.mock.calls[0]![0]).toMatchObject({
-    account: { tenantId: "synthetic-tenant", actorId: "synthetic-actor" },
-    clientId: synthetic.selected.client.id,
-  });
   expect(render(false)).not.toContain("Admitted synthetic list");
   expect(render(true, false)).not.toContain("Admitted synthetic list");
   synthetic.identity.isFetching = true;
@@ -82,11 +81,12 @@ it("mounts discovery only for current identity, verified active client and serve
   expect(render()).not.toContain("Admitted synthetic list");
   synthetic.identity.error = null;
   synthetic.selected.state = "unavailable";
-  expect(render()).not.toContain("Admitted synthetic list");
+  expect(render()).toContain("Admitted synthetic list");
   synthetic.selected.state = "authorized-client";
   synthetic.selected.client.status = "archived";
-  expect(render()).toContain("This client is archived");
-  expect(synthetic.list).toHaveBeenCalledTimes(1);
+  // Core lists each owned chat only after its own current client wall; UI client choice does not grant or filter General ownership.
+  expect(render()).toContain("Admitted synthetic list");
+  expect(synthetic.list).toHaveBeenCalledTimes(3);
 });
 
 it("client changes on the list stay on discovery and carry no conversation or dispatch hint", () => {

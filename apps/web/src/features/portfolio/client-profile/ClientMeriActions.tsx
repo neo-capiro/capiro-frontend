@@ -6,6 +6,7 @@ import { DropdownMenu } from "radix-ui";
 import type { Client } from "@/features/portfolio/index/public";
 import { ClientAttendancePreferences } from "@/features/portfolio/calendar/attendance/public";
 import { ClientEnrichmentDialog } from "./enrichment/public";
+import { useClientEntry } from "@/shared/meri-entry/public";
 import headerStyles from "./client-header.module.css";
 import styles from "./client-meri-actions.module.css";
 
@@ -34,14 +35,7 @@ export function ClientMeriActions({ client }: { client: Client }) {
               if (preferences || enrichment) event.preventDefault();
             }}
           >
-            <DropdownMenu.Item
-              className={styles.item}
-              disabled
-              title="Client context handoff is not connected yet"
-            >
-              <span>✦ Ask Meri about this client</span>
-              <small>Open Meri with this client in context.</small>
-            </DropdownMenu.Item>
+            <AskMeriItem client={client} />
             <DropdownMenu.Item
               className={styles.item}
               onSelect={() => setEnrichment(true)}
@@ -86,5 +80,20 @@ export function ClientMeriActions({ client }: { client: Client }) {
         />
       )}
     </>
+  );
+}
+
+function AskMeriItem({ client }: { client: Client }) {
+  const entry = useClientEntry(client.id, client.status !== "archived");
+  return (
+    <DropdownMenu.Item
+      className={styles.item}
+      disabled={!entry.ready}
+      title={entry.reason}
+      onSelect={entry.open}
+    >
+      <span>✦ Ask Meri about this client</span>
+      <small>{entry.reason}</small>
+    </DropdownMenu.Item>
   );
 }

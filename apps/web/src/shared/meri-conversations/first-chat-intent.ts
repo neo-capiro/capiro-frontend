@@ -6,11 +6,16 @@ const opaqueId = z
   .min(1)
   .max(256)
   .refine((value) => value === value.trim());
-const scopeSchema = z.strictObject({
-  tenantId: opaqueId,
-  actorId: opaqueId,
-  clientId: uuid,
-});
+const account = { tenantId: opaqueId, actorId: opaqueId };
+export const firstChatScope = z.union([
+  z.strictObject({ ...account, clientId: uuid }),
+  z.strictObject({
+    ...account,
+    scopeKind: z.literal("general"),
+    clientId: z.null(),
+  }),
+]);
+const scopeSchema = firstChatScope;
 export type FirstChatScope = z.infer<typeof scopeSchema>;
 
 const identity = {
@@ -52,7 +57,12 @@ function scopedKey(scope: FirstChatScope) {
   const checked = scopeSchema.parse(scope);
   return (
     prefix +
-    JSON.stringify([checked.tenantId, checked.actorId, checked.clientId])
+    JSON.stringify([
+      checked.tenantId,
+      checked.actorId,
+      checked.clientId,
+      ...(checked.clientId === null ? ["general"] : []),
+    ])
   );
 }
 

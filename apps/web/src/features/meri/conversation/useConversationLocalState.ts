@@ -8,7 +8,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
-import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
+import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import {
   requireMeriTabStorage,
   type TabScope,
@@ -32,7 +32,7 @@ function draftOwner(scope: TabScope | undefined, accessLost: boolean) {
 }
 /** Draft persistence owns text and revision; React subscribes only to this mounted view's changes. */
 function useDraftState(
-  context: ActionContext | undefined,
+  context: ConversationContext | undefined,
   accessLost: boolean,
   scope?: TabScope,
 ) {
@@ -87,7 +87,7 @@ function useDraftState(
 
 /** Raw text and rendered turns share the exact selected conversation's access lifetime. */
 export function useConversationLocalState(
-  context: ActionContext | undefined,
+  context: ConversationContext | undefined,
   accessLost: boolean,
   scope?: TabScope,
 ) {
@@ -99,7 +99,7 @@ export function useConversationLocalState(
     if (accessLost) setTurns([]);
   }
   const bindNext = useCallback(
-    (target: ActionContext, request: ConversationSubmitRequest) => {
+    (target: ConversationContext, request: ConversationSubmitRequest) => {
       owner.bindNext(target, request);
     },
     [owner],

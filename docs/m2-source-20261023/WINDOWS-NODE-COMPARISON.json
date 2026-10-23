@@ -1,0 +1,42 @@
+{
+  "synthetic": true,
+  "platform": "win32",
+  "node": "v24.22.1",
+  "base": "0261e9e2639502490da26c0f6ba888aebfe4f926",
+  "baseInstall": "npm ci --ignore-scripts --no-audit --no-fund",
+  "command": "npm test",
+  "records": [
+    {
+      "file": "fe-node-test-base-0261.log",
+      "tests": 172,
+      "pass": 168,
+      "fail": 4,
+      "failures": [
+        "apps\\web\\test\\meri-conversation-selection-journal.test.mjs:1:1",
+        "apps\\web\\test\\meri-turn-recovery.test.mjs:1:1",
+        "apps\\web\\test\\preview-backend-boundary.test.mjs:172:1",
+        "scripts\\deployment-cli.test.mjs:20:1"
+      ],
+      "imports": [
+        "session-receipt",
+        "turn-persistence"
+      ]
+    },
+    {
+      "file": "fe-node-test-working.log",
+      "tests": 172,
+      "pass": 168,
+      "fail": 4,
+      "failures": [
+        "apps\\web\\test\\meri-conversation-selection-journal.test.mjs:1:1",
+        "apps\\web\\test\\meri-turn-recovery.test.mjs:1:1",
+        "apps\\web\\test\\preview-backend-boundary.test.mjs:172:1",
+        "scripts\\deployment-cli.test.mjs:20:1"
+      ],
+      "imports": [
+        "session-receipt",
+        "turn-persistence"
+      ]
+    }
+  ]
+}

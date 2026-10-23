@@ -1,0 +1,101 @@
+.dialog {
+  position: fixed;
+  z-index: 101;
+  left: 50%;
+  top: 96px;
+  transform: translateX(-50%);
+  width: min(800px, calc(100vw - 32px));
+  max-height: calc(100dvh - 128px);
+  overflow: auto;
+  padding: 24px;
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px -12px #0c0a092e;
+}
+.title {
+  margin: 0 32px 12px 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+.hint {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-bottom: 20px;
+}
+.command {
+  background: var(--card);
+}
+.command [data-slot="command-input-wrapper"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+}
+.command input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 8px;
+  font-size: 14px;
+}
+.command svg {
+  width: 18px;
+  height: 18px;
+}
+.command [cmdk-list] {
+  max-height: 400px;
+  overflow: auto;
+}
+.command [cmdk-group-heading] {
+  padding: 16px 8px 8px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.command [cmdk-item] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.command [cmdk-item][data-selected="true"] {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.command [cmdk-item] span {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.dialog p {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.dialog button {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: inherit;
+}
+.dialog button:disabled {
+  opacity: 0.5;
+}
+.handoff {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+@media (max-width: 600px) {
+  .dialog {
+    top: 32px;
+    max-height: calc(100dvh - 64px);
+  }
+}

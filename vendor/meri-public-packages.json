@@ -134,6 +134,24 @@
       "status": "accepted-pushed-source-artifact; consumer qualification by the frontend preview build",
       "purpose": "Initial-input allocate budget maxRequestMs 25000 (0.1.9 was 12000): one live allocate runs ~4 full session rechecks (~3 s each). Otherwise identical to 0.1.9 apart from the version string.",
       "custody": "Built by Fable from the pushed integration commit; digests recorded before the lock update."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.11.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "16a93e7fafd648c13a9289d8a7d623d89967366a",
+      "bytes": 668303,
+      "sha256": "21c4a7f2408e8516e0041021f3e19d2c2d6d41bf3aca8d7b46745680385111e3",
+      "regularEntryCount": 62,
+      "status": "verified-source-pending-consumer-qualification"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.1.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "54aa8278b354db030a11a77c9c06aa8eb9e50393",
+      "bytes": 2751,
+      "sha256": "6d37f584ccf23a8cd7447339b549ada544e5b17ddf8d5094716d6ce6015b5f1e",
+      "regularEntryCount": 6,
+      "status": "verified-source-pending-consumer-qualification"
     }
   ]
 }

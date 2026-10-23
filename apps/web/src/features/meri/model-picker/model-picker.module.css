@@ -1,0 +1,88 @@
+.preview {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.preview summary {
+  cursor: pointer;
+  padding: 12px 0;
+}
+.preview p {
+  margin: 8px 0 12px;
+  line-height: 1.5;
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  width: 100%;
+  color: var(--foreground);
+}
+.trigger svg,
+.popup svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.popup {
+  z-index: 70;
+  min-width: 320px;
+  width: min(400px, calc(100vw - 32px));
+  background: white;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 36px #0002;
+  padding: 8px;
+  font-size: 14px;
+}
+.popup [data-slot="cascader-panel"] {
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+}
+.popup input {
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  outline-offset: -2px;
+  background: transparent;
+}
+.popup [data-slot="cascader-item"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  min-height: 40px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.popup [data-highlighted],
+.popup [data-selected] {
+  background: var(--muted);
+}
+.popup [data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.popup [data-slot="cascader-nav"],
+.popup [data-slot="cascader-breadcrumb"] {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.popup [data-slot="cascader-status"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}

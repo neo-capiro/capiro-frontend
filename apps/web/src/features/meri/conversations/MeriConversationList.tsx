@@ -1,12 +1,11 @@
 "use client";
 
 import { useIdentity } from "../../../shared/portfolio/auth/identity";
-import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { useMeriCapabilities } from "../../../shared/meri-resources/CapabilityContext";
 import { LiveNewConversation } from "../../../shared/shell/LiveNewConversation";
 import { MeriClientSelector } from "../MeriClientSelector";
 import { MeriPageHeading } from "../ui/MeriPageHeading";
-import { ConversationList } from "./ConversationList";
+import { ManagedConversationPanel } from "./ManagedConversationPanel";
 import ui from "../ui/meri-ui.module.css";
 
 type Props = {
@@ -15,18 +14,15 @@ type Props = {
   firstChatBootstrapClientId?: string;
 };
 
-/** Only a current account and active, verified client may mount private discovery. */
+/** Current account-owned discovery; Core rechecks each chat's immutable scope and client wall. */
 export function MeriConversationList(props: Props) {
   const identity = useIdentity();
-  const selected = useSelectedClient();
   const capabilities = useMeriCapabilities();
   const current =
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
       : undefined;
   const enabled = props.enabled && capabilities.conversations.status === "on";
-  const client =
-    selected.state === "authorized-client" ? selected.client : undefined;
   const account = current?.tenant?.id
     ? { tenantId: current.tenant.id, actorId: current.user.id }
     : undefined;
@@ -34,7 +30,7 @@ export function MeriConversationList(props: Props) {
     <div className={ui.page}>
       <MeriPageHeading
         title="Conversations"
-        description="Open a saved conversation in its original client scope."
+        description="Find your saved chats, or manage their titles and history. Each chat keeps its original scope."
         action={
           <LiveNewConversation
             assetSet="home"
@@ -60,22 +56,11 @@ export function MeriConversationList(props: Props) {
         <p role="status">
           Conversation history is not enabled for this workspace.
         </p>
-      ) : !account || !client ? (
-        <p role="status">
-          A verified account and current client are required to load
-          conversations.
-        </p>
-      ) : client.status === "archived" ? (
-        <p role="alert">
-          This client is archived. Select an active client to load
-          conversations.
-        </p>
+      ) : !account ? (
+        <p role="status">Verify your account to load your chats.</p>
       ) : (
-        <ConversationList
-          key={JSON.stringify([account.tenantId, account.actorId, client.id])}
-          account={account}
-          clientId={client.id}
-          clientName={client.name}
+        <ManagedConversationPanel
+          key={JSON.stringify([account.tenantId, account.actorId])}
         />
       )}
     </div>

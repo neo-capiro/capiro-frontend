@@ -50,6 +50,10 @@ vi.mock("react", async (importOriginal) => {
     },
   };
 });
+// This isolated lifetime fixture has no verified Core account; the actual palette/read boundary is exercised by meri-m2.spec.ts.
+vi.mock("../src/shared/portfolio/auth/identity", () => ({
+  useIdentity: () => ({ isSuccess: false, isFetching: false }),
+}));
 vi.mock("../src/shared/portfolio/auth/AuthenticationProvider", () => ({
   AuthenticationProvider: ({ children }: { children: ReactNode }) => children,
 }));

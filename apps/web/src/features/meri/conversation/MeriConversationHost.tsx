@@ -3,7 +3,11 @@ import { Button } from "@capiro/ui/button";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
-import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
+import {
+  firstChatCoreOperationKey,
+  firstChatV2OperationKey,
+} from "../../../shared/capiro/operations/meri-first-chat";
+import { readClientEntry } from "../../../shared/meri-entry/descriptor";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import {
@@ -28,7 +32,9 @@ export function MeriConversationHost({
   firstChatBootstrapClientId?: string;
 }) {
   const selected = useSelectedClient();
-  const selector = conversationSelection(useSearchParams());
+  const params = useSearchParams();
+  const selector = conversationSelection(params);
+  const general = params.get("scope") === "general" && !params.has("clientId");
   const [newChatEpoch, setNewChatEpoch] = useState(0);
   useEffect(() => {
     if (selector.state !== "current") return;
@@ -55,6 +61,15 @@ export function MeriConversationHost({
         </p>
       </section>
     );
+  if (account && general)
+    return (
+      <GeneralConversation
+        account={account}
+        selector={selector}
+        newChatEpoch={newChatEpoch}
+        firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+      />
+    );
   if (!account || selected.state !== "authorized-client")
     return (
       <section role="status">
@@ -65,8 +80,41 @@ export function MeriConversationHost({
         </p>
       </section>
     );
+  return (
+    <ClientConversation
+      account={account}
+      client={selected.client}
+      selector={selector}
+      newChatEpoch={newChatEpoch}
+      firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+      firstChatBootstrapClientId={firstChatBootstrapClientId}
+      entryId={params.get("entry") ?? undefined}
+    />
+  );
+}
+
+function ClientConversation({
+  account,
+  client,
+  selector,
+  newChatEpoch,
+  firstChatBootstrapEnabled,
+  firstChatBootstrapClientId,
+  entryId,
+}: {
+  account: ConversationAccount;
+  client: { id: string; name: string; status?: string | null };
+  selector: Exclude<
+    ReturnType<typeof conversationSelection>,
+    { state: "invalid" }
+  >;
+  newChatEpoch: number;
+  firstChatBootstrapEnabled: boolean;
+  firstChatBootstrapClientId?: string;
+  entryId?: string;
+}) {
   const ineligible = clientIneligibility(
-    selected.client,
+    client,
     firstChatBootstrapEnabled,
     firstChatBootstrapClientId,
   );
@@ -77,12 +125,13 @@ export function MeriConversationHost({
         key={JSON.stringify([
           account.tenantId,
           account.actorId,
-          selected.client.id,
+          client.id,
           newChatEpoch,
         ])}
         account={account}
-        clientId={selected.client.id}
-        scope={selected.client.name}
+        clientId={client.id}
+        scope={client.name}
+        entryId={entryId}
       />
     );
   return (
@@ -90,15 +139,54 @@ export function MeriConversationHost({
       key={JSON.stringify([
         account.tenantId,
         account.actorId,
-        selected.client.id,
+        client.id,
         selector,
       ])}
       account={account}
-      clientId={selected.client.id}
-      scope={selected.client.name}
+      clientId={client.id}
+      scope={client.name}
       conversationId={
         selector.state === "selected" ? selector.conversationId : undefined
       }
+    />
+  );
+}
+
+function GeneralConversation({
+  account,
+  selector,
+  newChatEpoch,
+  firstChatBootstrapEnabled,
+}: {
+  account: ConversationAccount;
+  selector: Exclude<
+    ReturnType<typeof conversationSelection>,
+    { state: "invalid" }
+  >;
+  newChatEpoch: number;
+  firstChatBootstrapEnabled: boolean;
+}) {
+  if (!firstChatBootstrapEnabled)
+    return (
+      <section role="status">
+        <h2>General chat unavailable</h2>
+        <p>General conversations are not enabled in this environment.</p>
+      </section>
+    );
+  return selector.state === "current" ? (
+    <CoreResolvedConversation
+      key={JSON.stringify([account, "general", newChatEpoch])}
+      account={account}
+      clientId={null}
+      scope="General"
+    />
+  ) : (
+    <ConnectedConversation
+      key={JSON.stringify([account, "general", selector])}
+      account={account}
+      clientId={null}
+      scope="General"
+      conversationId={selector.conversationId}
     />
   );
 }
@@ -145,58 +233,23 @@ function CoreResolvedConversation({
   account,
   clientId,
   scope,
+  entryId,
 }: {
   account: ConversationAccount;
-  clientId: string;
+  clientId: string | null;
   scope: string;
+  entryId?: string;
 }) {
-  const api = useCapiro();
-  const [attempt, setAttempt] = useState(0);
-  const [resolution, setResolution] = useState<CoreResolution>({
-    state: "pending",
-  });
-  const { tenantId, actorId } = account;
-  const { restart, refuse } = useResolutionControls(setResolution, setAttempt);
-  const beginNew = useBeginNewChat(
-    { tenantId, actorId, clientId },
-    restart,
-    refuse,
+  const { resolution, restart, beginNew } = useCoreResolution(
+    account,
+    clientId,
+    entryId,
   );
-  useEffect(() => {
-    const controller = new AbortController();
-    void Promise.resolve()
-      .then(() =>
-        resolveFirstChatConversation({
-          scope: { tenantId, actorId, clientId },
-          storage: window.sessionStorage,
-          signal: controller.signal,
-          createOrReuse: (body, signal) =>
-            api.request(firstChatCoreOperationKey, { body }, { signal }),
-        }),
-      )
-      .then(({ conversationId }) => {
-        if (!controller.signal.aborted)
-          setResolution({ state: "ready", conversationId });
-      })
-      .catch((error: unknown) => {
-        if (!controller.signal.aborted)
-          setResolution({
-            state: "error",
-            canBeginNew: canBeginNewChatAfterConflict(
-              error,
-              { tenantId, actorId, clientId },
-              () => window.sessionStorage,
-            ),
-          });
-      });
-    return () => controller.abort();
-  }, [api, tenantId, actorId, clientId, attempt]);
-
   if (resolution.state === "pending")
     return (
       <section role="status">
         <h2>Preparing conversation</h2>
-        <p>Confirming the current client conversation.</p>
+        <p>Confirming the conversation and its current scope.</p>
       </section>
     );
   if (resolution.state === "error")
@@ -225,6 +278,69 @@ function CoreResolvedConversation({
   );
 }
 
+function useCoreResolution(
+  account: ConversationAccount,
+  clientId: string | null,
+  entryId?: string,
+) {
+  const api = useCapiro();
+  const [attempt, setAttempt] = useState(0);
+  const [resolution, setResolution] = useState<CoreResolution>({
+    state: "pending",
+  });
+  const { tenantId, actorId } = account;
+  const chatScope =
+    clientId === null
+      ? { tenantId, actorId, clientId, scopeKind: "general" as const }
+      : { tenantId, actorId, clientId };
+  const { restart, refuse } = useResolutionControls(setResolution, setAttempt);
+  const beginNew = useBeginNewChat(chatScope, restart, refuse);
+  useEffect(() => {
+    const controller = new AbortController();
+    void Promise.resolve()
+      .then(() => {
+        const scope =
+          clientId === null
+            ? { tenantId, actorId, clientId, scopeKind: "general" as const }
+            : { tenantId, actorId, clientId };
+        if (entryId) {
+          if (clientId === null)
+            throw new Error("Client entry cannot select General");
+          readClientEntry({ tenantId, actorId, clientId }, entryId);
+        }
+        return resolveFirstChatConversation({
+          scope,
+          storage: window.sessionStorage,
+          signal: controller.signal,
+          createOrReuse: (body, signal) =>
+            body.schemaVersion === 2
+              ? api.request(firstChatV2OperationKey, { body }, { signal })
+              : api.request(firstChatCoreOperationKey, { body }, { signal }),
+        });
+      })
+      .then(({ conversationId }) => {
+        if (!controller.signal.aborted)
+          setResolution({ state: "ready", conversationId });
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted)
+          setResolution({
+            state: "error",
+            canBeginNew: canBeginNewChatAfterConflict(
+              error,
+              clientId === null
+                ? { tenantId, actorId, clientId, scopeKind: "general" }
+                : { tenantId, actorId, clientId },
+              () => window.sessionStorage,
+            ),
+          });
+      });
+    return () => controller.abort();
+  }, [api, tenantId, actorId, clientId, attempt, entryId]);
+
+  return { resolution, restart, beginNew };
+}
+
 function useResolutionControls(
   setResolution: (value: CoreResolution) => void,
   setAttempt: (update: (value: number) => number) => void,
@@ -248,7 +364,7 @@ function ConnectedConversation({
   conversationId,
 }: {
   account: ConversationAccount;
-  clientId: string;
+  clientId: string | null;
   scope: string;
   conversationId?: string | undefined;
 }) {

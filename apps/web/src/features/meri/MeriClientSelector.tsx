@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useClients } from "../../shared/portfolio/api/clients";
 import { useSelectedClient } from "../../shared/session/SelectedClient";
 import { scopedHref } from "../../shared/session/client-route";
@@ -18,6 +19,8 @@ export function MeriClientSelector({
   destination?: "/meri" | "/meri/conversations";
 }) {
   const selected = useSelectedClient();
+  const params = useSearchParams();
+  const general = params.get("scope") === "general" && !params.has("clientId");
   const clients = useClients({
     enabled: Boolean(scope),
     scope: scope ?? { tenantId: "", userId: "" },
@@ -38,11 +41,22 @@ export function MeriClientSelector({
         <span>
           {selected.state === "authorized-client"
             ? selected.client.name
-            : "Choose client"}
+            : general
+              ? "General"
+              : "Choose scope"}
         </span>
       </summary>
       <div className={styles.menu}>
-        <p className={styles.heading}>Choose a client</p>
+        <p className={styles.heading}>Chat scope</p>
+        {scope && (
+          <Link
+            href={`${destination}?scope=general`}
+            className={styles.option}
+            aria-current={general ? "page" : undefined}
+          >
+            General
+          </Link>
+        )}
         {!scope ? (
           <p role="status">Verify your account to see available clients.</p>
         ) : clients.isFetching || clients.isPending ? (

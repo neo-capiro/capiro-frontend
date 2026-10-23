@@ -11,7 +11,7 @@ type Conversation = ConversationListPage["conversations"][number];
 export function conversationInClient(
   conversation: Conversation,
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
 ) {
   if (
     conversation.owner.tenantId !== account.tenantId ||
@@ -21,6 +21,15 @@ export function conversationInClient(
   const clients = conversation.scopes.filter(
     (scope) => scope.kind === "client",
   );
+  // Only called for a General selection already confirmed by Core. This tests
+  // the retained history scope; private-user alone never classifies a list row.
+  if (clientId === null)
+    return (
+      conversation.scopes.length === 1 &&
+      conversation.scopes[0]?.kind === "private-user" &&
+      conversation.scopes[0]?.resourceId === account.actorId &&
+      conversation.scopes[0]?.tenantId === account.tenantId
+    );
   return (
     clients.length > 0 &&
     clients.every((scope) => scope.resourceId === clientId)
@@ -30,7 +39,7 @@ export function conversationInClient(
 export function discoveryConversations(
   pages: readonly ConversationListPage[],
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
 ) {
   const seen = new Set<string>();
   return pages.flatMap((page) =>
@@ -67,7 +76,7 @@ const requestContent = ({ requestId: _id, ...content }: SavedTurn["request"]) =>
 export function transcriptPages(
   pages: readonly ConversationTranscriptPage[],
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
 ) {
   const turns = new Map<string, SavedTurn>(),
     eventIds = new Set<string>();

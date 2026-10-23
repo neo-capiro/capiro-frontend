@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@capiro/ui/button";
+import { openMeriPalette } from "../meri-entry/MeriCommandPalette";
 import Link from "next/link";
 import { PanelLeft } from "lucide-react";
 import { ScopedLink } from "./ScopedLink";
@@ -53,52 +54,68 @@ export function Header({
           ))}
         </nav>
       }
-      actions={
-        <div className={styles.globalActions}>
-          {(fixture ? actions.filter((action) => action.href) : actions).map(
-            (action) =>
-              action.href ? (
-                <Button
-                  key={action.label}
-                  asChild
-                  variant="ghost"
-                  className={styles.action}
-                >
-                  <ScopedLink href={action.href} aria-label={action.label}>
-                    <DesignIcon
-                      name={action.icon}
-                      assetSet="header-34-20261016"
-                    />
-                  </ScopedLink>
-                </Button>
-              ) : (
-                <Button
-                  key={action.label}
-                  type="button"
-                  variant="ghost"
-                  className={styles.action}
-                  disabled
-                  aria-label={`${action.label} — unavailable`}
-                >
-                  <DesignIcon
-                    name={action.icon}
-                    assetSet="header-34-20261016"
-                  />
-                </Button>
-              ),
-          )}
-          {fixture ? (
-            <FixtureHeaderActions assetSet={assetSet} />
-          ) : (
-            <Button asChild variant="ghost" className={styles.action}>
-              <Link href="/settings/personal" aria-label="Account settings">
-                <DesignIcon name="profile" assetSet={assetSet} />
-              </Link>
-            </Button>
-          )}
-        </div>
-      }
+      actions={<HeaderActions fixture={fixture} assetSet={assetSet} />}
     />
+  );
+}
+
+function HeaderActions({
+  fixture,
+  assetSet,
+}: {
+  fixture: boolean;
+  assetSet: "home" | "cited-answer";
+}) {
+  return (
+    <div className={styles.globalActions}>
+      {(fixture ? actions.filter((action) => action.href) : actions).map(
+        (action) =>
+          !fixture && action.label === "Search" ? (
+            <Button
+              key={action.label}
+              type="button"
+              variant="ghost"
+              className={styles.action}
+              onClick={openMeriPalette}
+              aria-label="Search and commands"
+              aria-keyshortcuts="Control+k Meta+k"
+            >
+              <DesignIcon name={action.icon} assetSet="header-34-20261016" />
+            </Button>
+          ) : action.href ? (
+            <Button
+              key={action.label}
+              asChild
+              variant="ghost"
+              className={styles.action}
+            >
+              <ScopedLink href={action.href} aria-label={action.label}>
+                <DesignIcon name={action.icon} assetSet="header-34-20261016" />
+              </ScopedLink>
+            </Button>
+          ) : (
+            <Button
+              key={action.label}
+              type="button"
+              variant="ghost"
+              className={styles.action}
+              disabled
+              aria-label={`${action.label} — unavailable`}
+            >
+              <DesignIcon name={action.icon} assetSet="header-34-20261016" />
+            </Button>
+          ),
+      )}
+      {fixture ? (
+        <FixtureHeaderActions assetSet={assetSet} />
+      ) : (
+        <Button asChild variant="ghost" className={styles.action}>
+          <Link href="/settings/personal" aria-label="Account settings">
+            <DesignIcon name="profile" assetSet={assetSet} />
+          </Link>
+        </Button>
+      )}
+    </div>
   );
 }
 

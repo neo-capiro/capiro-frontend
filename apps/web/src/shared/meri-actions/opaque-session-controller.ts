@@ -9,10 +9,11 @@ type Snapshot<P> = Readonly<
   | { status: "idle" | "connecting" | "unavailable" | "expired" }
   | { status: "ready"; port: P; lifetimeKey: string }
 >;
-type Options<P> = {
-  hints: ActionSessionHints;
+type SessionLifetime = { expiresAtMs: number; context: unknown };
+type Options<P, R extends SessionLifetime> = {
+  issue: (signal: AbortSignal) => Promise<R>;
   createPort: (lifetime: {
-    session: ActionSessionReceipt;
+    session: R;
     signal: AbortSignal;
     onAccessLost: () => void;
     isCurrent: () => boolean;
@@ -53,7 +54,10 @@ const defaultRetryDelaysMs = Object.freeze([1_000, 3_000]);
 type ExpirationReason = "renewal" | "expiry" | "access-lost";
 
 /** Owns one in-memory connection and observation lifetime; never admits a run. */
-export class OpaqueSessionController<P extends { dispose(): void }> {
+export class SessionLifetimeController<
+  P extends { dispose(): void },
+  R extends SessionLifetime,
+> {
   private snapshot: Snapshot<P> = Object.freeze({ status: "idle" });
   private listeners = new Set<() => void>();
   private active = false;
@@ -64,7 +68,7 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
   private port: P | undefined;
   private expirationReason: ExpirationReason | undefined;
   private now: () => number;
-  constructor(private readonly options: Options<P>) {
+  constructor(private readonly options: Options<P, R>) {
     this.now = options.now ?? Date.now;
   }
   getSnapshot = () => this.snapshot;
@@ -111,12 +115,7 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
     const delays = this.options.retryDelaysMs ?? defaultRetryDelaysMs;
     for (let attempt = 0; ; attempt++) {
       try {
-        return await bootstrapActionSession(
-          this.options.hints,
-          signal,
-          this.options.fetcher,
-          this.now,
-        );
+        return await this.options.issue(signal);
       } catch (error) {
         if (attempt >= delays.length || !transientIssuance(error) || !current())
           throw error;
@@ -198,4 +197,26 @@ export class OpaqueSessionController<P extends { dispose(): void }> {
       this.publish({ status: "unavailable" });
     }
   };
+}
+
+/** Existing client-only action issuance keeps its exact receiver. */
+export class OpaqueSessionController<
+  P extends { dispose(): void },
+> extends SessionLifetimeController<P, ActionSessionReceipt> {
+  constructor(
+    options: Omit<Options<P, ActionSessionReceipt>, "issue"> & {
+      hints: ActionSessionHints;
+    },
+  ) {
+    super({
+      ...options,
+      issue: (signal) =>
+        bootstrapActionSession(
+          options.hints,
+          signal,
+          options.fetcher,
+          options.now,
+        ),
+    });
+  }
 }

@@ -82,3 +82,93 @@ export function firstChatCoreOperationForClient(clientId: string) {
     ),
   };
 }
+
+/** Explicit immutable scope. Legacy null-client records are never General chats. */
+export const conversationBinding = z.discriminatedUnion("scopeKind", [
+  z.strictObject({ scopeKind: z.literal("client"), clientId: canonicalUuid }),
+  z.strictObject({ scopeKind: z.literal("general"), clientId: z.null() }),
+]);
+const bootstrapV2Identity = {
+  schemaVersion: z.literal(2),
+  requestId: canonicalUuid,
+};
+export const firstChatV2Request = z.discriminatedUnion("scopeKind", [
+  z.strictObject({
+    ...bootstrapV2Identity,
+    scopeKind: z.literal("client"),
+    clientId: canonicalUuid,
+  }),
+  z.strictObject({
+    ...bootstrapV2Identity,
+    scopeKind: z.literal("general"),
+    clientId: z.null(),
+  }),
+]);
+const receiptIdentity = {
+  ...bootstrapV2Identity,
+  conversationId: canonicalUuid,
+  tenantId: canonicalUuid,
+  actorId: canonicalUuid,
+};
+export const firstChatV2Receipt = z.discriminatedUnion("scopeKind", [
+  z.strictObject({
+    ...receiptIdentity,
+    scopeKind: z.literal("client"),
+    clientId: canonicalUuid,
+  }),
+  z.strictObject({
+    ...receiptIdentity,
+    scopeKind: z.literal("general"),
+    clientId: z.null(),
+  }),
+]);
+export type FirstChatV2Request = z.infer<typeof firstChatV2Request>;
+export const firstChatV2OperationKey = "meri.conversation.bootstrap.v2";
+export const firstChatV2Operation = defineOperation({
+  ...firstChatCoreOperation,
+  request: z.strictObject({ body: firstChatV2Request }),
+  response: firstChatV2Receipt,
+  source:
+    "Core Wave2 explicit General binding; source only, reviewed gateway activation required",
+});
+
+export const firstChatCapabilityRequest = z.strictObject({
+  schemaVersion: z.literal(1),
+  clientId: canonicalUuid,
+});
+export const firstChatCapabilityReceipt = z.strictObject({
+  schemaVersion: z.literal(1),
+  capability: z.literal("conversation.bootstrap.v2"),
+  tenantId: canonicalUuid,
+  actorId: canonicalUuid,
+  clientId: canonicalUuid,
+  checkedAtMs: z.number().int().safe().nonnegative(),
+  expiresAtMs: z.number().int().safe().positive(),
+});
+export function requireFirstChatCapability(
+  value: unknown,
+  expected: { tenantId: string; actorId: string; clientId: string },
+  now = Date.now(),
+) {
+  const receipt = firstChatCapabilityReceipt.parse(value);
+  if (
+    receipt.tenantId !== expected.tenantId ||
+    receipt.actorId !== expected.actorId ||
+    receipt.clientId !== expected.clientId ||
+    receipt.checkedAtMs > now ||
+    receipt.expiresAtMs <= now ||
+    receipt.expiresAtMs - receipt.checkedAtMs > 30_000
+  )
+    throw new FirstChatCoreReceiptError();
+  return receipt;
+}
+export const firstChatCapabilityOperationKey =
+  "meri.conversation.bootstrapCapability.v1";
+export const firstChatCapabilityOperation = defineOperation({
+  ...firstChatCoreOperation,
+  path: "/clio/conversations/bootstrap-capability",
+  request: z.strictObject({ body: firstChatCapabilityRequest }),
+  response: firstChatCapabilityReceipt,
+  source:
+    "Core Wave2 current-client capability; presentation hint, bootstrap rechecks authority",
+});

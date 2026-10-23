@@ -1,0 +1,79 @@
+.launcher {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  font-size: 14px;
+}
+.launcher summary {
+  padding: 12px 0;
+  cursor: pointer;
+}
+.command {
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 12px;
+}
+.command [cmdk-input-wrapper] {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.command svg {
+  height: 16px;
+  width: 16px;
+}
+.command input {
+  border: 0;
+  width: 100%;
+  padding: 6px;
+}
+.command [cmdk-list] {
+  max-height: 240px;
+  overflow: auto;
+  padding: 8px;
+}
+.command [cmdk-item] {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.command [data-selected="true"] {
+  background: var(--muted);
+}
+.detail {
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+.detail p {
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+.windows {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.windows legend {
+  padding: 0 4px;
+}
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+}
+.field input,
+.field [data-slot="select-trigger"] {
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
