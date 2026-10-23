@@ -1,6 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useCallback, useState, type ReactNode } from "react";
+import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { StatusPanel } from "../../shared/module-ui";
@@ -34,6 +35,7 @@ type ScreenContext = {
   meriPreferences: ReactNode;
   memoryReviewEnabled: boolean;
   readOnlyPreview: boolean;
+  reportTeamFailure: (error?: string) => void;
 };
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
@@ -43,6 +45,7 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
     <TeamSettings
       identity={context.identity}
       refreshIdentity={context.refresh}
+      reportFailure={context.reportTeamFailure}
     />
   ),
   integrations: () => <IntegrationSettings />,
@@ -99,6 +102,15 @@ export function SettingsScreen({
   memoryReviewEnabled?: boolean;
   readOnlyPreview?: boolean;
 }) {
+  const api = useCapiro();
+  const [teamFailure, setTeamFailure] = useState<{
+    scope: typeof api;
+    message?: string;
+  }>();
+  const reportTeamFailure = useCallback(
+    (message?: string) => setTeamFailure({ scope: api, message }),
+    [api],
+  );
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
   const render = screens[section];
@@ -124,6 +136,13 @@ export function SettingsScreen({
                 </p>
               )}
             </header>
+            {section === "team" &&
+              teamFailure?.scope === api &&
+              teamFailure.message && (
+                <SettingsNotice title="Team update failed" error>
+                  {teamFailure.message}
+                </SettingsNotice>
+              )}
             {readOnlyPreview && !["personal", "profiles"].includes(section) ? (
               <SettingsNotice title="Unavailable in read-only preview">
                 This Settings section is not admitted by the server preview
@@ -152,6 +171,7 @@ export function SettingsScreen({
                   meriPreferences,
                   memoryReviewEnabled,
                   readOnlyPreview,
+                  reportTeamFailure,
                 })}
               </>
             ) : (

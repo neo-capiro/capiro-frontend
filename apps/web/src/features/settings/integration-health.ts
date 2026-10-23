@@ -43,7 +43,7 @@ export function parseOAuthOutcome(query: URLSearchParams): OAuthOutcome | null {
   if (query.has("admin_consent"))
     return {
       provider,
-      kind: query.get("admin_consent") === "true" ? "admin-consent" : "denied",
+      kind: query.get("admin_consent") === "1" ? "admin-consent" : "denied",
     };
   const connectionId = query.get("connectionId");
   return query.get("connected") === "1" &&

@@ -29,9 +29,11 @@ const joinedDate = new Intl.DateTimeFormat("en-US", {
 export function TeamSettings({
   identity,
   refreshIdentity,
+  reportFailure,
 }: {
   identity: CapiroMe;
   refreshIdentity: () => void;
+  reportFailure: (error?: string) => void;
 }) {
   const { api, action, pending, reconcile, locked } =
     useSettingsMutation("team");
@@ -47,8 +49,11 @@ export function TeamSettings({
   };
   const rows = members.data ?? [];
   useEffect(() => {
-    if (action.error) refreshIdentity();
-  }, [action.error, refreshIdentity]);
+    if (action.error) {
+      reportFailure(action.error);
+      refreshIdentity();
+    } else if (action.busy) reportFailure(undefined);
+  }, [action.error, action.busy, refreshIdentity, reportFailure]);
   const pendingInvitations = invitations.data ?? [];
   return (
     <div
@@ -83,11 +88,6 @@ export function TeamSettings({
         busy={action.busy}
         reconcile={reconcile}
       />
-      {action.error && (
-        <SettingsNotice title="Team update failed" error>
-          {action.error}
-        </SettingsNotice>
-      )}
       {action.message && <SettingsNotice title={action.message} />}
       {tab === "members" ? (
         <StatusPanel

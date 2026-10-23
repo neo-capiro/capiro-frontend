@@ -24,13 +24,19 @@ This is a partial, reviewable source checkpoint. **A2 is not complete.** The ful
 - Six temporary production mutations rejected: inactive target made active; spoofed callback forced success; failed-record branch removed; remaining-page branch removed; preview archived query forced true; false submitted callout restored. Each produced test exit 1; originals restored and 26/26 rerun passed.
 - Targeted ESLint: zero errors, three existing `<img>` warnings in Branding/Profile/ModuleHeader.
 - Prettier on all changed TS/TSX and new tests; `git diff --check` passed.
-- Architecture: zero errors, 554 size/responsibility review signals. The attempted preview-policy import was removed after the guard correctly rejected it. No guard exception or weakening. Changed large legacy Settings views still require the usual exact-head design review.
+- Architecture at `34805cc4`: **exit 1**, zero boundary/review errors but **14 blocking changed size-review obligations**, 554 total signals. This was not a passing gate or an inherited baseline failure. The attempted preview-policy import was removed after the guard correctly rejected it. No guard exception or weakening. Changed functions require exact-head responsibility review.
 
 ## Remaining work before lane completion
 
 ST20 recipient inbox/explicit ack is allocated but **not implemented**. PF07 Objective association review/recovery is **not implemented**. PF09 existing canonical client binding still needs focused verification. PF14 note-only disposition needs final visible-copy check. ST24 remains partial: durable uncertainty/recovery and all original remaining form cases must be completed, including signature asynchronous file-read races and exact-resource readback before retry. ML11 callback browser lifecycle, wrong-scope/401/403/source mismatch, blocked-vs-upstream-error, and live Clerk actions need qualification. All other open rows and Core minimal proposals are in `PREREQUISITES.md`.
 
 No browser visual/accessibility qualification, full frontend Docker/production gate, independent exact-head review, PostgreSQL tests, provider tests, deployment, migration, AWS action, secret read, or live acceptance ran. These are not implied by unit/SSR checks.
+
+## Independent review repairs — 2026-10-23
+
+The independent review of `34805cc4` found three P2 regressions. Personal title receipts now compare Core's canonical `trim() || null` value. Microsoft admin consent uses Core's `admin_consent=1` success contract. SettingsScreen retains the Team rejection message, bound to the current API lifetime, while identity reload unmounts Team; fresh authority still controls whether Team remounts.
+
+The reviewer-derived synthetic browser fixture ran eight cases: empty, whitespace-only, padded and ordinary title; definitive Team rejection; unknown write; revoked actor; and confirmed billing update. Each issued one mutation with no page errors. Title saves refresh identity, definitive rejection remains visible, revoked access hides Team, and unknown writes remain fenced. Evidence is retained in root `work/a2-repairs-20261023`. The 26 targeted tests and native typecheck pass after repairs. This is bounded local browser lifecycle evidence, not full-app visual/accessibility, Clerk or provider qualification. The full A2 inventory remains open.
 
 ## Ownership for resume
 

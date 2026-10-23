@@ -53,7 +53,7 @@ export function PersonalSettings({
                 );
                 if (
                   result.user.id !== identity.user.id ||
-                  result.user.title !== title
+                  result.user.title !== (title.trim() || null)
                 )
                   throw new Error(
                     "The response did not confirm this profile. Reload before making another change.",

@@ -168,11 +168,16 @@ describe("A2 provider callback and bounded sync presentation (synthetic)", () =>
       )?.kind,
     ).toBe("cancelled");
     const admin = parseOAuthOutcome(
-      new URLSearchParams("provider=microsoft_365&admin_consent=true"),
+      new URLSearchParams("provider=microsoft_365&admin_consent=1"),
     )!;
     expect(oauthOutcomeMessage(admin, [connection])).toContain(
       "not a mailbox connection",
     );
+    expect(
+      parseOAuthOutcome(
+        new URLSearchParams("provider=microsoft_365&admin_consent=0"),
+      )?.kind,
+    ).toBe("denied");
   });
   it("never interprets calendar-only, failures, or remaining pages as complete mail history", () => {
     expect(
