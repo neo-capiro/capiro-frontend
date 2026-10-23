@@ -1,6 +1,6 @@
 # Workspace and Planner entry checkpoint
 
-This is a bounded MF19 source increment on the reviewed main integration `5acef36d4a5bf90b7b8e72cbbf9a851a7dafe49b`, not full M2 or SDK acceptance. Core data owners still authorize reads. No provider request, new endpoint, capability DTO, table, dependency or deployment flag is introduced.
+This is a bounded MF19 source increment, not full M2 or SDK acceptance. The module-mount increment follows client-wire checkpoint `b6e12a96ceb27c9f6db679bf905fe80000505130`, which includes reviewed main `75458af705e352c54bf23ed3b5c61de7e781d714`. Core data owners still authorize reads. No provider request, new endpoint, capability DTO, table, dependency or deployment flag is introduced.
 
 ## Public source mount
 
@@ -16,7 +16,7 @@ useEntityEntry(
 ): { ready: boolean; reason: string; open(): void }
 ```
 
-The target IDs are UUIDs validated at the existing local descriptor boundary. `active` is a source control's presentation input, never a grant. A owns the small Portfolio source mounts; no A-owned feature, gateway, registry, shared library or manifest is edited here. Workspace and Planner module mounts still need root allocation. Mail connection identity is not inferred from an address.
+The target IDs are UUIDs validated at the existing local descriptor boundary. `active` is a source control's presentation input, never a grant. A owns the small Portfolio source mounts; no A-owned feature, gateway, registry, shared library or manifest is edited here. The allocated Planner task detail, Workspace draft and saved newsletter now mount this helper. Mail connection identity is not inferred from an address.
 
 Opening creates or reuses the existing unsent bootstrap request, then navigates with only the client ID and opaque local entry ID in the URL. The local record stores the exact object ID, no title/body/prompt/credential. Repeated clicks reuse the same entry. Replacing a reference retires its old Back link while preserving an unresolved Core request. Confirmed client/General changes retire the reference; transient client loading does not. Account/session retirement uses the existing tab owner. Rejection removes only the matching entry and cannot erase a newer reference.
 
@@ -36,7 +36,7 @@ The first 13-case browser run failed because the fixture omitted the existing Me
 
 Full Linux/build/service-backed acceptance and independent exact-head review remain root gates. Remaining M2 requirements are tracked in `STATUS.md` and `SDK-MIGRATION.md`; this checkpoint does not narrow them.
 
-Final local source checks on Windows Node24.22.1/npm11.19.1:
+Earlier receiver-only local checks on Windows Node24.22.1/npm11.19.1:
 
 - Web TypeScript, touched-source ESLint and Prettier pass; `git diff --check` passes.
 - `npm run test --workspace @capiro/web -- tests/meri-entry.test.ts tests/meri-m2-owned-contracts.test.ts tests/meri-skill-draft.test.ts`: 85/85 pass.
@@ -45,3 +45,20 @@ Final local source checks on Windows Node24.22.1/npm11.19.1:
 - Removing `draft.clientId !== scope.clientId` causes the wrong-client browser case to fail at its required unavailable-state assertion. Exact source bytes are restored; the final20-case run passes afterward.
 
 Raw synthetic results, mutation log and the inspected PNG are retained outside the repository in the root task's `work/wave2-current/u/mf19-20261023-1710` evidence directory. Native toolchain11.9.0/Linux qualification remains separate; no build or live acceptance is claimed from this local npm version.
+
+## Module source controls
+
+Planner uses the saved task ID and canonical client association. Its existing editor exposes whether its fields or project/section membership differ from the saved task. Unsaved task/comment edits, child editing dialogs, pending mutations, archived/unassigned tasks and mutation errors disable Ask Meri. The existing attachment owner reports its own pending/error state through one optional callback; upload, archive, download and their `finally` paths keep that state in the same owner. Layout-effect cleanup clears the parent observation on unmount, and an old account's late response cannot update a replacement component. No second request counter or upload implementation was added.
+
+Workspace draft uses the saved draft ID/client and refuses prospects, held/missing client associations, unsaved content/title changes, pending saves and errors. Newsletter uses its saved draft identity, never its editable client selector; unsaved or pending changes remain held. A cached newsletter cannot bypass its parent detail query's loading/error state. These controls only open an unsent context; the receiver still re-reads the exact entity, and SDK submission remains unavailable.
+
+Fresh module Figma context came from file `Zc2dEN5aLU47dVdsewDmiJ`, Planner footer `411:100778` within task detail `411:100627`, and newsletter builder `976:190222` including action row `976:190919` and button `976:190923`. The mounts reuse existing text buttons/action rows with no new asset, CSS, motion or library. Desktop and 390px phone task screenshots plus Workspace/newsletter screenshots were inspected for visible controls, wrapping and clipping.
+
+Module checkpoint checks:
+
+- Final combined browser run: **34/34 pass**, no skips, 1.9 minutes. It includes all14 earlier receiver cases,14 source/attachment/network controls and six existing M2 palette/client/skill/mock-model/management cases. Requests use the actual public operation methods, including PATCH for task/draft updates; only explicitly held synthetic writes are allowed. An unregistered read is deliberately requested and proven to fail.
+- New controls cover keyboard navigation on desktop/phone, saved IDs and a fresh receiver title, dirty/restored drafts, pending/unknown save, archived/missing/held sources, newsletter edits and denied receiving read, attachment success/unknown/archive, and late account retirement. No automatic bootstrap or submit is admitted.
+- Removing the task dirty guard makes the required disabled-state assertion fail. Exact source bytes were restored before the final passing suite. The first source run's two failures were fixture POST assumptions for existing PATCH writes; that failure is retained as fixture evidence, not a product fix.
+- Touched-source ESLint/Prettier and web TypeScript pass; no dependency/lockfile changes. Architecture reports zero dependency errors and **seven pending size reviews**: TaskAttachments, TaskDetail module/session, useTaskEditor, DraftEditor and NewsletterWorkflow module/function. These are existing owners; no size waiver or cosmetic extraction was added. Independent cohesion review and exact-head Linux/build acceptance remain pending.
+
+Evidence is outside the repository under `work/wave2-current/u/mf19-module-20261023`: final browser log, dirty-guard mutation log, architecture fingerprints and inspected synthetic PNGs. This does not qualify live authorization, SDK context delivery, or full MF19 completion roundtrip.

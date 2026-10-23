@@ -30,6 +30,7 @@ import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
+import { useEntityEntry } from "../../../shared/meri-entry/public";
 
 function DraftEditor({
   draft,
@@ -61,6 +62,21 @@ function DraftEditor({
   );
   const pending = Boolean(
     prospectSave?.pending || update.pending || snapshot.pending,
+  );
+  const savedInput = manualDraftInput(currentDraft);
+  const edited =
+    title !== savedInput.title ||
+    JSON.stringify(sections) !== JSON.stringify(savedInput.sections);
+  const meri = useEntityEntry(
+    currentDraft.clientId ?? "",
+    { source: "workspace-draft", draftId: currentDraft.id },
+    Boolean(currentDraft.clientId) &&
+      !currentDraft.prospectId &&
+      currentDraft.clientAssociation !== "held" &&
+      !pending &&
+      !edited &&
+      !update.error &&
+      !snapshot.error,
   );
   async function save() {
     if (pending || invalidSection) return;
@@ -94,6 +110,17 @@ function DraftEditor({
           </p>
         </div>
         <div className={styles.actions}>
+          <ActionButton
+            disabled={!meri.ready}
+            onClick={meri.open}
+            title={
+              edited
+                ? "Save your document edits before opening Meri."
+                : meri.reason
+            }
+          >
+            Ask Meri
+          </ActionButton>
           <ActionButton onClick={() => setHistory(true)}>History</ActionButton>
           {draft.prospectId && (
             <DocumentPreview title={title} names={names} sections={sections} />
@@ -331,6 +358,8 @@ export function WorkspaceDraft({
     }
   }
   if (
+    !query.loading &&
+    !query.error &&
     !prospectId &&
     !query.data?.prospectId &&
     query.data?.product === "Newsletter"

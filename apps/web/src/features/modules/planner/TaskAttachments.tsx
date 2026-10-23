@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -12,9 +12,11 @@ import styles from "./planner.module.css";
 export function TaskAttachments({
   taskId,
   writable,
+  onStateChange,
 }: {
   taskId: string;
   writable: boolean;
+  onStateChange?: (state: { pending: boolean; error?: string }) => void;
 }) {
   const api = useCapiro();
   const query = useCapiroQuery("planner.task.attachments", {
@@ -23,6 +25,10 @@ export function TaskAttachments({
   const fileInput = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
+  useLayoutEffect(() => {
+    onStateChange?.({ pending: busy, error });
+    return () => onStateChange?.({ pending: false });
+  }, [busy, error, onStateChange]);
   const upload = async (file: File) => {
     setBusy(true);
     setError(undefined);

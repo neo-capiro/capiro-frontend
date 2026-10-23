@@ -115,6 +115,21 @@ export function useTaskEditor(props: TaskEditorInput) {
   };
   return {
     data,
+    hasChanges:
+      JSON.stringify([
+        data,
+        projectIds.map((projectId) => [
+          projectId,
+          sectionIds[projectId] ?? null,
+        ]),
+      ]) !==
+      JSON.stringify([
+        taskDraft(props),
+        editorMemberships(props).map((item) => [
+          item.projectId,
+          item.sectionId,
+        ]),
+      ]),
     setData,
     projectIds,
     setProjects,

@@ -22,6 +22,7 @@ import { SelectTemplate } from "./NewsletterTemplates";
 import { useNewsletter } from "./use-newsletter";
 import { NewsletterStaging } from "./NewsletterStaging";
 import { DraftClientAssociation } from "../DraftClientAssociation";
+import { useEntityEntry } from "../../../../shared/meri-entry/public";
 
 function BuilderTools({
   body,
@@ -112,6 +113,17 @@ export function NewsletterWorkflow({
     documentId,
     acceptClientAssociation,
   } = useNewsletter({ onClose, existing, initialClientId });
+  const meri = useEntityEntry(
+    draft?.clientId ?? "",
+    { source: "workspace-draft", draftId: draft?.id ?? "" },
+    Boolean(draft?.clientId) &&
+      !draft?.prospectId &&
+      draft?.clientAssociation !== "held" &&
+      saved &&
+      !pending &&
+      !error &&
+      clientId === draft?.clientId,
+  );
   return (
     <fieldset
       disabled={pending}
@@ -200,6 +212,17 @@ export function NewsletterWorkflow({
       ) : (
         <>
           <div className={styles.actions}>
+            <ActionButton
+              disabled={!meri.ready}
+              onClick={meri.open}
+              title={
+                !saved
+                  ? "Save your newsletter edits before opening Meri."
+                  : meri.reason
+              }
+            >
+              Ask Meri
+            </ActionButton>
             <Badge tone={saved ? "success" : "warning"}>
               {pending
                 ? "Saving…"

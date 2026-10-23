@@ -32,6 +32,7 @@ import { AddTimeDialog } from "./TimeDialogs";
 import { duplicateTaskSeed } from "./task-editor-data";
 import { MarkdownTextarea } from "../../../shared/markdown/MarkdownTextarea";
 import { TaskEventText } from "./TaskEventText";
+import { useEntityEntry } from "../../../shared/meri-entry/public";
 type Props = {
   task: PlannerTask;
   people: PlannerPerson[];
@@ -147,6 +148,10 @@ export function TaskDetail(props: Props) {
 }
 function TaskDetailSession(props: Props) {
   const m = useDetail(props);
+  const [attachments, setAttachments] = useState<{
+    pending: boolean;
+    error?: string;
+  }>({ pending: false });
   const desktop = useDesktopTaskLayout();
   const editor = useTaskEditor({
     task: props.task,
@@ -167,6 +172,31 @@ function TaskDetailSession(props: Props) {
   });
   const inline =
     desktop && m.writable && !m.edit && !m.subtask && !m.time && !m.duplicate;
+  const edited = editor.hasChanges || Boolean(m.comment.trim());
+  const meri = useEntityEntry(
+    props.task.clientId ?? "",
+    { source: "planner-task", taskId: props.task.id },
+    Boolean(props.task.clientId) &&
+      !props.task.archived &&
+      !m.busy &&
+      !edited &&
+      !m.edit &&
+      !m.subtask &&
+      !m.time &&
+      !m.error &&
+      !attachments.pending &&
+      !attachments.error &&
+      !editor.error,
+  );
+  const meriAction = (
+    <ActionButton
+      disabled={!meri.ready}
+      onClick={meri.open}
+      title={edited ? "Save your task edits before opening Meri." : meri.reason}
+    >
+      Ask Meri
+    </ActionButton>
+  );
   return (
     <>
       <Modal
@@ -190,6 +220,7 @@ function TaskDetailSession(props: Props) {
                 }
               }}
             />
+            {meriAction}
             <ActionButton
               className={detailStyles.closeAction}
               disabled={m.busy}
@@ -215,6 +246,7 @@ function TaskDetailSession(props: Props) {
         <div className={styles.drawerContent}>
           <div className={detailStyles.legacySummary}>
             <TaskSummary props={props} model={m} />
+            {meriAction}
           </div>
           {inline ? (
             <TaskEditorForm
@@ -244,6 +276,7 @@ function TaskDetailSession(props: Props) {
           <TaskAttachments
             taskId={props.task.id}
             writable={props.task.access !== "viewer" && !props.task.archived}
+            onStateChange={setAttachments}
           />
           <ActionButton
             disabled={!m.writable || m.busy}
