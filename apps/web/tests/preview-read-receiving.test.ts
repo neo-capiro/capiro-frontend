@@ -4,6 +4,7 @@ import * as core from "../src/app/api/backend/[service]/[...path]/route";
 import * as capiro from "../src/app/api/capiro/[operation]/route";
 import proxy from "../src/proxy";
 import { capiroOperations } from "../src/shared/capiro/registry";
+import { operationalReadInput } from "../src/shared/capiro/operations/objective-operational";
 import { isQualifiedCorePreviewReadEnabled } from "../src/shared/preview/read-config.server";
 
 const clerk = vi.hoisted(() => ({ auth: vi.fn(), middleware: vi.fn() }));
@@ -67,8 +68,8 @@ function receive(path: string, init?: RequestInit) {
       })
     : core.GET(req, {
         params: Promise.resolve({
-          service: "core",
-          path: pathname.slice(18).split("/"),
+          service: pathname.split("/")[3] ?? "",
+          path: pathname.split("/").slice(4),
         }),
       });
 }
@@ -107,7 +108,7 @@ it.each([
   ["backend/core/me", "/me"],
   ["backend/core/clients", "/clients"],
   [`backend/core/clients/${id}`, `/clients/${id}`],
-])("receives only the dedicated contract for %s", async (path, suffix) => {
+])("receives the Core read %s", async (path, suffix) => {
   const payload =
     suffix === "/me" ? me : suffix === "/clients" ? [client] : client;
   fetcher.mockResolvedValue(Response.json(payload));
@@ -196,18 +197,82 @@ it("uses the existing me schema and keeps native Clerk middleware", async () => 
 });
 
 it.each([
-  "backend/core/clients?profileStatus=draft&sectorTag=health&includeArchived=true",
+  `backend/core/clients/${id}/activity?limit=500`,
+  `backend/core/clients/${id}/facilities`,
+  `backend/core/clients/${id}/objectives?status=active&page=2`,
+  "backend/core/engagement/clients/timeline?clientId=a&clientId=b",
+  "backend/core/me/memberships",
+  "backend/core/clients/v1.2_x~y-z",
+])("passes every Core GET path and query through: %s", async (path) => {
+  fetcher.mockResolvedValue(Response.json({ any: "payload" }));
+  const response = await receive(path);
+  expect(response.status).toBe(200);
+  expect(await response.json()).toEqual({ any: "payload" });
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(
+    target + path.slice("backend/core".length),
+  );
+  expect(fetcher.mock.lastCall?.[1]?.method).toBe("GET");
+});
+
+it.each([
+  [
+    "backend/strategy/strategies?clientId=a",
+    "/strategy-api/strategies?clientId=a",
+  ],
+  ["backend/workspace/documents/recent", "/workspace-api/documents/recent"],
+  [
+    "backend/intelligence/tracker/bills?page=2",
+    "/intel-api/tracker/bills?page=2",
+  ],
+  ["capiro/planner.tasks", "/strategy-api/planner/tasks"],
+  ["capiro/workspace.documents", "/workspace-api/hillday/documents"],
+])("dispatches %s to its preview service prefix", async (path, suffix) => {
+  fetcher.mockResolvedValue(Response.json({ unexpected: true }));
+  await receive(path);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(
+    new URL(target).origin + suffix,
+  );
+  expect(fetcher.mock.lastCall?.[1]?.method).toBe("GET");
+});
+
+it("dispatches a registered Core GET through its own request and response schemas", async () => {
+  const objectiveId = "20000000-0000-4000-8000-000000000002";
+  const input = operationalReadInput({
+    schemaVersion: 1,
+    clientId: id,
+    objectiveId,
+    limit: 20,
+    cursors: {
+      strategies: null,
+      projects: null,
+      decisions: null,
+      engagements: null,
+    },
+  });
+  fetcher.mockResolvedValue(Response.json({ unexpected: true }));
+  const response = await receive(
+    `capiro/objectives.operational.read?input=${encodeURIComponent(JSON.stringify(input))}`,
+  );
+  const url = new URL(String(fetcher.mock.lastCall?.[0]));
+  expect(url.origin + url.pathname).toBe(
+    `${target}/clients/${id}/objectives/operational`,
+  );
+  expect(Object.fromEntries(url.searchParams)).toEqual({
+    schemaVersion: "1",
+    objectiveId,
+    limit: "20",
+  });
+  expect(response.status).toBe(502);
+});
+
+it.each([
   `capiro/clients.list?input=${encodeURIComponent(JSON.stringify({ query: { profileStatus: "draft", sectorTag: "health", includeArchived: true } }))}`,
 ])("normalizes only existing list filters from %s", async (path) => {
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   expect((await receive(path)).status).toBe(200);
   const url = new URL(String(fetcher.mock.lastCall?.[0]));
-  expect(url.origin).toBe(
-    path.startsWith("capiro/")
-      ? new URL(qualifiedTarget).origin
-      : new URL(target).origin,
-  );
+  expect(url.origin).toBe(new URL(qualifiedTarget).origin);
   expect(Object.fromEntries(url.searchParams)).toEqual({
     profileStatus: "draft",
     sectorTag: "health",
@@ -324,24 +389,28 @@ it.each(["HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE", "PROPFIND"])(
 );
 
 it.each([
-  "backend/intelligence/clients",
-  "backend/core/me/memberships",
+  "backend/onboard/setup/state",
+  "backend/meri/conversations",
+  "backend/unknown/clients",
+  "backend/Core/clients",
+  "backend/core",
+  "backend/core/",
   "backend/core/clients/",
+  "backend/core/clients//activity",
   "backend/core/%63lients",
-  `backend/core/clients/${id.toUpperCase().replace("1000", "A000")}`,
-  "backend/core/clients/not-a-uuid",
-  "backend/core/healthz",
-  "backend/core/clients?tenantId=forged",
-  "backend/core/clients?__proto__=forged",
-  "backend/core/clients?constructor=forged",
-  "backend/core/clients?_method=GET",
-  "backend/core/clients?includeArchived=1",
-  "backend/core/clients?sectorTag=a&sectorTag=b",
-  "backend/core/me?sectorTag=a",
-  `backend/core/clients/${id}?sectorTag=a`,
+  "backend/core/clients%2Factivity",
+  "backend/core/clients%2factivity",
+  "backend/core/clients/%2e%2e%2fme",
+  "backend/core/clients/a%5Cb",
+  "backend/core/clients/a:b",
+  `backend/core/clients?q=${"x".repeat(16_000)}`,
   "capiro/me.update",
-  "capiro/me.memberships",
   "capiro/public-onboard.pricing",
+  "capiro/unknown.operation",
+  "capiro/__proto__",
+  "capiro/objectives.operational.read",
+  `capiro/objectives.operational.read?input=${encodeURIComponent(JSON.stringify({ params: { clientId: "../me" } }))}`,
+  `capiro/me.read?input=${encodeURIComponent("{}")}&other=1`,
   "capiro/clients.list?input=%7B%22query%22:%7B%22tenantId%22:%22forged%22%7D%7D",
   "capiro/clients.list?input=%7B%22query%22:%7B%22includeArchived%22:%22true%22%7D%7D",
   "capiro/clients.list?input={}&input={}",
@@ -384,15 +453,23 @@ it("rejects expired identity before dispatch", async () => {
   expect((await receive("backend/core/clients")).status).toBe(401);
   expect(fetcher).not.toHaveBeenCalled();
 });
-it("keeps every other registered operation held with candidate bindings present", async () => {
+it("keeps every non-GET or Onboard registered operation held", async () => {
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(true);
-  for (const [operation, descriptor] of Object.entries(capiroOperations)) {
-    if (["me.read", "clients.list"].includes(operation)) continue;
+  const held = Object.entries(capiroOperations).filter(
+    ([, descriptor]) =>
+      descriptor.method !== "GET" || descriptor.service === "onboard",
+  );
+  expect(held.some(([, descriptor]) => descriptor.method === "GET")).toBe(true);
+  for (const [operation, descriptor] of held) {
     await denied(
-      await receive(`capiro/${operation}`, { method: descriptor.method }),
+      await receive(`capiro/${operation}`, {
+        method: descriptor.method,
+        ...(descriptor.method === "GET" ? {} : { body: "{}" }),
+      }),
     );
+    await denied(await receive(`capiro/${operation}`));
   }
 });
 it.each([401, 403, 404, 429, 500, 302])(

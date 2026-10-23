@@ -33,6 +33,9 @@ function approvedPricingImport(file, module, entry) {
 }
 
 export const publicExports = new Set([
+  '@capiro/ui/cascader',
+  '@capiro/ui/motion',
+  '@capiro/ui/sonner',
   '@capiro/meri-client/user-preferences',
   '@capiro/ui/button', '@capiro/ui/markdown', '@capiro/ui/dialog', '@capiro/ui/tooltip', '@capiro/ui/prompt-input',
   '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
