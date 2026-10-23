@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
@@ -15,6 +16,7 @@ import { IntentApprovalsEnabled } from "./conversation/intents/approvals-enabled
 import { MeriClientSelector } from "./MeriClientSelector";
 import { MockModelPicker } from "./model-picker/MockModelPicker";
 import { SkillLauncher } from "./skills/SkillLauncher";
+import { retireEntryForScope } from "../../shared/meri-entry/descriptor";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
@@ -136,6 +138,17 @@ function useMeriHomeScope() {
       : undefined;
   const clientId =
     selected.state === "authorized-client" ? selected.client.id : undefined;
+  useEffect(() => {
+    if (!current?.tenant?.id || selected.state === "loading") return;
+    try {
+      retireEntryForScope(
+        { tenantId: current.tenant.id, actorId: current.user.id },
+        clientId ?? null,
+      );
+    } catch {
+      // The entry receiver refuses unreadable storage; never recover another scope.
+    }
+  }, [current?.tenant?.id, current?.user.id, selected.state, clientId]);
   const clientScope = current?.tenant?.id
     ? { tenantId: current.tenant.id, userId: current.user.id }
     : undefined;

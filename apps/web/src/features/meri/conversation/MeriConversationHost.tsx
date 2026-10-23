@@ -19,8 +19,19 @@ import { conversationSelection } from "../../../shared/meri-conversations/select
 import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { useConversationSession } from "./useConversationSession";
 import { ConversationView } from "./ConversationView";
+import { MeriEntryContext } from "./MeriEntryContext";
 
-export function MeriConversationHost({
+export function MeriConversationHost(
+  props: Parameters<typeof ConversationConnection>[0],
+) {
+  return (
+    <MeriEntryContext account={props.account}>
+      <ConversationConnection {...props} />
+    </MeriEntryContext>
+  );
+}
+
+function ConversationConnection({
   enabled,
   account,
   firstChatBootstrapEnabled = false,
@@ -127,6 +138,7 @@ function ClientConversation({
           account.actorId,
           client.id,
           newChatEpoch,
+          entryId,
         ])}
         account={account}
         clientId={client.id}
@@ -306,7 +318,17 @@ function useCoreResolution(
         if (entryId) {
           if (clientId === null)
             throw new Error("Client entry cannot select General");
-          readClientEntry({ tenantId, actorId, clientId }, entryId);
+          const entry = readClientEntry(
+            { tenantId, actorId, clientId },
+            entryId,
+          );
+          if (
+            entry.source !== "client-profile" &&
+            entry.source !== "command-palette"
+          )
+            throw new Error(
+              "Entity context is not connected to conversation input",
+            );
         }
         return resolveFirstChatConversation({
           scope,
