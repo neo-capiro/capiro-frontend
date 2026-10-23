@@ -1,4 +1,5 @@
 import type {
+  CapiroService,
   OperationDefinition,
   OperationRegistry,
 } from "../capiro/contracts";
@@ -9,7 +10,17 @@ import {
 } from "../capiro/gateway-input";
 import { capiroOperations } from "../capiro/registry";
 
-const corePath = /^\/api\/backend\/core((?:\/[A-Za-z0-9._~-]+)+)$/;
+/** Preview backends share the preview API host under their production path prefixes. */
+export const previewServicePrefixes = {
+  core: "/api",
+  strategy: "/strategy-api",
+  workspace: "/workspace-api",
+  intelligence: "/intel-api",
+} as const satisfies Partial<Record<CapiroService, string>>;
+type PreviewService = keyof typeof previewServicePrefixes;
+const isPreviewService = (service: string): service is PreviewService =>
+  Object.hasOwn(previewServicePrefixes, service);
+const backendPath = /^\/api\/backend\/([a-z]+)((?:\/[A-Za-z0-9._~-]+)+)$/;
 const forbiddenHeaders = [
   "x-http-method-override",
   "x-method-override",
@@ -22,20 +33,15 @@ const forbiddenHeaders = [
 ];
 export type PreviewReadRoute = {
   browserPath: string;
-  /** Backend path relative to the preview API target, with its query string. */
+  service: PreviewService;
+  /** Backend path relative to the service prefix, with its query string. */
   path: string;
   operation?: OperationDefinition;
 };
 
 const registry: OperationRegistry = capiroOperations;
-function coreRead(key: string): OperationDefinition | null {
-  const operation = Object.hasOwn(registry, key) ? registry[key]! : null;
-  return operation?.method === "GET" && operation.service === "core"
-    ? operation
-    : null;
-}
 
-/** Every Core GET: raw Portfolio paths pass through; registered operations keep their own schemas. */
+/** Every preview-service GET: raw Portfolio paths pass through; registered operations keep their own schemas. */
 export function previewReadRoute(request: Request): PreviewReadRoute | null {
   if (
     request.method !== "GET" ||
@@ -46,21 +52,29 @@ export function previewReadRoute(request: Request): PreviewReadRoute | null {
   try {
     const url = new URL(request.url);
     if (url.search.length > 16_000) return null;
-    const core = corePath.exec(url.pathname);
+    const backend = backendPath.exec(url.pathname);
     // URL parsing already resolved dot segments; the pattern refuses any escape.
-    if (core) return { browserPath: url.pathname, path: core[1] + url.search };
+    if (backend) {
+      const [, service = "", path = ""] = backend;
+      return isPreviewService(service)
+        ? { browserPath: url.pathname, service, path: path + url.search }
+        : null;
+    }
     if (!url.pathname.startsWith("/api/capiro/")) return null;
-    const operation = coreRead(url.pathname.slice("/api/capiro/".length));
-    if (!operation) return null;
+    const key = url.pathname.slice("/api/capiro/".length);
+    const operation = Object.hasOwn(registry, key) ? registry[key] : undefined;
+    if (operation?.method !== "GET" || !isPreviewService(operation.service))
+      return null;
     const parsed = operation.request.safeParse(getRequestInput(request));
     if (!parsed.success) return null;
-    const backend = new URL(
+    const target = new URL(
       `https://backend.invalid${operationPath(operation, parsed.data)}`,
     );
-    appendQuery(backend, operation, parsed.data);
+    appendQuery(target, operation, parsed.data);
     return {
       browserPath: url.pathname,
-      path: backend.pathname + backend.search,
+      service: operation.service,
+      path: target.pathname + target.search,
       operation,
     };
   } catch {

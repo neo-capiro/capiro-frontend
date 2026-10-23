@@ -68,8 +68,8 @@ function receive(path: string, init?: RequestInit) {
       })
     : core.GET(req, {
         params: Promise.resolve({
-          service: "core",
-          path: pathname.slice(18).split("/"),
+          service: pathname.split("/")[3] ?? "",
+          path: pathname.split("/").slice(4),
         }),
       });
 }
@@ -210,6 +210,27 @@ it.each([
   expect(await response.json()).toEqual({ any: "payload" });
   expect(String(fetcher.mock.lastCall?.[0])).toBe(
     target + path.slice("backend/core".length),
+  );
+  expect(fetcher.mock.lastCall?.[1]?.method).toBe("GET");
+});
+
+it.each([
+  [
+    "backend/strategy/strategies?clientId=a",
+    "/strategy-api/strategies?clientId=a",
+  ],
+  ["backend/workspace/documents/recent", "/workspace-api/documents/recent"],
+  [
+    "backend/intelligence/tracker/bills?page=2",
+    "/intel-api/tracker/bills?page=2",
+  ],
+  ["capiro/planner.tasks", "/strategy-api/planner/tasks"],
+  ["capiro/workspace.documents", "/workspace-api/hillday/documents"],
+])("dispatches %s to its preview service prefix", async (path, suffix) => {
+  fetcher.mockResolvedValue(Response.json({ unexpected: true }));
+  await receive(path);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(
+    new URL(target).origin + suffix,
   );
   expect(fetcher.mock.lastCall?.[1]?.method).toBe("GET");
 });
@@ -368,9 +389,10 @@ it.each(["HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE", "PROPFIND"])(
 );
 
 it.each([
-  "backend/intelligence/clients",
-  "backend/strategy/planner/tasks",
-  "backend/workspace/drafts",
+  "backend/onboard/setup/state",
+  "backend/meri/conversations",
+  "backend/unknown/clients",
+  "backend/Core/clients",
   "backend/core",
   "backend/core/",
   "backend/core/clients/",
@@ -431,13 +453,13 @@ it("rejects expired identity before dispatch", async () => {
   expect((await receive("backend/core/clients")).status).toBe(401);
   expect(fetcher).not.toHaveBeenCalled();
 });
-it("keeps every non-GET or non-Core registered operation held", async () => {
+it("keeps every non-GET or Onboard registered operation held", async () => {
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(true);
   const held = Object.entries(capiroOperations).filter(
     ([, descriptor]) =>
-      descriptor.method !== "GET" || descriptor.service !== "core",
+      descriptor.method !== "GET" || descriptor.service === "onboard",
   );
   expect(held.some(([, descriptor]) => descriptor.method === "GET")).toBe(true);
   for (const [operation, descriptor] of held) {
