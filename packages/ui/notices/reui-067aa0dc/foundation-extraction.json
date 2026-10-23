@@ -1,0 +1,158 @@
+{
+  "source": "325d0e3d8c1eaa31a3f2a18e393c980b5aa56996",
+  "base": "dfcb1436a31c8593e05aa1b3949356b35f0e1b3a",
+  "unchangedSourceFiles": [
+    {
+      "path": "packages/ui/notices/reui-067aa0dc/LICENSE.md",
+      "sha256": "09592ffefa6512b68dd7aa9031bc50d5d39cfcc9da08288f5eb1f9d236baca66"
+    },
+    {
+      "path": "packages/ui/notices/reui-067aa0dc/cascader.registry.json",
+      "sha256": "ec4a19a36324da63f3c0a709498f4de7c60f493637f2b19d5f8317add75db07c"
+    },
+    {
+      "path": "packages/ui/src/cascader.ts",
+      "sha256": "15ad52d61810341e8ab95d7f3de4e468f0d69fae73db598e8f6a2117ec5f1d48"
+    },
+    {
+      "path": "packages/ui/src/motion.tsx",
+      "sha256": "ccedb69aa6eb1fa97fcb5315ea1a7a7227eecbdc04570be3583c810d66fc56fc"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-async.tsx",
+      "sha256": "aa9f427ba97eff658aec7b7cb32212c4899b5bc47324a79d99af8f3fa3c68342"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-columns.tsx",
+      "sha256": "ca5c3eb2d352dcbb10b48d9d4c5b293fce4516b68fe85d2485a7c0292580faa3"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-context.tsx",
+      "sha256": "05aafb82a06c08830f1ff0de6704727e626e4ad0787e0d5e1ed1e66d387d3c85"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-footer.tsx",
+      "sha256": "49d151c8214ba065769d92226c200f4122403cfbe47bea39d3943dc82b6913c4"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-i18n.tsx",
+      "sha256": "43295263e5f6ccb0d761911bea2ad72880b76666268523c5a5824fc892118f81"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-item.tsx",
+      "sha256": "6a5062525cea18b5041274b8680eebc411ed998b0f6c0b428d8c4eb554ecc5fb"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-lib.tsx",
+      "sha256": "410e72036c12bb5c9e2c4800c3856ca09e15517dcb8b7ab9369b6efe812559b8"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-nav.tsx",
+      "sha256": "8fe5198f554674c359ab607d0cf6944c4c28f990ef861a5838db2b555d9ee868"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-types.tsx",
+      "sha256": "d6bfc55565ccee32856e915f97fbf17842f5157a86a3471112ca601a18af90a3"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader-virtual.tsx",
+      "sha256": "95af70a0c10c84a997e71466595de88e0c8596c8dd1285739fa1291e2ee3297e"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/cascader.tsx",
+      "sha256": "13f11815335e2264b7375a0daa62ce8c3cc30c641abd1af71e7b4e7ef1b25280"
+    },
+    {
+      "path": "packages/ui/src/reui/cascader/spinner.tsx",
+      "sha256": "185753c5de9654228ef55b01e1a6af15e168fb128fb365552a98e8235177f816"
+    },
+    {
+      "path": "packages/ui/src/sonner.tsx",
+      "sha256": "6bb72e3b83a248b0cd7f258bc77ac1fb5a0cf4e1e10beabea19f204382c7af27"
+    }
+  ],
+  "provenanceCorrection": "Three upstream hashes in the prior record did not match the exact bundled registry. Corrected from UTF-8 files[].content after fetching the exact upstream commit and confirming the registry SHA. Adopted code and registry bytes unchanged.",
+  "packages": [
+    {
+      "name": "motion",
+      "version": "14.6.0",
+      "license": "MIT",
+      "integrity": "sha512-qqaZbyubgk7x3zxjPgP1l3Br/KQXol/IIV1uqb358SoN4ApcqNuV7+wyDPg/XLErmuyQL5lL8JVI/fOmDsmBKQ==",
+      "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0"
+      },
+      "peerDependenciesMeta": {
+        "react": {
+          "optional": true
+        },
+        "react-dom": {
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "sonner",
+      "version": "2.0.8",
+      "license": "MIT",
+      "integrity": "sha512-UM/ByIoFra8yzV75n1o0Puu0bw5U/9UNnDacrJNspekBewIfsQ3D6ez1nvlWpt7aTsO6rujQtifBpycwIivqlg==",
+      "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0 || ^19.0.0-rc",
+        "react-dom": "^18.0.0 || ^19.0.0 || ^19.0.0-rc",
+        "@types/react": "^18.0.0 || ^19.0.0"
+      },
+      "peerDependenciesMeta": {
+        "@types/react": {
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "@base-ui/react",
+      "version": "1.9.0",
+      "license": "MIT",
+      "integrity": "sha512-S8CSYosASBKtpL8SWUfS78rFElfLijiCgA7oHOK22jCJ95FULsYyKwBNFOgudt0RA+/7yNc7F81bOvQnRgbBiQ==",
+      "peerDependencies": {
+        "react": "^17 || ^18 || ^19",
+        "date-fns": "^4.0.0",
+        "react-dom": "^17 || ^18 || ^19",
+        "@date-fns/tz": "^1.2.0",
+        "@types/react": "^17 || ^18 || ^19"
+      },
+      "peerDependenciesMeta": {
+        "date-fns": {
+          "optional": true
+        },
+        "@date-fns/tz": {
+          "optional": true
+        },
+        "@types/react": {
+          "optional": true
+        }
+      }
+    },
+    {
+      "name": "@tanstack/react-virtual",
+      "version": "3.14.22",
+      "license": "MIT",
+      "integrity": "sha512-zNiB9IF3prySTfAUrj9tPHjD/lonBYkfxrPP4v4ITUx+qwHajJR5cY/xirjvwc+KWkur10GX3TpsbKh7JkD8Lw==",
+      "peerDependencies": {
+        "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+        "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+      }
+    }
+  ],
+  "lockfile": "Regenerated from main with only four packages/ui dependencies. Eleven added dependency entries; packages/ui is the only changed pre-existing entry. No Meri artifact/manifest updates.",
+  "checks": {
+    "uiTypecheck": "PASS",
+    "publicImportBuild": "Vite8.3.4 production library bundle,35 exports,1117974 bytes",
+    "ssr": "MotionSurface/Toaster/CascaderTrigger on React19.3.0 PASS",
+    "architecture": "Zero errors or blocking findings. Three public imports previously rejected; exact entries now pass; private import still refuses.",
+    "publicPackages": "PASS; current main Meri archives unchanged",
+    "webTypecheck": "PASS"
+  },
+  "limitations": [
+    "No feature UI or runtime activation",
+    "Independent review and combined application acceptance remain root-owned"
+  ]
+}

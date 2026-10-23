@@ -1,0 +1,73 @@
+{
+  "repository": "https://github.com/keenthemes/reui",
+  "commit": "067aa0dc7f8bbfec1cd76fc5ad31f842be5f569a",
+  "registry": "public/r/styles/radix-nova/cascader.json",
+  "registrySha256": "ec4a19a36324da63f3c0a709498f4de7c60f493637f2b19d5f8317add75db07c",
+  "license": "MIT",
+  "adaptations": [
+    "relative import remaps to existing cn and ScrollArea",
+    "official Lucide variant selection from upstream IconPlaceholder",
+    "local equivalent spinner presentation",
+    "strict TypeScript optional-property undefined annotations and bounded array guards; no compiler relaxation",
+    "local type-only process.env.NODE_ENV declaration retained for upstream diagnostic",
+    "repository formatting only; upstream source hashes retained separately"
+  ],
+  "files": [
+    {
+      "path": "src/reui/cascader/cascader-async.tsx",
+      "upstreamSha256": "b9fd70ce5381f028d2191de72cc59bb1a23d67d16d30467ae9ac28546711806d",
+      "adaptedSha256": "aa9f427ba97eff658aec7b7cb32212c4899b5bc47324a79d99af8f3fa3c68342"
+    },
+    {
+      "path": "src/reui/cascader/cascader-columns.tsx",
+      "upstreamSha256": "54973ee468493d43775b1f644c5f3a72a7947e7244a759d871acef1435572b56",
+      "adaptedSha256": "ca5c3eb2d352dcbb10b48d9d4c5b293fce4516b68fe85d2485a7c0292580faa3"
+    },
+    {
+      "path": "src/reui/cascader/cascader-context.tsx",
+      "upstreamSha256": "947ce1ab5cfe592edf21bb5e56e3da91d4a707975b3680dab9a1d648991d74a0",
+      "adaptedSha256": "05aafb82a06c08830f1ff0de6704727e626e4ad0787e0d5e1ed1e66d387d3c85"
+    },
+    {
+      "path": "src/reui/cascader/cascader-footer.tsx",
+      "upstreamSha256": "37ff1f75ff4f083b79bb220d21be1400a2982078a1b517dcda81bf5e0772e4e2",
+      "adaptedSha256": "49d151c8214ba065769d92226c200f4122403cfbe47bea39d3943dc82b6913c4"
+    },
+    {
+      "path": "src/reui/cascader/cascader-i18n.tsx",
+      "upstreamSha256": "dd2042e19f07f1573c2c085c2a9b466c77ec1bb7f30f41bfcc2194af288d3013",
+      "adaptedSha256": "43295263e5f6ccb0d761911bea2ad72880b76666268523c5a5824fc892118f81"
+    },
+    {
+      "path": "src/reui/cascader/cascader-item.tsx",
+      "upstreamSha256": "3de89037602681a3e98b5e02ea22b3aa422795354125855af49f46f64b19b293",
+      "adaptedSha256": "6a5062525cea18b5041274b8680eebc411ed998b0f6c0b428d8c4eb554ecc5fb"
+    },
+    {
+      "path": "src/reui/cascader/cascader-lib.tsx",
+      "upstreamSha256": "0314534058c771c62b2775a504c927b597e104bc7e60eaaeaf453d7b80646ed7",
+      "adaptedSha256": "410e72036c12bb5c9e2c4800c3856ca09e15517dcb8b7ab9369b6efe812559b8"
+    },
+    {
+      "path": "src/reui/cascader/cascader-nav.tsx",
+      "upstreamSha256": "b0923f616ec7bacc9c5485c64346f43ee8689b195241b870dd929eda829888b0",
+      "adaptedSha256": "8fe5198f554674c359ab607d0cf6944c4c28f990ef861a5838db2b555d9ee868"
+    },
+    {
+      "path": "src/reui/cascader/cascader-types.tsx",
+      "upstreamSha256": "ea215fecbf64a640b0a24a4d1dd2368d438ae10a9b667f351979dc0bb36ece83",
+      "adaptedSha256": "d6bfc55565ccee32856e915f97fbf17842f5157a86a3471112ca601a18af90a3"
+    },
+    {
+      "path": "src/reui/cascader/cascader-virtual.tsx",
+      "upstreamSha256": "18534141cc21c485a0c4c570b0eebbdc63454be5348e6c5097a8355fc410c50a",
+      "adaptedSha256": "95af70a0c10c84a997e71466595de88e0c8596c8dd1285739fa1291e2ee3297e"
+    },
+    {
+      "path": "src/reui/cascader/cascader.tsx",
+      "upstreamSha256": "35d4627fec78b0c89fea1c01be1c6b47b3e52578e901d6d19ced3a920bb2804b",
+      "adaptedSha256": "13f11815335e2264b7375a0daa62ce8c3cc30c641abd1af71e7b4e7ef1b25280"
+    }
+  ],
+  "hashDerivation": "SHA256 of UTF-8 registry files[].content before adaptation; adaptedSha256 uses Git LF bytes. Three upstream hash mismatches corrected during extraction; source unchanged."
+}
