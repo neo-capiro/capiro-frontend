@@ -1,6 +1,5 @@
 import type { CapiroApi } from "../../shared/capiro/http";
 import type { capiroOperations } from "../../shared/capiro/registry";
-import { settingsDestination } from "./externalNavigation";
 import type { SettingsWrite } from "./security-write-types";
 
 type Row = Record<string, unknown>;
@@ -113,63 +112,6 @@ export function ordinaryReceipt(
         same(receipt.name, body.name) &&
         receipt.status === "active"
       );
-    case "settings.integrations.create":
-      return (
-        typeof receipt.id === "string" &&
-        !!receipt.id &&
-        same(receipt.provider, body.provider) &&
-        same(
-          receipt.accountEmail,
-          typeof body.accountEmail === "string"
-            ? body.accountEmail.trim().toLowerCase()
-            : undefined,
-        ) &&
-        receipt.status === "needs_configuration" &&
-        receipt.displayName ===
-          (typeof body.displayName === "string"
-            ? body.displayName.trim() || null
-            : null)
-      );
-    case "settings.integrations.syncMicrosoft":
-    case "settings.integrations.syncGoogle":
-      return same(receipt.connectionId, params.connectionId);
-    case "settings.integrations.configureMicrosoftSubscriptions":
-      return receipt.configured === true;
-    case "settings.integrations.startMicrosoft":
-    case "settings.integrations.startGoogle": {
-      if (
-        typeof receipt.connectionId !== "string" ||
-        !receipt.connectionId ||
-        (body.connectionId !== undefined &&
-          receipt.connectionId !== body.connectionId) ||
-        typeof receipt.authUrl !== "string"
-      )
-        return false;
-      try {
-        settingsDestination(
-          receipt.authUrl,
-          write.operation.endsWith("Microsoft") ? "microsoft" : "google",
-        );
-        return true;
-      } catch {
-        return false;
-      }
-    }
-    case "settings.billing.portal":
-    case "settings.billing.checkout": {
-      if (typeof receipt.url !== "string") return false;
-      try {
-        const url = new URL(settingsDestination(receipt.url, "billing"));
-        return (
-          url.origin ===
-          (write.operation.endsWith("portal")
-            ? "https://billing.stripe.com"
-            : "https://checkout.stripe.com")
-        );
-      } catch {
-        return false;
-      }
-    }
     default:
       return undefined;
   }

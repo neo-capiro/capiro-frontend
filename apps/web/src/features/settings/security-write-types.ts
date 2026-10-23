@@ -15,3 +15,13 @@ export type SettingsWrite = {
   receiptConfirmed?: boolean;
   projection?: { keys: string[]; hash: string };
 };
+
+/** Scoped persistence and cache ownership, independent of dispatch and receipt rules. */
+export type SettingsWriteJournal = {
+  scopeKey: string;
+  current(): SettingsWrite | undefined;
+  record(write: SettingsWrite): void;
+  persist(write: SettingsWrite, input: unknown): Promise<void>;
+  clear(write: SettingsWrite): void;
+  markUnknown(write: SettingsWrite): void;
+};
