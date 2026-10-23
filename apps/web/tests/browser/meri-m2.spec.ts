@@ -39,6 +39,18 @@ async function syntheticNetwork(page: Page) {
         ],
       });
     if (
+      request.method() === "GET" &&
+      url.pathname === `/api/backend/core/clients/${id(3)}`
+    )
+      return route.fulfill({
+        json: {
+          id: id(3),
+          name: "Synthetic client",
+          profileStatus: "ACTIVE",
+          status: "active",
+        },
+      });
+    if (
       request.method() === "POST" &&
       url.pathname === "/api/capiro/meri.conversation.management.list.v1"
     )
@@ -116,6 +128,38 @@ test("synthetic actual boundary: Cmd/Ctrl K, Escape, focus return, title navigat
   await expect(page).toHaveURL(
     new RegExp(`/meri\\?scope=general&conversationId=${id(4)}`),
   );
+  expect(
+    net.calls.every(
+      (call) => call.startsWith("GET ") || call.endsWith("management.list.v1"),
+    ),
+  ).toBe(true);
+  expect(net.unexpected).toEqual([]);
+});
+
+test("synthetic client entry navigates to an unsent draft without capability polling or submit", async ({
+  page,
+}) => {
+  const net = await syntheticNetwork(page);
+  await page.goto("/meri-m2.html");
+  await page.getByRole("button", { name: "Open commands" }).click();
+  await page
+    .getByRole("option", { name: "Synthetic client", exact: true })
+    .click();
+  await expect(
+    page.getByText("Open a draft with this client in context."),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Open client chat" }).click();
+  await expect(page).toHaveURL(
+    new RegExp(`/meri\\?clientId=${id(3)}&entry=[0-9a-f-]{36}$`),
+  );
+  await expect
+    .poll(
+      () =>
+        net.calls.filter(
+          (call) => call === `GET /api/backend/core/clients/${id(3)}`,
+        ).length,
+    )
+    .toBe(1);
   expect(
     net.calls.every(
       (call) => call.startsWith("GET ") || call.endsWith("management.list.v1"),

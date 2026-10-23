@@ -8,7 +8,6 @@ import {
   beginNewChatIntent,
   readFirstChatIntent,
 } from "../meri-conversations/first-chat-intent";
-import { requireFirstChatCapability } from "../capiro/operations/meri-first-chat";
 
 /** Typed navigation intent only: no prompts, credentials, profile blobs or auto-send. */
 export const meriEntry = z.strictObject({
@@ -33,7 +32,6 @@ function record(scope: FirstChatScope, storage: TabStorage) {
 }
 export function prepareClientEntry(
   scope: FirstChatScope,
-  capability: unknown,
   storage = requireMeriTabStorage(),
   now = Date.now(),
   issueId = () => crypto.randomUUID(),
@@ -41,7 +39,6 @@ export function prepareClientEntry(
 ) {
   if (!storage)
     throw new Error("The current tab cannot retain the client handoff.");
-  requireFirstChatCapability(capability, scope, now);
   const owner = record(scope, storage);
   const previous = owner.read();
   // An existing entry remains the same navigation intent on a double click/retry.

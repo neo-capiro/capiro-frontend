@@ -24,8 +24,6 @@ import {
   firstChatCoreOperationKey,
   firstChatV2Operation,
   firstChatV2OperationKey,
-  firstChatCapabilityOperation,
-  firstChatCapabilityOperationKey,
 } from "./operations/meri-first-chat";
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
@@ -54,5 +52,4 @@ export const capiroOperations = {
     governedObjectiveStrategyIntakeOperation,
   [firstChatCoreOperationKey]: firstChatCoreOperation,
   [firstChatV2OperationKey]: firstChatV2Operation,
-  [firstChatCapabilityOperationKey]: firstChatCapabilityOperation,
 } as const satisfies OperationRegistry;

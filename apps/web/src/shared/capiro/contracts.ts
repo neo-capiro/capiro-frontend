@@ -78,7 +78,6 @@ function nativeSessionAllowed(
       definition.method === "POST" &&
       [
         "/clio/conversations/bootstrap",
-        "/clio/conversations/bootstrap-capability",
         "/clio/conversations/management/v1/list",
         "/clio/conversations/management/v1/change",
       ].includes(definition.path))

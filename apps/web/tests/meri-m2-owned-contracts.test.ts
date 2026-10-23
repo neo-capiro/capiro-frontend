@@ -22,7 +22,6 @@ import {
   clientEntryHref,
   meriEntry,
 } from "../src/shared/meri-entry/descriptor";
-import { requireFirstChatCapability } from "../src/shared/capiro/operations/meri-first-chat";
 import { bootstrapConversationSession } from "../src/shared/meri-conversations/session";
 import { receiveSessionReceipt } from "../src/shared/meri-actions/session-receipt";
 import { defineOperation } from "../src/shared/capiro/contracts";
@@ -77,7 +76,6 @@ const request: ManagementRequest = {
 
 it("registers only the exact reviewed Core POST paths for default Clerk sessions", () => {
   for (const path of [
-    "/clio/conversations/bootstrap-capability",
     "/clio/conversations/management/v1/list",
     "/clio/conversations/management/v1/change",
   ]) {
@@ -104,6 +102,12 @@ it("registers only the exact reviewed Core POST paths for default Clerk sessions
         defineOperation({ ...firstChatCoreOperation, path: neighbor }),
       ).toThrow();
   }
+  expect(() =>
+    defineOperation({
+      ...firstChatCoreOperation,
+      path: "/clio/conversations/bootstrap-capability",
+    }),
+  ).toThrow();
 });
 
 it("requires explicit General, preserves one bootstrap key after loss, and validates the returned owner", async () => {
@@ -202,20 +206,12 @@ it("retains exact mutation retry identity and refuses another scope or stale ide
   expect(() => journal.write({ request, previous: row })).toThrow();
 });
 
-it("typed client entry is navigation only, verifies freshness, and keeps the same intent on a double click", () => {
+it("client navigation keeps the same draft intent without a capability receipt", () => {
   const scope = { ...account, clientId },
     store = storage();
-  const capability = {
-    schemaVersion: 1,
-    capability: "conversation.bootstrap.v2",
-    ...scope,
-    checkedAtMs: now,
-    expiresAtMs: now + 30000,
-  };
   let counter = 10;
   const first = prepareClientEntry(
     scope,
-    capability,
     store,
     now,
     () => id(counter++),
@@ -223,7 +219,7 @@ it("typed client entry is navigation only, verifies freshness, and keeps the sam
   );
   expect(first.source).toBe("command-palette");
   expect(
-    prepareClientEntry(scope, capability, store, now, () => {
+    prepareClientEntry(scope, store, now, () => {
       throw Error("must reuse");
     }),
   ).toEqual(first);
@@ -234,11 +230,16 @@ it("typed client entry is navigation only, verifies freshness, and keeps the sam
     readClientEntry(scope, first.entryId, store, now + 300000),
   ).toThrow();
   expect(() =>
-    requireFirstChatCapability(capability, { ...scope, actorId: id(9) }, now),
+    readClientEntry({ ...scope, clientId: id(9) }, first.entryId, store, now),
   ).toThrow();
   expect(() =>
-    requireFirstChatCapability(capability, scope, now + 30000),
+    readClientEntry({ ...scope, actorId: id(9) }, first.entryId, store, now),
   ).toThrow();
+  expect(() =>
+    readClientEntry({ ...scope, tenantId: id(9) }, first.entryId, store, now),
+  ).toThrow();
+  syncMeriTabIdentity(JSON.stringify({ ...account, actorId: id(9) }), store);
+  expect(() => readClientEntry(scope, first.entryId, store, now)).toThrow();
 });
 
 it("General conversation sessions require a bound conversation and cannot enter the client-only action receiver", async () => {
