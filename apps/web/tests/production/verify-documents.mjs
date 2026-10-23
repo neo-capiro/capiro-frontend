@@ -87,7 +87,7 @@ export async function verifyDocumentNavigation(
       exact: true,
     })
     .click();
-  await page.waitForURL(`${origin}/meri`);
+  await page.waitForURL(`${origin}/meri/conversations`);
   return {
     documentFiles: "actual unconfigured host",
     viewport,
