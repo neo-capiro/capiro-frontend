@@ -2,6 +2,8 @@ import { z } from "zod";
 import { defineOperation } from "../contracts";
 import {
   billingStateSchema,
+  broadcastAcknowledgementSchema,
+  recipientBroadcastSchema,
   billingSummarySchema,
   brandingSchema,
   clientAccountOwnersSchema,
@@ -45,6 +47,24 @@ const microsoftSource = `apps/api/src/engagement/microsoft/microsoft-oauth.contr
 const googleSource = `apps/api/src/engagement/google/google-oauth.controller.ts ${pinned}`;
 
 export const settingsOperations = {
+  "me.broadcasts.pending": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/me/broadcasts/pending",
+    request: emptySettingsRequest,
+    response: z.array(recipientBroadcastSchema).max(100),
+    source:
+      "capiro-backend@1ca9246a6f27e96fe2902a42fa1e239c97dbe94d apps/api/src/admin-broadcasts/admin-broadcasts.service.ts",
+  }),
+  "me.broadcasts.acknowledge": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/me/broadcasts/:id/acknowledge",
+    request: z.object({ params: z.object({ id: z.uuid() }).strict() }).strict(),
+    response: broadcastAcknowledgementSchema,
+    source:
+      "capiro-backend@1ca9246a6f27e96fe2902a42fa1e239c97dbe94d apps/api/src/admin-broadcasts/admin-broadcasts.service.ts",
+  }),
   "clients.list": defineOperation({
     service: "core",
     method: "GET",

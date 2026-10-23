@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { OperationResponse } from "../../shared/capiro/contracts";
 import type { settingsOperations } from "../../shared/capiro/operations/settings";
 import { useCapiroQuery } from "../../shared/capiro/queries";
@@ -20,7 +19,8 @@ import {
   SettingsTabs,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 type Client = OperationResponse<
   (typeof settingsOperations)["clients.list"]
@@ -36,7 +36,8 @@ export function ProfileSettings({
 }: {
   readOnlyPreview?: boolean;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("profiles-status");
+  const { api, action, locked } = mutation;
   const query = useCapiroQuery("clients.list", {
     query: { includeArchived: !readOnlyPreview },
   });
@@ -49,7 +50,6 @@ export function ProfileSettings({
   const [search, setSearch] = useState("");
   const [archive, setArchive] = useState<Client>();
   const [create, setCreate] = useState(false);
-  const action = useSettingsAction(api);
   const reload = () => {
     query.reload();
     owners.reload();
@@ -122,7 +122,7 @@ export function ProfileSettings({
         </div>
         <SettingsButton
           primary
-          disabled={readOnlyPreview || action.busy}
+          disabled={readOnlyPreview || locked}
           onClick={() => setCreate(true)}
         >
           + Add profile
@@ -140,6 +140,7 @@ export function ProfileSettings({
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice {...mutation} busy={action.busy} />
       {owners.error && tab === "active" && (
         <SettingsNotice
           title="Account owners unavailable"
@@ -266,7 +267,7 @@ export function ProfileSettings({
                   ) : row.status === "archived" ? (
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
                           (signal) => changeStatus(row, "restore", signal),
@@ -280,7 +281,7 @@ export function ProfileSettings({
                   ) : (
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => setArchive(row)}
                     >
                       Archive
@@ -313,7 +314,7 @@ export function ProfileSettings({
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (archive)
                   void action.run(
@@ -358,11 +359,11 @@ function CreateProfile({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("profiles-create");
+  const { api, action, locked } = mutation;
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
-  const action = useSettingsAction(api);
   return (
     <SettingsDialog
       busy={action.busy}
@@ -381,7 +382,7 @@ function CreateProfile({
             primary
             form="settings-create-profile"
             type="submit"
-            disabled={action.busy}
+            disabled={locked}
           >
             {action.busy ? "Creating…" : "Create profile"}
           </SettingsButton>
@@ -420,7 +421,7 @@ function CreateProfile({
         <SettingField label="Name">
           <TextInput
             required
-            disabled={action.busy}
+            disabled={locked}
             maxLength={200}
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -429,7 +430,7 @@ function CreateProfile({
         <SettingField label="Website (optional)">
           <TextInput
             maxLength={2048}
-            disabled={action.busy}
+            disabled={locked}
             value={website}
             onChange={(event) => setWebsite(event.target.value)}
           />
@@ -437,7 +438,7 @@ function CreateProfile({
         <SettingField label="Description (optional)">
           <TextArea
             maxLength={10000}
-            disabled={action.busy}
+            disabled={locked}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
@@ -447,6 +448,7 @@ function CreateProfile({
             {action.error}
           </SettingsNotice>
         )}
+        <SettingsMutationNotice {...mutation} busy={action.busy} />
       </form>
     </SettingsDialog>
   );

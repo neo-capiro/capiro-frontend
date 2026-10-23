@@ -12,6 +12,10 @@ import type { CapiroApi } from "../../shared/capiro/http";
 import { capiroOperations } from "../../shared/capiro/registry";
 import { useSettingsAction } from "./useSettingsAction";
 import {
+  prepareOrdinaryRecovery,
+  retainCanonicalSignature,
+} from "./ordinary-write-recovery";
+import {
   clearSettingsWrite,
   persistSettingsWrite,
   restoreSettingsWrite,
@@ -26,7 +30,7 @@ import {
 
 type Api = CapiroApi<typeof capiroOperations>;
 /** Settings recovery uses the existing session cache plus nonsecret, nonreplayable recovery metadata. */
-export function useSettingsMutation(section: string) {
+export function useSettingsMutation(section: string, subjectId?: string) {
   const raw = useCapiro();
   const cache = useQueryClient();
   const { userId, sessionId, orgId } = useAuth();
@@ -70,10 +74,12 @@ export function useSettingsMutation(section: string) {
         options?.signal?.throwIfAborted();
         const captured = structuredClone(input);
         const write = snapshotSettingsWrite(operation, captured);
+        write.subjectId = subjectId;
         cache.setQueryData(journalKey, write);
         let dispatched = false;
         let accepted = false;
         try {
+          await prepareOrdinaryRecovery(write, storageKey);
           if (operation === "settings.team.resend") {
             const invitations = await raw.request(
               "settings.team.invitations",
@@ -104,6 +110,16 @@ export function useSettingsMutation(section: string) {
           accepted = true;
           options?.signal?.throwIfAborted();
           assertSettingsReceipt(write, result);
+          write.receiptConfirmed = true;
+          if (operation === "me.emailSignature.update") {
+            await retainCanonicalSignature(write, result);
+          }
+          await persistSettingsWrite(
+            window.sessionStorage,
+            storageKey,
+            write,
+            captured,
+          );
           if (
             settingsWriteNeedsReadback(operation) &&
             !(await reconcileSettingsWrite(
@@ -142,7 +158,7 @@ export function useSettingsMutation(section: string) {
         }
       },
     }),
-    [raw, cache, journalKey, storageKey, userId, sessionId],
+    [raw, cache, journalKey, storageKey, userId, sessionId, subjectId],
   );
   const pending = useSyncExternalStore(
     useCallback((notify) => cache.getQueryCache().subscribe(notify), [cache]),

@@ -2,7 +2,6 @@
 
 import { ScopedLink as Link } from "../../shared/shell/ScopedLink";
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { Badge, StatusPanel, TextInput } from "../../shared/module-ui";
 import {
@@ -20,7 +19,8 @@ import {
   type BillingAction,
 } from "./billingFlow";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 const money = (value: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
@@ -28,14 +28,14 @@ const money = (value: number) =>
   );
 
 export function BillingSettings() {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("billing");
+  const { api, action, locked } = mutation;
   const state = useCapiroQuery("settings.billing.state", {});
   const summary = useCapiroQuery("settings.billing.summary", {});
   const [quantity, setQuantity] = useState(10);
   const [promoCode, setPromoCode] = useState("");
   const [checkout, setCheckout] = useState(false);
   const [cancel, setCancel] = useState(false);
-  const action = useSettingsAction(api);
   async function openBilling(request: BillingAction, signal: AbortSignal) {
     try {
       const destination = await requestBillingDestination(api, request, signal);
@@ -77,7 +77,7 @@ export function BillingSettings() {
                     onClick={() =>
                       void action.run(portal, "Opening payment settings…")
                     }
-                    disabled={action.busy || !canOpenPortal}
+                    disabled={locked || !canOpenPortal}
                   >
                     Update payment method
                   </SettingsButton>
@@ -108,7 +108,7 @@ export function BillingSettings() {
               action={
                 <SettingsButton
                   primary
-                  disabled={action.busy || flow === "unavailable"}
+                  disabled={locked || flow === "unavailable"}
                   onClick={() => {
                     if (canOpenPortal)
                       void action.run(portal, "Opening billing portal…");
@@ -169,7 +169,7 @@ export function BillingSettings() {
               description="View and update your payment method through the billing provider."
               action={
                 <SettingsButton
-                  disabled={action.busy || !canOpenPortal}
+                  disabled={locked || !canOpenPortal}
                   onClick={() =>
                     void action.run(portal, "Opening billing portal…")
                   }
@@ -184,7 +184,7 @@ export function BillingSettings() {
             </SettingsCard>
             <SettingsCard title="Invoices and receipts">
               <SettingsButton
-                disabled={action.busy || !canOpenPortal}
+                disabled={locked || !canOpenPortal}
                 onClick={() => void action.run(portal, "Opening invoices…")}
               >
                 View and download invoices
@@ -195,7 +195,7 @@ export function BillingSettings() {
               description="Only authorized billing administrators can manage the plan."
               action={
                 <SettingsButton
-                  disabled={action.busy || !canOpenPortal}
+                  disabled={locked || !canOpenPortal}
                   onClick={() => setCancel(true)}
                 >
                   Cancel plan
@@ -220,6 +220,7 @@ export function BillingSettings() {
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice {...mutation} busy={action.busy} />
       <SettingsDialog
         busy={action.busy}
         open={checkout && flow === "checkout"}
@@ -229,7 +230,7 @@ export function BillingSettings() {
         footer={
           <>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => setCheckout(false)}
             >
               Cancel
@@ -238,7 +239,7 @@ export function BillingSettings() {
               primary
               form="billing-checkout"
               type="submit"
-              disabled={action.busy}
+              disabled={locked}
             >
               Review checkout
             </SettingsButton>
@@ -271,7 +272,7 @@ export function BillingSettings() {
               step={1}
               required
               value={quantity}
-              disabled={action.busy}
+              disabled={locked}
               onChange={(event) => setQuantity(Number(event.target.value))}
             />
           </SettingField>
@@ -279,7 +280,7 @@ export function BillingSettings() {
             <TextInput
               maxLength={64}
               value={promoCode}
-              disabled={action.busy}
+              disabled={locked}
               onChange={(event) => setPromoCode(event.target.value)}
             />
           </SettingField>
@@ -298,15 +299,12 @@ export function BillingSettings() {
         description="Review your cancellation terms with the billing provider."
         footer={
           <>
-            <SettingsButton
-              disabled={action.busy}
-              onClick={() => setCancel(false)}
-            >
+            <SettingsButton disabled={locked} onClick={() => setCancel(false)}>
               Keep my plan
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() =>
                 void action.run(portal, "Opening cancellation settings…")
               }

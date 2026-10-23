@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { integrationProviderSchema } from "../../shared/capiro/operations/settings-schemas";
 import { TextInput } from "../../shared/module-ui";
 import {
@@ -12,7 +11,8 @@ import {
 } from "./components";
 import { integrationProviders } from "./integrationProviders";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 type Provider = z.infer<typeof integrationProviderSchema>;
 const providers = integrationProviders;
 
@@ -25,12 +25,13 @@ export function RegisterAccount({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("integration-register");
+  const { api, action, locked } = mutation;
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const action = useSettingsAction(api);
   return (
     <SettingsDialog
+      busy={action.busy}
       open={!!provider}
       onClose={() => {
         if (!action.busy) onClose();
@@ -46,7 +47,7 @@ export function RegisterAccount({
             form="register-integration-account"
             type="submit"
             primary
-            disabled={action.busy}
+            disabled={locked}
           >
             {action.busy ? "Registering…" : "Register account"}
           </SettingsButton>
@@ -60,14 +61,18 @@ export function RegisterAccount({
           event.preventDefault();
           if (provider)
             void action.run(
-              () =>
-                api.request("settings.integrations.create", {
-                  body: {
-                    provider,
-                    accountEmail: email,
-                    ...(displayName ? { displayName } : {}),
+              (signal) =>
+                api.request(
+                  "settings.integrations.create",
+                  {
+                    body: {
+                      provider,
+                      accountEmail: email,
+                      ...(displayName ? { displayName } : {}),
+                    },
                   },
-                }),
+                  { signal },
+                ),
               "Account was registered.",
               () => {
                 refresh();
@@ -88,7 +93,7 @@ export function RegisterAccount({
           <TextInput
             type="email"
             required
-            disabled={action.busy}
+            disabled={locked}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -96,7 +101,7 @@ export function RegisterAccount({
         <SettingField label="Display name">
           <TextInput
             maxLength={120}
-            disabled={action.busy}
+            disabled={locked}
             value={displayName}
             onChange={(event) => setDisplayName(event.target.value)}
           />
@@ -106,6 +111,7 @@ export function RegisterAccount({
             {action.error}
           </SettingsNotice>
         )}
+        <SettingsMutationNotice {...mutation} busy={action.busy} />
       </form>
     </SettingsDialog>
   );

@@ -32,7 +32,9 @@ export async function persistSettingsWrite(
 ) {
   const digest = await crypto.subtle.digest(
     "SHA-256",
-    new TextEncoder().encode(JSON.stringify(dispatchedInput)),
+    new TextEncoder().encode(
+      JSON.stringify([key, write.operation, write.attemptId, dispatchedInput]),
+    ),
   );
   const requestHash = [...new Uint8Array(digest)]
     .map((byte) => byte.toString(16).padStart(2, "0"))
@@ -51,6 +53,10 @@ export async function persistSettingsWrite(
       operation: write.operation,
       startedAt: write.startedAt,
       state: "unknown",
+      subjectId: write.subjectId,
+      scopeHash: write.scopeHash,
+      receiptConfirmed: write.receiptConfirmed,
+      projection: write.projection,
       input: { params: write.input.params, body },
     }),
   );
@@ -71,18 +77,41 @@ export function restoreSettingsWrite(
       typeof data.requestHash !== "string" ||
       !/^[a-f0-9]{64}$/.test(data.requestHash) ||
       typeof data.operation !== "string" ||
-      !data.operation.startsWith("settings.") ||
+      !(
+        data.operation.startsWith("settings.") ||
+        ["me.update", "me.emailSignature.update"].includes(data.operation)
+      ) ||
       typeof data.startedAt !== "string" ||
       !data.input ||
       typeof data.input !== "object"
     )
       throw new Error("invalid journal");
+    if (data.projection !== undefined) {
+      const projection = data.projection as Record<string, unknown>;
+      if (
+        !projection ||
+        !Array.isArray(projection.keys) ||
+        projection.keys.length > 20 ||
+        !projection.keys.every(
+          (key) => typeof key === "string" && key.length <= 64,
+        ) ||
+        typeof projection.hash !== "string" ||
+        !/^[a-f0-9]{64}$/.test(projection.hash)
+      )
+        throw new Error("invalid projection");
+    }
     return {
       operation: data.operation,
       attemptId: data.attemptId,
       input: data.input as SettingsWrite["input"],
       startedAt: data.startedAt,
       state: "unknown",
+      subjectId:
+        typeof data.subjectId === "string" ? data.subjectId : undefined,
+      scopeHash:
+        typeof data.scopeHash === "string" ? data.scopeHash : undefined,
+      receiptConfirmed: data.receiptConfirmed === true,
+      projection: data.projection as SettingsWrite["projection"],
     };
   } catch {
     // Corrupt recovery data must not make a prior dispatch safe to repeat.

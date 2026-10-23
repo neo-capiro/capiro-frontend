@@ -26,6 +26,10 @@ export default async function RootLayout({
         <Suspense fallback={<p role="status">Loading workspace…</p>}>
           <ApplicationBoundary
             publishableKey={readCapiroConfig(process.env).publishableKey}
+            readOnlyPreview={
+              process.env.CAPIRO_PREVIEW_READ_ONLY !== undefined &&
+              process.env.CAPIRO_PREVIEW_READ_ONLY !== "false"
+            }
           >
             {children}
           </ApplicationBoundary>

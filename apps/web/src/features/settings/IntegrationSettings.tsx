@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { z } from "zod";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type {
   integrationProviderSchema,
   integrationSchema,
@@ -69,7 +68,6 @@ export function IntegrationSettings() {
       `${url.pathname}${url.search}${url.hash}`,
     );
   }, [oauthOutcome]);
-  const api = useCapiro();
   const connections = useCapiroQuery("settings.integrations.list", {});
   const microsoft = useCapiroQuery(
     "settings.integrations.microsoftCapabilities",
@@ -95,7 +93,7 @@ export function IntegrationSettings() {
       throw new Error(
         "IMAP / CalDAV ingestion is unsupported in this application.",
       );
-    const result = await api.request(
+    const result = await mutationApi.request(
       provider === "microsoft_365"
         ? "settings.integrations.startMicrosoft"
         : "settings.integrations.startGoogle",
@@ -117,7 +115,7 @@ export function IntegrationSettings() {
   async function sync(connection: Connection, signal: AbortSignal) {
     if (!canRetrySync(connection))
       throw new Error("Reconnect this account before syncing.");
-    const result = await api.request(
+    const result = await mutationApi.request(
       connection.provider === "microsoft_365"
         ? "settings.integrations.syncMicrosoft"
         : "settings.integrations.syncGoogle",
@@ -279,7 +277,7 @@ export function IntegrationSettings() {
                               onClick={() =>
                                 void action.run(
                                   (signal) =>
-                                    api.request(
+                                    mutationApi.request(
                                       "settings.integrations.configureMicrosoftSubscriptions",
                                       {
                                         params: { connectionId: connection.id },

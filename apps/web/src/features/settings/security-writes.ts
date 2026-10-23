@@ -1,4 +1,7 @@
 import { CapiroApiError } from "../../shared/capiro/http";
+import { ordinaryReceipt } from "./ordinary-write-recovery";
+import type { SettingsWrite } from "./security-write-types";
+export type { SettingsWrite } from "./security-write-types";
 
 type Row = Record<string, unknown>;
 const row = (value: unknown): Row =>
@@ -14,16 +17,6 @@ const sameMembers = (a: unknown, b: unknown) => {
     left.every((id, index) => id === right[index])
   );
 };
-export type SettingsWrite = {
-  operation: string;
-  attemptId: string;
-  input: { params?: Row; body?: Row };
-  state: "pending" | "unknown";
-  expectedInvitation?: { email: string; role: string };
-  receiptId?: string;
-  acceptedResult?: boolean;
-  startedAt: string;
-};
 export const uncertainSettingsWrite =
   "The result is not confirmed. This write will not be sent again. Check the recorded target before making another change.";
 
@@ -31,7 +24,7 @@ export const uncertainSettingsWrite =
 export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const receipt = row(value);
   const { params = {}, body = {} } = write.input;
-  let confirmed = false;
+  let confirmed = ordinaryReceipt(write, value) ?? false;
   switch (write.operation) {
     case "settings.team.remove":
       confirmed = receipt.ok === true || typeof receipt.jobId === "string";

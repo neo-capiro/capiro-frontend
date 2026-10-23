@@ -19,6 +19,17 @@ export const jsonScalarSchema = z.union([
 ]);
 export const flatPreferencesSchema = z.record(z.string(), jsonScalarSchema);
 export const emptySettingsRequest = z.object({}).strict();
+export const recipientBroadcastSchema = z.object({
+  id: z.uuid(),
+  title: z.string().max(2000),
+  body: z.string().max(100000),
+  createdAt: z.iso.datetime({ offset: true }),
+});
+export const broadcastAcknowledgementSchema = z.object({
+  ok: z.literal(true),
+  broadcastId: z.uuid(),
+  acknowledgedAt: z.iso.datetime({ offset: true }),
+});
 export const tenantIdentitySchema = z.object({
   id: z.string(),
   slug: z.string(),

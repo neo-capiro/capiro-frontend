@@ -2,7 +2,6 @@
 
 import { ScopedLink as Link } from "../../shared/shell/ScopedLink";
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { TextInput } from "../../shared/module-ui";
 import {
@@ -14,7 +13,8 @@ import {
 } from "./components";
 import { EmailSignature } from "./SignatureSettings";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 export function PersonalSettings({
   identity,
@@ -25,9 +25,9 @@ export function PersonalSettings({
   refresh: () => void;
   readOnlyPreview?: boolean;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("personal", identity.user.id);
+  const { api, action, locked } = mutation;
   const [title, setTitle] = useState(identity.user.title ?? "");
-  const action = useSettingsAction(api);
   return (
     <div className={styles.stack} data-design-target="411:67666">
       <SettingsCard
@@ -71,7 +71,7 @@ export function PersonalSettings({
                 className={styles.input}
                 value={title}
                 maxLength={120}
-                disabled={readOnlyPreview || action.busy}
+                disabled={readOnlyPreview || locked}
                 onChange={(event) => setTitle(event.target.value)}
                 placeholder="Add your title"
               />
@@ -80,7 +80,7 @@ export function PersonalSettings({
           <SettingsButton
             primary
             type="submit"
-            disabled={readOnlyPreview || action.busy}
+            disabled={readOnlyPreview || locked}
           >
             {action.busy ? "Saving…" : "Save"}
           </SettingsButton>
@@ -91,6 +91,7 @@ export function PersonalSettings({
           </SettingsNotice>
         )}
         {action.message && <SettingsNotice title={action.message} />}
+        <SettingsMutationNotice {...mutation} busy={action.busy} />
       </SettingsCard>
       <SettingsCard title="Account">
         <SettingFacts

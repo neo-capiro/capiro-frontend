@@ -1,6 +1,14 @@
 import { beforeEach, expect, it, vi } from "vitest";
 import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+vi.mock("@clerk/nextjs", () => ({
+  useAuth: () => ({
+    userId: "actor-a",
+    sessionId: "session-a",
+    orgId: "tenant-a",
+  }),
+}));
 import { SettingsScreen } from "../src/features/settings/SettingsScreen";
 vi.mock("../src/features/settings/SettingsNavigation", () => ({
   SettingsNavigation: () => createElement("nav", null, "Synthetic navigation"),
@@ -47,15 +55,19 @@ beforeEach(() => {
 });
 const render = (section: string, readOnlyPreview = true) =>
   renderToStaticMarkup(
-    createElement(SettingsScreen, {
-      section,
-      readOnlyPreview,
-      meriPreferences: createElement(
-        "p",
-        null,
-        "Preferences child must not mount",
-      ),
-    }),
+    createElement(
+      QueryClientProvider,
+      { client: new QueryClient() },
+      createElement(SettingsScreen, {
+        section,
+        readOnlyPreview,
+        meriPreferences: createElement(
+          "p",
+          null,
+          "Preferences child must not mount",
+        ),
+      }),
+    ),
   );
 
 it("preview Profiles requests active roster without archived/owner reads or write controls", () => {

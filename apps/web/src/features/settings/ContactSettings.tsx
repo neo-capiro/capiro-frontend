@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import {
   contactInfoSchema,
   type CapiroMe,
@@ -16,7 +15,8 @@ import {
   SettingsNotice,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 type ContactInfo = z.infer<typeof contactInfoSchema>;
 const organizationFields = [
@@ -54,16 +54,16 @@ function ContactForm({
   canEdit: boolean;
   reload: () => void;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("contact");
+  const { api, action, locked } = mutation;
   const [form, setForm] = useState(initial);
-  const action = useSettingsAction(api);
   function input(key: keyof ContactInfo, label: string) {
     return (
       <SettingField label={label}>
         <TextInput
           className={styles.input}
           value={form[key] ?? ""}
-          disabled={!canEdit || action.busy}
+          disabled={!canEdit || locked}
           type={key === "email" ? "email" : key === "phone" ? "tel" : "text"}
           onChange={(event) =>
             setForm((current) => ({ ...current, [key]: event.target.value }))
@@ -122,12 +122,9 @@ function ContactForm({
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice {...mutation} busy={action.busy} />
       <div>
-        <SettingsButton
-          primary
-          type="submit"
-          disabled={!canEdit || action.busy}
-        >
+        <SettingsButton primary type="submit" disabled={!canEdit || locked}>
           {action.busy ? "Saving…" : "Save contact info"}
         </SettingsButton>
       </div>

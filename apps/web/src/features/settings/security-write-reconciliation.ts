@@ -1,6 +1,7 @@
 import type { CapiroApi } from "../../shared/capiro/http";
 import type { capiroOperations } from "../../shared/capiro/registry";
 import type { SettingsWrite } from "./security-writes";
+import { reconcileOrdinaryWrite } from "./ordinary-write-recovery";
 type Api = CapiroApi<typeof capiroOperations>;
 const row = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -12,6 +13,12 @@ export async function reconcileSettingsWrite(
   signal: AbortSignal,
 ): Promise<boolean> {
   signal.throwIfAborted();
+  // These legacy owners expose current state, not an attributable command lookup.
+  // Another actor can produce the same state after a lost response. Only a
+  // delivered, validated receipt permits this follow-up observation to settle.
+  if (!write.receiptConfirmed) return false;
+  const ordinary = await reconcileOrdinaryWrite(api, write, signal);
+  if (ordinary !== undefined) return ordinary;
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
     case "settings.team.resend": {
@@ -196,6 +203,7 @@ export async function reconcileSettingsWrite(
 
 export const settingsWriteNeedsReadback = (operation: string) =>
   [
+    "me.emailSignature.update",
     "settings.team.remove",
     "settings.team.resend",
     "settings.analyst.personCandidates.decide",

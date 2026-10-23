@@ -1,5 +1,7 @@
 # A2 frontend checkpoint — 2026-10-23
 
+Historical checkpoint below. Read `CONTINUATION.md` and the refreshed `PREREQUISITES.md` for current ST20/ST24/PF16 source and remaining scope; the original “not implemented” entries below describe the earlier rotation only.
+
 This is a partial, reviewable source checkpoint. **A2 is not complete.** The full 25-ticket inventory and absent Core protocols remain in `PREREQUISITES.md`. Worker rotation is for gate repair and independent review, not a scope reduction.
 
 ## Changed behavior

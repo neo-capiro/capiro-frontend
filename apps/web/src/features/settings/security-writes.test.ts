@@ -165,6 +165,7 @@ describe("A1 Settings receipt boundaries", () => {
       params: { userId: "right" },
       body: { role: "user_admin" },
     });
+    write.receiptConfirmed = true;
     const api = { request } as unknown as Parameters<
       typeof reconcileSettingsWrite
     >[0];
@@ -201,6 +202,7 @@ describe("A1 Settings receipt boundaries", () => {
       params: { id: "right" },
       body: { decision: "confirm" },
     });
+    write.receiptConfirmed = true;
     expect(
       await reconcileSettingsWrite(api, write, new AbortController().signal),
     ).toBe(true);
@@ -384,6 +386,7 @@ it("a resend requires the returned invitation to belong to the originally review
     role: "user_admin",
   };
   assertSettingsReceipt(write, { invitationId: "new" });
+  write.receiptConfirmed = true;
   const request = vi
     .fn()
     .mockResolvedValueOnce([

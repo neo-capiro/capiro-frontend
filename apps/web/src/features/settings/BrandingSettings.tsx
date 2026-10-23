@@ -13,6 +13,8 @@ import {
 } from "./components";
 import styles from "./styles";
 import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 function BrandingForm({
   initialName,
@@ -27,6 +29,9 @@ function BrandingForm({
   const [name, setName] = useState(initialName);
   const upload = useRef<HTMLInputElement>(null);
   const action = useSettingsAction(api);
+  const mutation = useSettingsMutation("branding-name");
+  const busy = action.busy || mutation.action.busy;
+  const locked = busy || mutation.locked;
   async function uploadLogo(file: File, signal: AbortSignal) {
     const contentType = file.type;
     if (
@@ -75,9 +80,9 @@ function BrandingForm({
           className={`${styles.row} ${styles.formRow}`}
           onSubmit={(event) => {
             event.preventDefault();
-            void action.run(
+            void mutation.action.run(
               async (signal) => {
-                const result = await api.request(
+                const result = await mutation.api.request(
                   "settings.branding.update",
                   { body: { name } },
                   { signal },
@@ -100,14 +105,14 @@ function BrandingForm({
                 minLength={2}
                 maxLength={200}
                 required
-                disabled={action.busy}
+                disabled={locked}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
               />
             </SettingField>
           </div>
-          <SettingsButton primary type="submit" disabled={action.busy}>
-            {action.busy ? "Saving…" : "Save"}
+          <SettingsButton primary type="submit" disabled={locked}>
+            {mutation.action.busy ? "Saving…" : "Save"}
           </SettingsButton>
         </form>
       </SettingsCard>
@@ -129,7 +134,7 @@ function BrandingForm({
             <div className={styles.logoPreview}>No logo</div>
           )}
           <SettingsButton
-            disabled={action.busy}
+            disabled={locked}
             onClick={() => upload.current?.click()}
           >
             {action.busy ? "Uploading…" : "Upload logo"}
@@ -138,10 +143,11 @@ function BrandingForm({
             ref={upload}
             type="file"
             hidden
+            disabled={locked}
             accept="image/png,image/jpeg,image/webp,image/svg+xml"
             onChange={(event) => {
               const file = event.target.files?.[0];
-              if (file)
+              if (file && !locked)
                 void action.run(
                   (signal) => uploadLogo(file, signal),
                   "Logo was uploaded.",
@@ -152,12 +158,16 @@ function BrandingForm({
           />
         </div>
       </SettingsCard>
-      {action.error && (
+      {(action.error || mutation.action.error) && (
         <SettingsNotice title="Branding could not be saved" error>
-          {action.error}
+          {action.error ?? mutation.action.error}
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      {mutation.action.message && (
+        <SettingsNotice title={mutation.action.message} />
+      )}
+      <SettingsMutationNotice {...mutation} busy={busy} />
     </div>
   );
 }
