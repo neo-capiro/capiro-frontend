@@ -1,30 +1,14 @@
-import { z } from "zod";
 import type { ApiClient } from "@/shared/portfolio/api/http";
-import { messageSchema, threadSchema } from "../email";
+import { threadPageSchema, type MailThreadPage } from "../email/read-contracts";
+import {
+  mailThreadKey,
+  readThreadPage,
+  type ThreadContinuation,
+} from "../email/read-pages";
 
-// Detail returns all stored active messages. The list's three-message projection
-// is deliberately insufficient for expansion or selecting reply recipients.
-export const fullThreadSchema = threadSchema
-  .extend({
-    tenantId: z.uuid(),
-    connectionStatus: z.string().nullable(),
-    messages: z.array(
-      messageSchema.extend({
-        threadId: z.uuid(),
-        createdAt: z.iso.datetime({ offset: true }),
-        sentAt: z.iso.datetime({ offset: true }).nullable(),
-        receivedAt: z.iso.datetime({ offset: true }).nullable(),
-      }),
-    ),
-  })
-  .refine(
-    (thread) =>
-      thread.messages.every((message) => message.threadId === thread.id) &&
-      new Set(thread.messages.map((message) => message.id)).size ===
-        thread.messages.length,
-    "Mail message association mismatch",
-  );
-export type FullThread = z.infer<typeof fullThreadSchema>;
+// One bounded current page, never the list's previews or all provider history.
+export const fullThreadSchema = threadPageSchema;
+export type FullThread = MailThreadPage;
 export interface ThreadScope {
   tenantId: string;
   userId: string;
@@ -32,30 +16,12 @@ export interface ThreadScope {
   threadId: string;
 }
 export const threadKey = (scope: ThreadScope) =>
-  [
-    "mail-thread",
-    scope.tenantId,
-    scope.userId,
-    scope.clientId,
-    scope.threadId,
-  ] as const;
+  mailThreadKey(scope, scope.threadId);
 export function readTimelineThread(
   api: ApiClient,
   scope: ThreadScope,
   signal?: AbortSignal,
+  continuation: ThreadContinuation | null = null,
 ) {
-  z.uuid().parse(scope.clientId);
-  z.uuid().parse(scope.threadId);
-  return api.request(
-    "core",
-    `engagement/mail-threads/${scope.threadId}`,
-    fullThreadSchema.refine(
-      (thread) =>
-        thread.id === scope.threadId &&
-        thread.clientId === scope.clientId &&
-        thread.tenantId === scope.tenantId,
-      "Thread does not belong to this client and tenant",
-    ),
-    { signal },
-  );
+  return readThreadPage(api, scope, scope.threadId, continuation, signal);
 }

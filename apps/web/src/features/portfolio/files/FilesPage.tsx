@@ -13,6 +13,9 @@ import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
 import { MoveFile } from "./MoveFile";
+import { BatchMoveDialog } from "./BatchMoveDialog";
+import { useBatchMove } from "./useBatchMove";
+import type { Attachment } from "./contracts";
 import { UploadDialog } from "./UploadDialog";
 import { FileStorageUsage } from "./FileStorageUsage";
 import { DocumentState } from "./DocumentState";
@@ -28,6 +31,11 @@ export function FilesPage({
   linkedFileId?: string;
 }) {
   const query = useFiles(clientId);
+  const batch = useBatchMove(clientId);
+  const [batchSelection, setBatchSelection] = useState<{
+    view: string;
+    files: Attachment[];
+  }>();
   const arrival = useLinkedFileArrival(clientId, linkedFileId, query);
   const client = useClient(clientId);
   const [filters, setFilters] = useState<{
@@ -96,6 +104,7 @@ export function FilesPage({
     ...new Set(files.flatMap((file) => (file.folder ? [file.folder] : []))),
   ].sort();
   const chosen = files.filter((f) => selected.includes(f.id));
+  const batchOpen = batchSelection?.view === query.readerScope;
   return (
     <div className="page stack">
       <header className="row between">
@@ -130,6 +139,28 @@ export function FilesPage({
           </button>
         </div>
       </header>
+      {batch.pending && !batchOpen && (
+        <div role="status">
+          <p>
+            A previous file batch is unconfirmed. Recover its exact result
+            before another batch.
+          </p>
+          <button
+            className="button"
+            disabled={batch.busy}
+            onClick={batch.recover}
+          >
+            Check batch result
+          </button>
+        </div>
+      )}
+      {batch.error && !batchOpen && <p role="alert">{batch.error}</p>}
+      {batch.confirmed && !batchOpen && (
+        <p role="status">
+          {batch.confirmed} Current file organization may have changed since
+          that receipt.
+        </p>
+      )}
       <FileToolbar
         search={search}
         source={source}
@@ -262,6 +293,25 @@ export function FilesPage({
                   <FileSelectionBar
                     visibleCount={rows.length}
                     selectedCount={chosen.length}
+                    moveUnavailable={
+                      chosen.length > 1
+                        ? chosen.length > 100
+                          ? "Select at most 100 files for one atomic move."
+                          : chosen.some(
+                                (file) => file.metadataRevision === undefined,
+                              )
+                            ? "Batch revisions are unavailable. Refresh after the file service contract is enabled."
+                            : chosen.some(
+                                  (file) =>
+                                    file.sourceEntityType ===
+                                    "hearing_record_brief",
+                                )
+                              ? "Hearing-backed documents require additional owner authorization before batch moves are available."
+                              : batch.locked
+                                ? "Check the retained batch or refresh the current file access before moving this selection."
+                                : undefined
+                        : undefined
+                    }
                     hiddenSelectedCount={
                       chosen.filter(
                         (file) => !rows.some((row) => row.id === file.id),
@@ -271,7 +321,15 @@ export function FilesPage({
                       setChecked({ view: query.readerScope, ids: [] })
                     }
                     onMove={() => {
-                      if (chosen[0]) requestAction("move", chosen[0].id);
+                      if (chosen.length === 1 && chosen[0])
+                        requestAction("move", chosen[0].id);
+                      else if (chosen.length > 1 && !batch.locked) {
+                        batch.begin();
+                        setBatchSelection({
+                          view: query.readerScope,
+                          files: structuredClone(chosen),
+                        });
+                      }
                     }}
                   />
                   <FileTable
@@ -319,6 +377,15 @@ export function FilesPage({
           folders={folders}
           creating={action.kind === "new-folder"}
           onClose={close}
+        />
+      )}
+      {batchSelection?.view === query.readerScope && (
+        <BatchMoveDialog
+          clientId={clientId}
+          files={batchSelection.files}
+          folders={folders}
+          move={batch}
+          onClose={() => setBatchSelection(undefined)}
         />
       )}
       {requestedAction?.kind === "delete" &&

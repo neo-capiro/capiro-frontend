@@ -13,6 +13,7 @@ import { SessionContext } from "./SessionContext";
 import { SelectedClientProvider } from "./SelectedClient";
 import { routeClientId } from "./client-route";
 import { isOnboardPath, isPublicOnboardPath } from "./onboard-route";
+import { BroadcastInbox } from "../shell/BroadcastInbox";
 
 const noSignedInSession = () => {};
 
@@ -39,10 +40,12 @@ function SessionData({
   children,
   clientId,
   onSessionExpired,
+  readOnlyPreview,
 }: {
   children: ReactNode;
   clientId?: string;
   onSessionExpired: () => void;
+  readOnlyPreview: boolean;
 }) {
   const [expired, setExpired] = useState(false);
   const expire = useCallback(() => {
@@ -66,6 +69,7 @@ function SessionData({
       <DataProvider key={clientId ?? "no-selection"} onSessionExpired={expire}>
         <CapiroDataProvider onSessionExpired={expire}>
           <SelectedClientProvider requestedId={clientId}>
+            {!readOnlyPreview && <BroadcastInbox />}
             {children}
           </SelectedClientProvider>
         </CapiroDataProvider>
@@ -73,7 +77,13 @@ function SessionData({
     </SessionContext.Provider>
   );
 }
-function CurrentSession({ children }: { children: ReactNode }) {
+function CurrentSession({
+  children,
+  readOnlyPreview,
+}: {
+  children: ReactNode;
+  readOnlyPreview: boolean;
+}) {
   const { isLoaded, userId, sessionId, orgId } = useAuth();
   const pathname = usePathname();
   const search = useSearchParams();
@@ -121,6 +131,7 @@ function CurrentSession({ children }: { children: ReactNode }) {
       key={JSON.stringify([userId, sessionId, orgId])}
       clientId={clientId}
       onSessionExpired={tabSession.expire}
+      readOnlyPreview={readOnlyPreview}
     >
       {content}
     </SessionData>
@@ -129,9 +140,11 @@ function CurrentSession({ children }: { children: ReactNode }) {
 export function ApplicationBoundary({
   publishableKey,
   children,
+  readOnlyPreview = false,
 }: {
   publishableKey?: string;
   children: ReactNode;
+  readOnlyPreview?: boolean;
 }) {
   const pathname = usePathname();
   // Revocable Planner capability forms have an independent public contract.
@@ -152,7 +165,9 @@ export function ApplicationBoundary({
     );
   return (
     <AuthenticationProvider publishableKey={publishableKey}>
-      <CurrentSession>{children}</CurrentSession>
+      <CurrentSession readOnlyPreview={readOnlyPreview}>
+        {children}
+      </CurrentSession>
     </AuthenticationProvider>
   );
 }

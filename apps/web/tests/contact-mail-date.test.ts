@@ -12,12 +12,17 @@ const state = vi.hoisted(() => ({
   error: null as Error | null,
 }));
 vi.mock("../src/features/portfolio/relationships/email", () => ({
-  useContactThreads: () => ({ ...state, refetch: vi.fn() }),
+  useContactThreads: () => ({
+    ...state,
+    scope: { tenantId: "synthetic-tenant", userId: "synthetic-actor" },
+    refresh: vi.fn(),
+    hasNextPage: false,
+  }),
   useMailThread: () => ({
     isSuccess: false,
     isPending: false,
     error: null,
-    refetch: vi.fn(),
+    refresh: vi.fn(),
   }),
 }));
 vi.mock("../src/features/portfolio/relationships/MailCompose", () => ({
@@ -147,7 +152,9 @@ describe("Contact message history date", () => {
 
   it("preserves explicit empty and no-email states without message dates", () => {
     state.data = [];
-    expect(render()).toContain("No accessible messages for this contact.");
+    expect(render()).toContain(
+      "No accessible stored messages match this contact and these filters.",
+    );
     state.data = [thread];
     const noEmail = render(null);
     expect(noEmail).toContain(

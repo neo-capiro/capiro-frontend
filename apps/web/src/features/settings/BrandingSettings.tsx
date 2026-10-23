@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
+import { useRef, useState, type FormEvent } from "react";
 import { useCapiroQuery } from "../../shared/capiro/queries";
-import { uploadCapiroLogo } from "../../shared/capiro/uploads";
 import { StatusPanel, TextInput } from "../../shared/module-ui";
 import {
   SettingField,
@@ -12,7 +10,9 @@ import {
   SettingsNotice,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
+import { useBrandingLogo } from "./branding/useBrandingLogo";
 
 function BrandingForm({
   initialName,
@@ -23,126 +23,147 @@ function BrandingForm({
   logoUrl?: string | null;
   reload: () => void;
 }) {
-  const api = useCapiro();
   const [name, setName] = useState(initialName);
-  const upload = useRef<HTMLInputElement>(null);
-  const action = useSettingsAction(api);
-  async function uploadLogo(file: File, signal: AbortSignal) {
-    const contentType = file.type;
-    if (
-      !["image/png", "image/jpeg", "image/webp", "image/svg+xml"].includes(
-        contentType,
-      )
-    )
-      throw new Error("Choose a PNG, JPG, WEBP or SVG logo.");
-    if (!file.size || file.size > 2 * 1024 * 1024)
-      throw new Error("Choose a logo smaller than 2 MB.");
-    const ticket = await api.request(
-      "settings.branding.logoUploadUrl",
-      {
-        body: {
-          contentType: contentType as
-            | "image/png"
-            | "image/jpeg"
-            | "image/webp"
-            | "image/svg+xml",
-          contentLength: file.size,
-        },
+  const mutation = useSettingsMutation("branding-name");
+  const logo = useBrandingLogo(reload);
+  const locked = mutation.locked || logo.locked;
+  function saveName(event: FormEvent) {
+    event.preventDefault();
+    if (locked) return;
+    void mutation.action.run(
+      async (signal) => {
+        const result = await mutation.api.request(
+          "settings.branding.update",
+          { body: { name } },
+          { signal },
+        );
+        if (result.name !== name)
+          throw new Error(
+            "The response did not confirm the company name. Reload before making another change.",
+          );
+        return result;
       },
-      { signal },
-    );
-    await uploadCapiroLogo(ticket, file, { signal });
-    signal.throwIfAborted();
-    return api.request(
-      "settings.branding.logoConfirm",
-      {
-        body: {
-          s3Key: ticket.s3Key,
-          contentType: contentType as
-            | "image/png"
-            | "image/jpeg"
-            | "image/webp"
-            | "image/svg+xml",
-        },
-      },
-      { signal },
+      "Company name was saved in Capiro. Sign-in provider synchronization is not confirmed.",
+      reload,
     );
   }
   return (
     <div className={styles.stack} data-design-target="411:72025">
-      <SettingsCard title="Company name">
-        <form
-          className={`${styles.row} ${styles.formRow}`}
-          onSubmit={(event) => {
-            event.preventDefault();
-            void action.run(
-              () => api.request("settings.branding.update", { body: { name } }),
-              "Company name was saved.",
-              reload,
-            );
-          }}
-        >
-          <div className={styles.grow}>
-            <SettingField label="Company name">
-              <TextInput
-                className={styles.input}
-                minLength={2}
-                maxLength={200}
-                required
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </SettingField>
-          </div>
-          <SettingsButton primary type="submit" disabled={action.busy}>
-            {action.busy ? "Saving…" : "Save"}
-          </SettingsButton>
-        </form>
-      </SettingsCard>
-      <SettingsCard title="Logo">
-        <div className={styles.row}>
-          {logoUrl ? (
-            <img
-              src={logoUrl}
-              alt="Organization logo"
-              width={160}
-              height={80}
-              style={{ objectFit: "contain" }}
-            />
-          ) : (
-            <div className={styles.logoPreview}>No logo</div>
-          )}
-          <SettingsButton
-            disabled={action.busy}
-            onClick={() => upload.current?.click()}
-          >
-            {action.busy ? "Uploading…" : "Upload logo"}
-          </SettingsButton>
-          <input
-            ref={upload}
-            type="file"
-            hidden
-            accept="image/png,image/jpeg,image/webp,image/svg+xml"
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (file)
-                void action.run(
-                  (signal) => uploadLogo(file, signal),
-                  "Logo was uploaded.",
-                  reload,
-                );
-              event.target.value = "";
-            }}
-          />
-        </div>
-      </SettingsCard>
-      {action.error && (
+      <BrandingName
+        name={name}
+        onChange={setName}
+        onSubmit={saveName}
+        disabled={locked}
+        busy={mutation.action.busy}
+      />
+      <SettingsNotice title="Sign-in provider name">
+        The Capiro name is saved locally. The current service does not report
+        whether the name has synchronized with the sign-in provider.
+      </SettingsNotice>
+      <BrandingLogo
+        logoUrl={logoUrl}
+        disabled={locked}
+        busy={logo.action.busy}
+        uploadFile={logo.uploadFile}
+      />
+      {(logo.action.error || mutation.action.error) && (
         <SettingsNotice title="Branding could not be saved" error>
-          {action.error}
+          {logo.action.error ?? mutation.action.error}
         </SettingsNotice>
       )}
-      {action.message && <SettingsNotice title={action.message} />}
+      {logo.action.message && <SettingsNotice title={logo.action.message} />}
+      {mutation.action.message && (
+        <SettingsNotice title={mutation.action.message} />
+      )}
+      <SettingsMutationNotice {...mutation} busy={mutation.action.busy} />
+      <SettingsMutationNotice {...logo} busy={logo.action.busy} />
     </div>
+  );
+}
+
+function BrandingName({
+  name,
+  onChange,
+  onSubmit,
+  disabled,
+  busy,
+}: {
+  name: string;
+  onChange: (name: string) => void;
+  onSubmit: (event: FormEvent) => void;
+  disabled: boolean;
+  busy: boolean;
+}) {
+  return (
+    <SettingsCard title="Company name">
+      <form className={`${styles.row} ${styles.formRow}`} onSubmit={onSubmit}>
+        <div className={styles.grow}>
+          <SettingField label="Company name">
+            <TextInput
+              className={styles.input}
+              minLength={2}
+              maxLength={200}
+              required
+              disabled={disabled}
+              value={name}
+              onChange={(event) => onChange(event.target.value)}
+            />
+          </SettingField>
+        </div>
+        <SettingsButton primary type="submit" disabled={disabled}>
+          {busy ? "Saving…" : "Save"}
+        </SettingsButton>
+      </form>
+    </SettingsCard>
+  );
+}
+
+function BrandingLogo({
+  logoUrl,
+  disabled,
+  busy,
+  uploadFile,
+}: {
+  logoUrl?: string | null;
+  disabled: boolean;
+  busy: boolean;
+  uploadFile: (file: File) => void;
+}) {
+  const upload = useRef<HTMLInputElement>(null);
+  return (
+    <SettingsCard title="Logo">
+      <div className={styles.row}>
+        {logoUrl ? (
+          <img
+            src={logoUrl}
+            alt="Organization logo"
+            width={160}
+            height={80}
+            style={{ objectFit: "contain" }}
+          />
+        ) : (
+          <div className={styles.logoPreview}>No logo</div>
+        )}
+        <SettingsButton
+          disabled={disabled}
+          onClick={() => upload.current?.click()}
+        >
+          {busy ? "Uploading…" : "Upload logo"}
+        </SettingsButton>
+        <input
+          ref={upload}
+          type="file"
+          hidden
+          disabled={disabled}
+          accept="image/png,image/jpeg,image/webp,image/svg+xml"
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            if (file && !disabled) uploadFile(file);
+            event.target.value = "";
+          }}
+        />
+      </div>
+    </SettingsCard>
   );
 }
 

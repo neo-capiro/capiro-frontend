@@ -150,6 +150,7 @@ function retireRecovery(
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
+          | "OBJECTIVE_ASSOCIATION_REJECTED"
           | "OBJECTIVE_VERSION_CONFLICT";
       },
   assert: () => void,
@@ -184,6 +185,36 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Caller validates the native failure schema and obtains a fresh current read
+ * under the execution lock. A missing receipt is never a no-write refusal. */
+export function retireAssociationRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: { requestId: string | null; outcome: string; code: string },
+  assert: () => void,
+) {
+  if (
+    failure.requestId !== requestId ||
+    failure.outcome !== "rejected" ||
+    ![
+      "MALFORMED_REQUEST",
+      "UNAUTHENTICATED",
+      "FORBIDDEN",
+      "OBJECTIVE_VERSION_CONFLICT",
+      "ASSOCIATION_VERSION_CONFLICT",
+      "REQUEST_CONFLICT",
+      "UNSUPPORTED_RESOURCE",
+    ].includes(failure.code)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "OBJECTIVE_ASSOCIATION_REJECTED" },
+    assert,
+  );
 }
 
 /** Caller must verify this exact command's no-write refusal and fresh reads,

@@ -1,6 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useCallback, useState, type ReactNode } from "react";
+import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { StatusPanel } from "../../shared/module-ui";
@@ -33,12 +34,20 @@ type ScreenContext = {
   refresh: () => void;
   meriPreferences: ReactNode;
   memoryReviewEnabled: boolean;
+  readOnlyPreview: boolean;
+  reportTeamFailure: (error?: string) => void;
 };
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
   "contact-info": (context) => <ContactSettings identity={context.identity} />,
   branding: () => <BrandingSettings />,
-  team: (context) => <TeamSettings identity={context.identity} />,
+  team: (context) => (
+    <TeamSettings
+      identity={context.identity}
+      refreshIdentity={context.refresh}
+      reportFailure={context.reportTeamFailure}
+    />
+  ),
   integrations: () => <IntegrationSettings />,
   memory: (context) => (
     <MemorySettings reviewEnabled={context.memoryReviewEnabled} />
@@ -46,7 +55,9 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
   "ai-usage": () => <UsageSettings />,
-  profiles: () => <ProfileSettings />,
+  profiles: (context) => (
+    <ProfileSettings readOnlyPreview={context.readOnlyPreview} />
+  ),
   "hq-tenants": (context) => <TenantSettings identity={context.identity} />,
   "hq-customers": () => <CustomerSettings />,
   "hq-ai-keys": () => <AiKeysSettings />,
@@ -84,11 +95,22 @@ export function SettingsScreen({
   section = "personal",
   meriPreferences,
   memoryReviewEnabled = false,
+  readOnlyPreview = false,
 }: {
   section?: string;
   meriPreferences: ReactNode;
   memoryReviewEnabled?: boolean;
+  readOnlyPreview?: boolean;
 }) {
+  const api = useCapiro();
+  const [teamFailure, setTeamFailure] = useState<{
+    scope: typeof api;
+    message?: string;
+  }>();
+  const reportTeamFailure = useCallback(
+    (message?: string) => setTeamFailure({ scope: api, message }),
+    [api],
+  );
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
   const render = screens[section];
@@ -114,7 +136,19 @@ export function SettingsScreen({
                 </p>
               )}
             </header>
-            {!canOpenSettings(section, identity) ? (
+            {section === "team" &&
+              teamFailure?.scope === api &&
+              teamFailure.message && (
+                <SettingsNotice title="Team update failed" error>
+                  {teamFailure.message}
+                </SettingsNotice>
+              )}
+            {readOnlyPreview && !["personal", "profiles"].includes(section) ? (
+              <SettingsNotice title="Unavailable in read-only preview">
+                This Settings section is not admitted by the server preview
+                policy. No section reads or writes have been requested.
+              </SettingsNotice>
+            ) : !canOpenSettings(section, identity) ? (
               <SettingsNotice
                 title={
                   section === "billing"
@@ -136,6 +170,8 @@ export function SettingsScreen({
                   refresh: query.reload,
                   meriPreferences,
                   memoryReviewEnabled,
+                  readOnlyPreview,
+                  reportTeamFailure,
                 })}
               </>
             ) : (

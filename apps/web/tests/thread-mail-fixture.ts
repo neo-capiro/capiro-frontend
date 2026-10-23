@@ -2,7 +2,9 @@ import type { FullThread } from "../src/features/portfolio/relationships/thread/
 export const threadClientId = "10000000-0000-4000-8000-000000000001";
 export const threadId = "20000000-0000-4000-8000-000000000001";
 export const threadTenantId = "90000000-0000-4000-8000-000000000001";
-export const fullThread: FullThread = {
+export const threadActorId = "70000000-0000-4000-8000-000000000001";
+const threadConnectionId = "80000000-0000-4000-8000-000000000001";
+const storedThread = {
   id: threadId,
   clientId: threadClientId,
   tenantId: threadTenantId,
@@ -47,4 +49,40 @@ export const fullThread: FullThread = {
       createdAt: "2026-10-11T14:00:01Z",
     },
   ],
+};
+export const fullThread: FullThread = {
+  ...storedThread,
+  associationClientId: null,
+  connectionId: threadConnectionId,
+  connectionOwnerTenantId: threadTenantId,
+  connectionOwnerActorId: threadActorId,
+  updatedAt: "2026-10-11T14:00:01.000Z",
+  asOf: "2026-10-12T00:00:00.000Z",
+  totalMessages: 2,
+  messageOffset: 0,
+  hasMore: false,
+  nextCursor: null,
+  nextMessageOffset: null,
+  notice: "Synthetic stored current read",
+  coverage: {
+    sourceStatus: "healthy",
+    reason: null,
+    lastMailSyncAt: "2026-10-12T00:00:00.000Z",
+    lastConnectionSyncAt: "2026-10-12T00:00:00.000Z",
+    backfillComplete: true,
+    hasMore: false,
+    captureRepair: "complete",
+  },
+  messages: storedThread.messages.map((message) => ({
+    ...message,
+    tenantId: threadTenantId,
+    connectionId: threadConnectionId,
+    bodyOffset: 0,
+    bodyLength: message.bodyText.length,
+    bodyTruncated: false,
+    nextBodyOffset: null,
+    bodySha256: "a".repeat(64),
+    bodyStoredPresent: true,
+    bodyCompleteness: "full",
+  })),
 };

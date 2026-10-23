@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { StatusPanel } from "../../shared/module-ui";
 import {
@@ -11,18 +10,14 @@ import {
   SettingsNotice,
   SettingsSwitch,
 } from "./components";
+import { useSignatureFile } from "./signature/useSignatureFile";
+import { SignatureUpload } from "./signature/SignatureUpload";
 import { RichSignatureEditor } from "./signature/RichSignatureEditor";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 const signatureLimit = 18_000_000;
-const allowedImages = new Set([
-  "image/png",
-  "image/jpeg",
-  "image/gif",
-  "image/webp",
-]);
-
 function SignatureEditor({
   initialHtml,
   initialEnabled,
@@ -32,74 +27,26 @@ function SignatureEditor({
   initialEnabled: boolean;
   reload: () => void;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("signature");
+  const { api, action } = mutation;
   const [html, setHtml] = useState(initialHtml ?? "");
   const [enabled, setEnabled] = useState(initialEnabled);
-  const [fileError, setFileError] = useState<string>();
   const upload = useRef<HTMLInputElement>(null);
-  const action = useSettingsAction();
-  const hasPreview =
-    /<(?:img|table)\b/i.test(html) ||
-    Boolean(
-      html
-        .replace(/<[^>]+>/g, "")
-        .replace(/&nbsp;|&#160;/g, "")
-        .trim(),
-    );
-  async function readFile(file?: File) {
-    if (!file) return;
-    setFileError(undefined);
-    if (file.size > 12_000_000) {
-      setFileError("Choose a file smaller than 12 MB.");
-      return;
-    }
-    if (allowedImages.has(file.type)) {
-      const reader = new FileReader();
-      reader.onload = () =>
-        setHtml(`<img src="${String(reader.result)}" alt="Email signature" />`);
-      reader.onerror = () =>
-        setFileError("The selected image could not be read.");
-      reader.readAsDataURL(file);
-      return;
-    }
-    if (!/\.html?$/i.test(file.name)) {
-      setFileError("Choose a PNG, JPG, GIF, WEBP or HTML signature file.");
-      return;
-    }
-    try {
-      setHtml(await file.text());
-    } catch {
-      setFileError("The selected file could not be read.");
-    }
+  const { reading, fileError, readFile } = useSignatureFile(
+    api,
+    mutation.locked,
+    setHtml,
+  );
+  const [readerScope, setReaderScope] = useState(api);
+  if (readerScope !== api) {
+    setReaderScope(api);
+    setHtml(initialHtml ?? "");
+    setEnabled(initialEnabled);
   }
+  const locked = mutation.locked || reading;
   return (
     <div className={styles.stack}>
-      <div
-        className={styles.dropzone}
-        onDragOver={(event) => event.preventDefault()}
-        onDrop={(event) => {
-          event.preventDefault();
-          void readFile(event.dataTransfer.files[0]);
-        }}
-      >
-        <h3>Upload a signature image or HTML file</h3>
-        <p className={styles.description}>
-          Drag and drop, or browse. Image (PNG, JPG, GIF, WEBP) or .html / .htm
-        </p>
-        <SettingsButton onClick={() => upload.current?.click()}>
-          Browse file
-        </SettingsButton>
-        <input
-          ref={upload}
-          type="file"
-          hidden
-          accept="image/png,image/jpeg,image/gif,image/webp,.html,.htm"
-          onChange={(event) => {
-            void readFile(event.target.files?.[0]);
-            event.target.value = "";
-          }}
-        />
-      </div>
+      <SignatureUpload upload={upload} disabled={locked} readFile={readFile} />
       <p className={styles.description}>
         Export your signature from Outlook (File → Options → Mail → Signatures →
         save as HTML) or Gmail (copy source), then upload it here.
@@ -109,40 +56,25 @@ function SignatureEditor({
         value={html}
         onChange={setHtml}
         onImage={() => upload.current?.click()}
-        disabled={action.busy}
+        disabled={locked}
       />
-      {hasPreview && (
-        <iframe
-          className={styles.signaturePreview}
-          title="Email signature preview"
-          sandbox=""
-          referrerPolicy="no-referrer"
-          srcDoc={`<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data: https:; style-src 'unsafe-inline'"><style>body{font:13px Arial;margin:12px;color:#0a0a0a}</style>${html}`}
-        />
-      )}
-      <div className={styles.check}>
-        <SettingsSwitch
-          label="Append signature to campaign emails by default"
-          checked={enabled}
-          onChange={setEnabled}
-        />
-        <span>
-          Append signature to campaign emails by default
-          <br />
-          <span className={styles.description}>
-            You can still toggle it per campaign at send time.
-          </span>
-        </span>
-      </div>
+      <SignatureOptions
+        html={html}
+        enabled={enabled}
+        disabled={locked}
+        onChange={setEnabled}
+      />
       {(fileError || action.error) && (
         <SettingsNotice title="Signature could not be saved" error>
           {fileError ?? action.error}
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      {reading && <p role="status">Reading the selected signature file…</p>}
+      <SettingsMutationNotice {...mutation} busy={action.busy} />
       <div className={styles.footer}>
         <SettingsButton
-          disabled={action.busy}
+          disabled={locked}
           onClick={() => {
             setHtml(initialHtml ?? "");
             setEnabled(initialEnabled);
@@ -153,13 +85,17 @@ function SignatureEditor({
         </SettingsButton>
         <SettingsButton
           primary
-          disabled={action.busy || html.length > signatureLimit}
+          disabled={locked || html.length > signatureLimit}
           onClick={() =>
             void action.run(
-              () =>
-                api.request("me.emailSignature.update", {
-                  body: { html, enabled },
-                }),
+              (signal) =>
+                api.request(
+                  "me.emailSignature.update",
+                  {
+                    body: { html, enabled },
+                  },
+                  { signal },
+                ),
               "Your signature was saved.",
               reload,
             )
@@ -195,5 +131,55 @@ export function EmailSignature() {
         )}
       </StatusPanel>
     </SettingsCard>
+  );
+}
+
+/** Preview and campaign default are presentation of the current local draft. */
+function SignatureOptions({
+  html,
+  enabled,
+  disabled,
+  onChange,
+}: {
+  html: string;
+  enabled: boolean;
+  disabled: boolean;
+  onChange: (enabled: boolean) => void;
+}) {
+  const hasPreview =
+    /<(?:img|table)\b/i.test(html) ||
+    Boolean(
+      html
+        .replace(/<[^>]+>/g, "")
+        .replace(/&nbsp;|&#160;/g, "")
+        .trim(),
+    );
+  return (
+    <>
+      {hasPreview && (
+        <iframe
+          className={styles.signaturePreview}
+          title="Email signature preview"
+          sandbox=""
+          referrerPolicy="no-referrer"
+          srcDoc={`<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data: https:; style-src 'unsafe-inline'"><style>body{font:13px Arial;margin:12px;color:#0a0a0a}</style>${html}`}
+        />
+      )}
+      <div className={styles.check}>
+        <SettingsSwitch
+          label="Append signature to campaign emails by default"
+          checked={enabled}
+          disabled={disabled}
+          onChange={onChange}
+        />
+        <span>
+          Append signature to campaign emails by default
+          <br />
+          <span className={styles.description}>
+            You can still toggle it per campaign at send time.
+          </span>
+        </span>
+      </div>
+    </>
   );
 }

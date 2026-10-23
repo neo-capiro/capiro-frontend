@@ -7,12 +7,14 @@ export function FileSelectionBar({
   hiddenSelectedCount,
   onClear,
   onMove,
+  moveUnavailable,
 }: {
   visibleCount: number;
   selectedCount: number;
   hiddenSelectedCount: number;
   onClear: () => void;
   onMove: () => void;
+  moveUnavailable?: string;
 }) {
   return (
     <>
@@ -32,18 +34,15 @@ export function FileSelectionBar({
           </button>
           <button
             className="button"
-            disabled={selectedCount !== 1}
+            disabled={selectedCount === 0 || !!moveUnavailable}
             onClick={onMove}
           >
             Move to folder
           </button>
         </div>
       </div>
-      {selectedCount > 1 && (
-        <p role="status">
-          Batch moves require the atomic move contract. Move individual files
-          until that contract is integrated.
-        </p>
+      {selectedCount > 1 && moveUnavailable && (
+        <p role="status">{moveUnavailable}</p>
       )}
     </>
   );

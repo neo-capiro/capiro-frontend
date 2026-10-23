@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import {
   contactInfoSchema,
   type CapiroMe,
@@ -16,7 +15,8 @@ import {
   SettingsNotice,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 type ContactInfo = z.infer<typeof contactInfoSchema>;
 const organizationFields = [
@@ -54,65 +54,52 @@ function ContactForm({
   canEdit: boolean;
   reload: () => void;
 }) {
-  const api = useCapiro();
+  const mutation = useSettingsMutation("contact");
+  const { api, action, locked } = mutation;
   const [form, setForm] = useState(initial);
-  const action = useSettingsAction();
-  function input(key: keyof ContactInfo, label: string) {
-    return (
-      <SettingField label={label}>
-        <TextInput
-          className={styles.input}
-          value={form[key] ?? ""}
-          disabled={!canEdit || action.busy}
-          type={key === "email" ? "email" : key === "phone" ? "tel" : "text"}
-          onChange={(event) =>
-            setForm((current) => ({ ...current, [key]: event.target.value }))
-          }
-        />
-      </SettingField>
-    );
-  }
   return (
     <form
       className={styles.stack}
       onSubmit={(event) => {
         event.preventDefault();
         void action.run(
-          () => api.request("settings.contact.update", { body: form }),
+          async (signal) => {
+            const result = await api.request(
+              "settings.contact.update",
+              { body: form },
+              { signal },
+            );
+            if (
+              Object.entries(form).some(
+                ([key, value]) => result[key as keyof ContactInfo] !== value,
+              )
+            )
+              throw new Error(
+                "The response did not confirm the contact details. Reload before making another change.",
+              );
+            return result;
+          },
           "Contact information was saved.",
           reload,
         );
       }}
     >
-      <SettingsCard title="Organization contact">
-        <div className={styles.grid}>
-          {organizationFields.map(([key, label]) => (
-            <div key={key}>{input(key, label)}</div>
-          ))}
-        </div>
-      </SettingsCard>
-      {addresses.map((address) => (
-        <SettingsCard key={address.title} title={address.title}>
-          {input(address.keys[0], "Street 1")}
-          {input(address.keys[1], "Street 2")}
-          <div className={`${styles.grid} ${styles.two}`}>
-            {input(address.keys[2], "City")}
-            {input(address.keys[3], "State / ZIP")}
-          </div>
-        </SettingsCard>
-      ))}
+      <ContactFields
+        form={form}
+        disabled={!canEdit || locked}
+        onChange={(key, value) =>
+          setForm((current) => ({ ...current, [key]: value }))
+        }
+      />
       {action.error && (
         <SettingsNotice title="Contact information could not be saved" error>
           {action.error}
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice {...mutation} busy={action.busy} />
       <div>
-        <SettingsButton
-          primary
-          type="submit"
-          disabled={!canEdit || action.busy}
-        >
+        <SettingsButton primary type="submit" disabled={!canEdit || locked}>
           {action.busy ? "Saving…" : "Save contact info"}
         </SettingsButton>
       </div>
@@ -144,5 +131,50 @@ export function ContactSettings({ identity }: { identity: CapiroMe }) {
         )}
       </StatusPanel>
     </div>
+  );
+}
+
+function ContactFields({
+  form,
+  disabled,
+  onChange,
+}: {
+  form: ContactInfo;
+  disabled: boolean;
+  onChange: (key: keyof ContactInfo, value: string) => void;
+}) {
+  function input(key: keyof ContactInfo, label: string) {
+    return (
+      <SettingField label={label}>
+        <TextInput
+          className={styles.input}
+          value={form[key] ?? ""}
+          disabled={disabled}
+          type={key === "email" ? "email" : key === "phone" ? "tel" : "text"}
+          onChange={(event) => onChange(key, event.target.value)}
+        />
+      </SettingField>
+    );
+  }
+  return (
+    <>
+      <SettingsCard title="Organization contact">
+        <div className={styles.grid}>
+          {organizationFields.map(([key, label]) => (
+            <div key={key}>{input(key, label)}</div>
+          ))}
+        </div>
+      </SettingsCard>
+      {addresses.map((address) => (
+        <SettingsCard key={address.title} title={address.title}>
+          {input(address.keys[0], "Street 1")}
+          {input(address.keys[1], "Street 2")}
+          <div className={`${styles.grid} ${styles.two}`}>
+            {input(address.keys[2], "City")}
+            {input(address.keys[3], "State / ZIP")}
+          </div>
+        </SettingsCard>
+      ))}
+    </>
   );
 }
