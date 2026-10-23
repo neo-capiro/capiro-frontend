@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
-import { unavailableTitle } from "../meri-resources/unavailable";
+import { useSelectedClient } from "../session/SelectedClient";
+import { scopedHref } from "../session/client-route";
 import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
 import { DesignIcon } from "./DesignIcon";
 import {
@@ -33,6 +34,7 @@ export function Sidebar({
   pendingApprovals?: number | undefined;
 }) {
   const capabilities = useMeriCapabilities();
+  const selected = useSelectedClient();
   const pathname = usePathname();
   const router = useRouter();
   const resetFixture = () => {
@@ -77,15 +79,18 @@ export function Sidebar({
           </Link>
         </Button>
       ) : (
-        <Button
-          type="button"
-          variant="ghost"
-          className={styles.navButton}
-          disabled
-          title={unavailableTitle("conversationList")}
-        >
-          <DesignIcon name="search" assetSet={assetSet} />
-          Search conversations
+        <Button asChild variant="ghost" className={styles.navButton}>
+          <Link
+            href={scopedHref(
+              "/meri/conversations",
+              selected.state === "authorized-client"
+                ? selected.client.id
+                : undefined,
+            )}
+          >
+            <DesignIcon name="search" assetSet={assetSet} />
+            Find conversations
+          </Link>
         </Button>
       )}
       <div className={styles.divider} />

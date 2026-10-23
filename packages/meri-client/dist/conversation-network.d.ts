@@ -1,9 +1,9 @@
-import type { ConversationSubmittedResponse } from '@capiro/meri-contracts/conversation-application';
-type Binding = ConversationSubmittedResponse['run']['binding'];
+import type { ConversationSubmittedResponse } from "@capiro/meri-contracts/conversation-application";
+type Binding = ConversationSubmittedResponse["run"]["binding"];
 /** Supplied by the existing opaque-session owner. Browser selection grants no authority. */
 export interface ConversationLifetime {
-    context: Readonly<Pick<Binding, 'tenantId' | 'actorId' | 'conversationId' | 'runId'> & {
-        selectedClientId: string;
+    context: Readonly<Pick<Binding, "tenantId" | "actorId" | "conversationId" | "runId"> & {
+        selectedClientId: string | null;
     }>;
     credential: string;
     expiresAtMs: number;
@@ -18,7 +18,7 @@ export interface ConversationLifetime {
      * Where the opaque credential travels. The same-origin proxy reads its own header so the
      * credential never shadows the native session cookie; a direct trusted origin expects a bearer.
      */
-    credentialHeader?: 'x-meri-action-session' | 'authorization';
+    credentialHeader?: "x-meri-action-session" | "authorization";
 }
 export declare class ConversationUnavailable extends Error {
     readonly code: string;

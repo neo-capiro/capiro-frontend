@@ -12,29 +12,39 @@ import {
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
 
-export function NewsletterComments({ documentId }: { documentId?: string }) {
+/** One comment draft and write lifetime, retained while the workflow changes steps. */
+export function useNewsletterComments(
+  documentId: string | undefined,
+  active: boolean,
+) {
   const [view, setView] = useState("open");
   const [body, setBody] = useState("");
   const [replyTo, setReplyTo] = useState<string>();
+  const [writeError, setWriteError] = useState<Error>();
   const query = useCapiroQuery(
     "workspace.comments",
     { params: { documentId: documentId ?? "" } },
-    { enabled: Boolean(documentId) },
+    { enabled: active && Boolean(documentId) },
   );
   const create = useCapiroMutation("workspace.comment.create");
   const resolve = useCapiroMutation("workspace.comment.resolve");
   async function post() {
     if (!documentId) return;
+    const submitted = body;
     try {
       await create.run({
         params: { documentId },
-        body: { body, parentId: replyTo },
+        body: { body: submitted, parentId: replyTo },
       });
-      setBody("");
+      setBody((current) => (current === submitted ? "" : current));
       setReplyTo(undefined);
       query.reload();
-    } catch {
-      /* Preserve unsent comment text. */
+    } catch (failure) {
+      setWriteError(
+        failure instanceof Error
+          ? failure
+          : new Error("The comment result could not be confirmed."),
+      );
     }
   }
   async function toggle(id: string, resolved: boolean) {
@@ -45,10 +55,53 @@ export function NewsletterComments({ documentId }: { documentId?: string }) {
         body: { resolved },
       });
       query.reload();
-    } catch {
-      /* Server owns comment review permissions. */
+    } catch (failure) {
+      setWriteError(
+        failure instanceof Error
+          ? failure
+          : new Error("The comment result could not be confirmed."),
+      );
     }
   }
+  return {
+    documentId,
+    view,
+    setView,
+    body,
+    setBody,
+    replyTo,
+    setReplyTo,
+    query,
+    create,
+    resolve,
+    post,
+    toggle,
+    dirty: Boolean(body.trim()),
+    pending: create.pending || resolve.pending,
+    error: writeError ?? create.error ?? resolve.error,
+  };
+}
+
+export function NewsletterComments({
+  model,
+}: {
+  model: ReturnType<typeof useNewsletterComments>;
+}) {
+  const {
+    documentId,
+    view,
+    setView,
+    body,
+    setBody,
+    replyTo,
+    setReplyTo,
+    query,
+    create,
+    resolve,
+    post,
+    toggle,
+    error,
+  } = model;
   return (
     <aside className={styles.info}>
       <h3>Comments</h3>
@@ -122,9 +175,9 @@ export function NewsletterComments({ documentId }: { documentId?: string }) {
       >
         Post comment
       </ActionButton>
-      {(create.error || resolve.error) && (
+      {error && (
         <p role="alert" className={styles.error}>
-          {(create.error ?? resolve.error)?.message}
+          {error.message}
         </p>
       )}
       <div className={styles.success} style={{ marginTop: 20 }}>

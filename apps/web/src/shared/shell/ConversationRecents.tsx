@@ -3,90 +3,63 @@ import { useContext } from "react";
 import Link from "next/link";
 import { useIdentity } from "../portfolio/auth/identity";
 import { SessionContext } from "../session/SessionContext";
-import { useSelectedClient } from "../session/SelectedClient";
-import { useConversationDiscovery } from "../meri-conversations/history-queries";
-import type { ConversationAccount } from "../meri-conversations/host-controller";
+import { useManagedConversations } from "../meri-conversations/useManagedConversations";
+import { conversationHref } from "../meri-conversations/conversation-navigation";
 
 type Props = {
   enabled: boolean;
   className?: string | undefined;
   onNavigate?: (() => void) | undefined;
 };
-
-/** The surrounding shell can render before sign-in and outside the data provider. */
+/** The shell may render outside signed-in providers. Read nothing until the verified owner is present. */
 export function ConversationRecents(props: Props) {
   const session = useContext(SessionContext);
   if (!props.enabled || session !== "signed-in")
     return <p>Recent conversations unavailable</p>;
   return <VerifiedRecents {...props} />;
 }
-
 function VerifiedRecents(props: Props) {
-  const identity = useIdentity(),
-    selected = useSelectedClient();
-  const current =
+  const identity = useIdentity();
+  const account =
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
       : undefined;
-  if (!current?.tenant?.id || selected.state !== "authorized-client")
-    return <p>A verified account and current client are required.</p>;
-  const account = { tenantId: current.tenant.id, actorId: current.user.id };
+  if (!account?.tenant?.id) return <p>A verified account is required.</p>;
   return (
-    <RecentLinks
-      key={JSON.stringify([account, selected.client.id])}
-      {...props}
-      account={account}
-      clientId={selected.client.id}
-    />
+    <RecentLinks key={`${account.tenant.id}:${account.user.id}`} {...props} />
   );
 }
-
-function RecentLinks({
-  account,
-  clientId,
-  className,
-  onNavigate,
-}: Props & { account: ConversationAccount; clientId: string }) {
-  const { query, conversations, unavailable } = useConversationDiscovery(
-    account,
-    clientId,
-  );
-  const loading = query.isPending || query.isRefetching;
+function RecentLinks({ className, onNavigate }: Props) {
+  const { query, current } = useManagedConversations("", "active");
+  const chats = current
+    ? (query.data?.pages.flatMap((page) => page.conversations) ?? [])
+    : [];
   return (
     <>
-      {loading ? (
+      {query.isPending || query.isFetching ? (
         <p role="status">Loading recent conversations.</p>
-      ) : unavailable ? (
-        <p
-          role="status"
-          title="The conversation list could not be verified for the current account and client."
-        >
-          Recent conversations unavailable.
-        </p>
+      ) : !current ? (
+        <p role="status">Recent conversations unavailable.</p>
       ) : (
         <>
-          {conversations.map((conversation) => (
+          {chats.map((row) => (
             <Link
-              key={conversation.conversationId}
+              key={row.conversationId}
               className={className}
-              href={`/meri?${new URLSearchParams({ clientId, conversationId: conversation.conversationId })}`}
+              href={conversationHref(row.clientId, row.conversationId)}
               onClick={onNavigate}
             >
-              Conversation ·{" "}
-              {new Date(conversation.createdAt).toLocaleString("en", {
-                dateStyle: "medium",
-                timeStyle: "short",
-                timeZone: "UTC",
-              })}{" "}
-              UTC
+              {row.title}
+              <span>
+                {" "}
+                · {row.scopeKind === "general" ? "General" : "Client chat"}
+              </span>
             </Link>
           ))}
-          {!conversations.length && (
-            <p>No conversations for this client in the loaded pages.</p>
-          )}
+          {!chats.length && <p>No recent conversations.</p>}
         </>
       )}
-      {unavailable ? (
+      {query.error ? (
         <button
           type="button"
           className={className}

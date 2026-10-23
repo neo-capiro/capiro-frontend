@@ -2,7 +2,7 @@
 export type TabScope = Readonly<{
   tenantId: string;
   actorId: string;
-  clientId: string;
+  clientId: string | null;
   conversationId: string;
 }>;
 export type TabStorage = Pick<
@@ -62,7 +62,14 @@ export function requireMeriTabStorage(
   return storage;
 }
 
-type Kind = "draft" | "draft-capture" | "request" | "turn" | "selection";
+type Kind =
+  | "draft"
+  | "draft-capture"
+  | "request"
+  | "turn"
+  | "selection"
+  | "entry"
+  | "management";
 const byteLength = (value: string) =>
   new TextEncoder().encode(value).byteLength;
 

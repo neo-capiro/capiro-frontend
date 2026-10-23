@@ -68,6 +68,22 @@ export type OperationDefinition<
   binary?: BinaryPolicy;
 };
 
+function nativeSessionAllowed(
+  definition: Pick<OperationDefinition, "service" | "method" | "path">,
+) {
+  return (
+    (definition.service === "onboard" &&
+      /^\/(?:funnel|setup)\//.test(definition.path)) ||
+    (definition.service === "core" &&
+      definition.method === "POST" &&
+      [
+        "/clio/conversations/bootstrap",
+        "/clio/conversations/management/v1/list",
+        "/clio/conversations/management/v1/change",
+      ].includes(definition.path))
+  );
+}
+
 /** One reviewed controller contract; no ambient configuration or network work. */
 export function defineOperation<
   Request extends z.ZodType<OperationInput>,
@@ -75,13 +91,10 @@ export function defineOperation<
 >(
   definition: OperationDefinition<Request, Response>,
 ): OperationDefinition<Request, Response> {
-  const nativeSessionAllowed =
-    (definition.service === "onboard" &&
-      /^\/(?:funnel|setup)\//.test(definition.path)) ||
-    (definition.service === "core" &&
-      definition.method === "POST" &&
-      definition.path === "/clio/conversations/bootstrap");
-  if (definition.authentication === "clerk-session" && !nativeSessionAllowed)
+  if (
+    definition.authentication === "clerk-session" &&
+    !nativeSessionAllowed(definition)
+  )
     throw new Error(
       "Default Clerk session tokens are restricted to reviewed operations.",
     );

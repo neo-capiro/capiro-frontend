@@ -5,6 +5,7 @@ import { createContext, runInContext, runInNewContext } from "node:vm";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { conversationLabel } from "../src/shared/meri-conversations/conversation-navigation";
 import { ConversationRecents } from "../src/shared/shell/ConversationRecents";
 import {
   SessionContext,
@@ -26,25 +27,30 @@ vi.mock("../src/shared/portfolio/auth/identity", () => ({
     data: { tenant: { id: "tenant" }, user: { id: "actor" } },
   }),
 }));
-vi.mock("../src/shared/session/SelectedClient", () => ({
-  useSelectedClient: () => ({
-    state: fixture.selected ? "authorized-client" : "unavailable",
-    client: { id: "client" },
-  }),
-}));
-vi.mock("../src/shared/meri-conversations/history-queries", () => ({
-  useConversationDiscovery: (...args: unknown[]) => {
+vi.mock("../src/shared/meri-conversations/useManagedConversations", () => ({
+  useManagedConversations: (...args: unknown[]) => {
     fixture.discovery(...args);
     return {
+      current: !fixture.unavailable && !fixture.loading,
       query: {
         isPending: fixture.loading,
-        isRefetching: false,
+        isFetching: false,
         hasNextPage: false,
+        data: {
+          pages: [
+            {
+              conversations: [
+                {
+                  conversationId: "conversation",
+                  clientId: fixture.selected ? "client" : null,
+                  scopeKind: fixture.selected ? "client" : "general",
+                  title: "Synthetic saved title",
+                },
+              ],
+            },
+          ],
+        },
       },
-      conversations: [
-        { conversationId: "conversation", createdAt: fixture.createdAt },
-      ],
-      unavailable: fixture.unavailable,
     };
   },
 }));
@@ -126,7 +132,7 @@ afterEach(() => {
 });
 
 it.each(orders)(
-  "recents preserve exact UTC output and scope with %s",
+  "canonical date labels and titled recents preserve scope with %s",
   (order) => {
     const globals = globalsFor(order);
     vi.stubGlobal("Date", globals.Date);
@@ -141,41 +147,40 @@ it.each(orders)(
     ]) {
       fixture.createdAt = createdAt;
       const html = render();
-      expect(html).toContain(
+      expect(conversationLabel(createdAt)).toContain(
         `${nativeFormatter.format(new NativeDate(createdAt))} UTC`,
       );
+      expect(html).toContain("Synthetic saved title");
       expect(html).toContain(
         'href="/meri?clientId=client&amp;conversationId=conversation"',
       );
-      expect(fixture.discovery).toHaveBeenLastCalledWith(
-        { tenantId: "tenant", actorId: "actor" },
-        "client",
-      );
+      expect(fixture.discovery).toHaveBeenLastCalledWith("", "active");
     }
   },
 );
 
-it("date presentation never exposes recents before session, identity and client verification", () => {
-  expect(render("signed-out")).not.toContain("Conversation ·");
-  expect(render("signed-in", false)).not.toContain("Conversation ·");
+it("titles never expose recents before session and current owner verification", () => {
+  expect(render("signed-out")).not.toContain("Synthetic saved title");
+  expect(render("signed-in", false)).not.toContain("Synthetic saved title");
   fixture.identity = false;
-  expect(render()).toContain(
-    "A verified account and current client are required.",
-  );
-  fixture.identity = true;
-  fixture.selected = false;
-  expect(render()).toContain(
-    "A verified account and current client are required.",
-  );
+  expect(render()).toContain("A verified account is required.");
   expect(fixture.discovery).not.toHaveBeenCalled();
+});
+it("owned General recents keep their explicit scope without a selected client", () => {
+  fixture.selected = false;
+  const html = render();
+  expect(html).toContain(
+    'href="/meri?scope=general&amp;conversationId=conversation"',
+  );
+  expect(html).toContain("Synthetic saved title");
 });
 
 it("loading or unavailable discovery does not expose a retained dated link", () => {
   fixture.loading = true;
   expect(render()).toContain("Loading recent conversations.");
-  expect(render()).not.toContain("Conversation ·");
+  expect(render()).not.toContain("Synthetic saved title");
   fixture.loading = false;
   fixture.unavailable = true;
   expect(render()).toContain("Recent conversations unavailable.");
-  expect(render()).not.toContain("Conversation ·");
+  expect(render()).not.toContain("Synthetic saved title");
 });

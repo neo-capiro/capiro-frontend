@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -12,9 +12,11 @@ import styles from "./planner.module.css";
 export function TaskAttachments({
   taskId,
   writable,
+  onStateChange,
 }: {
   taskId: string;
   writable: boolean;
+  onStateChange?: (state: { pending: boolean; error?: string }) => void;
 }) {
   const api = useCapiro();
   const query = useCapiroQuery("planner.task.attachments", {
@@ -23,6 +25,11 @@ export function TaskAttachments({
   const fileInput = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
+  const [writeError, setWriteError] = useState<string>();
+  useLayoutEffect(() => {
+    onStateChange?.({ pending: busy, error: writeError ?? error });
+    return () => onStateChange?.({ pending: false });
+  }, [busy, error, writeError, onStateChange]);
   const upload = async (file: File) => {
     setBusy(true);
     setError(undefined);
@@ -35,7 +42,7 @@ export function TaskAttachments({
       query.reload();
       if (fileInput.current) fileInput.current.value = "";
     } catch (cause) {
-      setError(
+      setWriteError(
         cause instanceof Error ? cause.message : "Unable to upload attachment.",
       );
     } finally {
@@ -52,7 +59,7 @@ export function TaskAttachments({
       });
       query.reload();
     } catch (cause) {
-      setError(
+      setWriteError(
         cause instanceof Error ? cause.message : "Unable to update attachment.",
       );
     } finally {
@@ -107,7 +114,7 @@ export function TaskAttachments({
       />
       <AttachmentList
         query={query}
-        error={error}
+        error={writeError ?? error}
         busy={busy}
         writable={writable}
         download={download}

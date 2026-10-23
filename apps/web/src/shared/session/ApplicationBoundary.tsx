@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@clerk/nextjs";
+import { MeriCommandPalette } from "../meri-entry/MeriCommandPalette";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useState, type ReactNode } from "react";
 import { AuthenticationProvider } from "../portfolio/auth/AuthenticationProvider";
@@ -66,6 +67,7 @@ function SessionData({
       <DataProvider key={clientId ?? "no-selection"} onSessionExpired={expire}>
         <CapiroDataProvider onSessionExpired={expire}>
           <SelectedClientProvider requestedId={clientId}>
+            <MeriCommandPalette />
             {children}
           </SelectedClientProvider>
         </CapiroDataProvider>

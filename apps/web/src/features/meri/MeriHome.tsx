@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
 import { useSelectedClient } from "../../shared/session/SelectedClient";
@@ -12,6 +14,9 @@ import styles from "./home.module.css";
 import { MeriConversationHost } from "./conversation/MeriConversationHost";
 import { IntentApprovalsEnabled } from "./conversation/intents/approvals-enabled";
 import { MeriClientSelector } from "./MeriClientSelector";
+import { MockModelPicker } from "./model-picker/MockModelPicker";
+import { SkillLauncher } from "./skills/SkillLauncher";
+import { retireEntryForScope } from "../../shared/meri-entry/descriptor";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
@@ -32,17 +37,16 @@ export function MeriHome({
   const capabilities = useMeriCapabilities();
   const conversationAvailable =
     conversationEnabled && capabilities.conversations.status === "on";
-  const identity = useIdentity();
-  const selected = useSelectedClient();
-  const current =
-    identity.isSuccess && !identity.isFetching && !identity.error
-      ? identity.data
-      : undefined;
-  const clientId =
-    selected.state === "authorized-client" ? selected.client.id : undefined;
-  const clientScope = current?.tenant?.id
-    ? { tenantId: current.tenant.id, userId: current.user.id }
-    : undefined;
+  const {
+    identity,
+    current,
+    selected,
+    clientId,
+    general,
+    clientScope,
+    skillScope,
+    scopeLabel,
+  } = useMeriHomeScope();
   return (
     <div className={styles.home}>
       <div className={styles.scopeRow}>
@@ -67,14 +71,7 @@ export function MeriHome({
               : "Welcome."}
           </p>
         )}
-        <section aria-label="Current client">
-          {selected.state === "authorized-client" ? (
-            <p>Selected client: {selected.client.name}</p>
-          ) : (
-            <p>Choose a permitted client above to work in its scope.</p>
-          )}
-          <Link href="/">Open Portfolio</Link>
-        </section>
+        <CurrentClient selected={selected} general={general} />
         <IntentApprovalsEnabled.Provider
           value={
             intentApprovalsEnabled &&
@@ -95,6 +92,8 @@ export function MeriHome({
             }
           />
         </IntentApprovalsEnabled.Provider>
+        <SkillLauncher scope={skillScope} scopeLabel={scopeLabel} />
+        <MockModelPicker />
         <MeriWorkspaceLinks
           clientId={clientId}
           memoryReviewEnabled={memoryReviewEnabled}
@@ -102,6 +101,82 @@ export function MeriHome({
       </div>
     </div>
   );
+}
+
+function CurrentClient({
+  selected,
+  general,
+}: {
+  selected: ReturnType<typeof useSelectedClient>;
+  general: boolean;
+}) {
+  return (
+    <section aria-label="Current client">
+      {selected.state === "authorized-client" ? (
+        <p>Selected client: {selected.client.name}</p>
+      ) : general ? (
+        <p>
+          General chat uses your current access across clients. Client-specific
+          actions may need a client chat.
+        </p>
+      ) : (
+        <p>Choose a permitted client above to work in its scope.</p>
+      )}
+      <Link href="/">Open Portfolio</Link>
+    </section>
+  );
+}
+
+function useMeriHomeScope() {
+  const identity = useIdentity();
+  const selected = useSelectedClient();
+  const params = useSearchParams();
+  const general = params.get("scope") === "general" && !params.has("clientId");
+  const current =
+    identity.isSuccess && !identity.isFetching && !identity.error
+      ? identity.data
+      : undefined;
+  const clientId =
+    selected.state === "authorized-client" ? selected.client.id : undefined;
+  useEffect(() => {
+    if (!current?.tenant?.id || selected.state === "loading") return;
+    try {
+      retireEntryForScope(
+        { tenantId: current.tenant.id, actorId: current.user.id },
+        clientId ?? null,
+      );
+    } catch {
+      // The entry receiver refuses unreadable storage; never recover another scope.
+    }
+  }, [current?.tenant?.id, current?.user.id, selected.state, clientId]);
+  const clientScope = current?.tenant?.id
+    ? { tenantId: current.tenant.id, userId: current.user.id }
+    : undefined;
+  const skillScope =
+    current?.tenant?.id && (clientId || general)
+      ? {
+          tenantId: current.tenant.id,
+          actorId: current.user.id,
+          clientId: clientId ?? null,
+          conversationId: params.get("conversationId") ?? "",
+        }
+      : undefined;
+  const scopeLabel =
+    selected.state === "authorized-client"
+      ? selected.client.name
+      : general
+        ? "General"
+        : "Not selected";
+  return {
+    identity,
+    current,
+    selected,
+    clientId,
+    general,
+    clientScope,
+    skillScope,
+    scopeLabel,
+  };
 }
 
 /** Keep additional real workflows reachable without shifting the designed sidebar. */

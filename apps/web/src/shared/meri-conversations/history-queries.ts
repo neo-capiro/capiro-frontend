@@ -30,7 +30,7 @@ export const historyNotStarted = (error: unknown) =>
 
 const transcriptKey = (
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId?: string,
 ) => [
   "meri-conversation-transcript",
@@ -42,7 +42,7 @@ const transcriptKey = (
 
 async function scopedTranscript(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId: string | undefined,
   after: number | undefined,
   signal: AbortSignal,
@@ -60,7 +60,7 @@ async function scopedTranscript(
 export function clearConversationReads(
   cache: QueryClient,
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
 ) {
   const filters = {
     predicate: (query: { queryKey: readonly unknown[] }) => {
@@ -81,7 +81,7 @@ export function clearConversationReads(
 /** Read the latest run's lineage even when earlier conversation pages remain unloaded. */
 function useLatestTranscript(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId: string | undefined,
   after: number | undefined,
   enabled: boolean,
@@ -103,7 +103,7 @@ function useLatestTranscript(
 /** Read failures and revalidation hide cached private data until the owner admits it again. */
 export function useConversationDiscovery(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
 ) {
   const query = useInfiniteQuery({
     queryKey: [
@@ -148,7 +148,7 @@ export function useConversationDiscovery(
 /** History and latest-run lineage use conversation cursors, never the SDK stream cursor. */
 export function useConversationHistory(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId?: string,
   enabled = true,
 ) {
