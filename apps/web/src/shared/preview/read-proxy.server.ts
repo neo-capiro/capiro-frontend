@@ -5,7 +5,11 @@ import {
 } from "../meri-actions/bounded-json";
 import { previewHeldResponse } from "./backend-policy.server";
 import { previewReadTarget } from "./read-config.server";
-import { previewReadRoute, type PreviewReadRoute } from "./read-route.server";
+import {
+  previewReadRoute,
+  previewServicePrefixes,
+  type PreviewReadRoute,
+} from "./read-route.server";
 
 const headers = {
   "Cache-Control": "private, no-store",
@@ -55,9 +59,9 @@ export async function proxyPreviewRead(
   const route = previewReadRoute(request);
   if (!target || !route || route.browserPath !== expectedBrowserPath)
     return previewHeldResponse();
-  const url = new URL(target.href + route.path);
-  for (const [key, value] of Object.entries(route.query))
-    if (value !== undefined) url.searchParams.set(key, String(value));
+  const url = new URL(
+    target.origin + previewServicePrefixes[route.service] + route.path,
+  );
   try {
     return await withActionDeadline([request.signal], async (signal) => {
       const token = await abortable(getToken(), signal);
