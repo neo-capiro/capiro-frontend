@@ -5,6 +5,7 @@ import {
   threadId,
   threadTenantId,
   threadClientId,
+  threadActorId,
 } from "../thread-mail-fixture";
 async function setup(
   page: Page,
@@ -34,7 +35,7 @@ async function setup(
     if (path === "me")
       return route.fulfill({
         json: {
-          user: { id: "actor", email: "actor@example.test" },
+          user: { id: threadActorId, email: "actor@example.test" },
           tenant: { id: threadTenantId, name: "Synthetic" },
           role: options.role ?? "standard_user",
         },
@@ -361,7 +362,9 @@ test("invalidated identity cannot retain an open reviewed draft", async ({
 test("empty stored thread has honest empty state and no reply", async ({
   page,
 }) => {
-  await setup(page, { body: { ...fullThread, messages: [] } });
+  await setup(page, {
+    body: { ...fullThread, messages: [], totalMessages: 0 },
+  });
   await expand(page);
   await expect(
     page.getByText("No active stored messages in this thread."),

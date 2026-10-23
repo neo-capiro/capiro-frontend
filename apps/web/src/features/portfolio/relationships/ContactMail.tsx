@@ -1,22 +1,35 @@
 "use client";
 import { useState } from "react";
-import { type MailContact, type MailThread } from "./email";
-import { useContactThreads, useMailThread } from "./email";
+import { type MailContact, useContactThreads, useMailThread } from "./email";
+import type { MailFilters } from "./email/read-contracts";
 import { MailCompose } from "./MailCompose";
+import { ThreadContent } from "./thread/ThreadContent";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
-export function ContactMail({
-  clientId,
-  person,
-}: {
-  clientId: string;
-  person: MailContact;
-}) {
-  const query = useContactThreads(clientId, person.email);
+import { MailHistoryFilters, ContactHistory } from "./email/ContactMailHistory";
+
+type ContactMailProps = { clientId: string; person: MailContact };
+
+function useContactMail({ clientId, person }: ContactMailProps) {
+  const [filters, setFilters] = useState<MailFilters>({});
+  const query = useContactThreads(clientId, person.email, filters);
   const [selected, setSelected] = useState<string | null>(null);
   const [compose, setCompose] = useState<"new" | "reply" | null>(null);
-  const thread = useMailThread(selected);
-  const contactKey = JSON.stringify([clientId, person.personId, person.email]);
+  const [bodyError, setBodyError] = useState<Error | null>(null);
+  const thread = useMailThread(
+    selected,
+    clientId,
+    Boolean(query.data),
+    person.email ?? undefined,
+  );
+  const contactKey = JSON.stringify([
+    query.scope.tenantId,
+    query.scope.userId,
+    clientId,
+    person.personId,
+    person.email,
+    filters,
+  ]);
   const [readScope, setReadScope] = useState({
     contactKey,
     historyError: query.error,
@@ -36,14 +49,68 @@ export function ContactMail({
     if (contactChanged || query.error) {
       setSelected(null);
       setCompose(null);
+      setBodyError(null);
     } else if (thread.error && compose === "reply") setCompose(null);
   }
   const history =
     !contactChanged && query.isSuccess && !query.error ? query.data : undefined;
   const currentThread =
-    history && thread.isSuccess && !thread.error && thread.data.id === selected
+    history &&
+    thread.isSuccess &&
+    !thread.error &&
+    !bodyError &&
+    !thread.isFetching &&
+    thread.data?.id === selected
       ? thread.data
       : undefined;
+  function refreshHistory() {
+    setSelected(null);
+    setCompose(null);
+    setBodyError(null);
+    void query.refresh();
+  }
+  async function refreshThread() {
+    const previous = bodyError;
+    setCompose(null);
+    await thread.refresh();
+    setBodyError((current) => (current === previous ? null : current));
+  }
+  function bodyFailed(error: Error) {
+    setBodyError(error);
+    setCompose(null);
+  }
+  return {
+    query,
+    history,
+    thread,
+    currentThread,
+    selected,
+    setSelected,
+    compose,
+    setCompose,
+    bodyError,
+    setBodyError,
+    setFilters,
+    refreshHistory,
+    refreshThread,
+    bodyFailed,
+  };
+}
+
+export function ContactMail({ clientId, person }: ContactMailProps) {
+  const state = useContactMail({ clientId, person });
+  const {
+    query,
+    history,
+    selected,
+    setSelected,
+    compose,
+    setCompose,
+    currentThread,
+    setBodyError,
+    setFilters,
+    refreshHistory,
+  } = state;
   return (
     <section className="stack">
       <header className="row between">
@@ -60,84 +127,31 @@ export function ContactMail({
       </header>
       {person.email ? (
         <>
+          <MailHistoryFilters
+            disabled={query.isFetching}
+            onApply={setFilters}
+          />
           <QueryState
             pending={query.isPending}
             error={query.error}
-            retry={() => void query.refetch()}
+            retry={refreshHistory}
           />
-          {history?.map((item) => (
-            <button
-              className="button ghost"
-              key={item.id}
-              disabled={query.isFetching}
-              onClick={() => {
-                if (history && !query.isFetching) setSelected(item.id);
-              }}
-            >
-              <span>
-                <strong>{item.subject}</strong>
-                <p className="muted">{item.snippet}</p>
-                <p className="muted">
-                  <small>
-                    <ContactMessageDate messages={item.messages} />
-                  </small>
-                </p>
-              </span>
-            </button>
-          ))}
-          {history?.length === 0 && (
-            <p className="muted">No accessible messages for this contact.</p>
-          )}
-          <small>
-            Up to 50 recent client threads from your accessible mailbox. Open a
-            thread to read its full message history.
-          </small>
+          <ContactHistory
+            history={history}
+            query={query}
+            refresh={refreshHistory}
+            select={(id) => {
+              setBodyError(null);
+              setSelected(id);
+            }}
+          />
         </>
       ) : (
         <p className="muted">
           Add an email address to view mail for this contact.
         </p>
       )}
-      <Dialog
-        open={Boolean(history && selected)}
-        onOpenChange={(open) => {
-          if (!open) setSelected(null);
-        }}
-        title={currentThread?.subject ?? "Mail thread"}
-        drawer
-      >
-        <QueryState
-          pending={thread.isPending}
-          error={thread.error}
-          retry={() => void thread.refetch()}
-        />
-        {currentThread?.messages.map((message) => (
-          <article className="card stack" key={message.id}>
-            <strong>
-              {message.fromName ?? message.fromEmail ?? "Unknown sender"}
-            </strong>
-            <small>
-              {new Date(
-                message.sentAt ?? message.receivedAt ?? message.createdAt,
-              ).toLocaleString()}
-            </small>
-            <p style={{ whiteSpace: "pre-wrap" }}>
-              {message.bodyText ?? "Message text is not available."}
-            </p>
-          </article>
-        ))}
-        {currentThread && (
-          <button
-            className="button"
-            disabled={thread.isFetching || query.isFetching}
-            onClick={() => {
-              if (!thread.isFetching && !query.isFetching) setCompose("reply");
-            }}
-          >
-            Reply to {person.name}
-          </button>
-        )}
-      </Dialog>
+      <ContactThreadDrawer state={state} person={person} />
       {history && compose && (compose === "new" || currentThread) && (
         <MailCompose
           key={`${compose}:${selected}`}
@@ -155,32 +169,81 @@ export function ContactMail({
   );
 }
 
-function ContactMessageDate({
-  messages,
+function ContactThreadDrawer({
+  state,
+  person,
 }: {
-  messages: MailThread["messages"];
+  state: ReturnType<typeof useContactMail>;
+  person: MailContact;
 }) {
-  let latest: { value: string; instant: number } | undefined;
-  for (const message of messages) {
-    const value = message.sentAt ?? message.receivedAt ?? message.createdAt;
-    const instant = Date.parse(value);
-    if (Number.isFinite(instant) && (!latest || instant > latest.instant))
-      latest = { value, instant };
-  }
-  if (!latest) return "Date unavailable";
-  const date = new Date(latest.instant);
+  const {
+    history,
+    selected,
+    setSelected,
+    currentThread,
+    thread,
+    query,
+    bodyError,
+    refreshThread,
+    bodyFailed,
+    setCompose,
+  } = state;
   return (
-    <time dateTime={latest.value} title="Latest available message date">
-      {date.toLocaleDateString(undefined, {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })}
-      {" · "}
-      {date.toLocaleTimeString(undefined, {
-        hour: "numeric",
-        minute: "2-digit",
-      })}
-    </time>
+    <Dialog
+      open={Boolean(history && selected)}
+      onOpenChange={(open) => {
+        if (!open) setSelected(null);
+      }}
+      title={currentThread?.subject ?? "Mail thread"}
+      drawer
+    >
+      <QueryState
+        pending={thread.isPending || thread.isFetching}
+        error={bodyError ?? thread.error}
+        retry={refreshThread}
+      />
+      {currentThread && (
+        <>
+          <ThreadContent
+            thread={currentThread}
+            scope={thread.scope}
+            onReadFailure={bodyFailed}
+          />
+          <div className="row">
+            {thread.hasNextPage && (
+              <button
+                className="button"
+                onClick={() => void thread.fetchNextPage()}
+              >
+                Load more messages
+              </button>
+            )}
+            <button className="button ghost" onClick={refreshThread}>
+              Refresh thread
+            </button>
+            <button
+              className="button"
+              disabled={thread.isFetching || query.isFetching}
+              onClick={() => {
+                if (!thread.isFetching && !query.isFetching)
+                  setCompose("reply");
+              }}
+            >
+              Reply to {person.name}
+            </button>
+          </div>
+          <small className="muted">
+            {currentThread.messages.length} of {currentThread.totalMessages}{" "}
+            stored messages.{" "}
+            {currentThread.hasMore
+              ? thread.hasNextPage
+                ? "More stored messages are available."
+                : "Further messages exceed this reading limit. Open your mailbox to continue."
+              : "End of stored messages."}{" "}
+            Provider history may be incomplete.
+          </small>
+        </>
+      )}
+    </Dialog>
   );
 }

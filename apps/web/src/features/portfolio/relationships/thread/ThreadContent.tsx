@@ -1,8 +1,18 @@
 import type { FullThread } from "./contracts";
 import { orderedMessages } from "./recipients";
 import styles from "./thread.module.css";
+import { MailMessageBody } from "../email/MailMessageBody";
+import type { MailReadScope } from "../email/read-contracts";
 
-export function ThreadContent({ thread }: { thread: FullThread }) {
+export function ThreadContent({
+  thread,
+  scope,
+  onReadFailure,
+}: {
+  thread: FullThread;
+  scope: MailReadScope;
+  onReadFailure: (error: Error) => void;
+}) {
   return (
     <div className={styles.messages}>
       {orderedMessages(thread).map((message) => {
@@ -27,7 +37,12 @@ export function ThreadContent({ thread }: { thread: FullThread }) {
                   : "Date unavailable"}
               </time>
             </header>
-            <p>{message.bodyText ?? "Stored message text is unavailable."}</p>
+            <MailMessageBody
+              thread={thread}
+              message={message}
+              scope={scope}
+              onReadFailure={onReadFailure}
+            />
           </article>
         );
       })}

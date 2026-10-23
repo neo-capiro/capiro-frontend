@@ -2,6 +2,8 @@ import { expect, test } from "@playwright/test";
 import { clientId, installFixtures, json, person, personId } from "./fixtures";
 import {
   contactThread,
+  contactMailList,
+  installContactMailIdentity,
   controlledRead,
   readError,
   refreshRelationships,
@@ -13,20 +15,31 @@ test("pending send and lost delivery receipt survive current-history loss and sa
   page,
 }) => {
   const unexpected = await installFixtures(page);
+  await installContactMailIdentity(page);
   const thread = contactThread();
   const historyRead = await controlledRead(
     page,
     "**/engagement/mail-threads?**",
-    [thread],
+    contactMailList([thread]),
   );
-  await page.route(`**/engagement/mail-threads/${threadId}`, (route) =>
+  await page.route(`**/engagement/mail-threads/${threadId}*`, (route) =>
     json(route, thread),
   );
   let sends = 0;
+  let requestKey = "";
+  const recoveryReads: string[] = [];
+  await page.route("**/engagement/mail/send-intents/*", async (route) => {
+    expect(route.request().method()).toBe("GET");
+    recoveryReads.push(
+      new URL(route.request().url()).pathname.split("/").pop()!,
+    );
+    await json(route, { message: "Synthetic receipt unavailable" }, 503);
+  });
   let release: (() => void) | undefined;
   await page.route("**/engagement/mail/send", async (route) => {
     expect(route.request().method()).toBe("POST");
     sends++;
+    requestKey = route.request().postDataJSON().requestKey;
     expect(route.request().postDataJSON()).toMatchObject({
       clientId,
       threadId,
@@ -61,7 +74,7 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     .click();
   await expect.poll(() => Boolean(release)).toBe(true);
   historyRead.fail(403);
-  await refreshRelationships(page, ["contact-mail", clientId]);
+  await refreshRelationships(page, ["contact-mail"]);
   await expect(
     page
       .getByRole("alert", { includeHidden: true })
@@ -71,7 +84,7 @@ test("pending send and lost delivery receipt survive current-history loss and sa
   await expect(
     page.getByRole("dialog", { name: "Send email", exact: true }),
   ).toHaveCount(0);
-  historyRead.hold([thread]);
+  historyRead.hold(contactMailList([thread]));
   await contact.getByRole("button", { name: "Retry", exact: true }).click();
   await expect.poll(() => historyRead.waiting).toBe(1);
   historyRead.release();
@@ -105,6 +118,8 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     compose.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();
   expect(sends).toBe(1);
+  expect(recoveryReads.length).toBeGreaterThan(0);
+  expect(recoveryReads.every((key) => key === requestKey)).toBe(true);
   expect(historyRead.writes).toEqual([]);
   expect(unexpected).toEqual([]);
 });

@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { expect, type Page } from "@playwright/test";
 import { clientId, json, person, sendingMailbox } from "./fixtures";
 import { committee } from "./government-fixtures";
@@ -75,30 +76,94 @@ export const readError = (status: number) =>
     ? "You do not have permission for this operation."
     : `Synthetic current read ${status}`;
 
-export function contactThread(client: string | null = clientId) {
+const mailTenantId = "c0000000-0000-4000-8000-000000000001";
+const mailActorId = "d0000000-0000-4000-8000-000000000001";
+const mailInstant = "2026-10-13T10:00:00Z";
+const mailCoverage = {
+  sourceStatus: "healthy",
+  reason: null,
+  lastMailSyncAt: mailInstant,
+  lastConnectionSyncAt: mailInstant,
+  backfillComplete: true,
+  hasMore: false,
+  captureRepair: "complete",
+};
+export async function installContactMailIdentity(page: Page) {
+  await page.route("**/api/backend/core/me", (route) =>
+    json(route, {
+      user: { id: mailActorId, email: "test@example.test" },
+      tenant: { id: mailTenantId, name: "UI tests" },
+      role: "user_admin",
+    }),
+  );
+}
+export function contactThread(
+  client: string | null = clientId,
+  bodyText = "Exact requested synthetic thread content",
+) {
   return {
     id: threadId,
     clientId: client,
+    associationClientId: clientId,
+    tenantId: mailTenantId,
+    connectionOwnerTenantId: mailTenantId,
+    connectionOwnerActorId: mailActorId,
+    connectionStatus: "connected",
     subject: "Synthetic acceptance briefing",
     snippet: "Synthetic retained thread",
     connectionId: sendingMailbox.id,
     connectionEmail: sendingMailbox.accountEmail,
     participants: [{ email: person.email, name: person.name }],
+    updatedAt: mailInstant,
+    asOf: mailInstant,
+    totalMessages: 1,
+    messageOffset: 0,
+    hasMore: false,
+    nextMessageOffset: null,
+    nextCursor: null,
+    coverage: mailCoverage,
+    notice: "Synthetic stored read",
     messages: [
       {
         id: "b0000000-0000-4000-8000-000000000001",
         threadId,
+        tenantId: mailTenantId,
+        connectionId: sendingMailbox.id,
         subject: "Synthetic acceptance briefing",
         fromEmail: person.email,
         fromName: person.name,
         toRecipients: [{ email: sendingMailbox.accountEmail }],
         ccRecipients: [],
-        bodyText: "Exact requested synthetic thread content",
+        bodyText,
+        bodyOffset: 0,
+        bodyLength: bodyText.length,
+        bodyTruncated: false,
+        nextBodyOffset: null,
+        bodySha256: createHash("sha256").update(bodyText).digest("hex"),
+        bodyStoredPresent: true,
+        bodyCompleteness: "full",
         sentAt: null,
-        receivedAt: "2026-10-13T10:00:00Z",
-        createdAt: "2026-10-13T10:00:00Z",
+        receivedAt: mailInstant,
+        createdAt: mailInstant,
       },
     ],
+  };
+}
+export function contactMailList(items: ReturnType<typeof contactThread>[]) {
+  return {
+    items,
+    asOf: mailInstant,
+    hasMore: false,
+    nextCursor: null,
+    mailboxes: [
+      {
+        id: sendingMailbox.id,
+        email: sendingMailbox.accountEmail,
+        coverage: mailCoverage,
+      },
+    ],
+    coverageTruncated: false,
+    notice: "Synthetic live stored list",
   };
 }
 
