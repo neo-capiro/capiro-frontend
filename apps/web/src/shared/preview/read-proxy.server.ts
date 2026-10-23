@@ -56,8 +56,6 @@ export async function proxyPreviewRead(
   if (!target || !route || route.browserPath !== expectedBrowserPath)
     return previewHeldResponse();
   const url = new URL(target.href + route.path);
-  for (const [key, value] of Object.entries(route.query))
-    if (value !== undefined) url.searchParams.set(key, String(value));
   try {
     return await withActionDeadline([request.signal], async (signal) => {
       const token = await abortable(getToken(), signal);
