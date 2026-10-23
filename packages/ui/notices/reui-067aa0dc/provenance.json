@@ -10,7 +10,8 @@
     "local equivalent spinner presentation",
     "strict TypeScript optional-property undefined annotations and bounded array guards; no compiler relaxation",
     "local type-only process.env.NODE_ENV declaration retained for upstream diagnostic",
-    "repository formatting only; upstream source hashes retained separately"
+    "repository formatting only; upstream source hashes retained separately",
+    "local keyboard repair: render the existing empty level-swap frame in the active rows as well as Base UI filteredItems, preserving DOM item registration for Enter; upstream hashes unchanged"
   ],
   "files": [
     {
@@ -66,7 +67,7 @@
     {
       "path": "src/reui/cascader/cascader.tsx",
       "upstreamSha256": "35d4627fec78b0c89fea1c01be1c6b47b3e52578e901d6d19ced3a920bb2804b",
-      "adaptedSha256": "13f11815335e2264b7375a0daa62ce8c3cc30c641abd1af71e7b4e7ef1b25280"
+      "adaptedSha256": "a03188bb1067b8e0b0683619b72fb0ff91525b39b1fa8251468bae3c90bc8901"
     }
   ],
   "hashDerivation": "SHA256 of UTF-8 registry files[].content before adaptation; adaptedSha256 uses Git LF bytes. Three upstream hash mismatches corrected during extraction; source unchanged."
