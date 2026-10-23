@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { DataTable, SelectInput, StatusPanel } from "../../shared/module-ui";
@@ -16,7 +15,8 @@ import {
 } from "./components";
 import { InviteMember } from "./InviteMember";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 const joinedDate = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -26,19 +26,19 @@ const joinedDate = new Intl.DateTimeFormat("en-US", {
 });
 
 export function TeamSettings({ identity }: { identity: CapiroMe }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("team");
   const members = useCapiroQuery("settings.team.list", {});
   const invitations = useCapiroQuery("settings.team.invitations", {});
   const [tab, setTab] = useState("members");
   const [invite, setInvite] = useState(false);
   const [remove, setRemove] = useState<{ userId: string; email: string }>();
-  const action = useSettingsAction();
   const refresh = () => {
     members.reload();
     invitations.reload();
   };
   const rows = members.data ?? [];
-  const pending = invitations.data ?? [];
+  const pendingInvitations = invitations.data ?? [];
   return (
     <div
       className={styles.stack}
@@ -54,15 +54,24 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
               { id: "members", label: `Members (${rows.length})` },
               {
                 id: "invitations",
-                label: `Pending invitations (${pending.length})`,
+                label: `Pending invitations (${pendingInvitations.length})`,
               },
             ]}
           />
         </div>
-        <SettingsButton primary onClick={() => setInvite(true)}>
+        <SettingsButton
+          disabled={locked}
+          primary
+          onClick={() => setInvite(true)}
+        >
           + Add team member
         </SettingsButton>
       </div>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Team update failed" error>
           {action.error}
@@ -135,7 +144,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                           <SelectInput
                             aria-label={`Role for ${row.email}`}
                             value={row.role}
-                            disabled={action.busy}
+                            disabled={locked}
                             options={[
                               {
                                 value: "standard_user",
@@ -145,15 +154,19 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                             ]}
                             onValueChange={(role) =>
                               void action.run(
-                                () =>
-                                  api.request("settings.team.setRole", {
-                                    params: { userId: row.userId },
-                                    body: {
-                                      role: role as
-                                        | "user_admin"
-                                        | "standard_user",
+                                (signal) =>
+                                  api.request(
+                                    "settings.team.setRole",
+                                    {
+                                      params: { userId: row.userId },
+                                      body: {
+                                        role: role as
+                                          | "user_admin"
+                                          | "standard_user",
+                                      },
                                     },
-                                  }),
+                                    { signal },
+                                  ),
                                 "Member role was updated.",
                                 refresh,
                               )
@@ -170,17 +183,21 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                             label={`Billing admin for ${row.email}`}
                             checked={row.billingAdmin}
                             disabled={
-                              action.busy ||
+                              locked ||
                               row.role === "capiro_admin" ||
                               row.userId === identity.user.id
                             }
                             onChange={(billingAdmin) =>
                               void action.run(
-                                () =>
-                                  api.request("settings.team.setBillingAdmin", {
-                                    params: { userId: row.userId },
-                                    body: { billingAdmin },
-                                  }),
+                                (signal) =>
+                                  api.request(
+                                    "settings.team.setBillingAdmin",
+                                    {
+                                      params: { userId: row.userId },
+                                      body: { billingAdmin },
+                                    },
+                                    { signal },
+                                  ),
                                 "Billing administrator access was updated.",
                                 refresh,
                               )
@@ -221,7 +238,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                           <SettingsButton
                             danger
                             small
-                            disabled={action.busy}
+                            disabled={locked}
                             onClick={() => setRemove(row)}
                           >
                             Remove
@@ -242,7 +259,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
         >
           <SettingsCard title="Pending invitations">
             <DataTable
-              rows={pending}
+              rows={pendingInvitations}
               rowKey={(row) => row.id}
               caption="Pending team invitations"
               emptyMessage="No pending invitations."
@@ -276,13 +293,17 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                   render: (row) => (
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
-                          () =>
-                            api.request("settings.team.resend", {
-                              params: { invitationId: row.id },
-                            }),
+                          (signal) =>
+                            api.request(
+                              "settings.team.resend",
+                              {
+                                params: { invitationId: row.id },
+                              },
+                              { signal },
+                            ),
                           "Invitation was resent.",
                           refresh,
                         )
@@ -303,6 +324,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
         onDone={refresh}
       />
       <SettingsDialog
+        busy={action.busy}
         open={!!remove}
         onClose={() => setRemove(undefined)}
         title="Remove team member"
@@ -310,21 +332,25 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
         footer={
           <>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => setRemove(undefined)}
             >
               Cancel
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (remove)
                   void action.run(
-                    () =>
-                      api.request("settings.team.remove", {
-                        params: { userId: remove.userId },
-                      }),
+                    (signal) =>
+                      api.request(
+                        "settings.team.remove",
+                        {
+                          params: { userId: remove.userId },
+                        },
+                        { signal },
+                      ),
                     "Removal was submitted.",
                     () => {
                       setRemove(undefined);
@@ -339,6 +365,11 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
         }
       >
         <p>{remove?.email}</p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Removal failed" error>
             {action.error}

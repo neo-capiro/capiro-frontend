@@ -1,0 +1,117 @@
+{
+  "scope": "A1 frontend #118 mechanical review corrections; verification only",
+  "local_head": "f46cb45b9498b11afb285e4875b313b13441994f",
+  "source_sha256": {
+    "apps/web/src/features/portfolio/relationships/email.ts": "06fc7f3c9fdf58b7f4663ad1109c06ced785ff247d82721a12931d70e47bd942",
+    "apps/web/tests/a1-portfolio.test.ts": "ab90c25d89cfea7387e08b31ac525a1aff2a3a0064d9b12c575a9451ea6b0bcc"
+  },
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "next": "16.4.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.11",
+    "eslint": "9.39.2",
+    "lock_sha256": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234",
+    "install": "Reused existing installed dependencies without modification; original installed tree lockfile matches this branch, including nested workspace dependencies. Not a fresh npm ci. No package/configuration changes.",
+    "cache": "Temporary .vite and .next paths outside the full workspace disk."
+  },
+  "commands": {
+    "web": "npm test --workspace @capiro/web -- --maxWorkers=2 --reporter=json --outputFile=/dev/shm/a1-pf-fe-web-vitest-final.json",
+    "capiro": "npm run test:capiro --workspace @capiro/web -- --maxWorkers=2 --reporter=json --outputFile=/dev/shm/a1-pf-fe-capiro-vitest.json",
+    "lint": "npm run lint --workspace @capiro/web",
+    "build": "npm run build --workspace @capiro/web",
+    "typecheck": "NODE_OPTIONS=--max-old-space-size=5120 node node_modules/typescript/bin/tsc --noEmit --incremental false --project apps/web/tsconfig.json"
+  },
+  "results": {
+    "web": {
+      "exit": 0,
+      "success": true,
+      "tests": 3063,
+      "passed": 3063,
+      "failed": 0,
+      "pending": 0,
+      "files": 232,
+      "suites": 477
+    },
+    "capiro": {
+      "exit": 0,
+      "success": true,
+      "tests": 549,
+      "passed": 549,
+      "failed": 0,
+      "pending": 0,
+      "files": 52,
+      "suites": 82
+    },
+    "lint": {
+      "exit": 0,
+      "errors": 0,
+      "warnings": 85
+    },
+    "typecheck": {
+      "status": "pass",
+      "exit": 0,
+      "errors": 0,
+      "first_attempt": {
+        "exit": 137,
+        "diagnostics": "none; parent-observed incomplete result"
+      },
+      "serialized_retry": {
+        "exit": 0,
+        "process_returncode": 0,
+        "elapsed_seconds": 173,
+        "node_options": "--max-old-space-size=5120",
+        "command": [
+          "node",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--incremental",
+          "false",
+          "--project",
+          "apps/web/tsconfig.json"
+        ]
+      },
+      "runtime_only": "5 GiB Node heap budget; unchanged TypeScript project settings; incremental output disabled to avoid writing to the full workspace disk."
+    },
+    "default_build": {
+      "command": "NODE_OPTIONS=--max-old-space-size=5120 NEXT_TELEMETRY_DISABLED=1 npm run build",
+      "exit": 0,
+      "duration_seconds": 266,
+      "status": "pass",
+      "source_tree": "8e166f214db29557cac4bd50fca05599565d535e",
+      "configuration_changed": false,
+      "layout": "Identical runtime/configuration and existing matching-lock dependencies physically inside isolated project root; historical docs evidence omitted.",
+      "clean_install": false
+    },
+    "initial_default_build": {
+      "exit": 1,
+      "status": "blocked before compilation",
+      "error": "Turbopack: Symlink node_modules could not be resolved: the symlink target leaves the filesystem root or its parent directory could not be resolved."
+    }
+  },
+  "initial_environment_failures": {
+    "web_first": {
+      "ENOSPC_files": 24,
+      "missing_export_files": 26,
+      "assertion_failures": 1
+    },
+    "web_first_repair": {
+      "passed": 3024,
+      "failed_assertions": 0,
+      "missing_export_files": 5
+    },
+    "remaining_five_after_package_nested_repair": {
+      "success": true,
+      "tests": 39,
+      "passed": 39,
+      "failed": 0,
+      "pending": 0,
+      "files": 5,
+      "suites": 5
+    },
+    "resolution": "Restored existing locked nested apps/web and packages/meri-client dependency trees, including @capiro/meri-contracts 0.1.10; moved generated Vite cache to /dev/shm. Final full-web run passed."
+  },
+  "comparison": "Base was not rerun in this environment. Reviewer reported base with zero type/lint errors, 3052 web tests and 549 Capiro tests passing. This record reports only observed corrected-head checks.",
+  "boundaries": "No mail policy/send-attempt changes, new dependencies, SQL execution, merge, deployment, or external provider calls. Source files were not edited by this verifier. Default build configuration was unchanged; the final default root build passed."
+}

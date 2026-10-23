@@ -5,10 +5,51 @@ import { MailSendError, type SendInput } from "./send";
 
 type MailAttempt = {
   token: string;
+  startedAt: number;
   status: "pending" | "unknown";
-  input: SendInput;
+  input?: SendInput;
   error?: MailSendError;
 };
+const storageKey = (key: QueryKey) =>
+  `capiro-mail-intent:${JSON.stringify(key)}`;
+function restoreAttempt(key: QueryKey, strict = false): MailAttempt | null {
+  try {
+    const raw = localStorage.getItem(storageKey(key));
+    if (!raw) return null;
+    const value = JSON.parse(raw) as { token?: unknown; startedAt?: unknown };
+    if (
+      typeof value.token !== "string" ||
+      !/^[0-9a-f-]{36}$/i.test(value.token)
+    )
+      return null;
+    return {
+      token: value.token,
+      startedAt: typeof value.startedAt === "number" ? value.startedAt : 0,
+      status: "unknown",
+      error: new MailSendError(
+        "Checking the original send request. Do not resend while delivery is uncertain.",
+        true,
+      ),
+    };
+  } catch (error) {
+    if (strict) throw error;
+    return null;
+  }
+}
+function persistAttempt(
+  key: QueryKey,
+  attempt: MailAttempt | null,
+  expectedToken?: string,
+) {
+  // Store only the durable request identity. Message bodies and recipient lists stay on the server.
+  if (attempt)
+    localStorage.setItem(
+      storageKey(key),
+      JSON.stringify({ token: attempt.token, startedAt: attempt.startedAt }),
+    );
+  else if (!expectedToken || restoreAttempt(key)?.token === expectedToken)
+    localStorage.removeItem(storageKey(key));
+}
 export const mailAttemptKey = (
   tenantId: string,
   userId: string,
@@ -20,49 +61,130 @@ export function useMailAttempt(key: QueryKey) {
   const cache = useQueryClient();
   const encoded = JSON.stringify(key);
   return useSyncExternalStore(
-    (notify) =>
-      cache.getQueryCache().subscribe((event) => {
+    (notify) => {
+      const storage = (event: StorageEvent) => {
+        if (event.key === storageKey(key)) {
+          cache.setQueryData(key, restoreAttempt(key));
+          notify();
+        }
+      };
+      window.addEventListener("storage", storage);
+      const unsubscribe = cache.getQueryCache().subscribe((event) => {
         if (JSON.stringify(event.query.queryKey) === encoded) notify();
-      }),
-    () => cache.getQueryData<MailAttempt | null>(key) ?? null,
+      });
+      return () => {
+        unsubscribe();
+        window.removeEventListener("storage", storage);
+      };
+    },
+    () => {
+      const cached = cache.getQueryData<MailAttempt | null>(key);
+      if (cached !== undefined) return cached;
+      const restored = restoreAttempt(key);
+      cache.setQueryData(key, restored);
+      return restored;
+    },
     () => null,
   );
 }
 
-/** Same-session replay protection, never a provider delivery receipt. */
-export function beginMailAttempt(
+/** Cross-tab reservation; durable server claim remains the send authority. */
+export async function beginMailAttempt(
   cache: QueryClient,
   key: QueryKey,
   input: SendInput,
 ) {
-  const previous = cache.getQueryData<MailAttempt | null>(key);
-  if (previous)
+  if (!navigator.locks)
     throw new MailSendError(
-      "An email for this contact or thread is pending or its delivery is uncertain. Check the original mailbox Sent Items; this attempt cannot be repeated here.",
-      previous.status === "unknown",
+      "This browser cannot safely reserve a send request.",
+      false,
     );
-  const attempt: MailAttempt = {
-    token: crypto.randomUUID(),
-    status: "pending",
-    input: structuredClone(input),
-  };
-  cache.setQueryDefaults(key, { gcTime: Infinity });
-  cache.setQueryData(key, attempt);
-  return attempt.token;
+  return navigator.locks.request(storageKey(key), () => {
+    const previous =
+      cache.getQueryData<MailAttempt | null>(key) ?? restoreAttempt(key, true);
+    if (previous)
+      throw new MailSendError(
+        "An email for this contact or thread is pending or its delivery is uncertain. Check the original mailbox Sent Items; this attempt cannot be repeated here.",
+        previous.status === "unknown",
+      );
+    const attempt: MailAttempt = {
+      token: crypto.randomUUID(),
+      startedAt: Date.now(),
+      status: "pending",
+      input: structuredClone(input),
+    };
+    try {
+      persistAttempt(key, attempt);
+    } catch {
+      throw new MailSendError(
+        "Allow browser storage before sending so this request can be recovered.",
+        false,
+      );
+    }
+    cache.setQueryDefaults(key, { gcTime: Infinity });
+    cache.setQueryData(key, attempt);
+    return attempt.token;
+  });
 }
 
-export function settleMailAttempt(
+export async function settleMailAttempt(
   cache: QueryClient,
   key: QueryKey,
   token: string,
   error?: unknown,
 ) {
-  const attempt = cache.getQueryData<MailAttempt | null>(key);
-  // Cleared/replaced scope and newer attempts own their own state.
-  if (attempt?.token !== token) return;
-  const next: MailAttempt | null =
-    error instanceof MailSendError && error.uncertain
-      ? { ...attempt, status: "unknown", error }
+  return navigator.locks.request(storageKey(key), () => {
+    const attempt = cache.getQueryData<MailAttempt | null>(key);
+    // The lock and token comparison also cover uncertain writes, not just deletion.
+    if (attempt?.token !== token) return false;
+    const next: MailAttempt | null =
+      error instanceof MailSendError && error.uncertain
+        ? { ...attempt, status: "unknown", error }
+        : null;
+    try {
+      const stored = restoreAttempt(key, true);
+      if (stored?.token !== token) {
+        cache.setQueryData(key, stored);
+        return false;
+      }
+      persistAttempt(key, next, token);
+      cache.setQueryData<MailAttempt | null>(key, next);
+      return true;
+    } catch {
+      cache.setQueryData(key, {
+        ...attempt,
+        status: "unknown",
+        error: new MailSendError(
+          "Could not save the send result. Check the original request before sending again.",
+          true,
+        ),
+      });
+      return false;
+    }
+  });
+}
+
+/** Terminal recovery is released only for the exact reserved request. */
+export async function recoverMailAttempt(
+  cache: QueryClient,
+  key: QueryKey,
+  row: {
+    requestKey: string;
+    state: string;
+    ok?: boolean;
+    threadId?: string;
+    messageId?: string;
+  },
+) {
+  if (row.state === "failed") {
+    return (await settleMailAttempt(cache, key, row.requestKey))
+      ? ("failed" as const)
       : null;
-  cache.setQueryData<MailAttempt | null>(key, next);
+  }
+  if (row.state === "accepted" && row.ok && row.threadId && row.messageId) {
+    return (await settleMailAttempt(cache, key, row.requestKey))
+      ? ("accepted" as const)
+      : null;
+  }
+  return null;
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { TextArea } from "../../../shared/module-ui";
 import {
   SettingFacts,
@@ -11,7 +10,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import {
   basisLabel,
   mappingRelationships,
@@ -29,7 +29,9 @@ export function MappingReview({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    `mapping-review:${mapping.id}`,
+  );
   const [relationship, setRelationship] = useState<MappingRelationship | "">(
     mappingRelationships.includes(
       mapping.relationshipType as MappingRelationship,
@@ -45,24 +47,27 @@ export function MappingReview({
         : "",
   );
   const [reason, setReason] = useState("");
-  const action = useSettingsAction();
   const award = requiresAwardDecision(mapping.source);
   function decide(confirmed: boolean) {
     return action.run(
-      () =>
-        api.request("settings.mappings.confirmIndividual", {
-          params: { mappingId: mapping.id },
-          body: {
-            confirmed,
-            ...(confirmed && award
-              ? {
-                  relationshipType: relationship as MappingRelationship,
-                  rollUpAwards: rollUp === "yes",
-                }
-              : {}),
-            ...(!confirmed && reason ? { rejectionReason: reason } : {}),
+      (signal) =>
+        api.request(
+          "settings.mappings.confirmIndividual",
+          {
+            params: { mappingId: mapping.id },
+            body: {
+              confirmed,
+              ...(confirmed && award
+                ? {
+                    relationshipType: relationship as MappingRelationship,
+                    rollUpAwards: rollUp === "yes",
+                  }
+                : {}),
+              ...(!confirmed && reason ? { rejectionReason: reason } : {}),
+            },
           },
-        }),
+          { signal },
+        ),
       (result) =>
         result.confirmed
           ? "Mapping was confirmed."
@@ -75,24 +80,25 @@ export function MappingReview({
   }
   return (
     <SettingsDialog
+      busy={action.busy}
       open
       onClose={onClose}
       title="Review intelligence mapping"
       footer={
         <>
-          <SettingsButton disabled={action.busy} onClick={onClose}>
+          <SettingsButton disabled={locked} onClick={onClose}>
             Cancel
           </SettingsButton>
           <SettingsButton
             danger
-            disabled={action.busy}
+            disabled={locked}
             onClick={() => void decide(false)}
           >
             Reject
           </SettingsButton>
           <SettingsButton
             primary
-            disabled={action.busy || (award && (!relationship || !rollUp))}
+            disabled={locked || (award && (!relationship || !rollUp))}
             onClick={() => void decide(true)}
           >
             Confirm mapping
@@ -114,6 +120,7 @@ export function MappingReview({
         <>
           <SettingField label="Relationship to client">
             <select
+              disabled={locked}
               className={styles.input}
               value={relationship}
               onChange={(event) =>
@@ -130,6 +137,7 @@ export function MappingReview({
           </SettingField>
           <SettingField label="Roll up federal awards into this client?">
             <select
+              disabled={locked}
               className={styles.input}
               value={rollUp}
               onChange={(event) =>
@@ -145,11 +153,17 @@ export function MappingReview({
       )}
       <SettingField label="Rejection reason (optional)">
         <TextArea
+          disabled={locked}
           maxLength={1000}
           value={reason}
           onChange={(event) => setReason(event.target.value)}
         />
       </SettingField>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Mapping review failed" error>
           {action.error}

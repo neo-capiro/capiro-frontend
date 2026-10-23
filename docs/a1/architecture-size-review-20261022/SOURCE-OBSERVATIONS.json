@@ -1,0 +1,29 @@
+[
+  {
+    "id": "PF-CAP-1",
+    "classification": "source-only-command-admission-observation",
+    "sourceHead": "c968392dd47a1bfee303a9e1e66fd742a63dc7d1",
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "callsites": "assertReadable:71-90; editingCurrent/sharingCurrent:117-127; dialog actions:312-399",
+    "claim": "Row controls use capability flags, but current-read admission and already-open edit/share dialogs do not consult an explicit current edit/share=false projection. A still-readable refreshed record can leave that dialog action dispatchable.",
+    "limits": "Source inference only; no executed reproduction or authorization-bypass claim. Backend authority remains required. Hold for dot/Fable disposition; no behavioral change made."
+  },
+  {
+    "id": "MAIL-RECOVERY-1",
+    "classification": "source-only-recovery-projection-observation",
+    "sourceHead": "c968392dd47a1bfee303a9e1e66fd742a63dc7d1",
+    "file": "apps/web/src/features/portfolio/relationships/email.ts",
+    "callsites": "accepted recovery:172-175; returned state:204-208; MailCompose.tsx:86-87,105",
+    "claim": "Accepted recovery clears the local attempt and invalidates queries but does not replace an earlier uncertain mutation error or expose accepted success through mutation.isSuccess. The same mounted composer can therefore continue showing the old uncertain lock after accepted recovery.",
+    "limits": "Source inference only; not a reproduced provider/React/browser result. Existing no-new-email/no-recovery-change direction applies; reservation and no-resend behavior are unchanged. Hold for dot/Fable/Neo disposition."
+  },
+  {
+    "id": "PF-FIXTURE-1",
+    "classification": "source-only-browser-fixture-gap",
+    "sourceHead": "c968392dd47a1bfee303a9e1e66fd742a63dc7d1",
+    "file": "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+    "callsites": "fixture:11-26; cache key:38; calendar/mutations.ts:48; meeting-save.ts revision receiving",
+    "claim": "The old browser receipt harness seeds [meeting,id], while current save admission reads [meeting,id,readClientId ?? null]. The fixture also omits updatedAt required for explicit association clearing.",
+    "limits": "No browser run performed. These source fixtures cannot be cited as current successful save/clear qualification without correction and rerun. Hold for coordinating review; no assertion weakened."
+  }
+]

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { OperationResponse } from "../../../shared/capiro/contracts";
 import type { analystOperations } from "../../../shared/capiro/operations/settings-admin/analyst";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -20,7 +19,8 @@ import {
   SettingsNotice,
 } from "../components";
 import styles from "../styles";
-import { useSettingsAction } from "../useSettingsAction";
+import { useSettingsMutation } from "../useSettingsMutation";
+import { SettingsMutationNotice } from "../SettingsMutationNotice";
 import { QueuePagination } from "./QueuePagination";
 
 type Item = OperationResponse<
@@ -28,7 +28,9 @@ type Item = OperationResponse<
 >["data"][number];
 
 export function ReconciliationQueue() {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } = useSettingsMutation(
+    "analyst-reconciliation",
+  );
   const [status, setStatus] = useState("open");
   const [page, setPage] = useState(1);
   const query = useCapiroQuery("settings.analyst.reconciliation.list", {
@@ -37,21 +39,24 @@ export function ReconciliationQueue() {
   const [manual, setManual] = useState<Item>();
   const [manualValue, setManualValue] = useState("");
   const [notes, setNotes] = useState("");
-  const action = useSettingsAction();
   function decide(
     item: Item,
     decision: "keep_current" | "accept_conflicting" | "manual_value",
   ) {
     return action.run(
-      () =>
-        api.request("settings.analyst.reconciliation.resolve", {
-          params: { id: item.id },
-          body: {
-            decision,
-            ...(decision === "manual_value" ? { manualValue } : {}),
-            ...(notes ? { notes } : {}),
+      (signal) =>
+        api.request(
+          "settings.analyst.reconciliation.resolve",
+          {
+            params: { id: item.id },
+            body: {
+              decision,
+              ...(decision === "manual_value" ? { manualValue } : {}),
+              ...(notes ? { notes } : {}),
+            },
           },
-        }),
+          { signal },
+        ),
       (result) =>
         result.pendingApproval
           ? "The proposed value requires approval by a second administrator. The canonical value has not changed."
@@ -72,6 +77,7 @@ export function ReconciliationQueue() {
         title="Reconciliation Review Queue"
         action={
           <select
+            disabled={locked}
             className={styles.input}
             aria-label="Reconciliation status"
             value={status}
@@ -141,7 +147,7 @@ export function ReconciliationQueue() {
                     <div className={styles.row}>
                       <SettingsButton
                         small
-                        disabled={action.busy}
+                        disabled={locked}
                         onClick={() => void decide(row, "keep_current")}
                       >
                         Keep
@@ -149,14 +155,14 @@ export function ReconciliationQueue() {
                       <SettingsButton
                         primary
                         small
-                        disabled={action.busy}
+                        disabled={locked}
                         onClick={() => void decide(row, "accept_conflicting")}
                       >
                         Accept
                       </SettingsButton>
                       <SettingsButton
                         small
-                        disabled={action.busy}
+                        disabled={locked}
                         onClick={() => {
                           setManual(row);
                           setManualValue("");
@@ -170,13 +176,14 @@ export function ReconciliationQueue() {
                   ) : row.status === "pending_approval" ? (
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
-                          () =>
+                          (signal) =>
                             api.request(
                               "settings.analyst.reconciliation.approve",
                               { params: { id: row.id } },
+                              { signal },
                             ),
                           "The second administrator approval was recorded.",
                           query.reload,
@@ -201,6 +208,11 @@ export function ReconciliationQueue() {
           )}
         </StatusPanel>
       </SettingsCard>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Reconciliation action failed" error>
           {action.error}
@@ -208,13 +220,14 @@ export function ReconciliationQueue() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
+        busy={action.busy}
         open={!!manual}
         onClose={() => setManual(undefined)}
         title={`Manual value, ${manual?.peCode ?? ""} FY${manual?.fy ?? ""} ${manual?.fieldName ?? ""}`}
         footer={
           <>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => setManual(undefined)}
             >
               Cancel
@@ -223,7 +236,7 @@ export function ReconciliationQueue() {
               primary
               form="manual-reconciliation-value"
               type="submit"
-              disabled={action.busy}
+              disabled={locked}
             >
               Apply value
             </SettingsButton>
@@ -240,6 +253,7 @@ export function ReconciliationQueue() {
         >
           <SettingField label="Value ($ millions)">
             <TextInput
+              disabled={locked}
               required
               inputMode="decimal"
               pattern="-?(0|[1-9][0-9]*)(\.[0-9]+)?"
@@ -250,6 +264,7 @@ export function ReconciliationQueue() {
           </SettingField>
           <SettingField label="Notes (optional)">
             <TextArea
+              disabled={locked}
               maxLength={10000}
               value={notes}
               placeholder="Why this value?"
@@ -260,6 +275,11 @@ export function ReconciliationQueue() {
             Values requiring a second administrator remain pending until
             approved.
           </p>
+          <SettingsMutationNotice
+            pending={pending}
+            busy={action.busy}
+            reconcile={reconcile}
+          />
           {action.error && (
             <SettingsNotice title="Manual value could not be submitted" error>
               {action.error}

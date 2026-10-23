@@ -1,0 +1,19 @@
+{
+  "status": "PROPOSAL_VALIDATED_NOT_REGISTERED",
+  "method": "Read-only exact-key, scanner fingerprint, previous-record and record-format checks. Shared registry was never modified. This is not npm architecture or production qualification.",
+  "covered": 50,
+  "uncovered": 0,
+  "duplicateProposedKeys": 0,
+  "recordFormatErrors": [],
+  "perPR": {
+    "117": {
+      "count": 42,
+      "proposalsSha256": "bf3a7551519f8c64e8850daa9cca45310c5fc6fddbe6e9e5864374ed99903b40"
+    },
+    "118": {
+      "count": 8,
+      "proposalsSha256": "9ef73b127ea9bf5fd218ec53e5c28a42ad7b088bbc5ea010e78697a9958dd3f6"
+    }
+  },
+  "canonicalGatesRemainHeld": true
+}

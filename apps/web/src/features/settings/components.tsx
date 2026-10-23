@@ -104,6 +104,7 @@ export function SettingsDialog({
   children,
   footer,
   side,
+  busy = false,
 }: {
   title: string;
   description?: string;
@@ -112,18 +113,24 @@ export function SettingsDialog({
   children: ReactNode;
   footer?: ReactNode;
   side?: "center" | "right";
+  busy?: boolean;
 }) {
   return (
     <Modal
       open={open}
+      closeDisabled={busy}
       onOpenChange={(value) => {
-        if (!value) onClose();
+        if (!value && !busy) onClose();
       }}
       title={title}
       description={description}
       side={side}
       footer={
-        footer ?? <SettingsButton onClick={onClose}>Close</SettingsButton>
+        footer ?? (
+          <SettingsButton disabled={busy} onClick={onClose}>
+            Close
+          </SettingsButton>
+        )
       }
     >
       <div className={styles.stack}>{children}</div>

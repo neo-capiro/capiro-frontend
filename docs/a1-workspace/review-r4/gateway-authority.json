@@ -1,0 +1,59 @@
+{
+  "priorRemoteHead": "b6f0fd74c981e76e9b5063aa44d298148e11f50c",
+  "source": "apps/web/tests/workspace-descendant-gateway.test.ts",
+  "sha256": "b64b1fb9ca518a5f2d7e71c9656a0b9af0d9f83208fbfa96c21c54216e9d1957",
+  "nonblankLines": 497,
+  "enabledRun": {
+    "success": true,
+    "numTotalTests": 57,
+    "numPassedTests": 57,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numRuntimeErrorTestSuites": null
+  },
+  "breakdown": {
+    "standaloneForwarding": 21,
+    "fixtureDependent": 36
+  },
+  "wrapper": {
+    "success": true,
+    "numTotalTests": 1,
+    "numPassedTests": 1,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numRuntimeErrorTestSuites": 0
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "diagnostics": 0
+  },
+  "lint": {
+    "exitCode": 0
+  },
+  "cleanInstall": false,
+  "productionChanges": false,
+  "limits": [
+    "TenantGuard replaced by synthetic trusted identity; no realJWT/Clerk qualification",
+    "Prisma substituted by tenant/parent-aware fixture",
+    "nominated descendant read/effect counters exclude authority config selections, which may contain content",
+    "no native no-SQL-effect or concurrency proof",
+    "no clean build/fullsuite parity/image/browser/provider qualification"
+  ],
+  "holds": [
+    "Workspace ACL deployment HOLD",
+    "backend108 NOT DEPLOYABLE",
+    "frozen clean closure/Prisma parity",
+    "native PostgreSQL16/RLS/revocation/concurrency",
+    "exact image binding",
+    "reviewed numbered SQL/fresh clone",
+    "migration -> combined backend -> frontend"
+  ],
+  "designReview": {
+    "verdict": "No bounded blocker",
+    "reviewedSha256": "b64b1fb9ca518a5f2d7e71c9656a0b9af0d9f83208fbfa96c21c54216e9d1957",
+    "nonblankLines": 497,
+    "soleOver80LineFunction": "102-line describe registration callback",
+    "executingCallbacks": "small; existing request/fixture/assertion helpers reused",
+    "reviewerRuntimeTests": false
+  }
+}

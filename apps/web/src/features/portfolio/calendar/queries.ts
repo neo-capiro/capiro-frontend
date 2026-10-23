@@ -61,15 +61,15 @@ export function useCalendarFeeds(
   });
   return { meetings, hearings, planner, deadlines, government, funding };
 }
-export function useMeeting(id: string | null) {
+export function useMeeting(id: string | null, clientId?: string) {
   const api = useApi();
   return useQuery({
-    queryKey: ["meeting", id],
+    queryKey: ["meeting", id, clientId ?? null],
     enabled: Boolean(id),
     queryFn: ({ signal }) =>
       api.request(
         "core",
-        `engagement/meetings/${encodeURIComponent(id ?? "")}`,
+        `engagement/meetings/${encodeURIComponent(id ?? "")}${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
         meetingSchema.refine((meeting) => meeting.id === id, {
           message: "Meeting response does not match the requested meeting",
         }),
@@ -97,7 +97,7 @@ export function useMeetingNotes(
     queryFn: ({ signal }) =>
       api.request(
         "core",
-        `engagement/meetings/${encodeURIComponent(id ?? "")}/${kind}`,
+        `engagement/meetings/${encodeURIComponent(id ?? "")}/${kind}${scope?.clientId ? `?clientId=${encodeURIComponent(scope.clientId)}` : ""}`,
         meetingArtifactListSchema(id, scope?.clientId),
         { signal },
       ),

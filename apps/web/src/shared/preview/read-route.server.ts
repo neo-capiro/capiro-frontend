@@ -1,12 +1,26 @@
-import type { OperationDefinition } from "../capiro/contracts";
-import { getRequestInput } from "../capiro/gateway-input";
-import { settingsOperations } from "../capiro/operations/settings";
+import type {
+  CapiroService,
+  OperationDefinition,
+  OperationRegistry,
+} from "../capiro/contracts";
+import {
+  appendQuery,
+  getRequestInput,
+  operationPath,
+} from "../capiro/gateway-input";
+import { capiroOperations } from "../capiro/registry";
 
-const clientId =
-  "[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
-const corePath = new RegExp(
-  `^/api/backend/core/(me|clients|clients/${clientId})$`,
-);
+/** Preview backends share the preview API host under their production path prefixes. */
+export const previewServicePrefixes = {
+  core: "/api",
+  strategy: "/strategy-api",
+  workspace: "/workspace-api",
+  intelligence: "/intel-api",
+} as const satisfies Partial<Record<CapiroService, string>>;
+type PreviewService = keyof typeof previewServicePrefixes;
+const isPreviewService = (service: string): service is PreviewService =>
+  Object.hasOwn(previewServicePrefixes, service);
+const backendPath = /^\/api\/backend\/([a-z]+)((?:\/[A-Za-z0-9._~-]+)+)$/;
 const forbiddenHeaders = [
   "x-http-method-override",
   "x-method-override",
@@ -19,28 +33,15 @@ const forbiddenHeaders = [
 ];
 export type PreviewReadRoute = {
   browserPath: string;
+  service: PreviewService;
+  /** Backend path relative to the service prefix, with its query string. */
   path: string;
-  query: Record<string, string | boolean | undefined>;
   operation?: OperationDefinition;
 };
 
-function coreQuery(url: URL, path: string): PreviewReadRoute["query"] | null {
-  if (path !== "/clients") return url.search ? null : {};
-  const query: Record<string, string | boolean> = Object.create(null);
-  for (const [key, value] of url.searchParams) {
-    if (Object.hasOwn(query, key)) return null;
-    if (key === "includeArchived") {
-      if (value !== "true" && value !== "false") return null;
-      query[key] = value === "true";
-    } else query[key] = value;
-  }
-  const parsed = settingsOperations["clients.list"].request.safeParse({
-    query,
-  });
-  return parsed.success ? (parsed.data.query ?? {}) : null;
-}
+const registry: OperationRegistry = capiroOperations;
 
-/** Browser paths map to three backend GETs; existing fixed-operation schemas own DTOs. */
+/** Every preview-service GET: raw Portfolio paths pass through; registered operations keep their own schemas. */
 export function previewReadRoute(request: Request): PreviewReadRoute | null {
   if (
     request.method !== "GET" ||
@@ -51,32 +52,29 @@ export function previewReadRoute(request: Request): PreviewReadRoute | null {
   try {
     const url = new URL(request.url);
     if (url.search.length > 16_000) return null;
-    const core = corePath.exec(url.pathname);
-    if (core) {
-      const path = `/${core[1]}`;
-      const query = coreQuery(url, path);
-      return query ? { browserPath: url.pathname, path, query } : null;
+    const backend = backendPath.exec(url.pathname);
+    // URL parsing already resolved dot segments; the pattern refuses any escape.
+    if (backend) {
+      const [, service = "", path = ""] = backend;
+      return isPreviewService(service)
+        ? { browserPath: url.pathname, service, path: path + url.search }
+        : null;
     }
-    const key =
-      url.pathname === "/api/capiro/me.read"
-        ? "me.read"
-        : url.pathname === "/api/capiro/clients.list"
-          ? "clients.list"
-          : null;
-    if (!key) return null;
-    const operation = settingsOperations[key];
-    const parsed = operation.request.safeParse(getRequestInput(request));
-    if (
-      !parsed.success ||
-      operation.method !== "GET" ||
-      operation.service !== "core" ||
-      operation.path !== (key === "me.read" ? "/me" : "/clients")
-    )
+    if (!url.pathname.startsWith("/api/capiro/")) return null;
+    const key = url.pathname.slice("/api/capiro/".length);
+    const operation = Object.hasOwn(registry, key) ? registry[key] : undefined;
+    if (operation?.method !== "GET" || !isPreviewService(operation.service))
       return null;
+    const parsed = operation.request.safeParse(getRequestInput(request));
+    if (!parsed.success) return null;
+    const target = new URL(
+      `https://backend.invalid${operationPath(operation, parsed.data)}`,
+    );
+    appendQuery(target, operation, parsed.data);
     return {
       browserPath: url.pathname,
-      path: operation.path,
-      query: "query" in parsed.data ? (parsed.data.query ?? {}) : {},
+      service: operation.service,
+      path: target.pathname + target.search,
       operation,
     };
   } catch {

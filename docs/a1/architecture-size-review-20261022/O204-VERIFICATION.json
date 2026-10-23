@@ -1,0 +1,253 @@
+{
+  "scope": "O204: exact accepted registry records plus PF-CAP-1, MAIL-RECOVERY-1 and PF-FIXTURE-1; cancelled notes excluded",
+  "sourceHeadBefore": "9de43835db85c3cf839dd5c77678858116e4c363",
+  "base": "87a8495138f0af5303bc93397438238c6cc5081b",
+  "registration": {
+    "pr": 118,
+    "replacements": 7,
+    "additions": 1,
+    "verified": 8,
+    "registryBeforeSha256": "db85888022c559660e0b33a325e8227e9669f13ed9e6dd239f8fd8be7cb00ad3",
+    "registryAfterSha256": "b02a57e0e89d30833d664fa500a3a28602dfc467b477f2e21a3bc45dc98fdbc4",
+    "acceptedEntries": [
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+        "kind": "file",
+        "symbol": "<module>",
+        "fingerprint": "9ad57744c6b3a293ca149235200b2be9636879b56a6dd21514a95bdb2da27815"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+        "kind": "function",
+        "symbol": "ArtifactEditor",
+        "fingerprint": "95d33d77069d4af55ddc2851fb5a3082500e045a1f7b1562c6453627038c23d5"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+        "kind": "function",
+        "symbol": "ArtifactEditor > <anonymous> #8",
+        "fingerprint": "0cf6c07d1d43e02e78ef7d20afa3af2c4b93b004e0663ab1843d97d1c157ae7e"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+        "kind": "function",
+        "symbol": "MeetingForm",
+        "fingerprint": "7d85f252ca237ac0d0234f1923c412f6c4173471c6f922e72e9af7f145c1e660"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
+        "kind": "function",
+        "symbol": "useSaveMeeting",
+        "fingerprint": "0c9a51edb153a5e660c7309507ca0c567aa24ef22f002390dc4a9c94d2927d88"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+        "kind": "function",
+        "symbol": "ActivityActions",
+        "fingerprint": "ef4491c12aeba7cb881f92ec3dabab93d0edb41322fd51e15d19c2208f2db35f"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
+        "kind": "function",
+        "symbol": "sendReviewedMail",
+        "fingerprint": "d0c3f05b87e0e6859c7405de82c2e800073f902a8f121a78fb18b47e32a858a7"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/relationships/email.ts",
+        "kind": "function",
+        "symbol": "useSendMail",
+        "fingerprint": "801093b94ef55df07e70a63784f63ff81f697be1249aeb12dbf7e0a75502f7f7"
+      }
+    ],
+    "importerUnchanged": true
+  },
+  "changedSourceSha256": {
+    "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx": "958069e66cce02d6c7085ece7078b8a380502eea999852aea83a7b640a5dec7e",
+    "apps/web/src/features/portfolio/relationships/email.ts": "22ebef16a63ee9f622a82bb63b687b0158f154b45fa4ad8e3610c7522e997aca",
+    "apps/web/tests/a1-artifact-capabilities.test.ts": "09d6e24e0658d1b7acdb4668effa1977dd422d439f2d691d57f426125958cf4d",
+    "apps/web/tests/a1-mail-recovery-projection.test.ts": "4a51928978ee0aaf9f17b40e8a6f85c00694d9b8445e1b48b9cf18461516dc8a",
+    "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx": "4fe6379e8b610293e3145aacb390d4acd09533ceb107f3761899fb75bf4f0759",
+    "scripts/architecture/reviewed-size-findings.json": "b02a57e0e89d30833d664fa500a3a28602dfc467b477f2e21a3bc45dc98fdbc4"
+  },
+  "unchangedPolicySha256": {
+    "scripts/architecture.mjs": "b5354d6a8e17c099ec1f7278ca2914192244880a7de17e0409c1830a64f29cea",
+    "scripts/architecture/reviews.mjs": "32c60a419ed3642b9e248da9a30e625cc9776906bcd543c30d16c492646fc124",
+    "scripts/architecture/scan.mjs": "7326fb690a8578e2cce8ce3a10b806c17039583c7479e2ec4c4c0b4d76548bc9",
+    "scripts/architecture/dependencies.mjs": "e1c76f20e4ab5f1f1f2884d8cad4030a51ca984a92bc2a39dd4df6d7e2750f5a",
+    "scripts/architecture/portfolio-transfer-size-baseline.json": "2d2bd6894e280155344680a78b0a6eff484a66583db02475f35a405e0aec7a76",
+    "docs/architecture-size-reviews.json": "0a5213a2ce2d1c2e268f4a4cf0d2c0dafba16e63c5ed00f9dab8431f0ca5fe9a",
+    "package.json": "f6159deb8588ef341d6ea5f48cb3d68a1534217758c012a813975a2d9570e51d",
+    "package-lock.json": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234"
+  },
+  "gates": {
+    "registrationOnlyComposed": {
+      "exit": 0,
+      "errors": [],
+      "sizeSummary": {
+        "total": 551,
+        "reviewed": 533,
+        "inheritedUnreviewed": 18,
+        "blocking": 0
+      },
+      "scope": "Before O204 source corrections; historical checkpoint only"
+    },
+    "finalComposed": {
+      "exit": 1,
+      "errors": [],
+      "sizeSummary": {
+        "total": 551,
+        "reviewed": 529,
+        "inheritedUnreviewed": 18,
+        "blocking": 4
+      },
+      "reason": "Four changed exact fingerprints await dot review; old accepted pins retained"
+    },
+    "pfCap": {
+      "red": {
+        "pass": 4,
+        "fail": 6,
+        "exit": 1
+      },
+      "green": {
+        "pass": 10,
+        "fail": 0,
+        "exit": 0
+      },
+      "finalFormattingOnly": "Added Edit-click condition line wrapping only; focused ESLint passes"
+    },
+    "mailProjection": {
+      "scope": "O204 MAIL-RECOVERY-1 only",
+      "files": {
+        "apps/web/src/features/portfolio/relationships/email.ts": "22ebef16a63ee9f622a82bb63b687b0158f154b45fa4ad8e3610c7522e997aca",
+        "apps/web/tests/a1-mail-recovery-projection.test.ts": "4a51928978ee0aaf9f17b40e8a6f85c00694d9b8445e1b48b9cf18461516dc8a"
+      },
+      "sendAttemptUnchanged": true,
+      "runs": [
+        {
+          "receipt": "mail-red.json",
+          "exit": 1,
+          "numTotalTests": 11,
+          "numPassedTests": 9,
+          "numFailedTests": 2,
+          "success": false
+        },
+        {
+          "receipt": "mail-second-token-red.json",
+          "exit": 1,
+          "numTotalTests": 13,
+          "numPassedTests": 12,
+          "numFailedTests": 1,
+          "success": false
+        },
+        {
+          "receipt": "mail-green-final.json",
+          "exit": 0,
+          "numTotalTests": 13,
+          "numPassedTests": 13,
+          "numFailedTests": 0,
+          "success": true
+        }
+      ],
+      "limits": [
+        "Node hook probe retains state/memo/ref cells and effect cleanup; query/mutation observers and authority are controlled test doubles.",
+        "Real QueryClient, beginMailAttempt, settleMailAttempt and recoverMailAttempt run with synthetic storage/lock provider.",
+        "No browser, real providers, clean install or central qualification claimed."
+      ],
+      "lint": {
+        "exit": 0,
+        "errors": 0,
+        "warnings": 0,
+        "receipt": "mail-lint-final.log",
+        "setupError": "mail-lint.log records initial wrong-cwd no-files error; corrected path run succeeded"
+      },
+      "newUseSendMailFingerprint": "5ae96096540e54531fb43a280f8f643cf66e59383349eb305bd516740d4fe83e",
+      "newFingerprintAcceptance": "PENDING_DOT_EXACT_HEAD_REVIEW"
+    },
+    "existingFocused": {
+      "command": "npm test --workspace @capiro/web -- tests/a1-portfolio.test.ts tests/calendar-artifact-receipts.test.ts tests/acceptance-meeting-artifacts-admission.test.ts tests/mail-intent-recovery.test.ts tests/email-compose.test.ts --maxWorkers=1",
+      "pass": 94,
+      "fail": 0,
+      "skip": 0,
+      "exit": 0
+    },
+    "focusedTypecheck": {
+      "exit": 0,
+      "diagnostics": 0,
+      "scope": "Scratch tsconfig extends unchanged apps/web/tsconfig.json; includes two touched sources, two new tests, meeting fixture and next-env.d.ts; incremental false; 2-GiB heap. Full repository typecheck not repeated."
+    },
+    "focusedLint": {
+      "exit": 0,
+      "errors": 0,
+      "warnings": 0,
+      "scope": "Two touched sources, two new tests and meeting fixture"
+    },
+    "fixtureBrowser": {
+      "command": "npm run test:browser --workspace @capiro/web -- calendar-meeting-receipts.spec.ts calendar-client-clear.spec.ts",
+      "exit": 1,
+      "blockedAtLaunch": 7,
+      "executed": 0,
+      "reason": "Required Chromium headless-shell executable missing; no dependency/browser install attempted"
+    }
+  },
+  "pendingFingerprintReview": [
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "fingerprint": "5177818e63066bb762e62f294024d1b8c7c64d96c44c169ee8865240c999def8",
+      "reason": "This remains the presentation owner for one meeting notes/debrief interaction. The actor-keyed wrapper and editor retain one list, local draft and dialog lifetime. O204 adds current explicit capability refusals to the existing admission and dialog checks; transport, receipt validation, attempt state, generation and document preview remain delegated to their existing owners. The change adds no grant store or server policy. Separating individual checks or JSX would disperse the same retained interaction rather than isolate a new responsibility.",
+      "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
+      "reviewedOn": "2026-10-22"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "function",
+      "symbol": "ArtifactEditor",
+      "fingerprint": "20cee08ec23298bebe4b587a49e90b39c8b63714e1fbdb2a1b64c812e3fe153c",
+      "reason": "The editor owns one artifact selection and attempt lifetime shared by list rows, retained edit text and conditional share/edit dialogs. O204 applies the existing server-reported capability refusals to the cached current-command predicate and retained-dialog visibility, so both consume the same refreshed row. useArtifactMutation still owns dispatch/attempt state and existing API/contracts own receipts. Keeping selection, admission and concealment together preserves unsaved draft retention; splitting them merely to reduce line count would introduce additional lifecycle coordination.",
+      "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
+      "reviewedOn": "2026-10-22"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "function",
+      "symbol": "ArtifactEditor > <anonymous> #8",
+      "fingerprint": "3d16d20879702a5dc5addfad02f41f64338882636b55e61db21acda309c12489",
+      "reason": "This stateless saved-artifact card projection renders one row and delegates commands/dialog state to its parent. O204 adds current edit/share capability checks to its retained entry callbacks, matching the refreshed row controls without giving cards their own attempt or authority state. All actions still use the enclosing editor admission boundary. Extracting this one callback would pass the same row and selection callbacks through another component without isolating another domain or reusable presentation.",
+      "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
+      "reviewedOn": "2026-10-22"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email.ts",
+      "kind": "function",
+      "symbol": "useSendMail",
+      "fingerprint": "5ae96096540e54531fb43a280f8f643cf66e59383349eb305bd516740d4fe83e",
+      "reason": "This hook composes one actor/client/entity reserved mail attempt with its read-only recovery and caller-visible status. O204 projects accepted recovery only after the existing exact-token settlement succeeds, and invalidates that projection when scope or token changes, a later local send begins, or recovery fails. The lifetime/sequence checks prevent delayed recovery from replacing a newer view. send-attempt still owns Web Lock/storage settlement and sendReviewedMail still owns preflight and single dispatch; neither is changed. A separate stateful recovery owner would split the same reserved identity across competing UI lifetimes.",
+      "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
+      "reviewedOn": "2026-10-22"
+    }
+  ],
+  "receiptSha256": {
+    "architecture-registered-composed.log": "9a51a79b86adfa6a5ca76aa409d1ab5f5420dfc66846fd1e23ed3509d887d56a",
+    "architecture-final-composed.log": "ba68b35dc3a3d6dd672753527c990e76c492904764851970aaab37b989e7bd35",
+    "pf-cap-red.json": "994f0b8fa571855b7eb7e05d5f73db4ebb737afef58747127e7fffdfc24dcfbc",
+    "pf-cap-green.json": "9fba2b7a9b6d0b806803707df4b9366912737df9d3cf5e7fedbceef96064023c",
+    "mail-red.json": "72920b43571dd5c73647914a023c997a23b418287a18739f77406d395ff7472f",
+    "mail-second-token-red.json": "8c3ca5fff479615438fdcff1eb21330980dd3a4b0a900740da8718e072537433",
+    "mail-green-final.json": "9a3bf3267e491e4156669458f48d4afb3f3791bdc2a58f87c59088509eb71bbe",
+    "existing-focused.json": "0ebd8bc12e37b3e3ca6a5ae7732513fda0578e0152480c3ccad0c571b211b698",
+    "focused-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pf-cap-eslint.log": "b3fcd1e7ab9ebc0e31cd34ae48a42796444b9e0cd4b78f9c3733f5d1aabd8806",
+    "mail-lint-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixture-eslint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixture-browser.log": "aad5c607306b42233715536e59b1781d7bc240adb0f2a854be678851df033eac",
+    "registry-independent.json": "178c7bcaf0d5422d8fd5f4ec063c6600547adf7c5a202e6498f783c2648acb2e"
+  },
+  "limits": [
+    "Dependencies reused from matching locked installation; no clean install.",
+    "Node/SSR capability tests use real query cache with controlled mutation/presentation boundaries. Mail tests use real reservation/settlement helpers with synthetic storage/locks and controlled React/query observers. No browser/provider/backend qualification claimed.",
+    "No prior missing-jsdom form tests were rerun; zero executed remains. Fable owns composed CodeBuild, smoke, browser and scan.",
+    "Earlier run3961445f failed before later production gates; preserved as historical failure.",
+    "Unknown/refused reservations, send-attempt and no-resend behavior unchanged. No new send/recovery action, SQL, A2 or acceptance turn. STOP2/6 remains."
+  ]
+}

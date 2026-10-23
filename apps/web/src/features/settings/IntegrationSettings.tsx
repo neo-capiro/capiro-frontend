@@ -20,7 +20,8 @@ import {
 import { settingsDestination } from "./externalNavigation";
 import { integrationProviders } from "./integrationProviders";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 type Provider = z.infer<typeof integrationProviderSchema>;
 type Connection = z.infer<typeof integrationSchema>;
@@ -56,7 +57,13 @@ export function IntegrationSettings() {
   const [register, setRegister] = useState<Provider>();
   const [disconnect, setDisconnect] = useState<Connection>();
   const [detail, setDetail] = useState<Connection>();
-  const action = useSettingsAction(api);
+  const {
+    api: mutationApi,
+    action,
+    pending,
+    reconcile,
+    locked,
+  } = useSettingsMutation("integration-disconnect");
   async function connect(
     provider: Provider,
     connectionId: string | undefined,
@@ -107,14 +114,18 @@ export function IntegrationSettings() {
       );
     return result;
   }
-  async function disconnectAccount(connection: Connection) {
+  async function disconnectAccount(
+    connection: Connection,
+    signal: AbortSignal,
+  ) {
     if (connection.provider === "imap_caldav")
       throw new Error("IMAP / CalDAV disconnection is unavailable here.");
-    const result = await api.request(
+    const result = await mutationApi.request(
       connection.provider === "microsoft_365"
         ? "settings.integrations.disconnectMicrosoft"
         : "settings.integrations.disconnectGoogle",
       { params: { connectionId: connection.id } },
+      { signal },
     );
     if (result.connectionId !== connection.id || !result.disconnected)
       throw new Error(
@@ -226,7 +237,7 @@ export function IntegrationSettings() {
                         <SettingsButton
                           small
                           disabled={
-                            action.busy ||
+                            locked ||
                             connection.status !== "connected" ||
                             provider.id === "imap_caldav"
                           }
@@ -244,7 +255,7 @@ export function IntegrationSettings() {
                           connection.status === "connected" && (
                             <SettingsButton
                               small
-                              disabled={action.busy}
+                              disabled={locked}
                               onClick={() =>
                                 void action.run(
                                   (signal) =>
@@ -267,9 +278,7 @@ export function IntegrationSettings() {
                           <SettingsButton
                             danger
                             small
-                            disabled={
-                              action.busy || provider.id === "imap_caldav"
-                            }
+                            disabled={locked || provider.id === "imap_caldav"}
                             onClick={() => setDisconnect(connection)}
                           >
                             Disconnect
@@ -279,9 +288,7 @@ export function IntegrationSettings() {
                           provider.id !== "imap_caldav" && (
                             <SettingsButton
                               small
-                              disabled={
-                                action.busy || !capability?.data?.configured
-                              }
+                              disabled={locked || !capability?.data?.configured}
                               onClick={() =>
                                 void action.run(
                                   (signal) =>
@@ -330,7 +337,7 @@ export function IntegrationSettings() {
                   <SettingsButton
                     primary
                     small
-                    disabled={action.busy || !capability?.data?.configured}
+                    disabled={locked || !capability?.data?.configured}
                     onClick={() =>
                       void action.run(
                         (signal) => connect(provider.id, undefined, signal),
@@ -357,6 +364,11 @@ export function IntegrationSettings() {
           })}
         </div>
       </StatusPanel>
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {action.error && (
         <SettingsNotice title="Integration action failed" error>
           {action.error}
@@ -369,6 +381,7 @@ export function IntegrationSettings() {
         refresh={connections.reload}
       />
       <SettingsDialog
+        busy={action.busy}
         open={!!disconnect}
         onClose={() => {
           if (!action.busy) setDisconnect(undefined);
@@ -378,18 +391,18 @@ export function IntegrationSettings() {
         footer={
           <>
             <SettingsButton
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => setDisconnect(undefined)}
             >
               Keep connected
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (disconnect && disconnect.provider !== "imap_caldav")
                   void action.run(
-                    () => disconnectAccount(disconnect),
+                    (signal) => disconnectAccount(disconnect, signal),
                     "Account was disconnected.",
                     () => {
                       setDisconnect(undefined);
@@ -404,6 +417,11 @@ export function IntegrationSettings() {
         }
       >
         <p>{disconnect?.accountEmail}</p>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Disconnect failed" error>
             {action.error}
@@ -416,11 +434,7 @@ export function IntegrationSettings() {
         title="Account permissions"
       >
         <p>{detail?.accountEmail}</p>
-        <ul>
-          {detail?.scopes.map((scope) => (
-            <li key={scope}>{scope}</li>
-          ))}
-        </ul>
+        <ul>{detail?.scopes.map((scope) => <li key={scope}>{scope}</li>)}</ul>
         {!detail?.scopes.length && <p>No granted scopes were returned.</p>}
       </SettingsDialog>
     </div>

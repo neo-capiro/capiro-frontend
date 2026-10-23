@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
@@ -8,6 +9,7 @@ import { useIdentity } from "@/shared/portfolio/auth/identity";
 import {
   beginMailAttempt,
   mailAttemptKey,
+  recoverMailAttempt,
   settleMailAttempt,
   useMailAttempt,
 } from "./email/send-attempt";
@@ -107,31 +109,117 @@ export type MailContact = {
   title: string | null;
   email: string | null;
 };
+const sendIntentReceipt = z.object({
+  intentId: z.uuid(),
+  requestKey: z.uuid(),
+  state: z.enum(["pending", "sending", "unknown", "accepted", "failed"]),
+  ok: z.literal(true).optional(),
+  threadId: z.uuid().optional(),
+  messageId: z.uuid().optional(),
+});
+type SendIntentReceipt = z.infer<typeof sendIntentReceipt>;
 export function useSendMail(clientId: string, entity: string) {
   const api = useApi();
   const cache = useQueryClient();
   const authority = useMailAuthority(clientId);
   const identity = useIdentity();
-  const key = mailAttemptKey(
-    identity.data?.tenant?.id ?? "",
-    identity.data?.user.id ?? "",
-    clientId,
-    entity,
+  const key = useMemo(
+    () =>
+      mailAttemptKey(
+        identity.data?.tenant?.id ?? "",
+        identity.data?.user.id ?? "",
+        clientId,
+        entity,
+      ),
+    [identity.data?.tenant?.id, identity.data?.user.id, clientId, entity],
   );
+  const lifetime = useRef({ active: false, sequence: 0 });
+  const [acceptedRecovery, setAcceptedRecovery] = useState<{
+    key: typeof key;
+    token: string;
+  } | null>(null);
+  useEffect(() => {
+    const current = { active: true, sequence: 0 };
+    lifetime.current = current;
+    return () => {
+      current.active = false;
+    };
+  }, [key]);
   const attempt = useMailAttempt(key);
+  if (
+    acceptedRecovery &&
+    (acceptedRecovery.key !== key ||
+      (attempt && attempt.token !== acceptedRecovery.token))
+  )
+    setAcceptedRecovery(null);
+  const [recoveryError, setRecoveryError] = useState<MailSendError | null>(
+    null,
+  );
+  const recovery = useQuery<SendIntentReceipt>({
+    queryKey: ["mail-send-recovery", ...key, attempt?.token],
+    enabled: Boolean(attempt?.token),
+    retry: false,
+    refetchInterval: (query) =>
+      attempt &&
+      Date.now() - attempt.startedAt < 120_000 &&
+      !query.state.error &&
+      !["unknown", "accepted", "failed"].includes(query.state.data?.state ?? "")
+        ? 5000
+        : false,
+    queryFn: async ({ signal }) => {
+      const token = attempt!.token;
+      const assert = authority.capture();
+      const receipt = await api.request<SendIntentReceipt>(
+        "core",
+        `engagement/mail/send-intents/${token}`,
+        sendIntentReceipt.refine((row) => row.requestKey === token),
+        { signal },
+      );
+      assert();
+      return receipt;
+    },
+  });
+  useEffect(() => {
+    const row = recovery.data;
+    if (!attempt || !row) return;
+    const current = lifetime.current;
+    const sequence = current.sequence;
+    void recoverMailAttempt(cache, key, row).then((terminal) => {
+      if (!current.active || current.sequence !== sequence) return;
+      if (terminal === "failed") {
+        setAcceptedRecovery(null);
+        setRecoveryError(
+          new MailSendError(
+            "The original send was rejected without delivery. Review the email before sending again.",
+            false,
+          ),
+        );
+      }
+      if (terminal === "accepted") {
+        setRecoveryError(null);
+        setAcceptedRecovery({ key, token: row.requestKey });
+        void cache.invalidateQueries({ queryKey: ["contact-mail"] });
+        void cache.invalidateQueries({ queryKey: ["mail-thread"] });
+      }
+    });
+  }, [recovery.data, attempt, cache, key]);
   const mutation = useMutation({
     retry: false,
     mutationFn: async (body: SendInput) => {
+      lifetime.current.sequence += 1;
+      setAcceptedRecovery(null);
+      setRecoveryError(null);
       if (body.clientId !== clientId)
         throw new MailSendError("This email belongs to another client.", false);
       const assert = authority.capture();
-      const token = beginMailAttempt(cache, key, body);
+      const token = await beginMailAttempt(cache, key, body);
       try {
-        const result = await sendReviewedMail(api, body, assert);
-        settleMailAttempt(cache, key, token);
+        assert();
+        const result = await sendReviewedMail(api, body, assert, token);
+        await settleMailAttempt(cache, key, token);
         return result;
       } catch (error) {
-        settleMailAttempt(cache, key, token, error);
+        await settleMailAttempt(cache, key, token, error);
         throw error;
       }
     },
@@ -143,9 +231,17 @@ export function useSendMail(clientId: string, entity: string) {
       ]);
     },
   });
+  const recovered = acceptedRecovery?.key === key && !attempt;
   return {
     ...mutation,
-    isPending: mutation.isPending || attempt?.status === "pending",
-    error: attempt?.error ?? mutation.error,
+    isSuccess: recovered || mutation.isSuccess,
+    isIdle: !recovered && mutation.isIdle,
+    isError: !recovered && mutation.isError,
+    status: recovered ? ("success" as const) : mutation.status,
+    isPending:
+      !recovered && (mutation.isPending || attempt?.status === "pending"),
+    error: recovered
+      ? null
+      : (attempt?.error ?? recoveryError ?? mutation.error),
   };
 }

@@ -1,0 +1,74 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9ad57744c6b3a293ca149235200b2be9636879b56a6dd21514a95bdb2da27815",
+    "reason": "Retain this module as the presentation owner for one meeting's notes/debrief interaction. Its exported wrapper establishes the actor/tenant/meeting/client/kind React lifetime, and its private editor owns only the admitted list, local draft and selected dialogs. The existing artifacts/api, artifacts/contracts and useArtifactMutation modules own request/receipt semantics and attempt state; debrief/public and documents/public own generation and document preview. Notes and debriefs use the same interaction contract, so duplicating their editors or moving arbitrary JSX to meet 400 lines would add another owner without isolating a distinct domain. The capability-admission observation below needs a bounded correction in the existing owner, not a general component split.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor",
+    "fingerprint": "95d33d77069d4af55ddc2851fb5a3082500e045a1f7b1562c6453627038c23d5",
+    "reason": "Retain the editor as one interaction coordinator: all three local selections (editing, sharing and preview) refer to the same actor-scoped list and are concealed by the same current-read boundary. Keeping the attempt hook above the conditional dialogs preserves pending/uncertain intent when a read hides a dialog. The function delegates dispatch/receipt processing to useArtifactMutation and changeMeetingArtifact and does not own model generation or PDF generation. A separate generic controller or separate save/share state owners would obscure this shared lifetime. The existing admission predicate is the appropriate single place to address PF-CAP-1; extracting it merely to shorten the editor would not fix the inconsistency.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor > <anonymous> #8",
+    "fingerprint": "0cf6c07d1d43e02e78ef7d20afa3af2c4b93b004e0663ab1843d97d1c157ae7e",
+    "reason": "Retain the rows.map callback as one saved-artifact card projection. It renders that row's status, known/unknown sharing caption, restricted-content treatment and command entry points; every branch addresses the same row. Commands delegate to the enclosing editor's single mutation/selection lifetime, while export delegates to the existing preview owner. Extracting a stateful card would risk per-row attempts or dialogs, and extracting a stateless card would pass the same admission and selection callbacks through without separating responsibility. A later reusable card is reasonable only if an actual second presentation needs it. The current-capability observation belongs to shared action admission, not a new per-card authority layer.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "kind": "function",
+    "symbol": "MeetingForm",
+    "fingerprint": "7d85f252ca237ac0d0234f1923c412f6c4173471c6f922e72e9af7f145c1e660",
+    "reason": "Retain this one meeting-draft form. Subject, time, description, location and selected client are submitted together and share the pending/uncertain lock, local validation and close behavior. The form converts civil input using the existing range owner and delegates assignment intent to meetingAssignmentFields and dispatch to useSaveMeeting. Client availability and current-read feedback determine whether this same draft can be submitted; they are not a separate client-management workflow. The existing keyed callers reset the draft when the editor opens/closes. Splitting individual fields or validation JSX would disperse one submission contract without removing business or transport logic, which already lives outside the form.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
+    "kind": "function",
+    "symbol": "useSaveMeeting",
+    "fingerprint": "0c9a51edb153a5e660c7309507ca0c567aa24ef22f002390dc4a9c94d2927d88",
+    "reason": "Retain the hook as the save-sequence owner for one meeting create/update. Synchronous single-flight reservation, captured lifetime, exact current-read admission, native request/receipt validation, uncertain outcome retention and successful invalidation are phases of the same save attempt. The original association and readClientId intentionally remain distinct from the selected destination clientId; combining those would break reassignment admission. Identity policy is delegated to useDispatchGuard and DTO/receipt semantics to meeting-save.ts. Extracting the try/catch or cache completion into generic helpers would hide the before/after-dispatch boundary without creating an independently meaningful service.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+    "kind": "function",
+    "symbol": "ActivityActions",
+    "fingerprint": "ef4491c12aeba7cb881f92ec3dabab93d0edb41322fd51e15d19c2208f2db35f",
+    "reason": "Retain this per-record action coordinator. The menu, settle/reopen control, pin feedback and edit/remove dialog selection all act on the same recorded activity and share useChangeActivity state. The local refs have one UI purpose: transfer focus from a closing Radix menu to a dialog or return it after a pin/removal interaction. Editing fields, removal confirmation and status rendering are already delegated to ActivityDialogs; current-record preflight, command semantics, receipt admission and uncertainty are already delegated to activity-mutations/activity-change. Further splitting the menu or focus handlers would add callback plumbing around a single interaction rather than isolate a new reason to change.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
+    "kind": "function",
+    "symbol": "sendReviewedMail",
+    "fingerprint": "d0c3f05b87e0e6859c7405de82c2e800073f902a8f121a78fb18b47e32a858a7",
+    "reason": "Retain this bounded single-send adapter. Parsing the reviewed DTO, re-reading the exact sender, confirming the reply thread and attachment readiness, dispatching once, validating the exact request receipt and classifying delivery uncertainty form one ordered send sequence. The split between preflight refusal and post-dispatch uncertainty is essential to whether the caller may release its attempt. Mailbox projection, attachment receiving and recipient normalization are already separate semantic owners. Keeping the final actor assertion adjacent to dispatch makes the no-intervening-await property reviewable. It does not select a provider, store durable intent, manage React state, compose mail, rewrite content or retry delivery, so another workflow/service extraction is not warranted by its line count.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email.ts",
+    "kind": "function",
+    "symbol": "useSendMail",
+    "fingerprint": "801093b94ef55df07e70a63784f63ff81f697be1249aeb12dbf7e0a75502f7f7",
+    "reason": "Retain this hook as the React lifecycle owner of one actor/client/entity mail attempt. The write path and read-only recovery path use the same reserved request identity and must reconcile into the same caller-visible status. Transport/preflight and delivery classification belong to sendReviewedMail, cross-tab reservation/storage/settlement belong to send-attempt, and authority capture belongs to useMailAuthority; the hook only composes those owners with query invalidation. Separating recovery into an independently stateful sender would risk two owners for the same attempt. The recovery projection observation below should be resolved within this lifecycle interface if authorized, rather than extracting files to satisfy 80 lines.",
+    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
+    "reviewedOn": "2026-10-22"
+  }
+]
