@@ -1,6 +1,10 @@
 import type { OperationDefinition } from "./contracts";
 import { readBoundedJson } from "./gateway-input";
 import {
+  isObjectiveAssociationOperation,
+  objectiveAssociationFailure,
+} from "./objective-association-errors";
+import {
   isWorkspaceBriefOperation,
   workspaceBriefConflictCode,
   type WorkspaceBriefConflictCode,
@@ -28,6 +32,28 @@ export async function serviceErrorResponse(
   signal: AbortSignal,
   publicCapability: boolean,
 ): Promise<Response> {
+  if (!publicCapability && isObjectiveAssociationOperation(operation)) {
+    try {
+      const payload = await readBoundedJson(response.body, 4096, signal);
+      signal.throwIfAborted();
+      const failure = objectiveAssociationFailure(
+        operation,
+        response.status,
+        payload,
+      );
+      if (failure)
+        return Response.json(failure, {
+          status: response.status,
+          headers: {
+            "Cache-Control": "no-store",
+            "Referrer-Policy": "no-referrer",
+          },
+        });
+    } catch (error) {
+      if (signal.aborted) throw error;
+      // A malformed native response cannot establish a rejected command.
+    }
+  }
   let code: WorkspaceBriefConflictCode | undefined;
   if (
     !publicCapability &&

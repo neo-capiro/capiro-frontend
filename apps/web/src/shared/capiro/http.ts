@@ -1,4 +1,6 @@
 import { readBinaryResponse } from "./binary";
+import { objectiveAssociationFailure } from "./objective-association-errors";
+import type { OperationalFailure } from "./operations/objective-operational";
 import type {
   OperationDefinition,
   OperationInput,
@@ -15,14 +17,17 @@ import {
 export class CapiroApiError extends Error {
   readonly status: number;
   readonly code?: WorkspaceBriefConflictCode;
+  readonly associationFailure?: OperationalFailure;
   constructor(
     status: number,
     message: string,
     code?: WorkspaceBriefConflictCode,
+    associationFailure?: OperationalFailure,
   ) {
     super(message);
     this.status = status;
     this.code = code;
+    this.associationFailure = associationFailure;
     this.name = "CapiroApiError";
   }
 }
@@ -131,6 +136,7 @@ async function responsePayload(
         ? "Your session expired. Sign in again."
         : (readableError(payload) ?? "The request could not be completed."),
       workspaceBriefConflictCode(operation, response.status, payload),
+      objectiveAssociationFailure(operation, response.status, payload),
     );
   }
   const parsed = operation.response.safeParse(payload);

@@ -29,6 +29,7 @@ const envelope = z.discriminatedUnion("state", [
         "OBJECTIVE_GENERATION_FAILED",
         "OBJECTIVE_CONTEXT_INCOMPLETE",
         "OBJECTIVE_VERSION_CONFLICT",
+        "OBJECTIVE_ASSOCIATION_REJECTED",
       ]),
     })
     .strict(),
