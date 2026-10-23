@@ -222,6 +222,7 @@ async function managedNetwork(context: BrowserContext) {
     changes: Record<string, unknown>[] = [];
   const receipts = new Map<string, unknown>();
   let loseNext = false;
+  let actor = 2;
   let row = {
     conversationId: id(4),
     scopeKind: "general",
@@ -245,7 +246,7 @@ async function managedNetwork(context: BrowserContext) {
     if (request.method() === "GET" && url.pathname === "/api/backend/core/me")
       return route.fulfill({
         json: {
-          user: { id: id(2), email: "synthetic@example.test" },
+          user: { id: id(actor), email: "synthetic@example.test" },
           tenant: { id: id(1), name: "Synthetic tenant" },
           role: "standard_user",
         },
@@ -261,6 +262,7 @@ async function managedNetwork(context: BrowserContext) {
           managementAvailable: true,
           nextBefore: null,
           conversations:
+            actor === 2 &&
             body.status === row.status &&
             row.title.toLowerCase().includes(body.title.toLowerCase())
               ? [row]
@@ -333,6 +335,9 @@ async function managedNetwork(context: BrowserContext) {
     loseNextReply: () => {
       loseNext = true;
     },
+    replaceActor: () => {
+      actor = 9;
+    },
   };
 }
 
@@ -360,6 +365,9 @@ test("synthetic management: lost reply recovers exact request, cross-tab recents
   await panel.getByRole("button", { name: "Rename", exact: true }).click();
   await expect(panel).toContainText("The change is not confirmed");
   await expect(
+    page.getByRole("region", { name: "Conversation renamed", exact: true }),
+  ).toHaveCount(0);
+  await expect(
     panel.getByRole("button", { name: "Rename", exact: true }),
   ).toBeDisabled();
   expect(net.changes).toHaveLength(1);
@@ -376,6 +384,20 @@ test("synthetic management: lost reply recovers exact request, cross-tab recents
   await expect(
     other.getByRole("complementary", { name: "Synthetic recents" }),
   ).toContainText("Reviewed synthetic title");
+  const renamed = page.getByRole("region", {
+    name: "Conversation renamed",
+    exact: true,
+  });
+  await expect(renamed).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "Confirmed chat changes", exact: true }),
+  ).toHaveAttribute("aria-live", "polite");
+  await expect(
+    other.getByRole("region", { name: "Conversation renamed", exact: true }),
+  ).toHaveCount(0);
+  await renamed.getByRole("button", { name: "Dismiss" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(renamed).toHaveCount(0);
   await expect(
     panel.getByRole("button", { name: "Retry same change" }),
   ).toHaveCount(0);
@@ -393,6 +415,30 @@ test("synthetic management: lost reply recovers exact request, cross-tab recents
   await trash.click();
   await page.getByRole("button", { name: "Confirm move to Trash" }).click();
   await expect.poll(() => net.changes.length).toBe(3);
+  const trashed = page.getByRole("region", {
+    name: "Conversation moved to Trash",
+    exact: true,
+  });
+  await expect(trashed).toBeVisible();
+  const icon = trashed.locator("img");
+  await expect
+    .poll(() =>
+      icon.evaluate(
+        (node: HTMLImageElement) =>
+          node.complete &&
+          node.naturalWidth === 14 &&
+          node.naturalHeight === 14,
+      ),
+    )
+    .toBe(true);
+  const geometry = await icon.boundingBox();
+  expect(geometry?.width).toBeCloseTo(14, 3);
+  expect(geometry?.height).toBeCloseTo(14, 3);
+  const dismissGeometry = await trashed
+    .getByRole("button", { name: "Dismiss" })
+    .boundingBox();
+  expect(dismissGeometry?.height).toBeCloseTo(36, 3);
+  await trashed.screenshot({ path: "work/meri-m2-trash-sonner-synthetic.png" });
   await expect(
     other.getByRole("complementary", { name: "Synthetic recents" }),
   ).not.toContainText("Reviewed synthetic title");
@@ -404,6 +450,20 @@ test("synthetic management: lost reply recovers exact request, cross-tab recents
   await expect(
     other.getByRole("complementary", { name: "Synthetic recents" }),
   ).toContainText("Reviewed synthetic title");
+  await expect(
+    page.getByRole("region", { name: "Conversation restored", exact: true }),
+  ).toBeVisible();
+  net.replaceActor();
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new CustomEvent("test:session", {
+        detail: { userId: "other-test-user", sessionId: "other-session" },
+      }),
+    ),
+  );
+  await expect(
+    page.getByRole("region", { name: "Conversation restored", exact: true }),
+  ).toHaveCount(0);
   expect(net.changes.map((change) => change.operation)).toEqual([
     "rename",
     "rename",

@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useRef, useState } from "react";
+import { useManagedOutcome } from "./ManagedOutcomes";
 import { announceManagementReceipt } from "../../../shared/meri-conversations/management-refresh";
 import { CapiroApiError } from "../../../shared/capiro/http";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
@@ -29,6 +30,7 @@ export function useManagedChange({
   refresh,
 }: ManagedChatProps) {
   const api = useCapiro();
+  const confirmed = useManagedOutcome();
   const recovery = useMemo(() => {
     try {
       const owner = managementJournal({
@@ -60,15 +62,15 @@ export function useManagedChange({
       journal.write(pending);
       pendingRef.current = pending;
       setIntent(pending);
-      requireManagementReceipt(
-        await api.request(managedChangeKey, { body: pending.request }),
-        pending.request,
-        pending.previous,
-      );
+      const receipt = await api.request(managedChangeKey, {
+        body: pending.request,
+      });
+      requireManagementReceipt(receipt, pending.request, pending.previous);
       journal.clear();
       pendingRef.current = null;
       setIntent(null);
       setMessage("Chat change confirmed.");
+      confirmed(pending, receipt);
       announceManagementReceipt(account);
       refresh();
     } catch (error) {
