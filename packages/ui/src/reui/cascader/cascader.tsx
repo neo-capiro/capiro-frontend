@@ -1572,9 +1572,16 @@ function Cascader<T>({
       currentParent,
       levelItems,
       deepResults,
-      renderedItems,
-      columns,
-      treeRows,
+      // The rendered rows must match the empty filteredItems reset frame.
+      // Otherwise Base UI truncates its registered DOM refs after row mount;
+      // restoring the array length leaves holes and Enter cannot click a leaf.
+      renderedItems: swapping ? EMPTY : renderedItems,
+      columns: swapping
+        ? columns.map((column) =>
+            column.active ? { ...column, items: [] } : column,
+          )
+        : columns,
+      treeRows: swapping ? [] : treeRows,
       selectedValues,
       selectedDescendants,
       loadStates,
@@ -1592,6 +1599,7 @@ function Cascader<T>({
       renderedItems,
       columns,
       treeRows,
+      swapping,
       selectedValues,
       selectedDescendants,
       loadStates,
