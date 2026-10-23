@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { z } from "zod";
 import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type {
@@ -22,31 +23,52 @@ import { integrationProviders } from "./integrationProviders";
 import styles from "./styles";
 import { useSettingsMutation } from "./useSettingsMutation";
 import { SettingsMutationNotice } from "./SettingsMutationNotice";
+import {
+  canRetrySync,
+  oauthOutcomeMessage,
+  oauthResultKeys,
+  parseOAuthOutcome,
+  syncOutcomeMessage,
+} from "./integration-health";
 
 type Provider = z.infer<typeof integrationProviderSchema>;
 type Connection = z.infer<typeof integrationSchema>;
 const providers = integrationProviders;
 
 function syncAge(value: string | null) {
-  if (!value) return "Not synced yet";
+  if (!value) return "No sync activity reported";
   const minutes = Math.max(
     0,
     Math.round((Date.now() - Date.parse(value)) / 60000),
   );
   if (!Number.isFinite(minutes)) return "Sync time unavailable";
-  if (minutes < 1) return "Synced just now";
-  if (minutes < 60) return `Synced ${minutes} min ago`;
+  if (minutes < 1) return "Sync activity just now";
+  if (minutes < 60) return `Sync activity ${minutes} min ago`;
   const hours = Math.round(minutes / 60);
-  if (hours < 24) return `Synced ${hours} hr ago`;
+  if (hours < 24) return `Sync activity ${hours} hr ago`;
   const days = Math.round(hours / 24);
-  if (days < 7) return `Synced ${days} days ago`;
-  return `Synced ${new Date(value).toLocaleDateString("en-US", {
+  if (days < 7) return `Sync activity ${days} days ago`;
+  return `Sync activity ${new Date(value).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
   })}`;
 }
 
 export function IntegrationSettings() {
+  const search = useSearchParams();
+  const [oauthOutcome] = useState(() =>
+    parseOAuthOutcome(new URLSearchParams(search.toString())),
+  );
+  useEffect(() => {
+    if (!oauthOutcome) return;
+    const url = new URL(window.location.href);
+    oauthResultKeys.forEach((key) => url.searchParams.delete(key));
+    window.history.replaceState(
+      window.history.state,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
+  }, [oauthOutcome]);
   const api = useCapiro();
   const connections = useCapiroQuery("settings.integrations.list", {});
   const microsoft = useCapiroQuery(
@@ -71,7 +93,7 @@ export function IntegrationSettings() {
   ) {
     if (provider === "imap_caldav")
       throw new Error(
-        "OAuth is unavailable for IMAP / CalDAV. Ask your administrator to configure the server connection.",
+        "IMAP / CalDAV ingestion is unsupported in this application.",
       );
     const result = await api.request(
       provider === "microsoft_365"
@@ -92,25 +114,19 @@ export function IntegrationSettings() {
       ),
     );
   }
-  async function sync(connection: Connection) {
-    if (connection.provider === "imap_caldav")
-      throw new Error("Manual IMAP / CalDAV sync is unavailable.");
+  async function sync(connection: Connection, signal: AbortSignal) {
+    if (!canRetrySync(connection))
+      throw new Error("Reconnect this account before syncing.");
     const result = await api.request(
       connection.provider === "microsoft_365"
         ? "settings.integrations.syncMicrosoft"
         : "settings.integrations.syncGoogle",
       { params: { connectionId: connection.id } },
+      { signal },
     );
     if (result.connectionId !== connection.id)
       throw new Error(
         "The sync response did not match this account. Reload integrations to confirm the result.",
-      );
-    const stats = [result.calendar, ...Object.values(result.mail ?? {})].filter(
-      (value) => !!value,
-    );
-    if (stats.some((value) => value.failed > 0))
-      throw new Error(
-        "The sync completed with failed records. Check the connection details and retry.",
       );
     return result;
   }
@@ -135,6 +151,11 @@ export function IntegrationSettings() {
   }
   return (
     <div className={styles.stack} data-design-target="1064:244275">
+      {oauthOutcome && (
+        <SettingsNotice title="Provider sign-in result">
+          {oauthOutcomeMessage(oauthOutcome, connections.data)}
+        </SettingsNotice>
+      )}
       <div className={styles.integrationIntro}>
         <h2 className={styles.integrationHeading}>
           Engagement integrations{" "}
@@ -143,7 +164,8 @@ export function IntegrationSettings() {
           </SettingsBadge>
         </h2>
         <p className={styles.description}>
-          Provider records, scopes, sync state and connection health.
+          Provider authorization and sync activity. A connected account and its
+          last activity time do not establish complete mail coverage.
         </p>
       </div>
       <StatusPanel
@@ -195,7 +217,7 @@ export function IntegrationSettings() {
                               className={styles.integrationPermissions}
                               onClick={() => setDetail(connection)}
                             >
-                              Permissions
+                              Scope details
                             </SettingsButton>
                           </div>
                           <div className={styles.integrationMeta}>
@@ -236,20 +258,18 @@ export function IntegrationSettings() {
                       >
                         <SettingsButton
                           small
-                          disabled={
-                            locked ||
-                            connection.status !== "connected" ||
-                            provider.id === "imap_caldav"
-                          }
+                          disabled={locked || !canRetrySync(connection)}
                           onClick={() =>
                             void action.run(
-                              () => sync(connection),
-                              "Connection sync completed.",
+                              (signal) => sync(connection, signal),
+                              syncOutcomeMessage,
                               connections.reload,
                             )
                           }
                         >
-                          Sync now
+                          {connection.status === "error"
+                            ? "Retry sync"
+                            : "Sync now"}
                         </SettingsButton>
                         {connection.provider === "microsoft_365" &&
                           connection.status === "connected" && (
@@ -266,7 +286,7 @@ export function IntegrationSettings() {
                                       },
                                       { signal },
                                     ),
-                                  "Realtime subscriptions are configured.",
+                                  "Subscription reconciliation returned. Reload connection details to review the current state.",
                                   connections.reload,
                                 )
                               }
@@ -274,7 +294,7 @@ export function IntegrationSettings() {
                               Realtime
                             </SettingsButton>
                           )}
-                        {connection.status === "connected" && (
+                        {connection.provider !== "imap_caldav" && (
                           <SettingsButton
                             danger
                             small
@@ -297,7 +317,7 @@ export function IntegrationSettings() {
                                 )
                               }
                             >
-                              Connect account
+                              Reconnect account
                             </SettingsButton>
                           )}
                       </div>
@@ -330,6 +350,7 @@ export function IntegrationSettings() {
                 <div className={`${styles.row} ${styles.wrap}`}>
                   <SettingsButton
                     small
+                    disabled={locked || provider.id === "imap_caldav"}
                     onClick={() => setRegister(provider.id)}
                   >
                     + Register account
@@ -346,7 +367,7 @@ export function IntegrationSettings() {
                     }
                   >
                     {provider.id === "imap_caldav"
-                      ? "Connect OAuth"
+                      ? "Unsupported provider"
                       : capability?.data?.configured
                         ? `Connect ${provider.title}`
                         : "Administrator setup required"}
@@ -354,9 +375,9 @@ export function IntegrationSettings() {
                 </div>
                 {provider.id === "imap_caldav" && (
                   <p className={styles.description}>
-                    Server configuration is required for IMAP / CalDAV
-                    ingestion. OAuth, manual sync and disconnection are
-                    unavailable here.
+                    IMAP / CalDAV ingestion is unsupported. No verified
+                    ingestion service is connected; adding credentials does not
+                    enable mail or calendar sync.
                   </p>
                 )}
               </SettingsCard>
@@ -387,7 +408,7 @@ export function IntegrationSettings() {
           if (!action.busy) setDisconnect(undefined);
         }}
         title={`Disconnect ${disconnect?.provider === "microsoft_365" ? "Microsoft 365" : "Google Workspace"}?`}
-        description="Calendar and mail syncing will stop. Existing records are kept."
+        description="Calendar and mail syncing will stop. Retained records become unavailable in these mail views after disconnection; reconnect does not guarantee restoration of prior history."
         footer={
           <>
             <SettingsButton
@@ -417,6 +438,11 @@ export function IntegrationSettings() {
         }
       >
         <p>{disconnect?.accountEmail}</p>
+        <p>
+          {disconnect?.provider === "microsoft_365"
+            ? "This removes the local connection, not the Microsoft application grant. Remove the grant in your Microsoft account application permissions; an organization-wide grant may require your Microsoft administrator."
+            : "Google grant revocation is attempted by the provider service. The local disconnect receipt does not confirm revocation; review connected applications in your Google account permissions."}
+        </p>
         <SettingsMutationNotice
           pending={pending}
           busy={action.busy}
@@ -431,11 +457,19 @@ export function IntegrationSettings() {
       <SettingsDialog
         open={!!detail}
         onClose={() => setDetail(undefined)}
-        title="Account permissions"
+        title="Requested account scopes"
       >
         <p>{detail?.accountEmail}</p>
-        <ul>{detail?.scopes.map((scope) => <li key={scope}>{scope}</li>)}</ul>
-        {!detail?.scopes.length && <p>No granted scopes were returned.</p>}
+        <p>
+          These are scopes recorded by the connection service. They do not prove
+          the currently granted permissions or that each action is available.
+        </p>
+        <ul>
+          {detail?.scopes.map((scope) => (
+            <li key={scope}>{scope}</li>
+          ))}
+        </ul>
+        {!detail?.scopes.length && <p>No recorded scopes were returned.</p>}
       </SettingsDialog>
     </div>
   );

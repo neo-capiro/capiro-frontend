@@ -33,12 +33,18 @@ type ScreenContext = {
   refresh: () => void;
   meriPreferences: ReactNode;
   memoryReviewEnabled: boolean;
+  readOnlyPreview: boolean;
 };
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
   "contact-info": (context) => <ContactSettings identity={context.identity} />,
   branding: () => <BrandingSettings />,
-  team: (context) => <TeamSettings identity={context.identity} />,
+  team: (context) => (
+    <TeamSettings
+      identity={context.identity}
+      refreshIdentity={context.refresh}
+    />
+  ),
   integrations: () => <IntegrationSettings />,
   memory: (context) => (
     <MemorySettings reviewEnabled={context.memoryReviewEnabled} />
@@ -46,7 +52,9 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
   "ai-usage": () => <UsageSettings />,
-  profiles: () => <ProfileSettings />,
+  profiles: (context) => (
+    <ProfileSettings readOnlyPreview={context.readOnlyPreview} />
+  ),
   "hq-tenants": (context) => <TenantSettings identity={context.identity} />,
   "hq-customers": () => <CustomerSettings />,
   "hq-ai-keys": () => <AiKeysSettings />,
@@ -84,10 +92,12 @@ export function SettingsScreen({
   section = "personal",
   meriPreferences,
   memoryReviewEnabled = false,
+  readOnlyPreview = false,
 }: {
   section?: string;
   meriPreferences: ReactNode;
   memoryReviewEnabled?: boolean;
+  readOnlyPreview?: boolean;
 }) {
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
@@ -114,7 +124,12 @@ export function SettingsScreen({
                 </p>
               )}
             </header>
-            {!canOpenSettings(section, identity) ? (
+            {readOnlyPreview && !["personal", "profiles"].includes(section) ? (
+              <SettingsNotice title="Unavailable in read-only preview">
+                This Settings section is not admitted by the server preview
+                policy. No section reads or writes have been requested.
+              </SettingsNotice>
+            ) : !canOpenSettings(section, identity) ? (
               <SettingsNotice
                 title={
                   section === "billing"
@@ -136,6 +151,7 @@ export function SettingsScreen({
                   refresh: query.reload,
                   meriPreferences,
                   memoryReviewEnabled,
+                  readOnlyPreview,
                 })}
               </>
             ) : (

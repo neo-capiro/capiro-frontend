@@ -37,7 +37,7 @@ function SignatureEditor({
   const [enabled, setEnabled] = useState(initialEnabled);
   const [fileError, setFileError] = useState<string>();
   const upload = useRef<HTMLInputElement>(null);
-  const action = useSettingsAction();
+  const action = useSettingsAction(api);
   const hasPreview =
     /<(?:img|table)\b/i.test(html) ||
     Boolean(
@@ -47,7 +47,7 @@ function SignatureEditor({
         .trim(),
     );
   async function readFile(file?: File) {
-    if (!file) return;
+    if (!file || action.busy) return;
     setFileError(undefined);
     if (file.size > 12_000_000) {
       setFileError("Choose a file smaller than 12 MB.");
@@ -86,13 +86,17 @@ function SignatureEditor({
         <p className={styles.description}>
           Drag and drop, or browse. Image (PNG, JPG, GIF, WEBP) or .html / .htm
         </p>
-        <SettingsButton onClick={() => upload.current?.click()}>
+        <SettingsButton
+          disabled={action.busy}
+          onClick={() => upload.current?.click()}
+        >
           Browse file
         </SettingsButton>
         <input
           ref={upload}
           type="file"
           hidden
+          disabled={action.busy}
           accept="image/png,image/jpeg,image/gif,image/webp,.html,.htm"
           onChange={(event) => {
             void readFile(event.target.files?.[0]);
@@ -124,6 +128,7 @@ function SignatureEditor({
         <SettingsSwitch
           label="Append signature to campaign emails by default"
           checked={enabled}
+          disabled={action.busy}
           onChange={setEnabled}
         />
         <span>
@@ -156,10 +161,14 @@ function SignatureEditor({
           disabled={action.busy || html.length > signatureLimit}
           onClick={() =>
             void action.run(
-              () =>
-                api.request("me.emailSignature.update", {
-                  body: { html, enabled },
-                }),
+              (signal) =>
+                api.request(
+                  "me.emailSignature.update",
+                  {
+                    body: { html, enabled },
+                  },
+                  { signal },
+                ),
               "Your signature was saved.",
               reload,
             )

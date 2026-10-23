@@ -76,8 +76,19 @@ function BrandingForm({
           onSubmit={(event) => {
             event.preventDefault();
             void action.run(
-              () => api.request("settings.branding.update", { body: { name } }),
-              "Company name was saved.",
+              async (signal) => {
+                const result = await api.request(
+                  "settings.branding.update",
+                  { body: { name } },
+                  { signal },
+                );
+                if (result.name !== name)
+                  throw new Error(
+                    "The response did not confirm the company name. Reload before making another change.",
+                  );
+                return result;
+              },
+              "Company name was saved in Capiro. Sign-in provider synchronization is not confirmed.",
               reload,
             );
           }}
@@ -89,6 +100,7 @@ function BrandingForm({
                 minLength={2}
                 maxLength={200}
                 required
+                disabled={action.busy}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
               />
@@ -99,6 +111,10 @@ function BrandingForm({
           </SettingsButton>
         </form>
       </SettingsCard>
+      <SettingsNotice title="Sign-in provider name">
+        The Capiro name is saved locally. The current service does not report
+        whether the name has synchronized with the sign-in provider.
+      </SettingsNotice>
       <SettingsCard title="Logo">
         <div className={styles.row}>
           {logoUrl ? (

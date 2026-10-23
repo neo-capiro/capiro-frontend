@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ScopedLink } from "./ScopedLink";
 import { ModuleAsset } from "./ModuleAsset";
 import { ModuleSidebarToggle } from "./ModuleSidebarVisibility";
+import { AccountProfileControl } from "./AccountProfileControl";
 import styles from "./module-shell.module.css";
 
 export function ModuleHeader({
@@ -83,9 +84,7 @@ export function ModuleHeader({
             >
               <ModuleAsset name="updates" />
             </button>
-            <ScopedLink href="/settings/personal" aria-label="Account settings">
-              <ModuleAsset name="profile" />
-            </ScopedLink>
+            <AccountProfileControl />
           </nav>
         )
       }

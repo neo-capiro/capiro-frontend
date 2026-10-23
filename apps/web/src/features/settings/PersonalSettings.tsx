@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { ScopedLink as Link } from "../../shared/shell/ScopedLink";
 import { useState } from "react";
 import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
@@ -19,13 +19,15 @@ import { useSettingsAction } from "./useSettingsAction";
 export function PersonalSettings({
   identity,
   refresh,
+  readOnlyPreview = false,
 }: {
   identity: CapiroMe;
   refresh: () => void;
+  readOnlyPreview?: boolean;
 }) {
   const api = useCapiro();
   const [title, setTitle] = useState(identity.user.title ?? "");
-  const action = useSettingsAction();
+  const action = useSettingsAction(api);
   return (
     <div className={styles.stack} data-design-target="411:67666">
       <SettingsCard
@@ -39,7 +41,25 @@ export function PersonalSettings({
           onSubmit={(event) => {
             event.preventDefault();
             void action.run(
-              () => api.request("me.update", { body: { title } }),
+              async (signal) => {
+                if (readOnlyPreview)
+                  throw new Error(
+                    "Profile editing is unavailable in read-only preview.",
+                  );
+                const result = await api.request(
+                  "me.update",
+                  { body: { title } },
+                  { signal },
+                );
+                if (
+                  result.user.id !== identity.user.id ||
+                  result.user.title !== title
+                )
+                  throw new Error(
+                    "The response did not confirm this profile. Reload before making another change.",
+                  );
+                return result;
+              },
               "Your title was saved.",
               refresh,
             );
@@ -51,12 +71,17 @@ export function PersonalSettings({
                 className={styles.input}
                 value={title}
                 maxLength={120}
+                disabled={readOnlyPreview || action.busy}
                 onChange={(event) => setTitle(event.target.value)}
                 placeholder="Add your title"
               />
             </SettingField>
           </div>
-          <SettingsButton primary type="submit" disabled={action.busy}>
+          <SettingsButton
+            primary
+            type="submit"
+            disabled={readOnlyPreview || action.busy}
+          >
             {action.busy ? "Saving…" : "Save"}
           </SettingsButton>
         </form>
@@ -81,7 +106,14 @@ export function PersonalSettings({
           ]}
         />
       </SettingsCard>
-      <EmailSignature />
+      {readOnlyPreview ? (
+        <SettingsNotice title="Read-only preview">
+          Your identity is available. Profile edits and signature reads are
+          unavailable in this server mode.
+        </SettingsNotice>
+      ) : (
+        <EmailSignature />
+      )}
       <SettingsCard
         title="Watchlist and monitoring setup"
         description="Manage the client watchlists and monitoring settings used by LegiWatch."

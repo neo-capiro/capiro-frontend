@@ -7,7 +7,6 @@ import surfaces from "../../ui/surfaces.module.css";
 import ui from "../../ui/meri-ui.module.css";
 import { ToggleChip } from "./SettingsControls";
 import { SettingsCard } from "./SettingsCard";
-import { SettingsCallout } from "./SettingsCallout";
 import { SettingsLayout } from "./SettingsLayout";
 import type {
   SettingsChrome,
@@ -78,7 +77,6 @@ export function HelpShortcutsScreen({
             unavailable={chrome.unavailable}
             drafts={chrome.localDrafts}
           />
-          <SettingsCallout notice={view.submitted} />
         </>
       }
     />

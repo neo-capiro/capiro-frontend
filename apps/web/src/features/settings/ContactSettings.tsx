@@ -56,7 +56,7 @@ function ContactForm({
 }) {
   const api = useCapiro();
   const [form, setForm] = useState(initial);
-  const action = useSettingsAction();
+  const action = useSettingsAction(api);
   function input(key: keyof ContactInfo, label: string) {
     return (
       <SettingField label={label}>
@@ -78,7 +78,22 @@ function ContactForm({
       onSubmit={(event) => {
         event.preventDefault();
         void action.run(
-          () => api.request("settings.contact.update", { body: form }),
+          async (signal) => {
+            const result = await api.request(
+              "settings.contact.update",
+              { body: form },
+              { signal },
+            );
+            if (
+              Object.entries(form).some(
+                ([key, value]) => result[key as keyof ContactInfo] !== value,
+              )
+            )
+              throw new Error(
+                "The response did not confirm the contact details. Reload before making another change.",
+              );
+            return result;
+          },
           "Contact information was saved.",
           reload,
         );

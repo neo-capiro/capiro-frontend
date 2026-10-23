@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { DataTable, SelectInput, StatusPanel } from "../../shared/module-ui";
@@ -17,6 +17,7 @@ import { InviteMember } from "./InviteMember";
 import styles from "./styles";
 import { useSettingsMutation } from "./useSettingsMutation";
 import { SettingsMutationNotice } from "./SettingsMutationNotice";
+import { teamPermissions } from "./team-permissions";
 
 const joinedDate = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -25,7 +26,13 @@ const joinedDate = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
-export function TeamSettings({ identity }: { identity: CapiroMe }) {
+export function TeamSettings({
+  identity,
+  refreshIdentity,
+}: {
+  identity: CapiroMe;
+  refreshIdentity: () => void;
+}) {
   const { api, action, pending, reconcile, locked } =
     useSettingsMutation("team");
   const members = useCapiroQuery("settings.team.list", {});
@@ -34,10 +41,14 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
   const [invite, setInvite] = useState(false);
   const [remove, setRemove] = useState<{ userId: string; email: string }>();
   const refresh = () => {
+    refreshIdentity();
     members.reload();
     invitations.reload();
   };
   const rows = members.data ?? [];
+  useEffect(() => {
+    if (action.error) refreshIdentity();
+  }, [action.error, refreshIdentity]);
   const pendingInvitations = invitations.data ?? [];
   return (
     <div
@@ -144,7 +155,10 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                           <SelectInput
                             aria-label={`Role for ${row.email}`}
                             value={row.role}
-                            disabled={locked}
+                            disabled={
+                              locked ||
+                              !teamPermissions(identity, row).canChangeRole
+                            }
                             options={[
                               {
                                 value: "standard_user",
@@ -185,7 +199,11 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                             disabled={
                               locked ||
                               row.role === "capiro_admin" ||
-                              row.userId === identity.user.id
+                              !(row.billingAdmin
+                                ? teamPermissions(identity, row)
+                                    .canRevokeBilling
+                                : teamPermissions(identity, row)
+                                    .canGrantBilling)
                             }
                             onChange={(billingAdmin) =>
                               void action.run(
@@ -204,6 +222,11 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                             }
                           />
                           {row.billingAdmin ? "On" : "Off"}
+                          {teamPermissions(identity, row).reason && (
+                            <small>
+                              {teamPermissions(identity, row).reason}
+                            </small>
+                          )}
                         </div>
                       ),
                     },
@@ -238,7 +261,10 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                           <SettingsButton
                             danger
                             small
-                            disabled={locked}
+                            disabled={
+                              locked ||
+                              !teamPermissions(identity, row).canRemove
+                            }
                             onClick={() => setRemove(row)}
                           >
                             Remove
