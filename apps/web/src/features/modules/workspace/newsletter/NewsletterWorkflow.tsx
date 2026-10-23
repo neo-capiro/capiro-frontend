@@ -16,7 +16,10 @@ import {
   UnavailableAction,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
-import { NewsletterComments } from "./NewsletterComments";
+import {
+  NewsletterComments,
+  useNewsletterComments,
+} from "./NewsletterComments";
 import { NewsletterPaper } from "./NewsletterPaper";
 import { SelectTemplate } from "./NewsletterTemplates";
 import { useNewsletter } from "./use-newsletter";
@@ -113,6 +116,7 @@ export function NewsletterWorkflow({
     documentId,
     acceptClientAssociation,
   } = useNewsletter({ onClose, existing, initialClientId });
+  const comments = useNewsletterComments(documentId, step === "review");
   const meri = useEntityEntry(
     draft?.clientId ?? "",
     { source: "workspace-draft", draftId: draft?.id ?? "" },
@@ -122,6 +126,9 @@ export function NewsletterWorkflow({
       saved &&
       !pending &&
       !error &&
+      !comments.dirty &&
+      !comments.pending &&
+      !comments.error &&
       clientId === draft?.clientId,
   );
   return (
@@ -359,7 +366,7 @@ export function NewsletterWorkflow({
                 </p>
                 <NewsletterPaper body={body} mobile={mobile} />
               </Panel>
-              <NewsletterComments documentId={documentId} />
+              <NewsletterComments model={comments} />
             </div>
           )}
           {step === "stage" && (

@@ -25,10 +25,11 @@ export function TaskAttachments({
   const fileInput = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
+  const [writeError, setWriteError] = useState<string>();
   useLayoutEffect(() => {
-    onStateChange?.({ pending: busy, error });
+    onStateChange?.({ pending: busy, error: writeError ?? error });
     return () => onStateChange?.({ pending: false });
-  }, [busy, error, onStateChange]);
+  }, [busy, error, writeError, onStateChange]);
   const upload = async (file: File) => {
     setBusy(true);
     setError(undefined);
@@ -41,7 +42,7 @@ export function TaskAttachments({
       query.reload();
       if (fileInput.current) fileInput.current.value = "";
     } catch (cause) {
-      setError(
+      setWriteError(
         cause instanceof Error ? cause.message : "Unable to upload attachment.",
       );
     } finally {
@@ -58,7 +59,7 @@ export function TaskAttachments({
       });
       query.reload();
     } catch (cause) {
-      setError(
+      setWriteError(
         cause instanceof Error ? cause.message : "Unable to update attachment.",
       );
     } finally {
@@ -113,7 +114,7 @@ export function TaskAttachments({
       />
       <AttachmentList
         query={query}
-        error={error}
+        error={writeError ?? error}
         busy={busy}
         writable={writable}
         download={download}

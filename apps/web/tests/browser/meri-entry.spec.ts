@@ -67,6 +67,21 @@ async function network(page: Page) {
     clientGate: Promise<void> | undefined;
   let writeGate: Promise<void> | undefined;
   let attachmentGate: Promise<void> | undefined;
+  let commentGate: Promise<void> | undefined;
+  let commentFails = false;
+  let commentCompleted = 0;
+  let showComment = false;
+  const comment = {
+    id: id(10),
+    documentId: id(7),
+    authorId: id(2),
+    role: "user",
+    quote: null,
+    body: "Existing synthetic comment",
+    resolved: false,
+    parentId: null,
+    createdAt: date,
+  };
   let attachmentFails = false;
   let attachmentCompleted = 0;
   let showAttachment = false;
@@ -153,6 +168,56 @@ async function network(page: Page) {
       url.pathname === "/api/capiro/planner.tasks"
     )
       return route.fulfill({ json: { items: [], nextCursor: null } });
+    if (
+      request.method() === "GET" &&
+      url.pathname === "/api/capiro/workspace.comments"
+    ) {
+      expect(JSON.parse(url.searchParams.get("input")!)).toEqual({
+        params: { documentId: id(7) },
+      });
+      return route.fulfill({ json: showComment ? [comment] : [] });
+    }
+    if (
+      request.method() === "GET" &&
+      url.pathname === "/api/capiro/planner.task.attachment.download"
+    ) {
+      expect(JSON.parse(url.searchParams.get("input")!)).toEqual({
+        params: { taskId: id(5), id: id(6) },
+      });
+      return route.fulfill({
+        contentType: "application/octet-stream",
+        body: Buffer.from("synthetic file"),
+      });
+    }
+    if (
+      commentGate &&
+      ((request.method() === "POST" &&
+        url.pathname === "/api/capiro/workspace.comment.create") ||
+        (request.method() === "PATCH" &&
+          url.pathname === "/api/capiro/workspace.comment.resolve"))
+    ) {
+      const input = request.postDataJSON();
+      expect(input.params.documentId).toBe(id(7));
+      if (request.method() === "PATCH")
+        expect(input.params.commentId).toBe(id(10));
+      await commentGate;
+      await route.fulfill(
+        commentFails
+          ? {
+              status: 503,
+              json: { message: "Synthetic comment outcome unknown" },
+            }
+          : {
+              json: {
+                ...comment,
+                body: input.body.body ?? comment.body,
+                resolved: input.body.resolved ?? false,
+              },
+            },
+      );
+      commentCompleted += 1;
+      return;
+    }
     if (
       writeGate &&
       request.method() === "PATCH" &&
@@ -246,6 +311,16 @@ async function network(page: Page) {
     calls,
     unexpected,
     attachmentCompleted: () => attachmentCompleted,
+    commentCompleted: () => commentCompleted,
+    showComment: () => {
+      showComment = true;
+    },
+    holdComment: (fails: boolean) => {
+      commentFails = fails;
+      commentGate = new Promise<void>((resolve) => {
+        release = resolve;
+      });
+    },
     showAttachment: () => {
       showAttachment = true;
     },
@@ -756,5 +831,221 @@ test("synthetic newsletter source: saved identity only, edits held and receiver 
   );
   await expect(page.getByText(draft.docTitle, { exact: true })).toHaveCount(0);
   expect(net.calls.every((call) => call.startsWith("GET "))).toBe(true);
+  expect(net.unexpected).toEqual([]);
+});
+
+async function newsletterReview(page: Page) {
+  const net = await network(page);
+  net.draft({
+    product: "Newsletter",
+    documents: [
+      {
+        id: id(7),
+        draftId: id(4),
+        ordinal: 0,
+        name: "Synthetic newsletter document",
+        body: { blocks: [] },
+        createdAt: date,
+        updatedAt: date,
+      },
+    ],
+  });
+  await page.goto("/meri-entry.html?source=draft");
+  await expect(
+    page.getByRole("button", { name: "Ask Meri", exact: true }),
+  ).toBeEnabled();
+  expect(
+    net.calls.filter((call) => call.includes("workspace.comments")),
+  ).toEqual([]);
+  await page
+    .getByRole("button", { name: "Preview & review", exact: true })
+    .click();
+  return net;
+}
+
+test("synthetic newsletter comment: unsent text survives step changes and fences handoff", async ({
+  page,
+}) => {
+  const net = await newsletterReview(page);
+  const action = page.getByRole("button", { name: "Ask Meri", exact: true });
+  await page
+    .getByLabel("Add a comment", { exact: true })
+    .fill("Synthetic unsent comment");
+  await expect(action).toBeDisabled();
+  await page
+    .getByRole("button", { name: "Edit newsletter", exact: true })
+    .click();
+  await expect(action).toBeDisabled();
+  await page
+    .getByRole("button", { name: "Preview & review", exact: true })
+    .click();
+  await expect(page.getByLabel("Add a comment", { exact: true })).toHaveValue(
+    "Synthetic unsent comment",
+  );
+  await page.getByLabel("Add a comment", { exact: true }).fill("");
+  await expect(action).toBeEnabled();
+  expect(net.calls.every((call) => call.startsWith("GET "))).toBe(true);
+  expect(net.unexpected).toEqual([]);
+});
+
+for (const fails of [false, true])
+  test(`synthetic newsletter comment: pending then ${fails ? "unknown stays held across steps" : "successful save releases handoff"}`, async ({
+    page,
+  }) => {
+    const net = await newsletterReview(page);
+    net.holdComment(fails);
+    await page
+      .getByLabel("Add a comment", { exact: true })
+      .fill("Synthetic pending comment");
+    await page
+      .getByRole("button", { name: "Post comment", exact: true })
+      .click();
+    await expect
+      .poll(() =>
+        net.calls.includes("POST /api/capiro/workspace.comment.create"),
+      )
+      .toBe(true);
+    const action = page.getByRole("button", { name: "Ask Meri", exact: true });
+    await expect(action).toBeDisabled();
+    await page
+      .getByRole("button", { name: "Edit newsletter", exact: true })
+      .click();
+    await expect(action).toBeDisabled();
+    net.release();
+    await expect.poll(net.commentCompleted).toBe(1);
+    if (fails) await expect(action).toBeDisabled();
+    else await expect(action).toBeEnabled();
+    await page
+      .getByRole("button", { name: "Preview & review", exact: true })
+      .click();
+    if (fails) {
+      await expect(page.getByRole("alert")).toContainText(
+        "Synthetic comment outcome unknown",
+      );
+      await page.getByLabel("Add a comment", { exact: true }).fill("");
+      await expect(action).toBeDisabled();
+    } else
+      await expect(
+        page.getByLabel("Add a comment", { exact: true }),
+      ).toHaveValue("");
+    expect(net.calls.filter((call) => !call.startsWith("GET "))).toEqual([
+      "POST /api/capiro/workspace.comment.create",
+    ]);
+    expect(net.unexpected).toEqual([]);
+  });
+
+test("synthetic newsletter comment: pending resolve and unknown result fence navigation", async ({
+  page,
+}) => {
+  const net = await newsletterReview(page);
+  net.showComment();
+  await page
+    .getByRole("button", { name: "Edit newsletter", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Preview & review", exact: true })
+    .click();
+  net.holdComment(true);
+  await page.getByRole("button", { name: "Resolve", exact: true }).click();
+  const action = page.getByRole("button", { name: "Ask Meri", exact: true });
+  await expect(action).toBeDisabled();
+  net.release();
+  await expect(page.getByRole("alert")).toContainText(
+    "Synthetic comment outcome unknown",
+  );
+  await expect(action).toBeDisabled();
+  expect(net.calls.filter((call) => !call.startsWith("GET "))).toEqual([
+    "PATCH /api/capiro/workspace.comment.resolve",
+  ]);
+  expect(net.unexpected).toEqual([]);
+});
+
+test("synthetic newsletter comment: late retired-account result cannot fence replacement draft", async ({
+  page,
+}) => {
+  const net = await newsletterReview(page);
+  net.holdComment(true);
+  await page
+    .getByLabel("Add a comment", { exact: true })
+    .fill("Retired actor comment");
+  await page.getByRole("button", { name: "Post comment", exact: true }).click();
+  await expect
+    .poll(() => net.calls.includes("POST /api/capiro/workspace.comment.create"))
+    .toBe(true);
+  net.replaceIdentity(9, 8);
+  net.draft({
+    ownerId: id(9),
+    tenantId: id(8),
+    docTitle: "Replacement account newsletter",
+  });
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new CustomEvent("test:session", {
+        detail: {
+          userId: "replacement-user",
+          sessionId: "replacement-session",
+          orgId: "replacement-org",
+        },
+      }),
+    ),
+  );
+  await expect(
+    page.getByRole("heading", {
+      name: "Replacement account newsletter",
+      exact: true,
+    }),
+  ).toBeVisible();
+  const action = page.getByRole("button", { name: "Ask Meri", exact: true });
+  await expect(action).toBeEnabled();
+  net.release();
+  await expect.poll(net.commentCompleted).toBe(1);
+  await page
+    .getByRole("button", { name: "Preview & review", exact: true })
+    .click();
+  await expect(page.getByLabel("Add a comment", { exact: true })).toHaveValue(
+    "",
+  );
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(action).toBeEnabled();
+  expect(net.unexpected).toEqual([]);
+});
+
+test("synthetic Planner attachment: download cannot release an uncertain write fence", async ({
+  page,
+}) => {
+  const net = await network(page);
+  net.task({ access: "editor" });
+  net.showAttachment();
+  net.holdAttachment(true);
+  await page.goto("/meri-entry.html?source=task");
+  const action = page.getByRole("button", { name: "Ask Meri", exact: true });
+  await expect(action).toBeEnabled();
+  await page.getByLabel("Task attachment file").setInputFiles({
+    name: "new-synthetic.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("uncertain upload"),
+  });
+  await expect(action).toBeDisabled();
+  net.release();
+  await expect(page.getByRole("alert")).toContainText(
+    "Synthetic unknown attachment",
+  );
+  await expect(action).toBeDisabled();
+  await page.getByRole("button", { name: "Download", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Download", exact: true }),
+  ).toBeEnabled();
+  await expect(action).toBeDisabled();
+  await expect(page.getByRole("alert")).toContainText(
+    "Synthetic unknown attachment",
+  );
+  expect(net.calls.filter((call) => !call.startsWith("GET "))).toEqual([
+    "POST /api/capiro/planner.task.attachment.upload",
+  ]);
+  expect(
+    net.calls.filter((call) =>
+      call.includes("planner.task.attachment.download"),
+    ),
+  ).toHaveLength(1);
   expect(net.unexpected).toEqual([]);
 });
