@@ -7,12 +7,16 @@ import { createMeriConversation } from '@capiro/meri-client/conversation';
 const source = process.env.MERI_CONVERSATION_QUALIFICATION_SOURCE;
 if (!source) throw Error('Exact backend qualification source is required');
 const { applicationFixture, binding, id } = await import(pathToFileURL(`${source}/apps/control/conversations/test/application-fixture.mjs`));
+const { createConversationInitialInputApplication } = await import(pathToFileURL(`${source}/apps/control/conversations/initial-input/http.mjs`));
+const { createConversationInputApplication } = await import(pathToFileURL(`${source}/apps/control/conversations/input/http.mjs`));
 const originalFetch = globalThis.fetch;
 globalThis.fetch = () => { throw Error('External network is forbidden'); };
 test.after(() => { globalThis.fetch = originalFetch; });
 
 async function fixture(t) {
-  const f = await applicationFixture();
+  const f = await applicationFixture({ initialInput: true });
+  const allocation = createConversationInitialInputApplication({ service: f.service });
+  const admission = createConversationInputApplication({ service: f.service });
   const calls = [], lifetime = new AbortController();
   let accessLost = 0;
   const client = createMeriConversation({
@@ -22,7 +26,10 @@ async function fixture(t) {
     fetchImpl: async (url, init) => {
       const request = new Request(url, init);
       calls.push({ method: request.method, path: new URL(request.url).pathname, headers: Object.fromEntries(request.headers), body: init.body });
-      const response = await f.app.handle(request);
+      const path = new URL(request.url).pathname;
+      const app = path === '/api/conversations/input/allocate' ? allocation
+        : path === '/api/conversations/input/admit' ? admission : f.app;
+      const response = await app.handle(request);
       if (f.loseSubmit && new URL(request.url).pathname.endsWith('/submit')) {
         f.loseSubmit = false; await response.body?.cancel(); throw Error('Synthetic lost acknowledgement');
       }
@@ -35,7 +42,11 @@ async function fixture(t) {
 
 test('frontend submit, real producer POST, explicit cancel and public receiver compose without a provider', async t => {
   const f = await fixture(t);
-  await f.client.submit(f.input);
+  await f.client.submitInitial(f.input);
+  assert.deepEqual(f.calls.slice(0, 3).map(call => call.path), [
+    '/api/conversations/input/allocate', '/api/conversations/input/admit', '/api/conversations/submit',
+  ]);
+  assert.equal(f.allocations.size, 1);
   assert.equal(f.state.starts, 1); assert.equal(f.client.getSnapshot().observation.after, 0);
   assert.deepEqual(await f.client.cancel(), { state: 'cancelled' });
   await f.client.openChat().chat.sendMessage({ text: 'observation only' }, { body: { prompt: 'never submitted', after: 9 } });
@@ -47,7 +58,7 @@ test('frontend submit, real producer POST, explicit cancel and public receiver c
 });
 
 test('native partial page40/20 acknowledges60 and actual SDK GET consumes through200', async t => {
-  const f = await fixture(t); await f.client.submit(f.input);
+  const f = await fixture(t); await f.client.submitInitial(f.input);
   const append = (n, type, data) => f.runOwner.append({ binding, event: { eventId: id(1000 + n), createdAt: '2026-10-13T00:00:00Z', type, data } });
   await append(2, 'run.status', { state: 'starting', reasonCode: null });
   await append(3, 'run.status', { state: 'running', reasonCode: null });
@@ -69,7 +80,7 @@ test('native partial page40/20 acknowledges60 and actual SDK GET consumes throug
 
 test('lost real submit acknowledgement retries exact intent with one persisted run', async t => {
   const f = await fixture(t); f.loseNextSubmit();
-  await assert.rejects(f.client.submit(f.input));
+  await assert.rejects(f.client.submitInitial(f.input));
   assert.equal(f.client.getSnapshot().submit, 'unknown');
   await f.client.retrySubmit();
   const submits = f.calls.filter(call => call.path.endsWith('/submit'));
@@ -81,7 +92,7 @@ test('lost real submit acknowledgement retries exact intent with one persisted r
 });
 
 test('disposing an active real subscription leaves the durable queued run intact', async t => {
-  const f = await fixture(t); await f.client.submit(f.input);
+  const f = await fixture(t); await f.client.submitInitial(f.input);
   const { chat } = f.client.openChat();
   const first = new Promise(resolve => { const unsubscribe = f.client.subscribe(() => {
     if (f.client.getSnapshot().observation?.after === 1) { unsubscribe(); resolve(); }
@@ -103,7 +114,7 @@ for (const [name, mutate] of Object.entries({
   scope: f => { f.state.context.scopes[0].policyRevision = 'changed'; },
   revocation: f => { f.state.revoked = true; },
 })) test(`real current ${name} refusal clears frontend content before a new GET`, async t => {
-  const f = await fixture(t); await f.client.submit(f.input); await f.client.history();
+  const f = await fixture(t); await f.client.submitInitial(f.input); await f.client.history();
   mutate(f); await f.client.openChat().chat.resumeStream();
   assert.equal(f.accessLost(), 1); assert.equal(f.client.getSnapshot().status, 'disposed');
   assert.equal(f.client.getSnapshot().observation, null); assert.equal(f.state.cancels, 0);

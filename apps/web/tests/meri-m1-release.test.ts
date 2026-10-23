@@ -24,7 +24,7 @@ const approved = () => ({
     ]),
   ),
   contracts: {
-    applicationPackage: "0.1.10",
+    applicationPackage: "0.1.11",
     eventWire: "0.1.0",
     lifecycleWire: "0.1.0",
     installedHashesReceiptId: "synthetic-contract-receipt",
@@ -104,6 +104,10 @@ describe("M1 preview opt-in and receipt gate", () => {
   });
   it("refuses production, stale pins, unapproved identity and enabled slices without negative/unknown receipts", () => {
     const invalid = [
+      {
+        ...approved(),
+        contracts: { ...approved().contracts, applicationPackage: "0.1.10" },
+      },
       {
         ...approved(),
         deployment: {

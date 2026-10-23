@@ -192,6 +192,11 @@ it.each([
     undefined,
   ],
   [
+    "stale conversation contract",
+    "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
+    "0.1.10",
+  ],
+  [
     "incompatible conversation contract",
     "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
     "999.999.999",

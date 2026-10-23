@@ -19,7 +19,7 @@ export const m1ReleaseSchema = z.strictObject({
   }),
   sources: z.strictObject({ frontend: pin, meri: pin, core: pin }),
   contracts: z.strictObject({
-    applicationPackage: z.literal("0.1.10"),
+    applicationPackage: z.literal("0.1.11"),
     eventWire: z.literal("0.1.0"),
     lifecycleWire: z.literal("0.1.0"),
     installedHashesReceiptId: text,
