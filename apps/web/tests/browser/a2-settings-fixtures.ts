@@ -154,6 +154,7 @@ export async function settingsFixture(page: Page) {
           personal: "Personal",
           branding: "Branding",
           "contact-info": "Contact info",
+          "hq-ai-keys": "Tenants",
         } as Record<string, string>
       )[section] ?? "Settings",
     );

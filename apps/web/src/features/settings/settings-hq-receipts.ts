@@ -1,4 +1,5 @@
 import type { CapiroApi } from "../../shared/capiro/http";
+import { upgradeTextModel } from "@capiro/shared/ai-model-policy";
 import type { capiroOperations } from "../../shared/capiro/registry";
 import type { SettingsWrite } from "./security-write-types";
 import { row, list, equal, sameMembers } from "./settings-receipt-values";
@@ -49,7 +50,10 @@ export function hqReceipt(
         equal(receipt.provider, body.provider) &&
         receipt.status === "active" &&
         equal(receipt.last4, body.keyLast4) &&
-        receipt.modelOverride === (body.modelOverride ?? null)
+        receipt.modelOverride ===
+          (typeof body.modelOverride === "string" && body.modelOverride.trim()
+            ? upgradeTextModel(body.modelOverride)
+            : null)
       );
     case "settings.hq.ai.updateModel":
       return (

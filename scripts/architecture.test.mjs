@@ -316,3 +316,12 @@ test('newsletter browser boundary admits only its two governed public subpaths',
     assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
   }
 });
+
+test('credential receipt owner reuses only the public canonical model policy', () => {
+  const file = 'apps/web/src/features/settings/settings-hq-receipts.ts';
+  const accepted = "import { upgradeTextModel } from '@capiro/shared/ai-model-policy';";
+  assert.deepEqual(inspectSources(new Map([[file, accepted]])).errors, []);
+  for (const specifier of ['@capiro/shared', '@capiro/shared/src/ai-model-policy', '@capiro/shared/dist/ai-model-policy', '@capiro/shared/ai-model-policy/internal']) {
+    assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
+  }
+});

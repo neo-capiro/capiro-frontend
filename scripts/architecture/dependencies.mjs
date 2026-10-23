@@ -56,6 +56,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
+  '@capiro/shared/ai-model-policy',
 ]);
 
 export const serverAdapters = new Map([
