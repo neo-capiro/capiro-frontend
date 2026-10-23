@@ -46,7 +46,9 @@ export async function prepareOrdinaryRecovery(
             write.operation,
           )
         ? body
-        : undefined;
+        : write.operation === "settings.branding.logoConfirm"
+          ? { logoS3Key: body.s3Key, logoContentType: body.contentType }
+          : undefined;
   if (expected) {
     const keys = Object.keys(expected).sort();
     write.projection = {
@@ -101,6 +103,11 @@ export function ordinaryReceipt(
       );
     case "settings.branding.update":
       return same(receipt.name, body.name);
+    case "settings.branding.logoConfirm":
+      return (
+        same(receipt.logoS3Key, body.s3Key) &&
+        same(receipt.logoContentType, body.contentType)
+      );
     case "settings.profiles.archive":
       return same(receipt.id, params.clientId) && receipt.status === "archived";
     case "settings.profiles.restore":
@@ -126,6 +133,7 @@ export async function reconcileOrdinaryWrite(
     "me.update",
     "me.emailSignature.update",
     "settings.branding.update",
+    "settings.branding.logoConfirm",
     "settings.contact.update",
     "settings.profiles.archive",
     "settings.profiles.restore",
@@ -142,6 +150,7 @@ export async function reconcileOrdinaryWrite(
       current = await api.request("me.emailSignature.read", {}, { signal });
       break;
     case "settings.branding.update":
+    case "settings.branding.logoConfirm":
       current = row(
         await api.request("settings.branding.read", {}, { signal }),
       );

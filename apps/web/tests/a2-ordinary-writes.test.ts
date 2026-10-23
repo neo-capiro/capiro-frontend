@@ -137,6 +137,48 @@ describe("ordinary Settings canonical receipts and retained uncertainty", () => 
       ),
     ).toBe(false);
   });
+  it("binds logo confirmation to exact key/type and delivered receipt before current readback", async () => {
+    const write = fixture("settings.branding.logoConfirm", {
+      s3Key: "synthetic-upload-key",
+      contentType: "image/png",
+    });
+    await prepareOrdinaryRecovery(write, "actor-a/tenant-a");
+    const receipt = {
+      logoS3Key: "synthetic-upload-key",
+      logoContentType: "image/png",
+    };
+    expect(() => assertSettingsReceipt(write, receipt)).not.toThrow();
+    expect(() =>
+      assertSettingsReceipt(write, { ...receipt, logoS3Key: "another-key" }),
+    ).toThrow();
+    expect(() =>
+      assertSettingsReceipt(write, {
+        ...receipt,
+        logoContentType: "image/jpeg",
+      }),
+    ).toThrow();
+    const request = vi.fn(async () => receipt);
+    const signal = new AbortController().signal;
+    expect(
+      await reconcileSettingsWrite({ request } as never, write, signal),
+    ).toBe(false);
+    expect(request).not.toHaveBeenCalled();
+    write.receiptConfirmed = true;
+    expect(
+      await reconcileSettingsWrite({ request } as never, write, signal),
+    ).toBe(true);
+    request.mockResolvedValueOnce({ ...receipt, logoS3Key: "later-upload" });
+    expect(
+      await reconcileSettingsWrite({ request } as never, write, signal),
+    ).toBe(false);
+    const storage = store();
+    await persistSettingsWrite(storage, "key", write, write.input);
+    expect(storage.getItem("key")).not.toContain("synthetic-upload-key");
+    const restored = restoreSettingsWrite(storage, "key")!;
+    expect(
+      await reconcileSettingsWrite({ request } as never, restored, signal),
+    ).toBe(true);
+  });
   it("does not turn coincidental legacy Settings state into a receipt after response loss", async () => {
     const request = vi.fn(async () => []);
     for (const operation of [

@@ -33,6 +33,7 @@ export async function reconcileSettingsWrite(
 export const settingsWriteNeedsReadback = (operation: string) =>
   [
     "me.emailSignature.update",
+    "settings.branding.logoConfirm",
     "settings.team.remove",
     "settings.team.resend",
     "settings.analyst.personCandidates.decide",

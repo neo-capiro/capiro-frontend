@@ -77,6 +77,15 @@ export async function settingsFixture(page: Page) {
     invitations: [structuredClone(invitation)],
     state: structuredClone(billingState),
     summary: structuredClone(billingSummary),
+    branding: {
+      id: "synthetic-tenant",
+      slug: "synthetic",
+      name: "Synthetic organization",
+      logoS3Key: null as string | null,
+      logoContentType: null as string | null,
+      logoUploadedAt: null as string | null,
+      logoUrl: null as string | null,
+    },
     signature: {
       html: "<p>Original signature</p>" as string | null,
       enabled: false,
@@ -118,6 +127,7 @@ export async function settingsFixture(page: Page) {
       "me.read": data.identity,
       "me.emailSignature.read": data.signature,
       "settings.contact.read": data.contact,
+      "settings.branding.read": data.branding,
       "settings.team.list": data.members,
       "settings.team.invitations": data.invitations,
       "settings.billing.state": data.state,
@@ -142,6 +152,7 @@ export async function settingsFixture(page: Page) {
           team: "Team",
           billing: "Billing",
           personal: "Personal",
+          branding: "Branding",
           "contact-info": "Contact info",
         } as Record<string, string>
       )[section] ?? "Settings",
