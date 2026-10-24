@@ -1,11 +1,88 @@
 import { describe, it, expect } from "vitest";
+import { receiveActionResponse } from "@capiro/meri-contracts/action-application";
 import {
   accepted,
+  archivedFixture,
+  canonicalSha256,
   context,
   fixture,
   harness,
   prepared,
 } from "./meri-action-fixtures";
+
+describe("current query fixtures preserve archived-wire refusal", () => {
+  it.each([
+    "query",
+    "query-interleaved-sequence",
+    "query-foreign-intent-limit",
+    "query-foreign-intent-page",
+  ])(
+    "derives only the closed subject and real observation hash for %s",
+    async (name) => {
+      const archived = archivedFixture(name);
+      const current = fixture(name);
+      await expect(
+        receiveActionResponse("query", 200, JSON.stringify(archived.response)),
+      ).rejects.toMatchObject({ code: "ACTION_RESPONSE_SHAPE" });
+      const admitted = await receiveActionResponse(
+        "query",
+        200,
+        JSON.stringify(current.response),
+      );
+      expect(admitted).toEqual(current.response);
+      const prior = archived.response as Extract<
+        typeof admitted,
+        { observation: unknown }
+      >;
+      const derived = structuredClone(prior);
+      Reflect.deleteProperty(
+        derived.observation.subject,
+        "authorizationDecisionId",
+      );
+      Reflect.deleteProperty(
+        derived.observation.result.subject,
+        "authorizationDecisionId",
+      );
+      expect(current.response).toEqual({
+        ...derived,
+        resultSha256: expect.any(String),
+      });
+      expect(archivedFixture(name)).toEqual(archived);
+      await expect(
+        receiveActionResponse(
+          "query",
+          200,
+          JSON.stringify({
+            ...(current.response as object),
+            resultSha256: prior.resultSha256,
+          }),
+        ),
+      ).rejects.toMatchObject({ code: "ACTION_RESPONSE_CORRELATION" });
+    },
+  );
+
+  it.each(["subject", "result"])(
+    "refuses the retired field in the %s subject independently",
+    async (branch) => {
+      const query = fixture("query").response as {
+        resultSha256: string;
+        observation: { subject: object; result: { subject: object } };
+      };
+      Object.assign(
+        branch === "subject"
+          ? query.observation.subject
+          : query.observation.result.subject,
+        {
+          authorizationDecisionId: "00000000-0000-4000-8000-000000000099",
+        },
+      );
+      query.resultSha256 = canonicalSha256(query.observation);
+      await expect(
+        receiveActionResponse("query", 200, JSON.stringify(query)),
+      ).rejects.toMatchObject({ code: "ACTION_RESPONSE_SHAPE" });
+    },
+  );
+});
 
 describe("governed action intent and retained wires", () => {
   it("preserves the exact canonical chain, separate approver, pending refusal and explicit same-proposal replay", async () => {

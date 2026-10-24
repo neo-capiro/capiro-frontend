@@ -2200,10 +2200,10 @@
     "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
     "kind": "function",
     "symbol": "write",
-    "fingerprint": "88c0936120dc53e0d3947280754efbb93502e00f67ccdf930dd24bfab7372d0d",
-    "reason": "One reserved-write lifecycle claims the shared journal synchronously, fingerprints admitted immutable intent, dispatches once, correlates the returned receipt and settles conservatively. Post-hash/pre-dispatch/post-settlement ownership checks remain adjacent to the transitions they protect. HTTP receiving and cache-generation ownership are separate. Extracting steps merely to drop below80 would obscure reentrant cancellation and attempt fencing.",
-    "reviewedBy": "Codex independent Meri Files integration review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "a8422381bb47a1af29131d19ddd005c91d7349ccc4898638c5b81c543233299b",
+    "reason": "One create-or-revise transaction over the same document attempt: preflight, retain delivery identity and intent fingerprint before dispatch, receive/correlate, adopt, and settle known/unknown outcome with cleanup. The ordered checks prevent a lost ACK or stale session from becoming another write. Transport/receiver and journal are existing separate owners. A generic transaction abstraction or several stateful fragments would obscure the effect boundary and error disposition.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/tests/meri-document-adapter.test.ts",
@@ -2344,28 +2344,28 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5177818e63066bb762e62f294024d1b8c7c64d96c44c169ee8865240c999def8",
+    "fingerprint": "a6a9cb4f409621fd0c94fcb6a283bbcb9a36e574c3ce91409a0ad8b66b1d668e",
     "reason": "This remains the presentation owner for one meeting notes/debrief interaction. The actor-keyed wrapper and editor retain one list, local draft and dialog lifetime. O204 adds current explicit capability refusals to the existing admission and dialog checks; transport, receipt validation, attempt state, generation and document preview remain delegated to their existing owners. The change adds no grant store or server policy. Separating individual checks or JSX would disperse the same retained interaction rather than isolate a new responsibility.",
-    "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
-    "reviewedOn": "2026-10-22"
+    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor",
-    "fingerprint": "20cee08ec23298bebe4b587a49e90b39c8b63714e1fbdb2a1b64c812e3fe153c",
+    "fingerprint": "d76ed5889e6c24d5936166b7d500c813f9fb5cfae5ebfec2a40d29be4d771af9",
     "reason": "The editor owns one artifact selection and attempt lifetime shared by list rows, retained edit text and conditional share/edit dialogs. O204 applies the existing server-reported capability refusals to the cached current-command predicate and retained-dialog visibility, so both consume the same refreshed row. useArtifactMutation still owns dispatch/attempt state and existing API/contracts own receipts. Keeping selection, admission and concealment together preserves unsaved draft retention; splitting them merely to reduce line count would introduce additional lifecycle coordination.",
-    "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
-    "reviewedOn": "2026-10-22"
+    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor > <anonymous> #8",
-    "fingerprint": "3d16d20879702a5dc5addfad02f41f64338882636b55e61db21acda309c12489",
+    "fingerprint": "f2365772d0dc96ed013e0de435ed916717df4a4981040c9467767905a29d23cf",
     "reason": "This stateless saved-artifact card projection renders one row and delegates commands/dialog state to its parent. O204 adds current edit/share capability checks to its retained entry callbacks, matching the refreshed row controls without giving cards their own attempt or authority state. All actions still use the enclosing editor admission boundary. Extracting this one callback would pass the same row and selection callbacks through another component without isolating another domain or reusable presentation.",
-    "reviewedBy": "agent 3 v1 O204 follow-up proposal; awaiting dot exact-fingerprint review",
-    "reviewedOn": "2026-10-22"
+    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/target-queries.ts",
@@ -2605,10 +2605,10 @@
     "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "4272796b545f46b9864c6fddd8e7a1271d2e06add3a998f0d02b596f84de62aa",
-    "reason": "This page-scoped CSS module groups the Portfolio index pulse, cards, navigation, chooser, filters and responsive variants used by index components. The Figma changes adapt existing index selectors without adding a global token, shared shell rule or cross-feature style owner.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "41cce5eafc0f5d19ffcbc26c9777077bf5ade748556928f20b634798c11174a3",
+    "reason": "One Portfolio index screen stylesheet shared only by its local cards/results, summary, filters/navigation, owner filter and create-profile chooser. Rules are scoped CSS-module selectors with explicit screen markers for the few global selectors. It contains presentation/responsive cascade, no business or state owner. Splitting by arbitrary line count would scatter the coordinated card/header/mobile layout; no cross-feature responsibility warrants extraction in this delta.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
@@ -3154,10 +3154,10 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings",
-    "fingerprint": "d4d2ddb780ca576f62c7589b8d973944194f29afc1927abe0beaf098a1ba8df6",
+    "fingerprint": "246bce636a95ffcfa30b21b7b1722ce3a3266c091b28c87fcece9e9f5faf78cd",
     "reason": "This function coordinates one integration-settings page: list/capability queries, the selected registration/detail/disconnect record, fixed-operation callbacks and matching status views. The disconnect journal is owned by useSettingsMutation, account registration by RegisterAccount, and URL admission by settingsDestination; server OAuth and sync internals are absent. The large portion is provider/connection markup, separately reviewed below, so a new controller layer would currently duplicate the same selected-account lifetime.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
@@ -3217,19 +3217,19 @@
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
     "symbol": "MeriConversationHost",
-    "fingerprint": "6056bf65ed132090737b083f9892a902004af27b369ff142e6a56aa82fcf4efc",
-    "reason": "One conversation availability and selection boundary applies feature enablement, URL validity, verified account/current-client eligibility, archived-client refusal, and configured preview scope before choosing Core bootstrap or an existing conversation. This function performs no request, receipt validation, token handling, or Meri session issuance; CoreResolvedConversation and useConversationSession own those lifetimes. Keeping refusal order together ensures current and explicit conversation links reject an archived client before downstream mounting; focused host tests cover this. See docs/non-meri-continuation-20261016/PR70-SIZE-REVIEW.md.",
-    "reviewedBy": "Codex PR70 root and independent source reviewer",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "d828701139e3fc586f28062fc6f61859cf54780f38b9eeb327c2545ec512589f",
+    "reason": "One conversation selection and mount boundary: malformed URL refusal, enabled/current-account state, client eligibility, explicit General selection, and keyed lifetime replacement. Core bootstrap and session ownership remain in existing resolver/controller modules; browser selection is not authority. The branches choose presentations of the same connection, not separate domain workflows. Existing ConnectedConversation and notice helpers already isolate meaningful subresponsibilities.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
     "symbol": "CoreResolvedConversation",
-    "fingerprint": "86bf191233b45c6ebc3b825e224178e2bb508db00cdf8cb401fb4c3cba24e775",
-    "reason": "One selected tenant, actor and client owns a Core create-or-reuse attempt. Abort on scope change, the shared persisted request identity and verified receipt, and retry/New Chat presentation belong to that attempt; Meri session issuance mounts only after a verified conversation ID. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedBy": "Codex PR60 root and independent source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "5434dc180235c9a7fbd4cf2e7144145403e7052d3fab965db8614f3ea6584102",
+    "reason": "One cancellable Core bootstrap attempt and its pending/ready/error presentation. It delegates durable request identity, receipt/principal validation and conflict recovery to resolveFirstChatConversation, first-chat-intent and useBeginNewChat. The effect cleanup prevents obsolete completion from mounting a session; retry and New Chat update this same attempt. Splitting its effect from its render state would distribute one lifecycle without reducing responsibility.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
@@ -3424,10 +3424,10 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "533315bfc2efc666b350a1f4a9969dd5e54717e3e5ffc3b51d159a95b6a805b0",
+    "fingerprint": "a4ebb9fa8282598a6cc931453f295465405f9e775b5db9127aa63ab232cb6ef0",
     "reason": "This module presents the existing integration-account settings surface: provider cards, connection status/actions, selected-account permissions and disconnect confirmation. Provider metadata, account registration, destination validation and uncertain-write lifecycle already have separate owners; the only file-local helper formats sync age. It contains fixed API calls and view state, not OAuth/token exchange, mailbox sync algorithms or authority enforcement. Retaining these mutually related views avoids distributing selected connection and disconnect state merely to reduce line count.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
@@ -3532,19 +3532,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
     "kind": "function",
     "symbol": "MeetingForm",
-    "fingerprint": "7d85f252ca237ac0d0234f1923c412f6c4173471c6f922e72e9af7f145c1e660",
+    "fingerprint": "80d852aced890d4d4dd01818924ccea78a37715815d72874b9be4be266b5c91a",
     "reason": "Retain this one meeting-draft form. Subject, time, description, location and selected client are submitted together and share the pending/uncertain lock, local validation and close behavior. The form converts civil input using the existing range owner and delegates assignment intent to meetingAssignmentFields and dispatch to useSaveMeeting. Client availability and current-read feedback determine whether this same draft can be submitted; they are not a separate client-management workflow. The existing keyed callers reset the draft when the editor opens/closes. Splitting individual fields or validation JSX would disperse one submission contract without removing business or transport logic, which already lives outside the form.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
     "kind": "function",
     "symbol": "useSaveMeeting",
-    "fingerprint": "0c9a51edb153a5e660c7309507ca0c567aa24ef22f002390dc4a9c94d2927d88",
-    "reason": "Retain the hook as the save-sequence owner for one meeting create/update. Synchronous single-flight reservation, captured lifetime, exact current-read admission, native request/receipt validation, uncertain outcome retention and successful invalidation are phases of the same save attempt. The original association and readClientId intentionally remain distinct from the selected destination clientId; combining those would break reassignment admission. Identity policy is delegated to useDispatchGuard and DTO/receipt semantics to meeting-save.ts. Extracting the try/catch or cache completion into generic helpers would hide the before/after-dispatch boundary without creating an independently meaningful service.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "e94d4f86aaa4b8cd4159d2b84c5b513de5c8d6f452d405d58f4bc011df84c69a",
+    "reason": "One meeting-save attempt: bind the initiating identity and meeting snapshot, validate existing DTO/receipt, dispatch one POST/PUT, retain uncertainty, and invalidate the same meeting caches on known success. useDispatchGuard, meeting-save schemas and the API owner retain access, wire validation and transport. The pending/unknown fences and post-response currentness must remain consistent in this hook; this is not a generic mutation framework or a second authorization service.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/MemoryCorrectionComposer.tsx",
@@ -3617,5 +3617,32 @@
     "reason": "One captured owner-decision transaction across addition and governed-version endpoints. It reserves a nonsecret ID before dispatch, binds the chosen candidate and decision, releases only on definite Core results or confirmed non-dispatch, and retains ambiguous writes for read-only status verification. No browser value grants owner/tenant authority, no automatic retry changes the action, and no active-memory state is fabricated.",
     "reviewedBy": "Codex frontend source receiving review",
     "reviewedOn": "2026-10-21"
+  },
+  {
+    "file": "apps/web/src/features/meri/MeriHome.tsx",
+    "kind": "function",
+    "symbol": "MeriHome",
+    "fingerprint": "f6a15e0d845644a231b551a8f63cee6567a71e4e97c09496c305ce08305c3cff",
+    "reason": "One Meri landing-page composition: current identity/client-or-General presentation, capability-gated conversation host, and links to existing workspaces. Identity, session authority, bootstrap, approvals and workflow behavior remain delegated. The 81 nonblank lines are mainly explicit JSX; extracting fragments solely to cross the threshold would not create a new responsibility boundary.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "f3377dfce3f36a3cc93d59e0174a780c09270b524006e8a1de9287207e49edfd",
+    "reason": "One generated-document workflow lifetime: branded version handles, immutable receipt correlation, read/create/revise orchestration, and one shared busy/unknown attempt journal. Public package receivers own schemas and byte verification; workflow-transport owns fixed HTTP/credential lifetime; the journal owns persistent local uncertainty. The native-file union is explicitly refused as a generated revision target rather than assimilated into a second workflow. No provider, renderer, server authority or unrelated feature is added.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "packages/meri-client/src/conversation-client.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "1e1797b909c9c16285f8624b6f85462d0003df1afb72d59e54f8d702dd67edfa",
+    "reason": "One public conversation connection state machine: retained initial/input admission identity, submit reconciliation, history binding, cancellation receipt and attachment of the current observation. ConversationNetwork owns credential/HTTP/deadline disposal, ConversationObservation owns cursor/event projection, conversationChat owns upstream UI transport, and public contracts own wire admission. Initial and next-input methods share the exact retained intent and uncertainty state; separating them into competing owners would weaken reconciliation. General only extends context correlation with the canonical actor-private scope; no model loop or server authorization is reproduced.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
   }
 ]

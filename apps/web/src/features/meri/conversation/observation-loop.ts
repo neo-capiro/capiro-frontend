@@ -1,7 +1,7 @@
 export type ObservationOutcome = "settled" | "stalled" | "stopped";
 export type ObservationPhase = "live" | "reconnecting";
 
-/** Waits between attempts that admitted nothing new; three in a row stop the loop. */
+/** Three retry waits; a fourth consecutive failed attempt without progress stops the loop. */
 export const reconnectDelays: readonly number[] = Object.freeze([
   1_000, 2_000, 4_000,
 ]);
@@ -67,6 +67,8 @@ export async function observeUntilSettled({
     else if (failed) failures++;
     else {
       // A clean, empty window: still live; pause before the next one so a window that closes at once cannot spin.
+      failures = 0;
+      onPhase?.("live");
       await wait(delays[0] ?? 0, signal);
       continue;
     }

@@ -11,7 +11,10 @@ import {
 import { basename, dirname, isAbsolute, join, resolve, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
-import { buildSSR } from "../../../../packages/qualification-elements/ssr-build.mjs";
+import {
+  buildSSR,
+  selectSSRTool,
+} from "../../../../packages/qualification-elements/ssr-build.mjs";
 
 const repository = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -78,8 +81,7 @@ async function prepareTool(work) {
   const pins = JSON.parse(
     readFileSync(join(packageRoot, "toolchain-pins.json"), "utf8"),
   );
-  const pin = pins.tools.find((item) => item.platform === "linux-x64");
-  assert.ok(pin);
+  const pin = selectSSRTool(pins);
   const toolRoot = join(work, "tool");
   const tool = join(toolRoot, pin.platform);
   mkdirSync(tool, { recursive: true });
@@ -118,17 +120,18 @@ async function prepareTool(work) {
 }
 
 export async function qualifyElements(workRoot) {
-  assert.equal(
-    process.platform + "-" + process.arch,
-    "linux-x64",
-    "shipping tool platform",
-  );
   assert.ok(isAbsolute(workRoot), "work root must be absolute");
   const absolute = resolve(workRoot);
   const work = join(realpathSync(dirname(absolute)), basename(absolute));
   assert.ok(
     work !== repository && !work.startsWith(repository + sep),
     "work root must be outside checkout",
+  );
+  // Validate output ownership on every host before any tool preparation.
+  // mkdir remains exclusive; unsupported platforms must not allocate it.
+  assert.ok(
+    process.platform === "linux" && ["x64", "arm64"].includes(process.arch),
+    "shipping tool platform",
   );
   mkdirSync(work); // Exclusive, no reuse of an old tool, output or receipt.
   const toolRoot = await prepareTool(work);

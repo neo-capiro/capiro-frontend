@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useId } from "react";
 import type { Prospect } from "@/features/portfolio/prospects/public";
 import {
   clientLocation,
@@ -106,15 +107,12 @@ export function ProspectCard({
   prospect: Prospect;
   owner?: Member;
 }) {
+  const descriptionId = useId();
   const description = [prospect.serviceHypothesis, prospect.geography]
     .filter(Boolean)
     .join(" · ");
   return (
-    <Link
-      className={`${styles.profileCard} ${styles.prospectCard}`}
-      href={`/portfolio/prospects/${prospect.id}`}
-      aria-label={`Open prospect ${prospect.displayName}`}
-    >
+    <div className={`${styles.profileCard} ${styles.prospectCard}`}>
       <div className={styles.cardTop}>
         <span
           className={`${styles.profileLogo} ${styles.prospectLogo}`}
@@ -123,8 +121,19 @@ export function ProspectCard({
           {organizationInitials(prospect.displayName)}
         </span>
         <div className={styles.cardIdentity}>
-          <h2>{prospect.displayName}</h2>
-          <small>{description || "Prospect details unavailable"}</small>
+          <h2>
+            <Link
+              className={styles.profileLink}
+              href={`/portfolio/prospects/${prospect.id}`}
+              aria-label={`Open prospect ${prospect.displayName}`}
+              aria-describedby={descriptionId}
+            >
+              {prospect.displayName}
+            </Link>
+          </h2>
+          <small id={descriptionId}>
+            {description || "Prospect details unavailable"}
+          </small>
         </div>
       </div>
       <div className={styles.cardBottom}>
@@ -142,7 +151,7 @@ export function ProspectCard({
           </span>
         )}
       </div>
-    </Link>
+    </div>
   );
 }
 

@@ -1,54 +1,85 @@
 import {
-  conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse,
-} from '@capiro/meri-contracts/conversation-application';
+  conversationApplicationMetadata as protocol,
+  receiveConversationRequest,
+  receiveConversationResponse,
+} from "@capiro/meri-contracts/conversation-application";
 import type {
-  AdmittedConversationRequest, AdmittedConversationView, ConversationRoute,
-  ConversationSubmitRequest, ConversationHistoryRequest, ConversationCancelledResponse,
-} from '@capiro/meri-contracts/conversation-application';
+  AdmittedConversationRequest,
+  AdmittedConversationView,
+  ConversationRoute,
+  ConversationSubmitRequest,
+  ConversationHistoryRequest,
+  ConversationCancelledResponse,
+} from "@capiro/meri-contracts/conversation-application";
 import {
-  conversationInputMetadata, conversationInputView,
-  receiveConversationInputRequest, receiveConversationInputResponse,
-} from '@capiro/meri-contracts/conversation-input';
-import type { AdmittedConversationInputReceipt } from '@capiro/meri-contracts/conversation-input';
+  conversationInputMetadata,
+  conversationInputView,
+  receiveConversationInputRequest,
+  receiveConversationInputResponse,
+} from "@capiro/meri-contracts/conversation-input";
+import type { AdmittedConversationInputReceipt } from "@capiro/meri-contracts/conversation-input";
 import {
-  conversationInitialInputMetadata, receiveConversationInitialInputRequest,
-  receiveConversationInitialInputResponse, receiveAllocatedConversationInputResponse,
-} from '@capiro/meri-contracts/conversation-initial-input';
-import { ConversationNetwork, ConversationUnavailable } from './conversation-network.js';
-import type { ConversationLifetime } from './conversation-network.js';
-import { ConversationObservation } from './conversation-observation.js';
-import type { ConversationObservationSnapshot } from './conversation-observation.js';
-import { conversationChat } from './conversation-chat.js';
-import type { ConversationChat } from './conversation-chat.js';
-import { stableStringify } from './json-identity.js';
+  conversationInitialInputMetadata,
+  receiveConversationInitialInputRequest,
+  receiveConversationInitialInputResponse,
+  receiveAllocatedConversationInputResponse,
+} from "@capiro/meri-contracts/conversation-initial-input";
+import {
+  ConversationNetwork,
+  ConversationUnavailable,
+} from "./conversation-network.js";
+import type { ConversationLifetime } from "./conversation-network.js";
+import { ConversationObservation } from "./conversation-observation.js";
+import type { ConversationObservationSnapshot } from "./conversation-observation.js";
+import { conversationChat } from "./conversation-chat.js";
+import type { ConversationChat } from "./conversation-chat.js";
+import { stableStringify } from "./json-identity.js";
 
 export { ConversationUnavailable };
-export type { ConversationLifetime, ConversationObservationSnapshot, ConversationChat };
+export type {
+  ConversationLifetime,
+  ConversationObservationSnapshot,
+  ConversationChat,
+};
 export interface MeriConversationSnapshot {
-  readonly status: 'idle' | 'loading' | 'ready' | 'unavailable' | 'disposed';
+  readonly status: "idle" | "loading" | "ready" | "unavailable" | "disposed";
   readonly observation: ConversationObservationSnapshot | null;
-  readonly submit: 'idle' | 'pending' | 'unknown' | 'observed';
-  readonly cancel: 'idle' | 'pending' | 'unknown' | 'observed';
+  readonly submit: "idle" | "pending" | "unknown" | "observed";
+  readonly cancel: "idle" | "pending" | "unknown" | "observed";
   readonly cancelReceipt: ConversationCancelledResponse | null;
 }
 const EMPTY: MeriConversationSnapshot = Object.freeze({
-  status: 'idle', observation: null, submit: 'idle', cancel: 'idle', cancelReceipt: null,
+  status: "idle",
+  observation: null,
+  submit: "idle",
+  cancel: "idle",
+  cancelReceipt: null,
 });
-const DISPOSED: MeriConversationSnapshot = Object.freeze({ ...EMPTY, status: 'disposed' });
-const HIDDEN: MeriConversationSnapshot = Object.freeze({ ...EMPTY, status: 'unavailable' });
-const bytes = (value: unknown) => new TextEncoder().encode(JSON.stringify(value));
+const DISPOSED: MeriConversationSnapshot = Object.freeze({
+  ...EMPTY,
+  status: "disposed",
+});
+const HIDDEN: MeriConversationSnapshot = Object.freeze({
+  ...EMPTY,
+  status: "unavailable",
+});
+const bytes = (value: unknown) =>
+  new TextEncoder().encode(JSON.stringify(value));
 type InitialRequest = ReturnType<typeof receiveConversationInitialInputRequest>;
-type InitialReceipt = Exclude<Awaited<ReturnType<typeof receiveConversationInitialInputResponse>>, { error: unknown }>;
+type InitialReceipt = Exclude<
+  Awaited<ReturnType<typeof receiveConversationInitialInputResponse>>,
+  { error: unknown }
+>;
 
 /** One server-selected run/context. No new turn or durable cancel is implied by observation. */
 class ConversationConnection {
   private readonly network: ConversationNetwork;
-  private readonly context: ConversationLifetime['context'];
+  private readonly context: ConversationLifetime["context"];
   private state = EMPTY;
   private view: AdmittedConversationView | undefined;
   private observation: ConversationObservation | undefined;
   private handle: ConversationChat | undefined;
-  private intent: AdmittedConversationRequest<'submit'> | undefined;
+  private intent: AdmittedConversationRequest<"submit"> | undefined;
   // Correlation only: this synthetic tail must never replace an observed transcript/cursor.
   private inputReceipt: AdmittedConversationInputReceipt | undefined;
   private initialIntent: InitialRequest | undefined;
@@ -62,9 +93,19 @@ class ConversationConnection {
   }
   getSnapshot = (): MeriConversationSnapshot => {
     if (this.disposed) return DISPOSED;
-    try { this.network.check(); return this.state; } catch { return this.disposed ? DISPOSED : HIDDEN; }
+    try {
+      this.network.check();
+      return this.state;
+    } catch {
+      return this.disposed ? DISPOSED : HIDDEN;
+    }
   };
-  subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
+  subscribe = (listener: () => void) => {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
+  };
   private publish(patch: Partial<MeriConversationSnapshot>) {
     if (this.disposed) return;
     this.state = Object.freeze({ ...this.state, ...patch });
@@ -73,70 +114,132 @@ class ConversationConnection {
   private detach() {
     const handle = this.handle;
     handle?.transport.close();
-    if (handle) void handle.chat.dispose().catch(() => {}).finally(() => {
-      handle.chat.messages = []; handle.chat.clearError();
-    });
+    if (handle)
+      void handle.chat
+        .dispose()
+        .catch(() => {})
+        .finally(() => {
+          handle.chat.messages = [];
+          handle.chat.clearError();
+        });
     this.handle = undefined;
   }
   private clear() {
     if (this.disposed) return;
-    this.disposed = true; this.detach();
-    this.view = undefined; this.observation = undefined; this.intent = undefined;
+    this.disposed = true;
+    this.detach();
+    this.view = undefined;
+    this.observation = undefined;
+    this.intent = undefined;
     this.inputReceipt = undefined;
-    this.initialIntent = undefined; this.allocation = undefined;
+    this.initialIntent = undefined;
+    this.allocation = undefined;
     this.state = DISPOSED;
     for (const listener of this.listeners) listener();
   }
   dispose = () => this.network.dispose();
   private start() {
     this.network.check();
-    if (this.disposed || this.busy) throw new ConversationUnavailable('operation-unavailable');
+    if (this.disposed || this.busy)
+      throw new ConversationUnavailable("operation-unavailable");
     this.busy = true;
   }
   private bind(view: AdmittedConversationView) {
     const binding = view.run.binding;
-    for (const key of ['tenantId', 'actorId', 'conversationId', 'runId'] as const) {
-      if (binding[key] !== this.context[key]) throw new ConversationUnavailable('foreign-session-view');
+    for (const key of [
+      "tenantId",
+      "actorId",
+      "conversationId",
+      "runId",
+    ] as const) {
+      if (binding[key] !== this.context[key])
+        throw new ConversationUnavailable("foreign-session-view");
     }
-    if (!view.run.scopes.some(scope => scope.tenantId === this.context.tenantId && scope.kind === 'client'
-      && scope.resourceId === this.context.selectedClientId)) throw new ConversationUnavailable('foreign-client-view');
-    if ('request' in view && this.intent) {
+    const scopes = view.run.scopes;
+    const selected = this.context.selectedClientId;
+    const matches =
+      selected === null
+        ? scopes.length === 1 &&
+          scopes[0]?.kind === "private-user" &&
+          scopes[0].tenantId === this.context.tenantId &&
+          scopes[0].resourceId === this.context.actorId
+        : scopes.some(
+            (scope) =>
+              scope.tenantId === this.context.tenantId &&
+              scope.kind === "client" &&
+              scope.resourceId === selected,
+          );
+    if (!matches) throw new ConversationUnavailable("foreign-client-view");
+    if ("request" in view && this.intent) {
       const saved = view.request;
       const input = this.intent;
-      if (saved.requestId !== input.requestId || saved.prompt !== input.prompt
-        || stableStringify(saved.windowRequest) !== stableStringify(input.windowRequest ?? null)
-        || stableStringify(saved.skill && { skillId: saved.skill.skillId, skillVersion: saved.skill.skillVersion }) !== stableStringify(input.skill ?? null)) {
-        throw new ConversationUnavailable('foreign-retained-request');
+      if (
+        saved.requestId !== input.requestId ||
+        saved.prompt !== input.prompt ||
+        stableStringify(saved.windowRequest) !==
+          stableStringify(input.windowRequest ?? null) ||
+        stableStringify(
+          saved.skill && {
+            skillId: saved.skill.skillId,
+            skillVersion: saved.skill.skillVersion,
+          },
+        ) !== stableStringify(input.skill ?? null)
+      ) {
+        throw new ConversationUnavailable("foreign-retained-request");
       }
     }
-    this.detach(); this.network.check();
+    this.detach();
+    this.network.check();
     this.view = view;
-    const observation = new ConversationObservation(view, () => {
-      this.network.check();
-      if (this.observation === observation) this.publish({ observation: observation.snapshot });
-    }, 'request' in view ? null : this.intent?.prompt ?? null);
+    const observation = new ConversationObservation(
+      view,
+      () => {
+        this.network.check();
+        if (this.observation === observation)
+          this.publish({ observation: observation.snapshot });
+      },
+      "request" in view ? null : (this.intent?.prompt ?? null),
+    );
     this.observation = observation;
-    this.publish({ status: 'ready', observation: observation.snapshot });
+    this.publish({ status: "ready", observation: observation.snapshot });
   }
-  private async receive<R extends Exclude<ConversationRoute, 'events'>>(
-    route: R, request: AdmittedConversationRequest<R>, onDispatch?: () => void,
+  private async receive<R extends Exclude<ConversationRoute, "events">>(
+    route: R,
+    request: AdmittedConversationRequest<R>,
+    onDispatch?: () => void,
   ) {
     const current = this.view;
-    const response = await this.network.json(protocol.routes[route].path, bytes(request), onDispatch);
-    const correlation = current ?? (this.inputReceipt && conversationInputView(this.inputReceipt));
-    const value = await receiveConversationResponse(route, response.status, response.bytes, request, correlation);
+    const response = await this.network.json(
+      protocol.routes[route].path,
+      bytes(request),
+      onDispatch,
+    );
+    const correlation =
+      current ??
+      (this.inputReceipt && conversationInputView(this.inputReceipt));
+    const value = await receiveConversationResponse(
+      route,
+      response.status,
+      response.bytes,
+      request,
+      correlation,
+    );
     this.network.check();
-    if (this.disposed || this.view !== current) throw new ConversationUnavailable('superseded-response');
-    if ('error' in value) throw new ConversationUnavailable(value.error.code);
+    if (this.disposed || this.view !== current)
+      throw new ConversationUnavailable("superseded-response");
+    if ("error" in value) throw new ConversationUnavailable(value.error.code);
     return value;
   }
-  private retain<T extends AdmittedConversationRequest<'submit'>>(
-    input: ConversationSubmitRequest, receive: (input: Uint8Array) => T,
+  private retain<T extends AdmittedConversationRequest<"submit">>(
+    input: ConversationSubmitRequest,
+    receive: (input: Uint8Array) => T,
   ) {
     this.network.check();
-    if (this.intent) throw new ConversationUnavailable('retained-submit-intent');
+    if (this.intent)
+      throw new ConversationUnavailable("retained-submit-intent");
     const request = receive(bytes(input));
-    this.start(); this.intent = request;
+    this.start();
+    this.intent = request;
     return request;
   }
   submit = async (input: ConversationSubmitRequest) => {
@@ -145,98 +248,193 @@ class ConversationConnection {
   };
   /** Original input only. A local identity is a proposal until the server's durable allocation. */
   submitInitial = async (input: ConversationSubmitRequest) => {
-    if (this.view || this.inputReceipt) throw new ConversationUnavailable('initial-input-already-observed');
-    this.initialIntent = this.retain(input, receiveConversationInitialInputRequest);
+    if (this.view || this.inputReceipt)
+      throw new ConversationUnavailable("initial-input-already-observed");
+    this.initialIntent = this.retain(
+      input,
+      receiveConversationInitialInputRequest,
+    );
     return this.sendRetained();
   };
   retrySubmit = async () => {
-    if (!this.intent || this.state.submit !== 'unknown') throw new ConversationUnavailable('no-unknown-submit');
-    this.start(); return this.sendRetained(true);
+    if (!this.intent || this.state.submit !== "unknown")
+      throw new ConversationUnavailable("no-unknown-submit");
+    this.start();
+    return this.sendRetained(true);
   };
   private inputContext() {
     return {
-      tenantId: this.context.tenantId, actorId: this.context.actorId,
-      conversationId: this.context.conversationId, runId: this.context.runId,
+      tenantId: this.context.tenantId,
+      actorId: this.context.actorId,
+      conversationId: this.context.conversationId,
+      runId: this.context.runId,
       clientId: this.context.selectedClientId,
     };
   }
   private async allocateRetained(onDispatch: () => void) {
-    const intent = this.initialIntent!, previous = this.allocation, current = this.view;
-    const response = await this.network.json(conversationInitialInputMetadata.routes.allocate.path,
-      bytes(intent), onDispatch, conversationInitialInputMetadata.limits);
-    const value = await receiveConversationInitialInputResponse(response.status, response.bytes, intent, this.inputContext());
+    const intent = this.initialIntent!,
+      previous = this.allocation,
+      current = this.view;
+    const response = await this.network.json(
+      conversationInitialInputMetadata.routes.allocate.path,
+      bytes(intent),
+      onDispatch,
+      conversationInitialInputMetadata.limits,
+    );
+    const value = await receiveConversationInitialInputResponse(
+      response.status,
+      response.bytes,
+      intent,
+      this.inputContext(),
+    );
     this.network.check();
-    if (this.disposed || this.initialIntent !== intent || this.allocation !== previous || this.view !== current) {
-      throw new ConversationUnavailable('superseded-allocation-receipt');
+    if (
+      this.disposed ||
+      this.initialIntent !== intent ||
+      this.allocation !== previous ||
+      this.view !== current
+    ) {
+      throw new ConversationUnavailable("superseded-allocation-receipt");
     }
-    if ('error' in value) throw new ConversationUnavailable(value.error.code);
-    if (previous && stableStringify(previous.allocation) !== stableStringify(value.allocation)) {
-      throw new ConversationUnavailable('INITIAL_INPUT_RECEIPT_DRIFT');
+    if ("error" in value) throw new ConversationUnavailable(value.error.code);
+    if (
+      previous &&
+      stableStringify(previous.allocation) !== stableStringify(value.allocation)
+    ) {
+      throw new ConversationUnavailable("INITIAL_INPUT_RECEIPT_DRIFT");
     }
     this.allocation = value;
   }
   private async admitRetained(onDispatch: () => void) {
-    const current = this.view, previous = this.inputReceipt, intent = this.intent!;
-    const initial = this.initialIntent, allocation = this.allocation;
-    if (initial && !allocation) throw new ConversationUnavailable('no-initial-input-allocation');
-    const response = await this.network.json(conversationInputMetadata.routes.admit.path, bytes(intent), onDispatch);
+    const current = this.view,
+      previous = this.inputReceipt,
+      intent = this.intent!;
+    const initial = this.initialIntent,
+      allocation = this.allocation;
+    if (initial && !allocation)
+      throw new ConversationUnavailable("no-initial-input-allocation");
+    const response = await this.network.json(
+      conversationInputMetadata.routes.admit.path,
+      bytes(intent),
+      onDispatch,
+    );
     const value = initial
-      ? await receiveAllocatedConversationInputResponse(response.status, response.bytes, initial, this.inputContext(), allocation!)
-      : await receiveConversationInputResponse(response.status, response.bytes, intent, this.inputContext(), current ?? previous);
+      ? await receiveAllocatedConversationInputResponse(
+          response.status,
+          response.bytes,
+          initial,
+          this.inputContext(),
+          allocation!,
+        )
+      : await receiveConversationInputResponse(
+          response.status,
+          response.bytes,
+          intent,
+          this.inputContext(),
+          current ?? previous,
+        );
     this.network.check();
-    if (this.disposed || this.view !== current || this.inputReceipt !== previous || this.allocation !== allocation) throw new ConversationUnavailable('superseded-input-receipt');
-    if ('error' in value) throw new ConversationUnavailable(value.error.code);
+    if (
+      this.disposed ||
+      this.view !== current ||
+      this.inputReceipt !== previous ||
+      this.allocation !== allocation
+    )
+      throw new ConversationUnavailable("superseded-input-receipt");
+    if ("error" in value) throw new ConversationUnavailable(value.error.code);
     this.inputReceipt = value;
   }
   private async sendRetained(previouslyUnknown = false) {
     const intent = this.intent!;
     let dispatched = false;
-    this.publish({ submit: 'pending' });
+    this.publish({ submit: "pending" });
     try {
-      if (this.initialIntent) await this.allocateRetained(() => { dispatched = true; });
-      await this.admitRetained(() => { dispatched = true; });
-      const view = await this.receive('submit', intent, () => { dispatched = true; });
+      if (this.initialIntent)
+        await this.allocateRetained(() => {
+          dispatched = true;
+        });
+      await this.admitRetained(() => {
+        dispatched = true;
+      });
+      const view = await this.receive("submit", intent, () => {
+        dispatched = true;
+      });
       // An ACK carries no historical events. Preserve any already observed prefix and cursor.
-      if (this.observation && this.state.status === 'ready' && this.state.observation === this.observation.snapshot) this.view = view;
+      if (
+        this.observation &&
+        this.state.status === "ready" &&
+        this.state.observation === this.observation.snapshot
+      )
+        this.view = view;
       else this.bind(view);
-      this.publish({ submit: 'observed' });
+      this.publish({ submit: "observed" });
       return this.getSnapshot();
     } catch (error) {
       if (!dispatched && !previouslyUnknown) {
-        this.intent = undefined; this.initialIntent = undefined; this.allocation = undefined;
+        this.intent = undefined;
+        this.initialIntent = undefined;
+        this.allocation = undefined;
       }
-      this.publish({ submit: dispatched || previouslyUnknown ? 'unknown' : 'idle' });
+      this.publish({
+        submit: dispatched || previouslyUnknown ? "unknown" : "idle",
+      });
       throw error;
-    } finally { this.busy = false; }
+    } finally {
+      this.busy = false;
+    }
   }
   history = async (input: ConversationHistoryRequest = {}) => {
-    const request = receiveConversationRequest('history', bytes(input));
-    this.start(); this.detach(); this.publish({ status: 'loading', observation: null });
+    const request = receiveConversationRequest("history", bytes(input));
+    this.start();
+    this.detach();
+    this.publish({ status: "loading", observation: null });
     try {
-      const view = await this.receive('history', request);
+      const view = await this.receive("history", request);
       this.bind(view);
       return this.getSnapshot();
-    } catch (error) { this.publish({ status: 'unavailable', observation: null }); throw error; }
-    finally { this.busy = false; }
+    } catch (error) {
+      this.publish({ status: "unavailable", observation: null });
+      throw error;
+    } finally {
+      this.busy = false;
+    }
   };
   cancel = async () => {
-    if (!this.view) throw new ConversationUnavailable('no-admitted-run');
-    const request = receiveConversationRequest('cancel', bytes({}));
-    this.start(); let dispatched = false;
-    const previouslyUnknown = this.state.cancel === 'unknown';
-    this.publish({ cancel: 'pending', cancelReceipt: null });
+    if (!this.view) throw new ConversationUnavailable("no-admitted-run");
+    const request = receiveConversationRequest("cancel", bytes({}));
+    this.start();
+    let dispatched = false;
+    const previouslyUnknown = this.state.cancel === "unknown";
+    this.publish({ cancel: "pending", cancelReceipt: null });
     try {
-      const receipt = await this.receive('cancel', request, () => { dispatched = true; });
-      this.publish({ cancel: 'observed', cancelReceipt: receipt }); return receipt;
-    } catch (error) { this.publish({ cancel: dispatched || previouslyUnknown ? 'unknown' : 'idle' }); throw error; }
-    finally { this.busy = false; }
+      const receipt = await this.receive("cancel", request, () => {
+        dispatched = true;
+      });
+      this.publish({ cancel: "observed", cancelReceipt: receipt });
+      return receipt;
+    } catch (error) {
+      this.publish({
+        cancel: dispatched || previouslyUnknown ? "unknown" : "idle",
+      });
+      throw error;
+    } finally {
+      this.busy = false;
+    }
   };
   openChat = (): ConversationChat => {
     this.network.check();
     const observation = this.observation;
-    if (this.busy || this.state.status !== 'ready' || !observation) throw new ConversationUnavailable('no-current-observation');
+    if (this.busy || this.state.status !== "ready" || !observation)
+      throw new ConversationUnavailable("no-current-observation");
     if (!this.handle || this.handle.transport.isClosed) {
-      this.handle = conversationChat(this.network, observation, () => !this.disposed && this.observation === observation && this.state.status === 'ready');
+      this.handle = conversationChat(
+        this.network,
+        observation,
+        () =>
+          !this.disposed &&
+          this.observation === observation &&
+          this.state.status === "ready",
+      );
     }
     return this.handle;
   };
@@ -246,9 +444,14 @@ class ConversationConnection {
 export function createMeriConversation(options: ConversationLifetime) {
   const connection = new ConversationConnection(options);
   return Object.freeze({
-    getSnapshot: connection.getSnapshot, subscribe: connection.subscribe,
-    submit: connection.submit, submitInitial: connection.submitInitial, retrySubmit: connection.retrySubmit,
-    history: connection.history, cancel: connection.cancel,
-    openChat: connection.openChat, dispose: connection.dispose,
+    getSnapshot: connection.getSnapshot,
+    subscribe: connection.subscribe,
+    submit: connection.submit,
+    submitInitial: connection.submitInitial,
+    retrySubmit: connection.retrySubmit,
+    history: connection.history,
+    cancel: connection.cancel,
+    openChat: connection.openChat,
+    dispose: connection.dispose,
   });
 }

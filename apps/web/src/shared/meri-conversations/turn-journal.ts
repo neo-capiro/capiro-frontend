@@ -58,7 +58,7 @@ function requirePreviousTarget(
 export function conversationTurnJournal(
   cache: QueryClient,
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId: string,
   storage?: TabStorage,
 ) {

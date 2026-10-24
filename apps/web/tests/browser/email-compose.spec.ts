@@ -44,6 +44,7 @@ async function setup(
     scan?: boolean;
     sendStatus?: number;
     badReceipt?: boolean;
+    wrongRequestKey?: boolean;
     role?: string;
     replyClient?: string;
     holdPrepare?: boolean;
@@ -139,13 +140,24 @@ async function setup(
       ]);
     }
     if (path === "engagement/mail/send") {
-      sent.push(route.request().postDataJSON());
+      expect(route.request().method()).toBe("POST");
+      const input = route.request().postDataJSON();
+      sent.push(input);
+      if (options.wrongRequestKey) expect(input.requestKey).not.toBe(other);
       return json(
         options.badReceipt
           ? { ok: true }
           : options.sendStatus
             ? { message: "Delivery could not be confirmed" }
-            : { ok: true, threadId: id, messageId: other, ...sendingReceipt },
+            : {
+                ok: true,
+                intentId: id,
+                requestKey: options.wrongRequestKey ? other : input.requestKey,
+                state: "accepted",
+                threadId: id,
+                messageId: other,
+                ...sendingReceipt,
+              },
         options.sendStatus ?? 200,
       );
     }
@@ -216,6 +228,9 @@ test("explicit mailbox B is shown in review and confirmed by its exact sender re
     return route.fulfill({
       json: {
         ok: true,
+        intentId: id,
+        requestKey: body.requestKey,
+        state: "accepted",
         threadId: id,
         messageId: other,
         ...sendingReceipt,
@@ -473,13 +488,17 @@ test("oversize file refuses before prepare and draft removal never deletes Files
     page.getByRole("button", { name: "Review email", exact: true }),
   ).toBeEnabled();
 });
-for (const status of [503, 200])
+for (const status of [503, 200, "wrong-key"] as const)
   test(`uncertain or malformed receipt freezes send attempt (${status})`, async ({
     page,
   }) => {
     const state = await setup(
       page,
-      status === 503 ? { sendStatus: 503 } : { badReceipt: true },
+      status === 503
+        ? { sendStatus: 503 }
+        : status === "wrong-key"
+          ? { wrongRequestKey: true }
+          : { badReceipt: true },
     );
     await compose(page);
     await page

@@ -60,6 +60,11 @@ test("actual Add profile keeps creation reachable around an optional billing dis
   expect(
     await dialog.evaluate((node) => node.scrollWidth <= node.clientWidth),
   ).toBe(true);
+  expect(
+    await dialog.evaluate(
+      (node) => node.getBoundingClientRect().bottom <= innerHeight,
+    ),
+  ).toBe(true);
   await dialog.screenshot({
     path: info.outputPath("billing-chooser-mobile-dark.png"),
   });

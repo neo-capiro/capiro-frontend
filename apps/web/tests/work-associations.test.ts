@@ -21,16 +21,28 @@ const draft: WorkspaceDraft = {
 
 describe("Workspace canonical client association", () => {
   it("holds name-only legacy content even when the name is unique", () => {
-    expect(clientDrafts([{ ...draft, clientId: undefined }], current, [current])).toEqual([]);
+    expect(
+      clientDrafts([{ ...draft, clientId: undefined }], current, [current]),
+    ).toEqual([]);
   });
   it("does not transfer a same-name document with a different UUID", () => {
-    expect(clientDrafts([{ ...draft, clientId: "10000000-0000-4000-8000-000000000002" }], current, [current])).toEqual([]);
+    expect(
+      clientDrafts(
+        [{ ...draft, clientId: "10000000-0000-4000-8000-000000000002" }],
+        current,
+        [current],
+      ),
+    ).toEqual([]);
   });
   it("retains UUID-bound documents through rename and duplicate names", () => {
     const renamed = { ...draft, client: "Former name" };
-    expect(clientDrafts([renamed], current, [current, {...current, id: "other"}])).toEqual([renamed]);
+    expect(
+      clientDrafts([renamed], current, [current, { ...current, id: "other" }]),
+    ).toEqual([renamed]);
   });
   it("keeps prospect content out even if client UUID is supplied", () => {
-    expect(clientDrafts([{ ...draft, prospectId: "prospect" }], current, [current])).toEqual([]);
+    expect(
+      clientDrafts([{ ...draft, prospectId: "prospect" }], current, [current]),
+    ).toEqual([]);
   });
 });

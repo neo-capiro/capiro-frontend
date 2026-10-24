@@ -19,14 +19,17 @@ const meeting = {
 for (const foreign of [
   { id: "foreign" },
   { client: { id: "foreign", name: "Other" } },
+  { client: null },
 ]) {
   test(`foreign meeting receipt retains editor: ${JSON.stringify(foreign)}`, async ({
     page,
   }) => {
     await installFixtures(page);
-    await page.route("**/core/engagement/meetings/meeting-one", (route) =>
-      json(route, { ...meeting, ...foreign }),
-    );
+    await page.route("**/core/engagement/meetings/meeting-one", (route) => {
+      expect(route.request().method()).toBe("PUT");
+      expect(route.request().postDataJSON()).not.toHaveProperty("clientId");
+      return json(route, { ...meeting, ...foreign });
+    });
     await page.goto("/calendar-meeting-receipts.html");
     await page.getByRole("button", { name: "Save meeting" }).click();
     await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(

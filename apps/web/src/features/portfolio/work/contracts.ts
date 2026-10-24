@@ -56,7 +56,9 @@ export function clientDrafts(
   client: { id: string; name: string },
   _clients: { id: string; name: string }[],
 ) {
-  return drafts.filter((draft) => !draft.prospectId && draft.clientId === client.id);
+  return drafts.filter(
+    (draft) => !draft.prospectId && draft.clientId === client.id,
+  );
 }
 export function workProjection(strategies: StrategyDetail[], today: string) {
   const date = new Date(`${today}T00:00:00Z`);

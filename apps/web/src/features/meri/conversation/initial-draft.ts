@@ -9,7 +9,7 @@ import {
   type TabScope,
   type TabStorage,
 } from "../../../shared/meri-conversations/tab-journal";
-import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
+import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 
 const capture = z.strictObject({
@@ -31,7 +31,7 @@ const empty = (): DraftState => ({
   pending: null,
   reserved: null,
 });
-const runKey = (context: ActionContext) =>
+const runKey = (context: ConversationContext) =>
   JSON.stringify([
     context.tenantId,
     context.actorId,
@@ -87,7 +87,7 @@ class DraftOwner {
   };
   draft = () => this.state.draft;
   revision = () => this.state.revision;
-  private check(context?: ActionContext) {
+  private check(context?: ConversationContext) {
     if (
       this.error() ||
       (context &&
@@ -127,7 +127,7 @@ class DraftOwner {
     }
   }
   begin(
-    context: ActionContext,
+    context: ConversationContext,
     request: ConversationSubmitRequest,
     draft: string,
     capturedRevision = this.state.revision,
@@ -148,7 +148,7 @@ class DraftOwner {
       throw new TabJournalUnavailable();
     this.save({ ...this.state, pending, reserved: null });
   }
-  select(context: ActionContext) {
+  select(context: ConversationContext) {
     this.check(context);
     if (
       this.state.pending &&
@@ -167,7 +167,7 @@ class DraftOwner {
       },
     });
   }
-  bindNext(context: ActionContext, request: ConversationSubmitRequest) {
+  bindNext(context: ConversationContext, request: ConversationSubmitRequest) {
     const captured = this.state.reserved;
     if (captured && captured.request !== submissionIdentity(request)) return;
     if (captured)
@@ -185,10 +185,10 @@ class DraftOwner {
     this.blocked = true;
     this.changed();
   }
-  hasPending = (context: ActionContext) =>
+  hasPending = (context: ConversationContext) =>
     this.state.pending?.run === runKey(context);
   acknowledge(
-    context: ActionContext,
+    context: ConversationContext,
     submit: ConversationIntent["submit"],
     draft: string,
   ) {

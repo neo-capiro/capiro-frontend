@@ -40,11 +40,6 @@ export function WorkspaceDocuments({
     drafts !== undefined;
   const rows = complete ? clientDrafts(drafts, currentClient, catalog) : [];
   const draftCount = rows.filter((row) => row.status === "draft").length;
-  const ambiguous =
-    currentClient &&
-    catalog &&
-    catalog.filter((candidate) => candidate.name === currentClient.name)
-      .length > 1;
   return (
     <section className={styles.section} aria-label="Workspace documents">
       <header className={styles.header}>
@@ -85,10 +80,8 @@ export function WorkspaceDocuments({
         />
       )}
       <p className={styles.association}>
-        Workspace associates legacy documents by client name. Renamed clients
-        may have missing documents.
-        {ambiguous &&
-          " This name is shared by multiple clients; documents cannot be safely assigned here."}
+        Only documents linked to this client are shown. Matching client names do
+        not establish a link.
       </p>
     </section>
   );

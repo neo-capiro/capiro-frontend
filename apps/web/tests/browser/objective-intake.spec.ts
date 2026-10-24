@@ -251,7 +251,7 @@ test("a mismatched client response cannot populate or authorize the new objectiv
   );
   await page.goto("/__test/objective-session?new=1");
   await expect(page.getByRole("alert")).toContainText(
-    "did not confirm the selected client",
+    "The service returned an unexpected response. Please retry or contact support.",
   );
   await expect(
     page.getByRole("region", { name: "New objective", exact: true }),

@@ -19,13 +19,14 @@ export type IntentRow = Readonly<{
   /** Present only for a visible command proposal; the exact content the server retained. */
   proposal: IntentsProposal | null;
   fields: readonly IntentField[];
-  /** The executor's observed result for a completed task.create. */
+  /** The owner's observed task or published document result. */
   result: readonly IntentField[];
 }>;
 export type Viewer = Readonly<{ tenantId: string; actorId: string }>;
 
 const operationLabels: Readonly<Record<string, string>> = {
   create_task: "Create a task",
+  create_word: "Prepare a document",
   update_task: "Update a task",
   save_memory: "Save to memory",
   save_chat_attachments: "File chat attachments",
@@ -34,6 +35,7 @@ const operationLabels: Readonly<Record<string, string>> = {
 };
 const actionLabels: Readonly<Record<string, string>> = {
   "task.create": "Create a task",
+  "document.draft": "Prepare a document",
   "memory.propose": "Propose a memory for review",
   "artifact.file": "File attachments to a client",
 };
@@ -90,6 +92,15 @@ type Completed = Extract<
   { state: "completed" }
 >;
 function resultFields(execution: Completed): readonly IntentField[] {
+  if ("version" in execution.outcome) {
+    const { version } = execution.outcome;
+    return [
+      { label: "Document prepared", value: version.filename },
+      { label: "Version", value: version.versionId },
+      { label: "Bytes", value: String(version.object.bytes) },
+      { label: "Created", value: version.createdAt },
+    ];
+  }
   const { receipt, result } = execution.outcome;
   return [
     { label: "Task created", value: result.title },

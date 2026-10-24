@@ -7,6 +7,10 @@ const mocks = vi.hoisted(() => ({
   query: {} as Record<string, unknown>,
   selected: { state: "no-selection" } as Record<string, unknown>,
   useClients: vi.fn(),
+  search: "",
+}));
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams(mocks.search),
 }));
 vi.mock("../src/shared/portfolio/api/clients", () => ({
   useClients: (options: unknown) => {
@@ -26,6 +30,7 @@ afterEach(() => {
   mocks.query = {};
   mocks.selected = { state: "no-selection" };
   mocks.useClients.mockClear();
+  mocks.search = "";
 });
 
 it("offers only returned, nonarchived clients as explicit Meri route choices", () => {
@@ -66,9 +71,21 @@ it("shows an empty roster without selecting a client", () => {
     createElement(MeriClientSelector, { scope }),
   );
 
-  expect(html).toContain("Choose client");
+  expect(html).toContain("Choose scope");
   expect(html).toContain("No available clients were returned");
   expect(html).not.toContain('href="/meri?clientId=');
+});
+
+it("preserves explicit General navigation without selecting a client", () => {
+  mocks.search = "scope=general";
+  mocks.query = { isSuccess: true, isFetching: false, data: [] };
+  const html = renderToStaticMarkup(
+    createElement(MeriClientSelector, { scope }),
+  );
+  expect(html).toContain('href="/meri?scope=general"');
+  expect(html).toContain('aria-current="page"');
+  expect(html).not.toContain('href="/meri?clientId=');
+  expect(mocks.selected).toEqual({ state: "no-selection" });
 });
 
 it("keeps the roster unavailable when identity or the list is not verified", () => {

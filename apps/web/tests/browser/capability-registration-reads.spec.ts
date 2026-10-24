@@ -59,7 +59,9 @@ test("registration read rejects a successful response for another native client"
     }),
   );
   const dialog = await openRegistrations(page);
-  await expect(dialog.getByRole("alert")).toContainText("another client");
+  await expect(dialog.getByRole("alert")).toContainText(
+    "The service returned an unexpected response. Please retry or contact support.",
+  );
   await expect(
     dialog.getByText(registrationClient.uei, { exact: true }),
   ).toHaveCount(0);

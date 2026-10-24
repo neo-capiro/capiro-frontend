@@ -1,6 +1,9 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
-import type { IntentsItem } from "@capiro/meri-client/intents";
+import {
+  receiveIntentsResponse,
+  type IntentsItem,
+} from "@capiro/meri-client/intents";
 import {
   intentRow,
   intentRows,
@@ -137,4 +140,73 @@ it("refusal messages are plain and keep the code", () => {
     "This proposal has expired. Nothing was executed. (INTENT_EXPIRED)",
   );
   expect(refusalMessage("SOMETHING_NEW")).toContain("(SOMETHING_NEW)");
+});
+
+it("canonical document publication renders file facts without inventing task or renderer results", async () => {
+  const fixture = wire("documentPublished");
+  const received = await receiveIntentsResponse(
+    "list",
+    200,
+    JSON.stringify(fixture.response),
+    { request: fixture.request },
+  );
+  if ("error" in received) throw Error("Unexpected refusal");
+  const row = intentRow(received.intents[0]!, now, viewer);
+  expect(row).toMatchObject({
+    title: "Prepare a document",
+    status: "Completed",
+    decision: "closed",
+  });
+  expect(
+    Object.fromEntries(row.result.map((field) => [field.label, field.value])),
+  ).toEqual({
+    "Document prepared": "Selected document.docx",
+    Version: "00000000-0000-4000-8000-000000000201",
+    Bytes: "200",
+    Created: "2026-10-12T20:00:00.000Z",
+  });
+  expect(
+    row.result.some((field) => /Task|render|qualified/i.test(field.label)),
+  ).toBe(false);
+  const item = fixture.response.intents[0];
+  // Approval without publication stays visibly unconfirmed, with no invented result.
+  item.phase = "approved";
+  item.execution = null;
+  const approved = await receiveIntentsResponse(
+    "list",
+    200,
+    JSON.stringify(fixture.response),
+    { request: fixture.request },
+  );
+  if ("error" in approved) throw Error("Unexpected refusal");
+  expect(intentRow(approved.intents[0]!, now, viewer)).toMatchObject({
+    status: "Approved",
+    result: [],
+    decision: "closed",
+  });
+});
+
+it("document publication is refused before display for foreign scope, uncommitted output or false qualification", async () => {
+  for (const mutate of [
+    (outcome: ReturnType<typeof wire>) => {
+      outcome.version.binding.actorId = "another-actor";
+    },
+    (outcome: ReturnType<typeof wire>) => {
+      outcome.version.scopes[0].resourceId = "another-scope";
+    },
+    (outcome: ReturnType<typeof wire>) => {
+      outcome.execution.versionCommitted = false;
+    },
+    (outcome: ReturnType<typeof wire>) => {
+      outcome.execution.nativeQualified = true;
+    },
+  ]) {
+    const fixture = wire("documentPublished");
+    mutate(fixture.response.intents[0].execution.outcome);
+    await expect(
+      receiveIntentsResponse("list", 200, JSON.stringify(fixture.response), {
+        request: fixture.request,
+      }),
+    ).rejects.toThrow();
+  }
 });

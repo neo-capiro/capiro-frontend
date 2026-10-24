@@ -88,8 +88,10 @@ test("actual client Calendar retains uncertain import across view changes withou
     .getByRole("button", { name: "Close", exact: true })
     .click();
   await page
-    .getByRole("combobox", { name: "Calendar view", exact: true })
-    .selectOption("week");
+    .getByRole("group", { name: "Calendar view", exact: true })
+    .getByRole("button", { name: "Week", exact: true })
+    .click();
+  await expect(page).toHaveURL(/view=week/);
   await page
     .getByRole("button", { name: "Sync calendar", exact: true })
     .click();

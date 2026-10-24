@@ -469,8 +469,9 @@ test("comprehensive briefing renders saved coverage and linked source quotations
       },
     ],
   };
-  await page.route(`**/core/engagement/meetings/${meetingId}`, (route) =>
-    json(route, response),
+  await page.route(
+    `**/core/engagement/meetings/${meetingId}?clientId=${clientId}`,
+    (route) => json(route, response),
   );
   const drawer = await open();
   await expect(
@@ -496,22 +497,24 @@ test("institutional draft remains in its originating review flow and omitted sha
   page,
 }) => {
   const { meeting, open, unexpected } = await fixture(page);
-  await page.route(`**/core/engagement/meetings/${meetingId}`, (route) =>
-    json(route, {
-      ...meeting,
-      preps: [
-        {
-          ...initialPrep,
-          sharedAt: undefined,
-          status: "edited",
-          generatedFrom: {
-            schemaVersion: "research_portfolio_institutional_v1",
-            briefing: true,
-            reviewStatus: "unreviewed_draft",
+  await page.route(
+    `**/core/engagement/meetings/${meetingId}?clientId=${clientId}`,
+    (route) =>
+      json(route, {
+        ...meeting,
+        preps: [
+          {
+            ...initialPrep,
+            sharedAt: undefined,
+            status: "edited",
+            generatedFrom: {
+              schemaVersion: "research_portfolio_institutional_v1",
+              briefing: true,
+              reviewStatus: "unreviewed_draft",
+            },
           },
-        },
-      ],
-    }),
+        ],
+      }),
   );
   const drawer = await open();
   await expect(
@@ -549,8 +552,9 @@ test("structured email evidence retains attribution through unrelated edits and 
     },
   ];
   const savedPrep = { ...initialPrep, emailEvidence: evidence };
-  await page.route(`**/core/engagement/meetings/${meetingId}`, (route) =>
-    json(route, { ...meeting, preps: [savedPrep] }),
+  await page.route(
+    `**/core/engagement/meetings/${meetingId}?clientId=${clientId}`,
+    (route) => json(route, { ...meeting, preps: [savedPrep] }),
   );
   const payloads: unknown[] = [];
   await page.route(

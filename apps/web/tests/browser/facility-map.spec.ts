@@ -115,7 +115,9 @@ test("real coordinate pins, keyboard district selection, pan/zoom and source-bac
   await expect(detail).toContainText("Test Representative");
   await expect(detail).toContainText("12");
   await expect(
-    detail.getByRole("link", { name: "Open relationships" }),
+    detail
+      .getByRole("region", { name: "Location and geography", exact: true })
+      .getByRole("link", { name: "Open relationships", exact: true }),
   ).toHaveAttribute(
     "href",
     `/portfolio/${clientId}/relationships?kind=government`,

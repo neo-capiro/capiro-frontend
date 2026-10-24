@@ -27,6 +27,21 @@ export function useRunObservation(
     const controller = new AbortController();
     loop.current = controller;
     const current = () => alive.current && loop.current === controller;
+    let after = port.getSnapshot().observation?.after ?? 0;
+    // A recovered window can remain open for 30 s after admitting an event.
+    const unsubscribe = port.subscribe(() => {
+      if (!current()) return;
+      const observed = port.getSnapshot().observation;
+      if (observed && observed.after > after) {
+        after = observed.after;
+        setState(isSettled(observed.runState) ? "settled" : "live");
+      }
+    });
+    const detach = () => {
+      unsubscribe();
+      controller.signal.removeEventListener("abort", detach);
+    };
+    controller.signal.addEventListener("abort", detach, { once: true });
     void observeUntilSettled({
       signal: controller.signal,
       settled: () => isSettled(port.getSnapshot().observation?.runState),
@@ -43,11 +58,13 @@ export function useRunObservation(
         if (handle.chat.error)
           throw new ConversationUnavailable("subscription-unavailable");
       },
-    }).then((outcome) => {
-      if (loop.current !== controller) return;
-      loop.current = null;
-      if (alive.current) setState(outcome);
-    });
+    })
+      .finally(detach)
+      .then((outcome) => {
+        if (loop.current !== controller) return;
+        loop.current = null;
+        if (alive.current) setState(outcome);
+      });
   };
   const stop = () => {
     loop.current?.abort();

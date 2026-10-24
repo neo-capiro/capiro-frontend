@@ -11,6 +11,8 @@ const messages: Record<DocumentProblem, string> = {
     "No result was released. This does not prove that the write did not happen.",
   "read-unavailable":
     "The current version could not be read. Previously displayed version actions and downloads have been removed.",
+  "native-revision-unavailable":
+    "This is a stored workspace file. It can be downloaded from the conversation, but it is not a generated document revision target.",
   "access-lost":
     "Current access is unavailable. Version actions and downloads have been removed. A new verified connection is required.",
   "invalid-response":

@@ -3,6 +3,7 @@ export type DocumentProblem =
   | "unknown"
   | "result-withheld"
   | "read-unavailable"
+  | "native-revision-unavailable"
   | "access-lost"
   | "invalid-response";
 

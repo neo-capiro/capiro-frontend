@@ -1,3 +1,4 @@
+import { nativeInspection } from "./meri-document-access-fixtures";
 import { describe, expect, it, vi } from "vitest";
 import {
   receiveDocumentRequest,
@@ -465,4 +466,47 @@ describe("synchronous write fences and current lifetime", () => {
       expect(f.fetcher).toHaveBeenCalledTimes(2);
     },
   );
+});
+
+it("refuses native workspace revision targets explicitly without dispatching a generated write", async () => {
+  const f = fixture(),
+    port = f.workflow();
+  f.responses.push(jsonResponse(nativeInspection()));
+  expect(await port.inspectVersion(ids.version, signal())).toEqual({
+    ok: false,
+    problem: "native-revision-unavailable",
+  });
+  expect(await port.revise({}, textContent, signal())).toEqual({
+    ok: false,
+    problem: "not-dispatched",
+  });
+  expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([
+    "/api/documents/inspect",
+  ]);
+  expect(f.journal.read().status).toBe("idle");
+});
+it("inspecting a native file does not resolve an uncertain generated write", async () => {
+  const f = fixture(),
+    port = f.workflow();
+  f.journal.write({
+    status: "unresolved",
+    fingerprints: ["a".repeat(64)],
+    attemptId: "uncertain-delivery",
+    problem: "unknown",
+  });
+  f.responses.push(jsonResponse(nativeInspection()));
+  expect(await port.inspectVersion(ids.version, signal())).toEqual({
+    ok: false,
+    problem: "native-revision-unavailable",
+  });
+  expect(f.journal.read()).toMatchObject({
+    status: "unresolved",
+    attemptId: "uncertain-delivery",
+    problem: "unknown",
+  });
+  expect(await port.create(textContent, signal())).toEqual({
+    ok: false,
+    problem: "unknown",
+  });
+  expect(f.fetcher).toHaveBeenCalledTimes(1);
 });

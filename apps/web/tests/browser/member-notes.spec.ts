@@ -1,5 +1,5 @@
 import { test, expect, type Page, type Route } from "@playwright/test";
-import { clientId, installFixtures } from "./fixtures";
+import { client, clientId, installFixtures } from "./fixtures";
 import {
   governmentTarget,
   installGovernmentFixtures,
@@ -148,11 +148,20 @@ test("global entry searches real members, preserves Client handoff and closes wi
     .getByRole("combobox", { name: "Client", exact: true })
     .selectOption(clientId);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
-  await expect(page).toHaveURL(`/portfolio/${clientId}?log=1`);
+  await expect(page).toHaveURL("/portfolio?log=1&keep=scope");
+  const clientLog = page.getByRole("dialog", {
+    name: "Quick log",
+    exact: true,
+  });
   await expect(
-    page.getByRole("textbox", { name: "Title", exact: true }),
+    clientLog.getByText(`Files to: ${client.name} timeline`, { exact: true }),
+  ).toBeVisible();
+  await expect(
+    clientLog.getByRole("textbox", { name: "Title", exact: true }),
   ).toBeVisible();
   await page.keyboard.press("Escape");
+  await expect(clientLog).toHaveCount(0);
+  await expect(page).toHaveURL("/portfolio?keep=scope");
   expect(writes).toEqual([]);
   expect(unexpected).toEqual([]);
 });

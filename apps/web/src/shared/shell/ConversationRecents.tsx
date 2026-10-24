@@ -1,6 +1,7 @@
 "use client";
 import { useContext } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../portfolio/auth/identity";
 import { SessionContext } from "../session/SessionContext";
 import { useSelectedClient } from "../session/SelectedClient";
@@ -24,19 +25,32 @@ export function ConversationRecents(props: Props) {
 function VerifiedRecents(props: Props) {
   const identity = useIdentity(),
     selected = useSelectedClient();
+  const params = useSearchParams();
+  const general =
+    params.getAll("scope").length === 1 &&
+    params.get("scope") === "general" &&
+    !params.has("clientId");
   const current =
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
       : undefined;
-  if (!current?.tenant?.id || selected.state !== "authorized-client")
+  if (
+    !current?.tenant?.id ||
+    (!general && selected.state !== "authorized-client")
+  )
     return <p>A verified account and current client are required.</p>;
   const account = { tenantId: current.tenant.id, actorId: current.user.id };
+  const clientId = general
+    ? null
+    : selected.state === "authorized-client"
+      ? selected.client.id
+      : null;
   return (
     <RecentLinks
-      key={JSON.stringify([account, selected.client.id])}
+      key={JSON.stringify([account, clientId])}
       {...props}
       account={account}
-      clientId={selected.client.id}
+      clientId={clientId}
     />
   );
 }
@@ -46,7 +60,7 @@ function RecentLinks({
   clientId,
   className,
   onNavigate,
-}: Props & { account: ConversationAccount; clientId: string }) {
+}: Props & { account: ConversationAccount; clientId: string | null }) {
   const { query, conversations, unavailable } = useConversationDiscovery(
     account,
     clientId,
@@ -69,7 +83,7 @@ function RecentLinks({
             <Link
               key={conversation.conversationId}
               className={className}
-              href={`/meri?${new URLSearchParams({ clientId, conversationId: conversation.conversationId })}`}
+              href={`/meri?${new URLSearchParams({ ...(clientId === null ? { scope: "general" } : { clientId }), conversationId: conversation.conversationId })}`}
               onClick={onNavigate}
             >
               Conversation ·{" "}
@@ -82,7 +96,11 @@ function RecentLinks({
             </Link>
           ))}
           {!conversations.length && (
-            <p>No conversations for this client in the loaded pages.</p>
+            <p>
+              {clientId === null
+                ? "No General conversations in the loaded pages."
+                : "No conversations for this client in the loaded pages."}
+            </p>
           )}
         </>
       )}

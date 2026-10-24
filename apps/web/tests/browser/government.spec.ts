@@ -210,7 +210,20 @@ test("state target details preserve encoded identity; tier clearing, reviewed ma
   let target: Omit<typeof stateTarget, "tier"> & { tier: number | null } =
     stateTarget;
   let mails = 0;
+  let requestKey: string | undefined;
+  const recoveryKeys: string[] = [];
   let removals = 0;
+  await page.route("**/engagement/mail/send-intents/*", (route) => {
+    if (route.request().method() !== "GET") return route.fallback();
+    recoveryKeys.push(
+      new URL(route.request().url()).pathname.split("/").at(-1)!,
+    );
+    return json(
+      route,
+      { message: "Synthetic delivery readback unavailable" },
+      503,
+    );
+  });
   await page.route(`**/clients/${clientId}/targets**`, (route) => {
     const method = route.request().method();
     if (method === "PATCH") {
@@ -231,8 +244,10 @@ test("state target details preserve encoded identity; tier clearing, reviewed ma
     return json(route, [governmentTarget, target]);
   });
   await page.route("**/engagement/mail/send", (route) => {
+    expect(route.request().method()).toBe("POST");
     mails++;
     const body = route.request().postDataJSON();
+    requestKey = body.requestKey;
     expect(body).toMatchObject({
       clientId,
       to: [{ email: "state@example.test", name: stateTarget.memberName }],
@@ -265,6 +280,9 @@ test("state target details preserve encoded identity; tier clearing, reviewed ma
   const review = page.getByRole("dialog", { name: "Send email", exact: true });
   await review.getByRole("button", { name: "Send email", exact: true }).click();
   await expect(review.getByText("Test provider unavailable")).toBeVisible();
+  await expect(
+    review.getByRole("button", { name: "Send email", exact: true }),
+  ).toBeDisabled();
   expect(mails).toBe(1);
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
@@ -278,5 +296,7 @@ test("state target details preserve encoded identity; tier clearing, reviewed ma
   await remove.getByRole("button", { name: "Confirm removal" }).click();
   await expect(remove.getByText("Removal unavailable")).toBeVisible();
   expect(removals).toBe(1);
+  await expect.poll(() => recoveryKeys).toEqual([requestKey]);
+  expect(mails).toBe(1);
   expect(unexpected).toEqual([]);
 });

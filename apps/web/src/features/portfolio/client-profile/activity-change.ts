@@ -71,8 +71,14 @@ export async function changeActivity(
     );
   if (change.action === "pin" && expected.kind !== "note")
     throw new ApiError(400, "Only recorded notes can be pinned here.");
-  if (change.action === "settle" && !["commitment", "request"].includes(expected.kind))
-    throw new ApiError(400, "Only a recorded commitment or request can be settled.");
+  if (
+    change.action === "settle" &&
+    !["commitment", "request"].includes(expected.kind)
+  )
+    throw new ApiError(
+      400,
+      "Only a recorded commitment or request can be settled.",
+    );
   const fields =
     change.action === "edit"
       ? activityEditSchema.parse(change.fields)

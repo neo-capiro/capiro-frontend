@@ -21,6 +21,8 @@ import { governedObjectiveStrategyIntakeOperation } from "./operations/objective
 import {
   firstChatCoreOperation,
   firstChatCoreOperationKey,
+  firstChatV2Operation,
+  firstChatV2OperationKey,
 } from "./operations/meri-first-chat";
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
@@ -47,4 +49,5 @@ export const capiroOperations = {
   "objectives.governedStrategy.intake":
     governedObjectiveStrategyIntakeOperation,
   [firstChatCoreOperationKey]: firstChatCoreOperation,
+  [firstChatV2OperationKey]: firstChatV2Operation,
 } as const satisfies OperationRegistry;

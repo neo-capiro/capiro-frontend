@@ -87,7 +87,10 @@ test("compute failure keeps an independently successful fit read available", asy
     "Synthetic computation unavailable",
   );
   await expect(
-    page.getByRole("heading", { name: "1 fit matches" }),
+    page
+      .getByRole("region", { name: "Capability fit", exact: true })
+      .locator("summary")
+      .filter({ hasText: /^1 fit match available$/ }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: "Open target" })).toBeVisible();
   expect(unexpected).toEqual([]);

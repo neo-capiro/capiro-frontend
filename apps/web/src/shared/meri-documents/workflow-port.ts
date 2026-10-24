@@ -9,7 +9,7 @@ export type DocumentReply<T> =
   | { ok: false; problem: DocumentProblem };
 export type DocumentInspection =
   | DocumentCreatedResponse["inspection"]
-  | DocumentInspectionResponse["inspection"];
+  | Exclude<DocumentInspectionResponse, { kind: "native-file" }>["inspection"];
 export type DocumentVersionView = Readonly<{
   handle: object;
   metadata: Readonly<{

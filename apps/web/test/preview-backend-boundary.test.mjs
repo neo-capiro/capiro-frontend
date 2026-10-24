@@ -170,7 +170,15 @@ test("every API handler applies preview admission before any route work", () => 
 });
 
 test("preview policy stays in server entry points with no request-derived configuration", () => {
-  const allowed = new Set([...apiRoutes, join(source, "proxy.ts")]);
+  const capabilityOwner = join(
+    source,
+    "shared/meri-resources/capabilities.server.ts",
+  );
+  const allowed = new Set([
+    ...apiRoutes,
+    join(source, "proxy.ts"),
+    capabilityOwner,
+  ]);
   for (const path of files(source).filter((path) => /\.tsx?$/.test(path))) {
     const ast = parse(path);
     for (const node of ast.statements.filter(ts.isImportDeclaration)) {
@@ -189,4 +197,29 @@ test("preview policy stays in server entry points with no request-derived config
     policy,
     /NEXT_PUBLIC_|fetch\s*\(|headers\s*\(|cookies\s*\(/,
   );
+  const capabilitySource = readFileSync(capabilityOwner, "utf8");
+  assert.doesNotMatch(
+    capabilitySource,
+    /["']use client["']|headers\s*\(|cookies\s*\(|process\.env|fetch\s*\(/,
+  );
+  assert.match(capabilitySource, /previewBackendRejection\(env, request\)/);
+  assert.match(
+    capabilitySource,
+    /servingCheck\(env, config\.requestOrigin, held\)/,
+  );
+  const consumers = files(source).filter(
+    (path) =>
+      /\.tsx?$/.test(path) &&
+      parse(path).statements.some(
+        (node) =>
+          ts.isImportDeclaration(node) &&
+          node.moduleSpecifier.text.includes(
+            "meri-resources/capabilities.server",
+          ),
+      ),
+  );
+  assert.deepEqual(consumers, [join(source, "app/meri/layout.tsx")]);
+  const layout = readFileSync(consumers[0], "utf8");
+  assert.doesNotMatch(layout, /["']use client["']|headers\s*\(|cookies\s*\(/);
+  assert.match(layout, /readMeriCapabilities\(process\.env\)/);
 });

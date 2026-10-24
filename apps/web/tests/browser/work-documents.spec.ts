@@ -99,7 +99,14 @@ test("client Work withholds legacy name matches when accessible clients collide"
   const unexpected = await installFixtures(page);
   await page.route("**/workspace/drafts?scope=all", (route) =>
     json(route, {
-      drafts: drafts.map((draft) => ({ ...draft, clientId: null })),
+      drafts: [
+        ...drafts.map((draft) => ({ ...draft, clientId: null })),
+        {
+          ...drafts[0],
+          id: "91000000-0000-4000-8000-000000000003",
+          docTitle: "Explicitly linked document",
+        },
+      ],
     }),
   );
   await page.route("**/core/clients", (route) =>
@@ -110,7 +117,10 @@ test("client Work withholds legacy name matches when accessible clients collide"
   );
   await page.goto(`/portfolio/${clientId}/work`);
   await expect(
-    page.getByText(/name is shared by multiple clients/),
+    page.getByText(/Only documents linked to this client are shown/),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Explicitly linked document", { exact: true }),
   ).toBeVisible();
   await expect(page.getByText("Synthetic briefing draft")).toHaveCount(0);
   await expect(page.getByText("Synthetic completed letter")).toHaveCount(0);

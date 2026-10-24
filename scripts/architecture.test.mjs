@@ -15,6 +15,19 @@ test('run workspace admits only its three approved additional public seams', () 
     assert.equal(errors.filter(error => error.includes('non-public package')).length, 1, specifier);
   }
 });
+
+test('General sessions, native documents, intents and preferences use only their exact public exports', () => {
+  const file = 'packages/meri-client/src/public-boundary.ts';
+  for (const specifier of ['@capiro/meri-contracts/conversation-session', '@capiro/meri-contracts/document-access-application', '@capiro/meri-contracts/intents-application', '@capiro/meri-contracts/user-preferences-application']) {
+    assert.deepEqual(inspectSources(new Map([[file, `import '${specifier}';`]])).errors, []);
+    for (const suffix of ['/node', '/schema', '/private']) {
+      assert.ok(inspectSources(new Map([[file, `import '${specifier}${suffix}';`]])).errors.some(error => error.includes('non-public package')));
+    }
+  }
+  for (const specifier of ['@capiro/meri-contracts/src/conversation-session', '@capiro/meri-contracts/dist/conversation-session.mjs', '@capiro/meri-contracts/conversation-session-internal', '@capiro/meri-contracts/document-access']) {
+    assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')));
+  }
+});
 test('rejects cycles, feature-private crossing, private package and external repository paths', () => {
   const files = new Map([['apps/web/src/features/meri/A.ts', "import '../modules/B'; import '@capiro/ui/vendor/button'; import 'meri-greenfield/apps/private';"], ['apps/web/src/features/modules/B.ts', "import '../meri/A';"]]);
   const errors = inspectSources(files).errors.join('\n');

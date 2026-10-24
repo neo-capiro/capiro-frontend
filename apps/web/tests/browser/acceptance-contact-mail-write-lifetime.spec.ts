@@ -23,10 +23,24 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     json(route, thread),
   );
   let sends = 0;
+  let requestKey: string | undefined;
+  const recoveryKeys: string[] = [];
+  await page.route("**/core/engagement/mail/send-intents/*", (route) => {
+    if (route.request().method() !== "GET") return route.fallback();
+    recoveryKeys.push(
+      new URL(route.request().url()).pathname.split("/").at(-1)!,
+    );
+    return json(
+      route,
+      { message: "Synthetic delivery readback unavailable" },
+      503,
+    );
+  });
   let release: (() => void) | undefined;
   await page.route("**/engagement/mail/send", async (route) => {
     expect(route.request().method()).toBe("POST");
     sends++;
+    requestKey = route.request().postDataJSON().requestKey;
     expect(route.request().postDataJSON()).toMatchObject({
       clientId,
       threadId,
@@ -105,6 +119,9 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     compose.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();
   expect(sends).toBe(1);
+  expect(requestKey).toBeTruthy();
+  expect(recoveryKeys.length).toBeGreaterThan(0);
+  expect(recoveryKeys.every((key) => key === requestKey)).toBe(true);
   expect(historyRead.writes).toEqual([]);
   expect(unexpected).toEqual([]);
 });

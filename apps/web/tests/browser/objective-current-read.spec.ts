@@ -74,12 +74,13 @@ for (const status of [403, 503]) {
     await refresh(page);
     await expect(page.getByRole("alert")).toBeVisible();
     await expect(page.getByRole("article")).toHaveCount(0);
-    await page.getByLabel("Objective status").selectOption("ready");
+    await expect(page.getByLabel("Objective status")).toHaveCount(0);
     await expect(page.getByText("No objectives match this status")).toHaveCount(
       0,
     );
-    await page.getByLabel("Objective status").selectOption("draft");
-    await expect(page.getByRole("article")).toHaveCount(0);
+    await expect(
+      page.getByRole("button", { name: "New objective", exact: true }),
+    ).toBeDisabled();
     let release!: () => void;
     const waiting = new Promise<void>((resolve) => {
       release = resolve;
@@ -112,6 +113,18 @@ for (const status of [403, 503]) {
     await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(
       0,
     );
+    await page.getByLabel("Objective status").selectOption("ready");
+    await expect(page.getByRole("article")).toHaveCount(0);
+    await expect(
+      page.getByText("No objectives match this status"),
+    ).toBeVisible();
+    await page.getByLabel("Objective status").selectOption("draft");
+    await expect(
+      page.getByRole("button", {
+        name: "Current recovered outcome",
+        exact: true,
+      }),
+    ).toBeVisible();
     expect(unexpected).toEqual([]);
   });
 
@@ -141,9 +154,18 @@ for (const status of [403, 503]) {
     await expect(
       page.getByRole("link", { name: /Refreshed summary/ }),
     ).toBeVisible();
+    const viewAll = page.getByRole("link", { name: "View all", exact: true });
+    await expect(viewAll).toHaveAttribute(
+      "href",
+      `/portfolio/${clientId}/objectives`,
+    );
+    await page.goto((await viewAll.getAttribute("href"))!);
     await expect(
-      page.getByRole("link", { name: "New objective", exact: true }),
+      page.getByRole("button", { name: "Refreshed summary", exact: true }),
     ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "New objective", exact: true }),
+    ).toBeEnabled();
     expect(unexpected).toEqual([]);
   });
 

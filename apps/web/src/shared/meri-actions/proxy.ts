@@ -1,6 +1,7 @@
 import { sameRequestOrigin } from "../request-origin";
 import { boundedJsonText, withActionDeadline } from "./bounded-json";
 import { actionSessionHints } from "./session-bootstrap";
+import { conversationSessionHints } from "../meri-conversations/session";
 import { receivedActionSession } from "./session-header";
 import type { readActionConfig } from "./config";
 
@@ -50,7 +51,8 @@ export async function proxyActionRequest(
         signal,
         route === "session" ? 4096 : 16 * 1024 * 1024,
       );
-      if (route === "session") actionSessionHints.parse(JSON.parse(body));
+      if (route === "session")
+        actionSessionHints.or(conversationSessionHints).parse(JSON.parse(body));
       signal.throwIfAborted();
       const response = await fetcher(
         `${config.baseUrl}/api/action-followthrough/${route}`,
