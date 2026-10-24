@@ -33,7 +33,7 @@ type Options<P, R extends SessionLifetime> = {
 /**
  * Meri never extends a session past its issued cap (it is bound to the native credential it was issued with), so the
  * session ends itself early instead: this long before the cap, once no request is in flight, for the owner's usual
- * renewal. It exceeds the 30 s budget of one request, so nothing started before it runs into the cap.
+ * renewal. Shorter receipts renew halfway through their remaining lifetime; the hard cap still aborts busy work.
  */
 export const RENEW_LEAD_MS = 45_000;
 const RENEW_RECHECK_MS = 1_000;
@@ -179,8 +179,12 @@ export class SessionLifetimeController<
         if (busy?.(port)) this.renewal = setTimeout(renew, RENEW_RECHECK_MS);
         else expire("renewal");
       };
-      const renewIn = session.expiresAtMs - RENEW_LEAD_MS - this.now();
-      if (busy && renewIn > 0) this.renewal = setTimeout(renew, renewIn);
+      const remaining = session.expiresAtMs - this.now();
+      const renewIn = Math.max(
+        RENEW_RECHECK_MS,
+        remaining > RENEW_LEAD_MS ? remaining - RENEW_LEAD_MS : remaining / 2,
+      );
+      if (busy) this.renewal = setTimeout(renew, renewIn);
       this.publish({
         status: "ready",
         port,

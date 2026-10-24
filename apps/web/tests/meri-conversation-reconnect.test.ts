@@ -279,3 +279,70 @@ it("detaching during the wait stops further issuance", async () => {
   expect(fetcher).toHaveBeenCalledTimes(1);
   expect(host.getSnapshot().status).toBe("idle");
 });
+
+it.each([10_000, 30_000, 45_000])(
+  "an idle %i ms session renews before its cap and retains the exact run",
+  async (ttl) => {
+    clock();
+    const bodies: unknown[] = [];
+    const host = new ConversationHostController({
+      hints: exactHints,
+      account,
+      fetcher: async (_url, init) => {
+        bodies.push(JSON.parse(String(init?.body)));
+        return session(context, ttl);
+      },
+    });
+    const detach = host.attach();
+    try {
+      await host.connect();
+      const original = host.getSnapshot();
+      if (original.status !== "ready") throw new Error("not ready");
+      await vi.advanceTimersByTimeAsync(ttl / 2 - 1);
+      expect(host.getSnapshot().status).toBe("ready");
+      await vi.advanceTimersByTimeAsync(1);
+      expect(host.getSnapshot().status).toBe("expired");
+      expect(host.getExpirationReason()).toBe("renewal");
+      expect(original.port.getSnapshot().status).toBe("disposed");
+      await host.connect();
+      expect(host.getSnapshot().status).toBe("ready");
+      expect(bodies).toEqual([exactHints, exactHints]);
+    } finally {
+      detach();
+    }
+  },
+);
+
+it("a busy short session still ends at its issued cap, aborting the pending read", async () => {
+  clock();
+  let readSignal: AbortSignal | null | undefined;
+  const host = new ConversationHostController({
+    hints: exactHints,
+    account,
+    fetcher: async (url, init) => {
+      if (String(url).endsWith("/session")) return session(context, 10_000);
+      readSignal = init?.signal;
+      return new Promise((_resolve, reject) => {
+        readSignal?.addEventListener("abort", () => reject(readSignal?.reason));
+      });
+    },
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const original = host.getSnapshot();
+    if (original.status !== "ready") throw new Error("not ready");
+    const reading = original.port.history().catch(() => undefined);
+    await vi.advanceTimersByTimeAsync(9_999);
+    expect(host.getSnapshot().status).toBe("ready");
+    expect(readSignal?.aborted).toBe(false);
+    await vi.advanceTimersByTimeAsync(1);
+    await reading;
+    expect(host.getExpirationReason()).toBe("expiry");
+    expect(host.getSnapshot().status).toBe("expired");
+    expect(readSignal?.aborted).toBe(true);
+    expect(original.port.getSnapshot().status).toBe("disposed");
+  } finally {
+    detach();
+  }
+});

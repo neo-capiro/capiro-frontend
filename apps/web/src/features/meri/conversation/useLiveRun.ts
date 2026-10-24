@@ -41,10 +41,9 @@ export function useLiveRun(
       // Fresh next-turn admission records identity before reservation; reconnect reuses it exactly.
       if (initialPrompt && retained && retained.state !== "observed")
         void commands.submit(retained.prompt, true);
-      // Reloaded storage needs SDK readmission. Navigation keeps a genuinely uncertain
-      // cached command for explicit retry, including its original initial-input workflow.
-      else if (retained?.state !== "unknown" || journal.restoredFromStorage)
-        void commands.history();
+      // Every new authorized port needs readmission, including cached uncertain requests.
+      // Reading can recover a terminal answer; uncertainty still never authorizes a resend.
+      else void commands.history();
     } else if (!active.current) observation.observe();
     return () => {
       alive.current = false;

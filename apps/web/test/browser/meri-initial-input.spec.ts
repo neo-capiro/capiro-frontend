@@ -3,6 +3,7 @@ import type { Route } from "@playwright/test";
 import {
   clientId,
   composer,
+  context,
   reply,
   sendButton,
   setupConversation,
@@ -202,12 +203,20 @@ test("synthetic desktop session expiry fences a held admission and publishes no 
   await expect(sendButton(page)).toBeEnabled();
   await sendButton(page).click();
   await expect.poll(() => native.calls.admit.length).toBe(1);
+  await expect.poll(() => f.hints.length).toBe(2);
+  expect(f.hints[1]).toEqual({
+    clientId,
+    conversationId: context.conversationId,
+    runId: context.runId,
+  });
   await expect(
-    page.getByRole("heading", {
-      name: "Conversation session expired",
+    page.getByRole("button", {
+      name: "Continue accepted request",
       exact: true,
     }),
   ).toBeVisible();
+  expect(native.calls.allocate).toHaveLength(1);
+  expect(native.calls.admit).toHaveLength(1);
   await reply(held!, receipt!).catch(() => undefined);
   expect(native.calls.submit).toEqual([]);
   await expect(

@@ -14,8 +14,6 @@ import {
 import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import { useConversationSelection } from "./useConversationSelection";
 
-/** A short hard expiry needs explicit reconnect; proactive renewal already has timer evidence. */
-const renewAfterMs = 60_000;
 type Hints = ConstructorParameters<
   typeof ConversationHostController
 >[0]["hints"];
@@ -52,13 +50,11 @@ function useSessionRenewal({
   status,
   bound,
   reopen,
-  now,
 }: {
   host: ConversationHostController;
   status: ReturnType<ConversationHostController["getSnapshot"]>["status"];
   bound: ReturnType<typeof boundContext>;
   reopen: (options?: Reopening) => void;
-  now: () => number;
 }) {
   // Keep private data hidden through explicit retry until a fresh receipt is validated.
   const [denied, setDenied] = useState(false);
@@ -72,16 +68,12 @@ function useSessionRenewal({
     const last = bound.last();
     if (status !== "expired" || !last) return;
     const reason = host.getExpirationReason();
-    if (reason === "access-lost") return;
+    if (reason !== "renewal" && reason !== "expiry") return;
     const key = JSON.stringify(last.context) + last.at;
-    if (
-      renewed.current === key ||
-      (reason !== "renewal" && now() - last.at < renewAfterMs)
-    )
-      return;
+    if (renewed.current === key) return;
     renewed.current = key;
     reopen();
-  }, [status, reopen, bound, now, host]);
+  }, [status, reopen, bound, host]);
 
   return {
     accessLost,
@@ -209,7 +201,6 @@ export function useConversationConnection(
     status: state.status,
     bound,
     reopen,
-    now,
   });
   useEffect(() => {
     if (!renewal.accessLost) return;

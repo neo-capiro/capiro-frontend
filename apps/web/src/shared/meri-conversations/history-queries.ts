@@ -22,11 +22,11 @@ import {
 const accessDenied = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   ([401, 403].includes(error.status) || error.code === "MEMBERSHIP_CHANGED");
-/** Meri answers NOT_FOUND for an admitted conversation whose first input has not run yet. */
+/** Empty-history presentation only; not-found never proves ownership or grants admission. */
 export const historyNotStarted = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   error.status === 404 &&
-  error.code === "NOT_FOUND";
+  (error.code === "NOT_FOUND" || error.code === "CONVERSATION_NOT_FOUND");
 
 const transcriptKey = (
   account: ConversationAccount,

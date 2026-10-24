@@ -27,7 +27,6 @@ function retainedCommands(
     return {
       current: () => false,
       recoveryBlocked: true,
-      restoredFromStorage: false,
       read: (): ConversationIntent => ({}),
       write: (value: ConversationIntent): boolean => {
         void value;

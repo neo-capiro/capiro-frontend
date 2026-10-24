@@ -106,7 +106,7 @@ test('explicit Meri origin and opt-in form one exact, reviewable parameter propo
   assert.equal(p.environment.CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN, optedIn.meriApiBaseUrl);
   assert.equal(p.environment.CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE, meriSource);
   assert.equal(p.environment.CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST, meriDigest);
-  assert.equal(p.environment.CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION, '0.1.12');
+  assert.equal(p.environment.CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION, '0.1.13');
   assert.equal(p.holds.includes('meri'), true);
   assert.match(p.activationStatus, /readiness not established/);
   validatePreviewParameters(p.parameters.toReversed(), optedIn);
@@ -290,7 +290,7 @@ test('preview template constrains every explicit configuration value and keeps h
     ['CapiroPreviewFirstChatApiBaseUrl', coreApi],
     ['CapiroPreviewMeriRuntimeSource', meriSource],
     ['CapiroPreviewMeriRuntimeImageDigest', meriDigest],
-    ['CapiroPreviewMeriContractPackageVersion', '0.1.12'],
+    ['CapiroPreviewMeriContractPackageVersion', '0.1.13'],
   ]);
   const optionalBooleans = new Set(['MeriConversationWorkflowEnabled', 'MeriFirstChatBootstrapEnabled',
     'CapiroPreviewMeriConversationRoutesEnabled', 'MeriMemoryOwnerReviewEnabled',

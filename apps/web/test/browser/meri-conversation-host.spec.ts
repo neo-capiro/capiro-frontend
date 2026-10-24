@@ -681,7 +681,7 @@ test("client replacement rejects a settled late transcript and verifies a new co
   expect(f.unexpected).toEqual([]);
 });
 
-test("an expired session offers Reconnect, which rebinds the exact run and resumes", async ({
+test("a short session automatically rebinds the exact run and recovers its completed answer", async ({
   page,
 }) => {
   const f = await setupConversation(page, undefined, [context], 2_500);
@@ -695,13 +695,7 @@ test("an expired session offers Reconnect, which rebinds the exact run and resum
   );
   await connect(page);
   await expect(page.getByText("Before expiry", { exact: true })).toBeVisible();
-  await expect(
-    page.getByRole("heading", {
-      name: "Conversation session expired",
-      exact: true,
-    }),
-  ).toBeVisible({ timeout: 10_000 });
-  await page.getByRole("button", { name: "Reconnect", exact: true }).click();
+  await expect.poll(() => f.hints.length).toBe(2);
   await expect(page.getByText("Before expiry", { exact: true })).toBeVisible();
   expect(f.hints).toEqual([
     { clientId },
