@@ -2,11 +2,11 @@
 
 These are concrete follow-up seams for root allocation, not implemented protocols or completion claims. PF16, release gates and migrations remain with their allocated owners.
 
-## Live refusal relay: immediate integration blocker
+## Live refusal relay: allocated and repaired in source
 
-The actual backend route uses `apps/web/src/shared/portfolio/api/proxy.ts`. Its error response contains only `message`, stripping both `DIRECTORY_NOTE_REFUSED` and `PROSPECT_NEW_CLIENT_REFUSED`. Feature/browser mocks do not exercise this boundary.
+Root allocated the exact proxy/helper/tests. Frontend `bb0b386bd936b4d15d901459c3726721a8af33d8` repairs the actual backend route's removal of both `DIRECTORY_NOTE_REFUSED` and `PROSPECT_NEW_CLIENT_REFUSED` fields. No further source allocation is needed for this finite relay.
 
-Proposed exact shared scope: that proxy, a small adjacent `portfolio-command-refusals.ts` validator, and focused proxy integration tests. Only POST Core Directory member note commands and new-client prospect conversion commands may relay their respective strict finite v1 envelope. Validate request UUID against the submitted body, target against the exact route, status against the response and domain allowlist, digest format and bounded message. Conversion body must declare `new_client`. Feature validation still binds the original payload digest. Keep generic failures, GET failures, foreign routes/requests and malformed envelopes sanitized; forward no upstream headers or diagnostic fields. Preserve no-store. Root approval is pending; no gateway lines have been edited.
+The small adjacent `portfolio-command-refusals.ts` validator relays only exact POST Core Directory note commands and new-client conversion commands. It checks v1 schema, request UUID against body, target against route/body, kind/mode, status, digest encoding, bounded message and exact envelope fields. Existing feature validation binds the original payload digest, including Directory actor scope. Generic/GET/authority/malformed/foreign failures stay sanitized, no upstream headers are forwarded, and no-store is preserved. Twenty-four focused tests include the actual proxy→ApiClient→feature path and foreign-digest rejection. Browser/deployed qualification and independent follow-up review remain root-owned.
 
 ## PF13 client contact creation: historical receipt storage is missing
 
