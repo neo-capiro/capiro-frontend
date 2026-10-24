@@ -73,7 +73,7 @@ export function useSaveMeeting(
           .request(
             "core",
             `engagement/meetings${meetingId ? `/${encodeURIComponent(meetingId)}` : ""}`,
-            meetingSaveReceiptSchema(meetingId, input),
+            meetingSaveReceiptSchema(meetingId, input, originalClientId),
             {
               method: meetingId ? "PUT" : "POST",
               body: input,

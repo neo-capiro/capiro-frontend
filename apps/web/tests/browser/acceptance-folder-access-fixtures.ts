@@ -46,6 +46,13 @@ export async function installFolderAccess(
       name: "Second synthetic client",
     }),
   );
+  await page.route(
+    `**/core/clients/${secondClientId}/files/storage-usage`,
+    (route) =>
+      route.request().method() === "GET"
+        ? json(route, { message: "Storage usage unavailable" }, 404)
+        : route.fallback(),
+  );
   await page.route("**/core/client-account-owners/options", (route) =>
     json(
       route,

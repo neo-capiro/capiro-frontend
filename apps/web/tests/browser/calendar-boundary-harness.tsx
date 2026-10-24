@@ -23,14 +23,18 @@ declare global {
 
 function CalendarBoundaryHarness() {
   const cache = useQueryClient();
+  const clientId = new URLSearchParams(location.search).get("workspaceClient");
   useEffect(() => {
     window.__calendarBoundary = {
       refreshFeeds: () => cache.invalidateQueries({ queryKey: ["calendar"] }),
       refreshClients: () => cache.invalidateQueries({ queryKey: clientsKey }),
       refreshMeeting: (id) =>
-        cache.invalidateQueries({ queryKey: ["meeting", id], exact: true }),
+        cache.invalidateQueries({
+          queryKey: ["meeting", id, clientId],
+          exact: true,
+        }),
       replaceMeeting: (meeting) =>
-        cache.setQueryData(["meeting", meeting.id], meeting),
+        cache.setQueryData(["meeting", meeting.id, clientId], meeting),
       snapshots: () =>
         cache
           .getQueryCache()
@@ -43,12 +47,10 @@ function CalendarBoundaryHarness() {
     return () => {
       delete window.__calendarBoundary;
     };
-  }, [cache]);
+  }, [cache, clientId]);
   return (
     <CalendarPage
-      clientId={
-        new URLSearchParams(location.search).get("workspaceClient") ?? undefined
-      }
+      clientId={clientId ?? undefined}
       destinations={{ existingApp: "http://127.0.0.1:5191/existing" }}
     />
   );

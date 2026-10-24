@@ -316,4 +316,31 @@ describe("meeting save native normalization", () => {
       }).safeParse({ ...meeting, client: null }).success,
     ).toBe(true);
   });
+  it("binds an unchanged update receipt without resubmitting the association", async () => {
+    const { meetingSaveReceiptSchema } =
+      await import("../src/features/portfolio/calendar/meeting-save");
+    const input = {
+      subject: meeting.subject,
+      startsAt: meeting.startsAt,
+      endsAt: meeting.endsAt,
+    };
+    const receipt = meetingSaveReceiptSchema(meeting.id, input, "client-one");
+    expect(receipt.safeParse(meeting).success).toBe(true);
+    expect(receipt.safeParse({ ...meeting, client: null }).success).toBe(false);
+    expect(
+      receipt.safeParse({ ...meeting, client: { id: "other", name: "Other" } })
+        .success,
+    ).toBe(false);
+    expect(
+      meetingSaveReceiptSchema(meeting.id, input, null).safeParse({
+        ...meeting,
+        client: null,
+      }).success,
+    ).toBe(true);
+    expect(
+      meetingSaveReceiptSchema(meeting.id, input, null).safeParse(meeting)
+        .success,
+    ).toBe(false);
+    expect(input).not.toHaveProperty("clientId");
+  });
 });

@@ -26,7 +26,9 @@ async function setup(page: Page) {
     );
   });
   await page.route(
-    `**/core/engagement/meetings/${selected.id}`,
+    (url) =>
+      url.pathname.endsWith(`/core/engagement/meetings/${selected.id}`) &&
+      (url.search === "" || url.search === `?clientId=${clientId}`),
     async (route) => {
       if (route.request().method() === "PUT") {
         const input = route.request().postDataJSON();
@@ -40,6 +42,7 @@ async function setup(page: Page) {
         state.rows = [state.meeting];
         return json(route, state.meeting);
       }
+      if (route.request().method() !== "GET") return route.fallback();
       state.reads++;
       await state.detailHold;
       return json(

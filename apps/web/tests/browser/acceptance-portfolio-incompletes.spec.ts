@@ -28,7 +28,7 @@ for (const width of [1440, 390]) {
         page.getByRole("heading", { name: "Test Aerospace", level: 2 }),
       ).toBeVisible();
       const pulse = page.getByRole("region", { name: "Portfolio pulse" });
-      const eyebrow = pulse.getByText("Portfolio pulse", { exact: true });
+      const eyebrow = pulse.getByText(/^Portfolio pulse · FY\d{2}$/);
       if (width === 390) await expect(eyebrow).toBeHidden();
       else await expect(eyebrow).toBeVisible();
       const labels = pulse.locator(
