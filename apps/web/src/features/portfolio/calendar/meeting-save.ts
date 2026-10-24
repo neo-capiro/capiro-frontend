@@ -38,9 +38,13 @@ export function meetingSaveReceiptSchema(
 }
 
 /** Preserve automatic/internal provenance unless the reviewed association changes. */
-export function meetingAssignmentFields(meeting: Meeting | undefined, target: string | null) {
+export function meetingAssignmentFields(
+  meeting: Meeting | undefined,
+  target: string | null,
+) {
   if (!meeting) return target ? { clientId: target } : {};
   if ((meeting.client?.id ?? null) === target) return {};
-  if (!meeting.updatedAt) throw new Error("Refresh the meeting before changing its client.");
+  if (!meeting.updatedAt)
+    throw new Error("Refresh the meeting before changing its client.");
   return { clientId: target, expectedRevision: meeting.updatedAt };
 }

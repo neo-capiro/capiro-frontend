@@ -133,7 +133,12 @@ describe("Work associations and date windows", () => {
     const client = { id, name: "Client" };
     expect(clientDrafts([draft], client, [client])).toEqual([]);
     const canonical = { ...draft, clientId: id };
-    expect(clientDrafts([canonical], client, [client, { id: "other", name: "Client" }])).toEqual([canonical]);
+    expect(
+      clientDrafts([canonical], client, [
+        client,
+        { id: "other", name: "Client" },
+      ]),
+    ).toEqual([canonical]);
   });
   it("uses a half-open 30-day window and excludes completed work from live items", () => {
     const node = {

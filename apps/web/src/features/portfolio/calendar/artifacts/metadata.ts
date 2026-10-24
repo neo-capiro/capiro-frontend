@@ -1,11 +1,13 @@
 import { z } from "zod";
 
-export const artifactActorSchema = z.object({
-  id: z.string(),
-  firstName: z.string().nullable().optional(),
-  lastName: z.string().nullable().optional(),
-  email: z.string().optional(),
-}).nullable();
+export const artifactActorSchema = z
+  .object({
+    id: z.string(),
+    firstName: z.string().nullable().optional(),
+    lastName: z.string().nullable().optional(),
+    email: z.string().optional(),
+  })
+  .nullable();
 
 // Native save/approve responses contain metadata, never the saved plaintext.
 export const artifactMetadataSchema = z.object({
@@ -13,7 +15,14 @@ export const artifactMetadataSchema = z.object({
   revision: z.iso.datetime().optional(),
   sharingKnown: z.boolean().optional(),
   approvalKnown: z.boolean().optional(),
-  capabilities: z.object({ edit: z.boolean(), approve: z.boolean(), share: z.boolean(), unshare: z.boolean() }).optional(),
+  capabilities: z
+    .object({
+      edit: z.boolean(),
+      approve: z.boolean(),
+      share: z.boolean(),
+      unshare: z.boolean(),
+    })
+    .optional(),
   id: z.string().min(1),
   meetingId: z.string().min(1),
   clientId: z.string().nullable(),

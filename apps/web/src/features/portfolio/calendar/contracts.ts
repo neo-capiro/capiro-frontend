@@ -2,7 +2,10 @@ import { z } from "zod";
 import type { EffectiveDateRecord } from "@/shared/federal-register/effective-dates";
 import { validDay } from "@/shared/portfolio/date/civil";
 import { preparationSchema } from "./preparation/schema";
-import { artifactActorSchema, artifactMetadataSchema } from "./artifacts/metadata";
+import {
+  artifactActorSchema,
+  artifactMetadataSchema,
+} from "./artifacts/metadata";
 const lifecycleArtifactSchema = artifactMetadataSchema
   .pick({ id: true, meetingId: true, clientId: true, status: true })
   .partial({ meetingId: true, clientId: true, status: true });
@@ -185,7 +188,14 @@ export const noteSchema = z.object({
   author: artifactActorSchema.optional(),
   approvedBy: artifactActorSchema.optional(),
   sharedBy: artifactActorSchema.optional(),
-  capabilities: z.object({ edit: z.boolean(), approve: z.boolean(), share: z.boolean(), unshare: z.boolean() }).optional(),
+  capabilities: z
+    .object({
+      edit: z.boolean(),
+      approve: z.boolean(),
+      share: z.boolean(),
+      unshare: z.boolean(),
+    })
+    .optional(),
 });
 export function meetingArtifactListSchema(
   meetingId: string | null,

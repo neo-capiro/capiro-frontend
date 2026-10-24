@@ -20,9 +20,7 @@ export function MeriClientSelector({ scope }: { scope?: ClientScope }) {
     scope && clients.isSuccess && !clients.isFetching && !clients.error,
   );
   const options = ready
-    ? (clients.data ?? []).filter(
-        (client) => client.status !== "archived",
-      )
+    ? (clients.data ?? []).filter((client) => client.status !== "archived")
     : [];
   const selectedId =
     selected.state === "authorized-client" ? selected.client.id : undefined;
