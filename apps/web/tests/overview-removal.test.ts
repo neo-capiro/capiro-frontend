@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { createApiClient, ApiError } from "../src/shared/portfolio/api/http";
-import { undoQuickLog } from "../src/features/portfolio/client-profile/quick-log/actions";
+
 import {
   currentClientWriter,
   assertClientWriter,
   ambiguousClientWrite,
 } from "../src/features/portfolio/client-profile/quick-log/authority";
-import { quickLogReceiptSchema } from "../src/features/portfolio/client-profile/quick-log/contracts";
+
 import { removeSubmission } from "../src/features/portfolio/client-profile/past-performance/actions";
 import {
   loadSubmissions,
@@ -24,24 +24,6 @@ it("only explicit known rejection permits a reviewed retry; ambiguous failures f
   expect(ambiguousClientWrite(new ApiError(502, "Wrong receipt"))).toBe(true);
   expect(ambiguousClientWrite(new Error("Lost response"))).toBe(true);
 });
-const receipt = quickLogReceiptSchema.parse({
-  id,
-  clientId,
-  tenantId,
-  actorUserId: userId,
-  createdByUserId: userId,
-  kind: "note",
-  title: "Saved note",
-  body: "Details",
-  personId: null,
-  occurredAt: "2026-10-11T08:00:00Z",
-  pinned: false,
-  dueAt: null,
-  settledAt: null,
-  sourceType: null,
-  sourceId: null,
-});
-const timeline = { ...receipt, origin: "recorded" };
 const submission = submissionSchema.parse({
   id,
   clientId,
@@ -67,89 +49,6 @@ function harness(reply: (method: string, url: string) => unknown) {
   }) as unknown as typeof fetch;
   return { api: createApiClient(fetcher), calls };
 }
-describe("owned Quick log inverse", () => {
-  it("deletes the retained ID rather than the first/latest unrelated timeline item", async () => {
-    const h = harness((method) =>
-      method === "GET"
-        ? [{ ...timeline, id: userId, title: "Unrelated newer note" }, timeline]
-        : { ok: true },
-    );
-    await undoQuickLog(
-      h.api,
-      receipt,
-      actor,
-      () => {},
-      new AbortController().signal,
-      () => {},
-    );
-    expect(h.calls.at(-1)).toBe(
-      `DELETE /api/backend/core/clients/${clientId}/activity/${id}`,
-    );
-  });
-  it("refuses a changed pinned entry without dispatching deletion", async () => {
-    const h = harness(() => [{ ...timeline, pinned: true }]);
-    await expect(
-      undoQuickLog(
-        h.api,
-        receipt,
-        actor,
-        () => {},
-        new AbortController().signal,
-        () => {},
-      ),
-    ).rejects.toThrow("entry changed");
-    expect(h.calls).toHaveLength(1);
-  });
-  it("refuses derived entries and bounded feed absence", async () => {
-    for (const rows of [[], [{ ...timeline, origin: "derived" }]]) {
-      const h = harness(() => rows);
-      await expect(
-        undoQuickLog(
-          h.api,
-          receipt,
-          actor,
-          () => {},
-          new AbortController().signal,
-          () => {},
-        ),
-      ).rejects.toThrow("not visible");
-      expect(h.calls).toHaveLength(1);
-    }
-  });
-  it("rechecks lifetime after the read before deleting", async () => {
-    const controller = new AbortController();
-    const h = harness(() => {
-      controller.abort();
-      return [timeline];
-    });
-    await expect(
-      undoQuickLog(
-        h.api,
-        receipt,
-        actor,
-        () => controller.signal.throwIfAborted(),
-        controller.signal,
-        () => {},
-      ),
-    ).rejects.toThrow();
-    expect(h.calls).toHaveLength(1);
-  });
-  it("requires actual canonical acknowledgement", async () => {
-    const h = harness((method) =>
-      method === "GET" ? [timeline] : { ok: false },
-    );
-    await expect(
-      undoQuickLog(
-        h.api,
-        receipt,
-        actor,
-        () => {},
-        new AbortController().signal,
-        () => {},
-      ),
-    ).rejects.toThrow("unexpected response");
-  });
-});
 describe("saved submission removal", () => {
   it("validates tenant/client rows and uses exact history inverse with deleted receipt", async () => {
     const h = harness((method) =>

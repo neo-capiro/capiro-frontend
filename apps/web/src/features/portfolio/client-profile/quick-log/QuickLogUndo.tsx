@@ -1,120 +1,79 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useIdentity } from "@/shared/portfolio/auth/identity";
-import { useApi } from "@/shared/portfolio/api/provider";
-import { profileKey } from "../queries";
-import {
-  assertClientWriter,
-  currentClientWriter,
-  ambiguousClientWrite,
-} from "./authority";
-import { undoQuickLog } from "./actions";
-import type { QuickLogReceipt } from "./contracts";
+import type { UndoAttempt } from "./command-undo";
+import type { useQuickLogUndo } from "./useQuickLogUndo";
 import styles from "./quick-log.module.css";
+
 export function QuickLogUndo({
   receipt,
   clientName,
+  recovery,
   onDismiss,
 }: {
-  receipt: QuickLogReceipt;
+  receipt: UndoAttempt["snapshot"];
   clientName: string;
+  recovery: ReturnType<typeof useQuickLogUndo>;
   onDismiss: () => void;
 }) {
-  const api = useApi();
-  const cache = useQueryClient();
-  const identity = useIdentity();
-  const [uncertain, setUncertain] = useState(false);
-  const [removed, setRemoved] = useState(false);
-  const lifetime = useRef<AbortController | null>(null);
-  const deleting = useRef(false);
-  useLayoutEffect(() => {
-    const controller = new AbortController();
-    lifetime.current = controller;
-    return () => controller.abort();
-  }, [receipt.id, cache, identity.data?.user.id, identity.data?.tenant?.id]);
-  const actor = currentClientWriter(cache);
-  const allowed =
-    actor?.tenantId === receipt.tenantId &&
-    actor?.userId === receipt.createdByUserId;
-  const mutation = useMutation({
-    retry: false,
-    mutationFn: async () => {
-      const controller = lifetime.current;
-      if (
-        !allowed ||
-        !actor ||
-        !controller ||
-        uncertain ||
-        removed ||
-        deleting.current
-      )
-        throw new Error(
-          "This Quick log cannot be undone by the current session.",
-        );
-      let sent = false;
-      deleting.current = true;
-      const guard = () => {
-        controller.signal.throwIfAborted();
-        assertClientWriter(cache, actor);
-      };
-      try {
-        await undoQuickLog(
-          api,
-          receipt,
-          actor,
-          guard,
-          controller.signal,
-          () => {
-            sent = true;
-          },
-        );
-        setRemoved(true);
-      } catch (error) {
-        if (sent && ambiguousClientWrite(error)) setUncertain(true);
-        throw error;
-      } finally {
-        deleting.current = false;
-        if (sent)
-          await cache.invalidateQueries({
-            queryKey: profileKey(receipt.clientId, "activity"),
-          });
-      }
-    },
-  });
-  if (!allowed) return null;
+  const pending = Boolean(recovery.attempt);
+  const removed = recovery.result?.status === "removed";
   return (
     <aside className={styles.toast} aria-label="Quick log result">
       <span aria-hidden="true">✓</span>
       <div>
         <p role="status">
-          {removed ? "Quick log removed" : `Logged to ${clientName}`}
+          {removed
+            ? "Quick log removed"
+            : pending
+              ? "Undo awaiting confirmation"
+              : `Logged to ${clientName}`}
         </p>
         <small>
           {removed
             ? "Only this recorded activity was removed."
-            : "Recorded activity on the timeline"}
+            : pending
+              ? "The original Undo is retained for recovery."
+              : "Recorded activity on the timeline"}
         </small>
-        {mutation.error && <p role="alert">{mutation.error.message}</p>}
-        {uncertain && (
+        {recovery.error && <p role="alert">{recovery.error}</p>}
+        {pending && !removed && (
           <p>
-            The removal result is uncertain. Inspect the timeline; Undo will not
-            be resent.
+            Read the saved Undo to check its result. Retrying sends only the
+            original attempt.
           </p>
         )}
       </div>
       <a href={`/portfolio/${receipt.clientId}#activity-timeline`}>View</a>
-      {!removed && (
+      {pending && !removed && (
         <button
-          disabled={mutation.isPending || uncertain}
-          onClick={() => mutation.mutate()}
+          disabled={recovery.busy}
+          onClick={() => void recovery.run("read")}
         >
-          {mutation.isPending ? "Undoing…" : "Undo"}
+          Read saved Undo
         </button>
       )}
-      <button aria-label="Dismiss Quick log result" onClick={onDismiss}>
-        ×
-      </button>
+      {!removed && (
+        <button
+          disabled={!recovery.ready || recovery.busy}
+          onClick={() => void recovery.run("send", receipt)}
+        >
+          {recovery.busy
+            ? "Checking Undo…"
+            : pending
+              ? "Retry original Undo"
+              : "Undo"}
+        </button>
+      )}
+      {(!pending || removed) && (
+        <button
+          aria-label="Dismiss Quick log result"
+          disabled={recovery.busy}
+          onClick={async () => {
+            if (!pending || (await recovery.run("acknowledge"))) onDismiss();
+          }}
+        >
+          ×
+        </button>
+      )}
     </aside>
   );
 }

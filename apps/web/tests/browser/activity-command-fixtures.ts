@@ -23,6 +23,20 @@ export async function installCommands(page: Page) {
     input: undefined as ActivityCommandInput | undefined,
     receipt: undefined as ActivityCommandReceipt | undefined,
     calls: [] as { path: string; method: string; body: unknown }[],
+    undoCalls: [] as { path: string; method: string; body: unknown }[],
+    undoRespond: async (route: Route) => {
+      const receipt = state.receipt ?? commandReceipt(state.input);
+      return json(route, {
+        schemaVersion: 1,
+        commandId: receipt.commandId,
+        creationRequestId: receipt.requestId,
+        tenantId: receipt.tenantId,
+        actorUserId: receipt.actorUserId,
+        clientId: receipt.clientId,
+        activityId: receipt.activity.id,
+        status: "unavailable",
+      });
+    },
     optionsReads: 0,
     holdOptions: async () => {},
     respond: async (route: Route) =>
@@ -47,6 +61,10 @@ export async function installCommands(page: Page) {
       const body = route.request().postData()
         ? route.request().postDataJSON()
         : null;
+      if (path.endsWith("/undo")) {
+        state.undoCalls.push({ path, method, body });
+        return state.undoRespond(route);
+      }
       state.calls.push({ path, method, body });
       if (method === "POST" && path.endsWith("/activity-commands"))
         state.input = body;

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { ApiClient } from "@/shared/portfolio/api/http";
+import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { activitySchema } from "../contracts";
 import { matchesQuickLogDetails, quickLogReceiptSchema } from "./contracts";
 import {
@@ -7,6 +7,133 @@ import {
   type ActivityCommandReceipt,
 } from "./command-contracts";
 import type { CommandContext } from "./command-actions";
+import type { ClientWriter } from "./authority";
+
+const revisionSchema = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z$/);
+export const commandUndoSnapshotSchema = quickLogReceiptSchema.extend({
+  commandId: z.uuid(),
+  creationRequestId: z.uuid(),
+  revision: revisionSchema,
+});
+export type CommandUndoSnapshot = z.infer<typeof commandUndoSnapshotSchema>;
+export const undoAttemptSchema = z
+  .object({
+    snapshot: commandUndoSnapshotSchema.pick({
+      id: true,
+      clientId: true,
+      tenantId: true,
+      actorUserId: true,
+      commandId: true,
+      creationRequestId: true,
+      revision: true,
+    }),
+    input: z
+      .object({
+        schemaVersion: z.literal(1),
+        requestId: z.uuid(),
+        activityId: z.uuid(),
+        expectedRevision: revisionSchema,
+      })
+      .strict(),
+  })
+  .strict()
+  .refine(
+    (value) =>
+      value.input.activityId === value.snapshot.id &&
+      value.input.expectedRevision === value.snapshot.revision,
+  );
+export type UndoAttempt = z.infer<typeof undoAttemptSchema>;
+export const undoRecoveryContract = {
+  schema: undoAttemptSchema,
+  requestId: (value: UndoAttempt) => value.input.requestId,
+  validateUpdate: (previous: UndoAttempt, next: UndoAttempt) => {
+    if (JSON.stringify(previous) !== JSON.stringify(next))
+      throw new Error("The original Undo cannot change.");
+  },
+};
+export const undoRecoveryScope = (actor: ClientWriter, clientId: string) =>
+  JSON.stringify([
+    "quick-log-undo",
+    z.uuid().parse(actor.tenantId),
+    z.uuid().parse(actor.userId),
+    z.uuid().parse(clientId),
+  ]);
+type UndoIdentity = Pick<
+  CommandUndoSnapshot,
+  | "commandId"
+  | "creationRequestId"
+  | "id"
+  | "tenantId"
+  | "clientId"
+  | "actorUserId"
+>;
+export const undoPath = (identity: UndoIdentity) =>
+  `clients/${encodeURIComponent(identity.clientId)}/activity-commands/${encodeURIComponent(identity.creationRequestId)}/undo`;
+export function undoStatusSchema(identity: UndoIdentity, actor: ClientWriter) {
+  if (
+    identity.tenantId !== actor.tenantId ||
+    identity.actorUserId !== actor.userId
+  )
+    throw new ApiError(
+      403,
+      "Undo belongs to the session that created this activity.",
+    );
+  const base = z.object({
+    schemaVersion: z.literal(1),
+    commandId: z.literal(identity.commandId),
+    creationRequestId: z.literal(identity.creationRequestId),
+    tenantId: z.literal(actor.tenantId),
+    clientId: z.literal(identity.clientId),
+    actorUserId: z.literal(actor.userId),
+    activityId: z.literal(identity.id),
+  });
+  return z.discriminatedUnion("status", [
+    base
+      .extend({
+        status: z.literal("available"),
+        revision: revisionSchema,
+        activity: activitySchema.extend({
+          id: z.literal(identity.id),
+          personId: z.uuid().nullable(),
+        }),
+      })
+      .strict(),
+    base.extend({ status: z.literal("unavailable") }).strict(),
+    base
+      .extend({
+        status: z.literal("removed"),
+        undo: z
+          .object({
+            requestId: z.uuid(),
+            payloadDigest: z.string().regex(/^[0-9a-f]{64}$/),
+            removedAt: z.iso.datetime(),
+          })
+          .strict(),
+      })
+      .strict(),
+  ]);
+}
+export async function readUndoStatus(
+  api: ApiClient,
+  identity: UndoIdentity,
+  actor: ClientWriter,
+  signal: AbortSignal,
+  guard: () => void,
+) {
+  guard();
+  signal.throwIfAborted();
+  const result = await api.request(
+    "core",
+    undoPath(identity),
+    undoStatusSchema(identity, actor),
+    { signal },
+  );
+  guard();
+  signal.throwIfAborted();
+  return result;
+}
 
 /** Current snapshot for a future explicit Undo, never historical command proof.
  * The original command receipt is verified independently before acknowledgment. */
@@ -31,20 +158,25 @@ export async function readCommandUndoSnapshot(
     return undefined;
   guard();
   signal.throwIfAborted();
-  const rows = await api.request(
-    "core",
-    `clients/${encodeURIComponent(context.clientId)}/activity?limit=500`,
-    z
-      .array(activitySchema.extend({ personId: z.uuid().nullable() }))
-      .max(500)
-      .refine(
-        (items) => new Set(items.map((item) => item.id)).size === items.length,
-      ),
-    { signal },
+  const identity = {
+    commandId: receipt.commandId,
+    creationRequestId: receipt.requestId,
+    id: receipt.activity.id,
+    clientId: context.clientId,
+    tenantId: receipt.tenantId,
+    actorUserId: receipt.actorUserId,
+  };
+  const current = await readUndoStatus(
+    api,
+    identity,
+    context.actor,
+    signal,
+    guard,
   );
+  if (current.status !== "available") return undefined;
   guard();
   signal.throwIfAborted();
-  const row = rows.find((item) => item.id === receipt.activity.id);
+  const row = current.activity;
   const input = context.input.activity;
   if (
     !row ||
@@ -66,11 +198,14 @@ export async function readCommandUndoSnapshot(
     !matchesQuickLogDetails(row, input)
   )
     return undefined;
-  return quickLogReceiptSchema.parse({
+  return commandUndoSnapshotSchema.parse({
     ...row,
     clientId: context.clientId,
     tenantId: receipt.tenantId,
     actorUserId: receipt.actorUserId,
     createdByUserId: receipt.actorUserId,
+    commandId: receipt.commandId,
+    creationRequestId: receipt.requestId,
+    revision: current.revision,
   });
 }

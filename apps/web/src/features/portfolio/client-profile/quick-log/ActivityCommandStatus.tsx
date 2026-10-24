@@ -1,13 +1,13 @@
 "use client";
 import type { useActivityCommand } from "./useActivityCommand";
-import type { QuickLogReceipt } from "./contracts";
+import type { CommandUndoSnapshot } from "./command-undo";
 
 export function ActivityCommandStatus({
   command,
   onDone,
 }: {
   command: ReturnType<typeof useActivityCommand>;
-  onDone: (undo?: QuickLogReceipt) => void;
+  onDone: (undo?: CommandUndoSnapshot) => void;
 }) {
   const pending = command.pending;
   if (!pending)

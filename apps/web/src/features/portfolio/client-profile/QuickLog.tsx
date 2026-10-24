@@ -2,15 +2,13 @@
 import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
-import {
-  QuickLogUndo,
-  quickLogInputSchema,
-  type QuickLogReceipt,
-} from "./quick-log/public";
+import { QuickLogUndo, quickLogInputSchema } from "./quick-log/public";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import meetingEntryStyles from "./quick-log/meeting-entry.module.css";
 import { followUpInputSchema } from "./quick-log/command-contracts";
 import { useActivityCommand } from "./quick-log/useActivityCommand";
+import { useQuickLogUndo } from "./quick-log/useQuickLogUndo";
+import type { CommandUndoSnapshot } from "./quick-log/command-undo";
 import { FollowUpFields } from "./quick-log/FollowUpFields";
 import { ActivityCommandStatus } from "./quick-log/ActivityCommandStatus";
 import { useQuickLogDetailFields } from "./quick-log/QuickLogDetailFields";
@@ -45,7 +43,15 @@ export function QuickLog({
     value: false,
   });
   const command = useActivityCommand(clientId, open);
-  const [receipt, setReceipt] = useState<QuickLogReceipt>();
+  const [receipt, setReceipt] = useState<CommandUndoSnapshot>();
+  const undo = useQuickLogUndo(clientId);
+  const undoReceipt =
+    undo.attempt?.snapshot ??
+    (receipt?.clientId === clientId &&
+    receipt.actorUserId === undo.actor?.userId &&
+    receipt.tenantId === undo.actor?.tenantId
+      ? receipt
+      : undefined);
   const details = useQuickLogDetailFields(
     clientId,
     open,
@@ -315,11 +321,20 @@ export function QuickLog({
           </form>
         )}
       </Dialog>
-      {receipt && (
+      {!undoReceipt && undo.error && (
+        <div role="alert">
+          {undo.error}
+          <button disabled={undo.busy} onClick={() => void undo.run("read")}>
+            Retry Undo recovery
+          </button>
+        </div>
+      )}
+      {undoReceipt && (
         <QuickLogUndo
-          key={receipt.id}
-          receipt={receipt}
+          key={undoReceipt.id}
+          receipt={undoReceipt}
           clientName={clientName}
+          recovery={undo}
           onDismiss={() => setReceipt(undefined)}
         />
       )}

@@ -8,8 +8,14 @@ import {
   readActivityCommand,
   resumeActivityCommand,
 } from "../src/features/portfolio/client-profile/quick-log/command-actions";
-import { readCommandUndoSnapshot } from "../src/features/portfolio/client-profile/quick-log/command-undo";
-import { undoQuickLog } from "../src/features/portfolio/client-profile/quick-log/actions";
+import {
+  readCommandUndoSnapshot,
+  type CommandUndoSnapshot,
+} from "../src/features/portfolio/client-profile/quick-log/command-undo";
+import {
+  undoQuickLog,
+  undoDigest,
+} from "../src/features/portfolio/client-profile/quick-log/actions";
 import {
   recoveryScope,
   retainedCommandContract,
@@ -47,6 +53,7 @@ const row = {
 function fixture(response = receipt) {
   const calls: { path: string; method: string; body: unknown }[] = [];
   let rows: unknown[] = [row];
+  let version = 0;
   const api = createApiClient(async (path, init) => {
     const method = init?.method ?? "GET";
     calls.push({
@@ -54,6 +61,59 @@ function fixture(response = receipt) {
       method,
       body: init?.body ? JSON.parse(String(init.body)) : null,
     });
+    if (String(path).endsWith("/undo")) {
+      const current = rows.find(
+        (value) => (value as typeof row).id === receipt.activity.id,
+      );
+      const revision = `2026-10-24T10:00:00.${String(version).padStart(6, "0")}Z`;
+      const identity = {
+        schemaVersion: 1,
+        commandId: receipt.commandId,
+        creationRequestId: receipt.requestId,
+        tenantId: receipt.tenantId,
+        actorUserId: receipt.actorUserId,
+        clientId: commandClientId,
+        activityId: receipt.activity.id,
+      };
+      if (method === "POST") {
+        const submitted = JSON.parse(String(init?.body));
+        if (submitted.expectedRevision !== revision)
+          return new Response(
+            JSON.stringify({ message: "The activity changed" }),
+            { status: 409 },
+          );
+        const snapshot = {
+          ...row,
+          clientId: commandClientId,
+          tenantId: receipt.tenantId,
+          actorUserId: receipt.actorUserId,
+          createdByUserId: receipt.actorUserId,
+          creationRequestId: receipt.requestId,
+          commandId: receipt.commandId,
+          revision,
+        };
+        return new Response(
+          JSON.stringify({
+            ...identity,
+            status: "removed",
+            undo: {
+              requestId: submitted.requestId,
+              payloadDigest: await undoDigest({ snapshot, input: submitted }),
+              removedAt: "2026-10-24T11:00:00.123456Z",
+            },
+          }),
+          { status: 200 },
+        );
+      }
+      return new Response(
+        JSON.stringify(
+          current
+            ? { ...identity, status: "available", revision, activity: current }
+            : { ...identity, status: "unavailable" },
+        ),
+        { status: 200 },
+      );
+    }
     return new Response(
       JSON.stringify(
         String(path).endsWith("activity?limit=500")
@@ -70,11 +130,21 @@ function fixture(response = receipt) {
     calls,
     rows: (value: unknown[]) => {
       rows = value;
+      version++;
     },
   };
 }
 const signal = () => new AbortController().signal;
 const guard = () => {};
+const attempt = (snapshot: CommandUndoSnapshot) => ({
+  snapshot,
+  input: {
+    schemaVersion: 1 as const,
+    requestId: crypto.randomUUID(),
+    activityId: snapshot.id,
+    expectedRevision: snapshot.revision,
+  },
+});
 installPlatform();
 
 it("uses the existing command POST without any follow-up, assignee read or ordinary activity POST", async () => {
@@ -165,10 +235,10 @@ it("prepares Undo only for the exact command-owned current row and rechecks it b
     tenantId: commandActor.tenantId,
     createdByUserId: commandActor.userId,
   });
-  await undoQuickLog(h.api, undo!, commandActor, guard, signal(), guard);
+  await undoQuickLog(h.api, attempt(undo!), commandActor, guard, signal());
   expect(h.calls.at(-1)).toMatchObject({
-    method: "DELETE",
-    path: `/api/backend/core/clients/${commandClientId}/activity/${receipt.activity.id}`,
+    method: "POST",
+    path: `/api/backend/core/clients/${commandClientId}/activity-commands/${receipt.requestId}/undo`,
   });
 });
 it.each([
@@ -189,7 +259,7 @@ it.each([
   ).toBeUndefined();
   expect(h.calls.every((call) => call.method === "GET")).toBe(true);
 });
-it("does not mistake a missing bounded timeline row for a missing historical command", async () => {
+it("does not mistake a missing activity for a missing historical creation command", async () => {
   const h = fixture();
   h.rows([]);
   expect(await readActivityCommand(h.api, context, signal(), guard)).toEqual(
@@ -260,9 +330,9 @@ it("retains rich commitment details and equivalent timestamp instants for prospe
     },
   ]);
   await expect(
-    undoQuickLog(h.api, undo!, commandActor, guard, signal(), guard),
-  ).rejects.toThrow("entry changed");
-  expect(h.calls.every((call) => call.method === "GET")).toBe(true);
+    undoQuickLog(h.api, attempt(undo!), commandActor, guard, signal()),
+  ).rejects.toThrow("activity changed");
+  expect(h.calls.at(-1)?.method).toBe("POST");
 });
 
 it("rejects commitment-only details on a plain note before dispatch", () => {
