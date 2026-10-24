@@ -292,28 +292,6 @@ export function retireRefusedRecovery(
   return retireRecovery(scope, requestId, { state: "refused", code }, assert);
 }
 
-/** Only after re-reading an exact terminal failed Objective receipt with no result.
- * An unconfirmed outcome can never release its durable request fence. */
-export function retireObjectiveFailureRecovery(
-  scope: string,
-  requestId: string,
-  code:
-    | "OBJECTIVE_GENERATION_FAILED"
-    | "OBJECTIVE_CONTEXT_INCOMPLETE"
-    | "OBJECTIVE_VERSION_CONFLICT",
-  assert: () => void,
-) {
-  if (
-    ![
-      "OBJECTIVE_GENERATION_FAILED",
-      "OBJECTIVE_CONTEXT_INCOMPLETE",
-      "OBJECTIVE_VERSION_CONFLICT",
-    ].includes(code)
-  )
-    return Promise.reject(new RecoveryStorageError());
-  return retireRecovery(scope, requestId, { state: "refused", code }, assert);
-}
-
 /** Serialize dispatch/reconciliation across tabs without nesting the storage lock.
  * Callers re-read the journal after acquiring this lock before sending anything. */
 export async function withRecoveryCommandLock<T>(

@@ -241,14 +241,6 @@ export function requireGeneratedStrategy(
 }
 
 export const objectiveGenerationOperations = {
-  "strategies.objectiveDraft": defineOperation({
-    service: "strategy",
-    method: "POST",
-    path: "/strategies/objective-drafts",
-    request: z.object({ body: objectiveGenerationRequest }).strict(),
-    response: objectiveGenerationAccepted,
-    source,
-  }),
   "strategies.objectiveDraftJob": defineOperation({
     service: "strategy",
     method: "GET",
