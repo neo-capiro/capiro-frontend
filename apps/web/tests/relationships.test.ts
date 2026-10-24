@@ -59,7 +59,7 @@ describe("organization contact API boundary", () => {
       ).rejects.toMatchObject({ status: 502 });
     },
   );
-  it("creates and updates through the core route with an explicit nullable email clear", async () => {
+  it("updates through the core route and refuses an unkeyed create", async () => {
     const calls: { url: string; method: string; body: unknown }[] = [];
     const api = createApiClient(async (url, options) => {
       const sent = JSON.parse(String(options?.body));
@@ -70,21 +70,18 @@ describe("organization contact API boundary", () => {
       });
       return reply({ ...person, ...sent });
     });
-    await writePerson(api, clientId, {
-      kind: "save",
-      body: { ...body, name: "  New contact  ", email: null },
-    });
+    await expect(
+      writePerson(api, clientId, {
+        kind: "save",
+        body: { ...body, name: "  New contact  ", email: null },
+      }),
+    ).rejects.toMatchObject({ status: 400 });
     await writePerson(api, clientId, {
       kind: "save",
       id,
       body: { ...body, email: "  taylor@example.test  " },
     });
     expect(calls).toEqual([
-      {
-        url: `/api/backend/core/clients/${clientId}/people`,
-        method: "POST",
-        body: { ...body, name: "New contact", email: null },
-      },
       {
         url: `/api/backend/core/clients/${clientId}/people/${id}`,
         method: "PATCH",

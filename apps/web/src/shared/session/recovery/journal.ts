@@ -148,8 +148,12 @@ function retireRecovery(
         state: "refused";
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
+          | "ACTIVITY_UNDO_REFUSED"
+          | "DIRECTORY_NOTE_REFUSED"
+          | "PROSPECT_NEW_CLIENT_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
+          | "OBJECTIVE_ASSOCIATION_REJECTED"
           | "OBJECTIVE_VERSION_CONFLICT";
       },
   assert: () => void,
@@ -186,15 +190,104 @@ export function acknowledgeRecovery(
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
 }
 
+/** Caller validates the native failure schema and obtains a fresh current read
+ * under the execution lock. A missing receipt is never a no-write refusal. */
+export function retireAssociationRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: { requestId: string | null; outcome: string; code: string },
+  assert: () => void,
+) {
+  if (
+    failure.requestId !== requestId ||
+    failure.outcome !== "rejected" ||
+    ![
+      "MALFORMED_REQUEST",
+      "UNAUTHENTICATED",
+      "FORBIDDEN",
+      "OBJECTIVE_VERSION_CONFLICT",
+      "ASSOCIATION_VERSION_CONFLICT",
+      "REQUEST_CONFLICT",
+      "UNSUPPORTED_RESOURCE",
+    ].includes(failure.code)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "OBJECTIVE_ASSOCIATION_REJECTED" },
+    assert,
+  );
+}
+
+/** Caller must verify this exact command's no-write refusal and fresh reads,
+ * under the same execution lock used for all attempts. Unknown outcomes remain pending. */
+export function retireMemberNoteRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: {
+    schemaVersion: number;
+    code: string;
+    requestId: string;
+    status: number;
+  },
+  assert: () => void,
+) {
+  if (
+    failure.schemaVersion !== 1 ||
+    failure.code !== "DIRECTORY_NOTE_REFUSED" ||
+    failure.requestId !== requestId ||
+    ![400, 404, 409].includes(failure.status)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "DIRECTORY_NOTE_REFUSED" },
+    assert,
+  );
+}
+
+/** Caller binds the Core rollback proof to the original prospect/digest and
+ * obtains fresh authority, receipt and prospect reads under the execution lock. */
+export function retireNewClientConversionRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: {
+    schemaVersion: number;
+    code: string;
+    requestId: string;
+    status: number;
+  },
+  assert: () => void,
+) {
+  if (
+    failure.schemaVersion !== 1 ||
+    failure.code !== "PROSPECT_NEW_CLIENT_REFUSED" ||
+    failure.requestId !== requestId ||
+    ![400, 402, 404, 409].includes(failure.status)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "PROSPECT_NEW_CLIENT_REFUSED" },
+    assert,
+  );
+}
+
 /** Caller must verify this exact command's no-write refusal and fresh reads,
  * under the same execution lock used for all attempts. Unknown outcomes remain pending. */
 export function retireRefusedRecovery(
   scope: string,
   requestId: string,
-  code: "WORKSPACE_BRIEF_STATE_CONFLICT",
+  code: "WORKSPACE_BRIEF_STATE_CONFLICT" | "ACTIVITY_UNDO_REFUSED",
   assert: () => void,
 ) {
-  if (code !== "WORKSPACE_BRIEF_STATE_CONFLICT")
+  if (
+    code !== "WORKSPACE_BRIEF_STATE_CONFLICT" &&
+    code !== "ACTIVITY_UNDO_REFUSED"
+  )
     return Promise.reject(new RecoveryStorageError());
   return retireRecovery(scope, requestId, { state: "refused", code }, assert);
 }

@@ -612,10 +612,10 @@
     "file": "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
     "kind": "function",
     "symbol": "ContactDrawer",
-    "fingerprint": "b22243978b8655836539d1686288a85595ecccfa36277fe01a97efe24a367188",
-    "reason": "This drawer owns one contact's create/edit/remove/discard lifecycle. ContactForm, hierarchy, mail and QuickLog delegate their independent subflows, and the contact mutation hook owns writes. The retained state selects and edits one contact. A removal dialog can be extracted when it gains more behavior; current actions do not create a separate persistence owner.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "13cc47a3dd7a1ec09b7cb3712c7dd3be92634cb65d08dffcc5aaa049f0ea2835",
+    "reason": "ContactDrawer owns one contact form, action and confirmation presentation. Existing form, hierarchy, mail, Quick Log and recovery children retain their responsibilities; durable journal, crypto, request correlation and Core authority remain external. The added recovery child consumes the same creation lifetime and does not add a second transaction or state machine. Retain the cohesive drawer rather than mechanically splitting its controls. Independent review: a/review-contact-create-928e/REPORT.md at frontend2a9b90e0.",
+    "reviewedBy": "Codex A independent contact-create source review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/ContactForm.tsx",
@@ -738,10 +738,10 @@
     "file": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
     "kind": "function",
     "symbol": "OrganizationRelationships",
-    "fingerprint": "6cb28957ed5eec22dfa0d76e3d48978cdcb9b511c4fb0d49265648faae4385ba",
-    "reason": "The current organization-contact roster, hierarchy review navigation and selected-contact composition. Roster/search/review filtering and route selection derive from the same current client roster. Current-read disposal and the create-attempt status are necessary admission for the same Add contact affordance. OrganizationChart, ContactDrawer/forms, mailbox workflow and mutation/attempt owners remain external. No new independent subsystem is embedded. Keep the current roster owner cohesive; the unchanged hierarchy review here is selection/navigation, not a copied write algorithm.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "1bdfeb5e1857b9b2ae591b2c12df435b9b5ceeb1e9d8c3358a1fcc6ecd8e6fa2",
+    "reason": "OrganizationRelationships owns the current client roster, search, route selection and hierarchy-review navigation. Recovery display and Add-contact admission consume the existing create hook; the chart, drawer, mutation, durable recovery and Core authorization owners stay separate. No independent write or storage subsystem is embedded in this page composition. Independent review: a/review-contact-create-928e/REPORT.md at frontend2a9b90e0.",
+    "reviewedBy": "Codex A independent contact-create source review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
@@ -3643,6 +3643,24 @@
     "fingerprint": "1e1797b909c9c16285f8624b6f85462d0003df1afb72d59e54f8d702dd67edfa",
     "reason": "One public conversation connection state machine: retained initial/input admission identity, submit reconciliation, history binding, cancellation receipt and attachment of the current observation. ConversationNetwork owns credential/HTTP/deadline disposal, ConversationObservation owns cursor/event projection, conversationChat owns upstream UI transport, and public contracts own wire admission. Initial and next-input methods share the exact retained intent and uncertainty state; separating them into competing owners would weaken reconciliation. General only extends context correlation with the canonical actor-private scope; no model loop or server authorization is reproduced.",
     "reviewedBy": "Codex independent D (wave2_d_review_handover)",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+    "kind": "function",
+    "symbol": "runQuickLogUndo",
+    "fingerprint": "e06d1e5e49d18813187c81fc27fe1346e16e26bbdb195bd6f11c5479fa9c1cd9",
+    "reason": "One serialized Undo operation restores its immutable attempt, compares the requested target, reads or explicitly sends, validates the outcome and retires only a proved result. Keeping these branches under the existing execution lock makes the safety boundary visible. Independent review accepted the exact FE21d8e029/Corea21e8175 repair; this entry does not cover other outstanding Portfolio obligations.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover), PF13 Undo repair",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+    "kind": "function",
+    "symbol": "runQuickLogUndo > <anonymous>",
+    "fingerprint": "cb52949e0a4ff165fa8786e1b521461cecd71675c150b71a2f2b664628b2416c",
+    "reason": "The callback holds the existing execution lock around the same immutable Undo identity from restored intent through target comparison, read/send, result validation and proved retirement. These branches are one operation, not separate lifecycle owners. Independent D review accepted this exact callback with FE21d8e029/Corea21e8175; unrelated size findings remain open.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover), PF13 Undo repair",
     "reviewedOn": "2026-10-24"
   }
 ]

@@ -4,7 +4,6 @@ import { useIsMutating } from "@tanstack/react-query";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { ApiError } from "@/shared/portfolio/api/http";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import type { Person } from "./contracts";
 import { canManageContacts } from "./contact-api";
@@ -14,14 +13,18 @@ import { HierarchyEditor } from "./HierarchyEditor";
 import { ContactMail } from "./ContactMail";
 import { QuickLog } from "@/features/portfolio/client-profile/public";
 import styles from "./contact-drawer.module.css";
+import type { ContactCreation } from "./contact-create-attempt";
+import { ContactCreateRecovery } from "./ContactCreateRecovery";
 
 export function ContactDrawer({
+  creation,
   clientId,
   person,
   people,
   open,
   onClose,
 }: {
+  creation: ContactCreation;
   clientId: string;
   person?: Person;
   people: Person[];
@@ -45,12 +48,12 @@ export function ContactDrawer({
   const [note, setNote] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [discard, setDiscard] = useState(false);
-  const mutation = usePersonMutation(clientId, onClose);
-  const busy = useIsMutating({ mutationKey: peopleWriteKey(clientId) }) > 0;
+  const mutation = usePersonMutation(clientId, onClose, creation);
+  const busy =
+    useIsMutating({ mutationKey: peopleWriteKey(clientId) }) > 0 ||
+    creation.busy;
   const uncertainCreate =
-    !person &&
-    Boolean(mutation.error) &&
-    (!(mutation.error instanceof ApiError) || mutation.error.status >= 500);
+    !person && (!creation.ready || Boolean(creation.attempt));
   function close() {
     if (!busy) {
       if (dirty) setDiscard(true);
@@ -140,12 +143,11 @@ export function ContactDrawer({
           disabled={!permitted || busy || uncertainCreate}
           onChange={() => setDirty(true)}
         />
-        <QueryState error={mutation.error} />
-        {uncertainCreate && (
-          <p role="alert">
-            This request may have saved. Your draft is preserved. Close and
-            check the refreshed roster before creating another contact.
-          </p>
+        <QueryState
+          error={person || !creation.error ? mutation.error : undefined}
+        />
+        {!person && (
+          <ContactCreateRecovery creation={creation} onSaved={onClose} />
         )}
       </div>
       <footer className={styles.footer}>

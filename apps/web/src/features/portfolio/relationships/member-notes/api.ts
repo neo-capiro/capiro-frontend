@@ -1,60 +1,68 @@
-import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
+import type { ApiClient } from "@/shared/portfolio/api/http";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 import { memberDetailSchema } from "../directory-contracts";
 import {
-  memberReferenceSchema,
-  memberNoteInputSchema,
-  memberNoteReceiptSchema,
-  type MemberReference,
-} from "./contracts";
+  memberNoteCommandReceiptSchema,
+  requireMemberNoteReceipt,
+  type RetainedNote,
+} from "./command";
 
 export async function createMemberNote(
   api: ApiClient,
-  member: MemberReference,
   actor: ClientWriter,
-  text: string,
+  attempt: RetainedNote,
   guard: () => void,
   signal: AbortSignal,
-  dispatched: () => void,
+  beforeDispatch: () => Promise<void>,
 ) {
-  const selected = memberReferenceSchema.parse(member);
-  const body = memberNoteInputSchema.parse({
-    body: text,
-    directoryContactName: selected.name,
-  });
   guard();
   signal.throwIfAborted();
-  const id = encodeURIComponent(selected.id);
-  // The create endpoint itself accepts arbitrary contact strings. Check the
-  // current canonical member before writing; this is not server authorization.
+  const id = encodeURIComponent(attempt.member.id);
+  // A current UI observation; Core also validates the canonical member before
+  // committing the immutable note and audit together.
   await api.request(
     "core",
     `directory/members/${id}`,
     memberDetailSchema.refine(
-      (value) => value.id === selected.id,
+      (value) => value.id === attempt.member.id,
       "Member identity mismatch",
     ),
     { signal },
   );
   guard();
   signal.throwIfAborted();
-  dispatched();
-  const receipt = await api.request(
+  await beforeDispatch();
+  guard();
+  signal.throwIfAborted();
+  const value = await api.request(
     "core",
-    `directory/contacts/${id}/notes`,
-    memberNoteReceiptSchema,
-    { method: "POST", body, signal },
+    `directory/members/${id}/note-commands`,
+    memberNoteCommandReceiptSchema,
+    {
+      method: "POST",
+      body: attempt.input,
+      signal,
+    },
   );
   guard();
-  if (
-    receipt.directoryContactId !== selected.id ||
-    receipt.directoryContactName !== body.directoryContactName ||
-    receipt.body !== body.body ||
-    receipt.createdBy.id !== actor.userId
-  )
-    throw new ApiError(
-      502,
-      "The saved note receipt does not match this member, author or text. Check Directory notes before saving again.",
-    );
-  return receipt;
+  return requireMemberNoteReceipt(value, actor, attempt);
+}
+
+export async function recoverMemberNote(
+  api: ApiClient,
+  actor: ClientWriter,
+  attempt: RetainedNote,
+  guard: () => void,
+  signal: AbortSignal,
+) {
+  guard();
+  signal.throwIfAborted();
+  const value = await api.request(
+    "core",
+    `directory/members/${encodeURIComponent(attempt.member.id)}/note-commands/${attempt.input.requestId}`,
+    memberNoteCommandReceiptSchema,
+    { signal },
+  );
+  guard();
+  return requireMemberNoteReceipt(value, actor, attempt);
 }

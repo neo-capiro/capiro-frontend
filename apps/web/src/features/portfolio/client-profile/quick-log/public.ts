@@ -1,4 +1,3 @@
-export { useQuickLog } from "./useQuickLog";
 export { QuickLogUndo } from "./QuickLogUndo";
 export { quickLogInputSchema, type QuickLogReceipt } from "./contracts";
 export {

@@ -1,6 +1,11 @@
 import { mailListFixture, mailThreadFixture } from "../mail-read-fixture";
 import { installMailReadIdentity } from "./mail-read-fixtures";
 import { expect, test } from "@playwright/test";
+import { installRemoval } from "./overview-removal-fixtures";
+import {
+  contactCreationReceipt,
+  installContactCreateIdentity,
+} from "./acceptance-relationships-fixtures";
 import {
   sendingMailbox,
   clientId,
@@ -36,20 +41,27 @@ test("contact deep link, search empty state and keyboard close retain organizati
   expect(unexpected).toEqual([]);
 });
 
-test("create retains a rejected draft, refuses duplicate pending submits and refreshes the roster after verified save", async ({
+test("create retains an uncertain draft, retries the same request and refreshes the roster after verified save", async ({
   page,
 }) => {
   const unexpected = await installFixtures(page);
   let rows = [person];
+  await installContactCreateIdentity(page);
   let attempts = 0;
+  let original: unknown;
   let release: (() => void) | undefined;
   await page.route(endpoint, async (route) => {
     if (route.request().method() === "GET") return json(route, rows);
     attempts++;
-    if (attempts === 1)
-      return json(route, { message: "Review the contact details" }, 409);
     const body = route.request().postDataJSON();
+    if (attempts === 1) {
+      original = body;
+      return json(route, { message: "Contact save not confirmed" }, 503);
+    }
+    expect(body).toEqual(original);
     expect(body).toEqual({
+      requestId: expect.any(String),
+      lastContact: null,
       name: "New Contact",
       title: "Director",
       email: null,
@@ -66,7 +78,7 @@ test("create retains a rejected draft, refuses duplicate pending submits and ref
       id: "20000000-0000-4000-8000-000000000002",
     };
     rows = [...rows, saved];
-    return json(route, saved);
+    return json(route, contactCreationReceipt(body, saved.id));
   });
   await page.goto(path);
   await page.getByRole("button", { name: "Add contact", exact: true }).click();
@@ -86,14 +98,12 @@ test("create retains a rejected draft, refuses duplicate pending submits and ref
     .getByRole("button", { name: "Save contact", exact: true })
     .click();
   await expect(drawer.getByRole("alert")).toContainText(
-    "Review the contact details",
+    "Contact save not confirmed",
   );
   await expect(drawer.getByLabel("Notes", { exact: true })).toHaveValue(
     "Dated source retained",
   );
-  await drawer
-    .getByRole("button", { name: "Save contact", exact: true })
-    .click();
+  await drawer.getByRole("button", { name: "Retry save", exact: true }).click();
   await expect.poll(() => Boolean(release)).toBe(true);
   await expect(
     drawer.getByRole("button", { name: "Cancel", exact: true }),
@@ -224,16 +234,20 @@ test("remove requires confirmation and a deleted:true receipt; failure retains t
   expect(unexpected).toEqual([]);
 });
 
-test("unknown create completion retains draft and prevents a blind duplicate creation", async ({
+test("unknown creation survives reload and exact lookup restores Add contact without another POST", async ({
   page,
 }) => {
   const unexpected = await installFixtures(page);
+  await installContactCreateIdentity(page);
   let attempts = 0;
+  let saved: ReturnType<typeof contactCreationReceipt> | undefined;
   await page.route(endpoint, (route) => {
     if (route.request().method() === "GET") return json(route, [person]);
     attempts++;
+    saved = contactCreationReceipt(route.request().postDataJSON(), personId);
     return json(route, { message: "Reply unavailable after dispatch" }, 503);
   });
+  await page.route(`${endpoint}/requests/*`, (route) => json(route, saved));
   await page.goto(path);
   await page.getByRole("button", { name: "Add contact", exact: true }).click();
   const drawer = page.getByRole("dialog", { name: "Add contact", exact: true });
@@ -241,13 +255,22 @@ test("unknown create completion retains draft and prevents a blind duplicate cre
   await drawer
     .getByRole("button", { name: "Save contact", exact: true })
     .click();
-  await expect(drawer.getByText(/This request may have saved/)).toBeVisible();
+  await expect(drawer.getByText(/needs confirmation/)).toBeVisible();
   await expect(drawer.getByLabel("Name *", { exact: true })).toHaveValue(
     "Uncertain Contact",
   );
   await expect(
     drawer.getByRole("button", { name: "Save contact", exact: true }),
   ).toBeDisabled();
+  await page.reload();
+  await expect(
+    drawer.getByText(/Uncertain Contact.*needs confirmation/),
+  ).toBeVisible();
+  await drawer.getByRole("button", { name: "Check save", exact: true }).click();
+  await expect(drawer).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Add contact", exact: true }),
+  ).toBeEnabled();
   expect(attempts).toBe(1);
   expect(unexpected).toEqual([]);
 });
@@ -456,7 +479,7 @@ test("hierarchy saves stay separate from contact details and fence competing con
 test("person-linked QuickLog retains its failed note and existing email provider refusal remains visible", async ({
   page,
 }) => {
-  const unexpected = await installFixtures(page);
+  const { unexpected } = await installRemoval(page);
   let notes = 0;
   let sends = 0;
   let requestKey: string | undefined;
@@ -472,10 +495,10 @@ test("person-linked QuickLog retains its failed note and existing email provider
       503,
     );
   });
-  await page.route(`**/clients/${clientId}/activity`, (route) => {
+  await page.route(`**/clients/${clientId}/activity-commands`, (route) => {
     expect(route.request().method()).toBe("POST");
     notes++;
-    expect(route.request().postDataJSON()).toMatchObject({
+    expect(route.request().postDataJSON().activity).toMatchObject({
       personId,
       kind: "note",
       title: "Follow-up",

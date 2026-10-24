@@ -49,7 +49,7 @@ export const activityCommandInputSchema = z
           !value.occurredAt || Date.parse(value.occurredAt) <= Date.now(),
         "Activity must have already occurred",
       ),
-    followUp: followUpInputSchema,
+    followUp: followUpInputSchema.optional(),
   })
   .strict();
 export type ActivityCommandInput = z.infer<typeof activityCommandInputSchema>;
@@ -124,7 +124,9 @@ export function scopedCommandReceipt(
       receipt.requestId === input.requestId &&
       receipt.activity.personId ===
         (input.activity.personId?.toLowerCase() ?? null) &&
-      receipt.followUp?.assigneeUserId === input.followUp.assigneeUserId &&
+      (input.followUp
+        ? receipt.followUp?.assigneeUserId === input.followUp.assigneeUserId
+        : receipt.followUp === null) &&
       (!known.commandId || receipt.commandId === known.commandId) &&
       (!known.activityId || receipt.activity.id === known.activityId) &&
       (!known.taskId ||

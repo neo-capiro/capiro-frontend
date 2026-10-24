@@ -3,7 +3,7 @@ import { json } from "./fixtures";
 import { commandAssignee } from "../activity-command-fixtures";
 import { completedCommand, installCommands } from "./activity-command-fixtures";
 
-export async function retainedCommand(page: Page) {
+export async function retainedCommand(page: Page, withFollowUp = true) {
   const fixture = await installCommands(page);
   const pairs = new Map<string, ReturnType<typeof completedCommand>>();
   let disclose = false;
@@ -36,12 +36,17 @@ export async function retainedCommand(page: Page) {
   await page
     .getByLabel("Details", { exact: true })
     .fill("Private restart details");
-  await page.getByRole("checkbox", { name: "Add generic follow-up" }).check();
+  if (withFollowUp) {
+    await page.getByRole("checkbox", { name: "Add generic follow-up" }).check();
+    await page
+      .getByRole("combobox", { name: "Follow-up assignee", exact: true })
+      .selectOption(commandAssignee.id);
+  }
   await page
-    .getByRole("combobox", { name: "Follow-up assignee", exact: true })
-    .selectOption(commandAssignee.id);
-  await page
-    .getByRole("button", { name: "Save activity and follow-up", exact: true })
+    .getByRole("button", {
+      name: withFollowUp ? "Save activity and follow-up" : "Save activity",
+      exact: true,
+    })
     .click();
   await expect.poll(() => pairs.size).toBe(1);
   await expect(
