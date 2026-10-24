@@ -7,6 +7,38 @@ not alter the existing `capiro-dev` cluster, shared Capiro ALB/listener,
 `os.capiro.ai`, or backend services. The source continuation requires an
 owner-visible AWS step before shipping an image or creating resources.
 
+## Current first-chat operator pins
+
+The frontend service uses **ARM64/Linux**, matching native image qualification.
+The previously deployed revision25 used X86_64; do not pair that task platform
+with the new ARM64 image. Root must verify the selected frontend digest and
+scan before proposing the task-definition change.
+
+| Binding | Exact reviewed value |
+| --- | --- |
+| Core v2 bootstrap contract baseline | `16c3122a379481eb19cdee156ceb5d5c8b615bea` |
+| Expected actual Core image source | `d03a118192acd2b1ed2ef5698afb0ab8f2b36ae8` |
+| Expected actual Core image digest | `sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375` |
+| Meri runtime image source | `7eea1e852f177c17e3675429830b886b906e4cd6` |
+| Meri runtime image digest | `sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d` |
+| Frontend contracts distribution | `0.1.12` |
+
+`CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE` identifies the reviewed contract
+baseline. It does **not** assert that Core is serving that commit. The actual
+Core successor is recorded separately in `expectedCoreDeployment` and template
+metadata. Its bootstrap/current-authority, tenant, role and client-wall owners
+have identical Git blobs to the baseline. The shipping owner must independently
+verify the actual task's `RELEASE_SHA`, image digest, listener and readiness
+against those expected deployment values; static metadata is not attestation.
+Never report the baseline as the deployed source or replace the baseline with
+an arbitrary successor to bypass admission.
+
+All opt-ins remain held by default. This refresh leaves selected-client limits,
+explicit General scope, exact routes/methods/targets, Clerk/Core authorization,
+unrelated feature holds, IAM and network rules unchanged. Client and General
+chat, authorized reads, follow-up and Stop still require live acceptance.
+Historical build examples below are not commands for this release.
+
 ## Isolated configuration successor
 
 The source-only preview profile now follows backend
