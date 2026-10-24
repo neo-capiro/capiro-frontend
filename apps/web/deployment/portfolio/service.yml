@@ -148,7 +148,7 @@ Parameters:
   CapiroPreviewMeriContractPackageVersion:
     Type: String
     Default: ""
-    AllowedValues: ["", "0.1.12"]
+    AllowedValues: ["", "0.1.13"]
     Description: Frontend consumer distribution; this is not a Meri producer package assertion
 
 Rules:
@@ -225,7 +225,7 @@ Rules:
         AssertDescription: Meri route requires the currently qualified image source
       - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d"]
         AssertDescription: Meri route requires the currently qualified image digest
-      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.12"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.13"]
         AssertDescription: Meri route requires the frontend consumer distribution version
   MeriRouteHeldWithoutWorkflow:
     RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "false"]

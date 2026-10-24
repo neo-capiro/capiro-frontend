@@ -21,7 +21,7 @@ scan before proposing the task-definition change.
 | Expected actual Core image digest | `sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375` |
 | Meri runtime image source | `7eea1e852f177c17e3675429830b886b906e4cd6` |
 | Meri runtime image digest | `sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d` |
-| Frontend contracts distribution | `0.1.12` |
+| Frontend contracts distribution | `0.1.13` via `CapiroPreviewMeriContractPackageVersion`; retain the actual deployed runtime source/image pins |
 
 `CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE` identifies the reviewed contract
 baseline. It does **not** assert that Core is serving that commit. The actual

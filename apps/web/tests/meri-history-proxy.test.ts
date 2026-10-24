@@ -8,7 +8,14 @@ import type { ConversationProxyConfig } from "../src/shared/meri-conversations/p
 import {
   ConversationHistoryUnavailable,
   listConversations,
+  readConversationTranscript,
 } from "../src/shared/meri-conversations/history-client";
+
+import {
+  conversation,
+  turn,
+  initialEvents,
+} from "../test/browser/meri-history-fixtures";
 
 // Synthetic byte-boundary controls. All fetches are injected; none calls a real identity/provider.
 const origin = "https://frontend.example";
@@ -184,6 +191,101 @@ describe("synthetic native history proxy", () => {
     expect(response.headers.get("cache-control")).toContain("no-store");
     expect(response.headers.has("authorization")).toBe(false);
   });
+
+  it.each([
+    undefined,
+    { provider: "bedrock", modelId: "synthetic-model", effort: "high" },
+    { provider: "claude-api", modelId: "synthetic-model", effort: null },
+  ])(
+    "releases canonical stored model selection through proxy and browser receiver: %o",
+    async (modelSelection) => {
+      const saved = turn();
+      const body = {
+        schema: "meri.conversation-transcript/1",
+        conversation,
+        latestRun: saved.run,
+        latestSequenceBase: 0,
+        turns: [
+          {
+            ...saved,
+            request: {
+              ...saved.request,
+              ...(modelSelection === undefined ? {} : { modelSelection }),
+            },
+          },
+        ],
+        events: initialEvents,
+        nextSequence: 2,
+        lastSequence: 2,
+        hasMore: false,
+        pendingTurn: null,
+      };
+      const selector = { conversationId: conversation.conversationId };
+      const response = await proxyConversationHistory(
+        input("transcript", selector),
+        "transcript",
+        config,
+        token,
+        async () => json(body),
+      );
+      expect(response.status).toBe(200);
+      const received = await readConversationTranscript(
+        selector,
+        new AbortController().signal,
+        async () => response,
+      );
+      expect(received).toEqual(body);
+      expect(Object.hasOwn(received.turns[0]!.request, "modelSelection")).toBe(
+        modelSelection !== undefined,
+      );
+    },
+  );
+
+  it.each([
+    { provider: "unknown", modelId: "synthetic-model", effort: null },
+    { provider: "bedrock", modelId: "synthetic-model", effort: "unbounded" },
+    {
+      provider: "bedrock",
+      modelId: "synthetic-model",
+      effort: null,
+      authority: "forged",
+    },
+    null,
+  ])(
+    "does not release malformed or unknown stored model selection: %o",
+    async (modelSelection) => {
+      const saved = turn();
+      const body = {
+        schema: "meri.conversation-transcript/1",
+        conversation,
+        latestRun: saved.run,
+        latestSequenceBase: 0,
+        turns: [{ ...saved, request: { ...saved.request, modelSelection } }],
+        events: initialEvents,
+        nextSequence: 2,
+        lastSequence: 2,
+        hasMore: false,
+        pendingTurn: null,
+      };
+      const selector = { conversationId: conversation.conversationId };
+      const response = await proxyConversationHistory(
+        input("transcript", selector),
+        "transcript",
+        config,
+        token,
+        async () => json(body),
+      );
+      expect(response.status).toBe(502);
+      expect(await response.text()).not.toContain("synthetic-model");
+      await expect(
+        readConversationTranscript(
+          selector,
+          new AbortController().signal,
+          async () => json(body),
+        ),
+      ).rejects.toMatchObject({ code: "INVALID_RESPONSE" });
+    },
+  );
 
   it("does not trust forwarded host or dispatch for a request URL outside the configured origin", async () => {
     const credential = vi.fn(token);
