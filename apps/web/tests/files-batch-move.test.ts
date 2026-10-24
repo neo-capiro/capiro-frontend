@@ -1,5 +1,5 @@
 import "./command-recovery-platform";
-import { installPlatform, db } from "./command-recovery-platform";
+import { installPlatform, db, local } from "./command-recovery-platform";
 import { decryptJournal } from "../src/shared/session/recovery/journal-crypto";
 import { batchMoveRecovery } from "../src/features/portfolio/files/batch-move-recovery";
 import { createHash } from "node:crypto";
@@ -344,3 +344,136 @@ it("storage failure stops dispatch and keeps recovery blocked", async () => {
     batchMoveRecovery(clientId, s.actor, s.execution.guard).load(),
   ).rejects.toThrow(/recovery is unavailable/);
 });
+
+it("a second view clears its original cached hold only after the same command was durably acknowledged", async () => {
+  const first = setup(() => {
+    throw new Error("lost");
+  });
+  await expect(first.save()).rejects.toThrow("lost");
+  const second = setup();
+  await moveFileBatch(
+    createApiClient(async () => json(receipt(first.command))),
+    second.cache,
+    clientId,
+    second.execution,
+    { recover: "receipt" },
+  );
+  first.fetcher.mockClear();
+  await expect(first.run({ recover: "receipt" })).rejects.toMatchObject({
+    status: 409,
+  });
+  expect(first.fetcher).not.toHaveBeenCalled();
+  expect(first.cache.getQueryData(first.key)).toBeNull();
+});
+
+it("a stale exact-retry click adopts a different durable move without dispatching it", async () => {
+  const first = setup(() => {
+    throw new Error("lost first");
+  });
+  await expect(first.save()).rejects.toThrow("lost first");
+  const second = setup();
+  await moveFileBatch(
+    createApiClient(async () => json(receipt(first.command))),
+    second.cache,
+    clientId,
+    second.execution,
+    { recover: "receipt" },
+  );
+  const third = setup(() => {
+    throw new Error("lost next");
+  });
+  await expect(third.save()).rejects.toThrow("lost next");
+  first.fetcher.mockClear();
+  await expect(first.run({ recover: "retry" })).rejects.toThrow(
+    /changed in another view/,
+  );
+  expect(first.fetcher).not.toHaveBeenCalled();
+  expect(first.cache.getQueryData(first.key)).toMatchObject({
+    status: "unknown",
+    command: third.command,
+  });
+  const fetcher = vi.fn<typeof fetch>(async () => json(receipt(third.command)));
+  await moveFileBatch(
+    createApiClient(fetcher),
+    first.cache,
+    clientId,
+    first.execution,
+    { recover: "retry" },
+  );
+  expect(JSON.parse(String(fetcher.mock.calls[0]?.[1]?.body))).toEqual(
+    third.command,
+  );
+});
+
+it.each(["absent", "inconsistent"])(
+  "%s storage never proves a cached uncertain move was acknowledged",
+  async (state) => {
+    const s = setup(() => {
+      throw new Error("lost");
+    });
+    await expect(s.save()).rejects.toThrow();
+    db.records.clear();
+    if (state === "absent") local.clear();
+    s.fetcher.mockClear();
+    await expect(s.run({ recover: "receipt" })).rejects.toThrow();
+    expect(s.fetcher).not.toHaveBeenCalled();
+    expect(s.cache.getQueryData(s.key)).toMatchObject({
+      status: "unknown",
+      command: s.command,
+    });
+  },
+);
+
+it("another command's acknowledgment never clears the cached original command", async () => {
+  const first = setup(() => {
+    throw new Error("lost");
+  });
+  await expect(first.save()).rejects.toThrow();
+  const second = setup();
+  await moveFileBatch(
+    createApiClient(async () => json(receipt(first.command))),
+    second.cache,
+    clientId,
+    second.execution,
+    { recover: "receipt" },
+  );
+  await second.save();
+  first.fetcher.mockClear();
+  await expect(first.run({ recover: "receipt" })).rejects.toThrow();
+  expect(first.fetcher).not.toHaveBeenCalled();
+  expect(first.cache.getQueryData(first.key)).toMatchObject({
+    status: "unknown",
+    command: first.command,
+  });
+});
+
+it.each(["abort", "actor"])(
+  "does not restore an acknowledged cache entry if %s authority is lost after its durable write",
+  async (boundary) => {
+    const s = setup();
+    db.beforeRead = async () => {
+      for (const [scope, encrypted] of db.records) {
+        if ((await decryptJournal(scope, encrypted)).state !== "acknowledged")
+          continue;
+        if (boundary === "abort") s.controller.abort();
+        else
+          s.cache.setQueryData(["identity"], {
+            user: { id: "replacement", email: "synthetic@example.test" },
+            tenant: { id: "synthetic-tenant", name: "Synthetic" },
+            role: "standard_user",
+          });
+      }
+    };
+    await expect(s.save()).rejects.toThrow();
+    expect(s.cache.getQueryData(s.key)).toBeNull();
+    expect(
+      s.cache.getQueryData(
+        batchMoveKey(clientId, {
+          tenantId: "synthetic-tenant",
+          userId: "replacement",
+        }),
+      ),
+    ).toBeUndefined();
+    expect(s.fetcher).toHaveBeenCalledTimes(1);
+  },
+);

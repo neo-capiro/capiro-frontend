@@ -74,6 +74,17 @@ export function readRecovery<Data>(
     return record?.state === "pending" ? decode(record, contract) : null;
   });
 }
+/** Positive proof for one original command; missing storage is never acknowledgement. */
+export function readRecoveryAcknowledgement(
+  scope: string,
+  requestId: string,
+  assert: () => void,
+) {
+  return locked(scope, assert, async () => {
+    const record = await current(scope);
+    return record?.state === "acknowledged" && record.requestId === requestId;
+  });
+}
 export function reserveRecovery<Data>(
   scope: string,
   requestId: string,

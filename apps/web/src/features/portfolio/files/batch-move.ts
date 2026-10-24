@@ -86,6 +86,16 @@ export async function moveFileBatch(
         );
       if (!("command" in input) && !retained)
         throw new ApiError(409, "There is no saved move to recover.");
+      if (
+        !("command" in input) &&
+        cached &&
+        (cached.digest !== retained!.digest ||
+          JSON.stringify(cached.command) !== JSON.stringify(retained!.command))
+      )
+        throw new ApiError(
+          409,
+          "The saved move changed in another view. Review it before checking or retrying.",
+        );
       const command = commandSchema.parse(
         "command" in input ? input.command : retained!.command,
       );
@@ -131,7 +141,13 @@ export async function moveFileBatch(
     });
   } catch (error) {
     // Untyped 4xx cannot disprove an earlier commit. Retain until a validated complete receipt.
-    cache.setQueryData(key, retained ?? cached ?? null);
+    const unresolved = retained ?? cached ?? null;
+    const acknowledged = unresolved
+      ? await recovery
+          .acknowledged(unresolved.command.requestId)
+          .catch(() => false)
+      : false;
+    cache.setQueryData(key, acknowledged ? null : unresolved);
     throw error;
   }
 }

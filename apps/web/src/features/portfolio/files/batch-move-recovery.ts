@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 import {
   readRecovery,
+  readRecoveryAcknowledgement,
   reserveRecovery,
   updateRecovery,
   acknowledgeRecovery,
@@ -97,6 +98,9 @@ export function batchMoveRecovery(
     },
     acknowledge: (requestId: string) =>
       acknowledgeRecovery(scope, requestId, guard),
+    // Storage-only reconciliation of this original cache entry, never current authority or UI adoption.
+    acknowledged: (requestId: string) =>
+      readRecoveryAcknowledgement(scope, requestId, () => {}),
     lock: <T>(action: () => Promise<T>) =>
       withRecoveryCommandLock(scope, guard, action),
   };
