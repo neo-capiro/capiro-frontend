@@ -10,7 +10,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
-import { reserveConversationTurn } from "../../../shared/meri-conversations/history-client";
+import {
+  reserveConversationTurn,
+  type ConversationTranscriptPage,
+} from "../../../shared/meri-conversations/history-client";
 import {
   conversationIntentJournal,
   submissionIdentity,
@@ -196,12 +199,13 @@ function useTurnLifetime(
   return { active, alive, gate };
 }
 
-/** Owns reservation/recovery only; canonical session issuance and SDK submit retain their owners. */
+/** Owns reservation recovery and completed-request acknowledgement; session issuance and submit stay separate. */
 export function useConversationTurn(
   account: ConversationAccount,
   clientId: string | null,
   conversationId: string | undefined,
   open: (target: ConversationTurnTarget) => void,
+  completedHistory?: ConversationTranscriptPage,
 ) {
   const cache = useQueryClient();
   const {
@@ -211,6 +215,19 @@ export function useConversationTurn(
   } = useRetainedTurn(cache, account, clientId, conversationId);
   const { active, alive, gate } = useTurnLifetime(journal);
   const [notReady, setNotReady] = useState(false);
+  useEffect(() => {
+    if (
+      completedHistory &&
+      !gate.busy &&
+      !gate.error &&
+      journal?.canAcknowledgeCompleted(completedHistory)
+    )
+      void gate.perform(async () => {
+        journal.acknowledgeCompleted(completedHistory);
+      });
+    // Observe only fresh scoped history and the current immutable intent; this performs no network operation.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completedHistory, journal, intent, gate.busy, gate.error]);
   const perform = (
     source?: RunBinding,
     prompt?: string,

@@ -5,7 +5,7 @@ import styles from "./live.module.css";
 
 type Session = ReturnType<typeof useConversationSession>;
 
-/** Write uncertainty has its own recovery controls; a read snapshot never clears it. */
+/** Unresolved writes keep recovery controls until exact completed-request history acknowledges them. */
 function TurnRecoveryStatus({ session }: { session: Session }) {
   const { continuation } = session;
   return (

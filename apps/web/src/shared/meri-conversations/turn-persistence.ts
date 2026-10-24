@@ -40,6 +40,10 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
   );
   return {
     current: record.current,
+    clear() {
+      record.clear();
+      if (record.read() !== undefined) throw new TabJournalUnavailable();
+    },
     read() {
       const value = record.read();
       return value

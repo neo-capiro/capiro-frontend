@@ -1,13 +1,15 @@
 import type { QueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
-import { submissionIdentity } from "./query-journal";
+import { storedSubmission, submissionIdentity } from "./query-journal";
 import { recoverPersistedTurn } from "./turn-persistence";
 import { TabJournalUnavailable, type TabStorage } from "./tab-journal";
+import { conversationInClient } from "./history-pages";
 import type { ConversationAccount } from "./host-controller";
 import {
   ConversationHistoryUnavailable,
   type ConversationTurnReceipt,
+  type ConversationTranscriptPage,
 } from "./history-client";
 
 /** Nonsecret immutable submit identity exists before reservation dispatch, not after its ACK. */
@@ -60,7 +62,63 @@ function requirePreviousTarget(
     throw new Error("Recover the retained turn first");
 }
 
-/** Same-tab identity survives reload; the reservation mapping must still be recovered explicitly. */
+/** Fresh scoped history can consume a completed request, never manufacture a reservation receipt. */
+function completedRequest(
+  page: ConversationTranscriptPage,
+  intent: TurnIntent | undefined,
+  account: ConversationAccount,
+  clientId: string | null,
+  conversationId: string,
+) {
+  if (
+    !intent ||
+    page.pendingTurn ||
+    page.conversation.conversationId !== conversationId ||
+    page.conversation.owner.tenantId !== account.tenantId ||
+    page.conversation.owner.actorId !== account.actorId ||
+    !conversationInClient(page.conversation, account, clientId) ||
+    !["completed", "failed", "cancelled"].includes(page.latestRun.state)
+  )
+    return false;
+  const target = page.turns.find(
+    (turn) => turn.run.binding.runId === page.latestRun.binding.runId,
+  );
+  if (
+    !target ||
+    target.run.state !== page.latestRun.state ||
+    target.run.binding.runId === intent.source.runId ||
+    target.run.binding.tenantId !== account.tenantId ||
+    target.run.binding.actorId !== account.actorId ||
+    target.run.binding.conversationId !== conversationId ||
+    Object.entries(page.latestRun.binding).some(
+      ([key, value]) => target.run.binding[key as keyof RunBinding] !== value,
+    ) ||
+    (intent.receipt &&
+      Object.entries(intent.receipt.targetBinding).some(
+        ([key, value]) => target.run.binding[key as keyof RunBinding] !== value,
+      ))
+  )
+    return false;
+  const actual = {
+    ...storedSubmission({
+      ...target.request,
+      windowRequest: target.request.windowRequest ?? null,
+    }),
+  };
+  if (intent.modelSelection === undefined) delete actual.modelSelection;
+  return (
+    submissionIdentity(actual) ===
+    submissionIdentity({
+      requestId: intent.requestId,
+      prompt: intent.prompt,
+      ...(intent.modelSelection
+        ? { modelSelection: intent.modelSelection }
+        : {}),
+    })
+  );
+}
+
+/** Same-tab identity survives reload; unresolved reservation mappings need explicit recovery. */
 export function conversationTurnJournal(
   cache: QueryClient,
   account: ConversationAccount,
@@ -107,20 +165,20 @@ export function conversationTurnJournal(
   const write = (intent: TurnIntent) => {
     const previous = read();
     if (
-      previous &&
-      (previous.requestId !== intent.requestId ||
-        previous.prompt !== intent.prompt ||
+      !previous ||
+      previous.requestId !== intent.requestId ||
+      previous.prompt !== intent.prompt ||
+      submissionIdentity({
+        requestId: intent.requestId,
+        prompt: intent.prompt,
+        modelSelection: previous.modelSelection,
+      }) !==
         submissionIdentity({
           requestId: intent.requestId,
           prompt: intent.prompt,
-          modelSelection: previous.modelSelection,
-        }) !==
-          submissionIdentity({
-            requestId: intent.requestId,
-            prompt: intent.prompt,
-            modelSelection: intent.modelSelection,
-          }) ||
-        previous.source.runId !== intent.source.runId)
+          modelSelection: intent.modelSelection,
+        }) ||
+      previous.source.runId !== intent.source.runId
     )
       return false;
     return store(intent);
@@ -130,6 +188,15 @@ export function conversationTurnJournal(
     recoveryBlocked: retained.blocked,
     read,
     write,
+    canAcknowledgeCompleted: (page: ConversationTranscriptPage) =>
+      completedRequest(page, read(), account, clientId, conversationId),
+    acknowledgeCompleted(page: ConversationTranscriptPage) {
+      if (!completedRequest(page, read(), account, clientId, conversationId))
+        return false;
+      retained.record?.clear();
+      cache.setQueryData(key, Object.freeze({}));
+      return true;
+    },
     start(
       source: RunBinding,
       prompt: string,

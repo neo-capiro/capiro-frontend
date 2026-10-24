@@ -111,6 +111,9 @@ export function useConversationSession(
     clientId,
     accessLost ? undefined : selectedId,
     openTarget,
+    ready?.port.context.runId === history.current?.latestRun.binding.runId
+      ? history.current
+      : undefined,
   );
   const view = sessionHistoryState(
     history,
