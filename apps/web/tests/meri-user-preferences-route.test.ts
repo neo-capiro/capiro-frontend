@@ -5,6 +5,7 @@ const clerk = vi.hoisted(() => ({ auth: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => clerk);
 const origin = "https://frontend.example.test";
 const env = {
+  CAPIRO_PREVIEW_READ_ONLY: "false",
   CORE_API_BASE_URL: "https://core.example.test/api",
   MERI_API_BASE_URL: "https://meri.example.test",
   CAPIRO_REQUEST_ORIGIN: origin,
@@ -42,4 +43,43 @@ it("forwards the native Clerk session token, never the capiro template token", a
   expect(
     new Headers(fetcher.mock.calls[0]![1]!.headers).get("authorization"),
   ).toBe("Bearer synthetic-native-bearer");
+});
+
+it("ordinary preferences still refuse cross-origin requests before authentication", async () => {
+  for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
+  const fetcher = vi.fn();
+  vi.stubGlobal("fetch", fetcher);
+  const response = await POST(
+    new Request(`${origin}/api/settings/user/read`, {
+      method: "POST",
+      body: "{}",
+      headers: {
+        "Content-Type": "application/json",
+        Origin: "https://foreign.example.test",
+      },
+    }),
+    { params: Promise.resolve({ operation: "read" }) },
+  );
+  expect(response.status).toBe(400);
+  expect(clerk.auth).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("ordinary preferences require a signed-in session before reaching Meri", async () => {
+  for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
+  const getToken = vi.fn();
+  clerk.auth.mockResolvedValue({ userId: null, getToken });
+  const fetcher = vi.fn();
+  vi.stubGlobal("fetch", fetcher);
+  const response = await POST(
+    new Request(`${origin}/api/settings/user/read`, {
+      method: "POST",
+      body: "{}",
+      headers: { "Content-Type": "application/json", Origin: origin },
+    }),
+    { params: Promise.resolve({ operation: "read" }) },
+  );
+  expect(response.status).toBe(401);
+  expect(getToken).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
 });

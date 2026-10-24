@@ -54,8 +54,9 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   for (const name of ['CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE', 'CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL']) assert.equal(p.environment[name], '', name);
   for (const name of ['MERI_FIRST_CHAT_BOOTSTRAP_ENABLED', 'CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED',
     'MERI_MEMORY_OWNER_REVIEW_ENABLED', 'CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED']) assert.equal(p.environment[name], 'false', name);
-  assert.equal(p.parameters.length, 29);
+  assert.equal(p.parameters.length, 30);
   assert.deepEqual(p.parameters.filter(item => item.ParameterKey.startsWith('Meri')), [
+    { ParameterKey: 'MeriUserPreferencesEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriFirstChatBootstrapEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriMemoryOwnerReviewEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriApiBaseUrl', ParameterValue: '' },
@@ -66,6 +67,41 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   assert.equal(Object.hasOwn(p.environment, 'CLERK_SECRET_KEY'), false);
   assert.equal(p.secretReferences.CLERK_SECRET_KEY, bindings.clerkSecretArn);
   validatePreviewParameters(p.parameters.toReversed(), bindings);
+});
+
+test('ordinary authenticated mode switches every service target together and enables the existing catalogue', () => {
+  const input = { ...bindings, ...meriEnabled, previewReadEnabled: true,
+    firstChatBootstrapEnabled: true, previewReadOnly: false, userPreferencesEnabled: true };
+  const p = renderPreviewConfiguration(input);
+  assert.equal(p.environment.CAPIRO_PREVIEW_READ_ONLY, 'false');
+  assert.equal(p.environment.CORE_API_BASE_URL, coreApi);
+  for (const [key, suffix] of [['STRATEGY', 'strategy-api'], ['WORKSPACE', 'workspace-api'], ['INTELLIGENCE', 'intel-api']])
+    assert.equal(p.environment[`${key}_API_BASE_URL`], `https://first-chat-preview.app-dev.capiro.ai/${suffix}`);
+  assert.equal(p.environment.MERI_API_BASE_URL, input.meriApiBaseUrl);
+  assert.equal(p.environment.MERI_USER_PREFERENCES_ENABLED, 'true');
+  assert.equal(p.environment.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED, 'true');
+  assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'true');
+  assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://portfolio-preview.app.capiro.ai');
+  assert.equal(p.expectedCoreDeployment, null); // Old preview metadata is not a new deployment assertion.
+  assert.deepEqual(p.secretReferences, renderPreviewConfiguration(bindings).secretReferences);
+  validatePreviewParameters(p.parameters, input);
+  for (const key of ['CoreApiBaseUrl', 'StrategyApiBaseUrl', 'WorkspaceApiBaseUrl', 'IntelligenceApiBaseUrl']) {
+    const old = renderPreviewConfiguration(bindings).parameters.find(item => item.ParameterKey === key);
+    assert.throws(() => validatePreviewParameters(p.parameters.map(item => item.ParameterKey === key ? old : item), input), /PREVIEW_PARAMETER_MISMATCH/);
+    assert.match(template, new RegExp(`- Assert: !Equals \\[!Ref ${key}, "https://first-chat-preview\\.app-dev\\.capiro\\.ai/`));
+  }
+  assert.match(template, /OrdinaryBackendTargets:\n +RuleCondition: !Equals \[!Ref CapiroPreviewReadOnly, "false"\]/);
+  assert.match(template, /UserPreferencesRequiresMeri:/);
+});
+
+test('ordinary mode and personal preferences require explicit boolean configuration and Meri target', () => {
+  for (const value of [undefined, null, 'false', 0]) {
+    assert.throws(() => renderPreviewConfiguration({ ...bindings, previewReadOnly: value }), /PREVIEW_MODE_INVALID/);
+    assert.throws(() => renderPreviewConfiguration({ ...bindings, userPreferencesEnabled: value }), /PREVIEW_USER_PREFERENCES_FLAG_INVALID/);
+  }
+  assert.throws(() => renderPreviewConfiguration({ ...bindings, previewReadOnly: false, userPreferencesEnabled: true }), /PREVIEW_USER_PREFERENCES_DEPENDENCY_HELD/);
+  assert.throws(() => renderPreviewConfiguration({ ...bindings, ...meriEnabled, userPreferencesEnabled: true }), /PREVIEW_USER_PREFERENCES_DEPENDENCY_HELD/);
+  assert.equal(renderPreviewConfiguration({ ...bindings, previewReadOnly: false }).environment.MERI_USER_PREFERENCES_ENABLED, 'false');
 });
 
 test('memory preview is held until a listener-compatible Core successor is pinned', () => {
@@ -293,6 +329,7 @@ test('preview template constrains every explicit configuration value and keeps h
     ['CapiroPreviewMeriContractPackageVersion', '0.1.14'],
   ]);
   const optionalBooleans = new Set(['MeriConversationWorkflowEnabled', 'MeriFirstChatBootstrapEnabled',
+    'MeriUserPreferencesEnabled',
     'CapiroPreviewMeriConversationRoutesEnabled', 'MeriMemoryOwnerReviewEnabled',
     'CapiroPreviewMemoryOwnerRoutesEnabled']);
   for (const item of p.parameters) {
@@ -325,6 +362,10 @@ test('preview template constrains every explicit configuration value and keeps h
       assert.match(block, /Default: ""/);
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
       assert.deepEqual(allowed, ['', optionalExact.get(item.ParameterKey)]);
+    } else if (['CoreApiBaseUrl', 'StrategyApiBaseUrl', 'WorkspaceApiBaseUrl', 'IntelligenceApiBaseUrl', 'CapiroPreviewReadOnly'].includes(item.ParameterKey)) {
+      const ordinary = renderPreviewConfiguration({ ...bindings, previewReadOnly: false }).parameters.find(p => p.ParameterKey === item.ParameterKey);
+      const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
+      assert.deepEqual(allowed, [item.ParameterValue, ordinary.ParameterValue]);
     } else {
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
       assert.deepEqual(allowed, [item.ParameterValue], item.ParameterKey);
@@ -335,6 +376,7 @@ test('preview template constrains every explicit configuration value and keeps h
     const parameter = {
       MERI_API_BASE_URL: 'MeriApiBaseUrl', MERI_CONVERSATION_WORKFLOW_ENABLED: 'MeriConversationWorkflowEnabled',
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: 'MeriFirstChatBootstrapEnabled',
+      MERI_USER_PREFERENCES_ENABLED: 'MeriUserPreferencesEnabled',
       CAPIRO_REQUEST_ORIGIN: 'CapiroRequestOrigin', CAPIRO_PREVIEW_READ_ONLY: 'CapiroPreviewReadOnly',
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: 'CapiroPreviewReadBackendSource', CAPIRO_PREVIEW_READ_API_BASE_URL: 'CapiroPreviewReadApiBaseUrl',
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: 'CapiroPreviewClientRosterBackendSource',

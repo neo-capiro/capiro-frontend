@@ -33,8 +33,15 @@ const fixedParameters = Object.freeze({
   ExistingAppUrl: origin,
   TrackerBackend: 'intelligence',
 });
+const ordinaryServiceParameters = Object.freeze({
+  CoreApiBaseUrl: corePreviewApi,
+  StrategyApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/strategy-api',
+  WorkspaceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/workspace-api',
+  IntelligenceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/intel-api',
+});
 const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const optionalBindings = [
+  'previewReadOnly', 'userPreferencesEnabled',
   'previewReadEnabled', 'firstChatBootstrapEnabled',
   'qualifiedCoreClientRosterApiBaseUrl',
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
@@ -140,10 +147,20 @@ export function renderPreviewConfiguration(bindings) {
   const firstChat = readFirstChatConfiguration(bindings, meri);
   const qualifiedCoreRosterApi = readQualifiedCoreRosterApi(bindings, firstChat, meri);
   const memory = readMemoryConfiguration(bindings);
+  const previewReadOnly = Object.hasOwn(bindings, 'previewReadOnly') ? bindings.previewReadOnly : true;
+  const userPreferencesEnabled = Object.hasOwn(bindings, 'userPreferencesEnabled') ? bindings.userPreferencesEnabled : false;
+  if (typeof previewReadOnly !== 'boolean')
+    throw Error('PREVIEW_MODE_INVALID');
+  if (typeof userPreferencesEnabled !== 'boolean')
+    throw Error('PREVIEW_USER_PREFERENCES_FLAG_INVALID');
+  if (userPreferencesEnabled && (!meri.baseUrl || previewReadOnly))
+    throw Error('PREVIEW_USER_PREFERENCES_DEPENDENCY_HELD');
+  const services = previewReadOnly ? fixedParameters : { ...fixedParameters, ...ordinaryServiceParameters };
   const values = {
-    ...fixedParameters,
+    ...services,
     CapiroRequestOrigin: origin,
-    CapiroPreviewReadOnly: 'true',
+    CapiroPreviewReadOnly: String(previewReadOnly),
+    MeriUserPreferencesEnabled: String(userPreferencesEnabled),
     CapiroPreviewReadBackendSource: firstChat.readEnabled ? coreReadSource : '',
     CapiroPreviewReadApiBaseUrl: firstChat.readEnabled ? corePreviewApi : '',
     CapiroPreviewClientRosterBackendSource: qualifiedCoreRosterApi ? qualifiedCoreRosterSource : '',
@@ -171,17 +188,17 @@ export function renderPreviewConfiguration(bindings) {
     status: 'configuration-proposal',
     profile: 'portfolio-preview',
     backendSource: '0f1e663d5c23ed3f6f02bde801da8f5bb3f8ccba',
-    expectedCoreDeployment: firstChat.bootstrapEnabled ? {
+    expectedCoreDeployment: previewReadOnly && firstChat.bootstrapEnabled ? {
       contractSource: coreBootstrapSource,
       sourceCommit: coreDeploymentSource,
       imageDigest: coreDeploymentDigest,
     } : null,
     parameters: Object.entries(values).map(([ParameterKey, ParameterValue]) => ({ ParameterKey, ParameterValue })),
     environment: {
-      CORE_API_BASE_URL: fixedParameters.CoreApiBaseUrl,
-      STRATEGY_API_BASE_URL: '',
-      WORKSPACE_API_BASE_URL: fixedParameters.WorkspaceApiBaseUrl,
-      INTELLIGENCE_API_BASE_URL: fixedParameters.IntelligenceApiBaseUrl,
+      CORE_API_BASE_URL: services.CoreApiBaseUrl,
+      STRATEGY_API_BASE_URL: services.StrategyApiBaseUrl,
+      WORKSPACE_API_BASE_URL: services.WorkspaceApiBaseUrl,
+      INTELLIGENCE_API_BASE_URL: services.IntelligenceApiBaseUrl,
       CAPIRO_EXISTING_APP_URL: origin,
       TRACKER_BACKEND: 'intelligence',
       ONBOARD_API_BASE_URL: '',
@@ -191,7 +208,8 @@ export function renderPreviewConfiguration(bindings) {
       MERI_DOCUMENT_WORKFLOW_ENABLED: 'false',
       MERI_DOCUMENT_OPERATION: '',
       CAPIRO_REQUEST_ORIGIN: origin,
-      CAPIRO_PREVIEW_READ_ONLY: 'true',
+      CAPIRO_PREVIEW_READ_ONLY: String(previewReadOnly),
+      MERI_USER_PREFERENCES_ENABLED: String(userPreferencesEnabled),
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: values.CapiroPreviewReadBackendSource,
       CAPIRO_PREVIEW_READ_API_BASE_URL: values.CapiroPreviewReadApiBaseUrl,
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: values.CapiroPreviewClientRosterBackendSource,
@@ -218,8 +236,10 @@ export function renderPreviewConfiguration(bindings) {
       applicationId: bindings.clerkApplicationId,
       requiredEnvironment: 'configured-core-issuer-unverified',
     },
-    holds: ['strategy', 'onboard', 'meri'],
-    activationStatus: meri.enabled
+    holds: previewReadOnly ? ['strategy', 'onboard', 'meri'] : ['onboard'],
+    activationStatus: !previewReadOnly
+      ? 'unverified ordinary authenticated routing; verify backend routes and credential compatibility before activation'
+      : meri.enabled
       ? 'unverified; Meri service and model readiness not established; not a complete apply request'
       : 'unverified; all backend services held at zero; not a complete apply request',
   };

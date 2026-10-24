@@ -7,7 +7,7 @@ not alter the existing `capiro-dev` cluster, shared Capiro ALB/listener,
 `os.capiro.ai`, or backend services. The source continuation requires an
 owner-visible AWS step before shipping an image or creating resources.
 
-## Current first-chat operator pins
+## Existing first-chat containment pins
 
 The frontend service uses **ARM64/Linux**, matching native image qualification.
 The previously deployed revision25 used X86_64; do not pair that task platform
@@ -43,7 +43,45 @@ unrelated feature holds, IAM and network rules unchanged. Client and General
 chat, authorized reads, follow-up and Stop still require live acceptance.
 Historical build examples below are not commands for this release.
 
-## Isolated configuration successor
+## Ordinary authenticated activation
+
+The existing frontend image supports ordinary authenticated gateways. Set
+`previewReadOnly: false` in the operator bindings to produce
+`CapiroPreviewReadOnly=false` together with these four backend targets:
+
+| Parameter | Target |
+| --- | --- |
+| `CoreApiBaseUrl` | `https://first-chat-preview.app-dev.capiro.ai/api` |
+| `StrategyApiBaseUrl` | `https://first-chat-preview.app-dev.capiro.ai/strategy-api` |
+| `WorkspaceApiBaseUrl` | `https://first-chat-preview.app-dev.capiro.ai/workspace-api` |
+| `IntelligenceApiBaseUrl` | `https://first-chat-preview.app-dev.capiro.ai/intel-api` |
+
+The renderer and template require this pairing, preventing ordinary requests
+from looping back to the frontend. Preserve the public request origin, current
+Meri HTTPS origin, Clerk secret references, enabled chat flags and deployed image.
+`userPreferencesEnabled: true` emits `MeriUserPreferencesEnabled=true` and the
+existing `MERI_USER_PREFERENCES_ENABLED` environment flag for personal preferences
+and the model catalogue. It requires ordinary mode and a configured Meri origin.
+Both new bindings are optional; defaults retain containment and disabled
+preferences. The frontend contract pin remains `0.1.13`.
+
+This change needs a task configuration update, not a frontend image build. Before
+activation, the shipping owner must verify the Core route-selection correction
+and exact host/method backend listener routes. Ordinary Core calls use the existing
+`capiro` Clerk template; bootstrap and Meri preferences use the native session.
+Verify compatibility with the deployed Core session requirements. Tenant, role,
+client ownership and same-origin checks remain in their existing owners. Other
+service GET/HEAD listener limits remain; this configuration grants no new backend
+permission. The old preview source markers do not attest the deployed successor;
+ordinary proposals return no `expectedCoreDeployment` claim.
+
+Signed-in acceptance must cover authorized reads, General/client bootstrap,
+history, model catalogue and the intentionally activated mutation. Preserve real
+403 refusals. Provider sends still require their existing explicit authorization.
+For rollback restore the prior configuration as a unit, including all four service
+targets and the preferences flag; keep the verified image and data unchanged.
+
+## Contained configuration profile
 
 The source-only preview profile now follows backend
 [PR2483 at 0f1e663d](https://github.com/neo-capiro/capirov2/pull/2483).
@@ -83,7 +121,7 @@ duplicates, overrides and `UsePreviousValue`; it never merges ambient environmen
 values or reads AWS/secret contents. Output is not a complete apply request.
 Image, certificate and ingress review remain with the shipping owner.
 
-The service template constrains the same preview parameters. Read and bootstrap
+With the default contained profile, the service template constrains the same preview parameters. Read and bootstrap
 target the separate Core bare API origin when enabled; ordinary `CORE_API_BASE_URL`
 still points to this frontend's `/api`. `CAPIRO_PREVIEW_READ_ONLY` remains true
 and `CAPIRO_REQUEST_ORIGIN` remains the Portfolio preview origin. First-chat
