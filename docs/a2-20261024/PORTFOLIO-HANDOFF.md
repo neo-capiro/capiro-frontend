@@ -1,6 +1,16 @@
 # Visible Portfolio checkpoint — 24 October 2026
 
-Root owns integration, independent review, shared gate scheduling and release. This is source and local test evidence, not deployed acceptance. PF16 remains D's file batch owner. No deployment, AWS, schema change, migration application, database/browser acceptance, dependency install or additional chat was started by this lane.
+Root owns integration, independent review, shared gate scheduling and release. This is source and local test evidence, not deployed acceptance. PF16 remains D's file batch owner. Root allocated one disposable local PostgreSQL gate, now complete and released. No deployment, AWS, production schema/migration application, browser run, dependency install or additional chat was started by this lane.
+
+## Follow-up: actual PostgreSQL and plain Quick Log
+
+Core `92df681b20a136b7d5c4edede87d363bac34f902` passed **19/19 actual PostgreSQL cases**, zero skips/failures/runtime errors. Product code is unchanged from `516633834`: fixture-only corrections align synthetic required user email and the canonical tenant_status enum, and drain concurrent operations before asserting failure. Exact516 initially executed7/19 passing; original failures and runner failures remain preserved. Later `391afdf9b` only narrows the already-asserted settled result tuple for TypeScript; it is not another PG run.
+
+Evidence: `C:/dev/wave2-evidence-20261024/portfolio/pg-516633834-narrow` contains COMMANDS.md, original/final logs and JSON, tool versions and verified cleanup.json. PostgreSQL16.15/Node24.22.1/Jest29.7/Prisma5.22 ran in a uniquely labelled, network-none,2CPU/3GiB,tmpfs disposable container with retained tooling read-only. Both owned containers were removed and absence verified. The sole PG slot is RELEASED. These results supersede earlier unrun PG statements below, without establishing browser or deployed acceptance.
+
+PF13 plain Quick Log now uses the existing optional-follow-up ActivityCommand. It retains original input/request across reload, uses the existing encrypted scope and cross-tab execution lock, reads the original receipt and reuses only that exact request on explicit recovery. Generic failures remain held. Done rereads current authority and the original receipt before acknowledging. An independent current command-owned timeline snapshot may enable prospective Undo; it is not historical proof. Undo still rechecks exact current lineage before its existing DELETE, and its separate durable-deletion protocol remains open.
+
+Replaced raw createQuickLog/useQuickLog code and its obsolete creation tests were removed. Existing follow-up behavior uses the same renamed useActivityCommand/ActivityCommandStatus owner and unchanged journal scope. Browser source now covers plain lost response/reload/GET recovery/exact-key replay/acknowledgment mismatch/second-tab recovery and adapts commitment, person-linked note, meeting handoff and explicit Undo scenarios. Browser execution remains unallocated and unrun. Current PF13 checks: six affected suites **73/73 pass**, full frontend TypeScript and changed-file lint/format pass. Architecture errors[] with function-size obligations, exit1. Focused Core TypeScript passes at `5e6cb3034`, after both settled result tuples were narrowed (`391afdf9b`, `5e6cb3034`); no product change or additional PG run.
 
 ## Source and provenance
 
@@ -50,7 +60,7 @@ PF09 retains the canonical client-ID implementation: name-only rows stay held, f
 
 ## Remaining scope and coordination
 
-PF13 remains an owner-by-owner protocol census/repair. Plain Quick Log can reuse Core's existing optional-follow-up ActivityCommand, but its frontend still requires a follow-up and uses ordinary POST for plain activity. A repair must preserve explicit Undo/lineage behavior and avoid treating a current timeline observation as a historical command receipt. Calendar mutation/artifact/share/sync, contact creation and non-PF16 file flows still need their exact domain owners. Existing durable activity, upload and Objective protocols are preserved.
+PF13 remains an owner-by-owner protocol census/repair. Plain Quick Log creation is repaired as described above. Undo deletion, calendar mutation/artifact/share/sync, contact creation and non-PF16 file flows still need their exact domain owners. Existing durable activity, upload and Objective protocols are preserved.
 
 PF18 carry-over is a separate open stage: category-specific contacts/files/research custody, revisions, merge conflicts, ACL and rollback semantics need owner allocation. No implicit copy-all behavior or D-owned file changes were introduced. PF09 saved Workspace revisions/writers and deployed revocation acceptance also remain open.
 
