@@ -441,8 +441,17 @@ test("Integrations require configured capability, keep IMAP unavailable and cons
     }),
   );
   await openSettings(page, "integrations");
+  const google = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Google Workspace", exact: true }),
+  });
   await expect(
-    page.getByRole("button", {
+    google.getByText(
+      "This provider is not configured on the server. A Capiro administrator must add the OAuth credentials before accounts can be connected.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(
+    google.getByRole("button", {
       name: "Administrator setup required",
       exact: true,
     }),
