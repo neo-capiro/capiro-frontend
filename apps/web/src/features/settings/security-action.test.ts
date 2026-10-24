@@ -103,6 +103,7 @@ vi.mock("../../shared/capiro/registry", () => ({
     "me.update": { method: "PATCH" },
     "me.emailSignature.update": { method: "PUT" },
     "settings.branding.update": { method: "PUT" },
+    "settings.support.create": { method: "POST" },
     "settings.contact.update": { method: "PUT" },
     "settings.profiles.create": { method: "POST" },
     "settings.profiles.archive": { method: "DELETE" },
@@ -515,6 +516,76 @@ describe("Remaining Settings form recovery", () => {
     cache.clear();
     await mount(section);
   };
+  it("recovers only the exact owned support receipt after reload without retaining report text", async () => {
+    const body = {
+      id: "11111111-1111-4111-8111-111111111111",
+      summary: "Private summary",
+      detail: "Private report",
+      runReference: "Opaque reference",
+    };
+    const receipt = {
+      ...body,
+      tenantId: "tenant-a",
+      submittedByUserId: "actor-a",
+      createdAt: "2026-10-24T00:00:00Z",
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockRejectedValueOnce(new Error("reply lost"));
+    await mount("support-request");
+    await act(() => send("settings.support.create", { body }));
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "support-request"])}`;
+    for (const text of [body.summary, body.detail, body.runReference])
+      expect(sessionStorage.getItem(key)).not.toContain(text);
+    expect(sessionStorage.getItem(key)).toContain(body.id);
+    await remount("support-request");
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ ...receipt, detail: "Wrong report" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(receipt);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(current().action.message).toBe("Report saved for HQ review.");
+    expect(after).not.toHaveBeenCalled();
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.support.create",
+      ),
+    ).toHaveLength(1);
+  });
+  it.each([
+    "id",
+    "tenantId",
+    "submittedByUserId",
+    "summary",
+    "detail",
+    "runReference",
+  ])("rejects mismatched support receipt %s", async (field) => {
+    const body = {
+      id: "11111111-1111-4111-8111-111111111111",
+      summary: "Summary",
+      detail: "Detail",
+      runReference: null,
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({
+        ...body,
+        tenantId: "tenant-a",
+        submittedByUserId: "actor-a",
+        [field]: "wrong",
+      });
+    await mount("support-request");
+    await act(() => send("settings.support.create", { body }));
+    expect(current().locked).toBe(true);
+    expect(after).not.toHaveBeenCalled();
+  });
   it("reconciles a lost company-name save without claiming provider sync or retaining the name", async () => {
     state.api.request
       .mockReset()
@@ -563,13 +634,11 @@ describe("Remaining Settings form recovery", () => {
       expect.objectContaining({ clerkSync: "failed" }),
     );
     after.mockClear();
-    state.api.request
-      .mockResolvedValueOnce(identity)
-      .mockResolvedValueOnce({
-        id: "other",
-        name: "Reviewed",
-        clerkSync: "confirmed",
-      });
+    state.api.request.mockResolvedValueOnce(identity).mockResolvedValueOnce({
+      id: "other",
+      name: "Reviewed",
+      clerkSync: "confirmed",
+    });
     await act(() =>
       send("settings.branding.update", { body: { name: "Reviewed" } }),
     );

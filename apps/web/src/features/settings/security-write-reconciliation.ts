@@ -15,6 +15,38 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "settings.support.create": {
+      if (
+        !write.expectedAccount ||
+        !write.requestHash ||
+        typeof body.id !== "string"
+      )
+        return false;
+      const account = await api.request("me.read", {}, { signal });
+      if (
+        account.user.id !== write.expectedAccount.userId ||
+        account.tenant.id !== write.expectedAccount.tenantId
+      )
+        return false;
+      const receipt = await api.request(
+        "settings.support.receipt",
+        { params: { id: body.id } },
+        { signal },
+      );
+      return (
+        receipt.id === body.id &&
+        receipt.tenantId === write.expectedAccount.tenantId &&
+        receipt.submittedByUserId === write.expectedAccount.userId &&
+        (await settingsRequestHash({
+          body: {
+            id: receipt.id,
+            summary: receipt.summary,
+            detail: receipt.detail,
+            runReference: receipt.runReference,
+          },
+        })) === write.requestHash
+      );
+    }
     case "settings.branding.update": {
       if (!write.expectedAccount || !write.requestHash) return false;
       const account = await api.request("me.read", {}, { signal });

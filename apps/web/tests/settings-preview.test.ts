@@ -32,23 +32,24 @@ vi.mock("../src/shared/capiro/queries", () => ({
 }));
 beforeEach(() => vi.clearAllMocks());
 describe("Settings Profiles preview", () => {
-  it("requests only the permitted active roster, disables owner reads and hides archived actions", () => {
+  it("preserves admitted archived roster and owner reads while disabling held profile writes", () => {
     const html = renderToStaticMarkup(
       createElement(ProfileSettings, { readOnlyPreview: true }),
     );
     expect(state.queries).toHaveBeenCalledWith(
       "clients.list",
-      { query: { includeArchived: false } },
+      { query: { includeArchived: true } },
       undefined,
     );
     expect(state.queries).toHaveBeenCalledWith(
       "settings.profiles.accountOwners",
       {},
-      { enabled: false },
+      { enabled: true },
     );
     expect(html).toContain("Visible profile");
-    expect(html).toContain("Active profiles only in preview");
-    expect(html).not.toMatch(/>Archive<|>Restore<|Archived \(0\)/);
+    expect(html).toContain("Profile changes unavailable in preview");
+    expect(html).toContain("Archived (0)");
+    expect(html).not.toMatch(/>Archive<|>Restore</);
     expect(html).toMatch(
       /<button[^>]*disabled=""[^>]*>\+ Add profile<\/button>/,
     );

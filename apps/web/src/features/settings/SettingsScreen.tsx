@@ -15,6 +15,7 @@ import { SettingsNotice } from "./components";
 import { ContactSettings } from "./ContactSettings";
 import { AiKeysSettings } from "./hq/AiKeysSettings";
 import { BroadcastSettings } from "./hq/BroadcastSettings";
+import { SupportRequestsSettings } from "./hq/SupportRequestsSettings";
 import { CustomerSettings } from "./hq/CustomerSettings";
 import { TenantSettings } from "./hq/TenantSettings";
 import { TenantTabs } from "./hq/TenantTabs";
@@ -59,6 +60,7 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   "hq-customers": () => <CustomerSettings />,
   "hq-ai-keys": () => <AiKeysSettings />,
   "hq-broadcasts": () => <BroadcastSettings />,
+  "hq-support": () => <SupportRequestsSettings />,
   "intelligence-mappings": () => <MappingSettings />,
   "hq-personnel": () => <PersonnelMergeQueue />,
   "hq-reconciliation": () => <ReconciliationQueue />,
@@ -136,14 +138,15 @@ export function SettingsScreen({
                 Ask a workspace administrator to update your permissions in
                 Team.
               </SettingsNotice>
-            ) : readOnlyPreview &&
-              !["personal", "profiles"].includes(section) ? (
-              <SettingsNotice title="This Settings section is unavailable in preview">
-                Preview provides your identity and active profiles. Additional
-                Settings reads and changes are unavailable in this mode.
-              </SettingsNotice>
             ) : render ? (
               <>
+                {readOnlyPreview && section !== "meri-preferences" && (
+                  <SettingsNotice title="Preview settings">
+                    You can view authorized records. Capiro settings changes are
+                    unavailable in this preview; connected Meri preferences
+                    remain available.
+                  </SettingsNotice>
+                )}
                 {["hq-tenants", "hq-ai-keys", "hq-personnel"].includes(
                   section,
                 ) && <TenantTabs section={section} />}

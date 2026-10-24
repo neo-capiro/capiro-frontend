@@ -81,6 +81,7 @@ export function useSettingsMutation(section: string) {
             operation === "me.update" ||
             operation === "me.emailSignature.update" ||
             operation === "settings.branding.update" ||
+            operation === "settings.support.create" ||
             operation === "settings.contact.update"
           ) {
             const identity = await raw.request("me.read", {}, options);
@@ -176,12 +177,19 @@ export function useSettingsMutation(section: string) {
     () => undefined,
   );
   const reconcile = () =>
-    action.run(async (signal) => {
-      const write = cache.getQueryData<SettingsWrite>(journalKey);
-      if (!write || !(await reconcileSettingsWrite(raw, write, signal)))
-        throw new Error(uncertainSettingsWrite);
-      signal.throwIfAborted();
-      clear(write);
-    }, "The recorded target now has the requested state. Review it before making another change.");
+    action.run(
+      async (signal) => {
+        const write = cache.getQueryData<SettingsWrite>(journalKey);
+        if (!write || !(await reconcileSettingsWrite(raw, write, signal)))
+          throw new Error(uncertainSettingsWrite);
+        signal.throwIfAborted();
+        clear(write);
+        return write.operation;
+      },
+      (operation) =>
+        operation === "settings.support.create"
+          ? "Report saved for HQ review."
+          : "The recorded target now has the requested state. Review it before making another change.",
+    );
   return { api, action, pending, reconcile, locked: action.busy || !!pending };
 }

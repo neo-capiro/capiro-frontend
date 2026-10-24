@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { FormField } from "../../ui/FormField";
 import panel from "../../ui/panel.module.css";
@@ -45,10 +45,12 @@ export function HelpShortcutsScreen({
   chrome,
   view,
   outcome,
+  reportContent,
 }: {
   chrome: SettingsChrome;
   view: HelpShortcutsView;
   outcome?: SettingsOutcome | undefined;
+  reportContent?: ReactNode;
 }) {
   const { shortcuts, supported } = view;
   return (
@@ -72,14 +74,16 @@ export function HelpShortcutsScreen({
         </>
       }
       supporting={
-        <>
-          <ReportProblem
-            report={view.report}
-            unavailable={chrome.unavailable}
-            drafts={chrome.localDrafts}
-          />
-          <SettingsCallout notice={view.unavailable} />
-        </>
+        reportContent ?? (
+          <>
+            <ReportProblem
+              report={view.report}
+              unavailable={chrome.unavailable}
+              drafts={chrome.localDrafts}
+            />
+            <SettingsCallout notice={view.unavailable} />
+          </>
+        )
       }
     />
   );

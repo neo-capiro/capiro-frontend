@@ -37,6 +37,16 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.support.create":
+      confirmed =
+        !!write.expectedAccount &&
+        equal(receipt.id, body.id) &&
+        equal(receipt.tenantId, write.expectedAccount.tenantId) &&
+        equal(receipt.submittedByUserId, write.expectedAccount.userId) &&
+        equal(receipt.summary, body.summary) &&
+        equal(receipt.detail, body.detail) &&
+        equal(receipt.runReference, body.runReference);
+      break;
     case "settings.branding.update":
       confirmed =
         !!write.expectedAccount &&

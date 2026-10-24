@@ -42,11 +42,14 @@ export async function persistSettingsWrite(
 ) {
   const requestHash = await settingsRequestHash(dispatchedInput);
   write.requestHash = requestHash;
-  const body = Object.fromEntries(
-    Object.entries(write.input.body ?? {}).filter(([name]) =>
-      retainedValues.includes(name),
-    ),
-  );
+  const body =
+    write.operation === "settings.support.create"
+      ? { id: write.input.body?.id }
+      : Object.fromEntries(
+          Object.entries(write.input.body ?? {}).filter(([name]) =>
+            retainedValues.includes(name),
+          ),
+        );
   storage.setItem(
     key,
     JSON.stringify({

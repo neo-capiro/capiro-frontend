@@ -113,7 +113,7 @@ export function PersonalSettings({
           ]}
         />
       </SettingsCard>
-      {!readOnlyPreview && <EmailSignature />}
+      <EmailSignature readOnlyPreview={readOnlyPreview} />
       <SettingsCard
         title="Watchlist and monitoring setup"
         description="Manage the client watchlists and monitoring settings used by LegiWatch."

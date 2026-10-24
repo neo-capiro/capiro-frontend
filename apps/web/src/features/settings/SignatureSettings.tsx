@@ -27,13 +27,21 @@ function SignatureEditor({
   initialHtml,
   initialEnabled,
   reload,
+  readOnlyPreview,
 }: {
   initialHtml: string | null;
   initialEnabled: boolean;
   reload: () => void;
+  readOnlyPreview: boolean;
 }) {
-  const { api, action, pending, reconcile, locked } =
-    useSettingsMutation("signature");
+  const {
+    api,
+    action,
+    pending,
+    reconcile,
+    locked: mutationLocked,
+  } = useSettingsMutation("signature");
+  const locked = mutationLocked || readOnlyPreview;
   const [html, setHtml] = useState(initialHtml ?? "");
   const [enabled, setEnabled] = useState(initialEnabled);
   const [fileError, setFileError] = useState<string>();
@@ -210,7 +218,11 @@ function SignatureEditor({
   );
 }
 
-export function EmailSignature() {
+export function EmailSignature({
+  readOnlyPreview = false,
+}: {
+  readOnlyPreview?: boolean;
+}) {
   const query = useCapiroQuery("me.emailSignature.read", {});
   return (
     <SettingsCard
@@ -229,6 +241,7 @@ export function EmailSignature() {
             initialHtml={query.data.html}
             initialEnabled={query.data.enabled}
             reload={query.reload}
+            readOnlyPreview={readOnlyPreview}
           />
         )}
       </StatusPanel>

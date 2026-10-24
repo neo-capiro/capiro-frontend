@@ -1,6 +1,7 @@
 import { ConnectedModule } from "../../../shared/shell/ConnectedModule";
 import { SettingsScreen } from "../../../features/settings";
 import { MeriPreferencesPanel } from "../../../features/meri/screens/settings/MeriPreferencesPanel";
+import { SupportRequestForm } from "../../../features/settings/SupportRequestForm";
 
 export default async function SettingsPage({
   params,
@@ -21,6 +22,7 @@ export default async function SettingsPage({
         }
         meriPreferences={
           <MeriPreferencesPanel
+            reportContent={readOnlyPreview ? undefined : <SupportRequestForm />}
             userPreferencesEnabled={
               process.env.MERI_USER_PREFERENCES_ENABLED === "true"
             }

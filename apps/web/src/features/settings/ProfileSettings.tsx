@@ -39,13 +39,13 @@ export function ProfileSettings({
   const { api, action, pending, reconcile, locked } =
     useSettingsMutation("profiles");
   const query = useCapiroQuery("clients.list", {
-    query: { includeArchived: !readOnlyPreview },
+    query: { includeArchived: true },
   });
   const [tab, setTab] = useState("active");
   const owners = useCapiroQuery(
     "settings.profiles.accountOwners",
     {},
-    { enabled: !readOnlyPreview && tab === "active" },
+    { enabled: tab === "active" },
   );
   const [search, setSearch] = useState("");
   const [archive, setArchive] = useState<Client>();
@@ -105,9 +105,7 @@ export function ProfileSettings({
             onChange={setTab}
             items={[
               { id: "active", label: `Active (${active.length})` },
-              ...(!readOnlyPreview
-                ? [{ id: "archived", label: `Archived (${archived.length})` }]
-                : []),
+              { id: "archived", label: `Archived (${archived.length})` },
             ]}
           />
         </div>
@@ -128,9 +126,9 @@ export function ProfileSettings({
         </SettingsButton>
       </div>
       {readOnlyPreview && (
-        <SettingsNotice title="Active profiles only in preview">
-          Archived profiles, account-owner details and profile changes are
-          unavailable in this mode.
+        <SettingsNotice title="Profile changes unavailable in preview">
+          Active profiles, archived profiles and account-owner details remain
+          available to authorized users.
         </SettingsNotice>
       )}
       {action.error && (
