@@ -36,6 +36,10 @@ Resources:
             Principal:
               Service: codebuild.amazonaws.com
             Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+                aws:SourceArn: !Sub arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/capiro-portfolio-preview-build
       Policies:
         - PolicyName: portfolio-preview-build
           PolicyDocument:
@@ -65,6 +69,7 @@ Resources:
                   - ecr:CompleteLayerUpload
                   - ecr:PutImage
                   - ecr:BatchGetImage
+                  - ecr:GetDownloadUrlForLayer
                   - ecr:DescribeImages
                 Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/capiro/portfolio-preview
   PortfolioBuildProject:
