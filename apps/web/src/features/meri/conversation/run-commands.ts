@@ -33,9 +33,11 @@ export function matchesStoredRequest(
   const request = { ...retained };
   Reflect.deleteProperty(request, "state");
   Reflect.deleteProperty(request, "workflow");
-  return (
-    submissionIdentity(request) === submissionIdentity(storedSubmission(stored))
-  );
+  const saved = { ...storedSubmission(stored) };
+  // Admission resolves omitted defaults/inheritance into the stored request.
+  // Only an originally explicit choice is part of the retained input identity.
+  if (request.modelSelection === undefined) delete saved.modelSelection;
+  return submissionIdentity(request) === submissionIdentity(saved);
 }
 
 /** Positive exact-run history can resolve delivery uncertainty without sending anything. */
@@ -72,6 +74,7 @@ export async function sendRequest(
   retry: boolean,
   initial = false,
   onRecorded?: (request: ConversationSubmitRequest) => void,
+  modelSelection?: ConversationSubmitRequest["modelSelection"],
 ) {
   const retained = intent.read().submit;
   if ((!retry && retained) || (retry && !retained))
@@ -81,11 +84,16 @@ export async function sendRequest(
     : {
         requestId: crypto.randomUUID(),
         prompt,
+        ...(modelSelection
+          ? { modelSelection: Object.freeze({ ...modelSelection }) }
+          : {}),
         state: "pending" as const,
         ...(initial ? { workflow: "initial" as const } : {}),
       };
   intent.write({ ...intent.read(), submit: { ...input, state: "pending" } });
-  const { state: _state, workflow, ...request } = input;
+  const { workflow, ...request } = input;
+  Reflect.deleteProperty(request, "state");
+  Object.freeze(request);
   try {
     if (!retry) onRecorded?.(request);
     if (retry && port.getSnapshot().submit === "unknown")
@@ -110,10 +118,12 @@ export async function recoverRequest(
   intent: IntentRecord,
   stored: ConversationStoredRequest,
 ) {
-  const request = storedSubmission(stored),
+  const request = { ...storedSubmission(stored) },
     retained = intent.read().submit;
   if (retained && !matchesStoredRequest(retained, stored))
     throw new ConversationUnavailable("retained-submit-mismatch");
+  if (retained && retained.modelSelection === undefined)
+    delete request.modelSelection;
   // Canonical stored input already exists. A recreated port can use ordinary admission;
   // a still-live unknown SDK operation retains and retries its own exact original workflow.
   intent.write({ ...intent.read(), submit: { ...request, state: "unknown" } });

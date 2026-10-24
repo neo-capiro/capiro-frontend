@@ -1,5 +1,7 @@
 import type { QueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
+import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
+import { submissionIdentity } from "./query-journal";
 import { recoverPersistedTurn } from "./turn-persistence";
 import { TabJournalUnavailable, type TabStorage } from "./tab-journal";
 import type { ConversationAccount } from "./host-controller";
@@ -17,6 +19,7 @@ export type TurnIntent = Readonly<{
     Partial<RunBinding>;
   requestId: string;
   prompt: string;
+  modelSelection?: ConversationSubmitRequest["modelSelection"];
   state: "reserving" | "unknown" | "ready";
   receipt?: ConversationTurnReceipt;
 }>;
@@ -33,6 +36,9 @@ function snapshotIntent(intent: TurnIntent) {
   return Object.freeze({
     ...intent,
     source: Object.freeze({ ...intent.source }),
+    ...(intent.modelSelection
+      ? { modelSelection: Object.freeze({ ...intent.modelSelection }) }
+      : {}),
     ...(receipt ? { receipt } : {}),
   });
 }
@@ -104,6 +110,16 @@ export function conversationTurnJournal(
       previous &&
       (previous.requestId !== intent.requestId ||
         previous.prompt !== intent.prompt ||
+        submissionIdentity({
+          requestId: intent.requestId,
+          prompt: intent.prompt,
+          modelSelection: previous.modelSelection,
+        }) !==
+          submissionIdentity({
+            requestId: intent.requestId,
+            prompt: intent.prompt,
+            modelSelection: intent.modelSelection,
+          }) ||
         previous.source.runId !== intent.source.runId)
     )
       return false;
@@ -114,7 +130,12 @@ export function conversationTurnJournal(
     recoveryBlocked: retained.blocked,
     read,
     write,
-    start(source: RunBinding, prompt: string, requestId: string) {
+    start(
+      source: RunBinding,
+      prompt: string,
+      requestId: string,
+      modelSelection?: ConversationSubmitRequest["modelSelection"],
+    ) {
       if (
         !current() ||
         source.tenantId !== account.tenantId ||
@@ -127,6 +148,9 @@ export function conversationTurnJournal(
         source: Object.freeze({ ...source }),
         prompt,
         requestId,
+        ...(modelSelection
+          ? { modelSelection: Object.freeze({ ...modelSelection }) }
+          : {}),
         state: "reserving",
       });
       store(intent);

@@ -75,7 +75,13 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
             conversationId: intent.source.conversationId,
             sourceRunId: intent.source.runId,
           },
-          request: { requestId: intent.requestId, prompt: intent.prompt },
+          request: {
+            requestId: intent.requestId,
+            prompt: intent.prompt,
+            ...(intent.modelSelection
+              ? { modelSelection: intent.modelSelection }
+              : {}),
+          },
         }),
       );
     },

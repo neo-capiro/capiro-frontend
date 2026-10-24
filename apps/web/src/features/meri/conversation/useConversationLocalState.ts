@@ -92,6 +92,10 @@ export function useConversationLocalState(
   scope?: TabScope,
 ) {
   const { owner, edit } = useDraftState(context, accessLost, scope);
+  const [modelDraft, setModelDraft] = useState<{
+    owner: typeof owner;
+    value: ConversationSubmitRequest["modelSelection"];
+  }>({ owner, value: undefined });
   const [turns, setTurns] = useState<readonly TurnView[]>([]);
   const [wasAccessLost, setWasAccessLost] = useState(accessLost);
   if (accessLost !== wasAccessLost) {
@@ -108,6 +112,11 @@ export function useConversationLocalState(
     draft: accessLost ? "" : owner.draft(),
     turns: accessLost ? [] : turns,
     setDraft: edit,
+    modelSelection:
+      !accessLost && modelDraft.owner === owner ? modelDraft.value : undefined,
+    setModelSelection: (value: ConversationSubmitRequest["modelSelection"]) => {
+      if (!accessLost) setModelDraft({ owner, value });
+    },
     initialDraft: owner,
     storageError: owner.error(),
     bindNext,
