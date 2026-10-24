@@ -3,15 +3,22 @@ import { expectAccessibleHome } from "../../test/accessibility";
 import {
   tabTo,
   expectFocusEvidence,
+  clickObservedPoint,
 } from "../../test/accessibility-interaction";
-import { installFixtures } from "./fixtures";
+import { installFixtures, prospect } from "./fixtures";
 
-for (const width of [1440, 390]) {
-  test(`Portfolio home preserves accessible names, descriptions and default axe checks at ${width}px`, async ({
+for (const { width, colorScheme } of [
+  { width: 1440, colorScheme: "light" },
+  { width: 390, colorScheme: "light" },
+  { width: 1440, colorScheme: "dark" },
+  { width: 390, colorScheme: "dark" },
+] as const) {
+  test(`Portfolio home preserves accessible names, descriptions and default axe checks at ${width}px${colorScheme === "dark" ? " (dark)" : ""}`, async ({
     page,
   }, testInfo) => {
     const unexpected = await installFixtures(page);
     await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
+    await page.emulateMedia({ colorScheme });
     await page.goto("/");
     const profile = page.getByRole("link", {
       name: "Open Test Aerospace",
@@ -54,6 +61,30 @@ for (const width of [1440, 390]) {
     await expect(
       page.getByRole("heading", { name: "Test Aerospace", level: 2 }),
     ).toBeVisible();
+    const prospectLink = page.getByRole("link", {
+      name: `Open prospect ${prospect.displayName}`,
+      exact: true,
+    });
+    await expect(prospectLink).toHaveAccessibleDescription(
+      "Advocacy · Virginia",
+    );
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    await tabTo(page, prospectLink);
+    await expectFocusEvidence(prospectLink, testInfo);
+    await prospectLink.press("Enter");
+    const destination = `/portfolio/prospects/${prospect.id}`;
+    await expect(page).toHaveURL(new RegExp(`${destination}$`));
+    await page.goBack();
+    await clickObservedPoint(
+      page,
+      page.getByText("Prospect", { exact: true }),
+      destination,
+    );
+    await expect(page).toHaveURL(new RegExp(`${destination}$`));
     expect(unexpected).toEqual([]);
   });
 }

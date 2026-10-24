@@ -70,8 +70,12 @@
   gap: 18px;
 }
 .prospectCard {
+  position: relative;
   border-style: dashed;
   border-color: var(--border-strong);
+}
+.prospectCard .cardTop {
+  position: static;
 }
 .prospectCard:hover {
   text-decoration: none;
@@ -103,7 +107,7 @@
 }
 .prospectBadge {
   color: var(--muted-foreground);
-  background: color-mix(in srgb, var(--muted-foreground) 10%, transparent);
+  background: var(--muted);
 }
 .stageBadge {
   color: var(--foreground);
