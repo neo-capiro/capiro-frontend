@@ -266,7 +266,9 @@ function ArtifactEditor({
                 {item.status === "approved" &&
                   meeting.client &&
                   !item.confidential &&
-                  !item.sharedAt && item.sharingKnown !== false && item.capabilities?.share !== false && (
+                  !item.sharedAt &&
+                  item.sharingKnown !== false &&
+                  item.capabilities?.share !== false && (
                     <button
                       className="button"
                       disabled={blocked}

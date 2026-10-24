@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createMeriConversation } from '@capiro/meri-client/conversation';
 import { fixture, event, stream, chunks, part, id, binding, run, drain } from './conversation-fixture.mjs';
+import { observeUntilSettled } from '../../apps/web/src/features/meri/conversation/observation-loop.ts';
 
 const forbiddenFetch = globalThis.fetch;
 globalThis.fetch = () => { throw Error('Qualification forbids external network'); };
@@ -36,6 +37,44 @@ test('partial history acknowledges only observed page; actual SDK GET resumes at
   assert.equal(call.headers['x-meri-resume-sequence'], '60'); assert.equal(call.body, undefined);
   assert.equal(call.headers['last-event-id'], undefined);
   assert.equal(f.client.getSnapshot().observation.after, 61);
+});
+
+test('failed resume then empty recovery keeps the admitted cursor and each answer fragment exactly once', async t => {
+  const f = setup(t); await f.submit();
+  let subscriptions = 0;
+  const text = (sequence, value) => event(sequence, { type: 'message.delta', data: { messageId: id(90), text: value } });
+  f.override = call => {
+    if (!call.path.endsWith('/events') && call.method !== 'GET') return;
+    subscriptions++;
+    if (subscriptions === 1) return stream([text(1, 'Hello')]);
+    if (subscriptions === 2) throw Error('synthetic interrupted observation');
+    if (subscriptions === 3) return stream([]);
+    if (subscriptions === 4) return stream([text(2, ' world'), event(3, { data: { state: 'completed', reasonCode: null } })]);
+    throw Error('Unexpected extra subscription');
+  };
+  const phases = [];
+  const outcome = await observeUntilSettled({
+    signal: new AbortController().signal,
+    settled: () => f.client.getSnapshot().observation.runState === 'completed',
+    progress: () => f.client.getSnapshot().observation.after,
+    onPhase: phase => phases.push(phase),
+    wait: async () => {},
+    attempt: async first => {
+      const { chat } = f.client.openChat();
+      if (first) await chat.sendMessage({ text: '' });
+      else await chat.resumeStream();
+      if (chat.error) throw chat.error;
+    },
+  });
+  assert.equal(outcome, 'settled');
+  const observed = f.client.getSnapshot().observation;
+  assert.equal(observed.after, 3);
+  assert.deepEqual(observed.events.map(item => item.sequence), [1, 2, 3]);
+  assert.equal(observed.events.filter(item => item.type === 'message.delta').map(item => item.data.text).join(''), 'Hello world');
+  assert.deepEqual(f.calls.filter(call => call.method === 'GET').map(call => call.headers['x-meri-resume-sequence']), ['1', '1', '1']);
+  assert.equal(f.calls.filter(call => call.path.endsWith('/submit')).length, 1);
+  assert.equal(f.calls.filter(call => call.path.endsWith('/cancel')).length, 0);
+  assert.deepEqual(phases.slice(-2), ['live', 'live']);
 });
 
 for (const [name, bad] of [

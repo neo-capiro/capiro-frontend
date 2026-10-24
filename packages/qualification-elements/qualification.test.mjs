@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFileSync, readdirSync, existsSync, mkdtempSync, copyFileSync, mkdirSync, writeFileSync, unlinkSync, symlinkSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, mkdtempSync, copyFileSync, mkdirSync, writeFileSync, unlinkSync, symlinkSync, rmSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep, posix } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -135,6 +135,7 @@ function inspectAdoptedClosure(sourceMap, roots) {
 }
 
 const ADDITION_EXPORTS = { './tool': './src/ai-elements/tool.tsx', './artifact': './src/ai-elements/artifact.tsx', './attachments': './src/ai-elements/attachments.tsx', './confirmation': './src/ai-elements/confirmation.tsx', './plan': './src/ai-elements/plan.tsx', './sources': './src/ai-elements/sources.tsx', './queue': './src/ai-elements/queue.tsx', './checkpoint': './src/ai-elements/checkpoint.tsx', './file-tree': './src/ai-elements/file-tree.tsx', './task': './src/ai-elements/task.tsx', './web-preview': './src/ai-elements/web-preview.tsx', './badge': './src/shadcn/badge.tsx', './collapsible': './src/shadcn/collapsible.tsx', './alert': './src/shadcn/alert.tsx', './card': './src/shadcn/card.tsx', './scroll-area': './src/shadcn/scroll-area.tsx', './output-block': './src/output-block.tsx', './streaming-text': './src/streaming-text.tsx' };
+const FOUNDATION_EXPORTS = { './cascader': './src/cascader.ts', './motion': './src/motion.tsx', './sonner': './src/sonner.tsx' };
 
 {
   const ssr = onceSSROutcome(() => {
@@ -270,7 +271,7 @@ const ADDITION_EXPORTS = { './tool': './src/ai-elements/tool.tsx', './artifact':
     const closure = inspectClosure(sources); assert.deepEqual(closure.files, vendorFiles());
     const p = json('../ui/package.json');
     const declared = { ...p.dependencies, ...p.peerDependencies };
-    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx', ...ADDITION_EXPORTS });
+    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx', ...ADDITION_EXPORTS, ...FOUNDATION_EXPORTS });
     assert.equal(json('package.json').dependencies['@capiro/ui'], '0.0.0');
     for (const name of closure.external) assert.ok(Object.hasOwn(declared, name), `undeclared dependency ${name}`);
     const bad = new Map(sources); bad.set('src/ai-elements/conversation.tsx', sources.get('src/ai-elements/conversation.tsx') + '\nimport {generateText} from "ai";');
@@ -343,9 +344,9 @@ const ADDITION_EXPORTS = { './tool': './src/ai-elements/tool.tsx', './artifact':
     const pins = json('promotion-pins.json');
     const projectPath = 'packages/ui/src/markdown.tsx';
     const projectPaths = projectUiSources().map(path => `packages/ui/${path}`);
-    assert.deepEqual(projectPaths, [projectPath, 'packages/ui/src/output-block.tsx', 'packages/ui/src/streaming-text.tsx']);
+    assert.deepEqual(projectPaths, ['packages/ui/src/cascader.ts', projectPath, 'packages/ui/src/motion.tsx', 'packages/ui/src/output-block.tsx', 'packages/ui/src/reui/cascader/spinner.tsx', 'packages/ui/src/sonner.tsx', 'packages/ui/src/streaming-text.tsx']);
     assert.deepEqual(pins.projectAuthoredUi, pins.artifacts.filter(x => projectPaths.includes(x.path)));
-    assert.equal(pins.projectAuthoredUi.length, 3);
+    assert.equal(pins.projectAuthoredUi.length, 7);
     const cloneWorkspace = mkdtempSync(join(tmpdir(), 'capiro-ui-inventory-'));
     const clone = join(cloneWorkspace, 'packages/qualification-elements');
     for (const name of ownedFiles(HERE)) { const path = join(cloneWorkspace, name); mkdirSync(dirname(path), { recursive: true }); copyFileSync(join(workspaceRoot(HERE), name), path); }
@@ -353,10 +354,52 @@ const ADDITION_EXPORTS = { './tool': './src/ai-elements/tool.tsx', './artifact':
       const path = join(cloneWorkspace, 'packages/ui', name); writeFileSync(path, 'export const unlisted = true;');
       assert.throws(() => verifyPromotedSources(clone), /explicitly inventoried project UI sources/); unlinkSync(path);
     }
-    for (const name of [projectPath, 'packages/ui/package.json']) {
+    for (const name of [...projectPaths, 'packages/ui/package.json']) {
       const path = join(cloneWorkspace, name), raw = readSource(HERE, name);
       writeFileSync(path, Buffer.concat([raw, Buffer.from(' ')]));
       assert.throws(() => sourceRecords(clone), /complete actual split-package source pins/); writeFileSync(path, raw);
+    }
+  });
+
+  test('reviewed ReUI inventory binds exact upstream and adapted bytes and refuses missing or extra sources', () => {
+    const cloneWorkspace = mkdtempSync(join(tmpdir(), 'capiro-reui-inventory-'));
+    const clone = join(cloneWorkspace, 'packages/qualification-elements');
+    try {
+      for (const name of ownedFiles(HERE)) { const path = join(cloneWorkspace, name); mkdirSync(dirname(path), { recursive: true }); copyFileSync(join(workspaceRoot(HERE), name), path); }
+      const notice = join(cloneWorkspace, 'packages/ui/notices/reui-067aa0dc');
+      const provenancePath = join(notice, 'provenance.json');
+      const original = readFileSync(provenancePath), provenance = JSON.parse(original);
+      verifyPromotedSources(clone);
+      const mutate = (change, pattern) => {
+        const copy = structuredClone(provenance); change(copy);
+        writeFileSync(provenancePath, JSON.stringify(copy));
+        assert.throws(() => verifyPromotedSources(clone), pattern);
+        writeFileSync(provenancePath, original);
+      };
+      mutate(p => { p.commit = '0'.repeat(40); }, /ERR_ASSERTION|AssertionError/);
+      mutate(p => { p.files.pop(); }, /exact eleven reviewed ReUI sources/);
+      mutate(p => { p.files[0].path = p.files[1].path; }, /exact eleven reviewed ReUI sources/);
+      mutate(p => { p.files[0].path = 'src/reui/cascader/foreign.tsx'; }, /exact eleven reviewed ReUI sources/);
+      mutate(p => { p.files[0].upstreamSha256 = '0'.repeat(64); }, /retained ReUI upstream source/);
+      mutate(p => { p.files[0].adaptedSha256 = p.files[0].upstreamSha256; }, /reviewed ReUI adapted source/);
+      for (const name of ['notices/reui-067aa0dc/cascader.registry.json', ...provenance.files.map(row => row.path)]) {
+        const path = join(cloneWorkspace, 'packages/ui', name), bytes = readFileSync(path);
+        writeFileSync(path, Buffer.concat([bytes, Buffer.from(' ')]));
+        assert.throws(() => verifyPromotedSources(clone), /retained ReUI registry bytes|reviewed ReUI adapted source/);
+        writeFileSync(path, bytes);
+      }
+      const missing = join(cloneWorkspace, 'packages/ui', provenance.files[0].path), bytes = readFileSync(missing);
+      unlinkSync(missing);
+      assert.throws(() => verifyPromotedSources(clone), { code: 'ENOENT' });
+      writeFileSync(missing, bytes);
+      const extra = join(cloneWorkspace, 'packages/ui/src/reui/cascader/unlisted.tsx');
+      writeFileSync(extra, 'export const unlisted = true;');
+      assert.throws(() => verifyPromotedSources(clone), /explicitly inventoried project UI sources/);
+      unlinkSync(extra);
+      verifyPromotedSources(clone);
+    } finally {
+      assert.ok(resolve(cloneWorkspace).startsWith(resolve(tmpdir()) + sep + 'capiro-reui-inventory-'));
+      rmSync(cloneWorkspace, { recursive: true, force: true });
     }
   });
 

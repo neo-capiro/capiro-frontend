@@ -91,7 +91,14 @@ it("never reassigns prospect documents through a matching legacy client display 
   ).toEqual([]);
   expect(
     clientDrafts(
-      [{ ...draft, prospectId: null, client: client.name, clientId: client.id }],
+      [
+        {
+          ...draft,
+          prospectId: null,
+          client: client.name,
+          clientId: client.id,
+        },
+      ],
       client,
       [client],
     ),

@@ -28,7 +28,8 @@ test('shipping SSR entry is import-safe and refuses invalid/reused output before
   assert.equal(existsSync(inside), false);
   assert.match(run(process.execPath, [prepare, inside], 1).stderr, /outside checkout/);
   assert.equal(existsSync(inside), false);
-  assert.match(run(process.execPath, [prepare, tmpdir()], 1).stderr, /EEXIST/);
+  const nativeShipping = process.platform === 'linux' && ['x64', 'arm64'].includes(process.arch);
+  assert.match(run(process.execPath, [prepare, tmpdir()], 1).stderr, nativeShipping ? /EEXIST/ : /shipping tool platform/);
 });
 
 test('container smoke documents exits and rejects invalid input before Docker allocation', () => {

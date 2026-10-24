@@ -7,6 +7,7 @@ async function setup(page: Page) {
     actor: "actor-a",
     rewrites: [] as Record<string, unknown>[],
     sends: [] as Record<string, unknown>[],
+    recoveryReads: [] as string[],
     unexpected: [] as string[],
     held: false,
     release: () => {},
@@ -39,6 +40,20 @@ async function setup(page: Page) {
     if (path === "engagement/mail/mailboxes")
       return route.fulfill({ json: [sendingMailbox] });
     if (path?.endsWith("/people")) return route.fulfill({ json: [] });
+    if (
+      route.request().method() === "GET" &&
+      /^engagement\/mail\/send-intents\/[0-9a-f-]{36}$/.test(path ?? "")
+    ) {
+      const requestKey = path!.split("/").at(-1)!;
+      state.recoveryReads.push(requestKey);
+      return route.fulfill({
+        json: {
+          intentId: "20000000-0000-4000-8000-000000000003",
+          requestKey,
+          state: "pending",
+        },
+      });
+    }
     if (path === "engagement/mail/rewrite") {
       state.rewrites.push(route.request().postDataJSON());
       if (state.held)

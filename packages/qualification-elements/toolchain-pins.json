@@ -2,7 +2,7 @@
   "schema": "meri-elements-ssr-toolchain/1",
   "version": "0.28.2",
   "officialRelease": "https://github.com/evanw/esbuild/releases/tag/v0.28.2",
-  "scope": "Build-only tool; separate from unchanged 367-package runtime lock. Windows executed locally; Linux pinned but unexecuted.",
+  "scope": "Build-only tool; original Windows/Linux x64 pins retained. Official linux-arm64 artifact verified; native execution is separately qualified.",
   "tools": [
     {
       "platform": "win32-x64",
@@ -35,6 +35,22 @@
       "binaryName": "esbuild",
       "binaryBytes": 11427952,
       "binarySha256": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100"
+    },
+    {
+      "platform": "linux-arm64",
+      "package": "@esbuild/linux-arm64",
+      "version": "0.28.2",
+      "metadataUrl": "https://registry.npmjs.org/@esbuild%2flinux-arm64/0.28.2",
+      "metadataBytes": 1788,
+      "metadataSha256": "0db5155f2b74a473e1b909a1034d7cf0c23feb2bfd7cc1e53502976dd02f094a",
+      "archiveUrl": "https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.28.2.tgz",
+      "archiveBytes": 4283627,
+      "archiveSha256": "a96dbfa41d3ef5dbd1ef22b1c10d5187be9267e86093a870f06402a7ec931596",
+      "archiveIntegrity": "sha512-pW4AC0P3it8c7do9MVM4p51FzHzdM/TZrerurgRcHJ2WTa1VQ1CIq18xncfpBJw4ojkiZZrKW2yIBWBP92j6Ug==",
+      "packageJsonSha256": "0ee05403f9b919e3ac6108bf555ec0fa3e04c4dd493aede4c72ac9bf57e95b75",
+      "binaryName": "esbuild",
+      "binaryBytes": 10289264,
+      "binarySha256": "90bd269553d258e80b19e3ccab4f98f0831f87442a2f056510ce24fd1b425fc2"
     }
   ]
 }
