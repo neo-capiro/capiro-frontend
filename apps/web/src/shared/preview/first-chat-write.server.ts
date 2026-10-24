@@ -1,6 +1,5 @@
 import {
   firstChatCoreOperationKey,
-  firstChatCoreRequest,
   firstChatV2OperationKey,
 } from "../capiro/operations/meri-first-chat";
 import { previewApiTarget } from "./read-config.server";
@@ -14,7 +13,7 @@ export const previewGeneralBackendSource =
   "16c3122a379481eb19cdee156ceb5d5c8b615bea";
 const generalPath = `/api/capiro/${firstChatV2OperationKey}`;
 
-/** The only preview write candidate: exact route, method, query, client and target. */
+/** The only preview write candidate: exact route, method, query and target; Core authorizes the selected scope. */
 export function previewFirstChatWriteTarget(
   env: Record<string, string | undefined>,
   request: Request,
@@ -29,9 +28,6 @@ export function previewFirstChatWriteTarget(
       current ||
       (source === previewFirstChatBackendSource && url.pathname === browserPath)
     ) ||
-    !firstChatCoreRequest.shape.clientId.safeParse(
-      env.MERI_FIRST_CHAT_CLIENT_ID,
-    ).success ||
     request.method !== "POST" ||
     !(
       url.pathname === browserPath ||

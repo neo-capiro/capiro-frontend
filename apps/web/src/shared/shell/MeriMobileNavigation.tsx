@@ -28,7 +28,6 @@ type MenuProps = {
   fixture: boolean;
   conversationEnabled: boolean;
   firstChatBootstrapEnabled: boolean;
-  firstChatBootstrapClientId?: string;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
   clientId?: string | undefined;
@@ -96,7 +95,6 @@ function MobileNewConversation({
   fixture,
   conversationEnabled,
   firstChatBootstrapEnabled,
-  firstChatBootstrapClientId,
   onNavigate,
 }: Pick<
   MenuProps,
@@ -104,7 +102,6 @@ function MobileNewConversation({
   | "fixture"
   | "conversationEnabled"
   | "firstChatBootstrapEnabled"
-  | "firstChatBootstrapClientId"
   | "onNavigate"
 >) {
   const plus = <DesignIcon name="plus" assetSet={assetSet} />;
@@ -126,7 +123,6 @@ function MobileNewConversation({
       className={styles.mobileNewConversation}
       conversationEnabled={conversationEnabled}
       firstChatBootstrapEnabled={firstChatBootstrapEnabled}
-      firstChatBootstrapClientId={firstChatBootstrapClientId}
       onNavigate={onNavigate}
     />
   );
@@ -187,7 +183,6 @@ function MobileMenu({
   section,
   conversationEnabled,
   firstChatBootstrapEnabled,
-  firstChatBootstrapClientId,
   pendingApprovals,
   clientId,
   onNavigate,
@@ -207,7 +202,6 @@ function MobileMenu({
         fixture={fixture}
         conversationEnabled={conversationEnabled}
         firstChatBootstrapEnabled={firstChatBootstrapEnabled}
-        firstChatBootstrapClientId={firstChatBootstrapClientId}
         onNavigate={onNavigate}
       />
       {destinations.map((item) => {
@@ -258,7 +252,6 @@ export function MeriMobileNavigation({
   fixture = false,
   conversationEnabled = false,
   firstChatBootstrapEnabled = false,
-  firstChatBootstrapClientId,
   section,
   pendingApprovals,
 }: {
@@ -266,7 +259,6 @@ export function MeriMobileNavigation({
   fixture?: boolean;
   conversationEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
-  firstChatBootstrapClientId?: string;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
@@ -315,7 +307,6 @@ export function MeriMobileNavigation({
             firstChatBootstrapEnabled &&
             capabilities.newConversation.status === "on"
           }
-          firstChatBootstrapClientId={firstChatBootstrapClientId}
           section={section}
           pendingApprovals={pendingApprovals}
           clientId={clientId}

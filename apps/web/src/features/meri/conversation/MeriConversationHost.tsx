@@ -23,12 +23,10 @@ export function MeriConversationHost({
   enabled,
   account,
   firstChatBootstrapEnabled = false,
-  firstChatBootstrapClientId,
 }: {
   enabled: boolean;
   account?: ConversationAccount;
   firstChatBootstrapEnabled?: boolean;
-  firstChatBootstrapClientId?: string;
 }) {
   const selected = useSelectedClient();
   const params = useSearchParams();
@@ -104,12 +102,8 @@ export function MeriConversationHost({
         </p>
       </section>
     );
-  const ineligible = clientIneligibility(
-    selected.client,
-    firstChatBootstrapEnabled,
-    firstChatBootstrapClientId,
-  );
-  if (ineligible) return <ClientIneligibleNotice reason={ineligible} />;
+  // Core rechecks current client authority on bootstrap and session issuance.
+  if (selected.client.status === "archived") return <ArchivedClientNotice />;
   if (firstChatBootstrapEnabled && selector.state === "current")
     return (
       <CoreResolvedConversation
@@ -142,34 +136,14 @@ export function MeriConversationHost({
   );
 }
 
-type Ineligibility = "archived" | "not-configured";
-
-function clientIneligibility(
-  client: { id: string; status?: string | null },
-  firstChatBootstrapEnabled: boolean,
-  firstChatBootstrapClientId?: string,
-): Ineligibility | null {
-  // Core bootstrap and authority context refuse `status: "archived"` clients.
-  // Stop before any Core create or Meri session; Core stays the authority.
-  if (client.status === "archived") return "archived";
-  if (firstChatBootstrapEnabled && client.id !== firstChatBootstrapClientId)
-    return "not-configured";
-  return null;
-}
-
-function ClientIneligibleNotice({ reason }: { reason: Ineligibility }) {
-  return reason === "archived" ? (
+function ArchivedClientNotice() {
+  return (
     <section role="alert">
       <h2>Conversations unavailable for this client</h2>
       <p>
         This client is archived. Restore it or select an active client in
         Portfolio to start a conversation.
       </p>
-    </section>
-  ) : (
-    <section role="alert">
-      <h2>Conversation connection unavailable</h2>
-      <p>This client is not configured for the current conversation.</p>
     </section>
   );
 }

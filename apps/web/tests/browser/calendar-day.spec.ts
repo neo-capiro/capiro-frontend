@@ -165,7 +165,6 @@ test("Day meeting entry preserves the current calendar route without dispatching
   const event = page
     .locator('[data-view="day"]')
     .getByText(fixture.meeting.subject, { exact: true });
-  await event.scrollIntoViewIfNeeded();
   await event.click();
   await expect(page).toHaveURL(new RegExp(`meeting=${fixture.meeting.id}`));
   const url = new URL(page.url());

@@ -1,10 +1,9 @@
 import type { OperationRegistry } from "../capiro/contracts";
 import { jsonError } from "../capiro/gateway-errors";
 import {
-  firstChatCoreOperationForClient,
+  firstChatCoreOperation,
   firstChatCoreOperationKey,
-  firstChatCoreRequest,
-  firstChatV2OperationForClient,
+  firstChatV2Operation,
   firstChatV2OperationKey,
 } from "../capiro/operations/meri-first-chat";
 import { capiroOperations } from "../capiro/registry";
@@ -32,29 +31,17 @@ export function selectFirstChatGateway(
     return {
       response: jsonError(503, "First chat bootstrap is not enabled."),
     };
-  const configuredClient = bootstrap
-    ? firstChatCoreRequest.shape.clientId.safeParse(
-        env.MERI_FIRST_CHAT_CLIENT_ID,
-      )
-    : null;
-  if (configuredClient && !configuredClient.success)
-    return { response: jsonError(503, "First chat client is not configured.") };
-  const scopedFirstChat = configuredClient?.success
+  const firstChat = bootstrap
     ? operation === firstChatV2OperationKey
-      ? firstChatV2OperationForClient(configuredClient.data)
-      : firstChatCoreOperationForClient(configuredClient.data)
+      ? firstChatV2Operation
+      : firstChatCoreOperation
     : null;
   const previewWriteTarget = previewFirstChatWriteTarget(env, request);
-  if (previewWriteTarget && (!bootstrap || !scopedFirstChat))
+  if (previewWriteTarget && (!bootstrap || !firstChat))
     return { response: previewHeldResponse() };
   const operations: OperationRegistry =
-    previewWriteTarget && scopedFirstChat
-      ? { [operation]: scopedFirstChat }
-      : scopedFirstChat
-        ? {
-            ...capiroOperations,
-            [operation]: scopedFirstChat,
-          }
-        : capiroOperations;
+    previewWriteTarget && firstChat
+      ? { [operation]: firstChat }
+      : capiroOperations;
   return { response: null, operations, previewWriteTarget };
 }

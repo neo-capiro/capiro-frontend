@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { settingsFixtures } from "./settings-fixtures";
-import captured from "./user-preferences-fixture.json" with { type: "json" };
+import { currentPreferencesFixture as captured } from "../../tests/meri-user-preferences-fixtures";
 
 async function identity(page: Page, enabled = true) {
   await onlyLocalRequests(page);
@@ -45,7 +45,7 @@ test("personal preferences remain disabled without literal opt-in", async ({
   expect(requests).toBe(0);
 });
 
-test("actual application replies support complete save/readback and local panel preview", async ({
+test("current synthetic application replies support complete save/readback and local panel preview", async ({
   page,
 }) => {
   await identity(page);

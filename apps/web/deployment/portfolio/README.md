@@ -7,6 +7,42 @@ not alter the existing `capiro-dev` cluster, shared Capiro ALB/listener,
 `os.capiro.ai`, or backend services. The source continuation requires an
 owner-visible AWS step before shipping an image or creating resources.
 
+## Current first-chat operator pins
+
+The frontend service uses **ARM64/Linux**, matching native image qualification.
+The previously deployed revision25 used X86_64; do not pair that task platform
+with the new ARM64 image. Root must verify the selected frontend digest and
+scan before proposing the task-definition change.
+
+| Binding | Exact reviewed value |
+| --- | --- |
+| Core v2 bootstrap contract baseline | `16c3122a379481eb19cdee156ceb5d5c8b615bea` |
+| Expected actual Core image source | `d03a118192acd2b1ed2ef5698afb0ab8f2b36ae8` |
+| Expected actual Core image digest | `sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375` |
+| Meri runtime image source | `7eea1e852f177c17e3675429830b886b906e4cd6` |
+| Meri runtime image digest | `sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d` |
+| Frontend contracts distribution | `0.1.12` |
+
+`CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE` identifies the reviewed contract
+baseline. It does **not** assert that Core is serving that commit. The actual
+Core successor is recorded separately in `expectedCoreDeployment` and template
+metadata. Its bootstrap/current-authority, tenant, role and client-wall owners
+have identical Git blobs to the baseline. The shipping owner must independently
+verify the actual task's `RELEASE_SHA`, image digest, listener and readiness
+against those expected deployment values; static metadata is not attestation.
+Never report the baseline as the deployed source or replace the baseline with
+an arbitrary successor to bypass admission.
+
+All opt-ins remain held by default. Chat accepts explicit General or any client
+that the current Clerk/Core session authorizes. The configured single-client
+parameter and environment value have been removed; remove `firstChatClientId`
+from operator bindings and `MeriFirstChatClientId` from deployment parameters.
+Core remains responsible for current tenant, actor, client and wall checks.
+This preserves exact routes/methods/targets, Clerk/Core authorization,
+unrelated feature holds, IAM and network rules unchanged. Client and General
+chat, authorized reads, follow-up and Stop still require live acceptance.
+Historical build examples below are not commands for this release.
+
 ## Isolated configuration successor
 
 The source-only preview profile now follows backend
@@ -21,8 +57,8 @@ availability.
 `clerkIssuer`, `clerkApplicationId`, `clerkPublishableKeyArn`, `clerkSecretArn`
 and `clerkKeyArn`. Optional `previewReadEnabled`, `firstChatBootstrapEnabled`,
 `meriConversationWorkflowEnabled` and `meriConversationRoutesEnabled` are
-booleans that default to false. The first-chat client ID stays empty unless
-the reviewed read, bootstrap and Meri route bindings are enabled together.
+booleans that default to false. First chat requires the reviewed read, bootstrap
+and Meri route bindings together; it does not take a configured client ID.
 `meriApiBaseUrl` must be a canonical HTTPS DNS root origin when Meri is enabled;
 its qualified image source and digest must match the explicit runtime pins.
 Supply only owner-verified public
@@ -39,7 +75,7 @@ node apps/web/deployment/portfolio/preview-config.mjs --help
 node apps/web/deployment/portfolio/preview-config.mjs --bindings /absolute/path/to/verified-public-metadata.json
 ```
 
-The command prints a local configuration proposal with all 24 configuration
+The command prints a local configuration proposal with all configuration
 parameters explicit, including held first-chat and Meri defaults. `--parameters FILE`
 additionally validates a candidate JSON parameter array against those exact
 values. It rejects missing values,
@@ -84,20 +120,34 @@ acceptance.
 ## Source and runtime ownership
 
 The build context is the **repository root**, with a single active workspace
-lock. Run local preparation from that root:
+lock. Before release, run the checks for the changed feature locally: relevant
+types/lint/unit tests and browser checks when behavior changed. Record those
+results against the source commit. Broad suites remain available separately as
+`npm run check`, `npm run test:browser -- --workers=3`,
+`npm run test:browser:modules` and
+`node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"`;
+the image job does not rerun them or build a second app on the host.
+
+The release job verifies the source commit and S3 version, then builds the app
+once inside Docker on a native ARM64 host. `build.yml` uses `ARM_CONTAINER`,
+`aws/codebuild/amazonlinux-aarch64-standard:3.0`, `BUILD_GENERAL1_LARGE` and
+privileged Docker, matching the successful native build. The Dockerfile pins
+build-stage npm 11.9.0 and runs the build with a 4096 MiB Node heap and
+`CIRCLE_NODE_TOTAL=2`. Runtime npm/npx/Yarn removal is retained.
+
+To build and smoke the image manually on native ARM64, run from the repository
+root (CodeBuild performs these same steps):
 
 ```sh
-npm ci --ignore-scripts --no-audit --no-fund
-npm run check
-npm exec --workspace @capiro/web -- playwright install --with-deps chromium
-node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"
-npm run test:browser -- --workers=3
-npm run test:browser:modules
-npm run build
-npm run test:production
-docker build --pull --platform linux/amd64 -f apps/web/Dockerfile -t portfolio-preview:review .
+docker build --pull --platform linux/arm64 -f apps/web/Dockerfile -t portfolio-preview:review .
 bash apps/web/deployment/portfolio/smoke.sh portfolio-preview:review
 ```
+
+CodeBuild checks the host, Docker daemon and resulting image architecture. Its
+ordinary CloudWatch logs include source identity, build/smoke output and the
+pushed digest. Local result files are under `evidence/frontend-image`; the
+project remains `NO_ARTIFACTS`. Publication requires both
+`CODEBUILD_BUILD_SUCCEEDING=1` and the successful build/smoke exit marker.
 
 The pinned Node 24 Alpine image and zlib package retain the previously reviewed
 runtime choice. Run a fresh image scan; previous findings do not establish a new
@@ -109,7 +159,9 @@ Each HTTP probe has a two-second connection deadline and a five-second overall
 deadline, including each attempt in the bounded readiness loop. A stalled
 container response therefore cannot leave the smoke waiting indefinitely.
 
-`npm run test:production` first assembles public assets and static chunks beside
+The separate `npm run test:production` check requires a local `npm run build`;
+it is available when standalone browser/navigation behavior needs qualification.
+It first assembles public assets and static chunks beside
 the built Next standalone server, then checks that server on loopback port 5188.
 It verifies route status and security headers, fail-closed unconfigured routing,
 the canonical Portfolio root, and real Next navigation from the existing
@@ -159,15 +211,16 @@ ingress address or cached AWS reads are available or current.
    `source-commit.txt` containing that commit SHA. Upload it only to the existing
    versioned source key after the shipment step is authorized. Record its S3
    version and pass that exact version and SHA to CodeBuild.
-4. The buildspec is now
-   `apps/web/deployment/portfolio/buildspec.yml`. Use this as an explicit build
-   override for the existing project, or review a project-template update. The
-   build verifies source SHA and S3 version, runs the root checks, both browser suites, fresh UI provenance/SSR, build
-   and standalone production navigation check,
-   builds and smokes the Linux image, then pushes the SHA tag and reads back its
-   digest. The bounded build role can read its source, write logs and push/read
-   this ECR repository; it does not update ECS or DNS.
-5. Read back the exact ECR digest and a completed scan. Review the preview-only
+4. Use `apps/web/deployment/portfolio/buildspec.yml` with the native ARM project
+   configuration in `build.yml`. Supply the full commit as `EXPECTED_SHA` and
+   the selected source version as both CodeBuild's `sourceVersion` and
+   `EXPECTED_S3_VERSION`. The job verifies those identities, builds one ARM64
+   image, runs the existing smoke against that exact image, then pushes its SHA
+   tag only on success and reads back the digest. The bounded build role can
+   read its source, write logs and push/read this ECR repository; it does not
+   update ECS or DNS.
+5. Read back the exact ECR digest and a completed scan with zero HIGH/CRITICAL
+   findings, recording other findings. Review the preview-only
    service change set with that immutable digest and the explicit configuration
    proposal above. Independently verify the existing Clerk references and
    preview backend bindings; preserve narrow ingress and unrelated parameters.
@@ -181,7 +234,9 @@ ingress address or cached AWS reads are available or current.
    owner browser `/32` ingress; do not broaden it to make a test work. Do not
    allocate a paid Clerk satellite or redirect the shared Capiro hostname.
 8. Verify HTTPS, sign-in, tenant selection, read-only Portfolio flows and the
-   audit's actual acceptance conditions. Provider sends, billing changes and
+   changed feature's deployed behavior against the selected digest; container
+   smoke does not replace these checks. Verify the audit's actual acceptance
+   conditions. Provider sends, billing changes and
    customer-record mutations require their own existing authorization.
 
 ## Restart and rollback

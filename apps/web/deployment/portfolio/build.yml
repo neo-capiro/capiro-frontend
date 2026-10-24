@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Bounded isolated CodeBuild verification and image build for Portfolio preview
+Description: Exact-source native ARM64 image build for Portfolio preview
 
 Resources:
   BuildSourceBucket:
@@ -36,6 +36,10 @@ Resources:
             Principal:
               Service: codebuild.amazonaws.com
             Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+                aws:SourceArn: !Sub arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/capiro-portfolio-preview-build
       Policies:
         - PolicyName: portfolio-preview-build
           PolicyDocument:
@@ -65,13 +69,14 @@ Resources:
                   - ecr:CompleteLayerUpload
                   - ecr:PutImage
                   - ecr:BatchGetImage
+                  - ecr:GetDownloadUrlForLayer
                   - ecr:DescribeImages
                 Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/capiro/portfolio-preview
   PortfolioBuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: capiro-portfolio-preview-build
-      Description: Exact-commit Portfolio checks and immutable ECR image build
+      Description: Exact-commit native ARM64 image build and container smoke
       ServiceRole: !GetAtt BuildRole.Arn
       TimeoutInMinutes: 60
       QueuedTimeoutInMinutes: 10
@@ -82,9 +87,9 @@ Resources:
       Artifacts:
         Type: NO_ARTIFACTS
       Environment:
-        Type: LINUX_CONTAINER
+        Type: ARM_CONTAINER
         ComputeType: BUILD_GENERAL1_LARGE
-        Image: aws/codebuild/standard:8.0
+        Image: aws/codebuild/amazonlinux-aarch64-standard:3.0
         ImagePullCredentialsType: CODEBUILD
         PrivilegedMode: true
         EnvironmentVariables:

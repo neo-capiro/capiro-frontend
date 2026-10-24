@@ -1,11 +1,12 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useIdentity } from "../portfolio/auth/identity";
 import {
   beginNewChatIntent,
   newChatIntentEvent,
+  type FirstChatScope,
 } from "../meri-conversations/first-chat-intent";
 import { SessionContext } from "../session/SessionContext";
 import { useSelectedClient } from "../session/SelectedClient";
@@ -18,7 +19,6 @@ type Props = {
   className?: string | undefined;
   conversationEnabled: boolean;
   firstChatBootstrapEnabled: boolean;
-  firstChatBootstrapClientId?: string | undefined;
   onNavigate?: () => void;
 };
 
@@ -65,6 +65,12 @@ function VerifiedNewConversation(props: Props) {
   const identity = useIdentity();
   const selected = useSelectedClient();
   const router = useRouter();
+  const params = useSearchParams();
+  const general = params.get("scope") === "general" && !params.has("clientId");
+  const invalidScope =
+    (params.has("scope") &&
+      (!general || params.getAll("scope").length !== 1)) ||
+    params.getAll("clientId").length > 1;
   const [error, setError] = useState<string | null>(null);
   const current =
     identity.isSuccess && !identity.isFetching && !identity.error
@@ -72,29 +78,36 @@ function VerifiedNewConversation(props: Props) {
       : undefined;
   const client =
     selected.state === "authorized-client" ? selected.client : null;
-  const unavailable = !client
-    ? "Choose a visible client to start a conversation."
-    : client.status === "archived"
-      ? "This client is archived."
-      : client.id !== props.firstChatBootstrapClientId
-        ? "This client is not configured for the current conversation."
+  const unavailable = invalidScope
+    ? "The conversation scope is invalid."
+    : !general && !client
+      ? "Choose General or a visible client to start a conversation."
+      : !general && client?.status === "archived"
+        ? "This client is archived."
         : !current?.tenant?.id || !current.user.id
           ? "A verified account is required to start a conversation."
           : undefined;
   const start = () => {
-    if (unavailable || !client || !current?.tenant?.id) return;
-    try {
-      beginNewChatIntent(
-        {
+    if (unavailable || (!general && !client) || !current?.tenant?.id) return;
+    const scope: FirstChatScope = general
+      ? {
           tenantId: current.tenant.id,
           actorId: current.user.id,
-          clientId: client.id,
-        },
-        window.sessionStorage,
-      );
+          scopeKind: "general",
+          clientId: null,
+        }
+      : {
+          tenantId: current.tenant.id,
+          actorId: current.user.id,
+          clientId: client!.id,
+        };
+    try {
+      beginNewChatIntent(scope, window.sessionStorage);
       setError(null);
       window.dispatchEvent(new Event(newChatIntentEvent));
-      router.push(productHref("meri", client.id));
+      router.push(
+        general ? "/meri?scope=general" : productHref("meri", client!.id),
+      );
       props.onNavigate?.();
     } catch (cause) {
       setError(

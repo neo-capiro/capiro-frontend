@@ -1,21 +1,12 @@
-import { readFileSync } from "node:fs";
 import { expect, type Page, type Request, type Route } from "@playwright/test";
+import {
+  fixture as wire,
+  context as actionContext,
+} from "../../tests/meri-action-fixtures";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { client, navigate } from "./next-modules-fixtures";
 
-export { navigate };
-export function wire(name: string) {
-  return JSON.parse(
-    readFileSync(
-      new URL(
-        `../../tests/fixtures/meri-actions/${name}.json`,
-        import.meta.url,
-      ),
-      "utf8",
-    ),
-  );
-}
-export const actionContext = wire("CONTEXT");
+export { navigate, wire, actionContext };
 export const actionClock = Date.parse(actionContext.syntheticNow);
 export const actionClient = {
   ...client,

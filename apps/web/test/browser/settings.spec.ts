@@ -86,7 +86,7 @@ test("Team prevents self-removal and failed invitations remain editable without 
   });
   await page.route("**/api/capiro/settings.team.invite", (route) =>
     route.fulfill({
-      status: 500,
+      status: 409,
       json: { message: "Test invitation failure" },
     }),
   );

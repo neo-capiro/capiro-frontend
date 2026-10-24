@@ -11,7 +11,6 @@ export default function MeriPage() {
     <ProductShell
       conversationEnabled={config.enabled}
       firstChatBootstrapEnabled={config.firstChatBootstrapEnabled}
-      firstChatBootstrapClientId={config.firstChatBootstrapClientId}
     >
       <RequireSession>
         <MeriHome
@@ -21,7 +20,6 @@ export default function MeriPage() {
             process.env.MERI_MEMORY_OWNER_REVIEW_ENABLED === "true"
           }
           firstChatBootstrapEnabled={config.firstChatBootstrapEnabled}
-          firstChatBootstrapClientId={config.firstChatBootstrapClientId}
         />
       </RequireSession>
     </ProductShell>
