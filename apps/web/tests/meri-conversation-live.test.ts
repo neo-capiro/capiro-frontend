@@ -278,6 +278,42 @@ describe("observeUntilSettled", () => {
     expect(outcome).toBe("stopped");
     expect(attempt).toHaveBeenCalledTimes(1);
   });
+
+  it("a clean empty recovery clears the warning and resets consecutive failures without advancing the cursor", async () => {
+    let calls = 0;
+    let phase = "live";
+    const waits: Array<[number, string]> = [];
+    const firsts: boolean[] = [];
+    const outcome = await observeUntilSettled({
+      attempt: async (first) => {
+        firsts.push(first);
+        calls++;
+        // Two failures, a successful empty window, then four failures.
+        if (calls !== 3) throw new Error("synthetic unavailable");
+      },
+      settled: () => false,
+      progress: () => 7,
+      signal: new AbortController().signal,
+      onPhase: (value) => {
+        phase = value;
+      },
+      delays: [1, 2, 4],
+      wait: async (ms) => {
+        waits.push([ms, phase]);
+      },
+    });
+    expect(outcome).toBe("stalled");
+    expect(calls).toBe(7);
+    expect(firsts).toEqual([true, false, false, false, false, false, false]);
+    expect(waits).toEqual([
+      [1, "reconnecting"],
+      [2, "reconnecting"],
+      [1, "live"],
+      [1, "reconnecting"],
+      [2, "reconnecting"],
+      [4, "reconnecting"],
+    ]);
+  });
 });
 
 describe("conversation view", () => {

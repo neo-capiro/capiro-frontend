@@ -1,4 +1,5 @@
 import { Button } from "@capiro/ui/button";
+import { useEffect, useState } from "react";
 import type { useLiveRun } from "./useLiveRun";
 import { isTerminal, type TurnView } from "./conversation-view";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
@@ -191,16 +192,23 @@ function StopStatus({
 /** Watching an unfinished run: receiving, resuming from the cursor, or stopped trying. */
 function ObservationStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
   const { observing } = run;
+  const [delayed, setDelayed] = useState(false);
+  useEffect(() => {
+    if (observing !== "reconnecting") {
+      setDelayed(false);
+      return;
+    }
+    // Allow the existing first two retry waits (1 s + 2 s) before announcing recovery.
+    const timer = setTimeout(() => setDelayed(true), 3_000);
+    return () => clearTimeout(timer);
+  }, [observing]);
   return (
     <>
-      {observing === "live" && (
+      {(observing === "live" || observing === "reconnecting") && (
         <p role="status" className={styles.muted}>
-          Receiving updates from Meri.
-        </p>
-      )}
-      {observing === "reconnecting" && (
-        <p role="status" className={styles.muted}>
-          Connection interrupted. Reconnecting from the last received update…
+          {observing === "reconnecting" && delayed
+            ? "Updates are delayed. Reconnecting from the last received update…"
+            : "Waiting for Meri updates."}
         </p>
       )}
       {observing === "stalled" && (
