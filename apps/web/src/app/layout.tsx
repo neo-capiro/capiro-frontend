@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { ApplicationBoundary } from "../shared/session/ApplicationBoundary";
+import { BroadcastRecipient } from "../features/settings/BroadcastRecipient";
 import { readCapiroConfig } from "../shared/capiro/config";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
@@ -26,6 +27,12 @@ export default async function RootLayout({
         <Suspense fallback={<p role="status">Loading workspace…</p>}>
           <ApplicationBoundary
             publishableKey={readCapiroConfig(process.env).publishableKey}
+            authenticatedContent={
+              process.env.CAPIRO_PREVIEW_READ_ONLY === undefined ||
+              process.env.CAPIRO_PREVIEW_READ_ONLY === "false" ? (
+                <BroadcastRecipient />
+              ) : undefined
+            }
           >
             {children}
           </ApplicationBoundary>

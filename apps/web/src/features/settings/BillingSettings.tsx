@@ -224,6 +224,7 @@ export function BillingSettings() {
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
         open={checkout && flow === "checkout"}
+        busy={action.busy}
         onClose={() => setCheckout(false)}
         title="Start subscription"
         description="Choose the total profile capacity for a new subscription. Review pricing in hosted checkout before payment."
@@ -272,6 +273,7 @@ export function BillingSettings() {
               step={1}
               required
               value={quantity}
+              disabled={action.busy}
               onChange={(event) => setQuantity(Number(event.target.value))}
             />
           </SettingField>
@@ -279,6 +281,7 @@ export function BillingSettings() {
             <TextInput
               maxLength={64}
               value={promoCode}
+              disabled={action.busy}
               onChange={(event) => setPromoCode(event.target.value)}
             />
           </SettingField>
@@ -291,12 +294,16 @@ export function BillingSettings() {
       </SettingsDialog>
       <SettingsDialog
         open={cancel && canOpenPortal}
+        busy={action.busy}
         onClose={() => setCancel(false)}
         title="Cancel Capiro?"
         description="Review your cancellation terms with the billing provider."
         footer={
           <>
-            <SettingsButton onClick={() => setCancel(false)}>
+            <SettingsButton
+              disabled={action.busy}
+              onClick={() => setCancel(false)}
+            >
               Keep my plan
             </SettingsButton>
             <SettingsButton

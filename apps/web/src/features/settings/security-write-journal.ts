@@ -18,6 +18,7 @@ const retainedValues = [
   "externalId",
   "source",
   "role",
+  "status",
   "billingAdmin",
   "comped",
   "provider",
@@ -52,7 +53,9 @@ export async function persistSettingsWrite(
       version: 1,
       attemptId: write.attemptId,
       requestHash,
+      resultHash: write.resultHash,
       expectedAccount: write.expectedAccount,
+      inputFields: write.inputFields,
       operation: write.operation,
       startedAt: write.startedAt,
       state: "unknown",
@@ -77,7 +80,8 @@ export function restoreSettingsWrite(
       !/^[a-f0-9]{64}$/.test(data.requestHash) ||
       typeof data.operation !== "string" ||
       (!data.operation.startsWith("settings.") &&
-        data.operation !== "me.update") ||
+        data.operation !== "me.update" &&
+        data.operation !== "me.emailSignature.update") ||
       typeof data.startedAt !== "string" ||
       !data.input ||
       typeof data.input !== "object"
@@ -97,6 +101,10 @@ export function restoreSettingsWrite(
       input: data.input as SettingsWrite["input"],
       startedAt: data.startedAt,
       requestHash: data.requestHash,
+      ...(typeof data.resultHash === "string" &&
+      /^[a-f0-9]{64}$/.test(data.resultHash)
+        ? { resultHash: data.resultHash }
+        : {}),
       ...(account
         ? {
             expectedAccount: {
@@ -104,6 +112,10 @@ export function restoreSettingsWrite(
               tenantId: String(account.tenantId),
             },
           }
+        : {}),
+      ...(Array.isArray(data.inputFields) &&
+      data.inputFields.every((key) => typeof key === "string")
+        ? { inputFields: data.inputFields as string[] }
         : {}),
       state: "unknown",
     };
@@ -117,6 +129,24 @@ export function restoreSettingsWrite(
       state: "unknown",
     };
   }
+}
+
+/** Retain the hash of a sanitized signature receipt without retaining signature HTML. */
+export function retainSettingsResult(
+  storage: StoragePort,
+  key: string,
+  write: SettingsWrite,
+) {
+  const existing = storage.getItem(key);
+  if (
+    !existing ||
+    restoreSettingsWrite(storage, key)?.attemptId !== write.attemptId
+  )
+    return;
+  storage.setItem(
+    key,
+    JSON.stringify({ ...JSON.parse(existing), resultHash: write.resultHash }),
+  );
 }
 
 /** An old scope may finish after a new operation started; it must never erase the new recovery record. */

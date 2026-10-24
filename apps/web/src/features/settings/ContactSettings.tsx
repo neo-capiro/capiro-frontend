@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { z } from "zod";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import {
   contactInfoSchema,
   type CapiroMe,
@@ -16,7 +15,8 @@ import {
   SettingsNotice,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 type ContactInfo = z.infer<typeof contactInfoSchema>;
 const organizationFields = [
@@ -54,16 +54,16 @@ function ContactForm({
   canEdit: boolean;
   reload: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("contact");
   const [form, setForm] = useState(initial);
-  const action = useSettingsAction();
   function input(key: keyof ContactInfo, label: string) {
     return (
       <SettingField label={label}>
         <TextInput
           className={styles.input}
           value={form[key] ?? ""}
-          disabled={!canEdit || action.busy}
+          disabled={!canEdit || locked}
           type={key === "email" ? "email" : key === "phone" ? "tel" : "text"}
           onChange={(event) =>
             setForm((current) => ({ ...current, [key]: event.target.value }))
@@ -77,8 +77,10 @@ function ContactForm({
       className={styles.stack}
       onSubmit={(event) => {
         event.preventDefault();
+        if (!canEdit) return;
         void action.run(
-          () => api.request("settings.contact.update", { body: form }),
+          (signal) =>
+            api.request("settings.contact.update", { body: form }, { signal }),
           "Contact information was saved.",
           reload,
         );
@@ -107,12 +109,13 @@ function ContactForm({
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       <div>
-        <SettingsButton
-          primary
-          type="submit"
-          disabled={!canEdit || action.busy}
-        >
+        <SettingsButton primary type="submit" disabled={!canEdit || locked}>
           {action.busy ? "Saving…" : "Save contact info"}
         </SettingsButton>
       </div>

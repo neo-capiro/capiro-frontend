@@ -20,9 +20,11 @@ import { SettingsMutationNotice } from "./SettingsMutationNotice";
 export function PersonalSettings({
   identity,
   refresh,
+  readOnlyPreview = false,
 }: {
   identity: CapiroMe;
   refresh: () => void;
+  readOnlyPreview?: boolean;
 }) {
   const { api, action, pending, reconcile, locked } =
     useSettingsMutation("personal-title");
@@ -41,6 +43,7 @@ export function PersonalSettings({
           className={`${styles.row} ${styles.formRow}`}
           onSubmit={(event) => {
             event.preventDefault();
+            if (readOnlyPreview) return;
             void action.run(
               (signal) =>
                 api.request(
@@ -58,17 +61,26 @@ export function PersonalSettings({
               <TextInput
                 className={styles.input}
                 value={title}
-                disabled={locked}
+                disabled={locked || readOnlyPreview}
                 maxLength={120}
                 onChange={(event) => setTitle(event.target.value)}
                 placeholder="Add your title"
               />
             </SettingField>
           </div>
-          <SettingsButton primary type="submit" disabled={locked}>
+          <SettingsButton
+            primary
+            type="submit"
+            disabled={locked || readOnlyPreview}
+          >
             {action.busy ? "Saving…" : "Save"}
           </SettingsButton>
         </form>
+        {readOnlyPreview && (
+          <SettingsNotice title="Profile changes unavailable in preview">
+            Your current identity is shown read-only.
+          </SettingsNotice>
+        )}
         <SettingsMutationNotice
           pending={pending}
           busy={action.busy}
@@ -101,7 +113,7 @@ export function PersonalSettings({
           ]}
         />
       </SettingsCard>
-      <EmailSignature />
+      {!readOnlyPreview && <EmailSignature />}
       <SettingsCard
         title="Watchlist and monitoring setup"
         description="Manage the client watchlists and monitoring settings used by LegiWatch."

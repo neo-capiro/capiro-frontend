@@ -101,6 +101,11 @@ vi.mock("../../shared/capiro/registry", () => ({
     "settings.team.list": { method: "GET" },
     "me.read": { method: "GET" },
     "me.update": { method: "PATCH" },
+    "me.emailSignature.update": { method: "PUT" },
+    "settings.contact.update": { method: "PUT" },
+    "settings.profiles.create": { method: "POST" },
+    "settings.profiles.archive": { method: "DELETE" },
+    "settings.profiles.restore": { method: "PUT" },
   },
 }));
 const capture = vi.fn<(view: ReturnType<typeof useSettingsMutation>) => void>();
@@ -486,6 +491,163 @@ describe("Personal title receipt and reload recovery", () => {
         ([operation]) => operation === "me.update",
       ),
     ).toHaveLength(1);
+    expect(after).not.toHaveBeenCalled();
+  });
+});
+
+describe("Remaining Settings form recovery", () => {
+  const identity = { user: { id: "actor-a" }, tenant: { id: "tenant-a" } };
+  const send = (
+    operation: Parameters<
+      ReturnType<typeof useSettingsMutation>["api"]["request"]
+    >[0],
+    payload: unknown,
+  ) =>
+    current().action.run(
+      (signal) =>
+        current().api.request(operation, payload as never, { signal }),
+      "Saved",
+      after,
+    );
+  const remount = async (section: string) => {
+    await act(() => root.unmount());
+    cache.clear();
+    await mount(section);
+  };
+  it("a lost contact reply reconciles only the full recorded value in the original account", async () => {
+    const body = {
+      email: "synthetic@example.test",
+      name: "Synthetic organization",
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockRejectedValueOnce(new Error("response lost"));
+    await mount("contact");
+    await act(() => send("settings.contact.update", { body }));
+    expect(current().locked).toBe(true);
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "contact"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain(body.email);
+    expect(sessionStorage.getItem(key)).not.toContain(body.name);
+    await remount("contact");
+    state.api.request.mockResolvedValueOnce({
+      ...identity,
+      tenant: { id: "other" },
+    });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ ...body, phone: "extra" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ name: body.name, email: body.email });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.contact.update",
+      ),
+    ).toHaveLength(1);
+  });
+  it("does not accept nonempty contact data as the receipt for clearing contact details", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ phone: "old" });
+    await mount("contact");
+    await act(() => send("settings.contact.update", { body: {} }));
+    expect(current().locked).toBe(true);
+    expect(after).not.toHaveBeenCalled();
+  });
+  it.each(["archive", "restore"] as const)(
+    "retains the exact profile %s target/status across reload",
+    async (operation) => {
+      state.api.request
+        .mockReset()
+        .mockResolvedValueOnce({
+          id: "other",
+          status: operation === "archive" ? "archived" : "active",
+        });
+      await mount("profiles");
+      await act(() =>
+        send(`settings.profiles.${operation}`, {
+          params: { clientId: "reviewed" },
+          ...(operation === "restore" ? { body: { status: "active" } } : {}),
+        }),
+      );
+      await remount("profiles");
+      state.api.request.mockResolvedValueOnce([
+        {
+          id: "other",
+          status: operation === "archive" ? "archived" : "active",
+        },
+      ]);
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(true);
+      state.api.request.mockResolvedValueOnce([
+        {
+          id: "reviewed",
+          status: operation === "archive" ? "archived" : "active",
+        },
+      ]);
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(false);
+      expect(after).not.toHaveBeenCalled();
+    },
+  );
+  it("never retries profile creation after a lost response or guesses identity from a matching name", async () => {
+    state.api.request
+      .mockReset()
+      .mockRejectedValueOnce(new Error("lost response"));
+    await mount("profile-create");
+    await act(() =>
+      send("settings.profiles.create", { body: { name: "Synthetic" } }),
+    );
+    await remount("profile-create");
+    await act(() => current().reconcile());
+    await act(() =>
+      send("settings.profiles.create", { body: { name: "Synthetic" } }),
+    );
+    expect(current().locked).toBe(true);
+    expect(state.api.request).toHaveBeenCalledTimes(1);
+  });
+  it("confirms the server-sanitized signature only after exact current readback", async () => {
+    const saved = { html: "<p>Saved signature</p>", enabled: true };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved)
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved);
+    await mount("signature");
+    await act(() =>
+      send("me.emailSignature.update", {
+        body: { html: '<p onclick="bad()">Saved signature</p>', enabled: true },
+      }),
+    );
+    expect(current().locked).toBe(false);
+    expect(after).toHaveBeenCalledTimes(1);
+  });
+  it("retains only a signature receipt hash through readback failure and reload", async () => {
+    const saved = { html: "<p>Private signature</p>", enabled: false };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved)
+      .mockRejectedValueOnce(new Error("read unavailable"));
+    await mount("signature");
+    await act(() => send("me.emailSignature.update", { body: saved }));
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "signature"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain("Private signature");
+    await remount("signature");
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
     expect(after).not.toHaveBeenCalled();
   });
 });

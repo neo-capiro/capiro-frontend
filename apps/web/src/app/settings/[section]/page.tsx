@@ -8,9 +8,13 @@ export default async function SettingsPage({
   params: Promise<{ section: string }>;
 }) {
   const { section } = await params;
+  const readOnlyPreview =
+    process.env.CAPIRO_PREVIEW_READ_ONLY !== undefined &&
+    process.env.CAPIRO_PREVIEW_READ_ONLY !== "false";
   return (
-    <ConnectedModule settings>
+    <ConnectedModule settings readOnlyPreview={readOnlyPreview}>
       <SettingsScreen
+        readOnlyPreview={readOnlyPreview}
         section={section === "preferences" ? "meri-preferences" : section}
         memoryReviewEnabled={
           process.env.MERI_MEMORY_OWNER_REVIEW_ENABLED === "true"

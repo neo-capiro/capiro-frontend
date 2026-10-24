@@ -16,6 +16,8 @@ import {
   clearSettingsWrite,
   persistSettingsWrite,
   restoreSettingsWrite,
+  settingsRequestHash,
+  retainSettingsResult,
 } from "./security-write-journal";
 import {
   assertSettingsReceipt,
@@ -75,12 +77,18 @@ export function useSettingsMutation(section: string) {
         let dispatched = false;
         let accepted = false;
         try {
-          if (operation === "me.update") {
+          if (
+            operation === "me.update" ||
+            operation === "me.emailSignature.update" ||
+            operation === "settings.contact.update"
+          ) {
             const identity = await raw.request("me.read", {}, options);
             write.expectedAccount = {
               userId: identity.user.id,
               tenantId: identity.tenant.id,
             };
+            if (operation === "settings.contact.update")
+              write.inputFields = Object.keys(write.input.body ?? {});
           }
           if (operation.startsWith("settings.team."))
             await assertTeamWriteAllowed(raw, operation, write.input, options);
@@ -114,6 +122,10 @@ export function useSettingsMutation(section: string) {
           accepted = true;
           options?.signal?.throwIfAborted();
           assertSettingsReceipt(write, result);
+          if (operation === "me.emailSignature.update") {
+            write.resultHash = await settingsRequestHash(result);
+            retainSettingsResult(window.sessionStorage, storageKey, write);
+          }
           if (
             settingsWriteNeedsReadback(operation) &&
             !(await reconcileSettingsWrite(

@@ -33,6 +33,7 @@ type ScreenContext = {
   refresh: () => void;
   meriPreferences: ReactNode;
   memoryReviewEnabled: boolean;
+  readOnlyPreview: boolean;
 };
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
@@ -51,7 +52,9 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
   "ai-usage": () => <UsageSettings />,
-  profiles: () => <ProfileSettings />,
+  profiles: (context) => (
+    <ProfileSettings readOnlyPreview={context.readOnlyPreview} />
+  ),
   "hq-tenants": (context) => <TenantSettings identity={context.identity} />,
   "hq-customers": () => <CustomerSettings />,
   "hq-ai-keys": () => <AiKeysSettings />,
@@ -89,10 +92,12 @@ export function SettingsScreen({
   section = "personal",
   meriPreferences,
   memoryReviewEnabled = false,
+  readOnlyPreview = false,
 }: {
   section?: string;
   meriPreferences: ReactNode;
   memoryReviewEnabled?: boolean;
+  readOnlyPreview?: boolean;
 }) {
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
@@ -131,6 +136,12 @@ export function SettingsScreen({
                 Ask a workspace administrator to update your permissions in
                 Team.
               </SettingsNotice>
+            ) : readOnlyPreview &&
+              !["personal", "profiles"].includes(section) ? (
+              <SettingsNotice title="This Settings section is unavailable in preview">
+                Preview provides your identity and active profiles. Additional
+                Settings reads and changes are unavailable in this mode.
+              </SettingsNotice>
             ) : render ? (
               <>
                 {["hq-tenants", "hq-ai-keys", "hq-personnel"].includes(
@@ -141,6 +152,7 @@ export function SettingsScreen({
                   refresh: query.reload,
                   meriPreferences,
                   memoryReviewEnabled,
+                  readOnlyPreview,
                 })}
               </>
             ) : (
