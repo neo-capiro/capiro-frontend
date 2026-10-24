@@ -127,17 +127,28 @@ export async function reconcileSettingsWrite(
       );
     }
     case "settings.team.resend": {
-      if (!write.expectedInvitation || !write.receiptId) return false;
+      if (
+        !write.receiptId ||
+        (!write.expectedInvitationHash && !write.expectedInvitation)
+      )
+        return false;
+      const expectedHash =
+        write.expectedInvitationHash ??
+        (await settingsRequestHash(write.expectedInvitation));
       const invitations = await api.request(
         "settings.team.invitations",
         {},
         { signal },
       );
-      return invitations.some(
-        (entry) =>
-          entry.id === write.receiptId &&
-          entry.email === write.expectedInvitation!.email &&
-          entry.role === write.expectedInvitation!.role,
+      const invitation = invitations.find(
+        (entry) => entry.id === write.receiptId,
+      );
+      return (
+        !!invitation &&
+        (await settingsRequestHash({
+          email: invitation.email,
+          role: invitation.role,
+        })) === expectedHash
       );
     }
     case "settings.analyst.personCandidates.decide":

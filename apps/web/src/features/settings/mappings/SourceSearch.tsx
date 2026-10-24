@@ -12,10 +12,12 @@ export function SourceSearch({
   source,
   q,
   choose,
+  disabled = false,
 }: {
   source: SearchableMappingSource;
   q: string;
   choose: (record: SelectedFederalRecord) => void;
+  disabled?: boolean;
 }) {
   const lda = useCapiroQuery(
     "settings.mappings.searchLda",
@@ -114,7 +116,10 @@ export function SourceSearch({
             render: (row) => (
               <SettingsButton
                 small
-                onClick={() => choose({ id: row.id, name: row.name })}
+                disabled={disabled}
+                onClick={() => {
+                  if (!disabled) choose({ id: row.id, name: row.name });
+                }}
               >
                 Select record
               </SettingsButton>

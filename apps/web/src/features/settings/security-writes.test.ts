@@ -15,6 +15,7 @@ import {
   clearSettingsWrite,
   persistSettingsWrite,
   restoreSettingsWrite,
+  retainSettingsResult,
 } from "./security-write-journal";
 
 const fixture = (operation: string, input: unknown) =>
@@ -413,6 +414,11 @@ it("a late completion cannot erase a newer recovery record", async () => {
   });
   await persistSettingsWrite(store, "scope", second, second.input);
   clearSettingsWrite(store, "scope", first);
+  first.receiptId = "late-receipt";
+  first.acceptedResult = true;
+  retainSettingsResult(store, "scope", first);
+  expect(restoreSettingsWrite(store, "scope")?.receiptId).toBeUndefined();
+  expect(restoreSettingsWrite(store, "scope")?.acceptedResult).toBeUndefined();
   expect(restoreSettingsWrite(store, "scope")?.input.params?.userId).toBe(
     "second",
   );

@@ -42,6 +42,10 @@ export async function persistSettingsWrite(
 ) {
   const requestHash = await settingsRequestHash(dispatchedInput);
   write.requestHash = requestHash;
+  if (write.expectedInvitation)
+    write.expectedInvitationHash = await settingsRequestHash(
+      write.expectedInvitation,
+    );
   const body =
     write.operation === "settings.support.create"
       ? { id: write.input.body?.id }
@@ -57,6 +61,7 @@ export async function persistSettingsWrite(
       attemptId: write.attemptId,
       requestHash,
       resultHash: write.resultHash,
+      expectedInvitationHash: write.expectedInvitationHash,
       expectedAccount: write.expectedAccount,
       inputFields: write.inputFields,
       operation: write.operation,
@@ -104,6 +109,16 @@ export function restoreSettingsWrite(
       input: data.input as SettingsWrite["input"],
       startedAt: data.startedAt,
       requestHash: data.requestHash,
+      ...(typeof data.expectedInvitationHash === "string" &&
+      /^[a-f0-9]{64}$/.test(data.expectedInvitationHash)
+        ? { expectedInvitationHash: data.expectedInvitationHash }
+        : {}),
+      ...(typeof data.receiptId === "string" && data.receiptId.length > 0
+        ? { receiptId: data.receiptId }
+        : {}),
+      ...(typeof data.acceptedResult === "boolean"
+        ? { acceptedResult: data.acceptedResult }
+        : {}),
       ...(typeof data.resultHash === "string" &&
       /^[a-f0-9]{64}$/.test(data.resultHash)
         ? { resultHash: data.resultHash }
@@ -134,7 +149,7 @@ export function restoreSettingsWrite(
   }
 }
 
-/** Retain the hash of a sanitized signature receipt without retaining signature HTML. */
+/** Retain accepted comparison metadata, never private receipt text or replayable payloads. */
 export function retainSettingsResult(
   storage: StoragePort,
   key: string,
@@ -148,7 +163,12 @@ export function retainSettingsResult(
     return;
   storage.setItem(
     key,
-    JSON.stringify({ ...JSON.parse(existing), resultHash: write.resultHash }),
+    JSON.stringify({
+      ...JSON.parse(existing),
+      resultHash: write.resultHash,
+      receiptId: write.receiptId,
+      acceptedResult: write.acceptedResult,
+    }),
   );
 }
 
