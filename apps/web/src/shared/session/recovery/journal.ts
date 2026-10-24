@@ -148,6 +148,7 @@ function retireRecovery(
         state: "refused";
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
+          | "DIRECTORY_NOTE_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_VERSION_CONFLICT";
@@ -184,6 +185,34 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Caller must verify this exact command's no-write refusal and fresh reads,
+ * under the same execution lock used for all attempts. Unknown outcomes remain pending. */
+export function retireMemberNoteRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: {
+    schemaVersion: number;
+    code: string;
+    requestId: string;
+    status: number;
+  },
+  assert: () => void,
+) {
+  if (
+    failure.schemaVersion !== 1 ||
+    failure.code !== "DIRECTORY_NOTE_REFUSED" ||
+    failure.requestId !== requestId ||
+    ![400, 404, 409].includes(failure.status)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "DIRECTORY_NOTE_REFUSED" },
+    assert,
+  );
 }
 
 /** Caller must verify this exact command's no-write refusal and fresh reads,

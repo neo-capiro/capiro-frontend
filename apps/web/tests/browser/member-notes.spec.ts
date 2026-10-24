@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { test, expect, type Page, type Route } from "@playwright/test";
 import { client, clientId, installFixtures } from "./fixtures";
 import {
@@ -25,7 +26,7 @@ test.afterEach(async ({ page }) => {
 
 const member = { id: "member-42", name: "Sen. Synthetic Member" };
 const noteText = "Reviewed the public briefing.";
-const noteEndpoint = `**/api/backend/core/directory/contacts/${member.id}/notes`;
+const noteEndpoint = `**/api/backend/core/directory/members/${member.id}/note-commands`;
 const detailEndpoint = `**/api/backend/core/directory/members/${member.id}`;
 const searchEndpoint = "**/api/backend/core/directory/contacts?*";
 const detail = {
@@ -67,8 +68,49 @@ const result = (page = 1, total = 1) => ({
     },
   ],
 });
-const fulfill = (route: Route, json: unknown, status = 200) =>
-  route.fulfill({ json, status });
+const savedReceipts = new Map<string, unknown>();
+function commandDigest(route: Route) {
+  const command = route.request().postDataJSON();
+  return createHash("sha256")
+    .update(
+      JSON.stringify([
+        "directory-member-note",
+        1,
+        identity.tenant.id,
+        identity.user.id,
+        command.requestId,
+        member.id,
+        command.directoryContactName,
+        command.body,
+      ]),
+    )
+    .digest("hex");
+}
+function savedCommand(route: Route, note: object) {
+  const command = route.request().postDataJSON();
+  const value = {
+    schemaVersion: 1,
+    requestId: command.requestId,
+    tenantId: identity.tenant.id,
+    actorUserId: identity.user.id,
+    payloadDigest: commandDigest(route),
+    note: { ...note, id: command.requestId },
+  };
+  savedReceipts.set(command.requestId, value);
+  return value;
+}
+const fulfill = (route: Route, json: unknown, status = 200) => {
+  if (
+    route.request().method() === "POST" &&
+    route.request().url().endsWith("/note-commands") &&
+    status === 200 &&
+    json &&
+    typeof json === "object" &&
+    "directoryContactId" in json
+  )
+    json = savedCommand(route, json);
+  return route.fulfill({ json, status });
+};
 async function setup(page: Page, government = false) {
   const unexpected = await (government
     ? installGovernmentFixtures(page)
@@ -88,6 +130,14 @@ async function setup(page: Page, government = false) {
   });
   await page.route(detailEndpoint, (route) => fulfill(route, detail));
   await page.route(noteEndpoint, (route) => fulfill(route, receipt));
+  await page.route(`${noteEndpoint}/*`, (route) => {
+    const value = savedReceipts.get(route.request().url().split("/").pop()!);
+    return fulfill(
+      route,
+      value ?? { message: "Receipt unavailable" },
+      value ? 200 : 404,
+    );
+  });
   return { unexpected, searches, writes };
 }
 async function openMember(page: Page, path = "/portfolio?log=1&keep=scope") {
@@ -226,8 +276,13 @@ test("explicit Note save sends only supported fields and displays its verified r
     page.getByRole("button", { name: "Saved", exact: true }),
   ).toBeDisabled();
   expect(writes).toHaveLength(1);
-  expect(writes[0]!.path).toContain(`/directory/contacts/${member.id}/notes`);
+  expect(writes[0]!.path).toContain(
+    `/directory/members/${member.id}/note-commands`,
+  );
   expect(writes[0]!.body).toEqual({
+    schemaVersion: 1,
+    requestId: expect.any(String),
+    kind: "note",
     body: noteText,
     directoryContactName: member.name,
   });
@@ -329,7 +384,9 @@ for (const [field, wrongReceipt] of [
     await page.route(noteEndpoint, (route) => fulfill(route, wrongReceipt));
     await draft(page);
     await saveButton(page).click();
-    await expect(page.getByText(/The save result is uncertain/)).toBeVisible();
+    await expect(
+      page.getByText(/A note save is awaiting its exact receipt/),
+    ).toBeVisible();
     await expect(saveButton(page)).toBeDisabled();
     await expect(
       page.getByRole("button", { name: "Change member" }),
@@ -346,7 +403,9 @@ test("lost POST reply freezes automatic and explicit replay", async ({
   await page.route(noteEndpoint, (route) => route.abort("connectionreset"));
   await draft(page);
   await saveButton(page).click();
-  await expect(page.getByText(/The save result is uncertain/)).toBeVisible();
+  await expect(
+    page.getByText(/A note save is awaiting its exact receipt/),
+  ).toBeVisible();
   await expect(saveButton(page)).toBeDisabled();
   await page
     .getByRole("dialog")
@@ -369,17 +428,21 @@ test("switching Client and Member cannot bypass an uncertain save freeze", async
   );
   await draft(page);
   await saveButton(page).click();
-  await expect(page.getByText(/The save result is uncertain/)).toBeVisible();
+  await expect(
+    page.getByText(/A note save is awaiting its exact receipt/),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Client", exact: true }).click();
   await expect(
     page.getByRole("combobox", { name: "Client", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Member", exact: true }).click();
-  await expect(page.getByText(/The save result is uncertain/)).toBeVisible();
+  await expect(
+    page.getByText(/A note save is awaiting its exact receipt/),
+  ).toBeVisible();
   await expect(saveButton(page)).toBeDisabled();
   await expect(
     page.getByRole("textbox", { name: "What happened" }),
-  ).toHaveValue(`  ${noteText}\n`);
+  ).toHaveValue(noteText);
   expect(writes).toHaveLength(1);
 });
 
@@ -445,8 +508,13 @@ test("Congress target drawer reuses the same tenant-shared form without creating
   await drawer.getByRole("button", { name: "Log it", exact: true }).click();
   await expect(drawer.getByText(/^Note saved to Directory/)).toBeVisible();
   expect(writes).toHaveLength(1);
-  expect(writes[0]!.path).toContain(`/directory/contacts/${member.id}/notes`);
+  expect(writes[0]!.path).toContain(
+    `/directory/members/${member.id}/note-commands`,
+  );
   expect(writes[0]!.body).toEqual({
+    schemaVersion: 1,
+    requestId: expect.any(String),
+    kind: "note",
     body: noteText,
     directoryContactName: member.name,
   });
@@ -460,12 +528,28 @@ test("known validation refusal retains draft and supports an explicit reviewed r
   let attempts = 0;
   await page.route(noteEndpoint, (route) =>
     ++attempts === 1
-      ? fulfill(route, { message: "Review note text" }, 400)
+      ? fulfill(
+          route,
+          {
+            schemaVersion: 1,
+            code: "DIRECTORY_NOTE_REFUSED",
+            requestId: route.request().postDataJSON().requestId,
+            memberId: member.id,
+            payloadDigest: commandDigest(route),
+            status: 400,
+            message: "Review note text",
+          },
+          400,
+        )
       : fulfill(route, receipt),
   );
   await draft(page);
   await saveButton(page).click();
   await expect(page.getByRole("alert")).toContainText("Review note text");
+  await expect(saveButton(page)).toBeDisabled();
+  await page
+    .getByRole("button", { name: "Review note again", exact: true })
+    .click();
   await expect(saveButton(page)).toBeEnabled();
   expect(writes).toHaveLength(1);
   await saveButton(page).click();
@@ -568,8 +652,10 @@ test("role change after dispatch freezes the same-scope form even when role is r
   await expect.poll(() => writes.length).toBe(1);
   await event(page, "member-note-role-change");
   release();
-  await expect(page.getByText(/The save result is uncertain/)).toBeVisible();
   await event(page, "member-note-role-restore");
+  await expect(
+    page.getByText(/A note save is awaiting its exact receipt/),
+  ).toBeVisible();
   await expect(saveButton(page)).toBeDisabled();
   await expect(page.getByText(/^Note saved to Directory/)).toHaveCount(0);
   expect(writes).toHaveLength(1);
@@ -633,4 +719,55 @@ test("mobile dark shared note layout stays within the viewport", async ({
     fullPage: false,
   });
   expect(writes).toEqual([]);
+});
+
+test("lost committed reply recovers across reload through GET without another POST", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await page.route(noteEndpoint, async (route) => {
+    savedCommand(route, receipt);
+    await route.abort("connectionreset");
+  });
+  await draft(page);
+  await saveButton(page).click();
+  await expect(
+    page.getByText(/A note save is awaiting its exact receipt/),
+  ).toBeVisible();
+  await selectMember(page);
+  await expect(
+    page.getByRole("textbox", { name: "What happened" }),
+  ).toHaveValue(noteText);
+  await expect(saveButton(page)).toBeDisabled();
+  await page
+    .getByRole("button", { name: "Recover saved note", exact: true })
+    .click();
+  await expect(page.getByText(/^Note saved to Directory/)).toBeVisible();
+  expect(writes).toHaveLength(1);
+  await page
+    .getByRole("button", { name: "Acknowledge saved note", exact: true })
+    .click();
+  await expect(
+    page.getByRole("textbox", { name: "What happened" }),
+  ).toHaveValue("");
+  expect(writes).toHaveLength(1);
+});
+
+test("generic HTTP refusal cannot unlock a retained command", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await page.route(noteEndpoint, (route) =>
+    fulfill(route, { message: "Unattributed rejection" }, 409),
+  );
+  await draft(page);
+  await saveButton(page).click();
+  await expect(
+    page.getByText(/A note save is awaiting its exact receipt/),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Review note again", exact: true }),
+  ).toHaveCount(0);
+  await expect(saveButton(page)).toBeDisabled();
+  expect(writes).toHaveLength(1);
 });

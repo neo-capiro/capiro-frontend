@@ -34,7 +34,11 @@ function NoteSession({ member, onSaved, onChangeMember }: Props) {
   const [validation, setValidation] = useState("");
   const state = useMemberNote(member, onSaved);
   const locked =
-    state.mutation.isPending || state.uncertain || Boolean(state.receipt);
+    state.mutation.isPending ||
+    state.recovery.isPending ||
+    Boolean(state.refusal) ||
+    state.uncertain ||
+    Boolean(state.receipt);
   return (
     <form
       className={styles.form}
@@ -92,7 +96,7 @@ function NoteSession({ member, onSaved, onChangeMember }: Props) {
         label="What happened"
         hint="Shared with users in your tenant who can access Directory notes."
         placeholder="What was said, what was asked, what was promised…"
-        value={text}
+        value={state.retainedText ?? text}
         onChange={(event) => setText(event.target.value)}
         maxLength={4000}
         required
@@ -127,22 +131,71 @@ function NoteSession({ member, onSaved, onChangeMember }: Props) {
         </p>
       ) : null}
       {validation && <p role="alert">{validation}</p>}
-      {state.mutation.error && (
+      {state.mutation.error && !state.refusal && (
         <p role="alert" className="status error">
           {state.mutation.error.message}
         </p>
       )}
       {state.uncertain && (
-        <p role="alert" className="status error">
-          The save result is uncertain. Check this member’s Directory notes
-          before saving again. This form will not resend the request.
+        <div role="alert" className="status error">
+          <p>
+            A note save is awaiting its exact receipt. It is retained across
+            reloads. Recover that save before starting another note.
+          </p>
+          <button
+            type="button"
+            className="button"
+            disabled={state.recovery.isPending || state.mutation.isPending}
+            onClick={() => state.recovery.mutate("recover")}
+          >
+            Recover saved note
+          </button>
+        </div>
+      )}
+      {state.refusal && (
+        <div role="alert" className="status error">
+          <p>
+            {state.refusal.message} Core confirmed that this command made no
+            note.
+          </p>
+          <button
+            type="button"
+            className="button"
+            disabled={state.recovery.isPending}
+            onClick={() =>
+              state.recovery.mutate("retire-refusal", {
+                onSuccess: () => state.mutation.reset(),
+              })
+            }
+          >
+            Review note again
+          </button>
+        </div>
+      )}
+      {(state.recoveryError || state.recovery.error) && (
+        <p role="alert">
+          {state.recoveryError || state.recovery.error?.message}
         </p>
       )}
       {state.receipt && (
-        <p role="status">
-          Note saved to Directory. Recorded{" "}
-          {new Date(state.receipt.createdAt).toLocaleString()}.
-        </p>
+        <div>
+          <p role="status">
+            Note saved to Directory. Recorded{" "}
+            {new Date(state.receipt.createdAt).toLocaleString()}.
+          </p>
+          <button
+            type="button"
+            className="button"
+            disabled={state.recovery.isPending}
+            onClick={() =>
+              state.recovery.mutate("acknowledge", {
+                onSuccess: () => setText(""),
+              })
+            }
+          >
+            Acknowledge saved note
+          </button>
+        </div>
       )}
       <footer className={styles.footer}>
         <small>{text.length}/4000</small>

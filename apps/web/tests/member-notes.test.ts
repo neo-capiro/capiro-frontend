@@ -6,6 +6,7 @@ import {
   ambiguousClientWrite,
 } from "../src/features/portfolio/client-profile/quick-log/public";
 import { createMemberNote } from "../src/features/portfolio/relationships/member-notes/api";
+import { prepareMemberNote } from "../src/features/portfolio/relationships/member-notes/command";
 import {
   memberReferenceSchema,
   memberNoteInputSchema,
@@ -28,6 +29,20 @@ const receipt = {
   createdAt: "2026-10-11T12:00:00Z",
   createdBy: { id: actor.userId, email: null, firstName: null, lastName: null },
 };
+const attempt = await prepareMemberNote(
+  actor,
+  member,
+  receipt.body,
+  receipt.id,
+);
+const commandReceipt = {
+  schemaVersion: 1,
+  requestId: receipt.id,
+  tenantId: actor.tenantId,
+  actorUserId: actor.userId,
+  payloadDigest: attempt.payloadDigest,
+  note: receipt,
+};
 function transport(
   options: {
     detail?: unknown;
@@ -49,7 +64,9 @@ function transport(
     return new Response(
       JSON.stringify(
         method === "POST"
-          ? (options.receipt ?? receipt)
+          ? options.receipt
+            ? { ...commandReceipt, note: options.receipt }
+            : commandReceipt
           : (options.detail ?? detail),
       ),
       { status, headers: { "Content-Type": "application/json" } },
@@ -64,14 +81,20 @@ function save(
 ) {
   const value = transport(options);
   const dispatched = vi.fn();
+  const trackedApi = {
+    ...value.api,
+    request: (...args: Parameters<typeof value.api.request>) => {
+      if (args[3]?.method === "POST") dispatched();
+      return value.api.request(...args);
+    },
+  } as typeof value.api;
   const result = createMemberNote(
-    value.api,
-    member,
+    trackedApi,
     actor,
-    `  ${receipt.body}\n`,
+    attempt,
     guard,
     signal,
-    dispatched,
+    async () => {},
   );
   return { ...value, result, dispatched };
 }
@@ -83,9 +106,9 @@ describe("member Directory note boundary", () => {
     expect(calls).toEqual([
       { path: "/api/backend/core/directory/members/member-42", method: "GET" },
       {
-        path: "/api/backend/core/directory/contacts/member-42/notes",
+        path: "/api/backend/core/directory/members/member-42/note-commands",
         method: "POST",
-        body: { body: receipt.body, directoryContactName: member.name },
+        body: attempt.input,
       },
     ]);
     expect(dispatched).toHaveBeenCalledTimes(1);
@@ -182,7 +205,7 @@ describe("member Directory note boundary", () => {
   it("refuses local authority changes after dispatch rather than publishing a receipt", async () => {
     let checks = 0;
     const { result, calls, dispatched } = save({}, () => {
-      if (++checks === 3) throw new ApiError(403, "Local authority changed");
+      if (++checks === 4) throw new ApiError(403, "Local authority changed");
     });
     await expect(result).rejects.toMatchObject({ status: 403 });
     expect(calls.map((call) => call.method)).toEqual(["GET", "POST"]);
