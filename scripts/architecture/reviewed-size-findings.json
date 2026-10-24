@@ -3217,7 +3217,7 @@
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
     "symbol": "MeriConversationHost",
-    "fingerprint": "d828701139e3fc586f28062fc6f61859cf54780f38b9eeb327c2545ec512589f",
+    "fingerprint": "99cf7f159a896f749f47717cbe33128f3359c67043e084550d250e3fafa30371",
     "reason": "One conversation selection and mount boundary: malformed URL refusal, enabled/current-account state, client eligibility, explicit General selection, and keyed lifetime replacement. Core bootstrap and session ownership remain in existing resolver/controller modules; browser selection is not authority. The branches choose presentations of the same connection, not separate domain workflows. Existing ConnectedConversation and notice helpers already isolate meaningful subresponsibilities.",
     "reviewedBy": "Codex independent D (wave2_d_review_handover)",
     "reviewedOn": "2026-10-24"
