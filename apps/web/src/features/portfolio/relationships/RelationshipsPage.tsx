@@ -15,6 +15,7 @@ import { RelationshipTypeNavigation } from "./RelationshipTypeNavigation";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { canManageContacts } from "./contact-api";
 import { useContactCreateAttempt } from "./contact-create-attempt";
+import { ContactCreateRecovery } from "./ContactCreateRecovery";
 export function RelationshipsPage({
   clientId,
   destinations = {},
@@ -96,6 +97,8 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
               !permitted ||
               !records ||
               query.isFetching ||
+              !creation.ready ||
+              creation.busy ||
               Boolean(creation.attempt)
             }
             onClick={() => {
@@ -107,13 +110,7 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
         </div>
       </header>
       <RelationshipTypeNavigation />
-      {creation.attempt && (
-        <p role="status">
-          {creation.attempt.status === "pending"
-            ? "A contact creation is pending."
-            : "A contact creation may have completed. Review the roster; another create is unavailable in this session. A roster read does not confirm the earlier attempt."}
-        </p>
-      )}
+      {permitted && <ContactCreateRecovery creation={creation} />}
       <QueryState
         error={identity.error}
         retry={() => void identity.refetch()}
@@ -215,6 +212,7 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
       )}
       {records && (
         <ContactDrawer
+          creation={creation}
           key={`${clientId}:${selected ?? "closed"}`}
           clientId={clientId}
           person={person}

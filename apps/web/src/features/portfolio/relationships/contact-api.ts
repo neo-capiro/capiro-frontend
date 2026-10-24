@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { ApiClient } from "@/shared/portfolio/api/http";
+import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { canAdminister } from "@/shared/portfolio/auth/identity";
 import { contactInput, personSchema, type Person } from "./contracts";
 
@@ -47,7 +47,7 @@ export function readPeople(
   );
 }
 
-/** Uses current ClientPeople receipts; no invented version/idempotency guarantees. */
+/** Existing edits, hierarchy changes and deletion. Creation uses its request owner. */
 export async function writePerson(
   api: ApiClient,
   clientId: string,
@@ -91,6 +91,11 @@ export async function writePerson(
     ...change.body,
     email: change.body.email?.trim() ?? "",
   });
+  if (!id)
+    throw new ApiError(
+      400,
+      "Use the contact creation command to save a new contact.",
+    );
   const body = { ...parsed, email: parsed.email || null };
   const receipt = scopedPerson(clientId, id).refine(
     (person) =>
@@ -99,8 +104,8 @@ export async function writePerson(
       ),
     "Saved contact details do not match the submitted change",
   );
-  return api.request("core", `${base}${id ? `/${id}` : ""}`, receipt, {
-    method: id ? "PATCH" : "POST",
+  return api.request("core", `${base}/${id}`, receipt, {
+    method: "PATCH",
     body,
   });
 }

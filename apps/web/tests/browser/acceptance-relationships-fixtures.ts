@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import { createHash } from "node:crypto";
 import { clientId, json, person, sendingMailbox } from "./fixtures";
 import { committee } from "./government-fixtures";
 
@@ -6,6 +7,55 @@ export const relationshipsPath = `/portfolio/${clientId}/relationships`;
 export const governmentPath = `${relationshipsPath}?kind=government`;
 export const otherClientId = "10000000-0000-4000-8000-000000000002";
 export const threadId = "a0000000-0000-4000-8000-000000000001";
+
+const contactActor = {
+  tenantId: "00000000-0000-4000-8000-000000000001",
+  userId: "00000000-0000-4000-8000-000000000002",
+};
+export async function installContactCreateIdentity(page: Page) {
+  await page.route("**/api/backend/core/me", (route) =>
+    json(route, {
+      user: { id: contactActor.userId, email: "synthetic@example.test" },
+      tenant: { id: contactActor.tenantId, name: "Synthetic contact tests" },
+      role: "user_admin",
+    }),
+  );
+}
+export function contactCreationReceipt(
+  body: Record<string, unknown>,
+  id: string,
+) {
+  return {
+    schemaVersion: 1,
+    status: "completed",
+    tenantId: contactActor.tenantId,
+    actorUserId: contactActor.userId,
+    clientId,
+    requestId: body.requestId,
+    personId: id,
+    available: true,
+    createdAt: "2026-10-24T12:00:00.000Z",
+    payloadDigest: createHash("sha256")
+      .update(
+        JSON.stringify([
+          "client-person-create",
+          1,
+          contactActor.tenantId,
+          contactActor.userId,
+          clientId,
+          body.requestId,
+          body.name,
+          body.title,
+          body.email,
+          body.phone,
+          body.role,
+          body.notes,
+          body.lastContact,
+        ]),
+      )
+      .digest("hex"),
+  };
+}
 
 export async function refreshRelationships(
   page: Page,
