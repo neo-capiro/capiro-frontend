@@ -9,11 +9,7 @@ import {
 } from "react";
 import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
-import {
-  intentRows,
-  type IntentRow,
-  type Viewer,
-} from "./intent-view";
+import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
 import {
   intentDecisionRecovery,
@@ -26,14 +22,6 @@ export type Attempt =
   | { state: "pending"; decision: Choice }
   | { state: "uncertain"; decision: Choice; message?: string };
 export type IntentScope = IntentDecisionScope;
-const decided = new Set([
-  "approved",
-  "rejected",
-  "executing",
-  "completed",
-  "unknown",
-  "expired",
-]);
 type RecoveryState = {
   key: string;
   access: IntentsAccess;
@@ -64,7 +52,7 @@ export function useConversationIntents(
       current.current.active = false;
     };
   }, [access, key]);
-  const pending = useRef(new Set<string>());
+  const pending = useRef(new Map<string, IntentsAccess>());
   const [recovery, setRecovery] = useState<RecoveryState>({
     key,
     access,
@@ -100,12 +88,19 @@ export function useConversationIntents(
           continue;
         const id = item.proposal.proposalId,
           journal = recoveryFor(id);
-        if (pending.current.has(id)) continue;
+        if (pending.current.get(id) === access) continue;
         const saved = await journal.load();
         guard();
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
-        if (decided.has(item.phase))
+        if (
+          (item.phase === "rejected" &&
+            typeof item.decision === "object" &&
+            item.decision?.decision === "rejected") ||
+          (item.phase === "completed" &&
+            typeof item.execution === "object" &&
+            item.execution?.state === "completed")
+        )
           await journal.observed(item.proposal, item.deliveryId);
         else
           entries.push([id, { state: "uncertain", decision: saved.decision }]);
@@ -122,7 +117,7 @@ export function useConversationIntents(
             ...Object.fromEntries(
               Object.entries(
                 previous.key === key ? previous.attempts : {},
-              ).filter(([id]) => pending.current.has(id)),
+              ).filter(([id]) => pending.current.get(id) === access),
             ),
           },
         }));
@@ -163,7 +158,11 @@ export function useConversationIntents(
   const decide = useCallback(
     async (row: IntentRow, decision: Choice) => {
       const proposal = row.proposal;
-      if (!proposal || !ready || pending.current.has(proposal.proposalId))
+      if (
+        !proposal ||
+        !ready ||
+        pending.current.get(proposal.proposalId) === access
+      )
         return;
       const id = proposal.proposalId,
         prior = attempts[id];
@@ -176,7 +175,7 @@ export function useConversationIntents(
         commandSha256: proposal.commandSha256,
         decision,
       };
-      pending.current.add(id);
+      pending.current.set(id, access);
       setRecovery((previous) => ({
         ...previous,
         attempts: {
@@ -193,14 +192,15 @@ export function useConversationIntents(
           proposal,
           new AbortController().signal,
         );
-        if (reply.kind === "ok") attempt = null;
+        if (reply.kind === "ok" && reply.value.status !== "indeterminate")
+          attempt = null;
         else if (reply.kind === "refused")
           attempt = {
             state: "uncertain",
             decision,
-          message: `The service returned ${reply.code}. The saved decision remains unresolved; refresh or retry the same request.`,
+            message: `The service returned ${reply.code}. The saved decision remains unresolved; refresh or retry the same request.`,
           };
-        else if (!reply.dispatched)
+        else if (reply.kind === "unavailable" && !reply.dispatched)
           attempt = {
             state: "uncertain",
             decision,
@@ -217,7 +217,7 @@ export function useConversationIntents(
               : "Decision recovery is unavailable.",
         };
       } finally {
-        pending.current.delete(id);
+        if (pending.current.get(id) === access) pending.current.delete(id);
       }
       if (
         !current.current.active ||
@@ -233,16 +233,7 @@ export function useConversationIntents(
       });
       await refresh();
     },
-    [
-      access,
-      attempts,
-      conversationId,
-      ready,
-      recoveryFor,
-      guard,
-      key,
-      refresh,
-    ],
+    [access, attempts, conversationId, ready, recoveryFor, guard, key, refresh],
   );
 
   const viewer = useMemo<Viewer>(

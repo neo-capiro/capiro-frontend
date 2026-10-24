@@ -236,3 +236,28 @@ it("keeps the original marker on authority loss and reconciles through a current
   expect((await record()).state).toBe("acknowledged");
   expect(access.decide).toHaveBeenCalledTimes(1);
 });
+
+it("retains the exact approved request after an admitted indeterminate execution response", async () => {
+  const executed = wire("decideExecuted");
+  const body = structuredClone(executed.response);
+  Reflect.deleteProperty(body, "outcome");
+  const fetcher = vi.fn(async () =>
+    Response.json({ ...body, status: "indeterminate" }),
+  );
+  const access = createIntentsAccess(
+    `action_session_${"a".repeat(43)}`,
+    signal(),
+    fetcher,
+  );
+  const reply = await recovery().decide(
+    access,
+    executed.request,
+    executed.proposal,
+    signal(),
+  );
+  expect(reply).toMatchObject({
+    kind: "ok",
+    value: { status: "indeterminate" },
+  });
+  expect(await recovery().load()).toEqual(executed.request);
+});

@@ -109,7 +109,7 @@ export function intentDecisionRecovery(
         signal.throwIfAborted();
         const reply = await access.decide(exact, proposal, signal);
         guard();
-        if (reply.kind === "ok")
+        if (reply.kind === "ok" && reply.value.status !== "indeterminate")
           await acknowledgeRecovery(scope, proposalId, guard);
         return reply;
       });
