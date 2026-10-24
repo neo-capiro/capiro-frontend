@@ -41,21 +41,27 @@ function DecisionControls({
   row,
   attempt,
   onDecide,
+  disabled,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  disabled: boolean;
 }) {
   const [confirming, setConfirming] = useState<Choice | null>(null);
-  const busy = attempt?.state === "pending";
+  const busy = disabled || attempt?.state === "pending";
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
-          We could not confirm whether your decision to{" "}
-          {attempt.decision === "approved" ? "approve" : "reject"} this was
-          recorded. Checking sends the same request again; nothing new is
-          created.
+          {attempt.message ?? (
+            <>
+              We could not confirm whether your decision to{" "}
+              {attempt.decision === "approved" ? "approve" : "reject"} this was
+              recorded. Checking sends the same request again; nothing new is
+              created.
+            </>
+          )}
         </p>
         <div className={styles.actions}>
           <Button
@@ -130,10 +136,12 @@ function IntentCard({
   row,
   attempt,
   onDecide,
+  disabled,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  disabled: boolean;
 }) {
   const titleId = `intent-${row.deliveryId.slice(4, 16)}`;
   return (
@@ -145,12 +153,12 @@ function IntentCard({
       <p className={styles.muted}>{row.detail}</p>
       <FieldList fields={row.fields} />
       <FieldList fields={row.result} label="Recorded result" />
-      {attempt?.state === "refused" && (
-        <p role="status" className={styles.refusal}>
-          {attempt.message}
-        </p>
-      )}
-      <DecisionControls row={row} attempt={attempt} onDecide={onDecide} />
+      <DecisionControls
+        row={row}
+        attempt={attempt}
+        onDecide={onDecide}
+        disabled={disabled}
+      />
     </article>
   );
 }
@@ -162,6 +170,8 @@ function Body({
   retry,
   loadMore,
   decide,
+  decisionsReady,
+  recoveryError,
 }: ReturnType<typeof useConversationIntents>) {
   if (list.status === "disabled")
     return (
@@ -191,6 +201,12 @@ function Body({
   return (
     <>
       <ul className={styles.list}>
+        {!decisionsReady && (
+          <li role="status">
+            {recoveryError ??
+              "Checking saved decisions before another request…"}
+          </li>
+        )}
         {rows.map((row) => (
           <li key={row.deliveryId}>
             <IntentCard
@@ -199,6 +215,7 @@ function Body({
                 row.proposal ? attempts[row.proposal.proposalId] : undefined
               }
               onDecide={decide}
+              disabled={!decisionsReady}
             />
           </li>
         ))}
