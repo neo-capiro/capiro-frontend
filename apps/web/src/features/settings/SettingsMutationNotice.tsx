@@ -2,6 +2,7 @@
 import { SettingsButton, SettingsNotice } from "./components";
 import type { SettingsWrite } from "./security-writes";
 const labels: Record<string, string> = {
+  "me.update": "Personal title change",
   "settings.team.invite": "Team invitation",
   "settings.team.resend": "Invitation resend",
   "settings.team.remove": "Member removal",

@@ -99,6 +99,8 @@ vi.mock("../../shared/capiro/registry", () => ({
     "settings.team.setBillingAdmin": { method: "PUT" },
     "settings.team.remove": { method: "DELETE" },
     "settings.team.list": { method: "GET" },
+    "me.read": { method: "GET" },
+    "me.update": { method: "PATCH" },
   },
 }));
 const capture = vi.fn<(view: ReturnType<typeof useSettingsMutation>) => void>();
@@ -204,6 +206,20 @@ beforeEach(() => {
   vi.stubGlobal("window", { sessionStorage: storage });
   state.auth = { userId: "actor-a", sessionId: "session-a", orgId: "org-a" };
   state.api.request.mockReset();
+  state.api.request
+    .mockResolvedValueOnce({
+      role: "user_admin",
+      billingAdmin: true,
+      user: { id: "actor-a" },
+    })
+    .mockResolvedValueOnce([
+      {
+        userId: "target",
+        role: "user_admin",
+        status: "active",
+        billingAdmin: false,
+      },
+    ]);
   after.mockReset();
   capture.mockClear();
   sessionStorage.clear();
@@ -215,6 +231,43 @@ afterEach(() => {
 });
 
 describe("Settings dispatch lifetime", () => {
+  it("a revoked actor never dispatches the write or leaves a recovery record", async () => {
+    state.api.request.mockReset().mockResolvedValueOnce({
+      role: "standard_user",
+      user: { id: "actor-a" },
+    });
+    await mount();
+    await act(dispatch);
+    expect(
+      state.api.request.mock.calls.map(([operation]) => operation),
+    ).toEqual(["me.read"]);
+    expect(current().locked).toBe(false);
+    expect(current().action.error).toContain("no longer available");
+    expect(after).not.toHaveBeenCalled();
+    expect(sessionStorage.length).toBe(0);
+  });
+  it("scope cancellation during preflight never reaches a team mutation", async () => {
+    let finish!: (value: unknown) => void;
+    state.api.request.mockReset().mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    await mount();
+    const first = dispatch();
+    await until(() => state.api.request.mock.calls.length === 1);
+    await act(() => root.render("other-section"));
+    await act(async () => {
+      finish({ role: "standard_user", user: { id: "actor-a" } });
+      await first;
+    });
+    expect(
+      state.api.request.mock.calls.map(([operation]) => operation),
+    ).toEqual(["me.read"]);
+    expect(sessionStorage.length).toBe(0);
+    expect(after).not.toHaveBeenCalled();
+  });
   it("double submission dispatches once, freezes the captured input and validates the target", async () => {
     let finish!: (value: unknown) => void;
     state.api.request.mockImplementation(
@@ -241,9 +294,9 @@ describe("Settings dispatch lifetime", () => {
       changing.params.userId = "other";
       void dispatch();
     });
-    await until(() => state.api.request.mock.calls.length === 1);
+    await until(() => state.api.request.mock.calls.length === 3);
     expect(current().locked).toBe(true);
-    expect(state.api.request.mock.calls[0]?.[1]).toEqual(input);
+    expect(state.api.request.mock.calls[2]?.[1]).toEqual(input);
     await act(async () => {
       finish({ userId: "target", billingAdmin: true });
       await first;
@@ -270,7 +323,7 @@ describe("Settings dispatch lifetime", () => {
     await act(async () => {
       await dispatch();
     });
-    expect(state.api.request).toHaveBeenCalledTimes(1);
+    expect(state.api.request).toHaveBeenCalledTimes(3);
     expect(current().action.error).toContain("not confirmed");
   });
   it.each(["target", "client", "actor", "organization", "session"])(
@@ -288,8 +341,8 @@ describe("Settings dispatch lifetime", () => {
       await act(async () => {
         first = dispatch();
       });
-      await until(() => state.api.request.mock.calls.length === 1);
-      const signal = state.api.request.mock.calls[0]?.[2].signal as AbortSignal;
+      await until(() => state.api.request.mock.calls.length === 3);
+      const signal = state.api.request.mock.calls[2]?.[2].signal as AbortSignal;
       if (kind === "client") state.api = { ...state.api };
       if (kind === "actor") state.auth = { ...state.auth, userId: "actor-b" };
       if (kind === "organization")
@@ -356,6 +409,8 @@ describe("Settings dispatch lifetime", () => {
     expect(
       state.api.request.mock.calls.map(([operation]) => operation),
     ).toEqual([
+      "me.read",
+      "settings.team.list",
       "settings.team.setBillingAdmin",
       "settings.team.list",
       "settings.team.list",
@@ -372,5 +427,65 @@ describe("Settings dispatch lifetime", () => {
     expect(current().action.error).toBe("denied");
     expect(after).not.toHaveBeenCalled();
     expect(sessionStorage.length).toBe(0);
+  });
+});
+
+describe("Personal title receipt and reload recovery", () => {
+  const identity = {
+    user: { id: "actor-a", title: "Reviewed title" },
+    tenant: { id: "tenant-a" },
+  };
+  const submit = () =>
+    current().action.run(
+      (signal) =>
+        current().api.request(
+          "me.update",
+          { body: { title: "Reviewed title" } },
+          { signal },
+        ),
+      "Saved",
+      after,
+    );
+  it("accepts only the exact account and title", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(identity);
+    await mount("personal-title");
+    await act(submit);
+    expect(current().action.message).toBe("Saved");
+    expect(sessionStorage.length).toBe(0);
+    expect(after).toHaveBeenCalledTimes(1);
+  });
+  it("retains uncertainty after a wrong-account receipt and reload, without retaining the title", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ ...identity, tenant: { id: "other" } });
+    await mount("personal-title");
+    await act(submit);
+    expect(current().pending?.state).toBe("unknown");
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "personal-title"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain("Reviewed title");
+    await act(() => root.unmount());
+    cache.clear();
+    await mount("personal-title");
+    expect(current().locked).toBe(true);
+    state.api.request.mockResolvedValueOnce({
+      ...identity,
+      user: { ...identity.user, title: "Other title" },
+    });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request.mockResolvedValueOnce(identity);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(current().action.message).toContain("now has the requested state");
+    expect(
+      state.api.request.mock.calls.filter(
+        ([operation]) => operation === "me.update",
+      ),
+    ).toHaveLength(1);
+    expect(after).not.toHaveBeenCalled();
   });
 });

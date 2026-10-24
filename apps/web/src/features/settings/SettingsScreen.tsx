@@ -38,7 +38,12 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
   "contact-info": (context) => <ContactSettings identity={context.identity} />,
   branding: () => <BrandingSettings />,
-  team: (context) => <TeamSettings identity={context.identity} />,
+  team: (context) => (
+    <TeamSettings
+      identity={context.identity}
+      refreshIdentity={context.refresh}
+    />
+  ),
   integrations: () => <IntegrationSettings />,
   memory: (context) => (
     <MemorySettings reviewEnabled={context.memoryReviewEnabled} />

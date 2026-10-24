@@ -1,6 +1,7 @@
 import type { CapiroApi } from "../../shared/capiro/http";
 import type { capiroOperations } from "../../shared/capiro/registry";
 import type { SettingsWrite } from "./security-writes";
+import { settingsRequestHash } from "./security-write-journal";
 type Api = CapiroApi<typeof capiroOperations>;
 const row = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -14,6 +15,17 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "me.update": {
+      if (!write.expectedAccount || !write.requestHash) return false;
+      const current = await api.request("me.read", {}, { signal });
+      return (
+        current.user.id === write.expectedAccount.userId &&
+        current.tenant.id === write.expectedAccount.tenantId &&
+        (await settingsRequestHash({
+          body: { title: current.user.title ?? "" },
+        })) === write.requestHash
+      );
+    }
     case "settings.team.resend": {
       if (!write.expectedInvitation || !write.receiptId) return false;
       const invitations = await api.request(

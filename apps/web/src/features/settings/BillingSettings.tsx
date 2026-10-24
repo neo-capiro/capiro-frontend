@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { ScopedLink } from "../../shared/shell/ScopedLink";
 import { useState } from "react";
 import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../shared/capiro/queries";
@@ -209,7 +209,9 @@ export function BillingSettings() {
             </SettingsCard>
             <p className={styles.description}>
               AI usage is included in your plan.{" "}
-              <Link href="/settings/ai-usage">See where it is being used.</Link>
+              <ScopedLink href="/settings/ai-usage">
+                See where it is being used.
+              </ScopedLink>
             </p>
           </>
         )}

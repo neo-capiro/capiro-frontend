@@ -20,6 +20,8 @@ export type SettingsWrite = {
   input: { params?: Row; body?: Row };
   state: "pending" | "unknown";
   expectedInvitation?: { email: string; role: string };
+  expectedAccount?: { userId: string; tenantId: string };
+  requestHash?: string;
   receiptId?: string;
   acceptedResult?: boolean;
   startedAt: string;
@@ -33,6 +35,13 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "me.update":
+      confirmed =
+        !!write.expectedAccount &&
+        equal(row(receipt.user).id, write.expectedAccount.userId) &&
+        equal(row(receipt.tenant).id, write.expectedAccount.tenantId) &&
+        equal(row(receipt.user).title ?? "", body.title);
+      break;
     case "settings.team.remove":
       confirmed = receipt.ok === true || typeof receipt.jobId === "string";
       break;

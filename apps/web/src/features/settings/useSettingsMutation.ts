@@ -11,6 +11,7 @@ import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroApi } from "../../shared/capiro/http";
 import { capiroOperations } from "../../shared/capiro/registry";
 import { useSettingsAction } from "./useSettingsAction";
+import { assertTeamWriteAllowed } from "./team-permissions";
 import {
   clearSettingsWrite,
   persistSettingsWrite,
@@ -74,6 +75,15 @@ export function useSettingsMutation(section: string) {
         let dispatched = false;
         let accepted = false;
         try {
+          if (operation === "me.update") {
+            const identity = await raw.request("me.read", {}, options);
+            write.expectedAccount = {
+              userId: identity.user.id,
+              tenantId: identity.tenant.id,
+            };
+          }
+          if (operation.startsWith("settings.team."))
+            await assertTeamWriteAllowed(raw, operation, write.input, options);
           if (operation === "settings.team.resend") {
             const invitations = await raw.request(
               "settings.team.invitations",

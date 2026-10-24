@@ -32,7 +32,7 @@ export type HelpShortcutsView = {
     runReference: { label: string; placeholder: string };
     footnote: string;
   };
-  submitted: SettingsNotice;
+  unavailable: SettingsNotice;
 };
 
 const columns: readonly DataColumn<ShortcutRow>[] = [
@@ -78,7 +78,7 @@ export function HelpShortcutsScreen({
             unavailable={chrome.unavailable}
             drafts={chrome.localDrafts}
           />
-          <SettingsCallout notice={view.submitted} />
+          <SettingsCallout notice={view.unavailable} />
         </>
       }
     />
@@ -126,9 +126,9 @@ function ReportProblem({
         className={styles.field}
         label={report.runReference.label}
         value={includeRun ? runReference : ""}
-        onChange={includeRun ? setRunReference : undefined}
+        onChange={drafts && includeRun ? setRunReference : undefined}
         placeholder={report.runReference.placeholder}
-        disabled={!includeRun}
+        disabled={!drafts || !includeRun}
       />
       <p className={ui.muted}>{report.footnote}</p>
       <button type="button" className={ui.primary} disabled title={unavailable}>

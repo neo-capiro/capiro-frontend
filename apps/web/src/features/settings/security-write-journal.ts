@@ -1,6 +1,15 @@
 import { type SettingsWrite } from "./security-writes";
 
 type StoragePort = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+export async function settingsRequestHash(input: unknown) {
+  const digest = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(JSON.stringify(input)),
+  );
+  return [...new Uint8Array(digest)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
 const retainedValues = [
   "tenantId",
   "clientId",
@@ -30,13 +39,8 @@ export async function persistSettingsWrite(
   write: SettingsWrite,
   dispatchedInput: unknown,
 ) {
-  const digest = await crypto.subtle.digest(
-    "SHA-256",
-    new TextEncoder().encode(JSON.stringify(dispatchedInput)),
-  );
-  const requestHash = [...new Uint8Array(digest)]
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
+  const requestHash = await settingsRequestHash(dispatchedInput);
+  write.requestHash = requestHash;
   const body = Object.fromEntries(
     Object.entries(write.input.body ?? {}).filter(([name]) =>
       retainedValues.includes(name),
@@ -48,6 +52,7 @@ export async function persistSettingsWrite(
       version: 1,
       attemptId: write.attemptId,
       requestHash,
+      expectedAccount: write.expectedAccount,
       operation: write.operation,
       startedAt: write.startedAt,
       state: "unknown",
@@ -71,17 +76,35 @@ export function restoreSettingsWrite(
       typeof data.requestHash !== "string" ||
       !/^[a-f0-9]{64}$/.test(data.requestHash) ||
       typeof data.operation !== "string" ||
-      !data.operation.startsWith("settings.") ||
+      (!data.operation.startsWith("settings.") &&
+        data.operation !== "me.update") ||
       typeof data.startedAt !== "string" ||
       !data.input ||
       typeof data.input !== "object"
     )
       throw new Error("invalid journal");
+    const account = data.expectedAccount as Record<string, unknown> | undefined;
+    if (
+      data.operation === "me.update" &&
+      (!account ||
+        typeof account.userId !== "string" ||
+        typeof account.tenantId !== "string")
+    )
+      throw new Error("invalid account journal");
     return {
       operation: data.operation,
       attemptId: data.attemptId,
       input: data.input as SettingsWrite["input"],
       startedAt: data.startedAt,
+      requestHash: data.requestHash,
+      ...(account
+        ? {
+            expectedAccount: {
+              userId: String(account.userId),
+              tenantId: String(account.tenantId),
+            },
+          }
+        : {}),
       state: "unknown",
     };
   } catch {

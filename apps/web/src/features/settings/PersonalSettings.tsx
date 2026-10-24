@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
+import { ScopedLink } from "../../shared/shell/ScopedLink";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { TextInput } from "../../shared/module-ui";
 import {
@@ -14,7 +14,8 @@ import {
 } from "./components";
 import { EmailSignature } from "./SignatureSettings";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 export function PersonalSettings({
   identity,
@@ -23,9 +24,11 @@ export function PersonalSettings({
   identity: CapiroMe;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("personal-title");
+  const { openUserProfile } = useClerk();
+  const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState(identity.user.title ?? "");
-  const action = useSettingsAction();
   return (
     <div className={styles.stack} data-design-target="411:67666">
       <SettingsCard
@@ -39,7 +42,12 @@ export function PersonalSettings({
           onSubmit={(event) => {
             event.preventDefault();
             void action.run(
-              () => api.request("me.update", { body: { title } }),
+              (signal) =>
+                api.request(
+                  "me.update",
+                  { body: { title: title.trim() } },
+                  { signal },
+                ),
               "Your title was saved.",
               refresh,
             );
@@ -50,16 +58,22 @@ export function PersonalSettings({
               <TextInput
                 className={styles.input}
                 value={title}
+                disabled={locked}
                 maxLength={120}
                 onChange={(event) => setTitle(event.target.value)}
                 placeholder="Add your title"
               />
             </SettingField>
           </div>
-          <SettingsButton primary type="submit" disabled={action.busy}>
+          <SettingsButton primary type="submit" disabled={locked}>
             {action.busy ? "Saving…" : "Save"}
           </SettingsButton>
         </form>
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
         {action.error && (
           <SettingsNotice title="Title could not be saved" error>
             {action.error}
@@ -68,6 +82,12 @@ export function PersonalSettings({
         {action.message && <SettingsNotice title={action.message} />}
       </SettingsCard>
       <SettingsCard title="Account">
+        <SettingsButton
+          disabled={!isLoaded || !isSignedIn}
+          onClick={() => openUserProfile()}
+        >
+          Manage profile and security
+        </SettingsButton>
         <SettingFacts
           items={[
             ["User ID", identity.user.id],
@@ -86,16 +106,16 @@ export function PersonalSettings({
         title="Watchlist and monitoring setup"
         description="Manage the client watchlists and monitoring settings used by LegiWatch."
       >
-        <Link href="/modules/legiwatch">Open monitoring setup</Link>
+        <ScopedLink href="/modules/legiwatch">Open monitoring setup</ScopedLink>
       </SettingsCard>
       <p className={styles.description}>
         Email, password and two-step verification are managed in your profile.
-        Open the account menu at the top right and choose Profile.
+        Choose Manage profile and security to open your Clerk account.
       </p>
       <p className={styles.description}>
-        <Link href="/settings/meri-preferences">
+        <ScopedLink href="/settings/meri-preferences">
           Meri workspace preferences
-        </Link>
+        </ScopedLink>
       </p>
     </div>
   );
