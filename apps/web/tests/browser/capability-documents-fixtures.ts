@@ -41,6 +41,13 @@ export const uploadReceipt = {
 };
 export async function installDocumentFixtures(page: Page) {
   const unexpected = await installFixtures(page);
+  await page.route(
+    "**/core/clients/10000000-0000-4000-8000-000000000002/files/storage-usage",
+    (route) =>
+      route.request().method() === "GET"
+        ? json(route, { message: "Storage usage unavailable" }, 404)
+        : route.fallback(),
+  );
   await page.route("**/core/engagement/attachments?**", (route) => {
     const requested = new URL(route.request().url()).searchParams.get(
       "clientId",

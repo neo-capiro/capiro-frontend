@@ -74,10 +74,14 @@ async function setup(page: Page) {
         .catch(() => {});
     }
     if (path === "engagement/mail/send") {
-      state.sends.push(route.request().postDataJSON());
+      const input = route.request().postDataJSON();
+      state.sends.push(input);
       return route.fulfill({
         json: {
           ok: true,
+          intentId: "20000000-0000-4000-8000-000000000003",
+          requestKey: input.requestKey,
+          state: "accepted",
           threadId: "20000000-0000-4000-8000-000000000001",
           messageId: "20000000-0000-4000-8000-000000000002",
           ...sendingReceipt,
@@ -132,6 +136,7 @@ for (const [name, tag] of [
       .getByRole("button", { name: "Send email", exact: true })
       .click();
     await expect.poll(() => state.sends.length).toBe(1);
+    await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
     expect(state.sends[0]?.bodyHtml).toContain(
       name === "List"
         ? "<ul><li><p>Original rich draft.</p></li></ul>"
@@ -249,6 +254,7 @@ test("paste keeps supported formatting while removing active markup and remote c
     .getByRole("button", { name: "Send email", exact: true })
     .click();
   await expect.poll(() => state.sends.length).toBe(1);
+  await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
   expect(state.sends[0]?.bodyHtml).not.toMatch(
     /<(?:img|script|style|a|iframe)\b|onerror=|href=/,
   );
