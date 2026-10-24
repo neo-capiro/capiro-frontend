@@ -8,14 +8,18 @@ const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
 const qualifiedCoreRosterSource = '50475125275853299798fc40f8cb119f0b865464';
 const coreRosterPreviewOrigin = 'https://core-roster-preview.capiro.ai';
 const coreRosterPreviewApi = `${coreRosterPreviewOrigin}/api`;
-const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
+// Reviewed v2 contract baseline, not the serving commit. The deployment owner
+// independently checks the successor image/source below before activation.
+const coreBootstrapSource = '16c3122a379481eb19cdee156ceb5d5c8b615bea';
+const coreDeploymentSource = 'd03a118192acd2b1ed2ef5698afb0ab8f2b36ae8';
+const coreDeploymentDigest = 'sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375';
 // Re-pin only to a Core successor with the complete memory route packet and
 // qualified preview listener. The reviewed memory source alone is insufficient.
 const coreMemorySource = '';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
-const meriImageSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
-const meriImageDigest = 'sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8';
-const meriConsumerVersion = '0.1.10';
+const meriImageSource = '7eea1e852f177c17e3675429830b886b906e4cd6';
+const meriImageDigest = 'sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d';
+const meriConsumerVersion = '0.1.12';
 const canonicalUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const nonMeriHosts = new Set([
   'capiro.ai', 'app.capiro.ai', 'os.capiro.ai', 'api.capiro.ai',
@@ -176,6 +180,11 @@ export function renderPreviewConfiguration(bindings) {
     status: 'configuration-proposal',
     profile: 'portfolio-preview',
     backendSource: '0f1e663d5c23ed3f6f02bde801da8f5bb3f8ccba',
+    expectedCoreDeployment: firstChat.bootstrapEnabled ? {
+      contractSource: coreBootstrapSource,
+      sourceCommit: coreDeploymentSource,
+      imageDigest: coreDeploymentDigest,
+    } : null,
     parameters: Object.entries(values).map(([ParameterKey, ParameterValue]) => ({ ParameterKey, ParameterValue })),
     environment: {
       CORE_API_BASE_URL: fixedParameters.CoreApiBaseUrl,

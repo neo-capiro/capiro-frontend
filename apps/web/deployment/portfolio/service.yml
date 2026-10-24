@@ -1,6 +1,15 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Isolated ECS/ALB network for the Capiro Portfolio preview frontend
 
+Metadata:
+  AWSToolsMetrics:
+    AWSAgentToolkit: aws-cloudformation@3
+  CoreBootstrapCompatibility:
+    ContractSource: "16c3122a379481eb19cdee156ceb5d5c8b615bea"
+    ExpectedDeploymentSource: "d03a118192acd2b1ed2ef5698afb0ab8f2b36ae8"
+    ExpectedDeploymentImageDigest: "sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375"
+    Verification: Independent task source, image, listener and readiness readback required before activation; metadata is not attestation.
+
 Parameters:
   ImageUri:
     Type: String
@@ -88,7 +97,8 @@ Parameters:
   CapiroPreviewFirstChatBackendSource:
     Type: String
     Default: ""
-    AllowedValues: ["", "c64f0005cf14d69683aabafa11def4964d766832"]
+    AllowedValues: ["", "16c3122a379481eb19cdee156ceb5d5c8b615bea"]
+    Description: Reviewed v2 contract baseline; actual Core deployment source and digest are independently checked against Metadata
   CapiroPreviewFirstChatApiBaseUrl:
     Type: String
     Default: ""
@@ -135,15 +145,15 @@ Parameters:
   CapiroPreviewMeriRuntimeSource:
     Type: String
     Default: ""
-    AllowedValues: ["", "176a8811a9b05d8613282e70bd7a57ebd75ca201"]
+    AllowedValues: ["", "7eea1e852f177c17e3675429830b886b906e4cd6"]
   CapiroPreviewMeriRuntimeImageDigest:
     Type: String
     Default: ""
-    AllowedValues: ["", "sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8"]
+    AllowedValues: ["", "sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d"]
   CapiroPreviewMeriContractPackageVersion:
     Type: String
     Default: ""
-    AllowedValues: ["", "0.1.10"]
+    AllowedValues: ["", "0.1.12"]
     Description: Frontend consumer distribution; this is not a Meri producer package assertion
 
 Rules:
@@ -178,8 +188,8 @@ Rules:
         AssertDescription: First chat requires one owner-verified active client
       - Assert: !Equals [!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"]
         AssertDescription: First chat needs the selected-client read binding
-      - Assert: !Equals [!Ref CapiroPreviewFirstChatBackendSource, "c64f0005cf14d69683aabafa11def4964d766832"]
-        AssertDescription: First chat requires its reviewed Core bootstrap source
+      - Assert: !Equals [!Ref CapiroPreviewFirstChatBackendSource, "16c3122a379481eb19cdee156ceb5d5c8b615bea"]
+        AssertDescription: First chat requires its reviewed v2 Core contract baseline
       - Assert: !Equals [!Ref CapiroPreviewFirstChatApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/api"]
         AssertDescription: First chat requires the fixed Core preview API target
       - Assert: !Equals [!Ref CapiroPreviewMeriConversationRoutesEnabled, "true"]
@@ -220,11 +230,11 @@ Rules:
         AssertDescription: Meri workflow opt-in requires its narrow preview route
       - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeOrigin, !Ref MeriApiBaseUrl]
         AssertDescription: Meri runtime origin must equal the configured Meri API origin
-      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeSource, "176a8811a9b05d8613282e70bd7a57ebd75ca201"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeSource, "7eea1e852f177c17e3675429830b886b906e4cd6"]
         AssertDescription: Meri route requires the currently qualified image source
-      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d"]
         AssertDescription: Meri route requires the currently qualified image digest
-      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.10"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.12"]
         AssertDescription: Meri route requires the frontend consumer distribution version
   MeriRouteHeldWithoutWorkflow:
     RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "false"]
@@ -436,7 +446,8 @@ Resources:
       NetworkMode: awsvpc
       RequiresCompatibilities: [FARGATE]
       RuntimePlatform:
-        CpuArchitecture: X86_64
+        # Native qualification and the selected image must both be ARM64.
+        CpuArchitecture: ARM64
         OperatingSystemFamily: LINUX
       ExecutionRoleArn: !GetAtt TaskExecutionRole.Arn
       TaskRoleArn: !GetAtt TaskRole.Arn
