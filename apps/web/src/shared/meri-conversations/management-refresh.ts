@@ -47,6 +47,9 @@ export function useManagementRefresh(
     const remote = (event: MessageEvent) => {
       if (sameAccount(event.data, scope)) invalidate(cache, scope);
     };
+    const focus = () => {
+      if (document.visibilityState === "visible") invalidate(cache, scope);
+    };
     let channel: BroadcastChannel | undefined;
     try {
       if (typeof BroadcastChannel !== "undefined") {
@@ -57,8 +60,12 @@ export function useManagementRefresh(
       /* Focus refresh remains available. */
     }
     window.addEventListener(eventName, local);
+    window.addEventListener("focus", focus);
+    document.addEventListener("visibilitychange", focus);
     return () => {
       window.removeEventListener(eventName, local);
+      window.removeEventListener("focus", focus);
+      document.removeEventListener("visibilitychange", focus);
       channel?.close();
     };
   }, [cache, tenantId, actorId, enabled]);

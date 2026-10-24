@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { MotionSurface } from "@capiro/ui/motion";
 import type {
@@ -24,6 +24,12 @@ export function ManagedChatRow({
   refresh: () => void;
 }) {
   const [title, setTitle] = useState(row.title);
+  const previousTitle = useRef(row.title);
+  useEffect(() => {
+    const previous = previousTitle.current;
+    previousTitle.current = row.title;
+    setTitle((draft) => (draft === previous ? row.title : draft));
+  }, [row.title]);
   const { journal, intent, busy, message, submit, change } = useManagedChange({
     row,
     account,

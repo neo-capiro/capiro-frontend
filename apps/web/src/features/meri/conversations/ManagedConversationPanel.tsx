@@ -10,9 +10,12 @@ export function ManagedConversationPanel() {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState<ManagedConversation["status"]>("active");
   const { query, scope, current } = useManagedConversations(title, status);
-  const rows = current
-    ? (query.data?.pages.flatMap((page) => page.conversations) ?? [])
-    : [];
+  // Keep local row state during revalidation, but hide it until the read is current.
+  // A failed read or account replacement removes the rows and their private state.
+  const rows =
+    scope && !query.error
+      ? (query.data?.pages.flatMap((page) => page.conversations) ?? [])
+      : [];
   const available = current;
   return (
     <>
@@ -50,13 +53,17 @@ export function ManagedConversationPanel() {
         )}
         {scope &&
           rows.map((row) => (
-            <ManagedChatRow
-              key={`${scope.tenantId}:${scope.actorId}:${row.conversationId}:${row.revision}`}
-              row={row}
-              account={scope}
-              available={available}
-              refresh={() => void query.refetch()}
-            />
+            <div
+              key={`${scope.tenantId}:${scope.actorId}:${row.conversationId}`}
+              hidden={!current}
+            >
+              <ManagedChatRow
+                row={row}
+                account={scope}
+                available={available}
+                refresh={() => void query.refetch()}
+              />
+            </div>
           ))}
         {current && query.hasNextPage && (
           <button onClick={() => void query.fetchNextPage()}>
