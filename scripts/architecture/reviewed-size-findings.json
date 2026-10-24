@@ -2587,10 +2587,10 @@
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "function",
     "symbol": "PortfolioIndex",
-    "fingerprint": "8c9e687baf07154d496c1502e91bf16dc154c802e18e8fe7e28847a904ca9a05",
-    "reason": "This ordinary Portfolio page composes scoped Core, owner, identity and BD queries with navigation, results, empty/error and customization states; projection and child surfaces remain separate. The changed query gate stops BD reads and cached BD data on the Clients tab without adding transport, persistence, or another authority owner.",
-    "reviewedBy": "Codex non-Meri Core preview source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "81352fd3ffd6b394c5877801d2b51607088b6c2a0dbb2a5b0a68d3716382b3e7",
+    "reason": "The existing Portfolio index composition keeps query, projection, attention, profiles and dialog owners separate. Moving the unchanged attention sibling restores the approved mobile DOM/reading/focus order while existing desktop grid columns stay pinned; no new responsibility or useful extraction is introduced. Exact independent assessment: docs/reviews/portfolio-index-dom-order-20261024.md.",
+    "reviewedBy": "Codex R independent PortfolioIndex cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/index/PreviewClientCatalog.tsx",
@@ -3460,10 +3460,10 @@
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "4e92a17763ad0bb2e4ed574aecf220a8975771d685e817821908f733ad4175fd",
-    "reason": "The file keeps the ordinary Portfolio route composition and week label together while catalog projection, navigation, cards, attention, dialogs and mutations stay in their existing owners. The added Clients-tab query gate reduces unneeded BD work and does not add a second workflow or backend authority.",
-    "reviewedBy": "Codex non-Meri Core preview source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "20e7c9daf399395e159833b5c43744ba8bc5e6add49bbaa0fb22f31fbd54a3e9",
+    "reason": "The existing Portfolio index composition keeps query, projection, attention, profiles and dialog owners separate. Moving the unchanged attention sibling restores the approved mobile DOM/reading/focus order while existing desktop grid columns stay pinned; no new responsibility or useful extraction is introduced. Exact independent assessment: docs/reviews/portfolio-index-dom-order-20261024.md.",
+    "reviewedBy": "Codex R independent PortfolioIndex cohesion review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",

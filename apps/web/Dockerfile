@@ -11,6 +11,8 @@ RUN npm ci --ignore-scripts --no-audit --no-fund
 RUN npm run build
 
 FROM base AS runtime
+RUN rm -rf /usr/local/lib/node_modules/npm /opt/yarn-v1.22.22 \
+    && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/yarn /usr/local/bin/yarnpkg
 ENV NODE_ENV=production PORT=5188 HOSTNAME=0.0.0.0
 COPY --from=build --chown=node:node /app/apps/web/.next/standalone ./
 COPY --from=build --chown=node:node /app/apps/web/public ./apps/web/public

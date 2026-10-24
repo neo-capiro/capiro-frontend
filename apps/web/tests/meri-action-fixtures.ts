@@ -20,6 +20,7 @@ export function archivedFixture(name: string): {
   route: ActionRoute;
   httpStatus: number;
   response: unknown;
+  request?: unknown;
 } {
   return JSON.parse(
     readFileSync(
@@ -76,6 +77,18 @@ export function fixture(name: string) {
     ).resultSha256;
     const { draftSha256: _archivedDigest, ...content } = draft;
     draft.draftSha256 = canonicalSha256(content);
+  }
+  if (name === "draft") {
+    const request = value.request as {
+      selection: { resultSha256: string };
+    };
+    request.selection.resultSha256 = (
+      fixture("query").response as ActionQueryResponse
+    ).resultSha256;
+  }
+  if (name === "prepare") {
+    const request = value.request as { draft: ActionDraftResponse };
+    request.draft = fixture("draft").response as ActionDraftResponse;
   }
   return value;
 }

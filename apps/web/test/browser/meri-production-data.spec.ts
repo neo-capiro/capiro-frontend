@@ -104,7 +104,7 @@ test("null account names and no client selection use neutral state, never sample
   await page.goto("/meri");
   await expect(page.getByText("Welcome.", { exact: true })).toBeVisible();
   await expect(
-    page.locator("summary").filter({ hasText: /^Choose client$/ }),
+    page.locator("summary").filter({ hasText: /^Choose scope$/ }),
   ).toBeVisible();
   await expect(
     page.getByRole("region", { name: "Current client", exact: true }),

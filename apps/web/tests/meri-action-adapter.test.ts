@@ -11,6 +11,34 @@ import {
 } from "./meri-action-fixtures";
 
 describe("current query fixtures preserve archived-wire refusal", () => {
+  it("binds browser request expectations to the actual current workflow without altering archived requests", async () => {
+    const originals = ["query", "draft", "prepare"].map(archivedFixture);
+    const h = harness();
+    await prepared(h);
+    expect(h.requests.map(({ body }) => body)).toEqual(
+      ["query", "draft", "prepare"].map((name) => fixture(name).request),
+    );
+    expect(fixture("draft").request).toEqual({
+      ...(originals[1]!.request as object),
+      selection: context.selection,
+    });
+    expect(fixture("prepare").request).toEqual({
+      draft: fixture("draft").response,
+    });
+    expect(["query", "draft", "prepare"].map(archivedFixture)).toEqual(
+      originals,
+    );
+  });
+
+  it.each([
+    "query",
+    "execute-approval-pending",
+    "execute-observed",
+    "execute-replay",
+  ])("preserves the exact %s request", (name) => {
+    expect(fixture(name).request).toEqual(archivedFixture(name).request);
+  });
+
   it.each([
     "query",
     "query-interleaved-sequence",
