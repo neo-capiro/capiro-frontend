@@ -52,8 +52,12 @@ test("contact history loads beyond 50, deduplicates moved threads and restarts f
   await page
     .getByLabel("Search stored mail", { exact: true })
     .fill("No such subject");
-  await page.getByLabel("Folder", { exact: true }).selectOption("sent");
-  await page.getByLabel("Message date", { exact: true }).selectOption("90");
+  await page
+    .getByRole("combobox", { name: "Folder", exact: true })
+    .selectOption("sent");
+  await page
+    .getByRole("combobox", { name: "Message date", exact: true })
+    .selectOption("90");
   await page.getByRole("button", { name: "Apply mail filters" }).click();
   await expect(
     page.getByText(
