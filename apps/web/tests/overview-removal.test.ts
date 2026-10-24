@@ -1,17 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { createApiClient, ApiError } from "../src/shared/portfolio/api/http";
-import {
-  createQuickLog,
-  undoQuickLog,
-} from "../src/features/portfolio/client-profile/quick-log/actions";
+import { undoQuickLog } from "../src/features/portfolio/client-profile/quick-log/actions";
 import {
   currentClientWriter,
   assertClientWriter,
   ambiguousClientWrite,
 } from "../src/features/portfolio/client-profile/quick-log/authority";
 import { quickLogReceiptSchema } from "../src/features/portfolio/client-profile/quick-log/contracts";
-import { activityCommandInputSchema } from "../src/features/portfolio/client-profile/quick-log/command-contracts";
 import { removeSubmission } from "../src/features/portfolio/client-profile/past-performance/actions";
 import {
   loadSubmissions,
@@ -28,7 +24,6 @@ it("only explicit known rejection permits a reviewed retry; ambiguous failures f
   expect(ambiguousClientWrite(new ApiError(502, "Wrong receipt"))).toBe(true);
   expect(ambiguousClientWrite(new Error("Lost response"))).toBe(true);
 });
-const input = { kind: "note" as const, title: "Saved note", body: "Details" };
 const receipt = quickLogReceiptSchema.parse({
   id,
   clientId,
@@ -73,166 +68,6 @@ function harness(reply: (method: string, url: string) => unknown) {
   return { api: createApiClient(fetcher), calls };
 }
 describe("owned Quick log inverse", () => {
-  it("accepts the same commitment timestamps after server ISO normalization", async () => {
-    const commitment = {
-      kind: "commitment" as const,
-      title: "Promised a one-pager",
-      body: "Follow through",
-      occurredAt: "2025-01-15T10:30:00-05:00",
-      dueAt: "2025-01-20T23:59:59-05:00",
-    };
-    const normalized = {
-      ...receipt,
-      ...commitment,
-      occurredAt: "2025-01-15T15:30:00.000Z",
-      dueAt: "2025-01-21T04:59:59.000Z",
-    };
-    const h = harness(() => normalized);
-    await expect(
-      createQuickLog(
-        h.api,
-        clientId,
-        actor,
-        commitment,
-        () => {},
-        new AbortController().signal,
-        () => {},
-      ),
-    ).resolves.toEqual(normalized);
-  });
-  it("allows Core-supported commitment details in the combined follow-up command", () => {
-    const command = {
-      requestId: id,
-      activity: {
-        kind: "commitment",
-        title: "Promised a one-pager",
-        body: "Follow through",
-        dueAt: "2025-01-21T04:59:59.000Z",
-        occurredAt: "2025-01-15T15:30:00.000Z",
-        direction: "we_owe",
-        counterparty: "Client counsel",
-        objectiveId: "90000000-0000-4000-8000-000000000001",
-        objectiveVersion: 3,
-      },
-      followUp: { assigneeUserId: userId },
-    };
-    expect(activityCommandInputSchema.safeParse(command).success).toBe(true);
-    expect(
-      activityCommandInputSchema.safeParse({
-        ...command,
-        activity: {
-          kind: "note",
-          title: "Note",
-          body: "Details",
-          direction: "we_owe",
-        },
-      }).success,
-    ).toBe(false);
-  });
-  it("checks direct rich details in the Core receipt and exact timeline before Undo", async () => {
-    const rich = {
-      kind: "commitment" as const,
-      title: "Send briefing",
-      body: "Promised counsel the revised version",
-      direction: "we_owe" as const,
-      counterparty: "Client counsel",
-      objectiveId: "90000000-0000-4000-8000-000000000001",
-      objectiveVersion: 3,
-    };
-    const objective = {
-      objectiveId: rich.objectiveId,
-      objectiveVersion: rich.objectiveVersion,
-      objectiveRevisionId: "90000000-0000-4000-8000-000000000002",
-      availability: "current" as const,
-    };
-    const saved = {
-      ...receipt,
-      ...rich,
-      direction: rich.direction,
-      counterparty: rich.counterparty,
-      objective,
-    };
-    const h = harness((method) =>
-      method === "GET"
-        ? [{ ...saved, origin: "recorded" }]
-        : method === "DELETE"
-          ? { ok: true }
-          : saved,
-    );
-    await expect(
-      createQuickLog(
-        h.api,
-        clientId,
-        actor,
-        rich,
-        () => {},
-        new AbortController().signal,
-        () => {},
-      ),
-    ).resolves.toMatchObject({ direction: "we_owe", objective });
-    await undoQuickLog(
-      h.api,
-      saved,
-      actor,
-      () => {},
-      new AbortController().signal,
-      () => {},
-    );
-    expect(h.calls.at(-1)).toBe(
-      `DELETE /api/backend/core/clients/${clientId}/activity/${id}`,
-    );
-    const dropped = harness(() => ({
-      ...saved,
-      direction: undefined,
-      counterparty: undefined,
-      objective: undefined,
-    }));
-    await expect(
-      createQuickLog(
-        dropped.api,
-        clientId,
-        actor,
-        rich,
-        () => {},
-        new AbortController().signal,
-        () => {},
-      ),
-    ).rejects.toThrow("receipt does not match");
-  });
-  it("retains only the exact validated created row for Undo", async () => {
-    const h = harness(() => receipt);
-    expect(
-      await createQuickLog(
-        h.api,
-        clientId,
-        actor,
-        input,
-        () => {},
-        new AbortController().signal,
-        () => {},
-      ),
-    ).toEqual(receipt);
-    expect(h.calls).toEqual([
-      `POST /api/backend/core/clients/${clientId}/activity`,
-    ]);
-  });
-  it.each(["clientId", "tenantId", "createdByUserId", "actorUserId"] as const)(
-    "refuses mismatched %s receipt",
-    async (field) => {
-      const h = harness(() => ({ ...receipt, [field]: id }));
-      await expect(
-        createQuickLog(
-          h.api,
-          clientId,
-          actor,
-          input,
-          () => {},
-          new AbortController().signal,
-          () => {},
-        ),
-      ).rejects.toThrow("receipt does not match");
-    },
-  );
   it("deletes the retained ID rather than the first/latest unrelated timeline item", async () => {
     const h = harness((method) =>
       method === "GET"

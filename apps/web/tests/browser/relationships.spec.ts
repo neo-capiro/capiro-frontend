@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { installRemoval } from "./overview-removal-fixtures";
 import {
   sendingMailbox,
   clientId,
@@ -454,7 +455,7 @@ test("hierarchy saves stay separate from contact details and fence competing con
 test("person-linked QuickLog retains its failed note and existing email provider refusal remains visible", async ({
   page,
 }) => {
-  const unexpected = await installFixtures(page);
+  const { unexpected } = await installRemoval(page);
   let notes = 0;
   let sends = 0;
   let requestKey: string | undefined;
@@ -470,10 +471,10 @@ test("person-linked QuickLog retains its failed note and existing email provider
       503,
     );
   });
-  await page.route(`**/clients/${clientId}/activity`, (route) => {
+  await page.route(`**/clients/${clientId}/activity-commands`, (route) => {
     expect(route.request().method()).toBe("POST");
     notes++;
-    expect(route.request().postDataJSON()).toMatchObject({
+    expect(route.request().postDataJSON().activity).toMatchObject({
       personId,
       kind: "note",
       title: "Follow-up",

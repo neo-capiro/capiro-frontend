@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import { client, clientId, json } from "./fixtures";
-import { installRemoval, savedActivity } from "./overview-removal-fixtures";
+import { installRemoval } from "./overview-removal-fixtures";
 
 const secondId = "10000000-0000-4000-8000-000000000002";
 const meetingEntry = (page: Page) =>
@@ -180,9 +180,8 @@ test("a pending activity save blocks the handoff and preserves the original exac
     `**/api/backend/core/clients/${clientId}/activity*`,
     async (route) => {
       if (route.request().method() !== "POST") return route.fallback();
-      const body = route.request().postDataJSON();
       await held;
-      return json(route, { ...savedActivity, ...body });
+      return route.fallback();
     },
   );
   await page.goto(`/portfolio/${clientId}?log=1`);
@@ -199,12 +198,15 @@ test("a pending activity save blocks the handoff and preserves the original exac
   );
   await expect(page).toHaveURL(`/portfolio/${clientId}?log=1`);
   release();
+  await quickLog(page)
+    .getByRole("button", { name: "Done", exact: true })
+    .click();
   await expect(quickLog(page)).toHaveCount(0);
   await expect(
     page.getByRole("complementary", { name: "Quick log result" }),
   ).toContainText("Logged to Test Aerospace");
   expect(writes).toEqual([
-    `POST /api/backend/core/clients/${clientId}/activity`,
+    `POST /api/backend/core/clients/${clientId}/activity-commands`,
   ]);
   await expect(
     page.getByRole("dialog", { name: "New meeting", exact: true }),
@@ -223,7 +225,9 @@ test("an unknown activity result retains the draft, blocks the handoff and expos
   await quickLog(page)
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
-  await expect(quickLog(page)).toContainText("The save result is uncertain.");
+  await expect(quickLog(page)).toContainText(
+    "The save result is not confirmed.",
+  );
   await expect(meetingEntry(page)).toBeDisabled();
   await meetingEntry(page).evaluate((button) =>
     (button as HTMLButtonElement).click(),
@@ -242,12 +246,12 @@ test("an unknown activity result retains the draft, blocks the handoff and expos
     page.getByRole("button", { name: "Undo", exact: true }),
   ).toHaveCount(0);
   expect(writes).toEqual([
-    `POST /api/backend/core/clients/${clientId}/activity`,
+    `POST /api/backend/core/clients/${clientId}/activity-commands`,
   ]);
   expect(unexpected).toEqual([]);
 });
 
-test("a direct save locks its captured draft and a refusal restores the same editable fields", async ({
+test("a plain save locks its captured draft and a generic refusal keeps the original fields held", async ({
   page,
 }, testInfo) => {
   const { unexpected } = await installRemoval(page);
@@ -300,7 +304,11 @@ test("a direct save locks its captured draft and a refusal restores the same edi
     release();
   }
   await expect(dialog).toContainText("Review the synthetic activity");
-  await expect(dialog.getByLabel("Title", { exact: true })).toBeEnabled();
+  await expect(dialog.getByLabel("Title", { exact: true })).toBeDisabled();
+  await expect(meetingEntry(page)).toBeDisabled();
+  await expect(
+    dialog.getByRole("button", { name: "Read saved command", exact: true }),
+  ).toBeEnabled();
   await expect(dialog.getByLabel("Title", { exact: true })).toHaveValue(
     "Captured promise",
   );
@@ -315,7 +323,7 @@ test("a direct save locks its captured draft and a refusal restores the same edi
     "2026-10-19T09:30",
   );
   expect(writes).toEqual([
-    `POST /api/backend/core/clients/${clientId}/activity`,
+    `POST /api/backend/core/clients/${clientId}/activity-commands`,
   ]);
   expect(unexpected).toEqual([]);
 });

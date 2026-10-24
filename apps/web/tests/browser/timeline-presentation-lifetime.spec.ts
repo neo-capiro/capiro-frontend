@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { clientId, installFixtures, json } from "./fixtures";
+import { installRemoval } from "./overview-removal-fixtures";
 const note = {
   id: "90000000-0000-4000-8000-000000000001",
   kind: "note",
@@ -135,10 +136,10 @@ test("pending activity stays fenced while its response is held across expand and
   expect(unexpected).toEqual([]);
 });
 
-test("expanded Log activity reuses the existing Quick log uncertain creation owner", async ({
+test("expanded Log activity restores the retained plain activity command", async ({
   page,
 }) => {
-  const unexpected = await installFixtures(page);
+  const { unexpected } = await installRemoval(page);
   let writes = 0;
   await page.route(`**/clients/${clientId}/activity**`, (route) => {
     if (route.request().method() === "GET") return json(route, [note]);
@@ -151,7 +152,7 @@ test("expanded Log activity reuses the existing Quick log uncertain creation own
     .getByLabel("Title", { exact: true })
     .fill("Uncertain original activity");
   await log.getByRole("button", { name: "Save activity", exact: true }).click();
-  await expect(log.getByText(/save result is uncertain/i)).toBeVisible();
+  await expect(log.getByText(/save result is not confirmed/i)).toBeVisible();
   await log.getByRole("button", { name: "Close", exact: true }).click();
   const timeline = page.getByRole("region", {
     name: "Activity timeline",
@@ -167,7 +168,7 @@ test("expanded Log activity reuses the existing Quick log uncertain creation own
   await expect(
     log.getByRole("button", { name: "Save activity", exact: true }),
   ).toBeDisabled();
-  await expect(log.getByText(/save result is uncertain/i)).toBeVisible();
+  await expect(log.getByText(/save result is not confirmed/i)).toBeVisible();
   expect(new URL(page.url()).searchParams.get("context")).toBe("preserved");
   expect(new URL(page.url()).searchParams.get("log")).toBe("1");
   expect(writes).toBe(1);

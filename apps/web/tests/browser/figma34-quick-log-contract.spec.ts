@@ -22,20 +22,25 @@ test("direct Quick Log sends selected current Objective and verifies rich receip
     (route) => json(route, [objective]),
   );
   await page.route(
-    `**/api/backend/core/clients/${clientId}/activity`,
+    `**/api/backend/core/clients/${clientId}/activity-commands`,
     (route) => {
       if (route.request().method() !== "POST") return route.fallback();
       const body = route.request().postDataJSON();
-      posts.push(body);
+      posts.push(body.activity);
+      const receipt = commandReceipt(body);
       const saved = {
         ...savedActivity,
-        ...body,
-        direction: body.direction ?? null,
-        counterparty: body.counterparty ?? null,
+        ...body.activity,
+        id: receipt.activity.id,
+        sourceType: "activity_command",
+        sourceId: receipt.commandId,
+        direction: body.activity.direction ?? null,
+        counterparty: body.activity.counterparty ?? null,
         objective: objectiveLink,
       };
       state.activities.push({ ...saved, origin: "recorded" });
-      return json(route, saved);
+      state.commands.set(body.requestId, receipt);
+      return json(route, receipt);
     },
   );
   await page.goto(`/portfolio/${clientId}?log=1`);
@@ -55,6 +60,7 @@ test("direct Quick Log sends selected current Objective and verifies rich receip
   await dialog
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
   await expect(
     page.getByRole("complementary", { name: "Quick log result" }),
   ).toContainText("Logged to Test Aerospace");

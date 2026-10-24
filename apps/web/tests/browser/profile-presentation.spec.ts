@@ -1,5 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
-import { clientId, installFixtures, json } from "./fixtures";
+import { clientId, json } from "./fixtures";
+import { installRemoval } from "./overview-removal-fixtures";
 import { boundaryFixture, facility } from "../facility-map-fixtures";
 import type { Activity } from "../../src/features/portfolio/client-profile/contracts";
 
@@ -34,7 +35,7 @@ const file = {
   indexedAt: null,
 };
 async function setup(page: Page) {
-  const unexpected = await installFixtures(page);
+  const { unexpected } = await installRemoval(page);
   const dates = await page.evaluate(() => {
     const today = new Date();
     const yesterday = new Date(today);

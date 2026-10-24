@@ -83,23 +83,26 @@ export async function createActivityCommand(
   const body = activityCommandInputSchema.parse(context.input);
   assert();
   signal.throwIfAborted();
-  const members = await api.request(
-    "core",
-    "client-account-owners/options",
-    profileMemberOptionsSchema,
-    { signal },
-  );
-  assert();
-  signal.throwIfAborted();
-  if (
-    !members.some(
-      (member) => member.id.toLowerCase() === body.followUp.assigneeUserId,
-    )
-  )
-    throw new ApiError(
-      400,
-      "The selected follow-up assignee is unavailable. Refresh members before saving.",
+  const followUp = body.followUp;
+  if (followUp) {
+    const members = await api.request(
+      "core",
+      "client-account-owners/options",
+      profileMemberOptionsSchema,
+      { signal },
     );
+    assert();
+    signal.throwIfAborted();
+    if (
+      !members.some(
+        (member) => member.id.toLowerCase() === followUp.assigneeUserId,
+      )
+    )
+      throw new ApiError(
+        400,
+        "The selected follow-up assignee is unavailable. Refresh members before saving.",
+      );
+  }
   dispatched();
   const receipt = await api.request(
     "core",
@@ -151,6 +154,8 @@ export async function resumeActivityCommand(
     context.known,
   ).parse(current);
   if (
+    !context.input.followUp ||
+    !current.followUp ||
     !["pending", "needs_attention"].includes(current.status) ||
     current.followUp?.state === "completed"
   )

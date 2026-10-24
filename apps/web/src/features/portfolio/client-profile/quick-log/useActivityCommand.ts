@@ -12,6 +12,7 @@ import {
   reserveRecovery,
   updateRecovery,
   RecoveryStorageError,
+  withRecoveryCommandLock,
 } from "@/shared/session/recovery/journal";
 import {
   retainedCommandContract,
@@ -20,6 +21,7 @@ import {
 import { useCommandRecovery } from "./useCommandRecovery";
 import { profileKey } from "../profile-keys";
 import type { QuickLogInput } from "./contracts";
+import { readCommandUndoSnapshot } from "./command-undo";
 import {
   activityCommandInputSchema,
   type ActivityCommandInput,
@@ -44,7 +46,7 @@ type PendingCommand = {
 };
 type Operation = "create" | "read" | "resume" | "recover";
 
-export function useFollowUpCommand(clientId: string, open: boolean) {
+export function useActivityCommand(clientId: string, open: boolean) {
   const api = useApi();
   const cache = useQueryClient();
   useIdentity();
@@ -111,6 +113,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
       return;
     if (kind === "recover" && (!saved?.readAttempted || saved.receipt)) return;
     if (kind === "resume" && (!saved?.readFresh || !saved.receipt)) return;
+    const commandScope = recovery.scope;
     let original: PendingCommand = saved ?? {
       input: input!,
       known: {},
@@ -140,84 +143,86 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
     let authorityVerified = false;
     let durable = Boolean(saved);
     try {
-      await verifyCommandAuthority(
-        api,
-        actor,
-        clientId,
-        controller.signal,
-        guard,
-      );
-      authorityVerified = true;
-      const retained =
-        kind === "create"
-          ? await reserveRecovery(
-              recovery.scope,
-              original.input.requestId,
-              { input: original.input, known: original.known },
-              retainedCommandContract,
-              guard,
-            )
-          : await readRecovery(recovery.scope, retainedCommandContract, guard);
-      guard();
-      if (!retained) throw new RecoveryStorageError();
-      durable = true;
-      if (retained.input.requestId !== original.input.requestId) {
-        cache.setQueryData(key, {
-          ...retained,
-          readFresh: false,
-          readAttempted: false,
-          error:
-            "An original command was restored from another view. Read it before continuing.",
-        });
-        return;
-      }
-      original = { ...original, ...retained };
-      const context = {
-        actor,
-        clientId,
-        input: original.input,
-        known: original.known,
-      };
-      const receipt =
-        kind === "read"
-          ? await readActivityCommand(api, context, controller.signal, guard)
-          : kind === "resume"
-            ? await resumeActivityCommand(
-                api,
-                context,
-                original.receipt!,
-                controller.signal,
+      await withRecoveryCommandLock(commandScope, guard, async () => {
+        await verifyCommandAuthority(
+          api,
+          actor,
+          clientId,
+          controller.signal,
+          guard,
+        );
+        authorityVerified = true;
+        const retained =
+          kind === "create"
+            ? await reserveRecovery(
+                commandScope,
+                original.input.requestId,
+                { input: original.input, known: original.known },
+                retainedCommandContract,
                 guard,
-                mark,
               )
-            : await createActivityCommand(
-                api,
-                context,
-                controller.signal,
-                guard,
-                mark,
-              );
-      guard();
-      const known = {
-        commandId: receipt.commandId,
-        activityId: receipt.activity.id,
-        version: receipt.version,
-        taskId: receipt.followUp?.taskId ?? original.known.taskId,
-      };
-      await updateRecovery(
-        recovery.scope,
-        original.input.requestId,
-        { input: original.input, known },
-        retainedCommandContract,
-        guard,
-      );
-      guard();
-      cache.setQueryData(key, {
-        ...active,
-        busy: undefined,
-        receipt,
-        readFresh: kind === "read",
-        known,
+            : await readRecovery(commandScope, retainedCommandContract, guard);
+        guard();
+        if (!retained) throw new RecoveryStorageError();
+        durable = true;
+        if (retained.input.requestId !== original.input.requestId) {
+          cache.setQueryData(key, {
+            ...retained,
+            readFresh: false,
+            readAttempted: false,
+            error:
+              "An original command was restored from another view. Read it before continuing.",
+          });
+          return;
+        }
+        original = { ...original, ...retained };
+        const context = {
+          actor,
+          clientId,
+          input: original.input,
+          known: original.known,
+        };
+        const receipt =
+          kind === "read"
+            ? await readActivityCommand(api, context, controller.signal, guard)
+            : kind === "resume"
+              ? await resumeActivityCommand(
+                  api,
+                  context,
+                  original.receipt!,
+                  controller.signal,
+                  guard,
+                  mark,
+                )
+              : await createActivityCommand(
+                  api,
+                  context,
+                  controller.signal,
+                  guard,
+                  mark,
+                );
+        guard();
+        const known = {
+          commandId: receipt.commandId,
+          activityId: receipt.activity.id,
+          version: receipt.version,
+          taskId: receipt.followUp?.taskId ?? original.known.taskId,
+        };
+        await updateRecovery(
+          commandScope,
+          original.input.requestId,
+          { input: original.input, known },
+          retainedCommandContract,
+          guard,
+        );
+        guard();
+        cache.setQueryData(key, {
+          ...active,
+          busy: undefined,
+          receipt,
+          readFresh: kind === "read",
+          known,
+        });
       });
     } catch (cause) {
       if (controller.signal.aborted) return;
@@ -244,7 +249,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
         });
     }
   }
-  function start(activity: QuickLogInput, followUp: FollowUpInput) {
+  function start(activity: QuickLogInput, followUp?: FollowUpInput) {
     try {
       z.uuid().parse(actor?.userId);
       z.uuid().parse(actor?.tenantId);
@@ -252,7 +257,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
       const input = activityCommandInputSchema.parse({
         requestId: crypto.randomUUID(),
         activity,
-        followUp,
+        ...(followUp ? { followUp } : {}),
       });
       void run("create", input);
     } catch (cause) {
@@ -260,7 +265,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
         scope,
         message:
           cause instanceof z.ZodError
-            ? (cause.issues[0]?.message ?? "Review the follow-up fields.")
+            ? (cause.issues[0]?.message ?? "Review the activity fields.")
             : "A current Core session is required.",
       });
     }
@@ -268,7 +273,9 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
   const complete =
     pending?.receipt?.status === "completed" &&
     pending.receipt.activity.available &&
-    pending.receipt.followUp?.state === "completed";
+    (pending.input.followUp
+      ? pending.receipt.followUp?.state === "completed"
+      : pending.receipt.followUp === null);
   return {
     pending,
     start,
@@ -286,6 +293,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
     recover: () => run("recover"),
     resume: () => run("resume"),
     canResume:
+      Boolean(pending?.input.followUp) &&
       pending?.readFresh &&
       pending.receipt &&
       ["pending", "needs_attention"].includes(pending.receipt.status) &&
@@ -302,7 +310,8 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
         !controller ||
         operation.current
       )
-        return false;
+        return { acknowledged: false };
+      const commandScope = recovery.scope;
       const token = crypto.randomUUID();
       operation.current = token;
       cache.setQueryData(key, { ...pending, busy: token });
@@ -311,21 +320,51 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
         assertClientWriter(cache, actor);
       };
       try {
-        await verifyCommandAuthority(
-          api,
-          actor,
-          clientId,
-          controller.signal,
-          guard,
-        );
-        await acknowledgeRecovery(
-          recovery.scope,
-          pending.input.requestId,
-          guard,
-        );
-        guard();
-        cache.setQueryData(key, null);
-        return true;
+        return await withRecoveryCommandLock(commandScope, guard, async () => {
+          await verifyCommandAuthority(
+            api,
+            actor,
+            clientId,
+            controller.signal,
+            guard,
+          );
+          const context = {
+            actor,
+            clientId,
+            input: pending.input,
+            known: pending.known,
+          };
+          const current = await readActivityCommand(
+            api,
+            context,
+            controller.signal,
+            guard,
+          );
+          if (current.status !== "completed" || !current.activity.available) {
+            cache.setQueryData(key, {
+              ...pending,
+              receipt: current,
+              busy: undefined,
+              readFresh: true,
+            });
+            return { acknowledged: false };
+          }
+          const undo = await readCommandUndoSnapshot(
+            api,
+            context,
+            current,
+            controller.signal,
+            guard,
+          );
+          await acknowledgeRecovery(
+            commandScope,
+            pending.input.requestId,
+            guard,
+          );
+          guard();
+          cache.setQueryData(key, null);
+          return { acknowledged: true, undo };
+        });
       } catch (cause) {
         if (!controller.signal.aborted)
           recovery.block(
@@ -333,7 +372,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
               ? cause.message
               : "The original command remains retained.",
           );
-        return false;
+        return { acknowledged: false };
       } finally {
         if (operation.current === token) operation.current = null;
       }

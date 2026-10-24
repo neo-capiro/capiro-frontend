@@ -1,62 +1,12 @@
 import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { activitySchema } from "../contracts";
-import {
-  matchesQuickLogDetails,
-  quickLogInputSchema,
-  quickLogReceiptSchema,
-  type QuickLogInput,
-  type QuickLogReceipt,
-} from "./contracts";
+import { quickLogReceiptSchema, type QuickLogReceipt } from "./contracts";
 import type { ClientWriter } from "./authority";
 function sameInstant(left: string | null, right: string | null) {
   return left === null || right === null
     ? left === right
     : Date.parse(left) === Date.parse(right);
-}
-export async function createQuickLog(
-  api: ApiClient,
-  clientId: string,
-  actor: ClientWriter,
-  input: QuickLogInput,
-  guard: () => void,
-  signal: AbortSignal,
-  dispatched: () => void,
-) {
-  const body = quickLogInputSchema.parse(input);
-  guard();
-  signal.throwIfAborted();
-  dispatched();
-  const receipt = await api.request(
-    "core",
-    `clients/${encodeURIComponent(clientId)}/activity`,
-    quickLogReceiptSchema,
-    { method: "POST", body, signal },
-  );
-  guard();
-  if (
-    receipt.clientId !== clientId ||
-    receipt.tenantId !== actor.tenantId ||
-    receipt.createdByUserId !== actor.userId ||
-    receipt.actorUserId !== actor.userId ||
-    receipt.kind !== body.kind ||
-    receipt.title !== body.title ||
-    receipt.body !== (body.body || null) ||
-    receipt.personId !== (body.personId ?? null) ||
-    receipt.pinned ||
-    !sameInstant(receipt.dueAt, body.dueAt ?? null) ||
-    (body.occurredAt != null &&
-      Date.parse(receipt.occurredAt) !== Date.parse(body.occurredAt)) ||
-    receipt.settledAt !== null ||
-    receipt.sourceType !== null ||
-    receipt.sourceId !== null ||
-    !matchesQuickLogDetails(receipt, body)
-  )
-    throw new ApiError(
-      502,
-      "The saved activity receipt does not match this Quick log. Inspect the timeline before logging again.",
-    );
-  return receipt;
 }
 export async function undoQuickLog(
   api: ApiClient,

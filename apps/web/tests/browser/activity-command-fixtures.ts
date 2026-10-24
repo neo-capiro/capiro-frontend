@@ -72,10 +72,12 @@ export function completedCommand(
     version,
     status: "completed",
     reason: null,
-    followUp: {
-      ...value.followUp!,
-      state: "completed",
-      taskId: "synthetic-planner-task",
-    },
+    followUp: value.followUp
+      ? {
+          ...value.followUp!,
+          state: "completed",
+          taskId: "synthetic-planner-task",
+        }
+      : null,
   };
 }
