@@ -612,10 +612,10 @@
     "file": "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
     "kind": "function",
     "symbol": "ContactDrawer",
-    "fingerprint": "b22243978b8655836539d1686288a85595ecccfa36277fe01a97efe24a367188",
-    "reason": "This drawer owns one contact's create/edit/remove/discard lifecycle. ContactForm, hierarchy, mail and QuickLog delegate their independent subflows, and the contact mutation hook owns writes. The retained state selects and edits one contact. A removal dialog can be extracted when it gains more behavior; current actions do not create a separate persistence owner.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "13cc47a3dd7a1ec09b7cb3712c7dd3be92634cb65d08dffcc5aaa049f0ea2835",
+    "reason": "ContactDrawer owns one contact form, action and confirmation presentation. Existing form, hierarchy, mail, Quick Log and recovery children retain their responsibilities; durable journal, crypto, request correlation and Core authority remain external. The added recovery child consumes the same creation lifetime and does not add a second transaction or state machine. Retain the cohesive drawer rather than mechanically splitting its controls. Independent review: a/review-contact-create-928e/REPORT.md at frontend2a9b90e0.",
+    "reviewedBy": "Codex A independent contact-create source review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/ContactForm.tsx",
@@ -738,10 +738,10 @@
     "file": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
     "kind": "function",
     "symbol": "OrganizationRelationships",
-    "fingerprint": "6cb28957ed5eec22dfa0d76e3d48978cdcb9b511c4fb0d49265648faae4385ba",
-    "reason": "The current organization-contact roster, hierarchy review navigation and selected-contact composition. Roster/search/review filtering and route selection derive from the same current client roster. Current-read disposal and the create-attempt status are necessary admission for the same Add contact affordance. OrganizationChart, ContactDrawer/forms, mailbox workflow and mutation/attempt owners remain external. No new independent subsystem is embedded. Keep the current roster owner cohesive; the unchanged hierarchy review here is selection/navigation, not a copied write algorithm.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "1bdfeb5e1857b9b2ae591b2c12df435b9b5ceeb1e9d8c3358a1fcc6ecd8e6fa2",
+    "reason": "OrganizationRelationships owns the current client roster, search, route selection and hierarchy-review navigation. Recovery display and Add-contact admission consume the existing create hook; the chart, drawer, mutation, durable recovery and Core authorization owners stay separate. No independent write or storage subsystem is embedded in this page composition. Independent review: a/review-contact-create-928e/REPORT.md at frontend2a9b90e0.",
+    "reviewedBy": "Codex A independent contact-create source review",
+    "reviewedOn": "2026-10-24"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
