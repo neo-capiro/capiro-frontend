@@ -37,6 +37,12 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.branding.update":
+      confirmed =
+        !!write.expectedAccount &&
+        equal(receipt.id, write.expectedAccount.tenantId) &&
+        equal(receipt.name, body.name);
+      break;
     case "me.emailSignature.update":
       confirmed =
         receipt.enabled === body.enabled &&

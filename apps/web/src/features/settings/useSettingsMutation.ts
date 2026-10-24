@@ -80,6 +80,7 @@ export function useSettingsMutation(section: string) {
           if (
             operation === "me.update" ||
             operation === "me.emailSignature.update" ||
+            operation === "settings.branding.update" ||
             operation === "settings.contact.update"
           ) {
             const identity = await raw.request("me.read", {}, options);

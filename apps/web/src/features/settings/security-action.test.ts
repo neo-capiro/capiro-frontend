@@ -102,6 +102,7 @@ vi.mock("../../shared/capiro/registry", () => ({
     "me.read": { method: "GET" },
     "me.update": { method: "PATCH" },
     "me.emailSignature.update": { method: "PUT" },
+    "settings.branding.update": { method: "PUT" },
     "settings.contact.update": { method: "PUT" },
     "settings.profiles.create": { method: "POST" },
     "settings.profiles.archive": { method: "DELETE" },
@@ -514,6 +515,67 @@ describe("Remaining Settings form recovery", () => {
     cache.clear();
     await mount(section);
   };
+  it("reconciles a lost company-name save without claiming provider sync or retaining the name", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockRejectedValueOnce(new Error("response lost"));
+    await mount("branding");
+    await act(() =>
+      send("settings.branding.update", { body: { name: "Reviewed company" } }),
+    );
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "branding"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain("Reviewed company");
+    await remount("branding");
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ id: "tenant-a", name: "Other name" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ id: "tenant-a", name: "Reviewed company" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(current().action.message).not.toContain("synced");
+    expect(after).not.toHaveBeenCalled();
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.branding.update",
+      ),
+    ).toHaveLength(1);
+  });
+  it("accepts a local branding save with failed provider sync but refuses a wrong account receipt", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({
+        id: "tenant-a",
+        name: "Reviewed",
+        clerkSync: "failed",
+      });
+    await mount("branding");
+    await act(() =>
+      send("settings.branding.update", { body: { name: "Reviewed" } }),
+    );
+    expect(current().locked).toBe(false);
+    expect(after).toHaveBeenCalledWith(
+      expect.objectContaining({ clerkSync: "failed" }),
+    );
+    after.mockClear();
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({
+        id: "other",
+        name: "Reviewed",
+        clerkSync: "confirmed",
+      });
+    await act(() =>
+      send("settings.branding.update", { body: { name: "Reviewed" } }),
+    );
+    expect(current().locked).toBe(true);
+    expect(after).not.toHaveBeenCalled();
+  });
   it("a lost contact reply reconciles only the full recorded value in the original account", async () => {
     const body = {
       email: "synthetic@example.test",
@@ -565,12 +627,10 @@ describe("Remaining Settings form recovery", () => {
   it.each(["archive", "restore"] as const)(
     "retains the exact profile %s target/status across reload",
     async (operation) => {
-      state.api.request
-        .mockReset()
-        .mockResolvedValueOnce({
-          id: "other",
-          status: operation === "archive" ? "archived" : "active",
-        });
+      state.api.request.mockReset().mockResolvedValueOnce({
+        id: "other",
+        status: operation === "archive" ? "archived" : "active",
+      });
       await mount("profiles");
       await act(() =>
         send(`settings.profiles.${operation}`, {

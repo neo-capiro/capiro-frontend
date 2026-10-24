@@ -2,6 +2,7 @@
 import { SettingsButton, SettingsNotice } from "./components";
 import type { SettingsWrite } from "./security-writes";
 const labels: Record<string, string> = {
+  "settings.branding.update": "Company name change",
   "me.update": "Personal title change",
   "me.emailSignature.update": "Email signature change",
   "settings.contact.update": "Organization contact change",

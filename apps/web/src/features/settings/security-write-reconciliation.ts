@@ -15,6 +15,25 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "settings.branding.update": {
+      if (!write.expectedAccount || !write.requestHash) return false;
+      const account = await api.request("me.read", {}, { signal });
+      if (
+        account.user.id !== write.expectedAccount.userId ||
+        account.tenant.id !== write.expectedAccount.tenantId
+      )
+        return false;
+      const current = await api.request(
+        "settings.branding.read",
+        {},
+        { signal },
+      );
+      return (
+        current?.id === write.expectedAccount.tenantId &&
+        (await settingsRequestHash({ body: { name: current.name } })) ===
+          write.requestHash
+      );
+    }
     case "me.emailSignature.update": {
       if (!write.expectedAccount || !write.resultHash) return false;
       const account = await api.request("me.read", {}, { signal });
