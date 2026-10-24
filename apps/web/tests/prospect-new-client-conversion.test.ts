@@ -1,15 +1,18 @@
 import "./command-recovery-platform";
 import { describe, expect, it } from "vitest";
-import { createApiClient } from "../src/shared/portfolio/api/http";
+import { ApiError, createApiClient } from "../src/shared/portfolio/api/http";
 import {
   newClientCommandRequest,
   newClientRecoveryContract,
   prepareNewClient,
+  newClientRefusal,
+  reviewNewClientRefusal,
 } from "../src/features/portfolio/prospects/conversion/new-client-command";
 import type { Prospect } from "../src/features/portfolio/prospects/contracts";
 import {
   readRecovery,
   reserveRecovery,
+  retireNewClientConversionRefusalRecovery,
 } from "../src/shared/session/recovery/journal";
 import { installPlatform } from "./command-recovery-platform";
 
@@ -41,6 +44,134 @@ const prepare = () =>
     requestId,
   );
 const guard = () => {};
+const refusalFor = (attempt: Awaited<ReturnType<typeof prepare>>) => ({
+  schemaVersion: 1 as const,
+  code: "PROSPECT_NEW_CLIENT_REFUSED" as const,
+  requestId,
+  prospectId: record.id,
+  payloadDigest: attempt.payloadDigest,
+  status: 409 as const,
+  message: "Review changed prospect",
+});
+
+it.each([
+  { requestId: clientId },
+  { prospectId: clientId },
+  { payloadDigest: "0".repeat(64) },
+  { schemaVersion: 2 },
+  { code: "GENERIC_CONFLICT" },
+  { status: 400 },
+])("does not bind a mismatched refusal %j", async (patch) => {
+  const attempt = await prepare();
+  expect(
+    newClientRefusal(
+      new ApiError(409, "Conflict", { ...refusalFor(attempt), ...patch }),
+      attempt,
+    ),
+  ).toBeUndefined();
+});
+it("generic refusal and missing receipt alone cannot release conversion recovery", async () => {
+  const attempt = await prepare();
+  expect(
+    newClientRefusal(new ApiError(409, "Conflict"), attempt),
+  ).toBeUndefined();
+  const f = await fixture({}, 404);
+  await expect(
+    reviewNewClientRefusal(f.api, attempt, new AbortController().signal, guard),
+  ).rejects.toThrow("no verified refusal");
+  expect(f.calls).toEqual([]);
+});
+it("a typed bound refusal survives reload and requires fresh receipt/prospect reads before explicit retirement", async () => {
+  const attempt = await prepare();
+  const saved = { ...attempt, refusal: refusalFor(attempt) };
+  const scope = "new-client-refusal-test";
+  await reserveRecovery(
+    scope,
+    requestId,
+    saved,
+    newClientRecoveryContract,
+    guard,
+  );
+  const restored = await readRecovery(scope, newClientRecoveryContract, guard);
+  expect(restored).toEqual(saved);
+  const calls: string[] = [];
+  const api = createApiClient(async (path, init) => {
+    expect(init?.method).toBe("GET");
+    calls.push(String(path));
+    return String(path).includes("conversion-commands")
+      ? Response.json({ message: "No saved receipt" }, { status: 404 })
+      : Response.json({ ...record, updatedAt: "2026-10-24T13:00:00.000Z" });
+  });
+  const failure = await reviewNewClientRefusal(
+    api,
+    restored!,
+    new AbortController().signal,
+    guard,
+  );
+  expect(await readRecovery(scope, newClientRecoveryContract, guard)).toEqual(
+    saved,
+  );
+  await retireNewClientConversionRefusalRecovery(
+    scope,
+    requestId,
+    failure,
+    guard,
+  );
+  expect(
+    await readRecovery(scope, newClientRecoveryContract, guard),
+  ).toBeNull();
+  expect(calls).toEqual([
+    `/api/backend/core/business-development/prospects/${record.id}/conversion-commands/${requestId}`,
+    `/api/backend/core/business-development/prospects/${record.id}`,
+  ]);
+});
+it("a later matching receipt prevents refusal retirement", async () => {
+  const f = await fixture();
+  await expect(
+    reviewNewClientRefusal(
+      f.api,
+      { ...f.attempt, refusal: refusalFor(f.attempt) },
+      new AbortController().signal,
+      guard,
+    ),
+  ).rejects.toThrow("saved receipt");
+  expect(f.calls).toHaveLength(1);
+});
+it.each([
+  "unavailable-receipt",
+  "foreign-receipt",
+  "revoked-prospect",
+  "converted-prospect",
+])("fresh %s keeps typed refusal held", async (failure) => {
+  const f = await fixture();
+  const calls: string[] = [];
+  const api = createApiClient(async (path) => {
+    calls.push(String(path));
+    if (String(path).includes("conversion-commands")) {
+      if (failure === "unavailable-receipt")
+        return Response.json({ message: "Unavailable" }, { status: 503 });
+      if (failure === "foreign-receipt")
+        return Response.json({ ...f.receipt, payloadDigest: "0".repeat(64) });
+      return Response.json({ message: "No saved receipt" }, { status: 404 });
+    }
+    return failure === "revoked-prospect"
+      ? Response.json({ message: "Revoked" }, { status: 403 })
+      : Response.json({
+          ...record,
+          linkedClientId: clientId,
+          convertedAt: record.updatedAt,
+        });
+  });
+  await expect(
+    reviewNewClientRefusal(
+      api,
+      { ...f.attempt, refusal: refusalFor(f.attempt) },
+      new AbortController().signal,
+      guard,
+    ),
+  ).rejects.toThrow();
+  expect(calls.length).toBe(failure.endsWith("prospect") ? 2 : 1);
+});
 async function fixture(patch: object = {}, status = 200) {
   const attempt = await prepare();
   const receipt = {

@@ -185,6 +185,137 @@ test("a foreign receipt and a generic refusal keep the original new-client comma
     dialog.getByRole("button", { name: "Create reviewed client" }),
   ).toHaveCount(0);
   await expect(dialog.getByLabel("Website", { exact: true })).toBeDisabled();
+  await expect(
+    dialog.getByRole("button", { name: "Review refused conversion" }),
+  ).toHaveCount(0);
+  expect(posts).toBe(1);
+  expect(unexpected).toEqual([]);
+});
+
+test("exact rollback refusal survives reload and explicit fresh review permits a newly reviewed request", async ({
+  page,
+}) => {
+  const unexpected = await installFixtures(page);
+  const commands: Record<string, unknown>[] = [];
+  const reads: string[] = [];
+  await page.route(matchesPath, (route) => json(route, { results: [] }));
+  await page.route(currentPath, (route) => {
+    reads.push("prospect");
+    return json(route, prospect);
+  });
+  await page.route(commandPath, (route) => {
+    const command = route.request().postDataJSON();
+    commands.push(command);
+    return json(
+      route,
+      {
+        schemaVersion: 1,
+        code: "PROSPECT_NEW_CLIENT_REFUSED",
+        requestId: command.requestId,
+        prospectId,
+        payloadDigest: createHash("sha256")
+          .update(JSON.stringify(command))
+          .digest("hex"),
+        status: 409,
+        message: "Review this refused conversion",
+      },
+      409,
+    );
+  });
+  await page.route(receiptPath, (route) => {
+    reads.push("receipt");
+    return json(route, { message: "Original receipt not found" }, 404);
+  });
+  let dialog = await openReview(page);
+  await dialog
+    .getByLabel("Description", { exact: true })
+    .fill("Retained intake");
+  await dialog
+    .getByRole("checkbox", { name: /I reviewed the possible matches/ })
+    .check();
+  await dialog.getByRole("button", { name: "Create reviewed client" }).click();
+  await expect(
+    dialog.getByRole("button", { name: "Review refused conversion" }),
+  ).toBeVisible();
+  await page.reload();
+  await page
+    .getByRole("button", { name: "Recover new-client conversion", exact: true })
+    .click();
+  dialog = page.getByRole("dialog", {
+    name: "Recover new-client conversion",
+    exact: true,
+  });
+  await expect(
+    dialog.getByLabel("Description", { exact: true }),
+  ).toBeDisabled();
+  expect(commands).toHaveLength(1);
+  expect(reads).not.toContain("receipt");
+  reads.length = 0;
+  await dialog
+    .getByRole("button", { name: "Review refused conversion" })
+    .click();
+  dialog = page.getByRole("dialog", {
+    name: `Create client from ${prospect.displayName}`,
+  });
+  await expect(dialog.getByLabel("Description", { exact: true })).toBeEnabled();
+  await expect(dialog.getByLabel("Description", { exact: true })).toHaveValue(
+    "Retained intake",
+  );
+  await expect(
+    dialog.getByRole("checkbox", { name: /I reviewed the possible matches/ }),
+  ).not.toBeChecked();
+  expect(reads.slice(0, 2)).toEqual(["receipt", "prospect"]);
+  expect(commands).toHaveLength(1);
+  await dialog
+    .getByRole("checkbox", { name: /I reviewed the possible matches/ })
+    .check();
+  await dialog.getByRole("button", { name: "Create reviewed client" }).click();
+  await expect.poll(() => commands.length).toBe(2);
+  expect(commands[1]?.requestId).not.toBe(commands[0]?.requestId);
+  expect(commands[1]?.clientDescription).toBe("Retained intake");
+  expect(unexpected).toEqual([]);
+});
+
+test("typed refusal cannot release edits while the fresh receipt read is unavailable", async ({
+  page,
+}) => {
+  const unexpected = await installFixtures(page);
+  let posts = 0;
+  await page.route(matchesPath, (route) => json(route, { results: [] }));
+  await page.route(commandPath, (route) => {
+    posts++;
+    const command = route.request().postDataJSON();
+    return json(
+      route,
+      {
+        schemaVersion: 1,
+        code: "PROSPECT_NEW_CLIENT_REFUSED",
+        requestId: command.requestId,
+        prospectId,
+        payloadDigest: createHash("sha256")
+          .update(JSON.stringify(command))
+          .digest("hex"),
+        status: 402,
+        message: "Capacity changed",
+      },
+      402,
+    );
+  });
+  await page.route(receiptPath, (route) =>
+    json(route, { message: "Receipt temporarily unavailable" }, 503),
+  );
+  const dialog = await openReview(page);
+  await dialog.getByRole("button", { name: "Create reviewed client" }).click();
+  await dialog
+    .getByRole("button", { name: "Review refused conversion" })
+    .click();
+  await expect(dialog.getByRole("alert")).toContainText(
+    "Receipt temporarily unavailable",
+  );
+  await expect(dialog.getByLabel("Website", { exact: true })).toBeDisabled();
+  await expect(
+    dialog.getByRole("button", { name: "Create reviewed client" }),
+  ).toHaveCount(0);
   expect(posts).toBe(1);
   expect(unexpected).toEqual([]);
 });

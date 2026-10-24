@@ -5,6 +5,7 @@ import {
   readRecovery,
   reserveRecovery,
   retireRefusedRecovery,
+  retireNewClientConversionRefusalRecovery,
   RecoveryStorageError,
 } from "../src/shared/session/recovery/journal";
 import {
@@ -23,6 +24,60 @@ import {
 } from "./command-recovery-platform";
 
 installPlatform();
+
+const conversionRefusal = {
+  schemaVersion: 1,
+  code: "PROSPECT_NEW_CLIENT_REFUSED",
+  requestId: id,
+  status: 402,
+};
+it("retires only the explicit typed conversion rollback and preserves its distinct fence", async () => {
+  await reserveRecovery(scope, id, data, contract, current);
+  await retireNewClientConversionRefusalRecovery(
+    scope,
+    id,
+    conversionRefusal,
+    current,
+  );
+  expect(await envelope()).toEqual({
+    version: 1,
+    scope,
+    requestId: id,
+    state: "refused",
+    code: "PROSPECT_NEW_CLIENT_REFUSED",
+  });
+  expect(await readRecovery(scope, contract, current)).toBeNull();
+  expect(JSON.parse(local.get(fenceKey())!)).toEqual({
+    version: 1,
+    requestId: id,
+  });
+  await expect(
+    reserveRecovery(scope, id, data, contract, current),
+  ).rejects.toBeInstanceOf(RecoveryStorageError);
+});
+it.each([
+  { schemaVersion: 2 },
+  { code: "DIRECTORY_NOTE_REFUSED" },
+  { requestId: nextId },
+  { status: 403 },
+  { status: 500 },
+])(
+  "does not retire malformed or mismatched conversion disposition %j",
+  async (patch) => {
+    await reserveRecovery(scope, id, data, contract, current);
+    const writes = db.writes.length;
+    await expect(
+      retireNewClientConversionRefusalRecovery(
+        scope,
+        id,
+        { ...conversionRefusal, ...patch },
+        current,
+      ),
+    ).rejects.toBeInstanceOf(RecoveryStorageError);
+    expect(db.writes).toHaveLength(writes);
+    expect(await readRecovery(scope, contract, current)).toEqual(data);
+  },
+);
 
 it("retires only the exact pending request, erases its payload, and retains a refusal fence", async () => {
   await reserveRecovery(scope, id, data, contract, current);

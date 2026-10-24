@@ -23,6 +23,8 @@ import {
   readRecovery,
   reserveRecovery,
   withRecoveryCommandLock,
+  updateRecovery,
+  retireNewClientConversionRefusalRecovery,
 } from "@/shared/session/recovery/journal";
 import { verifyProfileCapacity } from "@/features/portfolio/billing/public";
 import { clientsKey } from "@/features/portfolio/index/public";
@@ -32,6 +34,8 @@ import { searchLinkClients, type ClientChoice } from "./api";
 import {
   newClientCommandRequest,
   newClientRecoveryContract,
+  newClientRefusal,
+  reviewNewClientRefusal,
   prepareNewClient,
   type NewClientAttempt,
   type NewClientReceipt,
@@ -113,7 +117,7 @@ export function useNewClientConversion(record: Prospect) {
             description: string;
             duplicates: ClientChoice[];
           }
-        | { kind: "recover" | "acknowledge" },
+        | { kind: "recover" | "acknowledge" | "retire-refusal" },
     ) => {
       const controller = lifetime.current;
       if (!actor || !scope || !ready || !controller || busy.current)
@@ -124,7 +128,7 @@ export function useNewClientConversion(record: Prospect) {
       };
       busy.current = true;
       try {
-        await withRecoveryCommandLock(scope, guard, async () => {
+        return await withRecoveryCommandLock(scope, guard, async () => {
           await verifyCoreWriter(api, actor, controller.signal, guard);
           const saved = await readRecovery(
             scope,
@@ -187,7 +191,23 @@ export function useNewClientConversion(record: Prospect) {
               "create",
               controller.signal,
               guard,
-            );
+            ).catch(async (error: unknown) => {
+              const refusal = newClientRefusal(error, retained);
+              if (refusal) {
+                guard();
+                const refused = { ...retained, refusal };
+                await updateRecovery(
+                  scope,
+                  retained.command.requestId,
+                  refused,
+                  newClientRecoveryContract,
+                  guard,
+                );
+                guard();
+                setPending(refused);
+              }
+              throw error;
+            });
             guard();
             setReceipt(value);
           } else {
@@ -195,6 +215,24 @@ export function useNewClientConversion(record: Prospect) {
               throw new Error(
                 "No pending conversion is stored. Reopen this review.",
               );
+            if (input.kind === "retire-refusal") {
+              const refusal = await reviewNewClientRefusal(
+                api,
+                saved,
+                controller.signal,
+                guard,
+              );
+              await retireNewClientConversionRefusalRecovery(
+                scope,
+                saved.command.requestId,
+                refusal,
+                guard,
+              );
+              guard();
+              setPending(null);
+              setReceipt(undefined);
+              return saved;
+            }
             const value = await newClientCommandRequest(
               api,
               saved,

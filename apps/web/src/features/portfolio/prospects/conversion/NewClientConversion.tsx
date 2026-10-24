@@ -203,6 +203,34 @@ function ConversionSession({
                 </button>
               </div>
             )}
+            {flow.pending?.refusal && !flow.receipt && (
+              <div className="stack">
+                <p>
+                  Core confirmed that this original request made no changes.
+                  Review the latest prospect before editing a new conversion.
+                </p>
+                <button
+                  type="button"
+                  className="button"
+                  disabled={flow.action.isPending}
+                  onClick={() =>
+                    flow.action.mutate(
+                      { kind: "retire-refusal" },
+                      {
+                        onSuccess: (saved) => {
+                          if (!saved) return;
+                          setWebsite(saved.command.clientWebsite ?? "");
+                          setDescription(saved.command.clientDescription ?? "");
+                          setReviewed(false);
+                        },
+                      },
+                    )
+                  }
+                >
+                  Review refused conversion
+                </button>
+              </div>
+            )}
             {flow.receipt && (
               <div className="stack" role="status">
                 <p>

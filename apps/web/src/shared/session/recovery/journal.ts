@@ -149,6 +149,7 @@ function retireRecovery(
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
           | "DIRECTORY_NOTE_REFUSED"
+          | "PROSPECT_NEW_CLIENT_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_ASSOCIATION_REJECTED"
@@ -242,6 +243,34 @@ export function retireMemberNoteRefusalRecovery(
     scope,
     requestId,
     { state: "refused", code: "DIRECTORY_NOTE_REFUSED" },
+    assert,
+  );
+}
+
+/** Caller binds the Core rollback proof to the original prospect/digest and
+ * obtains fresh authority, receipt and prospect reads under the execution lock. */
+export function retireNewClientConversionRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: {
+    schemaVersion: number;
+    code: string;
+    requestId: string;
+    status: number;
+  },
+  assert: () => void,
+) {
+  if (
+    failure.schemaVersion !== 1 ||
+    failure.code !== "PROSPECT_NEW_CLIENT_REFUSED" ||
+    failure.requestId !== requestId ||
+    ![400, 402, 404, 409].includes(failure.status)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "PROSPECT_NEW_CLIENT_REFUSED" },
     assert,
   );
 }

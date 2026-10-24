@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
-import type { Prospect } from "../contracts";
+import { prospectForIdSchema, type Prospect } from "../contracts";
 
 const website = z
   .string()
@@ -26,12 +26,36 @@ export const newClientCommandSchema = z
     clientDescription: z.string().trim().min(1).max(600).nullable(),
   })
   .strict();
+const newClientRefusalSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    code: z.literal("PROSPECT_NEW_CLIENT_REFUSED"),
+    requestId: z.uuid(),
+    prospectId: z.uuid(),
+    payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
+    status: z.union([
+      z.literal(400),
+      z.literal(402),
+      z.literal(404),
+      z.literal(409),
+    ]),
+    message: z.string().min(1).max(2000),
+  })
+  .strict();
 export const newClientAttemptSchema = z
   .object({
     command: newClientCommandSchema,
     payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
+    refusal: newClientRefusalSchema.optional(),
   })
-  .strict();
+  .strict()
+  .refine(
+    (attempt) =>
+      !attempt.refusal ||
+      (attempt.refusal.requestId === attempt.command.requestId &&
+        attempt.refusal.prospectId === attempt.command.prospectId &&
+        attempt.refusal.payloadDigest === attempt.payloadDigest),
+  );
 export type NewClientAttempt = z.infer<typeof newClientAttemptSchema>;
 const receiptSchema = z.object({
   schemaVersion: z.literal(1),
@@ -49,6 +73,64 @@ export const newClientRecoveryContract = {
   schema: newClientAttemptSchema,
   requestId: (attempt: NewClientAttempt) => attempt.command.requestId,
 };
+
+export function newClientRefusal(error: unknown, attempt: NewClientAttempt) {
+  if (!(error instanceof ApiError)) return undefined;
+  const parsed = newClientRefusalSchema.safeParse(error.details);
+  if (
+    !parsed.success ||
+    parsed.data.status !== error.status ||
+    parsed.data.requestId !== attempt.command.requestId ||
+    parsed.data.prospectId !== attempt.command.prospectId ||
+    parsed.data.payloadDigest !== attempt.payloadDigest
+  )
+    return undefined;
+  return parsed.data;
+}
+
+/** The typed rollback envelope establishes the original no-write result.
+ * Fresh reads only prevent retiring after a later conversion or authority change. */
+export async function reviewNewClientRefusal(
+  api: ApiClient,
+  attempt: NewClientAttempt,
+  signal: AbortSignal,
+  guard: () => void,
+) {
+  const failure = attempt.refusal;
+  if (
+    !failure ||
+    !newClientRefusal(
+      new ApiError(failure.status, failure.message, failure),
+      attempt,
+    )
+  )
+    throw new Error(
+      "This conversion has no verified refusal. Recover its original receipt.",
+    );
+  try {
+    await newClientCommandRequest(api, attempt, "recover", signal, guard);
+  } catch (error) {
+    if (!(error instanceof ApiError) || error.status !== 404) throw error;
+    guard();
+    signal.throwIfAborted();
+    const current = await api.request(
+      "core",
+      `business-development/prospects/${attempt.command.prospectId}`,
+      prospectForIdSchema(attempt.command.prospectId),
+      { signal },
+    );
+    guard();
+    signal.throwIfAborted();
+    if (current.linkedClientId || current.convertedAt)
+      throw new Error(
+        "This prospect has a conversion. Recover and review the original command before continuing.",
+      );
+    return failure;
+  }
+  throw new Error(
+    "The original conversion has a saved receipt. Recover it before continuing.",
+  );
+}
 
 export async function prepareNewClient(
   record: Prospect,
