@@ -3644,5 +3644,23 @@
     "reason": "One public conversation connection state machine: retained initial/input admission identity, submit reconciliation, history binding, cancellation receipt and attachment of the current observation. ConversationNetwork owns credential/HTTP/deadline disposal, ConversationObservation owns cursor/event projection, conversationChat owns upstream UI transport, and public contracts own wire admission. Initial and next-input methods share the exact retained intent and uncertainty state; separating them into competing owners would weaken reconciliation. General only extends context correlation with the canonical actor-private scope; no model loop or server authorization is reproduced.",
     "reviewedBy": "Codex independent D (wave2_d_review_handover)",
     "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+    "kind": "function",
+    "symbol": "runQuickLogUndo",
+    "fingerprint": "e06d1e5e49d18813187c81fc27fe1346e16e26bbdb195bd6f11c5479fa9c1cd9",
+    "reason": "One serialized Undo operation restores its immutable attempt, compares the requested target, reads or explicitly sends, validates the outcome and retires only a proved result. Keeping these branches under the existing execution lock makes the safety boundary visible. Independent review accepted the exact FE21d8e029/Corea21e8175 repair; this entry does not cover other outstanding Portfolio obligations.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover), PF13 Undo repair",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+    "kind": "function",
+    "symbol": "runQuickLogUndo > <anonymous>",
+    "fingerprint": "cb52949e0a4ff165fa8786e1b521461cecd71675c150b71a2f2b664628b2416c",
+    "reason": "The callback holds the existing execution lock around the same immutable Undo identity from restored intent through target comparison, read/send, result validation and proved retirement. These branches are one operation, not separate lifecycle owners. Independent D review accepted this exact callback with FE21d8e029/Corea21e8175; unrelated size findings remain open.",
+    "reviewedBy": "Codex independent D (wave2_d_review_handover), PF13 Undo repair",
+    "reviewedOn": "2026-10-24"
   }
 ]
