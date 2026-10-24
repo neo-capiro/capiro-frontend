@@ -30,6 +30,27 @@ export function verifyPackageInputs(manifest, readArtifact) {
   });
 }
 
+/** Active local Meri packages must have immutable provenance, not only archived inputs. */
+export function verifyActiveMeriPackages(records, consumers) {
+  const active = new Map();
+  for (const consumer of consumers) {
+    for (const dependencies of [consumer.dependencies, consumer.devDependencies]) {
+      for (const [name, family] of [['@capiro/meri-contracts', 'contracts'], ['@capiro/meri-ui-stream', 'ui-stream']]) {
+        const value = dependencies?.[name];
+        if (value === undefined) continue;
+        const file = typeof value === 'string' && /^file:\.\.\/\.\.\/vendor\/(capiro-meri-(?:contracts|ui-stream)-\d+\.\d+\.\d+\.tgz)$/.exec(value)?.[1];
+        if (!file || !file.startsWith(`capiro-meri-${family}-`)) throw Error(`Invalid active public package dependency: ${name}`);
+        const record = records.find(item => item.file === file);
+        if (!record || typeof record.sourceCommit !== 'string' || !/^[a-f0-9]{40}$/.test(record.sourceCommit))
+          throw Error(`Active public package has no immutable source binding: ${file}`);
+        active.set(file, record);
+      }
+    }
+  }
+  if (!active.size) throw Error('No active Meri public package dependencies');
+  return [...active.values()];
+}
+
 function main(argv) {
   const usage = 'Usage: node scripts/public-packages.mjs [--help]\nVerify versioned vendor artifact bytes; no install/network. Exit0 success/help; exit1 invalid arguments, setup or drift.';
   if (argv.length === 1 && argv[0] === '--help') { console.log(usage); return; }
@@ -38,7 +59,10 @@ function main(argv) {
   const manifests = ['meri-public-packages.json', 'newsletter-public-packages.json', 'onboard-public-packages.json']
     .map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
   const records = manifests.flatMap(manifest => verifyPackageInputs(manifest, name => readFileSync(path.join(vendor, name))));
-  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records, userPreferences: checkUserPreferencesPublic(), documentAccess: checkDocumentAccessInput() }, null, 2));
+  const consumers = ['apps/web', 'packages/meri-client', 'packages/qualification-transport']
+    .map(name => JSON.parse(readFileSync(new URL(`../${name}/package.json`, import.meta.url), 'utf8')));
+  const active = verifyActiveMeriPackages(records, consumers);
+  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records, active, userPreferences: checkUserPreferencesPublic(), documentAccess: checkDocumentAccessInput() }, null, 2));
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -1,13 +1,11 @@
+import type { ConversationContext } from "./session";
 import type { QueryClient } from "@tanstack/react-query";
 import {
   receiveConversationRequest,
   type ConversationStoredRequest,
   type ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
-import {
-  actionUuid,
-  type ActionContext,
-} from "../meri-actions/session-receipt";
+import { actionUuid } from "../meri-actions/session-receipt";
 import { z } from "zod";
 import {
   tabRecord,
@@ -95,7 +93,7 @@ function receiveIntent(value: unknown): ConversationIntent {
 /** Nonsecret command uncertainty follows this exact observed context in same-tab recovery. */
 export function conversationIntentJournal(
   client: QueryClient,
-  context: ActionContext,
+  context: ConversationContext,
   storage?: TabStorage,
 ) {
   const key = [
@@ -177,7 +175,7 @@ export function conversationIntentJournal(
 export function conversationSelectionOwner(
   client: QueryClient,
   account: { tenantId: string; actorId: string },
-  clientId: string,
+  clientId: string | null,
   conversationId?: string,
   storage?: TabStorage,
 ) {
@@ -219,7 +217,7 @@ export function conversationSelectionOwner(
     client.getQueryData<{ conversationId?: string; runId?: string }>(key) ?? {};
   return {
     hints: { ...remembered, clientId },
-    record(context: ActionContext) {
+    record(context: ConversationContext) {
       if (
         context.tenantId !== account.tenantId ||
         context.actorId !== account.actorId ||

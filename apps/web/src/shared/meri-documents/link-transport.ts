@@ -2,7 +2,7 @@ import { boundedJsonBytes } from "../meri-actions/bounded-json";
 import { actionSessionHeader } from "../meri-actions/session-header";
 import { issuedLink, linkRefusal } from "./link-wire";
 
-type Refused = { ok: false; code: string };
+type Refused = { ok: false; code: string; accessDenied?: true };
 const decode = async (response: Response, signal: AbortSignal) =>
   JSON.parse(
     new TextDecoder("utf-8", { fatal: true }).decode(
@@ -46,14 +46,18 @@ export function createLinkTransport(
     response: Response,
     signal: AbortSignal,
   ): Promise<Refused> {
+    const accessDenied = response.status === 401 || response.status === 403;
+    let code: string;
     try {
-      return {
-        ok: false,
-        code: linkRefusal.parse(await decode(response, signal)).error.code,
-      };
+      code = linkRefusal.parse(await decode(response, signal)).error.code;
     } catch {
-      return { ok: false, code: "DOWNLOAD_LINK_UNAVAILABLE" };
+      code = "DOWNLOAD_LINK_UNAVAILABLE";
     }
+    return {
+      ok: false,
+      code,
+      ...(accessDenied ? { accessDenied: true as const } : {}),
+    };
   }
   return {
     async issue(versionId: string, signal: AbortSignal) {

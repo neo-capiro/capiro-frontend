@@ -2,8 +2,14 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { NextRequest, type NextFetchEvent } from "next/server";
 import proxy from "../src/proxy";
 import { POST, PUT } from "../src/app/api/capiro/[operation]/route";
-import { firstChatCoreOperationKey } from "../src/shared/capiro/operations/meri-first-chat";
-import { previewFirstChatBackendSource } from "../src/shared/preview/first-chat-write.server";
+import {
+  firstChatCoreOperationKey,
+  firstChatV2OperationKey,
+} from "../src/shared/capiro/operations/meri-first-chat";
+import {
+  previewFirstChatBackendSource,
+  previewGeneralBackendSource,
+} from "../src/shared/preview/first-chat-write.server";
 
 const clerk = vi.hoisted(() => ({ auth: vi.fn(), middleware: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => ({
@@ -33,7 +39,7 @@ const getToken = vi.fn(async (...args) =>
 );
 const fetcher = vi.fn<typeof fetch>();
 
-function request(url = `${origin}${path}`, requestBody = body) {
+function request(url = `${origin}${path}`, requestBody: unknown = body) {
   return new Request(url, {
     method: "POST",
     headers: {
@@ -231,4 +237,131 @@ it("replays the same browser request identity without minting a second one", asy
       requestId: body.requestId,
       clientId: body.clientId,
     });
+});
+
+const general = {
+  schemaVersion: 2,
+  requestId: body.requestId,
+  scopeKind: "general",
+  clientId: null,
+};
+const v2Path = `/api/capiro/${firstChatV2OperationKey}`;
+const v2Context = {
+  params: Promise.resolve({ operation: firstChatV2OperationKey }),
+};
+const generalReceipt = { ...receipt, ...general };
+
+it("admits explicit General through the existing pinned native Clerk gateway", async () => {
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+    previewGeneralBackendSource,
+  );
+  fetcher.mockResolvedValue(Response.json(generalReceipt));
+  const continuation = await proxy(
+    new NextRequest(`${origin}${v2Path}`, { method: "POST" }),
+    {} as NextFetchEvent,
+  );
+  expect(await (continuation as Response).text()).toBe(
+    "native Clerk middleware",
+  );
+  const response = await POST(
+    request(`${origin}${v2Path}`, general),
+    v2Context,
+  );
+  expect(response.status).toBe(200);
+  expect(await response.json()).toEqual(generalReceipt);
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(
+    `${previewTarget}/clio/conversations/bootstrap`,
+  );
+  expect(JSON.parse(String(fetcher.mock.lastCall?.[1]?.body))).toEqual(general);
+  expect(
+    new Headers(fetcher.mock.lastCall?.[1]?.headers).get("authorization"),
+  ).toBe("Bearer native-session-token");
+});
+
+it("keeps the staged old source client-only and refuses General before authentication", async () => {
+  await held(await POST(request(`${origin}${v2Path}`, general), v2Context));
+});
+
+it("pins General to the reviewed successor and refuses its superseded source", async () => {
+  expect(previewGeneralBackendSource).toBe(
+    "16c3122a379481eb19cdee156ceb5d5c8b615bea",
+  );
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+    "65173134d68f92eedec309034866dd9f01579771",
+  );
+  await held(await POST(request(`${origin}${v2Path}`, general), v2Context));
+});
+
+it("admits the configured client through v2 without broadening its client roster", async () => {
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+    previewGeneralBackendSource,
+  );
+  const selected = { ...general, scopeKind: "client", clientId: body.clientId };
+  fetcher.mockResolvedValue(Response.json({ ...receipt, ...selected }));
+  expect(
+    (await POST(request(`${origin}${v2Path}`, selected), v2Context)).status,
+  ).toBe(200);
+  expect(JSON.parse(String(fetcher.mock.lastCall?.[1]?.body))).toEqual(
+    selected,
+  );
+});
+
+it.each([
+  { ...general, clientId: body.clientId },
+  { ...general, scopeKind: "client" },
+  { schemaVersion: 2, requestId: body.requestId, clientId: null },
+  {
+    ...general,
+    scopeKind: "client",
+    clientId: "66666666-6666-4666-8666-666666666666",
+  },
+  { ...general, tenantId: receipt.tenantId },
+])(
+  "refuses malformed or unconfigured v2 selectors before dispatch %#",
+  async (input) => {
+    vi.stubEnv(
+      "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+      previewGeneralBackendSource,
+    );
+    expect(
+      (await POST(request(`${origin}${v2Path}`, input), v2Context)).status,
+    ).toBe(400);
+    expect(fetcher).not.toHaveBeenCalled();
+    expect(clerk.auth).not.toHaveBeenCalled();
+  },
+);
+
+it.each([401, 403])(
+  "preserves Core refusal %s for General instead of manufacturing a receipt",
+  async (status) => {
+    vi.stubEnv(
+      "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+      previewGeneralBackendSource,
+    );
+    fetcher.mockResolvedValue(
+      Response.json({ message: "synthetic refusal" }, { status }),
+    );
+    const response = await POST(
+      request(`${origin}${v2Path}`, general),
+      v2Context,
+    );
+    expect(response.status).toBe(status);
+    expect(await response.text()).not.toContain("synthetic refusal");
+  },
+);
+
+it("does not use an ordinary target for General while preview routing is active", async () => {
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+    previewGeneralBackendSource,
+  );
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL",
+    "https://ordinary.synthetic.invalid/api",
+  );
+  await held(await POST(request(`${origin}${v2Path}`, general), v2Context));
 });

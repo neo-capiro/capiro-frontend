@@ -1,0 +1,149 @@
+{
+  "route": "list",
+  "request": {
+    "conversationId": "00000000-0000-4000-8000-000000000001"
+  },
+  "httpStatus": 200,
+  "response": {
+    "conversationId": "00000000-0000-4000-8000-000000000001",
+    "intents": [
+      {
+        "deliveryId": "sdk:0000000000000000000000000000000000000000000000000000000000000001",
+        "createdAt": "2026-10-12T20:00:00.000Z",
+        "operation": {
+          "id": "create_word",
+          "version": "0.2.0"
+        },
+        "state": "prepared",
+        "kind": "proposal",
+        "proposal": {
+          "proposalId": "00000000-0000-4000-8000-000000000102",
+          "command": {
+            "contractVersion": "0.2.0",
+            "commandId": "00000000-0000-4000-8000-000000000100",
+            "binding": {
+              "tenantId": "tenant",
+              "actorId": "actor",
+              "conversationId": "00000000-0000-4000-8000-000000000001",
+              "runId": "00000000-0000-4000-8000-000000000002",
+              "attemptId": "00000000-0000-4000-8000-000000000003",
+              "workerId": "00000000-0000-4000-8000-000000000004",
+              "writerFence": 1
+            },
+            "action": "document.draft",
+            "arguments": {
+              "preparationSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "artifactRequestSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "sourceContextSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "baseVersionId": null,
+              "title": "Selected document",
+              "format": "docx"
+            },
+            "attachments": [],
+            "scopes": [
+              {
+                "tenantId": "tenant",
+                "kind": "tenant",
+                "resourceId": "tenant",
+                "policyRevision": "p1"
+              }
+            ],
+            "idempotencyKey": "00000000-0000-4000-8000-000000000101"
+          },
+          "commandSha256": "d4da0ea301fd1f45b341868b43ab5099ef504098539677c009145a3bb3031f5f",
+          "createdAt": "2026-10-12T20:00:00.000Z",
+          "expiresAt": "2026-10-12T20:00:45.000Z",
+          "requiredApprover": {
+            "tenantId": "tenant",
+            "actorId": "actor"
+          }
+        },
+        "decision": {
+          "proposalId": "00000000-0000-4000-8000-000000000102",
+          "commandSha256": "d4da0ea301fd1f45b341868b43ab5099ef504098539677c009145a3bb3031f5f",
+          "decision": "approved",
+          "decidedAt": "2026-10-12T20:00:00.000Z",
+          "expiresAt": "2026-10-12T20:00:45.000Z",
+          "approver": {
+            "tenantId": "tenant",
+            "actorId": "actor"
+          },
+          "policyRevision": "p1"
+        },
+        "execution": {
+          "state": "completed",
+          "outcome": {
+            "version": {
+              "contractVersion": "0.2.0",
+              "artifactId": "00000000-0000-4000-8000-000000000200",
+              "versionId": "00000000-0000-4000-8000-000000000201",
+              "parentVersionId": null,
+              "binding": {
+                "tenantId": "tenant",
+                "actorId": "actor",
+                "conversationId": "00000000-0000-4000-8000-000000000001",
+                "runId": "00000000-0000-4000-8000-000000000210",
+                "attemptId": "00000000-0000-4000-8000-000000000211",
+                "workerId": "00000000-0000-4000-8000-000000000212",
+                "writerFence": 2
+              },
+              "object": {
+                "objectId": "00000000-0000-4000-8000-000000000202",
+                "versionId": "synthetic-object-version",
+                "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                "bytes": 200,
+                "scopes": [
+                  {
+                    "tenantId": "tenant",
+                    "kind": "tenant",
+                    "resourceId": "tenant",
+                    "policyRevision": "p1"
+                  }
+                ]
+              },
+              "filename": "Selected document.docx",
+              "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+              "scopes": [
+                {
+                  "tenantId": "tenant",
+                  "kind": "tenant",
+                  "resourceId": "tenant",
+                  "policyRevision": "p1"
+                }
+              ],
+              "evidence": [],
+              "generationStatus": "draft",
+              "previewStatus": "pending",
+              "createdAt": "2026-10-12T20:00:00.000Z"
+            },
+            "inspection": {
+              "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "bytes": 200,
+              "format": "docx",
+              "nativeOpened": false,
+              "rendered": false,
+              "recalculated": false,
+              "members": [],
+              "details": {
+                "paragraphs": 1,
+                "tables": 0,
+                "pictures": 0
+              }
+            },
+            "execution": {
+              "kind": "native-document",
+              "invocationId": "sdk:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "requestSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "authorizationReceiptId": "00000000-0000-4000-8000-000000000203",
+              "objectCommitted": true,
+              "versionCommitted": true,
+              "nativeQualified": false
+            }
+          }
+        },
+        "phase": "completed"
+      }
+    ],
+    "next": null
+  }
+}

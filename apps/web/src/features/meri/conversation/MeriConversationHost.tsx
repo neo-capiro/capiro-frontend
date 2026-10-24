@@ -3,7 +3,10 @@ import { Button } from "@capiro/ui/button";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
-import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
+import {
+  firstChatCoreOperationKey,
+  firstChatV2OperationKey,
+} from "../../../shared/capiro/operations/meri-first-chat";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import {
@@ -28,7 +31,11 @@ export function MeriConversationHost({
   firstChatBootstrapClientId?: string;
 }) {
   const selected = useSelectedClient();
-  const selector = conversationSelection(useSearchParams());
+  const params = useSearchParams();
+  const selector = conversationSelection(params);
+  const general = params.get("scope") === "general" && !params.has("clientId");
+  const invalidScope =
+    params.has("scope") && (!general || params.getAll("scope").length !== 1);
   const [newChatEpoch, setNewChatEpoch] = useState(0);
   useEffect(() => {
     if (selector.state !== "current") return;
@@ -46,7 +53,7 @@ export function MeriConversationHost({
         </p>
       </section>
     );
-  if (selector.state === "invalid")
+  if (selector.state === "invalid" || invalidScope)
     return (
       <section role="alert">
         <h2>Conversation selection unavailable</h2>
@@ -55,6 +62,38 @@ export function MeriConversationHost({
         </p>
       </section>
     );
+  if (account && general) {
+    const key = JSON.stringify([
+      account.tenantId,
+      account.actorId,
+      null,
+      selector,
+      newChatEpoch,
+    ]);
+    if (selector.state === "current")
+      return firstChatBootstrapEnabled ? (
+        <CoreResolvedConversation
+          key={key}
+          account={account}
+          clientId={null}
+          scope="General"
+        />
+      ) : (
+        <section role="status">
+          <h2>General chat is unavailable</h2>
+          <p>The current conversation could not be confirmed.</p>
+        </section>
+      );
+    return (
+      <ConnectedConversation
+        key={key}
+        account={account}
+        clientId={null}
+        scope="General"
+        conversationId={selector.conversationId}
+      />
+    );
+  }
   if (!account || selected.state !== "authorized-client")
     return (
       <section role="status">
@@ -147,7 +186,7 @@ function CoreResolvedConversation({
   scope,
 }: {
   account: ConversationAccount;
-  clientId: string;
+  clientId: string | null;
   scope: string;
 }) {
   const api = useCapiro();
@@ -156,22 +195,27 @@ function CoreResolvedConversation({
     state: "pending",
   });
   const { tenantId, actorId } = account;
+  const currentScope =
+    clientId === null
+      ? { tenantId, actorId, clientId, scopeKind: "general" as const }
+      : { tenantId, actorId, clientId };
   const { restart, refuse } = useResolutionControls(setResolution, setAttempt);
-  const beginNew = useBeginNewChat(
-    { tenantId, actorId, clientId },
-    restart,
-    refuse,
-  );
+  const beginNew = useBeginNewChat(currentScope, restart, refuse);
   useEffect(() => {
     const controller = new AbortController();
     void Promise.resolve()
       .then(() =>
         resolveFirstChatConversation({
-          scope: { tenantId, actorId, clientId },
+          scope:
+            clientId === null
+              ? { tenantId, actorId, clientId, scopeKind: "general" }
+              : { tenantId, actorId, clientId },
           storage: window.sessionStorage,
           signal: controller.signal,
           createOrReuse: (body, signal) =>
-            api.request(firstChatCoreOperationKey, { body }, { signal }),
+            body.schemaVersion === 2
+              ? api.request(firstChatV2OperationKey, { body }, { signal })
+              : api.request(firstChatCoreOperationKey, { body }, { signal }),
         }),
       )
       .then(({ conversationId }) => {
@@ -184,7 +228,9 @@ function CoreResolvedConversation({
             state: "error",
             canBeginNew: canBeginNewChatAfterConflict(
               error,
-              { tenantId, actorId, clientId },
+              clientId === null
+                ? { tenantId, actorId, clientId, scopeKind: "general" }
+                : { tenantId, actorId, clientId },
               () => window.sessionStorage,
             ),
           });
@@ -196,7 +242,7 @@ function CoreResolvedConversation({
     return (
       <section role="status">
         <h2>Preparing conversation</h2>
-        <p>Confirming the current client conversation.</p>
+        <p>Confirming the current conversation.</p>
       </section>
     );
   if (resolution.state === "error")
@@ -248,7 +294,7 @@ function ConnectedConversation({
   conversationId,
 }: {
   account: ConversationAccount;
-  clientId: string;
+  clientId: string | null;
   scope: string;
   conversationId?: string | undefined;
 }) {

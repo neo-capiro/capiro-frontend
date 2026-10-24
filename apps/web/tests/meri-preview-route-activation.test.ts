@@ -196,6 +196,11 @@ it.each([
     "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
     "999.999.999",
   ],
+  [
+    "superseded conversation contract",
+    "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
+    "0.1.10",
+  ],
 ])("holds %s at every preview entry", async (_, key, value) => {
   const env: Record<string, string | undefined> = { ...environment };
   if (value === undefined) delete env[key];

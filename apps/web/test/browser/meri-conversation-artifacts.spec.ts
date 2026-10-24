@@ -2,6 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { ids, inspected } from "../../tests/meri-document-public-fixtures";
 import {
   accessFormats,
+  nativeInspection,
   accessInspection,
 } from "../../tests/meri-document-access-fixtures";
 import {
@@ -178,3 +179,186 @@ test("a refused inspection leaves the file without invented details", async ({
   await expect(card.getByText(/Generation:/)).toHaveCount(0);
   expect(f.unexpected).toEqual([]);
 });
+
+test("native workspace files show truthful path/bytes and download without generated claims", async ({
+  page,
+}, info) => {
+  const { f, card, seen } = await withArtifact(page),
+    receipt = nativeInspection();
+  await page.route("**/api/documents/inspect", (r) => reply(r, receipt));
+  await page.route("**/api/documents/links/issue", (r) =>
+    reply(r, {
+      versionId: ids.version,
+      token,
+      expiresAtMs: Date.now() + 60000,
+    }),
+  );
+  await page.route("**/api/documents/links/redeem", (r) =>
+    r.fulfill({
+      status: 200,
+      headers: {
+        "content-type": "application/octet-stream",
+        "content-disposition": 'attachment; filename="report.csv"',
+        "content-length": String(fileBytes.length),
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+      },
+      body: fileBytes,
+    }),
+  );
+  await card.getByRole("button", { name: "Preview", exact: true }).click();
+  const file = page.getByRole("group", { name: "report.csv" });
+  await expect(
+    file.getByText("exports/report.csv", { exact: true }),
+  ).toBeVisible();
+  await expect(file.getByText("Stored bytes verified")).toBeVisible();
+  await expect(
+    file.getByText(
+      /Generation:|Preview: pending|Visual inspection|Native opening/,
+    ),
+  ).toHaveCount(0);
+  const pending = page.waitForEvent("download");
+  await file.getByRole("button", { name: "Download", exact: true }).click();
+  const download = await pending;
+  expect(download.suggestedFilename()).toBe("report.csv");
+  const { readFile } = await import("node:fs/promises");
+  expect(await readFile((await download.path())!, "utf8")).toBe(fileBytes);
+  expect(seen.map((row) => row.path)).toEqual([
+    "/api/documents/inspect",
+    "/api/documents/inspect",
+    "/api/documents/links/issue",
+    "/api/documents/links/redeem",
+  ]);
+  expect(f.unexpected).toEqual([]);
+  await page.screenshot({
+    path: info.outputPath("native-workspace-file.png"),
+    fullPage: true,
+  });
+});
+
+for (const kind of ["native", "generated"] as const)
+  for (const denial of [401, 403])
+    for (const deniedAt of ["inspect", "issue", "redeem"] as const)
+      test(`${kind} file clears artifact-local data after ${deniedAt} ${denial}`, async ({
+        page,
+      }) => {
+        await page.addInitScript(() => {
+          const urls = { created: [] as string[], revoked: [] as string[] };
+          Object.assign(window, { artifactUrls: urls });
+          const create = URL.createObjectURL.bind(URL);
+          const revoke = URL.revokeObjectURL.bind(URL);
+          URL.createObjectURL = (blob) => {
+            const value = create(blob);
+            urls.created.push(value);
+            return value;
+          };
+          URL.revokeObjectURL = (value) => {
+            urls.revoked.push(value);
+            revoke(value);
+          };
+        });
+        const { f, card } = await withArtifact(page);
+        const receipt =
+          kind === "native" ? nativeInspection() : accessInspection("txt");
+        const filename = kind === "native" ? "report.csv" : "Synthetic.txt";
+        const mimeType =
+          "mimeType" in receipt.version
+            ? receipt.version.mimeType
+            : "application/octet-stream";
+        let denied = false,
+          downloads = 0;
+        page.on("download", () => downloads++);
+        await page.route("**/api/documents/inspect", (route) =>
+          denied && deniedAt === "inspect"
+            ? reply(
+                route,
+                {
+                  error: { code: "ACCESS_DENIED", outcome: "READ_UNAVAILABLE" },
+                },
+                denial,
+              )
+            : reply(route, receipt),
+        );
+        await page.route("**/api/documents/links/issue", (route) =>
+          denied && deniedAt === "issue"
+            ? reply(route, { error: { code: "DOWNLOAD_LINK_REFUSED" } }, denial)
+            : reply(route, {
+                versionId: ids.version,
+                token,
+                expiresAtMs: Date.now() + 60000,
+              }),
+        );
+        await page.route("**/api/documents/links/redeem", (route) =>
+          denied && deniedAt === "redeem"
+            ? reply(route, { error: { code: "DOWNLOAD_LINK_REFUSED" } }, denial)
+            : route.fulfill({
+                status: 200,
+                headers: {
+                  "content-type": mimeType,
+                  "content-disposition": `attachment; filename="${filename}"`,
+                  "content-length": String(fileBytes.length),
+                  "cache-control": "no-store",
+                  "x-content-type-options": "nosniff",
+                },
+                body: fileBytes,
+              }),
+        );
+        await card
+          .getByRole("button", { name: "Preview", exact: true })
+          .click();
+        const file = page.getByRole("group", { name: filename });
+        await expect(file).toBeVisible();
+        const saved = page.waitForEvent("download");
+        await file
+          .getByRole("button", { name: "Download", exact: true })
+          .click();
+        expect((await saved).suggestedFilename()).toBe(filename);
+        const downloadUrl = await page.evaluate(() =>
+          (
+            window as unknown as { artifactUrls: { created: string[] } }
+          ).artifactUrls.created.at(-1),
+        );
+        expect(downloadUrl).toMatch(/^blob:/);
+        denied = true;
+        await file
+          .getByRole("button", {
+            name: deniedAt === "inspect" ? "Preview" : "Download",
+            exact: true,
+          })
+          .click();
+        await expect(
+          page.getByText(
+            /(?:Preview|Download) unavailable \(.+\). Nothing was substituted\./,
+          ),
+        ).toBeVisible();
+        await expect
+          .soft(page.getByRole("group", { name: filename }))
+          .toHaveCount(0);
+        await expect
+          .soft(
+            page.getByText(
+              /Stored bytes verified|Generation: draft|Preview: pending/,
+            ),
+          )
+          .toHaveCount(0);
+        expect
+          .soft(
+            await page.evaluate(
+              (url) =>
+                (
+                  window as unknown as { artifactUrls: { revoked: string[] } }
+                ).artifactUrls.revoked.includes(url!),
+              downloadUrl,
+            ),
+          )
+          .toBe(true);
+        expect(downloads).toBe(1);
+        await expect(
+          page.getByLabel("Meri message", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          page.getByText("Your brief is ready.", { exact: true }),
+        ).toBeVisible();
+        expect(f.hints).toHaveLength(1);
+        expect(f.unexpected).toEqual([]);
+      });

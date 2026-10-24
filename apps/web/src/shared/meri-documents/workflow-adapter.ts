@@ -29,8 +29,11 @@ type Options = {
   isCurrent?: () => boolean;
   now?: () => number;
 };
+class NativeRevisionUnavailable extends Error {}
+
 type Receipt = DocumentResponseMap["create"] | DocumentResponseMap["inspect"];
-type Held = { version: AdmittedDocumentVersion; view: DocumentVersionView };
+type GeneratedVersion = Extract<AdmittedDocumentVersion, { filename: string }>;
+type Held = { version: GeneratedVersion; view: DocumentVersionView };
 const refused = <T>(problem: DocumentProblem): DocumentReply<T> => ({
   ok: false,
   problem,
@@ -53,7 +56,7 @@ const sameId = (left: string, right: string) =>
 export class DocumentWorkflow implements DocumentWorkflowPort {
   private readonly lifetime = new AbortController();
   private handles = new WeakMap<object, Held>();
-  private known = new Map<string, AdmittedDocumentVersion>();
+  private known = new Map<string, GeneratedVersion>();
   private busy = false;
   private readonly options: Options;
   constructor(options: Options) {
@@ -103,8 +106,12 @@ export class DocumentWorkflow implements DocumentWorkflowPort {
   }
   private adopt(
     receipt: Receipt,
-    base?: AdmittedDocumentVersion,
+    base?: GeneratedVersion,
   ): DocumentVersionView {
+    if ("kind" in receipt)
+      throw new NativeRevisionUnavailable(
+        "Native workspace files are not generated revision targets",
+      );
     const { version, inspection } = receipt;
     const context = this.options.session.context;
     const expectedFormat =
@@ -183,7 +190,7 @@ export class DocumentWorkflow implements DocumentWorkflowPort {
     route: R,
     request: AdmittedDocumentRequest<R>,
     caller: AbortSignal,
-    base?: AdmittedDocumentVersion,
+    base?: GeneratedVersion,
   ): Promise<DocumentReply<DocumentVersionView>> {
     const blocked = this.preflight(caller);
     if (blocked) return refused(blocked);
@@ -331,7 +338,9 @@ export class DocumentWorkflow implements DocumentWorkflowPort {
       return refused(
         error instanceof DocumentAccessUnavailable
           ? "access-lost"
-          : "read-unavailable",
+          : error instanceof NativeRevisionUnavailable
+            ? "native-revision-unavailable"
+            : "read-unavailable",
       );
     } finally {
       this.busy = false;

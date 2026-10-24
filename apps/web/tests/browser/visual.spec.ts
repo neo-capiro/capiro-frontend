@@ -63,7 +63,23 @@ for (const path of [
         "background-color",
         "rgb(245, 245, 244)",
       );
-      await expect(pulse.getByText("0", { exact: true })).toHaveCount(2);
+      await expect(
+        pulse
+          .getByText("Recent activity items", { exact: true })
+          .locator("..")
+          .locator("strong"),
+      ).toHaveText("0");
+      for (const [label, unavailable] of [
+        ["Touches", "Touch count unavailable"],
+        ["Awaiting reply", "Reply status unavailable"],
+        ["Overdue", "Deadline status unavailable"],
+      ] as const) {
+        const metric = pulse.getByText(label, { exact: true }).locator("..");
+        await expect(metric.locator("strong")).toHaveText("—");
+        await expect(
+          metric.getByText(unavailable, { exact: true }),
+        ).toBeVisible();
+      }
     }
     await expect(page.getByRole("alert")).toHaveCount(0);
     await expect(page.locator("img")).not.toHaveCount(0);

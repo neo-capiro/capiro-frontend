@@ -34,7 +34,7 @@ export type ConversationTurnTarget = {
 /** Seed the existing canonical command journal before exact target session issuance. */
 function prepareTarget(
   cache: ReturnType<typeof useQueryClient>,
-  clientId: string,
+  clientId: string | null,
   retained: TurnIntent,
 ): ConversationTurnTarget {
   const binding = retained.receipt!.targetBinding;
@@ -111,7 +111,7 @@ async function requestTurn(
 function useRetainedTurn(
   cache: ReturnType<typeof useQueryClient>,
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId?: string,
 ) {
   const retention = useMemo(
@@ -170,7 +170,7 @@ function useTurnLifetime(
 /** Owns reservation/recovery only; canonical session issuance and SDK submit retain their owners. */
 export function useConversationTurn(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId: string | undefined,
   open: (target: ConversationTurnTarget) => void,
 ) {

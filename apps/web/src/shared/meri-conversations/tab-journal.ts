@@ -2,7 +2,7 @@
 export type TabScope = Readonly<{
   tenantId: string;
   actorId: string;
-  clientId: string;
+  clientId: string | null;
   conversationId: string;
 }>;
 export type TabStorage = Pick<

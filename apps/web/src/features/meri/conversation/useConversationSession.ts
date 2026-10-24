@@ -14,7 +14,7 @@ import { useConversationLocalState } from "./useConversationLocalState";
 /** Bind the captured input to the reserved target before opening its exact authorized session. */
 function useTurnOpening(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   reopen: ReturnType<typeof useConversationConnection>["reopen"],
   bindNext: ReturnType<typeof useConversationLocalState>["bindNext"],
 ) {
@@ -41,7 +41,7 @@ function useTurnOpening(
 /** Read exact selected history and revoke the same connection on membership denial. */
 function useSelectedHistory(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId: string | undefined,
   connection: ReturnType<typeof useConversationConnection>,
 ) {
@@ -69,7 +69,7 @@ function useSelectedHistory(
 /** Screen lifetime composition: saved reads, exact session selection and retained next-turn intent. */
 export function useConversationSession(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId?: string,
 ) {
   const connection = useConversationConnection(

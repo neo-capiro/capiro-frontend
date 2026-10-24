@@ -3,7 +3,9 @@ import type { DocumentInspection } from "../../../shared/meri-documents/workflow
 import type { ArtifactPreview } from "../../../shared/meri-documents/artifact-access";
 import styles from "./files.module.css";
 
-type Inspection = DocumentInspection | ArtifactPreview["inspection"];
+type Inspection =
+  | DocumentInspection
+  | Extract<ArtifactPreview, { kind: "generated" }>["inspection"];
 function inspectionRows(
   inspection: Inspection,
 ): readonly (readonly [string, string | number])[] {
