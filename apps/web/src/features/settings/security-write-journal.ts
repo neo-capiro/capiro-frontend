@@ -1,6 +1,15 @@
 import { type SettingsWrite } from "./security-writes";
 
 type StoragePort = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+export async function settingsRequestHash(input: unknown) {
+  const digest = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(JSON.stringify(input)),
+  );
+  return [...new Uint8Array(digest)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
 const retainedValues = [
   "tenantId",
   "clientId",
@@ -9,6 +18,7 @@ const retainedValues = [
   "externalId",
   "source",
   "role",
+  "status",
   "billingAdmin",
   "comped",
   "provider",
@@ -30,24 +40,25 @@ export async function persistSettingsWrite(
   write: SettingsWrite,
   dispatchedInput: unknown,
 ) {
-  const digest = await crypto.subtle.digest(
-    "SHA-256",
-    new TextEncoder().encode(JSON.stringify(dispatchedInput)),
-  );
-  const requestHash = [...new Uint8Array(digest)]
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-  const body = Object.fromEntries(
-    Object.entries(write.input.body ?? {}).filter(([name]) =>
-      retainedValues.includes(name),
-    ),
-  );
+  const requestHash = await settingsRequestHash(dispatchedInput);
+  write.requestHash = requestHash;
+  const body =
+    write.operation === "settings.support.create"
+      ? { id: write.input.body?.id }
+      : Object.fromEntries(
+          Object.entries(write.input.body ?? {}).filter(([name]) =>
+            retainedValues.includes(name),
+          ),
+        );
   storage.setItem(
     key,
     JSON.stringify({
       version: 1,
       attemptId: write.attemptId,
       requestHash,
+      resultHash: write.resultHash,
+      expectedAccount: write.expectedAccount,
+      inputFields: write.inputFields,
       operation: write.operation,
       startedAt: write.startedAt,
       state: "unknown",
@@ -71,17 +82,44 @@ export function restoreSettingsWrite(
       typeof data.requestHash !== "string" ||
       !/^[a-f0-9]{64}$/.test(data.requestHash) ||
       typeof data.operation !== "string" ||
-      !data.operation.startsWith("settings.") ||
+      (!data.operation.startsWith("settings.") &&
+        data.operation !== "me.update" &&
+        data.operation !== "me.emailSignature.update") ||
       typeof data.startedAt !== "string" ||
       !data.input ||
       typeof data.input !== "object"
     )
       throw new Error("invalid journal");
+    const account = data.expectedAccount as Record<string, unknown> | undefined;
+    if (
+      data.operation === "me.update" &&
+      (!account ||
+        typeof account.userId !== "string" ||
+        typeof account.tenantId !== "string")
+    )
+      throw new Error("invalid account journal");
     return {
       operation: data.operation,
       attemptId: data.attemptId,
       input: data.input as SettingsWrite["input"],
       startedAt: data.startedAt,
+      requestHash: data.requestHash,
+      ...(typeof data.resultHash === "string" &&
+      /^[a-f0-9]{64}$/.test(data.resultHash)
+        ? { resultHash: data.resultHash }
+        : {}),
+      ...(account
+        ? {
+            expectedAccount: {
+              userId: String(account.userId),
+              tenantId: String(account.tenantId),
+            },
+          }
+        : {}),
+      ...(Array.isArray(data.inputFields) &&
+      data.inputFields.every((key) => typeof key === "string")
+        ? { inputFields: data.inputFields as string[] }
+        : {}),
       state: "unknown",
     };
   } catch {
@@ -94,6 +132,24 @@ export function restoreSettingsWrite(
       state: "unknown",
     };
   }
+}
+
+/** Retain the hash of a sanitized signature receipt without retaining signature HTML. */
+export function retainSettingsResult(
+  storage: StoragePort,
+  key: string,
+  write: SettingsWrite,
+) {
+  const existing = storage.getItem(key);
+  if (
+    !existing ||
+    restoreSettingsWrite(storage, key)?.attemptId !== write.attemptId
+  )
+    return;
+  storage.setItem(
+    key,
+    JSON.stringify({ ...JSON.parse(existing), resultHash: write.resultHash }),
+  );
 }
 
 /** An old scope may finish after a new operation started; it must never erase the new recovery record. */

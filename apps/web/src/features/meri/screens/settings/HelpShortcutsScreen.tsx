@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { FormField } from "../../ui/FormField";
 import panel from "../../ui/panel.module.css";
@@ -32,7 +32,7 @@ export type HelpShortcutsView = {
     runReference: { label: string; placeholder: string };
     footnote: string;
   };
-  submitted: SettingsNotice;
+  unavailable: SettingsNotice;
 };
 
 const columns: readonly DataColumn<ShortcutRow>[] = [
@@ -45,10 +45,12 @@ export function HelpShortcutsScreen({
   chrome,
   view,
   outcome,
+  reportContent,
 }: {
   chrome: SettingsChrome;
   view: HelpShortcutsView;
   outcome?: SettingsOutcome | undefined;
+  reportContent?: ReactNode;
 }) {
   const { shortcuts, supported } = view;
   return (
@@ -72,14 +74,16 @@ export function HelpShortcutsScreen({
         </>
       }
       supporting={
-        <>
-          <ReportProblem
-            report={view.report}
-            unavailable={chrome.unavailable}
-            drafts={chrome.localDrafts}
-          />
-          <SettingsCallout notice={view.submitted} />
-        </>
+        reportContent ?? (
+          <>
+            <ReportProblem
+              report={view.report}
+              unavailable={chrome.unavailable}
+              drafts={chrome.localDrafts}
+            />
+            <SettingsCallout notice={view.unavailable} />
+          </>
+        )
       }
     />
   );
@@ -126,9 +130,9 @@ function ReportProblem({
         className={styles.field}
         label={report.runReference.label}
         value={includeRun ? runReference : ""}
-        onChange={includeRun ? setRunReference : undefined}
+        onChange={drafts && includeRun ? setRunReference : undefined}
         placeholder={report.runReference.placeholder}
-        disabled={!includeRun}
+        disabled={!drafts || !includeRun}
       />
       <p className={ui.muted}>{report.footnote}</p>
       <button type="button" className={ui.primary} disabled title={unavailable}>

@@ -13,6 +13,37 @@ const tenantQuery = z
   .object({ query: z.object({ tenantId: z.uuid() }).strict() })
   .strict();
 export const broadcastOperations = {
+  "me.broadcasts.pending": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/me/broadcasts/pending",
+    request: z.object({}).strict(),
+    response: z
+      .array(
+        z.object({
+          id: z.uuid(),
+          title: z.string().max(200),
+          body: z.string().max(5000),
+          createdAt: z.iso.datetime({ offset: true }),
+        }),
+      )
+      .max(100),
+    source:
+      "apps/api/src/admin-broadcasts/me-broadcasts.controller.ts + admin-broadcasts.service.ts@2262b5c2282e04dfd1a9bb7f54675769f45af71c",
+  }),
+  "me.broadcasts.acknowledge": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/me/broadcasts/:id/acknowledge",
+    request: z.object({ params: z.object({ id: z.uuid() }).strict() }).strict(),
+    response: z.object({
+      ok: z.literal(true),
+      broadcastId: z.uuid(),
+      acknowledgedAt: z.iso.datetime({ offset: true }),
+    }),
+    source:
+      "apps/api/src/admin-broadcasts/me-broadcasts.controller.ts + admin-broadcasts.service.ts@2262b5c2282e04dfd1a9bb7f54675769f45af71c",
+  }),
   "settings.hq.broadcasts.members": defineOperation({
     service: "core",
     method: "GET",

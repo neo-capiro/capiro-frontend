@@ -11,10 +11,13 @@ import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroApi } from "../../shared/capiro/http";
 import { capiroOperations } from "../../shared/capiro/registry";
 import { useSettingsAction } from "./useSettingsAction";
+import { assertTeamWriteAllowed } from "./team-permissions";
 import {
   clearSettingsWrite,
   persistSettingsWrite,
   restoreSettingsWrite,
+  settingsRequestHash,
+  retainSettingsResult,
 } from "./security-write-journal";
 import {
   assertSettingsReceipt,
@@ -74,6 +77,23 @@ export function useSettingsMutation(section: string) {
         let dispatched = false;
         let accepted = false;
         try {
+          if (
+            operation === "me.update" ||
+            operation === "me.emailSignature.update" ||
+            operation === "settings.branding.update" ||
+            operation === "settings.support.create" ||
+            operation === "settings.contact.update"
+          ) {
+            const identity = await raw.request("me.read", {}, options);
+            write.expectedAccount = {
+              userId: identity.user.id,
+              tenantId: identity.tenant.id,
+            };
+            if (operation === "settings.contact.update")
+              write.inputFields = Object.keys(write.input.body ?? {});
+          }
+          if (operation.startsWith("settings.team."))
+            await assertTeamWriteAllowed(raw, operation, write.input, options);
           if (operation === "settings.team.resend") {
             const invitations = await raw.request(
               "settings.team.invitations",
@@ -104,6 +124,10 @@ export function useSettingsMutation(section: string) {
           accepted = true;
           options?.signal?.throwIfAborted();
           assertSettingsReceipt(write, result);
+          if (operation === "me.emailSignature.update") {
+            write.resultHash = await settingsRequestHash(result);
+            retainSettingsResult(window.sessionStorage, storageKey, write);
+          }
           if (
             settingsWriteNeedsReadback(operation) &&
             !(await reconcileSettingsWrite(
@@ -153,12 +177,19 @@ export function useSettingsMutation(section: string) {
     () => undefined,
   );
   const reconcile = () =>
-    action.run(async (signal) => {
-      const write = cache.getQueryData<SettingsWrite>(journalKey);
-      if (!write || !(await reconcileSettingsWrite(raw, write, signal)))
-        throw new Error(uncertainSettingsWrite);
-      signal.throwIfAborted();
-      clear(write);
-    }, "The recorded target now has the requested state. Review it before making another change.");
+    action.run(
+      async (signal) => {
+        const write = cache.getQueryData<SettingsWrite>(journalKey);
+        if (!write || !(await reconcileSettingsWrite(raw, write, signal)))
+          throw new Error(uncertainSettingsWrite);
+        signal.throwIfAborted();
+        clear(write);
+        return write.operation;
+      },
+      (operation) =>
+        operation === "settings.support.create"
+          ? "Report saved for HQ review."
+          : "The recorded target now has the requested state. Review it before making another change.",
+    );
   return { api, action, pending, reconcile, locked: action.busy || !!pending };
 }

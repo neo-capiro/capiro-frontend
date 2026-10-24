@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { DataTable, SelectInput, StatusPanel } from "../../shared/module-ui";
@@ -17,6 +17,7 @@ import { InviteMember } from "./InviteMember";
 import styles from "./styles";
 import { useSettingsMutation } from "./useSettingsMutation";
 import { SettingsMutationNotice } from "./SettingsMutationNotice";
+import { teamPermissions } from "./team-permissions";
 
 const joinedDate = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -25,7 +26,13 @@ const joinedDate = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
-export function TeamSettings({ identity }: { identity: CapiroMe }) {
+export function TeamSettings({
+  identity,
+  refreshIdentity,
+}: {
+  identity: CapiroMe;
+  refreshIdentity: () => void;
+}) {
   const { api, action, pending, reconcile, locked } =
     useSettingsMutation("team");
   const members = useCapiroQuery("settings.team.list", {});
@@ -33,11 +40,18 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
   const [tab, setTab] = useState("members");
   const [invite, setInvite] = useState(false);
   const [remove, setRemove] = useState<{ userId: string; email: string }>();
+  useEffect(() => {
+    if (action.error) refreshIdentity();
+  }, [action.error, refreshIdentity]);
   const refresh = () => {
     members.reload();
     invitations.reload();
+    refreshIdentity();
   };
-  const rows = members.data ?? [];
+  const rows = (members.data ?? []).map((row) => ({
+    ...row,
+    permissions: teamPermissions(identity, row),
+  }));
   const pendingInvitations = invitations.data ?? [];
   return (
     <div
@@ -141,51 +155,64 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                               )}
                           </SettingsBadge>
                         ) : (
-                          <SelectInput
-                            aria-label={`Role for ${row.email}`}
-                            value={row.role}
-                            disabled={locked}
-                            options={[
-                              {
-                                value: "standard_user",
-                                label: "Standard user",
-                              },
-                              { value: "user_admin", label: "User admin" },
-                            ]}
-                            onValueChange={(role) =>
-                              void action.run(
-                                (signal) =>
-                                  api.request(
-                                    "settings.team.setRole",
-                                    {
-                                      params: { userId: row.userId },
-                                      body: {
-                                        role: role as
-                                          | "user_admin"
-                                          | "standard_user",
+                          <div>
+                            <SelectInput
+                              aria-label={`Role for ${row.email}${row.permissions.roleReason ? `. ${row.permissions.roleReason}` : ""}`}
+                              value={row.role}
+                              disabled={
+                                locked || !row.permissions.canChangeRole
+                              }
+                              options={[
+                                {
+                                  value: "standard_user",
+                                  label: "Standard user",
+                                },
+                                { value: "user_admin", label: "User admin" },
+                              ]}
+                              onValueChange={(role) =>
+                                void action.run(
+                                  (signal) =>
+                                    api.request(
+                                      "settings.team.setRole",
+                                      {
+                                        params: { userId: row.userId },
+                                        body: {
+                                          role: role as
+                                            | "user_admin"
+                                            | "standard_user",
+                                        },
                                       },
-                                    },
-                                    { signal },
-                                  ),
-                                "Member role was updated.",
-                                refresh,
-                              )
-                            }
-                          />
+                                      { signal },
+                                    ),
+                                  "Member role was updated.",
+                                  refresh,
+                                )
+                              }
+                            />
+                            {row.permissions.roleReason && (
+                              <span className={styles.description}>
+                                {row.permissions.roleReason}
+                              </span>
+                            )}
+                          </div>
                         ),
                     },
                     {
                       key: "billing",
                       label: "Billing",
                       render: (row) => (
-                        <div className={styles.row}>
+                        <div
+                          className={styles.row}
+                          title={row.permissions.billingReason}
+                        >
                           <SettingsSwitch
-                            label={`Billing admin for ${row.email}`}
+                            label={`Billing admin for ${row.email}${row.permissions.billingReason ? `. ${row.permissions.billingReason}` : ""}`}
                             checked={row.billingAdmin}
                             disabled={
                               locked ||
-                              row.role === "capiro_admin" ||
-                              row.userId === identity.user.id
+                              !(row.billingAdmin
+                                ? row.permissions.canRevokeBilling
+                                : row.permissions.canGrantBilling)
                             }
                             onChange={(billingAdmin) =>
                               void action.run(
@@ -204,6 +231,11 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                             }
                           />
                           {row.billingAdmin ? "On" : "Off"}
+                          {row.permissions.billingReason && (
+                            <span className={styles.description}>
+                              {row.permissions.billingReason}
+                            </span>
+                          )}
                         </div>
                       ),
                     },
@@ -238,7 +270,8 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                           <SettingsButton
                             danger
                             small
-                            disabled={locked}
+                            disabled={locked || !row.permissions.canRemove}
+                            title={row.permissions.removeReason}
                             onClick={() => setRemove(row)}
                           >
                             Remove
