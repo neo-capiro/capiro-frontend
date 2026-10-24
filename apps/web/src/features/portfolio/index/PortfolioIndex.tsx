@@ -207,6 +207,7 @@ export function PortfolioIndex({
           />
         )}
         <div className={styles.columns}>
+          {records && <PortfolioAttention clients={records} />}
           <section className="stack" aria-label="Portfolio profiles">
             <IndexNavigation
               records={records}
@@ -376,7 +377,6 @@ export function PortfolioIndex({
               </button>
             )}
           </section>
-          {records && <PortfolioAttention clients={records} />}
         </div>
         {records && <GlobalQuickLog clients={records} />}
         <CreateProfileDialog

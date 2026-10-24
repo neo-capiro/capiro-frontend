@@ -215,7 +215,7 @@ test("Branding validates logo bytes and confirms only a completed synthetic uplo
     operations.push("upload");
     await route.fulfill({
       status: 204,
-      headers: { "access-control-allow-origin": "http://127.0.0.1:5197" },
+      headers: { "access-control-allow-origin": new URL(page.url()).origin },
     });
   });
   await openSettings(page, "branding");
@@ -542,71 +542,96 @@ test("Integration sync dispatches once and refuses failed-record or wrong-accoun
   ]);
 });
 
-test("Integration disconnect retains refusal and requires a matching affirmative receipt", async ({
-  page,
-}) => {
-  let connections = [connection];
-  await settingsFixture(page, {
-    "settings.integrations.list": () => connections,
+for (const outcome of ["negative", "foreign", "confirmed"] as const)
+  test(`Integration disconnect retains refusal and requires a matching affirmative receipt: ${outcome}`, async ({
+    page,
+  }) => {
+    let connections = [connection];
+    await settingsFixture(page, {
+      "settings.integrations.list": () => connections,
+    });
+    let reply: "refusal" | "negative" | "foreign" | "confirmed" = "refusal";
+    const writes: unknown[] = [];
+    await page.route(
+      "**/api/capiro/settings.integrations.disconnectMicrosoft",
+      async (route) => {
+        writes.push(route.request().postDataJSON());
+        if (reply === "refusal")
+          return refuse(route, "Synthetic disconnect conflict");
+        if (reply === "confirmed") connections = [];
+        await route.fulfill({
+          json: {
+            disconnected: reply !== "negative",
+            connectionId: reply === "foreign" ? otherId : connection.id,
+            subscriptionsDeleted: 0,
+          },
+        });
+      },
+    );
+    await openSettings(page, "integrations");
+    await providerCard(page)
+      .getByRole("button", { name: "Disconnect", exact: true })
+      .click();
+    const dialog = page.getByRole("dialog", {
+      name: "Disconnect Microsoft 365?",
+      exact: true,
+    });
+    await dialog
+      .getByRole("button", { name: "Disconnect", exact: true })
+      .click();
+    await expect(dialog.getByRole("alert")).toContainText(
+      "Synthetic disconnect conflict",
+    );
+    reply = outcome;
+    await dialog
+      .getByRole("button", { name: "Disconnect", exact: true })
+      .click();
+    if (outcome !== "confirmed") {
+      await expect(dialog).toBeVisible();
+      await expect(dialog).toContainText(
+        "This change will not be submitted again.",
+      );
+      await expect(
+        dialog.getByRole("button", { name: "Disconnect", exact: true }),
+      ).toBeDisabled();
+      await expect(
+        page.getByText("Account was disconnected.", { exact: true }),
+      ).toHaveCount(0);
+      // A mismatched 200 is unknown. A still-connected readback cannot authorize replay.
+      await dialog
+        .getByRole("button", { name: "Check current result" })
+        .click();
+      await expect(
+        dialog.getByRole("button", { name: "Disconnect", exact: true }),
+      ).toBeDisabled();
+      await page.reload();
+      await expect(
+        providerCard(page).getByRole("button", {
+          name: "Disconnect",
+          exact: true,
+        }),
+      ).toBeDisabled();
+      await expect(
+        page.getByRole("heading", {
+          name: connection.displayName,
+          exact: true,
+        }),
+      ).toBeVisible();
+      expect(writes).toEqual([
+        { params: { connectionId: connection.id } },
+        { params: { connectionId: connection.id } },
+      ]);
+      return;
+    }
+    await expect(dialog).toHaveCount(0);
+    await expect(
+      page.getByText("Account was disconnected.", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: connection.displayName, exact: true }),
+    ).toHaveCount(0);
+    expect(writes).toEqual([
+      { params: { connectionId: connection.id } },
+      { params: { connectionId: connection.id } },
+    ]);
   });
-  let reply: "refusal" | "negative" | "foreign" | "confirmed" = "refusal";
-  const writes: unknown[] = [];
-  await page.route(
-    "**/api/capiro/settings.integrations.disconnectMicrosoft",
-    async (route) => {
-      writes.push(route.request().postDataJSON());
-      if (reply === "refusal")
-        return refuse(route, "Synthetic disconnect conflict");
-      if (reply === "confirmed") connections = [];
-      await route.fulfill({
-        json: {
-          disconnected: reply !== "negative",
-          connectionId: reply === "foreign" ? otherId : connection.id,
-          subscriptionsDeleted: 0,
-        },
-      });
-    },
-  );
-  await openSettings(page, "integrations");
-  await providerCard(page)
-    .getByRole("button", { name: "Disconnect", exact: true })
-    .click();
-  const dialog = page.getByRole("dialog", {
-    name: "Disconnect Microsoft 365?",
-    exact: true,
-  });
-  await dialog.getByRole("button", { name: "Disconnect", exact: true }).click();
-  await expect(dialog.getByRole("alert")).toContainText(
-    "Synthetic disconnect conflict",
-  );
-  reply = "negative";
-  await dialog.getByRole("button", { name: "Disconnect", exact: true }).click();
-  await expect(dialog.getByRole("alert")).toContainText("unexpected response");
-  await expect(
-    page.getByText("Account was disconnected.", { exact: true }),
-  ).toHaveCount(0);
-  reply = "foreign";
-  await dialog.getByRole("button", { name: "Disconnect", exact: true }).click();
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole("alert")).toContainText(
-    "did not confirm this account",
-  );
-  await expect(
-    page.getByText("Account was disconnected.", { exact: true }),
-  ).toHaveCount(0);
-  reply = "confirmed";
-  await dialog.getByRole("button", { name: "Disconnect", exact: true }).click();
-  await expect(dialog).toHaveCount(0);
-  await expect(
-    page.getByText("Account was disconnected.", { exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: connection.displayName, exact: true }),
-  ).toHaveCount(0);
-  expect(writes).toEqual([
-    { params: { connectionId: connection.id } },
-    { params: { connectionId: connection.id } },
-    { params: { connectionId: connection.id } },
-    { params: { connectionId: connection.id } },
-  ]);
-});

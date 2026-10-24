@@ -4,7 +4,7 @@ import { observeHomeIsolation, tabTo } from "../accessibility-interaction";
 import { expectAccessibleHome } from "../accessibility";
 
 const explanation =
-  "Every client and every activity, across the whole firm. Choose a client profile to show just that client’s work.";
+  "Every client and every activity available to your account. Choose a client profile to show just that client’s work.";
 
 async function openHub(page: Page, info: TestInfo) {
   const isolation = await observeHomeIsolation(page, info);

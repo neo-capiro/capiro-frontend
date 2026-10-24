@@ -2,10 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import {
   USER_PREFERENCE_DEFAULTS,
+  receiveUserPreferencesRequest,
   receiveUserPreferencesResponse,
   type UserPreferences,
   type UserPreferencesSaveRequest,
-  type UserPreferencesResponse,
 } from "@capiro/meri-client/user-preferences";
 import { UserPreferencesController } from "../src/shared/meri-user-preferences/controller";
 import { userPreferencesJournal } from "../src/shared/meri-user-preferences/journal";
@@ -13,33 +13,103 @@ import {
   userPreferencesTransport,
   PreferencesAccessLost,
 } from "../src/shared/meri-user-preferences/transport";
+import {
+  modelCatalog,
+  currentPreferencesFixture,
+} from "./meri-user-preferences-fixtures";
+import archived from "../test/browser/user-preferences-fixture.json" with { type: "json" };
 
 const owner = {
   tenantId: "20000000-0000-4000-8000-000000000001",
   actorId: "10000000-0000-4000-8000-000000000001",
 };
-// Explicitly synthetic configured catalog; no provider qualification is claimed.
-const modelCatalog: UserPreferencesResponse["modelCatalog"] = {
-  defaultSelection: {
-    provider: "bedrock",
-    modelId: "synthetic-model",
-    effort: null,
-  },
-  models: [
-    {
-      provider: "bedrock",
-      modelId: "synthetic-model",
-      label: "Synthetic model",
-      efforts: [null, "high"],
-      available: true,
-      unavailableReason: null,
-    },
-  ],
-};
 const document = (
   revision = 3,
   preferences: UserPreferences = structuredClone(USER_PREFERENCE_DEFAULTS),
 ) => ({ owner, revision, preferences, modelCatalog });
+
+describe("current synthetic preferences fixture receiving", () => {
+  it("keeps the historical read and save request refused by the current contract", async () => {
+    await expect(
+      receiveUserPreferencesResponse(
+        "read",
+        200,
+        JSON.stringify(archived.read),
+        {
+          owner: archived.read.owner,
+        },
+      ),
+    ).rejects.toMatchObject({ code: "USER_PREFERENCES_SHAPE" });
+    await expect(
+      receiveUserPreferencesRequest("save", JSON.stringify(archived.request)),
+    ).rejects.toMatchObject({ code: "USER_PREFERENCES_SHAPE" });
+    expect(archived.read.preferences).not.toHaveProperty("defaultModel");
+    expect(archived.read).not.toHaveProperty("modelCatalog");
+  });
+  it("admits the complete current read, captured save and readback without altering retained fields", async () => {
+    const current = currentPreferencesFixture;
+    const request = await receiveUserPreferencesRequest(
+      "save",
+      JSON.stringify(current.request),
+    );
+    expect(request).toEqual(current.request);
+    for (const key of ["read", "readback"] as const) {
+      expect(
+        await receiveUserPreferencesResponse(
+          "read",
+          200,
+          JSON.stringify(current[key]),
+          {
+            owner: current.read.owner,
+          },
+        ),
+      ).toEqual(current[key]);
+      const { defaultModel, ...preferences } = current[key].preferences;
+      expect(defaultModel).toBeNull();
+      expect(preferences).toEqual(archived[key].preferences);
+    }
+    expect(
+      await receiveUserPreferencesResponse(
+        "save",
+        200,
+        JSON.stringify(current.save),
+        {
+          owner: current.read.owner,
+          request,
+        },
+      ),
+    ).toEqual(current.save);
+  });
+  it("still rejects a foreign owner and a mismatched saved preference", async () => {
+    const current = currentPreferencesFixture;
+    const request = await receiveUserPreferencesRequest(
+      "save",
+      JSON.stringify(current.request),
+    );
+    await expect(
+      receiveUserPreferencesResponse(
+        "read",
+        200,
+        JSON.stringify({
+          ...current.read,
+          owner: { ...current.read.owner, actorId: "foreign" },
+        }),
+        { owner: current.read.owner },
+      ),
+    ).rejects.toMatchObject({ code: "USER_PREFERENCES_CORRELATION" });
+    await expect(
+      receiveUserPreferencesResponse(
+        "save",
+        200,
+        JSON.stringify({
+          ...current.save,
+          preferences: { ...current.save.preferences, theme: "light" },
+        }),
+        { owner: current.read.owner, request },
+      ),
+    ).rejects.toMatchObject({ code: "USER_PREFERENCES_CORRELATION" });
+  });
+});
 const changed = (): UserPreferences => ({
   ...structuredClone(USER_PREFERENCE_DEFAULTS),
   defaultModel: { ...modelCatalog.defaultSelection, effort: "high" },

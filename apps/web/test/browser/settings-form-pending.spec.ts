@@ -14,10 +14,16 @@ async function holdResponse(page: Page, operation: string) {
   return { requests, finish };
 }
 
-async function assertPendingDialog(page: Page, dialog: Locator) {
+async function assertPendingDialog(
+  page: Page,
+  dialog: Locator,
+  closeDisabled: boolean,
+) {
   await page.keyboard.press("Escape");
   await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: "Close dialog" }).click();
+  const close = dialog.getByRole("button", { name: "Close dialog" });
+  if (closeDisabled) await expect(close).toBeDisabled();
+  else await close.click();
   await expect(dialog).toBeVisible();
   await page.mouse.click(4, 4);
   await expect(dialog).toBeVisible();
@@ -45,7 +51,7 @@ for (const outcome of ["success", "refusal"] as const) {
     await dialog.getByRole("combobox").selectOption("user_admin");
     await dialog.getByRole("button", { name: "Send invitation" }).click();
     await expect.poll(() => pending.requests.length).toBe(1);
-    await assertPendingDialog(page, dialog);
+    await assertPendingDialog(page, dialog, true);
     for (const label of ["First name", "Last name", "Email"])
       await expect(dialog.getByLabel(label, { exact: true })).toBeDisabled();
     await expect(dialog.getByRole("combobox")).toBeDisabled();
@@ -123,7 +129,7 @@ for (const outcome of ["success", "refusal"] as const) {
       .getByRole("button", { name: "Register account", exact: true })
       .click();
     await expect.poll(() => pending.requests.length).toBe(1);
-    await assertPendingDialog(page, dialog);
+    await assertPendingDialog(page, dialog, false);
     for (const label of ["Account email", "Display name"])
       await expect(dialog.getByLabel(label)).toBeDisabled();
     await expect(dialog.getByLabel("Provider")).toHaveValue("Microsoft 365");
