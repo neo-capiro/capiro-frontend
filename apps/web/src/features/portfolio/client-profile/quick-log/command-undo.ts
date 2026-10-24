@@ -71,7 +71,7 @@ type UndoIdentity = Pick<
 >;
 export const undoPath = (identity: UndoIdentity) =>
   `clients/${encodeURIComponent(identity.clientId)}/activity-commands/${encodeURIComponent(identity.creationRequestId)}/undo`;
-export function undoStatusSchema(identity: UndoIdentity, actor: ClientWriter) {
+function undoIdentitySchema(identity: UndoIdentity, actor: ClientWriter) {
   if (
     identity.tenantId !== actor.tenantId ||
     identity.actorUserId !== actor.userId
@@ -80,7 +80,7 @@ export function undoStatusSchema(identity: UndoIdentity, actor: ClientWriter) {
       403,
       "Undo belongs to the session that created this activity.",
     );
-  const base = z.object({
+  return z.object({
     schemaVersion: z.literal(1),
     commandId: z.literal(identity.commandId),
     creationRequestId: z.literal(identity.creationRequestId),
@@ -89,6 +89,20 @@ export function undoStatusSchema(identity: UndoIdentity, actor: ClientWriter) {
     actorUserId: z.literal(actor.userId),
     activityId: z.literal(identity.id),
   });
+}
+export function undoRefusalSchema(identity: UndoIdentity, actor: ClientWriter) {
+  return undoIdentitySchema(identity, actor)
+    .extend({
+      code: z.literal("ACTIVITY_UNDO_REFUSED"),
+      requestId: z.uuid(),
+      payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
+      status: z.literal(409),
+      message: z.string().min(1).max(500),
+    })
+    .strict();
+}
+export function undoStatusSchema(identity: UndoIdentity, actor: ClientWriter) {
+  const base = undoIdentitySchema(identity, actor);
   return z.discriminatedUnion("status", [
     base
       .extend({

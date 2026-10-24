@@ -148,6 +148,7 @@ function retireRecovery(
         state: "refused";
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
+          | "ACTIVITY_UNDO_REFUSED"
           | "DIRECTORY_NOTE_REFUSED"
           | "PROSPECT_NEW_CLIENT_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
@@ -280,10 +281,13 @@ export function retireNewClientConversionRefusalRecovery(
 export function retireRefusedRecovery(
   scope: string,
   requestId: string,
-  code: "WORKSPACE_BRIEF_STATE_CONFLICT",
+  code: "WORKSPACE_BRIEF_STATE_CONFLICT" | "ACTIVITY_UNDO_REFUSED",
   assert: () => void,
 ) {
-  if (code !== "WORKSPACE_BRIEF_STATE_CONFLICT")
+  if (
+    code !== "WORKSPACE_BRIEF_STATE_CONFLICT" &&
+    code !== "ACTIVITY_UNDO_REFUSED"
+  )
     return Promise.reject(new RecoveryStorageError());
   return retireRecovery(scope, requestId, { state: "refused", code }, assert);
 }

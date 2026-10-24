@@ -3,6 +3,7 @@ import {
   acknowledgeRecovery,
   readRecovery,
   reserveRecovery,
+  retireRefusedRecovery,
   withRecoveryCommandLock,
 } from "@/shared/session/recovery/journal";
 import type { ClientWriter } from "./authority";
@@ -13,6 +14,7 @@ import {
   undoRecoveryContract,
   undoRecoveryScope,
   undoPath,
+  undoRefusalSchema,
   type UndoAttempt,
 } from "./command-undo";
 
@@ -91,6 +93,25 @@ export async function runQuickLogUndo(
   return withRecoveryCommandLock(scope, guard, async () => {
     let attempt = await readRecovery(scope, undoRecoveryContract, guard);
     let result: Awaited<ReturnType<typeof readUndoStatus>> | undefined;
+    if (
+      attempt &&
+      operation === "send" &&
+      snapshot &&
+      Object.entries(attempt.snapshot).some(
+        ([key, value]) => snapshot[key as keyof typeof snapshot] !== value,
+      )
+    ) {
+      result = await checkedResult(
+        attempt,
+        await readUndoStatus(api, attempt.snapshot, actor, signal, guard),
+      );
+      return {
+        attempt,
+        result,
+        error:
+          "A different activity has a saved Undo. The saved activity is shown for review. No Undo was sent; retry only if you intend to undo that activity.",
+      };
+    }
     if (!attempt && operation === "send" && snapshot) {
       if (snapshot.clientId !== clientId)
         throw new ApiError(409, "Undo client changed.");
@@ -126,8 +147,42 @@ export async function runQuickLogUndo(
       result ??
         (await readUndoStatus(api, attempt.snapshot, actor, signal, guard)),
     );
-    if (operation === "send" && result.status !== "removed")
-      result = await undoQuickLog(api, attempt, actor, guard, signal);
+    if (operation === "send" && result.status !== "removed") {
+      try {
+        result = await undoQuickLog(api, attempt, actor, guard, signal);
+      } catch (error) {
+        const refusal = undoRefusalSchema(attempt.snapshot, actor).safeParse(
+          error instanceof ApiError && error.status === 409
+            ? error.details
+            : null,
+        );
+        if (
+          !refusal.success ||
+          refusal.data.requestId !== attempt.input.requestId ||
+          refusal.data.payloadDigest !== (await undoDigest(attempt))
+        )
+          throw error;
+        // Reconcile a racing completion before retiring this bound no-effect
+        // refusal. Failed/denied reads and generic conflicts retain the attempt.
+        result = await checkedResult(
+          attempt,
+          await readUndoStatus(api, attempt.snapshot, actor, signal, guard),
+        );
+        if (result.status !== "removed") {
+          await retireRefusedRecovery(
+            scope,
+            attempt.input.requestId,
+            "ACTIVITY_UNDO_REFUSED",
+            guard,
+          );
+          return {
+            attempt: null,
+            error:
+              "Undo was refused because the activity changed or is unavailable. This attempt removed no activity. Review the timeline before another Undo.",
+          };
+        }
+      }
+    }
     if (operation === "acknowledge") {
       if (result.status !== "removed")
         throw new ApiError(

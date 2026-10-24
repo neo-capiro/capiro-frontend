@@ -9,6 +9,20 @@ const refusalSchema = z.discriminatedUnion("code", [
   z
     .object({
       ...binding,
+      code: z.literal("ACTIVITY_UNDO_REFUSED"),
+      commandId: z.uuid(),
+      creationRequestId: z.uuid(),
+      tenantId: z.uuid(),
+      clientId: z.uuid(),
+      actorUserId: z.uuid(),
+      activityId: z.uuid(),
+      status: z.literal(409),
+      message: z.string().min(1).max(500),
+    })
+    .strict(),
+  z
+    .object({
+      ...binding,
       code: z.literal("DIRECTORY_NOTE_REFUSED"),
       memberId: z.string().regex(/^member-[1-9][0-9]*$/),
       status: z.union([z.literal(400), z.literal(404), z.literal(409)]),
@@ -57,7 +71,18 @@ export function portfolioCommandRefusal(
   if (!submitted.success || submitted.data.requestId !== parsed.data.requestId)
     return;
   const refusal = parsed.data;
-  if (refusal.code === "DIRECTORY_NOTE_REFUSED") {
+  if (refusal.code === "ACTIVITY_UNDO_REFUSED") {
+    if (
+      path.length !== 5 ||
+      path[0] !== "clients" ||
+      path[1] !== refusal.clientId ||
+      path[2] !== "activity-commands" ||
+      path[3] !== refusal.creationRequestId ||
+      path[4] !== "undo" ||
+      submitted.data.activityId !== refusal.activityId
+    )
+      return;
+  } else if (refusal.code === "DIRECTORY_NOTE_REFUSED") {
     if (
       path.length !== 4 ||
       path[0] !== "directory" ||

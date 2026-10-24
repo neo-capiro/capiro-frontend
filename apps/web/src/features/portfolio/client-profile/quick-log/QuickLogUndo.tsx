@@ -35,6 +35,9 @@ export function QuickLogUndo({
               : "Recorded activity on the timeline"}
         </small>
         {recovery.error && <p role="alert">{recovery.error}</p>}
+        {pending && recovery.result?.status === "available" && (
+          <p>Saved Undo activity: {recovery.result.activity.title}</p>
+        )}
         {pending && !removed && (
           <p>
             Read the saved Undo to check its result. Retrying sends only the

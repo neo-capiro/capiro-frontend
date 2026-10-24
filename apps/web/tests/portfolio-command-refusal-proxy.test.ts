@@ -61,6 +61,29 @@ const conversion = {
     message: "Capacity changed",
   },
 };
+const undo = {
+  path: ["clients", other, "activity-commands", id, "undo"],
+  body: {
+    schemaVersion: 1,
+    requestId: id,
+    activityId: other,
+    expectedRevision: "2026-10-24T12:00:00.123456Z",
+  },
+  failure: {
+    schemaVersion: 1,
+    requestId: id,
+    code: "ACTIVITY_UNDO_REFUSED",
+    commandId: id,
+    creationRequestId: id,
+    tenantId: other,
+    clientId: other,
+    actorUserId: id,
+    activityId: other,
+    payloadDigest: "c".repeat(64),
+    status: 409,
+    message: "This Undo removed no activity.",
+  },
+};
 type Scenario = {
   path: string[];
   body: unknown;
@@ -103,7 +126,7 @@ async function relay(
       }),
   );
 }
-it.each([note, conversion])(
+it.each([note, conversion, undo])(
   "relays only the exact bounded refusal and no upstream headers",
   async (value) => {
     const response = await relay(value);
@@ -123,7 +146,7 @@ it.each([
   { message: "x".repeat(2001) },
   { diagnostics: { private: "synthetic internal detail" } },
 ])("sanitizes malformed, foreign or expanded envelopes %j", async (patch) => {
-  for (const value of [note, conversion]) {
+  for (const value of [note, conversion, undo]) {
     const response = await relay(value, {
       failure: { ...value.failure, ...patch },
     });
@@ -150,7 +173,7 @@ it.each([
 ])(
   "keeps unrelated request/method/status boundaries sanitized %j",
   async (options) => {
-    for (const value of [note, conversion])
+    for (const value of [note, conversion, undo])
       expect(await (await relay(value, options)).json()).toEqual({
         message: expect.any(String),
       });
@@ -172,6 +195,19 @@ it("requires the exact Directory target/kind and conversion target/new-client mo
     { body: JSON.stringify({ ...conversion.body, mode: "existing_client" }) },
   ])
     expect(await (await relay(conversion, options)).json()).toEqual({
+      message: expect.any(String),
+    });
+});
+it("binds Undo refusal transport to the original client, creation request and activity", async () => {
+  for (const options of [
+    { path: ["clients", id, "activity-commands", id, "undo"] },
+    { path: ["clients", other, "activity-commands", other, "undo"] },
+    { path: [...undo.path, id] },
+    { path: ["clients", other, "activity-commands", id] },
+    { body: JSON.stringify({ ...undo.body, activityId: id }) },
+    { status: 403, failure: { ...undo.failure, status: 403 } },
+  ])
+    expect(await (await relay(undo, options)).json()).toEqual({
       message: expect.any(String),
     });
 });
