@@ -1,3 +1,4 @@
+import { mailListFixture } from "../mail-read-fixture";
 import { effectivePage } from "../effective-date-fixtures";
 import { commentPage } from "../comment-calendar-fixtures";
 import { fundingPage } from "../funding-calendar-fixtures";
@@ -307,7 +308,7 @@ export async function installFixtures(page: Page) {
         computedAt: null,
         matches: [],
       },
-      "core/engagement/mail-threads": [],
+      "core/engagement/mail-threads": mailListFixture([]),
       "core/engagement/capabilities": {
         meetingPrepComprehensiveEnabled: false,
         runtime: { externalActionsEnabled: false },

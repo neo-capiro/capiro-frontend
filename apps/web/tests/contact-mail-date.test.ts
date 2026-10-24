@@ -5,14 +5,16 @@ import { ContactMail } from "../src/features/portfolio/relationships/ContactMail
 import type { MailThread } from "../src/features/portfolio/relationships/email";
 
 const state = vi.hoisted(() => ({
-  data: undefined as MailThread[] | undefined,
+  data: undefined as
+    | { items: MailThread[]; mailboxes: []; coverageTruncated: false }
+    | undefined,
   isSuccess: false,
   isPending: false,
   isFetching: false,
   error: null as Error | null,
 }));
 vi.mock("../src/features/portfolio/relationships/email", () => ({
-  useContactThreads: () => ({ ...state, refetch: vi.fn() }),
+  useContactThreads: () => ({ ...state, refetch: vi.fn(), restart: vi.fn() }),
   useMailThread: () => ({
     isSuccess: false,
     isPending: false,
@@ -58,7 +60,7 @@ const dates = (html: string) =>
 
 beforeEach(() => {
   Object.assign(state, {
-    data: [thread],
+    data: { items: [thread], mailboxes: [], coverageTruncated: false },
     isSuccess: true,
     isPending: false,
     isFetching: false,
@@ -78,7 +80,7 @@ describe("Contact message history date", () => {
       { ...message, id: "older", receivedAt: "2026-10-09T12:00:00Z" },
     ];
     const before = JSON.stringify(messages);
-    state.data = [
+    state.data!.items = [
       { ...thread, messages },
       { ...thread, id: "other", subject: "Second saved thread" },
     ];
@@ -98,7 +100,7 @@ describe("Contact message history date", () => {
   });
 
   it("keeps sent, received, then stored creation timestamp precedence", () => {
-    state.data = [
+    state.data!.items = [
       {
         ...thread,
         messages: [{ ...message, sentAt: "2026-10-07T12:00:00Z" }],
@@ -118,7 +120,7 @@ describe("Contact message history date", () => {
   });
 
   it("does not invent a date for an empty or malformed message projection", () => {
-    state.data = [
+    state.data!.items = [
       { ...thread, messages: [] },
       {
         ...thread,
@@ -133,7 +135,7 @@ describe("Contact message history date", () => {
   });
 
   it("ignores unusable instants when an available message has a valid date", () => {
-    state.data = [
+    state.data!.items = [
       {
         ...thread,
         messages: [
@@ -146,9 +148,11 @@ describe("Contact message history date", () => {
   });
 
   it("preserves explicit empty and no-email states without message dates", () => {
-    state.data = [];
-    expect(render()).toContain("No accessible messages for this contact.");
-    state.data = [thread];
+    state.data!.items = [];
+    expect(render()).toContain(
+      "No accessible messages match this contact and the selected filters.",
+    );
+    state.data!.items = [thread];
     const noEmail = render(null);
     expect(noEmail).toContain(
       "Add an email address to view mail for this contact.",
