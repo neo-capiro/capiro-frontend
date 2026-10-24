@@ -1,5 +1,8 @@
 import "./command-recovery-platform";
 import { describe, expect, it, vi } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { AssociationReview } from "../src/features/portfolio/objectives/operational/AssociationReview";
 import wire from "./objective-operational-contract-fixtures.json";
 import { barrier, installPlatform } from "./command-recovery-platform";
 import { CapiroApiError, createCapiroApi } from "../src/shared/capiro/http";
@@ -55,6 +58,87 @@ function responding(receipt: OperationalAssociationReceipt) {
 }
 
 describe("Objective association authoring and durable recovery", () => {
+  it("retains selected unlink kind/title for confirmation without putting labels into command identity", async () => {
+    const read = operationalReadSchema.parse(
+      wire.examples.find(
+        (row) =>
+          row.type === "ReadResponse" &&
+          row.value.associationSetVersion !== null,
+      )!.value,
+    );
+    const objective = {
+      clientId: read.scope.clientId,
+      id: read.scope.objectiveId,
+      version: read.scope.objectiveVersion,
+      status: read.scope.objectiveStatus,
+    };
+    const provenance = {
+      kind: "manual" as const,
+      associationId: other,
+      linkedRevision: { id: other, version: 1 },
+      linkedAt: "2026-10-15T12:00:00Z",
+      via: { kind: "planner_task" as const, id: other },
+    };
+    const choice = {
+      action: "unlink" as const,
+      provenance,
+      title: "Synthetic selected task",
+    };
+    const captured = await captureAssociation(read, objective, choice, other);
+    choice.title = "Edited local label";
+    expect(captured.unlinkSummary).toEqual({
+      kind: "planner_task",
+      title: "Synthetic selected task",
+    });
+    const render = (value: typeof captured) =>
+      renderToStaticMarkup(
+        createElement(AssociationReview, {
+          value,
+          pending: false,
+          busy: false,
+          submit: vi.fn(),
+          discard: vi.fn(),
+          recover: vi.fn(),
+          acknowledge: vi.fn(),
+        }),
+      );
+    expect(render(captured)).toContain("Planner task");
+    expect(render(captured)).toContain("Synthetic selected task");
+    const renamed = await captureAssociation(
+      read,
+      objective,
+      { ...choice, title: "A different selected task" },
+      other,
+    );
+    expect(render(renamed)).toContain("A different selected task");
+    expect(renamed.command).toEqual(captured.command);
+    expect(renamed.payloadDigest).toBe(captured.payloadDigest);
+    const recovery = createAssociationRecovery(
+      { tenantId: other, userId: other },
+      objective,
+      () => undefined,
+    );
+    await recovery.reserve(captured);
+    expect((await recovery.load())?.unlinkSummary).toEqual(
+      captured.unlinkSummary,
+    );
+    const legacy = { ...captured };
+    delete legacy.unlinkSummary;
+    expect(
+      await requireRetainedAssociation(
+        legacy,
+        objective.clientId,
+        objective.id,
+      ),
+    ).toEqual(legacy);
+    expect(render(legacy)).toContain("Title unavailable");
+    expect(
+      render({
+        ...captured,
+        unlinkSummary: { ...captured.unlinkSummary!, title: null },
+      }),
+    ).toContain("Title unavailable");
+  });
   it("serializes two submits and reloads into the same immutable command without replay", async () => {
     const { recovery, pending, receipt } = fixture(),
       api = responding(receipt);

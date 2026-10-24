@@ -271,6 +271,11 @@ test("unlink is a distinct explicit action and confirms the original linked revi
   await expect(
     dialog.getByRole("heading", { name: "Unlink from this Objective" }),
   ).toBeVisible();
+  const review = dialog.getByRole("region", { name: "Review unlink" });
+  await expect(
+    review.getByText(inventory.items[0]!.resource.title!, { exact: true }),
+  ).toBeVisible();
+  await expect(review).toContainText("Strategy ·");
   expect(command).toBeUndefined();
   await dialog.getByRole("button", { name: "Confirm unlink" }).click();
   await expect(dialog.getByRole("status")).toContainText(

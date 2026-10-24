@@ -1,4 +1,7 @@
-import type { RetainedAssociation } from "./association-command";
+import {
+  associationLabels,
+  type RetainedAssociation,
+} from "./association-command";
 import styles from "./association.module.css";
 
 type ReviewProps = {
@@ -99,6 +102,17 @@ export function AssociationReview({
         {linking ? "Link to this Objective" : "Unlink from this Objective"}
       </h3>
       {value.source && <strong>{value.source.title || "Untitled work"}</strong>}
+      {!linking && (
+        <p>
+          {value.unlinkSummary
+            ? associationLabels[value.unlinkSummary.kind]
+            : "Selected linked work"}
+          {" · "}
+          <strong>
+            {value.unlinkSummary?.title?.trim() || "Title unavailable"}
+          </strong>
+        </p>
+      )}
       <p>
         {linking
           ? "This adds a durable link to the current Objective."

@@ -40,6 +40,13 @@ export const associationSourceSchema = z
   })
   .strict();
 export type AssociationSource = z.infer<typeof associationSourceSchema>;
+// Presentation only; the unlink command and linked revision retain authority.
+const unlinkSummarySchema = z
+  .object({
+    kind: z.enum(associationKinds),
+    title: z.string().nullable(),
+  })
+  .strict();
 const revision = z
   .object({ id: z.uuid(), version: z.number().int().positive() })
   .strict();
@@ -49,6 +56,7 @@ export const retainedAssociationSchema = z
     payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
     source: associationSourceSchema.optional(),
     linkedRevision: revision.optional(),
+    unlinkSummary: unlinkSummarySchema.optional(),
     receipt: operationalAssociationReceiptSchema.optional(),
     refusal: operationalFailureSchema.optional(),
   })
@@ -81,6 +89,7 @@ export async function captureAssociation(
     | {
         action: "unlink";
         provenance: Extract<OperationalProvenance, { kind: "manual" }>;
+        title?: string | null;
       },
   requestId = crypto.randomUUID(),
 ): Promise<RetainedAssociation> {
@@ -119,6 +128,10 @@ export async function captureAssociation(
     command,
     payloadDigest: await operationalAssociationPayloadDigest(command),
     linkedRevision: revision.parse(choice.provenance.linkedRevision),
+    unlinkSummary: unlinkSummarySchema.parse({
+      kind: choice.provenance.via.kind,
+      title: choice.title ?? null,
+    }),
   };
 }
 

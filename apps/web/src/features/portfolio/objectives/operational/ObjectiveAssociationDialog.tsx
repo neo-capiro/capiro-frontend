@@ -71,6 +71,7 @@ function AssociationEditor({
         onUnlink={(item) =>
           author.reviewAction({
             action: "unlink",
+            title: item.resource.title,
             provenance: {
               kind: "manual",
               associationId: item.associationId,

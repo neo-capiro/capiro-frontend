@@ -68,6 +68,7 @@ type Choice =
   | {
       action: "unlink";
       provenance: Extract<OperationalProvenance, { kind: "manual" }>;
+      title?: string | null;
     };
 type SetState = Dispatch<SetStateAction<AssociationState>>;
 type Action = (
