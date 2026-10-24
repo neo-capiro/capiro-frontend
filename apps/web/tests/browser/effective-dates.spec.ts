@@ -85,7 +85,7 @@ test("client Agenda and master Month never fetch the public effective-date feed"
     `/portfolio/${clientId}/calendar?view=agenda&date=2026-10-08`,
   );
   await expect(
-    page.getByRole("heading", { name: "Calendar", exact: true }),
+    page.getByRole("heading", { name: "Test Aerospace meetings", exact: true }),
   ).toBeVisible();
   await page.goto("/calendar?view=month&date=2026-10-08");
   await expect(

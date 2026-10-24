@@ -29,6 +29,13 @@ test("client header supports keyboard navigation and scoped quick-add deep links
   await meeting.getByRole("button", { name: "Close", exact: true }).click();
   await expect(meeting).not.toBeVisible();
   await expect(page).not.toHaveURL(/new=/);
+  // Calendar owns a dedicated meeting header. Return through its real client
+  // breadcrumb before exercising the profile header's next quick-add action.
+  await page
+    .getByRole("navigation", { name: "Breadcrumb", exact: true })
+    .getByRole("link", { name: "Test Aerospace", exact: true })
+    .click();
+  await expect(page).toHaveURL(new RegExp(`${clientId}$`));
   await page.getByRole("button", { name: "Quick add", exact: true }).click();
   await page
     .getByRole("menuitem", { name: "Account notes", exact: true })

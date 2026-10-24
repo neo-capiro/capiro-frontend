@@ -50,6 +50,15 @@ for (const change of ["actor", "standard-role", "invalidate", "client"])
   }) => {
     const unexpected = await installRegistrationBoundary(page);
     let reads = 0;
+    let completedReads = 0;
+    page.on("response", (response) => {
+      if (
+        response.request().method() === "GET" &&
+        response.url().endsWith(`/core/clients/${clientId}`) &&
+        response.status() === 200
+      )
+        completedReads += 1;
+    });
     await page.route(`**/core/clients/${clientId}`, (route) => {
       if (route.request().method() !== "GET") return route.fallback();
       reads += 1;
@@ -81,7 +90,11 @@ for (const change of ["actor", "standard-role", "invalidate", "client"])
       page.getByLabel("Synthetic pending capability writes"),
     ).toHaveText("0");
     const expectedReads = ["actor", "standard-role"].includes(change) ? 3 : 2;
-    await expect.poll(() => reads).toBe(expectedReads);
+    // Actor replacement may abort a mounting saved-history read and start its
+    // replacement. Count completed reads, then freeze all dispatched requests
+    // so that a late write cannot cause any additional refresh.
+    await expect.poll(() => completedReads).toBe(expectedReads);
+    const dispatchedBeforeReceipt = reads;
     held.release();
     await held.settled;
     await expect(
@@ -94,7 +107,8 @@ for (const change of ["actor", "standard-role", "invalidate", "client"])
       await expect(dialog.getByLabel("UEI", { exact: true })).toHaveValue(
         "EEEEFFFF9012",
       );
-    expect(reads).toBe(expectedReads);
+    expect(completedReads).toBe(expectedReads);
+    expect(reads).toBe(dispatchedBeforeReceipt);
     expect(held.calls()).toBe(1);
     expect(unexpected).toEqual([]);
   });

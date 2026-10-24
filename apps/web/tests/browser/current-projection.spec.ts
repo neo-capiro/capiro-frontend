@@ -24,6 +24,22 @@ for (const status of [403, 503]) {
     page,
   }, testInfo) => {
     const unexpected = await installFixtures(page);
+    // This case isolates the client catalog; the shared fixture also supplies
+    // an independent BD prospect, which is included in Portfolio's total.
+    await page.route("**/core/business-development/prospects?*", (route) =>
+      route.request().method() === "GET"
+        ? json(route, {
+            prospects: [],
+            counts: {
+              visible: 0,
+              total: 0,
+              active: 0,
+              dismissed: 0,
+              byStage: {},
+            },
+          })
+        : route.fallback(),
+    );
     let failing = false;
     let recovered = false;
     let gate = Promise.resolve();
