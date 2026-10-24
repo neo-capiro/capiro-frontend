@@ -80,8 +80,10 @@ export function ClientMeriHandoffDialog({
           "This client could not be verified. Refresh the profile and try again.",
         );
     } finally {
-      if (!controller.signal.aborted) setBusy(false);
-      if (pending.current === controller) pending.current = null;
+      if (pending.current === controller) {
+        pending.current = null;
+        setBusy(false);
+      }
     }
   };
   return (

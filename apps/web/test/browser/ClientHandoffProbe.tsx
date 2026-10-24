@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { usePathname, useSearchParams } from "./navigation";
 import { DataProvider } from "../../src/shared/portfolio/api/provider";
 import { SelectedClientProvider } from "../../src/shared/session/SelectedClient";
@@ -6,6 +7,16 @@ import { MeriCapabilitiesProvider } from "../../src/shared/meri-resources/Capabi
 import { resolveMeriCapabilities } from "../../src/shared/meri-resources/capabilities";
 import { useMeriTabSession } from "../../src/shared/meri-conversations/MeriTabSession";
 import { ClientMeriHandoffDialog } from "../../src/features/portfolio/client-profile/ClientMeriHandoffDialog";
+function RefreshIdentity() {
+  const cache = useQueryClient();
+  return (
+    <button
+      onClick={() => void cache.invalidateQueries({ queryKey: ["identity"] })}
+    >
+      Revalidate current session
+    </button>
+  );
+}
 export function ClientHandoffProbe() {
   const params = useSearchParams(),
     path = usePathname();
@@ -17,6 +28,7 @@ export function ClientHandoffProbe() {
   if (path === "/meri") return <p>Meri received the client selector</p>;
   return (
     <DataProvider key={clientId}>
+      <RefreshIdentity />
       <SelectedClientProvider requestedId={clientId}>
         <MeriCapabilitiesProvider
           value={resolveMeriCapabilities(

@@ -343,3 +343,59 @@ test("client profile fresh archived refusal keeps reviewed text and does not nav
   );
   await expect(page).toHaveURL(/\/profile\?/);
 });
+
+test("client profile revalidation releases an aborted verification while retaining the draft", async ({
+  page,
+}) => {
+  let reads = 0;
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/api/backend/core/me", async (route) => {
+    reads++;
+    if (reads === 2) await held;
+    await route
+      .fulfill({
+        json: {
+          user: { id: "actor", email: null },
+          tenant: { id: "synthetic", name: "Synthetic" },
+        },
+      })
+      .catch(() => {});
+  });
+  await page.route("**/api/backend/core/clients/*", (route) =>
+    route.fulfill({
+      json: {
+        id: id(5),
+        name: "Synthetic client",
+        status: "active",
+        profileStatus: "ready",
+      },
+    }),
+  );
+  await page.goto(`/profile?clientId=${id(5)}`);
+  await expect(page.getByLabel("Your initial message")).toBeEnabled();
+  await page
+    .getByLabel("Your initial message")
+    .fill("Retained reviewed question");
+  await page.getByRole("button", { name: "Open draft in Meri" }).click();
+  await expect.poll(() => reads).toBe(2);
+  await page
+    .getByRole("button", {
+      name: "Revalidate current session",
+      includeHidden: true,
+    })
+    .evaluate((button: HTMLButtonElement) => button.click());
+  await expect.poll(() => reads).toBe(3);
+  await expect(
+    page.getByRole("button", { name: "Open draft in Meri" }),
+  ).toBeEnabled();
+  await expect(page.getByLabel("Your initial message")).toHaveValue(
+    "Retained reviewed question",
+  );
+  await expect(page).toHaveURL(/\/profile\?/);
+  release();
+  await page.getByRole("button", { name: "Open draft in Meri" }).click();
+  await expect(page).toHaveURL(`http://127.0.0.1:5293/meri?clientId=${id(5)}`);
+});
