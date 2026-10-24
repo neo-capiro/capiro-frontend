@@ -1,3 +1,5 @@
+import { mailListFixture, mailThreadFixture } from "../mail-read-fixture";
+import { installMailReadIdentity } from "./mail-read-fixtures";
 import { expect, test, type Page } from "@playwright/test";
 import {
   client,
@@ -22,13 +24,16 @@ async function installContactMail(
   associatedClient: string | null = clientId,
 ) {
   const unexpected = await installFixtures(page);
+  await installMailReadIdentity(page);
   const thread = contactThread(associatedClient);
-  const history = await controlledRead(page, "**/engagement/mail-threads?**", [
-    thread,
-  ]);
+  const history = await controlledRead(
+    page,
+    "**/engagement/mail-threads?**",
+    mailListFixture([thread]),
+  );
   const detail = await controlledRead(
     page,
-    `**/engagement/mail-threads/${threadId}`,
+    `**/engagement/mail-threads/${threadId}*`,
     thread,
   );
   return { unexpected, thread, history, detail };
@@ -137,16 +142,19 @@ for (const source of ["history", "detail"] as const)
         exact: true,
       }),
     ).toHaveCount(0);
-    const current = {
-      ...control.thread,
-      messages: [
-        {
-          ...control.thread.messages[0],
-          bodyText: "Current synthetic thread after review",
-        },
-      ],
-    };
-    read.hold(source === "history" ? [current] : current);
+    const current = mailThreadFixture(
+      {
+        ...control.thread,
+        messages: [
+          {
+            ...control.thread.messages[0]!,
+            bodyText: "Current synthetic thread after review",
+          },
+        ],
+      },
+      { associationClientId: clientId },
+    );
+    read.hold(source === "history" ? mailListFixture([current]) : current);
     await page.getByRole("button", { name: "Retry", exact: true }).click();
     await expect.poll(() => read.waiting).toBe(1);
     await expect(compose).toHaveCount(0);

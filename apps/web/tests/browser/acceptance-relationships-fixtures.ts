@@ -1,3 +1,4 @@
+import { mailThreadFixture } from "../mail-read-fixture";
 import { expect, type Page } from "@playwright/test";
 import { clientId, json, person, sendingMailbox } from "./fixtures";
 import { committee } from "./government-fixtures";
@@ -76,30 +77,33 @@ export const readError = (status: number) =>
     : `Synthetic current read ${status}`;
 
 export function contactThread(client: string | null = clientId) {
-  return {
-    id: threadId,
-    clientId: client,
-    subject: "Synthetic acceptance briefing",
-    snippet: "Synthetic retained thread",
-    connectionId: sendingMailbox.id,
-    connectionEmail: sendingMailbox.accountEmail,
-    participants: [{ email: person.email, name: person.name }],
-    messages: [
-      {
-        id: "b0000000-0000-4000-8000-000000000001",
-        threadId,
-        subject: "Synthetic acceptance briefing",
-        fromEmail: person.email,
-        fromName: person.name,
-        toRecipients: [{ email: sendingMailbox.accountEmail }],
-        ccRecipients: [],
-        bodyText: "Exact requested synthetic thread content",
-        sentAt: null,
-        receivedAt: "2026-10-13T10:00:00Z",
-        createdAt: "2026-10-13T10:00:00Z",
-      },
-    ],
-  };
+  return mailThreadFixture(
+    {
+      id: threadId,
+      clientId: client,
+      subject: "Synthetic acceptance briefing",
+      snippet: "Synthetic retained thread",
+      connectionId: sendingMailbox.id,
+      connectionEmail: sendingMailbox.accountEmail,
+      participants: [{ email: person.email, name: person.name }],
+      messages: [
+        {
+          id: "b0000000-0000-4000-8000-000000000001",
+          threadId,
+          subject: "Synthetic acceptance briefing",
+          fromEmail: person.email,
+          fromName: person.name,
+          toRecipients: [{ email: sendingMailbox.accountEmail }],
+          ccRecipients: [],
+          bodyText: "Exact requested synthetic thread content",
+          sentAt: null,
+          receivedAt: "2026-10-13T10:00:00Z",
+          createdAt: "2026-10-13T10:00:00Z",
+        },
+      ],
+    },
+    { associationClientId: clientId },
+  );
 }
 
 export const recommendation = {

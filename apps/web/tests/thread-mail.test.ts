@@ -1,3 +1,4 @@
+import { mailActorId } from "./mail-read-fixture";
 import { describe, expect, it } from "vitest";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import {
@@ -16,12 +17,12 @@ import {
 } from "./thread-mail-fixture";
 const scope = {
   tenantId: threadTenantId,
-  userId: "actor",
+  userId: mailActorId,
   clientId: threadClientId,
   threadId,
 };
 describe("synced timeline thread", () => {
-  it("reads exact stored thread source and preserves all messages", async () => {
+  it("reads the exact bounded stored thread source and preserves returned messages", async () => {
     const calls: string[] = [];
     const api = createApiClient(async (input) => {
       calls.push(String(input));
@@ -29,7 +30,7 @@ describe("synced timeline thread", () => {
     });
     expect((await readTimelineThread(api, scope)).messages).toHaveLength(2);
     expect(calls).toEqual([
-      `/api/backend/core/engagement/mail-threads/${threadId}`,
+      `/api/backend/core/engagement/mail-threads/${threadId}?clientId=${threadClientId}&limit=10`,
     ]);
   });
   it.each(["id", "clientId", "tenantId"] as const)(

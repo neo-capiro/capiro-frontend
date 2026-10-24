@@ -1,6 +1,6 @@
 "use client";
 import { useId, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -8,7 +8,12 @@ import { canManageContacts } from "../contact-api";
 import { MailCompose, type MailInitialDraft } from "../MailCompose";
 import { readTimelineThread, threadKey, type ThreadScope } from "./contracts";
 import { replyRecipients } from "./recipients";
-import { ThreadContent } from "./ThreadContent";
+import { ThreadContent, MailCoverageNotice } from "./ThreadContent";
+import {
+  mergeMailPages,
+  nextMailPage,
+  type MailContinuation,
+} from "../email/read";
 import styles from "./thread.module.css";
 
 const replyGap =
@@ -63,21 +68,30 @@ function ThreadSession({
   canReply: boolean;
 }) {
   const api = useApi();
+  const cache = useQueryClient();
   const id = useId();
   const [expanded, setExpanded] = useState(false);
   const [draft, setDraft] = useState<MailInitialDraft | null>(null);
   const [error, setError] = useState("");
-  const query = useQuery({
+  const [bodyError, setBodyError] = useState<Error | null>(null);
+  const query = useInfiniteQuery({
     queryKey: threadKey(scope),
     enabled: expanded,
-    queryFn: ({ signal }) => readTimelineThread(api, scope, signal),
+    initialPageParam: {} as MailContinuation,
+    queryFn: ({ signal, pageParam }) =>
+      readTimelineThread(api, scope, signal, pageParam),
+    getNextPageParam: nextMailPage,
+    select: (data) => mergeMailPages(data.pages),
   });
   const thread =
-    query.isSuccess && !query.error && !query.isFetching
+    query.isSuccess &&
+    !query.error &&
+    !bodyError &&
+    (!query.isFetching || query.isFetchingNextPage)
       ? query.data
       : undefined;
   function review(all: boolean) {
-    if (!thread || !canReply) return;
+    if (!thread || !canReply || thread.hasMore || query.isFetching) return;
     try {
       const recipients = replyRecipients(thread, actorEmail, all);
       setError("");
@@ -108,28 +122,51 @@ function ThreadSession({
       ) : (
         <div id={id} className={styles.expanded}>
           <QueryState
-            pending={query.isPending || query.isFetching}
-            error={query.error}
-            retry={() => void query.refetch()}
+            pending={
+              query.isPending || (query.isFetching && !query.isFetchingNextPage)
+            }
+            error={query.error ?? bodyError}
+            retry={() => {
+              setBodyError(null);
+              void cache.resetQueries({
+                queryKey: threadKey(scope),
+                exact: true,
+              });
+            }}
           />
           {thread && (
             <>
-              <ThreadContent thread={thread} />
+              <ThreadContent
+                thread={thread}
+                scope={scope}
+                onReadError={setBodyError}
+              />
+              <MailCoverageNotice coverage={thread.coverage} />
               <div className={styles.actions}>
                 <small>
-                  Synced email · {thread.messages.length} stored message
-                  {thread.messages.length === 1 ? "" : "s"}
+                  Synced email · {thread.messages.length} of{" "}
+                  {thread.totalMessages} stored messages loaded
                 </small>
                 <button
                   className="button"
-                  disabled={!canReply || !thread.messages.length}
+                  disabled={
+                    !canReply ||
+                    !thread.messages.length ||
+                    thread.hasMore ||
+                    query.isFetching
+                  }
                   onClick={() => review(false)}
                 >
                   Reply
                 </button>
                 <button
                   className="button"
-                  disabled={!canReply || !thread.messages.length}
+                  disabled={
+                    !canReply ||
+                    !thread.messages.length ||
+                    thread.hasMore ||
+                    query.isFetching
+                  }
                   onClick={() => review(true)}
                 >
                   Reply all
@@ -143,9 +180,46 @@ function ThreadSession({
                   Show less
                 </button>
               </div>
+              {query.hasNextPage && (
+                <button
+                  className="button"
+                  disabled={query.isFetching}
+                  onClick={() => void query.fetchNextPage()}
+                >
+                  {query.isFetchingNextPage
+                    ? "Loading messages…"
+                    : "Load more messages"}
+                </button>
+              )}
+              {thread.hasMore && !query.hasNextPage && (
+                <p className="muted">
+                  The stored thread read limit was reached. Review remaining
+                  messages in your mailbox.
+                </p>
+              )}
+              {thread.hasMore && (
+                <small>
+                  Load the remaining stored messages before reviewing reply
+                  recipients.
+                </small>
+              )}
+              <button
+                className="button ghost"
+                disabled={query.isFetching}
+                onClick={() => {
+                  setDraft(null);
+                  setBodyError(null);
+                  void cache.resetQueries({
+                    queryKey: threadKey(scope),
+                    exact: true,
+                  });
+                }}
+              >
+                Refresh thread
+              </button>
               <small className="muted">
-                Stored active message text, newest first. This is not a live
-                mailbox view.
+                Loaded active messages, newest first. Earlier pages load first.
+                Refresh if the stored thread changes.
               </small>
               {!canReply && (
                 <small>Reply requires a permitted mailbox role.</small>
