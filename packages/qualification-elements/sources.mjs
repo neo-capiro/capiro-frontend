@@ -10,7 +10,8 @@ export const HERE = dirname(fileURLToPath(import.meta.url));
 export const BASELINE_SHA256 = 'd7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1';
 export const AI_ELEMENTS_COMMIT = 'bc871264341cf54a7ea1fee36d951688ed2a1ff7';
 export const SHADCN_COMMIT = '2d3f1cd436b18ea12f24130de4df781355925b08';
-const PROJECT_UI_SOURCES = ['src/markdown.tsx', 'src/output-block.tsx', 'src/streaming-text.tsx'];
+const PROJECT_UI_SOURCES = ['src/cascader.ts', 'src/markdown.tsx', 'src/motion.tsx', 'src/output-block.tsx', 'src/reui/cascader/spinner.tsx', 'src/sonner.tsx', 'src/streaming-text.tsx'];
+const REUI_SOURCES = ['cascader-async', 'cascader-columns', 'cascader-context', 'cascader-footer', 'cascader-i18n', 'cascader-item', 'cascader-lib', 'cascader-nav', 'cascader-types', 'cascader-virtual', 'cascader'].map(name => `src/reui/cascader/${name}.tsx`);
 const ADDITION_LIMIT = 64;
 export const hash = raw => createHash('sha256').update(raw).digest('hex');
 export const slash = path => path.split(sep).join('/');
@@ -78,9 +79,32 @@ export function verifyPromotedSources(root = HERE) {
     assert.equal(Buffer.byteLength(text), old.localBytes);
   }
   const additions = verifyAdditions(root, provenance, promoted);
+  const reui = verifyReuiSources(root);
   const actual = ownedFiles(root).filter(x => x.startsWith('packages/ui/src/')).map(x => x.slice('packages/ui/'.length));
-  assert.deepEqual(actual, [...promoted, ...additions, ...PROJECT_UI_SOURCES].sort(), 'exact seventeen adopted, recorded additions and explicitly inventoried project UI sources');
+  assert.deepEqual(actual, [...promoted, ...additions, ...reui, ...PROJECT_UI_SOURCES].sort(), 'exact seventeen adopted, recorded additions and explicitly inventoried project UI sources including reviewed ReUI');
   return provenance;
+}
+
+// Consume the existing reviewed adoption record; do not relabel local repairs as upstream.
+function verifyReuiSources(root) {
+  const notice = join(uiRoot(root), 'notices/reui-067aa0dc');
+  const provenance = JSON.parse(readBounded(join(notice, 'provenance.json')));
+  assert.equal(provenance.repository, 'https://github.com/keenthemes/reui');
+  assert.equal(provenance.commit, '067aa0dc7f8bbfec1cd76fc5ad31f842be5f569a');
+  assert.equal(provenance.registry, 'public/r/styles/radix-nova/cascader.json');
+  assert.equal(provenance.registrySha256, 'ec4a19a36324da63f3c0a709498f4de7c60f493637f2b19d5f8317add75db07c');
+  assert.equal(provenance.license, 'MIT');
+  assert.deepEqual(provenance.files.map(row => row.path).sort(), [...REUI_SOURCES].sort(), 'exact eleven reviewed ReUI sources');
+  const raw = readBounded(join(notice, 'cascader.registry.json'));
+  assert.equal(hash(raw), provenance.registrySha256, 'retained ReUI registry bytes');
+  const registry = JSON.parse(raw);
+  assert.deepEqual(registry.files.map(row => `src/reui/cascader/${row.path}`).sort(), [...REUI_SOURCES].sort());
+  for (const row of provenance.files) {
+    const upstream = registry.files.find(item => `src/reui/cascader/${item.path}` === row.path);
+    assert.equal(hash(Buffer.from(upstream.content)), row.upstreamSha256, 'retained ReUI upstream source');
+    assert.equal(hash(readBounded(join(uiRoot(root), row.path))), row.adaptedSha256, 'reviewed ReUI adapted source');
+  }
+  return REUI_SOURCES;
 }
 
 // Additions have no vendor copy: the inverse rewrite must hash to the recorded pinned upstream blob.
