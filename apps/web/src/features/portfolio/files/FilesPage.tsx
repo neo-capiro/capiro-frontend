@@ -4,7 +4,7 @@ import type { Destinations } from "@/shared/portfolio/config/config";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useClient } from "@/features/portfolio/index/public";
 import { useFiles } from "./queries";
-import { filterFiles } from "./contracts";
+import { filterFiles, type Attachment } from "./contracts";
 import { DeleteFile } from "./DeleteFile";
 import { FileToolbar } from "./FileToolbar";
 import { FileSelectionBar } from "./FileSelectionBar";
@@ -13,6 +13,8 @@ import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
 import { MoveFile } from "./MoveFile";
+import { MoveFiles } from "./MoveFiles";
+import { useBatchMoveAttempt } from "./useBatchMove";
 import { UploadDialog } from "./UploadDialog";
 import { FileStorageUsage } from "./FileStorageUsage";
 import { DocumentState } from "./DocumentState";
@@ -61,6 +63,8 @@ export function FilesPage({
   const setFolder = (value: string | undefined) =>
     changeFilters({ folder: value, mode: "files" });
   const [checked, setChecked] = useState<{ view: string; ids: string[] }>();
+  const batchAttempt = useBatchMoveAttempt(clientId);
+  const [batch, setBatch] = useState<{ view: string; files: Attachment[] }>();
   const selected = checked?.view === query.readerScope ? checked.ids : [];
   const [requestedAction, setAction] = useState<{
     view: string;
@@ -139,6 +143,24 @@ export function FilesPage({
         onSource={(source) => changeFilters({ source })}
         onSort={(sort) => changeFilters({ sort })}
       />
+      {batchAttempt && (
+        <button
+          className="button"
+          onClick={() => {
+            arrival.dismiss();
+            setBatch({
+              view: query.readerScope,
+              files: files.filter((file) =>
+                batchAttempt.command.files.some(
+                  (entry) => entry.id === file.id,
+                ),
+              ),
+            });
+          }}
+        >
+          Review pending move
+        </button>
+      )}
       <div className={styles.viewMode} role="group" aria-label="File view">
         <button
           className="button"
@@ -271,7 +293,13 @@ export function FilesPage({
                       setChecked({ view: query.readerScope, ids: [] })
                     }
                     onMove={() => {
-                      if (chosen[0]) requestAction("move", chosen[0].id);
+                      if (chosen.length > 1 && chosen.length <= 100) {
+                        arrival.dismiss();
+                        setBatch({
+                          view: query.readerScope,
+                          files: structuredClone(chosen),
+                        });
+                      } else if (chosen[0]) requestAction("move", chosen[0].id);
                     }}
                   />
                   <FileTable
@@ -319,6 +347,20 @@ export function FilesPage({
           folders={folders}
           creating={action.kind === "new-folder"}
           onClose={close}
+        />
+      )}
+      {batch?.view === query.readerScope && available && (
+        <MoveFiles
+          key={query.readerScope}
+          clientId={clientId}
+          files={batch.files}
+          currentFiles={files}
+          folders={folders}
+          onClose={() => setBatch(undefined)}
+          onSaved={() => {
+            setBatch(undefined);
+            setChecked({ view: query.readerScope, ids: [] });
+          }}
         />
       )}
       {requestedAction?.kind === "delete" &&

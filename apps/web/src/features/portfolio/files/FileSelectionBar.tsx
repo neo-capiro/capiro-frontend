@@ -32,18 +32,15 @@ export function FileSelectionBar({
           </button>
           <button
             className="button"
-            disabled={selectedCount !== 1}
+            disabled={selectedCount === 0 || selectedCount > 100}
             onClick={onMove}
           >
             Move to folder
           </button>
         </div>
       </div>
-      {selectedCount > 1 && (
-        <p role="status">
-          Batch moves require the atomic move contract. Move individual files
-          until that contract is integrated.
-        </p>
+      {selectedCount > 100 && (
+        <p role="status">Select at most 100 files to move together.</p>
       )}
     </>
   );

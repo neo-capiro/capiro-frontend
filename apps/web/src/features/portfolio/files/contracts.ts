@@ -47,6 +47,7 @@ export const attachmentSchema = z.object({
   byteSize: z.number().nullable(),
   source: z.string(),
   folder: z.string().nullable(),
+  metadataRevision: z.number().int().min(0).max(2_147_483_647).optional(),
   viewerMode: z.enum(["all", "restricted"]),
   viewerUserIds: z.array(z.string()),
   uploadedByUserId: z.string().nullable(),
