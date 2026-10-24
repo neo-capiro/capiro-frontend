@@ -1,6 +1,6 @@
 "use client";
-import { useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import {
   batchMoveKey,
@@ -8,37 +8,39 @@ import {
   type BatchMoveAttempt,
   type BatchMoveCommand,
 } from "./batch-move";
-import { filesKey, useFileReader } from "./file-reader";
+import { assertFileReader, filesKey, useFileReader } from "./file-reader";
 import { useFileScope, type FileExecution } from "./file-scope";
+import { batchMoveRecovery } from "./batch-move-recovery";
 
-export function useBatchMoveAttempt(clientId: string) {
+function useBatchMoveJournal(clientId: string) {
   const cache = useQueryClient(),
     reader = useFileReader();
-  const tenantId = reader?.tenantId,
-    userId = reader?.userId;
-  const key = useMemo(
-    () =>
-      batchMoveKey(
-        clientId,
-        tenantId && userId ? { tenantId, userId } : undefined,
-      ),
-    [clientId, tenantId, userId],
-  );
-  const encoded = JSON.stringify(key);
-  return useSyncExternalStore(
-    (notify) =>
-      cache.getQueryCache().subscribe((event) => {
-        if (JSON.stringify(event.query.queryKey) === encoded) notify();
-      }),
-    () => cache.getQueryData<BatchMoveAttempt | null>(key) ?? null,
-    () => null,
-  );
+  return useQuery<BatchMoveAttempt | null>({
+    queryKey: batchMoveKey(clientId, reader),
+    enabled: Boolean(reader),
+    staleTime: Infinity,
+    gcTime: Infinity,
+    retry: false,
+    queryFn: async () => {
+      if (!reader)
+        throw new Error(
+          "Verify your current session before recovering file moves.",
+        );
+      return batchMoveRecovery(clientId, reader, () =>
+        assertFileReader(cache, reader),
+      ).load();
+    },
+  });
+}
+export function useBatchMoveAttempt(clientId: string) {
+  return useBatchMoveJournal(clientId).data ?? null;
 }
 export function useBatchMove(clientId: string, onSaved: () => void) {
   const api = useApi(),
     cache = useQueryClient();
   const scope = useFileScope(clientId, "batch-move");
-  const attempt = useBatchMoveAttempt(clientId);
+  const journal = useBatchMoveJournal(clientId);
+  const attempt = journal.data ?? null;
   const operation = useRef<FileExecution | null>(null);
   const [state, setState] = useState<{
     scope: string;
@@ -72,15 +74,25 @@ export function useBatchMove(clientId: string, onSaved: () => void) {
               : new Error("The move could not be confirmed."),
         });
     } finally {
-      if (operation.current === execution) operation.current = null;
+      if (operation.current === execution) {
+        operation.current = null;
+        setState((current) =>
+          current?.scope === scope.key
+            ? { ...current, pending: false }
+            : current,
+        );
+      }
     }
   }
-  const pending = Boolean(visible?.pending) || attempt?.status === "pending";
+  const pending =
+    journal.isPending ||
+    Boolean(visible?.pending) ||
+    attempt?.status === "pending";
   return {
     attempt,
     pending,
-    error: visible?.error,
-    canStart: scope.canWrite && !pending && !attempt,
+    error: visible?.error ?? journal.error ?? undefined,
+    canStart: scope.canWrite && !pending && !journal.error && !attempt,
     canCheck: scope.canRead && !pending && attempt?.status === "unknown",
     canRetry: scope.canWrite && !pending && attempt?.status === "unknown",
     start: (command: BatchMoveCommand) => void run({ command }),

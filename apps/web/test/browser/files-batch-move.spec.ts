@@ -86,7 +86,7 @@ test("moves the full reviewed selection including hidden rows with one atomic PO
     page.getByText("1 files · 0 selected", { exact: true }),
   ).toBeVisible();
 });
-test("lost batch response survives dialog closure and file-view remount; explicit check never reposts", async ({
+test("lost batch response survives dialog closure, remount and hard reload; explicit check never reposts", async ({
   page,
 }) => {
   const commands: BatchMoveCommand[] = [];
@@ -110,6 +110,7 @@ test("lost batch response survives dialog closure and file-view remount; explici
   await expect(dialog).toHaveCount(0);
   await page.getByRole("button", { name: "Toggle file view" }).click();
   await page.getByRole("button", { name: "Toggle file view" }).click();
+  await page.reload();
   expect(commands).toHaveLength(1);
   expect(reads).toBe(0);
   await page.getByRole("button", { name: "Review pending move" }).click();

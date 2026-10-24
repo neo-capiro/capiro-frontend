@@ -1,3 +1,7 @@
+import "./command-recovery-platform";
+import { installPlatform, db } from "./command-recovery-platform";
+import { decryptJournal } from "../src/shared/session/recovery/journal-crypto";
+import { batchMoveRecovery } from "../src/features/portfolio/files/batch-move-recovery";
 import { createHash } from "node:crypto";
 import { QueryClient } from "@tanstack/react-query";
 import { describe, expect, it, vi } from "vitest";
@@ -20,6 +24,7 @@ import {
 } from "../src/features/portfolio/files/contracts";
 import { clientId, file as fixture } from "./browser/fixtures";
 
+installPlatform();
 const file = attachmentSchema.parse(fixture);
 const files = [
   { ...file, metadataRevision: 3 },
@@ -89,6 +94,9 @@ function setup(
   const key = batchMoveKey(clientId, actor);
   return {
     command,
+    actor,
+    execution,
+    api,
     cache,
     fetcher,
     controller,
@@ -261,9 +269,78 @@ describe("Core atomic file move caller", () => {
       ).toBeUndefined();
     },
   );
-  it("an explicit fresh refusal releases only the refused attempt", async () => {
+  it("an untyped refusal retains the exact command because it cannot retire earlier uncertainty", async () => {
     const s = setup(() => json({ message: "A selected file changed" }, 409));
     await expect(s.save()).rejects.toMatchObject({ status: 409 });
-    expect(s.cache.getQueryData(s.key)).toBeNull();
+    expect(s.cache.getQueryData(s.key)).toMatchObject({
+      status: "unknown",
+      command: s.command,
+    });
   });
+});
+
+it("hard reload restores the exact encrypted command before any new move and needs no current file revision for receipt lookup", async () => {
+  const first = setup(() => {
+    throw new Error("lost");
+  });
+  await expect(first.save()).rejects.toThrow();
+  const second = setup();
+  second.cache.setQueryData(currentFilesKey(second.cache, clientId), []);
+  const recovery = batchMoveRecovery(
+    clientId,
+    second.actor,
+    second.execution.guard,
+  );
+  expect(await recovery.load()).toMatchObject({
+    command: first.command,
+    status: "unknown",
+  });
+  await expect(second.save()).rejects.toMatchObject({ status: 409 });
+  expect(second.fetcher).not.toHaveBeenCalled();
+  const api = createApiClient(async () => json(receipt(first.command)));
+  await moveFileBatch(api, second.cache, clientId, second.execution, {
+    recover: "receipt",
+  });
+  expect(await recovery.load()).toBeNull();
+  expect(JSON.stringify([...db.records.values()])).not.toContain("Reviewed");
+});
+it("retains a received late validated receipt only under its original actor across reload", async () => {
+  let release!: (v: Response) => void;
+  const first = setup(
+    () =>
+      new Promise((resolve) => {
+        release = resolve;
+      }),
+  );
+  const pending = first.save();
+  await vi.waitFor(() => expect(release).toBeTypeOf("function"));
+  first.cache.setQueryData(["identity"], {
+    user: { id: "other" },
+    tenant: { id: "synthetic-tenant" },
+    role: "standard_user",
+  });
+  release(json(receipt(first.command)));
+  await expect(pending).rejects.toThrow();
+  const second = setup();
+  const saved = await batchMoveRecovery(
+    clientId,
+    second.actor,
+    second.execution.guard,
+  ).load();
+  expect(saved?.receipt).toEqual(receipt(first.command));
+  const [scope, encrypted] = [...db.records][0]!;
+  expect(await decryptJournal(scope, encrypted)).toMatchObject({
+    state: "pending",
+    data: { command: first.command, receipt: receipt(first.command) },
+  });
+});
+it("storage failure stops dispatch and keeps recovery blocked", async () => {
+  const s = setup();
+  db.failWrite = true;
+  await expect(s.save()).rejects.toThrow(/recovery is unavailable/);
+  expect(s.fetcher).not.toHaveBeenCalled();
+  db.failWrite = false;
+  await expect(
+    batchMoveRecovery(clientId, s.actor, s.execution.guard).load(),
+  ).rejects.toThrow(/recovery is unavailable/);
 });
