@@ -6,13 +6,16 @@ import {
 } from "./objective-generation-browser-fixtures";
 import { planHref } from "../../src/shared/capiro/operations/strategy-materialization";
 
-test("one desktop action saves Strategy then plan and opens current authorized project through Planner", async ({
+test("explicit plan action after saved Strategy and opens current authorized project through Planner", async ({
   page,
 }, info) => {
   const f = await fixture(page);
   await page.goto(origin);
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   await generate(page);
+  await page
+    .getByRole("button", { name: "Continue plan preparation", exact: true })
+    .click();
   const open = page.getByRole("link", {
     name: "Review generated Planner plan",
   });
@@ -51,6 +54,9 @@ test("lost plan reply recovers after reload by GET without another POST", async 
   await page.goto(origin);
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   await generate(page);
+  await page
+    .getByRole("button", { name: "Continue plan preparation", exact: true })
+    .click();
   await expect(
     page
       .getByRole("alert")
@@ -70,6 +76,9 @@ test("uncertain absent plan receipt waits for explicit same-request resume", asy
   await page.goto(origin);
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   await generate(page);
+  await page
+    .getByRole("button", { name: "Continue plan preparation", exact: true })
+    .click();
   await expect(
     page.getByRole("button", {
       name: "Recover same plan request",
@@ -97,6 +106,9 @@ test("partial outputs show saved-but-unavailable state and expose no output navi
   await page.goto(origin);
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   await generate(page);
+  await page
+    .getByRole("button", { name: "Continue plan preparation", exact: true })
+    .click();
   await expect(
     page.getByText(
       "Plan was saved, but some outputs are currently unavailable.",
@@ -115,6 +127,9 @@ test("a zero-actionable source creates a context plan without fabricated tasks o
   await page.goto(origin);
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   await generate(page);
+  await page
+    .getByRole("button", { name: "Continue plan preparation", exact: true })
+    .click();
   await expect(
     page.getByText(
       "The saved plan has no actionable work. Its context was retained.",
@@ -143,33 +158,28 @@ test("a forged Objective version refuses receipt content before project navigati
   ).toHaveCount(0);
   expect(f.planWrites).toHaveLength(0);
 });
-test("stopping observation before generation finishes prevents automatic plan POST until resume", async ({
+test("finished generation and reload do not prepare a plan without an explicit action", async ({
   page,
 }) => {
-  const f = await fixture(page, { holdGeneration: true });
+  const f = await fixture(page);
   await page.goto(origin);
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   await generate(page);
-  await page
-    .getByRole("button", { name: "Stop watching", exact: true })
-    .click();
-  f.options.holdGeneration = false;
-  await page
-    .getByRole("button", { name: "Refresh generation status", exact: true })
-    .click();
   await expect(
     page.getByRole("button", {
       name: "Continue plan preparation",
       exact: true,
     }),
-  ).toBeVisible();
+  ).toBeEnabled();
   expect(f.planWrites).toHaveLength(0);
-  await page
-    .getByRole("button", {
-      name: "Resume watching and plan preparation",
-      exact: true,
-    })
-    .click();
+  await page.reload();
+  const action = page.getByRole("button", {
+    name: "Continue plan preparation",
+    exact: true,
+  });
+  await expect(action).toBeEnabled();
+  expect(f.planWrites).toHaveLength(0);
+  await action.click();
   await expect(
     page.getByRole("link", { name: "Review generated Planner plan" }),
   ).toBeVisible();

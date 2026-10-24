@@ -2,14 +2,14 @@ import "./command-recovery-platform";
 import { expect, it, vi } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { objective as fixtureObjective } from "./browser/fixtures";
-import { db, installPlatform } from "./command-recovery-platform";
+import { db, installPlatform, barrier } from "./command-recovery-platform";
 import { decryptJournal } from "../src/shared/session/recovery/journal-crypto";
 import { createCapiroApi } from "../src/shared/capiro/http";
 import { capiroOperations } from "../src/shared/capiro/registry";
 import type { ApiClient } from "../src/shared/portfolio/api/http";
 import { createStrategyIntakeRecovery } from "../src/features/portfolio/objectives/objective-strategy-intake-recovery";
 import { ObjectiveStrategyIntakeSession } from "../src/features/portfolio/objectives/objective-strategy-intake-session";
-import { governedStrategyIntakeEnabled } from "../src/features/portfolio/objectives/ObjectiveStrategyIntake";
+import wire from "./objective-generation-wire-fixtures.json";
 import { previewBackendRejection } from "../src/shared/preview/backend-policy.server";
 import { requireInitialStrategyIntakeSource } from "../src/features/portfolio/objectives/objective-strategy-intake-source";
 import type { GovernedObjectiveStrategyIntakeRequest } from "../src/shared/capiro/operations/objective-governed-strategy-intake";
@@ -73,10 +73,17 @@ function setup() {
     objectiveVersion: 7,
     source: structuredClone(source) as GovernedObjectiveGenerationObservation,
     replaceEcho: false,
+    lostStart: false,
+    wrongRevision: false,
+    wrongResult: false,
+    complete: false,
+    pause: undefined as Promise<void> | undefined,
   };
   const writes: GovernedObjectiveStrategyIntakeRequest[] = [];
   const core: ApiClient = {
     async request(_service, path, schema, options) {
+      options?.signal?.throwIfAborted();
+      if (path === "me") await control.pause;
       options?.signal?.throwIfAborted();
       const value: unknown =
         path === "me"
@@ -100,6 +107,25 @@ function setup() {
     const key = new URL(String(url), "https://example.invalid").pathname;
     if (key.endsWith("/objectives.governedGeneration.read"))
       return Response.json(control.source);
+    if (key.endsWith("/strategies.objectiveDraftJob")) {
+      const job = structuredClone(
+        control.complete ? wire.completedPoll.body : wire.pendingPoll.body,
+      );
+      job.jobId = id(20);
+      if (control.wrongResult && job.objectiveGeneration.result) {
+        job.strategyId = id(80);
+        job.objectiveGeneration.result.strategyId = id(80);
+      }
+      job.objectiveGeneration.requestId =
+        writes[0]!.body.selection.generationRequestId;
+      job.objectiveGeneration.source = {
+        clientId: client.id,
+        objectiveId: objective.id,
+        objectiveVersion: 7,
+        objectiveRevisionId: control.wrongRevision ? id(99) : id(3),
+      };
+      return Response.json(job);
+    }
     if (!key.endsWith("/objectives.governedStrategy.intake"))
       throw new Error(`Unexpected Capiro operation: ${key}`);
     const request = JSON.parse(
@@ -115,6 +141,7 @@ function setup() {
       );
     const receipt = {
       schemaVersion: 2,
+      generationJobId: id(20),
       commandReceipt: {
         schemaVersion: 1,
         receiptId: id(5),
@@ -160,6 +187,18 @@ function setup() {
     return Response.json(receipt);
   });
   const strategy = createCapiroApi(capiroOperations, { fetcher });
+  const starts = vi.fn(async (generationJobId: string, signal: AbortSignal) => {
+    signal.throwIfAborted();
+    const [scope, encrypted] = [...db.records][0]!;
+    expect(JSON.stringify(await decryptJournal(scope, encrypted))).toContain(
+      '"generationJobId":"' + id(20) + '"',
+    );
+    if (control.lostStart) {
+      control.lostStart = false;
+      throw Error("Start outcome is unconfirmed");
+    }
+    return { state: "requested" as const, generationJobId };
+  });
   const session = () =>
     new ObjectiveStrategyIntakeSession(
       strategy,
@@ -172,8 +211,9 @@ function setup() {
         current.objective,
         () => current,
       ),
+      starts,
     );
-  return { cache, current, control, writes, fetcher, session };
+  return { cache, current, control, writes, fetcher, starts, session };
 }
 
 it("accepts a current ready source even when an ordinary GET says outcome unconfirmed", () => {
@@ -196,8 +236,7 @@ it("accepts a current ready source even when an ordinary GET says outcome unconf
     ).toThrow();
 });
 
-it("leaves the new UI off and the preview POST held", () => {
-  expect(governedStrategyIntakeEnabled).toBe(false);
+it("preserves the explicit read-only deployment boundary", () => {
   const held = previewBackendRejection(
     { CAPIRO_PREVIEW_READ_ONLY: "true" },
     new Request(
@@ -208,6 +247,58 @@ it("leaves the new UI off and the preview POST held", () => {
     ),
   );
   expect(held?.status).toBe(503);
+});
+
+it("persists accepted intake before start and never starts again on hydrate", async () => {
+  const s = setup();
+  const first = s.session();
+  await first.hydrate();
+  expect(s.starts).not.toHaveBeenCalled();
+  await first.submit("appropriations");
+  expect(s.starts).toHaveBeenCalledTimes(1);
+  expect(first.snapshot().retained?.started).toEqual({
+    state: "requested",
+    generationJobId: id(20),
+  });
+  const reopened = s.session();
+  await reopened.hydrate();
+  expect(s.starts).toHaveBeenCalledTimes(1);
+  expect(s.writes).toHaveLength(1);
+  expect(reopened.snapshot().job?.jobId).toBe(id(20));
+});
+
+it("lost start response preserves accepted job across reload and explicitly retries only that job", async () => {
+  const s = setup();
+  const first = s.session();
+  await first.hydrate();
+  s.control.lostStart = true;
+  await first.submit("appropriations");
+  expect(first.snapshot().retained?.accepted?.generationJobId).toBe(id(20));
+  expect(first.snapshot().retained?.started).toBeUndefined();
+  const reopened = s.session();
+  await reopened.hydrate();
+  expect(s.starts).toHaveBeenCalledTimes(1);
+  expect(s.writes).toHaveLength(1);
+  await reopened.submit("appropriations");
+  expect(s.starts.mock.calls.map(([jobId]) => jobId)).toEqual([id(20), id(20)]);
+  expect(s.writes).toHaveLength(1);
+});
+
+it("withholds mismatched canonical completed source but retains the exact accepted job", async () => {
+  const s = setup();
+  const first = s.session();
+  await first.hydrate();
+  s.control.complete = true;
+  s.control.wrongRevision = true;
+  await first.submit("appropriations");
+  expect(first.snapshot().retained?.started).toBeTruthy();
+  expect(first.snapshot().job).toBeUndefined();
+  expect(first.snapshot().error).toMatch(/source changed/);
+  s.control.wrongRevision = false;
+  await first.refresh();
+  expect(first.snapshot().job?.status).toBe("completed");
+  expect(s.starts).toHaveBeenCalledTimes(1);
+  expect(s.writes).toHaveLength(1);
 });
 
 it("never creates a new intent from a changed Objective or requested ready source", async () => {
@@ -315,4 +406,76 @@ it("refuses to dispatch when encrypted recovery storage fails", async () => {
   await b.submit("authorization");
   expect(other.writes).toHaveLength(0);
   expect(b.snapshot().error).toMatch(/recovery is unavailable/);
+});
+
+it("disposal during authority verification cannot dispatch intake or start", async () => {
+  const s = setup(),
+    session = s.session();
+  await session.hydrate();
+  const held = barrier();
+  s.control.pause = held.promise;
+  const pending = session.submit("appropriations");
+  session.suspend();
+  held.resolve();
+  await pending;
+  expect(s.writes).toHaveLength(0);
+  expect(s.starts).not.toHaveBeenCalled();
+});
+it("replacement actor cannot recover or start the original actor's saved job", async () => {
+  const s = setup(),
+    session = s.session();
+  await session.hydrate();
+  s.control.lostStart = true;
+  await session.submit("appropriations");
+  s.cache.setQueryData(["identity"], {
+    user: { id: "replacement" },
+    tenant: { id: actor.tenantId },
+    role: "standard_user",
+  });
+  await session.submit("appropriations");
+  expect(s.writes).toHaveLength(1);
+  expect(s.starts).toHaveBeenCalledTimes(1);
+});
+
+it("pins completed Strategy output identity across reload before exposing a link", async () => {
+  const s = setup(),
+    session = s.session();
+  await session.hydrate();
+  s.control.complete = true;
+  await session.submit("appropriations");
+  expect(session.snapshot().job?.status).toBe("completed");
+  s.control.wrongResult = true;
+  const reopened = s.session();
+  await reopened.hydrate();
+  expect(reopened.snapshot().job).toBeUndefined();
+  expect(reopened.snapshot().error).toMatch(/result changed/);
+  expect(s.writes).toHaveLength(1);
+  expect(s.starts).toHaveBeenCalledTimes(1);
+});
+
+it.each(["standard_user", "user_admin", "capiro_admin"])(
+  "accepts the canonical Core writer role %s",
+  async (role) => {
+    const s = setup();
+    s.control.role = role;
+    const original = s.cache.getQueryData<Record<string, unknown>>([
+      "identity",
+    ]);
+    s.cache.setQueryData(["identity"], { ...original, role });
+    const session = s.session();
+    await session.hydrate();
+    await session.submit("appropriations");
+    expect(s.writes).toHaveLength(1);
+    expect(s.starts).toHaveBeenCalledTimes(1);
+  },
+);
+
+it("does not add an active-only restriction to Core's non-archived client admission", async () => {
+  const s = setup();
+  s.control.clientStatus = "inactive";
+  s.current.client = { ...s.current.client, status: "inactive" };
+  const session = s.session();
+  await session.hydrate();
+  await session.submit("appropriations");
+  expect(s.writes).toHaveLength(1);
 });

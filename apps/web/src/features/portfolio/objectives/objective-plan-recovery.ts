@@ -17,7 +17,7 @@ import {
   type PlanResponse,
 } from "@/shared/capiro/operations/strategy-materialization";
 import type { ObjectiveGenerationJob } from "@/shared/capiro/operations/objective-generation";
-import { createGenerationRecovery } from "./objective-generation-recovery";
+import { objectiveSourceAuthority } from "./objective-source-authority";
 import {
   rememberPlanOutputs,
   planCreationIdentity,
@@ -44,7 +44,7 @@ export function createPlanRecovery(
   job: ObjectiveGenerationJob,
 ): PlanRecovery {
   const source = job.objectiveGeneration.source;
-  const authority = createGenerationRecovery(api, cache, actor, {
+  const authority = objectiveSourceAuthority(api, cache, actor, {
     clientId: source.clientId,
     id: source.objectiveId,
     version: source.objectiveVersion,

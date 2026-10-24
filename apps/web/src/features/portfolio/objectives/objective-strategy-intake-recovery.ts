@@ -1,7 +1,9 @@
 import { z } from "zod";
+import { objectiveGenerationReceipt } from "@/shared/capiro/operations/objective-generation";
+import { receiveObjectiveGenerationStartResponse } from "@capiro/meri-contracts/objective-generation";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ApiClient } from "@/shared/portfolio/api/http";
-import { identitySchema } from "@/shared/portfolio/auth/identity";
+import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
 import {
   assertClientWriter,
   type ClientWriter,
@@ -32,6 +34,8 @@ const retainedSchema = z
     request: governedObjectiveStrategyIntakeRequest,
     origin: governedObjectiveGenerationObservation,
     accepted: governedObjectiveStrategyIntakeResponse.optional(),
+    started: z.unknown().optional(),
+    result: objectiveGenerationReceipt.shape.result.unwrap().optional(),
   })
   .refine((value) => {
     try {
@@ -57,6 +61,16 @@ const retainedSchema = z
           value.request,
           value.origin,
         );
+      if (value.started !== undefined) {
+        if (!value.accepted) return false;
+        const receipt = receiveObjectiveGenerationStartResponse(
+          202,
+          JSON.stringify(value.started),
+          value.accepted.generationJobId,
+        );
+        if ("error" in receipt) return false;
+      }
+      if (value.result && !value.accepted) return false;
       return true;
     } catch {
       return false;
@@ -75,7 +89,11 @@ const contract = {
       JSON.stringify(previous.request) !== JSON.stringify(next.request) ||
       JSON.stringify(previous.origin) !== JSON.stringify(next.origin) ||
       (previous.accepted &&
-        JSON.stringify(previous.accepted) !== JSON.stringify(next.accepted))
+        JSON.stringify(previous.accepted) !== JSON.stringify(next.accepted)) ||
+      (previous.started !== undefined &&
+        JSON.stringify(previous.started) !== JSON.stringify(next.started)) ||
+      (previous.result !== undefined &&
+        JSON.stringify(previous.result) !== JSON.stringify(next.result))
     )
       throw new Error("The retained Strategy intake changed.");
   },
@@ -113,14 +131,11 @@ export function createStrategyIntakeRecovery(
   ]);
   function guard() {
     assertClientWriter(cache, actor);
-    const identity = identitySchema.safeParse(cache.getQueryData(["identity"]));
     const live = currentSelection();
     if (
-      !identity.success ||
-      identity.data.role !== "standard_user" ||
       !live.client ||
       live.client.id !== selected.clientId ||
-      live.client.status !== "active" ||
+      live.client.status === "archived" ||
       live.objective.clientId !== selected.clientId ||
       live.objective.id !== selected.id
     )
@@ -136,18 +151,7 @@ export function createStrategyIntakeRecovery(
         guard();
       };
       assert();
-      const identity = await api.request("core", "me", identitySchema, {
-        signal,
-      });
-      assert();
-      if (
-        identity.user.id.toLowerCase() !== actor.userId.toLowerCase() ||
-        identity.tenant?.id.toLowerCase() !== actor.tenantId.toLowerCase() ||
-        identity.role !== "standard_user"
-      )
-        throw new Error(
-          "Current Core membership cannot submit Strategy intake.",
-        );
+      await verifyCoreWriter(api, actor, signal, assert);
       const client = await api.request(
         "core",
         `clients/${encodeURIComponent(selected.clientId)}`,
@@ -155,8 +159,8 @@ export function createStrategyIntakeRecovery(
         { signal },
       );
       assert();
-      if (client.id !== selected.clientId || client.status !== "active")
-        throw new Error("The selected client is no longer active.");
+      if (client.id !== selected.clientId || client.status === "archived")
+        throw new Error("The selected client is archived.");
       const objectives = await api.request(
         "core",
         `clients/${encodeURIComponent(selected.clientId)}/objectives`,

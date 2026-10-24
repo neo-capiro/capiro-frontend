@@ -16,9 +16,6 @@ import {
   type GovernedPlannerClient,
 } from "./objective-governed-planner-read";
 
-/** The preview has no coherent PR48 + PR53 + PR56 Core read pin or reviewed route yet. */
-export const governedPlannerReadEnabled = false;
-
 export function ObjectiveGovernedPlanner({
   objective,
   disabled,
@@ -37,7 +34,7 @@ export function ObjectiveGovernedPlanner({
     !disabled &&
     !!client &&
     client.id === objective.clientId &&
-    client.status === "active" &&
+    client.status !== "archived" &&
     objective.status === "ready" &&
     governedObjectiveGenerationReadRequest.safeParse(request).success;
   const generationRead = useCapiroQuery(
@@ -63,9 +60,7 @@ export function ObjectiveGovernedPlanner({
     <section className="card stack" aria-label="Governed Planner status">
       <h3>Current Planner work</h3>
       {!allowed ? (
-        <p>
-          Save a ready Objective in the selected active client to view work.
-        </p>
+        <p>Save a ready Objective in the selected client to view work.</p>
       ) : generationRead.loading ? (
         <p role="status">Checking current Planner work.</p>
       ) : generationRead.error || !generation ? (

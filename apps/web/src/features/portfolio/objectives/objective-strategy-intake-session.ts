@@ -6,6 +6,12 @@ import {
 } from "@/shared/capiro/operations/objective-governed-strategy-intake";
 import type { StrategySummary } from "@/shared/capiro/operations/strategies-schemas";
 import {
+  objectiveGenerationRequest,
+  requireObjectiveGeneration,
+  type ObjectiveGenerationJob,
+} from "@/shared/capiro/operations/objective-generation";
+import { startObjectiveGeneration } from "./objective-generation-start";
+import {
   governedObjectiveGenerationReadRequest,
   requireGovernedObjectiveGenerationObservation,
 } from "@/shared/capiro/operations/objective-governed-generation";
@@ -26,6 +32,7 @@ export type StrategyIntakeState = {
   busy: boolean;
   newSourceVerified: boolean;
   retained: RetainedStrategyIntake | null;
+  job?: ObjectiveGenerationJob;
   error?: string;
 };
 const idle: StrategyIntakeState = {
@@ -45,6 +52,7 @@ export class ObjectiveStrategyIntakeSession {
     private objective: StrategyIntakeObjective,
     private client: StrategyIntakeClient,
     private recovery: StrategyIntakeRecovery,
+    private start = startObjectiveGeneration,
   ) {}
   snapshot = () => this.state;
   subscribe = (listener: () => void) => {
@@ -79,11 +87,79 @@ export class ObjectiveStrategyIntakeSession {
     this.assert(signal);
     return requireGovernedObjectiveGenerationObservation(read, request);
   }
+  private async readJob(retained: RetainedStrategyIntake, signal: AbortSignal) {
+    if (!retained.accepted) return;
+    const request = objectiveGenerationRequest.parse({
+      requestId: retained.request.body.selection.generationRequestId,
+      clientId: retained.request.params.clientId,
+      objective: {
+        objectiveId: retained.request.params.objectiveId,
+        objectiveVersion:
+          retained.request.body.command.expectedObjectiveVersion,
+      },
+      type: retained.request.body.selection.type,
+    });
+    const value = await this.strategyApi.request(
+      "strategies.objectiveDraftJob",
+      {
+        params: { jobId: retained.accepted.generationJobId },
+      },
+      { signal },
+    );
+    this.assert(signal);
+    const job = requireObjectiveGeneration(
+      value,
+      request,
+      retained.accepted.generationJobId,
+    );
+    if (
+      job.objectiveGeneration.source.objectiveRevisionId !==
+      retained.origin.objective.revision.id
+    )
+      throw new Error(
+        "The generation source changed. Refresh the saved Objective work.",
+      );
+    const result = job.objectiveGeneration.result;
+    if (
+      retained.result &&
+      JSON.stringify(retained.result) !== JSON.stringify(result)
+    )
+      throw new Error(
+        "The saved generation result changed. Its destination cannot be verified.",
+      );
+    if (result && !retained.result) {
+      retained = { ...retained, result };
+      await this.recovery.save(retained);
+      this.assert(signal);
+    }
+    this.update({ job, retained });
+  }
+  private async startSaved(
+    retained: RetainedStrategyIntake,
+    signal: AbortSignal,
+  ) {
+    if (!retained.accepted)
+      throw new Error(
+        "A verified saved intake is required before starting generation.",
+      );
+    if (!retained.started) {
+      const started = await this.start(
+        retained.accepted.generationJobId,
+        signal,
+      );
+      this.assert(signal);
+      retained = { ...retained, started };
+      await this.recovery.save(retained);
+      this.assert(signal);
+      this.update({ retained });
+    }
+    await this.readJob(retained, signal);
+  }
   private async run(action: (signal: AbortSignal) => Promise<void>) {
     if (this.state.busy) return;
     const controller = new AbortController();
     this.active = controller;
-    this.update({ busy: true, error: undefined });
+    this.update({ busy: true, error: undefined, job: undefined });
     try {
       await action(controller.signal);
     } catch (cause) {
@@ -110,6 +186,7 @@ export class ObjectiveStrategyIntakeSession {
       this.assert(signal);
       this.update({ retained, ready: true });
       const savedObjective = await this.recovery.authorize(signal);
+      if (retained?.accepted) await this.readJob(retained, signal);
       if (!retained) {
         if (
           savedObjective.status !== "ready" ||
@@ -192,7 +269,11 @@ export class ObjectiveStrategyIntakeSession {
             "A different saved Strategy intake must be recovered.",
           );
         this.update({ retained });
-        if (retained.accepted) return;
+        if (retained.accepted) {
+          await this.startSaved(retained, signal);
+          return;
+        }
+        let next: RetainedStrategyIntake;
         try {
           const receipt = await this.strategyApi.request(
             "objectives.governedStrategy.intake",
@@ -205,7 +286,7 @@ export class ObjectiveStrategyIntakeSession {
             retained.request,
             retained.origin,
           );
-          const next = { ...retained, accepted };
+          next = { ...retained, accepted };
           await this.recovery.save(next);
           this.assert(signal);
           this.update({ retained: next });
@@ -214,6 +295,8 @@ export class ObjectiveStrategyIntakeSession {
             "The intake outcome is unconfirmed. Review current work, then recover this exact saved request.",
           );
         }
+        // The accepted Core job is durable locally before any Meri start dispatch.
+        await this.startSaved(next, signal);
       });
     });
   refresh = () =>
@@ -223,6 +306,7 @@ export class ObjectiveStrategyIntakeSession {
       this.assert(signal);
       this.update({ retained, ready: true, newSourceVerified: false });
       const current = await this.readCurrent(signal);
+      if (retained?.accepted) await this.readJob(retained, signal);
       if (!retained)
         requireInitialStrategyIntakeSource(
           current,
@@ -230,5 +314,11 @@ export class ObjectiveStrategyIntakeSession {
           this.client,
         );
       this.update({ newSourceVerified: !retained });
+    });
+  observe = () =>
+    this.run(async (signal) => {
+      this.assert(signal);
+      const retained = this.state.retained;
+      if (retained?.accepted) await this.readJob(retained, signal);
     });
 }

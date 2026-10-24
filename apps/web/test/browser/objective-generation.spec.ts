@@ -15,7 +15,7 @@ test("desktop generation validates the saved receipt and opens exact Strategy/ve
   const f = await fixture(page);
   await page.goto(origin);
   const action = page.getByRole("button", {
-    name: "Generate Strategy and prepare plan",
+    name: "Request Strategy generation",
     exact: true,
   });
   await expect(action).toBeDisabled();
@@ -28,20 +28,18 @@ test("desktop generation validates the saved receipt and opens exact Strategy/ve
   });
   await expect(open).toBeVisible();
   expect(f.writes).toHaveLength(1);
-  expect(Object.keys(f.writes[0]!).sort()).toEqual([
-    "clientId",
-    "objective",
-    "requestId",
-    "type",
-  ]);
   expect(f.writes[0]).toMatchObject({
-    clientId,
-    objective: {
-      objectiveId: objective.id,
-      objectiveVersion: objective.version,
+    params: { clientId, objectiveId: objective.id },
+    body: {
+      schemaVersion: 2,
+      command: { expectedObjectiveVersion: objective.version },
+      selection: { type: "appropriations" },
     },
-    type: "appropriations",
   });
+  expect(f.starts).toEqual([
+    { generationJobId: wire.completedPoll.body.jobId },
+  ]);
+  expect(f.planWrites).toHaveLength(0);
   const versionId =
     wire.completedPoll.body.objectiveGeneration.result.strategyVersionId;
   await expect(open).toHaveAttribute(
@@ -87,7 +85,7 @@ test("lost submission survives reload and recovery reuses the frozen request wit
   const original = structuredClone(f.writes[0]);
   await page.reload();
   const recover = page.getByRole("button", {
-    name: "Recover same request",
+    name: "Recover same Strategy request",
     exact: true,
   });
   await expect(recover).toBeEnabled();
@@ -118,9 +116,9 @@ test("incomplete coverage shows its issue and never exposes a saved Strategy lin
     page.getByRole("link", { name: "Open generated Strategy receipt" }),
   ).toHaveCount(0);
   await page
-    .getByRole("button", { name: "Start another Strategy and plan request" })
+    .getByRole("button", { name: "Refresh saved intake and access" })
     .click();
-  await expect(page.getByLabel("Strategy type")).toBeEnabled();
+  await expect(page.getByLabel("Strategy type")).toBeDisabled();
   expect(f.writes).toHaveLength(1);
   expect(f.unexpected).toEqual([]);
 });
@@ -161,7 +159,7 @@ test("read-only and unsaved Objective views cannot dispatch generation", async (
     .fill("Unsaved synthetic change");
   await expect(
     page.getByRole("button", {
-      name: "Generate Strategy and prepare plan",
+      name: "Request Strategy generation",
       exact: true,
     }),
   ).toBeDisabled();
@@ -172,14 +170,48 @@ test("read-only and unsaved Objective views cannot dispatch generation", async (
   await page.reload();
   await expect(
     page.getByText(
-      "Your current session cannot generate a Strategy for this client.",
+      "Save a ready Objective in your selected client to request Strategy intake.",
     ),
   ).toBeVisible();
   await expect(
     page.getByRole("button", {
-      name: "Generate Strategy and prepare plan",
+      name: "Request Strategy generation",
       exact: true,
     }),
   ).toHaveCount(0);
   expect(f.writes).toEqual([]);
+});
+
+test("lost start response survives hard reload and retries only the already saved job", async ({
+  page,
+}) => {
+  const f = await fixture(page, { lostStart: true });
+  await page.goto(origin);
+  await expect(page.getByLabel("Strategy type")).toBeEnabled();
+  await generate(page);
+  await expect(
+    page
+      .getByRole("region", { name: "Governed Strategy intake" })
+      .getByRole("alert"),
+  ).toBeVisible();
+  const first = structuredClone(f.starts[0]);
+  await page.reload();
+  const retry = page.getByRole("button", {
+    name: "Start or retry saved generation",
+    exact: true,
+  });
+  await expect(retry).toBeEnabled();
+  expect(f.writes).toHaveLength(1);
+  expect(f.starts).toHaveLength(1);
+  expect(f.planWrites).toHaveLength(0);
+  await retry.click();
+  await expect.poll(() => f.starts).toEqual([first, first]);
+  await expect(
+    page.getByText(
+      "Generation was requested for the saved job. Its current result is checked below.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(retry).toHaveCount(0);
+  expect(f.writes).toHaveLength(1);
 });

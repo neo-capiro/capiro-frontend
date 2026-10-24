@@ -2,9 +2,9 @@ import type { Page } from "@playwright/test";
 import wire from "../../tests/objective-generation-wire-fixtures.json" with { type: "json" };
 import planWire from "../../tests/objective-plan-wire-fixtures.json" with { type: "json" };
 import {
-  objectiveGenerationRequest,
-  type ObjectiveGenerationRequest,
-} from "../../src/shared/capiro/operations/objective-generation";
+  governedObjectiveStrategyIntakeRequest,
+  type GovernedObjectiveStrategyIntakeRequest,
+} from "../../src/shared/capiro/operations/objective-governed-strategy-intake";
 import {
   planRequest,
   type PlanRequest,
@@ -14,6 +14,7 @@ import {
   installFixtures,
   json,
   objective,
+  client,
   clientId,
 } from "../../tests/browser/fixtures";
 import {
@@ -26,6 +27,7 @@ import { bootstrap, nextTask } from "./next-modules-fixtures";
 export const origin = `/portfolio/${clientId}/objectives?objective=${objective.id}`;
 type Options = {
   lost?: boolean;
+  lostStart?: boolean;
   failed?: boolean;
   lostPlan?: boolean;
   noPlanCommit?: boolean;
@@ -36,11 +38,22 @@ type Options = {
 };
 export async function fixture(page: Page, options: Options = {}) {
   const unexpected = await installFixtures(page);
+  await page.route("**/api/backend/core/me", (r) =>
+    json(r, {
+      user: { id: "user-test", email: "test@example.test" },
+      tenant: { id: "tenant-test", name: "UI tests" },
+      role: "user_admin",
+    }),
+  );
+  await page.route(`**/api/backend/core/clients/${clientId}`, (r) =>
+    json(r, { ...client, status: "active" }),
+  );
   await page.route(`**/api/backend/core/clients/${clientId}/objectives`, (r) =>
     json(r, [{ ...objective, status: "ready", readyAt: objective.updatedAt }]),
   );
-  const writes: ObjectiveGenerationRequest[] = [],
+  const writes: GovernedObjectiveStrategyIntakeRequest[] = [],
     planWrites: PlanRequest[] = [];
+  const starts: { generationJobId: string }[] = [];
   let committed = false;
   const job = () => {
     const value = structuredClone(
@@ -51,7 +64,8 @@ export async function fixture(page: Page, options: Options = {}) {
           : wire.completedPoll.body,
     );
     value.objectiveGeneration.requestId =
-      writes[0]?.requestId ?? wire.request.body.requestId;
+      writes[0]?.body.selection.generationRequestId ??
+      wire.request.body.requestId;
     value.objectiveGeneration.source = { ...binding };
     if (value.objectiveGeneration.result)
       value.objectiveGeneration.result.strategyId = strategyId;
@@ -80,20 +94,6 @@ export async function fixture(page: Page, options: Options = {}) {
     };
     return value;
   };
-  await page.route(
-    "**/api/backend/strategy/strategies/objective-drafts",
-    async (route) => {
-      const body = objectiveGenerationRequest.parse(
-        route.request().postDataJSON(),
-      );
-      writes.push(body);
-      if (options.lost && writes.length === 1) return route.abort("failed");
-      const value = structuredClone(wire.accepted.body);
-      value.objectiveGeneration.requestId = body.requestId;
-      value.objectiveGeneration.source = { ...binding };
-      return json(route, value);
-    },
-  );
   await page.route("**/api/backend/strategy/strategies/draft-jobs/*", (r) =>
     json(r, job()),
   );
@@ -150,8 +150,71 @@ export async function fixture(page: Page, options: Options = {}) {
           ]
         : [],
     );
+  const source = {
+    schemaVersion: 1,
+    clientId,
+    objective: {
+      id: objective.id,
+      revision: { id: binding.objectiveRevisionId, version: objective.version },
+      status: "ready",
+    },
+    workAction: "objective.strategy.draft",
+    requestedSource: {
+      revision: { id: binding.objectiveRevisionId, version: objective.version },
+      canonicalBindingVersion: 3,
+    },
+    control: {
+      version: 0,
+      currentAuthorizationRequestId: null,
+      cancelledAt: null,
+    },
+    consent: null,
+    reconciliation: "outcome_unconfirmed",
+    accounting: null,
+    commandReceipt: null,
+    observedAt: "2026-10-24T12:00:00.000Z",
+  };
+  const intake = (input: unknown) => {
+    const request = governedObjectiveStrategyIntakeRequest.parse(input);
+    writes.push(request);
+    const requestId = request.body.command.requestId;
+    return {
+      schemaVersion: 2,
+      generationJobId: job().jobId,
+      selection: request.body.selection,
+      commandReceipt: {
+        schemaVersion: 1,
+        receiptId: "d0000000-0000-4000-8000-000000000001",
+        requestId,
+        payloadDigest: "a".repeat(64),
+        clientId,
+        objectiveId: objective.id,
+        command: "retry",
+        workAction: "objective.strategy.draft",
+        commandRevision: source.objective.revision,
+        sourceRevision: source.requestedSource.revision,
+        rootIntentId: "d0000000-0000-4000-8000-000000000002",
+        controlVersionBefore: 0,
+        controlVersionAfter: 1,
+        targetAuthorizationRequestId: null,
+        authorizationRequestId: "d0000000-0000-4000-8000-000000000003",
+        consent: {
+          id: "d0000000-0000-4000-8000-000000000003",
+          confirmedAt: "2026-10-24T12:00:00.000Z",
+          expiresAt: "2026-10-24T12:15:00.000Z",
+        },
+        outcome: "reconsent_recorded",
+        committedAt: "2026-10-24T12:00:01.000Z",
+      },
+    };
+  };
   await operationFixtures(page, {
     "me.read": testIdentity,
+    "objectives.governedGeneration.read": (input) => ({
+      ...source,
+      workAction: (input as { query: { workAction: string } }).query.workAction,
+    }),
+    "objectives.governedStrategy.intake": intake,
     "strategies.objectiveDraftJob": () => job(),
     "strategies.objectiveDestination": boundStrategy,
     "planner.strategyMaterialization": () => plan(),
@@ -178,7 +241,27 @@ export async function fixture(page: Page, options: Options = {}) {
       nextCursor: null,
     }),
   });
-  return { writes, planWrites, job, plan, unexpected, options };
+  await page.route(
+    "**/api/capiro/objectives.governedStrategy.intake",
+    async (route) => {
+      const value = intake(route.request().postDataJSON());
+      if (options.lost && writes.length === 1) return route.abort("failed");
+      return json(route, value);
+    },
+  );
+  await page.route(
+    "**/api/action-followthrough/objective-start",
+    async (route) => {
+      starts.push(route.request().postDataJSON());
+      if (options.lostStart && starts.length === 1)
+        return route.abort("failed");
+      return route.fulfill({
+        status: 202,
+        json: { state: "requested", generationJobId: job().jobId },
+      });
+    },
+  );
+  return { writes, starts, planWrites, job, plan, unexpected, options };
 }
 export async function generate(page: Page) {
   await page
@@ -186,7 +269,7 @@ export async function generate(page: Page) {
     .selectOption("appropriations");
   await page
     .getByRole("button", {
-      name: "Generate Strategy and prepare plan",
+      name: "Request Strategy generation",
       exact: true,
     })
     .click();
