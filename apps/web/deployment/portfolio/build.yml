@@ -36,6 +36,10 @@ Resources:
             Principal:
               Service: codebuild.amazonaws.com
             Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+                aws:SourceArn: !Sub arn:${AWS::Partition}:codebuild:${AWS::Region}:${AWS::AccountId}:project/capiro-portfolio-preview-build
       Policies:
         - PolicyName: portfolio-preview-build
           PolicyDocument:
