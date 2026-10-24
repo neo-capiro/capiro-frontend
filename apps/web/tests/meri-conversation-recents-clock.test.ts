@@ -18,6 +18,10 @@ const fixture = vi.hoisted(() => ({
   loading: false,
   createdAt: "2026-10-13T00:00:00Z",
   discovery: vi.fn(),
+  search: "",
+}));
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams(fixture.search),
 }));
 vi.mock("../src/shared/portfolio/auth/identity", () => ({
   useIdentity: () => ({
@@ -118,6 +122,7 @@ beforeEach(() => {
     unavailable: false,
     loading: false,
     createdAt: "2026-10-13T00:00:00Z",
+    search: "",
   });
 });
 afterEach(() => {
@@ -178,4 +183,26 @@ it("loading or unavailable discovery does not expose a retained dated link", () 
   fixture.unavailable = true;
   expect(render()).toContain("Recent conversations unavailable.");
   expect(render()).not.toContain("Conversation ·");
+});
+
+it("keeps General discovery and reopen links explicitly separate from client scope", () => {
+  fixture.search = "scope=general";
+  fixture.selected = false;
+  expect(render()).toContain(
+    'href="/meri?scope=general&amp;conversationId=conversation"',
+  );
+  expect(fixture.discovery).toHaveBeenLastCalledWith(
+    { tenantId: "tenant", actorId: "actor" },
+    null,
+  );
+  fixture.discovery.mockClear();
+  for (const search of [
+    "",
+    "scope=general&scope=client",
+    "scope=general&clientId=client",
+  ]) {
+    fixture.search = search;
+    expect(render()).not.toContain("Conversation ·");
+  }
+  expect(fixture.discovery).not.toHaveBeenCalled();
 });
