@@ -83,6 +83,9 @@ async function setup(
       return route.fulfill({
         json: {
           ok: true,
+          intentId: "20000000-0000-4000-8000-000000000003",
+          requestKey: input.requestKey,
+          state: "accepted",
           threadId: "20000000-0000-4000-8000-000000000001",
           messageId: "20000000-0000-4000-8000-000000000002",
           ...sendingReceipt,
@@ -467,6 +470,9 @@ for (const response of [403, 503, "loading"] as const)
         .getByRole("button", { name: "Send email", exact: true })
         .click();
       await expect.poll(() => state.sends.length).toBe(1);
+      await expect(
+        page.getByText("Email sent.", { exact: true }),
+      ).toBeVisible();
       expect(state.sends[0]).toMatchObject({
         bodyHtml: `<p>${original}</p>`,
         appendSignature: true,

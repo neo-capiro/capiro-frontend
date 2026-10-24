@@ -19,6 +19,20 @@ async function fixtures(page: Page, unavailable = false) {
     }),
   );
   await page.route("**/core/clients", (route) => json(route, clients));
+  await page.route("**/core/business-development/prospects?*", (route) =>
+    route.request().method() === "GET"
+      ? json(route, {
+          prospects: [],
+          counts: {
+            visible: 0,
+            total: 0,
+            active: 0,
+            dismissed: 0,
+            byStage: {},
+          },
+        })
+      : route.fallback(),
+  );
   const writes: unknown[] = [];
   let order = initialOrder.map((id) => `client:${id}`);
   let version = 1;
@@ -78,7 +92,7 @@ for (const query of [
     await expect(
       page
         .getByRole("status")
-        .filter({ hasText: "Customizing all 2 profiles" }),
+        .filter({ hasText: "Customizing 2 client profiles you can access." }),
     ).toBeVisible();
     await expect(page).toHaveURL(before);
     await expect(page.getByLabel("Search profiles")).toBeDisabled();

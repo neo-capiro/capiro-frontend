@@ -22,11 +22,22 @@ const hash = (value: unknown) => {
     throw new Error("Synthetic canonical input required");
   return createHash("sha256").update(text).digest("hex");
 };
-const makeAllocation = (input: ConversationSubmitRequest) => ({
+const generalScopes: typeof scopes = [
+  {
+    tenantId: binding.tenantId,
+    kind: "private-user",
+    resourceId: binding.actorId,
+    policyRevision: "policy1",
+  },
+];
+const makeAllocation = (
+  input: ConversationSubmitRequest,
+  general: boolean,
+) => ({
   binding,
-  scopes,
+  scopes: general ? generalScopes : scopes,
   versions: runFor().versions,
-  selectedClientId: clientId,
+  selectedClientId: general ? null : clientId,
   requestId: input.requestId,
   inputSha256: hash(input),
   requestSha256: hash(stored(input.requestId, input.prompt)),
@@ -34,7 +45,17 @@ const makeAllocation = (input: ConversationSubmitRequest) => ({
   expiresAtMs: Date.now() + 60_000,
 });
 
-export async function installInitialInput(page: Page, running = false) {
+export async function installInitialInput(
+  page: Page,
+  running = false,
+  general = false,
+) {
+  const selectedScopes = general ? generalScopes : scopes;
+  const selectedRun = (...args: Parameters<typeof runFor>) => ({
+    ...runFor(...args),
+    scopes: selectedScopes,
+  });
+  const selectedConversation = { ...conversation, scopes: selectedScopes };
   const native: {
     input?: ConversationSubmitRequest;
     allocation?: ReturnType<typeof makeAllocation>;
@@ -48,7 +69,7 @@ export async function installInitialInput(page: Page, running = false) {
     cancel: 0,
   };
   const events = () =>
-    native.submitted
+    (native.submitted
       ? running
         ? [status(1, "queued"), status(2, "running")]
         : [
@@ -56,7 +77,8 @@ export async function installInitialInput(page: Page, running = false) {
             event(2, "Initial synthetic answer"),
             status(3, "completed"),
           ]
-      : [status(1, "queued")];
+      : [status(1, "queued")]
+    ).map((item) => ({ ...item, scopes: selectedScopes }));
   const state = () =>
     native.submitted
       ? running
@@ -77,7 +99,7 @@ export async function installInitialInput(page: Page, running = false) {
     if (native.input && hash(input) !== hash(native.input))
       throw new Error("Synthetic allocation identity conflict");
     native.input ??= structuredClone(input);
-    native.allocation ??= makeAllocation(input);
+    native.allocation ??= makeAllocation(input, general);
     return {
       allocation: native.allocation,
       state: native.accepted ? ("ACCEPTED" as const) : ("RESERVED" as const),
@@ -91,7 +113,7 @@ export async function installInitialInput(page: Page, running = false) {
       throw new Error("Synthetic allocation required");
     native.accepted = true;
     return {
-      run: runFor(state()),
+      run: selectedRun(state()),
       request: stored(input.requestId, input.prompt),
       lastSequence: events().length,
       replayed,
@@ -104,7 +126,7 @@ export async function installInitialInput(page: Page, running = false) {
       throw new Error("Synthetic positive input required");
     native.submitted = true;
     return {
-      run: runFor(replayed ? state() : "running"),
+      run: selectedRun(replayed ? state() : "running"),
       requestId: input.requestId,
       lastSequence: events().length,
       replayed,
@@ -127,13 +149,14 @@ export async function installInitialInput(page: Page, running = false) {
             state: state(),
             prompt: native.input!.prompt,
           }),
+          run: selectedRun(state()),
           request: stored(native.input!.requestId, native.input!.prompt),
         }),
   );
   await page.route("**/api/conversations/list", (route) =>
     reply(route, {
       schema: "meri.conversation-list/1",
-      conversations: native.accepted ? [conversation] : [],
+      conversations: native.accepted ? [selectedConversation] : [],
       nextBefore: null,
     }),
   );
@@ -153,11 +176,11 @@ export async function installInitialInput(page: Page, running = false) {
         0,
         all.length,
       ),
-      run: runFor(state()),
+      run: selectedRun(state()),
     };
     return reply(route, {
       schema: "meri.conversation-transcript/1",
-      conversation,
+      conversation: selectedConversation,
       latestRun: current.run,
       latestSequenceBase: 0,
       turns: page.length ? [current] : [],

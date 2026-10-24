@@ -104,6 +104,11 @@ async function setup(page: Page) {
   );
   return { state, unexpected };
 }
+// The header has a compact entry; status assertions target the full panel.
+const attendancePanel = (page: Page) =>
+  page.getByRole("region", { name: "Meri meeting attendance" }).filter({
+    has: page.getByRole("heading", { name: "Meri attendance", exact: true }),
+  });
 async function openMeeting(page: Page) {
   await page.goto(
     `/portfolio/${clientId}/calendar?view=agenda&date=2099-10-15&zone=UTC&meeting=${meetingId}`,
@@ -113,7 +118,7 @@ async function openMeeting(page: Page) {
     .getByRole("navigation", { name: "Meeting sections" })
     .getByRole("button", { name: "Information", exact: true })
     .click();
-  const panel = page.getByRole("region", { name: "Meri meeting attendance" });
+  const panel = attendancePanel(page);
   await expect(panel).toBeVisible();
   return panel;
 }
@@ -168,9 +173,9 @@ test("Owned meeting dispatch requires both confirmations and preserves future sc
   });
   await send.click();
   await expect(dialog).not.toBeVisible();
-  await expect(
-    page.getByRole("region", { name: "Meri meeting attendance" }),
-  ).toContainText("Joining or scheduled · attendance not yet confirmed");
+  await expect(attendancePanel(page)).toContainText(
+    "Joining or scheduled · attendance not yet confirmed",
+  );
   expect(state.sends).toEqual([
     {
       meetingUrl: meeting.joinLink,
@@ -506,7 +511,19 @@ test("Mobile dark Send Meri dialog fits the viewport and retains accessible cons
   const { unexpected } = await setup(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ colorScheme: "dark" });
-  const dialog = await openSend(page);
+  const panel = await openMeeting(page);
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+    .toBeLessThanOrEqual(390);
+  await page.screenshot({
+    path: "work/screens/attendance-workspace-mobile-dark.png",
+    fullPage: true,
+  });
+  await panel.getByRole("button", { name: "Send Meri to take notes" }).click();
+  const dialog = page.getByRole("dialog", {
+    name: "Send Meri to take notes",
+    exact: true,
+  });
   await expect(dialog).toHaveCSS("padding", "16px");
   await expect(
     dialog.getByRole("heading", { name: "Send Meri to take notes" }),

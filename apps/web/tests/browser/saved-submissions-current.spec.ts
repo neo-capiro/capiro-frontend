@@ -12,6 +12,7 @@ test("Capabilities composes current saved submissions and retains Advocacy histo
 }) => {
   const { unexpected } = await installRemoval(page);
   await page.goto(`/portfolio/${clientId}/capabilities`);
+  await page.locator("summary").filter({ hasText: "Past performance" }).click();
   const section = page.getByRole("region", { name: "Past performance" });
   await expect(
     section.getByRole("heading", { name: "Saved submissions" }),
@@ -148,6 +149,7 @@ test("an unavailable history leaves the independent capability feed usable", asy
   await expect(
     page.getByRole("button", { name: "Add capability", exact: true }),
   ).toBeEnabled();
+  await page.locator("summary").filter({ hasText: "Past performance" }).click();
   await expect(
     page.getByRole("region", { name: "Past performance" }).getByRole("alert"),
   ).toContainText("You do not have permission for this operation.");

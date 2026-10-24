@@ -457,6 +457,19 @@ test("person-linked QuickLog retains its failed note and existing email provider
   const unexpected = await installFixtures(page);
   let notes = 0;
   let sends = 0;
+  let requestKey: string | undefined;
+  const recoveryKeys: string[] = [];
+  await page.route("**/engagement/mail/send-intents/*", (route) => {
+    if (route.request().method() !== "GET") return route.fallback();
+    recoveryKeys.push(
+      new URL(route.request().url()).pathname.split("/").at(-1)!,
+    );
+    return json(
+      route,
+      { message: "Synthetic delivery readback unavailable" },
+      503,
+    );
+  });
   await page.route(`**/clients/${clientId}/activity`, (route) => {
     expect(route.request().method()).toBe("POST");
     notes++;
@@ -470,6 +483,7 @@ test("person-linked QuickLog retains its failed note and existing email provider
   });
   await page.route("**/engagement/mail/send", (route) => {
     sends++;
+    requestKey = route.request().postDataJSON().requestKey;
     expect(route.request().postDataJSON()).toMatchObject({
       clientId,
       personIds: [personId],
@@ -513,6 +527,7 @@ test("person-linked QuickLog retains its failed note and existing email provider
   );
   await expect(mail.getByText("Email sent.", { exact: true })).toHaveCount(0);
   expect(notes).toBe(1);
+  await expect.poll(() => recoveryKeys).toEqual([requestKey]);
   expect(sends).toBe(1);
   expect(unexpected).toEqual([]);
 });

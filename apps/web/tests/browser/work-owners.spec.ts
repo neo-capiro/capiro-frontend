@@ -270,6 +270,7 @@ for (const replacement of [
         state.drafts = state.drafts.map((draft) => ({
           ...draft,
           client: next.name,
+          clientId: next.id,
         }));
         state.summaries = state.summaries.map((strategy) => ({
           ...strategy,

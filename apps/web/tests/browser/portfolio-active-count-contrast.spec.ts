@@ -25,12 +25,15 @@ for (const width of [1440, 390]) {
       await page.emulateMedia({ colorScheme });
       await page.goto("/portfolio");
       const navigation = page.getByRole("navigation", { name: "Profile type" });
-      for (const name of [/^All /, /^Clients /]) {
+      for (const [name, expectedCount] of [
+        [/^All /, "2"],
+        [/^Clients /, "1"],
+      ] as const) {
         const tab = navigation.getByRole("button", { name });
         await tab.click();
         await expect(tab).toHaveAttribute("aria-pressed", "true");
         const count = tab.locator("small");
-        await expect(count).toHaveText("1");
+        await expect(count).toHaveText(expectedCount);
         for (const state of ["hover", "rest"]) {
           if (state === "rest") await page.mouse.move(0, 0);
           const colors = await count.evaluate((element) => {

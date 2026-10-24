@@ -52,7 +52,11 @@ test("four-field readiness persists once, transitions, and refreshes the list", 
     .click();
   await expect(editor).not.toBeVisible();
   await expect(
-    page.locator("span.chip").filter({ hasText: /^Ready$/ }),
+    page
+      .getByRole("region", { name: "Current objectives" })
+      .getByRole("article")
+      .filter({ hasText: "Test outcome" })
+      .locator('[data-status="ready"]'),
   ).toBeVisible();
   expect(writes).toBe(2);
   expect(unexpected).toEqual([]);
@@ -112,8 +116,22 @@ test("mail is reviewed and a provider error remains visible without automatic re
 }) => {
   const unexpected = await installFixtures(page);
   let attempts = 0;
+  let requestKey: string | undefined;
+  const recoveryKeys: string[] = [];
+  await page.route("**/engagement/mail/send-intents/*", (route) => {
+    if (route.request().method() !== "GET") return route.fallback();
+    recoveryKeys.push(
+      new URL(route.request().url()).pathname.split("/").at(-1)!,
+    );
+    return json(
+      route,
+      { message: "Synthetic delivery readback unavailable" },
+      503,
+    );
+  });
   await page.route("**/engagement/mail/send", async (route) => {
     attempts++;
+    requestKey = route.request().postDataJSON().requestKey;
     expect(route.request().postDataJSON()).toMatchObject({
       clientId,
       personIds: [personId],
@@ -138,6 +156,7 @@ test("mail is reviewed and a provider error remains visible without automatic re
     review.getByRole("button", { name: "Send email" }),
   ).toBeDisabled();
   await expect(review.getByText(/Sending may have completed/)).toBeVisible();
+  await expect.poll(() => recoveryKeys).toEqual([requestKey]);
   expect(attempts).toBe(1);
   expect(unexpected).toEqual([]);
 });

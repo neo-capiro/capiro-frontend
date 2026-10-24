@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
+import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { renewConversationSelection } from "./conversation-selection";
 import { conversationSelectionOwner } from "../../../shared/meri-conversations/query-journal";
@@ -13,7 +13,7 @@ import {
 /** Storage failures never fall back to broader session selectors. */
 export function useConversationSelection(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId?: string,
 ) {
   const cache = useQueryClient();
@@ -34,7 +34,7 @@ export function useConversationSelection(
     selection ? undefined : new TabJournalUnavailable().message,
   );
   const record = useCallback(
-    (context: ActionContext) => {
+    (context: ConversationContext) => {
       try {
         if (!selection) throw new TabJournalUnavailable();
         selection.record(context);

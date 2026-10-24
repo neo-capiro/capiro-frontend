@@ -7,15 +7,17 @@ import {
   createIntentsAccess,
   type IntentsAccess,
 } from "../meri-intents/access";
-import { OpaqueSessionController } from "../meri-actions/opaque-session-controller";
+import { SessionLifetimeController } from "../meri-actions/opaque-session-controller";
 import {
-  actionSessionHints,
-  type ActionSessionHints,
-} from "../meri-actions/session-bootstrap";
-import type { ActionContext } from "../meri-actions/session-receipt";
+  bootstrapConversationSession,
+  conversationSessionHints,
+  type ConversationSessionHints,
+  type ConversationContext,
+} from "./session";
+import type { ConversationSessionReceipt } from "@capiro/meri-contracts/conversation-session";
 
 export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
-  readonly context: ActionContext;
+  readonly context: ConversationContext;
   /** Read-only artifact preview/download under the same session lifetime. */
   readonly artifacts: ArtifactAccess;
   /** Prepared-action list and decisions, checked by the public receiver under the same session lifetime. */
@@ -27,21 +29,25 @@ export type ConversationAccount = Readonly<{
 }>;
 
 /** Composition only: canonical bootstrap owns credential/lifetime; public SDK owns admission. */
-export class ConversationHostController extends OpaqueSessionController<MeriConversationPort> {
+export class ConversationHostController extends SessionLifetimeController<
+  MeriConversationPort,
+  ConversationSessionReceipt
+> {
   constructor(options: {
-    hints: ActionSessionHints;
+    hints: ConversationSessionHints;
     account: ConversationAccount;
     fetcher?: typeof fetch;
     now?: () => number;
     origin?: string;
-    onBound?: (context: ActionContext) => void;
+    onBound?: (context: ConversationContext) => void;
     retryDelaysMs?: readonly number[];
   }) {
-    const hints = actionSessionHints.parse(options.hints);
+    const hints = conversationSessionHints.parse(options.hints);
     const account = Object.freeze({ ...options.account });
     const { fetcher, now, origin, onBound, retryDelaysMs } = options;
     super({
-      hints,
+      issue: (signal) =>
+        bootstrapConversationSession(hints, account, signal, fetcher, now),
       fetcher,
       now,
       ...(retryDelaysMs ? { retryDelaysMs } : {}),

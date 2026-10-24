@@ -5,6 +5,7 @@ import {
   receiveUserPreferencesResponse,
   type UserPreferences,
   type UserPreferencesSaveRequest,
+  type UserPreferencesResponse,
 } from "@capiro/meri-client/user-preferences";
 import { UserPreferencesController } from "../src/shared/meri-user-preferences/controller";
 import { userPreferencesJournal } from "../src/shared/meri-user-preferences/journal";
@@ -17,12 +18,31 @@ const owner = {
   tenantId: "20000000-0000-4000-8000-000000000001",
   actorId: "10000000-0000-4000-8000-000000000001",
 };
+// Explicitly synthetic configured catalog; no provider qualification is claimed.
+const modelCatalog: UserPreferencesResponse["modelCatalog"] = {
+  defaultSelection: {
+    provider: "bedrock",
+    modelId: "synthetic-model",
+    effort: null,
+  },
+  models: [
+    {
+      provider: "bedrock",
+      modelId: "synthetic-model",
+      label: "Synthetic model",
+      efforts: [null, "high"],
+      available: true,
+      unavailableReason: null,
+    },
+  ],
+};
 const document = (
   revision = 3,
   preferences: UserPreferences = structuredClone(USER_PREFERENCE_DEFAULTS),
-) => ({ owner, revision, preferences });
+) => ({ owner, revision, preferences, modelCatalog });
 const changed = (): UserPreferences => ({
   ...structuredClone(USER_PREFERENCE_DEFAULTS),
+  defaultModel: { ...modelCatalog.defaultSelection, effort: "high" },
   theme: "dark",
   density: "compact",
   timezone: "America/New_York",

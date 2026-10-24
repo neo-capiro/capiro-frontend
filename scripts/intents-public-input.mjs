@@ -1,3 +1,4 @@
+import { checkInstalledPublicExport } from "./installed-public-export.mjs";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
@@ -51,17 +52,7 @@ export function checkIntentsInput() {
   const records = verifyIntentsInput(manifest, (name) =>
     readFileSync(new URL(name, directory)),
   );
-  const client = JSON.parse(
-    readFileSync(new URL("package.json", root), "utf8"),
-  );
-  const entry = client.exports?.["./intents"],
-    prefix = "./vendor/intents-application/0.1.0/";
-  if (
-    entry?.types !== prefix + "intents-application.d.ts" ||
-    entry?.default !== prefix + "intents-application.mjs" ||
-    !client.files.includes(prefix.slice(2, -1))
-  )
-    throw Error("Intents public export drift");
+  const active = checkInstalledPublicExport("intents", "intents-application");
   // The generated metadata and schema name the same exact contract the export promises.
   const metadata = JSON.parse(
     readFileSync(
@@ -88,7 +79,7 @@ export function checkIntentsInput() {
     throw Error(
       "Intents public receiver is not the generated self-contained boundary",
     );
-  return { sourceCommit: manifest.sourceCommit, records };
+  return { sourceCommit: manifest.sourceCommit, records, active };
 }
 if (
   process.argv[1] &&

@@ -58,6 +58,15 @@ async function request(
       cache: "no-store",
       signal: current,
     });
+    // Access denial is authoritative even when an upstream error body is malformed.
+    // Discard it without admitting private bytes or retaining a readable prior view.
+    if (response.status === 401 || response.status === 403) {
+      void response.body?.cancel().catch(() => undefined);
+      throw new ConversationHistoryUnavailable(
+        response.status,
+        "CONVERSATION_ACCESS_DENIED",
+      );
+    }
     if (response.redirected || response.headers.has("content-encoding")) {
       void response.body?.cancel().catch(() => undefined);
       throw new ConversationHistoryUnavailable(

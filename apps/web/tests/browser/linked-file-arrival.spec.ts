@@ -52,6 +52,13 @@ async function installArrival(page: Page) {
       name: "Second synthetic client",
     }),
   );
+  await page.route(
+    `**/core/clients/${secondClientId}/files/storage-usage`,
+    (route) =>
+      route.request().method() === "GET"
+        ? json(route, { message: "Storage usage unavailable" }, 404)
+        : route.fallback(),
+  );
   await page.route(`**/core/clients/${clientId}/activity**`, (route) =>
     json(route, [
       {
@@ -190,7 +197,9 @@ test("a missing exact target reports current-list unavailability without choosin
     json(route, include ? [other, target] : [other]),
   );
   await page.goto(path);
-  await expect(page.getByRole("status")).toContainText(unavailable);
+  await expect(
+    page.getByRole("status").filter({ hasText: unavailable }),
+  ).toBeVisible();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.screenshot({
     path: testInfo.outputPath("linked-file-unavailable.png"),
@@ -223,7 +232,9 @@ test("a pending exact arrival waits for the authorized current list", async ({
     await page.goto(path);
     await held.started;
     await expect(page.getByRole("dialog")).toHaveCount(0);
-    await expect(page.getByRole("status")).toContainText("Loading");
+    await expect(
+      page.getByRole("status").filter({ hasText: /^Loading…$/ }),
+    ).toBeVisible();
   } finally {
     held.release();
   }
@@ -263,7 +274,9 @@ test("a new arrival waits for an in-flight refresh instead of opening a retained
     held.release();
   }
   await held.settled;
-  await expect(page.getByRole("status")).toContainText(unavailable);
+  await expect(
+    page.getByRole("status").filter({ hasText: unavailable }),
+  ).toBeVisible();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await noSideEffects(page, observed);
 });

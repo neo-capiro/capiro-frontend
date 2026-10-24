@@ -9,6 +9,8 @@ import { createArtifactAccess } from "../src/shared/meri-documents/artifact-acce
 import { DocumentInspectionSummary } from "../src/features/meri/files/DocumentInspectionSummary";
 import {
   accessBinary,
+  nativeInspection,
+  nativeBinary,
   accessFormats,
   accessInspection,
 } from "./meri-document-access-fixtures";
@@ -168,6 +170,7 @@ describe("B2 artifact inspection and signed-link download", () => {
       expect(await client(fetcher).inspect(ids.version, signal())).toEqual({
         ok: false,
         code: "SESSION_REFUSED",
+        accessDenied: true,
       });
     },
   );
@@ -184,8 +187,39 @@ describe("B2 artifact inspection and signed-link download", () => {
     expect(await client(fetcher).inspect(ids.version, signal())).toEqual({
       ok: false,
       code: "ACCESS_DENIED",
+      accessDenied: true,
     });
   });
+
+  for (const stage of ["issue", "redeem"] as const)
+    for (const status of [401, 403, 503])
+      it.each([false, true])(
+        `maps actual ${stage} HTTP ${status} independently of malformed body=%s`,
+        async (malformed) => {
+          const fetcher = vi
+            .fn<typeof fetch>()
+            .mockResolvedValueOnce(jsonResponse(accessInspection("txt")));
+          if (stage === "redeem") fetcher.mockResolvedValueOnce(issued());
+          fetcher.mockResolvedValueOnce(
+            jsonResponse(
+              malformed ? {} : { error: { code: "DOWNLOAD_LINK_REFUSED" } },
+              status,
+            ),
+          );
+          expect(await client(fetcher).download(ids.version, signal())).toEqual(
+            {
+              ok: false,
+              code: malformed
+                ? "DOWNLOAD_LINK_UNAVAILABLE"
+                : "DOWNLOAD_LINK_REFUSED",
+              ...(status === 401 || status === 403
+                ? { accessDenied: true }
+                : {}),
+            },
+          );
+          expect(fetcher).toHaveBeenCalledTimes(stage === "issue" ? 2 : 3);
+        },
+      );
 
   it.each(["caller", "lifetime"])(
     "stops %s cancellation before link dispatch and prevents credential reuse",
@@ -250,6 +284,90 @@ describe("truthful structural inspection display", () => {
       if (format !== "txt") expect(html).not.toContain("UTF-8 text");
       if (format === "pptx" || format === "pdf")
         expect(html).toContain("Pending");
+    },
+  );
+});
+
+describe("native workspace artifact access", () => {
+  it("reports verified path/bytes without generated inspection and downloads the same object", async () => {
+    const receipt = nativeInspection(),
+      fetcher = vi
+        .fn<typeof fetch>()
+        .mockResolvedValueOnce(jsonResponse(receipt))
+        .mockResolvedValueOnce(jsonResponse(receipt))
+        .mockResolvedValueOnce(issued())
+        .mockResolvedValueOnce(nativeBinary(receipt));
+    const access = client(fetcher),
+      preview = await access.inspect(ids.version, signal());
+    expect(preview).toMatchObject({
+      ok: true,
+      value: {
+        kind: "native-file",
+        path: "exports/report.csv",
+        filename: "report.csv",
+        mimeType: "application/octet-stream",
+        currentBytesVerified: true,
+      },
+    });
+    if (preview.ok) {
+      expect(preview.value).not.toHaveProperty("inspection");
+      expect(preview.value).not.toHaveProperty("generationStatus");
+    }
+    expect(await access.download(ids.version, signal())).toEqual({
+      ok: true,
+      value: {
+        filename: "report.csv",
+        mimeType: "application/octet-stream",
+        bytes: documentBytes,
+      },
+    });
+    expect(fetcher.mock.calls.map(([url]) => url)).toEqual([
+      "/api/documents/inspect",
+      "/api/documents/inspect",
+      "/api/documents/links/issue",
+      "/api/documents/links/redeem",
+    ]);
+  });
+  it("preserves the actual Unicode basename while validating RFC5987 download headers", async () => {
+    const receipt = nativeInspection("exports/r\u00e9sum\u00e9.csv"),
+      fetcher = vi
+        .fn<typeof fetch>()
+        .mockResolvedValueOnce(jsonResponse(receipt))
+        .mockResolvedValueOnce(issued())
+        .mockResolvedValueOnce(
+          nativeBinary(
+            receipt,
+            "attachment; filename=\"r_sum_.csv\"; filename*=UTF-8''r%C3%A9sum%C3%A9.csv",
+          ),
+        );
+    expect(await client(fetcher).download(ids.version, signal())).toMatchObject(
+      {
+        ok: true,
+        value: {
+          filename: "r\u00e9sum\u00e9.csv",
+          mimeType: "application/octet-stream",
+        },
+      },
+    );
+  });
+  it.each(["scope", "path", "hash", "object"])(
+    "refuses native %s mismatch before link issuance",
+    async (kind) => {
+      const receipt = nativeInspection();
+      if (kind === "scope")
+        receipt.version.object.scopes = [
+          { ...receipt.version.scopes[0]!, resourceId: ids.other },
+        ];
+      else if (kind === "path") receipt.version.path = "../file";
+      else if (kind === "hash") receipt.integrity.sha256 = "a".repeat(64);
+      else receipt.version.object.objectId = ids.other;
+      const fetcher = vi
+        .fn<typeof fetch>()
+        .mockResolvedValueOnce(jsonResponse(receipt));
+      expect((await client(fetcher).download(ids.version, signal())).ok).toBe(
+        false,
+      );
+      expect(fetcher).toHaveBeenCalledTimes(1);
     },
   );
 });

@@ -393,3 +393,9 @@
   letter-spacing: -0.2px;
   white-space: nowrap;
 }
+
+@media (max-width: 680px) {
+  .clientHeader {
+    flex-wrap: wrap;
+  }
+}

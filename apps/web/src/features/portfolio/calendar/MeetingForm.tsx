@@ -92,7 +92,11 @@ export function MeetingForm({
         location,
       });
     } catch (error) {
-      setValidation(error instanceof Error ? error.message : "Enter valid start and end date/times.");
+      setValidation(
+        error instanceof Error
+          ? error.message
+          : "Enter valid start and end date/times.",
+      );
     }
   }
   return (

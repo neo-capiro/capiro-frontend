@@ -434,7 +434,11 @@ export function IntegrationSettings() {
         title="Account permissions"
       >
         <p>{detail?.accountEmail}</p>
-        <ul>{detail?.scopes.map((scope) => <li key={scope}>{scope}</li>)}</ul>
+        <ul>
+          {detail?.scopes.map((scope) => (
+            <li key={scope}>{scope}</li>
+          ))}
+        </ul>
         {!detail?.scopes.length && <p>No granted scopes were returned.</p>}
       </SettingsDialog>
     </div>

@@ -45,7 +45,11 @@ export function useSaveMeeting(
         controller.signal.throwIfAborted();
         guard();
         if (meetingId) {
-          const saved = cache.getQueryState<Meeting>(["meeting", meetingId, readClientId ?? null]);
+          const saved = cache.getQueryState<Meeting>([
+            "meeting",
+            meetingId,
+            readClientId ?? null,
+          ]);
           if (
             saved?.status !== "success" ||
             saved.fetchStatus !== "idle" ||
@@ -53,7 +57,8 @@ export function useSaveMeeting(
             saved.error ||
             saved.data?.id !== meetingId ||
             (saved.data.client?.id ?? null) !== originalClientId ||
-            (meeting?.updatedAt !== undefined && saved.data.updatedAt !== meeting.updatedAt)
+            (meeting?.updatedAt !== undefined &&
+              saved.data.updatedAt !== meeting.updatedAt)
           )
             throw new ApiError(
               409,
@@ -68,7 +73,7 @@ export function useSaveMeeting(
           .request(
             "core",
             `engagement/meetings${meetingId ? `/${encodeURIComponent(meetingId)}` : ""}`,
-            meetingSaveReceiptSchema(meetingId, input),
+            meetingSaveReceiptSchema(meetingId, input, originalClientId),
             {
               method: meetingId ? "PUT" : "POST",
               body: input,

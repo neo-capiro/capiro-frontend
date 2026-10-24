@@ -4,6 +4,8 @@ import {
   firstChatCoreOperationForClient,
   firstChatCoreOperationKey,
   firstChatCoreRequest,
+  firstChatV2OperationForClient,
+  firstChatV2OperationKey,
 } from "../capiro/operations/meri-first-chat";
 import { capiroOperations } from "../capiro/registry";
 import { previewHeldResponse } from "./backend-policy.server";
@@ -23,37 +25,35 @@ export function selectFirstChatGateway(
   request: Request,
   operation: string,
 ): FirstChatGatewaySelection {
-  if (
-    operation === firstChatCoreOperationKey &&
-    env.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED !== "true"
-  )
+  const bootstrap =
+    operation === firstChatCoreOperationKey ||
+    operation === firstChatV2OperationKey;
+  if (bootstrap && env.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED !== "true")
     return {
       response: jsonError(503, "First chat bootstrap is not enabled."),
     };
-  const configuredClient =
-    operation === firstChatCoreOperationKey
-      ? firstChatCoreRequest.shape.clientId.safeParse(
-          env.MERI_FIRST_CHAT_CLIENT_ID,
-        )
-      : null;
+  const configuredClient = bootstrap
+    ? firstChatCoreRequest.shape.clientId.safeParse(
+        env.MERI_FIRST_CHAT_CLIENT_ID,
+      )
+    : null;
   if (configuredClient && !configuredClient.success)
     return { response: jsonError(503, "First chat client is not configured.") };
   const scopedFirstChat = configuredClient?.success
-    ? firstChatCoreOperationForClient(configuredClient.data)
+    ? operation === firstChatV2OperationKey
+      ? firstChatV2OperationForClient(configuredClient.data)
+      : firstChatCoreOperationForClient(configuredClient.data)
     : null;
   const previewWriteTarget = previewFirstChatWriteTarget(env, request);
-  if (
-    previewWriteTarget &&
-    (operation !== firstChatCoreOperationKey || !scopedFirstChat)
-  )
+  if (previewWriteTarget && (!bootstrap || !scopedFirstChat))
     return { response: previewHeldResponse() };
   const operations: OperationRegistry =
     previewWriteTarget && scopedFirstChat
-      ? { [firstChatCoreOperationKey]: scopedFirstChat }
+      ? { [operation]: scopedFirstChat }
       : scopedFirstChat
         ? {
             ...capiroOperations,
-            [firstChatCoreOperationKey]: scopedFirstChat,
+            [operation]: scopedFirstChat,
           }
         : capiroOperations;
   return { response: null, operations, previewWriteTarget };

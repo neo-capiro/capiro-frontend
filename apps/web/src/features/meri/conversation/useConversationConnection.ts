@@ -11,7 +11,7 @@ import {
   ConversationHostController,
   type ConversationAccount,
 } from "../../../shared/meri-conversations/host-controller";
-import type { ActionContext } from "../../../shared/meri-actions/session-receipt";
+import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import { useConversationSelection } from "./useConversationSelection";
 
 /** A short hard expiry needs explicit reconnect; proactive renewal already has timer evidence. */
@@ -29,16 +29,17 @@ type Reopening = {
   target?: { conversationId: string; runId: string };
   pending?: string;
 };
-const exactTarget = (hints: Hints | ActionContext | undefined) =>
+const exactTarget = (hints: Hints | ConversationContext | undefined) =>
   hints?.conversationId && hints.runId
     ? { conversationId: hints.conversationId, runId: hints.runId }
     : undefined;
 
 /** Last service binding: an exact reopening/draft selector, never current authority. */
 function boundContext() {
-  let last: Readonly<{ context: ActionContext; at: number }> | null = null;
+  let last: Readonly<{ context: ConversationContext; at: number }> | null =
+    null;
   return {
-    record(context: ActionContext, at: number) {
+    record(context: ConversationContext, at: number) {
       last = Object.freeze({ context, at });
     },
     last: () => last,
@@ -95,7 +96,7 @@ function useSessionRenewal({
 /** Exact selectors and explicit opening intent stay separate from mounted host/renewal resources. */
 function useConversationOpening(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   conversationId: string | undefined,
   now: () => number,
   bound: ReturnType<typeof boundContext>,
@@ -168,7 +169,7 @@ function useConversationOpening(
  */
 export function useConversationConnection(
   account: ConversationAccount,
-  clientId: string,
+  clientId: string | null,
   now: () => number = Date.now,
   conversationId?: string,
 ) {

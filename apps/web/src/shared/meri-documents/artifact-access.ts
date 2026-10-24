@@ -10,19 +10,34 @@ import {
   DocumentAccessUnavailable,
   documentAccessTransport,
 } from "./workflow-transport";
-type ArtifactInspection = DocumentInspectionResponse["inspection"];
+type GeneratedInspection = Exclude<
+  DocumentInspectionResponse,
+  { kind: "native-file" }
+>;
+type ArtifactInspection = GeneratedInspection["inspection"];
+type GeneratedVersion = Extract<AdmittedDocumentVersion, { filename: string }>;
 
 export type ArtifactPreview = Readonly<{
   versionId: string;
-  artifactId: string;
   filename: string;
   mimeType: string;
   bytes: number;
   createdAt: string;
-  generationStatus: AdmittedDocumentVersion["generationStatus"];
-  previewStatus: AdmittedDocumentVersion["previewStatus"];
-  inspection: ArtifactInspection;
-}>;
+}> &
+  (
+    | Readonly<{
+        kind: "generated";
+        artifactId: string;
+        generationStatus: GeneratedVersion["generationStatus"];
+        previewStatus: GeneratedVersion["previewStatus"];
+        inspection: ArtifactInspection;
+      }>
+    | Readonly<{
+        kind: "native-file";
+        path: string;
+        currentBytesVerified: true;
+      }>
+  );
 export type ArtifactFile = Readonly<{
   filename: string;
   mimeType: string;
@@ -31,7 +46,7 @@ export type ArtifactFile = Readonly<{
 /** Closed refusal codes from the service, or a local code when nothing usable was received. */
 export type ArtifactReply<T> =
   | { ok: true; value: T }
-  | { ok: false; code: string };
+  | { ok: false; code: string; accessDenied?: true };
 export interface ArtifactAccess {
   inspect(
     versionId: string,
@@ -43,7 +58,11 @@ export interface ArtifactAccess {
   ): Promise<ArtifactReply<ArtifactFile>>;
 }
 
-const failure = (code: string) => ({ ok: false as const, code });
+const failure = (code: string, accessDenied = false) => ({
+  ok: false as const,
+  code,
+  ...(accessDenied ? { accessDenied: true as const } : {}),
+});
 const failed = (error: unknown, fallback: string) =>
   failure(
     error instanceof DocumentAccessUnavailable
@@ -51,22 +70,35 @@ const failed = (error: unknown, fallback: string) =>
       : error instanceof Error && error.name === "AbortError"
         ? "CANCELLED"
         : fallback,
+    error instanceof DocumentAccessUnavailable,
   );
-const preview = (
-  version: AdmittedDocumentVersion,
-  inspection: ArtifactInspection,
-): ArtifactPreview =>
-  Object.freeze({
+const preview = (receipt: DocumentInspectionResponse): ArtifactPreview => {
+  const { version } = receipt;
+  const common = {
     versionId: version.versionId,
-    artifactId: version.artifactId,
-    filename: version.filename,
-    mimeType: version.mimeType,
     bytes: version.object.bytes,
     createdAt: version.createdAt,
-    generationStatus: version.generationStatus,
-    previewStatus: version.previewStatus,
-    inspection,
-  });
+  };
+  return "kind" in receipt
+    ? Object.freeze({
+        ...common,
+        kind: "native-file",
+        filename: receipt.version.path.split("/").at(-1)!,
+        path: receipt.version.path,
+        mimeType: "application/octet-stream",
+        currentBytesVerified: receipt.integrity.currentBytesVerified,
+      })
+    : Object.freeze({
+        ...common,
+        kind: "generated",
+        artifactId: receipt.version.artifactId,
+        filename: receipt.version.filename,
+        mimeType: receipt.version.mimeType,
+        generationStatus: receipt.version.generationStatus,
+        previewStatus: receipt.version.previewStatus,
+        inspection: receipt.inspection,
+      });
+};
 
 /**
  * Read-only access to artifacts in the session's own conversation, under that session's lifetime.
@@ -85,8 +117,9 @@ export function createArtifactAccess(
       "inspect",
       new TextEncoder().encode(JSON.stringify({ versionId })),
     );
-    const { value } = await documents.inspect(request, signal);
-    if ("error" in value) return failure(value.error.code);
+    const { status, value } = await documents.inspect(request, signal);
+    if ("error" in value)
+      return failure(value.error.code, status === 401 || status === 403);
     if (value.version.versionId !== versionId)
       return failure("VERSION_MISMATCH");
     return { ok: true as const, value };
@@ -106,7 +139,7 @@ export function createArtifactAccess(
         return reply.ok
           ? {
               ok: true,
-              value: preview(reply.value.version, reply.value.inspection),
+              value: preview(reply.value),
             }
           : reply;
       }),
@@ -126,8 +159,14 @@ export function createArtifactAccess(
         return {
           ok: true,
           value: Object.freeze({
-            filename: file.version.filename,
-            mimeType: file.version.mimeType,
+            filename:
+              "path" in file.version
+                ? file.version.path.split("/").at(-1)!
+                : file.version.filename,
+            mimeType:
+              "path" in file.version
+                ? "application/octet-stream"
+                : file.version.mimeType,
             bytes: file.bytes,
           }),
         };

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { verifyPackageInputs } from './public-packages.mjs';
+import { verifyPackageInputs, verifyActiveMeriPackages } from './public-packages.mjs';
 
 const record = { file: 'fixture-0.1.0.tgz', sourceCommit: 'a'.repeat(40), bytes: 3, sha256: 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad' };
 const manifest = value => ({ schema: 'capiro-public-package-inputs/1', artifacts: [value] });
@@ -50,4 +50,17 @@ test('validated primitive snapshots survive reader mutation of a later input rec
   assert.deepEqual(names, ['fixture-0.1.0.tgz', 'second.tgz']);
   assert.equal(result[1].sourceCommit, record.sourceCommit);
   assert.equal(verifyPackageInputs(manifest(Object.assign(Object.create(null), record)), () => Buffer.from('abc')).length, 1);
+});
+
+test('every currently consumed Meri tarball needs its own immutable manifest record', () => {
+  const current = {...record, file:'capiro-meri-contracts-0.1.12.tgz'};
+  const stream = {...record, file:'capiro-meri-ui-stream-0.1.2.tgz'};
+  const consumers = [{dependencies:{'@capiro/meri-contracts':`file:../../vendor/${current.file}`}},
+    {devDependencies:{'@capiro/meri-contracts':`file:../../vendor/${current.file}`,'@capiro/meri-ui-stream':`file:../../vendor/${stream.file}`}}];
+  assert.deepEqual(verifyActiveMeriPackages([record,current,stream],consumers),[current,stream]);
+  for (const records of [[record], [current], [{...current,sourceCommit:null},stream], [{...current,sourceCommit:'working-tree'},stream]])
+    assert.throws(()=>verifyActiveMeriPackages(records,consumers),/immutable source binding/);
+  for (const value of ['0.1.12',`file:../../vendor/${stream.file}`,'file:../../vendor/../escape.tgz',['file:../../vendor/'+current.file]])
+    assert.throws(()=>verifyActiveMeriPackages([current,stream],[{dependencies:{'@capiro/meri-contracts':value}}]),/Invalid active/);
+  assert.throws(()=>verifyActiveMeriPackages([current],[]),/No active/);
 });

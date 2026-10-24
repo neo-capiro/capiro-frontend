@@ -1,6 +1,10 @@
 import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import {
   receiveActionResponse,
+  type ActionDraftResponse,
+  type ActionPrepareResponse,
+  type ActionQueryResponse,
   type ActionRoute,
 } from "@capiro/meri-contracts/action-application";
 import { GovernedActionWorkflow } from "../src/shared/meri-actions/workflow-adapter";
@@ -12,7 +16,7 @@ import type {
 } from "../src/shared/meri-actions/attempt-journal";
 import type { WorkflowReply } from "../src/shared/meri-actions/workflow-port";
 
-export function fixture(name: string): {
+export function archivedFixture(name: string): {
   route: ActionRoute;
   httpStatus: number;
   response: unknown;
@@ -24,12 +28,66 @@ export function fixture(name: string): {
     ),
   );
 }
+export const { canonicalSha256 } = createRequire(import.meta.url)(
+  "@capiro/meri-contracts/node",
+) as { canonicalSha256(value: unknown): string };
+
+export function fixture(name: string) {
+  const value = archivedFixture(name);
+  if (
+    [
+      "query",
+      "query-interleaved-sequence",
+      "query-foreign-intent-limit",
+      "query-foreign-intent-page",
+    ].includes(name)
+  ) {
+    // Keep the historical wire files immutable. These current synthetic queries
+    // retain every other value and use the public contract's observation hash.
+    const query = value.response as ActionQueryResponse;
+    Reflect.deleteProperty(
+      query.observation.subject,
+      "authorizationDecisionId",
+    );
+    Reflect.deleteProperty(
+      query.observation.result.subject,
+      "authorizationDecisionId",
+    );
+    query.resultSha256 = canonicalSha256(query.observation);
+  }
+  if (
+    [
+      "draft",
+      "draft-canonical-date",
+      "draft-foreign-query-handle",
+      "prepare",
+      "prepare-canonical-date",
+      "prepare-coherent-task-substitution",
+      "prepare-foreign-supporting-draft",
+      "prepare-recovered-worker",
+    ].includes(name)
+  ) {
+    const draft =
+      value.route === "draft"
+        ? (value.response as ActionDraftResponse)
+        : (value.response as ActionPrepareResponse).draft;
+    draft.source.resultSha256 = (
+      fixture("query").response as ActionQueryResponse
+    ).resultSha256;
+    const { draftSha256: _archivedDigest, ...content } = draft;
+    draft.draftSha256 = canonicalSha256(content);
+  }
+  return value;
+}
 export const context = JSON.parse(
   readFileSync(
     new URL("./fixtures/meri-actions/CONTEXT.json", import.meta.url),
     "utf8",
   ),
 );
+context.selection.resultSha256 = (
+  fixture("query").response as ActionQueryResponse
+).resultSha256;
 export const clock = Date.parse(context.syntheticNow);
 export function accepted<T>(reply: WorkflowReply<T>): T {
   if (!reply.ok) throw new Error(`Expected admitted fixture: ${reply.problem}`);

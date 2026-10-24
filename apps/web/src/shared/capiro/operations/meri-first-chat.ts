@@ -82,3 +82,57 @@ export function firstChatCoreOperationForClient(clientId: string) {
     ),
   };
 }
+
+const bootstrapV2Identity = {
+  schemaVersion: z.literal(2),
+  requestId: canonicalUuid,
+};
+export const firstChatV2Request = z.discriminatedUnion("scopeKind", [
+  z.strictObject({
+    ...bootstrapV2Identity,
+    scopeKind: z.literal("client"),
+    clientId: canonicalUuid,
+  }),
+  z.strictObject({
+    ...bootstrapV2Identity,
+    scopeKind: z.literal("general"),
+    clientId: z.null(),
+  }),
+]);
+const receiptIdentity = {
+  ...bootstrapV2Identity,
+  conversationId: canonicalUuid,
+  tenantId: canonicalUuid,
+  actorId: canonicalUuid,
+};
+export const firstChatV2Receipt = z.discriminatedUnion("scopeKind", [
+  z.strictObject({
+    ...receiptIdentity,
+    scopeKind: z.literal("client"),
+    clientId: canonicalUuid,
+  }),
+  z.strictObject({
+    ...receiptIdentity,
+    scopeKind: z.literal("general"),
+    clientId: z.null(),
+  }),
+]);
+export type FirstChatV2Request = z.infer<typeof firstChatV2Request>;
+export const firstChatV2OperationKey = "meri.conversation.bootstrap.v2";
+export const firstChatV2Operation = defineOperation({
+  ...firstChatCoreOperation,
+  request: z.strictObject({ body: firstChatV2Request }),
+  response: firstChatV2Receipt,
+  source:
+    "capiro-backend@16c3122a379481eb19cdee156ceb5d5c8b615bea canonical v2 General/client bootstrap; deployment qualification separate",
+});
+
+/** General is explicit; client requests remain restricted to the configured preview client. */
+export function firstChatV2OperationForClient(clientId: string) {
+  return {
+    ...firstChatV2Operation,
+    request: firstChatV2Operation.request.refine(
+      ({ body }) => body.scopeKind === "general" || body.clientId === clientId,
+    ),
+  };
+}

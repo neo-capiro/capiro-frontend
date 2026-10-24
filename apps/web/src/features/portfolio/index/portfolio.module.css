@@ -70,8 +70,12 @@
   gap: 18px;
 }
 .prospectCard {
+  position: relative;
   border-style: dashed;
   border-color: var(--border-strong);
+}
+.prospectCard .cardTop {
+  position: static;
 }
 .prospectCard:hover {
   text-decoration: none;
@@ -103,7 +107,7 @@
 }
 .prospectBadge {
   color: var(--muted-foreground);
-  background: color-mix(in srgb, var(--muted-foreground) 10%, transparent);
+  background: var(--muted);
 }
 .stageBadge {
   color: var(--foreground);
@@ -316,7 +320,7 @@
   transform: translateX(-50%);
   gap: 0;
   padding: 0;
-  max-height: calc(100dvh - 24px);
+  max-height: calc(100dvh - min(211px, 20.3dvh) - 16px);
   box-shadow:
     0 16px 40px -12px #0c0a092e,
     0 2px 6px #0c0a090d;

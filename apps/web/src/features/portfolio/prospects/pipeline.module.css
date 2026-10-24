@@ -34,7 +34,7 @@
   letter-spacing: -0.3px;
 }
 .pipelineDialog > header h2::after {
-  content: "i";
+  content: "i" / "";
   display: inline-grid;
   place-items: center;
   width: 16px;
@@ -249,4 +249,26 @@
   color: var(--stone-600, #57534e);
   font-size: 13px;
   line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .pipelineDialog > header {
+    flex-basis: auto;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 16px 20px;
+  }
+  .pipelineDialog > header > div:first-child {
+    flex: 1;
+    min-width: 0;
+  }
+  .pipelineDialog > header h2 {
+    white-space: nowrap;
+  }
+  .pipelineSummary {
+    order: 1;
+    width: 100%;
+    margin-left: 0;
+    white-space: normal;
+  }
 }

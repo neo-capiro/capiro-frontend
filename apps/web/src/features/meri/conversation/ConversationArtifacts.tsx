@@ -12,6 +12,7 @@ import { FileText } from "lucide-react";
 import type {
   ArtifactAccess,
   ArtifactPreview,
+  ArtifactReply,
 } from "../../../shared/meri-documents/artifact-access";
 import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { DocumentInspectionSummary } from "../files/DocumentInspectionSummary";
@@ -85,12 +86,21 @@ function useArtifactActions(access: ArtifactAccess, versionId: string) {
     setStatus({ kind: "working", action });
     return controller;
   };
+  const refuse = (
+    action: "preview" | "download",
+    reply: Extract<ArtifactReply<unknown>, { ok: false }>,
+  ) => {
+    if (reply.accessDenied) {
+      setPreview(null);
+      url.clear();
+    }
+    setStatus({ kind: "failed", action, code: reply.code });
+  };
   const inspect = async () => {
     const controller = begin("preview");
     const reply = await access.inspect(versionId, controller.signal);
     if (work.current !== controller) return;
-    if (!reply.ok)
-      return setStatus({ kind: "failed", action: "preview", code: reply.code });
+    if (!reply.ok) return refuse("preview", reply);
     setPreview(reply.value);
     setStatus({ kind: "idle" });
   };
@@ -98,12 +108,7 @@ function useArtifactActions(access: ArtifactAccess, versionId: string) {
     const controller = begin("download");
     const reply = await access.download(versionId, controller.signal);
     if (work.current !== controller) return;
-    if (!reply.ok)
-      return setStatus({
-        kind: "failed",
-        action: "download",
-        code: reply.code,
-      });
+    if (!reply.ok) return refuse("download", reply);
     const link = document.createElement("a");
     link.href = url.replace(
       new Blob([reply.value.bytes], { type: reply.value.mimeType }),
@@ -176,11 +181,20 @@ function ConversationArtifact({
       </div>
       {preview && (
         <div className={styles.preview}>
-          <div className={styles.pills}>
-            <StatusPill>{`Generation: ${preview.generationStatus}`}</StatusPill>
-            <StatusPill>{`Preview: ${preview.previewStatus}`}</StatusPill>
-          </div>
-          <DocumentInspectionSummary inspection={preview.inspection} />
+          {preview.kind === "native-file" ? (
+            <>
+              <p>{preview.path}</p>
+              <StatusPill>Stored bytes verified</StatusPill>
+            </>
+          ) : (
+            <>
+              <div className={styles.pills}>
+                <StatusPill>{`Generation: ${preview.generationStatus}`}</StatusPill>
+                <StatusPill>{`Preview: ${preview.previewStatus}`}</StatusPill>
+              </div>
+              <DocumentInspectionSummary inspection={preview.inspection} />
+            </>
+          )}
         </div>
       )}
     </Artifact>

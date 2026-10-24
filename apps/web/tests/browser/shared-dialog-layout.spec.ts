@@ -29,7 +29,7 @@ const surfaces = [
     name: "wide",
     path: "/portfolio/prospects",
     trigger: "Pipeline",
-    title: "Prospects pipeline",
+    title: "Pipeline",
     width: 1280,
     drawer: false,
     compact: false,
@@ -56,13 +56,11 @@ async function expectDialogGeometry(
   await expect(dialog).toBeVisible();
   await expect(dialog).toHaveAttribute("data-slot", "dialog-content");
   await expect(dialog).toHaveAttribute("aria-modal", "true");
-  await expect(dialog).toHaveCSS("display", surface.compact ? "flex" : "grid");
-  await expect(dialog).toHaveCSS("row-gap", surface.compact ? "0px" : "20px");
-  await expect(dialog).toHaveCSS(
-    "column-gap",
-    surface.compact ? "0px" : "20px",
-  );
-  if (surface.compact) {
+  const flex = surface.compact || surface.name === "wide";
+  await expect(dialog).toHaveCSS("display", flex ? "flex" : "grid");
+  await expect(dialog).toHaveCSS("row-gap", flex ? "0px" : "20px");
+  await expect(dialog).toHaveCSS("column-gap", flex ? "0px" : "20px");
+  if (flex) {
     await expect(dialog).toHaveCSS("flex-direction", "column");
   } else {
     // Used grid tracks expose the actual page-grid collision, including CSS order.
@@ -84,7 +82,50 @@ async function expectDialogGeometry(
     expect(bounds.height).toBeCloseTo(viewport.height, 1);
   } else {
     expect(bounds.x + bounds.width / 2).toBeCloseTo(viewport.width / 2, 1);
-    expect(bounds.y + bounds.height / 2).toBeCloseTo(viewport.height / 2, 1);
+    if (surface.name === "wide") {
+      await expect(
+        dialog.getByRole("heading", { name: "Pipeline", exact: true }),
+      ).toBeVisible();
+      expect(bounds.y).toBeCloseTo(
+        Math.max(24, Math.min(110, viewport.height * 0.1058)),
+        1,
+      );
+      expect(bounds.height).toBeCloseTo(Math.min(554, viewport.height - 48), 1);
+      expect(bounds.y + bounds.height).toBeLessThanOrEqual(viewport.height);
+      const header = dialog.locator(":scope > header");
+      const content = [
+        header.getByRole("heading", { name: "Pipeline", exact: true }),
+        header.getByText("Weighted pipeline and win rate unavailable", {
+          exact: true,
+        }),
+        header.getByRole("button", { name: "Close", exact: true }),
+      ];
+      const rects = await Promise.all(
+        content.map((item) => item.boundingBox()),
+      );
+      for (const [index, rect] of rects.entries()) {
+        expect(rect).not.toBeNull();
+        if (!rect)
+          throw new Error("Pipeline header item has no rendered bounds.");
+        expect(rect.x).toBeGreaterThanOrEqual(bounds.x);
+        expect(rect.x + rect.width).toBeLessThanOrEqual(
+          bounds.x + bounds.width,
+        );
+        for (const other of rects.slice(index + 1)) {
+          if (!other)
+            throw new Error("Pipeline header item has no rendered bounds.");
+          expect(
+            rect.x + rect.width <= other.x ||
+              other.x + other.width <= rect.x ||
+              rect.y + rect.height <= other.y ||
+              other.y + other.height <= rect.y,
+            "Pipeline title, summary and close control must not overlap",
+          ).toBe(true);
+        }
+      }
+    } else {
+      expect(bounds.y + bounds.height / 2).toBeCloseTo(viewport.height / 2, 1);
+    }
   }
   expect(
     await dialog.evaluate(

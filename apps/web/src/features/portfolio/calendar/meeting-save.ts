@@ -16,6 +16,7 @@ export type MeetingInput = z.infer<typeof meetingInputSchema>;
 export function meetingSaveReceiptSchema(
   id: string | undefined,
   input: MeetingInput,
+  originalClientId?: string | null,
 ) {
   return meetingSchema.refine(
     (row) =>
@@ -30,7 +31,10 @@ export function meetingSaveReceiptSchema(
       Date.parse(row.endsAt) === Date.parse(input.endsAt) &&
       // An unscoped create may be associated by the backend. An explicit update
       // to null clears the association; neither case requires a browser echo.
-      (input.clientId === undefined ||
+      ((input.clientId === undefined &&
+        (!id ||
+          originalClientId === undefined ||
+          (row.client?.id ?? null) === originalClientId)) ||
         (!id && !input.clientId) ||
         (row.client?.id ?? null) === input.clientId),
     "The saved meeting does not match the submitted meeting and client.",
@@ -38,9 +42,13 @@ export function meetingSaveReceiptSchema(
 }
 
 /** Preserve automatic/internal provenance unless the reviewed association changes. */
-export function meetingAssignmentFields(meeting: Meeting | undefined, target: string | null) {
+export function meetingAssignmentFields(
+  meeting: Meeting | undefined,
+  target: string | null,
+) {
   if (!meeting) return target ? { clientId: target } : {};
   if ((meeting.client?.id ?? null) === target) return {};
-  if (!meeting.updatedAt) throw new Error("Refresh the meeting before changing its client.");
+  if (!meeting.updatedAt)
+    throw new Error("Refresh the meeting before changing its client.");
   return { clientId: target, expectedRevision: meeting.updatedAt };
 }

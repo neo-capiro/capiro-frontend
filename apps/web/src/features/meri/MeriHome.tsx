@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
 import { useSelectedClient } from "../../shared/session/SelectedClient";
@@ -34,12 +35,16 @@ export function MeriHome({
     conversationEnabled && capabilities.conversations.status === "on";
   const identity = useIdentity();
   const selected = useSelectedClient();
+  const params = useSearchParams();
+  const general = params.get("scope") === "general" && !params.has("clientId");
   const current =
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
       : undefined;
   const clientId =
-    selected.state === "authorized-client" ? selected.client.id : undefined;
+    !general && selected.state === "authorized-client"
+      ? selected.client.id
+      : undefined;
   const clientScope = current?.tenant?.id
     ? { tenantId: current.tenant.id, userId: current.user.id }
     : undefined;
@@ -68,7 +73,9 @@ export function MeriHome({
           </p>
         )}
         <section aria-label="Current client">
-          {selected.state === "authorized-client" ? (
+          {general ? (
+            <p>Selected scope: General</p>
+          ) : selected.state === "authorized-client" ? (
             <p>Selected client: {selected.client.name}</p>
           ) : (
             <p>Choose a permitted client above to work in its scope.</p>

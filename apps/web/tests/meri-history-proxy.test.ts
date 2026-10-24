@@ -326,12 +326,15 @@ describe("synthetic native history browser client", () => {
     ).resolves.toEqual(emptyList);
   });
 
-  it("retains only admitted closed denial codes, never untrusted service prose", async () => {
+  it("classifies access denial before admitting any service error body", async () => {
     await expect(
       listConversations({}, new AbortController().signal, async () =>
         json({ error: { code: "MEMBERSHIP_REVOKED" } }, 403),
       ),
-    ).rejects.toMatchObject({ status: 403, code: "MEMBERSHIP_REVOKED" });
+    ).rejects.toMatchObject({
+      status: 403,
+      code: "CONVERSATION_ACCESS_DENIED",
+    });
     expect(
       new ConversationHistoryUnavailable(403, "MEMBERSHIP_REVOKED").message,
     ).toBe("Conversation history unavailable");

@@ -26,10 +26,13 @@ test("linked Objective meeting opens the current Portfolio detail", async ({
 }) => {
   await installFixtures(page);
   let detailReads = 0;
-  await page.route(`**/core/engagement/meetings/${meetingId}`, (route) => {
-    detailReads++;
-    return json(route, meeting);
-  });
+  await page.route(
+    `**/core/engagement/meetings/${meetingId}?clientId=${clientId}`,
+    (route) => {
+      detailReads++;
+      return json(route, meeting);
+    },
+  );
   await page.goto(url(`meeting=${meetingId}&objectiveMeeting=1`));
   await expect(
     page.getByRole("dialog", { name: meeting.subject }),
@@ -72,11 +75,13 @@ test("foreign Portfolio meeting receipt withholds its workspace", async ({
   page,
 }) => {
   await installFixtures(page);
-  await page.route(`**/core/engagement/meetings/${meetingId}`, (route) =>
-    json(route, {
-      ...meeting,
-      client: { id: otherClientId, name: "Other client" },
-    }),
+  await page.route(
+    `**/core/engagement/meetings/${meetingId}?clientId=${clientId}`,
+    (route) =>
+      json(route, {
+        ...meeting,
+        client: { id: otherClientId, name: "Other client" },
+      }),
   );
   await page.goto(url(`meeting=${meetingId}&objectiveMeeting=1`));
   await expect(page.getByRole("alert")).toContainText(

@@ -68,7 +68,9 @@ test("Customize saves the complete authorized catalog without appending ungrante
   ).toBeEnabled();
   await expect.poll(() => positions(page)).toEqual([secondId, clientId]);
   await expect(
-    page.getByRole("status").filter({ hasText: "Customizing all 2 profiles" }),
+    page
+      .getByRole("status")
+      .filter({ hasText: "Customizing 2 client profiles you can access." }),
   ).toBeVisible();
   await expect(page.getByText("Ungrant Wall", { exact: true })).toHaveCount(0);
   await expect(page.getByText("Archived Profile", { exact: true })).toHaveCount(
