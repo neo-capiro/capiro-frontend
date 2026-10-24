@@ -69,6 +69,7 @@ Resources:
                   - ecr:CompleteLayerUpload
                   - ecr:PutImage
                   - ecr:BatchGetImage
+                  - ecr:GetDownloadUrlForLayer
                   - ecr:DescribeImages
                 Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/capiro/portfolio-preview
   PortfolioBuildProject:
