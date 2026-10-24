@@ -23,6 +23,7 @@ import { publicOnboardOperations } from "./operations/onboard-public";
 import { jsonError, serviceErrorResponse } from "./gateway-errors";
 import { reportStrategyValidation } from "./strategy-validation-diagnostic";
 import { sameRequestOrigin } from "../request-origin";
+import { coreSessionAuthentication } from "../preview/core-session-authentication";
 
 const requestLimit = 2_000_000;
 const responseLimit = 8_000_000;
@@ -337,7 +338,18 @@ export async function handleCapiroRequest(
   }
   let token: string | null;
   try {
-    token = await abortable(getToken(operation.authentication), signal);
+    token = await abortable(
+      getToken(
+        operation.authentication ??
+          coreSessionAuthentication(
+            operation.service,
+            base,
+            operation.method,
+            operationPath(operation, input),
+          ),
+      ),
+      signal,
+    );
   } catch {
     if (signal.aborted)
       return jsonError(

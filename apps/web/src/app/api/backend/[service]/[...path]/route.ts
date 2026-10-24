@@ -8,9 +8,12 @@ async function handle(request: Request, context: Context) {
   const held = previewBackendRejection(process.env, request);
   if (held) return held;
   const { service, path } = await context.params;
-  const getToken = async () => {
+  const getToken = async (authentication?: "clerk-session") => {
     const session = await auth();
-    return session.userId ? session.getToken({ template: "capiro" }) : null;
+    if (!session.userId) return null;
+    return authentication === "clerk-session"
+      ? session.getToken()
+      : session.getToken({ template: "capiro" });
   };
   if (process.env.CAPIRO_PREVIEW_READ_ONLY === "true")
     return proxyPreviewRead(
