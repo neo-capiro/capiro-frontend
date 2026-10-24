@@ -20,7 +20,9 @@ export const modelCatalog: UserPreferencesResponse["modelCatalog"] = {
   ],
 };
 
-const currentDocument = (value: typeof archived.read | typeof archived.save) => ({
+const currentDocument = (
+  value: typeof archived.read | typeof archived.save,
+) => ({
   ...structuredClone(value),
   preferences: { ...structuredClone(value.preferences), defaultModel: null },
   modelCatalog: structuredClone(modelCatalog),
