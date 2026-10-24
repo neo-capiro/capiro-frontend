@@ -91,7 +91,10 @@ export async function sendRequest(
     if (retry && port.getSnapshot().submit === "unknown")
       await port.retrySubmit();
     else {
-      if (workflow === "initial") await port.submitInitial(request);
+      // A successful history read already admitted this run. An explicit retry then
+      // uses ordinary admission with the original bytes, without allocating it again.
+      if (workflow === "initial" && (!retry || !port.getSnapshot().observation))
+        await port.submitInitial(request);
       else await port.submit(request);
     }
     intent.write({ ...intent.read(), submit: { ...input, state: "observed" } });

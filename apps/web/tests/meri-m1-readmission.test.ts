@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createMeriConversation } from "@capiro/meri-client/conversation";
 import { useLiveRun } from "../src/features/meri/conversation/useLiveRun";
 import { RunStatus } from "../src/features/meri/conversation/RunStatus";
+import { turnFromObservation } from "../src/features/meri/conversation/conversation-view";
 import { conversationIntentJournal } from "../src/shared/meri-conversations/query-journal";
 import {
   syncMeriTabIdentity,
@@ -16,6 +17,7 @@ import { installInitialInput } from "../test/browser/meri-initial-input-fixtures
 import {
   binding,
   context,
+  event,
   history,
   runFor,
   status,
@@ -93,15 +95,18 @@ function mount(
   navigation?: {
     initial: boolean;
     reload?: boolean;
+    cache?: QueryClient;
+    storage?: TabStorage;
+    savedRequest?: boolean;
     fetchImpl: NonNullable<
       Parameters<typeof createMeriConversation>[0]["fetchImpl"]
     >;
   },
 ) {
-  const storage = memoryStorage();
+  const storage = navigation?.storage ?? memoryStorage();
   syncMeriTabIdentity("synthetic-readmission-session", storage);
   vi.stubGlobal("window", { sessionStorage: storage });
-  const oldCache = new QueryClient();
+  const oldCache = navigation?.cache ?? new QueryClient();
   conversationIntentJournal(oldCache, context, storage).write({
     submit: navigation
       ? {
@@ -138,7 +143,11 @@ function mount(
   });
   let run!: ReturnType<typeof useLiveRun>;
   function Probe() {
-    run = useLiveRun(port, undefined, request);
+    run = useLiveRun(
+      port,
+      undefined,
+      navigation?.savedRequest === false ? undefined : request,
+    );
     return null;
   }
   const render = () =>
@@ -156,6 +165,8 @@ function mount(
       return run;
     },
     port,
+    cache,
+    storage,
     calls,
     journal,
     render,
@@ -207,20 +218,43 @@ async function acceptedInputFixture(submitted = true) {
   return { ...native, input, fetchImpl };
 }
 
-it.each([false, true])(
-  "navigation retains explicit exact retry after a lost ACK (initial workflow: %s)",
-  async (initial) => {
+it.each([
+  { initial: false, readable: true },
+  { initial: true, readable: true },
+  { initial: false, readable: false },
+  { initial: true, readable: false },
+])(
+  "navigation reads before explicit exact retry (initial: $initial, readable: $readable)",
+  async ({ initial, readable }) => {
     const fixture = await acceptedInputFixture();
+    let firstRead = true;
     const mounted = mount(() => Response.json(history()), {
       initial,
-      fetchImpl: fixture.fetchImpl,
+      savedRequest: false,
+      fetchImpl: async (url, init) => {
+        if (String(url).endsWith("/history") && firstRead) {
+          firstRead = false;
+          if (!readable)
+            return Response.json(
+              { error: { code: "PRODUCT_UNAVAILABLE" } },
+              { status: 502 },
+            );
+        }
+        return fixture.fetchImpl(url, init);
+      },
     });
     const original = structuredClone(mounted.journal.read().submit);
     for (const effect of harness.effects.splice(0)) effect();
-    await Promise.resolve();
-    expect(mounted.calls).toEqual([]);
+    await vi.waitFor(() =>
+      expect(mounted.port.getSnapshot().status).toBe(
+        readable ? "ready" : "unavailable",
+      ),
+    );
+    expect(mounted.calls).toEqual(["/api/conversations/history"]);
     expect(mounted.journal.read().submit).toEqual(original);
-    expect(mounted.port.getSnapshot().observation).toBeNull();
+    expect(mounted.port.getSnapshot().observation?.runState).toBe(
+      readable ? "completed" : undefined,
+    );
     renderToStaticMarkup(
       createElement(RunStatus, {
         run: mounted.run,
@@ -238,12 +272,13 @@ it.each([false, true])(
       expect(mounted.journal.read().submit?.state).toBe("observed"),
     );
     expect(mounted.calls).toEqual([
-      ...(initial ? ["/api/conversations/input/allocate"] : []),
+      "/api/conversations/history",
+      ...(initial && !readable ? ["/api/conversations/input/allocate"] : []),
       "/api/conversations/input/admit",
       "/api/conversations/submit",
       "/api/conversations/history",
     ]);
-    expect(fixture.calls.allocate).toHaveLength(initial ? 2 : 1);
+    expect(fixture.calls.allocate).toHaveLength(initial && !readable ? 2 : 1);
     expect(fixture.calls.admit).toHaveLength(2);
     expect(fixture.calls.submit).toHaveLength(2);
     expect(
@@ -259,6 +294,49 @@ it.each([false, true])(
     });
   },
 );
+
+it("session replacement recovers the terminal answer with a cached unknown request and unavailable saved history", async () => {
+  const terminal = history(
+    [event(1, "Synthetic completed answer"), status(2, "completed")],
+    { state: "completed" },
+  );
+  const response = () => Response.json(terminal);
+  const fetchImpl = async () => response();
+  const first = mount(response, {
+    initial: true,
+    savedRequest: false,
+    fetchImpl,
+  });
+  // The current port already has a durable answer when its session is replaced.
+  harness.effects = [];
+  await first.port.history();
+  expect(first.port.getSnapshot().observation?.runState).toBe("completed");
+  const original = structuredClone(first.journal.read().submit);
+  first.port.dispose();
+  expect(first.port.getSnapshot().observation).toBeNull();
+
+  const renewed = mount(response, {
+    initial: true,
+    savedRequest: false,
+    cache: first.cache,
+    storage: first.storage,
+    fetchImpl,
+  });
+  expect(renewed.port.getSnapshot().observation).toBeNull();
+  for (const effect of harness.effects.splice(0)) effect();
+  await vi.waitFor(() =>
+    expect(renewed.port.getSnapshot().observation?.runState).toBe("completed"),
+  );
+  const observed = renewed.port.getSnapshot().observation!;
+  const turn = turnFromObservation(observed, renewed.port.context.runId);
+  expect(turn.messages.map((message) => message.text)).toEqual([
+    "Synthetic completed answer",
+  ]);
+  expect(first.calls).toEqual(["/api/conversations/history"]);
+  expect(renewed.calls).toEqual(["/api/conversations/history"]);
+  expect(renewed.journal.read().submit).toEqual(original);
+  expect(renewed.journal.read().submit?.state).toBe("unknown");
+});
 
 it("reload of a lost admission reads queued history and continues only on the explicit same-input action", async () => {
   const fixture = await acceptedInputFixture(false);
