@@ -37,6 +37,7 @@ vi.mock("../src/shared/session/SelectedClient", () => ({
   }),
 }));
 vi.mock("../src/shared/meri-conversations/history-queries", () => ({
+  useRecentConversationTitles: () => undefined,
   useConversationDiscovery: (...args: unknown[]) => {
     fixture.discovery(...args);
     return {

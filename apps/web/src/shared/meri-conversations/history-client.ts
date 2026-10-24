@@ -5,6 +5,13 @@ import {
   DISCOVERY_SCHEMA,
   HISTORY_SCHEMA,
   TURN_SCHEMA,
+  MANAGEMENT_VERSION,
+} from "@capiro/meri-contracts/conversation-history";
+export { MANAGEMENT_VERSION };
+export type {
+  ConversationMetadata,
+  ConversationSummary,
+  ConversationHistoryManageRequest,
 } from "@capiro/meri-contracts/conversation-history";
 import {
   boundedJsonBytes,
@@ -40,8 +47,8 @@ export class ConversationHistoryUnavailable extends Error {
 }
 
 /** Native membership credentials remain in the server proxy; browser selectors grant no authority. */
-async function request(
-  route: HistoryRoute,
+async function request<R extends HistoryRoute>(
+  route: R,
   input: unknown,
   signal: AbortSignal,
   fetcher: typeof fetch,
@@ -94,6 +101,22 @@ async function request(
       );
     return value;
   });
+}
+
+export function summarizeConversations(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  return request("summaries", input, signal, fetcher);
+}
+
+export function manageConversation(
+  input: unknown,
+  signal: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  return request("manage", input, signal, fetcher);
 }
 
 export async function listConversations(

@@ -62,7 +62,58 @@ export function requireMeriTabStorage(
   return storage;
 }
 
-type Kind = "draft" | "draft-capture" | "request" | "turn" | "selection";
+type Kind =
+  | "draft"
+  | "draft-capture"
+  | "request"
+  | "turn"
+  | "selection"
+  | "management";
+
+/** Pending management commands stay recoverable after the row moves to Archive or Trash. */
+export function pendingManagementScopes(
+  account: { tenantId: string; actorId: string },
+  storage = browserTabStorage(),
+): TabScope[] {
+  const ready = requireMeriTabStorage(storage);
+  if (!ready) return [];
+  const scopes: TabScope[] = [];
+  let records = 0;
+  for (let index = 0; index < ready.length; index++) {
+    const key = ready.key(index);
+    if (!key?.startsWith(prefix)) continue;
+    if (++records > maxRecords) throw new TabJournalUnavailable();
+    const parts: unknown = JSON.parse(key.slice(prefix.length));
+    if (
+      !Array.isArray(parts) ||
+      parts.length !== 3 ||
+      parts[1] !== "management" ||
+      parts[2] !== "" ||
+      typeof parts[0] !== "string"
+    )
+      continue;
+    const scope: unknown = JSON.parse(parts[0]);
+    if (
+      !Array.isArray(scope) ||
+      scope.length !== 4 ||
+      scope[0] !== account.tenantId ||
+      scope[1] !== account.actorId
+    )
+      continue;
+    if (
+      !(scope[2] === null || typeof scope[2] === "string") ||
+      typeof scope[3] !== "string"
+    )
+      throw new TabJournalUnavailable();
+    scopes.push({
+      tenantId: account.tenantId,
+      actorId: account.actorId,
+      clientId: scope[2],
+      conversationId: scope[3],
+    });
+  }
+  return scopes;
+}
 const byteLength = (value: string) =>
   new TextEncoder().encode(value).byteLength;
 

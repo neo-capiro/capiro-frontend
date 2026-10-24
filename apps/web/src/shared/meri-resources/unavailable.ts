@@ -20,9 +20,9 @@ export const unavailableResources = Object.freeze({
   conversationList: {
     label: "Recent conversations",
     summary:
-      "Searching conversations is not available yet. Recent conversations and the current conversation still work.",
+      "Connect to Meri to search your chat titles and manage saved conversations.",
     missing:
-      "A conversation search route. The service lists recent conversations with paging (POST /api/conversations/list), which Recents uses, but cannot search them.",
+      "Current access and serving configuration for the published conversation summaries and management routes.",
     owner: `${conversations} (conversation-wide history lane)`,
   },
   conversationHistory: {

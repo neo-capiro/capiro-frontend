@@ -20,11 +20,11 @@ type CapabilityDefinition = Readonly<{
 export const meriCapabilityTable = {
   conversations: {
     label: "Conversations",
-    ordinaryRoute: "/meri",
+    ordinaryRoute: "/meri/conversations",
     navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
     publicContract:
-      "conversation-application/0.1.0 + conversation-history/1.0.0",
+      "conversation-application/0.1.0 + conversation-history/1.1.0",
     sourcePin: contractSource,
     runtimeOwner: "Meri conversation owner",
     requiredReceipt:

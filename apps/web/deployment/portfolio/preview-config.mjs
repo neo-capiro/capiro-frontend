@@ -19,7 +19,7 @@ const coreMemorySource = '';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
 const meriImageSource = '7eea1e852f177c17e3675429830b886b906e4cd6';
 const meriImageDigest = 'sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d';
-const meriConsumerVersion = '0.1.13';
+const meriConsumerVersion = '0.1.14';
 const nonMeriHosts = new Set([
   'capiro.ai', 'app.capiro.ai', 'os.capiro.ai', 'api.capiro.ai',
   'portfolio-preview.app.capiro.ai', 'first-chat-preview.app-dev.capiro.ai',

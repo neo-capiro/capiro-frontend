@@ -30,6 +30,8 @@ const allowedPostPaths = [
   "/api/conversations/list",
   "/api/conversations/transcript",
   "/api/conversations/next-turn",
+  "/api/conversations/summaries",
+  "/api/conversations/manage",
   "/api/conversations/input/allocate",
   "/api/conversations/input/admit",
 ];
