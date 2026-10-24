@@ -7,6 +7,7 @@ import {
   moveFileBatch,
   type BatchMoveAttempt,
   type BatchMoveCommand,
+  type BatchMoveInput,
 } from "./batch-move";
 import { assertFileReader, filesKey, useFileReader } from "./file-reader";
 import { useFileScope, type FileExecution } from "./file-scope";
@@ -48,14 +49,12 @@ export function useBatchMove(clientId: string, onSaved: () => void) {
     error?: Error;
   }>();
   const visible = state?.scope === scope.key ? state : undefined;
-  async function run(
-    input: { command: BatchMoveCommand } | { recover: "receipt" | "retry" },
-  ) {
+  async function run(input: BatchMoveInput) {
     if (operation.current && !operation.current.signal.aborted) return;
     let execution: FileExecution | undefined;
     try {
       execution = scope.capture(
-        "command" in input || input.recover === "retry",
+        "command" in input || input.recover !== "receipt",
       );
       operation.current = execution;
       setState({ scope: scope.key, pending: true });
@@ -93,10 +92,20 @@ export function useBatchMove(clientId: string, onSaved: () => void) {
     pending,
     error: visible?.error ?? journal.error ?? undefined,
     canStart: scope.canWrite && !pending && !journal.error && !attempt,
-    canCheck: scope.canRead && !pending && attempt?.status === "unknown",
-    canRetry: scope.canWrite && !pending && attempt?.status === "unknown",
+    canCheck:
+      scope.canRead &&
+      !pending &&
+      attempt?.status === "unknown" &&
+      !attempt.refusal,
+    canRetry:
+      scope.canWrite &&
+      !pending &&
+      attempt?.status === "unknown" &&
+      !attempt.refusal,
+    canRetire: scope.canWrite && !pending && Boolean(attempt?.refusal),
     start: (command: BatchMoveCommand) => void run({ command }),
     check: () => void run({ recover: "receipt" }),
     retry: () => void run({ recover: "retry" }),
+    retire: () => void run({ recover: "retire-refusal" }),
   };
 }

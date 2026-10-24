@@ -1,6 +1,7 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
-import type { Attachment } from "./contracts";
+import { clientFilesSchema, type Attachment } from "./contracts";
+import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
 import { currentFilesKey } from "./file-reader";
 import type { FileExecution } from "./file-scope";
 import {
@@ -8,10 +9,17 @@ import {
   commandSchema,
   batchMoveDigest,
   batchMoveReceiptSchema,
+  batchMoveRefusal,
+  batchMoveRefusalSchema,
   type BatchMoveAttempt,
   type BatchMoveCommand,
 } from "./batch-move-contract";
 import { batchMoveRecovery } from "./batch-move-recovery";
+export type BatchMoveInput =
+  | { command: BatchMoveCommand }
+  | {
+      recover: "receipt" | "retry" | "retire-refusal";
+    };
 export {
   batchMoveKey,
   batchMoveCommand,
@@ -52,7 +60,7 @@ export async function moveFileBatch(
   cache: QueryClient,
   clientId: string,
   execution: FileExecution,
-  input: { command: BatchMoveCommand } | { recover: "receipt" | "retry" },
+  input: BatchMoveInput,
 ) {
   const key = batchMoveKey(clientId, execution.actor);
   const cached = cache.getQueryData<BatchMoveAttempt | null>(key);
@@ -101,6 +109,32 @@ export async function moveFileBatch(
       );
       if (command.clientId !== clientId)
         throw new ApiError(409, "This move belongs to another client.");
+      if ("recover" in input && input.recover === "retire-refusal") {
+        batchMoveRefusalSchema(retained!).parse(retained!.refusal);
+        await verifyCoreWriter(
+          api,
+          execution.actor,
+          execution.signal,
+          execution.guard,
+        );
+        const files = await api.request(
+          "core",
+          `engagement/attachments?${new URLSearchParams({ clientId })}`,
+          clientFilesSchema(clientId),
+          { signal: execution.signal },
+        );
+        execution.guard();
+        await recovery.retireRefusal(retained!);
+        execution.guard();
+        cache.setQueryData(currentFilesKey(cache, clientId), files);
+        cache.setQueryData(key, null);
+        return;
+      }
+      if (retained?.refusal)
+        throw new ApiError(
+          409,
+          "Core refused this saved move. Review fresh files and clear it before preparing another.",
+        );
       if ("command" in input) {
         currentSelection(cache, command, execution);
         const digest = await batchMoveDigest(command);
@@ -119,16 +153,30 @@ export async function moveFileBatch(
       execution.guard();
       cache.setQueryData(key, { ...retained!, status: "pending" });
       const receiptOnly = "recover" in input && input.recover === "receipt";
-      const receipt = await api.request(
-        "core",
-        `clients/${clientId}/files/batch-moves${receiptOnly ? `/${command.requestId}` : ""}`,
-        batchMoveReceiptSchema(retained!),
-        {
-          method: receiptOnly ? "GET" : "POST",
-          body: receiptOnly ? undefined : command,
-          signal: execution.signal,
-        },
-      );
+      const receipt = await api
+        .request(
+          "core",
+          `clients/${clientId}/files/batch-moves${receiptOnly ? `/${command.requestId}` : ""}`,
+          batchMoveReceiptSchema(retained!),
+          {
+            method: receiptOnly ? "GET" : "POST",
+            body: receiptOnly ? undefined : command,
+            signal: execution.signal,
+          },
+        )
+        .catch(async (error: unknown) => {
+          const refusal = batchMoveRefusal(error, retained!);
+          if (refusal) {
+            const refused = {
+              ...retained!,
+              refusal,
+              status: "unknown" as const,
+            };
+            await recovery.received(refused);
+            retained = refused;
+          }
+          throw error;
+        });
       // Validation already binds every file, revision, destination and digest to this original dispatch.
       // Persist its late response only to that immutable journal; never adopt it into a replacement UI scope.
       retained = { ...retained!, receipt, status: "unknown" };
@@ -140,14 +188,12 @@ export async function moveFileBatch(
       return receipt;
     });
   } catch (error) {
-    // Untyped 4xx cannot disprove an earlier commit. Retain until a validated complete receipt.
+    // Untyped 4xx cannot disprove an earlier commit. Only the exact durable disposition settles this cache.
     const unresolved = retained ?? cached ?? null;
-    const acknowledged = unresolved
-      ? await recovery
-          .acknowledged(unresolved.command.requestId)
-          .catch(() => false)
+    const settled = unresolved
+      ? await recovery.settled(unresolved.command.requestId).catch(() => false)
       : false;
-    cache.setQueryData(key, acknowledged ? null : unresolved);
+    cache.setQueryData(key, settled ? null : unresolved);
     throw error;
   }
 }

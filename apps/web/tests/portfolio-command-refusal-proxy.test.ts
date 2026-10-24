@@ -84,6 +84,25 @@ const undo = {
     message: "This Undo removed no activity.",
   },
 };
+const batch = {
+  path: ["clients", other, "files", "batch-moves"],
+  body: {
+    schemaVersion: 1,
+    requestId: id,
+    clientId: other,
+    folder: "Reviewed",
+    files: [],
+  },
+  failure: {
+    schemaVersion: 1,
+    requestId: id,
+    clientId: other,
+    code: "FILE_BATCH_MOVE_REFUSED",
+    payloadDigest: "d".repeat(64),
+    status: 409,
+    message: "The saved move was refused; no files were moved.",
+  },
+};
 type Scenario = {
   path: string[];
   body: unknown;
@@ -126,7 +145,7 @@ async function relay(
       }),
   );
 }
-it.each([note, conversion, undo])(
+it.each([note, conversion, undo, batch])(
   "relays only the exact bounded refusal and no upstream headers",
   async (value) => {
     const response = await relay(value);
@@ -146,7 +165,7 @@ it.each([
   { message: "x".repeat(2001) },
   { diagnostics: { private: "synthetic internal detail" } },
 ])("sanitizes malformed, foreign or expanded envelopes %j", async (patch) => {
-  for (const value of [note, conversion, undo]) {
+  for (const value of [note, conversion, undo, batch]) {
     const response = await relay(value, {
       failure: { ...value.failure, ...patch },
     });
@@ -173,12 +192,53 @@ it.each([
 ])(
   "keeps unrelated request/method/status boundaries sanitized %j",
   async (options) => {
-    for (const value of [note, conversion, undo])
+    for (const value of [note, conversion, undo, batch])
       expect(await (await relay(value, options)).json()).toEqual({
         message: expect.any(String),
       });
   },
 );
+it.each([400, 404, 409])(
+  "relays the exact durable batch refusal on POST and GET status%s",
+  async (status) => {
+    const failure = { ...batch.failure, status };
+    expect(await (await relay(batch, { status, failure })).json()).toEqual(
+      failure,
+    );
+    expect(
+      await (
+        await relay(batch, {
+          method: "GET",
+          path: [...batch.path, id],
+          status,
+          failure,
+        })
+      ).json(),
+    ).toEqual(failure);
+  },
+);
+it("sanitizes foreign batch clients, receipt IDs, status and extra fields on both methods", async () => {
+  for (const options of [
+    { path: ["clients", id, "files", "batch-moves"] },
+    { body: JSON.stringify({ ...batch.body, clientId: id }) },
+    { method: "GET", path: [...batch.path, other] },
+    { method: "GET", path: ["clients", id, "files", "batch-moves", id] },
+    {
+      method: "GET",
+      path: [...batch.path, id],
+      status: 403,
+      failure: { ...batch.failure, status: 403 },
+    },
+    {
+      method: "GET",
+      path: [...batch.path, id],
+      failure: { ...batch.failure, extra: true },
+    },
+  ])
+    expect(await (await relay(batch, options)).json()).toEqual({
+      message: expect.any(String),
+    });
+});
 it("requires the exact Directory target/kind and conversion target/new-client mode", async () => {
   for (const options of [
     { path: ["directory", "members", "member-43", "note-commands"] },

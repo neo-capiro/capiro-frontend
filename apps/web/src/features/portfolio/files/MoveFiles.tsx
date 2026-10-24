@@ -85,27 +85,42 @@ export function MoveFiles({
           <p role="status">
             {move.pending
               ? "Confirming the selected move…"
-              : "The move is unconfirmed. The original files, revisions and folder are retained. Check its receipt or retry the same request."}
+              : move.attempt?.refusal
+                ? "Core confirmed this move was refused and no files were moved. Review current files before clearing the saved move."
+                : "The move is unconfirmed. The original files, revisions and folder are retained. Check its receipt or retry the same request."}
           </p>
         )}
         {held ? (
           <div className="row">
-            <button
-              type="button"
-              className="button"
-              disabled={!move.canCheck}
-              onClick={move.check}
-            >
-              Check move outcome
-            </button>
-            <button
-              type="button"
-              className="button"
-              disabled={!move.canRetry}
-              onClick={move.retry}
-            >
-              Retry same move
-            </button>
+            {move.attempt?.refusal ? (
+              <button
+                type="button"
+                className="button"
+                disabled={!move.canRetire}
+                onClick={move.retire}
+              >
+                Review fresh files and clear refused move
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className="button"
+                  disabled={!move.canCheck}
+                  onClick={move.check}
+                >
+                  Check move outcome
+                </button>
+                <button
+                  type="button"
+                  className="button"
+                  disabled={!move.canRetry}
+                  onClick={move.retry}
+                >
+                  Retry same move
+                </button>
+              </>
+            )}
           </div>
         ) : (
           <button

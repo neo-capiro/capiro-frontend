@@ -31,6 +31,7 @@ export type BatchMoveAttempt = {
   readonly digest: string;
   readonly status: "pending" | "unknown";
   readonly receipt?: unknown;
+  readonly refusal?: BatchMoveRefusal;
 };
 export const batchMoveKey = (clientId: string, actor?: ClientWriter) =>
   [
@@ -69,6 +70,32 @@ export async function batchMoveDigest(command: BatchMoveCommand) {
   return Array.from(new Uint8Array(bytes), (byte) =>
     byte.toString(16).padStart(2, "0"),
   ).join("");
+}
+export const batchMoveRefusalBodySchema = z.strictObject({
+  schemaVersion: z.literal(1),
+  code: z.literal("FILE_BATCH_MOVE_REFUSED"),
+  requestId: id,
+  clientId: id,
+  payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
+  status: z.union([z.literal(400), z.literal(404), z.literal(409)]),
+  message: z.string().min(1).max(500),
+});
+export type BatchMoveRefusal = z.infer<typeof batchMoveRefusalBodySchema>;
+export const batchMoveRefusalSchema = (
+  attempt: Pick<BatchMoveAttempt, "command" | "digest">,
+) =>
+  batchMoveRefusalBodySchema.refine(
+    (value) =>
+      value.requestId === attempt.command.requestId &&
+      value.clientId === attempt.command.clientId &&
+      value.payloadDigest === attempt.digest,
+  );
+export function batchMoveRefusal(error: unknown, attempt: BatchMoveAttempt) {
+  if (!(error instanceof ApiError)) return;
+  const value = batchMoveRefusalSchema(attempt).safeParse(error.details);
+  return value.success && value.data.status === error.status
+    ? value.data
+    : undefined;
 }
 export const batchMoveReceiptSchema = (
   attempt: Pick<BatchMoveAttempt, "command" | "digest">,

@@ -158,3 +158,65 @@ test("reader replacement retires the pending dialog and ignores its late respons
   ).toBeVisible();
   expect(calls).toBe(1);
 });
+
+test("a durable Core refusal survives reload and clears only after explicit fresh authority and files review", async ({
+  page,
+}) => {
+  const commands: BatchMoveCommand[] = [];
+  let meReads = 0,
+    fileReads = 0;
+  page.on("request", (request) => {
+    if (request.url().endsWith("/core/me")) meReads++;
+    if (request.url().includes("/core/engagement/attachments?")) fileReads++;
+  });
+  await page.route("**/core/clients/*/files/batch-moves", (route) => {
+    const command = route.request().postDataJSON() as BatchMoveCommand;
+    commands.push(command);
+    return route.fulfill({
+      status: 409,
+      contentType: "application/json",
+      body: JSON.stringify({
+        schemaVersion: 1,
+        code: "FILE_BATCH_MOVE_REFUSED",
+        requestId: command.requestId,
+        clientId,
+        payloadDigest: receipt(command).payloadDigest,
+        status: 409,
+        message: "The saved move was refused; no files were moved.",
+      }),
+    });
+  });
+  let dialog = await setup(page);
+  await dialog
+    .getByRole("button", { name: "Move 2 files", exact: true })
+    .click();
+  await expect(
+    dialog.getByRole("button", {
+      name: "Review fresh files and clear refused move",
+    }),
+  ).toBeEnabled();
+  await expect(
+    dialog.getByRole("button", { name: "Retry same move" }),
+  ).toHaveCount(0);
+  await page.reload();
+  await page.getByRole("button", { name: "Review pending move" }).click();
+  dialog = page.getByRole("dialog", {
+    name: "Move selected files",
+    exact: true,
+  });
+  await expect(
+    dialog.getByText(/Core confirmed this move was refused/),
+  ).toBeVisible();
+  const before = { meReads, fileReads };
+  expect(commands).toHaveLength(1);
+  await dialog
+    .getByRole("button", { name: "Review fresh files and clear refused move" })
+    .click();
+  await expect(dialog).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Review pending move" }),
+  ).toHaveCount(0);
+  expect(meReads).toBeGreaterThan(before.meReads);
+  expect(fileReads).toBeGreaterThan(before.fileReads);
+  expect(commands).toHaveLength(1);
+});

@@ -2,16 +2,19 @@ import { z } from "zod";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 import {
   readRecovery,
-  readRecoveryAcknowledgement,
+  readRecoveryDisposition,
   reserveRecovery,
   updateRecovery,
   acknowledgeRecovery,
+  retireFileBatchMoveRefusalRecovery,
   withRecoveryCommandLock,
 } from "@/shared/session/recovery/journal";
 import {
   commandSchema,
   batchMoveDigest,
   batchMoveReceiptSchema,
+  batchMoveRefusalBodySchema,
+  batchMoveRefusalSchema,
   type BatchMoveAttempt,
 } from "./batch-move-contract";
 
@@ -20,12 +23,20 @@ const record = z
     command: commandSchema,
     digest: z.string().regex(/^[a-f0-9]{64}$/),
     receipt: z.unknown().optional(),
+    refusal: batchMoveRefusalBodySchema.optional(),
   })
   .refine(
     (value) =>
       value.receipt === undefined ||
       batchMoveReceiptSchema(value).safeParse(value.receipt).success,
     "The saved batch receipt does not match its original command.",
+  )
+  .refine(
+    (value) =>
+      value.refusal === undefined ||
+      (value.receipt === undefined &&
+        batchMoveRefusalSchema(value).safeParse(value.refusal).success),
+    "The saved refusal does not match its original command.",
   );
 const contract = {
   schema: record,
@@ -38,7 +49,9 @@ const contract = {
       JSON.stringify(previous.command) !== JSON.stringify(next.command) ||
       previous.digest !== next.digest ||
       (previous.receipt !== undefined &&
-        JSON.stringify(previous.receipt) !== JSON.stringify(next.receipt))
+        JSON.stringify(previous.receipt) !== JSON.stringify(next.receipt)) ||
+      (previous.refusal !== undefined &&
+        JSON.stringify(previous.refusal) !== JSON.stringify(next.refusal))
     )
       throw new Error("The saved file move identity changed.");
   },
@@ -54,10 +67,16 @@ export function batchMoveRecovery(
     actor.userId,
     clientId,
   ]);
-  const durable = ({ command, digest, receipt }: BatchMoveAttempt) => ({
+  const durable = ({
+    command,
+    digest,
+    receipt,
+    refusal,
+  }: BatchMoveAttempt) => ({
     command,
     digest,
     ...(receipt === undefined ? {} : { receipt }),
+    ...(refusal === undefined ? {} : { refusal }),
   });
   async function load(): Promise<BatchMoveAttempt | null> {
     const value = await readRecovery(scope, contract, guard);
@@ -98,9 +117,21 @@ export function batchMoveRecovery(
     },
     acknowledge: (requestId: string) =>
       acknowledgeRecovery(scope, requestId, guard),
+    retireRefusal: (value: BatchMoveAttempt) =>
+      retireFileBatchMoveRefusalRecovery(
+        scope,
+        value.command.requestId,
+        batchMoveRefusalSchema(value).parse(value.refusal),
+        guard,
+      ),
     // Storage-only reconciliation of this original cache entry, never current authority or UI adoption.
-    acknowledged: (requestId: string) =>
-      readRecoveryAcknowledgement(scope, requestId, () => {}),
+    async settled(requestId: string) {
+      const value = await readRecoveryDisposition(scope, requestId, () => {});
+      return (
+        value?.state === "acknowledged" ||
+        (value?.state === "refused" && value.code === "FILE_BATCH_MOVE_REFUSED")
+      );
+    },
     lock: <T>(action: () => Promise<T>) =>
       withRecoveryCommandLock(scope, guard, action),
   };

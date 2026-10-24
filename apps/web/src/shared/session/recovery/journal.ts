@@ -74,15 +74,17 @@ export function readRecovery<Data>(
     return record?.state === "pending" ? decode(record, contract) : null;
   });
 }
-/** Positive proof for one original command; missing storage is never acknowledgement. */
-export function readRecoveryAcknowledgement(
+/** Positive disposition for one original command; missing storage is never settlement. */
+export function readRecoveryDisposition(
   scope: string,
   requestId: string,
   assert: () => void,
 ) {
   return locked(scope, assert, async () => {
     const record = await current(scope);
-    return record?.state === "acknowledged" && record.requestId === requestId;
+    return record?.requestId === requestId && record.state !== "pending"
+      ? record
+      : null;
   });
 }
 export function reserveRecovery<Data>(
@@ -165,7 +167,8 @@ function retireRecovery(
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_ASSOCIATION_REJECTED"
-          | "OBJECTIVE_VERSION_CONFLICT";
+          | "OBJECTIVE_VERSION_CONFLICT"
+          | "FILE_BATCH_MOVE_REFUSED";
       },
   assert: () => void,
 ) {
@@ -199,6 +202,33 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Caller binds Core's no-write proof to the exact command and refreshes current authority/files. */
+export function retireFileBatchMoveRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: {
+    schemaVersion: number;
+    requestId: string;
+    code: string;
+    status: number;
+  },
+  assert: () => void,
+) {
+  if (
+    failure.schemaVersion !== 1 ||
+    failure.requestId !== requestId ||
+    failure.code !== "FILE_BATCH_MOVE_REFUSED" ||
+    ![400, 404, 409].includes(failure.status)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "FILE_BATCH_MOVE_REFUSED" },
+    assert,
+  );
 }
 
 /** Caller validates the native failure schema and obtains a fresh current read
