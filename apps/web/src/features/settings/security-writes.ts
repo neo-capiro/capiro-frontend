@@ -20,6 +20,10 @@ export type SettingsWrite = {
   input: { params?: Row; body?: Row };
   state: "pending" | "unknown";
   expectedInvitation?: { email: string; role: string };
+  expectedAccount?: { userId: string; tenantId: string };
+  requestHash?: string;
+  resultHash?: string;
+  inputFields?: string[];
   receiptId?: string;
   acceptedResult?: boolean;
   startedAt: string;
@@ -33,6 +37,55 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.support.create":
+      confirmed =
+        !!write.expectedAccount &&
+        equal(receipt.id, body.id) &&
+        equal(receipt.tenantId, write.expectedAccount.tenantId) &&
+        equal(receipt.submittedByUserId, write.expectedAccount.userId) &&
+        equal(receipt.summary, body.summary) &&
+        equal(receipt.detail, body.detail) &&
+        equal(receipt.runReference, body.runReference);
+      break;
+    case "settings.branding.update":
+      confirmed =
+        !!write.expectedAccount &&
+        equal(receipt.id, write.expectedAccount.tenantId) &&
+        equal(receipt.name, body.name);
+      break;
+    case "me.emailSignature.update":
+      confirmed =
+        receipt.enabled === body.enabled &&
+        (receipt.html === null || typeof receipt.html === "string");
+      break;
+    case "settings.contact.update":
+      confirmed =
+        Object.keys(receipt).length === Object.keys(body).length &&
+        Object.entries(body).every(([key, value]) =>
+          equal(receipt[key], value),
+        );
+      break;
+    case "settings.profiles.create":
+      confirmed =
+        typeof receipt.id === "string" &&
+        receipt.id.length > 0 &&
+        equal(receipt.name, body.name) &&
+        receipt.status === "active";
+      break;
+    case "settings.profiles.archive":
+    case "settings.profiles.restore":
+      confirmed =
+        equal(receipt.id, params.clientId) &&
+        receipt.status ===
+          (write.operation.endsWith("archive") ? "archived" : body.status);
+      break;
+    case "me.update":
+      confirmed =
+        !!write.expectedAccount &&
+        equal(row(receipt.user).id, write.expectedAccount.userId) &&
+        equal(row(receipt.tenant).id, write.expectedAccount.tenantId) &&
+        equal(row(receipt.user).title ?? "", body.title);
+      break;
     case "settings.team.remove":
       confirmed = receipt.ok === true || typeof receipt.jobId === "string";
       break;

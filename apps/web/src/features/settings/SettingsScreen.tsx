@@ -15,6 +15,7 @@ import { SettingsNotice } from "./components";
 import { ContactSettings } from "./ContactSettings";
 import { AiKeysSettings } from "./hq/AiKeysSettings";
 import { BroadcastSettings } from "./hq/BroadcastSettings";
+import { SupportRequestsSettings } from "./hq/SupportRequestsSettings";
 import { CustomerSettings } from "./hq/CustomerSettings";
 import { TenantSettings } from "./hq/TenantSettings";
 import { TenantTabs } from "./hq/TenantTabs";
@@ -33,12 +34,18 @@ type ScreenContext = {
   refresh: () => void;
   meriPreferences: ReactNode;
   memoryReviewEnabled: boolean;
+  readOnlyPreview: boolean;
 };
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
   "contact-info": (context) => <ContactSettings identity={context.identity} />,
   branding: () => <BrandingSettings />,
-  team: (context) => <TeamSettings identity={context.identity} />,
+  team: (context) => (
+    <TeamSettings
+      identity={context.identity}
+      refreshIdentity={context.refresh}
+    />
+  ),
   integrations: () => <IntegrationSettings />,
   memory: (context) => (
     <MemorySettings reviewEnabled={context.memoryReviewEnabled} />
@@ -46,11 +53,14 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
   "ai-usage": () => <UsageSettings />,
-  profiles: () => <ProfileSettings />,
+  profiles: (context) => (
+    <ProfileSettings readOnlyPreview={context.readOnlyPreview} />
+  ),
   "hq-tenants": (context) => <TenantSettings identity={context.identity} />,
   "hq-customers": () => <CustomerSettings />,
   "hq-ai-keys": () => <AiKeysSettings />,
   "hq-broadcasts": () => <BroadcastSettings />,
+  "hq-support": () => <SupportRequestsSettings />,
   "intelligence-mappings": () => <MappingSettings />,
   "hq-personnel": () => <PersonnelMergeQueue />,
   "hq-reconciliation": () => <ReconciliationQueue />,
@@ -84,10 +94,12 @@ export function SettingsScreen({
   section = "personal",
   meriPreferences,
   memoryReviewEnabled = false,
+  readOnlyPreview = false,
 }: {
   section?: string;
   meriPreferences: ReactNode;
   memoryReviewEnabled?: boolean;
+  readOnlyPreview?: boolean;
 }) {
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
@@ -128,6 +140,13 @@ export function SettingsScreen({
               </SettingsNotice>
             ) : render ? (
               <>
+                {readOnlyPreview && section !== "meri-preferences" && (
+                  <SettingsNotice title="Preview settings">
+                    You can view authorized records. Capiro settings changes are
+                    unavailable in this preview; connected Meri preferences
+                    remain available.
+                  </SettingsNotice>
+                )}
                 {["hq-tenants", "hq-ai-keys", "hq-personnel"].includes(
                   section,
                 ) && <TenantTabs section={section} />}
@@ -136,6 +155,7 @@ export function SettingsScreen({
                   refresh: query.reload,
                   meriPreferences,
                   memoryReviewEnabled,
+                  readOnlyPreview,
                 })}
               </>
             ) : (

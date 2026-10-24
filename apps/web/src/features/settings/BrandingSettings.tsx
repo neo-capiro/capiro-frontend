@@ -13,20 +13,39 @@ import {
 } from "./components";
 import styles from "./styles";
 import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
+import {
+  brandingSyncMessage,
+  canRetryBrandingSync,
+  retryBrandingSync,
+  type BrandingSyncReceipt,
+} from "./branding-sync";
 
 function BrandingForm({
   initialName,
   logoUrl,
   reload,
+  mutation,
+  onSaved,
+  onStart,
+  uploadAction,
+  syncing,
 }: {
   initialName: string;
   logoUrl?: string | null;
   reload: () => void;
+  mutation: ReturnType<typeof useSettingsMutation>;
+  onSaved: (receipt: BrandingSyncReceipt) => void;
+  onStart: () => void;
+  uploadAction: ReturnType<typeof useSettingsAction>;
+  syncing: boolean;
 }) {
   const api = useCapiro();
   const [name, setName] = useState(initialName);
   const upload = useRef<HTMLInputElement>(null);
-  const action = useSettingsAction(api);
+  const action = uploadAction;
+  const locked = mutation.locked || action.busy || syncing;
   async function uploadLogo(file: File, signal: AbortSignal) {
     const contentType = file.type;
     if (
@@ -75,10 +94,20 @@ function BrandingForm({
           className={`${styles.row} ${styles.formRow}`}
           onSubmit={(event) => {
             event.preventDefault();
-            void action.run(
-              () => api.request("settings.branding.update", { body: { name } }),
-              "Company name was saved.",
-              reload,
+            onStart();
+            const capturedName = name;
+            void mutation.action.run(
+              (signal) =>
+                mutation.api.request(
+                  "settings.branding.update",
+                  { body: { name: capturedName } },
+                  { signal },
+                ),
+              "Company name saved in Capiro.",
+              (receipt) => {
+                onSaved(receipt);
+                reload();
+              },
             );
           }}
         >
@@ -89,13 +118,14 @@ function BrandingForm({
                 minLength={2}
                 maxLength={200}
                 required
+                disabled={locked}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
               />
             </SettingField>
           </div>
-          <SettingsButton primary type="submit" disabled={action.busy}>
-            {action.busy ? "Saving…" : "Save"}
+          <SettingsButton primary type="submit" disabled={locked}>
+            {mutation.action.busy ? "Saving…" : "Save"}
           </SettingsButton>
         </form>
       </SettingsCard>
@@ -113,7 +143,7 @@ function BrandingForm({
             <div className={styles.logoPreview}>No logo</div>
           )}
           <SettingsButton
-            disabled={action.busy}
+            disabled={locked}
             onClick={() => upload.current?.click()}
           >
             {action.busy ? "Uploading…" : "Upload logo"}
@@ -121,6 +151,7 @@ function BrandingForm({
           <input
             ref={upload}
             type="file"
+            disabled={locked}
             hidden
             accept="image/png,image/jpeg,image/webp,image/svg+xml"
             onChange={(event) => {
@@ -148,28 +179,83 @@ function BrandingForm({
 
 export function BrandingSettings() {
   const query = useCapiroQuery("settings.branding.read", {});
+  const api = useCapiro();
+  const mutation = useSettingsMutation("branding");
+  const sync = useSettingsAction(api);
+  const uploadAction = useSettingsAction(api);
+  const [receipt, setReceipt] = useState<BrandingSyncReceipt>();
+  const status =
+    receipt && query.data && receipt.name !== query.data.name
+      ? "superseded"
+      : receipt?.clerkSync;
   return (
-    <StatusPanel
-      loading={query.loading}
-      error={query.error}
-      onRetry={query.reload}
-    >
-      {query.data ? (
-        <BrandingForm
-          key={`${query.data.name}:${query.data.logoUploadedAt}`}
-          initialName={query.data.name}
-          logoUrl={query.data.logoUrl}
-          reload={query.reload}
-        />
-      ) : (
-        !query.loading &&
-        !query.error && (
-          <SettingsNotice title="Branding unavailable">
-            Your organization branding record is unavailable. Contact your
-            workspace administrator.
-          </SettingsNotice>
-        )
+    <div className={styles.stack}>
+      <StatusPanel
+        loading={query.loading}
+        error={query.error}
+        onRetry={query.reload}
+      >
+        {query.data ? (
+          <BrandingForm
+            key={`${query.data.name}:${query.data.logoUploadedAt}`}
+            initialName={query.data.name}
+            logoUrl={query.data.logoUrl}
+            reload={query.reload}
+            mutation={mutation}
+            onSaved={setReceipt}
+            onStart={() => {
+              setReceipt(undefined);
+              sync.clear();
+            }}
+            uploadAction={uploadAction}
+            syncing={sync.busy}
+          />
+        ) : (
+          !query.loading &&
+          !query.error && (
+            <SettingsNotice title="Branding unavailable">
+              Your organization branding record is unavailable. Contact your
+              workspace administrator.
+            </SettingsNotice>
+          )
+        )}
+      </StatusPanel>
+      <SettingsMutationNotice
+        pending={mutation.pending}
+        busy={mutation.action.busy}
+        reconcile={mutation.reconcile}
+      />
+      {mutation.action.error && (
+        <SettingsNotice title="Company name result not confirmed" error>
+          {mutation.action.error}
+        </SettingsNotice>
       )}
-    </StatusPanel>
+      {(status || mutation.action.message) && (
+        <SettingsNotice title={brandingSyncMessage[status ?? "unknown"]}>
+          {(!status || canRetryBrandingSync(status)) && (
+            <SettingsButton
+              disabled={mutation.locked || sync.busy || uploadAction.busy}
+              onClick={() =>
+                void sync.run(
+                  (signal) => retryBrandingSync(api, signal),
+                  "Organization sync checked.",
+                  (result) => {
+                    setReceipt(result);
+                    query.reload();
+                  },
+                )
+              }
+            >
+              {sync.busy ? "Syncing…" : "Retry organization sync"}
+            </SettingsButton>
+          )}
+        </SettingsNotice>
+      )}
+      {sync.error && (
+        <SettingsNotice title="Organization sync not confirmed" error>
+          {sync.error}
+        </SettingsNotice>
+      )}
+    </div>
   );
 }

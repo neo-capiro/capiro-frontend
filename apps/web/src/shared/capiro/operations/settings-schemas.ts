@@ -155,6 +155,14 @@ export const provisionedMemberSchema = z.object({
   membershipCreated: z.boolean(),
   membershipRoleUpdated: z.boolean(),
 });
+export const brandingSyncSchema = z.enum([
+  "confirmed",
+  "failed",
+  "unknown",
+  "not_requested",
+  "superseded",
+  "not_linked",
+]);
 export const brandingSchema = z.object({
   id: z.string(),
   slug: z.string(),

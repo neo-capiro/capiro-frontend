@@ -110,17 +110,15 @@ export const help: HelpShortcutsView = {
     description: "Supported work, keyboard navigation and reporting a problem.",
   },
   shortcuts: {
-    title: "Designed Meri shortcuts",
+    title: "Available keyboard controls",
     rows: [
-      ["search", "Search workspace", "⌘K / Ctrl+K"],
-      ["send", "Send message", "Enter"],
+      ["send", "Send message when sending is available", "Enter"],
       ["line", "New line", "Shift+Enter"],
-      ["close", "Close dialog", "Esc"],
+      ["close", "Close a dismissible dialog", "Esc"],
       ["move", "Move between controls", "Tab / Shift+Tab"],
-      ["select", "Select search result", "↑ / ↓ then Enter"],
     ].map(([id = "", action = "", keys = ""]) => ({ id, action, keys })),
     footnote:
-      "These are designed shortcuts. Meri’s current implementation determines which are available.",
+      "Message controls apply in the Meri composer. Workspace search shortcuts are not available in the connected application.",
   },
   supported: {
     title: "Supported work",
@@ -141,11 +139,11 @@ export const help: HelpShortcutsView = {
       placeholder: "Optional · select the toggle to include",
     },
     footnote:
-      "Conversation content and private files are not attached automatically.",
+      "Attachments are not supported. Conversation content, private files and run metadata are not attached automatically.",
   },
-  submitted: {
-    title: "Report submitted",
+  unavailable: {
+    title: "Feedback submission unavailable",
     detail:
-      "Designed receipt state. A real feedback service must acknowledge the submission before showing success.",
+      "No report has been sent. Feedback submission is unavailable until a support service is connected.",
   },
 };

@@ -99,6 +99,15 @@ vi.mock("../../shared/capiro/registry", () => ({
     "settings.team.setBillingAdmin": { method: "PUT" },
     "settings.team.remove": { method: "DELETE" },
     "settings.team.list": { method: "GET" },
+    "me.read": { method: "GET" },
+    "me.update": { method: "PATCH" },
+    "me.emailSignature.update": { method: "PUT" },
+    "settings.branding.update": { method: "PUT" },
+    "settings.support.create": { method: "POST" },
+    "settings.contact.update": { method: "PUT" },
+    "settings.profiles.create": { method: "POST" },
+    "settings.profiles.archive": { method: "DELETE" },
+    "settings.profiles.restore": { method: "PUT" },
   },
 }));
 const capture = vi.fn<(view: ReturnType<typeof useSettingsMutation>) => void>();
@@ -204,6 +213,20 @@ beforeEach(() => {
   vi.stubGlobal("window", { sessionStorage: storage });
   state.auth = { userId: "actor-a", sessionId: "session-a", orgId: "org-a" };
   state.api.request.mockReset();
+  state.api.request
+    .mockResolvedValueOnce({
+      role: "user_admin",
+      billingAdmin: true,
+      user: { id: "actor-a" },
+    })
+    .mockResolvedValueOnce([
+      {
+        userId: "target",
+        role: "user_admin",
+        status: "active",
+        billingAdmin: false,
+      },
+    ]);
   after.mockReset();
   capture.mockClear();
   sessionStorage.clear();
@@ -215,6 +238,43 @@ afterEach(() => {
 });
 
 describe("Settings dispatch lifetime", () => {
+  it("a revoked actor never dispatches the write or leaves a recovery record", async () => {
+    state.api.request.mockReset().mockResolvedValueOnce({
+      role: "standard_user",
+      user: { id: "actor-a" },
+    });
+    await mount();
+    await act(dispatch);
+    expect(
+      state.api.request.mock.calls.map(([operation]) => operation),
+    ).toEqual(["me.read"]);
+    expect(current().locked).toBe(false);
+    expect(current().action.error).toContain("no longer available");
+    expect(after).not.toHaveBeenCalled();
+    expect(sessionStorage.length).toBe(0);
+  });
+  it("scope cancellation during preflight never reaches a team mutation", async () => {
+    let finish!: (value: unknown) => void;
+    state.api.request.mockReset().mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    await mount();
+    const first = dispatch();
+    await until(() => state.api.request.mock.calls.length === 1);
+    await act(() => root.render("other-section"));
+    await act(async () => {
+      finish({ role: "standard_user", user: { id: "actor-a" } });
+      await first;
+    });
+    expect(
+      state.api.request.mock.calls.map(([operation]) => operation),
+    ).toEqual(["me.read"]);
+    expect(sessionStorage.length).toBe(0);
+    expect(after).not.toHaveBeenCalled();
+  });
   it("double submission dispatches once, freezes the captured input and validates the target", async () => {
     let finish!: (value: unknown) => void;
     state.api.request.mockImplementation(
@@ -241,9 +301,9 @@ describe("Settings dispatch lifetime", () => {
       changing.params.userId = "other";
       void dispatch();
     });
-    await until(() => state.api.request.mock.calls.length === 1);
+    await until(() => state.api.request.mock.calls.length === 3);
     expect(current().locked).toBe(true);
-    expect(state.api.request.mock.calls[0]?.[1]).toEqual(input);
+    expect(state.api.request.mock.calls[2]?.[1]).toEqual(input);
     await act(async () => {
       finish({ userId: "target", billingAdmin: true });
       await first;
@@ -270,7 +330,7 @@ describe("Settings dispatch lifetime", () => {
     await act(async () => {
       await dispatch();
     });
-    expect(state.api.request).toHaveBeenCalledTimes(1);
+    expect(state.api.request).toHaveBeenCalledTimes(3);
     expect(current().action.error).toContain("not confirmed");
   });
   it.each(["target", "client", "actor", "organization", "session"])(
@@ -288,8 +348,8 @@ describe("Settings dispatch lifetime", () => {
       await act(async () => {
         first = dispatch();
       });
-      await until(() => state.api.request.mock.calls.length === 1);
-      const signal = state.api.request.mock.calls[0]?.[2].signal as AbortSignal;
+      await until(() => state.api.request.mock.calls.length === 3);
+      const signal = state.api.request.mock.calls[2]?.[2].signal as AbortSignal;
       if (kind === "client") state.api = { ...state.api };
       if (kind === "actor") state.auth = { ...state.auth, userId: "actor-b" };
       if (kind === "organization")
@@ -356,6 +416,8 @@ describe("Settings dispatch lifetime", () => {
     expect(
       state.api.request.mock.calls.map(([operation]) => operation),
     ).toEqual([
+      "me.read",
+      "settings.team.list",
       "settings.team.setBillingAdmin",
       "settings.team.list",
       "settings.team.list",
@@ -372,5 +434,349 @@ describe("Settings dispatch lifetime", () => {
     expect(current().action.error).toBe("denied");
     expect(after).not.toHaveBeenCalled();
     expect(sessionStorage.length).toBe(0);
+  });
+});
+
+describe("Personal title receipt and reload recovery", () => {
+  const identity = {
+    user: { id: "actor-a", title: "Reviewed title" },
+    tenant: { id: "tenant-a" },
+  };
+  const submit = () =>
+    current().action.run(
+      (signal) =>
+        current().api.request(
+          "me.update",
+          { body: { title: "Reviewed title" } },
+          { signal },
+        ),
+      "Saved",
+      after,
+    );
+  it("accepts only the exact account and title", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(identity);
+    await mount("personal-title");
+    await act(submit);
+    expect(current().action.message).toBe("Saved");
+    expect(sessionStorage.length).toBe(0);
+    expect(after).toHaveBeenCalledTimes(1);
+  });
+  it("retains uncertainty after a wrong-account receipt and reload, without retaining the title", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ ...identity, tenant: { id: "other" } });
+    await mount("personal-title");
+    await act(submit);
+    expect(current().pending?.state).toBe("unknown");
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "personal-title"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain("Reviewed title");
+    await act(() => root.unmount());
+    cache.clear();
+    await mount("personal-title");
+    expect(current().locked).toBe(true);
+    state.api.request.mockResolvedValueOnce({
+      ...identity,
+      user: { ...identity.user, title: "Other title" },
+    });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request.mockResolvedValueOnce(identity);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(current().action.message).toContain("now has the requested state");
+    expect(
+      state.api.request.mock.calls.filter(
+        ([operation]) => operation === "me.update",
+      ),
+    ).toHaveLength(1);
+    expect(after).not.toHaveBeenCalled();
+  });
+});
+
+describe("Remaining Settings form recovery", () => {
+  const identity = { user: { id: "actor-a" }, tenant: { id: "tenant-a" } };
+  const send = (
+    operation: Parameters<
+      ReturnType<typeof useSettingsMutation>["api"]["request"]
+    >[0],
+    payload: unknown,
+  ) =>
+    current().action.run(
+      (signal) =>
+        current().api.request(operation, payload as never, { signal }),
+      "Saved",
+      after,
+    );
+  const remount = async (section: string) => {
+    await act(() => root.unmount());
+    cache.clear();
+    await mount(section);
+  };
+  it("recovers only the exact owned support receipt after reload without retaining report text", async () => {
+    const body = {
+      id: "11111111-1111-4111-8111-111111111111",
+      summary: "Private summary",
+      detail: "Private report",
+      runReference: "Opaque reference",
+    };
+    const receipt = {
+      ...body,
+      tenantId: "tenant-a",
+      submittedByUserId: "actor-a",
+      createdAt: "2026-10-24T00:00:00Z",
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockRejectedValueOnce(new Error("reply lost"));
+    await mount("support-request");
+    await act(() => send("settings.support.create", { body }));
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "support-request"])}`;
+    for (const text of [body.summary, body.detail, body.runReference])
+      expect(sessionStorage.getItem(key)).not.toContain(text);
+    expect(sessionStorage.getItem(key)).toContain(body.id);
+    await remount("support-request");
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ ...receipt, detail: "Wrong report" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(receipt);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(current().action.message).toBe("Report saved for HQ review.");
+    expect(after).not.toHaveBeenCalled();
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.support.create",
+      ),
+    ).toHaveLength(1);
+  });
+  it.each([
+    "id",
+    "tenantId",
+    "submittedByUserId",
+    "summary",
+    "detail",
+    "runReference",
+  ])("rejects mismatched support receipt %s", async (field) => {
+    const body = {
+      id: "11111111-1111-4111-8111-111111111111",
+      summary: "Summary",
+      detail: "Detail",
+      runReference: null,
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({
+        ...body,
+        tenantId: "tenant-a",
+        submittedByUserId: "actor-a",
+        [field]: "wrong",
+      });
+    await mount("support-request");
+    await act(() => send("settings.support.create", { body }));
+    expect(current().locked).toBe(true);
+    expect(after).not.toHaveBeenCalled();
+  });
+  it("reconciles a lost company-name save without claiming provider sync or retaining the name", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockRejectedValueOnce(new Error("response lost"));
+    await mount("branding");
+    await act(() =>
+      send("settings.branding.update", { body: { name: "Reviewed company" } }),
+    );
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "branding"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain("Reviewed company");
+    await remount("branding");
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ id: "tenant-a", name: "Other name" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ id: "tenant-a", name: "Reviewed company" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(current().action.message).not.toContain("synced");
+    expect(after).not.toHaveBeenCalled();
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.branding.update",
+      ),
+    ).toHaveLength(1);
+  });
+  it("accepts a local branding save with failed provider sync but refuses a wrong account receipt", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({
+        id: "tenant-a",
+        name: "Reviewed",
+        clerkSync: "failed",
+      });
+    await mount("branding");
+    await act(() =>
+      send("settings.branding.update", { body: { name: "Reviewed" } }),
+    );
+    expect(current().locked).toBe(false);
+    expect(after).toHaveBeenCalledWith(
+      expect.objectContaining({ clerkSync: "failed" }),
+    );
+    after.mockClear();
+    state.api.request.mockResolvedValueOnce(identity).mockResolvedValueOnce({
+      id: "other",
+      name: "Reviewed",
+      clerkSync: "confirmed",
+    });
+    await act(() =>
+      send("settings.branding.update", { body: { name: "Reviewed" } }),
+    );
+    expect(current().locked).toBe(true);
+    expect(after).not.toHaveBeenCalled();
+  });
+  it("a lost contact reply reconciles only the full recorded value in the original account", async () => {
+    const body = {
+      email: "synthetic@example.test",
+      name: "Synthetic organization",
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockRejectedValueOnce(new Error("response lost"));
+    await mount("contact");
+    await act(() => send("settings.contact.update", { body }));
+    expect(current().locked).toBe(true);
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "contact"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain(body.email);
+    expect(sessionStorage.getItem(key)).not.toContain(body.name);
+    await remount("contact");
+    state.api.request.mockResolvedValueOnce({
+      ...identity,
+      tenant: { id: "other" },
+    });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ ...body, phone: "extra" });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(true);
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ name: body.name, email: body.email });
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.contact.update",
+      ),
+    ).toHaveLength(1);
+  });
+  it("does not accept nonempty contact data as the receipt for clearing contact details", async () => {
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce({ phone: "old" });
+    await mount("contact");
+    await act(() => send("settings.contact.update", { body: {} }));
+    expect(current().locked).toBe(true);
+    expect(after).not.toHaveBeenCalled();
+  });
+  it.each(["archive", "restore"] as const)(
+    "retains the exact profile %s target/status across reload",
+    async (operation) => {
+      state.api.request.mockReset().mockResolvedValueOnce({
+        id: "other",
+        status: operation === "archive" ? "archived" : "active",
+      });
+      await mount("profiles");
+      await act(() =>
+        send(`settings.profiles.${operation}`, {
+          params: { clientId: "reviewed" },
+          ...(operation === "restore" ? { body: { status: "active" } } : {}),
+        }),
+      );
+      await remount("profiles");
+      state.api.request.mockResolvedValueOnce([
+        {
+          id: "other",
+          status: operation === "archive" ? "archived" : "active",
+        },
+      ]);
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(true);
+      state.api.request.mockResolvedValueOnce([
+        {
+          id: "reviewed",
+          status: operation === "archive" ? "archived" : "active",
+        },
+      ]);
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(false);
+      expect(after).not.toHaveBeenCalled();
+    },
+  );
+  it("never retries profile creation after a lost response or guesses identity from a matching name", async () => {
+    state.api.request
+      .mockReset()
+      .mockRejectedValueOnce(new Error("lost response"));
+    await mount("profile-create");
+    await act(() =>
+      send("settings.profiles.create", { body: { name: "Synthetic" } }),
+    );
+    await remount("profile-create");
+    await act(() => current().reconcile());
+    await act(() =>
+      send("settings.profiles.create", { body: { name: "Synthetic" } }),
+    );
+    expect(current().locked).toBe(true);
+    expect(state.api.request).toHaveBeenCalledTimes(1);
+  });
+  it("confirms the server-sanitized signature only after exact current readback", async () => {
+    const saved = { html: "<p>Saved signature</p>", enabled: true };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved)
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved);
+    await mount("signature");
+    await act(() =>
+      send("me.emailSignature.update", {
+        body: { html: '<p onclick="bad()">Saved signature</p>', enabled: true },
+      }),
+    );
+    expect(current().locked).toBe(false);
+    expect(after).toHaveBeenCalledTimes(1);
+  });
+  it("retains only a signature receipt hash through readback failure and reload", async () => {
+    const saved = { html: "<p>Private signature</p>", enabled: false };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved)
+      .mockRejectedValueOnce(new Error("read unavailable"));
+    await mount("signature");
+    await act(() => send("me.emailSignature.update", { body: saved }));
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "signature"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain("Private signature");
+    await remount("signature");
+    state.api.request
+      .mockResolvedValueOnce(identity)
+      .mockResolvedValueOnce(saved);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(after).not.toHaveBeenCalled();
   });
 });
