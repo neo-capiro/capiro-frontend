@@ -24,7 +24,10 @@ export function ProspectClientLink({ record }: { record: Prospect }) {
   if (record.linkedClientId)
     return (
       <>
-        <NewClientConversion record={record} />
+        <NewClientConversion
+          record={record}
+          returnFocus={() => linked.current?.focus()}
+        />
         <Link
           ref={linked}
           className="button"
@@ -36,7 +39,10 @@ export function ProspectClientLink({ record }: { record: Prospect }) {
     );
   return (
     <>
-      <NewClientConversion record={record} />
+      <NewClientConversion
+        record={record}
+        returnFocus={() => linked.current?.focus()}
+      />
       <button
         ref={trigger}
         className="button"

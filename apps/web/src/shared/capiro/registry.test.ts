@@ -16,6 +16,7 @@ import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
 import { objectiveOperationalOperations } from "./operations/objective-operational";
+import { objectiveAssociationOperations } from "./operations/objective-associations";
 import { governedObjectiveGenerationReadOperation } from "./operations/objective-governed-generation";
 import { governedObjectiveOutputsReadOperation } from "./operations/objective-governed-outputs";
 import { governedObjectiveStrategyIntakeOperation } from "./operations/objective-governed-strategy-intake";
@@ -44,6 +45,7 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     onboardSetupOperations,
     onboardCoreOperations,
     objectiveOperationalOperations,
+    objectiveAssociationOperations,
     {
       "objectives.governedGeneration.read":
         governedObjectiveGenerationReadOperation,

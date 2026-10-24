@@ -1,5 +1,7 @@
 # PF07 source continuation, 23 October 2026
 
+> Historical evidence from the original A2 source head. Imported on 24 October with `-x` provenance from `8d83623a3c92854f67d5e8908b4f3b9cfe0a0e78` and `47740e4c7ce24f63f8c49aac8e69dabfd3243497`. The gates and screenshots below were not rerun against the visible Portfolio head. See [the current Portfolio handoff](../a2-20261024/PORTFOLIO-HANDOFF.md) for current evidence and remaining scope. The old whole-A2 PREREQUISITES.md remains deleted.
+
 This checkpoint mounts real Objective link/unlink review and retained recovery. It does not claim full PF07 acceptance or completion of the 25-row A2 brief in PREREQUISITES.md. Released shared UI foundation PR127 was integrated through ordinary main merge; no M2 branch, lockfile copy or frozen preview edit is involved.
 
 The five existing source owners provide review metadata for Strategies, Planner projects/tasks, Outreach sessions and meetings. Reads validate exact identity/client, current lifecycle and available revisions. Planner uses its existing bootstrap/task list and cursor contracts; Outreach detail must have exactly this client as sole sponsor; meeting lists use an explicit maximum 93-day range. Duplicate identities and nonadvancing pages refuse. Metadata snapshots are encrypted local review context, never authority tokens. Core rechecks current scope and source permission when committing.

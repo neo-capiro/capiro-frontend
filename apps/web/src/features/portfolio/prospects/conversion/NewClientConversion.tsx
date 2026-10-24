@@ -12,16 +12,29 @@ import type { Prospect } from "../contracts";
 import { useLinkClients } from "./queries";
 import { useNewClientConversion } from "./useNewClientConversion";
 
-export function NewClientConversion({ record }: { record: Prospect }) {
+export function NewClientConversion({
+  record,
+  returnFocus,
+}: {
+  record: Prospect;
+  returnFocus: () => void;
+}) {
   const identity = useIdentity();
   return (
     <ConversionSession
       key={`${identity.data?.tenant?.id}:${identity.data?.user.id}:${record.id}`}
       record={record}
+      returnFocus={returnFocus}
     />
   );
 }
-function ConversionSession({ record }: { record: Prospect }) {
+function ConversionSession({
+  record,
+  returnFocus,
+}: {
+  record: Prospect;
+  returnFocus: () => void;
+}) {
   const flow = useNewClientConversion(record);
   const [open, setOpen] = useState(false),
     [reviewed, setReviewed] = useState(false);
@@ -66,7 +79,8 @@ function ConversionSession({ record }: { record: Prospect }) {
           }}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
-            trigger.current?.focus();
+            if (trigger.current) trigger.current.focus();
+            else returnFocus();
           }}
         >
           <form
@@ -96,7 +110,7 @@ function ConversionSession({ record }: { record: Prospect }) {
                 className="input"
                 type="url"
                 maxLength={2048}
-              placeholder="Optional website"
+                placeholder="Optional website"
                 disabled={locked}
                 value={
                   flow.pending
