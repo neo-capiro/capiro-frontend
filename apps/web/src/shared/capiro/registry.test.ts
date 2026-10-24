@@ -22,6 +22,8 @@ import { governedObjectiveStrategyIntakeOperation } from "./operations/objective
 import {
   firstChatCoreOperation,
   firstChatCoreOperationKey,
+  firstChatV2Operation,
+  firstChatV2OperationKey,
 } from "./operations/meri-first-chat";
 
 it("imports the complete reviewed allowlist safely and exposes no silently overwritten operation", () => {
@@ -49,13 +51,31 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
       "objectives.governedStrategy.intake":
         governedObjectiveStrategyIntakeOperation,
     },
-    { [firstChatCoreOperationKey]: firstChatCoreOperation },
+    {
+      [firstChatCoreOperationKey]: firstChatCoreOperation,
+      [firstChatV2OperationKey]: firstChatV2Operation,
+    },
   ];
   const declared = groups.flatMap((group) => Object.keys(group));
   expect(new Set(declared).size).toBe(declared.length);
   expect(Object.keys(capiroOperations)).toHaveLength(declared.length);
   expect(Object.keys(capiroOperations).sort()).toEqual(declared.sort());
   expect(declared.length).toBeGreaterThan(0);
+});
+it("registers only the reviewed client and explicit General bootstrap contracts", () => {
+  expect(capiroOperations[firstChatCoreOperationKey]).toBe(
+    firstChatCoreOperation,
+  );
+  expect(capiroOperations[firstChatV2OperationKey]).toBe(firstChatV2Operation);
+  expect(
+    Object.keys(capiroOperations).filter((key) =>
+      key.startsWith("meri.conversation.bootstrap"),
+    ),
+  ).toEqual([firstChatCoreOperationKey, firstChatV2OperationKey]);
+  expect(firstChatV2Operation.service).toBe("core");
+  expect(firstChatV2Operation.method).toBe("POST");
+  expect(firstChatV2Operation.path).toBe("/clio/conversations/bootstrap");
+  expect(firstChatV2Operation.authentication).toBe("clerk-session");
 });
 it("registers only the reviewed governed Objective operations", () => {
   expect(capiroOperations["objectives.governedGeneration.read"]).toBe(
