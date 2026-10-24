@@ -8,6 +8,7 @@ import type { Prospect } from "../contracts";
 import { clientSearchLimit, type ClientChoice } from "./api";
 import { useLinkClients, useLinkProspect } from "./queries";
 import styles from "./conversion.module.css";
+import { NewClientConversion } from "./NewClientConversion";
 
 export function ProspectClientLink({ record }: { record: Prospect }) {
   const identity = useIdentity();
@@ -22,16 +23,26 @@ export function ProspectClientLink({ record }: { record: Prospect }) {
   );
   if (record.linkedClientId)
     return (
-      <Link
-        ref={linked}
-        className="button"
-        href={`/portfolio/${record.linkedClientId}`}
-      >
-        Open linked client ↗
-      </Link>
+      <>
+        <NewClientConversion
+          record={record}
+          returnFocus={() => linked.current?.focus()}
+        />
+        <Link
+          ref={linked}
+          className="button"
+          href={`/portfolio/${record.linkedClientId}`}
+        >
+          Open linked client ↗
+        </Link>
+      </>
     );
   return (
     <>
+      <NewClientConversion
+        record={record}
+        returnFocus={() => linked.current?.focus()}
+      />
       <button
         ref={trigger}
         className="button"

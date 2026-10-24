@@ -1,5 +1,6 @@
 import type { RuntimeConfig, Service } from "../config/config";
 import { sameRequestOrigin } from "../../request-origin";
+import { portfolioCommandRefusal } from "./portfolio-command-refusals";
 const permittedRoots: Record<Service, readonly string[]> = {
   core: [
     "clients",
@@ -128,6 +129,19 @@ export async function proxyRequest(
     // Forward no cookies, redirects, server diagnostics or provider headers.
     if (!response.ok) {
       const payload: unknown = await response.json().catch(() => null);
+      const refusal = portfolioCommandRefusal(
+        selected,
+        request.method,
+        path,
+        body,
+        response.status,
+        payload,
+      );
+      if (refusal)
+        return Response.json(refusal, {
+          status: response.status,
+          headers: { "Cache-Control": "no-store" },
+        });
       let message =
         response.status === 404
           ? "The requested action or record is unavailable from the current service."

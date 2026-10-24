@@ -12,6 +12,7 @@ import {
   type TabStorage,
 } from "../src/shared/meri-conversations/tab-journal";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
+import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import type { Page, Route } from "@playwright/test";
 import { installInitialInput } from "../test/browser/meri-initial-input-fixtures";
 import {
@@ -98,6 +99,8 @@ function mount(
     cache?: QueryClient;
     storage?: TabStorage;
     savedRequest?: boolean;
+    modelSelection?: ConversationStoredRequest["modelSelection"];
+    storedRequest?: ConversationStoredRequest;
     fetchImpl: NonNullable<
       Parameters<typeof createMeriConversation>[0]["fetchImpl"]
     >;
@@ -113,6 +116,9 @@ function mount(
           requestId: request.requestId,
           prompt: request.prompt,
           state: "unknown",
+          ...(navigation.modelSelection
+            ? { modelSelection: navigation.modelSelection }
+            : {}),
           ...(navigation.initial ? { workflow: "initial" as const } : {}),
         }
       : { ...retained, state: "observed" },
@@ -146,7 +152,9 @@ function mount(
     run = useLiveRun(
       port,
       undefined,
-      navigation?.savedRequest === false ? undefined : request,
+      navigation?.savedRequest === false
+        ? undefined
+        : (navigation?.storedRequest ?? request),
     );
     return null;
   }
@@ -336,6 +344,112 @@ it("session replacement recovers the terminal answer with a cached unknown reque
   expect(renewed.calls).toEqual(["/api/conversations/history"]);
   expect(renewed.journal.read().submit).toEqual(original);
   expect(renewed.journal.read().submit?.state).toBe("unknown");
+});
+
+it.each([false, true])(
+  "cached readmission preserves the original model identity (explicit: %s) without sending",
+  async (explicit) => {
+    const selection = {
+      provider: "bedrock" as const,
+      modelId: "synthetic-qualified",
+      effort: "high" as const,
+    };
+    const terminal = history([status(1, "completed")], { state: "completed" });
+    const stored = { ...terminal.request, modelSelection: selection };
+    const response = () => Response.json({ ...terminal, request: stored });
+    const mounted = mount(response, {
+      initial: true,
+      ...(explicit ? { modelSelection: selection } : {}),
+      storedRequest: stored,
+      fetchImpl: async () => response(),
+    });
+    const original = structuredClone(mounted.journal.read().submit);
+    for (const effect of harness.effects.splice(0)) effect();
+    await vi.waitFor(() =>
+      expect(mounted.port.getSnapshot().observation?.runState).toBe(
+        "completed",
+      ),
+    );
+    mounted.render();
+    harness.effects.at(-1)!();
+    await vi.waitFor(() =>
+      expect(mounted.journal.read().submit?.state).toBe("observed"),
+    );
+    expect(mounted.calls).toEqual(["/api/conversations/history"]);
+    expect(mounted.journal.read().submit).toEqual({
+      ...original,
+      state: "observed",
+    });
+    expect(mounted.journal.read().submit?.modelSelection).toEqual(
+      explicit ? selection : undefined,
+    );
+  },
+);
+
+it("explicit retry after readmission reuses the chosen model without initial reallocation", async () => {
+  const selection = {
+    provider: "bedrock" as const,
+    modelId: "synthetic-qualified",
+    effort: "high" as const,
+  };
+  const terminal = history([status(1, "completed")], { state: "completed" });
+  const stored = { ...terminal.request, modelSelection: selection };
+  const response = () => Response.json({ ...terminal, request: stored });
+  const mutations: unknown[] = [];
+  const mounted = mount(response, {
+    initial: true,
+    modelSelection: selection,
+    savedRequest: false,
+    fetchImpl: async (url, init) => {
+      if (String(url).endsWith("/history")) return response();
+      mutations.push(JSON.parse(String(init?.body)));
+      if (String(url).endsWith("/input/admit"))
+        return Response.json({
+          run: terminal.run,
+          request: stored,
+          lastSequence: 1,
+          replayed: true,
+        });
+      if (String(url).endsWith("/submit"))
+        return Response.json({
+          run: terminal.run,
+          requestId: stored.requestId,
+          lastSequence: 1,
+          replayed: true,
+        });
+      throw new Error("Unexpected allocation during same-request retry");
+    },
+  });
+  for (const effect of harness.effects.splice(0)) effect();
+  await vi.waitFor(() =>
+    expect(mounted.port.getSnapshot().status).toBe("ready"),
+  );
+  expect(mutations).toEqual([]);
+  expect(mounted.journal.read().submit?.state).toBe("unknown");
+  await mounted.run.submit("Later edited draft", true);
+  expect(mutations).toEqual([
+    {
+      requestId: request.requestId,
+      prompt: request.prompt,
+      modelSelection: selection,
+    },
+    {
+      requestId: request.requestId,
+      prompt: request.prompt,
+      modelSelection: selection,
+    },
+  ]);
+  expect(mounted.calls).toEqual([
+    "/api/conversations/history",
+    "/api/conversations/input/admit",
+    "/api/conversations/submit",
+    "/api/conversations/history",
+  ]);
+  expect(mounted.journal.read().submit?.modelSelection).toEqual(selection);
+  expect(Object.isFrozen(mounted.journal.read().submit?.modelSelection)).toBe(
+    true,
+  );
+  expect(mounted.journal.read().submit?.state).toBe("observed");
 });
 
 it("reload of a lost admission reads queued history and continues only on the explicit same-input action", async () => {

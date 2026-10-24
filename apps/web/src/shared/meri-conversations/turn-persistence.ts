@@ -40,6 +40,10 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
   );
   return {
     current: record.current,
+    clear() {
+      record.clear();
+      if (record.read() !== undefined) throw new TabJournalUnavailable();
+    },
     read() {
       const value = record.read();
       return value
@@ -75,7 +79,13 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
             conversationId: intent.source.conversationId,
             sourceRunId: intent.source.runId,
           },
-          request: { requestId: intent.requestId, prompt: intent.prompt },
+          request: {
+            requestId: intent.requestId,
+            prompt: intent.prompt,
+            ...(intent.modelSelection
+              ? { modelSelection: intent.modelSelection }
+              : {}),
+          },
         }),
       );
     },

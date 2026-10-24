@@ -5,6 +5,8 @@ import { useContactThreads, useMailThread } from "./email";
 import { MailCompose } from "./MailCompose";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
+import { defaultMailFilters, type MailFilters } from "./email/read";
+import { MailCoverageNotice, ThreadContent } from "./thread/ThreadContent";
 export function ContactMail({
   clientId,
   person,
@@ -12,10 +14,12 @@ export function ContactMail({
   clientId: string;
   person: MailContact;
 }) {
-  const query = useContactThreads(clientId, person.email);
+  const [filters, setFilters] = useState(defaultMailFilters);
+  const query = useContactThreads(clientId, person.email, filters);
   const [selected, setSelected] = useState<string | null>(null);
   const [compose, setCompose] = useState<"new" | "reply" | null>(null);
-  const thread = useMailThread(selected);
+  const thread = useMailThread(selected, clientId, person.email);
+  const [bodyError, setBodyError] = useState<Error | null>(null);
   const contactKey = JSON.stringify([clientId, person.personId, person.email]);
   const [readScope, setReadScope] = useState({
     contactKey,
@@ -36,12 +40,20 @@ export function ContactMail({
     if (contactChanged || query.error) {
       setSelected(null);
       setCompose(null);
+      setBodyError(null);
+      if (contactChanged) setFilters(defaultMailFilters);
     } else if (thread.error && compose === "reply") setCompose(null);
   }
   const history =
-    !contactChanged && query.isSuccess && !query.error ? query.data : undefined;
+    !contactChanged && query.isSuccess && !query.error
+      ? query.data?.items
+      : undefined;
   const currentThread =
-    history && thread.isSuccess && !thread.error && thread.data.id === selected
+    history &&
+    thread.isSuccess &&
+    !thread.error &&
+    !bodyError &&
+    thread.data.id === selected
       ? thread.data
       : undefined;
   return (
@@ -60,10 +72,19 @@ export function ContactMail({
       </header>
       {person.email ? (
         <>
+          <ContactMailFilters
+            key={contactKey}
+            onApply={(next) => {
+              setSelected(null);
+              setCompose(null);
+              setBodyError(null);
+              setFilters(next);
+            }}
+          />
           <QueryState
             pending={query.isPending}
             error={query.error}
-            retry={() => void query.refetch()}
+            retry={() => void query.restart()}
           />
           {history?.map((item) => (
             <button
@@ -71,7 +92,10 @@ export function ContactMail({
               key={item.id}
               disabled={query.isFetching}
               onClick={() => {
-                if (history && !query.isFetching) setSelected(item.id);
+                if (history && !query.isFetching) {
+                  setBodyError(null);
+                  setSelected(item.id);
+                }
               }}
             >
               <span>
@@ -86,12 +110,55 @@ export function ContactMail({
             </button>
           ))}
           {history?.length === 0 && (
-            <p className="muted">No accessible messages for this contact.</p>
+            <p className="muted">
+              No accessible messages match this contact and the selected
+              filters.
+            </p>
           )}
-          <small>
-            Up to 50 recent client threads from your accessible mailbox. Open a
-            thread to read its full message history.
-          </small>
+          {history && (
+            <>
+              {query.hasNextPage && (
+                <button
+                  className="button"
+                  disabled={query.isFetching}
+                  onClick={() => void query.fetchNextPage()}
+                >
+                  {query.isFetchingNextPage
+                    ? "Loading threads…"
+                    : "Load more threads"}
+                </button>
+              )}
+              <button
+                className="button ghost"
+                disabled={query.isFetching}
+                onClick={() => {
+                  setSelected(null);
+                  setCompose(null);
+                  setBodyError(null);
+                  void query.restart();
+                }}
+              >
+                Refresh history
+              </button>
+              {query.data?.mailboxes.map((box) => (
+                <div key={box.id}>
+                  <small>{box.email ?? "Accessible mailbox"}</small>
+                  <MailCoverageNotice coverage={box.coverage} />
+                </div>
+              ))}
+              {query.data?.coverageTruncated && (
+                <small>Coverage is shown for up to 50 mailboxes.</small>
+              )}
+              {!query.data?.mailboxes.length && (
+                <small>No mailbox coverage is available.</small>
+              )}
+              <small>
+                Stored active mail only. New sync or edits can move threads
+                between pages. Refresh history to restart. Thread previews and
+                mailbox coverage are bounded.
+              </small>
+            </>
+          )}
         </>
       ) : (
         <p className="muted">
@@ -108,24 +175,54 @@ export function ContactMail({
       >
         <QueryState
           pending={thread.isPending}
-          error={thread.error}
-          retry={() => void thread.refetch()}
+          error={thread.error ?? bodyError}
+          retry={() => {
+            setBodyError(null);
+            void thread.restart();
+          }}
         />
-        {currentThread?.messages.map((message) => (
-          <article className="card stack" key={message.id}>
-            <strong>
-              {message.fromName ?? message.fromEmail ?? "Unknown sender"}
-            </strong>
+        {currentThread && (
+          <>
+            <ThreadContent
+              thread={currentThread}
+              scope={thread.scope}
+              onReadError={setBodyError}
+            />
             <small>
-              {new Date(
-                message.sentAt ?? message.receivedAt ?? message.createdAt,
-              ).toLocaleString()}
+              {currentThread.messages.length} of {currentThread.totalMessages}{" "}
+              stored messages loaded.
             </small>
-            <p style={{ whiteSpace: "pre-wrap" }}>
-              {message.bodyText ?? "Message text is not available."}
-            </p>
-          </article>
-        ))}
+            <MailCoverageNotice coverage={currentThread.coverage} />
+            {thread.hasNextPage && (
+              <button
+                className="button"
+                disabled={thread.isFetching}
+                onClick={() => void thread.fetchNextPage()}
+              >
+                {thread.isFetchingNextPage
+                  ? "Loading messages…"
+                  : "Load more messages"}
+              </button>
+            )}
+            {currentThread.hasMore && !thread.hasNextPage && (
+              <p className="muted">
+                The stored thread read limit was reached. Review remaining
+                messages in your mailbox.
+              </p>
+            )}
+            <button
+              className="button ghost"
+              disabled={thread.isFetching}
+              onClick={() => {
+                setCompose(null);
+                setBodyError(null);
+                void thread.restart();
+              }}
+            >
+              Refresh thread
+            </button>
+          </>
+        )}
         {currentThread && (
           <button
             className="button"
@@ -152,6 +249,53 @@ export function ContactMail({
         />
       )}
     </section>
+  );
+}
+
+function ContactMailFilters({
+  onApply,
+}: {
+  onApply: (filters: MailFilters) => void;
+}) {
+  return (
+    <form
+      className="row wrap"
+      onSubmit={(event) => {
+        event.preventDefault();
+        const values = new FormData(event.currentTarget);
+        const folder = String(values.get("folder"));
+        onApply({
+          query: String(values.get("query") ?? "").trim(),
+          withinDays: String(values.get("withinDays") ?? ""),
+          folder: folder === "inbox" || folder === "sent" ? folder : "all",
+        });
+      }}
+    >
+      <label>
+        Search stored mail
+        <input name="query" type="search" maxLength={200} className="input" />
+      </label>
+      <label>
+        Folder
+        <select name="folder" className="input">
+          <option value="all">All stored folders</option>
+          <option value="inbox">Inbox</option>
+          <option value="sent">Sent</option>
+        </select>
+      </label>
+      <label>
+        Message date
+        <select name="withinDays" className="input">
+          <option value="">All stored dates</option>
+          <option value="30">Last 30 days</option>
+          <option value="90">Last 90 days</option>
+          <option value="365">Last year</option>
+        </select>
+      </label>
+      <button className="button" type="submit">
+        Apply mail filters
+      </button>
+    </form>
   );
 }
 

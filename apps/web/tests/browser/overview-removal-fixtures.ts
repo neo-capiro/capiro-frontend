@@ -1,5 +1,7 @@
 import type { Page } from "@playwright/test";
 import { clientId, installFixtures, json } from "./fixtures";
+import { commandReceipt } from "../activity-command-fixtures";
+import type { ActivityCommandReceipt } from "../../src/features/portfolio/client-profile/quick-log/command-contracts";
 export const actorId = "a1000000-0000-4000-8000-000000000001";
 export const tenantId = "a1000000-0000-4000-8000-000000000002";
 export const activityId = "a1000000-0000-4000-8000-000000000003";
@@ -32,8 +34,8 @@ export const savedActivity = {
   pinned: false,
   dueAt: null,
   settledAt: null,
-  sourceType: null,
-  sourceId: null,
+  sourceType: null as string | null,
+  sourceId: null as string | null,
 };
 export async function installRemoval(page: Page) {
   const unexpected = await installFixtures(page);
@@ -51,6 +53,7 @@ export async function installRemoval(page: Page) {
     posts: 0,
     historyGets: 0,
     activityGets: 0,
+    commands: new Map<string, ActivityCommandReceipt>(),
     mode: "ok",
     role: "user_admin",
     holdHistory: false,
@@ -98,22 +101,50 @@ export async function installRemoval(page: Page) {
         state.activityGets++;
         return json(route, state.activities);
       }
-      state.posts++;
-      const body = route.request().postDataJSON();
-      const row = {
-        ...savedActivity,
-        id:
-          state.posts === 1
-            ? activityId
-            : "a1000000-0000-4000-8000-000000000005",
-        ...body,
-      };
-      state.activities.push({ ...row, origin: "recorded" });
+      throw new Error("Quick Log must use its activity command owner");
+    },
+  );
+  await page.route(
+    `**/api/backend/core/clients/${clientId}/activity-commands**`,
+    async (route) => {
+      let receipt: ActivityCommandReceipt | undefined;
+      if (route.request().method() === "POST") {
+        state.posts++;
+        const input = route.request().postDataJSON();
+        receipt = state.commands.get(input.requestId);
+        if (!receipt) {
+          const id =
+            state.posts === 1
+              ? activityId
+              : "a1000000-0000-4000-8000-000000000005";
+          receipt = {
+            ...commandReceipt(input),
+            activity: {
+              id,
+              personId: input.activity.personId ?? null,
+              available: true,
+            },
+          };
+          state.commands.set(input.requestId, receipt);
+          state.activities.push({
+            ...savedActivity,
+            ...input.activity,
+            id,
+            sourceType: "activity_command",
+            sourceId: receipt.commandId,
+            origin: "recorded",
+          });
+        }
+      } else
+        receipt = state.commands.get(
+          new URL(route.request().url()).pathname.split("/").at(-1)!,
+        );
+      if (!receipt) return json(route, { message: "Command not found" }, 404);
       return json(
         route,
         state.mode === "wrongCreate"
-          ? { ...row, createdByUserId: historyId }
-          : row,
+          ? { ...receipt, actorUserId: historyId }
+          : receipt,
       );
     },
   );

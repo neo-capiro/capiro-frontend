@@ -1,74 +1,71 @@
-import { useSyncExternalStore } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import type { QueryClient, QueryKey } from "@tanstack/react-query";
+"use client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useApi } from "@/shared/portfolio/api/provider";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
-import { ApiError } from "@/shared/portfolio/api/http";
-import type { PersonChange } from "./contact-api";
-
-type CreateAttempt = {
-  token: string;
-  status: "pending" | "unknown";
-  change: Extract<PersonChange, { kind: "save" }>;
-};
-export const contactCreateAttemptKey = (
-  tenantId: string,
-  userId: string,
-  clientId: string,
-) => ["contact-create-attempt", tenantId, userId, clientId, "new"] as const;
+import { assertClientWriter } from "@/shared/portfolio/auth/client-writer";
+import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
+import { useRetainedIntent } from "@/shared/session/recovery/useRetainedIntent";
+import {
+  contactCreateContract,
+  contactCreateScope,
+  runContactCreate,
+} from "./contact-create-command";
+import { peopleKey } from "./queries";
 
 export function useContactCreateAttempt(clientId: string) {
-  const identity = useIdentity();
+  const api = useApi();
   const cache = useQueryClient();
-  const key = contactCreateAttemptKey(
-    identity.data?.tenant?.id ?? "",
-    identity.data?.user.id ?? "",
-    clientId,
-  );
-  const encoded = JSON.stringify(key);
-  const attempt = useSyncExternalStore(
-    (notify) =>
-      cache.getQueryCache().subscribe((event) => {
-        if (JSON.stringify(event.query.queryKey) === encoded) notify();
-      }),
-    () => cache.getQueryData<CreateAttempt | null>(key) ?? null,
-    () => null,
-  );
-  return { key, attempt };
-}
-
-export function beginContactCreate(
-  cache: QueryClient,
-  key: QueryKey,
-  change: CreateAttempt["change"],
-) {
-  if (cache.getQueryData<CreateAttempt | null>(key))
-    throw new ApiError(
-      409,
-      "A contact creation is pending or may have completed. Review the roster before starting another contact; this attempt cannot be repeated here.",
-    );
-  const attempt: CreateAttempt = {
-    token: crypto.randomUUID(),
-    status: "pending",
-    change: structuredClone(change),
+  const identity = useIdentity();
+  const actor = {
+    tenantId: identity.data?.tenant?.id ?? "",
+    userId: identity.data?.user.id ?? "",
   };
-  cache.setQueryDefaults(key, { gcTime: Infinity });
-  cache.setQueryData(key, attempt);
-  return attempt.token;
+  const recovery = useRetainedIntent(
+    contactCreateScope(actor, clientId),
+    contactCreateContract,
+    async (signal, guard) => {
+      assertClientWriter(cache, actor);
+      await verifyCoreWriter(api, actor, signal, guard);
+    },
+  );
+  const mutation = useMutation({
+    mutationKey: ["contact-create-command", clientId],
+    retry: false,
+    mutationFn: async (action: Parameters<typeof runContactCreate>[3]) => {
+      const guard = () => {
+        recovery.guard();
+        assertClientWriter(cache, actor);
+      };
+      await recovery.verify();
+      return runContactCreate(
+        api,
+        actor,
+        clientId,
+        action,
+        guard,
+        recovery.signal(),
+        recovery.install,
+      );
+    },
+    onSettled: () => cache.invalidateQueries({ queryKey: peopleKey(clientId) }),
+  });
+  return {
+    ready: recovery.ready,
+    attempt: recovery.record,
+    busy: mutation.isPending,
+    error: recovery.error ?? mutation.error?.message,
+    receipt: mutation.data,
+    reload: recovery.retry,
+    save: (
+      values: Extract<
+        Parameters<typeof runContactCreate>[3],
+        { kind: "save" }
+      >["values"],
+    ) => mutation.mutateAsync({ kind: "save", values }),
+    recover: (kind: "check" | "retry") =>
+      recovery.record
+        ? mutation.mutateAsync({ kind, expected: recovery.record })
+        : Promise.reject(new Error("No saved contact attempt")),
+  };
 }
-
-export function settleContactCreate(
-  cache: QueryClient,
-  key: QueryKey,
-  token: string,
-  error?: unknown,
-) {
-  const attempt = cache.getQueryData<CreateAttempt | null>(key);
-  if (attempt?.token !== token) return;
-  const uncertain =
-    error !== undefined &&
-    (!(error instanceof ApiError) || error.status >= 500);
-  const next: CreateAttempt | null = uncertain
-    ? { ...attempt, status: "unknown" }
-    : null;
-  cache.setQueryData<CreateAttempt | null>(key, next);
-}
+export type ContactCreation = ReturnType<typeof useContactCreateAttempt>;

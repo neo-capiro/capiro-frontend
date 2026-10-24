@@ -21,7 +21,8 @@ export function billingFlow(summary?: Summary, state?: State) {
   if (
     !summary?.billingEnabled ||
     !state?.billingEnabled ||
-    summary.status !== state.status
+    summary.status !== state.status ||
+    summary.status === "comped"
   )
     return "unavailable";
   if (summary.hasSubscription) return "portal";
@@ -44,12 +45,19 @@ export async function requestBillingDestination(
   action: BillingAction,
   signal: AbortSignal,
 ) {
-  const [summary, state] = await Promise.all([
+  const [summary, state, identity] = await Promise.all([
     api.request("settings.billing.summary", {}, { signal }),
     api.request("settings.billing.state", {}, { signal }),
+    api.request("me.read", {}, { signal }),
   ]);
   signal.throwIfAborted();
-  if (billingFlow(summary, state) !== action.kind)
+  if (
+    billingFlow(summary, state) !== action.kind ||
+    !(
+      identity.role === "capiro_admin" ||
+      (identity.role === "user_admin" && identity.billingAdmin)
+    )
+  )
     throw new BillingStateChanged();
   const result =
     action.kind === "portal"

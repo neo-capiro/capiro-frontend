@@ -142,7 +142,7 @@ function stopFeedback(
       title: "Requesting stop",
       tone: "warning",
       status: "Attention",
-      message: "Stopping: requesting a cancellation fence.",
+      message: "Requesting stop…",
     };
   if (intent.cancel === "unknown")
     return {

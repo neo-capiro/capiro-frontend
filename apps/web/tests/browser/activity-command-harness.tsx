@@ -33,17 +33,14 @@ function Harness() {
   return (
     <main>
       <p>Synthetic command checks. All service requests are intercepted.</p>
-      {shown ? (
-        <QuickLog
-          key={`${identity.data?.tenant?.id}:${identity.data?.user.id}:${clientId}`}
-          clientId={clientId}
-          clientName="Synthetic client"
-          open
-          onOpenChange={setShown}
-        />
-      ) : (
-        <p>Quick log view closed.</p>
-      )}
+      <QuickLog
+        key={`${identity.data?.tenant?.id}:${identity.data?.user.id}:${clientId}`}
+        clientId={clientId}
+        clientName="Synthetic client"
+        open={shown}
+        onOpenChange={setShown}
+      />
+      {!shown && <p>Quick log view closed.</p>}
     </main>
   );
 }

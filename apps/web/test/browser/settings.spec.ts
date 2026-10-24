@@ -174,6 +174,12 @@ test("Connected Microsoft account configures realtime subscriptions", async ({
   const writes: unknown[] = [];
   await operationFixtures(page, {
     ...settingsFixtures,
+    "settings.integrations.microsoftCapabilities": {
+      configured: true,
+      redirectUri: "https://example.test/callback",
+      scopes: [],
+      subscriptionsConfigured: true,
+    },
     "settings.integrations.list": [
       {
         id: "40000000-0000-4000-8000-000000000001",

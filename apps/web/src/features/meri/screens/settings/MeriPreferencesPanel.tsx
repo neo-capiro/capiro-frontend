@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { ConnectorAccountsScreen } from "./ConnectorAccountsScreen";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
@@ -26,8 +26,10 @@ const unavailable =
  */
 export function MeriPreferencesPanel({
   userPreferencesEnabled = false,
+  reportContent,
 }: {
   userPreferencesEnabled?: boolean;
+  reportContent?: ReactNode;
 }) {
   const [page, setPage] = useState<PreferencePageId>("personal");
   const chrome: SettingsChrome = {
@@ -64,6 +66,23 @@ export function MeriPreferencesPanel({
     case "privacy":
       return <PrivacyDeletionScreen chrome={chrome} view={views.privacy} />;
     case "help":
-      return <HelpShortcutsScreen chrome={chrome} view={views.help} />;
+      return (
+        <HelpShortcutsScreen
+          chrome={{
+            ...chrome,
+            ...(reportContent
+              ? {
+                  notice: {
+                    title: "Help and feedback",
+                    detail:
+                      "Review keyboard shortcuts or save a problem report for Capiro HQ.",
+                  },
+                }
+              : {}),
+          }}
+          view={views.help}
+          reportContent={reportContent}
+        />
+      );
   }
 }

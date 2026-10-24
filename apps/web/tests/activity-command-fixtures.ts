@@ -33,19 +33,21 @@ export function commandReceipt(
     tenantId: commandActor.tenantId,
     clientId: commandClientId,
     actorUserId: commandActor.userId,
-    status: "needs_attention",
-    reason: "planner_unavailable",
+    status: input.followUp ? "needs_attention" : "completed",
+    reason: input.followUp ? "planner_unavailable" : null,
     activity: {
       id: "a1000000-0000-4000-8000-000000000010",
       personId: input.activity.personId ?? null,
       available: true,
     },
-    followUp: {
-      owner: "planner",
-      requestId: "a1000000-0000-4000-8000-000000000009",
-      assigneeUserId: input.followUp.assigneeUserId,
-      state: "pending",
-      taskId: null,
-    },
+    followUp: input.followUp
+      ? {
+          owner: "planner",
+          requestId: "a1000000-0000-4000-8000-000000000009",
+          assigneeUserId: input.followUp.assigneeUserId,
+          state: "pending",
+          taskId: null,
+        }
+      : null,
   };
 }

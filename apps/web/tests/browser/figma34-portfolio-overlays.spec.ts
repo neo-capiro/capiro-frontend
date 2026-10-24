@@ -28,7 +28,7 @@ test("Add profile chooser desktop frame", async ({ page }, info) => {
 test("Quick log global chooser and inline client form desktop frames", async ({
   page,
 }, info) => {
-  const unexpected = await installFixtures(page);
+  const { unexpected } = await installRemoval(page);
   const writes: string[] = [];
   page.on("request", (request) => {
     if (request.url().includes("/api/backend/") && request.method() !== "GET")
@@ -94,6 +94,7 @@ test("global Quick log keeps its verified Undo after saving above the index", as
   await form
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
+  await form.getByRole("button", { name: "Done", exact: true }).click();
   await expect(form).toHaveCount(0);
   const result = page.getByRole("complementary", { name: "Quick log result" });
   await expect(result).toContainText("Logged to Test Aerospace");

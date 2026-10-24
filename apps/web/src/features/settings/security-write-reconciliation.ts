@@ -1,6 +1,7 @@
 import type { CapiroApi } from "../../shared/capiro/http";
 import type { capiroOperations } from "../../shared/capiro/registry";
 import type { SettingsWrite } from "./security-writes";
+import { settingsRequestHash } from "./security-write-journal";
 type Api = CapiroApi<typeof capiroOperations>;
 const row = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -14,6 +15,117 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "settings.support.create": {
+      if (
+        !write.expectedAccount ||
+        !write.requestHash ||
+        typeof body.id !== "string"
+      )
+        return false;
+      const account = await api.request("me.read", {}, { signal });
+      if (
+        account.user.id !== write.expectedAccount.userId ||
+        account.tenant.id !== write.expectedAccount.tenantId
+      )
+        return false;
+      const receipt = await api.request(
+        "settings.support.receipt",
+        { params: { id: body.id } },
+        { signal },
+      );
+      return (
+        receipt.id === body.id &&
+        receipt.tenantId === write.expectedAccount.tenantId &&
+        receipt.submittedByUserId === write.expectedAccount.userId &&
+        (await settingsRequestHash({
+          body: {
+            id: receipt.id,
+            summary: receipt.summary,
+            detail: receipt.detail,
+            runReference: receipt.runReference,
+          },
+        })) === write.requestHash
+      );
+    }
+    case "settings.branding.update": {
+      if (!write.expectedAccount || !write.requestHash) return false;
+      const account = await api.request("me.read", {}, { signal });
+      if (
+        account.user.id !== write.expectedAccount.userId ||
+        account.tenant.id !== write.expectedAccount.tenantId
+      )
+        return false;
+      const current = await api.request(
+        "settings.branding.read",
+        {},
+        { signal },
+      );
+      return (
+        current?.id === write.expectedAccount.tenantId &&
+        (await settingsRequestHash({ body: { name: current.name } })) ===
+          write.requestHash
+      );
+    }
+    case "me.emailSignature.update": {
+      if (!write.expectedAccount || !write.resultHash) return false;
+      const account = await api.request("me.read", {}, { signal });
+      if (
+        account.user.id !== write.expectedAccount.userId ||
+        account.tenant.id !== write.expectedAccount.tenantId
+      )
+        return false;
+      const current = await api.request(
+        "me.emailSignature.read",
+        {},
+        { signal },
+      );
+      return (await settingsRequestHash(current)) === write.resultHash;
+    }
+    case "settings.contact.update": {
+      if (!write.expectedAccount || !write.requestHash || !write.inputFields)
+        return false;
+      const account = await api.request("me.read", {}, { signal });
+      if (
+        account.user.id !== write.expectedAccount.userId ||
+        account.tenant.id !== write.expectedAccount.tenantId
+      )
+        return false;
+      const current = await api.request(
+        "settings.contact.read",
+        {},
+        { signal },
+      );
+      if (Object.keys(current).length !== write.inputFields.length)
+        return false;
+      const body = Object.fromEntries(
+        write.inputFields.map((key) => [key, row(current)[key]]),
+      );
+      return (await settingsRequestHash({ body })) === write.requestHash;
+    }
+    case "settings.profiles.archive":
+    case "settings.profiles.restore": {
+      const profiles = await api.request(
+        "clients.list",
+        { query: { includeArchived: true } },
+        { signal },
+      );
+      const target = profiles.find((profile) => profile.id === params.clientId);
+      return (
+        target?.status ===
+        (write.operation.endsWith("archive") ? "archived" : body.status)
+      );
+    }
+    case "me.update": {
+      if (!write.expectedAccount || !write.requestHash) return false;
+      const current = await api.request("me.read", {}, { signal });
+      return (
+        current.user.id === write.expectedAccount.userId &&
+        current.tenant.id === write.expectedAccount.tenantId &&
+        (await settingsRequestHash({
+          body: { title: current.user.title ?? "" },
+        })) === write.requestHash
+      );
+    }
     case "settings.team.resend": {
       if (!write.expectedInvitation || !write.receiptId) return false;
       const invitations = await api.request(
@@ -196,6 +308,7 @@ export async function reconcileSettingsWrite(
 
 export const settingsWriteNeedsReadback = (operation: string) =>
   [
+    "me.emailSignature.update",
     "settings.team.remove",
     "settings.team.resend",
     "settings.analyst.personCandidates.decide",

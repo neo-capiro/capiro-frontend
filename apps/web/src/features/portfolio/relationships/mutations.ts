@@ -10,19 +10,18 @@ import {
   type PersonChange,
 } from "./contact-api";
 import { peopleKey } from "./queries";
-import {
-  beginContactCreate,
-  settleContactCreate,
-  useContactCreateAttempt,
-} from "./contact-create-attempt";
+import type { ContactCreation } from "./contact-create-attempt";
 export type { PersonChange } from "./contact-api";
 export const peopleWriteKey = (clientId: string) =>
   ["client-people-write", clientId] as const;
-export function usePersonMutation(clientId: string, onSaved?: () => void) {
+export function usePersonMutation(
+  clientId: string,
+  onSaved?: () => void,
+  creation?: ContactCreation,
+) {
   const api = useApi();
   const cache = useQueryClient();
   const identity = useIdentity();
-  const creation = useContactCreateAttempt(clientId);
   const lifetime = useRef({ active: false });
   useLayoutEffect(() => {
     const current = { active: true };
@@ -64,18 +63,15 @@ export function usePersonMutation(clientId: string, onSaved?: () => void) {
           409,
           "Wait for the current contact change to finish.",
         );
-      const creating = change.kind === "save" && !change.id;
-      const token = creating
-        ? beginContactCreate(cache, creation.key, change)
-        : undefined;
-      try {
-        const result = await writePerson(api, clientId, change);
-        if (token) settleContactCreate(cache, creation.key, token);
-        return result;
-      } catch (error) {
-        if (token) settleContactCreate(cache, creation.key, token, error);
-        throw error;
+      if (change.kind === "save" && !change.id) {
+        if (!creation?.ready)
+          throw new ApiError(
+            409,
+            "Load the saved contact attempt before creating a contact.",
+          );
+        return creation.save(change.body);
       }
+      return writePerson(api, clientId, change);
     },
     onSuccess: async (_result, _change, scope) => {
       await cache.invalidateQueries({ queryKey: peopleKey(clientId) });

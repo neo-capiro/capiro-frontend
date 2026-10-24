@@ -37,10 +37,12 @@ function PublicSessionData({
 
 function SessionData({
   children,
+  authenticatedContent,
   clientId,
   onSessionExpired,
 }: {
   children: ReactNode;
+  authenticatedContent?: ReactNode;
   clientId?: string;
   onSessionExpired: () => void;
 }) {
@@ -66,6 +68,7 @@ function SessionData({
       <DataProvider key={clientId ?? "no-selection"} onSessionExpired={expire}>
         <CapiroDataProvider onSessionExpired={expire}>
           <SelectedClientProvider requestedId={clientId}>
+            {authenticatedContent}
             {children}
           </SelectedClientProvider>
         </CapiroDataProvider>
@@ -73,7 +76,13 @@ function SessionData({
     </SessionContext.Provider>
   );
 }
-function CurrentSession({ children }: { children: ReactNode }) {
+function CurrentSession({
+  children,
+  authenticatedContent,
+}: {
+  children: ReactNode;
+  authenticatedContent?: ReactNode;
+}) {
   const { isLoaded, userId, sessionId, orgId } = useAuth();
   const pathname = usePathname();
   const search = useSearchParams();
@@ -121,6 +130,7 @@ function CurrentSession({ children }: { children: ReactNode }) {
       key={JSON.stringify([userId, sessionId, orgId])}
       clientId={clientId}
       onSessionExpired={tabSession.expire}
+      authenticatedContent={authenticatedContent}
     >
       {content}
     </SessionData>
@@ -129,9 +139,11 @@ function CurrentSession({ children }: { children: ReactNode }) {
 export function ApplicationBoundary({
   publishableKey,
   children,
+  authenticatedContent,
 }: {
   publishableKey?: string;
   children: ReactNode;
+  authenticatedContent?: ReactNode;
 }) {
   const pathname = usePathname();
   // Revocable Planner capability forms have an independent public contract.
@@ -152,7 +164,9 @@ export function ApplicationBoundary({
     );
   return (
     <AuthenticationProvider publishableKey={publishableKey}>
-      <CurrentSession>{children}</CurrentSession>
+      <CurrentSession authenticatedContent={authenticatedContent}>
+        {children}
+      </CurrentSession>
     </AuthenticationProvider>
   );
 }

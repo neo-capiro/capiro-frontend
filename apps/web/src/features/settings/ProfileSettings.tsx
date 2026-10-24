@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { OperationResponse } from "../../shared/capiro/contracts";
 import type { settingsOperations } from "../../shared/capiro/operations/settings";
 import { useCapiroQuery } from "../../shared/capiro/queries";
@@ -20,7 +19,8 @@ import {
   SettingsTabs,
 } from "./components";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 type Client = OperationResponse<
   (typeof settingsOperations)["clients.list"]
@@ -31,8 +31,13 @@ const addedDate = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
-export function ProfileSettings() {
-  const api = useCapiro();
+export function ProfileSettings({
+  readOnlyPreview = false,
+}: {
+  readOnlyPreview?: boolean;
+}) {
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("profiles");
   const query = useCapiroQuery("clients.list", {
     query: { includeArchived: true },
   });
@@ -45,7 +50,6 @@ export function ProfileSettings() {
   const [search, setSearch] = useState("");
   const [archive, setArchive] = useState<Client>();
   const [create, setCreate] = useState(false);
-  const action = useSettingsAction();
   const reload = () => {
     query.reload();
     owners.reload();
@@ -53,16 +57,26 @@ export function ProfileSettings() {
   async function changeStatus(
     client: Client,
     operation: "archive" | "restore",
+    signal: AbortSignal,
   ) {
+    if (readOnlyPreview) return;
     const result =
       operation === "archive"
-        ? await api.request("settings.profiles.archive", {
-            params: { clientId: client.id },
-          })
-        : await api.request("settings.profiles.restore", {
-            params: { clientId: client.id },
-            body: { status: "active" },
-          });
+        ? await api.request(
+            "settings.profiles.archive",
+            {
+              params: { clientId: client.id },
+            },
+            { signal },
+          )
+        : await api.request(
+            "settings.profiles.restore",
+            {
+              params: { clientId: client.id },
+              body: { status: "active" },
+            },
+            { signal },
+          );
     if (
       result.id !== client.id ||
       result.status !== (operation === "archive" ? "archived" : "active")
@@ -103,16 +117,31 @@ export function ProfileSettings() {
             onChange={(event) => setSearch(event.target.value)}
           />
         </div>
-        <SettingsButton primary onClick={() => setCreate(true)}>
+        <SettingsButton
+          primary
+          disabled={readOnlyPreview || locked}
+          onClick={() => setCreate(true)}
+        >
           + Add profile
         </SettingsButton>
       </div>
+      {readOnlyPreview && (
+        <SettingsNotice title="Profile changes unavailable in preview">
+          Active profiles, archived profiles and account-owner details remain
+          available to authorized users.
+        </SettingsNotice>
+      )}
       {action.error && (
         <SettingsNotice title="Profile update failed" error>
           {action.error}
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       {owners.error && tab === "active" && (
         <SettingsNotice
           title="Account owners unavailable"
@@ -234,13 +263,13 @@ export function ProfileSettings() {
                 label: "Actions",
                 visuallyHiddenHeader: true,
                 render: (row) =>
-                  row.status === "archived" ? (
+                  readOnlyPreview ? null : row.status === "archived" ? (
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() =>
                         void action.run(
-                          () => changeStatus(row, "restore"),
+                          (signal) => changeStatus(row, "restore", signal),
                           "Profile was restored.",
                           reload,
                         )
@@ -251,7 +280,7 @@ export function ProfileSettings() {
                   ) : (
                     <SettingsButton
                       small
-                      disabled={action.busy}
+                      disabled={locked}
                       onClick={() => setArchive(row)}
                     >
                       Archive
@@ -262,12 +291,15 @@ export function ProfileSettings() {
           />
         </div>
       </StatusPanel>
-      <p className={styles.description}>
-        Archived profiles leave your portfolio. Billing changes follow your
-        current subscription terms. Archive and restoration are managed here.
-      </p>
+      {!readOnlyPreview && (
+        <p className={styles.description}>
+          Archived profiles leave your portfolio. Billing changes follow your
+          current subscription terms. Archive and restoration are managed here.
+        </p>
+      )}
       <SettingsDialog
         open={!!archive}
+        busy={action.busy}
         onClose={() => {
           if (!action.busy) setArchive(undefined);
         }}
@@ -283,11 +315,11 @@ export function ProfileSettings() {
             </SettingsButton>
             <SettingsButton
               danger
-              disabled={action.busy}
+              disabled={locked}
               onClick={() => {
                 if (archive)
                   void action.run(
-                    () => changeStatus(archive, "archive"),
+                    (signal) => changeStatus(archive, "archive", signal),
                     "Profile was archived.",
                     () => {
                       setArchive(undefined);
@@ -310,11 +342,13 @@ export function ProfileSettings() {
           </SettingsNotice>
         )}
       </SettingsDialog>
-      <CreateProfile
-        open={create}
-        onClose={() => setCreate(false)}
-        refresh={reload}
-      />
+      {!readOnlyPreview && (
+        <CreateProfile
+          open={create}
+          onClose={() => setCreate(false)}
+          refresh={reload}
+        />
+      )}
     </div>
   );
 }
@@ -328,14 +362,15 @@ function CreateProfile({
   onClose: () => void;
   refresh: () => void;
 }) {
-  const api = useCapiro();
+  const { api, action, pending, reconcile, locked } =
+    useSettingsMutation("profile-create");
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
-  const action = useSettingsAction();
   return (
     <SettingsDialog
       open={open}
+      busy={action.busy}
       onClose={() => {
         if (!action.busy) onClose();
       }}
@@ -350,7 +385,7 @@ function CreateProfile({
             primary
             form="settings-create-profile"
             type="submit"
-            disabled={action.busy}
+            disabled={locked}
           >
             {action.busy ? "Creating…" : "Create profile"}
           </SettingsButton>
@@ -363,14 +398,18 @@ function CreateProfile({
         onSubmit={(event) => {
           event.preventDefault();
           void action.run(
-            () =>
-              api.request("settings.profiles.create", {
-                body: {
-                  name,
-                  ...(website ? { website } : {}),
-                  ...(description ? { description } : {}),
+            (signal) =>
+              api.request(
+                "settings.profiles.create",
+                {
+                  body: {
+                    name,
+                    ...(website ? { website } : {}),
+                    ...(description ? { description } : {}),
+                  },
                 },
-              }),
+                { signal },
+              ),
             "Profile was created.",
             () => {
               refresh();
@@ -387,6 +426,7 @@ function CreateProfile({
             required
             maxLength={200}
             value={name}
+            disabled={locked}
             onChange={(event) => setName(event.target.value)}
           />
         </SettingField>
@@ -394,6 +434,7 @@ function CreateProfile({
           <TextInput
             maxLength={2048}
             value={website}
+            disabled={locked}
             onChange={(event) => setWebsite(event.target.value)}
           />
         </SettingField>
@@ -401,6 +442,7 @@ function CreateProfile({
           <TextArea
             maxLength={10000}
             value={description}
+            disabled={locked}
             onChange={(event) => setDescription(event.target.value)}
           />
         </SettingField>
@@ -409,6 +451,11 @@ function CreateProfile({
             {action.error}
           </SettingsNotice>
         )}
+        <SettingsMutationNotice
+          pending={pending}
+          busy={action.busy}
+          reconcile={reconcile}
+        />
       </form>
     </SettingsDialog>
   );

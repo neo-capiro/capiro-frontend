@@ -11,6 +11,8 @@ import {
   readError,
   refreshRelationships,
   relationshipsPath,
+  contactCreationReceipt,
+  installContactCreateIdentity,
 } from "./acceptance-relationships-fixtures";
 
 for (const status of [200, 503])
@@ -18,6 +20,7 @@ for (const status of [200, 503])
     page,
   }) => {
     const unexpected = await installFixtures(page);
+    await installContactCreateIdentity(page);
     const read = await controlledRead(page, `**/clients/${clientId}/people`, [
       person,
     ]);
@@ -34,7 +37,7 @@ for (const status of [200, 503])
       await json(
         route,
         status === 200
-          ? { ...person, ...body, id: "20000000-0000-4000-8000-000000000002" }
+          ? contactCreationReceipt(body, "20000000-0000-4000-8000-000000000002")
           : { message: "Synthetic unknown create" },
         status,
       );
@@ -94,7 +97,7 @@ for (const status of [200, 503])
     if (status === 503) {
       await expect(add).toBeDisabled();
       await expect(page.getByRole("status")).toContainText(
-        "A contact creation may have completed",
+        "needs confirmation",
       );
       await refreshRelationships(page, ["client-people", clientId]);
       await expect

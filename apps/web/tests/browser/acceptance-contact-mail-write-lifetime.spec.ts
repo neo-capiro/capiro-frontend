@@ -1,3 +1,5 @@
+import { mailListFixture } from "../mail-read-fixture";
+import { installMailReadIdentity } from "./mail-read-fixtures";
 import { expect, test } from "@playwright/test";
 import { clientId, installFixtures, json, person, personId } from "./fixtures";
 import {
@@ -13,13 +15,14 @@ test("pending send and lost delivery receipt survive current-history loss and sa
   page,
 }) => {
   const unexpected = await installFixtures(page);
+  await installMailReadIdentity(page);
   const thread = contactThread();
   const historyRead = await controlledRead(
     page,
     "**/engagement/mail-threads?**",
-    [thread],
+    mailListFixture([thread]),
   );
-  await page.route(`**/engagement/mail-threads/${threadId}`, (route) =>
+  await page.route(`**/engagement/mail-threads/${threadId}*`, (route) =>
     json(route, thread),
   );
   let sends = 0;
@@ -85,7 +88,7 @@ test("pending send and lost delivery receipt survive current-history loss and sa
   await expect(
     page.getByRole("dialog", { name: "Send email", exact: true }),
   ).toHaveCount(0);
-  historyRead.hold([thread]);
+  historyRead.hold(mailListFixture([thread]));
   await contact.getByRole("button", { name: "Retry", exact: true }).click();
   await expect.poll(() => historyRead.waiting).toBe(1);
   historyRead.release();

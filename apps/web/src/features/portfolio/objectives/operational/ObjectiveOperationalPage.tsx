@@ -1,4 +1,5 @@
 "use client";
+import { lazy, Suspense, useRef, useState } from "react";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import Image from "next/image";
 import type { OperationalRead } from "@/shared/capiro/operations/objective-operational";
@@ -11,6 +12,11 @@ import {
   OperationalWorkSections,
 } from "./OperationalSections";
 import styles from "./operational.module.css";
+const ObjectiveAssociationDialog = lazy(() =>
+  import("./ObjectiveAssociationDialog").then((module) => ({
+    default: module.ObjectiveAssociationDialog,
+  })),
+);
 
 function Overview({
   read,
@@ -59,6 +65,82 @@ function Overview({
   );
 }
 
+function SuccessCriteria({ objective }: { objective: Objective }) {
+  return (
+    <section className={styles.panel} aria-label="Success criteria and limits">
+      <header className={styles.panelHead}>
+        <h2>Success criteria and limits</h2>
+      </header>
+      <dl className={styles.criteria}>
+        <div>
+          <dt>Outcome</dt>
+          <dd>{objective.outcome || "Not defined"}</dd>
+        </div>
+        <div>
+          <dt>Minimum win</dt>
+          <dd>{objective.minimumWin || "Not defined"}</dd>
+        </div>
+        <div>
+          <dt>Limits</dt>
+          <dd>{objective.limits || "Not defined"}</dd>
+        </div>
+      </dl>
+    </section>
+  );
+}
+
+function LinkedWork({
+  query,
+  onManage,
+  trigger,
+}: {
+  query: ReturnType<typeof useObjectiveOperational>;
+  onManage: () => void;
+  trigger: React.RefObject<HTMLButtonElement | null>;
+}) {
+  const read = query.value;
+  if (!read) return null;
+  const panels = { read, next: query.next, canNext: query.canNext };
+  return (
+    <>
+      <div className={styles.observation}>
+        <small>
+          Observed {new Date(read.observedAt).toLocaleString()}. Resource
+          permissions and versions are checked again when opened.
+        </small>
+        <button className="button" onClick={query.reload}>
+          Refresh linked work
+        </button>
+        <button
+          className="button"
+          ref={trigger}
+          disabled={query.loading || read.associationSetVersion === null}
+          onClick={onManage}
+        >
+          Manage links
+        </button>
+      </div>
+      <OperationalDecisionSection {...panels} />
+      <OperationalWorkSections {...panels} />
+      <OperationalPanel
+        title="Open intelligence questions"
+        coverage={read.sections.questions.coverage}
+        hasItems={false}
+        empty=""
+      >
+        <p className={styles.caption}>
+          Question status is unavailable for this view.
+        </p>
+      </OperationalPanel>
+      <OperationalEngagementSection {...panels} />
+      <p className={styles.caption}>
+        Requested, Strategy-applied and Planner-applied versions are
+        unavailable. Opening this page does not start or continue generation.
+      </p>
+    </>
+  );
+}
+
 export function ObjectiveOperationalPage({
   objective,
   onBack,
@@ -71,13 +153,14 @@ export function ObjectiveOperationalPage({
   onReloadObjective: () => void;
 }) {
   const query = useObjectiveOperational(objective);
+  const [manageLinks, setManageLinks] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
   const read = query.value;
   const canEdit = read?.actions.some(
     (action) =>
       action.kind === "edit_objective" &&
       action.expectedObjectiveVersion === objective.version,
   );
-  const panels = { read: read!, next: query.next, canNext: query.canNext };
   return (
     <section
       className={styles.page}
@@ -123,59 +206,26 @@ export function ObjectiveOperationalPage({
           Reload current objective
         </button>
       )}
-      {read && (
-        <>
-          <div className={styles.observation}>
-            <small>
-              Observed {new Date(read.observedAt).toLocaleString()}. Resource
-              permissions and versions are checked again when opened.
-            </small>
-            <button className="button" onClick={query.reload}>
-              Refresh linked work
-            </button>
-          </div>
-          <OperationalDecisionSection {...panels} />
-          <OperationalWorkSections {...panels} />
-          <OperationalPanel
-            title="Open intelligence questions"
-            coverage={read.sections.questions.coverage}
-            hasItems={false}
-            empty=""
-          >
-            <p className={styles.caption}>
-              Question status is unavailable for this view.
-            </p>
-          </OperationalPanel>
-          <OperationalEngagementSection {...panels} />
-          <p className={styles.caption}>
-            Requested, Strategy-applied and Planner-applied versions are
-            unavailable. Opening this page does not start or continue
-            generation.
-          </p>
-        </>
+      <LinkedWork
+        query={query}
+        onManage={() => setManageLinks(true)}
+        trigger={trigger}
+      />
+      <SuccessCriteria objective={objective} />
+      {manageLinks && (
+        <Suspense fallback={<p role="status">Loading link editor…</p>}>
+          <ObjectiveAssociationDialog
+            key={`${objective.clientId}:${objective.id}`}
+            objective={objective}
+            onClose={() => setManageLinks(false)}
+            onRefresh={() => {
+              query.reload();
+              onReloadObjective();
+            }}
+            onReturnFocus={() => trigger.current?.focus()}
+          />
+        </Suspense>
       )}
-      <section
-        className={styles.panel}
-        aria-label="Success criteria and limits"
-      >
-        <header className={styles.panelHead}>
-          <h2>Success criteria and limits</h2>
-        </header>
-        <dl className={styles.criteria}>
-          <div>
-            <dt>Outcome</dt>
-            <dd>{objective.outcome || "Not defined"}</dd>
-          </div>
-          <div>
-            <dt>Minimum win</dt>
-            <dd>{objective.minimumWin || "Not defined"}</dd>
-          </div>
-          <div>
-            <dt>Limits</dt>
-            <dd>{objective.limits || "Not defined"}</dd>
-          </div>
-        </dl>
-      </section>
     </section>
   );
 }

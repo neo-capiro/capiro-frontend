@@ -33,6 +33,9 @@ export function storedSubmission(
       JSON.stringify({
         requestId: stored.requestId,
         prompt: stored.prompt,
+        ...(stored.modelSelection
+          ? { modelSelection: stored.modelSelection }
+          : {}),
         ...(stored.windowRequest
           ? { windowRequest: stored.windowRequest }
           : {}),
@@ -62,6 +65,7 @@ function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   const copy = structuredClone(submit);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
   if (copy.skill) Object.freeze(copy.skill);
+  if (copy.modelSelection) Object.freeze(copy.modelSelection);
   return Object.freeze(copy);
 }
 /** Only canonical request fields and local uncertainty survive reload; no receipt grants authority. */

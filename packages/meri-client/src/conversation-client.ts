@@ -183,7 +183,10 @@ class ConversationConnection {
             skillId: saved.skill.skillId,
             skillVersion: saved.skill.skillVersion,
           },
-        ) !== stableStringify(input.skill ?? null)
+        ) !== stableStringify(input.skill ?? null) ||
+        (input.modelSelection !== undefined &&
+          stableStringify(saved.modelSelection) !==
+            stableStringify(input.modelSelection))
       ) {
         throw new ConversationUnavailable("foreign-retained-request");
       }

@@ -14,7 +14,7 @@ async function openRemove(page: Page) {
     .click();
   return page.getByRole("dialog", { name: "Remove submission?", exact: true });
 }
-async function saveNote(page: Page) {
+async function saveNote(page: Page, acknowledge = true) {
   await page.goto(`/portfolio/${clientId}?log=1`);
   const dialog = page.getByRole("dialog", { name: "Quick log", exact: true });
   await dialog
@@ -26,6 +26,8 @@ async function saveNote(page: Page) {
   await dialog
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
+  if (acknowledge)
+    await dialog.getByRole("button", { name: "Done", exact: true }).click();
   return page.getByRole("complementary", { name: "Quick log result" });
 }
 test("submission explicit confirmation, rejected request retry, exact removal and retained data", async ({
@@ -138,9 +140,9 @@ test("wrong creator create receipt offers no Undo and blocks duplicate create", 
 }) => {
   const { state } = await installRemoval(page);
   state.mode = "wrongCreate";
-  await saveNote(page);
+  await saveNote(page, false);
   const dialog = page.getByRole("dialog", { name: "Quick log", exact: true });
-  await expect(dialog).toContainText("receipt does not match");
+  await expect(dialog).toContainText("unexpected response");
   await expect(
     dialog.getByRole("button", { name: "Save activity", exact: true }),
   ).toBeDisabled();
@@ -197,7 +199,7 @@ test("an unknown second create cannot leave the prior entry Undo visible", async
   await dialog
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
-  await expect(dialog).toContainText("receipt does not match");
+  await expect(dialog).toContainText("unexpected response");
   await expect(
     page.getByRole("button", { name: "Undo", exact: true }),
   ).toHaveCount(0);

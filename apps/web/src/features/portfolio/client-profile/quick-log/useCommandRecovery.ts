@@ -29,7 +29,7 @@ export function useCommandRecovery(
   try {
     if (actor) scope = recoveryScope(actor, clientId);
   } catch {
-    /* Ordinary legacy logging remains available; durable commands require Core UUIDs. */
+    /* Activity commands require canonical Core UUIDs for durable recovery. */
   }
   const [state, setState] = useState<RecoveryState>();
   const [revision, setRevision] = useState(0);

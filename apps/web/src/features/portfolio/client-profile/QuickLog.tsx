@@ -2,18 +2,15 @@
 import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
-import {
-  QuickLogUndo,
-  quickLogInputSchema,
-  useQuickLog,
-} from "./quick-log/public";
+import { QuickLogUndo, quickLogInputSchema } from "./quick-log/public";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
-import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import meetingEntryStyles from "./quick-log/meeting-entry.module.css";
 import { followUpInputSchema } from "./quick-log/command-contracts";
-import { useFollowUpCommand } from "./quick-log/useFollowUpCommand";
+import { useActivityCommand } from "./quick-log/useActivityCommand";
+import { useQuickLogUndo } from "./quick-log/useQuickLogUndo";
+import type { CommandUndoSnapshot } from "./quick-log/command-undo";
 import { FollowUpFields } from "./quick-log/FollowUpFields";
-import { FollowUpStatus } from "./quick-log/FollowUpStatus";
+import { ActivityCommandStatus } from "./quick-log/ActivityCommandStatus";
 import { useQuickLogDetailFields } from "./quick-log/QuickLogDetailFields";
 import styles from "./quick-log/quick-log-dialog.module.css";
 export function QuickLog({
@@ -45,7 +42,16 @@ export function QuickLog({
     scope: "",
     value: false,
   });
-  const command = useFollowUpCommand(clientId, open);
+  const command = useActivityCommand(clientId, open);
+  const [receipt, setReceipt] = useState<CommandUndoSnapshot>();
+  const undo = useQuickLogUndo(clientId);
+  const undoReceipt =
+    undo.attempt?.snapshot ??
+    (receipt?.clientId === clientId &&
+    receipt.actorUserId === undo.actor?.userId &&
+    receipt.tenantId === undo.actor?.tenantId
+      ? receipt
+      : undefined);
   const details = useQuickLogDetailFields(
     clientId,
     open,
@@ -66,23 +72,19 @@ export function QuickLog({
     setFollowUpSelection({ scope: details.scope, value: false });
     onOpenChange(false);
   };
-  const withFollowUp = Boolean(command.pending) || followUpRequested;
+  const withFollowUp = command.pending
+    ? Boolean(command.pending.input.followUp)
+    : followUpRequested;
   const currentKind = command.pending?.input.activity.kind ?? kind;
-  const { mutation, receipt, clearReceipt, canCreate, uncertain } = useQuickLog(
-    clientId,
-    open,
-    close,
-  );
-  const canOpenMeeting =
-    open && canCreate && !mutation.isPending && !uncertain && !command.pending;
-  const fieldsLocked =
-    mutation.isPending || uncertain || Boolean(command.pending);
+  const canCreate = command.ready && !command.pending;
+  const canOpenMeeting = open && canCreate && !command.busy;
+  const fieldsLocked = command.busy || Boolean(command.pending);
   return (
     <>
       <Dialog
         open={open}
         onOpenChange={(value) => {
-          if (!mutation.isPending && !command.busy) {
+          if (!command.busy) {
             if (value) onOpenChange(true);
             else close();
           }
@@ -107,12 +109,7 @@ export function QuickLog({
             {onChangeClient && (
               <button
                 type="button"
-                disabled={
-                  mutation.isPending ||
-                  command.busy ||
-                  Boolean(command.pending) ||
-                  uncertain
-                }
+                disabled={command.busy || Boolean(command.pending)}
                 onClick={onChangeClient}
               >
                 Change client
@@ -121,7 +118,7 @@ export function QuickLog({
           </div>
         </div>
         {command.checking ? (
-          <p role="status">Checking saved follow-up recovery…</p>
+          <p role="status">Checking saved activity recovery…</p>
         ) : command.blocked ? (
           <div role="alert">
             <p>{command.recoveryError}</p>
@@ -167,6 +164,7 @@ export function QuickLog({
                 return;
               }
               setValidation("");
+              setReceipt(undefined);
               if (withFollowUp) {
                 const dueOn = String(form.get("followUpDate") ?? "");
                 const dueTime = String(form.get("followUpTime") ?? "");
@@ -187,7 +185,7 @@ export function QuickLog({
                 command.start(input.data, followUp.data);
                 return;
               }
-              mutation.mutate(input.data);
+              command.start(input.data);
             }}
           >
             <label className={styles.kindField}>
@@ -262,9 +260,7 @@ export function QuickLog({
               <input
                 type="checkbox"
                 checked={withFollowUp}
-                disabled={
-                  mutation.isPending || uncertain || Boolean(command.pending)
-                }
+                disabled={command.busy || Boolean(command.pending)}
                 onChange={(event) =>
                   setFollowUpSelection({
                     scope: details.scope,
@@ -290,25 +286,18 @@ export function QuickLog({
               </div>
             )}
             {validation && <p role="alert">{validation}</p>}
-            <QueryState error={mutation.error} />
-            <FollowUpStatus
+            <ActivityCommandStatus
               command={command}
-              onDone={() => {
+              onDone={(undo) => {
+                setReceipt(undo);
                 close();
               }}
             />
-            {uncertain && (
-              <p role="alert">
-                The save result is uncertain. Inspect the timeline before
-                logging again. This request will not be resent and Undo is
-                unavailable without a verified saved entry.
-              </p>
-            )}
             <div className={`${styles.formActions} formActions`}>
               <button
                 type="button"
                 className="button"
-                disabled={mutation.isPending || command.busy}
+                disabled={command.busy}
                 onClick={close}
               >
                 Cancel
@@ -317,12 +306,12 @@ export function QuickLog({
                 className="button primary"
                 disabled={
                   !canCreate ||
-                  mutation.isPending ||
+                  command.busy ||
                   Boolean(command.pending) ||
-                  (withFollowUp && !command.ready)
+                  !command.ready
                 }
               >
-                {mutation.isPending || command.busy
+                {command.busy
                   ? "Saving…"
                   : withFollowUp
                     ? "Save activity and follow-up"
@@ -332,12 +321,21 @@ export function QuickLog({
           </form>
         )}
       </Dialog>
-      {receipt && (
+      {!undoReceipt && undo.error && (
+        <div role="alert">
+          {undo.error}
+          <button disabled={undo.busy} onClick={() => void undo.run("read")}>
+            Retry Undo recovery
+          </button>
+        </div>
+      )}
+      {undoReceipt && (
         <QuickLogUndo
-          key={receipt.id}
-          receipt={receipt}
+          key={undoReceipt.id}
+          receipt={undoReceipt}
           clientName={clientName}
-          onDismiss={clearReceipt}
+          recovery={undo}
+          onDismiss={() => setReceipt(undefined)}
         />
       )}
     </>

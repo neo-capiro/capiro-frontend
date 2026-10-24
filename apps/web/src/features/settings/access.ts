@@ -51,6 +51,7 @@ export const settingsNavigation = [
       ["hq-tenants", "Tenants"],
       ["hq-customers", "Customers"],
       ["hq-broadcasts", "Broadcasts"],
+      ["hq-support", "Support requests"],
       ["hq-analyst", "Analyst console"],
       ["hq-reconciliation", "PE reconciliation"],
       ["hq-matches", "PE match queue"],

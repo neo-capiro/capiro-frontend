@@ -4,6 +4,7 @@ import {
   billingStateSchema,
   billingSummarySchema,
   brandingSchema,
+  brandingSyncSchema,
   clientAccountOwnersSchema,
   connectionParamsSchema,
   contactInfoSchema,
@@ -303,8 +304,22 @@ export const settingsOperations = {
           .strict(),
       })
       .strict(),
-    response: brandingSchema,
-    source: adminSource,
+    response: brandingSchema.extend({ clerkSync: brandingSyncSchema }),
+    source:
+      "apps/api/src/tenant-admin/tenant-admin.service.ts@2262b5c2282e04dfd1a9bb7f54675769f45af71c",
+  }),
+  "settings.branding.sync": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/tenant-admin/branding/sync",
+    request: emptySettingsRequest,
+    response: z.object({
+      id: z.string(),
+      name: z.string(),
+      clerkSync: brandingSyncSchema,
+    }),
+    source:
+      "apps/api/src/tenant-admin/tenant-admin.service.ts@2262b5c2282e04dfd1a9bb7f54675769f45af71c",
   }),
   "settings.branding.logoUploadUrl": defineOperation({
     service: "core",
@@ -547,6 +562,9 @@ export const settingsOperations = {
     response: z.object({
       disconnected: z.literal(true),
       connectionId: z.string(),
+      providerRevocation: z
+        .enum(["confirmed", "unconfirmed", "not_attempted"])
+        .optional(),
     }),
     source: googleSource,
   }),

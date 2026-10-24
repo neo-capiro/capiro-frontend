@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { clientId, json } from "./fixtures";
-import { installRemoval, savedActivity } from "./overview-removal-fixtures";
+import { installRemoval } from "./overview-removal-fixtures";
 
 async function fillCommitment(page: import("@playwright/test").Page) {
   await page.goto(`/portfolio/${clientId}?log=1`);
@@ -28,9 +28,9 @@ test("commitment sends Core's supported occurrence and due fields and retains ex
     if (
       request.method() === "POST" &&
       new URL(request.url()).pathname ===
-        `/api/backend/core/clients/${clientId}/activity`
+        `/api/backend/core/clients/${clientId}/activity-commands`
     )
-      posts.push(request.postDataJSON());
+      posts.push(request.postDataJSON().activity);
   });
   const dialog = await fillCommitment(page);
   await expect(
@@ -45,6 +45,7 @@ test("commitment sends Core's supported occurrence and due fields and retains ex
   await dialog
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
   const result = page.getByRole("complementary", { name: "Quick log result" });
   await expect(result).toContainText("Logged to Test Aerospace");
   expect(state.posts).toBe(1);
@@ -66,35 +67,33 @@ test("commitment sends Core's supported occurrence and due fields and retains ex
   expect(unexpected).toEqual([]);
 });
 
-test("a commitment receipt with a different due date freezes retry and Undo", async ({
+test("a command whose current commitment has a different due date freezes retry and Undo", async ({
   page,
 }) => {
-  const { unexpected } = await installRemoval(page);
-  let posts = 0;
+  const { state, unexpected } = await installRemoval(page);
   await page.route(
-    `**/api/backend/core/clients/${clientId}/activity`,
+    `**/api/backend/core/clients/${clientId}/activity?limit=500`,
     (route) => {
-      if (route.request().method() !== "POST") return route.fallback();
-      posts++;
-      return json(route, {
-        ...savedActivity,
-        ...route.request().postDataJSON(),
-        dueAt: null,
-      });
+      return json(
+        route,
+        state.activities.map((row) => ({ ...row, dueAt: null })),
+      );
     },
   );
   const dialog = await fillCommitment(page);
   await dialog
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
-  await expect(dialog).toContainText("receipt does not match this Quick log");
+  await expect(dialog).toContainText(
+    "command activity details are not confirmed",
+  );
   await expect(
     dialog.getByRole("button", { name: "Save activity", exact: true }),
   ).toBeDisabled();
   await expect(
     page.getByRole("button", { name: "Undo", exact: true }),
   ).toHaveCount(0);
-  expect(posts).toBe(1);
+  expect(state.posts).toBe(1);
   expect(unexpected).toEqual([]);
 });
 
@@ -107,9 +106,9 @@ test("blank When explicitly records at save time without sending a stale timesta
     if (
       request.method() === "POST" &&
       new URL(request.url()).pathname ===
-        `/api/backend/core/clients/${clientId}/activity`
+        `/api/backend/core/clients/${clientId}/activity-commands`
     )
-      posts.push(request.postDataJSON());
+      posts.push(request.postDataJSON().activity);
   });
   await page.goto(`/portfolio/${clientId}?log=1`);
   const dialog = page.getByRole("dialog", { name: "Quick log", exact: true });
@@ -125,6 +124,7 @@ test("blank When explicitly records at save time without sending a stale timesta
   await dialog
     .getByRole("button", { name: "Save activity", exact: true })
     .click();
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
   await expect(
     page.getByRole("complementary", { name: "Quick log result" }),
   ).toContainText("Logged to Test Aerospace");

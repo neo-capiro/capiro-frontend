@@ -13,6 +13,8 @@ import {
   type ConversationComposerChannel,
 } from "./conversation-composer";
 import type { useConversationSession } from "./useConversationSession";
+import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
+import modelStyles from "../model-selection/model-selection.module.css";
 
 type Session = ReturnType<typeof useConversationSession>;
 
@@ -37,6 +39,16 @@ export function SessionComposer({
     session.ready?.port === published?.port
       ? published
       : null;
+  const modelDocument = session.modelCatalog?.document;
+  const modelDisabled =
+    !current ||
+    current.running ||
+    (!!current.controls.sendBlocked &&
+      current.controls.sendBlocked !== session.modelBlocked) ||
+    !!current.controls.draftBlocked ||
+    !!session.continuation.busy;
+  const selection =
+    current?.controls.modelSelection ?? session.modelSelection ?? null;
   return (
     <MeriComposer
       draft={session.accessLost ? "" : session.draft}
@@ -45,6 +57,52 @@ export function SessionComposer({
       assetSet="cited-answer"
       running={current?.running ?? false}
       live={current?.controls ?? pendingConversationComposer(session, scope)}
+      modelControl={
+        session.modelCatalog && (
+          <div className={modelStyles.slot}>
+            {modelDocument ? (
+              <ModelSelectionPicker
+                catalog={modelDocument.modelCatalog}
+                label="Model for next message"
+                compact
+                value={selection}
+                disabled={modelDisabled}
+                onChange={(value) =>
+                  session.setModelSelection(value ?? undefined)
+                }
+                defaultLabel={
+                  session.acceptedRequest || session.earlier.length
+                    ? "Continue current model"
+                    : "Use personal default"
+                }
+                defaultDescription="The server chooses your personal default for the first message and inherits the admitted model for later messages."
+              />
+            ) : (
+              <span className={modelStyles.recovery} role="status">
+                {session.modelCatalog.loading
+                  ? "Loading model choices…"
+                  : "Model choices unavailable."}
+              </span>
+            )}
+            {!modelDocument && !session.modelCatalog.loading && (
+              <div className={modelStyles.recovery}>
+                <button type="button" onClick={session.modelCatalog.refresh}>
+                  Reload models
+                </button>
+                {selection && (
+                  <button
+                    type="button"
+                    disabled={modelDisabled}
+                    onClick={() => session.setModelSelection(undefined)}
+                  >
+                    Use default
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        )
+      }
     />
   );
 }
@@ -84,6 +142,8 @@ export function ConversationView({
           onDraft={session.setDraft}
           initialDraft={session.initialDraft}
           storageError={session.storageError}
+          modelSelection={session.modelSelection}
+          modelBlocked={session.modelBlocked}
           textareaRef={session.textarea}
           onNextTurn={session.startNext}
           nextTurnBlocked={session.nextBlocked}

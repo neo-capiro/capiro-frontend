@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useCapiro } from "../../shared/capiro/CapiroBoundary";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { StatusPanel } from "../../shared/module-ui";
 import {
@@ -13,7 +12,8 @@ import {
 } from "./components";
 import { RichSignatureEditor } from "./signature/RichSignatureEditor";
 import styles from "./styles";
-import { useSettingsAction } from "./useSettingsAction";
+import { useSettingsMutation } from "./useSettingsMutation";
+import { SettingsMutationNotice } from "./SettingsMutationNotice";
 
 const signatureLimit = 18_000_000;
 const allowedImages = new Set([
@@ -27,17 +27,36 @@ function SignatureEditor({
   initialHtml,
   initialEnabled,
   reload,
+  readOnlyPreview,
 }: {
   initialHtml: string | null;
   initialEnabled: boolean;
   reload: () => void;
+  readOnlyPreview: boolean;
 }) {
-  const api = useCapiro();
+  const {
+    api,
+    action,
+    pending,
+    reconcile,
+    locked: mutationLocked,
+  } = useSettingsMutation("signature");
+  const locked = mutationLocked || readOnlyPreview;
   const [html, setHtml] = useState(initialHtml ?? "");
   const [enabled, setEnabled] = useState(initialEnabled);
   const [fileError, setFileError] = useState<string>();
   const upload = useRef<HTMLInputElement>(null);
-  const action = useSettingsAction();
+  const fileRead = useRef(0);
+  const lockedRef = useRef(locked);
+  useLayoutEffect(() => {
+    lockedRef.current = locked;
+  }, [locked]);
+  useEffect(
+    () => () => {
+      fileRead.current += 1;
+    },
+    [api],
+  );
   const hasPreview =
     /<(?:img|table)\b/i.test(html) ||
     Boolean(
@@ -47,7 +66,9 @@ function SignatureEditor({
         .trim(),
     );
   async function readFile(file?: File) {
-    if (!file) return;
+    if (!file || lockedRef.current) return;
+    const version = ++fileRead.current;
+    const current = () => version === fileRead.current && !lockedRef.current;
     setFileError(undefined);
     if (file.size > 12_000_000) {
       setFileError("Choose a file smaller than 12 MB.");
@@ -55,10 +76,15 @@ function SignatureEditor({
     }
     if (allowedImages.has(file.type)) {
       const reader = new FileReader();
-      reader.onload = () =>
-        setHtml(`<img src="${String(reader.result)}" alt="Email signature" />`);
-      reader.onerror = () =>
-        setFileError("The selected image could not be read.");
+      reader.onload = () => {
+        if (current())
+          setHtml(
+            `<img src="${String(reader.result)}" alt="Email signature" />`,
+          );
+      };
+      reader.onerror = () => {
+        if (current()) setFileError("The selected image could not be read.");
+      };
       reader.readAsDataURL(file);
       return;
     }
@@ -67,9 +93,10 @@ function SignatureEditor({
       return;
     }
     try {
-      setHtml(await file.text());
+      const content = await file.text();
+      if (current()) setHtml(content);
     } catch {
-      setFileError("The selected file could not be read.");
+      if (current()) setFileError("The selected file could not be read.");
     }
   }
   return (
@@ -86,12 +113,16 @@ function SignatureEditor({
         <p className={styles.description}>
           Drag and drop, or browse. Image (PNG, JPG, GIF, WEBP) or .html / .htm
         </p>
-        <SettingsButton onClick={() => upload.current?.click()}>
+        <SettingsButton
+          disabled={locked}
+          onClick={() => upload.current?.click()}
+        >
           Browse file
         </SettingsButton>
         <input
           ref={upload}
           type="file"
+          disabled={locked}
           hidden
           accept="image/png,image/jpeg,image/gif,image/webp,.html,.htm"
           onChange={(event) => {
@@ -107,9 +138,12 @@ function SignatureEditor({
       <div className={styles.divider}>or compose manually</div>
       <RichSignatureEditor
         value={html}
-        onChange={setHtml}
+        onChange={(value) => {
+          fileRead.current += 1;
+          setHtml(value);
+        }}
         onImage={() => upload.current?.click()}
-        disabled={action.busy}
+        disabled={locked}
       />
       {hasPreview && (
         <iframe
@@ -124,6 +158,7 @@ function SignatureEditor({
         <SettingsSwitch
           label="Append signature to campaign emails by default"
           checked={enabled}
+          disabled={locked}
           onChange={setEnabled}
         />
         <span>
@@ -140,10 +175,16 @@ function SignatureEditor({
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      <SettingsMutationNotice
+        pending={pending}
+        busy={action.busy}
+        reconcile={reconcile}
+      />
       <div className={styles.footer}>
         <SettingsButton
-          disabled={action.busy}
+          disabled={locked}
           onClick={() => {
+            fileRead.current += 1;
             setHtml(initialHtml ?? "");
             setEnabled(initialEnabled);
             action.clear();
@@ -153,17 +194,22 @@ function SignatureEditor({
         </SettingsButton>
         <SettingsButton
           primary
-          disabled={action.busy || html.length > signatureLimit}
-          onClick={() =>
+          disabled={locked || html.length > signatureLimit}
+          onClick={() => {
+            fileRead.current += 1;
             void action.run(
-              () =>
-                api.request("me.emailSignature.update", {
-                  body: { html, enabled },
-                }),
+              (signal) =>
+                api.request(
+                  "me.emailSignature.update",
+                  {
+                    body: { html, enabled },
+                  },
+                  { signal },
+                ),
               "Your signature was saved.",
               reload,
-            )
-          }
+            );
+          }}
         >
           {action.busy ? "Saving…" : "Save signature"}
         </SettingsButton>
@@ -172,7 +218,11 @@ function SignatureEditor({
   );
 }
 
-export function EmailSignature() {
+export function EmailSignature({
+  readOnlyPreview = false,
+}: {
+  readOnlyPreview?: boolean;
+}) {
   const query = useCapiroQuery("me.emailSignature.read", {});
   return (
     <SettingsCard
@@ -191,6 +241,7 @@ export function EmailSignature() {
             initialHtml={query.data.html}
             initialEnabled={query.data.enabled}
             reload={query.reload}
+            readOnlyPreview={readOnlyPreview}
           />
         )}
       </StatusPanel>
