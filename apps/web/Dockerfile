@@ -6,9 +6,11 @@ RUN apk add --no-cache --upgrade zlib=1.3.2-r1 ca-certificates
 WORKDIR /app
 
 FROM base AS build
+RUN npm install --global npm@11.9.0 --ignore-scripts --no-audit --no-fund \
+    && test "$(npm --version)" = 11.9.0
 COPY . .
 RUN npm ci --ignore-scripts --no-audit --no-fund
-RUN npm run build
+RUN NODE_OPTIONS=--max-old-space-size=4096 CIRCLE_NODE_TOTAL=2 npm run build
 
 FROM base AS runtime
 RUN rm -rf /usr/local/lib/node_modules/npm /opt/yarn-v1.22.22 \
