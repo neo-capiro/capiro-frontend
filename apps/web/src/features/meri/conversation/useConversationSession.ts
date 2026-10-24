@@ -1,5 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { useConversationHistory } from "../../../shared/meri-conversations/history-queries";
 import { useConversationConnection } from "./useConversationConnection";
@@ -12,6 +14,14 @@ import type { TurnView } from "./conversation-view";
 import { useConversationLocalState } from "./useConversationLocalState";
 import { useModelCatalog } from "../model-selection/useModelCatalog";
 import { selectionAvailable } from "../model-selection/model-selection";
+import {
+  skillSelectionFields,
+  storedSubmission,
+  conversationSelectionOwner,
+} from "../../../shared/meri-conversations/query-journal";
+import { requireMeriTabStorage } from "../../../shared/meri-conversations/tab-journal";
+import { conversationHref } from "../../../shared/meri-conversations/conversation-navigation";
+import type { LifecycleTarget } from "./lifecycle/useRunLifecycle";
 
 /** Bind the captured input to the reserved target before opening its exact authorized session. */
 function useTurnOpening(
@@ -32,6 +42,7 @@ function useTurnOpening(
         {
           requestId: target.requestId,
           prompt: target.pending,
+          ...skillSelectionFields(target),
           ...(target.modelSelection
             ? { modelSelection: target.modelSelection }
             : {}),
@@ -80,6 +91,8 @@ export function useConversationSession(
   clientId: string | null,
   conversationId?: string,
 ) {
+  const cache = useQueryClient();
+  const router = useRouter();
   const connection = useConversationConnection(
     account,
     clientId,
@@ -122,6 +135,11 @@ export function useConversationSession(
     accessLost ? undefined : continuation.intent,
     continuation.busy,
   );
+  const skillSelection =
+    local.skillSelection ??
+    (view.acceptedRequest
+      ? skillSelectionFields(storedSubmission(view.acceptedRequest))
+      : {});
   const startNext = (prompt: string, finished: TurnView) => {
     if (
       !view.source ||
@@ -136,7 +154,31 @@ export function useConversationSession(
       prompt,
       (request) => local.retainNext(finished, request),
       local.modelSelection,
+      skillSelection,
     );
+  };
+  const openLifecycleTarget = (target: LifecycleTarget) => {
+    if (
+      !ready ||
+      accessLost ||
+      local.storageError ||
+      connection.storageError ||
+      target.tenantId !== account.tenantId ||
+      target.actorId !== account.actorId
+    )
+      throw Error("Conversation target unavailable");
+    const storage = requireMeriTabStorage();
+    if (!storage) throw Error("Conversation target cannot be retained");
+    conversationSelectionOwner(
+      cache,
+      account,
+      clientId,
+      target.conversationId,
+      storage,
+    ).record({ ...target, selectedClientId: clientId });
+    if (target.conversationId === ready.port.context.conversationId)
+      reopen({ target });
+    else router.push(conversationHref(clientId, target.conversationId));
   };
   return {
     connection,
@@ -147,6 +189,8 @@ export function useConversationSession(
     continuation,
     draft: local.draft,
     setDraft: local.setDraft,
+    skillSelection,
+    setSkillSelection: local.setSkillSelection,
     modelCatalog,
     modelSelection: local.modelSelection,
     setModelSelection: local.setModelSelection,
@@ -159,6 +203,7 @@ export function useConversationSession(
     textarea,
     ...view,
     startNext,
+    openLifecycleTarget,
     refresh: history.refresh,
     openLatest: () => {
       if (view.latestTarget) connection.reopen({ target: view.latestTarget });

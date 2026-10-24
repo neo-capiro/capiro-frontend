@@ -1,4 +1,4 @@
-import { createElement, Fragment, type ComponentProps } from "react";
+import { createElement, type ComponentProps } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { expect, it, vi } from "vitest";
 import { RunStatus } from "../src/features/meri/conversation/RunStatus";
@@ -7,7 +7,6 @@ import {
   type TurnView,
 } from "../src/features/meri/conversation/conversation-view";
 import { RunLifecycleControls } from "../src/features/meri/conversation/lifecycle/RunLifecycleControls";
-import { lifecycleAvailability } from "../src/shared/meri-conversation-lifecycle/availability";
 
 function renderStop(
   state: string,
@@ -72,7 +71,7 @@ it("cancelling distinguishes an outstanding request from a fence and an uncertai
   expect(pending).toContain("<h3>Requesting stop</h3>");
   expect(pending).not.toContain("<h3>Cancelling</h3>");
   expect(pending).toContain('data-tone="warning">Attention</span>');
-  expect(pending).toContain("Stopping: requesting a cancellation fence.");
+  expect(pending).toContain("Requesting stop…");
   expect(pending).not.toContain("Stop fence recorded");
   expect(pending).not.toContain("finishing the current safe step");
   expect(pending).toMatch(
@@ -145,19 +144,21 @@ it("a saved completed or failed run cannot be presented as cancellation in progr
   }
 });
 
-it("held lifecycle presentation has one reason per instance without dead actions or duplicate ids", () => {
+it("lifecycle controls offer exact recovery without a second pause or steer", () => {
   const html = renderToStaticMarkup(
-    createElement(
-      Fragment,
-      null,
-      createElement(RunLifecycleControls),
-      createElement(RunLifecycleControls),
-    ),
+    createElement(RunLifecycleControls, {
+      lifecycle: {
+        command: { controlId: "retained", intent: "pause" },
+        available: true,
+        busy: false,
+        retry: vi.fn(),
+      } as unknown as ComponentProps<typeof RunLifecycleControls>["lifecycle"],
+      turn: null,
+      disabled: false,
+    }),
   );
-  expect(lifecycleAvailability.enabled).toBe(false);
-  expect(html.split(lifecycleAvailability.reason)).toHaveLength(3);
-  expect(html.match(/<summary>Pause and recovery<\/summary>/g)).toHaveLength(2);
-  expect(html).not.toContain("<button");
+  expect(html).toContain("Retry same control");
+  expect(html).not.toContain("Send guidance");
+  expect(html).not.toContain(">Pause</button>");
   expect(html).not.toMatch(/\sid=/);
-  expect(html).not.toContain("Resume from checkpoint");
 });

@@ -4,6 +4,8 @@ import type { ConversationIntent } from "../../../shared/meri-conversations/quer
 import {
   storedSubmission,
   submissionIdentity,
+  skillSelectionFields,
+  type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import type {
   ConversationStoredRequest,
@@ -75,6 +77,7 @@ export async function sendRequest(
   initial = false,
   onRecorded?: (request: ConversationSubmitRequest) => void,
   modelSelection?: ConversationSubmitRequest["modelSelection"],
+  selection: ConversationSkillSelection = {},
 ) {
   const retained = intent.read().submit;
   if ((!retry && retained) || (retry && !retained))
@@ -84,6 +87,7 @@ export async function sendRequest(
     : {
         requestId: crypto.randomUUID(),
         prompt,
+        ...skillSelectionFields(selection),
         ...(modelSelection
           ? { modelSelection: Object.freeze({ ...modelSelection }) }
           : {}),

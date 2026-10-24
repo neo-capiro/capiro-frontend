@@ -28,6 +28,7 @@ export type TurnView = Readonly<
     | "approvals"
     | "artifacts"
     | "errors"
+    | "checkpointIds"
   >
 >;
 
@@ -83,6 +84,7 @@ export function turnFromEvents(
     approvals: view?.approvals ?? [],
     artifacts: view?.artifacts ?? [],
     errors: view?.errors ?? [],
+    checkpointIds: view?.checkpointIds ?? [],
   });
 }
 

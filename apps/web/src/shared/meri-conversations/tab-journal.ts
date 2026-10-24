@@ -68,7 +68,9 @@ type Kind =
   | "request"
   | "turn"
   | "selection"
-  | "management";
+  | "management"
+  | "lifecycle"
+  | "handoff";
 
 /** Pending management commands stay recoverable after the row moves to Archive or Trash. */
 export function pendingManagementScopes(

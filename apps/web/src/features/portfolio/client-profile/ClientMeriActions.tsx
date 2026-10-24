@@ -8,11 +8,23 @@ import { ClientAttendancePreferences } from "@/features/portfolio/calendar/atten
 import { ClientEnrichmentDialog } from "./enrichment/public";
 import headerStyles from "./client-header.module.css";
 import styles from "./client-meri-actions.module.css";
+import { useMeriCapabilities } from "@/shared/meri-resources/CapabilityContext";
+import { useSelectedClient } from "@/shared/session/SelectedClient";
+import { ClientMeriHandoffDialog } from "./ClientMeriHandoffDialog";
 
 export function ClientMeriActions({ client }: { client: Client }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const [preferences, setPreferences] = useState(false);
   const [enrichment, setEnrichment] = useState(false);
+  const [handoff, setHandoff] = useState(false);
+  const capabilities = useMeriCapabilities(),
+    selected = useSelectedClient();
+  const canAsk =
+    capabilities.conversations.status === "on" &&
+    capabilities.newConversation.status === "on" &&
+    selected.state === "authorized-client" &&
+    selected.client.id === client.id &&
+    selected.client.status !== "archived";
   return (
     <>
       <DropdownMenu.Root>
@@ -31,13 +43,18 @@ export function ClientMeriActions({ client }: { client: Client }) {
             align="end"
             sideOffset={8}
             onCloseAutoFocus={(event) => {
-              if (preferences || enrichment) event.preventDefault();
+              if (preferences || enrichment || handoff) event.preventDefault();
             }}
           >
             <DropdownMenu.Item
               className={styles.item}
-              disabled
-              title="Client context handoff is not connected yet"
+              disabled={!canAsk}
+              title={
+                canAsk
+                  ? undefined
+                  : "A current active client and enabled Meri conversation are required"
+              }
+              onSelect={() => setHandoff(true)}
             >
               <span>✦ Ask Meri about this client</span>
               <small>Open Meri with this client in context.</small>
@@ -64,6 +81,15 @@ export function ClientMeriActions({ client }: { client: Client }) {
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
+      {handoff && (
+        <ClientMeriHandoffDialog
+          client={client}
+          onClose={() => {
+            setHandoff(false);
+            trigger.current?.focus();
+          }}
+        />
+      )}
       <ClientEnrichmentDialog
         clientId={client.id}
         open={enrichment}

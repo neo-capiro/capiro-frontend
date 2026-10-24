@@ -17,6 +17,8 @@ import {
 import {
   conversationIntentJournal,
   submissionIdentity,
+  skillSelectionFields,
+  type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import {
   conversationTurnJournal,
@@ -36,6 +38,8 @@ export type ConversationTurnTarget = {
   pending: string;
   requestId: string;
   modelSelection?: ConversationSubmitRequest["modelSelection"];
+  skill?: ConversationSubmitRequest["skill"];
+  windowRequest?: ConversationSubmitRequest["windowRequest"];
 };
 
 /** Seed the existing canonical command journal before exact target session issuance. */
@@ -60,6 +64,7 @@ function prepareTarget(
   const request = {
     requestId: retained.requestId,
     prompt: retained.prompt,
+    ...skillSelectionFields(retained),
     ...(retained.modelSelection
       ? { modelSelection: retained.modelSelection }
       : {}),
@@ -70,6 +75,8 @@ function prepareTarget(
       previous.submit.prompt !== retained.prompt ||
       submissionIdentity({
         ...request,
+        skill: previous.submit.skill,
+        windowRequest: previous.submit.windowRequest,
         modelSelection: previous.submit.modelSelection,
       }) !== submissionIdentity(request))
   )
@@ -87,6 +94,7 @@ function prepareTarget(
     runId: binding.runId,
     pending: retained.prompt,
     requestId: retained.requestId,
+    ...skillSelectionFields(retained),
     ...(retained.modelSelection
       ? { modelSelection: retained.modelSelection }
       : {}),
@@ -103,9 +111,11 @@ async function requestTurn(
     readOnly: boolean;
     capture?: (request: ConversationSubmitRequest) => void;
     modelSelection?: ConversationSubmitRequest["modelSelection"];
+    selection?: ConversationSkillSelection;
   },
 ) {
-  const { source, prompt, readOnly, capture, modelSelection } = options;
+  const { source, prompt, readOnly, capture, modelSelection, selection } =
+    options;
   if (readOnly && source) {
     await reserveConversationTurn(
       { conversationId: source.conversationId, sourceRunId: source.runId },
@@ -117,6 +127,7 @@ async function requestTurn(
     const request = Object.freeze({
       requestId: crypto.randomUUID(),
       prompt,
+      ...skillSelectionFields(selection ?? {}),
       ...(modelSelection
         ? { modelSelection: Object.freeze({ ...modelSelection }) }
         : {}),
@@ -127,6 +138,7 @@ async function requestTurn(
       request.prompt,
       request.requestId,
       request.modelSelection,
+      selection,
     );
   }
   const retained = await recoverConversationTurn(
@@ -234,6 +246,7 @@ export function useConversationTurn(
     readOnly = false,
     capture?: (request: ConversationSubmitRequest) => void,
     modelSelection?: ConversationSubmitRequest["modelSelection"],
+    selection?: ConversationSkillSelection,
   ) =>
     gate.perform(async () => {
       if (!journal?.current()) throw new TabJournalUnavailable();
@@ -247,6 +260,7 @@ export function useConversationTurn(
           readOnly,
           ...(capture ? { capture } : {}),
           ...(modelSelection ? { modelSelection } : {}),
+          ...(selection ? { selection } : {}),
         });
         if (retained) open(prepareTarget(cache, clientId, retained));
       } catch (cause) {
@@ -275,7 +289,8 @@ export function useConversationTurn(
       prompt: string,
       capture: (request: ConversationSubmitRequest) => void,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
-    ) => perform(source, prompt, false, capture, modelSelection),
+      selection?: ConversationSkillSelection,
+    ) => perform(source, prompt, false, capture, modelSelection, selection),
     retry: () => perform(),
     readMapping: (source: RunBinding) => perform(source, undefined, true),
   };

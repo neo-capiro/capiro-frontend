@@ -10,6 +10,7 @@ import type {
   ConversationSubmitRequest,
   ConversationHistoryRequest,
   ConversationCancelledResponse,
+  ConversationStoredRequest,
 } from "@capiro/meri-contracts/conversation-application";
 import {
   conversationInputMetadata,
@@ -34,6 +35,17 @@ import type { ConversationObservationSnapshot } from "./conversation-observation
 import { conversationChat } from "./conversation-chat.js";
 import type { ConversationChat } from "./conversation-chat.js";
 import { stableStringify } from "./json-identity.js";
+import {
+  conversationLifecycleMetadata,
+  receiveConversationLifecycleRequest,
+  receiveConversationLifecycleResponse,
+} from "@capiro/meri-contracts/conversation-lifecycle";
+import type {
+  ConversationLifecycleRoute,
+  ConversationLifecycleRequestMap,
+  ConversationLifecycleControlRequest,
+  ConversationCheckpointInspectionRequest,
+} from "@capiro/meri-contracts/conversation-lifecycle";
 
 export { ConversationUnavailable };
 export type {
@@ -47,6 +59,7 @@ export interface MeriConversationSnapshot {
   readonly submit: "idle" | "pending" | "unknown" | "observed";
   readonly cancel: "idle" | "pending" | "unknown" | "observed";
   readonly cancelReceipt: ConversationCancelledResponse | null;
+  readonly acceptedRequest: Readonly<ConversationStoredRequest> | null;
 }
 const EMPTY: MeriConversationSnapshot = Object.freeze({
   status: "idle",
@@ -54,6 +67,7 @@ const EMPTY: MeriConversationSnapshot = Object.freeze({
   submit: "idle",
   cancel: "idle",
   cancelReceipt: null,
+  acceptedRequest: null,
 });
 const DISPOSED: MeriConversationSnapshot = Object.freeze({
   ...EMPTY,
@@ -65,6 +79,13 @@ const HIDDEN: MeriConversationSnapshot = Object.freeze({
 });
 const bytes = (value: unknown) =>
   new TextEncoder().encode(JSON.stringify(value));
+/** Display-only copy; mutable consumers must never gain a reference to private admitted facts. */
+const requestSnapshot = (request: ConversationStoredRequest) => {
+  const copy = structuredClone(request);
+  for (const value of Object.values(copy))
+    if (value && typeof value === "object") Object.freeze(value);
+  return Object.freeze(copy);
+};
 type InitialRequest = ReturnType<typeof receiveConversationInitialInputRequest>;
 type InitialReceipt = Exclude<
   Awaited<ReturnType<typeof receiveConversationInitialInputResponse>>,
@@ -204,7 +225,13 @@ class ConversationConnection {
       "request" in view ? null : (this.intent?.prompt ?? null),
     );
     this.observation = observation;
-    this.publish({ status: "ready", observation: observation.snapshot });
+    this.publish({
+      status: "ready",
+      observation: observation.snapshot,
+      ...("request" in view
+        ? { acceptedRequest: requestSnapshot(view.request) }
+        : {}),
+    });
   }
   private async receive<R extends Exclude<ConversationRoute, "events">>(
     route: R,
@@ -346,6 +373,7 @@ class ConversationConnection {
       throw new ConversationUnavailable("superseded-input-receipt");
     if ("error" in value) throw new ConversationUnavailable(value.error.code);
     this.inputReceipt = value;
+    this.publish({ acceptedRequest: requestSnapshot(value.request) });
   }
   private async sendRetained(previouslyUnknown = false) {
     const intent = this.intent!;
@@ -390,13 +418,21 @@ class ConversationConnection {
     const request = receiveConversationRequest("history", bytes(input));
     this.start();
     this.detach();
-    this.publish({ status: "loading", observation: null });
+    this.publish({
+      status: "loading",
+      observation: null,
+      acceptedRequest: null,
+    });
     try {
       const view = await this.receive("history", request);
       this.bind(view);
       return this.getSnapshot();
     } catch (error) {
-      this.publish({ status: "unavailable", observation: null });
+      this.publish({
+        status: "unavailable",
+        observation: null,
+        acceptedRequest: null,
+      });
       throw error;
     } finally {
       this.busy = false;
@@ -424,6 +460,42 @@ class ConversationConnection {
       this.busy = false;
     }
   };
+  /** The same private admitted view validates lifecycle receipts; callers cannot inject one. */
+  private async lifecycle<R extends ConversationLifecycleRoute>(
+    route: R,
+    input: ConversationLifecycleRequestMap[R],
+  ) {
+    const current = this.view;
+    if (!current || this.state.status !== "ready")
+      throw new ConversationUnavailable("no-admitted-run");
+    const request = receiveConversationLifecycleRequest(route, bytes(input));
+    this.start();
+    this.publish({ status: "loading" });
+    try {
+      const response = await this.network.json(
+        conversationLifecycleMetadata.routes[route].path,
+        bytes(request),
+      );
+      const receipt = await receiveConversationLifecycleResponse(
+        route,
+        response.status,
+        response.bytes,
+        request,
+        current,
+      );
+      this.network.check();
+      if (this.disposed || this.view !== current)
+        throw new ConversationUnavailable("superseded-response");
+      return receipt;
+    } finally {
+      this.busy = false;
+      this.publish({ status: "ready" });
+    }
+  }
+  control = (input: ConversationLifecycleControlRequest) =>
+    this.lifecycle("control", input);
+  inspectCheckpoint = (input: ConversationCheckpointInspectionRequest) =>
+    this.lifecycle("inspect", input);
   openChat = (): ConversationChat => {
     this.network.check();
     const observation = this.observation;
@@ -454,6 +526,8 @@ export function createMeriConversation(options: ConversationLifetime) {
     retrySubmit: connection.retrySubmit,
     history: connection.history,
     cancel: connection.cancel,
+    control: connection.control,
+    inspectCheckpoint: connection.inspectCheckpoint,
     openChat: connection.openChat,
     dispose: connection.dispose,
   });
