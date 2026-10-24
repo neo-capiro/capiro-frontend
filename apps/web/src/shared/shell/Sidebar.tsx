@@ -20,7 +20,6 @@ export function Sidebar({
   fixture = false,
   conversationEnabled = false,
   firstChatBootstrapEnabled = false,
-  firstChatBootstrapClientId,
   section,
   pendingApprovals,
 }: {
@@ -28,7 +27,6 @@ export function Sidebar({
   fixture?: boolean;
   conversationEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
-  firstChatBootstrapClientId?: string;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
@@ -66,7 +64,6 @@ export function Sidebar({
             firstChatBootstrapEnabled &&
             capabilities.newConversation.status === "on"
           }
-          firstChatBootstrapClientId={firstChatBootstrapClientId}
         />
       )}
       {fixture ? (

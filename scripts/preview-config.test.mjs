@@ -26,7 +26,6 @@ const coreDeploymentSource = 'd03a118192acd2b1ed2ef5698afb0ab8f2b36ae8';
 const coreDeploymentDigest = 'sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375';
 const meriSource = '7eea1e852f177c17e3675429830b886b906e4cd6';
 const meriDigest = 'sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d';
-const syntheticClientId = '33333333-3333-4333-8333-333333333333';
 const meriEnabled = {
   meriApiBaseUrl: 'https://meri-preview.example.test',
   meriConversationWorkflowEnabled: true,
@@ -48,17 +47,16 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   assert.equal(p.environment.CAPIRO_PREVIEW_READ_ONLY, 'true');
   for (const name of ['CAPIRO_PREVIEW_READ_BACKEND_SOURCE', 'CAPIRO_PREVIEW_READ_API_BASE_URL',
     'CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE', 'CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL',
-    'MERI_FIRST_CHAT_CLIENT_ID', 'CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE',
+    'CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE',
     'CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL', 'CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN',
     'CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE', 'CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST',
     'CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION']) assert.equal(p.environment[name], '', name);
   for (const name of ['CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE', 'CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL']) assert.equal(p.environment[name], '', name);
   for (const name of ['MERI_FIRST_CHAT_BOOTSTRAP_ENABLED', 'CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED',
     'MERI_MEMORY_OWNER_REVIEW_ENABLED', 'CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED']) assert.equal(p.environment[name], 'false', name);
-  assert.equal(p.parameters.length, 30);
+  assert.equal(p.parameters.length, 29);
   assert.deepEqual(p.parameters.filter(item => item.ParameterKey.startsWith('Meri')), [
     { ParameterKey: 'MeriFirstChatBootstrapEnabled', ParameterValue: 'false' },
-    { ParameterKey: 'MeriFirstChatClientId', ParameterValue: '' },
     { ParameterKey: 'MeriMemoryOwnerReviewEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriApiBaseUrl', ParameterValue: '' },
     { ParameterKey: 'MeriConversationWorkflowEnabled', ParameterValue: 'false' },
@@ -132,27 +130,23 @@ test('Core read and first chat remain held until all exact bindings are supplied
   assert.equal(read.environment.CAPIRO_PREVIEW_READ_API_BASE_URL, coreApi);
   assert.equal(read.environment.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED, 'false');
   const active = { ...bindings, ...meriEnabled, previewReadEnabled: true,
-    firstChatBootstrapEnabled: true, firstChatClientId: syntheticClientId };
+    firstChatBootstrapEnabled: true };
   const p = renderPreviewConfiguration(active);
   assert.equal(p.environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
   assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL, coreApi);
   assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE, coreBootstrapSource);
-  assert.equal(p.environment.MERI_FIRST_CHAT_CLIENT_ID, syntheticClientId);
+  assert.equal(Object.hasOwn(p.environment, 'MERI_FIRST_CHAT_CLIENT_ID'), false);
   validatePreviewParameters(p.parameters.toReversed(), active);
   for (const invalid of [
-    { ...bindings, firstChatBootstrapEnabled: true, firstChatClientId: syntheticClientId },
-    { ...bindings, previewReadEnabled: true, firstChatBootstrapEnabled: true, firstChatClientId: syntheticClientId },
-    { ...active, firstChatClientId: '' },
-    { ...active, firstChatClientId: '33333333-3333-4333-8333-33333333333A' },
-    { ...bindings, firstChatClientId: syntheticClientId },
-    { ...bindings, firstChatClientId: null },
+    { ...bindings, firstChatBootstrapEnabled: true },
+    { ...bindings, previewReadEnabled: true, firstChatBootstrapEnabled: true },
     { ...bindings, previewReadEnabled: 'true' },
   ]) assert.throws(() => renderPreviewConfiguration(invalid), /PREVIEW_FIRST_CHAT_/);
 });
 
 test('v2 contract baseline remains distinct from independently verified serving source', () => {
   const active = { ...bindings, ...meriEnabled, previewReadEnabled: true,
-    firstChatBootstrapEnabled: true, firstChatClientId: syntheticClientId };
+    firstChatBootstrapEnabled: true };
   const p = renderPreviewConfiguration(active);
   assert.deepEqual(p.expectedCoreDeployment, {
     contractSource: coreBootstrapSource,
@@ -212,14 +206,14 @@ test('qualified Core roster adds a separate pair without switching first-chat re
   assert.throws(() => renderPreviewConfiguration({ ...qualified,
     qualifiedCoreReadApiBaseUrl: qualifiedCoreRosterApi }), /PREVIEW_BINDINGS_SHAPE/);
   const firstChat = { ...qualified, ...meriEnabled,
-    firstChatBootstrapEnabled: true, firstChatClientId: syntheticClientId };
+    firstChatBootstrapEnabled: true };
   const integrated = renderPreviewConfiguration(firstChat);
   assert.equal(integrated.environment.CAPIRO_PREVIEW_READ_BACKEND_SOURCE, coreReadSource);
   assert.equal(integrated.environment.CAPIRO_PREVIEW_READ_API_BASE_URL, coreApi);
   assert.equal(integrated.environment.CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE, coreBootstrapSource);
   assert.equal(integrated.environment.CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL, coreApi);
   assert.equal(integrated.environment.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED, 'true');
-  assert.equal(integrated.environment.MERI_FIRST_CHAT_CLIENT_ID, syntheticClientId);
+  assert.equal(Object.hasOwn(integrated.environment, 'MERI_FIRST_CHAT_CLIENT_ID'), false);
   assert.equal(integrated.environment.CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE, qualifiedCoreRosterSource);
   assert.equal(integrated.environment.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL, qualifiedCoreRosterApi);
   assert.equal(integrated.status, 'configuration-proposal');
@@ -323,12 +317,6 @@ test('preview template constrains every explicit configuration value and keeps h
       assert.doesNotMatch('http://meri-preview.example.test', new RegExp(pattern));
       assert.doesNotMatch('https://meri-preview.example.test/path', new RegExp(pattern));
       assert.doesNotMatch('https://127.0.0.1', new RegExp(pattern));
-    } else if (item.ParameterKey === 'MeriFirstChatClientId') {
-      assert.match(block, /Default: ""/);
-      const pattern = JSON.parse(block.match(/AllowedPattern: (".*")/)?.[1] ?? 'null');
-      assert.match(item.ParameterValue, new RegExp(pattern));
-      assert.match(syntheticClientId, new RegExp(pattern));
-      assert.doesNotMatch('33333333-3333-4333-8333-33333333333A', new RegExp(pattern));
     } else if (optionalBooleans.has(item.ParameterKey)) {
       assert.match(block, /Default: "false"/);
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
@@ -346,7 +334,7 @@ test('preview template constrains every explicit configuration value and keeps h
   for (const [name, value] of Object.entries(p.environment).filter(([name]) => /^(ONBOARD_|MERI_|CAPIRO_PREVIEW_|CAPIRO_REQUEST_ORIGIN)/.test(name))) {
     const parameter = {
       MERI_API_BASE_URL: 'MeriApiBaseUrl', MERI_CONVERSATION_WORKFLOW_ENABLED: 'MeriConversationWorkflowEnabled',
-      MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: 'MeriFirstChatBootstrapEnabled', MERI_FIRST_CHAT_CLIENT_ID: 'MeriFirstChatClientId',
+      MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: 'MeriFirstChatBootstrapEnabled',
       CAPIRO_REQUEST_ORIGIN: 'CapiroRequestOrigin', CAPIRO_PREVIEW_READ_ONLY: 'CapiroPreviewReadOnly',
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: 'CapiroPreviewReadBackendSource', CAPIRO_PREVIEW_READ_API_BASE_URL: 'CapiroPreviewReadApiBaseUrl',
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: 'CapiroPreviewClientRosterBackendSource',
@@ -451,4 +439,12 @@ test('preview CLI is import-safe, ignores hostile ambient values and never echoe
     const missing = run([script, '--bindings', join(dir, 'missing.json')]);
     assert.equal(missing.status, 1); assert.equal(missing.stdout, '');
   } finally { rmSync(dir, { recursive: true }); }
+});
+
+test('configured-client narrowing is removed from operator input, parameters and environment', () => {
+  assert.throws(() => renderPreviewConfiguration({ ...bindings, firstChatClientId: '33333333-3333-4333-8333-333333333333' }), /PREVIEW_BINDINGS_SHAPE/);
+  assert.doesNotMatch(template, /MeriFirstChatClientId|MERI_FIRST_CHAT_CLIENT_ID/);
+  const p=renderPreviewConfiguration({...bindings,...meriEnabled,previewReadEnabled:true,firstChatBootstrapEnabled:true});
+  assert.equal(p.parameters.some(p=>p.ParameterKey==='MeriFirstChatClientId'), false);
+  assert.equal(Object.hasOwn(p.environment,'MERI_FIRST_CHAT_CLIENT_ID'), false);
 });

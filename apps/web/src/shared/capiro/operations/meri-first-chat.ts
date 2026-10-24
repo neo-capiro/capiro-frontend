@@ -73,16 +73,6 @@ export const firstChatCoreOperation = defineOperation({
   requestLimitBytes: 1024,
 });
 
-/** Server-only narrowing: the preview admits only Meri's configured selected client. */
-export function firstChatCoreOperationForClient(clientId: string) {
-  return {
-    ...firstChatCoreOperation,
-    request: firstChatCoreOperation.request.refine(
-      ({ body }) => body.clientId === clientId,
-    ),
-  };
-}
-
 const bootstrapV2Identity = {
   schemaVersion: z.literal(2),
   requestId: canonicalUuid,
@@ -126,13 +116,3 @@ export const firstChatV2Operation = defineOperation({
   source:
     "capiro-backend@16c3122a379481eb19cdee156ceb5d5c8b615bea canonical v2 General/client bootstrap; deployment qualification separate",
 });
-
-/** General is explicit; client requests remain restricted to the configured preview client. */
-export function firstChatV2OperationForClient(clientId: string) {
-  return {
-    ...firstChatV2Operation,
-    request: firstChatV2Operation.request.refine(
-      ({ body }) => body.scopeKind === "general" || body.clientId === clientId,
-    ),
-  };
-}

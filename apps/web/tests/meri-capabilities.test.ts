@@ -129,12 +129,6 @@ it("missing or invalid connection inputs never turn source availability into act
   expect(
     readMeriCapabilities({
       ...allCapabilitiesEnv,
-      MERI_FIRST_CHAT_CLIENT_ID: "unverified-client",
-    }).newConversation.status,
-  ).toBe("off");
-  expect(
-    readMeriCapabilities({
-      ...allCapabilitiesEnv,
       CORE_API_BASE_URL: "https://core.synthetic.invalid/other",
     }).memory.status,
   ).toBe("off");
@@ -245,4 +239,13 @@ it("unavailable copy preserves source reception and does not claim personal pref
   expect(unavailableResources.preferences.summary).not.toMatch(
     /nothing is (saved|stored)/i,
   );
+});
+
+it("new conversation capability does not require a configured client", () => {
+  expect(readMeriCapabilities(allCapabilitiesEnv).newConversation.status).toBe(
+    "on",
+  );
+  expect(
+    readMeriCapabilities(previewCapabilitiesEnv).newConversation.status,
+  ).toBe("on");
 });

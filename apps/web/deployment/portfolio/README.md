@@ -33,8 +33,12 @@ against those expected deployment values; static metadata is not attestation.
 Never report the baseline as the deployed source or replace the baseline with
 an arbitrary successor to bypass admission.
 
-All opt-ins remain held by default. This refresh leaves selected-client limits,
-explicit General scope, exact routes/methods/targets, Clerk/Core authorization,
+All opt-ins remain held by default. Chat accepts explicit General or any client
+that the current Clerk/Core session authorizes. The configured single-client
+parameter and environment value have been removed; remove `firstChatClientId`
+from operator bindings and `MeriFirstChatClientId` from deployment parameters.
+Core remains responsible for current tenant, actor, client and wall checks.
+This preserves exact routes/methods/targets, Clerk/Core authorization,
 unrelated feature holds, IAM and network rules unchanged. Client and General
 chat, authorized reads, follow-up and Stop still require live acceptance.
 Historical build examples below are not commands for this release.
@@ -53,8 +57,8 @@ availability.
 `clerkIssuer`, `clerkApplicationId`, `clerkPublishableKeyArn`, `clerkSecretArn`
 and `clerkKeyArn`. Optional `previewReadEnabled`, `firstChatBootstrapEnabled`,
 `meriConversationWorkflowEnabled` and `meriConversationRoutesEnabled` are
-booleans that default to false. The first-chat client ID stays empty unless
-the reviewed read, bootstrap and Meri route bindings are enabled together.
+booleans that default to false. First chat requires the reviewed read, bootstrap
+and Meri route bindings together; it does not take a configured client ID.
 `meriApiBaseUrl` must be a canonical HTTPS DNS root origin when Meri is enabled;
 its qualified image source and digest must match the explicit runtime pins.
 Supply only owner-verified public
@@ -71,7 +75,7 @@ node apps/web/deployment/portfolio/preview-config.mjs --help
 node apps/web/deployment/portfolio/preview-config.mjs --bindings /absolute/path/to/verified-public-metadata.json
 ```
 
-The command prints a local configuration proposal with all 24 configuration
+The command prints a local configuration proposal with all configuration
 parameters explicit, including held first-chat and Meri defaults. `--parameters FILE`
 additionally validates a candidate JSON parameter array against those exact
 values. It rejects missing values,

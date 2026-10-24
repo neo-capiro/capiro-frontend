@@ -89,11 +89,6 @@ Parameters:
     Type: String
     Default: "false"
     AllowedValues: ["false", "true"]
-  MeriFirstChatClientId:
-    Type: String
-    Default: ""
-    AllowedPattern: "^$|^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-    Description: Exact owner-verified active client; no value is committed in source
   CapiroPreviewFirstChatBackendSource:
     Type: String
     Default: ""
@@ -184,8 +179,6 @@ Rules:
   FirstChatRequiresCurrentBindings:
     RuleCondition: !Equals [!Ref MeriFirstChatBootstrapEnabled, "true"]
     Assertions:
-      - Assert: !Not [!Equals [!Ref MeriFirstChatClientId, ""]]
-        AssertDescription: First chat requires one owner-verified active client
       - Assert: !Equals [!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"]
         AssertDescription: First chat needs the selected-client read binding
       - Assert: !Equals [!Ref CapiroPreviewFirstChatBackendSource, "16c3122a379481eb19cdee156ceb5d5c8b615bea"]
@@ -197,8 +190,6 @@ Rules:
   FirstChatHeldWithoutFlag:
     RuleCondition: !Equals [!Ref MeriFirstChatBootstrapEnabled, "false"]
     Assertions:
-      - Assert: !Equals [!Ref MeriFirstChatClientId, ""]
-        AssertDescription: A held first-chat route must not carry a client identifier
       - Assert: !Equals [!Ref CapiroPreviewFirstChatBackendSource, ""]
         AssertDescription: A held first-chat route must not carry a source marker
       - Assert: !Equals [!Ref CapiroPreviewFirstChatApiBaseUrl, ""]
@@ -494,8 +485,6 @@ Resources:
               Value: !Ref CapiroPreviewClientRosterApiBaseUrl
             - Name: MERI_FIRST_CHAT_BOOTSTRAP_ENABLED
               Value: !Ref MeriFirstChatBootstrapEnabled
-            - Name: MERI_FIRST_CHAT_CLIENT_ID
-              Value: !Ref MeriFirstChatClientId
             - Name: CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE
               Value: !Ref CapiroPreviewFirstChatBackendSource
             - Name: CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL

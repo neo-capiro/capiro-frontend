@@ -24,7 +24,6 @@ import { pendingApprovals } from "../../src/features/meri/fixtures/screens/appro
 import { MeriHome } from "../../src/features/meri/MeriHome";
 import { MemoryOwnerInbox } from "../../src/features/meri/memory-review/MemoryOwnerInbox";
 import { MemoryCorrectionComposer } from "../../src/features/meri/memory-review/MemoryCorrectionComposer";
-import { clientId as testClientId } from "../../tests/browser/fixtures";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
 import { StrictMode } from "react";
@@ -175,7 +174,6 @@ function RoutedApp() {
         firstChatBootstrapEnabled={
           sessionStorage.getItem("meri-first-chat-enabled") === "true"
         }
-        firstChatBootstrapClientId={testClientId}
       >
         <RequireSession>
           <MeriHome
@@ -185,7 +183,6 @@ function RoutedApp() {
             firstChatBootstrapEnabled={
               sessionStorage.getItem("meri-first-chat-enabled") === "true"
             }
-            firstChatBootstrapClientId={testClientId}
           />
         </RequireSession>
       </ProductShell>

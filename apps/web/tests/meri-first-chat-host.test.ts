@@ -6,6 +6,8 @@ import { MeriConversationHost } from "../src/features/meri/conversation/MeriConv
 const mocks = vi.hoisted(() => ({
   search: "",
   clientStatus: "active",
+  clientId: "33333333-3333-4333-8333-333333333333",
+  selectedState: "authorized-client",
   session: vi.fn(() => ({
     ready: undefined,
     latestTarget: undefined,
@@ -18,9 +20,9 @@ vi.mock("next/navigation", () => ({
 }));
 vi.mock("../src/shared/session/SelectedClient", () => ({
   useSelectedClient: () => ({
-    state: "authorized-client",
+    state: mocks.selectedState,
     client: {
-      id: "33333333-3333-4333-8333-333333333333",
+      id: mocks.clientId,
       name: "Current client",
       status: mocks.clientStatus,
     },
@@ -40,11 +42,12 @@ const account = {
   tenantId: "11111111-1111-4111-8111-111111111111",
   actorId: "22222222-2222-4222-8222-222222222222",
 };
-const configuredClientId = "33333333-3333-4333-8333-333333333333";
 
 afterEach(() => {
   mocks.search = "";
   mocks.clientStatus = "active";
+  mocks.clientId = "33333333-3333-4333-8333-333333333333";
+  mocks.selectedState = "authorized-client";
   vi.clearAllMocks();
 });
 
@@ -54,7 +57,6 @@ it("with first-chat bootstrap selected, does not mount a Meri session before Cor
       enabled: true,
       account,
       firstChatBootstrapEnabled: true,
-      firstChatBootstrapClientId: configuredClientId,
     }),
   );
   expect(html).toContain("Preparing conversation");
@@ -69,7 +71,6 @@ it("preserves explicit conversation links without a Core create call", () => {
       enabled: true,
       account,
       firstChatBootstrapEnabled: true,
-      firstChatBootstrapClientId: configuredClientId,
     }),
   );
   expect(html).toContain("Meri session pending");
@@ -81,17 +82,70 @@ it("preserves explicit conversation links without a Core create call", () => {
   );
 });
 
-it("holds an unconfigured client before Core and Meri session issuance", () => {
+it.each([
+  "33333333-3333-4333-8333-333333333333",
+  "66666666-6666-4666-8666-666666666666",
+])("lets each verified active client reach Core resolution: %s", (clientId) => {
+  mocks.clientId = clientId;
   const html = renderToStaticMarkup(
     createElement(MeriConversationHost, {
       enabled: true,
       account,
       firstChatBootstrapEnabled: true,
-      firstChatBootstrapClientId: "66666666-6666-4666-8666-666666666666",
     }),
   );
-  expect(html).toContain("This client is not configured");
-  expect(mocks.coreRequest).not.toHaveBeenCalled();
+  expect(html).toContain("Preparing conversation");
+  expect(mocks.session).not.toHaveBeenCalled();
+});
+
+it.each(["unavailable", "loading", "no-selection"])(
+  "holds %s selection before Core or a session",
+  (state) => {
+    mocks.selectedState = state;
+    const html = renderToStaticMarkup(
+      createElement(MeriConversationHost, {
+        enabled: true,
+        account,
+        firstChatBootstrapEnabled: true,
+      }),
+    );
+    expect(html).toContain("Conversation connection unavailable");
+    expect(mocks.coreRequest).not.toHaveBeenCalled();
+    expect(mocks.session).not.toHaveBeenCalled();
+  },
+);
+
+it("explicit General does not inherit the selected client", () => {
+  mocks.search =
+    "scope=general&conversationId=55555555-5555-4555-8555-555555555555";
+  renderToStaticMarkup(
+    createElement(MeriConversationHost, {
+      enabled: true,
+      account,
+      firstChatBootstrapEnabled: true,
+    }),
+  );
+  expect(mocks.session).toHaveBeenCalledWith(
+    account,
+    null,
+    "55555555-5555-4555-8555-555555555555",
+  );
+});
+
+it.each([
+  "scope=general&clientId=33333333-3333-4333-8333-333333333333",
+  "scope=general&scope=general",
+  "scope=client",
+])("refuses ambiguous scope %s", (search) => {
+  mocks.search = search;
+  const html = renderToStaticMarkup(
+    createElement(MeriConversationHost, {
+      enabled: true,
+      account,
+      firstChatBootstrapEnabled: true,
+    }),
+  );
+  expect(html).toContain("Conversation selection unavailable");
   expect(mocks.session).not.toHaveBeenCalled();
 });
 
@@ -124,7 +178,6 @@ it("refuses an archived client before any Core bootstrap or Meri session", () =>
           enabled: true,
           account,
           firstChatBootstrapEnabled,
-          firstChatBootstrapClientId: configuredClientId,
         }),
       );
       expect(html).toContain("Conversations unavailable for this client");
@@ -143,7 +196,6 @@ it("only the exact Core archived literal is refused", () => {
       enabled: true,
       account,
       firstChatBootstrapEnabled: true,
-      firstChatBootstrapClientId: configuredClientId,
     }),
   );
   expect(html).toContain("Preparing conversation");

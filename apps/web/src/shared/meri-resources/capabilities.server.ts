@@ -65,9 +65,7 @@ export function readMeriCapabilities(env: Environment) {
       conversations,
       newConversation: permitted(
         "newConversation",
-        conversations &&
-          conversation.firstChatBootstrapEnabled &&
-          Boolean(conversation.firstChatBootstrapClientId),
+        conversations && conversation.firstChatBootstrapEnabled,
         `/api/capiro/${firstChatCoreOperationKey}`,
       ),
       files: permitted(
