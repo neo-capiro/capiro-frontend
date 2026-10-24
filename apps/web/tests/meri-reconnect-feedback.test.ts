@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { createElement, type ComponentProps } from "react";
+import {
+  Children,
+  createElement,
+  isValidElement,
+  type ComponentProps,
+  type ReactElement,
+} from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { RunStatus } from "../src/features/meri/conversation/RunStatus";
 import { useRunObservation } from "../src/features/meri/conversation/useRunObservation";
@@ -12,6 +18,7 @@ const probe = vi.hoisted(() => ({
   effect: undefined as undefined | (() => void | (() => void)),
   cleanup: undefined as undefined | (() => void),
 }));
+let mountedObservation: ReactElement | undefined;
 vi.mock("react", async (original) => ({
   ...(await original<typeof import("react")>()),
   useState: (initial: unknown) => {
@@ -38,6 +45,7 @@ beforeEach(() => {
   probe.value = undefined;
   probe.ref.current = null;
   probe.effect = probe.cleanup = undefined;
+  mountedObservation = undefined;
 });
 afterEach(() => {
   probe.ref.current?.abort();
@@ -53,7 +61,25 @@ function feedback(observing: string, active = true) {
     observing,
     reconnect: vi.fn(),
   } as unknown as ComponentProps<typeof RunStatus>["run"];
-  return renderToStaticMarkup(createElement(RunStatus, { run, active }));
+  const tree = RunStatus({ run, active });
+  const observation = Children.toArray(tree.props.children).find(
+    (child): child is ReactElement =>
+      isValidElement(child) &&
+      typeof child.type === "function" &&
+      child.type.name === "ObservationStatus",
+  );
+  // Model React's actual element identity, not the expected observation state.
+  // Removing the production key must keep the old state and fail the reset controls.
+  if (
+    observation?.type !== mountedObservation?.type ||
+    observation?.key !== mountedObservation?.key
+  ) {
+    probe.cleanup?.();
+    probe.value = undefined;
+    probe.effect = probe.cleanup = undefined;
+  }
+  mountedObservation = observation;
+  return renderToStaticMarkup(tree);
 }
 function commitEffect() {
   probe.cleanup?.();
@@ -101,6 +127,30 @@ it("shows stalled uncertainty immediately and suppresses recovery feedback after
   );
 });
 
+it("keeps the same recovery deadline across unrelated renders", async () => {
+  feedback("reconnecting");
+  commitEffect();
+  await vi.advanceTimersByTimeAsync(1_500);
+  expect(feedback("reconnecting")).not.toContain("Updates are delayed");
+  await vi.advanceTimersByTimeAsync(1_500);
+  expect(feedback("reconnecting")).toContain("Updates are delayed");
+});
+
+it("cancels the grace timer on terminal unmount and starts fresh on a later active run", async () => {
+  feedback("reconnecting");
+  commitEffect();
+  await vi.advanceTimersByTimeAsync(2_000);
+  expect(feedback("reconnecting", false)).not.toContain("Waiting for Meri");
+  expect(vi.getTimerCount()).toBe(0);
+  await vi.advanceTimersByTimeAsync(5_000);
+  expect(feedback("reconnecting")).not.toContain("Updates are delayed");
+  commitEffect();
+  await vi.advanceTimersByTimeAsync(2_999);
+  expect(feedback("reconnecting")).not.toContain("Updates are delayed");
+  await vi.advanceTimersByTimeAsync(1);
+  expect(feedback("reconnecting")).toContain("Updates are delayed");
+});
+
 function observation() {
   const listeners = new Set<() => void>();
   const snapshot = { observation: { after: 7, runState: "running" } };
@@ -124,7 +174,12 @@ function observation() {
     openChat: () => ({ chat: { resumeStream: resume, sendMessage: send } }),
   } as unknown as MeriConversationPort;
   const alive = { current: true };
-  const hook = useRunObservation(port, alive);
+  let hook!: ReturnType<typeof useRunObservation>;
+  function ObservationProbe() {
+    hook = useRunObservation(port, alive);
+    return null;
+  }
+  renderToStaticMarkup(createElement(ObservationProbe));
   return {
     listeners,
     snapshot,

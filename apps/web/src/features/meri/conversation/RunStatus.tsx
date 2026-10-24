@@ -83,7 +83,7 @@ export function RunStatus({
           Continue accepted request
         </Button>
       )}
-      {active && <ObservationStatus run={run} />}
+      {active && <ObservationStatus key={run.observing} run={run} />}
       <StopStatus run={run} savedCurrent={savedCurrent} />
       {active && (
         <p className={styles.muted}>
@@ -194,10 +194,7 @@ function ObservationStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
   const { observing } = run;
   const [delayed, setDelayed] = useState(false);
   useEffect(() => {
-    if (observing !== "reconnecting") {
-      setDelayed(false);
-      return;
-    }
+    if (observing !== "reconnecting") return;
     // Allow the existing first two retry waits (1 s + 2 s) before announcing recovery.
     const timer = setTimeout(() => setDelayed(true), 3_000);
     return () => clearTimeout(timer);
