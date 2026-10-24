@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import assert from "node:assert/strict";
 import { QueryClient } from "@tanstack/react-query";
 import { conversationSelectionOwner } from "../src/shared/meri-conversations/query-journal.ts";

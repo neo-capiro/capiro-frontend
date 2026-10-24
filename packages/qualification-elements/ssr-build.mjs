@@ -17,6 +17,14 @@ const ENTRY = 'export { ElementsFixture } from "./fixture.tsx";\nexport { render
 const externalsAllowed = rows => rows.every(x => /^(?:node:)?(?:stream|util|crypto|buffer|async_hooks|path|process|url)$/.test(x));
 const slash = path => path.split(sep).join('/');
 
+/** One canonical pin for the actual native build platform; never emulate/fall back. */
+export function selectSSRTool(pins, platform = process.platform + '-' + process.arch) {
+  assert.ok(['win32-x64', 'linux-x64', 'linux-arm64'].includes(platform), 'unsupported SSR tool platform');
+  const selected = pins.tools.find(item => item.platform === platform);
+  assert.ok(selected, 'native SSR tool pin is missing');
+  return selected;
+}
+
 function inputBindings(root, dependencyRoot, metadata, sources) {
   const result = [];
   for (const name of Object.keys(metadata.inputs).sort()) {
@@ -85,8 +93,7 @@ export function buildSSR({ toolRoot, outputRoot, packageRoot = HERE }) {
   const pins = JSON.parse(read(join(root, 'toolchain-pins.json')));
   assert.equal(pins.schema, 'meri-elements-ssr-toolchain/1'); assert.equal(pins.version, '0.28.2');
   const platform = process.platform + '-' + process.arch;
-  assert.ok(platform === 'win32-x64' || platform === 'linux-x64');
-  const selected = pins.tools.find(x => x.platform === platform); assert.ok(selected);
+  const selected = selectSSRTool(pins, platform);
   const toolDir = join(realpathSync(toolRoot), platform), binary = join(toolDir, selected.binaryName);
   for (const [name, bytes, digest] of [['metadata.json', selected.metadataBytes, selected.metadataSha256], ['archive.tgz', selected.archiveBytes, selected.archiveSha256], [selected.binaryName, selected.binaryBytes, selected.binarySha256]]) {
     const raw = read(join(toolDir, name)); assert.equal(raw.length, bytes); assert.equal(hash(raw), digest);
