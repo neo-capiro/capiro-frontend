@@ -52,7 +52,6 @@ it("holds the registered Core write before Clerk when first chat is disabled", a
 it("passes a flagged first-chat write through the unmarked native Clerk bearer", async () => {
   for (const [key, value] of Object.entries({
     MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: "true",
-    MERI_FIRST_CHAT_CLIENT_ID: body.clientId,
     CAPIRO_PREVIEW_READ_ONLY: "false",
     CORE_API_BASE_URL: "https://core.example.test/api",
     CAPIRO_REQUEST_ORIGIN: origin,
@@ -79,27 +78,38 @@ it("passes a flagged first-chat write through the unmarked native Clerk bearer",
   expect(await response.json()).toEqual(receipt);
 });
 
-it("rejects a different authorized client before Core dispatch", async () => {
-  vi.stubEnv("MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "true");
-  vi.stubEnv("MERI_FIRST_CHAT_CLIENT_ID", body.clientId);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_ONLY", "false");
-  vi.stubEnv("CORE_API_BASE_URL", "https://core.example.test/api");
-  vi.stubEnv("CAPIRO_REQUEST_ORIGIN", origin);
-  vi.stubEnv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_YXBw");
-  vi.stubEnv("CLERK_SECRET_KEY", "sk_test_synthetic");
-  const fetcher = vi.fn();
-  vi.stubGlobal("fetch", fetcher);
-
-  const response = await POST(
-    incoming({
+it.each([
+  "33333333-3333-4333-8333-333333333333",
+  "66666666-6666-4666-8666-666666666666",
+])(
+  "forwards each client selector to Core authorization: %s",
+  async (clientId) => {
+    for (const [key, value] of Object.entries({
+      MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: "true",
+      CAPIRO_PREVIEW_READ_ONLY: "false",
+      CORE_API_BASE_URL: "https://core.example.test/api",
+      CAPIRO_REQUEST_ORIGIN: origin,
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_YXBw",
+      CLERK_SECRET_KEY: "sk_test_synthetic",
+    }))
+      vi.stubEnv(key, value);
+    clerk.auth.mockResolvedValue({
+      userId: "clerk-subject",
+      getToken: async () => "native-session-token",
+    });
+    const fetcher = vi.fn<typeof fetch>(async () =>
+      Response.json({ ...receipt, clientId }),
+    );
+    vi.stubGlobal("fetch", fetcher);
+    expect((await POST(incoming({ ...body, clientId }), context)).status).toBe(
+      200,
+    );
+    expect(JSON.parse(String(fetcher.mock.calls[0]![1]?.body))).toEqual({
       ...body,
-      clientId: "66666666-6666-4666-8666-666666666666",
-    }),
-    context,
-  );
-  expect(response.status).toBe(400);
-  expect(fetcher).not.toHaveBeenCalled();
-});
+      clientId,
+    });
+  },
+);
 
 it("keeps a read-only preview closed even when the first-chat flag is set", async () => {
   vi.stubEnv("MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "true");

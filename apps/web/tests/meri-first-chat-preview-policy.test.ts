@@ -56,7 +56,6 @@ beforeEach(() => {
   for (const [key, value] of Object.entries({
     CAPIRO_PREVIEW_READ_ONLY: "true",
     MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: "true",
-    MERI_FIRST_CHAT_CLIENT_ID: body.clientId,
     CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: previewFirstChatBackendSource,
     CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL: previewTarget,
     CORE_API_BASE_URL: "https://ordinary.synthetic.invalid/api",
@@ -144,7 +143,6 @@ it("keeps the pinned first-chat write with a separate qualified roster binding",
 
 it.each([
   ["MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "false"],
-  ["MERI_FIRST_CHAT_CLIENT_ID", ""],
   ["CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE", "wrong-source"],
   ["CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL", ""],
   ["CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL", "https://os.capiro.ai/api"],
@@ -206,11 +204,11 @@ it.each([
   );
 });
 
-it("validates the configured client and Core receipt before returning either", async () => {
+it("validates the client selector and Core receipt before returning either", async () => {
   const wrong = await POST(
     request(`${origin}${path}`, {
       ...body,
-      clientId: "66666666-6666-4666-8666-666666666666",
+      clientId: "not-a-client-uuid",
     }),
     context,
   );
@@ -295,20 +293,23 @@ it("pins General to the reviewed successor and refuses its superseded source", a
   await held(await POST(request(`${origin}${v2Path}`, general), v2Context));
 });
 
-it("admits the configured client through v2 without broadening its client roster", async () => {
-  vi.stubEnv(
-    "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
-    previewGeneralBackendSource,
-  );
-  const selected = { ...general, scopeKind: "client", clientId: body.clientId };
-  fetcher.mockResolvedValue(Response.json({ ...receipt, ...selected }));
-  expect(
-    (await POST(request(`${origin}${v2Path}`, selected), v2Context)).status,
-  ).toBe(200);
-  expect(JSON.parse(String(fetcher.mock.lastCall?.[1]?.body))).toEqual(
-    selected,
-  );
-});
+it.each([body.clientId, "66666666-6666-4666-8666-666666666666"])(
+  "forwards client %s through v2 to canonical Core authorization",
+  async (clientId) => {
+    vi.stubEnv(
+      "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+      previewGeneralBackendSource,
+    );
+    const selected = { ...general, scopeKind: "client", clientId };
+    fetcher.mockResolvedValue(Response.json({ ...receipt, ...selected }));
+    expect(
+      (await POST(request(`${origin}${v2Path}`, selected), v2Context)).status,
+    ).toBe(200);
+    expect(JSON.parse(String(fetcher.mock.lastCall?.[1]?.body))).toEqual(
+      selected,
+    );
+  },
+);
 
 it.each([
   { ...general, clientId: body.clientId },
@@ -317,23 +318,20 @@ it.each([
   {
     ...general,
     scopeKind: "client",
-    clientId: "66666666-6666-4666-8666-666666666666",
+    clientId: "not-a-client-uuid",
   },
   { ...general, tenantId: receipt.tenantId },
-])(
-  "refuses malformed or unconfigured v2 selectors before dispatch %#",
-  async (input) => {
-    vi.stubEnv(
-      "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
-      previewGeneralBackendSource,
-    );
-    expect(
-      (await POST(request(`${origin}${v2Path}`, input), v2Context)).status,
-    ).toBe(400);
-    expect(fetcher).not.toHaveBeenCalled();
-    expect(clerk.auth).not.toHaveBeenCalled();
-  },
-);
+])("refuses malformed v2 selectors before dispatch %#", async (input) => {
+  vi.stubEnv(
+    "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+    previewGeneralBackendSource,
+  );
+  expect(
+    (await POST(request(`${origin}${v2Path}`, input), v2Context)).status,
+  ).toBe(400);
+  expect(fetcher).not.toHaveBeenCalled();
+  expect(clerk.auth).not.toHaveBeenCalled();
+});
 
 it.each([401, 403])(
   "preserves Core refusal %s for General instead of manufacturing a receipt",
@@ -365,3 +363,28 @@ it("does not use an ordinary target for General while preview routing is active"
   );
   await held(await POST(request(`${origin}${v2Path}`, general), v2Context));
 });
+
+for (const clientId of [
+  body.clientId,
+  "66666666-6666-4666-8666-666666666666",
+]) {
+  it.each([401, 403, 409])(
+    `preserves current Core denial/revocation for client ${clientId}: %s`,
+    async (status) => {
+      fetcher.mockResolvedValue(
+        Response.json({ message: "private refusal" }, { status }),
+      );
+      for (let replay = 0; replay < 2; replay++) {
+        const response = await POST(
+          request(`${origin}${path}`, { ...body, clientId }),
+          context,
+        );
+        expect(response.status).toBe(status);
+        expect(await response.text()).not.toContain("private refusal");
+      }
+      expect(fetcher).toHaveBeenCalledTimes(2);
+      for (const [, init] of fetcher.mock.calls)
+        expect(JSON.parse(String(init?.body))).toEqual({ ...body, clientId });
+    },
+  );
+}

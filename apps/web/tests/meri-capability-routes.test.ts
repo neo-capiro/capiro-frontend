@@ -11,7 +11,6 @@ import { readMeriCapabilities } from "../src/shared/meri-resources/capabilities.
 import { meriCapabilityHref } from "../src/shared/meri-resources/capabilities";
 import {
   allCapabilitiesEnv,
-  capabilityFixtureEnv,
   capabilityFlags,
   previewCapabilitiesEnv,
 } from "./meri-capabilities-fixtures";
@@ -90,7 +89,7 @@ function requestFor(route: (typeof routes)[number], origin: string) {
                   body: {
                     schemaVersion: 1,
                     requestId: "22222222-2222-4222-8222-222222222222",
-                    clientId: capabilityFixtureEnv.MERI_FIRST_CHAT_CLIENT_ID,
+                    clientId: "33333333-3333-4333-8333-333333333333",
                   },
                 })
               : "{}",

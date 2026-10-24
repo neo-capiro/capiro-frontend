@@ -20,7 +20,6 @@ const coreMemorySource = '';
 const meriImageSource = '7eea1e852f177c17e3675429830b886b906e4cd6';
 const meriImageDigest = 'sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d';
 const meriConsumerVersion = '0.1.12';
-const canonicalUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const nonMeriHosts = new Set([
   'capiro.ai', 'app.capiro.ai', 'os.capiro.ai', 'api.capiro.ai',
   'portfolio-preview.app.capiro.ai', 'first-chat-preview.app-dev.capiro.ai',
@@ -36,7 +35,7 @@ const fixedParameters = Object.freeze({
 });
 const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const optionalBindings = [
-  'previewReadEnabled', 'firstChatBootstrapEnabled', 'firstChatClientId',
+  'previewReadEnabled', 'firstChatBootstrapEnabled',
   'qualifiedCoreClientRosterApiBaseUrl',
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
   'meriRuntimeSource', 'meriRuntimeImageDigest',
@@ -99,19 +98,12 @@ function readFirstChatConfiguration(bindings, meri) {
     ? bindings.previewReadEnabled : false;
   const bootstrapEnabled = Object.hasOwn(bindings, 'firstChatBootstrapEnabled')
     ? bindings.firstChatBootstrapEnabled : false;
-  const clientId = Object.hasOwn(bindings, 'firstChatClientId')
-    ? bindings.firstChatClientId : '';
   if (typeof readEnabled !== 'boolean' || typeof bootstrapEnabled !== 'boolean')
     throw Error('PREVIEW_FIRST_CHAT_FLAG_INVALID');
-  if (typeof clientId !== 'string') throw Error('PREVIEW_FIRST_CHAT_CLIENT_INVALID');
   if (bootstrapEnabled) {
     if (!readEnabled || !meri.routesEnabled) throw Error('PREVIEW_FIRST_CHAT_DEPENDENCY_HELD');
-    if (typeof clientId !== 'string' || !canonicalUuid.test(clientId))
-      throw Error('PREVIEW_FIRST_CHAT_CLIENT_INVALID');
-  } else if (clientId !== '') {
-    throw Error('PREVIEW_FIRST_CHAT_CLIENT_WITHOUT_BOOTSTRAP');
   }
-  return { readEnabled, bootstrapEnabled, clientId };
+  return { readEnabled, bootstrapEnabled };
 }
 
 function readQualifiedCoreRosterApi(bindings, firstChat, meri) {
@@ -157,7 +149,6 @@ export function renderPreviewConfiguration(bindings) {
     CapiroPreviewClientRosterBackendSource: qualifiedCoreRosterApi ? qualifiedCoreRosterSource : '',
     CapiroPreviewClientRosterApiBaseUrl: qualifiedCoreRosterApi,
     MeriFirstChatBootstrapEnabled: String(firstChat.bootstrapEnabled),
-    MeriFirstChatClientId: firstChat.clientId,
     CapiroPreviewFirstChatBackendSource: firstChat.bootstrapEnabled ? coreBootstrapSource : '',
     CapiroPreviewFirstChatApiBaseUrl: firstChat.bootstrapEnabled ? corePreviewApi : '',
     MeriMemoryOwnerReviewEnabled: String(memory.enabled),
@@ -206,7 +197,6 @@ export function renderPreviewConfiguration(bindings) {
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: values.CapiroPreviewClientRosterBackendSource,
       CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: values.CapiroPreviewClientRosterApiBaseUrl,
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: values.MeriFirstChatBootstrapEnabled,
-      MERI_FIRST_CHAT_CLIENT_ID: values.MeriFirstChatClientId,
       CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: values.CapiroPreviewFirstChatBackendSource,
       CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL: values.CapiroPreviewFirstChatApiBaseUrl,
       MERI_MEMORY_OWNER_REVIEW_ENABLED: values.MeriMemoryOwnerReviewEnabled,

@@ -10,7 +10,6 @@ export default function MeriTaskUpdatesPage() {
     <ProductShell
       conversationEnabled={conversation.enabled}
       firstChatBootstrapEnabled={conversation.firstChatBootstrapEnabled}
-      firstChatBootstrapClientId={conversation.firstChatBootstrapClientId}
     >
       <RequireSession>
         <MeriTaskUpdateHost

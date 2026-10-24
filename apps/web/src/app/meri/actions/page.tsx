@@ -11,7 +11,6 @@ export default function MeriActionsPage() {
       actionWorkflow
       conversationEnabled={conversation.enabled}
       firstChatBootstrapEnabled={conversation.firstChatBootstrapEnabled}
-      firstChatBootstrapClientId={conversation.firstChatBootstrapClientId}
     >
       <RequireSession>
         <MeriActionHost enabled={readActionConfig(process.env).enabled} />

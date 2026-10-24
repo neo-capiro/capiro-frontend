@@ -12,7 +12,6 @@ export default function MeriFilesPage() {
       documentWorkflow
       conversationEnabled={conversation.enabled}
       firstChatBootstrapEnabled={conversation.firstChatBootstrapEnabled}
-      firstChatBootstrapClientId={conversation.firstChatBootstrapClientId}
     >
       <RequireSession>
         <MeriFilesHost

@@ -20,7 +20,6 @@ export function MeriHome({
   intentApprovalsEnabled = false,
   memoryReviewEnabled = false,
   firstChatBootstrapEnabled = false,
-  firstChatBootstrapClientId,
 }: {
   conversationEnabled?: boolean;
   /** Server-decided (readIntentsConfig); approvals stay dark unless true. */
@@ -28,7 +27,6 @@ export function MeriHome({
   /** Server-decided (MERI_MEMORY_OWNER_REVIEW_ENABLED); the memory link stays hidden unless true. */
   memoryReviewEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
-  firstChatBootstrapClientId?: string;
 }) {
   const capabilities = useMeriCapabilities();
   const conversationAvailable =
@@ -94,7 +92,6 @@ export function MeriHome({
               firstChatBootstrapEnabled &&
               capabilities.newConversation.status === "on"
             }
-            firstChatBootstrapClientId={firstChatBootstrapClientId}
             account={
               current?.tenant?.id
                 ? { tenantId: current.tenant.id, actorId: current.user.id }

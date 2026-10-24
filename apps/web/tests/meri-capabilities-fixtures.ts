@@ -6,7 +6,6 @@ export const capabilityFixtureEnv: Record<string, string | undefined> = {
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_c3ludGhldGljJA==",
   CLERK_SECRET_KEY: "sk_test_synthetic",
   MERI_DOCUMENT_OPERATION: "create_word",
-  MERI_FIRST_CHAT_CLIENT_ID: "11111111-1111-4111-8111-111111111111",
   CAPIRO_PREVIEW_READ_ONLY: "false",
 };
 

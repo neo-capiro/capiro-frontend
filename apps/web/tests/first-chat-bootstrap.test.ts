@@ -203,3 +203,63 @@ it("offers explicit New Chat only after a confirmed Core 409", async () => {
     }),
   ).toBe(false);
 });
+
+for (const clientId of [
+  scope.clientId,
+  "66666666-6666-4666-8666-666666666666",
+]) {
+  it.each(["tenantId", "actorId", "clientId"] as const)(
+    `refuses a changed %s for selected client ${clientId}`,
+    async (field) => {
+      const current = { ...scope, clientId };
+      const storage = memoryStorage();
+      await expect(
+        resolveFirstChatConversation({
+          scope: current,
+          storage,
+          signal: new AbortController().signal,
+          issueId: () => requestId,
+          createOrReuse: async () => ({
+            ...receipt,
+            ...current,
+            [field]: "77777777-7777-4777-8777-777777777777",
+          }),
+        }),
+      ).rejects.toThrow();
+      expect(readFirstChatIntent(current, storage)?.state).toBe("pending");
+    },
+  );
+  it.each([401, 403])(
+    `rechecks revoked client ${clientId} on stored replay: %s`,
+    async (status) => {
+      const current = { ...scope, clientId };
+      const storage = memoryStorage();
+      await resolveFirstChatConversation({
+        scope: current,
+        storage,
+        signal: new AbortController().signal,
+        issueId: () => requestId,
+        createOrReuse: async () => ({ ...receipt, ...current }),
+      });
+      const denied = new CapiroApiError(status, "Access denied.");
+      const replay = vi.fn(async () => {
+        throw denied;
+      });
+      await expect(
+        resolveFirstChatConversation({
+          scope: current,
+          storage,
+          signal: new AbortController().signal,
+          createOrReuse: replay,
+        }),
+      ).rejects.toBe(denied);
+      expect(replay).toHaveBeenCalledExactlyOnceWith(
+        { schemaVersion: 1, requestId, clientId },
+        expect.any(AbortSignal),
+      );
+      expect(readFirstChatIntent(current, storage)).toMatchObject({
+        conversationId,
+      });
+    },
+  );
+}
