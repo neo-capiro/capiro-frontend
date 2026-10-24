@@ -12,6 +12,7 @@ import { SettingsFields } from "../screens/settings/SettingsFields";
 import type { SettingsChrome } from "../screens/settings/settings-view";
 import { unavailablePreferences } from "../screens/settings/preferences-unavailable";
 import { UserPreferencesForm } from "./UserPreferencesForm";
+import { toast, Toaster } from "@capiro/ui/sonner";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./user-preferences.module.css";
 
@@ -32,7 +33,7 @@ export function UserPreferencesHost({ chrome }: { chrome: SettingsChrome }) {
         notice: {
           title: "Personal Meri preferences",
           detail:
-            "Only personal appearance and timezone settings are connected. Other Meri settings remain unavailable.",
+            "Personal model defaults, appearance and timezone settings are connected. Other Meri settings remain unavailable.",
         },
       }}
       heading={{
@@ -86,7 +87,12 @@ function OwnedPreferences({ owner }: { owner: UserPreferencesOwner }) {
     );
   });
   useEffect(() => controller.attach(), [controller]);
-  return <PreferencesView controller={controller} />;
+  return (
+    <>
+      <PreferencesView controller={controller} />
+      <Toaster />
+    </>
+  );
 }
 
 function PreferencesView({
@@ -110,7 +116,10 @@ function PreferencesView({
           document={view.document}
           editable={view.status === "ready"}
           save={(preferences) => {
-            void controller.save(preferences);
+            void controller.save(preferences).then(() => {
+              if (controller.snapshot().status === "saved")
+                toast.success("Personal preferences saved");
+            });
           }}
         />
       ) : null}

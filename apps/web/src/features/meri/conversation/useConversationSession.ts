@@ -10,6 +10,8 @@ import {
 import { sessionHistoryState } from "./saved-turns";
 import type { TurnView } from "./conversation-view";
 import { useConversationLocalState } from "./useConversationLocalState";
+import { useModelCatalog } from "../model-selection/useModelCatalog";
+import { selectionAvailable } from "../model-selection/model-selection";
 
 /** Bind the captured input to the reserved target before opening its exact authorized session. */
 function useTurnOpening(
@@ -27,7 +29,13 @@ function useTurnOpening(
           conversationId: target.conversationId,
           runId: target.runId,
         },
-        { requestId: target.requestId, prompt: target.pending },
+        {
+          requestId: target.requestId,
+          prompt: target.pending,
+          ...(target.modelSelection
+            ? { modelSelection: target.modelSelection }
+            : {}),
+        },
       );
       reopen({
         target: { conversationId: target.conversationId, runId: target.runId },
@@ -81,6 +89,7 @@ export function useConversationSession(
   const { boundReady, selectedId, history, accessLost, ready } =
     useSelectedHistory(account, clientId, conversationId, connection);
   const { reopen } = connection;
+  const modelCatalog = useModelCatalog(account, !accessLost);
   const local = useConversationLocalState(
     boundReady?.port.context,
     accessLost,
@@ -89,6 +98,12 @@ export function useConversationSession(
       : undefined,
   );
   const { bindNext } = local;
+  const modelBlocked = selectionAvailable(
+    modelCatalog.document?.modelCatalog,
+    local.modelSelection ?? null,
+  )
+    ? undefined
+    : "Selected model is unavailable. Reload model choices or use the default.";
   const textarea = useRef<HTMLTextAreaElement>(null);
   const openTarget = useTurnOpening(account, clientId, reopen, bindNext);
   const continuation = useConversationTurn(
@@ -105,10 +120,19 @@ export function useConversationSession(
     continuation.busy,
   );
   const startNext = (prompt: string, finished: TurnView) => {
-    if (!view.source || view.nextBlocked || !prompt || local.storageError)
+    if (
+      !view.source ||
+      view.nextBlocked ||
+      !prompt ||
+      local.storageError ||
+      modelBlocked
+    )
       return;
-    void continuation.start(view.source, prompt, (request) =>
-      local.retainNext(finished, request),
+    void continuation.start(
+      view.source,
+      prompt,
+      (request) => local.retainNext(finished, request),
+      local.modelSelection,
     );
   };
   return {
@@ -120,6 +144,10 @@ export function useConversationSession(
     continuation,
     draft: local.draft,
     setDraft: local.setDraft,
+    modelCatalog,
+    modelSelection: local.modelSelection,
+    setModelSelection: local.setModelSelection,
+    modelBlocked,
     initialDraft: local.initialDraft,
     storageError:
       local.storageError ??

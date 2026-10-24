@@ -89,7 +89,19 @@ export function useRunCommands(
   const submitInitial = (
     prompt: string,
     onRecorded?: (request: ConversationSubmitRequest) => void,
-  ) => send(() => sendRequest(port, record, prompt, false, true, onRecorded));
+    modelSelection?: ConversationSubmitRequest["modelSelection"],
+  ) =>
+    send(() =>
+      sendRequest(
+        port,
+        record,
+        prompt,
+        false,
+        true,
+        onRecorded,
+        modelSelection,
+      ),
+    );
   const recover = (stored: ConversationStoredRequest) =>
     send(() => recoverRequest(port, record, stored));
   const reconcile = (stored: ConversationStoredRequest) => {

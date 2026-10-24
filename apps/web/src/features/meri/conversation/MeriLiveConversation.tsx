@@ -215,6 +215,8 @@ export function MeriLiveConversation({
   savedCurrent,
   acceptedRequest,
   storageError,
+  modelSelection,
+  modelBlocked,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -236,6 +238,8 @@ export function MeriLiveConversation({
   savedCurrent?: TurnView | undefined;
   acceptedRequest?: ConversationStoredRequest | undefined;
   storageError?: string | undefined;
+  modelSelection?: ConversationStoredRequest["modelSelection"];
+  modelBlocked?: string | undefined;
 }) {
   const run = useLiveRun(
     port,
@@ -267,11 +271,13 @@ export function MeriLiveConversation({
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
   const send = () => {
-    if (retentionError) return;
+    if (retentionError || modelBlocked) return;
     const prompt = draft.trim();
     if (availability.initial) {
-      void run.submitInitial(prompt, (request) =>
-        initialDraft.begin(port.context, request, draft),
+      void run.submitInitial(
+        prompt,
+        (request) => initialDraft.begin(port.context, request, draft),
+        modelSelection,
       );
     } else if (
       !initialDraft.hasPending(port.context) &&
@@ -287,7 +293,11 @@ export function MeriLiveConversation({
     controls: {
       onSend: send,
       onStop: () => void run.cancel(),
-      sendBlocked: retentionError ?? availability.sendBlocked,
+      sendBlocked: retentionError ?? availability.sendBlocked ?? modelBlocked,
+      modelSelection:
+        intent.submit?.state !== "observed" && intent.submit
+          ? intent.submit.modelSelection
+          : modelSelection,
       stopBlocked: retentionError ?? availability.stopBlocked,
       scope,
       attachUnavailable: unavailableTitle("attachments"),

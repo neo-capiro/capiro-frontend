@@ -11,7 +11,10 @@ import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { reserveConversationTurn } from "../../../shared/meri-conversations/history-client";
-import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
+import {
+  conversationIntentJournal,
+  submissionIdentity,
+} from "../../../shared/meri-conversations/query-journal";
 import {
   conversationTurnJournal,
   recoverConversationTurn,
@@ -29,6 +32,7 @@ export type ConversationTurnTarget = {
   runId: string;
   pending: string;
   requestId: string;
+  modelSelection?: ConversationSubmitRequest["modelSelection"];
 };
 
 /** Seed the existing canonical command journal before exact target session issuance. */
@@ -50,18 +54,28 @@ function prepareTarget(
     requireMeriTabStorage(),
   );
   const previous = commands.read();
+  const request = {
+    requestId: retained.requestId,
+    prompt: retained.prompt,
+    ...(retained.modelSelection
+      ? { modelSelection: retained.modelSelection }
+      : {}),
+  };
   if (
     previous.submit &&
     (previous.submit.requestId !== retained.requestId ||
-      previous.submit.prompt !== retained.prompt)
+      previous.submit.prompt !== retained.prompt ||
+      submissionIdentity({
+        ...request,
+        modelSelection: previous.submit.modelSelection,
+      }) !== submissionIdentity(request))
   )
     throw new Error("Target request identity changed");
   if (!previous.submit)
     commands.write({
       ...previous,
       submit: {
-        requestId: retained.requestId,
-        prompt: retained.prompt,
+        ...request,
         state: "unknown",
       },
     });
@@ -70,6 +84,9 @@ function prepareTarget(
     runId: binding.runId,
     pending: retained.prompt,
     requestId: retained.requestId,
+    ...(retained.modelSelection
+      ? { modelSelection: retained.modelSelection }
+      : {}),
   };
 }
 
@@ -82,9 +99,10 @@ async function requestTurn(
     prompt?: string | undefined;
     readOnly: boolean;
     capture?: (request: ConversationSubmitRequest) => void;
+    modelSelection?: ConversationSubmitRequest["modelSelection"];
   },
 ) {
-  const { source, prompt, readOnly, capture } = options;
+  const { source, prompt, readOnly, capture, modelSelection } = options;
   if (readOnly && source) {
     await reserveConversationTurn(
       { conversationId: source.conversationId, sourceRunId: source.runId },
@@ -93,9 +111,20 @@ async function requestTurn(
     return undefined;
   }
   if (source && prompt) {
-    const request = { requestId: crypto.randomUUID(), prompt };
+    const request = Object.freeze({
+      requestId: crypto.randomUUID(),
+      prompt,
+      ...(modelSelection
+        ? { modelSelection: Object.freeze({ ...modelSelection }) }
+        : {}),
+    });
     capture?.(request);
-    journal.start(source, request.prompt, request.requestId);
+    journal.start(
+      source,
+      request.prompt,
+      request.requestId,
+      request.modelSelection,
+    );
   }
   const retained = await recoverConversationTurn(
     journal,
@@ -187,6 +216,7 @@ export function useConversationTurn(
     prompt?: string,
     readOnly = false,
     capture?: (request: ConversationSubmitRequest) => void,
+    modelSelection?: ConversationSubmitRequest["modelSelection"],
   ) =>
     gate.perform(async () => {
       if (!journal?.current()) throw new TabJournalUnavailable();
@@ -199,6 +229,7 @@ export function useConversationTurn(
           prompt,
           readOnly,
           ...(capture ? { capture } : {}),
+          ...(modelSelection ? { modelSelection } : {}),
         });
         if (retained) open(prepareTarget(cache, clientId, retained));
       } catch (cause) {
@@ -226,7 +257,8 @@ export function useConversationTurn(
       source: RunBinding,
       prompt: string,
       capture: (request: ConversationSubmitRequest) => void,
-    ) => perform(source, prompt, false, capture),
+      modelSelection?: ConversationSubmitRequest["modelSelection"],
+    ) => perform(source, prompt, false, capture, modelSelection),
     retry: () => perform(),
     readMapping: (source: RunBinding) => perform(source, undefined, true),
   };

@@ -1,5 +1,6 @@
 "use client";
 import { useId } from "react";
+import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 import {
   PromptInput,
   PromptInputBody,
@@ -30,6 +31,7 @@ export type LiveComposer = Readonly<{
   scope: string;
   /** Why attachments are unavailable. */
   attachUnavailable: string;
+  modelSelection?: ConversationSubmitRequest["modelSelection"];
 }>;
 
 export function MeriComposer({
@@ -39,6 +41,7 @@ export function MeriComposer({
   assetSet = "home",
   running = false,
   live,
+  modelControl,
 }: {
   draft: string;
   onDraft: (value: string) => void;
@@ -47,6 +50,7 @@ export function MeriComposer({
   /** A run is in progress: the submit slot shows Stop instead of Send. */
   running?: boolean;
   live?: LiveComposer;
+  modelControl?: React.ReactNode;
 }) {
   const helpId = useId();
   const canSend =
@@ -96,8 +100,15 @@ export function MeriComposer({
             {...(live ? { maxLength: 8000 } : {})}
           />
         </PromptInputBody>
-        <PromptInputFooter className={styles.composerFooter}>
-          <ComposerTools live={live} assetSet={assetSet} />
+        <PromptInputFooter
+          className={styles.composerFooter}
+          style={{ flexWrap: "wrap" }}
+        >
+          <ComposerTools
+            live={live}
+            assetSet={assetSet}
+            modelControl={modelControl}
+          />
           <ComposerAction
             running={running}
             live={live}
@@ -127,12 +138,17 @@ export function MeriComposer({
 function ComposerTools({
   live,
   assetSet,
+  modelControl,
 }: {
   live: LiveComposer | undefined;
   assetSet: AssetSet;
+  modelControl?: React.ReactNode;
 }) {
   return (
-    <PromptInputTools className={styles.tools}>
+    <PromptInputTools
+      className={styles.tools}
+      style={{ flexWrap: "wrap", minWidth: 0 }}
+    >
       <PromptInputButton
         className={styles.toolButton}
         disabled
@@ -160,6 +176,7 @@ function ComposerTools({
         <DesignIcon name="chevron" assetSet={assetSet} />
         {live ? live.scope : "Anduril"}
       </PromptInputButton>
+      {live ? modelControl : null}
     </PromptInputTools>
   );
 }
