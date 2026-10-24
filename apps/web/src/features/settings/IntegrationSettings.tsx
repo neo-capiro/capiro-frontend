@@ -22,25 +22,31 @@ import { integrationProviders } from "./integrationProviders";
 import styles from "./styles";
 import { useSettingsMutation } from "./useSettingsMutation";
 import { SettingsMutationNotice } from "./SettingsMutationNotice";
+import { OAuthOutcomeNotice } from "./integrations/OAuthOutcome";
+import { canRetrySync, syncOutcomeMessage } from "./integrations/outcomes";
+import {
+  IntegrationHealth,
+  IntegrationPermissions,
+} from "./integrations/IntegrationHealth";
 
 type Provider = z.infer<typeof integrationProviderSchema>;
 type Connection = z.infer<typeof integrationSchema>;
 const providers = integrationProviders;
 
 function syncAge(value: string | null) {
-  if (!value) return "Not synced yet";
+  if (!value) return "No sync attempt recorded";
   const minutes = Math.max(
     0,
     Math.round((Date.now() - Date.parse(value)) / 60000),
   );
   if (!Number.isFinite(minutes)) return "Sync time unavailable";
-  if (minutes < 1) return "Synced just now";
-  if (minutes < 60) return `Synced ${minutes} min ago`;
+  if (minutes < 1) return "Last sync attempt just now";
+  if (minutes < 60) return `Last sync attempt ${minutes} min ago`;
   const hours = Math.round(minutes / 60);
-  if (hours < 24) return `Synced ${hours} hr ago`;
+  if (hours < 24) return `Last sync attempt ${hours} hr ago`;
   const days = Math.round(hours / 24);
-  if (days < 7) return `Synced ${days} days ago`;
-  return `Synced ${new Date(value).toLocaleDateString("en-US", {
+  if (days < 7) return `Last sync attempt ${days} days ago`;
+  return `Last sync attempt ${new Date(value).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
   })}`;
@@ -56,7 +62,10 @@ export function IntegrationSettings() {
   const google = useCapiroQuery("settings.integrations.googleCapabilities", {});
   const [register, setRegister] = useState<Provider>();
   const [disconnect, setDisconnect] = useState<Connection>();
-  const [detail, setDetail] = useState<Connection>();
+  const [detailId, setDetailId] = useState<string>();
+  const detail = connections.data?.find(
+    (connection) => connection.id === detailId,
+  );
   const {
     api: mutationApi,
     action,
@@ -71,7 +80,7 @@ export function IntegrationSettings() {
   ) {
     if (provider === "imap_caldav")
       throw new Error(
-        "OAuth is unavailable for IMAP / CalDAV. Ask your administrator to configure the server connection.",
+        "IMAP / CalDAV ingestion is not supported in this application.",
       );
     const result = await api.request(
       provider === "microsoft_365"
@@ -92,27 +101,25 @@ export function IntegrationSettings() {
       ),
     );
   }
-  async function sync(connection: Connection) {
+  async function sync(connection: Connection, signal: AbortSignal) {
     if (connection.provider === "imap_caldav")
       throw new Error("Manual IMAP / CalDAV sync is unavailable.");
-    const result = await api.request(
-      connection.provider === "microsoft_365"
-        ? "settings.integrations.syncMicrosoft"
-        : "settings.integrations.syncGoogle",
-      { params: { connectionId: connection.id } },
-    );
-    if (result.connectionId !== connection.id)
-      throw new Error(
-        "The sync response did not match this account. Reload integrations to confirm the result.",
+    try {
+      const result = await api.request(
+        connection.provider === "microsoft_365"
+          ? "settings.integrations.syncMicrosoft"
+          : "settings.integrations.syncGoogle",
+        { params: { connectionId: connection.id } },
+        { signal },
       );
-    const stats = [result.calendar, ...Object.values(result.mail ?? {})].filter(
-      (value) => !!value,
-    );
-    if (stats.some((value) => value.failed > 0))
-      throw new Error(
-        "The sync completed with failed records. Check the connection details and retry.",
-      );
-    return result;
+      if (result.connectionId !== connection.id)
+        throw new Error(
+          "The sync response did not match this account. Reload integrations to confirm the result.",
+        );
+      return result;
+    } finally {
+      if (!signal.aborted) connections.reload();
+    }
   }
   async function disconnectAccount(
     connection: Connection,
@@ -135,6 +142,7 @@ export function IntegrationSettings() {
   }
   return (
     <div className={styles.stack} data-design-target="1064:244275">
+      <OAuthOutcomeNotice currentConnections={connections.data} />
       <div className={styles.integrationIntro}>
         <h2 className={styles.integrationHeading}>
           Engagement integrations{" "}
@@ -193,7 +201,7 @@ export function IntegrationSettings() {
                             <SettingsButton
                               small
                               className={styles.integrationPermissions}
-                              onClick={() => setDetail(connection)}
+                              onClick={() => setDetailId(connection.id)}
                             >
                               Permissions
                             </SettingsButton>
@@ -231,6 +239,7 @@ export function IntegrationSettings() {
                           {connection.lastError}
                         </SettingsNotice>
                       )}
+                      <IntegrationHealth connection={connection} />
                       <div
                         className={`${styles.row} ${styles.wrap} ${styles.integrationActions}`}
                       >
@@ -238,24 +247,32 @@ export function IntegrationSettings() {
                           small
                           disabled={
                             locked ||
-                            connection.status !== "connected" ||
-                            provider.id === "imap_caldav"
+                            !canRetrySync(connection) ||
+                            !capability?.data?.configured ||
+                            capability?.data?.actions?.sync.allowed === false
                           }
                           onClick={() =>
                             void action.run(
-                              () => sync(connection),
-                              "Connection sync completed.",
-                              connections.reload,
+                              (signal) => sync(connection, signal),
+                              syncOutcomeMessage,
                             )
                           }
                         >
-                          Sync now
+                          {connection.status === "error"
+                            ? "Retry sync"
+                            : "Sync now"}
                         </SettingsButton>
                         {connection.provider === "microsoft_365" &&
                           connection.status === "connected" && (
                             <SettingsButton
                               small
-                              disabled={locked}
+                              disabled={
+                                locked ||
+                                microsoft.data?.subscriptionsConfigured !==
+                                  true ||
+                                microsoft.data?.actions?.subscriptions
+                                  .allowed === false
+                              }
                               onClick={() =>
                                 void action.run(
                                   (signal) =>
@@ -274,32 +291,42 @@ export function IntegrationSettings() {
                               Realtime
                             </SettingsButton>
                           )}
-                        {connection.status === "connected" && (
+                        {provider.id !== "imap_caldav" && (
                           <SettingsButton
                             danger
                             small
-                            disabled={locked || provider.id === "imap_caldav"}
+                            disabled={
+                              locked ||
+                              capability?.data?.actions?.disconnect.allowed ===
+                                false
+                            }
                             onClick={() => setDisconnect(connection)}
                           >
                             Disconnect
                           </SettingsButton>
                         )}
-                        {connection.status !== "connected" &&
-                          provider.id !== "imap_caldav" && (
-                            <SettingsButton
-                              small
-                              disabled={locked || !capability?.data?.configured}
-                              onClick={() =>
-                                void action.run(
-                                  (signal) =>
-                                    connect(provider.id, connection.id, signal),
-                                  "Opening provider sign-in…",
-                                )
-                              }
-                            >
-                              Connect account
-                            </SettingsButton>
-                          )}
+                        {provider.id !== "imap_caldav" && (
+                          <SettingsButton
+                            small
+                            disabled={
+                              locked ||
+                              !capability?.data?.configured ||
+                              capability.data.actions?.connect.allowed === false
+                            }
+                            onClick={() =>
+                              void action.run(
+                                (signal) =>
+                                  connect(provider.id, connection.id, signal),
+                                "Opening provider sign-in…",
+                              )
+                            }
+                          >
+                            {connection.status === "connected" ||
+                            connection.status === "error"
+                              ? "Reconnect account"
+                              : "Connect account"}
+                          </SettingsButton>
+                        )}
                       </div>
                     </div>
                   ))
@@ -327,36 +354,55 @@ export function IntegrationSettings() {
                     can be connected.
                   </p>
                 )}
-                <div className={`${styles.row} ${styles.wrap}`}>
-                  <SettingsButton
-                    small
-                    onClick={() => setRegister(provider.id)}
-                  >
-                    + Register account
-                  </SettingsButton>
-                  <SettingsButton
-                    primary
-                    small
-                    disabled={locked || !capability?.data?.configured}
-                    onClick={() =>
-                      void action.run(
-                        (signal) => connect(provider.id, undefined, signal),
-                        "Opening provider sign-in…",
-                      )
-                    }
-                  >
-                    {provider.id === "imap_caldav"
-                      ? "Connect OAuth"
-                      : capability?.data?.configured
+                {capability?.data?.actions?.connect.reason ===
+                  "runtime_held" && (
+                  <SettingsNotice title="Provider actions are unavailable in this environment">
+                    OAuth configuration is present, but the server currently
+                    holds external integration actions.
+                  </SettingsNotice>
+                )}
+                {provider.id === "microsoft_365" &&
+                  capability?.data?.subscriptionsConfigured === false && (
+                    <p className={styles.description}>
+                      Realtime notifications are not configured. Periodic sync
+                      remains separate.
+                    </p>
+                  )}
+                {provider.id !== "imap_caldav" && (
+                  <div className={`${styles.row} ${styles.wrap}`}>
+                    <SettingsButton
+                      small
+                      disabled={locked}
+                      onClick={() => setRegister(provider.id)}
+                    >
+                      + Register account
+                    </SettingsButton>
+                    <SettingsButton
+                      primary
+                      small
+                      disabled={
+                        locked ||
+                        !capability?.data?.configured ||
+                        capability.data.actions?.connect.allowed === false
+                      }
+                      onClick={() =>
+                        void action.run(
+                          (signal) => connect(provider.id, undefined, signal),
+                          "Opening provider sign-in…",
+                        )
+                      }
+                    >
+                      {capability?.data?.configured
                         ? `Connect ${provider.title}`
                         : "Administrator setup required"}
-                  </SettingsButton>
-                </div>
+                    </SettingsButton>
+                  </div>
+                )}
                 {provider.id === "imap_caldav" && (
                   <p className={styles.description}>
-                    Server configuration is required for IMAP / CalDAV
-                    ingestion. OAuth, manual sync and disconnection are
-                    unavailable here.
+                    IMAP / CalDAV ingestion is not supported. Registration,
+                    connection and sync are unavailable. Existing records do not
+                    establish a working provider connection.
                   </p>
                 )}
               </SettingsCard>
@@ -376,6 +422,7 @@ export function IntegrationSettings() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <RegisterAccount
+        key={register ?? "closed"}
         provider={register}
         onClose={() => setRegister(undefined)}
         refresh={connections.reload}
@@ -387,7 +434,7 @@ export function IntegrationSettings() {
           if (!action.busy) setDisconnect(undefined);
         }}
         title={`Disconnect ${disconnect?.provider === "microsoft_365" ? "Microsoft 365" : "Google Workspace"}?`}
-        description="Calendar and mail syncing will stop. Existing records are kept."
+        description="Calendar and mail syncing will stop. Stored mail records are retained, but become unavailable in mail views when this connection is removed. Reconnecting does not restore access to that earlier history."
         footer={
           <>
             <SettingsButton
@@ -403,7 +450,13 @@ export function IntegrationSettings() {
                 if (disconnect && disconnect.provider !== "imap_caldav")
                   void action.run(
                     (signal) => disconnectAccount(disconnect, signal),
-                    "Account was disconnected.",
+                    (result) =>
+                      disconnect.provider === "microsoft_365"
+                        ? "Account was disconnected in Capiro. Microsoft app consent remains."
+                        : "providerRevocation" in result &&
+                            result.providerRevocation === "confirmed"
+                          ? "Account was disconnected in Capiro and Google token revocation was confirmed."
+                          : "Account was disconnected in Capiro. Google token revocation was not confirmed; review Capiro access in your Google account.",
                     () => {
                       setDisconnect(undefined);
                       connections.reload();
@@ -417,6 +470,11 @@ export function IntegrationSettings() {
         }
       >
         <p>{disconnect?.accountEmail}</p>
+        <p>
+          {disconnect?.provider === "microsoft_365"
+            ? "This removes the connection in Capiro. Microsoft app consent remains; remove it in your Microsoft account or ask your administrator to revoke it."
+            : "Google token revocation is best effort. If it cannot be confirmed, remove Capiro access from your Google account’s third-party connections."}
+        </p>
         <SettingsMutationNotice
           pending={pending}
           busy={action.busy}
@@ -429,17 +487,18 @@ export function IntegrationSettings() {
         )}
       </SettingsDialog>
       <SettingsDialog
-        open={!!detail}
-        onClose={() => setDetail(undefined)}
-        title="Account permissions"
+        open={!!detailId}
+        onClose={() => setDetailId(undefined)}
+        title="Account scope record"
       >
         <p>{detail?.accountEmail}</p>
-        <ul>
-          {detail?.scopes.map((scope) => (
-            <li key={scope}>{scope}</li>
-          ))}
-        </ul>
-        {!detail?.scopes.length && <p>No granted scopes were returned.</p>}
+        {detail && <IntegrationPermissions connection={detail} />}
+        {!detail && (
+          <p>
+            Current account details are unavailable. Reload integrations to
+            verify this account.
+          </p>
+        )}
       </SettingsDialog>
     </div>
   );

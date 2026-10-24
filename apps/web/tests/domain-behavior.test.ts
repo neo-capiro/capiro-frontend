@@ -15,11 +15,7 @@ import {
   reportingCycle,
   type Person,
 } from "../src/features/portfolio/relationships/contracts";
-import {
-  plainMailHtml,
-  threadsForRecipient,
-  type MailThread,
-} from "../src/features/portfolio/relationships/email";
+import { plainMailHtml } from "../src/features/portfolio/relationships/email";
 
 const id = "10000000-0000-4000-8000-000000000001";
 const fields = {
@@ -202,22 +198,7 @@ describe("Relationship boundaries", () => {
       reportingCycle([{ ...people[0]!, reportsToPersonId: "a" }], "x", "a"),
     ).toBe(true);
   });
-  it("matches complete mail addresses and escapes user text before provider HTML", () => {
-    const thread = {
-      id,
-      clientId: id,
-      subject: "Test",
-      snippet: null,
-      connectionEmail: null,
-      participants: [{ email: "PERSON@example.test" }],
-      messages: [],
-    } satisfies MailThread;
-    expect(threadsForRecipient([thread], " person@example.test ")).toEqual([
-      thread,
-    ]);
-    expect(threadsForRecipient([thread], "otherperson@example.test")).toEqual(
-      [],
-    );
+  it("escapes user text before provider HTML", () => {
     expect(plainMailHtml('<script>\n&"')).toBe(
       "<p>&lt;script&gt;</p><p>&amp;&quot;</p>",
     );

@@ -11,6 +11,7 @@ import {
   SettingsNotice,
 } from "./components";
 import { integrationProviders } from "./integrationProviders";
+import { assertRegistrationReceipt } from "./integrations/registration";
 import styles from "./styles";
 import { useSettingsAction } from "./useSettingsAction";
 type Provider = z.infer<typeof integrationProviderSchema>;
@@ -31,12 +32,13 @@ export function RegisterAccount({
   const action = useSettingsAction(api);
   return (
     <SettingsDialog
-      open={!!provider}
+      open={!!provider && provider !== "imap_caldav"}
+      busy={action.busy}
       onClose={() => {
         if (!action.busy) onClose();
       }}
       title="Register account"
-      description="Register the provider account before connecting it."
+      description="Create an account record. Registration does not grant permissions or start sync; provider sign-in is still required."
       footer={
         <>
           <SettingsButton disabled={action.busy} onClick={onClose}>
@@ -58,16 +60,22 @@ export function RegisterAccount({
         className={styles.stack}
         onSubmit={(event) => {
           event.preventDefault();
-          if (provider)
+          if (provider && provider !== "imap_caldav")
             void action.run(
-              () =>
-                api.request("settings.integrations.create", {
-                  body: {
-                    provider,
-                    accountEmail: email,
-                    ...(displayName ? { displayName } : {}),
-                  },
-                }),
+              async (signal) => {
+                const submitted = {
+                  provider,
+                  accountEmail: email,
+                  ...(displayName ? { displayName } : {}),
+                };
+                const result = await api.request(
+                  "settings.integrations.create",
+                  { body: submitted },
+                  { signal },
+                );
+                assertRegistrationReceipt(submitted, result);
+                return result;
+              },
               "Account was registered.",
               () => {
                 refresh();

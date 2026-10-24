@@ -13,83 +13,14 @@ import {
   settleMailAttempt,
   useMailAttempt,
 } from "./email/send-attempt";
-const recipientSchema = z.object({
-  email: z.string(),
-  name: z.string().nullable().optional(),
-});
-export const messageSchema = z.object({
-  id: z.string().uuid(),
-  subject: z.string().nullable(),
-  fromEmail: z.string().nullable(),
-  fromName: z.string().nullable(),
-  toRecipients: z.array(recipientSchema),
-  ccRecipients: z.array(recipientSchema),
-  bodyText: z.string().nullable(),
-  sentAt: z.string().nullable(),
-  receivedAt: z.string().nullable(),
-  createdAt: z.string(),
-});
-export const threadSchema = z.object({
-  id: z.string().uuid(),
-  clientId: z.string().nullable(),
-  subject: z.string(),
-  snippet: z.string().nullable(),
-  connectionEmail: z.string().nullable(),
-  participants: z.array(recipientSchema),
-  messages: z.array(messageSchema),
-});
-export type MailThread = z.infer<typeof threadSchema>;
-export function threadsForRecipient(threads: MailThread[], email: string) {
-  const target = email.trim().toLowerCase();
-  return threads.filter(
-    (thread) =>
-      thread.participants.some((p) => p.email.toLowerCase() === target) ||
-      thread.messages.some(
-        (message) =>
-          message.fromEmail?.toLowerCase() === target ||
-          [...message.toRecipients, ...message.ccRecipients].some(
-            (p) => p.email.toLowerCase() === target,
-          ),
-      ),
-  );
-}
+export {
+  messageSchema,
+  threadSchema,
+  useContactThreads,
+  useMailThread,
+  type MailThread,
+} from "./email/read";
 export { plainMailHtml } from "./email/mail-body";
-export function useContactThreads(clientId: string, email: string | null) {
-  const api = useApi();
-  return useQuery({
-    queryKey: ["contact-mail", clientId, email],
-    enabled: Boolean(email),
-    queryFn: async ({ signal }) =>
-      threadsForRecipient(
-        await api.request(
-          "core",
-          `engagement/mail-threads?clientId=${clientId}&recipientEmails=${encodeURIComponent(email ?? "")}`,
-          z.array(threadSchema),
-          { signal },
-        ),
-        email ?? "",
-      ),
-  });
-}
-export function useMailThread(id: string | null) {
-  const api = useApi();
-  return useQuery({
-    queryKey: ["mail-thread", id],
-    enabled: Boolean(id),
-    queryFn: ({ signal }) =>
-      api.request(
-        "core",
-        `engagement/mail-threads/${id}`,
-        threadSchema.refine(
-          (thread) => thread.id === id,
-          "Requested mail thread mismatch",
-        ),
-        {
-          signal,
-        },
-      ),
-  });
-}
 export function useSignature() {
   const api = useApi();
   return useQuery({

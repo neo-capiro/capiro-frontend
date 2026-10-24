@@ -547,6 +547,9 @@ export const settingsOperations = {
     response: z.object({
       disconnected: z.literal(true),
       connectionId: z.string(),
+      providerRevocation: z
+        .enum(["confirmed", "unconfirmed", "not_attempted"])
+        .optional(),
     }),
     source: googleSource,
   }),

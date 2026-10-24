@@ -247,6 +247,18 @@ export const integrationProviderSchema = z.enum([
   "google_workspace",
   "imap_caldav",
 ]);
+export const integrationResourceHealthSchema = z.object({
+  attemptedAt: z.string(),
+  lastSuccessAt: nullableText,
+  lastCompleteAt: nullableText,
+  outcome: z.enum(["complete", "partial", "failed"]),
+  hasMore: z.boolean(),
+  failed: z.number().int().nonnegative(),
+});
+export const integrationHealthSchema = z.object({
+  calendar: integrationResourceHealthSchema.optional(),
+  mail: integrationResourceHealthSchema.optional(),
+});
 export const integrationSchema = z.object({
   id: z.string(),
   provider: integrationProviderSchema,
@@ -256,11 +268,63 @@ export const integrationSchema = z.object({
   scopes: z.array(z.string()),
   lastSyncAt: nullableText,
   lastError: nullableText,
+  nextSyncAt: nullableText.optional(),
+  permissions: z
+    .object({
+      requestedScopes: z.array(z.string()),
+      grantedScopes: z.array(z.string()).nullable(),
+      lastVerifiedAt: nullableText,
+    })
+    .optional(),
+  health: integrationHealthSchema.optional(),
+  mailCoverage: z
+    .object({
+      sourceStatus: z.enum(["healthy", "degraded", "unavailable"]),
+      reason: nullableText,
+      lastMailSyncAt: nullableText,
+      lastConnectionSyncAt: nullableText,
+      backfillComplete: z.boolean(),
+      hasMore: z.boolean(),
+      captureRepair: z.enum([
+        "required",
+        "in_progress",
+        "complete",
+        "not_applicable",
+      ]),
+    })
+    .optional(),
+  subscriptions: z
+    .object({
+      configured: z.boolean(),
+      updatedAt: nullableText,
+      lastNotificationAt: nullableText,
+      lastLifecycleEvent: nullableText,
+      resources: z.array(
+        z.object({
+          resource: z.string(),
+          expiresAt: nullableText,
+          lastRenewedAt: nullableText,
+          needsReauthorization: z.boolean(),
+        }),
+      ),
+    })
+    .optional(),
 });
 export const integrationCapabilitiesSchema = z.object({
   configured: z.boolean(),
   redirectUri: z.string(),
   scopes: z.array(z.string()),
+  subscriptionsConfigured: z.boolean().optional(),
+  actions: z
+    .record(
+      z.enum(["connect", "sync", "disconnect", "subscriptions"]),
+      z.object({
+        configured: z.boolean(),
+        allowed: z.boolean(),
+        reason: nullableText,
+      }),
+    )
+    .optional(),
 });
 export const oauthStartBodySchema = z
   .object({
@@ -279,6 +343,7 @@ export const integrationSyncStatsSchema = z.object({
   skipped: z.number(),
   removed: z.number(),
   failed: z.number(),
+  held: z.number().int().nonnegative().optional(),
   pages: z.number(),
   hasMore: z.boolean(),
 });
@@ -286,6 +351,7 @@ export const integrationSyncResponseSchema = z.object({
   connectionId: z.string(),
   calendar: integrationSyncStatsSchema.optional(),
   mail: z.record(z.string(), integrationSyncStatsSchema).optional(),
+  health: integrationHealthSchema.optional(),
 });
 export const integrationSyncQuerySchema = z
   .object({

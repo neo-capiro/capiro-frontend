@@ -1,3 +1,5 @@
+import { mailListFixture, mailThreadFixture } from "../mail-read-fixture";
+import { installMailReadIdentity } from "./mail-read-fixtures";
 import { expect, test } from "@playwright/test";
 import {
   sendingMailbox,
@@ -536,6 +538,7 @@ test("existing client-filtered email history opens the permitted full thread fro
   page,
 }) => {
   const unexpected = await installFixtures(page);
+  await installMailReadIdentity(page);
   const threadId = "a0000000-0000-4000-8000-000000000001";
   const thread = {
     id: threadId,
@@ -563,10 +566,10 @@ test("existing client-filtered email history opens the permitted full thread fro
     const url = new URL(route.request().url());
     expect(url.searchParams.get("clientId")).toBe(clientId);
     expect(url.searchParams.get("recipientEmails")).toBe(person.email);
-    return json(route, [thread]);
+    return json(route, mailListFixture([thread]));
   });
-  await page.route(`**/engagement/mail-threads/${threadId}`, (route) =>
-    json(route, thread),
+  await page.route(`**/engagement/mail-threads/${threadId}*`, (route) =>
+    json(route, mailThreadFixture(thread, { associationClientId: clientId })),
   );
   await page.goto(`${path}?person=${personId}`);
   const drawer = page.getByRole("dialog", { name: person.name, exact: true });
