@@ -35,6 +35,7 @@ export type ObservedExecution = Readonly<{
 
 export type ExecutionView =
   | ObservedExecution
+  | Readonly<{ status: "not-executed"; checkedAt: string }>
   | Readonly<{ status: "approval-pending" }>
   | Readonly<{ status: "indeterminate" }>;
 
@@ -57,6 +58,7 @@ export type TaskRecoveryView<P, E> =
   | { phase: "empty" }
   | { phase: "prepare"; fields: readonly { label: string; value: string }[] }
   | { phase: "proposal" | "execute"; proposal: P }
+  | { phase: "not-executed"; proposal: P; checkedAt: string }
   | { phase: "observed"; execution: E };
 
 /**

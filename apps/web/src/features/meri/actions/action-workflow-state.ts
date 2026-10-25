@@ -38,6 +38,7 @@ export type WorkflowState = Readonly<{
   checkingRecovery: boolean;
   savedRequest: boolean;
   canDiscard: boolean;
+  notExecutedAt: string | null;
   recoveryFields: readonly { label: string; value: string }[];
 }>;
 
@@ -56,6 +57,7 @@ const initialState = (): WorkflowState =>
     checkingRecovery: false,
     savedRequest: false,
     canDiscard: false,
+    notExecutedAt: null,
     recoveryFields: [],
   });
 
@@ -96,14 +98,28 @@ export class ActionWorkflowController {
     this.#succeed({
       checkingRecovery: false,
       problem: null,
-      savedRequest: value.phase === "prepare" || value.phase === "execute",
-      canDiscard: value.phase === "prepare" || value.phase === "proposal",
+      savedRequest:
+        value.phase === "prepare" ||
+        value.phase === "execute" ||
+        value.phase === "not-executed",
+      canDiscard:
+        value.phase === "prepare" ||
+        value.phase === "proposal" ||
+        value.phase === "not-executed",
+      notExecutedAt: value.phase === "not-executed" ? value.checkedAt : null,
       recoveryFields: value.phase === "prepare" ? value.fields : [],
       ...(value.phase === "empty" || value.phase === "prepare"
         ? { stage: "idle", proposal: null, execution: null }
         : {}),
-      ...(value.phase === "proposal" || value.phase === "execute"
-        ? { stage: "pending", proposal: value.proposal, draft: null }
+      ...(value.phase === "proposal" ||
+      value.phase === "execute" ||
+      value.phase === "not-executed"
+        ? {
+            stage: "pending",
+            proposal: value.proposal,
+            draft: null,
+            execution: null,
+          }
         : {}),
       ...(value.phase === "observed"
         ? { stage: "observed", execution: value.execution }
@@ -328,6 +344,12 @@ export class ActionWorkflowController {
       (signal) => this.#port.execute(proposal.handle, signal),
       (result) => {
         if (result.status === "indeterminate") this.#fail("unknown");
+        else if (result.status === "not-executed")
+          this.#recover({
+            phase: "not-executed",
+            proposal,
+            checkedAt: result.checkedAt,
+          });
         else if (result.status === "approval-pending")
           this.#succeed({
             stage: "pending",

@@ -4,6 +4,7 @@ import { sameJson } from "./correlation";
 import {
   acknowledgeRecovery,
   discardUnexecutedTaskRecovery,
+  retireUnexecutedTaskRecovery,
   readRecovery,
   readRecoveryDisposition,
   reserveRecovery,
@@ -32,6 +33,7 @@ const schema = z.strictObject({
   prepared: z.unknown().optional(),
   preparedContext: actionContextSchema.optional(),
   executing: z.boolean(),
+  notExecuted: z.unknown().optional(),
 });
 export type SavedTaskCommand = z.infer<typeof schema>;
 const contract = {
@@ -48,7 +50,11 @@ const contract = {
             previous.preparedContext ?? previous.context,
             next.preparedContext ?? next.context,
           ))) ||
-      (previous.executing && !next.executing)
+      (previous.executing && !next.executing) ||
+      (previous.notExecuted !== undefined &&
+        !sameJson(previous.notExecuted, next.notExecuted)) ||
+      (next.notExecuted !== undefined &&
+        (!next.executing || next.prepared === undefined))
     )
       throw new Error("The original saved task command cannot change.");
   },
@@ -120,10 +126,24 @@ export function standaloneTaskRecovery(
         contract,
         guard,
       ),
+    retireNotExecuted: (value: SavedTaskCommand) =>
+      retireUnexecutedTaskRecovery(
+        scope,
+        check(value).requestId,
+        value.notExecuted,
+        contract,
+        guard,
+      ),
     async discarded(requestId: string) {
+      const disposition = await readRecoveryDisposition(
+        scope,
+        requestId,
+        guard,
+      );
       return (
-        (await readRecoveryDisposition(scope, requestId, guard))?.state ===
-        "discarded"
+        disposition?.state === "discarded" ||
+        (disposition?.state === "refused" &&
+          disposition.code === "TASK_EXECUTION_NOT_EXECUTED")
       );
     },
     async acknowledged(requestId: string) {

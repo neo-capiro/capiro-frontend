@@ -191,8 +191,27 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
         throw new Error("Future saved proposal");
       prepared = value;
     }
+    let checkedAt: string | null = null;
+    if (saved.notExecuted !== undefined) {
+      if (!prepared || !saved.executing)
+        throw new Error("Missing original proposal");
+      const { tenantId, actorId, conversationId, runId } =
+        prepared.proposal.command.binding;
+      const proof = await receiveTaskCommandResponse(
+        "execute",
+        200,
+        JSON.stringify(saved.notExecuted),
+        {
+          binding: { tenantId, actorId, conversationId, runId },
+          proposal: prepared.proposal,
+        },
+      );
+      if ("error" in proof || proof.status !== "not_executed")
+        throw new Error("Invalid terminal proof");
+      checkedAt = proof.checkedAt;
+    }
     this.current(signal);
-    return { saved, request, prepared };
+    return { saved, request, prepared, checkedAt };
   }
   private proposalView(
     proposal: TaskUpdateApprovalProposal,
@@ -225,6 +244,15 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
         return { ok: true, value: { phase: "empty" } };
       }
       this.knownRequestId = retained.saved.requestId;
+      if (retained.checkedAt && retained.prepared)
+        return {
+          ok: true,
+          value: {
+            phase: "not-executed",
+            proposal: this.proposalView(retained.prepared.proposal),
+            checkedAt: retained.checkedAt,
+          },
+        };
       if (retained.prepared) {
         if (!retained.saved.executing)
           this.options.journal.write({ status: "idle" });
@@ -273,13 +301,15 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
             ? { ok: true, value: { phase: "proposal", proposal: reply.value } }
             : reply;
         }
-        if (!retained.saved.executing) return this.restore(current);
+        if (!retained.saved.executing || retained.checkedAt)
+          return this.restore(current);
         const reply = await this.executeSaved(
           retained.saved,
           retained.prepared.proposal,
           current,
         );
         if (!reply.ok) return reply;
+        if (reply.value.status === "not-executed") return this.restore(current);
         return reply.value.status === "observed"
           ? { ok: true, value: { phase: "observed", execution: reply.value } }
           : {
@@ -318,7 +348,9 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
         if (!retained) return refused("unknown");
         if (retained.saved.requestId !== this.knownRequestId)
           return this.restore(current);
-        await this.recovery(current).discard(retained.saved);
+        if (retained.checkedAt)
+          await this.recovery(current).retireNotExecuted(retained.saved);
+        else await this.recovery(current).discard(retained.saved);
         this.knownRequestId = null;
         this.proposals = new WeakMap();
         return { ok: true, value: { phase: "empty" } };
@@ -398,6 +430,11 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
         retained.saved.requestId !== this.knownRequestId
       )
         return refused("unknown");
+      if (retained.checkedAt)
+        return {
+          ok: true,
+          value: { status: "not-executed", checkedAt: retained.checkedAt },
+        };
       if (
         !retained.saved.executing &&
         (Date.parse(proposal.createdAt) > this.now() ||
@@ -431,6 +468,19 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
       )
         return { ok: true, value: { status: "approval-pending" } };
       return this.error(status, value);
+    }
+    if (value.status === "not_executed") {
+      if (!saved)
+        throw new Error("Acknowledged execution cannot become unexecuted");
+      await this.recovery(requestSignal).update({
+        ...saved,
+        executing: true,
+        notExecuted: value,
+      });
+      return {
+        ok: true,
+        value: { status: "not-executed", checkedAt: value.checkedAt },
+      };
     }
     if (value.status !== "observed") return refused("unknown");
     if (saved) await this.recovery(requestSignal).acknowledge(saved);

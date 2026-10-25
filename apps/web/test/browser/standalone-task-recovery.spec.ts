@@ -28,7 +28,12 @@ const taskWire = (name: string) =>
     ),
   );
 type Kind = "create" | "update";
-async function setup(page: Page, kind: Kind, refuseOldDraft = false) {
+async function setup(
+  page: Page,
+  kind: Kind,
+  refuseOldDraft = false,
+  terminal = false,
+) {
   const ctx = kind === "create" ? actionContext : taskWire("context");
   const now =
     typeof ctx.syntheticNow === "string"
@@ -142,6 +147,24 @@ async function setup(page: Page, kind: Kind, refuseOldDraft = false) {
         return route.abort("failed");
       }
       if (operation === "execute") {
+        if (terminal) {
+          const proposal = (
+            wire("prepare").response as
+              | ActionPrepareResponse
+              | TaskCommandPrepareResponse
+          ).proposal;
+          return route.fulfill({
+            json: {
+              status: "not_executed",
+              proposalId: proposal.proposalId,
+              commandSha256: proposal.commandSha256,
+              idempotencyKey: proposal.command.idempotencyKey,
+              binding: proposal.command.binding,
+              reason: "expired",
+              checkedAt: proposal.expiresAt,
+            },
+          });
+        }
         const original = wire(
           kind === "create" ? "execute-observed" : "observed",
         ).response as ActionExecuteResponse | TaskCommandExecuteResponse;
@@ -206,93 +229,146 @@ async function setup(page: Page, kind: Kind, refuseOldDraft = false) {
 }
 
 for (const kind of ["create", "update"] as const)
-  test(`${kind} task reload keeps exact preparation and approved execution with no automatic dispatch`, async ({
-    page,
-  }) => {
-    const f = await setup(page, kind);
-    await f.connect();
-    if (kind === "create") {
+  for (const terminal of [false, true])
+    test(`${kind} task reload ${terminal ? "retires terminal expired non-execution only explicitly" : "keeps exact preparation and approved execution with no automatic dispatch"}`, async ({
+      page,
+    }) => {
+      const f = await setup(page, kind, false, terminal);
+      await f.connect();
+      if (kind === "create") {
+        await page
+          .getByRole("button", { name: "Find recommendations", exact: true })
+          .click();
+        await page
+          .getByRole("button", { name: /^Select recommendation/ })
+          .click();
+        await page
+          .getByLabel("Task title", { exact: true })
+          .fill(actionContext.task.title);
+        await page
+          .getByRole("button", { name: "Review draft", exact: true })
+          .click();
+      } else {
+        await page
+          .getByLabel("Task ID", { exact: true })
+          .fill("00000000-0000-4000-8000-000000000021");
+        await page
+          .getByLabel("New task title", { exact: true })
+          .fill("Updated");
+        await page
+          .getByRole("combobox", { name: /^New task status/ })
+          .selectOption("todo");
+      }
       await page
-        .getByRole("button", { name: "Find recommendations", exact: true })
+        .getByRole("button", { name: "Prepare approval proposal", exact: true })
         .click();
+      await expect(page.getByRole("alert")).toContainText("Outcome uncertain");
+      const prepare = f.calls.find((c) => c.operation === "prepare")!.body;
+      expect(prepare.requestId).toMatch(/^[0-9a-f-]{36}$/);
+      await f.advance(f.now + 6_000);
+      await page.reload();
+      await f.connect();
+      await expect(
+        page.getByRole("region", { name: "Saved task recovery" }),
+      ).toContainText(kind === "create" ? actionContext.task.title : "Updated");
+      expect(f.calls.filter((c) => c.operation === "prepare")).toHaveLength(1);
+      expect(
+        f.calls.filter((c) => c.operation === "session").at(-1)!.body,
+      ).toEqual({
+        clientId: f.ctx.clientId ?? f.ctx.selectedClientId,
+        conversationId: f.ctx.conversationId,
+      });
       await page
-        .getByRole("button", { name: /^Select recommendation/ })
+        .getByRole("button", { name: "Retry exact saved request" })
         .click();
+      await expect(
+        page.getByRole("button", { name: "Approve and execute", exact: true }),
+      ).toBeDisabled();
+      expect(
+        f.calls.filter((c) => c.operation === "prepare").map((c) => c.body),
+      ).toEqual([prepare, prepare]);
+      expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(0);
+      await page.getByRole("checkbox", { name: /I approve/ }).check();
+      expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(0);
       await page
-        .getByLabel("Task title", { exact: true })
-        .fill(actionContext.task.title);
-      await page
-        .getByRole("button", { name: "Review draft", exact: true })
+        .getByRole("button", { name: "Approve and execute", exact: true })
         .click();
-    } else {
+      await expect(page.getByRole("alert")).toContainText("Outcome uncertain");
+      const execute = f.calls.find((c) => c.operation === "execute")!.body;
+      await f.advance(f.now + 50_000);
+      await page.reload();
+      await f.connect();
+      await expect(
+        page.getByRole("region", { name: "Saved task recovery" }),
+      ).toBeVisible();
+      expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(1);
       await page
-        .getByLabel("Task ID", { exact: true })
-        .fill("00000000-0000-4000-8000-000000000021");
-      await page.getByLabel("New task title", { exact: true }).fill("Updated");
-      await page
-        .getByRole("combobox", { name: /^New task status/ })
-        .selectOption("todo");
-    }
-    await page
-      .getByRole("button", { name: "Prepare approval proposal", exact: true })
-      .click();
-    await expect(page.getByRole("alert")).toContainText("Outcome uncertain");
-    const prepare = f.calls.find((c) => c.operation === "prepare")!.body;
-    expect(prepare.requestId).toMatch(/^[0-9a-f-]{36}$/);
-    await f.advance(f.now + 6_000);
-    await page.reload();
-    await f.connect();
-    await expect(
-      page.getByRole("region", { name: "Saved task recovery" }),
-    ).toContainText(kind === "create" ? actionContext.task.title : "Updated");
-    expect(f.calls.filter((c) => c.operation === "prepare")).toHaveLength(1);
-    expect(
-      f.calls.filter((c) => c.operation === "session").at(-1)!.body,
-    ).toEqual({
-      clientId: f.ctx.clientId ?? f.ctx.selectedClientId,
-      conversationId: f.ctx.conversationId,
+        .getByRole("button", { name: "Retry exact saved request" })
+        .click();
+      if (terminal) {
+        const recovery = page.getByRole("region", {
+          name: "Saved task recovery",
+        });
+        await expect(recovery).toContainText(
+          "The task was not executed before its approval expired",
+        );
+        await expect(
+          page.getByRole("button", {
+            name: "Approve and execute",
+            exact: true,
+          }),
+        ).toBeDisabled();
+        expect(
+          f.calls.filter((c) => c.operation === "execute").map((c) => c.body),
+        ).toEqual([execute, execute]);
+        await f.advance(f.now + 56_000);
+        await page.reload();
+        await f.connect();
+        await expect(recovery).toContainText(
+          "The task was not executed before its approval expired",
+        );
+        await expect(
+          page.getByRole("button", { name: "Retry exact saved request" }),
+        ).toBeDisabled();
+        expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(
+          2,
+        );
+        const count = f.calls.length;
+        await page
+          .getByRole("button", {
+            name: "Discard unexecuted preparation and review again",
+          })
+          .click();
+        await expect(recovery).toBeHidden();
+        expect(f.calls).toHaveLength(count);
+        if (kind === "create")
+          await expect(
+            page.getByRole("button", {
+              name: "Find recommendations",
+              exact: true,
+            }),
+          ).toBeEnabled();
+        else
+          await expect(
+            page.getByLabel("New task title", { exact: true }),
+          ).toBeEnabled();
+        expect(f.errors).toEqual([]);
+        return;
+      }
+      await expect(
+        page.getByRole("heading", {
+          name:
+            kind === "create"
+              ? "Task creation confirmed"
+              : "Task update confirmed",
+          exact: true,
+        }),
+      ).toBeVisible();
+      expect(
+        f.calls.filter((c) => c.operation === "execute").map((c) => c.body),
+      ).toEqual([execute, execute]);
+      expect(f.errors).toEqual([]);
     });
-    await page
-      .getByRole("button", { name: "Retry exact saved request" })
-      .click();
-    await expect(
-      page.getByRole("button", { name: "Approve and execute", exact: true }),
-    ).toBeDisabled();
-    expect(
-      f.calls.filter((c) => c.operation === "prepare").map((c) => c.body),
-    ).toEqual([prepare, prepare]);
-    expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(0);
-    await page.getByRole("checkbox", { name: /I approve/ }).check();
-    expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(0);
-    await page
-      .getByRole("button", { name: "Approve and execute", exact: true })
-      .click();
-    await expect(page.getByRole("alert")).toContainText("Outcome uncertain");
-    const execute = f.calls.find((c) => c.operation === "execute")!.body;
-    await f.advance(f.now + 50_000);
-    await page.reload();
-    await f.connect();
-    await expect(
-      page.getByRole("region", { name: "Saved task recovery" }),
-    ).toBeVisible();
-    expect(f.calls.filter((c) => c.operation === "execute")).toHaveLength(1);
-    await page
-      .getByRole("button", { name: "Retry exact saved request" })
-      .click();
-    await expect(
-      page.getByRole("heading", {
-        name:
-          kind === "create"
-            ? "Task creation confirmed"
-            : "Task update confirmed",
-        exact: true,
-      }),
-    ).toBeVisible();
-    expect(
-      f.calls.filter((c) => c.operation === "execute").map((c) => c.body),
-    ).toEqual([execute, execute]);
-    expect(f.errors).toEqual([]);
-  });
 
 test("task update preserves unsent draft through current identity revalidation and clears it on actor replacement", async ({
   page,

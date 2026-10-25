@@ -26,6 +26,180 @@ import type { ActionPrepareResponse } from "@capiro/meri-contracts/action-applic
 import type { TaskCommandPrepareResponse } from "@capiro/meri-contracts/task-command-application";
 
 const signal = () => new AbortController().signal;
+function notExecuted(
+  proposal:
+    | ActionPrepareResponse["proposal"]
+    | TaskCommandPrepareResponse["proposal"],
+) {
+  return {
+    status: "not_executed",
+    proposalId: proposal.proposalId,
+    commandSha256: proposal.commandSha256,
+    idempotencyKey: proposal.command.idempotencyKey,
+    binding: proposal.command.binding,
+    reason: "expired",
+    checkedAt: proposal.expiresAt,
+  };
+}
+
+it("retains a verified create non-execution proof across reload until explicit retirement, then permits fresh review", async () => {
+  const first = harness(),
+    { proposal } = await prepared(first);
+  first.queue.push(async () => {
+    throw new Error("request lost before dispatch");
+  });
+  await first.port.execute(proposal.handle, signal());
+  const next = harness(undefined, { runId: crypto.randomUUID() });
+  next.setNow(clock + 50_000);
+  const controller = new ActionWorkflowController(next.port);
+  controller.attach();
+  await vi.waitFor(() =>
+    expect(controller.getSnapshot().savedRequest).toBe(true),
+  );
+  const terminal = notExecuted(
+    (fixture("prepare").response as ActionPrepareResponse).proposal,
+  );
+  next.queue.push(async () => Response.json(terminal));
+  await controller.retrySaved();
+  expect(controller.getSnapshot()).toMatchObject({
+    savedRequest: true,
+    canDiscard: true,
+    notExecutedAt: terminal.checkedAt,
+  });
+  const storage = standaloneTaskRecovery(
+    "create",
+    next.session.context,
+    () => undefined,
+  );
+  const retained = await storage.load();
+  expect(retained).toMatchObject({ executing: true, notExecuted: terminal });
+  controller.dispose();
+  const reload = harness();
+  const restored = new ActionWorkflowController(reload.port);
+  restored.attach();
+  await vi.waitFor(() =>
+    expect(restored.getSnapshot().notExecutedAt).toBe(terminal.checkedAt),
+  );
+  await restored.retrySaved();
+  expect(reload.requests).toHaveLength(0);
+  await restored.discardSaved();
+  expect(await storage.load()).toBeNull();
+  expect(await storage.acknowledged(retained!.requestId)).toBe(false);
+  expect(accepted(await next.port.restore(signal()))).toEqual({
+    phase: "empty",
+  });
+  expect(restored.getSnapshot()).toMatchObject({
+    savedRequest: false,
+    proposal: null,
+  });
+  reload.queue.push("query");
+  await restored.query();
+  expect(reload.requests).toHaveLength(1);
+  expect(restored.getSnapshot().stage).toBe("recommendations");
+});
+
+it("retains an update non-execution proof and requires explicit retirement before another preparation", async () => {
+  const wire = taskWire("prepare").response as TaskCommandPrepareResponse;
+  let step = 0;
+  const fetcher = vi.fn(async () => {
+    if (step++ === 0) return taskResponse("prepare");
+    if (step === 2) throw new Error("lost request");
+    return Response.json(notExecuted(wire.proposal));
+  });
+  const first = taskWorkflow(fetcher);
+  const proposal = accepted(await first.port.prepare(taskInput, signal()));
+  await first.port.execute(proposal.handle, signal());
+  const next = taskWorkflow(fetcher, undefined, () => taskNow + 50_000);
+  await next.port.restore(signal());
+  expect(accepted(await next.port.retrySaved(signal()))).toMatchObject({
+    phase: "not-executed",
+  });
+  const reload = taskWorkflow(fetcher);
+  const controller = new TaskUpdateController(reload.port);
+  controller.attach();
+  await vi.waitFor(() =>
+    expect(controller.getSnapshot().notExecutedAt).toBe(
+      wire.proposal.expiresAt,
+    ),
+  );
+  await controller.retrySaved();
+  expect(fetcher).toHaveBeenCalledTimes(3);
+  await controller.discardSaved();
+  expect(controller.getSnapshot()).toMatchObject({
+    savedRequest: false,
+    canDiscard: false,
+    proposal: null,
+  });
+  expect(accepted(await next.port.restore(signal()))).toEqual({
+    phase: "empty",
+  });
+});
+
+it.each(["proposal", "binding", "time"])(
+  "keeps an unknown execution held when its non-execution proof has wrong %s",
+  async (field) => {
+    const wire = taskWire("prepare").response as TaskCommandPrepareResponse;
+    const terminal = structuredClone(notExecuted(wire.proposal));
+    if (field === "proposal") terminal.proposalId = crypto.randomUUID();
+    if (field === "binding") terminal.binding.runId = crypto.randomUUID();
+    if (field === "time") terminal.checkedAt = wire.proposal.createdAt;
+    let step = 0;
+    const view = taskWorkflow(
+      vi.fn(async () =>
+        step++ === 0 ? taskResponse("prepare") : Response.json(terminal),
+      ),
+    );
+    const proposal = accepted(await view.port.prepare(taskInput, signal()));
+    expect(await view.port.execute(proposal.handle, signal())).toEqual({
+      ok: false,
+      problem: "unknown",
+    });
+    expect(accepted(await view.port.restore(signal()))).toMatchObject({
+      phase: "execute",
+    });
+    expect(await view.port.discardSaved(signal())).toEqual({
+      ok: false,
+      problem: "unknown",
+    });
+    expect(
+      await standaloneTaskRecovery(
+        "update",
+        taskSession().context,
+        () => undefined,
+      ).load(),
+    ).toMatchObject({ executing: true });
+  },
+);
+
+it("revalidates a persisted terminal proof against its original proposal before displaying or retiring it", async () => {
+  const wire = taskWire("prepare").response as TaskCommandPrepareResponse;
+  const view = taskWorkflow(vi.fn(async () => taskResponse("prepare")));
+  await view.port.prepare(taskInput, signal());
+  const recovery = standaloneTaskRecovery(
+    "update",
+    taskSession().context,
+    () => undefined,
+  );
+  const saved = (await recovery.load())!;
+  await recovery.update({
+    ...saved,
+    executing: true,
+    notExecuted: {
+      ...notExecuted(wire.proposal),
+      proposalId: crypto.randomUUID(),
+    },
+  });
+  const reload = taskWorkflow(vi.fn());
+  expect(await reload.port.restore(signal())).toEqual({
+    ok: false,
+    problem: "unknown",
+  });
+  expect(await reload.port.discardSaved(signal())).toEqual({
+    ok: false,
+    problem: "unknown",
+  });
+  expect(await recovery.load()).not.toBeNull();
+});
 function nativeUpdate(
   proposal = JSON.parse(JSON.stringify(taskWire("prepare").response)).proposal,
 ) {

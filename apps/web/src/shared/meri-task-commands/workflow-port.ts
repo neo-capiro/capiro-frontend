@@ -18,6 +18,7 @@ export type TaskUpdateProposalView = Readonly<{
 }>;
 export type TaskUpdateExecutionView = Readonly<
   | { status: "approval-pending" }
+  | { status: "not-executed"; checkedAt: string }
   | {
       status: "observed";
       receiptReference: string;

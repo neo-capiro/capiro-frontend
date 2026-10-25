@@ -23,6 +23,7 @@ type State = Readonly<{
   checkingRecovery: boolean;
   savedRequest: boolean;
   canDiscard: boolean;
+  notExecutedAt: string | null;
   recoveryFields: readonly { label: string; value: string }[];
 }>;
 const initial = (): State =>
@@ -35,6 +36,7 @@ const initial = (): State =>
     checkingRecovery: false,
     savedRequest: false,
     canDiscard: false,
+    notExecutedAt: null,
     recoveryFields: [],
   });
 
@@ -69,14 +71,23 @@ export class TaskUpdateController {
       busy: null,
       checkingRecovery: false,
       problem: null,
-      savedRequest: value.phase === "prepare" || value.phase === "execute",
-      canDiscard: value.phase === "prepare" || value.phase === "proposal",
+      savedRequest:
+        value.phase === "prepare" ||
+        value.phase === "execute" ||
+        value.phase === "not-executed",
+      canDiscard:
+        value.phase === "prepare" ||
+        value.phase === "proposal" ||
+        value.phase === "not-executed",
+      notExecutedAt: value.phase === "not-executed" ? value.checkedAt : null,
       recoveryFields: value.phase === "prepare" ? value.fields : [],
       ...(value.phase === "empty" || value.phase === "prepare"
         ? { proposal: null, execution: null }
         : {}),
-      ...(value.phase === "proposal" || value.phase === "execute"
-        ? { proposal: value.proposal }
+      ...(value.phase === "proposal" ||
+      value.phase === "execute" ||
+      value.phase === "not-executed"
+        ? { proposal: value.proposal, execution: null }
         : {}),
       ...(value.phase === "observed" ? { execution: value.execution } : {}),
     });
@@ -224,7 +235,13 @@ export class TaskUpdateController {
       "execute",
       (signal) => this.port.execute(proposal.handle, signal),
       (execution) => {
-        this.set({ execution: Object.freeze({ ...execution }) });
+        if (execution.status === "not-executed")
+          this.recovered({
+            phase: "not-executed",
+            proposal,
+            checkedAt: execution.checkedAt,
+          });
+        else this.set({ execution: Object.freeze({ ...execution }) });
       },
     );
   };

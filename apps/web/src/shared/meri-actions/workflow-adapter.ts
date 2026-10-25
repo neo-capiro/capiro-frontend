@@ -222,8 +222,22 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
         throw new Error("Saved proposal is unavailable");
       prepared = value;
     }
+    let checkedAt: string | null = null;
+    if (saved.notExecuted !== undefined) {
+      if (!prepared || !saved.executing)
+        throw new Error("Missing original proposal");
+      const proof = await receiveActionResponse(
+        "execute",
+        200,
+        JSON.stringify(saved.notExecuted),
+        { proposal: prepared.proposal },
+      );
+      if ("error" in proof || proof.status !== "not_executed")
+        throw new Error("Invalid terminal proof");
+      checkedAt = proof.checkedAt;
+    }
     this.current(signal);
-    return { saved, request, prepared };
+    return { saved, request, prepared, checkedAt };
   }
   private proposalView(prepared: ActionPrepareResponse): ProposalView {
     const handle = Object.freeze({});
@@ -251,6 +265,15 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
         return { ok: true, value: { phase: "empty" } };
       }
       this.knownRequestId = retained.saved.requestId;
+      if (retained.checkedAt && retained.prepared)
+        return {
+          ok: true,
+          value: {
+            phase: "not-executed",
+            proposal: this.proposalView(retained.prepared),
+            checkedAt: retained.checkedAt,
+          },
+        };
       if (retained.prepared) {
         if (!retained.saved.executing)
           this.options.journal.write({ status: "idle" });
@@ -297,7 +320,8 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
           ? { ok: true, value: { phase: "proposal", proposal: reply.value } }
           : reply;
       }
-      if (!retained.saved.executing) return this.restore(signal);
+      if (!retained.saved.executing || retained.checkedAt)
+        return this.restore(signal);
       const reply = await this.executeSaved(
         retained.saved,
         retained.prepared,
@@ -306,6 +330,7 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
       );
       if (!reply.ok) return reply;
       if (reply.value.status === "indeterminate") return refused("unknown");
+      if (reply.value.status === "not-executed") return this.restore(signal);
       return reply.value.status === "observed"
         ? { ok: true, value: { phase: "observed", execution: reply.value } }
         : {
@@ -330,7 +355,9 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
         if (!retained) return refused("unknown");
         if (retained.saved.requestId !== this.knownRequestId)
           return this.restore(signal);
-        await this.recovery(signal).discard(retained.saved);
+        if (retained.checkedAt)
+          await this.recovery(signal).retireNotExecuted(retained.saved);
+        else await this.recovery(signal).discard(retained.saved);
         this.knownRequestId = null;
         this.selections = new WeakMap();
         this.drafts = new WeakMap();
@@ -493,6 +520,11 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
         !sameJson(retained.prepared, prepared)
       )
         return refused("unknown");
+      if (retained.checkedAt)
+        return {
+          ok: true,
+          value: { status: "not-executed", checkedAt: retained.checkedAt },
+        };
       if (
         !retained.saved.executing &&
         Date.parse(prepared.proposal.expiresAt) <= this.now()
@@ -526,6 +558,16 @@ export class GovernedActionWorkflow implements ActionWorkflowPort {
           )
         )
           throw new Error("Mismatched execution");
+        if (execution.status === "not_executed") {
+          if (!saved)
+            throw new Error("Acknowledged execution cannot become unexecuted");
+          await this.recovery(signal).update({
+            ...saved,
+            executing: true,
+            notExecuted: execution,
+          });
+          return { status: "not-executed", checkedAt: execution.checkedAt };
+        }
         if (execution.status === "indeterminate") {
           this.options.journal.write({
             status: "unresolved",

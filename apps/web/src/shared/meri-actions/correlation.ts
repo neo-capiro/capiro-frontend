@@ -110,6 +110,13 @@ export function validExecution(
   context: ActionContext,
 ): boolean {
   if (value.status === "indeterminate") return true;
+  if (value.status === "not_executed")
+    return (
+      value.proposalId === prepared.proposal.proposalId &&
+      value.commandSha256 === prepared.proposal.commandSha256 &&
+      value.idempotencyKey === prepared.proposal.command.idempotencyKey &&
+      sameContext(value.binding, context)
+    );
   const { result } = value.outcome;
   const receipt =
     "execution" in value.outcome

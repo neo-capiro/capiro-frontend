@@ -170,7 +170,8 @@ function retireRecovery(
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_ASSOCIATION_REJECTED"
           | "OBJECTIVE_VERSION_CONFLICT"
-          | "FILE_BATCH_MOVE_REFUSED";
+          | "FILE_BATCH_MOVE_REFUSED"
+          | "TASK_EXECUTION_NOT_EXECUTED";
       },
   assert: () => void,
   beforeRetire?: (
@@ -226,6 +227,39 @@ export function discardUnexecutedTaskRecovery<
     assert,
     (record) => {
       if (decode(record, contract).executing !== false)
+        throw new RecoveryStorageError();
+    },
+  );
+}
+
+/** Caller revalidates the public proof against the original proposal. Retire only that retained proof. */
+export function retireUnexecutedTaskRecovery<
+  Data extends { executing: boolean; notExecuted?: unknown },
+>(
+  scope: string,
+  requestId: string,
+  proof: unknown,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  if (
+    !proof ||
+    typeof proof !== "object" ||
+    Reflect.get(proof, "status") !== "not_executed" ||
+    Reflect.get(proof, "reason") !== "expired"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "TASK_EXECUTION_NOT_EXECUTED" },
+    assert,
+    (record) => {
+      const saved = decode(record, contract);
+      if (
+        !saved.executing ||
+        JSON.stringify(saved.notExecuted) !== JSON.stringify(proof)
+      )
         throw new RecoveryStorageError();
     },
   );

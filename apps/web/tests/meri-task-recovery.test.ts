@@ -56,6 +56,36 @@ it("discard atomically refuses a saved execution flip even when the caller saw a
   expect(await journal().discarded(requestId)).toBe(false);
 });
 
+it("terminal retirement requires the exact durable proof and cannot retire a changed request", async () => {
+  const proof = {
+    status: "not_executed",
+    reason: "expired",
+    proposalId: "synthetic",
+  };
+  await journal().reserve(value);
+  const terminal = {
+    ...value,
+    prepared: {},
+    executing: true,
+    notExecuted: proof,
+  };
+  await journal().update(terminal);
+  await expect(
+    journal().update({ ...terminal, notExecuted: undefined }),
+  ).rejects.toThrow();
+  await expect(
+    journal().retireNotExecuted({
+      ...terminal,
+      notExecuted: { ...proof, proposalId: "other" },
+    }),
+  ).rejects.toThrow();
+  await journal().retireNotExecuted(terminal);
+  expect(await journal().discarded(requestId)).toBe(true);
+  expect(await journal().acknowledged(requestId)).toBe(false);
+  await journal().reserve({ ...value, requestId: crypto.randomUUID() });
+  await expect(journal().retireNotExecuted(terminal)).rejects.toThrow();
+});
+
 it("explicit unexecuted discard has its own positive disposition and cannot retire a replacement command", async () => {
   await journal().reserve(value);
   await journal().discard(value);

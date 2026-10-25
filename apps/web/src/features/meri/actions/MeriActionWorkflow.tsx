@@ -66,9 +66,11 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
         port.restore && (
           <section className={styles.notice} aria-label="Saved task recovery">
             <p role="status">
-              {state.checkingRecovery
-                ? "Checking saved task recovery before another request."
-                : "A task request is saved. Continue with that exact request."}
+              {state.notExecutedAt
+                ? `The task was not executed before its approval expired. Verified at ${state.notExecutedAt}. Discard it to review a fresh task.`
+                : state.checkingRecovery
+                  ? "Checking saved task recovery before another request."
+                  : "A task request is saved. Continue with that exact request."}
             </p>
             <dl>
               {state.recoveryFields.map((field) => (
@@ -80,7 +82,7 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
             </dl>
             <Button
               type="button"
-              disabled={Boolean(state.busy)}
+              disabled={Boolean(state.busy) || Boolean(state.notExecutedAt)}
               onClick={() => void controller.retrySaved()}
             >
               Retry exact saved request
