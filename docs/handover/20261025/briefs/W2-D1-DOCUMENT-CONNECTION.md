@@ -167,3 +167,32 @@ Unlisted Meri tickets (MG, MB, MO except MO-10/11, MF except MF-02/10, MT-13 to 
 
 Brief assembled UTC: 2026-10-25T17:31:48.7631544Z
 
+
+## Implementation handback — 25 October 2026
+
+Correction: MeriFilesHost obtains the same resolved conversation's native typed transcript before opaque issuance. The new cohesive session-context helper correlates account/client/conversation, refuses pending or cancelled context, and supplies its exact saved runId to the existing session receiver. The subsequent session-bound history receiver remains in place to catch changed bindings, cancellation, expiry and access loss. No shared wiring, Meri code, contracts, schema, flags or dependency changes.
+
+The original first-chat create-or-reuse remains unchanged: a new/unstarted conversation still cannot pass document connection. This repair is not arbitrary cross-tab discovery or a fallback to another saved conversation. Connect must not be called a side-effect-free inspection of the entire first-chat path; this change specifically prevents implicit next-run selection by the session request. The original acceptance HTTP failure stage remains UNKNOWN. No new live diagnostic click occurred, and D1 remains unconsumed.
+
+Origin boundary: deployed Meri apps/runtime/artifacts/core-authority.mjs canonicalRun reads the exact saved binding/scopes and rejects cancelled runs. Typed document content is self-contained in the new request; no old chat prompt, evidence or assets is adopted. Core checks the operation and request SHA at admission/effect/release. Existing frontend DocumentWorkflow.create captures the actual content in a fresh deliveryId/request, and receipt adoption checks tenant/actor/conversation/run/version identity. A connected context is not a document result, publication receipt, new model run or D1 origin claim. All generation behavior stays unchanged; live D1 needs its own legitimate request and provenance.
+
+Design review note: document eligibility is kept in one 35-line domain helper. The existing bootstrap still owns the sequential identity/session/history transaction; its additional call does not introduce a second policy or generation owner. The Files route does not gain a transcript UI or a new service. No shared ownership exception needed.
+
+Verification (all local synthetic data, Node24.22.1; Vitest4.1.11, TypeScript5.9.3, ESLint9.39.2, Prettier3.8.1):
+- Deployed Meri selector reproduction: actual createNextRunOwner with a synthetic journal; completed source plus exact runId => no reservation; omitted runId => one new successor, no accepted request. PASS. This is a concrete source counterexample, not PostgreSQL or live-failure attribution. Scratch log d1-selection-repro.log.
+- First attempted older recovery-fixture reproduction failed SDK_SESSION_DEADLINE because the fixture uses historical expiry. Preserved diagnostic; no product check claimed from it. Replaced the scratch harness with the minimal actual-selector/synthetic-journal reproduction above, not a weakened product test.
+- Untouched frontend base: npm run test --workspace @capiro/web -- tests/meri-files-session.test.ts, 17:36:14 UTC, exit0,20/20PASS.
+- New session suite on original MeriFilesHost source: same command,17:37:59–17:38:02 UTC,exit1,22FAIL/13PASS. Head source restored byte-for-byte. Several failures also reflect the newly required transcript crossing; the explicit completed-run and changed-run tests demonstrate the behavioral defect.
+- Head: npm run test --workspace @capiro/web -- tests/meri-files-session.test.ts tests/meri-document-adapter.test.ts,17:39:03 UTC,exit0,79/79PASS (35 session,44 existing adapter). Existing adapter coverage retains new-content capture, foreign binding rejection and uncertain-write fences. Session count20→35 (+15); no tests deleted.
+- Four session-context mutants,17:38:13–17:38:29 UTC: omit runId4FAIL/31PASS; skip account/client correlation3FAIL/32PASS; admit pending successor1FAIL/34PASS; admit cancelled transcript1FAIL/34PASS. Each killed, exact helper bytes restored; final79PASS run follows restoration.
+- node node_modules/typescript/bin/tsc --noEmit --incremental false -p apps/web/tsconfig.json: exit0, no diagnostics, started17:36:28 UTC and completion observed before17:37:59 UTC.
+- Touched ESLint and Prettier checks: exit0. Initial ESLint invocation at repository root lacked the app config; corrected invocation from apps/web passed. Initial updated test fixture treated byte-array request as a string (8FAIL/13PASS); corrected fixture reads BodyInit via Response.json, then35PASS. These are retained authoring failures, not base defects.
+- git diff --check: PASS.
+
+Retained base failure: node --test --test-concurrency=1 apps/runtime/artifacts/test/core-authority.test.mjs on untouched deployed Meri7eee,17:39UTC,exit1,2PASS/6FAIL. Four tests still supply the removed authorityPorts credential shape (ARTIFACT_AUTHORITY_CONFIGURATION); another expects old runOptions.authorityPorts readiness; composition supplies an obsolete argument (INVALID_COMMAND). The configuration-only document-owners test is not a replacement for these integration assertions. No Meri file was changed or failing assertion weakened. Root receives this evidence; backend composition qualification remains an explicit gap for its existing owner, not a claimed pass. Log d1-meri-contract-tests.log.
+
+Deletion proof: the unpinned {conversationId,clientId} session request in MeriFilesHost was replaced; no active unpinned call remains in that host. The new helper has one production caller. Existing typed receivers and all generation code remain used. No config/resource deletion or migration applies; historical rules/evidence remain. No dead temporary production instrumentation was added.
+
+Environment: reused the already installed exact frontend dependency cache via a task-worktree junction; no install, package/lock change, cache reset, WSL/service/database change. Donor and frozen checkouts remain intact. Mutant files restored. Scratch logs are retained evidence; no server, container, cloud resource or model process was started.
+
+NOT RUN: authenticated browser connection and observed-failure attribution; D1 generation/publication/recovery and legitimate-origin acceptance; full six-format/native-open acceptance; real PostgreSQL/Core/object store/renderer/model; build/scan/deployment. Root/Release/Acceptance own those subsequent steps. This is a draft source repair awaiting independent exact-head review, not a Wave2/D1 pass. No new architecture or scope authorization is claimed.

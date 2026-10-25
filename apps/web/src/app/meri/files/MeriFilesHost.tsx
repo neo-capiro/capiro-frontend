@@ -24,6 +24,7 @@ import { resolveFirstChatConversation } from "../../../shared/meri-conversations
 import { DocumentWorkflow } from "../../../shared/meri-documents/workflow-adapter";
 import { documentTransport } from "../../../shared/meri-documents/workflow-transport";
 import { documentQueryJournal } from "../../../shared/meri-documents/query-journal";
+import { documentSessionContext } from "../../../shared/meri-documents/session-context";
 
 type Operation = "create_word" | "create_excel";
 export function MeriFilesHost({
@@ -227,7 +228,13 @@ export async function bootstrapFileSession({
     signal,
   });
   const session = await bootstrapActionSession(
-    { conversationId: resolved.conversationId, clientId },
+    await documentSessionContext({
+      account,
+      clientId,
+      conversationId: resolved.conversationId,
+      signal,
+      fetcher,
+    }),
     signal,
     fetcher,
     now,
