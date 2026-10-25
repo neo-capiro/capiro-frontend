@@ -8,6 +8,7 @@ import {
   json,
   person,
   personId,
+  sendingMailbox,
 } from "./fixtures";
 import {
   contactThread,
@@ -46,6 +47,84 @@ async function openContactThread(page: Page) {
     .getByRole("button", { name: /Synthetic acceptance briefing/ })
     .click();
 }
+
+for (const storedClient of [clientId, null])
+  test(`contact reply from stored client ${storedClient} reaches review with the canonical origin mailbox`, async ({
+    page,
+  }) => {
+    const control = await installContactMail(page, storedClient);
+    const requests: string[] = [];
+    const writes: string[] = [];
+    page.on("request", (request) => {
+      if (request.url().includes(`/engagement/mail-threads/${threadId}`))
+        requests.push(request.url());
+      if (request.method() !== "GET") writes.push(request.url());
+    });
+    await openContactThread(page);
+    await page
+      .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
+      .click();
+    const compose = page.getByRole("dialog", { name: "Reply", exact: true });
+    await compose
+      .getByLabel("Message", { exact: true })
+      .fill("Synthetic reply for review only.");
+    await expect(compose.getByLabel("From mailbox")).toHaveValue(
+      sendingMailbox.id,
+    );
+    await expect(compose.getByLabel("From mailbox")).toBeDisabled();
+    await compose
+      .getByRole("button", { name: "Review email", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "Send email", exact: true }),
+    ).toBeVisible();
+    expect(requests).toHaveLength(2);
+    for (const request of requests) {
+      const params = new URL(request).searchParams;
+      expect(params.get("associationClientId")).toBe(clientId);
+      expect(params.get("recipientEmails")).toBe(person.email);
+    }
+    expect(writes).toEqual([]);
+    expect(control.unexpected).toEqual([]);
+  });
+
+for (const [reason, change] of [
+  ["direct other client", { clientId: otherClientId }],
+  ["wrong association", { associationClientId: otherClientId }],
+  ["wrong actor", { connectionOwnerActorId: otherClientId }],
+  ["wrong tenant", { tenantId: otherClientId }],
+  ["wrong mailbox tenant", { connectionOwnerTenantId: otherClientId }],
+  ["missing origin mailbox", { connectionId: null }],
+  ["unavailable origin mailbox", { connectionId: otherClientId }],
+] as const)
+  test(`contact reply refuses ${reason} on the fresh origin read`, async ({
+    page,
+  }) => {
+    const control = await installContactMail(page, null);
+    const writes: string[] = [];
+    page.on("request", (request) => {
+      if (request.method() !== "GET") writes.push(request.url());
+    });
+    await openContactThread(page);
+    control.detail.hold({ ...control.thread, ...change });
+    await page
+      .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
+      .click();
+    const compose = page.getByRole("dialog", { name: "Reply", exact: true });
+    await compose
+      .getByLabel("Message", { exact: true })
+      .fill("Synthetic reply for review only.");
+    await expect.poll(() => control.detail.waiting).toBe(1);
+    control.detail.release();
+    await expect(
+      compose.getByRole("button", { name: "Refresh mailboxes", exact: true }),
+    ).toBeEnabled();
+    await expect(
+      compose.getByRole("button", { name: "Review email", exact: true }),
+    ).toBeDisabled();
+    expect(writes).toEqual([]);
+    expect(control.unexpected).toEqual([]);
+  });
 
 test("contact thread admits the exact requested ID for direct and recipient-derived null or other-client histories", async ({
   page,
@@ -125,9 +204,7 @@ for (const source of ["history", "detail"] as const)
     read.fail(status);
     await refreshRelationships(
       page,
-      source === "history"
-        ? ["contact-mail", clientId]
-        : ["mail-thread", threadId],
+      source === "history" ? ["contact-mail", clientId] : ["mail-thread"],
     );
     await expect(
       page

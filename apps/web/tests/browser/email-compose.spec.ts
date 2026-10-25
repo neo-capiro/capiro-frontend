@@ -1,6 +1,11 @@
 import { expectMailMessage } from "./mail-message-assertions";
 import { test, expect, type Page } from "@playwright/test";
 import { sendingMailbox, sendingReceipt } from "./fixtures";
+import {
+  mailActorId,
+  mailTenantId,
+  mailThreadFixture,
+} from "../mail-read-fixture";
 const clientId = "10000000-0000-4000-8000-000000000001";
 const id = "20000000-0000-4000-8000-000000000001";
 const other = "20000000-0000-4000-8000-000000000002";
@@ -52,7 +57,7 @@ async function setup(
     confirmFailure?: boolean;
   } = {},
 ) {
-  let user = "actor-a";
+  let user = mailActorId;
   let usable = options.scan !== false;
   let prepares = 0;
   let uploads = 0;
@@ -71,7 +76,7 @@ async function setup(
     if (path === "me")
       return json({
         user: { id: user, email: "actor@example.test" },
-        tenant: { id: "tenant-a", name: "Synthetic" },
+        tenant: { id: mailTenantId, name: "Synthetic" },
         role: options.role ?? "standard_user",
       });
     if (path === "me/email-signature")
@@ -94,11 +99,21 @@ async function setup(
         },
       ]);
     if (path === `engagement/mail-threads/${id}`)
-      return json({
-        id,
-        clientId: options.replyClient ?? clientId,
-        connectionId: sendingMailbox.id,
-      });
+      return json(
+        mailThreadFixture(
+          {
+            id,
+            clientId: options.replyClient ?? clientId,
+            connectionId: sendingMailbox.id,
+            subject: "Previous review",
+            snippet: null,
+            connectionEmail: sendingMailbox.accountEmail,
+            participants: [{ email: person.email }],
+            messages: [],
+          },
+          { associationClientId: clientId, connectionOwnerActorId: user },
+        ),
+      );
     if (path === "engagement/attachments/upload-url") {
       prepares++;
       if (options.holdPrepare)
@@ -554,7 +569,9 @@ test("reply to foreign-client thread refuses before mail send", async ({
   await expect(
     page.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();
-  await expect(page.getByText(/unexpected response/).last()).toBeVisible();
+  await expect(
+    page.getByText("The reply thread belongs to another client.").last(),
+  ).toBeVisible();
   await expectMailMessage(page, "Draft retained for explicit review.");
   expect(state.sent).toHaveLength(0);
 });

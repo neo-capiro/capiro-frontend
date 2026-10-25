@@ -71,7 +71,12 @@ export function MailCompose({
   );
   const signature = useSignature();
   const authority = useMailAuthority(clientId);
-  const mailboxes = useMailboxes(clientId, thread?.id, !sendBlockedReason);
+  const mailboxes = useMailboxes(
+    clientId,
+    thread?.id,
+    person.email,
+    !sendBlockedReason,
+  );
   const sourceKey = JSON.stringify([clientId, person, thread, to, cc, bcc]);
   const attachmentInput = useRef<HTMLInputElement>(null);
   const rewrite = useMailRewrite({
