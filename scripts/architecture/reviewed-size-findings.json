@@ -3831,5 +3831,32 @@
     "reason": "Newly crossed function threshold: base e478 has 78 nonblank body lines, fingerprint a135877c9c64aa1e7064f64f724aae22cbdbd5e677ff301b1de7661cdb7738da; head 646bcf919 has 84 body lines with the exact head fingerprint in this record. Add this one function record. Independent review of PR149 at exact head 646bcf919: the 84 nonblank body lines form one current sending-mailbox selection hook. Its existing mailbox-list and reply-origin queries must jointly determine current selection, loading, error and refresh state. The origin query now reuses readMailThreadPage and useMailAuthority instead of duplicating a response schema; it validates canonical scope, permits only null or the exact direct client, and selects the exact origin only from current eligible rows. Core remains the permission and association owner. Splitting these coupled query states would not separate an independent responsibility; no new abstraction or second policy is justified.",
     "reviewedBy": "Codex independent Wave 2 reviewer",
     "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+    "kind": "function",
+    "symbol": "ConnectedHost",
+    "fingerprint": "e38312eb424947ae9d8f3cae070e789c98d3263c382484460d4423a6d1be41eb",
+    "reason": "One recommendation-action connection composition: captures the account/client lifetime supplied by the keyed parent, injects canonical task recovery and a typed first-chat Core invocation into ActionHostController, binds its existing query journal, subscribes and disposes with React, and renders the matching explicit-connect/availability state. The new lazy first-chat adapter is evaluated only after recovery finds no saved command; request persistence, receipt checking, command recovery, transport, current authorization and action effects remain with their existing owners. The 96-line function adds no independently changing business policy, effect dispatcher or storage implementation. Its coupled lifecycle and connection presentation are coherent; extraction merely to satisfy 80 lines would distribute one small composition without a responsibility benefit.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/app/meri/task-updates/MeriTaskUpdateHost.tsx",
+    "kind": "function",
+    "symbol": "ConnectedHost",
+    "fingerprint": "56b8ac59e9141e1ce1fd29924b87a5aac5fc929ee49fa03449c45932b22aa15c",
+    "reason": "One task-update connection composition: captures the keyed account/client lifetime, delegates saved-or-fresh session selection to bootstrapTaskRecoverySession and the existing first-chat owner, creates TaskUpdateWorkflow using its canonical transport and query journal, subscribes/disposes the shared lifetime and renders current connection availability. The typed Core adapter carries only the admitted bootstrap request. Command preparation/execution/recovery and immutable proposal validation stay in the task workflow and recovery owners. The 98-line function has one coordinated lifecycle and UI reason to change; it neither duplicates Core policy nor grows a second task pipeline. No fragmentation solely for the size threshold is justified.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+    "kind": "function",
+    "symbol": "ConnectedFiles",
+    "fingerprint": "6b08cc8ddbfffe1f4f5a98b31cb074fed3d750736c82851747526173b08432e7",
+    "reason": "One document connection composition: within the parent account/client/operation key, creates the existing SessionLifetimeController, delegates identity/bootstrap/public-history qualification to bootstrapFileSession, and constructs DocumentWorkflow with its fixed transport and context journal only after qualification. React attachment, availability hiding, revocation, subscription and explicit-connect presentation belong to this same local lifetime. Persisted-run receiving, canonical authorization, document generation/publication and durable uncertainty remain in existing public client/backend/workflow owners. The 100-line function does not implement these domains itself or dispatch document/Stop effects during connection. A separate generic host/helper solely to trim JSX would scatter this cohesive boundary.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
   }
 ]
