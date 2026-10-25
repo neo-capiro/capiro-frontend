@@ -165,6 +165,7 @@ function retireRecovery(
           | "ACTIVITY_UNDO_REFUSED"
           | "DIRECTORY_NOTE_REFUSED"
           | "PROSPECT_NEW_CLIENT_REFUSED"
+          | "PROSPECT_CONTACT_TRANSFER_REFUSED"
           | "MEETING_COMMAND_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
@@ -210,6 +211,35 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Feature owner validates the full immutable receipt and rereads it under current authority and the command lock. */
+export function retireProspectContactTransferRefusalRecovery(
+  scope: string,
+  requestId: string,
+  receipt: {
+    schemaVersion: number;
+    requestId: string;
+    status: string;
+    result: unknown;
+    refusal: { code: string } | null;
+  },
+  assert: () => void,
+) {
+  if (
+    receipt.schemaVersion !== 1 ||
+    receipt.requestId !== requestId ||
+    receipt.status !== "refused" ||
+    receipt.result !== null ||
+    receipt.refusal?.code !== "PROSPECT_CONTACT_TRANSFER_REFUSED"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "PROSPECT_CONTACT_TRANSFER_REFUSED" },
+    assert,
+  );
 }
 
 /** Explicit local discard is not execution completion or a server refusal. Check the latest marker atomically. */
