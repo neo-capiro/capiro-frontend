@@ -118,3 +118,25 @@ Meaningful mutant: remove only the restored schemaVersion from the fixed items r
 NOT RUN by this lane: full production build/container, model, AWS, PostgreSQL, migration, authenticated live owner list/correction/recall/firm governance/retention, and E23/E24/E25/E36 integrated outcomes. Root/Release/Acceptance own current material binding and final deployed verification. No new services/resources, no fixture mutation and no cleanup of shared environment. Reuse retained exact-lock dependencies. Temporary mutants are restored before commit. No obsolete mechanism is introduced or replaced; deletion is limited to the erroneous unversioned serialization expression, with no obsolete callers/flags/resources and no test-count reduction.
 
 Definition of done: brief committed/pushed before edits; exact final head/tree and changed files; proven baseline/fix/mutant checks with scrubbed evidence; draft PR and separate exact-head review handoff to Root; explicit remaining live/config prerequisites. No #202 post. Private evidence is referenced by name only, never private identifiers, values or credentials. In-scope decisions proceed and are logged; only direct Neo chat approves scope/security changes.
+
+
+## Author result (25 October 2026; source qualification only)
+
+Brief committed and pushed before edits as `b6249bc80a34f92b02937a07dcd4cd1fd15df0de`. Product delta is one items-only serialization hunk; the existing strict projection, privacy/no-store headers, authorization, route, upstream status handling and all writes are unchanged. Two new consumer-boundary cases cover empty and populated pages, and the prior exact-wire assertion now includes the required version. No tests removed. Existing test file exceeds the repository's 400-nonblank-line review trigger; it retains one cohesive owner-proxy responsibility, with no new module/domain. Exact-head reviewer should assess that bounded extension; unrelated splitting would expand this repair.
+
+Environment: retained Windows Node24.22.1, Vitest4.1.11, TypeScript5.9.3, Prettier3.8.1 and existing ESLint; direct Node tool commands used. Ambient npm11.19.1 differs from repository11.9.0 guidance, but npm/install was not used. Dependency lock SHA256 `8a17eb3b8cf2c333403fe94bafb62d3791daaead4d57d8c945acba0a60b7db04c` matches the donor exactly. Task-local node_modules junction reuses preserved same-host dependencies; no install or lock change.
+
+| Check | UTC start | Result |
+| --- | --- | --- |
+| New consumer cases against unchanged product | 2026-10-25T17:35:15.3221835Z | Expected FAIL:2/2 Invalid memory item page;14 unselected (exit1) |
+| Five owner proxy/route/current-access/paging/decision-hold suites | 2026-10-25T17:35:26.8844928Z | PASS54/54,5 files,0 skipped (exit0) |
+| Remove restored wire schemaVersion only | 2026-10-25T17:35:48.327051+00:00 | Killed:2/2 new cases fail;14 unselected (exit1) |
+| Restored fixed consumer cases | 2026-10-25T17:37:32.7720238Z | PASS2/2;14 unselected (exit0) |
+| Scoped existing ESLint | 2026-10-25T17:36:05.586112+00:00 | PASS,0 errors/warnings (exit0) |
+| Scoped existing Prettier | 2026-10-25T17:36:09.442131+00:00 | PASS (exit0) |
+| Scoped two-file/transitive TypeScript | 2026-10-25T17:36:09.817406+00:00 | PASS (exit0) |
+| git diff --check | 2026-10-25T17:36:11.124641+00:00 | PASS (exit0) |
+
+Commands and complete synthetic logs are retained under Settings `work/personal-memory-get` by check name. Focused test command: `node node_modules/vitest/vitest.mjs run --root apps/web tests/meri-memory-owner-review-proxy.test.ts tests/meri-memory-owner-review-route.test.ts tests/meri-memory-current-access.test.ts tests/meri-memory-owner-inbox-pagination.test.ts tests/meri-memory-owner-decision-hold.test.ts`. Baseline/mutant/restored select only the two new cases with `-t 'delivers a'`. Lint/format target the two changed source/test paths; types uses a scratch tsconfig extending the existing web config with those two entry files and retained node type roots. Initial scratch console output hit Windows UnicodeEncodeError after saving the expected mutant failures; `finally` restored the source. The retained failure log was inspected and the console encoding was corrected without a second mutation run. Final source matches the exact base plus only the intended hunk.
+
+No product-test failure remains in the selected54 cases. This is not a whole-suite/build/live pass. Full production build, browser, model, AWS, DB and integrated E23/E24/E25/E36 acceptance remain NOT RUN. The16:51 live HTTP cause and current Core memory lifecycle/tenant selection remain unverified prerequisites with Root/Release/Acceptance. No runtime/telemetry/fixture resources created. No dead flag/caller/resource introduced; replaced unversioned serialization is removed in this same change. Core and all other frontend product paths remain byte-identical to the parent. Draft publication and independent exact-head review follow; merge/deployment remain separate.

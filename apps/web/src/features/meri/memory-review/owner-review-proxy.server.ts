@@ -212,9 +212,10 @@ export async function proxyOwnerMemoryReview(
           const raw = await boundedJsonText(response, signal, 2_000_000);
           const value: unknown = JSON.parse(raw);
           if (operation.kind === "items")
-            return Response.json(receiveOwnerCorrectionPage(value), {
-              headers,
-            });
+            return Response.json(
+              { schemaVersion: 1, ...receiveOwnerCorrectionPage(value) },
+              { headers },
+            );
           if (operation.kind === "correction") {
             const candidateId = receiveCorrectionReceipt(value);
             return Response.json(

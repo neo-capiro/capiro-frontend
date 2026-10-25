@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { proxyOwnerMemoryReview } from "../src/features/meri/memory-review/owner-review-proxy.server";
+import { receiveOwnerCorrectionPage } from "../src/features/meri/memory-review/owner-correction";
 import {
   ownerCandidateTitle,
   receiveOwnerCandidates,
@@ -373,6 +374,43 @@ describe("Core-owned personal memory review proxy", () => {
     expect(fetcher).toHaveBeenCalledTimes(1);
   });
 
+  it.each([
+    { name: "empty", items: [], nextCursor: null },
+    { name: "populated", items: [item], nextCursor: "opaque_page_2" },
+  ])("delivers a $name items page to the browser decoder", async (page) => {
+    const fetcher = vi.fn<typeof fetch>(async () =>
+      Response.json({
+        schemaVersion: 1,
+        items: page.items.map((entry) => ({ ...entry, internalOnly: true })),
+        nextCursor: page.nextCursor,
+        internalOnly: true,
+      }),
+    );
+    const response = await proxyOwnerMemoryReview(
+      itemsRequest(),
+      { kind: "items" },
+      env,
+      async () => "native",
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(response.headers.get("cache-control")).toBe("private, no-store");
+    const wire = await response.json();
+    expect(receiveOwnerCorrectionPage(wire)).toEqual({
+      items: page.items,
+      nextCursor: page.nextCursor,
+    });
+    expect(wire).toEqual({
+      schemaVersion: 1,
+      items: page.items,
+      nextCursor: page.nextCursor,
+    });
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(
+      new Headers(fetcher.mock.calls[0]![1]!.headers).get("authorization"),
+    ).toBe("Bearer native");
+  });
+
   it("pages only caller-owned canonical personal items from Core", async () => {
     const nextCursor = "opaque_page_2";
     const fetcher = vi.fn<typeof fetch>(async () =>
@@ -386,7 +424,11 @@ describe("Core-owned personal memory review proxy", () => {
       fetcher,
     );
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ items: [item], nextCursor });
+    expect(await response.json()).toEqual({
+      schemaVersion: 1,
+      items: [item],
+      nextCursor,
+    });
     expect(fetcher.mock.calls[0]![0]).toBe(
       "https://core.synthetic.invalid/api/memory/owner/items?limit=25",
     );
