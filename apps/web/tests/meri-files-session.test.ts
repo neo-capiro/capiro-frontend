@@ -81,12 +81,45 @@ function setup() {
   });
   const issued = { ...context };
   const current = { ...account };
+  const transcript = {
+    schema: "meri.conversation-transcript/1",
+    conversation: {
+      conversationId: context.conversationId,
+      owner: { ...account },
+      scopes: page.run.scopes,
+      createdAt: page.run.createdAt,
+      policyRevision: "policy1",
+    },
+    latestRun: page.run,
+    latestSequenceBase: 0,
+    turns: [
+      {
+        run: page.run,
+        request: page.request,
+        promptLineage: {
+          kind: "submission",
+          logicalRequestId: page.request.requestId,
+          sourceBinding: null,
+          sourceRequestId: null,
+        },
+        sequenceBase: 0,
+        sequenceEnd: null,
+        lastSequence: 1,
+      },
+    ],
+    events: page.events.map((event) => ({ sequence: 1, event })),
+    nextSequence: 1,
+    lastSequence: 1,
+    hasMore: false,
+    pendingTurn: null as unknown,
+  };
   const calls: Array<{ url: string; body: unknown }> = [];
   const history = vi.fn(async () => Response.json(page));
+  const readTranscript = vi.fn(async () => Response.json(transcript));
   const fetcher: typeof fetch = vi.fn(async (url, init) => {
     calls.push({
       url: String(url),
-      body: init?.body ? JSON.parse(String(init.body)) : null,
+      body: init?.body ? await new Response(init.body).json() : null,
     });
     if (String(url).endsWith("/me"))
       return Response.json({
@@ -94,6 +127,7 @@ function setup() {
         tenant: { id: current.tenantId, name: "Synthetic" },
         role: "standard_user",
       });
+    if (String(url).endsWith("/transcript")) return readTranscript();
     if (String(url).endsWith("/history")) return history();
     if (!String(url).endsWith("/session"))
       throw new Error("Unexpected dispatch");
@@ -123,6 +157,8 @@ function setup() {
   return {
     connect,
     history,
+    transcript,
+    readTranscript,
     createOrReuse,
     page,
     issued,
@@ -138,14 +174,20 @@ it("allows an existing persisted run through the canonical history receiver with
   expect(session.context).toEqual(context);
   expect(c.calls.map((call) => call.url)).toEqual([
     "/api/backend/core/me",
+    "/api/conversations/transcript",
     "/api/action-followthrough/session",
     "/api/conversations/history",
   ]);
   expect(c.calls[1]?.body).toEqual({
+    conversationId: context.conversationId,
+    limit: 1,
+  });
+  expect(c.calls[2]?.body).toEqual({
     clientId,
     conversationId: context.conversationId,
+    runId: context.runId,
   });
-  expect(c.calls[2]?.body).toEqual({ limit: 1 });
+  expect(c.calls[3]?.body).toEqual({ limit: 1 });
 });
 it.each([
   ["NOT_FOUND", 404],
@@ -159,13 +201,14 @@ it.each([
       Response.json({ error: { code } }, { status }),
     );
     await expect(c.connect()).rejects.toThrow();
-    expect(c.calls).toHaveLength(3);
+    expect(c.calls).toHaveLength(4);
   },
 );
 it("withholds a cancelled persisted run", async () => {
   const c = setup();
   c.page.run.state = "cancelled";
   await expect(c.connect()).rejects.toThrow("no available saved run");
+  expect(c.calls).toHaveLength(2);
 });
 it.each(["tenantId", "actorId", "conversationId", "runId"] as const)(
   "rejects a persisted history page for another %s",
@@ -190,15 +233,18 @@ it.each(["tenantId", "actorId"] as const)(
     expect(c.history).not.toHaveBeenCalled();
   },
 );
-it.each(["tenantId", "actorId", "selectedClientId", "conversationId"] as const)(
-  "refuses changed session %s before history",
-  async (key) => {
-    const c = setup();
-    c.issued[key] = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
-    await expect(c.connect()).rejects.toThrow();
-    expect(c.history).not.toHaveBeenCalled();
-  },
-);
+it.each([
+  "tenantId",
+  "actorId",
+  "selectedClientId",
+  "conversationId",
+  "runId",
+] as const)("refuses changed session %s before history", async (key) => {
+  const c = setup();
+  c.issued[key] = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
+  await expect(c.connect()).rejects.toThrow();
+  expect(c.history).not.toHaveBeenCalled();
+});
 it("a scope switch during history cannot mount a document workflow from the stale page", async () => {
   const c = setup();
   c.history.mockImplementationOnce(async () => {
@@ -227,6 +273,7 @@ it("an expired session cannot reach history or any document operation", async ()
   expect(c.history).not.toHaveBeenCalled();
   expect(c.calls.map((call) => call.url)).toEqual([
     "/api/backend/core/me",
+    "/api/conversations/transcript",
     "/api/action-followthrough/session",
   ]);
 });
@@ -238,7 +285,122 @@ it("a history transport failure remains unknown and does not trigger another boo
   expect(c.createOrReuse).toHaveBeenCalledOnce();
   expect(c.calls.map((call) => call.url)).toEqual([
     "/api/backend/core/me",
+    "/api/conversations/transcript",
     "/api/action-followthrough/session",
     "/api/conversations/history",
   ]);
+});
+
+it("pins a completed conversation's saved run instead of requesting a successor", async () => {
+  const c = setup();
+  c.page.run.state = "completed";
+  const session = await c.connect();
+  expect(session.context.runId).toBe(context.runId);
+  expect(c.calls.map((call) => call.url)).toEqual([
+    "/api/backend/core/me",
+    "/api/conversations/transcript",
+    "/api/action-followthrough/session",
+    "/api/conversations/history",
+  ]);
+  expect(c.calls[2]?.body).toEqual({
+    clientId,
+    conversationId: context.conversationId,
+    runId: context.runId,
+  });
+});
+
+it("does not issue a document session when a successor is already reserved", async () => {
+  const c = setup();
+  c.page.run.state = "completed";
+  c.transcript.pendingTurn = {
+    sourceBinding: c.page.run.binding,
+    targetBinding: {
+      ...c.page.run.binding,
+      runId: "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      attemptId: "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      workerId: "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+      writerFence: 2,
+    },
+    state: "RESERVED",
+  };
+  await expect(c.connect()).rejects.toThrow("no available saved run");
+  expect(c.calls).toHaveLength(2);
+  expect(c.history).not.toHaveBeenCalled();
+});
+
+it.each([
+  ["CONVERSATION_NOT_FOUND", 404],
+  ["UNAUTHENTICATED", 401],
+  ["CONVERSATION_ACCESS_DENIED", 403],
+  ["CONVERSATION_UNAVAILABLE", 503],
+] as const)(
+  "does not bootstrap an unstarted or unavailable conversation after transcript %s",
+  async (code, status) => {
+    const c = setup();
+    c.readTranscript.mockResolvedValueOnce(
+      Response.json({ error: { code } }, { status }),
+    );
+    await expect(c.connect()).rejects.toThrow();
+    expect(c.calls).toHaveLength(2);
+    expect(c.history).not.toHaveBeenCalled();
+  },
+);
+
+it.each(["tenantId", "actorId", "conversationId", "selectedClientId"] as const)(
+  "rejects a valid transcript from another %s before session issuance",
+  async (key) => {
+    const c = setup();
+    const foreign = "eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee";
+    if (key === "selectedClientId") c.page.run.scopes[0]!.resourceId = foreign;
+    else if (key === "conversationId") {
+      c.transcript.conversation.conversationId = foreign;
+      c.page.run.binding.conversationId = foreign;
+    } else {
+      c.transcript.conversation.owner[key] = foreign;
+      c.page.run.binding[key] = foreign;
+      if (key === "tenantId") c.page.run.scopes[0]!.tenantId = foreign;
+    }
+    await expect(c.connect()).rejects.toThrow();
+    expect(c.calls).toHaveLength(2);
+    expect(c.history).not.toHaveBeenCalled();
+  },
+);
+
+it("a context switch during transcript read stops before session issuance", async () => {
+  const c = setup();
+  c.readTranscript.mockImplementationOnce(async () => {
+    c.controller.abort();
+    return Response.json(c.transcript);
+  });
+  await expect(c.connect()).rejects.toThrow();
+  expect(c.calls).toHaveLength(2);
+  expect(c.history).not.toHaveBeenCalled();
+});
+
+it("a lost transcript response never falls back to implicit session selection", async () => {
+  const c = setup();
+  const failure = new Error("Synthetic transcript response lost");
+  c.readTranscript.mockRejectedValueOnce(failure);
+  await expect(c.connect()).rejects.toBe(failure);
+  expect(c.readTranscript).toHaveBeenCalledOnce();
+  expect(c.calls).toHaveLength(2);
+  expect(c.history).not.toHaveBeenCalled();
+});
+
+it("rejects a different run selected between transcript and issuance", async () => {
+  const c = setup();
+  c.issued.runId = "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb";
+  await expect(c.connect()).rejects.toThrow("Action context mismatch");
+  expect(c.calls).toHaveLength(3);
+  expect(c.history).not.toHaveBeenCalled();
+});
+
+it("still rechecks cancellation in saved history after transcript selection", async () => {
+  const c = setup();
+  c.history.mockImplementationOnce(async () => {
+    c.page.run.state = "cancelled";
+    return Response.json(c.page);
+  });
+  await expect(c.connect()).rejects.toThrow("no available saved run");
+  expect(c.calls).toHaveLength(4);
 });
