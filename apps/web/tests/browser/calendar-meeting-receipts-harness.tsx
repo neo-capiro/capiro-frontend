@@ -9,7 +9,7 @@ import "@/shared/portfolio/styles.css";
 import "./test-font.css";
 import { clientId } from "./fixtures";
 const meeting: Meeting = {
-  id: "meeting-one",
+  id: "91000000-0000-4000-8000-000000000001",
   subject: "Synthetic meeting",
   description: null,
   location: "Old location",
@@ -21,7 +21,7 @@ const meeting: Meeting = {
   visibility: "private",
   isVirtual: false,
   meri: null,
-  client: { id: "client-one", name: "Synthetic" },
+  client: { id: "10000000-0000-4000-8000-000000000001", name: "Synthetic" },
   attendees: [],
   preps: [],
 };
@@ -29,7 +29,9 @@ function Harness() {
   const [open, setOpen] = useState(true);
   const mode = new URLSearchParams(location.search).get("mode");
   const readClientId =
-    mode === "clear" || mode === "create" ? undefined : "client-one";
+    mode === "clear" || mode === "create"
+      ? undefined
+      : "10000000-0000-4000-8000-000000000001";
   const currentMeeting =
     mode === "create"
       ? undefined

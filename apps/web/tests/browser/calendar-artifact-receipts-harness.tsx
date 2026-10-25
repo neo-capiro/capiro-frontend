@@ -8,14 +8,17 @@ import "@/shared/portfolio/styles.css";
 import "./test-font.css";
 
 function Harness() {
-  const [clientId, setClient] = useState("client-one");
+  const [clientId, setClient] = useState(
+    "10000000-0000-4000-8000-000000000001",
+  );
   const [visible, setVisible] = useState(true);
   const kind =
     new URLSearchParams(location.search).get("kind") === "debriefs"
       ? "debriefs"
       : "notes";
   const meeting: Meeting = {
-    id: "meeting-one",
+    id: "91000000-0000-4000-8000-000000000001",
+    updatedAt: "2026-10-10T13:00:00.000Z",
     subject: "Synthetic receipt review",
     description: null,
     location: null,
@@ -35,7 +38,11 @@ function Harness() {
       <h1>Synthetic artifact receipt review</h1>
       <button
         onClick={() =>
-          setClient(clientId === "client-one" ? "client-two" : "client-one")
+          setClient(
+            clientId === "10000000-0000-4000-8000-000000000001"
+              ? "10000000-0000-4000-8000-000000000002"
+              : "10000000-0000-4000-8000-000000000001",
+          )
         }
       >
         Replace client
