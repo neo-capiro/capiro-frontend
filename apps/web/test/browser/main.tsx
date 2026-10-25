@@ -264,6 +264,10 @@ function RoutedApp() {
                 }
                 meriPreferences={
                   <MeriPreferencesPanel
+                    tenantSettingsEnabled={
+                      sessionStorage.getItem("tenant-settings-enabled") ===
+                      "true"
+                    }
                     userPreferencesEnabled={
                       sessionStorage.getItem("user-preferences-enabled") ===
                       "true"
