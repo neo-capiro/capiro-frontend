@@ -1,9 +1,4 @@
-import type { ActionSessionReceipt } from "./session-receipt";
-import type { ActionSessionHints } from "./session-bootstrap";
-import {
-  ActionSessionUnavailable,
-  bootstrapActionSession,
-} from "./session-bootstrap";
+import { ActionSessionUnavailable } from "./session-bootstrap";
 
 type Snapshot<P> = Readonly<
   | { status: "idle" | "connecting" | "unavailable" | "expired" }
@@ -201,26 +196,4 @@ export class SessionLifetimeController<
       this.publish({ status: "unavailable" });
     }
   };
-}
-
-/** Existing client-only action issuance keeps its exact receiver. */
-export class OpaqueSessionController<
-  P extends { dispose(): void },
-> extends SessionLifetimeController<P, ActionSessionReceipt> {
-  constructor(
-    options: Omit<Options<P, ActionSessionReceipt>, "issue"> & {
-      hints: ActionSessionHints;
-    },
-  ) {
-    super({
-      ...options,
-      issue: (signal) =>
-        bootstrapActionSession(
-          options.hints,
-          signal,
-          options.fetcher,
-          options.now,
-        ),
-    });
-  }
 }
