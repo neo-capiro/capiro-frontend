@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import {
   CONVERSATION_SKILLS,
   type ConversationSubmitRequest,
@@ -142,9 +143,14 @@ export function SkillSelectionPicker({
     }
   };
   return (
-    <details className={styles.field}>
-      <summary>
-        Skill for next message: {skillSelectionLabel(selection)}
+    <details className={styles.picker}>
+      {/* Figma composer "Skill · None": the Select-trigger look; the full name stays for assistive technology. */}
+      <summary className={styles.trigger}>
+        <span className="sr-only">Skill for next message: </span>
+        <span className={styles.value}>
+          Skill · {selection.skill ? skillSelectionLabel(selection) : "None"}
+        </span>
+        <ChevronDown aria-hidden />
       </summary>
       <p className={styles.help}>
         Choose a skill and time window, then review your message before Send.

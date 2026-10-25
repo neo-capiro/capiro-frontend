@@ -90,6 +90,7 @@ export function SessionComposer({
                 <ModelSelectionPicker
                   catalog={modelDocument.modelCatalog}
                   label="Model for next message"
+                  prefix="Model"
                   compact
                   value={selection}
                   disabled={modelDisabled}
@@ -100,6 +101,11 @@ export function SessionComposer({
                     session.acceptedRequest || session.earlier.length
                       ? "Continue current model"
                       : "Use personal default"
+                  }
+                  defaultShortLabel={
+                    session.acceptedRequest || session.earlier.length
+                      ? "Current"
+                      : "Default"
                   }
                   defaultDescription="The server chooses your personal default for the first message and inherits the admitted model for later messages."
                 />

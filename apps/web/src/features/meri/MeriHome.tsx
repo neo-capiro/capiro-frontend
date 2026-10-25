@@ -49,7 +49,10 @@ export function MeriHome({
   return (
     <div className={styles.home}>
       <div className={styles.scopeRow}>
-        <MeriClientSelector scope={clientScope} />
+        <div className={styles.scope}>
+          <MeriClientSelector scope={clientScope} />
+          <span className={styles.status}>Your authorized data</span>
+        </div>
         <span className={styles.meriWordmark} role="img" aria-label="Meri" />
       </div>
       <div
