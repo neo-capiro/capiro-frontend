@@ -21,6 +21,10 @@ export const personSchema = z.object({
   placementSource: z.enum(["manual", "auto_title"]),
   reviewRequired: z.boolean(),
   createdAt: z.string(),
+  updatedAt: z.iso
+    .datetime()
+    .refine((value) => new Date(value).toISOString() === value)
+    .optional(),
 });
 export type Person = z.infer<typeof personSchema>;
 export const contactInput = z.object({
