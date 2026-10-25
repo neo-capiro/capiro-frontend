@@ -35,6 +35,7 @@ const operationLabels: Readonly<Record<string, string>> = {
 };
 const actionLabels: Readonly<Record<string, string>> = {
   "task.create": "Create a task",
+  "task.update": "Update a task",
   "document.draft": "Prepare a document",
   "memory.propose": "Propose a memory for review",
   "artifact.file": "File attachments to a client",
@@ -91,7 +92,10 @@ type Completed = Extract<
   Extract<IntentsItem, { kind: "proposal"; proposal: unknown }>["execution"],
   { state: "completed" }
 >;
-function resultFields(execution: Completed): readonly IntentField[] {
+function resultFields(
+  execution: Completed,
+  action: IntentsProposal["command"]["action"],
+): readonly IntentField[] {
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
     return [
@@ -101,11 +105,21 @@ function resultFields(execution: Completed): readonly IntentField[] {
       { label: "Created", value: version.createdAt },
     ];
   }
-  const { receipt, result } = execution.outcome;
+  const { result } = execution.outcome;
+  const proof =
+    "execution" in execution.outcome
+      ? execution.outcome.execution
+      : execution.outcome.receipt;
   return [
-    { label: "Task created", value: result.title },
+    {
+      label: action === "task.update" ? "Task updated" : "Task created",
+      value: result.title,
+    },
+    ...(action === "task.update"
+      ? [{ label: "Task status", value: result.status.replaceAll("_", " ") }]
+      : []),
     { label: "Due date", value: result.dueDate ? day(result.dueDate) : "None" },
-    { label: "Completed", value: receipt.completedAt },
+    { label: "Completed", value: proof.completedAt },
   ];
 }
 
@@ -273,6 +287,28 @@ export function intentRow(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
   if (item.kind === "schedule_proposal") return closed(plainLooks.schedule);
+  if (item.kind === "memory_review") {
+    const withheld = "withheld" in item;
+    return {
+      ...closed({
+        status: withheld ? "Withheld" : "Submitted for review",
+        tone: "neutral",
+        detail: withheld
+          ? "Memory review details are unavailable with your current access."
+          : "Submission was accepted for memory review. This receipt does not confirm a saved or published memory.",
+      }),
+      title: "Memory review",
+      result: withheld
+        ? []
+        : [
+            {
+              label: "Candidate reference",
+              value: item.review.result.candidateId,
+            },
+            { label: "Command hash", value: item.review.result.commandSha256 },
+          ],
+    };
+  }
   if ("withheld" in item) return closed(plainLooks.withheldProposal);
   const { look, decision } = proposalLook(item, now, viewer);
   const execution = item.execution;
@@ -289,7 +325,9 @@ export function intentRow(
     title: actionLabels[item.proposal.command.action] ?? row.title,
     proposal: item.proposal,
     fields: proposalFields(item.proposal),
-    result: completed ? resultFields(completed) : [],
+    result: completed
+      ? resultFields(completed, item.proposal.command.action)
+      : [],
   };
 }
 

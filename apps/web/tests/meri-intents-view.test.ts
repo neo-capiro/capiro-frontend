@@ -1,6 +1,10 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import {
+  memoryReviewIntent,
+  nativeTaskIntent,
+} from "./meri-intents-native-fixtures";
+import {
   receiveIntentsResponse,
   type IntentsItem,
 } from "@capiro/meri-client/intents";
@@ -209,4 +213,75 @@ it("document publication is refused before display for foreign scope, uncommitte
       }),
     ).rejects.toThrow();
   }
+});
+
+it.each([false, true])(
+  "native task completion renders its actual result without a fabricated receipt (update=%s)",
+  async (update) => {
+    const fixture = nativeTaskIntent(update);
+    const received = await receiveIntentsResponse(
+      "list",
+      200,
+      JSON.stringify(fixture.response),
+      { request: fixture.request },
+    );
+    if ("error" in received) throw Error("Unexpected refusal");
+    const row = intentRow(received.intents[0]!, now, viewer);
+    expect(row).toMatchObject({
+      title: update ? "Update a task" : "Create a task",
+      status: "Completed",
+      decision: "closed",
+    });
+    expect(
+      Object.fromEntries(row.result.map(({ label, value }) => [label, value])),
+    ).toEqual({
+      [update ? "Task updated" : "Task created"]: update
+        ? "Updated task"
+        : "Task",
+      ...(update ? { "Task status": "in progress" } : {}),
+      "Due date": "None",
+      Completed: "2026-10-12T20:00:00.000Z",
+    });
+  },
+);
+
+it.each([false, true])(
+  "memory review receipt has no task proposal or approval controls (withheld=%s)",
+  async (withheld) => {
+    const fixture = memoryReviewIntent(withheld);
+    const received = await receiveIntentsResponse(
+      "list",
+      200,
+      JSON.stringify(fixture.response),
+      { request: fixture.request },
+    );
+    if ("error" in received) throw Error("Unexpected refusal");
+    const row = intentRow(received.intents[0]!, now, viewer);
+    expect(row).toMatchObject({
+      title: "Memory review",
+      status: withheld ? "Withheld" : "Submitted for review",
+      decision: "closed",
+      proposal: null,
+      fields: [],
+    });
+    expect(row.result).toHaveLength(withheld ? 0 : 2);
+    if (!withheld)
+      expect(row.detail).toContain(
+        "does not confirm a saved or published memory",
+      );
+  },
+);
+
+it("foreign native task proof and memory review scope are refused before display", async () => {
+  const task = nativeTaskIntent(true);
+  task.response.intents[0].execution.outcome.execution.commandSha256 =
+    "f".repeat(64);
+  const memory = memoryReviewIntent();
+  memory.response.intents[0].review.scopes[0].resourceId = "other-actor";
+  for (const fixture of [task, memory])
+    await expect(
+      receiveIntentsResponse("list", 200, JSON.stringify(fixture.response), {
+        request: fixture.request,
+      }),
+    ).rejects.toThrow();
 });
