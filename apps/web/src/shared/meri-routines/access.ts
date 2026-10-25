@@ -13,6 +13,15 @@ import {
 } from "../meri-actions/bounded-json";
 import { actionSessionHeader } from "../meri-actions/session-header";
 
+export class RoutinesAccessDenied extends Error {
+  constructor() {
+    super(
+      "Routine access was denied. Reconnect to check current access. Saved requests are retained.",
+    );
+    this.name = "RoutinesAccessDenied";
+  }
+}
+
 export interface RoutinesAccess {
   exchange<R extends RoutinesRoute>(
     route: R,
@@ -51,6 +60,12 @@ export function createRoutinesAccess(
             signal,
           },
         );
+        // A refusal retires local access even when an intermediary returns a non-JSON body.
+        if (response.status === 401 || response.status === 403) {
+          token = "";
+          void response.body?.cancel().catch(() => undefined);
+          throw new RoutinesAccessDenied();
+        }
         const text = await boundedJsonText(
           response,
           signal,
