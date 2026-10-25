@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import {
+  filingIntent,
   memoryReviewIntent,
   nativeTaskIntent,
 } from "./meri-intents-native-fixtures";
@@ -43,6 +44,80 @@ it("an awaiting task.create proposal is decidable and shows the exact retained c
     "Command hash": proposal.commandSha256,
     Expires: proposal.expiresAt,
   });
+});
+
+it("filing completion preserves every file's partial, failed and indexing observations", async () => {
+  const fixture = filingIntent();
+  const received = await receiveIntentsResponse(
+    "list",
+    200,
+    JSON.stringify(fixture.response),
+    { request: fixture.request },
+  );
+  if ("error" in received) throw Error("Unexpected refusal");
+  const row = intentRow(received.intents[0]!, now, viewer);
+  expect(row).toMatchObject({
+    title: "File attachments to a client",
+    status: "Filing needs attention",
+    tone: "warning",
+    decision: "closed",
+  });
+  expect(row.detail).toContain("1 saved, 1 pending, 1 failed");
+  expect(
+    Object.fromEntries(row.result.map(({ label, value }) => [label, value])),
+  ).toMatchObject({
+    "File 1": "saved-1.txt",
+    "File 1 status": "Saved",
+    "File 1 indexing": "Pending",
+    "File 2": "pending-2.txt",
+    "File 2 status": "Pending",
+    "File 2 indexing": "Not indexed",
+    "File 2 reason": "Index registration unavailable",
+    "File 3": "failed-3.txt",
+    "File 3 status": "Failed",
+    "File 3 reason": "File was not stored",
+  });
+  expect(row.result.some(({ label }) => label === "File 3 document")).toBe(
+    false,
+  );
+  expect(row.fields).toContainEqual({
+    label: "Attachment 2 version",
+    value: "version-2",
+  });
+});
+
+it.each(["saved", "failed"] as const)(
+  "filing %s result cannot imply indexing success",
+  async (status) => {
+    const fixture = filingIntent([status]);
+    const received = await receiveIntentsResponse(
+      "list",
+      200,
+      JSON.stringify(fixture.response),
+      { request: fixture.request },
+    );
+    if ("error" in received) throw Error("Unexpected refusal");
+    const row = intentRow(received.intents[0]!, now, viewer);
+    expect(row.status).toBe(
+      status === "saved" ? "Files saved" : "Filing failed",
+    );
+    expect(row.result.some(({ value }) => value === "Indexed")).toBe(false);
+  },
+);
+
+it("foreign filing objects and incomplete persistence facts are rejected before rendering", async () => {
+  for (const changed of ["object", "document"] as const) {
+    const fixture = filingIntent(["saved"]);
+    const file = fixture.response.intents[0].execution.outcome.result.files[0];
+    if (changed === "object")
+      file.object = { ...file.object, versionId: "another-version" };
+    else delete file.documentId;
+    await expect(
+      receiveIntentsResponse("list", 200, JSON.stringify(fixture.response), {
+        request: fixture.request,
+      }),
+    ).rejects.toThrow();
+  }
 });
 
 it("durable phases read as truthful, closed rows", () => {

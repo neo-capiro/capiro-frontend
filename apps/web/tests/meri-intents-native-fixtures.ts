@@ -78,3 +78,58 @@ export function memoryReviewIntent(withheld = false) {
   ];
   return fixture;
 }
+
+export function filingIntent(
+  statuses: ("saved" | "pending" | "failed")[] = ["saved", "pending", "failed"],
+) {
+  const fixture = nativeTaskIntent();
+  const item = fixture.response.intents[0];
+  const command = item.proposal.command;
+  item.operation.id = "save_chat_attachments";
+  command.action = "artifact.file";
+  command.arguments = {
+    clientId: "00000000-0000-4000-8000-000000000005",
+    conversationId: command.binding.conversationId,
+  };
+  command.scopes = [
+    {
+      tenantId: "tenant",
+      kind: "client",
+      resourceId: command.arguments.clientId,
+      policyRevision: "p1",
+    },
+  ];
+  command.attachments = statuses.map((_, index) => ({
+    objectId: `00000000-0000-4000-8000-${String(800 + index).padStart(12, "0")}`,
+    versionId: `version-${index + 1}`,
+    sha256: "a".repeat(64),
+    bytes: 2,
+    scopes: command.scopes,
+  }));
+  item.proposal.commandSha256 = canonicalSha256(command);
+  item.decision.commandSha256 = item.proposal.commandSha256;
+  const proof = item.execution.outcome.execution;
+  proof.kind = "native-artifact-file";
+  proof.commandSha256 = item.proposal.commandSha256;
+  proof.approvalDecisionSha256 = canonicalSha256(item.decision);
+  item.execution.outcome.result = {
+    commandSha256: item.proposal.commandSha256,
+    files: statuses.map((status, index) => ({
+      object: command.attachments[index],
+      status,
+      fileName: `${status}-${index + 1}.txt`,
+      ...(status === "failed"
+        ? { reason: "File was not stored" }
+        : {
+            documentId: `00000000-0000-4000-8000-${String(900 + index).padStart(12, "0")}`,
+            location: "/files",
+            indexingStatus: status === "saved" ? "pending" : "not_indexed",
+            reused: false,
+            ...(status === "pending"
+              ? { reason: "Index registration unavailable" }
+              : {}),
+          }),
+    })),
+  };
+  return fixture;
+}

@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import {
+  filingIntent,
   memoryReviewIntent,
   nativeTaskIntent,
 } from "../../tests/meri-intents-native-fixtures";
@@ -32,6 +33,38 @@ test("memory submission and withheld history render without task approval or aut
   await expect(
     page.getByText("Candidate reference", { exact: true }),
   ).toHaveCount(1);
+  await expect(
+    page.getByRole("button", { name: /Approve|Reject|Check result/ }),
+  ).toHaveCount(0);
+  expect(decisions).toBe(0);
+});
+
+test("filing history displays partial results and indexing separately without repeating the action", async ({
+  page,
+}) => {
+  const fixture = filingIntent();
+  let decisions = 0;
+  await onlyLocalRequests(page);
+  await page.route("**/api/conversations/intents/list", (route) =>
+    route.fulfill({ json: fixture.response }),
+  );
+  await page.route("**/api/conversations/intents/decide", (route) => {
+    decisions++;
+    return route.abort();
+  });
+  await page.goto("/intents");
+  await expect(
+    page.getByText("Filing needs attention", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText(/1 saved, 1 pending, 1 failed/)).toBeVisible();
+  const results = page.getByRole("definition");
+  await expect(results.filter({ hasText: /^saved-1.txt$/ })).toBeVisible();
+  await expect(results.filter({ hasText: /^pending-2.txt$/ })).toBeVisible();
+  await expect(results.filter({ hasText: /^failed-3.txt$/ })).toBeVisible();
+  await expect(results.filter({ hasText: /^Not indexed$/ })).toBeVisible();
+  await expect(
+    page.getByText("File was not stored", { exact: true }),
+  ).toBeVisible();
   await expect(
     page.getByRole("button", { name: /Approve|Reject|Check result/ }),
   ).toHaveCount(0);

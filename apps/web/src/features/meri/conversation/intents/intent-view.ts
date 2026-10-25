@@ -85,6 +85,16 @@ export function proposalFields(
     { label: "Expires", value: proposal.expiresAt },
     { label: "Command hash", value: proposal.commandSha256 },
   );
+  if (command.action === "artifact.file")
+    command.attachments.forEach((file, index) => {
+      const label = `Attachment ${index + 1}`;
+      fields.push(
+        { label: `${label} reference`, value: file.objectId },
+        { label: `${label} version`, value: file.versionId },
+        { label: `${label} bytes`, value: String(file.bytes) },
+        { label: `${label} hash`, value: file.sha256 },
+      );
+    });
   return fields;
 }
 
@@ -106,6 +116,31 @@ function resultFields(
     ];
   }
   const { result } = execution.outcome;
+  if ("files" in result)
+    return result.files.flatMap((file, index) => {
+      const label = `File ${index + 1}`;
+      return [
+        { label, value: file.fileName ?? "Name unavailable" },
+        { label: `${label} status`, value: humanize(file.status) },
+        ...(file.documentId === undefined
+          ? []
+          : [
+              { label: `${label} document`, value: file.documentId },
+              { label: `${label} location`, value: file.location! },
+              {
+                label: `${label} indexing`,
+                value:
+                  file.indexingStatus === "not_indexed"
+                    ? "Not indexed"
+                    : humanize(file.indexingStatus!),
+              },
+              { label: `${label} reused`, value: file.reused ? "Yes" : "No" },
+            ]),
+        ...(file.reason === undefined
+          ? []
+          : [{ label: `${label} reason`, value: file.reason }]),
+      ];
+    });
   const proof =
     "execution" in execution.outcome
       ? execution.outcome.execution
@@ -124,6 +159,32 @@ function resultFields(
 }
 
 type Look = Readonly<{ status: string; tone: IntentTone; detail: string }>;
+function filingLook(execution: Completed): Look | null {
+  if (
+    !("result" in execution.outcome) ||
+    !("files" in execution.outcome.result)
+  )
+    return null;
+  const files = execution.outcome.result.files;
+  const saved = files.filter((file) => file.status === "saved").length;
+  const pending = files.filter((file) => file.status === "pending").length;
+  const failed = files.filter((file) => file.status === "failed").length;
+  return {
+    status:
+      saved === files.length
+        ? "Files saved"
+        : failed === files.length
+          ? "Filing failed"
+          : "Filing needs attention",
+    tone:
+      saved === files.length
+        ? "success"
+        : failed === files.length
+          ? "danger"
+          : "warning",
+    detail: `${saved} saved, ${pending} pending, ${failed} failed. Review each file's recorded result; indexing is shown separately.`,
+  };
+}
 const nothing = "Nothing was approved or executed.";
 /** Journal states and withheld or non-command items: shown, never decidable, no content. */
 const plainLooks = {
@@ -321,6 +382,7 @@ export function intentRow(
   return {
     ...row,
     ...(item.phase === "completed" && !completed ? phaseLooks.unknown : look),
+    ...(completed ? filingLook(completed) : null),
     decision,
     title: actionLabels[item.proposal.command.action] ?? row.title,
     proposal: item.proposal,
