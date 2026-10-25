@@ -32,10 +32,12 @@ function TransferSession({ record }: { record: Prospect }) {
   const pending = flow.recovery.record,
     busy = flow.action.isPending || flow.review.isPending;
   const review =
-    freshReview?.review ??
-    (!flow.review.isPending && !flow.review.error
-      ? flow.review.data
-      : undefined);
+    flow.recovery.ready && !flow.contextError
+      ? (freshReview?.review ??
+        (!flow.review.isPending && !flow.review.error
+          ? flow.review.data
+          : undefined))
+      : undefined;
   const receipt =
     pending && flow.action.data?.receipt.requestId === pending.command.requestId
       ? flow.action.data.receipt
@@ -103,7 +105,7 @@ function TransferSession({ record }: { record: Prospect }) {
         >
           <div className="stack">
             {error && <p role="alert">{error}</p>}
-            {flow.contextError ? null : pending ? (
+            {flow.contextError || !flow.recovery.ready ? null : pending ? (
               <>
                 <h3>Original transfer to {pending.clientName}</h3>
                 <ul>

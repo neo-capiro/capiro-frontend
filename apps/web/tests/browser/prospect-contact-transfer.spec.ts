@@ -159,7 +159,10 @@ async function openReview(page: Page) {
     exact: true,
   });
   await expect(
-    dialog.getByLabel(`Action for ${source.name}`, { exact: true }),
+    dialog.getByRole("combobox", {
+      name: `Action for ${source.name}`,
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(
     dialog.getByRole("button", { name: "Transfer reviewed contacts" }),
@@ -173,7 +176,7 @@ async function selectCreate(page: Page) {
     exact: true,
   });
   await dialog
-    .getByLabel(`Action for ${source.name}`, { exact: true })
+    .getByRole("combobox", { name: `Action for ${source.name}`, exact: true })
     .selectOption("create");
   await dialog
     .getByRole("checkbox", { name: /I reviewed each selected/ })
@@ -242,13 +245,13 @@ test("explicit create, exact link and skip survive lost ACK and reload; deleted 
   });
   const dialog = await openReview(page);
   await dialog
-    .getByLabel(`Action for ${source.name}`, { exact: true })
+    .getByRole("combobox", { name: `Action for ${source.name}`, exact: true })
     .selectOption("create");
   await dialog
-    .getByLabel(`Action for ${linked.name}`, { exact: true })
+    .getByRole("combobox", { name: `Action for ${linked.name}`, exact: true })
     .selectOption(`link:${target.id}`);
   await dialog
-    .getByLabel(`Action for ${skipped.name}`, { exact: true })
+    .getByRole("combobox", { name: `Action for ${skipped.name}`, exact: true })
     .selectOption("skip");
   expect(commands).toHaveLength(0);
   await dialog
@@ -374,7 +377,10 @@ test("refusal stays retained while verification fails, then explicit fresh revie
   });
   await expect(fresh).toBeVisible();
   await expect(
-    fresh.getByLabel(`Action for ${source.name}`, { exact: true }),
+    fresh.getByRole("combobox", {
+      name: `Action for ${source.name}`,
+      exact: true,
+    }),
   ).toHaveValue("create");
   await expect(
     fresh.getByRole("checkbox", { name: /I reviewed each selected/ }),
@@ -522,3 +528,115 @@ test("relinking the prospect hides the old client's retained details and holds n
   expect(state.unexpected).toEqual([]);
   expect(state.errors).toEqual([]);
 });
+
+for (const phase of ["unsent", "retained", "fresh"] as const) {
+  test(`current client denial hides ${phase} contact details and allows explicit recovery`, async ({
+    page,
+    baseURL,
+  }) => {
+    const state = await setup(page, baseURL);
+    const commands: TransferCommand[] = [];
+    const pending = phase === "retained";
+    let sourceVersion = 2;
+    await page.route(contactsPath, (route) =>
+      json(route, {
+        prospectId,
+        readOnly: true,
+        contacts: [{ ...source, version: sourceVersion }],
+        nextCursor: null,
+      }),
+    );
+    await page.route(commandPath, (route) => {
+      const command = route.request().postDataJSON() as TransferCommand;
+      commands.push(command);
+      return phase === "fresh"
+        ? json(route, receipt(command, "refused"))
+        : route.abort("failed");
+    });
+    await page.route(receiptPath, (route) =>
+      json(
+        route,
+        receipt(commands[0]!, phase === "fresh" ? "refused" : "completed"),
+      ),
+    );
+    let dialog = await openReview(page);
+    if (phase !== "unsent") {
+      await selectCreate(page);
+      dialog = page.getByRole("dialog", {
+        name: "Recover contact carry-over",
+        exact: true,
+      });
+      if (pending)
+        await expect(
+          dialog.getByRole("button", {
+            name: "Check original transfer result",
+          }),
+        ).toBeEnabled();
+      await expect(dialog).toContainText(source.name);
+      if (phase === "fresh") {
+        sourceVersion = 3;
+        await dialog
+          .getByRole("button", { name: "Review a new transfer after refusal" })
+          .click();
+        dialog = page.getByRole("dialog", {
+          name: "Review contact carry-over",
+          exact: true,
+        });
+        await expect(
+          dialog.getByRole("region", {
+            name: "Changes since the refused transfer",
+          }),
+        ).toContainText(source.name);
+      }
+    }
+    await page.route(`**/clients/${clientId}`, (route) =>
+      json(route, { message: "Synthetic client access revoked" }, 403),
+    );
+    if (pending)
+      await dialog
+        .getByRole("button", { name: "Check original transfer result" })
+        .click();
+    else await selectCreate(page);
+    await expect(page.getByRole("dialog").getByRole("alert")).toBeVisible();
+    await expect(page.getByRole("dialog")).not.toContainText(source.name);
+    await expect(
+      page
+        .getByRole("dialog")
+        .getByRole("button", { name: "Transfer reviewed contacts" }),
+    ).toHaveCount(0);
+    await expect(
+      page.getByRole("region", { name: "Changes since the refused transfer" }),
+    ).toHaveCount(0);
+    expect(commands).toHaveLength(phase === "unsent" ? 0 : 1);
+    await page
+      .getByRole("dialog")
+      .getByRole("button", { name: "Close", exact: true })
+      .click();
+    await page.route(`**/clients/${clientId}`, (route) => json(route, client));
+    await page
+      .getByRole("button", { name: "Retry contact recovery", exact: true })
+      .click();
+    await page
+      .getByRole("button", {
+        name: pending
+          ? "Recover contact carry-over"
+          : "Review contact carry-over",
+        exact: true,
+      })
+      .click();
+    if (pending) {
+      const restored = page.getByRole("dialog", {
+        name: "Recover contact carry-over",
+        exact: true,
+      });
+      await expect(restored).toContainText(source.name);
+      await restored
+        .getByRole("button", { name: "Check original transfer result" })
+        .click();
+      await expect(restored.getByRole("status")).toContainText("completed");
+    }
+    expect(commands).toHaveLength(phase === "unsent" ? 0 : 1);
+    expect(state.unexpected).toEqual([]);
+    expect(state.errors).toEqual([]);
+  });
+}

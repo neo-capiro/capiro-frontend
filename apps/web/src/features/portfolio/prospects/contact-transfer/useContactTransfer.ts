@@ -1,6 +1,7 @@
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
+import { ApiError } from "@/shared/portfolio/api/http";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { assertClientWriter } from "@/shared/portfolio/auth/client-writer";
 import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
@@ -45,10 +46,20 @@ export function useContactTransfer(record: Prospect) {
     recovery.guard();
     assertClientWriter(cache, actor);
   };
+  const verify = async () => {
+    try {
+      await recovery.verify();
+    } catch (error) {
+      // Hide the installed view when current access cannot be verified; the
+      // encrypted command remains available for an explicit recovery retry.
+      recovery.block(error);
+      throw error;
+    }
+  };
   const review = useMutation({
     retry: false,
     mutationFn: async () => {
-      await recovery.verify();
+      await verify();
       return readTransferReview(
         api,
         record.id,
@@ -64,7 +75,7 @@ export function useContactTransfer(record: Prospect) {
       if (!recovery.ready)
         throw new Error("Restore saved-command recovery before continuing.");
       if (contextError) throw new Error(contextError);
-      await recovery.verify();
+      await verify();
       return runContactTransfer(
         api,
         actor,
@@ -74,6 +85,10 @@ export function useContactTransfer(record: Prospect) {
         recovery.signal(),
         recovery.install,
       );
+    },
+    onError: (error) => {
+      if (error instanceof ApiError && [401, 403].includes(error.status))
+        recovery.block(error);
     },
     onSettled: () =>
       Promise.all([
