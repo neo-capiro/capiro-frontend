@@ -211,6 +211,35 @@
 .selectedSource {
   background: var(--muted);
 }
+.sourceAvailability {
+  color: var(--muted-foreground);
+}
+.sourceDetails {
+  width: 100%;
+}
+.sourceDetails ol {
+  margin: 12px 0 0;
+  padding-left: 24px;
+}
+.sourceDetails li {
+  display: list-item;
+  overflow-wrap: anywhere;
+}
+.sourceDetails dl {
+  margin: 8px 0 0;
+}
+.sourceDetails dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.sourceDetails dt {
+  color: var(--muted-foreground);
+  min-width: 100px;
+}
+.sourceDetails dd {
+  margin: 0;
+}
 /* Figma 10.05 mobile conversation: 16px gutters, 22px title, no Meri wordmark. */
 @media (max-width: 680px) {
   .view {

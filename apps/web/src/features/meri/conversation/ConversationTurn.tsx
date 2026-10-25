@@ -2,10 +2,11 @@ import { Message, MessageContent } from "@capiro/ui/message";
 import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import { UserMessage } from "../screens/conversation/UserMessage";
+import { TurnSources } from "../screens/sources/TurnSources";
 import { Notice } from "../ui/Notice";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import { runStateLabels } from "../workspace/workspace-view";
-import type { TurnView } from "./conversation-view";
+import { isTerminal, type TurnView } from "./conversation-view";
 import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
 import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
@@ -89,18 +90,21 @@ export function ConversationTurn({
                 <li key={tool.requestId}>
                   {tool.name ?? "Tool"}
                   {" · "}
-                  {tool.resultReference ? "Done" : "In progress"}
+                  {tool.resultReference
+                    ? "Result recorded · outcome unavailable"
+                    : turn.omittedPrefix || turn.incompleteHistory
+                      ? "Result not in loaded updates"
+                      : isTerminal(turn.runState)
+                        ? "No result recorded"
+                        : "Awaiting result"}
                 </li>
               ))}
             </ul>
           )}
-          {turn.sources.length > 0 && (
-            <p className={styles.muted}>
-              {turn.sources.length === 1
-                ? "1 authorized source record was used."
-                : `${turn.sources.length} authorized source records were used.`}
-            </p>
-          )}
+          <TurnSources
+            sources={turn.sources}
+            historyIncomplete={!!(turn.omittedPrefix || turn.incompleteHistory)}
+          />
         </MessageContent>
       </Message>
       <TurnNotices turn={turn} />
