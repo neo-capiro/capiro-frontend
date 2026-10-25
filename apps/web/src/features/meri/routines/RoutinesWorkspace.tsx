@@ -14,7 +14,14 @@ import { RoutineForm, RoutineCancellation } from "./RoutineForm";
 import { Panel } from "../ui/Panel";
 import styles from "../ui/meri-ui.module.css";
 
-export function RoutinesWorkspace({ port }: { port: RoutineWorkflow }) {
+export function RoutinesWorkspace({
+  port,
+  preserveNewDraft = false,
+}: {
+  port: RoutineWorkflow;
+  /** Only the host keyed by immutable account/client may retain an unsent new draft across reauthorization. */
+  preserveNewDraft?: boolean;
+}) {
   const state = useSyncExternalStore(
     port.subscribe,
     port.getSnapshot,
@@ -42,11 +49,18 @@ export function RoutinesWorkspace({ port }: { port: RoutineWorkflow }) {
   useEffect(() => {
     void port.load();
   }, [port]);
-  // A replacement connection cannot inherit pages, cursors or edits from the former lifetime.
+  // Service pages and existing-routine edits never carry across a connection. An unsent new draft
+  // may stay within its keyed owner; the host hides it until fresh authorization and unmounts on denial.
   if (viewPort !== port || (state.accessDenied && (page || editor))) {
+    const retainNewDraft =
+      preserveNewDraft &&
+      !state.accessDenied &&
+      !viewPort.getSnapshot().accessDenied &&
+      editor?.mode === "edit" &&
+      !editor.scheduleId;
     setViewPort(port);
     setPage(null);
-    setEditor(null);
+    if (!retainNewDraft) setEditor(null);
     setError(null);
   }
   if (state.saved && editor) setEditor(null);
