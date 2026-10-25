@@ -61,7 +61,9 @@ function LiveTurn({
       <p className={styles.muted}>
         {intent.submit.state === "unknown"
           ? "Delivery is uncertain. Retry sends exactly the same request; nothing is duplicated."
-          : "Sending to Meri."}
+          : intent.submit.state === "observed"
+            ? "Message accepted. Reload the transcript to check its current status."
+            : "Sending to Meri."}
       </p>
     </article>
   );
@@ -98,7 +100,9 @@ function composerAvailability(
       : intent.submit?.state === "unknown"
         ? "Delivery of your last request is uncertain. Retry it before sending another."
         : intent.submit && !turn
-          ? "Your request is being sent."
+          ? intent.submit.state === "observed"
+            ? "Reload the transcript to verify the current run."
+            : "Your request is being sent."
           : undefined);
   return {
     initial,
