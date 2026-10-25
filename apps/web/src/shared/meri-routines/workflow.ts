@@ -30,6 +30,7 @@ type Options = {
   access: RoutinesAccess;
   signal: AbortSignal;
   isCurrent: () => boolean;
+  /** Existing session retirement owner; invoked once after a definitive refusal has cleared this view. */
   onAccessLost?: () => void;
   /** Admitted chat proposal. Its proposal ID is a local storage key, never a new prepare request. */
   seed?: SavedRoutine;
@@ -48,8 +49,7 @@ export class RoutineWorkflow {
   private listeners = new Set<() => void>();
   private disposed = false;
   constructor(private readonly options: Options) {
-    options.signal.addEventListener("abort", this.endLifetime, { once: true });
-    if (options.signal.aborted) this.endLifetime();
+    this.observeLifetime();
   }
   getSnapshot = () => this.state;
   subscribe = (listener: () => void) => {
@@ -60,10 +60,7 @@ export class RoutineWorkflow {
   };
   attach = () => {
     this.disposed = false;
-    this.options.signal.addEventListener("abort", this.endLifetime, {
-      once: true,
-    });
-    if (this.options.signal.aborted) this.endLifetime();
+    this.observeLifetime();
     return this.dispose;
   };
   dispose = () => {
@@ -71,6 +68,16 @@ export class RoutineWorkflow {
     this.options.signal.removeEventListener("abort", this.endLifetime);
     this.listeners.clear();
   };
+  /**
+   * The existing session lifetime owns this view: ending it retires privileged content without
+   * reading an ordinary renewal or expiry as a refusal. One registration per lifetime.
+   */
+  private observeLifetime() {
+    this.options.signal.addEventListener("abort", this.endLifetime, {
+      once: true,
+    });
+    if (this.options.signal.aborted) this.endLifetime();
+  }
   private endLifetime = () => {
     this.state = Object.freeze({
       ...this.state,
@@ -128,6 +135,8 @@ export class RoutineWorkflow {
           message: error.message,
         });
         for (const listener of this.listeners) listener();
+        // Retire this exact lifetime once so every view on the refused session ends and only an
+        // explicit Connect can issue fresh access; the refused token is never reused or replayed.
         this.options.onAccessLost?.();
       }
       throw error;
