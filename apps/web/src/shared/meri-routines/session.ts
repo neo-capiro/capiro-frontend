@@ -8,14 +8,14 @@ export async function bootstrapRoutineSession({
   api,
   owner,
   signal,
-  resolveGeneral,
+  resolveConversation,
   fetcher = fetch,
   now = Date.now,
 }: {
   api: ApiClient;
   owner: RoutineOwner;
   signal: AbortSignal;
-  resolveGeneral: (signal: AbortSignal) => Promise<string>;
+  resolveConversation: (signal: AbortSignal) => Promise<string>;
   fetcher?: typeof fetch;
   now?: () => number;
 }) {
@@ -29,14 +29,11 @@ export async function bootstrapRoutineSession({
     signal.throwIfAborted(),
   ).load();
   const conversationId =
-    saved?.context.conversationId ??
-    (owner.selectedClientId === null
-      ? await resolveGeneral(signal)
-      : undefined);
+    saved?.context.conversationId ?? (await resolveConversation(signal));
   return bootstrapConversationSession(
     {
       clientId: owner.selectedClientId,
-      ...(conversationId ? { conversationId } : {}),
+      conversationId,
     },
     { tenantId: owner.tenantId, actorId: owner.actorId },
     signal,

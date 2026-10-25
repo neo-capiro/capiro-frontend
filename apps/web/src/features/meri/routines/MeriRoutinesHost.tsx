@@ -10,7 +10,10 @@ import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { useIdentity } from "../../../shared/portfolio/auth/identity";
 import { useApi } from "../../../shared/portfolio/api/provider";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
-import { firstChatV2OperationKey } from "../../../shared/capiro/operations/meri-first-chat";
+import {
+  firstChatCoreOperationKey,
+  firstChatV2OperationKey,
+} from "../../../shared/capiro/operations/meri-first-chat";
 import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { bootstrapRoutineSession } from "../../../shared/meri-routines/session";
@@ -88,26 +91,37 @@ function Connected({
             api,
             owner,
             signal,
-            resolveGeneral: async (signal) => {
-              if (!generalEnabled)
+            resolveConversation: async (signal) => {
+              if (owner.selectedClientId === null && !generalEnabled)
                 throw new Error("General routine context is not enabled.");
               const result = await resolveFirstChatConversation({
-                scope: {
-                  tenantId: owner.tenantId,
-                  actorId: owner.actorId,
-                  clientId: null,
-                  scopeKind: "general",
-                },
+                scope:
+                  owner.selectedClientId === null
+                    ? {
+                        tenantId: owner.tenantId,
+                        actorId: owner.actorId,
+                        clientId: null,
+                        scopeKind: "general",
+                      }
+                    : {
+                        tenantId: owner.tenantId,
+                        actorId: owner.actorId,
+                        clientId: owner.selectedClientId,
+                      },
                 storage: window.sessionStorage,
                 signal,
                 createOrReuse: (body, signal) => {
-                  if (body.schemaVersion !== 2)
-                    throw new Error("Unexpected routine context.");
-                  return capiro.request(
-                    firstChatV2OperationKey,
-                    { body },
-                    { signal },
-                  );
+                  return body.schemaVersion === 1
+                    ? capiro.request(
+                        firstChatCoreOperationKey,
+                        { body },
+                        { signal },
+                      )
+                    : capiro.request(
+                        firstChatV2OperationKey,
+                        { body },
+                        { signal },
+                      );
                 },
               });
               return result.conversationId;

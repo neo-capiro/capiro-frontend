@@ -124,6 +124,14 @@ vi.mock("../src/shared/capiro/CapiroBoundary", async (original) => {
       providers.capiro as unknown as ReturnType<typeof actual.useCapiro>,
   };
 });
+// These retained lifecycle fixtures use non-UUID tenant/actor aliases. Mock the
+// unchanged Core bootstrap resolver here; cold session binding is covered separately.
+vi.mock("../src/shared/meri-conversations/first-chat-bootstrap", () => ({
+  resolveFirstChatConversation: async () => ({
+    conversationId: f.context.conversationId,
+    clientId: f.context.selectedClientId,
+  }),
+}));
 vi.mock("@capiro/ui/button", () => ({
   Button: (
     props: ComponentProps<typeof import("@capiro/ui/button").Button>,
@@ -786,7 +794,7 @@ it("reconnect selects saved conversation without expired run and fresh Core iden
     owner: f.context,
     signal: signal(),
     fetcher: issue,
-    resolveGeneral: async () => {
+    resolveConversation: async () => {
       throw Error("unexpected allocation");
     },
   });
@@ -803,7 +811,7 @@ it("reconnect selects saved conversation without expired run and fresh Core iden
       owner: f.context,
       signal: signal(),
       fetcher: issue,
-      resolveGeneral: async () => "unused",
+      resolveConversation: async () => "unused",
     }),
   ).rejects.toThrow();
   expect(issue).toHaveBeenCalledTimes(1);
@@ -895,6 +903,7 @@ type HostHarness = {
 };
 function hostHarness(): HostHarness {
   const calls: { path: string; body: unknown }[] = [];
+  vi.stubGlobal("window", { sessionStorage: localStorage });
   providers.api = createApiClient(
     vi.fn(async () =>
       Response.json(routineAccount()),
