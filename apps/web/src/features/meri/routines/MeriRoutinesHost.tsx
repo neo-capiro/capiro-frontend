@@ -113,7 +113,7 @@ function Connected({
               return result.conversationId;
             },
           }),
-        createPort: ({ session, signal, isCurrent }) =>
+        createPort: ({ session, signal, isCurrent, onAccessLost }) =>
           new RoutineWorkflow({
             context: {
               tenantId: session.context.tenantId,
@@ -125,6 +125,7 @@ function Connected({
             access: createRoutinesAccess(session.credential, signal),
             signal,
             isCurrent,
+            onAccessLost,
           }),
       }),
   );

@@ -47,6 +47,7 @@ export interface IntentsAccess {
     access: RoutinesAccess;
     context: RoutineContext;
     signal: AbortSignal;
+    onAccessLost?: () => void;
   };
   list(
     request: IntentsListRequest,
@@ -146,6 +147,7 @@ export function createIntentsAccess(
   lifetime: AbortSignal,
   fetcher: typeof fetch = fetch,
   context?: RoutineContext,
+  onAccessLost?: () => void,
 ): IntentsAccess {
   let token = lifetime.aborted ? "" : credential;
   lifetime.addEventListener("abort", () => (token = ""), { once: true });
@@ -180,6 +182,7 @@ export function createIntentsAccess(
             access: createRoutinesAccess(credential, lifetime, fetcher),
             context,
             signal: lifetime,
+            onAccessLost,
           },
         }
       : {}),
