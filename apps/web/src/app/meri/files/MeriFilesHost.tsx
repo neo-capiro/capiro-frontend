@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import {
   useEffect,
   useLayoutEffect,
@@ -9,6 +10,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@capiro/ui/button";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
+import { scopedHref } from "../../../shared/session/client-route";
+import { useMeriCapabilities } from "../../../shared/meri-resources/CapabilityContext";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { bootstrapActionSession } from "../../../shared/meri-actions/session-bootstrap";
 import { createMeriConversation } from "@capiro/meri-client/conversation";
@@ -98,6 +101,7 @@ function ConnectedFiles({
   const queryClient = useQueryClient();
   const api = useApi();
   const capiro = useCapiro();
+  const capabilities = useMeriCapabilities();
   const [host] = useState(
     () =>
       new SessionLifetimeController({
@@ -172,8 +176,10 @@ function ConnectedFiles({
   return (
     <section aria-label="Document connection">
       <h1>Files</h1>
+      <p>Client: {clientName}.</p>
       <p>
-        Client: {clientName}. A currently admitted document context is required.
+        Document creation uses a saved request from this tab’s current client
+        chat. Connecting checks that context; it does not start a request.
       </p>
       <p role="status">
         {state.status === "connecting"
@@ -191,6 +197,17 @@ function ConnectedFiles({
       >
         Connect document service
       </Button>
+      {capabilities.newConversation.status === "on" && (
+        <p>
+          <Link
+            href={scopedHref("/meri", clientId)}
+            prefetch={false}
+            className="underline"
+          >
+            Open client chat
+          </Link>
+        </p>
+      )}
     </section>
   );
 }
