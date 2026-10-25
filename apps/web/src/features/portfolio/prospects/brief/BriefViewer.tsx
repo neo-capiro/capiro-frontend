@@ -12,16 +12,22 @@ import { BriefEditor } from "./BriefEditor";
 import { BriefSource } from "./BriefSource";
 import { BriefRefresh } from "./BriefRefresh";
 import { WorkspaceCopyLink } from "./WorkspaceCopyLink";
+import {
+  selectClientBrief,
+  type ClientBriefSelection,
+} from "./client-copy/review";
 import styles from "./brief.module.css";
 
 export function BriefViewer({
   scope,
   data,
   onClose,
+  onClientCopy,
 }: {
   scope: BriefScope;
   data: CurrentBrief;
   onClose: () => void;
+  onClientCopy?: (selection: ClientBriefSelection) => void;
 }) {
   const api = useApi();
   const [selected, setSelected] = useState<{
@@ -59,6 +65,14 @@ export function BriefViewer({
     : data.currentVersion;
   const current = !selected || selected.id === data.currentVersion?.id;
   const editable = current && data.brief?.status === "draft" && !!version;
+  let clientSelection: ClientBriefSelection | undefined;
+  if (onClientCopy && version && data.brief) {
+    try {
+      clientSelection = selectClientBrief(scope, data.brief, version);
+    } catch {
+      // An incomplete saved identity cannot be offered for copying.
+    }
+  }
   if (!version && source !== undefined) setSource(undefined);
   return (
     <Dialog
@@ -108,6 +122,14 @@ export function BriefViewer({
         )}
       </nav>
       <WorkspaceCopyLink scope={scope} brief={data.brief} version={version} />
+      {onClientCopy && clientSelection && !editing && (
+        <button
+          className="button"
+          onClick={() => onClientCopy(clientSelection!)}
+        >
+          Copy saved version to private client draft
+        </button>
+      )}
       {panel === "history" ? (
         <BriefHistory
           scope={scope}
