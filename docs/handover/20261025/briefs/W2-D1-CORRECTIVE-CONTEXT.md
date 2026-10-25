@@ -46,8 +46,22 @@ A change is not done until what it replaced is gone.
 - Negative tests are mandatory: another tenant's data, another client's data, and walled data must not be retrievable, through chat or through tools. A General chat reads across the clients the user can already see, with each client's wall enforced per result (FINAL-PLAN decision 2).
 - The original read-only first cut is historical. Neo subsequently authorized preview client-record writes and autonomous Wave 2 completion. Activate accepted writes through their existing authenticated domain/intent owners and receipts, with the actual route/configuration and effect semantics verified. This does not authorize the assistant to send external mail without the user's specific send instruction.
 
-# D1 corrective document context diagnosis — PROCESS6.1
-FROM: Root | TO: Portfolio | TYPE: brief | RE: second D1 connection failure (Wave 2)
+# D1 document context guidance — PROCESS6.1
+FROM: Root | TO: Portfolio | TYPE: brief | RE: explain the saved-request prerequisite (Wave 2)
+
+## Current bounded guidance allocation — before implementation
+
+Root allocated a small presentation correction after accepting the diagnosis below: explain that document creation uses a saved request from this tab's current client chat, and Connect checks that context rather than starting a request. Add an explicit same-tab "Open client chat" link through existing scopedHref('/meri',clientId) only when the current client is authorized and the existing server-derived newConversation capability is on. Use the existing capability context and Next Link with prefetch disabled; do not introduce a new selector, authorization owner, bootstrap or model action. Opening the existing chat route retains its normal Core resolution; the Files page must not do that automatically.
+
+Ownership for this correction is one existing production UI file, apps/web/src/app/meri/files/MeriFilesHost.tsx, plus this brief. Shared lifecycle, routing helper, capability producer, selection, session, wire contracts and proxy files remain unchanged. No inference from generic failure/404, alternative saved-history selection, Recent/General/C3 borrowing, automatic Send, new model invocation, backend repair or live action. Existing generic failure text remains accurate; the prerequisite is stated independently of failure classification.
+
+Refreshed base: remote origin/main confirmed by git ls-remote as a5bd5336aa55bb2635d218caa6c0b8c7bce9b3e3 on25 October2026. Continue the isolated codex/w2-d1-context-20261025 branch from the published diagnosis head f3f31c818eaf617b32303c45a789ce4c8b195ba7; no app source was changed in that head. Current standing source rechecked at8acb394cf10782d1a7703fa2d0b8c926f14ab508; STANDING-REQUIREMENTS.md is unchanged fromb6bf5e90, so the full rules1–4 above remain current. Existing matching tickets/register/scenarios below apply only to this guidance slice.
+
+Verification: inspect current client and server capability gating, existing scoped routing and ordinary chat entry; run affected existing routing/capability and Files session checks plus touched lint/format and diff checks. Static copy/link does not warrant a new mirror test or full suite; new executable regression tests0, mutation N/A. Reuse the retained positive/negative diagnostic reproduction as existing-owner behavior proof, not as a repaired regression. Record commands/UTC/counts/exits and relevant unrun browser/auth/live/model/build/deploy checks. Replace the vague prerequisite sentence, search that removed copy, preserve all existing refusal and session behavior. No new telemetry/resources.
+
+Definition of done for this allocation: one production-file guidance change plus updated brief, commit AND push, draft PR against refreshedmain with exact base/head/tree and affected checks, then Root-allocated independent exact-head review. Root combines accepted Files/Routines/Actions changes for the next candidate; Release/Acceptance own later rollout and legitimate D1 entry. No AWS/live change or model budget consumed here. In-scope choices proceed; only actual ownership/security conflicts go to Root. The earlier diagnosis remains historical evidence: actual19:49 cause is still UNKNOWN and guidance does not close D1.
+
+## Original diagnosis allocation and evidence
 
 Current standing source: C:/dev/wave2-handoff-20261025-docs at b6bf5e90f8f4a55607106b8ee35c4098a6177c1b, STANDING-REQUIREMENTS.md and PROCESS6.1 read on 25 October 2026. Current roles and provenance qualification apply: Root orchestrates; this allocated author implements at xhigh; separate Primary/Supporting reviewers review the exact head. Release alone owns AWS, migration, rollout and rollback. No independent scope authority is inferred from engineering prose. Full Claude SDK harness, native tools and skills, direct Bedrock via Runtime V1, Core authority, user/firm memory and durable outcomes remain.
 
