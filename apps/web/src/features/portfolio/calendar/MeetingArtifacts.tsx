@@ -110,6 +110,7 @@ function ArtifactEditor({
         body: string;
         confidential: boolean;
         generated?: boolean;
+        reviewedBody?: string;
       }
     | undefined
   >(() =>
@@ -140,6 +141,19 @@ function ArtifactEditor({
       !item.confidential &&
       item.status === "approved",
   );
+  const editingRevisionCurrent =
+    !editing?.id ||
+    rows?.some(
+      (item) =>
+        item.id === editing.id &&
+        (item.revision ?? item.updatedAt) === editing.revision,
+    );
+  const returnToReview = () => {
+    // The retained command owns the draft. Reopening it is the explicit step
+    // that reviews a current row; the stale editor must not become writable.
+    if (editing?.id) setEditing(undefined);
+    setSharing(undefined);
+  };
   const changeArtifact = (change: ArtifactChange) => {
     if (blocked) return;
     try {
@@ -158,6 +172,7 @@ function ArtifactEditor({
           setEditing(undefined);
           setSharing(undefined);
         }}
+        onReview={returnToReview}
       />
       <div className="row between">
         <h3>{kind === "notes" ? "Meeting notes" : "Debriefs"}</h3>
@@ -183,6 +198,10 @@ function ArtifactEditor({
                 revision: mutation.uncertain
                   ? saved.revision
                   : (reviewed?.revision ?? reviewed?.updatedAt),
+                reviewedBody:
+                  !mutation.uncertain && reviewed
+                    ? (reviewed.body ?? "")
+                    : undefined,
               });
               return;
             }
@@ -366,7 +385,7 @@ function ArtifactEditor({
           className="stack"
           onSubmit={(event) => {
             event.preventDefault();
-            if (blocked) return;
+            if (blocked || !editingRevisionCurrent) return;
             const form = new FormData(event.currentTarget);
             changeArtifact({
               action: "save",
@@ -380,7 +399,21 @@ function ArtifactEditor({
           <MeetingCommandStatus
             command={mutation.command}
             onDone={() => setEditing(undefined)}
+            onReview={returnToReview}
           />
+          {editing?.reviewedBody !== undefined && (
+            <div className="card stack">
+              <strong>Current saved content</strong>
+              <p style={{ whiteSpace: "pre-wrap" }}>{editing.reviewedBody}</p>
+              <small>Review your retained draft below before saving.</small>
+            </div>
+          )}
+          {!editingRevisionCurrent && (
+            <p role="status">
+              This saved record changed. Review the current revision before
+              saving.
+            </p>
+          )}
           <TextareaField
             label="Content"
             name="body"
@@ -413,7 +446,10 @@ function ArtifactEditor({
           <small>
             Edits require approval again. Saving does not send email.
           </small>
-          <button className="button primary" disabled={blocked}>
+          <button
+            className="button primary"
+            disabled={blocked || !editingRevisionCurrent}
+          >
             Save {singular}
           </button>
         </form>
@@ -429,6 +465,7 @@ function ArtifactEditor({
         <MeetingCommandStatus
           command={mutation.command}
           onDone={() => setSharing(undefined)}
+          onReview={returnToReview}
         />
         <p>
           Confidential material cannot be shared. This does not send an email.

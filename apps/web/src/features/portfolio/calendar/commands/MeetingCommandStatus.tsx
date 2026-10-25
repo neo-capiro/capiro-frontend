@@ -4,9 +4,11 @@ import type { MeetingRecovery } from "./useMeetingCommand";
 export function MeetingCommandStatus({
   command,
   onDone,
+  onReview,
 }: {
   command: MeetingRecovery;
   onDone?: () => void;
+  onReview?: () => void;
 }) {
   const input = command.attempt?.input;
   const run = (kind: "check" | "retry" | "done" | "review") => {
@@ -14,6 +16,7 @@ export function MeetingCommandStatus({
       .recover(kind)
       .then(() => {
         if (kind === "done") onDone?.();
+        if (kind === "review") onReview?.();
       })
       .catch(() => {});
   };

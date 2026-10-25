@@ -138,6 +138,65 @@ async function draft(page: Page, singular: string) {
 }
 for (const kind of ["notes", "debriefs"]) {
   const singular = kind === "notes" ? "note" : "debrief";
+  test(`${kind}: stale update refusal returns to explicit review of the current revision`, async ({
+    page,
+  }) => {
+    const state = await setup(page, kind);
+    const item = {
+      ...createdMetadata(kind),
+      body: "Original saved content",
+      restricted: false,
+    };
+    state.items = [item];
+    await page.reload();
+    await page.getByRole("button", { name: "Edit", exact: true }).click();
+    await page
+      .getByLabel("Content", { exact: true })
+      .fill("Retained changed draft");
+    const freshRevision = "2026-10-10T16:00:00.000Z";
+    state.items = [
+      { ...item, body: "Newer saved content", updatedAt: freshRevision },
+    ];
+    state.refused = true;
+    await page.getByRole("button", { name: `Save ${singular}` }).click();
+    await page
+      .getByRole("button", { name: "Review again", exact: true })
+      .click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(state.writes).toBe(1);
+    await expect(
+      page.getByText("Newer saved content", { exact: true }),
+    ).toBeVisible();
+    await page
+      .getByRole("button", { name: "Review retained draft", exact: true })
+      .click();
+    const editor = page.getByRole("dialog");
+    await expect(editor.getByLabel("Content", { exact: true })).toHaveValue(
+      "Retained changed draft",
+    );
+    await expect(
+      editor.getByText("Newer saved content", { exact: true }),
+    ).toBeVisible();
+    expect(state.writes).toBe(1);
+    state.refused = false;
+    state.nextItems = [
+      { ...item, body: "Retained changed draft", updatedAt: freshRevision },
+    ];
+    await editor.getByRole("button", { name: `Save ${singular}` }).click();
+    await page.getByRole("button", { name: "Done", exact: true }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(state.writes).toBe(2);
+    const [first, second] = state.requests.map((request) => request.body);
+    expect(first!.artifact?.revision).toBe(
+      new Date(metadata.updatedAt).toISOString(),
+    );
+    expect(second!.requestId).not.toBe(first!.requestId);
+    expect(second!.artifact).toMatchObject({
+      id: metadata.id,
+      revision: freshRevision,
+      body: "Retained changed draft",
+    });
+  });
   test(`${kind}: malformed receipt preserves draft and fences repeat creation`, async ({
     page,
   }) => {
