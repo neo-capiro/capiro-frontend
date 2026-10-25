@@ -3413,10 +3413,10 @@
     "file": "apps/web/src/features/settings/BillingSettings.tsx",
     "kind": "function",
     "symbol": "BillingSettings",
-    "fingerprint": "f9bf4c7327b73079b5f8c4cd4bbd1538094930fa05d784aa6ffa5a8494e6add1",
-    "reason": "One billing-state screen composes summary, lock notices, hosted checkout and portal entry, and their local confirmation dialogs. billingFlow and requestBillingDestination own flow choice, fresh preflight and URL validation; the added capacity list-price fact is presentation, not a new billing writer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "20ec4b82090b9c738b73cb16bcdf1aad8c2c5b4ffe5c4ef5979fb17ddf8014ae",
+    "reason": "BillingSettings remains one billing-state screen composing plan and usage presentation, hosted-flow entry and local checkout/cancellation dialogs. The canonical non-aborted 403 now shares the existing BillingStateChanged invalidation branch, closing both dialogs and reloading the existing state/summary queries. billingFlow and requestBillingDestination retain eligibility, current preflight and destination validation; useSettingsAction, Capiro transport, queries and StatusPanel retain cancellation, authority, request lifetime and withholding. This predicate adds no independent responsibility, provider effect, retry loop or policy copy; splitting the cohesive view solely for its size would not improve ownership.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
