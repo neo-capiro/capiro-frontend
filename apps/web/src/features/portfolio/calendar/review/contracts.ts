@@ -18,6 +18,7 @@ export const savedNoteSchema = z.object({
 });
 export type SavedNote = z.infer<typeof savedNoteSchema>;
 export const meetingAttachmentSchema = attachmentSchema.extend({
+  metadataRevision: z.number().int().min(0).optional(),
   tenantId: z.string().min(1),
   meetingId: z.string().nullable(),
   s3Key: z.string().min(1),

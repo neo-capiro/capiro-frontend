@@ -23,21 +23,30 @@ export const syncStatsSchema = z.object({
   skipped: z.number().int().nonnegative(),
   removed: z.number().int().nonnegative(),
   failed: z.number().int().nonnegative(),
-  pages: z.number().int().min(0).max(12),
+  pages: z.number().int().nonnegative(),
   hasMore: z.boolean(),
 });
 export const syncRangeSchema = z
   .object({
-    from: z.iso.datetime({ offset: true }),
-    to: z.iso.datetime({ offset: true }),
+    from: z.iso
+      .datetime({ offset: true })
+      .transform((value) => new Date(value).toISOString()),
+    to: z.iso
+      .datetime({ offset: true })
+      .transform((value) => new Date(value).toISOString()),
   })
-  .refine((range) => Date.parse(range.to) > Date.parse(range.from), {
-    message: "The end must be after the start.",
-  });
+  .refine(
+    (range) =>
+      Date.parse(range.to) > Date.parse(range.from) &&
+      Date.parse(range.to) - Date.parse(range.from) <= 732 * 86_400_000,
+    {
+      message: "The end must be after the start.",
+    },
+  );
 export type CalendarSyncRange = z.infer<typeof syncRangeSchema>;
 export const syncIntentSchema = z
   .object({
-    connectionId: z.uuid(),
+    connectionId: z.uuid().transform((value) => value.toLowerCase()),
     provider: syncProviderSchema,
     range: syncRangeSchema.optional(),
   })
@@ -45,21 +54,32 @@ export const syncIntentSchema = z
     message: "Google sync does not accept a date range.",
   });
 export type CalendarSyncIntent = z.infer<typeof syncIntentSchema>;
-export type CalendarSyncReceipt =
-  | {
-      kind: "connection";
-      connectionId: string;
-      calendar: z.infer<typeof syncStatsSchema>;
-    }
-  | { kind: "window"; calendar: z.infer<typeof syncStatsSchema> };
+export const calendarReceiptSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    requestId: z.uuid(),
+    connectionId: z.uuid(),
+    provider: syncProviderSchema,
+    payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
+    range: syncRangeSchema.nullable(),
+    window: syncRangeSchema,
+    status: z.enum(["pending", "completed"]),
+    calendar: syncStatsSchema,
+    createdAt: z.iso.datetime({ offset: true }),
+    updatedAt: z.iso.datetime({ offset: true }),
+  })
+  .strict()
+  .refine(
+    (value) =>
+      value.status !== "completed" ||
+      (!value.calendar.hasMore && value.calendar.failed === 0),
+  );
+export type CalendarSyncReceipt = z.infer<typeof calendarReceiptSchema>;
 export type CalendarSyncAttempt =
   | { status: "idle" }
   | { status: "pending" | "unknown"; intent: CalendarSyncIntent }
   | {
-      status: "completed";
+      status: "partial" | "completed";
       intent: CalendarSyncIntent;
       receipt: CalendarSyncReceipt;
     };
-/** An actor-wide fence: remounting or choosing another connection cannot retry uncertainty. */
-export const syncAttemptKey = (tenantId: string, userId: string) =>
-  ["calendar-sync-attempt", tenantId, userId] as const;

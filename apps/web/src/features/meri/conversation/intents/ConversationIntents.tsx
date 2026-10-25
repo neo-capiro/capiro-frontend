@@ -11,6 +11,7 @@ import {
   type IntentScope,
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
+import { ConversationRoutine } from "../../routines/ConversationRoutine";
 
 function FieldList({
   fields,
@@ -41,21 +42,27 @@ function DecisionControls({
   row,
   attempt,
   onDecide,
+  disabled,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  disabled: boolean;
 }) {
   const [confirming, setConfirming] = useState<Choice | null>(null);
-  const busy = attempt?.state === "pending";
+  const busy = disabled || attempt?.state === "pending";
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
-          We could not confirm whether your decision to{" "}
-          {attempt.decision === "approved" ? "approve" : "reject"} this was
-          recorded. Checking sends the same request again; nothing new is
-          created.
+          {attempt.message ?? (
+            <>
+              We could not confirm whether your decision to{" "}
+              {attempt.decision === "approved" ? "approve" : "reject"} this was
+              recorded. Checking sends the same request again to recover its
+              outcome.
+            </>
+          )}
         </p>
         <div className={styles.actions}>
           <Button
@@ -130,10 +137,12 @@ function IntentCard({
   row,
   attempt,
   onDecide,
+  disabled,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  disabled: boolean;
 }) {
   const titleId = `intent-${row.deliveryId.slice(4, 16)}`;
   return (
@@ -145,12 +154,12 @@ function IntentCard({
       <p className={styles.muted}>{row.detail}</p>
       <FieldList fields={row.fields} />
       <FieldList fields={row.result} label="Recorded result" />
-      {attempt?.state === "refused" && (
-        <p role="status" className={styles.refusal}>
-          {attempt.message}
-        </p>
-      )}
-      <DecisionControls row={row} attempt={attempt} onDecide={onDecide} />
+      <DecisionControls
+        row={row}
+        attempt={attempt}
+        onDecide={onDecide}
+        disabled={disabled}
+      />
     </article>
   );
 }
@@ -162,7 +171,10 @@ function Body({
   retry,
   loadMore,
   decide,
-}: ReturnType<typeof useConversationIntents>) {
+  decisionsReady,
+  recoveryError,
+  access,
+}: ReturnType<typeof useConversationIntents> & { access: IntentsAccess }) {
   if (list.status === "disabled")
     return (
       <p className={styles.muted}>
@@ -174,8 +186,8 @@ function Body({
   if (list.status === "unavailable")
     return (
       <p className={styles.muted} role="status">
-        Prepared actions could not be read right now. Nothing was approved or
-        executed.{" "}
+        Prepared actions could not be read right now. Their outcomes remain
+        unconfirmed.{" "}
         <Button type="button" variant="outline" onClick={retry}>
           Try again
         </Button>
@@ -191,17 +203,42 @@ function Body({
   return (
     <>
       <ul className={styles.list}>
-        {rows.map((row) => (
-          <li key={row.deliveryId}>
-            <IntentCard
-              row={row}
-              attempt={
-                row.proposal ? attempts[row.proposal.proposalId] : undefined
-              }
-              onDecide={decide}
-            />
+        {!decisionsReady && (
+          <li role="status">
+            {recoveryError ??
+              "Checking saved decisions before another request…"}
           </li>
-        ))}
+        )}
+        {rows.map((row) => {
+          const item = list.items.find(
+            (item) => item.deliveryId === row.deliveryId,
+          );
+          const schedule =
+            item?.state === "prepared" &&
+            item.kind === "schedule_proposal" &&
+            "proposal" in item
+              ? item
+              : null;
+          return (
+            <li key={row.deliveryId}>
+              {schedule && access.routines ? (
+                <ConversationRoutine
+                  item={schedule}
+                  connection={access.routines}
+                />
+              ) : (
+                <IntentCard
+                  row={row}
+                  attempt={
+                    row.proposal ? attempts[row.proposal.proposalId] : undefined
+                  }
+                  onDecide={decide}
+                  disabled={!decisionsReady}
+                />
+              )}
+            </li>
+          );
+        })}
       </ul>
       {list.next && (
         <Button
@@ -250,7 +287,7 @@ export function ConversationIntents({
           </Button>
         )}
       </div>
-      <Body {...state} />
+      <Body {...state} access={access} />
     </section>
   );
 }

@@ -6,6 +6,7 @@ import {
   reserveRecovery,
   retireRefusedRecovery,
   retireNewClientConversionRefusalRecovery,
+  retireProspectContactTransferRefusalRecovery,
   RecoveryStorageError,
 } from "../src/shared/session/recovery/journal";
 import {
@@ -24,6 +25,71 @@ import {
 } from "./command-recovery-platform";
 
 installPlatform();
+
+const contactRefusal = {
+  schemaVersion: 1,
+  requestId: id,
+  status: "refused",
+  result: null,
+  refusal: { code: "PROSPECT_CONTACT_TRANSFER_REFUSED" },
+};
+it("retires a validated contact-transfer refusal to its payload-free exact request fence", async () => {
+  await reserveRecovery(scope, id, data, contract, current);
+  await retireProspectContactTransferRefusalRecovery(
+    scope,
+    id,
+    contactRefusal,
+    current,
+  );
+  expect(await envelope()).toEqual({
+    version: 1,
+    scope,
+    requestId: id,
+    state: "refused",
+    code: "PROSPECT_CONTACT_TRANSFER_REFUSED",
+  });
+  expect(await readRecovery(scope, contract, current)).toBeNull();
+  await expect(
+    reserveRecovery(scope, id, data, contract, current),
+  ).rejects.toBeInstanceOf(RecoveryStorageError);
+});
+it.each([
+  { schemaVersion: 2 },
+  { requestId: nextId },
+  { status: "completed" },
+  { result: {} },
+  { refusal: null },
+  { refusal: { code: "PROSPECT_NEW_CLIENT_REFUSED" } },
+])(
+  "retains pending contact command for invalid terminal receipt %j",
+  async (patch) => {
+    await reserveRecovery(scope, id, data, contract, current);
+    const writes = db.writes.length;
+    await expect(
+      retireProspectContactTransferRefusalRecovery(
+        scope,
+        id,
+        { ...contactRefusal, ...patch },
+        current,
+      ),
+    ).rejects.toBeInstanceOf(RecoveryStorageError);
+    expect(db.writes).toHaveLength(writes);
+    expect(await readRecovery(scope, contract, current)).toEqual(data);
+  },
+);
+it("failed contact refusal storage preserves the unresolved original payload", async () => {
+  await reserveRecovery(scope, id, data, contract, current);
+  db.failWrite = true;
+  await expect(
+    retireProspectContactTransferRefusalRecovery(
+      scope,
+      id,
+      contactRefusal,
+      current,
+    ),
+  ).rejects.toThrow();
+  expect(await readRecovery(scope, contract, current)).toEqual(data);
+});
 
 const conversionRefusal = {
   schemaVersion: 1,

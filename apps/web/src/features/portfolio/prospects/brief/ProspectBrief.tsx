@@ -8,6 +8,8 @@ import type { BriefScope, CreateInput } from "./api";
 import { BriefViewer } from "./BriefViewer";
 import styles from "./brief.module.css";
 import { BriefDate } from "./BriefDate";
+import { useProspect } from "../queries";
+import { ClientBriefCopy } from "./client-copy/ClientBriefCopy";
 
 export function ProspectBrief({ prospectId }: { prospectId: string }) {
   const identity = useIdentity();
@@ -51,6 +53,7 @@ export function ProspectBrief({ prospectId }: { prospectId: string }) {
   );
 }
 function ScopedBrief({ scope }: { scope: BriefScope }) {
+  const prospect = useProspect(scope.prospectId);
   const current = useBrief(scope);
   const create = useWriteBrief(scope);
   const [attempt, setAttempt] = useState<CreateInput>();
@@ -153,13 +156,30 @@ function ScopedBrief({ scope }: { scope: BriefScope }) {
         Workspace filing and candidate objectives require separate supported
         workflows.
       </small>
-      {open && result?.brief && (
-        <BriefViewer
-          scope={scope}
-          data={result}
-          onClose={() => setOpen(false)}
-        />
-      )}
+      <ClientBriefCopy
+        record={
+          prospect.isSuccess && !prospect.error ? prospect.data : undefined
+        }
+      >
+        {(select) =>
+          open &&
+          result?.brief && (
+            <BriefViewer
+              scope={scope}
+              data={result}
+              onClose={() => setOpen(false)}
+              onClientCopy={
+                select
+                  ? (selection) => {
+                      setOpen(false);
+                      select(selection);
+                    }
+                  : undefined
+              }
+            />
+          )
+        }
+      </ClientBriefCopy>
     </>
   );
 }

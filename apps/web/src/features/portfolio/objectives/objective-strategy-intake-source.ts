@@ -18,12 +18,12 @@ export function strategyIntakeReadRequest(
 ) {
   if (
     client.id !== objective.clientId ||
-    client.status !== "active" ||
+    client.status === "archived" ||
     objective.status !== "ready" ||
     !Number.isInteger(objective.version) ||
     objective.version < 1
   )
-    throw new Error("Select an active client and save a ready Objective.");
+    throw new Error("Select a current client and save a ready Objective.");
   return governedObjectiveGenerationReadRequest.parse({
     params: { clientId: objective.clientId, objectiveId: objective.id },
     query: { workAction: "objective.strategy.draft" },

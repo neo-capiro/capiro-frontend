@@ -63,7 +63,7 @@ test("Meri unavailable connection exposes no automatic action dispatch", async (
   expectActionIsolation(fixture);
 });
 
-test("Meri exact proposal requires separate approval and rechecks the identical observed command", async ({
+test("Meri exact proposal requires explicit approval and rechecks the identical observed command", async ({
   page,
 }) => {
   const fixture = await actionHostFixture(page);
@@ -87,16 +87,22 @@ test("Meri exact proposal requires separate approval and rechecks the identical 
   expect(fixture.calls("draft")[0]!.body).toEqual(wire("draft").request);
   expect(fixture.calls("prepare")).toHaveLength(0);
   await prepareAction(page);
-  expect(fixture.calls("prepare")[0]!.body).toEqual(wire("prepare").request);
+  expect(fixture.calls("prepare")[0]!.body).toEqual({
+    ...(wire("prepare").request as object),
+    requestId: expect.any(String),
+  });
   const proposal = page.getByRole("region", {
     name: "Immutable approval proposal",
   });
   await expect(proposal).toContainText(actionContext.proposal.proposalId);
   await expect(proposal).toContainText(actionContext.proposal.commandSha256);
-  await expect(page.getByRole("button", { name: /approve/i })).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Approve and execute", exact: true }),
+  ).toBeDisabled();
   expect(fixture.calls("execute")).toHaveLength(0);
+  await page.getByRole("checkbox", { name: /I approve/ }).check();
   await page
-    .getByRole("button", { name: "Request execution", exact: true })
+    .getByRole("button", { name: "Approve and execute", exact: true })
     .click();
   await expect(proposal.getByRole("status")).toContainText(
     "Current approval is still required.",
@@ -105,10 +111,11 @@ test("Meri exact proposal requires separate approval and rechecks the identical 
     page.getByRole("heading", { name: "Task creation confirmed" }),
   ).toHaveCount(0);
   expect(fixture.calls("execute")).toHaveLength(1);
-  // External test control supplies a later service observation; the browser never approves.
+  // A later explicit retry receives a service observation for the same proposal.
   fixture.use("execute-observed");
+  await page.getByRole("checkbox", { name: /I approve/ }).check();
   await page
-    .getByRole("button", { name: "Request execution", exact: true })
+    .getByRole("button", { name: "Approve and execute", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "Task creation confirmed" }),
@@ -197,6 +204,7 @@ for (const width of [1440, 375]) {
     ).toBeVisible();
     await prepareAction(page);
     expect(fixture.calls("prepare")[0]!.body).toEqual({
+      requestId: expect.any(String),
       draft: wire("draft-canonical-date").response,
     });
     await page.evaluate(() => document.fonts.ready.then(() => undefined));

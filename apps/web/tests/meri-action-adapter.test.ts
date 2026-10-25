@@ -1,3 +1,5 @@
+import { installPlatform } from "./command-recovery-platform";
+installPlatform();
 import { describe, it, expect } from "vitest";
 import { receiveActionResponse } from "@capiro/meri-contracts/action-application";
 import {
@@ -15,9 +17,14 @@ describe("current query fixtures preserve archived-wire refusal", () => {
     const originals = ["query", "draft", "prepare"].map(archivedFixture);
     const h = harness();
     await prepared(h);
-    expect(h.requests.map(({ body }) => body)).toEqual(
-      ["query", "draft", "prepare"].map((name) => fixture(name).request),
-    );
+    expect(h.requests.map(({ body }) => body)).toEqual([
+      fixture("query").request,
+      fixture("draft").request,
+      {
+        ...(fixture("prepare").request as object),
+        requestId: expect.any(String),
+      },
+    ]);
     expect(fixture("draft").request).toEqual({
       ...(originals[1]!.request as object),
       selection: context.selection,
@@ -187,7 +194,10 @@ describe("governed action intent and retained wires", () => {
       selection: context.selection,
       edits: { title: context.task.title, dueDate: null },
     });
-    expect(h.requests[2]!.body).toEqual({ draft: fixture("draft").response });
+    expect(h.requests[2]!.body).toEqual({
+      requestId: expect.any(String),
+      draft: fixture("draft").response,
+    });
   });
 });
 

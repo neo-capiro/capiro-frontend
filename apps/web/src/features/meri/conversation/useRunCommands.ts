@@ -18,6 +18,7 @@ import type {
 } from "@capiro/meri-contracts/conversation-application";
 import type { useRunObservation } from "./useRunObservation";
 import { isSettled } from "./conversation-view";
+import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
 
 /** Reads the run's transcript; false when the conversation has no run yet to observe. */
 async function readTranscript(
@@ -90,6 +91,7 @@ export function useRunCommands(
     prompt: string,
     onRecorded?: (request: ConversationSubmitRequest) => void,
     modelSelection?: ConversationSubmitRequest["modelSelection"],
+    selection?: ConversationSkillSelection,
   ) =>
     send(() =>
       sendRequest(
@@ -100,6 +102,7 @@ export function useRunCommands(
         true,
         onRecorded,
         modelSelection,
+        selection,
       ),
     );
   const recover = (stored: ConversationStoredRequest) =>

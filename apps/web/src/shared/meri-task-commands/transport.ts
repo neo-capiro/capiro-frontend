@@ -6,9 +6,10 @@ import {
   type TaskCommandExecuteResponse,
   type TaskCommandErrorResponse,
   type TaskUpdateApprovalProposal,
-  type TaskUpdateRaw,
-} from "@capiro/meri-client/task-commands";
+  type TaskCommandPrepareRequest,
+} from "@capiro/meri-contracts/task-command-application";
 import type { ActionContext } from "../meri-actions/session-receipt";
+import { sameTaskConversation } from "../meri-actions/task-recovery";
 import {
   boundedJsonText,
   withActionDeadline,
@@ -18,12 +19,14 @@ import { actionSessionHeader } from "../meri-actions/session-header";
 type Reply<T> = { status: number; value: T | TaskCommandErrorResponse };
 export interface TaskCommandTransport {
   prepare(
-    input: TaskUpdateRaw,
+    input: TaskCommandPrepareRequest,
     signal: AbortSignal,
+    originalContext?: ActionContext,
   ): Promise<Reply<TaskCommandPrepareResponse>>;
   execute(
     proposal: TaskUpdateApprovalProposal,
     signal: AbortSignal,
+    originalContext?: ActionContext,
   ): Promise<Reply<TaskCommandExecuteResponse>>;
 }
 export class TaskCommandAccessUnavailable extends Error {}
@@ -44,8 +47,12 @@ export function taskCommandTransport(
     },
     { once: true },
   );
-  const { tenantId, actorId, conversationId, runId } = context;
-  const binding = Object.freeze({ tenantId, actorId, conversationId, runId });
+  const bindingFor = (original: ActionContext = context) => {
+    if (!sameTaskConversation(original, context))
+      throw new TaskCommandNotDispatched("Task conversation changed");
+    const { tenantId, actorId, conversationId, runId } = original;
+    return { tenantId, actorId, conversationId, runId };
+  };
   async function send<T>(
     route: "prepare" | "execute",
     text: string,
@@ -86,24 +93,40 @@ export function taskCommandTransport(
     }
   }
   return {
-    async prepare(input, signal) {
+    async prepare(input, signal, originalContext) {
+      const binding = bindingFor(originalContext);
       let request;
       try {
         request = await receiveTaskCommandRequest(
           "prepare",
-          JSON.stringify({ arguments: input }),
+          JSON.stringify(input),
         );
       } catch {
         throw new TaskCommandNotDispatched("Task input refused");
       }
-      return send("prepare", JSON.stringify(request), signal, (status, body) =>
-        receiveTaskCommandResponse("prepare", status, body, {
-          binding,
-          request,
-        }),
+      return send(
+        "prepare",
+        JSON.stringify(request),
+        signal,
+        async (status, body) => {
+          try {
+            return await receiveTaskCommandResponse("prepare", status, body, {
+              binding,
+              request,
+            });
+          } catch (error) {
+            if (binding.runId === context.runId) throw error;
+            // An absent original delivery can prepare a new proposal only in the freshly admitted run.
+            return receiveTaskCommandResponse("prepare", status, body, {
+              binding: bindingFor(),
+              request,
+            });
+          }
+        },
       );
     },
-    async execute(proposal, signal) {
+    async execute(proposal, signal, originalContext) {
+      const binding = bindingFor(originalContext);
       let request;
       try {
         request = await receiveTaskCommandRequest(

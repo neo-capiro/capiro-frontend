@@ -1,7 +1,7 @@
 import {
   receiveTaskCommandRequest,
   taskCommandMetadata,
-} from "@capiro/meri-client/task-commands";
+} from "@capiro/meri-contracts/task-command-application";
 import {
   boundedJsonText,
   withActionDeadline,

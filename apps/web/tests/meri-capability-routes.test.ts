@@ -48,6 +48,14 @@ const routes = [
       actions(request, { params: Promise.resolve({ operation: "query" }) }),
   },
   {
+    id: "routines",
+    path: "/api/action-followthrough/routine-list",
+    invoke: (request: Request) =>
+      actions(request, {
+        params: Promise.resolve({ operation: "routine-list" }),
+      }),
+  },
+  {
     id: "taskUpdates",
     path: "/api/task-commands/prepare",
     invoke: (request: Request) =>
@@ -125,6 +133,7 @@ it("existing navigation never unlocks disabled native APIs or bypasses authentic
         "actions",
         "taskUpdates",
         "preferences",
+        "routines",
       ].includes(route.id),
     );
     expect(

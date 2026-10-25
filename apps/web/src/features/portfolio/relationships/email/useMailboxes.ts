@@ -1,15 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { z } from "zod";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { useMailAuthority } from "./authority";
 import { sendingMailboxesSchema } from "./mailboxes";
+import { readMailThreadPage } from "./read";
 
 export function useMailboxes(
   clientId: string,
-  threadId?: string,
+  threadId: string | undefined,
+  recipientEmail: string | null,
   enabled = true,
 ) {
   const api = useApi();
@@ -35,23 +36,29 @@ export function useMailboxes(
     },
   });
   const origin = useQuery({
-    queryKey: ["sending-thread-mailbox", ...scope, threadId],
+    queryKey: ["sending-thread-mailbox", ...scope, threadId, recipientEmail],
     enabled: enabled && authority.ready && Boolean(threadId),
     retry: false,
     refetchOnMount: "always",
     queryFn: async ({ signal }) => {
       const assert = authority.capture();
-      const thread = await api.request(
-        "core",
-        `engagement/mail-threads/${encodeURIComponent(threadId ?? "")}`,
-        z
-          .object({ id: z.uuid(), clientId: z.uuid(), connectionId: z.uuid() })
-          .refine(
-            (value) => value.id === threadId && value.clientId === clientId,
-          ),
-        { signal },
+      const thread = await readMailThreadPage(
+        api,
+        {
+          tenantId: identity.data?.tenant?.id ?? "",
+          userId: identity.data?.user.id ?? "",
+          threadId: threadId ?? "",
+          associationClientId: clientId,
+          recipientEmails: recipientEmail ?? "",
+        },
+        {},
+        signal,
       );
       assert();
+      // Core admits recipient-associated history for reading across clients, but
+      // a reply may only use an unassigned thread or this exact direct client.
+      if (thread.clientId !== null && thread.clientId !== clientId)
+        throw new Error("The reply thread belongs to another client.");
       return thread;
     },
   });

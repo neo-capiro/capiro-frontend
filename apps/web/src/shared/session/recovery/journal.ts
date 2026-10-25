@@ -74,6 +74,19 @@ export function readRecovery<Data>(
     return record?.state === "pending" ? decode(record, contract) : null;
   });
 }
+/** Positive disposition for one original command; missing storage is never settlement. */
+export function readRecoveryDisposition(
+  scope: string,
+  requestId: string,
+  assert: () => void,
+) {
+  return locked(scope, assert, async () => {
+    const record = await current(scope);
+    return record?.requestId === requestId && record.state !== "pending"
+      ? record
+      : null;
+  });
+}
 export function reserveRecovery<Data>(
   scope: string,
   requestId: string,
@@ -145,23 +158,36 @@ function retireRecovery(
   disposition:
     | { state: "acknowledged" }
     | {
+        state: "discarded";
+        code: "TASK_PREPARATION_DISCARDED" | "ROUTINE_PREPARATION_DISCARDED";
+      }
+    | {
         state: "refused";
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
           | "ACTIVITY_UNDO_REFUSED"
           | "DIRECTORY_NOTE_REFUSED"
           | "PROSPECT_NEW_CLIENT_REFUSED"
+          | "PROSPECT_CONTACT_TRANSFER_REFUSED"
+          | "MEETING_COMMAND_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_ASSOCIATION_REJECTED"
-          | "OBJECTIVE_VERSION_CONFLICT";
+          | "OBJECTIVE_VERSION_CONFLICT"
+          | "FILE_BATCH_MOVE_REFUSED"
+          | "TASK_EXECUTION_NOT_EXECUTED"
+          | "FILE_ACCESS_REFUSED";
       },
   assert: () => void,
+  beforeRetire?: (
+    record: Extract<JournalEnvelope, { state: "pending" }>,
+  ) => void,
 ) {
   return locked(scope, assert, async () => {
     const existing = await current(scope);
     if (existing?.state !== "pending" || existing.requestId !== requestId)
       throw new RecoveryStorageError();
+    beforeRetire?.(existing);
     // Retain the non-sensitive fence; erase the encrypted draft payload.
     // A known refusal is distinct from an acknowledged completed receipt.
     const retired = await encryptJournal({
@@ -188,6 +214,184 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Feature owner validates the full immutable receipt and rereads it under current authority and the command lock. */
+export function retireProspectContactTransferRefusalRecovery(
+  scope: string,
+  requestId: string,
+  receipt: {
+    schemaVersion: number;
+    requestId: string;
+    status: string;
+    result: unknown;
+    refusal: { code: string } | null;
+  },
+  assert: () => void,
+) {
+  if (
+    receipt.schemaVersion !== 1 ||
+    receipt.requestId !== requestId ||
+    receipt.status !== "refused" ||
+    receipt.result !== null ||
+    receipt.refusal?.code !== "PROSPECT_CONTACT_TRANSFER_REFUSED"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "PROSPECT_CONTACT_TRANSFER_REFUSED" },
+    assert,
+  );
+}
+
+/** Explicit local discard is not execution completion or a server refusal. Check the latest marker atomically. */
+export function discardUnexecutedTaskRecovery<
+  Data extends { executing: boolean },
+>(
+  scope: string,
+  requestId: string,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "discarded", code: "TASK_PREPARATION_DISCARDED" },
+    assert,
+    (record) => {
+      if (decode(record, contract).executing !== false)
+        throw new RecoveryStorageError();
+    },
+  );
+}
+
+/** An explicit discard can retire preparation only while no routine approval was dispatched. */
+export function discardUnapprovedRoutineRecovery<
+  Data extends { approving: boolean },
+>(
+  scope: string,
+  requestId: string,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "discarded", code: "ROUTINE_PREPARATION_DISCARDED" },
+    assert,
+    (record) => {
+      if (decode(record, contract).approving !== false)
+        throw new RecoveryStorageError();
+    },
+  );
+}
+
+/** Caller revalidates the public proof against the original proposal. Retire only that retained proof. */
+export function retireUnexecutedTaskRecovery<
+  Data extends { executing: boolean; notExecuted?: unknown },
+>(
+  scope: string,
+  requestId: string,
+  proof: unknown,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  if (
+    !proof ||
+    typeof proof !== "object" ||
+    Reflect.get(proof, "status") !== "not_executed" ||
+    Reflect.get(proof, "reason") !== "expired"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "TASK_EXECUTION_NOT_EXECUTED" },
+    assert,
+    (record) => {
+      const saved = decode(record, contract);
+      if (
+        !saved.executing ||
+        JSON.stringify(saved.notExecuted) !== JSON.stringify(proof)
+      )
+        throw new RecoveryStorageError();
+    },
+  );
+}
+
+/** Caller binds Core's no-write proof to the exact command and refreshes current authority/files. */
+export function retireFileAccessRefusalRecovery(
+  scope: string,
+  requestId: string,
+  outcome: {
+    requestId: string;
+    status: string;
+    refusal: { code: string } | null;
+  },
+  assert: () => void,
+) {
+  if (
+    outcome.requestId !== requestId ||
+    outcome.status !== "refused" ||
+    outcome.refusal?.code !== "FILE_ACCESS_REFUSED"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "FILE_ACCESS_REFUSED" },
+    assert,
+  );
+}
+
+/** Caller binds Core's no-write proof to the exact command and refreshes current authority/files. */
+export function retireFileBatchMoveRefusalRecovery(
+  scope: string,
+  requestId: string,
+  failure: {
+    schemaVersion: number;
+    requestId: string;
+    code: string;
+    status: number;
+  },
+  assert: () => void,
+) {
+  if (
+    failure.schemaVersion !== 1 ||
+    failure.requestId !== requestId ||
+    failure.code !== "FILE_BATCH_MOVE_REFUSED" ||
+    ![400, 404, 409].includes(failure.status)
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "FILE_BATCH_MOVE_REFUSED" },
+    assert,
+  );
+}
+
+/** Caller re-reads and validates the exact immutable Core refusal under the
+ * execution lock. Missing results and generic HTTP errors never release it. */
+export function retireMeetingRefusalRecovery(
+  scope: string,
+  requestId: string,
+  refusal: { requestId: string; code: string; status: string },
+  assert: () => void,
+) {
+  if (
+    refusal.requestId !== requestId ||
+    refusal.code !== "MEETING_COMMAND_REFUSED" ||
+    refusal.status !== "refused"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "MEETING_COMMAND_REFUSED" },
+    assert,
+  );
 }
 
 /** Caller validates the native failure schema and obtains a fresh current read
@@ -287,28 +491,6 @@ export function retireRefusedRecovery(
   if (
     code !== "WORKSPACE_BRIEF_STATE_CONFLICT" &&
     code !== "ACTIVITY_UNDO_REFUSED"
-  )
-    return Promise.reject(new RecoveryStorageError());
-  return retireRecovery(scope, requestId, { state: "refused", code }, assert);
-}
-
-/** Only after re-reading an exact terminal failed Objective receipt with no result.
- * An unconfirmed outcome can never release its durable request fence. */
-export function retireObjectiveFailureRecovery(
-  scope: string,
-  requestId: string,
-  code:
-    | "OBJECTIVE_GENERATION_FAILED"
-    | "OBJECTIVE_CONTEXT_INCOMPLETE"
-    | "OBJECTIVE_VERSION_CONFLICT",
-  assert: () => void,
-) {
-  if (
-    ![
-      "OBJECTIVE_GENERATION_FAILED",
-      "OBJECTIVE_CONTEXT_INCOMPLETE",
-      "OBJECTIVE_VERSION_CONFLICT",
-    ].includes(code)
   )
     return Promise.reject(new RecoveryStorageError());
   return retireRecovery(scope, requestId, { state: "refused", code }, assert);

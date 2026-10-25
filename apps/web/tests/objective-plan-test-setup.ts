@@ -3,19 +3,12 @@ import genWire from "./objective-generation-wire-fixtures.json";
 import planWire from "./objective-plan-wire-fixtures.json";
 import { objective } from "./browser/fixtures";
 import { ApiError, type ApiClient } from "../src/shared/portfolio/api/http";
-import {
-  objectiveGenerationJob,
-  objectiveGenerationRequest,
-  type ObjectiveGenerationRequest,
-} from "../src/shared/capiro/operations/objective-generation";
+import { objectiveGenerationJob } from "../src/shared/capiro/operations/objective-generation";
 import {
   planRequest,
   type PlanRequest,
   type PlanResponse,
 } from "../src/shared/capiro/operations/strategy-materialization";
-import { ObjectiveGenerationSession } from "../src/features/portfolio/objectives/objective-generation-session";
-import { createGenerationRecovery } from "../src/features/portfolio/objectives/objective-generation-recovery";
-import { ObjectivePlanFlow } from "../src/features/portfolio/objectives/objective-plan-flow";
 import { ObjectivePlanSession } from "../src/features/portfolio/objectives/objective-plan-session";
 import { createPlanRecovery } from "../src/features/portfolio/objectives/objective-plan-recovery";
 
@@ -42,10 +35,9 @@ export function planSetup() {
     malformedError: false,
     pausePost: undefined as Promise<void> | undefined,
   };
-  const generations: ObjectiveGenerationRequest[] = [],
-    plans: PlanRequest[] = [];
-  let generationId = genWire.request.body.requestId,
-    savedPlan: PlanResponse | undefined;
+  const plans: PlanRequest[] = [];
+  const generationId = genWire.request.body.requestId;
+  let savedPlan: PlanResponse | undefined;
   const completed = () =>
     objectiveGenerationJob.parse({
       ...genWire.completedPoll.body,
@@ -73,18 +65,7 @@ export function planSetup() {
             status: "ready",
           },
         ];
-      else if (path === "strategies/objective-drafts") {
-        const request = objectiveGenerationRequest.parse(options?.body);
-        generations.push(request);
-        generationId = request.requestId;
-        value = {
-          ...genWire.accepted.body,
-          objectiveGeneration: {
-            ...genWire.accepted.body.objectiveGeneration,
-            requestId: generationId,
-          },
-        };
-      } else if (path.startsWith("strategies/draft-jobs/")) value = completed();
+      else if (path.startsWith("strategies/draft-jobs/")) value = completed();
       else if (path === "planner/strategy-materializations") {
         const request = planRequest.parse(options?.body);
         plans.push(request);
@@ -132,19 +113,11 @@ export function planSetup() {
       return schema.parse(value);
     },
   };
-  const flow = () =>
-    new ObjectivePlanFlow(
-      new ObjectiveGenerationSession(
-        api,
-        selected,
-        createGenerationRecovery(api, cache, actor, selected),
-      ),
-      (job) =>
-        new ObjectivePlanSession(
-          api,
-          job,
-          createPlanRecovery(api, cache, actor, job),
-        ),
+  const session = () =>
+    new ObjectivePlanSession(
+      api,
+      completed(),
+      createPlanRecovery(api, cache, actor, completed()),
     );
   return {
     api,
@@ -152,9 +125,8 @@ export function planSetup() {
     actor,
     selected,
     control,
-    generations,
     plans,
-    flow,
+    session,
     replaceSavedPlan: (value: PlanResponse) => {
       savedPlan = value;
     },

@@ -16,6 +16,11 @@ export function taskWire(name: string) {
   );
 }
 export const context = taskWire("context");
+const taskIdentity = {
+  ...testIdentity,
+  user: { ...testIdentity.user, id: context.actorId },
+  tenant: { ...testIdentity.tenant, id: context.tenantId },
+};
 export const taskClient = {
   ...client,
   id: context.selectedClientId,
@@ -47,11 +52,11 @@ export async function taskHostFixture(page: Page) {
     return route.fulfill({ status: 501, json: { synthetic: "unconfigured" } });
   });
   await operationFixtures(page, {
-    "me.read": testIdentity,
+    "me.read": taskIdentity,
     "clients.list": [taskClient, otherTaskClient],
   });
   await page.route("**/api/backend/core/me", (route) =>
-    route.fulfill({ json: testIdentity }),
+    route.fulfill({ json: taskIdentity }),
   );
   await page.route("**/api/backend/core/clients/*", (route) =>
     route.fulfill({

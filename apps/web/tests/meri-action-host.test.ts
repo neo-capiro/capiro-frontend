@@ -1,10 +1,57 @@
+import { installPlatform } from "./command-recovery-platform";
+installPlatform();
+import "./command-recovery-platform";
 import { QueryClient } from "@tanstack/react-query";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionHostController } from "../src/shared/meri-actions/host-controller";
+import { SessionLifetimeController } from "../src/shared/meri-actions/opaque-session-controller";
 import { actionQueryJournal } from "../src/shared/meri-actions/query-journal";
 import { accepted, clock, context, fixture } from "./meri-action-fixtures";
 
 const credential = `action_session_${"s".repeat(43)}`;
+it("routine-style session availability preserves the connection until explicit revocation or receipt expiry", async () => {
+  vi.useFakeTimers();
+  const port = { dispose: vi.fn() };
+  let lifetime!: { signal: AbortSignal; isCurrent: () => boolean };
+  const issue = vi.fn(async () => ({
+    expiresAtMs: Date.now() + 60_000,
+    context: {},
+  }));
+  const host = new SessionLifetimeController({
+    issue,
+    createPort: (value) => {
+      lifetime = value;
+      return port;
+    },
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const ready = host.getSnapshot();
+    expect(ready.status).toBe("ready");
+    host.setClientAvailable(false);
+    await vi.advanceTimersByTimeAsync(30_000);
+    expect(lifetime.isCurrent()).toBe(false);
+    expect(lifetime.signal.aborted).toBe(false);
+    expect(host.getSnapshot()).toBe(ready);
+    host.setClientAvailable(true);
+    expect(lifetime.isCurrent()).toBe(true);
+    expect(host.getSnapshot()).toBe(ready);
+    expect(issue).toHaveBeenCalledOnce();
+    await vi.advanceTimersByTimeAsync(30_000);
+    expect(host.getSnapshot()).toEqual({ status: "expired" });
+    expect(host.getExpirationReason()).toBe("expiry");
+    expect(lifetime.signal.aborted).toBe(true);
+    await host.connect();
+    host.revoke();
+    expect(host.getExpirationReason()).toBe("access-lost");
+    expect(lifetime.signal.aborted).toBe(true);
+    expect(port.dispose).toHaveBeenCalledTimes(2);
+  } finally {
+    detach();
+    vi.useRealTimers();
+  }
+});
 const serverContext = {
   tenantId: context.tenantId,
   actorId: context.actorId,
@@ -278,7 +325,7 @@ describe("Meri host availability pause and revocation", () => {
         }),
     );
     const pending = port.execute(selected.handle, new AbortController().signal);
-    expect(h.requests).toHaveLength(5);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(5));
     h.host.setClientAvailable(false);
     release(Response.json(fixture("execute-observed").response));
     expect(await pending).toEqual({ ok: false, problem: "unknown" });
@@ -289,7 +336,7 @@ describe("Meri host availability pause and revocation", () => {
     });
     h.host.setClientAvailable(true);
     expect(ready(h.host)).toBe(before);
-    expect(h.requests).toHaveLength(5);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(5));
     expect(
       await port.execute(selected.handle, new AbortController().signal),
     ).toEqual({ ok: false, problem: "unknown" });
@@ -420,7 +467,7 @@ describe("Meri scoped cache journal versus private host state", () => {
         }),
     );
     const pending = port.execute(selected.handle, new AbortController().signal);
-    expect(h.requests).toHaveLength(5);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(5));
     expect(actionQueryJournal(h.client, serverContext).read()).toEqual({
       status: "pending",
     });

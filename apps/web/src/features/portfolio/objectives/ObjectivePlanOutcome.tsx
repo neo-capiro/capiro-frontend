@@ -2,15 +2,16 @@
 import Link from "next/link";
 import { planHref } from "@/shared/capiro/operations/strategy-materialization";
 import type { PlanState } from "./objective-plan-session";
-import type { ObjectivePlanFlow } from "./objective-plan-flow";
 
 export function ObjectivePlanOutcome({
   state,
-  flow,
+  onContinue,
+  onRefresh,
   locked,
 }: {
   state: PlanState;
-  flow: ObjectivePlanFlow;
+  onContinue: () => void;
+  onRefresh: () => void;
   locked: boolean;
 }) {
   const value = state.verified && !locked ? state.response : undefined;
@@ -70,7 +71,7 @@ export function ObjectivePlanOutcome({
           className="button primary"
           type="button"
           disabled={locked}
-          onClick={() => void flow.resume()}
+          onClick={onContinue}
         >
           {state.request
             ? "Recover same plan request"
@@ -82,7 +83,7 @@ export function ObjectivePlanOutcome({
           className="button"
           type="button"
           disabled={locked || state.busy}
-          onClick={() => void flow.refresh()}
+          onClick={onRefresh}
         >
           Refresh plan receipt
         </button>

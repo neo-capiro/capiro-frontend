@@ -210,19 +210,19 @@
     "file": "apps/web/src/features/portfolio/calendar/sync/CalendarSyncDialog.tsx",
     "kind": "function",
     "symbol": "CalendarSyncDialog",
-    "fingerprint": "d9cfe83645f345ac5e9523e71487a062f222f1f4aa7abf9e7f6f79af0fe74c53",
-    "reason": "This dialog is a single connected-account/date-range review and sync-attempt status projection. useCalendarSync and the adapter own dispatch, while provider-specific labels remain explicit. Those distinctions should not be hidden in a generic provider framework. A status subview is optional on expansion; the current markup has one sync-review purpose.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "7daeeefc41f7c3d78540d29d7e377a8f0dedd789673fdbd265913d0e4f6cf1d7",
+    "reason": "one existing explicit account/range/recovery dialog; protocol and authority remain in hook/command owners, JSX length does not introduce another responsibility.",
+    "reviewedBy": "Codex independent visible review",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/sync/useCalendarSync.ts",
     "kind": "function",
     "symbol": "useCalendarSync",
-    "fingerprint": "fe6d704802cfc4253e707dc583d0578d9638bca9ff96c46232b322275e31ef72",
-    "reason": "This hook owns one local sync attempt's scope, identity subscription, pre-dispatch pending fence and known/unknown result. API calls are delegated. The related cache changes and statuses must share the same attempt identity. Local coherence is not evidence of a durable backend replay fence; that server dependency remains open.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "ca31ec6cb8c00d10b70fc4c1222c99f80bcec2afcbd05be3cb4d2d834da1bab6",
+    "reason": "one actor/open lifetime and retained-command orchestration hook; separate read/write guards, hydration, cancellation and result visibility must remain coordinated.",
+    "reviewedBy": "Codex independent visible review",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
@@ -487,21 +487,19 @@
     "file": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
     "kind": "function",
     "symbol": "BriefViewer",
-    "fingerprint": "cc49e21117e2077b288f1f2805bd762937cdfebf4f8ecb8d7b49ad686530e69b",
-    "reason": "Existing saved brief/history/refresh view adds a delegated source-link presentation. Exact tuple construction lives in WorkspaceCopyLink; no Workspace transport, copy execution or durable state is added to this Portfolio viewer. Exact independent review: docs/workspace-brief-copy-20261013/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent calendar_relationships_review; root integrated exact reviewed source",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "8953fba7fc40b0c26aac50e3d358210c7320dc7e94de1c850e790d40129939cc",
+    "reason": "One saved-version viewing session owns selected history and document/editor/source panel composition, whose implementations remain delegated. The added copy action emits the currently displayed immutable selection through a callback; no journal, transport or copy execution is absorbed.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx",
     "kind": "function",
     "symbol": "ScopedBrief",
-    "line": 53,
-    "nonblank": 113,
-    "fingerprint": "b8f8e5f8f17c3b54da2ef7d9c86378232a5a988de36a7ceb98aa66c2e5b95220",
-    "reason": "Owns availability, initial generation intent, a frozen creation request and opening the saved viewer within an already identity-keyed parent. A 404 is not treated as an empty brief and a lost result is not an automatic new generation. Retain the creation/readback state together; Workspace filing remains a separate contract.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "be0e9e4b00dcb995b408d280c05a65336aaa9264254be6e8976b522269da969f",
+    "reason": "The existing brief card composes creation/status and viewing. ClientBriefCopy remains a separate persistent owner so lost-ack recovery survives viewer closure or source absence. Only the current prospect read and explicit callback composition are added; copy rules, persistence and transport remain delegated.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
@@ -525,10 +523,10 @@
     "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
     "kind": "function",
     "symbol": "ClientLinkDialog",
-    "fingerprint": "02718467f77d1f64359d11917bdc7de0767f06b810dd9cd68efa51e85ca3bb52",
-    "reason": "One explicit existing-client link confirmation owns the normalized search term, current candidate projection, selected candidate and confirmation checkbox. The query/API own native lookup and link dispatch. Selection revocation and mutation outcome preservation are aspects of the same confirmation transaction; the large JSX does not add a second conversion workflow or provider operation. The revised same-component conditional reset clears only an unavailable reviewed record or selection, terminates after that reset, and leaves submitted writer state and existing generation fencing intact.",
-    "reviewedBy": "Codex modules_settings_review independent",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "3bf00cb1effe0b231d1df399b7c08ff6c1a07e67e1f330d3730e80341ee5446d",
+    "reason": "Existing cohesive search/select/confirm link interaction; only explanatory carry-over copy changed. The new workflow is composed outside this dialog through its public feature entry.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx",
@@ -556,10 +554,10 @@
     "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
     "kind": "function",
     "symbol": "ProspectDetail",
-    "fingerprint": "cbbe1c4d1e35e6b3b3aadf7610f646b0b27a31eb79f067c3eb6202afa784bdf7",
-    "reason": "Existing prospect detail composes its independently owned overview, brief, contacts, proposals and conversion areas. The addition mounts the canonical Portfolio Files public component only under current prospect access and links the exact immutable prospect UUID to Modules Workspace; it adds no document editor, attachment transport or cross-feature import. Existing field editing remains with its original domain hooks.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "5e2f741ec15131e3ce658cb1ba7c706177886f0296a35c8fbb6db0a6933ff613",
+    "reason": "The existing prospect detail page remains a composition of separately owned feature surfaces. The only changed responsibility is passing linkedClientId to ProspectFiles when the already loaded prospect has convertedAt; the copy feature independently rechecks current conversion/link/access. It adds no file command, receipt, storage or recovery logic to the page. This exact one-prop composition preserves the existing cohesion decision.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
@@ -900,10 +898,10 @@
     "file": "apps/web/src/features/portfolio/files/file-scope.ts",
     "kind": "function",
     "symbol": "useFileScope",
-    "fingerprint": "301aed60e5253d762f0090d0edb8121ded1373868dbf5fb583224222209048d1",
-    "reason": "Owns one Files view lifetime keyed by client, entity context and the captured reader revision. It subscribes only to actual query-state updates, disposes its AbortController on reader/context/error/unmount changes, and returns read/write executions plus availability. Reader provenance and list transport live separately in file-reader and queries; ticket retries and navigation have their own owners. The 89-line hook keeps cleanup and dispatch guards together instead of spreading one lifetime across effects in each caller.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "61d2ff982ebf39696b7b70757d2b619919c297339c6b80b1eb0a77cdf6e38790",
+    "reason": "One Files view execution lifetime: subscribes to canonical reader and file-list state, keys the lifetime by client/context/reader revision, aborts captured executions when authority or view becomes obsolete, and returns guarded captures plus availability. The finite refetchOnMount:false delegation to useFiles prevents child action mounts from refreshing their initiating parent while retaining missing-data loading and explicit invalidation. Identity transport/schema, list transport, Core authorization, upload attempts, signed-URL navigation and durable move/access/deletion protocols remain in their existing owners. The 96 nonblank-line hook keeps the coupled subscription, controller disposal and dispatch guards together; it adds no independent domain responsibility, duplicate cache, authority owner or workflow dispatcher. Splitting it to meet 80 lines would scatter one lifetime without a responsibility benefit.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), PR145 692b725310453e04f846518fc5c3e379e7851ea1",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/files/upload.ts",
@@ -1210,10 +1208,10 @@
     "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
     "kind": "function",
     "symbol": "ProspectFileSession",
-    "fingerprint": "6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c",
-    "reason": "One keyed actor/tenant/prospect view composes the existing authorized file list, readiness-gated links and separate upload recovery hook. The added filename search, clear and no-match presentation consume only the current successful non-fetching list and reset with the existing scope. No new transport, cache, authority or corpus ownership is introduced. Root inspected the full function and phone capture; independent calendar_relationships accepted its bounded source/test evidence. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "3958f59790af5b74203779998cc05070346aa56fe31f0b223c5956e93b5dd28c",
+    "reason": "The existing prospect-file session owns one list/upload/remove view. This change passes the current converted client to a separately owned ProspectFileCopy component and mounts that component under the same verified actor/prospect lifetime. Copy transport, review, encrypted reservation and receipt recovery remain outside this presenter. The narrow composition does not add another workflow owner to the existing function.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/files/prospect-upload.ts",
@@ -1417,19 +1415,19 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "58dcec17ff70d486702c0c50888d7057ef86355c9b893c4e65cef8c2c13c0c08",
-    "reason": "The existing reviewed mail-composition entry module and its props. The module has one substantive exported UI function. Rich text, body sanitization, recipients, attachments, authority, rewrite/Undo, signature sandbox, mailbox selection and transport/send validation already live in cohesive separate modules. This patch adds only stable contact/thread identity to the existing send hook. 411 lines is a visible review signal, not a new responsibility. No wholesale extraction is justified by this bounded argument change. Extract future independently changing workflow logic into the existing email owners, not a generic composer service.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "dff2dcd9e82873fc4a9d87e91e48b452c9c234898ff66850d6cf3d7ad759f0bd",
+    "reason": "Pre-existing file size signal: base e478 has 411 nonblank lines, fingerprint 58dcec17ff70d486702c0c50888d7057ef86355c9b893c4e65cef8c2c13c0c08; head 646bcf919 has 416 lines with the exact head fingerprint in this record. Replace the existing file record. Independent review of PR149 at exact head 646bcf919: this existing composition entry module still owns one draft, explicit review and send presentation workflow. The only delta passes existing person.email to the existing mailbox-selection hook. Rich body editing, recipient validation, attachments, signature, rewrite, authority and send transport remain in their existing dedicated owners. The 416 nonblank file lines do not add another responsibility; extracting argument plumbing would obscure the existing lifecycle without removing policy or behavior.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "2c5b5508cab8256e3683f1055077576b3891f85753e45ed467e9bfec3716d183",
+    "reason": "Pre-existing function size signal: base e478 has 376 nonblank body lines, fingerprint 7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c; head 646bcf919 has 381 body lines with the exact head fingerprint in this record. Replace the existing function record. Independent review of PR149 at exact head 646bcf919: the 381 nonblank body lines retain the existing coherent draft-to-review-to-send UI lifecycle and immutable reviewed payload. This delta only supplies contact email to useMailboxes; it introduces no sender, access policy, storage or transport responsibility. Both dialogs still share the same draft, pending locks and uncertain-delivery state. Existing specialized hooks and components own independently changing mechanisms, so no additional extraction is warranted for this argument change.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
@@ -1561,10 +1559,10 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
-    "fingerprint": "398d237e5aaa25b8bb7786f54296c1938acdc100a29879417be1cb3bf72459a9",
-    "reason": "One reader-scoped file collection composes local folder/filter/selection state, linked-file arrival and action dialog visibility. Storage usage has an independent Core read; upload, access, move, preview and delete remain in child owners.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "cf5eff94adf4c0698c3cf1420c1a31367aa96d989ecdb3ece58a29c96d32ab1f",
+    "reason": "The existing file-library presenter adds a frozen selection for deletion and an always-mounted, reader-keyed recovery child so a missing target cannot hide retained work. Other file actions continue through their separate components and hooks. It does not receive deletion receipts, infer outcomes, issue requests or own the journal. The exact narrow composition is cohesive despite inherited JSX length; no unrelated refactor is required.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
@@ -2110,10 +2108,10 @@
     "file": "apps/web/tests/meri-action-host.test.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e",
-    "reason": "One host-lifetime contract test module shares a small synthetic session/fetch harness and real QueryClient to exercise explicit connect, idle expiry, suspension/revocation and cache-generation ownership. These are the states of one ActionHostController plus its injected journal, not separate feature domains. Splitting at431 nonblank lines would duplicate the same authority/observation fixtures; all executable test cases and helpers remain below80 lines.",
-    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "d82e3f1aa1a6ccfe09e33822692881854f01e9fb3317c0b658499a34b87b6a6a",
+    "reason": "The existing action-host suite covers explicit connection, pause/revocation and journal versus private host state over a shared synthetic setup. The original PR adds lifetime behavior cases; the correction does not alter this file. These are related contracts of the same host owner, with separately named tests and cleanup. Keeping their fixtures local avoids a speculative shared test framework.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/tests/meri-action-host.test.ts",
@@ -3415,10 +3413,10 @@
     "file": "apps/web/src/features/settings/BillingSettings.tsx",
     "kind": "function",
     "symbol": "BillingSettings",
-    "fingerprint": "f9bf4c7327b73079b5f8c4cd4bbd1538094930fa05d784aa6ffa5a8494e6add1",
-    "reason": "One billing-state screen composes summary, lock notices, hosted checkout and portal entry, and their local confirmation dialogs. billingFlow and requestBillingDestination own flow choice, fresh preflight and URL validation; the added capacity list-price fact is presentation, not a new billing writer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "20ec4b82090b9c738b73cb16bcdf1aad8c2c5b4ffe5c4ef5979fb17ddf8014ae",
+    "reason": "BillingSettings remains one billing-state screen composing plan and usage presentation, hosted-flow entry and local checkout/cancellation dialogs. The canonical non-aborted 403 now shares the existing BillingStateChanged invalidation branch, closing both dialogs and reloading the existing state/summary queries. billingFlow and requestBillingDestination retain eligibility, current preflight and destination validation; useSettingsAction, Capiro transport, queries and StatusPanel retain cancellation, authority, request lifetime and withholding. This predicate adds no independent responsibility, provider effect, retry loop or policy copy; splitting the cohesive view solely for its size would not improve ownership.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
@@ -3577,10 +3575,10 @@
     "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
     "kind": "function",
     "symbol": "proxyOwnerMemoryReview",
-    "fingerprint": "927f0a6775a3aa2d80609d5bcc9c1129a1e18f2711fab1fff497b5a5b588afe7",
-    "reason": "One fixed-operation native Core memory HTTP boundary. It validates exact paths/methods, same-origin mutation input, UUIDs, bounded closed bodies, configured targets and verified replies; deadlines, native tokens and no-store responses follow existing owners. Item reads, correction proposals and version decisions share this constrained transport boundary while Core alone owns authorization, CAS and canonical decisions. Root cross-repository review matched the routes and response shapes; preview source remains null and all activation gates remain held.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "d1e4f89cd564d403f909a7f9f6e838ed576ffd60a4060aecf8f4115a1de40ed8",
+    "reason": "Independent FE155 review at 0e97502120aafa6f9aaf0acff54755244195a959 approves the existing fixed-operation native Core memory HTTP boundary. The items-only change restores wire schemaVersion1 after the existing strict whitelist projection; native authentication, exact methods/paths, closed bodies, status refusals, no-store output, deadline and all write branches remain unchanged. Core retains ownership, tenant/wall/lifecycle authorization and durable outcomes. The 187-line function adds no separate responsibility; retained54 tests and one version-drop mutant killed by2 consumer cases substantiate the narrow repair. See personal-memory-pr155-review.txt.",
+    "reviewedBy": "Codex independent Tenant Settings review",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/useOwnerCorrection.ts",
@@ -3662,5 +3660,266 @@
     "reason": "The callback holds the existing execution lock around the same immutable Undo identity from restored intent through target comparison, read/send, result validation and proved retirement. These branches are one operation, not separate lifecycle owners. Independent D review accepted this exact callback with FE21d8e029/Corea21e8175; unrelated size findings remain open.",
     "reviewedBy": "Codex independent D (wave2_d_review_handover), PF13 Undo repair",
     "reviewedOn": "2026-10-24"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contact-transfer/ContactTransfer.tsx",
+    "kind": "function",
+    "symbol": "TransferSession",
+    "fingerprint": "ed4a745638d92e566939c8a7ec9502397f2f26e65f816d47ec3e9eb4c0969999",
+    "reason": "One dialog session owns mutually exclusive review, retained recovery, and fresh-after-refusal presentation, explicit confirmation and focus. Matching, schema validation, command construction, receipt transport and persistence have separate cohesive owners. A single readiness gate covers every private branch and notice; keeping these mode transitions together makes privacy and retained-intent behavior reviewable.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contact-transfer/recovery.ts",
+    "kind": "function",
+    "symbol": "runContactTransfer",
+    "fingerprint": "26d52e51adf04f00b0720d4a0199c761a0383457dd01c434e265b61dc498b4ff",
+    "reason": "One domain operation snapshots user intent and orchestrates the existing recovery command lock. Authority checks, pre-POST encrypted reservation, exact retry and verified retirement form one bounded lifecycle; DTO, matching and transport stay separate.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contact-transfer/recovery.ts",
+    "kind": "function",
+    "symbol": "runContactTransfer > <anonymous>",
+    "fingerprint": "481140c20717475c12a5e6cd0098e6ac7003c42f092cb8fe011ae4ca3a5e5511",
+    "reason": "One contiguous critical section enforces read/reserve/send-or-read/retire ordering across tabs, preserving lock lifetime and guard visibility around the immutable attempt.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contact-transfer/TransferReview.tsx",
+    "kind": "function",
+    "symbol": "TransferReview",
+    "fingerprint": "0736c7d176278ac794b6a63d86c4810775d12fab41b9c20fc14ccfea1e51b213",
+    "reason": "One presentational contact-choice control renders reviewed fields, explicit create/link/skip choices and stale-target state. It has no transport or persistence ownership; matching remains in review.ts.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contact-transfer/useContactTransfer.ts",
+    "kind": "function",
+    "symbol": "useContactTransfer",
+    "fingerprint": "58bba55164204a39c0a4e9c5e4cfeddfed4627cf16dbb6c3105e7c3254875de8",
+    "reason": "One React binding owns current actor/context checks, retained-intent hydration and explicit review/action mutations for contact carry-over. Fresh reads and command execution remain in their existing owners. Access-failure blocking belongs here because it controls the same installed private view; it leaves the encrypted journal and domain result semantics unchanged.",
+    "reviewedBy": "/root/final_privacy_review_xhigh",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/client-copy/ClientBriefCopy.tsx",
+    "kind": "function",
+    "symbol": "CopySession",
+    "fingerprint": "dccec185cc0a3509a76e3291d2dfffccc5373cbd530e2f6abab0d862dd98776a",
+    "reason": "One dialog owns explicit saved-source review, title confirmation and held-command recovery presentation. Authority, immutable comparison, transport, encrypted persistence and result presentation already have separate owners. Keeping mutually exclusive view states and their readiness gate together makes confirmation and privacy reviewable; splitting JSX solely for size would scatter this single interaction.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/client-copy/recovery.ts",
+    "kind": "function",
+    "symbol": "runClientBriefCopy",
+    "fingerprint": "6f40047f27df4a524b5c7a4f30197e50836a07d193270180fdf47b09b3af19ae",
+    "reason": "One bounded command lifecycle reuses the existing lock and encrypted journal, with separate authority, review and command modules. Contiguous ordering makes authority-before-decryption, reservation-before-POST, GET-before-retry and exact acknowledgement reviewable.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/client-copy/recovery.ts",
+    "kind": "function",
+    "symbol": "runClientBriefCopy > <anonymous>",
+    "fingerprint": "a262a5415a07be76c83d121325d9f4be4575faa02310c73bb0bfc82c0651703a",
+    "reason": "This is the single command-lock critical section for the copy lifecycle. The saved attempt and lock lifetime are shared across reserve, send or reconcile, and acknowledge. Separating fragments solely for size would obscure ordering and guards without creating an independent responsibility.",
+    "reviewedBy": "/root/settings_source_audit",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/client-copy/useClientBriefCopy.ts",
+    "kind": "function",
+    "symbol": "useClientBriefCopy",
+    "fingerprint": "1350df0f66bf1854cd254c01334b758ee1ef90de66681699c04db87ea88cbff9",
+    "reason": "One React binding connects the copy session to current cached identity, retained-intent hydration and explicit review/action mutations. Domain access, source review, transport and persistence algorithms remain delegated. Access-failure blocking and readiness belong to this same mounted session lifetime.",
+    "reviewedBy": "/root/final_privacy_review_xhigh",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/ProspectFileCopy.tsx",
+    "kind": "function",
+    "symbol": "ProspectFileCopy",
+    "fingerprint": "47c438df05a7c3c7d52a3bde570b76cda37608777c7f3e8f6d237f47281c247c",
+    "reason": "One private-copy dialog presents the mutually exclusive review, retained-command recovery, pending and completed states of one user action. Selection/folder confirmation, busy dismissal and private-detail hiding must remain coherent with the same recovery readiness. Transport, authority checks, command construction, journal locking and receipt settlement are delegated to existing or dedicated owners. Its JSX length does not justify fragmenting this single presentation lifecycle.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/recovery.ts",
+    "kind": "function",
+    "symbol": "runProspectFileCopy",
+    "fingerprint": "33f8dada3795a6b1009968e68893fcae7d61e55a121fe0476c016404d93b793e",
+    "reason": "One finite copy/recovery operation snapshots its input and enters the existing recovery command lock. It composes current authorization, frozen source review, encrypted reservation before POST, exact receipt reads/retry and completed-only acknowledgement for the same retained request. The function owns no new journal or policy framework; keeping this sequence together exposes the dispatch and acknowledgement boundaries.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/recovery.ts",
+    "kind": "function",
+    "symbol": "runProspectFileCopy > <anonymous>",
+    "fingerprint": "8a67096c00369c23c77b4123e5e091618530a633b211f6c5431c66652ba228a1",
+    "reason": "This callback is the critical section of the same retained copy operation. It checks current access around the stored command, reserves before the first POST, permits only explicit identical-command retry after GET plus fresh access, rechecks access after receipts and acknowledges only completed history. Splitting its ordered steps into independent stateful owners would obscure the single lock and request invariant. Command/schema and authority implementations already have separate owners.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/useProspectFileCopy.ts",
+    "kind": "function",
+    "symbol": "useProspectFileCopy",
+    "fingerprint": "034c9ca3758accfea7ab648407ea055628fb2e4543dcb9cfe44e1aa44f94d6d8",
+    "reason": "One hook binds the existing retained-intent lifetime to current actor/prospect/client and two no-retry mutations for review and action. Its shared guard, context mismatch, verification and privacy-block handling protect that same account-bound operation; transport and journal transaction behavior are delegated. No unrelated cache, domain policy or background workflow is introduced.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/DeleteFile.tsx",
+    "kind": "function",
+    "symbol": "DeletionSession",
+    "fingerprint": "749e7eecb442df7015a83394371e30f500c7df2af3efb043dfe3a2b083a63d85",
+    "reason": "One deletion dialog presents current review, retained command, pending and completed receipt states for the same actor/client lifetime. Recovery readiness controls every private detail and action; busy dismissal and completed-only acknowledgement belong to that same interaction. Transport, canonical current access, exact command construction and encrypted journal settlement are delegated. Its JSX size does not introduce another domain owner or justify splitting the recovery state across components.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/deletion.ts",
+    "kind": "function",
+    "symbol": "deleteClientFile",
+    "fingerprint": "c59800102591ac2f7cbca01de9e7757413bc932be0fb312a63cc0a5034ab5c3c",
+    "reason": "One finite deletion attempt snapshots its input and runs under the existing encrypted recovery command lock. Submission uses current file review and reserve-before-DELETE; recovery uses the original command and receipt without requiring target presence. Fresh authority, explicit identical-command retry and completed-only acknowledgement share one durable request invariant. Command/receipt validation and current authority remain separate owners, with no new framework or cache-local settlement.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/deletion.ts",
+    "kind": "function",
+    "symbol": "deleteClientFile > <anonymous>",
+    "fingerprint": "8d0369f1e24f9d2cf58f208fd12967a926d72d9c8b73aedb561bce5dae9c3a4d",
+    "reason": "This is the critical section of the same retained deletion transaction: authorize around storage, reserve before dispatch, compare the original attempt, read a receipt before explicit retry, recheck authority after receipt and acknowledge only confirmed completion. Keeping its ordered effect boundaries within one callback makes the command lock inspectable. It does not implement journal storage, cryptography, backend deletion or a second authority owner.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2f5ae9a7db31cd7232341d26416fb28a183d1fcaac1178555e10a85da5a7c7d9",
+    "reason": "FilesPage remains the existing client-file library composition module. The bounded change snapshots the selected deletion review and mounts the separately owned DeleteFile recovery surface outside target-list presence. Existing list/filter/selection and feature dialogs keep their current owners; deletion contracts, access, transport and journal lifecycle live elsewhere. Crossing the file-size signal adds no independent business responsibility to this module.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/settings/PersonalSettings.tsx",
+    "kind": "function",
+    "symbol": "PersonalSettings",
+    "fingerprint": "99ed618f24994d0110181586b2936daea978ff5a0c064e353cdc5359dcfe61dc",
+    "reason": "The existing personal-settings presenter keeps its title mutation, Clerk account controls, email-signature child and navigation cards under their existing owners. The ST28 change only corrects the monitoring ScopedLink destination to the mounted Intelligence LegiWatch view, retaining current client context through the existing ScopedLink. It introduces no new state, transport, policy or workflow responsibility; the exact link-only change preserves cohesion.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/useMailboxes.ts",
+    "kind": "function",
+    "symbol": "useMailboxes",
+    "fingerprint": "2980261076acdc51769a5915f063dbc4092af1497723b9237450144ea93c08c3",
+    "reason": "Newly crossed function threshold: base e478 has 78 nonblank body lines, fingerprint a135877c9c64aa1e7064f64f724aae22cbdbd5e677ff301b1de7661cdb7738da; head 646bcf919 has 84 body lines with the exact head fingerprint in this record. Add this one function record. Independent review of PR149 at exact head 646bcf919: the 84 nonblank body lines form one current sending-mailbox selection hook. Its existing mailbox-list and reply-origin queries must jointly determine current selection, loading, error and refresh state. The origin query now reuses readMailThreadPage and useMailAuthority instead of duplicating a response schema; it validates canonical scope, permits only null or the exact direct client, and selects the exact origin only from current eligible rows. Core remains the permission and association owner. Splitting these coupled query states would not separate an independent responsibility; no new abstraction or second policy is justified.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+    "kind": "function",
+    "symbol": "ConnectedHost",
+    "fingerprint": "e38312eb424947ae9d8f3cae070e789c98d3263c382484460d4423a6d1be41eb",
+    "reason": "One recommendation-action connection composition: captures the account/client lifetime supplied by the keyed parent, injects canonical task recovery and a typed first-chat Core invocation into ActionHostController, binds its existing query journal, subscribes and disposes with React, and renders the matching explicit-connect/availability state. The new lazy first-chat adapter is evaluated only after recovery finds no saved command; request persistence, receipt checking, command recovery, transport, current authorization and action effects remain with their existing owners. The 96-line function adds no independently changing business policy, effect dispatcher or storage implementation. Its coupled lifecycle and connection presentation are coherent; extraction merely to satisfy 80 lines would distribute one small composition without a responsibility benefit.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/app/meri/task-updates/MeriTaskUpdateHost.tsx",
+    "kind": "function",
+    "symbol": "ConnectedHost",
+    "fingerprint": "56b8ac59e9141e1ce1fd29924b87a5aac5fc929ee49fa03449c45932b22aa15c",
+    "reason": "One task-update connection composition: captures the keyed account/client lifetime, delegates saved-or-fresh session selection to bootstrapTaskRecoverySession and the existing first-chat owner, creates TaskUpdateWorkflow using its canonical transport and query journal, subscribes/disposes the shared lifetime and renders current connection availability. The typed Core adapter carries only the admitted bootstrap request. Command preparation/execution/recovery and immutable proposal validation stay in the task workflow and recovery owners. The 98-line function has one coordinated lifecycle and UI reason to change; it neither duplicates Core policy nor grows a second task pipeline. No fragmentation solely for the size threshold is justified.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+    "kind": "function",
+    "symbol": "ConnectedFiles",
+    "fingerprint": "6b08cc8ddbfffe1f4f5a98b31cb074fed3d750736c82851747526173b08432e7",
+    "reason": "One document connection composition: within the parent account/client/operation key, creates the existing SessionLifetimeController, delegates identity/bootstrap/public-history qualification to bootstrapFileSession, and constructs DocumentWorkflow with its fixed transport and context journal only after qualification. React attachment, availability hiding, revocation, subscription and explicit-connect presentation belong to this same local lifetime. Persisted-run receiving, canonical authorization, document generation/publication and durable uncertainty remain in existing public client/backend/workflow owners. The 100-line function does not implement these domains itself or dispatch document/Stop effects during connection. A separate generic host/helper solely to trim JSX would scatter this cohesive boundary.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
+    "kind": "function",
+    "symbol": "Connected",
+    "fingerprint": "85f6a0a1bc2d6fee41384ec314424b5cf65b77e7641b76a329c654c77576d28b",
+    "reason": "Independent FE156 review explicitly accepts Connected and its nested issue callback as one cohesive controller/wiring lifetime. The added v1/v2 branch belongs beside the existing scope resolver and does not merit extraction solely for a line threshold. Canonical first-chat, account/client/session receiving, encrypted recovery, authority and command behavior remain in existing owners. The 109-nonblank-line function adds cold client conversation resolution without another policy, schema, transport or lifecycle owner; saved original conversation recovery and omission of the expired run hint are retained. Review reused 38 distinct passing cases and two killed mutants, while recording that synthetic resolution does not qualify live Core/Meri admission. Exact source and cohesion verdict: fe-pr156-review.txt, sealed 2026-10-25T17:52:28UTC.",
+    "reviewedBy": "Codex independent Primary review (chat 01a170f1-e07c-7283-864e-76bd7ca520ac), FE156 a05af12f8520a828959bec23a83391dface74d73; Integration adopts explicitly approved exact source",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
+    "kind": "function",
+    "symbol": "RoutinesWorkspace",
+    "fingerprint": "b2448061c2453120c6f2ced803e441acf18a43cb85ff9a892b03280018e506a9",
+    "reason": "This component owns one routine workspace view: page/cursor, loading/error and editor state, with existing RoutineReview, RoutineForm, RoutineCancellation and Panel children. The changed denial/replacement reset belongs to the same local view lifetime. Network validation, access policy and durable command custody remain delegated. Existing large JSX is cohesive; a mechanical split would obscure the view reset without removing a separate responsibility.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
+    "kind": "function",
+    "symbol": "RoutinesWorkspace > <anonymous> #7",
+    "fingerprint": "2995b98c471e14dfb7df04a86d23aae28fd5b27ad7f051670d7af2153bf6e7d7",
+    "reason": "This rows.map callback renders one canonical routine projection and its bounded observed activity, with edit/cancel buttons delegating to the parent editor state. It neither authorizes a change nor writes a command. Its 86-line JSX body has one rendering responsibility and remains unchanged by the correction; no helper component is necessary to establish the denial/lifetime boundary.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239",
+    "reason": "This describe callback is a declarative group of separately named tests for one explicit host connection lifetime, not one 142-line operation. Each case isolates issuance, receipt validation, attach/detach, expiry or refusal using the same synthetic host fixture. No unrelated business responsibilities are combined.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #5",
+    "fingerprint": "60162a7677bfcd763ad299f238db9f7bda894c7dc77eeeeadcca2bef0880c097",
+    "reason": "This describe callback groups separately named tests of the boundary between scoped cache journal metadata and private host state. Cases check retained uncertain writes, identity separation, exact context keys and old settlement after clear. The 119-line grouping preserves the shared fixture and does not create an oversized production operation.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/tests/meri-routines.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "113221f8453013d5db2dddd539cb1fb79f7a1ae782a255e8cc2159a184f3d505",
+    "reason": "The routines suite keeps synthetic public contract fixtures, existing encrypted-journal platform mocks and focused transport/workflow/view scenarios together. The correction adds four scenarios at the same denial/session boundary, importing the actual standalone host and conversation card. Only their four provider hooks and the existing static React harness are adapted; no unrelated domain or reusable test framework is added. The useMemo mock assumes stable dependencies and the static renderer does not prove mounted React subscription, browser visibility or StrictMode cleanup. Those limits are explicit in the verdict; these tests are accepted as local composition evidence together with source inspection, not live acceptance.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
+    "kind": "function",
+    "symbol": "proxyOwnerMemoryReview > <anonymous>",
+    "fingerprint": "38770ef1187942e1c78e96c8d9ea6c792457f3026f2298b5a2f176458cfca8d4",
+    "reason": "Independent FE155 review at 0e97502120aafa6f9aaf0acff54755244195a959 approves this81-line existing deadline callback. It performs one native-authenticated Core dispatch and validates/translates that fixed operation's bounded response with shared body cleanup and status handling. Restoring one validated items-page wire-version field creates the threshold crossing without a new policy, parser, data owner or independent lifecycle. Keeping the bounded dispatch/response/finally sequence together preserves readable error semantics; the actual proxy-to-browser decoder regressions and meaningful version-drop mutant cover the change. See personal-memory-pr155-review.txt.",
+    "reviewedBy": "Codex independent Tenant Settings review",
+    "reviewedOn": "2026-10-25"
   }
 ]

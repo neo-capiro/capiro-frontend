@@ -1,6 +1,9 @@
 import { z } from "zod";
 import {
   submissionIdentity,
+  receiveSkillSelection,
+  skillSelectionFields,
+  type ConversationSkillSelection,
   type ConversationIntent,
 } from "../../../shared/meri-conversations/query-journal";
 import {
@@ -23,6 +26,7 @@ const draftState = z.strictObject({
     .extend({ run: z.string(), request: z.string(), continuation: z.boolean() })
     .nullable(),
   reserved: capture.extend({ request: z.string() }).nullable(),
+  selection: z.unknown().transform(receiveSkillSelection).optional(),
 });
 type DraftState = z.infer<typeof draftState>;
 const empty = (): DraftState => ({
@@ -87,6 +91,14 @@ class DraftOwner {
   };
   draft = () => this.state.draft;
   revision = () => this.state.revision;
+  selection = () => this.state.selection;
+  selectSkill(selection: ConversationSkillSelection) {
+    this.save({
+      ...this.state,
+      selection: receiveSkillSelection(skillSelectionFields(selection)),
+      revision: this.state.revision + 1,
+    });
+  }
   private check(context?: ConversationContext) {
     if (
       this.error() ||

@@ -45,10 +45,12 @@ const emptyList = {
 };
 
 describe("synthetic native history proxy", () => {
-  it("allocates only the three exact canonical routes", () => {
+  it("allocates only the exact canonical history and management routes", () => {
     expect(conversationHistoryRoute("list")).toBe("list");
     expect(conversationHistoryRoute("transcript")).toBe("transcript");
     expect(conversationHistoryRoute("next-turn")).toBe("nextTurn");
+    expect(conversationHistoryRoute("summaries")).toBe("summaries");
+    expect(conversationHistoryRoute("manage")).toBe("manage");
     for (const path of [
       "history",
       "events",

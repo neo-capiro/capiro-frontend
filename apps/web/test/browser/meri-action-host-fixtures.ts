@@ -2,12 +2,17 @@ import { expect, type Page, type Request, type Route } from "@playwright/test";
 import {
   fixture as wire,
   context as actionContext,
-} from "../../tests/meri-action-fixtures";
+} from "../../tests/meri-action-wire-fixtures";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { client, navigate } from "./next-modules-fixtures";
 
 export { navigate, wire, actionContext };
 export const actionClock = Date.parse(actionContext.syntheticNow);
+const actionIdentity = {
+  ...testIdentity,
+  user: { ...testIdentity.user, id: actionContext.actorId },
+  tenant: { ...testIdentity.tenant, id: actionContext.tenantId },
+};
 export const actionClient = {
   ...client,
   id: actionContext.clientId,
@@ -83,13 +88,13 @@ export async function actionHostFixture(page: Page) {
     });
   });
   await operationFixtures(page, {
-    "me.read": testIdentity,
+    "me.read": actionIdentity,
     "clients.list": [actionClient, otherActionClient],
   });
   // Ordinary Meri reads canonical Core identity; never replace it with the former home fixture.
   await page.route("**/api/backend/core/me", (route) => {
     expect(route.request().method()).toBe("GET");
-    return route.fulfill({ json: testIdentity });
+    return route.fulfill({ json: actionIdentity });
   });
   const receive = async (route: Route, name: string, fallback: Reply) => {
     const request = route.request();
@@ -219,7 +224,7 @@ export async function prepareAction(page: Page) {
     .click();
   await expect(
     page.getByRole("heading", {
-      name: "Pending separate approval",
+      name: "Ready for your approval",
       exact: true,
     }),
   ).toBeVisible();

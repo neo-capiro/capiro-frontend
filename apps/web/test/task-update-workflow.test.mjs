@@ -2,6 +2,38 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { TaskUpdateController } from "../src/features/meri/task-updates/workflow-state.ts";
 
+test("saved task reconciliation replaces an old proposal without executing the newly displayed request", async () => {
+  let next = {
+    phase: "prepare",
+    fields: [{ label: "title", value: "Another saved task" }],
+  };
+  const controller = new TaskUpdateController({
+    restore: async () => ({ ok: true, value: { phase: "proposal", proposal } }),
+    retrySaved: async () => ({ ok: true, value: next }),
+    prepare: () => {
+      throw Error("No prepare on reconciliation");
+    },
+    execute: () => {
+      throw Error("No execute on reconciliation");
+    },
+  });
+  controller.attach();
+  await Promise.resolve();
+  assert.equal(controller.getSnapshot().proposal.reference, proposal.reference);
+  await controller.retrySaved();
+  assert.equal(controller.getSnapshot().proposal, null);
+  assert.equal(controller.getSnapshot().savedRequest, true);
+  assert.equal(
+    controller.getSnapshot().recoveryFields[0].value,
+    "Another saved task",
+  );
+  await controller.execute();
+  next = { phase: "empty" };
+  await controller.retrySaved();
+  assert.equal(controller.getSnapshot().savedRequest, false);
+  assert.equal(controller.getSnapshot().proposal, null);
+});
+
 const proposal = Object.freeze({
   handle: Object.freeze({}),
   reference: "synthetic",

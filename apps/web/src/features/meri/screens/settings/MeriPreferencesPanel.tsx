@@ -1,6 +1,7 @@
 "use client";
 import { useState, type ReactNode } from "react";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
+import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
 import { ConnectorAccountsScreen } from "./ConnectorAccountsScreen";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
 import { NotificationsAccountScreen } from "./NotificationsAccountScreen";
@@ -21,14 +22,16 @@ const unavailable =
 
 /**
  * Meri preferences inside Capiro Settings: the same 09.01–09.07 pages as the fixtures,
- * with local tabs and disabled unavailable pages. Only the explicitly enabled
- * personal slot uses the canonical native-authenticated preferences contract.
+ * with local tabs and disabled unavailable pages. Explicitly enabled settings
+ * slots use their canonical native-authenticated owners.
  */
 export function MeriPreferencesPanel({
   userPreferencesEnabled = false,
+  tenantSettingsEnabled = false,
   reportContent,
 }: {
   userPreferencesEnabled?: boolean;
+  tenantSettingsEnabled?: boolean;
   reportContent?: ReactNode;
 }) {
   const [page, setPage] = useState<PreferencePageId>("personal");
@@ -56,7 +59,26 @@ export function MeriPreferencesPanel({
         <ConnectorAccountsScreen chrome={chrome} view={views.connections} />
       );
     case "usage":
-      return <UsageLimitsScreen chrome={chrome} view={views.usage} />;
+      return (
+        <UsageLimitsScreen
+          chrome={
+            tenantSettingsEnabled
+              ? {
+                  ...chrome,
+                  notice: {
+                    title: "Workspace model limits",
+                    detail:
+                      "Current administrators can manage model budgets. Usage totals and run history remain unavailable here.",
+                  },
+                }
+              : chrome
+          }
+          view={views.usage}
+          configurationContent={
+            tenantSettingsEnabled ? <TenantModelSettings /> : undefined
+          }
+        />
+      );
     case "skills":
       return <SkillsTemplatesScreen chrome={chrome} view={views.skills} />;
     case "updates":

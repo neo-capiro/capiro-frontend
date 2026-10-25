@@ -164,6 +164,9 @@ export async function proxyConversationHistory(
       });
     });
   } catch {
-    return unavailable(502, dispatched && route === "nextTurn");
+    return unavailable(
+      502,
+      dispatched && (route === "nextTurn" || route === "manage"),
+    );
   }
 }

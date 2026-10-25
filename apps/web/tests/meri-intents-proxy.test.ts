@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, it, vi } from "vitest";
+import { receiveIntentsResponse } from "@capiro/meri-client/intents";
 import { proxyIntentsRequest } from "../src/shared/meri-intents/proxy";
 
 const wire = (name: string) =>
@@ -16,7 +17,8 @@ const config = {
   requestOrigin: origin,
 };
 const credential = `action_session_${"a".repeat(43)}`;
-const token = vi.fn(async () => "synthetic-native-token");
+const nativeToken = "synthetic-native-token";
+const token = vi.fn(async () => nativeToken);
 const request = (
   operation: string,
   body: unknown,
@@ -44,7 +46,7 @@ const upstream = (status: number, body: unknown) =>
   );
 const code = async (response: Response) => (await response.json()).error?.code;
 
-it("forwards exactly the validated list and decide bodies to Meri with the opaque session as the bearer", async () => {
+it("forwards exactly the validated list and decide bodies to Meri with the server native token as the bearer", async () => {
   for (const [operation, name] of [
     ["list", "listAwaiting"],
     ["decide", "decideExecuted"],
@@ -69,7 +71,7 @@ it("forwards exactly the validated list and decide bodies to Meri with the opaqu
       `https://meri.example.test/api/conversations/intents/${operation}`,
     );
     expect(new Headers(init.headers).get("authorization")).toBe(
-      `Bearer ${credential}`,
+      `Bearer ${nativeToken}`,
     );
     expect(JSON.parse(String(init.body))).toEqual(exchange.request);
     expect(init).toMatchObject({
@@ -79,6 +81,72 @@ it("forwards exactly the validated list and decide bodies to Meri with the opaqu
     });
   }
 });
+
+it("admits an empty list through a native membership boundary that refuses the opaque session", async () => {
+  const listed = wire("listAwaiting");
+  const empty = { ...listed.response, intents: [], next: null };
+  const fetcher = vi.fn(async (_url: unknown, init?: RequestInit) => {
+    const admitted =
+      new Headers(init?.headers).get("authorization") ===
+      `Bearer ${nativeToken}`;
+    return Response.json(
+      admitted ? empty : { error: { code: "UNAUTHENTICATED" } },
+      { status: admitted ? 200 : 401 },
+    );
+  });
+  const response = await proxyIntentsRequest(
+    request("list", listed.request),
+    "list",
+    config,
+    token,
+    fetcher,
+  );
+  expect(response.status).toBe(200);
+  expect(
+    await receiveIntentsResponse(
+      "list",
+      response.status,
+      await response.text(),
+      { request: listed.request },
+    ),
+  ).toEqual(empty);
+
+  const refused = await proxyIntentsRequest(
+    request("list", listed.request),
+    "list",
+    config,
+    async () => credential,
+    fetcher,
+  );
+  expect(refused.status).toBe(401);
+  expect(await refused.json()).toEqual({
+    error: { code: "UNAUTHENTICATED" },
+  });
+});
+
+it.each([
+  ["list", "listAwaiting", 401, "UNAUTHENTICATED"],
+  ["list", "listAwaiting", 403, "MEMBERSHIP_REVOKED"],
+  ["decide", "decideExecuted", 401, "UNAUTHENTICATED"],
+  ["decide", "decideExecuted", 403, "ACCESS_DENIED"],
+] as const)(
+  "preserves %s (%s) native authority refusal %i %s",
+  async (operation, name, status, refusal) => {
+    const body = { error: { code: refusal } };
+    const fetcher = upstream(status, body);
+    const response = await proxyIntentsRequest(
+      request(operation, wire(name).request),
+      operation,
+      config,
+      token,
+      fetcher as unknown as typeof fetch,
+    );
+    expect(response.status).toBe(status);
+    expect(await response.json()).toEqual(body);
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  },
+);
 
 it("passes Meri's closed refusals through unchanged, including UNKNOWN", async () => {
   const unknown = wire("decideUnknown");

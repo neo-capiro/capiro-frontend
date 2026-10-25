@@ -1,3 +1,5 @@
+import { installPlatform } from "./command-recovery-platform";
+installPlatform();
 import { QueryClient } from "@tanstack/react-query";
 import { describe, expect, it, vi } from "vitest";
 import { taskCommandJournal } from "../src/shared/meri-task-commands/query-journal";
@@ -53,19 +55,20 @@ describe("actual public task-command receiver and immutable proposal adapter", (
     });
     expect(fetcher).not.toHaveBeenCalled();
   });
-  it("rejects cross-run/hash/task substitution and retains uncertainty", async () => {
-    for (const mutate of [
-      (wire: Record<string, unknown>) => {
-        const p = wire.proposal as { commandSha256: string };
-        p.commandSha256 = "f".repeat(64);
-      },
-      (wire: Record<string, unknown>) => {
-        const p = wire.proposal as {
-          command: { arguments: { taskId: string } };
-        };
-        p.command.arguments.taskId = "00000000-0000-4000-8000-000000000099";
-      },
-    ]) {
+  it.each([
+    (wire: Record<string, unknown>) => {
+      const p = wire.proposal as { commandSha256: string };
+      p.commandSha256 = "f".repeat(64);
+    },
+    (wire: Record<string, unknown>) => {
+      const p = wire.proposal as {
+        command: { arguments: { taskId: string } };
+      };
+      p.command.arguments.taskId = "00000000-0000-4000-8000-000000000099";
+    },
+  ])(
+    "rejects hash/task substitution and retains uncertainty",
+    async (mutate) => {
       const wire = structuredClone(taskWire("prepare").response) as Record<
         string,
         unknown
@@ -83,8 +86,8 @@ describe("actual public task-command receiver and immutable proposal adapter", (
       });
       await port.prepare(taskInput, signal());
       expect(fetcher).toHaveBeenCalledOnce();
-    }
-  });
+    },
+  );
   it("keeps approval-store read failure uncertain instead of treating it as approval pending", async () => {
     const replies = ["prepare", "missingApprovalStore"];
     const fetcher = vi.fn(async () => taskResponse(replies.shift()!));
@@ -193,8 +196,9 @@ describe("actual public task-command receiver and immutable proposal adapter", (
       problem: "unknown",
     });
   });
-  it("withholds proposals whose created/expiry times do not contain the fresh clock", async () => {
-    for (const at of [taskNow - 1, taskNow + 45_001]) {
+  it.each([taskNow - 1, taskNow + 45_001])(
+    "withholds proposals outside the fresh clock %s",
+    async (at) => {
       const fetcher = vi.fn(async () => taskResponse("prepare"));
       const { port, journal } = taskWorkflow(fetcher, undefined, () => at);
       expect(await port.prepare(taskInput, signal())).toEqual({
@@ -206,8 +210,8 @@ describe("actual public task-command receiver and immutable proposal adapter", (
         problem: "unknown",
       });
       expect(fetcher).toHaveBeenCalledOnce();
-    }
-  });
+    },
+  );
   it("refuses a delayed valid proposal when current client access changes during the request", async () => {
     let release!: (response: Response) => void;
     let current = true;

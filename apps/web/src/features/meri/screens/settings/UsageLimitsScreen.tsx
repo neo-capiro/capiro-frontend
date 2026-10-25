@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { LinkAction } from "../../ui/LinkAction";
 import surfaces from "../../ui/surfaces.module.css";
@@ -59,13 +60,15 @@ const columns: readonly DataColumn<UsageRow>[] = [
   { key: "usage", label: "Usage", width: 120, render: (row) => row.usage },
 ];
 
-/** 09.03 Usage and workspace limits: effective limits are read-only policy, never browser authority. */
+/** 09.03 Usage and workspace limits; the optional connected configuration keeps policy server-owned. */
 export function UsageLimitsScreen({
   chrome,
   view,
+  configurationContent,
 }: {
   chrome: SettingsChrome;
   view: UsageLimitsView;
+  configurationContent?: ReactNode;
 }) {
   const { configuration, limitStates } = view;
   return (
@@ -92,16 +95,20 @@ export function UsageLimitsScreen({
             />
           </SettingsCard>
           <SettingsCard title={configuration.title}>
-            <SettingsFields fields={configuration.fields} mode="inactive" />
-            <dl className={styles.policy}>
-              {configuration.limits.map((limit) => (
-                <div key={limit.label}>
-                  <dt>{limit.label}</dt>
-                  <dd>{limit.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className={ui.muted}>{configuration.footnote}</p>
+            {configurationContent ?? (
+              <>
+                <SettingsFields fields={configuration.fields} mode="inactive" />
+                <dl className={styles.policy}>
+                  {configuration.limits.map((limit) => (
+                    <div key={limit.label}>
+                      <dt>{limit.label}</dt>
+                      <dd>{limit.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className={ui.muted}>{configuration.footnote}</p>
+              </>
+            )}
           </SettingsCard>
         </>
       }

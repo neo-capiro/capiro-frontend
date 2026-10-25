@@ -6,7 +6,6 @@ import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversat
 import ui from "../ui/meri-ui.module.css";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
 import styles from "./live.module.css";
-import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
 import { matchesStoredRequest } from "./run-commands";
 
 /** Connection, delivery and stop feedback for the current run; never a run outcome by itself. */
@@ -91,7 +90,6 @@ export function RunStatus({
           to request cancellation.
         </p>
       )}
-      <RunLifecycleControls />
     </>
   );
 }

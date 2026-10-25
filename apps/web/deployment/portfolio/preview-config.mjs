@@ -19,7 +19,7 @@ const coreMemorySource = '';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
 const meriImageSource = '7eea1e852f177c17e3675429830b886b906e4cd6';
 const meriImageDigest = 'sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d';
-const meriConsumerVersion = '0.1.13';
+const meriConsumerVersion = '0.1.14';
 const nonMeriHosts = new Set([
   'capiro.ai', 'app.capiro.ai', 'os.capiro.ai', 'api.capiro.ai',
   'portfolio-preview.app.capiro.ai', 'first-chat-preview.app-dev.capiro.ai',
@@ -33,13 +33,22 @@ const fixedParameters = Object.freeze({
   ExistingAppUrl: origin,
   TrackerBackend: 'intelligence',
 });
+const ordinaryServiceParameters = Object.freeze({
+  CoreApiBaseUrl: corePreviewApi,
+  StrategyApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/strategy-api',
+  WorkspaceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/workspace-api',
+  IntelligenceApiBaseUrl: 'https://first-chat-preview.app-dev.capiro.ai/intel-api',
+});
 const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const optionalBindings = [
+  'previewReadOnly', 'userPreferencesEnabled',
   'previewReadEnabled', 'firstChatBootstrapEnabled',
   'qualifiedCoreClientRosterApiBaseUrl',
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
   'meriRuntimeSource', 'meriRuntimeImageDigest',
   'memoryOwnerReviewEnabled',
+  'meriActionWorkflowEnabled', 'meriTaskCommandWorkflowEnabled',
+  'meriIntentApprovalsWorkflowEnabled', 'meriDocumentWorkflowEnabled', 'meriDocumentOperation',
 ];
 const patterns = Object.freeze({
   clerkIssuer: /^https:\/\/clerk\.app\.capiro\.ai$/,
@@ -118,12 +127,34 @@ function readQualifiedCoreRosterApi(bindings, firstChat, meri) {
   return target;
 }
 
-function readMemoryConfiguration(bindings) {
+function readMemoryConfiguration(bindings, previewReadOnly) {
   const enabled = Object.hasOwn(bindings, 'memoryOwnerReviewEnabled')
     ? bindings.memoryOwnerReviewEnabled : false;
   if (typeof enabled !== 'boolean') throw Error('PREVIEW_MEMORY_FLAG_INVALID');
-  if (enabled && !coreMemorySource) throw Error('PREVIEW_MEMORY_LISTENER_UNQUALIFIED');
-  return { enabled };
+  const previewRoutesEnabled = enabled && previewReadOnly;
+  if (previewRoutesEnabled && !coreMemorySource) throw Error('PREVIEW_MEMORY_LISTENER_UNQUALIFIED');
+  return { enabled, previewRoutesEnabled };
+}
+
+function readMeriWorkflows(bindings, meri, previewReadOnly) {
+  const enabled = {};
+  for (const name of ['meriActionWorkflowEnabled', 'meriTaskCommandWorkflowEnabled',
+    'meriIntentApprovalsWorkflowEnabled', 'meriDocumentWorkflowEnabled']) {
+    enabled[name] = Object.hasOwn(bindings, name) ? bindings[name] : false;
+    if (typeof enabled[name] !== 'boolean') throw Error('PREVIEW_MERI_WORKFLOW_FLAG_INVALID');
+  }
+  if (Object.values(enabled).some(Boolean) && (previewReadOnly || !meri.baseUrl))
+    throw Error('PREVIEW_MERI_WORKFLOW_DEPENDENCY_HELD');
+  if (enabled.meriIntentApprovalsWorkflowEnabled && !meri.enabled)
+    throw Error('PREVIEW_MERI_INTENTS_DEPENDENCY_HELD');
+  const operation = Object.hasOwn(bindings, 'meriDocumentOperation') ? bindings.meriDocumentOperation : '';
+  // Only the existing Word/TXT family is in this deployment allocation.
+  if (!['', 'create_word'].includes(operation)
+      || (enabled.meriDocumentWorkflowEnabled && operation !== 'create_word'))
+    throw Error('PREVIEW_MERI_DOCUMENT_OPERATION_INVALID');
+  if (!enabled.meriDocumentWorkflowEnabled && operation !== '')
+    throw Error('PREVIEW_MERI_DOCUMENT_OPERATION_WITHOUT_WORKFLOW');
+  return { ...enabled, operation };
 }
 
 /** Public metadata only. This does not read credentials or establish application authority. */
@@ -139,11 +170,22 @@ export function renderPreviewConfiguration(bindings) {
   const meri = readMeriConfiguration(bindings);
   const firstChat = readFirstChatConfiguration(bindings, meri);
   const qualifiedCoreRosterApi = readQualifiedCoreRosterApi(bindings, firstChat, meri);
-  const memory = readMemoryConfiguration(bindings);
+  const previewReadOnly = Object.hasOwn(bindings, 'previewReadOnly') ? bindings.previewReadOnly : true;
+  const userPreferencesEnabled = Object.hasOwn(bindings, 'userPreferencesEnabled') ? bindings.userPreferencesEnabled : false;
+  if (typeof previewReadOnly !== 'boolean')
+    throw Error('PREVIEW_MODE_INVALID');
+  const memory = readMemoryConfiguration(bindings, previewReadOnly);
+  const workflows = readMeriWorkflows(bindings, meri, previewReadOnly);
+  if (typeof userPreferencesEnabled !== 'boolean')
+    throw Error('PREVIEW_USER_PREFERENCES_FLAG_INVALID');
+  if (userPreferencesEnabled && (!meri.baseUrl || previewReadOnly))
+    throw Error('PREVIEW_USER_PREFERENCES_DEPENDENCY_HELD');
+  const services = previewReadOnly ? fixedParameters : { ...fixedParameters, ...ordinaryServiceParameters };
   const values = {
-    ...fixedParameters,
+    ...services,
     CapiroRequestOrigin: origin,
-    CapiroPreviewReadOnly: 'true',
+    CapiroPreviewReadOnly: String(previewReadOnly),
+    MeriUserPreferencesEnabled: String(userPreferencesEnabled),
     CapiroPreviewReadBackendSource: firstChat.readEnabled ? coreReadSource : '',
     CapiroPreviewReadApiBaseUrl: firstChat.readEnabled ? corePreviewApi : '',
     CapiroPreviewClientRosterBackendSource: qualifiedCoreRosterApi ? qualifiedCoreRosterSource : '',
@@ -152,11 +194,16 @@ export function renderPreviewConfiguration(bindings) {
     CapiroPreviewFirstChatBackendSource: firstChat.bootstrapEnabled ? coreBootstrapSource : '',
     CapiroPreviewFirstChatApiBaseUrl: firstChat.bootstrapEnabled ? corePreviewApi : '',
     MeriMemoryOwnerReviewEnabled: String(memory.enabled),
-    CapiroPreviewMemoryOwnerRoutesEnabled: String(memory.enabled),
-    CapiroPreviewMemoryCoreBackendSource: memory.enabled ? coreMemorySource : '',
-    CapiroPreviewMemoryCoreApiBaseUrl: memory.enabled ? corePreviewApi : '',
+    CapiroPreviewMemoryOwnerRoutesEnabled: String(memory.previewRoutesEnabled),
+    CapiroPreviewMemoryCoreBackendSource: memory.previewRoutesEnabled ? coreMemorySource : '',
+    CapiroPreviewMemoryCoreApiBaseUrl: memory.previewRoutesEnabled ? corePreviewApi : '',
     MeriApiBaseUrl: meri.baseUrl,
     MeriConversationWorkflowEnabled: String(meri.enabled),
+    MeriActionWorkflowEnabled: String(workflows.meriActionWorkflowEnabled),
+    MeriTaskCommandWorkflowEnabled: String(workflows.meriTaskCommandWorkflowEnabled),
+    MeriIntentApprovalsWorkflowEnabled: String(workflows.meriIntentApprovalsWorkflowEnabled),
+    MeriDocumentWorkflowEnabled: String(workflows.meriDocumentWorkflowEnabled),
+    MeriDocumentOperation: workflows.operation,
     CapiroPreviewMeriConversationRoutesEnabled: String(meri.routesEnabled),
     CapiroPreviewMeriRuntimeOrigin: meri.routesEnabled ? meri.baseUrl : '',
     CapiroPreviewMeriRuntimeSource: meri.runtimeSource,
@@ -171,27 +218,30 @@ export function renderPreviewConfiguration(bindings) {
     status: 'configuration-proposal',
     profile: 'portfolio-preview',
     backendSource: '0f1e663d5c23ed3f6f02bde801da8f5bb3f8ccba',
-    expectedCoreDeployment: firstChat.bootstrapEnabled ? {
+    expectedCoreDeployment: previewReadOnly && firstChat.bootstrapEnabled ? {
       contractSource: coreBootstrapSource,
       sourceCommit: coreDeploymentSource,
       imageDigest: coreDeploymentDigest,
     } : null,
     parameters: Object.entries(values).map(([ParameterKey, ParameterValue]) => ({ ParameterKey, ParameterValue })),
     environment: {
-      CORE_API_BASE_URL: fixedParameters.CoreApiBaseUrl,
-      STRATEGY_API_BASE_URL: '',
-      WORKSPACE_API_BASE_URL: fixedParameters.WorkspaceApiBaseUrl,
-      INTELLIGENCE_API_BASE_URL: fixedParameters.IntelligenceApiBaseUrl,
+      CORE_API_BASE_URL: services.CoreApiBaseUrl,
+      STRATEGY_API_BASE_URL: services.StrategyApiBaseUrl,
+      WORKSPACE_API_BASE_URL: services.WorkspaceApiBaseUrl,
+      INTELLIGENCE_API_BASE_URL: services.IntelligenceApiBaseUrl,
       CAPIRO_EXISTING_APP_URL: origin,
       TRACKER_BACKEND: 'intelligence',
       ONBOARD_API_BASE_URL: '',
       MERI_API_BASE_URL: meri.baseUrl,
       MERI_CONVERSATION_WORKFLOW_ENABLED: String(meri.enabled),
-      MERI_ACTION_WORKFLOW_ENABLED: 'false',
-      MERI_DOCUMENT_WORKFLOW_ENABLED: 'false',
-      MERI_DOCUMENT_OPERATION: '',
+      MERI_ACTION_WORKFLOW_ENABLED: values.MeriActionWorkflowEnabled,
+      MERI_TASK_COMMAND_WORKFLOW_ENABLED: values.MeriTaskCommandWorkflowEnabled,
+      MERI_INTENT_APPROVALS_WORKFLOW_ENABLED: values.MeriIntentApprovalsWorkflowEnabled,
+      MERI_DOCUMENT_WORKFLOW_ENABLED: values.MeriDocumentWorkflowEnabled,
+      MERI_DOCUMENT_OPERATION: values.MeriDocumentOperation,
       CAPIRO_REQUEST_ORIGIN: origin,
-      CAPIRO_PREVIEW_READ_ONLY: 'true',
+      CAPIRO_PREVIEW_READ_ONLY: String(previewReadOnly),
+      MERI_USER_PREFERENCES_ENABLED: String(userPreferencesEnabled),
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: values.CapiroPreviewReadBackendSource,
       CAPIRO_PREVIEW_READ_API_BASE_URL: values.CapiroPreviewReadApiBaseUrl,
       CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: values.CapiroPreviewClientRosterBackendSource,
@@ -218,8 +268,10 @@ export function renderPreviewConfiguration(bindings) {
       applicationId: bindings.clerkApplicationId,
       requiredEnvironment: 'configured-core-issuer-unverified',
     },
-    holds: ['strategy', 'onboard', 'meri'],
-    activationStatus: meri.enabled
+    holds: previewReadOnly ? ['strategy', 'onboard', 'meri'] : ['onboard'],
+    activationStatus: !previewReadOnly
+      ? 'unverified ordinary authenticated routing; verify backend routes and credential compatibility before activation'
+      : meri.enabled
       ? 'unverified; Meri service and model readiness not established; not a complete apply request'
       : 'unverified; all backend services held at zero; not a complete apply request',
   };

@@ -1,4 +1,5 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
+import { ManagedConversationPanel } from "../../src/features/meri/conversations/ManagedConversationPanel";
 import { SyntheticMeriCapabilities } from "./meri-capability-profile";
 import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
@@ -59,6 +60,12 @@ function SessionProbe() {
 function RoutedApp() {
   const path = usePathname();
   const search = useSearchParams();
+  if (path === "/meri/conversations")
+    return (
+      <RequireSession>
+        <ManagedConversationPanel />
+      </RequireSession>
+    );
   if (isOnboardPath(path) && search.get("onboard-boundary") === "1")
     return <OnboardBoundaryProbe />;
   if (isOnboardPath(path)) {
@@ -257,6 +264,10 @@ function RoutedApp() {
                 }
                 meriPreferences={
                   <MeriPreferencesPanel
+                    tenantSettingsEnabled={
+                      sessionStorage.getItem("tenant-settings-enabled") ===
+                      "true"
+                    }
                     userPreferencesEnabled={
                       sessionStorage.getItem("user-preferences-enabled") ===
                       "true"

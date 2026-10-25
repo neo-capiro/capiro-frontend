@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createElement } from "react";
+import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient } from "@tanstack/react-query";
 import { CapiroApiError } from "../../shared/capiro/http";
 import { useSettingsMutation } from "./useSettingsMutation";
+import { SourceSearch } from "./mappings/SourceSearch";
 
 type Dependencies = readonly unknown[] | undefined;
 type Effect = () => void | (() => void);
@@ -23,6 +24,64 @@ const hooks = vi.hoisted(() => ({
   effectIndex: 0,
   dirty: false,
 }));
+const selectorButtons = vi.hoisted(
+  () => [] as { disabled?: boolean; onClick: () => void }[],
+);
+vi.mock("../../shared/capiro/queries", () => ({
+  useCapiroQuery: (operation: string) => ({
+    data:
+      operation === "settings.mappings.searchLda"
+        ? [
+            { id: "record-a", name: "Record A", totalFilings: 1 },
+            { id: "record-b", name: "Record B", totalFilings: 1 },
+          ]
+        : [],
+    reload: vi.fn(),
+  }),
+}));
+vi.mock("../../shared/module-ui", async () => {
+  const { createElement: element } = await import("react");
+  return {
+    ActionButton: ({
+      children,
+      primary,
+      ...props
+    }: Record<string, unknown>) => {
+      selectorButtons.push(
+        props as { disabled?: boolean; onClick: () => void },
+      );
+      return element(
+        "button",
+        { ...props, "data-primary": primary },
+        children as ReactNode,
+      );
+    },
+    DataTable: ({
+      rows,
+      columns,
+    }: {
+      rows: Record<string, unknown>[];
+      columns: {
+        key: string;
+        render: (row: Record<string, unknown>) => ReactNode;
+      }[];
+    }) =>
+      element(
+        "div",
+        null,
+        rows.map((row, index) =>
+          element(
+            "div",
+            { key: index },
+            columns.map((column) =>
+              element("span", { key: column.key }, column.render(row)),
+            ),
+          ),
+        ),
+      ),
+    StatusPanel: ({ children }: { children: ReactNode }) => children,
+  };
+});
 function sameDependencies(a: Dependencies, b: Dependencies) {
   return (
     !!a && !!b && a.length === b.length && a.every((v, i) => Object.is(v, b[i]))
@@ -98,6 +157,10 @@ vi.mock("../../shared/capiro/registry", () => ({
   capiroOperations: {
     "settings.team.setBillingAdmin": { method: "PUT" },
     "settings.team.remove": { method: "DELETE" },
+    "settings.team.resend": { method: "POST" },
+    "settings.team.invitations": { method: "GET" },
+    "settings.analyst.quarantine.reprocess": { method: "POST" },
+    "settings.mappings.manual": { method: "POST" },
     "settings.team.list": { method: "GET" },
     "me.read": { method: "GET" },
     "me.update": { method: "PATCH" },
@@ -231,6 +294,305 @@ beforeEach(() => {
   capture.mockClear();
   sessionStorage.clear();
 });
+
+describe("Accepted Settings response metadata survives reload", () => {
+  const send = (
+    operation:
+      | "settings.team.resend"
+      | "settings.analyst.quarantine.reprocess"
+      | "me.emailSignature.update",
+  ) =>
+    current().action.run(
+      (signal) =>
+        current().api.request(
+          operation,
+          operation === "settings.team.resend"
+            ? { params: { invitationId: "original" } }
+            : operation === "me.emailSignature.update"
+              ? {
+                  body: {
+                    html: "<p>Private late signature</p>",
+                    enabled: true,
+                  },
+                }
+              : { params: { type: "program_element", id: "reviewed" } },
+          { signal },
+        ),
+      "Saved",
+      after,
+    );
+  const reload = async (section: string) => {
+    await act(() => root.unmount());
+    cache.clear();
+    await mount(section);
+  };
+  it("recovers the exact accepted resend after readback denial and reload without retaining email", async () => {
+    const expected = {
+      email: "private-invite@example.test",
+      role: "user_admin",
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce({ role: "user_admin", user: { id: "actor-a" } })
+      .mockResolvedValueOnce([{ id: "original", ...expected }])
+      .mockResolvedValueOnce({
+        invitationId: "replacement",
+        email: expected.email,
+        message: "Private provider response",
+      })
+      .mockRejectedValueOnce(new CapiroApiError(403, "readback denied"));
+    await mount("team");
+    await act(() => send("settings.team.resend"));
+    expect(current().locked).toBe(true);
+    const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "team"])}`;
+    expect(sessionStorage.getItem(key)).not.toContain(expected.email);
+    expect(sessionStorage.getItem(key)).not.toContain(
+      "Private provider response",
+    );
+    await reload("team");
+    expect(current().pending?.expectedInvitation).toBeUndefined();
+    expect(current().pending?.receiptId).toBe("replacement");
+    for (const wrong of [
+      { id: "other", ...expected },
+      { id: "replacement", ...expected, email: "other@example.test" },
+      { id: "replacement", ...expected, role: "standard_user" },
+    ]) {
+      state.api.request.mockResolvedValueOnce([wrong]);
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(true);
+    }
+    await act(() => send("settings.team.resend"));
+    state.api.request.mockResolvedValueOnce([
+      { id: "replacement", ...expected },
+    ]);
+    await act(() => current().reconcile());
+    expect(current().locked).toBe(false);
+    expect(sessionStorage.length).toBe(0);
+    expect(after).not.toHaveBeenCalled();
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.team.resend",
+      ),
+    ).toHaveLength(1);
+  });
+  it.each([true, false])(
+    "recovers reprocess accepted=%s after readback failure and reload, without replay",
+    async (accepted) => {
+      state.api.request
+        .mockReset()
+        .mockResolvedValueOnce({
+          reprocessed: true,
+          accepted,
+          payload: { message: "Private quarantine payload" },
+        })
+        .mockRejectedValueOnce(new Error("readback unavailable"));
+      await mount("analyst-quarantine");
+      await act(() => send("settings.analyst.quarantine.reprocess"));
+      const startedAt = current().pending!.startedAt;
+      const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", "analyst-quarantine"])}`;
+      expect(sessionStorage.getItem(key)).not.toContain(
+        "Private quarantine payload",
+      );
+      expect(JSON.parse(sessionStorage.getItem(key)!).acceptedResult).toBe(
+        accepted,
+      );
+      await reload("analyst-quarantine");
+      expect(current().pending?.acceptedResult).toBe(accepted);
+      const event = {
+        entityId: "reviewed",
+        action: "quarantine.reprocess",
+        entityType: "program_element_quarantine",
+        occurredAt: startedAt,
+        after: { accepted },
+      };
+      for (const wrong of [
+        { ...event, entityId: "other" },
+        { ...event, after: { accepted: !accepted } },
+      ]) {
+        state.api.request.mockResolvedValueOnce({
+          data: [wrong],
+          page: 1,
+          limit: 100,
+          total: 1,
+        });
+        await act(() => current().reconcile());
+        expect(current().locked).toBe(true);
+      }
+      await act(() => send("settings.analyst.quarantine.reprocess"));
+      state.api.request.mockResolvedValueOnce({
+        data: [event],
+        page: 1,
+        limit: 100,
+        total: 1,
+      });
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(false);
+      expect(after).not.toHaveBeenCalled();
+      expect(
+        state.api.request.mock.calls.filter(
+          ([op]) => op === "settings.analyst.quarantine.reprocess",
+        ),
+      ).toHaveLength(1);
+    },
+  );
+  it("a refused reprocess retains no accepted result or reload fence", async () => {
+    state.api.request
+      .mockReset()
+      .mockRejectedValueOnce(new CapiroApiError(403, "refused"));
+    await mount("analyst-quarantine");
+    await act(() => send("settings.analyst.quarantine.reprocess"));
+    await reload("analyst-quarantine");
+    expect(current().locked).toBe(false);
+    expect(current().pending).toBeUndefined();
+    expect(sessionStorage.length).toBe(0);
+    expect(after).not.toHaveBeenCalled();
+  });
+  it("a late recovery read from an old organization cannot clear or replay the accepted resend", async () => {
+    const expected = {
+      email: "private-invite@example.test",
+      role: "user_admin",
+    };
+    state.api.request
+      .mockReset()
+      .mockResolvedValueOnce({ role: "user_admin", user: { id: "actor-a" } })
+      .mockResolvedValueOnce([{ id: "original", ...expected }])
+      .mockResolvedValueOnce({ invitationId: "replacement" })
+      .mockRejectedValueOnce(new Error("readback unavailable"));
+    await mount("team");
+    await act(() => send("settings.team.resend"));
+    await reload("team");
+    let finish!: (value: unknown) => void;
+    state.api.request.mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    const recovery = current().reconcile();
+    await until(() => !!finish);
+    const signal = state.api.request.mock.lastCall![2].signal as AbortSignal;
+    state.auth = { ...state.auth, orgId: "org-b" };
+    await act(() => root.render("team"));
+    expect(signal.aborted).toBe(true);
+    await act(async () => {
+      finish([{ id: "replacement", ...expected }]);
+      await recovery;
+    });
+    expect(current().pending).toBeUndefined();
+    expect(current().action.message).toBeUndefined();
+    state.auth = { ...state.auth, orgId: "org-a" };
+    await reload("team");
+    expect(current().pending?.receiptId).toBe("replacement");
+    await act(() => send("settings.team.resend"));
+    expect(current().locked).toBe(true);
+    expect(
+      state.api.request.mock.calls.filter(
+        ([op]) => op === "settings.team.resend",
+      ),
+    ).toHaveLength(1);
+    expect(after).not.toHaveBeenCalled();
+  });
+  it.each([
+    "settings.team.resend",
+    "settings.analyst.quarantine.reprocess",
+    "me.emailSignature.update",
+  ] as const)(
+    "retains a validated late %s receipt only in its original scope",
+    async (operation) => {
+      const resend = operation === "settings.team.resend";
+      const signature = operation === "me.emailSignature.update";
+      const section = resend
+        ? "team"
+        : signature
+          ? "signature"
+          : "analyst-quarantine";
+      const dispatchedCalls = resend ? 3 : signature ? 2 : 1;
+      const identity = { user: { id: "actor-a" }, tenant: { id: "tenant-a" } };
+      const savedSignature = {
+        html: "<p>Private late signature</p>",
+        enabled: true,
+      };
+      const expected = {
+        email: "private-invite@example.test",
+        role: "user_admin",
+      };
+      state.api.request.mockReset();
+      if (resend)
+        state.api.request
+          .mockResolvedValueOnce({
+            role: "user_admin",
+            user: { id: "actor-a" },
+          })
+          .mockResolvedValueOnce([{ id: "original", ...expected }]);
+      if (signature) state.api.request.mockResolvedValueOnce(identity);
+      let finish!: (value: unknown) => void;
+      state.api.request.mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            finish = resolve;
+          }),
+      );
+      await mount(section);
+      const mutation = send(operation);
+      await until(() => !!finish);
+      const startedAt = current().pending!.startedAt;
+      const signal = state.api.request.mock.lastCall![2].signal as AbortSignal;
+      state.auth = { ...state.auth, orgId: "org-b" };
+      await act(() => root.render(section));
+      expect(signal.aborted).toBe(true);
+      await act(async () => {
+        finish(
+          resend
+            ? { invitationId: "replacement" }
+            : signature
+              ? savedSignature
+              : { reprocessed: true, accepted: false },
+        );
+        await mutation;
+      });
+      expect(current().pending).toBeUndefined();
+      expect(current().action.message).toBeUndefined();
+      expect(state.api.request).toHaveBeenCalledTimes(dispatchedCalls);
+      state.auth = { ...state.auth, orgId: "org-a" };
+      await reload(section);
+      if (resend) expect(current().pending?.receiptId).toBe("replacement");
+      else if (signature) {
+        expect(current().pending?.resultHash).toMatch(/^[a-f0-9]{64}$/);
+        const key = `capiro:settings-write:v1:${JSON.stringify(["actor-a", "session-a", "org-a", section])}`;
+        expect(sessionStorage.getItem(key)).not.toContain(savedSignature.html);
+      } else expect(current().pending?.acceptedResult).toBe(false);
+      await act(() => send(operation));
+      expect(state.api.request).toHaveBeenCalledTimes(dispatchedCalls);
+      if (signature) state.api.request.mockResolvedValueOnce(identity);
+      state.api.request.mockResolvedValueOnce(
+        resend
+          ? [{ id: "replacement", ...expected }]
+          : signature
+            ? savedSignature
+            : {
+                data: [
+                  {
+                    entityId: "reviewed",
+                    entityType: "program_element_quarantine",
+                    action: "quarantine.reprocess",
+                    occurredAt: startedAt,
+                    after: { accepted: false },
+                  },
+                ],
+                page: 1,
+                limit: 100,
+                total: 1,
+              },
+      );
+      await act(() => current().reconcile());
+      expect(current().locked).toBe(false);
+      expect(
+        state.api.request.mock.calls.filter(([op]) => op === operation),
+      ).toHaveLength(1);
+      expect(after).not.toHaveBeenCalled();
+    },
+  );
+});
 afterEach(() => {
   root?.unmount();
   cache?.clear();
@@ -238,6 +600,73 @@ afterEach(() => {
 });
 
 describe("Settings dispatch lifetime", () => {
+  it.each(["refused", "unknown"])(
+    "record selection stays on the dispatched target while pending and %s",
+    async (outcome) => {
+      let selected = { id: "record-a", name: "Record A" };
+      const selector = () => {
+        selectorButtons.length = 0;
+        return renderToStaticMarkup(
+          createElement(SourceSearch, {
+            source: "lda",
+            q: "Record",
+            disabled: current().locked,
+            choose: (record) => {
+              selected = record;
+            },
+          }),
+        );
+      };
+      let reject!: (error: Error) => void;
+      state.api.request.mockReset().mockImplementation(
+        () =>
+          new Promise((_resolve, fail) => {
+            reject = fail;
+          }),
+      );
+      await mount("mapping-attach");
+      expect(selector()).not.toContain('disabled=""');
+      selectorButtons[0]!.onClick();
+      const mutation = current().action.run(
+        (signal) =>
+          current().api.request(
+            "settings.mappings.manual",
+            {
+              params: { clientId: "client" },
+              body: {
+                source: "lda",
+                externalId: selected.id,
+                externalName: selected.name,
+              },
+            },
+            { signal },
+          ),
+        "Attached",
+        after,
+      );
+      await until(() => !!reject);
+      expect(selector().match(/disabled=""/g)).toHaveLength(2);
+      selectorButtons[1]!.onClick();
+      expect(selected.id).toBe("record-a");
+      expect(state.api.request.mock.calls[0]![1].body.externalId).toBe(
+        "record-a",
+      );
+      await act(async () => {
+        reject(
+          outcome === "refused"
+            ? new CapiroApiError(403, "refused")
+            : new Error("response lost"),
+        );
+        await mutation;
+      });
+      const html = selector();
+      expect(html.includes('disabled=""')).toBe(outcome === "unknown");
+      selectorButtons[1]!.onClick();
+      expect(selected.id).toBe(outcome === "unknown" ? "record-a" : "record-b");
+      expect(state.api.request).toHaveBeenCalledTimes(1);
+      expect(after).not.toHaveBeenCalled();
+    },
+  );
   it("a revoked actor never dispatches the write or leaves a recovery record", async () => {
     state.api.request.mockReset().mockResolvedValueOnce({
       role: "standard_user",

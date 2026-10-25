@@ -1,6 +1,7 @@
 "use client";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { useSaveMeeting } from "./mutations";
+import { MeetingCommandStatus } from "./commands/MeetingCommandStatus";
 import { meetingAssignmentFields } from "./meeting-save";
 import { useState } from "react";
 import { Temporal } from "temporal-polyfill";
@@ -30,9 +31,24 @@ export function MeetingForm({
 }) {
   const clients = useClients();
   const currentClients = clients.isSuccess ? clients.data : [];
-  const [selectedClientId, setSelectedClientId] = useState(
-    meeting?.client?.id ?? "",
+  const [selectedClient, setSelectedClient] = useState<{
+    draft?: string;
+    id: string;
+  }>();
+  const mutation = useSaveMeeting(
+    meeting,
+    () => onOpenChange(false),
+    clientId,
+    clientId,
   );
+  const retained = mutation.command.draft?.input;
+  const draft = retained?.meeting ?? undefined;
+  const selectedClientId =
+    selectedClient?.draft === retained?.requestId && selectedClient
+      ? selectedClient.id
+      : draft?.assignClient
+        ? (draft.clientId ?? "")
+        : (meeting?.client?.id ?? "");
   const clientAvailable =
     clientScopeAvailable &&
     (Boolean(clientId) ||
@@ -41,12 +57,6 @@ export function MeetingForm({
         (!selectedClientId ||
           currentClients.some((client) => client.id === selectedClientId))));
   const [validation, setValidation] = useState("");
-  const mutation = useSaveMeeting(
-    meeting,
-    () => onOpenChange(false),
-    clientId ?? selectedClientId,
-    clientId,
-  );
   const locked = mutation.isPending || mutation.uncertain;
   const local = (instant: string | undefined) =>
     instant
@@ -103,12 +113,20 @@ export function MeetingForm({
     <Dialog
       open={open}
       onOpenChange={(value) => {
-        if (!mutation.isPending && !mutation.uncertain) onOpenChange(value);
+        if (!mutation.isPending) onOpenChange(value);
       }}
       title={meeting ? "Edit meeting" : "New meeting"}
       description={`Meeting times use ${zone}. New meetings are private until explicitly shared.`}
     >
-      <form className="stack" onSubmit={submit}>
+      <form
+        key={retained?.requestId ?? "draft"}
+        className="stack"
+        onSubmit={submit}
+      >
+        <MeetingCommandStatus
+          command={mutation.command}
+          onDone={mutation.onSaved}
+        />
         {!current && (
           <div className="stack" role="status">
             <p>
@@ -130,7 +148,7 @@ export function MeetingForm({
             required
             maxLength={240}
             autoFocus
-            defaultValue={meeting?.subject}
+            defaultValue={draft?.subject ?? meeting?.subject}
           />
         </label>
         {!clientId && (
@@ -139,7 +157,12 @@ export function MeetingForm({
             <select
               name="clientId"
               value={selectedClientId}
-              onChange={(event) => setSelectedClientId(event.target.value)}
+              onChange={(event) =>
+                setSelectedClient({
+                  draft: retained?.requestId,
+                  id: event.target.value,
+                })
+              }
               disabled={locked || !clients.isSuccess || clients.isFetching}
             >
               <option value="">No client</option>
@@ -183,7 +206,7 @@ export function MeetingForm({
               readOnly={locked}
               type="datetime-local"
               required
-              defaultValue={local(meeting?.startsAt)}
+              defaultValue={local(draft?.startsAt ?? meeting?.startsAt)}
             />
           </label>
           <label>
@@ -193,7 +216,7 @@ export function MeetingForm({
               readOnly={locked}
               type="datetime-local"
               required
-              defaultValue={local(meeting?.endsAt)}
+              defaultValue={local(draft?.endsAt ?? meeting?.endsAt)}
             />
           </label>
         </div>
@@ -203,21 +226,20 @@ export function MeetingForm({
             name="location"
             readOnly={locked}
             maxLength={240}
-            defaultValue={meeting?.location ?? ""}
+            defaultValue={draft?.location ?? meeting?.location ?? ""}
           />
         </label>
         <TextareaField
           label="Description"
           name="description"
           readOnly={locked}
-          defaultValue={meeting?.description ?? ""}
+          defaultValue={draft?.description ?? meeting?.description ?? ""}
         />
         {validation && (
           <p className="danger" role="alert">
             {validation}
           </p>
         )}
-        <QueryState error={mutation.error} />
         <button
           className="button primary"
           disabled={

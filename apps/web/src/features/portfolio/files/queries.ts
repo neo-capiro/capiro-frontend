@@ -7,11 +7,7 @@ import {
 import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
-import {
-  clientFilesSchema,
-  fileAccessForIdSchema,
-  storageUsageSchema,
-} from "./contracts";
+import { clientFilesSchema, storageUsageSchema } from "./contracts";
 import {
   assertFileReader,
   currentFileReader,
@@ -86,13 +82,17 @@ export function filesOptions(
     },
   };
 }
-export function useFiles(clientId: string) {
+export function useFiles(
+  clientId: string,
+  options: { refetchOnMount?: false } = {},
+) {
   const api = useApi();
   const cache = useQueryClient();
-  const identity = useIdentity();
+  const identity = useIdentity(options);
   const reader = useFileReader();
   const query = useQuery({
     ...filesOptions(api, cache, clientId, reader),
+    ...options,
     enabled: Boolean(reader),
     refetchInterval: (query) =>
       query.state.data?.some(
@@ -118,31 +118,4 @@ export function useFiles(clientId: string) {
           ))
         : null),
   };
-}
-export function useFileAccess(clientId: string, id?: string) {
-  const api = useApi();
-  const cache = useQueryClient();
-  const reader = useFileReader();
-  return useQuery({
-    queryKey: [
-      "file-access",
-      clientId,
-      id,
-      reader?.tenantId,
-      reader?.userId,
-      reader?.revision,
-    ],
-    enabled: Boolean(id && reader),
-    queryFn: async ({ signal }) => {
-      assertFileReader(cache, reader);
-      const access = await api.request(
-        "core",
-        `clients/${encodeURIComponent(clientId)}/files/${encodeURIComponent(id ?? "")}/access`,
-        fileAccessForIdSchema(id ?? ""),
-        { signal },
-      );
-      assertFileReader(cache, reader);
-      return access;
-    },
-  });
 }

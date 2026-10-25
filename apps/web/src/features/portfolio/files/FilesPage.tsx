@@ -4,7 +4,7 @@ import type { Destinations } from "@/shared/portfolio/config/config";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useClient } from "@/features/portfolio/index/public";
 import { useFiles } from "./queries";
-import { filterFiles } from "./contracts";
+import { filterFiles, type Attachment } from "./contracts";
 import { DeleteFile } from "./DeleteFile";
 import { FileToolbar } from "./FileToolbar";
 import { FileSelectionBar } from "./FileSelectionBar";
@@ -12,7 +12,10 @@ import { FolderCards } from "./FolderCards";
 import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
+import { useFileAccessAttempt } from "./mutations";
 import { MoveFile } from "./MoveFile";
+import { MoveFiles } from "./MoveFiles";
+import { useBatchMoveAttempt } from "./useBatchMove";
 import { UploadDialog } from "./UploadDialog";
 import { FileStorageUsage } from "./FileStorageUsage";
 import { DocumentState } from "./DocumentState";
@@ -61,20 +64,46 @@ export function FilesPage({
   const setFolder = (value: string | undefined) =>
     changeFilters({ folder: value, mode: "files" });
   const [checked, setChecked] = useState<{ view: string; ids: string[] }>();
+  const batchAttempt = useBatchMoveAttempt(clientId);
+  const accessAttempt = useFileAccessAttempt(clientId);
+  const [batch, setBatch] = useState<{ view: string; files: Attachment[] }>();
   const selected = checked?.view === query.readerScope ? checked.ids : [];
   const [requestedAction, setAction] = useState<{
     view: string;
     kind: FileAction | "new-folder";
     id: string;
+    deleteFile?: Attachment;
   }>();
   const [uploadView, setUploadView] = useState<string>();
   const [folderAccess, setFolderAccess] = useState<{
     view: string;
     folder: string | null;
+    files: Attachment[];
+    operation: "file-access" | "folder-access";
   }>();
   const requestAction = (kind: FileAction | "new-folder", id: string) => {
     arrival.dismiss();
-    setAction({ view: query.readerScope, kind, id });
+    if (kind === "access") {
+      const file = query.data?.find((item) => item.id === id);
+      if (file)
+        setFolderAccess({
+          view: query.readerScope,
+          folder: file.folder,
+          files: [structuredClone(file)],
+          operation: "file-access",
+        });
+      return;
+    }
+    const deleteFile =
+      kind === "delete"
+        ? query.data?.find((file) => file.id === id)
+        : undefined;
+    setAction({
+      view: query.readerScope,
+      kind,
+      id,
+      ...(deleteFile ? { deleteFile: structuredClone(deleteFile) } : {}),
+    });
   };
   const close = () => {
     arrival.dismiss();
@@ -139,6 +168,44 @@ export function FilesPage({
         onSource={(source) => changeFilters({ source })}
         onSort={(sort) => changeFilters({ sort })}
       />
+      {batchAttempt && (
+        <button
+          className="button"
+          onClick={() => {
+            arrival.dismiss();
+            setBatch({
+              view: query.readerScope,
+              files: files.filter((file) =>
+                batchAttempt.command.files.some(
+                  (entry) => entry.id === file.id,
+                ),
+              ),
+            });
+          }}
+        >
+          Review pending move
+        </button>
+      )}
+      {accessAttempt && (
+        <button
+          className="button"
+          onClick={() => {
+            arrival.dismiss();
+            setFolderAccess({
+              view: query.readerScope,
+              folder: accessAttempt.command.folder,
+              files: files.filter((file) =>
+                accessAttempt.command.files.some(
+                  (entry) => entry.id === file.id,
+                ),
+              ),
+              operation: accessAttempt.command.operation,
+            });
+          }}
+        >
+          Review pending access change
+        </button>
+      )}
       <div className={styles.viewMode} role="group" aria-label="File view">
         <button
           className="button"
@@ -172,6 +239,10 @@ export function FilesPage({
                 setFolderAccess({
                   view: query.readerScope,
                   folder: folder || null,
+                  files: structuredClone(
+                    files.filter((file) => file.folder === (folder || null)),
+                  ),
+                  operation: "folder-access",
                 });
               }}
             >
@@ -271,7 +342,13 @@ export function FilesPage({
                       setChecked({ view: query.readerScope, ids: [] })
                     }
                     onMove={() => {
-                      if (chosen[0]) requestAction("move", chosen[0].id);
+                      if (chosen.length > 1 && chosen.length <= 100) {
+                        arrival.dismiss();
+                        setBatch({
+                          view: query.readerScope,
+                          files: structuredClone(chosen),
+                        });
+                      } else if (chosen[0]) requestAction("move", chosen[0].id);
                     }}
                   />
                   <FileTable
@@ -302,13 +379,13 @@ export function FilesPage({
           onClose={close}
         />
       )}
-      {action?.kind === "access" && (
-        <FileAccess clientId={clientId} file={action.file} onClose={close} />
-      )}
-      {folderAccess?.view === query.readerScope && available && (
+      {folderAccess?.view === query.readerScope && (
         <FileAccess
+          key={`${query.readerScope}:${folderAccess.operation}:${JSON.stringify(folderAccess.files.map((file) => file.id))}`}
           clientId={clientId}
           folder={folderAccess.folder}
+          files={folderAccess.files}
+          operation={folderAccess.operation}
           onClose={() => setFolderAccess(undefined)}
         />
       )}
@@ -321,17 +398,31 @@ export function FilesPage({
           onClose={close}
         />
       )}
-      {requestedAction?.kind === "delete" &&
-        requestedAction.view === query.readerScope &&
-        available && (
-          <DeleteFile
-            key={`${query.readerScope}:${requestedAction.id}`}
-            clientId={clientId}
-            id={requestedAction.id}
-            fileName={currentFile?.fileName}
-            onClose={close}
-          />
-        )}
+      {batch?.view === query.readerScope && available && (
+        <MoveFiles
+          key={query.readerScope}
+          clientId={clientId}
+          files={batch.files}
+          currentFiles={files}
+          folders={folders}
+          onClose={() => setBatch(undefined)}
+          onSaved={() => {
+            setBatch(undefined);
+            setChecked({ view: query.readerScope, ids: [] });
+          }}
+        />
+      )}
+      <DeleteFile
+        key={query.readerScope}
+        clientId={clientId}
+        file={
+          requestedAction?.kind === "delete" &&
+          requestedAction.view === query.readerScope
+            ? requestedAction.deleteFile
+            : undefined
+        }
+        onClose={close}
+      />
       {uploadView === query.readerScope && available && (
         <UploadDialog
           clientId={clientId}

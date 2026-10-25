@@ -7,6 +7,9 @@ import { SessionContext } from "../session/SessionContext";
 import { useSelectedClient } from "../session/SelectedClient";
 import { useConversationDiscovery } from "../meri-conversations/history-queries";
 import type { ConversationAccount } from "../meri-conversations/host-controller";
+import { useRecentConversationTitles } from "../meri-conversations/history-queries";
+import { recentTitle } from "../meri-conversations/recent-titles";
+import { conversationLabel } from "../meri-conversations/conversation-navigation";
 
 type Props = {
   enabled: boolean;
@@ -66,6 +69,7 @@ function RecentLinks({
     clientId,
   );
   const loading = query.isPending || query.isRefetching;
+  const summaries = useRecentConversationTitles(account);
   return (
     <>
       {loading ? (
@@ -86,13 +90,8 @@ function RecentLinks({
               href={`/meri?${new URLSearchParams({ ...(clientId === null ? { scope: "general" } : { clientId }), conversationId: conversation.conversationId })}`}
               onClick={onNavigate}
             >
-              Conversation ·{" "}
-              {new Date(conversation.createdAt).toLocaleString("en", {
-                dateStyle: "medium",
-                timeStyle: "short",
-                timeZone: "UTC",
-              })}{" "}
-              UTC
+              {recentTitle(conversation, summaries) ??
+                conversationLabel(conversation.createdAt)}
             </Link>
           ))}
           {!conversations.length && (

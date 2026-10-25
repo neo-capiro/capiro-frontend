@@ -56,6 +56,7 @@ const observed = {
 };
 const response = {
   schemaVersion: 2,
+  generationJobId: id(20),
   commandReceipt: {
     schemaVersion: 1,
     receiptId: id(7),

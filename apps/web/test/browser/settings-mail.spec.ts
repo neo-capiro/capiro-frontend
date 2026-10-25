@@ -174,3 +174,155 @@ test("callback confirmation recovers a failed read and updates after disconnect"
     page.getByText(/Google token revocation was not confirmed/),
   ).toBeVisible();
 });
+
+test("failed Realtime reconciliation refreshes persisted partial health", async ({
+  page,
+}) => {
+  let configured = true;
+  await operationFixtures(page, {
+    "me.read": testIdentity,
+    "clients.list": [],
+    "settings.integrations.list": () => [
+      {
+        ...connection,
+        provider: "microsoft_365",
+        subscriptions: {
+          configured,
+          updatedAt: null,
+          lastNotificationAt: null,
+          lastLifecycleEvent: null,
+          resources: [],
+        },
+      },
+    ],
+    "settings.integrations.microsoftCapabilities": {
+      ...capabilities,
+      subscriptionsConfigured: true,
+    },
+    "settings.integrations.googleCapabilities": capabilities,
+  });
+  await page.route(
+    "**/api/capiro/settings.integrations.configureMicrosoftSubscriptions",
+    async (route) => {
+      expect(route.request().method()).toBe("POST");
+      expect(route.request().postDataJSON()).toEqual({
+        params: { connectionId: id },
+      });
+      configured = false;
+      await route.fulfill({
+        status: 503,
+        json: { message: "Synthetic subscription renewal failed" },
+      });
+    },
+  );
+  await page.goto("/settings/integrations");
+  await expect(
+    page.getByText(/Realtime notifications: configured\./),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Realtime", exact: true }).click();
+  await expect(
+    page.getByText("Integration action failed", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/Realtime notifications: not confirmed\./),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Realtime subscriptions are configured.", { exact: true }),
+  ).toHaveCount(0);
+});
+
+for (const provider of ["google_workspace", "microsoft_365"] as const) {
+  test(`${provider} restart requires review and ordinary retry resumes after failure`, async ({
+    page,
+  }) => {
+    let failed = false;
+    const writes: unknown[] = [];
+    const operation =
+      provider === "microsoft_365" ? "syncMicrosoft" : "syncGoogle";
+    await operationFixtures(page, {
+      "me.read": testIdentity,
+      "clients.list": [],
+      "settings.integrations.list": () => [
+        {
+          ...connection,
+          provider,
+          status: failed ? "error" : "connected",
+          lastError: failed
+            ? "Synthetic import interrupted; progress is saved."
+            : null,
+        },
+      ],
+      "settings.integrations.microsoftCapabilities": capabilities,
+      "settings.integrations.googleCapabilities": capabilities,
+    });
+    await page.route(
+      `**/api/capiro/settings.integrations.${operation}`,
+      async (route) => {
+        expect(route.request().method()).toBe("POST");
+        writes.push(route.request().postDataJSON());
+        if (writes.length === 1) {
+          failed = true;
+          return route.fulfill({
+            status: 503,
+            json: { message: "Synthetic import interrupted" },
+          });
+        }
+        return route.fulfill({
+          json: {
+            connectionId: id,
+            calendar: stats,
+            mail: { inbox: { ...stats, hasMore: true } },
+          },
+        });
+      },
+    );
+    await page.goto("/settings/integrations");
+    await page
+      .getByRole("button", { name: "Restart sync…", exact: true })
+      .click();
+    await expect(page.getByRole("dialog")).toContainText(
+      "configured folders and history window",
+    );
+    await page.screenshot({ path: test.info().outputPath("restart-sync.png") });
+    expect(writes).toEqual([]);
+    await page
+      .getByRole("button", { name: "Keep current progress", exact: true })
+      .click();
+    expect(writes).toEqual([]);
+    await page
+      .getByRole("button", { name: "Restart sync…", exact: true })
+      .click();
+    await page
+      .getByRole("dialog")
+      .getByRole("button", { name: "Restart sync", exact: true })
+      .click();
+    await expect(
+      page.getByText("Integration action failed", { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(
+      page.getByText("Synthetic import interrupted; progress is saved."),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Retry sync", exact: true }).click();
+    await expect(
+      page.getByText(
+        "Sync made progress. More records remain to import; coverage is incomplete.",
+        { exact: true },
+      ),
+    ).toBeVisible();
+    expect(writes).toEqual([
+      { params: { connectionId: id }, query: { reset: true } },
+      { params: { connectionId: id } },
+    ]);
+  });
+}
+
+test("restart remains unavailable when reconnect is required", async ({
+  page,
+}) => {
+  await fixtures(page, [{ ...connection, status: "needs_configuration" }]);
+  await page.goto("/settings/integrations");
+  await expect(
+    page.getByRole("button", { name: "Restart sync…", exact: true }),
+  ).toBeDisabled();
+});

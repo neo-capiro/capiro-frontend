@@ -1,6 +1,7 @@
 import type { RuntimeConfig, Service } from "../config/config";
 import { sameRequestOrigin } from "../../request-origin";
 import { portfolioCommandRefusal } from "./portfolio-command-refusals";
+import { coreSessionAuthentication } from "../../preview/core-session-authentication";
 const permittedRoots: Record<Service, readonly string[]> = {
   core: [
     "clients",
@@ -33,7 +34,7 @@ export async function proxyRequest(
   service: string,
   path: string[],
   config: RuntimeConfig,
-  getToken: () => Promise<string | null>,
+  getToken: (authentication?: "clerk-session") => Promise<string | null>,
   fetcher: typeof fetch = fetch,
 ): Promise<Response> {
   if (!Object.hasOwn(permittedRoots, service))
@@ -103,7 +104,14 @@ export async function proxyRequest(
     return jsonError(403, "Request origin is not allowed.");
   let token: string | null;
   try {
-    token = await getToken();
+    token = await getToken(
+      coreSessionAuthentication(
+        selected,
+        base,
+        request.method,
+        `/${path.map(encodeURIComponent).join("/")}`,
+      ),
+    );
   } catch {
     return jsonError(401, "Your session could not be verified. Sign in again.");
   }

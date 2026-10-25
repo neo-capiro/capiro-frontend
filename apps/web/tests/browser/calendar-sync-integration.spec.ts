@@ -37,13 +37,13 @@ test("actual Master Calendar imports only the reviewed DST window and retains cl
   expect(state.writes).toHaveLength(1);
   const url = new URL(state.writes[0]!.url, "http://localhost");
   expect(url.pathname).toBe(
-    `/api/backend/core/engagement/integrations/microsoft/${syncMicrosoftId}/calendar-window`,
+    `/api/backend/core/engagement/integrations/microsoft/${syncMicrosoftId}/calendar-commands`,
   );
-  expect(Object.fromEntries(url.searchParams)).toEqual({
-    from: "2026-11-01T04:00:00Z",
-    to: "2026-11-08T05:00:00Z",
+  expect(url.search).toBe("");
+  expect(JSON.parse(state.writes[0]!.body!).range).toEqual({
+    from: "2026-11-01T04:00:00.000Z",
+    to: "2026-11-08T05:00:00.000Z",
   });
-  expect(state.writes[0]!.body).toBeNull();
   await dialog
     .locator("footer")
     .getByRole("button", { name: "Close", exact: true })
@@ -96,12 +96,12 @@ test("actual client Calendar retains uncertain import across view changes withou
     .getByRole("button", { name: "Sync calendar", exact: true })
     .click();
   dialog = page.getByRole("dialog");
-  await expect(dialog).toContainText("request is frozen");
+  await expect(dialog).toContainText("new request stays");
   await expect(
     dialog.getByRole("button", { name: "Import calendar meetings" }),
   ).toHaveCount(0);
   expect(state.writes).toHaveLength(1);
-  expect(state.writes[0]!.url).toContain("calendar=1&mail=0");
+  expect(JSON.parse(state.writes[0]!.body!).range).toBeNull();
   expect(new URL(page.url()).searchParams.get("zone")).toBe("UTC");
   expect(new URL(page.url()).searchParams.get("date")).toBe("2026-10-20");
   expect(unexpected).toEqual([]);

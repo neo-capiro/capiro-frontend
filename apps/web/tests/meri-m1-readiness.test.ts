@@ -16,10 +16,24 @@ type ButtonProps = {
 const harness = vi.hoisted(() => ({
   run: undefined as ReturnType<typeof useLiveRun> | undefined,
   buttons: [] as ButtonProps[],
-  composer: undefined as { stopBlocked?: string | undefined } | undefined,
+  composer: undefined as
+    | { stopBlocked?: string | undefined; sendBlocked?: string | undefined }
+    | undefined,
+  lifecycleUnavailable: false,
 }));
 vi.mock("../src/features/meri/conversation/useLiveRun", () => ({
   useLiveRun: () => harness.run,
+}));
+vi.mock("../src/shared/meri-conversation-lifecycle/journal", () => ({
+  lifecycleJournal: () => {
+    if (harness.lifecycleUnavailable) throw Error("Synthetic storage failure");
+    return {
+      current: () => true,
+      read: () => undefined,
+      retain: vi.fn(),
+      clear: vi.fn(),
+    };
+  },
 }));
 vi.mock("@capiro/ui/button", () => ({
   Button: (props: ButtonProps) => {
@@ -90,6 +104,7 @@ function liveProps(): LiveProps {
     },
     onNextTurn: vi.fn(),
     onSettled: vi.fn(),
+    onLifecycleTarget: vi.fn(),
     nextTurnVerified: true,
     savedCurrent: turnFromEvents(
       [],
@@ -101,6 +116,7 @@ function liveProps(): LiveProps {
   };
 }
 function resetRun() {
+  harness.lifecycleUnavailable = false;
   harness.run = {
     snapshot: { observation: null, cancelReceipt: null },
     intent: {},
@@ -142,7 +158,91 @@ it("verified terminal history offers Ready and focuses the composer without disp
   expect(props.onDraft).not.toHaveBeenCalled();
 });
 
+it.each(["loading", "unavailable"] as const)(
+  "acknowledged input with %s history offers readback without claiming another send",
+  (state) => {
+    const props = liveProps();
+    props.savedCurrent = undefined;
+    props.nextTurnVerified = false;
+    harness.run!.snapshot = {
+      ...harness.run!.snapshot,
+      status: state,
+      observation: null,
+    };
+    harness.run!.intent = { submit: { ...request, state: "observed" } };
+    harness.run!.transcript = state;
+    const html = renderLive(props);
+    expect(html).toContain(request.prompt);
+    expect(html).toContain(
+      "Message accepted. Reload the transcript to check its current status.",
+    );
+    expect(html).not.toContain("Sending to Meri.");
+    expect(html).not.toContain('aria-label="Next message status"');
+    expect(button("Retry same request")).toBeUndefined();
+    expect(harness.composer?.sendBlocked).toBe(
+      "Reload the transcript to verify the current run.",
+    );
+    if (state === "unavailable") {
+      button("Reload transcript")!.onClick();
+      expect(harness.run!.history).toHaveBeenCalledOnce();
+    }
+    expect(harness.run!.submit).not.toHaveBeenCalled();
+    expect(harness.run!.submitInitial).not.toHaveBeenCalled();
+    expect(props.onNextTurn).not.toHaveBeenCalled();
+  },
+);
+
+it.each(["pending", "unknown"] as const)(
+  "%s input keeps its delivery state and send restriction without a transcript",
+  (state) => {
+    const props = liveProps();
+    props.savedCurrent = undefined;
+    harness.run!.intent = { submit: { ...request, state } };
+    const html = renderLive(props);
+    expect(html).not.toContain("Message accepted.");
+    expect(html).toContain(
+      state === "pending" ? "Sending to Meri." : "Delivery is uncertain.",
+    );
+    expect(harness.composer?.sendBlocked).toBe(
+      state === "pending"
+        ? "Your request is being sent."
+        : "Delivery of your last request is uncertain. Retry it before sending another.",
+    );
+    if (state === "unknown") {
+      button("Retry same request")!.onClick();
+      expect(harness.run!.submit).toHaveBeenCalledExactlyOnceWith(
+        request.prompt,
+        true,
+      );
+    } else expect(button("Retry same request")).toBeUndefined();
+    expect(props.onNextTurn).not.toHaveBeenCalled();
+  },
+);
+
+it("acknowledged input does not settle an unknown Stop when history is unavailable", () => {
+  const props = liveProps();
+  props.savedCurrent = undefined;
+  harness.run!.intent = {
+    submit: { ...request, state: "observed" },
+    cancel: "unknown",
+  };
+  harness.run!.transcript = "unavailable";
+  const html = renderLive(props);
+  expect(html).toContain("Stop request uncertain");
+  expect(html).not.toContain("<h3>Stopped</h3>");
+  button("Retry Stop")!.onClick();
+  expect(harness.run!.cancel).toHaveBeenCalledOnce();
+  expect(harness.run!.submit).not.toHaveBeenCalled();
+  expect(props.onNextTurn).not.toHaveBeenCalled();
+});
+
 const readinessBlockers: Array<[string, (props: LiveProps) => void]> = [
+  [
+    "lifecycle journal storage failure",
+    () => {
+      harness.lifecycleUnavailable = true;
+    },
+  ],
   [
     "session storage failure",
     (props) => {

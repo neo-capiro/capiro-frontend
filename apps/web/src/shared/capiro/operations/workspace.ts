@@ -8,7 +8,9 @@ import { newsletterStagingOperations } from "./workspace-newsletter-staging";
 import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
 import { workspaceBriefCopyOperations } from "./workspace-brief-copy";
+import { workspaceClientBriefCopyOperations } from "./workspace-client-brief-copy";
 export const workspaceOperations = {
+  ...workspaceClientBriefCopyOperations,
   ...workspaceBriefCopyOperations,
   ...richNewsletterOperations,
   ...workspaceObjectiveOperations,

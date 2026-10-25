@@ -15,6 +15,7 @@ import {
 } from "../../../shared/meri-conversations/tab-journal";
 import type { TurnView } from "./conversation-view";
 import { createInitialDraftOwner } from "./initial-draft";
+import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
 
 function draftOwner(scope: TabScope | undefined, accessLost: boolean) {
   if (accessLost) {
@@ -112,6 +113,15 @@ export function useConversationLocalState(
     draft: accessLost ? "" : owner.draft(),
     turns: accessLost ? [] : turns,
     setDraft: edit,
+    skillSelection: accessLost ? undefined : owner.selection(),
+    setSkillSelection: (value: ConversationSkillSelection) => {
+      if (accessLost) return;
+      try {
+        owner.selectSkill(value);
+      } catch {
+        owner.fail();
+      }
+    },
     modelSelection:
       !accessLost && modelDraft.owner === owner ? modelDraft.value : undefined,
     setModelSelection: (value: ConversationSubmitRequest["modelSelection"]) => {

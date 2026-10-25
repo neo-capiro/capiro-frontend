@@ -1,7 +1,10 @@
+import { createHash } from "node:crypto";
+import type { MeetingAttempt } from "../../src/features/portfolio/calendar/commands/recovery";
 import { test, expect, type Page } from "@playwright/test";
 import { installFixtures, json } from "./fixtures";
 import {
   sharingMeeting,
+  sharingActor,
   sharingFile,
   sharingTime,
   sharedMeetingFixture,
@@ -22,8 +25,9 @@ async function setup(page: Page) {
     feed: [sharedMeetingFixture()],
     writes: [] as {
       path: string;
-      body: { artifacts: { type: string; id: string }[] };
+      body: MeetingAttempt["input"];
     }[],
+    receipts: new Map<string, unknown>(),
     receipt: undefined as unknown,
     status: 200,
     feedStatus: 200,
@@ -47,14 +51,30 @@ async function setup(page: Page) {
       state.feedStatus,
     ).catch(() => {});
   });
-  await page.route("**/core/engagement/meetings**", async (route) => {
+  await page.route("**/core/me", (route) =>
+    json(route, {
+      user: { id: sharingActor.userId, email: "synthetic@example.test" },
+      tenant: { id: sharingActor.tenantId, name: "Synthetic" },
+      role: "user_admin",
+    }),
+  );
+  await page.route("**/core/engagement/meeting-commands**", async (route) => {
     const path = new URL(route.request().url()).pathname;
-    if (route.request().method() !== "GET") {
-      const body = route.request().postDataJSON();
-      state.writes.push({ path, body });
-      if (state.hold) await state.hold;
-      if (state.receipt !== undefined)
-        return json(route, state.receipt, state.status).catch(() => {});
+    if (route.request().method() === "GET") {
+      const receipt = state.receipts.get(path.split("/").at(-1)!);
+      return json(
+        route,
+        receipt ?? { message: "Not found" },
+        receipt ? 200 : 404,
+      );
+    }
+    const body = route.request().postDataJSON() as MeetingAttempt["input"];
+    state.writes.push({ path, body });
+    if (state.hold) await state.hold;
+    if (state.receipt !== undefined)
+      return json(route, state.receipt, state.status).catch(() => {});
+    if (!state.receipts.has(body.requestId)) {
+      const revision = "2026-10-24T12:01:00.000Z";
       for (const ref of body.artifacts) {
         const kind = (
           {
@@ -63,28 +83,72 @@ async function setup(page: Page) {
             debrief: "debriefs",
             attachment: "attachments",
           } as const
-        )[ref.type as "prep"];
-        const item = state.meeting[kind].find((item) => item.id === ref.id);
+        )[ref.type];
+        const item = state.meeting[kind].find((row) => row.id === ref.id);
         if (item)
           Object.assign(
             item,
-            path.endsWith("/unshare")
+            body.operation === "unshare"
               ? { sharedAt: null, sharedByUserId: null }
-              : { sharedAt: sharingTime, sharedByUserId: "user-test" },
+              : { sharedAt: revision, sharedByUserId: sharingActor.userId },
+            ref.type === "attachment"
+              ? { metadataRevision: Number(ref.revision) + 1 }
+              : { updatedAt: revision },
           );
       }
-      state.meeting.visibility =
-        state.meeting.notes.some((row) => row.sharedAt) ||
-        state.meeting.preps.some((row) => row.sharedAt) ||
-        state.meeting.attachments.some((row) => row.sharedAt)
-          ? "shared"
-          : "private";
+      state.meeting.updatedAt = revision;
+      state.meeting.visibility = [
+        state.meeting.notes,
+        state.meeting.preps,
+        state.meeting.attachments,
+      ].some((rows) => rows.some((row) => row.sharedAt))
+        ? "shared"
+        : "private";
       state.files = state.meeting.attachments.map((row) => ({
         ...row,
         usable: true,
       }));
-      return json(route, state.meeting, state.status).catch(() => {});
+      state.receipts.set(body.requestId, {
+        schemaVersion: 1,
+        tenantId: sharingActor.tenantId,
+        actorUserId: sharingActor.userId,
+        requestId: body.requestId,
+        payloadDigest: createHash("sha256")
+          .update(
+            JSON.stringify([
+              "meeting-command",
+              1,
+              sharingActor.tenantId,
+              sharingActor.userId,
+              body,
+            ]),
+          )
+          .digest("hex"),
+        operation: body.operation,
+        requestedMeetingId: body.meetingId,
+        expectedClientId: body.expectedClientId,
+        status: "completed",
+        result: {
+          meetingId: body.meetingId,
+          clientId: body.expectedClientId,
+          revision,
+          artifacts: body.artifacts.map((row) => ({
+            ...row,
+            revision:
+              typeof row.revision === "number" ? row.revision + 1 : revision,
+          })),
+        },
+        refusal: null,
+        available: true,
+        createdAt: revision,
+      });
     }
+    return json(route, state.receipts.get(body.requestId), state.status).catch(
+      () => {},
+    );
+  });
+  await page.route("**/core/engagement/meetings**", async (route) => {
+    const path = new URL(route.request().url()).pathname;
     if (path.endsWith("/meetings")) return json(route, [state.meeting]);
     if (path.endsWith("/notes") || path.endsWith("/debriefs"))
       return json(route, []);
@@ -125,7 +189,7 @@ test("approved prep and attachment share and selected unshare preserve other sha
   const { state, unexpected } = await setup(page);
   Object.assign(state.meeting.notes[0]!, {
     sharedAt: sharingTime,
-    sharedByUserId: "user-test",
+    sharedByUserId: sharingActor.userId,
   });
   await openSharing(page);
   const dialog = await choosePrepAndFile(page);
@@ -133,10 +197,15 @@ test("approved prep and attachment share and selected unshare preserve other sha
   await dialog
     .getByRole("button", { name: "Confirm: Share selected artifacts" })
     .click();
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
   await expect(dialog).toHaveCount(0);
   expect(state.writes[0]!.body.artifacts).toEqual([
-    { type: "prep", id: sharingMeeting.preps[0]!.id },
-    { type: "attachment", id: sharingFile.id },
+    { type: "attachment", id: sharingFile.id, revision: 0 },
+    {
+      type: "prep",
+      id: sharingMeeting.preps[0]!.id,
+      revision: new Date(sharingTime).toISOString(),
+    },
   ]);
   await page
     .getByRole("button", { name: "Share artifacts", exact: true })
@@ -158,6 +227,7 @@ test("approved prep and attachment share and selected unshare preserve other sha
   await confirm
     .getByRole("button", { name: "Confirm: Unshare selected artifacts" })
     .click();
+  await confirm.getByRole("button", { name: "Done", exact: true }).click();
   await expect(confirm).toHaveCount(0);
   expect(state.writes).toHaveLength(2);
   expect(state.meeting.visibility).toBe("shared");
@@ -211,7 +281,7 @@ for (const scenario of ["uncertain", "foreign receipt"] as const)
     });
     await expect.poll(() => state.writes.length).toBe(1);
     pause.release();
-    await expect(dialog.getByRole("alert")).toContainText("may have changed");
+    await expect(dialog.getByText(/saved for recovery/)).toBeVisible();
     await page.keyboard.press("Escape");
     await page
       .getByRole("button", { name: "Share artifacts", exact: true })
@@ -220,7 +290,7 @@ for (const scenario of ["uncertain", "foreign receipt"] as const)
       name: "Share artifacts with your organization?",
       exact: true,
     });
-    await expect(reopened.getByRole("alert")).toContainText("may have changed");
+    await expect(reopened.getByText(/saved for recovery/)).toBeVisible();
     await expect(
       reopened.getByRole("button", {
         name: "Share selected artifacts",
@@ -265,14 +335,6 @@ test("actor replacement during held preflight produces zero writes", async ({
     .click();
   const preflight = await requested;
   await expect.poll(() => state.reads).toBeGreaterThan(before);
-  await page.waitForFunction(
-    () =>
-      (
-        window as unknown as {
-          __sharingTest: { originalSharingAttempt: () => string | undefined };
-        }
-      ).__sharingTest.originalSharingAttempt() === "pending",
-  );
   await page.evaluate(() =>
     (
       window as unknown as { __sharingTest: { replaceActor: () => void } }
@@ -293,21 +355,24 @@ test("actor replacement during held preflight produces zero writes", async ({
         : completionError.message,
     ).toContain("ERR_ABORTED");
   else expect(response).not.toBeNull();
-  await page.waitForFunction(
-    () =>
-      (
-        window as unknown as {
-          __sharingTest: { originalSharingAttempt: () => string | undefined };
-        }
-      ).__sharingTest.originalSharingAttempt() === "refused",
-  );
+  await expect
+    .poll(() =>
+      page.evaluate(async () =>
+        (
+          window as unknown as {
+            __sharingTest: { originalSharingAttempt: () => Promise<string> };
+          }
+        ).__sharingTest.originalSharingAttempt(),
+      ),
+    )
+    .toBe("idle");
   await expect(dialog).toHaveCount(0);
   expect(state.writes).toEqual([]);
   await testInfo.attach("preflight-completion.json", {
     body: JSON.stringify({
       url: preflight.url(),
       network: completionError ? "aborted" : "finished",
-      originalAttempt: "refused",
+      originalAttempt: "idle; request was never dispatched",
       writes: state.writes,
     }),
     contentType: "application/json",

@@ -2,8 +2,10 @@
 
 import {
   useId,
+  useEffect,
   useLayoutEffect,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
@@ -18,9 +20,7 @@ import type { Client } from "@/shared/session/client-contract";
 import type { Objective } from "./contracts";
 import { createStrategyIntakeRecovery } from "./objective-strategy-intake-recovery";
 import { ObjectiveStrategyIntakeSession } from "./objective-strategy-intake-session";
-
-/** The qualified Core intake still lacks positive serving authority and a reviewed preview write route. */
-export const governedStrategyIntakeEnabled = false;
+import { ObjectiveGenerationOutcome } from "./ObjectiveGeneration";
 
 export function ObjectiveStrategyIntake({
   objective,
@@ -37,10 +37,9 @@ export function ObjectiveStrategyIntake({
     selected.state === "authorized-client" ? selected.client : null;
   if (
     !actor ||
-    identity.data?.role !== "standard_user" ||
     !client ||
     client.id !== objective.clientId ||
-    client.status !== "active"
+    client.status === "archived"
   )
     return (
       <section className="card stack" aria-label="Governed Strategy intake">
@@ -48,7 +47,7 @@ export function ObjectiveStrategyIntake({
         <p>
           {identity.isFetching
             ? "Verifying your current session."
-            : "Save a ready Objective in your selected active client to request Strategy intake."}
+            : "Save a ready Objective in your selected client to request Strategy intake."}
         </p>
       </section>
     );
@@ -124,10 +123,37 @@ function ReadyStrategyIntake({
     session.snapshot,
     session.snapshot,
   );
+  const polls = useRef({ jobId: "", count: 0 });
   useLayoutEffect(() => {
-    queueMicrotask(() => void session.hydrate());
-    return () => session.suspend();
-  }, [session]);
+    let current = true;
+    if (!disabled)
+      queueMicrotask(() => {
+        if (current) void session.hydrate();
+      });
+    return () => {
+      current = false;
+      session.suspend();
+    };
+  }, [disabled, session]);
+  useEffect(() => {
+    const job = state.job;
+    if (
+      disabled ||
+      state.busy ||
+      state.error ||
+      !job ||
+      !["queued", "running"].includes(job.status)
+    )
+      return;
+    if (polls.current.jobId !== job.jobId)
+      polls.current = { jobId: job.jobId, count: 0 };
+    if (polls.current.count >= 120) return;
+    const timer = setTimeout(() => {
+      polls.current.count++;
+      void session.observe();
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [disabled, session, state.busy, state.error, state.job]);
   const retained = state.retained;
   const type = retained?.request.body.selection.type ?? selectedType;
   const locked =
@@ -140,7 +166,7 @@ function ReadyStrategyIntake({
     <section className="card stack" aria-label="Governed Strategy intake">
       <h3>Strategy intake</h3>
       <p>
-        Request initial consent and reserve work from saved Objective version{" "}
+        Authorize Strategy generation from saved Objective version{" "}
         {objective.version}.
       </p>
       {(disabled || (!retained && objective.status !== "ready")) && (
@@ -166,8 +192,9 @@ function ReadyStrategyIntake({
       </select>
       {retained?.accepted ? (
         <p role="status">
-          Consent and a reserved Strategy intake job were recorded. This receipt
-          does not verify a Strategy output.
+          {retained.started
+            ? "Generation was requested for the saved job. Its current result is checked below."
+            : "Consent and the saved generation job are recorded. Start or recover this same job; no new intake will be created."}
         </p>
       ) : retained ? (
         <p role="status">
@@ -180,7 +207,7 @@ function ReadyStrategyIntake({
           custody.
         </p>
       )}
-      {!retained?.accepted && (
+      {!retained?.started && (
         <button
           className="button primary"
           type="button"
@@ -191,12 +218,17 @@ function ReadyStrategyIntake({
         >
           {state.busy
             ? "Checking Strategy intake."
-            : retained
-              ? "Recover same Strategy request"
-              : "Request Strategy intake"}
+            : retained?.accepted
+              ? "Start or retry saved generation"
+              : retained
+                ? "Recover same Strategy request"
+                : "Request Strategy generation"}
         </button>
       )}
       {state.error && <p role="alert">{state.error}</p>}
+      {state.job && !disabled && (
+        <ObjectiveGenerationOutcome job={state.job} actor={actor} />
+      )}
       <button
         className="button"
         type="button"

@@ -118,7 +118,9 @@ export function PersonalSettings({
         title="Watchlist and monitoring setup"
         description="Manage the client watchlists and monitoring settings used by LegiWatch."
       >
-        <ScopedLink href="/modules/legiwatch">Open monitoring setup</ScopedLink>
+        <ScopedLink href="/modules/intelligence?view=legiwatch">
+          Open monitoring setup
+        </ScopedLink>
       </SettingsCard>
       <p className={styles.description}>
         Email, password and two-step verification are managed in your profile.

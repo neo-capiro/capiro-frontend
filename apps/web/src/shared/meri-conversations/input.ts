@@ -13,12 +13,26 @@ import {
 } from "@capiro/meri-contracts/conversation-initial-input";
 import { boundedJsonBytes } from "../meri-actions/bounded-json";
 import { publicRequestOrigin } from "../request-origin";
+import {
+  conversationLifecycleMetadata,
+  receiveConversationLifecycleRequest,
+} from "@capiro/meri-contracts/conversation-lifecycle";
 
 const reconnectPath =
   /^events\/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\/stream$/;
 
 /** Only public protocol routes; no user-selected upstream destination. */
 export function conversationRoute(path: string) {
+  if (
+    `/api/conversations/${path}` ===
+    conversationLifecycleMetadata.routes.control.path
+  )
+    return "control" as const;
+  if (
+    `/api/conversations/${path}` ===
+    conversationLifecycleMetadata.routes.inspect.path
+  )
+    return "inspect" as const;
   if (
     `/api/conversations/${path}` ===
     conversationInitialInputMetadata.routes.allocate.path
@@ -90,7 +104,12 @@ export function validConversationRequest(
 
 export async function conversationBody(
   request: Request,
-  route: ConversationRoute | "inputAdmit" | "inputAllocate",
+  route:
+    | ConversationRoute
+    | "inputAdmit"
+    | "inputAllocate"
+    | "control"
+    | "inspect",
   signal: AbortSignal,
 ) {
   const bytes = await boundedJsonBytes(
@@ -102,6 +121,8 @@ export async function conversationBody(
   );
   if (route === "inputAllocate") receiveConversationInitialInputRequest(bytes);
   else if (route === "inputAdmit") receiveConversationInputRequest(bytes);
+  else if (route === "control" || route === "inspect")
+    receiveConversationLifecycleRequest(route, bytes);
   else receiveConversationRequest(route, bytes);
   return bytes;
 }

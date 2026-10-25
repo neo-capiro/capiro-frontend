@@ -13,6 +13,7 @@ export type ListState =
     }
   | { status: "disabled" }
   | { status: "unavailable" };
+const loading: ListState = { status: "loading" };
 
 /**
  * The conversation's durable intent list: read on open and whenever `refreshKey` changes, then
@@ -23,7 +24,33 @@ export function useIntentList(
   conversationId: string,
   refreshKey: string | undefined,
 ) {
-  const [list, setList] = useState<ListState>({ status: "loading" });
+  const [stored, setStored] = useState({
+    access,
+    conversationId,
+    value: { status: "loading" } as ListState,
+  });
+  const list: ListState =
+    stored.access === access && stored.conversationId === conversationId
+      ? stored.value
+      : loading;
+  const setList = useCallback(
+    (next: ListState | ((current: ListState) => ListState)) => {
+      setStored((previous) => ({
+        access,
+        conversationId,
+        value:
+          typeof next === "function"
+            ? next(
+                previous.access === access &&
+                  previous.conversationId === conversationId
+                  ? previous.value
+                  : { status: "loading" },
+              )
+            : next,
+      }));
+    },
+    [access, conversationId],
+  );
   const work = useRef<AbortController | null>(null);
   const alive = useRef(true);
   useEffect(() => {
@@ -64,7 +91,7 @@ export function useIntentList(
             : { status: "unavailable" },
         );
     },
-    [access, conversationId],
+    [access, conversationId, setList],
   );
   useEffect(() => {
     void read(null);
@@ -73,11 +100,11 @@ export function useIntentList(
   const retry = useCallback(() => {
     setList({ status: "loading" });
     void read(null);
-  }, [read]);
+  }, [read, setList]);
   const loadMore = useCallback(() => {
     if (list.status !== "ready" || !list.next) return;
     setList({ ...list, loadingMore: true });
     void read(list.next);
-  }, [list, read]);
+  }, [list, read, setList]);
   return { list, refresh, retry, loadMore, alive };
 }

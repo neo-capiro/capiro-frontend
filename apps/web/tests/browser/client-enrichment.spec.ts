@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import { clientId } from "./fixtures";
+import { clientId, json } from "./fixtures";
 import {
   advocacyId,
   findingId,
@@ -17,6 +17,49 @@ async function openReview(page: Page) {
   await expect(drawer).toBeVisible();
   return drawer;
 }
+test("stale enrichment upload still loads missing Files state and opens its shared dialog", async ({
+  page,
+}) => {
+  const { state, unexpected } = await installEnrichment(page);
+  let fileReads = 0;
+  page.on("request", (request) => {
+    if (request.url().includes("/core/engagement/attachments?")) fileReads += 1;
+  });
+  // The mounted profile's durable command owners require canonical UUID actors.
+  await page.route("**/api/backend/core/me", (route) =>
+    json(route, {
+      user: {
+        id: "90000000-0000-4000-8000-000000000002",
+        email: "synthetic@example.test",
+      },
+      tenant: {
+        id: "90000000-0000-4000-8000-000000000001",
+        name: "Synthetic tenant",
+      },
+      role: state.role,
+    }),
+  );
+  const drawer = await openReview(page);
+  const upload = drawer.getByRole("button", { name: "Upload", exact: true });
+  await expect(upload).toBeEnabled();
+  expect(fileReads).toBe(0);
+  // Age the query cache without replacing the profile's native Intl formatters.
+  await page.evaluate(() => {
+    const now = Date.now;
+    Date.now = () => now() + 31_000;
+  });
+  await upload.click();
+  const dialog = page.getByRole("dialog", {
+    name: "Upload files",
+    exact: true,
+  });
+  await expect(
+    dialog.getByLabel("Select files", { exact: true }),
+  ).toBeEnabled();
+  expect(fileReads).toBe(1);
+  expect(state.posts).toEqual([]);
+  expect(unexpected).toEqual([]);
+});
 test("saved run current/proposed, sources, selection and explicit partial apply", async ({
   page,
 }) => {

@@ -22,6 +22,9 @@ export default async function SettingsPage({
         }
         meriPreferences={
           <MeriPreferencesPanel
+            tenantSettingsEnabled={
+              process.env.MERI_TENANT_SETTINGS_ENABLED === "true"
+            }
             reportContent={readOnlyPreview ? undefined : <SupportRequestForm />}
             userPreferencesEnabled={
               process.env.MERI_USER_PREFERENCES_ENABLED === "true"

@@ -83,12 +83,13 @@ for (const status of [200, 401]) {
       status === 200 ? "execute-observed" : "error-unauthenticated",
     );
     const held = fixture.hold("execute", { status, json: response.response });
+    await page.getByRole("checkbox", { name: /I approve/ }).check();
     await page
-      .getByRole("button", { name: "Request execution", exact: true })
+      .getByRole("button", { name: "Approve and execute", exact: true })
       .click();
     await held.entered;
     await expect(
-      page.getByRole("button", { name: "Request execution", exact: true }),
+      page.getByRole("button", { name: "Approve and execute", exact: true }),
     ).toBeDisabled();
     await navigate(page, actionUrl(otherActionClient.id));
     await expect(

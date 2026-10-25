@@ -20,9 +20,9 @@ export const unavailableResources = Object.freeze({
   conversationList: {
     label: "Recent conversations",
     summary:
-      "Searching conversations is not available yet. Recent conversations and the current conversation still work.",
+      "Connect to Meri to search your chat titles and manage saved conversations.",
     missing:
-      "A conversation search route. The service lists recent conversations with paging (POST /api/conversations/list), which Recents uses, but cannot search them.",
+      "Current access and serving configuration for the published conversation summaries and management routes.",
     owner: `${conversations} (conversation-wide history lane)`,
   },
   conversationHistory: {
@@ -67,9 +67,9 @@ export const unavailableResources = Object.freeze({
   },
   routines: {
     label: "Routines",
-    summary: "Routines are not available yet.",
+    summary: "Connect to Meri to review recurring work and manage routines.",
     missing:
-      "Browser routes for the schedule owner (create, update, cancel and history exist only as server source in apps/control/schedules).",
+      "Current access and serving configuration for the public routines prepare, approve, list and reconciliation routes.",
     owner: "neo-capiro/meri-greenfield apps/control/schedules",
   },
   dataAccess: {

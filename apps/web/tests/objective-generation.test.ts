@@ -139,10 +139,8 @@ describe("backend-pinned Objective generation contract", () => {
       ),
     ).toThrow();
   });
-  it("registers only the fixed app-owned POST and scoped job GET", () => {
-    expect(capiroOperations["strategies.objectiveDraft"].path).toBe(
-      "/strategies/objective-drafts",
-    );
+  it("keeps the scoped job GET and removes the replaced legacy POST", () => {
+    expect("strategies.objectiveDraft" in capiroOperations).toBe(false);
     expect(capiroOperations["strategies.objectiveDraftJob"].path).toBe(
       "/strategies/draft-jobs/:jobId",
     );

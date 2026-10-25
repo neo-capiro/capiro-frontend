@@ -26,7 +26,7 @@ export function currentGovernedPlannerRequest(
 ) {
   if (
     client.id !== objective.clientId ||
-    client.status !== "active" ||
+    client.status === "archived" ||
     objective.status !== "ready" ||
     !Number.isInteger(objective.version) ||
     objective.version < 1

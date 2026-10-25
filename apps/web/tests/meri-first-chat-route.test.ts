@@ -1,6 +1,9 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { POST } from "../src/app/api/capiro/[operation]/route";
-import { firstChatCoreOperationKey } from "../src/shared/capiro/operations/meri-first-chat";
+import {
+  firstChatCoreOperationKey,
+  firstChatV2OperationKey,
+} from "../src/shared/capiro/operations/meri-first-chat";
 
 const clerk = vi.hoisted(() => ({ auth: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => clerk);
@@ -121,3 +124,44 @@ it("keeps a read-only preview closed even when the first-chat flag is set", asyn
   expect(clerk.auth).not.toHaveBeenCalled();
   expect(fetcher).not.toHaveBeenCalled();
 });
+
+it.each([
+  { scopeKind: "general", clientId: null },
+  { scopeKind: "client", clientId: body.clientId },
+])(
+  "ordinary v2 bootstrap preserves the explicit $scopeKind scope",
+  async (scope) => {
+    for (const [key, value] of Object.entries({
+      MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: "true",
+      CAPIRO_PREVIEW_READ_ONLY: "false",
+      CORE_API_BASE_URL: "https://first-chat-preview.app-dev.capiro.ai/api",
+      CAPIRO_REQUEST_ORIGIN: origin,
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_YXBw",
+      CLERK_SECRET_KEY: "sk_test_synthetic",
+    }))
+      vi.stubEnv(key, value);
+    const getToken = vi.fn(async () => "native-session-token");
+    clerk.auth.mockResolvedValue({ userId: "clerk-subject", getToken });
+    const selected = { ...body, schemaVersion: 2, ...scope };
+    const expected = { ...receipt, schemaVersion: 2, ...scope };
+    const fetcher = vi.fn<typeof fetch>(async () => Response.json(expected));
+    vi.stubGlobal("fetch", fetcher);
+    const response = await POST(
+      new Request(`${origin}/api/capiro/${firstChatV2OperationKey}`, {
+        method: "POST",
+        headers: { Origin: origin, "Content-Type": "application/json" },
+        body: JSON.stringify({ body: selected }),
+      }),
+      { params: Promise.resolve({ operation: firstChatV2OperationKey }) },
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual(expected);
+    expect(getToken).toHaveBeenCalledExactlyOnceWith();
+    expect(String(fetcher.mock.calls[0]![0])).toBe(
+      "https://first-chat-preview.app-dev.capiro.ai/api/clio/conversations/bootstrap",
+    );
+    expect(JSON.parse(String(fetcher.mock.calls[0]![1]?.body))).toEqual(
+      selected,
+    );
+  },
+);

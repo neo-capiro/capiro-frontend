@@ -23,6 +23,44 @@ export type ConversationIntent = Readonly<{
   cancel?: "pending" | "unknown" | "observed";
 }>;
 
+export type ConversationSkillSelection = Pick<
+  ConversationSubmitRequest,
+  "skill" | "windowRequest"
+>;
+
+/** Preserve exact selected inputs independently of mutable picker objects. */
+export function skillSelectionFields(input: ConversationSkillSelection) {
+  const copy = structuredClone({
+    ...(input.skill ? { skill: input.skill } : {}),
+    ...(input.windowRequest ? { windowRequest: input.windowRequest } : {}),
+  });
+  if (copy.skill) Object.freeze(copy.skill);
+  if (copy.windowRequest) Object.freeze(copy.windowRequest);
+  return Object.freeze(copy);
+}
+
+/** Reuse the public request receiver for draft fields; this local shell is never dispatched. */
+export function receiveSkillSelection(value: unknown) {
+  const fields = z
+    .strictObject({
+      skill: z.unknown().optional(),
+      windowRequest: z.unknown().optional(),
+    })
+    .parse(value);
+  return skillSelectionFields(
+    receiveConversationRequest(
+      "submit",
+      new TextEncoder().encode(
+        JSON.stringify({
+          requestId: "00000000-0000-4000-8000-000000000000",
+          prompt: "Unsent draft selection",
+          ...fields,
+        }),
+      ),
+    ),
+  );
+}
+
 /** Recover the original requested window and skill selection, never the normalized execution window. */
 export function storedSubmission(
   stored: ConversationStoredRequest,

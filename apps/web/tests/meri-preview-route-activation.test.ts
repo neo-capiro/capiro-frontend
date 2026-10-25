@@ -26,10 +26,14 @@ const allowedPostPaths = [
   "/api/conversations/submit",
   "/api/conversations/history",
   "/api/conversations/cancel",
+  "/api/conversations/control",
+  "/api/conversations/checkpoints/inspect",
   "/api/conversations/events",
   "/api/conversations/list",
   "/api/conversations/transcript",
   "/api/conversations/next-turn",
+  "/api/conversations/summaries",
+  "/api/conversations/manage",
   "/api/conversations/input/allocate",
   "/api/conversations/input/admit",
 ];
@@ -275,7 +279,7 @@ it.each([
   ["POST", "/api/action-followthrough/query"],
   ["POST", "/api/documents/create"],
   ["POST", "/api/backend/core/clients"],
-  ["POST", "/api/conversations/control"],
+  ["POST", "/api/conversations/control/unknown"],
   ["POST", "/api/conversations/history?after=0"],
   ["GET", "/api/conversations/history"],
   ["GET", "/api/action-followthrough/session"],
@@ -415,8 +419,8 @@ it("holds wrong direct Meri paths and queries before Clerk", async () => {
     await actionPost(request("/api/action-followthrough/session?extra=1"), {
       params: Promise.resolve({ operation: "session" }),
     }),
-    await conversationPost(request("/api/conversations/control"), {
-      params: Promise.resolve({ path: ["control"] }),
+    await conversationPost(request("/api/conversations/control/unknown"), {
+      params: Promise.resolve({ path: ["control", "unknown"] }),
     }),
     await conversationPost(request("/api/conversations/history?extra=1"), {
       params: Promise.resolve({ path: ["history"] }),

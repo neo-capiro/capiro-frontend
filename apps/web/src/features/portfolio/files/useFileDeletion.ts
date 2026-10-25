@@ -1,81 +1,81 @@
 "use client";
-import { useRef, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
-import { filesKey, useFileReader } from "./file-reader";
-import { useFileScope, type FileExecution } from "./file-scope";
+import { ApiError } from "@/shared/portfolio/api/http";
 import {
-  deleteClientFile,
-  fileDeletionKey,
-  reviewFileDeletion,
-  type FileDeletionAttempt,
-} from "./deletion";
+  assertClientWriter,
+  type ClientWriter,
+} from "@/shared/portfolio/auth/client-writer";
+import { useRetainedIntent } from "@/shared/session/recovery/useRetainedIntent";
+import { filesKey } from "./file-reader";
+import {
+  fileDeletionRecoveryContract,
+  fileDeletionScope,
+} from "./deletion-contract";
+import {
+  FileDeletionAccessError,
+  verifyFileDeletionAccess,
+} from "./deletion-review";
+import { deleteClientFile, type FileDeletionAction } from "./deletion";
 
-type DeletionState = {
-  scope: string;
-  pending?: boolean;
-  error?: Error;
-  current?: Awaited<ReturnType<typeof reviewFileDeletion>>;
-};
-
-export function useFileDeletion(
-  clientId: string,
-  id: string,
-  onDeleted: () => void,
-) {
-  const api = useApi();
-  const cache = useQueryClient();
-  const reader = useFileReader();
-  const scope = useFileScope(clientId, `delete:${id}`);
-  const { data: attempt } = useQuery<FileDeletionAttempt | null>({
-    queryKey: fileDeletionKey(clientId, id, reader),
-    queryFn: () => null,
-    enabled: false,
-    gcTime: Infinity,
-  });
-  const operation = useRef<FileExecution | null>(null);
-  const [state, setState] = useState<DeletionState>();
-  const visible = state?.scope === scope.key ? state : undefined;
-  async function run(review: boolean) {
-    if (operation.current && !operation.current.signal.aborted) return;
-    let execution: FileExecution | undefined;
-    try {
-      execution = scope.capture(!review);
-      operation.current = execution;
-      setState({ scope: scope.key, pending: true });
-      const context = { cache, clientId, execution };
-      if (review) {
-        const current = await reviewFileDeletion(api, id, context);
-        setState({ scope: scope.key, current });
-        return;
-      }
-      await deleteClientFile(api, id, context);
-      await cache.invalidateQueries({ queryKey: filesKey(clientId) });
-      execution.guard();
-      setState({ scope: scope.key });
-      onDeleted();
-    } catch (error) {
-      if (!execution?.signal.aborted)
-        setState({
-          scope: scope.key,
-          error:
-            error instanceof Error
-              ? error
-              : new Error("The deletion could not be confirmed."),
-        });
-    } finally {
-      if (operation.current === execution) operation.current = null;
-    }
-  }
-  return {
-    attempt,
-    error: visible?.error,
-    current: visible?.current,
-    isPending: Boolean(visible?.pending) || attempt?.status === "pending",
-    blocked: !scope.canWrite || Boolean(visible?.pending) || Boolean(attempt),
-    canReview:
-      scope.canRead && !visible?.pending && attempt?.status === "unknown",
-    remove: () => void run(false),
-    review: () => void run(true),
+export function useFileDeletion(clientId: string, actor: ClientWriter) {
+  const api = useApi(),
+    cache = useQueryClient();
+  const recovery = useRetainedIntent(
+    fileDeletionScope(actor, clientId),
+    fileDeletionRecoveryContract,
+    async (signal, guard) => {
+      assertClientWriter(cache, actor);
+      await verifyFileDeletionAccess(api, actor, clientId, signal, guard);
+      assertClientWriter(cache, actor);
+    },
+  );
+  const guard = () => {
+    recovery.guard();
+    assertClientWriter(cache, actor);
   };
+  const saved = recovery.record;
+  const contextError =
+    saved &&
+    (saved.tenantId !== actor.tenantId ||
+      saved.userId !== actor.userId ||
+      saved.command.clientId !== clientId)
+      ? "Restore the original client and account before recovering this deletion."
+      : undefined;
+  const action = useMutation({
+    retry: false,
+    mutationFn: async (input: FileDeletionAction) => {
+      const pinned = structuredClone(input);
+      if (!recovery.ready || contextError)
+        throw new Error(
+          contextError ?? "Restore saved deletion recovery before continuing.",
+        );
+      try {
+        await recovery.verify();
+      } catch (error) {
+        recovery.block(error);
+        throw error;
+      }
+      return deleteClientFile(
+        api,
+        actor,
+        clientId,
+        pinned,
+        recovery.signal(),
+        guard,
+        recovery.install,
+      );
+    },
+    onSuccess: () => {
+      void cache.invalidateQueries({ queryKey: filesKey(clientId) });
+    },
+    onError: (error) => {
+      if (
+        error instanceof FileDeletionAccessError ||
+        (error instanceof ApiError && [401, 403, 404].includes(error.status))
+      )
+        recovery.block(error);
+    },
+  });
+  return { recovery, action, contextError };
 }

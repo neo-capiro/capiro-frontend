@@ -1,7 +1,12 @@
 import type { QueryClient } from "@tanstack/react-query";
 import type { RunBinding } from "@capiro/meri-contracts";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
-import { storedSubmission, submissionIdentity } from "./query-journal";
+import {
+  storedSubmission,
+  submissionIdentity,
+  skillSelectionFields,
+  type ConversationSkillSelection,
+} from "./query-journal";
 import { recoverPersistedTurn } from "./turn-persistence";
 import { TabJournalUnavailable, type TabStorage } from "./tab-journal";
 import { conversationInClient } from "./history-pages";
@@ -22,6 +27,8 @@ export type TurnIntent = Readonly<{
   requestId: string;
   prompt: string;
   modelSelection?: ConversationSubmitRequest["modelSelection"];
+  skill?: ConversationSubmitRequest["skill"];
+  windowRequest?: ConversationSubmitRequest["windowRequest"];
   state: "reserving" | "unknown" | "ready";
   receipt?: ConversationTurnReceipt;
 }>;
@@ -38,6 +45,7 @@ function snapshotIntent(intent: TurnIntent) {
   return Object.freeze({
     ...intent,
     source: Object.freeze({ ...intent.source }),
+    ...skillSelectionFields(intent),
     ...(intent.modelSelection
       ? { modelSelection: Object.freeze({ ...intent.modelSelection }) }
       : {}),
@@ -111,6 +119,7 @@ function completedRequest(
     submissionIdentity({
       requestId: intent.requestId,
       prompt: intent.prompt,
+      ...skillSelectionFields(intent),
       ...(intent.modelSelection
         ? { modelSelection: intent.modelSelection }
         : {}),
@@ -171,11 +180,13 @@ export function conversationTurnJournal(
       submissionIdentity({
         requestId: intent.requestId,
         prompt: intent.prompt,
+        ...skillSelectionFields(previous),
         modelSelection: previous.modelSelection,
       }) !==
         submissionIdentity({
           requestId: intent.requestId,
           prompt: intent.prompt,
+          ...skillSelectionFields(intent),
           modelSelection: intent.modelSelection,
         }) ||
       previous.source.runId !== intent.source.runId
@@ -202,6 +213,7 @@ export function conversationTurnJournal(
       prompt: string,
       requestId: string,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
+      selection: ConversationSkillSelection = {},
     ) {
       if (
         !current() ||
@@ -215,6 +227,7 @@ export function conversationTurnJournal(
         source: Object.freeze({ ...source }),
         prompt,
         requestId,
+        ...skillSelectionFields(selection),
         ...(modelSelection
           ? { modelSelection: Object.freeze({ ...modelSelection }) }
           : {}),

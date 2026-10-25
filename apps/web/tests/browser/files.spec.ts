@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { installFixtures, json, clientId } from "./fixtures";
+import { moveOutcome } from "../../test/browser/files-access-fixtures";
 const fileId = "60000000-0000-4000-8000-000000000001";
 const file = {
   id: fileId,
@@ -9,6 +10,7 @@ const file = {
   byteSize: 512,
   source: "manual",
   folder: "Reports",
+  metadataRevision: 3,
   viewerMode: "all",
   viewerUserIds: [],
   uploadedByUserId: null,
@@ -31,10 +33,14 @@ test("Files keeps quarantined bytes unavailable and persists folder moves", asyn
   await page.route("**/engagement/attachments?**", (route) =>
     json(route, [{ ...file, folder: moved ? "Archive" : "Reports" }]),
   );
-  await page.route(`**/files/${fileId}/folder`, async (route) => {
-    expect(route.request().postDataJSON()).toEqual({ folder: "Archive" });
+  await page.route(`**/files/batch-moves`, async (route) => {
+    const command = route.request().postDataJSON();
+    expect(command).toMatchObject({
+      folder: "Archive",
+      files: [{ id: fileId, expectedRevision: 3 }],
+    });
     moved = true;
-    await json(route, { ...file, folder: "Archive" });
+    await json(route, moveOutcome(command));
   });
   await page.goto(`/portfolio/${clientId}/files`);
   await page

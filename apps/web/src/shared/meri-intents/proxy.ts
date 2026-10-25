@@ -24,8 +24,8 @@ const unavailable = (status: number) =>
   );
 
 /**
- * Fixed same-origin forwarding of the two conversation intent routes. Meri resolves the opaque
- * session, current membership and approval authority; this adapter only validates the request
+ * Fixed same-origin forwarding of the two conversation intent routes. Meri verifies native
+ * membership and approval authority; this adapter only validates the request
  * against the versioned public contract and bounds the exchange. A 502 after a decide was
  * forwarded makes no claim about the decision: the caller reconciles by repeating the request.
  */
@@ -55,7 +55,7 @@ export async function proxyIntentsRequest(
       const nativeToken = await getNativeToken();
       signal.throwIfAborted();
       if (!nativeToken) return unavailable(401);
-      // The opaque session arrives in its own header; Meri reads it as the bearer.
+      // Keep the browser's session prerequisite; upstream membership uses the native token.
       const session = receivedActionSession(request);
       if (!session) return unavailable(401);
       let body: string;
@@ -79,7 +79,7 @@ export async function proxyIntentsRequest(
           body,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${session}`,
+            Authorization: `Bearer ${nativeToken}`,
           },
           credentials: "omit",
           redirect: "error",

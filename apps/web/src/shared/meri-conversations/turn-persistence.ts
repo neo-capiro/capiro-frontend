@@ -5,6 +5,7 @@ import {
   type ConversationSubmitRequest,
 } from "@capiro/meri-contracts/conversation-application";
 import { receiveConversationHistoryRequest } from "@capiro/meri-contracts/conversation-history";
+import { skillSelectionFields } from "./query-journal";
 import {
   tabRecord,
   TabJournalUnavailable,
@@ -82,6 +83,7 @@ export function persistedTurn(scope: TabScope, storage?: TabStorage) {
           request: {
             requestId: intent.requestId,
             prompt: intent.prompt,
+            ...skillSelectionFields(intent),
             ...(intent.modelSelection
               ? { modelSelection: intent.modelSelection }
               : {}),

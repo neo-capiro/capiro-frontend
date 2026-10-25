@@ -94,12 +94,14 @@ export function validPrepared(
   draft: ActionDraftResponse,
   context: ActionContext,
   now: number,
+  allowExpired = false,
 ): boolean {
   return (
     sameJson(value.draft, draft) &&
     sameContext(value.proposal.command.binding, context) &&
     value.proposal.requiredApprover.tenantId === context.tenantId &&
-    Date.parse(value.proposal.expiresAt) > now
+    Date.parse(value.proposal.createdAt) <= now &&
+    (allowExpired || Date.parse(value.proposal.expiresAt) > now)
   );
 }
 export function validExecution(
@@ -108,10 +110,23 @@ export function validExecution(
   context: ActionContext,
 ): boolean {
   if (value.status === "indeterminate") return true;
-  const { receipt, result } = value.outcome;
+  if (value.status === "not_executed")
+    return (
+      value.proposalId === prepared.proposal.proposalId &&
+      value.commandSha256 === prepared.proposal.commandSha256 &&
+      value.idempotencyKey === prepared.proposal.command.idempotencyKey &&
+      sameContext(value.binding, context)
+    );
+  const { result } = value.outcome;
+  const receipt =
+    "execution" in value.outcome
+      ? value.outcome.execution
+      : value.outcome.receipt;
   const command = prepared.proposal.command;
   return (
-    receipt.commandId === command.commandId &&
+    ("kind" in receipt
+      ? receipt.proposalId === prepared.proposal.proposalId
+      : receipt.commandId === command.commandId) &&
     receipt.commandSha256 === prepared.proposal.commandSha256 &&
     receipt.idempotencyKey === command.idempotencyKey &&
     sameContext(receipt.binding, context) &&

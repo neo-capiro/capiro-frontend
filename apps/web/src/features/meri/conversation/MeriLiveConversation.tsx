@@ -25,6 +25,13 @@ import { useLiveRun } from "./useLiveRun";
 import { shouldShowPrompt } from "./prompt-identity";
 import type { InitialDraftOwner } from "./initial-draft";
 import styles from "./live.module.css";
+import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
+import {
+  useRunLifecycle,
+  type LifecycleTarget,
+} from "./lifecycle/useRunLifecycle";
+import { RunLifecycleControls } from "./lifecycle/RunLifecycleControls";
+import { SelectedRequestReceipt } from "./SelectedRequestReceipt";
 
 /** The current admitted segment, or the exact immutable request whose ACK is still pending. */
 function LiveTurn({
@@ -54,7 +61,9 @@ function LiveTurn({
       <p className={styles.muted}>
         {intent.submit.state === "unknown"
           ? "Delivery is uncertain. Retry sends exactly the same request; nothing is duplicated."
-          : "Sending to Meri."}
+          : intent.submit.state === "observed"
+            ? "Message accepted. Reload the transcript to check its current status."
+            : "Sending to Meri."}
       </p>
     </article>
   );
@@ -91,7 +100,9 @@ function composerAvailability(
       : intent.submit?.state === "unknown"
         ? "Delivery of your last request is uncertain. Retry it before sending another."
         : intent.submit && !turn
-          ? "Your request is being sent."
+          ? intent.submit.state === "observed"
+            ? "Reload the transcript to verify the current run."
+            : "Your request is being sent."
           : undefined);
   return {
     initial,
@@ -217,6 +228,8 @@ export function MeriLiveConversation({
   storageError,
   modelSelection,
   modelBlocked,
+  skillSelection,
+  onLifecycleTarget,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -240,6 +253,8 @@ export function MeriLiveConversation({
   storageError?: string | undefined;
   modelSelection?: ConversationStoredRequest["modelSelection"];
   modelBlocked?: string | undefined;
+  skillSelection?: ConversationSkillSelection;
+  onLifecycleTarget: (target: LifecycleTarget) => void;
 }) {
   const run = useLiveRun(
     port,
@@ -247,6 +262,12 @@ export function MeriLiveConversation({
     savedCurrent?.runId === port.context.runId ? acceptedRequest : undefined,
   );
   const { snapshot, intent } = run;
+  const lifecycle = useRunLifecycle(
+    port,
+    run.suspendObservation,
+    run.reconnect,
+    onLifecycleTarget,
+  );
   const observed = snapshot.observation
     ? {
         ...turnFromObservation(snapshot.observation, port.context.runId),
@@ -271,13 +292,14 @@ export function MeriLiveConversation({
   const retentionError =
     storageError ?? initialDraft.error() ?? run.storageError;
   const send = () => {
-    if (retentionError || modelBlocked) return;
+    if (retentionError || modelBlocked || lifecycle.blocked) return;
     const prompt = draft.trim();
     if (availability.initial) {
       void run.submitInitial(
         prompt,
         (request) => initialDraft.begin(port.context, request, draft),
         modelSelection,
+        skillSelection,
       );
     } else if (
       !initialDraft.hasPending(port.context) &&
@@ -293,12 +315,17 @@ export function MeriLiveConversation({
     controls: {
       onSend: send,
       onStop: () => void run.cancel(),
-      sendBlocked: retentionError ?? availability.sendBlocked ?? modelBlocked,
+      sendBlocked:
+        retentionError ??
+        lifecycle.blocked ??
+        availability.sendBlocked ??
+        modelBlocked,
       modelSelection:
         intent.submit?.state !== "observed" && intent.submit
           ? intent.submit.modelSelection
           : modelSelection,
-      stopBlocked: retentionError ?? availability.stopBlocked,
+      stopBlocked:
+        retentionError ?? lifecycle.blocked ?? availability.stopBlocked,
       scope,
       attachUnavailable: unavailableTitle("attachments"),
     },
@@ -308,15 +335,37 @@ export function MeriLiveConversation({
       earlier={earlier}
       current={<LiveTurn turn={turn} intent={intent} earlier={earlier} />}
       status={
-        <CurrentRunStatus
-          run={run}
-          retentionError={retentionError}
-          active={active}
-          acceptedRequest={acceptedRequest}
-          savedCurrent={savedCurrent}
-          readyForNext={availability.readyForNext && !retentionError}
-          onCompose={() => textareaRef.current?.focus()}
-        />
+        <>
+          <SelectedRequestReceipt
+            request={snapshot.acceptedRequest ?? acceptedRequest}
+            scope={scope}
+          />
+          <CurrentRunStatus
+            run={{
+              ...run,
+              busy: run.busy || lifecycle.busy || !!lifecycle.command,
+            }}
+            retentionError={retentionError}
+            active={active}
+            acceptedRequest={acceptedRequest}
+            savedCurrent={savedCurrent}
+            readyForNext={
+              availability.readyForNext && !retentionError && !lifecycle.blocked
+            }
+            onCompose={() => textareaRef.current?.focus()}
+          />
+          <RunLifecycleControls
+            lifecycle={lifecycle}
+            turn={turn}
+            disabled={
+              run.busy ||
+              !!retentionError ||
+              snapshot.status !== "ready" ||
+              intent.submit?.state === "unknown" ||
+              intent.cancel === "unknown"
+            }
+          />
+        </>
       }
       files={<ConversationPanels port={port} turn={turn} earlier={earlier} />}
     />

@@ -6,6 +6,13 @@ const binding = {
   payloadDigest: z.string().regex(/^[a-f0-9]{64}$/),
 };
 const refusalSchema = z.discriminatedUnion("code", [
+  z.strictObject({
+    ...binding,
+    code: z.literal("FILE_BATCH_MOVE_REFUSED"),
+    clientId: z.uuid(),
+    status: z.union([z.literal(400), z.literal(404), z.literal(409)]),
+    message: z.string().min(1).max(500),
+  }),
   z
     .object({
       ...binding,
@@ -58,9 +65,24 @@ export function portfolioCommandRefusal(
   status: number,
   payload: unknown,
 ) {
-  if (service !== "core" || method !== "POST" || !body) return;
+  if (service !== "core" || !["POST", "GET"].includes(method)) return;
   const parsed = refusalSchema.safeParse(payload);
   if (!parsed.success || parsed.data.status !== status) return;
+  if (method === "GET") {
+    const refusal = parsed.data;
+    if (
+      refusal.code !== "FILE_BATCH_MOVE_REFUSED" ||
+      path.length !== 5 ||
+      path[0] !== "clients" ||
+      path[1] !== refusal.clientId ||
+      path[2] !== "files" ||
+      path[3] !== "batch-moves" ||
+      path[4] !== refusal.requestId
+    )
+      return;
+    return refusal;
+  }
+  if (!body) return;
   let input: unknown;
   try {
     input = JSON.parse(body);
@@ -71,7 +93,17 @@ export function portfolioCommandRefusal(
   if (!submitted.success || submitted.data.requestId !== parsed.data.requestId)
     return;
   const refusal = parsed.data;
-  if (refusal.code === "ACTIVITY_UNDO_REFUSED") {
+  if (refusal.code === "FILE_BATCH_MOVE_REFUSED") {
+    if (
+      path.length !== 4 ||
+      path[0] !== "clients" ||
+      path[1] !== refusal.clientId ||
+      path[2] !== "files" ||
+      path[3] !== "batch-moves" ||
+      submitted.data.clientId !== refusal.clientId
+    )
+      return;
+  } else if (refusal.code === "ACTIVITY_UNDO_REFUSED") {
     if (
       path.length !== 5 ||
       path[0] !== "clients" ||

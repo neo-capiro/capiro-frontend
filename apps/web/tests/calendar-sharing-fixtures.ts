@@ -1,4 +1,7 @@
-export const sharingActor = { userId: "user-test", tenantId: "tenant-test" };
+export const sharingActor = {
+  userId: "00000000-0000-4000-8000-000000000002",
+  tenantId: "00000000-0000-4000-8000-000000000001",
+};
 export const sharingClientId = "10000000-0000-4000-8000-000000000001";
 export const sharingTime = "2026-10-12T12:00:00Z";
 export const sharingMeetingId = "91000000-0000-4000-8000-000000000001";
@@ -42,6 +45,7 @@ export const sharingDebrief = {
   updatedAt: sharingTime,
 };
 export const sharingAttachment = {
+  metadataRevision: 0,
   ...scope,
   ...stamps,
   id: "95000000-0000-4000-8000-000000000001",
@@ -65,6 +69,7 @@ export const sharingAttachment = {
   approvedByUserId: sharingActor.userId,
 };
 export const sharingMeeting = {
+  updatedAt: sharingTime,
   id: sharingMeetingId,
   tenantId: sharingActor.tenantId,
   subject: "Synthetic sharing meeting",

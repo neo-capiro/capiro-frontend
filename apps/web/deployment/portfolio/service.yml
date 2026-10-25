@@ -5,6 +5,7 @@ Metadata:
   AWSToolsMetrics:
     AWSAgentToolkit: aws-cloudformation@3
   CoreBootstrapCompatibility:
+    Applicability: Legacy contained preview profile; ordinary mode uses current deployment readback instead of these historical image pins.
     ContractSource: "16c3122a379481eb19cdee156ceb5d5c8b615bea"
     ExpectedDeploymentSource: "d03a118192acd2b1ed2ef5698afb0ab8f2b36ae8"
     ExpectedDeploymentImageDigest: "sha256:a1e35b1aeae40889b46c75df472ced83aebe54b8f78234bffef4192c9767e375"
@@ -41,19 +42,19 @@ Parameters:
   CoreApiBaseUrl:
     Type: String
     Default: https://portfolio-preview.app.capiro.ai/api
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai/api"]
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai/api", "https://first-chat-preview.app-dev.capiro.ai/api"]
   StrategyApiBaseUrl:
     Type: String
     Default: ""
-    AllowedValues: [""]
+    AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/strategy-api"]
   WorkspaceApiBaseUrl:
     Type: String
     Default: https://portfolio-preview.app.capiro.ai/workspace-api
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai/workspace-api"]
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai/workspace-api", "https://first-chat-preview.app-dev.capiro.ai/workspace-api"]
   IntelligenceApiBaseUrl:
     Type: String
     Default: https://portfolio-preview.app.capiro.ai/intel-api
-    AllowedValues: ["https://portfolio-preview.app.capiro.ai/intel-api"]
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai/intel-api", "https://first-chat-preview.app-dev.capiro.ai/intel-api"]
   ExistingAppUrl:
     Type: String
     Default: https://portfolio-preview.app.capiro.ai
@@ -65,8 +66,13 @@ Parameters:
   CapiroPreviewReadOnly:
     Type: String
     Default: "true"
-    AllowedValues: ["true"]
-    Description: Keep ordinary backend routes held; only exact reviewed exceptions can pass
+    AllowedValues: ["true", "false"]
+    Description: False uses the existing authenticated gateways with the paired clone service targets; backend routing and credential compatibility must be verified first
+  MeriUserPreferencesEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Enable existing personal preferences and model catalogue against the configured Meri owner
   CapiroPreviewReadBackendSource:
     Type: String
     Default: ""
@@ -102,7 +108,7 @@ Parameters:
     Type: String
     Default: "false"
     AllowedValues: ["false", "true"]
-    Description: Held until the complete Core memory packet and listener are qualified
+    Description: Explicit opt-in after Core owner-review qualification; ordinary mode uses CoreApiBaseUrl and contained preview requires its separately qualified listener
   CapiroPreviewMemoryOwnerRoutesEnabled:
     Type: String
     Default: "false"
@@ -128,6 +134,31 @@ Parameters:
     Default: "false"
     AllowedValues: ["false", "true"]
     Description: Explicit Meri conversation opt-in after the service and its dependencies are qualified
+  MeriActionWorkflowEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Ordinary action opt-in after canonical session, intent readiness and effect receipts are qualified
+  MeriTaskCommandWorkflowEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Ordinary task-command opt-in after canonical session, Core task effects and recovery are qualified
+  MeriIntentApprovalsWorkflowEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Ordinary conversation approval opt-in after intent decisions and durable effects are qualified
+  MeriDocumentWorkflowEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Ordinary document opt-in after persisted-run custody and native output are qualified
+  MeriDocumentOperation:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "create_word"]
+    Description: Explicit existing Word/TXT writer family; other formats require separate qualification
   CapiroPreviewMeriConversationRoutesEnabled:
     Type: String
     Default: "false"
@@ -148,10 +179,54 @@ Parameters:
   CapiroPreviewMeriContractPackageVersion:
     Type: String
     Default: ""
-    AllowedValues: ["", "0.1.13"]
+    AllowedValues: ["", "0.1.14"]
     Description: Frontend consumer distribution; this is not a Meri producer package assertion
 
 Rules:
+  OrdinaryBackendTargets:
+    RuleCondition: !Equals [!Ref CapiroPreviewReadOnly, "false"]
+    Assertions:
+      - Assert: !Equals [!Ref CoreApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/api"]
+        AssertDescription: Ordinary Core requests must reach the clone, not the frontend itself
+      - Assert: !Equals [!Ref StrategyApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/strategy-api"]
+        AssertDescription: Preserve the existing Strategy read destination
+      - Assert: !Equals [!Ref WorkspaceApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/workspace-api"]
+        AssertDescription: Preserve the existing Workspace read destination
+      - Assert: !Equals [!Ref IntelligenceApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/intel-api"]
+        AssertDescription: Preserve the existing Intelligence read destination
+  UserPreferencesRequiresMeri:
+    RuleCondition: !Equals [!Ref MeriUserPreferencesEnabled, "true"]
+    Assertions:
+      - Assert: !Not [!Equals [!Ref MeriApiBaseUrl, ""]]
+        AssertDescription: Preferences require the existing Meri HTTPS service
+      - Assert: !Equals [!Ref CapiroPreviewReadOnly, "false"]
+        AssertDescription: Preferences use the ordinary authenticated gateway
+  OrdinaryMeriWorkflowsRequireTarget:
+    RuleCondition: !Or
+      - !Equals [!Ref MeriActionWorkflowEnabled, "true"]
+      - !Equals [!Ref MeriTaskCommandWorkflowEnabled, "true"]
+      - !Equals [!Ref MeriIntentApprovalsWorkflowEnabled, "true"]
+      - !Equals [!Ref MeriDocumentWorkflowEnabled, "true"]
+    Assertions:
+      - Assert: !Not [!Equals [!Ref MeriApiBaseUrl, ""]]
+        AssertDescription: Enabled workflows require the existing Meri HTTPS service
+      - Assert: !Equals [!Ref CapiroPreviewReadOnly, "false"]
+        AssertDescription: These workflows use existing ordinary authenticated routes
+  IntentApprovalsRequireConversation:
+    RuleCondition: !Equals [!Ref MeriIntentApprovalsWorkflowEnabled, "true"]
+    Assertions:
+      - Assert: !Equals [!Ref MeriConversationWorkflowEnabled, "true"]
+        AssertDescription: Intent approvals require the existing conversation workflow
+  DocumentsRequireOperation:
+    RuleCondition: !Equals [!Ref MeriDocumentWorkflowEnabled, "true"]
+    Assertions:
+      - Assert: !Equals [!Ref MeriDocumentOperation, "create_word"]
+        AssertDescription: Documents require the explicitly selected Word/TXT writer family
+  DocumentOperationHeldWithoutWorkflow:
+    RuleCondition: !Equals [!Ref MeriDocumentWorkflowEnabled, "false"]
+    Assertions:
+      - Assert: !Equals [!Ref MeriDocumentOperation, ""]
+        AssertDescription: Disabled documents must not carry an operation
   PreviewReadRequiresPairedTarget:
     RuleCondition: !Equals [!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"]
     Assertions:
@@ -195,7 +270,9 @@ Rules:
       - Assert: !Equals [!Ref CapiroPreviewFirstChatApiBaseUrl, ""]
         AssertDescription: A held first-chat route must not carry a target
   MemoryReviewRequiresQualifiedCore:
-    RuleCondition: !Equals [!Ref MeriMemoryOwnerReviewEnabled, "true"]
+    RuleCondition: !And
+      - !Equals [!Ref MeriMemoryOwnerReviewEnabled, "true"]
+      - !Equals [!Ref CapiroPreviewReadOnly, "true"]
     Assertions:
       - Assert: !Equals [!Ref CapiroPreviewMemoryOwnerRoutesEnabled, "true"]
         AssertDescription: Memory review requires its exact preview routes
@@ -204,14 +281,16 @@ Rules:
       - Assert: !Not [!Equals [!Ref CapiroPreviewMemoryCoreApiBaseUrl, ""]]
         AssertDescription: Memory review requires the matching Core preview target
   MemoryReviewHeldWithoutFlag:
-    RuleCondition: !Equals [!Ref MeriMemoryOwnerReviewEnabled, "false"]
+    RuleCondition: !Or
+      - !Equals [!Ref MeriMemoryOwnerReviewEnabled, "false"]
+      - !Equals [!Ref CapiroPreviewReadOnly, "false"]
     Assertions:
       - Assert: !Equals [!Ref CapiroPreviewMemoryOwnerRoutesEnabled, "false"]
-        AssertDescription: Held memory review cannot open its preview routes
+        AssertDescription: Ordinary or disabled memory review cannot open preview routes
       - Assert: !Equals [!Ref CapiroPreviewMemoryCoreBackendSource, ""]
-        AssertDescription: Held memory review must not carry a Core source
+        AssertDescription: Ordinary or disabled memory review must not carry a preview Core source
       - Assert: !Equals [!Ref CapiroPreviewMemoryCoreApiBaseUrl, ""]
-        AssertDescription: Held memory review must not carry a Core target
+        AssertDescription: Ordinary or disabled memory review must not carry a preview Core target
   MeriConversationRequiresOrigin:
     RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "true"]
     Assertions:
@@ -225,7 +304,7 @@ Rules:
         AssertDescription: Meri route requires the currently qualified image source
       - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:1421f5cb090a010be2c3e3faa8c549f2c570c30a7432641efcca839dd8a8e35d"]
         AssertDescription: Meri route requires the currently qualified image digest
-      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.13"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.14"]
         AssertDescription: Meri route requires the frontend consumer distribution version
   MeriRouteHeldWithoutWorkflow:
     RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "false"]
@@ -505,6 +584,8 @@ Resources:
               Value: !Ref MeriApiBaseUrl
             - Name: MERI_CONVERSATION_WORKFLOW_ENABLED
               Value: !Ref MeriConversationWorkflowEnabled
+            - Name: MERI_USER_PREFERENCES_ENABLED
+              Value: !Ref MeriUserPreferencesEnabled
             - Name: CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED
               Value: !Ref CapiroPreviewMeriConversationRoutesEnabled
             - Name: CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN
@@ -515,12 +596,18 @@ Resources:
               Value: !Ref CapiroPreviewMeriRuntimeImageDigest
             - Name: CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION
               Value: !Ref CapiroPreviewMeriContractPackageVersion
+            # Release selects these explicit opt-ins only after the existing
+            # authenticated owners and durable effects pass qualification.
             - Name: MERI_ACTION_WORKFLOW_ENABLED
-              Value: "false"
+              Value: !Ref MeriActionWorkflowEnabled
+            - Name: MERI_TASK_COMMAND_WORKFLOW_ENABLED
+              Value: !Ref MeriTaskCommandWorkflowEnabled
+            - Name: MERI_INTENT_APPROVALS_WORKFLOW_ENABLED
+              Value: !Ref MeriIntentApprovalsWorkflowEnabled
             - Name: MERI_DOCUMENT_WORKFLOW_ENABLED
-              Value: "false"
+              Value: !Ref MeriDocumentWorkflowEnabled
             - Name: MERI_DOCUMENT_OPERATION
-              Value: ""
+              Value: !Ref MeriDocumentOperation
   PreviewService:
     Type: AWS::ECS::Service
     DependsOn: PreviewListener

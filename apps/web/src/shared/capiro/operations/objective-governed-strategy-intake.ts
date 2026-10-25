@@ -45,6 +45,7 @@ export const governedObjectiveStrategyIntakeRequest = z.strictObject({
 
 export const governedObjectiveStrategyIntakeResponse = z.strictObject({
   schemaVersion: z.literal(2),
+  generationJobId: id,
   commandReceipt: governedObjectiveCommandReceipt,
   selection: z.strictObject({
     type: z.enum(strategyTypes),

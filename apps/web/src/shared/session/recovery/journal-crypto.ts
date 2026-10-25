@@ -5,6 +5,18 @@ const envelope = z.discriminatedUnion("state", [
       version: z.literal(1),
       scope: z.string(),
       requestId: z.uuid(),
+      state: z.literal("discarded"),
+      code: z.enum([
+        "TASK_PREPARATION_DISCARDED",
+        "ROUTINE_PREPARATION_DISCARDED",
+      ]),
+    })
+    .strict(),
+  z
+    .object({
+      version: z.literal(1),
+      scope: z.string(),
+      requestId: z.uuid(),
       state: z.literal("pending"),
       data: z.unknown(),
     })
@@ -28,10 +40,15 @@ const envelope = z.discriminatedUnion("state", [
         "ACTIVITY_UNDO_REFUSED",
         "DIRECTORY_NOTE_REFUSED",
         "PROSPECT_NEW_CLIENT_REFUSED",
+        "PROSPECT_CONTACT_TRANSFER_REFUSED",
+        "MEETING_COMMAND_REFUSED",
         "OBJECTIVE_GENERATION_FAILED",
         "OBJECTIVE_CONTEXT_INCOMPLETE",
         "OBJECTIVE_VERSION_CONFLICT",
         "OBJECTIVE_ASSOCIATION_REJECTED",
+        "FILE_BATCH_MOVE_REFUSED",
+        "TASK_EXECUTION_NOT_EXECUTED",
+        "FILE_ACCESS_REFUSED",
       ]),
     })
     .strict(),

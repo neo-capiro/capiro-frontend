@@ -10,6 +10,11 @@ const pricingOwner = `${appSource}shared/capiro/onboard-pricing.server.ts`;
 const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
 const previewPolicy = `${appSource}shared/preview/backend-policy.server.ts`;
 const meriCapabilityReader = `${appSource}shared/meri-resources/capabilities.server.ts`;
+const coreSessionAuthentication = `${appSource}shared/preview/core-session-authentication.ts`;
+const coreSessionReaders = new Set([
+  `${appSource}shared/capiro/gateway.ts`,
+  `${appSource}shared/portfolio/api/proxy.ts`,
+]);
 const previewOwner = `${appSource}shared/preview/`;
 const previewReadProxy = `${previewOwner}read-proxy.server.ts`;
 const previewReadConfig = `${previewOwner}read-config.server.ts`;
@@ -20,8 +25,24 @@ const previewUiPages = new Set([
 const previewMemoryOwnerRoute = `${previewOwner}memory-owner-route.server.ts`;
 const memoryOwnerProxy = `${appSource}features/meri/memory-review/owner-review-proxy.server.ts`;
 const objectiveSnapshotOwner = `${appSource}shared/capiro/operations/objective-workspace-receiving.ts`;
+const clientBriefCopyOwner = `${appSource}features/portfolio/prospects/brief/client-copy/`;
+const prospectActionsEntry = `${appSource}features/modules/workspace/prospect-actions-public.ts`;
+const clientBriefAuthorityImports = new Map([
+  [`${clientBriefCopyOwner}authority.ts`, new Set(['verifyProspectWriter', 'ProspectWriter'])],
+  [`${clientBriefCopyOwner}command.ts`, new Set(['prospectIntentScope', 'ProspectWriter'])],
+  [`${clientBriefCopyOwner}ClientBriefCopy.tsx`, new Set(['ProspectWriter'])],
+  [`${clientBriefCopyOwner}useClientBriefCopy.ts`, new Set(['ProspectWriter'])],
+  [`${clientBriefCopyOwner}recovery.ts`, new Set(['ProspectWriter'])],
+]);
+function approvedClientBriefAuthorityImport(from, to, entry) {
+  const allowed = clientBriefAuthorityImports.get(from);
+  // The scanner marks whole-clause import type as other, retaining only its explicit named bindings.
+  return to === prospectActionsEntry && allowed && ['named', 'other'].includes(entry.kind)
+    && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
+}
 function approvedSnapshotImport(file, entry) {
-  return file === objectiveSnapshotOwner && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
+  return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`)
+    && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
 }
 
 function approvedPricingImport(file, module, entry) {
@@ -47,11 +68,15 @@ export const publicExports = new Set([
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
+  '@capiro/meri-contracts/conversation-lifecycle',
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
   '@capiro/meri-contracts/conversation-session',
   '@capiro/meri-contracts/document-access-application',
   '@capiro/meri-contracts/intents-application',
+  '@capiro/meri-contracts/routines-application',
+  '@capiro/meri-contracts/objective-generation',
+  '@capiro/meri-contracts/task-command-application',
   '@capiro/meri-contracts/user-preferences-application',
   '@capiro/meri-client/conversation',
   '@capiro/meri-client/task-commands',
@@ -92,6 +117,9 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/settings/user/[operation]/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-user-preferences/config.ts`, `${appSource}shared/meri-user-preferences/proxy.ts`,
   ])],
+  [`${appSource}app/api/settings/tenant/[operation]/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-tenant-settings/proxy.ts`,
+  ])],
   [`${appSource}app/api/conversations/[...path]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`, `${appSource}shared/meri-conversations/proxy.ts`,
@@ -109,6 +137,7 @@ export const serverAdapters = new Map([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-actions/config.ts`, `${appSource}shared/meri-actions/proxy.ts`, `${appSource}shared/meri-actions/connection-config.ts`,
     `${appSource}shared/meri-actions/identity-token.server.ts`,
+    `${appSource}shared/meri-routines/routes.ts`,
   ])],
   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
     previewPolicy, previewReadProxy,
@@ -145,6 +174,10 @@ function edgeViolation(from, to, entry, module) {
         && entry.kind === 'named' && entry.names.length === 1
         && entry.names[0] === 'previewBackendRejection'
         && !module.directives.includes('use client'))
+      && !(coreSessionReaders.has(from) && to === coreSessionAuthentication
+        && entry.kind === 'named' && entry.names.length === 1
+        && entry.names[0] === 'coreSessionAuthentication'
+        && !module.directives.includes('use client'))
       && !(to === previewPolicy && from === `${appSource}proxy.ts`)
       && !(to === previewMemoryOwnerRoute && from === memoryOwnerProxy)
       && !serverAdapters.get(from)?.has(to)) return `${from}: preview policy and receiving code are allocated only to reviewed backend server entries`;
@@ -152,7 +185,7 @@ function edgeViolation(from, to, entry, module) {
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
-  if (feature(from) && feature(to) && feature(from) !== feature(to)) return `${from}: private cross-feature import ${to}`;
+  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
   if (feature(from) === 'portfolio' && feature(to) === 'portfolio' && portfolioArea(from) !== portfolioArea(to) && !publicEntry(to)) return `${from}: private Portfolio domain import ${to}; use public.ts or a named *-public.ts entry`;
   return undefined;
 }

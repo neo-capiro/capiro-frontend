@@ -2,68 +2,42 @@ import { describe, expect, it, vi } from "vitest";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import {
   sharingMeetingSchema,
-  sharingReceipt,
   sharedFeedSchema,
-  type ShareRef,
+  sharingScope,
 } from "../src/features/portfolio/calendar/sharing/contracts";
 import { sharingTargets } from "../src/features/portfolio/calendar/sharing/targets";
-import { changeSharing } from "../src/features/portfolio/calendar/sharing/api";
+import {
+  sharingCommand,
+  preflightSharing,
+} from "../src/features/portfolio/calendar/sharing/api";
 import {
   sharingActor as actor,
   sharingMeeting as meeting,
   sharingFile as file,
   sharedMeetingFixture,
 } from "./calendar-sharing-fixtures";
-const refs: ShareRef[] = [
-  { type: "prep", id: meeting.preps[0]!.id },
-  { type: "attachment", id: file.id },
-];
-import { meetingAttachmentSchema } from "../src/features/portfolio/calendar/review/contracts";
 const parse = (row: unknown) => sharingMeetingSchema.parse(row);
-
-describe("native selected artifact sharing and client feed", () => {
-  it("accepts all four native artifact collections and preserves nullable original attribution", () => {
+describe("native shared feed and current eligibility", () => {
+  it("preserves nullable original attribution in all native artifact collections", () => {
     const row = sharedMeetingFixture();
     row.preps[0]!.sharedByUserId = null;
     row.attachments[0]!.sharedByUserId = null;
-    expect(
-      sharingReceipt(meeting, actor, "share", refs).safeParse(row).success,
-    ).toBe(true);
+    expect(sharingScope(meeting, actor).safeParse(row).success).toBe(true);
     expect(
       sharedFeedSchema(meeting.client.id, actor.tenantId).safeParse([row])
         .success,
     ).toBe(true);
   });
-  it.each(["tenant", "client", "meeting", "missing", "private", "unapproved"])(
-    "rejects a %s sharing receipt",
+  it.each(["tenant", "client", "meeting"])(
+    "rejects foreign %s scope",
     (kind) => {
       const row = sharedMeetingFixture();
       if (kind === "tenant") row.tenantId = "foreign";
       if (kind === "client") row.client.id = "foreign";
       if (kind === "meeting") row.attachments[0]!.meetingId = "foreign";
-      if (kind === "missing") row.preps = [];
-      if (kind === "private") row.visibility = "private";
-      if (kind === "unapproved") row.preps[0]!.status = "edited";
-      expect(
-        sharingReceipt(meeting, actor, "share", refs).safeParse(row).success,
-      ).toBe(false);
+      expect(sharingScope(meeting, actor).safeParse(row).success).toBe(false);
     },
   );
-  it("unsharing selected artifacts permits other artifacts to keep the meeting shared", () => {
-    const row = sharedMeetingFixture();
-    Object.assign(row.preps[0]!, { sharedAt: null, sharedByUserId: null });
-    Object.assign(row.attachments[0]!, {
-      sharedAt: null,
-      sharedByUserId: null,
-    });
-    expect(
-      sharingReceipt(meeting, actor, "unshare", refs).safeParse(row).success,
-    ).toBe(true);
-    Object.assign(row.attachments[0]!, { sharedByUserId: "stale" });
-    expect(
-      sharingReceipt(meeting, actor, "unshare", refs).safeParse(row).success,
-    ).toBe(false);
-  });
   it("feed rejects private, foreign-client, foreign-tenant, unshared and duplicate records", () => {
     const row = sharedMeetingFixture();
     const schema = sharedFeedSchema(meeting.client.id, actor.tenantId);
@@ -133,48 +107,38 @@ describe("native selected artifact sharing and client feed", () => {
 for (const scenario of [
   "success",
   "changed",
-  "uncertain",
-  "foreign receipt",
   "revoked",
+  "parent",
+  "file-revision",
 ] as const)
-  it(`sharing dispatch ${scenario}`, async () => {
+  it(`sharing preflight ${scenario}`, async () => {
     const selected = sharingTargets(
       parse(meeting),
-      [meetingAttachmentSchema.parse(file)],
+      [file],
       actor,
       false,
     ).filter((row) => row.type === "prep" || row.type === "attachment");
     const current = structuredClone(meeting);
     if (scenario === "changed")
       current.preps[0]!.summary = "Changed after review";
-    const receipt = sharedMeetingFixture();
-    if (scenario === "foreign receipt") receipt.tenantId = "foreign";
+    if (scenario === "parent") current.updatedAt = "2026-10-24T12:00:00Z";
+    if (scenario === "file-revision")
+      current.attachments[0]!.metadataRevision++;
     const fetcher = vi.fn(
       async (input: RequestInfo | URL, init?: RequestInit) => {
-        const url = String(input);
-        return new Response(
-          JSON.stringify(
-            init?.method === "POST"
-              ? receipt
-              : url.includes("/attachments?")
-                ? [file]
-                : current,
-          ),
-          {
-            status:
-              init?.method === "POST" && scenario === "uncertain" ? 503 : 200,
-          },
+        expect(init?.method).toBe("GET");
+        return Response.json(
+          String(input).includes("/attachments?") ? [file] : current,
         );
       },
     );
-    const api = createApiClient(fetcher);
     let guards = 0;
     const guard = () => {
       if (++guards === 2 && scenario === "revoked")
-        throw new Error("Synthetic actor replaced");
+        throw Error("Actor replaced");
     };
-    const action = changeSharing(
-      api,
+    const result = preflightSharing(
+      createApiClient(fetcher),
       meeting,
       actor,
       false,
@@ -183,12 +147,25 @@ for (const scenario of [
       guard,
       new AbortController().signal,
     );
-    if (scenario === "success") await expect(action).resolves.toBeUndefined();
-    else
-      await expect(action).rejects.toMatchObject({
-        uncertain: scenario === "uncertain" || scenario === "foreign receipt",
-      });
-    expect(
-      fetcher.mock.calls.filter((call) => call[1]?.method === "POST"),
-    ).toHaveLength(scenario === "changed" || scenario === "revoked" ? 0 : 1);
+    if (scenario === "success") await expect(result).resolves.toBeUndefined();
+    else await expect(result).rejects.toThrow();
+    expect(fetcher.mock.calls.map((call) => call[1]?.method)).toEqual([
+      "GET",
+      "GET",
+      "GET",
+    ]);
+    const command = sharingCommand(meeting, "share", selected);
+    expect(command).toMatchObject({
+      meetingId: meeting.id,
+      expectedClientId: meeting.client.id,
+      expectedRevision: meeting.updatedAt,
+      artifacts: [
+        {
+          type: "prep",
+          id: meeting.preps[0]!.id,
+          revision: meeting.preps[0]!.updatedAt,
+        },
+        { type: "attachment", id: file.id, revision: 0 },
+      ],
+    });
   });

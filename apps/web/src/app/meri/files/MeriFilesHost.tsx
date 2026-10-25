@@ -9,10 +9,22 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@capiro/ui/button";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
-import { OpaqueSessionController } from "../../../shared/meri-actions/opaque-session-controller";
+import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
+import { bootstrapActionSession } from "../../../shared/meri-actions/session-bootstrap";
+import { createMeriConversation } from "@capiro/meri-client/conversation";
+import {
+  useIdentity,
+  identitySchema,
+} from "../../../shared/portfolio/auth/identity";
+import { useApi } from "../../../shared/portfolio/api/provider";
+import type { ApiClient } from "../../../shared/portfolio/api/http";
+import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
+import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
 import { DocumentWorkflow } from "../../../shared/meri-documents/workflow-adapter";
 import { documentTransport } from "../../../shared/meri-documents/workflow-transport";
 import { documentQueryJournal } from "../../../shared/meri-documents/query-journal";
+import { documentSessionContext } from "../../../shared/meri-documents/session-context";
 
 type Operation = "create_word" | "create_excel";
 export function MeriFilesHost({
@@ -23,6 +35,7 @@ export function MeriFilesHost({
   operation: Operation;
 }) {
   const selected = useSelectedClient();
+  const identity = useIdentity();
   if (!enabled)
     return (
       <MeriFilesWorkflow
@@ -42,9 +55,21 @@ export function MeriFilesHost({
         </p>
       </section>
     );
+  if (!identity.data?.tenant?.id || identity.error)
+    return <p role="status">Verifying the current document account…</p>;
+  const account = {
+    tenantId: identity.data.tenant.id,
+    actorId: identity.data.user.id,
+  };
   return (
     <ConnectedFiles
-      key={`${operation}:${selected.requestedId}`}
+      key={JSON.stringify([
+        operation,
+        account.tenantId,
+        account.actorId,
+        selected.requestedId,
+      ])}
+      account={account}
       operation={operation}
       clientId={selected.requestedId}
       clientName={
@@ -52,7 +77,7 @@ export function MeriFilesHost({
           ? selected.client.name
           : "Selected client"
       }
-      availability={selected.state}
+      availability={identity.isFetching ? "loading" : selected.state}
     />
   );
 }
@@ -62,17 +87,41 @@ function ConnectedFiles({
   clientName,
   availability,
   operation,
+  account,
 }: {
   clientId: string;
   clientName: string;
   operation: Operation;
   availability: "authorized-client" | "loading" | "unavailable";
+  account: { tenantId: string; actorId: string };
 }) {
   const queryClient = useQueryClient();
+  const api = useApi();
+  const capiro = useCapiro();
   const [host] = useState(
     () =>
-      new OpaqueSessionController({
-        hints: { clientId },
+      new SessionLifetimeController({
+        issue: (signal) =>
+          bootstrapFileSession({
+            api,
+            account,
+            clientId,
+            signal,
+            firstChat: {
+              storage: window.sessionStorage,
+              createOrReuse: (body, signal) => {
+                if (body.schemaVersion !== 1)
+                  throw new Error(
+                    "A selected-client conversation is required.",
+                  );
+                return capiro.request(
+                  firstChatCoreOperationKey,
+                  { body },
+                  { signal },
+                );
+              },
+            },
+          }),
         createPort: ({ session, signal, ...lifetime }) =>
           new DocumentWorkflow({
             session,
@@ -144,4 +193,81 @@ function ConnectedFiles({
       </Button>
     </section>
   );
+}
+
+/** A Core conversation and an initial session alone do not establish an artifact run. */
+export async function bootstrapFileSession({
+  api,
+  account,
+  clientId,
+  signal,
+  firstChat,
+  fetcher = fetch,
+  now = Date.now,
+}: {
+  api: ApiClient;
+  account: { tenantId: string; actorId: string };
+  clientId: string;
+  signal: AbortSignal;
+  firstChat: Pick<
+    Parameters<typeof resolveFirstChatConversation>[0],
+    "storage" | "createOrReuse"
+  >;
+  fetcher?: typeof fetch;
+  now?: () => number;
+}) {
+  const identity = await api.request("core", "me", identitySchema, { signal });
+  if (
+    identity.tenant?.id !== account.tenantId ||
+    identity.user.id !== account.actorId
+  )
+    throw new Error("The current document account changed.");
+  const resolved = await resolveFirstChatConversation({
+    ...firstChat,
+    scope: { ...account, clientId },
+    signal,
+  });
+  const session = await bootstrapActionSession(
+    await documentSessionContext({
+      account,
+      clientId,
+      conversationId: resolved.conversationId,
+      signal,
+      fetcher,
+    }),
+    signal,
+    fetcher,
+    now,
+  );
+  if (
+    session.context.tenantId !== account.tenantId ||
+    session.context.actorId !== account.actorId
+  )
+    throw new Error("The current document account changed.");
+  const reader = createMeriConversation({
+    ...session,
+    signal,
+    now,
+    fetchImpl: fetcher,
+    credentialHeader: "x-meri-action-session",
+    isCurrent: () => !signal.aborted,
+    onAccessLost: () => undefined,
+  });
+  try {
+    await reader.history({ limit: 1 });
+    signal.throwIfAborted();
+    const snapshot = reader.getSnapshot();
+    if (
+      snapshot.status !== "ready" ||
+      !snapshot.acceptedRequest ||
+      !snapshot.observation ||
+      snapshot.observation.runState === "cancelled"
+    )
+      throw new Error(
+        "The current document conversation has no available saved run.",
+      );
+    return session;
+  } finally {
+    reader.dispose();
+  }
 }

@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { Button } from "@capiro/ui/button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSelectedClient } from "../session/SelectedClient";
+import { conversationSearchHref } from "../meri-conversations/conversation-navigation";
 import { unavailableTitle } from "../meri-resources/unavailable";
 import { useMeriCapabilities } from "../meri-resources/CapabilityContext";
 import { DesignIcon } from "./DesignIcon";
@@ -33,6 +35,16 @@ export function Sidebar({
   const capabilities = useMeriCapabilities();
   const pathname = usePathname();
   const router = useRouter();
+  const selected = useSelectedClient();
+  const params = useSearchParams();
+  const searchClient =
+    params.getAll("scope").length === 1 &&
+    params.get("scope") === "general" &&
+    !params.has("clientId")
+      ? null
+      : selected.state === "authorized-client"
+        ? selected.client.id
+        : undefined;
   const resetFixture = () => {
     window.dispatchEvent(new Event("meri:reset-local-draft"));
     if (pathname !== "/meri/fixture/home") router.push("/meri/fixture/home");
@@ -69,6 +81,13 @@ export function Sidebar({
       {fixture ? (
         <Button asChild variant="ghost" className={styles.navButton}>
           <Link href="/meri/fixture/command-palette">
+            <DesignIcon name="search" assetSet={assetSet} />
+            Search conversations
+          </Link>
+        </Button>
+      ) : conversationEnabled && capabilities.conversations.status === "on" ? (
+        <Button asChild variant="ghost" className={styles.navButton}>
+          <Link href={conversationSearchHref(searchClient)}>
             <DesignIcon name="search" assetSet={assetSet} />
             Search conversations
           </Link>

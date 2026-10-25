@@ -1,0 +1,339 @@
+{
+  "context": {
+    "tenantId": "tenant-a",
+    "actorId": "owner-a",
+    "conversationId": "10000000-0000-4000-8000-000000000001",
+    "runId": "10000000-0000-4000-8000-000000000002",
+    "selectedClientId": "10000000-0000-4000-8000-000000000005"
+  },
+  "request": {
+    "requestId": "10000000-0000-4000-8000-000000000900",
+    "operation": "schedule_task",
+    "request": {
+      "taskInstruction": "  Summarize authorized activity.\n",
+      "destinationReference": "  Meri inbox  ",
+      "requestedLimits": {
+        "maxCostMicrousd": 5000,
+        "maxRuntimeSeconds": 120,
+        "retryLimit": 2
+      },
+      "policy": {
+        "spec": {
+          "calendars": [],
+          "intervals": [
+            {
+              "every": 60000,
+              "offset": 0
+            }
+          ],
+          "cronExpressions": [],
+          "skip": [],
+          "startAt": null,
+          "endAt": null,
+          "jitterMs": 0,
+          "timezone": "UTC"
+        },
+        "overlap": "SKIP",
+        "catchupWindowMs": 60000,
+        "pauseOnFailure": true,
+        "remainingActions": null,
+        "paused": false,
+        "note": "Explicit test policy",
+        "runNow": false,
+        "runNowOverlap": "ALLOW_ALL"
+      }
+    }
+  },
+  "prepared": {
+    "status": "approval_required",
+    "proposal": {
+      "operation": "schedule_task",
+      "status": "approval_required",
+      "proposalId": "10000000-0000-4000-8000-000000000101",
+      "intentSha256": "f629c015f892cf27d11198f7e7f4701ae10f261212211324c23c506b256f591c",
+      "taskInstruction": "Summarize authorized activity.",
+      "projection": {
+        "scheduleId": "10000000-0000-4000-8000-000000000100",
+        "owner": {
+          "tenantId": "tenant-a",
+          "actorId": "owner-a"
+        },
+        "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+        "timezone": "UTC",
+        "scopes": [
+          {
+            "kind": "client",
+            "tenantId": "tenant-a",
+            "resourceId": "10000000-0000-4000-8000-000000000005",
+            "policyRevision": "p1"
+          }
+        ],
+        "state": "active",
+        "maxCostMicrousd": 1000,
+        "maxRuntimeSeconds": 60,
+        "retryLimit": 0,
+        "destinationId": "meri-inbox",
+        "createdAt": "2026-10-17T12:00:00.000Z"
+      },
+      "policy": {
+        "spec": {
+          "calendars": [],
+          "intervals": [
+            {
+              "every": 60000,
+              "offset": 0
+            }
+          ],
+          "cronExpressions": [],
+          "skip": [],
+          "startAt": null,
+          "endAt": null,
+          "jitterMs": 0,
+          "timezone": "UTC"
+        },
+        "overlap": "SKIP",
+        "catchupWindowMs": 60000,
+        "pauseOnFailure": true,
+        "remainingActions": null,
+        "paused": false,
+        "note": "Explicit test policy",
+        "runNow": false,
+        "runNowOverlap": "ALLOW_ALL"
+      },
+      "cancel": null
+    }
+  },
+  "approval": {
+    "operation": "schedule_task",
+    "request": {
+      "taskInstruction": "  Summarize authorized activity.\n",
+      "destinationReference": "  Meri inbox  ",
+      "requestedLimits": {
+        "maxCostMicrousd": 5000,
+        "maxRuntimeSeconds": 120,
+        "retryLimit": 2
+      },
+      "policy": {
+        "spec": {
+          "calendars": [],
+          "intervals": [
+            {
+              "every": 60000,
+              "offset": 0
+            }
+          ],
+          "cronExpressions": [],
+          "skip": [],
+          "startAt": null,
+          "endAt": null,
+          "jitterMs": 0,
+          "timezone": "UTC"
+        },
+        "overlap": "SKIP",
+        "catchupWindowMs": 60000,
+        "pauseOnFailure": true,
+        "remainingActions": null,
+        "paused": false,
+        "note": "Explicit test policy",
+        "runNow": false,
+        "runNowOverlap": "ALLOW_ALL"
+      }
+    },
+    "proposalId": "10000000-0000-4000-8000-000000000101",
+    "intentSha256": "f629c015f892cf27d11198f7e7f4701ae10f261212211324c23c506b256f591c",
+    "decision": "approved"
+  },
+  "acknowledged": {
+    "operation": "schedule_task",
+    "status": "acknowledged",
+    "receipt": {
+      "operation": "schedule_task",
+      "intentId": "10000000-0000-4000-8000-000000000101",
+      "generation": 1,
+      "projection": {
+        "scheduleId": "10000000-0000-4000-8000-000000000100",
+        "owner": {
+          "tenantId": "tenant-a",
+          "actorId": "owner-a"
+        },
+        "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+        "timezone": "UTC",
+        "scopes": [
+          {
+            "kind": "client",
+            "tenantId": "tenant-a",
+            "resourceId": "10000000-0000-4000-8000-000000000005",
+            "policyRevision": "p1"
+          }
+        ],
+        "state": "active",
+        "maxCostMicrousd": 1000,
+        "maxRuntimeSeconds": 60,
+        "retryLimit": 0,
+        "destinationId": "meri-inbox",
+        "createdAt": "2026-10-17T12:00:00.000Z"
+      },
+      "outcome": "ACKNOWLEDGED",
+      "physicalStopProven": false
+    }
+  },
+  "reconcileRequest": {
+    "operation": "schedule_task",
+    "request": {
+      "taskInstruction": "  Summarize authorized activity.\n",
+      "destinationReference": "  Meri inbox  ",
+      "requestedLimits": {
+        "maxCostMicrousd": 5000,
+        "maxRuntimeSeconds": 120,
+        "retryLimit": 2
+      },
+      "policy": {
+        "spec": {
+          "calendars": [],
+          "intervals": [
+            {
+              "every": 60000,
+              "offset": 0
+            }
+          ],
+          "cronExpressions": [],
+          "skip": [],
+          "startAt": null,
+          "endAt": null,
+          "jitterMs": 0,
+          "timezone": "UTC"
+        },
+        "overlap": "SKIP",
+        "catchupWindowMs": 60000,
+        "pauseOnFailure": true,
+        "remainingActions": null,
+        "paused": false,
+        "note": "Explicit test policy",
+        "runNow": false,
+        "runNowOverlap": "ALLOW_ALL"
+      }
+    },
+    "proposalId": "10000000-0000-4000-8000-000000000101",
+    "intentSha256": "f629c015f892cf27d11198f7e7f4701ae10f261212211324c23c506b256f591c"
+  },
+  "reconciled": {
+    "intentId": "10000000-0000-4000-8000-000000000101",
+    "operation": "schedule_task",
+    "generation": 1,
+    "outcome": "ACKNOWLEDGED",
+    "code": null,
+    "reconciled": false
+  },
+  "listed": {
+    "operation": "list_scheduled_tasks",
+    "status": "listed",
+    "page": {
+      "operation": "list_scheduled_tasks",
+      "rows": [
+        {
+          "projection": {
+            "scheduleId": "10000000-0000-4000-8000-000000000100",
+            "owner": {
+              "tenantId": "tenant-a",
+              "actorId": "owner-a"
+            },
+            "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+            "timezone": "UTC",
+            "scopes": [
+              {
+                "kind": "client",
+                "tenantId": "tenant-a",
+                "resourceId": "10000000-0000-4000-8000-000000000005",
+                "policyRevision": "p1"
+              }
+            ],
+            "state": "active",
+            "maxCostMicrousd": 1000,
+            "maxRuntimeSeconds": 60,
+            "retryLimit": 0,
+            "destinationId": "meri-inbox",
+            "createdAt": "2026-10-17T12:00:00.000Z"
+          },
+          "generation": 1,
+          "unresolved": false,
+          "inspection": {
+            "projection": {
+              "scheduleId": "10000000-0000-4000-8000-000000000100",
+              "owner": {
+                "tenantId": "tenant-a",
+                "actorId": "owner-a"
+              },
+              "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+              "timezone": "UTC",
+              "scopes": [
+                {
+                  "kind": "client",
+                  "tenantId": "tenant-a",
+                  "resourceId": "10000000-0000-4000-8000-000000000005",
+                  "policyRevision": "p1"
+                }
+              ],
+              "state": "active",
+              "maxCostMicrousd": 1000,
+              "maxRuntimeSeconds": 60,
+              "retryLimit": 0,
+              "destinationId": "meri-inbox",
+              "createdAt": "2026-10-17T12:00:00.000Z"
+            },
+            "projectionSha256": "7ebae26b0631953a3b3e1abfa37de0c42a22221194a55de2bc0b3c9f337e906a",
+            "observedAt": "2026-10-17T12:00:00.000Z",
+            "temporal": {
+              "scheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+              "paused": false,
+              "remainingActions": null,
+              "createdAt": "2025-10-15T12:00:00.000Z",
+              "lastUpdatedAt": null,
+              "numActionsTaken": 0,
+              "numActionsMissedCatchupWindow": 0,
+              "numActionsSkippedOverlap": 0,
+              "nextActionTimes": [],
+              "recentActions": [],
+              "runningActions": []
+            },
+            "coverage": {
+              "historyComplete": false,
+              "currentRunIdentityVerified": false,
+              "nextActions": {
+                "observed": 0,
+                "returned": 0,
+                "omitted": 0
+              },
+              "recentActions": {
+                "observed": 0,
+                "returned": 0,
+                "omitted": 0
+              },
+              "runningActions": {
+                "observed": 0,
+                "returned": 0,
+                "omitted": 0
+              }
+            }
+          },
+          "inspectionState": "observed"
+        }
+      ],
+      "hasMore": false,
+      "nextAfterScheduleId": null,
+      "originalRuns": {
+        "executions": [],
+        "coverage": {
+          "observedReferences": 0,
+          "returned": 0,
+          "omitted": 0,
+          "historyComplete": false,
+          "currentRetryVerified": false
+        }
+      },
+      "coverage": {
+        "complete": false,
+        "currentRetryVerified": false
+      }
+    }
+  }
+}

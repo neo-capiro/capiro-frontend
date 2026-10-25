@@ -1,22 +1,40 @@
+import "./command-recovery-platform";
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
+import { db, installPlatform } from "./command-recovery-platform";
 import { createApiClient } from "../src/shared/portfolio/api/http";
+import { fetchOwnedCalendarConnections } from "../src/features/portfolio/calendar/sync/api";
 import {
-  fetchOwnedCalendarConnections,
-  runCalendarSync,
-} from "../src/features/portfolio/calendar/sync/api";
-import {
-  syncAttemptKey,
+  calendarReceiptSchema,
   syncIntentSchema,
   syncRangeSchema,
+  type CalendarSyncIntent,
 } from "../src/features/portfolio/calendar/sync/contracts";
+import {
+  calendarRecoveryContract,
+  calendarRecoveryScope,
+  runCalendarSync,
+  type CalendarAction,
+} from "../src/features/portfolio/calendar/sync/recovery";
+import { readRecovery } from "../src/shared/session/recovery/journal";
+installPlatform();
 const id = "80000000-0000-4000-8000-000000000001";
+const actor = { tenantId: "tenant", userId: "user" };
+const intent: CalendarSyncIntent = {
+  connectionId: id,
+  provider: "microsoft_365",
+};
+const range = {
+  from: "2026-10-01T00:00:00.000Z",
+  to: "2026-11-01T00:00:00.000Z",
+};
 const account = {
   id,
   provider: "microsoft_365",
   accountEmail: "synthetic@example.test",
   displayName: null,
   status: "connected",
-  createdByUserId: "user",
+  createdByUserId: actor.userId,
   lastSyncAt: null,
 };
 const stats = {
@@ -28,189 +46,317 @@ const stats = {
   pages: 1,
   hasMore: false,
 };
-function fixture(
-  provider = "microsoft_365",
-  result: unknown = { connectionId: id, calendar: stats },
-) {
-  const calls: { url: string; options?: RequestInit }[] = [];
-  const api = createApiClient(async (url, options) => {
-    calls.push({ url: String(url), options });
-    return new Response(
-      JSON.stringify(
-        String(url).includes("/integrations/")
-          ? result
-          : [{ ...account, provider }],
-      ),
-      { status: 200, headers: { "Content-Type": "application/json" } },
-    );
+const current = (identity = actor) =>
+  readRecovery(
+    calendarRecoveryScope(identity),
+    calendarRecoveryContract,
+    () => {},
+  );
+function fixture() {
+  const state = {
+    calls: [] as {
+      url: string;
+      method: string;
+      body?: {
+        schemaVersion: number;
+        requestId: string;
+        range: typeof range | null;
+      };
+    }[],
+    account: { ...account },
+    rows: new Map<string, unknown>(),
+    loss: "" as "" | "before" | "after",
+    status: 0,
+    pending: false,
+    patch: {} as Record<string, unknown>,
+    effects: 0,
+    authority: true,
+    afterPreflight: () => {},
+    afterCommit: () => {},
+  };
+  const api = createApiClient(async (input, options) => {
+    const url = String(input),
+      method = options?.method ?? "GET";
+    const body = options?.body ? JSON.parse(String(options.body)) : undefined;
+    state.calls.push({ url, method, body });
+    if (url.endsWith("/integrations")) {
+      state.afterPreflight();
+      return Response.json([state.account]);
+    }
+    let row;
+    if (method === "POST") {
+      if (state.loss === "before") {
+        state.loss = "";
+        throw Error("request lost");
+      }
+      row = state.rows.get(body.requestId);
+      if (!row || (row as { status: string }).status === "pending") {
+        state.effects++;
+        row = {
+          schemaVersion: 1,
+          requestId: body.requestId,
+          connectionId: id,
+          provider: state.account.provider,
+          payloadDigest: createHash("sha256")
+            .update(
+              JSON.stringify([
+                1,
+                actor.tenantId,
+                actor.userId,
+                id,
+                state.account.provider,
+                body.range,
+              ]),
+            )
+            .digest("hex"),
+          range: body.range,
+          window: body.range ?? range,
+          status: state.pending ? "pending" : "completed",
+          calendar: { ...stats, pages: state.effects, hasMore: state.pending },
+          createdAt: range.from,
+          updatedAt: range.to,
+        };
+        state.rows.set(body.requestId, row);
+      }
+      state.afterCommit();
+      if (state.loss === "after") {
+        state.loss = "";
+        throw Error("response lost");
+      }
+    } else row = state.rows.get(url.split("/").at(-1)!);
+    if (state.status)
+      return Response.json(
+        { message: "Synthetic refusal" },
+        { status: state.status },
+      );
+    return row
+      ? Response.json({ ...(row as object), ...state.patch })
+      : Response.json({}, { status: 404 });
   });
-  return { api, calls };
+  const run = (action: CalendarAction, signal = new AbortController().signal) =>
+    runCalendarSync(
+      api,
+      actor,
+      action,
+      () => {
+        if (!state.authority) throw Error("Session invalidated");
+      },
+      signal,
+      () => {},
+      async () => {
+        if (!state.authority) throw Error("Session invalidated");
+      },
+    );
+  return {
+    state,
+    api,
+    run,
+    start: (change = intent) => run({ kind: "start", intent: change }),
+    posts: () => state.calls.filter((c) => c.method === "POST"),
+  };
 }
-describe("calendar-only sync contracts", () => {
+describe("durable calendar imports", () => {
   it.each(["microsoft_365", "google_workspace"] as const)(
-    "%s sends only calendar=1/mail=0 with no body/reset/client",
+    "%s sends a calendar command and retains its exact request",
     async (provider) => {
-      const { api, calls } = fixture(provider);
-      let recorded = false;
-      const receipt = await runCalendarSync(
-        api,
-        { connectionId: id, provider },
-        "user",
-        () => {},
-        () => {
-          recorded = true;
-        },
-      );
-      expect(recorded).toBe(true);
-      expect(receipt).toEqual({
-        kind: "connection",
-        connectionId: id,
-        calendar: stats,
+      const f = fixture();
+      f.state.account.provider = provider;
+      const receipt = await f.start({ ...intent, provider });
+      const saved = (await current())!;
+      expect(receipt).toMatchObject({
+        status: "completed",
+        requestId: saved.requestId,
+        payloadDigest: saved.payloadDigest,
       });
-      expect(calls).toHaveLength(2);
-      const request = calls[1]!;
-      expect(request.url).toBe(
-        `/api/backend/core/engagement/integrations/${provider === "microsoft_365" ? "microsoft" : "google"}/${id}/sync?calendar=1&mail=0`,
-      );
-      expect(request.options?.method).toBe("POST");
-      expect(request.options?.body).toBeUndefined();
-      expect(request.url).not.toMatch(/reset|clientId/);
+      expect(f.posts()[0]).toEqual({
+        url: `/api/backend/core/engagement/integrations/${provider === "microsoft_365" ? "microsoft" : "google"}/${id}/calendar-commands`,
+        method: "POST",
+        body: { schemaVersion: 1, requestId: saved.requestId, range: null },
+      });
+      await expect(f.start()).rejects.toMatchObject({ status: 409 });
+      await f.run({ kind: "done", expected: saved });
+      expect(await current()).toBeNull();
+      expect(f.posts()).toHaveLength(1);
     },
   );
-  it("window receipt stays bare statistics, without fabricated account/range confirmation", async () => {
-    const { api, calls } = fixture("microsoft_365", stats);
-    const range = { from: "2026-10-01T00:00:00Z", to: "2026-11-01T00:00:00Z" };
-    expect(
-      await runCalendarSync(
-        api,
-        { connectionId: id, provider: "microsoft_365", range },
-        "user",
-        () => {},
-        () => {},
-      ),
-    ).toEqual({ kind: "window", calendar: stats });
-    const url = new URL(calls[1]!.url, "http://localhost");
-    expect(url.pathname).toContain("/calendar-window");
-    expect(Object.fromEntries(url.searchParams)).toEqual(range);
-    expect(calls[1]?.options?.body).toBeUndefined();
+  it("normalizes the reviewed Microsoft range and binds it in the receipt", async () => {
+    const f = fixture();
+    await f.start({
+      ...intent,
+      range: { from: "2026-10-01T01:00:00+01:00", to: "2026-11-01T00:00:00Z" },
+    });
+    expect(f.posts()[0]?.body?.range).toEqual(range);
+    expect((await current())?.intent.range).toEqual(range);
   });
-  it("changed actor after account preflight refuses POST safely", async () => {
-    const { api, calls } = fixture();
-    let guards = 0;
+  it.each(["before", "after"] as const)(
+    "recovers %s-commit loss after rehydration with the original request",
+    async (loss) => {
+      const f = fixture();
+      f.state.loss = loss;
+      await expect(f.start()).rejects.toThrow();
+      const saved = (await current())!;
+      if (loss === "before") {
+        await expect(
+          f.run({ kind: "check", expected: saved }),
+        ).rejects.toMatchObject({ status: 404 });
+        expect(await current()).toEqual(saved);
+      } else
+        expect(await f.run({ kind: "check", expected: saved })).toMatchObject({
+          status: "completed",
+        });
+      expect(f.posts()).toHaveLength(1);
+      await f.run({ kind: "continue", expected: saved });
+      expect(f.posts().map((c) => c.body?.requestId)).toEqual([
+        saved.requestId,
+        saved.requestId,
+      ]);
+      expect(f.state.effects).toBe(1);
+    },
+  );
+  it("pending progress requires explicit same-request continuation, never acknowledgement", async () => {
+    const f = fixture();
+    f.state.pending = true;
+    expect(await f.start()).toMatchObject({ status: "pending" });
+    const saved = (await current())!;
     await expect(
-      runCalendarSync(
-        api,
-        { connectionId: id, provider: "microsoft_365" },
-        "user",
-        () => {
-          if (++guards === 2) throw new Error("Actor changed");
-        },
-        () => {},
-      ),
-    ).rejects.toMatchObject({ uncertain: false, message: "Actor changed" });
-    expect(calls).toHaveLength(1);
+      f.run({ kind: "done", expected: saved }),
+    ).rejects.toMatchObject({ status: 409 });
+    expect(await current()).toEqual(saved);
+    expect(f.posts()).toHaveLength(1);
+    f.state.pending = false;
+    f.state.account.status = "error";
+    expect(await f.run({ kind: "continue", expected: saved })).toMatchObject({
+      status: "completed",
+      calendar: { pages: 2 },
+    });
+    expect(f.posts()[1]?.body).toEqual(f.posts()[0]?.body);
   });
-  it("caller-owned list does not accept another creator", async () => {
-    const { api } = fixture();
+  it.each([400, 401, 403, 404, 409, 500])(
+    "HTTP %s never clears an uncertain import",
+    async (status) => {
+      const f = fixture();
+      f.state.status = status;
+      await expect(f.start()).rejects.toMatchObject({ status });
+      const saved = (await current())!;
+      expect(saved).toBeTruthy();
+      await expect(
+        f.run({ kind: "check", expected: saved }),
+      ).rejects.toMatchObject({ status });
+      expect(await current()).toEqual(saved);
+      expect(f.posts()).toHaveLength(1);
+    },
+  );
+  it.each([
+    { connectionId: "80000000-0000-4000-8000-000000000002" },
+    { payloadDigest: "0".repeat(64) },
+    { provider: "google_workspace" },
+    { range },
+    { status: "completed", calendar: { ...stats, hasMore: true } },
+  ])(
+    "rejects mismatched or dishonest receipts without losing the request: %j",
+    async (patch) => {
+      const f = fixture();
+      f.state.patch = patch;
+      await expect(f.start()).rejects.toThrow();
+      expect(await current()).toBeTruthy();
+      expect(f.posts()).toHaveLength(1);
+    },
+  );
+  it("storage failure prevents dispatch", async () => {
+    const f = fixture();
+    db.failWrite = true;
+    await expect(f.start()).rejects.toThrow();
+    expect(f.posts()).toHaveLength(0);
+  });
+  it("changed authority after preflight prevents dispatch", async () => {
+    const f = fixture();
+    f.state.afterPreflight = () => {
+      f.state.authority = false;
+    };
+    await expect(f.start()).rejects.toThrow("Session invalidated");
+    expect(f.posts()).toHaveLength(0);
+    expect(await current()).toBeNull();
+  });
+  it("changed authority or abort after commit preserves recovery and hides the receipt", async () => {
+    const f = fixture();
+    f.state.afterCommit = () => {
+      f.state.authority = false;
+    };
+    await expect(f.start()).rejects.toThrow("Session invalidated");
+    expect(await current()).toBeTruthy();
+    expect(f.posts()).toHaveLength(1);
+  });
+  it("abort after dispatch preserves recovery", async () => {
+    const f = fixture(),
+      controller = new AbortController();
+    f.state.afterCommit = () => controller.abort();
     await expect(
-      fetchOwnedCalendarConnections(api, "other-user"),
+      f.run({ kind: "start", intent }, controller.signal),
+    ).rejects.toThrow();
+    expect(await current()).toBeTruthy();
+  });
+  it("another actor cannot read this retained import", async () => {
+    const f = fixture();
+    await f.start();
+    expect(await current({ ...actor, userId: "another" })).toBeNull();
+    expect(await current({ ...actor, tenantId: "another" })).toBeNull();
+  });
+  it("cross-tab duplicate starts serialize to one provider request", async () => {
+    const f = fixture();
+    const results = await Promise.allSettled([f.start(), f.start()]);
+    expect(results.filter((r) => r.status === "fulfilled")).toHaveLength(1);
+    expect(f.posts()).toHaveLength(1);
+  });
+  it.each([
+    { provider: "google_workspace" },
+    { status: "disabled" },
+    { status: "error" },
+    { createdByUserId: "other" },
+  ])("rejects changed/unowned accounts before dispatch: %j", async (patch) => {
+    const f = fixture();
+    Object.assign(f.state.account, patch);
+    await expect(f.start()).rejects.toThrow();
+    expect(f.posts()).toHaveLength(0);
+  });
+  it("owned connection list rejects a different creator", async () => {
+    const f = fixture();
+    await expect(
+      fetchOwnedCalendarConnections(f.api, "other-user"),
     ).rejects.toThrow("outside the current caller");
   });
-  it("provider mismatch and disconnected accounts cannot dispatch", async () => {
-    const { api, calls } = fixture("google_workspace");
-    await expect(
-      runCalendarSync(
-        api,
-        { connectionId: id, provider: "microsoft_365" },
-        "user",
-        () => {},
-        () => {},
-      ),
-    ).rejects.toMatchObject({ uncertain: false });
-    expect(calls).toHaveLength(1);
-  });
-  it("wrong connection response is uncertain after POST", async () => {
-    const { api, calls } = fixture("microsoft_365", {
-      connectionId: "80000000-0000-4000-8000-000000000002",
-      calendar: stats,
-    });
-    await expect(
-      runCalendarSync(
-        api,
-        { connectionId: id, provider: "microsoft_365" },
-        "user",
-        () => {},
-        () => {},
-      ),
-    ).rejects.toMatchObject({ uncertain: true });
-    expect(
-      calls.filter((call) => call.options?.method === "POST"),
-    ).toHaveLength(1);
-  });
-  it("authority loss after a successful response remains uncertain", async () => {
-    const { api } = fixture();
-    let guards = 0;
-    await expect(
-      runCalendarSync(
-        api,
-        { connectionId: id, provider: "microsoft_365" },
-        "user",
-        () => {
-          if (++guards === 4) throw new Error("Session invalidated");
-        },
-        () => {},
-      ),
-    ).rejects.toMatchObject({ uncertain: true });
-  });
-  it("provider HTTP400 may follow writes and is never an automatic retry", async () => {
-    let posts = 0;
-    const api = createApiClient(async (url, options) => {
-      if (options?.method === "POST") {
-        posts++;
-        return new Response(
-          JSON.stringify({ message: "Provider refused a later page" }),
-          { status: 400 },
-        );
-      }
-      return new Response(JSON.stringify([account]), { status: 200 });
-    });
-    await expect(
-      runCalendarSync(
-        api,
-        { connectionId: id, provider: "microsoft_365" },
-        "user",
-        () => {},
-        () => {},
-      ),
-    ).rejects.toMatchObject({ uncertain: true });
-    expect(posts).toBe(1);
-  });
-  it("valid ISO bounds have no invented maximum span; Google range is rejected", () => {
-    const range = {
-      from: "2020-01-01T00:00:00Z",
-      to: "2030-01-01T00:00:00+00:00",
-    };
+  it("validates explicit bounds, Google range prohibition, and cumulative page counts", () => {
     expect(syncRangeSchema.safeParse(range).success).toBe(true);
     expect(
       syncRangeSchema.safeParse({ ...range, to: range.from }).success,
+    ).toBe(false);
+    expect(
+      syncRangeSchema.safeParse({ ...range, to: "2030-01-01T00:00:00Z" })
+        .success,
     ).toBe(false);
     expect(
       syncRangeSchema.safeParse({ ...range, from: "2026-10-01" }).success,
     ).toBe(false);
     expect(
       syncIntentSchema.safeParse({
-        connectionId: id,
+        ...intent,
         provider: "google_workspace",
         range,
       }).success,
     ).toBe(false);
-  });
-  it("transient fences are actor and tenant scoped", () => {
-    expect(syncAttemptKey("tenant-a", "user-a")).not.toEqual(
-      syncAttemptKey("tenant-a", "user-b"),
-    );
-    expect(syncAttemptKey("tenant-a", "user-a")).not.toEqual(
-      syncAttemptKey("tenant-b", "user-a"),
-    );
+    expect(
+      calendarReceiptSchema.safeParse({
+        schemaVersion: 1,
+        requestId: id,
+        connectionId: id,
+        provider: intent.provider,
+        payloadDigest: "0".repeat(64),
+        range: null,
+        window: range,
+        status: "completed",
+        calendar: { ...stats, pages: 24 },
+        createdAt: range.from,
+        updatedAt: range.to,
+      }).success,
+    ).toBe(true);
   });
 });

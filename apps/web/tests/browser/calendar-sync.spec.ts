@@ -29,14 +29,14 @@ test("explicit Microsoft calendar-only completion with truthful processing recei
   await expect(dialog).toContainText("not newly created meetings");
   expect(state.writes).toEqual([
     {
-      url: `/api/backend/core/engagement/integrations/microsoft/${syncMicrosoftId}/sync?calendar=1&mail=0`,
+      url: `/api/backend/core/engagement/integrations/microsoft/${syncMicrosoftId}/calendar-commands`,
       method: "POST",
-      body: null,
+      body: expect.any(String),
     },
   ]);
   expect(state.unexpected).toEqual([]);
 });
-test("reviewed window is explicit and twelve-page partial results cannot claim resume", async ({
+test("reviewed window and partial progress continue using the same saved request", async ({
   page,
 }) => {
   const state = await installCalendarSyncFixtures(page, { hasMore: true });
@@ -52,16 +52,24 @@ test("reviewed window is explicit and twelve-page partial results cannot claim r
   await dialog
     .getByRole("button", { name: "Import calendar meetings" })
     .click();
-  await expect(dialog).toContainText("cannot resume from the next page");
-  await expect(dialog).toContainText(
-    "without an operation, account or range-bound receipt",
-  );
-  const url = new URL(state.writes[0]!.url, "http://localhost");
-  expect(Object.fromEntries(url.searchParams)).toEqual({
-    from: "2026-10-01T00:00:00Z",
-    to: "2026-11-01T00:00:00Z",
+  await expect(dialog).toContainText("Calendar import is pending");
+  await expect(dialog).toContainText("12 pages");
+  const original = JSON.parse(state.writes[0]!.body!);
+  expect(original.range).toEqual({
+    from: "2026-10-01T00:00:00.000Z",
+    to: "2026-11-01T00:00:00.000Z",
   });
   expect(state.writes).toHaveLength(1);
+  state.pending = false;
+  await dialog.getByRole("button", { name: "Continue saved import" }).click();
+  await expect(dialog).toContainText("Calendar sync completed");
+  expect(JSON.parse(state.writes[1]!.body!)).toEqual(original);
+  await dialog.getByRole("button", { name: "Review another sync" }).click();
+  await expect(
+    dialog.getByRole("combobox", { name: "Connected account" }),
+  ).toBeVisible();
+  expect(state.commandReads).toBe(1);
+  expect(state.writes).toHaveLength(2);
 });
 test("Google does not offer the Microsoft range and excludes mail", async ({
   page,
@@ -81,7 +89,7 @@ test("Google does not offer the Microsoft range and excludes mail", async ({
     .click();
   await expect(dialog.getByLabel("Calendar sync result")).toBeVisible();
   expect(state.writes[0]?.url).toContain("/google/");
-  expect(state.writes[0]?.url).toContain("calendar=1&mail=0");
+  expect(JSON.parse(state.writes[0]!.body!).range).toBeNull();
 });
 test("unknown result survives close, route remount and returning to the initiating actor", async ({
   page,
@@ -97,18 +105,18 @@ test("unknown result survives close, route remount and returning to the initiati
   await dialog
     .getByRole("button", { name: "Import calendar meetings" })
     .click();
-  await expect(dialog.getByRole("alert")).toContainText("Sync outcome unknown");
+  await expect(dialog).toContainText("Sync outcome unknown");
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Unmount sync" }).click();
   dialog = await open(page);
-  await expect(dialog).toContainText("request is frozen");
+  await expect(dialog).toContainText("new request stays");
   await expect(
     dialog.getByRole("button", { name: "Import calendar meetings" }),
   ).toHaveCount(0);
   await page.evaluate(() => window.__syncActor?.(true));
-  await expect(dialog).not.toContainText("request is frozen");
+  await expect(dialog).not.toContainText("new request stays");
   await page.evaluate(() => window.__syncActor?.(false));
-  await expect(dialog).toContainText("request is frozen");
+  await expect(dialog).toContainText("new request stays");
   expect(state.writes).toHaveLength(1);
 });
 test("Cancel stops waiting and cannot erase the dispatched fence", async ({
@@ -134,7 +142,7 @@ test("Cancel stops waiting and cannot erase the dispatched fence", async ({
     });
     await dialog.getByRole("button", { name: "Cancel", exact: true }).click();
     dialog = await open(page);
-    await expect(dialog).toContainText("request is frozen");
+    await expect(dialog).toContainText("new request stays");
     expect(state.writes).toHaveLength(1);
   } finally {
     response.release();
@@ -304,4 +312,59 @@ test("identity invalidation while idle immediately disables consent with no requ
     dialog.getByRole("button", { name: "Import calendar meetings" }),
   ).toBeDisabled();
   expect(state.writes).toEqual([]);
+});
+
+test("hard reload hydrates without POST and checks a lost acknowledgement while external actions are disabled", async ({
+  page,
+}) => {
+  const options = { responseStatus: 400, enabled: true };
+  const state = await installCalendarSyncFixtures(page, options);
+  await page.goto("/__test/calendar-sync");
+  let dialog = await open(page);
+  await dialog
+    .getByRole("combobox", { name: "Connected account" })
+    .selectOption(syncMicrosoftId);
+  await dialog
+    .getByRole("button", { name: "Import calendar meetings" })
+    .click();
+  await expect(dialog).toContainText("Sync outcome unknown");
+  const original = JSON.parse(state.writes[0]!.body!);
+  options.enabled = false;
+  await page.reload();
+  dialog = await open(page);
+  await expect(dialog).toContainText("Sync outcome unknown");
+  expect(state.writes).toHaveLength(1);
+  expect(state.commandReads).toBe(0);
+  await expect(
+    dialog.getByRole("button", { name: "Continue saved import" }),
+  ).toBeDisabled();
+  await dialog.getByRole("button", { name: "Check saved outcome" }).click();
+  await expect(dialog).toContainText("Calendar sync completed");
+  expect(state.receipts.has(original.requestId)).toBe(true);
+  expect(state.writes).toHaveLength(1);
+  expect(state.commandReads).toBe(1);
+  await dialog.getByRole("button", { name: "Review another sync" }).click();
+  await expect(
+    dialog.getByRole("button", { name: "Import calendar meetings" }),
+  ).toBeDisabled();
+});
+
+test("a previously displayed receipt is hidden immediately when identity is invalidated", async ({
+  page,
+}) => {
+  await installCalendarSyncFixtures(page);
+  await page.goto("/__test/calendar-sync");
+  const dialog = await open(page);
+  await dialog
+    .getByRole("combobox", { name: "Connected account" })
+    .selectOption(syncMicrosoftId);
+  await dialog
+    .getByRole("button", { name: "Import calendar meetings" })
+    .click();
+  await expect(dialog.getByLabel("Calendar sync result")).toBeVisible();
+  await page.evaluate(() => window.__syncInvalidate?.());
+  await expect(dialog.getByLabel("Calendar sync result")).toHaveCount(0);
+  await expect(
+    dialog.getByRole("button", { name: "Review another sync" }),
+  ).toBeDisabled();
 });

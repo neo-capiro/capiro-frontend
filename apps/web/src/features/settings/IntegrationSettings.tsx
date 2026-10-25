@@ -62,6 +62,12 @@ export function IntegrationSettings() {
   const google = useCapiroQuery("settings.integrations.googleCapabilities", {});
   const [register, setRegister] = useState<Provider>();
   const [disconnect, setDisconnect] = useState<Connection>();
+  const [resetId, setResetId] = useState<string>();
+  const resetConnection = connections.data?.find((row) => row.id === resetId);
+  const resetCapability =
+    resetConnection?.provider === "microsoft_365"
+      ? microsoft.data
+      : google.data;
   const [detailId, setDetailId] = useState<string>();
   const detail = connections.data?.find(
     (connection) => connection.id === detailId,
@@ -101,7 +107,11 @@ export function IntegrationSettings() {
       ),
     );
   }
-  async function sync(connection: Connection, signal: AbortSignal) {
+  async function sync(
+    connection: Connection,
+    signal: AbortSignal,
+    reset = false,
+  ) {
     if (connection.provider === "imap_caldav")
       throw new Error("Manual IMAP / CalDAV sync is unavailable.");
     try {
@@ -109,7 +119,10 @@ export function IntegrationSettings() {
         connection.provider === "microsoft_365"
           ? "settings.integrations.syncMicrosoft"
           : "settings.integrations.syncGoogle",
-        { params: { connectionId: connection.id } },
+        {
+          params: { connectionId: connection.id },
+          ...(reset ? { query: { reset: true } } : {}),
+        },
         { signal },
       );
       if (result.connectionId !== connection.id)
@@ -117,6 +130,20 @@ export function IntegrationSettings() {
           "The sync response did not match this account. Reload integrations to confirm the result.",
         );
       return result;
+    } finally {
+      if (!signal.aborted) connections.reload();
+    }
+  }
+  async function configureSubscriptions(
+    connection: Connection,
+    signal: AbortSignal,
+  ) {
+    try {
+      return await api.request(
+        "settings.integrations.configureMicrosoftSubscriptions",
+        { params: { connectionId: connection.id } },
+        { signal },
+      );
     } finally {
       if (!signal.aborted) connections.reload();
     }
@@ -276,21 +303,28 @@ export function IntegrationSettings() {
                               onClick={() =>
                                 void action.run(
                                   (signal) =>
-                                    api.request(
-                                      "settings.integrations.configureMicrosoftSubscriptions",
-                                      {
-                                        params: { connectionId: connection.id },
-                                      },
-                                      { signal },
-                                    ),
+                                    configureSubscriptions(connection, signal),
                                   "Realtime subscriptions are configured.",
-                                  connections.reload,
                                 )
                               }
                             >
                               Realtime
                             </SettingsButton>
                           )}
+                        {provider.id !== "imap_caldav" && (
+                          <SettingsButton
+                            small
+                            disabled={
+                              locked ||
+                              !canRetrySync(connection) ||
+                              !capability?.data?.configured ||
+                              capability.data.actions?.sync.allowed === false
+                            }
+                            onClick={() => setResetId(connection.id)}
+                          >
+                            Restart sync…
+                          </SettingsButton>
+                        )}
                         {provider.id !== "imap_caldav" && (
                           <SettingsButton
                             danger
@@ -427,6 +461,50 @@ export function IntegrationSettings() {
         onClose={() => setRegister(undefined)}
         refresh={connections.reload}
       />
+      <SettingsDialog
+        open={!!resetId}
+        onClose={() => setResetId(undefined)}
+        title="Restart mail and calendar sync?"
+        description="Advanced recovery: restart provider import within this account’s configured folders and history window. This can repeat work already completed and does not import unlimited history."
+        footer={
+          <>
+            <SettingsButton onClick={() => setResetId(undefined)}>
+              Keep current progress
+            </SettingsButton>
+            <SettingsButton
+              disabled={
+                locked ||
+                !resetConnection ||
+                !canRetrySync(resetConnection) ||
+                !resetCapability?.configured ||
+                resetCapability.actions?.sync.allowed === false
+              }
+              onClick={() => {
+                if (!resetConnection) return;
+                const connection = resetConnection;
+                setResetId(undefined);
+                void action.run(
+                  (signal) => sync(connection, signal, true),
+                  syncOutcomeMessage,
+                );
+              }}
+            >
+              Restart sync
+            </SettingsButton>
+          </>
+        }
+      >
+        <p>
+          {resetConnection?.accountEmail ??
+            "This account is no longer available."}
+        </p>
+        <p>
+          Only one bounded sync batch runs now. Review the refreshed health
+          after it finishes or fails, then use Sync now or Retry sync to
+          continue saved progress. Restart again only when you intend to begin a
+          new import.
+        </p>
+      </SettingsDialog>
       <SettingsDialog
         busy={action.busy}
         open={!!disconnect}

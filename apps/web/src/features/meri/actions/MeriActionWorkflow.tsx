@@ -53,10 +53,52 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
     controller.getSnapshot,
     controller.getSnapshot,
   );
-  const disabled = Boolean(state.busy || state.problem);
+  const disabled = Boolean(
+    state.busy || state.problem || state.checkingRecovery || state.savedRequest,
+  );
   const problem = state.problem ? workflowProblems[state.problem] : null;
   return (
     <>
+      {(state.checkingRecovery ||
+        state.savedRequest ||
+        state.problem ||
+        state.canDiscard) &&
+        port.restore && (
+          <section className={styles.notice} aria-label="Saved task recovery">
+            <p role="status">
+              {state.notExecutedAt
+                ? `The task was not executed before its approval expired. Verified at ${state.notExecutedAt}. Discard it to review a fresh task.`
+                : state.checkingRecovery
+                  ? "Checking saved task recovery before another request."
+                  : "A task request is saved. Continue with that exact request."}
+            </p>
+            <dl>
+              {state.recoveryFields.map((field) => (
+                <div key={field.label}>
+                  <dt>{field.label}</dt>
+                  <dd>{field.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <Button
+              type="button"
+              disabled={Boolean(state.busy) || Boolean(state.notExecutedAt)}
+              onClick={() => void controller.retrySaved()}
+            >
+              Retry exact saved request
+            </Button>
+            {port.discardSaved && (
+              <Button
+                type="button"
+                variant="outline"
+                disabled={Boolean(state.busy) || !state.canDiscard}
+                onClick={() => void controller.discardSaved()}
+              >
+                Discard unexecuted preparation and review again
+              </Button>
+            )}
+          </section>
+        )}
       <div className={styles.controls}>
         <Button
           type="button"
@@ -101,6 +143,7 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
         )}
         {state.proposal && (
           <ProposalPanel
+            key={state.proposal.reference}
             proposal={state.proposal}
             execution={state.execution}
             refused={state.approvalRefused}

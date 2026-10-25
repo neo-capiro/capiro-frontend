@@ -6,155 +6,184 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { skipToken, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError } from "@/shared/portfolio/api/http";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
+import { assertClientWriter } from "@/shared/portfolio/auth/client-writer";
+import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
+import { useRetainedIntent } from "@/shared/session/recovery/useRetainedIntent";
 import { useCalendarCapabilities, useDispatchGuard } from "../access/public";
-import { CalendarSyncError, runCalendarSync } from "./api";
 import {
-  syncAttemptKey,
-  type CalendarSyncAttempt,
-  type CalendarSyncIntent,
+  calendarRecoveryContract,
+  calendarRecoveryScope,
+  runCalendarSync,
+  type CalendarAction,
+} from "./recovery";
+import type {
+  CalendarSyncAttempt,
+  CalendarSyncIntent,
+  CalendarSyncReceipt,
 } from "./contracts";
 import { calendarConnectionsKey } from "./queries";
 
 export function useCalendarSync(open: boolean) {
   const api = useApi(),
-    cache = useQueryClient();
-  const identity = useIdentity(),
+    cache = useQueryClient(),
+    identity = useIdentity(),
     capabilities = useCalendarCapabilities();
+  const userId = identity.data?.user.id ?? "",
+    tenantId = identity.data?.tenant?.id ?? "";
+  const actor = { userId, tenantId },
+    scope = calendarRecoveryScope(actor);
+  const readGuard = useDispatchGuard(userId, tenantId),
+    writeGuard = useDispatchGuard(userId, tenantId, true);
   const subscribe = useCallback(
     (notify: () => void) => cache.getQueryCache().subscribe(notify),
     [cache],
   );
-  // refetchType:none changes isInvalidated without starting a fetch. Observe it directly.
   const gatesInvalidated = useSyncExternalStore(
     subscribe,
     () =>
-      Boolean(
-        cache.getQueryState(["identity"])?.isInvalidated ||
-        cache.getQueryState(["meeting-preparation", "capabilities"])
-          ?.isInvalidated,
-      ),
-    () => true,
+      (cache.getQueryState(["identity"])?.isInvalidated ? 1 : 0) |
+      (cache.getQueryState(["meeting-preparation", "capabilities"])
+        ?.isInvalidated
+        ? 2
+        : 0),
+    () => 3,
   );
-  const userId = identity.data?.user.id ?? "",
-    tenantId = identity.data?.tenant?.id ?? "";
-  const guard = useDispatchGuard(userId, tenantId, true);
   const lifetime = useRef<AbortController | undefined>(undefined);
   const busy = useRef(false);
-  const [error, setError] = useState("");
-  const key = syncAttemptKey(tenantId, userId);
-  const attempt = useQuery<CalendarSyncAttempt>({
-    queryKey: key,
-    queryFn: skipToken,
-    enabled: false,
-    initialData: { status: "idle" },
-    gcTime: Infinity,
-  });
+  const [activeScope, setActiveScope] = useState<string>();
+  const [snapshot, setSnapshot] = useState<{
+    scope: string;
+    receipt?: CalendarSyncReceipt;
+    error?: string;
+  }>();
+  const recovery = useRetainedIntent(
+    scope,
+    calendarRecoveryContract,
+    async (signal, guard) => {
+      assertClientWriter(cache, actor);
+      await verifyCoreWriter(api, actor, signal, guard);
+    },
+  );
   useLayoutEffect(() => {
-    const scope = new AbortController();
-    lifetime.current = scope;
-    if (!open) scope.abort();
-    return () => scope.abort();
+    const current = new AbortController();
+    lifetime.current = current;
+    if (!open) current.abort();
+    return () => current.abort();
   }, [open, userId, tenantId]);
-  const allowed = Boolean(
+  const canRead = Boolean(
     open &&
     userId &&
     tenantId &&
+    recovery.ready &&
     identity.isSuccess &&
     !identity.isFetching &&
     !identity.error &&
-    !gatesInvalidated &&
+    !(gatesInvalidated & 1) &&
     (identity.data?.role === "standard_user" ||
-      canAdminister(identity.data?.role)) &&
+      canAdminister(identity.data?.role)),
+  );
+  const allowed = Boolean(
+    canRead &&
+    !(gatesInvalidated & 2) &&
     capabilities.isSuccess &&
     !capabilities.isFetching &&
     !capabilities.error &&
     capabilities.data.runtime?.externalActionsEnabled === true,
   );
-  function assertCurrent(scope = lifetime.current) {
-    if (!open || !scope || scope !== lifetime.current || scope.signal.aborted)
+  function assertCurrent(current = lifetime.current, external = true) {
+    if (
+      !open ||
+      !current ||
+      current !== lifetime.current ||
+      current.signal.aborted
+    )
       throw new ApiError(409, "This calendar review is closed or changed.");
-    guard();
+    recovery.guard();
+    (external ? writeGuard : readGuard)();
   }
-  async function sync(intent: CalendarSyncIntent) {
+  async function execute(action: CalendarAction) {
     if (busy.current) return;
-    const previous = cache.getQueryData<CalendarSyncAttempt>(key);
-    if (previous?.status !== "idle") return;
-    const scope = lifetime.current;
+    const current = lifetime.current;
     busy.current = true;
-    setError("");
+    setActiveScope(scope);
+    setSnapshot({ scope });
     try {
-      assertCurrent(scope);
+      if (!recovery.ready)
+        throw new Error("Load saved calendar recovery before continuing.");
+      const external = action.kind === "start" || action.kind === "continue";
+      const guard = () => assertCurrent(current, external);
+      guard();
+      const signal = AbortSignal.any([current!.signal, recovery.signal()]);
       const receipt = await runCalendarSync(
         api,
-        intent,
-        userId,
-        () => assertCurrent(scope),
-        (captured) => {
-          if (cache.getQueryData<CalendarSyncAttempt>(key)?.status !== "idle")
-            throw new ApiError(
-              409,
-              "Another calendar sync is already pending or needs review.",
-            );
-          // Persist the fence before the request; it survives route remount and Cancel.
-          cache.setQueryData<CalendarSyncAttempt>(
-            key,
-            (): CalendarSyncAttempt => ({
-              status: "pending",
-              intent: captured,
-            }),
-          );
-        },
-        scope?.signal,
+        actor,
+        action,
+        guard,
+        signal,
+        recovery.install,
+        () => recovery.verify(),
       );
-      cache.setQueryData<CalendarSyncAttempt>(
-        key,
-        (): CalendarSyncAttempt => ({
-          status: "completed",
-          intent,
-          receipt,
-        }),
-      );
+      guard();
+      setSnapshot({ scope, ...(action.kind === "done" ? {} : { receipt }) });
       void cache.invalidateQueries({ queryKey: ["calendar", "meetings"] });
       void cache.invalidateQueries({
         queryKey: calendarConnectionsKey(tenantId, userId),
       });
     } catch (failure) {
-      if (failure instanceof CalendarSyncError && failure.uncertain)
-        cache.setQueryData<CalendarSyncAttempt>(
-          key,
-          (): CalendarSyncAttempt => ({
-            status: "unknown",
-            intent,
-          }),
-        );
-      if (scope === lifetime.current && !scope?.signal.aborted)
-        setError(
-          failure instanceof Error ? failure.message : "Sync could not start.",
-        );
+      if (current === lifetime.current && !current?.signal.aborted)
+        setSnapshot({
+          scope,
+          error:
+            failure instanceof Error
+              ? failure.message
+              : "Calendar import could not be confirmed.",
+        });
     } finally {
       busy.current = false;
+      setActiveScope(undefined);
     }
   }
+  const command = recovery.record;
+  const receipt =
+    snapshot?.scope === scope &&
+    snapshot.receipt?.requestId === command?.requestId
+      ? snapshot.receipt
+      : undefined;
+  const attempt: CalendarSyncAttempt = !command
+    ? { status: "idle" }
+    : activeScope === scope
+      ? { status: "pending", intent: command.intent }
+      : receipt
+        ? {
+            status: receipt.status === "completed" ? "completed" : "partial",
+            intent: command.intent,
+            receipt,
+          }
+        : { status: "unknown", intent: command.intent };
   return {
     allowed,
+    canRead,
     userId,
     tenantId,
     assertCurrent,
-    attempt: attempt.data ?? { status: "idle" as const },
-    error,
-    sync,
-    reviewAnother() {
-      assertCurrent();
-      if (
-        cache.getQueryData<CalendarSyncAttempt>(key)?.status === "completed"
-      ) {
-        cache.setQueryData<CalendarSyncAttempt>(key, { status: "idle" });
-        setError("");
-      }
-    },
+    attempt,
+    ready: recovery.ready,
+    loading: recovery.loading,
+    busy: activeScope === scope,
+    error:
+      recovery.error ??
+      (snapshot?.scope === scope ? snapshot.error : undefined),
+    reload: recovery.retry,
+    sync: (intent: CalendarSyncIntent) => execute({ kind: "start", intent }),
+    recover: (kind: "check" | "continue" | "done") =>
+      command ? execute({ kind, expected: command }) : Promise.resolve(),
+    reviewAnother: () =>
+      command
+        ? execute({ kind: "done", expected: command })
+        : Promise.resolve(),
   };
 }

@@ -18,15 +18,18 @@ import {
   type ProspectAttachment,
 } from "./prospect-files";
 import { useProspectUpload } from "./useProspectUpload";
+import { ProspectFileCopy } from "./upload-copy/ProspectFileCopy";
 
 export function ProspectFiles({
   prospectId,
   available,
   active,
+  clientId,
 }: {
   prospectId: string;
   available: boolean;
   active: boolean;
+  clientId?: string | null;
 }) {
   useIdentity();
   const cache = useQueryClient();
@@ -45,6 +48,7 @@ export function ProspectFiles({
           prospectId={prospectId}
           actor={actor}
           active={active}
+          clientId={clientId}
         />
       ) : (
         <p role="status">
@@ -64,8 +68,8 @@ export function ProspectFiles({
         </button>
       </div>
       <small>
-        These files cannot be copied into client libraries, Outreach, Meri or
-        generation workflows.
+        Ready uploads can be reviewed for a private copy to the linked client
+        after conversion. Outreach and generation remain unavailable here.
       </small>
     </section>
   );
@@ -74,10 +78,12 @@ function ProspectFileSession({
   prospectId,
   actor,
   active,
+  clientId,
 }: {
   prospectId: string;
   actor: ClientWriter;
   active: boolean;
+  clientId?: string | null;
 }) {
   const api = useApi();
   const cache = useQueryClient();
@@ -234,6 +240,15 @@ function ProspectFileSession({
       )}
       {current && !query.data.length && (
         <p>No files are available for this prospect.</p>
+      )}
+      {clientId && (
+        <ProspectFileCopy
+          key={clientId}
+          actor={actor}
+          prospectId={prospectId}
+          clientId={clientId}
+          files={current ? query.data : undefined}
+        />
       )}
       {current && query.data.length > 0 && !matchingFiles.length && (
         <p role="status">No files match your search.</p>

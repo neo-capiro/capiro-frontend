@@ -56,7 +56,19 @@ export function CalendarSyncDialog({
         Client assignment determines which meetings appear in{" "}
         {clientName ? `${clientName}’s calendar` : "each client’s calendar"}.
       </p>
-      {attempt.status === "idle" && (
+      {!sync.ready && (
+        <div role="status">
+          <p>
+            {sync.loading ? "Loading saved calendar recovery…" : sync.error}
+          </p>
+          {!sync.loading && (
+            <button className="button" onClick={sync.reload}>
+              Reload saved import
+            </button>
+          )}
+        </div>
+      )}
+      {attempt.status === "idle" && sync.ready && (
         <>
           {!sync.allowed && (
             <p role="status">
@@ -89,6 +101,7 @@ export function CalendarSyncDialog({
                 <label className={styles.field}>
                   Connected account
                   <select
+                    disabled={sync.busy}
                     value={selected}
                     onChange={(event) => {
                       setSelected(event.target.value);
@@ -126,6 +139,7 @@ export function CalendarSyncDialog({
                 <label className={styles.check}>
                   <input
                     type="checkbox"
+                    disabled={sync.busy}
                     checked={windowOnly}
                     onChange={(event) => setWindowOnly(event.target.checked)}
                   />
@@ -165,50 +179,59 @@ export function CalendarSyncDialog({
         <div role="alert">
           <strong>Sync outcome unknown</strong>
           <p>
-            Meetings may already have been imported. This request is frozen and
-            cannot be repeated here. Refreshing the calendar or account status
-            cannot establish this operation’s result.
+            Meetings may already have been imported. Check this saved request’s
+            outcome, or explicitly continue the same import. A new request stays
+            blocked until this one is confirmed complete.
           </p>
         </div>
       )}
-      {attempt.status === "completed" && sync.allowed && (
-        <section aria-label="Calendar sync result" className={styles.result}>
-          <strong>
-            {attempt.receipt.calendar.hasMore || attempt.receipt.calendar.failed
-              ? "Calendar sync returned partial results"
-              : "Calendar sync completed"}
-          </strong>
-          <p>
-            {attempt.receipt.calendar.scanned} scanned ·{" "}
-            {attempt.receipt.calendar.matched} matched ·{" "}
-            {attempt.receipt.calendar.skipped} skipped ·{" "}
-            {attempt.receipt.calendar.removed} removed ·{" "}
-            {attempt.receipt.calendar.failed} failed ·{" "}
-            {attempt.receipt.calendar.pages} pages
-          </p>
-          <p className={styles.explanation}>
-            Matched counts processing outcomes, not newly created meetings.
-          </p>
-          {attempt.receipt.kind === "window" && (
-            <p className={styles.explanation}>
-              The window endpoint returns statistics without an operation,
-              account or range-bound receipt.
+      {(attempt.status === "completed" || attempt.status === "partial") &&
+        sync.canRead && (
+          <section aria-label="Calendar sync result" className={styles.result}>
+            <strong>
+              {attempt.status === "partial"
+                ? "Calendar import is pending"
+                : "Calendar sync completed"}
+            </strong>
+            <p>
+              {attempt.receipt.calendar.scanned} scanned ·{" "}
+              {attempt.receipt.calendar.matched} matched ·{" "}
+              {attempt.receipt.calendar.skipped} skipped ·{" "}
+              {attempt.receipt.calendar.removed} removed ·{" "}
+              {attempt.receipt.calendar.failed} failed ·{" "}
+              {attempt.receipt.calendar.pages} pages
             </p>
-          )}
-          {attempt.receipt.calendar.hasMore && (
             <p className={styles.explanation}>
-              {attempt.receipt.kind === "window"
-                ? "The 12-page limit left more results. This window endpoint cannot resume from the next page."
-                : "More results remain after this run. A separate reviewed sync may continue the server cursor."}
+              Matched counts processing outcomes, not newly created meetings.
             </p>
-          )}
-        </section>
+            {attempt.status === "partial" && (
+              <p className={styles.explanation}>
+                The saved import retains its progress. Continue it to process
+                the remaining pages.
+              </p>
+            )}
+          </section>
+        )}
+      {sync.error && attempt.status !== "idle" && (
+        <p role="alert">{sync.error}</p>
       )}
-      {attempt.status === "completed" && !sync.allowed && (
-        <p role="status">
-          Review the current session and permissions before viewing this sync
-          result.
-        </p>
+      {(attempt.status === "unknown" || attempt.status === "partial") && (
+        <div className="row">
+          <button
+            className="button"
+            disabled={!sync.canRead || sync.busy}
+            onClick={() => void sync.recover("check")}
+          >
+            Check saved outcome
+          </button>
+          <button
+            className="button primary"
+            disabled={!sync.allowed || sync.busy}
+            onClick={() => void sync.recover("continue")}
+          >
+            Continue saved import
+          </button>
+        </div>
       )}
       <footer className="row">
         <button className="button" onClick={() => onOpenChange(false)}>
@@ -219,6 +242,7 @@ export function CalendarSyncDialog({
             className="button primary"
             disabled={
               !sync.allowed ||
+              sync.busy ||
               accounts.isFetching ||
               Boolean(accounts.error) ||
               !connection
@@ -244,8 +268,8 @@ export function CalendarSyncDialog({
         {attempt.status === "completed" && (
           <button
             className="button"
-            disabled={!sync.allowed}
-            onClick={sync.reviewAnother}
+            disabled={!sync.canRead || sync.busy}
+            onClick={() => void sync.reviewAnother()}
           >
             Review another sync
           </button>

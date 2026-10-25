@@ -15,7 +15,7 @@ import {
 
 const date = "2026-10-21T12:00:00.000Z";
 describe("A1 Portfolio receiving and writes", () => {
-  it("PF-11 sends client assignment only when changed and pins the reviewed revision", () => {
+  it("pins every meeting edit to the reviewed revision without rewriting unchanged client assignment", () => {
     const base: Meeting = {
       id: "meeting-1",
       subject: "Meeting",
@@ -33,10 +33,12 @@ describe("A1 Portfolio receiving and writes", () => {
       client: { id: "c1", name: "Client" },
       updatedAt: date,
     };
-    expect(meetingAssignmentFields(base, "c1")).toEqual({});
-    expect(meetingAssignmentFields({ ...base, client: null }, null)).toEqual(
-      {},
-    );
+    expect(meetingAssignmentFields(base, "c1")).toEqual({
+      expectedRevision: date,
+    });
+    expect(meetingAssignmentFields({ ...base, client: null }, null)).toEqual({
+      expectedRevision: date,
+    });
     expect(meetingAssignmentFields(base, "c2")).toEqual({
       clientId: "c2",
       expectedRevision: date,
@@ -48,7 +50,19 @@ describe("A1 Portfolio receiving and writes", () => {
     expect(() =>
       meetingAssignmentFields({ ...base, updatedAt: undefined }, "c2"),
     ).toThrow("Refresh");
+    expect(() =>
+      meetingAssignmentFields({ ...base, updatedAt: undefined }, "c1"),
+    ).toThrow("Refresh");
+    expect(() =>
+      meetingAssignmentFields(
+        { ...base, client: null, updatedAt: undefined },
+        null,
+      ),
+    ).toThrow("Refresh");
     expect(meetingAssignmentFields(undefined, null)).toEqual({});
+    expect(meetingAssignmentFields(undefined, "c1")).toEqual({
+      clientId: "c1",
+    });
   });
   it("PF-12 preserves unavailable sharing state and current capability refusals in the read schema", () => {
     const row = noteSchema.parse({

@@ -13,7 +13,10 @@ import {
   readConversationTranscript,
   type ConversationListPage,
   ConversationHistoryUnavailable,
+  summarizeConversations,
+  MANAGEMENT_VERSION,
 } from "./history-client";
+import { useManagementRefresh } from "./management-refresh";
 import {
   conversationInClient,
   discoveryConversations,
@@ -27,6 +30,35 @@ export const historyNotStarted = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   error.status === 404 &&
   (error.code === "NOT_FOUND" || error.code === "CONVERSATION_NOT_FOUND");
+
+/** One bounded title page enriches Recents without replacing scheduled discovery. */
+export function useRecentConversationTitles(account: ConversationAccount) {
+  useManagementRefresh(account, true);
+  const query = useQuery({
+    queryKey: [
+      "meri-owned-titles",
+      account.tenantId,
+      account.actorId,
+      "recents",
+    ],
+    queryFn: ({ signal }) =>
+      summarizeConversations(
+        {
+          version: MANAGEMENT_VERSION,
+          status: "active",
+          title: "",
+          before: null,
+        },
+        signal,
+      ),
+    retry: false,
+    staleTime: 0,
+    refetchOnMount: "always",
+  });
+  return query.isSuccess && !query.isFetching && !query.error
+    ? query.data.conversations
+    : undefined;
+}
 
 const transcriptKey = (
   account: ConversationAccount,

@@ -77,6 +77,7 @@ export function useLiveRun(
     snapshot,
     ...commands,
     observing: observation.state,
+    suspendObservation: observation.stop,
     reconnect: observation.observe,
   };
 }

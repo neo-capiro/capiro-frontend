@@ -63,6 +63,11 @@ export function readMeriCapabilities(env: Environment) {
   return resolveMeriCapabilities(
     {
       conversations,
+      routines: permitted(
+        "routines",
+        conversation.enabled,
+        "/api/action-followthrough/routine-list",
+      ),
       newConversation: permitted(
         "newConversation",
         conversations && conversation.firstChatBootstrapEnabled,

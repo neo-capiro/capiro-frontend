@@ -35,6 +35,7 @@ const operationLabels: Readonly<Record<string, string>> = {
 };
 const actionLabels: Readonly<Record<string, string>> = {
   "task.create": "Create a task",
+  "task.update": "Update a task",
   "document.draft": "Prepare a document",
   "memory.propose": "Propose a memory for review",
   "artifact.file": "File attachments to a client",
@@ -84,6 +85,16 @@ export function proposalFields(
     { label: "Expires", value: proposal.expiresAt },
     { label: "Command hash", value: proposal.commandSha256 },
   );
+  if (command.action === "artifact.file")
+    command.attachments.forEach((file, index) => {
+      const label = `Attachment ${index + 1}`;
+      fields.push(
+        { label: `${label} reference`, value: file.objectId },
+        { label: `${label} version`, value: file.versionId },
+        { label: `${label} bytes`, value: String(file.bytes) },
+        { label: `${label} hash`, value: file.sha256 },
+      );
+    });
   return fields;
 }
 
@@ -91,7 +102,10 @@ type Completed = Extract<
   Extract<IntentsItem, { kind: "proposal"; proposal: unknown }>["execution"],
   { state: "completed" }
 >;
-function resultFields(execution: Completed): readonly IntentField[] {
+function resultFields(
+  execution: Completed,
+  action: IntentsProposal["command"]["action"],
+): readonly IntentField[] {
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
     return [
@@ -101,15 +115,76 @@ function resultFields(execution: Completed): readonly IntentField[] {
       { label: "Created", value: version.createdAt },
     ];
   }
-  const { receipt, result } = execution.outcome;
+  const { result } = execution.outcome;
+  if ("files" in result)
+    return result.files.flatMap((file, index) => {
+      const label = `File ${index + 1}`;
+      return [
+        { label, value: file.fileName ?? "Name unavailable" },
+        { label: `${label} status`, value: humanize(file.status) },
+        ...(file.documentId === undefined
+          ? []
+          : [
+              { label: `${label} document`, value: file.documentId },
+              { label: `${label} location`, value: file.location! },
+              {
+                label: `${label} indexing`,
+                value:
+                  file.indexingStatus === "not_indexed"
+                    ? "Not indexed"
+                    : humanize(file.indexingStatus!),
+              },
+              { label: `${label} reused`, value: file.reused ? "Yes" : "No" },
+            ]),
+        ...(file.reason === undefined
+          ? []
+          : [{ label: `${label} reason`, value: file.reason }]),
+      ];
+    });
+  const proof =
+    "execution" in execution.outcome
+      ? execution.outcome.execution
+      : execution.outcome.receipt;
   return [
-    { label: "Task created", value: result.title },
+    {
+      label: action === "task.update" ? "Task updated" : "Task created",
+      value: result.title,
+    },
+    ...(action === "task.update"
+      ? [{ label: "Task status", value: result.status.replaceAll("_", " ") }]
+      : []),
     { label: "Due date", value: result.dueDate ? day(result.dueDate) : "None" },
-    { label: "Completed", value: receipt.completedAt },
+    { label: "Completed", value: proof.completedAt },
   ];
 }
 
 type Look = Readonly<{ status: string; tone: IntentTone; detail: string }>;
+function filingLook(execution: Completed): Look | null {
+  if (
+    !("result" in execution.outcome) ||
+    !("files" in execution.outcome.result)
+  )
+    return null;
+  const files = execution.outcome.result.files;
+  const saved = files.filter((file) => file.status === "saved").length;
+  const pending = files.filter((file) => file.status === "pending").length;
+  const failed = files.filter((file) => file.status === "failed").length;
+  return {
+    status:
+      saved === files.length
+        ? "Files saved"
+        : failed === files.length
+          ? "Filing failed"
+          : "Filing needs attention",
+    tone:
+      saved === files.length
+        ? "success"
+        : failed === files.length
+          ? "danger"
+          : "warning",
+    detail: `${saved} saved, ${pending} pending, ${failed} failed. Review each file's recorded result; indexing is shown separately.`,
+  };
+}
 const nothing = "Nothing was approved or executed.";
 /** Journal states and withheld or non-command items: shown, never decidable, no content. */
 const plainLooks = {
@@ -170,13 +245,14 @@ const phaseLooks = {
   expired: {
     status: "Expired",
     tone: "neutral",
-    detail: "It expired before a decision. Nothing was executed.",
+    detail:
+      "The approval period has expired. Refresh to read any recorded outcome; expiry does not confirm that nothing ran.",
   },
   unknown: {
     status: "Result uncertain",
     tone: "warning",
     detail:
-      "Meri could not confirm the result of the approved action. Check again; nothing is repeated.",
+      "Meri could not confirm the result of the approved action. Check again to recover the outcome of that same request.",
   },
   unknown_decision: {
     status: "Decision status unavailable",
@@ -266,13 +342,35 @@ export function intentRow(
     return closed({
       status: "Failed",
       tone: "danger",
-      detail: `Preparation failed (${item.code}). ${nothing}`,
+      detail: `Preparation failed (${item.code}). No preparation result was confirmed.`,
     });
   if (item.kind === "draft")
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
   if (item.kind === "schedule_proposal") return closed(plainLooks.schedule);
+  if (item.kind === "memory_review") {
+    const withheld = "withheld" in item;
+    return {
+      ...closed({
+        status: withheld ? "Withheld" : "Submitted for review",
+        tone: "neutral",
+        detail: withheld
+          ? "Memory review details are unavailable with your current access."
+          : "Submission was accepted for memory review. This receipt does not confirm a saved or published memory.",
+      }),
+      title: "Memory review",
+      result: withheld
+        ? []
+        : [
+            {
+              label: "Candidate reference",
+              value: item.review.result.candidateId,
+            },
+            { label: "Command hash", value: item.review.result.commandSha256 },
+          ],
+    };
+  }
   if ("withheld" in item) return closed(plainLooks.withheldProposal);
   const { look, decision } = proposalLook(item, now, viewer);
   const execution = item.execution;
@@ -285,11 +383,14 @@ export function intentRow(
   return {
     ...row,
     ...(item.phase === "completed" && !completed ? phaseLooks.unknown : look),
+    ...(completed ? filingLook(completed) : null),
     decision,
     title: actionLabels[item.proposal.command.action] ?? row.title,
     proposal: item.proposal,
     fields: proposalFields(item.proposal),
-    result: completed ? resultFields(completed) : [],
+    result: completed
+      ? resultFields(completed, item.proposal.command.action)
+      : [],
   };
 }
 
@@ -307,16 +408,18 @@ export function intentRows(
 }
 
 const refusalText: Readonly<Record<string, string>> = {
-  INTENT_EXPIRED: "This proposal has expired. Nothing was executed.",
+  INTENT_EXPIRED:
+    "This proposal's approval period has expired. Refresh to read any recorded outcome.",
   INTENT_NOT_APPROVABLE:
-    "Approval is not available yet for this kind of action. Nothing was executed.",
+    "Approval is not available here for this kind of action. Refresh to read its current record.",
   INTENT_MISMATCH:
-    "This proposal changed. Refresh to see the current one. Nothing was executed.",
-  INTENT_NOT_FOUND: "Meri no longer has this proposal. Nothing was executed.",
+    "This decision request does not match the current proposal. Refresh to review its current record.",
+  INTENT_NOT_FOUND:
+    "Meri could not read this proposal. Any prior outcome remains unconfirmed.",
   INTENT_SCOPE_WITHHELD:
-    "You no longer have access to what this proposal covers. Nothing was executed.",
+    "You no longer have access to what this proposal covers. Any prior outcome remains unconfirmed.",
   APPROVER_REFUSED:
-    "You are not the approver for this proposal. Nothing was executed.",
+    "You are not the approver for this proposal. Refresh to read its current record.",
   APPROVAL_DECISION_REFUSED:
     "A different decision was already recorded for this proposal. Refresh to see it.",
   INTENT_APPROVALS_DISABLED:
@@ -324,4 +427,4 @@ const refusalText: Readonly<Record<string, string>> = {
 };
 /** Plain words for a definite refusal; the code stays visible so support can read it. */
 export const refusalMessage = (code: string) =>
-  `${refusalText[code] ?? "Your decision was not recorded. Nothing was executed."} (${code})`;
+  `${refusalText[code] ?? "This decision request was refused. Any prior outcome remains unconfirmed; refresh to read its current record."} (${code})`;

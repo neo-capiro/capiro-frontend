@@ -167,7 +167,14 @@ export function AttachFederalRecord({
           Search
         </SettingsButton>
       </form>
-      <SourceSearch source={source} q={q} choose={setSelected} />
+      <SourceSearch
+        source={source}
+        q={q}
+        disabled={locked}
+        choose={(record) => {
+          if (!locked) setSelected(record);
+        }}
+      />
       {selected && (
         <SettingsNotice title="Selected external record">
           {selected.name} · {selected.id}

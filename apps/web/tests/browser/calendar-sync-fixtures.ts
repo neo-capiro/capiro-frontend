@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type { Page } from "@playwright/test";
 export const syncMicrosoftId = "80000000-0000-4000-8000-000000000001";
 export const syncGoogleId = "80000000-0000-4000-8000-000000000002";
@@ -32,6 +33,10 @@ export async function installCalendarSyncFixtures(
 ) {
   const state = {
     reads: 0,
+    commandReads: 0,
+    pending: options.hasMore ?? false,
+    responseStatus: options.responseStatus ?? 0,
+    receipts: new Map<string, unknown>(),
     writes: [] as { url: string; method: string; body: string | null }[],
     unexpected: [] as string[],
   };
@@ -81,35 +86,69 @@ export async function installCalendarSyncFixtures(
         })),
       );
     }
-    if (
-      request.method() === "POST" &&
-      /\/integrations\/(microsoft|google)\/[^/]+\/(sync|calendar-window)$/.test(
-        url.pathname,
-      )
-    ) {
+    const commandPath = url.pathname.match(
+      /\/integrations\/(microsoft|google)\/([^/]+)\/calendar-commands(?:\/([^/]+))?$/,
+    );
+    if (commandPath && request.method() === "GET" && commandPath[3]) {
+      state.commandReads++;
+      const row = state.receipts.get(commandPath[3]);
+      return row ? reply(row) : reply({}, 404);
+    }
+    if (commandPath && request.method() === "POST" && !commandPath[3]) {
       state.writes.push({
         url: url.pathname + url.search,
         method: request.method(),
         body: request.postData(),
       });
+      const body = request.postDataJSON() as {
+        schemaVersion: number;
+        requestId: string;
+        range: { from: string; to: string } | null;
+      };
+      const provider =
+        commandPath[1] === "microsoft" ? "microsoft_365" : "google_workspace";
+      const window = body.range ?? {
+        from: "2026-10-01T00:00:00.000Z",
+        to: "2026-11-01T00:00:00.000Z",
+      };
+      const receipt = {
+        schemaVersion: 1,
+        requestId: body.requestId,
+        connectionId: commandPath[2],
+        provider,
+        payloadDigest: createHash("sha256")
+          .update(
+            JSON.stringify([
+              1,
+              "sync-tenant",
+              "sync-user",
+              commandPath[2],
+              provider,
+              body.range,
+            ]),
+          )
+          .digest("hex"),
+        range: body.range,
+        window,
+        status: state.pending ? "pending" : "completed",
+        calendar: {
+          ...syncStats,
+          hasMore: state.pending,
+          pages: state.pending ? 12 : state.writes.length,
+        },
+        createdAt: "2026-10-25T00:00:00.000Z",
+        updatedAt: "2026-10-25T00:00:00.000Z",
+      };
+      state.receipts.set(body.requestId, receipt);
       if (options.responseGate) await options.responseGate;
       if (options.delay)
         await new Promise((resolve) => setTimeout(resolve, options.delay));
-      if (options.responseStatus)
+      if (state.responseStatus)
         return reply(
           { message: "Synthetic provider refused a later page" },
-          options.responseStatus,
+          state.responseStatus,
         );
-      const calendar = {
-        ...syncStats,
-        hasMore: options.hasMore ?? false,
-        ...(options.hasMore ? { pages: 12 } : {}),
-      };
-      return reply(
-        url.pathname.endsWith("calendar-window")
-          ? calendar
-          : { connectionId: url.pathname.split("/").at(-2), calendar },
-      );
+      return reply(receipt);
     }
     if (options.fallback) return route.fallback();
     state.unexpected.push(`${request.method()} ${url.pathname}`);

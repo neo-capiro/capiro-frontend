@@ -18,7 +18,10 @@ const env = {
 };
 const request = (
   operation = "prepare",
-  body: unknown = { arguments: taskInput },
+  body: unknown = {
+    requestId: "00000000-0000-4000-8000-000000000123",
+    arguments: taskInput,
+  },
   options: RequestInit = {},
   suffix = "",
 ) =>
@@ -187,7 +190,12 @@ describe("task-command exact frontend admission", () => {
       "Content-Type": "application/json",
       Authorization: bearer,
     });
-    expect(options.body).toBe(JSON.stringify({ arguments: taskInput }));
+    expect(options.body).toBe(
+      JSON.stringify({
+        requestId: "00000000-0000-4000-8000-000000000123",
+        arguments: taskInput,
+      }),
+    );
     expect(options.redirect).toBe("error");
     expect(options.credentials).toBe("omit");
   });
@@ -197,7 +205,10 @@ describe("task-command exact frontend admission", () => {
     const bound = (requestOrigin: string) =>
       new Request("https://0.0.0.0:5188/api/task-commands/prepare", {
         method: "POST",
-        body: JSON.stringify({ arguments: taskInput }),
+        body: JSON.stringify({
+          requestId: "00000000-0000-4000-8000-000000000123",
+          arguments: taskInput,
+        }),
         headers: {
           "Content-Type": "application/json",
           Origin: requestOrigin,

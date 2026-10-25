@@ -9,6 +9,7 @@ import { clientSearchLimit, type ClientChoice } from "./api";
 import { useLinkClients, useLinkProspect } from "./queries";
 import styles from "./conversion.module.css";
 import { NewClientConversion } from "./NewClientConversion";
+import { ContactTransfer } from "../contact-transfer/public";
 
 export function ProspectClientLink({ record }: { record: Prospect }) {
   const identity = useIdentity();
@@ -35,6 +36,7 @@ export function ProspectClientLink({ record }: { record: Prospect }) {
         >
           Open linked client ↗
         </Link>
+        <ContactTransfer record={record} />
       </>
     );
   return (
@@ -181,9 +183,8 @@ function ClientLinkDialog({
           </label>
         )}
         <p className="muted">
-          Prospect history remains on this record. Files, research and contact
-          carry-over are not available yet. Creating a new client is currently
-          unavailable.
+          Prospect history, files and research remain on this record. After
+          linking, you can explicitly review contact carry-over to this client.
         </p>
         <QueryState error={mutation.error} />
         <footer className={`row ${styles.footer}`}>

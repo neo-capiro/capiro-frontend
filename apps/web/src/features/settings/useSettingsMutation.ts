@@ -122,12 +122,15 @@ export function useSettingsMutation(section: string) {
           dispatched = true;
           const result = await raw.request(operation, captured, options);
           accepted = true;
-          options?.signal?.throwIfAborted();
           assertSettingsReceipt(write, result);
+          // A received receipt still belongs to the original journal if its UI scope has closed.
+          if (write.receiptId || write.acceptedResult !== undefined)
+            retainSettingsResult(window.sessionStorage, storageKey, write);
           if (operation === "me.emailSignature.update") {
             write.resultHash = await settingsRequestHash(result);
             retainSettingsResult(window.sessionStorage, storageKey, write);
           }
+          options?.signal?.throwIfAborted();
           if (
             settingsWriteNeedsReadback(operation) &&
             !(await reconcileSettingsWrite(

@@ -3,6 +3,7 @@
 import { ScopedLink } from "../../shared/shell/ScopedLink";
 import { useState } from "react";
 import { useCapiro } from "../../shared/capiro/CapiroBoundary";
+import { CapiroApiError } from "../../shared/capiro/http";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { Badge, StatusPanel, TextInput } from "../../shared/module-ui";
 import {
@@ -42,7 +43,11 @@ export function BillingSettings() {
       signal.throwIfAborted();
       window.location.assign(destination);
     } catch (error) {
-      if (error instanceof BillingStateChanged && !signal.aborted) {
+      if (
+        !signal.aborted &&
+        (error instanceof BillingStateChanged ||
+          (error instanceof CapiroApiError && error.status === 403))
+      ) {
         setCheckout(false);
         setCancel(false);
         state.reload();

@@ -1,8 +1,9 @@
-import type { ConversationSubmitRequest, ConversationHistoryRequest, ConversationCancelledResponse } from "@capiro/meri-contracts/conversation-application";
+import type { ConversationSubmitRequest, ConversationHistoryRequest, ConversationCancelledResponse, ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { ConversationUnavailable } from "./conversation-network.js";
 import type { ConversationLifetime } from "./conversation-network.js";
 import type { ConversationObservationSnapshot } from "./conversation-observation.js";
 import type { ConversationChat } from "./conversation-chat.js";
+import type { ConversationLifecycleControlRequest, ConversationCheckpointInspectionRequest } from "@capiro/meri-contracts/conversation-lifecycle";
 export { ConversationUnavailable };
 export type { ConversationLifetime, ConversationObservationSnapshot, ConversationChat, };
 export interface MeriConversationSnapshot {
@@ -11,6 +12,7 @@ export interface MeriConversationSnapshot {
     readonly submit: "idle" | "pending" | "unknown" | "observed";
     readonly cancel: "idle" | "pending" | "unknown" | "observed";
     readonly cancelReceipt: ConversationCancelledResponse | null;
+    readonly acceptedRequest: Readonly<ConversationStoredRequest> | null;
 }
 /** Public handle deliberately exposes no credential, branded view or cursor injection. */
 export declare function createMeriConversation(options: ConversationLifetime): Readonly<{
@@ -21,6 +23,8 @@ export declare function createMeriConversation(options: ConversationLifetime): R
     retrySubmit: () => Promise<MeriConversationSnapshot>;
     history: (input?: ConversationHistoryRequest) => Promise<MeriConversationSnapshot>;
     cancel: () => Promise<Readonly<ConversationCancelledResponse>>;
+    control: (input: ConversationLifecycleControlRequest) => Promise<import("@capiro/meri-contracts/conversation-lifecycle").ConversationLifecycleResponse<"control">>;
+    inspectCheckpoint: (input: ConversationCheckpointInspectionRequest) => Promise<import("@capiro/meri-contracts/conversation-lifecycle").ConversationLifecycleResponse<"inspect">>;
     openChat: () => ConversationChat;
     dispose: () => void;
 }>;
