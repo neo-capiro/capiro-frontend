@@ -20,8 +20,24 @@ const previewUiPages = new Set([
 const previewMemoryOwnerRoute = `${previewOwner}memory-owner-route.server.ts`;
 const memoryOwnerProxy = `${appSource}features/meri/memory-review/owner-review-proxy.server.ts`;
 const objectiveSnapshotOwner = `${appSource}shared/capiro/operations/objective-workspace-receiving.ts`;
+const clientBriefCopyOwner = `${appSource}features/portfolio/prospects/brief/client-copy/`;
+const prospectActionsEntry = `${appSource}features/modules/workspace/prospect-actions-public.ts`;
+const clientBriefAuthorityImports = new Map([
+  [`${clientBriefCopyOwner}authority.ts`, new Set(['verifyProspectWriter', 'ProspectWriter'])],
+  [`${clientBriefCopyOwner}command.ts`, new Set(['prospectIntentScope', 'ProspectWriter'])],
+  [`${clientBriefCopyOwner}ClientBriefCopy.tsx`, new Set(['ProspectWriter'])],
+  [`${clientBriefCopyOwner}useClientBriefCopy.ts`, new Set(['ProspectWriter'])],
+  [`${clientBriefCopyOwner}recovery.ts`, new Set(['ProspectWriter'])],
+]);
+function approvedClientBriefAuthorityImport(from, to, entry) {
+  const allowed = clientBriefAuthorityImports.get(from);
+  // The scanner marks whole-clause import type as other, retaining only its explicit named bindings.
+  return to === prospectActionsEntry && allowed && ['named', 'other'].includes(entry.kind)
+    && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
+}
 function approvedSnapshotImport(file, entry) {
-  return file === objectiveSnapshotOwner && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
+  return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`)
+    && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
 }
 
 function approvedPricingImport(file, module, entry) {
@@ -152,7 +168,7 @@ function edgeViolation(from, to, entry, module) {
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
-  if (feature(from) && feature(to) && feature(from) !== feature(to)) return `${from}: private cross-feature import ${to}`;
+  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
   if (feature(from) === 'portfolio' && feature(to) === 'portfolio' && portfolioArea(from) !== portfolioArea(to) && !publicEntry(to)) return `${from}: private Portfolio domain import ${to}; use public.ts or a named *-public.ts entry`;
   return undefined;
 }
