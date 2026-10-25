@@ -164,20 +164,149 @@ for (const read of ["summary", "state"]) {
     await page
       .getByRole("button", { name: "Start subscription", exact: true })
       .click();
-    await page.route(`**/api/capiro/settings.billing.${read}?*`, (route) =>
-      route.fulfill({
+    let reads = 0;
+    await page.route(`**/api/capiro/settings.billing.${read}?*`, (route) => {
+      reads++;
+      return route.fulfill({
         status: 503,
         json: { message: `Synthetic ${read} unavailable` },
-      }),
-    );
+      });
+    });
     const dialog = page.getByRole("dialog", { name: "Start subscription" });
+    await dialog.getByLabel("Total profiles", { exact: true }).fill("17");
     await dialog.getByRole("button", { name: "Review checkout" }).click();
     await expect(dialog.getByRole("alert")).toContainText(
       `Synthetic ${read} unavailable`,
     );
+    await expect(
+      dialog.getByLabel("Total profiles", { exact: true }),
+    ).toHaveValue("17");
+    await expect(
+      dialog.getByRole("button", { name: "Review checkout" }),
+    ).toBeEnabled();
+    await expect(
+      page.getByRole("heading", { name: "Your plan", includeHidden: true }),
+    ).toBeVisible();
+    expect(reads).toBe(1);
     expect(writes).toEqual([]);
   });
 }
+
+for (const flow of ["portal", "checkout", "cancel"] as const) {
+  test(`${flow} canonical 403 withholds cached billing and closes review before reload completes`, async ({
+    page,
+  }) => {
+    const { current, writes } = await billingFixture(
+      page,
+      flow === "checkout" ? { status: "none", hasSubscription: false } : {},
+    );
+    if (flow !== "portal")
+      await page
+        .getByRole("button", {
+          name: flow === "checkout" ? "Start subscription" : "Cancel plan",
+          exact: true,
+        })
+        .click();
+    let release!: () => void;
+    const waiting = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let reads = 0;
+    let denied = true;
+    await page.route(
+      "**/api/capiro/settings.billing.summary?*",
+      async (route) => {
+        reads++;
+        if (reads === 2) await waiting;
+        await route.fulfill(
+          denied
+            ? {
+                status: 403,
+                json: { message: "Synthetic billing access denied" },
+              }
+            : { json: current.summary },
+        );
+      },
+    );
+    try {
+      await page
+        .getByRole("button", {
+          name:
+            flow === "portal"
+              ? "Add profiles"
+              : flow === "checkout"
+                ? "Review checkout"
+                : "Open billing portal",
+          exact: true,
+        })
+        .click();
+      await expect(
+        page.getByRole("heading", { name: "Your plan", includeHidden: true }),
+      ).toHaveCount(0);
+      await expect(page.getByText("1 of 10 used", { exact: true })).toHaveCount(
+        0,
+      );
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      await expect(
+        page.getByRole("button", {
+          name: /^(Add profiles|Start subscription|Update|View and download invoices|Cancel plan)$/,
+        }),
+      ).toHaveCount(0);
+      await expect.poll(() => reads).toBe(2);
+      expect(writes).toEqual([]);
+    } finally {
+      release();
+    }
+    await expect(
+      page.getByRole("button", { name: "Try again", exact: true }),
+    ).toBeVisible();
+    await expect(page.getByRole("alert").first()).toContainText(
+      "Synthetic billing access denied",
+    );
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
+    expect(reads).toBe(2);
+    expect(writes).toEqual([]);
+    // A later explicit read can recover access, but must not reopen or replay either review.
+    denied = false;
+    await page.getByRole("button", { name: "Try again", exact: true }).click();
+    await expect(
+      page.getByRole("heading", { name: "Your plan" }),
+    ).toBeVisible();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(reads).toBe(3);
+    expect(writes).toEqual([]);
+    await expect(page).toHaveURL(/\/settings\/billing$/);
+  });
+}
+
+test("canceling checkout review leaves the plan intact without revalidation or a provider request", async ({
+  page,
+}) => {
+  const { writes } = await billingFixture(page, {
+    status: "none",
+    hasSubscription: false,
+  });
+  let reads = 0;
+  page.on("request", (request) => {
+    if (request.url().includes("/api/capiro/settings.billing.")) reads++;
+  });
+  await page
+    .getByRole("button", { name: "Start subscription", exact: true })
+    .click();
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Cancel", exact: true })
+    .click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Your plan" })).toBeVisible();
+  expect(reads).toBe(0);
+  expect(writes).toEqual([]);
+});
 
 test("an existing-subscriber action rechecks that a subscription still exists", async ({
   page,
