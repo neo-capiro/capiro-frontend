@@ -210,19 +210,19 @@
     "file": "apps/web/src/features/portfolio/calendar/sync/CalendarSyncDialog.tsx",
     "kind": "function",
     "symbol": "CalendarSyncDialog",
-    "fingerprint": "d9cfe83645f345ac5e9523e71487a062f222f1f4aa7abf9e7f6f79af0fe74c53",
-    "reason": "This dialog is a single connected-account/date-range review and sync-attempt status projection. useCalendarSync and the adapter own dispatch, while provider-specific labels remain explicit. Those distinctions should not be hidden in a generic provider framework. A status subview is optional on expansion; the current markup has one sync-review purpose.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "7daeeefc41f7c3d78540d29d7e377a8f0dedd789673fdbd265913d0e4f6cf1d7",
+    "reason": "one existing explicit account/range/recovery dialog; protocol and authority remain in hook/command owners, JSX length does not introduce another responsibility.",
+    "reviewedBy": "Codex independent visible review",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/sync/useCalendarSync.ts",
     "kind": "function",
     "symbol": "useCalendarSync",
-    "fingerprint": "fe6d704802cfc4253e707dc583d0578d9638bca9ff96c46232b322275e31ef72",
-    "reason": "This hook owns one local sync attempt's scope, identity subscription, pre-dispatch pending fence and known/unknown result. API calls are delegated. The related cache changes and statuses must share the same attempt identity. Local coherence is not evidence of a durable backend replay fence; that server dependency remains open.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "ca31ec6cb8c00d10b70fc4c1222c99f80bcec2afcbd05be3cb4d2d834da1bab6",
+    "reason": "one actor/open lifetime and retained-command orchestration hook; separate read/write guards, hydration, cancellation and result visibility must remain coordinated.",
+    "reviewedBy": "Codex independent visible review",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
@@ -1559,10 +1559,10 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
-    "fingerprint": "398d237e5aaa25b8bb7786f54296c1938acdc100a29879417be1cb3bf72459a9",
-    "reason": "One reader-scoped file collection composes local folder/filter/selection state, linked-file arrival and action dialog visibility. Storage usage has an independent Core read; upload, access, move, preview and delete remain in child owners.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "cf5eff94adf4c0698c3cf1420c1a31367aa96d989ecdb3ece58a29c96d32ab1f",
+    "reason": "The existing file-library presenter adds a frozen selection for deletion and an always-mounted, reader-keyed recovery child so a missing target cannot hide retained work. Other file actions continue through their separate components and hooks. It does not receive deletion receipts, infer outcomes, issue requests or own the journal. The exact narrow composition is cohesive despite inherited JSX length; no unrelated refactor is required.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
@@ -3775,6 +3775,51 @@
     "symbol": "useProspectFileCopy",
     "fingerprint": "034c9ca3758accfea7ab648407ea055628fb2e4543dcb9cfe44e1aa44f94d6d8",
     "reason": "One hook binds the existing retained-intent lifetime to current actor/prospect/client and two no-retry mutations for review and action. Its shared guard, context mismatch, verification and privacy-block handling protect that same account-bound operation; transport and journal transaction behavior are delegated. No unrelated cache, domain policy or background workflow is introduced.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/DeleteFile.tsx",
+    "kind": "function",
+    "symbol": "DeletionSession",
+    "fingerprint": "749e7eecb442df7015a83394371e30f500c7df2af3efb043dfe3a2b083a63d85",
+    "reason": "One deletion dialog presents current review, retained command, pending and completed receipt states for the same actor/client lifetime. Recovery readiness controls every private detail and action; busy dismissal and completed-only acknowledgement belong to that same interaction. Transport, canonical current access, exact command construction and encrypted journal settlement are delegated. Its JSX size does not introduce another domain owner or justify splitting the recovery state across components.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/deletion.ts",
+    "kind": "function",
+    "symbol": "deleteClientFile",
+    "fingerprint": "c59800102591ac2f7cbca01de9e7757413bc932be0fb312a63cc0a5034ab5c3c",
+    "reason": "One finite deletion attempt snapshots its input and runs under the existing encrypted recovery command lock. Submission uses current file review and reserve-before-DELETE; recovery uses the original command and receipt without requiring target presence. Fresh authority, explicit identical-command retry and completed-only acknowledgement share one durable request invariant. Command/receipt validation and current authority remain separate owners, with no new framework or cache-local settlement.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/deletion.ts",
+    "kind": "function",
+    "symbol": "deleteClientFile > <anonymous>",
+    "fingerprint": "8d0369f1e24f9d2cf58f208fd12967a926d72d9c8b73aedb561bce5dae9c3a4d",
+    "reason": "This is the critical section of the same retained deletion transaction: authorize around storage, reserve before dispatch, compare the original attempt, read a receipt before explicit retry, recheck authority after receipt and acknowledge only confirmed completion. Keeping its ordered effect boundaries within one callback makes the command lock inspectable. It does not implement journal storage, cryptography, backend deletion or a second authority owner.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2f5ae9a7db31cd7232341d26416fb28a183d1fcaac1178555e10a85da5a7c7d9",
+    "reason": "FilesPage remains the existing client-file library composition module. The bounded change snapshots the selected deletion review and mounts the separately owned DeleteFile recovery surface outside target-list presence. Existing list/filter/selection and feature dialogs keep their current owners; deletion contracts, access, transport and journal lifecycle live elsewhere. Crossing the file-size signal adds no independent business responsibility to this module.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/settings/PersonalSettings.tsx",
+    "kind": "function",
+    "symbol": "PersonalSettings",
+    "fingerprint": "99ed618f24994d0110181586b2936daea978ff5a0c064e353cdc5359dcfe61dc",
+    "reason": "The existing personal-settings presenter keeps its title mutation, Clerk account controls, email-signature child and navigation cards under their existing owners. The ST28 change only corrects the monitoring ScopedLink destination to the mounted Intelligence LegiWatch view, retaining current client context through the existing ScopedLink. It introduces no new state, transport, policy or workflow responsibility; the exact link-only change preserves cohesion.",
     "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
     "reviewedOn": "2026-10-25"
   }
