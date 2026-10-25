@@ -147,6 +147,14 @@ export class ActionWorkflowController {
         this.#set({ checkingRecovery: true, problem: "unknown" });
     }
   }
+  checkSaved = async () => {
+    if (!this.#port.restore) return;
+    await this.#run(
+      "recover",
+      (signal) => this.#port.restore!(signal),
+      (value) => this.#recover(value),
+    );
+  };
   retrySaved = async () => {
     if (!this.#port.retrySaved) return;
     await this.#run(

@@ -5,6 +5,66 @@ import { workflowProblems } from "../src/features/meri/actions/workflow-problems
 
 const ok = (value) => ({ ok: true, value });
 
+test("checking an uncertain query reads recovery without replaying a task or another query", async () => {
+  let reads = 0,
+    retries = 0;
+  let recovery = { phase: "empty" };
+  const f = fixture({
+    restore: async () => {
+      reads++;
+      return ok(recovery);
+    },
+    retrySaved: async () => {
+      retries++;
+      throw Error("must not replay");
+    },
+    query: async () => ({ ok: false, problem: "unknown" }),
+  });
+  f.controller.attach();
+  await Promise.resolve();
+  await f.controller.query();
+  assert.equal(f.controller.getSnapshot().problem, "unknown");
+  recovery = {
+    phase: "prepare",
+    fields: [{ label: "Task", value: "Retained task" }],
+  };
+  await f.controller.checkSaved();
+  assert.equal(reads, 2);
+  assert.equal(retries, 0);
+  assert.equal(f.controller.getSnapshot().savedRequest, true);
+  assert.deepEqual(f.controller.getSnapshot().recoveryFields, recovery.fields);
+  assert.deepEqual(f.calls, []);
+});
+
+test("unavailable recovery keeps uncertainty and a late recovery cannot restore a disposed scope", async () => {
+  const hold = deferred();
+  let next = () => ok({ phase: "empty" });
+  const f = fixture({
+    restore: async () => next(),
+    query: async () => ({ ok: false, problem: "unknown" }),
+  });
+  f.controller.attach();
+  await Promise.resolve();
+  await f.controller.query();
+  next = () => ({ ok: false, problem: "read-unavailable" });
+  await f.controller.checkSaved();
+  assert.equal(f.controller.getSnapshot().problem, "read-unavailable");
+  assert.equal(f.controller.getSnapshot().savedRequest, false);
+  next = () => hold.promise;
+  const checking = f.controller.checkSaved();
+  f.controller.dispose();
+  hold.resolve(
+    ok({
+      phase: "prepare",
+      fields: [{ label: "Task", value: "Old private task" }],
+    }),
+  );
+  await checking;
+  assert.equal(f.controller.getSnapshot().savedRequest, false);
+  assert.deepEqual(f.controller.getSnapshot().recoveryFields, []);
+  assert.deepEqual(f.calls, []);
+});
+
 test("saved create-task reconciliation removes the old proposal before another explicit request", async () => {
   let next = {
     phase: "prepare",
