@@ -554,10 +554,10 @@
     "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
     "kind": "function",
     "symbol": "ProspectDetail",
-    "fingerprint": "cbbe1c4d1e35e6b3b3aadf7610f646b0b27a31eb79f067c3eb6202afa784bdf7",
-    "reason": "Existing prospect detail composes its independently owned overview, brief, contacts, proposals and conversion areas. The addition mounts the canonical Portfolio Files public component only under current prospect access and links the exact immutable prospect UUID to Modules Workspace; it adds no document editor, attachment transport or cross-feature import. Existing field editing remains with its original domain hooks.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "5e2f741ec15131e3ce658cb1ba7c706177886f0296a35c8fbb6db0a6933ff613",
+    "reason": "The existing prospect detail page remains a composition of separately owned feature surfaces. The only changed responsibility is passing linkedClientId to ProspectFiles when the already loaded prospect has convertedAt; the copy feature independently rechecks current conversion/link/access. It adds no file command, receipt, storage or recovery logic to the page. This exact one-prop composition preserves the existing cohesion decision.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
@@ -1208,10 +1208,10 @@
     "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
     "kind": "function",
     "symbol": "ProspectFileSession",
-    "fingerprint": "6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c",
-    "reason": "One keyed actor/tenant/prospect view composes the existing authorized file list, readiness-gated links and separate upload recovery hook. The added filename search, clear and no-match presentation consume only the current successful non-fetching list and reset with the existing scope. No new transport, cache, authority or corpus ownership is introduced. Root inspected the full function and phone capture; independent calendar_relationships accepted its bounded source/test evidence. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "3958f59790af5b74203779998cc05070346aa56fe31f0b223c5956e93b5dd28c",
+    "reason": "The existing prospect-file session owns one list/upload/remove view. This change passes the current converted client to a separately owned ProspectFileCopy component and mounts that component under the same verified actor/prospect lifetime. Copy transport, review, encrypted reservation and receipt recovery remain outside this presenter. The narrow composition does not add another workflow owner to the existing function.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/files/prospect-upload.ts",
@@ -3740,6 +3740,42 @@
     "fingerprint": "1350df0f66bf1854cd254c01334b758ee1ef90de66681699c04db87ea88cbff9",
     "reason": "One React binding connects the copy session to current cached identity, retained-intent hydration and explicit review/action mutations. Domain access, source review, transport and persistence algorithms remain delegated. Access-failure blocking and readiness belong to this same mounted session lifetime.",
     "reviewedBy": "/root/final_privacy_review_xhigh",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/ProspectFileCopy.tsx",
+    "kind": "function",
+    "symbol": "ProspectFileCopy",
+    "fingerprint": "47c438df05a7c3c7d52a3bde570b76cda37608777c7f3e8f6d237f47281c247c",
+    "reason": "One private-copy dialog presents the mutually exclusive review, retained-command recovery, pending and completed states of one user action. Selection/folder confirmation, busy dismissal and private-detail hiding must remain coherent with the same recovery readiness. Transport, authority checks, command construction, journal locking and receipt settlement are delegated to existing or dedicated owners. Its JSX length does not justify fragmenting this single presentation lifecycle.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/recovery.ts",
+    "kind": "function",
+    "symbol": "runProspectFileCopy",
+    "fingerprint": "33f8dada3795a6b1009968e68893fcae7d61e55a121fe0476c016404d93b793e",
+    "reason": "One finite copy/recovery operation snapshots its input and enters the existing recovery command lock. It composes current authorization, frozen source review, encrypted reservation before POST, exact receipt reads/retry and completed-only acknowledgement for the same retained request. The function owns no new journal or policy framework; keeping this sequence together exposes the dispatch and acknowledgement boundaries.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/recovery.ts",
+    "kind": "function",
+    "symbol": "runProspectFileCopy > <anonymous>",
+    "fingerprint": "8a67096c00369c23c77b4123e5e091618530a633b211f6c5431c66652ba228a1",
+    "reason": "This callback is the critical section of the same retained copy operation. It checks current access around the stored command, reserves before the first POST, permits only explicit identical-command retry after GET plus fresh access, rechecks access after receipts and acknowledges only completed history. Splitting its ordered steps into independent stateful owners would obscure the single lock and request invariant. Command/schema and authority implementations already have separate owners.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/upload-copy/useProspectFileCopy.ts",
+    "kind": "function",
+    "symbol": "useProspectFileCopy",
+    "fingerprint": "034c9ca3758accfea7ab648407ea055628fb2e4543dcb9cfe44e1aa44f94d6d8",
+    "reason": "One hook binds the existing retained-intent lifetime to current actor/prospect/client and two no-retry mutations for review and action. Its shared guard, context mismatch, verification and privacy-block handling protect that same account-bound operation; transport and journal transaction behavior are delegated. No unrelated cache, domain policy or background workflow is introduced.",
+    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
     "reviewedOn": "2026-10-25"
   }
 ]
