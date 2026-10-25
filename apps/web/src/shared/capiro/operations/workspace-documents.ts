@@ -102,6 +102,36 @@ export const workspaceDraft = z.object({
     tone: z.string().optional(),
   }),
 });
+// A saved version carries the exact bounded draft state captured at save time
+// (apps/workspace VersionsService.list returns the raw WsDocVersion row incl.
+// `snapshot`). Unknown rich fields are preserved by passthrough so read-only
+// history never lossily reshapes or drops stored JSON.
+const savedVersionDocument = z
+  .object({
+    id: workspaceId,
+    name: z.string().optional(),
+    ordinal: z.number().optional(),
+    body: z.unknown().optional(),
+    sourceBriefVersion: z.unknown().optional(),
+  })
+  .passthrough();
+const savedVersionSnapshot = z
+  .object({
+    docTitle: z.string().optional(),
+    // config.clientId is the snapshot's client association (the restore parent
+    // identity check); other engine config keys are preserved.
+    config: z
+      .object({
+        clientId: workspaceId.nullable().optional(),
+        sections: z.array(z.string()).optional(),
+        sectionContent: z.record(z.string(), z.string()).optional(),
+      })
+      .passthrough()
+      .optional(),
+    ask: z.unknown().optional(),
+    documents: z.array(savedVersionDocument).optional(),
+  })
+  .passthrough();
 const version = z.object({
   id: workspaceId,
   draftId: workspaceId,
@@ -109,6 +139,9 @@ const version = z.object({
   authorId: z.string(),
   authorKind: z.string(),
   createdAt: z.string(),
+  // Present on the real producer rows (VersionsService.list/create). Optional
+  // here so the shared version response stays additive for existing consumers.
+  snapshot: savedVersionSnapshot.optional(),
 });
 export const workspaceDocumentOperations = {
   "workspace.draft": defineOperation({
@@ -279,3 +312,6 @@ export const workspaceDocumentOperations = {
 export type NewsletterBody = z.infer<typeof newsletterBody>;
 export type NewsletterBlock = z.infer<typeof newsletterBlock>;
 export type WorkspaceDraftDocument = z.infer<typeof workspaceDraft>;
+export type SavedVersion = z.infer<typeof version>;
+export type SavedVersionSnapshot = z.infer<typeof savedVersionSnapshot>;
+export type SavedVersionDocument = z.infer<typeof savedVersionDocument>;

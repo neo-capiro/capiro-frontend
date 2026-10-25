@@ -9,7 +9,6 @@ import {
 import {
   ActionButton,
   Field,
-  Modal,
   Panel,
   StatusPanel,
   TextArea,
@@ -30,6 +29,7 @@ import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
+import { VersionHistory } from "./version-history/VersionHistory";
 
 function DraftEditor({
   draft,
@@ -48,14 +48,8 @@ function DraftEditor({
   const [boundDraft, setBoundDraft] = useState<WorkspaceDraftDocument>();
   const currentDraft = boundDraft ?? draft;
   const names = initial.names;
-  const [history, setHistory] = useState(false);
   const update = useCapiroMutation("workspace.draft.update");
   const snapshot = useCapiroMutation("workspace.draft.snapshot");
-  const versions = useCapiroQuery(
-    "workspace.draft.versions",
-    { params: { draftId: draft.id } },
-    { enabled: history },
-  );
   const invalidSection = Object.values(sections).some((content) =>
     sectionSizeError(content),
   );
@@ -94,7 +88,10 @@ function DraftEditor({
           </p>
         </div>
         <div className={styles.actions}>
-          <ActionButton onClick={() => setHistory(true)}>History</ActionButton>
+          <VersionHistory
+            key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
+            draft={currentDraft}
+          />
           {draft.prospectId && (
             <DocumentPreview title={title} names={names} sections={sections} />
           )}
@@ -225,30 +222,6 @@ function DraftEditor({
             ))}
         </Panel>
       )}
-      <Modal open={history} onOpenChange={setHistory} title="Document history">
-        <StatusPanel
-          loading={versions.loading}
-          error={
-            versions.error ??
-            (versions.data?.some((version) => version.draftId !== draft.id)
-              ? new Error("History belongs to another document.")
-              : undefined)
-          }
-          onRetry={versions.reload}
-        >
-          <div className={styles.form}>
-            {versions.data?.map((version) => (
-              <p key={version.id}>
-                <strong>{version.label ?? "Saved version"}</strong>
-                <span className={styles.secondary}>
-                  {new Date(version.createdAt).toLocaleString()} ·{" "}
-                  {version.authorKind}
-                </span>
-              </p>
-            ))}
-          </div>
-        </StatusPanel>
-      </Modal>
     </section>
   );
 }
