@@ -30,6 +30,7 @@ type Options = {
   access: RoutinesAccess;
   signal: AbortSignal;
   isCurrent: () => boolean;
+  onAccessLost?: () => void;
   /** Admitted chat proposal. Its proposal ID is a local storage key, never a new prepare request. */
   seed?: SavedRoutine;
 };
@@ -46,7 +47,10 @@ export class RoutineWorkflow {
   };
   private listeners = new Set<() => void>();
   private disposed = false;
-  constructor(private readonly options: Options) {}
+  constructor(private readonly options: Options) {
+    options.signal.addEventListener("abort", this.endLifetime, { once: true });
+    if (options.signal.aborted) this.endLifetime();
+  }
   getSnapshot = () => this.state;
   subscribe = (listener: () => void) => {
     this.listeners.add(listener);
@@ -56,11 +60,24 @@ export class RoutineWorkflow {
   };
   attach = () => {
     this.disposed = false;
+    this.options.signal.addEventListener("abort", this.endLifetime, {
+      once: true,
+    });
+    if (this.options.signal.aborted) this.endLifetime();
     return this.dispose;
   };
   dispose = () => {
     this.disposed = true;
+    this.options.signal.removeEventListener("abort", this.endLifetime);
     this.listeners.clear();
+  };
+  private endLifetime = () => {
+    this.state = Object.freeze({
+      ...this.state,
+      saved: null,
+      settled: false,
+    });
+    for (const listener of this.listeners) listener();
   };
   private guard = () => {
     if (this.state.accessDenied) throw new RoutinesAccessDenied();
@@ -100,7 +117,7 @@ export class RoutineWorkflow {
         throw new RoutinesAccessDenied();
       return response;
     } catch (error) {
-      if (error instanceof RoutinesAccessDenied) {
+      if (error instanceof RoutinesAccessDenied && !this.state.accessDenied) {
         // Clearing a refused view must also work during temporary identity revalidation.
         // The encrypted journal retains the exact command and any uncertain outcome.
         this.state = Object.freeze({
@@ -111,6 +128,7 @@ export class RoutineWorkflow {
           message: error.message,
         });
         for (const listener of this.listeners) listener();
+        this.options.onAccessLost?.();
       }
       throw error;
     }

@@ -88,6 +88,7 @@ export class ConversationHostController extends SessionLifetimeController<
             signal,
             fetcher,
             session.context,
+            lifetime.onAccessLost,
           ),
         });
         try {

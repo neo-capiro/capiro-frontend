@@ -38,9 +38,11 @@ export function createRoutinesAccess(
   fetcher: typeof fetch = fetch,
 ): RoutinesAccess {
   let token = lifetime.aborted ? "" : credential;
+  let denied = false;
   lifetime.addEventListener("abort", () => (token = ""), { once: true });
   return {
     async exchange(route, request, expectation, caller) {
+      if (denied) throw new RoutinesAccessDenied();
       const body = JSON.stringify(request);
       await receiveRoutinesRequest(route, body);
       return withActionDeadline([caller, lifetime], async (signal) => {
@@ -62,6 +64,7 @@ export function createRoutinesAccess(
         );
         // A refusal retires local access even when an intermediary returns a non-JSON body.
         if (response.status === 401 || response.status === 403) {
+          denied = true;
           token = "";
           void response.body?.cancel().catch(() => undefined);
           throw new RoutinesAccessDenied();
