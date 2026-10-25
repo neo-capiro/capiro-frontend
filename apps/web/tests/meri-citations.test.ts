@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import type { UIEvent } from "@capiro/meri-contracts";
 import { validateUIEvent } from "@capiro/meri-contracts/browser";
 import { ConversationTurn } from "../src/features/meri/conversation/ConversationTurn";
+import { savedTurns } from "../src/features/meri/conversation/saved-turns";
 import {
   turnFromEvents,
   type TurnView,
@@ -121,6 +122,54 @@ describe("saved citation reference presentation", () => {
 });
 
 describe("tool-result truthfulness", () => {
+  it("qualifies a missing result until its saved completion update is loaded", () => {
+    const firstStart = events.findIndex(
+      (event) => event.type === "tool.started",
+    );
+    const started = events[firstStart]!;
+    if (started.type !== "tool.started")
+      throw new Error("Missing tool fixture");
+    expect(
+      events
+        .slice(firstStart + 1)
+        .some(
+          (event) =>
+            event.type === "tool.completed" &&
+            event.data.requestId === started.data.requestId,
+        ),
+    ).toBe(true);
+    const restore = (loaded: readonly UIEvent[]) =>
+      savedTurns({
+        latest: {},
+        turns: [
+          {
+            run: { binding: events[0]!.binding, state: "completed" },
+            request: { prompt: "Synthetic partial history" },
+            promptLineage: { logicalRequestId: "synthetic-request" },
+            lastSequence: events.at(-1)!.sequence,
+          },
+        ],
+        events: loaded.map((event) => ({ sequence: event.sequence, event })),
+        // Only the already-admitted fields consumed by the saved-turn fold.
+      } as unknown as NonNullable<Parameters<typeof savedTurns>[0]>)[0]!;
+    const partial = restore(events.slice(0, firstStart + 1));
+    expect(partial.incompleteHistory).toBe(true);
+    expect(partial.runState).toBe("completed");
+    const partialHtml = render(partial);
+    expect(partialHtml).toContain(
+      "More saved updates for this run have not been loaded.",
+    );
+    expect(partialHtml).not.toContain("No result recorded");
+    expect(partialHtml).toContain("Result not in loaded updates");
+    const full = restore(events);
+    expect(full.incompleteHistory).toBe(false);
+    expect(render(full)).toContain("Result recorded · outcome unavailable");
+    expect(render(full)).not.toContain("Result not in loaded updates");
+    expect(
+      render({ ...partial, incompleteHistory: false, omittedPrefix: true }),
+    ).toContain("Result not in loaded updates");
+  });
+
   it("does not present a recorded result as success when a run error follows", () => {
     const html = render({
       runState: "failed",

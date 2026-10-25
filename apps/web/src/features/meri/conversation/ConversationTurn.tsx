@@ -92,9 +92,11 @@ export function ConversationTurn({
                   {" · "}
                   {tool.resultReference
                     ? "Result recorded · outcome unavailable"
-                    : isTerminal(turn.runState)
-                      ? "No result recorded"
-                      : "Awaiting result"}
+                    : turn.omittedPrefix || turn.incompleteHistory
+                      ? "Result not in loaded updates"
+                      : isTerminal(turn.runState)
+                        ? "No result recorded"
+                        : "Awaiting result"}
                 </li>
               ))}
             </ul>
