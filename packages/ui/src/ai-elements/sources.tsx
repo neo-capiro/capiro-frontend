@@ -1,5 +1,8 @@
 "use client";
 
+// Capiro M3 owner adaptation: SourcesProps follows the existing Collapsible props
+// so its already-forwarded disclosure options are typed. Runtime behavior is unchanged.
+
 import {
   Collapsible,
   CollapsibleContent,
@@ -9,7 +12,7 @@ import { cn } from "../lib/utils";
 import { BookIcon, ChevronDownIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
-export type SourcesProps = ComponentProps<"div">;
+export type SourcesProps = ComponentProps<typeof Collapsible>;
 
 export const Sources = ({ className, ...props }: SourcesProps) => (
   <Collapsible
