@@ -220,3 +220,119 @@ test("a denied current-access read clears saved history detail", async ({
   expect(state.calls.filter((call) => call.method !== "GET")).toEqual([]);
   expect(state.errors).toEqual([]);
 });
+
+/** Override only the version read; later registrations win over the base fixture. */
+async function overrideVersions(
+  page: Page,
+  handler: () =>
+    | { json?: unknown; status?: number }
+    | Promise<{ json?: unknown; status?: number }>,
+) {
+  await page.route("**/api/capiro/*", async (route) => {
+    const key = decodeURIComponent(
+      new URL(route.request().url()).pathname.split("/").pop()!,
+    );
+    if (key !== "workspace.draft.versions") return route.fallback();
+    const reply = await handler();
+    try {
+      return await route.fulfill(
+        reply.status
+          ? { status: reply.status, json: reply.json }
+          : { json: reply.json },
+      );
+    } catch {
+      // The view aborting the superseded read closes this route; ignore it.
+    }
+  });
+}
+
+test("a late response after close never overwrites the current saved history", async ({
+  page,
+}) => {
+  const state = await fixture(page);
+  const stale = savedVersions().map((version) => ({
+    ...version,
+    label: "Stale save",
+  }));
+  let calls = 0;
+  let releaseStale!: () => void;
+  const staleGate = new Promise<void>((resolve) => (releaseStale = resolve));
+  await overrideVersions(page, () =>
+    calls++ === 0
+      ? staleGate.then(() => ({ json: stale }))
+      : { json: savedVersions() },
+  );
+  await page.goto(editorUrl);
+  await page.getByRole("button", { name: "History", exact: true }).click();
+  await expect(history(page).getByRole("status")).toContainText("Loading");
+  // Close while the first read is still in flight, then reopen (a fresh read).
+  await page.getByRole("button", { name: "Close dialog" }).click();
+  await expect(history(page)).toHaveCount(0);
+  await openHistory(page);
+  await expect(
+    saveList(page).getByRole("tab", { name: "Earlier save" }),
+  ).toBeVisible();
+  // The obsolete response arrives only now and must never reach the view.
+  releaseStale();
+  await page.waitForTimeout(400);
+  await expect(
+    saveList(page).getByRole("tab", { name: "Earlier save" }),
+  ).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Stale save" })).toHaveCount(0);
+  expect(state.errors).toEqual([]);
+});
+
+test("already populated saved detail clears when the next read is denied", async ({
+  page,
+}) => {
+  const state = await fixture(page);
+  const denial = {
+    status: 403,
+    json: { message: "You do not have permission to access this document" },
+  };
+  let calls = 0;
+  await overrideVersions(page, () =>
+    calls++ === 0 ? { json: savedVersions() } : denial,
+  );
+  await page.goto(editorUrl);
+  await openHistory(page);
+  // Populate the read-only detail for one saved version.
+  await saveList(page).getByRole("tab", { name: "Earlier save" }).click();
+  await expect(history(page).getByText("Parent document")).toBeVisible();
+  // A later authorized read is denied: the populated detail must not remain.
+  await page.getByRole("button", { name: "Close dialog" }).click();
+  await expect(history(page)).toHaveCount(0);
+  await openHistory(page);
+  await expect(history(page).getByRole("alert")).toContainText(
+    "do not have permission",
+  );
+  await expect(history(page).getByText("Parent document")).toHaveCount(0);
+  await expect(page.getByRole("tablist")).toHaveCount(0);
+  expect(state.calls.filter((call) => call.method !== "GET")).toEqual([]);
+  expect(state.errors).toEqual([]);
+});
+
+test("already populated saved detail clears when a later read expires the session", async ({
+  page,
+}) => {
+  const state = await fixture(page);
+  const revoked = { status: 401, json: { message: "Session expired" } };
+  let calls = 0;
+  await overrideVersions(page, () =>
+    calls++ === 0 ? { json: savedVersions() } : revoked,
+  );
+  await page.goto(editorUrl);
+  await openHistory(page);
+  await saveList(page).getByRole("tab", { name: "Earlier save" }).click();
+  await expect(history(page).getByText("Parent document")).toBeVisible();
+  // Revocation: the next read returns 401 and the session owner ends the view.
+  await page.getByRole("button", { name: "Close dialog" }).click();
+  await expect(history(page)).toHaveCount(0);
+  await page.getByRole("button", { name: "History", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Your session expired" }),
+  ).toBeVisible();
+  await expect(history(page)).toHaveCount(0);
+  await expect(page.getByText("Parent document")).toHaveCount(0);
+  expect(state.errors).toEqual([]);
+});

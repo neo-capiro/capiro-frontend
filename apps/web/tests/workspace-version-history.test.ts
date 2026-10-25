@@ -10,6 +10,7 @@ import {
   canonicalJson,
   chronologicalPair,
   compareSavedVersions,
+  hasShownChanges,
   safeDocumentLines,
   unknownContentExplanations,
   versionParentClient,
@@ -318,7 +319,65 @@ it("reports no change for identical saved snapshots", () => {
     sectionsAdded: [],
     sectionsRemoved: [],
     sectionsChanged: [],
+    otherContentChanged: false,
   });
+});
+
+// ---- correction counterexamples (synthetic, no recursion) ------------------
+
+it("never reports equality when only the unshown saved ask differs", () => {
+  const shown = {
+    docTitle: "Same",
+    config: { clientId: CLIENT_ID, sectionContent: { Body: "one" } },
+    documents: [
+      { id: "t1", name: "Alpha", ordinal: 0, body: blockedLines("one") },
+    ],
+  };
+  const older = savedVersion({
+    id: V_OLD,
+    createdAt: "2026-10-24T10:00:00Z",
+    snapshot: { ...shown, ask: { amount: 1 } },
+  });
+  const newer = savedVersion({
+    id: V_NEW,
+    createdAt: "2026-10-25T10:00:00Z",
+    snapshot: { ...shown, ask: { amount: 2 } },
+  });
+  const diff = compareSavedVersions(older, newer);
+  expect(hasShownChanges(diff)).toBe(false);
+  expect(diff.otherContentChanged).toBe(true);
+});
+
+it("never reports equality when only section ordering differs", () => {
+  const order = (sections: string[]) => ({
+    docTitle: "Same",
+    config: { clientId: CLIENT_ID, sections, sectionContent: { Body: "one" } },
+    documents: [],
+  });
+  const diff = compareSavedVersions(
+    savedVersion({
+      id: V_OLD,
+      createdAt: "2026-10-24T10:00:00Z",
+      snapshot: order(["Body", "Ask"]),
+    }),
+    savedVersion({
+      id: V_NEW,
+      createdAt: "2026-10-25T10:00:00Z",
+      snapshot: order(["Ask", "Body"]),
+    }),
+  );
+  expect(hasShownChanges(diff)).toBe(false);
+  expect(diff.otherContentChanged).toBe(true);
+});
+
+it("refuses a saved receipt with no snapshot even for an unassociated draft", () => {
+  const unassociated = { id: DRAFT_ID } as unknown as WorkspaceDraftDocument;
+  const result = admitSavedVersions(
+    [savedVersion({ snapshot: undefined })],
+    unassociated,
+  );
+  expect(result.versions).toHaveLength(0);
+  expect(result.refusal).toMatch(/missing its saved content/i);
 });
 
 // ---- pure content projection ---------------------------------------------
@@ -538,4 +597,40 @@ it("explains unrecognised saved content and never renders raw markup", () => {
   expect(markup).toContain("config.tone");
   expect(markup).toContain("&lt;img src=x onerror=alert(1)&gt;");
   expect(markup).not.toContain(MARKUP_PAYLOAD);
+});
+
+it("qualifies the comparison instead of claiming equality when unshown content differs", () => {
+  const shown = {
+    docTitle: "Same",
+    config: { clientId: CLIENT_ID, sectionContent: { Body: "one" } },
+    documents: [
+      { id: "t1", name: "Alpha", ordinal: 0, body: blockedLines("one") },
+    ],
+  };
+  h.result.data = [
+    savedVersion({
+      id: V_OLD,
+      createdAt: "2026-10-24T10:00:00Z",
+      label: "Earlier save",
+      snapshot: { ...shown, ask: { amount: 1 } },
+    }),
+    savedVersion({
+      id: V_NEW,
+      createdAt: "2026-10-25T10:00:00Z",
+      label: "Later save",
+      snapshot: { ...shown, ask: { amount: 2 } },
+    }),
+  ];
+  const markup = renderHistory([true, V_OLD, V_NEW]);
+  expect(markup).toContain("Comparing");
+  expect(markup).not.toContain("No differences between these saved versions");
+  expect(markup).toContain("does not show");
+});
+
+it("refuses display when a saved receipt has no snapshot", () => {
+  h.result.data = [savedVersion({ snapshot: undefined })];
+  const markup = renderHistory([true, V_OLD, undefined]);
+  expect(markup).toContain('role="alert"');
+  expect(markup).toContain("missing its saved content");
+  expect(markup).not.toContain("Parent document");
 });

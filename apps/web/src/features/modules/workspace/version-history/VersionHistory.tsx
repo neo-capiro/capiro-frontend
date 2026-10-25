@@ -19,6 +19,7 @@ import {
   admitSavedVersions,
   chronologicalPair,
   compareSavedVersions,
+  hasShownChanges,
   safeDocumentLines,
   unknownContentExplanations,
   versionParentClient,
@@ -166,16 +167,7 @@ function SavedVersionComparison({
 }) {
   const [older, newer] = chronologicalPair(left, right);
   const diff = compareSavedVersions(older, newer);
-  const changed =
-    diff.titleChanged ||
-    diff.tabsAdded.length > 0 ||
-    diff.tabsRemoved.length > 0 ||
-    diff.tabsReordered.length > 0 ||
-    diff.tabsRenamed.length > 0 ||
-    diff.bodiesChanged.length > 0 ||
-    diff.sectionsAdded.length > 0 ||
-    diff.sectionsRemoved.length > 0 ||
-    diff.sectionsChanged.length > 0;
+  const changed = hasShownChanges(diff);
   return (
     <Panel
       title={`Comparing ${older.label ?? "saved version"} → ${newer.label ?? "saved version"}`}
@@ -198,7 +190,7 @@ function SavedVersionComparison({
             : "Unchanged"}
         </dd>
       </dl>
-      {changed ? (
+      {changed && (
         <ul>
           {diff.tabsAdded.length > 0 && (
             <li>
@@ -234,7 +226,15 @@ function SavedVersionComparison({
             <li>Sections changed: {diff.sectionsChanged.join(", ")}</li>
           )}
         </ul>
-      ) : (
+      )}
+      {!changed && diff.otherContentChanged && (
+        <p>
+          Saved content that this comparison does not show — the saved ask,
+          section ordering or other preserved fields — differs between these
+          versions, so they are not identical.
+        </p>
+      )}
+      {!changed && !diff.otherContentChanged && (
         <p>No differences between these saved versions.</p>
       )}
     </Panel>

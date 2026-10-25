@@ -130,9 +130,12 @@ export type AdmittedVersions = {
 };
 
 /**
- * Admit the returned version rows for this draft. A row whose parent draft or
- * snapshot client association does not match the document under view is a
- * mismatched receipt: display is refused rather than showing foreign history.
+ * Admit the returned version rows for this draft. A row without its saved
+ * snapshot, or whose parent draft or snapshot client association does not match
+ * the document under view, is an unusable/mismatched receipt: display is refused
+ * rather than inventing empty content or showing foreign history. The shared
+ * response schema stays optional for existing metadata/write consumers; the
+ * saved-detail shape is enforced here, at this view's boundary.
  */
 export function admitSavedVersions(
   rows: readonly SavedVersion[],
@@ -140,6 +143,12 @@ export function admitSavedVersions(
 ): AdmittedVersions {
   const currentClient = draft.clientId ?? null;
   for (const row of rows) {
+    if (!row.snapshot)
+      return {
+        versions: [],
+        refusal:
+          "A saved version is missing its saved content; display is refused.",
+      };
     if (row.draftId.toLowerCase() !== draft.id.toLowerCase())
       return { versions: [], refusal: "History belongs to another document." };
     if (versionParentClient(row.snapshot) !== currentClient)
@@ -163,7 +172,29 @@ export type SavedVersionDiff = {
   sectionsAdded: string[];
   sectionsRemoved: string[];
   sectionsChanged: string[];
+  /**
+   * True when the shown fields match but other saved content still differs —
+   * e.g. the saved ask, config.sections ordering, or any other preserved JSON
+   * the read-only comparison does not project. Guards against claiming equality
+   * of two materially different saved revisions.
+   */
+  otherContentChanged: boolean;
 };
+
+/** Whether the shown comparison found any difference. */
+export function hasShownChanges(diff: SavedVersionDiff): boolean {
+  return (
+    diff.titleChanged ||
+    diff.tabsAdded.length > 0 ||
+    diff.tabsRemoved.length > 0 ||
+    diff.tabsReordered.length > 0 ||
+    diff.tabsRenamed.length > 0 ||
+    diff.bodiesChanged.length > 0 ||
+    diff.sectionsAdded.length > 0 ||
+    diff.sectionsRemoved.length > 0 ||
+    diff.sectionsChanged.length > 0
+  );
+}
 
 const tabName = (document: SavedVersionDocument) =>
   document.name ?? "Untitled tab";
@@ -222,23 +253,45 @@ export function compareSavedVersions(
     : [];
   const beforeSections = before.snapshot?.config?.sectionContent ?? {};
   const afterSections = after.snapshot?.config?.sectionContent ?? {};
+  const titleChanged =
+    (before.snapshot?.docTitle ?? "") !== (after.snapshot?.docTitle ?? "");
+  const sectionsAdded = Object.keys(afterSections).filter(
+    (name) => !(name in beforeSections),
+  );
+  const sectionsRemoved = Object.keys(beforeSections).filter(
+    (name) => !(name in afterSections),
+  );
+  const sectionsChanged = Object.keys(afterSections).filter(
+    (name) =>
+      name in beforeSections && beforeSections[name] !== afterSections[name],
+  );
+  const shownChanged =
+    titleChanged ||
+    tabsAdded.length > 0 ||
+    tabsRemoved.length > 0 ||
+    tabsReordered.length > 0 ||
+    tabsRenamed.length > 0 ||
+    bodiesChanged.length > 0 ||
+    sectionsAdded.length > 0 ||
+    sectionsRemoved.length > 0 ||
+    sectionsChanged.length > 0;
+  // Whole-snapshot equality is claimed only when nothing is left unchecked: the
+  // shown comparison omits the saved ask, config.sections ordering and any other
+  // preserved JSON, so an unshown difference must still be reported.
+  const otherContentChanged =
+    !shownChanged &&
+    canonicalJson(before.snapshot ?? null) !==
+      canonicalJson(after.snapshot ?? null);
   return {
-    titleChanged:
-      (before.snapshot?.docTitle ?? "") !== (after.snapshot?.docTitle ?? ""),
+    titleChanged,
     tabsAdded,
     tabsRemoved,
     tabsReordered,
     tabsRenamed,
     bodiesChanged,
-    sectionsAdded: Object.keys(afterSections).filter(
-      (name) => !(name in beforeSections),
-    ),
-    sectionsRemoved: Object.keys(beforeSections).filter(
-      (name) => !(name in afterSections),
-    ),
-    sectionsChanged: Object.keys(afterSections).filter(
-      (name) =>
-        name in beforeSections && beforeSections[name] !== afterSections[name],
-    ),
+    sectionsAdded,
+    sectionsRemoved,
+    sectionsChanged,
+    otherContentChanged,
   };
 }
