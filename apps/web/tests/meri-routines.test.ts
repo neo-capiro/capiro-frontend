@@ -2,13 +2,20 @@ import { readFileSync } from "node:fs";
 import { beforeEach, expect, it, vi } from "vitest";
 import { createElement, type ComponentProps } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { RoutinesWorkspace } from "../src/features/meri/routines/RoutinesWorkspace";
+// The platform module registers the mocked recovery storage, so it is imported before anything that
+// reaches the journal at runtime: the routine host and cards below import the workflow, which does.
 import {
   installPlatform,
   db,
   local,
   barrier,
 } from "./command-recovery-platform";
+import { RoutinesWorkspace } from "../src/features/meri/routines/RoutinesWorkspace";
+import { MeriRoutinesHost } from "../src/features/meri/routines/MeriRoutinesHost";
+import { RoutineReview } from "../src/features/meri/routines/RoutineReview";
+import { ConversationRoutine } from "../src/features/meri/routines/ConversationRoutine";
+import { ConversationHostController } from "../src/shared/meri-conversations/host-controller";
+import type { IntentsAccess } from "../src/shared/meri-intents/access";
 import { RoutineWorkflow } from "../src/shared/meri-routines/workflow";
 import {
   routineRecovery,
@@ -31,7 +38,16 @@ const view = vi.hoisted(() => ({
   values: [] as unknown[],
   index: 0,
   changed: false,
+  captureEffects: false,
+  effects: [] as Array<() => void | (() => void)>,
   buttons: [] as ComponentProps<typeof import("@capiro/ui/button").Button>[],
+}));
+// The static render harness has no providers: the routine host reads these four, nothing else.
+const providers = vi.hoisted(() => ({
+  identity: undefined as unknown,
+  selected: undefined as unknown,
+  api: undefined as unknown,
+  capiro: undefined as unknown,
 }));
 vi.mock("react", async (original) => {
   const actual = await original<typeof import("react")>();
@@ -49,13 +65,63 @@ vi.mock("react", async (original) => {
       },
     ];
   };
+  // One cached value per hook slot, exactly as useState above: the production dependency lists are stable.
+  const useMemo = (factory: () => unknown) => {
+    const index = view.index++;
+    if (index === view.values.length) view.values.push(factory());
+    return view.values[index];
+  };
+  // A static render never runs effects; only a test that asks for them drives this one.
+  const useEffect = (effect: () => void | (() => void)) => {
+    if (view.captureEffects) view.effects.push(effect);
+  };
   return {
     ...actual,
     useState,
+    useMemo,
+    useEffect,
     useRef: (initial: unknown) => useState({ current: initial })[0],
     useLayoutEffect: (effect: () => void) => effect(),
     useSyncExternalStore: (_subscribe: unknown, snapshot: () => unknown) =>
       snapshot(),
+  };
+});
+// MeriRoutinesHost's four providers; every other routine path is exercised for real.
+vi.mock("../src/shared/portfolio/auth/identity", async (original) => {
+  const actual =
+    await original<typeof import("../src/shared/portfolio/auth/identity")>();
+  return {
+    ...actual,
+    useIdentity: () =>
+      providers.identity as unknown as ReturnType<typeof actual.useIdentity>,
+  };
+});
+vi.mock("../src/shared/session/SelectedClient", async (original) => {
+  const actual =
+    await original<typeof import("../src/shared/session/SelectedClient")>();
+  return {
+    ...actual,
+    useSelectedClient: () =>
+      providers.selected as unknown as ReturnType<
+        typeof actual.useSelectedClient
+      >,
+  };
+});
+vi.mock("../src/shared/portfolio/api/provider", async (original) => {
+  const actual =
+    await original<typeof import("../src/shared/portfolio/api/provider")>();
+  return {
+    ...actual,
+    useApi: () => providers.api as unknown as ReturnType<typeof actual.useApi>,
+  };
+});
+vi.mock("../src/shared/capiro/CapiroBoundary", async (original) => {
+  const actual =
+    await original<typeof import("../src/shared/capiro/CapiroBoundary")>();
+  return {
+    ...actual,
+    useCapiro: () =>
+      providers.capiro as unknown as ReturnType<typeof actual.useCapiro>,
   };
 });
 vi.mock("@capiro/ui/button", () => ({
@@ -78,7 +144,15 @@ vi.mock("../src/features/meri/routines/RoutineForm", () => ({
 beforeEach(() => {
   view.values = [];
   view.buttons = [];
+  view.captureEffects = false;
+  view.effects = [];
 });
+/** Runs the effects a test captured, once, at the point the real renderer would have. */
+function runEffects() {
+  const effects = view.effects;
+  view.effects = [];
+  for (const effect of effects) effect();
+}
 function renderWorkspace(port: RoutineWorkflow) {
   let html = "";
   for (let render = 0; render < 5; render++) {
@@ -733,6 +807,374 @@ it("reconnect selects saved conversation without expired run and fresh Core iden
     }),
   ).rejects.toThrow();
   expect(issue).toHaveBeenCalledTimes(1);
+});
+
+/**
+ * One conversation session lifetime, two real routine consumers and the real host. Everything except
+ * the four React providers above is the production path: transport, workflow, journal and views.
+ */
+function conversationReceipt() {
+  return {
+    credential: "action_session_" + "a".repeat(43),
+    expiresAtMs: Date.now() + 60_000,
+    context: f.context,
+  };
+}
+/** ConversationRoutine.tsx:34-38 composes exactly this from the shared connection it is handed. */
+function conversationConsumer(
+  connection: NonNullable<IntentsAccess["routines"]>,
+  proposalId: string,
+) {
+  return new RoutineWorkflow({
+    ...connection,
+    seed: {
+      requestId: proposalId,
+      context: {
+        ...f.context,
+        selectedClientId: connection.context.selectedClientId,
+      },
+      prepare: { ...f.request, requestId: proposalId },
+      proposal: { ...f.prepared.proposal, proposalId },
+      approving: false,
+    },
+    isCurrent: () => !connection.signal.aborted,
+  });
+}
+function renderReview(port: RoutineWorkflow) {
+  view.index = 0;
+  view.buttons = [];
+  view.changed = false;
+  return renderToStaticMarkup(createElement(RoutineReview, { port }));
+}
+function scheduleItem(proposalId: string) {
+  return {
+    deliveryId: "sdk:" + "b".repeat(64),
+    createdAt: f.prepared.proposal.projection.createdAt,
+    operation: { id: "schedule_task", version: "0.2.0" } as const,
+    state: "prepared" as const,
+    kind: "schedule_proposal" as const,
+    binding: {
+      tenantId: f.context.tenantId,
+      actorId: f.context.actorId,
+      conversationId: f.context.conversationId,
+      runId: f.context.runId,
+      attemptId: crypto.randomUUID(),
+      workerId: crypto.randomUUID(),
+      writerFence: 1,
+    },
+    request: f.request.request,
+    proposal: { ...f.prepared.proposal, proposalId },
+  };
+}
+const account = () => ({
+  user: { id: f.context.actorId, email: null },
+  tenant: { id: f.context.tenantId, name: "Synthetic" },
+  role: "standard_user",
+});
+function conversationHost(fetcher: typeof fetch) {
+  return new ConversationHostController({
+    hints: { clientId: f.context.selectedClientId },
+    account: { tenantId: f.context.tenantId, actorId: f.context.actorId },
+    fetcher,
+  });
+}
+function readyConnection(host: ConversationHostController) {
+  const snapshot = host.getSnapshot();
+  if (snapshot.status !== "ready") throw new Error(snapshot.status);
+  const connection = snapshot.port.intents.routines;
+  if (!connection) throw new Error("Routine connection is missing");
+  return connection;
+}
+/** The actual standalone host: its own composition, its own issuance, no test-local port factory. */
+function routineAccount() {
+  return account();
+}
+type HostHarness = {
+  calls: { path: string; body: unknown }[];
+  setReply: (reply: (route: string, body: unknown) => Response) => void;
+};
+function hostHarness(): HostHarness {
+  const calls: { path: string; body: unknown }[] = [];
+  providers.api = createApiClient(
+    vi.fn(async () =>
+      Response.json(routineAccount()),
+    ) as unknown as typeof fetch,
+  );
+  providers.selected = {
+    state: "authorized-client",
+    requestedId: f.context.selectedClientId,
+    client: { name: "Synthetic client" },
+  };
+  providers.identity = {
+    data: routineAccount(),
+    error: null,
+    isFetching: false,
+  };
+  providers.capiro = {
+    request: async () => {
+      throw new Error("The general routine context is not enabled.");
+    },
+  };
+  let reply: (route: string, body: unknown) => Response = () =>
+    new Response("refused", { status: 403 });
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (url: string, init?: RequestInit) => {
+      const path = String(url);
+      const body = init?.body ? JSON.parse(String(init.body)) : undefined;
+      calls.push({ path, body });
+      if (path === "/api/action-followthrough/session")
+        return Response.json(conversationReceipt());
+      return reply(
+        path.replace("/api/action-followthrough/routine-", ""),
+        body,
+      );
+    }),
+  );
+  return { calls, setReply: (next) => (reply = next) };
+}
+const issuances = (h: HostHarness) =>
+  h.calls.filter((call) => call.path === "/api/action-followthrough/session")
+    .length;
+const routineCalls = (h: HostHarness) =>
+  h.calls.filter((call) => call.path.includes("/routine-"));
+function renderHost() {
+  view.index = 0;
+  view.buttons = [];
+  view.changed = false;
+  return renderToStaticMarkup(
+    createElement(MeriRoutinesHost, { enabled: true, generalEnabled: false }),
+  );
+}
+/** The host settles its visible workspace from state it derives during a render pass. */
+function hostMarkup(passes = 3) {
+  let html = "";
+  for (let pass = 0; pass < passes; pass++) html = renderHost();
+  return html;
+}
+function hostButton(label: string) {
+  return view.buttons.find((props) => props.children === label);
+}
+function clickHost(label: string) {
+  const button = hostButton(label);
+  expect(button, label).toBeDefined();
+  expect(button!.disabled).not.toBe(true);
+  button!.onClick!({} as never);
+}
+
+it("a refused routine action retires the exact standalone connection so explicit Connect issues fresh access without reposting the saved approval", async () => {
+  const harness = hostHarness();
+  view.captureEffects = true;
+  renderHost();
+  runEffects();
+  clickHost("Connect routines");
+  await vi.waitFor(() => {
+    hostMarkup();
+    expect(hostButton("Connect routines")).toBeUndefined();
+  });
+  expect(issuances(harness)).toBe(1);
+  expect(routineCalls(harness)).toHaveLength(0);
+  // The exact pending approval this connection retained, which a reconnect must never resend from.
+  await journal().reserve({
+    requestId: f.request.requestId,
+    context: f.context,
+    prepare: f.request,
+    proposal: f.prepared.proposal,
+    approving: true,
+  } satisfies SavedRoutine);
+  harness.setReply(() => new Response("not JSON", { status: 403 }));
+  clickHost("Refresh routines");
+  await vi.waitFor(() =>
+    expect(hostMarkup()).toContain("Routine access was denied"),
+  );
+  // The refusal retires the exact lifetime: the promised reconnect is available and issues again.
+  expect(hostButton("Connect routines")?.disabled).toBe(false);
+  expect(issuances(harness)).toBe(1);
+  clickHost("Connect routines");
+  await vi.waitFor(() => expect(issuances(harness)).toBe(2));
+  // Fresh access is issued by the explicit click only; the refused action and the saved approval are not replayed.
+  expect(routineCalls(harness)).toHaveLength(1);
+  expect(routineCalls(harness)[0]!.path).toBe(
+    "/api/action-followthrough/routine-list",
+  );
+  const retained = (await journal().load()) satisfies SavedRoutine | null;
+  expect(retained?.approving).toBe(true);
+  expect(retained?.proposal?.proposalId).toBe(f.prepared.proposal.proposalId);
+});
+
+it("a transient read failure and a paused client keep the connected routine session and its current-owner rows", async () => {
+  const harness = hostHarness();
+  view.captureEffects = true;
+  renderHost();
+  runEffects();
+  clickHost("Connect routines");
+  await vi.waitFor(() => {
+    hostMarkup();
+    expect(hostButton("Connect routines")).toBeUndefined();
+  });
+  harness.setReply(() => Response.json(pagedRoutines()));
+  clickHost("Refresh routines");
+  await vi.waitFor(() =>
+    expect(hostMarkup()).toContain(
+      f.listed.page.rows[0].projection.destinationId,
+    ),
+  );
+  harness.setReply(() =>
+    Response.json({ error: { code: "ROUTINES_UNAVAILABLE" } }, { status: 503 }),
+  );
+  clickHost("Refresh routines");
+  await vi.waitFor(() =>
+    expect(hostMarkup()).toContain(
+      "Previously shown results are not current authority",
+    ),
+  );
+  expect(hostMarkup()).toContain(
+    f.listed.page.rows[0].projection.destinationId,
+  );
+  expect(hostButton("Connect routines")).toBeUndefined();
+  expect(issuances(harness)).toBe(1);
+  // A paused client hides current rows and admits no new action without retiring the session.
+  providers.identity = {
+    data: routineAccount(),
+    error: null,
+    isFetching: true,
+  };
+  const paused = hostMarkup();
+  expect(paused).toContain("Verifying current account and client access");
+  expect(paused).toContain(f.listed.page.rows[0].projection.destinationId);
+  expect(hostButton("Connect routines")).toBeUndefined();
+  providers.identity = {
+    data: routineAccount(),
+    error: null,
+    isFetching: false,
+  };
+  expect(hostMarkup()).toContain(
+    f.listed.page.rows[0].projection.destinationId,
+  );
+  expect(issuances(harness)).toBe(1);
+});
+
+it("one refused routine card retires the shared conversation lifetime so its sibling loses saved content immediately, held reply included", async () => {
+  const refused = "22222222-2222-4222-8222-222222222221";
+  const held = "22222222-2222-4222-8222-222222222222";
+  const started = barrier();
+  const release = barrier();
+  const fetcher = vi.fn<typeof fetch>(async (url, init) => {
+    const path = String(url);
+    if (path === "/api/action-followthrough/session")
+      return Response.json(conversationReceipt());
+    const body = JSON.parse(String(init?.body));
+    if (path.endsWith("/routine-approve") && body.proposalId === held) {
+      started.resolve();
+      await release.promise;
+      return Response.json(f.acknowledged);
+    }
+    return new Response("refused", { status: 403 });
+  });
+  const host = conversationHost(fetcher);
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const connection = readyConnection(host);
+    expect(typeof connection.onAccessLost).toBe("function");
+    const first = conversationConsumer(connection, refused);
+    const sibling = conversationConsumer(connection, held);
+    await first.load();
+    await sibling.load();
+    expect(renderReview(first)).toContain(f.request.request.taskInstruction);
+    expect(renderReview(sibling)).toContain(f.request.request.taskInstruction);
+    // The sibling's approval is already dispatched on the still-valid token when the refusal arrives.
+    const pending = sibling.approve();
+    await started.promise;
+    expect(sibling.getSnapshot().saved?.approving).toBe(true);
+    await first.approve();
+    expect(first.getSnapshot()).toMatchObject({
+      accessDenied: true,
+      saved: null,
+    });
+    // The definitive refusal retires the one shared lifetime, taking the sibling's view with it.
+    expect(sibling.getSnapshot().saved).toBeNull();
+    expect(renderReview(sibling)).not.toContain(
+      f.request.request.taskInstruction,
+    );
+    expect(host.getSnapshot().status).toBe("expired");
+    expect(host.getExpirationReason()).toBe("access-lost");
+    // The refused transport keeps its typed denial without repeating the refused call.
+    const sent = fetcher.mock.calls.length;
+    const list = { afterScheduleId: null, limit: 20, historyLimit: 10 };
+    await expect(
+      connection.access.exchange(
+        "list",
+        list,
+        { request: list },
+        connection.signal,
+      ),
+    ).rejects.toBeInstanceOf(RoutinesAccessDenied);
+    expect(fetcher).toHaveBeenCalledTimes(sent);
+    // Both exact pending commands are still retained.
+    expect(
+      (await routineRecovery(f.context, () => {}, refused).load())?.approving,
+    ).toBe(true);
+    expect(
+      (await routineRecovery(f.context, () => {}, held).load())?.approving,
+    ).toBe(true);
+    release.resolve();
+    await pending;
+    // A late admitted answer cannot restore the retired view or change the retained command.
+    expect(sibling.getSnapshot().saved).toBeNull();
+    expect(renderReview(sibling)).not.toContain(
+      f.request.request.taskInstruction,
+    );
+    expect(
+      (await routineRecovery(f.context, () => {}, held).load())?.proposal
+        ?.proposalId,
+    ).toBe(held);
+  } finally {
+    detach();
+  }
+});
+
+it("the production conversation card retires its saved content when the shared session deny ends the same lifetime", async () => {
+  const refused = "22222222-2222-4222-8222-222222222223";
+  const card = "22222222-2222-4222-8222-222222222224";
+  const fetcher = vi.fn<typeof fetch>(async (url) =>
+    String(url) === "/api/action-followthrough/session"
+      ? Response.json(conversationReceipt())
+      : new Response("refused", { status: 403 }),
+  );
+  const host = conversationHost(fetcher);
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const connection = readyConnection(host);
+    view.captureEffects = true;
+    const renderCard = () => {
+      view.index = 0;
+      view.buttons = [];
+      view.changed = false;
+      return renderToStaticMarkup(
+        createElement(ConversationRoutine, {
+          item: scheduleItem(card),
+          connection,
+        }),
+      );
+    };
+    renderCard();
+    runEffects();
+    await vi.waitFor(() =>
+      expect(renderCard()).toContain(f.request.request.taskInstruction),
+    );
+    const denier = conversationConsumer(connection, refused);
+    await denier.load();
+    await denier.approve();
+    expect(denier.getSnapshot().accessDenied).toBe(true);
+    // The card's own port observes the same shared lifetime, so its view ends with it.
+    expect(renderCard()).not.toContain(f.request.request.taskInstruction);
+    expect(host.getSnapshot().status).toBe("expired");
+    expect(renderCard()).not.toContain("Approve routine change");
+  } finally {
+    detach();
+  }
 });
 
 it("existing proxy permits only fixed admitted routine paths with current cookie and opaque access", async () => {
