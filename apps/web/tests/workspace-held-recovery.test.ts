@@ -114,10 +114,14 @@ vi.mock("../src/shared/module-ui", () => {
     TextArea: input,
   };
 });
-function render() {
+function render(expectedClientId?: string) {
   h.index = 0;
   return renderToStaticMarkup(
-    createElement(WorkspaceDraft, { id: draft.id, onClose: vi.fn() }),
+    createElement(WorkspaceDraft, {
+      id: draft.id,
+      expectedClientId,
+      onClose: vi.fn(),
+    }),
   );
 }
 beforeEach(() => {
@@ -133,6 +137,40 @@ beforeEach(() => {
   };
   h.update.mockResolvedValue({});
   h.snapshot.mockResolvedValue({});
+});
+
+it.each([
+  { clientId: undefined, clientAssociation: undefined },
+  { clientId: null, clientAssociation: undefined },
+  {
+    clientId: "90000000-0000-4000-8000-000000000001",
+    clientAssociation: undefined,
+  },
+  {
+    clientId: "10000000-0000-4000-8000-000000000001",
+    clientAssociation: "held" as const,
+  },
+])(
+  "refuses a moved or unresolved ordinary client binding before editor hydration: %j",
+  (binding) => {
+    h.row = { ...h.row!, ...binding };
+    expect(render("10000000-0000-4000-8000-000000000001")).toContain(
+      "Document unavailable",
+    );
+    expect(h.inputs).not.toHaveBeenCalled();
+    expect(h.binding).not.toHaveBeenCalled();
+    expect(h.update).not.toHaveBeenCalled();
+    expect(h.snapshot).not.toHaveBeenCalled();
+  },
+);
+
+it("opens the existing ordinary editor for its current canonical client", () => {
+  const clientId = "10000000-0000-4000-8000-000000000001";
+  h.row = { ...h.row!, clientId, clientAssociation: undefined };
+  expect(render(clientId)).not.toContain("Document unavailable");
+  expect(h.inputs).toHaveBeenCalled();
+  expect(h.update).not.toHaveBeenCalled();
+  expect(h.snapshot).not.toHaveBeenCalled();
 });
 it("adopts a confirmed client without reloading or losing unsaved ordinary draft edits", async () => {
   render();
