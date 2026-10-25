@@ -13,6 +13,8 @@ export function MoveFiles({
   folders,
   onClose,
   onSaved,
+  creating = false,
+  initialFolder = "",
 }: {
   clientId: string;
   files: readonly Attachment[];
@@ -20,16 +22,24 @@ export function MoveFiles({
   currentFiles: readonly Attachment[];
   onClose: () => void;
   onSaved: () => void;
+  creating?: boolean;
+  initialFolder?: string;
 }) {
   const move = useBatchMove(clientId, onSaved);
-  const [folder, setFolder] = useState("");
+  const [folder, setFolder] = useState(initialFolder);
   const [error, setError] = useState<Error>();
   const held = move.attempt?.command;
   const count = held?.files.length ?? files.length;
   return (
     <Dialog
       open
-      title="Move selected files"
+      title={
+        creating
+          ? "New folder"
+          : count === 1
+            ? "Move to folder"
+            : "Move selected files"
+      }
       description={`Review all ${count} files before moving them together.`}
       onOpenChange={(open) => {
         if (!open && !move.pending) onClose();
@@ -62,10 +72,11 @@ export function MoveFiles({
           ))}
         </ul>
         <label>
-          Destination folder
+          {creating ? "Folder name" : "Destination folder"}
           <input
             list="batch-move-folders"
             maxLength={120}
+            required={creating}
             disabled={!move.canStart}
             value={held ? (held.folder ?? "") : folder}
             onChange={(event) => setFolder(event.target.value)}
@@ -125,9 +136,18 @@ export function MoveFiles({
         ) : (
           <button
             className="button primary"
-            disabled={!move.canStart || count < 2 || count > 100}
+            disabled={
+              !move.canStart ||
+              count < 1 ||
+              count > 100 ||
+              (creating && !folder.trim())
+            }
           >
-            Move {count} files
+            {creating
+              ? "Create folder & move file"
+              : count === 1
+                ? "Move file"
+                : `Move ${count} files`}
           </button>
         )}
       </form>

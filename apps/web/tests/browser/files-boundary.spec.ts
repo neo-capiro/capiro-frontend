@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { installFixtures, json, clientId, file } from "./fixtures";
+import { moveOutcome } from "../../test/browser/files-access-fixtures";
 const ready = {
   ...file,
   lifecycleStatus: "available",
@@ -92,15 +93,13 @@ test("a mismatched folder-save receipt keeps the edit open and does not claim su
 }) => {
   const unexpected = await installFixtures(page);
   await page.route("**/engagement/attachments?**", (route) =>
-    json(route, [file]),
+    json(route, [{ ...file, metadataRevision: 3 }]),
   );
-  await page.route(`**/files/${file.id}/folder`, (route) =>
-    json(route, {
-      ...file,
-      id: "60000000-0000-4000-8000-000000000009",
-      folder: "Reviewed folder",
-    }),
-  );
+  await page.route(`**/files/batch-moves`, (route) => {
+    const outcome = moveOutcome(route.request().postDataJSON());
+    outcome.files[0]!.id = "60000000-0000-4000-8000-000000000009";
+    return json(route, outcome);
+  });
   await page.goto(`/portfolio/${clientId}/files`);
   await page.getByRole("checkbox", { name: `Select ${file.fileName}` }).check();
   await page.getByRole("button", { name: "New folder", exact: true }).click();

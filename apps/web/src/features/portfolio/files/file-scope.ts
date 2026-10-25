@@ -24,7 +24,11 @@ export type FileExecution = {
 };
 
 /** One Files view lifetime; uploads retain its captured execution across retries. */
-export function useFileScope(clientId: string, context: string) {
+export function useFileScope(
+  clientId: string,
+  context: string,
+  requireFilesForRead = true,
+) {
   const cache = useQueryClient();
   const reader = useFileReader();
   useFiles(clientId);
@@ -56,7 +60,9 @@ export function useFileScope(clientId: string, context: string) {
     reader?.userId,
     reader?.tenantId,
     reader?.revision,
-    cache.getQueryState(currentFilesKey(cache, clientId))?.errorUpdateCount,
+    requireFilesForRead
+      ? cache.getQueryState(currentFilesKey(cache, clientId))?.errorUpdateCount
+      : null,
   ]);
   const lifetime = useRef<{ key: string; controller: AbortController } | null>(
     null,
@@ -74,6 +80,7 @@ export function useFileScope(clientId: string, context: string) {
         }
       }
       if (
+        requireFilesForRead &&
         JSON.stringify(event.query.queryKey) === filesQueryKey &&
         event.query.state.status === "error"
       )
@@ -83,7 +90,7 @@ export function useFileScope(clientId: string, context: string) {
       controller.abort();
       unsubscribe();
     };
-  }, [cache, filesQueryKey, key, reader]);
+  }, [cache, filesQueryKey, key, reader, requireFilesForRead]);
 
   function capture(write = false): FileExecution {
     const held = lifetime.current;
@@ -108,7 +115,9 @@ export function useFileScope(clientId: string, context: string) {
   return {
     key,
     capture,
-    canRead: Boolean(reader) && currentFilesAvailable(cache, clientId),
+    canRead:
+      Boolean(reader) &&
+      (!requireFilesForRead || currentFilesAvailable(cache, clientId)),
     canWrite:
       Boolean(currentClientWriter(cache)) &&
       currentFilesAvailable(cache, clientId),

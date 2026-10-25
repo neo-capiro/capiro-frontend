@@ -28,9 +28,9 @@ for (const width of [360, 1440]) {
       const held = new Promise<void>((resolve) => (release = resolve));
       let writes = 0;
       await page.route("**/engagement/attachments?**", (route) =>
-        json(route, [file]),
+        json(route, [{ ...file, metadataRevision: 3 }]),
       );
-      await page.route(`**/files/${file.id}/folder`, async (route) => {
+      await page.route(`**/files/batch-moves`, async (route) => {
         writes++;
         await held;
         return json(route, file);
@@ -56,10 +56,12 @@ for (const width of [360, 1440]) {
       if (submit === "button") await save.click();
       else await field.press("Enter");
       await expect.poll(() => writes).toBe(1);
-      await expect(save).toBeDisabled();
+      await expect(
+        dialog.getByRole("button", { name: "Check move outcome" }),
+      ).toBeDisabled();
       await expectContainedFocus(page, dialog);
       release();
-      await expect(dialog.getByText(/save outcome is unknown/)).toBeVisible();
+      await expect(dialog.getByText(/move is unconfirmed/)).toBeVisible();
       await expectContainedFocus(page, dialog);
       await page.keyboard.press("Escape");
       await expect(dialog).toHaveCount(0);

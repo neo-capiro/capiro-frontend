@@ -2,95 +2,110 @@
 import { useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
-import { filesKey, useFileReader } from "./file-reader";
+import { assertFileReader, filesKey, useFileReader } from "./file-reader";
 import { useFileScope, type FileExecution } from "./file-scope";
-import { normalizedFolder, type FolderAccessChange } from "./contracts";
 import {
-  folderAccessKey,
-  reviewFolderAccess,
-  saveFolderAccess,
-  type FolderAccessAttempt,
-} from "./folder-access";
-export type { FolderAccessChange as FileChange } from "./contracts";
-
-type FolderState = {
-  scope: string;
-  pending?: boolean;
-  error?: Error;
-  draft?: FolderAccessChange;
-  current?: Awaited<ReturnType<typeof reviewFolderAccess>>;
-};
-
-export function useFileChange(
-  clientId: string,
-  folder: string | null,
-  onSaved?: () => void,
-) {
-  const api = useApi();
-  const cache = useQueryClient();
-  const reader = useFileReader();
-  const scope = useFileScope(
-    clientId,
-    `folder-access:${JSON.stringify(normalizedFolder(folder))}`,
-  );
-  const { data: attempt } = useQuery<FolderAccessAttempt | null>({
-    queryKey: folderAccessKey(clientId, folder, reader),
-    queryFn: () => null,
-    enabled: false,
+  fileAccessKey,
+  type FileAccessAttempt,
+  type FileAccessCommand,
+} from "./file-access-command";
+import { fileAccessRecovery } from "./file-access-recovery";
+import { saveFileAccess, type FileAccessInput } from "./folder-access";
+function useAccessJournal(clientId: string) {
+  const cache = useQueryClient(),
+    reader = useFileReader();
+  return useQuery<FileAccessAttempt | null>({
+    queryKey: fileAccessKey(clientId, reader),
+    enabled: Boolean(reader),
+    staleTime: Infinity,
     gcTime: Infinity,
+    retry: false,
+    queryFn: () => {
+      if (!reader)
+        throw new Error(
+          "Verify the current account before recovering access changes.",
+        );
+      return fileAccessRecovery(clientId, reader, () =>
+        assertFileReader(cache, reader),
+      ).load();
+    },
   });
+}
+export function useFileAccessAttempt(clientId: string) {
+  return useAccessJournal(clientId).data ?? null;
+}
+export function useFileChange(clientId: string, onSaved: () => void) {
+  const api = useApi(),
+    cache = useQueryClient(),
+    scope = useFileScope(clientId, "file-access", false);
+  const journal = useAccessJournal(clientId),
+    attempt = journal.data ?? null;
   const operation = useRef<FileExecution | null>(null);
-  const [state, setState] = useState<FolderState>();
+  const [state, setState] = useState<{
+    scope: string;
+    pending?: boolean;
+    error?: Error;
+  }>();
   const visible = state?.scope === scope.key ? state : undefined;
-  async function run(change?: FolderAccessChange) {
+  async function run(input: FileAccessInput) {
     if (operation.current && !operation.current.signal.aborted) return;
     let execution: FileExecution | undefined;
     try {
-      execution = scope.capture(Boolean(change));
+      execution = scope.capture("command" in input);
       operation.current = execution;
-      const draft = change ?? attempt?.change;
-      setState({ scope: scope.key, pending: true, draft });
-      const context = { cache, clientId, execution };
-      if (!change) {
-        const current = await reviewFolderAccess(api, folder, context);
-        execution.guard();
-        setState({ scope: scope.key, current, draft });
-        return;
-      }
-      await saveFolderAccess(api, change, context);
-      execution.guard();
-      await Promise.all([
-        cache.invalidateQueries({ queryKey: filesKey(clientId) }),
-        cache.invalidateQueries({ queryKey: ["file-access", clientId] }),
-      ]);
+      setState({ scope: scope.key, pending: true });
+      const outcome = await saveFileAccess(
+        api,
+        cache,
+        clientId,
+        execution,
+        input,
+      );
       execution.guard();
       setState({ scope: scope.key });
-      onSaved?.();
+      if (
+        outcome.status === "completed" ||
+        ("recover" in input && input.recover === "retire")
+      ) {
+        await cache.invalidateQueries({ queryKey: filesKey(clientId) });
+        execution.guard();
+        onSaved();
+      }
     } catch (error) {
       if (!execution?.signal.aborted)
         setState({
           scope: scope.key,
-          draft: change ?? attempt?.change,
           error:
             error instanceof Error
               ? error
-              : new Error("The folder access change could not be confirmed."),
+              : new Error("The access change could not be confirmed."),
         });
     } finally {
-      if (operation.current === execution) operation.current = null;
+      if (operation.current === execution) {
+        operation.current = null;
+        setState((current) =>
+          current?.scope === scope.key
+            ? { ...current, pending: false }
+            : current,
+        );
+      }
     }
   }
+  const pending =
+    journal.isPending ||
+    Boolean(visible?.pending) ||
+    attempt?.status === "pending";
+  const ready = scope.canRead && !pending && !journal.error;
   return {
     attempt,
-    draft: visible?.draft ?? attempt?.change,
-    error: visible?.error,
-    current: visible?.current,
-    isPending: Boolean(visible?.pending) || attempt?.status === "pending",
-    blocked: !scope.canWrite || Boolean(visible?.pending) || Boolean(attempt),
-    canReview:
-      scope.canRead && !visible?.pending && attempt?.status === "unknown",
-    mutate: (change: FolderAccessChange) => void run(change),
-    review: () => void run(),
+    pending,
+    error: visible?.error ?? journal.error,
+    canStart: scope.canWrite && ready && !attempt,
+    canCheck: ready && attempt?.status === "unknown",
+    start: (command: FileAccessCommand) => void run({ command }),
+    check: () => void run({ recover: "receipt" }),
+    retry: () => void run({ recover: "retry" }),
+    retire: () => void run({ recover: "retire" }),
   };
 }
 export { useExtractFile } from "./extraction";

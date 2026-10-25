@@ -12,6 +12,7 @@ import { FolderCards } from "./FolderCards";
 import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
+import { useFileAccessAttempt } from "./mutations";
 import { MoveFile } from "./MoveFile";
 import { MoveFiles } from "./MoveFiles";
 import { useBatchMoveAttempt } from "./useBatchMove";
@@ -64,6 +65,7 @@ export function FilesPage({
     changeFilters({ folder: value, mode: "files" });
   const [checked, setChecked] = useState<{ view: string; ids: string[] }>();
   const batchAttempt = useBatchMoveAttempt(clientId);
+  const accessAttempt = useFileAccessAttempt(clientId);
   const [batch, setBatch] = useState<{ view: string; files: Attachment[] }>();
   const selected = checked?.view === query.readerScope ? checked.ids : [];
   const [requestedAction, setAction] = useState<{
@@ -75,9 +77,22 @@ export function FilesPage({
   const [folderAccess, setFolderAccess] = useState<{
     view: string;
     folder: string | null;
+    files: Attachment[];
+    operation: "file-access" | "folder-access";
   }>();
   const requestAction = (kind: FileAction | "new-folder", id: string) => {
     arrival.dismiss();
+    if (kind === "access") {
+      const file = query.data?.find((item) => item.id === id);
+      if (file)
+        setFolderAccess({
+          view: query.readerScope,
+          folder: file.folder,
+          files: [structuredClone(file)],
+          operation: "file-access",
+        });
+      return;
+    }
     setAction({ view: query.readerScope, kind, id });
   };
   const close = () => {
@@ -161,6 +176,26 @@ export function FilesPage({
           Review pending move
         </button>
       )}
+      {accessAttempt && (
+        <button
+          className="button"
+          onClick={() => {
+            arrival.dismiss();
+            setFolderAccess({
+              view: query.readerScope,
+              folder: accessAttempt.command.folder,
+              files: files.filter((file) =>
+                accessAttempt.command.files.some(
+                  (entry) => entry.id === file.id,
+                ),
+              ),
+              operation: accessAttempt.command.operation,
+            });
+          }}
+        >
+          Review pending access change
+        </button>
+      )}
       <div className={styles.viewMode} role="group" aria-label="File view">
         <button
           className="button"
@@ -194,6 +229,10 @@ export function FilesPage({
                 setFolderAccess({
                   view: query.readerScope,
                   folder: folder || null,
+                  files: structuredClone(
+                    files.filter((file) => file.folder === (folder || null)),
+                  ),
+                  operation: "folder-access",
                 });
               }}
             >
@@ -330,13 +369,13 @@ export function FilesPage({
           onClose={close}
         />
       )}
-      {action?.kind === "access" && (
-        <FileAccess clientId={clientId} file={action.file} onClose={close} />
-      )}
-      {folderAccess?.view === query.readerScope && available && (
+      {folderAccess?.view === query.readerScope && (
         <FileAccess
+          key={`${query.readerScope}:${folderAccess.operation}:${JSON.stringify(folderAccess.files.map((file) => file.id))}`}
           clientId={clientId}
           folder={folderAccess.folder}
+          files={folderAccess.files}
+          operation={folderAccess.operation}
           onClose={() => setFolderAccess(undefined)}
         />
       )}

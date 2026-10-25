@@ -171,7 +171,8 @@ function retireRecovery(
           | "OBJECTIVE_ASSOCIATION_REJECTED"
           | "OBJECTIVE_VERSION_CONFLICT"
           | "FILE_BATCH_MOVE_REFUSED"
-          | "TASK_EXECUTION_NOT_EXECUTED";
+          | "TASK_EXECUTION_NOT_EXECUTED"
+          | "FILE_ACCESS_REFUSED";
       },
   assert: () => void,
   beforeRetire?: (
@@ -262,6 +263,31 @@ export function retireUnexecutedTaskRecovery<
       )
         throw new RecoveryStorageError();
     },
+  );
+}
+
+/** Caller binds Core's no-write proof to the exact command and refreshes current authority/files. */
+export function retireFileAccessRefusalRecovery(
+  scope: string,
+  requestId: string,
+  outcome: {
+    requestId: string;
+    status: string;
+    refusal: { code: string } | null;
+  },
+  assert: () => void,
+) {
+  if (
+    outcome.requestId !== requestId ||
+    outcome.status !== "refused" ||
+    outcome.refusal?.code !== "FILE_ACCESS_REFUSED"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "FILE_ACCESS_REFUSED" },
+    assert,
   );
 }
 
