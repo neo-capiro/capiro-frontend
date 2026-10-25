@@ -2,9 +2,12 @@ import {
   receiveRoutinesRequest,
   type RoutinesPrepareRequest,
   type RoutinesListResponse,
+  type RoutinesRoute,
+  type RoutinesRequestMap,
+  type RoutinesExpectationMap,
 } from "@capiro/meri-contracts/routines-application";
 import { sameJson } from "../meri-actions/correlation";
-import type { RoutinesAccess } from "./access";
+import { RoutinesAccessDenied, type RoutinesAccess } from "./access";
 import {
   routineRecovery,
   routineApproval,
@@ -20,6 +23,7 @@ export type RoutineState = Readonly<{
   saved: SavedRoutine | null;
   message: string | null;
   settled: boolean;
+  accessDenied: boolean;
 }>;
 type Options = {
   context: RoutineContext;
@@ -38,6 +42,7 @@ export class RoutineWorkflow {
     saved: null,
     message: null,
     settled: false,
+    accessDenied: false,
   };
   private listeners = new Set<() => void>();
   private disposed = false;
@@ -58,6 +63,7 @@ export class RoutineWorkflow {
     this.listeners.clear();
   };
   private guard = () => {
+    if (this.state.accessDenied) throw new RoutinesAccessDenied();
     this.options.signal.throwIfAborted();
     if (this.disposed || !this.options.isCurrent())
       throw new DOMException("Current routine context changed.", "AbortError");
@@ -73,6 +79,41 @@ export class RoutineWorkflow {
     this.guard();
     this.state = Object.freeze({ ...this.state, ...change });
     for (const listener of this.listeners) listener();
+  }
+  private async exchange<R extends RoutinesRoute>(
+    route: R,
+    request: RoutinesRequestMap[R],
+    expectation: RoutinesExpectationMap[R],
+  ) {
+    this.guard();
+    try {
+      const response = await this.options.access.exchange(
+        route,
+        request,
+        expectation,
+        this.options.signal,
+      );
+      if (
+        "error" in response &&
+        response.error.code === "ROUTINES_ACCESS_DENIED"
+      )
+        throw new RoutinesAccessDenied();
+      return response;
+    } catch (error) {
+      if (error instanceof RoutinesAccessDenied) {
+        // Clearing a refused view must also work during temporary identity revalidation.
+        // The encrypted journal retains the exact command and any uncertain outcome.
+        this.state = Object.freeze({
+          ...this.state,
+          accessDenied: true,
+          saved: null,
+          settled: false,
+          message: error.message,
+        });
+        for (const listener of this.listeners) listener();
+      }
+      throw error;
+    }
   }
   private matching(value: SavedRoutine) {
     const expected = this.options.context,
@@ -198,12 +239,9 @@ export class RoutineWorkflow {
       await this.sendPrepare(saved);
     });
   private async sendPrepare(saved: SavedRoutine) {
-    const response = await this.options.access.exchange(
-      "prepare",
-      saved.prepare,
-      { request: saved.prepare },
-      this.options.signal,
-    );
+    const response = await this.exchange("prepare", saved.prepare, {
+      request: saved.prepare,
+    });
     if ("error" in response)
       throw new Error(
         `Routine preparation could not be confirmed (${response.error.code}). The original request is retained.`,
@@ -224,12 +262,10 @@ export class RoutineWorkflow {
       saved = await this.journal().update({ ...saved, approving: true });
       this.publish({ saved });
       const request = routineApproval(saved);
-      const response = await this.options.access.exchange(
-        "approve",
+      const response = await this.exchange("approve", request, {
         request,
-        { request, proposal: saved.proposal! },
-        this.options.signal,
-      );
+        proposal: saved.proposal!,
+      });
       if ("error" in response)
         throw new Error(
           `Routine approval could not be confirmed (${response.error.code}). Check the saved result or retry this exact approval.`,
@@ -247,12 +283,10 @@ export class RoutineWorkflow {
       if (!saved.approving || !saved.proposal)
         throw new Error("No saved approval needs reconciliation.");
       const request = routineDecision(saved);
-      const response = await this.options.access.exchange(
-        "reconcile",
+      const response = await this.exchange("reconcile", request, {
         request,
-        { request, proposal: saved.proposal },
-        this.options.signal,
-      );
+        proposal: saved.proposal,
+      });
       if ("error" in response || response.outcome !== "ACKNOWLEDGED")
         throw new Error(
           "The schedule owner has not confirmed this change. The exact approval remains saved; no replacement routine was created.",
@@ -285,12 +319,7 @@ export class RoutineWorkflow {
   ): Promise<RoutinesListResponse> => {
     this.guard();
     const request = { afterScheduleId, limit: 20, historyLimit: 10 };
-    const response = await this.options.access.exchange(
-      "list",
-      request,
-      { request },
-      this.options.signal,
-    );
+    const response = await this.exchange("list", request, { request });
     this.guard();
     if ("error" in response)
       throw new Error("Current routines could not be read.");

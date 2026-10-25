@@ -31,6 +31,7 @@ export function RoutinesWorkspace({ port }: { port: RoutineWorkflow }) {
     mode: "edit" | "cancel";
     scheduleId?: string;
   } | null>(null);
+  const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
   useLayoutEffect(() => {
     current.current = port;
@@ -41,6 +42,13 @@ export function RoutinesWorkspace({ port }: { port: RoutineWorkflow }) {
   useEffect(() => {
     void port.load();
   }, [port]);
+  // A replacement connection cannot inherit pages, cursors or edits from the former lifetime.
+  if (viewPort !== port || (state.accessDenied && (page || editor))) {
+    setViewPort(port);
+    setPage(null);
+    setEditor(null);
+    setError(null);
+  }
   if (state.saved && editor) setEditor(null);
   async function read(more = false) {
     if (loading) return;
@@ -70,6 +78,7 @@ export function RoutinesWorkspace({ port }: { port: RoutineWorkflow }) {
   const prepare = (request: Parameters<RoutineWorkflow["prepare"]>[0]) => {
     void port.prepare(request);
   };
+  if (state.accessDenied) return <p role="alert">{state.message}</p>;
   return (
     <div className={styles.page}>
       <header>

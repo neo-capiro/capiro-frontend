@@ -1,5 +1,8 @@
 import { readFileSync } from "node:fs";
-import { expect, it, vi } from "vitest";
+import { beforeEach, expect, it, vi } from "vitest";
+import { createElement, type ComponentProps } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { RoutinesWorkspace } from "../src/features/meri/routines/RoutinesWorkspace";
 import {
   installPlatform,
   db,
@@ -11,7 +14,11 @@ import {
   routineRecovery,
   type SavedRoutine,
 } from "../src/shared/meri-routines/recovery";
-import { createRoutinesAccess } from "../src/shared/meri-routines/access";
+import {
+  createRoutinesAccess,
+  RoutinesAccessDenied,
+  type RoutinesAccess,
+} from "../src/shared/meri-routines/access";
 import { bootstrapRoutineSession } from "../src/shared/meri-routines/session";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import { proxyActionRequest } from "../src/shared/meri-actions/proxy";
@@ -19,6 +26,87 @@ import { receiveRoutinesResponse } from "@capiro/meri-contracts/routines-applica
 import { receiveIntentsResponse } from "@capiro/meri-contracts/intents-application";
 
 installPlatform();
+// Retain the workspace's hook state between static renders and invoke its actual button handlers.
+const view = vi.hoisted(() => ({
+  values: [] as unknown[],
+  index: 0,
+  changed: false,
+  buttons: [] as ComponentProps<typeof import("@capiro/ui/button").Button>[],
+}));
+vi.mock("react", async (original) => {
+  const actual = await original<typeof import("react")>();
+  const useState = (initial: unknown) => {
+    const index = view.index++;
+    if (index === view.values.length)
+      view.values.push(typeof initial === "function" ? initial() : initial);
+    return [
+      view.values[index],
+      (next: unknown) => {
+        const value =
+          typeof next === "function" ? next(view.values[index]) : next;
+        view.changed ||= !Object.is(value, view.values[index]);
+        view.values[index] = value;
+      },
+    ];
+  };
+  return {
+    ...actual,
+    useState,
+    useRef: (initial: unknown) => useState({ current: initial })[0],
+    useLayoutEffect: (effect: () => void) => effect(),
+    useSyncExternalStore: (_subscribe: unknown, snapshot: () => unknown) =>
+      snapshot(),
+  };
+});
+vi.mock("@capiro/ui/button", () => ({
+  Button: (
+    props: ComponentProps<typeof import("@capiro/ui/button").Button>,
+  ) => {
+    view.buttons.push(props);
+    return createElement(
+      "button",
+      { disabled: props.disabled },
+      props.children,
+    );
+  },
+}));
+vi.mock("../src/features/meri/routines/RoutineForm", () => ({
+  RoutineForm: () => createElement("p", null, "Unsaved routine editor"),
+  RoutineCancellation: () =>
+    createElement("p", null, "Routine cancellation editor"),
+}));
+beforeEach(() => {
+  view.values = [];
+  view.buttons = [];
+});
+function renderWorkspace(port: RoutineWorkflow) {
+  let html = "";
+  for (let render = 0; render < 5; render++) {
+    view.index = 0;
+    view.buttons = [];
+    view.changed = false;
+    html = renderToStaticMarkup(createElement(RoutinesWorkspace, { port }));
+    if (!view.changed) return html;
+  }
+  throw new Error("Workspace did not settle");
+}
+function clickRoutine(label: string) {
+  const button = view.buttons.find((props) => props.children === label);
+  expect(button, label).toBeDefined();
+  expect(button!.disabled).not.toBe(true);
+  button!.onClick!({} as never);
+}
+async function readWorkspace(
+  port: RoutineWorkflow,
+  label = "Refresh routines",
+) {
+  renderWorkspace(port);
+  clickRoutine(label);
+  await vi.waitFor(() =>
+    expect(renderWorkspace(port)).not.toContain("Reading current routines"),
+  );
+  return renderWorkspace(port);
+}
 const wire = () =>
   JSON.parse(
     readFileSync(
@@ -336,6 +424,227 @@ it("public list receiver accepts canonical bounded list and rejects out-of-order
   await expect(
     receiveRoutinesResponse("list", 200, JSON.stringify(invalid), { request }),
   ).rejects.toThrow();
+});
+
+function pagedRoutines() {
+  const result = wire().listed;
+  result.page.rows = Array.from({ length: 20 }, (_, index) => ({
+    ...structuredClone(result.page.rows[0]),
+    projection: {
+      ...result.page.rows[0].projection,
+      scheduleId: `10000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
+    },
+  }));
+  result.page.hasMore = true;
+  result.page.nextAfterScheduleId =
+    result.page.rows.at(-1).projection.scheduleId;
+  return result;
+}
+
+it.each([401, 403])(
+  "HTTP %i removes paged content and editor even with a malformed body",
+  async (status) => {
+    const fetch = fetcher(() => Response.json(pagedRoutines()));
+    const port = workflow(fetch);
+    await port.load();
+    expect(await readWorkspace(port)).toContain(
+      f.listed.page.rows[0].projection.destinationId,
+    );
+    clickRoutine("New routine");
+    expect(renderWorkspace(port)).toContain("Unsaved routine editor");
+    fetch.mockImplementationOnce(
+      async () => new Response("not JSON", { status }),
+    );
+    const html = await readWorkspace(port, "Show more routines");
+    expect(html).toContain("Routine access was denied");
+    expect(html).not.toContain(f.listed.page.rows[0].projection.destinationId);
+    expect(html).not.toContain("Recent activity");
+    expect(html).not.toContain("Unsaved routine editor");
+    expect(html).not.toContain("Show more routines");
+    await expect(port.list()).rejects.toBeInstanceOf(RoutinesAccessDenied);
+    expect(fetch).toHaveBeenCalledTimes(2);
+  },
+);
+
+it("canonical denial cannot become a generic list failure or revive a saved approval", async () => {
+  const admitted = await receiveRoutinesResponse(
+    "list",
+    403,
+    JSON.stringify({ error: { code: "ROUTINES_ACCESS_DENIED" } }),
+    { request: { afterScheduleId: null, limit: 20, historyLimit: 10 } },
+  );
+  const fetch = fetcher(prepared);
+  const port = await ready(fetch);
+  fetch.mockRejectedValueOnce(new Error("lost approval ACK"));
+  await port.approve();
+  const saved = await journal().load();
+  const next = new RoutineWorkflow({
+    context: f.context,
+    access: { exchange: vi.fn(async () => admitted) } as RoutinesAccess,
+    signal: signal(),
+    isCurrent: () => true,
+  });
+  await next.load();
+  expect(renderWorkspace(next)).toContain(f.request.request.taskInstruction);
+  await expect(next.list()).rejects.toBeInstanceOf(RoutinesAccessDenied);
+  await next.load();
+  await next.approve();
+  await next.discard();
+  expect(next.getSnapshot()).toMatchObject({ accessDenied: true, saved: null });
+  expect(renderWorkspace(next)).not.toContain(
+    f.request.request.taskInstruction,
+  );
+  expect(await journal().load()).toEqual(saved);
+  const recovered = workflow(fetch);
+  await recovered.load();
+  expect(recovered.getSnapshot().saved).toEqual(saved);
+  expect(fetch).toHaveBeenCalledTimes(2);
+  fetch.mockResolvedValueOnce(Response.json(f.reconciled));
+  await recovered.reconcile();
+  expect(recovered.getSnapshot().saved?.result?.value).toEqual(f.reconciled);
+});
+
+it.each(["network", "service"])(
+  "transient %s failure preserves current rows and explicit pagination retry",
+  async (failure) => {
+    const page = pagedRoutines();
+    const fetch = fetcher(() => Response.json(page));
+    const port = workflow(fetch);
+    await port.load();
+    await readWorkspace(port);
+    fetch.mockImplementationOnce(async () => {
+      if (failure === "network") throw new Error("offline");
+      return Response.json(
+        { error: { code: "ROUTINES_UNAVAILABLE" } },
+        { status: 503 },
+      );
+    });
+    const html = await readWorkspace(port, "Show more routines");
+    expect(html).toContain(f.listed.page.rows[0].projection.destinationId);
+    expect(html).toContain(
+      "Previously shown results are not current authority",
+    );
+    expect(port.getSnapshot().accessDenied).toBe(false);
+    fetch.mockResolvedValueOnce(
+      Response.json({
+        ...f.listed,
+        page: {
+          ...f.listed.page,
+          rows: [],
+          hasMore: false,
+          nextAfterScheduleId: null,
+        },
+      }),
+    );
+    expect(await readWorkspace(port, "Show more routines")).toContain(
+      f.listed.page.rows[0].projection.destinationId,
+    );
+    expect(
+      JSON.parse(String(fetch.mock.calls[2]![1]?.body)).afterScheduleId,
+    ).toBe(page.page.nextAfterScheduleId);
+  },
+);
+
+it("replacement connection cannot inherit a page, cursor or unsaved editor", async () => {
+  const fetch = fetcher(() => Response.json(pagedRoutines()));
+  const original = workflow(fetch);
+  await original.load();
+  await readWorkspace(original);
+  clickRoutine("New routine");
+  expect(renderWorkspace(original)).toContain("Unsaved routine editor");
+  const replacement = workflow(fetch);
+  await replacement.load();
+  const html = renderWorkspace(replacement);
+  expect(html).not.toContain(f.listed.page.rows[0].projection.destinationId);
+  expect(html).not.toContain("Unsaved routine editor");
+  expect(html).not.toContain("Show more routines");
+  await readWorkspace(replacement);
+  expect(
+    JSON.parse(String(fetch.mock.calls[1]![1]?.body)).afterScheduleId,
+  ).toBeNull();
+});
+
+it("denial during a held prepare fences late UI publication but retains the exact journal", async () => {
+  const started = barrier(),
+    release = barrier();
+  const fetch = fetcher(async (route) => {
+    if (route === "list")
+      return Response.json(
+        { error: { code: "ROUTINES_ACCESS_DENIED" } },
+        { status: 403 },
+      );
+    started.resolve();
+    await release.promise;
+    return prepared();
+  });
+  const port = workflow(fetch);
+  await port.load();
+  const pending = port.prepare(f.request);
+  await started.promise;
+  await expect(port.list()).rejects.toBeInstanceOf(RoutinesAccessDenied);
+  release.resolve();
+  await pending;
+  expect(port.getSnapshot()).toMatchObject({
+    accessDenied: true,
+    saved: null,
+    busy: false,
+  });
+  expect(renderWorkspace(port)).not.toContain(
+    f.request.request.taskInstruction,
+  );
+  expect((await journal().load())?.proposal).toEqual(f.prepared.proposal);
+});
+
+it("a held successful list cannot publish after a concurrent approval denial", async () => {
+  const started = barrier(),
+    release = barrier();
+  const fetch = fetcher(async (route) => {
+    if (route === "prepare") return prepared();
+    if (route === "approve") return new Response("refused", { status: 401 });
+    started.resolve();
+    await release.promise;
+    return Response.json(f.listed);
+  });
+  const port = await ready(fetch);
+  const pending = port.list();
+  await started.promise;
+  await port.approve();
+  release.resolve();
+  await expect(pending).rejects.toBeInstanceOf(RoutinesAccessDenied);
+  expect(port.getSnapshot().saved).toBeNull();
+  expect((await journal().load())?.approving).toBe(true);
+});
+
+it("denial received during identity revalidation remains hidden when availability returns", async () => {
+  let current = true;
+  const started = barrier(),
+    release = barrier();
+  const fetch = fetcher(async (route) => {
+    if (route === "prepare") return prepared();
+    started.resolve();
+    await release.promise;
+    return new Response("refused", { status: 403 });
+  });
+  const life = signal();
+  const port = new RoutineWorkflow({
+    context: f.context,
+    signal: life,
+    isCurrent: () => current,
+    access: createRoutinesAccess("synthetic", life, fetch),
+  });
+  await port.load();
+  await port.prepare(f.request);
+  const pending = port.approve();
+  await started.promise;
+  current = false;
+  release.resolve();
+  await pending;
+  current = true;
+  expect(port.getSnapshot()).toMatchObject({ accessDenied: true, saved: null });
+  expect(renderWorkspace(port)).not.toContain(
+    f.request.request.taskInstruction,
+  );
+  expect((await journal().load())?.approving).toBe(true);
 });
 
 it("chat preparation never automatically approves or calls prepare; an explicit approval uses the original request", async () => {
