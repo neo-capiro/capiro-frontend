@@ -448,6 +448,8 @@ it("holds draft entry until exact conversation selection while storage failure k
     textarea: { current: null },
     history: { query: { isPending: true }, tail: {}, selected: false },
     continuation: { busy: false, failed: false },
+    skillSelection: {},
+    setSkillSelection: vi.fn(),
   } as unknown as Parameters<typeof ConversationView>[0]["session"];
   const render = (patch: Partial<typeof session>) =>
     renderToStaticMarkup(

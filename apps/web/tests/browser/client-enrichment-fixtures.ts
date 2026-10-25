@@ -129,8 +129,11 @@ export async function installEnrichment(page: Page) {
   };
   await page.route("**/api/backend/core/me", (route) =>
     json(route, {
-      user: { id: "user-test", email: "test@example.test" },
-      tenant: { id: "tenant-test", name: "UI tests" },
+      user: {
+        id: "90000000-0000-4000-8000-000000000002",
+        email: "test@example.test",
+      },
+      tenant: { id: "90000000-0000-4000-8000-000000000001", name: "UI tests" },
       role: state.role,
     }),
   );

@@ -63,6 +63,18 @@ function session(current?: MeriConversationPort): Session {
     draft: "Typed during connection",
     setDraft: vi.fn(),
     textarea: { current: null },
+    skillSelection: {},
+    setSkillSelection: vi.fn(),
+    continuation: {
+      intent: undefined,
+      busy: false,
+      failed: false,
+      notReady: false,
+      storageError: undefined,
+      start: vi.fn(async () => false),
+      retry: vi.fn(async () => false),
+      readMapping: vi.fn(async () => false),
+    } satisfies Session["continuation"],
   } as unknown as Session;
 }
 function render(

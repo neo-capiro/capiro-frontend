@@ -16,6 +16,10 @@ const harness = vi.hoisted(() => ({
   hints: [] as Array<Record<string, string>>,
   history: vi.fn(),
   reserve: vi.fn(),
+  push: vi.fn(),
+}));
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: harness.push }),
 }));
 vi.mock("../src/shared/meri-conversations/host-controller", () => ({
   ConversationHostController: class {
