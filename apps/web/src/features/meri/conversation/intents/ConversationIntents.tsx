@@ -58,8 +58,8 @@ function DecisionControls({
             <>
               We could not confirm whether your decision to{" "}
               {attempt.decision === "approved" ? "approve" : "reject"} this was
-              recorded. Checking sends the same request again; nothing new is
-              created.
+              recorded. Checking sends the same request again to recover its
+              outcome.
             </>
           )}
         </p>
@@ -184,8 +184,8 @@ function Body({
   if (list.status === "unavailable")
     return (
       <p className={styles.muted} role="status">
-        Prepared actions could not be read right now. Nothing was approved or
-        executed.{" "}
+        Prepared actions could not be read right now. Their outcomes remain
+        unconfirmed.{" "}
         <Button type="button" variant="outline" onClick={retry}>
           Try again
         </Button>

@@ -245,13 +245,14 @@ const phaseLooks = {
   expired: {
     status: "Expired",
     tone: "neutral",
-    detail: "It expired before a decision. Nothing was executed.",
+    detail:
+      "The approval period has expired. Refresh to read any recorded outcome; expiry does not confirm that nothing ran.",
   },
   unknown: {
     status: "Result uncertain",
     tone: "warning",
     detail:
-      "Meri could not confirm the result of the approved action. Check again; nothing is repeated.",
+      "Meri could not confirm the result of the approved action. Check again to recover the outcome of that same request.",
   },
   unknown_decision: {
     status: "Decision status unavailable",
@@ -341,7 +342,7 @@ export function intentRow(
     return closed({
       status: "Failed",
       tone: "danger",
-      detail: `Preparation failed (${item.code}). ${nothing}`,
+      detail: `Preparation failed (${item.code}). No preparation result was confirmed.`,
     });
   if (item.kind === "draft")
     return closed(
@@ -407,16 +408,18 @@ export function intentRows(
 }
 
 const refusalText: Readonly<Record<string, string>> = {
-  INTENT_EXPIRED: "This proposal has expired. Nothing was executed.",
+  INTENT_EXPIRED:
+    "This proposal's approval period has expired. Refresh to read any recorded outcome.",
   INTENT_NOT_APPROVABLE:
-    "Approval is not available yet for this kind of action. Nothing was executed.",
+    "Approval is not available here for this kind of action. Refresh to read its current record.",
   INTENT_MISMATCH:
-    "This proposal changed. Refresh to see the current one. Nothing was executed.",
-  INTENT_NOT_FOUND: "Meri no longer has this proposal. Nothing was executed.",
+    "This decision request does not match the current proposal. Refresh to review its current record.",
+  INTENT_NOT_FOUND:
+    "Meri could not read this proposal. Any prior outcome remains unconfirmed.",
   INTENT_SCOPE_WITHHELD:
-    "You no longer have access to what this proposal covers. Nothing was executed.",
+    "You no longer have access to what this proposal covers. Any prior outcome remains unconfirmed.",
   APPROVER_REFUSED:
-    "You are not the approver for this proposal. Nothing was executed.",
+    "You are not the approver for this proposal. Refresh to read its current record.",
   APPROVAL_DECISION_REFUSED:
     "A different decision was already recorded for this proposal. Refresh to see it.",
   INTENT_APPROVALS_DISABLED:
@@ -424,4 +427,4 @@ const refusalText: Readonly<Record<string, string>> = {
 };
 /** Plain words for a definite refusal; the code stays visible so support can read it. */
 export const refusalMessage = (code: string) =>
-  `${refusalText[code] ?? "Your decision was not recorded. Nothing was executed."} (${code})`;
+  `${refusalText[code] ?? "This decision request was refused. Any prior outcome remains unconfirmed; refresh to read its current record."} (${code})`;

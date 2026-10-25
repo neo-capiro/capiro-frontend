@@ -216,7 +216,7 @@ it("awaiting rows come first, then the rest newest first", () => {
 
 it("refusal messages are plain and keep the code", () => {
   expect(refusalMessage("INTENT_EXPIRED")).toBe(
-    "This proposal has expired. Nothing was executed. (INTENT_EXPIRED)",
+    "This proposal's approval period has expired. Refresh to read any recorded outcome. (INTENT_EXPIRED)",
   );
   expect(refusalMessage("SOMETHING_NEW")).toContain("(SOMETHING_NEW)");
 });
