@@ -10,6 +10,11 @@ const pricingOwner = `${appSource}shared/capiro/onboard-pricing.server.ts`;
 const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
 const previewPolicy = `${appSource}shared/preview/backend-policy.server.ts`;
 const meriCapabilityReader = `${appSource}shared/meri-resources/capabilities.server.ts`;
+const coreSessionAuthentication = `${appSource}shared/preview/core-session-authentication.ts`;
+const coreSessionReaders = new Set([
+  `${appSource}shared/capiro/gateway.ts`,
+  `${appSource}shared/portfolio/api/proxy.ts`,
+]);
 const previewOwner = `${appSource}shared/preview/`;
 const previewReadProxy = `${previewOwner}read-proxy.server.ts`;
 const previewReadConfig = `${previewOwner}read-config.server.ts`;
@@ -63,11 +68,15 @@ export const publicExports = new Set([
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
+  '@capiro/meri-contracts/conversation-lifecycle',
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
   '@capiro/meri-contracts/conversation-session',
   '@capiro/meri-contracts/document-access-application',
   '@capiro/meri-contracts/intents-application',
+  '@capiro/meri-contracts/routines-application',
+  '@capiro/meri-contracts/objective-generation',
+  '@capiro/meri-contracts/task-command-application',
   '@capiro/meri-contracts/user-preferences-application',
   '@capiro/meri-client/conversation',
   '@capiro/meri-client/task-commands',
@@ -128,6 +137,7 @@ export const serverAdapters = new Map([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-actions/config.ts`, `${appSource}shared/meri-actions/proxy.ts`, `${appSource}shared/meri-actions/connection-config.ts`,
     `${appSource}shared/meri-actions/identity-token.server.ts`,
+    `${appSource}shared/meri-routines/routes.ts`,
   ])],
   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
     previewPolicy, previewReadProxy,
@@ -163,6 +173,10 @@ function edgeViolation(from, to, entry, module) {
       && !(from === meriCapabilityReader && to === previewPolicy
         && entry.kind === 'named' && entry.names.length === 1
         && entry.names[0] === 'previewBackendRejection'
+        && !module.directives.includes('use client'))
+      && !(coreSessionReaders.has(from) && to === coreSessionAuthentication
+        && entry.kind === 'named' && entry.names.length === 1
+        && entry.names[0] === 'coreSessionAuthentication'
         && !module.directives.includes('use client'))
       && !(to === previewPolicy && from === `${appSource}proxy.ts`)
       && !(to === previewMemoryOwnerRoute && from === memoryOwnerProxy)
