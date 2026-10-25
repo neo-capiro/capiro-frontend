@@ -30,6 +30,7 @@ import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
 import { VersionHistory } from "./version-history/VersionHistory";
 import { OrdinaryDraftExport } from "./ordinary-export/OrdinaryDraftExport";
+import { ordinaryUnsupportedBlocks } from "./ordinary-export/ordinary-export";
 
 function DraftEditor({
   draft,
@@ -53,6 +54,7 @@ function DraftEditor({
   const invalidSection = Object.values(sections).some((content) =>
     sectionSizeError(content),
   );
+  const unsupportedBlocks = ordinaryUnsupportedBlocks(currentDraft);
   const pending = Boolean(
     prospectSave?.pending || update.pending || snapshot.pending,
   );
@@ -92,7 +94,25 @@ function DraftEditor({
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
             draft={currentDraft}
           />
-          <DocumentPreview title={title} names={names} sections={sections} />
+          {/* Safe preview of the supported section projection only. An ordinary
+              document whose stored body is not a supported projection is
+              refused with a reason, and a mixed projection is qualified, rather
+              than shown as the whole document. Prospect behavior is unchanged. */}
+          {draft.prospectId || names.length ? (
+            <DocumentPreview title={title} names={names} sections={sections} />
+          ) : (
+            <p className={styles.secondary}>
+              Preview unavailable: there is no supported section content to
+              preview; stored body content is preserved read-only and is not
+              shown.
+            </p>
+          )}
+          {!draft.prospectId && names.length > 0 && unsupportedBlocks > 0 && (
+            <p className={styles.secondary}>
+              This preview shows only the supported sections; other stored
+              content is preserved read-only and is not shown.
+            </p>
+          )}
           {!draft.prospectId && (
             <OrdinaryDraftExport
               key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}

@@ -50,6 +50,11 @@ const h = vi.hoisted(() => ({
     onChange: (value: string) => void;
   }[],
   inputs: [] as { value: string; onChange: (event: unknown) => void }[],
+  previews: [] as {
+    title: string;
+    names: string[];
+    sections: Record<string, string>;
+  }[],
   update: vi.fn(),
   snapshot: vi.fn(),
   reload: vi.fn(),
@@ -112,7 +117,12 @@ vi.mock(
 );
 vi.mock(
   "../src/features/modules/workspace/rich-document/DocumentPreview",
-  () => ({ DocumentPreview: () => null }),
+  () => ({
+    DocumentPreview: (props: (typeof h.previews)[number]) => {
+      h.previews.push(props);
+      return createElement("div", null, "Preview draft");
+    },
+  }),
 );
 vi.mock(
   "../src/features/modules/workspace/rich-document/SectionPreview",
@@ -214,6 +224,7 @@ beforeEach(() => {
   h.selects = [];
   h.editors = [];
   h.inputs = [];
+  h.previews = [];
   h.current = draftWith();
   h.api.request.mockImplementation(async () => h.current);
   h.api.download.mockResolvedValue({
@@ -236,33 +247,45 @@ afterEach(() => vi.unstubAllGlobals());
 
 // ---- pure: tabs and parts --------------------------------------------------
 
-it("selects tabs by exact document id, not by name", () => {
+it("offers only packet add-on tabs, by exact id, excluding the primary row", () => {
   const draft = draftWith({
     documents: [
-      { id: TAB_A, name: "Overview" },
-      { id: TAB_B, name: "Overview" },
+      { id: TAB_A, name: "Overview", ordinal: 0 },
+      { id: TAB_B, name: "Overview", ordinal: 1 },
     ],
   } as unknown as Partial<WorkspaceDraftDocument>);
   const tabs = ordinaryExportTabs(draft);
-  expect(tabs).toEqual([
-    { id: TAB_A, label: "Overview" },
-    { id: TAB_B, label: "Overview" },
-  ]);
-  expect(new Set(tabs.map((tab) => tab.id)).size).toBe(2);
+  expect(tabs).toEqual([{ id: TAB_B, label: "Overview" }]);
   expect(ordinaryPartOptions(tabs).map((option) => option.value)).toEqual([
     ORDINARY_ALL_PART,
     ORDINARY_MAIN_PART,
-    TAB_A,
     TAB_B,
   ]);
 });
 
-it("falls back to a plain label for an unnamed tab", () => {
+it("orders tabs by ordinal before excluding the primary row", () => {
+  const draft = draftWith({
+    documents: [
+      { id: TAB_B, name: "Cover letter", ordinal: 1 },
+      { id: TAB_A, name: "Primary", ordinal: 0 },
+    ],
+  } as unknown as Partial<WorkspaceDraftDocument>);
+  expect(ordinaryExportTabs(draft)).toEqual([
+    { id: TAB_B, label: "Cover letter" },
+  ]);
+});
+
+it("falls back to a plain label for an unnamed add-on tab", () => {
   expect(
     ordinaryExportTabs(
-      draftWith({ documents: [{ id: TAB_A, name: "  " }] } as never),
+      draftWith({
+        documents: [
+          { id: TAB_A, name: "Primary", ordinal: 0 },
+          { id: TAB_B, name: "  ", ordinal: 1 },
+        ],
+      } as never),
     ),
-  ).toEqual([{ id: TAB_A, label: "Untitled tab" }]);
+  ).toEqual([{ id: TAB_B, label: "Untitled tab" }]);
 });
 
 // ---- pure: refusals --------------------------------------------------------
@@ -290,12 +313,15 @@ it("refuses a moved, held, foreign or prospect receipt before export", () => {
   ).toMatch(/ordinary documents only/i);
 });
 
-it("refuses a part that is not all, main or an exact current tab id", () => {
+it("refuses a part that is not all, main or an exact add-on tab id", () => {
   const tabs = ordinaryExportTabs(draftWith());
   expect(ordinaryPartRefusal(ORDINARY_ALL_PART, tabs)).toBe("");
   expect(ordinaryPartRefusal(ORDINARY_MAIN_PART, tabs)).toBe("");
-  expect(ordinaryPartRefusal(TAB_A, tabs)).toBe("");
-  expect(ordinaryPartRefusal(TAB_A.toUpperCase(), tabs)).toBe("");
+  expect(ordinaryPartRefusal(TAB_B, tabs)).toBe("");
+  expect(ordinaryPartRefusal(TAB_B.toUpperCase(), tabs)).toBe("");
+  expect(ordinaryPartRefusal(TAB_A, tabs)).toMatch(
+    /not part of this document/i,
+  );
   expect(ordinaryPartRefusal(FOREIGN_TAB, tabs)).toMatch(
     /not part of this document/i,
   );
@@ -394,8 +420,9 @@ it("renders the tab choice, both formats and the saved-content warning", () => {
   const markup = renderExport();
   expect(markup).toContain("All documents");
   expect(markup).toContain("Main sections only");
-  expect(markup).toContain("Main document");
   expect(markup).toContain("Cover letter");
+  // The primary row is not offered as an exact-id part.
+  expect(markup).not.toContain("Main document");
   expect(markup).toContain("Export saved PDF");
   expect(markup).toContain("Export saved DOCX");
   expect(markup).toContain("server-saved content");
@@ -522,6 +549,7 @@ function redrawDraft() {
   h.editors = [];
   h.inputs = [];
   h.buttons = [];
+  h.previews = [];
   return renderToStaticMarkup(
     createElement(WorkspaceDraft, {
       id: DRAFT_ID,
@@ -562,6 +590,46 @@ it("keeps an unsupported ordinary body inert and read-only", () => {
   expect(markup).toContain("table");
   expect(markup).not.toContain("Format text");
   expect(markup).not.toContain("<img>");
+  // The preview must refuse rather than present a title-only empty document.
+  expect(h.previews).toHaveLength(0);
+  expect(markup).toContain("Preview unavailable");
+});
+
+it("qualifies a mixed ordinary projection instead of hiding unsupported content", () => {
+  h.current = draftWith({
+    config: { sections: ["Body"], sectionContent: { Body: "Saved body" } },
+    documents: [
+      {
+        id: TAB_A,
+        name: "Primary",
+        ordinal: 0,
+        body: { blocks: [{ id: "b1", type: "photo" }] },
+      },
+    ],
+  } as never);
+  const markup = redrawDraft();
+  expect(h.previews).toHaveLength(1);
+  expect(markup).toContain("Preview draft");
+  expect(markup).toContain("shows only the supported sections");
+  expect(markup).not.toContain("Preview unavailable");
+});
+
+it("does not qualify a fully supported ordinary projection", () => {
+  h.current = draftWith({
+    config: { sections: ["Body"], sectionContent: { Body: "Saved body" } },
+    documents: [
+      {
+        id: TAB_A,
+        name: "Primary",
+        ordinal: 0,
+        body: { blocks: [{ id: "b1", type: "section", title: "Body" }] },
+      },
+    ],
+  } as never);
+  const markup = redrawDraft();
+  expect(h.previews).toHaveLength(1);
+  expect(markup).not.toContain("shows only the supported sections");
+  expect(markup).not.toContain("Preview unavailable");
 });
 
 it("offers ordinary saved export without any writer on render", () => {

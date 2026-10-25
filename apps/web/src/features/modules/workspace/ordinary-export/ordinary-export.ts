@@ -20,14 +20,38 @@ export type OrdinaryExportFile = { blob: Blob; filename: string };
 export const ORDINARY_ALL_PART = "all";
 export const ORDINARY_MAIN_PART = "main";
 
-/** Tabs are the current authorized draft's documents, identified by exact id. */
+/**
+ * Tabs are the current authorized draft's packet ADD-ON documents, identified by
+ * exact id. The producer orders documents by ordinal ascending and treats the
+ * first row as the draft's own (primary) content: its export service builds
+ * `packetDocs = documents.slice(1)` and accepts an exact `part` id only from
+ * those add-ons. Primary content is exported with `part=main`, never by its
+ * document id, so the primary row is deliberately not offered here.
+ */
 export function ordinaryExportTabs(
   draft: WorkspaceDraftDocument,
 ): OrdinaryExportTab[] {
-  return draft.documents.map((document) => ({
-    id: document.id,
-    label: document.name?.trim() || "Untitled tab",
-  }));
+  return [...draft.documents]
+    .sort((left, right) => left.ordinal - right.ordinal)
+    .slice(1)
+    .map((document) => ({
+      id: document.id,
+      label: document.name?.trim() || "Untitled tab",
+    }));
+}
+
+/**
+ * Stored blocks that the section preview does not project - anything that is not
+ * a titled section. They stay read-only and must be refused or explicitly
+ * qualified, never presented as the whole document.
+ */
+export function ordinaryUnsupportedBlocks(
+  draft: WorkspaceDraftDocument,
+): number {
+  return draft.documents
+    .filter((document) => !document.sourceBriefVersion)
+    .flatMap((document) => document.body.blocks ?? [])
+    .filter((block) => block.type !== "section" || !block.title).length;
 }
 
 export function ordinaryPartOptions(

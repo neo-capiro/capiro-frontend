@@ -33,12 +33,15 @@ export function OrdinaryDraftExport({
   const [error, setError] = useState("");
   const working = useRef(false);
   const mounted = useRef(true);
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    // React replays setup -> cleanup -> setup (StrictMode), so the flag must be
+    // restored on every attachment. Only a real unmount - or the existing
+    // request-lifetime cancellation - may suppress a late download.
+    mounted.current = true;
+    return () => {
       mounted.current = false;
-    },
-    [],
-  );
+    };
+  }, []);
   const options = ordinaryPartOptions(ordinaryExportTabs(draft));
   async function exportSaved(format: OrdinaryExportFormat) {
     if (working.current || disabled) return;
