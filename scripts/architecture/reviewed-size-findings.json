@@ -1415,19 +1415,19 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "58dcec17ff70d486702c0c50888d7057ef86355c9b893c4e65cef8c2c13c0c08",
-    "reason": "The existing reviewed mail-composition entry module and its props. The module has one substantive exported UI function. Rich text, body sanitization, recipients, attachments, authority, rewrite/Undo, signature sandbox, mailbox selection and transport/send validation already live in cohesive separate modules. This patch adds only stable contact/thread identity to the existing send hook. 411 lines is a visible review signal, not a new responsibility. No wholesale extraction is justified by this bounded argument change. Extract future independently changing workflow logic into the existing email owners, not a generic composer service.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "dff2dcd9e82873fc4a9d87e91e48b452c9c234898ff66850d6cf3d7ad759f0bd",
+    "reason": "Pre-existing file size signal: base e478 has 411 nonblank lines, fingerprint 58dcec17ff70d486702c0c50888d7057ef86355c9b893c4e65cef8c2c13c0c08; head 646bcf919 has 416 lines with the exact head fingerprint in this record. Replace the existing file record. Independent review of PR149 at exact head 646bcf919: this existing composition entry module still owns one draft, explicit review and send presentation workflow. The only delta passes existing person.email to the existing mailbox-selection hook. Rich body editing, recipient validation, attachments, signature, rewrite, authority and send transport remain in their existing dedicated owners. The 416 nonblank file lines do not add another responsibility; extracting argument plumbing would obscure the existing lifecycle without removing policy or behavior.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "2c5b5508cab8256e3683f1055077576b3891f85753e45ed467e9bfec3716d183",
+    "reason": "Pre-existing function size signal: base e478 has 376 nonblank body lines, fingerprint 7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c; head 646bcf919 has 381 body lines with the exact head fingerprint in this record. Replace the existing function record. Independent review of PR149 at exact head 646bcf919: the 381 nonblank body lines retain the existing coherent draft-to-review-to-send UI lifecycle and immutable reviewed payload. This delta only supplies contact email to useMailboxes; it introduces no sender, access policy, storage or transport responsibility. Both dialogs still share the same draft, pending locks and uncertain-delivery state. Existing specialized hooks and components own independently changing mechanisms, so no additional extraction is warranted for this argument change.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
@@ -3821,6 +3821,15 @@
     "fingerprint": "99ed618f24994d0110181586b2936daea978ff5a0c064e353cdc5359dcfe61dc",
     "reason": "The existing personal-settings presenter keeps its title mutation, Clerk account controls, email-signature child and navigation cards under their existing owners. The ST28 change only corrects the monitoring ScopedLink destination to the mounted Intelligence LegiWatch view, retaining current client context through the existing ScopedLink. It introduces no new state, transport, policy or workflow responsibility; the exact link-only change preserves cohesion.",
     "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/useMailboxes.ts",
+    "kind": "function",
+    "symbol": "useMailboxes",
+    "fingerprint": "2980261076acdc51769a5915f063dbc4092af1497723b9237450144ea93c08c3",
+    "reason": "Newly crossed function threshold: base e478 has 78 nonblank body lines, fingerprint a135877c9c64aa1e7064f64f724aae22cbdbd5e677ff301b1de7661cdb7738da; head 646bcf919 has 84 body lines with the exact head fingerprint in this record. Add this one function record. Independent review of PR149 at exact head 646bcf919: the 84 nonblank body lines form one current sending-mailbox selection hook. Its existing mailbox-list and reply-origin queries must jointly determine current selection, loading, error and refresh state. The origin query now reuses readMailThreadPage and useMailAuthority instead of duplicating a response schema; it validates canonical scope, permits only null or the exact direct client, and selects the exact origin only from current eligible rows. Core remains the permission and association owner. Splitting these coupled query states would not separate an independent responsibility; no new abstraction or second policy is justified.",
+    "reviewedBy": "Codex independent Wave 2 reviewer",
     "reviewedOn": "2026-10-25"
   }
 ]
