@@ -1,6 +1,7 @@
 "use client";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { useArtifactMutation } from "./artifacts/useArtifactMutation";
+import { MeetingCommandStatus } from "./commands/MeetingCommandStatus";
 import type { ArtifactActor, ArtifactChange } from "./artifacts/contracts";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
 import { ApiError } from "@/shared/portfolio/api/http";
@@ -78,6 +79,7 @@ function ArtifactEditor({
       !rows ||
       (change.id &&
         (!selected ||
+          (selected.revision ?? selected.updatedAt) !== change.revision ||
           selected.restricted ||
           selected.capabilities?.[
             change.action === "save" ? "edit" : change.action
@@ -93,7 +95,7 @@ function ArtifactEditor({
         "Refresh the saved artifacts before changing this record.",
       );
   }
-  const mutation = useArtifactMutation(meeting, kind, actor, assertReadable);
+  const mutation = useArtifactMutation(meeting, kind, assertReadable);
   const rows =
     query.isSuccess && !query.isFetching && !query.error
       ? readableRows()
@@ -104,6 +106,7 @@ function ArtifactEditor({
   const [editing, setEditing] = useState<
     | {
         id?: string;
+        revision?: string;
         body: string;
         confidential: boolean;
         generated?: boolean;
@@ -114,7 +117,7 @@ function ArtifactEditor({
       ? mutation.attempt.change
       : undefined,
   );
-  const [sharing, setSharing] = useState<string>();
+  const [sharing, setSharing] = useState<{ id: string; revision?: string }>();
   const [preview, setPreview] = useState<string>();
   const previewRecord = rows?.find(
     (item) => item.id === preview && !item.restricted,
@@ -130,7 +133,8 @@ function ArtifactEditor({
       ));
   const sharingCurrent = rows?.some(
     (item) =>
-      item.id === sharing &&
+      item.id === sharing?.id &&
+      (item.revision ?? item.updatedAt) === sharing.revision &&
       !item.restricted &&
       item.capabilities?.share !== false &&
       !item.confidential &&
@@ -143,14 +147,18 @@ function ArtifactEditor({
     } catch {
       return;
     }
-    mutation.mutate(change, () => {
-      setEditing(undefined);
-      setSharing(undefined);
-    });
+    mutation.mutate(change);
   };
   const singular = kind === "notes" ? "note" : "debrief";
   return (
     <div className="stack">
+      <MeetingCommandStatus
+        command={mutation.command}
+        onDone={() => {
+          setEditing(undefined);
+          setSharing(undefined);
+        }}
+      />
       <div className="row between">
         <h3>{kind === "notes" ? "Meeting notes" : "Debriefs"}</h3>
         <button
@@ -164,14 +172,25 @@ function ArtifactEditor({
           onClick={() => {
             if (!allowed || mutation.isPending || !readableRows()) return;
             const saved = mutation.attempt.change;
-            if (mutation.uncertain) {
-              if (saved?.action === "save") setEditing(saved);
+            if (saved?.action === "save") {
+              const reviewed = saved.id
+                ? readableRows()?.find(
+                    (row) => row.id === saved.id && !row.restricted,
+                  )
+                : undefined;
+              setEditing({
+                ...saved,
+                revision: mutation.uncertain
+                  ? saved.revision
+                  : (reviewed?.revision ?? reviewed?.updatedAt),
+              });
               return;
             }
+            if (mutation.uncertain) return;
             setEditing({ body: "", confidential: false });
           }}
         >
-          {mutation.uncertain && mutation.attempt.change?.action === "save"
+          {mutation.attempt.change?.action === "save"
             ? "Review retained draft"
             : `Add ${singular}`}
         </button>
@@ -242,6 +261,7 @@ function ArtifactEditor({
                     )
                       setEditing({
                         id: selected.id,
+                        revision: selected.revision ?? selected.updatedAt,
                         body: selected.body ?? "",
                         confidential: selected.confidential,
                       });
@@ -257,6 +277,7 @@ function ArtifactEditor({
                       changeArtifact({
                         action: "approve",
                         id: item.id,
+                        revision: item.revision ?? item.updatedAt,
                       })
                     }
                   >
@@ -284,7 +305,10 @@ function ArtifactEditor({
                               row.status === "approved",
                           )
                         )
-                          setSharing(item.id);
+                          setSharing({
+                            id: item.id,
+                            revision: item.revision ?? item.updatedAt,
+                          });
                       }}
                     >
                       Share
@@ -298,6 +322,7 @@ function ArtifactEditor({
                       changeArtifact({
                         action: "unshare",
                         id: item.id,
+                        revision: item.revision ?? item.updatedAt,
                       })
                     }
                   >
@@ -317,7 +342,6 @@ function ArtifactEditor({
           onClose={() => setPreview(undefined)}
         />
       )}
-      <QueryState error={mutation.error} />
       {mutation.uncertain && (
         <button
           className="button"
@@ -347,11 +371,16 @@ function ArtifactEditor({
             changeArtifact({
               action: "save",
               id: editing?.id,
+              revision: editing?.revision,
               body: String(form.get("body")).trim(),
               confidential: form.get("confidential") === "on",
             });
           }}
         >
+          <MeetingCommandStatus
+            command={mutation.command}
+            onDone={() => setEditing(undefined)}
+          />
           <TextareaField
             label="Content"
             name="body"
@@ -384,7 +413,6 @@ function ArtifactEditor({
           <small>
             Edits require approval again. Saving does not send email.
           </small>
-          <QueryState error={mutation.error} />
           <button className="button primary" disabled={blocked}>
             Save {singular}
           </button>
@@ -398,10 +426,13 @@ function ArtifactEditor({
         title={`Share ${singular}`}
         description={`Share this approved ${singular} with the authorized team for ${meeting.client?.name ?? "this client"}.`}
       >
+        <MeetingCommandStatus
+          command={mutation.command}
+          onDone={() => setSharing(undefined)}
+        />
         <p>
           Confidential material cannot be shared. This does not send an email.
         </p>
-        <QueryState error={mutation.error} />
         <button
           className="button primary"
           disabled={blocked}
@@ -409,7 +440,8 @@ function ArtifactEditor({
             if (sharing)
               changeArtifact({
                 action: "share",
-                id: sharing,
+                id: sharing.id,
+                revision: sharing.revision,
               });
           }}
         >

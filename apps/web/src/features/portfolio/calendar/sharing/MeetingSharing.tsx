@@ -4,6 +4,7 @@ import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { ReviewMeeting } from "../review/contracts";
 import { useSharing } from "./useSharing";
+import { MeetingCommandStatus } from "../commands/MeetingCommandStatus";
 import type { ShareAction } from "./contracts";
 import type { SharingTarget } from "./targets";
 import styles from "./sharing.module.css";
@@ -47,6 +48,7 @@ export function MeetingSharing({
       className={styles.dialog}
     >
       <div className="stack">
+        <MeetingCommandStatus command={state.command} onDone={onClose} />
         <p>
           {meeting.client?.name ?? "No associated client"} · Choose saved
           meeting artifacts.
@@ -90,9 +92,6 @@ export function MeetingSharing({
           <p role="alert">
             Sharing is unavailable for the current session or role.
           </p>
-        )}
-        {state.attempt.error && (
-          <p role="alert">{state.attempt.error.message}</p>
         )}
         {current && (
           <fieldset disabled={blocked || confirm} className={styles.choices}>
@@ -150,7 +149,7 @@ export function MeetingSharing({
             className="button primary"
             disabled={!current || blocked || !eligible}
             onClick={() =>
-              confirm ? state.submit(action, chosen, onClose) : setConfirm(true)
+              confirm ? state.submit(action, chosen) : setConfirm(true)
             }
           >
             {state.attempt.status === "pending"

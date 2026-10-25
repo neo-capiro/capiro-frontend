@@ -8,6 +8,8 @@ export type SharingTarget = ShareRef & {
   shareReason?: string;
   unshareReason?: string;
   snapshot: string;
+  revision?: string | number;
+  parentRevision?: string;
 };
 export function sharingTargets(
   meeting: SharingMeeting,
@@ -30,18 +32,29 @@ export function sharingTargets(
         type === "attachment"
           ? "approvedAt" in row && Boolean(row.approvedAt)
           : "status" in row && row.status === "approved";
-      const shareReason = !meeting.client
-        ? "Associate a client first"
-        : institutional
-          ? "Private Research Portfolio preparation"
-          : confidential
-            ? "Confidential artifact"
-            : !approved
-              ? "Approval required"
-              : type === "attachment" &&
-                  (!file || !canReviewAttachment(file, actor.userId))
-                ? "Current file readiness is unavailable"
-                : undefined;
+      const revision =
+        type === "attachment" && "metadataRevision" in row
+          ? row.metadataRevision
+          : "revision" in row && typeof row.revision === "string"
+            ? row.revision
+            : "updatedAt" in row && typeof row.updatedAt === "string"
+              ? row.updatedAt
+              : undefined;
+      const shareReason =
+        revision === undefined || !meeting.updatedAt
+          ? "Refresh the artifact version"
+          : !meeting.client
+            ? "Associate a client first"
+            : institutional
+              ? "Private Research Portfolio preparation"
+              : confidential
+                ? "Confidential artifact"
+                : !approved
+                  ? "Approval required"
+                  : type === "attachment" &&
+                      (!file || !canReviewAttachment(file, actor.userId))
+                    ? "Current file readiness is unavailable"
+                    : undefined;
       const mayUnshare =
         admin ||
         row.sharedByUserId === actor.userId ||
@@ -49,19 +62,24 @@ export function sharingTargets(
       return {
         type,
         id: row.id,
+        revision,
+        parentRevision: meeting.updatedAt,
         label:
           type === "attachment" && "fileName" in row
             ? row.fileName
             : `${type === "prep" ? "Meeting prep" : type === "note" ? "Meeting notes" : "Debrief"} · ${new Date(row.createdAt).toLocaleDateString("en-US", { timeZone: "UTC" })}`,
         shared: Boolean(row.sharedAt),
         shareReason,
-        unshareReason: institutional
-          ? "Private Research Portfolio preparation"
-          : !row.sharedAt
-            ? "Not shared"
-            : !mayUnshare
-              ? "Only the sharer, author or an administrator can unshare"
-              : undefined,
+        unshareReason:
+          revision === undefined || !meeting.updatedAt
+            ? "Refresh the artifact version"
+            : institutional
+              ? "Private Research Portfolio preparation"
+              : !row.sharedAt
+                ? "Not shared"
+                : !mayUnshare
+                  ? "Only the sharer, author or an administrator can unshare"
+                  : undefined,
         snapshot: JSON.stringify([
           row,
           file

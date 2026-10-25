@@ -1,16 +1,9 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useApi } from "@/shared/portfolio/api/provider";
+import { useQueryClient } from "@tanstack/react-query";
 import { ApiError } from "@/shared/portfolio/api/http";
-import { useIdentity } from "@/shared/portfolio/auth/identity";
-import { useDispatchGuard } from "./access/public";
 import type { Meeting } from "./contracts";
-import {
-  meetingInputSchema,
-  meetingSaveReceiptSchema,
-  type MeetingInput,
-} from "./meeting-save";
+import { meetingInputSchema, type MeetingInput } from "./meeting-save";
+import { useMeetingCommand } from "./commands/useMeetingCommand";
 
 export function useSaveMeeting(
   meeting: Meeting | undefined,
@@ -18,36 +11,42 @@ export function useSaveMeeting(
   clientId?: string,
   readClientId?: string,
 ) {
-  const api = useApi();
   const cache = useQueryClient();
-  const meetingId = meeting?.id;
+  const command = useMeetingCommand(meeting?.id ?? null);
   const originalClientId = meeting?.client?.id ?? null;
-  const identity = useIdentity();
-  const userId = identity.data?.user.id;
-  const tenantId = identity.data?.tenant?.id;
-  const guard = useDispatchGuard(userId, tenantId);
-  const busy = useRef(false);
-  const uncertain = useRef(false);
-  const [isUncertain, setUncertain] = useState(false);
-  const lifetime = useRef<AbortController | null>(null);
-  useLayoutEffect(() => {
-    const controller = new AbortController();
-    lifetime.current = controller;
-    return () => controller.abort();
-  }, [meetingId, originalClientId, clientId, readClientId, userId, tenantId]);
-  const mutation = useMutation({
-    mutationFn: async (body: MeetingInput) => {
-      const input = meetingInputSchema.parse(body);
-      const controller = lifetime.current;
-      if (!controller)
-        throw new ApiError(409, "Reopen this meeting before saving.");
-      const current = () => {
-        controller.signal.throwIfAborted();
-        guard();
-        if (meetingId) {
+  const mutate = (body: MeetingInput) => {
+    if (command.blocked) return;
+    const input = meetingInputSchema.parse(body);
+    void command
+      .save(
+        {
+          operation: meeting ? "update" : "create",
+          meetingId: meeting?.id ?? null,
+          expectedClientId: originalClientId,
+          expectedRevision: meeting ? (input.expectedRevision ?? null) : null,
+          meeting: {
+            subject: input.subject,
+            description: input.description ?? null,
+            location: input.location ?? null,
+            startsAt: input.startsAt,
+            endsAt: input.endsAt,
+            assignClient: !meeting || "clientId" in input,
+            clientId:
+              !meeting || "clientId" in input
+                ? input.clientId !== undefined
+                  ? input.clientId
+                  : (clientId ?? null)
+                : null,
+          },
+          artifact: null,
+          artifacts: [],
+        },
+        async (_signal, guard) => {
+          guard();
+          if (!meeting) return;
           const saved = cache.getQueryState<Meeting>([
             "meeting",
-            meetingId,
+            meeting.id,
             readClientId ?? null,
           ]);
           if (
@@ -55,65 +54,24 @@ export function useSaveMeeting(
             saved.fetchStatus !== "idle" ||
             saved.isInvalidated ||
             saved.error ||
-            saved.data?.id !== meetingId ||
+            saved.data?.id !== meeting.id ||
             (saved.data.client?.id ?? null) !== originalClientId ||
-            (meeting?.updatedAt !== undefined &&
-              saved.data.updatedAt !== meeting.updatedAt)
+            saved.data.updatedAt !== meeting.updatedAt
           )
             throw new ApiError(
               409,
               "Refresh the meeting details before saving.",
             );
-        }
-      };
-      current();
-      let knownRefusal = false;
-      try {
-        const receipt = await api
-          .request(
-            "core",
-            `engagement/meetings${meetingId ? `/${encodeURIComponent(meetingId)}` : ""}`,
-            meetingSaveReceiptSchema(meetingId, input, originalClientId),
-            {
-              method: meetingId ? "PUT" : "POST",
-              body: input,
-              signal: controller.signal,
-            },
-          )
-          .catch((error: unknown) => {
-            knownRefusal =
-              error instanceof ApiError &&
-              [400, 401, 403, 404, 409, 422].includes(error.status);
-            throw error;
-          });
-        current();
-        return receipt;
-      } catch (error) {
-        if (knownRefusal) throw error;
-        uncertain.current = true;
-        setUncertain(true);
-        throw new Error(
-          "The meeting save may have completed. Keep this draft and verify the saved meeting before further changes; this attempt cannot be retried here.",
-        );
-      }
-    },
-    onSuccess: () => {
-      void cache.invalidateQueries({ queryKey: ["calendar", "meetings"] });
-      void cache.invalidateQueries({ queryKey: ["meeting", meetingId] });
-      void cache.invalidateQueries({ queryKey: ["meeting-library"] });
-      onSaved();
-    },
-    onSettled: () => {
-      busy.current = false;
-    },
-  });
+        },
+      )
+      .catch(() => {});
+  };
   return {
-    ...mutation,
-    uncertain: isUncertain,
-    mutate: (body: MeetingInput) => {
-      if (busy.current || uncertain.current) return;
-      busy.current = true;
-      mutation.mutate(body);
-    },
+    command,
+    mutate,
+    onSaved,
+    isPending: command.busy,
+    uncertain: command.blocked,
+    error: command.error ? new Error(command.error) : null,
   };
 }

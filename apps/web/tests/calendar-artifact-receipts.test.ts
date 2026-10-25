@@ -1,346 +1,105 @@
-import { describe, expect, it, vi } from "vitest";
-import { createApiClient } from "../src/shared/portfolio/api/http";
-import { changeMeetingArtifact } from "../src/features/portfolio/calendar/artifacts/api";
+import { expect, it } from "vitest";
 import {
-  artifactReceiptSchema,
-  type ArtifactChange,
-  type ArtifactKind,
-} from "../src/features/portfolio/calendar/artifacts/contracts";
-
-const actor = { userId: "actor-one", tenantId: "tenant-one" };
-const meeting = {
-  id: "meeting-one",
-  subject: "Synthetic",
-  description: null,
-  location: null,
-  startsAt: "2026-10-10T14:00:00Z",
-  endsAt: "2026-10-10T15:00:00Z",
-  status: "scheduled",
-  joinLink: null,
-  visibility: "private" as const,
-  isVirtual: false,
-  meri: null,
-  client: { id: "client-one", name: "Synthetic" },
-  attendees: [],
-  preps: [],
-};
-const baseMetadata = {
-  id: "artifact-one",
-  meetingId: "meeting-one",
-  clientId: "client-one",
-  authorUserId: "actor-one",
-  confidential: false,
-  status: "draft",
-  sharedAt: null,
-  sharedByUserId: null,
-  createdAt: "2026-10-10T15:00:00Z",
-  updatedAt: "2026-10-10T15:00:00Z",
-};
-const save: ArtifactChange = {
-  action: "save",
-  body: "Retained content",
-  confidential: false,
-};
-for (const kind of ["notes", "debriefs"] as ArtifactKind[]) {
-  const metadata = {
-    ...baseMetadata,
-    status: kind === "notes" ? "draft" : "generated",
-    ...(kind === "notes" ? { approvedAt: null, approvedByUserId: null } : {}),
-  };
-  describe(kind, () => {
-    it.each([
-      {},
-      null,
-      { ...metadata, meetingId: "foreign" },
-      { ...metadata, clientId: "foreign" },
-      { ...metadata, authorUserId: "foreign" },
-      { ...metadata, confidential: true },
-      { ...metadata, status: "approved" },
-    ])("rejects an unrelated or incomplete creation receipt: %j", (receipt) => {
-      expect(
-        artifactReceiptSchema(meeting, kind, actor, save).safeParse(receipt)
-          .success,
-      ).toBe(false);
-    });
-    it("accepts native metadata without plaintext or a tenant field", () => {
-      expect(
-        artifactReceiptSchema(meeting, kind, actor, save).safeParse(metadata)
-          .success,
-      ).toBe(true);
-    });
-    it("validates edit ID and lifecycle while allowing an admin to edit another author's artifact", () => {
-      const schema = artifactReceiptSchema(meeting, kind, actor, {
-        ...save,
-        id: metadata.id,
-      });
-      expect(
-        schema.safeParse({
-          ...metadata,
-          authorUserId: "another-author",
-          status: "edited",
-        }).success,
-      ).toBe(true);
-      expect(
-        schema.safeParse({ ...metadata, id: "foreign", status: "edited" })
-          .success,
-      ).toBe(false);
-      expect(schema.safeParse(metadata).success).toBe(false);
-    });
-    it("validates native approval attribution separately for notes and debriefs", () => {
-      const schema = artifactReceiptSchema(meeting, kind, actor, {
-        action: "approve",
-        id: metadata.id,
-      });
-      const receipt = {
-        ...metadata,
-        status: "approved",
-        ...(kind === "notes"
-          ? { approvedAt: metadata.updatedAt, approvedByUserId: actor.userId }
-          : {}),
-      };
-      expect(schema.safeParse(receipt).success).toBe(true);
-      expect(schema.safeParse({ ...receipt, id: "foreign" }).success).toBe(
-        false,
-      );
-      if (kind === "notes")
-        expect(
-          schema.safeParse({ ...receipt, approvedByUserId: "foreign" }).success,
-        ).toBe(false);
-    });
-    it("accepts an idempotent share retaining its original sharer and rejects absent/foreign artifacts", () => {
-      const schema = artifactReceiptSchema(meeting, kind, actor, {
-        action: "share",
-        id: metadata.id,
-      });
-      const artifact = {
-        ...metadata,
-        status: "approved",
-        sharedAt: metadata.updatedAt,
-        sharedByUserId: "original-sharer",
-      };
-      const receipt = { ...meeting, visibility: "shared", [kind]: [artifact] };
-      expect(schema.safeParse(receipt).success).toBe(true);
-      expect(schema.safeParse({ ...receipt, [kind]: [] }).success).toBe(false);
-      expect(
-        schema.safeParse({
-          ...receipt,
-          [kind]: [{ ...artifact, meetingId: "foreign" }],
-        }).success,
-      ).toBe(false);
-      expect(
-        schema.safeParse({ ...receipt, [kind]: [artifact, artifact] }).success,
-      ).toBe(false);
-    });
-    it("accepts unshare with another artifact still shared, but requires both selected share stamps cleared", () => {
-      const schema = artifactReceiptSchema(meeting, kind, actor, {
-        action: "unshare",
-        id: metadata.id,
-      });
-      const receipt = {
-        ...meeting,
-        visibility: "shared",
-        [kind]: [{ ...metadata, status: "approved" }],
-      };
-      expect(schema.safeParse(receipt).success).toBe(true);
-      expect(
-        schema.safeParse({
-          ...receipt,
-          [kind]: [{ ...metadata, sharedByUserId: "original-sharer" }],
-        }).success,
-      ).toBe(false);
-    });
-    it.each([200, 204, 500, 503])(
-      "retains uncertainty for dispatched invalid responses (HTTP %i)",
-      async (status) => {
-        const fetcher = vi
-          .fn()
-          .mockResolvedValueOnce(Response.json(meeting))
-          .mockResolvedValueOnce(
-            status === 204
-              ? new Response(null, { status })
-              : Response.json({}, { status }),
-          );
-        await expect(
-          changeMeetingArtifact(
-            createApiClient(fetcher),
-            meeting,
-            kind,
-            actor,
-            save,
-            () => {},
-            new AbortController().signal,
-          ),
-        ).rejects.toMatchObject({ uncertain: true });
-        expect(fetcher).toHaveBeenCalledTimes(2);
+  prepareMeetingCommand,
+  type MeetingChange,
+} from "../src/features/portfolio/calendar/commands/recovery";
+import { meetingReceiptSchema } from "../src/features/portfolio/calendar/commands/receipt";
+const id = (n: number) =>
+  `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
+const actor = { tenantId: id(1), userId: id(2) };
+const revision = "2026-10-24T12:00:00.000Z";
+for (const operation of [
+  "note-create",
+  "note-update",
+  "note-approve",
+  "debrief-create",
+  "debrief-update",
+  "debrief-approve",
+] as const) {
+  it(`${operation} requires the exact persisted command and result identity`, async () => {
+    const create = operation.endsWith("create"),
+      approve = operation.endsWith("approve");
+    const change: MeetingChange = {
+      operation,
+      meetingId: id(3),
+      expectedClientId: id(4),
+      expectedRevision: revision,
+      meeting: null,
+      artifacts: [],
+      artifact: {
+        id: create ? null : id(5),
+        revision: create ? null : revision,
+        body: approve ? null : "Reviewed draft",
+        confidential: approve ? null : false,
       },
-    );
-    it.each([400, 401, 403, 404, 409, 422])(
-      "distinguishes a known HTTP %i refusal from uncertain completion",
-      async (status) => {
-        const fetcher = vi
-          .fn()
-          .mockResolvedValueOnce(Response.json(meeting))
-          .mockResolvedValueOnce(
-            Response.json({ message: "Refused" }, { status }),
-          );
-        await expect(
-          changeMeetingArtifact(
-            createApiClient(fetcher),
-            meeting,
-            kind,
-            actor,
-            save,
-            () => {},
-            new AbortController().signal,
-          ),
-        ).rejects.toMatchObject({
-          uncertain: false,
-          message:
-            status === 401 ? "Your session expired. Sign in again." : "Refused",
-        });
+    };
+    const a = await prepareMeetingCommand(actor, change, id(6));
+    const type = operation.startsWith("note-") ? "note" : "debrief";
+    const row = {
+      schemaVersion: 1,
+      tenantId: actor.tenantId,
+      actorUserId: actor.userId,
+      requestId: a.input.requestId,
+      payloadDigest: a.payloadDigest,
+      operation,
+      requestedMeetingId: id(3),
+      expectedClientId: id(4),
+      status: "completed",
+      refusal: null,
+      createdAt: revision,
+      available: true,
+      result: {
+        meetingId: id(3),
+        clientId: id(4),
+        revision,
+        artifacts: [{ type, id: id(5), revision }],
       },
-    );
-    it("does not dispatch after a changed parent client", async () => {
-      const fetcher = vi.fn().mockResolvedValue(
-        Response.json({
-          ...meeting,
-          client: { id: "foreign", name: "Other" },
-        }),
-      );
-      await expect(
-        changeMeetingArtifact(
-          createApiClient(fetcher),
-          meeting,
-          kind,
-          actor,
-          save,
-          () => {},
-          new AbortController().signal,
-        ),
-      ).rejects.toMatchObject({ uncertain: false });
-      expect(fetcher).toHaveBeenCalledTimes(1);
-    });
-    it("does not dispatch after the initiating scope aborts during preflight", async () => {
-      const controller = new AbortController();
-      const fetcher = vi.fn().mockImplementation(async () => {
-        controller.abort();
-        return Response.json(meeting);
-      });
-      await expect(
-        changeMeetingArtifact(
-          createApiClient(fetcher),
-          meeting,
-          kind,
-          actor,
-          save,
-          () => {},
-          controller.signal,
-        ),
-      ).rejects.toMatchObject({ uncertain: false });
-      expect(fetcher).toHaveBeenCalledTimes(1);
-    });
-    it("treats a network failure after dispatch as uncertain", async () => {
-      const fetcher = vi
-        .fn()
-        .mockResolvedValueOnce(Response.json(meeting))
-        .mockRejectedValueOnce(new TypeError("Network failed"));
-      await expect(
-        changeMeetingArtifact(
-          createApiClient(fetcher),
-          meeting,
-          kind,
-          actor,
-          save,
-          () => {},
-          new AbortController().signal,
-        ),
-      ).rejects.toMatchObject({ uncertain: true });
-    });
+    };
+    const schema = meetingReceiptSchema(actor, a.input, a.payloadDigest);
+    expect(schema.safeParse(row).success).toBe(true);
+    for (const result of [
+      { ...row.result, meetingId: id(9) },
+      { ...row.result, clientId: null },
+      { ...row.result, artifacts: [] },
+      {
+        ...row.result,
+        artifacts: [
+          { type: type === "note" ? "debrief" : "note", id: id(5), revision },
+        ],
+      },
+      { ...row.result, artifacts: [{ type, id: id(5), revision: 2 }] },
+    ])
+      expect(schema.safeParse({ ...row, result }).success).toBe(false);
+    if (!create)
+      expect(
+        schema.safeParse({
+          ...row,
+          result: { ...row.result, artifacts: [{ type, id: id(9), revision }] },
+        }).success,
+      ).toBe(false);
+    expect(
+      schema.safeParse({ ...row, payloadDigest: "a".repeat(64) }).success,
+    ).toBe(false);
+    expect(schema.safeParse({ ...row, status: "refused" }).success).toBe(false);
   });
 }
-
-describe("meeting save native normalization", () => {
-  it("matches normalized fields and equivalent instants", async () => {
-    const { meetingSaveReceiptSchema } =
-      await import("../src/features/portfolio/calendar/meeting-save");
-    const input = {
-      subject: "  Synthetic  ",
-      description: " ",
-      location: " ",
-      startsAt: meeting.startsAt,
-      endsAt: meeting.endsAt,
-      clientId: "client-one",
-    };
-    const schema = meetingSaveReceiptSchema(meeting.id, input);
-    expect(
-      schema.safeParse({ ...meeting, startsAt: "2026-10-10T14:00:00.000Z" })
-        .success,
-    ).toBe(true);
-    expect(schema.safeParse({ ...meeting, id: "foreign" }).success).toBe(false);
-    expect(
-      schema.safeParse({ ...meeting, client: { id: "foreign", name: "Other" } })
-        .success,
-    ).toBe(false);
-    expect(
-      schema.safeParse({ ...meeting, startsAt: "2026-10-10T16:00:00Z" })
-        .success,
-    ).toBe(false);
-  });
-  it("permits backend automatic association only on an unscoped create", async () => {
-    const { meetingSaveReceiptSchema } =
-      await import("../src/features/portfolio/calendar/meeting-save");
-    const input = {
-      subject: meeting.subject,
-      startsAt: meeting.startsAt,
-      endsAt: meeting.endsAt,
-    };
-    expect(
-      meetingSaveReceiptSchema(undefined, input).safeParse(meeting).success,
-    ).toBe(true);
-    expect(
-      meetingSaveReceiptSchema(undefined, {
-        ...input,
-        clientId: "other",
-      }).safeParse(meeting).success,
-    ).toBe(false);
-    expect(
-      meetingSaveReceiptSchema(meeting.id, {
-        ...input,
-        clientId: null,
-      }).safeParse(meeting).success,
-    ).toBe(false);
-    expect(
-      meetingSaveReceiptSchema(meeting.id, {
-        ...input,
-        clientId: null,
-      }).safeParse({ ...meeting, client: null }).success,
-    ).toBe(true);
-  });
-  it("binds an unchanged update receipt without resubmitting the association", async () => {
-    const { meetingSaveReceiptSchema } =
-      await import("../src/features/portfolio/calendar/meeting-save");
-    const input = {
-      subject: meeting.subject,
-      startsAt: meeting.startsAt,
-      endsAt: meeting.endsAt,
-    };
-    const receipt = meetingSaveReceiptSchema(meeting.id, input, "client-one");
-    expect(receipt.safeParse(meeting).success).toBe(true);
-    expect(receipt.safeParse({ ...meeting, client: null }).success).toBe(false);
-    expect(
-      receipt.safeParse({ ...meeting, client: { id: "other", name: "Other" } })
-        .success,
-    ).toBe(false);
-    expect(
-      meetingSaveReceiptSchema(meeting.id, input, null).safeParse({
-        ...meeting,
-        client: null,
-      }).success,
-    ).toBe(true);
-    expect(
-      meetingSaveReceiptSchema(meeting.id, input, null).safeParse(meeting)
-        .success,
-    ).toBe(false);
-    expect(input).not.toHaveProperty("clientId");
-  });
+it("attachments use integer metadata revisions including zero", async () => {
+  const change: MeetingChange = {
+    operation: "share",
+    meetingId: id(3),
+    expectedClientId: id(4),
+    expectedRevision: revision,
+    meeting: null,
+    artifact: null,
+    artifacts: [{ type: "attachment", id: id(5), revision: 0 }],
+  };
+  const a = await prepareMeetingCommand(actor, change, id(6));
+  expect(a.input.artifacts[0]!.revision).toBe(0);
+  await expect(
+    prepareMeetingCommand(
+      actor,
+      { ...change, artifacts: [{ type: "attachment", id: id(5), revision }] },
+      id(6),
+    ),
+  ).rejects.toThrow();
 });

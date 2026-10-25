@@ -1,128 +1,72 @@
 import { describe, expect, it } from "vitest";
-import {
-  artifactReceiptSchema,
-  type ArtifactKind,
-} from "../src/features/portfolio/calendar/artifacts/contracts";
-
-const actor = { userId: "author", tenantId: "tenant" };
+import { artifactCommand } from "../src/features/portfolio/calendar/artifacts/api";
+import { parseMeetingCommand } from "../src/features/portfolio/calendar/commands/input";
+const id = (n: number) =>
+  `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
+const revision = "2026-10-24T12:00:00.000Z";
 const meeting = {
-  id: "meeting",
-  subject: "Synthetic",
-  description: null,
-  location: null,
-  startsAt: "2026-10-10T14:00:00Z",
-  endsAt: "2026-10-10T15:00:00Z",
-  status: "scheduled",
-  joinLink: null,
-  visibility: "shared" as const,
-  isVirtual: false,
-  meri: null,
-  client: { id: "client", name: "Synthetic" },
-  attendees: [],
-  preps: [],
+  id: id(1),
+  client: { id: id(2), name: "Synthetic" },
+  updatedAt: revision,
 };
-const metadata = {
-  id: "artifact",
-  meetingId: meeting.id,
-  clientId: meeting.client.id,
-  authorUserId: actor.userId,
-  confidential: false,
-  sharedAt: null,
-  sharedByUserId: null,
-  createdAt: "2026-10-10T15:00:00Z",
-  updatedAt: "2026-10-10T15:00:00Z",
-};
-const save = {
-  action: "save" as const,
-  body: "Synthetic content",
-  confidential: false,
-};
-const clearedApproval = { approvedAt: null, approvedByUserId: null };
-describe("pinned native artifact lifecycle", () => {
-  for (const kind of ["notes", "debriefs"] as ArtifactKind[]) {
-    const receipt = {
-      ...metadata,
-      status: kind === "notes" ? "draft" : "generated",
-      ...(kind === "notes" ? clearedApproval : {}),
-    };
-    it(`${kind} accepts its real creation status and rejects the other artifact's status`, () => {
-      const schema = artifactReceiptSchema(meeting, kind, actor, save);
-      expect(schema.safeParse(receipt).success).toBe(true);
-      expect(
-        schema.safeParse({
-          ...receipt,
-          status: kind === "notes" ? "generated" : "draft",
-        }).success,
-      ).toBe(false);
-    });
-    it(`${kind} accepts a native idempotent share whose original sharer was deleted`, () => {
-      const artifact = {
-        ...receipt,
-        status: "approved",
-        sharedAt: metadata.updatedAt,
-        sharedByUserId: null,
-      };
-      const schema = artifactReceiptSchema(meeting, kind, actor, {
-        action: "share",
-        id: metadata.id,
+for (const kind of ["notes", "debriefs"] as const)
+  describe(`${kind} command lifecycle`, () => {
+    const prefix = kind === "notes" ? "note" : "debrief";
+    for (const action of [
+      "create",
+      "update",
+      "approve",
+      "share",
+      "unshare",
+    ] as const)
+      it(`binds reviewed ${action}`, () => {
+        const change =
+          action === "create" || action === "update"
+            ? {
+                action: "save" as const,
+                body: "Original draft",
+                confidential: true,
+                ...(action === "update" ? { id: id(3), revision } : {}),
+              }
+            : { action, id: id(3), revision };
+        const mapped = artifactCommand(meeting, kind, change);
+        const parsed = parseMeetingCommand({
+          schemaVersion: 1,
+          requestId: id(4),
+          ...mapped,
+        });
+        expect(parsed).toMatchObject({
+          meetingId: meeting.id,
+          expectedClientId: meeting.client.id,
+          expectedRevision: revision,
+          operation:
+            action === "share" || action === "unshare"
+              ? action
+              : `${prefix}-${action}`,
+        });
+        if (action === "share" || action === "unshare")
+          expect(parsed.artifacts).toEqual([
+            { type: prefix, id: id(3), revision },
+          ]);
+        else
+          expect(parsed.artifact).toMatchObject(
+            action === "approve"
+              ? { id: id(3), revision, body: null, confidential: null }
+              : {
+                  id: action === "update" ? id(3) : null,
+                  revision: action === "update" ? revision : null,
+                  body: "Original draft",
+                  confidential: true,
+                },
+          );
       });
-      expect(schema.safeParse({ ...meeting, [kind]: [artifact] }).success).toBe(
-        true,
-      );
-      for (const invalid of [
-        { id: "foreign" },
-        { meetingId: "foreign" },
-        { clientId: "foreign" },
-        { status: "edited" },
-        { confidential: true },
-        { sharedAt: null },
-      ])
-        expect(
-          schema.safeParse({
-            ...meeting,
-            [kind]: [{ ...artifact, ...invalid }],
-          }).success,
-        ).toBe(false);
-      expect(
-        schema.safeParse({
-          ...meeting,
-          visibility: "private",
-          [kind]: [artifact],
-        }).success,
-      ).toBe(false);
+    it("does not invent a missing reviewed revision", () => {
+      expect(() =>
+        parseMeetingCommand({
+          schemaVersion: 1,
+          requestId: id(4),
+          ...artifactCommand(meeting, kind, { action: "approve", id: id(3) }),
+        }),
+      ).toThrow();
     });
-  }
-  for (const editing of [false, true])
-    it(`note ${editing ? "edit" : "create"} requires cleared native approval stamps`, () => {
-      const schema = artifactReceiptSchema(meeting, "notes", actor, {
-        ...save,
-        ...(editing ? { id: metadata.id } : {}),
-      });
-      const receipt = {
-        ...metadata,
-        status: editing ? "edited" : "draft",
-        ...clearedApproval,
-      };
-      expect(schema.safeParse(receipt).success).toBe(true);
-      expect(
-        schema.safeParse({ ...receipt, approvedAt: metadata.updatedAt })
-          .success,
-      ).toBe(false);
-      expect(
-        schema.safeParse({ ...receipt, approvedByUserId: actor.userId })
-          .success,
-      ).toBe(false);
-      const { approvedAt, approvedByUserId, ...incomplete } = receipt;
-      void approvedAt;
-      void approvedByUserId;
-      expect(schema.safeParse(incomplete).success).toBe(false);
-    });
-  it("debrief edit accepts edited metadata without nonexistent approval stamps", () => {
-    expect(
-      artifactReceiptSchema(meeting, "debriefs", actor, {
-        ...save,
-        id: metadata.id,
-      }).safeParse({ ...metadata, status: "edited" }).success,
-    ).toBe(true);
   });
-});

@@ -165,6 +165,7 @@ function retireRecovery(
           | "ACTIVITY_UNDO_REFUSED"
           | "DIRECTORY_NOTE_REFUSED"
           | "PROSPECT_NEW_CLIENT_REFUSED"
+          | "MEETING_COMMAND_REFUSED"
           | "OBJECTIVE_GENERATION_FAILED"
           | "OBJECTIVE_CONTEXT_INCOMPLETE"
           | "OBJECTIVE_ASSOCIATION_REJECTED"
@@ -253,6 +254,28 @@ export function retireFileBatchMoveRefusalRecovery(
     scope,
     requestId,
     { state: "refused", code: "FILE_BATCH_MOVE_REFUSED" },
+    assert,
+  );
+}
+
+/** Caller re-reads and validates the exact immutable Core refusal under the
+ * execution lock. Missing results and generic HTTP errors never release it. */
+export function retireMeetingRefusalRecovery(
+  scope: string,
+  requestId: string,
+  refusal: { requestId: string; code: string; status: string },
+  assert: () => void,
+) {
+  if (
+    refusal.requestId !== requestId ||
+    refusal.code !== "MEETING_COMMAND_REFUSED" ||
+    refusal.status !== "refused"
+  )
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "MEETING_COMMAND_REFUSED" },
     assert,
   );
 }

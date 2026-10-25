@@ -54,9 +54,6 @@ export const collection = {
   debrief: "debriefs",
   attachment: "attachments",
 } as const;
-export function selectedArtifact(meeting: SharingMeeting, ref: ShareRef) {
-  return meeting[collection[ref.type]].find((row) => row.id === ref.id);
-}
 export function sharingScope(meeting: ReviewMeeting, actor: ReviewActor) {
   return sharingMeetingSchema.refine(
     (row) =>
@@ -64,35 +61,6 @@ export function sharingScope(meeting: ReviewMeeting, actor: ReviewActor) {
       row.tenantId === actor.tenantId &&
       (row.client?.id ?? null) === (meeting.client?.id ?? null),
     "The meeting, client or organization changed. Reopen the meeting.",
-  );
-}
-export function sharingReceipt(
-  meeting: ReviewMeeting,
-  actor: ReviewActor,
-  action: ShareAction,
-  refs: ShareRef[],
-) {
-  return sharingScope(meeting, actor).refine(
-    (row) =>
-      refs.length > 0 &&
-      refs.every((ref) => {
-        const item = selectedArtifact(row, ref);
-        if (!item) return false;
-        if (action === "unshare")
-          return item.sharedAt === null && item.sharedByUserId === null;
-        return (
-          row.visibility === "shared" &&
-          Boolean(item.sharedAt) &&
-          ("approvedAt" in item && ref.type === "attachment"
-            ? Boolean(item.approvedAt)
-            : "status" in item && item.status === "approved") &&
-          (!("confidential" in item) || !item.confidential) &&
-          (!("generatedFrom" in item) ||
-            item.generatedFrom?.schemaVersion !==
-              "research_portfolio_institutional_v1")
-        );
-      }),
-    "The receipt does not confirm every selected artifact's sharing state.",
   );
 }
 export function sharedFeedSchema(clientId: string, tenantId: string) {

@@ -3,11 +3,12 @@ import { createRoot } from "react-dom/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { DataProvider } from "@/shared/portfolio/api/provider";
 import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
+import { readRecovery } from "@/shared/session/recovery/journal";
 import {
-  sharingAttemptKey,
-  type SharingAttempt,
-} from "@/features/portfolio/calendar/sharing/fence";
-import { sharingMeeting } from "../calendar-sharing-fixtures";
+  meetingCommandScope,
+  meetingCommandContract,
+} from "@/features/portfolio/calendar/commands/recovery";
+import { sharingActor, sharingMeeting } from "../calendar-sharing-fixtures";
 import "@/app/globals.css";
 import "@/shared/portfolio/styles.css";
 import "./test-font.css";
@@ -16,20 +17,21 @@ function Harness() {
   useEffect(() => {
     Object.assign(window, {
       __sharingTest: {
-        originalSharingAttempt: () =>
-          cache.getQueryData<SharingAttempt>(
-            sharingAttemptKey(sharingMeeting, {
-              userId: "user-test",
-              tenantId: "tenant-test",
-            }),
-          )?.status,
+        originalSharingAttempt: async () =>
+          (await readRecovery(
+            meetingCommandScope(sharingActor, sharingMeeting.id),
+            meetingCommandContract,
+            () => {},
+          ))
+            ? "uncertain"
+            : "idle",
         replaceActor: () =>
           cache.setQueryData(["identity"], {
             user: {
               id: "synthetic-replacement",
               email: "replacement@example.test",
             },
-            tenant: { id: "tenant-test", name: "Synthetic" },
+            tenant: { id: sharingActor.tenantId, name: "Synthetic" },
             role: "user_admin",
           }),
         refresh: () => cache.invalidateQueries({ queryKey: ["calendar"] }),

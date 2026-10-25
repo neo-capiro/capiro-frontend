@@ -37,6 +37,7 @@ const envelope = z.discriminatedUnion("state", [
         "ACTIVITY_UNDO_REFUSED",
         "DIRECTORY_NOTE_REFUSED",
         "PROSPECT_NEW_CLIENT_REFUSED",
+        "MEETING_COMMAND_REFUSED",
         "OBJECTIVE_GENERATION_FAILED",
         "OBJECTIVE_CONTEXT_INCOMPLETE",
         "OBJECTIVE_VERSION_CONFLICT",
