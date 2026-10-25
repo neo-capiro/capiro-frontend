@@ -1,0 +1,29 @@
+/* Figma 01.04 Conversation history on the live route: filters, table, selected-row actions and receipts. */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.receipts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.receipts p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.transcript {
+  display: grid;
+  gap: 12px;
+}
+.transcript summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}

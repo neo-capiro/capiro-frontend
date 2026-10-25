@@ -1,5 +1,5 @@
 import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
-import { ManagedConversationPanel } from "../../src/features/meri/conversations/ManagedConversationPanel";
+import { ConversationHistoryList } from "../../src/features/meri/conversations/ConversationHistoryList";
 import { SyntheticMeriCapabilities } from "./meri-capability-profile";
 import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
@@ -63,7 +63,7 @@ function RoutedApp() {
   if (path === "/meri/conversations")
     return (
       <RequireSession>
-        <ManagedConversationPanel />
+        <ConversationHistoryList />
       </RequireSession>
     );
   if (isOnboardPath(path) && search.get("onboard-boundary") === "1")

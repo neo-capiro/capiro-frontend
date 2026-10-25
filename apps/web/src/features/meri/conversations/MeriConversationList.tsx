@@ -1,64 +1,57 @@
 "use client";
 
-import { useIdentity } from "../../../shared/portfolio/auth/identity";
+import { useSearchParams } from "next/navigation";
 import { useMeriCapabilities } from "../../../shared/meri-resources/CapabilityContext";
 import { LiveNewConversation } from "../../../shared/shell/LiveNewConversation";
-import { MeriClientSelector } from "../MeriClientSelector";
 import { MeriPageHeading } from "../ui/MeriPageHeading";
-import { ManagedConversationPanel } from "./ManagedConversationPanel";
+import {
+  ConversationHistoryList,
+  GENERAL_CLIENT_FILTER,
+} from "./ConversationHistoryList";
 import ui from "../ui/meri-ui.module.css";
+import cards from "../ui/phone-cards.module.css";
+import phone from "../ui/phone-page.module.css";
 
 type Props = {
   enabled: boolean;
   firstChatBootstrapEnabled: boolean;
 };
 
-/** Current account-owned discovery; Core rechecks each chat's immutable scope and client wall. */
+/** Figma 01.04 Conversation history: account-owned discovery; Core rechecks each chat's immutable scope and client wall. */
 export function MeriConversationList(props: Props) {
-  const identity = useIdentity();
   const capabilities = useMeriCapabilities();
-  const current =
-    identity.isSuccess && !identity.isFetching && !identity.error
-      ? identity.data
-      : undefined;
+  const params = useSearchParams();
   const enabled = props.enabled && capabilities.conversations.status === "on";
-  const account = current?.tenant?.id
-    ? { tenantId: current.tenant.id, actorId: current.user.id }
-    : undefined;
+  const initialClient =
+    params.get("scope") === "general" && !params.has("clientId")
+      ? GENERAL_CLIENT_FILTER
+      : (params.get("clientId") ?? undefined);
+  const newConversation = (variant: "primary" | "outline") => (
+    <LiveNewConversation
+      assetSet="home"
+      className={ui[variant]}
+      conversationEnabled={enabled}
+      firstChatBootstrapEnabled={
+        props.firstChatBootstrapEnabled &&
+        capabilities.newConversation.status === "on"
+      }
+    />
+  );
   return (
-    <div className={ui.page}>
+    <div className={`${ui.page} ${phone.page} ${cards.cards}`}>
       <MeriPageHeading
         title="Conversations"
-        description="Find your saved chats, or manage their titles and history. Each chat keeps its original scope."
-        action={
-          <LiveNewConversation
-            assetSet="home"
-            className={ui.primary}
-            conversationEnabled={enabled}
-            firstChatBootstrapEnabled={
-              props.firstChatBootstrapEnabled &&
-              capabilities.newConversation.status === "on"
-            }
-          />
-        }
-      />
-      <MeriClientSelector
-        destination="/meri/conversations"
-        scope={
-          account
-            ? { tenantId: account.tenantId, userId: account.actorId }
-            : undefined
-        }
+        description="Find previous work, including runs that are still active."
+        action={newConversation("primary")}
       />
       {!enabled ? (
         <p role="status">
           Conversation history is not enabled for this workspace.
         </p>
-      ) : !account ? (
-        <p role="status">Verify your account to load your chats.</p>
       ) : (
-        <ManagedConversationPanel
-          key={JSON.stringify([account.tenantId, account.actorId])}
+        <ConversationHistoryList
+          initialClient={initialClient}
+          newConversation={newConversation("outline")}
         />
       )}
     </div>
