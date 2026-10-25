@@ -84,6 +84,7 @@ export const mailThreadPageSchema = threadSchema
   .extend({
     tenantId: z.uuid(),
     associationClientId: z.uuid().nullable(),
+    connectionId: z.uuid().nullable(),
     connectionOwnerTenantId: z.uuid(),
     connectionOwnerActorId: z.uuid(),
     connectionStatus: z.string().nullable(),

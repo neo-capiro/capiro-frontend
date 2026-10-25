@@ -39,6 +39,7 @@ export function mailThreadFixture<T extends MailThread>(
   overrides: Partial<MailThreadPage> = {},
 ): MailThreadPage {
   return {
+    connectionId: null,
     ...thread,
     tenantId: mailTenantId,
     associationClientId: null,
