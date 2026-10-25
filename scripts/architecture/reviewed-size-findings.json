@@ -3575,10 +3575,10 @@
     "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
     "kind": "function",
     "symbol": "proxyOwnerMemoryReview",
-    "fingerprint": "927f0a6775a3aa2d80609d5bcc9c1129a1e18f2711fab1fff497b5a5b588afe7",
-    "reason": "One fixed-operation native Core memory HTTP boundary. It validates exact paths/methods, same-origin mutation input, UUIDs, bounded closed bodies, configured targets and verified replies; deadlines, native tokens and no-store responses follow existing owners. Item reads, correction proposals and version decisions share this constrained transport boundary while Core alone owns authorization, CAS and canonical decisions. Root cross-repository review matched the routes and response shapes; preview source remains null and all activation gates remain held.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "d1e4f89cd564d403f909a7f9f6e838ed576ffd60a4060aecf8f4115a1de40ed8",
+    "reason": "Independent FE155 review at 0e97502120aafa6f9aaf0acff54755244195a959 approves the existing fixed-operation native Core memory HTTP boundary. The items-only change restores wire schemaVersion1 after the existing strict whitelist projection; native authentication, exact methods/paths, closed bodies, status refusals, no-store output, deadline and all write branches remain unchanged. Core retains ownership, tenant/wall/lifecycle authorization and durable outcomes. The 187-line function adds no separate responsibility; retained54 tests and one version-drop mutant killed by2 consumer cases substantiate the narrow repair. See personal-memory-pr155-review.txt.",
+    "reviewedBy": "Codex independent Tenant Settings review",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/useOwnerCorrection.ts",
@@ -3863,9 +3863,9 @@
     "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
     "kind": "function",
     "symbol": "Connected",
-    "fingerprint": "19c975e8ed0378a64deacd719ef3e0eb3622cfd0e47656cc5db04ce784bcd6b9",
-    "reason": "This function composes the existing routine session lifetime and providers, then renders connection status and its single workspace. Bootstrap, authority, encrypted recovery and command behavior remain in their existing owners. This delta passes the existing onAccessLost callback to the workflow; it adds no independent policy or transport layer. Keeping the callback beside the port factory makes exact lifetime ownership visible. No extraction is warranted solely by the 98-line body.",
-    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "fingerprint": "85f6a0a1bc2d6fee41384ec314424b5cf65b77e7641b76a329c654c77576d28b",
+    "reason": "Independent FE156 review explicitly accepts Connected and its nested issue callback as one cohesive controller/wiring lifetime. The added v1/v2 branch belongs beside the existing scope resolver and does not merit extraction solely for a line threshold. Canonical first-chat, account/client/session receiving, encrypted recovery, authority and command behavior remain in existing owners. The 109-nonblank-line function adds cold client conversation resolution without another policy, schema, transport or lifecycle owner; saved original conversation recovery and omission of the expired run hint are retained. Review reused 38 distinct passing cases and two killed mutants, while recording that synthetic resolution does not qualify live Core/Meri admission. Exact source and cohesion verdict: fe-pr156-review.txt, sealed 2026-10-25T17:52:28UTC.",
+    "reviewedBy": "Codex independent Primary review (chat 01a170f1-e07c-7283-864e-76bd7ca520ac), FE156 a05af12f8520a828959bec23a83391dface74d73; Integration adopts explicitly approved exact source",
     "reviewedOn": "2026-10-25"
   },
   {
@@ -3911,6 +3911,15 @@
     "fingerprint": "113221f8453013d5db2dddd539cb1fb79f7a1ae782a255e8cc2159a184f3d505",
     "reason": "The routines suite keeps synthetic public contract fixtures, existing encrypted-journal platform mocks and focused transport/workflow/view scenarios together. The correction adds four scenarios at the same denial/session boundary, importing the actual standalone host and conversation card. Only their four provider hooks and the existing static React harness are adapted; no unrelated domain or reusable test framework is added. The useMemo mock assumes stable dependencies and the static renderer does not prove mounted React subscription, browser visibility or StrictMode cleanup. Those limits are explicit in the verdict; these tests are accepted as local composition evidence together with source inspection, not live acceptance.",
     "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/memory-review/owner-review-proxy.server.ts",
+    "kind": "function",
+    "symbol": "proxyOwnerMemoryReview > <anonymous>",
+    "fingerprint": "38770ef1187942e1c78e96c8d9ea6c792457f3026f2298b5a2f176458cfca8d4",
+    "reason": "Independent FE155 review at 0e97502120aafa6f9aaf0acff54755244195a959 approves this81-line existing deadline callback. It performs one native-authenticated Core dispatch and validates/translates that fixed operation's bounded response with shared body cleanup and status handling. Restoring one validated items-page wire-version field creates the threshold crossing without a new policy, parser, data owner or independent lifecycle. Keeping the bounded dispatch/response/finally sequence together preserves readable error semantics; the actual proxy-to-browser decoder regressions and meaningful version-drop mutant cover the change. See personal-memory-pr155-review.txt.",
+    "reviewedBy": "Codex independent Tenant Settings review",
     "reviewedOn": "2026-10-25"
   }
 ]
