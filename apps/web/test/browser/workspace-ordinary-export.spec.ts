@@ -39,6 +39,9 @@ const ordinary = () => ({
   ],
 });
 const editorUrl = `/modules/workspace?clientId=${clientId}&draftId=${draft.id}`;
+// Same route mounted through React.StrictMode (main.tsx test-harness opt-in),
+// which under a development React build replays effects setup -> cleanup -> setup.
+const strictEditorUrl = `${editorUrl}&strict=1`;
 const libraryUrl = `/modules/workspace?clientId=${clientId}`;
 
 type DraftReply = { json?: unknown; status?: number; message?: string };
@@ -162,6 +165,24 @@ test("ordinary saved PDF export downloads server-saved content with the unsaved 
   expect(
     state.calls.filter((call) => call.operation.includes("snapshot")),
   ).toEqual([]);
+  expect(state.errors).toEqual([]);
+});
+
+test("a real development StrictMode replay still downloads exactly once", async ({
+  page,
+}) => {
+  const state = await fixture(page);
+  await page.goto(strictEditorUrl);
+  await expect(
+    page.getByRole("heading", { name: "Synthetic ordinary export document" }),
+  ).toBeVisible();
+  const download = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export saved PDF" }).click();
+  const file = await download;
+  expect(file.suggestedFilename()).toBe("workspace-document.pdf");
+  expect(state.downloads).toEqual(["workspace-document.pdf"]);
+  expect(state.exports).toHaveLength(1);
+  expect(state.exports[0]!.input.query?.part).toBe("all");
   expect(state.errors).toEqual([]);
 });
 

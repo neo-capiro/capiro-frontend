@@ -276,7 +276,15 @@ function RoutedApp() {
                 }
               />
             ) : path.startsWith("/modules") ? (
-              moduleView
+              // Test-harness-only, opt-in via ?strict=1: mount the modules view
+              // through React.StrictMode so effects replay setup -> cleanup ->
+              // setup, as they do in development. Production default is
+              // unchanged (no StrictMode wrapper without the query flag).
+              search.get("strict") === "1" ? (
+                <StrictMode>{moduleView}</StrictMode>
+              ) : (
+                moduleView
+              )
             ) : (
               <SessionProbe />
             )}
