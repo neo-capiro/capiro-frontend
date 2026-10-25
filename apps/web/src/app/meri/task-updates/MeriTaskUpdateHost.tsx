@@ -9,13 +9,17 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@capiro/ui/button";
 import { MeriTaskUpdates } from "../../../features/meri/task-updates/MeriTaskUpdates";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
-import { OpaqueSessionController } from "../../../shared/meri-actions/opaque-session-controller";
+import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
 import { TaskUpdateWorkflow } from "../../../shared/meri-task-commands/workflow-adapter";
 import { taskCommandTransport } from "../../../shared/meri-task-commands/transport";
 import { taskCommandJournal } from "../../../shared/meri-task-commands/query-journal";
+import { useIdentity } from "../../../shared/portfolio/auth/identity";
+import { useApi } from "../../../shared/portfolio/api/provider";
+import { bootstrapTaskRecoverySession } from "../../../shared/meri-actions/task-recovery-session";
 
 export function MeriTaskUpdateHost({ enabled }: { enabled: boolean }) {
   const selected = useSelectedClient();
+  const identity = useIdentity();
   if (!enabled)
     return (
       <section role="status">
@@ -32,16 +36,27 @@ export function MeriTaskUpdateHost({ enabled }: { enabled: boolean }) {
         </p>
       </section>
     );
+  if (!identity.data?.tenant?.id || identity.error)
+    return <p role="status">Verifying the current task account…</p>;
+  const account = {
+    tenantId: identity.data.tenant.id,
+    actorId: identity.data.user.id,
+  };
   return (
     <ConnectedHost
-      key={selected.requestedId}
+      key={JSON.stringify([
+        account.tenantId,
+        account.actorId,
+        selected.requestedId,
+      ])}
+      account={account}
       clientId={selected.requestedId}
       clientName={
         selected.state === "authorized-client"
           ? selected.client.name
           : "Selected client"
       }
-      availability={selected.state}
+      availability={identity.isFetching ? "loading" : selected.state}
     />
   );
 }
@@ -50,16 +65,28 @@ function ConnectedHost({
   clientId,
   clientName,
   availability,
+  account,
 }: {
   clientId: string;
   clientName: string;
   availability: "authorized-client" | "loading" | "unavailable";
+  account: { tenantId: string; actorId: string };
 }) {
   const queryClient = useQueryClient();
+  const api = useApi();
   const [host] = useState(
     () =>
-      new OpaqueSessionController({
-        hints: { clientId },
+      new SessionLifetimeController({
+        issue: (signal) =>
+          bootstrapTaskRecoverySession(
+            api,
+            "update",
+            clientId,
+            signal,
+            fetch,
+            Date.now,
+            account,
+          ),
         createPort: ({ session, signal, ...lifetime }) =>
           new TaskUpdateWorkflow({
             session,
@@ -83,6 +110,25 @@ function ConnectedHost({
     host.getSnapshot,
     host.getSnapshot,
   );
+  if (state.status === "ready")
+    return (
+      <>
+        <p role="status" hidden={availability === "authorized-client"}>
+          Verifying the current selected client…
+        </p>
+        <section
+          hidden={availability !== "authorized-client"}
+          style={{ padding: 24 }}
+        >
+          <h1>Task updates</h1>
+          <p>
+            Client selection: {clientName}. The service checks current task
+            authority for every request.
+          </p>
+          <MeriTaskUpdates port={state.port} lifetimeKey={state.lifetimeKey} />
+        </section>
+      </>
+    );
   if (availability !== "authorized-client")
     return (
       <section role="status">
@@ -101,14 +147,10 @@ function ConnectedHost({
         Client selection: {clientName}. The service checks current task
         authority for every request.
       </p>
-      {state.status === "ready" ? (
-        <MeriTaskUpdates port={state.port} lifetimeKey={state.lifetimeKey} />
-      ) : (
-        <ConnectionState
-          status={state.status}
-          connect={() => void host.connect()}
-        />
-      )}
+      <ConnectionState
+        status={state.status}
+        connect={() => void host.connect()}
+      />
     </section>
   );
 }

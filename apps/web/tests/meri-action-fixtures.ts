@@ -1,107 +1,25 @@
-import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
-import {
-  receiveActionResponse,
-  type ActionDraftResponse,
-  type ActionPrepareResponse,
-  type ActionQueryResponse,
-  type ActionRoute,
-} from "@capiro/meri-contracts/action-application";
+import { fixture, context, clock } from "./meri-action-wire-fixtures";
+export {
+  fixture,
+  archivedFixture,
+  context,
+  clock,
+  canonicalSha256,
+} from "./meri-action-wire-fixtures";
+
+import { receiveActionResponse } from "@capiro/meri-contracts/action-application";
 import { GovernedActionWorkflow } from "../src/shared/meri-actions/workflow-adapter";
 import { actionTransport } from "../src/shared/meri-actions/workflow-transport";
-import { receiveSessionReceipt } from "../src/shared/meri-actions/session-receipt";
+import {
+  receiveSessionReceipt,
+  type ActionContext,
+} from "../src/shared/meri-actions/session-receipt";
 import type {
   ActionAttempt,
   ActionAttemptJournal,
 } from "../src/shared/meri-actions/attempt-journal";
 import type { WorkflowReply } from "../src/shared/meri-actions/workflow-port";
 
-export function archivedFixture(name: string): {
-  route: ActionRoute;
-  httpStatus: number;
-  response: unknown;
-  request?: unknown;
-} {
-  return JSON.parse(
-    readFileSync(
-      new URL(`./fixtures/meri-actions/${name}.json`, import.meta.url),
-      "utf8",
-    ),
-  );
-}
-export const { canonicalSha256 } = createRequire(import.meta.url)(
-  "@capiro/meri-contracts/node",
-) as { canonicalSha256(value: unknown): string };
-
-export function fixture(name: string) {
-  const value = archivedFixture(name);
-  if (
-    [
-      "query",
-      "query-interleaved-sequence",
-      "query-foreign-intent-limit",
-      "query-foreign-intent-page",
-    ].includes(name)
-  ) {
-    // Keep the historical wire files immutable. These current synthetic queries
-    // retain every other value and use the public contract's observation hash.
-    const query = value.response as ActionQueryResponse;
-    Reflect.deleteProperty(
-      query.observation.subject,
-      "authorizationDecisionId",
-    );
-    Reflect.deleteProperty(
-      query.observation.result.subject,
-      "authorizationDecisionId",
-    );
-    query.resultSha256 = canonicalSha256(query.observation);
-  }
-  if (
-    [
-      "draft",
-      "draft-canonical-date",
-      "draft-foreign-query-handle",
-      "prepare",
-      "prepare-canonical-date",
-      "prepare-coherent-task-substitution",
-      "prepare-foreign-supporting-draft",
-      "prepare-recovered-worker",
-    ].includes(name)
-  ) {
-    const draft =
-      value.route === "draft"
-        ? (value.response as ActionDraftResponse)
-        : (value.response as ActionPrepareResponse).draft;
-    draft.source.resultSha256 = (
-      fixture("query").response as ActionQueryResponse
-    ).resultSha256;
-    const { draftSha256: _archivedDigest, ...content } = draft;
-    draft.draftSha256 = canonicalSha256(content);
-  }
-  if (name === "draft") {
-    const request = value.request as {
-      selection: { resultSha256: string };
-    };
-    request.selection.resultSha256 = (
-      fixture("query").response as ActionQueryResponse
-    ).resultSha256;
-  }
-  if (name === "prepare") {
-    const request = value.request as { draft: ActionDraftResponse };
-    request.draft = fixture("draft").response as ActionDraftResponse;
-  }
-  return value;
-}
-export const context = JSON.parse(
-  readFileSync(
-    new URL("./fixtures/meri-actions/CONTEXT.json", import.meta.url),
-    "utf8",
-  ),
-);
-context.selection.resultSha256 = (
-  fixture("query").response as ActionQueryResponse
-).resultSha256;
-export const clock = Date.parse(context.syntheticNow);
 export function accepted<T>(reply: WorkflowReply<T>): T {
   if (!reply.ok) throw new Error(`Expected admitted fixture: ${reply.problem}`);
   return reply.value;
@@ -115,7 +33,10 @@ export function cell(): ActionAttemptJournal {
     },
   };
 }
-export function harness(journal = cell()) {
+export function harness(
+  journal = cell(),
+  contextOverride: Partial<ActionContext> = {},
+) {
   const queue: Array<string | (() => Promise<Response>)> = [];
   const requests: Array<{ url: string; init: RequestInit; body: unknown }> = [];
   let lost = 0,
@@ -131,6 +52,7 @@ export function harness(journal = cell()) {
         conversationId: context.conversationId,
         runId: context.runId,
         selectedClientId: context.clientId,
+        ...contextOverride,
       },
     }),
     clock,

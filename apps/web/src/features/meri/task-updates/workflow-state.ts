@@ -6,6 +6,7 @@ import type {
   WorkflowProblem,
   WorkflowReply,
 } from "../../../shared/meri-task-commands/workflow-port";
+import type { TaskRecoveryView } from "../../../shared/meri-actions/workflow-port";
 
 export type TaskUpdateDraft = Readonly<{
   taskId: string;
@@ -15,10 +16,14 @@ export type TaskUpdateDraft = Readonly<{
 }>;
 type State = Readonly<{
   draft: TaskUpdateDraft;
-  busy: "prepare" | "execute" | null;
+  busy: "prepare" | "execute" | "recover" | "discard" | null;
   proposal: TaskUpdateProposalView | null;
   execution: TaskUpdateExecutionView | null;
   problem: WorkflowProblem | null;
+  checkingRecovery: boolean;
+  savedRequest: boolean;
+  canDiscard: boolean;
+  recoveryFields: readonly { label: string; value: string }[];
 }>;
 const initial = (): State =>
   Object.freeze({
@@ -27,6 +32,10 @@ const initial = (): State =>
     proposal: null,
     execution: null,
     problem: null,
+    checkingRecovery: false,
+    savedRequest: false,
+    canDiscard: false,
+    recoveryFields: [],
   });
 
 /** Local interaction only; the port retains received proposals and write uncertainty. */
@@ -39,6 +48,7 @@ export class TaskUpdateController {
   private readonly port: TaskUpdateWorkflowPort;
   constructor(port: TaskUpdateWorkflowPort) {
     this.port = port;
+    this.state = { ...initial(), checkingRecovery: Boolean(port.restore) };
   }
   getSnapshot = () => this.state;
   subscribe = (listener: () => void) => {
@@ -49,7 +59,67 @@ export class TaskUpdateController {
   };
   attach = () => {
     this.active = true;
+    void this.restore();
     return this.dispose;
+  };
+  private recovered(
+    value: TaskRecoveryView<TaskUpdateProposalView, TaskUpdateExecutionView>,
+  ) {
+    this.set({
+      busy: null,
+      checkingRecovery: false,
+      problem: null,
+      savedRequest: value.phase === "prepare" || value.phase === "execute",
+      canDiscard: value.phase === "prepare" || value.phase === "proposal",
+      recoveryFields: value.phase === "prepare" ? value.fields : [],
+      ...(value.phase === "empty" || value.phase === "prepare"
+        ? { proposal: null, execution: null }
+        : {}),
+      ...(value.phase === "proposal" || value.phase === "execute"
+        ? { proposal: value.proposal }
+        : {}),
+      ...(value.phase === "observed" ? { execution: value.execution } : {}),
+    });
+  }
+  private async restore() {
+    if (!this.port.restore) return;
+    const generation = ++this.generation,
+      request = new AbortController();
+    this.request = request;
+    this.set({ checkingRecovery: true });
+    try {
+      const reply = await this.port.restore(request.signal);
+      if (
+        !this.active ||
+        generation !== this.generation ||
+        request.signal.aborted
+      )
+        return;
+      if (reply.ok) this.recovered(reply.value);
+      else this.set({ checkingRecovery: true, problem: reply.problem });
+    } catch {
+      if (this.active && generation === this.generation)
+        this.set({ checkingRecovery: true, problem: "unknown" });
+    }
+  }
+  retrySaved = async () => {
+    if (!this.port.retrySaved) return;
+    await this.run(
+      "recover",
+      (signal) => this.port.retrySaved!(signal),
+      (value) => this.recovered(value),
+    );
+  };
+  discardSaved = async () => {
+    if (!this.port.discardSaved || !this.state.canDiscard) return;
+    await this.run(
+      "discard",
+      (signal) => this.port.discardSaved!(signal),
+      (value) => {
+        if (value.phase === "empty") this.set(initial());
+        else this.recovered(value);
+      },
+    );
   };
   dispose = () => {
     this.active = false;
@@ -66,21 +136,39 @@ export class TaskUpdateController {
     if (
       this.active &&
       !this.state.busy &&
+      !this.state.checkingRecovery &&
+      !this.state.savedRequest &&
       !this.state.proposal &&
       !this.state.problem
     )
       this.set({ draft: Object.freeze({ ...draft }) });
   };
   private async run<T>(
-    operation: "prepare" | "execute",
+    operation: "prepare" | "execute" | "recover" | "discard",
     invoke: (signal: AbortSignal) => Promise<WorkflowReply<T>>,
     accept: (value: T) => void,
   ) {
-    if (!this.active || this.state.busy || this.state.problem) return;
+    if (
+      !this.active ||
+      this.state.busy ||
+      (operation !== "recover" &&
+        operation !== "discard" &&
+        (this.state.problem ||
+          this.state.checkingRecovery ||
+          this.state.savedRequest))
+    )
+      return;
     const generation = ++this.generation,
       request = new AbortController();
     this.request = request;
-    this.set({ busy: operation });
+    this.set({
+      busy: operation,
+      ...(operation === "prepare"
+        ? { canDiscard: true }
+        : operation === "execute"
+          ? { canDiscard: false }
+          : {}),
+    });
     const current = () =>
       this.active && generation === this.generation && !request.signal.aborted;
     try {

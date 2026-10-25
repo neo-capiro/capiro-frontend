@@ -11,9 +11,13 @@ import { MeriActionWorkflow } from "../../../features/meri/actions/MeriActionWor
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { ActionHostController } from "../../../shared/meri-actions/host-controller";
 import { actionQueryJournal } from "../../../shared/meri-actions/query-journal";
+import { useIdentity } from "../../../shared/portfolio/auth/identity";
+import { useApi } from "../../../shared/portfolio/api/provider";
+import { bootstrapTaskRecoverySession } from "../../../shared/meri-actions/task-recovery-session";
 
 export function MeriActionHost({ enabled }: { enabled: boolean }) {
   const selected = useSelectedClient();
+  const identity = useIdentity();
   if (!enabled)
     return (
       <MeriActionWorkflow
@@ -32,16 +36,27 @@ export function MeriActionHost({ enabled }: { enabled: boolean }) {
         </p>
       </section>
     );
+  if (!identity.data?.tenant?.id || identity.error)
+    return <p role="status">Verifying the current task account…</p>;
+  const account = {
+    tenantId: identity.data.tenant.id,
+    actorId: identity.data.user.id,
+  };
   return (
     <ConnectedHost
-      key={selected.requestedId}
+      key={JSON.stringify([
+        account.tenantId,
+        account.actorId,
+        selected.requestedId,
+      ])}
+      account={account}
       clientId={selected.requestedId}
       clientName={
         selected.state === "authorized-client"
           ? selected.client.name
           : "Selected client"
       }
-      availability={selected.state}
+      availability={identity.isFetching ? "loading" : selected.state}
     />
   );
 }
@@ -50,16 +65,29 @@ function ConnectedHost({
   clientId,
   clientName,
   availability,
+  account,
 }: {
   clientId: string;
   clientName: string;
   availability: "authorized-client" | "loading" | "unavailable";
+  account: { tenantId: string; actorId: string };
 }) {
   const queryClient = useQueryClient();
+  const api = useApi();
   const [host] = useState(
     () =>
       new ActionHostController({
         hints: { clientId },
+        issue: (signal) =>
+          bootstrapTaskRecoverySession(
+            api,
+            "create",
+            clientId,
+            signal,
+            fetch,
+            Date.now,
+            account,
+          ),
         journal: (context) => actionQueryJournal(queryClient, context),
       }),
   );

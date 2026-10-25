@@ -1,3 +1,5 @@
+import { installPlatform } from "./command-recovery-platform";
+installPlatform();
 import { describe, it, expect } from "vitest";
 import {
   accepted,

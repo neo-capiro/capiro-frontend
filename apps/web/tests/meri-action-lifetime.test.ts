@@ -1,4 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { installPlatform } from "./command-recovery-platform";
+installPlatform();
+import { describe, it, expect, vi } from "vitest";
 import {
   accepted,
   context,
@@ -81,7 +83,7 @@ describe("Meri disposal, expiry and held observations", () => {
         }),
     );
     const pending = h.port.execute(proposal.handle, h.signal());
-    expect(h.requests).toHaveLength(4);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(4));
     expect(h.journal.read()).toEqual({ status: "pending" });
     h.port.dispose();
     expect(await pending).toEqual({ ok: false, problem: "unknown" });
@@ -112,6 +114,7 @@ describe("Meri disposal, expiry and held observations", () => {
         }),
     );
     const pending = h.port.execute(proposal.handle, h.signal());
+    await vi.waitFor(() => expect(h.requests).toHaveLength(4));
     expect(await h.port.execute(proposal.handle, h.signal())).toEqual({
       ok: false,
       problem: "not-dispatched",

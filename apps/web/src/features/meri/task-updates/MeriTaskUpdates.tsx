@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
+import { Button } from "@capiro/ui/button";
 import type { TaskUpdateWorkflowPort } from "../../../shared/meri-task-commands/workflow-port";
 import { workflowProblems } from "../actions/workflow-problems";
 import { TaskUpdateController } from "./workflow-state";
@@ -25,9 +26,49 @@ function ConnectedUpdates({ port }: { port: TaskUpdateWorkflowPort }) {
     controller.getSnapshot,
   );
   const problem = state.problem ? workflowProblems[state.problem] : null;
-  const disabled = Boolean(state.busy || state.problem);
+  const disabled = Boolean(
+    state.busy || state.problem || state.checkingRecovery || state.savedRequest,
+  );
   return (
     <div className={styles.workflow}>
+      {(state.checkingRecovery ||
+        state.savedRequest ||
+        state.problem ||
+        state.canDiscard) &&
+        port.restore && (
+          <section className={styles.panel} aria-label="Saved task recovery">
+            <p role="status">
+              {state.checkingRecovery
+                ? "Checking saved task recovery before another request."
+                : "A task request is saved. Continue with that exact request."}
+            </p>
+            <dl>
+              {state.recoveryFields.map((field) => (
+                <div key={field.label}>
+                  <dt>{field.label}</dt>
+                  <dd>{field.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <Button
+              type="button"
+              disabled={Boolean(state.busy)}
+              onClick={() => void controller.retrySaved()}
+            >
+              Retry exact saved request
+            </Button>
+            {port.discardSaved && (
+              <Button
+                type="button"
+                variant="outline"
+                disabled={Boolean(state.busy) || !state.canDiscard}
+                onClick={() => void controller.discardSaved()}
+              >
+                Discard unexecuted preparation and review again
+              </Button>
+            )}
+          </section>
+        )}
       <p role="status">
         {state.busy
           ? `${state.busy === "prepare" ? "Preparing proposal" : "Checking approval and execution"}…`
@@ -49,6 +90,7 @@ function ConnectedUpdates({ port }: { port: TaskUpdateWorkflowPort }) {
         />
         {state.proposal && (
           <TaskUpdateProposal
+            key={state.proposal.reference}
             proposal={state.proposal}
             execution={state.execution}
             disabled={disabled}

@@ -30,7 +30,7 @@ test("desktop Meri Home keeps Task updates reachable with the selected client", 
   expect(fixture.remote).toEqual([]);
 });
 
-test("desktop task update uses explicit connection, immutable preparation and separate approval before exact execution/replay", async ({
+test("desktop task update uses explicit connection, immutable preparation and explicit approval before exact execution/replay", async ({
   page,
 }, testInfo) => {
   const fixture = await taskHostFixture(page);
@@ -47,6 +47,7 @@ test("desktop task update uses explicit connection, immutable preparation and se
   await prepareTaskUpdate(page);
   expect(fixture.operations("session")[0]!.authorization).toBeUndefined();
   expect(fixture.operations("prepare")[0]!.body).toEqual({
+    requestId: expect.any(String),
     arguments: {
       taskId: "00000000-0000-4000-8000-000000000021",
       title: "Updated",
@@ -58,26 +59,30 @@ test("desktop task update uses explicit connection, immutable preparation and se
   await expect(
     page.getByLabel("New task title", { exact: true }),
   ).toBeDisabled();
-  await expect(page.getByRole("button", { name: /^approve/i })).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Approve and execute", exact: true }),
+  ).toBeDisabled();
   const proposal = page.getByRole("region", {
     name: "Immutable task update proposal",
   });
   await expect(proposal).toContainText(
     taskWire("prepare").response.proposal.commandSha256,
   );
+  await page.getByRole("checkbox", { name: /I approve/ }).check();
   await page
-    .getByRole("button", { name: "Check approval and execute", exact: true })
+    .getByRole("button", { name: "Approve and execute", exact: true })
     .click();
   await expect(proposal.getByRole("status")).toContainText(
-    "Separate approval is still required",
+    "Current approval is still required",
   );
   await expect(
     page.getByRole("heading", { name: "Task update confirmed" }),
   ).toHaveCount(0);
-  // Synthetic external approval control changes only the service reply; browser has no decision API.
+  // The synthetic service now returns the recorded outcome for the same approved proposal.
   fixture.execute("observed");
+  await page.getByRole("checkbox", { name: /I approve/ }).check();
   await page
-    .getByRole("button", { name: "Check approval and execute", exact: true })
+    .getByRole("button", { name: "Approve and execute", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "Task update confirmed" }),
@@ -134,8 +139,9 @@ test("uncertain store outcome fences another prepare across client-side navigati
   fixture.execute("missingApprovalStore");
   await page.goto(taskUrl());
   await prepareTaskUpdate(page);
+  await page.getByRole("checkbox", { name: /I approve/ }).check();
   await page
-    .getByRole("button", { name: "Check approval and execute", exact: true })
+    .getByRole("button", { name: "Approve and execute", exact: true })
     .click();
   await expect(page.getByRole("alert")).toContainText("Outcome uncertain");
   await navigate(page, `/meri/actions?clientId=${context.selectedClientId}`);
@@ -143,8 +149,18 @@ test("uncertain store outcome fences another prepare across client-side navigati
     page.getByRole("button", { name: "Connect action service", exact: true }),
   ).toBeVisible();
   await navigate(page, taskUrl());
-  await prepareTaskUpdateWithoutSuccess(page);
-  await expect(page.getByRole("alert")).toContainText("Outcome uncertain");
+  await page
+    .getByRole("button", { name: "Connect task-update service", exact: true })
+    .click();
+  await expect(
+    page.getByRole("region", { name: "Saved task recovery" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Prepare approval proposal",
+      exact: true,
+    }),
+  ).toBeDisabled();
   expect(fixture.operations("prepare")).toHaveLength(1);
   expect(fixture.operations("execute")).toHaveLength(1);
 });
@@ -173,18 +189,3 @@ test("client replacement and opaque session expiry clear prepared details withou
   );
   expect(fixture.operations("execute")).toHaveLength(0);
 });
-
-async function prepareTaskUpdateWithoutSuccess(
-  page: import("@playwright/test").Page,
-) {
-  await page
-    .getByRole("button", { name: "Connect task-update service", exact: true })
-    .click();
-  await page
-    .getByLabel("Task ID", { exact: true })
-    .fill("00000000-0000-4000-8000-000000000021");
-  await page.getByLabel("New task title", { exact: true }).fill("Updated");
-  await page
-    .getByRole("button", { name: "Prepare approval proposal", exact: true })
-    .click();
-}

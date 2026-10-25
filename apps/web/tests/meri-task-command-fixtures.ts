@@ -62,10 +62,10 @@ export function taskWorkflow(
   journal = taskCell(),
   now = () => taskNow,
   isCurrent = () => true,
+  session = taskSession(),
 ) {
   const lifetime = new AbortController(),
     lost: boolean[] = [];
-  const session = taskSession();
   const port = new TaskUpdateWorkflow({
     session,
     transport: taskCommandTransport(

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@capiro/ui/button";
 import type { ObservedExecution, ProposalView } from "./action-workflow-port";
 import styles from "./workflow.module.css";
@@ -17,18 +18,19 @@ export function ProposalPanel({
   disabled: boolean;
   onExecute: () => void;
 }) {
+  const [approved, setApproved] = useState(false);
   return (
     <section className={styles.panel} aria-label="Immutable approval proposal">
       <h2>
         {execution
-          ? "Execution receipt"
+          ? "Recorded execution"
           : pending
-            ? "Pending separate approval"
+            ? "Ready for your approval"
             : "Prepared proposal"}
       </h2>
       <p className={styles.muted}>
-        Preparing this immutable proposal did not execute it. Approval must be
-        recorded through the separate trusted service.
+        Preparing this proposal did not execute it. Review the task below, then
+        approve and execute it. The service checks your current authority.
       </p>
       <dl className={styles.details}>
         <dt>Task</dt>
@@ -61,7 +63,7 @@ export function ProposalPanel({
           </h3>
           {execution.taskTitle !== null && <p>{execution.taskTitle}</p>}
           <dl className={styles.details}>
-            <dt>Receipt</dt>
+            <dt>Execution reference</dt>
             <dd>{execution.receiptReference}</dd>
             <dt>Completed</dt>
             <dd>
@@ -71,23 +73,34 @@ export function ProposalPanel({
             </dd>
           </dl>
           <p className={styles.muted}>
-            This receipt describes the service-observed outcome for this
+            This record describes the service-observed outcome for this
             proposal.
           </p>
         </div>
+      )}
+      {!execution && (
+        <label>
+          <input
+            type="checkbox"
+            checked={approved}
+            disabled={disabled}
+            onChange={(event) => setApproved(event.target.checked)}
+          />
+          I approve creating this task exactly as shown.
+        </label>
       )}
       <Button
         type="button"
         variant="outline"
         className={styles.button}
-        disabled={disabled}
+        disabled={disabled || (!execution && !approved)}
         onClick={onExecute}
       >
-        {execution ? "Check recorded result" : "Request execution"}
+        {execution ? "Check recorded result" : "Approve and execute"}
       </Button>
       <p className={styles.muted}>
-        This request cannot approve the proposal. The service checks current
-        approval and authority. Rechecking uses the same immutable proposal.
+        Approve and execute records your approval for this exact proposal.
+        Rechecking a recorded result uses the same proposal.
       </p>
     </section>
   );

@@ -1,3 +1,6 @@
+import { installPlatform } from "./command-recovery-platform";
+installPlatform();
+import "./command-recovery-platform";
 import { QueryClient } from "@tanstack/react-query";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionHostController } from "../src/shared/meri-actions/host-controller";
@@ -278,7 +281,7 @@ describe("Meri host availability pause and revocation", () => {
         }),
     );
     const pending = port.execute(selected.handle, new AbortController().signal);
-    expect(h.requests).toHaveLength(5);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(5));
     h.host.setClientAvailable(false);
     release(Response.json(fixture("execute-observed").response));
     expect(await pending).toEqual({ ok: false, problem: "unknown" });
@@ -289,7 +292,7 @@ describe("Meri host availability pause and revocation", () => {
     });
     h.host.setClientAvailable(true);
     expect(ready(h.host)).toBe(before);
-    expect(h.requests).toHaveLength(5);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(5));
     expect(
       await port.execute(selected.handle, new AbortController().signal),
     ).toEqual({ ok: false, problem: "unknown" });
@@ -420,7 +423,7 @@ describe("Meri scoped cache journal versus private host state", () => {
         }),
     );
     const pending = port.execute(selected.handle, new AbortController().signal);
-    expect(h.requests).toHaveLength(5);
+    await vi.waitFor(() => expect(h.requests).toHaveLength(5));
     expect(actionQueryJournal(h.client, serverContext).read()).toEqual({
       status: "pending",
     });

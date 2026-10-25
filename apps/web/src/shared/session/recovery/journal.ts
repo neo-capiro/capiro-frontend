@@ -157,6 +157,7 @@ function retireRecovery(
   requestId: string,
   disposition:
     | { state: "acknowledged" }
+    | { state: "discarded"; code: "TASK_PREPARATION_DISCARDED" }
     | {
         state: "refused";
         code:
@@ -171,11 +172,15 @@ function retireRecovery(
           | "FILE_BATCH_MOVE_REFUSED";
       },
   assert: () => void,
+  beforeRetire?: (
+    record: Extract<JournalEnvelope, { state: "pending" }>,
+  ) => void,
 ) {
   return locked(scope, assert, async () => {
     const existing = await current(scope);
     if (existing?.state !== "pending" || existing.requestId !== requestId)
       throw new RecoveryStorageError();
+    beforeRetire?.(existing);
     // Retain the non-sensitive fence; erase the encrypted draft payload.
     // A known refusal is distinct from an acknowledged completed receipt.
     const retired = await encryptJournal({
@@ -202,6 +207,27 @@ export function acknowledgeRecovery(
   assert: () => void,
 ) {
   return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Explicit local discard is not execution completion or a server refusal. Check the latest marker atomically. */
+export function discardUnexecutedTaskRecovery<
+  Data extends { executing: boolean },
+>(
+  scope: string,
+  requestId: string,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "discarded", code: "TASK_PREPARATION_DISCARDED" },
+    assert,
+    (record) => {
+      if (decode(record, contract).executing !== false)
+        throw new RecoveryStorageError();
+    },
+  );
 }
 
 /** Caller binds Core's no-write proof to the exact command and refreshes current authority/files. */

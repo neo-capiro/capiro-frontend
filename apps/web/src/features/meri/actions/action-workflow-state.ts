@@ -7,9 +7,16 @@ import type {
   TaskEdits,
   WorkflowProblem,
   WorkflowReply,
+  TaskRecoveryView,
 } from "./action-workflow-port.ts";
 
-type Operation = "query" | "draft" | "prepare" | "execute";
+type Operation =
+  | "query"
+  | "draft"
+  | "prepare"
+  | "execute"
+  | "recover"
+  | "discard";
 export type WorkflowState = Readonly<{
   stage:
     | "idle"
@@ -28,6 +35,10 @@ export type WorkflowState = Readonly<{
   execution: ObservedExecution | null;
   problem: WorkflowProblem | null;
   approvalRefused: boolean;
+  checkingRecovery: boolean;
+  savedRequest: boolean;
+  canDiscard: boolean;
+  recoveryFields: readonly { label: string; value: string }[];
 }>;
 
 const initialState = (): WorkflowState =>
@@ -42,6 +53,10 @@ const initialState = (): WorkflowState =>
     execution: null,
     problem: null,
     approvalRefused: false,
+    checkingRecovery: false,
+    savedRequest: false,
+    canDiscard: false,
+    recoveryFields: [],
   });
 
 /** UI request observation only: no durable journal, authorization or wire admission. */
@@ -55,6 +70,10 @@ export class ActionWorkflowController {
 
   constructor(port: ActionWorkflowPort) {
     this.#port = port;
+    this.#state = {
+      ...initialState(),
+      checkingRecovery: Boolean(port.restore),
+    };
   }
 
   getSnapshot = () => this.#state;
@@ -69,7 +88,67 @@ export class ActionWorkflowController {
   /** Reattachment supports React's development effect probe; old work stays fenced. */
   attach = () => {
     this.#active = true;
+    void this.restore();
     return this.dispose;
+  };
+
+  #recover(value: TaskRecoveryView<ProposalView, ObservedExecution>) {
+    this.#succeed({
+      checkingRecovery: false,
+      problem: null,
+      savedRequest: value.phase === "prepare" || value.phase === "execute",
+      canDiscard: value.phase === "prepare" || value.phase === "proposal",
+      recoveryFields: value.phase === "prepare" ? value.fields : [],
+      ...(value.phase === "empty" || value.phase === "prepare"
+        ? { stage: "idle", proposal: null, execution: null }
+        : {}),
+      ...(value.phase === "proposal" || value.phase === "execute"
+        ? { stage: "pending", proposal: value.proposal, draft: null }
+        : {}),
+      ...(value.phase === "observed"
+        ? { stage: "observed", execution: value.execution }
+        : {}),
+    });
+  }
+  private async restore() {
+    if (!this.#port.restore) return;
+    const generation = ++this.#generation,
+      request = new AbortController();
+    this.#request = request;
+    this.#set({ checkingRecovery: true });
+    try {
+      const reply = await this.#port.restore(request.signal);
+      if (
+        !this.#active ||
+        generation !== this.#generation ||
+        request.signal.aborted
+      )
+        return;
+      if (reply.ok) this.#recover(reply.value);
+      else this.#set({ checkingRecovery: true, problem: reply.problem });
+    } catch {
+      if (this.#active && generation === this.#generation)
+        this.#set({ checkingRecovery: true, problem: "unknown" });
+    }
+  }
+  retrySaved = async () => {
+    if (!this.#port.retrySaved) return;
+    await this.#run(
+      "recover",
+      (signal) => this.#port.retrySaved!(signal),
+      (value) => this.#recover(value),
+    );
+  };
+  discardSaved = async () => {
+    if (!this.#port.discardSaved || !this.#state.canDiscard) return;
+    await this.#run(
+      "discard",
+      (signal) => this.#port.discardSaved!(signal),
+      (value) => {
+        if (value.phase === "empty") this.#succeed(initialState());
+        else this.#recover(value);
+      },
+    );
   };
 
   dispose = () => {
@@ -106,12 +185,26 @@ export class ActionWorkflowController {
     invoke: (signal: AbortSignal) => Promise<WorkflowReply<T>>,
     accept: (value: T) => void,
   ) {
-    if (!this.#active || this.#state.busy || this.#state.problem) return;
+    if (
+      !this.#active ||
+      this.#state.busy ||
+      (operation !== "recover" &&
+        operation !== "discard" &&
+        (this.#state.problem ||
+          this.#state.checkingRecovery ||
+          this.#state.savedRequest))
+    )
+      return;
     const generation = ++this.#generation;
     const request = new AbortController();
     this.#request = request;
     this.#set({
       busy: operation,
+      ...(operation === "prepare"
+        ? { canDiscard: true }
+        : operation === "execute"
+          ? { canDiscard: false }
+          : {}),
       ...(operation === "execute" ? { approvalRefused: false } : {}),
     });
     try {
@@ -161,6 +254,8 @@ export class ActionWorkflowController {
     if (
       !this.#active ||
       this.#state.busy ||
+      this.#state.checkingRecovery ||
+      this.#state.savedRequest ||
       this.#state.problem ||
       this.#state.proposal
     )
@@ -181,6 +276,8 @@ export class ActionWorkflowController {
     if (
       !this.#active ||
       this.#state.busy ||
+      this.#state.checkingRecovery ||
+      this.#state.savedRequest ||
       this.#state.problem ||
       this.#state.proposal ||
       !this.#state.selected

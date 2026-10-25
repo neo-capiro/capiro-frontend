@@ -53,12 +53,29 @@ export type WorkflowReply<T> =
   | Readonly<{ ok: true; value: T }>
   | Readonly<{ ok: false; problem: WorkflowProblem }>;
 
+export type TaskRecoveryView<P, E> =
+  | { phase: "empty" }
+  | { phase: "prepare"; fields: readonly { label: string; value: string }[] }
+  | { phase: "proposal" | "execute"; proposal: P }
+  | { phase: "observed"; execution: E };
+
 /**
  * Handles retain exact validated objects in the adapter; the feature never inspects them.
  * No credential, approval decision, policy or execution authority belongs in this port.
  * A host must replace the feature lifetime whenever its trusted context/port changes.
  */
 export interface ActionWorkflowPort {
+  discardSaved?(
+    signal: AbortSignal,
+  ): Promise<WorkflowReply<TaskRecoveryView<ProposalView, ObservedExecution>>>;
+  /** Local encrypted recovery only; never dispatches. */
+  restore?(
+    signal: AbortSignal,
+  ): Promise<WorkflowReply<TaskRecoveryView<ProposalView, ObservedExecution>>>;
+  /** Explicit exact saved request only. */
+  retrySaved?(
+    signal: AbortSignal,
+  ): Promise<WorkflowReply<TaskRecoveryView<ProposalView, ObservedExecution>>>;
   query(signal: AbortSignal): Promise<WorkflowReply<RecommendationPage>>;
   draft(
     selection: object,

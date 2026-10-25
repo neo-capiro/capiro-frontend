@@ -6,7 +6,7 @@ import { z } from "zod";
 export const actionUuid = z
   .string()
   .regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
-const context = z.strictObject({
+export const actionContextSchema = z.strictObject({
   tenantId: z.string().min(1).max(256),
   actorId: z.string().min(1).max(256),
   conversationId: actionUuid,
@@ -16,7 +16,7 @@ const context = z.strictObject({
 const receipt = z.strictObject({
   credential: z.string().regex(/^action_session_[A-Za-z0-9_-]{43}$/),
   expiresAtMs: z.number().int().safe().positive(),
-  context,
+  context: actionContextSchema,
 });
 export type ActionSessionReceipt = Readonly<z.infer<typeof receipt>>;
 export type ActionContext = Readonly<ActionSessionReceipt["context"]>;

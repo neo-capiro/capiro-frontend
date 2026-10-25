@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@capiro/ui/button";
 import type {
   TaskUpdateProposalView,
@@ -16,18 +17,17 @@ export function TaskUpdateProposal({
   disabled: boolean;
   onExecute: () => void;
 }) {
+  const [approved, setApproved] = useState(false);
   const observed = execution?.status === "observed" ? execution : null;
   return (
     <section
       className={styles.panel}
       aria-label="Immutable task update proposal"
     >
-      <h2>
-        {observed ? "Task update confirmed" : "Pending separate approval"}
-      </h2>
+      <h2>{observed ? "Task update confirmed" : "Ready for your approval"}</h2>
       <p>
-        Preparation did not execute this update. Approval is recorded through
-        the separate trusted service.
+        Preparation did not execute this update. Review the changes below, then
+        approve and execute them. The service checks your current authority.
       </p>
       <dl className={styles.details}>
         <dt>Task ID</dt>
@@ -51,12 +51,12 @@ export function TaskUpdateProposal({
       </dl>
       {execution?.status === "approval-pending" && (
         <p role="status">
-          Separate approval is still required. No update was dispatched for this
-          request.
+          Current approval is still required. No execution result was released
+          for this request.
         </p>
       )}
       {observed && (
-        <div aria-label="Verified task update receipt">
+        <div aria-label="Verified task update result">
           <h3>Recorded task</h3>
           <p>{observed.title}</p>
           <dl className={styles.details}>
@@ -64,7 +64,7 @@ export function TaskUpdateProposal({
             <dd>{observed.taskStatus}</dd>
             <dt>Due date</dt>
             <dd>{observed.dueDate ?? "None"}</dd>
-            <dt>Receipt</dt>
+            <dt>Execution reference</dt>
             <dd>{observed.receiptReference}</dd>
             <dt>Completed</dt>
             <dd>
@@ -75,17 +75,28 @@ export function TaskUpdateProposal({
           </dl>
         </div>
       )}
+      {!observed && (
+        <label>
+          <input
+            type="checkbox"
+            checked={approved}
+            disabled={disabled}
+            onChange={(event) => setApproved(event.target.checked)}
+          />
+          I approve updating this task exactly as shown.
+        </label>
+      )}
       <Button
         type="button"
         variant="outline"
-        disabled={disabled}
+        disabled={disabled || (!observed && !approved)}
         onClick={onExecute}
       >
-        {observed ? "Check recorded result" : "Check approval and execute"}
+        {observed ? "Check recorded result" : "Approve and execute"}
       </Button>
       <p>
-        This checks current approval and authority for the same immutable
-        proposal. It cannot approve the update.
+        Approve and execute records your approval for this exact proposal.
+        Rechecking a recorded result uses the same proposal.
       </p>
     </section>
   );

@@ -1,7 +1,8 @@
-import type { TaskUpdateRaw } from "@capiro/meri-client/task-commands";
+import type { TaskUpdateRaw } from "@capiro/meri-contracts/task-command-application";
 import type {
   WorkflowProblem,
   WorkflowReply,
+  TaskRecoveryView,
 } from "../meri-actions/workflow-port";
 
 export type { WorkflowProblem, WorkflowReply };
@@ -29,6 +30,27 @@ export type TaskUpdateExecutionView = Readonly<
 
 /** Display handles retain exact public received proposals inside the adapter. */
 export interface TaskUpdateWorkflowPort {
+  discardSaved?(
+    signal: AbortSignal,
+  ): Promise<
+    WorkflowReply<
+      TaskRecoveryView<TaskUpdateProposalView, TaskUpdateExecutionView>
+    >
+  >;
+  restore?(
+    signal: AbortSignal,
+  ): Promise<
+    WorkflowReply<
+      TaskRecoveryView<TaskUpdateProposalView, TaskUpdateExecutionView>
+    >
+  >;
+  retrySaved?(
+    signal: AbortSignal,
+  ): Promise<
+    WorkflowReply<
+      TaskRecoveryView<TaskUpdateProposalView, TaskUpdateExecutionView>
+    >
+  >;
   prepare(
     input: TaskUpdateInput,
     signal: AbortSignal,

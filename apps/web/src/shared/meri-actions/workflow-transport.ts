@@ -1,5 +1,7 @@
 import {
   receiveActionResponse,
+  receiveActionPrepareRequest,
+  type ActionPrepareResponse,
   type ActionRoute,
   type ActionResponse,
 } from "@capiro/meri-contracts/action-application";
@@ -32,6 +34,18 @@ export function actionTransport(
     if (!["query", "draft", "prepare", "execute"].includes(route))
       throw new Error("Unknown action route");
     const capturedBody = JSON.stringify(body);
+    const expected =
+      route === "prepare"
+        ? { request: await receiveActionPrepareRequest(capturedBody) }
+        : route === "execute"
+          ? {
+              proposal: (
+                JSON.parse(capturedBody) as {
+                  proposal: ActionPrepareResponse["proposal"];
+                }
+              ).proposal,
+            }
+          : undefined;
     let unauthorized = false;
     try {
       return await withActionDeadline([caller, lifetime], async (signal) => {
@@ -49,7 +63,12 @@ export function actionTransport(
         });
         unauthorized = response.status === 401;
         const text = await boundedJsonText(response, signal, 16 * 1024 * 1024);
-        const value = await receiveActionResponse(route, response.status, text);
+        const value = await receiveActionResponse(
+          route,
+          response.status,
+          text,
+          expected,
+        );
         signal.throwIfAborted();
         return { status: response.status, value };
       });

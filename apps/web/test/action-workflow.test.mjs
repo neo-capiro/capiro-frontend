@@ -4,6 +4,32 @@ import { ActionWorkflowController } from "../src/features/meri/actions/action-wo
 import { workflowProblems } from "../src/features/meri/actions/workflow-problems.ts";
 
 const ok = (value) => ({ ok: true, value });
+
+test("saved create-task reconciliation removes the old proposal before another explicit request", async () => {
+  let next = {
+    phase: "prepare",
+    fields: [{ label: "Task", value: "Another saved task" }],
+  };
+  const f = fixture({
+    restore: async () => ok({ phase: "proposal", proposal: f.proposal }),
+    retrySaved: async () => ok(next),
+  });
+  f.controller.attach();
+  await Promise.resolve();
+  assert.equal(
+    f.controller.getSnapshot().proposal.reference,
+    f.proposal.reference,
+  );
+  await f.controller.retrySaved();
+  assert.equal(f.controller.getSnapshot().proposal, null);
+  assert.equal(f.controller.getSnapshot().savedRequest, true);
+  await f.controller.execute();
+  assert.deepEqual(f.calls, []);
+  next = { phase: "empty" };
+  await f.controller.retrySaved();
+  assert.equal(f.controller.getSnapshot().savedRequest, false);
+  assert.equal(f.controller.getSnapshot().proposal, null);
+});
 const deferred = () => {
   let resolve;
   const promise = new Promise((done) => {

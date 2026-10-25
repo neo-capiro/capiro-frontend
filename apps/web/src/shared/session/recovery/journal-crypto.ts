@@ -5,6 +5,15 @@ const envelope = z.discriminatedUnion("state", [
       version: z.literal(1),
       scope: z.string(),
       requestId: z.uuid(),
+      state: z.literal("discarded"),
+      code: z.literal("TASK_PREPARATION_DISCARDED"),
+    })
+    .strict(),
+  z
+    .object({
+      version: z.literal(1),
+      scope: z.string(),
+      requestId: z.uuid(),
       state: z.literal("pending"),
       data: z.unknown(),
     })
