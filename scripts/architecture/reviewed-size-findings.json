@@ -2108,10 +2108,10 @@
     "file": "apps/web/tests/meri-action-host.test.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e",
-    "reason": "One host-lifetime contract test module shares a small synthetic session/fetch harness and real QueryClient to exercise explicit connect, idle expiry, suspension/revocation and cache-generation ownership. These are the states of one ActionHostController plus its injected journal, not separate feature domains. Splitting at431 nonblank lines would duplicate the same authority/observation fixtures; all executable test cases and helpers remain below80 lines.",
-    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "d82e3f1aa1a6ccfe09e33822692881854f01e9fb3317c0b658499a34b87b6a6a",
+    "reason": "The existing action-host suite covers explicit connection, pause/revocation and journal versus private host state over a shared synthetic setup. The original PR adds lifetime behavior cases; the correction does not alter this file. These are related contracts of the same host owner, with separately named tests and cleanup. Keeping their fixtures local avoids a speculative shared test framework.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/tests/meri-action-host.test.ts",
@@ -3857,6 +3857,60 @@
     "fingerprint": "6b08cc8ddbfffe1f4f5a98b31cb074fed3d750736c82851747526173b08432e7",
     "reason": "One document connection composition: within the parent account/client/operation key, creates the existing SessionLifetimeController, delegates identity/bootstrap/public-history qualification to bootstrapFileSession, and constructs DocumentWorkflow with its fixed transport and context journal only after qualification. React attachment, availability hiding, revocation, subscription and explicit-connect presentation belong to this same local lifetime. Persisted-run receiving, canonical authorization, document generation/publication and durable uncertainty remain in existing public client/backend/workflow owners. The 100-line function does not implement these domains itself or dispatch document/Stop effects during connection. A separate generic host/helper solely to trim JSX would scatter this cohesive boundary.",
     "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), FE150 e2a50982210a365685a9d549eaafe4813f996fdc; original function cohesion at cb52af2c8a384f579198dd434888ca19be7ee500 independently reverified unchanged after cleanup; source ACCEPT",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
+    "kind": "function",
+    "symbol": "Connected",
+    "fingerprint": "19c975e8ed0378a64deacd719ef3e0eb3622cfd0e47656cc5db04ce784bcd6b9",
+    "reason": "This function composes the existing routine session lifetime and providers, then renders connection status and its single workspace. Bootstrap, authority, encrypted recovery and command behavior remain in their existing owners. This delta passes the existing onAccessLost callback to the workflow; it adds no independent policy or transport layer. Keeping the callback beside the port factory makes exact lifetime ownership visible. No extraction is warranted solely by the 98-line body.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
+    "kind": "function",
+    "symbol": "RoutinesWorkspace",
+    "fingerprint": "b2448061c2453120c6f2ced803e441acf18a43cb85ff9a892b03280018e506a9",
+    "reason": "This component owns one routine workspace view: page/cursor, loading/error and editor state, with existing RoutineReview, RoutineForm, RoutineCancellation and Panel children. The changed denial/replacement reset belongs to the same local view lifetime. Network validation, access policy and durable command custody remain delegated. Existing large JSX is cohesive; a mechanical split would obscure the view reset without removing a separate responsibility.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
+    "kind": "function",
+    "symbol": "RoutinesWorkspace > <anonymous> #7",
+    "fingerprint": "2995b98c471e14dfb7df04a86d23aae28fd5b27ad7f051670d7af2153bf6e7d7",
+    "reason": "This rows.map callback renders one canonical routine projection and its bounded observed activity, with edit/cancel buttons delegating to the parent editor state. It neither authorizes a change nor writes a command. Its 86-line JSX body has one rendering responsibility and remains unchanged by the correction; no helper component is necessary to establish the denial/lifetime boundary.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239",
+    "reason": "This describe callback is a declarative group of separately named tests for one explicit host connection lifetime, not one 142-line operation. Each case isolates issuance, receipt validation, attach/detach, expiry or refusal using the same synthetic host fixture. No unrelated business responsibilities are combined.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #5",
+    "fingerprint": "60162a7677bfcd763ad299f238db9f7bda894c7dc77eeeeadcca2bef0880c097",
+    "reason": "This describe callback groups separately named tests of the boundary between scoped cache journal metadata and private host state. Cases check retained uncertain writes, identity separation, exact context keys and old settlement after clear. The 119-line grouping preserves the shared fixture and does not create an oversized production operation.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/tests/meri-routines.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "113221f8453013d5db2dddd539cb1fb79f7a1ae782a255e8cc2159a184f3d505",
+    "reason": "The routines suite keeps synthetic public contract fixtures, existing encrypted-journal platform mocks and focused transport/workflow/view scenarios together. The correction adds four scenarios at the same denial/session boundary, importing the actual standalone host and conversation card. Only their four provider hooks and the existing static React harness are adapted; no unrelated domain or reusable test framework is added. The useMemo mock assumes stable dependencies and the static renderer does not prove mounted React subscription, browser visibility or StrictMode cleanup. Those limits are explicit in the verdict; these tests are accepted as local composition evidence together with source inspection, not live acceptance.",
+    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
     "reviewedOn": "2026-10-25"
   }
 ]
