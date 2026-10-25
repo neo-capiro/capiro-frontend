@@ -22,6 +22,14 @@ const h = vi.hoisted(() => ({
         onChange: (event: { target: { value: string } }) => void;
       }) => void
     >(),
+  editors:
+    vi.fn<
+      (props: {
+        name: string;
+        value: string;
+        onChange: (value: string) => void;
+      }) => void
+    >(),
   buttons:
     vi.fn<
       (props: { children: ReactNode; onClick: () => Promise<void> }) => void
@@ -85,7 +93,16 @@ vi.mock(
 );
 vi.mock(
   "../src/features/modules/workspace/rich-document/SectionEditor",
-  () => ({ SectionEditor: () => null }),
+  () => ({
+    SectionEditor: (props: Parameters<typeof h.editors>[0]) => {
+      h.editors(props);
+      return null;
+    },
+  }),
+);
+vi.mock(
+  "../src/features/modules/workspace/ordinary-export/OrdinaryDraftExport",
+  () => ({ OrdinaryDraftExport: () => null }),
 );
 vi.mock(
   "../src/features/modules/workspace/rich-document/SectionPreview",
@@ -174,9 +191,10 @@ it("opens the existing ordinary editor for its current canonical client", () => 
 });
 it("adopts a confirmed client without reloading or losing unsaved ordinary draft edits", async () => {
   render();
-  const [title, body] = h.inputs.mock.calls.map(([props]) => props);
+  const [title] = h.inputs.mock.calls.map(([props]) => props);
+  const [body] = h.editors.mock.calls.map(([props]) => props);
   title!.onChange({ target: { value: "Unsaved title" } });
-  body!.onChange({ target: { value: "Unsaved body" } });
+  body!.onChange("Unsaved body");
   render();
   const bound: WorkspaceDraftDocument = {
     ...h.row!,
@@ -189,10 +207,8 @@ it("adopts a confirmed client without reloading or losing unsaved ordinary draft
   expect(h.reload).not.toHaveBeenCalled();
   expect(html).toContain("Bound client");
   expect(h.binding.mock.lastCall![0].draft).toBe(bound);
-  expect(h.inputs.mock.calls.slice(-2).map(([props]) => props.value)).toEqual([
-    "Unsaved title",
-    "Unsaved body",
-  ]);
+  expect(h.inputs.mock.calls.at(-1)![0].value).toBe("Unsaved title");
+  expect(h.editors.mock.calls.at(-1)![0].value).toBe("Unsaved body");
   const save = h.buttons.mock.calls.findLast(
     ([props]) => props.children === "Save draft",
   )![0];

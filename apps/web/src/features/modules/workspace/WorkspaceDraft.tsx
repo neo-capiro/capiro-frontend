@@ -11,7 +11,6 @@ import {
   Field,
   Panel,
   StatusPanel,
-  TextArea,
   TextInput,
 } from "../../../shared/module-ui";
 import {
@@ -30,6 +29,7 @@ import styles from "./workspace.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
 import { VersionHistory } from "./version-history/VersionHistory";
+import { OrdinaryDraftExport } from "./ordinary-export/OrdinaryDraftExport";
 
 function DraftEditor({
   draft,
@@ -92,8 +92,13 @@ function DraftEditor({
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
             draft={currentDraft}
           />
-          {draft.prospectId && (
-            <DocumentPreview title={title} names={names} sections={sections} />
+          <DocumentPreview title={title} names={names} sections={sections} />
+          {!draft.prospectId && (
+            <OrdinaryDraftExport
+              key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
+              draft={currentDraft}
+              disabled={pending}
+            />
           )}
           <ActionButton
             primary
@@ -182,28 +187,14 @@ function DraftEditor({
       {names.length ? (
         names.map((name) => (
           <Panel key={name} title={name}>
-            {draft.prospectId ? (
-              <SectionEditor
-                name={name}
-                value={sections[name] ?? ""}
-                disabled={pending}
-                onChange={(content) =>
-                  setSections((previous) => ({ ...previous, [name]: content }))
-                }
-              />
-            ) : (
-              <TextArea
-                aria-label={`${name} content`}
-                value={sections[name] ?? ""}
-                disabled={pending}
-                onChange={(event) =>
-                  setSections((previous) => ({
-                    ...previous,
-                    [name]: event.target.value,
-                  }))
-                }
-              />
-            )}
+            <SectionEditor
+              name={name}
+              value={sections[name] ?? ""}
+              disabled={pending}
+              onChange={(content) =>
+                setSections((previous) => ({ ...previous, [name]: content }))
+              }
+            />
           </Panel>
         ))
       ) : (
