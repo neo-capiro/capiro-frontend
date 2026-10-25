@@ -898,10 +898,10 @@
     "file": "apps/web/src/features/portfolio/files/file-scope.ts",
     "kind": "function",
     "symbol": "useFileScope",
-    "fingerprint": "301aed60e5253d762f0090d0edb8121ded1373868dbf5fb583224222209048d1",
-    "reason": "Owns one Files view lifetime keyed by client, entity context and the captured reader revision. It subscribes only to actual query-state updates, disposes its AbortController on reader/context/error/unmount changes, and returns read/write executions plus availability. Reader provenance and list transport live separately in file-reader and queries; ticket retries and navigation have their own owners. The 89-line hook keeps cleanup and dispatch guards together instead of spreading one lifetime across effects in each caller.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "61d2ff982ebf39696b7b70757d2b619919c297339c6b80b1eb0a77cdf6e38790",
+    "reason": "One Files view execution lifetime: subscribes to canonical reader and file-list state, keys the lifetime by client/context/reader revision, aborts captured executions when authority or view becomes obsolete, and returns guarded captures plus availability. The finite refetchOnMount:false delegation to useFiles prevents child action mounts from refreshing their initiating parent while retaining missing-data loading and explicit invalidation. Identity transport/schema, list transport, Core authorization, upload attempts, signed-URL navigation and durable move/access/deletion protocols remain in their existing owners. The 96 nonblank-line hook keeps the coupled subscription, controller disposal and dispatch guards together; it adds no independent domain responsibility, duplicate cache, authority owner or workflow dispatcher. Splitting it to meet 80 lines would scatter one lifetime without a responsibility benefit.",
+    "reviewedBy": "Codex independent Wave2 Files reviewer (/root/wave2_files_review), PR145 692b725310453e04f846518fc5c3e379e7851ea1",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/portfolio/files/upload.ts",
