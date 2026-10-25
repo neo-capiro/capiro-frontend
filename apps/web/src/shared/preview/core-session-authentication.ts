@@ -11,7 +11,7 @@ const nativeClientDelete = new RegExp(`^/clients/${clientId}$`);
 
 /** Match the existing Core native-session handlers on their configured origin.
  * This chooses a credential only; Core still validates route, membership and scope.
- * Nested client operations and all other origins keep their ordinary token.
+ * Callers validate the configured target before selecting its credential.
  */
 export function coreSessionAuthentication(
   service: string,
@@ -19,7 +19,11 @@ export function coreSessionAuthentication(
   method: string,
   path: string,
 ): "clerk-session" | undefined {
-  if (service !== "core" || base !== nativeCoreBase) return undefined;
+  if (service !== "core") return undefined;
+  // Saved layouts require Core's current-session proof on every configured target.
+  if (path === "/me/portfolio-layout" && (method === "GET" || method === "PUT"))
+    return "clerk-session";
+  if (base !== nativeCoreBase) return undefined;
   const native =
     ((method === "GET" || method === "HEAD") && nativeReads.test(path)) ||
     (method === "POST" && path === "/clients") ||

@@ -136,6 +136,28 @@ it("keeps ordinary local/other-host, other service, malformed and non-native han
   ).toBe("clerk-session");
 });
 
+it.each([
+  ["core", "HEAD", "/me/portfolio-layout"],
+  ["core", "POST", "/me/portfolio-layout"],
+  ["core", "PATCH", "/me/portfolio-layout"],
+  ["core", "DELETE", "/me/portfolio-layout"],
+  ["core", "GET", "/me/portfolio-layout/"],
+  ["core", "GET", "/me/portfolio-layout/items"],
+  ["core", "GET", "/me/portfolio-layout-extra"],
+  ["core", "GET", "/me/Portfolio-layout"],
+  ["core", "GET", "/me%2Fportfolio-layout"],
+  ["strategy", "GET", "/me/portfolio-layout"],
+  ["workspace", "PUT", "/me/portfolio-layout"],
+])(
+  "does not select layout credentials for %s %s %s",
+  (service, method, path) => {
+    for (const target of [base, "http://127.0.0.1:5208/api"])
+      expect(
+        coreSessionAuthentication(service, target, method, path),
+      ).toBeUndefined();
+  },
+);
+
 it("keeps unsigned native requests and cross-origin client writes refused", async () => {
   clerk.auth.mockResolvedValueOnce({ userId: null, getToken });
   expect(
