@@ -3863,18 +3863,18 @@
     "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
     "kind": "function",
     "symbol": "Connected",
-    "fingerprint": "85f6a0a1bc2d6fee41384ec314424b5cf65b77e7641b76a329c654c77576d28b",
-    "reason": "Independent FE156 review explicitly accepts Connected and its nested issue callback as one cohesive controller/wiring lifetime. The added v1/v2 branch belongs beside the existing scope resolver and does not merit extraction solely for a line threshold. Canonical first-chat, account/client/session receiving, encrypted recovery, authority and command behavior remain in existing owners. The 109-nonblank-line function adds cold client conversation resolution without another policy, schema, transport or lifecycle owner; saved original conversation recovery and omission of the expired run hint are retained. Review reused 38 distinct passing cases and two killed mutants, while recording that synthetic resolution does not qualify live Core/Meri admission. Exact source and cohesion verdict: fe-pr156-review.txt, sealed 2026-10-25T17:52:28UTC.",
-    "reviewedBy": "Codex independent Primary review (chat 01a170f1-e07c-7283-864e-76bd7ca520ac), FE156 a05af12f8520a828959bec23a83391dface74d73; Integration adopts explicitly approved exact source",
+    "fingerprint": "daa937f215f8cf64bb9939e287af815b91708f750d5c6002c89ed7ac268cba03",
+    "reason": "PR162 exact48ddc9d: one routine connection composition for the immutable tenant/actor/client owner. The existing canonical issuer, controller, workflow and typed access stay separate owners. The added expiry-only effect and access-loss reset govern the same connection visibility; they add no credential, transport, storage or command-retry subsystem.124 nonblank function/204 file lines, unchanged imports. Mounted held-reauthorization, retry, refusal and identity-switch cases plus four causal mutants support the boundary. Keep cohesive here; splitting merely to satisfy the threshold would separate tightly coupled lifecycle state.",
+    "reviewedBy": "Independent Primary reviewer (Wave 2)",
     "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
     "kind": "function",
     "symbol": "RoutinesWorkspace",
-    "fingerprint": "b2448061c2453120c6f2ced803e441acf18a43cb85ff9a892b03280018e506a9",
-    "reason": "This component owns one routine workspace view: page/cursor, loading/error and editor state, with existing RoutineReview, RoutineForm, RoutineCancellation and Panel children. The changed denial/replacement reset belongs to the same local view lifetime. Network validation, access policy and durable command custody remain delegated. Existing large JSX is cohesive; a mechanical split would obscure the view reset without removing a separate responsibility.",
-    "reviewedBy": "Calendar independent reviewer (chat 01a170f2-6761-7e00-94bc-ea091b4f5676), FE146 e7d81b8486f0a7e741ece5d26b7d3701f7ee35e0",
+    "fingerprint": "dffbd9bc74029f6458073a4cbbaa3f0f6160ae56765e200a2f7a708336e18ede",
+    "reason": "PR162 exact48ddc9d: one routine workspace owns local page/cursor/loading/editor lifetime and renders existing RoutineReview/RoutineForm/RoutineCancellation components. The opt-in predicate retains only a same-owner unsent New editor; both old/current denial latches, saved commands and existing-routine edit/cancel paths still clear it. Service data resets and stale-result fencing stay in this owner; mutations/journal/receivers remain delegated.222 nonblank function/244 file lines, unchanged imports and unchanged86-line row renderer fingerprint. No new domain responsibility or generic persistence framework; no extraction is warranted for this narrow lifetime change.",
+    "reviewedBy": "Independent Primary reviewer (Wave 2)",
     "reviewedOn": "2026-10-25"
   },
   {
@@ -3920,6 +3920,15 @@
     "fingerprint": "38770ef1187942e1c78e96c8d9ea6c792457f3026f2298b5a2f176458cfca8d4",
     "reason": "Independent FE155 review at 0e97502120aafa6f9aaf0acff54755244195a959 approves this81-line existing deadline callback. It performs one native-authenticated Core dispatch and validates/translates that fixed operation's bounded response with shared body cleanup and status handling. Restoring one validated items-page wire-version field creates the threshold crossing without a new policy, parser, data owner or independent lifecycle. Keeping the bounded dispatch/response/finally sequence together preserves readable error semantics; the actual proxy-to-browser decoder regressions and meaningful version-drop mutant cover the change. See personal-memory-pr155-review.txt.",
     "reviewedBy": "Codex independent Tenant Settings review",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+    "kind": "function",
+    "symbol": "ConnectedWorkflow",
+    "fingerprint": "e4ee7a975a0f73aeda07d58a8a9ca82231f507b874eb537b98cc7c12c104547b",
+    "reason": "ConnectedWorkflow owns one connected recommendation follow-through view: controller subscription/disposal, recovery affordance and composition of existing recommendation, draft and proposal panels. The changed branch selects truthful copy and an explicit read-versus-retry callback from controller state. Authorization, transport, saved-command persistence, immutable binding and async operation control remain in their existing separate owners. The addition creates no second workflow, journal or authority owner; extracting this small presentation branch would fragment the same view without separating a new responsibility. Accepted for this exact function only; no whole-architecture pass is claimed.",
+    "reviewedBy": "Codex independent File Workflows UI reviewer, Root allocated PR163 review",
     "reviewedOn": "2026-10-25"
   }
 ]

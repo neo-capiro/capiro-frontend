@@ -146,3 +146,12 @@ New finite checks: prove all13 source/test/brief blobs and modes match the accep
 Return exact base/head/tree, changed paths, UTC/commands/results and any inherited or setup failures, source/metadata preservation evidence, tests run/not run, and a draft main-targeted PR. Root owns later gates/merge and Release owns a coherent release. Deployed FE image source remains1dfd5893525ad31b7e6622371b1d4e1ddb6bcbf1 until a separately qualified rollout. Preserve cached dependencies/checkouts and active services. This work creates no process/server/cloud/DB resource requiring cleanup; retain owned source/evidence.
 
 Prior bounded adoption audit remains22 close-as-incorporated /1 keep-open: Meri253's unadopted `apps/runtime/test/product-mount.test.mjs` change stays open pending Root disposition. Docs245 merged separately and is excluded; Wave3 remains excluded. No further PR-state change or repeated product audit occurs in this composition.
+
+
+## Composition qualification and remaining metadata gate
+
+All13 accepted files replayed without overlap or conflict, with exact source/test/brief blob and mode preservation. The supplied3 cohesion records match their canonical fingerprints; unrelated records and the86-line routine row renderer are preserved. Two existing records were replaced and one Actions record added. No application behavior was edited by Integration.
+
+The finite5-production-file scan also finds one changed PR164 function lacking a supplied current record: ConnectedFiles at MeriFilesHost.tsx:88,114 nonblank lines, fingerprint `737c72cb1edffd5c6c540b4bdb04ca7146514d8f425ec0cba4baf63470d57abf`. Existing record fingerprint `6b08cc8ddbfffe1f4f5a98b31cb074fed3d750736c82851747526173b08432e7` is stale. PR164 source ACCEPT is retained; Integration does not invent a new independent cohesion record. Root owns this narrow metadata disposition before any merge. The scanner failure is preserved; no whole-architecture PASS is claimed.
+
+Local tooling notes: initial scratch scanner imports used a Windows absolute path instead of file URL and failed before scanning; corrected to standard file URLs. Initial registry formatting check found JSON style differences; only that file was normalized with existing Prettier, then the check passed. This did not change registry semantics or accepted source. No product tests/builds/browser/cloud actions ran; existing exact-source evidence and its inherited transport failure remain reused.
