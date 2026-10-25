@@ -39,6 +39,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
   const { userId, orgId } = useAuth();
   const holdKey = ownerDecisionHoldKey(userId, orgId);
   const [inbox, setInbox] = useState<OwnerInbox>({ state: "loading" });
+  const [loadedFor, setLoadedFor] = useState<string | null>(null);
   const [revision, setRevision] = useState(0);
   const [working, setWorking] = useState<string | null>(null);
   const [feedback, setFeedback] = useState("");
@@ -50,6 +51,8 @@ export function useOwnerMemoryInbox(enabled: boolean) {
   const pageController = useRef<AbortController | null>(null);
   const pagePending = useRef(false);
   const verifyOffset = useRef(0);
+  const generation = useRef(0);
+  const access = useRef(false);
   const holdStatus =
     !holdKey || holds?.key !== holdKey
       ? "loading"
@@ -78,13 +81,21 @@ export function useOwnerMemoryInbox(enabled: boolean) {
 
   useEffect(() => {
     if (!enabled) return;
+    const current = ++generation.current;
+    const generationRef = generation;
+    access.current = false;
+    pending.current = null;
     const controller = new AbortController();
     pageController.current = controller;
     pagePending.current = false;
     async function read() {
       setInbox({ state: "loading" });
+      setLoadedFor(holdKey);
       setLoadingMore(false);
       setLoadMoreError("");
+      setWorking(null);
+      setVerifying(false);
+      setFeedback("");
       try {
         const response = await fetch(`${ownerReviewPaths.list}?limit=50`, {
           credentials: "same-origin",
@@ -98,12 +109,14 @@ export function useOwnerMemoryInbox(enabled: boolean) {
         }
         const value: unknown = await response.json();
         const page = receiveOwnerCandidatePage(value);
-        if (!controller.signal.aborted)
+        if (!controller.signal.aborted && generation.current === current) {
+          access.current = true;
           setInbox({
             state: "ready",
             candidates: page.candidates,
             nextCursor: page.nextCursor,
           });
+        }
       } catch {
         if (!controller.signal.aborted)
           setInbox({
@@ -114,6 +127,8 @@ export function useOwnerMemoryInbox(enabled: boolean) {
     }
     void read();
     return () => {
+      generationRef.current++;
+      access.current = false;
       controller.abort();
       if (pageController.current === controller) pageController.current = null;
     };
@@ -121,6 +136,19 @@ export function useOwnerMemoryInbox(enabled: boolean) {
 
   function refresh() {
     setRevision((value) => value + 1);
+  }
+
+  function loseAccess(status: number) {
+    generation.current++;
+    access.current = false;
+    pageController.current?.abort();
+    pageController.current = null;
+    pending.current = null;
+    setInbox({ state: "error", message: readFailure(status) });
+    setLoadingMore(false);
+    setLoadMoreError("");
+    setWorking(null);
+    setVerifying(false);
   }
 
   async function loadMore() {
@@ -143,6 +171,11 @@ export function useOwnerMemoryInbox(enabled: boolean) {
         cache: "no-store",
         signal: controller.signal,
       });
+      if (controller.signal.aborted) return;
+      if (response.status === 401 || response.status === 403) {
+        loseAccess(response.status);
+        return;
+      }
       if (!response.ok) throw new Error("Page unavailable");
       const value: unknown = await response.json();
       const page = receiveOwnerCandidatePage(value);
@@ -178,7 +211,9 @@ export function useOwnerMemoryInbox(enabled: boolean) {
   }
 
   async function verifyUncertain() {
-    if (verifying || !holdKey || holdStatus !== "ready") return;
+    if (verifying || !holdKey || holdStatus !== "ready" || !access.current)
+      return;
+    const current = generation.current;
     const storage = browserStorage();
     const ids = storage && readOwnerDecisionHolds(storage, holdKey);
     if (!storage || !ids || ids.size === 0) return;
@@ -200,8 +235,14 @@ export function useOwnerMemoryInbox(enabled: boolean) {
               credentials: "same-origin",
               cache: "no-store",
             });
+            if (generation.current !== current) return;
+            if (response.status === 401 || response.status === 403) {
+              loseAccess(response.status);
+              return;
+            }
             if (!response.ok) return;
             const value: unknown = await response.json();
+            if (generation.current !== current) return;
             const receipt = receiveOwnerCandidateStatus(value, id);
             if (receipt.terminal && releaseOwnerDecision(storage, holdKey, id))
               confirmed += 1;
@@ -210,6 +251,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
           }
         }),
       );
+      if (generation.current !== current) return;
       setHolds({ key: holdKey, ids: readOwnerDecisionHolds(storage, holdKey) });
       setFeedback(
         confirmed > 0
@@ -218,7 +260,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       );
       if (confirmed > 0) refresh();
     } finally {
-      setVerifying(false);
+      if (generation.current === current) setVerifying(false);
     }
   }
 
@@ -233,9 +275,11 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       pending.current ||
       holdStatus !== "ready" ||
       uncertainIds.has(id) ||
-      !holdKey
+      !holdKey ||
+      !access.current
     )
       return;
+    const current = generation.current;
     pending.current = id;
     const storage = browserStorage();
     if (!storage || !holdOwnerDecision(storage, holdKey, id)) {
@@ -272,6 +316,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
           cache: "no-store",
         },
       );
+      if (generation.current !== current) return;
       if ([400, 404, 409].includes(response.status)) {
         release();
         setFeedback(
@@ -282,6 +327,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       }
       if (response.status === 401 || response.status === 403) {
         release();
+        loseAccess(response.status);
         setFeedback(
           "Your current session cannot decide this proposal. Refresh access before continuing.",
         );
@@ -289,6 +335,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       }
       if (response.status === 503) {
         const failure: unknown = await response.json().catch(() => null);
+        if (generation.current !== current) return;
         if (
           failure &&
           typeof failure === "object" &&
@@ -307,6 +354,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       }
       if (!response.ok) throw new Error("Decision not confirmed");
       const result: unknown = await response.json();
+      if (generation.current !== current) return;
       if (
         !result ||
         typeof result !== "object" ||
@@ -324,6 +372,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       setFeedback(decisionFeedback(result.status));
       refresh();
     } catch {
+      if (generation.current !== current) return;
       // A transport failure after dispatch may hide a committed decision. A
       // pending-list read alone cannot establish the terminal outcome. The
       // actor-scoped storage marker survives reload and is observed by other tabs.
@@ -331,13 +380,16 @@ export function useOwnerMemoryInbox(enabled: boolean) {
         "The decision status is uncertain. Use Verify outcomes with Core before taking another action on this proposal.",
       );
     } finally {
-      pending.current = null;
-      setWorking(null);
+      if (generation.current === current) {
+        pending.current = null;
+        setWorking(null);
+      }
     }
   }
 
   return {
-    inbox,
+    inbox:
+      enabled && loadedFor === holdKey ? inbox : { state: "loading" as const },
     feedback,
     working,
     loadingMore,
