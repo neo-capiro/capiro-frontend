@@ -17,9 +17,21 @@ const harness = vi.hoisted(() => ({
   run: undefined as ReturnType<typeof useLiveRun> | undefined,
   buttons: [] as ButtonProps[],
   composer: undefined as { stopBlocked?: string | undefined } | undefined,
+  lifecycleUnavailable: false,
 }));
 vi.mock("../src/features/meri/conversation/useLiveRun", () => ({
   useLiveRun: () => harness.run,
+}));
+vi.mock("../src/shared/meri-conversation-lifecycle/journal", () => ({
+  lifecycleJournal: () => {
+    if (harness.lifecycleUnavailable) throw Error("Synthetic storage failure");
+    return {
+      current: () => true,
+      read: () => undefined,
+      retain: vi.fn(),
+      clear: vi.fn(),
+    };
+  },
 }));
 vi.mock("@capiro/ui/button", () => ({
   Button: (props: ButtonProps) => {
@@ -90,6 +102,7 @@ function liveProps(): LiveProps {
     },
     onNextTurn: vi.fn(),
     onSettled: vi.fn(),
+    onLifecycleTarget: vi.fn(),
     nextTurnVerified: true,
     savedCurrent: turnFromEvents(
       [],
@@ -101,6 +114,7 @@ function liveProps(): LiveProps {
   };
 }
 function resetRun() {
+  harness.lifecycleUnavailable = false;
   harness.run = {
     snapshot: { observation: null, cancelReceipt: null },
     intent: {},
@@ -143,6 +157,12 @@ it("verified terminal history offers Ready and focuses the composer without disp
 });
 
 const readinessBlockers: Array<[string, (props: LiveProps) => void]> = [
+  [
+    "lifecycle journal storage failure",
+    () => {
+      harness.lifecycleUnavailable = true;
+    },
+  ],
   [
     "session storage failure",
     (props) => {

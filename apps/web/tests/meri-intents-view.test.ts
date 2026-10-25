@@ -36,7 +36,10 @@ it("an awaiting task.create proposal is decidable and shows the exact retained c
   });
   const fields = Object.fromEntries(row.fields.map((f) => [f.label, f.value]));
   const proposal = (
-    first("listAwaiting") as Extract<IntentsItem, { proposal: unknown }>
+    first("listAwaiting") as Extract<
+      IntentsItem,
+      { kind: "proposal"; proposal: unknown }
+    >
   ).proposal;
   expect(fields).toMatchObject({
     Action: "Create a task",
@@ -141,7 +144,7 @@ it("durable phases read as truthful, closed rows", () => {
 it("a proposal past its expiry is never offered for a decision, even before the list says so", () => {
   const item = first("listAwaiting") as Extract<
     IntentsItem,
-    { proposal: unknown }
+    { kind: "proposal"; proposal: unknown }
   >;
   expect(
     intentRow(item, Date.parse(item.proposal.expiresAt), viewer),
@@ -151,7 +154,7 @@ it("a proposal past its expiry is never offered for a decision, even before the 
 it("held kinds and other approvers are shown but never decidable", () => {
   const item = structuredClone(first("listAwaiting")) as Extract<
     IntentsItem,
-    { proposal: unknown }
+    { kind: "proposal"; proposal: unknown }
   >;
   const memory = structuredClone(item);
   (memory.proposal.command as { action: string }).action = "memory.propose";
