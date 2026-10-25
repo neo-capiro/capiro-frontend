@@ -579,6 +579,73 @@ for (const phase of ["unsent", "retained"] as const)
     state.assertClean();
   });
 
+test("late Workspace POST404 hides pending details and retains the exact original for GET recovery", async ({
+  page,
+  baseURL,
+}) => {
+  const state = await setup(page, baseURL),
+    commands: ClientBriefCopyCommand[] = [];
+  let available = false;
+  state.onCreate(async (route, input) => {
+    commands.push(input.body!);
+    await assertEncrypted(page, input.body!);
+    await json(
+      route,
+      { message: "Synthetic Workspace access unavailable" },
+      404,
+    );
+  });
+  state.onRead((route, input) => {
+    expect(input.params).toEqual({
+      prospectId,
+      clientId,
+      requestId: commands[0]!.requestId,
+    });
+    return available
+      ? json(route, receipt(commands[0]!))
+      : json(route, { message: "Synthetic Workspace access unavailable" }, 404);
+  });
+  await openReview(page);
+  await submit(page);
+  const blocked = page.getByRole("dialog");
+  await expect(blocked.getByRole("alert")).toContainText(
+    "Workspace access unavailable",
+  );
+  await expect(blocked).not.toContainText(sourceTitle);
+  await expect(blocked).not.toContainText(client.name);
+  await expect(
+    blocked.getByRole("heading", { name: title, exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    blocked.getByLabel("New private draft title", { exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    blocked.getByRole("button", { name: "Acknowledge copy result" }),
+  ).toHaveCount(0);
+  expect(commands).toHaveLength(1);
+  await assertEncrypted(page, commands[0]!);
+  expect(
+    state.operations.filter((value) => value.key === receiptOperation),
+  ).toHaveLength(0);
+  await blocked.getByRole("button", { name: "Close", exact: true }).click();
+  available = true;
+  await page
+    .getByRole("button", { name: "Retry brief-copy recovery", exact: true })
+    .click();
+  const restored = await openRecovery(page);
+  expect(commands).toHaveLength(1);
+  await restored
+    .getByRole("button", { name: "Check original copy result" })
+    .click();
+  await expect(restored.getByRole("status")).toContainText("confirmed");
+  await assertEncrypted(page, commands[0]!);
+  expect(
+    state.operations.filter((value) => value.key === receiptOperation),
+  ).toHaveLength(1);
+  expect(commands).toHaveLength(1);
+  state.assertClean();
+});
+
 test("initial503 remains retained through reload and GET404 before the same reviewed request is retried", async ({
   page,
   baseURL,
@@ -612,12 +679,20 @@ test("initial503 remains retained through reload and GET404 before the same revi
   await dialog
     .getByRole("button", { name: "Check original copy result" })
     .click();
-  await expect(dialog.getByRole("alert")).toContainText("No saved receipt");
+  const blocked = page.getByRole("dialog");
+  await expect(blocked.getByRole("alert")).toContainText("No saved receipt");
+  await expect(blocked).not.toContainText(sourceTitle);
+  await assertEncrypted(page, commands[0]!);
   expect(commands).toHaveLength(1);
-  await dialog
+  await blocked.getByRole("button", { name: "Close", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Retry brief-copy recovery", exact: true })
+    .click();
+  const restored = await openRecovery(page);
+  await restored
     .getByRole("button", { name: "Retry the same reviewed copy" })
     .click();
-  await expect(dialog.getByRole("status")).toContainText("confirmed");
+  await expect(restored.getByRole("status")).toContainText("confirmed");
   expect(commands[1]).toEqual(commands[0]);
   expect(events).toEqual(["POST", "GET", "GET", "POST"]);
   state.assertClean();

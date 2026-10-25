@@ -109,7 +109,8 @@ export function useClientBriefCopy(actor: ProspectWriter, record: Prospect) {
       if (
         error instanceof ClientBriefAccessError ||
         error instanceof ApiError ||
-        (error instanceof CapiroApiError && [401, 403].includes(error.status))
+        (error instanceof CapiroApiError &&
+          [401, 403, 404].includes(error.status))
       )
         recovery.block(error);
     },
