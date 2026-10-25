@@ -47,6 +47,8 @@ const optionalBindings = [
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
   'meriRuntimeSource', 'meriRuntimeImageDigest',
   'memoryOwnerReviewEnabled',
+  'meriActionWorkflowEnabled', 'meriTaskCommandWorkflowEnabled',
+  'meriIntentApprovalsWorkflowEnabled', 'meriDocumentWorkflowEnabled', 'meriDocumentOperation',
 ];
 const patterns = Object.freeze({
   clerkIssuer: /^https:\/\/clerk\.app\.capiro\.ai$/,
@@ -125,12 +127,34 @@ function readQualifiedCoreRosterApi(bindings, firstChat, meri) {
   return target;
 }
 
-function readMemoryConfiguration(bindings) {
+function readMemoryConfiguration(bindings, previewReadOnly) {
   const enabled = Object.hasOwn(bindings, 'memoryOwnerReviewEnabled')
     ? bindings.memoryOwnerReviewEnabled : false;
   if (typeof enabled !== 'boolean') throw Error('PREVIEW_MEMORY_FLAG_INVALID');
-  if (enabled && !coreMemorySource) throw Error('PREVIEW_MEMORY_LISTENER_UNQUALIFIED');
-  return { enabled };
+  const previewRoutesEnabled = enabled && previewReadOnly;
+  if (previewRoutesEnabled && !coreMemorySource) throw Error('PREVIEW_MEMORY_LISTENER_UNQUALIFIED');
+  return { enabled, previewRoutesEnabled };
+}
+
+function readMeriWorkflows(bindings, meri, previewReadOnly) {
+  const enabled = {};
+  for (const name of ['meriActionWorkflowEnabled', 'meriTaskCommandWorkflowEnabled',
+    'meriIntentApprovalsWorkflowEnabled', 'meriDocumentWorkflowEnabled']) {
+    enabled[name] = Object.hasOwn(bindings, name) ? bindings[name] : false;
+    if (typeof enabled[name] !== 'boolean') throw Error('PREVIEW_MERI_WORKFLOW_FLAG_INVALID');
+  }
+  if (Object.values(enabled).some(Boolean) && (previewReadOnly || !meri.baseUrl))
+    throw Error('PREVIEW_MERI_WORKFLOW_DEPENDENCY_HELD');
+  if (enabled.meriIntentApprovalsWorkflowEnabled && !meri.enabled)
+    throw Error('PREVIEW_MERI_INTENTS_DEPENDENCY_HELD');
+  const operation = Object.hasOwn(bindings, 'meriDocumentOperation') ? bindings.meriDocumentOperation : '';
+  // Only the existing Word/TXT family is in this deployment allocation.
+  if (!['', 'create_word'].includes(operation)
+      || (enabled.meriDocumentWorkflowEnabled && operation !== 'create_word'))
+    throw Error('PREVIEW_MERI_DOCUMENT_OPERATION_INVALID');
+  if (!enabled.meriDocumentWorkflowEnabled && operation !== '')
+    throw Error('PREVIEW_MERI_DOCUMENT_OPERATION_WITHOUT_WORKFLOW');
+  return { ...enabled, operation };
 }
 
 /** Public metadata only. This does not read credentials or establish application authority. */
@@ -146,11 +170,12 @@ export function renderPreviewConfiguration(bindings) {
   const meri = readMeriConfiguration(bindings);
   const firstChat = readFirstChatConfiguration(bindings, meri);
   const qualifiedCoreRosterApi = readQualifiedCoreRosterApi(bindings, firstChat, meri);
-  const memory = readMemoryConfiguration(bindings);
   const previewReadOnly = Object.hasOwn(bindings, 'previewReadOnly') ? bindings.previewReadOnly : true;
   const userPreferencesEnabled = Object.hasOwn(bindings, 'userPreferencesEnabled') ? bindings.userPreferencesEnabled : false;
   if (typeof previewReadOnly !== 'boolean')
     throw Error('PREVIEW_MODE_INVALID');
+  const memory = readMemoryConfiguration(bindings, previewReadOnly);
+  const workflows = readMeriWorkflows(bindings, meri, previewReadOnly);
   if (typeof userPreferencesEnabled !== 'boolean')
     throw Error('PREVIEW_USER_PREFERENCES_FLAG_INVALID');
   if (userPreferencesEnabled && (!meri.baseUrl || previewReadOnly))
@@ -169,11 +194,16 @@ export function renderPreviewConfiguration(bindings) {
     CapiroPreviewFirstChatBackendSource: firstChat.bootstrapEnabled ? coreBootstrapSource : '',
     CapiroPreviewFirstChatApiBaseUrl: firstChat.bootstrapEnabled ? corePreviewApi : '',
     MeriMemoryOwnerReviewEnabled: String(memory.enabled),
-    CapiroPreviewMemoryOwnerRoutesEnabled: String(memory.enabled),
-    CapiroPreviewMemoryCoreBackendSource: memory.enabled ? coreMemorySource : '',
-    CapiroPreviewMemoryCoreApiBaseUrl: memory.enabled ? corePreviewApi : '',
+    CapiroPreviewMemoryOwnerRoutesEnabled: String(memory.previewRoutesEnabled),
+    CapiroPreviewMemoryCoreBackendSource: memory.previewRoutesEnabled ? coreMemorySource : '',
+    CapiroPreviewMemoryCoreApiBaseUrl: memory.previewRoutesEnabled ? corePreviewApi : '',
     MeriApiBaseUrl: meri.baseUrl,
     MeriConversationWorkflowEnabled: String(meri.enabled),
+    MeriActionWorkflowEnabled: String(workflows.meriActionWorkflowEnabled),
+    MeriTaskCommandWorkflowEnabled: String(workflows.meriTaskCommandWorkflowEnabled),
+    MeriIntentApprovalsWorkflowEnabled: String(workflows.meriIntentApprovalsWorkflowEnabled),
+    MeriDocumentWorkflowEnabled: String(workflows.meriDocumentWorkflowEnabled),
+    MeriDocumentOperation: workflows.operation,
     CapiroPreviewMeriConversationRoutesEnabled: String(meri.routesEnabled),
     CapiroPreviewMeriRuntimeOrigin: meri.routesEnabled ? meri.baseUrl : '',
     CapiroPreviewMeriRuntimeSource: meri.runtimeSource,
@@ -204,9 +234,11 @@ export function renderPreviewConfiguration(bindings) {
       ONBOARD_API_BASE_URL: '',
       MERI_API_BASE_URL: meri.baseUrl,
       MERI_CONVERSATION_WORKFLOW_ENABLED: String(meri.enabled),
-      MERI_ACTION_WORKFLOW_ENABLED: 'false',
-      MERI_DOCUMENT_WORKFLOW_ENABLED: 'false',
-      MERI_DOCUMENT_OPERATION: '',
+      MERI_ACTION_WORKFLOW_ENABLED: values.MeriActionWorkflowEnabled,
+      MERI_TASK_COMMAND_WORKFLOW_ENABLED: values.MeriTaskCommandWorkflowEnabled,
+      MERI_INTENT_APPROVALS_WORKFLOW_ENABLED: values.MeriIntentApprovalsWorkflowEnabled,
+      MERI_DOCUMENT_WORKFLOW_ENABLED: values.MeriDocumentWorkflowEnabled,
+      MERI_DOCUMENT_OPERATION: values.MeriDocumentOperation,
       CAPIRO_REQUEST_ORIGIN: origin,
       CAPIRO_PREVIEW_READ_ONLY: String(previewReadOnly),
       MERI_USER_PREFERENCES_ENABLED: String(userPreferencesEnabled),

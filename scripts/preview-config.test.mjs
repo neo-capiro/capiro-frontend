@@ -41,6 +41,8 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   assert.equal(p.environment.INTELLIGENCE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/intel-api');
   for (const name of ['STRATEGY_API_BASE_URL', 'ONBOARD_API_BASE_URL', 'MERI_API_BASE_URL', 'MERI_DOCUMENT_OPERATION']) assert.equal(p.environment[name], '');
   assert.equal(p.environment.MERI_ACTION_WORKFLOW_ENABLED, 'false');
+  assert.equal(p.environment.MERI_TASK_COMMAND_WORKFLOW_ENABLED, 'false');
+  assert.equal(p.environment.MERI_INTENT_APPROVALS_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_DOCUMENT_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.CAPIRO_REQUEST_ORIGIN, 'https://portfolio-preview.app.capiro.ai');
@@ -54,13 +56,18 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
   for (const name of ['CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE', 'CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL']) assert.equal(p.environment[name], '', name);
   for (const name of ['MERI_FIRST_CHAT_BOOTSTRAP_ENABLED', 'CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED',
     'MERI_MEMORY_OWNER_REVIEW_ENABLED', 'CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED']) assert.equal(p.environment[name], 'false', name);
-  assert.equal(p.parameters.length, 30);
+  assert.equal(p.parameters.length, 35);
   assert.deepEqual(p.parameters.filter(item => item.ParameterKey.startsWith('Meri')), [
     { ParameterKey: 'MeriUserPreferencesEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriFirstChatBootstrapEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriMemoryOwnerReviewEnabled', ParameterValue: 'false' },
     { ParameterKey: 'MeriApiBaseUrl', ParameterValue: '' },
     { ParameterKey: 'MeriConversationWorkflowEnabled', ParameterValue: 'false' },
+    { ParameterKey: 'MeriActionWorkflowEnabled', ParameterValue: 'false' },
+    { ParameterKey: 'MeriTaskCommandWorkflowEnabled', ParameterValue: 'false' },
+    { ParameterKey: 'MeriIntentApprovalsWorkflowEnabled', ParameterValue: 'false' },
+    { ParameterKey: 'MeriDocumentWorkflowEnabled', ParameterValue: 'false' },
+    { ParameterKey: 'MeriDocumentOperation', ParameterValue: '' },
   ]);
   assert.equal(p.clerkMetadata.requiredEnvironment, 'configured-core-issuer-unverified');
   assert.match(p.activationStatus, /held at zero/);
@@ -114,6 +121,81 @@ test('memory preview is held until a listener-compatible Core successor is pinne
   const held = renderPreviewConfiguration({ ...bindings, memoryOwnerReviewEnabled: false });
   assert.equal(held.environment.MERI_MEMORY_OWNER_REVIEW_ENABLED, 'false');
   assert.equal(held.environment.CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL, '');
+  const rule = template.match(/^  MemoryReviewRequiresQualifiedCore:\n([\s\S]*?)(?=^  \w+:)/m)?.[1];
+  assert.ok(rule);
+  assert.match(rule, /- Assert: !Equals \[!Ref CapiroPreviewMemoryOwnerRoutesEnabled, "true"\]/);
+  for (const name of ['CapiroPreviewMemoryCoreBackendSource', 'CapiroPreviewMemoryCoreApiBaseUrl'])
+    assert.ok(rule.includes(`- Assert: !Not [!Equals [!Ref ${name}, ""]]`), name);
+});
+
+test('ordinary memory review uses native Core without opening or pinning preview memory routes', () => {
+  const input = { ...bindings, previewReadOnly: false, memoryOwnerReviewEnabled: true };
+  const p = renderPreviewConfiguration(input);
+  assert.equal(p.environment.CORE_API_BASE_URL, coreApi);
+  assert.equal(p.environment.MERI_MEMORY_OWNER_REVIEW_ENABLED, 'true');
+  assert.equal(p.environment.CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED, 'false');
+  assert.equal(p.environment.CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE, '');
+  assert.equal(p.environment.CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL, '');
+  validatePreviewParameters(p.parameters, input);
+  assert.match(template, /MemoryReviewRequiresQualifiedCore:\n +RuleCondition: !And\n +- !Equals \[!Ref MeriMemoryOwnerReviewEnabled, "true"\]\n +- !Equals \[!Ref CapiroPreviewReadOnly, "true"\]/);
+  assert.match(template, /MemoryReviewHeldWithoutFlag:\n +RuleCondition: !Or\n +- !Equals \[!Ref MeriMemoryOwnerReviewEnabled, "false"\]\n +- !Equals \[!Ref CapiroPreviewReadOnly, "false"\]/);
+  for (const name of ['CapiroPreviewMemoryOwnerRoutesEnabled', 'CapiroPreviewMemoryCoreBackendSource', 'CapiroPreviewMemoryCoreApiBaseUrl']) {
+    const altered = p.parameters.map(item => item.ParameterKey === name
+      ? { ...item, ParameterValue: name.endsWith('Enabled') ? 'true' : 'unqualified' } : item);
+    assert.throws(() => validatePreviewParameters(altered, input), /PREVIEW_PARAMETER_MISMATCH/);
+  }
+});
+
+const workflowBindings = {
+  meriActionWorkflowEnabled: 'MERI_ACTION_WORKFLOW_ENABLED',
+  meriTaskCommandWorkflowEnabled: 'MERI_TASK_COMMAND_WORKFLOW_ENABLED',
+  meriIntentApprovalsWorkflowEnabled: 'MERI_INTENT_APPROVALS_WORKFLOW_ENABLED',
+  meriDocumentWorkflowEnabled: 'MERI_DOCUMENT_WORKFLOW_ENABLED',
+};
+
+test('ordinary workflow opt-ins are independent explicit booleans with defaults off', () => {
+  const ordinary = { ...bindings, ...meriEnabled, previewReadOnly: false };
+  for (const [binding, environment] of Object.entries(workflowBindings)) {
+    assert.equal(renderPreviewConfiguration(ordinary).environment[environment], 'false', binding);
+    const input = { ...ordinary, [binding]: true,
+      ...(binding === 'meriDocumentWorkflowEnabled' ? { meriDocumentOperation: 'create_word' } : {}) };
+    const p = renderPreviewConfiguration(input);
+    assert.equal(p.environment[environment], 'true');
+    for (const other of Object.values(workflowBindings).filter(name => name !== environment))
+      assert.equal(p.environment[other], 'false', other);
+    validatePreviewParameters(p.parameters, input);
+    for (const value of [undefined, null, 1, 'true', 'false'])
+      assert.throws(() => renderPreviewConfiguration({ ...ordinary, [binding]: value }), /PREVIEW_MERI_WORKFLOW_FLAG_INVALID/);
+    assert.throws(() => renderPreviewConfiguration({ ...input, previewReadOnly: true }), /PREVIEW_MERI_WORKFLOW_DEPENDENCY_HELD/);
+    assert.throws(() => renderPreviewConfiguration({ ...bindings, previewReadOnly: false, [binding]: true }), /PREVIEW_MERI_WORKFLOW_DEPENDENCY_HELD/);
+    if (binding !== 'meriIntentApprovalsWorkflowEnabled') {
+      const standalone = { ...input, meriConversationWorkflowEnabled: false, meriConversationRoutesEnabled: false,
+        meriRuntimeSource: '', meriRuntimeImageDigest: '' };
+      assert.equal(renderPreviewConfiguration(standalone).environment[environment], 'true');
+    }
+    const parameter = binding[0].toUpperCase() + binding.slice(1);
+    const replaced = p.parameters.map(item => item.ParameterKey === parameter ? { ...item, ParameterValue: 'false' } : item);
+    assert.throws(() => validatePreviewParameters(replaced, input), /PREVIEW_PARAMETER_MISMATCH/);
+  }
+});
+
+test('document opt-in requires the explicit Word family and approvals require conversation', () => {
+  const ordinary = { ...bindings, previewReadOnly: false, meriApiBaseUrl: meriEnabled.meriApiBaseUrl };
+  assert.throws(() => renderPreviewConfiguration({ ...ordinary, meriIntentApprovalsWorkflowEnabled: true }), /PREVIEW_MERI_INTENTS_DEPENDENCY_HELD/);
+  for (const value of [undefined, null, 1, '', 'create_excel', 'create_pdf', 'create_word '])
+    assert.throws(() => renderPreviewConfiguration({ ...ordinary, meriDocumentWorkflowEnabled: true, meriDocumentOperation: value }), /PREVIEW_MERI_DOCUMENT_OPERATION_INVALID/);
+  assert.throws(() => renderPreviewConfiguration({ ...ordinary, meriDocumentOperation: 'create_word' }), /PREVIEW_MERI_DOCUMENT_OPERATION_WITHOUT_WORKFLOW/);
+  const input = { ...ordinary, ...meriEnabled, memoryOwnerReviewEnabled: true,
+    ...Object.fromEntries(Object.keys(workflowBindings).map(key => [key, true])), meriDocumentOperation: 'create_word' };
+  const p = renderPreviewConfiguration(input);
+  for (const name of Object.values(workflowBindings)) assert.equal(p.environment[name], 'true');
+  assert.equal(p.environment.MERI_DOCUMENT_OPERATION, 'create_word');
+  assert.equal(p.environment.MERI_MEMORY_OWNER_REVIEW_ENABLED, 'true');
+  validatePreviewParameters(p.parameters, input);
+  assert.match(template, /OrdinaryMeriWorkflowsRequireTarget:\n +RuleCondition: !Or\n +- !Equals \[!Ref MeriActionWorkflowEnabled, "true"\]\n +- !Equals \[!Ref MeriTaskCommandWorkflowEnabled, "true"\]\n +- !Equals \[!Ref MeriIntentApprovalsWorkflowEnabled, "true"\]\n +- !Equals \[!Ref MeriDocumentWorkflowEnabled, "true"\]\n +Assertions:\n +- Assert: !Not \[!Equals \[!Ref MeriApiBaseUrl, ""\]\][\s\S]*?- Assert: !Equals \[!Ref CapiroPreviewReadOnly, "false"\]/);
+  assert.match(template, /IntentApprovalsRequireConversation:\n +RuleCondition: !Equals \[!Ref MeriIntentApprovalsWorkflowEnabled, "true"\]\n +Assertions:\n +- Assert: !Equals \[!Ref MeriConversationWorkflowEnabled, "true"\]/);
+  assert.match(template, /DocumentsRequireOperation:\n +RuleCondition: !Equals \[!Ref MeriDocumentWorkflowEnabled, "true"\]\n +Assertions:\n +- Assert: !Equals \[!Ref MeriDocumentOperation, "create_word"\]/);
+  assert.match(template, /DocumentOperationHeldWithoutWorkflow:\n +RuleCondition: !Equals \[!Ref MeriDocumentWorkflowEnabled, "false"\]\n +Assertions:\n +- Assert: !Equals \[!Ref MeriDocumentOperation, ""\]/);
 });
 
 test('Meri opt-in requires an explicit canonical HTTPS root origin', () => {
@@ -327,9 +409,12 @@ test('preview template constrains every explicit configuration value and keeps h
     ['CapiroPreviewMeriRuntimeSource', meriSource],
     ['CapiroPreviewMeriRuntimeImageDigest', meriDigest],
     ['CapiroPreviewMeriContractPackageVersion', '0.1.14'],
+    ['MeriDocumentOperation', 'create_word'],
   ]);
   const optionalBooleans = new Set(['MeriConversationWorkflowEnabled', 'MeriFirstChatBootstrapEnabled',
     'MeriUserPreferencesEnabled',
+    'MeriActionWorkflowEnabled', 'MeriTaskCommandWorkflowEnabled',
+    'MeriIntentApprovalsWorkflowEnabled', 'MeriDocumentWorkflowEnabled',
     'CapiroPreviewMeriConversationRoutesEnabled', 'MeriMemoryOwnerReviewEnabled',
     'CapiroPreviewMemoryOwnerRoutesEnabled']);
   for (const item of p.parameters) {
@@ -375,6 +460,10 @@ test('preview template constrains every explicit configuration value and keeps h
   for (const [name, value] of Object.entries(p.environment).filter(([name]) => /^(ONBOARD_|MERI_|CAPIRO_PREVIEW_|CAPIRO_REQUEST_ORIGIN)/.test(name))) {
     const parameter = {
       MERI_API_BASE_URL: 'MeriApiBaseUrl', MERI_CONVERSATION_WORKFLOW_ENABLED: 'MeriConversationWorkflowEnabled',
+      MERI_ACTION_WORKFLOW_ENABLED: 'MeriActionWorkflowEnabled',
+      MERI_TASK_COMMAND_WORKFLOW_ENABLED: 'MeriTaskCommandWorkflowEnabled',
+      MERI_INTENT_APPROVALS_WORKFLOW_ENABLED: 'MeriIntentApprovalsWorkflowEnabled',
+      MERI_DOCUMENT_WORKFLOW_ENABLED: 'MeriDocumentWorkflowEnabled', MERI_DOCUMENT_OPERATION: 'MeriDocumentOperation',
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: 'MeriFirstChatBootstrapEnabled',
       MERI_USER_PREFERENCES_ENABLED: 'MeriUserPreferencesEnabled',
       CAPIRO_REQUEST_ORIGIN: 'CapiroRequestOrigin', CAPIRO_PREVIEW_READ_ONLY: 'CapiroPreviewReadOnly',
