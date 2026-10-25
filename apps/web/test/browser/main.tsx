@@ -276,15 +276,7 @@ function RoutedApp() {
                 }
               />
             ) : path.startsWith("/modules") ? (
-              // Test-harness-only opt-in: replay the modules view through
-              // StrictMode's setup -> cleanup -> setup so mounted effects (for
-              // example an ordinary-export download guard) are exercised as
-              // they are under `next dev`.
-              search.get("strict") === "1" ? (
-                <StrictMode>{moduleView}</StrictMode>
-              ) : (
-                moduleView
-              )
+              moduleView
             ) : (
               <SessionProbe />
             )}
