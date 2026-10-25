@@ -13,6 +13,12 @@ const item = {
   updatedAt,
 };
 
+/** Figma 05.04 card action for the synthetic item. */
+const proposeCorrection = (page: Page) =>
+  page
+    .getByRole("article", { name: item.title, exact: true })
+    .getByRole("button", { name: "Propose a correction", exact: true })
+    .click();
 async function memoryFixture(page: Page, enabled = true) {
   const fixture = await setupConversation(page);
   if (enabled)
@@ -74,9 +80,7 @@ test("pending correction freezes its captured draft and confirms review without 
     },
   );
   await page.goto("/meri/memory");
-  await page
-    .getByRole("button", { name: /Synthetic communication preference/ })
-    .click();
+  await proposeCorrection(page);
   const draft = page.getByRole("textbox", {
     name: "Corrected text",
     exact: true,
@@ -104,9 +108,7 @@ test("pending correction freezes its captured draft and confirms review without 
     page.getByText("Correction submitted for review.", { exact: false }),
   ).toBeVisible();
   await expect(draft).toHaveCount(0);
-  await page
-    .getByRole("button", { name: /Synthetic communication preference/ })
-    .click();
+  await proposeCorrection(page);
   await expect(draft).toHaveValue(item.value);
   expect(writes).toHaveLength(1);
   expect(fixture.unexpected).toEqual([]);
@@ -128,9 +130,7 @@ test("uncertain correction keeps its draft and prevents resubmission after reloa
     },
   );
   await page.goto("/meri/memory");
-  await page
-    .getByRole("button", { name: /Synthetic communication preference/ })
-    .click();
+  await proposeCorrection(page);
   await page.getByLabel("Corrected text").fill("Held synthetic correction");
   await page
     .getByRole("button", { name: "Submit correction for review" })
@@ -150,9 +150,7 @@ test("uncertain correction keeps its draft and prevents resubmission after reloa
       name: "Correction outcome needs verification",
     }),
   ).toBeVisible();
-  await page
-    .getByRole("button", { name: /Synthetic communication preference/ })
-    .click();
+  await proposeCorrection(page);
   await page.getByLabel("Corrected text").fill("Another attempted correction");
   await expect(
     page.getByRole("button", { name: "Submit correction for review" }),

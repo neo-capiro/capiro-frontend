@@ -66,6 +66,7 @@ export function useOwnerCorrection(enabled: boolean) {
   const pending = useRef(false);
   const morePending = useRef(false);
   const generation = useRef(0);
+  const keepFeedback = useRef(false);
   const access = useRef(false);
   const holdsReady = !!holdKey && holds?.key === holdKey && !!holds.ids;
   const holdStatus =
@@ -107,7 +108,9 @@ export function useOwnerCorrection(enabled: boolean) {
         setItems({ state: "loading" });
         setLoadedFor(holdKey);
         setWorkingId(null);
-        setFeedback("");
+        // A re-read after a confirmed correction keeps its receipt visible; any other read starts clean.
+        if (!keepFeedback.current) setFeedback("");
+        keepFeedback.current = false;
       }
     });
     void readPage(null, controller.signal)
@@ -293,6 +296,7 @@ export function useOwnerCorrection(enabled: boolean) {
       setFeedback(
         "Correction submitted for review. The current memory remains unchanged; refresh your review inbox to see the proposal.",
       );
+      keepFeedback.current = true;
       refresh();
       return "confirmed" as const;
     } catch {
