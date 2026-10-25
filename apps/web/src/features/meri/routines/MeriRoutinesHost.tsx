@@ -153,10 +153,21 @@ function Connected({
     host.getSnapshot,
     host.getSnapshot,
   );
+  const accessLost = denied || host.getExpirationReason() === "access-lost";
+  useEffect(() => {
+    // Recheck current Core identity through the existing issuer. No routine command is replayed.
+    if (
+      available &&
+      !denied &&
+      state.status === "expired" &&
+      host.getExpirationReason() === "expiry"
+    )
+      void host.connect();
+  }, [available, denied, host, state.status]);
   const [lastReady, setLastReady] = useState<RoutineWorkflow | null>(null);
-  if (!denied && state.status === "ready" && lastReady !== state.port)
+  if (!accessLost && state.status === "ready" && lastReady !== state.port)
     setLastReady(state.port);
-  if (denied && lastReady) setLastReady(null);
+  if (accessLost && lastReady) setLastReady(null);
   return (
     <section style={{ padding: 24 }}>
       <p>
@@ -166,9 +177,13 @@ function Connected({
       {state.status !== "ready" && (
         <section aria-label="Routine connection">
           <p role="status">
-            {state.status === "connecting"
-              ? "Connecting to the current routine context…"
-              : "Connect to review routines and recover saved requests. Connecting does not approve or run a routine."}
+            {accessLost
+              ? "Routine access was denied. Connect to check current access."
+              : state.status === "connecting"
+                ? "Connecting to the current routine context…"
+                : lastReady
+                  ? "Routine connection unavailable. Connect again to continue. Connecting does not prepare or approve a routine."
+                  : "Connect to review routines and recover saved requests. Connecting does not approve or run a routine."}
           </p>
           <Button
             disabled={!available || state.status === "connecting"}
@@ -183,7 +198,7 @@ function Connected({
       )}
       {lastReady && (
         <div hidden={!available || state.status !== "ready"}>
-          <RoutinesWorkspace port={lastReady} />
+          <RoutinesWorkspace port={lastReady} preserveNewDraft />
         </div>
       )}
     </section>
