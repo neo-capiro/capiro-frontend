@@ -276,23 +276,6 @@ test("a held export response resolving after unmount never downloads", async ({
   expect(state.errors).toEqual([]);
 });
 
-test("ordinary export downloads under a StrictMode replay of the mounted host", async ({
-  page,
-}) => {
-  const state = await fixture(page);
-  await page.goto(`${editorUrl}&strict=1`);
-  await expect(
-    page.getByRole("heading", { name: "Synthetic ordinary export document" }),
-  ).toBeVisible();
-  const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Export saved PDF" }).click();
-  const file = await download;
-  expect(file.suggestedFilename()).toBe("workspace-document.pdf");
-  expect(state.downloads).toEqual(["workspace-document.pdf"]);
-  expect(state.exports[0]!.input.query?.part).toBe("all");
-  expect(state.errors).toEqual([]);
-});
-
 test("ordinary export controls are keyboard reachable", async ({ page }) => {
   await fixture(page);
   await openEditor(page);

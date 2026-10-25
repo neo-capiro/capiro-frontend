@@ -55,6 +55,7 @@ const h = vi.hoisted(() => ({
     names: string[];
     sections: Record<string, string>;
   }[],
+  effects: [] as (() => undefined | (() => void))[],
   update: vi.fn(),
   snapshot: vi.fn(),
   reload: vi.fn(),
@@ -74,6 +75,12 @@ vi.mock("react", async (original) => ({
             : next;
       },
     ];
+  },
+  // Capture effects instead of scheduling them so a test can replay React's
+  // documented StrictMode setup -> cleanup -> setup ordering against the real
+  // component refs. Static rendering never runs effects on its own.
+  useEffect: (effect: () => undefined | (() => void)) => {
+    h.effects.push(effect);
   },
 }));
 
@@ -225,6 +232,7 @@ beforeEach(() => {
   h.editors = [];
   h.inputs = [];
   h.previews = [];
+  h.effects = [];
   h.current = draftWith();
   h.api.request.mockImplementation(async () => h.current);
   h.api.download.mockResolvedValue({
@@ -408,6 +416,7 @@ function renderExport() {
   h.index = 0;
   h.buttons = [];
   h.selects = [];
+  h.effects = [];
   return renderToStaticMarkup(
     createElement(OrdinaryDraftExport, {
       draft: draftWith(),
@@ -451,6 +460,28 @@ it("downloads through the existing binary client and releases the object URL", a
   );
 });
 
+it("keeps a valid export working across a StrictMode setup -> cleanup -> setup replay", async () => {
+  renderExport();
+  // React replays the effect this way (development StrictMode). The component's
+  // real ref and its real save closure are exercised; only the scheduling is
+  // replayed by the test.
+  const effect = h.effects.at(-1)!;
+  const cleanup = effect() as () => void;
+  cleanup();
+  effect();
+  const pdf = h.buttons.find(
+    (button) => button.children === "Export saved PDF",
+  )!;
+  pdf.onClick!();
+  await vi.waitFor(() => expect(h.anchors).toHaveLength(1));
+  expect(h.api.download).toHaveBeenCalledWith("workspace.draft.pdf", {
+    params: { draftId: DRAFT_ID },
+    query: { part: ORDINARY_ALL_PART },
+  });
+  // The completion must also clear pending rather than bail out early.
+  expect(h.values[1]).toBe(false);
+});
+
 it("sends the explicitly chosen tab id as the export part", async () => {
   renderExport();
   h.selects[0]!.onValueChange(TAB_B);
@@ -470,6 +501,7 @@ function renderExportWithValues() {
   h.index = 0;
   h.buttons = [];
   h.selects = [];
+  h.effects = [];
   return renderToStaticMarkup(
     createElement(OrdinaryDraftExport, {
       draft: draftWith(),
