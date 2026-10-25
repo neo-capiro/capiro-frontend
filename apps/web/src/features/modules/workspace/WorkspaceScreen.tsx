@@ -108,7 +108,15 @@ export function WorkspaceScreen() {
       <HillDayWizard
         initialClientId={clientId}
         onClose={back}
-        onCreated={(id) => openDocument({ kind: "hillday", id })}
+        onCreated={(document) =>
+          router.push(
+            workspaceHref({
+              kind: "hillday",
+              hilldayId: document.id,
+              clientId: document.clientId,
+            }),
+          )
+        }
       />
     );
   if (view === "newsletter")

@@ -16,6 +16,28 @@ const h = vi.hoisted(() => ({
   copy: vi.fn(),
   library: vi.fn(),
   buttons: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  meetings: vi.fn(),
+  resolution: vi.fn(),
+  context: vi.fn(),
+  generation: vi.fn(),
+  values: [] as unknown[],
+  index: 0,
+}));
+vi.mock("react", async (original) => ({
+  ...(await original<typeof import("react")>()),
+  useState: (initial: unknown) => {
+    const index = h.index++;
+    if (index === h.values.length) h.values.push(initial);
+    return [
+      h.values[index],
+      (next: unknown) => {
+        h.values[index] =
+          typeof next === "function" ? next(h.values[index]) : next;
+      },
+    ];
+  },
 }));
 vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(h.query),
@@ -38,6 +60,41 @@ vi.mock("../src/features/modules/workspace/hillday/HillDayWizard", () => ({
     h.wizard(props);
     return null;
   },
+}));
+vi.mock("../src/features/modules/workspace/hillday/HillDayMeetings", () => ({
+  HillDayMeetings: (props: unknown) => {
+    h.meetings(props);
+    return null;
+  },
+}));
+vi.mock("../src/features/modules/workspace/hillday/HillDayResolution", () => ({
+  HillDayResolution: (props: unknown) => {
+    h.resolution(props);
+    return null;
+  },
+}));
+vi.mock("../src/features/modules/workspace/hillday/HillDayContext", () => ({
+  HillDayContext: (props: unknown) => {
+    h.context(props);
+    return null;
+  },
+}));
+vi.mock("../src/features/modules/workspace/hillday/HillDayGeneration", () => ({
+  HillDayGeneration: (props: unknown) => {
+    h.generation(props);
+    return null;
+  },
+}));
+vi.mock("../src/shared/capiro/queries", () => ({
+  useCapiroQuery: () => ({
+    data: { blueprints: [], items: [] },
+    loading: false,
+    reload: vi.fn(),
+  }),
+  useCapiroMutation: (key: string) => ({
+    run: key === "workspace.hillday.create" ? h.create : h.update,
+    pending: false,
+  }),
 }));
 vi.mock(
   "../src/features/modules/workspace/newsletter/NewsletterWorkflow",
@@ -91,14 +148,22 @@ vi.mock("../src/shared/module-ui", () => ({
     return createElement("button", null, props.children);
   },
   Modal: () => null,
+  Field: ({ children }: { children: ReactNode }) =>
+    createElement("div", null, children),
+  StatusPanel: ({ children }: { children: ReactNode }) =>
+    createElement("div", null, children),
+  TextInput: () => null,
 }));
 const render = (query = "") => {
+  h.index = 0;
   h.query = query;
   return renderToStaticMarkup(createElement(WorkspaceScreen));
 };
 beforeEach(() => {
   vi.clearAllMocks();
   h.query = "";
+  h.values = [];
+  h.index = 0;
 });
 
 it("opens each library resource using its canonical kind and keeps the selected client", () => {
@@ -138,11 +203,92 @@ it("mounts direct draft and Hill Day receivers and closes into the same client l
 
 it("routes acknowledged Hill Day creation to a durable editor URL", () => {
   render(`view=hillday&clientId=${otherId}`);
-  h.wizard.mock.lastCall![0].onCreated(draft.id);
+  h.wizard.mock.lastCall![0].onCreated({ id: draft.id, clientId: otherId });
   expect(h.push).toHaveBeenCalledWith(
     `/modules/workspace?clientId=${otherId}&view=hillday&hilldayId=${draft.id}`,
   );
 });
+
+it.each([
+  { label: "same sponsor", sponsor: otherId, pendingSponsor: otherId },
+  { label: "changed sponsor", sponsor: prospectId, pendingSponsor: prospectId },
+  {
+    label: "input changes while creation is pending",
+    sponsor: prospectId,
+    pendingSponsor: otherId,
+  },
+])(
+  "opens the acknowledged Hill Day client when $label",
+  async ({ sponsor, pendingSponsor }) => {
+    render(`view=hillday&clientId=${otherId}`);
+    const props = h.wizard.mock.lastCall![0];
+    const { HillDayWizard } = await vi.importActual<
+      typeof import("../src/features/modules/workspace/hillday/HillDayWizard")
+    >("../src/features/modules/workspace/hillday/HillDayWizard");
+    // Begin at the existing sponsor step with a selected authorized sponsor.
+    // All transitions after this use the real Wizard callbacks and create receipt.
+    h.values = [
+      1,
+      "synthetic-blueprint",
+      sponsor,
+      "Synthetic created schedule",
+      undefined,
+      [],
+      "",
+    ];
+    const renderWizard = () => {
+      h.index = 0;
+      h.buttons.mockClear();
+      renderToStaticMarkup(createElement(HillDayWizard, props));
+    };
+    let resolveCreate!: (value: unknown) => void;
+    h.create.mockReturnValue(
+      new Promise((resolve) => {
+        resolveCreate = resolve;
+      }),
+    );
+    renderWizard();
+    const pending = h.buttons.mock.calls
+      .find(([button]) => button.children === "Open calendar →")![0]
+      .onClick();
+    expect(h.create).toHaveBeenCalledWith({
+      body: expect.objectContaining({ clientId: sponsor }),
+    });
+    // Sponsor input can change before creation is acknowledged; it must not
+    // replace the canonical client returned for the created document.
+    h.values[2] = pendingSponsor;
+    resolveCreate({
+      id: draft.id,
+      name: "Synthetic created schedule",
+      status: "draft",
+      client: { id: sponsor, name: "Synthetic sponsor" },
+      timeZone: "UTC",
+      lookbackDays: 30,
+    });
+    await pending;
+    renderWizard();
+    h.meetings.mock.lastCall![0].onSaved([]);
+    renderWizard();
+    h.resolution.mock.lastCall![0].onContinue();
+    renderWizard();
+    h.context.mock.lastCall![0].onContinue();
+    renderWizard();
+    h.generation.mock.lastCall![0].onOpen();
+    const destination = new URL(
+      h.push.mock.lastCall![0],
+      "https://synthetic.invalid",
+    );
+    expect(destination.searchParams.get("hilldayId")).toBe(draft.id);
+    expect(destination.searchParams.get("clientId")).toBe(sponsor);
+    render(destination.searchParams.toString());
+    expect(h.hillday.mock.lastCall![0]).toMatchObject({
+      id: draft.id,
+      expectedClientId: sponsor,
+    });
+    expect(h.create).toHaveBeenCalledTimes(1);
+    expect(h.update).not.toHaveBeenCalled();
+  },
+);
 
 it("restores each current URL without navigating or mounting another receiver", () => {
   render(`draftId=${draft.id}`);
