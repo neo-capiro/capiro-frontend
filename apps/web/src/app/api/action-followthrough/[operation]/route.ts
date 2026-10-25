@@ -7,6 +7,7 @@ import {
 import { readActionConfig } from "../../../../shared/meri-actions/config";
 import { proxyActionRequest } from "../../../../shared/meri-actions/proxy";
 import { meriIdentityToken } from "../../../../shared/meri-actions/identity-token.server";
+import { routineRoute } from "../../../../shared/meri-routines/routes";
 
 export async function POST(
   request: Request,
@@ -19,7 +20,7 @@ export async function POST(
   return proxyActionRequest(
     request,
     operation,
-    operation === "objective-start"
+    operation === "objective-start" || routineRoute(operation)
       ? {
           enabled: connection.conversationEnabled,
           baseUrl: connection.baseUrl,

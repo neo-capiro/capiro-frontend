@@ -131,15 +131,14 @@ export const meriCapabilityTable = {
   },
   routines: {
     label: "Routines",
-    ordinaryRoute: null,
-    deploymentFlag: null,
-    publicContract: "No accepted browser routine-management consumer",
-    sourcePin: runtimeSource,
+    ordinaryRoute: "/meri/routines",
+    navigationWhenUnconfigured: true,
+    deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
+    publicContract: "routines-application/0.1.0",
+    sourcePin: "2419a727bceaeda24209abceb6fe2a7d87f2e6be",
     runtimeOwner: "Meri schedule owner",
     requiredReceipt:
       "Occurrence, consent and cancellation journal with current readback",
-    unavailableReason:
-      "Routine management is not available in this workspace yet.",
   },
   dataAccess: {
     label: "Data access",

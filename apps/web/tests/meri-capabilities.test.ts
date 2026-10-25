@@ -42,8 +42,9 @@ it("inventory distinguishes implemented ordinary routes from missing workspace c
     "/meri/task-updates",
     "/meri/memory",
     "/settings/preferences",
+    "/meri/routines",
   ]);
-  for (const id of ["runs", "approvals", "routines", "dataAccess"] as const) {
+  for (const id of ["runs", "approvals", "dataAccess"] as const) {
     expect(state[id].status, id).toBe("unavailable");
     expect(meriCapabilityHref(id, state), id).toBeUndefined();
     expect(meriCapabilityTable[id].deploymentFlag).toBeNull();
@@ -77,6 +78,10 @@ it("all 256 flag combinations preserve operation prerequisites and existing navi
       flags[7],
     ];
     const state = readMeriCapabilities(env);
+    expect(state.routines.status, `${bits}:routines`).toBe(
+      flags[0] ? "on" : "off",
+    );
+    expect(meriCapabilityHref("routines", state)).toBe("/meri/routines");
     ids.forEach((id, index) => {
       expect(state[id].status, `${bits}:${id}`).toBe(
         expected[index] ? "on" : "off",

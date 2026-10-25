@@ -6,7 +6,10 @@ const envelope = z.discriminatedUnion("state", [
       scope: z.string(),
       requestId: z.uuid(),
       state: z.literal("discarded"),
-      code: z.literal("TASK_PREPARATION_DISCARDED"),
+      code: z.enum([
+        "TASK_PREPARATION_DISCARDED",
+        "ROUTINE_PREPARATION_DISCARDED",
+      ]),
     })
     .strict(),
   z

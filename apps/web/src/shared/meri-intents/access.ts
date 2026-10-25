@@ -15,6 +15,11 @@ import {
 } from "../meri-actions/bounded-json";
 import { actionSessionHeader } from "../meri-actions/session-header";
 import { frontendIntentsRefusal } from "./proxy";
+import {
+  createRoutinesAccess,
+  type RoutinesAccess,
+} from "../meri-routines/access";
+import type { RoutineContext } from "../meri-routines/recovery";
 
 export type IntentsOutcome =
   | "NOT_DISPATCHED"
@@ -37,6 +42,12 @@ export type IntentsReply<T> =
   | { kind: "unavailable"; dispatched: boolean };
 
 export interface IntentsAccess {
+  /** Separate schedule owner: generic task decisions cannot mutate routines. */
+  routines?: {
+    access: RoutinesAccess;
+    context: RoutineContext;
+    signal: AbortSignal;
+  };
   list(
     request: IntentsListRequest,
     signal: AbortSignal,
@@ -134,6 +145,7 @@ export function createIntentsAccess(
   credential: string,
   lifetime: AbortSignal,
   fetcher: typeof fetch = fetch,
+  context?: RoutineContext,
 ): IntentsAccess {
   let token = lifetime.aborted ? "" : credential;
   lifetime.addEventListener("abort", () => (token = ""), { once: true });
@@ -162,6 +174,15 @@ export function createIntentsAccess(
     }
   }
   return {
+    ...(context
+      ? {
+          routines: {
+            access: createRoutinesAccess(credential, lifetime, fetcher),
+            context,
+            signal: lifetime,
+          },
+        }
+      : {}),
     list: (request, signal) =>
       exchange<IntentsListResponse>("list", request, { request }, signal),
     decide: (request, proposal, signal) =>

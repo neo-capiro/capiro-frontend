@@ -67,9 +67,9 @@ export const unavailableResources = Object.freeze({
   },
   routines: {
     label: "Routines",
-    summary: "Routines are not available yet.",
+    summary: "Connect to Meri to review recurring work and manage routines.",
     missing:
-      "Browser routes for the schedule owner (create, update, cancel and history exist only as server source in apps/control/schedules).",
+      "Current access and serving configuration for the public routines prepare, approve, list and reconciliation routes.",
     owner: "neo-capiro/meri-greenfield apps/control/schedules",
   },
   dataAccess: {

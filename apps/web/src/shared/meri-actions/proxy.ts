@@ -4,6 +4,12 @@ import { actionSessionHints } from "./session-bootstrap";
 import { conversationSessionHints } from "../meri-conversations/session";
 import { receivedActionSession } from "./session-header";
 import type { readActionConfig } from "./config";
+import { routineRoute } from "../meri-routines/routes";
+import {
+  routinesPaths,
+  routinesMetadata,
+  receiveRoutinesRequest,
+} from "@capiro/meri-contracts/routines-application";
 import {
   objectiveGenerationStartMetadata,
   requireObjectiveGenerationStartRequest,
@@ -37,7 +43,8 @@ export async function proxyActionRequest(
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
 ) {
-  if (!routes.has(route)) return unavailable(404);
+  const routine = routineRoute(route);
+  if (!routes.has(route) && !routine) return unavailable(404);
   if (request.method !== "POST") return unavailable(405);
   const url = new URL(request.url);
   if (
@@ -63,21 +70,24 @@ export async function proxyActionRequest(
       const body = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
         signal,
-        route === "objective-start"
-          ? objectiveGenerationStartMetadata.requestBytes
-          : route === "session"
-            ? 4096
-            : 16 * 1024 * 1024,
+        routine
+          ? routinesMetadata.limits.requestBytes
+          : route === "objective-start"
+            ? objectiveGenerationStartMetadata.requestBytes
+            : route === "session"
+              ? 4096
+              : 16 * 1024 * 1024,
       );
       if (route === "session")
         actionSessionHints.or(conversationSessionHints).parse(JSON.parse(body));
+      if (routine) await receiveRoutinesRequest(routine, body);
       const objective =
         route === "objective-start"
           ? requireObjectiveGenerationStartRequest(JSON.parse(body))
           : undefined;
       signal.throwIfAborted();
       const response = await fetcher(
-        `${config.baseUrl}${objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
+        `${config.baseUrl}${routine ? routinesPaths[routine] : objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
         {
           method: "POST",
           body,
@@ -94,11 +104,13 @@ export async function proxyActionRequest(
       const text = await boundedJsonText(
         response,
         signal,
-        objective
-          ? objectiveGenerationStartMetadata.responseBytes
-          : route === "session"
-            ? 4096
-            : 16 * 1024 * 1024,
+        routine
+          ? routinesMetadata.limits.responseBytes
+          : objective
+            ? objectiveGenerationStartMetadata.responseBytes
+            : route === "session"
+              ? 4096
+              : 16 * 1024 * 1024,
       );
       signal.throwIfAborted();
       if (objective)

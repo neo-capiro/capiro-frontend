@@ -83,7 +83,12 @@ export class ConversationHostController extends SessionLifetimeController<
           }),
           context: session.context,
           artifacts: createArtifactAccess(session.credential, signal, fetcher),
-          intents: createIntentsAccess(session.credential, signal, fetcher),
+          intents: createIntentsAccess(
+            session.credential,
+            signal,
+            fetcher,
+            session.context,
+          ),
         });
         try {
           onBound?.(session.context);

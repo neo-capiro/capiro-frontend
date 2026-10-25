@@ -16,6 +16,7 @@ export function ProductShell({
   assetSet = "home",
   actionWorkflow = false,
   documentWorkflow = false,
+  routineWorkflow = false,
   fixture = false,
   conversationEnabled = false,
   firstChatBootstrapEnabled = false,
@@ -27,6 +28,8 @@ export function ProductShell({
   assetSet?: "home" | "cited-answer";
   actionWorkflow?: boolean;
   documentWorkflow?: boolean;
+  /** The routine host owns current scope containment while preserving unsent choices. */
+  routineWorkflow?: boolean;
   fixture?: boolean;
   conversationEnabled?: boolean;
   firstChatBootstrapEnabled?: boolean;
@@ -58,7 +61,7 @@ export function ProductShell({
               pendingApprovals={pendingApprovals}
             />
             <main id="main-content" className={styles.main}>
-              {actionWorkflow || documentWorkflow ? (
+              {actionWorkflow || documentWorkflow || routineWorkflow ? (
                 <MeriCapabilityRouteGuard>{children}</MeriCapabilityRouteGuard>
               ) : (
                 <SelectedClientGate>
@@ -85,7 +88,9 @@ export function ProductShell({
                 ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
                 : actionWorkflow
                   ? "Recommendation actions require a verified action connection."
-                  : "Conversation operations require a verified runtime connection. Client and account details come from the connected Capiro services."}
+                  : routineWorkflow
+                    ? "Routine changes require a verified connection and explicit review before approval."
+                    : "Conversation operations require a verified runtime connection. Client and account details come from the connected Capiro services."}
             </>
           )}
         </div>

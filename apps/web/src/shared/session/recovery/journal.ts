@@ -157,7 +157,10 @@ function retireRecovery(
   requestId: string,
   disposition:
     | { state: "acknowledged" }
-    | { state: "discarded"; code: "TASK_PREPARATION_DISCARDED" }
+    | {
+        state: "discarded";
+        code: "TASK_PREPARATION_DISCARDED" | "ROUTINE_PREPARATION_DISCARDED";
+      }
     | {
         state: "refused";
         code:
@@ -258,6 +261,27 @@ export function discardUnexecutedTaskRecovery<
     assert,
     (record) => {
       if (decode(record, contract).executing !== false)
+        throw new RecoveryStorageError();
+    },
+  );
+}
+
+/** An explicit discard can retire preparation only while no routine approval was dispatched. */
+export function discardUnapprovedRoutineRecovery<
+  Data extends { approving: boolean },
+>(
+  scope: string,
+  requestId: string,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "discarded", code: "ROUTINE_PREPARATION_DISCARDED" },
+    assert,
+    (record) => {
+      if (decode(record, contract).approving !== false)
         throw new RecoveryStorageError();
     },
   );

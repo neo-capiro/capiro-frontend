@@ -11,6 +11,7 @@ import {
   type IntentScope,
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
+import { ConversationRoutine } from "../../routines/ConversationRoutine";
 
 function FieldList({
   fields,
@@ -172,7 +173,8 @@ function Body({
   decide,
   decisionsReady,
   recoveryError,
-}: ReturnType<typeof useConversationIntents>) {
+  access,
+}: ReturnType<typeof useConversationIntents> & { access: IntentsAccess }) {
   if (list.status === "disabled")
     return (
       <p className={styles.muted}>
@@ -207,18 +209,36 @@ function Body({
               "Checking saved decisions before another request…"}
           </li>
         )}
-        {rows.map((row) => (
-          <li key={row.deliveryId}>
-            <IntentCard
-              row={row}
-              attempt={
-                row.proposal ? attempts[row.proposal.proposalId] : undefined
-              }
-              onDecide={decide}
-              disabled={!decisionsReady}
-            />
-          </li>
-        ))}
+        {rows.map((row) => {
+          const item = list.items.find(
+            (item) => item.deliveryId === row.deliveryId,
+          );
+          const schedule =
+            item?.state === "prepared" &&
+            item.kind === "schedule_proposal" &&
+            "proposal" in item
+              ? item
+              : null;
+          return (
+            <li key={row.deliveryId}>
+              {schedule && access.routines ? (
+                <ConversationRoutine
+                  item={schedule}
+                  connection={access.routines}
+                />
+              ) : (
+                <IntentCard
+                  row={row}
+                  attempt={
+                    row.proposal ? attempts[row.proposal.proposalId] : undefined
+                  }
+                  onDecide={decide}
+                  disabled={!decisionsReady}
+                />
+              )}
+            </li>
+          );
+        })}
       </ul>
       {list.next && (
         <Button
@@ -267,7 +287,7 @@ export function ConversationIntents({
           </Button>
         )}
       </div>
-      <Body {...state} />
+      <Body {...state} access={access} />
     </section>
   );
 }
