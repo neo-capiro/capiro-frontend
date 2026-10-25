@@ -87,7 +87,7 @@ export function useContactTransfer(record: Prospect) {
       );
     },
     onError: (error) => {
-      if (error instanceof ApiError && [401, 403].includes(error.status))
+      if (error instanceof ApiError && [401, 403, 404].includes(error.status))
         recovery.block(error);
     },
     onSettled: () =>

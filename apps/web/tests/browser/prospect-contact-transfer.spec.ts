@@ -640,3 +640,94 @@ for (const phase of ["unsent", "retained", "fresh"] as const) {
     expect(state.errors).toEqual([]);
   });
 }
+
+test("late owner 404 hides contact details and retains the exact command for restored GET recovery", async ({
+  page,
+  baseURL,
+}) => {
+  const state = await setup(page, baseURL);
+  const commands: TransferCommand[] = [];
+  let denied = false;
+  let reads = 0;
+  await page.route(`**/clients/${clientId}`, (route) =>
+    denied
+      ? json(route, { message: "Synthetic client unavailable" }, 404)
+      : json(route, client),
+  );
+  await page.route(commandPath, (route) => {
+    commands.push(route.request().postDataJSON() as TransferCommand);
+    // The current-access reads already succeeded. The owner now denies this
+    // dispatched command using its canonical non-disclosing status.
+    denied = true;
+    return json(route, { message: "Synthetic client unavailable" }, 404);
+  });
+  await page.route(receiptPath, (route) => {
+    reads++;
+    expect(route.request().url()).toContain(commands[0]!.requestId);
+    return json(route, receipt(commands[0]!));
+  });
+  await openReview(page);
+  await selectCreate(page);
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.getByRole("alert")).toBeVisible();
+  await expect(dialog).not.toContainText(source.name);
+  await expect(dialog).not.toContainText(client.name);
+  await expect(
+    dialog.getByRole("button", { name: "Check original transfer result" }),
+  ).toHaveCount(0);
+  expect(commands).toHaveLength(1);
+  expect(reads).toBe(0);
+  const original = structuredClone(commands[0]!);
+  const encrypted = await page.evaluate(async (requestId) => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open("capiro-command-recovery-v1", 1);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+    try {
+      return await new Promise<boolean>((resolve, reject) => {
+        const transaction = db.transaction("records", "readonly");
+        const request = transaction.objectStore("records").getAll();
+        transaction.oncomplete = () =>
+          resolve(
+            request.result.some(
+              (row) =>
+                row.requestId === requestId &&
+                row.ciphertext instanceof ArrayBuffer &&
+                row.ciphertext.byteLength > 0 &&
+                row.key instanceof CryptoKey &&
+                !row.key.extractable &&
+                !Object.hasOwn(row, "data"),
+            ),
+          );
+        transaction.onerror = () => reject(transaction.error);
+      });
+    } finally {
+      db.close();
+    }
+  }, original.requestId);
+  expect(encrypted).toBe(true);
+  await dialog.getByRole("button", { name: "Close", exact: true }).click();
+  denied = false;
+  await page
+    .getByRole("button", { name: "Retry contact recovery", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Recover contact carry-over", exact: true })
+    .click();
+  const restored = page.getByRole("dialog", {
+    name: "Recover contact carry-over",
+    exact: true,
+  });
+  await expect(restored).toContainText(source.name);
+  expect(commands).toEqual([original]);
+  expect(reads).toBe(0);
+  await restored
+    .getByRole("button", { name: "Check original transfer result" })
+    .click();
+  await expect(restored.getByRole("status")).toContainText("completed");
+  expect(reads).toBe(1);
+  expect(commands).toEqual([original]);
+  expect(state.unexpected).toEqual([]);
+  expect(state.errors).toEqual([]);
+});
