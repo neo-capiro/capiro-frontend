@@ -646,7 +646,33 @@ it("qualifies a mixed ordinary projection instead of hiding unsupported content"
   expect(markup).not.toContain("Preview unavailable");
 });
 
-it("does not qualify a fully supported ordinary projection", () => {
+it("qualifies a supported-section ordinary preview when opaque body content is not shown", () => {
+  // Reviewer counterexample: supported config.sections/sectionContent plus
+  // passthrough content that is not inside body.blocks (richDocument) and
+  // therefore not projected by the section preview.
+  h.current = draftWith({
+    config: { sections: ["Body"], sectionContent: { Body: "Saved body" } },
+    documents: [
+      {
+        id: TAB_A,
+        name: "Primary",
+        ordinal: 0,
+        body: {
+          blocks: [],
+          richDocument: { type: "table", rows: [["Unshown stored content"]] },
+        },
+      },
+    ],
+  } as never);
+  const markup = redrawDraft();
+  expect(h.previews).toHaveLength(1);
+  expect(markup).toContain("shows only the supported sections");
+});
+
+it("qualifies the ordinary supported projection conservatively", () => {
+  // The qualification cannot be inferred from the block list alone - passthrough
+  // body/config content may exist outside it - so it is stated whenever the
+  // preview shows the supported sections only.
   h.current = draftWith({
     config: { sections: ["Body"], sectionContent: { Body: "Saved body" } },
     documents: [
@@ -660,7 +686,7 @@ it("does not qualify a fully supported ordinary projection", () => {
   } as never);
   const markup = redrawDraft();
   expect(h.previews).toHaveLength(1);
-  expect(markup).not.toContain("shows only the supported sections");
+  expect(markup).toContain("shows only the supported sections");
   expect(markup).not.toContain("Preview unavailable");
 });
 

@@ -40,20 +40,6 @@ export function ordinaryExportTabs(
     }));
 }
 
-/**
- * Stored blocks that the section preview does not project - anything that is not
- * a titled section. They stay read-only and must be refused or explicitly
- * qualified, never presented as the whole document.
- */
-export function ordinaryUnsupportedBlocks(
-  draft: WorkspaceDraftDocument,
-): number {
-  return draft.documents
-    .filter((document) => !document.sourceBriefVersion)
-    .flatMap((document) => document.body.blocks ?? [])
-    .filter((block) => block.type !== "section" || !block.title).length;
-}
-
 export function ordinaryPartOptions(
   tabs: readonly OrdinaryExportTab[],
 ): { value: string; label: string }[] {
