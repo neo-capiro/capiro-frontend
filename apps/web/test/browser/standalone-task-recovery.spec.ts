@@ -44,6 +44,8 @@ async function setup(page: Page, kind: Kind, refuseOldDraft = false) {
   const currentAction = (operation: "query" | "draft") => {
     const query = actionWire("query").response as ActionQueryResponse;
     query.observation.binding.runId = currentRun;
+    query.observation.result.binding.runId = currentRun;
+    for (const event of query.events) event.binding.runId = currentRun;
     query.resultSha256 = canonicalSha256(query.observation);
     if (operation === "query") return query;
     const draft = actionWire("draft").response as ActionDraftResponse;
@@ -384,3 +386,26 @@ test("stale unexecuted create preparation can be explicitly discarded before a f
   );
   expect(f.errors).toEqual([]);
 });
+
+for (const kind of ["create", "update"] as const)
+  test(`${kind} proposal replacement in the mounted controller requires fresh approval`, async ({
+    page,
+  }) => {
+    await onlyLocalRequests(page);
+    await page.goto(`/tasks?kind=${kind}&replacement=true`);
+    const approval = page.getByRole("checkbox", { name: /I approve/ });
+    const execute = page.getByRole("button", {
+      name: "Approve and execute",
+      exact: true,
+    });
+    await expect(execute).toBeDisabled();
+    await approval.check();
+    await expect(execute).toBeEnabled();
+    await page
+      .getByRole("button", { name: "Retry exact saved request" })
+      .click();
+    await expect(page.getByText("proposal-2", { exact: true })).toBeVisible();
+    await expect(approval).not.toBeChecked();
+    await expect(execute).toBeDisabled();
+    await expect(page.getByLabel("Synthetic execution count")).toHaveText("0");
+  });

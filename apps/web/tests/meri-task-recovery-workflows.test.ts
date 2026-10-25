@@ -11,7 +11,15 @@ import {
   taskWire,
   taskWorkflow,
 } from "./meri-task-command-fixtures";
-import { accepted, fixture, harness, prepared } from "./meri-action-fixtures";
+import {
+  accepted,
+  clock,
+  fixture,
+  harness,
+  prepared,
+} from "./meri-action-fixtures";
+import { ActionWorkflowController } from "../src/features/meri/actions/action-workflow-state";
+import { TaskUpdateController } from "../src/features/meri/task-updates/workflow-state";
 import { standaloneTaskRecovery } from "../src/shared/meri-actions/task-recovery";
 import { canonicalSha256 } from "./meri-action-wire-fixtures";
 import type { ActionPrepareResponse } from "@capiro/meri-contracts/action-application";
@@ -393,4 +401,104 @@ it("the recommendation native result passes through the public proposal-correlat
   expect(
     accepted(await view.port.execute(proposal.handle, view.signal())),
   ).toMatchObject({ status: "observed", receiptReference: wire.proposalId });
+});
+
+it("an expired unknown create execution remains held after generic approval refusal; no-effect retirement needs canonical proof", async () => {
+  const first = harness();
+  await prepared(first);
+  const controller = new ActionWorkflowController(first.port);
+  controller.attach();
+  await vi.waitFor(() =>
+    expect(controller.getSnapshot().proposal).not.toBeNull(),
+  );
+  first.queue.push(async () => {
+    throw new Error("request did not reach owner");
+  });
+  await controller.execute();
+  controller.dispose();
+  const next = harness(undefined, { runId: crypto.randomUUID() });
+  next.setNow(clock + 50_000);
+  const recovered = new ActionWorkflowController(next.port);
+  recovered.attach();
+  await vi.waitFor(() =>
+    expect(recovered.getSnapshot().savedRequest).toBe(true),
+  );
+  next.queue.push(async () =>
+    Response.json(
+      {
+        error: { code: "COMMAND_APPROVAL_REFUSED", outcome: "NOT_DISPATCHED" },
+      },
+      { status: 409 },
+    ),
+  );
+  await recovered.retrySaved();
+  expect(recovered.getSnapshot()).toMatchObject({
+    stage: "pending",
+    savedRequest: true,
+    canDiscard: false,
+    execution: null,
+  });
+  await recovered.discardSaved();
+  expect(next.requests).toHaveLength(1);
+  expect(
+    await standaloneTaskRecovery(
+      "create",
+      next.session.context,
+      () => undefined,
+    ).load(),
+  ).toMatchObject({ executing: true });
+});
+
+it("an expired unknown update execution cannot be discarded on generic approval refusal", async () => {
+  let step = 0;
+  const fetcher = vi.fn(async () => {
+    if (step++ === 0) return taskResponse("prepare");
+    if (step === 2) throw new Error("request did not reach owner");
+    return Response.json(
+      {
+        error: { code: "COMMAND_APPROVAL_REFUSED", outcome: "NOT_DISPATCHED" },
+      },
+      { status: 409 },
+    );
+  });
+  const first = taskWorkflow(fetcher);
+  await first.port.prepare(taskInput, signal());
+  const controller = new TaskUpdateController(first.port);
+  controller.attach();
+  await vi.waitFor(() =>
+    expect(controller.getSnapshot().proposal).not.toBeNull(),
+  );
+  await controller.execute();
+  controller.dispose();
+  const original = taskSession();
+  const next = taskWorkflow(
+    fetcher,
+    undefined,
+    () => taskNow + 50_000,
+    undefined,
+    {
+      ...original,
+      context: { ...original.context, runId: crypto.randomUUID() },
+    },
+  );
+  const recovered = new TaskUpdateController(next.port);
+  recovered.attach();
+  await vi.waitFor(() =>
+    expect(recovered.getSnapshot().savedRequest).toBe(true),
+  );
+  await recovered.retrySaved();
+  expect(recovered.getSnapshot()).toMatchObject({
+    savedRequest: true,
+    canDiscard: false,
+    execution: null,
+  });
+  await recovered.discardSaved();
+  expect(fetcher).toHaveBeenCalledTimes(3);
+  expect(
+    await standaloneTaskRecovery(
+      "update",
+      original.context,
+      () => undefined,
+    ).load(),
+  ).toMatchObject({ executing: true });
 });

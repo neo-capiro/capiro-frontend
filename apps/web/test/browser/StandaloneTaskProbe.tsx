@@ -4,6 +4,7 @@ import { SelectedClientProvider } from "../../src/shared/session/SelectedClient"
 import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
 import { MeriTaskUpdateHost } from "../../src/app/meri/task-updates/MeriTaskUpdateHost";
 import { useSearchParams } from "./navigation";
+import { TaskProposalReplacementProbe } from "./TaskProposalReplacementProbe";
 
 function Revalidate() {
   const cache = useQueryClient();
@@ -19,6 +20,8 @@ function Revalidate() {
 /** Synthetic HTTP fixture mounting both actual task hosts and their encrypted recovery. */
 export function StandaloneTaskProbe() {
   const params = useSearchParams();
+  if (params.get("replacement") === "true")
+    return <TaskProposalReplacementProbe kind={params.get("kind")} />;
   return (
     <DataProvider>
       <Revalidate />
