@@ -91,7 +91,9 @@ describe("Settings account and client navigation", () => {
   );
   it("preserves the verified selected client on monitoring and preferences links", () => {
     const html = render();
-    expect(html).toContain("/modules/legiwatch?clientId=synthetic-client");
+    expect(html).toContain(
+      "/modules/intelligence?view=legiwatch&amp;clientId=synthetic-client",
+    );
     expect(html).toContain(
       "/settings/meri-preferences?clientId=synthetic-client",
     );
