@@ -14,12 +14,13 @@ export const identitySchema = z.object({
   role: z.string().nullable().optional(),
   billingAdmin: z.boolean().optional(),
 });
-export function useIdentity() {
+export function useIdentity(options: { refetchOnMount?: false } = {}) {
   const api = useApi();
   return useQuery({
     queryKey: ["identity"],
     queryFn: ({ signal }) =>
       api.request("core", "me", identitySchema, { signal }),
+    ...options,
   });
 }
 export const canAdminister = (role: string | null | undefined) =>

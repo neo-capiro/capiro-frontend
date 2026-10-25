@@ -82,13 +82,17 @@ export function filesOptions(
     },
   };
 }
-export function useFiles(clientId: string) {
+export function useFiles(
+  clientId: string,
+  options: { refetchOnMount?: false } = {},
+) {
   const api = useApi();
   const cache = useQueryClient();
-  const identity = useIdentity();
+  const identity = useIdentity(options);
   const reader = useFileReader();
   const query = useQuery({
     ...filesOptions(api, cache, clientId, reader),
+    ...options,
     enabled: Boolean(reader),
     refetchInterval: (query) =>
       query.state.data?.some(
