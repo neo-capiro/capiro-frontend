@@ -3,10 +3,7 @@ import { DocumentsLibrary, WorkflowCards } from "./WorkspaceLibrary";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import {
-  workspaceId,
-  type WorkspaceLibraryDocument,
-} from "../../../shared/capiro/operations/workspace-schemas";
+import type { WorkspaceLibraryDocument } from "../../../shared/capiro/operations/workspace-schemas";
 import { ActionButton, Modal } from "../../../shared/module-ui";
 import { HillDayEditor } from "./hillday/HillDayEditor";
 import { HillDayWizard } from "./hillday/HillDayWizard";
@@ -18,16 +15,13 @@ import { WorkspaceShares } from "./WorkspaceShares";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
+import {
+  readWorkspaceRoute,
+  workspaceHref,
+  type WorkspaceView,
+} from "./workspace-route";
 
-type View =
-  | "documents"
-  | "workflows"
-  | "shares"
-  | "templates"
-  | "hillday"
-  | "newsletter"
-  | "rich-newsletter";
-const tabs: { id: View; label: string }[] = [
+const tabs: { id: WorkspaceView; label: string }[] = [
   { id: "documents", label: "Documents" },
   { id: "workflows", label: "Workflows" },
   { id: "shares", label: "Client shares" },
@@ -36,117 +30,91 @@ const tabs: { id: View; label: string }[] = [
 export function WorkspaceScreen() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const prospect = workspaceId.safeParse(searchParams.get("prospectId"));
-  const initialView = searchParams.get("view");
-  const requestedView: View =
-    initialView === "hillday" ||
-    initialView === "templates" ||
-    initialView === "newsletter" ||
-    initialView === "rich-newsletter" ||
-    initialView === "workflows" ||
-    initialView === "shares"
-      ? initialView
-      : "documents";
-  const parsedClient = workspaceId.safeParse(searchParams.get("clientId"));
-  const requestedDraft = workspaceId.safeParse(searchParams.get("draftId"));
-  const clientId = parsedClient.success ? parsedClient.data : undefined;
-  const [view, setView] = useState<View>(requestedView);
-  const [selected, setSelected] = useState<WorkspaceLibraryDocument>();
-  const [createdId, setCreatedId] = useState<string>();
+  const route = readWorkspaceRoute(searchParams);
   const [newDocument, setNewDocument] = useState(false);
-  const [routeKey, setRouteKey] = useState(() =>
-    JSON.stringify([requestedView, clientId]),
-  );
-  if (routeKey !== JSON.stringify([requestedView, clientId])) {
-    setRouteKey(JSON.stringify([requestedView, clientId]));
-    setView(requestedView);
-    setSelected(undefined);
-    setCreatedId(undefined);
-  }
-  const back = () => {
-    setSelected(undefined);
-    setCreatedId(undefined);
-    setView("documents");
-  };
-  if (searchParams.has("briefSource") || searchParams.has("copyDocumentId"))
-    return <BriefCopyRoute />;
-  if (requestedView === "rich-newsletter") {
-    if (
-      searchParams.has("draftId") ||
-      searchParams.has("prospectId") ||
-      searchParams.getAll("view").length !== 1
-    )
-      return (
-        <section role="alert">
-          <h1>Newsletter unavailable</h1>
-          <p>This link contains conflicting document references.</p>
-        </section>
-      );
+  if (route.kind === "invalid")
     return (
-      <RichNewsletterEditor
-        key={clientId ?? "unassigned"}
-        onClose={() =>
+      <section role="alert">
+        <h1>Workspace unavailable</h1>
+        <p>This link contains invalid or conflicting document references.</p>
+      </section>
+    );
+  if (route.kind === "brief-copy") return <BriefCopyRoute />;
+  const clientId = route.clientId;
+  const navigate = (view: WorkspaceView) =>
+    router.push(workspaceHref({ kind: "view", view, clientId }));
+  const back = () => navigate("documents");
+  const openDocument = (row: Pick<WorkspaceLibraryDocument, "id" | "kind">) =>
+    router.push(
+      workspaceHref(
+        row.kind === "hillday"
+          ? { kind: "hillday", hilldayId: row.id, clientId }
+          : { kind: "draft", draftId: row.id, clientId },
+      ),
+    );
+  if (route.kind === "prospect")
+    return (
+      <ProspectWorkspace
+        key={route.prospectId}
+        prospectId={route.prospectId}
+        onOpen={(id) =>
           router.push(
-            `/modules/workspace${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
+            workspaceHref({
+              kind: "draft",
+              draftId: id,
+              prospectId: route.prospectId,
+              clientId,
+            }),
           )
         }
       />
     );
-  }
-  if (searchParams.has("prospectId") && !prospect.success)
+  if (route.kind === "draft")
     return (
-      <section role="alert">
-        <h1>Prospect unavailable</h1>
-        <p>A canonical prospect ID is required.</p>
-      </section>
-    );
-  if (prospect.success) {
-    const base = `/modules/workspace?prospectId=${encodeURIComponent(prospect.data)}`;
-    return requestedDraft.success ? (
       <WorkspaceDraft
-        key={`${prospect.data}:${requestedDraft.data}`}
-        id={requestedDraft.data}
-        prospectId={prospect.data}
-        onClose={() => router.push(base)}
-      />
-    ) : (
-      <ProspectWorkspace
-        key={prospect.data}
-        prospectId={prospect.data}
-        onOpen={(id) =>
-          router.push(`${base}&draftId=${encodeURIComponent(id)}`)
+        key={`${route.prospectId ?? "ordinary"}:${route.draftId}:${clientId ?? "general"}`}
+        id={route.draftId}
+        prospectId={route.prospectId}
+        expectedClientId={clientId}
+        onClose={() =>
+          route.prospectId
+            ? router.push(
+                workspaceHref({
+                  kind: "prospect",
+                  prospectId: route.prospectId,
+                  clientId,
+                }),
+              )
+            : back()
         }
       />
     );
-  }
-  if (requestedDraft.success)
+  if (route.kind === "hillday")
     return (
-      <WorkspaceDraft
-        id={requestedDraft.data}
-        onClose={() => {
-          window.location.assign("/modules/workspace");
-        }}
+      <HillDayEditor
+        key={`${route.hilldayId}:${clientId ?? "general"}`}
+        id={route.hilldayId}
+        expectedClientId={clientId}
+        onClose={back}
       />
+    );
+  const view = route.view;
+  if (view === "rich-newsletter")
+    return (
+      <RichNewsletterEditor key={clientId ?? "unassigned"} onClose={back} />
     );
   if (view === "hillday")
     return (
       <HillDayWizard
         initialClientId={clientId}
         onClose={back}
-        onCreated={(id) => {
-          setCreatedId(id);
-          setView("documents");
-        }}
+        onCreated={(id) => openDocument({ kind: "hillday", id })}
       />
     );
   if (view === "newsletter")
     return <NewsletterWorkflow initialClientId={clientId} onClose={back} />;
   if (view === "templates")
     return <TemplateStudio initialClientId={clientId} onClose={back} />;
-  if (createdId || selected?.kind === "hillday")
-    return <HillDayEditor id={createdId ?? selected!.id} onClose={back} />;
-  if (selected?.kind === "draft")
-    return <WorkspaceDraft id={selected.id} onClose={back} />;
   return (
     <section className={styles.screen} data-design-node="411:112533">
       <header className={styles.heading}>
@@ -157,13 +125,16 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() =>
               router.push(
-                `/modules/workspace?view=rich-newsletter${clientId ? `&clientId=${encodeURIComponent(clientId)}` : ""}`,
+                `/meri/files${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
               )
             }
           >
+            Meri files
+          </ActionButton>
+          <ActionButton onClick={() => navigate("rich-newsletter")}>
             Rich newsletter preview
           </ActionButton>
-          <ActionButton onClick={() => setView("templates")}>
+          <ActionButton onClick={() => navigate("templates")}>
             Template Studio
           </ActionButton>
           <ActionButton primary onClick={() => setNewDocument(true)}>
@@ -178,15 +149,15 @@ export function WorkspaceScreen() {
             key={tab.id}
             className={view === tab.id ? styles.active : ""}
             aria-pressed={view === tab.id}
-            onClick={() => setView(tab.id)}
+            onClick={() => navigate(tab.id)}
           >
             {tab.label}
           </button>
         ))}
       </div>
-      {view !== "shares" && <WorkflowCards onStart={setView} />}
+      {view !== "shares" && <WorkflowCards onStart={navigate} />}
       {view === "documents" && (
-        <DocumentsLibrary clientId={clientId} onOpen={setSelected} />
+        <DocumentsLibrary clientId={clientId} onOpen={openDocument} />
       )}
       {view === "workflows" && (
         <div className={styles.info}>
@@ -195,7 +166,7 @@ export function WorkspaceScreen() {
             Start from a published campaign template or build a document using
             client meetings and supporting evidence.
           </p>
-          <ActionButton onClick={() => setView("templates")}>
+          <ActionButton onClick={() => navigate("templates")}>
             Open Template Studio
           </ActionButton>
         </div>
@@ -216,7 +187,7 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              setView("hillday");
+              navigate("hillday");
             }}
           >
             Hill Day Schedule
@@ -224,7 +195,7 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              setView("newsletter");
+              navigate("newsletter");
             }}
           >
             Newsletter
@@ -232,7 +203,7 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              setView("templates");
+              navigate("templates");
             }}
           >
             Start from a template

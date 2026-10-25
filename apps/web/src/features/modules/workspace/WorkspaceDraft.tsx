@@ -291,10 +291,12 @@ function ProspectDraftEditor({
 export function WorkspaceDraft({
   id,
   prospectId,
+  expectedClientId,
   onClose,
 }: {
   id: string;
   prospectId?: string;
+  expectedClientId?: string;
   onClose: () => void;
 }) {
   const query = useCapiroQuery("workspace.draft", { params: { id } });
@@ -303,14 +305,26 @@ export function WorkspaceDraft({
     {},
     { enabled: Boolean(prospectId || query.data?.prospectId) },
   );
-  if (query.data && query.data.id !== id)
+  if (
+    query.data &&
+    (query.data.id.toLowerCase() !== id.toLowerCase() ||
+      (!query.data.prospectId &&
+        expectedClientId &&
+        (query.data.clientAssociation === "held" ||
+          query.data.clientId?.toLowerCase() !==
+            expectedClientId.toLowerCase())))
+  )
     return (
       <section className={styles.screen}>
         <header className={styles.heading}>
           <h1>Document unavailable</h1>
         </header>
         <StatusPanel
-          error="The returned document does not match this link."
+          error={
+            query.data.id.toLowerCase() !== id.toLowerCase()
+              ? "The returned document does not match this link."
+              : "The returned document no longer matches this client scope."
+          }
           onRetry={query.reload}
         />
       </section>
