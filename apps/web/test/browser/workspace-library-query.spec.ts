@@ -144,33 +144,40 @@ test("owner, type, canonical client and status combinations reach the server", a
       ["draft", "Documents"],
     ]) {
       await choose(page, "Filter documents by template", kindLabel!);
-      for (const id of [clientId, otherClientId]) {
+      for (const id of [undefined, clientId, otherClientId]) {
         await choose(
           page,
           "Filter documents by client",
-          `Synthetic duplicate · ${id}`,
+          id ? `Synthetic duplicate · ${id}` : "All clients",
         );
-        for (const status of ["draft", "complete"]) {
-          await choose(page, "Filter documents by status", status);
+        for (const status of [
+          "",
+          "draft",
+          "generating",
+          "generated",
+          "partial",
+          "delivered",
+          "complete",
+        ]) {
+          await choose(
+            page,
+            "Filter documents by status",
+            status || "Status · Any",
+          );
           await expect
             .poll(() => reads.at(-1))
             .toEqual({
               q: "",
               scope: owner,
               kind,
-              clientId: id,
-              status,
+              ...(id ? { clientId: id } : {}),
+              ...(status ? { status } : {}),
               limit: 50,
             });
           await expect(table(page)).toContainText("Synthetic server result");
         }
       }
     }
-  }
-  // Every remaining advertised status is transmitted without an invented enum.
-  for (const status of ["generating", "generated", "partial", "delivered"]) {
-    await choose(page, "Filter documents by status", status);
-    await expect.poll(() => reads.at(-1)?.status).toBe(status);
   }
 });
 
@@ -194,6 +201,11 @@ test("every filter clears a prior opaque cursor and Newest retains the filters",
         `Synthetic duplicate · ${otherClientId}`,
       ),
     () => choose(page, "Filter documents by status", "draft"),
+    () => search(page).fill(""),
+    () => scope(page, "Everyone"),
+    () => choose(page, "Filter documents by template", "Template · All"),
+    () => choose(page, "Filter documents by client", "All clients"),
+    () => choose(page, "Filter documents by status", "Status · Any"),
   ];
   for (const change of changes) {
     await older(page).click();
