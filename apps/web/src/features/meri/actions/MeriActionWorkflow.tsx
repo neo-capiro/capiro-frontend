@@ -57,6 +57,7 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
     state.busy || state.problem || state.checkingRecovery || state.savedRequest,
   );
   const problem = state.problem ? workflowProblems[state.problem] : null;
+  const savedTaskKnown = state.savedRequest || state.proposal !== null;
   return (
     <>
       {(state.checkingRecovery ||
@@ -70,7 +71,9 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
                 ? `The task was not executed before its approval expired. Verified at ${state.notExecutedAt}. Discard it to review a fresh task.`
                 : state.checkingRecovery
                   ? "Checking saved task recovery before another request."
-                  : "A task request is saved. Continue with that exact request."}
+                  : savedTaskKnown
+                    ? "A task request is saved. Continue with that exact request."
+                    : "Check saved task recovery before continuing. No saved task request has been confirmed."}
             </p>
             <dl>
               {state.recoveryFields.map((field) => (
@@ -83,9 +86,15 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
             <Button
               type="button"
               disabled={Boolean(state.busy) || Boolean(state.notExecutedAt)}
-              onClick={() => void controller.retrySaved()}
+              onClick={() =>
+                void (savedTaskKnown
+                  ? controller.retrySaved()
+                  : controller.checkSaved())
+              }
             >
-              Retry exact saved request
+              {savedTaskKnown
+                ? "Retry exact saved request"
+                : "Check saved task recovery"}
             </Button>
             {port.discardSaved && (
               <Button
