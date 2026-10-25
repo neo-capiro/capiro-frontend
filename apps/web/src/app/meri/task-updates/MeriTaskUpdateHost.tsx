@@ -15,6 +15,8 @@ import { taskCommandTransport } from "../../../shared/meri-task-commands/transpo
 import { taskCommandJournal } from "../../../shared/meri-task-commands/query-journal";
 import { useIdentity } from "../../../shared/portfolio/auth/identity";
 import { useApi } from "../../../shared/portfolio/api/provider";
+import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
 import { bootstrapTaskRecoverySession } from "../../../shared/meri-actions/task-recovery-session";
 
 export function MeriTaskUpdateHost({ enabled }: { enabled: boolean }) {
@@ -74,6 +76,7 @@ function ConnectedHost({
 }) {
   const queryClient = useQueryClient();
   const api = useApi();
+  const capiro = useCapiro();
   const [host] = useState(
     () =>
       new SessionLifetimeController({
@@ -86,6 +89,20 @@ function ConnectedHost({
             fetch,
             Date.now,
             account,
+            () => ({
+              storage: window.sessionStorage,
+              createOrReuse: (body, signal) => {
+                if (body.schemaVersion !== 1)
+                  throw new Error(
+                    "A selected-client conversation is required.",
+                  );
+                return capiro.request(
+                  firstChatCoreOperationKey,
+                  { body },
+                  { signal },
+                );
+              },
+            }),
           ),
         createPort: ({ session, signal, ...lifetime }) =>
           new TaskUpdateWorkflow({

@@ -13,6 +13,8 @@ import { ActionHostController } from "../../../shared/meri-actions/host-controll
 import { actionQueryJournal } from "../../../shared/meri-actions/query-journal";
 import { useIdentity } from "../../../shared/portfolio/auth/identity";
 import { useApi } from "../../../shared/portfolio/api/provider";
+import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
 import { bootstrapTaskRecoverySession } from "../../../shared/meri-actions/task-recovery-session";
 
 export function MeriActionHost({ enabled }: { enabled: boolean }) {
@@ -74,6 +76,7 @@ function ConnectedHost({
 }) {
   const queryClient = useQueryClient();
   const api = useApi();
+  const capiro = useCapiro();
   const [host] = useState(
     () =>
       new ActionHostController({
@@ -87,6 +90,20 @@ function ConnectedHost({
             fetch,
             Date.now,
             account,
+            () => ({
+              storage: window.sessionStorage,
+              createOrReuse: (body, signal) => {
+                if (body.schemaVersion !== 1)
+                  throw new Error(
+                    "A selected-client conversation is required.",
+                  );
+                return capiro.request(
+                  firstChatCoreOperationKey,
+                  { body },
+                  { signal },
+                );
+              },
+            }),
           ),
         journal: (context) => actionQueryJournal(queryClient, context),
       }),

@@ -1,6 +1,7 @@
 import type { ApiClient } from "../portfolio/api/http";
 import { identitySchema } from "../portfolio/auth/identity";
 import { bootstrapActionSession } from "./session-bootstrap";
+import { resolveFirstChatConversation } from "../meri-conversations/first-chat-bootstrap";
 import {
   standaloneTaskRecovery,
   sameTaskConversation,
@@ -16,6 +17,10 @@ export async function bootstrapTaskRecoverySession(
   fetcher: typeof fetch = fetch,
   now: () => number = Date.now,
   expectedAccount?: { tenantId: string; actorId: string },
+  firstChat?: () => Pick<
+    Parameters<typeof resolveFirstChatConversation>[0],
+    "storage" | "createOrReuse"
+  >,
 ) {
   const identity = await api.request("core", "me", identitySchema, { signal });
   if (!identity.tenant?.id || !identity.user.id)
@@ -35,14 +40,21 @@ export async function bootstrapTaskRecoverySession(
     signal.throwIfAborted(),
   ).load();
   const context = saved?.context;
+  if (!context && !firstChat)
+    throw new Error("The current task conversation could not be confirmed.");
+  const conversationId = context
+    ? context.conversationId
+    : (
+        await resolveFirstChatConversation({
+          ...firstChat!(),
+          scope: { tenantId: owner.tenantId, actorId: owner.actorId, clientId },
+          signal,
+        })
+      ).conversationId;
   const session = await bootstrapActionSession(
     {
       clientId,
-      ...(context
-        ? {
-            conversationId: context.conversationId,
-          }
-        : {}),
+      conversationId,
     },
     signal,
     fetcher,
