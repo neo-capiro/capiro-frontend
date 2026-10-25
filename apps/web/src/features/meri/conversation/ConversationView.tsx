@@ -84,7 +84,7 @@ export function SessionComposer({
             disabled={modelDisabled}
             onChange={session.setSkillSelection}
           />
-          {session.modelCatalog && (
+          {!session.accessLost && session.modelCatalog && (
             <div className={modelStyles.slot}>
               {modelDocument ? (
                 <ModelSelectionPicker

@@ -2,8 +2,13 @@ import { afterEach, expect, it, vi } from "vitest";
 import { createElement, type ComponentProps } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { QueryClient } from "@tanstack/react-query";
+import { USER_PREFERENCE_DEFAULTS } from "@capiro/meri-client/user-preferences";
 import { clearConversationReads } from "../src/shared/meri-conversations/history-queries";
-import { ConversationView } from "../src/features/meri/conversation/ConversationView";
+import {
+  ConversationView,
+  SessionComposer,
+} from "../src/features/meri/conversation/ConversationView";
+import { createConversationComposer } from "../src/features/meri/conversation/conversation-composer";
 
 import { ConversationHostController } from "../src/shared/meri-conversations/host-controller";
 
@@ -212,6 +217,8 @@ it("the denied view hides saved, pending and draft content through connecting an
       earlier: [{ runId: "old-run", prompt: "Private saved prompt" }],
       draft: "Private unsent draft",
       continuation: {},
+      skillSelection: {},
+      modelCatalog: { document: undefined, loading: false, refresh: vi.fn() },
       setDraft: () => undefined,
       textarea: { current: null },
     } as unknown as ComponentProps<typeof ConversationView>["session"];
@@ -226,5 +233,72 @@ it("the denied view hides saved, pending and draft content through connecting an
     );
     expect(html).not.toContain("Conversation session expired");
     expect(html).not.toContain(">Reconnect<");
+    expect(html).not.toContain("Model choices unavailable");
+    expect(html).not.toContain("Reload models");
+    expect(
+      html.match(/<button[^>]*aria-label="Send message"[^>]*>/)?.[0],
+    ).toContain("disabled");
   }
+});
+
+it("available conversation access preserves catalog failure recovery and shows models after recovery", () => {
+  const refresh = vi.fn();
+  const session = {
+    accessLost: false,
+    connection: { state: { status: "connecting" } },
+    earlier: [],
+    draft: "",
+    skillSelection: {},
+    modelCatalog: { document: undefined, loading: false, refresh },
+    setDraft: () => undefined,
+    textarea: { current: null },
+  } as unknown as ComponentProps<typeof SessionComposer>["session"];
+  const render = () =>
+    renderToStaticMarkup(
+      createElement(SessionComposer, {
+        session,
+        scope: "General",
+        channel: createConversationComposer(),
+      }),
+    );
+  const failed = render();
+  expect(failed).toContain("Model choices unavailable");
+  expect(failed).toMatch(/<button type="button">Reload models<\/button>/);
+  expect(failed).not.toContain("Model for next message");
+
+  const selection = {
+    provider: "bedrock" as const,
+    modelId: "synthetic-qualified",
+    effort: null,
+  };
+  session.modelCatalog.document = {
+    owner: account,
+    revision: 1,
+    preferences: USER_PREFERENCE_DEFAULTS,
+    modelCatalog: {
+      defaultSelection: selection,
+      models: [
+        {
+          ...selection,
+          label: "Synthetic qualified",
+          efforts: [null],
+          available: true,
+          unavailableReason: null,
+        },
+      ],
+    },
+  };
+  session.accessLost = true;
+  const denied = render();
+  expect(denied).not.toContain("Model for next message");
+  expect(denied).not.toContain("Model choices unavailable");
+  expect(denied).not.toContain("Reload models");
+
+  session.accessLost = false;
+  const recovered = render();
+  expect(recovered).toContain("Model for next message");
+  expect(recovered).toContain("Use personal default");
+  expect(recovered).not.toContain("Model choices unavailable");
+  expect(recovered).not.toContain("Reload models");
+  expect(refresh).not.toHaveBeenCalled();
 });
