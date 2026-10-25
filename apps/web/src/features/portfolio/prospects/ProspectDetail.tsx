@@ -163,6 +163,7 @@ export function ProspectDetail({
                     query.isSuccess && !query.error && !query.isFetching
                   }
                   active={record.status === "active"}
+                  clientId={record.convertedAt ? record.linkedClientId : null}
                 />
                 <section className="card stack" aria-label="Prospect Workspace">
                   <h2>Workspace documents</h2>
