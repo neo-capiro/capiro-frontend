@@ -44,7 +44,9 @@ async function readPage(cursor: string | null, signal?: AbortSignal) {
     signal,
   });
   if (!response.ok)
-    throw new Error("Core did not verify personal memory items");
+    throw new Error("Core did not verify personal memory items", {
+      cause: response.status,
+    });
   return receiveOwnerCorrectionPage(await response.json());
 }
 
@@ -53,6 +55,7 @@ export function useOwnerCorrection(enabled: boolean) {
   const { userId, orgId } = useAuth();
   const holdKey = ownerCorrectionHoldKey(userId, orgId);
   const [items, setItems] = useState<ItemsState>({ state: "loading" });
+  const [loadedFor, setLoadedFor] = useState<string | null>(null);
   const [revision, setRevision] = useState(0);
   const [holds, setHolds] = useState<{
     key: string;
@@ -63,6 +66,7 @@ export function useOwnerCorrection(enabled: boolean) {
   const pending = useRef(false);
   const morePending = useRef(false);
   const generation = useRef(0);
+  const access = useRef(false);
   const holdsReady = !!holdKey && holds?.key === holdKey && !!holds.ids;
   const holdStatus =
     !holdKey || holds?.key !== holdKey
@@ -93,20 +97,30 @@ export function useOwnerCorrection(enabled: boolean) {
   useEffect(() => {
     if (!enabled) return;
     const current = ++generation.current;
+    access.current = false;
+    pending.current = false;
+    morePending.current = false;
     const generationRef = generation;
     const controller = new AbortController();
     queueMicrotask(() => {
-      if (generationRef.current === current) setItems({ state: "loading" });
+      if (generationRef.current === current) {
+        setItems({ state: "loading" });
+        setLoadedFor(holdKey);
+        setWorkingId(null);
+        setFeedback("");
+      }
     });
     void readPage(null, controller.signal)
       .then((page) => {
-        if (generation.current === current)
+        if (generation.current === current) {
+          access.current = true;
           setItems({
             state: "ready",
             ...page,
             moreLoading: false,
             moreError: null,
           });
+        }
       })
       .catch(() => {
         if (generation.current === current && !controller.signal.aborted)
@@ -118,12 +132,26 @@ export function useOwnerCorrection(enabled: boolean) {
       });
     return () => {
       generationRef.current++;
+      access.current = false;
       controller.abort();
     };
-  }, [enabled, userId, orgId, revision]);
+  }, [enabled, holdKey, revision]);
 
   function refresh() {
     setRevision((value) => value + 1);
+  }
+
+  function loseAccess() {
+    generation.current++;
+    access.current = false;
+    pending.current = false;
+    morePending.current = false;
+    setWorkingId(null);
+    setItems({
+      state: "error",
+      message:
+        "Your current session cannot read these memories. Refresh access before continuing.",
+    });
   }
 
   async function loadMore() {
@@ -158,8 +186,14 @@ export function useOwnerCorrection(enabled: boolean) {
           moreError: null,
         };
       });
-    } catch {
-      if (generation.current === current)
+    } catch (error) {
+      if (generation.current !== current) return;
+      if (
+        error instanceof Error &&
+        (error.cause === 401 || error.cause === 403)
+      ) {
+        loseAccess();
+      } else
         setItems((before) =>
           before.state === "ready"
             ? {
@@ -171,13 +205,14 @@ export function useOwnerCorrection(enabled: boolean) {
             : before,
         );
     } finally {
-      morePending.current = false;
+      if (generation.current === current) morePending.current = false;
     }
   }
 
   async function propose(item: OwnerCorrectionItem, newContent: string) {
     if (
       !enabled ||
+      !access.current ||
       pending.current ||
       !holdsReady ||
       !holdKey ||
@@ -187,6 +222,7 @@ export function useOwnerCorrection(enabled: boolean) {
       newContent.trim().length > 8_000
     )
       return "held" as const;
+    const current = generation.current;
     pending.current = true;
     const storage = browserStorage();
     if (!storage || !holdOwnerDecision(storage, holdKey, item.id)) {
@@ -217,7 +253,13 @@ export function useOwnerCorrection(enabled: boolean) {
         credentials: "same-origin",
         cache: "no-store",
       });
-      if ([400, 401, 403, 404, 409].includes(response.status)) {
+      if (generation.current !== current) return "held" as const;
+      if (response.status === 401 || response.status === 403) {
+        release();
+        loseAccess();
+        return "declined" as const;
+      }
+      if ([400, 404, 409].includes(response.status)) {
         release();
         setFeedback(
           "Core declined this correction. Refresh the current memory before trying again.",
@@ -226,6 +268,7 @@ export function useOwnerCorrection(enabled: boolean) {
       }
       if (response.status === 503) {
         const failure: unknown = await response.json().catch(() => null);
+        if (generation.current !== current) return "held" as const;
         if (
           failure &&
           typeof failure === "object" &&
@@ -243,7 +286,9 @@ export function useOwnerCorrection(enabled: boolean) {
         }
       }
       if (!response.ok) throw new Error("Correction result uncertain");
-      receiveCorrectionReceipt(await response.json());
+      const receipt: unknown = await response.json();
+      if (generation.current !== current) return "held" as const;
+      receiveCorrectionReceipt(receipt);
       release();
       setFeedback(
         "Correction submitted for review. The current memory remains unchanged; refresh your review inbox to see the proposal.",
@@ -251,18 +296,22 @@ export function useOwnerCorrection(enabled: boolean) {
       refresh();
       return "confirmed" as const;
     } catch {
+      if (generation.current !== current) return "held" as const;
       setFeedback(
         "The correction outcome is uncertain. This item is held in this browser; do not resubmit until its Core outcome is verified.",
       );
       return "uncertain" as const;
     } finally {
-      pending.current = false;
-      setWorkingId(null);
+      if (generation.current === current) {
+        pending.current = false;
+        setWorkingId(null);
+      }
     }
   }
 
   return {
-    items,
+    items:
+      enabled && loadedFor === holdKey ? items : { state: "loading" as const },
     refresh,
     loadMore,
     propose,
