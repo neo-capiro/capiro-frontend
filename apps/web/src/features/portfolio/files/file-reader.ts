@@ -2,7 +2,7 @@
 import { useMemo, useSyncExternalStore } from "react";
 import { useQueryClient, type QueryClient } from "@tanstack/react-query";
 import { ApiError } from "@/shared/portfolio/api/http";
-import { identitySchema, useIdentity } from "@/shared/portfolio/auth/identity";
+import { identitySchema } from "@/shared/portfolio/auth/identity";
 import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
 
 export type FileReader = ClientWriter & { revision: number };
@@ -72,7 +72,8 @@ export function currentFilesAvailable(cache: QueryClient, clientId: string) {
 
 export function useFileReader() {
   const cache = useQueryClient();
-  useIdentity();
+  // Files queries own identity loading; selection and action observers only
+  // follow that owner so mounting a dialog cannot replace its initiating reader.
   const snapshot = useSyncExternalStore(
     (notify) =>
       cache.getQueryCache().subscribe((event) => {

@@ -31,7 +31,9 @@ export function useFileScope(
 ) {
   const cache = useQueryClient();
   const reader = useFileReader();
-  useFiles(clientId);
+  // Missing queries still load; explicit invalidation/refetch still revokes the
+  // captured execution. Opening a child action does not refresh its parent view.
+  useFiles(clientId, { refetchOnMount: false });
   useSyncExternalStore(
     (notify) =>
       cache.getQueryCache().subscribe((event) => {
