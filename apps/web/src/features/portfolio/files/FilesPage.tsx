@@ -72,6 +72,7 @@ export function FilesPage({
     view: string;
     kind: FileAction | "new-folder";
     id: string;
+    deleteFile?: Attachment;
   }>();
   const [uploadView, setUploadView] = useState<string>();
   const [folderAccess, setFolderAccess] = useState<{
@@ -93,7 +94,16 @@ export function FilesPage({
         });
       return;
     }
-    setAction({ view: query.readerScope, kind, id });
+    const deleteFile =
+      kind === "delete"
+        ? query.data?.find((file) => file.id === id)
+        : undefined;
+    setAction({
+      view: query.readerScope,
+      kind,
+      id,
+      ...(deleteFile ? { deleteFile: structuredClone(deleteFile) } : {}),
+    });
   };
   const close = () => {
     arrival.dismiss();
@@ -402,17 +412,17 @@ export function FilesPage({
           }}
         />
       )}
-      {requestedAction?.kind === "delete" &&
-        requestedAction.view === query.readerScope &&
-        available && (
-          <DeleteFile
-            key={`${query.readerScope}:${requestedAction.id}`}
-            clientId={clientId}
-            id={requestedAction.id}
-            fileName={currentFile?.fileName}
-            onClose={close}
-          />
-        )}
+      <DeleteFile
+        key={query.readerScope}
+        clientId={clientId}
+        file={
+          requestedAction?.kind === "delete" &&
+          requestedAction.view === query.readerScope
+            ? requestedAction.deleteFile
+            : undefined
+        }
+        onClose={close}
+      />
       {uploadView === query.readerScope && available && (
         <UploadDialog
           clientId={clientId}

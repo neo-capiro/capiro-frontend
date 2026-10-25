@@ -1,323 +1,437 @@
-import { QueryClient } from "@tanstack/react-query";
-import { expect, it, vi } from "vitest";
-import { createApiClient } from "../src/shared/portfolio/api/http";
-import { assertClientWriter } from "../src/shared/portfolio/auth/client-writer";
+import "./command-recovery-platform";
+import { createHash } from "node:crypto";
+import { expect, it } from "vitest";
 import {
-  assertFileReader,
-  currentFileReader,
-  currentFilesAvailable,
-  currentFilesKey,
-} from "../src/features/portfolio/files/file-reader";
-import { filesOptions } from "../src/features/portfolio/files/queries";
+  readRecovery,
+  reserveRecovery,
+  readRecoveryDisposition,
+} from "../src/shared/session/recovery/journal";
+import {
+  fileDeletionRecoveryContract,
+  fileDeletionScope,
+  fileDeletionCommandSchema,
+  fileDeletionBodySchema,
+  fileDeletionReceiptSchema,
+} from "../src/features/portfolio/files/deletion-contract";
 import {
   deleteClientFile,
-  fileDeletionKey,
-  reviewFileDeletion,
+  type FileDeletionAction,
 } from "../src/features/portfolio/files/deletion";
-import { clientId, file } from "./browser/fixtures";
-
-const json = (value: unknown, status = 200) =>
-  new Response(JSON.stringify(value), { status });
-
-function setup(
-  respond: (options?: RequestInit) => Response | Promise<Response>,
-) {
-  const cache = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  cache.setQueryData(["identity"], {
-    user: { id: "user-test", email: "synthetic@example.test" },
-    tenant: { id: "tenant-test", name: "Synthetic tenant" },
-    role: "standard_user",
-  });
-  cache.setQueryData(currentFilesKey(cache, clientId), [file]);
-  const actor = currentFileReader(cache)!;
-  const controller = new AbortController();
-  const execution = {
-    actor,
-    signal: controller.signal,
-    guard() {
-      controller.signal.throwIfAborted();
-      assertFileReader(cache, actor);
-      assertClientWriter(cache, actor);
-    },
-  };
-  const fetcher = vi.fn((_url: RequestInfo | URL, options?: RequestInit) =>
-    Promise.resolve(respond(options)),
+import {
+  actor,
+  id,
+  clientId,
+  file,
+  review,
+  attempt,
+  fixture,
+  receiptFor,
+  commandCalls,
+} from "./files-delete-fixtures";
+import {
+  barrier,
+  db,
+  installPlatform,
+  local,
+} from "./command-recovery-platform";
+installPlatform();
+const guard = () => {},
+  scope = fileDeletionScope(actor, clientId);
+const submit: FileDeletionAction = { kind: "submit", review };
+const held = () => readRecovery(scope, fileDeletionRecoveryContract, guard);
+const run = (
+  f: ReturnType<typeof fixture>,
+  action: FileDeletionAction,
+  observe: Parameters<typeof deleteClientFile>[6] = () => {},
+  signal = new AbortController().signal,
+  assert = guard,
+) => deleteClientFile(f.api, actor, clientId, action, signal, assert, observe);
+async function retain() {
+  const saved = await attempt();
+  await reserveRecovery(
+    scope,
+    saved.command.requestId,
+    saved,
+    fileDeletionRecoveryContract,
+    guard,
   );
-  const api = createApiClient(fetcher);
-  const context = { cache, clientId, execution };
-  return {
-    cache,
-    controller,
-    execution,
-    fetcher,
-    api,
-    context,
-    key: fileDeletionKey(clientId, file.id, actor),
-    remove: () => deleteClientFile(api, file.id, context),
-    review: () => reviewFileDeletion(api, file.id, context),
-  };
+  return saved;
 }
-
-it("fences a repeated DELETE after an ambiguous dispatched response", async () => {
-  const state = setup(() => json({ message: "Synthetic response lost" }, 503));
-  await expect(state.remove()).rejects.toMatchObject({ status: 503 });
-  await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-  expect(state.fetcher).toHaveBeenCalledTimes(1);
-});
-
-it("requires deliberate fresh current-state review, then a separate renewed DELETE", async () => {
-  let deletes = 0;
-  const state = setup((options) =>
-    options?.method === "DELETE"
-      ? ++deletes === 1
-        ? json({}, 503)
-        : json({ ok: true })
-      : json([{ ...file, lifecycleStatus: "delete_failed" }]),
-  );
-  await expect(state.remove()).rejects.toMatchObject({ status: 503 });
-  // An ordinary query refresh must not count as the user's current-state review.
-  state.cache.setQueryData(currentFilesKey(state.cache, clientId), [file]);
-  await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-  await expect(state.review()).resolves.toMatchObject({
-    file: { id: file.id, lifecycleStatus: "delete_failed" },
-  });
-  expect(state.cache.getQueryData(state.key)).toBeNull();
-  expect(deletes).toBe(1);
-  await expect(state.remove()).resolves.toEqual({ ok: true });
-  expect(
-    state.fetcher.mock.calls.map(([, options]) => options?.method),
-  ).toEqual(["DELETE", "GET", "DELETE"]);
-  expect(state.fetcher.mock.calls[1]?.[0]).toContain(
-    `engagement/attachments?clientId=${clientId}`,
-  );
-});
-
-it.each([400, 403, 404, 409, 422])(
-  "permits correction after definite native refusal %s",
-  async (status) => {
-    let refused = true;
-    const state = setup(() =>
-      refused
-        ? json({ message: "Synthetic refusal" }, status)
-        : json({ ok: true }),
-    );
-    await expect(state.remove()).rejects.toMatchObject({ status });
-    expect(state.cache.getQueryData(state.key)).toBeNull();
-    refused = false;
-    await expect(state.remove()).resolves.toEqual({ ok: true });
-  },
-);
-
-it.each([{}, { ok: false }])(
-  "treats a malformed native deletion acknowledgement as unknown: %j",
-  async (receipt) => {
-    const state = setup(() => json(receipt));
-    await expect(state.remove()).rejects.toMatchObject({ status: 502 });
-    await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-    expect(state.cache.getQueryData(state.key)).toMatchObject({
-      status: "unknown",
-    });
-    expect(state.fetcher).toHaveBeenCalledTimes(1);
-  },
-);
-
-it("blocks overlapping dispatch and review while DELETE is pending", async () => {
-  let release!: (response: Response) => void;
-  const state = setup(
-    () =>
-      new Promise((resolve) => {
-        release = resolve;
-      }),
-  );
-  const first = state.remove();
-  await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-  await expect(state.review()).rejects.toMatchObject({ status: 409 });
-  release(json({ ok: true }));
-  await first;
-  expect(state.fetcher).toHaveBeenCalledTimes(1);
-});
-
-it.each(["absent", "delete_pending"])(
-  "does not infer completion or thaw a currently %s file",
-  async (lifecycle) => {
-    const state = setup((options) =>
-      options?.method === "DELETE"
-        ? json({}, 503)
-        : json(
-            lifecycle === "absent"
-              ? []
-              : [{ ...file, lifecycleStatus: lifecycle }],
-          ),
-    );
-    await expect(state.remove()).rejects.toMatchObject({ status: 503 });
-    const current = await state.review();
-    expect(current.file?.lifecycleStatus ?? "absent").toBe(lifecycle);
-    expect(state.cache.getQueryData(state.key)).toMatchObject({
-      status: "unknown",
-    });
-    await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-    expect(state.fetcher).toHaveBeenCalledTimes(2);
-  },
-);
-
-it.each(["failure", "foreign-client", "duplicates"])(
-  "does not thaw deletion after %s current-read evidence",
-  async (failure) => {
-    const state = setup((options) =>
-      options?.method === "DELETE"
-        ? json({}, 503)
-        : failure === "failure"
-          ? json({}, 503)
-          : json(
-              failure === "duplicates"
-                ? [file, file]
-                : [{ ...file, clientId: "other-client" }],
-            ),
-    );
-    await expect(state.remove()).rejects.toBeInstanceOf(Error);
-    await expect(state.review()).rejects.toBeInstanceOf(Error);
-    await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-    expect(state.cache.getQueryData(state.key)).toMatchObject({
-      status: "unknown",
-    });
-    expect(
-      state.cache.getQueryData(currentFilesKey(state.cache, clientId)),
-    ).toEqual([file]);
-  },
-);
-
-for (const phase of ["delete", "review"] as const) {
-  it.each(["actor", "client-abort", "cache-clear"])(
-    `rejects a late ${phase} response after %s replacement`,
-    async (boundary) => {
-      let release!: (response: Response) => void;
-      const state = setup((options) =>
-        phase === "review" && options?.method === "DELETE"
-          ? json({}, 503)
-          : new Promise((resolve) => {
-              release = resolve;
-            }),
-      );
-      if (phase === "review")
-        await expect(state.remove()).rejects.toBeInstanceOf(Error);
-      const request = phase === "delete" ? state.remove() : state.review();
-      const rejected = expect(request).rejects.toBeInstanceOf(Error);
-      await vi.waitFor(() => expect(release).toBeDefined());
-      if (boundary === "client-abort") state.controller.abort();
-      else if (boundary === "cache-clear") state.cache.clear();
-      else
-        state.cache.setQueryData(["identity"], {
-          user: { id: "replacement-user", email: "replacement@example.test" },
-          tenant: { id: "replacement-tenant", name: "Replacement tenant" },
-          role: "standard_user",
-        });
-      release(json(phase === "delete" ? { ok: true } : [file]));
-      await rejected;
-      if (boundary === "cache-clear")
-        expect(state.cache.getQueryData(state.key)).toBeUndefined();
-      else
-        expect(state.cache.getQueryData(state.key)).toMatchObject({
-          status: "unknown",
-        });
-      expect(
-        state.cache.getQueryData(
-          fileDeletionKey(clientId, file.id, {
-            userId: "replacement-user",
-            tenantId: "replacement-tenant",
-          }),
-        ),
-      ).toBeUndefined();
-    },
-  );
-}
-
-it("does not dispatch a file missing from the current collection or already pending deletion", async () => {
-  const state = setup(() => json({ ok: true }));
-  state.cache.setQueryData(currentFilesKey(state.cache, clientId), []);
-  await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-  state.cache.setQueryData(currentFilesKey(state.cache, clientId), [
-    { ...file, lifecycleStatus: "delete_pending" },
+it("matches Core canonical body order with route attachmentId last", async () => {
+  const saved = await attempt();
+  expect(Object.keys(saved.command)).toEqual([
+    "schemaVersion",
+    "requestId",
+    "clientId",
+    "expectedRevision",
+    "attachmentId",
   ]);
-  await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-  expect(state.fetcher).not.toHaveBeenCalled();
+  expect(saved.payloadDigest).toBe(
+    createHash("sha256")
+      .update(
+        JSON.stringify([
+          "client-file-delete",
+          1,
+          actor.tenantId,
+          actor.userId,
+          saved.command,
+        ]),
+      )
+      .digest("hex"),
+  );
+  expect(fileDeletionBodySchema.safeParse(saved.command).success).toBe(false);
+  expect(
+    fileDeletionCommandSchema.safeParse({ ...saved.command, unknown: true })
+      .success,
+  ).toBe(false);
 });
-
-it.each([403, 503])(
-  "a failed deliberate GET %s revokes collection authority until a new successful read",
+it("retains encrypted exact review before DELETE; lost ACK is recovered and acknowledged by matching GET after target removal", async () => {
+  let saved: Awaited<ReturnType<typeof attempt>> | null = null;
+  const f = fixture({
+    receipt: async () => {
+      expect(await held()).toEqual(saved);
+      expect([...local.values()].join("")).not.toContain(file.fileName);
+      expect(JSON.stringify([...db.records.values()])).not.toContain(
+        file.fileName,
+      );
+      throw new TypeError("Lost ACK");
+    },
+  });
+  await expect(
+    run(f, submit, (value) => {
+      saved = value;
+    }),
+  ).rejects.toThrow("Lost ACK");
+  const original = (await held())!,
+    recovered = fixture({ files: [], receipt: () => receiptFor(original) });
+  await run(recovered, { kind: "check", expected: original });
+  expect(await held()).toEqual(original);
+  await run(recovered, { kind: "acknowledge", expected: original });
+  expect(await held()).toBeNull();
+  expect(
+    await readRecoveryDisposition(scope, original.command.requestId, guard),
+  ).toMatchObject({ state: "acknowledged" });
+  expect(commandCalls(recovered).map((call) => call.method)).toEqual([
+    "GET",
+    "GET",
+  ]);
+  expect(
+    recovered.calls.some((call) => call.path.includes("attachments?")),
+  ).toBe(false);
+  expect(commandCalls(f)[0]!.body).toEqual({
+    schemaVersion: 1,
+    requestId: original.command.requestId,
+    clientId,
+    expectedRevision: 3,
+  });
+});
+it.each([400, 401, 403, 404, 409, 422, 503])(
+  "HTTP%s after dispatch is not a durable refusal; new submit stays held",
   async (status) => {
-    const other = { ...file, id: "60000000-0000-4000-8000-000000000002" };
-    let readFails = true;
-    const state = setup((options) =>
-      options?.method === "DELETE"
-        ? json({}, 503)
-        : readFails
-          ? json({ message: "Current files unavailable" }, status)
-          : json([file, other]),
-    );
-    state.cache.setQueryData(currentFilesKey(state.cache, clientId), [
-      file,
-      other,
+    const f = fixture({
+      receipt: () => Response.json({ message: "Unconfirmed" }, { status }),
+    });
+    await expect(run(f, submit)).rejects.toThrow();
+    const saved = await held();
+    expect(saved).not.toBeNull();
+    await expect(run(f, submit)).rejects.toThrow("saved file deletion");
+    expect(commandCalls(f)).toHaveLength(1);
+  },
+);
+it.each([{}, { ok: true }, { status: "completed" }])(
+  "malformed acknowledgement %j never retires intent",
+  async (value) => {
+    const f = fixture({ receipt: () => value });
+    await expect(run(f, submit)).rejects.toMatchObject({ status: 502 });
+    expect(await held()).not.toBeNull();
+  },
+);
+it.each(["pending", "missing"])(
+  "explicit retry of %s reconciles then sends only identical retained DELETE",
+  async (state) => {
+    const saved = await retain(),
+      f = fixture({
+        files: [],
+        receipt: (method) =>
+          method === "DELETE"
+            ? receiptFor(saved)
+            : state === "pending"
+              ? receiptFor(saved, "pending")
+              : Response.json({ message: "Missing" }, { status: 404 }),
+      });
+    await run(f, { kind: "retry", expected: saved });
+    expect(commandCalls(f).map((call) => call.method)).toEqual([
+      "GET",
+      "DELETE",
     ]);
-    await expect(state.remove()).rejects.toMatchObject({ status: 503 });
-    await expect(state.review()).rejects.toMatchObject({ status });
-    expect(currentFilesAvailable(state.cache, clientId)).toBe(false);
-    expect(
-      state.cache.getQueryState(currentFilesKey(state.cache, clientId))?.status,
-    ).toBe("error");
+    expect(commandCalls(f)[1]!.body).toEqual({
+      schemaVersion: 1,
+      requestId: saved.command.requestId,
+      clientId,
+      expectedRevision: 3,
+    });
+    expect(await held()).toEqual(saved);
+  },
+);
+it("completed historical receipt suppresses replay even if target is absent", async () => {
+  const saved = await retain(),
+    f = fixture({ files: [], receipt: () => receiptFor(saved) });
+  await run(f, { kind: "retry", expected: saved });
+  expect(commandCalls(f).map((call) => call.method)).toEqual(["GET"]);
+  expect(await held()).toEqual(saved);
+});
+it.each(["pending", "missing"])(
+  "%s cannot acknowledge deletion or release a new command",
+  async (state) => {
+    const saved = await retain(),
+      f = fixture({
+        files: [],
+        receipt: () =>
+          state === "pending"
+            ? receiptFor(saved, "pending")
+            : Response.json({ message: "Missing" }, { status: 404 }),
+      });
     await expect(
-      deleteClientFile(state.api, other.id, state.context),
-    ).rejects.toMatchObject({ status: 409 });
-    expect(state.fetcher).toHaveBeenCalledTimes(2);
-    expect(state.cache.getQueryData(state.key)).toMatchObject({
-      status: "unknown",
-    });
-    readFails = false;
-    await state.cache.fetchQuery(
-      filesOptions(state.api, state.cache, clientId),
-    );
-    expect(currentFilesAvailable(state.cache, clientId)).toBe(true);
-    await expect(state.remove()).rejects.toMatchObject({ status: 409 });
-    await expect(state.review()).resolves.toMatchObject({
-      file: { id: file.id },
-    });
-    expect(state.cache.getQueryData(state.key)).toBeNull();
+      run(f, { kind: "acknowledge", expected: saved }),
+    ).rejects.toThrow();
+    expect(await held()).toEqual(saved);
+    expect(commandCalls(f).every((call) => call.method === "GET")).toBe(true);
   },
 );
-
-it.each([200, 403])(
-  "a silently superseded review returning %s cannot replace or poison a newer successful collection",
+it.each([401, 403, 404, 409, 503])(
+  "GET%s does not retire or infer success from a missing file",
   async (status) => {
-    let release!: (response: Response) => void;
-    let reads = 0;
-    const newer = [{ ...file, fileName: "Newer current collection.pdf" }];
-    const state = setup((options) =>
-      options?.method === "DELETE"
-        ? json({}, 503)
-        : ++reads === 1
-          ? new Promise((resolve) => {
-              release = resolve;
-            })
-          : json(newer),
-    );
-    await expect(state.remove()).rejects.toMatchObject({ status: 503 });
-    const review = state.review();
-    const rejected = expect(review).rejects.toMatchObject({ status: 409 });
-    await vi.waitFor(() => expect(release).toBeDefined());
-    const options = filesOptions(state.api, state.cache, clientId);
-    await state.cache.refetchQueries({
-      queryKey: options.queryKey,
-      exact: true,
-    });
-    release(
-      json(status === 200 ? [file] : { message: "Obsolete refusal" }, status),
-    );
-    await rejected;
-    expect(currentFilesAvailable(state.cache, clientId)).toBe(true);
-    expect(state.cache.getQueryData(options.queryKey)).toEqual(newer);
-    expect(state.cache.getQueryData(state.key)).toMatchObject({
-      status: "unknown",
-    });
+    const saved = await retain(),
+      f = fixture({
+        files: [],
+        receipt: () => Response.json({ message: "Unavailable" }, { status }),
+      });
+    await expect(run(f, { kind: "check", expected: saved })).rejects.toThrow();
+    expect(await held()).toEqual(saved);
+    expect(commandCalls(f).map((call) => call.method)).toEqual(["GET"]);
   },
 );
+it.each([
+  "tenantId",
+  "actorUserId",
+  "requestId",
+  "clientId",
+  "attachmentId",
+  "expectedRevision",
+  "payloadDigest",
+])("rejects a mismatched %s receipt", async (key) => {
+  const saved = await retain(),
+    f = fixture({
+      receipt: () => ({
+        ...receiptFor(saved),
+        [key]:
+          key === "expectedRevision"
+            ? 4
+            : key === "payloadDigest"
+              ? "b".repeat(64)
+              : id(90),
+      }),
+    });
+  await expect(
+    run(f, { kind: "acknowledge", expected: saved }),
+  ).rejects.toThrow();
+  expect(await held()).toEqual(saved);
+});
+it("requires both actual object and indexed-chunk absence in completed receipt", async () => {
+  const saved = await attempt(),
+    receipt = receiptFor(saved);
+  expect(
+    fileDeletionReceiptSchema.safeParse({
+      ...receipt,
+      result: { ...receipt.result, objectAbsent: false },
+    }).success,
+  ).toBe(false);
+  expect(
+    fileDeletionReceiptSchema.safeParse({
+      ...receipt,
+      result: { ...receipt.result, indexedChunksAbsent: false },
+    }).success,
+  ).toBe(false);
+});
+it.each(
+  [
+    [],
+    [{ ...file, metadataRevision: 4 }],
+    [{ ...file, lifecycleStatus: "delete_pending" }],
+    [{ ...file, clientId: id(90) }],
+    [file, file],
+  ].map((files) => ({ files })),
+)(
+  "rejects unavailable/stale/noncanonical current list without dispatch",
+  async ({ files }) => {
+    const f = fixture({ files });
+    await expect(run(f, submit)).rejects.toThrow();
+    expect(commandCalls(f)).toHaveLength(0);
+    expect(await held()).toBeNull();
+  },
+);
+it.each([401, 403, 404, 503])(
+  "current authorization%s hides retained data before observation and sends no command",
+  async (status) => {
+    const saved = await retain(),
+      seen: unknown[] = [];
+    const f = fixture({
+      override: (path) =>
+        path.includes("/clients/")
+          ? Response.json({ message: "Unavailable" }, { status })
+          : undefined,
+    });
+    await expect(
+      run(f, { kind: "check", expected: saved }, (value) => seen.push(value)),
+    ).rejects.toThrow("access");
+    expect(seen).toEqual([]);
+    expect(commandCalls(f)).toHaveLength(0);
+    expect(await held()).toEqual(saved);
+  },
+);
+it("post-receipt authority loss keeps intent and cannot acknowledge", async () => {
+  const saved = await retain();
+  let revoked = false;
+  const f = fixture({
+    receipt: () => {
+      revoked = true;
+      return receiptFor(saved);
+    },
+    override: (path) =>
+      revoked && path.includes("/clients/")
+        ? Response.json({ message: "Unavailable" }, { status: 404 })
+        : undefined,
+  });
+  await expect(
+    run(f, { kind: "acknowledge", expected: saved }),
+  ).rejects.toThrow("access");
+  expect(await held()).toEqual(saved);
+});
+it("404 wall denial on explicit retry never permits DELETE when current authority no longer holds", async () => {
+  const saved = await retain();
+  let revoked = false;
+  const f = fixture({
+    receipt: () => {
+      revoked = true;
+      return Response.json({ message: "Unavailable" }, { status: 404 });
+    },
+    override: (path) =>
+      revoked && path.endsWith("/me")
+        ? Response.json({ message: "Unavailable" }, { status: 403 })
+        : undefined,
+  });
+  await expect(run(f, { kind: "retry", expected: saved })).rejects.toThrow(
+    "access",
+  );
+  expect(commandCalls(f).map((call) => call.method)).toEqual(["GET"]);
+  expect(await held()).toEqual(saved);
+});
+for (const method of ["DELETE", "GET"]) {
+  it.each(["actor", "client-abort", "cache-clear"])(
+    `late ${method} after %s replacement cannot publish completion`,
+    async (boundary) => {
+      const saved = method === "GET" ? await retain() : null,
+        entered = barrier(),
+        release = barrier(),
+        controller = new AbortController();
+      let current = true,
+        original = saved;
+      const f = fixture({
+        receipt: async () => {
+          entered.resolve();
+          await release.promise;
+          return receiptFor(original!);
+        },
+      });
+      const pending = run(
+        f,
+        saved ? { kind: "check", expected: saved } : submit,
+        (value) => {
+          original = value;
+        },
+        controller.signal,
+        () => {
+          controller.signal.throwIfAborted();
+          if (!current) throw new Error("Actor changed");
+        },
+      );
+      const rejected = expect(pending).rejects.toThrow();
+      await entered.promise;
+      if (boundary === "client-abort") controller.abort();
+      else current = false;
+      release.resolve();
+      await rejected;
+      expect(await held()).toEqual(original);
+      expect(
+        await readRecovery(
+          fileDeletionScope({ ...actor, userId: id(90) }, clientId),
+          fileDeletionRecoveryContract,
+          guard,
+        ),
+      ).toBeNull();
+    },
+  );
+}
+it("freezes file revision/name before awaiting authority", async () => {
+  const entered = barrier(),
+    release = barrier();
+  let first = true,
+    saved: Awaited<ReturnType<typeof attempt>> | null = null;
+  const f = fixture({
+      override: async (path) => {
+        if (first && path.endsWith("/me")) {
+          first = false;
+          entered.resolve();
+          await release.promise;
+        }
+        return undefined;
+      },
+      receipt: () => receiptFor(saved!),
+    }),
+    input = structuredClone(submit);
+  const pending = run(f, input, (value) => {
+    saved = value;
+  });
+  await entered.promise;
+  if (input.kind === "submit") {
+    input.review.metadataRevision = 8;
+    input.review.fileName = "Changed";
+  }
+  release.resolve();
+  await pending;
+  expect((await held())?.command.expectedRevision).toBe(3);
+  expect((await held())?.fileName).toBe(file.fileName);
+});
+it("storage failure and racing submissions cannot dispatch a duplicate command", async () => {
+  db.failWrite = true;
+  const f = fixture();
+  await expect(run(f, submit)).rejects.toThrow("storage");
+  expect(commandCalls(f)).toHaveLength(0);
+});
+it("cross-tab execution lock allows one submit; the second sees the retained first command", async () => {
+  let saved: Awaited<ReturnType<typeof attempt>> | null = null;
+  const f = fixture({ receipt: () => receiptFor(saved!) });
+  const first = run(f, submit, (value) => {
+    saved = value;
+  });
+  const second = run(f, submit);
+  const rejected = expect(second).rejects.toThrow("saved file deletion");
+  await first;
+  await rejected;
+  expect(commandCalls(f)).toHaveLength(1);
+});
+it("new current file data cannot retire the retained command or adopt a newer revision", async () => {
+  const saved = await retain(),
+    f = fixture({
+      files: [{ ...file, metadataRevision: 4 }],
+      receipt: () => receiptFor(saved, "pending"),
+    });
+  await run(f, { kind: "check", expected: saved });
+  await expect(
+    run(f, { kind: "submit", review: { ...review, metadataRevision: 4 } }),
+  ).rejects.toThrow("saved file deletion");
+  expect(await held()).toEqual(saved);
+  expect(f.calls.some((call) => call.path.includes("attachments?"))).toBe(
+    false,
+  );
+});
