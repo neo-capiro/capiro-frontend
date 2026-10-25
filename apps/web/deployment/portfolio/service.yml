@@ -509,6 +509,7 @@ Resources:
             Action: sts:AssumeRole
   PreviewTaskDefinition:
     Type: AWS::ECS::TaskDefinition
+    UpdateReplacePolicy: Retain
     Properties:
       Family: capiro-portfolio-preview
       Cpu: "512"
