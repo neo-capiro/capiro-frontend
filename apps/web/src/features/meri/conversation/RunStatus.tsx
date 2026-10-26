@@ -24,6 +24,14 @@ export function RunStatus({
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
+  const refreshable =
+    snapshot.status !== "disposed" &&
+    (snapshot.observation?.runState === "paused" ||
+      snapshot.observation?.runState === "waiting-for-approval" ||
+      run.observing === "stalled" ||
+      run.transcript === "unavailable" ||
+      uncertain ||
+      intent.cancel === "unknown");
   const canContinue =
     acceptedRequest &&
     snapshot.observation?.runState === "queued" &&
@@ -43,20 +51,9 @@ export function RunStatus({
         </p>
       )}
       {run.transcript === "unavailable" && !uncertain && (
-        <div className={styles.statusRow}>
-          <p className={styles.muted}>
-            The current transcript could not be loaded.
-          </p>
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            disabled={busy}
-            onClick={() => void run.history()}
-          >
-            Reload transcript
-          </Button>
-        </div>
+        <p className={styles.muted}>
+          The current transcript could not be loaded.
+        </p>
       )}
       {uncertain && !canContinue && (
         <div className={styles.statusRow}>
@@ -83,6 +80,19 @@ export function RunStatus({
         </Button>
       )}
       {active && <ObservationStatus key={run.observing} run={run} />}
+      {refreshable && (
+        <div className={styles.statusRow}>
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            disabled={busy}
+            onClick={run.refreshRunStatus}
+          >
+            Refresh run status
+          </Button>
+        </div>
+      )}
       <StopStatus run={run} savedCurrent={savedCurrent} />
       {active && (
         <p className={styles.muted}>
@@ -209,17 +219,9 @@ function ObservationStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
       {observing === "stalled" && (
         <div className={styles.statusRow}>
           <p role="status" className={styles.muted}>
-            Updates stopped arriving. The current run status is unknown.
-            Reconnect to check for updates.
+            Updates stopped arriving. The current run status is unknown. Refresh
+            to check its current status.
           </p>
-          <Button
-            type="button"
-            variant="outline"
-            className={ui.outline}
-            onClick={run.reconnect}
-          >
-            Reconnect
-          </Button>
         </div>
       )}
     </>

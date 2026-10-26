@@ -32,24 +32,24 @@ export function useLiveRun(
     port.getSnapshot,
     port.getSnapshot,
   );
-  const [decisionRefresh, setDecisionRefresh] = useState(0);
+  const [statusRefresh, setStatusRefresh] = useState(0);
   const requested = useRef(0);
   const handled = useRef(0),
     generation = useRef(0);
-  const decisionGeneration = generation.current;
-  const refreshAfterDecision = () => {
-    if (alive.current && generation.current === decisionGeneration)
-      setDecisionRefresh(++requested.current);
+  const refreshGeneration = generation.current;
+  const refreshRunStatus = () => {
+    if (alive.current && generation.current === refreshGeneration)
+      setStatusRefresh(++requested.current);
   };
   useEffect(() => {
     if (
       !alive.current ||
       commands.busy ||
       active.current ||
-      decisionRefresh <= handled.current
+      statusRefresh <= handled.current
     )
       return;
-    handled.current = decisionRefresh;
+    handled.current = statusRefresh;
     const captured = generation.current;
     // Coalesce read wakeups until an existing command finishes; never queue its write.
     void commands.history().then(() => {
@@ -63,7 +63,7 @@ export function useLiveRun(
     });
     // The command gate's busy transition releases a pending read wakeup.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [decisionRefresh, commands.busy]);
+  }, [statusRefresh, commands.busy]);
 
   useEffect(() => {
     alive.current = true;
@@ -114,7 +114,8 @@ export function useLiveRun(
     snapshot,
     ...commands,
     observing: observation.state,
-    refreshAfterDecision,
+    refreshRunStatus,
+    refreshAfterDecision: refreshRunStatus,
     cancel: () => {
       suspendObservation();
       return commands.cancel();
@@ -122,10 +123,10 @@ export function useLiveRun(
     suspendObservation,
     reconnect: () => {
       if (
-        decisionRefresh &&
+        statusRefresh &&
         snapshot.observation?.runState === "waiting-for-approval"
       )
-        refreshAfterDecision();
+        refreshRunStatus();
       else observation.observe();
     },
   };

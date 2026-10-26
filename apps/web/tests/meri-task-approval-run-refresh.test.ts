@@ -32,6 +32,7 @@ const hooks = vi.hoisted(() => ({
   dirty: false,
   mounted: false,
   onStop: undefined as (() => void) | undefined,
+  lifecycleBusy: false,
   list: { status: "loading" } as ListState,
   refresh: vi.fn(async () => undefined),
   decide: vi.fn<(...args: unknown[]) => Promise<unknown>>(),
@@ -50,7 +51,7 @@ vi.mock("../src/features/meri/conversation/conversation-composer", () => ({
   },
 }));
 vi.mock("../src/features/meri/conversation/lifecycle/useRunLifecycle", () => ({
-  useRunLifecycle: () => ({ busy: false }),
+  useRunLifecycle: () => ({ busy: hooks.lifecycleBusy }),
 }));
 vi.mock("../src/features/meri/conversation/intents/approvals-enabled", () => ({
   useIntentApprovalsEnabled: () => true,
@@ -243,11 +244,15 @@ function mountedTree(port: MeriConversationPort) {
     decisions = section.props.children[1]!.props;
   };
 }
-async function mount(item = task()) {
+async function mount(
+  item = task(),
+  initialState: "paused" | "waiting-for-approval" = "waiting-for-approval",
+) {
   let reads = 0,
     subscriptions = 0,
     denied = false;
   let nextRead: (() => Promise<Response>) | undefined;
+  let nextCancel: (() => Promise<Response>) | undefined;
   let events: ReadableStreamDefaultController<Uint8Array> | undefined;
   const cancelled = vi.fn(),
     lost = vi.fn();
@@ -276,13 +281,15 @@ async function mount(item = task()) {
           return read();
         }
         return Response.json(
-          history([status(1, "waiting-for-approval")], {
-            state: "waiting-for-approval",
+          history([status(1, initialState)], {
+            state: initialState,
           }),
         );
       }
       if (String(url).endsWith("/cancel"))
-        return Response.json({ state: "cancelled" });
+        return nextCancel
+          ? nextCancel()
+          : Response.json({ state: "cancelled" });
       if (String(url).includes("/events/")) {
         subscriptions++;
         return new Response(
@@ -319,7 +326,7 @@ async function mount(item = task()) {
   hooks.dirty = true;
   await flush();
   expect(decisions.decisionsReady).toBe(true);
-  expect(port.getSnapshot().observation?.runState).toBe("waiting-for-approval");
+  expect(port.getSnapshot().observation?.runState).toBe(initialState);
   return {
     port,
     lost,
@@ -333,6 +340,9 @@ async function mount(item = task()) {
     },
     deferRead(read: () => Promise<Response>) {
       nextRead = read;
+    },
+    deferCancel(cancel: () => Promise<Response>) {
+      nextCancel = cancel;
     },
     deny() {
       denied = true;
@@ -376,6 +386,7 @@ beforeEach(() => {
   hooks.cleanups.clear();
   hooks.dirty = false;
   hooks.onStop = undefined;
+  hooks.lifecycleBusy = false;
   hooks.refresh.mockReset();
   hooks.refresh.mockResolvedValue(undefined);
   hooks.decide.mockReset();
@@ -383,7 +394,7 @@ beforeEach(() => {
   hooks.cache = new QueryClient();
   const sessionStorage = storage();
   syncMeriTabIdentity("synthetic-run-refresh", sessionStorage);
-  vi.stubGlobal("window", { sessionStorage });
+  vi.stubGlobal("window", Object.assign(new EventTarget(), { sessionStorage }));
   vi.stubGlobal(
     "document",
     Object.assign(new EventTarget(), { visibilityState: "visible" }),
@@ -716,4 +727,222 @@ it("actual mounted Stop rejects a decision wakeup that completes after suspensio
   expect(f.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(1);
   expect(f.reads).toBe(1);
   expect(f.subscriptions).toBe(0);
+});
+
+it("manual status refresh reads a waiting run and observes delayed external approval without a decision", async () => {
+  const f = await mount();
+  run.refreshRunStatus();
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(1);
+  expect(run.snapshot.observation?.runState).toBe("waiting-for-approval");
+  await advance(5_000);
+  f.close(["running", "completed"]);
+  await flush();
+  expect(run.snapshot.observation?.runState).toBe("completed");
+  expect(hooks.decide).not.toHaveBeenCalled();
+  expect(
+    f.calls.every(
+      (path) => path.endsWith("/history") || path.includes("/events/"),
+    ),
+  ).toBe(true);
+});
+
+it("manual status refresh keeps unchanged paused history paused without streaming", async () => {
+  const f = await mount(task(), "paused");
+  run.refreshRunStatus();
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(0);
+  expect(run.snapshot.observation?.runState).toBe("paused");
+  expect(hooks.decide).not.toHaveBeenCalled();
+});
+
+it("visible return and focus coalesce to one bounded wait and never poll on the cooldown", async () => {
+  const f = await mount();
+  Object.assign(document, { visibilityState: "hidden" });
+  document.dispatchEvent(new Event("visibilitychange"));
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(1);
+  Object.assign(document, { visibilityState: "visible" });
+  document.dispatchEvent(new Event("visibilitychange"));
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(1);
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(2);
+  f.close();
+  await advance(0);
+  expect(run.observing).toBe("stalled");
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(2);
+  await advance(30_000);
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(1);
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(3);
+  expect(f.subscriptions).toBe(2);
+  f.close(["completed"]);
+  await advance(30_000);
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(3);
+  expect(hooks.decide).not.toHaveBeenCalled();
+});
+
+it("external refresh does not interrupt a live stream even after the cooldown", async () => {
+  const f = await mount();
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  await advance(31_000);
+  document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(1);
+  expect(f.cancelled).not.toHaveBeenCalled();
+});
+
+it("manual refresh recovers unavailable history without replaying a request", async () => {
+  const f = await mount();
+  f.deferRead(async () => {
+    throw new Error("Synthetic history outage");
+  });
+  await run.history();
+  await flush();
+  expect(run.snapshot.status).toBe("unavailable");
+  run.refreshRunStatus();
+  await flush();
+  expect(f.reads).toBe(3);
+  expect(run.snapshot.status).toBe("ready");
+  expect(
+    f.calls.every(
+      (path) => path.endsWith("/history") || path.includes("/events/"),
+    ),
+  ).toBe(true);
+});
+
+it("Stop retires automatic refresh synchronously but a fresh manual read may reconcile UNKNOWN", async () => {
+  const f = await mount();
+  const oldCallback = run.refreshAfterDecision;
+  f.deferCancel(async () => {
+    throw new Error("Synthetic lost cancel response");
+  });
+  window.dispatchEvent(new Event("focus"));
+  hooks.onStop!();
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(1);
+  expect(run.intent.cancel).toBe("unknown");
+  await advance(31_000);
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(1);
+  run.refreshRunStatus();
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(run.intent.cancel).toBe("unknown");
+  oldCallback();
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(1);
+  expect(hooks.decide).not.toHaveBeenCalled();
+});
+
+it("external refresh respects lifecycle work and does not queue behind a busy history read", async () => {
+  const f = await mount(task(), "paused");
+  hooks.lifecycleBusy = true;
+  hooks.dirty = true;
+  await flush();
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(1);
+  hooks.lifecycleBusy = false;
+  hooks.dirty = true;
+  await flush();
+  let finish!: (value: Response) => void;
+  f.deferRead(
+    () =>
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+  );
+  const reading = run.history();
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(2);
+  finish(Response.json(history([status(1, "paused")], { state: "paused" })));
+  await reading;
+  await flush();
+  expect(f.reads).toBe(2);
+});
+
+it("denied external refresh clears current data and future events cannot reuse its identity", async () => {
+  const f = await mount();
+  f.deny();
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.lost).toHaveBeenCalledTimes(1);
+  expect(run.snapshot.observation).toBeNull();
+  await advance(31_000);
+  window.dispatchEvent(new Event("focus"));
+  document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(0);
+});
+
+it("unmount and expiry retire external listeners without issuing history", async () => {
+  const f = await mount();
+  unmount();
+  window.dispatchEvent(new Event("focus"));
+  document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  expect(f.reads).toBe(1);
+  await advance(600_001);
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(f.reads).toBe(1);
+  expect(f.subscriptions).toBe(0);
+});
+
+it("a mounted expired session cannot be refreshed by tab return", async () => {
+  const f = await mount();
+  await advance(600_001);
+  expect(f.lost).toHaveBeenCalledTimes(1);
+  window.dispatchEvent(new Event("focus"));
+  document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  expect(f.reads).toBe(1);
+  expect(f.subscriptions).toBe(0);
+  expect(run.snapshot.observation).toBeNull();
+});
+
+it("a callback from a retired port lifetime cannot refresh its replacement", async () => {
+  const listen = vi.spyOn(window, "addEventListener");
+  const old = await mount();
+  const callback = listen.mock.calls.find(
+    ([name]) => name === "focus",
+  )![1] as EventListener;
+  unmount();
+  old.port.dispose();
+  hooks.cursor = 0;
+  hooks.slots = [];
+  hooks.pending = [];
+  const current = await mount();
+  callback(new Event("focus"));
+  await flush();
+  expect(old.reads).toBe(1);
+  expect(current.reads).toBe(1);
+  expect(current.subscriptions).toBe(0);
+  window.dispatchEvent(new Event("focus"));
+  await flush();
+  expect(current.reads).toBe(2);
+  expect(old.reads).toBe(1);
+  listen.mockRestore();
 });

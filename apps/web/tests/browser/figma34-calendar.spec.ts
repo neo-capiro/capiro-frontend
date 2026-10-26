@@ -245,12 +245,20 @@ async function installCalendarFixtures(page: Page) {
 
 async function expectClientMeetingsHeader(page: Page) {
   const header = page.locator("header.pageHeader");
+  // Figma 3.4 Month frame (1064:179149) is canonical for the client calendar
+  // header: "{Client} calendar". The Agenda frame still reads "{Client} meetings";
+  // the two frames disagree and Month was chosen as the target.
   await expect(
-    header.getByRole("heading", { name: "Anduril meetings" }),
+    header.getByRole("heading", { name: "Anduril calendar" }),
   ).toBeVisible();
+  // "Calendar" is the trailing breadcrumb view switcher (Figma 3.4 Month frame
+  // 1064:179149 renders it as an interactive chip inside the header), so it is a
+  // header button alongside the three actions. Its accessible name comes from
+  // aria-label, so visible text and accessible names are asserted separately.
   const actions = ["Sync calendar", "Meeting Library", "New meeting"];
-  await expect(header.getByRole("button")).toHaveText(actions);
-  for (const action of actions)
+  const switcher = "Switch client view: Calendar";
+  await expect(header.getByRole("button")).toHaveText(["Calendar", ...actions]);
+  for (const action of [...actions, switcher])
     await expect(
       header.getByRole("button", { name: action, exact: true }),
     ).toBeVisible();
