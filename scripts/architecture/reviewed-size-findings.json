@@ -4172,9 +4172,9 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
     "kind": "function",
     "symbol": "TemplateSettings",
-    "fingerprint": "23d13552fcc95982059bea3835b792dcff3e167b105a4e5d2d005eb30023da87",
-    "reason": "One metadata form with existing save owner, fields and footer; no second transaction or lifetime owner. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "fingerprint": "cef7af9dea6fb020e3ded3e315d8f80566094d25a67bafaa732c94c7db7afbb1",
+    "reason": "One existing metadata form preserves user inputs and consumes the common command owner. Acknowledged destination identity is passed back to the existing detail/list refresh callbacks.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4977,8 +4977,8 @@
     "file": "apps/web/src/features/modules/workspace/templates/CampaignPicker.tsx",
     "kind": "function",
     "symbol": "CampaignPicker",
-    "fingerprint": "70e05eb5a00f486d77ca28ab2ecb61a4bb3657abd82ef3fbbe74bd084a506ae2",
-    "reason": "One current authorized-list page/filter/selection presentation owner. Reads use the existing scoped aborting query; parent retains the sole explicit save mutation. The small JSX unit does not warrant another state owner.",
+    "fingerprint": "279beea34b684e413339f796a288b5e2bd6d1aab684c7ffd79b89aa990974226",
+    "reason": "One current authorized server-search page and selection UI; the existing scoped query owns cancellation and the parent owns the write. No new cache or paging authority.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
@@ -4986,8 +4986,8 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
     "kind": "function",
     "symbol": "UseTemplate",
-    "fingerprint": "5a345dfb3af520ecf57179118958395bb13d56d048451c1ff512a73a8bcae34c",
-    "reason": "Existing use/application-receipt behavior is byte-identical to the base. This history/paging slice neither extends its mutation authority nor claims its pending recovery guarantees.",
+    "fingerprint": "d14fe0664aac12c1f0cbd2f87593724e5f45b533fcc0813b67e6abe4e02a5ec7",
+    "reason": "One explicit Use form captures title/client/variables and delegates to the existing command owner; the duplicate completed receipt was removed. Immutable destination now governs pending access.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
@@ -5276,6 +5276,69 @@
     "fingerprint": "726365d1118f6e2b1143050cbdc80bec2234f591c58e2c6d4a0ca9ab9278ede2",
     "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
     "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
+    "kind": "function",
+    "symbol": "TemplateCard",
+    "fingerprint": "fc208106983f1b123ca2d6e1d24df850e21d30b3afe77fb76ba9dec7c624a28b",
+    "reason": "One existing catalog card renders capability-controlled actions. The change only consumes the shared write fence; it does not own a mutation.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9d0ec837beda791ffb2b5c28e5619c1c676dcae07efd090b1ddf11f77f22170a",
+    "reason": "One Studio host composes catalog, dialog selection and list refresh under the common command provider; canonical query, recovery, forms and transport remain separate owners. No threshold-driven extraction is needed.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "function",
+    "symbol": "TemplateStudioView",
+    "fingerprint": "2694373e7eba769f03b1a6f7ed66face8a64459980f64cfff62ebf87097c3fca",
+    "reason": "One Studio host composes catalog, dialog selection and list refresh under the common command provider; canonical query, recovery, forms and transport remain separate owners. No threshold-driven extraction is needed.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateWizard.tsx",
+    "kind": "function",
+    "symbol": "TemplateWizard",
+    "fingerprint": "cbc621d2e22b8f82efae7cd8d75ec440516a61a98b0afc22bf4648491a9c1cf6",
+    "reason": "One existing staged template form owns the complete edited specification and presents partial metadata/draft outcomes. Durable command handling is delegated to the common owner rather than duplicated in its steps.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateRecoveryPanel.tsx",
+    "kind": "function",
+    "symbol": "TemplateRecoveryPanel",
+    "fingerprint": "c5d5f6c9101a6a600f5bf569463b897ea8eb52263f7b692abfb7ad814231d0b6",
+    "reason": "One projection of the retained domain command distinguishes pending, partial and complete outcomes and exposes only supported explicit actions. The local Figma correction is required separately; it does not require another state owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/useTemplateCommands.tsx",
+    "kind": "function",
+    "symbol": "useCommands",
+    "fingerprint": "95c469d0242f04f4385f69b66ae8b1e3168249552fdb827b707e8306b0ba438b",
+    "reason": "One actor-scoped domain command coordinator composes the existing encrypted journal, retained-intent lifetime and canonical reads with sequential dispatch. It is the single write owner for this Studio, not a second journal or transport.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateProvenance.tsx",
+    "kind": "function",
+    "symbol": "TemplateProvenance",
+    "fingerprint": "45afdff58d0ebb72c65dacbe5fd36a0d612b7c0c34bd63a954c86f8a72506b89",
+    "reason": "One current-access canonical receipt dialog with four data-driven categories and local display state. Existing query, modal, journal and operation owners remain separate.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
