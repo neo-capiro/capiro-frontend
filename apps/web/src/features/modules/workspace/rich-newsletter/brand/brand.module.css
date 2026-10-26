@@ -1,0 +1,156 @@
+.workspace,
+.stack {
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
+.workspace {
+  padding: 28px;
+  color: var(--foreground);
+}
+.workspace h2,
+.workspace h3,
+.workspace h4,
+.workspace p {
+  margin: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.header > div {
+  display: grid;
+  gap: 8px;
+}
+.header h2 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+.header p,
+.help {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 20px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 660fr) minmax(0, 484fr);
+  gap: 16px;
+  align-items: start;
+}
+.controls {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+.controls input,
+.controls [data-slot="select-trigger"] {
+  max-width: 100%;
+}
+.controls button:not([data-slot="select-trigger"]) {
+  align-self: flex-start;
+  justify-self: start;
+}
+.badge {
+  justify-self: start;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--muted-foreground);
+  font-size: 11px;
+  line-height: 17px;
+}
+.record {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+  overflow-wrap: anywhere;
+}
+.color {
+  display: flex;
+  gap: 8px;
+  align-items: end;
+  min-width: 0;
+}
+.color > div {
+  flex: 1;
+  min-width: 0;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.swatches > div {
+  display: grid;
+  gap: 6px;
+}
+.swatches code {
+  font-size: 12px;
+  line-height: 18px;
+}
+.swatch {
+  height: 56px;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.flag {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  font-size: 13px;
+  line-height: 20px;
+}
+.flag input {
+  appearance: none;
+  width: 40px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 99px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  padding: 2px;
+  cursor: pointer;
+}
+.flag input::before {
+  display: block;
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 0 1px 2px #0003;
+}
+.flag input:checked {
+  background: #3e6875;
+}
+.flag input:checked::before {
+  transform: translateX(16px);
+}
+.flag input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .header {
+    flex-direction: column;
+  }
+}
+@media (max-width: 450px) {
+  .workspace {
+    padding: 16px;
+  }
+  .color {
+    flex-wrap: wrap;
+  }
+}

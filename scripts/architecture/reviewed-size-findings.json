@@ -1874,11 +1874,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "line": 41,
-    "nonblank": 251,
-    "fingerprint": "9d65adffa424b745f66d680da48031e5cc4817bbacf5df3c3469cc16fb017f91",
-    "reason": "One native Workspace destination compositor. The addition delegates a validated known-ID route to NewsletterReviewEntry with a target/client key; query intent, receiving, editable lifecycle and authorization remain outside this routing function. Existing accepted destination branches are not re-reviewed or moved.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
+    "fingerprint": "d28507cf391a57e6919ea4c9ad426abaaef7ca3d29de733252f9b99711fb97ef",
+    "reason": "The existing route owner adds a distinct catalog branch and two explicit entry actions, preserving Outreach routes.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -1894,18 +1892,18 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
     "kind": "function",
     "symbol": "RichBlockControls",
-    "fingerprint": "477a69a1cbced499133e95114a4dea29f64e7c45dd11c661e001f90f2110ed22",
-    "reason": "The existing block-settings function remains a presentation dispatcher for the currently selected block. This delta adds only the image/logo AssetReplaceControl child and its single imageUrl callback. Paged receiving, request lifetime, upload uncertainty and explicit selection are cohesive feature-local owners; draft updates and undo remain in the existing editor/controller. The 100\u2192106 nonblank increase does not add authority, transport or a second draft owner. No split solely for size is warranted.",
-    "reviewedBy": "Codex independent lifecycle_trace",
+    "fingerprint": "39b23a172181ff27e687ff05f5921b60ec904fad30c07f04fffe1f3c139cd911",
+    "reason": "One selected-block inspector dispatches to existing asset/content/style components; mutation remains the host callback and existing save owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "5ae345d566c8025c6a5153acc4811cf20a329cd91b401093150e0a1a6b5249f3",
-    "reason": "Root independently inspected the exact union of accepted202 review/adoption and206 library composition. Existing review spine and local editor request/history owners are retained; four library regions add catalog/dialog mounts and explicit local Apply without new authority, mutation transport or save owner. Combined source SHA25661339821d91c0f3eae1a113e00a278e956c4cda17df69404f9024ae4464884db.",
-    "reviewedBy": "Wave 3 Root independent composition reviewer",
+    "fingerprint": "84dbc3a45b79a00750d9b5cbdea8a9af2f083ecce0caf22697fa3a225b7a9f11",
+    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
+    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -2422,9 +2420,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "c32adbb67d893f830df4a9fc79fdd6752e9675b76496fbe9bc843a0778fde4a8",
-    "reason": "One existing saved-document editor composes title/section editing and delegates save, history, export, preview and people management to their established owners. The four-line delta adds one prospect-excluding People mount with currentDraft.id; it adds no people state, transport, policy or save lifetime. Existing keyed ordinary save and the panel's keyed identity preserve retirement. Extracting only this JSX insertion to satisfy the threshold would scatter the same composition responsibility. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
-    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
+    "fingerprint": "0d8b6312761bd50cbb8833c58733b34cae33291362e8b264e4fe3f111a697273",
+    "reason": "The existing editor adds only a stored Blueprint-version label; save, export and recovery retain their existing owners.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4017,18 +4015,18 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "222b65e078e040e1a6be3e17a660d71c5bc2ba4561f5a5e5f5bd9370147ca7f8",
-    "reason": "The existing newsletter editor owner gains only modal visibility and a minimum host splice. Editing, staging transactions, authorization and durable receipt ownership remain delegated; no new business controller, persistence owner or recovery state machine is added. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
+    "fingerprint": "f9c9806c8a370ac9980e5d2b06b875f261a17141fc7877e1464afe5a8e00aa5a",
+    "reason": "The existing Basic workflow adds inert content preview and explicit conversion handoff while retaining its current save, scope, history and recovery owners.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "function",
     "symbol": "NewsletterEditor",
-    "fingerprint": "30777b842e50270fde9e0bc13e07d404520ca5eae6d5908141bf390a6b85e272",
-    "reason": "The existing newsletter editor owner gains only modal visibility and a minimum host splice. Editing, staging transactions, authorization and durable receipt ownership remain delegated; no new business controller, persistence owner or recovery state machine is added. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
+    "fingerprint": "9f2671399af3746adb5a5664f00ac423b6d6750b234c1817f934fc4aaaf66250",
+    "reason": "The existing editor owns the source snapshot and deliberate conversion action, retaining unsaved changes and current identity checks across the local handoff.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4071,9 +4069,9 @@
     "file": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "fa0039c6058c81938e8ed3e22c95c71c46d0f99f7a5a560520df56ffa3f82ddb",
-    "reason": "This is the existing document operation/schema owner. The bounded newsletter variant joins the manual variant on the same fixed save operation; it does not introduce a serializer service, endpoint, policy decision or unrelated product owner. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "fingerprint": "36fcd6a4f98421cfb5a481cd369060d182e3ba40d33645144ebf503819643427",
+    "reason": "The existing workspace document contract adds only the canonical optional pin input and saved pin projection; unrelated configuration is never round-tripped.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4323,9 +4321,9 @@
     "file": "apps/web/src/features/modules/engagement/newsletter-receiving/useNewsletterReceiver.ts",
     "kind": "function",
     "symbol": "useNewsletterReceiver",
-    "fingerprint": "e93e83e32b502de7738ce80c41250882e9cb023c817348955effa39f54d5ee5d",
-    "reason": "One receiving lifetime owns disposable stage/record reads and explicit-open transient uncertainty. Transport, policy, durable records and rendering remain elsewhere. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
-    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
+    "fingerprint": "c21dcbf292acaa2b9e6e8cb19ee46e7ff434034dc995d80aea660a7c422ed08f",
+    "reason": "Existing stage-only read/open owner retains uncertain-open fence; the replaced record branch is deleted because NewsletterDelivery now owns that route.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4625,6 +4623,348 @@
     "fingerprint": "2f4a3aa5a2b422f5d8c193d61ef6c8a4117b2fcc5ede6e88f598414d8e7a9436",
     "reason": "One existing dialog composes picker, upload, management, history and focus transitions; each request and editor insertion retains its existing owner.",
     "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintAdoption.tsx",
+    "kind": "function",
+    "symbol": "useBlueprintAdoption",
+    "fingerprint": "c64b690917f69140829c58f38560973fd527ba68dc8ab9afd0cae24735b7c111",
+    "reason": "One mounted create interaction captures the exact published pin, checks current preflight, validates saved readback and keeps uncertain outcomes fenced; existing mutation transport performs the single POST.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDetail.tsx",
+    "kind": "function",
+    "symbol": "BlueprintDetail",
+    "fingerprint": "040cb6b1ab427390d9fdac6fa5c8d91f9f0469d396202b988eb966aa10fe48b6",
+    "reason": "One Blueprint detail view binds selected versions through public receivers and shows truthful metadata and explicit adoption.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintVersions.tsx",
+    "kind": "function",
+    "symbol": "BlueprintHistory",
+    "fingerprint": "3e37397590747b66343792e2ed488387bf749b6c309878441471a64912d8f872",
+    "reason": "One version-history dialog uses only returned adjacent comparisons and native focus/close behavior.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/DocumentTemplateLibrary.tsx",
+    "kind": "function",
+    "symbol": "DocumentTemplateLibrary",
+    "fingerprint": "a3f8dbb5c139103f1c60346315e397006465d23ec10e40c723ad0ac5f342633b",
+    "reason": "One catalog view owns local product/row selection and composes the existing query and adoption lifetimes.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/BasicConversion.tsx",
+    "kind": "function",
+    "symbol": "BasicConversionButton",
+    "fingerprint": "da410aa8dabaff56288626fcddec5bd47ebc5b315d360771db67091630547a89",
+    "reason": "A single explicit conversion interaction captures actor, session, client and draft identity, explains unsupported input, and applies the reviewed local candidate through the existing editor owner without saving or submitting.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/BrandSettings.tsx",
+    "kind": "function",
+    "symbol": "ButtonSettings",
+    "fingerprint": "760a0a6816ffeceb195d0fc3d314f36dd3303583fd3b98115d6226318a28e03a",
+    "reason": "One local button-settings dialog binds the supported fields and primary selection; it changes the local Brand Kit only through the kit edit function. Fields and canonical modal are reused, with no independent persistence owner.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/BrandWorkspace.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "3ea5aa1f88c49bf9e7652dc616fd0352b6db3ac6fb41fec2fc3ab75d0f3151b1",
+    "reason": "BrandWorkspace is one four-tab presentation module sharing the same Brand Kit draft and preview. Network lifetime, pure transformations, fields, logo picker and settings dialogs are already separate owners; no further split is justified solely by line count.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/BrandWorkspace.tsx",
+    "kind": "function",
+    "symbol": "BrandWorkspace",
+    "fingerprint": "4612ed705b8a351d8b051a8d73cdbdfbac659cb48ac981777394f813707117d1",
+    "reason": "The long function is mostly JSX for one Brand Kit workspace and its four panels. It delegates persistence/lifetime, shared preview rendering, asset selection and settings dialogs; Apply uses one existing history edit. It introduces no parallel transport, save journal or policy engine.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/use-brand-kit.ts",
+    "kind": "function",
+    "symbol": "useBrandKit",
+    "fingerprint": "16b942f0416b2ff6230e4a6917b07942766cd6684a271ec1725b6dafbe974be2",
+    "reason": "The hook owns one mounted kit interaction and its explicit read/save/font phases. Public response parsing, shared query/mutation hooks and scope identity protect completion; the kit/font unknown fence remains together across close and reload.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/SurveyForm.tsx",
+    "kind": "function",
+    "symbol": "SurveyForm",
+    "fingerprint": "c517ab1a0917f733d920f6120446e42456b523ebfc794344f13fb431a0539576",
+    "reason": "One local survey form owns tab selection and question ordering/focus restoration. Question controls and primitive fields are separate; persistence stays in useSurveyDrafts. The JSX preserves existing identity and definition fields.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/SurveyQuestion.tsx",
+    "kind": "function",
+    "symbol": "SurveyQuestion",
+    "fingerprint": "13a2ea881fdc418fab8ed809aa6f2b55a8407dca8acb5c286719e1702a0757fc",
+    "reason": "One canonical question union is rendered with conditional fields for its eight supported kinds. The function retains field identity and inert properties, delegates reusable fields, and never performs network work.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/SurveyWorkspace.tsx",
+    "kind": "function",
+    "symbol": "SurveyWorkspace",
+    "fingerprint": "7208f16c0ee92ec8484e70c128fff0dca8eb8ce0eec99dda8948c5d5384a4c6c",
+    "reason": "One modal composes accessible draft selection, form and unconfirmed presentation. Existing Modal owns focus; the hook owns writes, list scope and uncertainty. No draft publication, delivery or independent durable owner is added.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/use-survey-drafts.ts",
+    "kind": "function",
+    "symbol": "useSurveyDrafts",
+    "fingerprint": "97bf411bf9c79b1f5a58132680b1f258ae4deb725820f0772b6b34b328b9db06",
+    "reason": "The hook is the single mounted survey-list/form/save lifecycle. It binds current owner/document/API and saved id/revision, uses existing query/mutation transport, and treats mismatched readback as unconfirmed. Keeping those checks together prevents split uncertainty ownership.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c1b5a2efc0ce83c200dc9ea251f69a659b7bbe96092b5e9e0b421a76f99710d0",
+    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
+    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/AccountInvitation.tsx",
+    "kind": "function",
+    "symbol": "AccountInvitation",
+    "fingerprint": "c46425b430a4df7c6b83d5572fc86910ba9b87e4765bcb7e04cfc3132edfd11a",
+    "reason": "One saved firm-invitation dialog owns explicit read/dispatch presentation and delegates transport/lifetime to fixed operations and the review action owner. Public receipt binding and canRetry remain authoritative; it does not implement a sender. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterReview.tsx",
+    "kind": "function",
+    "symbol": "ReviewSession",
+    "fingerprint": "55979db1803c93519f691144e0d26dea08121aaacd5d329bce3c5b24201d9e76",
+    "reason": "Existing review composition owns saved preview/comments presentation and delegates reads, collaboration state, dialogs and sanitized HTML. Added role-bound actions do not create another editor, policy owner or save flow. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterSharing.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "dcd0a1c2b0d6e1e16fc56450a9658f6cd3d7c184c2be5f78d3e7d00b8a6ca6ed",
+    "reason": "One feature-local sharing module groups its role vocabulary, reusable person row and owner form. Public team/invitation parsing and the serialized action hook remain separate; the file does not own transport, account sending or global policy. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterSharing.tsx",
+    "kind": "function",
+    "symbol": "NewsletterSharing",
+    "fingerprint": "65ed9275b28c7e4983f0d6fec6d980408e6592deefbf19ebf8882890ae4d9c28",
+    "reason": "One owner-facing sharing form binds current people, pending requests and explicit invitation fields. Row rendering is factored; all writes use the common action owner and fixed public receivers. Its length reflects one coherent access-management interaction rather than unrelated domain work. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/ReviewCollaborationDialogs.tsx",
+    "kind": "function",
+    "symbol": "ReviewCollaborationDialogs",
+    "fingerprint": "39876d2d744b87e3e3dfe32d466eb6831df54daf9d323e2c87342b335ce27331",
+    "reason": "One composition switch mounts the selected collaboration dialog and passes captured parent/root/account identities. Field state and requests remain in the individual forms/hooks; splitting the switch would duplicate navigation and lifetime plumbing. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/ThreadNotifications.tsx",
+    "kind": "function",
+    "symbol": "ThreadNotifications",
+    "fingerprint": "f857130af83cee24d5bbf2333ac2284f7f46b4fdbde48b7d45377d29cc82fdbc",
+    "reason": "One known-root notification dialog selects the existing defaults/read operation, binds the returned root and applies explicit user choices. ThreadChoices isolates its list; the dialog owns no email sender or inferred delivery state. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-newsletter-collaboration.ts",
+    "kind": "function",
+    "symbol": "useNewsletterCollaboration",
+    "fingerprint": "95c25f72b572b79793c1ac35ea713cd2688729ffbbfc2960585e29bd52f22f99",
+    "reason": "One mounted collaboration state owner captures selected comment/root, draft notification choices and role/access retirement, then delegates requests to useReviewActions and team loading to useReviewTeam. The coupled retirement invariant should remain together. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-newsletter-review.ts",
+    "kind": "function",
+    "symbol": "useNewsletterReview",
+    "fingerprint": "f88b35b2aa3bf7e331c3ed2ed17fd8fa6142063515c4deb51c18f5e5ed7838c4",
+    "reason": "Existing saved review read owner preserves explicit admission, comments loading and access-loss clearing. The mutation override is a received current projection, not a new document owner or causal receipt. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-review-actions.ts",
+    "kind": "function",
+    "symbol": "useReviewActions",
+    "fingerprint": "96c841830fc105bb017a920c04505ef799a5546381a2db1646d7d2b9b53a5e02",
+    "reason": "One mounted serialized writer consistently holds pending/unknown state, same-input invitation recovery and actor/access-generation fences across dialogs. Fixed mutations and public parsers are supplied, with no replacement authority, ledger or sender. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/DestinationPicker.tsx",
+    "kind": "function",
+    "symbol": "DestinationPicker",
+    "fingerprint": "f6ea6b461f1f900b800b5adeae530282dddd835e22820667eb04755a2ee20592",
+    "reason": "One destination selection view owns paged Directory choices, current-client contact selection and local manual entry. Fixed operations and Core remain transport and authorization owners; stale replies are discarded.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterDelivery.tsx",
+    "kind": "function",
+    "symbol": "NewsletterDelivery",
+    "fingerprint": "6c58f84daaedb2b0831196fb5e0b31fa5b246d024f93e0b8867050fbfb1bdc2f",
+    "reason": "One existing record-route screen coordinates destination, preview, test and final-send presentation. The hook and adapter own request lifetime and receiving; it does not implement delivery or policy.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterDestinations.tsx",
+    "kind": "function",
+    "symbol": "NewsletterDestinations",
+    "fingerprint": "fea2db3e72a59ec7b5806317d24f1dc8946343684c78751e5f4a04d78df74da3",
+    "reason": "A local recipient/sender/subject form and scoped copy-address dialog prepare an explicit request. Existing fields/modal and fixed request schema are reused; no contact creation or implicit save/send.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterDestinations.tsx",
+    "kind": "function",
+    "symbol": "SelectedDestination",
+    "fingerprint": "f50ecc11079e9d7e219a4415fde2a82cb1a9dd0cc0b567e09117cee6f1175b78",
+    "reason": "A local recipient/sender/subject form and scoped copy-address dialog prepare an explicit request. Existing fields/modal and fixed request schema are reused; no contact creation or implicit save/send.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterPrepared.tsx",
+    "kind": "function",
+    "symbol": "NewsletterPrepared",
+    "fingerprint": "178b1d12551e3aa5d962d7512e9228c7dea7e3a5ddc6eb19446715df816df7d6",
+    "reason": "One immutable per-recipient prepared preview reuses inert SavedNewsletterHtml, existing field/select/action components and explicit test action. Root reviewed corrected primary content-width button against Figma1176:303150.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterSendStatus.tsx",
+    "kind": "function",
+    "symbol": "NewsletterSendStatus",
+    "fingerprint": "e3daf9fc126dc6fa176dd2852f5715b027b8834f3eca40e8be6b716e7e13f783",
+    "reason": "One read-only durable status view distinguishes accepted/queued/provider-accepted/unknown outcomes and offers only status refresh.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/delivery-api.ts",
+    "kind": "function",
+    "symbol": "createNewsletterDeliveryApi",
+    "fingerprint": "ee46eb58d19eab35e2cb24155a8f128ed7d230dcc4f2b9f07dd4a23b68f2f2ad",
+    "reason": "One public API adapter binds current record/stage/revision and prepared version set, freshly checks the reviewed mailbox, and delegates effects to existing Core newsletter routes and detached receivers.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/useNewsletterDelivery.ts",
+    "kind": "function",
+    "symbol": "useNewsletterDelivery",
+    "fingerprint": "2615c6f86c6bd021cc2b69b9cce3cf412f57bf7c7eb8c2ad296a170a177ffa40",
+    "reason": "One disposable request lifetime handles current reads, explicit preparation/send and retained URL request recovery. Identity/route changes abort; reload and unknown recovery only read the existing request.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+    "kind": "function",
+    "symbol": "RichStructure",
+    "fingerprint": "8beeccf29f0b854a731eaf22b3bc129305a756d47c4af5f6137a9e57b0454ba1",
+    "reason": "One recursive structure navigation surface invokes typed section/block actions and retains the existing saved-section callbacks.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/BlockPlacement.tsx",
+    "kind": "function",
+    "symbol": "BlockPlacement",
+    "fingerprint": "07a68f18a6f7525f5bbbddcabc82ff507df5e623a97370a46da75c8f99e71c16",
+    "reason": "One block-placement inspector binds current section/column choices and delegates changes to the guarded structural transform.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/DesignStyles.tsx",
+    "kind": "function",
+    "symbol": "DesignStyles",
+    "fingerprint": "c34c492eb9b038d7a60e2dfcc46daca47f0d39852474cb39905e5fc0a0885b87",
+    "reason": "One email-style inspector selects canonical desktop/mobile slots without replacing Brand Kit or document persistence. Numeric typing defect is separately required below; it is not a responsibility split issue.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/ManualContent.tsx",
+    "kind": "function",
+    "symbol": "ProductControls",
+    "fingerprint": "7a497a90ee19510e6240779c943988e66ef06957b5b43233a5baa08e5d0383a1",
+    "reason": "One manual product-list inspector edits/reorders the selected item and leaves fetching, recommendations and saving to existing owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/SocialControls.tsx",
+    "kind": "function",
+    "symbol": "SocialControls",
+    "fingerprint": "c00fcfeed1f5a0465af441302822d125f520ce4357184a3783dcd11b54b465c5",
+    "reason": "One follow/share inspector retains inactive lists and device settings through canonical social helpers; no share/send authority is introduced.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/StyleFields.tsx",
+    "kind": "function",
+    "symbol": "StyleFields",
+    "fingerprint": "08e29a9943632b7b0bb19292be48a8f66a2a2817b5373e4c870e76d310b773ac",
+    "reason": "One reusable projection of supported NewsletterStyle fields retains unknown keys and separates local device selection from authoritative persistence.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/structure.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "db7f1d289efd62222628aca5671ee1f9d07c059b9cb7f9a18b869b526d7828d7",
+    "reason": "One structural transformation suite shares its small fixture and covers fresh identities, source/font preservation, bounds, stale targets and actual public receiver round-trip.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]

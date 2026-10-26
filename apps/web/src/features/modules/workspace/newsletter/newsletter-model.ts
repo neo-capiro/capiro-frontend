@@ -37,6 +37,11 @@ export function createNewsletter(
         ? []
         : [
             {
+              id: "issue-date",
+              kind: "paragraph",
+              text: `WEEKLY POLICY BRIEF / ${new Date().toISOString().slice(0, 10)}`,
+            },
+            {
               id: "heading",
               kind: "heading",
               text: "The week in policy.\nWhat it means for you.",
@@ -76,13 +81,13 @@ export function newsletterDocumentBlocks(body: NewsletterBody) {
       title:
         block.kind === "heading"
           ? block.text
-          : block.kind === "button"
+          : ["button", "social"].includes(block.kind)
             ? "Action"
             : "",
       content:
         block.kind === "heading"
           ? ""
-          : block.kind === "button"
+          : ["button", "social"].includes(block.kind)
             ? `${block.text}${block.href ? `: ${block.href}` : ""}`
             : block.text,
     }));

@@ -40,6 +40,20 @@ function approvedClientBriefAuthorityImport(from, to, entry) {
   return to === prospectActionsEntry && allowed && ['named', 'other'].includes(entry.kind)
     && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
 }
+const newsletterDeliveryOwner = `${appSource}features/modules/engagement/newsletter-delivery/`;
+const newsletterRelationshipImports = new Map([
+  [`${newsletterDeliveryOwner}delivery-api.ts`, new Set(['sendingMailboxesSchema', 'SendingMailbox'])],
+  [`${newsletterDeliveryOwner}DestinationPicker.tsx`, new Set(['personSchema'])],
+  ...['NewsletterDestinations.tsx', 'NewsletterPrepared.tsx', 'useNewsletterDelivery.ts'].map(file =>
+    [`${newsletterDeliveryOwner}${file}`, new Set(['SendingMailbox'])]),
+]);
+function approvedNewsletterRelationshipImport(from, to, entry) {
+  const allowed = newsletterRelationshipImports.get(from);
+  return to === `${appSource}features/portfolio/relationships/public.ts` && allowed
+    && ['named', 'other'].includes(entry.kind) && entry.names.length > 0
+    && entry.names.every(name => allowed.has(name));
+}
+
 function approvedSnapshotImport(file, entry) {
   return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`
     || file === `${appSource}features/modules/workspace/ordinary-save/ordinary-save.ts`)
@@ -95,6 +109,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
+  '@capiro/shared/workspace-template-studio',
 ]);
 
 export const serverAdapters = new Map([
@@ -195,7 +210,7 @@ function edgeViolation(from, to, entry, module) {
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
-  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
+  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
   if (feature(from) === 'portfolio' && feature(to) === 'portfolio' && portfolioArea(from) !== portfolioArea(to) && !publicEntry(to)) return `${from}: private Portfolio domain import ${to}; use public.ts or a named *-public.ts entry`;
   return undefined;
 }

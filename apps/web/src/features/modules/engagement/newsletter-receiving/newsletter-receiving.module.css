@@ -7,9 +7,6 @@
 .screen button {
   border-radius: 10px;
 }
-.readAction {
-  color: var(--foreground);
-}
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 354px;

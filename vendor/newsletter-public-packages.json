@@ -178,7 +178,72 @@
         "newsletter-survey-receiving",
         "workspace-template-studio"
       ]
+    },
+    {
+      "file": "capiro-shared-0.0.0-d209ebd4-1b648808b321.tgz",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "d209ebd4cc759bf6409a2df7af578b125964b77a",
+      "sourceTree": "390a179bcc3651f3981eb49f793aeacd35e250f8",
+      "distributionPath": "vendor/capiro-shared-0.0.0-d209ebd4-1b648808b321.tgz",
+      "bytes": 736752,
+      "sha256": "1b648808b3213381512437fe36fdf781d9c237464ca70d65602469f43e211b5f",
+      "integrity": "sha512-A4I5Lt0x8VaXWc8F+DEUBCgnXj7ImmY5bRaCuJLa58SPq9gUEcha7b7cWlAmY2T3Heq92d7ILGeZY31Xf5Z0lA==",
+      "regularEntryCount": 321,
+      "qualification": "Release w3-shared-d209ebd4/distribution-receipt.json SCOPED_PASS: 6 actual installed public runtime cases plus strict NodeNext/Bundler declarations. Integration matched 321 archive/physical install entries, 76 committed source/compiler inputs, 248 generated outputs and 88 public export bindings. Core167 accepted source/native evidence reused; paired frontend consumers and authenticated deployed acceptance remain separate.",
+      "status": "active-packed-frontend-input; paired consumers and authenticated deployed acceptance tracked separately",
+      "browserExports": [
+        "@capiro/shared/newsletter",
+        "@capiro/shared/newsletter-render",
+        "@capiro/shared/workspace-template-studio"
+      ],
+      "runtimeClosure": [
+        "json-receiving",
+        "newsletter",
+        "newsletter-asset-management-receiving",
+        "newsletter-brand-receiving",
+        "newsletter-collaboration-receiving",
+        "newsletter-fonts",
+        "newsletter-fonts.catalog",
+        "newsletter-receiving",
+        "newsletter-render",
+        "newsletter-social-share",
+        "newsletter-survey-receiving",
+        "workspace-template-studio"
+      ]
+    },
+    {
+      "file": "capiro-shared-0.0.0-6146f9b6-ffb6476ab374.tgz",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "6146f9b6cffb96c0b1b120257bb991247574b476",
+      "sourceTree": "60be1ff10308663d4bbe25c57ee03af478f06544",
+      "distributionPath": "vendor/capiro-shared-0.0.0-6146f9b6-ffb6476ab374.tgz",
+      "bytes": 742493,
+      "sha256": "ffb6476ab3742f506d21c10419302f53cd3bc849fb201bd6c1389a317b3cf13f",
+      "integrity": "sha512-j8KiIQcv9rXqaLRQeGyujFAafja13An6IRN8bG9wjJyjOK1Ycv3TkRlkcwDqYadh4xiUkCOx4FWdIgGYPxJCrQ==",
+      "regularEntryCount": 327,
+      "qualification": "Release w3-shared-6146f9b6/distribution-receipt.json SCOPED_PASS: 5 actual installed public runtime cases plus strict NodeNext/Bundler declarations. Integration matched 327 archive/physical install entries, 78 committed source/compiler inputs, 252 generated outputs and 88 public export bindings. Core169 accepted source/native evidence reused; paired frontend consumers and authenticated deployed acceptance remain separate.",
+      "status": "active-packed-frontend-input; paired consumers and authenticated deployed acceptance tracked separately",
+      "browserExports": [
+        "@capiro/shared/newsletter",
+        "@capiro/shared/newsletter-render",
+        "@capiro/shared/workspace-template-studio"
+      ],
+      "runtimeClosure": [
+        "json-receiving",
+        "newsletter",
+        "newsletter-asset-management-receiving",
+        "newsletter-brand-receiving",
+        "newsletter-collaboration-receiving",
+        "newsletter-delivery-receiving",
+        "newsletter-fonts",
+        "newsletter-fonts.catalog",
+        "newsletter-receiving",
+        "newsletter-render",
+        "newsletter-social-share",
+        "newsletter-survey-receiving",
+        "workspace-template-studio"
+      ]
     }
   ],
-  "activeFile": "capiro-shared-0.0.0-27ff8b12-b3039217bfeb.tgz"
+  "activeFile": "capiro-shared-0.0.0-6146f9b6-ffb6476ab374.tgz"
 }
