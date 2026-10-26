@@ -47,6 +47,8 @@ export function conversationRoute(path: string) {
     path === "submit" ||
     path === "history" ||
     path === "cancel" ||
+    path === "feedback" ||
+    path === "feedback-read" ||
     path === "events"
   )
     return path;
