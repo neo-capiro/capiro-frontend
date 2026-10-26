@@ -4470,5 +4470,14 @@
     "reason": "One82-line synthetic mounted fixture installs Directory/correction responses and records queries, writes and aborted requests for the same actual application flow. Delayed reads/writes and real-shape responses make target/lifetime assertions meaningful; it does not implement or claim Core authorization. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
     "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "HillDayResolution > <anonymous> #3",
+    "fingerprint": "d5c748621238d6e8c900b597f9877d32b7b1c1e678e4b8533e0de09d00837140",
+    "reason": "This111-line meeting-map callback renders one resolution card: office facts and its attendee rows, including explicit existing correction/selection buttons. It owns no independent request, state, authorization or persistence mechanism; callbacks delegate to the surrounding existing resolution/correction owners. Its nested JSX keeps the meeting/attendee target visibly bound. Exact body is unchanged between05f58f4c and1bedc345; independent review now makes this specific responsibility explicit after the container-file change invalidated legacy whole-file coverage. No refactor or new product acceptance is implied. See W3-WS11-PR197-REVIEW.md addendum.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
