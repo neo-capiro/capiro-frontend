@@ -23,7 +23,20 @@
       "regularEntryCount": 288,
       "qualification": "Release W3-SHARED-DISTRIBUTION-HANDOFF.txt; one actual build/pack; public declarations, imports and scoped browser closure accepted by Root; PRICE_LOCK_COPY and PRICE_CHANGE_COPY equal previous input strings; public root is not a pure browser closure",
       "status": "active-packed-frontend-input; paired WS15 consumer and live acceptance tracked separately"
+    },
+    {
+      "file": "capiro-shared-0.0.0-3b4937ad-40ac9d745261.tgz",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "3b4937ad2f5d15b85ea1c4474ed48b4a39e2f0ac",
+      "sourceTree": "122b0c926a6a6f864c9aed36d8f5be465064976e",
+      "distributionPath": "vendor/capiro-shared-0.0.0-3b4937ad-40ac9d745261.tgz",
+      "bytes": 696105,
+      "sha256": "40ac9d74526123da69c321a537a8ec842960ee226acb53e41c0c8d5d65563598",
+      "integrity": "sha512-j/XFzPmzJCUsbKve+8gmtTXIyBLqMxHdzWthYBmnVBcGqKrWGssK4HrEGO90ANyqTXOJRmOUwdD3oews4p5kzw==",
+      "regularEntryCount": 288,
+      "qualification": "Release w3-shared-3b4937ad/distribution-receipt.json SCOPED_PASS:13 WS13 runtime,15 WS15 preview,public NodeNext/Bundler and import boundary; byte-identical WS15 browser closure evidence reused. Integration independently matched15 targeted installed files.",
+      "status": "active-packed-frontend-input; paired WS13 staging consumer and ordinary-role PostgreSQL acceptance remain open"
     }
   ],
-  "activeFile": "capiro-shared-0.0.0-d68024dc-e92d6c6129f7.tgz"
+  "activeFile": "capiro-shared-0.0.0-3b4937ad-40ac9d745261.tgz"
 }

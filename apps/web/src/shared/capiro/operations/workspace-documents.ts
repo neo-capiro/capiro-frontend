@@ -148,7 +148,7 @@ const ordinarySaveSource =
 const ordinaryHash = z.string().regex(/^[a-f0-9]{64}$/);
 // The editor sends only supported title/section edits. Core merges config;
 // unprojected config, body, documents and associations are never round-tripped.
-export const ordinarySaveBody = z
+export const manualSaveBody = z
   .object({
     requestId: workspaceId,
     expectedStateHash: ordinaryHash,
@@ -174,6 +174,32 @@ export const ordinarySaveBody = z
       new TextEncoder().encode(JSON.stringify(value)).byteLength <= 1_000_000,
     "The save exceeds the supported byte limit.",
   );
+export const newsletterSaveBody = z
+  .object({
+    requestId: workspaceId,
+    expectedStateHash: ordinaryHash,
+    expectedClientId: workspaceId.nullable(),
+    label: z.literal("Newsletter revision"),
+    draft: z.object({ docTitle: z.string().min(1).max(500) }).strict(),
+    documents: z
+      .array(
+        z
+          .object({
+            id: workspaceId,
+            name: z.string().min(1).max(400),
+            body: persistedDocumentBody.extend({ newsletter: newsletterBody }),
+          })
+          .strict(),
+      )
+      .length(1),
+  })
+  .strict()
+  .refine(
+    (value) =>
+      new TextEncoder().encode(JSON.stringify(value)).byteLength <= 1_000_000,
+    "The save exceeds the supported byte limit.",
+  );
+export const ordinarySaveBody = z.union([manualSaveBody, newsletterSaveBody]);
 export const ordinaryDraftState = z
   .object({
     schemaVersion: z.literal(1),

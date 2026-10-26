@@ -81,6 +81,19 @@ vi.mock("../src/shared/capiro/queries", () => ({
 vi.mock("../src/features/modules/workspace/newsletter/NewsletterPaper", () => ({
   NewsletterPaper: () => null,
 }));
+// Existing static presentation witnesses do not mount journal/auth lifetimes.
+// The newsletter atomic-save browser suite covers the real owner and binding.
+vi.mock(
+  "../src/features/modules/workspace/newsletter/ExistingNewsletterSave",
+  () => ({
+    ExistingNewsletterSave: ({
+      editor,
+      ...props
+    }: import("react").ComponentProps<
+      typeof import("../src/features/modules/workspace/newsletter/ExistingNewsletterSave").ExistingNewsletterSave
+    >) => createElement(editor, props),
+  }),
+);
 vi.mock(
   "../src/features/modules/workspace/newsletter/NewsletterComments",
   () => ({ NewsletterComments: () => null }),
@@ -320,7 +333,7 @@ describe("held draft client recovery", () => {
       renderElement(createElement(DraftClientAssociation, props)),
     ).toContain("not confirmed");
   });
-  it("keeps unsaved newsletter edits when its held association is confirmed", async () => {
+  it("keeps local edits but refuses existing save without the atomic owner", async () => {
     const props = { initialClientId: "", existing: held, onClose: vi.fn() };
     let view = render(props);
     view.setTitle("Unsaved title");
@@ -332,15 +345,9 @@ describe("held draft client recovery", () => {
     expect(view.title).toBe("Unsaved title");
     expect(view.body.subject).toBe("Unsaved subject");
     await view.save();
-    expect(h.run["workspace.document.update"]).toHaveBeenCalledWith(
-      expect.objectContaining({
-        body: expect.objectContaining({
-          name: "Unsaved title",
-          body: expect.objectContaining({
-            newsletter: expect.objectContaining({ subject: "Unsaved subject" }),
-          }),
-        }),
-      }),
+    expect(h.run["workspace.document.update"]).not.toHaveBeenCalled();
+    expect(render(props).error?.message).toContain(
+      "verify its atomic save state",
     );
   });
   it("refuses to mount staging for a held newsletter even on the stage view", () => {

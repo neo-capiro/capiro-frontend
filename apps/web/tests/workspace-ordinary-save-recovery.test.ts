@@ -111,20 +111,10 @@ it("refuses a different request ID or a disposed authority without erasing inten
 });
 it("refuses changed payload and known-outcome reversal in the actual journal", async () => {
   const intent = await reserve();
+  const changed = structuredClone(intent);
+  changed.body.draft.docTitle = "Changed";
   await expect(
-    updateRecovery(
-      key,
-      requestId,
-      {
-        ...intent,
-        body: {
-          ...intent.body,
-          draft: { ...intent.body.draft, docTitle: "Changed" },
-        },
-      },
-      ordinaryRecoveryContract,
-      guard,
-    ),
+    updateRecovery(key, requestId, changed, ordinaryRecoveryContract, guard),
   ).rejects.toThrow();
   const refused: OrdinaryRetained = {
     ...intent,

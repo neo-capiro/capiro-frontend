@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
+import type { workspaceDraft } from "../../../../shared/capiro/operations/workspace-documents";
 import {
   newsletterStagingBody,
   type SavedNewsletterRevision,
@@ -62,7 +63,7 @@ export async function verifyStagingActor(
     throw new Error("This document is unavailable for Newsletter staging.");
 }
 export function requireCompatibleSponsor(
-  revision: SavedNewsletterRevision,
+  revision: Pick<SavedNewsletterRevision, "clientId">,
   sponsor: { kind: string; clientRefs: { clientId: string }[] },
 ) {
   const compatible = revision.clientId
@@ -76,6 +77,22 @@ export function requireCompatibleSponsor(
       "Select an Outreach session with the exact saved client sponsor, or an explicit firm sponsor for firm content.",
     );
 }
+/** Old requests predate projection pins. Current v2 text cannot describe them. */
+export function historicalStagingSource(
+  draft: z.infer<typeof workspaceDraft>,
+  draftId: string,
+) {
+  if (
+    draft.id !== draftId ||
+    draft.prospectId ||
+    draft.clientAssociation === "held" ||
+    draft.clientId === undefined
+  )
+    throw new Error(
+      "The original staging source has no verified current client association.",
+    );
+  return { draftId: draft.id, clientId: draft.clientId };
+}
 export async function readStagingSelection(
   api: StagingApi,
   draftId: string,
@@ -83,14 +100,27 @@ export async function readStagingSelection(
   sessionId: string,
   signal: AbortSignal,
   guard: () => void,
+  historical = false,
 ) {
-  const revision = await api.request(
-    "workspace.newsletter.revision",
-    { params: { draftId, versionId } },
-    { signal },
-  );
+  const revision = historical
+    ? historicalStagingSource(
+        await api.request(
+          "workspace.draft",
+          { params: { id: draftId } },
+          { signal },
+        ),
+        draftId,
+      )
+    : await api.request(
+        "workspace.newsletter.revision",
+        { params: { draftId, versionId } },
+        { signal },
+      );
   guard();
-  if (revision.draftId !== draftId || revision.versionId !== versionId)
+  if (
+    "versionId" in revision &&
+    (revision.draftId !== draftId || revision.versionId !== versionId)
+  )
     throw new Error(
       "The selected saved revision does not match the source receipt.",
     );
@@ -107,13 +137,29 @@ export async function readStagingSelection(
   requireCompatibleSponsor(revision, session.spec.sponsor);
   return { revision, session };
 }
+export function verifyStagingProjection(
+  original: StagingIntent,
+  revision: SavedNewsletterRevision | Pick<SavedNewsletterRevision, "clientId">,
+) {
+  if (original.body.projectionVersion === undefined) return;
+  if (
+    !("projectionVersion" in revision) ||
+    revision.snapshotHash !== original.body.snapshotHash ||
+    revision.projectionVersion !== original.body.projectionVersion ||
+    revision.projectionHash !== original.body.projectionHash
+  )
+    throw new Error(
+      "The saved projection changed. Review the selected text again; any original request remains held.",
+    );
+}
 export function verifyStagingReceipt(
   receipt: NewsletterStagingReceipt,
   original: StagingIntent,
-  revision: SavedNewsletterRevision,
+  revision: SavedNewsletterRevision | Pick<SavedNewsletterRevision, "clientId">,
 ) {
   const body = original.body;
   const staged = receipt.staged;
+  verifyStagingProjection(original, revision);
   if (
     receipt.batchId !== body.requestId ||
     staged.requestId !== body.requestId ||
@@ -121,10 +167,14 @@ export function verifyStagingReceipt(
     staged.draftId !== body.draftId ||
     staged.versionId !== body.versionId ||
     staged.snapshotHash !== body.snapshotHash ||
+    staged.projectionVersion !== body.projectionVersion ||
+    staged.projectionHash !== body.projectionHash ||
     staged.clientId !== revision.clientId ||
-    staged.savedAt !== revision.savedAt ||
-    staged.authorId !== revision.authorId ||
-    staged.authorKind !== revision.authorKind ||
+    ("savedAt" in revision &&
+      (staged.savedAt !== revision.savedAt ||
+        staged.authorId !== revision.authorId ||
+        staged.authorKind !== revision.authorKind)) ||
+    (body.projectionVersion === undefined && !receipt.replayed) ||
     receipt.stateVersion !==
       body.expectedStateVersion + (receipt.changed ? 1 : 0) ||
     receipt.status !== (receipt.changed ? "applied" : "no_change")

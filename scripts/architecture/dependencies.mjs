@@ -46,6 +46,13 @@ function approvedSnapshotImport(file, entry) {
     && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
 }
 
+function approvedNewsletterProjectionTypeImport(file, entry) {
+  // Only whole-clause import type retains named bindings with kind other.
+  return file === `${appSource}shared/capiro/operations/workspace-newsletter-staging.ts`
+    && entry.specifier === '@capiro/shared' && entry.kind === 'other'
+    && entry.names.length === 1 && entry.names[0] === 'workspaceSavedOutreachRevisionWithinTx';
+}
+
 function approvedPricingImport(file, module, entry) {
   return file === pricingOwner && entry.specifier === '@capiro/shared'
     && entry.kind === 'named' && entry.names.length === 2
@@ -200,7 +207,7 @@ export function inspectDependencies(file, module, files, approvedExports = publi
     const { specifier } = entry;
     if (specifier === null) { errors.push(`${file}: computed import forbidden`); continue; }
     if (/meri-greenfield|capirov2|apps\/api|^https?:|^node:/.test(specifier)) errors.push(`${file}: restricted runtime/repository import ${specifier}`);
-    if (specifier === '@capiro/shared' ? !(approvedPricingImport(file, module, entry) || approvedSnapshotImport(file, entry)) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
+    if (specifier === '@capiro/shared' ? !(approvedPricingImport(file, module, entry) || approvedSnapshotImport(file, entry) || approvedNewsletterProjectionTypeImport(file, entry)) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
     const { local, resolved } = resolveImport(file, specifier, files);
     if (serverAdapters.has(file) && !serverAdapters.get(file).has(resolved ?? specifier)) errors.push(`${file}: server adapter dependency is not allocated: ${specifier}`);
     if (!local) continue;

@@ -4,8 +4,13 @@ import { moduleRouteFixtures } from "./module-route-fixtures";
 import { serviceErrorResponse } from "../../src/shared/capiro/gateway-errors";
 import { newsletterStagingOperations } from "../../src/shared/capiro/operations/workspace-newsletter-staging";
 import {
+  stagingScope,
+  type StagingIntent,
+} from "../../src/features/modules/workspace/newsletter/staging-model";
+import {
   draft,
   revision,
+  emptyRevision,
   session,
   sessionId,
   version,
@@ -86,9 +91,16 @@ test("explicit saved revision review stages only its exact references and opens 
   ).toBeDisabled();
   await select(page);
   await expect(
+    page.getByText(revision.contentSkeleton.subject, { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(revision.snapshot.docTitle, { exact: true }),
+  ).toHaveCount(0);
+  await expect(
     page.getByRole("button", { name: "Stage saved revision", exact: true }),
   ).toBeDisabled();
   await review(page);
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({
     path: info.outputPath("newsletter-staging-desktop.png"),
     fullPage: true,
@@ -109,6 +121,8 @@ test("explicit saved revision review stages only its exact references and opens 
           draftId: draft.id,
           versionId: revision.versionId,
           snapshotHash: revision.snapshotHash,
+          projectionVersion: revision.projectionVersion,
+          projectionHash: revision.projectionHash,
           expectedStateVersion: 3,
         },
       },
@@ -126,6 +140,356 @@ test("explicit saved revision review stages only its exact references and opens 
   await expect(
     page.getByRole("heading", { name: "Saved revision staged" }),
   ).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("empty authored subject stays empty and carries the producer projection pins", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await page.route("**/api/capiro/workspace.newsletter.revision?*", (r) =>
+    r.fulfill({ json: emptyRevision }),
+  );
+  await page.route("**/api/capiro/workspace.newsletter.stage", (r) =>
+    r.fulfill({ json: receipt(r.request().postDataJSON().body) }),
+  );
+  await open(page);
+  await select(page);
+  await expect(
+    page.getByText("Empty subject (staged unchanged)", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(revision.snapshot.docTitle, { exact: true }),
+  ).toHaveCount(0);
+  await review(page);
+  await page
+    .getByRole("button", { name: "Stage saved revision", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Saved revision staged" }),
+  ).toBeVisible();
+  expect(writes).toHaveLength(1);
+  expect(writes[0]!.body).toEqual({
+    params: { sessionId },
+    body: {
+      requestId: expect.any(String),
+      draftId: draft.id,
+      versionId: revision.versionId,
+      snapshotHash: emptyRevision.snapshotHash,
+      projectionVersion: emptyRevision.projectionVersion,
+      projectionHash: emptyRevision.projectionHash,
+      expectedStateVersion: 3,
+    },
+  });
+});
+
+test("changed projection between review and dispatch fences staging without a POST", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await open(page);
+  await select(page);
+  await review(page);
+  await page.route("**/api/capiro/workspace.newsletter.revision?*", (r) =>
+    r.fulfill({ json: { ...revision, projectionHash: "e".repeat(64) } }),
+  );
+  await page
+    .getByRole("button", { name: "Stage saved revision", exact: true })
+    .click();
+  await expect(page.getByRole("alert")).toContainText(
+    "saved projection changed",
+  );
+  await expect(
+    page.getByRole("button", { name: "Retry staging recovery" }),
+  ).toBeVisible();
+  expect(writes).toEqual([]);
+});
+
+test("wrong returned projection stays unknown and reload replays the identical pinned request", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await page.route("**/api/capiro/workspace.newsletter.stage", (r) => {
+    const result = receipt(r.request().postDataJSON().body);
+    result.staged.projectionHash = "e".repeat(64);
+    return r.fulfill({ json: result });
+  });
+  await open(page);
+  await select(page);
+  await review(page);
+  await page
+    .getByRole("button", { name: "Stage saved revision", exact: true })
+    .click();
+  await expect(page.getByRole("alert")).toContainText("receipt does not match");
+  await expect(
+    page.getByRole("heading", { name: "Saved revision staged" }),
+  ).toHaveCount(0);
+  await page.route("**/api/capiro/workspace.newsletter.stage", (r) =>
+    r.fulfill({ json: receipt(r.request().postDataJSON().body, true) }),
+  );
+  await open(page);
+  await review(page);
+  await page.getByRole("button", { name: "Recover original staging" }).click();
+  await expect(page.getByText(/recovered original receipt/)).toBeVisible();
+  expect(writes).toHaveLength(2);
+  expect(writes[1]).toEqual(writes[0]);
+});
+
+test("changed saved revision, refreshed projection and incompatible scope all require new review", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  const otherVersion = {
+    ...version,
+    id: "90000000-0000-4000-8000-000000000002",
+    label: "Second saved revision",
+  };
+  await page.route("**/api/capiro/workspace.draft.versions?*", (r) =>
+    r.fulfill({ json: [version, otherVersion] }),
+  );
+  let projectionHash = revision.projectionHash;
+  await page.route("**/api/capiro/workspace.newsletter.revision?*", (r) => {
+    const input = JSON.parse(
+      new URL(r.request().url()).searchParams.get("input")!,
+    );
+    return r.fulfill({
+      json: { ...revision, versionId: input.params.versionId, projectionHash },
+    });
+  });
+  await open(page);
+  await select(page);
+  await review(page);
+  for (const label of [/Second saved revision/, /Saved policy revision/]) {
+    await page
+      .getByRole("combobox", { name: "Saved Newsletter revision" })
+      .click();
+    await page.getByRole("option", { name: label }).click();
+    await expect(
+      page.getByRole("checkbox", { name: /I reviewed this saved text/ }),
+    ).not.toBeChecked();
+  }
+  await review(page);
+  projectionHash = "e".repeat(64);
+  await page
+    .getByRole("button", { name: "Refresh saved revision and session" })
+    .click();
+  await expect(
+    page.getByRole("checkbox", { name: /I reviewed this saved text/ }),
+  ).not.toBeChecked();
+  await review(page);
+  await page.route("**/api/capiro/engagement.session?*", (r) =>
+    r.fulfill({
+      json: {
+        ...session,
+        spec: {
+          ...session.spec,
+          sponsor: {
+            kind: "client",
+            label: "Other client",
+            clientRefs: [{ clientId: sessionId }],
+          },
+        },
+      },
+    }),
+  );
+  await page
+    .getByRole("button", { name: "Refresh saved revision and session" })
+    .click();
+  await expect(page.getByRole("alert")).toContainText(
+    "exact saved client sponsor",
+  );
+  await expect(
+    page.getByRole("button", { name: "Stage saved revision", exact: true }),
+  ).toBeDisabled();
+  await page.route("**/api/capiro/engagement.session?*", (r) =>
+    r.fulfill({ json: session }),
+  );
+  await page
+    .getByRole("button", { name: "Refresh saved revision and session" })
+    .click();
+  await expect(
+    page.getByRole("checkbox", { name: /I reviewed this saved text/ }),
+  ).not.toBeChecked();
+  expect(writes).toEqual([]);
+});
+
+for (const refusal of [
+  "overlength",
+  "image-only",
+  "invalid body",
+  "missing body",
+])
+  test(`producer ${refusal} refusal uses the existing unavailable boundary without staging`, async ({
+    page,
+  }) => {
+    const { writes } = await setup(page);
+    await page.route("**/api/capiro/workspace.newsletter.revision?*", (r) =>
+      r.fulfill({
+        status: 404,
+        json: {
+          message: `Saved Newsletter ${refusal} is unavailable for staging`,
+        },
+      }),
+    );
+    await open(page);
+    await page
+      .getByRole("combobox", { name: "Saved Newsletter revision" })
+      .click();
+    await page.getByRole("option", { name: /Saved policy revision/ }).click();
+    await expect(
+      page.getByText(/Saved revision staging is unavailable until/),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Stage saved revision", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("heading", { name: "Review saved content for Outreach" }),
+    ).toHaveCount(0);
+    expect(writes).toEqual([]);
+  });
+
+// Persist a pre-pin v1 journal fixture as an older app did, then let the mounted
+// production recovery owner read/decrypt/validate it. No production test hook.
+async function seedHistoricalRequest(page: Page, original: StagingIntent) {
+  const scope = stagingScope(
+    {
+      tenantId: testIdentity.tenant.id,
+      userId: testIdentity.user.id,
+      clerkUserId: testIdentity.user.clerkUserId,
+    },
+    draft.id,
+  );
+  await page.evaluate(
+    async ({ scope, original }) => {
+      const requestId = original.body.requestId;
+      const key = await crypto.subtle.generateKey(
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt", "decrypt"],
+      );
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const ciphertext = await crypto.subtle.encrypt(
+        {
+          name: "AES-GCM",
+          iv,
+          additionalData: new TextEncoder().encode(scope),
+        },
+        key,
+        new TextEncoder().encode(
+          JSON.stringify({
+            version: 1,
+            scope,
+            requestId,
+            state: "pending",
+            data: original,
+          }),
+        ),
+      );
+      await new Promise<void>((resolve, reject) => {
+        const request = indexedDB.open("capiro-command-recovery-v1", 1);
+        request.onupgradeneeded = () =>
+          request.result.createObjectStore("records");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+          const db = request.result;
+          const tx = db.transaction("records", "readwrite");
+          tx.objectStore("records").put(
+            { version: 1, requestId, key, iv, ciphertext },
+            scope,
+          );
+          tx.oncomplete = () => {
+            db.close();
+            resolve();
+          };
+          tx.onabort = () => {
+            db.close();
+            reject(tx.error);
+          };
+        };
+      });
+      localStorage.setItem(
+        `capiro-command-fence-v1:${scope}`,
+        JSON.stringify({ version: 1, requestId }),
+      );
+    },
+    { scope, original },
+  );
+}
+
+test("historical unpinned recovery holds on missing current client before recovering without a v2 projection", async ({
+  page,
+}) => {
+  const { writes, errors } = await setup(page);
+  let projectionReads = 0;
+  await page.route("**/api/capiro/workspace.newsletter.revision?*", (r) => {
+    projectionReads++;
+    return r.fulfill({
+      status: 404,
+      json: { message: "Historical Newsletter cannot project v2" },
+    });
+  });
+  const original = {
+    sessionId,
+    body: {
+      requestId: "b0000000-0000-4000-8000-000000000001",
+      draftId: draft.id,
+      versionId: revision.versionId,
+      snapshotHash: revision.snapshotHash,
+      expectedStateVersion: 3,
+    },
+  };
+  await page.goto(route);
+  await seedHistoricalRequest(page, original);
+  await page.route("**/api/capiro/workspace.newsletter.stage", (r) =>
+    r.fulfill({ json: receipt(r.request().postDataJSON().body, true) }),
+  );
+  await open(page);
+  await expect(
+    page.getByRole("heading", { name: "Recover historical staging receipt" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(revision.contentSkeleton.body, { exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Recover original staging" }),
+  ).toBeDisabled();
+  await page
+    .getByRole("checkbox", {
+      name: "I want to recover this original staging request.",
+    })
+    .check();
+  await page.route("**/api/capiro/workspace.draft?*", (r) =>
+    r.fulfill({ json: { ...draft, clientId: undefined } }),
+  );
+  await page.getByRole("button", { name: "Recover original staging" }).click();
+  await expect(page.getByRole("alert")).toContainText(
+    "no verified current client association",
+  );
+  expect(writes).toEqual([]);
+  await page.route("**/api/capiro/workspace.draft?*", (r) =>
+    r.fulfill({ json: draft }),
+  );
+  await page.getByRole("button", { name: "Retry staging recovery" }).click();
+  await page
+    .getByRole("checkbox", {
+      name: "I want to recover this original staging request.",
+    })
+    .check();
+  await page.getByRole("button", { name: "Recover original staging" }).click();
+  await expect(page.getByText(/recovered original receipt/)).toBeVisible();
+  expect(writes).toEqual([
+    {
+      key: "workspace.newsletter.stage",
+      body: { params: { sessionId }, body: original.body },
+    },
+  ]);
+  await page
+    .getByRole("button", { name: "Acknowledge staging receipt" })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Saved revision staged" }),
+  ).toHaveCount(0);
+  expect(projectionReads).toBe(0);
   expect(errors).toEqual([]);
 });
 test("lost response then reload recovers original key/version without restaging later session edits", async ({

@@ -8,16 +8,22 @@ import {
 import {
   newsletterStagingOperations,
   newsletterStagingReceipt,
+  newsletterStagingBody,
 } from "../src/shared/capiro/operations/workspace-newsletter-staging";
 import {
   requireCompatibleSponsor,
   verifyStagingReceipt,
+  verifyStagingProjection,
+  stagingRecovery,
+  historicalStagingSource,
 } from "../src/features/modules/workspace/newsletter/staging-model";
 const body = {
   requestId: "b0000000-0000-4000-8000-000000000001",
   draftId: draft.id,
   versionId: revision.versionId,
   snapshotHash: revision.snapshotHash,
+  projectionVersion: revision.projectionVersion,
+  projectionHash: revision.projectionHash,
   expectedStateVersion: 3,
 };
 it("pins selected revision to Workspace and fixed literal staging to Core", () => {
@@ -35,6 +41,69 @@ it("pins selected revision to Workspace and fixed literal staging to Core", () =
     method: "POST",
     path: "/engagement/outreach-v3/sessions/:sessionId/newsletter-staging",
   });
+});
+
+it("retains the published projection identity and refuses partial/unsupported pins", () => {
+  const intent = { sessionId, body };
+  expect(stagingRecovery.schema.parse(intent)).toEqual(intent);
+  for (const change of [
+    { projectionHash: undefined },
+    { projectionVersion: undefined },
+    { projectionHash: "invalid" },
+    { projectionVersion: "unsupported" },
+  ]) {
+    expect(
+      newsletterStagingBody.safeParse({ ...body, ...change }).success,
+    ).toBe(false);
+    expect(
+      newsletterStagingReceipt.safeParse({
+        ...receipt(body),
+        staged: { ...receipt(body).staged, ...change },
+      }).success,
+    ).toBe(false);
+  }
+});
+it.each([
+  { projectionHash: "e".repeat(64) },
+  { projectionVersion: "workspace-outreach-plaintext-v1" as const },
+])("rejects changed selected or returned projection %j", (change) => {
+  expect(() =>
+    verifyStagingProjection({ sessionId, body }, { ...revision, ...change }),
+  ).toThrow(/projection changed/);
+  expect(() =>
+    verifyStagingReceipt(
+      { ...receipt(body), staged: { ...receipt(body).staged, ...change } },
+      { sessionId, body },
+      revision,
+    ),
+  ).toThrow(/receipt does not match/);
+});
+it("keeps historical request bytes unpinned and accepts only its exact replay receipt", () => {
+  const {
+    projectionVersion: _version,
+    projectionHash: _hash,
+    ...oldBody
+  } = body;
+  void _version;
+  void _hash;
+  const original = { sessionId, body: oldBody };
+  expect(stagingRecovery.schema.parse(original)).toEqual(original);
+  const source = historicalStagingSource(draft, draft.id);
+  expect(() =>
+    verifyStagingReceipt(receipt(oldBody, true), original, source),
+  ).not.toThrow();
+  expect(() =>
+    verifyStagingReceipt(receipt(body, true), original, source),
+  ).toThrow();
+  expect(() =>
+    verifyStagingReceipt(receipt(oldBody, false), original, source),
+  ).toThrow();
+  expect(() =>
+    historicalStagingSource({ ...draft, clientId: undefined }, draft.id),
+  ).toThrow();
+  expect(() =>
+    historicalStagingSource({ ...draft, clientAssociation: "held" }, draft.id),
+  ).toThrow();
 });
 it.each(["content", "commands", "actor", "tenant", "sender", "sendIntent"])(
   "rejects caller %s from the staging request",
