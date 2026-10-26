@@ -12,8 +12,6 @@ import {
 } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
-  Badge,
-  DataTable,
   Field,
   Modal,
   SelectInput,
@@ -23,6 +21,8 @@ import {
 import styles from "../workspace.module.css";
 import { TemplateSettings } from "./TemplateSettings";
 import presentation from "./template-presentation.module.css";
+import { TemplateHistory } from "./TemplateHistory";
+import historyStyles from "./template-history.module.css";
 
 function ApplicationReceipt({
   receipt,
@@ -205,15 +205,26 @@ export function TemplateDetails({
   return (
     <Modal
       open
-      className={mode === "settings" ? presentation.settingsDialog : undefined}
+      className={
+        mode === "settings"
+          ? presentation.settingsDialog
+          : mode === "history"
+            ? historyStyles.dialog
+            : undefined
+      }
       onOpenChange={(open) => {
         if (!open) onClose();
       }}
+      footer={
+        mode === "history" ? (
+          <ActionButton onClick={onClose}>Close</ActionButton>
+        ) : undefined
+      }
       title={
         mode === "use"
           ? "Use template · Questions"
           : mode === "history"
-            ? "Template version history"
+            ? (query.data?.template.name ?? "Template version history")
             : "Edit template"
       }
     >
@@ -224,7 +235,7 @@ export function TemplateDetails({
       >
         {query.data && (
           <div className={mode === "settings" ? undefined : styles.form}>
-            {mode !== "settings" && <h3>{query.data.template.name}</h3>}
+            {mode === "use" && <h3>{query.data.template.name}</h3>}
             {mode === "use" ? (
               <UseTemplate detail={query.data} />
             ) : mode === "settings" ? (
@@ -238,38 +249,10 @@ export function TemplateDetails({
               />
             ) : (
               <>
-                <p>{query.data.template.description}</p>
-                <Badge>{query.data.template.scope}</Badge>
-                <DataTable
-                  rows={query.data.versions}
-                  rowKey={(version) => version.id}
-                  caption="Template version history"
-                  columns={[
-                    {
-                      key: "version",
-                      label: "VERSION",
-                      render: (version) => `v${version.versionNumber}`,
-                    },
-                    {
-                      key: "status",
-                      label: "STATE",
-                      render: (version) => version.lifecycle,
-                    },
-                    {
-                      key: "created",
-                      label: "CREATED",
-                      render: (version) =>
-                        new Date(version.createdAt).toLocaleString(),
-                    },
-                    {
-                      key: "hash",
-                      label: "PIN",
-                      render: (version) => version.contentHash.slice(0, 12),
-                    },
-                  ]}
-                />
+                <TemplateHistory key={id} detail={query.data} />
                 {query.data.capabilities.canEdit && (
                   <ActionButton
+                    className={historyStyles.edit}
                     onClick={() => {
                       onEdit(query.data!);
                       onClose();

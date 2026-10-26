@@ -29,6 +29,7 @@ import {
 import styles from "../workspace.module.css";
 import { TemplateDetails } from "./TemplateDetails";
 import { TemplateWizard } from "./TemplateWizard";
+import { CampaignPicker } from "./CampaignPicker";
 import { workspaceHref } from "../workspace-route";
 import presentation from "./template-presentation.module.css";
 
@@ -65,11 +66,6 @@ export function TemplateStudio({
       sort,
     },
   });
-  const campaigns = useCapiroQuery(
-    "engagement.sessions",
-    { query: { limit: 100, offset: 0, includeArchived: false } },
-    { enabled: fromCampaign },
-  );
   const duplicate = useCapiroMutation("workspace.template.duplicate");
   const archive = useCapiroMutation("workspace.template.archive");
   const publish = useCapiroMutation("workspace.template.publish");
@@ -163,7 +159,12 @@ export function TemplateStudio({
               <ActionButton aria-label="More template actions">⋯</ActionButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onSelect={() => setFromCampaign(true)}>
+              <DropdownMenuItem
+                onSelect={() => {
+                  setSessionId("");
+                  setFromCampaign(true);
+                }}
+              >
                 Save campaign as template
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -302,28 +303,13 @@ export function TemplateStudio({
         }
       >
         <div className={styles.form}>
-          <Field label="Source campaign" htmlFor="template-session-id">
-            <SelectInput
-              id="template-session-id"
-              disabled={saveCampaign.pending}
+          {fromCampaign && (
+            <CampaignPicker
               value={sessionId}
-              onValueChange={setSessionId}
-              options={[
-                { value: "", label: "Choose an Outreach campaign" },
-                ...(campaigns.data ?? []).map((campaign) => ({
-                  value: campaign.id,
-                  label:
-                    campaign.title || campaign.topic || "Untitled campaign",
-                })),
-              ]}
+              onChange={setSessionId}
+              disabled={saveCampaign.pending}
             />
-          </Field>
-          {campaigns.error && (
-            <p role="alert" className={styles.error}>
-              {campaigns.error.message}
-            </p>
           )}
-          {campaigns.loading && <p role="status">Loading campaigns…</p>}
           <Field label="Template name" htmlFor="template-from-session-name">
             <TextInput
               id="template-from-session-name"
