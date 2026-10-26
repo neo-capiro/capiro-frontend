@@ -154,6 +154,52 @@ function useSettledRefresh(finished: boolean, onSettled: () => void) {
   }, [finished, onSettled]);
 }
 
+/** Tab return reads current status; paired focus/visibility events never start a polling loop. */
+function useExternalRunRefresh(
+  port: MeriConversationPort,
+  run: ReturnType<typeof useLiveRun>,
+  lifecycleBlocked: boolean,
+) {
+  const { busy, observing, refreshRunStatus, intent } = run;
+  const cancelIntent = intent.cancel;
+  const lastRefresh = useRef(-Infinity);
+  useEffect(() => {
+    const returned = () => {
+      const snapshot = port.getSnapshot();
+      const state = snapshot.observation?.runState;
+      if (
+        document.visibilityState !== "visible" ||
+        lifecycleBlocked ||
+        busy ||
+        snapshot.status === "disposed" ||
+        snapshot.status === "loading" ||
+        snapshot.cancel !== "idle" ||
+        cancelIntent ||
+        isTerminal(state) ||
+        observing === "live" ||
+        observing === "reconnecting" ||
+        !(
+          state === "paused" ||
+          state === "waiting-for-approval" ||
+          snapshot.status === "unavailable" ||
+          observing === "stalled"
+        )
+      )
+        return;
+      const now = Date.now();
+      if (now - lastRefresh.current < 30_000) return;
+      lastRefresh.current = now;
+      refreshRunStatus();
+    };
+    window.addEventListener("focus", returned);
+    document.addEventListener("visibilitychange", returned);
+    return () => {
+      window.removeEventListener("focus", returned);
+      document.removeEventListener("visibilitychange", returned);
+    };
+  }, [port, refreshRunStatus, busy, observing, cancelIntent, lifecycleBlocked]);
+}
+
 /** Storage uncertainty disables mutation controls while the transcript remains readable. */
 function CurrentRunStatus({
   run,
@@ -268,6 +314,7 @@ export function MeriLiveConversation({
     run.reconnect,
     onLifecycleTarget,
   );
+  useExternalRunRefresh(port, run, lifecycle.busy || !!lifecycle.command);
   const observed = snapshot.observation
     ? {
         ...turnFromObservation(snapshot.observation, port.context.runId),
