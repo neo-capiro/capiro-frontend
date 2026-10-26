@@ -4362,5 +4362,41 @@
     "reason": "The new describe block contains two related mounted name-baseline journeys using the unchanged existing Hill Day fixture and actual route/mutation owner. They cover successive acknowledged saves and stale409 input/baseline preservation plus explicit reload. The unchanged original scenarios remain byte-identical; this is focused test organization, not a new framework.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDaySectionEditors.tsx",
+    "kind": "function",
+    "symbol": "FirstPageEditor",
+    "fingerprint": "0e920c9e855806f001b98e65dc1feddc625da2d87f5827c08dffa6a0b6f64f2a",
+    "reason": "One FirstPageEditor modal owns initial captured draft, local validation, explicit save, pending dismissal and conflict recovery. Sparse transformations live in first-page-draft and fields are stateless; transport, cancellation and current access stay with existing shared/Core owners. Splitting the83-line lifecycle further solely for the threshold would obscure the connected save/recovery flow. Exact independent disposition: W3-WS11-PR193-REVIEW.md at a98f07da1c4c05dc8d5a1ded5e250a25200230d4.",
+    "reviewedBy": "m3_scope, independent Wave 3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDaySectionEditors.tsx",
+    "kind": "function",
+    "symbol": "FirstPageFields",
+    "fingerprint": "190de784fe4a05296a6e4101a77bfa430086c3bf72c7819e4ef13d6b30bdf375",
+    "reason": "One stateless FirstPageFields form renders schema-derived column visibility, title/dateline and editable summary rows using existing primitives. It has no transport, authorization or independent lifetime state. The93-line JSX keeps the fixed column labels, values and pending controls readable within their one form responsibility. Exact independent disposition: W3-WS11-PR193-REVIEW.md at a98f07da1c4c05dc8d5a1ded5e250a25200230d4.",
+    "reviewedBy": "m3_scope, independent Wave 3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-first-page.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "b7d6a83dd5719dd3ffba2a6c505e75561e15a2ea3dd2c35667252784810cd9c4",
+    "reason": "One mounted first-page test module covers sparse replacement, explicit blanks, visibility, CAS recovery, pending/lifetime and scoped responsive keyboard rendering through a separately extracted synthetic fixture. The thirteen cases share the same feature boundary;417lines do not introduce another product domain or duplicate harness owner. Exact independent disposition: W3-WS11-PR193-REVIEW.md at a98f07da1c4c05dc8d5a1ded5e250a25200230d4.",
+    "reviewedBy": "m3_scope, independent Wave 3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-first-page.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #10",
+    "fingerprint": "f1a9796dc783d7fe8937ae82438eefe347ac2a6b1bcf08b45915092a93086728",
+    "reason": "One parameterized viewport scenario verifies the same mounted dialog at desktop and narrow widths, including canonical table geometry, keyboard scrolling, viewport containment, helper separation and scoped axe output. Its90-line body keeps these assertions bound to the same captured state; extracting unrelated-count helpers would hide the causal visual/keyboard setup. Exact independent disposition: W3-WS11-PR193-REVIEW.md at a98f07da1c4c05dc8d5a1ded5e250a25200230d4.",
+    "reviewedBy": "m3_scope, independent Wave 3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
