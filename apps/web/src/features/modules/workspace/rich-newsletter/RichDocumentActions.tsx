@@ -15,10 +15,16 @@ export function RichDocumentActions({
   state,
   owner,
   previewButtonRef,
+  commentsButtonRef,
+  onReview,
+  entryDocumentId,
 }: {
   state: RichDocumentState;
   owner: RichDocumentController;
   previewButtonRef?: Ref<HTMLButtonElement>;
+  commentsButtonRef?: Ref<HTMLButtonElement>;
+  onReview?: (documentId: string) => void;
+  entryDocumentId?: string;
 }) {
   const router = useRouter();
   const ready =
@@ -67,12 +73,18 @@ export function RichDocumentActions({
         className={styles.lifecycleActions}
       >
         <div className={styles.toolbar}>
-          <ActionButton onClick={() => void owner.list()}>
+          <ActionButton
+            disabled={Boolean(entryDocumentId)}
+            onClick={() => void owner.list()}
+          >
             Load saved newsletters
           </ActionButton>
           <ActionButton
             disabled={Boolean(
-              state.saved || state.fence || state.recovery.phase !== "ready",
+              entryDocumentId ||
+              state.saved ||
+              state.fence ||
+              state.recovery.phase !== "ready",
             )}
             onClick={() => void owner.create()}
           >
@@ -80,11 +92,16 @@ export function RichDocumentActions({
           </ActionButton>
           <ActionButton
             disabled={
+              !entryDocumentId &&
               !state.saved &&
               state.recovery.operation !== "save" &&
               outcome?.kind !== "committed"
             }
-            onClick={() => void owner.readback()}
+            onClick={() =>
+              void (entryDocumentId
+                ? owner.openKnown(entryDocumentId)
+                : owner.readback())
+            }
           >
             Read current saved document
           </ActionButton>
@@ -107,6 +124,15 @@ export function RichDocumentActions({
           >
             Stage newsletter
           </ActionButton>
+          {onReview && (
+            <ActionButton
+              ref={commentsButtonRef}
+              disabled={!state.saved}
+              onClick={() => state.saved && onReview(state.saved.id)}
+            >
+              Comments
+            </ActionButton>
+          )}
         </div>
         {state.recovery.phase !== "ready" && (
           <section
@@ -280,8 +306,8 @@ export function RichDocumentActions({
         </div>
       )}
       <div className={styles.toolbar}>
-        <UnavailableAction reason="Collaboration and asset operations are not included in this saved-document contract.">
-          Collaboration and uploads
+        <UnavailableAction reason="Sharing changes and asset operations are not included in this saved-document contract.">
+          Sharing and uploads
         </UnavailableAction>
         <UnavailableAction reason="Generation, account review, prepare, test and delivery require separate supported operations and explicit intent.">
           Generate or send newsletter

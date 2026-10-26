@@ -92,6 +92,50 @@ const input = (
 ) => JSON.parse(String(fetcher.mock.calls[index]![1]?.body));
 
 describe("explicit rich saved-document intent", () => {
+  it("rechecks a known review ID through detail without a list or automatic adoption", async () => {
+    const { owner, reply, fetcher, dispose } = await setup();
+    owner.edit((draft) => ({ ...draft, name: "Keep unsaved work" }));
+    reply(campaign());
+    await owner.openKnown(id);
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(String(fetcher.mock.calls[0]![0])).toContain(
+      "workspace.richNewsletter.detail",
+    );
+    expect(owner.getSnapshot().review?.id).toBe(id);
+    expect(owner.getSnapshot().saved).toBeUndefined();
+    expect(owner.getSnapshot().draft.name).toBe("Keep unsaved work");
+    expect(owner.getSnapshot().past).toHaveLength(1);
+    owner.adopt();
+    expect(owner.getSnapshot().saved?.id).toBe(id);
+    expect(owner.getSnapshot().draft.name).toBe(campaign().name);
+    dispose();
+  });
+  it("a known-ID detail cannot admit another document or bypass current refusal", async () => {
+    const { owner, reply, dispose } = await setup();
+    reply({ ...campaign(), id: different });
+    await owner.openKnown(id);
+    expect(owner.getSnapshot().review).toBeUndefined();
+    reply({ message: "Access changed" }, 403);
+    await owner.openKnown(id);
+    expect(owner.getSnapshot().saved).toBeUndefined();
+    expect(owner.getSnapshot().recovery.phase).toBe("blocked");
+    dispose();
+  });
+  it("review access loss clears the existing draft, undo and saved private state", async () => {
+    const { owner, open, dispose } = await setup();
+    await open();
+    owner.edit((draft) => ({ ...draft, name: "Private unsaved work" }));
+    owner.clearEditableAccess();
+    expect(owner.getSnapshot()).toMatchObject({
+      current: false,
+      past: [],
+      future: [],
+      recovery: { phase: "blocked" },
+    });
+    expect(owner.getSnapshot().saved).toBeUndefined();
+    expect(owner.getSnapshot().draft.name).not.toBe("Private unsaved work");
+    dispose();
+  });
   it("construction, mounting, editing and history issue no owner request", async () => {
     const { owner, fetcher } = await setup();
     owner.edit((draft) => ({ ...draft, name: "Local" }));
