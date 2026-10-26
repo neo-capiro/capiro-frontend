@@ -19,7 +19,7 @@ export function useLiveRun(
   acceptedRequest?: ConversationStoredRequest,
 ) {
   const alive = useRef(true),
-    started = useRef(false);
+    started = useRef<MeriConversationPort | null>(null);
   const observation = useRunObservation(port, alive);
   const { journal, active, ...commands } = useRunCommands(
     port,
@@ -67,8 +67,8 @@ export function useLiveRun(
 
   useEffect(() => {
     alive.current = true;
-    if (!started.current) {
-      started.current = true;
+    if (started.current !== port) {
+      started.current = port;
       const retained = journal.read().submit;
       // Fresh next-turn admission records identity before reservation; reconnect reuses it exactly.
       if (initialPrompt && retained && retained.state !== "observed")
@@ -83,7 +83,7 @@ export function useLiveRun(
     };
     // Runs once per mounted port; later commands are explicit.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [port]);
 
   useEffect(() => {
     if (

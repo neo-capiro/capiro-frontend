@@ -681,26 +681,90 @@ test("client replacement rejects a settled late transcript and verifies a new co
   expect(f.unexpected).toEqual([]);
 });
 
-test("a short session automatically rebinds the exact run and recovers its completed answer", async ({
+test("idle renewal preserves an open feedback draft, uses fresh credentials, and hides it on denial", async ({
   page,
 }) => {
-  const f = await setupConversation(page, undefined, [context], 2_500);
-  await page.route("**/api/conversations/history", (r) =>
-    reply(
+  test.setTimeout(45_000);
+  const f = await setupConversation(page);
+  const hints: unknown[] = [],
+    credentials: string[] = [],
+    histories: string[] = [];
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/api/action-followthrough/session", async (r) => {
+    hints.push(r.request().postDataJSON());
+    const attempt = hints.length;
+    if (attempt === 2) await held;
+    if (attempt === 3)
+      return reply(r, { error: { code: "SESSION_REFUSED" } }, 403);
+    return reply(r, {
+      credential: `action_session_${String(attempt).repeat(43)}`,
+      expiresAtMs: Date.now() + (attempt === 1 ? 12_000 : 10_000),
+      context,
+    });
+  });
+  await page.route("**/api/conversations/feedback-read", (r) => {
+    credentials.push(r.request().headers()["x-meri-action-session"]!);
+    return reply(r, { runId: binding.runId, receipts: [] });
+  });
+  await page.route("**/api/conversations/history", (r) => {
+    histories.push(r.request().headers()["x-meri-action-session"]!);
+    return reply(
       r,
       history([event(1, "Before expiry"), status(2, "completed")], {
         state: "completed",
       }),
-    ),
-  );
+    );
+  });
   await connect(page);
   await expect(page.getByText("Before expiry", { exact: true })).toBeVisible();
-  await expect.poll(() => f.hints.length).toBe(2);
+  await page
+    .getByRole("button", { name: "Give feedback", exact: true })
+    .click();
+  const dialog = page.getByRole("dialog");
+  await dialog
+    .getByLabel("Type of feedback")
+    .selectOption("factual_correction");
+  const field = dialog.getByLabel("What should be corrected?");
+  await field.fill("Synthetic retained correction.");
+  await expect.poll(() => credentials.length).toBe(1);
+  await expect.poll(() => hints.length, { timeout: 15_000 }).toBe(2);
+  await expect(dialog).toBeVisible();
+  await expect(field).toHaveValue("Synthetic retained correction.");
+  await expect(
+    page.getByRole("button", {
+      name: "Send message",
+      exact: true,
+      includeHidden: true,
+    }),
+  ).toBeDisabled();
+  release();
+  await expect
+    .poll(() => histories.includes(`action_session_${"2".repeat(43)}`))
+    .toBe(true);
+  await expect(
+    dialog.getByRole("button", { name: "Check saved feedback" }),
+  ).toBeEnabled();
+  await dialog.getByRole("button", { name: "Check saved feedback" }).click();
+  await expect.poll(() => credentials.length).toBe(2);
+  expect(credentials).toEqual([
+    `action_session_${"1".repeat(43)}`,
+    `action_session_${"2".repeat(43)}`,
+  ]);
+  await expect(field).toHaveValue("Synthetic retained correction.");
   await expect(page.getByText("Before expiry", { exact: true })).toBeVisible();
-  expect(f.hints).toEqual([
+  expect(hints).toEqual([
     { clientId },
     { clientId, conversationId: binding.conversationId, runId: binding.runId },
   ]);
+  await expect.poll(() => hints.length, { timeout: 10_000 }).toBe(3);
+  await expect(
+    page.getByRole("heading", { name: "Conversation access unavailable" }),
+  ).toBeVisible();
+  await expect(dialog).toHaveCount(0);
+  await expect(page.getByText("Before expiry", { exact: true })).toHaveCount(0);
   expect(f.unexpected).toEqual([]);
 });
 

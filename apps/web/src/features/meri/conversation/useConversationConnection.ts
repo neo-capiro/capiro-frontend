@@ -20,12 +20,14 @@ type Hints = ConstructorParameters<
 type Opening = Readonly<{
   host: ConversationHostController;
   hints: Hints;
+  renewal?: boolean;
   /** A prompt the person sent that waits for this fresh run's session. */
   pending?: string;
 }>;
 type Reopening = {
   target?: { conversationId: string; runId: string };
   pending?: string;
+  renewal?: boolean;
 };
 const exactTarget = (hints: Hints | ConversationContext | undefined) =>
   hints?.conversationId && hints.runId
@@ -72,7 +74,7 @@ function useSessionRenewal({
     const key = JSON.stringify(last.context) + last.at;
     if (renewed.current === key) return;
     renewed.current = key;
-    reopen();
+    reopen({ renewal: reason === "renewal" });
   }, [status, reopen, bound, host]);
 
   return {
@@ -136,6 +138,7 @@ function useConversationOpening(
       setOpening({
         host: create(hints),
         hints,
+        ...(options.renewal ? { renewal: true } : {}),
         ...(options.pending ? { pending: options.pending } : {}),
       });
     },
@@ -152,7 +155,8 @@ function useConversationOpening(
      * a fallback for a tab that has not yet been bound.
      */
     retry: (status: string) => {
-      const target = exactTarget(bound.last()?.context) ?? exactTarget(opening.hints);
+      const target =
+        exactTarget(bound.last()?.context) ?? exactTarget(opening.hints);
       if (status === "expired")
         return reopen({
           target,
@@ -234,6 +238,13 @@ export function useConversationConnection(
 
   return {
     state: storageError ? { status: "unavailable" as const } : state,
+    // Display continuity only: the disposed port still cannot issue any request.
+    renewing:
+      !storageError &&
+      ((state.status === "expired" &&
+        host.getExpirationReason() === "renewal") ||
+        (!!opening.renewal &&
+          (state.status === "idle" || state.status === "connecting"))),
     storageError,
     ...renewal,
     conversationId:

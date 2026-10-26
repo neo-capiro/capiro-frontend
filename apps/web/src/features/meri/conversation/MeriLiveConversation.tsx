@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
@@ -262,15 +262,22 @@ export function MeriLiveConversation({
     savedCurrent?.runId === port.context.runId ? acceptedRequest : undefined,
   );
   const { snapshot, intent } = run;
+  // A replacement credential rereads this same keyed run; keep its admitted display while it loads.
+  const [retainedObservation, setRetainedObservation] = useState(
+    snapshot.observation,
+  );
+  if (snapshot.observation && retainedObservation !== snapshot.observation)
+    setRetainedObservation(snapshot.observation);
+  const displayedObservation = snapshot.observation ?? retainedObservation;
   const lifecycle = useRunLifecycle(
     port,
     run.suspendObservation,
     run.reconnect,
     onLifecycleTarget,
   );
-  const observed = snapshot.observation
+  const observed = displayedObservation
     ? {
-        ...turnFromObservation(snapshot.observation, port.context.runId),
+        ...turnFromObservation(displayedObservation, port.context.runId),
         ...(promptKey ? { promptKey } : {}),
       }
     : null;
