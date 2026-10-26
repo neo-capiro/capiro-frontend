@@ -1901,8 +1901,8 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "491d11a2dcbeedd6d370acb7b56c45662db1d47e2b210f22ab2d8fa4b4723e1e",
-    "reason": "The existing editor host retains layout, close confirmation, draft controls and focus/preview composition. Its change disables editing while durable recovery is held and updates truthful exit/recovery text. No storage, receipt validation or transport moves into the host. Existing fieldset/primitives and controller ownership remain cohesive.",
+    "fingerprint": "0e41e19c8c49826a4d461b850209bedcbdcd72990b80ef72bd1bf049eb3dbe70",
+    "reason": "The existing rich editor remains the sole host for canonical document/history and recovery state. This change composes one adjacent library hook, dialog, notice and inspector with existing persisted-section and recovery controls; it does not absorb transport, parsing, cloning or modal implementation. The added opener reference belongs to host focus restoration. Keeping the existing view composition together preserves one editor owner. Exact 185-line function accepted; this is not a general size exemption.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
@@ -4522,6 +4522,42 @@
     "symbol": "<anonymous>",
     "fingerprint": "72d485dda854c1e21bd1dcd45c17255206b0ff9a066ab77181da3547479e2cb5",
     "reason": "The new sparse-facts unit describe body groups independent assertions over one pure draft adapter: exact raw preservation, fold/gap handling, new-date instant order, precision fallback and location semantics. It uses the already adopted Temporal package and synthetic values. Keeping these related positive/negative cases together is coherent; this is exact test-source review, not an exemption from size review.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SaveSectionDialog.tsx",
+    "kind": "function",
+    "symbol": "SaveSectionDialog",
+    "fingerprint": "2628a84735bb4071e77f23f4f3e6391ae1e4c3e061df4fc90a2ca3a4184590e2",
+    "reason": "One existing-Modal form owns name/folder input, current-server-versus-unsaved-draft explanation, pending disablement and the unknown-outcome acknowledgement. Request lifetime, dispatch and actual public receiving remain in the hook and fixed operations. The editing/pending/unknown presentations are one coherent interaction and keep close/GET-only choices next to the truthful save semantics. No new modal primitive, persistence or authority is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SavedSections.tsx",
+    "kind": "function",
+    "symbol": "SavedSections",
+    "fingerprint": "ac3ef7e1783d5ad0678dff9c344a8b5191d18f9785e4da666fa8742d6a570ee5",
+    "reason": "One inspector presents loading, unavailable, empty, filtered-empty and loaded section rows using existing field/select/button primitives. Search, folder and sort operate only on the current loaded list; the pure filter helper and parent hook own computation and request lifetime. Explicit Insert and Back share this selected inspector and focus owner. No management endpoint, automatic document save or second draft owner is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/use-section-library.ts",
+    "kind": "function",
+    "symbol": "useSectionLibrary",
+    "fingerprint": "7f01d9329a82a667370eedbd063ef21d4432ce56a499fdccd5e69177914fb003",
+    "reason": "The feature-local hook owns exactly one mounted section-library interaction: current owner/document/API scope, explicit read/save commands, pending and unknown presentation, and one local insertion handoff. A small closure owns abort controllers and synchronous dispatch/insertion claims; canonical transport/public parsing, editor history and durable document recovery retain their existing owners. Keeping these related transition guards together prevents late reads or repeated saves from bypassing the shared mounted fence. It adds no durable outcome, authorization policy, queue or second journal.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/rich-newsletter-library.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "e12f14bf55227f6ad8509a691f71337e31005878428728b6e41c005d02ecb205",
+    "reason": "This unit describe body exercises one fixed section-library operation family against the actual public parser and canonical transport: strict fixed routes/inputs, malformed replies without redispatch and cancellation. The negative receiver counterexample is independently demonstrated by the retained parser-removal mutant. Keeping these directly related transport-contract assertions together is cohesive; the exact 95-line test body is reviewed explicitly.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   }
