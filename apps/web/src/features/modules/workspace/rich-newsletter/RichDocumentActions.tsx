@@ -195,12 +195,14 @@ export function RichDocumentActions({
               next save replaces the full name, configuration and design.
             </p>
             <ActionButton
+              className={styles.reviewAction}
               disabled={!canResolve}
               onClick={() => void owner.adopt()}
             >
               Adopt saved document and replace local draft
             </ActionButton>
             <ActionButton
+              className={styles.reviewAction}
               disabled={!canResolve}
               onClick={() => void owner.rebase()}
             >

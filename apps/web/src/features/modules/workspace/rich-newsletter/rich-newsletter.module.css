@@ -273,6 +273,13 @@
 .savedNotice > button {
   justify-self: start;
 }
+.reviewAction {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 36px;
+  height: auto;
+  white-space: normal;
+}
 @media (max-width: 1100px) {
   .savedLayout {
     grid-template-columns: minmax(0, 1fr);
