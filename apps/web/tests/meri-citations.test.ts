@@ -34,13 +34,14 @@ describe("saved citation reference presentation", () => {
     expect(restored.sources).toEqual(savedTurn().sources);
     expect(restored.sources[0]).toEqual(source);
     const html = render(restored);
-    expect(html).toContain("1 saved source reference");
-    expect(html).toContain(source.sourceVersionId);
-    expect(html).toContain(source.observedAt);
-    expect(html).toContain("Source preview unavailable.");
+    expect(html).toContain("Saved references · 1");
+    expect(html).toContain('aria-expanded="false"');
+    expect(html).toContain("Source preview unavailable");
     expect(html).toContain("do not confirm current access");
     expect(html).not.toContain("authorized source record");
     for (const privateReference of [
+      source.sourceId,
+      source.sourceVersionId,
       source.recordId,
       source.authorizationDecisionId,
       source.contentSha256,
@@ -49,28 +50,28 @@ describe("saved citation reference presentation", () => {
   });
 
   it("keeps two admitted versions distinct even when their citation labels coincide", () => {
-    const sources = [
-      source,
-      { ...source, sourceVersionId: "synthetic-later-version" },
-    ];
-    const html = render({ sources });
-    expect(html).toContain("2 saved source references");
-    expect(html).toContain(source.sourceVersionId);
-    expect(html).toContain("synthetic-later-version");
-    expect(html).toContain("Reference 1");
-    expect(html).toContain("Reference 2");
+    const later = { ...source, sourceVersionId: "synthetic-later-version" };
+    const restored = savedTurn([
+      sourceEvent,
+      { ...sourceEvent, sequence: sourceEvent.sequence + 1, data: later },
+    ]);
+    expect(restored.sources).toEqual([source, later]);
+    const html = render(restored);
+    expect(html).toContain("Saved references · 2");
+    expect(html).not.toContain(source.sourceVersionId);
+    expect(html).not.toContain("synthetic-later-version");
   });
 
-  it("shows unknown source date without inventing freshness or current authorization", () => {
+  it("omits unavailable source details without inventing freshness or current authorization", () => {
     const html = render({ sources: [{ ...source, sourceUpdatedAt: null }] });
-    expect(html).toContain("Source updated</dt><dd>Not provided");
+    expect(html).not.toContain("Not provided");
+    expect(html).not.toContain("Source updated");
     expect(html).not.toContain("Up to date");
     const dated = render({
       sources: [{ ...source, sourceUpdatedAt: "2026-10-01T12:00:00Z" }],
     });
-    expect(dated).toContain(
-      '<time dateTime="2026-10-01T12:00:00Z">2026-10-01T12:00:00Z</time>',
-    );
+    expect(dated).toContain("do not confirm current access");
+    expect(dated).not.toContain("Up to date");
   });
 
   it("distinguishes missing references in a complete view from a partial loaded view", () => {
@@ -88,7 +89,7 @@ describe("saved citation reference presentation", () => {
         "No source references were provided.",
       );
       expect(render(patch)).toContain(
-        "More source references may exist in unloaded updates.",
+        "Some saved reference details are unavailable. This does not mean the answer had no sources.",
       );
     }
   });
@@ -107,16 +108,18 @@ describe("saved citation reference presentation", () => {
       ],
     });
     expect(html).toContain("&lt;script&gt;alert(2)&lt;/script&gt;");
-    expect(html).toContain("&lt;img src=x");
+    expect(html).not.toContain("untrusted.invalid/metadata");
+    expect(html).not.toContain("&lt;img src=x");
     expect(html).toContain("[citation](javascript:alert(1))");
     expect(html).not.toMatch(/<a\b|<script\b|<img src=x|<iframe\b/);
   });
 
   it("does not retain a source when its parent supplies a cleared current view", () => {
-    expect(render()).toContain(source.sourceVersionId);
+    expect(render()).toContain("Saved references · 1");
     const cleared = render({ sources: [], messages: [], tools: [] });
     expect(cleared).not.toContain(source.sourceVersionId);
     expect(cleared).not.toContain(source.sourceId);
+    expect(cleared).not.toContain("Saved references ·");
     expect(cleared).toContain("No source references were provided.");
   });
 });

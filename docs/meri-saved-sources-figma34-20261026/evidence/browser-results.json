@@ -1,0 +1,82 @@
+{
+  "stats": {
+    "startTime": "2026-10-26T05:34:13.624Z",
+    "duration": 29678.091,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "saved references start collapsed, support keyboard disclosure and retain both versions after reload",
+      "status": "passed",
+      "durationMs": 6450,
+      "axe": [
+        {
+          "violations": 0,
+          "passes": 45,
+          "incomplete": 1,
+          "inapplicable": 45,
+          "version": "4.14.0"
+        },
+        {
+          "violations": 0,
+          "passes": 46,
+          "incomplete": 1,
+          "inapplicable": 44,
+          "version": "4.14.0"
+        }
+      ],
+      "focus": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "title": "incomplete saved history keeps its references and does not claim zero sources",
+      "status": "passed",
+      "durationMs": 3225,
+      "axe": [
+        {
+          "violations": 0,
+          "passes": 46,
+          "incomplete": 1,
+          "inapplicable": 44,
+          "version": "4.14.0"
+        }
+      ]
+    },
+    {
+      "title": "mobile references and failed tool results stay truthful and hostile answer text stays inert",
+      "status": "passed",
+      "durationMs": 3065,
+      "axe": [
+        {
+          "violations": 0,
+          "passes": 44,
+          "incomplete": 0,
+          "inapplicable": 46,
+          "version": "4.14.0"
+        }
+      ]
+    },
+    {
+      "title": "existing conversation access denial removes expanded saved references",
+      "status": "passed",
+      "durationMs": 2550,
+      "axe": []
+    },
+    {
+      "title": "observation labels display each admitted UTC timestamp independently of browser timezone",
+      "status": "passed",
+      "durationMs": 2356,
+      "axe": []
+    }
+  ],
+  "browserTimezone": "America/New_York",
+  "scope": "Synthetic mounted conversation harness; no live provider or authorization qualification"
+}
