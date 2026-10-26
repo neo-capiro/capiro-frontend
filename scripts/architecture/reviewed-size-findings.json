@@ -3324,10 +3324,10 @@
     "file": "apps/web/src/features/portfolio/calendar/CalendarPageControls.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "9be03005add2107ed1ed3f44cf41332de51096c5d363edc00ddcddf5327fe2d6",
-    "reason": "Client and master calendar headers, period/view controls and agenda filters all update the same CalendarPageState URL contract. Components are already separated within this calendar-control source; it contains no second feature or persistence owner.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "e095de9c0944f09c160b9b0957412e5579c00f3070fd41fc81d7e55900be024c",
+    "reason": "This file owns calendar header and local period/view/filter control presentation. The change adds one public client-switcher composition and reuses existing assets; data reads, update state, synchronization and meeting commands stay in their established owners. Existing subordinate controls remain cohesive calendar controls and unchanged. No new domain or IO responsibility was introduced.",
+    "reviewedBy": "Codex independent PR236 reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
@@ -5451,6 +5451,15 @@
     "fingerprint": "6fa6226d2c40d0108b1043f1617d1defc17abd6025e7a8339edeb3b14b3122b3",
     "reason": "This component projects the current run, uncertainty and observation states through existing shared buttons and subordinate status components. The new refresh affordance delegates the existing read callback and honors busy/disposed state; it performs no IO, command mutation or authority decision. Its 82 nonblank lines remain one status presentation responsibility.",
     "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarPageControls.tsx",
+    "kind": "function",
+    "symbol": "CalendarPageHeader",
+    "fingerprint": "63711978b9563e0da1889cc27aab547fdbc9459d5694d4d14d70861744970ca6",
+    "reason": "This function remains the client/master calendar header presentation owner. The added client breadcrumb delegates navigation and keyboard/popover behavior to the existing ClientViewSwitcher through its public Portfolio interface; all three existing action callbacks and master-calendar branch are unchanged. No authorization, transport or state ownership was added. Keep this cohesive presentation rather than splitting to satisfy a size threshold.",
+    "reviewedBy": "Codex independent PR236 reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
