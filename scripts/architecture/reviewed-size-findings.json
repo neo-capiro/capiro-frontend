@@ -5461,5 +5461,41 @@
     "reason": "This function remains the client/master calendar header presentation owner. The added client breadcrumb delegates navigation and keyboard/popover behavior to the existing ClientViewSwitcher through its public Portfolio interface; all three existing action callbacks and master-calendar branch are unchanged. No authorization, transport or state ownership was added. Keep this cohesive presentation rather than splitting to satisfy a size threshold.",
     "reviewedBy": "Codex independent PR236 reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DistrictMap.tsx",
+    "kind": "function",
+    "symbol": "DistrictMap",
+    "fingerprint": "94913d589db055b6288773ea1c998d1621e5fdafed91ddcf40340b7a9ccf22a3",
+    "reason": "This function remains the current-district map presentation and official-boundary adapter. It reuses the canonical typed binary read, geometry helpers and cancellation lifetime. The added color dimension and selected key are parent-provided display inputs; zoom/layers stay local and no client authority, data aggregation or mutation ownership is introduced. Keeping these cohesive map interactions together avoids an artificial split.",
+    "reviewedBy": "Codex independent PR239 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "20ddb1006ef51937e9d598eabb82ef5a8bf71bf96a40e14634ddd75bd6cd7a3b",
+    "reason": "This module remains the single read-only District Nexus screen, composing existing query, status, select, table and map owners. The selected-state predicate now narrows the returned district rows before all local cards, map, list and selection derive from them, while retaining the server state query. It handles cross-state award rows honestly without changing Core authorization, data ownership, persistence or unrelated domains.",
+    "reviewedBy": "Codex independent PR239 state-filter reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+    "kind": "function",
+    "symbol": "DistrictNexus",
+    "fingerprint": "5a9f45e89a4c56cd94a07fd2afc2667d1e9290fb06ff7623218d1220a5e49f12",
+    "reason": "This component coordinates one district read and its local display scope. Filtering returned rows by the existing selected state belongs beside the existing inScope derivation; summaries, presentation filters and valid selection then share that set. Core remains the source and authorization owner, useCapiroQuery retains replaced-read admission, and DistrictMap owns boundaries. The actual mounted all-state-response regression proves the prior mismatch and the correction, including null summaries and stale-selection retirement; no artificial split or new state owner is needed.",
+    "reviewedBy": "Codex independent PR239 state-filter reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/host-controller.ts",
+    "kind": "function",
+    "symbol": "constructor",
+    "fingerprint": "5bb2933df0b4329486e4c41ff2ceef13cedc4f0c8d69bd7764697763f425b1f7",
+    "reason": "This constructor remains composition for one conversation session and its public ports. The extra artifact pending predicate is an observation supplied by the existing bounded artifact-access owner, parallel to feedback pending. The unchanged SessionLifetimeController owns renewal polling, hard expiry, revocation and cleanup. No file receiver, credential issuer, retry, replay or independent lifetime logic is added here; keeping the predicate beside other active-port checks preserves one renewal owner. Actual-host and mounted Preview/Download evidence proves early deferral while hard expiry/revocation/detach still abort.",
+    "reviewedBy": "Codex independent file-renewal reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

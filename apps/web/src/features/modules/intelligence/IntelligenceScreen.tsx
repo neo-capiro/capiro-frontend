@@ -29,6 +29,16 @@ export function IntelligenceScreen() {
     router.push(`${pathname}?${search}`);
   };
   if (view === "legiwatch") return <LegiWatchScreen />;
+  // District Nexus owns its own header (Figma 3.4 1064:241658 puts the Scope,
+  // Freshness and Data quality controls on the title row), so it composes the
+  // header itself the same way LegiWatchScreen does. The tab strip is passed
+  // through so this view stays switchable from the same place.
+  if (view === "district-nexus")
+    return (
+      <DistrictNexus
+        tabs={<Tabs items={views} value={view} onChange={setView} />}
+      />
+    );
   return (
     <>
       <PageHeader title="Intelligence Center" />
@@ -36,7 +46,6 @@ export function IntelligenceScreen() {
       {view === "explorer" && <DataExplorer />}
       {view === "defense" && <DefenseBudget />}
       {view === "funding" && <FundingOpportunities />}
-      {view === "district-nexus" && <DistrictNexus />}
       {view === "federal-spending" && <DataExplorer initialDataset="awards" />}
     </>
   );
