@@ -1,4 +1,5 @@
 "use client";
+import type { Ref } from "react";
 import { ActionButton, UnavailableAction } from "../../../../shared/module-ui";
 import {
   hasRichChanges,
@@ -6,16 +7,18 @@ import {
   type RichDocumentController,
   type RichDocumentState,
 } from "./document-controller";
-import { RichPreview, SavedRichPreview } from "./RichPreview";
+import { RichPreview } from "./RichPreview";
 import { pendingSavedWrite } from "./write-journal";
 import styles from "./rich-newsletter.module.css";
 
 export function RichDocumentActions({
   state,
   owner,
+  previewButtonRef,
 }: {
   state: RichDocumentState;
   owner: RichDocumentController;
+  previewButtonRef?: Ref<HTMLButtonElement>;
 }) {
   const ready =
     state.current &&
@@ -28,18 +31,25 @@ export function RichDocumentActions({
       entry.status === "unknown" &&
       entry.documentId.toLowerCase() === state.saved?.id.toLowerCase(),
   );
+  // The exact-revision card already presents this stage failure. Other errors,
+  // lookup results and create/save qualifications remain independently visible.
+  const duplicateStageError =
+    attempted?.status === "unknown" &&
+    uncertainStages.some((entry) => entry.attempt === attempted.attempt) &&
+    state.error ===
+      "Staging could not be confirmed. This document revision will not be staged again. Check its exact stage receipt separately; review current saved state before any further write.";
   return (
     <section
-      className={styles.controls}
+      className={styles.savedActions}
       aria-label="Saved newsletter documents"
     >
-      <h2>Saved newsletter documents</h2>
-      <p>
-        Loading the library or opening a document may activate an access
-        invitation. These requests run only when you choose an action below.
-        Library access does not imply that every document belongs to the
-        selected client.
-      </p>
+      <header>
+        <h2>Saved newsletter documents</h2>
+        <p>
+          Loading or opening saved newsletters may activate an access
+          invitation. Each document keeps its own client access.
+        </p>
+      </header>
       <fieldset
         disabled={Boolean(state.pending)}
         className={styles.lifecycleActions}
@@ -68,7 +78,11 @@ export function RichDocumentActions({
           >
             Save newsletter
           </ActionButton>
-          <ActionButton disabled={!ready} onClick={() => void owner.preview()}>
+          <ActionButton
+            ref={previewButtonRef}
+            disabled={!ready}
+            onClick={() => void owner.preview()}
+          >
             Preview saved state
           </ActionButton>
           <ActionButton
@@ -79,19 +93,21 @@ export function RichDocumentActions({
           </ActionButton>
         </div>
         {uncertainStages.map((entry) => (
-          <p key={entry.attempt}>
-            Stage outcome for revision {entry.revision} remains uncertain. This
-            revision will not be staged again. Checking reads only that exact
-            revision and does not adopt it as your editable baseline.
+          <div className={styles.savedNotice} key={entry.attempt} role="alert">
+            <p>
+              Staging could not be confirmed for revision {entry.revision}. This
+              revision will not be staged again. Checking reads only that exact
+              revision and does not adopt it as your editable baseline.
+            </p>
             <ActionButton
               onClick={() => void owner.recoverStage(entry.attempt)}
             >
               Check stage for revision {entry.revision}
             </ActionButton>
-          </p>
+          </div>
         ))}
         {state.items && (
-          <div>
+          <div className={styles.savedCard}>
             <h3>Current library response</h3>
             {!state.items.length && (
               <p>
@@ -116,7 +132,10 @@ export function RichDocumentActions({
           </div>
         )}
         {state.review && (
-          <section aria-label="Review current saved newsletter">
+          <section
+            className={styles.savedCard}
+            aria-label="Review current saved newsletter"
+          >
             <h3>
               {state.review.name} · revision {state.review.revision}
             </h3>
@@ -124,7 +143,7 @@ export function RichDocumentActions({
             <p>
               Primary client:{" "}
               {state.review.config.clientName ||
-                state.review.config.clientId ||
+                (state.review.config.clientId ? "Assigned client" : null) ||
                 "None"}
             </p>
             <p>
@@ -138,16 +157,20 @@ export function RichDocumentActions({
             <ActionButton onClick={owner.rebase}>
               Rebase local draft onto reviewed revision
             </ActionButton>
-            <RichPreview
-              draft={state.review}
-              mobile={false}
-              plainText={false}
-            />
+            <details>
+              <summary>Review saved content</summary>
+              <RichPreview
+                draft={state.review}
+                mobile={false}
+                plainText={false}
+                savedReview
+              />
+            </details>
           </section>
         )}
       </fieldset>
       {state.saved && (
-        <p>
+        <p className={styles.savedBaseline}>
           {state.current
             ? "Current saved baseline"
             : "Previous saved baseline; current read and review required"}
@@ -175,9 +198,9 @@ export function RichDocumentActions({
           adopted or used to rebase your local draft.
         </p>
       )}
-      {state.error && <p role="alert">{state.error}</p>}
+      {state.error && !duplicateStageError && <p role="alert">{state.error}</p>}
       {state.notice && <p role="status">{state.notice}</p>}
-      {(attempted?.status === "unknown" || attempted?.status === "pending") && (
+      {attempted?.status === "pending" && (
         <p role="alert">
           This saved revision has an uncertain stage attempt; this revision will
           not be staged again here.
@@ -190,16 +213,14 @@ export function RichDocumentActions({
         </p>
       )}
       {state.stage && (
-        <div role="status">
-          Stage {state.stage.id} received for document {state.stage.documentId},
-          revision {state.stage.revision}.
+        <div className={styles.savedCard} role="status">
+          <h3>Saved revision {state.stage.revision} staged</h3>
           <p>
-            Returned destination: <code>{state.stage.route}</code>. No
-            destination was opened and nothing was prepared or sent.
+            The saved stage record confirms this revision. No destination was
+            opened and nothing was prepared or sent.
           </p>
         </div>
       )}
-      {state.preview && <SavedRichPreview preview={state.preview} />}
       <div className={styles.toolbar}>
         <UnavailableAction reason="Collaboration and asset operations are not included in this saved-document contract.">
           Collaboration and uploads
