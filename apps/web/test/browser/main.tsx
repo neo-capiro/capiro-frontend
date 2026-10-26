@@ -9,6 +9,9 @@ import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
 import { MeriTaskUpdateHost } from "../../src/app/meri/task-updates/MeriTaskUpdateHost";
 import { IntegrationProbe } from "./IntegrationProbe";
 import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
+import { RoutinesProbe } from "./RoutinesProbe";
+import { SelectedLifecycleProbe } from "./SelectedLifecycleProbe";
+import { ClientHandoffProbe } from "./ClientHandoffProbe";
 import { isOnboardPath } from "../../src/shared/session/onboard-route";
 import { RequireSession } from "../../src/shared/session/SessionContext";
 import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
@@ -60,6 +63,11 @@ function SessionProbe() {
 function RoutedApp() {
   const path = usePathname();
   const search = useSearchParams();
+  // Dedicated synthetic harness mounts for the governed lifecycle and routine suites.
+  // No production route uses these paths; "/" is otherwise only addressed by them.
+  if (path === "/") return <SelectedLifecycleProbe />;
+  if (path === "/profile") return <ClientHandoffProbe />;
+  if (path === "/routines") return <RoutinesProbe />;
   if (path === "/meri/conversations")
     return (
       <RequireSession>
@@ -204,7 +212,7 @@ function RoutedApp() {
         </RequireSession>
       </div>
     );
-  if (path === "/" || path === "/portfolio" || path.startsWith("/portfolio/")) {
+  if (path === "/portfolio" || path.startsWith("/portfolio/")) {
     const id = path.split("/")[2];
     return (
       <div data-portfolio-root>

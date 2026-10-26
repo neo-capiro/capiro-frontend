@@ -44,7 +44,7 @@ export function verifyActiveMeriPackages(records, consumers) {
         const record = records.find(item => item.file === file);
         if (!record || typeof record.sourceCommit !== 'string' || !/^[a-f0-9]{40}$/.test(record.sourceCommit))
           throw Error(`Active public package has no immutable source binding: ${file}`);
-        if (match[2] && (family !== 'contracts' || record.sourceCommit.slice(0, 8) !== match[2]
+        if (match[2] && (record.sourceCommit.slice(0, 8) !== match[2]
           || typeof record.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(record.sha256)
           || record.sha256.slice(0, 12) !== match[3]))
           throw Error(`Content-addressed public package binding mismatch: ${file}`);

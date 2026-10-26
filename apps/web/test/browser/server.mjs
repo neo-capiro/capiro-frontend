@@ -1,10 +1,22 @@
 import { build, createServer, preview } from "vite";
 import { fileURLToPath } from "node:url";
+import { readdirSync } from "node:fs";
 import path from "node:path";
 
 const app = fileURLToPath(new URL("../../", import.meta.url));
 const workspace = path.resolve(app, "../..");
 const local = (name) => path.join(app, "test/browser", name);
+// Every harness page under test/browser is a build entry. Listing only a subset left
+// the remaining fixture pages served by the SPA fallback shell instead of mounting.
+const harnessPages = (directory) =>
+  readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) return harnessPages(target);
+    return entry.name.endsWith(".html")
+      ? [path.relative(local("."), target)]
+      : [];
+  });
+const harnessEntries = harnessPages(local("."));
 const port = Number(process.env.CAPIRO_BROWSER_TEST_PORT ?? "5197");
 if (!Number.isInteger(port) || port < 1024 || port > 65535)
   throw new Error("Invalid browser qualification port");
@@ -58,10 +70,12 @@ if (process.env.CAPIRO_BROWSER_TEST_DEV === "1") {
       minify: false,
       sourcemap: true,
       rolldownOptions: {
-        input: {
-          main: local("index.html"),
-          authLifecycle: local("auth-lifecycle.html"),
-        },
+        input: Object.fromEntries(
+          harnessEntries.map((page) => [
+            page.replace(/\.html$/, ""),
+            local(page),
+          ]),
+        ),
         onwarn(warning, handler) {
           if (warning.code !== "MODULE_LEVEL_DIRECTIVE") handler(warning);
         },
