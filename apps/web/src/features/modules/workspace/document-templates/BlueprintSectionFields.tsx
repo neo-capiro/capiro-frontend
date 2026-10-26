@@ -69,10 +69,12 @@ export function StudioNumber({
 }
 export function StudioToggle({
   label,
+  displayLabel = label,
   value,
   onChange,
 }: {
   label: string;
+  displayLabel?: string;
   value: boolean;
   onChange: (value: boolean) => void;
 }) {
@@ -92,7 +94,7 @@ export function StudioToggle({
         height={20}
         unoptimized
       />
-      {label}
+      {displayLabel}
     </button>
   );
 }
@@ -242,6 +244,7 @@ export function BlueprintSectionFields({
             <strong>{section.title || "Untitled section"}</strong>
             <StudioToggle
               label={`Required: ${section.title || `section ${index + 1}`}`}
+              displayLabel="Required"
               value={section.required}
               onChange={(required) => update(index, { ...section, required })}
             />

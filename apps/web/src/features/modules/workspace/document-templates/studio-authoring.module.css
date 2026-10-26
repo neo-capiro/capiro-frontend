@@ -135,10 +135,6 @@
 .dialog > :global([data-slot="modal-body"]) {
   padding: 8px 28px 24px;
 }
-.dialog > footer {
-  padding: 16px 28px;
-  background: var(--muted);
-}
 .read {
   display: flex;
   flex-direction: column;
@@ -169,13 +165,6 @@
   background: var(--muted);
   font-size: 12px;
 }
-.notice {
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  background: var(--muted);
-  border-radius: 10px;
-  font-size: 13px;
-}
 .assetGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
@@ -190,7 +179,6 @@
     flex-direction: column;
   }
   .dialog > header,
-  .dialog > footer,
   .dialog > :global([data-slot="modal-body"]) {
     padding: 16px;
   }

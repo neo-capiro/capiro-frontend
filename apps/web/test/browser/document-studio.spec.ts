@@ -14,7 +14,10 @@ async function capture(page: Page, name: string) {
   const directory = process.env.CAPIRO_BLUEPRINT_CAPTURE_DIR;
   if (!directory) return;
   mkdirSync(directory, { recursive: true });
-  await page.screenshot({ path: join(directory, name), fullPage: true });
+  await page.screenshot({
+    path: join(directory, name),
+    fullPage: (await page.getByRole("dialog").count()) === 0,
+  });
 }
 async function draftEditor(page: Page) {
   await openBlueprint(page);
@@ -313,12 +316,40 @@ test("theme editing preserves opaque settings and lifecycle, with explicit publi
     .click();
   await page.getByRole("combobox", { name: "Published theme version" }).click();
   await page.getByRole("option", { name: "v2", exact: true }).click();
+  let releaseTheme!: () => void;
+  const heldTheme = new Promise<void>((resolve) => {
+    releaseTheme = resolve;
+  });
+  let themeReadEntered = false;
+  await page.route(
+    "**/api/capiro/workspace.themes.version?*",
+    async (route) => {
+      themeReadEntered = true;
+      await heldTheme;
+      await route.fulfill({ json: studioTheme.versions[1] });
+    },
+  );
   await page
     .getByRole("button", { name: "Copy selected theme settings", exact: true })
     .click();
+  await expect.poll(() => themeReadEntered).toBe(true);
+  await expect(
+    page.getByRole("button", { name: "Save definition", exact: true }),
+  ).toBeDisabled();
+  await page
+    .getByLabel("Document type label")
+    .fill("Edited while copying theme");
+  releaseTheme();
   await expect(page.getByLabel("Default theme settings (JSON)")).toHaveValue(
     JSON.stringify(studioTheme.versions[1]!.settings, null, 2),
   );
+  await expect(page.getByLabel("Document type label")).toHaveValue(
+    "Edited while copying theme",
+  );
+  await page
+    .getByLabel("Default theme settings (JSON)")
+    .scrollIntoViewIfNeeded();
+  await capture(page, "theme-copy-editor-desktop.png");
   await page
     .getByRole("button", { name: "Save definition", exact: true })
     .click();
@@ -327,6 +358,9 @@ test("theme editing preserves opaque settings and lifecycle, with explicit publi
     id: studioTheme.id,
     name: studioTheme.name,
     settings: studioTheme.versions[1]!.settings,
+  });
+  expect(f.studio.versions[2]!.definition.documentType).toMatchObject({
+    label: "Edited while copying theme",
   });
 });
 
@@ -390,6 +424,7 @@ test("registers exact available upload, discloses readiness and respects referen
   expect(f.studio.writes[0]!.input.body).toEqual({
     attachmentId: f.studio.uploads[0]!.id,
   });
+  await capture(page, "assets-desktop.png");
   f.studio.referencedAsset = true;
   await page
     .getByRole("button", { name: "Remove Synthetic mark.png", exact: true })
@@ -406,6 +441,7 @@ test("registers exact available upload, discloses readiness and respects referen
       ),
   ).toBeVisible();
   f.studio.referencedAsset = false;
+  await capture(page, "asset-reference-refusal.png");
   await page
     .getByRole("button", { name: "Confirm remove asset", exact: true })
     .click();
@@ -473,6 +509,11 @@ test("narrow definition uses native keyboard dialog and exact switch asset dimen
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
+  const dialogRect = await editor.boundingBox();
+  expect(dialogRect?.x).toBe(16);
+  expect(dialogRect?.width).toBe(358);
+  expect(dialogRect!.y).toBeGreaterThanOrEqual(0);
+  expect(dialogRect!.y + dialogRect!.height).toBeLessThanOrEqual(844);
   await capture(page, "definition-editor-narrow.png");
   await page.keyboard.press("Escape");
   await expect(editor).toBeHidden();

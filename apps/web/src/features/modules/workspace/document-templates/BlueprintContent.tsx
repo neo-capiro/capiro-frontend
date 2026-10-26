@@ -180,6 +180,7 @@ function BlueprintDraftEditor({
         : undefined,
   );
   const [error, setError] = useState<string>();
+  const [themeCopyPending, setThemeCopyPending] = useState(false);
   return (
     <Modal
       open
@@ -195,6 +196,7 @@ function BlueprintDraftEditor({
           className={styles.fields}
           onSubmit={(event) => {
             event.preventDefault();
+            if (themeCopyPending) return;
             const parsed = parseWorkspaceBlueprintDefinition(value);
             if (!parsed.ok) {
               setError(
@@ -260,9 +262,18 @@ function BlueprintDraftEditor({
             disabled={writer.locked}
             className={`${styles.fields} ${styles.unframed}`}
           >
-            <BlueprintDefinitionFields value={value} onChange={setValue} />
+            <BlueprintDefinitionFields
+              value={value}
+              onChange={setValue}
+              onThemeCopyPending={setThemeCopyPending}
+              onThemeCopied={(defaultTheme) =>
+                setValue((current) =>
+                  current ? { ...current, defaultTheme } : current,
+                )
+              }
+            />
             {error && <p role="alert">{error}</p>}
-            <ActionButton type="submit" primary>
+            <ActionButton type="submit" primary disabled={themeCopyPending}>
               Save definition
             </ActionButton>
           </fieldset>

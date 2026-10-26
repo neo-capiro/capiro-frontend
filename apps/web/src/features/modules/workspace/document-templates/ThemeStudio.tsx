@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import {
   parseWorkspaceThemeList,
   parseWorkspaceThemeDetail,
@@ -385,6 +385,7 @@ function ThemeDetail({
   const query = useCapiroQuery("workspace.themes.detail", {
     params: { themeId: id },
   });
+  const versionFieldId = useId();
   const parsed =
     query.data === undefined
       ? undefined
@@ -471,8 +472,9 @@ function ThemeDetail({
             >
               New theme draft version
             </ActionButton>
-            <Field label="Saved theme version">
+            <Field label="Saved theme version" htmlFor={versionFieldId}>
               <SelectInput
+                id={versionFieldId}
                 aria-label="Saved theme version"
                 value={version?.id ?? ""}
                 placeholder="Choose a saved version"

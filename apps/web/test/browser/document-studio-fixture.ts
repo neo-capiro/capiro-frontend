@@ -19,10 +19,12 @@ export async function studioFixture(page: Page) {
   const base = await blueprintFixture(page);
   const control = {
     parent: structuredClone(blueprint),
-    versions: versions.map((row) => ({
-      ...row,
-      definition: structuredClone(studioDefinition),
-    })) as WorkspaceBlueprintContentVersion[],
+    versions: versions.map(
+      (row): WorkspaceBlueprintContentVersion => ({
+        ...row,
+        definition: { ...structuredClone(studioDefinition) },
+      }),
+    ),
     themes: [structuredClone(studioTheme)],
     assets: [] as WorkspaceBrandAsset[],
     uploads: [structuredClone(studioUpload)] as WorkspaceBrandUpload[],

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import {
   parseWorkspaceBrandAssetList,
   parseWorkspaceBrandUploadList,
@@ -108,6 +108,7 @@ function BrandUpload({
 }
 
 export function BrandAssetStudio({ writer }: { writer: StudioWrite }) {
+  const fieldsId = useId();
   const query = useCapiroQuery("workspace.brandAssets.list", {});
   const uploadsQuery = useCapiroQuery("workspace.brandAssets.uploads", {});
   const parsed =
@@ -162,8 +163,12 @@ export function BrandAssetStudio({ writer }: { writer: StudioWrite }) {
                 </p>
               )}
               {asset.scanDisclosure && <p>{asset.scanDisclosure}</p>}
-              <Field label="Asset reference for theme settings">
+              <Field
+                label="Asset reference for theme settings"
+                htmlFor={`${fieldsId}-${asset.id}`}
+              >
                 <TextInput
+                  id={`${fieldsId}-${asset.id}`}
                   aria-label={`Asset reference: ${asset.filename}`}
                   readOnly
                   value={asset.id}
@@ -205,8 +210,9 @@ export function BrandAssetStudio({ writer }: { writer: StudioWrite }) {
           onRetry={uploadsQuery.reload}
         />
         {uploads?.ok && (
-          <Field label="Confirmed image">
+          <Field label="Confirmed image" htmlFor={`${fieldsId}-upload`}>
             <SelectInput
+              id={`${fieldsId}-upload`}
               aria-label="Confirmed image"
               value={selected?.id ?? ""}
               placeholder="Choose an available image"

@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useId, useLayoutEffect, useMemo, useState } from "react";
 import {
   parseWorkspaceThemeList,
   parseWorkspaceThemeDetail,
@@ -19,10 +19,13 @@ import { createRequestLifetime } from "../../../../shared/session/request-lifeti
 
 export function BlueprintThemePicker({
   onChoose,
+  onPendingChange,
 }: {
   onChoose: (theme: BlueprintTheme) => void;
+  onPendingChange: (pending: boolean) => void;
 }) {
   const api = useCapiro();
+  const pickerId = useId();
   const lifetime = useMemo(() => ({ api, ...createRequestLifetime() }), [api]);
   useLayoutEffect(() => lifetime.mount(), [lifetime]);
   const query = useCapiroQuery("workspace.themes.list", {});
@@ -62,8 +65,9 @@ export function BlueprintThemePicker({
         onRetry={query.reload}
       />
       {list?.ok && (
-        <Field label="Theme to copy">
+        <Field label="Theme to copy" htmlFor={`${pickerId}-theme`}>
           <SelectInput
+            id={`${pickerId}-theme`}
             aria-label="Theme to copy"
             disabled={pending}
             value={themeId}
@@ -90,8 +94,9 @@ export function BlueprintThemePicker({
         onRetry={detail.reload}
       />
       {theme && (
-        <Field label="Published theme version">
+        <Field label="Published theme version" htmlFor={`${pickerId}-version`}>
           <SelectInput
+            id={`${pickerId}-version`}
             aria-label="Published theme version"
             disabled={pending}
             value={selected?.id ?? ""}
@@ -108,6 +113,7 @@ export function BlueprintThemePicker({
         onClick={async () => {
           if (!selected || !theme) return;
           setPending(true);
+          onPendingChange(true);
           setMessage("");
           const signal = lifetime.signal();
           try {
@@ -143,7 +149,10 @@ export function BlueprintThemePicker({
                 : "Could not copy theme settings.",
             );
           } finally {
-            if (!signal.aborted) setPending(false);
+            if (!signal.aborted) {
+              setPending(false);
+              onPendingChange(false);
+            }
           }
         }}
       >

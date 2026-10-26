@@ -1,6 +1,7 @@
 "use client";
 import { useId, useState } from "react";
 import type {
+  BlueprintTheme,
   IntakeQuestion,
   WorkspaceBlueprintDefinition,
 } from "@capiro/shared/workspace-template-studio";
@@ -98,6 +99,7 @@ function IntakeFields({
   questions: IntakeQuestion[];
   onChange: (value: IntakeQuestion[]) => void;
 }) {
+  const fieldsId = useId();
   const change = (index: number, row: IntakeQuestion) =>
     onChange(questions.map((value, at) => (at === index ? row : value)));
   return (
@@ -120,8 +122,9 @@ function IntakeFields({
             value={row.helpText ?? ""}
             onChange={(helpText) => change(index, { ...row, helpText })}
           />
-          <Field label="Answer source">
+          <Field label="Answer source" htmlFor={`${fieldsId}-answer-${index}`}>
             <SelectInput
+              id={`${fieldsId}-answer-${index}`}
               aria-label={`Answer source ${index + 1}`}
               value={row.answerSource}
               options={[
@@ -143,8 +146,12 @@ function IntakeFields({
             value={row.required}
             onChange={(required) => change(index, { ...row, required })}
           />
-          <Field label="Display condition">
+          <Field
+            label="Display condition"
+            htmlFor={`${fieldsId}-condition-${index}`}
+          >
             <SelectInput
+              id={`${fieldsId}-condition-${index}`}
               aria-label={`Display condition ${index + 1}`}
               value={row.condition?.operator ?? "none"}
               options={["none", "equals", "not_equals", "present"].map(
@@ -345,9 +352,13 @@ function PolicyFields({
 export function BlueprintDefinitionFields({
   value,
   onChange,
+  onThemeCopied,
+  onThemeCopyPending,
 }: {
   value: WorkspaceBlueprintDefinition;
   onChange: (value: WorkspaceBlueprintDefinition) => void;
+  onThemeCopied: (theme: BlueprintTheme) => void;
+  onThemeCopyPending: (pending: boolean) => void;
 }) {
   const [themeCopy, setThemeCopy] = useState(0);
   return (
@@ -439,9 +450,10 @@ export function BlueprintDefinitionFields({
             }
           />
           <BlueprintThemePicker
+            onPendingChange={onThemeCopyPending}
             onChoose={(defaultTheme) => {
               setThemeCopy((current) => current + 1);
-              onChange({ ...value, defaultTheme });
+              onThemeCopied(defaultTheme);
             }}
           />
         </div>
