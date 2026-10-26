@@ -1874,9 +1874,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "fingerprint": "88a3237b8a043fca61e48043e0dc199359131daba44ab99162fb03cf99c3bd9c",
-    "reason": "Existing route host gains a named resume destination; job/journal work stays out of the host. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "fingerprint": "036dce726b61ae740cc65d83e10cadb0eb6c4c3dcfa4bc152541bea69a1124c3",
+    "reason": "One existing Workspace route and view composition boundary retains canonical route parsing, client-aware navigation and its established feature children. This change preserves a single keyed Invitations entry, moves the three existing destinations into the adopted DropdownMenu and keeps New document primary. The menu CSS is feature-local; no new route, policy, receipt or state owner is introduced. Further splitting the routing JSX for this threshold would not isolate an independent responsibility. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -2414,9 +2414,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "b67d2721bb177cef6b2ad189a91f0762cd0cfc8c4b2c08457e68a97efa7e05ed",
-    "reason": "Accept exact reviewed DraftEditor: it composes one saved-document editing view from the existing ordinary/prospect save owners, preview, association, export and history components. The delta rearranges only the ordinary header/export/qualification presentation and preserves currentDraft, state keys, mutation gates and prospect behavior. No persistence, authorization or export receiver moves into this component; the existing feature boundaries remain explicit.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "fingerprint": "c32adbb67d893f830df4a9fc79fdd6752e9675b76496fbe9bc843a0778fde4a8",
+    "reason": "One existing saved-document editor composes title/section editing and delegates save, history, export, preview and people management to their established owners. The four-line delta adds one prospect-excluding People mount with currentDraft.id; it adds no people state, transport, policy or save lifetime. Existing keyed ordinary save and the panel's keyed identity preserve retirement. Extracting only this JSX insertion to satisfy the threshold would scatter the same composition responsibility. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4226,6 +4226,87 @@
     "fingerprint": "2dea7bb682a01f11815b1a832e0e8ce133bbe67da79e187c4ccbd74bfd0942c5",
     "reason": "Accept exact reviewed 570-line unit module after reviewing its existing and changed contents: 24 cases cover the same saved-history admission/diff/projection and consuming component contract. Its fixtures/mocks are local to that feature. Obsolete Panel/Tabs mocks are removed; native-row mocks preserve selection and negative assertions. The changed fingerprint is independently reviewed, not accepted merely because the prior file already exceeded the threshold.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/collaboration/InvitationEmail.tsx",
+    "kind": "function",
+    "symbol": "InvitationEmail",
+    "fingerprint": "e23072872d3e3aa157e35a3b18276a1266d7470d1ef546cb0f273e2b8fc18a16",
+    "reason": "One saved invitation's receipt card and explicit request/cancel controls; status text is outside the function. Existing operations own transport/authority. Exact independent disposition: W3-WS08-ML24-CONSUMER-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE189 d2c8834f9099f0c4f017d25dc9a55d4f09b7d2d1",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/collaboration/use-collaboration.ts",
+    "kind": "function",
+    "symbol": "useCollaboration",
+    "fingerprint": "1e271dbc7f34f934c7ea486bbf1671410b7895a15932386c459535ffea32b44f",
+    "reason": "One people owner combines its read, three mutations and uncertain acknowledgement reconciliation through standard scoped hooks. Splitting state ownership would obscure their shared lifetime. Exact independent disposition: W3-WS08-ML24-CONSUMER-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE189 d2c8834f9099f0c4f017d25dc9a55d4f09b7d2d1",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/collaboration/WorkspaceCollaboratorsPanel.tsx",
+    "kind": "function",
+    "symbol": "Person",
+    "fingerprint": "e9a8ffc756c91fbf484452699aaa7dba42e301defe73322b29c94c60ae85e5a4",
+    "reason": "One persisted row's immutable-owner/role/removal/optional-mail presentation. No policy or server-effect implementation. Exact independent disposition: W3-WS08-ML24-CONSUMER-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE189 d2c8834f9099f0c4f017d25dc9a55d4f09b7d2d1",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/collaboration/WorkspaceCollaboratorsPanel.tsx",
+    "kind": "function",
+    "symbol": "People",
+    "fingerprint": "83f7a8864f8323818d7ee38af722ae2ea8eb1b43c3f379467be5a7701b28732a",
+    "reason": "One current people view and selected internal-member form; mutation work remains in its hook. Exact independent disposition: W3-WS08-ML24-CONSUMER-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE189 d2c8834f9099f0c4f017d25dc9a55d4f09b7d2d1",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/collaboration/WorkspaceInvitationInbox.tsx",
+    "kind": "function",
+    "symbol": "NotificationCard",
+    "fingerprint": "230166e6b79d76300d9a26796d5203349fadaf95683279c7d24393e324003e44",
+    "reason": "One canonical notification's read versus accept/decline presentation, preserving non-invitation notices. Exact independent disposition: W3-WS08-ML24-CONSUMER-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE189 d2c8834f9099f0c4f017d25dc9a55d4f09b7d2d1",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/collaboration/WorkspaceInvitationInbox.tsx",
+    "kind": "function",
+    "symbol": "CurrentInbox",
+    "fingerprint": "9b5a7666004f1a9e1bc6ac93ef8bed87610816521b406a21e624929a01d02bba",
+    "reason": "Scoped notification list/current-recipient check, read-all and loading/refused/empty presentation. Exact independent disposition: W3-WS08-ML24-CONSUMER-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE189 d2c8834f9099f0c4f017d25dc9a55d4f09b7d2d1",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-collaboration/fixtures.ts",
+    "kind": "function",
+    "symbol": "fixture",
+    "fingerprint": "c27c54626cd52cd365b706a19c341b705bed543c486b52d801b343a7b7d51976",
+    "reason": "One synthetic collaboration fixture owns coherent in-memory people, invitation, notification and email-receipt state plus local request capture for the same focused feature. Relocation preserves its non-import body and existing local-request fence; it is not a production provider or authority. The adjacent helpers already hold reusable identity and deferred primitives. Keeping the operation dispatch and shared fixture state together makes cross-action assertions clear. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-collaboration/fixtures.ts",
+    "kind": "function",
+    "symbol": "fixture > <anonymous>",
+    "fingerprint": "3acf20ab7ac949a9629f8e47ae629bef987d7b2daf38832ec872dd9a4ec0d568",
+    "reason": "One nested synthetic operation dispatcher reads the fixed operation key/input, records requests and returns or mutates the same collaboration fixture state. Its cases cover people, invitation, notifications and explicit optional email receipts for this single scenario family, with an unexpected-operation failure. It introduces no reusable transport or product policy. The accepted body is unchanged by relocation; separating branches would obscure shared synthetic state without reducing responsibility. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/tests/workspace-collaboration.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "fb76716aa91530bf82b5161f0dba58e1564ffaea6f21586394ebefa6e0db2c88",
+    "reason": "One Vitest describe callback groups five related frozen collaboration receiver cases: synthetic owner versus mutation identity, resolved teammate input, fixed route/method ownership, truthful mail receipts and separate mutation/notification shapes. Each behavior is already an individual it callback. Relocation changes imports and two erased non-null assertions only, with all assertions retained; splitting the suite solely for the threshold would add no responsibility boundary. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]

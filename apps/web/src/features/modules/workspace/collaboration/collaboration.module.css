@@ -1,0 +1,111 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 16px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow-wrap: anywhere;
+}
+.card h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.07px;
+  color: var(--foreground);
+}
+.card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.card .caption {
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+.actions,
+.footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer {
+  padding: 20px 0 0;
+  justify-content: flex-end;
+}
+.dialog {
+  width: min(760px, calc(100vw - 32px));
+  border-radius: 12px;
+  box-shadow:
+    0 16px 40px -12px #0c0a092e,
+    0 2px 6px #0c0a090d;
+}
+.dialog > header {
+  padding: 24px;
+  border-bottom: 0;
+}
+.dialog :global([data-slot="dialog-title"]) {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.12px;
+}
+.dialog :global([data-slot="dialog-title"])::before {
+  content: "WORKSPACE";
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  line-height: 17px;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: var(--muted-foreground);
+}
+.dialog :global([data-slot="modal-body"]) {
+  padding: 24px;
+}
+.dialog button {
+  border-radius: 10px;
+}
+.card label {
+  font-size: 12px;
+  line-height: 1.2;
+}
+.card :global([data-slot="select-trigger"]) {
+  min-height: 36px;
+  height: 36px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+.card :global([role="alert"]) {
+  color: var(--destructive);
+}
+@media (max-width: 480px) {
+  .dialog {
+    max-height: calc(100dvh - 24px);
+  }
+  .dialog > header,
+  .dialog :global([data-slot="modal-body"]) {
+    padding: 16px;
+  }
+  .actions button,
+  .footer button {
+    white-space: normal;
+    min-height: 36px;
+    height: auto;
+    padding-block: 8px;
+  }
+}
