@@ -1874,9 +1874,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "fingerprint": "ec78085fc5fff0026c619d5a468a7e60ddda45a120c5a1f07b7c0c832ba5cf60",
-    "reason": "One194-line route-composition screen maps validated route variants to separate workflows, keys UI scopes and renders navigation choices. Parsing/serialization, library querying and each workflow have separate owners. It does not implement domain reads, authorization or persistence; keep the connected composition. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "fingerprint": "88a3237b8a043fca61e48043e0dc199359131daba44ab99162fb03cf99c3bd9c",
+    "reason": "Existing route host gains a named resume destination; job/journal work stays out of the host. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3908,10 +3908,10 @@
     "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "64155da97bb96b8706c60cccf26dec629a0c373dc85d9c2fe986aff843fbd67e",
-    "reason": "This 407-line declarative catalog retains the existing fixed Hill Day operation descriptors. The accepted change adds only authorized library query request metadata; it does not add a service lifecycle or browser authorization policy. Independent PR158 review explicitly accepted this catalog signal at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de. Composition preserves its exact blob. See docs/wave3-integration-20261026/BRIEF.md.",
-    "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "b3a076a4adf3c4bf31174770b03423bd634a1c5a579e2bb8efb0a9d7f02506c3",
+    "reason": "Existing typed Hill Day catalog remains the single producer-bound descriptor owner. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
@@ -3944,9 +3944,9 @@
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
     "kind": "function",
     "symbol": "HillDayWizard",
-    "fingerprint": "1d8d937ba624d1f17b1f73009e3238327262aee3471cc451915b91764b4556ed",
-    "reason": "One214-line wizard owns step state/presentation and composes separate sponsor, meeting, resolution, context and generation components. The accepted delta retains the returned document/client tuple for route construction; typed mutation hooks own create/update. No second job, recovery or authority subsystem is added. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "fingerprint": "48c9322228f45ae6664ba0fdf251e6c65dc412eed6c9fb599bfc869e3b166e92",
+    "reason": "Existing phase orchestration receives saved state/native destination callbacks without acquiring provider or journal responsibilities. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4073,6 +4073,42 @@
     "fingerprint": "1bd3e16fbdeb84beca078100a50be98f9c52ef3b70074e2c6f99ce629972992c",
     "reason": "The stage action owns one ordered verify/read/reserve/dispatch/receipt sequence and its uncertainty handling. Its exact projection checks and retained-request path belong to the same action rather than a new lifecycle owner. Exact independent disposition: W3-WS13-PR180-REVIEW.md.",
     "reviewedBy": "Independent m3_scope, FE180 e3a00f51ea0f8f62d3abf1affd2db518d1d426c2",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+    "kind": "function",
+    "symbol": "GenerationSession",
+    "fingerprint": "4e82485d8141a0b5be3eb81f92e3644b34cde8eac458536bd93b41749c74a416",
+    "reason": "One panel renders mutually constrained progress/recovery/control states; domain effects remain in the local hook. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+    "kind": "function",
+    "symbol": "HillDayMeetings",
+    "fingerprint": "6493a133ac7255442c1cd0d52f4e6fed02565c740428b2b3ffdf5b020f0deeda",
+    "reason": "Saved picker initialization remains in its existing picker. Restored saved-week parsing now matches the existing local-midnight week boundary; unchanged selection, timezone and query ownership. Exact Root correction disposition: W3-WS10-FE182-CORRECTION-REVIEW.md; original responsibility review: W3-WS10-FE182-REVIEW.md.",
+    "reviewedBy": "Root Codex independent calendar delta review, FE182 a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "cfda643256a8a4b21c2e112b38d0fd9839401db6228d4d6fd95547462dd9926d",
+    "reason": "Wizard and its thin authorized saved-document receiver share one lifecycle; phase components remain separate. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/hillday-generation-state.ts",
+    "kind": "function",
+    "symbol": "useHillDayGeneration",
+    "fingerprint": "a072efca8083d0d0ddcd8b3973db34cb93d522e29e09e6ca93be5fd179aa97f8",
+    "reason": "Domain start/control/readback glue reuses journal/query APIs; no alternate persistence, serializer, scheduler or authority layer. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
     "reviewedOn": "2026-10-26"
   }
 ]
