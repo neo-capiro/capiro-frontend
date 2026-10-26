@@ -91,7 +91,9 @@ function TemplateCard({
           </ActionButton>
         }
       >
-        <RichPreview draft={draft} mobile={false} plainText={false} />
+        <div tabIndex={0} aria-label="Template preview content">
+          <RichPreview draft={draft} mobile={false} plainText={false} />
+        </div>
       </Modal>
     </article>
   );

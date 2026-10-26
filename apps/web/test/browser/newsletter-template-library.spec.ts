@@ -77,6 +77,7 @@ test("explicit server-template save, inert preview, loaded filtering and one loc
     });
   await button(page, "Preview template Monthly update").click();
   const preview = page.getByRole("dialog", { name: "Preview: Monthly update" });
+  await expect(preview.getByLabel("Template preview content")).toBeFocused();
   await expect(preview.locator("iframe")).toHaveAttribute("sandbox", "");
   expect(f.templates.writes).toHaveLength(1);
   await page.keyboard.press("Escape");
@@ -325,7 +326,7 @@ test("narrow library cards and dialogs wrap; keyboard cancellation restores open
   ).toBe(true);
   if (capture) {
     mkdirSync(capture, { recursive: true });
-    await page.screenshot({
+    await list.screenshot({
       path: join(capture, "template-catalog-narrow.png"),
     });
   }
