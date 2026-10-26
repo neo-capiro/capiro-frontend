@@ -24,10 +24,16 @@ import { RichPreview, SavedRichPreview } from "./RichPreview";
 import { RichStructure } from "./RichStructure";
 import { RichDocumentActions } from "./RichDocumentActions";
 import { useRichDocument } from "./use-rich-document";
+import { useSectionLibrary } from "./library/use-section-library";
+import { SavedSections, SectionLibraryNotice } from "./library/SavedSections";
+import { SaveSectionDialog } from "./library/SaveSectionDialog";
+import libraryStyles from "./library/sections.module.css";
 import styles from "./rich-newsletter.module.css";
 
 export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
   const { owner, state: history } = useRichDocument();
+  const library = useSectionLibrary(owner, history.saved?.id);
+  const libraryOpener = useRef<HTMLButtonElement | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
@@ -121,6 +127,13 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
         owner={owner}
         previewButtonRef={previewButton}
       />
+      <SectionLibraryNotice library={library} />
+      {library.save && (
+        <SaveSectionDialog
+          key={`${library.save.documentId}:${library.save.sectionId}`}
+          library={library}
+        />
+      )}
       <fieldset
         disabled={
           Boolean(history.pending) || history.recovery.phase !== "ready"
@@ -149,15 +162,36 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
           </ActionButton>
         </div>
         <CampaignFields draft={draft} change={commit} />
-        <div className={styles.editor}>
+        <div
+          className={`${styles.editor} ${library.browsing ? libraryStyles.libraryLayout : ""}`}
+        >
           <RichStructure
             design={draft.design}
             selectedId={selectedId}
             select={setSelectedId}
             add={add}
+            savedSectionIds={
+              history.saved?.design.sections.map((section) => section.id) ?? []
+            }
+            saveSection={library.startSave}
+            browse={(opener) => {
+              libraryOpener.current = opener;
+              void library.browse();
+            }}
           />
           <RichPreview draft={draft} mobile={mobile} plainText={plainText} />
-          {selected ? (
+          {library.browsing ? (
+            <SavedSections
+              library={library}
+              close={() => {
+                library.closeBrowse();
+                libraryOpener.current?.focus();
+              }}
+              insert={(item) => {
+                if (library.insert(item)) libraryOpener.current?.focus();
+              }}
+            />
+          ) : selected ? (
             <RichBlockControls
               key={`${history.editorRevision}:${selected.id}`}
               block={selected}
