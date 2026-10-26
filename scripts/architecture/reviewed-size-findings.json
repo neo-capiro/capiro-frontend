@@ -2496,10 +2496,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "e2978996c95f2ccc411e88e154035f882899f04e2a51ebf7f59f42520327e9ca",
-    "reason": "Independent review: fixed-service request validation, authentication, bounded forwarding and response normalization remain cohesive. Delta only delegates origin equality to the shared comparator; no new auth, route-policy or dispatch responsibility. Approval applies only to this fingerprint; inherited signals remain visible.",
-    "reviewedBy": "Codex independent /root/runtime_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "d0ecf54d21fb247230aaf264729708d729e5b142741f5f10bc626dd3eebe3bfa",
+    "reason": "One exact allowlist predicate within the existing transport, no new authority.",
+    "reviewedBy": "Wave 3 Root independent reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
