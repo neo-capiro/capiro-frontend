@@ -2,6 +2,8 @@ import { outreachTemplateOperations } from "./outreach-templates";
 import { workspaceCommentOperations } from "./workspace-comments";
 import { workspaceDocumentOperations } from "./workspace-documents";
 import { workspaceDocumentTemplateOperations } from "./workspace-document-templates";
+import { workspaceBlueprintAuthoringOperations } from "./workspace-blueprint-authoring";
+import { workspaceThemeStudioOperations } from "./workspace-theme-studio";
 import { workspaceExportOperations } from "./workspace-exports";
 import { workspaceHillDayOperations } from "./workspace-hillday";
 import { workspaceProspectOperations } from "./workspace-prospects";
@@ -18,6 +20,8 @@ import { workspaceNotificationOperations } from "./workspace-notifications";
 import { richNewsletterReviewOperations } from "./rich-newsletter-review";
 export const workspaceOperations = {
   ...workspaceDocumentTemplateOperations,
+  ...workspaceBlueprintAuthoringOperations,
+  ...workspaceThemeStudioOperations,
   ...richNewsletterAssetOperations,
   ...richNewsletterAssetManagementOperations,
   ...richNewsletterReviewOperations,
