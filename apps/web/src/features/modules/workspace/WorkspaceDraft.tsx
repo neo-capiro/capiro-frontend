@@ -27,6 +27,7 @@ import presentation from "./ordinary-presentation.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
 import { VersionHistory } from "./version-history/VersionHistory";
+import { WorkspaceCollaboratorsPanel } from "./collaboration/WorkspaceCollaboratorsPanel";
 import { OrdinaryDraftExport } from "./ordinary-export/OrdinaryDraftExport";
 import {
   OrdinaryDraftSave,
@@ -108,6 +109,9 @@ function DraftEditor({
             draft.prospectId ? styles.actions : presentation.headerActions
           }
         >
+          {!draft.prospectId && (
+            <WorkspaceCollaboratorsPanel draftId={currentDraft.id} />
+          )}
           <VersionHistory
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}:${ordinarySave ? currentDraft.updatedAt : ""}`}
             draft={currentDraft}

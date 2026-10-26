@@ -3,6 +3,7 @@ import {
   documentFixture,
   documentId,
   stageId,
+  clientId,
   editorUrl,
   button,
   enterEditor,
@@ -14,7 +15,7 @@ test("rich document create is explicit, preserves local content and stages only 
   page,
 }) => {
   const fixture = await documentFixture(page);
-  await enterEditor(page);
+  await enterEditor(page, `${editorUrl}&clientId=${clientId}`);
   await page.getByLabel("Newsletter name").fill("Local creation name");
   await page
     .getByLabel("Subject", { exact: true })
@@ -74,9 +75,47 @@ test("rich document create is explicit, preserves local content and stages only 
     },
   ]);
   await expect(button(page, "Stage newsletter")).toBeDisabled();
-  await expect(page).toHaveURL(editorUrl);
-  await expect(page.locator(`a[href*="${stageId}"]`)).toHaveCount(0);
+  await expect(page).toHaveURL(`${editorUrl}&clientId=${clientId}`);
   expectIsolated(fixture);
+  const receiving: string[] = [];
+  await page.route("**/api/capiro/engagement.richNewsletter.*", (route) => {
+    receiving.push(
+      `${route.request().method()} ${new URL(route.request().url()).pathname}`,
+    );
+    return route.fulfill({
+      json: {
+        id: stageId,
+        documentId,
+        revision: 5,
+        name: fixture.control.current.name,
+        config: fixture.control.current.config,
+        design: fixture.control.current.design,
+      },
+    });
+  });
+  const reviewStage = button(page, "Review staged newsletter");
+  await expect(reviewStage).toBeEnabled();
+  await reviewStage.scrollIntoViewIfNeeded();
+  await page.screenshot({
+    path: test.info().outputPath("confirmed-stage-host.png"),
+  });
+  const writesBeforeNavigation = fixture.requests.filter(
+    (entry) => entry.method !== "GET",
+  );
+  await reviewStage.click();
+  await expect(page).toHaveURL(
+    `/engagement/outreach?newsletterStage=${stageId}&clientId=${clientId}`,
+  );
+  await expect(
+    page.getByRole("heading", { name: "Staged newsletter", exact: true }),
+  ).toBeVisible();
+  expect([...new Set(receiving)]).toEqual([
+    "GET /api/capiro/engagement.richNewsletter.stage",
+  ]);
+  expect(fixture.requests.filter((entry) => entry.method !== "GET")).toEqual(
+    writesBeforeNavigation,
+  );
+  expect(fixture.control.errors).toEqual([]);
 });
 
 test("rich library detail requires explicit adoption and sends the complete reviewed CAS document", async ({

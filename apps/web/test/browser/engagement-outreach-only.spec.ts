@@ -245,11 +245,20 @@ test("newsletter and Objective destination hints keep their dedicated route guar
   page,
 }) => {
   const observed = await setupOutreach(page);
+  await page.route("**/api/capiro/engagement.richNewsletter.stage?*", (route) =>
+    route.fulfill({
+      status: 403,
+      json: { message: "Synthetic current-access refusal" },
+    }),
+  );
   await page.goto(
     "/modules/engagement?view=outreach&newsletterStage=90000000-0000-4000-8000-000000000009",
   );
   await expect(
-    page.getByRole("heading", { name: "Rich newsletter unavailable" }),
+    page.getByText(
+      "This newsletter is unavailable for your current access or does not match this link.",
+      { exact: true },
+    ),
   ).toBeVisible();
   await expect(
     page.getByRole("table", { name: "Outreach records" }),

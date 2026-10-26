@@ -153,4 +153,12 @@ export const richNewsletterOperations = {
     response: receiving(parseNewsletterOutreachRecord),
     source,
   }),
+  "engagement.richNewsletter.open": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/engagement/newsletters/stages/:id/open",
+    request: z.object({ params: stageParams }).strict(),
+    response: receiving(parseNewsletterOutreachRecord),
+    source,
+  }),
 } as const;
