@@ -4425,5 +4425,59 @@
     "reason": "This126-line parameterized desktop/narrow journey retains exact source-read identity, inert text/current-link and positive-offset checks, focus and scoped accessibility, separate usage display and completed-run reload without admission effects. The added assertions cover native-only versus genuinely source-free history in the same existing fixture. The original host actually fails the native-only assertion, and the corrected desktop case passes using Release generated dist. Existing helper and setup owners are reused; this test body is an intentional end-to-end journey rather than a product abstraction.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6d18d85ad7aaececa18e73a96cac384f2587374469a2b6a4e21df23765286474",
+    "reason": "The resolution module retains one Hill Day resolution workflow and its existing correction dialog; the new adjacent picker owns Directory query, paging and roster presentation. At438 nonblank lines it adds no transport, policy or unrelated workflow owner. The fixed correction still owns captured-target submission and pending/error handling. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "CorrectionDialog",
+    "fingerprint": "9f99d29c592a7ebe7c67a8f6c5f68fe52b0c3f5faa5bc8bf9e3fe0e11e4bc428",
+    "reason": "One existing correction dialog owns mutually exclusive manual/Directory selection, captured target, explicit Confirm and pending dismissal. Its187 lines include the preserved office/location branch; Directory reads and result presentation were moved into the adjacent cohesive picker. Further splitting solely for size would divide the connected correction lifetime without removing a second responsibility. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "HillDayResolution",
+    "fingerprint": "ad1559be3ab56852f5015f7dc0e30be51071d6c4d99006ff99ca21f7e607767f",
+    "reason": "The210-line existing resolution host changes only its CorrectionDialog target key. Its established resolution/read/actions remain unchanged; the key disposes local inputs when document/meeting/attendee changes. This exact fingerprint disposition is limited to that one-line integration delta. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayStafferPicker.tsx",
+    "kind": "function",
+    "symbol": "HillDayStafferPicker",
+    "fingerprint": "f94d41f9bfe8be70d5f9c046cab12d9c8b803952b18248f7991ad734d497789c",
+    "reason": "One91-line read-and-select view owns search, contact-page state, exact returned staff.id selection and status/pager rendering. It delegates request lifetime to useCapiroQuery and correction writes to the parent, with no duplicated schema, policy or mutation owner. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-staffer-picker-fixture.ts",
+    "kind": "function",
+    "symbol": "stafferFixture",
+    "fingerprint": "914cb322b1171b933fe6b42ca18497e6a7639a04f1f10de3ed983c76225c48bf",
+    "reason": "One82-line synthetic mounted fixture installs Directory/correction responses and records queries, writes and aborted requests for the same actual application flow. Delayed reads/writes and real-shape responses make target/lifetime assertions meaningful; it does not implement or claim Core authorization. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "HillDayResolution > <anonymous> #3",
+    "fingerprint": "d5c748621238d6e8c900b597f9877d32b7b1c1e678e4b8533e0de09d00837140",
+    "reason": "This111-line meeting-map callback renders one resolution card: office facts and its attendee rows, including explicit existing correction/selection buttons. It owns no independent request, state, authorization or persistence mechanism; callbacks delegate to the surrounding existing resolution/correction owners. Its nested JSX keeps the meeting/attendee target visibly bound. Exact body is unchanged between05f58f4c and1bedc345; independent review now makes this specific responsibility explicit after the container-file change invalidated legacy whole-file coverage. No refactor or new product acceptance is implied. See W3-WS11-PR197-REVIEW.md addendum.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
