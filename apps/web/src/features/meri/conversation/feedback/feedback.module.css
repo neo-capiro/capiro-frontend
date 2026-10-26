@@ -112,12 +112,19 @@
   background: var(--muted);
 }
 .error {
-  color: var(--destructive);
+  color: var(--destructive-text);
 }
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+.actions > button {
+  justify-content: center;
+}
+.dialog button:disabled,
+.trigger:disabled {
+  opacity: 0.5;
 }
 .receipts {
   display: flex;
@@ -165,7 +172,7 @@
   color: var(--muted-foreground);
 }
 .dialog :focus-visible {
-  outline: 2px solid var(--ring);
+  outline: 2px solid var(--ring, #2563eb);
   outline-offset: 2px;
 }
 @media (max-width: 600px) {

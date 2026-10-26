@@ -20,6 +20,7 @@ import {
 } from "./FeedbackFields";
 import { FeedbackReceipts } from "./FeedbackReceipts";
 import portal from "../../ui/meri-dialog.module.css";
+import ui from "../../ui/meri-ui.module.css";
 import styles from "./feedback.module.css";
 
 function initialDraft(
@@ -94,7 +95,7 @@ function FeedbackDialog({
         type="button"
         variant="ghost"
         size="sm"
-        className={styles.trigger}
+        className={`${ui.ghost} ${styles.trigger}`}
         disabled={!eligible && !feedback.pending}
         onClick={() => {
           setOpen(true);
@@ -167,6 +168,7 @@ function FeedbackDialog({
             <div className={styles.actions}>
               <Button
                 type="submit"
+                className={ui.primary}
                 disabled={
                   feedback.busy ||
                   feedback.blocked ||
@@ -182,6 +184,7 @@ function FeedbackDialog({
               <Button
                 type="button"
                 variant="outline"
+                className={ui.outline}
                 disabled={feedback.busy || feedback.blocked}
                 onClick={() => void feedback.refresh()}
               >

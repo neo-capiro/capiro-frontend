@@ -100,8 +100,8 @@ test("preference and recommendation remain distinct and artifact target pins its
     "preference",
     "recommendation",
   ]);
-  expect(requests[1].target.kind).toBe("artifact");
-  expect(requests[1].target.versionId).toBeTruthy();
+  expect(requests[1]?.target.kind).toBe("artifact");
+  expect(requests[1]?.target.versionId).toBeTruthy();
 });
 test("lost commit acknowledgement freezes fields and readback confirms without another write", async ({
   page,
@@ -226,6 +226,15 @@ test("phone dialog fits the viewport with labelled keyboard controls", async ({
   const dialog = await open(page);
   await dialog.getByLabel("Type of feedback").selectOption("recommendation");
   await dialog.getByLabel("What do you recommend?").fill("Show the next step.");
+  await page.keyboard.press("Tab");
+  const save = dialog.getByRole("button", {
+    name: "Save feedback",
+    exact: true,
+  });
+  await expect(save).toBeFocused();
+  expect(
+    await save.evaluate((button) => getComputedStyle(button).outlineStyle),
+  ).not.toBe("none");
   await capture(page, "feedback-phone.png");
   const box = await dialog.boundingBox();
   expect(box!.width).toBeLessThanOrEqual(358);
