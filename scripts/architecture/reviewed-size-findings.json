@@ -746,7 +746,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -890,7 +890,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each job\u2019s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u2019s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each job’s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload’s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2369,7 +2369,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -3459,10 +3459,10 @@
     "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
     "kind": "function",
     "symbol": "MeriLiveConversation",
-    "fingerprint": "6c83576eabb815e0a82c174e6cb660ece6074ea7c89048c02d7bc96535648124",
-    "reason": "This session-bound renderer composes one current turn, status, artifacts and composer. The draft owner now receives the canonical request only after the command journal records it, and acknowledgement/pending checks use the exact run scope. Command dispatch, request identity and observation remain in existing separate owners; the renderer adds no authority or independent workflow. Independent cross_run_review verified effect ordering and the real run-switch regressions.",
-    "reviewedBy": "Codex root and independent cross_run_review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "8b49841ba1618ee9f07f7c25d4e7f60b93774dfefbd00f814983174c0cf0787f",
+    "reason": "This mounted shell composes the existing conversation turn, composer, lifecycle and panels. The MF-05 callback only filters the proposal binding to the current run before notifying its read owner. Domain decisions, authorization, persistence and observation algorithms remain in their established modules; the callback wiring introduces no separate responsibility to extract.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
@@ -5394,9 +5394,45 @@
     "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
     "kind": "function",
     "symbol": "useConversationIntents",
-    "fingerprint": "e28a9a60b57f510bbb0c9ea7a3be111b22d5e1a52f706b762357be29ef33ec38",
-    "reason": "The hook composes one conversation intent-review lifetime: admitted list projection, exact saved-decision recovery and explicit decisions. MF-04 delegates timer and visibility resource ownership to useIntentExpiry and adds only a fresh-decision deadline guard. Transport, authorization and durable journal semantics remain in existing owners; the small composition change adds no separate domain or reason to split the established recovery workflow.",
-    "reviewedBy": "Codex independent MF-04 reviewer",
+    "fingerprint": "3a3e03d911aa0138be277fecd3c3f2bc1400da207b051156399b97ca4cc99f17",
+    "reason": "The hook composes one conversation intent-review lifetime: admitted list projection, exact saved-decision recovery and explicit decisions. MF-05 adds only a completion notification after a known decision receipt and list refresh; current access and callback lifetime are checked. Run observation stays in its existing owner, and transport, authorization and durable journal semantics are unchanged.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents > <anonymous> #6",
+    "fingerprint": "f8cd8e8a2ce7dcde9ed2fe1ebfc735b439f69720e819d41f7d017ab1be138fa4",
+    "reason": "This callback owns one immutable explicit decision and its existing receipt/recovery lifecycle. The added notification reports only known completion after list refresh and currentness checks. Keeping admission, retained decision bytes, receipt reconciliation and that final notification together preserves the existing uncertain-write fence without creating a second journal or dispatch path.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
+    "kind": "function",
+    "symbol": "useLiveRun",
+    "fingerprint": "08fd4d6d8f9a1b8bae7e454073d197ae7e17ddb21933d643c973437432948320",
+    "reason": "The hook coordinates one admitted run command/observation lifetime. Coalesced post-decision read wakeups and synchronous Stop/Pause generation retirement belong to that same lifetime, including commands already holding its gate. Command dispatch, journal uncertainty and public SDK cursors remain in their existing owners. The corrected Stop wrapper retires read wakeups before delegating the unchanged canonical cancel.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
+    "kind": "function",
+    "symbol": "useRunObservation",
+    "fingerprint": "89c667891011cf0be5434515595c1356aa88bc2a0ed6d64589d5e04c4b64e9bc",
+    "reason": "The hook owns one cancellable public subscription per admitted port. The finite post-decision waiting window uses that same cursor, abort owner and retry/settlement loop; it adds no domain write, authority or persistence. Keeping subscription admission, cleanup and state projection together makes the bounded waiting exception explicit without duplicating the public client.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
+    "kind": "function",
+    "symbol": "useRunObservation > observe",
+    "fingerprint": "b45e523f1ef8ced2c84a05795a50af0aa5d283c173a2f7f3e48abd1cee7d9dbe",
+    "reason": "This function starts and tears down one observation attempt lifecycle. Its post-decision watermark distinguishes new run status from a paged history suffix, and its unchanged-wait window stops at the existing subscription boundary. Cursor progression, abort cleanup and settlement belong together; the shared loop and SDK retain transport/retry ownership and no command replay is added.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
