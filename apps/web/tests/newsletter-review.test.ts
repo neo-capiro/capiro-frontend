@@ -34,6 +34,25 @@ describe("saved newsletter public receiving", () => {
     },
   );
   it("rejects another document, including every nested comment binding", () => {
+    // A fully coherent foreign result must still be bound to our requested ID.
+    // Merely changing the top-level ID would also fail nested consistency and
+    // would not detect accidental binding to a response's own ID.
+    expect(
+      receiveReview(
+        {
+          ...reviewFixture(),
+          id: otherReviewId,
+          comments: [
+            {
+              ...reviewComment(),
+              documentId: otherReviewId,
+              campaignId: otherReviewId,
+            },
+          ],
+        },
+        reviewId,
+      ).ok,
+    ).toBe(false);
     expect(
       receiveReview({ ...reviewFixture(), id: otherReviewId }, reviewId).ok,
     ).toBe(false);

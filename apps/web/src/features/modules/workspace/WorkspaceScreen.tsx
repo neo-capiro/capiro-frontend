@@ -23,7 +23,7 @@ import { WorkspaceShares } from "./WorkspaceShares";
 import { WorkspaceInvitationEntry } from "./collaboration/WorkspaceInvitationInbox";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
-import { NewsletterReview } from "./rich-newsletter/review/NewsletterReview";
+import { NewsletterReviewEntry } from "./rich-newsletter/review/NewsletterReviewEntry";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
 import {
   readWorkspaceRoute,
@@ -57,7 +57,7 @@ export function WorkspaceScreen() {
   const back = () => navigate("documents");
   if (route.kind === "newsletter-review")
     return (
-      <NewsletterReview
+      <NewsletterReviewEntry
         key={`${route.newsletterId}:${clientId ?? "general"}`}
         documentId={route.newsletterId}
         onClose={back}

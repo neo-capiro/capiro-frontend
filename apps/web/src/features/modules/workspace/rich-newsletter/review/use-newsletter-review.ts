@@ -44,10 +44,15 @@ export function useNewsletterReview(documentId: string) {
     !comments.ok;
   const review = refused || malformed ? undefined : admitted;
   const unavailable = opened && !query.loading && !review;
+  const accessLost =
+    refused ||
+    (query.error instanceof CapiroApiError &&
+      [401, 403, 404].includes(query.error.status));
   return {
     opened,
     review,
     unavailable,
+    accessLost,
     loading: query.loading,
     commentsLoading: commentsRequested && commentsQuery.loading,
     commentsError: Boolean(commentsQuery.error),

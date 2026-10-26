@@ -14,16 +14,22 @@ export function NewsletterReview({
   documentId,
   onClose,
   onEdit,
+  onEditableAccessLost,
 }: {
   documentId: string;
   onClose: () => void;
   onEdit?: (documentId: string) => void;
+  onEditableAccessLost?: () => void;
 }) {
   const state = useNewsletterReview(documentId);
   const [mobile, setMobile] = useState(false);
   const [filter, setFilter] = useState<"all" | "open" | "resolved">("all");
   const heading = useRef<HTMLDivElement>(null);
   const { review } = state;
+  useEffect(() => {
+    if (state.accessLost || (review && !canEnterEditor(review.role)))
+      onEditableAccessLost?.();
+  }, [state.accessLost, review, onEditableAccessLost]);
   useEffect(() => {
     if (state.opened) heading.current?.focus();
   }, [state.opened, state.loading, state.unavailable]);
@@ -123,7 +129,8 @@ export function NewsletterReview({
               >
                 <h2>Comments</h2>
                 <p>
-                  Up to 500 comments are loaded. Older comments may not be shown.
+                  Up to 500 comments are loaded. Older comments may not be
+                  shown.
                 </p>
                 <div
                   className={styles.actions}
