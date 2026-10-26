@@ -1,0 +1,108 @@
+.content,
+.panel,
+.endpoint {
+  display: grid;
+  min-width: 0;
+  gap: 10px;
+}
+
+.panel {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+}
+
+.panel input {
+  min-width: 0;
+  border-color: var(--border-strong);
+  border-radius: 8px;
+  padding: 9px 12px;
+  height: 40px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.panel label,
+.panel p,
+.timezone,
+.endpoint legend {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.panel label,
+.hint,
+.timezone dt {
+  color: var(--muted-foreground);
+}
+
+.panel p,
+.timezone,
+.timezone dd {
+  margin: 0;
+}
+
+.timezone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.endpoints,
+.dateTime {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+}
+
+.endpoint {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.endpoint legend {
+  padding: 0 0 6px;
+  font-weight: 500;
+}
+
+.endpoint input {
+  height: 35px;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.error {
+  color: var(--destructive);
+}
+
+.exact,
+.error,
+.hint,
+.timezone dd {
+  overflow-wrap: anywhere;
+}
+
+.content > button {
+  justify-self: start;
+  max-width: 100%;
+  min-height: 36px;
+  height: auto;
+  padding: 6px 14px;
+  white-space: normal;
+}
+
+@media (max-width: 720px) {
+  .endpoints {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dateTime {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

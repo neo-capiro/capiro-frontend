@@ -50,7 +50,7 @@ export type CorrectionWrite = {
   body: Record<string, string>;
 };
 type Reply = { json: unknown; status?: number };
-const meeting = (number: number) => ({
+export const meeting = (number: number) => ({
   meetingId: `meeting-${number}`,
   eventId: `event-${number}`,
   state: "partial",
@@ -118,6 +118,11 @@ export async function stafferFixture(
         resolvedAt: at,
         sources: [],
         meetings: [meeting(1), meeting(2)],
+        meetingFacts: [1, 2].map((number) => ({
+          meetingId: `meeting-${number}`,
+          eventId: `event-${number}`,
+          facts: null,
+        })),
       },
     }),
   );

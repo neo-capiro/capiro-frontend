@@ -63,7 +63,13 @@ async function serviceResponse(
   diagnosticKey?: string,
 ): Promise<Response> {
   if (!response.ok)
-    return serviceErrorResponse(response, operation, signal, publicCapability);
+    return serviceErrorResponse(
+      response,
+      operation,
+      signal,
+      publicCapability,
+      input,
+    );
   if (operation.responseMode === "binary" && operation.binary) {
     const download = await readBinaryResponse(
       response,

@@ -24,10 +24,16 @@ import { RichPreview, SavedRichPreview } from "./RichPreview";
 import { RichStructure } from "./RichStructure";
 import { RichDocumentActions } from "./RichDocumentActions";
 import { useRichDocument } from "./use-rich-document";
+import { useSectionLibrary } from "./library/use-section-library";
+import { SavedSections, SectionLibraryNotice } from "./library/SavedSections";
+import { SaveSectionDialog } from "./library/SaveSectionDialog";
+import libraryStyles from "./library/sections.module.css";
 import styles from "./rich-newsletter.module.css";
 
 export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
   const { owner, state: history } = useRichDocument();
+  const library = useSectionLibrary(owner, history.saved?.id);
+  const libraryOpener = useRef<HTMLButtonElement | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
@@ -91,7 +97,7 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
     <section className={styles.screen}>
       <PageHeader
         title="Rich newsletter editor preview"
-        description="Edit locally, then explicitly create or review a saved rich document. Collaboration and delivery remain unavailable; leaving clears local edits, while uncertain write guards remain for this session and client scope."
+        description="Edit locally, then explicitly create or review a saved rich document. Submitted create/save requests remain in this browser for recovery; current saved content is reviewed separately. Collaboration and delivery remain unavailable."
         actions={
           <ActionButton
             disabled={Boolean(history.pending)}
@@ -104,8 +110,9 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
       {closing && (
         <div role="alert" className={styles.notice}>
           <p>
-            Discard this local draft and leave the preview? An uncertain request
-            may already have committed; leaving does not undo it.
+            Leave this preview? Unsubmitted local edits will be discarded. A
+            retained create/save request and its submitted edits remain
+            available for recovery; leaving does not undo it.
           </p>
           <ActionButton disabled={Boolean(history.pending)} onClick={onClose}>
             Discard and leave
@@ -120,9 +127,18 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
         owner={owner}
         previewButtonRef={previewButton}
       />
+      <SectionLibraryNotice library={library} />
+      {library.save && (
+        <SaveSectionDialog
+          key={`${library.save.documentId}:${library.save.sectionId}`}
+          library={library}
+        />
+      )}
       <fieldset
-        disabled={Boolean(history.pending)}
-        inert={Boolean(history.pending)}
+        disabled={
+          Boolean(history.pending) || history.recovery.phase !== "ready"
+        }
+        inert={Boolean(history.pending) || history.recovery.phase !== "ready"}
         className={styles.draftEditor}
       >
         <div className={styles.toolbar}>
@@ -146,15 +162,36 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
           </ActionButton>
         </div>
         <CampaignFields draft={draft} change={commit} />
-        <div className={styles.editor}>
+        <div
+          className={`${styles.editor} ${library.browsing ? libraryStyles.libraryLayout : ""}`}
+        >
           <RichStructure
             design={draft.design}
             selectedId={selectedId}
             select={setSelectedId}
             add={add}
+            savedSectionIds={
+              history.saved?.design.sections.map((section) => section.id) ?? []
+            }
+            saveSection={library.startSave}
+            browse={(opener) => {
+              libraryOpener.current = opener;
+              void library.browse();
+            }}
           />
           <RichPreview draft={draft} mobile={mobile} plainText={plainText} />
-          {selected ? (
+          {library.browsing ? (
+            <SavedSections
+              library={library}
+              close={() => {
+                library.closeBrowse();
+                libraryOpener.current?.focus();
+              }}
+              insert={(item) => {
+                if (library.insert(item)) libraryOpener.current?.focus();
+              }}
+            />
+          ) : selected ? (
             <RichBlockControls
               key={`${history.editorRevision}:${selected.id}`}
               block={selected}
