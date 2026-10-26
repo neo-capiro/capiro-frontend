@@ -10,6 +10,7 @@ import { isTerminal, type TurnView } from "./conversation-view";
 import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
 import answer from "../cited-answer.module.css";
 import styles from "./live.module.css";
+import { TurnFeedback } from "./feedback/TurnFeedback";
 
 const tones: Readonly<Record<TurnView["runState"], StatusTone>> = {
   queued: "neutral",
@@ -109,6 +110,7 @@ export function ConversationTurn({
               }
             />
           )}
+          <TurnFeedback turn={turn} />
         </MessageContent>
       </Message>
       <TurnNotices turn={turn} />

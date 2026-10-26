@@ -281,7 +281,7 @@
       "integrity": "sha512-VqGOo3KVDhg13J+6CabiUykZa2sAVyzZMMLbfWQNDOyLVWSgo1uO1F+VHrmNjKuUbManUunigZs0/9XRzJv0ig==",
       "bytes": 1021760,
       "regularEntryCount": 69,
-      "status": "active-packed-frontend-input; deployed-acceptance-separate",
+      "status": "superseded-by capiro-meri-contracts-0.1.15-4f6dd062-2fa661f28d6b.tgz (2026-10-26); archive retained for accepted-evidence provenance",
       "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
       "releaseReceiptSha256": "2e89f17f6bc3a2c82f659cbc5eac84f20d55e9c33397f855fc6dd303c898ecf0"
     },
@@ -314,6 +314,36 @@
       "status": "qualified-physical-client-evidence; native-workspace-owner-retained",
       "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
       "releaseReceiptSha256": "41a705bbfa806cfa796fd8003c75e0466a01e4d46d46dd410a43ae2aa6cdb5e5"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.15-d1e1c50b-abff4f22e6d8.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.15",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "d1e1c50b94146a78e25f9bbf37d8ed1ee715804b",
+      "sourceTree": "c106df9574f7845e4c85e0574a6984a4e394d927",
+      "packageSourceTree": "4cacf45f2ad0c29593006e179d159f47846d78da",
+      "sha256": "abff4f22e6d81bcbe8277cb2bd0c61fe90341edd3d67dd152d9e4a6c2f98e4f8",
+      "integrity": "sha512-R2gbreLQPaSSobbUqV/wA0l0jVHDYu7DKBu0XIyhegxTph8CDIN/dEHHPAOn9HKN1M6bk7fvcc716iXN5uit5w==",
+      "bytes": 1049137,
+      "regularEntryCount": 69,
+      "status": "superseded-by capiro-meri-contracts-0.1.15-4f6dd062-2fa661f28d6b.tgz (2026-10-26); archive retained for accepted-evidence provenance",
+      "qualification": "Release combined hearing/feedback physical receiver, NodeNext/Bundler and production-closure evidence reused. Integration verified all archive/installed bytes, unchanged media exports and package manifest; existing resolved player closure retained without install, build, repack or gate reruns."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.15-4f6dd062-2fa661f28d6b.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.15",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "4f6dd0626c0b8fa4beb91d6c3cfa4b0376b3a203",
+      "sourceTree": "77d8c8a6c2966bf261fa15e592283fbe5bfe17c8",
+      "sha256": "2fa661f28d6bffec2d3b197f8d6afc95d53e89504053d5d6a3f9ba1de8d941e1",
+      "integrity": "sha512-4w+2cCu+GBULuP18Ptxh0n96UflMhOGwnKEZ9wgzPJaDnMZlTJiL2OIHGAUsYWDLOlR+ipB4p4/QXZPXDo3nMg==",
+      "bytes": 1049133,
+      "regularEntryCount": 69,
+      "status": "active-packed-frontend-input; deployed-acceptance-separate",
+      "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
+      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u2026/5a1cf815\u2026). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
     }
   ]
 }
