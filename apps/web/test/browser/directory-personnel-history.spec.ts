@@ -163,7 +163,11 @@ test("DoW preview rejects invalid or stale IDs and clears on filter change", asy
   await selectableRow.focus();
   await page.keyboard.press("Enter");
   await expect(preview).toBeVisible();
-  await page.getByRole("combobox", { name: "Service" }).selectOption("Navy");
+  await page.getByRole("combobox", { name: "Service" }).focus();
+  await page.keyboard.press("Enter");
+  await page.getByRole("option", { name: "Navy", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/personnelService=Navy/);
   await expect(page).not.toHaveURL(/personnelPreviewId=/);
   await expect(
     preview.getByRole("heading", { name: "Select a person" }),

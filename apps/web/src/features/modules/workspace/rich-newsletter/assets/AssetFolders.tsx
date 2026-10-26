@@ -9,8 +9,8 @@ import type { AssetPickerState } from "./use-asset-picker";
 import styles from "./assets.module.css";
 
 export type AssetManagementLauncher = {
-  manage: (action: AssetManagementAction) => void;
-  disabled: boolean;
+  manage?: (action: AssetManagementAction) => void;
+  disabled?: boolean;
 };
 export function AssetFolders({
   picker,
@@ -55,53 +55,56 @@ export function AssetFolders({
           Folders unavailable. Refresh the library to try this read again.
         </p>
       )}
-      <div className={styles.actions}>
-        <ActionButton
-          data-asset-focus="importImage"
-          disabled={disabled || !!unavailable}
-          onClick={() =>
-            manage({ kind: "importImage", folder: selectedFolder })
-          }
-        >
-          Import URL
-        </ActionButton>
-        <ActionButton
-          data-asset-focus="createFolder"
-          disabled={disabled}
-          onClick={() => manage({ kind: "createFolder" })}
-        >
-          Add Folder
-        </ActionButton>
-        <ActionButton
-          data-asset-focus="moveImage"
-          disabled={disabled || !selectedImage || !folders.data}
-          onClick={() =>
-            selectedImage && manage({ kind: "moveImage", image: selectedImage })
-          }
-        >
-          Move to folder
-        </ActionButton>
-        <ActionButton
-          data-asset-focus="renameFolder"
-          disabled={disabled || !selectedFolder}
-          onClick={() =>
-            selectedFolder &&
-            manage({ kind: "renameFolder", folder: selectedFolder })
-          }
-        >
-          Rename Folder
-        </ActionButton>
-        <ActionButton
-          data-asset-focus="deleteFolder"
-          disabled={disabled || !selectedFolder}
-          onClick={() =>
-            selectedFolder &&
-            manage({ kind: "deleteFolder", folder: selectedFolder })
-          }
-        >
-          Delete Folder
-        </ActionButton>
-      </div>
+      {manage && (
+        <div className={styles.actions}>
+          <ActionButton
+            data-asset-focus="importImage"
+            disabled={disabled || !!unavailable}
+            onClick={() =>
+              manage({ kind: "importImage", folder: selectedFolder })
+            }
+          >
+            Import URL
+          </ActionButton>
+          <ActionButton
+            data-asset-focus="createFolder"
+            disabled={disabled}
+            onClick={() => manage({ kind: "createFolder" })}
+          >
+            Add Folder
+          </ActionButton>
+          <ActionButton
+            data-asset-focus="moveImage"
+            disabled={disabled || !selectedImage || !folders.data}
+            onClick={() =>
+              selectedImage &&
+              manage({ kind: "moveImage", image: selectedImage })
+            }
+          >
+            Move to folder
+          </ActionButton>
+          <ActionButton
+            data-asset-focus="renameFolder"
+            disabled={disabled || !selectedFolder}
+            onClick={() =>
+              selectedFolder &&
+              manage({ kind: "renameFolder", folder: selectedFolder })
+            }
+          >
+            Rename Folder
+          </ActionButton>
+          <ActionButton
+            data-asset-focus="deleteFolder"
+            disabled={disabled || !selectedFolder}
+            onClick={() =>
+              selectedFolder &&
+              manage({ kind: "deleteFolder", folder: selectedFolder })
+            }
+          >
+            Delete Folder
+          </ActionButton>
+        </div>
+      )}
     </div>
   );
 }

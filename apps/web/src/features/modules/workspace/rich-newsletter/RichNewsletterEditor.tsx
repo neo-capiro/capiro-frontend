@@ -407,6 +407,11 @@ export function RichNewsletterEditor({
                       <RichBlockControls
                         key={`${history.editorRevision}:${selected.id}`}
                         block={selected}
+                        documentId={
+                          history.current && !history.fence
+                            ? history.saved?.id
+                            : undefined
+                        }
                         design={draft.design}
                         structure={structure}
                         update={update}

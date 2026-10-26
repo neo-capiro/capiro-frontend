@@ -5,6 +5,7 @@ import {
   type NewsletterDesign,
 } from "@capiro/shared/newsletter";
 import { ActionButton, Field, TextArea } from "../../../../shared/module-ui";
+import { BlockProviderTools } from "./providers/BlockProviderTools";
 import { RichText } from "./RichText";
 import { AssetReplaceControl } from "./assets/AssetReplaceControl";
 import { Entry, Choice, NumberEntry, Toggle } from "./content/Fields";
@@ -22,12 +23,14 @@ import ui from "./library/sections.module.css";
 
 export function RichBlockControls({
   block,
+  documentId,
   design,
   structure,
   update,
   remove,
 }: {
   block: NewsletterBlock;
+  documentId?: string;
   design: NewsletterDesign;
   structure: (action: StructureAction) => void;
   update: (change: Partial<NewsletterBlock>) => void;
@@ -197,6 +200,11 @@ export function RichBlockControls({
       <ActionButton className={ui.button} onClick={remove}>
         Remove block
       </ActionButton>
+      <BlockProviderTools
+        documentId={documentId}
+        block={block}
+        update={update}
+      />
     </section>
   );
 }

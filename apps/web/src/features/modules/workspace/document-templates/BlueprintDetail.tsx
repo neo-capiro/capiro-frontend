@@ -19,12 +19,21 @@ import {
   blueprintDate,
 } from "./BlueprintVersions";
 import styles from "./document-templates.module.css";
+import { BlueprintContent } from "./BlueprintContent";
+import { BlueprintNewVersion } from "./BlueprintCreate";
+import type { StudioWrite } from "./studio-write";
 
 export function BlueprintDetail({
   id,
   onAdopt,
+  writer,
+  initialVersionId,
+  onVersionChanged,
 }: {
   id: string;
+  writer: StudioWrite;
+  initialVersionId?: string;
+  onVersionChanged: (versionId: string) => void;
   onAdopt: (
     blueprint: WorkspaceBlueprintDetail,
     version: WorkspaceBlueprintVersionMetadata,
@@ -38,7 +47,7 @@ export function BlueprintDetail({
       ? undefined
       : parseWorkspaceBlueprintDetail(query.data, { blueprintId: id });
   const blueprint = received?.ok ? received.value : undefined;
-  const [versionId, selectVersion] = useState("");
+  const [versionId, selectVersion] = useState(initialVersionId ?? "");
   const [history, setHistory] = useState(false);
   const listed =
     blueprint?.versions.some((version) => version.id === versionId) ?? false;
@@ -59,6 +68,12 @@ export function BlueprintDetail({
     selectVersion("");
     setHistory(false);
     query.reload();
+  };
+  const changed = (id: string) => {
+    selectVersion(id);
+    query.reload();
+    versionQuery.reload();
+    onVersionChanged(id);
   };
   return (
     <section
@@ -92,12 +107,19 @@ export function BlueprintDetail({
                 {blueprint.scope === "firm" ? "Firm" : "Capiro"}
               </p>
             </div>
-            <ActionButton
-              onClick={() => setHistory(true)}
-              disabled={!blueprint.versions.length}
-            >
-              Version history
-            </ActionButton>
+            <div className={styles.actions}>
+              <BlueprintNewVersion
+                id={id}
+                writer={writer}
+                onCreated={changed}
+              />
+              <ActionButton
+                onClick={() => setHistory(true)}
+                disabled={!blueprint.versions.length}
+              >
+                Version history
+              </ActionButton>
+            </div>
           </header>
           <div className={styles.detailBody}>
             <div className={styles.mainFacts}>
@@ -169,6 +191,16 @@ export function BlueprintDetail({
                   )}
                 </section>
               )}
+              {version && (
+                <BlueprintContent
+                  key={version.id + version.definitionHash + version.status}
+                  blueprint={blueprint}
+                  raw={versionQuery.data}
+                  versionId={version.id}
+                  writer={writer}
+                  onChanged={changed}
+                />
+              )}
             </div>
             <aside className={styles.sideFacts}>
               <h3>About this blueprint</h3>
@@ -181,8 +213,11 @@ export function BlueprintDetail({
                 <dd>{blueprint.versions.length}</dd>
               </dl>
               <p>
-                This view shows saved version details. Document content and
-                theme previews are not available here.
+                {blueprint.scope === "capiro"
+                  ? "Only the original owner can change this Capiro blueprint."
+                  : "Current firm members can create, edit and publish draft versions."}{" "}
+                Saved definitions describe document structure; using a version
+                creates a blank document with its immutable pin.
               </p>
               <ActionButton onClick={refresh}>Refresh blueprint</ActionButton>
             </aside>

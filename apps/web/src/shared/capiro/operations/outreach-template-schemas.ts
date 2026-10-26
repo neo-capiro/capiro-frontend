@@ -293,6 +293,7 @@ export const templateApplicationReceipt = z.object({
   requiresLiveContext: z.boolean(),
 });
 export const templateUseReceipt = z.object({
+  applicationId: templateId,
   sessionId: templateId,
   stateVersion: z.number(),
   templateId,

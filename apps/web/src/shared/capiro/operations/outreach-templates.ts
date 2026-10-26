@@ -10,6 +10,7 @@ import {
   templateSummary,
   templateUseReceipt,
   templateVersion,
+  templateApplicationReceipt,
 } from "./outreach-template-schemas";
 
 const source =
@@ -116,11 +117,17 @@ export const outreachTemplateOperations = {
     service: "core",
     method: "POST",
     path: `${path}/:templateId/publish`,
-    request: read,
+    request: z
+      .object({
+        params,
+        body: z.object({ expectedDraftVersionId: templateId }).strict(),
+      })
+      .strict(),
     response: z.object({
       templateId,
       version: templateVersion,
       published: z.literal(true),
+      replayed: z.boolean(),
     }),
     source,
   }),
@@ -169,5 +176,29 @@ export const outreachTemplateOperations = {
       .strict(),
     response: templateUseReceipt,
     source,
+  }),
+  "workspace.template.provenance": defineOperation({
+    service: "core",
+    method: "GET",
+    path: `${path}/provenance/:sessionId`,
+    request: z
+      .object({ params: z.object({ sessionId: templateId }).strict() })
+      .strict(),
+    response: z
+      .object({
+        sessionId: templateId,
+        templateId,
+        templateName: z.string(),
+        templateVersionId: templateId,
+        versionNumber: z.number().int(),
+        contentHash: z.string(),
+        applicationId: templateId,
+        appliedByUserId: z.string(),
+        appliedAt: z.string(),
+        receiptJsonb: templateApplicationReceipt,
+      })
+      .nullable(),
+    source:
+      "capiro-backend@caa7cc04b6 outreach-template.service.ts getProvenance; canonical current client access",
   }),
 };

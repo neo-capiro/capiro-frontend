@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import type { OutreachTemplateDetail } from "../../../../shared/capiro/operations/outreach-template-schemas";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
@@ -14,6 +11,8 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
+import { useTemplateCommands } from "./useTemplateCommands";
+import { outreachTemplateOperations } from "../../../../shared/capiro/operations/outreach-templates";
 import presentation from "./template-presentation.module.css";
 
 export function TemplateSettings({
@@ -22,38 +21,55 @@ export function TemplateSettings({
   onClose,
 }: {
   detail: OutreachTemplateDetail;
-  onSaved: () => void;
+  onSaved: (clientId?: string) => void;
   onClose: () => void;
 }) {
-  const [name, setName] = useState(detail.template.name);
+  const commands = useTemplateCommands();
+  const retained = commands.record?.command;
+  const submitted =
+    retained?.operation === "workspace.template.metadata" &&
+    retained.input.params.templateId === detail.template.id
+      ? retained.input.body
+      : undefined;
+  const [name, setName] = useState(submitted?.name ?? detail.template.name);
   const [description, setDescription] = useState(
-    detail.template.description ?? "",
+    submitted?.description ?? detail.template.description ?? "",
   );
   const [campaignType, setCampaignType] = useState(
-    detail.template.campaignType ?? "",
+    submitted?.campaignType ?? detail.template.campaignType ?? "",
   );
-  const [scope, setScope] = useState(detail.template.scope);
-  const [clientId, setClientId] = useState(detail.template.clientId ?? "");
+  const [scope, setScope] = useState(submitted?.scope ?? detail.template.scope);
+  const [clientId, setClientId] = useState(
+    submitted ? (submitted.clientId ?? "") : (detail.template.clientId ?? ""),
+  );
   const clients = useCapiroQuery("workspace.clients", {});
-  const update = useCapiroMutation("workspace.template.metadata");
   async function save() {
     try {
-      await update.run({
-        params: { templateId: detail.template.id },
-        body: {
-          name,
-          description,
-          campaignType,
-          scope,
-          clientId: scope === "client" ? clientId : undefined,
+      const completed = await commands.submit({
+        operation: "workspace.template.metadata",
+        accessClientId: detail.template.clientId ?? undefined,
+        input: {
+          params: { templateId: detail.template.id },
+          body: {
+            name,
+            description,
+            campaignType,
+            scope,
+            clientId: scope === "client" ? clientId : undefined,
+          },
         },
       });
-      onSaved();
+      if (completed?.result !== undefined)
+        onSaved(
+          outreachTemplateOperations[
+            "workspace.template.metadata"
+          ].response.parse(completed.result).clientId ?? undefined,
+        );
     } catch {
       /* Retain entered metadata on authorization or validation failure. */
     }
   }
-  const disabled = !detail.capabilities.canEdit || update.pending;
+  const disabled = !detail.capabilities.canEdit || commands.blocked;
   return (
     <div>
       <div className={presentation.settingsFields}>
@@ -114,12 +130,12 @@ export function TemplateSettings({
             />
           </Field>
         )}
-        {update.error && (
+        {commands.error && (
           <p role="alert" className={styles.error}>
-            {update.error.message}
+            {commands.error}
           </p>
         )}
-        {update.data && (
+        {commands.record?.result !== undefined && (
           <p className={styles.success}>Template settings saved.</p>
         )}
         {clients.error && scope === "client" && (
@@ -137,7 +153,7 @@ export function TemplateSettings({
           }
           onClick={save}
         >
-          {update.pending ? "Saving…" : "Save"}
+          {commands.busy ? "Saving…" : "Save"}
         </ActionButton>
       </footer>
     </div>
