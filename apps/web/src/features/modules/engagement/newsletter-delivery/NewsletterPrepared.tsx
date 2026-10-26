@@ -75,6 +75,7 @@ export function NewsletterPrepared({
             </p>
           </div>
           <ActionButton
+            primary
             disabled={disabled || !mailbox || !version?.sendable || tested}
             onClick={() => version && onTest(version.id)}
           >
