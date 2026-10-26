@@ -1,7 +1,10 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { IntentsItem } from "@capiro/meri-client/intents";
-import type { IntentsAccess } from "../../../../shared/meri-intents/access";
+import {
+  intentAccessLost,
+  type IntentsAccess,
+} from "../../../../shared/meri-intents/access";
 
 export type ListState =
   | { status: "loading" }
@@ -84,6 +87,7 @@ export function useIntentList(
         reply.code === "INTENT_APPROVALS_DISABLED"
       )
         setList({ status: "disabled" });
+      else if (intentAccessLost(reply)) setList({ status: "unavailable" });
       else
         setList((current) =>
           after && current.status === "ready"
