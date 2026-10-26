@@ -125,6 +125,8 @@ it.each([false, true])(
     clearMeriConversationRecovery(cache, scope, storage);
     const fresh = owners(cache, context, storage);
     expect(fresh.intent.read()).toEqual({});
+    expect(fresh.intent.recoveryBlocked).toBe(persistent);
+    expect(fresh.intent.current()).toBe(!persistent);
     expect(fresh.turn.read()).toBeUndefined();
     expect(fresh.selection.hints).toEqual({
       clientId: scope.clientId,
@@ -165,5 +167,59 @@ it.each([false, true])(
     expect(
       owners(cache, neighbors[3]!, storage).remembered.hints.conversationId,
     ).toBe(neighbors[3]!.conversationId);
+  },
+);
+
+it.each([false, true])(
+  "scope retirement erases private request bytes but keeps same-identity recovery blocked across reload (corrupt=%s)",
+  (corrupt) => {
+    const storage = memoryStorage();
+    syncMeriTabIdentity("synthetic-session", storage);
+    const cache = new QueryClient();
+    const old = conversationIntentJournal(cache, context, storage);
+    old.write({ submit: request });
+    const key = Array.from({ length: storage.length }, (_, i) =>
+      storage.key(i),
+    ).find((value) => value?.includes('"request"'))!;
+    expect(storage.getItem(key)).toContain(request.prompt);
+    if (corrupt) storage.setItem(key, "{invalid-json");
+    clearMeriConversationRecovery(cache, scope, storage);
+    expect(old.current()).toBe(false);
+    expect(() => old.write({ submit: request })).toThrow();
+    for (let n = 0; n < 2; n++) {
+      syncMeriTabIdentity("synthetic-session", storage);
+      const fresh = conversationIntentJournal(
+        new QueryClient(),
+        context,
+        storage,
+      );
+      expect(fresh.recoveryBlocked).toBe(true);
+      expect(fresh.current()).toBe(false);
+      expect(fresh.read()).toEqual({});
+      expect(fresh.read()).toEqual({});
+      expect(() => fresh.write({ submit: request })).toThrow();
+      expect(storage.getItem(key)).toBe("null");
+      clearMeriConversationRecovery(cache, scope, storage);
+    }
+    const nextRun = conversationIntentJournal(
+      new QueryClient(),
+      { ...context, runId: "30000000-0000-4000-8000-000000000003" },
+      storage,
+    );
+    expect(nextRun.recoveryBlocked).toBe(false);
+    expect(nextRun.current()).toBe(true);
+    expect(nextRun.read()).toEqual({});
+    expect(nextRun.write({ submit: request })).toBe(true);
+    expect(storage.getItem(key)).toBe("null");
+    syncMeriTabIdentity("synthetic-other-session", storage);
+    expect(storage.getItem(key)).toBeNull();
+    const replacement = conversationIntentJournal(
+      new QueryClient(),
+      context,
+      storage,
+    );
+    expect(replacement.recoveryBlocked).toBe(false);
+    expect(replacement.current()).toBe(true);
+    expect(replacement.read()).toEqual({});
   },
 );

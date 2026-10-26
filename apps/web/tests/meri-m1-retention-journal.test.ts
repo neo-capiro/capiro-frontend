@@ -339,9 +339,9 @@ it("scope revocation fences old writers while another conversation remains writa
     TabJournalUnavailable,
   );
   expect(() => revoked.read()).toThrow(TabJournalUnavailable);
-  expect(
+  expect(() =>
     tabRecord(scope, "request", receiveText, "run", storage).read(),
-  ).toBeUndefined();
+  ).toThrow(TabJournalUnavailable);
   other.write({ text: "Other response" });
   expect(other.read()).toEqual({ text: "Other response" });
 });

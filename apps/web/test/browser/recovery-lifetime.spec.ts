@@ -124,7 +124,8 @@ test("actual mounted receiver admits exact A-to-B recovery, then both retry bran
   );
   expect(await inspect(page)).toMatchObject({
     historySeedWasNotFound: true,
-    historyQueries: 0,
+    retainedHistoryErrors: 0,
+    retainedHistoryData: 0,
     exposesHistoryAuthority: false,
     accessLost: false,
   });
