@@ -21,6 +21,10 @@ import { createRoutinesAccess } from "../../../shared/meri-routines/access";
 import { RoutineWorkflow } from "../../../shared/meri-routines/workflow";
 import type { RoutineOwner } from "../../../shared/meri-routines/recovery";
 import { RoutinesWorkspace } from "./RoutinesWorkspace";
+import { MeriPageHeading } from "../ui/MeriPageHeading";
+import { Notice } from "../ui/Notice";
+import styles from "../ui/meri-ui.module.css";
+import phone from "../ui/phone-page.module.css";
 
 export function MeriRoutinesHost({
   enabled,
@@ -168,37 +172,69 @@ function Connected({
   if (!accessLost && state.status === "ready" && lastReady !== state.port)
     setLastReady(state.port);
   if (accessLost && lastReady) setLastReady(null);
+  // Figma 08.01A: the connect-required state keeps the page heading and explains the gate in a notice.
+  const gate = accessLost
+    ? {
+        tone: "warning" as const,
+        title: "Routine access was denied",
+        detail: "Connect to check current access.",
+      }
+    : state.status === "connecting"
+      ? {
+          tone: "neutral" as const,
+          title: "Connecting to the current routine context…",
+          detail: "",
+        }
+      : lastReady
+        ? {
+            tone: "neutral" as const,
+            title: "Routine connection unavailable",
+            detail:
+              "Connect again to continue. Connecting does not prepare or approve a routine.",
+          }
+        : {
+            tone: "neutral" as const,
+            title: "Connect to review routines",
+            detail: "Connecting does not approve or run a routine.",
+          };
+  const gated = state.status !== "ready" || !available;
   return (
-    <section style={{ padding: 24 }}>
-      <p>
-        Routine scope: {name}. Current account, scope and schedule authority are
-        checked by the service.
-      </p>
-      {state.status !== "ready" && (
-        <section aria-label="Routine connection">
-          <p role="status">
-            {accessLost
-              ? "Routine access was denied. Connect to check current access."
-              : state.status === "connecting"
-                ? "Connecting to the current routine context…"
-                : lastReady
-                  ? "Routine connection unavailable. Connect again to continue. Connecting does not prepare or approve a routine."
-                  : "Connect to review routines and recover saved requests. Connecting does not approve or run a routine."}
-          </p>
-          <Button
-            disabled={!available || state.status === "connecting"}
-            onClick={() => void host.connect()}
-          >
-            Connect routines
-          </Button>
-        </section>
-      )}
-      {!available && (
-        <p role="status">Verifying current account and client access…</p>
+    <section aria-label="Routines">
+      {gated && (
+        <div className={`${styles.page} ${phone.page}`}>
+          <MeriPageHeading
+            title="Routines"
+            description="Recurring research and drafting within your permissions"
+          />
+          {state.status !== "ready" && (
+            <Notice
+              tone={gate.tone}
+              title={gate.title}
+              action={
+                <Button
+                  disabled={!available || state.status === "connecting"}
+                  onClick={() => void host.connect()}
+                >
+                  Connect routines
+                </Button>
+              }
+            >
+              <span role="status">
+                Routine scope: {name}. Current account, scope and schedule
+                authority are checked by the service. {gate.detail}
+              </span>
+            </Notice>
+          )}
+          {!available && (
+            <p role="status" className={styles.muted}>
+              Verifying current account and client access…
+            </p>
+          )}
+        </div>
       )}
       {lastReady && (
         <div hidden={!available || state.status !== "ready"}>
-          <RoutinesWorkspace port={lastReady} preserveNewDraft />
+          <RoutinesWorkspace port={lastReady} preserveNewDraft client={name} />
         </div>
       )}
     </section>
