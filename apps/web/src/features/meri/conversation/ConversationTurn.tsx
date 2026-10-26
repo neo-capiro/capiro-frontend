@@ -101,10 +101,14 @@ export function ConversationTurn({
               ))}
             </ul>
           )}
-          <TurnSources
-            sources={turn.sources}
-            historyIncomplete={!!(turn.omittedPrefix || turn.incompleteHistory)}
-          />
+          {(turn.sources.length > 0 || turn.nativeSources.length === 0) && (
+            <TurnSources
+              sources={turn.sources}
+              historyIncomplete={
+                !!(turn.omittedPrefix || turn.incompleteHistory)
+              }
+            />
+          )}
         </MessageContent>
       </Message>
       <TurnNotices turn={turn} />

@@ -11,6 +11,8 @@ import { sameRequestOrigin } from "../request-origin";
 import type { ConversationProxyConfig } from "./proxy";
 import type { HistoryRoute } from "./history-client";
 import { trustedConversationFrontendOrigin } from "./frontend-origin";
+import type { CurrentReadOperation } from "./current-reads";
+export { conversationCurrentReadOperation } from "./current-reads";
 
 const headers = {
   "Cache-Control": "private, no-store",
@@ -47,13 +49,13 @@ export function conversationHistoryRoute(
 
 function validRequest(
   request: Request,
-  route: HistoryRoute,
+  operation: Pick<CurrentReadOperation<unknown>, "path" | "requestBytes">,
   config: ConversationProxyConfig,
 ) {
   const url = new URL(request.url);
   const declared = request.headers.get("content-length");
   return (
-    url.pathname === protocol.routes[route].path &&
+    url.pathname === operation.path &&
     !url.search &&
     !url.hash &&
     sameRequestOrigin(request, config.requestOrigin) &&
@@ -70,7 +72,7 @@ function validRequest(
     (declared === null ||
       (/^(0|[1-9]\d*)$/.test(declared) &&
         Number.isSafeInteger(Number(declared)) &&
-        Number(declared) <= protocol.limits.requestBytes))
+        Number(declared) <= operation.requestBytes))
   );
 }
 
@@ -94,8 +96,36 @@ export async function proxyConversationHistory(
   getNativeToken: () => Promise<string | null>,
   fetcher: typeof fetch = fetch,
 ) {
+  return proxyConversationNativeRead(
+    request,
+    {
+      path: protocol.routes[route].path,
+      requestBytes: protocol.limits.requestBytes,
+      responseBytes: protocol.limits.responseBytes,
+      async admit(bytes) {
+        const admitted = await receiveConversationHistoryRequest(route, bytes);
+        return (status, body) =>
+          receiveConversationHistoryResponse(route, status, body, admitted);
+      },
+    },
+    config,
+    getNativeToken,
+    fetcher,
+    route === "nextTurn" || route === "manage",
+  );
+}
+
+/** Native conversation operations reuse one HTTP/authentication owner and their public receivers. */
+export async function proxyConversationNativeRead(
+  request: Request,
+  operation: CurrentReadOperation<unknown>,
+  config: ConversationProxyConfig,
+  getNativeToken: () => Promise<string | null>,
+  fetcher: typeof fetch = fetch,
+  mutation = false,
+) {
   if (request.method !== "POST") return unavailable(405);
-  if (!validRequest(request, route, config)) return unavailable(400);
+  if (!validRequest(request, operation, config)) return unavailable(400);
   const origin = configuredOrigin(config);
   const frontendOrigin = trustedConversationFrontendOrigin(
     request,
@@ -110,38 +140,33 @@ export async function proxyConversationHistory(
       signal.throwIfAborted();
       if (!token) return unavailable(401);
       let bytes: Uint8Array<ArrayBuffer>;
-      let admitted: Awaited<
-        ReturnType<typeof receiveConversationHistoryRequest>
-      >;
+      let receive: Awaited<ReturnType<CurrentReadOperation<unknown>["admit"]>>;
       try {
         bytes = await boundedJsonBytes(
           new Response(request.body, { headers: request.headers }),
           signal,
-          protocol.limits.requestBytes,
+          operation.requestBytes,
         );
-        admitted = await receiveConversationHistoryRequest(route, bytes);
+        receive = await operation.admit(bytes);
       } catch {
         signal.throwIfAborted();
         return unavailable(400);
       }
       signal.throwIfAborted();
       dispatched = true;
-      const response = await fetcher(
-        `${origin}${protocol.routes[route].path}`,
-        {
-          method: "POST",
-          body: bytes,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            Origin: frontendOrigin,
-          },
-          credentials: "omit",
-          redirect: "error",
-          cache: "no-store",
-          signal,
+      const response = await fetcher(`${origin}${operation.path}`, {
+        method: "POST",
+        body: bytes,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Origin: frontendOrigin,
         },
-      );
+        credentials: "omit",
+        redirect: "error",
+        cache: "no-store",
+        signal,
+      });
       if (response.redirected || response.headers.has("content-encoding")) {
         void response.body?.cancel().catch(() => undefined);
         throw new Error("Unexpected native history response");
@@ -149,14 +174,9 @@ export async function proxyConversationHistory(
       const body = await boundedJsonBytes(
         response,
         signal,
-        protocol.limits.responseBytes,
+        operation.responseBytes,
       );
-      await receiveConversationHistoryResponse(
-        route,
-        response.status,
-        body,
-        admitted,
-      );
+      await receive(response.status, body);
       signal.throwIfAborted();
       return new Response(body, {
         status: response.status,
@@ -164,9 +184,6 @@ export async function proxyConversationHistory(
       });
     });
   } catch {
-    return unavailable(
-      502,
-      dispatched && (route === "nextTurn" || route === "manage"),
-    );
+    return unavailable(502, dispatched && mutation);
   }
 }

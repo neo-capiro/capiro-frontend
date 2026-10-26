@@ -48,12 +48,12 @@ export class UiTransportGuardError extends Error {
   }
 }
 
-export interface MeriGuardedTransportOptions {
+export interface MeriGuardedTransportOptions<T extends { eventId: string } = UIEvent> {
   inner: ChatTransport<MeriUIMessage>;
   /** Injected boundary validator (offline tests may inject the unchanged root validator). */
-  validateEvent: UIEventValidator;
+  validateEvent: (value: unknown) => T;
   /** Synchronous sink for each validated event, in stream order. */
-  onEvent?: (event: UIEvent) => void;
+  onEvent?: (event: T) => void;
   /** Observability hook for rejected chunks (does not swallow the rejection). */
   onRejected?: (error: UiTransportGuardError, chunk: UIMessageChunk) => void;
   /** Optional current-lifetime guard, captured separately for each subscription. */
@@ -67,10 +67,10 @@ export interface MeriGuardedTransportOptions {
  * Meri frame, or `null` for an allowed lifecycle frame. Throws a
  * `UiTransportGuardError` for any malformed, mismatched or unexpected frame.
  */
-export function guardUiChunk(
+export function guardUiChunk<T extends { eventId: string } = UIEvent>(
   chunk: UIMessageChunk,
-  validateEvent: UIEventValidator,
-): UIEvent | null {
+  validateEvent: (value: unknown) => T,
+): T | null {
   if (chunk.type === MERI_EVENT_DATA_PART) {
     if (typeof chunk.id !== 'string' || chunk.id.length === 0) {
       throw new UiTransportGuardError(
@@ -79,7 +79,7 @@ export function guardUiChunk(
         chunk.type,
       );
     }
-    let event: UIEvent;
+    let event: T;
     try {
       event = validateEvent(chunk.data);
     } catch (cause) {
@@ -110,10 +110,10 @@ export function guardUiChunk(
   return null;
 }
 
-interface GuardContext {
+interface GuardContext<T extends { eventId: string }> {
   beforeChunk?: ((chunk: UIMessageChunk) => void) | undefined;
-  validateEvent: UIEventValidator;
-  onEvent: ((event: UIEvent) => void) | undefined;
+  validateEvent: (value: unknown) => T;
+  onEvent: ((event: T) => void) | undefined;
   onRejected: ((error: UiTransportGuardError, chunk: UIMessageChunk) => void) | undefined;
   errorBoundary: ((error: unknown) => Error) | undefined;
 }
@@ -145,15 +145,15 @@ function boundedDiagnostics<T>(source: ReadableStream<T>, translate: (error: unk
   });
 }
 
-function guardStream(
+function guardStream<T extends { eventId: string }>(
   source: ReadableStream<UIMessageChunk>,
-  context: GuardContext,
+  context: GuardContext<T>,
 ): ReadableStream<UIMessageChunk> {
   const guarded = source.pipeThrough(
     new TransformStream<UIMessageChunk, UIMessageChunk>({
       transform(chunk, controller) {
         context.beforeChunk?.(chunk);
-        let event: UIEvent | null;
+        let event: T | null;
         try {
           event = guardUiChunk(chunk, context.validateEvent);
         } catch (error) {
@@ -169,16 +169,16 @@ function guardStream(
   return context.errorBoundary ? boundedDiagnostics(guarded, context.errorBoundary) : guarded;
 }
 
-export class MeriGuardedTransport implements ChatTransport<MeriUIMessage> {
+export class MeriGuardedTransport<T extends { eventId: string } = UIEvent> implements ChatTransport<MeriUIMessage> {
   /** Incremental replay: reconnect returns only new events after the accepted cursor. */
   readonly resumeStreamIsReplay = false;
 
   private readonly inner: ChatTransport<MeriUIMessage>;
-  private readonly context: GuardContext;
+  private readonly context: GuardContext<T>;
   private closed = false;
-  private readonly beginGuard: MeriGuardedTransportOptions['beginGuard'];
+  private readonly beginGuard: MeriGuardedTransportOptions<T>['beginGuard'];
 
-  constructor(options: MeriGuardedTransportOptions) {
+  constructor(options: MeriGuardedTransportOptions<T>) {
     this.inner = options.inner;
     this.beginGuard = options.beginGuard;
     this.context = {

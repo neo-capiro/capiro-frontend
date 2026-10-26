@@ -4,6 +4,7 @@ import { ConversationArtifacts } from "./ConversationArtifacts";
 import { conversationArtifacts, type TurnView } from "./conversation-view";
 import { ConversationIntents } from "./intents/ConversationIntents";
 import { useIntentApprovalsEnabled } from "./intents/approvals-enabled";
+import { ConversationEvidence } from "./evidence/ConversationEvidence";
 
 /**
  * The session-bound panels below the turns: actions prepared for approval (only when the deployment
@@ -21,6 +22,7 @@ export function ConversationPanels({
   const approvals = useIntentApprovalsEnabled();
   return (
     <>
+      <ConversationEvidence reads={port.reads} turn={turn} earlier={earlier} />
       {approvals && (
         <ConversationIntents
           access={port.intents}
