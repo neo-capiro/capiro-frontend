@@ -41,7 +41,8 @@ function approvedClientBriefAuthorityImport(from, to, entry) {
     && entry.names.length > 0 && entry.names.every(name => allowed.has(name));
 }
 function approvedSnapshotImport(file, entry) {
-  return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`)
+  return (file === objectiveSnapshotOwner || file === `${clientBriefCopyOwner}command.ts`
+    || file === `${appSource}features/modules/workspace/ordinary-save/ordinary-save.ts`)
     && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
 }
 

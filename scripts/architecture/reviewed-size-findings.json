@@ -2423,9 +2423,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "9d5d32d9acc1a90af02e8ac911c5f42fe6af9f45198583fcab0ad224bb85853e",
-    "reason": "One local draft-editing presentation owns title/section input and invokes existing save/query owners. History, preview, ordinary export, prospect recovery and client association have dedicated components/hooks. The accepted changes extract history/export and qualify partial preview without adding transport, persistence or authority. The existing ordinary PATCH-plus-snapshot limitation is not approved as atomic. This exact193-line ruling must not transfer to PR171 replacement source. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "fingerprint": "2114418c39d3315017c0392e0f94635b0a232d48794a2c5576f2dc3f2931dd14",
+    "reason": "DraftEditor retains its existing presentation role and composes distinct save owners. The corrected fallback renders currentDraft.documents after an explicit current read; it does not introduce transport, storage or authority. This final disposition replaces the earlier193-line pre171 composition record, which does not apply to the new body. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3962,9 +3962,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "WorkspaceDraft",
-    "fingerprint": "283dfdf30b55ea84c13173a045ac4a54c802e8a2b552c04326ccc59865d92bed",
-    "reason": "One87-line draft-read admission/selection boundary validates resource/client hints, checks prospect context through its existing reader and selects newsletter/prospect/ordinary presentation or refusal. It delegates actual authority, requests and editing. Splitting the connected selection would obscure its single boundary. A PR171 successor needs its own final fingerprint. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "fingerprint": "87d432ab93156c11b79ba3e5151b07f9a582179bd0094c05554a1fd89e121e31",
+    "reason": "One route/data selection boundary retains identity keying and existing prospect/newsletter branches. There is no independent responsibility requiring a new module. The original scoped PR171 acceptance was rechecked against final corrected source. This record replaces the earlier87-line pre171 composition body. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4010,6 +4010,42 @@
     "fingerprint": "4f4ff8e2949581ad06fefc424f14ba28f0d66bf06df188ccf0b7402f101be7aa",
     "reason": "The289-line body remains the existing template-list/filter/dialog composition owner. The accepted two-line change keys the detail by selected ID and supplies the existing list.reload callback. Detail/settings/query/lifetime owners remain separate; no cache, retry, receipt or authority mechanism is introduced. Full WS20 recovery/publication behavior is not approved by this narrow wiring review. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
     "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "7ba7f640862c62e4ea572649285cc7b8fc11f87738c45dabab7e3f8a387a0341",
+    "reason": "The ordinary-save lifecycle owner keeps editor state, immutable request recovery and explicit resolution in one captured scope. Its small comparison helper delegates positive disposition to the canonical journal. Splitting persistence or authority into another module would duplicate existing ownership. This exact final corrected body retains known submitted requests across absent or different journal records and preserves other-tab unsent edits. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
+    "kind": "function",
+    "symbol": "useOrdinaryDraftSave",
+    "fingerprint": "67b05f3110cdad27c6f53ad07b763df0743cc334e01fd71f1499a52d0428fb55",
+    "reason": "One ordinary-save lifecycle function owns editor state, immutable request recovery and explicit resolution in a shared captured scope. Positive acknowledgement/refusal remains with the canonical journal; missing state is not settlement. No persistence or authority owner is duplicated. The exact corrected transitions have independently inspected mounted recovery witnesses. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6df8502e4da136253395f755a289a4a55d326929e85d6bd32d2b23811409361c",
+    "reason": "The existing document operation owner gains additive fixed state/save schemas with bounded input and explicit response bindings. The original scoped PR171 design acceptance remains unchanged and matches final source. This is an exact module disposition, not a broad allowance for future operations. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/session/recovery/journal.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "519c4e4f07cbc3a772e90ec36f87c50c1846845232df651fb89e98eb604aa311",
+    "reason": "The narrow delta adds one guarded refusal helper using the canonical storage, encryption and lock owner. It does not duplicate persistence or authority. The original scoped PR171 acceptance is unchanged and matches final source; it approves this exact helper addition within the existing module, not unrelated recovery expansion. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
     "reviewedOn": "2026-10-26"
   }
 ]
