@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { Temporal } from "temporal-polyfill";
 import Link from "next/link";
@@ -6,6 +7,8 @@ import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { moveDate, validDay, zones } from "./range";
 import type { CalendarKind } from "./contracts";
 import type { CalendarPageState } from "./useCalendarPageState";
+import { clientViews } from "@/shared/portfolio/shell/client-views";
+import { ClientViewSwitcher } from "@/features/portfolio/client-profile/public";
 import clientStyles from "./calendar-client.module.css";
 
 function clientName(state: CalendarPageState) {
@@ -53,6 +56,11 @@ export function CalendarPageHeader({
   } = state;
   if (clientId) {
     const name = clientName(state);
+    const base = `/portfolio/${clientId}`;
+    // Trailing breadcrumb crumb is the client view switcher (Figma 3.4
+    // 1064:179149 "Client Calendar · Meetings · Month"), matching ClientHeader.
+    const view =
+      clientViews.find((item) => item.suffix === "/calendar") ?? clientViews[0];
     return (
       <header className={`${clientStyles.clientHeader} pageHeader`}>
         <div>
@@ -60,14 +68,24 @@ export function CalendarPageHeader({
             className={clientStyles.clientBreadcrumb}
             aria-label="Breadcrumb"
           >
+            <Link href="/portfolio" aria-label="Back to Portfolio">
+              <img src="/design/411-55991-imgIconArrowLeft.svg" alt="" />
+            </Link>
             <Link href="/portfolio">Portfolio</Link>
             <span aria-hidden="true">/</span>
-            <Link href={`/portfolio/${clientId}`}>{name}</Link>
+            <Link href={base}>{name}</Link>
             <span aria-hidden="true">/</span>
-            <span>Calendar</span>
+            <ClientViewSwitcher
+              key={clientId}
+              base={base}
+              name={name}
+              view={view}
+            />
           </nav>
-          <h1>{name} meetings</h1>
-          <p className="muted">Meeting preparation, notes and debriefs.</p>
+          <h1>{name} calendar</h1>
+          <p className="muted">
+            Meetings, preparation, notes and debriefs for {name}.
+          </p>
         </div>
         <div className={clientStyles.clientActions}>
           <button className="button" onClick={() => setSyncReview(syncScope)}>
