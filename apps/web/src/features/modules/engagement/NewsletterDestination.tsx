@@ -1,17 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import {
-  PageHeader,
-  Panel,
-  UnavailableAction,
-  ActionButton,
-} from "../../../shared/module-ui";
+import { ActionButton } from "../../../shared/module-ui";
+import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { newsletterBackHref } from "./newsletter-route";
 import type { NewsletterDestination as Destination } from "./newsletter-route";
+import { NewsletterReceivingView } from "./newsletter-receiving/NewsletterReceivingView";
 import styles from "./engagement.module.css";
 
-/** No read/write is admitted before the dedicated rich receiving contract exists. */
+/** Route hints select a canonical read; opening a record requires a separate click. */
 export function NewsletterDestination({
   destination,
   onBack,
@@ -20,6 +17,9 @@ export function NewsletterDestination({
   onBack?: () => void;
 }) {
   const params = useSearchParams();
+  const selected = useSelectedClient();
+  const clientId =
+    selected.state === "authorized-client" ? selected.client.id : undefined;
   const back = onBack ? (
     <ActionButton onClick={onBack}>Back to Outreach</ActionButton>
   ) : (
@@ -27,30 +27,22 @@ export function NewsletterDestination({
       Back to Outreach
     </Link>
   );
-  if (destination.kind === "invalid")
+  if (destination.kind === "invalid" || selected.state === "unavailable")
     return (
       <section role="alert" className={styles.screen}>
         <h1>Newsletter unavailable</h1>
-        <p>This link contains invalid or conflicting newsletter references.</p>
+        <p>This link or its current client scope could not be verified.</p>
         {back}
       </section>
     );
+  if (selected.state === "loading")
+    return <p role="status">Checking current client access…</p>;
   return (
-    <section className={styles.screen}>
-      <PageHeader
-        title="Rich newsletter"
-        description="This link targets the rich newsletter workflow."
-      />
-      <Panel title="Rich newsletter unavailable">
-        <p>
-          The rich newsletter editor is not available here yet. Your saved
-          content has not been changed.
-        </p>
-        <UnavailableAction reason="Open and review the rich newsletter before preparing delivery.">
-          Prepare delivery
-        </UnavailableAction>
-        {back}
-      </Panel>
-    </section>
+    <NewsletterReceivingView
+      key={JSON.stringify([destination, clientId])}
+      destination={destination}
+      clientId={clientId}
+      back={back}
+    />
   );
 }

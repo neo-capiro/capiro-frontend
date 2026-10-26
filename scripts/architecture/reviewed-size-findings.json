@@ -1973,18 +1973,18 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "fingerprint": "b35805e1fd82f51c73e4a16859babc27e3bd7a5171ec8f2a7a3a83c1d4dc612d",
-    "reason": "One existing action/recovery surface retains exact duplicate presentation selection with unchanged canonical controller, state transitions, mutations and GET recovery callbacks. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
-    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
+    "fingerprint": "80aec84768c2a321af1f6923ade3c71d1d8bc9609b068ea6ce7157485ecf4475",
+    "reason": "Existing saved-document action composition adds only confirmed-receipt navigation in the existing toolbar. Document effects stay in the controller and receiving stays separate. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
+    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/rich-newsletter.ts",
     "kind": "function",
     "symbol": "createRichNewsletterAdapter",
-    "fingerprint": "81d57d2659ca342558b221c4e38f7344515bf1267ef60c596696004e4590ac92",
-    "reason": "One feature transport adapter adds a canonical parser binding and read call. The public package still owns wire shapes; Core owns authorization; the controller owns UI intent/lifetime. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
-    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "fingerprint": "a1000d01a987a1236a2ae6c0283550ce43be8e3aa429557e0a68c28cae7b580b",
+    "reason": "Existing fixed rich-newsletter request/response binding owner; open uses the existing public parser boundary. No UI state, authority, retry or sender orchestration. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
+    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4307,6 +4307,42 @@
     "fingerprint": "fb76716aa91530bf82b5161f0dba58e1564ffaea6f21586394ebefa6e0db2c88",
     "reason": "One Vitest describe callback groups five related frozen collaboration receiver cases: synthetic owner versus mutation identity, resolved teammate input, fixed route/method ownership, truthful mail receipts and separate mutation/notification shapes. Each behavior is already an individual it callback. Relocation changes imports and two erased non-null assertions only, with all assertions retained; splitting the suite solely for the threshold would add no responsibility boundary. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
     "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-receiving/useNewsletterReceiver.ts",
+    "kind": "function",
+    "symbol": "useNewsletterReceiver",
+    "fingerprint": "e93e83e32b502de7738ce80c41250882e9cb023c817348955effa39f54d5ee5d",
+    "reason": "One receiving lifetime owns disposable stage/record reads and explicit-open transient uncertainty. Transport, policy, durable records and rendering remain elsewhere. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
+    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "06cd16d7a8b3add14380c21b21d0b704a01ccf038d873dce45d8233c7bf8f2b3",
+    "reason": "One rich-newsletter boundary test module exercises the existing fixed operations and adapter with shared synthetic campaign/stage/record builders. Four describe groups separate dispatch/input admission, response identity/lifetime, exact preview/staged-revision reads and explicit stage opening. The new open group reuses those builders and validates stage-only submission, captured primitive bindings, mismatch refusal and one dispatch on failures. It belongs to this adapter contract family; moving it solely to meet a file threshold would duplicate fixtures and obscure the same boundary. Exact independent disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at d54d585011071cc50e2ba84208a8f7cfd565d8f9.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/engagement-outreach-only.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "1537b6184a861659617bb3c130a7bd5625b91f26eeee0abd4a6fc755bdec5c30",
+    "reason": "One mounted Engagement route regression module covers Outreach-only navigation, existing campaign/draft destinations, saved meeting redirects and read filters/current client scope through the existing setupOutreach fixture. The bounded change replaces the old newsletter-placeholder assertion with an actual current-access-refused stage response and verifies the dedicated route still does not expose the generic Outreach table or write. It adds no unrelated owner or new fixture framework; the remaining scenarios are retained. Exact independent disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at d54d585011071cc50e2ba84208a8f7cfd565d8f9.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "28369e9a7abe09032366e9368210cf2d2a2ef0e00de21c2e77b442f4406508f6",
+    "reason": "One mounted explicit rich-document create, full-save, stage and navigation-only review journey verifies the causal order and absence of writes when following the confirmed-stage action. The steps share one document/stage fixture and cannot be split into independent tests without losing that sequence. Screenshot evidence now uses the existing Playwright per-test output owner. Exact independent final disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at 5f3cfdd1d71e4acbb068ef4f119403867eb1d3e5.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
