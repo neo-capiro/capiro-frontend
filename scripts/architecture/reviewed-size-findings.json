@@ -4317,5 +4317,23 @@
     "reason": "One receiving lifetime owns disposable stage/record reads and explicit-open transient uncertainty. Transport, policy, durable records and rendering remain elsewhere. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
     "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "06cd16d7a8b3add14380c21b21d0b704a01ccf038d873dce45d8233c7bf8f2b3",
+    "reason": "One rich-newsletter boundary test module exercises the existing fixed operations and adapter with shared synthetic campaign/stage/record builders. Four describe groups separate dispatch/input admission, response identity/lifetime, exact preview/staged-revision reads and explicit stage opening. The new open group reuses those builders and validates stage-only submission, captured primitive bindings, mismatch refusal and one dispatch on failures. It belongs to this adapter contract family; moving it solely to meet a file threshold would duplicate fixtures and obscure the same boundary. Exact independent disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at d54d585011071cc50e2ba84208a8f7cfd565d8f9.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/engagement-outreach-only.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "1537b6184a861659617bb3c130a7bd5625b91f26eeee0abd4a6fc755bdec5c30",
+    "reason": "One mounted Engagement route regression module covers Outreach-only navigation, existing campaign/draft destinations, saved meeting redirects and read filters/current client scope through the existing setupOutreach fixture. The bounded change replaces the old newsletter-placeholder assertion with an actual current-access-refused stage response and verifies the dedicated route still does not expose the generic Outreach table or write. It adds no unrelated owner or new fixture framework; the remaining scenarios are retained. Exact independent disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at d54d585011071cc50e2ba84208a8f7cfd565d8f9.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
