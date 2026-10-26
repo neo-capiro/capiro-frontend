@@ -3,9 +3,9 @@ import { useState } from "react";
 import type { DirectoryCommittee } from "../../../shared/capiro/operations/directory-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
-  ActionButton,
   DataTable,
   Panel,
+  SelectInput,
   StatusPanel,
   TextInput,
 } from "../../../shared/module-ui";
@@ -39,21 +39,24 @@ export function CommitteeDirectory() {
             setPage(1);
           }}
         />
-        <select
-          className={styles.select}
+        <SelectInput
           aria-label="Committee chamber"
           value={chamber}
-          onChange={(e) => {
-            setChamber(e.target.value);
+          onValueChange={(next) => {
+            setChamber(next);
             setPage(1);
           }}
-        >
-          <option value="">Chamber · Any</option>
-          {["House", "Senate", "Joint"].map((x) => (
-            <option key={x}>{x}</option>
-          ))}
-        </select>
-        <ActionButton
+          options={[
+            { value: "", label: "Chamber · Any" },
+            ...["House", "Senate", "Joint"].map((x) => ({
+              value: x,
+              label: x,
+            })),
+          ]}
+        />
+        <button
+          type="button"
+          className={styles.clearAll}
           onClick={() => {
             setQ("");
             setChamber("");
@@ -61,7 +64,7 @@ export function CommitteeDirectory() {
           }}
         >
           Clear all
-        </ActionButton>
+        </button>
       </div>
       <StatusPanel
         loading={committees.loading}
