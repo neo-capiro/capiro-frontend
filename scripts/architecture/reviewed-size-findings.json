@@ -4398,5 +4398,32 @@
     "reason": "One parameterized viewport scenario verifies the same mounted dialog at desktop and narrow widths, including canonical table geometry, keyboard scrolling, viewport containment, helper separation and scoped axe output. Its90-line body keeps these assertions bound to the same captured state; extracting unrelated-count helpers would hide the causal visual/keyboard setup. Exact independent disposition: W3-WS11-PR193-REVIEW.md at a98f07da1c4c05dc8d5a1ded5e250a25200230d4.",
     "reviewedBy": "m3_scope, independent Wave 3 WS11 source and Figma reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/evidence/RecordedUsageView.tsx",
+    "kind": "function",
+    "symbol": "UsageDetails",
+    "fingerprint": "1c68f807fa864d386dc51e4460025e81d553e987e3d4c75968bbfbd17df70da1",
+    "reason": "One admitted run-usage record is presented as explicitly separate this-run delta, cumulative SDK accounting basis/model counters, and recorded tool hooks. Missing/unavailable values and recorded zero remain distinct; provider-billing, per-model run-cost allocation, source/tool correlation and external-effect claims are excluded. Counters and hook rows already have small dedicated rendering helpers. This92-line declarative component owns no transport, authority, persistence, repricing or lifecycle. Further extraction would fragment one coherent display without separating a responsibility.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/meri-current-reads.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "d7f01f7d83fa80661ccb2895527cafba616d5a44c7bde521abb2894f4adfb515",
+    "reason": "This focused mounted specification reuses the established conversation fixture, synthetic public source/usage record, current-route intercepts and one accessibility helper. It groups one live native event case with saved-source/usage journeys and denial, closure, identity, malformed-response and zero/missing semantics. The final27 added assertion lines prove suppression of contradictory native-only empty copy and preservation of the true no-reference state within the existing desktop/narrow journey. At401 nonblank lines this remains one coherent feature test file, without a new harness or product responsibility.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/meri-current-reads.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "1eb09e680d0fe2f8a69f8a7a84aca27fa1bb5e441d8dd58934fbf25527ba3ac2",
+    "reason": "This126-line parameterized desktop/narrow journey retains exact source-read identity, inert text/current-link and positive-offset checks, focus and scoped accessibility, separate usage display and completed-run reload without admission effects. The added assertions cover native-only versus genuinely source-free history in the same existing fixture. The original host actually fails the native-only assertion, and the corrected desktop case passes using Release generated dist. Existing helper and setup owners are reused; this test body is an intentional end-to-end journey rather than a product abstraction.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   }
 ]

@@ -80,6 +80,8 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
   '@capiro/meri-contracts/conversation-session',
+  '@capiro/meri-contracts/conversation-sources',
+  '@capiro/meri-contracts/conversation-usage',
   '@capiro/meri-contracts/document-access-application',
   '@capiro/meri-contracts/intents-application',
   '@capiro/meri-contracts/routines-application',

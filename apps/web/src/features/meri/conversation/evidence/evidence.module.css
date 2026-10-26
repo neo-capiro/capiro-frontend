@@ -1,0 +1,103 @@
+.evidence,
+.run,
+.selected,
+.usageContent,
+.usageSection,
+.model {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.evidence {
+  width: 100%;
+}
+.run {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+.run > h2,
+.run > h3,
+.model h4 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.run > h2 {
+  font-size: 15px;
+}
+.run > h3,
+.model h4 {
+  font-size: 14px;
+}
+.run > button,
+.selected > button {
+  align-self: flex-start;
+}
+.selected {
+  color: var(--foreground);
+}
+.sources,
+.hooks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sources {
+  display: grid;
+  gap: 16px;
+}
+.fields {
+  width: 100%;
+}
+.text {
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--foreground);
+}
+.usageSection,
+.model {
+  gap: 10px;
+}
+.model {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.facts {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr);
+  gap: 8px 16px;
+  margin: 0;
+}
+.facts dd {
+  margin: 0;
+  color: var(--foreground);
+}
+.hooks li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.hooks li span:first-child {
+  color: var(--foreground);
+}
+@media (max-width: 600px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .facts dd + dt {
+    margin-top: 8px;
+  }
+}

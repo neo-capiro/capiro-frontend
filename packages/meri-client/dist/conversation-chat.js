@@ -1,6 +1,7 @@
 import { Chat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { validateUIEvent } from '@capiro/meri-contracts/browser';
+import { receiveNativeBillTextSourceEvent, BILL_TEXT_SOURCE_EVENT } from '@capiro/meri-contracts/conversation-sources';
 import { conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse, ConversationResponseError, } from '@capiro/meri-contracts/conversation-application';
 import { MeriGuardedTransport } from './guarded-transport.js';
 import { ConversationUnavailable } from './conversation-network.js';
@@ -88,6 +89,8 @@ export function conversationChat(network, observation, current) {
             };
         },
         validateEvent: value => {
+            if (value !== null && typeof value === 'object' && 'type' in value && value.type === BILL_TEXT_SOURCE_EVENT)
+                return receiveNativeBillTextSourceEvent(new TextEncoder().encode(JSON.stringify(value)));
             if (!validateUIEvent(value))
                 throw new ConversationUnavailable('invalid-event');
             return value;
