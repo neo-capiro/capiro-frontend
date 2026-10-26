@@ -3,6 +3,10 @@ import {
   BILL_TEXT_SOURCE_READ_SCHEMA,
   receiveBillTextSourceRequest,
   receiveBillTextSourceResponse,
+  hearingSourceMetadata,
+  HEARING_SOURCE_READ_SCHEMA,
+  receiveHearingSourceRequest,
+  receiveHearingSourceResponse,
 } from "@capiro/meri-contracts/conversation-sources";
 import {
   conversationUsageMetadata,
@@ -44,10 +48,31 @@ export const usageReadOperation = {
   },
 };
 
+export const hearingReadOperation = {
+  ...hearingSourceMetadata,
+  admit(bytes: Uint8Array) {
+    const request = receiveHearingSourceRequest(bytes);
+    return (status: number, body: Uint8Array) =>
+      receiveHearingSourceResponse(status, body, request);
+  },
+};
+
+/** Both source families use the same endpoint and their own public admission. */
+const conversationSourceReadOperation = {
+  ...sourceReadOperation,
+  admit(bytes: Uint8Array) {
+    try {
+      return sourceReadOperation.admit(bytes);
+    } catch {
+      return hearingReadOperation.admit(bytes);
+    }
+  },
+};
+
 /** Two exact paths from the public protocols; no caller-selected upstream endpoint. */
 export function conversationCurrentReadOperation(path: string) {
   if (`/api/conversations/${path}` === sourceReadOperation.path)
-    return sourceReadOperation;
+    return conversationSourceReadOperation;
   if (`/api/conversations/${path}` === usageReadOperation.path)
     return usageReadOperation;
   return undefined;
@@ -130,6 +155,21 @@ export function createConversationReads(
         sourceReadOperation,
         {
           schemaVersion: BILL_TEXT_SOURCE_READ_SCHEMA,
+          conversationId: context.conversationId,
+          runId,
+          referenceId,
+        },
+        AbortSignal.any([lifetime, signal]),
+        fetcher,
+        isCurrent,
+        onAccessLost,
+      );
+    },
+    hearing(runId: string, referenceId: string, signal: AbortSignal) {
+      return read(
+        hearingReadOperation,
+        {
+          schemaVersion: HEARING_SOURCE_READ_SCHEMA,
           conversationId: context.conversationId,
           runId,
           referenceId,
