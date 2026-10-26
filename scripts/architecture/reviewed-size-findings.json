@@ -3259,10 +3259,10 @@
     "file": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
     "kind": "function",
     "symbol": "TimelineView",
-    "fingerprint": "4f89b5d57e3ac893375cc9823698af8c3a5645257858fbac1e80aa63ab144d60",
-    "reason": "Composes one admitted Strategy workspace with separate editors and current-step membership checks. Fiscal labels and control placement are presentation; mutation and authorization remain delegated. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedBy": "Codex PR60 root and independent source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "a236167b31f38768554688d6fd1b5bbdf7035b53f3eac658421aa8670b39ca74",
+    "reason": "Existing timeline host receives one imported advisory panel; timeline composition remains its single responsibility, with the Watch read/check owner separate.",
+    "reviewedBy": "Wave 3 Root independent source and Figma review",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/operations/objective-operational-semantics.ts",
@@ -5339,6 +5339,15 @@
     "fingerprint": "45afdff58d0ebb72c65dacbe5fd36a0d612b7c0c34bd63a954c86f8a72506b89",
     "reason": "One current-access canonical receipt dialog with four data-driven categories and local display state. Existing query, modal, journal and operation owners remain separate.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/watch/strategy-watch.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "dd27511a8d46f1190d32ba24f861a23bbc0dbb67c9801411e24b9515c4b778b2",
+    "reason": "One cohesive receiver characterization group covers actual advisory shape, absent versus empty state, exact strategy/revision receiving and existing read/check routes.",
+    "reviewedBy": "Wave 3 Root independent source and Figma review",
     "reviewedOn": "2026-10-26"
   }
 ]

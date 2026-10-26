@@ -1,0 +1,53 @@
+.review {
+  font-size: 13px;
+  line-height: 1.45;
+  min-width: 0;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.action {
+  border-radius: 10px;
+  border-color: var(--input);
+}
+.snapshot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.revision {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.revision code {
+  display: block;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+.advisory {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--steel-subtle, #e9eef2);
+}
+.advisory h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--steel, #5b7690);
+  margin: 0;
+}
+.advisory p {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+.advisory .steps {
+  color: var(--steel, #5b7690);
+  font-size: 12px;
+  font-weight: 600;
+}
