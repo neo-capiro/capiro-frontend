@@ -130,6 +130,14 @@ for (const width of [1440, 390])
   }, info) => {
     await page.setViewportSize({ width, height: 1040 });
     const fixture = await openSavedRun(page);
+    await expect(
+      page.getByText("No source references were provided.", { exact: true }),
+    ).toHaveCount(0);
+    await expect(
+      page.getByText("No source references in the loaded updates.", {
+        exact: true,
+      }),
+    ).toHaveCount(0);
     const open = page.getByRole("button", { name: "Open saved page" });
     await open.focus();
     await page.keyboard.press("Enter");
@@ -225,6 +233,25 @@ for (const width of [1440, 390])
     ).toBeVisible();
     expect(fixture.effects).toEqual([]);
     expect(fixture.unexpected).toEqual([]);
+    await page.route("**/api/conversations/history", (route) =>
+      reply(
+        route,
+        history(
+          [
+            event(1, "Synthetic answer without sources."),
+            status(2, "completed"),
+          ],
+          { state: "completed" },
+        ),
+      ),
+    );
+    await page.reload();
+    await expect(
+      page.getByText("No source references were provided.", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Open saved page" }),
+    ).toHaveCount(0);
   });
 
 for (const [code, responseStatus] of [
