@@ -212,7 +212,7 @@ function DraftEditor({
         ))
       ) : (
         <Panel title="Document contents">
-          {draft.documents
+          {currentDraft.documents
             .filter((document) => !document.sourceBriefVersion)
             .map((document) => (
               <article key={document.id}>

@@ -90,10 +90,17 @@ export function OrdinarySaveRecovery({ save }: { save: OrdinarySave }) {
     <section aria-label="Document save recovery">
       {save.error && <p role="alert">{save.error}</p>}
       {save.message && <p role="status">{save.message}</p>}
-      {unknown && (
+      {unknown && !save.otherRequest && (
         <p role="status">
           Save unconfirmed. Your submitted edits are retained. No automatic
           retry will run. Reading current content cannot confirm this request.
+        </p>
+      )}
+      {save.otherRequest && (
+        <p role="status">
+          Another tab has a retained save. Your unsent edits are preserved
+          separately. Resolve that save in its original tab, then read current
+          saved content before adopting or rebasing your edits.
         </p>
       )}
       {save.retained?.outcome?.kind === "saved" && (
@@ -108,7 +115,7 @@ export function OrdinarySaveRecovery({ save }: { save: OrdinarySave }) {
       >
         Read current saved content
       </ActionButton>
-      {unknown && (
+      {unknown && !save.otherRequest && (
         <ActionButton
           disabled={save.pending}
           onClick={() => void save.replay()}

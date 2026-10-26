@@ -1,5 +1,49 @@
 # Ordinary draft atomic-save candidate — 2026-10-25
 
+## PR171 review corrections — 2026-10-26
+
+This correction addresses the three PROCESS6.2 CHANGES in Hermes's `W3-UI-PR171-REVIEW.md`, reviewed against original head `7043a3ad2746bb681506e053f4f083a2c96daa7d` / tree `5e45efe824c307a9306c526498001bc0916cd2e4`. That original commit and its evidence remain preserved. The correction is on the same branch and draft PR171, still stacked on exact FE159. Independent review of the correction remains pending.
+
+- The ordinary hook remembers the mounted request even when the shared hydration owner hides a blocked snapshot. An absent/different record cannot release a known request during current-state read, resolution, or repeated recovery retry. No new persistence or shared journal changes were made.
+- A reservation collision retains this tab's unsent title/body and original baseline separately from the other tab's immutable request. Recovery displays those local edits frozen and offers no replay of the other tab's request. If that request is no longer pending, the existing `readRecoveryDisposition` must supply its exact acknowledged or ordinary-CAS-refused marker before current-state review is available. Save remains disabled until deliberate adopt/rebase. A still-retained bound receipt likewise cannot automatically mark the independent editor saved or advance its baseline.
+- The no-supported-sections read-only display now maps `currentDraft.documents`, so adopting current state changes the displayed document name/body together with its title. Unsupported content remains inert and omitted from save requests.
+
+The synthetic browser fixture can install one shared producer-shaped state/receipt store into two pages in the same browser context. Its routes and receipt semantics are unchanged. The static host seam adds the cross-tab state field. Prospect, Newsletter, export/history product code, the five previously approved shared paths, package exports, manifests, architecture registries and Fable's paths are untouched by this correction.
+
+### Counterexamples, mutation and restored checks
+
+All times below are UTC on 2026-10-26. Tool versions/dependencies are unchanged from the original evidence. The browser uses the allocated port5323, checked free before each run, existing Chrome and isolated synthetic contexts. No signed-in service or real Core/DB was used.
+
+| Check                                                                                                                                                          | Result                                                                                                                                                                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Original product source with new mounted correction spec, 01:17:29–01:18:25                                                                                    | Exit1. Both missing-storage paths and the two-tab collision failed on the intended behavior. The fourth case initially used an unsupported fixture block type and failed setup; it is not counted as product evidence. |
+| Corrected read-only fixture (`table`), original product source, `--grep 'adopting current state'`, 01:19:10–01:19:30                                           | Exit1, one selected failure: adopted title appeared but current document name/body did not.                                                                                                                            |
+| First corrected browser run, save/correction/export specs, 01:21:00–01:22:27                                                                                   | Exit0, 27/27 passed; includes eight affected export cases.                                                                                                                                                             |
+| Deliberate mutation allowing absent storage to settle an independent cross-tab request, `--grep 'missing disposition'`, 01:23:25–01:23:49                      | Exit1, one selected failure on the missing recovery hold. Source restored byte-for-byte in `finally`.                                                                                                                  |
+| Final `npm run test:browser:modules --workspace @capiro/web -- workspace-ordinary-save-corrections.spec.ts workspace-ordinary-save.spec.ts`, 01:25:01–01:26:21 | Exit0, 20/20 passed, no skips: five corrections plus 15 ordinary-save cases. Includes positive exact replay/acknowledgement followed by B's explicit rebase, and absent disposition refusing it.                       |
+| Final `npm run test --workspace @capiro/web -- tests/workspace-ordinary-export.test.ts tests/workspace-held-recovery.test.ts`, 01:25:08                        | Exit0, 30/30 passed in two affected host test files, no skips. Reuse the original 42 other unchanged unit cases and producer evidence.                                                                                 |
+| Scoped ESLint on six changed TS/TSX paths, 01:25:11                                                                                                            | Exit0, no warnings. An intermediate hook-dependency warning and missing presentation-stub field were fixed before the final checks.                                                                                    |
+| `npm run typecheck --workspace @capiro/web`, 01:25:23                                                                                                          | Exit2: 33 candidate errors, exactly the same 33 diagnostic lines in the saved exact-base log; zero added errors.                                                                                                       |
+| `node scripts/architecture.mjs`, 01:25:27                                                                                                                      | Exit1: same public-import error and totals637/312 reviewed/18 inherited-unreviewed/307 blocking. No registry changes or suppressions.                                                                                  |
+
+Raw logs/results remain in the author's existing `work/correction-*` files. The final eight-path formatting and diff checks are recorded with the commit handoff. No broad producer/full acceptance rerun was requested or performed.
+
+### Exact review follow-up
+
+Hermes accepted the exact public `canonicalWorkspaceSnapshot` symbol/owner ruling and the unchanged `WorkspaceDraft`, `workspace-documents.ts`, and `journal.ts` size dispositions. Integration still owns the exact allowlist/registry edits and actual resulting gate. The three correction fingerprints needing review are:
+
+| Finding                                                       | Nonblank | Fingerprint                                                        |
+| ------------------------------------------------------------- | -------: | ------------------------------------------------------------------ |
+| `ordinary-save/useOrdinaryDraftSave.ts::<module>`             |      495 | `7ba7f640862c62e4ea572649285cc7b8fc11f87738c45dabab7e3f8a387a0341` |
+| `ordinary-save/useOrdinaryDraftSave.ts::useOrdinaryDraftSave` |      428 | `67b05f3110cdad27c6f53ad07b763df0743cc334e01fd71f1499a52d0428fb55` |
+| `WorkspaceDraft.tsx::DraftEditor`                             |      184 | `2114418c39d3315017c0392e0f94635b0a232d48794a2c5576f2dc3f2931dd14` |
+
+The added check composes the existing journal's positive-disposition owner; it does not create another recovery store or claim a receipt for unsent edits. The hook remains the single ordinary-save lifecycle owner. This is author rationale for the independent reviewer, not a size approval. The original raw-newline baseline comparison remains reused; no unrelated files were normalized. Authenticated integration/acceptance and release remain with the successor's assigned owners. No merge or deployment.
+
+## Original candidate evidence — preserved at head7043a3a
+
+The remainder records the original implementation and checks, before the correction above.
+
 Existing ordinary WorkspaceDraft saves now submit one typed POST `/drafts/:id/save` using the editing baseline. The existing encrypted retained-intent journal preserves the exact request across a lost response and remount. Explicit replay keeps its original identity/body; only a bound receipt reconciled with authorized current state reports Saved. A native CAS refusal allows deliberate adopt/rebase. Generic, request, client and foreign-receipt failures retain the fence.
 
 The ordinary editor preserves formatted sections and omits unsupported document bodies/config fields from writes. The producer retains those fields. Client association remains its existing separate action; current unsaved edits, including typing during the association request, carry into explicit baseline review. Prospect and basic Newsletter save owners are unchanged.

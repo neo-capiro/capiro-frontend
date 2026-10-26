@@ -8,6 +8,7 @@ import { useRetainedIntent } from "@/shared/session/recovery/useRetainedIntent";
 import {
   acknowledgeRecovery,
   readRecovery,
+  readRecoveryDisposition,
   reserveRecovery,
   updateRecovery,
   withRecoveryCommandLock,
@@ -34,7 +35,34 @@ type Editor = {
   baseline: OrdinaryDraftState;
   readback?: OrdinaryDraftState;
   needsReview: boolean;
+  separateRequest?: boolean;
 };
+
+async function checkRetained(
+  key: string,
+  expected: OrdinaryRetained | null,
+  record: OrdinaryRetained | null,
+  guard: () => void,
+  independent = false,
+) {
+  if (!expected || (record && sameOrdinaryRequest(record, expected))) return;
+  if (!record && independent) {
+    // Only the canonical journal's positive disposition for this exact
+    // other-tab request permits review of our still-unsent local edits.
+    const disposition = await readRecoveryDisposition(
+      key,
+      expected.body.requestId,
+      guard,
+    );
+    if (
+      disposition?.state === "acknowledged" ||
+      (disposition?.state === "refused" &&
+        disposition.code === "WORKSPACE_SAVE_STATE_CONFLICT")
+    )
+      return;
+  }
+  throw new RecoveryStorageError();
+}
 
 /** Core owns authorization/CAS; this hook owns only the captured browser edit
  * and composes the existing durable journal and disposable request lifetime. */
@@ -68,6 +96,9 @@ export function useOrdinaryDraftSave(
   );
   const [editor, setEditor] = useState<Editor>();
   const retryEditor = useRef<Editor | undefined>(undefined);
+  // A blocked journal hides its snapshot; that must not erase the mounted
+  // view's knowledge of an unresolved request or permit a fresh identity.
+  const knownRequest = useRef<OrdinaryRetained | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -79,6 +110,17 @@ export function useOrdinaryDraftSave(
     const retained = journal.record;
     void (async () => {
       try {
+        const local = retryEditor.current;
+        const independent = Boolean(
+          local && (local.separateRequest || !knownRequest.current),
+        );
+        await checkRetained(
+          key,
+          knownRequest.current,
+          retained,
+          journal.guard,
+          independent,
+        );
         if (
           retained?.body.expectedClientId !== undefined &&
           retained.body.expectedClientId !== scope.clientId
@@ -92,26 +134,39 @@ export function useOrdinaryDraftSave(
           );
         journal.guard();
         setEditor(
-          retained
+          local
             ? {
-                baseline: current,
-                input: retainedOrdinaryInput(retained),
-                needsReview: false,
+                ...local,
+                separateRequest: independent && Boolean(retained),
+                ...(independent && !retained && local.separateRequest
+                  ? { needsReview: true, readback: current }
+                  : {}),
               }
-            : (retryEditor.current ?? {
-                baseline: current,
-                input: carriedInput ?? ordinaryInput(current),
-                needsReview: Boolean(carriedInput),
-                ...(carriedInput ? { readback: current } : {}),
-              }),
+            : retained
+              ? {
+                  baseline: current,
+                  input: retainedOrdinaryInput(retained),
+                  needsReview: false,
+                }
+              : {
+                  baseline: current,
+                  input: carriedInput ?? ordinaryInput(current),
+                  needsReview: Boolean(carriedInput),
+                  ...(carriedInput ? { readback: current } : {}),
+                },
         );
+        knownRequest.current = retained;
         retryEditor.current = undefined;
       } catch (cause) {
         journal.block(cause);
       }
     })();
-  }, [journal, editor, scope, carriedInput]);
+  }, [journal, editor, scope, carriedInput, key]);
 
+  function installRetained(record: OrdinaryRetained | null) {
+    journal.install(record);
+    knownRequest.current = record;
+  }
   function fail(cause: unknown) {
     if (cause instanceof DOMException && cause.name === "AbortError") return;
     try {
@@ -169,6 +224,12 @@ export function useOrdinaryDraftSave(
       record.body,
     );
     journal.guard();
+    if (editor?.separateRequest) {
+      setMessage(
+        "The other tab's save has a bound receipt. Review current saved content before adopting or rebasing your unsent edits.",
+      );
+      return;
+    }
     if (result.receipt.stateHash !== current.stateHash) {
       setMessage(
         "This request has a saved version. Current saved content has changed since that version; review it before adopting or rebasing your retained edits.",
@@ -176,7 +237,7 @@ export function useOrdinaryDraftSave(
       return;
     }
     await acknowledgeRecovery(key, record.body.requestId, journal.guard);
-    journal.install(null);
+    installRetained(null);
     setEditor(
       (value) =>
         value && {
@@ -222,7 +283,7 @@ export function useOrdinaryDraftSave(
           ordinaryRecoveryContract,
           journal.guard,
         );
-        journal.install(refused);
+        installRetained(refused);
         setError(
           "The saved document changed. Your edits are retained. Read current saved content, then deliberately adopt or rebase.",
         );
@@ -244,7 +305,7 @@ export function useOrdinaryDraftSave(
       ordinaryRecoveryContract,
       journal.guard,
     );
-    journal.install(confirmed);
+    installRetained(confirmed);
     await reconcile(confirmed, await refreshCurrent());
   }
   async function save() {
@@ -272,15 +333,17 @@ export function useOrdinaryDraftSave(
         ordinaryRecoveryContract,
         journal.guard,
       );
-      journal.install(retained);
-      if (!sameOrdinaryRequest(retained, original))
+      installRetained(retained);
+      if (!sameOrdinaryRequest(retained, original)) {
+        setEditor((value) => value && { ...value, separateRequest: true });
         throw new RecoveryStorageError();
+      }
       await dispatch(retained);
     });
   }
   async function replay() {
     const expected = journal.record;
-    if (!expected || expected.outcome) return;
+    if (!expected || expected.outcome || editor?.separateRequest) return;
     await action(async () => {
       const original = await readRecovery(
         key,
@@ -289,7 +352,7 @@ export function useOrdinaryDraftSave(
       );
       if (!original || !sameOrdinaryRequest(original, expected))
         throw new RecoveryStorageError();
-      journal.install(original);
+      installRetained(original);
       if (original.outcome) {
         await reconcile(original, await refreshCurrent());
         return;
@@ -305,13 +368,29 @@ export function useOrdinaryDraftSave(
         ordinaryRecoveryContract,
         journal.guard,
       );
+      await checkRetained(
+        key,
+        knownRequest.current,
+        retained,
+        journal.guard,
+        editor?.separateRequest,
+      );
       if (
         retained &&
         (!journal.record || !sameOrdinaryRequest(retained, journal.record))
       )
         throw new RecoveryStorageError();
-      journal.install(retained);
-      setEditor((value) => value && { ...value, readback: current });
+      installRetained(retained);
+      setEditor(
+        (value) =>
+          value && {
+            ...value,
+            readback: current,
+            ...(!retained && value.separateRequest
+              ? { separateRequest: false, needsReview: true }
+              : {}),
+          },
+      );
       if (retained) await reconcile(retained, current);
       else
         setMessage(
@@ -332,6 +411,13 @@ export function useOrdinaryDraftSave(
         key,
         ordinaryRecoveryContract,
         journal.guard,
+      );
+      await checkRetained(
+        key,
+        knownRequest.current,
+        retained,
+        journal.guard,
+        editor?.separateRequest,
       );
       if (
         retained &&
@@ -356,7 +442,7 @@ export function useOrdinaryDraftSave(
           journal.guard,
         );
       }
-      journal.install(null);
+      installRetained(null);
       setEditor(
         (value) =>
           value && {
@@ -394,6 +480,7 @@ export function useOrdinaryDraftSave(
     currentDraft: ready ? editor!.baseline.draft : undefined,
     readback: ready ? editor!.readback : undefined,
     retained: ready ? journal.record : null,
+    otherRequest: ready && Boolean(editor!.separateRequest),
     frozen,
     canSave:
       ready && !frozen && editor!.baseline.draft.clientAssociation !== "held",
