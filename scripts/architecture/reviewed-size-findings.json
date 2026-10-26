@@ -5497,5 +5497,86 @@
     "reason": "This constructor remains composition for one conversation session and its public ports. The extra artifact pending predicate is an observation supplied by the existing bounded artifact-access owner, parallel to feedback pending. The unchanged SessionLifetimeController owns renewal polling, hard expiry, revocation and cleanup. No file receiver, credential issuer, retry, replay or independent lifetime logic is added here; keeping the predicate beside other active-port checks preserves one renewal owner. Actual-host and mounted Preview/Download evidence proves early deferral while hard expiry/revocation/detach still abort.",
     "reviewedBy": "Codex independent file-renewal reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/dashboard-layout.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "45223c7c8f4572cc0d83b7dd932d4056902e8d395fb204b9a2ea717a45778acc",
+    "reason": "This test describe groups seven focused pure layout cases covering validity, collision handling, resize, deletion and complete phone order. It has no production responsibility; splitting its single suite would not improve ownership.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "4341b2f2e506aefbc24316b835596d20c1198fbd1c6aa3f78a0123b235ccd6b6",
+    "reason": "The file owns one local dashboard-layout editor: layout history, pointer/keyboard editing and widget settings presentation. Financial rendering and layout transformations remain separate owners; it performs no HTTP, authorization or publishing. Keep this complete local editor cohesive rather than split by line count.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
+    "kind": "function",
+    "symbol": "DashboardDesigner",
+    "fingerprint": "0fec7bbad0b3fab4d1ca5661c400b65d56f59f5bbda70281f3435fa49c92acde",
+    "reason": "This function coordinates one editing lifetime and renders its canvas, palette, settings and phone order. Pointer drags use a draft and commit once; history and layout validation delegate to existing pure helpers. It neither persists a design nor grants access. Mounted pointer, resize, undo/redo, keyboard and save witnesses pass.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchShareRecipient.tsx",
+    "kind": "function",
+    "symbol": "ResearchShareRecipient",
+    "fingerprint": "993b27b4fed30a694c15d294f1634bd31bebea135a11534acc264435ccfe96c0",
+    "reason": "This component owns a single capability-link viewing lifetime: availability, in-memory PIN session and frozen dashboard rendering. Reads use the closed public client; keyed route remount and effect aborts retire old-token completions. It imports no signed-in data owner, exposes no external HTML/images and persists no view token. Mounted unavailable, PIN, reload and stale-token checks pass.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "3f383e6f50f91a2bfd62b3569ef53dc932af13e50e1abe7ce3b7ffe2cd167fe7",
+    "reason": "This feature file composes the portfolio sharing settings, design editor and published-link controls with local subordinate components. Existing typed operations, Capiro request lifetimes, module controls, layout helpers and common widget renderer retain their respective ownership. No backend authorization, generic workflow framework or new persistence owner is introduced.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "ResearchSharing",
+    "fingerprint": "4506c798394176cb1d56702453fc250d47a71b9f98b337e1673e48c678445721",
+    "reason": "This function composes three existing typed query results and the local edit/list panel selection for one portfolio. Settings, editing and link publication stay in named subordinate owners; the parent keyed portfolio route and scoped client retain identity disposal. It adds no data normalization or cross-feature authority.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "SharingSettings",
+    "fingerprint": "8ecf0ff36331b858a800ec0b28fd22944bbec5d7faf5d965628f2e1f650a4965",
+    "reason": "The function is the cohesive owner-only sharing switch/PIN form and disable confirmation. It calls the established typed mutations and reload callbacks, while Core remains authorization and revocation authority. The mounted owner/viewer and explicit disable-confirmation checks validate its bounded UI responsibility.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "ShareLinks",
+    "fingerprint": "155408b5945ed685ea4152cfe85aae45274f425c5a6cdada2490ff2da39f8181",
+    "reason": "This function owns one publish/list/revoke UI workflow for a portfolio. It binds an explicit client, immutable snapshot/design selection and operation key, displays the returned token once and delegates network authority to the scoped API. It does not implement signing, token persistence or provider delivery. Mounted exact selection/publication and confirmation evidence support retaining this form/list owner.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/gateway.ts",
+    "kind": "function",
+    "symbol": "handleCapiroRequest",
+    "fingerprint": "e0a31e2ff456199d7aaba100c434dfaa7beb3db009190b963112905679baab37",
+    "reason": "The signed-in gateway function is byte-identical to the accepted current-main implementation; the new public operation uses a separate thin wrapper over the existing closed public gateway. Its prior file-based review is invalidated only by the additive wrapper. Authenticated token/scoping, deadline, bounded input and response validation behavior remain unchanged.",
+    "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

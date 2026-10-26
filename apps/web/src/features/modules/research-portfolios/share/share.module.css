@@ -1,0 +1,362 @@
+/* Client dashboard: grid, widgets, designer and recipient page. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: 56px;
+  gap: 12px;
+}
+.cell {
+  grid-column: var(--x) / span var(--w);
+  grid-row: var(--y) / span var(--h);
+  min-width: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+@media (max-width: 760px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+  .cell {
+    order: var(--order);
+    overflow: visible;
+  }
+}
+
+/* Widget content */
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.title {
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  overflow-wrap: anywhere;
+}
+.description {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.muted {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.empty {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  margin: auto 0;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.metric {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.metric > span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.metric strong {
+  display: block;
+  font-size: 22px;
+  margin: 4px 0;
+}
+.span {
+  grid-column: 1 / -1;
+}
+.fit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.widgetLabel {
+  font-size: 13px;
+  font-weight: 500;
+}
+.fitBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.fitBar progress {
+  flex: 1;
+  height: 10px;
+  accent-color: #171717;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+.listRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+.listRow:first-child {
+  border-top: 0;
+}
+.commentary h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.commentary p {
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+.firmMark {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.firmMark strong {
+  font-family: var(--font-newsreader);
+  font-size: 22px;
+}
+
+/* Designer */
+.designer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+}
+.canvas {
+  min-height: 300px;
+  padding: 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  background: var(--muted);
+}
+.canvas .cell {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+}
+.canvas .cell:focus-visible,
+.canvas .selected {
+  outline-color: #2563eb;
+}
+.handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.handle:active {
+  cursor: grabbing;
+}
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  padding: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    var(--border-strong) 50%
+  );
+  border-radius: 0 0 12px 0;
+  cursor: nwse-resize;
+  touch-action: none;
+}
+.side {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 16px;
+}
+.palette {
+  display: grid;
+  gap: 6px;
+}
+.palette button {
+  text-align: left;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 13px;
+}
+.palette button:hover:not(:disabled) {
+  border-color: var(--border-strong);
+}
+.palette small {
+  display: block;
+  color: var(--muted-foreground);
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.toolbar > :first-child {
+  flex: 1;
+  min-width: 200px;
+}
+.orderList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+.orderList li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.orderList li span {
+  flex: 1;
+}
+.hint {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+.problems {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--destructive-text);
+}
+@media (max-width: 1000px) {
+  .designer {
+    grid-template-columns: 1fr;
+  }
+  .side {
+    position: static;
+  }
+}
+
+/* Sharing tab */
+.stack {
+  display: grid;
+  gap: 20px;
+}
+.form {
+  display: grid;
+  gap: 14px;
+  max-width: 480px;
+}
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.pin {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+}
+.linkBox {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--muted);
+}
+.linkBox code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* Recipient page */
+.page {
+  min-height: 100vh;
+  background: var(--muted);
+  padding: 32px 20px 48px;
+  color: var(--foreground);
+}
+.frame {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+.gate {
+  max-width: 440px;
+  margin: 48px auto;
+  padding: 32px;
+  display: grid;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.gate h1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}

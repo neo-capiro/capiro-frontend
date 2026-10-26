@@ -13,6 +13,7 @@ import { ResearchMembers } from "./ResearchMembers";
 import { ResearchOverview } from "./ResearchOverview";
 import { ResearchReviews } from "./ResearchReviews";
 import { ResearchSettings } from "./ResearchSettings";
+import { ResearchSharing } from "./share/ResearchSharing";
 import { ResearchSnapshots } from "./ResearchSnapshots";
 import { ResearchSubscriptions } from "./ResearchSubscriptions";
 import {
@@ -90,7 +91,8 @@ export function ResearchPortfolioDetail({
             {view === "snapshots" && (
               <ResearchSnapshots portfolio={p} onReload={query.reload} />
             )}{" "}
-            {view === "subscriptions" && <ResearchSubscriptions id={id} />}
+            {view === "subscriptions" && <ResearchSubscriptions id={id} />}{" "}
+            {view === "sharing" && <ResearchSharing portfolio={p} />}
           </>
         )}
       </StatusPanel>

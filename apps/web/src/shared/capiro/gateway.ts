@@ -19,6 +19,7 @@ import {
 } from "./multipart";
 import { publicPlannerFormOperations } from "./operations/planner-public-forms";
 import { publicOnboardOperations } from "./operations/onboard-public";
+import { publicResearchShareOperations } from "./operations/research-share-public";
 
 import { jsonError, serviceErrorResponse } from "./gateway-errors";
 import { reportStrategyValidation } from "./strategy-validation-diagnostic";
@@ -254,7 +255,7 @@ async function handlePublicOperationRequest(
   }
 }
 
-/** The two public surfaces remain separate reviewed capability allowlists. */
+/** The public surfaces remain separate reviewed capability allowlists. */
 export function handlePublicPlannerFormRequest(
   request: Request,
   key: string,
@@ -280,6 +281,22 @@ export function handlePublicOnboardRequest(
     request,
     key,
     publicOnboardOperations,
+    config,
+    fetcher,
+  );
+}
+
+/** Research Portfolio client share links: link token plus portfolio PIN, no session. */
+export function handlePublicResearchShareRequest(
+  request: Request,
+  key: string,
+  config: CapiroConfig,
+  fetcher: typeof fetch = fetch,
+) {
+  return handlePublicOperationRequest(
+    request,
+    key,
+    publicResearchShareOperations,
     config,
     fetcher,
   );

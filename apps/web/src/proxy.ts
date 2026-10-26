@@ -14,8 +14,11 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
     const held = previewBackendRejection(process.env, request);
     if (held) return held;
   }
-  // This namespace has its own closed public capability allowlist in the route.
-  if (request.nextUrl.pathname.startsWith("/api/capiro/public-onboard."))
+  // These namespaces have their own closed public capability allowlists in the route.
+  if (
+    request.nextUrl.pathname.startsWith("/api/capiro/public-onboard.") ||
+    request.nextUrl.pathname.startsWith("/api/capiro/public-research-share.")
+  )
     return NextResponse.next();
   if (request.nextUrl.pathname === "/settings") {
     const destination = request.nextUrl.clone();

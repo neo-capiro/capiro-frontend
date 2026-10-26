@@ -8,6 +8,7 @@ import { intelligenceOperations } from "./operations/intelligence";
 import { legiwatchOperations } from "./operations/legiwatch";
 import { plannerOperations } from "./operations/planner";
 import { researchPortfolioOperations } from "./operations/research-portfolios";
+import { researchShareOperations } from "./operations/research-share";
 import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
@@ -42,6 +43,7 @@ export const capiroOperations = {
   ...settingsAdminOperations,
   ...intelligenceOperations,
   ...researchPortfolioOperations,
+  ...researchShareOperations,
   ...onboardFunnelOperations,
   ...onboardSetupOperations,
   ...onboardCoreOperations,
