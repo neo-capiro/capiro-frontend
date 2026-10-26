@@ -1,0 +1,108 @@
+.recording {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.recording h3,
+.recording p {
+  margin: 0;
+}
+.recording > button {
+  justify-self: start;
+}
+.ranges {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.ranges li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.player {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.player p {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.controls {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  --media-background-color: var(--card);
+  --media-control-background: var(--card);
+  --media-control-hover-background: var(--muted);
+  --media-primary-color: var(--foreground);
+  --media-secondary-color: var(--card);
+  --media-font-family: inherit;
+}
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.controlButton {
+  box-sizing: border-box;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  --media-control-background: var(--muted);
+  --media-control-padding: 0;
+  --media-icon-size: 18px;
+}
+.icon {
+  display: block;
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+.icon img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.time {
+  font-family: var(--font-geist-mono, monospace);
+  font-size: 12px;
+  font-weight: 500;
+  --media-control-padding: 0;
+  --media-font-family: var(--font-geist-mono, monospace);
+}
+.seek {
+  flex: 1 1 120px;
+  min-width: 80px;
+  --media-range-padding: 0px;
+  --media-control-height: 40px;
+  --media-range-track-height: 5px;
+  --media-range-track-border-radius: 999px;
+  --media-range-track-background: var(--border);
+  --media-range-bar-color: var(--steel, #5b7690);
+  --media-time-range-buffered-color: var(--steel, #5b7690);
+}
+@media (max-width: 600px) {
+  .seek {
+    order: -1;
+    flex-basis: 100%;
+  }
+}
