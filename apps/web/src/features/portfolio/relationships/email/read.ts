@@ -11,6 +11,19 @@ const recipientSchema = z.object({
   email: z.string(),
   name: z.string().nullable().optional(),
 });
+export const mailReplyContextSchema = z.discriminatedUnion("supported", [
+  z.object({
+    supported: z.literal(true),
+    operation: z.literal("reply"),
+    originalMessageId: z.uuid(),
+    originalUpdatedAt: instant,
+    senderConnectionId: z.uuid(),
+    subject: z.string().min(1).max(300),
+    to: z.tuple([z.object({ email: z.email() })]),
+  }),
+  z.object({ supported: z.literal(false), reason: z.string().max(500) }),
+]);
+export type MailReplyContext = z.infer<typeof mailReplyContextSchema>;
 export const messageSchema = z.object({
   id: z.uuid(),
   subject: z.string().nullable(),
@@ -50,6 +63,7 @@ export const mailCoverageSchema = z.object({
 export type MailCoverage = z.infer<typeof mailCoverageSchema>;
 export const mailBodySchema = messageSchema
   .extend({
+    replyContext: mailReplyContextSchema.optional(),
     threadId: z.uuid(),
     sentAt: instant.nullable(),
     receivedAt: instant.nullable(),
@@ -102,7 +116,13 @@ export const mailThreadPageSchema = threadSchema
   .refine((page) => {
     const end = page.messageOffset + page.messages.length;
     return (
-      page.messages.every((message) => message.threadId === page.id) &&
+      page.messages.every(
+        (message) =>
+          message.threadId === page.id &&
+          (!message.replyContext?.supported ||
+            (message.replyContext.originalMessageId === message.id &&
+              message.replyContext.senderConnectionId === page.connectionId)),
+      ) &&
       new Set(page.messages.map((message) => message.id)).size ===
         page.messages.length &&
       end <= page.totalMessages &&

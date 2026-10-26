@@ -18,24 +18,33 @@ import { type MailContact } from "./email";
 import { useSendMail, useSignature } from "./email";
 import { useMailboxes } from "./email/useMailboxes";
 import { MailboxField } from "./email/MailboxField";
+import type { MailReplyContext } from "./email/read";
 export function MailCompose({
   person,
   clientId,
   thread,
   onClose,
   initialDraft,
-  sendBlockedReason,
+  sendBlockedReason: requestedSendBlock,
+  reply,
 }: {
   person: MailContact;
   clientId: string;
   thread?: { id: string; subject: string };
   onClose: () => void;
   initialDraft?: MailInitialDraft;
+  reply?: Extract<MailReplyContext, { supported: true }>;
   /** A verified contract gap: review is available, dispatch/upload/rewrite are not. */
   sendBlockedReason?: string;
 }) {
+  const sendBlockedReason =
+    requestedSendBlock ??
+    (thread && !reply
+      ? "Native reply is unavailable for this original. Reply from your mailbox."
+      : undefined);
   const [subject, setSubject] = useState(
-    initialDraft?.subject ??
+    reply?.subject ??
+      initialDraft?.subject ??
       (thread ? `Re: ${thread.subject.replace(/^Re:\s*/i, "")}` : ""),
   );
   const [append, setAppend] = useState<boolean | null>(null);
@@ -45,7 +54,8 @@ export function MailCompose({
     signatureStatus: "current" | "loading" | "unavailable";
   } | null>(null);
   const [to, setTo] = useState<Recipient[]>(
-    initialDraft?.to ??
+    reply?.to ??
+      initialDraft?.to ??
       (person.email
         ? [
             {
@@ -109,7 +119,7 @@ export function MailCompose({
       {sendBlockedReason && <p role="note">{sendBlockedReason}</p>}
       {send.isSuccess ? (
         <div className="stack">
-          <p role="status">Email sent.</p>
+          <p role="status">Your mailbox accepted the email.</p>
           {send.data?.senderEmail && <p>From: {send.data.senderEmail}</p>}
           {send.data?.signatureAppended === false && (
             <small>Your saved signature was not appended.</small>
@@ -133,6 +143,8 @@ export function MailCompose({
               return;
             try {
               if (bodyError) throw new Error(bodyError);
+              if (reply && mailboxes.selected?.id !== reply.senderConnectionId)
+                throw new Error("Review the original sending mailbox again.");
               const selected = recipients(to, cc, bcc);
               const personIds = selected.to.flatMap((item) =>
                 item.personId ? [item.personId] : [],
@@ -149,6 +161,13 @@ export function MailCompose({
                     ? "loading"
                     : "unavailable",
                 input: {
+                  ...(reply
+                    ? {
+                        operation: "reply" as const,
+                        originalMessageId: reply.originalMessageId,
+                        originalUpdatedAt: reply.originalUpdatedAt,
+                      }
+                    : {}),
                   clientId,
                   ...(personIds.length ? { personIds } : {}),
                   ...selected,
@@ -185,7 +204,7 @@ export function MailCompose({
             onCc={setCc}
             bcc={bcc}
             onBcc={setBcc}
-            disabled={locked}
+            disabled={locked || Boolean(reply)}
           />
           <label>
             Subject
@@ -193,7 +212,7 @@ export function MailCompose({
               required
               maxLength={300}
               value={subject}
-              disabled={locked}
+              disabled={locked || Boolean(reply)}
               onChange={(e) => setSubject(e.target.value)}
             />
           </label>

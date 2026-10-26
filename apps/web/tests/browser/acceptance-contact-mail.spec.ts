@@ -9,6 +9,7 @@ import {
   person,
   personId,
   sendingMailbox,
+  sendingReceipt,
 } from "./fixtures";
 import {
   contactThread,
@@ -26,7 +27,22 @@ async function installContactMail(
 ) {
   const unexpected = await installFixtures(page);
   await installMailReadIdentity(page);
-  const thread = contactThread(associatedClient);
+  const base = contactThread(associatedClient);
+  const thread = {
+    ...base,
+    messages: base.messages.map((message) => ({
+      ...message,
+      replyContext: {
+        supported: true,
+        operation: "reply",
+        originalMessageId: message.id,
+        originalUpdatedAt: "2026-10-26T20:00:00.000Z",
+        senderConnectionId: sendingMailbox.id,
+        subject: message.subject,
+        to: [{ email: person.email }],
+      },
+    })),
+  };
   const history = await controlledRead(
     page,
     "**/engagement/mail-threads?**",
@@ -40,12 +56,19 @@ async function installContactMail(
   return { unexpected, thread, history, detail };
 }
 
-async function openContactThread(page: Page) {
+async function openContactThread(page: Page, selectOriginal = true) {
   await page.goto(`${relationshipsPath}?person=${personId}`);
   const contact = page.getByRole("dialog", { name: person.name, exact: true });
   await contact
     .getByRole("button", { name: /Synthetic acceptance briefing/ })
     .click();
+  if (!selectOriginal) return;
+  await page
+    .getByLabel("Original message", { exact: true })
+    .selectOption("b0000000-0000-4000-8000-000000000001");
+  await expect(
+    page.getByRole("button", { name: `Reply to ${person.name}`, exact: true }),
+  ).toBeEnabled();
 }
 
 for (const storedClient of [clientId, null])
@@ -78,7 +101,7 @@ for (const storedClient of [clientId, null])
     await expect(
       page.getByRole("button", { name: "Send email", exact: true }),
     ).toBeVisible();
-    expect(requests).toHaveLength(2);
+    expect(requests).toHaveLength(3);
     for (const request of requests) {
       const params = new URL(request).searchParams;
       expect(params.get("associationClientId")).toBe(clientId);
@@ -132,7 +155,7 @@ test("contact thread admits the exact requested ID for direct and recipient-deri
   for (const association of [clientId, null, otherClientId])
     await test.step(`stored clientId ${String(association)}`, async () => {
       const control = await installContactMail(page, association);
-      await openContactThread(page);
+      await openContactThread(page, false);
       const thread = page.getByRole("dialog", {
         name: control.thread.subject,
         exact: true,
@@ -170,7 +193,7 @@ test("contact thread refuses a different returned thread ID even when its client
     ],
   };
   control.detail.hold(foreign);
-  await openContactThread(page);
+  await openContactThread(page, false);
   await expect.poll(() => control.detail.waiting).toBe(1);
   control.detail.release();
   await expect(page.getByRole("alert")).toBeVisible();
@@ -189,7 +212,7 @@ for (const source of ["history", "detail"] as const)
     page,
   }) => {
     const control = await installContactMail(page);
-    await openContactThread(page);
+    await openContactThread(page, false);
     const text = control.thread.messages[0]!.bodyText;
     await expect(page.getByText(text, { exact: true })).toBeVisible();
     await page
@@ -197,7 +220,7 @@ for (const source of ["history", "detail"] as const)
       .click();
     const compose = page.getByRole("dialog", { name: "Reply", exact: true });
     await compose
-      .getByLabel("Subject", { exact: true })
+      .getByLabel("Message", { exact: true })
       .fill("Discard this obsolete reply draft");
     const read = control[source];
     const status = source === "history" ? 403 : 503;
@@ -260,10 +283,13 @@ for (const source of ["history", "detail"] as const)
     }
     await expect(compose).toHaveCount(0);
     await page
+      .getByLabel("Original message", { exact: true })
+      .selectOption(control.thread.messages[0]!.id);
+    await page
       .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
       .click();
     await expect(compose.getByLabel("Subject", { exact: true })).toHaveValue(
-      `Re: ${control.thread.subject}`,
+      control.thread.subject,
     );
     expect(control.history.writes).toEqual([]);
     expect(control.detail.writes).toEqual([]);
@@ -285,7 +311,7 @@ test("a held former-client contact thread cannot surface after the route selects
     json(route, []),
   );
   control.detail.hold(control.thread);
-  await openContactThread(page);
+  await openContactThread(page, false);
   await expect.poll(() => control.detail.waiting).toBe(1);
   await page.evaluate((destination) => {
     history.pushState({}, "", destination);
@@ -307,3 +333,164 @@ test("a held former-client contact thread cannot surface after the route selects
   expect(control.detail.writes).toEqual([]);
   expect(control.unexpected).toEqual([]);
 });
+
+test("a removed selected original closes its reply draft on current thread read", async ({
+  page,
+}) => {
+  const control = await installContactMail(page);
+  await openContactThread(page);
+  await page
+    .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
+    .click();
+  const compose = page.getByRole("dialog", { name: "Reply", exact: true });
+  await compose
+    .getByLabel("Message", { exact: true })
+    .fill("Obsolete original draft");
+  control.detail.hold({
+    ...control.thread,
+    messages: [],
+    totalMessages: 0,
+    updatedAt: "2026-10-26T20:02:00.000Z",
+  });
+  await refreshRelationships(page, ["mail-thread"]);
+  await expect.poll(() => control.detail.waiting).toBe(1);
+  control.detail.release();
+  await expect(compose).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: `Reply to ${person.name}`, exact: true }),
+  ).toBeDisabled();
+  expect(control.detail.writes).toEqual([]);
+  expect(control.unexpected).toEqual([]);
+});
+
+for (const recover of [false, true])
+  test(`explicit selected incoming original ${recover ? "recovers accepted origin" : "sends native reply"} with exact immutable origin`, async ({
+    page,
+  }) => {
+    const control = await installContactMail(page);
+    const incoming = control.thread.messages[0]!;
+    const outgoing = {
+      ...incoming,
+      id: "b0000000-0000-4000-8000-000000000002",
+      fromEmail: sendingMailbox.accountEmail,
+      sentAt: "2026-10-14T10:00:00Z",
+      receivedAt: null,
+      bodyText: "Later outgoing message must not become the original.",
+      bodyLength: "Later outgoing message must not become the original.".length,
+      replyContext: {
+        supported: false as const,
+        reason:
+          "Native reply is unavailable for this original. Reply from your mailbox.",
+      },
+    };
+    const full = {
+      ...control.thread,
+      messages: [incoming, outgoing],
+      totalMessages: 2,
+    };
+    await page.route(`**/engagement/mail-threads/${threadId}*`, (route) => {
+      const selected = new URL(route.request().url()).searchParams.get(
+        "messageId",
+      );
+      return json(
+        route,
+        selected
+          ? {
+              ...full,
+              messages: full.messages.filter(
+                (message) => message.id === selected,
+              ),
+              totalMessages: 1,
+            }
+          : full,
+      );
+    });
+    const sent: Record<string, unknown>[] = [];
+    const receipt = (requestKey: string) => ({
+      ok: true,
+      intentId: "c0000000-0000-4000-8000-000000000001",
+      requestKey,
+      state: "accepted",
+      threadId: "a0000000-0000-4000-8000-000000000099",
+      messageId: "b0000000-0000-4000-8000-000000000099",
+      operation: "reply",
+      originalMessageId: incoming.id,
+      originalThreadId: threadId,
+      originalUpdatedAt: incoming.replyContext.originalUpdatedAt,
+      ...sendingReceipt,
+    });
+    await page.route("**/engagement/mail/send-intents/*", (route) => {
+      const requestKey = new URL(route.request().url()).pathname
+        .split("/")
+        .at(-1)!;
+      return json(
+        route,
+        sent.length
+          ? receipt(requestKey)
+          : {
+              intentId: "c0000000-0000-4000-8000-000000000001",
+              requestKey,
+              state: "sending",
+            },
+      );
+    });
+    await page.route("**/engagement/mail/send", (route) => {
+      const body = route.request().postDataJSON();
+      sent.push(body);
+      return recover
+        ? json(route, { message: "Synthetic accepted response lost" }, 503)
+        : json(route, receipt(body.requestKey));
+    });
+    await page.goto(`${relationshipsPath}?person=${personId}`);
+    await page
+      .getByRole("dialog", { name: person.name, exact: true })
+      .getByRole("button", { name: /Synthetic acceptance briefing/ })
+      .click();
+    const reply = page.getByRole("button", {
+      name: `Reply to ${person.name}`,
+      exact: true,
+    });
+    await expect(reply).toBeDisabled();
+    await page
+      .getByLabel("Original message", { exact: true })
+      .selectOption(outgoing.id);
+    await expect(
+      page.getByRole("note").filter({ hasText: "Native reply is unavailable" }),
+    ).toBeVisible();
+    await expect(reply).toBeDisabled();
+    await page
+      .getByLabel("Original message", { exact: true })
+      .selectOption(incoming.id);
+    await reply.click();
+    const compose = page.getByRole("dialog", { name: "Reply", exact: true });
+    await expect(compose.getByLabel("Subject", { exact: true })).toHaveValue(
+      control.thread.subject,
+    );
+    await expect(compose.getByLabel("Subject", { exact: true })).toBeDisabled();
+    await expect(compose.getByLabel("From mailbox")).toBeDisabled();
+    await compose
+      .getByLabel("Message", { exact: true })
+      .fill("Synthetic exact native reply.");
+    await compose
+      .getByRole("button", { name: "Review email", exact: true })
+      .click();
+    await page
+      .getByRole("dialog", { name: "Send email", exact: true })
+      .getByRole("button", { name: "Send email", exact: true })
+      .click();
+    await expect(
+      page.getByText("Your mailbox accepted the email.", { exact: true }),
+    ).toBeVisible({ timeout: 12000 });
+    expect(sent).toHaveLength(1);
+    expect(sent[0]).toMatchObject({
+      operation: "reply",
+      originalMessageId: incoming.id,
+      originalUpdatedAt: "2026-10-26T20:00:00.000Z",
+      threadId,
+      senderConnectionId: sendingMailbox.id,
+      subject: control.thread.subject,
+      to: [{ email: person.email }],
+    });
+    expect(sent[0]).not.toHaveProperty("providerThreadId");
+    expect(control.unexpected).toEqual([]);
+  });
