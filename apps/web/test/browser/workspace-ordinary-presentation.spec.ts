@@ -71,6 +71,12 @@ for (const width of [1440, 390]) {
       recovery.getByRole("heading", { name: "Save unconfirmed" }),
     ).toBeVisible();
     await contained(page, recovery);
+    await expect(
+      recovery.getByRole("button", { name: "Read current saved content" }),
+    ).toHaveCSS("color", "rgb(10, 10, 10)");
+    await expect(
+      recovery.getByText(/Your submitted edits are retained/),
+    ).toHaveCSS("color", "rgb(117, 110, 105)");
     await capturePresentation(
       page,
       info,
@@ -141,6 +147,12 @@ for (const width of [1440, 390]) {
       recovery.getByRole("heading", { name: "Save unconfirmed" }),
     ).toBeVisible();
     await contained(page, recovery);
+    await expect(
+      recovery.getByRole("button", { name: "Retry exact original save" }),
+    ).toHaveCSS("color", "rgb(10, 10, 10)");
+    await expect(
+      recovery.getByText(/Your submitted edits are retained/),
+    ).toHaveCSS("color", "rgb(117, 110, 105)");
     await capturePresentation(
       page,
       info,

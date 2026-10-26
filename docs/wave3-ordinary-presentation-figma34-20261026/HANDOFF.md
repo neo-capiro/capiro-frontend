@@ -101,3 +101,18 @@ WorkspaceDraft remains exclusive through this freeze. After this ordinary source
 ## Remaining gates and resources
 
 No install, build, pack, full repository campaign, database/cloud/provider access, merge or deployment was performed. Source/visual independent review, size-registry disposition, integration composition and release/live qualification remain with Root, m3_scope and Release. These synthetic checks do not qualify live authorization or persisted backend behavior. The baseline checkout is retained as clean source evidence; prior worktrees and shared dependency caches remain intact. Test-created browser servers exit with their runs; final listener check is recorded in the external handoff.
+
+## PR191 visual correction V1 — 26 October 2026 UTC
+
+Library's independent visual review found that recovery action labels inherited muted body color instead of Figma3146:115961 foreground. The only product change is `.saveRecovery > .actions { color: var(--foreground); }` in the owned stylesheet. Explanatory copy remains muted; existing primary colors, disabled treatment, controller behavior and action gates are unchanged. The extra trailing blank line in BRIEF.md was trimmed without changing its standing rules or content.
+
+Focused command from apps/web: `node ../../node_modules/@playwright/test/cli.js test --config test/browser/playwright.config.ts workspace-ordinary-presentation.spec.ts --grep 'ordinary presentation.*1440px|newsletter reuses.*390px'`, same development harness/port5323/Chrome. Exit0,2/2 passed. New assertions check foreground `rgb(10, 10, 10)` action labels and muted `rgb(117, 110, 105)` explanatory copy. Three affected scoped axe scans have0 violations and0 incomplete checks. Touched format/lint and diff checks pass; no full42/98 rerun or typecheck repetition. The inherited TS2339 projectionVersion finding is unchanged.
+
+Corrected screenshots and result/source hashes are in `evidence/color-correction/`. These supersede the original recovery-label-color evidence; earlier screenshots retain their historical attribution. CSS SHA256: `fdcae4bc3908ea1d50b5ecc4de10b07cdb59d72a4261da6da7c6b18afd2c22ad`. CSS is309 nonblank lines, with no size finding. No product TypeScript function fingerprint changed. The test's ordinary presentation callback changes from81 to87 nonblank lines, fingerprint `71295e38925778fd4a0026da750157856ba69e451d3b695355a4714a4fafd495`; the test file is184 nonblank lines. No registry edit or self-waiver. Port5323 is clear.
+
+![Corrected ordinary recovery](evidence/color-correction/ordinary-readback-1440.png)
+![Corrected shared newsletter recovery](evidence/color-correction/newsletter-readback-390.png)
+
+**Root review request:** obtain Library's narrow visual delta review for V1 against the corrected ordinary desktop and shared newsletter narrow captures. Keep the previous source/behavior review and unchanged findings separate; Integration still owns the accepted191+189 host composition.
+
+The separately allocated read-only WS16 section-library seam report is complete in the author's outputs/W3-WS16-RICH-SECTION-SOURCE-SEAM.md. No WS16 implementation or protected-file change was made.

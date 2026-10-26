@@ -97,6 +97,9 @@
   letter-spacing: -0.039px;
   overflow-wrap: anywhere;
 }
+.saveRecovery > .actions {
+  color: var(--foreground);
+}
 .saveRecovery h2,
 .saveRecovery h3,
 .saveRecovery p {
