@@ -3,7 +3,6 @@ import type { NewsletterWriteReceipt } from "@capiro/shared/newsletter";
 import {
   documentFixture,
   documentId,
-  editorUrl,
   enterEditor,
   adoptDocument,
   button,
@@ -337,6 +336,14 @@ test("partial recovery storage failure prevents the first dispatch and cannot be
       .getByRole("alert")
       .filter({ hasText: "recovery is unavailable or inconsistent" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Recovery unavailable" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("The original request is retained in this browser.", {
+      exact: false,
+    }),
+  ).toHaveCount(0);
   expect(f.writes).toEqual([]);
   await page.reload();
   await expect(
@@ -345,6 +352,7 @@ test("partial recovery storage failure prevents the first dispatch and cannot be
       .filter({ hasText: "recovery is unavailable or inconsistent" }),
   ).toBeVisible();
   await expect(button(page, "Create saved document")).toBeDisabled();
+  await expect(button(page, "Check browser recovery")).toBeEnabled();
   expect(f.writes).toEqual([]);
 });
 

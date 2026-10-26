@@ -120,16 +120,24 @@ export function RichDocumentActions({
                   ? `This request saved revision ${outcome.receipt.revision}`
                   : outcome?.kind === "refused"
                     ? "This save made no change"
-                    : "Request not confirmed"}
+                    : state.recovery.requestId
+                      ? "Request not confirmed"
+                      : "Recovery unavailable"}
             </h3>
             <p>
-              {outcome
-                ? "Current saved content is a separate read. Review it before adopting or rebasing your retained edits."
-                : "The original request is retained in this browser. Recovery checks that request without repeating a create or save. An absent or unavailable result keeps writing blocked."}
+              {state.recovery.phase === "loading"
+                ? "Checking this browser for recoverable create/save requests."
+                : outcome
+                  ? "Current saved content is a separate read. Review it before adopting or rebasing your retained edits."
+                  : state.recovery.requestId
+                    ? "The original request is retained in this browser. Recovery checks that request without repeating a create or save. An absent or unavailable result keeps writing blocked."
+                    : "Recovery could not be checked. Writing remains blocked until recovery is available."}
             </p>
             {state.recovery.phase !== "loading" && (
               <ActionButton onClick={() => void owner.recoverWrite()}>
-                Check retained request
+                {state.recovery.requestId
+                  ? "Check retained request"
+                  : "Check browser recovery"}
               </ActionButton>
             )}
           </section>
