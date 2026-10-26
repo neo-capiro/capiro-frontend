@@ -4638,9 +4638,9 @@
     "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDetail.tsx",
     "kind": "function",
     "symbol": "BlueprintDetail",
-    "fingerprint": "040cb6b1ab427390d9fdac6fa5c8d91f9f0469d396202b988eb966aa10fe48b6",
-    "reason": "One Blueprint detail view binds selected versions through public receivers and shows truthful metadata and explicit adoption.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "e157458772394fd152da23fadcb9dcfb261807da41ef1d9f39861e9ea24e6e8c",
+    "reason": "Existing saved Blueprint detail host retains its catalog/adoption behavior and adds the version-content view. The new authoring components and shared writer remain separate owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4656,9 +4656,9 @@
     "file": "apps/web/src/features/modules/workspace/document-templates/DocumentTemplateLibrary.tsx",
     "kind": "function",
     "symbol": "DocumentTemplateLibrary",
-    "fingerprint": "a3f8dbb5c139103f1c60346315e397006465d23ec10e40c723ad0ac5f342633b",
-    "reason": "One catalog view owns local product/row selection and composes the existing query and adoption lifetimes.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "84997246dbc6fc72772a5f9c7676ca5a94195a79c34d34e507fa3a095d69aa7b",
+    "reason": "Existing library host composes the catalog and studio tabs while retaining accepted pin adoption. Feature-local authoring modules handle their own forms; the shared write owner serializes changes across these tabs.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4991,6 +4991,168 @@
     "symbol": "TemplateHistory",
     "fingerprint": "04457d57e9ce43d5ac53060ca260da506c05bf782cdfb0449b53db82eec345d2",
     "reason": "One saved-version inspection component owns selection, previous-available comparison and disclosure. Pure comparison/formatting lives in the small separate domain helper; no policy, persistence or current-campaign state is inferred.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c8e3b1d6eeab3d3424b8b90818d0ade8a92659a8fe1f751b64993ba1a1764d6b",
+    "reason": "One saved Blueprint version family groups inspection, complete-draft editing and lifecycle actions; the shared write owner and field editors are separate. Current-access preflight and public receiving remain the existing owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "function",
+    "symbol": "DefinitionRead",
+    "fingerprint": "d1ff80aebc54d174c9e5e653388950fe8b39369ddbdb9bfe9ed26c99d8d159ad",
+    "reason": "One read-only presentation of the saved canonical definition; it neither adapts a draft nor creates authority.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "function",
+    "symbol": "BlueprintDraftEditor",
+    "fingerprint": "1817e5d3d461b0698ec6c6fc1028a28be6d14fa478ababafe8a05eac5b11f9af",
+    "reason": "One complete-definition edit transaction captures the displayed revision, preserves opaque fields, and applies delayed theme results only to current draft state. It delegates field presentation and uses the shared write owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "function",
+    "symbol": "BlueprintContent",
+    "fingerprint": "fe4ffcf0bdb1f4df08c973b78d084400b403e637ebd8efb8dc3111079b424645",
+    "reason": "One saved-version host coordinates read, historical clone, lifecycle and sample views using the existing public parsers and shared write owner; no second persistence or authority mechanism.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintCreate.tsx",
+    "kind": "function",
+    "symbol": "BlueprintCreate",
+    "fingerprint": "71345be929e8d8908e6e4a912d36582573b1f4d403c16c9902996b79c1f3aa03",
+    "reason": "One explicit firm Blueprint creation form captures and validates its request/result before current detail readback; it delegates existing transport and write serialization.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0ed0d5d64af253b1c69b257d2e290592ef95b307359e3e979eeec9fc0dafc961",
+    "reason": "One complete canonical definition form, with named Intake/Policy sections and separate section/theme components. Keeping the typed field composition together preserves optional and opaque values without adding another state owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "IntakeFields",
+    "fingerprint": "21b057bad814efc10935d7873da26118d31e04f68bc691341fb451505b154bf5",
+    "reason": "One typed intake-field editor/render map preserves optional conditions and stable accessible labels. It emits field updates to the single enclosing draft owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "IntakeFields > <anonymous>",
+    "fingerprint": "e7a818e9c42afd0b4144ec9fcdf465debbc39b0ae8be59af8611e6f244a4943d",
+    "reason": "One typed intake-field editor/render map preserves optional conditions and stable accessible labels. It emits field updates to the single enclosing draft owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "PolicyFields",
+    "fingerprint": "ac54796a9672dacb2bd0312d89d96ac39b7611c05be4b49e5f2b156ae2476050",
+    "reason": "One canonical policy/rules field group preserves exact nested values; its JSX and update paths share one draft responsibility.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "BlueprintDefinitionFields",
+    "fingerprint": "47d968c89eceeec8a2d3cf8526310b1b1e0071b563d45d172cfa92cd7a304401",
+    "reason": "One composition of complete-definition field groups. The theme callback forwards only copied settings to the current-state edit owner; no duplicated request, authority or storage responsibility.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintSectionFields.tsx",
+    "kind": "function",
+    "symbol": "BlueprintSectionFields",
+    "fingerprint": "d15554a92681662737fde91222bb19a50472dcabb89447001c8a7b7d7cb7358c",
+    "reason": "One canonical section-list editor owns explicit add/remove/reorder and native presentation; it emits changes to the enclosing definition and retains stable section identity.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintThemePicker.tsx",
+    "kind": "function",
+    "symbol": "BlueprintThemePicker",
+    "fingerprint": "648188ded36e5a6d3e00c76c8cfdf194bf3c702eb5e11da53a429920c092888d",
+    "reason": "One explicit published-theme selection/read composition binds captured version/hash and current lifetime. It returns only settings, reports pending to the draft owner, and does not establish a pin or overwrite the full draft.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BrandAssetStudio.tsx",
+    "kind": "function",
+    "symbol": "BrandAssetStudio",
+    "fingerprint": "b4cce6fa1b5e32675b8ef87a5480b640e6edbbb52dc3e132cf1617cbbaef5cf2",
+    "reason": "One brand-asset library host composes existing ticket/upload/confirm and deliberate registration/removal. The canonical attachment and brand owners retain access, readiness and reference checks; this component introduces no sender, queue or policy owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0e53ee16582716f10039518efb6059498f53cdc7064e8b83185a56184e153a9d",
+    "reason": "One theme/version lifecycle family retains complete opaque settings through create, inspect, edit, publish and retire views. Named subcomponents and the common write owner separate presentation from request serialization.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeCreate",
+    "fingerprint": "f24c8264a7a2666c6d2bcd1287e1d3c6367914235b14d4499f7b5a2f0f7e0fce",
+    "reason": "One theme creation form captures explicit values and verifies the actual created parent before readback, using the common write owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeVersionView",
+    "fingerprint": "a4fac9a2b163138fa7a4459383424a45dba18d4aed75d17d5a4ccd60aa86b2a9",
+    "reason": "One selected saved theme version view composes read/edit/lifecycle controls with captured identity/hash and lossless settings.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeDetail",
+    "fingerprint": "66a45cd20cdee472f7a8cb1883130bf4f538146a560dc591038f645b22bb5585",
+    "reason": "One theme parent detail and version-selection host; current readback and children own their distinct presentation without adding state persistence.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeStudio",
+    "fingerprint": "652d36e1e109e4b0900a864af531a45e638006a04c53774bfd5169e240ac9849",
+    "reason": "One theme catalog host controls current selection and explicit creation, reusing the scoped query and common write owner.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
