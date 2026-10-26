@@ -5461,5 +5461,23 @@
     "reason": "This function remains the client/master calendar header presentation owner. The added client breadcrumb delegates navigation and keyboard/popover behavior to the existing ClientViewSwitcher through its public Portfolio interface; all three existing action callbacks and master-calendar branch are unchanged. No authorization, transport or state ownership was added. Keep this cohesive presentation rather than splitting to satisfy a size threshold.",
     "reviewedBy": "Codex independent PR236 reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/task-updates/MeriTaskUpdates.tsx",
+    "kind": "function",
+    "symbol": "ConnectedUpdates",
+    "fingerprint": "3c130f0c434fcc1d56e8debd3675db1c27449220850466c99b4055c77266bfe7",
+    "reason": "This component composes the existing task-update form, proposal, result and local status actions. The added outline Button is a presentation of the controller terminal transition with the current captured proposal handle. Business admission, storage and transport remain in existing owners; no separate UI framework or responsibility was added.",
+    "reviewedBy": "Codex independent Wave4 orchestrator review",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/meri-task-commands/workflow-adapter.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "1333f6ccd2937e596a888d27cfd2638eb10e592554644c4a58ba22069639dafd",
+    "reason": "This adapter owns one standalone task-update workflow and its original request/proposal lifetime. The terminal transition reuses the existing encrypted recovery lock, acknowledgment and current-session guard before retiring only in-memory opaque handles. It adds no storage, transport, authority or mutation owner; keeping the transition with prepare/execute/recovery makes its shared state invariant explicit.",
+    "reviewedBy": "Codex independent Wave4 orchestrator review",
+    "reviewedOn": "2026-10-26"
   }
 ]
