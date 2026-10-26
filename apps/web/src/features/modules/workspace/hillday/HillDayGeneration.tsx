@@ -2,18 +2,12 @@
 
 import { useState } from "react";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
-import {
-  ActionButton,
-  Badge,
-  DataTable,
-  Panel,
-  StatusPanel,
-} from "../../../../shared/module-ui";
+import { ActionButton, StatusPanel } from "../../../../shared/module-ui";
 import {
   useHillDayGeneration,
   type HillDayGenerationScope,
 } from "./hillday-generation-state";
-import styles from "../workspace.module.css";
+import styles from "./hillday-presentation.module.css";
 
 export function HillDayGeneration({
   id,
@@ -71,26 +65,97 @@ function GenerationSession({
     job.units.some(
       (unit) => unit.state === "failed" || unit.state === "unknown",
     );
+  const settled =
+    job?.units.filter(
+      (unit) => unit.state === "done" || unit.state === "failed",
+    ).length ?? 0;
+  const progress = job?.units.length
+    ? Math.round((100 * settled) / job.units.length)
+    : 0;
   return (
     <div className={styles.form}>
-      <Panel
-        title={
-          retained
-            ? "Generation start unconfirmed"
-            : job?.status === "cancelled"
-              ? "Generation cancelled"
-              : active
-                ? "Building your packet"
-                : job?.status === "complete"
-                  ? "Your packet is ready"
-                  : job?.status === "failed"
-                    ? "Generation needs attention"
-                    : state.noJob
-                      ? "Ready to generate"
-                      : "Generation progress"
-        }
-        description="Workspace creates a section for each selected meeting and keeps source gaps visible."
+      <section
+        className={styles.generationCard}
+        aria-label="Generation progress"
+        data-design-node="1064:259246"
       >
+        <header className={styles.generationHeader}>
+          <span className={styles.generationIcon} aria-hidden>
+            ✦
+          </span>
+          <div>
+            <h3>
+              {retained
+                ? "Generation start unconfirmed"
+                : job?.status === "cancelled"
+                  ? "Generation cancelled"
+                  : active
+                    ? "Meri is drafting the packet"
+                    : job?.status === "complete"
+                      ? "Your packet is ready"
+                      : job?.status === "failed"
+                        ? "Generation needs attention"
+                        : state.noJob
+                          ? "Ready to generate"
+                          : "Generation progress"}
+            </h3>
+            <p>Assembling Directory, Portfolio and Intelligence per meeting.</p>
+          </div>
+          {job && <strong className={styles.progressValue}>{progress}%</strong>}
+        </header>
+        {job && (
+          <>
+            <progress
+              className={styles.progress}
+              value={settled}
+              max={job.units.length || 1}
+              aria-label="Settled meeting sections"
+            />
+            <ol
+              className={styles.units}
+              aria-label="Generation progress by meeting"
+            >
+              {job.units.map((unit, index) => (
+                <li
+                  key={unit.meetingId}
+                  className={styles.unit}
+                  data-state={unit.state}
+                >
+                  <span aria-hidden className={styles.unitIcon}>
+                    {unit.state === "done"
+                      ? "✓"
+                      : unit.state === "running"
+                        ? "↻"
+                        : ["failed", "unknown"].includes(unit.state)
+                          ? "⚠"
+                          : "○"}
+                  </span>
+                  <span className={styles.unitName}>Meeting {index + 1}</span>
+                  <span className={styles.unitDetail}>
+                    {unit.state === "done"
+                      ? "Completed"
+                      : unit.state === "running"
+                        ? "Drafting…"
+                        : unit.state === "unknown"
+                          ? "Outcome unknown"
+                          : unit.state === "failed"
+                            ? "Unavailable"
+                            : "Queued"}
+                    {unit.reason ? ` · ${unit.reason}` : ""}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <p className={styles.caption}>
+              Focus and Background are drafted per meeting. Unavailable sections
+              keep their reasons; unknown outcomes are not counted as settled.
+            </p>
+            {job.quality !== null && (
+              <p className={styles.caption}>Quality {job.quality}%</p>
+            )}
+            {job.error && <p className={styles.notice}>{job.error}</p>}
+          </>
+        )}
         {retained && (
           <p role="status">
             The original generation request is retained. Reading the latest job
@@ -190,55 +255,7 @@ function GenerationSession({
           <p role="status">Reading saved generation progress…</p>
         )}
         {state.noJob && !retained && <p>No saved generation job.</p>}
-      </Panel>
-      {job && (
-        <>
-          <p
-            className={
-              job.status === "complete" ? styles.success : styles.notice
-            }
-          >
-            {job.status}
-            {job.quality !== null ? ` · Quality ${job.quality}%` : ""}
-            {job.error ? ` · ${job.error}` : ""}
-          </p>
-          <DataTable
-            rows={job.units}
-            rowKey={(row) => row.meetingId}
-            caption="Generation progress by meeting"
-            columns={[
-              {
-                key: "meeting",
-                label: "MEETING",
-                render: (row) => row.meetingId,
-              },
-              {
-                key: "state",
-                label: "STATE",
-                render: (row) => (
-                  <Badge
-                    tone={
-                      row.state === "done"
-                        ? "success"
-                        : ["failed", "unknown"].includes(row.state)
-                          ? "warning"
-                          : "neutral"
-                    }
-                  >
-                    {row.state}
-                  </Badge>
-                ),
-              },
-              {
-                key: "reason",
-                label: "DETAIL",
-                render: (row) => row.reason ?? "—",
-              },
-              { key: "at", label: "UPDATED", render: (row) => row.at },
-            ]}
-          />
-        </>
-      )}
+      </section>
     </div>
   );
 }
