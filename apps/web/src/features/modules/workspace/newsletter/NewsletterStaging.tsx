@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
-  Panel,
+  Modal,
   SelectInput,
 } from "../../../../shared/module-ui";
 import {
@@ -15,21 +15,49 @@ import {
   type StagingActor,
 } from "./staging-model";
 import { useNewsletterStaging } from "./useNewsletterStaging";
-import styles from "../workspace.module.css";
+import styles from "./newsletter-staging.module.css";
 
 export function NewsletterStaging({
   draftId,
   saved,
+  open,
+  onClose,
+  disabled = false,
 }: {
-  draftId: string;
+  draftId?: string;
   saved: boolean;
+  open: boolean;
+  onClose: () => void;
+  disabled?: boolean;
 }) {
-  const me = useCapiroQuery("me.read", {});
-  if (!me.data)
+  const me = useCapiroQuery("me.read", {}, { enabled: Boolean(draftId) });
+  if (!draftId || !me.data)
     return (
-      <p role={me.error ? "alert" : "status"}>
-        {me.error?.message ?? "Checking current Core identity…"}
-      </p>
+      <Modal
+        className={styles.dialog}
+        open={open}
+        onOpenChange={(next) => {
+          if (!next) onClose();
+        }}
+        title="Stage in Outreach"
+        description="Review a saved version before adding it to an existing Outreach session."
+        footer={
+          <ActionButton className={styles.button} onClick={onClose}>
+            Cancel
+          </ActionButton>
+        }
+      >
+        <section className={styles.panel}>
+          <h3>
+            {draftId ? "Checking current access" : "Save a version first"}
+          </h3>
+          <p role={me.error ? "alert" : "status"}>
+            {draftId
+              ? (me.error?.message ?? "Checking access to saved versions…")
+              : "Return to the editor and save this newsletter before selecting a version for Outreach."}
+          </p>
+        </section>
+      </Modal>
     );
   const actor = {
     tenantId: me.data.tenant.id,
@@ -42,18 +70,36 @@ export function NewsletterStaging({
       actor={actor}
       draftId={draftId}
       saved={saved}
+      open={open}
+      onClose={onClose}
+      disabled={disabled}
     />
   );
 }
 
+function savedTime(value: string) {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+  }).format(new Date(value));
+}
 function StagingSelection({
   actor,
   draftId,
   saved,
+  open,
+  onClose,
+  disabled,
 }: {
+  open: boolean;
+  onClose: () => void;
   actor: StagingActor;
   draftId: string;
   saved: boolean;
+  disabled: boolean;
 }) {
   const flow = useNewsletterStaging(actor, draftId);
   const [selectedVersion, setVersion] = useState("");
@@ -70,27 +116,27 @@ function StagingSelection({
   const versions = useCapiroQuery(
     "workspace.draft.versions",
     { params: { draftId } },
-    { enabled: flow.retained.ready },
+    { enabled: open && flow.retained.ready },
   );
   const sessions = useCapiroQuery(
     "engagement.sessions",
     { query: { limit: 100, offset } },
-    { enabled: flow.retained.ready },
+    { enabled: open && flow.retained.ready },
   );
   const revision = useCapiroQuery(
     "workspace.newsletter.revision",
     { params: { draftId, versionId } },
-    { enabled: flow.retained.ready && !!versionId && !historical },
+    { enabled: open && flow.retained.ready && !!versionId && !historical },
   );
   const historicalSource = useCapiroQuery(
     "workspace.draft",
     { params: { id: draftId } },
-    { enabled: flow.retained.ready && historical },
+    { enabled: open && flow.retained.ready && historical },
   );
   const destination = useCapiroQuery(
     "engagement.session",
     { params: { sessionId } },
-    { enabled: flow.retained.ready && !!sessionId },
+    { enabled: open && flow.retained.ready && !!sessionId },
   );
   const selected = historical ? undefined : revision.data;
   const target = destination.data;
@@ -133,7 +179,7 @@ function StagingSelection({
     selected?.projectionVersion,
     selected?.projectionHash,
     selected?.clientId,
-    historical ? original?.body.requestId : undefined,
+    original?.body.requestId,
     historical ? historicalSource.data?.clientId : undefined,
     sessionId,
     target?.currentStateVersion,
@@ -153,241 +199,316 @@ function StagingSelection({
     !unavailable &&
     !destination.loading &&
     !destination.error;
-  const error = flow.retained.error ?? unavailable ?? "";
-  if (!flow.retained.ready)
-    return (
-      <div role={flow.retained.error ? "alert" : "status"}>
-        <p>{error || "Checking saved staging recovery…"}</p>
-        {flow.retained.error && (
-          <ActionButton onClick={flow.retained.retry}>
-            Retry staging recovery
-          </ActionButton>
-        )}
-      </div>
-    );
+  const failure =
+    flow.retained.error ||
+    unavailable ||
+    versions.error?.message ||
+    sessions.error?.message ||
+    (historical ? historicalSource.error?.message : revision.error?.message) ||
+    destination.error?.message;
+  const finishing = useRef(false);
+  useEffect(() => {
+    if (
+      finishing.current &&
+      flow.retained.ready &&
+      !flow.receipt &&
+      !flow.retained.record
+    ) {
+      finishing.current = false;
+      onClose();
+    }
+  }, [flow.retained.ready, flow.receipt, flow.retained.record, onClose]);
+  const confirmed = Boolean(flow.receipt && flow.retained.ready);
+  const state = confirmed
+    ? "confirmed"
+    : original
+      ? "original"
+      : failure
+        ? "refresh"
+        : "review";
+  const currentVersion = versions.data?.find(
+    (item) => item.draftId === draftId && item.id === versionId,
+  );
+  const versionLabel = currentVersion?.label ?? "Saved version";
+  const timestamp = flow.receipt?.staged.savedAt ?? currentVersion?.createdAt;
+  const destinationLabel =
+    target?.session.id === sessionId ? target.session.title : undefined;
+  const busy = flow.busy;
+  const canAct = ready && flow.retained.ready && !disabled && !busy;
+  function refresh() {
+    setReviewed("");
+    if (!flow.retained.ready) flow.retained.retry();
+    versions.reload();
+    sessions.reload();
+    revision.reload();
+    historicalSource.reload();
+    destination.reload();
+  }
+  const title = {
+    review: "Stage in Outreach",
+    refresh: "Review needs refreshing",
+    original: "Retry original staging",
+    confirmed: "Saved version staged",
+  }[state];
+  const description = {
+    review:
+      "Review a saved version before adding it to an existing Outreach session.",
+    refresh:
+      "Staging stays unavailable until the current review can be verified.",
+    original: "Staging was not confirmed. The original request is preserved.",
+    confirmed: "The original staging receipt confirms this saved version.",
+  }[state];
   return (
-    <div className={styles.form}>
-      <p>
-        {saved
-          ? "Choose a saved revision to stage."
-          : "Unsaved editor changes are excluded. Choose an existing saved revision, or save in the editor first."}{" "}
-        Staging replaces the session’s content skeleton. It does not generate or
-        send messages.
-      </p>
-      {original ? (
-        <p role="status">
-          Original staging request retained: {original.body.requestId}. Recovery
-          uses its original revision and state version{" "}
-          {original.body.expectedStateVersion}.
-        </p>
-      ) : (
+    <Modal
+      className={`${styles.dialog} ${styles[state]}`}
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) onClose();
+      }}
+      title={title}
+      description={description}
+      footer={
         <>
-          <Field label="Saved Newsletter revision" htmlFor="staging-version">
-            <SelectInput
-              id="staging-version"
-              value={selectedVersion}
-              disabled={flow.busy}
-              onValueChange={(value) => {
-                setReviewed("");
-                setVersion(value);
+          <ActionButton
+            className={styles.button}
+            disabled={confirmed && (busy || disabled)}
+            onClick={() => {
+              if (confirmed) {
+                finishing.current = true;
+                void flow.acknowledge();
+              } else onClose();
+            }}
+          >
+            {confirmed ? "Done" : "Cancel"}
+          </ActionButton>
+          {confirmed ? (
+            <ActionButton asChild primary className={styles.button}>
+              <Link
+                href={`/modules/engagement?view=outreach&session=${encodeURIComponent(sessionId)}`}
+              >
+                Open Outreach
+              </Link>
+            </ActionButton>
+          ) : failure ? (
+            <ActionButton
+              primary
+              className={styles.button}
+              disabled={busy || disabled}
+              onClick={refresh}
+            >
+              Refresh review
+            </ActionButton>
+          ) : (
+            <ActionButton
+              primary
+              className={styles.button}
+              disabled={!canAct || reviewed !== reviewKey}
+              onClick={() => {
+                if (original) void flow.stage();
+                else if (canAct && selected)
+                  void flow.stage({
+                    sessionId,
+                    draftId,
+                    versionId,
+                    snapshotHash: selected.snapshotHash,
+                    projectionVersion: selected.projectionVersion,
+                    projectionHash: selected.projectionHash,
+                    expectedStateVersion: target.currentStateVersion,
+                  });
               }}
-              placeholder="Choose saved revision"
-              options={(versions.data ?? [])
-                .filter((item) => item.draftId === draftId)
-                .map((item) => ({
+            >
+              {busy
+                ? "Checking staging…"
+                : original
+                  ? "Retry original staging"
+                  : "Stage saved version"}
+            </ActionButton>
+          )}
+        </>
+      }
+    >
+      {state === "review" && (
+        <>
+          <div className={styles.fields}>
+            <Field label="Saved version" htmlFor="staging-version">
+              <SelectInput
+                id="staging-version"
+                value={selectedVersion}
+                disabled={busy || disabled || !flow.retained.ready}
+                onValueChange={(value) => {
+                  setReviewed("");
+                  setVersion(value);
+                }}
+                placeholder="Choose saved version"
+                options={(versions.data ?? [])
+                  .filter((item) => item.draftId === draftId)
+                  .map((item) => ({
+                    value: item.id,
+                    label: `${item.label ?? "Saved version"} · ${savedTime(item.createdAt)}`,
+                  }))}
+              />
+            </Field>
+            <Field label="Outreach session" htmlFor="staging-session">
+              <SelectInput
+                id="staging-session"
+                value={selectedSession}
+                disabled={busy || disabled || !flow.retained.ready}
+                onValueChange={(value) => {
+                  setReviewed("");
+                  setSession(value);
+                }}
+                placeholder="Choose Outreach session"
+                options={(sessions.data ?? []).map((item) => ({
                   value: item.id,
-                  label: `${item.label ?? "Saved revision"} · ${item.createdAt} · ${item.id}`,
+                  label: item.title ?? "Untitled Outreach session",
                 }))}
-            />
-          </Field>
-          <Field label="Existing Outreach session" htmlFor="staging-session">
-            <SelectInput
-              id="staging-session"
-              value={selectedSession}
-              disabled={flow.busy}
-              onValueChange={(value) => {
-                setReviewed("");
-                setSession(value);
-              }}
-              placeholder="Choose existing session"
-              options={(sessions.data ?? []).map((item) => ({
-                value: item.id,
-                label: `${item.title ?? item.id} · ${item.status}`,
-              }))}
-            />
-          </Field>
-          <div className={styles.actions}>
-            <ActionButton
-              disabled={offset === 0 || flow.busy}
-              onClick={() => {
-                setOffset(offset - 100);
-                setSession("");
-              }}
-            >
-              Previous sessions
-            </ActionButton>
-            <ActionButton
-              disabled={sessions.data?.length !== 100 || flow.busy}
-              onClick={() => {
-                setOffset(offset + 100);
-                setSession("");
-              }}
-            >
-              More sessions
-            </ActionButton>
+              />
+            </Field>
           </div>
+          {(offset > 0 || sessions.data?.length === 100) && (
+            <div className={styles.paging}>
+              <ActionButton
+                className={styles.button}
+                disabled={offset === 0 || busy || disabled}
+                onClick={() => {
+                  setOffset(offset - 100);
+                  setSession("");
+                }}
+              >
+                Previous sessions
+              </ActionButton>
+              <ActionButton
+                className={styles.button}
+                disabled={sessions.data?.length !== 100 || busy || disabled}
+                onClick={() => {
+                  setOffset(offset + 100);
+                  setSession("");
+                }}
+              >
+                More sessions
+              </ActionButton>
+            </div>
+          )}
+          <section className={styles.panel}>
+            <h3>Content to stage</h3>
+            {ready && selected ? (
+              <>
+                <div className={styles.preview}>
+                  <p>Subject</p>
+                  <p data-staging-subject>
+                    {selected.contentSkeleton.subject || (
+                      <em>Empty subject (staged unchanged)</em>
+                    )}
+                  </p>
+                </div>
+                <div className={styles.preview}>
+                  <p>Plain text</p>
+                  <p data-staging-plaintext>{selected.contentSkeleton.body}</p>
+                </div>
+                <p className={styles.caption}>
+                  This is the selected saved version. Unsaved edits are
+                  excluded.
+                </p>
+              </>
+            ) : (
+              <p role="status">
+                {!flow.retained.ready || revision.loading || destination.loading
+                  ? "Checking saved content and current access…"
+                  : "Choose a saved version and an Outreach session to review the exact content."}
+              </p>
+            )}
+          </section>
+          <p className={styles.caption}>
+            Outreach receives the subject and plain text shown above. Images,
+            layout and rich formatting are not included.
+          </p>
+          {!saved && (
+            <p className={styles.caption}>
+              Your unsaved editor changes are excluded.
+            </p>
+          )}
+          <label className={styles.confirmation}>
+            <input
+              type="checkbox"
+              checked={reviewed === reviewKey}
+              disabled={!canAct}
+              onChange={(event) =>
+                setReviewed(event.target.checked ? reviewKey : "")
+              }
+            />
+            I reviewed this saved version and the selected Outreach session.
+          </label>
         </>
       )}
-      {[
-        versions.error,
-        sessions.error,
-        historical ? historicalSource.error : revision.error,
-        destination.error,
-      ]
-        .filter(Boolean)
-        .map((failure, index) => (
-          <p role="alert" key={index}>
-            {failure!.message} Saved revision staging is unavailable until the
-            source and destination can be verified.
+      {state === "refresh" && (
+        <>
+          <section className={styles.panel}>
+            <h3>The saved version or session needs checking</h3>
+            <p>
+              Refresh the review to see the current saved content and
+              destination. Review it again before staging.
+            </p>
+            <p className={styles.caption}>
+              Staging stays unavailable until the refreshed review is confirmed.
+            </p>
+          </section>
+          <p className={styles.caption}>
+            If this version or session is no longer available to you, return to
+            Workspace. No replacement is selected automatically.
           </p>
-        ))}
-      {((historical ? historicalSource.loading : revision.loading) ||
-        destination.loading) && (
-        <p role="status">Checking selected revision and Outreach session…</p>
+        </>
       )}
-      {unavailable && <p role="alert">{unavailable}</p>}
-      {ready && selected && (
-        <Panel title="Review saved content for Outreach">
+      {(state === "original" || state === "confirmed") && (
+        <>
+          <section className={styles.panel}>
+            <h3>
+              {confirmed ? "Ready in Outreach" : "Original saved version"}
+            </h3>
+            <div>
+              <p>
+                {versionLabel}
+                {timestamp ? ` · saved ${savedTime(timestamp)} UTC` : ""}
+              </p>
+              <p>
+                Outreach session
+                {destinationLabel
+                  ? ` · ${destinationLabel}`
+                  : " · Original selected session"}
+              </p>
+            </div>
+            <p className={styles.caption}>
+              {confirmed
+                ? "This receipt belongs to the original request. It does not describe a newer saved version."
+                : "The same original inputs and request identity are used. No new request is created."}
+            </p>
+          </section>
           <p>
-            Revision {selected.versionId} · saved {selected.savedAt} · author{" "}
-            {selected.authorId} ({selected.authorKind})
+            {confirmed
+              ? "Opening Outreach does not send this newsletter. Review destinations and delivery in Outreach."
+              : "Retry the original staging action. If it already completed, its saved result will be shown. Otherwise this retry may complete the original staging."}
           </p>
-          <p style={{ overflowWrap: "anywhere" }}>
-            Snapshot SHA-256: {selected.snapshotHash}
-          </p>
-          <p>
-            Scope:{" "}
-            {selected.clientId
-              ? `Client ${selected.clientId}`
-              : "Explicit firm content"}
-          </p>
-          <h3>Authored email subject</h3>
-          <p style={{ whiteSpace: "pre-wrap" }}>
-            {selected.contentSkeleton.subject || (
-              <em>Empty subject (staged unchanged)</em>
-            )}
-          </p>
-          <p style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
-            {selected.contentSkeleton.body}
-          </p>
-          <p>
-            Destination: {target.session.title ?? sessionId} · current version{" "}
-            {target.currentStateVersion}. Rich formatting, images and
-            attachments are not included.
-          </p>
-          {!flow.receipt && (
-            <label>
+          {!confirmed && (
+            <label className={styles.confirmation}>
               <input
                 type="checkbox"
                 checked={reviewed === reviewKey}
-                disabled={flow.busy}
+                disabled={!canAct}
                 onChange={(event) =>
                   setReviewed(event.target.checked ? reviewKey : "")
                 }
-              />{" "}
-              I reviewed this saved text and selected destination.
+              />
+              I want to retry the exact original staging action.
             </label>
           )}
-        </Panel>
+        </>
       )}
-      {ready && historical && original && (
-        <Panel title="Recover historical staging receipt">
-          <p>
-            This older request is held for recovery. Its saved revision is{" "}
-            {original.body.versionId}, snapshot {original.body.snapshotHash}.
-            The original plaintext cannot be previewed here. Recovering its
-            receipt uses the unchanged original request.
-          </p>
-          <p>
-            Destination: {target.session.title ?? sessionId}. Current access and
-            sponsor are checked again.
-          </p>
-          {!flow.receipt && (
-            <label>
-              <input
-                type="checkbox"
-                checked={reviewed === reviewKey}
-                disabled={flow.busy}
-                onChange={(event) =>
-                  setReviewed(event.target.checked ? reviewKey : "")
-                }
-              />{" "}
-              I want to recover this original staging request.
-            </label>
-          )}
-        </Panel>
+      {failure && <p role="alert">{failure}</p>}
+      {original && flow.error && !failure && <p role="alert">{flow.error}</p>}
+      {disabled && (
+        <p role="status">
+          Finish the editor’s pending save recovery before continuing.
+        </p>
       )}
-      {flow.error && <p role="alert">{flow.error}</p>}
-      {flow.receipt ? (
-        <Panel title="Saved revision staged">
-          <p role="status">
-            Receipt {flow.receipt.receiptId} · applied state version{" "}
-            {flow.receipt.stateVersion}
-            {flow.receipt.replayed ? " · recovered original receipt" : ""}. No
-            message was sent.
-          </p>
-          <Link
-            href={`/modules/engagement?view=outreach&session=${encodeURIComponent(sessionId)}`}
-          >
-            Open selected Outreach session
-          </Link>
-          <ActionButton
-            disabled={flow.busy}
-            onClick={() => void flow.acknowledge()}
-          >
-            Acknowledge staging receipt
-          </ActionButton>
-        </Panel>
-      ) : (
-        <ActionButton
-          primary
-          disabled={!ready || reviewed !== reviewKey || flow.busy}
-          onClick={() =>
-            ready &&
-            (original
-              ? void flow.stage()
-              : selected &&
-                void flow.stage({
-                  sessionId,
-                  draftId,
-                  versionId,
-                  snapshotHash: selected.snapshotHash,
-                  projectionVersion: selected.projectionVersion,
-                  projectionHash: selected.projectionHash,
-                  expectedStateVersion: target.currentStateVersion,
-                }))
-          }
-        >
-          {flow.busy
-            ? "Checking staging…"
-            : original
-              ? "Recover original staging"
-              : "Stage saved revision"}
-        </ActionButton>
-      )}
-      <ActionButton
-        disabled={flow.busy}
-        onClick={() => {
-          setReviewed("");
-          versions.reload();
-          sessions.reload();
-          revision.reload();
-          historicalSource.reload();
-          destination.reload();
-        }}
-      >
-        Refresh saved revision and session
-      </ActionButton>
-    </div>
+    </Modal>
   );
 }
