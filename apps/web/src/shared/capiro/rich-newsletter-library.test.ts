@@ -177,6 +177,10 @@ describe("fixed template and library metadata operations", () => {
     );
   });
   it("treats metadata/delete as exact ACKs, not a new document or revision receipt", () => {
+    expect(
+      update.request.safeParse({ params: { id }, body: { name: "Renamed" } })
+        .success,
+    ).toBe(false);
     expect([update.method, update.path, remove.method, remove.path]).toEqual([
       "PATCH",
       "/newsletters/library/items/:id",

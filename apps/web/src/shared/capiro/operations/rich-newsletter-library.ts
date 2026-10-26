@@ -104,7 +104,7 @@ export const richNewsletterLibraryOperations = {
         body: z
           .object({
             name: z.string().trim().min(1).max(200),
-            folder: z.string().trim().max(100).optional(),
+            folder: z.string().trim().max(100),
           })
           .strict(),
       })
