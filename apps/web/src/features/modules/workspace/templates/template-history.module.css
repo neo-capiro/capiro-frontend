@@ -1,0 +1,185 @@
+.stack {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.version {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.version button {
+  border-radius: 8px;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.edit {
+  justify-self: start;
+  align-self: flex-start;
+}
+.comparison {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--background);
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.comparison h3,
+.comparison p {
+  margin: 0;
+}
+.comparison h3,
+.comparison p,
+.label {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-weight: 400;
+}
+.change {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) 12px minmax(0, 1fr);
+  gap: 12px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.before {
+  color: var(--destructive-text, #652424);
+}
+.after {
+  color: var(--success, #3d6b4f);
+}
+.details {
+  margin: 12px 0 0;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.details dt {
+  color: var(--muted-foreground);
+}
+.details dd {
+  margin: 0 0 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.detailRow {
+  display: contents;
+}
+.dialog.dialog {
+  display: block;
+  top: 80px;
+  transform: translateX(-50%);
+  width: min(680px, calc(100vw - 32px));
+  max-width: 680px;
+  max-height: calc(100dvh - 112px);
+  background: var(--card);
+}
+.dialog > header {
+  padding: 24px 28px 16px;
+  border: 0;
+}
+.dialog > header > div::before {
+  content: "Version history";
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+}
+.dialog > header h2 {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+.dialog > [data-slot="modal-body"] {
+  padding: 8px 28px;
+}
+.dialog > footer {
+  padding: 16px 28px;
+  background: var(--muted);
+  justify-content: flex-end;
+}
+.saveDialog.saveDialog {
+  width: min(580px, calc(100vw - 32px));
+  max-width: 580px;
+  box-shadow:
+    0 2px 6px #0c0a090d,
+    0 16px 40px -12px #0c0a092e;
+}
+.saveDialog > header > div::before {
+  content: "Save as template";
+}
+.saveDialog > header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+}
+.saveDialog > header p {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.saveDialog > header > button {
+  width: 20px;
+  height: 20px;
+  color: var(--muted-foreground);
+  font-size: 20px;
+}
+.saveDialog > [data-slot="modal-body"] > div {
+  gap: 16px;
+}
+.saveDialog label {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-weight: 400;
+}
+.saveDialog input,
+.saveDialog [role="combobox"] {
+  border-color: var(--border-strong, #d6d3d1);
+  border-radius: 8px;
+}
+.saveDialog > footer {
+  gap: 10px;
+}
+.saveDialog > footer button {
+  border-radius: 8px;
+}
+@media (max-width: 680px) {
+  .dialog.dialog {
+    top: 16px;
+    max-height: calc(100dvh - 32px);
+  }
+  .change {
+    grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .change > .label {
+    grid-column: 1/-1;
+  }
+}

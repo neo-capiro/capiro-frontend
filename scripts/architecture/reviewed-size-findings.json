@@ -3986,9 +3986,9 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
     "kind": "function",
     "symbol": "TemplateStudio",
-    "fingerprint": "4e03810f77fca5fc544dd08bd8b7a397f9ee5dcd86f8be59380d55eebb94590c",
-    "reason": "One existing template list and action coordinator; domain operations and substantial detail/wizard children stay delegated. Presentation does not justify artificial extraction. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "fingerprint": "c3fc439800e7a5ffa97587f96dc342d61a29cfeec7bba0b0289d63e8d749deef",
+    "reason": "Existing Studio host retains list/detail/wizard and explicit mutation coordination. This delta delegates only the previously inline campaign picker and resets selection on opening; no new write owner or broad domain responsibility.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4964,6 +4964,33 @@
     "symbol": "<anonymous>",
     "fingerprint": "db7f1d289efd62222628aca5671ee1f9d07c059b9cb7f9a18b869b526d7828d7",
     "reason": "One structural transformation suite shares its small fixture and covers fresh identities, source/font preservation, bounds, stale targets and actual public receiver round-trip.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/CampaignPicker.tsx",
+    "kind": "function",
+    "symbol": "CampaignPicker",
+    "fingerprint": "70e05eb5a00f486d77ca28ab2ecb61a4bb3657abd82ef3fbbe74bd084a506ae2",
+    "reason": "One current authorized-list page/filter/selection presentation owner. Reads use the existing scoped aborting query; parent retains the sole explicit save mutation. The small JSX unit does not warrant another state owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
+    "kind": "function",
+    "symbol": "UseTemplate",
+    "fingerprint": "5a345dfb3af520ecf57179118958395bb13d56d048451c1ff512a73a8bcae34c",
+    "reason": "Existing use/application-receipt behavior is byte-identical to the base. This history/paging slice neither extends its mutation authority nor claims its pending recovery guarantees.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateHistory.tsx",
+    "kind": "function",
+    "symbol": "TemplateHistory",
+    "fingerprint": "04457d57e9ce43d5ac53060ca260da506c05bf782cdfb0449b53db82eec345d2",
+    "reason": "One saved-version inspection component owns selection, previous-available comparison and disclosure. Pure comparison/formatting lives in the small separate domain helper; no policy, persistence or current-campaign state is inferred.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
