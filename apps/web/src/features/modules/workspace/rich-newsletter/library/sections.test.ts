@@ -5,7 +5,7 @@ import {
 } from "@capiro/shared/newsletter";
 import { expect, it } from "vitest";
 import { newRichDraft } from "../draft";
-import { appendSavedSection, filterSavedSections } from "./sections";
+import { appendSavedSection, filterLibraryItems } from "./sections";
 
 it("inserts one deep identity clone while preserving nested content, provenance, fonts and the existing draft", () => {
   const draft = newRichDraft();
@@ -61,13 +61,13 @@ it("filters and sorts only loaded rows without mutating the received list", () =
       section,
     },
   ];
-  expect(filterSavedSections(rows, " upDATES ", "", "recent")).toEqual([
+  expect(filterLibraryItems(rows, " upDATES ", "", "recent")).toEqual([
     rows[0],
   ]);
-  expect(filterSavedSections(rows, "", "Briefs", "name")).toEqual([rows[1]]);
-  expect(
-    filterSavedSections(rows, "", "", "name").map((row) => row.id),
-  ).toEqual(["two", "one"]);
+  expect(filterLibraryItems(rows, "", "Briefs", "name")).toEqual([rows[1]]);
+  expect(filterLibraryItems(rows, "", "", "name").map((row) => row.id)).toEqual(
+    ["two", "one"],
+  );
   expect(rows.map((row) => row.id)).toEqual(["one", "two"]);
-  expect(filterSavedSections(rows, "not loaded", "", "recent")).toEqual([]);
+  expect(filterLibraryItems(rows, "not loaded", "", "recent")).toEqual([]);
 });

@@ -1903,11 +1903,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "line": 34,
-    "nonblank": 239,
-    "fingerprint": "77a6cc4b7b12c9ce853afc7d629b2d60c20f86b6b5c2dc726b5212c2016f7183",
-    "reason": "One mounted editor retains the canonical document draft/undo and explicit detail/adoption lifetime. The corrected fieldset predicate only compares the already-bound saved and route UUIDs with the same case-insensitive identity semantics; it adds no policy, transport, persistence or competing store. The focused old-predicate failure and four corrected mounted cases plus independent exact-expression probe close the visibility defect. Existing section-library and review owners remain unchanged.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 corrected source responsibility review",
+    "fingerprint": "5ae345d566c8025c6a5153acc4811cf20a329cd91b401093150e0a1a6b5249f3",
+    "reason": "Root independently inspected the exact union of accepted202 review/adoption and206 library composition. Existing review spine and local editor request/history owners are retained; four library regions add catalog/dialog mounts and explicit local Apply without new authority, mutation transport or save owner. Combined source SHA25661339821d91c0f3eae1a113e00a278e956c4cda17df69404f9024ae4464884db.",
+    "reviewedBy": "Wave 3 Root independent composition reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4538,30 +4536,12 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SaveSectionDialog.tsx",
-    "kind": "function",
-    "symbol": "SaveSectionDialog",
-    "fingerprint": "2628a84735bb4071e77f23f4f3e6391ae1e4c3e061df4fc90a2ca3a4184590e2",
-    "reason": "One existing-Modal form owns name/folder input, current-server-versus-unsaved-draft explanation, pending disablement and the unknown-outcome acknowledgement. Request lifetime, dispatch and actual public receiving remain in the hook and fixed operations. The editing/pending/unknown presentations are one coherent interaction and keep close/GET-only choices next to the truthful save semantics. No new modal primitive, persistence or authority is introduced.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SavedSections.tsx",
     "kind": "function",
     "symbol": "SavedSections",
-    "fingerprint": "ac3ef7e1783d5ad0678dff9c344a8b5191d18f9785e4da666fa8742d6a570ee5",
-    "reason": "One inspector presents loading, unavailable, empty, filtered-empty and loaded section rows using existing field/select/button primitives. Search, folder and sort operate only on the current loaded list; the pure filter helper and parent hook own computation and request lifetime. Explicit Insert and Back share this selected inspector and focus owner. No management endpoint, automatic document save or second draft owner is introduced.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/use-section-library.ts",
-    "kind": "function",
-    "symbol": "useSectionLibrary",
-    "fingerprint": "7f01d9329a82a667370eedbd063ef21d4432ce56a499fdccd5e69177914fb003",
-    "reason": "The feature-local hook owns exactly one mounted section-library interaction: current owner/document/API scope, explicit read/save commands, pending and unknown presentation, and one local insertion handoff. A small closure owns abort controllers and synchronous dispatch/insertion claims; canonical transport/public parsing, editor history and durable document recovery retain their existing owners. Keeping these related transition guards together prevents late reads or repeated saves from bypassing the shared mounted fence. It adds no durable outcome, authorization policy, queue or second journal.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "fingerprint": "bef33dca73a0c757e892a99381410511a85a77762ff523588d7696ab64c3d274",
+    "reason": "One loaded saved-section inspector owns presentation/filter controls and delegates insert/manage/read actions to the existing library owner. Added metadata controls do not perform transport or own draft history. Exact independent review: W3-WS16-FE206-REVIEW.md at 0b49ccb781a971fa0423ed2f4cdcd5a05adadd2d.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE206 source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4582,6 +4562,42 @@
     "fingerprint": "24ff52e1a735f464a223f5a183910171aafca677e0f3939c00fd2e4d631c4572",
     "reason": "One saved-content read view: explicit opening, current role display, inert HTML, loaded-comment filters/status and action callbacks. useNewsletterReview owns read admission/disposal, Shared owns validation, SavedNewsletterHtml owns sanitation, and the editor/controller own drafts and writes. The JSX remains cohesive presentation with no second document store or authority decision.",
     "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/LibraryDialog.tsx",
+    "kind": "function",
+    "symbol": "LibraryDialog",
+    "fingerprint": "c1167c0b52c7688d8d0205f5524247ae1a1f0f0b6fcd4a6dc4073c762bcf5192",
+    "reason": "One accessible library metadata/confirmation dialog maps the same name/folder fields and editing/pending/unknown phases for section and template records. It delegates all requests and outcome state to the library hook and reuses the canonical Modal, fields and buttons; separating each vocabulary branch would duplicate the same interaction responsibility. Exact independent review: W3-WS16-FE206-REVIEW.md at 0b49ccb781a971fa0423ed2f4cdcd5a05adadd2d.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE206 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SavedTemplates.tsx",
+    "kind": "function",
+    "symbol": "SavedTemplates",
+    "fingerprint": "1af4a99ee38d9de0c666243270ed391aa7a39456fba5635e4531b9ebf951073e",
+    "reason": "One loaded saved-template catalog owns filtering, six-row display paging and feature card composition. TemplateCard already isolates per-card local preview. Network/request lifetime and document edits remain delegated; no provider or authority behavior is in the catalog. Exact independent review: W3-WS16-FE206-REVIEW.md at 0b49ccb781a971fa0423ed2f4cdcd5a05adadd2d.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE206 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/use-newsletter-library.ts",
+    "kind": "function",
+    "symbol": "useNewsletterLibrary",
+    "fingerprint": "4ff0813826047028d89759e2ff0090bb975d5dd9096423f34dd9c79f79ac61f6",
+    "reason": "One mounted library interaction owner serializes explicit writes, guards current API/controller/document lifetime, invalidates list projections and retains one unknown-write fence across both library kinds. It reuses the fixed Capiro API, public receivers and existing editor history; dispatchAction/libraryRequests already separate mechanical dispatch and cancellation. A further split would divide the shared uncertain-request invariant. Exact independent review: W3-WS16-FE206-REVIEW.md at 0b49ccb781a971fa0423ed2f4cdcd5a05adadd2d.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE206 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/rich-newsletter-library.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "af4a453139033b7ac75142a73cb3a3981c038aba3eaf8e000a1986d2d12c1540",
+    "reason": "One focused suite groups template and metadata operation boundaries: full-template versus section input, actual parser, exact ACK and no retry after malformed delete success. Individual cases remain separate it callbacks and share only synthetic library inputs. Exact independent review: W3-WS16-FE206-REVIEW.md at 0b49ccb781a971fa0423ed2f4cdcd5a05adadd2d.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE206 source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
