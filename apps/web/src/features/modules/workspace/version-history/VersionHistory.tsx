@@ -6,15 +6,10 @@ import type {
   WorkspaceDraftDocument,
 } from "../../../../shared/capiro/operations/workspace-documents";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
-import {
-  ActionButton,
-  Modal,
-  Panel,
-  StatusPanel,
-  Tabs,
-} from "../../../../shared/module-ui";
+import { ActionButton, Modal, StatusPanel } from "../../../../shared/module-ui";
 import { SectionPreview } from "../rich-document/SectionPreview";
 import styles from "../workspace.module.css";
+import presentation from "../ordinary-presentation.module.css";
 import {
   admitSavedVersions,
   chronologicalPair,
@@ -22,7 +17,6 @@ import {
   hasShownChanges,
   safeDocumentLines,
   unknownContentExplanations,
-  versionParentClient,
 } from "./version-history";
 
 /**
@@ -49,15 +43,19 @@ export function VersionHistory({ draft }: { draft: WorkspaceDraftDocument }) {
   // is retained. A client/resource switch remounts this view (parent key).
   const selected = versions.find((version) => version.id === selectedId);
   const other = versions.find((version) => version.id === compareId);
-  const items = versions.map((version) => ({
-    id: version.id,
-    label: version.label ?? "Saved version",
-  }));
-
   return (
     <>
       <ActionButton onClick={() => setOpen(true)}>History</ActionButton>
-      <Modal open={open} onOpenChange={setOpen} title="Document history">
+      <Modal
+        open={open}
+        onOpenChange={setOpen}
+        title="Version history"
+        description={draft.docTitle}
+        className={presentation.historyModal}
+        footer={
+          <ActionButton onClick={() => setOpen(false)}>Close</ActionButton>
+        }
+      >
         <StatusPanel
           loading={query.loading}
           error={
@@ -66,34 +64,55 @@ export function VersionHistory({ draft }: { draft: WorkspaceDraftDocument }) {
           }
           onRetry={query.reload}
         >
-          <p className={styles.secondary}>
+          <p className={presentation.qualifier}>
             Read-only saved versions. Opening or comparing never changes the
             document.
           </p>
           {versions.length ? (
-            <Tabs
-              items={items}
-              value={selectedId ?? ""}
-              onChange={setSelectedId}
-              label="Saved versions"
-            />
+            <ul
+              className={presentation.versionRows}
+              aria-label="Saved versions"
+            >
+              {versions.map((version) => (
+                <li
+                  key={version.id}
+                  data-selected={selected?.id === version.id || undefined}
+                >
+                  <ActionButton
+                    className={presentation.versionSelect}
+                    aria-label={`View ${version.label ?? "Saved version"} · ${new Date(version.createdAt).toLocaleDateString()}`}
+                    aria-pressed={selected?.id === version.id}
+                    onClick={() => {
+                      setSelectedId(version.id);
+                      setCompareId(undefined);
+                    }}
+                  >
+                    {version.label ?? "Saved version"} ·{" "}
+                    <time dateTime={version.createdAt}>
+                      {new Date(version.createdAt).toLocaleDateString()}
+                    </time>
+                  </ActionButton>
+                  {versions.length > 1 && (
+                    <ActionButton
+                      aria-label={`Compare with ${version.label ?? "saved version"}`}
+                      disabled={!selected || selected.id === version.id}
+                      onClick={() => setCompareId(version.id)}
+                    >
+                      Compare
+                    </ActionButton>
+                  )}
+                </li>
+              ))}
+            </ul>
           ) : (
             <p>No saved versions yet.</p>
           )}
-          {selected && <SavedVersionDetail version={selected} />}
-          {versions.length > 1 && selectedId && (
-            <Tabs
-              items={items}
-              value={compareId ?? ""}
-              onChange={setCompareId}
-              label="Compare with"
-            />
+          {selected && !other && <SavedVersionDetail version={selected} />}
+          {selected && other && selected.id === other.id && (
+            <p>Choose two different saved versions to compare.</p>
           )}
           {selected && other && selected.id !== other.id && (
             <SavedVersionComparison left={selected} right={other} />
-          )}
-          {selected && other && selected.id === other.id && (
-            <p role="status">Choose two different saved versions to compare.</p>
           )}
         </StatusPanel>
       </Modal>
@@ -106,20 +125,18 @@ function SavedVersionDetail({ version }: { version: SavedVersion }) {
   const documents = version.snapshot?.documents ?? [];
   const unknown = unknownContentExplanations(version);
   return (
-    <Panel title={version.label ?? "Saved version"}>
+    <section
+      className={presentation.versionDetail}
+      aria-label="Selected saved version"
+    >
+      <h3>{version.label ?? "Saved version"}</h3>
       <dl className={styles.versionFacts}>
         <dt>Saved</dt>
         <dd>{new Date(version.createdAt).toLocaleString()}</dd>
         <dt>Author</dt>
         <dd>{version.authorKind}</dd>
-        <dt>Parent document</dt>
-        <dd>{version.draftId}</dd>
-        <dt>Client association</dt>
-        <dd>
-          {versionParentClient(version.snapshot) ?? "No client association"}
-        </dd>
       </dl>
-      <h3>{version.snapshot?.docTitle ?? "Untitled saved version"}</h3>
+      {version.snapshot?.docTitle && <h4>{version.snapshot.docTitle}</h4>}
       {Object.entries(sections).map(([name, content]) => (
         <section key={name} aria-label={name}>
           <h4>{name}</h4>
@@ -154,7 +171,7 @@ function SavedVersionDetail({ version }: { version: SavedVersion }) {
           </ul>
         </details>
       )}
-    </Panel>
+    </section>
   );
 }
 
@@ -169,9 +186,11 @@ function SavedVersionComparison({
   const diff = compareSavedVersions(older, newer);
   const changed = hasShownChanges(diff);
   return (
-    <Panel
-      title={`Comparing ${older.label ?? "saved version"} → ${newer.label ?? "saved version"}`}
+    <section
+      className={presentation.versionComparison}
+      aria-label="Saved version comparison"
     >
+      <h3>{`Comparing ${older.label ?? "saved version"} → ${newer.label ?? "saved version"}`}</h3>
       <dl className={styles.versionFacts}>
         <dt>Earlier</dt>
         <dd>
@@ -185,9 +204,17 @@ function SavedVersionComparison({
         </dd>
         <dt>Title</dt>
         <dd>
-          {diff.titleChanged
-            ? `${older.snapshot?.docTitle ?? "Untitled"} → ${newer.snapshot?.docTitle ?? "Untitled"}`
-            : "Unchanged"}
+          {diff.titleChanged ? (
+            <span className={presentation.beforeAfter}>
+              <span>{older.snapshot?.docTitle ?? "Title unavailable"}</span>
+              <span role="img" aria-label="changed to">
+                →
+              </span>
+              <span>{newer.snapshot?.docTitle ?? "Title unavailable"}</span>
+            </span>
+          ) : (
+            "Unchanged"
+          )}
         </dd>
       </dl>
       {changed && (
@@ -237,6 +264,6 @@ function SavedVersionComparison({
       {!changed && !diff.otherContentChanged && (
         <p>No differences between these saved versions.</p>
       )}
-    </Panel>
+    </section>
   );
 }

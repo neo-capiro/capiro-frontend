@@ -1,0 +1,126 @@
+[
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "nonblank": 383,
+    "findings": [
+      {
+        "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+        "kind": "function",
+        "symbol": "DraftEditor",
+        "line": 37,
+        "nonblank": 196,
+        "fingerprint": "b67d2721bb177cef6b2ad189a91f0762cd0cfc8c4b2c08457e68a97efa7e05ed"
+      },
+      {
+        "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+        "kind": "function",
+        "symbol": "WorkspaceDraft",
+        "line": 280,
+        "nonblank": 98,
+        "fingerprint": "87d432ab93156c11b79ba3e5151b07f9a582179bd0094c05554a1fd89e121e31"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-export/OrdinaryDraftExport.tsx",
+    "nonblank": 115,
+    "findings": [
+      {
+        "file": "apps/web/src/features/modules/workspace/ordinary-export/OrdinaryDraftExport.tsx",
+        "kind": "function",
+        "symbol": "OrdinaryDraftExport",
+        "line": 24,
+        "nonblank": 88,
+        "fingerprint": "231649bffc19e16cc2c11a2e07ff82cc45b7e6900a3c155abe93f53b6f2e3087"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/OrdinaryDraftSave.tsx",
+    "nonblank": 190,
+    "findings": [
+      {
+        "file": "apps/web/src/features/modules/workspace/ordinary-save/OrdinaryDraftSave.tsx",
+        "kind": "function",
+        "symbol": "OrdinarySaveRecovery",
+        "line": 97,
+        "nonblank": 90,
+        "fingerprint": "c0a2343ca23be713fe4bd5075d67fab067ea527fb2fddd0f0e9cc3e10d3db362"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/version-history/VersionHistory.tsx",
+    "nonblank": 265,
+    "findings": [
+      {
+        "file": "apps/web/src/features/modules/workspace/version-history/VersionHistory.tsx",
+        "kind": "function",
+        "symbol": "VersionHistory",
+        "line": 29,
+        "nonblank": 93,
+        "fingerprint": "0816b6a849b4414e101578af66f8405a72d6cee44b1000640e69ae9a486a09a9"
+      },
+      {
+        "file": "apps/web/src/features/modules/workspace/version-history/VersionHistory.tsx",
+        "kind": "function",
+        "symbol": "SavedVersionComparison",
+        "line": 178,
+        "nonblank": 86,
+        "fingerprint": "4445748028b5a13eff28373cf1641e012f7737cc81e1f3f09acd70c02ecc3b64"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/test/browser/workspace-version-history.spec.ts",
+    "nonblank": 438,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/workspace-version-history.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 438,
+        "fingerprint": "86d40e9326ca1097c88c2a92ebf9012b34366f204a81f3a66b18a624dda6648a"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/workspace-version-history.test.ts",
+    "nonblank": 570,
+    "findings": [
+      {
+        "file": "apps/web/tests/workspace-version-history.test.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 570,
+        "fingerprint": "2dea7bb682a01f11815b1a832e0e8ce133bbe67da79e187c4ccbd74bfd0942c5"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-presentation.module.css",
+    "nonblank": 306,
+    "findings": []
+  },
+  {
+    "file": "apps/web/test/browser/ordinary-presentation-evidence.ts",
+    "nonblank": 71,
+    "findings": []
+  },
+  {
+    "file": "apps/web/test/browser/workspace-ordinary-presentation.spec.ts",
+    "nonblank": 172,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/workspace-ordinary-presentation.spec.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 36,
+        "nonblank": 81,
+        "fingerprint": "a4e35d6c573f598912c59711f4bb2934ec17cffaa3c81ceb9ff745c39f0b1f5e"
+      }
+    ]
+  }
+]

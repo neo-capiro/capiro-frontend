@@ -23,6 +23,7 @@ import { SectionEditor } from "./rich-document/SectionEditor";
 import { SectionPreview } from "./rich-document/SectionPreview";
 import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
+import presentation from "./ordinary-presentation.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
 import { VersionHistory } from "./version-history/VersionHistory";
@@ -80,16 +81,33 @@ function DraftEditor({
   }
   return (
     <section className={styles.screen}>
-      <header className={styles.heading}>
-        <div>
-          <ActionButton onClick={onClose}>← Workspace</ActionButton>
+      {!draft.prospectId && (
+        <ActionButton className={presentation.back} onClick={onClose}>
+          ← Workspace
+        </ActionButton>
+      )}
+      <header
+        className={draft.prospectId ? styles.heading : presentation.header}
+      >
+        <div className={draft.prospectId ? undefined : presentation.title}>
+          {draft.prospectId && (
+            <ActionButton onClick={onClose}>← Workspace</ActionButton>
+          )}
           <h1>{ordinarySave ? currentDraft.docTitle : draft.docTitle}</h1>
           <p>
-            {currentDraft.product ?? "Document"} ·{" "}
-            {currentDraft.client ?? "Firm"}
+            {currentDraft.product ?? "Document"}
+            {currentDraft.client
+              ? ` · ${currentDraft.client}`
+              : draft.prospectId
+                ? " · Firm"
+                : ""}
           </p>
         </div>
-        <div className={styles.actions}>
+        <div
+          className={
+            draft.prospectId ? styles.actions : presentation.headerActions
+          }
+        >
           <VersionHistory
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}:${ordinarySave ? currentDraft.updatedAt : ""}`}
             draft={currentDraft}
@@ -98,27 +116,8 @@ function DraftEditor({
               document whose stored body is not a supported projection is
               refused with a reason, and a mixed projection is qualified, rather
               than shown as the whole document. Prospect behavior is unchanged. */}
-          {draft.prospectId || names.length ? (
+          {(draft.prospectId || names.length > 0) && (
             <DocumentPreview title={title} names={names} sections={sections} />
-          ) : (
-            <p className={styles.secondary}>
-              Preview unavailable: there is no supported section content to
-              preview; stored body content is preserved read-only and is not
-              shown.
-            </p>
-          )}
-          {!draft.prospectId && names.length > 0 && (
-            <p className={styles.secondary}>
-              This preview shows only the supported sections; other saved
-              content, if present, is preserved read-only and is not shown.
-            </p>
-          )}
-          {!draft.prospectId && (
-            <OrdinaryDraftExport
-              key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
-              draft={currentDraft}
-              disabled={pending}
-            />
           )}
           <ActionButton
             primary
@@ -135,6 +134,20 @@ function DraftEditor({
           </ActionButton>
         </div>
       </header>
+      {!draft.prospectId && (
+        <>
+          <p className={presentation.qualifier}>
+            {names.length
+              ? "This preview shows only the supported sections; other saved content, if present, is preserved read-only and is not shown."
+              : "Preview unavailable: there is no supported section content to preview; stored body content is preserved read-only and is not shown."}
+          </p>
+          <OrdinaryDraftExport
+            key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
+            draft={currentDraft}
+            disabled={pending}
+          />
+        </>
+      )}
       <DraftClientAssociation
         draft={currentDraft}
         disabled={pending || Boolean(ordinarySave?.frozen)}
