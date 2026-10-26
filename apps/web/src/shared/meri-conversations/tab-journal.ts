@@ -261,10 +261,23 @@ export function clearMeriConversationScope(
   for (let index = storage.length - 1; index >= 0; index--) {
     const key = storage.key(index);
     if (!key?.startsWith(prefix)) continue;
+    let parts: unknown;
     try {
-      if (JSON.parse(key.slice(prefix.length))[0] === expected)
-        storage.removeItem(key);
+      parts = JSON.parse(key.slice(prefix.length));
     } catch {
+      parts = undefined;
+    }
+    if (!Array.isArray(parts)) {
+      storage.removeItem(key);
+      continue;
+    }
+    if (parts[0] !== expected) continue;
+    if (parts[1] === "request") {
+      // Erase private bytes without inventing a disposition for a possibly delivered request.
+      // The existing decoder refuses null on every read; identity replacement still removes it.
+      storage.setItem(key, "null");
+      if (storage.getItem(key) !== "null") throw new TabJournalUnavailable();
+    } else {
       storage.removeItem(key);
     }
   }

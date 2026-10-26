@@ -184,8 +184,14 @@ const recoveryFixture = {
     corruptions,
     unmounts,
     historySeedWasNotFound,
-    historyQueries: cache.getQueryCache().findAll({ queryKey: historyKey })
-      .length,
+    retainedHistoryErrors: cache
+      .getQueryCache()
+      .findAll({ queryKey: historyKey })
+      .filter((query) => query.state.error !== null).length,
+    retainedHistoryData: cache
+      .getQueryCache()
+      .findAll({ queryKey: historyKey })
+      .filter((query) => query.state.data !== undefined).length,
     exposesHistoryAuthority: Object.hasOwn(history ?? {}, "unstarted"),
     journal: journal && {
       blocked: journal.journal.recoveryBlocked,
