@@ -23,6 +23,11 @@ export function RichDocumentActions({
     !state.fence &&
     !pendingSavedWrite(state.writes, state.saved!.id);
   const attempted = stageAttempt(state);
+  const uncertainStages = state.writes.stages.filter(
+    (entry) =>
+      entry.status === "unknown" &&
+      entry.documentId.toLowerCase() === state.saved?.id.toLowerCase(),
+  );
   return (
     <section
       className={styles.controls}
@@ -73,6 +78,18 @@ export function RichDocumentActions({
             Stage newsletter
           </ActionButton>
         </div>
+        {uncertainStages.map((entry) => (
+          <p key={entry.attempt}>
+            Stage outcome for revision {entry.revision} remains uncertain. This
+            revision will not be staged again. Checking reads only that exact
+            revision and does not adopt it as your editable baseline.
+            <ActionButton
+              onClick={() => void owner.recoverStage(entry.attempt)}
+            >
+              Check stage for revision {entry.revision}
+            </ActionButton>
+          </p>
+        ))}
         {state.items && (
           <div>
             <h3>Current library response</h3>
@@ -140,7 +157,12 @@ export function RichDocumentActions({
             : " Local content matches this baseline."}
         </p>
       )}
-      {state.pending && <p role="status">{state.pending} in progress…</p>}
+      {state.pending && (
+        <p role="status">
+          {state.pending === "recoverStage" ? "Stage lookup" : state.pending} in
+          progress…
+        </p>
+      )}
       {state.writes.create && (
         <p role="alert">
           Creation remains uncertain. Reviewing and adopting a known document
@@ -157,14 +179,13 @@ export function RichDocumentActions({
       {state.notice && <p role="status">{state.notice}</p>}
       {(attempted?.status === "unknown" || attempted?.status === "pending") && (
         <p role="alert">
-          This saved revision has an uncertain stage attempt. Document readback
-          cannot recover its missing stage ID; this revision will not be staged
-          again here.
+          This saved revision has an uncertain stage attempt; this revision will
+          not be staged again here.
         </p>
       )}
       {attempted?.status === "confirmed" && (
         <p>
-          This saved revision already has a confirmed stage attempt in this
+          This saved revision already has a confirmed stage record in this
           session and client scope.
         </p>
       )}

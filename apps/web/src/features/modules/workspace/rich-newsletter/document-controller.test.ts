@@ -41,6 +41,15 @@ function receipt(revision = 4) {
     route: `/engagement/outreach?newsletterStage=${stageId}`,
   };
 }
+const previewReceipt = () => ({
+  documentId: id,
+  revision: 4,
+  renderHash: "a".repeat(64),
+  hashFormat: "newsletter-render-json-v1",
+  html: "<p>Saved</p>",
+  plainText: "Saved",
+  checks: [],
+});
 function deferred() {
   let resolve!: (value: Response) => void;
   const promise = new Promise<Response>((done) => {
@@ -258,7 +267,7 @@ describe("current reads, preview and stage receipt boundaries", () => {
     async (status) => {
       const { owner, fetcher, reply, open } = setup();
       await open();
-      reply({ html: "<p>Saved</p>", plainText: "Saved", checks: [] });
+      reply(previewReceipt());
       await owner.preview();
       owner.edit((draft) => ({ ...draft, name: "Local survives" }));
       reply({}, status);
@@ -292,6 +301,7 @@ describe("current reads, preview and stage receipt boundaries", () => {
     await open();
     owner.edit((draft) => ({ ...draft, name: "Unsaved" }));
     const preview = {
+      ...previewReceipt(),
       html: "<script>untrusted()</script><p>Saved</p>",
       plainText: "Saved",
       checks: [],
@@ -429,12 +439,162 @@ describe("scope and attempt disposal", () => {
     dispose();
     owner.mount();
     held.resolve(
-      Response.json({ html: "private", plainText: "private", checks: [] }),
+      Response.json({
+        ...previewReceipt(),
+        html: "private",
+        plainText: "private",
+      }),
     );
     await preview;
     expect(fetcher).toHaveBeenCalledTimes(3);
     expect(owner.getSnapshot().preview).toBeUndefined();
   });
+});
+
+describe("request-bound preview and explicit exact-stage recovery", () => {
+  it("rejects a newer preview without adopting it or changing local edits", async () => {
+    const fixture = setup();
+    await fixture.open();
+    fixture.owner.edit((draft) => ({ ...draft, name: "Local retained" }));
+    fixture.reply({ ...previewReceipt(), revision: 5 });
+    await fixture.owner.preview();
+    expect(fixture.owner.getSnapshot().preview).toBeUndefined();
+    expect(fixture.owner.getSnapshot().saved?.revision).toBe(4);
+    expect(fixture.owner.getSnapshot().draft.name).toBe("Local retained");
+    expect(fixture.owner.getSnapshot().current).toBe(false);
+  });
+  it.each([false, true])(
+    "recovers only the retained revision while preserving the baseline (newer adopted: %s)",
+    async (newer) => {
+      const fixture = setup();
+      await fixture.open();
+      fixture.reply({}, 503);
+      await fixture.owner.stage();
+      const attempt = fixture.journal.read().stages[0]!;
+      if (newer) {
+        fixture.reply(campaign(7));
+        await fixture.owner.readback();
+        fixture.owner.adopt();
+      }
+      const before = fixture.owner.getSnapshot();
+      const start = fixture.fetcher.mock.calls.length;
+      fixture.reply(receipt());
+      await fixture.owner.recoverStage(attempt.attempt);
+      expect(fixture.owner.getSnapshot().stage).toEqual(receipt());
+      expect(fixture.owner.getSnapshot().saved).toEqual(before.saved);
+      expect(fixture.owner.getSnapshot().current).toBe(before.current);
+      expect(fixture.owner.getSnapshot().fence).toBe(before.fence);
+      expect(fixture.journal.read().stages[0]?.status).toBe("confirmed");
+      expect(fixture.owner.getSnapshot().notice).toContain(
+        "does not establish which earlier request",
+      );
+      expect(fixture.fetcher.mock.calls.slice(start)).toHaveLength(1);
+      const [url, options] = fixture.fetcher.mock.calls[start]!;
+      expect(options?.method).toBe("GET");
+      expect(decodeURIComponent(String(url))).toContain(
+        JSON.stringify({ params: { id, revision: 4 } }),
+      );
+      if (!newer) await fixture.owner.stage();
+      await fixture.owner.recoverStage(attempt.attempt);
+      expect(fixture.fetcher.mock.calls.slice(start)).toHaveLength(1);
+    },
+  );
+  it.each(["null", "denied", "wrong-revision"])(
+    "keeps uncertainty after %s recovery and never redispatches",
+    async (kind) => {
+      const fixture = setup();
+      await fixture.open();
+      fixture.reply({}, 503);
+      await fixture.owner.stage();
+      const before = fixture.journal.read();
+      fixture.reply(
+        kind === "null" ? null : kind === "denied" ? {} : receipt(5),
+        kind === "denied" ? 403 : 200,
+      );
+      await fixture.owner.recoverStage(before.stages[0]!.attempt);
+      await fixture.owner.stage();
+      expect(fixture.journal.read()).toEqual(before);
+      expect(fixture.owner.getSnapshot()).toMatchObject({
+        current: false,
+        fence: "stage",
+      });
+      expect(fixture.owner.getSnapshot().stage).toBeUndefined();
+      expect(fixture.fetcher).toHaveBeenCalledTimes(4);
+      expect(fixture.fetcher.mock.calls[3]![1]?.method).toBe("GET");
+      if (kind === "null")
+        expect(fixture.owner.getSnapshot().notice).toContain(
+          "remains uncertain",
+        );
+      else expect(fixture.owner.getSnapshot().error).toContain("lookup failed");
+    },
+  );
+  it.each([409, 503])(
+    "does not settle unknown creation or save status %s while recovering a stage",
+    async (status) => {
+      const fixture = setup();
+      fixture.reply({}, 503);
+      await fixture.owner.create();
+      await fixture.open();
+      fixture.reply({}, 503);
+      await fixture.owner.stage();
+      fixture.reply(campaign(7));
+      await fixture.owner.readback();
+      fixture.owner.adopt();
+      fixture.owner.edit((draft) => ({ ...draft, name: "Keep me" }));
+      fixture.reply({}, status);
+      await fixture.owner.save();
+      const before = fixture.owner.getSnapshot();
+      fixture.reply(receipt());
+      await fixture.owner.recoverStage(before.writes.stages[0]!.attempt);
+      expect(fixture.owner.getSnapshot().stage).toEqual(receipt());
+      expect(fixture.owner.getSnapshot().fence).toBe(before.fence);
+      expect(fixture.owner.getSnapshot().current).toBe(false);
+      expect(fixture.owner.getSnapshot().draft).toEqual(before.draft);
+      expect(fixture.journal.read().create).toEqual(before.writes.create);
+      expect(fixture.journal.read().saves).toEqual(before.writes.saves);
+    },
+  );
+  it.each(["unmount", "clear", "notification-unmount", "notification-replace"])(
+    "ignores recovery after %s",
+    async (mode) => {
+      const fixture = setup();
+      await fixture.open();
+      fixture.reply({}, 503);
+      await fixture.owner.stage();
+      const attempt = fixture.journal.read().stages[0]!;
+      const held = deferred();
+      fixture.fetcher.mockReturnValueOnce(held.promise);
+      const pending = fixture.owner.recoverStage(attempt.attempt);
+      if (mode === "unmount") fixture.dispose();
+      if (mode === "clear") fixture.queryClient.clear();
+      if (mode.startsWith("notification")) {
+        const unsubscribe = fixture.journal.subscribe(() => {
+          if (fixture.journal.read().stages[0]?.status !== "confirmed") return;
+          unsubscribe();
+          if (mode === "notification-unmount") fixture.dispose();
+          else {
+            fixture.queryClient.clear();
+            const replacement = fixture.journal.begin({
+              kind: "stage",
+              documentId: different,
+              revision: 4,
+            });
+            fixture.journal.finish(replacement!, "confirmed");
+          }
+        });
+      }
+      held.resolve(Response.json(receipt()));
+      await pending;
+      expect(fixture.owner.getSnapshot().stage).toBeUndefined();
+      expect(fixture.owner.getSnapshot().notice).toBeUndefined();
+      expect(fixture.fetcher).toHaveBeenCalledTimes(4);
+      if (mode === "notification-replace")
+        expect(fixture.journal.read().stages[0]).toMatchObject({
+          documentId: different,
+          status: "confirmed",
+        });
+    },
+  );
 });
 
 describe("same-scope navigation write journal", () => {

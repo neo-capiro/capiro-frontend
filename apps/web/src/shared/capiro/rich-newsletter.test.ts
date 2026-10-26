@@ -74,7 +74,7 @@ function ownedRecord() {
 }
 
 describe("fixed rich operations remain separate from saved-version staging", () => {
-  it("exposes only the eight reviewed paths and refuses injected authority", () => {
+  it("exposes only the reviewed paths and refuses injected authority", () => {
     expect(
       Object.values(operations).map(({ method, path }) => `${method} ${path}`),
     ).toEqual([
@@ -84,6 +84,7 @@ describe("fixed rich operations remain separate from saved-version staging", () 
       "PATCH /newsletters/documents/:id",
       "POST /newsletters/documents/:id/preview",
       "POST /newsletters/documents/:id/stage",
+      "GET /newsletters/documents/:id/stages/:revision",
       "GET /engagement/newsletters/stages/:id",
       "GET /engagement/newsletters/:id",
     ]);
@@ -234,14 +235,18 @@ describe("receiving binds current requests without inventing authority", () => {
       expect(fetcher).toHaveBeenCalledOnce();
     },
   );
-  it("does not turn saved HTML into a revision receipt or follow its content", async () => {
+  it("binds saved preview identity without trusting or following its HTML", async () => {
     const preview = {
+      documentId: id,
+      revision: 4,
+      renderHash: "a".repeat(64),
+      hashFormat: "newsletter-render-json-v1",
       html: "<script>untrusted()</script>",
       plainText: "saved",
       checks: [],
     };
     const { adapter, fetcher } = consumer(preview);
-    expect(await adapter.preview(id, false, signal())).toEqual(preview);
+    expect(await adapter.preview(id, 4, false, signal())).toEqual(preview);
     expect(fetcher).toHaveBeenCalledOnce();
   });
   it("validates stage creation independently and never follows the returned route", async () => {
@@ -362,6 +367,67 @@ describe("receiving binds current requests without inventing authority", () => {
     await expect(
       createRichNewsletterAdapter(api).detail(id, clientId, signal()),
     ).rejects.toMatchObject({ name: "AbortError" });
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+});
+
+describe("exact preview and staged-revision receiving", () => {
+  it.each([
+    { documentId: other },
+    { revision: 5 },
+    { documentId: undefined },
+    { renderHash: undefined },
+    { renderHash: "not-a-digest" },
+    { hashFormat: "different-format" },
+  ])("refuses an unbound preview %j without replay", async (change) => {
+    const { adapter, fetcher } = consumer({
+      documentId: id,
+      revision: 4,
+      renderHash: "a".repeat(64),
+      hashFormat: "newsletter-render-json-v1",
+      html: "saved",
+      plainText: "saved",
+      checks: [],
+      ...change,
+    });
+    await expect(adapter.preview(id, 4, false, signal())).rejects.toMatchObject(
+      { status: 502 },
+    );
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it.each([null, stageReceipt()])(
+    "preserves the exact stage result %j with a GET only",
+    async (value) => {
+      const { adapter, fetcher } = consumer(value);
+      expect(await adapter.stagedRevision(id, 4, signal())).toEqual(value);
+      expect(fetcher).toHaveBeenCalledOnce();
+      const [url, options] = fetcher.mock.calls[0]!;
+      expect(options?.method).toBe("GET");
+      expect(options?.body).toBeUndefined();
+      expect(String(url)).toContain("workspace.richNewsletter.stagedRevision");
+      expect(decodeURIComponent(String(url))).toContain(
+        JSON.stringify({ params: { id, revision: 4 } }),
+      );
+    },
+  );
+  it.each([{ documentId: other }, { revision: 5 }])(
+    "binds stage recovery identity %j",
+    async (change) => {
+      const { adapter, fetcher } = consumer({ ...stageReceipt(), ...change });
+      await expect(
+        adapter.stagedRevision(id, 4, signal()),
+      ).rejects.toMatchObject({ status: 502 });
+      expect(fetcher).toHaveBeenCalledOnce();
+    },
+  );
+  it("keeps denied lookup distinct from null and rejects invalid revision before dispatch", async () => {
+    const { adapter, fetcher } = consumer({}, 403);
+    await expect(adapter.stagedRevision(id, 4, signal())).rejects.toMatchObject(
+      { status: 403 },
+    );
+    await expect(adapter.stagedRevision(id, 0, signal())).rejects.toMatchObject(
+      { status: 400 },
+    );
     expect(fetcher).toHaveBeenCalledOnce();
   });
 });
