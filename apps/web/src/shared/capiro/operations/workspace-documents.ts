@@ -5,9 +5,18 @@ import { briefCopyBodySchema } from "./workspace-brief-copy-body";
 import { briefCopySourceSchema } from "./workspace-brief-copy-schemas";
 
 const source =
-  "capirov2@4be13b0 apps/workspace/src/drafts/{drafts.service,dto/draft.dto}.ts; documents/{documents.service,dto/document.dto}.ts; versions/versions.service.ts; delivery/share-link.service.ts";
+  "capirov2@4be13b0 apps/workspace/src/drafts/{drafts.service,dto/draft.dto}.ts; documents/{documents.service,dto/document.dto}.ts; versions/versions.service.ts; delivery/share-link.service.ts; explicit Blueprint pin: capiro-backend@563e6f1461e0b82c6de53d44a321c68ba83a92a4";
 const params = z.object({ id: workspaceId }).strict();
 const draftParams = z.object({ draftId: workspaceId }).strict();
+// Core166 CreateDraftDto resolves this explicit tuple through Blueprint policy.
+export const workspaceBlueprintPin = z
+  .object({
+    blueprintId: workspaceId,
+    versionId: workspaceId,
+    version: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    definitionHash: z.string().regex(/^[a-f0-9]{64}$/),
+  })
+  .strict();
 export const newsletterBlock = z
   .object({
     id: z.string().min(1).max(64),
@@ -96,6 +105,10 @@ export const workspaceDraft = z.object({
   createdAt: z.string(),
   documents: z.array(draftDocument),
   config: z.object({
+    documentAgent: z
+      .object({ blueprintPin: workspaceBlueprintPin.nullable().optional() })
+      .nullable()
+      .optional(),
     clientId: workspaceId.nullable().optional(),
     sections: z.array(z.string()).optional(),
     sectionContent: z.record(z.string(), z.string()).optional(),
@@ -279,6 +292,7 @@ export const workspaceDocumentOperations = {
             client: z.string().max(200).optional(),
             clientId: workspaceId.nullable().optional(),
             docTitle: z.string().min(1).max(500).optional(),
+            blueprintPin: workspaceBlueprintPin.optional(),
           })
           .strict(),
       })

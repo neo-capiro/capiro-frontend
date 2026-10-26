@@ -25,9 +25,10 @@ import { RichStructure } from "./RichStructure";
 import { RichDocumentActions } from "./RichDocumentActions";
 import { NewsletterReview } from "./review/NewsletterReview";
 import { useRichDocument } from "./use-rich-document";
-import { useSectionLibrary } from "./library/use-section-library";
-import { SavedSections, SectionLibraryNotice } from "./library/SavedSections";
-import { SaveSectionDialog } from "./library/SaveSectionDialog";
+import { useNewsletterLibrary } from "./library/use-newsletter-library";
+import { SavedSections } from "./library/SavedSections";
+import { SavedTemplates } from "./library/SavedTemplates";
+import { LibraryDialog, LibraryNotice } from "./library/LibraryDialog";
 import libraryStyles from "./library/sections.module.css";
 import styles from "./rich-newsletter.module.css";
 
@@ -39,7 +40,7 @@ export function RichNewsletterEditor({
   documentId?: string;
 }) {
   const { owner, state: history } = useRichDocument();
-  const library = useSectionLibrary(owner, history.saved?.id);
+  const library = useNewsletterLibrary(owner, history.saved?.id);
   const libraryOpener = useRef<HTMLButtonElement | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
@@ -181,13 +182,8 @@ export function RichNewsletterEditor({
         onReview={setReviewId}
         entryDocumentId={documentId}
       />
-      <SectionLibraryNotice library={library} />
-      {library.save && (
-        <SaveSectionDialog
-          key={`${library.save.documentId}:${library.save.sectionId}`}
-          library={library}
-        />
-      )}
+      <LibraryNotice library={library} />
+      {library.dialog && library.action && <LibraryDialog library={library} />}
       {(!documentId ||
         history.saved?.id.toLowerCase() === documentId.toLowerCase()) && (
         <fieldset
@@ -219,58 +215,97 @@ export function RichNewsletterEditor({
             >
               Plain text
             </ActionButton>
+            <ActionButton
+              className={libraryStyles.button}
+              onClick={(event) => {
+                libraryOpener.current = event.currentTarget;
+                void library.browse("template");
+              }}
+            >
+              Saved templates
+            </ActionButton>
+            <ActionButton
+              className={libraryStyles.button}
+              disabled={!history.saved || library.writing}
+              onClick={() => library.startSave()}
+            >
+              Save current server newsletter as template
+            </ActionButton>
           </div>
-          <CampaignFields draft={draft} change={commit} />
-          <div
-            className={`${styles.editor} ${library.browsing ? libraryStyles.libraryLayout : ""}`}
-          >
-            <RichStructure
-              design={draft.design}
-              selectedId={selectedId}
-              select={setSelectedId}
-              add={add}
-              savedSectionIds={
-                history.saved?.design.sections.map((section) => section.id) ??
-                []
-              }
-              saveSection={library.startSave}
-              browse={(opener) => {
-                libraryOpener.current = opener;
-                void library.browse();
+          {library.browsing === "template" ? (
+            <SavedTemplates
+              library={library}
+              close={() => {
+                library.closeBrowse();
+                libraryOpener.current?.focus();
+              }}
+              apply={(item) => {
+                if (library.apply(item)) {
+                  setSelectedId(null);
+                  libraryOpener.current?.focus();
+                }
               }}
             />
-            <RichPreview draft={draft} mobile={mobile} plainText={plainText} />
-            {library.browsing ? (
-              <SavedSections
-                library={library}
-                close={() => {
-                  library.closeBrowse();
-                  libraryOpener.current?.focus();
-                }}
-                insert={(item) => {
-                  if (library.insert(item)) libraryOpener.current?.focus();
-                }}
-              />
-            ) : selected ? (
-              <RichBlockControls
-                key={`${history.editorRevision}:${selected.id}`}
-                block={selected}
-                update={update}
-                remove={() => {
-                  commit((current) => ({
-                    ...current,
-                    design: removeRichBlock(current.design, selected.id),
-                  }));
-                  setSelectedId(null);
-                }}
-              />
-            ) : (
-              <aside className={styles.controls}>
-                <h2>Block settings</h2>
-                <p>Select a block to edit its content and style.</p>
-              </aside>
-            )}
-          </div>
+          ) : (
+            <>
+              <CampaignFields draft={draft} change={commit} />
+              <div
+                className={`${styles.editor} ${library.browsing === "section" ? libraryStyles.libraryLayout : ""}`}
+              >
+                <RichStructure
+                  design={draft.design}
+                  selectedId={selectedId}
+                  select={setSelectedId}
+                  add={add}
+                  savedSectionIds={
+                    history.saved?.design.sections.map(
+                      (section) => section.id,
+                    ) ?? []
+                  }
+                  saveSection={library.startSave}
+                  browse={(opener) => {
+                    libraryOpener.current = opener;
+                    void library.browse();
+                  }}
+                />
+                <RichPreview
+                  draft={draft}
+                  mobile={mobile}
+                  plainText={plainText}
+                />
+                {library.browsing === "section" ? (
+                  <SavedSections
+                    library={library}
+                    close={() => {
+                      library.closeBrowse();
+                      libraryOpener.current?.focus();
+                    }}
+                    insert={(item) => {
+                      if (library.insert(item)) libraryOpener.current?.focus();
+                    }}
+                  />
+                ) : selected ? (
+                  <RichBlockControls
+                    key={`${history.editorRevision}:${selected.id}`}
+                    block={selected}
+                    update={update}
+                    remove={() => {
+                      commit((current) => ({
+                        ...current,
+                        design: removeRichBlock(current.design, selected.id),
+                      }));
+                      setSelectedId(null);
+                    }}
+                  />
+                ) : (
+                  <aside className={styles.controls}>
+                    <h2>Block settings</h2>
+                    <p>Select a block to edit its content and style.</p>
+                  </aside>
+                )}
+              </div>
+            </>
+          )}
         </fieldset>
       )}
     </section>
