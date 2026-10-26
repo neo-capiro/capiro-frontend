@@ -3971,18 +3971,18 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
     "kind": "function",
     "symbol": "TemplateDetails",
-    "fingerprint": "8958c608acec9038a6186420c619eb7a242042adaab3f11bb80481a882d719df",
-    "reason": "The new86-line body remains one detail modal composing one query, settings/use/history mode and existing child presentations. Its acknowledged-save callback reloads the detail and notifies the existing list owner; it adds no business, authorization or durable lifecycle responsibility. Splitting solely for the threshold would obscure this wiring. This ruling does not approve the unchanged UseTemplate save/use guarantees. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
-    "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "fingerprint": "0f1b9798c6fb6b47adbef6370d40031b262bb67d7be478d31947c8168dce2fc2",
+    "reason": "One detail modal chooses the existing use/settings/history child and connects acknowledged refresh. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
     "kind": "function",
     "symbol": "TemplateStudio",
-    "fingerprint": "4f4ff8e2949581ad06fefc424f14ba28f0d66bf06df188ccf0b7402f101be7aa",
-    "reason": "The289-line body remains the existing template-list/filter/dialog composition owner. The accepted two-line change keys the detail by selected ID and supplies the existing list.reload callback. Detail/settings/query/lifetime owners remain separate; no cache, retry, receipt or authority mechanism is introduced. Full WS20 recovery/publication behavior is not approved by this narrow wiring review. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
-    "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "fingerprint": "4e03810f77fca5fc544dd08bd8b7a397f9ee5dcd86f8be59380d55eebb94590c",
+    "reason": "One existing template list and action coordinator; domain operations and substantial detail/wizard children stay delegated. Presentation does not justify artificial extraction. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4145,6 +4145,24 @@
     "fingerprint": "ba5872f320c305e6f96a039f55db10b55ead5dcea35ee66d035d9b6e8ade00da",
     "reason": "Accept exact reviewed DocumentEditor: it owns the document editing view and its child/modal composition. The change loads current me identity, exposes its load/error state, and mounts the one keyed export modal with document/client/tenant/user/actor scope. Recovery, command serialization and download lifetime stay in the dedicated export hook; this component adds no journal or binary logic.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/LibraryClientFilter.tsx",
+    "kind": "function",
+    "symbol": "LibraryClientFilter",
+    "fingerprint": "83bca844348335d83ad5f0d68aee498adc62d5947b08c2adac03de993a84db34",
+    "reason": "One authorized paged selector; query owner and focus primitive remain existing dependencies. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
+    "kind": "function",
+    "symbol": "TemplateSettings",
+    "fingerprint": "23d13552fcc95982059bea3835b792dcff3e167b105a4e5d2d005eb30023da87",
+    "reason": "One metadata form with existing save owner, fields and footer; no second transaction or lifetime owner. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
     "reviewedOn": "2026-10-26"
   }
 ]
