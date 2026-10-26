@@ -5371,5 +5371,14 @@
     "reason": "The existing intent-view module owns the closed presentation of admitted intent outcomes. The bounded addition adds document-family labels and separates generic preparation copy from actual schedule operations; it neither invents a file nor changes command decisions. Related status/label presentation remains cohesive. No count-only split is warranted for this exact 437-line module fingerprint.",
     "reviewedBy": "Independent Library reviewer; not author",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/module-ui/module-ui.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "34e95545b56fa3dad13d63ff3947458295032163a2d7b66ed091a10123a9aba4",
+    "reason": "The existing module-ui stylesheet remains the canonical local presentation owner for shared module primitives. This bounded correction replaces the obsolete statusNote rule with one unavailable-only modifier and its heading/body rules; loading, transient error, empty states, base status styles and controls are unchanged. The 406-line file is cohesive; extracting a separate style owner only for this threshold would fragment the existing status primitive.",
+    "reviewedBy": "Wave 3 A3 independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

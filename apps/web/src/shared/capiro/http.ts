@@ -23,6 +23,12 @@ import {
 export class CapiroApiError extends Error {
   readonly status: number;
   readonly code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode;
+  /**
+   * The upstream machine code from a refusal body (`error.code`), when present.
+   * Distinguishes conditions a retry cannot fix - a held or unconfigured backend -
+   * from a transient failure the caller may reasonably retry.
+   */
+  readonly upstreamCode?: string;
   readonly associationFailure?: OperationalFailure;
   readonly newsletterSaveRefusal?: NewsletterSaveRefusal;
   constructor(
@@ -31,12 +37,14 @@ export class CapiroApiError extends Error {
     code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode,
     associationFailure?: OperationalFailure,
     newsletterSaveRefusal?: NewsletterSaveRefusal,
+    upstreamCode?: string,
   ) {
     super(message);
     this.status = status;
     this.code = code;
     this.associationFailure = associationFailure;
     this.newsletterSaveRefusal = newsletterSaveRefusal;
+    this.upstreamCode = upstreamCode;
     this.name = "CapiroApiError";
   }
 }
@@ -66,6 +74,17 @@ function readableError(payload: unknown): string | undefined {
   return typeof payload.message === "string"
     ? payload.message.slice(0, 1000)
     : undefined;
+}
+
+/** A refusal body may carry its machine code under `error.code`. */
+function readableCode(payload: unknown): string | undefined {
+  if (!payload || typeof payload !== "object" || !("error" in payload))
+    return undefined;
+  const error = (payload as { error?: unknown }).error;
+  if (!error || typeof error !== "object" || !("code" in error))
+    return undefined;
+  const code = (error as { code?: unknown }).code;
+  return typeof code === "string" ? code : undefined;
 }
 
 type ApiOptions = {
@@ -149,6 +168,7 @@ async function responsePayload(
         ordinarySaveConflictCode(operation, response.status, payload),
       objectiveAssociationFailure(operation, response.status, payload),
       richNewsletterSaveRefusal(operation, response.status, payload, input),
+      readableCode(payload),
     );
   }
   const parsed = operation.response.safeParse(payload);
