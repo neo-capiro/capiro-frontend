@@ -38,11 +38,16 @@ export function verifyActiveMeriPackages(records, consumers) {
       for (const [name, family] of [['@capiro/meri-contracts', 'contracts'], ['@capiro/meri-ui-stream', 'ui-stream']]) {
         const value = dependencies?.[name];
         if (value === undefined) continue;
-        const file = typeof value === 'string' && /^file:\.\.\/\.\.\/vendor\/(capiro-meri-(?:contracts|ui-stream)-\d+\.\d+\.\d+\.tgz)$/.exec(value)?.[1];
+        const match = typeof value === 'string' && /^file:\.\.\/\.\.\/vendor\/(capiro-meri-(?:contracts|ui-stream)-\d+\.\d+\.\d+(?:-([a-f0-9]{8})-([a-f0-9]{12}))?\.tgz)$/.exec(value);
+        const file = match?.[1];
         if (!file || !file.startsWith(`capiro-meri-${family}-`)) throw Error(`Invalid active public package dependency: ${name}`);
         const record = records.find(item => item.file === file);
         if (!record || typeof record.sourceCommit !== 'string' || !/^[a-f0-9]{40}$/.test(record.sourceCommit))
           throw Error(`Active public package has no immutable source binding: ${file}`);
+        if (match[2] && (family !== 'contracts' || record.sourceCommit.slice(0, 8) !== match[2]
+          || typeof record.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(record.sha256)
+          || record.sha256.slice(0, 12) !== match[3]))
+          throw Error(`Content-addressed public package binding mismatch: ${file}`);
         active.set(file, record);
       }
     }

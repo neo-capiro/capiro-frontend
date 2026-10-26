@@ -200,6 +200,36 @@
       "bytes": 2756,
       "regularEntryCount": 6,
       "status": "verified-committed-source-pending-native-consumer-qualification"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.14-bc9a68f0-6e24472f649d.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.14",
+      "sourceCommit": "bc9a68f0dd35c830346c4555e5934bd99b245204",
+      "sourceTree": "9bd0ccbe93542d77696606e71cafc395bed8813c",
+      "packageInputTree": "10c3b953a4f52c2b3a7df7c39dd9a95708cb57e8",
+      "acceptedProducerCommit": "a602c574212bbf1521f8c7ea3aab41567838762d",
+      "acceptedConsumerCommit": "b58b9a56cc8b5abbb80ae7b4a67c9dfd9ba47974",
+      "sha256": "6e24472f649d9bc38b1a329b098b4f610500f5efdebc7724279962813352830a",
+      "integrity": "sha512-kaOMr11A2w5kyMJcFNh/94oq/UZUJuMR/dTYbpbmctMNptwmt69YcMnc1/Wi34FMTiVfB9QPrOM1vyLaLl8VpQ==",
+      "bytes": 885285,
+      "regularEntryCount": 61,
+      "status": "accepted-source-and-native-gates; composed-consumer-review-pending",
+      "purpose": "Exact initial-run recovery public receiver; same package version, immutable content-addressed archive; historical0.1.14 artifact preserved.",
+      "qualification": "Release pack/raw-entry checks; Integration actual installed61entry/runtime/schema/types proof; four original plus two corrected actual mounted cases; Root accepted ordinary-role PG7/7. No integrated build or deployed acceptance.",
+      "previousArtifact": "capiro-meri-contracts-0.1.14.tgz",
+      "changedEntries": [
+        "dist/conversation-session.metadata.json",
+        "dist/conversation-session.schema.json",
+        "dist/conversation-session.mjs",
+        "validate.mjs",
+        "dist/conversation-session.d.ts"
+      ],
+      "entryReceipt": "docs/wave3-recovery-distribution-20261026/ARTIFACT-ENTRIES.json",
+      "mergedProducerCommit": "0d128fe18c91530ab67de8f729b769c6e4b64e55",
+      "mergedProducerTree": "5cacccd0535e815456b9e5f7205facc5e49c3903",
+      "mergedProducerPackageInputTree": "10c3b953a4f52c2b3a7df7c39dd9a95708cb57e8"
     }
   ]
 }
