@@ -288,6 +288,11 @@ export function RichNewsletterEditor({
                   <RichBlockControls
                     key={`${history.editorRevision}:${selected.id}`}
                     block={selected}
+                    documentId={
+                      history.current && !history.fence
+                        ? history.saved?.id
+                        : undefined
+                    }
                     update={update}
                     remove={() => {
                       commit((current) => ({

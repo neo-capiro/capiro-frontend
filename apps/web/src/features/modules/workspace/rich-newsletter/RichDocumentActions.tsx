@@ -9,6 +9,7 @@ import {
   type RichDocumentState,
 } from "./document-controller";
 import { RichPreview } from "./RichPreview";
+import { HtmlCheckTool } from "./providers/HtmlCheckTool";
 import styles from "./rich-newsletter.module.css";
 
 export function RichDocumentActions({
@@ -132,6 +133,14 @@ export function RichDocumentActions({
             >
               Comments
             </ActionButton>
+          )}
+          {state.saved && (
+            <HtmlCheckTool
+              documentId={state.saved.id}
+              revision={state.saved.revision}
+              ready={Boolean(ready) && !state.pending}
+              unsaved={hasRichChanges(state)}
+            />
           )}
         </div>
         {state.recovery.phase !== "ready" && (
@@ -309,8 +318,8 @@ export function RichDocumentActions({
         <UnavailableAction reason="Sharing changes and asset operations are not included in this saved-document contract.">
           Sharing and uploads
         </UnavailableAction>
-        <UnavailableAction reason="Generation, account review, prepare, test and delivery require separate supported operations and explicit intent.">
-          Generate or send newsletter
+        <UnavailableAction reason="Stage this newsletter in Engagement Outreach to select recipients and send.">
+          Send from editor
         </UnavailableAction>
       </div>
     </section>

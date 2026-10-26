@@ -11,14 +11,17 @@ import {
 } from "../../../../shared/module-ui";
 import { RichText } from "./RichText";
 import { AssetReplaceControl } from "./assets/AssetReplaceControl";
+import { BlockProviderTools } from "./providers/BlockProviderTools";
 import styles from "./rich-newsletter.module.css";
 
 export function RichBlockControls({
   block,
+  documentId,
   update,
   remove,
 }: {
   block: NewsletterBlock;
+  documentId?: string;
   update: (change: Partial<NewsletterBlock>) => void;
   remove: () => void;
 }) {
@@ -117,13 +120,22 @@ export function RichBlockControls({
           }
         />
       </Field>
-      {!text && !plainText && !image && block.kind !== "code" && (
-        <p>
-          Advanced controls for this block are not available yet. Its content is
-          retained in the preview.
-        </p>
-      )}
+      {!text &&
+        !plainText &&
+        !image &&
+        block.kind !== "code" &&
+        block.kind !== "apps" && (
+          <p>
+            Advanced controls for this block are not available yet. Its content
+            is retained in the preview.
+          </p>
+        )}
       <ActionButton onClick={remove}>Remove block</ActionButton>
+      <BlockProviderTools
+        documentId={documentId}
+        block={block}
+        update={update}
+      />
     </section>
   );
 }
