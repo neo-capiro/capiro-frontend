@@ -13,6 +13,7 @@ import {
 } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationContext } from "../../../shared/meri-conversations/session";
 import { useConversationSelection } from "./useConversationSelection";
+import { conversationRetryHints } from "./conversation-retry-hints";
 
 type Hints = ConstructorParameters<
   typeof ConversationHostController
@@ -145,13 +146,33 @@ function useConversationOpening(
   return {
     opening,
     reopen,
-    retry: (status: string) =>
-      status === "expired"
+    /**
+     * A lost session is re-opened at conversation scope so the service can re-prepare the run it
+     * refused; every other retry keeps its exact binding. Recovery never sends or replays input.
+     */
+    retry: (status: string, accessLost: boolean) => {
+      const conversation =
+        bound.last()?.context.conversationId ??
+        conversationId ??
+        opening.hints.conversationId;
+      const recovery = conversationRetryHints({
+        accessLost,
+        clientId,
+        conversationId: conversation,
+      });
+      if (recovery)
+        return setOpening({
+          ...opening,
+          host: create(recovery),
+          hints: recovery,
+        });
+      return status === "expired"
         ? reopen({
             target: exactTarget(opening.hints),
             pending: opening.pending,
           })
-        : setOpening({ ...opening, host: create(opening.hints) }),
+        : setOpening({ ...opening, host: create(opening.hints) });
+    },
   };
 }
 
@@ -224,7 +245,7 @@ export function useConversationConnection(
     conversationId:
       bound.last()?.context.conversationId ?? opening.hints.conversationId,
     pending: opening.pending,
-    retry: () => retry(state.status),
+    retry: () => retry(state.status, renewal.accessLost),
     reopen,
   };
 }
