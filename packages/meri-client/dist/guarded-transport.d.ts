@@ -10,12 +10,14 @@ export declare class UiTransportGuardError extends Error {
     readonly chunkType: string;
     constructor(code: UiTransportGuardErrorCode, message: string, chunkType: string);
 }
-export interface MeriGuardedTransportOptions {
+export interface MeriGuardedTransportOptions<T extends {
+    eventId: string;
+} = UIEvent> {
     inner: ChatTransport<MeriUIMessage>;
     /** Injected boundary validator (offline tests may inject the unchanged root validator). */
-    validateEvent: UIEventValidator;
+    validateEvent: (value: unknown) => T;
     /** Synchronous sink for each validated event, in stream order. */
-    onEvent?: (event: UIEvent) => void;
+    onEvent?: (event: T) => void;
     /** Observability hook for rejected chunks (does not swallow the rejection). */
     onRejected?: (error: UiTransportGuardError, chunk: UIMessageChunk) => void;
     /** Optional current-lifetime guard, captured separately for each subscription. */
@@ -28,15 +30,19 @@ export interface MeriGuardedTransportOptions {
  * Meri frame, or `null` for an allowed lifecycle frame. Throws a
  * `UiTransportGuardError` for any malformed, mismatched or unexpected frame.
  */
-export declare function guardUiChunk(chunk: UIMessageChunk, validateEvent: UIEventValidator): UIEvent | null;
-export declare class MeriGuardedTransport implements ChatTransport<MeriUIMessage> {
+export declare function guardUiChunk<T extends {
+    eventId: string;
+} = UIEvent>(chunk: UIMessageChunk, validateEvent: (value: unknown) => T): T | null;
+export declare class MeriGuardedTransport<T extends {
+    eventId: string;
+} = UIEvent> implements ChatTransport<MeriUIMessage> {
     /** Incremental replay: reconnect returns only new events after the accepted cursor. */
     readonly resumeStreamIsReplay = false;
     private readonly inner;
     private readonly context;
     private closed;
     private readonly beginGuard;
-    constructor(options: MeriGuardedTransportOptions);
+    constructor(options: MeriGuardedTransportOptions<T>);
     sendMessages(options: Parameters<ChatTransport<MeriUIMessage>['sendMessages']>[0]): Promise<ReadableStream<UIMessageChunk>>;
     reconnectToStream(options: Parameters<ChatTransport<MeriUIMessage>['reconnectToStream']>[0]): Promise<ReadableStream<UIMessageChunk> | null>;
     /**

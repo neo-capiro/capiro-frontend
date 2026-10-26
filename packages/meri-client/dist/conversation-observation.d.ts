@@ -1,5 +1,4 @@
 import type { AdmittedConversationView, ConversationEvent } from '@capiro/meri-contracts/conversation-application';
-import type { UIEvent } from './types.js';
 export interface ConversationObservationSnapshot {
     readonly after: number;
     readonly omittedPrefix: boolean;
@@ -24,5 +23,5 @@ export declare class ConversationObservation {
             "x-meri-resume-sequence": string;
         }>;
     }>;
-    accept(event: UIEvent): void;
+    accept(event: ConversationEvent): void;
 }
