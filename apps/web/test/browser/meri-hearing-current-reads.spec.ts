@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import type { HearingSourceReadResponse } from "@capiro/meri-contracts/conversation-sources";
-import rawRecords from "../../tests/meri-hearing-source-fixtures.json";
+import rawRecords from "../../tests/meri-hearing-source-fixtures.json" with { type: "json" };
 import {
   binding,
   clientId,
