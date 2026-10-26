@@ -73,7 +73,7 @@ function ConnectedUpdates({ port }: { port: TaskUpdateWorkflowPort }) {
         )}
       <p role="status">
         {state.busy
-          ? `${state.busy === "prepare" ? "Preparing proposal" : "Checking approval and execution"}…`
+          ? `${state.busy === "prepare" ? "Preparing proposal" : state.busy === "start-new" ? "Opening a new task update" : "Checking approval and execution"}…`
           : "Requests run only when you choose an action."}
       </p>
       {problem && (
@@ -100,6 +100,18 @@ function ConnectedUpdates({ port }: { port: TaskUpdateWorkflowPort }) {
           />
         )}
       </div>
+      {state.proposal &&
+        state.execution?.status === "observed" &&
+        port.startNew && (
+          <Button
+            type="button"
+            variant="outline"
+            disabled={disabled}
+            onClick={() => void controller.startNew(state.proposal!.handle)}
+          >
+            Start another task update
+          </Button>
+        )}
     </div>
   );
 }

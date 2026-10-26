@@ -31,6 +31,10 @@ export type TaskUpdateExecutionView = Readonly<
 
 /** Display handles retain exact public received proposals inside the adapter. */
 export interface TaskUpdateWorkflowPort {
+  startNew?(
+    proposal: object,
+    signal: AbortSignal,
+  ): Promise<WorkflowReply<void>>;
   discardSaved?(
     signal: AbortSignal,
   ): Promise<
