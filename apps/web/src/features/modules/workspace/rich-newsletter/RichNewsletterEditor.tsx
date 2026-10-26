@@ -31,13 +31,19 @@ import { SavedTemplates } from "./library/SavedTemplates";
 import { LibraryDialog, LibraryNotice } from "./library/LibraryDialog";
 import libraryStyles from "./library/sections.module.css";
 import styles from "./rich-newsletter.module.css";
+import {
+  BasicConversionApply,
+  type BasicConversionCandidate,
+} from "../newsletter/BasicConversion";
 
 export function RichNewsletterEditor({
   onClose,
   documentId,
+  conversionCandidate,
 }: {
   onClose: () => void;
   documentId?: string;
+  conversionCandidate?: BasicConversionCandidate;
 }) {
   const { owner, state: history } = useRichDocument();
   const library = useNewsletterLibrary(owner, history.saved?.id);
@@ -174,6 +180,13 @@ export function RichNewsletterEditor({
         }
       />
       {closeNotice}
+      {conversionCandidate && (
+        <BasicConversionApply
+          candidate={conversionCandidate}
+          owner={owner}
+          state={history}
+        />
+      )}
       <RichDocumentActions
         state={history}
         owner={owner}
