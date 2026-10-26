@@ -5380,5 +5380,14 @@
     "reason": "The existing module-ui stylesheet remains the canonical local presentation owner for shared module primitives. This bounded correction replaces the obsolete statusNote rule with one unavailable-only modifier and its heading/body rules; loading, transient error, empty states, base status styles and controls are unchanged. The 406-line file is cohesive; extracting a separate style owner only for this threshold would fragment the existing status primitive.",
     "reviewedBy": "Wave 3 A3 independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useIntentList.ts",
+    "kind": "function",
+    "symbol": "useIntentList",
+    "fingerprint": "034996f781f7b3719b143d6caa890f74171358f5a467ef9c143fc815e2259611",
+    "reason": "The hook owns one conversation intent-list observation lifetime: identity-bound state, cancellation, initial/refresh/page reads, and display disposition. The added denial branch reuses the shared admitted-error classifier; Core authorization, transport validation and durable decision recovery remain in their existing owners. Keeping these tightly related states together is clearer than a size-only split.",
+    "reviewedBy": "Codex independent MF-03 reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
