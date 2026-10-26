@@ -4750,5 +4750,86 @@
     "reason": "The existing editor remains the composition point for its document, history, review, library and explicit conversion owners. This union adds the independently reviewed brand and survey entry points and persistent sibling views; those features retain their separate lifecycle and transport owners.",
     "reviewedBy": "Wave 3 Root independent composition reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/AccountInvitation.tsx",
+    "kind": "function",
+    "symbol": "AccountInvitation",
+    "fingerprint": "c46425b430a4df7c6b83d5572fc86910ba9b87e4765bcb7e04cfc3132edfd11a",
+    "reason": "One saved firm-invitation dialog owns explicit read/dispatch presentation and delegates transport/lifetime to fixed operations and the review action owner. Public receipt binding and canRetry remain authoritative; it does not implement a sender. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterReview.tsx",
+    "kind": "function",
+    "symbol": "ReviewSession",
+    "fingerprint": "55979db1803c93519f691144e0d26dea08121aaacd5d329bce3c5b24201d9e76",
+    "reason": "Existing review composition owns saved preview/comments presentation and delegates reads, collaboration state, dialogs and sanitized HTML. Added role-bound actions do not create another editor, policy owner or save flow. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterSharing.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "dcd0a1c2b0d6e1e16fc56450a9658f6cd3d7c184c2be5f78d3e7d00b8a6ca6ed",
+    "reason": "One feature-local sharing module groups its role vocabulary, reusable person row and owner form. Public team/invitation parsing and the serialized action hook remain separate; the file does not own transport, account sending or global policy. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterSharing.tsx",
+    "kind": "function",
+    "symbol": "NewsletterSharing",
+    "fingerprint": "65ed9275b28c7e4983f0d6fec6d980408e6592deefbf19ebf8882890ae4d9c28",
+    "reason": "One owner-facing sharing form binds current people, pending requests and explicit invitation fields. Row rendering is factored; all writes use the common action owner and fixed public receivers. Its length reflects one coherent access-management interaction rather than unrelated domain work. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/ReviewCollaborationDialogs.tsx",
+    "kind": "function",
+    "symbol": "ReviewCollaborationDialogs",
+    "fingerprint": "39876d2d744b87e3e3dfe32d466eb6831df54daf9d323e2c87342b335ce27331",
+    "reason": "One composition switch mounts the selected collaboration dialog and passes captured parent/root/account identities. Field state and requests remain in the individual forms/hooks; splitting the switch would duplicate navigation and lifetime plumbing. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/ThreadNotifications.tsx",
+    "kind": "function",
+    "symbol": "ThreadNotifications",
+    "fingerprint": "f857130af83cee24d5bbf2333ac2284f7f46b4fdbde48b7d45377d29cc82fdbc",
+    "reason": "One known-root notification dialog selects the existing defaults/read operation, binds the returned root and applies explicit user choices. ThreadChoices isolates its list; the dialog owns no email sender or inferred delivery state. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-newsletter-collaboration.ts",
+    "kind": "function",
+    "symbol": "useNewsletterCollaboration",
+    "fingerprint": "95c25f72b572b79793c1ac35ea713cd2688729ffbbfc2960585e29bd52f22f99",
+    "reason": "One mounted collaboration state owner captures selected comment/root, draft notification choices and role/access retirement, then delegates requests to useReviewActions and team loading to useReviewTeam. The coupled retirement invariant should remain together. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-newsletter-review.ts",
+    "kind": "function",
+    "symbol": "useNewsletterReview",
+    "fingerprint": "f88b35b2aa3bf7e331c3ed2ed17fd8fa6142063515c4deb51c18f5e5ed7838c4",
+    "reason": "Existing saved review read owner preserves explicit admission, comments loading and access-loss clearing. The mutation override is a received current projection, not a new document owner or causal receipt. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-review-actions.ts",
+    "kind": "function",
+    "symbol": "useReviewActions",
+    "fingerprint": "96c841830fc105bb017a920c04505ef799a5546381a2db1646d7d2b9b53a5e02",
+    "reason": "One mounted serialized writer consistently holds pending/unknown state, same-input invitation recovery and actor/access-generation fences across dialogs. Fixed mutations and public parsers are supplied, with no replacement authority, ledger or sender. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
