@@ -187,8 +187,8 @@ it("forwards only exact current-read routes with the current native bearer and v
       ),
     ).toHaveProperty("status", 401);
   }
-  expect(conversationCurrentReadOperation("source-read")).toBe(
-    sourceReadOperation,
+  expect(conversationCurrentReadOperation("source-read")?.path).toBe(
+    sourceReadOperation.path,
   );
   expect(conversationCurrentReadOperation("usage")).toBe(usageReadOperation);
   expect(conversationCurrentReadOperation("usage/anything")).toBeUndefined();

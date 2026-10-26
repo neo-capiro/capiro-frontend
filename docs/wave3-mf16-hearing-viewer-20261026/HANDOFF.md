@@ -1,0 +1,80 @@
+## 1. Claude handles the harness
+
+The quality bar is Claude's own. Answer quality comes from the whole harness, not only the model: its system prompt, built-in tools, subagents, skills, context management and compaction, and session handling.
+
+- Run `@anthropic-ai/claude-agent-sdk` with its **full harness** and the Claude Code system-prompt preset, plus a short Capiro/Meri append. Don't replace the preset with our own prose.
+- Do not rebuild what the SDK or AWS already does: model calls, retries, streaming, the tool loop, context management and compaction, session resume/fork, per-run turn and spend limits, AWS credentials.
+- The real Claude SDK calls Bedrock directly using its narrowly scoped AgentCore runtime IAM role. Preserve the full preset, native tools, subagents and all 14 skills.
+- Capiro data reaches Claude as **tools** (rule 4), not as a custom retrieval layer around the model.
+
+Spec and plan: `phases/wave2/WAVE2-00-CLAUDE-NATIVE-HARNESS-SPEC.md`. It is **Wave 2 item 0**, and it comes before every other item that touches the runner, the proxy or authority.
+
+## 2. Simple, standard architecture
+
+```text
+browser -> control (current access, conversation/run ownership, durable events)
+        -> AgentCore Runtime V1 (isolated conversation session; actual Claude SDK) -> Bedrock
+                                      -> tool gateway -> Core
+control -> existing durable SDK SessionStore and artifact owners
+control -> Temporal for required durable runs, schedules and background work
+```
+
+- **Core is the gatekeeper for Capiro data.** Tenant, member, client and wall rules remain server-side in Core. Check current access at admission and actual tool/data/artifact access; revocation must also prevent use of previously loaded privileged context. Do not duplicate policy in the harness.
+- Reuse one isolated environment only for the same immutable tenant/actor/conversation and approved General/client scope. Serialize turns; stop idle compute and restore exact SDK transcripts and artifacts from their durable owners. A Runtime session ID is not authorization or durable storage.
+- Keep the SDK's per-run turn/spend limits and one canonical tenant cap/usage owner. Preserve required durable runs, schedules, consent, outcomes and uncertain-write fences; neither SDK Task tools nor a warm process replaces Temporal durability.
+- **No custom warm pool, per-turn ECS task requirement, model proxy, duplicated per-hop authority, credential-minting service or spend-reservation ledger.** Use standard Runtime V1; no V2 snapshot machinery or second SDK implementation.
+- Before adding a mechanism, identify the standard feature or existing owner it uses. Before deleting a wrapper, prove the retained lower-layer behavior with meaningful positive/negative tests. Do not remove canonical authorization, idempotency or durable outcomes as “extra security.”
+
+## 3. Leave no dead code behind
+
+A change is not done until what it replaced is gone.
+
+1. **Delete in the same PR** everything the change makes unused: code, tests, fixtures, docs, config keys, env vars, feature flags, IAM statements, ALB rules, secrets, task definitions, CloudFormation resources, kit steps, alarms and metric filters. Applied database migrations are history: never edit them. Drop tables only through a separately reviewed forward migration after a snapshot; this hosting migration does not itself authorize schema/data removal.
+2. **Temporary diagnostics come out before merge** of the fix they were added for. A log line stays only as named product telemetry that someone reads.
+3. **No code behind a flag nothing turns on.** The "source-complete, activation-held" status is retired for code we don't intend to ship. Dark features need an owner and a date, or they are deleted.
+4. **No** commented-out code, `legacy` or `_old` copies, compatibility shims for removed things, or "superseded" stubs.
+5. **Show proof in the PR:** list the identifiers, files and resources deleted, with a search proving no executable/active caller remains; label immutable historical references, and explain any drop in test count.
+6. **Old plan tickets for removed mechanisms are closed as superseded**, not implemented and left dormant. See `source-of-truth/SUPERSEDED-BY-ITEM-0.md`.
+7. **Reuse before write.** Use SDK, AWS and library features first. Custom code needs one line saying what the standard option couldn't do.
+
+## 4. Capiro data must keep working
+
+- Capiro data is served to Claude as tools. Core remains the source: today's read families call Core at `/api/clio/tools/<operation>`, and the new tools call the same endpoints.
+- Tools are hosted by **control** (the existing tool gateway) so the runner never holds the Core service secret (`x-internal-service-secret`). The runner gets only a short-lived per-run token for control, scoped to tenant, user, client, conversation and run.
+- Reuse the existing read handlers under `apps/gateway/sources/*` and their typed schemas. Delete the authority, relay and measurement wrappers around them.
+- Parity: every read family that works today must be reachable as a tool with the same results and the same permission outcomes. A parity checklist is part of the item 0 spec.
+- Negative tests are mandatory: another tenant's data, another client's data, and walled data must not be retrievable, through chat or through tools. A General chat reads across the clients the user can already see, with each client's wall enforced per result (FINAL-PLAN decision 2).
+- The original read-only first cut is historical. Neo subsequently authorized preview client-record writes and autonomous Wave 2 completion. Activate accepted writes through their existing authenticated domain/intent owners and receipts, with the actual route/configuration and effect semantics verified. This does not authorize the assistant to send external mail without the user's specific send instruction.
+
+MF16 hearing viewer implementation outline — 2026-10-26
+
+Fresh sparse frontend checkout C:/dev/w3-mf16-hearing-viewer-20261026, branch codex/w3-mf16-hearing-viewer-20261026, accepted base912739b5da434ea8ceb7d811a1a2a80e26cbcd32. Frozen Unicode author/composition evidence preserved. Root reports merged Core168d209ebd4cc759bf6409a2df7af578b125964b77a and Meri276cc8a6d9fce95e235fee15c1c6a524a611fba3912, accepted trees unchanged.
+
+Use published conversation-sources hearing exports from275/276. Existing current-read HTTP/auth/lifetime owner admits the two closed source schemas on the same /api/conversations/source-read path. Extend existing native event fold and client SSE admission; preserve old bill-source/usage/legacy provenance. Add feature-local saved hearing record presentation using FieldTable, StateMessage, SourceCard, StatusPill, LinkAction and existing Figma3.4 surfaces/phone tokens. Actual Figma1064:146774 context and screenshot read. Source pages remain inert data, fragments never parse into full records/claims, only dedicated admitted sourceLocator is a link, no next-page fetch or claim-to-answer mapping. Current denial/stale/lifetime replacement clears material using existing owners.
+
+Release seam, before tests can claim installed end-to-end behavior: frontend currently pins contracts0.1.15 and ui-stream0.1.5 from qualified0a. Release must generate/qualify275+276 conversation-sources/conversation-history/conversation-application declarations/receivers and ui-stream protocol, then build actual frontend packages/meri-client source with the additive native-hearing admission. Author changes no dist/artifact/version/manifest/lock or private aliases. Existing current0a release remains untouched. Source-bound presentation checks can run independently; actual installed receiver/SSE/mounted full-host qualification awaits those artifacts.
+
+Media prerequisite: current frontend has no Vidstack/media-chrome dependency or player component. Existing Intel public hearing audio owner is apps/intel-api/src/hearing/capture/public-hearing-audio.controller.ts (GET public-hearings/:hearingId/audio and POST epochs/:epochId/playback); recording owner is hearings/:sessionId/recording. These are distinct from Core's source record projection. Public275/276 contains exact record/source/hash/location and current sourceLocator, but no admitted media epoch, expiring playback URL, captions or version/time binding. Do not use arbitrary payload URLs, turn a sourceLocator into a media source, start recording, add transport or copy a media DTO. Record presentation can proceed; playback needs the existing producer owner exposed through an accepted public consumer contract and actual library ownership.
+
+Focused checks will target full versus partial content, owner claims/reviews, inert malicious strings/URLs, current denial/stale/late lifetime, exact schema binding and native saved/stream events. No broad tests, local package build/install, provider, protected DB or live action. Independent source/visual review and Release-generated package integration remain required.
+Source checkpoint — 2026-10-26
+
+Implemented the existing conversation consumer's hearing-source union, fixed endpoint read dispatch through canonical request/response receivers, and two-line native SDK event admission in packages/meri-client/src/conversation-chat.ts. No new transport or caller-selected endpoint. Existing bill read/recorded usage/legacy source behavior remains in its owners. SourceReadState extracts the existing bill failure/loading copy and date formatting for reuse; the bill viewer uses that same state owner.
+
+HearingSourceView uses the existing useCurrentRead lifecycle. HearingSourceDetail composes canonical Figma3.4 FieldTable/StatusPill/LinkAction/surfaces/phone fields. HearingRecordContent renders whole owner claims/assessments/reviews with explicit source provenance; reference locators stay plain text. Fragments preserve exact text, cannot become claims arrays or imply a full hearing, and expose no next-page action. Full source data is inert text under an explicit disclosure. Only current.sourceLocator can become a link. No source supports an automatic answer-to-claim association. Media playback is truthfully unavailable until the separate producer seam below exists.
+
+Verification completed with retained Node24.22.1, TypeScript5.9.3, Vitest4.1.11 and the existing Chrome/Playwright/Vite toolchain; no install, package generation, build or dependency-junction copying. Tool configs resolve only installed public third-party packages. No product or test aliases point at private Meri source; the separate fixture-preparation script reads the original test owner to generate synthetic JSON, then validates all5 packets against actual275+276 source receiving. Those fixtures are not qualified generated packages.
+
+Presentation:4/4 focused cases PASS (PRESENTATION-TESTS.json). Covers script/link inertness, full owner claims/reviews and distinct authority, fragment JSON containing claims without rendering it as a claims collection, exact Unicode offsets, shared loading/denial/stale and retry copy. A disabled fragment guard fails the intended partial-content assertion; exact file bytes restored (SHAa681fb583c0ec51eb5778a04bec8674c354f87d9d4deb7a70c66dd30a1f58930 at that checkpoint), affected case PASS. A later presentation-only review-date formatting change passed the owner case; final owner source hash is in the committed checkpoint.
+
+Mounted presentation:8 distinct cases across1440/390px, current published record/reconciliation/claim-containing fragment/denied. Actual Geist loaded, no page errors, no horizontal overflow and0axe violations for every scoped case. PNGs are beside this handoff. The probe initially retained an opened HTML details element when selecting another synthetic fixture; keying by selection makes its remount match the actual selected-read owner. Reconciliation captures were refreshed at both widths; after final review-date formatting only those2 affected cases were repeated and passed. Author visually inspected desktop, narrow, partial and denied captures against actual Figma1064:146774/context and existing state geometry. Independent m3 visual acceptance and actual full-host keyboard/lifetime acceptance are not claimed.
+
+Static:15 changed TS/TSX/MJS files parse without syntax diagnostics; the canonical scoped size scanner finds0new/changed size signals. All13 touched web TS/TSX files pass the existing ESLint configuration; it warns React cannot be auto-detected in the new checkout (runtime React was borrowed through installed public resolution). Touched web formatting and git diff --check PASS. No full TypeScript/whole-architecture PASS: semantic types wait for Release's actual declarations. One first lint invocation had an empty path set because of cwd-relative pathspecs; it was interrupted before producing a result, then an explicit checked13-file list passed. Initial fixture preparation correctly rejected a private brief with a null subject, then refused mutation of frozen source data; the final generator supplies the canonical synthetic client and clones before frontend fixture binding. No production validation was weakened.
+
+Pending installed checks, prepared in source without skips:5 hearing read/proxy/fold cases;3 native client transport cases;4 full-host mounted cases (live hearing SSE, completed reload1440/390 with source/stale/focus semantics, late closed-view reply and partial-record presentation). The existing bill-current-read test's route object-identity assertion now checks its canonical path because the endpoint admits two closed source schemas. Actual qualification must also preserve the affected bill flow after the shared state extraction. These checks are NOT RUN against a fabricated package.
+
+SOURCE-CHECK.json proves the current installed0.1.15 package still has the bill receiver but lacks receiveHearingSourceRequest, receiveHearingSourceResponse and receiveNativeHearingSourceEvent; the current generated meri-client also lacks hearing event admission. Release must build merged Meri cc8a6d9fce95e235fee15c1c6a524a611fba3912 contracts/UI-stream, qualify/install actual public artifacts, and rebuild the frontend meri-client from this frozen source before consumer typechecking/SSE/full-host tests and merge. All dist files, archive/version/manifest/lock material remain untouched. The first0a/FEf855 rollout is separate.
+
+Exact media dependency: existing Intel GET public-hearings/:hearingId/audio and POST public-hearings/:hearingId/audio/epochs/:epochId/playback are owned by PublicHearingAudioController/PublicHearingAudioAccessService; session recording is separately owned by HearingRecordingController/HearingRecordingService. Current275+276 public response binds source record/hash/location but has no current-authorized media epoch/session, playback URL/expiry, captions or source-version/time mapping. The frontend base has no actual Vidstack/media-chrome package/component. Reuse those owners when a public current-read projection and library adoption are allocated; do not treat record.sourceLocator or arbitrary evidence URLs as a player. No player, recording activation or new media transport was invented. This is the remaining producer prerequisite for media, not full MF16 closure.
+
+Cleanup: replaced bill-only source filtering/dispatch in place, extracted shared state without obsolete duplicate, and kept all source/usage callers. No flags, disabled branches, removed test cases, native/cloud/DB/provider/live actions or new packages. One task-owned local Vite development probe on5359 and headless browsers are closed; no listener remains. Frozen Unicode author trees and prior evidence are preserved. Root owns independent review/composition and m3 review; Release owns actual package/build integration. Source is ready for those next steps, not merge-ready or deployed acceptance.
