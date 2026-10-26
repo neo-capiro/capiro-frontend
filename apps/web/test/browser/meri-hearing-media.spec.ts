@@ -1,4 +1,5 @@
 import { test, expect, type Page, type Route } from "@playwright/test";
+import { fileURLToPath } from "node:url";
 import records from "../../tests/meri-hearing-source-fixtures.json" with { type: "json" };
 import { hearingMediaFixture } from "../../tests/meri-hearing-media-fixtures";
 import {
@@ -56,9 +57,28 @@ async function openHearing(
       hearingMediaFixture(request.playback?.positionMs ?? null),
     );
   });
-  await page.route("https://media.example.test/synthetic.wav", (route) =>
-    route.fulfill({ status: 200, contentType: "audio/wav", body: silence() }),
-  );
+  await page.route("https://media.example.test/synthetic.wav", (route) => {
+    const bytes = silence();
+    const range = /^bytes=(\d+)-(\d*)$/.exec(
+      route.request().headers().range ?? "",
+    );
+    const start = range ? Number(range[1]) : 0;
+    const end = range?.[2]
+      ? Math.min(Number(range[2]), bytes.length - 1)
+      : bytes.length - 1;
+    return route.fulfill({
+      status: range ? 206 : 200,
+      contentType: "audio/wav",
+      headers: {
+        "accept-ranges": "bytes",
+        "content-length": String(end - start + 1),
+        ...(range
+          ? { "content-range": `bytes ${start}-${end}/${bytes.length}` }
+          : {}),
+      },
+      body: bytes.subarray(start, end + 1),
+    });
+  });
   await page.goto(
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
@@ -124,9 +144,16 @@ for (const width of [1440, 390])
         audio.evaluate((element: HTMLAudioElement) => element.playbackRate),
       )
       .not.toBe(1);
+    const rate = await audio.evaluate(
+      (element: HTMLAudioElement) => element.playbackRate,
+    );
+    await expect(
+      recording.locator("media-playback-rate-button"),
+    ).toHaveAccessibleName(`${rate}x playback speed`);
     const slider = recording.locator("media-time-range").getByRole("slider");
     await slider.focus();
-    await page.keyboard.press("ArrowRight");
+    for (let step = 0; step < 6; step++)
+      await page.keyboard.press("ArrowRight");
     await expect
       .poll(() =>
         audio.evaluate((element: HTMLAudioElement) => element.currentTime),
@@ -161,6 +188,9 @@ for (const width of [1440, 390])
         })),
       ).toEqual({ natural: [24, 24], rendered: [24, 24] });
     }
+    expect(
+      (await recording.locator("media-time-range").boundingBox())!.height,
+    ).toBeGreaterThanOrEqual(40);
     expect(selections).toEqual([
       null,
       { epochId: "synthetic-epoch", positionMs: 30_000 },
@@ -185,7 +215,9 @@ for (const width of [1440, 390])
       path: info.outputPath(`hearing-host-${width}.png`),
       fullPage: true,
     });
-    await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+    await page.addScriptTag({
+      path: fileURLToPath(import.meta.resolve("axe-core/axe.min.js")),
+    });
     const violations = await recording.evaluate(async (element) => {
       const axe = (
         window as unknown as {
@@ -202,8 +234,15 @@ for (const width of [1440, 390])
 test("expired playback removes the player and pauses its detached audio", async ({
   page,
 }) => {
-  await page.clock.install({ time: new Date() });
-  await openHearing(page);
+  await openHearing(page, async (route) => {
+    const request = route.request().postDataJSON();
+    const value = hearingMediaFixture(request.playback?.positionMs ?? null);
+    if (value.current.media.playback)
+      value.current.media.playback.expiresAt = new Date(
+        Date.now() + 5000,
+      ).toISOString();
+    await reply(route, value);
+  });
   await page
     .getByRole("button", { name: "Load recording 1", exact: true })
     .click();
@@ -213,12 +252,11 @@ test("expired playback removes the player and pauses its detached audio", async 
   await expect
     .poll(() => audio!.evaluate((element: HTMLAudioElement) => element.paused))
     .toBe(false);
-  await page.clock.fastForward(61_000);
   await expect(
     page.getByText(
       "Playback access expired. Load the recording again to check access.",
     ),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 10_000 });
   await expect(page.locator("audio, media-controller")).toHaveCount(0);
   expect(
     await audio!.evaluate((element: HTMLAudioElement) => element.paused),

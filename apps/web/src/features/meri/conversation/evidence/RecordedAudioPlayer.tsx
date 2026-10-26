@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import Image from "next/image";
 import { MediaPlayer, MediaProvider, isAudioProvider } from "@vidstack/react";
 import {
@@ -26,12 +26,9 @@ export default function RecordedAudioPlayer({
   onUnavailable: () => void;
 }) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [playbackRate, setPlaybackRate] = useState(1);
   const [currentTime, setCurrentTime] = useState(
     (positionMs - playback.startMs) / 1000,
-  );
-  const source = useMemo(
-    () => ({ src: playback.url, type: "audio/wav" }),
-    [playback.url],
   );
   const store = useMemo(
     () =>
@@ -54,7 +51,7 @@ export default function RecordedAudioPlayer({
   return (
     <MediaPlayer
       title="Retained hearing audio"
-      src={source}
+      src={playback.url}
       viewType="audio"
       streamType="on-demand"
       load="eager"
@@ -65,11 +62,12 @@ export default function RecordedAudioPlayer({
         if (isAudioProvider(provider)) setAudio(provider.audio);
       }}
       onTimeUpdate={(time) => setCurrentTime(time.currentTime)}
+      onRateChange={setPlaybackRate}
       onError={onUnavailable}
       className={styles.player}
     >
       <MediaProvider />
-      <RetainedAudioControls store={store} />
+      <RetainedAudioControls store={store} playbackRate={playbackRate} />
       <p>
         Recording position:{" "}
         {recordingTime(
@@ -84,9 +82,12 @@ export default function RecordedAudioPlayer({
 
 function RetainedAudioControls({
   store,
+  playbackRate,
 }: {
   store: ReturnType<typeof createMediaStore>;
+  playbackRate: number;
 }) {
+  const rateLabel = useId();
   return (
     <MediaController
       audio
@@ -105,7 +106,7 @@ function RetainedAudioControls({
             />
           </span>
         </MediaPlayButton>
-        <MediaTimeDisplay showDuration className={styles.time} />
+        <MediaTimeDisplay showDuration noToggle className={styles.time} />
         <MediaTimeRange className={styles.seek} />
         <MediaMuteButton className={styles.controlButton}>
           <span slot="high" className={styles.icon}>
@@ -117,7 +118,14 @@ function RetainedAudioControls({
             />
           </span>
         </MediaMuteButton>
-        <MediaPlaybackRateButton className={styles.controlButton} />
+        <MediaPlaybackRateButton
+          aria-labelledby={rateLabel}
+          className={styles.controlButton}
+        >
+          <span slot="icon" id={rateLabel}>
+            {playbackRate}x<span className="sr-only"> playback speed</span>
+          </span>
+        </MediaPlaybackRateButton>
       </MediaControlBar>
     </MediaController>
   );

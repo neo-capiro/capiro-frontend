@@ -45,6 +45,7 @@
   display: block;
   width: 100%;
   min-width: 0;
+  overflow: visible;
   --media-background-color: var(--card);
   --media-control-background: var(--card);
   --media-control-hover-background: var(--muted);
@@ -82,15 +83,16 @@
   left: 0;
 }
 .time {
-  font-family: var(--font-geist-mono), monospace;
+  font-family: var(--font-geist-mono, monospace);
   font-size: 12px;
   font-weight: 500;
   --media-control-padding: 0;
+  --media-font-family: var(--font-geist-mono, monospace);
 }
 .seek {
   flex: 1 1 120px;
   min-width: 80px;
-  --media-range-padding: 0;
+  --media-range-padding: 0px;
   --media-control-height: 40px;
   --media-range-track-height: 5px;
   --media-range-track-border-radius: 999px;
