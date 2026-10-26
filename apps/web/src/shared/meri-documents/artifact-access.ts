@@ -48,6 +48,8 @@ export type ArtifactReply<T> =
   | { ok: true; value: T }
   | { ok: false; code: string; accessDenied?: true };
 export interface ArtifactAccess {
+  /** Keeps early session renewal from cutting an active bounded file read. */
+  pending(): boolean;
   inspect(
     versionId: string,
     signal: AbortSignal,
@@ -110,6 +112,7 @@ export function createArtifactAccess(
   lifetime: AbortSignal,
   fetcher: typeof fetch = fetch,
 ): ArtifactAccess {
+  let active = 0;
   const documents = documentAccessTransport(credential, lifetime, fetcher);
   const links = createLinkTransport(credential, lifetime, fetcher);
   async function inspected(versionId: string, signal: AbortSignal) {
@@ -124,15 +127,22 @@ export function createArtifactAccess(
       return failure("VERSION_MISMATCH");
     return { ok: true as const, value };
   }
-  const bounded = <T>(
+  const bounded = async <T>(
     caller: AbortSignal,
     fallback: string,
     run: (signal: AbortSignal) => Promise<ArtifactReply<T>>,
-  ) =>
-    withActionDeadline([caller, lifetime], run).catch((error: unknown) =>
-      failed(error, fallback),
-    );
+  ) => {
+    active++;
+    try {
+      return await withActionDeadline([caller, lifetime], run);
+    } catch (error) {
+      return failed(error, fallback);
+    } finally {
+      active--;
+    }
+  };
   return {
+    pending: () => active > 0,
     inspect: (versionId, caller) =>
       bounded(caller, "PREVIEW_UNAVAILABLE", async (signal) => {
         const reply = await inspected(versionId, signal);
