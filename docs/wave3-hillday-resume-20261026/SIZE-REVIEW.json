@@ -280,8 +280,8 @@
     {
       "path": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
       "baseBlob": "1610b55b6a8c7f58d46383cd0587c8dae4c675e0",
-      "headBlob": "52d758c5daf2598ae70af307f876402f2ed4e71d",
-      "sha256": "90069cf3420f3a3417414b8e8c342fb57af61c8c9cf61bb4d1d1cf6ab0d3a1b5",
+      "headBlob": "2e8c908c674c8744e464944725326530a5a293df",
+      "sha256": "d2c44c8889228c0b7c4b20c2d6b6ffa0ad697da4b661f6f15ba6e4feec7aed1f",
       "nonblank": 341,
       "findings": [
         {
@@ -290,7 +290,7 @@
           "symbol": "HillDayMeetings",
           "line": 111,
           "nonblank": 225,
-          "fingerprint": "e70f5cafe3d3c9cbf79eeb03085b8bef4176c7d9284807d918ddb9d2466e0354"
+          "fingerprint": "6493a133ac7255442c1cd0d52f4e6fed02565c740428b2b3ffdf5b020f0deeda"
         }
       ],
       "baselineFindings": [
@@ -708,5 +708,81 @@
         "apps/web/src/shared/session/recovery/journal.ts"
       ]
     }
-  ]
+  ],
+  "calendarCorrection": {
+    "utc": "2026-10-26T04:09:05.774Z",
+    "previousHead": "25a17ded4b3112356c73f085f18a0500f55fa9f1",
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+    "previousBlob": "52d758c5daf2598ae70af307f876402f2ed4e71d",
+    "headBlob": "2e8c908c674c8744e464944725326530a5a293df",
+    "sha256": "d2c44c8889228c0b7c4b20c2d6b6ffa0ad697da4b661f6f15ba6e4feec7aed1f",
+    "previousFindings": [
+      {
+        "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+        "kind": "function",
+        "symbol": "HillDayMeetings",
+        "line": 111,
+        "nonblank": 225,
+        "fingerprint": "e70f5cafe3d3c9cbf79eeb03085b8bef4176c7d9284807d918ddb9d2466e0354"
+      }
+    ],
+    "findings": [
+      {
+        "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+        "kind": "function",
+        "symbol": "HillDayMeetings",
+        "line": 111,
+        "nonblank": 225,
+        "fingerprint": "6493a133ac7255442c1cd0d52f4e6fed02565c740428b2b3ffdf5b020f0deeda"
+      }
+    ],
+    "importsUnchanged": true,
+    "imports": [
+      {
+        "specifier": "react",
+        "line": 3,
+        "kind": "named",
+        "names": [
+          "useState"
+        ]
+      },
+      {
+        "specifier": "../../../../shared/capiro/operations/workspace-schemas",
+        "line": 4,
+        "kind": "other",
+        "names": [
+          "HillDayDocument",
+          "HillDayEvent"
+        ]
+      },
+      {
+        "specifier": "../../../../shared/capiro/queries",
+        "line": 8,
+        "kind": "named",
+        "names": [
+          "useCapiroMutation",
+          "useCapiroQuery"
+        ]
+      },
+      {
+        "specifier": "../../../../shared/module-ui",
+        "line": 12,
+        "kind": "named",
+        "names": [
+          "ActionButton",
+          "Badge",
+          "DataTable",
+          "StatusPanel",
+          "TextInput"
+        ]
+      },
+      {
+        "specifier": "../workspace.module.css",
+        "line": 19,
+        "kind": "other",
+        "names": []
+      }
+    ],
+    "status": "One-line saved-week boundary correction; independent delta review pending. Other six size records unchanged."
+  }
 }

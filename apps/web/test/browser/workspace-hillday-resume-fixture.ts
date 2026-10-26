@@ -110,6 +110,7 @@ export async function hillDayResumeFixture(
     method: string;
     input: {
       params?: Record<string, string>;
+      query?: Record<string, string>;
       body?: {
         requestId?: string;
         eventIds?: string[];
@@ -139,17 +140,16 @@ export async function hillDayResumeFixture(
         },
       ],
     },
-    "workspace.hillday.calendar": {
-      clientId,
-      from: at,
-      to: "2026-11-02T12:00:00.000Z",
-      timeZone: "UTC",
-      events: [
+    "workspace.hillday.calendar": (input: unknown) => {
+      const { query } = input as {
+        query: { from: string; to: string; timeZone: string };
+      };
+      const events = [
         {
           eventId: "saved-event",
           subject: "Saved calendar meeting",
-          startsAt: at,
-          endsAt: "2026-10-26T12:30:00.000Z",
+          startsAt: "2026-10-26T09:00:00.000Z",
+          endsAt: "2026-10-26T09:30:00.000Z",
           timeZone: "UTC",
           location: "Synthetic room",
           kind: "hill",
@@ -158,9 +158,18 @@ export async function hillDayResumeFixture(
           attendees: [],
           reason: { kind: "tagged", detail: "Synthetic", matchedAddresses: [] },
         },
-      ],
-      upcomingEventAt: null,
-      sources: [],
+      ];
+      return {
+        clientId,
+        ...query,
+        events: events.filter(
+          (event) =>
+            Date.parse(event.startsAt) >= Date.parse(query.from) &&
+            Date.parse(event.startsAt) < Date.parse(query.to),
+        ),
+        upcomingEventAt: null,
+        sources: [],
+      };
     },
     "workspace.hillday.context": (input: unknown) => ({
       meetingId: (input as { params: { meetingId: string } }).params.meetingId,
