@@ -1253,19 +1253,19 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
     "kind": "function",
     "symbol": "StagingSelection",
-    "fingerprint": "5be9a480554f38b89a831e1f2d832fa6256f22c0b970ee87fb0feca78c760b04",
-    "reason": "This renderer owns one explicit saved-revision and existing-session staging review. Source/session query selection, compatibility disclosure, retained-intent presentation, review acknowledgement and receipt link describe the same bounded interaction. The fixed gateway owns transport schemas, staging-model owns binding checks, useNewsletterStaging owns dispatch/recovery, and shared/session/recovery owns persistence. It neither creates sessions nor generates or sends content; no independent domain responsibility is hidden in the view.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "3472ae78e5343e0a81130218e663b3104c5818f0d4464aa0e6a34ea3064400c3",
+    "reason": "One closely coupled selection, confirmation and recovery view retains explicit historical recovery UI and projection/currentness gating. Splitting solely at the line threshold would distribute the same lifecycle state. Exact independent disposition: W3-WS13-PR180-REVIEW.md.",
+    "reviewedBy": "Independent m3_scope, FE180 e3a00f51ea0f8f62d3abf1affd2db518d1d426c2",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
     "kind": "function",
     "symbol": "useNewsletterStaging",
-    "fingerprint": "0f8c856513200a41973bf288a183f289c9abcadb8c0712ce3ef84aa165d96921",
-    "reason": "This hook owns one original staging intent from explicit submission through validated receipt acknowledgement. It composes existing durable recovery and fixed transport APIs with feature-specific source/destination/provenance checks. Preflight, same-key dispatch, uncertain-result hold and explicit acknowledgement must preserve one original lineage; splitting flags across unrelated hooks would obscure that invariant. No content generation, sender mutation or delivery is performed.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "79a68c08d1c38d3d85f452dbd8fb56fba440a505171b06d59da5b61c3cf6d1be",
+    "reason": "One ordered verify/read/reserve/dispatch/receipt sequence retains its uncertainty handling. The projection and historical replay additions remain within this existing staging lifecycle. Exact independent disposition: W3-WS13-PR180-REVIEW.md.",
+    "reviewedBy": "Independent m3_scope, FE180 e3a00f51ea0f8f62d3abf1affd2db518d1d426c2",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
@@ -4064,6 +4064,15 @@
     "fingerprint": "fa0039c6058c81938e8ed3e22c95c71c46d0f99f7a5a560520df56ffa3f82ddb",
     "reason": "This is the existing document operation/schema owner. The bounded newsletter variant joins the manual variant on the same fixed save operation; it does not introduce a serializer service, endpoint, policy decision or unrelated product owner. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
     "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
+    "kind": "function",
+    "symbol": "useNewsletterStaging > stage",
+    "fingerprint": "1bd3e16fbdeb84beca078100a50be98f9c52ef3b70074e2c6f99ce629972992c",
+    "reason": "The stage action owns one ordered verify/read/reserve/dispatch/receipt sequence and its uncertainty handling. Its exact projection checks and retained-request path belong to the same action rather than a new lifecycle owner. Exact independent disposition: W3-WS13-PR180-REVIEW.md.",
+    "reviewedBy": "Independent m3_scope, FE180 e3a00f51ea0f8f62d3abf1affd2db518d1d426c2",
     "reviewedOn": "2026-10-26"
   }
 ]
