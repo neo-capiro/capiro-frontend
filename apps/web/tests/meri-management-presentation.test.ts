@@ -1,7 +1,13 @@
-import { createElement, type ComponentProps } from "react";
+import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { ManagedChatRow } from "../src/features/meri/conversations/ManagedChatRow";
+import { SelectedConversationActions } from "../src/features/meri/conversations/SelectedConversationActions";
+import {
+  GENERAL_CLIENT_FILTER,
+  STATUS_FILTER,
+  historyRows,
+  updatedLabel,
+} from "../src/features/meri/conversations/ConversationHistoryList";
 import { SavedChatTranscript } from "../src/features/meri/conversations/SavedChatTranscript";
 import { useManagedChange } from "../src/features/meri/conversations/useManagedChange";
 import {
@@ -18,10 +24,6 @@ import { conversationSearchHref } from "../src/shared/meri-conversations/convers
 const history = vi.hoisted(() => vi.fn(() => ({ query: {}, tail: {} })));
 vi.mock("../src/shared/meri-conversations/history-queries", () => ({
   useConversationHistory: history,
-}));
-// Motion rendering is separately qualified; these controls inspect management presentation/handlers.
-vi.mock("@capiro/ui/motion", () => ({
-  MotionSurface: (props: ComponentProps<"div">) => createElement("div", props),
 }));
 
 const id = (n: number) =>
@@ -67,10 +69,11 @@ afterEach(() => {
 });
 function render(value = row, available = true) {
   return renderToStaticMarkup(
-    createElement(ManagedChatRow, {
+    createElement(SelectedConversationActions, {
       row: value,
       account,
       available,
+      current: available,
       refresh: vi.fn(),
     }),
   );
@@ -89,7 +92,7 @@ it("a collapsed saved chat never invokes the access-disabled history owner and c
   expect(history).not.toHaveBeenCalled();
 });
 
-it("uses the saved immutable scope and escapes the user title in client and General reopen links", () => {
+it("opens the saved immutable scope through the existing client and General routes", () => {
   expect(render()).toContain(
     `href="/meri?clientId=${row.clientId}&amp;conversationId=${row.conversationId}"`,
   );
@@ -97,7 +100,6 @@ it("uses the saved immutable scope and escapes the user title in client and Gene
   expect(render(general)).toContain(
     `href="/meri?scope=general&amp;conversationId=${row.conversationId}"`,
   );
-  expect(render(general)).toContain("My &lt;chosen&gt; title");
   expect(conversationSearchHref(null)).toBe(
     "/meri/conversations?scope=general#chat-title-search",
   );
@@ -109,10 +111,42 @@ it("uses the saved immutable scope and escapes the user title in client and Gene
   );
 });
 
-it("disables unsettled archive/trash while the existing handler still permits a user rename", async () => {
+it("maps summaries to the Figma 01.04 columns and status menu without inventing run state", () => {
+  const now = Date.parse("2026-10-24T12:00:30.000Z");
+  const rows = historyRows(
+    [
+      row,
+      { ...row, conversationId: id(5), scopeKind: "general", clientId: null },
+      {
+        ...row,
+        conversationId: id(6),
+        status: "trashed",
+        updatedAt: "2026-10-17T09:00:00.000Z",
+      },
+    ],
+    (clientId) => (clientId === row.clientId ? "Client <A>" : "Client"),
+    now,
+  );
+  expect(rows.map((r) => [r.client, r.status, r.updated])).toEqual([
+    ["Client <A>", "Active", "Just now"],
+    [GENERAL_CLIENT_FILTER, "Active", "Just now"],
+    ["Client <A>", "In Trash", "17 Oct"],
+  ]);
+  expect(updatedLabel("2026-10-24T11:58:00.000Z", now)).toBe("2 min ago");
+  expect(updatedLabel("2026-10-24T08:00:00.000Z", now)).toBe("Today");
+  expect(updatedLabel("2026-10-23T23:59:00.000Z", now)).toBe("Yesterday");
+  expect(STATUS_FILTER).toEqual({
+    "": "active",
+    Archived: "archived",
+    Trash: "trashed",
+  });
+});
+
+it("disables unsettled archive/delete while the existing handler still permits a user rename", async () => {
   const active = { ...row, canManage: false };
   expect(button(render(active), "Archive")).toContain("disabled");
-  expect(button(render(active), "Move to Trash")).toContain("disabled");
+  expect(button(render(active), "Delete")).toContain("disabled");
+  expect(button(render(active), "Rename")).not.toContain("disabled");
   let change!: ReturnType<typeof useManagedChange>;
   function Probe() {
     change = useManagedChange({
@@ -156,8 +190,9 @@ it("retains the same command and disables new actions after reload of an uncerta
   };
   managementJournal({ ...account, ...row }, storage).write(command);
   const html = render();
+  expect(button(html, "Rename")).toContain("disabled");
   expect(button(html, "Archive")).toContain("disabled");
-  expect(button(html, "Move to Trash")).toContain("disabled");
+  expect(button(html, "Delete")).toContain("disabled");
   expect(button(html, "Retry same change")).not.toContain("disabled");
   expect(button(render(row, false), "Retry same change")).toContain("disabled");
 });
@@ -169,6 +204,7 @@ it("archived chats have no live-chat link, and Trash Restore expires at the actu
     archivedAt: row.updatedAt,
   };
   expect(render(archived)).not.toContain('href="/meri?');
+  expect(button(render(archived), "Open conversation")).toContain("disabled");
   expect(button(render(archived), "Restore")).not.toContain("disabled");
   const trashed = {
     ...row,
@@ -181,5 +217,6 @@ it("archived chats have no live-chat link, and Trash Restore expires at the actu
   expect(button(render(trashed), "Restore")).not.toContain("disabled");
   vi.setSystemTime(new Date(trashed.restoreUntil));
   expect(button(render(trashed), "Restore")).toContain("disabled");
-  expect(render(trashed)).not.toContain("Move to Trash");
+  expect(render(trashed)).not.toContain(">Delete</button>");
+  expect(button(render(trashed), "Rename")).toContain("disabled");
 });
