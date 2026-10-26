@@ -2,7 +2,6 @@
 import type { Ref } from "react";
 import { useRouter } from "next/navigation";
 import { ActionButton, UnavailableAction } from "../../../../shared/module-ui";
-import { useSelectedClient } from "../../../../shared/session/SelectedClient";
 import {
   hasRichChanges,
   stageAttempt,
@@ -10,7 +9,6 @@ import {
   type RichDocumentState,
 } from "./document-controller";
 import { RichPreview } from "./RichPreview";
-import { pendingSavedWrite } from "./write-journal";
 import styles from "./rich-newsletter.module.css";
 
 export function RichDocumentActions({
@@ -23,12 +21,22 @@ export function RichDocumentActions({
   previewButtonRef?: Ref<HTMLButtonElement>;
 }) {
   const router = useRouter();
-  const selected = useSelectedClient();
   const ready =
     state.current &&
     Boolean(state.saved) &&
     !state.fence &&
-    !pendingSavedWrite(state.writes, state.saved!.id);
+    state.recovery.phase === "ready";
+  const outcome = state.recovery.outcome;
+  const canResolve =
+    state.recovery.phase === "ready" ||
+    Boolean(
+      outcome &&
+      state.review &&
+      (outcome.kind === "committed"
+        ? outcome.receipt.documentId
+        : outcome.refusal.documentId
+      ).toLowerCase() === state.review.id.toLowerCase(),
+    );
   const attempted = stageAttempt(state);
   const uncertainStages = state.writes.stages.filter(
     (entry) =>
@@ -64,14 +72,18 @@ export function RichDocumentActions({
           </ActionButton>
           <ActionButton
             disabled={Boolean(
-              state.saved || state.fence || state.writes.create,
+              state.saved || state.fence || state.recovery.phase !== "ready",
             )}
             onClick={() => void owner.create()}
           >
             Create saved document
           </ActionButton>
           <ActionButton
-            disabled={!state.saved}
+            disabled={
+              !state.saved &&
+              state.recovery.operation !== "save" &&
+              outcome?.kind !== "committed"
+            }
             onClick={() => void owner.readback()}
           >
             Read current saved document
@@ -96,6 +108,32 @@ export function RichDocumentActions({
             Stage newsletter
           </ActionButton>
         </div>
+        {state.recovery.phase !== "ready" && (
+          <section
+            className={styles.savedNotice}
+            aria-label="Newsletter write recovery"
+          >
+            <h3>
+              {state.recovery.phase === "loading"
+                ? "Checking saved requests"
+                : outcome?.kind === "committed"
+                  ? `This request saved revision ${outcome.receipt.revision}`
+                  : outcome?.kind === "refused"
+                    ? "This save made no change"
+                    : "Request not confirmed"}
+            </h3>
+            <p>
+              {outcome
+                ? "Current saved content is a separate read. Review it before adopting or rebasing your retained edits."
+                : "The original request is retained in this browser. Recovery checks that request without repeating a create or save. An absent or unavailable result keeps writing blocked."}
+            </p>
+            {state.recovery.phase !== "loading" && (
+              <ActionButton onClick={() => void owner.recoverWrite()}>
+                Check retained request
+              </ActionButton>
+            )}
+          </section>
+        )}
         {uncertainStages.map((entry) => (
           <div className={styles.savedNotice} key={entry.attempt} role="alert">
             <p>
@@ -141,7 +179,8 @@ export function RichDocumentActions({
             aria-label="Review current saved newsletter"
           >
             <h3>
-              {state.review.name} · revision {state.review.revision}
+              Current saved content: revision {state.review.revision} ·{" "}
+              {state.review.name}
             </h3>
             <p>Subject: {state.review.config.subject || "No subject"}</p>
             <p>
@@ -155,10 +194,16 @@ export function RichDocumentActions({
               created or saved it. Rebase keeps your complete local draft; the
               next save replaces the full name, configuration and design.
             </p>
-            <ActionButton onClick={owner.adopt}>
+            <ActionButton
+              disabled={!canResolve}
+              onClick={() => void owner.adopt()}
+            >
               Adopt saved document and replace local draft
             </ActionButton>
-            <ActionButton onClick={owner.rebase}>
+            <ActionButton
+              disabled={!canResolve}
+              onClick={() => void owner.rebase()}
+            >
               Rebase local draft onto reviewed revision
             </ActionButton>
             <details>
@@ -190,18 +235,6 @@ export function RichDocumentActions({
           progress…
         </p>
       )}
-      {state.writes.create && (
-        <p role="alert">
-          Creation remains uncertain. Reviewing and adopting a known document
-          resumes work on that document; it cannot confirm the lost creation.
-        </p>
-      )}
-      {(state.fence === "save" || state.fence === "conflict") && (
-        <p role="alert">
-          Saving remains blocked until a current owner read is explicitly
-          adopted or used to rebase your local draft.
-        </p>
-      )}
       {state.error && !duplicateStageError && <p role="alert">{state.error}</p>}
       {state.notice && <p role="status">{state.notice}</p>}
       {attempted?.status === "pending" && (
@@ -228,11 +261,7 @@ export function RichDocumentActions({
               disabled={Boolean(state.pending)}
               onClick={() => {
                 if (!state.stage) return;
-                const client =
-                  selected.state === "authorized-client"
-                    ? `&clientId=${encodeURIComponent(selected.client.id)}`
-                    : "";
-                router.push(`${state.stage.route}${client}`);
+                router.push(state.stage.route);
               }}
             >
               Review staged newsletter

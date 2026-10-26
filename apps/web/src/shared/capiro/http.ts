@@ -1,4 +1,6 @@
 import { readBinaryResponse } from "./binary";
+import type { NewsletterSaveRefusal } from "@capiro/shared/newsletter";
+import { richNewsletterSaveRefusal } from "./rich-newsletter-errors";
 import {
   ordinarySaveConflictCode,
   type OrdinarySaveConflictCode,
@@ -22,16 +24,19 @@ export class CapiroApiError extends Error {
   readonly status: number;
   readonly code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode;
   readonly associationFailure?: OperationalFailure;
+  readonly newsletterSaveRefusal?: NewsletterSaveRefusal;
   constructor(
     status: number,
     message: string,
     code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode,
     associationFailure?: OperationalFailure,
+    newsletterSaveRefusal?: NewsletterSaveRefusal,
   ) {
     super(message);
     this.status = status;
     this.code = code;
     this.associationFailure = associationFailure;
+    this.newsletterSaveRefusal = newsletterSaveRefusal;
     this.name = "CapiroApiError";
   }
 }
@@ -116,6 +121,7 @@ async function responsePayload(
   operation: OperationDefinition,
   signals: readonly AbortSignal[],
   options: ApiOptions,
+  input: OperationInput,
 ) {
   const payload: unknown =
     response.ok && operation.responseMode === "binary" && operation.binary
@@ -142,6 +148,7 @@ async function responsePayload(
       workspaceBriefConflictCode(operation, response.status, payload) ??
         ordinarySaveConflictCode(operation, response.status, payload),
       objectiveAssociationFailure(operation, response.status, payload),
+      richNewsletterSaveRefusal(operation, response.status, payload, input),
     );
   }
   const parsed = operation.response.safeParse(payload);
@@ -193,6 +200,7 @@ async function perform<
     operation,
     signals,
     options,
+    parsedInput.data,
   )) as OperationResponse<Registry[Key]>;
 }
 

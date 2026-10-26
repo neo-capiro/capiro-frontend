@@ -1,46 +1,13 @@
 # Saved rich newsletter lifecycle
 
-Implementation outline (13 October 2026): the existing rich editor owns local
-draft/history and presentation. A feature-local document controller will own
-explicit list/create/open, full CAS save, saved preview and stage attempts through
-the shared `createRichNewsletterAdapter`. Public newsletter types/parsers remain
-the sole wire owner; saved-version/OutreachV3 work stays separate. The React
-binding uses the existing Capiro session lifetime and disposes all private state,
-pending work and late completions on replacement. No owner request runs on mount.
+The existing rich editor owns the draft, undo history, review cards and explicit actions. `document-controller.ts` owns its mounted lifetime and adoption decisions. The public `@capiro/shared/newsletter` receivers remain the only wire authority; the fixed adapter binds every create/save receipt and request readback to its captured request.
 
-The feature-owned write journal uses the canonical `DataProvider` QueryClient,
-keyed `modules / rich-newsletter / write-journal`, with infinite inactive lifetime,
-no retries and the disabled `skipToken` sentinel instead of a query function. It
-stores attempt IDs/status and document/revision pairs only. Drafts, response bodies,
-preview HTML and review candidates remain view-local. Synchronous pending entries
-precede transport; unmount aborts observation and retains unknown attempts. Closing
-and reopening in the same scope cannot repeat unknown create or the same revision's
-stage attempt. The existing actor/session/org/client boundary clears this journal;
-no shared provider, backend authority, global or durable storage is introduced.
+`write-recovery.ts` composes the existing encrypted session recovery journal and command lock. Before the sole create/save transport, it retains the immutable request, submitted local draft and current tenant/user/actor/client identity and verifies storage. A partial storage failure blocks dispatch. Reload hydrates the retained request and performs only current-authorized request GET; there is no automatic write retry, replacement request key, list inference or second durable store. Submitted private content stays hidden until a current authorized receipt or document read. Actor/client replacement disposes the old view and rejects late completion.
 
-One explicit action runs at a time and locks edits during dispatch. Failed writes
-retain the local draft and an uncertainty/conflict fence. Explicit owner readback
-produces a review candidate; separate Adopt saved or Rebase local intent resumes
-work without attributing current state to the lost attempt. Unknown creation
-cannot be retried from an empty list. Unknown staging remains blocked for that
-document/revision even after readback. An explicit exact-stage GET can recover a
-missing stage receipt using the retained attempt's document/revision, including
-an older revision after a newer baseline is adopted. A found record confirms only
-that staged revision's existence, never the cause of an earlier request or the
-current editable baseline. Null/denied/invalid results leave uncertainty intact
-and never redispatch. Only a later saved revision permits a new stage intent.
-Returned stage routes are displayed as receipt data and never navigated or opened.
+A committed receipt proves only that request's saved revision, with the server's hash pins. Current content is fetched separately and may be newer. An explicit Adopt or Rebase action rereads the current document under the same command lock before retiring the resolved request. Generic409, null, unavailable, denied and malformed responses remain unknown. Only the public, exactly bound `NEWSLETTER_SAVE_CAS_REFUSED` result proves a successfully settled no-write save; it can be retired after the same explicit current-read/adoption step. The gateway forwards only that validated rich-save409 body; the generic error pipeline is unchanged. No browser canonical-JSON hash implementation is introduced.
 
-Saved preview captures the saved document/revision and validates the response
-with the public package's bound preview parser, including producer hash metadata.
-The POST renders current saved state; a different revision is refused, not adopted.
-No unsupported revision request field or client hash recomputation is introduced.
-The existing inert, sanitized HTML display remains required. Unsupported collaboration, assets, generation,
-account/invitation management and delivery remain visibly unavailable. Unit tests
-exercise duplicate actions, frozen submitted drafts, conflict preservation,
-deliberate readback/adoption, failed current reads, stage fences, same-cache view
-replacement and new-scope disposal in both cleanup orders. Reentrant journal
-notifications cannot restore material after disposal. Explicit adoption/rebase can
-review an unknown save; it never clears unknown creation or stage causation fences.
-The journal remains in memory within the current QueryClient scope; reload recovery,
-request-bound creation and exact save-causation recovery remain separate work.
+The existing QueryClient `write-journal.ts` now owns only exact document/revision stage attempts. Its session fence and exact-stage GET recovery are unchanged: a stage read proves existence, not causation; unknown stages are never redispatched for the same revision. Confirmed stage navigation opens the existing Engagement review route without a POST. WS19's explicit open, returned record and uncertain-open behavior remain separate.
+
+Saved preview still captures the saved document/revision, uses the public bound preview parser, and displays sanitized inert HTML. Existing PR187 cards, notices, Adopt/Rebase controls and Figma layout are reused. No invitation, provider, prepared recipient or sending behavior is added.
+
+Focused transport tests cover exact versus generic/malformed refusal through gateway→HTTP→adapter, and receipt/hash binding. Mounted browser cases cover lost acknowledgements plus real reload, later-current revision separation, refusal, access revocation, identity replacement, storage failure and cross-tab contention. The older full-document write fixtures now return content-free receipts; obsolete unknown-save adoption assertions are replaced by those recovery cases. Synthetic browser evidence does not prove deployed authentication, backend execution or native persistence.
