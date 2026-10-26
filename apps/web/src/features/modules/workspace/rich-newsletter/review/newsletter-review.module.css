@@ -1,0 +1,162 @@
+.screen {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  background: var(--muted);
+}
+.heading {
+  min-width: 0;
+}
+.heading h1 {
+  font-size: 26px;
+  line-height: 34px;
+}
+.heading p,
+.notice,
+.inspector,
+.caption {
+  overflow-wrap: anywhere;
+}
+.screen button {
+  border-radius: 10px;
+  white-space: normal;
+  min-height: 36px;
+  height: auto;
+}
+.notice {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--cat-2-teal-tint, #e6eeef);
+  font-size: 13px;
+  line-height: 20px;
+}
+.notice strong {
+  font-weight: 500;
+}
+.notice p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--foreground);
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 354px;
+  align-items: start;
+  gap: 12px;
+  min-width: 0;
+}
+.preview {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.preview > .actions button[aria-pressed] {
+  font-size: 13px;
+  line-height: 18px;
+}
+.actions button[aria-pressed="false"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.canvas {
+  padding: 16px;
+  background: var(--muted);
+  border-radius: 12px;
+  min-width: 0;
+}
+.canvas iframe {
+  display: block;
+  width: 100%;
+  height: 680px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.mobile {
+  width: min(392px, 100%);
+  justify-self: center;
+}
+.caption {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.inspector {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.inspector h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 23px;
+}
+.inspector p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--muted-foreground);
+}
+.inspector > button {
+  justify-self: start;
+}
+.comment {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+}
+.comment h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.comment time {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.comment p {
+  white-space: pre-wrap;
+}
+.status {
+  justify-self: start;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: var(--card);
+  font-size: 11px;
+  line-height: 17px;
+  color: var(--muted-foreground);
+}
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 650px) {
+  .screen {
+    padding: 16px;
+  }
+  .canvas {
+    padding: 0;
+  }
+  .mobile {
+    width: min(360px, 100%);
+  }
+}
