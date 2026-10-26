@@ -1,0 +1,180 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: min(760px, calc(100vw - 32px));
+  max-width: 760px;
+  border-radius: 12px;
+}
+.dialog > header {
+  flex-shrink: 0;
+  padding: 24px;
+}
+.dialog > header > div::before {
+  content: "NEWSLETTER";
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  line-height: 17px;
+}
+.dialog > header h2 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.12px;
+}
+.dialog > [data-slot="modal-body"] {
+  min-height: 0;
+  overflow: auto;
+  padding: 24px;
+}
+.dialog > footer {
+  flex-shrink: 0;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+.dialog button {
+  min-height: 36px;
+  height: auto;
+  white-space: normal;
+  border-radius: 10px;
+}
+.stack,
+.card {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.stack > button:not([role="combobox"]),
+.card > button:not([role="combobox"]) {
+  justify-self: start;
+  max-width: 100%;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.stack h3,
+.stack p,
+.card h3,
+.card p {
+  margin: 0;
+}
+.stack h3,
+.card h3 {
+  font-size: 15px;
+  line-height: 23px;
+  font-weight: 600;
+}
+.stack,
+.card,
+.notice {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 20px;
+}
+.card p {
+  white-space: pre-wrap;
+}
+.card > span,
+.hint {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 18px;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+}
+.row > div:first-child {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+.row p {
+  color: var(--muted-foreground);
+}
+.choices {
+  display: grid;
+  gap: 10px;
+}
+.choice {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  padding: 10px;
+  background: var(--muted);
+  border-radius: 8px;
+}
+.choice input {
+  margin-top: 4px;
+  accent-color: var(--foreground);
+}
+.choice:has(input[role="switch"]) {
+  background: transparent;
+  padding: 4px 0;
+  align-items: center;
+}
+.choice input[role="switch"] {
+  appearance: none;
+  order: 1;
+  flex-shrink: 0;
+  margin: 0 0 0 auto;
+  width: 40px;
+  height: 24px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--border);
+  position: relative;
+  cursor: pointer;
+}
+.choice input[role="switch"]::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 0 1px 2px #0002;
+}
+.choice input[role="switch"]:checked {
+  background: var(--foreground);
+}
+.choice input[role="switch"]:checked::before {
+  transform: translateX(16px);
+}
+.choice input[role="switch"]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.choice input[role="switch"]:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.notice {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted);
+}
+@media (max-width: 650px) {
+  .dialog > header,
+  .dialog > [data-slot="modal-body"],
+  .dialog > footer {
+    padding: 16px;
+  }
+  .row {
+    align-items: stretch;
+  }
+}

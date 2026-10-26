@@ -1,0 +1,185 @@
+.fields,
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.unframed {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.group {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 0;
+}
+.group legend,
+.group summary {
+  font-weight: 500;
+  font-size: 14px;
+}
+.group summary {
+  cursor: pointer;
+}
+.group[open] > summary {
+  margin-bottom: 16px;
+}
+.fieldRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.toggle img {
+  flex: none;
+}
+.toggle:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.toggle:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.sectionList {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+}
+.sectionList > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--muted);
+  padding: 10px 16px;
+}
+.sectionList h3 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.66px;
+  color: var(--muted-foreground);
+}
+.sectionList > header button {
+  min-height: 28px;
+  height: auto;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+.section {
+  border-top: 1px solid var(--border);
+  padding: 11px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sectionHeading strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+.section details > summary {
+  cursor: pointer;
+  font-size: 13px;
+}
+.section details[open] > summary {
+  margin-bottom: 16px;
+}
+.section .actions button {
+  font-size: 12px;
+  min-height: 28px;
+  height: auto;
+  padding: 5px 10px;
+}
+.empty {
+  padding: 16px;
+}
+.dialog {
+  width: min(960px, calc(100vw - 32px));
+  border-radius: 14px;
+  overflow-wrap: anywhere;
+}
+.dialog > header {
+  padding: 24px 28px 16px;
+}
+.dialog > :global([data-slot="modal-body"]) {
+  padding: 8px 28px 24px;
+}
+.read {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.read h3,
+.read h4 {
+  margin: 0;
+  font-weight: 500;
+}
+.read dl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 12px;
+  font-size: 13px;
+}
+.read dt {
+  color: var(--muted-foreground);
+}
+.read dd {
+  margin: 0;
+}
+.read pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+  font-size: 12px;
+}
+.assetGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+}
+@media (max-width: 520px) {
+  .fieldRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .dialog > header,
+  .dialog > :global([data-slot="modal-body"]) {
+    padding: 16px;
+  }
+}

@@ -1,18 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type {
-  NewsletterOutreachRecord,
-  NewsletterOutreachStage,
-} from "@capiro/shared/newsletter";
+import type { NewsletterOutreachStage } from "@capiro/shared/newsletter";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import { createRichNewsletterAdapter } from "../../../../shared/capiro/rich-newsletter";
 
-type Destination = { kind: "stage" | "record"; id: string };
+type Destination = { kind: "stage"; id: string };
 type Adapter = ReturnType<typeof createRichNewsletterAdapter>;
 type Read = {
   stage: NewsletterOutreachStage;
-  record?: NewsletterOutreachRecord;
 };
 
 /** Disposable receiving state; Core alone owns access and conditional draft reuse. */
@@ -41,14 +37,9 @@ export function useNewsletterReceiver(
   useEffect(() => {
     const controller = new AbortController();
     const expected = clientId === undefined ? {} : { clientId };
-    const request =
-      kind === "stage"
-        ? adapter
-            .stageDetail(id, expected, controller.signal)
-            .then((stage) => ({ stage }))
-        : adapter
-            .record(id, expected, controller.signal)
-            .then((record) => ({ stage: record.stage, record }));
+    const request = adapter
+      .stageDetail(id, expected, controller.signal)
+      .then((stage) => ({ stage }));
     void request.then(
       (value) => {
         if (!controller.signal.aborted) setRead({ adapter, key, value });
@@ -79,8 +70,7 @@ export function useNewsletterReceiver(
     read?.adapter === adapter && read.key === key ? read : undefined;
   const currentWrite = write?.adapter === adapter ? write : undefined;
   async function open() {
-    if (kind !== "stage" || !current?.value || currentWrite || active.current)
-      return;
+    if (!current?.value || currentWrite || active.current) return;
     const controller = new AbortController();
     active.current = controller;
     const revision = current.value.stage.revision;
@@ -101,7 +91,6 @@ export function useNewsletterReceiver(
     error: current?.error,
     stage:
       currentWrite?.status === "unknown" ? undefined : current?.value?.stage,
-    record: current?.value?.record,
     pending: currentWrite?.status === "pending",
     unknown: currentWrite?.status === "unknown",
     requestedRevision: currentWrite?.revision,

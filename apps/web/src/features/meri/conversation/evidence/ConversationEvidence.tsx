@@ -3,10 +3,33 @@ import { useEffect, useRef, useState } from "react";
 import type { ConversationReads } from "../../../../shared/meri-conversations/current-reads";
 import type { TurnView } from "../conversation-view";
 import { SourceCard } from "../../ui/SourceCard";
-import { BillSourceView, savedTime } from "./BillSourceView";
+import { BillSourceView } from "./BillSourceView";
+import { savedTime } from "./SourceReadState";
+import { HearingSourceView } from "./HearingSourceView";
 import { RecordedUsageView } from "./RecordedUsageView";
 import ui from "../../ui/meri-ui.module.css";
 import styles from "./evidence.module.css";
+
+function savedSource(event: TurnView["nativeSources"][number]) {
+  const saved = `Saved ${savedTime(event.createdAt)}`;
+  return event.type === "source.native-hearing-record"
+    ? {
+        id: event.eventId,
+        title: `Hearing record · ${event.data.selection.hearingId}`,
+        meta: `${event.data.selection.recordId} · ${saved}`,
+        summary: event.data.page.contentComplete
+          ? "Saved complete record · hearing coverage not established"
+          : "Saved record fragment · not a complete claims collection",
+      }
+    : {
+        id: event.eventId,
+        title: `Bill text · ${event.data.source.billId}`,
+        meta: `Version ${event.data.source.versionCode} · ${saved}`,
+        summary: event.data.page.contentComplete
+          ? "Saved complete bill text"
+          : "Saved partial bill text",
+      };
+}
 
 function SelectedRead({
   selection,
@@ -27,17 +50,27 @@ function SelectedRead({
     (event) => event.eventId === selection,
   );
   if (selection !== "usage" && !source) return null;
+  const sourceLabel =
+    source?.type === "source.native-hearing-record"
+      ? "hearing record"
+      : "bill text";
   return (
     <section
       ref={focus}
       tabIndex={-1}
       className={styles.selected}
-      aria-label={source ? "Bill text viewer" : "Run usage viewer"}
+      aria-label={
+        source
+          ? `${sourceLabel === "bill text" ? "Bill text" : "Hearing record"} viewer`
+          : "Run usage viewer"
+      }
     >
       <button type="button" className={ui.outline} onClick={onClose}>
-        Close {source ? "bill text" : "recorded usage"}
+        Close {source ? sourceLabel : "recorded usage"}
       </button>
-      {source ? (
+      {source?.type === "source.native-hearing-record" ? (
+        <HearingSourceView event={source} reads={reads} />
+      ) : source ? (
         <BillSourceView event={source} reads={reads} />
       ) : (
         <RecordedUsageView runId={turn.runId} reads={reads} />
@@ -62,7 +95,13 @@ function RunEvidence({
       <h2>{label}</h2>
       {turn.nativeSources.length > 0 && (
         <>
-          <h3>Saved bill-text pages</h3>
+          <h3>
+            {turn.nativeSources.some(
+              (event) => event.type === "source.native-hearing-record",
+            )
+              ? "Saved source pages"
+              : "Saved bill-text pages"}
+          </h3>
           <p>
             Open a saved page to check current access. Saved references do not
             establish how a source was used in the answer.
@@ -71,14 +110,7 @@ function RunEvidence({
             {turn.nativeSources.map((event) => (
               <li key={event.eventId}>
                 <SourceCard
-                  source={{
-                    id: event.eventId,
-                    title: `Bill text · ${event.data.source.billId}`,
-                    meta: `Version ${event.data.source.versionCode} · Saved ${savedTime(event.createdAt)}`,
-                    summary: event.data.page.contentComplete
-                      ? "Saved complete bill text"
-                      : "Saved partial bill text",
-                  }}
+                  source={savedSource(event)}
                   selected={selection === event.eventId}
                   action={
                     <button

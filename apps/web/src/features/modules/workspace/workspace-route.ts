@@ -5,6 +5,7 @@ const views = [
   "workflows",
   "shares",
   "templates",
+  "document-templates",
   "hillday",
   "newsletter",
   "rich-newsletter",

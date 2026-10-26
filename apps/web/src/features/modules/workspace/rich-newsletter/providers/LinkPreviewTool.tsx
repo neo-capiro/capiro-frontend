@@ -1,6 +1,5 @@
 "use client";
 import { useId, useState } from "react";
-import { Switch } from "radix-ui";
 import type {
   NewsletterBlock,
   NewsletterLinkProposal,
@@ -10,8 +9,6 @@ import {
   ActionButton,
   Field,
   Panel,
-  SelectInput,
-  TextArea,
   TextInput,
 } from "../../../../../shared/module-ui";
 import { useCapiroMutation } from "../../../../../shared/capiro/queries";
@@ -31,7 +28,7 @@ export function LinkPreviewTool({
   update: (change: Partial<NewsletterBlock>) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState(block.app?.sourceUrl || block.url);
+  const [url, setUrl] = useState(block.app?.sourceUrl ?? "");
   const id = useId();
   const mutation = useCapiroMutation("workspace.richNewsletter.linkPreview");
   const proposal = useProviderProposal<NewsletterLinkProposal>(
@@ -39,11 +36,11 @@ export function LinkPreviewTool({
   );
   const app: NewsletterLinkPreviewBlock = block.app ?? {
     kind: "link-preview",
-    sourceUrl: block.url,
-    title: block.text,
+    sourceUrl: "",
+    title: "",
     description: "",
-    imageUrl: block.imageUrl,
-    size: "large",
+    imageUrl: "",
+    size: "medium",
     showImage: true,
     showDescription: true,
     showBackground: true,
@@ -53,62 +50,6 @@ export function LinkPreviewTool({
   return (
     <div className={toolStyles.form}>
       <h3>Link Preview</h3>
-      <Field label="Preview source URL" htmlFor={`${id}-current-source`}>
-        <TextInput
-          id={`${id}-current-source`}
-          value={app.sourceUrl}
-          maxLength={2048}
-          onChange={(event) => edit({ sourceUrl: event.target.value })}
-        />
-      </Field>
-      <Field label="Preview title" htmlFor={`${id}-title`}>
-        <TextInput
-          id={`${id}-title`}
-          value={app.title}
-          maxLength={2000}
-          onChange={(event) => edit({ title: event.target.value })}
-        />
-      </Field>
-      <Field label="Preview description" htmlFor={`${id}-description`}>
-        <TextArea
-          id={`${id}-description`}
-          value={app.description}
-          maxLength={6000}
-          onChange={(event) => edit({ description: event.target.value })}
-        />
-      </Field>
-      <Field label="Block size" htmlFor={`${id}-size`}>
-        <SelectInput
-          id={`${id}-size`}
-          value={app.size}
-          options={[
-            { value: "small", label: "Small" },
-            { value: "medium", label: "Medium" },
-            { value: "large", label: "Large" },
-          ]}
-          onValueChange={(value) => {
-            if (value === "small" || value === "medium" || value === "large")
-              edit({ size: value });
-          }}
-        />
-      </Field>
-      {(
-        [
-          ["showImage", "Show image"],
-          ["showDescription", "Show description"],
-          ["showBackground", "Show background"],
-        ] as const
-      ).map(([key, label]) => (
-        <label key={key} className={toolStyles.toggle} htmlFor={`${id}-${key}`}>
-          {label}
-          <Switch.Root
-            id={`${id}-${key}`}
-            className={toolStyles.switch}
-            checked={app[key]}
-            onCheckedChange={(checked) => edit({ [key]: checked })}
-          />
-        </label>
-      ))}
       <ActionButton
         onClick={() => {
           if (!proposal.blocked && !proposal.result) setUrl(app.sourceUrl);

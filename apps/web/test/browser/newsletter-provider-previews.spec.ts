@@ -8,7 +8,11 @@ import {
   htmlReport,
   expectNoProviderSideEffects,
 } from "./newsletter-providers-fixture";
-import { button, documentId } from "./newsletter-document-fixtures";
+import {
+  button,
+  documentId,
+  heldResponse,
+} from "./newsletter-document-fixtures";
 import { auditDialog } from "./newsletter-provider-a11y";
 
 test("video thumbnail binds the canonical source and is adopted separately with Undo", async ({
@@ -16,15 +20,20 @@ test("video thumbnail binds the canonical source and is adopted separately with 
 }, info) => {
   const fixture = await providerFixture(page);
   await selectProviderBlock(page, "Video");
+  await expect(
+    page.getByText(/automatic thumbnail lookup is not available/),
+  ).toHaveCount(0);
   const originalImage = await page
-    .getByLabel("Image URL", { exact: true })
+    .getByLabel("Thumbnail URL", { exact: true })
     .inputValue();
   await button(page, "Video URL and thumbnail").click();
   await page
+    .getByRole("dialog", { name: "Video URL", exact: true })
     .getByRole("textbox", { name: "Video URL", exact: true })
     .fill("https://unrelated.example.test/video");
   await expect(button(page, "Create thumbnail")).toBeDisabled();
   await page
+    .getByRole("dialog", { name: "Video URL", exact: true })
     .getByRole("textbox", { name: "Video URL", exact: true })
     .fill(videoUrl);
   expect(fixture.calls("videoThumbnail")).toEqual([]);
@@ -45,19 +54,19 @@ test("video thumbnail binds the canonical source and is adopted separately with 
   await auditDialog(page, info, "video-proposal-narrow");
   await page.screenshot({ path: info.outputPath("video-proposal-narrow.png") });
   await button(page, "Close").click();
-  await expect(page.getByLabel("Image URL", { exact: true })).toHaveValue(
+  await expect(page.getByLabel("Thumbnail URL", { exact: true })).toHaveValue(
     originalImage,
   );
   await button(page, "Video URL and thumbnail").click();
   await button(page, "Use video thumbnail").click();
-  await expect(page.getByLabel("Link URL", { exact: true })).toHaveValue(
+  await expect(page.getByLabel("Video URL", { exact: true })).toHaveValue(
     newsletterVideoSource(videoUrl)!.url,
   );
-  await expect(page.getByLabel("Image URL", { exact: true })).toHaveValue(
+  await expect(page.getByLabel("Thumbnail URL", { exact: true })).toHaveValue(
     asset().url,
   );
   await button(page, "Undo").click();
-  await expect(page.getByLabel("Image URL", { exact: true })).toHaveValue(
+  await expect(page.getByLabel("Thumbnail URL", { exact: true })).toHaveValue(
     originalImage,
   );
   await expectNoProviderSideEffects(fixture);
@@ -96,15 +105,31 @@ test("link preview shows the final redirect and text-only warning while preservi
 }, info) => {
   const fixture = await providerFixture(page);
   await selectProviderBlock(page, "Apps");
+  for (const label of [
+    "Source URL",
+    "Preview title",
+    "Preview description",
+    "Preview image URL",
+    "Block size",
+  ])
+    await expect(page.getByLabel(label, { exact: true })).toHaveCount(1);
+  await expect(page.getByLabel("Block size", { exact: true })).toHaveText(
+    "medium",
+  );
   await page
-    .getByLabel("Preview source URL", { exact: true })
+    .getByLabel("Source URL", { exact: true })
     .fill("https://source.example.test/article");
   await page.getByLabel("Preview title", { exact: true }).fill("Manual title");
+  await page.getByLabel("Preview image URL", { exact: true }).fill(asset().url);
+  await page.getByLabel("Block size", { exact: true }).click();
+  await page.getByRole("option", { name: "small", exact: true }).click();
   await page.getByRole("switch", { name: "Show background" }).uncheck();
   await button(page, "Update link preview").click();
-  await expect(page.getByLabel("Source URL", { exact: true })).toHaveValue(
-    "https://source.example.test/article",
-  );
+  await expect(
+    page
+      .getByRole("dialog", { name: "Website preview" })
+      .getByLabel("Source URL", { exact: true }),
+  ).toHaveValue("https://source.example.test/article");
   expect(fixture.calls("linkPreview")).toEqual([]);
   await button(page, "Load preview").click();
   await expect(page.getByLabel("Final destination")).toHaveText(
@@ -129,18 +154,30 @@ test("link preview shows the final redirect and text-only warning while preservi
   await expect(page.getByLabel("Preview title", { exact: true })).toHaveValue(
     "Manual title",
   );
+  await expect(
+    page.getByLabel("Preview image URL", { exact: true }),
+  ).toHaveValue(asset().url);
   await button(page, "Update link preview").click();
   await button(page, "Use link preview").click();
   await expect(page.getByLabel("Preview title", { exact: true })).toHaveValue(
     "Synthetic linked title",
   );
-  await expect(
-    page.getByLabel("Preview source URL", { exact: true }),
-  ).toHaveValue("https://redirected.example.test/final");
+  await expect(page.getByLabel("Source URL", { exact: true })).toHaveValue(
+    "https://redirected.example.test/final",
+  );
   await expect(
     page.getByRole("switch", { name: "Show background" }),
   ).not.toBeChecked();
+  await expect(page.getByLabel("Block size", { exact: true })).toHaveText(
+    "small",
+  );
+  await expect(
+    page.getByLabel("Preview image URL", { exact: true }),
+  ).toHaveValue("");
   await button(page, "Undo").click();
+  await expect(
+    page.getByLabel("Preview image URL", { exact: true }),
+  ).toHaveValue(asset().url);
   await expect(page.getByLabel("Preview title", { exact: true })).toHaveValue(
     "Manual title",
   );
@@ -199,5 +236,48 @@ test("HTML reports for another revision remain unconfirmed without automatic res
   await button(page, "HTML compatibility check").click();
   await expect(button(page, "Run HTML check")).toBeDisabled();
   expect(fixture.calls("htmlCheck")).toHaveLength(1);
+  await expectNoProviderSideEffects(fixture);
+});
+
+test("manual link edits invalidate a pending proposal after an ABA edit", async ({
+  page,
+}) => {
+  const fixture = await providerFixture(page),
+    held = heldResponse();
+  fixture.queue("linkPreview", async (route) => {
+    await held.wait;
+    await route.fulfill({
+      json: {
+        sourceUrl: "https://source.example.test/article",
+        title: "Obsolete proposed title",
+        description: "Old proposal",
+        imageUrl: "",
+        warnings: [],
+      },
+    });
+    held.finished();
+  });
+  await selectProviderBlock(page, "Apps");
+  await page
+    .getByLabel("Source URL", { exact: true })
+    .fill("https://source.example.test/article");
+  await page.getByLabel("Preview title", { exact: true }).fill("Manual title");
+  await button(page, "Update link preview").click();
+  await button(page, "Load preview").click();
+  await expect(page.getByText(/Request in progress/)).toBeVisible();
+  await button(page, "Close").click();
+  await page
+    .getByLabel("Preview title", { exact: true })
+    .fill("Changed manually");
+  await page.getByLabel("Preview title", { exact: true }).fill("Manual title");
+  held.release();
+  await held.settled;
+  await button(page, "Update link preview").click();
+  await expect(button(page, "Use link preview")).toHaveCount(0);
+  await button(page, "Close").click();
+  await expect(page.getByLabel("Preview title", { exact: true })).toHaveValue(
+    "Manual title",
+  );
+  expect(fixture.calls("linkPreview")).toHaveLength(1);
   await expectNoProviderSideEffects(fixture);
 });
