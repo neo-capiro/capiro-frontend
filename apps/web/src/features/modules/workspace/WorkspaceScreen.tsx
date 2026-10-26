@@ -23,6 +23,7 @@ import { WorkspaceShares } from "./WorkspaceShares";
 import { WorkspaceInvitationEntry } from "./collaboration/WorkspaceInvitationInbox";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
+import { NewsletterReview } from "./rich-newsletter/review/NewsletterReview";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
 import {
   readWorkspaceRoute,
@@ -54,6 +55,14 @@ export function WorkspaceScreen() {
   const navigate = (view: WorkspaceView) =>
     router.push(workspaceHref({ kind: "view", view, clientId }));
   const back = () => navigate("documents");
+  if (route.kind === "newsletter-review")
+    return (
+      <NewsletterReview
+        key={`${route.newsletterId}:${clientId ?? "general"}`}
+        documentId={route.newsletterId}
+        onClose={back}
+      />
+    );
   const hillDayDestination = (
     document: { id: string; clientId: string },
     phase?: HillDayPhase,

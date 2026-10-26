@@ -22,6 +22,7 @@ export const hillDayPhases = [
 ] as const;
 export type HillDayPhase = (typeof hillDayPhases)[number];
 type Destination =
+  | { kind: "newsletter-review"; newsletterId: string }
   | { kind: "view"; view: WorkspaceView }
   | { kind: "draft"; draftId: string; prospectId?: string }
   | { kind: "hillday"; hilldayId: string; phase?: HillDayPhase }
@@ -33,7 +34,13 @@ export type WorkspaceRoute =
 
 /** URL hints choose a receiver; each existing service still checks current access. */
 export function readWorkspaceRoute(query: Query): WorkspaceRoute {
-  const identityKeys = ["clientId", "draftId", "prospectId", "hilldayId"];
+  const identityKeys = [
+    "clientId",
+    "draftId",
+    "prospectId",
+    "hilldayId",
+    "newsletterId",
+  ];
   if (
     [
       ...identityKeys,
@@ -54,11 +61,21 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   const draftId = query.get("draftId") ?? undefined;
   const prospectId = query.get("prospectId") ?? undefined;
   const hilldayId = query.get("hilldayId") ?? undefined;
+  const newsletterId = query.get("newsletterId") ?? undefined;
   const phase = hillDayPhases.find(
     (value) => value === query.get("hilldayPhase"),
   );
   if (query.has("hilldayPhase") && (!phase || !hilldayId || view !== "hillday"))
     return { kind: "invalid" };
+  if (newsletterId)
+    return view === "rich-newsletter" &&
+      !hilldayId &&
+      !draftId &&
+      !prospectId &&
+      !query.has("briefSource") &&
+      !query.has("copyDocumentId")
+      ? { kind: "newsletter-review", newsletterId, clientId }
+      : { kind: "invalid" };
   if (query.has("briefSource") || query.has("copyDocumentId"))
     return view === "documents" && !hilldayId
       ? { kind: "brief-copy" }
@@ -92,6 +109,10 @@ export function workspaceHref(destination: Destination & Scope) {
     query.set("view", "hillday");
     query.set("hilldayId", destination.hilldayId);
     if (destination.phase) query.set("hilldayPhase", destination.phase);
+  }
+  if (destination.kind === "newsletter-review") {
+    query.set("view", "rich-newsletter");
+    query.set("newsletterId", destination.newsletterId);
   }
   const suffix = query.toString();
   return `/modules/workspace${suffix ? `?${suffix}` : ""}`;
