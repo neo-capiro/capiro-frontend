@@ -214,31 +214,71 @@
 .sourceAvailability {
   color: var(--muted-foreground);
 }
-.sourceDetails {
+.savedSources {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
   width: 100%;
-}
-.sourceDetails ol {
-  margin: 12px 0 0;
-  padding-left: 24px;
-}
-.sourceDetails li {
-  display: list-item;
+  max-width: 712px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--foreground);
   overflow-wrap: anywhere;
 }
-.sourceDetails dl {
-  margin: 8px 0 0;
-}
-.sourceDetails dl > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 12px;
-}
-.sourceDetails dt {
-  color: var(--muted-foreground);
-  min-width: 100px;
-}
-.sourceDetails dd {
+.savedSources p {
   margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.savedSources .savedSourcesCaption,
+.sourceDetails article p:first-of-type {
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--muted-foreground);
+}
+.savedSourcesTrigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  text-align: left;
+}
+.savedSourcesChevron::before {
+  content: "⌄";
+}
+.savedSourcesTrigger[data-state="open"] .savedSourcesChevron::before {
+  content: "⌃";
+}
+.sourceDetails {
+  width: 100%;
+  margin: 0;
+}
+.sourceDetails[hidden] {
+  display: none;
+}
+.sourceDetails ol {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sourceDetails li {
+  min-width: 0;
 }
 /* Figma 10.05 mobile conversation: 16px gutters, 22px title, no Meri wordmark. */
 @media (max-width: 680px) {

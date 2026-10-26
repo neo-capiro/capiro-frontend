@@ -1253,9 +1253,9 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
     "kind": "function",
     "symbol": "StagingSelection",
-    "fingerprint": "3472ae78e5343e0a81130218e663b3104c5818f0d4464aa0e6a34ea3064400c3",
-    "reason": "One closely coupled selection, confirmation and recovery view retains explicit historical recovery UI and projection/currentness gating. Splitting solely at the line threshold would distribute the same lifecycle state. Exact independent disposition: W3-WS13-PR180-REVIEW.md.",
-    "reviewedBy": "Independent m3_scope, FE180 e3a00f51ea0f8f62d3abf1affd2db518d1d426c2",
+    "fingerprint": "13418862425340f1aa45cfdfe8e3ee5ca5f7f9449929bce319bbe9dc671634ba",
+    "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4007,18 +4007,18 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f23f461d90f898eb8522660d61c13b25a6454c78993146d97ea5a1331554f809",
-    "reason": "One newsletter presentation module still delegates editing, paper, comments, templates, association and staging. The added wrapper and saved-content renderer connect this view to the existing recovery owner; they add no transport or authorization lifecycle. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "fingerprint": "222b65e078e040e1a6be3e17a660d71c5bc2ba4561f5a5e5f5bd9370147ca7f8",
+    "reason": "The existing newsletter editor owner gains only modal visibility and a minimum host splice. Editing, staging transactions, authorization and durable receipt ownership remain delegated; no new business controller, persistence owner or recovery state machine is added. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "function",
     "symbol": "NewsletterEditor",
-    "fingerprint": "4ac93708fa8dec480e0bfcba274fe9a7911227e07d36f7918c74b9777b24c595",
-    "reason": "The renamed existing editor composes the same draft's steps and controls. Recovery/readback and frozen/confirmed-save states belong to this composition. Splitting individual JSX branches solely for count would disperse one view without removing a separate responsibility. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "fingerprint": "30777b842e50270fde9e0bc13e07d404520ca5eae6d5908141bf390a6b85e272",
+    "reason": "The existing newsletter editor owner gains only modal visibility and a minimum host splice. Editing, staging transactions, authorization and durable receipt ownership remain delegated; no new business controller, persistence owner or recovery state machine is added. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4109,6 +4109,15 @@
     "fingerprint": "a072efca8083d0d0ddcd8b3973db34cb93d522e29e09e6ca93be5fd179aa97f8",
     "reason": "Domain start/control/readback glue reuses journal/query APIs; no alternate persistence, serializer, scheduler or authority layer. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
     "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6ee25a3ee11079be3d516232ef735986ae93022c1c81656944d16c918c859bca",
+    "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   }
 ]
