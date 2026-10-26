@@ -249,6 +249,10 @@ test("rich saved preview excludes local edits and sanitizes active HTML without 
   fixture.queue("preview", (route) =>
     route.fulfill({
       json: {
+        documentId,
+        revision: 4,
+        renderHash: "a".repeat(64),
+        hashFormat: "newsletter-render-json-v1",
         html: '<html><head><style>body{color:rgb(12,34,56)}@import url("https://example.test/track.css");</style></head><body><h1>Saved owner heading</h1><script>parent.alert("unsafe")</script><form action="https://example.test/post"><input name="secret"></form><iframe src="https://example.test/frame"></iframe><img src="https://example.test/pixel" alt="Hidden image"><a href="https://example.test/link">Safe link text</a></body></html>',
         plainText: "Saved owner plain text",
         checks: [],
@@ -270,6 +274,12 @@ test("rich saved preview excludes local edits and sanitizes active HTML without 
     page.locator('iframe[title="Saved newsletter preview"]'),
   ).toHaveAttribute("sandbox", "");
   await expect(
+    page.locator('iframe[title="Saved newsletter preview"]'),
+  ).toHaveAttribute("referrerpolicy", "no-referrer");
+  await expect(
+    page.getByRole("region", { name: "Saved newsletter preview" }),
+  ).toContainText(`Saved document ${documentId}, revision 4.`);
+  await expect(
     frame.locator('meta[http-equiv="Content-Security-Policy"]'),
   ).toHaveAttribute("content", /default-src 'none'/);
   await page.getByText("Saved plain text", { exact: true }).click();
@@ -280,6 +290,10 @@ test("rich saved preview excludes local edits and sanitizes active HTML without 
   fixture.queue("preview", (route) =>
     route.fulfill({
       json: {
+        documentId,
+        revision: 4,
+        renderHash: "b".repeat(64),
+        hashFormat: "newsletter-render-json-v1",
         html: "<h1>Next saved owner heading</h1>",
         plainText: "Next saved plain text",
         checks: [],

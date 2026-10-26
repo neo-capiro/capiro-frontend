@@ -52,7 +52,7 @@ for (const [kind, api] of [
   }
 }
 
-test("the reused public receiving corpus and declarations retain published bytes", () => {
+test("public receiving fixtures match their published or adoption bindings", () => {
   const bindings = JSON.parse(
     readFileSync(
       new URL("./fixtures/RECEIVING-FIXTURE-BINDINGS.json", import.meta.url),

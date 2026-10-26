@@ -21,6 +21,7 @@ type Action =
   | "readback"
   | "save"
   | "preview"
+  | "recoverStage"
   | "stage";
 type Fence = "create" | "save" | "conflict" | "stage";
 export type RichDocumentState = {
@@ -98,7 +99,7 @@ export function createRichDocumentController(
   async function run<T>(
     action: Action,
     request: (signal: AbortSignal) => Promise<T>,
-    success: (value: T) => void,
+    success: (value: T, current: () => boolean) => void,
     failure?: (error: unknown) => void,
     write?: WriteIntent,
   ) {
@@ -123,7 +124,7 @@ export function createRichDocumentController(
       const value = await request(controller.signal);
       if (current()) {
         if (ticket) journal.finish(ticket, "confirmed");
-        if (current()) success(value);
+        if (current()) success(value, current);
       }
     } catch (error) {
       if (current()) {
@@ -346,12 +347,61 @@ export function createRichDocumentController(
     },
     preview() {
       if (!writable()) return;
-      const id = state.saved!.id;
+      const { id, revision } = state.saved!;
       publish({ preview: undefined });
       return run(
         "preview",
-        (signal) => adapter.preview(id, false, signal),
+        (signal) => adapter.preview(id, revision, false, signal),
         (preview) => publish({ preview }),
+      );
+    },
+    recoverStage(attemptNumber: number) {
+      if (!idle() || !state.saved) return;
+      const attempt = journal
+        .read()
+        .stages.find(
+          (entry) =>
+            entry.attempt === attemptNumber &&
+            entry.status === "unknown" &&
+            entry.documentId.toLowerCase() === state.saved!.id.toLowerCase(),
+        );
+      if (!attempt) return;
+      const retained = () =>
+        journal
+          .read()
+          .stages.find(
+            (entry) =>
+              entry.attempt === attempt.attempt &&
+              entry.documentId.toLowerCase() ===
+                attempt.documentId.toLowerCase() &&
+              entry.revision === attempt.revision,
+          );
+      publish({ stage: undefined });
+      return run(
+        "recoverStage",
+        (signal) =>
+          adapter.stagedRevision(attempt.documentId, attempt.revision, signal),
+        (stage, current) => {
+          if (!retained()) return;
+          if (stage === null) {
+            publish({
+              notice: `No stage was returned for revision ${attempt.revision}. The attempt remains uncertain and will not be repeated.`,
+            });
+            return;
+          }
+          journal.finish({ ...attempt, kind: "stage" }, "confirmed");
+          if (!current() || retained()?.status !== "confirmed") return;
+          publish({
+            stage,
+            notice:
+              "An exact staged revision was found. This does not establish which earlier request created it or change your editable baseline. Nothing was opened, prepared or sent.",
+          });
+        },
+        () =>
+          publish({
+            error:
+              "Stage lookup failed. The attempt remains uncertain and will not be repeated; your saved baseline and write fences are unchanged.",
+          }),
       );
     },
     stage() {
@@ -373,7 +423,7 @@ export function createRichDocumentController(
             current: false,
             fence: "stage",
             error:
-              "Staging could not be confirmed. This document revision remains fenced because document readback cannot recover the missing stage receipt. Review current state before any further write.",
+              "Staging could not be confirmed. This document revision will not be staged again. Check its exact stage receipt separately; review current saved state before any further write.",
           }),
         { kind: "stage", documentId: id, revision },
       );

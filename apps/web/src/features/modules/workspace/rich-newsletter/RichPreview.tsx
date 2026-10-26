@@ -73,9 +73,9 @@ export function SavedRichPreview({ preview }: { preview: NewsletterPreview }) {
     <section className={styles.preview} aria-label="Saved newsletter preview">
       <h2>Saved-state preview</h2>
       <p>
-        This explicit request rendered saved owner state, excluding local edits.
-        The response has no document or revision token and does not confirm an
-        exact saved revision. External images and links are disabled.
+        Saved document {preview.documentId}, revision {preview.revision}. This
+        response matches the requested saved revision and excludes local edits.
+        External images and links are disabled.
       </p>
       <iframe
         key={document}

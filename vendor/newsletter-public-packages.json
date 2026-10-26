@@ -47,7 +47,32 @@
         "newsletter-receiving"
       ],
       "status": "candidate-packed-frontend-receiving-consumer"
+    },
+    {
+      "file": "capiro-shared-0.0.0-d68024dc-e92d6c6129f7.tgz",
+      "repository": "https://github.com/neo-capiro/capiro-backend",
+      "sourceCommit": "d68024dc62edddb0784f79b4e5ca50335dd1ca89",
+      "sourceTree": "0051653db4eb1bbd4b8f8e742cc22b11d25126bf",
+      "distributionPath": "vendor/capiro-shared-0.0.0-d68024dc-e92d6c6129f7.tgz",
+      "bytes": 693445,
+      "sha256": "e92d6c6129f7c82b62b71086b81cbba6e0f57b786b41ba023017ca77b1c5c72e",
+      "integrity": "sha512-wUBVJlrrxmg1EvYdX37R7FDneLwCdCFblXU+B97hUm/aj86H7giPWMU4gEOrTf9kyzC+k3XQemlJuCYEnZLhcA==",
+      "regularEntryCount": 288,
+      "qualification": "Release W3-SHARED-DISTRIBUTION-HANDOFF.txt; one actual build/pack; public declarations, imports and scoped browser closure accepted by Root",
+      "status": "active-packed-frontend-input; paired WS15 consumer and live acceptance tracked separately",
+      "browserExports": [
+        "@capiro/shared/newsletter",
+        "@capiro/shared/newsletter-render"
+      ],
+      "runtimeClosure": [
+        "newsletter",
+        "newsletter-render",
+        "newsletter-fonts",
+        "newsletter-fonts.catalog",
+        "newsletter-social-share",
+        "newsletter-receiving"
+      ]
     }
   ],
-  "activeFile": "capiro-shared-0.0.0-38fec5c8.tgz"
+  "activeFile": "capiro-shared-0.0.0-d68024dc-e92d6c6129f7.tgz"
 }

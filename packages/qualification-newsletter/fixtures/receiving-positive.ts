@@ -30,7 +30,7 @@ import {
   parseNewsletterOutreachStage, parseNewsletterOutreachRecord, parseNewsletterReservedMetadata,
   parseNewsletterRecordDiscriminator, NEWSLETTER_RECEIVE_LIMITS,
   type NewsletterReceiveResult, type NewsletterCampaign, type NewsletterDocumentList,
-  type NewsletterPreview, type NewsletterCheck, type NewsletterHtmlCheck, type NewsletterOutreachStage,
+  type NewsletterPreview, type NewsletterPreviewContent, type NewsletterCheck, type NewsletterHtmlCheck, type NewsletterOutreachStage,
   type NewsletterOutreachRecord, type NewsletterReservedMetadata, type NewsletterRecordDiscriminator,
   type NewsletterReceiveIdentity, type DraftGenerationStatus, type DraftAuditStatus, type DraftApprovalStatus,
 } from '@capiro/shared/newsletter';
@@ -38,7 +38,17 @@ declare const wire: unknown;
 const identity: NewsletterReceiveIdentity = { revision:4, clientId:null };
 const campaign: NewsletterReceiveResult<NewsletterCampaign> = parseNewsletterCampaign(wire,identity);
 const list: NewsletterReceiveResult<NewsletterDocumentList> = parseNewsletterDocumentList(wire);
-const preview: NewsletterReceiveResult<NewsletterPreview> = parseNewsletterPreview(wire);
+const preview: NewsletterReceiveResult<NewsletterPreview> = parseNewsletterPreview(wire, { documentId: 'synthetic-newsletter', revision: 4 });
+const unboundPreview: NewsletterReceiveResult<NewsletterPreviewContent> = parseNewsletterPreview(wire);
+if (unboundPreview.ok) {
+  // @ts-expect-error Unbound content cannot claim an expected document/revision receipt.
+  const pinned: NewsletterPreview = unboundPreview.value;
+  void pinned;
+}
+// @ts-expect-error Both document and saved revision are required for a bound preview.
+parseNewsletterPreview(wire, { documentId: 'synthetic-newsletter' });
+// @ts-expect-error A revision alone does not bind a document.
+parseNewsletterPreview(wire, { revision: 4 });
 const checks: NewsletterReceiveResult<NewsletterCheck[]> = parseNewsletterChecks(wire);
 const htmlCheck: NewsletterReceiveResult<NewsletterHtmlCheck> = parseNewsletterHtmlCheck(wire,{revision:4});
 const receipt: NewsletterReceiveResult<NewsletterStage> = parseNewsletterStageReceipt(wire,{revision:4});
@@ -48,4 +58,4 @@ const reserved: NewsletterReceiveResult<NewsletterReservedMetadata> = parseNewsl
 const discriminator: NewsletterReceiveResult<NewsletterRecordDiscriminator> = parseNewsletterRecordDiscriminator(wire);
 const generation: DraftGenerationStatus='generated';const audit:DraftAuditStatus='held';const approval:DraftApprovalStatus='pending';
 if(campaign.ok){const subject:string=campaign.value.config.subject;void subject;}else{const path:string=campaign.error.path;void path;}
-export {campaign,list,preview,checks,htmlCheck,receipt,richStage,richRecord,reserved,discriminator,generation,audit,approval,NEWSLETTER_RECEIVE_LIMITS};
+export {campaign,list,preview,unboundPreview,checks,htmlCheck,receipt,richStage,richRecord,reserved,discriminator,generation,audit,approval,NEWSLETTER_RECEIVE_LIMITS};
