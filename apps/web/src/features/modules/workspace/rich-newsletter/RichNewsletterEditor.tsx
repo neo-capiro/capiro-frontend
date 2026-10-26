@@ -91,7 +91,7 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
     <section className={styles.screen}>
       <PageHeader
         title="Rich newsletter editor preview"
-        description="Edit locally, then explicitly create or review a saved rich document. Collaboration and delivery remain unavailable; leaving clears local edits, while uncertain write guards remain for this session and client scope."
+        description="Edit locally, then explicitly create or review a saved rich document. Submitted create/save requests remain in this browser for recovery; current saved content is reviewed separately. Collaboration and delivery remain unavailable."
         actions={
           <ActionButton
             disabled={Boolean(history.pending)}
@@ -104,8 +104,9 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
       {closing && (
         <div role="alert" className={styles.notice}>
           <p>
-            Discard this local draft and leave the preview? An uncertain request
-            may already have committed; leaving does not undo it.
+            Leave this preview? Unsubmitted local edits will be discarded. A
+            retained create/save request and its submitted edits remain
+            available for recovery; leaving does not undo it.
           </p>
           <ActionButton disabled={Boolean(history.pending)} onClick={onClose}>
             Discard and leave
@@ -121,8 +122,10 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
         previewButtonRef={previewButton}
       />
       <fieldset
-        disabled={Boolean(history.pending)}
-        inert={Boolean(history.pending)}
+        disabled={
+          Boolean(history.pending) || history.recovery.phase !== "ready"
+        }
+        inert={Boolean(history.pending) || history.recovery.phase !== "ready"}
         className={styles.draftEditor}
       >
         <div className={styles.toolbar}>

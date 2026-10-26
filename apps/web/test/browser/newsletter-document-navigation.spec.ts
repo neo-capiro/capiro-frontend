@@ -20,7 +20,8 @@ test("rich pending create remains fenced after history close/reopen and an empty
 }) => {
   const fixture = await documentFixture(page);
   await page.goto("/modules/workspace");
-  await button(page, "Rich newsletter preview").click();
+  await button(page, "Workspace tools").click();
+  await page.getByRole("menuitem", { name: "Rich newsletter preview" }).click();
   await page.getByLabel("Newsletter name").fill("Private creation draft");
   const held = heldResponse();
   fixture.queue("create", async (route) => {
@@ -50,14 +51,22 @@ test("rich pending create remains fenced after history close/reopen and an empty
     "Untitled newsletter",
   );
   await expect(button(page, "Create saved document")).toBeDisabled();
-  await expect(page.getByText(/Creation remains uncertain/)).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Request not confirmed" }),
+  ).toBeVisible();
   fixture.control.items = [];
   await button(page, "Load saved newsletters").click();
   await expect(page.getByText(/No documents were returned/)).toBeVisible();
   await expect(button(page, "Create saved document")).toBeDisabled();
   fixture.control.items = undefined;
-  await adoptDocument(page);
-  await expect(page.getByText(/Creation remains uncertain/)).toBeVisible();
+  await button(page, "Load saved newsletters").click();
+  await button(page, "Review Synthetic saved newsletter").click();
+  await expect(
+    button(page, "Adopt saved document and replace local draft"),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("heading", { name: "Request not confirmed" }),
+  ).toBeVisible();
   await closeAndReopen(page);
   await expect(button(page, "Create saved document")).toBeDisabled();
   expect(fixture.calls("create")).toHaveLength(1);
@@ -71,7 +80,10 @@ for (const status of [200, 503]) {
   }) => {
     const fixture = await documentFixture(page);
     await page.goto("/modules/workspace");
-    await button(page, "Rich newsletter preview").click();
+    await button(page, "Workspace tools").click();
+    await page
+      .getByRole("menuitem", { name: "Rich newsletter preview" })
+      .click();
     await adoptDocument(page);
     const held = heldResponse();
     fixture.queue("stage", async (route) => {
@@ -124,54 +136,6 @@ for (const status of [200, 503]) {
   });
 }
 
-test("rich unknown save after reopen needs a successful owner read and separate adoption", async ({
-  page,
-}) => {
-  const fixture = await documentFixture(page);
-  await enterEditor(page);
-  await adoptDocument(page);
-  await page.getByLabel("Newsletter name").fill("Disposed private local edits");
-  fixture.queue("save", (route) =>
-    route.fulfill({ status: 503, json: { message: "Lost save receipt" } }),
-  );
-  await button(page, "Save newsletter").click();
-  await expect(
-    page.getByText(/Save could not be confirmed and will not be repeated/),
-  ).toBeVisible();
-  await closeAndReopen(page);
-  fixture.queue("detail", (route) =>
-    route.fulfill({ status: 403, json: { message: "Current detail denied" } }),
-  );
-  await button(page, "Load saved newsletters").click();
-  await button(page, "Review Synthetic saved newsletter").click();
-  await expect(page.getByText(/The current read failed/)).toBeVisible();
-  await expect(
-    page.getByRole("region", { name: "Review current saved newsletter" }),
-  ).toHaveCount(0);
-  await expect(button(page, "Save newsletter")).toBeDisabled();
-  await expect(button(page, "Stage newsletter")).toBeDisabled();
-  expect(fixture.calls("save")).toHaveLength(1);
-  await button(page, "Review Synthetic saved newsletter").click();
-  await expect(
-    page.getByRole("region", { name: "Review current saved newsletter" }),
-  ).toBeVisible();
-  await expect(page.getByLabel("Newsletter name")).toHaveValue(
-    "Untitled newsletter",
-  );
-  await expect(button(page, "Save newsletter")).toBeDisabled();
-  await button(page, "Adopt saved document and replace local draft").click();
-  await page.getByLabel("Newsletter name").fill("New deliberate save");
-  await button(page, "Save newsletter").click();
-  await expect(
-    page.getByText("Saved revision 5.", { exact: true }),
-  ).toBeVisible();
-  expect(fixture.calls("save")).toHaveLength(2);
-  expect(fixture.calls("save")[1]!.input).toMatchObject({
-    body: { revision: 4, name: "New deliberate save" },
-  });
-  expectIsolated(fixture);
-});
-
 for (const replacement of ["client", "session"] as const) {
   test(`rich held save cannot restore prior private material after ${replacement} replacement`, async ({
     page,
@@ -185,7 +149,17 @@ for (const replacement of ["client", "session"] as const) {
       const submitted = route.request().postDataJSON().body;
       await held.wait;
       await route.fulfill({
-        json: { ...fixture.control.current, ...submitted, revision: 5 },
+        json: {
+          requestId: submitted.requestId,
+          operation: "save",
+          documentId,
+          previousRevision: 4,
+          revision: 5,
+          inputHash: "a".repeat(64),
+          contentHash: "b".repeat(64),
+          hashFormat: "newsletter-write-jcs-v1",
+          createdAt: "2026-10-13T02:00:00.000Z",
+        },
       });
       held.finished();
     });
@@ -208,13 +182,20 @@ for (const replacement of ["client", "session"] as const) {
     await expect(page.getByLabel("Newsletter name")).toHaveValue(
       "Untitled newsletter",
     );
-    await expect(button(page, "Create saved document")).toBeEnabled();
+    await expect(button(page, "Create saved document"))[
+      replacement === "client" ? "toBeEnabled" : "toBeDisabled"
+    ]();
     held.release();
     await held.settled;
-    await page.getByLabel("Newsletter name").fill("New scope local draft");
-    await expect(page.getByLabel("Newsletter name")).toHaveValue(
-      "New scope local draft",
-    );
+    if (replacement === "client") {
+      await page.getByLabel("Newsletter name").fill("New scope local draft");
+      await expect(page.getByLabel("Newsletter name")).toHaveValue(
+        "New scope local draft",
+      );
+    } else
+      await expect(
+        page.getByRole("heading", { name: "Request not confirmed" }),
+      ).toBeVisible();
     await expect(
       page.getByText("Saved revision 5.", { exact: true }),
     ).toHaveCount(0);

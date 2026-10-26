@@ -13,6 +13,18 @@ const id = "b2222222-2222-7222-8222-222222222222";
 const clientId = "e5555555-5555-4555-8555-555555555555";
 const stageId = "a1111111-1111-4111-8111-111111111111";
 const other = "d4444444-4444-4444-8444-444444444444";
+const requestId = "10000000-0000-4000-8000-000000000001";
+const writeReceipt = (revision = 5) => ({
+  requestId,
+  operation: "save",
+  documentId: id,
+  previousRevision: 4,
+  revision,
+  inputHash: "a".repeat(64),
+  contentHash: "b".repeat(64),
+  hashFormat: "newsletter-write-jcs-v1",
+  createdAt: "2026-10-26T00:00:00.000Z",
+});
 const signal = () => new AbortController().signal;
 const campaign = (): NewsletterCampaign => ({
   id,
@@ -82,6 +94,7 @@ describe("fixed rich operations remain separate from saved-version staging", () 
       "POST /newsletters/documents",
       "GET /newsletters/documents/:id",
       "PATCH /newsletters/documents/:id",
+      "GET /newsletters/write-requests/:requestId",
       "POST /newsletters/documents/:id/preview",
       "POST /newsletters/documents/:id/stage",
       "GET /newsletters/documents/:id/stages/:revision",
@@ -89,10 +102,10 @@ describe("fixed rich operations remain separate from saved-version staging", () 
       "GET /engagement/newsletters/:id",
       "POST /engagement/newsletters/stages/:id/open",
     ]);
-    for (const field of ["clientId", "ownerId", "tenantId", "requestId"])
+    for (const field of ["clientId", "ownerId", "tenantId"])
       expect(
         operations["workspace.richNewsletter.create"].request.safeParse({
-          body: { [field]: id },
+          body: { requestId, [field]: id },
         }).success,
       ).toBe(false);
     expect(
@@ -123,7 +136,13 @@ describe("fixed rich operations remain separate from saved-version staging", () 
       expect(
         operations["workspace.richNewsletter.save"].request.safeParse({
           params: { id },
-          body: { revision: 4, name: saved.name, design, config: saved.config },
+          body: {
+            requestId,
+            revision: 4,
+            name: saved.name,
+            design,
+            config: saved.config,
+          },
         }).success,
       ).toBe(false);
     },
@@ -179,12 +198,13 @@ describe("receiving binds current requests without inventing authority", () => {
   it("binds save to a captured submission while later edits survive independently", async () => {
     const saved = campaign();
     const body = {
+      requestId,
       revision: 4,
       name: saved.name,
       design: saved.design,
       config: saved.config,
     };
-    const committed = structuredClone({ ...saved, revision: 5 });
+    const committed = writeReceipt();
     const { adapter, fetcher } = consumer(committed);
     const pending = adapter.save(id, body, signal());
     body.config.clientId = other;
@@ -198,11 +218,12 @@ describe("receiving binds current requests without inventing authority", () => {
     "refuses successful save at unexpected revision %i without replay",
     async (revision) => {
       const saved = campaign();
-      const { adapter, fetcher } = consumer({ ...saved, revision });
+      const { adapter, fetcher } = consumer(writeReceipt(revision));
       await expect(
         adapter.save(
           id,
           {
+            requestId,
             revision: 4,
             name: saved.name,
             design: saved.design,
@@ -219,6 +240,7 @@ describe("receiving binds current requests without inventing authority", () => {
     async (status) => {
       const saved = campaign();
       const body = {
+        requestId,
         revision: 4,
         name: saved.name,
         design: saved.design,

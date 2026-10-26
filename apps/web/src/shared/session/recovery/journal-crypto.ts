@@ -38,6 +38,7 @@ const envelope = z.discriminatedUnion("state", [
       code: z.enum([
         "WORKSPACE_BRIEF_STATE_CONFLICT",
         "WORKSPACE_SAVE_STATE_CONFLICT",
+        "NEWSLETTER_SAVE_CAS_REFUSED",
         "ACTIVITY_UNDO_REFUSED",
         "DIRECTORY_NOTE_REFUSED",
         "PROSPECT_NEW_CLIENT_REFUSED",
