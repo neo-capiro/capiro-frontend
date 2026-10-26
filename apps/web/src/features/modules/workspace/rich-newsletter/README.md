@@ -23,16 +23,24 @@ retain the local draft and an uncertainty/conflict fence. Explicit owner readbac
 produces a review candidate; separate Adopt saved or Rebase local intent resumes
 work without attributing current state to the lost attempt. Unknown creation
 cannot be retried from an empty list. Unknown staging remains blocked for that
-document/revision even after readback: the eight operations cannot recover its
-missing stage ID. Only a later confirmed saved revision permits a new stage intent.
+document/revision even after readback. An explicit exact-stage GET can recover a
+missing stage receipt using the retained attempt's document/revision, including
+an older revision after a newer baseline is adopted. A found record confirms only
+that staged revision's existence, never the cause of an earlier request or the
+current editable baseline. Null/denied/invalid results leave uncertainty intact
+and never redispatch. Only a later saved revision permits a new stage intent.
 Returned stage routes are displayed as receipt data and never navigated or opened.
 
-Saved preview reuses the existing inert, sanitized HTML display and makes no
-document/revision receipt claim. Unsupported collaboration, assets, generation,
+Saved preview captures the saved document/revision and validates the response
+with the public package's bound preview parser, including producer hash metadata.
+The POST renders current saved state; a different revision is refused, not adopted.
+No unsupported revision request field or client hash recomputation is introduced.
+The existing inert, sanitized HTML display remains required. Unsupported collaboration, assets, generation,
 account/invitation management and delivery remain visibly unavailable. Unit tests
 exercise duplicate actions, frozen submitted drafts, conflict preservation,
 deliberate readback/adoption, failed current reads, stage fences, same-cache view
 replacement and new-scope disposal in both cleanup orders. Reentrant journal
 notifications cannot restore material after disposal. Explicit adoption/rebase can
 review an unknown save; it never clears unknown creation or stage causation fences.
-Browser/server/install/build and native calls are outside this lane's current lease.
+The journal remains in memory within the current QueryClient scope; reload recovery,
+request-bound creation and exact save-causation recovery remain separate work.

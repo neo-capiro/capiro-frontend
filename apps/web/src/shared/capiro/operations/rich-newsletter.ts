@@ -14,7 +14,7 @@ import { defineOperation } from "../contracts";
 import { richNewsletterId } from "./newsletter-routing";
 
 const source =
-  "capirov2@9ffab390ef444d7ea0bf4eb0d68224f810245e25 docs/shared-newsletter-receiving-packed-distribution-20261013/qualified-38fec5c8/HANDOFF.md; docs/contracts/newsletter-outreach-response-routing.md";
+  "capiro-backend@d68024dc62edddb0784f79b4e5ca50335dd1ca89 packages/shared/src/newsletter-receiving.ts; apps/workspace/src/newsletters/newsletter.controller.ts; docs/contracts/newsletter-outreach-response-routing.md";
 
 /** The public package owns receiving shapes; this only adapts the gateway slot. */
 function receiving<T>(parse: (value: unknown) => NewsletterReceiveResult<T>) {
@@ -121,6 +121,20 @@ export const richNewsletterOperations = {
       })
       .strict(),
     response: receiving(parseNewsletterStageReceipt),
+    source,
+  }),
+  "workspace.richNewsletter.stagedRevision": defineOperation({
+    service: "workspace",
+    method: "GET",
+    path: "/newsletters/documents/:id/stages/:revision",
+    request: z
+      .object({
+        params: documentParams.extend({
+          revision: z.number().int().positive(),
+        }),
+      })
+      .strict(),
+    response: receiving(parseNewsletterStageReceipt).nullable(),
     source,
   }),
   "engagement.richNewsletter.stage": defineOperation({

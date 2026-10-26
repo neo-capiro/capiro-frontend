@@ -2,6 +2,7 @@ import {
   parseNewsletterCampaign,
   parseNewsletterOutreachRecord,
   parseNewsletterOutreachStage,
+  parseNewsletterPreview,
   parseNewsletterStageReceipt,
   type NewsletterReceiveIdentity,
   type NewsletterReceiveResult,
@@ -28,7 +29,7 @@ function bound<T>(result: NewsletterReceiveResult<T>): T {
 
 /**
  * Request-bound receipts on the existing authenticated, cancelling transport.
- * No replay, approval, cross-client authority or ambiguous-write recovery here.
+ * No redispatch, approval or cross-client authority here.
  * The feature owner must retain its write fence until deliberate readback review.
  */
 export function createRichNewsletterAdapter(
@@ -69,16 +70,34 @@ export function createRichNewsletterAdapter(
         }),
       );
     },
-    // The response renders saved state but contains no revision/document receipt.
-    preview: (id: string, liveMergeTags: boolean, signal: AbortSignal) =>
-      api.request(
+    async preview(
+      id: string,
+      revision: number,
+      liveMergeTags: boolean,
+      signal: AbortSignal,
+    ) {
+      const value = await api.request(
         "workspace.richNewsletter.preview",
         {
           params: { id },
           body: { liveMergeTags },
         },
         { signal },
-      ),
+      );
+      return bound(parseNewsletterPreview(value, { documentId: id, revision }));
+    },
+    async stagedRevision(id: string, revision: number, signal: AbortSignal) {
+      const value = await api.request(
+        "workspace.richNewsletter.stagedRevision",
+        { params: { id, revision } },
+        { signal },
+      );
+      return value === null
+        ? null
+        : bound(
+            parseNewsletterStageReceipt(value, { documentId: id, revision }),
+          );
+    },
     async stage(id: string, revision: number, signal: AbortSignal) {
       const value = await api.request(
         "workspace.richNewsletter.stage",

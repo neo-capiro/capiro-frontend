@@ -36,6 +36,7 @@ export type DocumentOperation =
   | "detail"
   | "save"
   | "preview"
+  | "stagedRevision"
   | "stage";
 type Interception = (route: Route) => Promise<void>;
 type Observed = {
