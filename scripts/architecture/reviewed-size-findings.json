@@ -1874,11 +1874,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "line": 41,
-    "nonblank": 251,
-    "fingerprint": "9d65adffa424b745f66d680da48031e5cc4817bbacf5df3c3469cc16fb017f91",
-    "reason": "One native Workspace destination compositor. The addition delegates a validated known-ID route to NewsletterReviewEntry with a target/client key; query intent, receiving, editable lifecycle and authorization remain outside this routing function. Existing accepted destination branches are not re-reviewed or moved.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
+    "fingerprint": "d28507cf391a57e6919ea4c9ad426abaaef7ca3d29de733252f9b99711fb97ef",
+    "reason": "The existing route owner adds a distinct catalog branch and two explicit entry actions, preserving Outreach routes.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -2422,9 +2420,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "c32adbb67d893f830df4a9fc79fdd6752e9675b76496fbe9bc843a0778fde4a8",
-    "reason": "One existing saved-document editor composes title/section editing and delegates save, history, export, preview and people management to their established owners. The four-line delta adds one prospect-excluding People mount with currentDraft.id; it adds no people state, transport, policy or save lifetime. Existing keyed ordinary save and the panel's keyed identity preserve retirement. Extracting only this JSX insertion to satisfy the threshold would scatter the same composition responsibility. Exact independent disposition: W3-FE189-COMPOSITION-REVIEW.md at 7c3e95e9e767e4617c25bd87c5d13e63aa37afe6.",
-    "reviewedBy": "m3_scope, independent Wave 3 FE189 host composition reviewer",
+    "fingerprint": "0d8b6312761bd50cbb8833c58733b34cae33291362e8b264e4fe3f111a697273",
+    "reason": "The existing editor adds only a stored Blueprint-version label; save, export and recovery retain their existing owners.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4071,9 +4069,9 @@
     "file": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "fa0039c6058c81938e8ed3e22c95c71c46d0f99f7a5a560520df56ffa3f82ddb",
-    "reason": "This is the existing document operation/schema owner. The bounded newsletter variant joins the manual variant on the same fixed save operation; it does not introduce a serializer service, endpoint, policy decision or unrelated product owner. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "fingerprint": "36fcd6a4f98421cfb5a481cd369060d182e3ba40d33645144ebf503819643427",
+    "reason": "The existing workspace document contract adds only the canonical optional pin input and saved pin projection; unrelated configuration is never round-tripped.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4624,6 +4622,42 @@
     "symbol": "usePickerDialog",
     "fingerprint": "2f4a3aa5a2b422f5d8c193d61ef6c8a4117b2fcc5ede6e88f598414d8e7a9436",
     "reason": "One existing dialog composes picker, upload, management, history and focus transitions; each request and editor insertion retains its existing owner.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintAdoption.tsx",
+    "kind": "function",
+    "symbol": "useBlueprintAdoption",
+    "fingerprint": "c64b690917f69140829c58f38560973fd527ba68dc8ab9afd0cae24735b7c111",
+    "reason": "One mounted create interaction captures the exact published pin, checks current preflight, validates saved readback and keeps uncertain outcomes fenced; existing mutation transport performs the single POST.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDetail.tsx",
+    "kind": "function",
+    "symbol": "BlueprintDetail",
+    "fingerprint": "040cb6b1ab427390d9fdac6fa5c8d91f9f0469d396202b988eb966aa10fe48b6",
+    "reason": "One Blueprint detail view binds selected versions through public receivers and shows truthful metadata and explicit adoption.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintVersions.tsx",
+    "kind": "function",
+    "symbol": "BlueprintHistory",
+    "fingerprint": "3e37397590747b66343792e2ed488387bf749b6c309878441471a64912d8f872",
+    "reason": "One version-history dialog uses only returned adjacent comparisons and native focus/close behavior.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/DocumentTemplateLibrary.tsx",
+    "kind": "function",
+    "symbol": "DocumentTemplateLibrary",
+    "fingerprint": "a3f8dbb5c139103f1c60346315e397006465d23ec10e40c723ad0ac5f342633b",
+    "reason": "One catalog view owns local product/row selection and composes the existing query and adoption lifetimes.",
     "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   }

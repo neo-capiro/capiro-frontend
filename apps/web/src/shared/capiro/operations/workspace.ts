@@ -1,6 +1,7 @@
 import { outreachTemplateOperations } from "./outreach-templates";
 import { workspaceCommentOperations } from "./workspace-comments";
 import { workspaceDocumentOperations } from "./workspace-documents";
+import { workspaceDocumentTemplateOperations } from "./workspace-document-templates";
 import { workspaceExportOperations } from "./workspace-exports";
 import { workspaceHillDayOperations } from "./workspace-hillday";
 import { workspaceProspectOperations } from "./workspace-prospects";
@@ -16,6 +17,7 @@ import { workspaceCollaboratorOperations } from "./workspace-collaborators";
 import { workspaceNotificationOperations } from "./workspace-notifications";
 import { richNewsletterReviewOperations } from "./rich-newsletter-review";
 export const workspaceOperations = {
+  ...workspaceDocumentTemplateOperations,
   ...richNewsletterAssetOperations,
   ...richNewsletterAssetManagementOperations,
   ...richNewsletterReviewOperations,
