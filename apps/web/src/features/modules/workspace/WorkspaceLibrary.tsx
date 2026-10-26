@@ -191,7 +191,7 @@ export function DocumentsLibrary({
       >
         <DataTable
           rows={rows}
-          rowKey={(row) => row.id}
+          rowKey={(row) => `${row.kind}:${row.id}`}
           caption="Workspace documents"
           emptyMessage="No documents match these filters."
           columns={[
