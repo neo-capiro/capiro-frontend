@@ -141,6 +141,10 @@ export async function sendReviewedMail(
     return receipt;
   } catch (error) {
     if (error instanceof MailSendError) throw error;
+    const details =
+      error instanceof ApiError && error.status === 400
+        ? error.details
+        : undefined;
     const rejection = z
       .object({
         error: z.literal("MAIL_SEND_REJECTED"),
@@ -149,14 +153,29 @@ export async function sendReviewedMail(
         state: z.literal("failed"),
         retryable: z.literal(false),
       })
-      .safeParse(error instanceof ApiError ? error.details : undefined);
+      .safeParse(details);
+    const sizePreflight = z
+      .object({
+        error: z.literal("MAIL_PAYLOAD_TOO_LARGE"),
+        code: z.literal("MAIL_PAYLOAD_TOO_LARGE"),
+        phase: z.literal("preflight"),
+        requestKey: z.uuid(),
+        retryable: z.literal(false),
+        intentId: z.undefined().optional(),
+        state: z.undefined().optional(),
+      })
+      .safeParse(details);
     throw new MailSendError(
       error instanceof Error
         ? error.message
         : "Email delivery could not be confirmed.",
       // Access may be revoked after acceptance. HTTP status alone never proves
-      // non-delivery; only the exact intent's durable rejection can release it.
-      !rejection.success || rejection.data.requestKey !== requestKey,
+      // non-delivery. Require this exact request's durable rejection or Core's
+      // typed size refusal before intent creation; every other result stays fenced.
+      !(
+        (rejection.success && rejection.data.requestKey === requestKey) ||
+        (sizePreflight.success && sizePreflight.data.requestKey === requestKey)
+      ),
     );
   }
 }

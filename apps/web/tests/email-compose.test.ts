@@ -1,4 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { QueryClient } from "@tanstack/react-query";
+import {
+  beginMailAttempt,
+  settleMailAttempt,
+  mailAttemptKey,
+} from "../src/features/portfolio/relationships/email/send-attempt";
 import { createApiClient, ApiError } from "../src/shared/portfolio/api/http";
 import {
   copiedRecipients,
@@ -318,6 +324,155 @@ describe("explicit send dispatch", () => {
           () => {},
         ),
       ).rejects.toMatchObject({ uncertain: receiptKey !== requestKey });
+    },
+  );
+  it.each([
+    { label: "exact preflight", status: 400, changes: {}, uncertain: false },
+    {
+      label: "another request",
+      status: 400,
+      changes: { requestKey: other },
+      uncertain: true,
+    },
+    { label: "server uncertainty", status: 503, changes: {}, uncertain: true },
+    {
+      label: "unrelated code",
+      status: 400,
+      changes: { code: "MAIL_SEND_FAILED" },
+      uncertain: true,
+    },
+    {
+      label: "wrong phase",
+      status: 400,
+      changes: { phase: "sending" },
+      uncertain: true,
+    },
+    {
+      label: "contradictory intent",
+      status: 400,
+      changes: { intentId: id },
+      uncertain: true,
+    },
+  ])(
+    "ML-21 recognizes only the canonical size refusal: $label",
+    async ({ status, changes, uncertain }) => {
+      const message =
+        "Reduce the message or attachments, then review the email again.";
+      await expect(
+        sendReviewedMail(
+          createApiClient(async (_url, options) =>
+            options?.method === "POST"
+              ? response(
+                  {
+                    error: "MAIL_PAYLOAD_TOO_LARGE",
+                    code: "MAIL_PAYLOAD_TOO_LARGE",
+                    phase: "preflight",
+                    requestKey,
+                    retryable: false,
+                    message,
+                    ...changes,
+                  },
+                  status,
+                )
+              : response([file]),
+          ),
+          input,
+          () => {},
+        ),
+      ).rejects.toMatchObject({ uncertain, message });
+    },
+  );
+  it.each([400, 503])(
+    "ML-21 defensive durable size refusal requires HTTP 400 (%s)",
+    async (status) => {
+      const message =
+        "Reduce the message or attachments, then review the email again.";
+      await expect(
+        sendReviewedMail(
+          createApiClient(async (_url, options) =>
+            options?.method === "POST"
+              ? response(
+                  {
+                    error: "MAIL_SEND_REJECTED",
+                    code: "MAIL_PAYLOAD_TOO_LARGE",
+                    requestKey,
+                    intentId: id,
+                    state: "failed",
+                    retryable: false,
+                    message,
+                  },
+                  status,
+                )
+              : response([file]),
+          ),
+          input,
+          () => {},
+        ),
+      ).rejects.toMatchObject({ uncertain: status !== 400, message });
+    },
+  );
+  it.each([false, true])(
+    "ML-21 releases its refused composer attempt but preserves a newer uncertain attempt (%s)",
+    async (newer) => {
+      const values = new Map<string, string>();
+      vi.stubGlobal("navigator", {
+        locks: { request: async (_key: string, run: () => unknown) => run() },
+      });
+      vi.stubGlobal("localStorage", {
+        getItem: (key: string) => values.get(key) ?? null,
+        setItem: (key: string, value: string) => values.set(key, value),
+        removeItem: (key: string) => values.delete(key),
+      });
+      const cache = new QueryClient();
+      const key = mailAttemptKey(
+        "synthetic-tenant",
+        "synthetic-actor",
+        clientId,
+        "synthetic-contact",
+      );
+      try {
+        const token = await beginMailAttempt(cache, key, input);
+        const error = await dispatchReviewedMail(
+          createApiClient(async (_url, options) =>
+            options?.method === "POST"
+              ? response(
+                  {
+                    error: "MAIL_PAYLOAD_TOO_LARGE",
+                    code: "MAIL_PAYLOAD_TOO_LARGE",
+                    phase: "preflight",
+                    requestKey: token,
+                    retryable: false,
+                    message: "Reduce the message or attachments.",
+                  },
+                  400,
+                )
+              : response([file]),
+          ),
+          input,
+          () => {},
+          token,
+        ).catch((error: unknown) => error);
+        expect(error).toMatchObject({ uncertain: false });
+        if (newer)
+          values.set([...values.keys()][0]!, JSON.stringify({ token: other }));
+        await settleMailAttempt(cache, key, token, error);
+        if (newer) {
+          expect(cache.getQueryData(key)).toMatchObject({
+            token: other,
+            status: "unknown",
+          });
+          await expect(
+            beginMailAttempt(cache, key, input),
+          ).rejects.toMatchObject({ uncertain: true });
+        } else {
+          expect(cache.getQueryData(key)).toBeNull();
+          expect(values.size).toBe(0);
+          expect(await beginMailAttempt(cache, key, input)).not.toBe(token);
+        }
+      } finally {
+        cache.clear();
+        vi.unstubAllGlobals();
+      }
     },
   );
   it("upload wrapper refuses resumed dispatch after lifetime revocation", async () => {
