@@ -76,10 +76,6 @@ export function SavedRichPreview({
 }) {
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
-  const document = useMemo(
-    () => sanitizePreviewDocument(preview.html),
-    [preview],
-  );
   return (
     <section className={styles.savedView} aria-label="Saved newsletter preview">
       <PageHeader
@@ -111,12 +107,9 @@ export function SavedRichPreview({
               {preview.plainText}
             </pre>
           ) : (
-            <iframe
-              key={document}
+            <SavedNewsletterHtml
+              html={preview.html}
               title="Saved newsletter preview"
-              sandbox=""
-              referrerPolicy="no-referrer"
-              srcDoc={document}
             />
           )}
         </div>
@@ -157,6 +150,26 @@ export function SavedRichPreview({
         </aside>
       </div>
     </section>
+  );
+}
+
+/** Saved HTML uses the same sanitization, image policy and inert context. */
+export function SavedNewsletterHtml({
+  html,
+  title,
+}: {
+  html: string;
+  title: string;
+}) {
+  const document = useMemo(() => sanitizePreviewDocument(html), [html]);
+  return (
+    <iframe
+      key={document}
+      title={title}
+      sandbox=""
+      referrerPolicy="no-referrer"
+      srcDoc={document}
+    />
   );
 }
 
