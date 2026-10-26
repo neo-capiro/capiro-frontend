@@ -4335,5 +4335,14 @@
     "reason": "One mounted Engagement route regression module covers Outreach-only navigation, existing campaign/draft destinations, saved meeting redirects and read filters/current client scope through the existing setupOutreach fixture. The bounded change replaces the old newsletter-placeholder assertion with an actual current-access-refused stage response and verifies the dedicated route still does not expose the generic Outreach table or write. It adds no unrelated owner or new fixture framework; the remaining scenarios are retained. Exact independent disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at d54d585011071cc50e2ba84208a8f7cfd565d8f9.",
     "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "28369e9a7abe09032366e9368210cf2d2a2ef0e00de21c2e77b442f4406508f6",
+    "reason": "One mounted explicit rich-document create, full-save, stage and navigation-only review journey verifies the causal order and absence of writes when following the confirmed-stage action. The steps share one document/stage fixture and cannot be split into independent tests without losing that sequence. Screenshot evidence now uses the existing Playwright per-test output owner. Exact independent final disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at 5f3cfdd1d71e4acbb068ef4f119403867eb1d3e5.",
+    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
