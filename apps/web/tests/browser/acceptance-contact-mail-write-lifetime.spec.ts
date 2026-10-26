@@ -1,7 +1,14 @@
 import { mailListFixture } from "../mail-read-fixture";
 import { installMailReadIdentity } from "./mail-read-fixtures";
 import { expect, test } from "@playwright/test";
-import { clientId, installFixtures, json, person, personId } from "./fixtures";
+import {
+  clientId,
+  installFixtures,
+  json,
+  person,
+  personId,
+  sendingMailbox,
+} from "./fixtures";
 import {
   contactThread,
   controlledRead,
@@ -16,7 +23,22 @@ test("pending send and lost delivery receipt survive current-history loss and sa
 }) => {
   const unexpected = await installFixtures(page);
   await installMailReadIdentity(page);
-  const thread = contactThread();
+  const base = contactThread();
+  const thread = {
+    ...base,
+    messages: base.messages.map((message) => ({
+      ...message,
+      replyContext: {
+        supported: true,
+        operation: "reply",
+        originalMessageId: message.id,
+        originalUpdatedAt: "2026-10-26T20:00:00.000Z",
+        senderConnectionId: sendingMailbox.id,
+        subject: message.subject,
+        to: [{ email: person.email }],
+      },
+    })),
+  };
   const historyRead = await controlledRead(
     page,
     "**/engagement/mail-threads?**",
@@ -47,7 +69,9 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     expect(route.request().postDataJSON()).toMatchObject({
       clientId,
       threadId,
-      subject: "Synthetic pending reply",
+      subject: thread.subject,
+      operation: "reply",
+      originalMessageId: thread.messages[0]!.id,
     });
     await new Promise<void>((resolve) => {
       release = resolve;
@@ -60,12 +84,13 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     .getByRole("button", { name: /Synthetic acceptance briefing/ })
     .click();
   await page
+    .getByLabel("Original message", { exact: true })
+    .selectOption(thread.messages[0]!.id);
+  await page
     .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
     .click();
   const compose = page.getByRole("dialog", { name: "Reply", exact: true });
-  await compose
-    .getByLabel("Subject", { exact: true })
-    .fill("Synthetic pending reply");
+  await expect(compose.getByLabel("Subject", { exact: true })).toBeDisabled();
   await compose
     .getByLabel("Message", { exact: true })
     .fill("Synthetic explicit send regression.");
@@ -96,13 +121,16 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     .getByRole("button", { name: /Synthetic acceptance briefing/ })
     .click();
   await page
+    .getByLabel("Original message", { exact: true })
+    .selectOption(thread.messages[0]!.id);
+  await page
     .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
     .click();
   await expect(
     compose.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();
   await expect(compose.getByLabel("Subject", { exact: true })).toHaveValue(
-    `Re: ${thread.subject}`,
+    thread.subject,
   );
   release!();
   await expect(
@@ -112,6 +140,9 @@ test("pending send and lost delivery receipt survive current-history loss and sa
     compose.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();
   await compose.getByRole("button", { name: "Close", exact: true }).click();
+  await page
+    .getByLabel("Original message", { exact: true })
+    .selectOption(thread.messages[0]!.id);
   await page
     .getByRole("button", { name: `Reply to ${person.name}`, exact: true })
     .click();

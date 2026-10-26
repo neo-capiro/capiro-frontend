@@ -265,7 +265,9 @@ test("explicit mailbox B is shown in review and confirmed by its exact sender re
     }),
   ).toBeVisible();
   await review.getByRole("button", { name: "Send email", exact: true }).click();
-  await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Your mailbox accepted the email.", { exact: true }),
+  ).toBeVisible();
   await expect(
     page.getByText("From: second@example.test", { exact: true }),
   ).toBeVisible();
@@ -404,7 +406,9 @@ test("contact picker and CC/BCC survive explicit review and send exact receipt",
     page.getByText("Bcc: blind@example.test", { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Send email", exact: true }).click();
-  await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Your mailbox accepted the email.", { exact: true }),
+  ).toBeVisible();
   expect(state.sent).toHaveLength(1);
   expect(state.sent[0]).toMatchObject({
     clientId,
@@ -454,7 +458,9 @@ test("upload confirmation and scan readiness stay separate before send", async (
   ).toBeVisible();
   await page.getByRole("button", { name: "Review email", exact: true }).click();
   await page.getByRole("button", { name: "Send email", exact: true }).click();
-  await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Your mailbox accepted the email.", { exact: true }),
+  ).toBeVisible();
   expect(state.sent[0]).toMatchObject({ attachmentIds: [id] });
   expect(state.counts()).toMatchObject({
     prepares: 1,
@@ -561,16 +567,20 @@ test("unmounted actor lifetime refuses delayed upload dispatch", async ({
   await expect.poll(() => state.counts().uploads).toBe(0);
   expect(state.counts().confirms).toBe(0);
 });
-test("reply to foreign-client thread refuses before mail send", async ({
+test("legacy local-thread reply remains review only without native original proof", async ({
   page,
 }) => {
   const state = await setup(page, { replyClient: other });
   await compose(page, true, false);
   await expect(
     page.getByRole("button", { name: "Review email", exact: true }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await expect(
-    page.getByText("The reply thread belongs to another client.").last(),
+    page
+      .getByText(
+        "Native reply is unavailable for this original. Reply from your mailbox.",
+      )
+      .last(),
   ).toBeVisible();
   await expectMailMessage(page, "Draft retained for explicit review.");
   expect(state.sent).toHaveLength(0);
@@ -655,7 +665,9 @@ test("prepared seed requires canonical availability and an explicit selected rec
   ).toBeVisible();
   await page.getByRole("button", { name: "Review email", exact: true }).click();
   await page.getByRole("button", { name: "Send email", exact: true }).click();
-  await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Your mailbox accepted the email.", { exact: true }),
+  ).toBeVisible();
   expect(state.counts()).toMatchObject({
     prepares: 0,
     uploads: 0,

@@ -1,31 +1,61 @@
 import { useSyncExternalStore } from "react";
+import { z } from "zod";
 import { useQueryClient } from "@tanstack/react-query";
 import type { QueryClient, QueryKey } from "@tanstack/react-query";
-import { MailSendError, type SendInput } from "./send";
+import { MailSendError, replyReceiptMatches, type SendInput } from "./send";
 
 type MailAttempt = {
   token: string;
   startedAt: number;
   status: "pending" | "unknown";
   input?: SendInput;
+  replyBinding?: Partial<
+    Pick<
+      SendInput,
+      | "operation"
+      | "threadId"
+      | "originalMessageId"
+      | "originalUpdatedAt"
+      | "senderConnectionId"
+    >
+  >;
   error?: MailSendError;
 };
+const replyBindingSchema = z.object({
+  operation: z.literal("reply"),
+  threadId: z.uuid(),
+  originalMessageId: z.uuid(),
+  originalUpdatedAt: z.iso.datetime({ offset: true }),
+  senderConnectionId: z.uuid(),
+});
 const storageKey = (key: QueryKey) =>
   `capiro-mail-intent:${JSON.stringify(key)}`;
 function restoreAttempt(key: QueryKey, strict = false): MailAttempt | null {
   try {
     const raw = localStorage.getItem(storageKey(key));
     if (!raw) return null;
-    const value = JSON.parse(raw) as { token?: unknown; startedAt?: unknown };
+    const value = JSON.parse(raw) as {
+      token?: unknown;
+      startedAt?: unknown;
+      replyBinding?: unknown;
+    };
     if (
       typeof value.token !== "string" ||
       !/^[0-9a-f-]{36}$/i.test(value.token)
     )
       return null;
+    const replyBinding = replyBindingSchema.safeParse(value.replyBinding);
     return {
       token: value.token,
       startedAt: typeof value.startedAt === "number" ? value.startedAt : 0,
       status: "unknown",
+      ...(value.replyBinding !== undefined
+        ? {
+            replyBinding: replyBinding.success
+              ? replyBinding.data
+              : { operation: "reply" as const },
+          }
+        : {}),
       error: new MailSendError(
         "Checking the original send request. Do not resend while delivery is uncertain.",
         true,
@@ -41,11 +71,15 @@ function persistAttempt(
   attempt: MailAttempt | null,
   expectedToken?: string,
 ) {
-  // Store only the durable request identity. Message bodies and recipient lists stay on the server.
+  // Persist request and reply-origin identity only. Bodies and recipients stay on the server.
   if (attempt)
     localStorage.setItem(
       storageKey(key),
-      JSON.stringify({ token: attempt.token, startedAt: attempt.startedAt }),
+      JSON.stringify({
+        token: attempt.token,
+        startedAt: attempt.startedAt,
+        ...(attempt.replyBinding ? { replyBinding: attempt.replyBinding } : {}),
+      }),
     );
   else if (!expectedToken || restoreAttempt(key)?.token === expectedToken)
     localStorage.removeItem(storageKey(key));
@@ -112,6 +146,17 @@ export async function beginMailAttempt(
       startedAt: Date.now(),
       status: "pending",
       input: structuredClone(input),
+      ...(input.operation === "reply"
+        ? {
+            replyBinding: {
+              operation: input.operation,
+              threadId: input.threadId,
+              originalMessageId: input.originalMessageId,
+              originalUpdatedAt: input.originalUpdatedAt,
+              senderConnectionId: input.senderConnectionId,
+            },
+          }
+        : {}),
     };
     try {
       persistAttempt(key, attempt);
@@ -174,6 +219,11 @@ export async function recoverMailAttempt(
     ok?: boolean;
     threadId?: string;
     messageId?: string;
+    operation?: string;
+    originalMessageId?: string;
+    originalThreadId?: string;
+    originalUpdatedAt?: string;
+    senderConnectionId?: string;
   },
 ) {
   if (row.state === "failed") {
@@ -182,6 +232,29 @@ export async function recoverMailAttempt(
       : null;
   }
   if (row.state === "accepted" && row.ok && row.threadId && row.messageId) {
+    const attempt = cache.getQueryData<MailAttempt | null>(key);
+    const binding =
+      attempt?.input ??
+      attempt?.replyBinding ??
+      restoreAttempt(key)?.replyBinding;
+    if (
+      binding &&
+      (!replyReceiptMatches(row, binding) ||
+        (binding.operation === "reply" &&
+          row.senderConnectionId !== binding.senderConnectionId))
+    )
+      return null;
+    // After reload only the durable request identity is retained. Require complete
+    // origin evidence for a native reply; never infer it from the current composer.
+    if (
+      !attempt?.input &&
+      row.operation === "reply" &&
+      (!row.originalMessageId ||
+        !row.originalThreadId ||
+        !row.originalUpdatedAt ||
+        !row.senderConnectionId)
+    )
+      return null;
     return (await settleMailAttempt(cache, key, row.requestKey))
       ? ("accepted" as const)
       : null;
