@@ -1,0 +1,23 @@
+[
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-presentation.module.css",
+    "sha256": "fdcae4bc3908ea1d50b5ecc4de10b07cdb59d72a4261da6da7c6b18afd2c22ad",
+    "nonblank": 309,
+    "findings": []
+  },
+  {
+    "file": "apps/web/test/browser/workspace-ordinary-presentation.spec.ts",
+    "sha256": "25857311c7fa87f03dbc7455f54d6212af8e5fc68815b85066de533bf2dde00d",
+    "nonblank": 184,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/workspace-ordinary-presentation.spec.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 36,
+        "nonblank": 87,
+        "fingerprint": "71295e38925778fd4a0026da750157856ba69e451d3b695355a4714a4fafd495"
+      }
+    ]
+  }
+]

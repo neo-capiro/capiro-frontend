@@ -9,7 +9,11 @@ import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
 import { workspaceBriefCopyOperations } from "./workspace-brief-copy";
 import { workspaceClientBriefCopyOperations } from "./workspace-client-brief-copy";
+import { workspaceCollaboratorOperations } from "./workspace-collaborators";
+import { workspaceNotificationOperations } from "./workspace-notifications";
 export const workspaceOperations = {
+  ...workspaceCollaboratorOperations,
+  ...workspaceNotificationOperations,
   ...workspaceClientBriefCopyOperations,
   ...workspaceBriefCopyOperations,
   ...richNewsletterOperations,

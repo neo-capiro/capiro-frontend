@@ -8,8 +8,6 @@ import {
   otherId,
   deferred,
 } from "./fixtures";
-const output =
-  "C:/Users/Administrator/Documents/Codex/2026-10-26/wave3-orchestrator-20261026/work/ws19";
 
 test("navigation reads the exact stage; explicit open returns a bound record and reload reads only that record", async ({
   page,
@@ -23,7 +21,10 @@ test("navigation reads the exact stage; explicit open returns a bound record and
   await expect(
     page.getByText("Saved revision 4", { exact: true }),
   ).toBeVisible();
-  await page.screenshot({ path: `${output}/staged.png`, fullPage: true });
+  await page.screenshot({
+    path: test.info().outputPath("staged.png"),
+    fullPage: true,
+  });
   state.openGate = deferred();
   await page
     .getByRole("button", { name: "Open in Engagement", exact: true })
@@ -43,7 +44,10 @@ test("navigation reads the exact stage; explicit open returns a bound record and
   expect(state.requests.find((r) => r.method === "POST")?.input).toEqual({
     params: { id: stageId },
   });
-  await page.screenshot({ path: `${output}/record.png`, fullPage: true });
+  await page.screenshot({
+    path: test.info().outputPath("record.png"),
+    fullPage: true,
+  });
   state.record.status = "sent";
   await page.getByRole("button", { name: "Refresh record" }).click();
   await expect(page.getByText("Status: sent", { exact: true })).toBeVisible();
@@ -92,7 +96,10 @@ test("unconfirmed open removes private preview and offers no retry or new stage"
   await expect(
     page.getByRole("link", { name: "Back to Outreach" }),
   ).toHaveAttribute("href", "/modules/engagement?view=outreach");
-  await page.screenshot({ path: `${output}/unknown.png`, fullPage: true });
+  await page.screenshot({
+    path: test.info().outputPath("unknown.png"),
+    fullPage: true,
+  });
   expect(state.requests.filter((r) => r.method === "POST")).toHaveLength(1);
   expect(state.unexpected).toEqual([]);
 });
@@ -245,7 +252,10 @@ test("invalid links remain inert; narrow keyboard stage and plain text controls 
     ),
   ).toBe(true);
   await open.scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${output}/narrow.png`, fullPage: false });
+  await page.screenshot({
+    path: test.info().outputPath("narrow.png"),
+    fullPage: false,
+  });
   expect(state.requests.every((r) => r.method === "GET")).toBe(true);
   expect(state.unexpected).toEqual([]);
 });

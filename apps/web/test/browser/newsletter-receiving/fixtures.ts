@@ -3,7 +3,7 @@ import {
   defaultNewsletterConfig,
 } from "@capiro/shared/newsletter";
 import { type Page } from "@playwright/test";
-import { onlyLocalRequests } from "../../../../../../test/browser/fixtures";
+import { onlyLocalRequests } from "../fixtures";
 
 export const stageId = "b1000000-0000-4000-8000-000000000001";
 export const recordId = "b1000000-0000-4000-8000-000000000002";

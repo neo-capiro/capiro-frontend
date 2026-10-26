@@ -17,6 +17,7 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
+import presentation from "./hillday-presentation.module.css";
 
 export function mondayOf(date: Date) {
   const monday = new Date(date);
@@ -113,11 +114,13 @@ export function HillDayMeetings({
   clientId,
   onSaved,
   saved,
+  onBack,
 }: {
   id: string;
   clientId: string;
   saved?: Pick<HillDayDocument, "sections" | "weekStart" | "timeZone">;
   onSaved: (meetings: { meetingId: string; title: string }[]) => void;
+  onBack: () => void;
 }) {
   const [week, setWeek] = useState(() =>
     saved?.weekStart
@@ -186,160 +189,184 @@ export function HillDayMeetings({
   }
   const events = calendar.data?.events ?? [];
   return (
-    <div className={styles.form}>
-      <div className={styles.heading}>
-        <div className={styles.actions}>
-          <ActionButton onClick={() => move(-7)}>‹ Previous</ActionButton>
-          <ActionButton onClick={() => setWeek(mondayOf(new Date()))}>
-            This week
-          </ActionButton>
-          <ActionButton onClick={() => move(7)}>Next ›</ActionButton>
-          <span className={styles.footnote}>{week.toLocaleDateString()}</span>
+    <div className={presentation.meetings}>
+      <div className={presentation.meetingBody}>
+        <div className={presentation.meetingHeading}>
+          <h1>Which meetings go in the packet?</h1>
+          <div className={presentation.meetingControls}>
+            <div className={presentation.controlGroups}>
+              <div
+                className={presentation.segmented}
+                role="group"
+                aria-label="Calendar week"
+              >
+                <ActionButton onClick={() => move(-7)}>‹ Previous</ActionButton>
+                <ActionButton onClick={() => setWeek(mondayOf(new Date()))}>
+                  This week
+                </ActionButton>
+                <ActionButton onClick={() => move(7)}>Next ›</ActionButton>
+              </div>
+              <div
+                className={presentation.segmented}
+                role="group"
+                aria-label="Meeting picker views"
+              >
+                {["calendar", "list", "directory"].map((mode) => (
+                  <button
+                    key={mode}
+                    aria-pressed={view === mode}
+                    onClick={() => setView(mode)}
+                  >
+                    {mode[0]!.toUpperCase() + mode.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <span className={presentation.calendarSummary}>
+              Week of {week.toLocaleDateString()} ·{" "}
+              {selected.length + manual.length} selected
+              {manual.length > 0 && ` · ${manual.length} from the Directory`}
+            </span>
+          </div>
         </div>
-        <div
-          className={styles.pills}
-          role="group"
-          aria-label="Meeting picker views"
-        >
-          {["calendar", "list", "directory"].map((mode) => (
-            <button
-              key={mode}
-              aria-pressed={view === mode}
-              className={view === mode ? styles.active : ""}
-              onClick={() => setView(mode)}
-            >
-              {mode[0]!.toUpperCase() + mode.slice(1)}
-            </button>
+        {calendar.data?.sources
+          .filter((source) => source.status !== "ok")
+          .map((source) => (
+            <p className={styles.notice} key={source.source}>
+              {source.source}: {source.detail ?? source.status}
+            </p>
           ))}
-        </div>
-      </div>
-      {calendar.data?.sources
-        .filter((source) => source.status !== "ok")
-        .map((source) => (
-          <p className={styles.notice} key={source.source}>
-            {source.source}: {source.detail ?? source.status}
+        {view === "directory" ? (
+          <DirectoryMeetings
+            id={id}
+            onAdded={(meeting) =>
+              setManual((previous) => [
+                ...previous.filter(
+                  (value) => value.meetingId !== meeting.meetingId,
+                ),
+                meeting,
+              ])
+            }
+          />
+        ) : (
+          <StatusPanel
+            loading={calendar.loading}
+            error={calendar.error}
+            onRetry={calendar.reload}
+          >
+            {view === "calendar" ? (
+              <div className={styles.calendar}>
+                {Array.from({ length: 5 }, (_, index) => {
+                  const date = new Date(week);
+                  date.setDate(date.getDate() + index);
+                  const dayEvents = events.filter(
+                    (event) =>
+                      new Date(event.startsAt).toDateString() ===
+                      date.toDateString(),
+                  );
+                  return (
+                    <section key={index} className={styles.day}>
+                      <h3>
+                        {date.toLocaleDateString([], {
+                          weekday: "short",
+                          day: "numeric",
+                        })}
+                      </h3>
+                      {dayEvents.map((event) => (
+                        <article key={event.eventId} className={styles.event}>
+                          <label>
+                            <input
+                              type="checkbox"
+                              className={presentation.checkbox}
+                              checked={selected.includes(event.eventId)}
+                              onChange={() => toggle(event.eventId)}
+                              aria-label={`Include ${event.subject}`}
+                            />
+                            {time(event)}
+                          </label>
+                          <strong>{event.subject}</strong>
+                          <span>
+                            {event.location ?? "Location to be confirmed"}
+                          </span>
+                        </article>
+                      ))}
+                      {!dayEvents.length && <p>No meetings</p>}
+                    </section>
+                  );
+                })}
+              </div>
+            ) : (
+              <DataTable
+                rows={events}
+                rowKey={(event) => event.eventId}
+                caption="Client calendar meetings"
+                columns={[
+                  {
+                    key: "select",
+                    label: "INCLUDE",
+                    render: (event) => (
+                      <input
+                        type="checkbox"
+                        className={presentation.checkbox}
+                        checked={selected.includes(event.eventId)}
+                        onChange={() => toggle(event.eventId)}
+                        aria-label={`Include ${event.subject}`}
+                      />
+                    ),
+                  },
+                  {
+                    key: "title",
+                    label: "MEETING",
+                    render: (event) => event.subject,
+                  },
+                  {
+                    key: "time",
+                    label: "TIME",
+                    render: (event) => time(event),
+                  },
+                  {
+                    key: "location",
+                    label: "LOCATION",
+                    render: (event) => event.location ?? "To be confirmed",
+                  },
+                ]}
+              />
+            )}
+          </StatusPanel>
+        )}
+        {manual.map((meeting) => (
+          <p key={meeting.meetingId}>
+            <Badge>Directory</Badge> {meeting.title}
           </p>
         ))}
-      {view === "directory" ? (
-        <DirectoryMeetings
-          id={id}
-          onAdded={(meeting) =>
-            setManual((previous) => [
-              ...previous.filter(
-                (value) => value.meetingId !== meeting.meetingId,
-              ),
-              meeting,
-            ])
-          }
-        />
-      ) : (
-        <StatusPanel
-          loading={calendar.loading}
-          error={calendar.error}
-          onRetry={calendar.reload}
-        >
-          {view === "calendar" ? (
-            <div className={styles.calendar}>
-              {Array.from({ length: 5 }, (_, index) => {
-                const date = new Date(week);
-                date.setDate(date.getDate() + index);
-                const dayEvents = events.filter(
-                  (event) =>
-                    new Date(event.startsAt).toDateString() ===
-                    date.toDateString(),
-                );
-                return (
-                  <section key={index} className={styles.day}>
-                    <h3>
-                      {date.toLocaleDateString([], {
-                        weekday: "short",
-                        day: "numeric",
-                      })}
-                    </h3>
-                    {dayEvents.map((event) => (
-                      <article key={event.eventId} className={styles.event}>
-                        <label>
-                          <input
-                            type="checkbox"
-                            checked={selected.includes(event.eventId)}
-                            onChange={() => toggle(event.eventId)}
-                            aria-label={`Include ${event.subject}`}
-                          />
-                          {time(event)}
-                        </label>
-                        <strong>{event.subject}</strong>
-                        <span>
-                          {event.location ?? "Location to be confirmed"}
-                        </span>
-                      </article>
-                    ))}
-                    {!dayEvents.length && <p>No meetings</p>}
-                  </section>
-                );
-              })}
-            </div>
-          ) : (
-            <DataTable
-              rows={events}
-              rowKey={(event) => event.eventId}
-              caption="Client calendar meetings"
-              columns={[
-                {
-                  key: "select",
-                  label: "INCLUDE",
-                  render: (event) => (
-                    <input
-                      type="checkbox"
-                      checked={selected.includes(event.eventId)}
-                      onChange={() => toggle(event.eventId)}
-                      aria-label={`Include ${event.subject}`}
-                    />
-                  ),
-                },
-                {
-                  key: "title",
-                  label: "MEETING",
-                  render: (event) => event.subject,
-                },
-                { key: "time", label: "TIME", render: (event) => time(event) },
-                {
-                  key: "location",
-                  label: "LOCATION",
-                  render: (event) => event.location ?? "To be confirmed",
-                },
-              ]}
-            />
-          )}
-        </StatusPanel>
-      )}
-      {manual.map((meeting) => (
-        <p key={meeting.meetingId}>
-          <Badge>Directory</Badge> {meeting.title}
-        </p>
-      ))}
-      {skipped.length > 0 && (
-        <p role="alert" className={styles.notice}>
-          {skipped.length} selected calendar events became unavailable. Refresh
-          the calendar and review the selection.
-        </p>
-      )}
-      {save.error && (
-        <p role="alert" className={styles.error}>
-          {save.error.message}
-        </p>
-      )}
-      <div className={styles.actions}>
-        <span className={styles.footnote}>
-          {selected.length + manual.length} meetings selected
-        </span>
-        <ActionButton
-          primary
-          disabled={save.pending || (!selected.length && !manual.length)}
-          onClick={persist}
-        >
-          {save.pending ? "Saving…" : "Resolve attendees →"}
-        </ActionButton>
+        {skipped.length > 0 && (
+          <p role="alert" className={styles.notice}>
+            {skipped.length} selected calendar events became unavailable.
+            Refresh the calendar and review the selection.
+          </p>
+        )}
+        {save.error && (
+          <p role="alert" className={styles.error}>
+            {save.error.message}
+          </p>
+        )}
       </div>
+      <footer className={presentation.wizardFooter}>
+        <p>
+          <span>{selected.length + manual.length} meetings selected</span>
+          {manual.length > 0 && ` (${manual.length} from the Directory)`}
+        </p>
+        <div className={styles.actions}>
+          <ActionButton onClick={onBack}>Back</ActionButton>
+          <ActionButton
+            primary
+            disabled={save.pending || (!selected.length && !manual.length)}
+            onClick={persist}
+          >
+            {save.pending ? "Saving…" : "Resolve attendees →"}
+          </ActionButton>
+        </div>
+      </footer>
     </div>
   );
 }

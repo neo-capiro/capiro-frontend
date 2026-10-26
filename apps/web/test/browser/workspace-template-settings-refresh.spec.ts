@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { expect, type Page } from "@playwright/test";
 import { test } from "./runtime-observed-test";
 import { onlyLocalRequests, operationFixtures } from "./fixtures";
@@ -55,6 +56,18 @@ async function fixture(
   outcome: "success" | "denied" | "unknown" = "success",
 ) {
   await onlyLocalRequests(page);
+  if (process.env.CAPIRO_BROWSER_TEST_DEV === "1")
+    await page.route("**/Geist-Variable.woff2*", (route) =>
+      route.fulfill({
+        path: fileURLToPath(
+          new URL(
+            "../../../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
+            import.meta.url,
+          ),
+        ),
+        contentType: "font/woff2",
+      }),
+    );
   const rows = new Map([
     [firstId, template(firstId, originalName)],
     [secondId, template(secondId, secondName)],
@@ -125,7 +138,7 @@ async function fixture(
   return { state, release: gate.resolve };
 }
 const dialog = (page: Page) =>
-  page.getByRole("dialog", { name: "Template settings", exact: true });
+  page.getByRole("dialog", { name: "Edit template", exact: true });
 const card = (page: Page, name: string) =>
   page.getByRole("article", { includeHidden: true }).filter({
     has: page.getByRole("heading", { name, exact: true, includeHidden: true }),
@@ -149,11 +162,80 @@ async function edit(page: Page) {
   await dialog(page)
     .getByLabel("Campaign type", { exact: true })
     .fill("Revised type");
-  await dialog(page)
-    .getByRole("button", { name: "Save settings", exact: true })
-    .click();
+  await dialog(page).getByRole("button", { name: "Save", exact: true }).click();
   await expect(dialog(page).getByLabel("Name", { exact: true })).toBeDisabled();
 }
+
+test("template presentation keeps compact settings, dismissal and retained actions", async ({
+  page,
+}, testInfo) => {
+  const { state } = await fixture(page);
+  await page.goto(studioUrl);
+  await expect(card(page, originalName)).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  expect(
+    await page.evaluate(() => document.fonts.check("14px TestGeist")),
+  ).toBe(true);
+  await expect(
+    page.getByRole("navigation", { name: "Workspace views" }),
+  ).toContainText("Template Studio");
+  const disabled = card(page, originalName).getByRole("button", {
+    name: "Publish before use",
+  });
+  await expect(disabled).toBeDisabled();
+  expect(
+    await disabled.evaluate((el) => getComputedStyle(el).backgroundColor),
+  ).toBe("rgb(245, 245, 244)");
+  await page.screenshot({
+    path: testInfo.outputPath("template-studio-desktop.png"),
+    fullPage: true,
+  });
+  await page.getByRole("button", { name: "More template actions" }).click();
+  await page
+    .getByRole("menuitem", { name: "Save campaign as template" })
+    .click();
+  await expect(
+    page.getByRole("dialog", {
+      name: "Save campaign as template",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page.keyboard.press("Escape");
+  await settings(page);
+  await expect(dialog(page).getByRole("heading")).toHaveCount(1);
+  expect((await dialog(page).boundingBox())!.width).toBe(580);
+  expect((await dialog(page).boundingBox())!.y).toBe(80);
+  await page.screenshot({
+    path: testInfo.outputPath("template-settings-desktop.png"),
+    fullPage: true,
+  });
+  await dialog(page)
+    .getByLabel("Name", { exact: true })
+    .fill("Unsaved synthetic name");
+  await dialog(page)
+    .getByRole("button", { name: "Cancel", exact: true })
+    .click();
+  await expect(dialog(page)).toHaveCount(0);
+  expect(state.writes).toBe(0);
+  await settings(page);
+  await expect(dialog(page).getByLabel("Name", { exact: true })).toHaveValue(
+    originalName,
+  );
+  await page.keyboard.press("Escape");
+  await expect(dialog(page)).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await settings(page);
+  expect((await dialog(page).boundingBox())!.width).toBe(358);
+  expect(
+    await dialog(page).evaluate((el) => el.scrollWidth <= el.clientWidth),
+  ).toBe(true);
+  await page.screenshot({
+    path: testInfo.outputPath("template-settings-narrow.png"),
+    fullPage: false,
+  });
+  await page.keyboard.press("Escape");
+  expect(state.writes).toBe(0);
+});
 
 test("acknowledged metadata save refreshes detail and outer card without manual refresh", async ({
   page,
@@ -163,9 +245,11 @@ test("acknowledged metadata save refreshes detail and outer card without manual 
   await settings(page);
   await edit(page);
   release();
-  await expect(
-    dialog(page).getByRole("heading", { name: changedName, exact: true }),
-  ).toBeVisible();
+  await expect.poll(() => state.details.length).toBe(2);
+  await expect(dialog(page).getByLabel("Name", { exact: true })).toBeEnabled();
+  await expect(dialog(page).getByLabel("Name", { exact: true })).toHaveValue(
+    changedName,
+  );
   await dialog(page).getByRole("button", { name: "Close dialog" }).click();
   await expect(card(page, changedName)).toBeVisible();
   await expect(card(page, changedName)).toHaveCount(1);

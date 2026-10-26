@@ -1,0 +1,20 @@
+{
+  "scope": "Touched TypeScript roots and dependency graph; no emit or build",
+  "headCount": 1,
+  "baseCount": 1,
+  "introduced": [],
+  "head": [
+    {
+      "file": "apps/web/src/shared/capiro/operations/workspace-newsletter-staging.ts",
+      "code": 2339,
+      "message": "Property 'projectionVersion' does not exist on type '{ draftId: string; versionId: string; authorId: string; authorKind: string; savedAt: string; snapshot: unknown; snapshotJson: string; clientId: string | null; contentSkeleton: { subject: string; body: string; slots: never[]; }; }'."
+    }
+  ],
+  "base": [
+    {
+      "file": "apps/web/src/shared/capiro/operations/workspace-newsletter-staging.ts",
+      "code": 2339,
+      "message": "Property 'projectionVersion' does not exist on type '{ draftId: string; versionId: string; authorId: string; authorKind: string; savedAt: string; snapshot: unknown; snapshotJson: string; clientId: string | null; contentSkeleton: { subject: string; body: string; slots: never[]; }; }'."
+    }
+  ]
+}

@@ -130,6 +130,7 @@ function DocumentEditor({
   const [preview, setPreview] = useState(false);
   const [deliver, setDeliver] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const me = useCapiroQuery("me.read", {});
   const update = useCapiroMutation("workspace.hillday.update");
   const quality = useCapiroQuery("workspace.hillday.quality", {
     params: { id: document.id },
@@ -174,7 +175,13 @@ function DocumentEditor({
           <ActionButton onClick={() => setPreview(true)}>
             Preview as client
           </ActionButton>
-          <ActionButton onClick={() => setExporting(true)}>
+          <ActionButton
+            disabled={me.loading}
+            onClick={() => {
+              setExporting(true);
+              if (me.error) me.reload();
+            }}
+          >
             Export PDF
           </ActionButton>
           <ActionButton
@@ -186,6 +193,12 @@ function DocumentEditor({
           </ActionButton>
         </div>
       </header>
+      {exporting && me.error && (
+        <p role="alert" className={styles.error}>
+          Current export access could not be verified. Choose Export PDF to
+          retry.
+        </p>
+      )}
       {document.status === "delivered" && (
         <p className={styles.success}>
           This document is marked delivered. You can still export the displayed
@@ -333,9 +346,15 @@ function DocumentEditor({
           </p>
         )}
       </Modal>
-      {exporting && (
+      {exporting && me.data && !me.loading && !me.error && (
         <HillDayExport
-          document={document}
+          scope={{
+            tenantId: me.data.tenant.id,
+            userId: me.data.user.id,
+            actorId: me.data.user.clerkUserId,
+            documentId: document.id,
+            clientId: document.client.id,
+          }}
           onClose={() => setExporting(false)}
         />
       )}

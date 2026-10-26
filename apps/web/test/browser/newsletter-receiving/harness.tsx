@@ -1,12 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { usePathname } from "next/navigation";
-import { ApplicationBoundary } from "../../../../../shared/session/ApplicationBoundary";
-import { RequireSession } from "../../../../../shared/session/SessionContext";
-import { EngagementScreen } from "../../EngagementScreen";
-import { WorkspaceScreen } from "../../../workspace/WorkspaceScreen";
-import "../../../../../app/globals.css";
-import "../../../../../../test/browser/font.css";
+import { ApplicationBoundary } from "../../../src/shared/session/ApplicationBoundary";
+import { RequireSession } from "../../../src/shared/session/SessionContext";
+import { EngagementScreen } from "../../../src/features/modules/engagement/EngagementScreen";
+import { WorkspaceScreen } from "../../../src/features/modules/workspace/WorkspaceScreen";
+import "../../../src/app/globals.css";
+import "../font.css";
 
 function ReceivingRoute() {
   return usePathname().startsWith("/modules/workspace") ? (
