@@ -230,7 +230,12 @@ export async function readTemplateIntent(
   }
   const input = c.operation === "save-draft" ? c.input.metadata : c.input;
   let templateId = "params" in input ? input.params.templateId : undefined;
-  let clientId = record.metadataAcknowledged?.clientId ?? c.accessClientId;
+  // A pending use belongs to its submitted campaign client, even for a private
+  // or firm template. Older journal records may retain a different template hint.
+  let clientId =
+    c.operation === "workspace.template.use"
+      ? c.input.body.clientId
+      : (record.metadataAcknowledged?.clientId ?? c.accessClientId);
   if (record.metadataAcknowledged?.clientId === null) clientId = undefined;
   if (
     c.operation === "workspace.template.metadata" &&

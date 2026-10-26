@@ -203,6 +203,26 @@ describe("template command input and result boundaries", () => {
       query: { clientId: id(5) },
     });
   });
+  it("uses the immutable submitted client for pending use even when the retained template hint differs", async () => {
+    const record = intent("workspace.template.use");
+    if (record.command.operation !== "workspace.template.use")
+      throw new Error("Expected use fixture");
+    record.command.input.body.clientId = id(5);
+    const original = structuredClone(record);
+    const request = vi.fn().mockResolvedValue({ template: base });
+    await readTemplateIntent(
+      { request } as unknown as TemplateApi,
+      record,
+      new AbortController().signal,
+      () => {},
+    );
+    expect(request.mock.calls[0]![1]).toEqual({
+      params: { templateId: id(1) },
+      query: { clientId: id(5) },
+    });
+    expect(record).toEqual(original);
+    expect(record.command.accessClientId).toBe(id(4));
+  });
   it("rejects mismatched current reads before exposing retained inputs", async () => {
     const request = vi
       .fn()

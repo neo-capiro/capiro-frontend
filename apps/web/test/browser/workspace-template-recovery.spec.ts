@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import axe from "axe-core";
 import { test } from "./runtime-observed-test";
+import { clientId } from "./next-modules-fixtures";
 import {
   deferred,
   id,
@@ -9,6 +10,85 @@ import {
   reviewWizard,
   setup,
 } from "./template-recovery-fixtures";
+
+test("pending private-template use hides original inputs after submitted client access is revoked", async ({
+  page,
+}) => {
+  const f = await setup(page);
+  let denied = false;
+  const reads: Array<{
+    params: { templateId: string };
+    query?: { clientId?: string };
+  }> = [];
+  await page.route("**/api/capiro/workspace.template?*", (route) => {
+    const input = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input") ?? "{}",
+    );
+    reads.push(input);
+    if (denied && input.query?.clientId === clientId)
+      return route.fulfill({
+        status: 403,
+        json: { message: "Selected campaign client access denied" },
+      });
+    return route.fallback();
+  });
+  await f.write("use", (route, _input, count) =>
+    count === 1 ? route.abort("failed") : route.fulfill({ json: f.useResult }),
+  );
+  await f.open();
+  expect(f.template.clientId).toBeNull();
+  await page.getByRole("button", { name: "Use template", exact: true }).click();
+  await page.getByLabel("Client", { exact: true }).click();
+  await page
+    .getByRole("option", { name: "Current Aerospace", exact: true })
+    .click();
+  await page
+    .getByLabel("Campaign title", { exact: true })
+    .fill("Retained client B campaign");
+  await page
+    .getByRole("button", { name: "Apply template", exact: true })
+    .click();
+  await expect
+    .poll(() => f.calls.filter((c) => c.key === "use").length)
+    .toBe(1);
+  const beforeRemount = reads.length;
+  denied = true;
+  await page.reload();
+  await expect(panel(page)).toContainText(
+    "Selected campaign client access denied",
+  );
+  expect(reads.slice(beforeRemount)).toContainEqual({
+    params: { templateId: id(1) },
+    query: { clientId },
+  });
+  await expect(
+    page.getByText("Retained client B campaign", { exact: false }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Recover original command" }),
+  ).toHaveCount(0);
+  expect(f.calls.filter((c) => c.key === "use")).toHaveLength(1);
+  denied = false;
+  await panel(page)
+    .getByRole("button", { name: "Recheck recovery access" })
+    .click();
+  await panel(page).getByText("Submitted inputs", { exact: true }).click();
+  await expect(panel(page)).toContainText("Retained client B campaign");
+  await panel(page)
+    .getByRole("button", { name: "Recover original command" })
+    .click();
+  await page
+    .getByRole("dialog")
+    .getByRole("button", { name: "Close dialog" })
+    .click();
+  await expect(panel(page)).toContainText("Template command completed");
+  const writes = f.calls.filter((c) => c.key === "use");
+  expect(writes).toHaveLength(2);
+  expect(writes[1]!.input).toEqual(writes[0]!.input);
+  expect(writes[0]!.input).toMatchObject({
+    body: { clientId, title: "Retained client B campaign" },
+  });
+});
 
 test("lost use retains original inputs across remount and replays original version after publication", async ({
   page,
@@ -54,20 +134,20 @@ test("lost use retains original inputs across remount and replays original versi
   await panel(page)
     .getByRole("button", { name: "Recover original command" })
     .click();
-  await expect(panel(page)).toContainText(
-    "From template · Synthetic recovery template · v1",
-  );
+  const receiptDialog = page.getByRole("dialog", {
+    name: "Synthetic recovery template · v1",
+    exact: true,
+  });
+  await expect(receiptDialog).toBeVisible();
   const writes = f.calls.filter((c) => c.key === "use");
   expect(writes).toHaveLength(2);
   expect(writes[1]!.input).toEqual(writes[0]!.input);
   expect(f.calls.some((c) => c.key === "provenance")).toBe(true);
   await page.reload();
-  await expect(panel(page)).toContainText("Original applied topic");
+  await expect(receiptDialog).toContainText("Original applied topic");
   await page.addScriptTag({ content: axe.source });
   const audit = await page.evaluate(() =>
-    (window as unknown as { axe: typeof axe }).axe.run(
-      'section[aria-label="Template command recovery"]',
-    ),
+    (window as unknown as { axe: typeof axe }).axe.run('[role="dialog"]'),
   );
   await info.attach("recovery-axe", {
     body: JSON.stringify(audit),
@@ -78,7 +158,7 @@ test("lost use retains original inputs across remount and replays original versi
       (v) => v.impact === "serious" || v.impact === "critical",
     ),
   ).toEqual([]);
-  await panel(page).screenshot({
+  await receiptDialog.screenshot({
     path: info.outputPath("recovery-desktop.png"),
   });
   await page.setViewportSize({ width: 390, height: 844 });
@@ -87,7 +167,7 @@ test("lost use retains original inputs across remount and replays original versi
       page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
     )
     .toBe(true);
-  await panel(page).screenshot({
+  await receiptDialog.screenshot({
     path: info.outputPath("recovery-narrow.png"),
   });
   expect(f.calls.filter((c) => c.key === "use")).toHaveLength(2);
@@ -104,6 +184,122 @@ test("lost use retains original inputs across remount and replays original versi
     page.getByRole("button", { name: "Recover original command" }),
   ).toHaveCount(0);
   expect(f.calls.filter((c) => c.key === "use")).toHaveLength(2);
+});
+
+test("canonical receipt uses the Modules dialog and preserves all four categories at desktop and narrow widths", async ({
+  page,
+}, info) => {
+  const f = await setup(page);
+  Object.assign(f.provenance.receiptJsonb, {
+    inherited: [
+      { field: "topic", label: "Topic", detail: "Original applied topic" },
+      { field: "tone", label: "Tone", detail: "Concise and clear" },
+      { field: "length", label: "Length", detail: "Short" },
+    ],
+    refreshed: [
+      {
+        field: "recipients",
+        label: "Recipients",
+        detail: "Current synthetic directory",
+      },
+    ],
+    unresolved: [
+      { field: "purpose", label: "Campaign purpose", detail: "Choose in Plan" },
+    ],
+    unavailable: [
+      {
+        field: "source",
+        label: "Optional source",
+        detail: "No saved source available",
+      },
+    ],
+  });
+  await f.write("use", (route) => route.fulfill({ json: f.useResult }));
+  await f.open();
+  await page.getByRole("button", { name: "Use template", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Apply template", exact: true })
+    .click();
+  const dialog = page.getByRole("dialog", {
+    name: "Synthetic recovery template · v1",
+    exact: true,
+  });
+  await expect(dialog).toBeVisible();
+  await expect(page.getByRole("dialog")).toHaveCount(1);
+  expect((await dialog.boundingBox())?.width).toBe(640);
+  const receipt = dialog.getByRole("region", {
+    name: "Campaign template provenance",
+  });
+  await expect(receipt.locator("[data-category]")).toHaveCount(4);
+  await expect(receipt).toContainText("No saved source available");
+  const geometry = await receipt.evaluate((element) => {
+    const category = element.querySelector('[data-category="inherited"]')!;
+    const row = category.querySelector("dl > div")!;
+    return {
+      inset: getComputedStyle(element).paddingLeft,
+      label: getComputedStyle(category.querySelector("h3")!).fontSize,
+      rowFont: getComputedStyle(row).fontSize,
+      radius: getComputedStyle(row).borderRadius,
+      colors: [...element.querySelectorAll("[data-category]")].map(
+        (section) =>
+          getComputedStyle(section.querySelector("dl > div")!).backgroundColor,
+      ),
+    };
+  });
+  expect(geometry).toMatchObject({
+    inset: "28px",
+    label: "11px",
+    rowFont: "13px",
+    radius: "8px",
+  });
+  expect(geometry.colors[0]).toBe(geometry.colors[1]);
+  expect(geometry.colors[0]).toBe(geometry.colors[3]);
+  expect(geometry.colors[2]).not.toBe(geometry.colors[0]);
+  const continueLink = dialog.getByRole("link", {
+    name: "Continue to campaign",
+    exact: true,
+  });
+  await expect(continueLink).toHaveAttribute(
+    "href",
+    `/modules/engagement?session=${id(5)}`,
+  );
+  expect(
+    await continueLink.evaluate(
+      (element) => getComputedStyle(element).textDecorationLine,
+    ),
+  ).toBe("none");
+  await page.addScriptTag({ content: axe.source });
+  const audit = await page.evaluate(() =>
+    (window as unknown as { axe: typeof axe }).axe.run('[role="dialog"]'),
+  );
+  await info.attach("receipt-axe", {
+    body: JSON.stringify(audit),
+    contentType: "application/json",
+  });
+  expect(
+    audit.violations.filter(
+      (v) => v.impact === "serious" || v.impact === "critical",
+    ),
+  ).toEqual([]);
+  await dialog.screenshot({ path: info.outputPath("receipt-desktop.png") });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect
+    .poll(() =>
+      page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    )
+    .toBe(true);
+  await expect(continueLink).toBeVisible();
+  await dialog.screenshot({ path: info.outputPath("receipt-narrow.png") });
+  await dialog.getByRole("button", { name: "Close dialog" }).click();
+  const beforeReopen = f.calls.filter((c) => c.key === "provenance").length;
+  await panel(page)
+    .getByRole("button", { name: "View campaign receipt" })
+    .click();
+  await expect(dialog).toBeVisible();
+  expect(f.calls.filter((c) => c.key === "provenance").length).toBeGreaterThan(
+    beforeReopen,
+  );
+  expect(f.calls.filter((c) => c.key === "use")).toHaveLength(1);
 });
 
 test("publish retains acknowledged draft pointer through concurrent changes and exact replay", async ({

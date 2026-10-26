@@ -16,11 +16,15 @@ import { TemplateSettings } from "./TemplateSettings";
 import presentation from "./template-presentation.module.css";
 import { TemplateHistory } from "./TemplateHistory";
 import { useTemplateCommands } from "./useTemplateCommands";
-import { TemplateProvenance } from "./TemplateProvenance";
-import { outreachTemplateOperations } from "../../../../shared/capiro/operations/outreach-templates";
 import historyStyles from "./template-history.module.css";
 
-function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
+function UseTemplate({
+  detail,
+  onApplied,
+}: {
+  detail: OutreachTemplateDetail;
+  onApplied: () => void;
+}) {
   const version = detail.versions.find(
     (value) => value.id === detail.template.publishedVersionId,
   );
@@ -40,9 +44,8 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
     submitted?.variableValues ?? {},
   );
   async function use() {
-    await commands.submit({
+    const completed = await commands.submit({
       operation: "workspace.template.use",
-      accessClientId: detail.template.clientId ?? undefined,
       input: {
         params: { templateId: detail.template.id },
         body: {
@@ -53,20 +56,7 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
         },
       },
     });
-  }
-  if (
-    commands.record?.command.operation === "workspace.template.use" &&
-    commands.record.result !== undefined
-  ) {
-    const receipt = outreachTemplateOperations[
-      "workspace.template.use"
-    ].response.parse(commands.record.result);
-    return (
-      <TemplateProvenance
-        sessionId={receipt.sessionId}
-        expectedApplicationId={receipt.applicationId}
-      />
-    );
+    if (completed?.result !== undefined) onApplied();
   }
   return (
     <div className={styles.form}>
@@ -228,7 +218,7 @@ export function TemplateDetails({
           <div className={mode === "settings" ? undefined : styles.form}>
             {mode === "use" && <h3>{query.data.template.name}</h3>}
             {mode === "use" ? (
-              <UseTemplate detail={query.data} />
+              <UseTemplate detail={query.data} onApplied={onClose} />
             ) : mode === "settings" ? (
               <TemplateSettings
                 detail={query.data}
