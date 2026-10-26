@@ -12,6 +12,7 @@ import { TemplateStudio } from "./templates/TemplateStudio";
 import styles from "./workspace.module.css";
 import { WorkspaceDraft } from "./WorkspaceDraft";
 import { WorkspaceShares } from "./WorkspaceShares";
+import { WorkspaceInvitationEntry } from "./collaboration/WorkspaceInvitationInbox";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
@@ -170,6 +171,7 @@ export function WorkspaceScreen() {
           <h1>Workspace</h1>
         </div>
         <div className={styles.actions}>
+          <WorkspaceInvitationEntry key={clientId ?? "general"} />
           <ActionButton
             onClick={() =>
               router.push(
