@@ -2414,9 +2414,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "2114418c39d3315017c0392e0f94635b0a232d48794a2c5576f2dc3f2931dd14",
-    "reason": "DraftEditor retains its existing presentation role and composes distinct save owners. The corrected fallback renders currentDraft.documents after an explicit current read; it does not introduce transport, storage or authority. This final disposition replaces the earlier193-line pre171 composition record, which does not apply to the new body. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
-    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "fingerprint": "b67d2721bb177cef6b2ad189a91f0762cd0cfc8c4b2c08457e68a97efa7e05ed",
+    "reason": "Accept exact reviewed DraftEditor: it composes one saved-document editing view from the existing ordinary/prospect save owners, preview, association, export and history components. The delta rearranges only the ordinary header/export/qualification presentation and preserves currentDraft, state keys, mutation gates and prospect behavior. No persistence, authorization or export receiver moves into this component; the existing feature boundaries remain explicit.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4163,6 +4163,69 @@
     "fingerprint": "23d13552fcc95982059bea3835b792dcff3e167b105a4e5d2d005eb30023da87",
     "reason": "One metadata form with existing save owner, fields and footer; no second transaction or lifetime owner. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
     "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-export/OrdinaryDraftExport.tsx",
+    "kind": "function",
+    "symbol": "OrdinaryDraftExport",
+    "fingerprint": "231649bffc19e16cc2c11a2e07ff82cc45b7e6900a3c155abe93f53b6f2e3087",
+    "reason": "Accept exact reviewed OrdinaryDraftExport: one saved-export control owns selected part and local pending/error presentation while delegating scope/part validation and execution to the existing ordinary-export seam and typed binary client. This change adds an accessible useId/Field binding and card/action layout; exportSaved and its mounted-lifetime logic are unchanged. The newly crossed function threshold does not add another effect owner.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/OrdinaryDraftSave.tsx",
+    "kind": "function",
+    "symbol": "OrdinarySaveRecovery",
+    "fingerprint": "c0a2343ca23be713fe4bd5075d67fab067ea527fb2fddd0f0e9cc3e10d3db362",
+    "reason": "Accept exact reviewed OrdinarySaveRecovery: this is the shared rendering surface for ordinary/newsletter save state supplied by the existing save hook. It groups truthful messages, explicit read/replay actions and separate readback/adopt/rebase controls without owning requests or reconciliation. The new pending-aware heading derives from existing state and all action gates remain unchanged.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/version-history/VersionHistory.tsx",
+    "kind": "function",
+    "symbol": "VersionHistory",
+    "fingerprint": "0816b6a849b4414e101578af66f8405a72d6cee44b1000640e69ae9a486a09a9",
+    "reason": "Accept exact reviewed VersionHistory: one read-only dialog owns opening and exact selected/comparison IDs, while the existing query owner handles cancellation/current access and admitSavedVersions handles response identity. Native row controls replace tabs, reset comparison on a new selection, and feed separate detail/comparison renderers. No write, restore, receipt mutation or independent fetch/lifetime owner is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/version-history/VersionHistory.tsx",
+    "kind": "function",
+    "symbol": "SavedVersionComparison",
+    "fingerprint": "4445748028b5a13eff28373cf1641e012f7737cc81e1f3f09acd70c02ecc3b64",
+    "reason": "Accept exact reviewed SavedVersionComparison: it renders one pair of admitted saved snapshots. Chronological ordering, diffing and whole-snapshot difference qualification remain in existing pure helpers; this component only presents title/tab/section changes and the preserved unknown-content qualification. The card and accessible arrow changes introduce no new algorithm or domain owner.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-ordinary-presentation.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "71295e38925778fd4a0026da750157856ba69e451d3b695355a4714a4fafd495",
+    "reason": "Accept exact reviewed 81-line parameterized scenario: the sequence verifies one ordinary-document journey at desktop and narrow widths, from saved export selection through a lost save acknowledgement, explicit current read and exact original replay. Its causal assertions keep readback distinct from settlement. Shared font/capture/axe/containment operations are already factored into the evidence helper; the scenario owns no application behavior. Narrow correction reviewed at 3aab5229: two computed-color assertions now verify foreground action labels and muted explanation within this same scenario; no new responsibility or behavior owner is added.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-version-history.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "86d40e9326ca1097c88c2a92ebf9012b34366f204a81f3a66b18a624dda6648a",
+    "reason": "Accept exact reviewed 438-line browser module: one synthetic saved-history fixture supports seven related mounted cases for exact snapshots, comparison, keyboard/motion/scroll, parent refusal, access denial and stale/session lifetime cleanup. Presentation evidence uses the adjacent helper; all tests concern the same read-only feature. No unrelated scenario family or production helper is accumulated here.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/tests/workspace-version-history.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2dea7bb682a01f11815b1a832e0e8ce133bbe67da79e187c4ccbd74bfd0942c5",
+    "reason": "Accept exact reviewed 570-line unit module after reviewing its existing and changed contents: 24 cases cover the same saved-history admission/diff/projection and consuming component contract. Its fixtures/mocks are local to that feature. Obsolete Panel/Tabs mocks are removed; native-row mocks preserve selection and negative assertions. The changed fingerprint is independently reviewed, not accepted merely because the prior file already exceeded the threshold.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   }
 ]

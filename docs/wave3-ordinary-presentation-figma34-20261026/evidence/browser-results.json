@@ -1,0 +1,652 @@
+{
+  "stats": {
+    "uniqueCases": 42,
+    "passed": 42,
+    "failed": 0
+  },
+  "runs": [
+    {
+      "stage": "corrected 42-case focused run",
+      "stats": {
+        "startTime": "2026-10-26T06:16:58.407Z",
+        "duration": 241216.903,
+        "expected": 42,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "stage": "two affected history cases after final arrow accessibility correction",
+      "stats": {
+        "startTime": "2026-10-26T06:22:16.175Z",
+        "duration": 20378.015,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "tests": [
+    {
+      "title": "existing newsletter saves title and full body in one atomic request and preserves unrelated fields",
+      "status": "passed",
+      "durationMs": 7852,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter stale baseline requires explicit rebase while preserving title subject and body",
+      "status": "passed",
+      "durationMs": 5288,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter lost committed response survives reload and replays the exact full body",
+      "status": "passed",
+      "durationMs": 9701,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter tabs keep independent body edits through collision and positive settlement",
+      "status": "passed",
+      "durationMs": 10346,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter current access loss hides pending content and cannot resend",
+      "status": "passed",
+      "durationMs": 5326,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter actor replacement rejects a delayed receipt and clears the old edit",
+      "status": "passed",
+      "durationMs": 4465,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter client reassignment hides retained content before replay",
+      "status": "passed",
+      "durationMs": 4567,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter held-client binding carries edits made during association into explicit rebase",
+      "status": "passed",
+      "durationMs": 4715,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter undo and redo remain local and Save and exit waits for confirmation",
+      "status": "passed",
+      "durationMs": 4641,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "newsletter adoption after a bound replay uses the separately reviewed newer body",
+      "status": "passed",
+      "durationMs": 4677,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "a pending submission is not labelled as an unconfirmed outcome",
+      "status": "passed",
+      "durationMs": 4526,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "ordinary presentation contains title, export and uncertain readback at 1440px",
+      "status": "passed",
+      "durationMs": 5415,
+      "axe": [
+        {
+          "name": "export-1440-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 16,
+          "inapplicable": 73
+        },
+        {
+          "name": "recovery-1440-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 16,
+          "inapplicable": 73
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "newsletter reuses contained recovery presentation at 1440px",
+      "status": "passed",
+      "durationMs": 4861,
+      "axe": [
+        {
+          "name": "newsletter-1440-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 17,
+          "inapplicable": 72
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "ordinary presentation contains title, export and uncertain readback at 390px",
+      "status": "passed",
+      "durationMs": 6064,
+      "axe": [
+        {
+          "name": "export-390-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 16,
+          "inapplicable": 73
+        },
+        {
+          "name": "recovery-390-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 16,
+          "inapplicable": 73
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "newsletter reuses contained recovery presentation at 390px",
+      "status": "passed",
+      "durationMs": 4795,
+      "axe": [
+        {
+          "name": "newsletter-390-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 17,
+          "inapplicable": 72
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "missing journal cannot release a known unknown save through Read current saved content or recovery retry",
+      "status": "passed",
+      "durationMs": 4938,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "missing journal cannot release a known unknown save through Retry exact original save or recovery retry",
+      "status": "passed",
+      "durationMs": 5019,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "two-tab collision preserves independent edits with acknowledged disposition",
+      "status": "passed",
+      "durationMs": 11915,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "two-tab collision preserves independent edits with missing disposition",
+      "status": "passed",
+      "durationMs": 10971,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "adopting current state renders its changed read-only document name and body",
+      "status": "passed",
+      "durationMs": 4700,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "one save and duplicate click emit one atomic POST; pending input is frozen and unknown fields survive",
+      "status": "passed",
+      "durationMs": 4300,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "stale baseline preserves edits and requires deliberate rebase before a new save",
+      "status": "passed",
+      "durationMs": 4641,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "definite stale conflict can adopt current content without writing retained edits",
+      "status": "passed",
+      "durationMs": 4322,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "lost committed response survives remount; current read alone cannot settle it and exact replay creates no duplicate",
+      "status": "passed",
+      "durationMs": 8666,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "replayed receipt remains distinct from a newer saved revision",
+      "status": "passed",
+      "durationMs": 4814,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "mismatched receipt never shows Saved or unlocks adopt/rebase",
+      "status": "passed",
+      "durationMs": 4215,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "revoked current access hides retained content and cannot resend",
+      "status": "passed",
+      "durationMs": 4679,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "actor replacement and delayed completion cannot apply or expose the old pending editor",
+      "status": "passed",
+      "durationMs": 4590,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "WORKSPACE_SAVE_REQUEST_CONFLICT never permits adopt/rebase or a new save",
+      "status": "passed",
+      "durationMs": 4326,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "WORKSPACE_SAVE_CLIENT_CONFLICT never permits adopt/rebase or a new save",
+      "status": "passed",
+      "durationMs": 4288,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "UNKNOWN_CONFLICT never permits adopt/rebase or a new save",
+      "status": "passed",
+      "durationMs": 4245,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "client move hides unknown retained edits before any exact replay dispatch",
+      "status": "passed",
+      "durationMs": 4769,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "supported formatted section survives the mounted atomic save without body round-trip",
+      "status": "passed",
+      "durationMs": 4874,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "explicit client association preserves unsaved edits and requires deliberate rebase before atomic save",
+      "status": "passed",
+      "durationMs": 4939,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "failed journal reservation cannot dispatch and recovery retry preserves edits and their original baseline",
+      "status": "passed",
+      "durationMs": 4836,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "a foreign parent saved version refuses detail display",
+      "status": "passed",
+      "durationMs": 4248,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "a denied current-access read clears saved history detail",
+      "status": "passed",
+      "durationMs": 4226,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "a late response after close never overwrites the current saved history",
+      "status": "passed",
+      "durationMs": 4926,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "already populated saved detail clears when the next read is denied",
+      "status": "passed",
+      "durationMs": 4874,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "already populated saved detail clears when a later read expires the session",
+      "status": "passed",
+      "durationMs": 4921,
+      "axe": [],
+      "errors": []
+    },
+    {
+      "title": "saved history reads exact versions with keyboard selection, compare and no writes",
+      "status": "passed",
+      "durationMs": 12455,
+      "axe": [
+        {
+          "name": "history-desktop-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "tags": [
+                "cat.color",
+                "wcag2aa",
+                "wcag143",
+                "TTv5",
+                "TT13.c",
+                "EN-301-549",
+                "EN-9.1.4.3",
+                "ACT",
+                "RGAAv4",
+                "RGAA-3.2.1"
+              ],
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+              "nodes": [
+                {
+                  "any": [
+                    {
+                      "id": "color-contrast",
+                      "data": {
+                        "messageKey": "nonBmp"
+                      },
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Element content contains only non-text characters"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<span role=\"img\" aria-label=\"changed to\">→</span>",
+                  "target": [
+                    "span[role=\"img\"]"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+                }
+              ]
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "tags": [
+                "cat.semantics",
+                "wcag21a",
+                "wcag253",
+                "EN-301-549",
+                "EN-9.2.5.3",
+                "RGAAv4",
+                "RGAA-6.1.5"
+              ],
+              "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+              "nodes": [
+                {
+                  "any": [
+                    {
+                      "id": "label-content-name-mismatch",
+                      "data": null,
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Unable to determine if the visible text is part of the accessible name"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<button type=\"button\" data-slot=\"dialog-close\" class=\"_close_1ci7e_333\" aria-label=\"Close dialog\">×</button>",
+                  "target": [
+                    "._close_1ci7e_333"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Unable to determine if the visible text is part of the accessible name"
+                }
+              ]
+            }
+          ],
+          "passes": 29,
+          "inapplicable": 60
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "narrow history keeps long saved content scrollable, restores keyboard focus and respects reduced motion",
+      "status": "passed",
+      "durationMs": 5422,
+      "axe": [
+        {
+          "name": "history-narrow-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "tags": [
+                "cat.color",
+                "wcag2aa",
+                "wcag143",
+                "TTv5",
+                "TT13.c",
+                "EN-301-549",
+                "EN-9.1.4.3",
+                "ACT",
+                "RGAAv4",
+                "RGAA-3.2.1"
+              ],
+              "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+              "nodes": [
+                {
+                  "any": [
+                    {
+                      "id": "color-contrast",
+                      "data": {
+                        "contrastRatio": 0,
+                        "fontSize": "9.0pt (12px)",
+                        "fontWeight": "normal",
+                        "messageKey": "elmPartiallyObscuring",
+                        "expectedContrastRatio": "4.5:1"
+                      },
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Element's background color could not be determined because it partially overlaps other elements"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<p class=\"_qualifier_9qhww_29\">Read-only saved versions. Opening or comparing never changes the document.</p>",
+                  "target": [
+                    "._modalBody_1ci7e_326 > ._qualifier_9qhww_29"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+                },
+                {
+                  "any": [
+                    {
+                      "id": "color-contrast",
+                      "data": {
+                        "messageKey": "nonBmp"
+                      },
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Element content contains only non-text characters"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<span role=\"img\" aria-label=\"changed to\">→</span>",
+                  "target": [
+                    "span[role=\"img\"]"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+                },
+                {
+                  "any": [
+                    {
+                      "id": "color-contrast",
+                      "data": {
+                        "contrastRatio": 0,
+                        "fontSize": "9.8pt (13px)",
+                        "fontWeight": "normal",
+                        "messageKey": "elmPartiallyObscuring",
+                        "expectedContrastRatio": "4.5:1"
+                      },
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Element's background color could not be determined because it partially overlaps other elements"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<li>Tabs with new content: Alpha</li>",
+                  "target": [
+                    "._versionComparison_9qhww_246 > ul > li:nth-child(2)"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+                },
+                {
+                  "any": [
+                    {
+                      "id": "color-contrast",
+                      "data": {
+                        "contrastRatio": 0,
+                        "fontSize": "9.8pt (13px)",
+                        "fontWeight": "normal",
+                        "messageKey": "elmPartiallyObscuring",
+                        "expectedContrastRatio": "4.5:1"
+                      },
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Element's background color could not be determined because it partially overlaps other elements"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<li>Sections changed: Body</li>",
+                  "target": [
+                    "li:nth-child(3)"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+                }
+              ]
+            },
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "tags": [
+                "cat.semantics",
+                "wcag21a",
+                "wcag253",
+                "EN-301-549",
+                "EN-9.2.5.3",
+                "RGAAv4",
+                "RGAA-6.1.5"
+              ],
+              "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+              "nodes": [
+                {
+                  "any": [
+                    {
+                      "id": "label-content-name-mismatch",
+                      "data": null,
+                      "relatedNodes": [],
+                      "impact": "serious",
+                      "message": "Unable to determine if the visible text is part of the accessible name"
+                    }
+                  ],
+                  "all": [],
+                  "none": [],
+                  "impact": "serious",
+                  "html": "<button type=\"button\" data-slot=\"dialog-close\" class=\"_close_1ci7e_333\" aria-label=\"Close dialog\">×</button>",
+                  "target": [
+                    "._close_1ci7e_333"
+                  ],
+                  "failureSummary": "Fix any of the following:\n  Unable to determine if the visible text is part of the accessible name"
+                }
+              ]
+            }
+          ],
+          "passes": 29,
+          "inapplicable": 60
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "captures": [
+    "ordinary-export-selection-1440.png",
+    "ordinary-header-export-1440.png",
+    "ordinary-unconfirmed-1440.png",
+    "ordinary-readback-1440.png",
+    "newsletter-unconfirmed-1440.png",
+    "newsletter-readback-1440.png",
+    "ordinary-export-selection-390.png",
+    "ordinary-header-export-390.png",
+    "ordinary-unconfirmed-390.png",
+    "ordinary-readback-390.png",
+    "newsletter-unconfirmed-390.png",
+    "newsletter-readback-390.png",
+    "history-desktop-list.png",
+    "history-desktop-selected.png",
+    "history-desktop-compare.png",
+    "history-narrow-scroll.png",
+    "history-narrow-compare.png"
+  ],
+  "scope": "Synthetic local Vite development harness; selected owned regions use all default axe rules. No live provider or authorization qualification."
+}
