@@ -27,6 +27,7 @@ export const photo = {
 export const videoUrl = "https://youtu.be/AbCdef_12-3";
 export const proposedText =
   "Synthetic <script>window.providerCode=true</script> draft";
+const imageUrls = [photo.thumbnailUrl, asset().url, asset(secondId).url];
 const available = { available: true, reason: null };
 const unavailable = {
   available: false,
@@ -93,12 +94,13 @@ export async function providerFixture(page: Page) {
     files: number;
   }[] = [];
   const queued = new Map<Operation, ((route: Route) => Promise<void>)[]>();
-  await page.route(photo.thumbnailUrl, (route) =>
-    route.fulfill({
-      contentType: "image/svg+xml",
-      body: '<svg xmlns="http://www.w3.org/2000/svg" width="628" height="353"><rect width="628" height="353" fill="#e6eeef"/><text x="40" y="176" font-size="28">Synthetic provider image</text></svg>',
-    }),
-  );
+  for (const imageUrl of imageUrls)
+    await page.route(imageUrl, (route) =>
+      route.fulfill({
+        contentType: "image/svg+xml",
+        body: '<svg xmlns="http://www.w3.org/2000/svg" width="628" height="353"><rect width="628" height="353" fill="#e6eeef"/><text x="40" y="176" font-size="28">Synthetic provider image</text></svg>',
+      }),
+    );
   await page.route(
     "**/api/capiro/workspace.richNewsletter.*",
     async (route) => {
@@ -233,7 +235,7 @@ export async function expectNoProviderSideEffects(
   expect(fixture.assets.document.control.dialogs).toEqual([]);
   expect(
     fixture.assets.document.control.remote.filter(
-      (url) => url !== photo.thumbnailUrl,
+      (url) => !imageUrls.includes(url),
     ),
   ).toEqual([]);
 }

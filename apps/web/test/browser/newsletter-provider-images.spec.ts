@@ -136,6 +136,9 @@ test("four saved refinements require fresh current details before explicit inser
   await expect(
     page.getByText(/Historical image; Insert is unavailable/),
   ).toBeVisible();
+  await expect(
+    page.getByRole("img", { name: "Preview of Synthetic policy image" }),
+  ).toBeVisible();
   await expect(button(page, "Insert current variant")).toBeDisabled();
   await button(page, "Review variant 4").click();
   await expect(button(page, "Insert current variant")).toBeEnabled();

@@ -8,6 +8,7 @@ import { ActionButton, Panel } from "../../../../../shared/module-ui";
 import { useCapiroQuery } from "../../../../../shared/capiro/queries";
 import { boundAssetDetails } from "../assets/use-asset-picker";
 import { assetName } from "../assets/AssetLibrary";
+import { ProposalImage } from "./ProposalImage";
 import styles from "../assets/assets.module.css";
 
 export function RefinementResult({
@@ -61,12 +62,18 @@ export function RefinementResult({
           <p role="alert">Variant details could not be verified.</p>
         )}
         {asset && (
-          <p>
-            {assetName(asset.name)} · Revision {asset.revisionNumber} ·{" "}
-            {asset.currentRevision
-              ? "Current image"
-              : "Historical image; Insert is unavailable"}
-          </p>
+          <>
+            <ProposalImage
+              url={asset.url}
+              label={`Preview of ${assetName(asset.name)}`}
+            />
+            <p>
+              {assetName(asset.name)} · Revision {asset.revisionNumber} ·{" "}
+              {asset.currentRevision
+                ? "Current image"
+                : "Historical image; Insert is unavailable"}
+            </p>
+          </>
         )}
         <div className={styles.actions}>
           <ActionButton disabled={!selectedId} onClick={detail.reload}>

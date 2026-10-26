@@ -15,6 +15,7 @@ import {
 import { useCapiroMutation } from "../../../../../shared/capiro/queries";
 import { useProviderProposal } from "./use-provider-proposal";
 import { ProviderDialog, ProviderNotice } from "./ProviderDialog";
+import { ProposalImage } from "./ProposalImage";
 import styles from "../assets/assets.module.css";
 
 export function VideoThumbnailTool({
@@ -111,6 +112,10 @@ export function VideoThumbnailTool({
             <div className={styles.fields}>
               {proposal.result ? (
                 <>
+                  <ProposalImage
+                    url={proposal.result.imageUrl}
+                    label="Proposed video thumbnail"
+                  />
                   <Field label="Video title" htmlFor={`${id}-title`}>
                     <output id={`${id}-title`} className={styles.value}>
                       {proposal.result.title || "No title supplied"}

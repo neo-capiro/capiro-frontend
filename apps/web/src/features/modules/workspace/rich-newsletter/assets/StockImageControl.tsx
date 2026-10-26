@@ -13,6 +13,7 @@ import {
 } from "../../../../../shared/module-ui";
 import { useStockImages, type StockImagesState } from "./use-stock-images";
 import { assetName } from "./AssetLibrary";
+import { ProposalImage } from "../providers/ProposalImage";
 import styles from "./assets.module.css";
 import stockStyles from "./stock-images.module.css";
 
@@ -340,6 +341,10 @@ function ImportedStockImage({ view }: { view: StockImagesState }) {
           )}
           {view.details && (
             <>
+              <ProposalImage
+                url={view.details.url}
+                label="Imported image preview"
+              />
               <Field label="Imported name" htmlFor={`${id}-name`}>
                 <output id={`${id}-name`} className={styles.value}>
                   {assetName(view.details.name)}

@@ -1,6 +1,6 @@
 "use client";
 import { useId, useState } from "react";
-import { Switch } from "@base-ui/react/switch";
+import { Switch } from "radix-ui";
 import {
   parseNewsletterImageRefinement,
   type NewsletterBlock,

@@ -1,6 +1,6 @@
 "use client";
 import { useId, useState } from "react";
-import { Switch } from "@base-ui/react/switch";
+import { Switch } from "radix-ui";
 import type {
   NewsletterBlock,
   NewsletterLinkProposal,
@@ -17,6 +17,7 @@ import {
 import { useCapiroMutation } from "../../../../../shared/capiro/queries";
 import { useProviderProposal } from "./use-provider-proposal";
 import { ProviderDialog, ProviderNotice } from "./ProviderDialog";
+import { ProposalImage } from "./ProposalImage";
 import styles from "../assets/assets.module.css";
 import toolStyles from "./provider-tools.module.css";
 
@@ -163,6 +164,12 @@ export function LinkPreviewTool({
             <div className={styles.fields}>
               {proposal.result ? (
                 <>
+                  {proposal.result.imageUrl && (
+                    <ProposalImage
+                      url={proposal.result.imageUrl}
+                      label="Proposed link preview image"
+                    />
+                  )}
                   <Field label="Final destination" htmlFor={`${id}-final`}>
                     <output id={`${id}-final`} className={styles.value}>
                       {proposal.result.sourceUrl}

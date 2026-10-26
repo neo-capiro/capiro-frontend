@@ -32,6 +32,9 @@ test("video thumbnail binds the canonical source and is adopted separately with 
   await expect(page.getByLabel("Video source", { exact: true })).toHaveText(
     newsletterVideoSource(videoUrl)!.url,
   );
+  await expect(
+    page.getByRole("img", { name: "Proposed video thumbnail" }),
+  ).toBeVisible();
   expect(fixture.calls("videoThumbnail")[0]?.input).toEqual({
     params: { id: documentId },
     body: { url: videoUrl },
