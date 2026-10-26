@@ -367,7 +367,16 @@ export function MeriLiveConversation({
           />
         </>
       }
-      files={<ConversationPanels port={port} turn={turn} earlier={earlier} />}
+      files={
+        <ConversationPanels
+          port={port}
+          turn={turn}
+          earlier={earlier}
+          onDecisionSettled={(runId) => {
+            if (runId === port.context.runId) run.refreshAfterDecision();
+          }}
+        />
+      }
     />
   );
 }

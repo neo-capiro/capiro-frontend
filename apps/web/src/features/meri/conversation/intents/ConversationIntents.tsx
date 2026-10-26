@@ -263,20 +263,21 @@ export function ConversationIntents({
   access,
   scope,
   refreshKey,
+  onDecisionSettled,
   children,
 }: {
   access: IntentsAccess;
   scope: IntentScope;
   /** Changes when the conversation shows new approval or file activity, so the list is read again. */
   refreshKey?: string;
+  onDecisionSettled?: ((runId: string) => void) | undefined;
   /** Reuse this current, authorized list for adjacent file presentation. */
   children?: (items: readonly IntentsItem[]) => ReactNode;
 }) {
-  const state = useConversationIntents(
-    access,
-    scope,
-    refreshKey === undefined ? {} : { refreshKey },
-  );
+  const state = useConversationIntents(access, scope, {
+    ...(refreshKey === undefined ? {} : { refreshKey }),
+    ...(onDecisionSettled ? { onDecisionSettled } : {}),
+  });
   return (
     <>
       <section className={styles.panel} aria-labelledby="conversation-actions">
