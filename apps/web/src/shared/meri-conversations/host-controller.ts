@@ -16,6 +16,10 @@ import {
 } from "./session";
 import type { ConversationSessionReceipt } from "@capiro/meri-contracts/conversation-session";
 import {
+  createFeedbackAccess,
+  type FeedbackAccess,
+} from "../meri-feedback/access";
+import {
   createConversationReads,
   type ConversationReads,
 } from "./current-reads";
@@ -27,6 +31,7 @@ export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
   /** Prepared-action list and decisions, checked by the public receiver under the same session lifetime. */
   readonly intents: IntentsAccess;
   readonly reads: ConversationReads;
+  readonly feedback: FeedbackAccess;
 };
 export type ConversationAccount = Readonly<{
   tenantId: string;
@@ -62,7 +67,8 @@ export class ConversationHostController extends SessionLifetimeController<
         return (
           snapshot.submit === "pending" ||
           snapshot.cancel === "pending" ||
-          snapshot.status === "loading"
+          snapshot.status === "loading" ||
+          port.feedback.pending()
         );
       },
       createPort: ({ session, signal, ...lifetime }) => {
@@ -87,6 +93,15 @@ export class ConversationHostController extends SessionLifetimeController<
               : "x-meri-action-session",
           }),
           context: session.context,
+          feedback: createFeedbackAccess({
+            credential: session.credential,
+            context: session.context,
+            lifetime: signal,
+            isCurrent: lifetime.isCurrent,
+            onAccessLost: lifetime.onAccessLost,
+            fetcher,
+            origin,
+          }),
           reads: createConversationReads(
             session.context,
             signal,
