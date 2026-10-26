@@ -7,11 +7,13 @@ import { workspaceProspectOperations } from "./workspace-prospects";
 import { newsletterStagingOperations } from "./workspace-newsletter-staging";
 import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
+import { richNewsletterAssetOperations } from "./rich-newsletter-assets";
 import { workspaceBriefCopyOperations } from "./workspace-brief-copy";
 import { workspaceClientBriefCopyOperations } from "./workspace-client-brief-copy";
 import { workspaceCollaboratorOperations } from "./workspace-collaborators";
 import { workspaceNotificationOperations } from "./workspace-notifications";
 export const workspaceOperations = {
+  ...richNewsletterAssetOperations,
   ...workspaceCollaboratorOperations,
   ...workspaceNotificationOperations,
   ...workspaceClientBriefCopyOperations,

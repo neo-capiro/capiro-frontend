@@ -1,0 +1,129 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: min(760px, calc(100vw - 32px));
+  max-width: none;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.modal > header,
+.modal > footer {
+  flex-shrink: 0;
+  background: var(--card);
+}
+.modal > header > div {
+  min-width: 0;
+}
+.modal > header > button {
+  flex-shrink: 0;
+}
+.modal [data-slot="modal-body"] {
+  min-height: 0;
+  overflow-y: auto;
+}
+.value {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 12px;
+  border: 1px solid var(--input);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.modal > header {
+  padding: 24px;
+}
+.modal > footer {
+  flex-wrap: wrap;
+  padding: 20px 24px;
+}
+.modal button {
+  border-radius: 10px;
+  font-size: 13px;
+}
+.modal > header h2 {
+  font-size: 24px;
+  line-height: 32px;
+}
+.stack,
+.fields {
+  display: grid;
+  gap: 12px;
+}
+.panel > section {
+  padding: 16px;
+  box-shadow: none;
+}
+.panel > section > header {
+  margin-bottom: 12px;
+}
+.fields input {
+  font-size: 13px;
+}
+.items {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 12px 0;
+  list-style: none;
+}
+.item {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  padding: 12px;
+  background: var(--muted, #f5f5f4);
+  border-radius: 8px;
+}
+.item h3 {
+  font-size: 13px;
+  font-weight: 500;
+}
+.item p,
+.page,
+.file {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.item h3,
+.item p,
+.file {
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.page,
+.file {
+  margin: 12px 0;
+}
+.notice {
+  padding: 14px;
+  background: #f3eee2;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 12px 0;
+}
+.modal button {
+  max-width: 100%;
+  white-space: normal;
+  height: auto;
+  min-height: 36px;
+}
+@media (max-width: 600px) {
+  .modal > header,
+  .modal > footer,
+  .modal [data-slot="modal-body"] {
+    padding: 16px;
+  }
+  .modal {
+    max-height: calc(100dvh - 32px);
+  }
+}
