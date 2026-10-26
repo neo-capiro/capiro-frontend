@@ -101,6 +101,56 @@ export const resolution = z.object({
     }),
   ),
 });
+// PR158 also accepts compact offsets. Insert a colon for ISO validation only;
+// the received string is preserved, with no browser-local conversion.
+const meetingFactsInstant = z
+  .string()
+  .max(64)
+  .refine(
+    (value) =>
+      z.iso
+        .datetime({ offset: true })
+        .safeParse(value.replace(/([+-]\d{2})(\d{2})$/, "$1:$2")).success &&
+      Number.isFinite(Date.parse(value)),
+  );
+const meetingFactsZone = z
+  .string()
+  .min(1)
+  .max(64)
+  .refine((value) => {
+    try {
+      new Intl.DateTimeFormat("en-US", { timeZone: value });
+      return true;
+    } catch {
+      return false;
+    }
+  });
+const savedMeetingFacts = z
+  .object({
+    subject: z
+      .string()
+      .max(240)
+      .refine((value) => value.trim().length > 0),
+    startsAt: meetingFactsInstant,
+    endsAt: meetingFactsInstant,
+    timeZone: meetingFactsZone,
+    location: z.string().max(240).nullable(),
+  })
+  .strict()
+  .refine((value) => Date.parse(value.endsAt) > Date.parse(value.startsAt));
+/** GET-only stored facts. Manual additions are not capped by the 80-invite picker. */
+export const resolutionRead = resolution.extend({
+  meetingFacts: z.array(
+    z
+      .object({
+        meetingId: z.string().min(1),
+        eventId: z.string(),
+        facts: savedMeetingFacts.nullable(),
+      })
+      .strict()
+      .refine((row) => row.facts === null || row.eventId.length > 0),
+  ),
+});
 export const carrySelection = z
   .object({
     committees: z.boolean(),
@@ -279,4 +329,5 @@ export type WorkspaceClient = z.infer<typeof workspaceClient>;
 export type HillDayDocument = z.infer<typeof hillDayDocument>;
 export type HillDayEvent = z.infer<typeof calendarEvent>;
 export type HillDayResolution = z.infer<typeof resolution>;
+export type HillDayResolutionRead = z.infer<typeof resolutionRead>;
 export type HillDayContext = z.infer<typeof meetingContext>;
