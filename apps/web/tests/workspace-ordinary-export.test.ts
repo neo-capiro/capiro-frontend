@@ -1,3 +1,4 @@
+import { testIdentity } from "../test/browser/fixtures";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -88,9 +89,13 @@ vi.mock("../src/shared/capiro/CapiroBoundary", () => ({
   useCapiro: () => h.api,
 }));
 
+vi.mock(
+  "../src/features/modules/workspace/ordinary-save/OrdinaryDraftSave",
+  () => import("./workspace-ordinary-save-host-stub"),
+);
 vi.mock("../src/shared/capiro/queries", () => ({
   useCapiroQuery: (key: string) => ({
-    data: key === "workspace.draft" ? h.current : {},
+    data: key === "workspace.draft" ? h.current : testIdentity,
     loading: false,
     reload: h.reload,
   }),

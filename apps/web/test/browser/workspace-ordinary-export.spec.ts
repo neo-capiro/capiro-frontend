@@ -86,6 +86,17 @@ async function fixture(page: Page, options: FixtureOptions = {}) {
       nextCursor: null,
     },
     "workspace.draft.versions": [],
+    // The export witness needs the newly authoritative editor state read;
+    // this opaque fixture hash is never used for a save in these tests.
+    "workspace.draft.state": () => ({
+      schemaVersion: 1,
+      tenantId: testIdentity.tenant.id,
+      draftId: draft.id,
+      clientId,
+      stateHash: "a".repeat(64),
+      hashFormat: "workspace-ordinary-draft-state-v1",
+      draft: ordinary(),
+    }),
   });
   // Own the draft read so a later (export) re-read can be moved, denied or
   // withheld without disturbing the initial mount read.
