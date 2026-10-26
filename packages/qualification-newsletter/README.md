@@ -5,12 +5,12 @@ This workspace consumes the active immutable vendor artifact through public
 code owns parsing; this workspace owns synthetic public import, declaration and
 browser compatibility checks. No frontend runtime imports this test workspace.
 
-The active input is `capiro-shared-0.0.0-d68024dc-e92d6c6129f7.tgz`, built once by
-Release from Core `d68024dc62edddb0784f79b4e5ca50335dd1ca89`, SHA256
-`e92d6c6129f7c82b62b71086b81cbba6e0f57b786b41ba023017ca77b1c5c72e`, 693,445 bytes.
+The active input is `capiro-shared-0.0.0-3b4937ad-40ac9d745261.tgz`, built once by
+Release from Core `3b4937ad2f5d15b85ea1c4474ed48b4a39e2f0ac`, SHA256
+`40ac9d74526123da69c321a537a8ec842960ee226acb53e41c0c8d5d65563598`, 696,105 bytes.
 `PUBLIC-ENTRY-BINDINGS.json` binds its twelve active JavaScript/declaration files
 and preserves the complete previous artifact binding under `previousBinding`.
-Vendor manifests retain both older tarballs and their immutable provenance.
+Vendor manifests retain all older tarballs and their immutable provenance.
 
 `fixtures/receiving-positive.ts` is an active frontend adaptation: the bound
 preview supplies expected document and saved revision; unbound content cannot
@@ -41,9 +41,10 @@ npm run test:newsletter:browser -- /tmp/new-newsletter-browser-proof
 
 Both existing CLIs support `--help`, require a new evidence output directory and
 preserve failures. Browser execution needs Root's separate allocation. Release
-already qualified this exact artifact's six-module newsletter graph,116renderer
-and130receiving cases in actual Chromium; reuse that evidence for unchanged
-closures. The original Windows graph guard failed on path separators; Release
+qualified the prior d680 artifact's six-module newsletter graph,116renderer
+and130receiving cases in actual Chromium. Those exact module bytes are unchanged
+in this artifact, so Release reuses that evidence without a browser rerun.
+The original Windows graph guard failed on path separators; Release
 evaluated the same built bundle after normalized graph inspection, without a
 rebuild. Do not label the broad root import pure: its snapshot path includes the
 Vite node:crypto stub through internal-service-secret, outside this newsletter
@@ -56,4 +57,24 @@ consumer must bind identity from its submitted saved request and preserve
 sanitation, sandbox and request lifetime. Integration's affected declaration and
 byte checks do not establish the Library consumer, authenticated operation,
 frontend image or deployment acceptance. See the current
-[adoption brief](../../docs/wave3-ws15-distribution-20261026/BRIEF.md).
+[adoption brief](../../docs/wave3-ws13-distribution-20261026/BRIEF.md).
+
+## WS13 saved Newsletter projection continuation
+
+The Core3b4937 artifact adds the accepted saved Newsletter plaintext-v2 projection
+in the existing public Workspace saved-revision owner. Its package manifest and
+exports are unchanged. Only that module's source/JS/declaration/maps differ from
+d680; the twelve WS15 newsletter JS/declaration files and accepted consumer source
+remain unchanged. Release qualifies13 WS13 public runtime cases,15 WS15 preview
+cases and public declarations in NodeNext/Bundler; prior six-module browser
+evidence is reused by byte identity, not rerun. The initial12/13 runtime probe
+failed on Node synthetic ESM __esModule metadata; Release corrected only that
+probe and retained the failure. No package/source rebuild followed.
+
+The Workspace HTTP producer supplies projectionVersion and projectionHash for
+the selected saved revision. Library owns the separate basic staging consumer
+that must display and retain that exact identity; no frontend serializer/hash or
+private import is introduced here. Existing public fixtures and hash assertions
+remain intact, with active artifact metadata advanced and prior bindings retained.
+Ordinary-role PostgreSQL, paired staging, whole application and deployment
+acceptance remain open. The broad-root node:crypto stub caveat still applies.
