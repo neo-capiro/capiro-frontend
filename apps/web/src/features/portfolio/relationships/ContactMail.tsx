@@ -335,7 +335,7 @@ function ContactReply({
         </select>
       </label>
       <small>
-        Reply to one verified Gmail sender. Reply all and forwarding are
+        Reply to one verified Gmail or Outlook sender. Reply all and forwarding are
         unavailable here.
       </small>
       {original && (
