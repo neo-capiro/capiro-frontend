@@ -6,6 +6,7 @@ import {
   parseNewsletterStageReceipt,
   type NewsletterReceiveIdentity,
   type NewsletterReceiveResult,
+  type NewsletterOutreachStage,
 } from "@capiro/shared/newsletter";
 import type { OperationRequest } from "./contracts";
 import { CapiroApiError, type CapiroApi } from "./http";
@@ -143,6 +144,21 @@ export function createRichNewsletterAdapter(
         { signal },
       );
       return bound(parseNewsletterOutreachRecord(value, requested));
+    },
+    /** Explicit intent only: Core conditionally reuses a draft, not a replay receipt. */
+    async open(stage: NewsletterOutreachStage, signal: AbortSignal) {
+      const expected = {
+        stageId: stage.id,
+        documentId: stage.documentId,
+        revision: stage.revision,
+        clientId: stage.config.clientId,
+      };
+      const value = await api.request(
+        "engagement.richNewsletter.open",
+        { params: { id: expected.stageId } },
+        { signal },
+      );
+      return bound(parseNewsletterOutreachRecord(value, expected));
     },
   };
 }
