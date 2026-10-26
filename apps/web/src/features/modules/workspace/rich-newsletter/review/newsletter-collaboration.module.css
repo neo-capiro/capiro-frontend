@@ -45,6 +45,11 @@
   gap: 12px;
   min-width: 0;
 }
+.stack > button:not([role="combobox"]),
+.card > button:not([role="combobox"]) {
+  justify-self: start;
+  max-width: 100%;
+}
 .card {
   border: 1px solid var(--border);
   border-radius: 12px;
