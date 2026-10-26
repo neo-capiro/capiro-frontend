@@ -19,6 +19,7 @@
   overflow-wrap: anywhere;
 }
 .screen button {
+  border-radius: 10px;
   white-space: normal;
   min-height: 36px;
   height: auto;
@@ -57,6 +58,10 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+.preview > .actions button[aria-pressed] {
+  font-size: 13px;
+  line-height: 18px;
 }
 .actions button[aria-pressed="false"] {
   background: transparent;
