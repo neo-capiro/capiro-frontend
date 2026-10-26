@@ -1,4 +1,8 @@
 import { readBinaryResponse } from "./binary";
+import {
+  ordinarySaveConflictCode,
+  type OrdinarySaveConflictCode,
+} from "./workspace-ordinary-save-errors";
 import { objectiveAssociationFailure } from "./objective-association-errors";
 import type { OperationalFailure } from "./operations/objective-operational";
 import type {
@@ -16,12 +20,12 @@ import {
 
 export class CapiroApiError extends Error {
   readonly status: number;
-  readonly code?: WorkspaceBriefConflictCode;
+  readonly code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode;
   readonly associationFailure?: OperationalFailure;
   constructor(
     status: number,
     message: string,
-    code?: WorkspaceBriefConflictCode,
+    code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode,
     associationFailure?: OperationalFailure,
   ) {
     super(message);
@@ -135,7 +139,8 @@ async function responsePayload(
       response.status === 401 && options.credentials !== "omit"
         ? "Your session expired. Sign in again."
         : (readableError(payload) ?? "The request could not be completed."),
-      workspaceBriefConflictCode(operation, response.status, payload),
+      workspaceBriefConflictCode(operation, response.status, payload) ??
+        ordinarySaveConflictCode(operation, response.status, payload),
       objectiveAssociationFailure(operation, response.status, payload),
     );
   }

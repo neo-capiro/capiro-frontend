@@ -1,4 +1,9 @@
 import type { OperationDefinition } from "./contracts";
+import {
+  isOrdinarySaveOperation,
+  ordinarySaveConflictCode,
+  type OrdinarySaveConflictCode,
+} from "./workspace-ordinary-save-errors";
 import { readBoundedJson } from "./gateway-input";
 import {
   isObjectiveAssociationOperation,
@@ -13,7 +18,7 @@ import {
 export const jsonError = (
   status: number,
   message: string,
-  code?: WorkspaceBriefConflictCode,
+  code?: WorkspaceBriefConflictCode | OrdinarySaveConflictCode,
 ) =>
   Response.json(
     { message, ...(code ? { code } : {}) },
@@ -54,17 +59,19 @@ export async function serviceErrorResponse(
       // A malformed native response cannot establish a rejected command.
     }
   }
-  let code: WorkspaceBriefConflictCode | undefined;
+  let code: WorkspaceBriefConflictCode | OrdinarySaveConflictCode | undefined;
   if (
     !publicCapability &&
     response.status === 409 &&
-    isWorkspaceBriefOperation(operation)
+    (isWorkspaceBriefOperation(operation) || isOrdinarySaveOperation(operation))
   ) {
     try {
       const payload = await readBoundedJson(response.body, 4096, signal);
       if (signal.aborted)
         throw new DOMException("Request aborted.", "AbortError");
-      code = workspaceBriefConflictCode(operation, response.status, payload);
+      code =
+        workspaceBriefConflictCode(operation, response.status, payload) ??
+        ordinarySaveConflictCode(operation, response.status, payload);
     } catch (error) {
       if (signal.aborted) throw error;
       // Invalid or oversized native errors retain the generic conflict hold.

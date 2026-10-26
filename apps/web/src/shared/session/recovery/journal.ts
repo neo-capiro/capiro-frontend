@@ -165,6 +165,7 @@ function retireRecovery(
         state: "refused";
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
+          | "WORKSPACE_SAVE_STATE_CONFLICT"
           | "ACTIVITY_UNDO_REFUSED"
           | "DIRECTORY_NOTE_REFUSED"
           | "PROSPECT_NEW_CLIENT_REFUSED"
@@ -494,6 +495,33 @@ export function retireRefusedRecovery(
   )
     return Promise.reject(new RecoveryStorageError());
   return retireRecovery(scope, requestId, { state: "refused", code }, assert);
+}
+
+/** Retire only the recorded native ordinary-save CAS refusal. The feature
+ * receives the exact409code after Core's prior-request check, and rereads the
+ * reviewed current state under the execution lock before explicit resolution. */
+export function retireOrdinarySaveConflictRecovery<
+  Data extends { body: { requestId: string }; outcome?: { kind: string } },
+>(
+  scope: string,
+  requestId: string,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "WORKSPACE_SAVE_STATE_CONFLICT" },
+    assert,
+    (record) => {
+      const retained = decode(record, contract);
+      if (
+        retained.body.requestId !== requestId ||
+        retained.outcome?.kind !== "conflict"
+      )
+        throw new RecoveryStorageError();
+    },
+  );
 }
 
 /** Serialize dispatch/reconciliation across tabs without nesting the storage lock.
