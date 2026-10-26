@@ -1253,9 +1253,9 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
     "kind": "function",
     "symbol": "StagingSelection",
-    "fingerprint": "3472ae78e5343e0a81130218e663b3104c5818f0d4464aa0e6a34ea3064400c3",
-    "reason": "One closely coupled selection, confirmation and recovery view retains explicit historical recovery UI and projection/currentness gating. Splitting solely at the line threshold would distribute the same lifecycle state. Exact independent disposition: W3-WS13-PR180-REVIEW.md.",
-    "reviewedBy": "Independent m3_scope, FE180 e3a00f51ea0f8f62d3abf1affd2db518d1d426c2",
+    "fingerprint": "13418862425340f1aa45cfdfe8e3ee5ca5f7f9449929bce319bbe9dc671634ba",
+    "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -1901,10 +1901,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "b8c201eb9cc22c6a5d07df540f3b7fb3f95bc4e69e1577eccd03cffca0a5769c",
-    "reason": "Accept existing rich editor composition plus its local selection, display and close-confirmation state. Document/history transitions are delegated to the controller. Pending fieldsets are disabled/inert, and owner/editorRevision replacement resets transient or editor-local state. Wire/transport/cache/sanitization remain separately owned.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "67a462ae6215744dca9f062db81d36b60b5cc9770f0e43970e834472d3013d8a",
+    "reason": "The local host/view/focus composition delegates all domain state to the existing rich controller. Returning from saved preview preserves the unchanged local draft and focus. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
+    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
@@ -1973,9 +1973,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "fingerprint": "e7e1c6dca680337157798b52e269c3dd62e6626fc5d789c328178f4b7f578e90",
-    "reason": "One saved-document action/status view adds exact recovery controls. Parsing, transport and authority stay outside it. No independent domain responsibility or speculative UI abstraction is added. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
-    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "fingerprint": "b35805e1fd82f51c73e4a16859babc27e3bd7a5171ec8f2a7a3a83c1d4dc612d",
+    "reason": "One existing action/recovery surface retains exact duplicate presentation selection with unchanged canonical controller, state transitions, mutations and GET recovery callbacks. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
+    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3917,19 +3917,19 @@
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
     "kind": "function",
     "symbol": "ExportDialog",
-    "fingerprint": "8d5587abe2e9468c3e1f4e4b32895d99463e5e2f0d2fe6029f5b82bfaf226def",
-    "reason": "The dialog owns declarative presentation of the known export receipt, pending/error/expiry state and explicit recovery/download actions. The adjacent accepted hook owns the request and download lifetime. Independent PR166 design review accepted this division without artificial splitting at83806222558a9d0ab779152e5f8a1c5f890df657; composition preserves the exact blob. See docs/wave3-integration-20261026/BRIEF.md.",
-    "reviewedBy": "Independent Codex reviewer, W3-UI-PR166-REVIEW.md, 2026-10-25T21:09:35Z",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "81b386ec8b508a0f7d1a3be1ddc2ee91f080d57e2cd1572d959d9d816a877798",
+    "reason": "Accept exact reviewed ExportDialog: one modal owns its focus lifetime, local page-size selection and the visible initial, retained, checking, failed and ready states of one export intent. Actions and admission are supplied by useHillDayExport. The JSX contains no direct API, persistence, signing or policy implementation; its state branches are mutually related presentations of that same intent.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/useHillDayExport.ts",
     "kind": "function",
     "symbol": "useHillDayExport",
-    "fingerprint": "93b6021e2469b0017e5efbe2a882548d5ec009522d4d9e2f43a192c68d276fc5",
-    "reason": "This hook owns one cohesive known-receipt status/poll/renewal/download lifecycle and delegates query, mutation, transport and authorization to existing owners. The independent PR166 design review accepted this exact source at83806222558a9d0ab779152e5f8a1c5f890df657. Its report counts120 nonblank lines for the hook module; the canonical AST scanner counts112 in the function. Neither count is silently changed into a whole architecture pass. See docs/wave3-integration-20261026/BRIEF.md.",
-    "reviewedBy": "Independent Codex reviewer, W3-UI-PR166-REVIEW.md, 2026-10-25T21:09:35Z",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "b63ed0046e589750ac14c7a47afcb09adb0dbf244a458b29bbe51d09261cbb67",
+    "reason": "Accept exact reviewed useHillDayExport: one hook coordinates the lifetime of one immutable export intent through reserve, sole dispatch, exact-request readback and download. Existing recovery journal, command lock, session guards, typed HTTP/binary boundary and Core authority retain their ownership. The pure identity/digest contract is already adjacent and separate. The nested operations share the same scope, guard and retained intent; effects perform reads/timers only and no second storage, policy or render owner is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
@@ -3944,9 +3944,9 @@
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
     "kind": "function",
     "symbol": "HillDayWizard",
-    "fingerprint": "48c9322228f45ae6664ba0fdf251e6c65dc412eed6c9fb599bfc869e3b166e92",
-    "reason": "Existing phase orchestration receives saved state/native destination callbacks without acquiring provider or journal responsibilities. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "fingerprint": "74f9b63670064809a2f467a6cf87f096c2156d34494a2dac28ba07edfb929d7e",
+    "reason": "Accept exact reviewed HillDayWizard: it remains the single navigation and saved-document coordination owner for six stages, with each substantial stage delegated. The changed code moves the Meetings heading/footer into its step, supplies Back, and hides the duplicate generation heading accessibly. Existing create/update and stage-transition logic is preserved.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3962,27 +3962,27 @@
     "file": "apps/web/src/features/modules/workspace/workspace.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "73522216baa709b3adc375f39aac0a0b71138d30c0c6f91b765d9970d67a6dd7",
-    "reason": "Existing805-line scoped Workspace presentation stylesheet adds only14 nonblank lines for versionFacts grid/terms/values, existing tokens and wrapping. These serve the accepted history view without global selector, shell, policy or behavior change. Moving unrelated inherited styles only to lower the count would unnecessarily enlarge the composition. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "fingerprint": "e60302b366d35b6360729e0671f387632e4cdd9e3a8a7a0aa8149d43a01cef98",
+    "reason": "The exact deletion removes six lines of unused stageCards styling and the mobile selector, adds no behavior or responsibility, and preserves every remaining shared style. Splitting shared CSS solely for line count is unnecessary. Independent Root follow-up disposition on FE186 57e111c6 and architecture-comparison.json accepts this exact fingerprint.",
+    "reviewedBy": "Independent Root Codex, FE186 CSS follow-up 57e111c65f11104a543c1d9562ba2a511a23254c",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
     "kind": "function",
     "symbol": "TemplateDetails",
-    "fingerprint": "8958c608acec9038a6186420c619eb7a242042adaab3f11bb80481a882d719df",
-    "reason": "The new86-line body remains one detail modal composing one query, settings/use/history mode and existing child presentations. Its acknowledged-save callback reloads the detail and notifies the existing list owner; it adds no business, authorization or durable lifecycle responsibility. Splitting solely for the threshold would obscure this wiring. This ruling does not approve the unchanged UseTemplate save/use guarantees. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
-    "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "fingerprint": "0f1b9798c6fb6b47adbef6370d40031b262bb67d7be478d31947c8168dce2fc2",
+    "reason": "One detail modal chooses the existing use/settings/history child and connects acknowledged refresh. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
     "kind": "function",
     "symbol": "TemplateStudio",
-    "fingerprint": "4f4ff8e2949581ad06fefc424f14ba28f0d66bf06df188ccf0b7402f101be7aa",
-    "reason": "The289-line body remains the existing template-list/filter/dialog composition owner. The accepted two-line change keys the detail by selected ID and supplies the existing list.reload callback. Detail/settings/query/lifetime owners remain separate; no cache, retry, receipt or authority mechanism is introduced. Full WS20 recovery/publication behavior is not approved by this narrow wiring review. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
-    "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "fingerprint": "4e03810f77fca5fc544dd08bd8b7a397f9ee5dcd86f8be59380d55eebb94590c",
+    "reason": "One existing template list and action coordinator; domain operations and substantial detail/wizard children stay delegated. Presentation does not justify artificial extraction. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4007,18 +4007,18 @@
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f23f461d90f898eb8522660d61c13b25a6454c78993146d97ea5a1331554f809",
-    "reason": "One newsletter presentation module still delegates editing, paper, comments, templates, association and staging. The added wrapper and saved-content renderer connect this view to the existing recovery owner; they add no transport or authorization lifecycle. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "fingerprint": "222b65e078e040e1a6be3e17a660d71c5bc2ba4561f5a5e5f5bd9370147ca7f8",
+    "reason": "The existing newsletter editor owner gains only modal visibility and a minimum host splice. Editing, staging transactions, authorization and durable receipt ownership remain delegated; no new business controller, persistence owner or recovery state machine is added. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
     "kind": "function",
     "symbol": "NewsletterEditor",
-    "fingerprint": "4ac93708fa8dec480e0bfcba274fe9a7911227e07d36f7918c74b9777b24c595",
-    "reason": "The renamed existing editor composes the same draft's steps and controls. Recovery/readback and frozen/confirmed-save states belong to this composition. Splitting individual JSX branches solely for count would disperse one view without removing a separate responsibility. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "fingerprint": "30777b842e50270fde9e0bc13e07d404520ca5eae6d5908141bf390a6b85e272",
+    "reason": "The existing newsletter editor owner gains only modal visibility and a minimum host splice. Editing, staging transactions, authorization and durable receipt ownership remain delegated; no new business controller, persistence owner or recovery state machine is added. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4079,27 +4079,27 @@
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
     "kind": "function",
     "symbol": "GenerationSession",
-    "fingerprint": "4e82485d8141a0b5be3eb81f92e3644b34cde8eac458536bd93b41749c74a416",
-    "reason": "One panel renders mutually constrained progress/recovery/control states; domain effects remain in the local hook. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "fingerprint": "88e7f826d18886024427500e717b1fc255e7796be9e973f93d9ae624567cbb3c",
+    "reason": "Accept exact reviewed GenerationSession: presentation consumes the existing useHillDayGeneration owner and preserves its command and retry-consent gates. Settled percentage, unit labels, reasons, unavailable and unknown states derive from the same job. The removed diagnostic table is replaced by a compact card without adding generation, persistence or provider behavior.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
     "kind": "function",
     "symbol": "HillDayMeetings",
-    "fingerprint": "6493a133ac7255442c1cd0d52f4e6fed02565c740428b2b3ffdf5b020f0deeda",
-    "reason": "Saved picker initialization remains in its existing picker. Restored saved-week parsing now matches the existing local-midnight week boundary; unchanged selection, timezone and query ownership. Exact Root correction disposition: W3-WS10-FE182-CORRECTION-REVIEW.md; original responsibility review: W3-WS10-FE182-REVIEW.md.",
-    "reviewedBy": "Root Codex independent calendar delta review, FE182 a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "fingerprint": "6be1e75914b396bb191e17439c893b0a3a751e8236d7ba1369626609a894c599",
+    "reason": "Accept exact reviewed HillDayMeetings: calendar/list/directory views edit one selected-meetings draft and submit through the existing save owner. Existing query, selection and persistence logic is unchanged; new grouping, summary and Back/action footer belong to that same step. Directory search already has its own component. No new calendar integration, mutation policy or workflow owner is added.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "cfda643256a8a4b21c2e112b38d0fd9839401db6228d4d6fd95547462dd9926d",
-    "reason": "Wizard and its thin authorized saved-document receiver share one lifecycle; phase components remain separate. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "fingerprint": "93db502032a9dbe84656b234261a66a0f7c01f634e41ce0ee3c96ad838e8b416",
+    "reason": "Accept exact reviewed wizard module: SponsorStep, the resume read gate and HillDayWizard are local parts of the same create/resume flow. Meeting selection, resolution, context and generation remain delegated to their feature components. The delta changes header/footer presentation and a navigation callback; it introduces no independent service, journal or cross-feature abstraction.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4109,6 +4109,60 @@
     "fingerprint": "a072efca8083d0d0ddcd8b3973db34cb93d522e29e09e6ca93be5fd179aa97f8",
     "reason": "Domain start/control/readback glue reuses journal/query APIs; no alternate persistence, serializer, scheduler or authority layer. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
     "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6ee25a3ee11079be3d516232ef735986ae93022c1c81656944d16c918c859bca",
+    "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+    "kind": "function",
+    "symbol": "SavedRichPreview",
+    "fingerprint": "d0070cbc6c7fb5c15d734ac3c6ff8275fadf2ed85c60174b93bc2e4137fd943e",
+    "reason": "One cohesive inert saved-preview view owns width/plain-text controls and the information panel. The existing sanitizer/rendering and empty sandbox/no-referrer/CSP remain unchanged. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
+    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "5ee1de822aed630aa860b74ef4510f819b4edd0611ac3b52cc6c60116edd41fd",
+    "reason": "Accept exact reviewed module: the public document read gate, DocumentCanvas and DocumentEditor compose one Hill Day editing screen. Canvas, cover, section, context, delivery and export owners remain explicit; the 19-line editor addition obtains current identity and passes immutable export scope. The new file threshold does not introduce another persistence, authorization or rendering service.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
+    "kind": "function",
+    "symbol": "DocumentEditor",
+    "fingerprint": "ba5872f320c305e6f96a039f55db10b55ead5dcea35ee66d035d9b6e8ade00da",
+    "reason": "Accept exact reviewed DocumentEditor: it owns the document editing view and its child/modal composition. The change loads current me identity, exposes its load/error state, and mounts the one keyed export modal with document/client/tenant/user/actor scope. Recovery, command serialization and download lifetime stay in the dedicated export hook; this component adds no journal or binary logic.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/LibraryClientFilter.tsx",
+    "kind": "function",
+    "symbol": "LibraryClientFilter",
+    "fingerprint": "83bca844348335d83ad5f0d68aee498adc62d5947b08c2adac03de993a84db34",
+    "reason": "One authorized paged selector; query owner and focus primitive remain existing dependencies. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
+    "kind": "function",
+    "symbol": "TemplateSettings",
+    "fingerprint": "23d13552fcc95982059bea3835b792dcff3e167b105a4e5d2d005eb30023da87",
+    "reason": "One metadata form with existing save owner, fields and footer; no second transaction or lifetime owner. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
+    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
     "reviewedOn": "2026-10-26"
   }
 ]

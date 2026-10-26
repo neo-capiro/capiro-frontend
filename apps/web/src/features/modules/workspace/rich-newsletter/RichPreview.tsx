@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import DOMPurify from "dompurify";
 import {
   renderNewsletterDesign,
@@ -7,6 +7,7 @@ import {
 } from "@capiro/shared/newsletter-render";
 import type { RichDraft } from "./draft";
 import type { NewsletterPreview } from "@capiro/shared/newsletter";
+import { ActionButton, PageHeader } from "../../../../shared/module-ui";
 import styles from "./rich-newsletter.module.css";
 
 /** Canonical rendering plus inert display isolation; never a sendable artifact. */
@@ -64,37 +65,97 @@ function sanitizePreviewDocument(rendered: string) {
   return `<!doctype html>${preview.documentElement.outerHTML}`;
 }
 
-export function SavedRichPreview({ preview }: { preview: NewsletterPreview }) {
+export function SavedRichPreview({
+  preview,
+  name,
+  onClose,
+}: {
+  preview: NewsletterPreview;
+  name?: string;
+  onClose: () => void;
+}) {
+  const [mobile, setMobile] = useState(false);
+  const [plainText, setPlainText] = useState(false);
   const document = useMemo(
     () => sanitizePreviewDocument(preview.html),
     [preview],
   );
   return (
-    <section className={styles.preview} aria-label="Saved newsletter preview">
-      <h2>Saved-state preview</h2>
-      <p>
-        Saved document {preview.documentId}, revision {preview.revision}. This
-        response matches the requested saved revision and excludes local edits.
-        External images and links are disabled.
-      </p>
-      <iframe
-        key={document}
-        title="Saved newsletter preview"
-        sandbox=""
-        referrerPolicy="no-referrer"
-        srcDoc={document}
+    <section className={styles.savedView} aria-label="Saved newsletter preview">
+      <PageHeader
+        title={mobile ? "Preview newsletter · Mobile" : "Preview newsletter"}
+        description={name || `Saved revision ${preview.revision}`}
+        actions={
+          <ActionButton autoFocus onClick={onClose}>
+            Back to editor
+          </ActionButton>
+        }
       />
-      <details>
-        <summary>Saved plain text</summary>
-        <pre className={styles.plainText}>{preview.plainText}</pre>
-      </details>
-      <ul>
-        {preview.checks.map((check, index) => (
-          <li key={`${check.id}:${index}`}>
-            {check.severity}: {check.label} — {check.detail}
-          </li>
-        ))}
-      </ul>
+      <div className={styles.savedModes} aria-label="Saved preview width">
+        <ActionButton aria-pressed={!mobile} onClick={() => setMobile(false)}>
+          Desktop
+        </ActionButton>
+        <ActionButton aria-pressed={mobile} onClick={() => setMobile(true)}>
+          Mobile
+        </ActionButton>
+      </div>
+      <div className={styles.savedLayout}>
+        <div
+          className={`${styles.savedCanvas} ${mobile ? styles.savedMobile : ""}`}
+        >
+          {plainText ? (
+            <pre
+              className={styles.savedPlainText}
+              aria-label="Saved newsletter plain text"
+            >
+              {preview.plainText}
+            </pre>
+          ) : (
+            <iframe
+              key={document}
+              title="Saved newsletter preview"
+              sandbox=""
+              referrerPolicy="no-referrer"
+              srcDoc={document}
+            />
+          )}
+        </div>
+        <aside
+          className={styles.savedInspector}
+          aria-label="Saved preview information"
+        >
+          <h2>Saved preview</h2>
+          <p className={styles.savedRevision}>
+            Saved revision {preview.revision}
+          </p>
+          <p>
+            This preview shows the requested saved revision and excludes unsaved
+            local edits.
+          </p>
+          <p className={styles.savedCaption}>
+            External images and live links are disabled. Email clients may
+            render differently.
+          </p>
+          <ActionButton
+            aria-pressed={plainText}
+            onClick={() => setPlainText((value) => !value)}
+          >
+            Saved plain text
+          </ActionButton>
+          {preview.checks.length > 0 && (
+            <ul
+              className={styles.savedChecks}
+              aria-label="Saved preview checks"
+            >
+              {preview.checks.map((check, index) => (
+                <li key={`${check.id}:${index}`}>
+                  {check.severity}: {check.label} — {check.detail}
+                </li>
+              ))}
+            </ul>
+          )}
+        </aside>
+      </div>
     </section>
   );
 }
@@ -103,10 +164,12 @@ export function RichPreview({
   draft,
   mobile,
   plainText,
+  savedReview = false,
 }: {
   draft: RichDraft;
   mobile: boolean;
   plainText: boolean;
+  savedReview?: boolean;
 }) {
   const document = useMemo(() => previewDocument(draft), [draft]);
   const text = useMemo(
@@ -117,8 +180,8 @@ export function RichPreview({
   return (
     <div className={styles.preview}>
       <p>
-        Local preview · external images and links are disabled. Email clients
-        may render differently.
+        {savedReview ? "Reviewed saved content" : "Local preview"} · external
+        images and links are disabled. Email clients may render differently.
       </p>
       {plainText ? (
         <pre className={styles.plainText} aria-label="Newsletter plain text">

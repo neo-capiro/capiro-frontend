@@ -19,6 +19,7 @@ type Receipt = OperationResponse<
 const documentId = "51000000-0000-4000-8000-000000000001";
 const exportId = "52000000-0000-4000-8000-000000000001";
 const differentId = "53000000-0000-4000-8000-000000000001";
+const requestId = "54000000-0000-4000-8000-000000000001";
 const now = Date.parse("2026-10-25T12:00:00Z");
 const editorUrl = `/modules/workspace?clientId=${clientId}&view=hillday&hilldayId=${documentId}`;
 const document: HillDayDocument = {
@@ -49,11 +50,15 @@ const document: HillDayDocument = {
   },
   generation: { lastJobId: null, status: null },
 };
-// The actual Core137 ExportView shape, including null grants when signing is unavailable.
+// PR150 ExportView; the fixture binds its request UUID to the actual captured POST.
 function ready(expires = now + 3_600_000): Receipt {
   return {
     exportId,
     documentId,
+    requestId,
+    renderInputSha256: "b".repeat(64),
+    contentSha256: "c".repeat(64),
+    sourceUpdatedAt: document.updatedAt,
     status: "ready",
     format: "pdf",
     pageSize: "letter",
@@ -76,6 +81,7 @@ type Reply = { json: unknown; status?: number };
 type Options = {
   create?: Receipt;
   createGate?: Promise<void>;
+  createStatus?: number;
   status?: (count: number) => Reply | Promise<Reply>;
   downloadGate?: Promise<void>;
   downloadType?: string;
@@ -109,6 +115,13 @@ async function fixture(page: Page, options: Options = {}) {
     }),
   );
   let reads = 0;
+  let originalRequest = requestId;
+  const bind = (value: unknown) =>
+    value &&
+    typeof value === "object" &&
+    Reflect.get(value, "requestId") === requestId
+      ? { ...value, requestId: originalRequest }
+      : value;
   await page.route("**/api/capiro/workspace.hillday.export*", async (route) => {
     const req = route.request();
     const url = new URL(req.url());
@@ -119,11 +132,24 @@ async function fixture(page: Page, options: Options = {}) {
         : req.postDataJSON();
     calls.push({ key, method: req.method(), input });
     if (key === "workspace.hillday.export") {
+      originalRequest = (input as { body: { requestId: string } }).body
+        .requestId;
       await options.createGate;
-      await route.fulfill({ json: options.create ?? ready() }).catch(() => {});
+      await route
+        .fulfill(
+          options.createStatus
+            ? {
+                status: options.createStatus,
+                json: { message: "Synthetic lost acknowledgement" },
+              }
+            : { json: bind(options.create ?? ready()) },
+        )
+        .catch(() => {});
     } else {
+      originalRequest = (input as { params: { requestId: string } }).params
+        .requestId;
       const reply = (await options.status?.(++reads)) ?? { json: ready() };
-      await route.fulfill(reply).catch(() => {});
+      await route.fulfill({ ...reply, json: bind(reply.json) }).catch(() => {});
     }
   });
   await page.route(
@@ -151,7 +177,7 @@ async function fixture(page: Page, options: Options = {}) {
     aborted,
     creates: () => calls.filter((c) => c.key === "workspace.hillday.export"),
     statuses: () =>
-      calls.filter((c) => c.key === "workspace.hillday.export.status"),
+      calls.filter((c) => c.key === "workspace.hillday.export.request"),
     binaries: () => calls.filter((c) => c.key === "workspace.hillday.download"),
   };
 }
@@ -161,7 +187,7 @@ async function open(page: Page) {
   await page.getByRole("button", { name: "Generate PDF", exact: true }).click();
 }
 const dialog = (page: Page) =>
-  page.getByRole("dialog", { name: "Export Hill Day Schedule" });
+  page.getByRole("dialog", { name: "Export saved PDF" });
 
 test("expired known receipt renews by GET and downloads once without recreating", async ({
   page,
@@ -193,16 +219,162 @@ test("expired known receipt renews by GET and downloads once without recreating"
     .click();
   expect((await download).suggestedFilename()).toBe("hill-day-schedule.pdf");
   expect(state.creates()).toHaveLength(1);
-  expect(state.statuses()).toHaveLength(2);
+  expect(state.statuses()).toHaveLength(3);
   expect(state.statuses().every((call) => call.method === "GET")).toBe(true);
   expect(state.statuses().map((call) => call.input)).toEqual([
-    { params: { id: documentId, exportId } },
-    { params: { id: documentId, exportId } },
+    ...Array.from({ length: 3 }, () => ({
+      params: {
+        id: documentId,
+        requestId: (
+          state.creates()[0]!.input as { body: { requestId: string } }
+        ).body.requestId,
+      },
+    })),
   ]);
   expect(state.binaries()[0]!.input).toEqual({
     params: { id: documentId, exportId },
     query: { exp: String(now + 3_600_000), sig: "a".repeat(64) },
   });
+});
+
+test("lost acknowledgement survives close and reload with original page inputs and PDF", async ({
+  page,
+}) => {
+  const state = await fixture(page, {
+    createStatus: 503,
+    status: () => ({ json: { ...ready(), pageSize: "a4" } }),
+  });
+  await page.goto(editorUrl);
+  await page.getByRole("button", { name: "Export PDF", exact: true }).click();
+  await dialog(page).getByRole("combobox").click();
+  await page.getByRole("option", { name: "A4", exact: true }).click();
+  await dialog(page)
+    .getByRole("button", { name: "Generate PDF", exact: true })
+    .click();
+  await expect(
+    dialog(page).getByText("Export unconfirmed", { exact: true }),
+  ).toBeVisible();
+  expect(state.creates()).toHaveLength(1);
+  const original = state.creates()[0]!.input as {
+    body: { requestId: string; pageSize: string };
+  };
+  expect(original.body.pageSize).toBe("a4");
+  expect(original.body.requestId).toMatch(/^[a-f0-9-]{36}$/);
+  await dialog(page)
+    .getByRole("button", { name: "Close", exact: true })
+    .click();
+  await page.route("**/api/capiro/workspace.hillday.document?*", (route) =>
+    route.fulfill({
+      json: {
+        ...document,
+        name: "Later saved edit",
+        updatedAt: "2026-10-25T11:59:00Z",
+      },
+    }),
+  );
+  await page.getByRole("button", { name: "Export PDF", exact: true }).click();
+  await expect(
+    dialog(page).getByText("PDF ready", { exact: true }),
+  ).toBeVisible();
+  await expect(dialog(page).getByRole("combobox")).toHaveText("A4");
+  await expect(
+    dialog(page).getByText("synthetic-schedule.pdf", { exact: true }),
+  ).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Export PDF", exact: true }).click();
+  await expect(
+    dialog(page).getByText("PDF ready", { exact: true }),
+  ).toBeVisible();
+  const download = page.waitForEvent("download");
+  await dialog(page)
+    .getByRole("button", { name: "Download PDF", exact: true })
+    .click();
+  expect((await download).suggestedFilename()).toBe("hill-day-schedule.pdf");
+  expect(state.creates()).toHaveLength(1);
+  expect(
+    state
+      .statuses()
+      .every(
+        (call) =>
+          (call.input as { params: { requestId: string } }).params.requestId ===
+          original.body.requestId,
+      ),
+  ).toBe(true);
+  expect(state.binaries()[0]!.input).toMatchObject({
+    params: { id: documentId, exportId },
+  });
+});
+
+test("absent and unavailable readback never authorizes another POST", async ({
+  page,
+}) => {
+  const state = await fixture(page, {
+    createStatus: 503,
+    status: (count) =>
+      count === 1
+        ? { json: null }
+        : { status: 503, json: { message: "Synthetic unavailable read" } },
+  });
+  await open(page);
+  await expect(dialog(page).getByRole("alert")).toContainText(
+    "Synthetic lost acknowledgement",
+  );
+  await dialog(page)
+    .getByRole("button", { name: "Check status", exact: true })
+    .click();
+  await expect(
+    dialog(page).getByText("Export unconfirmed", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    dialog(page).getByRole("button", { name: "Generate PDF", exact: true }),
+  ).toHaveCount(0);
+  await page.reload();
+  await page.getByRole("button", { name: "Export PDF", exact: true }).click();
+  await expect(dialog(page).getByRole("alert")).toContainText(
+    "Synthetic unavailable read",
+  );
+  await page.clock.runFor(6000);
+  expect(state.creates()).toHaveLength(1);
+  expect(state.statuses()).toHaveLength(2);
+});
+
+test("two tabs share the retained command lock without a second dispatch", async ({
+  page,
+  context,
+}) => {
+  const gate = deferred();
+  const first = await fixture(page, { createGate: gate.promise });
+  const other = await context.newPage();
+  const second = await fixture(other);
+  for (const target of [page, other]) {
+    await target.goto(editorUrl);
+    await target
+      .getByRole("button", { name: "Export PDF", exact: true })
+      .click();
+  }
+  await dialog(page)
+    .getByRole("button", { name: "Generate PDF", exact: true })
+    .click();
+  await expect.poll(() => first.creates().length).toBe(1);
+  await dialog(other)
+    .getByRole("button", { name: "Generate PDF", exact: true })
+    .click();
+  gate.release();
+  await expect(
+    dialog(page).getByText("PDF ready", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    dialog(other).getByText("PDF ready", { exact: true }),
+  ).toBeVisible();
+  expect(second.creates()).toHaveLength(0);
+  expect(second.statuses()[0]!.input).toEqual({
+    params: {
+      id: documentId,
+      requestId: (first.creates()[0]!.input as { body: { requestId: string } })
+        .body.requestId,
+    },
+  });
+  await other.close();
 });
 
 test("expiry removes download admission while the dialog stays open", async ({
@@ -254,10 +426,10 @@ test("queued receipts poll to ready; creation and status pending cannot duplicat
   createGate.release();
   await expect(dialog(page).getByText("Checking export status…")).toBeVisible();
   await expect(
-    dialog(page).getByRole("button", { name: "Retry status" }),
+    dialog(page).getByRole("button", { name: "Checking…" }),
   ).toBeDisabled();
   statusGate.release();
-  await expect(dialog(page).getByText("Preparing PDF…")).toBeVisible();
+  await expect(dialog(page).getByText("Export in progress")).toBeVisible();
   await page.clock.runFor(2100);
   await expect(
     dialog(page).getByText("PDF ready", { exact: true }),
@@ -297,7 +469,7 @@ test("status error hides the prior grant and only deliberate GET retry recovers"
   await page.clock.runFor(6000);
   expect(state.statuses()).toHaveLength(2);
   denied = false;
-  await dialog(page).getByRole("button", { name: "Retry status" }).click();
+  await dialog(page).getByRole("button", { name: "Check status" }).click();
   await expect(
     dialog(page).getByText("PDF ready", { exact: true }),
   ).toBeVisible();
@@ -306,22 +478,11 @@ test("status error hides the prior grant and only deliberate GET retry recovers"
   expect(state.binaries()).toHaveLength(0);
 });
 
-test("missing signing grant and failed render remain honest and do not recreate", async ({
+test("missing signing grant stays unavailable without recreating", async ({
   page,
 }) => {
   const state = await fixture(page, {
-    status: (n) => ({
-      json:
-        n === 1
-          ? { ...ready(), url: null, expiresAt: null }
-          : {
-              ...ready(),
-              status: "failed",
-              url: null,
-              expiresAt: null,
-              error: "Synthetic render failure",
-            },
-    }),
+    status: () => ({ json: { ...ready(), url: null, expiresAt: null } }),
   });
   await open(page);
   await expect(
@@ -333,6 +494,28 @@ test("missing signing grant and failed render remain honest and do not recreate"
   await dialog(page)
     .getByRole("button", { name: "Refresh download link" })
     .click();
+  await expect(
+    dialog(page).getByText("A download link is unavailable.", { exact: false }),
+  ).toBeVisible();
+  expect(state.creates()).toHaveLength(1);
+  expect(state.statuses()).toHaveLength(2);
+});
+test("settled renderer failure remains failed without replacement", async ({
+  page,
+}) => {
+  const failed: Receipt = {
+    ...ready(),
+    status: "failed",
+    url: null,
+    expiresAt: null,
+    contentSha256: null,
+    error: "Synthetic render failure",
+  };
+  const state = await fixture(page, {
+    create: failed,
+    status: () => ({ json: failed }),
+  });
+  await open(page);
   await expect(dialog(page).getByText("PDF generation failed")).toBeVisible();
   await expect(
     dialog(page).getByText("Synthetic render failure"),
@@ -340,9 +523,10 @@ test("missing signing grant and failed render remain honest and do not recreate"
   await expect(
     dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
   ).toHaveCount(0);
-  await page.clock.runFor(6000);
-  expect(state.statuses()).toHaveLength(2);
+  await dialog(page).getByRole("button", { name: "Check status" }).click();
+  await expect(dialog(page).getByText("PDF generation failed")).toBeVisible();
   expect(state.creates()).toHaveLength(1);
+  expect(state.statuses()).toHaveLength(2);
 });
 
 for (const field of ["documentId", "exportId"] as const) {
@@ -379,6 +563,18 @@ test("a held status cannot restore receipt after actor/session replacement", asy
   });
   await open(page);
   await expect(dialog(page).getByText("Checking export status…")).toBeVisible();
+  await page.route("**/api/capiro/me.read*", (route) =>
+    route.fulfill({
+      json: {
+        ...testIdentity,
+        user: {
+          ...testIdentity.user,
+          id: differentId,
+          clerkUserId: "other-test-user",
+        },
+      },
+    }),
+  );
   await page.evaluate(() =>
     window.dispatchEvent(
       new CustomEvent("test:session", {
@@ -392,7 +588,7 @@ test("a held status cannot restore receipt after actor/session replacement", asy
   );
   await expect(dialog(page)).toHaveCount(0);
   await expect
-    .poll(() => state.aborted.includes("workspace.hillday.export.status"))
+    .poll(() => state.aborted.includes("workspace.hillday.export.request"))
     .toBe(true);
   gate.release();
   await page.getByRole("button", { name: "Export PDF", exact: true }).click();
@@ -472,10 +668,156 @@ test("binary MIME refusal is visible and status retry never creates a replacemen
     "Unexpected export response",
   );
   expect(state.downloads).toEqual([]);
+  await dialog(page).getByRole("button", { name: "Check status" }).click();
+  await expect(
+    dialog(page).getByText("PDF ready", { exact: true }),
+  ).toBeVisible();
+  await expect(dialog(page).getByRole("alert")).toHaveCount(0);
+  expect(state.creates()).toHaveLength(1);
+  expect(state.statuses()).toHaveLength(3);
+});
+
+test("a later digest substitution cannot replace the retained PDF proof", async ({
+  page,
+}) => {
+  let substituted = false;
+  const state = await fixture(page, {
+    status: () => ({
+      json: {
+        ...ready(),
+        contentSha256: substituted ? "d".repeat(64) : ready().contentSha256,
+      },
+    }),
+  });
+  await open(page);
+  await expect(
+    dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
+  ).toBeEnabled();
+  substituted = true;
   await dialog(page)
     .getByRole("button", { name: "Refresh download link" })
     .click();
-  await expect(dialog(page).getByRole("alert")).toHaveCount(0);
+  await expect(dialog(page).getByRole("alert")).toContainText(
+    "does not match the original request",
+  );
+  await expect(
+    dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
+  ).toHaveCount(0);
+  await page.reload();
+  await page.getByRole("button", { name: "Export PDF", exact: true }).click();
+  await expect(dialog(page).getByRole("alert")).toContainText(
+    "does not match the original request",
+  );
   expect(state.creates()).toHaveLength(1);
-  expect(state.statuses()).toHaveLength(2);
+  expect(state.binaries()).toHaveLength(0);
+});
+
+test("a live document reassignment clears the old client's grant before a binary request", async ({
+  page,
+}) => {
+  const state = await fixture(page);
+  await open(page);
+  await expect(
+    dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
+  ).toBeEnabled();
+  await page.route("**/api/capiro/workspace.hillday.document?*", (route) =>
+    route.fulfill({
+      json: { ...document, client: { ...document.client, id: otherClientId } },
+    }),
+  );
+  await dialog(page)
+    .getByRole("button", { name: "Download PDF", exact: true })
+    .click();
+  await expect(dialog(page).getByRole("alert")).toContainText(
+    "document or its client changed",
+  );
+  await expect(
+    dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
+  ).toHaveCount(0);
+  expect(state.binaries()).toHaveLength(0);
+  expect(state.creates()).toHaveLength(1);
+});
+
+test("export presentation keeps keyboard access and the retained original states", async ({
+  page,
+}, testInfo) => {
+  let resolved = false;
+  const state = await fixture(page, {
+    createStatus: 503,
+    status: () => ({ json: resolved ? ready() : null }),
+  });
+  await page.goto(editorUrl);
+  const trigger = page.getByRole("button", { name: "Export PDF", exact: true });
+  await trigger.click();
+  await expect(
+    dialog(page).getByRole("button", { name: "Generate PDF", exact: true }),
+  ).toBeEnabled();
+  await page.evaluate(() => window.document.fonts.ready);
+  await page.screenshot({
+    path: testInfo.outputPath("hillday-export-initial.png"),
+  });
+  const size = dialog(page).getByRole("combobox", { name: "Page size" });
+  await size.focus();
+  await expect(size).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(
+    dialog(page).getByRole("button", { name: "Close", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(dialog(page)).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await trigger.click();
+  await dialog(page)
+    .getByRole("button", { name: "Generate PDF", exact: true })
+    .click();
+  await expect(dialog(page).getByRole("alert")).toContainText(
+    "lost acknowledgement",
+  );
+  await dialog(page)
+    .getByRole("button", { name: "Check status", exact: true })
+    .click();
+  await expect(
+    dialog(page).getByRole("button", { name: "Check status", exact: true }),
+  ).toBeEnabled();
+  await page.screenshot({
+    path: testInfo.outputPath("hillday-export-unresolved.png"),
+  });
+  resolved = true;
+  await dialog(page)
+    .getByRole("button", { name: "Check status", exact: true })
+    .click();
+  await expect(
+    dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
+  ).toBeEnabled();
+  await page.screenshot({
+    path: testInfo.outputPath("hillday-export-ready.png"),
+  });
+  expect(state.creates()).toHaveLength(1);
+  expect(state.binaries()).toHaveLength(0);
+});
+
+test("closing during the original POST retires its acknowledgement and reopens by request GET", async ({
+  page,
+}) => {
+  const gate = deferred();
+  const state = await fixture(page, { createGate: gate.promise });
+  await open(page);
+  await expect.poll(() => state.creates().length).toBe(1);
+  const original = (
+    state.creates()[0]!.input as { body: { requestId: string } }
+  ).body.requestId;
+  await dialog(page)
+    .getByRole("button", { name: "Close", exact: true })
+    .click();
+  await expect(dialog(page)).toHaveCount(0);
+  gate.release();
+  await page.getByRole("button", { name: "Export PDF", exact: true }).click();
+  await expect(
+    dialog(page).getByRole("button", { name: "Download PDF", exact: true }),
+  ).toBeEnabled();
+  expect(state.statuses().map((call) => call.input)).toEqual([
+    { params: { id: documentId, requestId: original } },
+  ]);
+  expect(state.creates()).toHaveLength(1);
+  expect(state.downloads).toEqual([]);
 });
