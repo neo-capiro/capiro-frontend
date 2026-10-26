@@ -141,6 +141,10 @@ export async function sendReviewedMail(
     return receipt;
   } catch (error) {
     if (error instanceof MailSendError) throw error;
+    const details =
+      error instanceof ApiError && error.status === 400
+        ? error.details
+        : undefined;
     const rejection = z
       .object({
         error: z.literal("MAIL_SEND_REJECTED"),
@@ -149,14 +153,15 @@ export async function sendReviewedMail(
         state: z.literal("failed"),
         retryable: z.literal(false),
       })
-      .safeParse(error instanceof ApiError ? error.details : undefined);
+      .safeParse(details);
     throw new MailSendError(
       error instanceof Error
         ? error.message
         : "Email delivery could not be confirmed.",
       // Access may be revoked after acceptance. HTTP status alone never proves
-      // non-delivery; only the exact intent's durable rejection can release it.
-      !rejection.success || rejection.data.requestKey !== requestKey,
+      // non-delivery. Require this exact request's durable rejection; a size
+      // error without ledger ownership cannot exclude a concurrent send.
+      !(rejection.success && rejection.data.requestKey === requestKey),
     );
   }
 }

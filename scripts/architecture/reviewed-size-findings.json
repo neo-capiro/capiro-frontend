@@ -673,10 +673,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
     "kind": "function",
     "symbol": "sendReviewedMail",
-    "fingerprint": "d0c3f05b87e0e6859c7405de82c2e800073f902a8f121a78fb18b47e32a858a7",
-    "reason": "Retain this bounded single-send adapter. Parsing the reviewed DTO, re-reading the exact sender, confirming the reply thread and attachment readiness, dispatching once, validating the exact request receipt and classifying delivery uncertainty form one ordered send sequence. The split between preflight refusal and post-dispatch uncertainty is essential to whether the caller may release its attempt. Mailbox projection, attachment receiving and recipient normalization are already separate semantic owners. Keeping the final actor assertion adjacent to dispatch makes the no-intervening-await property reviewable. It does not select a provider, store durable intent, manage React state, compose mail, rewrite content or retry delivery, so another workflow/service extraction is not warranted by its line count.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "f3b5bee722a58e34d992c18d55ddecbafd6be7a3d19de5f626c3b179a96a0e40",
+    "reason": "Retain this single reviewed-mail dispatch sequence. The ML-21 correction requires HTTP 400 and an exact request key with a durable failed intent before releasing the browser attempt. Removing the unsound no-intent size-refusal branch keeps every untyped, mismatched, server-error or ambiguous result uncertain, including concurrent admission. Response classification remains adjacent to the one dispatch and uses the existing durable receipt contract. Canonical mailbox, attachments, recipients, browser reservation/settlement and UI remain separate existing owners. Extracting a separate stateful workflow or duplicating receipt parsing would obscure which completed request may release its attempt; no additional runtime responsibility is introduced.",
+    "reviewedBy": "Codex task_approval_author independent ML-21 paired correction review",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
