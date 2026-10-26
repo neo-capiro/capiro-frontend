@@ -4,6 +4,7 @@ import {
   createNewsletterLayout,
   defaultNewsletterConfig,
   type NewsletterCampaign,
+  type NewsletterWriteReceipt,
 } from "@capiro/shared/newsletter";
 import { onlyLocalRequests, operationFixtures } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
@@ -36,6 +37,7 @@ export type DocumentOperation =
   | "create"
   | "detail"
   | "save"
+  | "writeRequest"
   | "preview"
   | "stagedRevision"
   | "stage";
@@ -82,6 +84,7 @@ export async function documentFixture(page: Page) {
     dialogs: [] as string[],
   };
   const queued = new Map<DocumentOperation, Interception[]>();
+  const receipts = new Map<string, NewsletterWriteReceipt>();
   page.on("pageerror", (error) => control.errors.push(error.message));
   page.on("dialog", async (dialog) => {
     control.dialogs.push(dialog.message());
@@ -112,15 +115,41 @@ export async function documentFixture(page: Page) {
         return route.fulfill({
           json: { items: control.items ?? [control.current] },
         });
-      if (operation === "detail" || operation === "create")
+      if (operation === "detail")
         return route.fulfill({ json: control.current });
-      if (operation === "save") {
-        control.current = {
-          ...control.current,
-          ...input.body,
-          revision: input.body.revision + 1,
+      if (operation === "writeRequest")
+        return route.fulfill({
+          json: receipts.get(input.params.requestId) ?? null,
+        });
+      if (operation === "create" || operation === "save") {
+        const { requestId, ...submitted } = input.body;
+        control.current =
+          operation === "create"
+            ? {
+                ...control.current,
+                name: submitted.name ?? "Untitled newsletter",
+                revision: 1,
+                config: defaultNewsletterConfig(),
+                design: createNewsletterLayout(1),
+              }
+            : {
+                ...control.current,
+                ...submitted,
+                revision: input.body.revision + 1,
+              };
+        const receipt: NewsletterWriteReceipt = {
+          requestId,
+          operation,
+          documentId: control.current.id,
+          previousRevision: operation === "create" ? null : input.body.revision,
+          revision: control.current.revision,
+          inputHash: "a".repeat(64),
+          contentHash: "b".repeat(64),
+          hashFormat: "newsletter-write-jcs-v1",
+          createdAt: "2026-10-26T00:00:00.000Z",
         };
-        return route.fulfill({ json: control.current });
+        receipts.set(requestId, receipt);
+        return route.fulfill({ json: receipt });
       }
       if (operation === "stage")
         return route.fulfill({
@@ -179,7 +208,8 @@ export async function closeAndReopen(page: Page) {
   await expect(
     page.getByRole("heading", { name: "Workspace", exact: true }),
   ).toBeVisible();
-  await button(page, "Rich newsletter preview").click();
+  await button(page, "Workspace tools").click();
+  await page.getByRole("menuitem", { name: "Rich newsletter preview" }).click();
   await expect(page.getByLabel("Newsletter name")).toHaveValue(
     "Untitled newsletter",
   );

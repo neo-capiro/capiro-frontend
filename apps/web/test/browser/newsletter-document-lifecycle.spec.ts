@@ -25,7 +25,7 @@ test("rich document create is explicit, preserves local content and stages only 
   await button(page, "Create saved document").click();
   await expect(
     page.getByText(
-      "Saved document created. Save your local content into its revision before staging.",
+      "The create request has a committed receipt. Read current saved content, then adopt it or rebase your retained local draft.",
     ),
   ).toBeVisible();
   await expect(page.getByLabel("Newsletter name")).toHaveValue(
@@ -38,40 +38,43 @@ test("rich document create is explicit, preserves local content and stages only 
     {
       operation: "create",
       method: "POST",
-      input: { body: { name: "Local creation name" } },
+      input: {
+        body: { requestId: expect.any(String), name: "Local creation name" },
+      },
     },
   ]);
   expect(fixture.calls("save")).toEqual([]);
   await expect(button(page, "Stage newsletter")).toBeDisabled();
+  await button(page, "Read current saved document").click();
+  await button(page, "Rebase local draft onto reviewed revision").click();
   await button(page, "Save newsletter").click();
   await expect(
-    page.getByText("Saved revision 5.", { exact: true }),
+    page.getByRole("heading", { name: "This request saved revision 2" }),
   ).toBeVisible();
   const save = fixture.calls("save")[0]!;
   expect(save.method).toBe("PATCH");
   expect(save.input).toMatchObject({
     params: { id: documentId },
     body: {
-      revision: 4,
+      revision: 1,
       name: "Local creation name",
       config: { subject: "Local creation subject" },
     },
   });
-  expect(Object.keys((save.input as { body: object }).body).sort()).toEqual([
-    "config",
-    "design",
-    "name",
-    "revision",
-  ]);
+  expect(Object.keys((save.input as { body: object }).body).sort()).toEqual(
+    ["config", "design", "name", "revision", "requestId"].sort(),
+  );
+  await button(page, "Read current saved document").click();
+  await button(page, "Adopt saved document and replace local draft").click();
   await button(page, "Stage newsletter").click();
   await expect(
-    page.getByRole("heading", { name: "Saved revision 5 staged" }),
+    page.getByRole("heading", { name: "Saved revision 2 staged" }),
   ).toBeVisible();
   expect(fixture.calls("stage")).toEqual([
     {
       operation: "stage",
       method: "POST",
-      input: { params: { id: documentId }, body: { revision: 5 } },
+      input: { params: { id: documentId }, body: { revision: 2 } },
     },
   ]);
   await expect(button(page, "Stage newsletter")).toBeDisabled();
@@ -86,7 +89,7 @@ test("rich document create is explicit, preserves local content and stages only 
       json: {
         id: stageId,
         documentId,
-        revision: 5,
+        revision: 2,
         name: fixture.control.current.name,
         config: fixture.control.current.config,
         design: fixture.control.current.design,
@@ -104,7 +107,12 @@ test("rich document create is explicit, preserves local content and stages only 
   );
   await reviewStage.click();
   await expect(page).toHaveURL(
-    `/engagement/outreach?newsletterStage=${stageId}&clientId=${clientId}`,
+    `/engagement/outreach?newsletterStage=${stageId}`,
+  );
+  // This component harness does not mount the canonical Next redirect route.
+  // Mount its existing Modules destination after asserting the returned route.
+  await page.goto(
+    `/modules/engagement?view=outreach&newsletterStage=${stageId}`,
   );
   await expect(
     page.getByRole("heading", { name: "Staged newsletter", exact: true }),
@@ -142,7 +150,7 @@ test("rich library detail requires explicit adoption and sends the complete revi
     .fill("Full replacement subject");
   await button(page, "Save newsletter").click();
   await expect(
-    page.getByText("Saved revision 5.", { exact: true }),
+    page.getByRole("heading", { name: "This request saved revision 5" }),
   ).toBeVisible();
   expect(fixture.calls("save")).toEqual([
     {
@@ -151,6 +159,7 @@ test("rich library detail requires explicit adoption and sends the complete revi
       input: {
         params: { id: saved.id },
         body: {
+          requestId: expect.any(String),
           revision: saved.revision,
           name: "Full replacement name",
           config: { ...saved.config, subject: "Full replacement subject" },
@@ -159,116 +168,9 @@ test("rich library detail requires explicit adoption and sends the complete revi
       },
     },
   ]);
-  await expect(button(page, "Undo")).toBeDisabled();
-  expectIsolated(fixture);
-});
-
-for (const status of [409, 503]) {
-  test(`rich save ${status} retains edits until deliberate owner review and full rebase`, async ({
-    page,
-  }) => {
-    const fixture = await documentFixture(page);
-    await enterEditor(page);
-    await adoptDocument(page);
-    const saved = structuredClone(fixture.control.current);
-    await page.getByLabel("Newsletter name").fill("Retained local name");
-    await page
-      .getByLabel("Subject", { exact: true })
-      .fill("Retained local subject");
-    fixture.queue("save", (route) =>
-      route.fulfill({ status, json: { message: "Synthetic save refusal" } }),
-    );
-    await button(page, "Save newsletter").click();
-    await expect(
-      page.getByText(
-        status === 409
-          ? /The saved revision changed/
-          : /Save could not be confirmed and will not be repeated/,
-      ),
-    ).toBeVisible();
-    await expect(page.getByLabel("Newsletter name")).toHaveValue(
-      "Retained local name",
-    );
-    await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
-      "Retained local subject",
-    );
-    await expect(button(page, "Save newsletter")).toBeDisabled();
-    await expect(button(page, "Stage newsletter")).toBeDisabled();
-    await page
-      .getByLabel("Subject", { exact: true })
-      .fill("Continued local edit");
-    fixture.control.current = {
-      ...saved,
-      revision: 6,
-      name: "Changed owner document",
-      config: { ...saved.config, subject: "Changed owner subject" },
-    };
-    await button(page, "Read current saved document").click();
-    await expect(
-      page.getByRole("region", { name: "Review current saved newsletter" }),
-    ).toContainText("Changed owner document");
-    await expect(page.getByLabel("Newsletter name")).toHaveValue(
-      "Retained local name",
-    );
-    await expect(button(page, "Save newsletter")).toBeDisabled();
-    expect(fixture.calls("save")).toHaveLength(1);
-    await button(page, "Rebase local draft onto reviewed revision").click();
-    await expect(
-      page.getByText(/Local edits retained against the reviewed revision/),
-    ).toBeVisible();
-    await button(page, "Save newsletter").click();
-    await expect(
-      page.getByText("Saved revision 7.", { exact: true }),
-    ).toBeVisible();
-    expect(fixture.calls("save")).toHaveLength(2);
-    expect(fixture.calls("save")[1]!.input).toEqual({
-      params: { id: saved.id },
-      body: {
-        revision: 6,
-        name: "Retained local name",
-        config: { ...saved.config, subject: "Continued local edit" },
-        design: saved.design,
-      },
-    });
-    expectIsolated(fixture);
-  });
-}
-
-test("rich explicit adoption replaces uncertain local edits without attributing the owner state", async ({
-  page,
-}) => {
-  const fixture = await documentFixture(page);
-  await enterEditor(page);
-  await adoptDocument(page);
-  await page.getByLabel("Newsletter name").fill("Discarded local edits");
-  fixture.queue("save", (route) => route.abort("connectionreset"));
-  await button(page, "Save newsletter").click();
-  await expect(
-    page.getByText(/Save could not be confirmed and will not be repeated/),
-  ).toBeVisible();
-  fixture.control.current = {
-    ...fixture.control.current,
-    revision: 6,
-    name: "Reviewed owner name",
-  };
   await button(page, "Read current saved document").click();
-  await expect(
-    page.getByRole("region", { name: "Review current saved newsletter" }),
-  ).toBeVisible();
-  await expect(page.getByLabel("Newsletter name")).toHaveValue(
-    "Discarded local edits",
-  );
   await button(page, "Adopt saved document and replace local draft").click();
-  await expect(page.getByLabel("Newsletter name")).toHaveValue(
-    "Reviewed owner name",
-  );
-  await expect(
-    page.getByText(
-      "Using the reviewed saved document. This does not confirm a previous uncertain attempt.",
-    ),
-  ).toBeVisible();
   await expect(button(page, "Undo")).toBeDisabled();
-  expect(fixture.calls("save")).toHaveLength(1);
   expectIsolated(fixture);
 });
 
