@@ -116,14 +116,18 @@ export function HillDayWizard({
   initialClientId = "",
 }: {
   onClose: () => void;
-  onCreated: (id: string) => void;
+  onCreated: (document: { id: string; clientId: string }) => void;
   initialClientId?: string;
 }) {
   const [step, setStep] = useState(0);
   const [blueprintId, setBlueprintId] = useState("");
   const [clientId, setClientId] = useState(initialClientId);
   const [name, setName] = useState("");
-  const [documentId, setDocumentId] = useState("");
+  const [createdDocument, setCreatedDocument] = useState<{
+    id: string;
+    clientId: string;
+  }>();
+  const documentId = createdDocument?.id ?? "";
   const [meetings, setMeetings] = useState<
     { meetingId: string; title: string }[]
   >([]);
@@ -146,7 +150,7 @@ export function HillDayWizard({
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           },
         });
-        setDocumentId(result.id);
+        setCreatedDocument({ id: result.id, clientId: result.client.id });
         setStep(2);
       } catch {
         /* No transition until the server acknowledges creation. */
@@ -279,7 +283,9 @@ export function HillDayWizard({
         {step === 5 && (
           <HillDayGeneration
             id={documentId}
-            onOpen={() => onCreated(documentId)}
+            onOpen={() => {
+              if (createdDocument) onCreated(createdDocument);
+            }}
           />
         )}
       </div>

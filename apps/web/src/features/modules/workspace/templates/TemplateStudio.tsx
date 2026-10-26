@@ -214,10 +214,12 @@ export function TemplateStudio({
       )}
       {detail && (
         <TemplateDetails
+          key={detail.id}
           id={detail.id}
           mode={detail.mode}
           onClose={() => setDetail(undefined)}
           onEdit={setWizard}
+          onSettingsSaved={list.reload}
         />
       )}
       <Modal

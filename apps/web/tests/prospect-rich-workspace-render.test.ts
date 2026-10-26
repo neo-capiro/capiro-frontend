@@ -46,11 +46,12 @@ vi.mock(
   () => ({ NewsletterWorkflow: () => null }),
 );
 import { WorkspaceDraft } from "../src/features/modules/workspace/WorkspaceDraft";
-const render = () =>
+const render = (expectedClientId?: string) =>
   renderToStaticMarkup(
     createElement(WorkspaceDraft, {
       id: draft.id,
       prospectId: draft.prospectId,
+      expectedClientId,
       onClose: () => {},
     }),
   );
@@ -65,6 +66,11 @@ describe("manual prospect Workspace presentation", () => {
     expect(html).toContain('aria-label="Body content"');
     expect(html).toContain("Plain &amp; literal &lt; example</textarea>");
     expect(html).toContain("Format text");
+  });
+  it("keeps the prospect owner responsible for prospect admission when a client hint is present", () => {
+    const html = render("90000000-0000-4000-8000-000000000001");
+    expect(html).toContain('aria-label="Body content"');
+    expect(html).not.toContain("Document unavailable");
   });
   it("opens existing formatted sections without exposing literal HTML in a textarea", () => {
     state.html = "<p>A <strong>formatted</strong> draft</p>";

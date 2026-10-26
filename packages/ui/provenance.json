@@ -775,10 +775,25 @@
       "upstreamBlobSha1": "8c5d559a3926d40eb0254582a0bee5151e8ba801",
       "upstreamBytes": 1886,
       "upstreamSha256": "1454af3ac2c58766a155a881d119d1f9321632a4922d3f74581ba37f52b4707a",
-      "adaptation": null,
+      "adaptation": {
+        "owner": "Capiro M3 citation UI",
+        "reason": "Expose the existing forwarded Collapsible disclosure props in SourcesProps; no runtime change.",
+        "changes": [
+          "Prominent owner change notice",
+          "SourcesProps derives from the existing Collapsible component instead of a div."
+        ],
+        "importsExports": "Preserved",
+        "notice": "// Capiro M3 owner adaptation: SourcesProps follows the existing Collapsible props\n// so its already-forwarded disclosure options are typed. Runtime behavior is unchanged.\n\n",
+        "edits": [
+          {
+            "from": "export type SourcesProps = ComponentProps<\"div\">;",
+            "to": "export type SourcesProps = ComponentProps<typeof Collapsible>;"
+          }
+        ]
+      },
       "promotedPath": "src/ai-elements/sources.tsx",
-      "promotedSha256": "81db9ff918731bff2b6ddc5a90a158edde7d73c4c09d6224fbeb8627551f5c9e",
-      "promotedBytes": 1853,
+      "promotedSha256": "e94dc74ead0f0a20a64eded912b84255d877b017535e3bfe93be148fe19160de",
+      "promotedBytes": 2039,
       "importSpecifierChanges": [
         {
           "from": "@repo/shadcn-ui/components/ui/collapsible",

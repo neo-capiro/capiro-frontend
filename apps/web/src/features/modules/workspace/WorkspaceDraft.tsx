@@ -2,17 +2,12 @@
 
 import { useState } from "react";
 import type { WorkspaceDraftDocument } from "../../../shared/capiro/operations/workspace-documents";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
-  Modal,
   Panel,
   StatusPanel,
-  TextArea,
   TextInput,
 } from "../../../shared/module-ui";
 import {
@@ -30,79 +25,105 @@ import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
+import { VersionHistory } from "./version-history/VersionHistory";
+import { OrdinaryDraftExport } from "./ordinary-export/OrdinaryDraftExport";
+import {
+  OrdinaryDraftSave,
+  OrdinarySaveRecovery,
+  type OrdinarySave,
+} from "./ordinary-save/OrdinaryDraftSave";
 
 function DraftEditor({
   draft,
   onClose,
-  reload,
   prospectSave,
+  ordinarySave,
+  onOrdinaryBound,
 }: {
   draft: WorkspaceDraftDocument;
   onClose: () => void;
-  reload: () => void;
   prospectSave?: ReturnType<typeof useProspectDraftSave>;
+  ordinarySave?: OrdinarySave;
+  onOrdinaryBound?: (draft: WorkspaceDraftDocument) => void;
 }) {
   const initial = prospectSave?.retained?.input ?? manualDraftInput(draft);
-  const [title, setTitle] = useState(initial.title);
-  const [sections, setSections] = useState(initial.sections);
+  const [localTitle, setLocalTitle] = useState(initial.title);
+  const [localSections, setLocalSections] = useState(initial.sections);
   const [boundDraft, setBoundDraft] = useState<WorkspaceDraftDocument>();
-  const currentDraft = boundDraft ?? draft;
-  const names = initial.names;
-  const [history, setHistory] = useState(false);
-  const update = useCapiroMutation("workspace.draft.update");
-  const snapshot = useCapiroMutation("workspace.draft.snapshot");
-  const versions = useCapiroQuery(
-    "workspace.draft.versions",
-    { params: { draftId: draft.id } },
-    { enabled: history },
-  );
+  const currentDraft = ordinarySave?.currentDraft ?? boundDraft ?? draft;
+  const title = ordinarySave?.input?.title ?? localTitle;
+  const sections = ordinarySave?.input?.sections ?? localSections;
+  const names = ordinarySave?.input?.names ?? initial.names;
+  const setTitle = (value: string) =>
+    ordinarySave
+      ? ordinarySave.setInput({ title: value, sections, names })
+      : setLocalTitle(value);
+  const setSection = (name: string, content: string) =>
+    ordinarySave
+      ? ordinarySave.setInput({
+          title,
+          names,
+          sections: { ...sections, [name]: content },
+        })
+      : setLocalSections((previous) => ({ ...previous, [name]: content }));
   const invalidSection = Object.values(sections).some((content) =>
     sectionSizeError(content),
   );
-  const pending = Boolean(
-    prospectSave?.pending || update.pending || snapshot.pending,
-  );
+  const pending = Boolean(prospectSave?.pending || ordinarySave?.pending);
   async function save() {
     if (pending || invalidSection) return;
     if (draft.prospectId) {
       await prospectSave?.save({ title, sections, names });
       return;
     }
-    try {
-      await update.run({
-        params: { id: draft.id },
-        body: { docTitle: title, config: { sectionContent: sections } },
-      });
-      await snapshot.run({
-        params: { draftId: draft.id },
-        body: { label: "Manual save" },
-      });
-      reload();
-    } catch {
-      /* Server error remains visible. */
-    }
+    await ordinarySave?.save();
   }
   return (
     <section className={styles.screen}>
       <header className={styles.heading}>
         <div>
           <ActionButton onClick={onClose}>← Workspace</ActionButton>
-          <h1>{draft.docTitle}</h1>
+          <h1>{ordinarySave ? currentDraft.docTitle : draft.docTitle}</h1>
           <p>
             {currentDraft.product ?? "Document"} ·{" "}
             {currentDraft.client ?? "Firm"}
           </p>
         </div>
         <div className={styles.actions}>
-          <ActionButton onClick={() => setHistory(true)}>History</ActionButton>
-          {draft.prospectId && (
+          <VersionHistory
+            key={`${currentDraft.id}:${currentDraft.clientId ?? ""}:${ordinarySave ? currentDraft.updatedAt : ""}`}
+            draft={currentDraft}
+          />
+          {/* Safe preview of the supported section projection only. An ordinary
+              document whose stored body is not a supported projection is
+              refused with a reason, and a mixed projection is qualified, rather
+              than shown as the whole document. Prospect behavior is unchanged. */}
+          {draft.prospectId || names.length ? (
             <DocumentPreview title={title} names={names} sections={sections} />
+          ) : (
+            <p className={styles.secondary}>
+              Preview unavailable: there is no supported section content to
+              preview; stored body content is preserved read-only and is not
+              shown.
+            </p>
+          )}
+          {!draft.prospectId && names.length > 0 && (
+            <p className={styles.secondary}>
+              This preview shows only the supported sections; other saved
+              content, if present, is preserved read-only and is not shown.
+            </p>
+          )}
+          {!draft.prospectId && (
+            <OrdinaryDraftExport
+              key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
+              draft={currentDraft}
+              disabled={pending}
+            />
           )}
           <ActionButton
             primary
             disabled={
-              update.pending ||
-              snapshot.pending ||
+              (ordinarySave && !ordinarySave.canSave) ||
               prospectSave?.pending ||
               Boolean(prospectSave?.retained?.uncertain) ||
               invalidSection ||
@@ -116,10 +137,11 @@ function DraftEditor({
       </header>
       <DraftClientAssociation
         draft={currentDraft}
-        disabled={pending}
-        onBound={setBoundDraft}
+        disabled={pending || Boolean(ordinarySave?.frozen)}
+        onBound={onOrdinaryBound ?? setBoundDraft}
       />
       <CopiedTabs draft={currentDraft} />
+      {ordinarySave && <OrdinarySaveRecovery save={ordinarySave} />}
       {draft.prospectId && prospectSave && (
         <>
           <p>
@@ -168,50 +190,29 @@ function DraftEditor({
           />
         </>
       )}
-      {(update.error || snapshot.error) && (
-        <p role="alert" className={styles.error}>
-          {(update.error ?? snapshot.error)?.message}
-        </p>
-      )}
       <Field label="Document title" htmlFor="workspace-document-title">
         <TextInput
           id="workspace-document-title"
           value={title}
           maxLength={500}
-          disabled={pending}
+          disabled={pending || Boolean(ordinarySave?.frozen)}
           onChange={(event) => setTitle(event.target.value)}
         />
       </Field>
       {names.length ? (
         names.map((name) => (
           <Panel key={name} title={name}>
-            {draft.prospectId ? (
-              <SectionEditor
-                name={name}
-                value={sections[name] ?? ""}
-                disabled={pending}
-                onChange={(content) =>
-                  setSections((previous) => ({ ...previous, [name]: content }))
-                }
-              />
-            ) : (
-              <TextArea
-                aria-label={`${name} content`}
-                value={sections[name] ?? ""}
-                disabled={pending}
-                onChange={(event) =>
-                  setSections((previous) => ({
-                    ...previous,
-                    [name]: event.target.value,
-                  }))
-                }
-              />
-            )}
+            <SectionEditor
+              name={name}
+              value={sections[name] ?? ""}
+              disabled={pending || Boolean(ordinarySave?.frozen)}
+              onChange={(content) => setSection(name, content)}
+            />
           </Panel>
         ))
       ) : (
         <Panel title="Document contents">
-          {draft.documents
+          {currentDraft.documents
             .filter((document) => !document.sourceBriefVersion)
             .map((document) => (
               <article key={document.id}>
@@ -225,30 +226,6 @@ function DraftEditor({
             ))}
         </Panel>
       )}
-      <Modal open={history} onOpenChange={setHistory} title="Document history">
-        <StatusPanel
-          loading={versions.loading}
-          error={
-            versions.error ??
-            (versions.data?.some((version) => version.draftId !== draft.id)
-              ? new Error("History belongs to another document.")
-              : undefined)
-          }
-          onRetry={versions.reload}
-        >
-          <div className={styles.form}>
-            {versions.data?.map((version) => (
-              <p key={version.id}>
-                <strong>{version.label ?? "Saved version"}</strong>
-                <span className={styles.secondary}>
-                  {new Date(version.createdAt).toLocaleString()} ·{" "}
-                  {version.authorKind}
-                </span>
-              </p>
-            ))}
-          </div>
-        </StatusPanel>
-      </Modal>
     </section>
   );
 }
@@ -282,7 +259,6 @@ function ProspectDraftEditor({
       key={save.retained?.requestId ?? "current"}
       draft={draft}
       onClose={onClose}
-      reload={reload}
       prospectSave={save}
     />
   );
@@ -291,26 +267,46 @@ function ProspectDraftEditor({
 export function WorkspaceDraft({
   id,
   prospectId,
+  expectedClientId,
   onClose,
 }: {
   id: string;
   prospectId?: string;
+  expectedClientId?: string;
   onClose: () => void;
 }) {
   const query = useCapiroQuery("workspace.draft", { params: { id } });
   const me = useCapiroQuery(
     "me.read",
     {},
-    { enabled: Boolean(prospectId || query.data?.prospectId) },
+    {
+      enabled: Boolean(
+        prospectId ||
+        (query.data &&
+          (query.data.prospectId || query.data.product !== "Newsletter")),
+      ),
+    },
   );
-  if (query.data && query.data.id !== id)
+  if (
+    query.data &&
+    (query.data.id.toLowerCase() !== id.toLowerCase() ||
+      (!query.data.prospectId &&
+        expectedClientId &&
+        (query.data.clientAssociation === "held" ||
+          query.data.clientId?.toLowerCase() !==
+            expectedClientId.toLowerCase())))
+  )
     return (
       <section className={styles.screen}>
         <header className={styles.heading}>
           <h1>Document unavailable</h1>
         </header>
         <StatusPanel
-          error="The returned document does not match this link."
+          error={
+            query.data.id.toLowerCase() !== id.toLowerCase()
+              ? "The returned document does not match this link."
+              : "The returned document no longer matches this client scope."
+          }
           onRetry={query.reload}
         />
       </section>
@@ -346,28 +342,33 @@ export function WorkspaceDraft({
       }}
     >
       {query.data &&
-        (query.data.prospectId ? (
-          me.data && (
-            <ProspectDraftEditor
-              key={`${me.data.tenant.id}:${me.data.user.id}:${me.data.user.clerkUserId}:${query.data.id}`}
-              actor={{
-                tenantId: me.data.tenant.id,
-                userId: me.data.user.id,
-                ownerId: me.data.user.clerkUserId,
-              }}
-              draft={query.data}
-              onClose={onClose}
-              reload={query.reload}
-            />
-          )
-        ) : (
-          <DraftEditor
-            key={query.data.id}
-            draft={query.data}
-            onClose={onClose}
-            reload={query.reload}
-          />
-        ))}
+        (query.data.prospectId
+          ? me.data && (
+              <ProspectDraftEditor
+                key={`${me.data.tenant.id}:${me.data.user.id}:${me.data.user.clerkUserId}:${query.data.id}`}
+                actor={{
+                  tenantId: me.data.tenant.id,
+                  userId: me.data.user.id,
+                  ownerId: me.data.user.clerkUserId,
+                }}
+                draft={query.data}
+                onClose={onClose}
+                reload={query.reload}
+              />
+            )
+          : me.data && (
+              <OrdinaryDraftSave
+                key={`${me.data.tenant.id}:${me.data.user.id}:${me.data.user.clerkUserId}:${query.data.id}:${query.data.clientId ?? ""}`}
+                draft={query.data}
+                actor={{
+                  tenantId: me.data.tenant.id,
+                  userId: me.data.user.id,
+                  actorId: me.data.user.clerkUserId,
+                }}
+                onClose={onClose}
+                editor={DraftEditor}
+              />
+            ))}
     </StatusPanel>
   );
 }

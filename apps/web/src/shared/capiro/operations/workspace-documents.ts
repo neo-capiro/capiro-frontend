@@ -102,6 +102,36 @@ export const workspaceDraft = z.object({
     tone: z.string().optional(),
   }),
 });
+// A saved version carries the exact bounded draft state captured at save time
+// (apps/workspace VersionsService.list returns the raw WsDocVersion row incl.
+// `snapshot`). Unknown rich fields are preserved by passthrough so read-only
+// history never lossily reshapes or drops stored JSON.
+const savedVersionDocument = z
+  .object({
+    id: workspaceId,
+    name: z.string().optional(),
+    ordinal: z.number().optional(),
+    body: z.unknown().optional(),
+    sourceBriefVersion: z.unknown().optional(),
+  })
+  .passthrough();
+const savedVersionSnapshot = z
+  .object({
+    docTitle: z.string().optional(),
+    // config.clientId is the snapshot's client association (the restore parent
+    // identity check); other engine config keys are preserved.
+    config: z
+      .object({
+        clientId: workspaceId.nullable().optional(),
+        sections: z.array(z.string()).optional(),
+        sectionContent: z.record(z.string(), z.string()).optional(),
+      })
+      .passthrough()
+      .optional(),
+    ask: z.unknown().optional(),
+    documents: z.array(savedVersionDocument).optional(),
+  })
+  .passthrough();
 const version = z.object({
   id: workspaceId,
   draftId: workspaceId,
@@ -109,8 +139,99 @@ const version = z.object({
   authorId: z.string(),
   authorKind: z.string(),
   createdAt: z.string(),
+  // Present on the real producer rows (VersionsService.list/create). Optional
+  // here so the shared version response stays additive for existing consumers.
+  snapshot: savedVersionSnapshot.optional(),
 });
+const ordinarySaveSource =
+  "capirov2@45eaba1b720849e914052fcf3d7003ac73ac27cd apps/workspace/src/drafts/{ordinary-draft-save.ts,dto/save-draft.dto.ts,drafts.controller.ts,drafts.service.ts}";
+const ordinaryHash = z.string().regex(/^[a-f0-9]{64}$/);
+// The editor sends only supported title/section edits. Core merges config;
+// unprojected config, body, documents and associations are never round-tripped.
+export const ordinarySaveBody = z
+  .object({
+    requestId: workspaceId,
+    expectedStateHash: ordinaryHash,
+    expectedClientId: workspaceId.nullable(),
+    label: z.literal("Manual save"),
+    draft: z
+      .object({
+        docTitle: z.string().min(1).max(500),
+        config: z
+          .object({
+            sectionContent: z.record(
+              z.string().max(200),
+              z.string().max(50000),
+            ),
+          })
+          .strict(),
+      })
+      .strict(),
+  })
+  .strict()
+  .refine(
+    (value) =>
+      new TextEncoder().encode(JSON.stringify(value)).byteLength <= 1_000_000,
+    "The save exceeds the supported byte limit.",
+  );
+export const ordinaryDraftState = z
+  .object({
+    schemaVersion: z.literal(1),
+    tenantId: workspaceId,
+    draftId: workspaceId,
+    clientId: workspaceId.nullable(),
+    stateHash: ordinaryHash,
+    hashFormat: z.literal("workspace-ordinary-draft-state-v1"),
+    draft: workspaceDraft.extend({
+      tenantId: workspaceId,
+      clientId: workspaceId.nullable(),
+      prospectId: z.null().optional(),
+    }),
+  })
+  .strict();
+export const ordinarySaveResponse = z
+  .object({
+    schemaVersion: z.literal(1),
+    replayed: z.boolean(),
+    receipt: z
+      .object({
+        operation: z.literal("save_ordinary_draft"),
+        tenantId: workspaceId,
+        draftId: workspaceId,
+        actorId: z.string().min(1).max(200),
+        requestId: workspaceId,
+        requestHash: ordinaryHash,
+        clientId: workspaceId.nullable(),
+        stateHash: ordinaryHash,
+        versionId: workspaceId,
+        savedAt: z.iso.datetime(),
+        snapshotHash: ordinaryHash,
+        hashFormat: z.literal("workspace-snapshot-canonical-json-v1"),
+      })
+      .strict(),
+  })
+  .strict();
+export type OrdinarySaveBody = z.infer<typeof ordinarySaveBody>;
+export type OrdinaryDraftState = z.infer<typeof ordinaryDraftState>;
+export type OrdinarySaveResponse = z.infer<typeof ordinarySaveResponse>;
+
 export const workspaceDocumentOperations = {
+  "workspace.draft.state": defineOperation({
+    service: "workspace",
+    method: "GET",
+    path: "/drafts/:id/state",
+    request: z.object({ params }).strict(),
+    response: ordinaryDraftState,
+    source: ordinarySaveSource,
+  }),
+  "workspace.draft.save": defineOperation({
+    service: "workspace",
+    method: "POST",
+    path: "/drafts/:id/save",
+    request: z.object({ params, body: ordinarySaveBody }).strict(),
+    response: ordinarySaveResponse,
+    source: ordinarySaveSource,
+  }),
   "workspace.draft": defineOperation({
     service: "workspace",
     method: "GET",
@@ -279,3 +400,6 @@ export const workspaceDocumentOperations = {
 export type NewsletterBody = z.infer<typeof newsletterBody>;
 export type NewsletterBlock = z.infer<typeof newsletterBlock>;
 export type WorkspaceDraftDocument = z.infer<typeof workspaceDraft>;
+export type SavedVersion = z.infer<typeof version>;
+export type SavedVersionSnapshot = z.infer<typeof savedVersionSnapshot>;
+export type SavedVersionDocument = z.infer<typeof savedVersionDocument>;

@@ -1,4 +1,4 @@
-import { build, preview } from "vite";
+import { build, createServer, preview } from "vite";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -39,31 +39,43 @@ const configuration = {
     fs: { allow: [workspace] },
   },
 };
-await build({
-  ...configuration,
-  build: {
-    outDir: path.join(app, ".qa/modules-harness"),
-    emptyOutDir: true,
-    minify: false,
-    sourcemap: true,
-    rolldownOptions: {
-      input: {
-        main: local("index.html"),
-        authLifecycle: local("auth-lifecycle.html"),
-      },
-      onwarn(warning, handler) {
-        if (warning.code !== "MODULE_LEVEL_DIRECTIVE") handler(warning);
+// Opt-in test-only path (CAPIRO_BROWSER_TEST_DEV=1) for the strict-effects case:
+// the standard Vite development server serves the development React build, which
+// is the only build in which StrictMode actually replays effects. Default
+// behaviour (build + preview, production React) is unchanged.
+if (process.env.CAPIRO_BROWSER_TEST_DEV === "1") {
+  const server = await createServer({ ...configuration, logLevel: "warn" });
+  await server.listen();
+  console.log(
+    `Explicit test-only Modules and Settings harness (development, strict-effects): http://127.0.0.1:${port}`,
+  );
+} else {
+  await build({
+    ...configuration,
+    build: {
+      outDir: path.join(app, ".qa/modules-harness"),
+      emptyOutDir: true,
+      minify: false,
+      sourcemap: true,
+      rolldownOptions: {
+        input: {
+          main: local("index.html"),
+          authLifecycle: local("auth-lifecycle.html"),
+        },
+        onwarn(warning, handler) {
+          if (warning.code !== "MODULE_LEVEL_DIRECTIVE") handler(warning);
+        },
       },
     },
-  },
-  logLevel: "warn",
-});
-await preview({
-  ...configuration,
-  build: { outDir: path.join(app, ".qa/modules-harness") },
-  preview: { host: "127.0.0.1", port, strictPort: true },
-  logLevel: "warn",
-});
-console.log(
-  `Explicit test-only Modules and Settings harness: http://127.0.0.1:${port}`,
-);
+    logLevel: "warn",
+  });
+  await preview({
+    ...configuration,
+    build: { outDir: path.join(app, ".qa/modules-harness") },
+    preview: { host: "127.0.0.1", port, strictPort: true },
+    logLevel: "warn",
+  });
+  console.log(
+    `Explicit test-only Modules and Settings harness: http://127.0.0.1:${port}`,
+  );
+}

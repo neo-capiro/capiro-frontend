@@ -345,14 +345,31 @@ function DocumentEditor({
 
 export function HillDayEditor({
   id,
+  expectedClientId,
   onClose,
 }: {
   id: string;
+  expectedClientId?: string;
   onClose: () => void;
 }) {
   const query = useCapiroQuery("workspace.hillday.document", {
     params: { id },
   });
+  if (
+    query.data &&
+    (query.data.id.toLowerCase() !== id.toLowerCase() ||
+      (expectedClientId &&
+        query.data.client.id.toLowerCase() !== expectedClientId.toLowerCase()))
+  )
+    return (
+      <section className={styles.screen}>
+        <h1>Hill Day document unavailable</h1>
+        <StatusPanel
+          error="The returned document does not match this link or its client scope."
+          onRetry={query.reload}
+        />
+      </section>
+    );
   return (
     <StatusPanel
       loading={query.loading}

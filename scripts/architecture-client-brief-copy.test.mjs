@@ -80,10 +80,11 @@ test('a sixth caller, a private target and reverse or other feature edges remain
   rejected('packages/meri-client/src/authority.ts', `import type { ProspectWriter } from '${seam}';`, target, 'private cross-owner');
 });
 
-test('the new command and existing objective owner alone admit the sole named public snapshot function', () => {
+test('only allocated command, objective and ordinary-save owners admit the sole named public snapshot function', () => {
   const statement = "import { canonicalWorkspaceSnapshot } from '@capiro/shared';";
   const objective = `${root}shared/capiro/operations/objective-workspace-receiving.ts`;
-  for (const file of [`${owner}command.ts`, objective]) {
+  const ordinarySave = `${root}features/modules/workspace/ordinary-save/ordinary-save.ts`;
+  for (const file of [`${owner}command.ts`, objective, ordinarySave]) {
     assert.deepEqual(inspectSources(new Map([[file, statement]])).errors, []);
     for (const source of [
       "import { canonicalWorkspaceSnapshot, clientMemoryAllowed } from '@capiro/shared';",
@@ -100,7 +101,7 @@ test('the new command and existing objective owner alone admit the sole named pu
       "import { canonicalWorkspaceSnapshot } from '@capiro/shared/dist/workspace-saved-revision';",
     ]) assert.ok(inspectSources(new Map([[file, source]])).errors.some(error => error.includes('non-public package import')), source);
   }
-  for (const file of [`${owner}authority.ts`, `${owner}sixth.ts`, `${root}features/portfolio/prospects/command.ts`, `${root}shared/capiro/operations/other.ts`]) {
+  for (const file of [`${owner}authority.ts`, `${owner}sixth.ts`, `${root}features/portfolio/prospects/command.ts`, `${root}shared/capiro/operations/other.ts`, `${root}features/modules/workspace/ordinary-save/other.ts`]) {
     assert.ok(inspectSources(new Map([[file, statement]])).errors.some(error => error.includes('non-public package import')), file);
   }
 });

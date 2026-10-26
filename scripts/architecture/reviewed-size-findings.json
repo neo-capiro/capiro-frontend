@@ -1883,10 +1883,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "fingerprint": "9aa643c307cfc5f36a2b2f81a2e587413920dbb9cb916425ea9eed2044f3dcfc",
-    "reason": "Existing Workspace route/list/create container receives a single early delegation to BriefCopyRoute for exact copy query keys. Parsing, admission and command behavior remain in the new cohesive feature rather than expanding this route container. Exact independent review: docs/workspace-brief-copy-20261013/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent calendar_relationships_review; root integrated exact reviewed source",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "ec78085fc5fff0026c619d5a468a7e60ddda45a120c5a1f07b7c0c832ba5cf60",
+    "reason": "One194-line route-composition screen maps validated route variants to separate workflows, keys UI scopes and renders navigation choices. Parsing/serialization, library querying and each workflow have separate owners. It does not implement domain reads, authorization or persistence; keep the connected composition. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -2423,10 +2423,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "caa02f35b94dab13410db0c0c48a8966e104078c1b51afc66efe4aa9685ec465",
-    "reason": "Retain this function as the manual draft editor composition. It owns the editable title/section buffers, history visibility and ordinary PATCH-then-snapshot action for the displayed draft. Prospect identity admission remains in WorkspaceDraft/assertProspectDraft, retained prospect-save reconciliation remains in useProspectDraftSave, rich content rendering/export remains in named components, and copied source tabs remain in CopiedTabs. The A1 binding change stores only the confirmed bound draft for association presentation and passes onBound directly to setBoundDraft; it deliberately leaves title/sections intact instead of reloading the editor and losing unsaved work. Ordinary and prospect paths keep their established different save semantics while sharing the same editing presentation. Extracting their common JSX into a new generic editor abstraction would not remove an independent domain responsibility.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "2114418c39d3315017c0392e0f94635b0a232d48794a2c5576f2dc3f2931dd14",
+    "reason": "DraftEditor retains its existing presentation role and composes distinct save owners. The corrected fallback renders currentDraft.documents after an explicit current read; it does not introduce transport, storage or authority. This final disposition replaces the earlier193-line pre171 composition record, which does not apply to the new body. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-document/DocumentLink.tsx",
@@ -2864,10 +2864,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
     "kind": "function",
     "symbol": "DocumentsLibrary",
-    "fingerprint": "2d75301592dc14979a988f9c8f9456b73afa4c8a02e7e5fef966862d3561ba97",
-    "reason": "Retain this function as the read-only Workspace document-list interaction. Query parameters, current page cursor, local search/ownership/template/client filters, loading/refusal state, table columns and open callbacks all operate on one admitted result page. The fixed workspace.documents schema/transport owns receipt parsing and requests; the backend owns visibility, while the optional clientId is sent as the existing server query scope. The A1 additions suppress held rows from client-scoped views/options and show the explicit recovery label without adding a write path, association inference or new store. The local client-name selector filters already-returned display rows and does not establish client identity or change bindings. Extracting columns or each filter into separate files would mainly split presentation configuration, not create a clearer ownership boundary.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "0ff1c95000eca5d382215b642533d5bae8bdb6d9b8b2348ef18d78333fb910cf",
+    "reason": "This exact 165-line function retains one authorized library filter/list presentation and its local cursor/loading/error lifetime. The fixed-operation query and canonical client selector remain separate owners. Independent PR158 review explicitly accepted the cohesive function at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de; composition preserves that entire source blob. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
@@ -3930,5 +3930,122 @@
     "reason": "ConnectedWorkflow owns one connected recommendation follow-through view: controller subscription/disposal, recovery affordance and composition of existing recommendation, draft and proposal panels. The changed branch selects truthful copy and an explicit read-versus-retry callback from controller state. Authorization, transport, saved-command persistence, immutable binding and async operation control remain in their existing separate owners. The addition creates no second workflow, journal or authority owner; extracting this small presentation branch would fragment the same view without separating a new responsibility. Accepted for this exact function only; no whole-architecture pass is claimed.",
     "reviewedBy": "Codex independent File Workflows UI reviewer, Root allocated PR163 review",
     "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "64155da97bb96b8706c60cccf26dec629a0c373dc85d9c2fe986aff843fbd67e",
+    "reason": "This 407-line declarative catalog retains the existing fixed Hill Day operation descriptors. The accepted change adds only authorized library query request metadata; it does not add a service lifecycle or browser authorization policy. Independent PR158 review explicitly accepted this catalog signal at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de. Composition preserves its exact blob. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
+    "kind": "function",
+    "symbol": "ExportDialog",
+    "fingerprint": "8d5587abe2e9468c3e1f4e4b32895d99463e5e2f0d2fe6029f5b82bfaf226def",
+    "reason": "The dialog owns declarative presentation of the known export receipt, pending/error/expiry state and explicit recovery/download actions. The adjacent accepted hook owns the request and download lifetime. Independent PR166 design review accepted this division without artificial splitting at83806222558a9d0ab779152e5f8a1c5f890df657; composition preserves the exact blob. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Independent Codex reviewer, W3-UI-PR166-REVIEW.md, 2026-10-25T21:09:35Z",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/useHillDayExport.ts",
+    "kind": "function",
+    "symbol": "useHillDayExport",
+    "fingerprint": "93b6021e2469b0017e5efbe2a882548d5ec009522d4d9e2f43a192c68d276fc5",
+    "reason": "This hook owns one cohesive known-receipt status/poll/renewal/download lifecycle and delegates query, mutation, transport and authorization to existing owners. The independent PR166 design review accepted this exact source at83806222558a9d0ab779152e5f8a1c5f890df657. Its report counts120 nonblank lines for the hook module; the canonical AST scanner counts112 in the function. Neither count is silently changed into a whole architecture pass. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Independent Codex reviewer, W3-UI-PR166-REVIEW.md, 2026-10-25T21:09:35Z",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceDraft",
+    "fingerprint": "87d432ab93156c11b79ba3e5151b07f9a582179bd0094c05554a1fd89e121e31",
+    "reason": "One route/data selection boundary retains identity keying and existing prospect/newsletter branches. There is no independent responsibility requiring a new module. The original scoped PR171 acceptance was rechecked against final corrected source. This record replaces the earlier87-line pre171 composition body. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+    "kind": "function",
+    "symbol": "HillDayWizard",
+    "fingerprint": "1d8d937ba624d1f17b1f73009e3238327262aee3471cc451915b91764b4556ed",
+    "reason": "One214-line wizard owns step state/presentation and composes separate sponsor, meeting, resolution, context and generation components. The accepted delta retains the returned document/client tuple for route construction; typed mutation hooks own create/update. No second job, recovery or authority subsystem is added. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/version-history/version-history.ts",
+    "kind": "function",
+    "symbol": "compareSavedVersions",
+    "fingerprint": "dc962f4282dcef85949c59d87d6a5803dc5732f321b2f0db2e9e6a3431d2275e",
+    "reason": "One82-line pure comparison of two admitted immutable snapshots covers title, tab identity/order/name/body, known sections and explicit unshown-content difference. It has no IO, effects or persistence. The small threshold crossing is cohesive and the full-snapshot comparison preserves truthful qualification. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/workspace.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "73522216baa709b3adc375f39aac0a0b71138d30c0c6f91b765d9970d67a6dd7",
+    "reason": "Existing805-line scoped Workspace presentation stylesheet adds only14 nonblank lines for versionFacts grid/terms/values, existing tokens and wrapping. These serve the accepted history view without global selector, shell, policy or behavior change. Moving unrelated inherited styles only to lower the count would unnecessarily enlarge the composition. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
+    "kind": "function",
+    "symbol": "TemplateDetails",
+    "fingerprint": "8958c608acec9038a6186420c619eb7a242042adaab3f11bb80481a882d719df",
+    "reason": "The new86-line body remains one detail modal composing one query, settings/use/history mode and existing child presentations. Its acknowledged-save callback reloads the detail and notifies the existing list owner; it adds no business, authorization or durable lifecycle responsibility. Splitting solely for the threshold would obscure this wiring. This ruling does not approve the unchanged UseTemplate save/use guarantees. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
+    "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "function",
+    "symbol": "TemplateStudio",
+    "fingerprint": "4f4ff8e2949581ad06fefc424f14ba28f0d66bf06df188ccf0b7402f101be7aa",
+    "reason": "The289-line body remains the existing template-list/filter/dialog composition owner. The accepted two-line change keys the detail by selected ID and supplies the existing list.reload callback. Detail/settings/query/lifetime owners remain separate; no cache, retry, receipt or authority mechanism is introduced. Full WS20 recovery/publication behavior is not approved by this narrow wiring review. Exact independent disposition: W3-WS20-PR174-REVIEW.md.",
+    "reviewedBy": "Independent Codex WS20 reviewer, FE174 afae4e1ea9d1634bd8a3ce08a45aa5a54f6fb57d",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "7ba7f640862c62e4ea572649285cc7b8fc11f87738c45dabab7e3f8a387a0341",
+    "reason": "The ordinary-save lifecycle owner keeps editor state, immutable request recovery and explicit resolution in one captured scope. Its small comparison helper delegates positive disposition to the canonical journal. Splitting persistence or authority into another module would duplicate existing ownership. This exact final corrected body retains known submitted requests across absent or different journal records and preserves other-tab unsent edits. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
+    "kind": "function",
+    "symbol": "useOrdinaryDraftSave",
+    "fingerprint": "67b05f3110cdad27c6f53ad07b763df0743cc334e01fd71f1499a52d0428fb55",
+    "reason": "One ordinary-save lifecycle function owns editor state, immutable request recovery and explicit resolution in a shared captured scope. Positive acknowledgement/refusal remains with the canonical journal; missing state is not settlement. No persistence or authority owner is duplicated. The exact corrected transitions have independently inspected mounted recovery witnesses. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6df8502e4da136253395f755a289a4a55d326929e85d6bd32d2b23811409361c",
+    "reason": "The existing document operation owner gains additive fixed state/save schemas with bounded input and explicit response bindings. The original scoped PR171 design acceptance remains unchanged and matches final source. This is an exact module disposition, not a broad allowance for future operations. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/session/recovery/journal.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "519c4e4f07cbc3a772e90ec36f87c50c1846845232df651fb89e98eb604aa311",
+    "reason": "The narrow delta adds one guarded refusal helper using the canonical storage, encryption and lock owner. It does not duplicate persistence or authority. The original scoped PR171 acceptance is unchanged and matches final source; it approves this exact helper addition within the existing module, not unrelated recovery expansion. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
+    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
   }
 ]

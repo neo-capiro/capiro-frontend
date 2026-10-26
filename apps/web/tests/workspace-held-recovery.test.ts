@@ -1,3 +1,4 @@
+import { testIdentity } from "../test/browser/fixtures";
 import { beforeEach, expect, it, vi } from "vitest";
 import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -20,6 +21,14 @@ const h = vi.hoisted(() => ({
       (props: {
         value: string;
         onChange: (event: { target: { value: string } }) => void;
+      }) => void
+    >(),
+  editors:
+    vi.fn<
+      (props: {
+        name: string;
+        value: string;
+        onChange: (value: string) => void;
       }) => void
     >(),
   buttons:
@@ -45,6 +54,10 @@ vi.mock("react", async (original) => ({
     ];
   },
 }));
+vi.mock(
+  "../src/features/modules/workspace/ordinary-save/OrdinaryDraftSave",
+  () => import("./workspace-ordinary-save-host-stub"),
+);
 vi.mock("../src/shared/capiro/queries", () => ({
   useCapiroQuery: (key: string) => ({
     data:
@@ -52,7 +65,7 @@ vi.mock("../src/shared/capiro/queries", () => ({
         ? h.row
         : key === "workspace.draft.versions"
           ? []
-          : {},
+          : testIdentity,
     reload: h.reload,
     loading: false,
   }),
@@ -85,7 +98,16 @@ vi.mock(
 );
 vi.mock(
   "../src/features/modules/workspace/rich-document/SectionEditor",
-  () => ({ SectionEditor: () => null }),
+  () => ({
+    SectionEditor: (props: Parameters<typeof h.editors>[0]) => {
+      h.editors(props);
+      return null;
+    },
+  }),
+);
+vi.mock(
+  "../src/features/modules/workspace/ordinary-export/OrdinaryDraftExport",
+  () => ({ OrdinaryDraftExport: () => null }),
 );
 vi.mock(
   "../src/features/modules/workspace/rich-document/SectionPreview",
@@ -114,10 +136,14 @@ vi.mock("../src/shared/module-ui", () => {
     TextArea: input,
   };
 });
-function render() {
+function render(expectedClientId?: string) {
   h.index = 0;
   return renderToStaticMarkup(
-    createElement(WorkspaceDraft, { id: draft.id, onClose: vi.fn() }),
+    createElement(WorkspaceDraft, {
+      id: draft.id,
+      expectedClientId,
+      onClose: vi.fn(),
+    }),
   );
 }
 beforeEach(() => {
@@ -134,11 +160,47 @@ beforeEach(() => {
   h.update.mockResolvedValue({});
   h.snapshot.mockResolvedValue({});
 });
+
+it.each([
+  { clientId: undefined, clientAssociation: undefined },
+  { clientId: null, clientAssociation: undefined },
+  {
+    clientId: "90000000-0000-4000-8000-000000000001",
+    clientAssociation: undefined,
+  },
+  {
+    clientId: "10000000-0000-4000-8000-000000000001",
+    clientAssociation: "held" as const,
+  },
+])(
+  "refuses a moved or unresolved ordinary client binding before editor hydration: %j",
+  (binding) => {
+    h.row = { ...h.row!, ...binding };
+    expect(render("10000000-0000-4000-8000-000000000001")).toContain(
+      "Document unavailable",
+    );
+    expect(h.inputs).not.toHaveBeenCalled();
+    expect(h.binding).not.toHaveBeenCalled();
+    expect(h.update).not.toHaveBeenCalled();
+    expect(h.snapshot).not.toHaveBeenCalled();
+  },
+);
+
+it("opens the existing ordinary editor for its current canonical client", () => {
+  const clientId = "10000000-0000-4000-8000-000000000001";
+  h.row = { ...h.row!, clientId, clientAssociation: undefined };
+  expect(render(clientId)).not.toContain("Document unavailable");
+  expect(h.inputs).toHaveBeenCalled();
+  expect(h.update).not.toHaveBeenCalled();
+  expect(h.snapshot).not.toHaveBeenCalled();
+});
 it("adopts a confirmed client without reloading or losing unsaved ordinary draft edits", async () => {
   render();
-  const [title, body] = h.inputs.mock.calls.map(([props]) => props);
+  const [title] = h.inputs.mock.calls.map(([props]) => props);
+
   title!.onChange({ target: { value: "Unsaved title" } });
-  body!.onChange({ target: { value: "Unsaved body" } });
+  render();
+  h.editors.mock.lastCall![0].onChange("Unsaved body");
   render();
   const bound: WorkspaceDraftDocument = {
     ...h.row!,
@@ -151,19 +213,10 @@ it("adopts a confirmed client without reloading or losing unsaved ordinary draft
   expect(h.reload).not.toHaveBeenCalled();
   expect(html).toContain("Bound client");
   expect(h.binding.mock.lastCall![0].draft).toBe(bound);
-  expect(h.inputs.mock.calls.slice(-2).map(([props]) => props.value)).toEqual([
-    "Unsaved title",
-    "Unsaved body",
-  ]);
-  const save = h.buttons.mock.calls.findLast(
-    ([props]) => props.children === "Save draft",
-  )![0];
-  await save.onClick();
-  expect(h.update).toHaveBeenCalledWith({
-    params: { id: draft.id },
-    body: {
-      docTitle: "Unsaved title",
-      config: { sectionContent: { Body: "Unsaved body" } },
-    },
-  });
+  expect(h.inputs.mock.calls.at(-1)![0].value).toBe("Unsaved title");
+  expect(h.editors.mock.calls.at(-1)![0].value).toBe("Unsaved body");
+  // The obsolete PATCH save expectation is replaced by the mounted atomic-save
+  // association/rebase witness in workspace-ordinary-save.spec.ts.
+  expect(h.update).not.toHaveBeenCalled();
+  expect(h.snapshot).not.toHaveBeenCalled();
 });
