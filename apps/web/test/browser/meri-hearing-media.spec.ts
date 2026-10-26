@@ -100,29 +100,37 @@ for (const width of [1440, 390])
       .click();
     const audio = page.locator("audio");
     await expect
-      .poll(() => audio.evaluate((element) => element.readyState))
+      .poll(() =>
+        audio.evaluate((element: HTMLAudioElement) => element.readyState),
+      )
       .toBeGreaterThanOrEqual(2);
     await recording.locator("media-play-button").click();
     await expect
-      .poll(() => audio.evaluate((element) => element.currentTime))
+      .poll(() =>
+        audio.evaluate((element: HTMLAudioElement) => element.currentTime),
+      )
       .toBeGreaterThan(0);
     await recording.locator("media-play-button").click();
     await expect
-      .poll(() => audio.evaluate((element) => element.paused))
+      .poll(() => audio.evaluate((element: HTMLAudioElement) => element.paused))
       .toBe(true);
     await recording.locator("media-mute-button").click();
     await expect
-      .poll(() => audio.evaluate((element) => element.muted))
+      .poll(() => audio.evaluate((element: HTMLAudioElement) => element.muted))
       .toBe(true);
     await recording.locator("media-playback-rate-button").click();
     await expect
-      .poll(() => audio.evaluate((element) => element.playbackRate))
+      .poll(() =>
+        audio.evaluate((element: HTMLAudioElement) => element.playbackRate),
+      )
       .not.toBe(1);
     const slider = recording.locator("media-time-range").getByRole("slider");
     await slider.focus();
     await page.keyboard.press("ArrowRight");
     await expect
-      .poll(() => audio.evaluate((element) => element.currentTime))
+      .poll(() =>
+        audio.evaluate((element: HTMLAudioElement) => element.currentTime),
+      )
       .toBeGreaterThan(1);
     await expect(
       recording.getByText(/Recording position: 00:00:/),
@@ -173,7 +181,7 @@ test("expired playback removes the player and pauses its detached audio", async 
   const audio = await page.locator("audio").elementHandle();
   await page.locator("media-play-button").click();
   await expect
-    .poll(() => audio!.evaluate((element) => element.paused))
+    .poll(() => audio!.evaluate((element: HTMLAudioElement) => element.paused))
     .toBe(false);
   await page.clock.fastForward(61_000);
   await expect(
@@ -182,7 +190,9 @@ test("expired playback removes the player and pauses its detached audio", async 
     ),
   ).toBeVisible();
   await expect(page.locator("audio, media-controller")).toHaveCount(0);
-  expect(await audio!.evaluate((element) => element.paused)).toBe(true);
+  expect(
+    await audio!.evaluate((element: HTMLAudioElement) => element.paused),
+  ).toBe(true);
 });
 
 test("closing disposes media and identity replacement rejects late media replies", async ({
@@ -196,11 +206,13 @@ test("closing disposes media and identity replacement rejects late media replies
   const audio = await page.locator("audio").elementHandle();
   await page.locator("media-play-button").click();
   await expect
-    .poll(() => audio!.evaluate((element) => element.paused))
+    .poll(() => audio!.evaluate((element: HTMLAudioElement) => element.paused))
     .toBe(false);
   await page.getByRole("button", { name: "Close hearing record" }).click();
   await expect(page.locator("audio")).toHaveCount(0);
-  expect(await audio!.evaluate((element) => element.paused)).toBe(true);
+  expect(
+    await audio!.evaluate((element: HTMLAudioElement) => element.paused),
+  ).toBe(true);
   let release!: () => void,
     requested = false;
   const pending = new Promise<void>((resolve) => {
@@ -249,7 +261,7 @@ test("identity replacement removes active playback and pauses detached audio", a
   const audio = await page.locator("audio").elementHandle();
   await page.locator("media-play-button").click();
   await expect
-    .poll(() => audio!.evaluate((element) => element.paused))
+    .poll(() => audio!.evaluate((element: HTMLAudioElement) => element.paused))
     .toBe(false);
   await page.evaluate(() =>
     window.dispatchEvent(
@@ -263,7 +275,9 @@ test("identity replacement removes active playback and pauses detached audio", a
     ),
   );
   await expect(page.locator("audio, media-controller")).toHaveCount(0);
-  expect(await audio!.evaluate((element) => element.paused)).toBe(true);
+  expect(
+    await audio!.evaluate((element: HTMLAudioElement) => element.paused),
+  ).toBe(true);
 });
 
 test("unavailable, stale and unsafe media never reach the audio provider", async ({
