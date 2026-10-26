@@ -145,13 +145,28 @@ function useConversationOpening(
   return {
     opening,
     reopen,
-    retry: (status: string) =>
-      status === "expired"
-        ? reopen({
-            target: exactTarget(opening.hints),
-            pending: opening.pending,
-          })
-        : setOpening({ ...opening, host: create(opening.hints) }),
+    /**
+     * Recovery never widens. Both retry paths reuse the exact binding this tab already holds, so a
+     * conversation-scope issuance - which the service may answer by reserving a successor - is never
+     * requested merely to recover access. The bound exact context is preferred; the opening hints are only
+     * a fallback for a tab that has not yet been bound.
+     */
+    retry: (status: string) => {
+      const target = exactTarget(bound.last()?.context) ?? exactTarget(opening.hints);
+      if (status === "expired")
+        return reopen({
+          target,
+          pending: opening.pending,
+        });
+      const hints = target
+        ? {
+            clientId,
+            conversationId: target.conversationId,
+            runId: target.runId,
+          }
+        : opening.hints;
+      setOpening({ ...opening, host: create(hints), hints });
+    },
   };
 }
 

@@ -1,0 +1,542 @@
+{
+  "schema": "capiro-installed-public-artifact-evidence/1",
+  "artifact": {
+    "file": "capiro-meri-contracts-0.1.14-bc9a68f0-6e24472f649d.tgz",
+    "repository": "https://github.com/neo-capiro/meri-greenfield",
+    "name": "@capiro/meri-contracts",
+    "version": "0.1.14",
+    "sourceCommit": "bc9a68f0dd35c830346c4555e5934bd99b245204",
+    "sourceTree": "9bd0ccbe93542d77696606e71cafc395bed8813c",
+    "packageInputTree": "10c3b953a4f52c2b3a7df7c39dd9a95708cb57e8",
+    "acceptedProducerCommit": "a602c574212bbf1521f8c7ea3aab41567838762d",
+    "acceptedConsumerCommit": "b58b9a56cc8b5abbb80ae7b4a67c9dfd9ba47974",
+    "sha256": "6e24472f649d9bc38b1a329b098b4f610500f5efdebc7724279962813352830a",
+    "integrity": "sha512-kaOMr11A2w5kyMJcFNh/94oq/UZUJuMR/dTYbpbmctMNptwmt69YcMnc1/Wi34FMTiVfB9QPrOM1vyLaLl8VpQ==",
+    "bytes": 885285,
+    "regularEntryCount": 61,
+    "status": "accepted-source-and-native-gates; composed-consumer-review-pending",
+    "purpose": "Exact initial-run recovery public receiver; same package version, immutable content-addressed archive; historical0.1.14 artifact preserved.",
+    "qualification": "Release pack/raw-entry checks; Integration actual installed61entry/runtime/schema/types proof; four original plus two corrected actual mounted cases; Root accepted ordinary-role PG7/7. No integrated build or deployed acceptance.",
+    "previousArtifact": "capiro-meri-contracts-0.1.14.tgz",
+    "changedEntries": [
+      "dist/conversation-session.metadata.json",
+      "dist/conversation-session.schema.json",
+      "dist/conversation-session.mjs",
+      "validate.mjs",
+      "dist/conversation-session.d.ts"
+    ],
+    "entryReceipt": "docs/wave3-recovery-distribution-20261026/ARTIFACT-ENTRIES.json",
+    "mergedProducerCommit": "0d128fe18c91530ab67de8f729b769c6e4b64e55",
+    "mergedProducerTree": "5cacccd0535e815456b9e5f7205facc5e49c3903",
+    "mergedProducerPackageInputTree": "10c3b953a4f52c2b3a7df7c39dd9a95708cb57e8"
+  },
+  "entries": [
+    {
+      "path": "dist/action-application.metadata.json",
+      "bytes": 3127,
+      "sha256": "74b40cf4864dae50f9f604b39e2b5da716a5fbd9c6a57a141d1ad37335c16c4d",
+      "gitBlob": "5e2bf4029b295c0d8411651dae37e04863562b53",
+      "oldSha256": "74b40cf4864dae50f9f604b39e2b5da716a5fbd9c6a57a141d1ad37335c16c4d",
+      "changed": false
+    },
+    {
+      "path": "dist/action-application.schema.json",
+      "bytes": 71340,
+      "sha256": "ddbb3bb99a3550034137f1c9bed937bba3f4afb5ff93e559be3f386324a7c127",
+      "gitBlob": "aeb7bff3fd9c301d5f16e422ca024ed6e21f5753",
+      "oldSha256": "ddbb3bb99a3550034137f1c9bed937bba3f4afb5ff93e559be3f386324a7c127",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-application.metadata.json",
+      "bytes": 8376,
+      "sha256": "31d6da3f8f7585ac99e1b3017732b5b0976fe3a76192f31e3fcc508ccb86f338",
+      "gitBlob": "59bbf996d1975e0391d48345e12121008571e805",
+      "oldSha256": "31d6da3f8f7585ac99e1b3017732b5b0976fe3a76192f31e3fcc508ccb86f338",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-application.schema.json",
+      "bytes": 41169,
+      "sha256": "4c94af8ff703722ded98962183090c1c73bc1d9ec801ebb714994fba76f61712",
+      "gitBlob": "a1b92e8845dbb9be5017a689288e9e038745d463",
+      "oldSha256": "4c94af8ff703722ded98962183090c1c73bc1d9ec801ebb714994fba76f61712",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-history.metadata.json",
+      "bytes": 3544,
+      "sha256": "9859a0d2ac7e54e09fd7926201b07648ab6de7c054e83d397a0a217254e1fb02",
+      "gitBlob": "87093eb877ceebf4fbf8bfd3eb04644cded95f4e",
+      "oldSha256": "9859a0d2ac7e54e09fd7926201b07648ab6de7c054e83d397a0a217254e1fb02",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-history.schema.json",
+      "bytes": 55925,
+      "sha256": "6a1a9657129314affbbf44d272db90d3324d2d619e83008d2d2e5721e6d781d6",
+      "gitBlob": "1512be7082405a1514979a32da4dcc64dff806fc",
+      "oldSha256": "6a1a9657129314affbbf44d272db90d3324d2d619e83008d2d2e5721e6d781d6",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-initial-input.metadata.json",
+      "bytes": 4976,
+      "sha256": "1597f5cd139b464ee63244def8672125f79ca0c8bd142b7604e838993b5ba766",
+      "gitBlob": "09e65e1b17a583ecee512aa91a6b1d148b0d6b07",
+      "oldSha256": "1597f5cd139b464ee63244def8672125f79ca0c8bd142b7604e838993b5ba766",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-initial-input.schema.json",
+      "bytes": 16868,
+      "sha256": "e701a8ddab6426dafda04a746b439712ed13314db388675925280d8b32b43a32",
+      "gitBlob": "f150316160c2a339a2d9b0b19f940845f749160a",
+      "oldSha256": "e701a8ddab6426dafda04a746b439712ed13314db388675925280d8b32b43a32",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-input.metadata.json",
+      "bytes": 3497,
+      "sha256": "23f4c6d51e8222cdcc3ee3abd3a836800d94a037df3e9bd39fae4d2a991784ed",
+      "gitBlob": "d9db8a01f2e1116dd7071029111dbdb0a5d6961c",
+      "oldSha256": "23f4c6d51e8222cdcc3ee3abd3a836800d94a037df3e9bd39fae4d2a991784ed",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-input.schema.json",
+      "bytes": 21386,
+      "sha256": "60d1bc73d5d60833a1214ca57cb1b991814483775b2354db4df0f9f1d00a1bf7",
+      "gitBlob": "b67df9cbcc73cb4ee956247f736493daae6a1474",
+      "oldSha256": "60d1bc73d5d60833a1214ca57cb1b991814483775b2354db4df0f9f1d00a1bf7",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-lifecycle.metadata.json",
+      "bytes": 2279,
+      "sha256": "2d6767af26daea90e09c784ebcb8641846dc0da17810192243bd939ba1d8a6b2",
+      "gitBlob": "edf54ec7c644673d4a32614e061daf374d54173d",
+      "oldSha256": "2d6767af26daea90e09c784ebcb8641846dc0da17810192243bd939ba1d8a6b2",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-lifecycle.schema.json",
+      "bytes": 9259,
+      "sha256": "9ff87dc22a4fb144c1ad48d9b818f829a65053aac7937b83fdabdbff6f11ad4e",
+      "gitBlob": "c4b865e730ddc3ef633dee4487c0012dd790b08b",
+      "oldSha256": "9ff87dc22a4fb144c1ad48d9b818f829a65053aac7937b83fdabdbff6f11ad4e",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-session.metadata.json",
+      "bytes": 1210,
+      "sha256": "3e11df0f9972ff9706dfc00608b67b5f60a16b9ccbfa7e76227e283e955eb5ee",
+      "gitBlob": "ddf701656b57573cb8b9fa74256cc94cceeeba4e",
+      "oldSha256": "2b50c611fdc020f6826f839c0d697ab2fe90296c902ec1703aa59f256ee09458",
+      "changed": true
+    },
+    {
+      "path": "dist/conversation-session.schema.json",
+      "bytes": 4626,
+      "sha256": "890d2cfef8db1ce82bf0d20e75b40871b5ca966fa75d564b2eea47258ef06803",
+      "gitBlob": "63e0807bc0542355d4f672334874c61cd7de183c",
+      "oldSha256": "0c909245d1e494442c90f92105b58f9ede169a2577d53cc30bd621026096ec84",
+      "changed": true
+    },
+    {
+      "path": "dist/document-access-application.metadata.json",
+      "bytes": 7759,
+      "sha256": "12801513af1908281e7f10ed2aeab6abad892c4df15a7cdccade4cc1659f7ab0",
+      "gitBlob": "00642a700f94d03846a66493366ff4da31f507ab",
+      "oldSha256": "12801513af1908281e7f10ed2aeab6abad892c4df15a7cdccade4cc1659f7ab0",
+      "changed": false
+    },
+    {
+      "path": "dist/document-access-application.schema.json",
+      "bytes": 34286,
+      "sha256": "dee465abebca2faeead7486a04ef2eebde89b733f066de123f3c73888910a308",
+      "gitBlob": "d70b442ed8391173cc9078a23498dc004ef2cdb8",
+      "oldSha256": "dee465abebca2faeead7486a04ef2eebde89b733f066de123f3c73888910a308",
+      "changed": false
+    },
+    {
+      "path": "dist/document-application.metadata.json",
+      "bytes": 1997,
+      "sha256": "84291c99963445520e2ab587837bb6db3bcce51a73125588625859e333f5c537",
+      "gitBlob": "175366812f81663bfeae1eeb1c742659b8a1d07a",
+      "oldSha256": "84291c99963445520e2ab587837bb6db3bcce51a73125588625859e333f5c537",
+      "changed": false
+    },
+    {
+      "path": "dist/document-application.schema.json",
+      "bytes": 45708,
+      "sha256": "202ec9660148323c94d9b8b4e96fdfde24aa46930d7453a66c26de11d21d4223",
+      "gitBlob": "3704290cffdc0a7465dfbb72564359159b9c89f6",
+      "oldSha256": "202ec9660148323c94d9b8b4e96fdfde24aa46930d7453a66c26de11d21d4223",
+      "changed": false
+    },
+    {
+      "path": "dist/intents-application.metadata.json",
+      "bytes": 10539,
+      "sha256": "1a4b6a612fc854f7d02b98a4efe95c9daae8e8b520b8806182251c9c8f8589ae",
+      "gitBlob": "87f25e593259b81b5d0651247f3fd9aa62596dfd",
+      "oldSha256": "1a4b6a612fc854f7d02b98a4efe95c9daae8e8b520b8806182251c9c8f8589ae",
+      "changed": false
+    },
+    {
+      "path": "dist/intents-application.schema.json",
+      "bytes": 116068,
+      "sha256": "0120aa451e8517bb202b8b0ef32504102e73f37561f82c131e36db65ab00b21c",
+      "gitBlob": "1c682d4d72dab268026a1efb0f40cb561046d625",
+      "oldSha256": "0120aa451e8517bb202b8b0ef32504102e73f37561f82c131e36db65ab00b21c",
+      "changed": false
+    },
+    {
+      "path": "meri.schema.json",
+      "bytes": 50043,
+      "sha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "gitBlob": "d7b3c22491ae81c5e875243754413aa7d35097e3",
+      "oldSha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "changed": false
+    },
+    {
+      "path": "package.json",
+      "bytes": 7741,
+      "sha256": "5b012ca02e4f60ba5f4073448ebeb802fc8b7d67fcdcd18a93be17accc74a0a2",
+      "gitBlob": "e39a7e0f4c1755630db9b911851dcebd3fc28e33",
+      "oldSha256": "5b012ca02e4f60ba5f4073448ebeb802fc8b7d67fcdcd18a93be17accc74a0a2",
+      "changed": false
+    },
+    {
+      "path": "dist/task-command-application.metadata.json",
+      "bytes": 6640,
+      "sha256": "e7b0a4c659ded06833754bdc476f0a6d6ca20fe3c8eb3147065f281e1f2dd316",
+      "gitBlob": "670e66660ab9ca4cb8d2ce0bb4e68991e2df118b",
+      "oldSha256": "e7b0a4c659ded06833754bdc476f0a6d6ca20fe3c8eb3147065f281e1f2dd316",
+      "changed": false
+    },
+    {
+      "path": "dist/task-command-application.schema.json",
+      "bytes": 17977,
+      "sha256": "3e13798eb1f9635105322acebdeecb491b887b46139e221a82f1cacaae7fb607",
+      "gitBlob": "eec10f6b129ae815d06a9f4f53030dcce8fdeedb",
+      "oldSha256": "3e13798eb1f9635105322acebdeecb491b887b46139e221a82f1cacaae7fb607",
+      "changed": false
+    },
+    {
+      "path": "dist/user-preferences-application.metadata.json",
+      "bytes": 5590,
+      "sha256": "2e53938a1bbfc4c88df8ae4dc2f2f58697b93911a689d9a6171575362f6eaf54",
+      "gitBlob": "de00aa0cfab98d9f75180a2005e7c9e60fc4df1a",
+      "oldSha256": "2e53938a1bbfc4c88df8ae4dc2f2f58697b93911a689d9a6171575362f6eaf54",
+      "changed": false
+    },
+    {
+      "path": "dist/user-preferences-application.schema.json",
+      "bytes": 9407,
+      "sha256": "814dd882a4ab1930534fa388d4fe1a86184eede52cd5e8463bb6cc733b80dc86",
+      "gitBlob": "feb2b5a65d91a85f1a72d92fd8baae217e882765",
+      "oldSha256": "814dd882a4ab1930534fa388d4fe1a86184eede52cd5e8463bb6cc733b80dc86",
+      "changed": false
+    },
+    {
+      "path": "README.md",
+      "bytes": 18503,
+      "sha256": "e91da2a7641e0eaafcbc46142ee330c7fdb95f46b2574c6c45cf460c7114b1ef",
+      "gitBlob": "28c27ca8c90468feb61afd1b6a4eebfa928a44e6",
+      "oldSha256": "e91da2a7641e0eaafcbc46142ee330c7fdb95f46b2574c6c45cf460c7114b1ef",
+      "changed": false
+    },
+    {
+      "path": "THIRD-PARTY-NOTICES.md",
+      "bytes": 3841,
+      "sha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "gitBlob": "ec61b91441db31faa8b8e8d2c32f131eb0129e6c",
+      "oldSha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "changed": false
+    },
+    {
+      "path": "dist/action-application.mjs",
+      "bytes": 1619159,
+      "sha256": "d342e0e18808bdccc3aef031c3f69dddbcac03629b8f2ad859afad2e9f23e84b",
+      "gitBlob": "e2526954926fc08fe19c0565f1ac8543d267b0d2",
+      "oldSha256": "d342e0e18808bdccc3aef031c3f69dddbcac03629b8f2ad859afad2e9f23e84b",
+      "changed": false
+    },
+    {
+      "path": "dist/browser.mjs",
+      "bytes": 466002,
+      "sha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "gitBlob": "0edfb969fedcd13773c3da2c6c054d256a05ec71",
+      "oldSha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-application.mjs",
+      "bytes": 1613350,
+      "sha256": "3d3511e6fddaef04bc72a6631fb666b3c3aad61dc354ad2eb9ea52d26b62a4f2",
+      "gitBlob": "ac9d8ae3bcb577a6fac8f29adc29fcf191409288",
+      "oldSha256": "3d3511e6fddaef04bc72a6631fb666b3c3aad61dc354ad2eb9ea52d26b62a4f2",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-history.mjs",
+      "bytes": 1158566,
+      "sha256": "9d682f273410a4baa7be2f7a77938bc18930323b03cbfb963e80298a972af3d4",
+      "gitBlob": "67717d01caba744ed57643a6fb3e7fbd91fa0072",
+      "oldSha256": "9d682f273410a4baa7be2f7a77938bc18930323b03cbfb963e80298a972af3d4",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-initial-input.mjs",
+      "bytes": 91143,
+      "sha256": "2cce9b899a24edd3e5522800f45d5c698b9e671a8731967d3d08b23c7955cb4e",
+      "gitBlob": "2e32b7f48e102d4d3a49176b3eb3892dc948a6e8",
+      "oldSha256": "2cce9b899a24edd3e5522800f45d5c698b9e671a8731967d3d08b23c7955cb4e",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-input.mjs",
+      "bytes": 503271,
+      "sha256": "bc6e783bac26c2d263399a5986567cf1baeabb7574770204a15cb60488b36f79",
+      "gitBlob": "4e45404c18191d42f3d75ce71b894715538193fd",
+      "oldSha256": "bc6e783bac26c2d263399a5986567cf1baeabb7574770204a15cb60488b36f79",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-lifecycle.mjs",
+      "bytes": 134574,
+      "sha256": "39e902844cc81354720d0aac0c984402b2b0864c750af1380d952c65fb5c1fd5",
+      "gitBlob": "fcd1a72049781f29b4f372e677b3c21953975722",
+      "oldSha256": "39e902844cc81354720d0aac0c984402b2b0864c750af1380d952c65fb5c1fd5",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-session.mjs",
+      "bytes": 50598,
+      "sha256": "39a049110dcf024853121647c48b0df326bcc9ee795cb7021079d270ef212c49",
+      "gitBlob": "e1dd3ceead02ef4369c187594e1224cb488acf85",
+      "oldSha256": "0bc4278d9071999e282bf5931436573e6084d5f0b32be6f692216fb40dd98ff8",
+      "changed": true
+    },
+    {
+      "path": "dist/document-access-application.mjs",
+      "bytes": 492101,
+      "sha256": "f31f81fa21be63022789c3020e406fbc9efd671fe6d7e8644675b20331cb3968",
+      "gitBlob": "4143ebf04a0238b7c3a20c257078e32413c25460",
+      "oldSha256": "f31f81fa21be63022789c3020e406fbc9efd671fe6d7e8644675b20331cb3968",
+      "changed": false
+    },
+    {
+      "path": "dist/document-application.mjs",
+      "bytes": 668019,
+      "sha256": "cd811030adadacf2bb23062358d11274e41d4def085943edeb56fc0a83fed014",
+      "gitBlob": "1f58b0a186d63c68846db8764ebf9a08d1244b8e",
+      "oldSha256": "cd811030adadacf2bb23062358d11274e41d4def085943edeb56fc0a83fed014",
+      "changed": false
+    },
+    {
+      "path": "dist/intents-application.mjs",
+      "bytes": 2191019,
+      "sha256": "34cd7ec1fb6c3d1fcbd48c94c7717aec42bcd90a11ebb8b47f11a8d809100df9",
+      "gitBlob": "b68f8ee6339d54d1cb6d6db676b336454739180f",
+      "oldSha256": "34cd7ec1fb6c3d1fcbd48c94c7717aec42bcd90a11ebb8b47f11a8d809100df9",
+      "changed": false
+    },
+    {
+      "path": "dist/metadata.mjs",
+      "bytes": 533,
+      "sha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "gitBlob": "ac07aa48b3dd52f80ed243061f770d3528c3e6bd",
+      "oldSha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "changed": false
+    },
+    {
+      "path": "objective-generation.mjs",
+      "bytes": 2059,
+      "sha256": "9d50b75f9682f6df02eadfe9c2245df86b6c6f58fbdbb6fcc79cc7fed3f80cb6",
+      "gitBlob": "df95af57ac4b6aa2c3f95803381c94f422c19aac",
+      "oldSha256": "9d50b75f9682f6df02eadfe9c2245df86b6c6f58fbdbb6fcc79cc7fed3f80cb6",
+      "changed": false
+    },
+    {
+      "path": "dist/task-command-application.mjs",
+      "bytes": 418988,
+      "sha256": "384b030b0198f36826ae95b45d3a793460d316c09fbf61d93c181951975f3d25",
+      "gitBlob": "c4af5410c9ab710216c1a33f415f424793670c95",
+      "oldSha256": "384b030b0198f36826ae95b45d3a793460d316c09fbf61d93c181951975f3d25",
+      "changed": false
+    },
+    {
+      "path": "dist/user-preferences-application.mjs",
+      "bytes": 173419,
+      "sha256": "e7395822ae96365b9788b9c86df1c9e64dc0f5667ab7788d71056f5a60b28500",
+      "gitBlob": "a6fa65a377f63cd0d30bb8db806d9e8281120543",
+      "oldSha256": "e7395822ae96365b9788b9c86df1c9e64dc0f5667ab7788d71056f5a60b28500",
+      "changed": false
+    },
+    {
+      "path": "validate.mjs",
+      "bytes": 3572,
+      "sha256": "08f2f8a47e699dd2c6262b639c901beaf8035f1b4710d52051478c1408ac7042",
+      "gitBlob": "3c78e19c4aa9e1e18e3491092cab2d58d932b09b",
+      "oldSha256": "bc72b4cbc240e133742350d3dcc7dcd995a426d9dc85439f1886b49aa41c0605",
+      "changed": true
+    },
+    {
+      "path": "dist/action-application.d.ts",
+      "bytes": 18653,
+      "sha256": "e62d638fd8df41192e34496ffe8c834dbeeb232dee9dfdffbce4e346c50406c8",
+      "gitBlob": "0b1098ac0fe1b8dbecc144ae4b124bbb29b61066",
+      "oldSha256": "e62d638fd8df41192e34496ffe8c834dbeeb232dee9dfdffbce4e346c50406c8",
+      "changed": false
+    },
+    {
+      "path": "dist/browser.d.ts",
+      "bytes": 166,
+      "sha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "gitBlob": "5791ac15a45bc1cb19817005af1ae4e976ecf0a7",
+      "oldSha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "changed": false
+    },
+    {
+      "path": "dist/contracts.d.ts",
+      "bytes": 4090,
+      "sha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "gitBlob": "1273d1adced80d7f6361df242a0f7968f16ca24f",
+      "oldSha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-application.d.ts",
+      "bytes": 15258,
+      "sha256": "53f04e83f9132d1d29f19cb10594b725ca514d477d238bc294722580795915be",
+      "gitBlob": "979410ad75bb41359a1c9a5d611dfe75c1df2eaf",
+      "oldSha256": "53f04e83f9132d1d29f19cb10594b725ca514d477d238bc294722580795915be",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-history.d.ts",
+      "bytes": 25423,
+      "sha256": "b5252bff95f78d7024d604c1f7a8c207f084cd7e9ea5c63f0fe21441f6174a1c",
+      "gitBlob": "9bf178ecb0e2791c0531b5c2726d8fc75a83b916",
+      "oldSha256": "b5252bff95f78d7024d604c1f7a8c207f084cd7e9ea5c63f0fe21441f6174a1c",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-initial-input.d.ts",
+      "bytes": 7111,
+      "sha256": "a1813927da31eac1a15576929f9f01d3d9ad21ab9547d4680ee9d892d7d9202c",
+      "gitBlob": "c22292d9807ba320ebb448ac1c792b99b485bed9",
+      "oldSha256": "a1813927da31eac1a15576929f9f01d3d9ad21ab9547d4680ee9d892d7d9202c",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-input.d.ts",
+      "bytes": 8662,
+      "sha256": "2448015cbaa8aadbf484d441705922ed424fd675bbb490039e85b40ae9568452",
+      "gitBlob": "7b3c34a1ac78cb2348de8a513515caa188655af4",
+      "oldSha256": "2448015cbaa8aadbf484d441705922ed424fd675bbb490039e85b40ae9568452",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-lifecycle.d.ts",
+      "bytes": 6339,
+      "sha256": "1e9ff1c99e8b0d7d7a8ac86fdd275e2785adb5a6d300c095c783317d2c0ff523",
+      "gitBlob": "c98736a556150674caf04723d5e0e1f5c3c46618",
+      "oldSha256": "1e9ff1c99e8b0d7d7a8ac86fdd275e2785adb5a6d300c095c783317d2c0ff523",
+      "changed": false
+    },
+    {
+      "path": "dist/conversation-session.d.ts",
+      "bytes": 1384,
+      "sha256": "28beffb7b43271d3f76be47a6d29019ceebb58d9677cfdf0afbb5a27cf78089f",
+      "gitBlob": "9468f10aff1f0981db6b75ce816f8b50f801131e",
+      "oldSha256": "e6fe6f0bd03fb5bca254429d4dff7fbc1880a15e10058dd3e80ae883989e8374",
+      "changed": true
+    },
+    {
+      "path": "dist/document-access-application.d.ts",
+      "bytes": 15743,
+      "sha256": "e0d8e793bb91fd3754a4caf16bc8326cde0d9a512702f37aeb97d18c65094f87",
+      "gitBlob": "0868c57d05294d9b2283dc69491fbfd220c11db4",
+      "oldSha256": "e0d8e793bb91fd3754a4caf16bc8326cde0d9a512702f37aeb97d18c65094f87",
+      "changed": false
+    },
+    {
+      "path": "dist/document-application.d.ts",
+      "bytes": 28302,
+      "sha256": "1a77c603e02381e48fc6eeb62687cc8ada8a4064642d363f989d671abbeacc0f",
+      "gitBlob": "cb9657e36d82fa927529cfb43392118a3a1f3beb",
+      "oldSha256": "1a77c603e02381e48fc6eeb62687cc8ada8a4064642d363f989d671abbeacc0f",
+      "changed": false
+    },
+    {
+      "path": "dist/index.d.ts",
+      "bytes": 85,
+      "sha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "gitBlob": "79e6e96d047b3766f91352ec2845765a169059d7",
+      "oldSha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "changed": false
+    },
+    {
+      "path": "dist/intents-application.d.ts",
+      "bytes": 53917,
+      "sha256": "1887608701274323c92fd09b38242a93314cf4cf76a73bd741f072cfc5d48d6b",
+      "gitBlob": "bc4384c6c034e0b3df850f3af7b943b541724207",
+      "oldSha256": "1887608701274323c92fd09b38242a93314cf4cf76a73bd741f072cfc5d48d6b",
+      "changed": false
+    },
+    {
+      "path": "dist/metadata.d.ts",
+      "bytes": 485,
+      "sha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "gitBlob": "2d97076985d9cefb8906f31f5c90608942fff8fd",
+      "oldSha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "changed": false
+    },
+    {
+      "path": "objective-generation.d.ts",
+      "bytes": 944,
+      "sha256": "bf6490ebb610433e7f3f54f1c9b43a117741c0d37f70d4c29f0012c504f1a69d",
+      "gitBlob": "592dff100f5150f84cf9352f6a9100b330d12228",
+      "oldSha256": "bf6490ebb610433e7f3f54f1c9b43a117741c0d37f70d4c29f0012c504f1a69d",
+      "changed": false
+    },
+    {
+      "path": "dist/task-command-application.d.ts",
+      "bytes": 9104,
+      "sha256": "f8857f94d44047a58bb97548f2e140b5a8f7827d77d3d4771a38ddcd27a6f9fe",
+      "gitBlob": "68a7abb38e6ac0dd8169d6df2869cb25c5e650e9",
+      "oldSha256": "f8857f94d44047a58bb97548f2e140b5a8f7827d77d3d4771a38ddcd27a6f9fe",
+      "changed": false
+    },
+    {
+      "path": "dist/user-preferences-application.d.ts",
+      "bytes": 9154,
+      "sha256": "e19405b9535a3d23108228ae2097b7cab6c750442d07f95d04de1158759b1851",
+      "gitBlob": "9f5104a8fc7debf59b05add06f128bcc5bc8107d",
+      "oldSha256": "e19405b9535a3d23108228ae2097b7cab6c750442d07f95d04de1158759b1851",
+      "changed": false
+    }
+  ],
+  "publicRuntimeSchemaTypes": {
+    "dist/conversation-session.mjs": {
+      "gitBlob": "e1dd3ceead02ef4369c187594e1224cb488acf85",
+      "sha256": "39a049110dcf024853121647c48b0df326bcc9ee795cb7021079d270ef212c49",
+      "bytes": 50598
+    },
+    "dist/conversation-session.d.ts": {
+      "gitBlob": "9468f10aff1f0981db6b75ce816f8b50f801131e",
+      "sha256": "28beffb7b43271d3f76be47a6d29019ceebb58d9677cfdf0afbb5a27cf78089f",
+      "bytes": 1384
+    },
+    "dist/conversation-session.schema.json": {
+      "gitBlob": "63e0807bc0542355d4f672334874c61cd7de183c",
+      "sha256": "890d2cfef8db1ce82bf0d20e75b40871b5ca966fa75d564b2eea47258ef06803",
+      "bytes": 4626
+    }
+  },
+  "installedReceiverSha256": "39a049110dcf024853121647c48b0df326bcc9ee795cb7021079d270ef212c49",
+  "actualInstalledQualification": "Reused accepted npm11.9 offline lifecycle-disabled install;61entries match. See Integration W3-RECOVERY-CANDIDATE-INSTALLED.md; actual SDK5non-session exports unchanged."
+}

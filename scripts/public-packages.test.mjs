@@ -64,3 +64,17 @@ test('every currently consumed Meri tarball needs its own immutable manifest rec
     assert.throws(()=>verifyActiveMeriPackages([current,stream],[{dependencies:{'@capiro/meri-contracts':value}}]),/Invalid active/);
   assert.throws(()=>verifyActiveMeriPackages([current],[]),/No active/);
 });
+
+test('same-version contracts archives bind source and content suffixes to verified bytes', () => {
+  const current = { ...record, file: `capiro-meri-contracts-0.1.14-${record.sourceCommit.slice(0, 8)}-${record.sha256.slice(0, 12)}.tgz` };
+  const consume = file => [{ dependencies: { '@capiro/meri-contracts': `file:../../vendor/${file}` } }];
+  const verified = verifyPackageInputs(manifest(current), () => Buffer.from('abc'));
+  assert.deepEqual(verifyActiveMeriPackages(verified, consume(current.file)), verified);
+  for (const changed of [{ ...current, sourceCommit: 'b'.repeat(40) }, { ...current, sha256: 'b'.repeat(64) }, { ...current, sha256: undefined }])
+    assert.throws(() => verifyActiveMeriPackages([changed], consume(current.file)), /Content-addressed.*mismatch/);
+  assert.throws(() => verifyPackageInputs(manifest(current), () => Buffer.from('abd')), /Public package drift/);
+  for (const file of [current.file.replace('-aaaaaaaa-', '-aaaaaaa-'), current.file.replace('-aaaaaaaa-', '-working-tree-'), '../' + current.file])
+    assert.throws(() => verifyActiveMeriPackages([{ ...current, file }], consume(file)), /Invalid active/);
+  const stream = { ...current, file: current.file.replace('contracts', 'ui-stream') };
+  assert.throws(() => verifyActiveMeriPackages([stream], [{ dependencies: { '@capiro/meri-ui-stream': `file:../../vendor/${stream.file}` } }]), /Content-addressed.*mismatch/);
+});
