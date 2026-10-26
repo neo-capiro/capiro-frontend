@@ -448,6 +448,17 @@ export function createRichDocumentController(
       if (!item) return;
       return reviewDocument(item.id, item.config.clientId, "open");
     },
+    // A known review ID needs no editor-only list. Detail still binds the
+    // requested ID and Core rechecks current editable access before adoption.
+    openKnown(id: string) {
+      return reviewDocument(id, undefined, "open");
+    },
+    clearEditableAccess() {
+      if (!idle()) return;
+      writeFailure(
+        new CapiroApiError(403, "Current editing access is unavailable."),
+      );
+    },
     readback() {
       const id =
         retained?.outcome?.kind === "committed"

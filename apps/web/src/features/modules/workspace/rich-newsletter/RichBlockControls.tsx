@@ -10,6 +10,7 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import { RichText } from "./RichText";
+import { AssetReplaceControl } from "./assets/AssetReplaceControl";
 import styles from "./rich-newsletter.module.css";
 
 export function RichBlockControls({
@@ -69,6 +70,12 @@ export function RichBlockControls({
               onChange={(event) => update({ alt: event.target.value })}
             />
           </Field>
+          {(block.kind === "image" || block.kind === "logo") && (
+            <AssetReplaceControl
+              blockId={block.id}
+              onInsert={(asset) => update({ imageUrl: asset.url })}
+            />
+          )}
         </>
       )}
       {["button", "image", "logo", "video"].includes(block.kind) && (
