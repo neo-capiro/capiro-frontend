@@ -14,6 +14,7 @@ import {
   type AssetListQuery,
 } from "../../../../../shared/capiro/operations/rich-newsletter-assets";
 import type { AssetPickerState } from "./use-asset-picker";
+import { AssetFolders, type AssetManagementLauncher } from "./AssetFolders";
 import styles from "./assets.module.css";
 
 export const assetName = (name: string) =>
@@ -72,14 +73,17 @@ function LibraryFields({ picker }: { picker: AssetPickerState }) {
 export function AssetLibrary({
   picker,
   refresh,
+  manage,
+  disabled,
 }: {
   picker: AssetPickerState;
   refresh: () => void;
-}) {
+} & AssetManagementLauncher) {
   const { data, error, loading } = picker.list;
   return (
     <div className={styles.panel}>
       <Panel title="Uploads">
+        <AssetFolders picker={picker} manage={manage} disabled={disabled} />
         <LibraryFields picker={picker} />
         {loading && <p role="status">Loading images…</p>}
         {error && (
@@ -104,7 +108,9 @@ export function AssetLibrary({
           >
             View Details
           </ActionButton>
-          <ActionButton onClick={refresh}>Refresh library</ActionButton>
+          <ActionButton data-asset-focus="refresh" onClick={refresh}>
+            Refresh library
+          </ActionButton>
         </div>
       </Panel>
     </div>

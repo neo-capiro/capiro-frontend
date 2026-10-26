@@ -40,6 +40,15 @@ export async function proxyRequest(
   if (!Object.hasOwn(permittedRoots, service))
     return jsonError(404, "Unknown service.");
   const selected = service as Service;
+  // Stored connection metadata only; connection actions and tool discovery
+  // are not part of this proxy's surface.
+  const managedAppsRead =
+    selected === "core" &&
+    request.method === "GET" &&
+    path.length === 3 &&
+    path[0] === "clio" &&
+    path[1] === "v3" &&
+    path[2] === "apps";
   // OpenStates uses an opaque ocd-person/<UUID> as one route parameter. Accept
   // that exact identity shape only at the verified state-legislator detail path.
   const statePersonId =
@@ -52,7 +61,7 @@ export async function proxyRequest(
     );
   if (
     !path.length ||
-    !permittedRoots[selected].includes(path[0] ?? "") ||
+    (!permittedRoots[selected].includes(path[0] ?? "") && !managedAppsRead) ||
     path.some(
       (segment, index) =>
         !segment ||
