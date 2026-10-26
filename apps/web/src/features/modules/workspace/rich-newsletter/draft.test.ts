@@ -4,12 +4,12 @@ import {
   findNewsletterBlock,
 } from "@capiro/shared/newsletter";
 import {
-  addRichBlock,
   editRichBlock,
   editRichConfig,
   newRichDraft,
   removeRichBlock,
 } from "./draft";
+import { changeStructure } from "./content/structure";
 
 describe("rich editor local ownership", () => {
   it("edits nested content without losing style, crop, provenance or font references", () => {
@@ -63,11 +63,11 @@ describe("rich editor local ownership", () => {
   });
   it("adds a factory block without changing other sections or delivery settings", () => {
     const draft = newRichDraft();
-    const after = addRichBlock(
-      draft.design,
-      draft.design.sections[1]!.id,
-      "paragraph",
-    );
+    const after = changeStructure(draft.design, {
+      type: "addBlock",
+      target: { sectionId: draft.design.sections[1]!.id },
+      kind: "paragraph",
+    });
     expect(after.design.sections[1]!.blocks.at(-1)?.kind).toBe("paragraph");
     expect(after.design.sections[0]).toEqual(draft.design.sections[0]);
     expect(draft.design.sections[1]!.blocks).toHaveLength(2);

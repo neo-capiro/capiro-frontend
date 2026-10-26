@@ -62,6 +62,32 @@
   line-height: 1.45;
   color: var(--foreground);
 }
+.recordText {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--foreground);
+}
+.recordData {
+  width: 100%;
+}
+.recordData > summary {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+.recordData[open] > summary {
+  margin-bottom: 16px;
+}
+.recordReferences {
+  padding-inline-start: 20px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
 .usageSection,
 .model {
   gap: 10px;

@@ -1,7 +1,10 @@
 import type { ConversationObservationSnapshot } from "@capiro/meri-client/conversation";
 import type { RunBinding, UIEvent } from "@capiro/meri-contracts";
 import type { ConversationEvent } from "@capiro/meri-contracts/conversation-application";
-import type { NativeBillTextSourceEvent } from "@capiro/meri-contracts/conversation-sources";
+import type {
+  NativeBillTextSourceEvent,
+  NativeHearingSourceEvent,
+} from "@capiro/meri-contracts/conversation-sources";
 import {
   buildWorkspaceView,
   type WorkspaceView,
@@ -21,7 +24,10 @@ export type TurnView = Readonly<
     throughSequence?: number;
     /** UI key derived from admitted conversation + logical request identity; never prompt text. */
     promptKey?: string;
-    nativeSources: readonly NativeBillTextSourceEvent[];
+    nativeSources: readonly (
+      | NativeBillTextSourceEvent
+      | NativeHearingSourceEvent
+    )[];
   } & Pick<
     WorkspaceView,
     | "reasonCode"
@@ -74,7 +80,9 @@ export function turnFromEvents(
 ): TurnView {
   const first = events[0];
   const legacy = events.filter(
-    (event): event is UIEvent => event.type !== "source.native-bill-text",
+    (event): event is UIEvent =>
+      event.type !== "source.native-bill-text" &&
+      event.type !== "source.native-hearing-record",
   );
   const view = first ? buildWorkspaceView(legacy, first.binding) : undefined;
   return Object.freeze({
@@ -88,8 +96,9 @@ export function turnFromEvents(
     tools: view?.tools ?? [],
     sources: view?.sources ?? [],
     nativeSources: events.filter(
-      (event): event is NativeBillTextSourceEvent =>
-        event.type === "source.native-bill-text" &&
+      (event): event is NativeBillTextSourceEvent | NativeHearingSourceEvent =>
+        (event.type === "source.native-bill-text" ||
+          event.type === "source.native-hearing-record") &&
         event.binding.runId === binding.runId,
     ),
     approvals: view?.approvals ?? [],

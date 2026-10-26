@@ -1,0 +1,72 @@
+.form,
+.stack {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+}
+.option {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.form h4 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+.form button {
+  justify-self: start;
+}
+.form button:not([data-slot="select-trigger"]) {
+  align-self: flex-start;
+}
+.form textarea {
+  min-height: 72px;
+}
+.tabs [role="tablist"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.tabs [role="tab"] {
+  min-height: 36px;
+  height: auto;
+  padding: 8px 14px;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  white-space: normal;
+  font-size: 13px;
+  line-height: 18px;
+  background: var(--card);
+  color: var(--foreground);
+}
+.tabs [role="tab"][aria-selected="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+.dialog button {
+  max-width: 100%;
+  white-space: normal;
+  height: auto;
+  min-height: 36px;
+}
+@media (max-width: 650px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dialog > header,
+  .dialog > :global([data-slot="modal-body"]),
+  .dialog > footer {
+    padding: 16px;
+  }
+}

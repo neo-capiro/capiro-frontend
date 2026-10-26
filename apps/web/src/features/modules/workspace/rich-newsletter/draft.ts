@@ -1,10 +1,8 @@
 import {
-  createNewsletterBlock,
   createNewsletterLayout,
   defaultNewsletterConfig,
   findNewsletterBlock,
   type NewsletterBlock,
-  type NewsletterBlockKind,
   type NewsletterCampaignConfig,
   type NewsletterDesign,
 } from "@capiro/shared/newsletter";
@@ -46,18 +44,6 @@ export function removeRichBlock(design: NewsletterDesign, id: string) {
     section.blocks = remove(section.blocks);
   });
   return next;
-}
-
-export function addRichBlock(
-  design: NewsletterDesign,
-  sectionId: string,
-  kind: NewsletterBlockKind,
-) {
-  const next = structuredClone(design);
-  const section = next.sections.find((section) => section.id === sectionId);
-  const block = createNewsletterBlock(kind);
-  section?.blocks.push(block);
-  return { design: next, selectedId: section ? block.id : null };
 }
 
 export function editRichConfig(
