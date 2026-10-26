@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Link from "next/link";
+import { workspaceTaskHref } from "../../modules/workspace/task-destination-public";
 import { Button } from "@capiro/ui/button";
 import type { ObservedExecution, ProposalView } from "./action-workflow-port";
 import styles from "./workflow.module.css";
@@ -62,6 +64,13 @@ export function ProposalPanel({
               : "Execution failed"}
           </h3>
           {execution.taskTitle !== null && <p>{execution.taskTitle}</p>}
+          {execution.outcome === "succeeded" && execution.task && (
+            <Button variant="outline" asChild>
+              <Link prefetch={false} href={workspaceTaskHref(execution.task)}>
+                Open task in Workspace
+              </Link>
+            </Button>
+          )}
           <dl className={styles.details}>
             <dt>Execution reference</dt>
             <dd>{execution.receiptReference}</dd>

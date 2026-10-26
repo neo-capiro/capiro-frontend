@@ -70,6 +70,10 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
   private now: () => number;
   private readonly options: Options;
   private knownRequestId: string | null = null;
+  private observed: {
+    requestId: string;
+    proposal: TaskUpdateApprovalProposal;
+  } | null = null;
   constructor(options: Options) {
     this.options = options;
     this.now = options.now ?? Date.now;
@@ -77,6 +81,7 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
   dispose() {
     this.lifetime.abort();
     this.proposals = new WeakMap();
+    this.observed = null;
   }
   private current(signal: AbortSignal) {
     signal.throwIfAborted();
@@ -358,6 +363,40 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
       true,
     );
   }
+  async startNew(
+    handle: object,
+    signal: AbortSignal,
+  ): Promise<WorkflowReply<void>> {
+    const proposal = this.proposals.get(handle),
+      observed = this.observed;
+    if (
+      !proposal ||
+      !observed ||
+      observed.requestId !== this.knownRequestId ||
+      !sameJson(proposal, observed.proposal)
+    )
+      return refused("not-dispatched");
+    // The existing command lock also protects another tab's pending request.
+    return this.request(signal, async (current) => {
+      const recovery = this.recovery(current);
+      try {
+        if (await recovery.load()) return refused("not-dispatched");
+        if (!(await recovery.acknowledged(observed.requestId)))
+          return refused("unknown");
+      } finally {
+        this.current(current);
+      }
+      if (
+        this.observed !== observed ||
+        this.knownRequestId !== observed.requestId
+      )
+        return refused("not-dispatched");
+      this.proposals = new WeakMap();
+      this.knownRequestId = null;
+      this.observed = null;
+      return { ok: true, value: undefined };
+    });
+  }
   async prepare(
     input: TaskUpdateInput,
     signal: AbortSignal,
@@ -380,6 +419,7 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
         executing: false,
       });
       this.knownRequestId = saved.requestId;
+      this.observed = null;
       return this.prepareSaved(saved, captured, requestSignal);
     });
   }
@@ -484,6 +524,9 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
     }
     if (value.status !== "observed") return refused("unknown");
     if (saved) await this.recovery(requestSignal).acknowledge(saved);
+    const requestId = saved?.requestId ?? this.knownRequestId;
+    if (!requestId) throw new Error("Missing acknowledged task request");
+    this.observed = { requestId, proposal };
     const proof =
       "execution" in value.outcome
         ? value.outcome.execution
@@ -497,6 +540,15 @@ export class TaskUpdateWorkflow implements TaskUpdateWorkflowPort {
         title: value.outcome.result.title,
         taskStatus: value.outcome.result.status,
         dueDate: value.outcome.result.dueDate,
+        ...("execution" in value.outcome &&
+        value.outcome.execution.kind === "native-task"
+          ? {
+              task: {
+                id: value.outcome.result.id,
+                clientId: value.outcome.result.clientId,
+              },
+            }
+          : {}),
       }),
     };
   }

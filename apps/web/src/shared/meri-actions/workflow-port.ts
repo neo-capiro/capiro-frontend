@@ -31,6 +31,7 @@ export type ObservedExecution = Readonly<{
   receiptReference: string;
   completedAt: string;
   taskTitle: string | null;
+  task?: Readonly<{ id: string; clientId: string | null }>;
 }>;
 
 export type ExecutionView =
@@ -67,6 +68,8 @@ export type TaskRecoveryView<P, E> =
  * A host must replace the feature lifetime whenever its trusted context/port changes.
  */
 export interface ActionWorkflowPort {
+  /** Retire local handles only after the exact observed request is acknowledged. */
+  startNew?(handle: object, signal: AbortSignal): Promise<WorkflowReply<void>>;
   discardSaved?(
     signal: AbortSignal,
   ): Promise<WorkflowReply<TaskRecoveryView<ProposalView, ObservedExecution>>>;

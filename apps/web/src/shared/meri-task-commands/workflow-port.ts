@@ -26,11 +26,16 @@ export type TaskUpdateExecutionView = Readonly<
       title: string;
       taskStatus: string;
       dueDate: string | null;
+      task?: Readonly<{ id: string; clientId: string | null }>;
     }
 >;
 
 /** Display handles retain exact public received proposals inside the adapter. */
 export interface TaskUpdateWorkflowPort {
+  startNew?(
+    proposal: object,
+    signal: AbortSignal,
+  ): Promise<WorkflowReply<void>>;
   discardSaved?(
     signal: AbortSignal,
   ): Promise<

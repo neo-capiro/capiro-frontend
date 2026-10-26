@@ -16,7 +16,8 @@ type Operation =
   | "prepare"
   | "execute"
   | "recover"
-  | "discard";
+  | "discard"
+  | "start-new";
 export type WorkflowState = Readonly<{
   stage:
     | "idle"
@@ -172,6 +173,20 @@ export class ActionWorkflowController {
         if (value.phase === "empty") this.#succeed(initialState());
         else this.#recover(value);
       },
+    );
+  };
+
+  startNew = async (handle: object) => {
+    if (
+      !this.#port.startNew ||
+      this.#state.proposal?.handle !== handle ||
+      this.#state.execution?.status !== "observed"
+    )
+      return;
+    await this.#run(
+      "start-new",
+      (signal) => this.#port.startNew!(handle, signal),
+      () => this.#succeed(initialState()),
     );
   };
 

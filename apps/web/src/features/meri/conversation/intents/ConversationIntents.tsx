@@ -1,5 +1,7 @@
 "use client";
 import { useState, type ReactNode } from "react";
+import Link from "next/link";
+import { workspaceTaskHref } from "../../../modules/workspace/task-destination-public";
 import type { IntentsItem } from "@capiro/meri-client/intents";
 import { Button } from "@capiro/ui/button";
 import type { IntentsAccess } from "../../../../shared/meri-intents/access";
@@ -155,6 +157,13 @@ function IntentCard({
       <p className={styles.muted}>{row.detail}</p>
       <FieldList fields={row.fields} />
       <FieldList fields={row.result} label="Recorded result" />
+      {row.task && (
+        <Button variant="outline" asChild>
+          <Link prefetch={false} href={workspaceTaskHref(row.task)}>
+            Open task in Workspace
+          </Link>
+        </Button>
+      )}
       <DecisionControls
         row={row}
         attempt={attempt}

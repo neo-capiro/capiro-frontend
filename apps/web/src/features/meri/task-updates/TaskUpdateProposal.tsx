@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Link from "next/link";
+import { workspaceTaskHref } from "../../modules/workspace/task-destination-public";
 import { Button } from "@capiro/ui/button";
 import type {
   TaskUpdateProposalView,
@@ -59,6 +61,13 @@ export function TaskUpdateProposal({
         <div aria-label="Verified task update result">
           <h3>Recorded task</h3>
           <p>{observed.title}</p>
+          {observed.task && (
+            <Button variant="outline" asChild>
+              <Link prefetch={false} href={workspaceTaskHref(observed.task)}>
+                Open task in Workspace
+              </Link>
+            </Button>
+          )}
           <dl className={styles.details}>
             <dt>Status</dt>
             <dd>{observed.taskStatus}</dd>
