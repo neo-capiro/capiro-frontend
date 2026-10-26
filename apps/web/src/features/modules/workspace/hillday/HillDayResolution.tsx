@@ -15,6 +15,11 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
+import presentation from "./hillday-correction.module.css";
+import {
+  HillDayStafferPicker,
+  type StafferChoice,
+} from "./HillDayStafferPicker";
 
 type Meeting = Resolution["meetings"][number];
 type Attendee = Meeting["attendees"][number];
@@ -37,6 +42,10 @@ function CorrectionDialog({
   const [location, setLocation] = useState(meeting.office.room ?? "");
   const [memberId, setMemberId] = useState(meeting.office.memberId ?? "");
   const [search, setSearch] = useState("");
+  const [directory, setDirectory] = useState(false);
+  const [selectedStaffer, setSelectedStaffer] = useState<StafferChoice | null>(
+    null,
+  );
   const members = useCapiroQuery(
     "workspace.hillday.members",
     { query: { q: search } },
@@ -44,17 +53,26 @@ function CorrectionDialog({
   );
   const correction = useCapiroMutation("workspace.hillday.correction");
   async function save() {
+    if (correction.pending || (attendee && directory && !selectedStaffer))
+      return;
     try {
       await correction.run({
         params: { id, meetingId: meeting.meetingId },
-        body: attendee
-          ? {
-              kind: "manual_attendee",
-              attendeeId: attendee.attendeeId || undefined,
-              name,
-              role,
-            }
-          : { kind: "change_office", memberId },
+        body:
+          attendee && directory && selectedStaffer
+            ? {
+                kind: "assign_staffer",
+                attendeeId: attendee.attendeeId || undefined,
+                stafferId: selectedStaffer.id,
+              }
+            : attendee
+              ? {
+                  kind: "manual_attendee",
+                  attendeeId: attendee.attendeeId || undefined,
+                  name,
+                  role,
+                }
+              : { kind: "change_office", memberId },
       });
       onSaved();
       onClose();
@@ -81,6 +99,8 @@ function CorrectionDialog({
         if (!open && !correction.pending) onClose();
       }}
       title={attendee ? "Resolve attendee" : "Edit resolved office"}
+      className={attendee ? presentation.dialog : undefined}
+      closeDisabled={correction.pending}
       footer={
         <>
           <ActionButton disabled={correction.pending} onClick={onClose}>
@@ -89,7 +109,12 @@ function CorrectionDialog({
           <ActionButton
             primary
             disabled={
-              correction.pending || (attendee ? !name.trim() : !memberId)
+              correction.pending ||
+              (attendee
+                ? directory
+                  ? !selectedStaffer
+                  : !name.trim()
+                : !memberId)
             }
             onClick={save}
           >
@@ -100,27 +125,63 @@ function CorrectionDialog({
     >
       <div className={styles.form}>
         {attendee ? (
-          <>
-            <Field label="Full name" htmlFor="hillday-attendee-name">
-              <TextInput
-                id="hillday-attendee-name"
-                value={name}
-                maxLength={200}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </Field>
-            <Field label="Title or role" htmlFor="hillday-attendee-role">
-              <TextInput
-                id="hillday-attendee-role"
-                value={role}
-                maxLength={200}
-                onChange={(event) => setRole(event.target.value)}
-              />
-            </Field>
+          <section
+            className={presentation.attendee}
+            aria-label="Attendee correction"
+            data-design-node="1064:258991"
+          >
+            <div className={presentation.manual}>
+              <Field label="Full name" htmlFor="hillday-attendee-name">
+                <TextInput
+                  id="hillday-attendee-name"
+                  value={name}
+                  maxLength={200}
+                  disabled={correction.pending || directory}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </Field>
+              <Field label="Title or role" htmlFor="hillday-attendee-role">
+                <TextInput
+                  id="hillday-attendee-role"
+                  value={role}
+                  maxLength={200}
+                  disabled={correction.pending || directory}
+                  onChange={(event) => setRole(event.target.value)}
+                />
+              </Field>
+            </div>
+            <div className={presentation.choice}>
+              <p role="status">
+                {directory
+                  ? selectedStaffer
+                    ? `Directory selection: ${selectedStaffer.label}`
+                    : "Choose a Directory staffer to confirm."
+                  : "Confirm will use the manual name and role."}
+              </p>
+              {directory && (
+                <ActionButton
+                  disabled={correction.pending}
+                  onClick={() => {
+                    setDirectory(false);
+                    setSelectedStaffer(null);
+                  }}
+                >
+                  Use manual input
+                </ActionButton>
+              )}
+            </div>
+            <HillDayStafferPicker
+              selected={selectedStaffer}
+              pending={correction.pending}
+              onSelect={(choice) => {
+                setDirectory(true);
+                setSelectedStaffer(choice);
+              }}
+            />
             <p className={styles.footnote}>
               Your correction is attributed to your signed-in account.
             </p>
-          </>
+          </section>
         ) : (
           <>
             <Field label="Search members" htmlFor="hillday-office-search">
@@ -365,6 +426,7 @@ export function HillDayResolution({
       </ActionButton>
       {selected && (
         <CorrectionDialog
+          key={`${id}:${selected.meeting.meetingId}:${selected.attendee?.attendeeId ?? "office"}`}
           id={id}
           meeting={selected.meeting}
           attendee={selected.attendee}
