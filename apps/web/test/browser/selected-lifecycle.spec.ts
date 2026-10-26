@@ -164,7 +164,7 @@ test("selected skill applies exact version and DST window to draft and survives 
     return route.abort();
   });
   await setup(page);
-  await page.getByText("Skill for next message:", { exact: false }).click();
+  await page.getByText("Skill · None", { exact: true }).click();
   await page
     .getByRole("combobox", { name: "Skill", exact: true })
     .selectOption("quick_skill.client_changes");
@@ -272,9 +272,10 @@ for (const intent of ["resume", "fork"] as const)
 for (const clientId of [id(5), id(15)])
   test(`client profile ${clientId} revalidates before transferring reviewed draft`, async ({
     page,
+    baseURL,
   }) => {
-    let reads = 0,
-      writes = 0;
+    const readPaths: string[] = [];
+    let writes = 0;
     await page.route("**/api/backend/core/me", (route) =>
       route.fulfill({
         json: {
@@ -284,7 +285,7 @@ for (const clientId of [id(5), id(15)])
       }),
     );
     await page.route("**/api/backend/core/clients/*", (route) => {
-      reads++;
+      readPaths.push(new URL(page.url()).pathname);
       return route.fulfill({
         json: {
           id: clientId,
@@ -305,9 +306,10 @@ for (const clientId of [id(5), id(15)])
       .fill("Reviewed profile question");
     await page.getByRole("button", { name: "Open draft in Meri" }).click();
     await expect(page).toHaveURL(
-      `http://127.0.0.1:5293/meri?clientId=${clientId}`,
+      new URL(`/meri?clientId=${clientId}`, baseURL).href,
     );
-    expect(reads).toBe(2);
+    // The destination may revalidate again; the profile must read before transfer.
+    expect(readPaths.filter((path) => path === "/profile")).toHaveLength(2);
     expect(writes).toBe(0);
   });
 test("client profile fresh archived refusal keeps reviewed text and does not navigate", async ({
@@ -346,6 +348,7 @@ test("client profile fresh archived refusal keeps reviewed text and does not nav
 
 test("client profile revalidation releases an aborted verification while retaining the draft", async ({
   page,
+  baseURL,
 }) => {
   let reads = 0;
   let release!: () => void;
@@ -397,5 +400,7 @@ test("client profile revalidation releases an aborted verification while retaini
   await expect(page).toHaveURL(/\/profile\?/);
   release();
   await page.getByRole("button", { name: "Open draft in Meri" }).click();
-  await expect(page).toHaveURL(`http://127.0.0.1:5293/meri?clientId=${id(5)}`);
+  await expect(page).toHaveURL(
+    new URL(`/meri?clientId=${id(5)}`, baseURL).href,
+  );
 });

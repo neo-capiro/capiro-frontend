@@ -11,6 +11,7 @@ import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
+import { useIntentExpiry } from "./useIntentExpiry";
 import {
   intentDecisionRecovery,
   type IntentDecisionScope,
@@ -35,9 +36,14 @@ type RecoveryState = {
 export function useConversationIntents(
   access: IntentsAccess,
   scope: IntentScope,
-  options: { now?: () => number; refreshKey?: string } = {},
+  options: {
+    now?: () => number;
+    refreshKey?: string;
+    onDecisionSettled?: (runId: string) => void;
+  } = {},
 ) {
   const now = options.now ?? Date.now;
+  const onDecisionSettled = options.onDecisionSettled;
   const { conversationId, tenantId, actorId } = scope;
   const { list, refresh, retry, loadMore } = useIntentList(
     access,
@@ -45,6 +51,7 @@ export function useConversationIntents(
     options.refreshKey,
   );
   const key = JSON.stringify([tenantId, actorId, conversationId]);
+  const checkedAt = useIntentExpiry(list, key, now);
   const current = useRef({ access, key, active: true });
   useLayoutEffect(() => {
     current.current = { access, key, active: true };
@@ -166,6 +173,9 @@ export function useConversationIntents(
         return;
       const id = proposal.proposalId,
         prior = attempts[id];
+      // A throttled tab may still hold a control from before the deadline.
+      // Keep saved decision reconciliation separate from a new decision.
+      if (!prior && Date.parse(proposal.expiresAt) <= now()) return;
       if (prior?.state === "pending" || (prior && prior.decision !== decision))
         return;
       const request: IntentsDecideRequest = {
@@ -232,8 +242,26 @@ export function useConversationIntents(
         return { ...previous, attempts: next };
       });
       await refresh();
+      if (
+        !attempt &&
+        current.current.active &&
+        current.current.key === key &&
+        current.current.access === access
+      )
+        onDecisionSettled?.(proposal.command.binding.runId);
     },
-    [access, attempts, conversationId, ready, recoveryFor, guard, key, refresh],
+    [
+      access,
+      attempts,
+      conversationId,
+      ready,
+      recoveryFor,
+      guard,
+      key,
+      refresh,
+      now,
+      onDecisionSettled,
+    ],
   );
 
   const viewer = useMemo<Viewer>(
@@ -242,8 +270,8 @@ export function useConversationIntents(
   );
   const rows = useMemo(
     () =>
-      list.status === "ready" ? intentRows(list.items, now(), viewer) : [],
-    [list, now, viewer],
+      list.status === "ready" ? intentRows(list.items, checkedAt, viewer) : [],
+    [list, checkedAt, viewer],
   );
   return {
     list,

@@ -1,5 +1,5 @@
 "use client";
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import type { HearingSourceReadResponse } from "@capiro/meri-contracts/conversation-sources";
 import { FieldTable, type FieldRow } from "../../ui/FieldTable";
 import { StatusPill } from "../../ui/StatusPill";
@@ -55,8 +55,10 @@ function hearingFields({
 
 export function HearingSourceDetail({
   value,
+  media,
 }: {
   value: HearingSourceReadResponse;
+  media?: ReactNode;
 }) {
   const titleId = useId();
   const record = value.current.result.records[0];
@@ -88,9 +90,11 @@ export function HearingSourceDetail({
       ) : (
         <p className={surfaces.caption}>Source link unavailable</p>
       )}
-      <p className={surfaces.caption}>
-        Media playback is not available for this saved record.
-      </p>
+      {media ?? (
+        <p className={surfaces.caption}>
+          Media playback is not available for this saved record.
+        </p>
+      )}
       <p className={surfaces.caption}>
         This shows the saved hearing record after a current access check. It
         does not establish complete hearing coverage or how the source was used

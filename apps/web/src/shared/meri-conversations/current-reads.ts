@@ -7,6 +7,10 @@ import {
   HEARING_SOURCE_READ_SCHEMA,
   receiveHearingSourceRequest,
   receiveHearingSourceResponse,
+  HEARING_MEDIA_READ_SCHEMA,
+  receiveHearingMediaRequest,
+  receiveHearingMediaResponse,
+  type HearingMediaReadRequest,
 } from "@capiro/meri-contracts/conversation-sources";
 import {
   conversationUsageMetadata,
@@ -57,14 +61,27 @@ export const hearingReadOperation = {
   },
 };
 
-/** Both source families use the same endpoint and their own public admission. */
+export const hearingMediaReadOperation = {
+  ...hearingSourceMetadata,
+  admit(bytes: Uint8Array) {
+    const request = receiveHearingMediaRequest(bytes);
+    return (status: number, body: Uint8Array) =>
+      receiveHearingMediaResponse(status, body, request);
+  },
+};
+
+/** Saved source and media reads share one endpoint and their public admission. */
 const conversationSourceReadOperation = {
   ...sourceReadOperation,
   admit(bytes: Uint8Array) {
     try {
       return sourceReadOperation.admit(bytes);
     } catch {
-      return hearingReadOperation.admit(bytes);
+      try {
+        return hearingReadOperation.admit(bytes);
+      } catch {
+        return hearingMediaReadOperation.admit(bytes);
+      }
     }
   },
 };
@@ -173,6 +190,27 @@ export function createConversationReads(
           conversationId: context.conversationId,
           runId,
           referenceId,
+        },
+        AbortSignal.any([lifetime, signal]),
+        fetcher,
+        isCurrent,
+        onAccessLost,
+      );
+    },
+    hearingMedia(
+      runId: string,
+      referenceId: string,
+      playback: HearingMediaReadRequest["playback"],
+      signal: AbortSignal,
+    ) {
+      return read(
+        hearingMediaReadOperation,
+        {
+          schemaVersion: HEARING_MEDIA_READ_SCHEMA,
+          conversationId: context.conversationId,
+          runId,
+          referenceId,
+          playback,
         },
         AbortSignal.any([lifetime, signal]),
         fetcher,

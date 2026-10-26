@@ -70,6 +70,7 @@ type Kind =
   | "selection"
   | "management"
   | "lifecycle"
+  | "feedback"
   | "handoff";
 
 /** Pending management commands stay recoverable after the row moves to Archive or Trash. */
@@ -272,7 +273,7 @@ export function clearMeriConversationScope(
       continue;
     }
     if (parts[0] !== expected) continue;
-    if (parts[1] === "request") {
+    if (parts[1] === "request" || parts[1] === "feedback") {
       // Erase private bytes without inventing a disposition for a possibly delivered request.
       // The existing decoder refuses null on every read; identity replacement still removes it.
       storage.setItem(key, "null");

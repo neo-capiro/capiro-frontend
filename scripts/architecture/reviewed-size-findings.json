@@ -673,10 +673,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
     "kind": "function",
     "symbol": "sendReviewedMail",
-    "fingerprint": "d0c3f05b87e0e6859c7405de82c2e800073f902a8f121a78fb18b47e32a858a7",
-    "reason": "Retain this bounded single-send adapter. Parsing the reviewed DTO, re-reading the exact sender, confirming the reply thread and attachment readiness, dispatching once, validating the exact request receipt and classifying delivery uncertainty form one ordered send sequence. The split between preflight refusal and post-dispatch uncertainty is essential to whether the caller may release its attempt. Mailbox projection, attachment receiving and recipient normalization are already separate semantic owners. Keeping the final actor assertion adjacent to dispatch makes the no-intervening-await property reviewable. It does not select a provider, store durable intent, manage React state, compose mail, rewrite content or retry delivery, so another workflow/service extraction is not warranted by its line count.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "f3b5bee722a58e34d992c18d55ddecbafd6be7a3d19de5f626c3b179a96a0e40",
+    "reason": "Retain this single reviewed-mail dispatch sequence. The ML-21 correction requires HTTP 400 and an exact request key with a durable failed intent before releasing the browser attempt. Removing the unsound no-intent size-refusal branch keeps every untyped, mismatched, server-error or ambiguous result uncertain, including concurrent admission. Response classification remains adjacent to the one dispatch and uses the existing durable receipt contract. Canonical mailbox, attachments, recipients, browser reservation/settlement and UI remain separate existing owners. Extracting a separate stateful workflow or duplicating receipt parsing would obscure which completed request may release its attempt; no additional runtime responsibility is introduced.",
+    "reviewedBy": "Codex task_approval_author independent ML-21 paired correction review",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
@@ -746,7 +746,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -890,7 +890,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each job\u2019s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u2019s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each job’s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload’s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2369,7 +2369,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -3259,10 +3259,10 @@
     "file": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
     "kind": "function",
     "symbol": "TimelineView",
-    "fingerprint": "4f89b5d57e3ac893375cc9823698af8c3a5645257858fbac1e80aa63ab144d60",
-    "reason": "Composes one admitted Strategy workspace with separate editors and current-step membership checks. Fiscal labels and control placement are presentation; mutation and authorization remain delegated. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedBy": "Codex PR60 root and independent source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "a236167b31f38768554688d6fd1b5bbdf7035b53f3eac658421aa8670b39ca74",
+    "reason": "Existing timeline host receives one imported advisory panel; timeline composition remains its single responsibility, with the Watch read/check owner separate.",
+    "reviewedBy": "Wave 3 Root independent source and Figma review",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/operations/objective-operational-semantics.ts",
@@ -3286,10 +3286,12 @@
     "file": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
     "kind": "function",
     "symbol": "PersonnelDirectory",
-    "fingerprint": "c807490bf373a0c8631f079d52c788a2d7f41a67aa18000a9134c264a67010c1",
-    "reason": "One bounded personnel list owns URL filters, the list query, row selection and table presentation (reviewed at 246 lines on 2026-10-17). 53534db6 adds the verified selected-profile side preview: the read and rendering live in PersonnelPreview and row activation in DataTable; the growth here is the list/preview layout and URL-selected row binding only.",
-    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
-    "reviewedOn": "2026-10-18"
+    "line": 26,
+    "nonblank": 279,
+    "fingerprint": "7daab26fda7898aa518bc3ce86eaad428e143f7209f102a6aa610f815672d4e6",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
@@ -3457,10 +3459,10 @@
     "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
     "kind": "function",
     "symbol": "MeriLiveConversation",
-    "fingerprint": "6c83576eabb815e0a82c174e6cb660ece6074ea7c89048c02d7bc96535648124",
-    "reason": "This session-bound renderer composes one current turn, status, artifacts and composer. The draft owner now receives the canonical request only after the command journal records it, and acknowledgement/pending checks use the exact run scope. Command dispatch, request identity and observation remain in existing separate owners; the renderer adds no authority or independent workflow. Independent cross_run_review verified effect ordering and the real run-switch regressions.",
-    "reviewedBy": "Codex root and independent cross_run_review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "fcb1feba2430cb60fde78af5d91cc19db397314c9102824bfe8512b739b575b5",
+    "reason": "This component composes one session-bound conversation, composer, lifecycle and panels. It adds only the tab-return hook invocation; read dispatch, cancellation, current access and durable outcomes stay in their established owners. Existing lifecycle busy state also disables the visible manual action. No new domain logic is added to the composition function.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
@@ -4170,9 +4172,9 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
     "kind": "function",
     "symbol": "TemplateSettings",
-    "fingerprint": "23d13552fcc95982059bea3835b792dcff3e167b105a4e5d2d005eb30023da87",
-    "reason": "One metadata form with existing save owner, fields and footer; no second transaction or lifetime owner. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "fingerprint": "cef7af9dea6fb020e3ded3e315d8f80566094d25a67bafaa732c94c7db7afbb1",
+    "reason": "One existing metadata form preserves user inputs and consumes the common command owner. Acknowledged destination identity is passed back to the existing detail/list refresh callbacks.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4975,8 +4977,8 @@
     "file": "apps/web/src/features/modules/workspace/templates/CampaignPicker.tsx",
     "kind": "function",
     "symbol": "CampaignPicker",
-    "fingerprint": "70e05eb5a00f486d77ca28ab2ecb61a4bb3657abd82ef3fbbe74bd084a506ae2",
-    "reason": "One current authorized-list page/filter/selection presentation owner. Reads use the existing scoped aborting query; parent retains the sole explicit save mutation. The small JSX unit does not warrant another state owner.",
+    "fingerprint": "279beea34b684e413339f796a288b5e2bd6d1aab684c7ffd79b89aa990974226",
+    "reason": "One current authorized server-search page and selection UI; the existing scoped query owns cancellation and the parent owns the write. No new cache or paging authority.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
@@ -4984,8 +4986,8 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
     "kind": "function",
     "symbol": "UseTemplate",
-    "fingerprint": "5a345dfb3af520ecf57179118958395bb13d56d048451c1ff512a73a8bcae34c",
-    "reason": "Existing use/application-receipt behavior is byte-identical to the base. This history/paging slice neither extends its mutation authority nor claims its pending recovery guarantees.",
+    "fingerprint": "d14fe0664aac12c1f0cbd2f87593724e5f45b533fcc0813b67e6abe4e02a5ec7",
+    "reason": "One explicit Use form captures title/client/variables and delegates to the existing command owner; the duplicate completed receipt was removed. Immutable destination now governs pending access.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
@@ -5241,6 +5243,214 @@
     "fingerprint": "d37700209b29d5dcb59fe5af69498b8bcc4907c4b359d66e58834c7627ce2328",
     "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One explicit link-preview dialog presents source input, pending/unknown/proposed outcomes and separate adoption. Duplicate manual fields are removed: AppControls alone edits them. The proposal uses the same empty-app defaults and source-version fence, preserves display choices/unknown nested fields on explicit update, and reuses current mutation/Undo owners. Keeping its mutually exclusive dialog states together does not add another state or transport owner. See W3-FE217-COMPOSITION-REVIEW.md.",
     "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/CommitteeDirectory.tsx",
+    "kind": "function",
+    "symbol": "CommitteeDirectory",
+    "line": 14,
+    "nonblank": 149,
+    "fingerprint": "26c6d1f463b83753d74c52fe3b16dfeac41f3724256c398af3f7fe50c2e30cdd",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
+    "kind": "function",
+    "symbol": "CongressionalContacts",
+    "line": 25,
+    "nonblank": 231,
+    "fingerprint": "a340f0665f0daec0dfaad20df669fc83e1897b1190e4e44a4d13e815335807ea",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/StateDirectory.tsx",
+    "kind": "function",
+    "symbol": "StateDirectory",
+    "line": 13,
+    "nonblank": 206,
+    "fingerprint": "726365d1118f6e2b1143050cbdc80bec2234f591c58e2c6d4a0ca9ab9278ede2",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
+    "kind": "function",
+    "symbol": "TemplateCard",
+    "fingerprint": "fc208106983f1b123ca2d6e1d24df850e21d30b3afe77fb76ba9dec7c624a28b",
+    "reason": "One existing catalog card renders capability-controlled actions. The change only consumes the shared write fence; it does not own a mutation.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9d0ec837beda791ffb2b5c28e5619c1c676dcae07efd090b1ddf11f77f22170a",
+    "reason": "One Studio host composes catalog, dialog selection and list refresh under the common command provider; canonical query, recovery, forms and transport remain separate owners. No threshold-driven extraction is needed.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "function",
+    "symbol": "TemplateStudioView",
+    "fingerprint": "2694373e7eba769f03b1a6f7ed66face8a64459980f64cfff62ebf87097c3fca",
+    "reason": "One Studio host composes catalog, dialog selection and list refresh under the common command provider; canonical query, recovery, forms and transport remain separate owners. No threshold-driven extraction is needed.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateWizard.tsx",
+    "kind": "function",
+    "symbol": "TemplateWizard",
+    "fingerprint": "cbc621d2e22b8f82efae7cd8d75ec440516a61a98b0afc22bf4648491a9c1cf6",
+    "reason": "One existing staged template form owns the complete edited specification and presents partial metadata/draft outcomes. Durable command handling is delegated to the common owner rather than duplicated in its steps.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateRecoveryPanel.tsx",
+    "kind": "function",
+    "symbol": "TemplateRecoveryPanel",
+    "fingerprint": "c5d5f6c9101a6a600f5bf569463b897ea8eb52263f7b692abfb7ad814231d0b6",
+    "reason": "One projection of the retained domain command distinguishes pending, partial and complete outcomes and exposes only supported explicit actions. The local Figma correction is required separately; it does not require another state owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/useTemplateCommands.tsx",
+    "kind": "function",
+    "symbol": "useCommands",
+    "fingerprint": "95c469d0242f04f4385f69b66ae8b1e3168249552fdb827b707e8306b0ba438b",
+    "reason": "One actor-scoped domain command coordinator composes the existing encrypted journal, retained-intent lifetime and canonical reads with sequential dispatch. It is the single write owner for this Studio, not a second journal or transport.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateProvenance.tsx",
+    "kind": "function",
+    "symbol": "TemplateProvenance",
+    "fingerprint": "45afdff58d0ebb72c65dacbe5fd36a0d612b7c0c34bd63a954c86f8a72506b89",
+    "reason": "One current-access canonical receipt dialog with four data-driven categories and local display state. Existing query, modal, journal and operation owners remain separate.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/watch/strategy-watch.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "dd27511a8d46f1190d32ba24f861a23bbc0dbb67c9801411e24b9515c4b778b2",
+    "reason": "One cohesive receiver characterization group covers actual advisory shape, absent versus empty state, exact strategy/revision receiving and existing read/check routes.",
+    "reviewedBy": "Wave 3 Root independent source and Figma review",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
+    "kind": "function",
+    "symbol": "DecisionControls",
+    "line": 42,
+    "nonblank": 83,
+    "fingerprint": "2334908c7ab0c9fd413ae363010868f38cdfad693c34d28e30e79a890905d03d",
+    "reason": "DecisionControls is unchanged at its exact 83-line fingerprint from the pinned base. This correction only exposes the existing current list to adjacent file presentation; no new decision responsibility or function growth is introduced.",
+    "reviewedBy": "Independent Library reviewer; not author",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 437,
+    "fingerprint": "ec2a5c19bacdbd29d7c5de73f2a86346d2ab2b38afe0fd96afca5157d45018ab",
+    "reason": "The existing intent-view module owns the closed presentation of admitted intent outcomes. The bounded addition adds document-family labels and separates generic preparation copy from actual schedule operations; it neither invents a file nor changes command decisions. Related status/label presentation remains cohesive. No count-only split is warranted for this exact 437-line module fingerprint.",
+    "reviewedBy": "Independent Library reviewer; not author",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/module-ui/module-ui.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "34e95545b56fa3dad13d63ff3947458295032163a2d7b66ed091a10123a9aba4",
+    "reason": "The existing module-ui stylesheet remains the canonical local presentation owner for shared module primitives. This bounded correction replaces the obsolete statusNote rule with one unavailable-only modifier and its heading/body rules; loading, transient error, empty states, base status styles and controls are unchanged. The 406-line file is cohesive; extracting a separate style owner only for this threshold would fragment the existing status primitive.",
+    "reviewedBy": "Wave 3 A3 independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useIntentList.ts",
+    "kind": "function",
+    "symbol": "useIntentList",
+    "fingerprint": "034996f781f7b3719b143d6caa890f74171358f5a467ef9c143fc815e2259611",
+    "reason": "The hook owns one conversation intent-list observation lifetime: identity-bound state, cancellation, initial/refresh/page reads, and display disposition. The added denial branch reuses the shared admitted-error classifier; Core authorization, transport validation and durable decision recovery remain in their existing owners. Keeping these tightly related states together is clearer than a size-only split.",
+    "reviewedBy": "Codex independent MF-03 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents",
+    "fingerprint": "3a3e03d911aa0138be277fecd3c3f2bc1400da207b051156399b97ca4cc99f17",
+    "reason": "The hook composes one conversation intent-review lifetime: admitted list projection, exact saved-decision recovery and explicit decisions. MF-05 adds only a completion notification after a known decision receipt and list refresh; current access and callback lifetime are checked. Run observation stays in its existing owner, and transport, authorization and durable journal semantics are unchanged.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents > <anonymous> #6",
+    "fingerprint": "f8cd8e8a2ce7dcde9ed2fe1ebfc735b439f69720e819d41f7d017ab1be138fa4",
+    "reason": "This callback owns one immutable explicit decision and its existing receipt/recovery lifecycle. The added notification reports only known completion after list refresh and currentness checks. Keeping admission, retained decision bytes, receipt reconciliation and that final notification together preserves the existing uncertain-write fence without creating a second journal or dispatch path.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
+    "kind": "function",
+    "symbol": "useLiveRun",
+    "fingerprint": "4b013923d8e009d0f573f46eaf30c9c19bddaa82343e7576fc3818007e58f725",
+    "reason": "This hook coordinates one admitted run command and observation lifetime. Manual and tab-return refresh reuse the existing coalesced history wakeup and generation fence; Stop/Pause retires old callbacks synchronously. Command journaling, transport admission, bounded subscription and authority remain in their existing owners, with no command replay or second queue.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
+    "kind": "function",
+    "symbol": "useRunObservation",
+    "fingerprint": "89c667891011cf0be5434515595c1356aa88bc2a0ed6d64589d5e04c4b64e9bc",
+    "reason": "The hook owns one cancellable public subscription per admitted port. The finite post-decision waiting window uses that same cursor, abort owner and retry/settlement loop; it adds no domain write, authority or persistence. Keeping subscription admission, cleanup and state projection together makes the bounded waiting exception explicit without duplicating the public client.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
+    "kind": "function",
+    "symbol": "useRunObservation > observe",
+    "fingerprint": "b45e523f1ef8ced2c84a05795a50af0aa5d283c173a2f7f3e48abd1cee7d9dbe",
+    "reason": "This function starts and tears down one observation attempt lifecycle. Its post-decision watermark distinguishes new run status from a paged history suffix, and its unchanged-wait window stops at the existing subscription boundary. Cursor progression, abort cleanup and settlement belong together; the shared loop and SDK retain transport/retry ownership and no command replay is added.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "f5d1187bbc173208529d4f73ad0c1a16996743df26b6e174a5d13d0df05e3847",
+    "reason": "This module remains the mounted conversation presentation and interaction composition. The separate local hook owns focus/visibility listener attachment and cleanup for that exact lifetime, with a timestamp-only cooldown and current public-snapshot eligibility checks. It delegates one read wakeup to useLiveRun; there is no timer scheduler, transport, persistence or authorization implementation to extract into another owner.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/RunStatus.tsx",
+    "kind": "function",
+    "symbol": "RunStatus",
+    "fingerprint": "6fa6226d2c40d0108b1043f1617d1defc17abd6025e7a8339edeb3b14b3122b3",
+    "reason": "This component projects the current run, uncertainty and observation states through existing shared buttons and subordinate status components. The new refresh affordance delegates the existing read callback and honors busy/disposed state; it performs no IO, command mutation or authority decision. Its 82 nonblank lines remain one status presentation responsibility.",
+    "reviewedBy": "Codex independent MF-05 reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]

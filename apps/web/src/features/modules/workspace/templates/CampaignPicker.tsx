@@ -12,7 +12,7 @@ import styles from "./template-history.module.css";
 
 const pageSize = 50;
 
-/** Pages the existing authorized campaign list; filtering is explicitly page-local. */
+/** The canonical session owner filters before selecting each page. */
 export function CampaignPicker({
   value,
   onChange,
@@ -25,14 +25,15 @@ export function CampaignPicker({
   const [offset, setOffset] = useState(0);
   const [filter, setFilter] = useState("");
   const campaigns = useCapiroQuery("engagement.sessions", {
-    query: { limit: pageSize, offset, includeArchived: false },
+    query: {
+      limit: pageSize,
+      offset,
+      includeArchived: false,
+      search: filter.trim() || undefined,
+    },
   });
   const rows = campaigns.data ?? [];
-  const visible = rows.filter((row) =>
-    [row.title, row.topic, row.goal].some((text) =>
-      text?.toLocaleLowerCase().includes(filter.trim().toLocaleLowerCase()),
-    ),
-  );
+  const visible = rows;
   const page = (next: number) => {
     onChange("");
     setOffset(next);
@@ -40,9 +41,9 @@ export function CampaignPicker({
   return (
     <section className={styles.stack} aria-label="Source campaign picker">
       <Field
-        label="Filter this page"
+        label="Search campaigns"
         htmlFor="template-campaign-filter"
-        description="Filters names, topics and goals on the current page. Browse pages to find older campaigns."
+        description="Searches names, topics and goals across your campaigns."
       >
         <TextInput
           id="template-campaign-filter"
@@ -51,6 +52,7 @@ export function CampaignPicker({
           disabled={disabled}
           onChange={(event) => {
             onChange("");
+            setOffset(0);
             setFilter(event.target.value);
           }}
         />
@@ -76,7 +78,7 @@ export function CampaignPicker({
           />
         </Field>
         {!campaigns.loading && !campaigns.error && !visible.length && (
-          <p>No campaigns match on this page.</p>
+          <p>No campaigns match this search.</p>
         )}
       </StatusPanel>
       <nav className={styles.actions} aria-label="Campaign pages">

@@ -193,10 +193,22 @@
   max-width: 560px;
   line-height: 1.5;
 }
-/* Explains why no retry is offered; quieter than the diagnostic message. */
-.statusNote {
-  font-size: 12px !important;
-  color: var(--muted-foreground);
+.statusUnavailable {
+  padding: 20px;
+  border-style: solid;
+  text-align: left;
+  align-items: flex-start;
+  overflow-wrap: anywhere;
+}
+.statusUnavailable h2 {
+  color: var(--cat-1-clay, #7a2e2e);
+  font-weight: 600;
+  line-height: 1.45;
+}
+.statusUnavailable p {
+  width: 100%;
+  max-width: none;
+  line-height: 1.45;
 }
 .tabs {
   display: flex;

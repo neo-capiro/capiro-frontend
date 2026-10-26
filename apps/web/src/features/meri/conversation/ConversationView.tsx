@@ -17,6 +17,7 @@ import { ModelSelectionPicker } from "../model-selection/ModelSelectionPicker";
 import modelStyles from "../model-selection/model-selection.module.css";
 import { SkillSelectionPicker } from "./SkillSelectionPicker";
 import { ClientHandoffDraft } from "./ClientHandoffDraft";
+import { FeedbackContext } from "./feedback/FeedbackContext";
 
 type Session = ReturnType<typeof useConversationSession>;
 
@@ -152,46 +153,48 @@ export function ConversationView({
   const ready =
     !session.accessLost && !session.latestTarget ? session.ready : undefined;
   return (
-    <ConversationFrame
-      scope={scope}
-      historyStatus={
-        session.accessLost ? null : (
-          <ConversationHistoryStatus session={session} />
-        )
-      }
-      composer={
-        <SessionComposer session={session} scope={scope} channel={composer} />
-      }
-    >
-      {ready ? (
-        <MeriLiveConversation
-          key={ready.lifetimeKey}
-          port={ready.port}
-          composer={composer}
-          initialPrompt={session.connection.pending}
-          earlier={session.earlier}
-          scope={scope}
-          draft={session.draft}
-          onDraft={session.setDraft}
-          initialDraft={session.initialDraft}
-          storageError={session.storageError}
-          modelSelection={session.modelSelection}
-          skillSelection={session.skillSelection}
-          modelBlocked={session.modelBlocked}
-          textareaRef={session.textarea}
-          onNextTurn={session.startNext}
-          onLifecycleTarget={session.openLifecycleTarget}
-          nextTurnBlocked={session.nextBlocked}
-          nextTurnVerified={!!session.source && !session.nextBlocked}
-          initialBlocked={session.initialBlocked}
-          promptKey={session.logicalKey}
-          savedCurrent={session.savedCurrent}
-          acceptedRequest={session.acceptedRequest}
-          onSettled={session.refresh}
-        />
-      ) : (
-        <ConnectionPending session={session} />
-      )}
-    </ConversationFrame>
+    <FeedbackContext.Provider value={ready?.port ?? null}>
+      <ConversationFrame
+        scope={scope}
+        historyStatus={
+          session.accessLost ? null : (
+            <ConversationHistoryStatus session={session} />
+          )
+        }
+        composer={
+          <SessionComposer session={session} scope={scope} channel={composer} />
+        }
+      >
+        {ready ? (
+          <MeriLiveConversation
+            key={ready.lifetimeKey}
+            port={ready.port}
+            composer={composer}
+            initialPrompt={session.connection.pending}
+            earlier={session.earlier}
+            scope={scope}
+            draft={session.draft}
+            onDraft={session.setDraft}
+            initialDraft={session.initialDraft}
+            storageError={session.storageError}
+            modelSelection={session.modelSelection}
+            skillSelection={session.skillSelection}
+            modelBlocked={session.modelBlocked}
+            textareaRef={session.textarea}
+            onNextTurn={session.startNext}
+            onLifecycleTarget={session.openLifecycleTarget}
+            nextTurnBlocked={session.nextBlocked}
+            nextTurnVerified={!!session.source && !session.nextBlocked}
+            initialBlocked={session.initialBlocked}
+            promptKey={session.logicalKey}
+            savedCurrent={session.savedCurrent}
+            acceptedRequest={session.acceptedRequest}
+            onSettled={session.refresh}
+          />
+        ) : (
+          <ConnectionPending session={session} />
+        )}
+      </ConversationFrame>
+    </FeedbackContext.Provider>
   );
 }
