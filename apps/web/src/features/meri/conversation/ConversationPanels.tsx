@@ -16,10 +16,12 @@ export function ConversationPanels({
   port,
   turn,
   earlier,
+  onDecisionSettled,
 }: {
   port: MeriConversationPort;
   turn: TurnView | null;
   earlier: readonly TurnView[];
+  onDecisionSettled?: ((runId: string) => void) | undefined;
 }) {
   const approvals = useIntentApprovalsEnabled();
   const published = conversationArtifacts(turn ? [...earlier, turn] : earlier);
@@ -36,6 +38,7 @@ export function ConversationPanels({
         <ConversationIntents
           access={port.intents}
           scope={port.context}
+          onDecisionSettled={onDecisionSettled}
           refreshKey={`${turn?.runState ?? ""}:${turn?.approvals.length ?? 0}:${turn?.artifacts.length ?? 0}`}
         >
           {files}

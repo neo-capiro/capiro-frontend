@@ -36,9 +36,14 @@ type RecoveryState = {
 export function useConversationIntents(
   access: IntentsAccess,
   scope: IntentScope,
-  options: { now?: () => number; refreshKey?: string } = {},
+  options: {
+    now?: () => number;
+    refreshKey?: string;
+    onDecisionSettled?: (runId: string) => void;
+  } = {},
 ) {
   const now = options.now ?? Date.now;
+  const onDecisionSettled = options.onDecisionSettled;
   const { conversationId, tenantId, actorId } = scope;
   const { list, refresh, retry, loadMore } = useIntentList(
     access,
@@ -237,6 +242,13 @@ export function useConversationIntents(
         return { ...previous, attempts: next };
       });
       await refresh();
+      if (
+        !attempt &&
+        current.current.active &&
+        current.current.key === key &&
+        current.current.access === access
+      )
+        onDecisionSettled?.(proposal.command.binding.runId);
     },
     [
       access,
@@ -248,6 +260,7 @@ export function useConversationIntents(
       key,
       refresh,
       now,
+      onDecisionSettled,
     ],
   );
 
