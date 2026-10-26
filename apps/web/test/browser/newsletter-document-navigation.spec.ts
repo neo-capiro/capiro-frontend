@@ -114,9 +114,9 @@ for (const status of [200, 503]) {
     await expect(
       page.getByText(/This saved revision has an uncertain stage attempt/),
     ).toBeVisible();
-    await expect(page.getByText(/Stage .* received for document/)).toHaveCount(
-      0,
-    );
+    await expect(
+      page.getByRole("heading", { name: /Saved revision \d+ staged/ }),
+    ).toHaveCount(0);
     await expect(page.locator(`a[href*="${stageId}"]`)).toHaveCount(0);
     expect(fixture.calls("stage")).toHaveLength(1);
     await expect(page).toHaveURL(editorUrl);

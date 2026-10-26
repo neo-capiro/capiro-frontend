@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   findNewsletterBlock,
   type NewsletterBlock,
   type NewsletterBlockKind,
+  type NewsletterPreview,
 } from "@capiro/shared/newsletter";
 import {
   ActionButton,
@@ -19,7 +20,7 @@ import {
   type RichDraft,
 } from "./draft";
 import { RichBlockControls } from "./RichBlockControls";
-import { RichPreview } from "./RichPreview";
+import { RichPreview, SavedRichPreview } from "./RichPreview";
 import { RichStructure } from "./RichStructure";
 import { RichDocumentActions } from "./RichDocumentActions";
 import { useRichDocument } from "./use-rich-document";
@@ -32,12 +33,24 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
   const [plainText, setPlainText] = useState(false);
   const [closing, setClosing] = useState(false);
   const [previousOwner, setPreviousOwner] = useState(owner);
+  const [dismissedPreview, setDismissedPreview] = useState<NewsletterPreview>();
+  const previewButton = useRef<HTMLButtonElement>(null);
+  const returnFocus = useRef(false);
+  const savedPreview =
+    history.preview !== dismissedPreview ? history.preview : undefined;
+  useEffect(() => {
+    if (!savedPreview && returnFocus.current) {
+      returnFocus.current = false;
+      previewButton.current?.focus();
+    }
+  }, [savedPreview]);
   if (previousOwner !== owner) {
     setPreviousOwner(owner);
     setSelectedId(null);
     setMobile(false);
     setPlainText(false);
     setClosing(false);
+    setDismissedPreview(undefined);
   }
   const draft = history.draft;
   const selected = selectedId
@@ -56,6 +69,24 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
       ...current,
       design: addRichBlock(current.design, section, kind).design,
     }));
+  if (savedPreview)
+    return (
+      <section className={styles.screen}>
+        <SavedRichPreview
+          preview={savedPreview}
+          name={
+            history.saved?.id === savedPreview.documentId &&
+            history.saved.revision === savedPreview.revision
+              ? history.saved.name
+              : undefined
+          }
+          onClose={() => {
+            returnFocus.current = true;
+            setDismissedPreview(savedPreview);
+          }}
+        />
+      </section>
+    );
   return (
     <section className={styles.screen}>
       <PageHeader
@@ -84,7 +115,11 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
           </ActionButton>
         </div>
       )}
-      <RichDocumentActions state={history} owner={owner} />
+      <RichDocumentActions
+        state={history}
+        owner={owner}
+        previewButtonRef={previewButton}
+      />
       <fieldset
         disabled={Boolean(history.pending)}
         inert={Boolean(history.pending)}

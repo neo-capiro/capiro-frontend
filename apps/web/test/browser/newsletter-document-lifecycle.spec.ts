@@ -64,9 +64,7 @@ test("rich document create is explicit, preserves local content and stages only 
   ]);
   await button(page, "Stage newsletter").click();
   await expect(
-    page.getByText(
-      `Stage ${stageId} received for document ${documentId}, revision 5.`,
-    ),
+    page.getByRole("heading", { name: "Saved revision 5 staged" }),
   ).toBeVisible();
   expect(fixture.calls("stage")).toEqual([
     {
@@ -278,7 +276,7 @@ test("rich saved preview excludes local edits and sanitizes active HTML without 
   ).toHaveAttribute("referrerpolicy", "no-referrer");
   await expect(
     page.getByRole("region", { name: "Saved newsletter preview" }),
-  ).toContainText(`Saved document ${documentId}, revision 4.`);
+  ).toContainText("Saved revision 4");
   await expect(
     frame.locator('meta[http-equiv="Content-Security-Policy"]'),
   ).toHaveAttribute("content", /default-src 'none'/);
@@ -300,6 +298,7 @@ test("rich saved preview excludes local edits and sanitizes active HTML without 
       },
     }),
   );
+  await button(page, "Back to editor").click();
   await button(page, "Preview saved state").click();
   await expect(
     frame.getByRole("heading", { name: "Next saved owner heading" }),
@@ -321,6 +320,7 @@ test("rich saved preview excludes local edits and sanitizes active HTML without 
     },
   ]);
   expect(fixture.calls("save")).toEqual([]);
+  await button(page, "Back to editor").click();
   await expect(button(page, "Stage newsletter")).toBeDisabled();
   expectIsolated(fixture);
 });

@@ -22,13 +22,17 @@ const stageReceipt = {
 
 test("WS15 exact stage recovery keeps null and denied attempts fenced before finding an older revision", async ({
   page,
-}) => {
+}, info) => {
   const fixture = await documentFixture(page);
   await enterEditor(page);
   await adoptDocument(page);
   fixture.queue("stage", (route) => route.abort("connectionreset"));
   await button(page, "Stage newsletter").click();
   await expect(page.getByText(/Staging could not be confirmed/)).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath("rich-unknown-stage.png"),
+    fullPage: true,
+  });
   expect(fixture.calls("stagedRevision")).toEqual([]);
   fixture.queue("stagedRevision", (route) =>
     route.fulfill({ body: "null", contentType: "application/json" }),
@@ -58,9 +62,13 @@ test("WS15 exact stage recovery keeps null and denied attempts fenced before fin
     route.fulfill({ json: stageReceipt }),
   );
   await button(page, "Check stage for revision 4").click();
-  await expect(page.getByText(/Stage .* received for document/)).toContainText(
-    "revision 4.",
-  );
+  await expect(
+    page.getByRole("heading", { name: /Saved revision \d+ staged/ }),
+  ).toContainText("Saved revision 4 staged");
+  await page.screenshot({
+    path: info.outputPath("rich-confirmed-stage.png"),
+    fullPage: true,
+  });
   await expect(page.getByText(/Current saved baseline:/)).toContainText(
     "revision 7.",
   );
@@ -149,7 +157,9 @@ test("WS15 held stage lookup cannot restore a receipt after session replacement"
   held.release();
   await held.settled;
   await page.getByLabel("Newsletter name").fill("New scope draft");
-  await expect(page.getByText(/Stage .* received for document/)).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: /Saved revision \d+ staged/ }),
+  ).toHaveCount(0);
   await expect(button(page, "Check stage for revision 4")).toHaveCount(0);
   await expect(button(page, "Create saved document")).toBeEnabled();
   expect(fixture.calls("stage")).toHaveLength(1);
