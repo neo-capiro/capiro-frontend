@@ -1,10 +1,19 @@
 import { useId } from "react";
-import { Field, Panel } from "../../../../../shared/module-ui";
+import { ActionButton, Field, Panel } from "../../../../../shared/module-ui";
+import type { AssetManagementLauncher } from "./AssetFolders";
 import type { AssetPickerState } from "./use-asset-picker";
 import { assetName } from "./AssetLibrary";
 import styles from "./assets.module.css";
 
-export function AssetDetails({ picker }: { picker: AssetPickerState }) {
+export function AssetDetails({
+  picker,
+  manage,
+  disabled,
+  history,
+}: {
+  picker: AssetPickerState;
+  history: () => void;
+} & AssetManagementLauncher) {
   const id = useId();
   if (picker.detailLoading) return <p role="status">Loading image details…</p>;
   if (picker.detailError || !picker.details)
@@ -40,6 +49,25 @@ export function AssetDetails({ picker }: { picker: AssetPickerState }) {
             to choose a current image.
           </p>
         )}
+        <div className={styles.actions}>
+          <ActionButton
+            data-asset-focus="renameImage"
+            disabled={disabled || !item.currentRevision}
+            onClick={() => manage({ kind: "renameImage", image: item })}
+          >
+            Rename image
+          </ActionButton>
+          <ActionButton
+            data-asset-focus="deleteImage"
+            disabled={disabled || !item.currentRevision}
+            onClick={() => manage({ kind: "deleteImage", image: item })}
+          >
+            Delete image
+          </ActionButton>
+          <ActionButton data-asset-focus="history" onClick={history}>
+            Revision History
+          </ActionButton>
+        </div>
       </Panel>
     </div>
   );
