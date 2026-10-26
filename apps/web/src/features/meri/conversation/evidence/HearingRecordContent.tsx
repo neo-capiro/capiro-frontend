@@ -15,7 +15,11 @@ type Reconciliation = Extract<
 type Claim = Brief["payload"]["claims"][number];
 type Assessment = Reconciliation["assessments"][number];
 
-function References({ references }: { references: Claim["references"] }) {
+function References({
+  references,
+}: {
+  references: readonly Claim["references"][number][];
+}) {
   return (
     <ul
       className={styles.recordReferences}

@@ -41,7 +41,7 @@ function hearingFields({
       : []),
     {
       label: "Saved page",
-      value: `UTF-16 record JSON offsets ${page.characterStart}–${page.characterEnd} of ${page.totalCharacters} (end exclusive)`,
+      value: `Characters ${page.characterStart + 1}–${page.characterEnd} of ${page.totalCharacters}`,
     },
     {
       label: "Record coverage",

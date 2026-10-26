@@ -7,7 +7,13 @@ import records from "../../tests/meri-hearing-source-fixtures.json";
 /** Presentation-only synthetic probe; it does not replace public receiving or live authority. */
 export function MeriHearingEvidenceProbe() {
   const [selection, setSelection] = useState("published");
-  const fixtures = records as Record<string, HearingSourceReadResponse>;
+  const fixtures = records as Record<
+    keyof typeof records,
+    HearingSourceReadResponse
+  >;
+  const value = Object.entries(fixtures).find(
+    ([name]) => name === selection,
+  )?.[1];
   return (
     <>
       <header className="probe-controls">
@@ -31,8 +37,8 @@ export function MeriHearingEvidenceProbe() {
         </label>
       </header>
       <main data-testid="hearing-detail">
-        {fixtures[selection] ? (
-          <HearingSourceDetail key={selection} value={fixtures[selection]} />
+        {value ? (
+          <HearingSourceDetail key={selection} value={value} />
         ) : (
           <SourceReadState
             loading={selection === "loading"}

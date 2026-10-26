@@ -56,7 +56,7 @@ it("keeps a fragment containing claim JSON as exact inert text, never a full cla
   expect(partial).not.toContain("View saved record data");
   const unicode = fixtures.fragment.event.data.page;
   expect(render("fragment")).toContain(
-    `offsets ${unicode.characterStart}–${unicode.characterEnd}`,
+    `Characters ${unicode.characterStart + 1}–${unicode.characterEnd} of ${unicode.totalCharacters}`,
   );
 });
 
