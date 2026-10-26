@@ -61,14 +61,15 @@ export class ConversationHostController extends SessionLifetimeController<
       fetcher,
       now,
       ...(retryDelaysMs ? { retryDelaysMs } : {}),
-      // A Send, a Stop or a history read in flight finishes on this session before it is renewed.
+      // Active conversation, feedback and file reads finish before early renewal; the hard cap still aborts.
       busy: (port) => {
         const snapshot = port.getSnapshot();
         return (
           snapshot.submit === "pending" ||
           snapshot.cancel === "pending" ||
           snapshot.status === "loading" ||
-          port.feedback.pending()
+          port.feedback.pending() ||
+          port.artifacts.pending()
         );
       },
       createPort: ({ session, signal, ...lifetime }) => {

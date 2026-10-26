@@ -278,6 +278,23 @@ export function ConversationIntents({
     ...(refreshKey === undefined ? {} : { refreshKey }),
     ...(onDecisionSettled ? { onDecisionSettled } : {}),
   });
+  const key = JSON.stringify([
+    scope.tenantId,
+    scope.actorId,
+    scope.conversationId,
+  ]);
+  const [retained, setRetained] = useState({ key, list: state.list });
+  // Credential renewal rereads the same list. Keep adjacent file cards mounted only while it loads;
+  // fresh refusal/removal still clears them, and decisions always use the current list above.
+  if (
+    retained.key !== key ||
+    (state.list.status !== "loading" && retained.list !== state.list)
+  )
+    setRetained({ key, list: state.list });
+  const displayed =
+    state.list.status === "loading" && retained.key === key
+      ? retained.list
+      : state.list;
   return (
     <>
       <section className={styles.panel} aria-labelledby="conversation-actions">
@@ -295,7 +312,7 @@ export function ConversationIntents({
         </div>
         <Body {...state} access={access} />
       </section>
-      {children?.(state.list.status === "ready" ? state.list.items : [])}
+      {children?.(displayed.status === "ready" ? displayed.items : [])}
     </>
   );
 }
