@@ -82,7 +82,17 @@ function useSelectedHistory(
   useEffect(() => {
     if (history.denied) revoke();
   }, [history.denied, revoke]);
-  return { boundReady, selectedId, history, accessLost, ready };
+  // An explicit retry after access loss may drop the refused run only for a conversation the
+  // durable owner reported as never started; the connection still requires no retained input.
+  const retry = () => connection.retry({ unstarted: history.unstarted });
+  return {
+    boundReady,
+    selectedId,
+    history,
+    accessLost,
+    ready,
+    connection: { ...connection, retry },
+  };
 }
 
 /** Screen lifetime composition: saved reads, exact session selection and retained next-turn intent. */
@@ -93,14 +103,14 @@ export function useConversationSession(
 ) {
   const cache = useQueryClient();
   const router = useRouter();
-  const connection = useConversationConnection(
+  const mounted = useConversationConnection(
     account,
     clientId,
     undefined,
     conversationId,
   );
-  const { boundReady, selectedId, history, accessLost, ready } =
-    useSelectedHistory(account, clientId, conversationId, connection);
+  const { boundReady, selectedId, history, accessLost, ready, connection } =
+    useSelectedHistory(account, clientId, conversationId, mounted);
   const { reopen } = connection;
   const modelCatalog = useModelCatalog(account, !accessLost);
   const local = useConversationLocalState(

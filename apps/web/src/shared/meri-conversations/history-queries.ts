@@ -30,6 +30,15 @@ export const historyNotStarted = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   error.status === 404 &&
   (error.code === "NOT_FOUND" || error.code === "CONVERSATION_NOT_FOUND");
+/**
+ * The durable owner's statement that the owned conversation has no run at all (`NOT_FOUND` on an
+ * owned, valid zero-run record). `CONVERSATION_NOT_FOUND` (missing, foreign or trashed) does not
+ * count. Still no ownership proof and no admission; it only says nothing has started.
+ */
+export const historyUnstarted = (error: unknown) =>
+  error instanceof ConversationHistoryUnavailable &&
+  error.status === 404 &&
+  error.code === "NOT_FOUND";
 
 /** One bounded title page enriches Recents without replacing scheduled discovery. */
 export function useRecentConversationTitles(account: ConversationAccount) {
@@ -232,6 +241,8 @@ export function useConversationHistory(
     selected: !!conversationId,
     /** No turn has run yet; there is no saved history to show, which is not a failure. */
     empty,
+    /** The owner answered that this conversation has no run; the last answer stays while reads are disabled. */
+    unstarted: !!conversationId && !denied && historyUnstarted(query.error),
     unavailable: (!!query.error && !empty) || invalid || denied,
     refresh: () => {
       if (enabled && conversationId) void query.refetch();

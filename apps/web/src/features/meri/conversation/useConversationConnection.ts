@@ -147,24 +147,29 @@ function useConversationOpening(
     opening,
     reopen,
     /**
-     * A lost session is re-opened at conversation scope so the service can re-prepare the run it
-     * refused; every other retry keeps its exact binding. Recovery never sends or replays input.
+     * A lost session whose conversation provably never started is re-opened at conversation scope
+     * so the service can re-prepare the original it refused; every started or ambiguous case and
+     * every other retry keeps its exact binding (an exact run never reserves a successor; a
+     * conversation-scope issuance on a finished run would). Recovery never sends or replays input.
      */
-    retry: (status: string, accessLost: boolean) => {
+    retry: (
+      status: string,
+      recovery: { accessLost: boolean; unstarted: boolean },
+    ) => {
       const conversation =
         bound.last()?.context.conversationId ??
         conversationId ??
         opening.hints.conversationId;
-      const recovery = conversationRetryHints({
-        accessLost,
+      const hints = conversationRetryHints({
+        ...recovery,
         clientId,
         conversationId: conversation,
       });
-      if (recovery)
+      if (hints)
         return setOpening({
           ...opening,
-          host: create(recovery),
-          hints: recovery,
+          host: create(hints),
+          hints,
         });
       return status === "expired"
         ? reopen({
@@ -223,18 +228,27 @@ export function useConversationConnection(
     bound,
     reopen,
   });
+  /** What the retired recovery held for the lost conversation: read once, before it is cleared. */
+  const lost = useRef<
+    { conversationId: string; retainedInput: boolean } | undefined
+  >(undefined);
   useEffect(() => {
     if (!renewal.accessLost) return;
+    const last = bound.last()?.context;
     const exactConversation =
-      bound.last()?.context.conversationId ??
-      conversationId ??
-      opening.hints.conversationId;
-    clear(exactConversation);
+      last?.conversationId ?? conversationId ?? opening.hints.conversationId;
+    const retainedInput = clear(
+      exactConversation,
+      last?.runId ?? opening.hints.runId,
+    );
+    if (exactConversation)
+      lost.current = { conversationId: exactConversation, retainedInput };
   }, [
     renewal.accessLost,
     bound,
     conversationId,
     opening.hints.conversationId,
+    opening.hints.runId,
     clear,
   ]);
 
@@ -245,7 +259,25 @@ export function useConversationConnection(
     conversationId:
       bound.last()?.context.conversationId ?? opening.hints.conversationId,
     pending: opening.pending,
-    retry: () => retry(state.status, renewal.accessLost),
+    /**
+     * `unstarted` is the caller's durable-owner fact (history answered NOT_FOUND: the conversation
+     * has no run). It counts only when this tab retained no submission for the lost run.
+     */
+    retry: (proof?: { unstarted: boolean }) => {
+      const exactConversation =
+        bound.last()?.context.conversationId ??
+        conversationId ??
+        opening.hints.conversationId;
+      const retired = lost.current;
+      retry(state.status, {
+        accessLost: renewal.accessLost,
+        unstarted:
+          proof?.unstarted === true &&
+          retired !== undefined &&
+          retired.conversationId === exactConversation &&
+          !retired.retainedInput,
+      });
+    },
     reopen,
   };
 }
