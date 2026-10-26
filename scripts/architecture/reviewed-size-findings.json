@@ -1892,18 +1892,22 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
     "kind": "function",
     "symbol": "RichBlockControls",
-    "fingerprint": "39b23a172181ff27e687ff05f5921b60ec904fad30c07f04fffe1f3c139cd911",
-    "reason": "One selected-block inspector dispatches to existing asset/content/style components; mutation remains the host callback and existing save owner.",
-    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "line": 24,
+    "nonblank": 173,
+    "fingerprint": "095f9854594b366b3237349c02ea1158ae1b0ee1c84681c6179faca4910e2a28",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One current block-control host adds only the existing provider child and optional current saved-document identity. Current manual content/structure/style and existing update/remove owners remain exact after reversing those additions. The shared request/proposal hook retains lifetime responsibility; this host does not implement a second writer. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "84dbc3a45b79a00750d9b5cbdea8a9af2f083ecce0caf22697fa3a225b7a9f11",
-    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
-    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
+    "line": 44,
+    "nonblank": 393,
+    "fingerprint": "4122ccaa252ab0cd03a954bf2e9a4b6eb920c87aca13e86babad7ede1a7289f5",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor function composes one provider-child identity with its existing current/unfenced history and revision/block key. Existing state and handlers remain exact; request/proposal and block editing responsibilities stay with their current children/owners. The affected explicit-adoption and stale-result browser checks pass. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4744,9 +4748,11 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "c1b5a2efc0ce83c200dc9ea251f69a659b7bbe96092b5e9e0b421a76f99710d0",
-    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
-    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
+    "line": 1,
+    "nonblank": 496,
+    "fingerprint": "fb46349c600648deebcdefc0d11f04ed113250b2d83d68f0d2029cf60b596b3b",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor module adds only one current, unfenced saved-document identity prop to the existing revision/block-keyed child. Removing that prop restores the accepted current-base module exactly, preserving library, conversion, brand/survey, manual controls, history, recovery and Undo owners. No new module responsibility is introduced. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -5224,6 +5230,17 @@
     "fingerprint": "86aab7d0224e4bccff465026b63d15b30db71b118ea2f98ee464b25f0fb54f14",
     "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One writing dialog keeps explicit source/instructions, pending or unknown state and plain-text proposal adoption together. The common proposal hook and existing editor/Undo owner perform lifetime and mutation work; this view does not add automatic fetching, markup execution or saving. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
     "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/LinkPreviewTool.tsx",
+    "kind": "function",
+    "symbol": "LinkPreviewTool",
+    "line": 21,
+    "nonblank": 147,
+    "fingerprint": "d37700209b29d5dcb59fe5af69498b8bcc4907c4b359d66e58834c7627ce2328",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One explicit link-preview dialog presents source input, pending/unknown/proposed outcomes and separate adoption. Duplicate manual fields are removed: AppControls alone edits them. The proposal uses the same empty-app defaults and source-version fence, preserves display choices/unknown nested fields on explicit update, and reuses current mutation/Undo owners. Keeping its mutually exclusive dialog states together does not add another state or transport owner. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   }
 ]
