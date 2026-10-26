@@ -12,7 +12,7 @@ export const secondId = "20000000-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
 export const asset = (id = assetId, name = "Synthetic policy image") => ({
   id,
   name,
-  mimeType: "image/png",
+  mimeType: "image/png" as const,
   url: `https://assets.example.test/workspace-api/newsletters/assets/file/${id === assetId ? "a".repeat(64) : "b".repeat(64)}`,
 });
 export const assetDetails = (id = assetId) => ({
@@ -41,6 +41,10 @@ export async function assetFixture(page: Page) {
     input: Record<string, unknown>;
   }[] = [];
   const queued = new Map<Operation, ((route: Route) => Promise<void>)[]>();
+  await page.route(
+    "**/api/capiro/workspace.richNewsletter.assetFolders.list?*",
+    (route) => route.fulfill({ json: { items: [] } }),
+  );
   await page.route(
     "**/api/capiro/workspace.richNewsletter.assets.*",
     async (route) => {
@@ -103,7 +107,12 @@ export async function chooseDetails(
   await button(page, "View Details").click();
 }
 
-export async function auditDialog(page: Page, info: TestInfo, name: string) {
+export async function auditDialog(
+  page: Page,
+  info: TestInfo,
+  name: string,
+  reviewText?: (html: string) => Promise<void>,
+) {
   await page.getByRole("dialog").evaluate(async (dialog) => {
     await Promise.all(
       dialog
@@ -154,6 +163,13 @@ export async function auditDialog(page: Page, info: TestInfo, name: string) {
         const reasons = node.any.map((check) => check.data?.messageKey);
         if (reasons[0] === "elmPartiallyObscuring") {
           expect(reasons).toEqual(["elmPartiallyObscuring"]);
+          if (
+            reviewText &&
+            !node.html.includes('data-slot="dialog-description"')
+          ) {
+            await reviewText(node.html);
+            continue;
+          }
           expect(node.html).toContain('data-slot="dialog-description"');
           const readability = await descriptionReadability(page);
           await info.attach(`${name}-description-readability`, {

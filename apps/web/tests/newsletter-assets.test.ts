@@ -48,13 +48,17 @@ it("registers only three current owned-image paths with actual query limits", ()
     { pageSize: 20 },
     { search: "x".repeat(201) },
     { sort: "invalid" },
-    { folder: "unfiled" },
+    { folder: "not-a-folder" },
     { ownerId: id },
     { clientId: id },
   ])
     expect(
       list.request.safeParse({ query: { ...query, ...change } }).success,
     ).toBe(false);
+  for (const folder of ["unfiled", id])
+    expect(list.request.parse({ query: { ...query, folder } })).toEqual({
+      query: { ...query, folder },
+    });
   expect(detail.request.safeParse({ params: { id } }).success).toBe(true);
   for (const invalid of [
     "a".repeat(64),

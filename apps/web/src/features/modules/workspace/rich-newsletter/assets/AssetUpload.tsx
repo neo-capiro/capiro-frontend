@@ -12,9 +12,11 @@ import styles from "./assets.module.css";
 export function AssetUpload({
   upload,
   viewDetails,
+  disabled = false,
 }: {
   upload: AssetUploadState;
   viewDetails: (id: string) => void;
+  disabled?: boolean;
 }) {
   const id = useId();
   return (
@@ -23,14 +25,14 @@ export function AssetUpload({
         <Field
           label="Image file"
           htmlFor={id}
-          description="One PNG, JPEG, GIF or WebP, up to 10 MiB. Selecting a file does not upload it."
+          description="One PNG, JPEG, GIF or WebP, up to 10 MiB. Uploads are added to Unfiled. Selecting a file does not upload it."
           error={upload.error}
         >
           <TextInput
             id={id}
             type="file"
             accept="image/png,image/jpeg,image/gif,image/webp"
-            disabled={upload.pending || upload.unknown}
+            disabled={disabled || upload.pending || upload.unknown}
             onChange={(event) => upload.choose(event.target.files?.[0])}
           />
         </Field>
@@ -63,6 +65,7 @@ export function AssetUpload({
         <ActionButton
           primary
           disabled={
+            disabled ||
             !upload.file ||
             !!upload.error ||
             upload.pending ||

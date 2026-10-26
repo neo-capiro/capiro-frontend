@@ -151,3 +151,39 @@ it("keeps manual and newsletter hydration distinct within the same retained cont
   );
   expect(() => manualSaveModel.retained(f.capture())).toThrow();
 });
+
+it("upgrades only the exact old social projection while preserving extra fields and refusing foreign text", () => {
+  const f = fixture();
+  const body = f.row.documents[0]!.body;
+  body.newsletter!.blocks = [
+    {
+      id: "social",
+      kind: "social",
+      text: "Saved label",
+      href: "https://example.test/saved",
+    },
+  ];
+  body.blocks = [
+    {
+      id: "social",
+      type: "section",
+      title: "",
+      content: "Saved label",
+      extra: { retained: true },
+    },
+  ];
+  const input = newsletterSaveModel.input(f.current);
+  input.body = { ...input.body, subject: "Explicit updated subject" };
+  const captured = newsletterSaveModel.capture(f.current, input, requestId);
+  if (captured.body.label !== "Newsletter revision")
+    throw new Error("Expected newsletter variant");
+  expect(captured.body.documents[0]!.body.blocks![0]).toMatchObject({
+    title: "Action",
+    content: "Saved label: https://example.test/saved",
+    extra: { retained: true },
+  });
+  body.blocks[0]!.content = "Other content that cannot be discarded";
+  expect(() =>
+    newsletterSaveModel.capture(f.current, input, requestId),
+  ).toThrow("outside this newsletter editor");
+});

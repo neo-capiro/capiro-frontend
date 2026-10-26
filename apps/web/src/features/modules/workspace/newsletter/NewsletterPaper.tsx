@@ -14,35 +14,43 @@ import {
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
 import { safeNewsletterHref } from "./newsletter-model";
+import { AssetReplaceControl } from "../rich-newsletter/assets/AssetReplaceControl";
+import fidelity from "./basic-fidelity.module.css";
 
 function RenderBlock({ block }: { block: NewsletterBlock }) {
   if (block.kind === "heading")
     return <h2 style={{ whiteSpace: "pre-line" }}>{block.text}</h2>;
   if (block.kind === "divider") return <hr />;
   if (block.kind === "spacer") return <div style={{ height: 24 }} />;
-  if (block.kind === "button")
+  if (block.kind === "button" || block.kind === "social")
     return safeNewsletterHref(block.href ?? "") ? (
-      <a href={safeNewsletterHref(block.href ?? "")} className={styles.link}>
-        {block.text}
-      </a>
+      <p>
+        <strong>{block.text}</strong>
+        <br />
+        <span>{block.href}</span>
+      </p>
     ) : (
       <strong>{block.text}</strong>
     );
   if (block.kind === "image" || block.kind === "logo")
-    return safeNewsletterHref(block.href ?? "") ? (
-      <img
-        src={safeNewsletterHref(block.href ?? "")}
-        alt={block.text}
-        style={{ maxWidth: "100%", height: "auto" }}
-      />
-    ) : (
-      <p>Image source needed · {block.text}</p>
+    return (
+      <div className={fidelity.imagePlaceholder}>
+        <span>{block.text || (block.kind === "logo" ? "Logo" : "Image")}</span>
+        <small>
+          {block.href
+            ? "Image hidden in preview · URL preserved"
+            : "Image source needed"}
+        </small>
+      </div>
     );
   if (block.kind === "code")
     return (
-      <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
-        {block.text}
-      </pre>
+      <div>
+        <pre className={fidelity.literal}>{block.text}</pre>
+        <span className={fidelity.qualification}>
+          Literal code · HTML is not executed
+        </span>
+      </div>
     );
   return <p style={{ whiteSpace: "pre-line" }}>{block.text}</p>;
 }
@@ -58,6 +66,10 @@ function BlockEditor({
 }) {
   const [text, setText] = useState(block.text);
   const [href, setHref] = useState(block.href ?? "");
+  const image = block.kind === "image" || block.kind === "logo";
+  const validHref =
+    !href ||
+    Boolean(safeNewsletterHref(href) && (!image || /^https?:/i.test(href)));
   return (
     <Modal
       open
@@ -70,7 +82,7 @@ function BlockEditor({
           <ActionButton onClick={onClose}>Cancel</ActionButton>
           <ActionButton
             primary
-            disabled={Boolean(href) && !safeNewsletterHref(href)}
+            disabled={!validHref}
             onClick={() => {
               onSave({ ...block, text, href: href || undefined });
               onClose();
@@ -102,8 +114,10 @@ function BlockEditor({
             label="Link or image URL"
             htmlFor="newsletter-block-url"
             error={
-              href && !safeNewsletterHref(href)
-                ? "Use an http, https or mailto URL."
+              !validHref
+                ? image
+                  ? "Use an http or https image URL."
+                  : "Use an http, https or mailto URL."
                 : undefined
             }
           >
@@ -114,6 +128,12 @@ function BlockEditor({
               onChange={(event) => setHref(event.target.value)}
             />
           </Field>
+        )}
+        {image && (
+          <AssetReplaceControl
+            blockId={block.id}
+            onInsert={(asset) => setHref(asset.url)}
+          />
         )}
       </div>
     </Modal>
@@ -143,13 +163,13 @@ export function NewsletterPaper({
   }
   return (
     <article
-      className={`${styles.newsletterPaper} ${mobile ? styles.mobile : ""}`}
+      className={`${styles.newsletterPaper} ${fidelity.paper} ${mobile ? styles.mobile : ""}`}
     >
       <p style={{ color: "#0a0a0a", fontSize: 11 }}>
         {body.firmName || "CLIENT UPDATE"}
       </p>
-      <p style={{ fontSize: 10, letterSpacing: ".1em" }}>
-        WEEKLY POLICY BRIEF / {new Date().toLocaleDateString()}
+      <p className={fidelity.qualification}>
+        Images and live links are disabled in this preview.
       </p>
       {body.blocks.map((block, index) => (
         <section key={block.id} className={styles.newsletterBlock}>

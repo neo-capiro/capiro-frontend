@@ -9,6 +9,17 @@
   flex: 1;
   min-width: 200px;
 }
+.toolbar > [role="combobox"] {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: min(220px, 100%);
+}
+.toolbar > [role="combobox"] > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 /**
  * Long directory values (full committee names, street addresses) must not wrap the
  * whole row to ~20 lines the way unbounded text does. Figma 3.4 renders these

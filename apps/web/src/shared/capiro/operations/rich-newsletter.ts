@@ -17,7 +17,9 @@ const source =
   "capiro-backend@d68024dc62edddb0784f79b4e5ca50335dd1ca89 packages/shared/src/newsletter-receiving.ts; apps/workspace/src/newsletters/newsletter.controller.ts; docs/contracts/newsletter-outreach-response-routing.md";
 
 /** The public package owns receiving shapes; this only adapts the gateway slot. */
-function receiving<T>(parse: (value: unknown) => NewsletterReceiveResult<T>) {
+export function receiving<T>(
+  parse: (value: unknown) => NewsletterReceiveResult<T>,
+) {
   return z.unknown().transform((value, context): T | typeof z.NEVER => {
     const result = parse(value);
     if (result.ok) return result.value;

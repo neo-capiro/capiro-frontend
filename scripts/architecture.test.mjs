@@ -329,3 +329,11 @@ test('newsletter browser boundary admits only its two governed public subpaths',
     assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
   }
 });
+
+test('document Blueprint consumers use the exact governed public receiver export', () => {
+  const file = 'apps/web/src/features/modules/workspace/document-templates/BlueprintDetail.tsx';
+  assert.deepEqual(inspectSources(new Map([[file, "import '@capiro/shared/workspace-template-studio';"]])).errors, []);
+  for (const specifier of ['@capiro/shared/workspace-template-studio/private', '@capiro/shared/src/workspace-template-studio', '@capiro/shared/dist/workspace-template-studio']) {
+    assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
+  }
+});
