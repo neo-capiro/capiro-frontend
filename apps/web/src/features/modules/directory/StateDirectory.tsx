@@ -2,9 +2,9 @@
 import { useMemo, useState } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
-  ActionButton,
   DataTable,
   Panel,
+  SelectInput,
   StatusPanel,
   TextInput,
 } from "../../../shared/module-ui";
@@ -76,35 +76,36 @@ export function StateDirectory({
             setPage(1);
           }}
         />
-        <select
-          className={styles.select}
+        <SelectInput
           aria-label="State"
           value={state}
-          onChange={(e) => {
-            setState(e.target.value);
+          onValueChange={(next) => {
+            setState(next);
             setPage(1);
           }}
-        >
-          <option value="">State · Any</option>
-          {facets.data?.states.map((x) => (
-            <option key={x}>{x}</option>
-          ))}
-        </select>
-        <select
-          className={styles.select}
+          options={[
+            { value: "", label: "State · Any" },
+            ...(facets.data?.states ?? []).map((x) => ({ value: x, label: x })),
+          ]}
+        />
+        <SelectInput
           aria-label="Chamber"
           value={chamber}
-          onChange={(e) => {
-            setChamber(e.target.value);
+          onValueChange={(next) => {
+            setChamber(next);
             setPage(1);
           }}
-        >
-          <option value="">Chamber · Any</option>
-          {facets.data?.chambers.map((x) => (
-            <option key={x}>{x}</option>
-          ))}
-        </select>
-        <ActionButton
+          options={[
+            { value: "", label: "Chamber · Any" },
+            ...(facets.data?.chambers ?? []).map((x) => ({
+              value: x,
+              label: x,
+            })),
+          ]}
+        />
+        <button
+          type="button"
+          className={styles.clearAll}
           onClick={() => {
             setQ("");
             setState("");
@@ -113,7 +114,7 @@ export function StateDirectory({
           }}
         >
           Clear all
-        </ActionButton>
+        </button>
       </div>
       <StatusPanel
         loading={query.loading}
