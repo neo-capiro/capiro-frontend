@@ -1,5 +1,5 @@
 "use client";
-import { useId } from "react";
+import { useId, useState } from "react";
 import { Field, SelectInput, TextInput } from "../../../../../shared/module-ui";
 import styles from "./content.module.css";
 
@@ -72,6 +72,9 @@ export function NumberEntry({
   change: (value: number | undefined) => void;
 }) {
   const id = useId();
+  // Keep incomplete keyboard input local; only valid values enter editor history.
+  const [input, setInput] = useState({ value, text: String(value ?? "") });
+  if (input.value !== value) setInput({ value, text: String(value ?? "") });
   return (
     <Field label={label} htmlFor={id}>
       <TextInput
@@ -80,9 +83,11 @@ export function NumberEntry({
         min={min}
         max={max}
         step={step}
-        value={value ?? ""}
+        value={input.text}
+        onBlur={() => setInput({ value, text: String(value ?? "") })}
         onChange={(event) => {
           const raw = event.target.value;
+          setInput({ value, text: raw });
           if (!raw) change(undefined);
           else if (
             Number.isFinite(event.target.valueAsNumber) &&

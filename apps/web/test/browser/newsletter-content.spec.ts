@@ -245,6 +245,52 @@ test("social follow/share edits preserve the inactive list and styles; email sty
   expectIsolated(f);
 });
 
+test("bounded number fields allow keyboard replacement and keep invalid intermediate text out of the draft", async ({
+  page,
+}) => {
+  const f = await contentFixture(page);
+  await button(page, "Email styles").click();
+  const width = page
+    .getByRole("region", { name: "Email styles", exact: true })
+    .getByLabel("Content width");
+  const initial = String(f.control.current.design.styles.width);
+  await width.focus();
+  await width.press("ControlOrMeta+A");
+  await width.press("Backspace");
+  await expect(width).toHaveValue("");
+  await width.pressSequentially("700");
+  await expect(width).toHaveValue("700");
+  await width.press("Tab");
+  await button(page, "Undo").click();
+  await expect(width).toHaveValue(initial);
+  await button(page, "Redo").click();
+  await expect(width).toHaveValue("700");
+  await width.press("ControlOrMeta+A");
+  await width.pressSequentially("200");
+  await expect(width).toHaveValue("200");
+  await width.press("Tab");
+  await expect(width).toHaveValue("700");
+  await selectBlock(page, "Paragraph · Retained paragraph");
+  await inspector(page).getByText("Block styles", { exact: true }).click();
+  const font = inspector(page).getByLabel("Font size", { exact: true });
+  await font.press("ControlOrMeta+A");
+  await font.press("Backspace");
+  await font.pressSequentially("14");
+  await expect(font).toHaveValue("14");
+  await font.press("ControlOrMeta+A");
+  await font.press("Backspace");
+  await font.press("Tab");
+  await expect(font).toHaveValue("");
+  expect(f.calls("save")).toHaveLength(0);
+  await button(page, "Save newsletter").click();
+  await expect.poll(() => f.calls("save").length).toBe(1);
+  expect(f.submitted().design!.styles.width).toBe(700);
+  expect(
+    findNewsletterBlock(f.submitted().design!, f.blocks[0]!.id)?.style.fontSize,
+  ).toBeUndefined();
+  expectIsolated(f);
+});
+
 test("narrow controls remain keyboard reachable and contained without horizontal clipping", async ({
   page,
 }) => {
