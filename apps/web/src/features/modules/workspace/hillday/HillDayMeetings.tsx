@@ -121,7 +121,7 @@ export function HillDayMeetings({
 }) {
   const [week, setWeek] = useState(() =>
     saved?.weekStart
-      ? new Date(`${saved.weekStart}T12:00:00`)
+      ? new Date(`${saved.weekStart}T00:00:00`)
       : mondayOf(new Date()),
   );
   const [view, setView] = useState("calendar");

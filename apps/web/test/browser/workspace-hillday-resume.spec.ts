@@ -7,6 +7,41 @@ import {
   documentId,
 } from "./workspace-hillday-resume-fixture";
 
+test.describe("saved calendar range", () => {
+  test.use({ timezoneId: "UTC" });
+
+  test("saved week retains Monday morning selection in the filtered calendar query", async ({
+    page,
+  }) => {
+    const f = await hillDayResumeFixture(page);
+    await page.goto(resumeUrl("meetings"));
+    const meeting = page.getByLabel("Include Saved calendar meeting");
+    // The fixture applies Core's lower/upper time bounds to a Monday09:00 row.
+    // A noon start therefore removes the actual rendered selection.
+    await expect(meeting).toBeChecked();
+    expect(
+      f.calls.find((call) => call.key === "workspace.hillday.calendar")?.input
+        .query,
+    ).toEqual({
+      from: "2026-10-26T00:00:00.000Z",
+      to: "2026-11-02T00:00:00.000Z",
+      timeZone: "UTC",
+    });
+    await page.reload();
+    await expect(meeting).toBeChecked();
+    await page.getByRole("button", { name: "Resolve attendees" }).click();
+    await expect(page).toHaveURL(/hilldayPhase=resolution/);
+    expect(
+      f.calls.find((call) => call.key === "workspace.hillday.meetings")?.input
+        .body,
+    ).toEqual({
+      eventIds: ["saved-event"],
+      weekStart: "2026-10-26",
+      timeZone: "UTC",
+    });
+  });
+});
+
 test("saved generation entry discovers its existing job and polls without a generation POST", async ({
   page,
 }) => {
