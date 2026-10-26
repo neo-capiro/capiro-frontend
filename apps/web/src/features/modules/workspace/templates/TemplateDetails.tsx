@@ -22,6 +22,7 @@ import {
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
 import { TemplateSettings } from "./TemplateSettings";
+import presentation from "./template-presentation.module.css";
 
 function ApplicationReceipt({
   receipt,
@@ -204,6 +205,7 @@ export function TemplateDetails({
   return (
     <Modal
       open
+      className={mode === "settings" ? presentation.settingsDialog : undefined}
       onOpenChange={(open) => {
         if (!open) onClose();
       }}
@@ -212,7 +214,7 @@ export function TemplateDetails({
           ? "Use template · Questions"
           : mode === "history"
             ? "Template version history"
-            : "Template settings"
+            : "Edit template"
       }
     >
       <StatusPanel
@@ -221,13 +223,14 @@ export function TemplateDetails({
         onRetry={query.reload}
       >
         {query.data && (
-          <div className={styles.form}>
-            <h3>{query.data.template.name}</h3>
+          <div className={mode === "settings" ? undefined : styles.form}>
+            {mode !== "settings" && <h3>{query.data.template.name}</h3>}
             {mode === "use" ? (
               <UseTemplate detail={query.data} />
             ) : mode === "settings" ? (
               <TemplateSettings
                 detail={query.data}
+                onClose={onClose}
                 onSaved={() => {
                   query.reload();
                   onSettingsSaved();

@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { expect, type Page, type Route } from "@playwright/test";
 import { test } from "./runtime-observed-test";
 import {
@@ -53,6 +54,74 @@ const newest = (page: Page) =>
 const search = (page: Page) =>
   page.getByLabel("Search documents", { exact: true });
 
+test("client picker overlays the library and returns keyboard focus without stale labels", async ({
+  page,
+}, testInfo) => {
+  const reads = await fixture(page, () => ({
+    items: [row("Synthetic library document")],
+    nextCursor: null,
+  }));
+  await page.route("**/api/capiro/workspace.clients?*", (route) => {
+    const query = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input")!,
+    ).query as Query;
+    return route.fulfill({
+      json: {
+        items: query.q
+          ? []
+          : [{ ...clients[0], name: "Synthetic unique client" }],
+        nextCursor: null,
+        sources: [],
+      },
+    });
+  });
+  await page.goto("/modules/workspace");
+  await expect(table(page)).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  expect(
+    await page.evaluate(() => document.fonts.check("14px TestGeist")),
+  ).toBe(true);
+  const trigger = page.getByRole("button", {
+    name: "Client filter",
+    exact: true,
+  });
+  const before = await table(page).boundingBox();
+  await page.screenshot({
+    path: testInfo.outputPath("library-desktop.png"),
+    fullPage: true,
+  });
+  await trigger.focus();
+  await page.keyboard.press("Enter");
+  const picker = page.getByRole("dialog", { name: "Filter library clients" });
+  await expect(page.getByLabel("Search library clients")).toBeFocused();
+  expect((await table(page).boundingBox())?.y).toBe(before?.y);
+  await page.screenshot({
+    path: testInfo.outputPath("library-client-picker.png"),
+    fullPage: true,
+  });
+  await choose(page, "Filter documents by client", "Synthetic unique client");
+  await expect.poll(() => reads.at(-1)?.clientId).toBe(clientId);
+  await expect(trigger).toContainText("Synthetic unique client");
+  await page.getByLabel("Search library clients").fill("Absent");
+  await expect(trigger).toContainText("Selected client");
+  await expect(trigger).not.toContainText("Synthetic unique client");
+  await expect(picker).not.toContainText(clientId);
+  await page.keyboard.press("Escape");
+  await expect(picker).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  expect(reads.at(-1)?.clientId).toBe(clientId);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await trigger.click();
+  const bounds = await picker.boundingBox();
+  expect(bounds!.x).toBeGreaterThanOrEqual(0);
+  expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(390);
+  await page.screenshot({
+    path: testInfo.outputPath("library-client-picker-narrow.png"),
+    fullPage: true,
+  });
+  await page.keyboard.press("Escape");
+});
+
 async function fixture(
   page: Page,
   response: (query: Query) => {
@@ -69,9 +138,30 @@ async function fixture(
       return response(query);
     },
   });
+  if (process.env.CAPIRO_BROWSER_TEST_DEV === "1")
+    await page.route("**/Geist-Variable.woff2*", (route) =>
+      route.fulfill({
+        path: fileURLToPath(
+          new URL(
+            "../../../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
+            import.meta.url,
+          ),
+        ),
+        contentType: "font/woff2",
+      }),
+    );
   return reads;
 }
 async function choose(page: Page, label: string, name: string) {
+  if (
+    label === "Filter documents by client" &&
+    !(await page
+      .getByRole("combobox", { name: label, exact: true })
+      .isVisible())
+  )
+    await page
+      .getByRole("button", { name: "Client filter", exact: true })
+      .click();
   await page.getByRole("combobox", { name: label, exact: true }).click();
   await page.getByRole("option", { name, exact: true }).click();
 }
@@ -131,7 +221,9 @@ test("owner, type, canonical client and status combinations reach the server", a
   }));
   await page.goto("/modules/workspace");
   await expect(table(page)).toContainText("Synthetic server result");
-  await page.getByText("Client · All clients", { exact: true }).click();
+  await page
+    .getByRole("button", { name: "Client filter", exact: true })
+    .click();
   for (const [owner, ownerLabel] of [
     ["all", "Everyone"],
     ["mine", "Mine"],
@@ -189,7 +281,9 @@ test("every filter clears a prior opaque cursor and Newest retains the filters",
     nextCursor: next,
   }));
   await page.goto("/modules/workspace");
-  await page.getByText("Client · All clients", { exact: true }).click();
+  await page
+    .getByRole("button", { name: "Client filter", exact: true })
+    .click();
   const changes = [
     () => search(page).fill("Synthetic"),
     () => scope(page, "Mine"),
@@ -268,7 +362,9 @@ test("authorized client search and paging distinguish duplicate names by exact I
     });
   });
   await page.goto("/modules/workspace");
-  await page.getByText("Client · All clients", { exact: true }).click();
+  await page
+    .getByRole("button", { name: "Client filter", exact: true })
+    .click();
   await expect(
     page.getByText("No clients on this page.", { exact: false }),
   ).toBeVisible();
