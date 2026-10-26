@@ -11,7 +11,7 @@
     "test:browser": "node browser-check.mjs"
   },
   "dependencies": {
-    "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-3b4937ad-40ac9d745261.tgz"
+    "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-2381b4d7-457cd0e6b048.tgz"
   },
   "devDependencies": {
     "@playwright/test": "1.61.1",
