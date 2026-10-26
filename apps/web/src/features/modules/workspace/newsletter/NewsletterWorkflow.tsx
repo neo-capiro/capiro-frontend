@@ -149,7 +149,7 @@ function NewsletterEditor({
         data-design-node={
           step === "template"
             ? "976:190063"
-            : step === "builder"
+            : step === "builder" || step === "stage"
               ? "976:190222"
               : step === "review"
                 ? "976:190381"
@@ -174,21 +174,17 @@ function NewsletterEditor({
                 ? "Create a newsletter"
                 : step === "review"
                   ? "Newsletter preview & review"
-                  : step === "stage"
-                    ? "Stage newsletter in Outreach"
-                    : title}
+                  : title}
             </h1>
             <p>
               {step === "template"
                 ? "Select a starting point. Customize every section in the builder."
-                : step === "stage"
-                  ? "Select a saved revision and an existing Outreach session."
-                  : "Newsletter builder"}
+                : "Newsletter builder"}
             </p>
           </div>
           {step !== "template" && (
             <div className={styles.actions}>
-              {step === "builder" ? (
+              {step === "builder" || step === "stage" ? (
                 <>
                   <ActionButton
                     disabled={pending || (saveOwner && !saveOwner.canSave)}
@@ -262,7 +258,7 @@ function NewsletterEditor({
                 </>
               )}
             </div>
-            {step === "builder" && (
+            {(step === "builder" || step === "stage") && (
               <>
                 <div className={styles.grid}>
                   <Field label="Subject" htmlFor="newsletter-subject">
@@ -380,50 +376,6 @@ function NewsletterEditor({
                 <NewsletterComments documentId={documentId} />
               </div>
             )}
-            {step === "stage" && (
-              <Panel>
-                <Badge tone={saved ? "success" : "warning"}>
-                  {saved ? "Revision saved" : "Save required"}
-                </Badge>
-                <h2 style={{ marginTop: 20 }}>{title}</h2>
-                <div className={styles.stageCards}>
-                  <Panel title="Client">
-                    {draft?.client ??
-                      clients.data?.items.find((value) => value.id === clientId)
-                        ?.name ??
-                      "Firm"}
-                  </Panel>
-                  <Panel title="Status">
-                    {saved ? "Draft saved" : "Unsaved changes"}
-                  </Panel>
-                  <Panel title="Delivery">Outreach</Panel>
-                </div>
-                {draft?.clientAssociation === "held" ? (
-                  <p>Choose a client to continue.</p>
-                ) : draft ? (
-                  <NewsletterStaging draftId={draft.id} saved={saved} />
-                ) : (
-                  <p>
-                    Save the newsletter before selecting a saved revision for
-                    Outreach.
-                  </p>
-                )}
-                <div className={styles.actions} style={{ marginTop: 20 }}>
-                  <ActionButton onClick={() => setStep("builder")}>
-                    Back to editor
-                  </ActionButton>
-                  {!saved && (
-                    <ActionButton
-                      primary
-                      disabled={pending}
-                      onClick={() => save()}
-                    >
-                      Save newsletter
-                    </ActionButton>
-                  )}
-                </div>
-              </Panel>
-            )}
           </>
         )}
         <Modal
@@ -445,6 +397,13 @@ function NewsletterEditor({
           <p>Save the newsletter before closing to keep this revision.</p>
         </Modal>
       </fieldset>
+      <NewsletterStaging
+        draftId={draft?.id}
+        saved={saved}
+        open={step === "stage"}
+        onClose={() => setStep("builder")}
+        disabled={pending || Boolean(saveOwner?.frozen)}
+      />
     </>
   );
 }
