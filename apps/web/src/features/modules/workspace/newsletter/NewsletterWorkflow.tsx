@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import type {
   NewsletterBlock,
   NewsletterBody,
@@ -13,7 +15,6 @@ import {
   Panel,
   SelectInput,
   TextInput,
-  UnavailableAction,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
 import { NewsletterComments } from "./NewsletterComments";
@@ -28,6 +29,11 @@ import {
   type NewsletterEditorProps,
 } from "./ExistingNewsletterSave";
 import { newsletterInput } from "./newsletter-atomic-save";
+import {
+  BasicConversionButton,
+  type BasicConversionCandidate,
+} from "./BasicConversion";
+import { RichNewsletterEditor } from "../rich-newsletter/RichNewsletterEditor";
 
 function BuilderTools({
   body,
@@ -77,6 +83,24 @@ function BuilderTools({
       <p className={styles.footnote}>
         Images and links are reviewed before use.
       </p>
+      <button
+        disabled={body.blocks.length >= 100}
+        onClick={() =>
+          onChange({
+            ...body,
+            blocks: [
+              ...body.blocks,
+              {
+                id: crypto.randomUUID(),
+                kind: "paragraph",
+                text: `Issue date: ${new Date().toISOString().slice(0, 10)}`,
+              },
+            ],
+          })
+        }
+      >
+        Issue date
+      </button>
     </aside>
   );
 }
@@ -99,6 +123,7 @@ function NewsletterEditor({
   saveOwner,
   onAtomicBound,
 }: NewsletterEditorProps) {
+  const [conversion, setConversion] = useState<BasicConversionCandidate>();
   const {
     step,
     setStep,
@@ -133,6 +158,13 @@ function NewsletterEditor({
     saveOwner,
     onAtomicBound,
   });
+  if (conversion)
+    return (
+      <RichNewsletterEditor
+        conversionCandidate={conversion}
+        onClose={() => setConversion(undefined)}
+      />
+    );
   return (
     <>
       {saveOwner && (
@@ -356,9 +388,17 @@ function NewsletterEditor({
                       <ActionButton onClick={() => setStep("template")}>
                         Change template
                       </ActionButton>
-                      <UnavailableAction reason="Newsletter template publication does not have a verified backend contract.">
-                        Save as a template
-                      </UnavailableAction>
+                      <BasicConversionButton
+                        name={title}
+                        body={body}
+                        clientId={clientId || null}
+                        disabled={
+                          pending ||
+                          Boolean(saveOwner?.frozen) ||
+                          draft?.clientAssociation === "held"
+                        }
+                        onReview={setConversion}
+                      />
                     </div>
                   </aside>
                 </div>
