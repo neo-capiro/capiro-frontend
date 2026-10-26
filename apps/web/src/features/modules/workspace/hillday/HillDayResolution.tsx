@@ -15,6 +15,12 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
+import presentation from "./hillday-correction.module.css";
+import {
+  HillDayStafferPicker,
+  type StafferChoice,
+} from "./HillDayStafferPicker";
+import { HillDayMeetingFactsDialog } from "./HillDayMeetingFactsDialog";
 
 type Meeting = Resolution["meetings"][number];
 type Attendee = Meeting["attendees"][number];
@@ -34,9 +40,12 @@ function CorrectionDialog({
 }) {
   const [name, setName] = useState(attendee?.name ?? "");
   const [role, setRole] = useState(attendee?.role ?? "");
-  const [location, setLocation] = useState(meeting.office.room ?? "");
   const [memberId, setMemberId] = useState(meeting.office.memberId ?? "");
   const [search, setSearch] = useState("");
+  const [directory, setDirectory] = useState(false);
+  const [selectedStaffer, setSelectedStaffer] = useState<StafferChoice | null>(
+    null,
+  );
   const members = useCapiroQuery(
     "workspace.hillday.members",
     { query: { q: search } },
@@ -44,29 +53,26 @@ function CorrectionDialog({
   );
   const correction = useCapiroMutation("workspace.hillday.correction");
   async function save() {
+    if (correction.pending || (attendee && directory && !selectedStaffer))
+      return;
     try {
       await correction.run({
         params: { id, meetingId: meeting.meetingId },
-        body: attendee
-          ? {
-              kind: "manual_attendee",
-              attendeeId: attendee.attendeeId || undefined,
-              name,
-              role,
-            }
-          : { kind: "change_office", memberId },
-      });
-      onSaved();
-      onClose();
-    } catch {
-      /* Retain draft inputs on failure. */
-    }
-  }
-  async function saveLocation() {
-    try {
-      await correction.run({
-        params: { id, meetingId: meeting.meetingId },
-        body: { kind: "edit_meeting_facts", location },
+        body:
+          attendee && directory && selectedStaffer
+            ? {
+                kind: "assign_staffer",
+                attendeeId: attendee.attendeeId || undefined,
+                stafferId: selectedStaffer.id,
+              }
+            : attendee
+              ? {
+                  kind: "manual_attendee",
+                  attendeeId: attendee.attendeeId || undefined,
+                  name,
+                  role,
+                }
+              : { kind: "change_office", memberId },
       });
       onSaved();
       onClose();
@@ -81,6 +87,8 @@ function CorrectionDialog({
         if (!open && !correction.pending) onClose();
       }}
       title={attendee ? "Resolve attendee" : "Edit resolved office"}
+      className={attendee ? presentation.dialog : undefined}
+      closeDisabled={correction.pending}
       footer={
         <>
           <ActionButton disabled={correction.pending} onClick={onClose}>
@@ -89,7 +97,12 @@ function CorrectionDialog({
           <ActionButton
             primary
             disabled={
-              correction.pending || (attendee ? !name.trim() : !memberId)
+              correction.pending ||
+              (attendee
+                ? directory
+                  ? !selectedStaffer
+                  : !name.trim()
+                : !memberId)
             }
             onClick={save}
           >
@@ -100,27 +113,63 @@ function CorrectionDialog({
     >
       <div className={styles.form}>
         {attendee ? (
-          <>
-            <Field label="Full name" htmlFor="hillday-attendee-name">
-              <TextInput
-                id="hillday-attendee-name"
-                value={name}
-                maxLength={200}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </Field>
-            <Field label="Title or role" htmlFor="hillday-attendee-role">
-              <TextInput
-                id="hillday-attendee-role"
-                value={role}
-                maxLength={200}
-                onChange={(event) => setRole(event.target.value)}
-              />
-            </Field>
+          <section
+            className={presentation.attendee}
+            aria-label="Attendee correction"
+            data-design-node="1064:258991"
+          >
+            <div className={presentation.manual}>
+              <Field label="Full name" htmlFor="hillday-attendee-name">
+                <TextInput
+                  id="hillday-attendee-name"
+                  value={name}
+                  maxLength={200}
+                  disabled={correction.pending || directory}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </Field>
+              <Field label="Title or role" htmlFor="hillday-attendee-role">
+                <TextInput
+                  id="hillday-attendee-role"
+                  value={role}
+                  maxLength={200}
+                  disabled={correction.pending || directory}
+                  onChange={(event) => setRole(event.target.value)}
+                />
+              </Field>
+            </div>
+            <div className={presentation.choice}>
+              <p role="status">
+                {directory
+                  ? selectedStaffer
+                    ? `Directory selection: ${selectedStaffer.label}`
+                    : "Choose a Directory staffer to confirm."
+                  : "Confirm will use the manual name and role."}
+              </p>
+              {directory && (
+                <ActionButton
+                  disabled={correction.pending}
+                  onClick={() => {
+                    setDirectory(false);
+                    setSelectedStaffer(null);
+                  }}
+                >
+                  Use manual input
+                </ActionButton>
+              )}
+            </div>
+            <HillDayStafferPicker
+              selected={selectedStaffer}
+              pending={correction.pending}
+              onSelect={(choice) => {
+                setDirectory(true);
+                setSelectedStaffer(choice);
+              }}
+            />
             <p className={styles.footnote}>
               Your correction is attributed to your signed-in account.
             </p>
-          </>
+          </section>
         ) : (
           <>
             <Field label="Search members" htmlFor="hillday-office-search">
@@ -140,17 +189,6 @@ function CorrectionDialog({
                 {member.memberId === memberId ? " ✓" : ""}
               </ActionButton>
             ))}
-            <Field label="Meeting location" htmlFor="hillday-meeting-location">
-              <TextInput
-                id="hillday-meeting-location"
-                value={location}
-                maxLength={240}
-                onChange={(event) => setLocation(event.target.value)}
-              />
-            </Field>
-            <ActionButton disabled={correction.pending} onClick={saveLocation}>
-              Save location
-            </ActionButton>
           </>
         )}
         {correction.error && (
@@ -178,7 +216,13 @@ export function HillDayResolution({
   const [selected, setSelected] = useState<{
     meeting: Meeting;
     attendee?: Attendee;
+    details?: boolean;
   }>();
+  const [selectedDocument, setSelectedDocument] = useState(id);
+  if (selectedDocument !== id) {
+    setSelectedDocument(id);
+    setSelected(undefined);
+  }
   const data = resolve.data ?? query.data;
   const attendees =
     data?.meetings.flatMap((meeting) => meeting.attendees) ?? [];
@@ -188,6 +232,7 @@ export function HillDayResolution({
   async function run() {
     try {
       await resolve.run({ params: { id } });
+      query.reload();
     } catch {
       /* Display the response error. */
     }
@@ -281,7 +326,12 @@ export function HillDayResolution({
                     </dl>
                     <div className={styles.actions} style={{ marginTop: 18 }}>
                       <ActionButton onClick={() => setSelected({ meeting })}>
-                        Change office / Edit details
+                        Change office
+                      </ActionButton>
+                      <ActionButton
+                        onClick={() => setSelected({ meeting, details: true })}
+                      >
+                        Edit details
                       </ActionButton>
                     </div>
                   </div>
@@ -363,17 +413,32 @@ export function HillDayResolution({
       >
         Add context →
       </ActionButton>
-      {selected && (
-        <CorrectionDialog
+      {selected?.details ? (
+        <HillDayMeetingFactsDialog
+          key={`${id}:${selected.meeting.meetingId}:${selected.meeting.eventId}`}
           id={id}
-          meeting={selected.meeting}
-          attendee={selected.attendee}
+          meetingId={selected.meeting.meetingId}
+          eventId={selected.meeting.eventId}
           onClose={() => setSelected(undefined)}
           onSaved={() => {
             resolve.reset();
             query.reload();
           }}
         />
+      ) : (
+        selected && (
+          <CorrectionDialog
+            key={`${id}:${selected.meeting.meetingId}:${selected.attendee?.attendeeId ?? "office"}`}
+            id={id}
+            meeting={selected.meeting}
+            attendee={selected.attendee}
+            onClose={() => setSelected(undefined)}
+            onSaved={() => {
+              resolve.reset();
+              query.reload();
+            }}
+          />
+        )
       )}
     </div>
   );

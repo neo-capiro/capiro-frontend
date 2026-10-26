@@ -1901,37 +1901,37 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "67a462ae6215744dca9f062db81d36b60b5cc9770f0e43970e834472d3013d8a",
-    "reason": "The local host/view/focus composition delegates all domain state to the existing rich controller. Returning from saved preview preserves the unchanged local draft and focus. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
-    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
+    "fingerprint": "0e41e19c8c49826a4d461b850209bedcbdcd72990b80ef72bd1bf049eb3dbe70",
+    "reason": "The existing rich editor remains the sole host for canonical document/history and recovery state. This change composes one adjacent library hook, dialog, notice and inspector with existing persisted-section and recovery controls; it does not absorb transport, parsing, cloning or modal implementation. The added opener reference belongs to host focus restoration. Keeping the existing view composition together preserves one editor owner. Exact 185-line function accepted; this is not a general size exemption.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
     "kind": "function",
     "symbol": "createRichDocumentController",
-    "fingerprint": "e444e4155cfeb7c19673fa23ac0dc30d7f4725d6f580cc0596cf0ae5b4b440d2",
-    "reason": "Recovery needs the same active-request, lifetime and journal state as other document intents. The existing run guard is reused; extracting a second owner would obscure post-notification settlement. The recovery method itself is below80 lines. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
-    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "fingerprint": "19a4d9a2499c2faa61649dc30c5682420c0b31e329f8ba98740cf0b1b31b438b",
+    "reason": "The established document controller remains the single mounted view lifetime, current-read/adoption decision and draft/history owner. Durable create/save mechanics are delegated to write-recovery and the existing encrypted journal; stage attempts retain their existing separate session owner. Old create/save QueryClient attempts and generic-conflict adoption are removed. Related state transitions belong together so cancellation, projection clearing and write admission share one active operation. This review is limited to the exact module and function fingerprints, not a general size waiver.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "fafebbc2da5988b802967aa49fc28836e2d3d73ec00a29fa308fbededda65b58",
-    "reason": "Accept the focused finite controller/QueryClient suite. Public factories plus the real shared adapter and intercepted fetch test actual protocol boundaries without a backend or unrelated graph. Five semantic groups share fixtures to compare full request bodies, current state, draft retention and disposal; original draft/browser assertions remain unchanged.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "9ae9fb49a8250f005d2f11e1fdbf6564a2c317d9caf97a2a143cf5c753fd1464",
+    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
     "kind": "function",
     "symbol": "<anonymous> #2",
-    "fingerprint": "5d2383786cc185e1220b2a61012dcccc3f8a4aa03b65095885c5aff6a9ef3aed",
-    "reason": "Accept the grouped conflict/uncertainty controls: whole draft retention, exact CAS, explicit current read/adopt or rebase, malformed/wrong receipt refusal and creation noncausation. The group is one recovery boundary, not unrelated subsystems.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "5496570484a4410e1114e700b0af9b0e1a1b50d46ec1c2631c79e25c10f0ef07",
+    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
@@ -1946,10 +1946,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
     "kind": "function",
     "symbol": "<anonymous> #4",
-    "fingerprint": "afd8d9096671346de30ecff9e23a29c3692abbfb5235d3f06174791c30d5680d",
-    "reason": "Accept the grouped late completion/disposal controls. Held create/save/stage/preview and 200/403/503 outcomes verify that a disposed execution cannot restore private material to a remounted owner.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "d1cb42a2c7eaff30411b31970421aaec53eb975980504757b9350855bbd53923",
+    "reason": "The existing controller suite now keeps current-read, preview, stage and disposal assertions while removing superseded create/save semantics. One isolated setup owner supplies the canonical adapter and a recovery stub only for these retained controller responsibilities; durable recovery itself is covered by the real mounted browser owner. Nested describe bodies group independent positive/negative cases, not application responsibilities. Exact-source acceptance includes the visible reduction and replacement mapping, not a generic test exemption.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
@@ -1973,28 +1973,28 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "fingerprint": "80aec84768c2a321af1f6923ade3c71d1d8bc9609b068ea6ce7157485ecf4475",
-    "reason": "Existing saved-document action composition adds only confirmed-receipt navigation in the existing toolbar. Document effects stay in the controller and receiving stays separate. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
-    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
+    "fingerprint": "f9546bc72ea39f63bbc47b375ba9aff3421503c28a56cc27ea27bfeac9ddcd99",
+    "reason": "The existing saved-document action component keeps the single view projection for enabled commands, review/adoption, recovery outcome and stage navigation. Added branches consume controller state and invoke explicit owner commands; persistence, transport parsing and authorization stay outside JSX. Existing cards and buttons are reused, and the producer-validated stage route is followed directly. Keeping these tightly related action states together avoids splitting one visible decision surface. This exact function review does not approve future responsibility growth or replace separate visual review.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/rich-newsletter.ts",
     "kind": "function",
     "symbol": "createRichNewsletterAdapter",
-    "fingerprint": "a1000d01a987a1236a2ae6c0283550ce43be8e3aa429557e0a68c28cae7b580b",
-    "reason": "Existing fixed rich-newsletter request/response binding owner; open uses the existing public parser boundary. No UI state, authority, retry or sender orchestration. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
-    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
+    "fingerprint": "29cf4209a41e3a765783778264c07cf85e6842ef0e0be3f0376124bc82a7a0e3",
+    "reason": "The existing rich-newsletter adapter remains the sole typed boundary for request-bound public receivers over the canonical authenticated cancelling transport. Create/save return content-free receipts; GET receipt lookup captures the original binding including retained hashes; exact save refusal is revalidated against the submitted request. Existing campaign/preview/stage/outreach receivers remain in the same family. No retry, durable state, browser hashing or permission owner is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
     "kind": "function",
     "symbol": "<anonymous> #2",
-    "fingerprint": "886665df815ae5a4d34dac5f871cd8f29c9e742bd5f1f9523808acbb7a1af8fd",
-    "reason": "Accept one finite receiving-contract suite using the real public parsers, fixed operation registry and canonical transport with intercepted fetch. Direct and mismatched envelopes, captured request bindings, nominal revision, preserved historical tests, stage separation and abort disposal exercise the same request/receipt boundary. Tests compare observable response/request behavior, preserve original controls, and include failing baselines for mutable expected bindings. No unrelated backend or feature graph is mocked.",
-    "reviewedBy": "Codex root responsibility review with independent core_intake boundary review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "625643ebb9080a0444ca2ac0d8eaa56330d05d684f6bf2fd4f366e91363aa5e3",
+    "reason": "The adapter contract suite groups the fixed operation registry and request-bound receiving family, sharing synthetic fixtures. Changed create/save fixtures are content-free receipts and the GET request operation is explicit; existing preview, stage and outreach identity negatives remain. The large describe body is a related family of independent assertions, not a runtime owner. New end-to-end transport refusal/hash cases live in the small separate write test.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/test/browser/newsletter-document-fixtures.ts",
@@ -3908,9 +3908,9 @@
     "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "b3a076a4adf3c4bf31174770b03423bd634a1c5a579e2bb8efb0a9d7f02506c3",
-    "reason": "Existing typed Hill Day catalog remains the single producer-bound descriptor owner. Exact independent disposition: W3-WS10-FE182-REVIEW.md; retained by W3-WS10-FE182-CORRECTION-REVIEW.md.",
-    "reviewedBy": "Independent Codex lifecycle_trace, FE182 25a17ded4b3112356c73f085f18a0500f55fa9f1; unchanged at a170e058f1aa10c98ff78a6479dafe99a2149049",
+    "fingerprint": "fdeee0f26f423f9d70d39f924bfadc67c78d7493d038620bd959f79d4349422f",
+    "reason": "The canonical Workspace Hill Day operation registry changes only the GET resolution response from the existing resolution schema to its additive stored-facts extension and updates producer provenance. Fixed routes, requests, POST resolution and correction receiving remain exact. The registry remains one declarative operation family; it adds no network execution, clock conversion, mutable state or authority and does not justify splitting solely for size.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3989,18 +3989,18 @@
     "file": "apps/web/src/shared/session/recovery/journal.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "519c4e4f07cbc3a772e90ec36f87c50c1846845232df651fb89e98eb604aa311",
-    "reason": "The narrow delta adds one guarded refusal helper using the canonical storage, encryption and lock owner. It does not duplicate persistence or authority. The original scoped PR171 acceptance is unchanged and matches final source; it approves this exact helper addition within the existing module, not unrelated recovery expansion. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
-    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "fingerprint": "7a8decee42db3caf21ddd1d4a672bda3ed16ec5cf177823b1cd35ef72c94b5ad",
+    "reason": "The canonical encrypted recovery journal adds one guarded named newsletter refusal retirement and its disposition union member. The guard decodes the existing immutable record and invokes the public exact request/document/base-revision refusal receiver before the unchanged retirement path erases sensitive payload and verifies the positive tombstone. Existing reservation, encryption, storage locks, current-record verification and acknowledgement remain byte-preserved. A small domain retirement guard belongs with the existing named retirement family; no parallel journal is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "8e6ace5829103b1bfc9a09a9e2cb47ff451abadba52b134464eadf2af6aa6234",
-    "reason": "The module remains state types/helpers plus the single explicit-intent controller. No network stack, DTO/schema, persistence or authorization implementation is added. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
-    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "fingerprint": "bcb95367f462e5bac990cf68ed874914f4e59e48aaf4849a13d18f10ba160ab7",
+    "reason": "The established document controller remains the single mounted view lifetime, current-read/adoption decision and draft/history owner. Durable create/save mechanics are delegated to write-recovery and the existing encrypted journal; stage attempts retain their existing separate session owner. Old create/save QueryClient attempts and generic-conflict adoption are removed. Related state transitions belong together so cancellation, projection clearing and write admission share one active operation. This review is limited to the exact module and function fingerprints, not a general size waiver.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4322,9 +4322,9 @@
     "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "06cd16d7a8b3add14380c21b21d0b704a01ccf038d873dce45d8233c7bf8f2b3",
-    "reason": "One rich-newsletter boundary test module exercises the existing fixed operations and adapter with shared synthetic campaign/stage/record builders. Four describe groups separate dispatch/input admission, response identity/lifetime, exact preview/staged-revision reads and explicit stage opening. The new open group reuses those builders and validates stage-only submission, captured primitive bindings, mismatch refusal and one dispatch on failures. It belongs to this adapter contract family; moving it solely to meet a file threshold would duplicate fixtures and obscure the same boundary. Exact independent disposition: W3-FE192-TEST-COMPOSITION-REVIEW.md at d54d585011071cc50e2ba84208a8f7cfd565d8f9.",
-    "reviewedBy": "m3_scope, independent Wave 3 FE192 test composition reviewer",
+    "fingerprint": "c937dc7e4b51860b3cb058ebf20b8f94bb5330a380e090e6e343ffe2c3c504f1",
+    "reason": "The adapter contract suite groups the fixed operation registry and request-bound receiving family, sharing synthetic fixtures. Changed create/save fixtures are content-free receipts and the GET request operation is explicit; existing preview, stage and outreach identity negatives remain. The large describe body is a related family of independent assertions, not a runtime owner. New end-to-end transport refusal/hash cases live in the small separate write test.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4423,6 +4423,141 @@
     "symbol": "<anonymous> #2",
     "fingerprint": "1eb09e680d0fe2f8a69f8a7a84aca27fa1bb5e441d8dd58934fbf25527ba3ac2",
     "reason": "This126-line parameterized desktop/narrow journey retains exact source-read identity, inert text/current-link and positive-offset checks, focus and scoped accessibility, separate usage display and completed-run reload without admission effects. The added assertions cover native-only versus genuinely source-free history in the same existing fixture. The original host actually fails the native-only assertion, and the corrected desktop case passes using Release generated dist. Existing helper and setup owners are reused; this test body is an intentional end-to-end journey rather than a product abstraction.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "bc26bbce30ea4cd8235a62ef53f228cdaf30eb99fb93af3f0256ef7064274b55",
+    "reason": "The existing Hill Day resolution module retains resolution display and office/attendee correction composition while moving meeting-facts form behavior into a cohesive adjacent dialog and pure draft adapter. It removes the obsolete location mutation path and introduces only selected-document retirement and explicit GET refresh/composition. No Directory, canonical hook, transport, storage or authorization responsibility is duplicated. The module and each changed oversized function receive separate exact reviews.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "CorrectionDialog",
+    "fingerprint": "eb2bc604d7a22f5fee3430eaaeba898d03e159197d4f20aad7acc58c319fb5dc",
+    "reason": "The existing office/attendee correction dialog loses the office-room-derived location state, separate saveLocation request and Location action. It retains Directory selection, manual attendee and office correction responsibilities already owned here; facts editing moves to the adjacent explicitly selected dialog. The reduction preserves the accepted Directory data/action chain and does not introduce another behavior owner.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "HillDayResolution",
+    "fingerprint": "772146fe8f0df0dffbf4c3c4828f00d06ffd988918c3ba56481dbc462a9ca731",
+    "reason": "The existing resolution owner composes current resolution rows, explicit resolve, attendee/office corrections and the selected facts dialog. Its additions are a selected-details discriminator, document-change retirement, GET refresh after explicit resolve and narrow facts-dialog composition. Query/mutation hooks, field logic, Temporal conversion and Directory selection stay with their existing owners. This cohesive view composition is reviewed independently from its module and nested row-renderer signals.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayStafferPicker.tsx",
+    "kind": "function",
+    "symbol": "HillDayStafferPicker",
+    "fingerprint": "f94d41f9bfe8be70d5f9c046cab12d9c8b803952b18248f7991ad734d497789c",
+    "reason": "One91-line read-and-select view owns search, contact-page state, exact returned staff.id selection and status/pager rendering. It delegates request lifetime to useCapiroQuery and correction writes to the parent, with no duplicated schema, policy or mutation owner. Exact independent review: W3-WS11-PR197-REVIEW.md at1bedc3450383d6fad6797ef7906bae00b23bbd2a.",
+    "reviewedBy": "m3_scope, independent Wave3 WS11 source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/test/browser/workspace-staffer-picker-fixture.ts",
+    "kind": "function",
+    "symbol": "stafferFixture",
+    "fingerprint": "971788b5431e83ed110401c3eec3f32c54920f58c7bd2bbd3d9764715b172af1",
+    "reason": "The existing synthetic Directory browser fixture adds the now-required GET meetingFacts rows with facts:null; its meeting builder is exported for reuse. Existing Directory routes, write recording and original scenario bodies are retained. The fixture remains one coherent synthetic protocol owner shared by directly related correction tests, without copying production selection or authorization logic.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "kind": "function",
+    "symbol": "HillDayResolution > <anonymous> #3",
+    "fingerprint": "b726dcd2dd54b2541c196a0be741388c3b75bd74059e7529fc4f4c15f7ebcb93",
+    "reason": "This nested renderer presents one meeting row with office and attendee evidence plus explicit Change office/Edit details actions. It does not fetch, mutate or interpret saved facts; it selects the existing parent-owned dialog identity. The small facts action belongs with the row identity and existing correction affordances. Keeping this projection together preserves one meeting context and does not create a mixed runtime owner.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/write-recovery.ts",
+    "kind": "function",
+    "symbol": "createRichWriteRecovery",
+    "fingerprint": "a7fd7b42d751f17619f6a5f834e9a2b74e28d5b16b72a06ac93731d630c13b44",
+    "reason": "This feature-local composition binds one immutable newsletter input and current tenant/user/actor/client identity to the canonical encrypted journal and command lock. Hydrate, one dispatch, receipt GET and explicit resolution share the same captured scope and guarded record. It reuses storage, encryption, locking and public receipt/refusal parsing rather than creating another engine. No UI, service authorization, browser JCS, retry or backend persistence is added. Keeping this cohesive protocol closure intact makes reservation-before-dispatch and durable-outcome-before-retirement auditable.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/gateway-errors.ts",
+    "kind": "function",
+    "symbol": "serviceErrorResponse",
+    "fingerprint": "dd0bfd753f833d476e0bee72f1de8202a5deab8e5f16ba8122e3b3bc8a8e0949",
+    "reason": "The existing sparse service-error boundary adds only a bounded 4096-byte branch for the exact workspace PATCH newsletter operation, using the shared public bound-refusal helper and no-store response. Every other error path retains its existing owner and behavior; malformed or mismatched proofs collapse to an unknown outcome. This is a cohesive addition to the canonical transport error translator, not a new authority or generic error-body relay.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetingFactsDialog.tsx",
+    "kind": "function",
+    "symbol": "EndpointFields",
+    "fingerprint": "f3c5e37bea4898da1f663a57252ea4a000bc5ec3813fcbcb206956c929fd9ba4",
+    "reason": "The adjacent endpoint field group owns one start/end projection: existing date/time primitives, saved offset display, explicit fold occurrence selection, error text and exact read-only fallback for unsupported native precision. Temporal conversion and sparse-change decisions stay in the pure draft adapter; request lifetime and submission stay in the parent dialog. Keeping both conditional presentations of one endpoint together is cohesive and avoids duplicating date/occurrence controls. This exact 86-line body is approved, not a general size waiver.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetingFactsDialog.tsx",
+    "kind": "function",
+    "symbol": "HillDayMeetingFactsDialog",
+    "fingerprint": "6eed216bf399f262f86b44d5a697ec00e425cf60a64d6407bea08cbf676cf441",
+    "reason": "One existing-Modal form composes the canonical GET/mutation hooks with a snapshot and draft for exactly one document/meeting/event. It owns initialization, explicit discard/refresh, pending controls and truthful uncertain-save acknowledgement; pure receiving/conversion is delegated to meeting-facts-draft and current access/transport lifetime remain canonical. There is no new journal, request framework, clock service, authority or automatic retry. Related form state and submission decisions belong together so stale/mismatched reads cannot seed editable values.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/tests/workspace-hillday-facts-draft.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "72d485dda854c1e21bd1dcd45c17255206b0ff9a066ab77181da3547479e2cb5",
+    "reason": "The new sparse-facts unit describe body groups independent assertions over one pure draft adapter: exact raw preservation, fold/gap handling, new-date instant order, precision fallback and location semantics. It uses the already adopted Temporal package and synthetic values. Keeping these related positive/negative cases together is coherent; this is exact test-source review, not an exemption from size review.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SaveSectionDialog.tsx",
+    "kind": "function",
+    "symbol": "SaveSectionDialog",
+    "fingerprint": "2628a84735bb4071e77f23f4f3e6391ae1e4c3e061df4fc90a2ca3a4184590e2",
+    "reason": "One existing-Modal form owns name/folder input, current-server-versus-unsaved-draft explanation, pending disablement and the unknown-outcome acknowledgement. Request lifetime, dispatch and actual public receiving remain in the hook and fixed operations. The editing/pending/unknown presentations are one coherent interaction and keep close/GET-only choices next to the truthful save semantics. No new modal primitive, persistence or authority is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/SavedSections.tsx",
+    "kind": "function",
+    "symbol": "SavedSections",
+    "fingerprint": "ac3ef7e1783d5ad0678dff9c344a8b5191d18f9785e4da666fa8742d6a570ee5",
+    "reason": "One inspector presents loading, unavailable, empty, filtered-empty and loaded section rows using existing field/select/button primitives. Search, folder and sort operate only on the current loaded list; the pure filter helper and parent hook own computation and request lifetime. Explicit Insert and Back share this selected inspector and focus owner. No management endpoint, automatic document save or second draft owner is introduced.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/library/use-section-library.ts",
+    "kind": "function",
+    "symbol": "useSectionLibrary",
+    "fingerprint": "7f01d9329a82a667370eedbd063ef21d4432ce56a499fdccd5e69177914fb003",
+    "reason": "The feature-local hook owns exactly one mounted section-library interaction: current owner/document/API scope, explicit read/save commands, pending and unknown presentation, and one local insertion handoff. A small closure owns abort controllers and synchronous dispatch/insertion claims; canonical transport/public parsing, editor history and durable document recovery retain their existing owners. Keeping these related transition guards together prevents late reads or repeated saves from bypassing the shared mounted fence. It adds no durable outcome, authorization policy, queue or second journal.",
+    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/rich-newsletter-library.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "e12f14bf55227f6ad8509a691f71337e31005878428728b6e41c005d02ecb205",
+    "reason": "This unit describe body exercises one fixed section-library operation family against the actual public parser and canonical transport: strict fixed routes/inputs, malformed replies without redispatch and cancellation. The negative receiver counterexample is independently demonstrated by the retained parser-removal mutant. Keeping these directly related transport-contract assertions together is cohesive; the exact 95-line test body is reviewed explicitly.",
     "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
     "reviewedOn": "2026-10-26"
   }

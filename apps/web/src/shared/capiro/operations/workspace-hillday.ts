@@ -11,6 +11,7 @@ import {
   meetingContext,
   office,
   resolution,
+  resolutionRead,
   sourceStatus,
   workspaceClient,
   workspaceId,
@@ -252,8 +253,9 @@ export const workspaceHillDayOperations = {
     method: "GET",
     path: "/hillday/documents/:id/resolution",
     request: docRead,
-    response: resolution,
-    source,
+    response: resolutionRead,
+    source:
+      "capiro-backend@76ca8686fe1b91a5c2aac172b88f268fde38f9bb apps/workspace/src/hillday/{hillday-resolution.service.ts,meeting-facts.ts,hillday.types.ts} GET resolution",
   }),
   "workspace.hillday.resolve": defineOperation({
     service: "workspace",
