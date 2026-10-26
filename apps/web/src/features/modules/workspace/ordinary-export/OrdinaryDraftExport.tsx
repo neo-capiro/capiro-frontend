@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { WorkspaceDraftDocument } from "../../../../shared/capiro/operations/workspace-documents";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
-import { ActionButton, SelectInput } from "../../../../shared/module-ui";
+import { ActionButton, Field, SelectInput } from "../../../../shared/module-ui";
+import styles from "../ordinary-presentation.module.css";
 import {
   ORDINARY_ALL_PART,
   ordinaryExportTabs,
@@ -28,6 +29,7 @@ export function OrdinaryDraftExport({
   disabled: boolean;
 }) {
   const api = useCapiro();
+  const selectId = useId();
   const [part, setPart] = useState(ORDINARY_ALL_PART);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -75,32 +77,41 @@ export function OrdinaryDraftExport({
     if (message) setError(message);
   }
   return (
-    <div>
-      <SelectInput
-        aria-label="Saved content to export"
-        value={part}
-        onValueChange={setPart}
-        options={options}
-        disabled={disabled || pending}
-      />
-      <ActionButton
-        disabled={disabled || pending}
-        onClick={() => void exportSaved("pdf")}
-      >
-        Export saved PDF
-      </ActionButton>
-      <ActionButton
-        disabled={disabled || pending}
-        onClick={() => void exportSaved("docx")}
-      >
-        Export saved DOCX
-      </ActionButton>
+    <section className={styles.exportPanel} aria-label="Saved document export">
+      <div className={styles.exportRow}>
+        <div className={styles.exportSelection}>
+          <Field label="Saved content to export" htmlFor={selectId}>
+            <SelectInput
+              id={selectId}
+              aria-label="Saved content to export"
+              value={part}
+              onValueChange={setPart}
+              options={options}
+              disabled={disabled || pending}
+            />
+          </Field>
+        </div>
+        <div className={styles.actions}>
+          <ActionButton
+            disabled={disabled || pending}
+            onClick={() => void exportSaved("pdf")}
+          >
+            Export saved PDF
+          </ActionButton>
+          <ActionButton
+            disabled={disabled || pending}
+            onClick={() => void exportSaved("docx")}
+          >
+            Export saved DOCX
+          </ActionButton>
+        </div>
+      </div>
       {error && <p role="alert">{error}</p>}
-      <p role="status">
+      <p role="status" className={styles.qualifier}>
         {pending
           ? "Preparing the saved export…"
           : "Exports use the server-saved content and may differ from unsaved editor changes."}
       </p>
-    </div>
+    </section>
   );
 }

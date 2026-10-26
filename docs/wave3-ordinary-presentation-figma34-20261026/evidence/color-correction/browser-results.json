@@ -1,0 +1,61 @@
+{
+  "stats": {
+    "startTime": "2026-10-26T06:49:08.172Z",
+    "duration": 16467.12,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "ordinary presentation contains title, export and uncertain readback at 1440px",
+      "status": "passed",
+      "durationMs": 8594,
+      "axe": [
+        {
+          "name": "export-1440-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 16,
+          "inapplicable": 73
+        },
+        {
+          "name": "recovery-1440-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 16,
+          "inapplicable": 73
+        }
+      ],
+      "errors": []
+    },
+    {
+      "title": "newsletter reuses contained recovery presentation at 390px",
+      "status": "passed",
+      "durationMs": 5265,
+      "axe": [
+        {
+          "name": "newsletter-390-axe",
+          "version": "4.14.0",
+          "violations": [],
+          "incomplete": [],
+          "passes": 17,
+          "inapplicable": 72
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "captures": [
+    "ordinary-export-selection-1440.png",
+    "ordinary-header-export-1440.png",
+    "ordinary-unconfirmed-1440.png",
+    "ordinary-readback-1440.png",
+    "newsletter-unconfirmed-390.png",
+    "newsletter-readback-390.png"
+  ],
+  "scope": "Synthetic local Vite development harness; selected owned regions use all default axe rules. No live provider or authorization qualification."
+}

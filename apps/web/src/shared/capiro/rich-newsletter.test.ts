@@ -87,6 +87,7 @@ describe("fixed rich operations remain separate from saved-version staging", () 
       "GET /newsletters/documents/:id/stages/:revision",
       "GET /engagement/newsletters/stages/:id",
       "GET /engagement/newsletters/:id",
+      "POST /engagement/newsletters/stages/:id/open",
     ]);
     for (const field of ["clientId", "ownerId", "tenantId", "requestId"])
       expect(
@@ -430,4 +431,73 @@ describe("exact preview and staged-revision receiving", () => {
     );
     expect(fetcher).toHaveBeenCalledOnce();
   });
+});
+
+describe("explicit native rich-stage opening", () => {
+  it("uses only the exact stage ID and returns its bound saved record", async () => {
+    const value = ownedRecord();
+    const { adapter, fetcher } = consumer(value);
+    expect(await adapter.open(ownedStage(), signal())).toEqual(value);
+    expect(fetcher).toHaveBeenCalledOnce();
+    const [url, options] = fetcher.mock.calls[0]!;
+    expect(String(url)).toContain("engagement.richNewsletter.open");
+    expect(options?.method).toBe("POST");
+    expect(JSON.parse(String(options?.body))).toEqual({
+      params: { id: stageId },
+    });
+    expect(
+      operations["engagement.richNewsletter.open"].request.safeParse({
+        params: { id: stageId },
+        body: { tenantId: id },
+      }).success,
+    ).toBe(false);
+  });
+  it.each(["id", "documentId", "revision", "clientId"])(
+    "refuses an open result with a changed %s and never redispatches",
+    async (field) => {
+      const value = ownedRecord();
+      if (field === "clientId") value.stage.config.clientId = other;
+      else if (field === "revision") value.stage.revision = 5;
+      else if (field === "documentId") value.stage.documentId = other;
+      else value.stage.id = other;
+      const { adapter, fetcher } = consumer(value);
+      await expect(adapter.open(ownedStage(), signal())).rejects.toMatchObject({
+        status: 502,
+      });
+      expect(fetcher).toHaveBeenCalledOnce();
+    },
+  );
+  it("captures the reviewed binding before the open response arrives", async () => {
+    const stage = ownedStage();
+    const value = ownedRecord();
+    value.stage.revision = 5;
+    let finish!: (response: Response) => void;
+    const fetcher = vi.fn<typeof fetch>().mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    const adapter = createRichNewsletterAdapter(
+      createCapiroApi(operations, { fetcher }),
+    );
+    const pending = adapter.open(stage, signal());
+    stage.revision = 5;
+    finish(Response.json(value));
+    await expect(pending).rejects.toMatchObject({ status: 502 });
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it.each([403, 503])(
+    "preserves HTTP%i without treating it as no effect or retrying",
+    async (status) => {
+      const { adapter, fetcher } = consumer(
+        { message: "Synthetic failure after dispatch" },
+        status,
+      );
+      await expect(adapter.open(ownedStage(), signal())).rejects.toMatchObject({
+        status,
+      });
+      expect(fetcher).toHaveBeenCalledOnce();
+    },
+  );
 });

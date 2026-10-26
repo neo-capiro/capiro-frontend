@@ -7,6 +7,105 @@ import {
   documentId,
 } from "./workspace-hillday-resume-fixture";
 
+test.describe("saved name baseline", () => {
+  test("each acknowledged rename uses its exact snapshot and then the returned timestamp", async ({
+    page,
+  }) => {
+    const f = await hillDayResumeFixture(page);
+    const baseline = f.document.updatedAt;
+    const names: { name: string; expectedUpdatedAt: string }[] = [];
+    await page.route("**/api/capiro/workspace.hillday.update", (route) => {
+      const { body } = route.request().postDataJSON();
+      names.push(body);
+      if (body.expectedUpdatedAt !== f.document.updatedAt)
+        return route.fulfill({
+          status: 409,
+          json: { message: "The document changed. Reload before renaming." },
+        });
+      f.document.name = body.name;
+      f.document.updatedAt = new Date(
+        Date.parse(f.document.updatedAt) + 1,
+      ).toISOString();
+      return route.fulfill({ json: f.document });
+    });
+    await page.goto(resumeUrl("sponsor"));
+    const name = page.getByLabel("Document name", { exact: true });
+    await expect(name).toHaveValue(f.document.name);
+    expect(names).toHaveLength(0);
+    await name.fill("  First rename  ");
+    await page
+      .getByRole("button", { name: "Open calendar →", exact: true })
+      .click();
+    await expect(page).toHaveURL(/hilldayPhase=meetings/);
+    const savedAt = f.document.updatedAt;
+    await page.getByRole("button", { name: "Back", exact: true }).click();
+    await expect(name).toHaveValue("First rename");
+    await name.fill("Second rename");
+    await page
+      .getByRole("button", { name: "Open calendar →", exact: true })
+      .click();
+    await expect(page).toHaveURL(/hilldayPhase=meetings/);
+    expect(names).toEqual([
+      { name: "First rename", expectedUpdatedAt: baseline },
+      { name: "Second rename", expectedUpdatedAt: savedAt },
+    ]);
+  });
+
+  test("a stale rename retains input and its old baseline until explicit reload", async ({
+    page,
+  }) => {
+    const f = await hillDayResumeFixture(page);
+    const baseline = f.document.updatedAt;
+    const names: { name: string; expectedUpdatedAt: string }[] = [];
+    await page.route("**/api/capiro/workspace.hillday.update", (route) => {
+      const { body } = route.request().postDataJSON();
+      names.push(body);
+      if (body.expectedUpdatedAt !== f.document.updatedAt)
+        return route.fulfill({
+          status: 409,
+          json: { message: "The document changed. Reload before renaming." },
+        });
+      f.document.name = body.name;
+      f.document.updatedAt = new Date(
+        Date.parse(f.document.updatedAt) + 1,
+      ).toISOString();
+      return route.fulfill({ json: f.document });
+    });
+    await page.goto(resumeUrl("sponsor"));
+    const name = page.getByLabel("Document name", { exact: true });
+    await expect(name).toHaveValue(f.document.name);
+    f.document.name = "Another saved name";
+    f.document.updatedAt = "2026-10-26T12:00:01.000Z";
+    await name.fill("My unsaved name");
+    await page
+      .getByRole("button", { name: "Open calendar →", exact: true })
+      .click();
+    await expect(
+      page
+        .getByRole("alert")
+        .filter({ hasText: "The document changed. Reload before renaming." }),
+    ).toBeVisible();
+    await expect(name).toHaveValue("My unsaved name");
+    await expect(page).toHaveURL(/hilldayPhase=sponsor/);
+    expect(names).toEqual([
+      { name: "My unsaved name", expectedUpdatedAt: baseline },
+    ]);
+    expect(f.document.name).toBe("Another saved name");
+    await page.reload();
+    await expect(name).toHaveValue("Another saved name");
+    expect(names).toHaveLength(1);
+    await name.fill("New explicit rename");
+    await page
+      .getByRole("button", { name: "Open calendar →", exact: true })
+      .click();
+    await expect(page).toHaveURL(/hilldayPhase=meetings/);
+    expect(names[1]).toEqual({
+      name: "New explicit rename",
+      expectedUpdatedAt: "2026-10-26T12:00:01.000Z",
+    });
+  });
+});
+
 test.describe("saved calendar range", () => {
   test.use({ timezoneId: "UTC" });
 

@@ -29,8 +29,11 @@ const MARKUP_PAYLOAD = "<img src=x onerror=alert(1)>";
 const h = vi.hoisted(() => ({
   values: [] as unknown[],
   index: 0,
-  tabs: [] as { label: string; onChange: (id: string) => void }[],
-  buttons: [] as { children: ReactNode; onClick?: () => void }[],
+  buttons: [] as {
+    children: ReactNode;
+    onClick?: () => void;
+    label?: string;
+  }[],
   result: {
     data: [] as SavedVersion[],
     loading: false,
@@ -68,22 +71,23 @@ vi.mock("../src/shared/module-ui", () => ({
   ActionButton: ({
     children,
     onClick,
+    "aria-label": label,
+    disabled,
   }: {
     children: ReactNode;
     onClick?: () => void;
+    "aria-label"?: string;
+    disabled?: boolean;
   }) => {
-    h.buttons.push({ children, onClick });
-    return createElement("button", { type: "button", onClick }, children);
+    h.buttons.push({ children, onClick, label });
+    return createElement(
+      "button",
+      { type: "button", onClick, "aria-label": label, disabled },
+      children,
+    );
   },
   Modal: ({ open, children }: { open: boolean; children: ReactNode }) =>
     open ? createElement("div", null, children) : null,
-  Panel: ({ title, children }: { title?: string; children: ReactNode }) =>
-    createElement(
-      "section",
-      null,
-      title ? createElement("h2", null, title) : null,
-      children,
-    ),
   StatusPanel: ({
     loading,
     error,
@@ -102,36 +106,6 @@ vi.mock("../src/shared/module-ui", () => ({
             typeof error === "string" ? error : error.message,
           )
         : createElement("div", null, children),
-  Tabs: ({
-    items,
-    value,
-    onChange,
-    label,
-  }: {
-    items: { id: string; label: string }[];
-    value: string;
-    onChange: (id: string) => void;
-    label?: string;
-  }) => {
-    h.tabs.push({ label: label ?? "", onChange });
-    return createElement(
-      "div",
-      { role: "tablist", "aria-label": label },
-      items.map((item) =>
-        createElement(
-          "button",
-          {
-            key: item.id,
-            role: "tab",
-            type: "button",
-            "aria-selected": value === item.id,
-            onClick: () => onChange(item.id),
-          },
-          item.label,
-        ),
-      ),
-    );
-  },
 }));
 
 const draft = {
@@ -162,7 +136,6 @@ beforeEach(() => {
   vi.clearAllMocks();
   h.values = [];
   h.index = 0;
-  h.tabs = [];
   h.buttons = [];
   h.result = { data: [], loading: false, error: undefined };
 });
@@ -424,19 +397,17 @@ it("keeps canonical JSON stable across key order", () => {
 function renderHistory(seed?: unknown[]) {
   h.index = 0;
   h.values = seed ?? [];
-  h.tabs = [];
   h.buttons = [];
   return renderToStaticMarkup(createElement(VersionHistory, { draft }));
 }
 
 function rerenderHistory() {
   h.index = 0;
-  h.tabs = [];
   h.buttons = [];
   return renderToStaticMarkup(createElement(VersionHistory, { draft }));
 }
 
-it("shows the exact label, date, parent identity and saved content of a version", () => {
+it("shows the exact saved content without default identity diagnostics", () => {
   h.result.data = [
     savedVersion({
       snapshot: {
@@ -458,9 +429,10 @@ it("shows the exact label, date, parent identity and saved content of a version"
   ];
   const markup = renderHistory([true, V_OLD, undefined]);
   expect(markup).toContain("Manual save");
-  expect(markup).toContain("Parent document");
-  expect(markup).toContain(DRAFT_ID);
-  expect(markup).toContain(CLIENT_ID);
+  expect(markup).toContain('aria-label="Selected saved version"');
+  expect(markup).not.toContain(DRAFT_ID);
+  expect(markup).not.toContain(CLIENT_ID);
+  expect(markup).toContain("2026");
   expect(markup).toContain("Saved title");
   expect(markup).toContain("Section text");
   expect(markup).toContain("Intro body");
@@ -480,10 +452,10 @@ it("renders the selected saved version only, ignoring stale selections", () => {
   ];
   expect(
     renderHistory([true, "00000000-0000-4000-8000-0000000000aa", undefined]),
-  ).not.toContain("Parent document");
+  ).not.toContain('aria-label="Selected saved version"');
 });
 
-it("switches the shown saved version when a version tab is selected", () => {
+it("switches the shown saved version when a version row is selected", () => {
   h.result.data = [
     savedVersion({
       id: V_OLD,
@@ -496,8 +468,10 @@ it("switches the shown saved version when a version tab is selected", () => {
     }),
   ];
   renderHistory([true, V_OLD, undefined]);
-  const versions = h.tabs.find((tab) => tab.label === "Saved versions")!;
-  versions.onChange(V_NEW);
+  const versions = h.buttons.filter((button) =>
+    button.label?.startsWith("View Manual save"),
+  );
+  versions[1]!.onClick!();
   expect(rerenderHistory()).toContain("Newer title");
 });
 
@@ -511,7 +485,7 @@ it("refuses display for a foreign parent document", () => {
   const markup = renderHistory([true, V_OLD, undefined]);
   expect(markup).toContain('role="alert"');
   expect(markup).toContain("another document");
-  expect(markup).not.toContain("Parent document");
+  expect(markup).not.toContain('aria-label="Selected saved version"');
 });
 
 it("clears detail and compare state on a read error", () => {
@@ -530,7 +504,7 @@ it("clears detail and compare state on a read error", () => {
   );
   const markup = renderHistory([true, V_OLD, V_NEW]);
   expect(markup).toContain("You do not have permission");
-  expect(markup).not.toContain("Parent document");
+  expect(markup).not.toContain('aria-label="Selected saved version"');
   expect(markup).not.toContain("Comparing");
 });
 
@@ -632,5 +606,5 @@ it("refuses display when a saved receipt has no snapshot", () => {
   const markup = renderHistory([true, V_OLD, undefined]);
   expect(markup).toContain('role="alert"');
   expect(markup).toContain("missing its saved content");
-  expect(markup).not.toContain("Parent document");
+  expect(markup).not.toContain('aria-label="Selected saved version"');
 });

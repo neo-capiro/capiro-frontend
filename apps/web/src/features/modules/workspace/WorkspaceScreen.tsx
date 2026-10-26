@@ -3,6 +3,13 @@ import { DocumentsLibrary, WorkflowCards } from "./WorkspaceLibrary";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@capiro/ui/dropdown-menu";
 import type { WorkspaceLibraryDocument } from "../../../shared/capiro/operations/workspace-schemas";
 import { ActionButton, Modal } from "../../../shared/module-ui";
 import { HillDayEditor } from "./hillday/HillDayEditor";
@@ -10,8 +17,10 @@ import { HillDayResume, HillDayWizard } from "./hillday/HillDayWizard";
 import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
 import { TemplateStudio } from "./templates/TemplateStudio";
 import styles from "./workspace.module.css";
+import headerStyles from "./workspace-header.module.css";
 import { WorkspaceDraft } from "./WorkspaceDraft";
 import { WorkspaceShares } from "./WorkspaceShares";
+import { WorkspaceInvitationEntry } from "./collaboration/WorkspaceInvitationInbox";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
@@ -170,21 +179,31 @@ export function WorkspaceScreen() {
           <h1>Workspace</h1>
         </div>
         <div className={styles.actions}>
-          <ActionButton
-            onClick={() =>
-              router.push(
-                `/meri/files${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
-              )
-            }
-          >
-            Meri files
-          </ActionButton>
-          <ActionButton onClick={() => navigate("rich-newsletter")}>
-            Rich newsletter preview
-          </ActionButton>
-          <ActionButton onClick={() => navigate("templates")}>
-            Template Studio
-          </ActionButton>
+          <WorkspaceInvitationEntry key={clientId ?? "general"} />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <ActionButton>
+                Workspace tools <ChevronDown size={14} aria-hidden="true" />
+              </ActionButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className={headerStyles.menu}>
+              <DropdownMenuItem
+                onSelect={() =>
+                  router.push(
+                    `/meri/files${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
+                  )
+                }
+              >
+                Meri files
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => navigate("rich-newsletter")}>
+                Rich newsletter preview
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => navigate("templates")}>
+                Template Studio
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <ActionButton primary onClick={() => setNewDocument(true)}>
             + New document
           </ActionButton>

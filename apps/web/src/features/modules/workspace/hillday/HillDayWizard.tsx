@@ -138,6 +138,8 @@ export function HillDayWizard({
     existing?.client.id ?? initialClientId,
   );
   const [name, setName] = useState(existing?.name ?? "");
+  // Keep the baseline paired with this local name, even if props refresh.
+  const [nameUpdatedAt, setNameUpdatedAt] = useState(existing?.updatedAt);
   const [createdDocument, setCreatedDocument] = useState<
     | {
         id: string;
@@ -186,11 +188,13 @@ export function HillDayWizard({
       return;
     }
     if (step === 1 && documentId) {
+      if (!nameUpdatedAt) return;
       try {
-        await update.run({
+        const saved = await update.run({
           params: { id: documentId },
-          body: { name: name.trim() },
+          body: { name: name.trim(), expectedUpdatedAt: nameUpdatedAt },
         });
+        setNameUpdatedAt(saved.updatedAt);
         setStep(2);
       } catch {
         /* Keep the prior document name until the save succeeds. */
@@ -361,6 +365,7 @@ export function HillDayWizard({
                 primary
                 disabled={
                   pending ||
+                  (step === 1 && Boolean(documentId) && !nameUpdatedAt) ||
                   (step === 0 ? !chosenBlueprint : !clientId || !name.trim())
                 }
                 onClick={next}

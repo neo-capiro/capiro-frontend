@@ -26,6 +26,14 @@ async function setup(page: Page, record: object = rich) {
     "engagement.outreach": [record],
     "engagement.outreach.record": record,
   });
+  await page.route(
+    /\/api\/capiro\/engagement\.richNewsletter\.(stage|record)\?/,
+    (route) =>
+      route.fulfill({
+        status: 403,
+        json: { message: "Synthetic current-access refusal" },
+      }),
+  );
   const writes: string[] = [],
     operations: string[] = [],
     errors: string[] = [],
@@ -49,12 +57,15 @@ test("rich list selection cannot mount the generic writer and Back restores the 
   await page.goto("/modules/engagement?view=outreach");
   await page.getByRole("button", { name: "Synthetic rich draft" }).click();
   await expect(
-    page.getByRole("heading", { name: "Rich newsletter unavailable" }),
+    page.getByText(
+      "This newsletter is unavailable for your current access or does not match this link.",
+      { exact: true },
+    ),
   ).toBeVisible();
   await expect(page.getByLabel("Body", { exact: true })).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "Prepare delivery" }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
   await page.getByRole("button", { name: "Back to Outreach" }).click();
   await expect(
     page.getByRole("button", { name: "Synthetic rich draft" }),
@@ -80,7 +91,10 @@ test("legacy draft deep link containing rich metadata never mounts the plain wri
   const observed = await setup(page);
   await page.goto(`/modules/engagement?view=outreach&draft=${recordId}`);
   await expect(
-    page.getByRole("heading", { name: "Rich newsletter unavailable" }),
+    page.getByText(
+      "This newsletter is unavailable for your current access or does not match this link.",
+      { exact: true },
+    ),
   ).toBeVisible();
   await expect(page.getByLabel("Body", { exact: true })).toHaveCount(0);
   await page.getByRole("link", { name: "Back to Outreach" }).click();
@@ -124,10 +138,29 @@ for (const query of [
   }) => {
     const observed = await setup(page);
     await page.goto(`/modules/engagement?${query}`);
-    await expect(
-      page.getByRole("heading", { name: /newsletter unavailable/i }),
-    ).toBeVisible();
-    expect(observed.operations.filter((key) => key !== "me.read")).toEqual([]);
+    const expectedRead =
+      query === `newsletter=${recordId}`
+        ? "engagement.richNewsletter.record"
+        : query === `newsletterStage=${stageId}`
+          ? "engagement.richNewsletter.stage"
+          : undefined;
+    if (expectedRead) {
+      await expect(
+        page.getByText(
+          "This newsletter is unavailable for your current access or does not match this link.",
+          { exact: true },
+        ),
+      ).toBeVisible();
+    } else {
+      await expect(
+        page.getByRole("heading", {
+          name: "Newsletter unavailable",
+          exact: true,
+        }),
+      ).toBeVisible();
+    }
+    const reads = observed.operations.filter((key) => key !== "me.read");
+    expect([...new Set(reads)]).toEqual(expectedRead ? [expectedRead] : []);
     expect(observed.writes).toEqual([]);
     expect(observed.errors).toEqual([]);
   });

@@ -3,6 +3,12 @@ import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
 import { client, clientId } from "./next-modules-fixtures";
 import { draft, otherId } from "../../tests/prospect-resources-fixtures";
+import {
+  auditPresentation,
+  capturePresentation,
+  contained,
+  presentationFont,
+} from "./ordinary-presentation-evidence";
 
 const ordinary = {
   ...draft,
@@ -100,6 +106,15 @@ async function fixture(page: Page, versions: unknown[] = savedVersions()) {
       nextCursor: null,
     },
     "workspace.draft": () => structuredClone(ordinary),
+    "workspace.draft.state": () => ({
+      schemaVersion: 1,
+      tenantId: testIdentity.tenant.id,
+      draftId: ordinary.id,
+      clientId,
+      stateHash: "a".repeat(64),
+      hashFormat: "workspace-ordinary-draft-state-v1",
+      draft: structuredClone(ordinary),
+    }),
     "workspace.draft.versions": () => structuredClone(versions),
   });
   await page.route("**/api/backend/core/clients/*", (route) =>
@@ -115,11 +130,10 @@ async function fixture(page: Page, versions: unknown[] = savedVersions()) {
 }
 
 const history = (page: Page) =>
-  page.getByRole("dialog", { name: "Document history" });
+  page.getByRole("dialog", { name: "Version history" });
 const saveList = (page: Page) =>
-  history(page).getByRole("tablist", { name: "Saved versions" });
-const compareList = (page: Page) =>
-  history(page).getByRole("tablist", { name: "Compare with" });
+  history(page).getByRole("list", { name: "Saved versions" });
+const compareList = saveList;
 
 async function openHistory(page: Page) {
   await page.getByRole("button", { name: "History", exact: true }).click();
@@ -128,50 +142,138 @@ async function openHistory(page: Page) {
 
 test("saved history reads exact versions with keyboard selection, compare and no writes", async ({
   page,
-}) => {
+}, info) => {
   const state = await fixture(page);
+  await presentationFont(page);
   await page.goto(editorUrl);
   await expect(
     page.getByRole("heading", { name: ordinary.docTitle, exact: true }),
   ).toBeVisible();
   await openHistory(page);
+  expect(
+    await history(page).evaluate((el) => ({
+      duration: getComputedStyle(el).animationDuration,
+      count: getComputedStyle(el).animationIterationCount,
+    })),
+  ).toEqual({ duration: "2s", count: "1" });
+  await capturePresentation(page, info, "history-desktop-list", history(page));
 
   // The list is the authorized read; two synthetic saved versions.
-  await expect(saveList(page).getByRole("tab")).toHaveCount(2);
+  await expect(
+    saveList(page).getByRole("button", { name: /^View / }),
+  ).toHaveCount(2);
 
-  // Keyboard moves the read-only selection and marks the active tab.
-  const later = saveList(page).getByRole("tab", { name: "Later save" });
+  // Keyboard follows native row controls and selects the saved snapshot.
+  const later = saveList(page).getByRole("button", { name: "View Later save" });
   await later.focus();
-  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Enter");
   await expect(
-    saveList(page).getByRole("tab", { name: "Earlier save" }),
-  ).toHaveAttribute("aria-selected", "true");
+    saveList(page).getByRole("button", { name: "View Earlier save" }),
+  ).toHaveAttribute("aria-pressed", "true");
 
-  // Detail shows the exact label, saved date, parent identity and saved content
+  // Detail shows the exact label, saved date and content without raw identity IDs
   // of the selected snapshot only.
-  await expect(history(page).getByText("Parent document")).toBeVisible();
   await expect(
-    history(page).getByText(draft.id, { exact: true }),
+    history(page).getByRole("region", { name: "Selected saved version" }),
   ).toBeVisible();
-  await expect(
-    history(page).getByText(clientId, { exact: true }),
-  ).toBeVisible();
+  await expect(history(page).getByText(draft.id, { exact: true })).toHaveCount(
+    0,
+  );
+  await expect(history(page).getByText(clientId, { exact: true })).toHaveCount(
+    0,
+  );
   await expect(history(page).getByText("History title one")).toBeVisible();
   await expect(history(page).getByText("First alpha body")).toBeVisible();
   await expect(history(page).getByText("Second alpha body")).toHaveCount(0);
+  await expect(
+    saveList(page).getByRole("button", { name: "Compare with Earlier save" }),
+  ).toBeDisabled();
+  await capturePresentation(
+    page,
+    info,
+    "history-desktop-selected",
+    history(page),
+  );
 
   // Comparing two exact saved versions diffs tabs (documents) in old→new order.
-  await compareList(page).getByRole("tab", { name: "Later save" }).click();
+  await compareList(page)
+    .getByRole("button", { name: "Compare with Later save" })
+    .click();
   await expect(
     history(page).getByRole("heading", { name: /^Comparing/ }),
   ).toBeVisible();
   await expect(history(page).getByText("Tabs added: Beta")).toBeVisible();
+  await capturePresentation(
+    page,
+    info,
+    "history-desktop-compare",
+    history(page),
+  );
+  await auditPresentation(page, info, "history-desktop", '[role="dialog"]');
 
   // Reopening after a reload restores the read with no live-state substitution.
   await page.reload();
   await openHistory(page);
-  await expect(saveList(page).getByRole("tab")).toHaveCount(2);
+  await expect(
+    saveList(page).getByRole("button", { name: /^View / }),
+  ).toHaveCount(2);
 
+  expect(state.calls.filter((call) => call.method !== "GET")).toEqual([]);
+  expect(state.errors).toEqual([]);
+});
+
+test("narrow history keeps long saved content scrollable, restores keyboard focus and respects reduced motion", async ({
+  page,
+}, info) => {
+  await page.setViewportSize({ width: 390, height: 720 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const versions = savedVersions();
+  versions[1]!.snapshot.config.sectionContent.Body = Array.from(
+    { length: 90 },
+    (_, i) => `Synthetic saved line ${i + 1}`,
+  ).join("\n");
+  const state = await fixture(page, versions);
+  await presentationFont(page);
+  await page.goto(editorUrl);
+  await openHistory(page);
+  await contained(page, history(page));
+  expect(
+    await history(page).evaluate((el) => getComputedStyle(el).animationName),
+  ).toBe("none");
+  await saveList(page)
+    .getByRole("button", { name: "View Earlier save" })
+    .click();
+  const body = history(page).locator('[data-slot="modal-body"]');
+  expect(await body.evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(
+    true,
+  );
+  await capturePresentation(page, info, "history-narrow-scroll", history(page));
+  await history(page)
+    .getByRole("button", { name: "Close", exact: true })
+    .focus();
+  await page.keyboard.press("Enter");
+  await expect(history(page)).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "History", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press("Enter");
+  await compareList(page)
+    .getByRole("button", { name: "Compare with Later save" })
+    .click();
+  await expect(history(page).getByText("Tabs added: Beta")).toBeVisible();
+  await contained(page, history(page));
+  await capturePresentation(
+    page,
+    info,
+    "history-narrow-compare",
+    history(page),
+  );
+  await auditPresentation(page, info, "history-narrow", '[role="dialog"]');
+  await page.keyboard.press("Escape");
+  await expect(
+    page.getByRole("button", { name: "History", exact: true }),
+  ).toBeFocused();
   expect(state.calls.filter((call) => call.method !== "GET")).toEqual([]);
   expect(state.errors).toEqual([]);
 });
@@ -188,7 +290,9 @@ test("a foreign parent saved version refuses detail display", async ({
   await expect(history(page).getByRole("alert")).toContainText(
     "another document",
   );
-  await expect(history(page).getByText("Parent document")).toHaveCount(0);
+  await expect(
+    history(page).getByRole("region", { name: "Selected saved version" }),
+  ).toHaveCount(0);
   expect(state.calls.filter((call) => call.method !== "GET")).toEqual([]);
   expect(state.errors).toEqual([]);
 });
@@ -213,7 +317,9 @@ test("a denied current-access read clears saved history detail", async ({
   await expect(history(page).getByRole("alert")).toContainText(
     "do not have permission",
   );
-  await expect(history(page).getByText("Parent document")).toHaveCount(0);
+  await expect(
+    history(page).getByRole("region", { name: "Selected saved version" }),
+  ).toHaveCount(0);
   await expect(
     history(page).getByRole("heading", { name: /^Comparing/ }),
   ).toHaveCount(0);
@@ -270,15 +376,17 @@ test("a late response after close never overwrites the current saved history", a
   await expect(history(page)).toHaveCount(0);
   await openHistory(page);
   await expect(
-    saveList(page).getByRole("tab", { name: "Earlier save" }),
+    saveList(page).getByRole("button", { name: "View Earlier save" }),
   ).toBeVisible();
   // The obsolete response arrives only now and must never reach the view.
   releaseStale();
   await page.waitForTimeout(400);
   await expect(
-    saveList(page).getByRole("tab", { name: "Earlier save" }),
+    saveList(page).getByRole("button", { name: "View Earlier save" }),
   ).toBeVisible();
-  await expect(page.getByRole("tab", { name: "Stale save" })).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "View Stale save" }),
+  ).toHaveCount(0);
   expect(state.errors).toEqual([]);
 });
 
@@ -297,8 +405,12 @@ test("already populated saved detail clears when the next read is denied", async
   await page.goto(editorUrl);
   await openHistory(page);
   // Populate the read-only detail for one saved version.
-  await saveList(page).getByRole("tab", { name: "Earlier save" }).click();
-  await expect(history(page).getByText("Parent document")).toBeVisible();
+  await saveList(page)
+    .getByRole("button", { name: "View Earlier save" })
+    .click();
+  await expect(
+    history(page).getByRole("region", { name: "Selected saved version" }),
+  ).toBeVisible();
   // A later authorized read is denied: the populated detail must not remain.
   await page.getByRole("button", { name: "Close dialog" }).click();
   await expect(history(page)).toHaveCount(0);
@@ -306,8 +418,10 @@ test("already populated saved detail clears when the next read is denied", async
   await expect(history(page).getByRole("alert")).toContainText(
     "do not have permission",
   );
-  await expect(history(page).getByText("Parent document")).toHaveCount(0);
-  await expect(page.getByRole("tablist")).toHaveCount(0);
+  await expect(
+    history(page).getByRole("region", { name: "Selected saved version" }),
+  ).toHaveCount(0);
+  await expect(saveList(page)).toHaveCount(0);
   expect(state.calls.filter((call) => call.method !== "GET")).toEqual([]);
   expect(state.errors).toEqual([]);
 });
@@ -323,8 +437,12 @@ test("already populated saved detail clears when a later read expires the sessio
   );
   await page.goto(editorUrl);
   await openHistory(page);
-  await saveList(page).getByRole("tab", { name: "Earlier save" }).click();
-  await expect(history(page).getByText("Parent document")).toBeVisible();
+  await saveList(page)
+    .getByRole("button", { name: "View Earlier save" })
+    .click();
+  await expect(
+    history(page).getByRole("region", { name: "Selected saved version" }),
+  ).toBeVisible();
   // Revocation: the next read returns 401 and the session owner ends the view.
   await page.getByRole("button", { name: "Close dialog" }).click();
   await expect(history(page)).toHaveCount(0);
@@ -333,6 +451,8 @@ test("already populated saved detail clears when a later read expires the sessio
     page.getByRole("heading", { name: "Your session expired" }),
   ).toBeVisible();
   await expect(history(page)).toHaveCount(0);
-  await expect(page.getByText("Parent document")).toHaveCount(0);
+  await expect(
+    page.getByRole("region", { name: "Selected saved version" }),
+  ).toHaveCount(0);
   expect(state.errors).toEqual([]);
 });
