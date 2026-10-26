@@ -1,6 +1,8 @@
 "use client";
 import type { Ref } from "react";
+import { useRouter } from "next/navigation";
 import { ActionButton, UnavailableAction } from "../../../../shared/module-ui";
+import { useSelectedClient } from "../../../../shared/session/SelectedClient";
 import {
   hasRichChanges,
   stageAttempt,
@@ -20,6 +22,8 @@ export function RichDocumentActions({
   owner: RichDocumentController;
   previewButtonRef?: Ref<HTMLButtonElement>;
 }) {
+  const router = useRouter();
+  const selected = useSelectedClient();
   const ready =
     state.current &&
     Boolean(state.saved) &&
@@ -219,6 +223,19 @@ export function RichDocumentActions({
             The saved stage record confirms this revision. No destination was
             opened and nothing was prepared or sent.
           </p>
+          <ActionButton
+            disabled={Boolean(state.pending)}
+            onClick={() => {
+              if (!state.stage) return;
+              const client =
+                selected.state === "authorized-client"
+                  ? `&clientId=${encodeURIComponent(selected.client.id)}`
+                  : "";
+              router.push(`${state.stage.route}${client}`);
+            }}
+          >
+            Review staged newsletter
+          </ActionButton>
         </div>
       )}
       <div className={styles.toolbar}>
