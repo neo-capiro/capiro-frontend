@@ -44,7 +44,20 @@ export function CalendarDisplayedItems({
 }: {
   state: CalendarPageState;
 }) {
-  const { view, zone, date, scope, activeFeeds, items, update } = state;
+  const {
+    view,
+    zone,
+    date,
+    scope,
+    activeFeeds,
+    items,
+    update,
+    currentClients,
+  } = state;
+  // Figma 3.4 personalises this note with the client (1064:177487
+  // "Only meetings assigned to Anduril are shown.").
+  const clientName =
+    currentClients.find((client) => client.id === scope)?.name ?? "this client";
   return (
     <>
       {!scope && (
@@ -93,7 +106,7 @@ export function CalendarDisplayedItems({
       )}
       {scope && view === "agenda" && (
         <p className={clientStyles.clientAgendaNote}>
-          Only meetings assigned to this client are shown. Artifacts remain
+          Only meetings assigned to {clientName} are shown. Artifacts remain
           private until shared.
         </p>
       )}
