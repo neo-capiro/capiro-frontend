@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   findNewsletterBlock,
   type NewsletterBlock,
-  type NewsletterBlockKind,
   type NewsletterPreview,
 } from "@capiro/shared/newsletter";
 import {
@@ -13,7 +12,6 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import {
-  addRichBlock,
   editRichBlock,
   editRichConfig,
   removeRichBlock,
@@ -29,6 +27,9 @@ import { useNewsletterLibrary } from "./library/use-newsletter-library";
 import { SavedSections } from "./library/SavedSections";
 import { SavedTemplates } from "./library/SavedTemplates";
 import { LibraryDialog, LibraryNotice } from "./library/LibraryDialog";
+import { changeStructure, type StructureAction } from "./content/structure";
+import { DesignStyles, SectionSettings } from "./content/DesignStyles";
+import contentStyles from "./content/content.module.css";
 import { useBrandKit } from "./brand/use-brand-kit";
 import { BrandWorkspace } from "./brand/BrandWorkspace";
 import { useSurveyDrafts } from "./surveys/use-survey-drafts";
@@ -56,6 +57,9 @@ export function RichNewsletterEditor({
   const library = useNewsletterLibrary(owner, history.saved?.id);
   const libraryOpener = useRef<HTMLButtonElement | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [sectionId, setSectionId] = useState<string | null>(null);
+  const [emailStyles, setEmailStyles] = useState(false);
+  const [structureError, setStructureError] = useState("");
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
   const [closing, setClosing] = useState(false);
@@ -99,6 +103,9 @@ export function RichNewsletterEditor({
     setPreviousOwner(owner);
     setOwnerEpoch((value) => value + 1);
     setSelectedId(null);
+    setSectionId(null);
+    setEmailStyles(false);
+    setStructureError("");
     setMobile(false);
     setPlainText(false);
     setClosing(false);
@@ -109,6 +116,14 @@ export function RichNewsletterEditor({
   const selected = selectedId
     ? findNewsletterBlock(draft.design, selectedId)
     : null;
+  const selectedSection = draft.design.sections.find(
+    (section) => section.id === sectionId,
+  );
+  const selectBlock = (id: string) => {
+    setSelectedId(id);
+    setSectionId(null);
+    setEmailStyles(false);
+  };
   const commit = owner.edit;
   const update = (change: Partial<NewsletterBlock>) =>
     commit((current) => ({
@@ -117,11 +132,24 @@ export function RichNewsletterEditor({
         Object.assign(block, change),
       ),
     }));
-  const add = (section: string, kind: NewsletterBlockKind) =>
-    commit((current) => ({
-      ...current,
-      design: addRichBlock(current.design, section, kind).design,
-    }));
+  const structure = (action: StructureAction) => {
+    setStructureError("");
+    try {
+      let selection: string | undefined;
+      commit((current) => {
+        const result = changeStructure(current.design, action);
+        selection = result.selectedId;
+        return { ...current, design: result.design };
+      });
+      if (selection) selectBlock(selection);
+    } catch (error) {
+      setStructureError(
+        error instanceof Error
+          ? error.message
+          : "This structure change is unavailable.",
+      );
+    }
+  };
   const closeNotice = closing && (
     <div role="alert" className={styles.notice}>
       <p>
@@ -185,7 +213,7 @@ export function RichNewsletterEditor({
         <section className={styles.screen}>
           <PageHeader
             title="Rich newsletter editor preview"
-            description="Edit locally, then explicitly create or review a saved rich document. Submitted create/save requests remain in this browser for recovery; current saved content is reviewed separately. Comments opens a saved-content review; comment writing, sharing changes and delivery remain unavailable."
+            description="Edit your newsletter, save changes, and preview the result."
             actions={
               <ActionButton
                 disabled={Boolean(history.pending)}
@@ -212,6 +240,11 @@ export function RichNewsletterEditor({
             entryDocumentId={documentId}
           />
           <LibraryNotice library={library} />
+          {structureError && (
+            <p role="alert" className={contentStyles.error}>
+              {structureError}
+            </p>
+          )}
           {library.dialog && library.action && (
             <LibraryDialog library={library} />
           )}
@@ -257,6 +290,17 @@ export function RichNewsletterEditor({
                 </ActionButton>
                 <ActionButton
                   className={libraryStyles.button}
+                  aria-pressed={emailStyles}
+                  onClick={() => {
+                    setEmailStyles((current) => !current);
+                    setSelectedId(null);
+                    setSectionId(null);
+                  }}
+                >
+                  Email styles
+                </ActionButton>
+                <ActionButton
+                  className={libraryStyles.button}
                   onClick={(event) => {
                     libraryOpener.current = event.currentTarget;
                     void library.browse("template");
@@ -282,6 +326,8 @@ export function RichNewsletterEditor({
                   apply={(item) => {
                     if (library.apply(item)) {
                       setSelectedId(null);
+                      setSectionId(null);
+                      setEmailStyles(false);
                       libraryOpener.current?.focus();
                     }
                   }}
@@ -290,13 +336,18 @@ export function RichNewsletterEditor({
                 <>
                   <CampaignFields draft={draft} change={commit} />
                   <div
-                    className={`${styles.editor} ${library.browsing === "section" ? libraryStyles.libraryLayout : ""}`}
+                    className={`${styles.editor} ${contentStyles.editor} ${library.browsing === "section" ? libraryStyles.libraryLayout : ""}`}
                   >
                     <RichStructure
                       design={draft.design}
                       selectedId={selectedId}
-                      select={setSelectedId}
-                      add={add}
+                      select={selectBlock}
+                      change={structure}
+                      editSection={(id) => {
+                        setSectionId(id);
+                        setSelectedId(null);
+                        setEmailStyles(false);
+                      }}
                       savedSectionIds={
                         history.saved?.design.sections.map(
                           (section) => section.id,
@@ -325,10 +376,44 @@ export function RichNewsletterEditor({
                             libraryOpener.current?.focus();
                         }}
                       />
+                    ) : emailStyles ? (
+                      <DesignStyles
+                        design={draft.design}
+                        change={(styles) =>
+                          commit((current) => ({
+                            ...current,
+                            design: { ...current.design, styles },
+                          }))
+                        }
+                      />
+                    ) : selectedSection ? (
+                      <SectionSettings
+                        key={selectedSection.id}
+                        section={selectedSection}
+                        change={(next) =>
+                          commit((current) => ({
+                            ...current,
+                            design: {
+                              ...current.design,
+                              sections: current.design.sections.map(
+                                (section) =>
+                                  section.id === next.id ? next : section,
+                              ),
+                            },
+                          }))
+                        }
+                      />
                     ) : selected ? (
                       <RichBlockControls
                         key={`${history.editorRevision}:${selected.id}`}
                         block={selected}
+                        documentId={
+                          history.current && !history.fence
+                            ? history.saved?.id
+                            : undefined
+                        }
+                        design={draft.design}
+                        structure={structure}
                         update={update}
                         remove={() => {
                           commit((current) => ({

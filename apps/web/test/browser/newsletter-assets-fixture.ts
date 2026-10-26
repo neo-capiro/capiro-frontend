@@ -107,7 +107,12 @@ export async function chooseDetails(
   await button(page, "View Details").click();
 }
 
-export async function auditDialog(page: Page, info: TestInfo, name: string) {
+export async function auditDialog(
+  page: Page,
+  info: TestInfo,
+  name: string,
+  reviewText?: (html: string) => Promise<void>,
+) {
   await page.getByRole("dialog").evaluate(async (dialog) => {
     await Promise.all(
       dialog
@@ -158,6 +163,13 @@ export async function auditDialog(page: Page, info: TestInfo, name: string) {
         const reasons = node.any.map((check) => check.data?.messageKey);
         if (reasons[0] === "elmPartiallyObscuring") {
           expect(reasons).toEqual(["elmPartiallyObscuring"]);
+          if (
+            reviewText &&
+            !node.html.includes('data-slot="dialog-description"')
+          ) {
+            await reviewText(node.html);
+            continue;
+          }
           expect(node.html).toContain('data-slot="dialog-description"');
           const readability = await descriptionReadability(page);
           await info.attach(`${name}-description-readability`, {

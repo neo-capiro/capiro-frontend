@@ -1,0 +1,153 @@
+/* Modules 3.4 inspectors 1175:283070/283890 and manual product3177:112279. */
+.stack {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.panel {
+  composes: panel from "../library/sections.module.css";
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+.panel > button {
+  align-self: flex-start;
+  justify-self: start;
+}
+.panel :global(button[data-slot="button"]) {
+  justify-self: start;
+  align-self: flex-start;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.panel label:not(.toggle) {
+  font-size: 12px;
+  line-height: 18px;
+}
+.panel input:not([type="checkbox"]),
+.panel :global([data-slot="select-trigger"]) {
+  min-height: 44px;
+  height: auto;
+  padding: 11px;
+}
+.panel input,
+.panel textarea,
+.panel :global([data-slot="select-trigger"]) {
+  font-size: 13px;
+  line-height: 20px;
+}
+.panel p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 18px;
+}
+.panel h3 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}
+.panel .toggle input[type="checkbox"] {
+  appearance: none;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 24px;
+  min-height: 24px;
+  padding: 2px;
+  margin: 0;
+  border: 0;
+  border-radius: 12px;
+  background: var(--border);
+  cursor: pointer;
+  box-shadow: none;
+}
+.toggle input::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--card);
+  transition: transform 0.1s;
+}
+.panel .toggle input[type="checkbox"]:checked {
+  background: #416571;
+}
+.toggle input:checked::before {
+  transform: translateX(16px);
+}
+.toggle input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.formatting {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.formatting .toggle {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.panel .formatting .toggle input[type="checkbox"] {
+  flex: none;
+}
+.tree {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.tree li {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.tree button[aria-pressed="true"] {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+.column {
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.panel details > summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.panel details[open] > summary {
+  margin-bottom: 12px;
+}
+.error {
+  color: #8a2828 !important;
+}
+.editor {
+  grid-template-columns: 260px minmax(280px, 1fr) 354px;
+}
+@media (max-width: 1200px) {
+  .editor {
+    grid-template-columns: 220px minmax(280px, 1fr) 300px;
+  }
+}
+@media (max-width: 1000px) {
+  .editor {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

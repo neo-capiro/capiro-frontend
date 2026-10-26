@@ -22,8 +22,7 @@ function ReceivingInspector({
   onOpen: () => void;
   back: ReactNode;
 }) {
-  const { stage, record, pending, unknown, requestedRevision, refresh } =
-    receiver;
+  const { stage, pending, unknown, requestedRevision } = receiver;
   if (unknown)
     return (
       <aside
@@ -46,40 +45,18 @@ function ReceivingInspector({
     );
   if (!stage) return null;
   return (
-    <aside
-      className={styles.inspector}
-      data-design-node={record ? "3156:116229" : "3156:116216"}
-    >
-      <h2>{record ? "Engagement record" : "Staged newsletter"}</h2>
+    <aside className={styles.inspector} data-design-node="3156:116216">
+      <h2>Staged newsletter</h2>
       <p className={styles.metadata}>Saved revision {stage.revision}</p>
-      {record ? (
-        <>
-          <p className={styles.metadata}>Status: {record.status}</p>
-          <p>
-            Showing the returned record. Refresh reads this same record,
-            including its current status.
-          </p>
-          <p className={styles.caption}>
-            Opening does not send email or prepare recipients. Other record
-            activity is separate.
-          </p>
-          <ActionButton className={styles.readAction} onClick={refresh}>
-            Refresh record
-          </ActionButton>
-        </>
-      ) : (
-        <>
-          <p>Review this saved snapshot before opening it in Engagement.</p>
-          <p className={styles.caption}>
-            Opening may reuse an existing draft or create one. It does not
-            prepare recipients or send email.
-          </p>
-          <ActionButton primary disabled={pending} onClick={onOpen}>
-            Open in Engagement
-          </ActionButton>
-          {pending && <p role="status">Opening this saved snapshot…</p>}
-        </>
-      )}
+      <p>Review this saved snapshot before opening it in Engagement.</p>
+      <p className={styles.caption}>
+        Opening may reuse an existing draft or create one. It does not prepare
+        recipients or send email.
+      </p>
+      <ActionButton primary disabled={pending} onClick={onOpen}>
+        Open in Engagement
+      </ActionButton>
+      {pending && <p role="status">Opening this saved snapshot…</p>}
     </aside>
   );
 }
@@ -89,7 +66,7 @@ export function NewsletterReceivingView({
   clientId,
   back,
 }: {
-  destination: { kind: "stage" | "record"; id: string };
+  destination: { kind: "stage"; id: string };
   clientId?: string;
   back: ReactNode;
 }) {

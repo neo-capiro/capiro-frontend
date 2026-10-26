@@ -1892,18 +1892,22 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
     "kind": "function",
     "symbol": "RichBlockControls",
-    "fingerprint": "477a69a1cbced499133e95114a4dea29f64e7c45dd11c661e001f90f2110ed22",
-    "reason": "The existing block-settings function remains a presentation dispatcher for the currently selected block. This delta adds only the image/logo AssetReplaceControl child and its single imageUrl callback. Paged receiving, request lifetime, upload uncertainty and explicit selection are cohesive feature-local owners; draft updates and undo remain in the existing editor/controller. The 100\u2192106 nonblank increase does not add authority, transport or a second draft owner. No split solely for size is warranted.",
-    "reviewedBy": "Codex independent lifecycle_trace",
+    "line": 24,
+    "nonblank": 173,
+    "fingerprint": "095f9854594b366b3237349c02ea1158ae1b0ee1c84681c6179faca4910e2a28",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One current block-control host adds only the existing provider child and optional current saved-document identity. Current manual content/structure/style and existing update/remove owners remain exact after reversing those additions. The shared request/proposal hook retains lifetime responsibility; this host does not implement a second writer. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "f1364e5526b076deccec133ff274a8a5518eb90ba68effb5edaede4908cccc46",
-    "reason": "One existing mounted editor coordinates explicit brand and survey views with the current draft and resets their local view keys on owner replacement. The additive union preserves the reviewed saved-content review, template/section library, conversion action, save recovery and Undo behavior.",
-    "reviewedBy": "Wave 3 Root independent composition reviewer",
+    "line": 44,
+    "nonblank": 393,
+    "fingerprint": "4122ccaa252ab0cd03a954bf2e9a4b6eb920c87aca13e86babad7ede1a7289f5",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor function composes one provider-child identity with its existing current/unfenced history and revision/block key. Existing state and handlers remain exact; request/proposal and block editing responsibilities stay with their current children/owners. The affected explicit-adoption and stale-result browser checks pass. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -1977,11 +1981,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "line": 14,
-    "nonblank": 291,
-    "fingerprint": "e701468f3e0fea219dcd1ad3bd187ebe694b902459e1e65c9c0a9e582543eadf",
-    "reason": "One presentation surface for the existing saved-document controller. The leased additions expose Comments from an existing saved identity and adapt known-ID list/create/read controls. Receipt/recovery/adoption semantics remain in the existing owner; this component adds no transport, journal or policy implementation.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
+    "fingerprint": "0377edb6c78ccdbe4622f552ac98cb65aabbefbc5b52fb64e26d1c68739d943b",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: The existing saved-document action host mounts a separate HTML-check child with saved ID/revision, current readiness and dirty-state inputs, and replaces the obsolete combined generation/send placeholder. It does not implement provider transport, report receiving or a new persistence owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3284,10 +3286,12 @@
     "file": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
     "kind": "function",
     "symbol": "PersonnelDirectory",
-    "fingerprint": "c807490bf373a0c8631f079d52c788a2d7f41a67aa18000a9134c264a67010c1",
-    "reason": "One bounded personnel list owns URL filters, the list query, row selection and table presentation (reviewed at 246 lines on 2026-10-17). 53534db6 adds the verified selected-profile side preview: the read and rendering live in PersonnelPreview and row activation in DataTable; the growth here is the list/preview layout and URL-selected row binding only.",
-    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
-    "reviewedOn": "2026-10-18"
+    "line": 26,
+    "nonblank": 279,
+    "fingerprint": "7daab26fda7898aa518bc3ce86eaad428e143f7209f102a6aa610f815672d4e6",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
@@ -3986,9 +3990,9 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
     "kind": "function",
     "symbol": "TemplateStudio",
-    "fingerprint": "4e03810f77fca5fc544dd08bd8b7a397f9ee5dcd86f8be59380d55eebb94590c",
-    "reason": "One existing template list and action coordinator; domain operations and substantial detail/wizard children stay delegated. Presentation does not justify artificial extraction. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "fingerprint": "c3fc439800e7a5ffa97587f96dc342d61a29cfeec7bba0b0289d63e8d749deef",
+    "reason": "Existing Studio host retains list/detail/wizard and explicit mutation coordination. This delta delegates only the previously inline campaign picker and resets selection on opening; no new write owner or broad domain responsibility.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4168,9 +4172,9 @@
     "file": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
     "kind": "function",
     "symbol": "TemplateSettings",
-    "fingerprint": "23d13552fcc95982059bea3835b792dcff3e167b105a4e5d2d005eb30023da87",
-    "reason": "One metadata form with existing save owner, fields and footer; no second transaction or lifetime owner. Exact independent disposition: W3-FE190-SOURCE-RESPONSIBILITY-REVIEW.md; source and visual acceptance also recorded in W3-FE190-LIBRARY-TEMPLATE-REVIEW.md.",
-    "reviewedBy": "Independent Root Codex, FE190 d1cad36b6ea6b7e2ff66e78a732b5653f7a6b905",
+    "fingerprint": "cef7af9dea6fb020e3ded3e315d8f80566094d25a67bafaa732c94c7db7afbb1",
+    "reason": "One existing metadata form preserves user inputs and consumes the common command owner. Acknowledged destination identity is passed back to the existing detail/list refresh callbacks.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4321,9 +4325,9 @@
     "file": "apps/web/src/features/modules/engagement/newsletter-receiving/useNewsletterReceiver.ts",
     "kind": "function",
     "symbol": "useNewsletterReceiver",
-    "fingerprint": "e93e83e32b502de7738ce80c41250882e9cb023c817348955effa39f54d5ee5d",
-    "reason": "One receiving lifetime owns disposable stage/record reads and explicit-open transient uncertainty. Transport, policy, durable records and rendering remain elsewhere. Exact independent disposition: W3-WS19-FE192-REVIEW.md final correction addendum.",
-    "reviewedBy": "Independent Root m3 review, FE192 013dfc741fa64d43379e3f2306091ca496cc44ae",
+    "fingerprint": "c21dcbf292acaa2b9e6e8cb19ee46e7ff434034dc995d80aea660a7c422ed08f",
+    "reason": "Existing stage-only read/open owner retains uncertain-open fence; the replaced record branch is deleted because NewsletterDelivery now owns that route.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4602,9 +4606,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/AssetFolders.tsx",
     "kind": "function",
     "symbol": "AssetFolders",
-    "fingerprint": "3af93a0cac36235ce69db60d4a421f97578c556a22ceb27c72e07214a2275131",
-    "reason": "One folder-filter and action group delegates reads and changes to existing feature owners; no new authority or mutation transport.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "1c814e2a9742846f356e1fc2283ce599ad250238fe415fe9fcd5d5d062cf35bf",
+    "reason": "FE720 repair 2761c645a0c1ecc3a510ffbeca2091c656b03ac2: one existing folder-selection view conditionally renders its management action row only when the caller supplies a real management callback. The full AssetReplaceControl caller and all its handlers remain byte-identical; BrandLogoPicker retains browse/select/upload responsibility. This capability guard adds no state, writer, policy or no-op action. Reviewed with the exact four-file delta, before/after affected type closure and focused mounted regression in W3-FE720-BRAND-PICKER-REPAIR-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE720 repair source/responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4638,9 +4642,9 @@
     "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDetail.tsx",
     "kind": "function",
     "symbol": "BlueprintDetail",
-    "fingerprint": "040cb6b1ab427390d9fdac6fa5c8d91f9f0469d396202b988eb966aa10fe48b6",
-    "reason": "One Blueprint detail view binds selected versions through public receivers and shows truthful metadata and explicit adoption.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "e157458772394fd152da23fadcb9dcfb261807da41ef1d9f39861e9ea24e6e8c",
+    "reason": "Existing saved Blueprint detail host retains its catalog/adoption behavior and adds the version-content view. The new authoring components and shared writer remain separate owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4656,9 +4660,9 @@
     "file": "apps/web/src/features/modules/workspace/document-templates/DocumentTemplateLibrary.tsx",
     "kind": "function",
     "symbol": "DocumentTemplateLibrary",
-    "fingerprint": "a3f8dbb5c139103f1c60346315e397006465d23ec10e40c723ad0ac5f342633b",
-    "reason": "One catalog view owns local product/row selection and composes the existing query and adoption lifetimes.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "84997246dbc6fc72772a5f9c7676ca5a94195a79c34d34e507fa3a095d69aa7b",
+    "reason": "Existing library host composes the catalog and studio tabs while retaining accepted pin adoption. Feature-local authoring modules handle their own forms; the shared write owner serializes changes across these tabs.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4746,9 +4750,595 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "d5fe70ecfbdd33ab94d9cf357a127f6fe26692e96dd773251c0da66467fc6ef9",
-    "reason": "The existing editor remains the composition point for its document, history, review, library and explicit conversion owners. This union adds the independently reviewed brand and survey entry points and persistent sibling views; those features retain their separate lifecycle and transport owners.",
-    "reviewedBy": "Wave 3 Root independent composition reviewer",
+    "line": 1,
+    "nonblank": 496,
+    "fingerprint": "fb46349c600648deebcdefc0d11f04ed113250b2d83d68f0d2029cf60b596b3b",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor module adds only one current, unfenced saved-document identity prop to the existing revision/block-keyed child. Removing that prop restores the accepted current-base module exactly, preserving library, conversion, brand/survey, manual controls, history, recovery and Undo owners. No new module responsibility is introduced. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/AccountInvitation.tsx",
+    "kind": "function",
+    "symbol": "AccountInvitation",
+    "fingerprint": "c46425b430a4df7c6b83d5572fc86910ba9b87e4765bcb7e04cfc3132edfd11a",
+    "reason": "One saved firm-invitation dialog owns explicit read/dispatch presentation and delegates transport/lifetime to fixed operations and the review action owner. Public receipt binding and canRetry remain authoritative; it does not implement a sender. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterReview.tsx",
+    "kind": "function",
+    "symbol": "ReviewSession",
+    "fingerprint": "55979db1803c93519f691144e0d26dea08121aaacd5d329bce3c5b24201d9e76",
+    "reason": "Existing review composition owns saved preview/comments presentation and delegates reads, collaboration state, dialogs and sanitized HTML. Added role-bound actions do not create another editor, policy owner or save flow. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterSharing.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "dcd0a1c2b0d6e1e16fc56450a9658f6cd3d7c184c2be5f78d3e7d00b8a6ca6ed",
+    "reason": "One feature-local sharing module groups its role vocabulary, reusable person row and owner form. Public team/invitation parsing and the serialized action hook remain separate; the file does not own transport, account sending or global policy. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/NewsletterSharing.tsx",
+    "kind": "function",
+    "symbol": "NewsletterSharing",
+    "fingerprint": "65ed9275b28c7e4983f0d6fec6d980408e6592deefbf19ebf8882890ae4d9c28",
+    "reason": "One owner-facing sharing form binds current people, pending requests and explicit invitation fields. Row rendering is factored; all writes use the common action owner and fixed public receivers. Its length reflects one coherent access-management interaction rather than unrelated domain work. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/ReviewCollaborationDialogs.tsx",
+    "kind": "function",
+    "symbol": "ReviewCollaborationDialogs",
+    "fingerprint": "39876d2d744b87e3e3dfe32d466eb6831df54daf9d323e2c87342b335ce27331",
+    "reason": "One composition switch mounts the selected collaboration dialog and passes captured parent/root/account identities. Field state and requests remain in the individual forms/hooks; splitting the switch would duplicate navigation and lifetime plumbing. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/ThreadNotifications.tsx",
+    "kind": "function",
+    "symbol": "ThreadNotifications",
+    "fingerprint": "f857130af83cee24d5bbf2333ac2284f7f46b4fdbde48b7d45377d29cc82fdbc",
+    "reason": "One known-root notification dialog selects the existing defaults/read operation, binds the returned root and applies explicit user choices. ThreadChoices isolates its list; the dialog owns no email sender or inferred delivery state. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-newsletter-collaboration.ts",
+    "kind": "function",
+    "symbol": "useNewsletterCollaboration",
+    "fingerprint": "95c25f72b572b79793c1ac35ea713cd2688729ffbbfc2960585e29bd52f22f99",
+    "reason": "One mounted collaboration state owner captures selected comment/root, draft notification choices and role/access retirement, then delegates requests to useReviewActions and team loading to useReviewTeam. The coupled retirement invariant should remain together. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-newsletter-review.ts",
+    "kind": "function",
+    "symbol": "useNewsletterReview",
+    "fingerprint": "f88b35b2aa3bf7e331c3ed2ed17fd8fa6142063515c4deb51c18f5e5ed7838c4",
+    "reason": "Existing saved review read owner preserves explicit admission, comments loading and access-loss clearing. The mutation override is a received current projection, not a new document owner or causal receipt. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/review/use-review-actions.ts",
+    "kind": "function",
+    "symbol": "useReviewActions",
+    "fingerprint": "96c841830fc105bb017a920c04505ef799a5546381a2db1646d7d2b9b53a5e02",
+    "reason": "One mounted serialized writer consistently holds pending/unknown state, same-input invitation recovery and actor/access-generation fences across dialogs. Fixed mutations and public parsers are supplied, with no replacement authority, ledger or sender. Independent frozen-source review: W3-WS17-SHARING-COMMENTS-REVIEW.md at d995bff65ab8fb795b033e9ecb9acd71e8c27777. The separate local CSS correction is not approved by this record.",
+    "reviewedBy": "m3_scope, independent WS17 consumer source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/DestinationPicker.tsx",
+    "kind": "function",
+    "symbol": "DestinationPicker",
+    "fingerprint": "f6ea6b461f1f900b800b5adeae530282dddd835e22820667eb04755a2ee20592",
+    "reason": "One destination selection view owns paged Directory choices, current-client contact selection and local manual entry. Fixed operations and Core remain transport and authorization owners; stale replies are discarded.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterDelivery.tsx",
+    "kind": "function",
+    "symbol": "NewsletterDelivery",
+    "fingerprint": "6c58f84daaedb2b0831196fb5e0b31fa5b246d024f93e0b8867050fbfb1bdc2f",
+    "reason": "One existing record-route screen coordinates destination, preview, test and final-send presentation. The hook and adapter own request lifetime and receiving; it does not implement delivery or policy.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterDestinations.tsx",
+    "kind": "function",
+    "symbol": "NewsletterDestinations",
+    "fingerprint": "fea2db3e72a59ec7b5806317d24f1dc8946343684c78751e5f4a04d78df74da3",
+    "reason": "A local recipient/sender/subject form and scoped copy-address dialog prepare an explicit request. Existing fields/modal and fixed request schema are reused; no contact creation or implicit save/send.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterDestinations.tsx",
+    "kind": "function",
+    "symbol": "SelectedDestination",
+    "fingerprint": "f50ecc11079e9d7e219a4415fde2a82cb1a9dd0cc0b567e09117cee6f1175b78",
+    "reason": "A local recipient/sender/subject form and scoped copy-address dialog prepare an explicit request. Existing fields/modal and fixed request schema are reused; no contact creation or implicit save/send.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterPrepared.tsx",
+    "kind": "function",
+    "symbol": "NewsletterPrepared",
+    "fingerprint": "178b1d12551e3aa5d962d7512e9228c7dea7e3a5ddc6eb19446715df816df7d6",
+    "reason": "One immutable per-recipient prepared preview reuses inert SavedNewsletterHtml, existing field/select/action components and explicit test action. Root reviewed corrected primary content-width button against Figma1176:303150.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/NewsletterSendStatus.tsx",
+    "kind": "function",
+    "symbol": "NewsletterSendStatus",
+    "fingerprint": "e3daf9fc126dc6fa176dd2852f5715b027b8834f3eca40e8be6b716e7e13f783",
+    "reason": "One read-only durable status view distinguishes accepted/queued/provider-accepted/unknown outcomes and offers only status refresh.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/delivery-api.ts",
+    "kind": "function",
+    "symbol": "createNewsletterDeliveryApi",
+    "fingerprint": "ee46eb58d19eab35e2cb24155a8f128ed7d230dcc4f2b9f07dd4a23b68f2f2ad",
+    "reason": "One public API adapter binds current record/stage/revision and prepared version set, freshly checks the reviewed mailbox, and delegates effects to existing Core newsletter routes and detached receivers.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/newsletter-delivery/useNewsletterDelivery.ts",
+    "kind": "function",
+    "symbol": "useNewsletterDelivery",
+    "fingerprint": "2615c6f86c6bd021cc2b69b9cce3cf412f57bf7c7eb8c2ad296a170a177ffa40",
+    "reason": "One disposable request lifetime handles current reads, explicit preparation/send and retained URL request recovery. Identity/route changes abort; reload and unknown recovery only read the existing request.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+    "kind": "function",
+    "symbol": "RichStructure",
+    "fingerprint": "8beeccf29f0b854a731eaf22b3bc129305a756d47c4af5f6137a9e57b0454ba1",
+    "reason": "One recursive structure navigation surface invokes typed section/block actions and retains the existing saved-section callbacks.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/BlockPlacement.tsx",
+    "kind": "function",
+    "symbol": "BlockPlacement",
+    "fingerprint": "07a68f18a6f7525f5bbbddcabc82ff507df5e623a97370a46da75c8f99e71c16",
+    "reason": "One block-placement inspector binds current section/column choices and delegates changes to the guarded structural transform.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/DesignStyles.tsx",
+    "kind": "function",
+    "symbol": "DesignStyles",
+    "fingerprint": "c34c492eb9b038d7a60e2dfcc46daca47f0d39852474cb39905e5fc0a0885b87",
+    "reason": "One email-style inspector selects canonical desktop/mobile slots without replacing Brand Kit or document persistence. Numeric typing defect is separately required below; it is not a responsibility split issue.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/ManualContent.tsx",
+    "kind": "function",
+    "symbol": "ProductControls",
+    "fingerprint": "7a497a90ee19510e6240779c943988e66ef06957b5b43233a5baa08e5d0383a1",
+    "reason": "One manual product-list inspector edits/reorders the selected item and leaves fetching, recommendations and saving to existing owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/SocialControls.tsx",
+    "kind": "function",
+    "symbol": "SocialControls",
+    "fingerprint": "c00fcfeed1f5a0465af441302822d125f520ce4357184a3783dcd11b54b465c5",
+    "reason": "One follow/share inspector retains inactive lists and device settings through canonical social helpers; no share/send authority is introduced.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/StyleFields.tsx",
+    "kind": "function",
+    "symbol": "StyleFields",
+    "fingerprint": "08e29a9943632b7b0bb19292be48a8f66a2a2817b5373e4c870e76d310b773ac",
+    "reason": "One reusable projection of supported NewsletterStyle fields retains unknown keys and separates local device selection from authoritative persistence.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/structure.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "db7f1d289efd62222628aca5671ee1f9d07c059b9cb7f9a18b869b526d7828d7",
+    "reason": "One structural transformation suite shares its small fixture and covers fresh identities, source/font preservation, bounds, stale targets and actual public receiver round-trip.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/CampaignPicker.tsx",
+    "kind": "function",
+    "symbol": "CampaignPicker",
+    "fingerprint": "279beea34b684e413339f796a288b5e2bd6d1aab684c7ffd79b89aa990974226",
+    "reason": "One current authorized server-search page and selection UI; the existing scoped query owns cancellation and the parent owns the write. No new cache or paging authority.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
+    "kind": "function",
+    "symbol": "UseTemplate",
+    "fingerprint": "d14fe0664aac12c1f0cbd2f87593724e5f45b533fcc0813b67e6abe4e02a5ec7",
+    "reason": "One explicit Use form captures title/client/variables and delegates to the existing command owner; the duplicate completed receipt was removed. Immutable destination now governs pending access.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateHistory.tsx",
+    "kind": "function",
+    "symbol": "TemplateHistory",
+    "fingerprint": "04457d57e9ce43d5ac53060ca260da506c05bf782cdfb0449b53db82eec345d2",
+    "reason": "One saved-version inspection component owns selection, previous-available comparison and disclosure. Pure comparison/formatting lives in the small separate domain helper; no policy, persistence or current-campaign state is inferred.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c8e3b1d6eeab3d3424b8b90818d0ade8a92659a8fe1f751b64993ba1a1764d6b",
+    "reason": "One saved Blueprint version family groups inspection, complete-draft editing and lifecycle actions; the shared write owner and field editors are separate. Current-access preflight and public receiving remain the existing owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "function",
+    "symbol": "DefinitionRead",
+    "fingerprint": "d1ff80aebc54d174c9e5e653388950fe8b39369ddbdb9bfe9ed26c99d8d159ad",
+    "reason": "One read-only presentation of the saved canonical definition; it neither adapts a draft nor creates authority.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "function",
+    "symbol": "BlueprintDraftEditor",
+    "fingerprint": "1817e5d3d461b0698ec6c6fc1028a28be6d14fa478ababafe8a05eac5b11f9af",
+    "reason": "One complete-definition edit transaction captures the displayed revision, preserves opaque fields, and applies delayed theme results only to current draft state. It delegates field presentation and uses the shared write owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintContent.tsx",
+    "kind": "function",
+    "symbol": "BlueprintContent",
+    "fingerprint": "fe4ffcf0bdb1f4df08c973b78d084400b403e637ebd8efb8dc3111079b424645",
+    "reason": "One saved-version host coordinates read, historical clone, lifecycle and sample views using the existing public parsers and shared write owner; no second persistence or authority mechanism.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintCreate.tsx",
+    "kind": "function",
+    "symbol": "BlueprintCreate",
+    "fingerprint": "71345be929e8d8908e6e4a912d36582573b1f4d403c16c9902996b79c1f3aa03",
+    "reason": "One explicit firm Blueprint creation form captures and validates its request/result before current detail readback; it delegates existing transport and write serialization.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0ed0d5d64af253b1c69b257d2e290592ef95b307359e3e979eeec9fc0dafc961",
+    "reason": "One complete canonical definition form, with named Intake/Policy sections and separate section/theme components. Keeping the typed field composition together preserves optional and opaque values without adding another state owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "IntakeFields",
+    "fingerprint": "21b057bad814efc10935d7873da26118d31e04f68bc691341fb451505b154bf5",
+    "reason": "One typed intake-field editor/render map preserves optional conditions and stable accessible labels. It emits field updates to the single enclosing draft owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "IntakeFields > <anonymous>",
+    "fingerprint": "e7a818e9c42afd0b4144ec9fcdf465debbc39b0ae8be59af8611e6f244a4943d",
+    "reason": "One typed intake-field editor/render map preserves optional conditions and stable accessible labels. It emits field updates to the single enclosing draft owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "PolicyFields",
+    "fingerprint": "ac54796a9672dacb2bd0312d89d96ac39b7611c05be4b49e5f2b156ae2476050",
+    "reason": "One canonical policy/rules field group preserves exact nested values; its JSX and update paths share one draft responsibility.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintDefinitionFields.tsx",
+    "kind": "function",
+    "symbol": "BlueprintDefinitionFields",
+    "fingerprint": "47d968c89eceeec8a2d3cf8526310b1b1e0071b563d45d172cfa92cd7a304401",
+    "reason": "One composition of complete-definition field groups. The theme callback forwards only copied settings to the current-state edit owner; no duplicated request, authority or storage responsibility.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintSectionFields.tsx",
+    "kind": "function",
+    "symbol": "BlueprintSectionFields",
+    "fingerprint": "d15554a92681662737fde91222bb19a50472dcabb89447001c8a7b7d7cb7358c",
+    "reason": "One canonical section-list editor owns explicit add/remove/reorder and native presentation; it emits changes to the enclosing definition and retains stable section identity.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BlueprintThemePicker.tsx",
+    "kind": "function",
+    "symbol": "BlueprintThemePicker",
+    "fingerprint": "648188ded36e5a6d3e00c76c8cfdf194bf3c702eb5e11da53a429920c092888d",
+    "reason": "One explicit published-theme selection/read composition binds captured version/hash and current lifetime. It returns only settings, reports pending to the draft owner, and does not establish a pin or overwrite the full draft.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/BrandAssetStudio.tsx",
+    "kind": "function",
+    "symbol": "BrandAssetStudio",
+    "fingerprint": "b4cce6fa1b5e32675b8ef87a5480b640e6edbbb52dc3e132cf1617cbbaef5cf2",
+    "reason": "One brand-asset library host composes existing ticket/upload/confirm and deliberate registration/removal. The canonical attachment and brand owners retain access, readiness and reference checks; this component introduces no sender, queue or policy owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0e53ee16582716f10039518efb6059498f53cdc7064e8b83185a56184e153a9d",
+    "reason": "One theme/version lifecycle family retains complete opaque settings through create, inspect, edit, publish and retire views. Named subcomponents and the common write owner separate presentation from request serialization.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeCreate",
+    "fingerprint": "f24c8264a7a2666c6d2bcd1287e1d3c6367914235b14d4499f7b5a2f0f7e0fce",
+    "reason": "One theme creation form captures explicit values and verifies the actual created parent before readback, using the common write owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeVersionView",
+    "fingerprint": "a4fac9a2b163138fa7a4459383424a45dba18d4aed75d17d5a4ccd60aa86b2a9",
+    "reason": "One selected saved theme version view composes read/edit/lifecycle controls with captured identity/hash and lossless settings.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeDetail",
+    "fingerprint": "66a45cd20cdee472f7a8cb1883130bf4f538146a560dc591038f645b22bb5585",
+    "reason": "One theme parent detail and version-selection host; current readback and children own their distinct presentation without adding state persistence.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/document-templates/ThemeStudio.tsx",
+    "kind": "function",
+    "symbol": "ThemeStudio",
+    "fingerprint": "652d36e1e109e4b0900a864af531a45e638006a04c53774bfd5169e240ac9849",
+    "reason": "One theme catalog host controls current selection and explicit creation, reusing the scoped query and common write owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/StockImageControl.tsx",
+    "kind": "function",
+    "symbol": "StockImageControl",
+    "fingerprint": "a7c57b819b78e71571473a3d34f97e8dde1e433216c5eddb6f4f47dc0f3c49b5",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One stock dialog presents selection, import uncertainty and current-detail review, then explicitly inserts through the existing caller. State and transport remain in the stock hook; rendering these mutually exclusive states together preserves the single import fence. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/StockImageControl.tsx",
+    "kind": "function",
+    "symbol": "StockSearch",
+    "fingerprint": "3705f16c71b2665391633ef2786bd00bb1d2e4fcca2222503682a1b59dfca61d",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One explicit-search panel presents fixed-page results, selected-source attribution and paging/detail actions. Search intent and current results come from its hook; this component adds no automatic import, authorization or alternate query owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/use-stock-images.ts",
+    "kind": "function",
+    "symbol": "useStockImages",
+    "fingerprint": "9fe8d332bb7214210cae194c060302fcd6fc958f7e472ea97cf1db3a82b217d6",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One feature-local hook owns stock search selection and the pending/proposed/unknown import lifecycle across dialog close. Existing query/mutation hooks own transport, cancellation and replacement; insertion still depends on requested-ID-bound current asset details. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/AltTextTool.tsx",
+    "kind": "function",
+    "symbol": "AltTextTool",
+    "fingerprint": "a023ba77fdba0c66c608723b13332576bd836383163542afac79720832f9a808",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One source-to-proposal dialog binds the selected image/file generation and admits only a separate alternative-text update. Shared proposal state, multipart transport and image-source receiving are reused; image, link and style remain with the existing block owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/HtmlCheckTool.tsx",
+    "kind": "function",
+    "symbol": "HtmlCheck",
+    "fingerprint": "b749cb17234f4089a6ab185af5a7af84c1c223a0a4a51b76306ee9f68f3166d2",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One saved-revision report view captures the explicit sandbox request, displays inert report data and distinguishes saved from unsaved content. It uses shared proposal/transport owners and does not add delivery, rendering or persistence responsibility. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/RefineImageTool.tsx",
+    "kind": "function",
+    "symbol": "RefineImageTool",
+    "fingerprint": "3d04773c202ff31406ce51823823fb2aff09550e1563a6874a4bb1b3a8bdce9c",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One image-refinement request dialog binds source, instructions and supported count to its proposal. The separate result child owns current-detail review; this function reuses source selection, proposal lifetime and multipart transport rather than duplicating image-library persistence. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/VideoThumbnailTool.tsx",
+    "kind": "function",
+    "symbol": "VideoThumbnailTool",
+    "fingerprint": "b3dca183b6a17678e5e717457654e019d98f65184aa09488e390c6d116314e2c",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One video source/proposal flow captures canonical provider/source identity, displays the saved thumbnail and requires explicit adoption through the existing block update. It neither implements downloading nor creates a second asset or authorization owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/WritingTool.tsx",
+    "kind": "function",
+    "symbol": "WritingTool",
+    "fingerprint": "86aab7d0224e4bccff465026b63d15b30db71b118ea2f98ee464b25f0fb54f14",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One writing dialog keeps explicit source/instructions, pending or unknown state and plain-text proposal adoption together. The common proposal hook and existing editor/Undo owner perform lifetime and mutation work; this view does not add automatic fetching, markup execution or saving. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/LinkPreviewTool.tsx",
+    "kind": "function",
+    "symbol": "LinkPreviewTool",
+    "line": 21,
+    "nonblank": 147,
+    "fingerprint": "d37700209b29d5dcb59fe5af69498b8bcc4907c4b359d66e58834c7627ce2328",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One explicit link-preview dialog presents source input, pending/unknown/proposed outcomes and separate adoption. Duplicate manual fields are removed: AppControls alone edits them. The proposal uses the same empty-app defaults and source-version fence, preserves display choices/unknown nested fields on explicit update, and reuses current mutation/Undo owners. Keeping its mutually exclusive dialog states together does not add another state or transport owner. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/CommitteeDirectory.tsx",
+    "kind": "function",
+    "symbol": "CommitteeDirectory",
+    "line": 14,
+    "nonblank": 149,
+    "fingerprint": "26c6d1f463b83753d74c52fe3b16dfeac41f3724256c398af3f7fe50c2e30cdd",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
+    "kind": "function",
+    "symbol": "CongressionalContacts",
+    "line": 25,
+    "nonblank": 231,
+    "fingerprint": "a340f0665f0daec0dfaad20df669fc83e1897b1190e4e44a4d13e815335807ea",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/StateDirectory.tsx",
+    "kind": "function",
+    "symbol": "StateDirectory",
+    "line": 13,
+    "nonblank": 206,
+    "fingerprint": "726365d1118f6e2b1143050cbdc80bec2234f591c58e2c6d4a0ca9ab9278ede2",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
+    "kind": "function",
+    "symbol": "TemplateCard",
+    "fingerprint": "fc208106983f1b123ca2d6e1d24df850e21d30b3afe77fb76ba9dec7c624a28b",
+    "reason": "One existing catalog card renders capability-controlled actions. The change only consumes the shared write fence; it does not own a mutation.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9d0ec837beda791ffb2b5c28e5619c1c676dcae07efd090b1ddf11f77f22170a",
+    "reason": "One Studio host composes catalog, dialog selection and list refresh under the common command provider; canonical query, recovery, forms and transport remain separate owners. No threshold-driven extraction is needed.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "kind": "function",
+    "symbol": "TemplateStudioView",
+    "fingerprint": "2694373e7eba769f03b1a6f7ed66face8a64459980f64cfff62ebf87097c3fca",
+    "reason": "One Studio host composes catalog, dialog selection and list refresh under the common command provider; canonical query, recovery, forms and transport remain separate owners. No threshold-driven extraction is needed.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateWizard.tsx",
+    "kind": "function",
+    "symbol": "TemplateWizard",
+    "fingerprint": "cbc621d2e22b8f82efae7cd8d75ec440516a61a98b0afc22bf4648491a9c1cf6",
+    "reason": "One existing staged template form owns the complete edited specification and presents partial metadata/draft outcomes. Durable command handling is delegated to the common owner rather than duplicated in its steps.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateRecoveryPanel.tsx",
+    "kind": "function",
+    "symbol": "TemplateRecoveryPanel",
+    "fingerprint": "c5d5f6c9101a6a600f5bf569463b897ea8eb52263f7b692abfb7ad814231d0b6",
+    "reason": "One projection of the retained domain command distinguishes pending, partial and complete outcomes and exposes only supported explicit actions. The local Figma correction is required separately; it does not require another state owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/useTemplateCommands.tsx",
+    "kind": "function",
+    "symbol": "useCommands",
+    "fingerprint": "95c469d0242f04f4385f69b66ae8b1e3168249552fdb827b707e8306b0ba438b",
+    "reason": "One actor-scoped domain command coordinator composes the existing encrypted journal, retained-intent lifetime and canonical reads with sequential dispatch. It is the single write owner for this Studio, not a second journal or transport.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/templates/TemplateProvenance.tsx",
+    "kind": "function",
+    "symbol": "TemplateProvenance",
+    "fingerprint": "45afdff58d0ebb72c65dacbe5fd36a0d612b7c0c34bd63a954c86f8a72506b89",
+    "reason": "One current-access canonical receipt dialog with four data-driven categories and local display state. Existing query, modal, journal and operation owners remain separate.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]

@@ -12,7 +12,7 @@ export function AssetDetails({
   history,
 }: {
   picker: AssetPickerState;
-  history: () => void;
+  history?: () => void;
 } & AssetManagementLauncher) {
   const id = useId();
   if (picker.detailLoading) return <p role="status">Loading image details…</p>;
@@ -49,25 +49,33 @@ export function AssetDetails({
             to choose a current image.
           </p>
         )}
-        <div className={styles.actions}>
-          <ActionButton
-            data-asset-focus="renameImage"
-            disabled={disabled || !item.currentRevision}
-            onClick={() => manage({ kind: "renameImage", image: item })}
-          >
-            Rename image
-          </ActionButton>
-          <ActionButton
-            data-asset-focus="deleteImage"
-            disabled={disabled || !item.currentRevision}
-            onClick={() => manage({ kind: "deleteImage", image: item })}
-          >
-            Delete image
-          </ActionButton>
-          <ActionButton data-asset-focus="history" onClick={history}>
-            Revision History
-          </ActionButton>
-        </div>
+        {(manage || history) && (
+          <div className={styles.actions}>
+            {manage && (
+              <>
+                <ActionButton
+                  data-asset-focus="renameImage"
+                  disabled={disabled || !item.currentRevision}
+                  onClick={() => manage({ kind: "renameImage", image: item })}
+                >
+                  Rename image
+                </ActionButton>
+                <ActionButton
+                  data-asset-focus="deleteImage"
+                  disabled={disabled || !item.currentRevision}
+                  onClick={() => manage({ kind: "deleteImage", image: item })}
+                >
+                  Delete image
+                </ActionButton>
+              </>
+            )}
+            {history && (
+              <ActionButton data-asset-focus="history" onClick={history}>
+                Revision History
+              </ActionButton>
+            )}
+          </div>
+        )}
       </Panel>
     </div>
   );
