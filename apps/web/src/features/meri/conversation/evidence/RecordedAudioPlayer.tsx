@@ -1,0 +1,95 @@
+"use client";
+import { useEffect, useMemo, useState } from "react";
+import { MediaPlayer, MediaProvider, isAudioProvider } from "@vidstack/react";
+import {
+  MediaController,
+  MediaControlBar,
+  MediaPlayButton,
+  MediaMuteButton,
+  MediaTimeRange,
+  MediaTimeDisplay,
+  MediaPlaybackRateButton,
+} from "media-chrome/react";
+import { createMediaStore } from "media-chrome/media-store/media-store";
+import { recordingTime, type HearingPlayback } from "./hearing-media";
+import styles from "./hearing-media.module.css";
+
+/** Vidstack owns the provider; Media Chrome controls its actual audio element. */
+export default function RecordedAudioPlayer({
+  playback,
+  positionMs,
+  onUnavailable,
+}: {
+  playback: HearingPlayback;
+  positionMs: number;
+  onUnavailable: () => void;
+}) {
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [currentTime, setCurrentTime] = useState(
+    (positionMs - playback.startMs) / 1000,
+  );
+  const source = useMemo(
+    () => ({ src: playback.url, type: "audio/wav" }),
+    [playback.url],
+  );
+  const store = useMemo(
+    () =>
+      createMediaStore({
+        options: {
+          noVolumePref: true,
+          noMutedPref: true,
+          noSubtitlesLangPref: true,
+        },
+      }),
+    [],
+  );
+  useEffect(() => {
+    store.dispatch({ type: "mediaelementchangerequest", detail: audio });
+    return () => {
+      audio?.pause();
+      store.dispatch({ type: "mediaelementchangerequest", detail: undefined });
+    };
+  }, [audio, store]);
+  return (
+    <MediaPlayer
+      title="Retained hearing audio"
+      src={source}
+      viewType="audio"
+      streamType="on-demand"
+      load="eager"
+      preload="metadata"
+      currentTime={(positionMs - playback.startMs) / 1000}
+      keyDisabled
+      onProviderSetup={(provider) => {
+        if (isAudioProvider(provider)) setAudio(provider.audio);
+      }}
+      onTimeUpdate={(time) => setCurrentTime(time.currentTime)}
+      onError={onUnavailable}
+      className={styles.player}
+    >
+      <MediaProvider />
+      <MediaController
+        audio
+        noHotkeys
+        mediaStore={store}
+        className={styles.controls}
+      >
+        <MediaControlBar className={styles.bar}>
+          <MediaPlayButton />
+          <MediaTimeRange className={styles.seek} />
+          <MediaTimeDisplay showDuration />
+          <MediaMuteButton />
+          <MediaPlaybackRateButton />
+        </MediaControlBar>
+      </MediaController>
+      <p>
+        Recording position:{" "}
+        {recordingTime(
+          playback.startMs +
+            Math.min(currentTime * 1000, playback.endMs - playback.startMs),
+        )}
+        . Controls show time within this segment.
+      </p>
+    </MediaPlayer>
+  );
+}

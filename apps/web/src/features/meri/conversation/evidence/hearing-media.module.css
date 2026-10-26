@@ -1,0 +1,61 @@
+.recording {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.recording h3,
+.recording p {
+  margin: 0;
+}
+.recording > button {
+  justify-self: start;
+}
+.ranges {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.ranges li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.player {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.controls {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  --media-background-color: var(--background);
+  --media-control-background: var(--background);
+  --media-control-hover-background: var(--muted);
+  --media-primary-color: var(--foreground);
+  --media-secondary-color: var(--background);
+  --media-font-family: inherit;
+}
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.seek {
+  flex: 1 1 120px;
+  min-width: 80px;
+}
+@media (max-width: 600px) {
+  .seek {
+    order: -1;
+    flex-basis: 100%;
+  }
+}

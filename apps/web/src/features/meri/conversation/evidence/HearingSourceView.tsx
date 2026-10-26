@@ -5,6 +5,7 @@ import type { ConversationReads } from "../../../../shared/meri-conversations/cu
 import { useCurrentRead } from "./useCurrentRead";
 import { SourceReadState } from "./SourceReadState";
 import { HearingSourceDetail } from "./HearingSourceDetail";
+import { HearingMediaView } from "./HearingMediaView";
 export function HearingSourceView({
   event,
   reads,
@@ -18,7 +19,19 @@ export function HearingSourceView({
     [reads, event.binding.runId, event.eventId],
   );
   const result = useCurrentRead(event.eventId, read);
-  if (result.value) return <HearingSourceDetail value={result.value} />;
+  if (result.value)
+    return (
+      <HearingSourceDetail
+        value={result.value}
+        media={
+          <HearingMediaView
+            event={result.value.event}
+            reads={reads}
+            onSourceInvalidated={result.reload}
+          />
+        }
+      />
+    );
   return (
     <SourceReadState {...result} title="Hearing record" page="hearing record" />
   );
