@@ -1,4 +1,5 @@
 import { expect, type Page, type Route } from "@playwright/test";
+import { fileURLToPath } from "node:url";
 import {
   createNewsletterLayout,
   defaultNewsletterConfig,
@@ -48,6 +49,20 @@ type Observed = {
 /** Synthetic owner responses only; production parsers and lifecycle remain mounted. */
 export async function documentFixture(page: Page) {
   await onlyLocalRequests(page);
+  // Reused runtime junctions sit outside Vite's development allow-list.
+  // The fixture serves the same bundled font without changing the shared server.
+  if (process.env.CAPIRO_BROWSER_TEST_DEV === "1")
+    await page.route("**/Geist-Variable.woff2*", (route) =>
+      route.fulfill({
+        path: fileURLToPath(
+          new URL(
+            "../../../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
+            import.meta.url,
+          ),
+        ),
+        contentType: "font/woff2",
+      }),
+    );
   await operationFixtures(page, {
     ...moduleRouteFixtures,
     "clients.list": [client, otherClient],

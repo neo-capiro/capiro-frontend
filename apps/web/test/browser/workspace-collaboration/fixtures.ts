@@ -1,8 +1,5 @@
 import { expect, type Page } from "@playwright/test";
-import {
-  onlyLocalRequests,
-  testIdentity,
-} from "../../../../../../test/browser/fixtures";
+import { onlyLocalRequests, testIdentity } from "../fixtures";
 
 export const draftId = "d3000000-0000-4000-8000-000000000001";
 export const invitationId = "d3000000-0000-4000-8000-000000000002";

@@ -13,6 +13,7 @@ import type { ManualDraftInput } from "../prospects/manual-draft";
 import { SectionPreview } from "../rich-document/SectionPreview";
 import { manualSaveModel, type OrdinarySaveScope } from "./ordinary-save";
 import { useOrdinaryDraftSave } from "./useOrdinaryDraftSave";
+import styles from "../ordinary-presentation.module.css";
 
 export type OrdinarySave = ReturnType<
   typeof useOrdinaryDraftSave<ManualDraftInput>
@@ -102,13 +103,21 @@ export function OrdinarySaveRecovery({
 }) {
   const unknown = save.retained && !save.retained.outcome;
   return (
-    <section aria-label="Document save recovery">
+    <section
+      className={styles.saveRecovery}
+      aria-label="Document save recovery"
+    >
+      <h2>
+        {unknown && !save.otherRequest && !save.pending
+          ? "Save unconfirmed"
+          : "Document save"}
+      </h2>
       {save.error && <p role="alert">{save.error}</p>}
       {save.message && <p role="status">{save.message}</p>}
       {unknown && !save.otherRequest && (
         <p role="status">
-          Save unconfirmed. Your submitted edits are retained. No automatic
-          retry will run. Reading current content cannot confirm this request.
+          Your submitted edits are retained. No automatic retry will run.
+          Reading current content cannot confirm this request.
         </p>
       )}
       {save.otherRequest && (
@@ -124,34 +133,38 @@ export function OrdinarySaveRecovery({
           retained until current content is reconciled.
         </p>
       )}
-      <ActionButton
-        disabled={save.pending}
-        onClick={() => void save.readCurrent()}
-      >
-        Read current saved content
-      </ActionButton>
-      {unknown && !save.otherRequest && (
+      <div className={styles.actions}>
         <ActionButton
           disabled={save.pending}
-          onClick={() => void save.replay()}
+          onClick={() => void save.readCurrent()}
         >
-          Retry exact original save
+          Read current saved content
         </ActionButton>
-      )}
+        {unknown && !save.otherRequest && (
+          <ActionButton
+            disabled={save.pending}
+            onClick={() => void save.replay()}
+          >
+            Retry exact original save
+          </ActionButton>
+        )}
+      </div>
       {save.readback && (
-        <details open>
+        <details className={styles.readback} open>
           <summary>Current saved content — separate from your edits</summary>
-          <h2>{save.readback.draft.docTitle}</h2>
-          {children ??
-            Object.entries(save.readback.draft.config.sectionContent ?? {}).map(
-              ([name, content]) => (
+          <div className={styles.readbackContent}>
+            <h2>{save.readback.draft.docTitle}</h2>
+            {children ??
+              Object.entries(
+                save.readback.draft.config.sectionContent ?? {},
+              ).map(([name, content]) => (
                 <section key={name}>
                   <h3>{name}</h3>
                   <SectionPreview value={content} />
                 </section>
-              ),
-            )}
-          <p>
+              ))}
+          </div>
+          <p className={styles.qualifier}>
             {children
               ? "This view shows the saved newsletter fields."
               : "This view shows supported sections only. Other saved fields remain untouched."}
@@ -159,7 +172,7 @@ export function OrdinarySaveRecovery({
         </details>
       )}
       {save.canResolve && (
-        <div>
+        <div className={styles.actions}>
           <ActionButton
             disabled={save.pending}
             onClick={() => void save.resolve("adopt")}

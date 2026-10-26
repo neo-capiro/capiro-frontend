@@ -1,0 +1,80 @@
+{
+  "base": "1b676415f640ba46d6e097dfa4dc2ef205e00933",
+  "unit": {
+    "exit": 0,
+    "passed": 98,
+    "files": 5,
+    "historyAfterFinalAccessibility": {
+      "exit": 0,
+      "passed": 24
+    }
+  },
+  "browser": {
+    "development": true,
+    "fullFocused": {
+      "exit": 0,
+      "passed": 42,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "affectedHistoryAfterFinalAccessibility": {
+      "exit": 0,
+      "passed": 2
+    },
+    "earlierUnchangedExport": {
+      "passed": 8
+    },
+    "screenshots": 17,
+    "axe": {
+      "ownedRegionScans": 8,
+      "violations": 0,
+      "historyIncompleteRules": [
+        "color-contrast: arrow glyph and partially clipped scroll content",
+        "label-content-name-mismatch: shared close glyph"
+      ],
+      "disabledRules": []
+    }
+  },
+  "typescript": {
+    "introduced": 0,
+    "head": 1,
+    "base": 1,
+    "scope": "Touched roots and dependency graph, exact base file overlay; no emit",
+    "inherited": "workspace-newsletter-staging.ts TS2339 projectionVersion absent from installed public contract"
+  },
+  "lint": {
+    "exit": 0,
+    "scope": "Touched TypeScript from apps/web"
+  },
+  "format": {
+    "exit": 0
+  },
+  "diffCheck": {
+    "exit": 0
+  },
+  "investigation": {
+    "historyLabels": "Initial axe label-content-name-mismatch corrected by including visible dates in accessible names; arrow given a valid image role",
+    "pendingOutcome": "Initial 41-case run: 35 passed / 6 failed while label appeared before submission completed; base reproduces lost-response witness; corrected existing pending-state label and all 42 cases pass"
+  },
+  "resources": {
+    "port": 5323,
+    "listener": false,
+    "baseCheckout": "C:/dev/w3-ordinary-ui-base",
+    "baseClean": true
+  },
+  "notRun": [
+    "install",
+    "build",
+    "pack",
+    "full repository checks",
+    "cloud/database/provider access",
+    "merge",
+    "deployment",
+    "live acceptance"
+  ],
+  "independentReviewRequired": [
+    "source/visual",
+    "changed size fingerprints",
+    "coordinated PR189 host composition"
+  ]
+}

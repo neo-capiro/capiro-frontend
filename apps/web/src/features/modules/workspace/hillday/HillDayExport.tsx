@@ -1,46 +1,76 @@
 "use client";
 
 import { useState } from "react";
-import type { HillDayDocument } from "../../../../shared/capiro/operations/workspace-schemas";
-import {
-  ActionButton,
-  Field,
-  Modal,
-  SelectInput,
-} from "../../../../shared/module-ui";
-import styles from "../workspace.module.css";
+import { ActionButton, Field, Modal, SelectInput } from "@/shared/module-ui";
 import { useHillDayExport } from "./useHillDayExport";
+import type { HillDayExportScope } from "./hillday-export-recovery";
+import styles from "./hillday-presentation.module.css";
 
-type Props = { document: HillDayDocument; onClose: () => void };
-
+type Props = { scope: HillDayExportScope; onClose: () => void };
 export function HillDayExport(props: Props) {
-  return (
-    <ExportDialog
-      key={`${props.document.id}:${props.document.client.id}`}
-      {...props}
-    />
-  );
+  return <ExportDialog key={JSON.stringify(props.scope)} {...props} />;
 }
-
-function ExportDialog({ document, onClose }: Props) {
+function ExportDialog({ onClose, scope }: Props) {
   const [pageSize, setPageSize] = useState<"letter" | "a4">("letter");
-  const state = useHillDayExport(document.id);
-  const busy = state.creating || state.checking || state.downloading;
+  const state = useHillDayExport(scope);
+  const ready = state.receipt?.status === "ready";
+  const queued = state.creating || state.receipt?.status === "queued";
+  const failed = state.receipt?.status === "failed";
+  const held = state.known || !!state.error;
+  const title = ready
+    ? "PDF ready"
+    : queued
+      ? "Export in progress"
+      : failed
+        ? "PDF generation failed"
+        : "Export unconfirmed";
   return (
     <Modal
       open
+      className={styles.exportModal}
       onOpenChange={(open) => {
         if (!open) onClose();
       }}
-      title="Export Hill Day Schedule"
-      description="Create a PDF from the current saved document."
+      title="Export saved PDF"
+      description={
+        ready
+          ? "Download the original saved PDF for this request."
+          : held
+            ? "The original request is retained. Its outcome is not confirmed."
+            : "Create a PDF from the current saved document."
+      }
       footer={
         <>
-          <ActionButton onClick={onClose}>Close</ActionButton>
-          {!state.known && (
+          <ActionButton className={styles.button} onClick={onClose}>
+            Close
+          </ActionButton>
+          {ready ? (
             <ActionButton
+              className={styles.button}
               primary
-              disabled={state.creating || !!state.createError}
+              disabled={!state.canDownload || state.pending}
+              onClick={() => void state.download()}
+            >
+              {state.downloading ? "Downloading…" : "Download PDF"}
+            </ActionButton>
+          ) : held ? (
+            <ActionButton
+              className={styles.button}
+              primary
+              disabled={state.pending || state.loading}
+              onClick={() => void state.refresh()}
+            >
+              {state.creating
+                ? "Generating…"
+                : state.checking
+                  ? "Checking…"
+                  : "Check status"}
+            </ActionButton>
+          ) : (
+            <ActionButton
+              className={styles.button}
+              primary
+              disabled={!state.ready || state.pending}
               onClick={() => void state.generate(pageSize)}
             >
               {state.creating ? "Generating…" : "Generate PDF"}
@@ -49,13 +79,17 @@ function ExportDialog({ document, onClose }: Props) {
         </>
       }
     >
-      <div className={styles.form}>
-        <strong>{document.name}</strong>
+      <div
+        className={styles.exportBody}
+        data-design-node={
+          ready ? "3146:116036" : held ? "3148:134123" : "3146:115992"
+        }
+      >
         <Field label="Page size" htmlFor="hillday-export-size">
           <SelectInput
             id="hillday-export-size"
-            value={pageSize}
-            disabled={state.known || busy || !!state.createError}
+            value={state.pageSize ?? pageSize}
+            disabled={held || !state.ready || state.pending}
             onValueChange={(value) => setPageSize(value as "letter" | "a4")}
             options={[
               { value: "letter", label: "US Letter" },
@@ -63,66 +97,59 @@ function ExportDialog({ document, onClose }: Props) {
             ]}
           />
         </Field>
-        {state.createError && (
-          <p role="alert" className={styles.error}>
-            {state.createError.message} No export receipt was received. Creation
-            may have completed; this view cannot recover an unknown export ID.
-          </p>
-        )}
-        {state.checking && <p role="status">Checking export status…</p>}
-        {state.error && (
-          <p role="alert" className={styles.error}>
-            {state.error}
-          </p>
-        )}
-        {state.receipt && (
-          <div className={styles.notice}>
-            <strong role="status">
-              {state.receipt.status === "queued"
-                ? "Preparing PDF…"
-                : state.receipt.status === "failed"
-                  ? "PDF generation failed"
-                  : "PDF ready"}
-            </strong>
-            <p>{state.receipt.error ?? state.receipt.filename}</p>
-            {state.receipt.status === "ready" && (
+        {held && (
+          <div className={styles.resultCard}>
+            <strong role="status">{title}</strong>
+            {ready ? (
               <>
-                <p>
+                <p>{state.receipt?.filename}</p>
+                <p className={styles.caption}>
                   {state.expired
                     ? "Download link expired. Refresh it to download this export."
-                    : state.receipt.url && state.receipt.expiresAt
+                    : state.receipt?.url && state.receipt.expiresAt
                       ? `Download link expires ${new Date(state.receipt.expiresAt).toLocaleString()}.`
-                      : "A download link is unavailable. Retry status when export signing is available."}
+                      : "A download link is unavailable. Check status when signing is available."}
                 </p>
                 <ActionButton
-                  primary
-                  disabled={!state.canDownload || busy}
-                  onClick={() => void state.download()}
+                  className={styles.button}
+                  disabled={state.pending}
+                  onClick={() => void state.refresh()}
                 >
-                  {state.downloading ? "Downloading…" : "Download PDF"}
+                  Refresh download link
                 </ActionButton>
               </>
+            ) : (
+              <>
+                <p>
+                  {queued
+                    ? "The original request is still being prepared."
+                    : failed
+                      ? (state.receipt?.error ??
+                        "The renderer reported a failure.")
+                      : "Checking status looks up the original request. It does not create another PDF."}
+                </p>
+                {!queued && !failed && (
+                  <p className={styles.caption}>
+                    An unavailable or absent result does not confirm that no
+                    export occurred.
+                  </p>
+                )}
+              </>
+            )}
+            {state.error && <p role="alert">{state.error}</p>}
+            {state.checking && (
+              <p role="status" className={styles.caption}>
+                Checking export status…
+              </p>
             )}
           </div>
         )}
-        {state.known && (
-          <ActionButton disabled={busy} onClick={state.refresh}>
-            {state.receipt?.status === "ready"
-              ? "Refresh download link"
-              : "Retry status"}
-          </ActionButton>
-        )}
-        {state.downloadError && (
-          <p role="alert" className={styles.error}>
-            {state.downloadError}
-          </p>
-        )}
-        {state.known && (
-          <p className={styles.muted}>
-            Status and link refresh reuse this export. Keep this dialog open to
-            recover its receipt; closing or reloading clears it from this view.
-          </p>
-        )}
+        {state.loading && <p role="status">Reading saved export request…</p>}
+        <p className={styles.caption}>
+          This request is retained across closing and reloading. Use Check
+          status to look for its original saved PDF. No replacement is
+          generated.
+        </p>
       </div>
     </Modal>
   );

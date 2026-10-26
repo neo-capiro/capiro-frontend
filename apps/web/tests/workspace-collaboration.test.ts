@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   workspaceCollaboratorOperations as people,
   collaboratorEmailReceipt,
-} from "./workspace-collaborators";
-import { workspaceNotificationOperations as notifications } from "./workspace-notifications";
+} from "../src/shared/capiro/operations/workspace-collaborators";
+import { workspaceNotificationOperations as notifications } from "../src/shared/capiro/operations/workspace-notifications";
 
 const draftId = "d3000000-0000-4000-8000-000000000001";
 const invitationId = "d3000000-0000-4000-8000-000000000002";
@@ -31,10 +31,10 @@ describe("ordinary collaboration frozen receivers", () => {
         },
       ],
     });
-    expect(result.collaborators[1].status).toBe("pending");
+    expect(result.collaborators[1]!.status).toBe("pending");
     expect(
       people["workspace.collaborator.remove"].request.safeParse({
-        params: { draftId, id: result.collaborators[0].id },
+        params: { draftId, id: result.collaborators[0]!.id },
       }).success,
     ).toBe(false);
     expect(

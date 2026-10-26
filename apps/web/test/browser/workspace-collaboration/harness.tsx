@@ -1,10 +1,10 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { CapiroDataProvider } from "../../../../../shared/capiro/CapiroBoundary";
-import { WorkspaceCollaboratorsPanel } from "../WorkspaceCollaboratorsPanel";
-import { WorkspaceScreen } from "../../WorkspaceScreen";
-import "../../../../../app/globals.css";
-import "../../../../../../test/browser/font.css";
+import { CapiroDataProvider } from "../../../src/shared/capiro/CapiroBoundary";
+import { WorkspaceCollaboratorsPanel } from "../../../src/features/modules/workspace/collaboration/WorkspaceCollaboratorsPanel";
+import { WorkspaceScreen } from "../../../src/features/modules/workspace/WorkspaceScreen";
+import "../../../src/app/globals.css";
+import "../font.css";
 
 const firstDraft = "d3000000-0000-4000-8000-000000000001";
 function Fixture() {

@@ -2,8 +2,8 @@
 
 `WorkspaceCollaboratorsPanel({ draftId })` renders the People with access entry
 and dialog for an existing saved draft. It resolves `me.read` and the canonical
-Workspace people list; a host prop never establishes authority. The ordinary
-draft owner must mount this component in its actions before this slice merges.
+Workspace people list; a host prop never establishes authority. WorkspaceDraft
+mounts it once for ordinary saved drafts using the current saved draft ID.
 `WorkspaceInvitationEntry` is mounted in WorkspaceScreen and opens the independent
 `WorkspaceInvitationInbox`, so a pending invitee needs no draft read to accept.
 
@@ -28,9 +28,9 @@ were read with the design-to-code skill. Existing Modal, Select, Field and Butto
 components are reused, with local responsive card geometry. No static assets.
 
 Focused fixed-operation tests are in
-`shared/capiro/operations/workspace-collaboration.test.ts`; mounted fixtures are
-in `test/`. They mount the real components, CapiroDataProvider and fixed-operation
-HTTP client; only loopback HTTP responses/session changes are synthetic. The
+`apps/web/tests/workspace-collaboration.test.ts`; mounted fixtures are
+in `apps/web/test/browser/workspace-collaboration/`. They mount the real components,
+CapiroDataProvider and fixed-operation HTTP client; only loopback HTTP responses/session changes are synthetic. The
 WorkspaceScreen case verifies invitation access without requesting a draft.
 Owner, role/remove, pending recipient, lost acknowledgements, status/cancel,
 revocation, late result disposal and narrow keyboard behavior are covered.

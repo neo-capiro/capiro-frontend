@@ -3,10 +3,20 @@ import { binaryDownloadSchema, defineOperation } from "../contracts";
 import { documentParams, workspaceId } from "./workspace-schemas";
 
 const source =
-  "capirov2@4be13b0 apps/workspace/src/hillday/hillday-export.service.ts and hillday-file.controller.ts";
+  "capiro-backend@7ed1276f0bbe5638ef637d4fd3c70fe43b80adb6 apps/workspace/src/hillday/hillday-export.service.ts and hillday-file.controller.ts";
 const exportReceipt = z.object({
   exportId: workspaceId,
   documentId: workspaceId,
+  requestId: workspaceId.nullable(),
+  renderInputSha256: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .nullable(),
+  contentSha256: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .nullable(),
+  sourceUpdatedAt: z.iso.datetime().nullable(),
   status: z.enum(["queued", "ready", "failed"]),
   format: z.literal("pdf"),
   pageSize: z.enum(["letter", "a4"]),
@@ -31,11 +41,26 @@ export const workspaceExportOperations = {
       .object({
         params: documentParams,
         body: z
-          .object({ pageSize: z.enum(["letter", "a4"]).optional() })
+          .object({
+            pageSize: z.enum(["letter", "a4"]).optional(),
+            requestId: workspaceId.optional(),
+          })
           .strict(),
       })
       .strict(),
     response: exportReceipt,
+    source,
+  }),
+  "workspace.hillday.export.request": defineOperation({
+    service: "workspace",
+    method: "GET",
+    path: "/hillday/documents/:id/exports/requests/:requestId",
+    request: z
+      .object({
+        params: documentParams.extend({ requestId: workspaceId }).strict(),
+      })
+      .strict(),
+    response: exportReceipt.nullable(),
     source,
   }),
   "workspace.hillday.export.status": defineOperation({
