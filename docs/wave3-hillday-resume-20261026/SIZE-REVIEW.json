@@ -1,0 +1,712 @@
+{
+  "utc": "2026-10-26T03:52:25.587Z",
+  "base": "a76baa609302db93faf8d038096b7877e6890464",
+  "normalization": "Canonical LF source, matching git source blobs; unchanged files use the same checkout snapshot in both passes.",
+  "status": "Independent review pending; no size policy or registry changed.",
+  "baseExit": 1,
+  "headExit": 1,
+  "baseErrors": [],
+  "headErrors": [],
+  "newErrors": [],
+  "baseSizeSummary": {
+    "total": 648,
+    "reviewed": 503,
+    "inheritedUnreviewed": 18,
+    "blocking": 127
+  },
+  "headSizeSummary": {
+    "total": 650,
+    "reviewed": 498,
+    "inheritedUnreviewed": 18,
+    "blocking": 134
+  },
+  "source": [
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "baseBlob": "87bc2541bb72373e7961b0cdc62e9badde95a8d3",
+      "headBlob": "f1e67b974882b5ac301d921e783e8156c74f332d",
+      "sha256": "f8e2d77ed6c50f890d75fbf6699487b249a5c06d45e70b4174aabf5822246695",
+      "nonblank": 260,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+          "kind": "function",
+          "symbol": "WorkspaceScreen",
+          "line": 31,
+          "nonblank": 233,
+          "fingerprint": "88a3237b8a043fca61e48043e0dc199359131daba44ab99162fb03cf99c3bd9c"
+        }
+      ],
+      "baselineFindings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+          "kind": "function",
+          "symbol": "WorkspaceScreen",
+          "line": 30,
+          "nonblank": 194,
+          "fingerprint": "ec78085fc5fff0026c619d5a468a7e60ddda45a120c5a1f07b7c0c832ba5cf60"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "./WorkspaceLibrary",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "DocumentsLibrary",
+            "WorkflowCards"
+          ]
+        },
+        {
+          "specifier": "next/navigation",
+          "line": 4,
+          "kind": "named",
+          "names": [
+            "useRouter",
+            "useSearchParams"
+          ]
+        },
+        {
+          "specifier": "react",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "useState"
+          ]
+        },
+        {
+          "specifier": "../../../shared/capiro/operations/workspace-schemas",
+          "line": 6,
+          "kind": "other",
+          "names": [
+            "WorkspaceLibraryDocument"
+          ]
+        },
+        {
+          "specifier": "../../../shared/module-ui",
+          "line": 7,
+          "kind": "named",
+          "names": [
+            "ActionButton",
+            "Modal"
+          ]
+        },
+        {
+          "specifier": "./hillday/HillDayEditor",
+          "line": 8,
+          "kind": "named",
+          "names": [
+            "HillDayEditor"
+          ]
+        },
+        {
+          "specifier": "./hillday/HillDayWizard",
+          "line": 9,
+          "kind": "named",
+          "names": [
+            "HillDayResume",
+            "HillDayWizard"
+          ]
+        },
+        {
+          "specifier": "./newsletter/NewsletterWorkflow",
+          "line": 10,
+          "kind": "named",
+          "names": [
+            "NewsletterWorkflow"
+          ]
+        },
+        {
+          "specifier": "./templates/TemplateStudio",
+          "line": 11,
+          "kind": "named",
+          "names": [
+            "TemplateStudio"
+          ]
+        },
+        {
+          "specifier": "./workspace.module.css",
+          "line": 12,
+          "kind": "other",
+          "names": []
+        },
+        {
+          "specifier": "./WorkspaceDraft",
+          "line": 13,
+          "kind": "named",
+          "names": [
+            "WorkspaceDraft"
+          ]
+        },
+        {
+          "specifier": "./WorkspaceShares",
+          "line": 14,
+          "kind": "named",
+          "names": [
+            "WorkspaceShares"
+          ]
+        },
+        {
+          "specifier": "./prospects/ProspectWorkspace",
+          "line": 15,
+          "kind": "named",
+          "names": [
+            "ProspectWorkspace"
+          ]
+        },
+        {
+          "specifier": "./rich-newsletter/RichNewsletterEditor",
+          "line": 16,
+          "kind": "named",
+          "names": [
+            "RichNewsletterEditor"
+          ]
+        },
+        {
+          "specifier": "./brief-copy/BriefCopyRoute",
+          "line": 17,
+          "kind": "named",
+          "names": [
+            "BriefCopyRoute"
+          ]
+        },
+        {
+          "specifier": "./workspace-route",
+          "line": 18,
+          "kind": "named",
+          "names": [
+            "readWorkspaceRoute",
+            "workspaceHref",
+            "WorkspaceView",
+            "HillDayPhase"
+          ]
+        }
+      ],
+      "edges": [
+        "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+        "apps/web/src/shared/capiro/operations/workspace-schemas.ts",
+        "apps/web/src/shared/module-ui/index.ts",
+        "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
+        "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+        "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+        "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+        "apps/web/src/features/modules/workspace/workspace.module.css",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+        "apps/web/src/features/modules/workspace/WorkspaceShares.tsx",
+        "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx",
+        "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+        "apps/web/src/features/modules/workspace/brief-copy/BriefCopyRoute.tsx",
+        "apps/web/src/features/modules/workspace/workspace-route.ts"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+      "baseBlob": "4b023bfd9f7fa303356127afff050ba2de2d0eb4",
+      "headBlob": "b1fcabd53703659a5efa52422a56a2eb1e048ebe",
+      "sha256": "798f6007d8d56ad06027513559d72bedc5f6e8da250d07007a99b7428cf2610b",
+      "nonblank": 241,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+          "kind": "function",
+          "symbol": "GenerationSession",
+          "line": 48,
+          "nonblank": 191,
+          "fingerprint": "4e82485d8141a0b5be3eb81f92e3644b34cde8eac458536bd93b41749c74a416"
+        }
+      ],
+      "baselineFindings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+          "kind": "function",
+          "symbol": "HillDayGeneration",
+          "line": 17,
+          "nonblank": 122,
+          "fingerprint": "dd64e901a81cd807498bf2edbcfef691600b9619436844c62e6ba9209bbc4e63"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "useState"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/capiro/queries",
+          "line": 4,
+          "kind": "named",
+          "names": [
+            "useCapiroQuery"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/module-ui",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "ActionButton",
+            "Badge",
+            "DataTable",
+            "Panel",
+            "StatusPanel"
+          ]
+        },
+        {
+          "specifier": "./hillday-generation-state",
+          "line": 12,
+          "kind": "named",
+          "names": [
+            "useHillDayGeneration",
+            "HillDayGenerationScope"
+          ]
+        },
+        {
+          "specifier": "../workspace.module.css",
+          "line": 16,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "edges": [
+        "apps/web/src/shared/capiro/queries.ts",
+        "apps/web/src/shared/module-ui/index.ts",
+        "apps/web/src/features/modules/workspace/hillday/hillday-generation-state.ts",
+        "apps/web/src/features/modules/workspace/workspace.module.css"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+      "baseBlob": "1610b55b6a8c7f58d46383cd0587c8dae4c675e0",
+      "headBlob": "52d758c5daf2598ae70af307f876402f2ed4e71d",
+      "sha256": "90069cf3420f3a3417414b8e8c342fb57af61c8c9cf61bb4d1d1cf6ab0d3a1b5",
+      "nonblank": 341,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+          "kind": "function",
+          "symbol": "HillDayMeetings",
+          "line": 111,
+          "nonblank": 225,
+          "fingerprint": "e70f5cafe3d3c9cbf79eeb03085b8bef4176c7d9284807d918ddb9d2466e0354"
+        }
+      ],
+      "baselineFindings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+          "kind": "function",
+          "symbol": "HillDayMeetings",
+          "line": 108,
+          "nonblank": 212,
+          "fingerprint": "a22309f78798c5dc82950966fcf48b3831543fc2027a33f8e555ca7ee0fd3dd2"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "useState"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/capiro/operations/workspace-schemas",
+          "line": 4,
+          "kind": "other",
+          "names": [
+            "HillDayDocument",
+            "HillDayEvent"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/capiro/queries",
+          "line": 8,
+          "kind": "named",
+          "names": [
+            "useCapiroMutation",
+            "useCapiroQuery"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/module-ui",
+          "line": 12,
+          "kind": "named",
+          "names": [
+            "ActionButton",
+            "Badge",
+            "DataTable",
+            "StatusPanel",
+            "TextInput"
+          ]
+        },
+        {
+          "specifier": "../workspace.module.css",
+          "line": 19,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "edges": [
+        "apps/web/src/shared/capiro/operations/workspace-schemas.ts",
+        "apps/web/src/shared/capiro/queries.ts",
+        "apps/web/src/shared/module-ui/index.ts",
+        "apps/web/src/features/modules/workspace/workspace.module.css"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+      "baseBlob": "09c1f59cb2e6f05919f8304474cd5310e2d872ba",
+      "headBlob": "ef6ad71b59caa3d3c389b49997c9cc42a699e1ce",
+      "sha256": "0e1e55b9c111ebb614604cf69757674a486db1f9ab8a68063d93483209a87eeb",
+      "nonblank": 408,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 408,
+          "fingerprint": "cfda643256a8a4b21c2e112b38d0fd9839401db6228d4d6fd95547462dd9926d"
+        },
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+          "kind": "function",
+          "symbol": "HillDayWizard",
+          "line": 115,
+          "nonblank": 232,
+          "fingerprint": "48c9322228f45ae6664ba0fdf251e6c65dc412eed6c9fb599bfc869e3b166e92"
+        }
+      ],
+      "baselineFindings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+          "kind": "function",
+          "symbol": "HillDayWizard",
+          "line": 113,
+          "nonblank": 214,
+          "fingerprint": "1d8d937ba624d1f17b1f73009e3238327262aee3471cc451915b91764b4556ed"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "useState"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/capiro/operations/workspace-schemas",
+          "line": 4,
+          "kind": "other",
+          "names": [
+            "HillDayDocument"
+          ]
+        },
+        {
+          "specifier": "../workspace-route",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "hillDayPhases",
+            "HillDayPhase"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/capiro/queries",
+          "line": 6,
+          "kind": "named",
+          "names": [
+            "useCapiroMutation",
+            "useCapiroQuery"
+          ]
+        },
+        {
+          "specifier": "../../../../shared/module-ui",
+          "line": 10,
+          "kind": "named",
+          "names": [
+            "ActionButton",
+            "Field",
+            "StatusPanel",
+            "TextInput"
+          ]
+        },
+        {
+          "specifier": "../workspace.module.css",
+          "line": 16,
+          "kind": "other",
+          "names": []
+        },
+        {
+          "specifier": "./HillDayContext",
+          "line": 17,
+          "kind": "named",
+          "names": [
+            "HillDayContext"
+          ]
+        },
+        {
+          "specifier": "./HillDayGeneration",
+          "line": 18,
+          "kind": "named",
+          "names": [
+            "HillDayGeneration"
+          ]
+        },
+        {
+          "specifier": "./HillDayMeetings",
+          "line": 19,
+          "kind": "named",
+          "names": [
+            "HillDayMeetings"
+          ]
+        },
+        {
+          "specifier": "./HillDayResolution",
+          "line": 20,
+          "kind": "named",
+          "names": [
+            "HillDayResolution"
+          ]
+        }
+      ],
+      "edges": [
+        "apps/web/src/shared/capiro/operations/workspace-schemas.ts",
+        "apps/web/src/features/modules/workspace/workspace-route.ts",
+        "apps/web/src/shared/capiro/queries.ts",
+        "apps/web/src/shared/module-ui/index.ts",
+        "apps/web/src/features/modules/workspace/workspace.module.css",
+        "apps/web/src/features/modules/workspace/hillday/HillDayContext.tsx",
+        "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+        "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+        "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/workspace-route.ts",
+      "baseBlob": "2544c8bf05c088e79981c00ea3f24c293fbf6439",
+      "headBlob": "175dbc81f63c9560c83bc3f5d959b33f5a1f0dec",
+      "sha256": "07ae7003a38f7ce2dae3f6bd971c63152ee83bf055625ac4ba8b5898d39a9192",
+      "nonblank": 95,
+      "findings": [],
+      "baselineFindings": [],
+      "imports": [
+        {
+          "specifier": "../../../shared/capiro/operations/workspace-schemas",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "workspaceId"
+          ]
+        }
+      ],
+      "edges": [
+        "apps/web/src/shared/capiro/operations/workspace-schemas.ts"
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+      "baseBlob": "5bf016495f79dc4b0ed124dcda55dbe3923d190f",
+      "headBlob": "31f8b77594f90e40343e48c29917ab1dc22e5c70",
+      "sha256": "1991ec127ef1fa6b0df5aff6cf6e260c4531c48de64865def935ad1f2e41e096",
+      "nonblank": 447,
+      "findings": [
+        {
+          "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 447,
+          "fingerprint": "b3a076a4adf3c4bf31174770b03423bd634a1c5a579e2bb8efb0a9d7f02506c3"
+        }
+      ],
+      "baselineFindings": [
+        {
+          "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 407,
+          "fingerprint": "64155da97bb96b8706c60cccf26dec629a0c373dc85d9c2fe986aff843fbd67e"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "zod",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "z"
+          ]
+        },
+        {
+          "specifier": "../contracts",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "defineOperation"
+          ]
+        },
+        {
+          "specifier": "./workspace-schemas",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "calendarEvent",
+            "carrySelection",
+            "documentParams",
+            "emptyWorkspaceRequest",
+            "firstPage",
+            "hillDayDocument",
+            "libraryDocument",
+            "meetingContext",
+            "office",
+            "resolution",
+            "sourceStatus",
+            "workspaceClient",
+            "workspaceId"
+          ]
+        }
+      ],
+      "edges": [
+        "apps/web/src/shared/capiro/contracts.ts",
+        "apps/web/src/shared/capiro/operations/workspace-schemas.ts"
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-schemas.ts",
+      "baseBlob": "e00bb71a96e9d7488f4889d3c203e3873f1f62b8",
+      "headBlob": "466b1f773d3dda11dffd6d27bb753e8f338e85ce",
+      "sha256": "5646867944e442c4b59071fa3969f20609008914d25771c2dfedb4a0df790033",
+      "nonblank": 281,
+      "findings": [],
+      "baselineFindings": [],
+      "imports": [
+        {
+          "specifier": "zod",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "z"
+          ]
+        }
+      ],
+      "edges": []
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/hillday-generation-state.ts",
+      "baseBlob": null,
+      "headBlob": "9b55added8e1de5be9ec096149e576855d0d2ab1",
+      "sha256": "40784ca2e08c495bce08678ab13862e9f4a8f4d34ceb726f86185952a5d599a7",
+      "nonblank": 368,
+      "findings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/hillday/hillday-generation-state.ts",
+          "kind": "function",
+          "symbol": "useHillDayGeneration",
+          "line": 75,
+          "nonblank": 296,
+          "fingerprint": "a072efca8083d0d0ddcd8b3973db34cb93d522e29e09e6ca93be5fd179aa97f8"
+        }
+      ],
+      "baselineFindings": [],
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "useEffect",
+            "useRef",
+            "useState"
+          ]
+        },
+        {
+          "specifier": "zod",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "z"
+          ]
+        },
+        {
+          "specifier": "@/shared/capiro/CapiroBoundary",
+          "line": 4,
+          "kind": "named",
+          "names": [
+            "useCapiro"
+          ]
+        },
+        {
+          "specifier": "@/shared/capiro/http",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "CapiroApiError"
+          ]
+        },
+        {
+          "specifier": "@/shared/capiro/queries",
+          "line": 6,
+          "kind": "named",
+          "names": [
+            "useCapiroQuery"
+          ]
+        },
+        {
+          "specifier": "@/shared/capiro/operations/workspace-schemas",
+          "line": 7,
+          "kind": "named",
+          "names": [
+            "workspaceId"
+          ]
+        },
+        {
+          "specifier": "@/shared/capiro/operations/workspace-hillday",
+          "line": 8,
+          "kind": "other",
+          "names": [
+            "HillDayJobStatus"
+          ]
+        },
+        {
+          "specifier": "@/shared/session/recovery/useRetainedIntent",
+          "line": 9,
+          "kind": "named",
+          "names": [
+            "useRetainedIntent"
+          ]
+        },
+        {
+          "specifier": "@/shared/session/recovery/journal",
+          "line": 10,
+          "kind": "named",
+          "names": [
+            "acknowledgeRecovery",
+            "readRecovery",
+            "readRecoveryDisposition",
+            "reserveRecovery",
+            "updateRecovery",
+            "withRecoveryCommandLock",
+            "RecoveryStorageError",
+            "RecoveryContract"
+          ]
+        }
+      ],
+      "edges": [
+        "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+        "apps/web/src/shared/capiro/http.ts",
+        "apps/web/src/shared/capiro/queries.ts",
+        "apps/web/src/shared/capiro/operations/workspace-schemas.ts",
+        "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+        "apps/web/src/shared/session/recovery/useRetainedIntent.ts",
+        "apps/web/src/shared/session/recovery/journal.ts"
+      ]
+    }
+  ]
+}

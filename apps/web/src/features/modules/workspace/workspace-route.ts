@@ -12,10 +12,19 @@ const views = [
 export type WorkspaceView = (typeof views)[number];
 type Query = Pick<URLSearchParams, "get" | "getAll" | "has">;
 type Scope = { clientId?: string };
+export const hillDayPhases = [
+  "template",
+  "sponsor",
+  "meetings",
+  "resolution",
+  "context",
+  "generate",
+] as const;
+export type HillDayPhase = (typeof hillDayPhases)[number];
 type Destination =
   | { kind: "view"; view: WorkspaceView }
   | { kind: "draft"; draftId: string; prospectId?: string }
-  | { kind: "hillday"; hilldayId: string }
+  | { kind: "hillday"; hilldayId: string; phase?: HillDayPhase }
   | { kind: "prospect"; prospectId: string };
 export type WorkspaceRoute =
   | (Destination & Scope)
@@ -26,9 +35,13 @@ export type WorkspaceRoute =
 export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   const identityKeys = ["clientId", "draftId", "prospectId", "hilldayId"];
   if (
-    [...identityKeys, "view", "briefSource", "copyDocumentId"].some(
-      (key) => query.getAll(key).length > 1,
-    ) ||
+    [
+      ...identityKeys,
+      "view",
+      "briefSource",
+      "copyDocumentId",
+      "hilldayPhase",
+    ].some((key) => query.getAll(key).length > 1) ||
     identityKeys.some(
       (key) => query.has(key) && !workspaceId.safeParse(query.get(key)).success,
     )
@@ -41,13 +54,18 @@ export function readWorkspaceRoute(query: Query): WorkspaceRoute {
   const draftId = query.get("draftId") ?? undefined;
   const prospectId = query.get("prospectId") ?? undefined;
   const hilldayId = query.get("hilldayId") ?? undefined;
+  const phase = hillDayPhases.find(
+    (value) => value === query.get("hilldayPhase"),
+  );
+  if (query.has("hilldayPhase") && (!phase || !hilldayId || view !== "hillday"))
+    return { kind: "invalid" };
   if (query.has("briefSource") || query.has("copyDocumentId"))
     return view === "documents" && !hilldayId
       ? { kind: "brief-copy" }
       : { kind: "invalid" };
   if (hilldayId)
     return view === "hillday" && !draftId && !prospectId
-      ? { kind: "hillday", hilldayId, clientId }
+      ? { kind: "hillday", hilldayId, clientId, phase }
       : { kind: "invalid" };
   if (draftId || prospectId) {
     if (view !== "documents") return { kind: "invalid" };
@@ -73,6 +91,7 @@ export function workspaceHref(destination: Destination & Scope) {
   if (destination.kind === "hillday") {
     query.set("view", "hillday");
     query.set("hilldayId", destination.hilldayId);
+    if (destination.phase) query.set("hilldayPhase", destination.phase);
   }
   const suffix = query.toString();
   return `/modules/workspace${suffix ? `?${suffix}` : ""}`;

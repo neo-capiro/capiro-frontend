@@ -266,6 +266,11 @@ it.each([
       lookbackDays: 30,
     });
     await pending;
+    // A reload at the first acknowledged phase must already recover this
+    // document and the receipt's canonical client, before generation opens.
+    expect(h.push).toHaveBeenLastCalledWith(
+      `/modules/workspace?clientId=${sponsor}&view=hillday&hilldayId=${draft.id}&hilldayPhase=meetings`,
+    );
     renderWizard();
     h.meetings.mock.lastCall![0].onSaved([]);
     renderWizard();
