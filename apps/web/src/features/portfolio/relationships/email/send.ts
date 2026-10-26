@@ -154,28 +154,14 @@ export async function sendReviewedMail(
         retryable: z.literal(false),
       })
       .safeParse(details);
-    const sizePreflight = z
-      .object({
-        error: z.literal("MAIL_PAYLOAD_TOO_LARGE"),
-        code: z.literal("MAIL_PAYLOAD_TOO_LARGE"),
-        phase: z.literal("preflight"),
-        requestKey: z.uuid(),
-        retryable: z.literal(false),
-        intentId: z.undefined().optional(),
-        state: z.undefined().optional(),
-      })
-      .safeParse(details);
     throw new MailSendError(
       error instanceof Error
         ? error.message
         : "Email delivery could not be confirmed.",
       // Access may be revoked after acceptance. HTTP status alone never proves
-      // non-delivery. Require this exact request's durable rejection or Core's
-      // typed size refusal before intent creation; every other result stays fenced.
-      !(
-        (rejection.success && rejection.data.requestKey === requestKey) ||
-        (sizePreflight.success && sizePreflight.data.requestKey === requestKey)
-      ),
+      // non-delivery. Require this exact request's durable rejection; a size
+      // error without ledger ownership cannot exclude a concurrent send.
+      !(rejection.success && rejection.data.requestKey === requestKey),
     );
   }
 }

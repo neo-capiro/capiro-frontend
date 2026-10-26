@@ -326,64 +326,33 @@ describe("explicit send dispatch", () => {
       ).rejects.toMatchObject({ uncertain: receiptKey !== requestKey });
     },
   );
-  it.each([
-    { label: "exact preflight", status: 400, changes: {}, uncertain: false },
-    {
-      label: "another request",
-      status: 400,
-      changes: { requestKey: other },
-      uncertain: true,
-    },
-    { label: "server uncertainty", status: 503, changes: {}, uncertain: true },
-    {
-      label: "unrelated code",
-      status: 400,
-      changes: { code: "MAIL_SEND_FAILED" },
-      uncertain: true,
-    },
-    {
-      label: "wrong phase",
-      status: 400,
-      changes: { phase: "sending" },
-      uncertain: true,
-    },
-    {
-      label: "contradictory intent",
-      status: 400,
-      changes: { intentId: id },
-      uncertain: true,
-    },
-  ])(
-    "ML-21 recognizes only the canonical size refusal: $label",
-    async ({ status, changes, uncertain }) => {
-      const message =
-        "Reduce the message or attachments, then review the email again.";
-      await expect(
-        sendReviewedMail(
-          createApiClient(async (_url, options) =>
-            options?.method === "POST"
-              ? response(
-                  {
-                    error: "MAIL_PAYLOAD_TOO_LARGE",
-                    code: "MAIL_PAYLOAD_TOO_LARGE",
-                    phase: "preflight",
-                    requestKey,
-                    retryable: false,
-                    message,
-                    ...changes,
-                  },
-                  status,
-                )
-              : response([file]),
-          ),
-          input,
-          () => {},
+  it("ML-21 size refusal without durable admission remains uncertain", async () => {
+    const message =
+      "Reduce the message or attachments, then review the email again.";
+    await expect(
+      sendReviewedMail(
+        createApiClient(async (_url, options) =>
+          options?.method === "POST"
+            ? response(
+                {
+                  error: "MAIL_PAYLOAD_TOO_LARGE",
+                  code: "MAIL_PAYLOAD_TOO_LARGE",
+                  phase: "preflight",
+                  requestKey,
+                  retryable: false,
+                  message,
+                },
+                400,
+              )
+            : response([file]),
         ),
-      ).rejects.toMatchObject({ uncertain, message });
-    },
-  );
+        input,
+        () => {},
+      ),
+    ).rejects.toMatchObject({ uncertain: true, message });
+  });
   it.each([400, 503])(
-    "ML-21 defensive durable size refusal requires HTTP 400 (%s)",
+    "ML-21 durable size refusal requires HTTP 400 (%s)",
     async (status) => {
       const message =
         "Reduce the message or attachments, then review the email again.";
@@ -437,10 +406,11 @@ describe("explicit send dispatch", () => {
             options?.method === "POST"
               ? response(
                   {
-                    error: "MAIL_PAYLOAD_TOO_LARGE",
+                    error: "MAIL_SEND_REJECTED",
                     code: "MAIL_PAYLOAD_TOO_LARGE",
-                    phase: "preflight",
                     requestKey: token,
+                    intentId: id,
+                    state: "failed",
                     retryable: false,
                     message: "Reduce the message or attachments.",
                   },
