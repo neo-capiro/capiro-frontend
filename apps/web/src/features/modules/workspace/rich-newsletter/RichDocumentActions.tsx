@@ -31,6 +31,13 @@ export function RichDocumentActions({
       entry.status === "unknown" &&
       entry.documentId.toLowerCase() === state.saved?.id.toLowerCase(),
   );
+  // The exact-revision card already presents this stage failure. Other errors,
+  // lookup results and create/save qualifications remain independently visible.
+  const duplicateStageError =
+    attempted?.status === "unknown" &&
+    uncertainStages.some((entry) => entry.attempt === attempted.attempt) &&
+    state.error ===
+      "Staging could not be confirmed. This document revision will not be staged again. Check its exact stage receipt separately; review current saved state before any further write.";
   return (
     <section
       className={styles.savedActions}
@@ -86,11 +93,11 @@ export function RichDocumentActions({
           </ActionButton>
         </div>
         {uncertainStages.map((entry) => (
-          <div className={styles.savedNotice} key={entry.attempt}>
+          <div className={styles.savedNotice} key={entry.attempt} role="alert">
             <p>
-              Stage outcome for revision {entry.revision} remains uncertain.
-              This revision will not be staged again. Checking reads only that
-              exact revision and does not adopt it as your editable baseline.
+              Staging could not be confirmed for revision {entry.revision}. This
+              revision will not be staged again. Checking reads only that exact
+              revision and does not adopt it as your editable baseline.
             </p>
             <ActionButton
               onClick={() => void owner.recoverStage(entry.attempt)}
@@ -191,9 +198,9 @@ export function RichDocumentActions({
           adopted or used to rebase your local draft.
         </p>
       )}
-      {state.error && <p role="alert">{state.error}</p>}
+      {state.error && !duplicateStageError && <p role="alert">{state.error}</p>}
       {state.notice && <p role="status">{state.notice}</p>}
-      {(attempted?.status === "unknown" || attempted?.status === "pending") && (
+      {attempted?.status === "pending" && (
         <p role="alert">
           This saved revision has an uncertain stage attempt; this revision will
           not be staged again here.

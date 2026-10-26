@@ -29,6 +29,11 @@ test("WS15 exact stage recovery keeps null and denied attempts fenced before fin
   fixture.queue("stage", (route) => route.abort("connectionreset"));
   await button(page, "Stage newsletter").click();
   await expect(page.getByText(/Staging could not be confirmed/)).toBeVisible();
+  await expect(page.getByText(/Staging could not be confirmed/)).toHaveCount(1);
+  await expect(
+    page.getByText(/This saved revision has an uncertain stage attempt/),
+  ).toHaveCount(0);
+  await expect(page.getByText(/Previous saved baseline/)).toBeVisible();
   await page.screenshot({
     path: info.outputPath("rich-unknown-stage.png"),
     fullPage: true,
