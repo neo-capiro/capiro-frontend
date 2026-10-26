@@ -39,7 +39,7 @@ async function openHearing(
       history(
         [
           event(1, "Synthetic saved hearing audio"),
-          records.published.event,
+          hearingMediaFixture().event,
           status(3, "completed"),
         ],
         { state: "completed" },
@@ -141,6 +141,26 @@ for (const width of [1440, 390])
         "Loaded segment: 00:00:50–00:01:10 on the recording timeline.",
       ),
     ).toBeVisible();
+    await expect
+      .poll(() =>
+        audio.evaluate((element: HTMLAudioElement) => element.readyState),
+      )
+      .toBeGreaterThanOrEqual(2);
+    for (const name of ["play", "volume"]) {
+      const icon = recording.locator(
+        `img[src="/figma/meri-hearing-media/${name}.svg"]`,
+      );
+      await expect(icon).toBeVisible();
+      expect(
+        await icon.evaluate((element: HTMLImageElement) => ({
+          natural: [element.naturalWidth, element.naturalHeight],
+          rendered: [
+            element.getBoundingClientRect().width,
+            element.getBoundingClientRect().height,
+          ],
+        })),
+      ).toEqual({ natural: [24, 24], rendered: [24, 24] });
+    }
     expect(selections).toEqual([
       null,
       { epochId: "synthetic-epoch", positionMs: 30_000 },
@@ -154,6 +174,16 @@ for (const width of [1440, 390])
     ).toBe(true);
     await recording.screenshot({
       path: info.outputPath(`hearing-media-${width}.png`),
+    });
+    await recording
+      .locator("media-controller")
+      .locator("..")
+      .screenshot({
+        path: info.outputPath(`hearing-audio-card-${width}.png`),
+      });
+    await page.screenshot({
+      path: info.outputPath(`hearing-host-${width}.png`),
+      fullPage: true,
     });
     await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
     const violations = await recording.evaluate(async (element) => {

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { MediaPlayer, MediaProvider, isAudioProvider } from "@vidstack/react";
 import {
   MediaController,
@@ -68,20 +69,7 @@ export default function RecordedAudioPlayer({
       className={styles.player}
     >
       <MediaProvider />
-      <MediaController
-        audio
-        noHotkeys
-        mediaStore={store}
-        className={styles.controls}
-      >
-        <MediaControlBar className={styles.bar}>
-          <MediaPlayButton />
-          <MediaTimeRange className={styles.seek} />
-          <MediaTimeDisplay showDuration />
-          <MediaMuteButton />
-          <MediaPlaybackRateButton />
-        </MediaControlBar>
-      </MediaController>
+      <RetainedAudioControls store={store} />
       <p>
         Recording position:{" "}
         {recordingTime(
@@ -91,5 +79,46 @@ export default function RecordedAudioPlayer({
         . Controls show time within this segment.
       </p>
     </MediaPlayer>
+  );
+}
+
+function RetainedAudioControls({
+  store,
+}: {
+  store: ReturnType<typeof createMediaStore>;
+}) {
+  return (
+    <MediaController
+      audio
+      noHotkeys
+      mediaStore={store}
+      className={styles.controls}
+    >
+      <MediaControlBar className={styles.bar}>
+        <MediaPlayButton className={styles.controlButton}>
+          <span slot="play" className={styles.icon}>
+            <Image
+              src="/figma/meri-hearing-media/play.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
+          </span>
+        </MediaPlayButton>
+        <MediaTimeDisplay showDuration className={styles.time} />
+        <MediaTimeRange className={styles.seek} />
+        <MediaMuteButton className={styles.controlButton}>
+          <span slot="high" className={styles.icon}>
+            <Image
+              src="/figma/meri-hearing-media/volume.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
+          </span>
+        </MediaMuteButton>
+        <MediaPlaybackRateButton className={styles.controlButton} />
+      </MediaControlBar>
+    </MediaController>
   );
 }
