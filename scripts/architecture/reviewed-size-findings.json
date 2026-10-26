@@ -628,10 +628,10 @@
     "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
     "kind": "function",
     "symbol": "ContactMail",
-    "fingerprint": "39414ae5a513e5548577754642b31580856c241e64e0e4ed395f831bc229928e",
-    "reason": "The existing contact-scoped read/compose workflow and stale/error barriers remain together. The caption alone selects the latest valid effective instant among returned messages; canonical mail hooks and compose/dialog owners retain transport, writes and lifecycle. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
-    "reviewedBy": "Codex root and independent continuation source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "0d0605a8badfc336c6bed824ce74561152abb1fc24942292323d58d92b047153",
+    "reason": "ContactMail still owns current contact history, selected thread and read-error retirement. The former generic reply toggle is removed and delegated to ContactReply; ordinary new-mail composition remains separate. Existing query cancellation and application identity boundaries retain authority. No provider behavior or persistence moved into this component.",
+    "reviewedBy": "Codex independent Gmail frontend reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
@@ -673,9 +673,9 @@
     "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
     "kind": "function",
     "symbol": "sendReviewedMail",
-    "fingerprint": "f3b5bee722a58e34d992c18d55ddecbafd6be7a3d19de5f626c3b179a96a0e40",
-    "reason": "Retain this single reviewed-mail dispatch sequence. The ML-21 correction requires HTTP 400 and an exact request key with a durable failed intent before releasing the browser attempt. Removing the unsound no-intent size-refusal branch keeps every untyped, mismatched, server-error or ambiguous result uncertain, including concurrent admission. Response classification remains adjacent to the one dispatch and uses the existing durable receipt contract. Canonical mailbox, attachments, recipients, browser reservation/settlement and UI remain separate existing owners. Extracting a separate stateful workflow or duplicating receipt parsing would obscure which completed request may release its attempt; no additional runtime responsibility is introduced.",
-    "reviewedBy": "Codex task_approval_author independent ML-21 paired correction review",
+    "fingerprint": "5150fdb86326313c0ee2860ce8b208f9880d711148e91b7098c7aa25e42f38bd",
+    "reason": "This existing transport boundary owns bounded preflight and response admission for one explicit mail request. Native reply adds a canonical selected-original read and exact origin/revision/mailbox checks, then reuses attachment admission and the sole POST. The shared replyReceiptMatches leaf distinguishes original conversation from the actual provider-returned receipt. Pre-POST failures are definite; post-POST ambiguity remains uncertain unless the exact durable request is rejected. Core remains authorization and send-ledger owner.",
+    "reviewedBy": "Codex independent Gmail frontend reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -1406,19 +1406,19 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "dff2dcd9e82873fc4a9d87e91e48b452c9c234898ff66850d6cf3d7ad759f0bd",
-    "reason": "Pre-existing file size signal: base e478 has 411 nonblank lines, fingerprint 58dcec17ff70d486702c0c50888d7057ef86355c9b893c4e65cef8c2c13c0c08; head 646bcf919 has 416 lines with the exact head fingerprint in this record. Replace the existing file record. Independent review of PR149 at exact head 646bcf919: this existing composition entry module still owns one draft, explicit review and send presentation workflow. The only delta passes existing person.email to the existing mailbox-selection hook. Rich body editing, recipient validation, attachments, signature, rewrite, authority and send transport remain in their existing dedicated owners. The 416 nonblank file lines do not add another responsibility; extracting argument plumbing would obscure the existing lifecycle without removing policy or behavior.",
-    "reviewedBy": "Codex independent Wave 2 reviewer",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "3fba6d69953190d8594128e885ce08c2d5eb31d4da10aa18a0858bf5d2a291e3",
+    "reason": "This module is the existing reviewed mail composer. The additive reply mode fixes reviewed recipient/subject/mailbox context while body editing, uploads, signature, rewrite and send/recovery remain in their existing owners. Unsupported legacy thread inputs remain review-only. No new provider adapter, transport or persistence responsibility is introduced.",
+    "reviewedBy": "Codex independent Gmail frontend reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "2c5b5508cab8256e3683f1055077576b3891f85753e45ed467e9bfec3716d183",
-    "reason": "Pre-existing function size signal: base e478 has 376 nonblank body lines, fingerprint 7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c; head 646bcf919 has 381 body lines with the exact head fingerprint in this record. Replace the existing function record. Independent review of PR149 at exact head 646bcf919: the 381 nonblank body lines retain the existing coherent draft-to-review-to-send UI lifecycle and immutable reviewed payload. This delta only supplies contact email to useMailboxes; it introduces no sender, access policy, storage or transport responsibility. Both dialogs still share the same draft, pending locks and uncertain-delivery state. Existing specialized hooks and components own independently changing mechanisms, so no additional extraction is warranted for this argument change.",
-    "reviewedBy": "Codex independent Wave 2 reviewer",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "e683a59fb2031647792057e3135a3a389dad78a40dd37d2a064d5e725c88cab8",
+    "reason": "The composer continues to assemble an explicit user review and delegate dispatch to useSendMail. Reply adds original id/revision to the reviewed input, disables editable recipients/subject, verifies the original mailbox, and uses acceptance-accurate receipt copy. Existing body, attachment, signature, authority and uncertainty fences are retained. Most growth is cohesive declarative review UI; no duplicate command/recovery owner is created.",
+    "reviewedBy": "Codex independent Gmail frontend reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
@@ -1874,9 +1874,9 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
     "kind": "function",
     "symbol": "WorkspaceScreen",
-    "fingerprint": "d28507cf391a57e6919ea4c9ad426abaaef7ca3d29de733252f9b99711fb97ef",
-    "reason": "The existing route owner adds a distinct catalog branch and two explicit entry actions, preserving Outreach routes.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "067bd385990271ef4c03b88bfd57c33e662dfa10bed5dec17d9c6c76991e625f",
+    "reason": "The existing Workspace route dispatcher adds one early exact-task destination and delegates the current read and presentation to EngagementTaskDetail. It does not embed task authorization or another task execution pipeline. Existing document/share/template destinations remain unchanged.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -3909,10 +3909,10 @@
     "file": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
     "kind": "function",
     "symbol": "ConnectedWorkflow",
-    "fingerprint": "e4ee7a975a0f73aeda07d58a8a9ca82231f507b874eb537b98cc7c12c104547b",
-    "reason": "ConnectedWorkflow owns one connected recommendation follow-through view: controller subscription/disposal, recovery affordance and composition of existing recommendation, draft and proposal panels. The changed branch selects truthful copy and an explicit read-versus-retry callback from controller state. Authorization, transport, saved-command persistence, immutable binding and async operation control remain in their existing separate owners. The addition creates no second workflow, journal or authority owner; extracting this small presentation branch would fragment the same view without separating a new responsibility. Accepted for this exact function only; no whole-architecture pass is claimed.",
-    "reviewedBy": "Codex independent File Workflows UI reviewer, Root allocated PR163 review",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "b99001f6c3da7aeb8dda03e8fb2297d4cdeb9a00a9470aacf5c33653ce8571b8",
+    "reason": "ConnectedWorkflow owns the existing task-create screen presentation and explicit user controls. The additive terminal button delegates to the current controller with the exact captured proposal handle; it owns no receipt validation, persistence, authorization, request construction, or retry decision. Keeping the control beside the observed result is cohesive. The independent stale-callback mutant confirms the controller remains the authority for local transition eligibility.",
+    "reviewedBy": "Codex independent MF12 task-create source review (/root/a4_assessment)",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
@@ -5365,11 +5365,9 @@
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "file",
     "symbol": "<module>",
-    "line": 1,
-    "nonblank": 437,
-    "fingerprint": "ec2a5c19bacdbd29d7c5de73f2a86346d2ab2b38afe0fd96afca5157d45018ab",
-    "reason": "The existing intent-view module owns the closed presentation of admitted intent outcomes. The bounded addition adds document-family labels and separates generic preparation copy from actual schedule operations; it neither invents a file nor changes command decisions. Related status/label presentation remains cohesive. No count-only split is warranted for this exact 437-line module fingerprint.",
-    "reviewedBy": "Independent Library reviewer; not author",
+    "fingerprint": "0e964327fe6a8793965c6204e6660d244652e14383f61aecc73ab63cf8264509",
+    "reason": "The existing intent presentation module remains one cohesive durable-state projection owner. This delta adds a native-task identity field and exact completed-native conditional beside its existing result projection; no receiver, execution, authority or recovery implementation is duplicated.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -5577,6 +5575,78 @@
     "fingerprint": "e0a31e2ff456199d7aaba100c434dfaa7beb3db009190b963112905679baab37",
     "reason": "The signed-in gateway function is byte-identical to the accepted current-main implementation; the new public operation uses a separate thin wrapper over the existing closed public gateway. Its prior file-based review is invalidated only by the additive wrapper. Authenticated token/scoping, deadline, bounded input and response validation behavior remain unchanged.",
     "reviewedBy": "Codex independent PR240 original-source reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/task-updates/MeriTaskUpdates.tsx",
+    "kind": "function",
+    "symbol": "ConnectedUpdates",
+    "fingerprint": "3c130f0c434fcc1d56e8debd3675db1c27449220850466c99b4055c77266bfe7",
+    "reason": "This component composes the existing task-update form, proposal, result and local status actions. The added outline Button is a presentation of the controller terminal transition with the current captured proposal handle. Business admission, storage and transport remain in existing owners; no separate UI framework or responsibility was added.",
+    "reviewedBy": "Codex independent Wave4 orchestrator review",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/meri-task-commands/workflow-adapter.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "d10279e20bc9cc21d23977c2d3b08e62b1d9ddd88ea68e574c455f6cbe02a288",
+    "reason": "The existing task-update workflow adapter adds only the admitted native task identity to its observed view. The public receiver, exact saved-request recovery, journal acknowledgment, lifetime fences and terminal reset remain unchanged; this cohesive projection does not establish another task or authority owner.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9eaf8adc865ab59b1b4c73996ea9b44c27407babc898f854b507458bf8527c70",
+    "reason": "The existing task-create workflow adapter projects the admitted native task identity into its observed execution view after the maintained public receiver and journal acknowledgment. Legacy receipts stay unlinked. Binding, lifetime, request construction, native execution, unknown recovery and terminal acknowledgment owners remain unchanged; the nine-line result projection has the same reason to change as its neighboring receipt fields.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "becebeea1563857fb5d872856b6f8a8a05250a33cc145159e6d1954f048c18a5",
+    "reason": "Existing Contact mail/reply selection and composition remains unchanged; only capability copy includes Outlook. Preserve existing reviewed responsibility and replace the exact changed fingerprint after independent review. Independent source review confirms this bounded delta remains in the canonical owner; no alternate policy, execution or recovery owner was introduced.",
+    "reviewedBy": "Codex independent Graph substantive source review (/root/a4_assessment), original Core025f01d4/FEf4db31fd; subsequent cleanup separately reviewed by root",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+    "kind": "function",
+    "symbol": "ContactReply",
+    "fingerprint": "4dfcf97729523aee3487030e4cf9f6da527b023ba8bb79ac74617d7bddd5e392",
+    "reason": "Existing Contact mail/reply selection and composition remains unchanged; only capability copy includes Outlook. Preserve existing reviewed responsibility and replace the exact changed fingerprint after independent review. Independent source review confirms this bounded delta remains in the canonical owner; no alternate policy, execution or recovery owner was introduced.",
+    "reviewedBy": "Codex independent Graph substantive source review (/root/a4_assessment), original Core025f01d4/FEf4db31fd; subsequent cleanup separately reviewed by root",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/actions/ProposalPanel.tsx",
+    "kind": "function",
+    "symbol": "ProposalPanel",
+    "fingerprint": "869bf3be25a68c07f3d279880919812846ab09dd93f4914de9c40062bf5e0f24",
+    "reason": "One task-create proposal/receipt presentation. The addition exposes an admitted native EngagementTask identity through a fixed Workspace destination link. The existing adapter and public receiver retain execution and receipt admission; the new exact Core reader retains current authority. No execution, persistence, reset, or authorization behavior moves into this component.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
+    "kind": "function",
+    "symbol": "intentRow",
+    "fingerprint": "4eddb9a062d6a0a4d89058d78fc1ff4f0b4c5e04d31c46a2068bf13bf862c7a3",
+    "reason": "The canonical intent presentation projector adds a current-task reference only to a completed native-task outcome already admitted by the public receiver. Legacy, pending, unknown and withheld states stay unlinked. All status, decision and receipt behavior remains in this existing projection owner; extraction of this small conditional would split the same outcome projection.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/task-updates/TaskUpdateProposal.tsx",
+    "kind": "function",
+    "symbol": "TaskUpdateProposal",
+    "fingerprint": "45411cfdc49361b9c2156d89b1ed9302efcd220314a46468d2712880dd641062",
+    "reason": "One task-update proposal/result presentation. The additive fixed Workspace link uses only the already-admitted native identity and delegates its URL to the Workspace public facade. Proposal approval, execution, uncertainty, reset and journal behavior remain with the existing workflow owners.",
+    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
     "reviewedOn": "2026-10-26"
   }
 ]
