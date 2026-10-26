@@ -1,0 +1,51 @@
+"use client";
+import { useEffect, useState } from "react";
+import type { ListState } from "./useIntentList";
+
+/** Refresh local expiry at the next proposal deadline or tab return, without IO. */
+export function useIntentExpiry(
+  list: ListState,
+  scopeKey: string,
+  now: () => number,
+): number {
+  const [, refreshClock] = useState(0);
+  useEffect(() => {
+    if (list.status !== "ready") return;
+    const deadlines = list.items.flatMap((item) =>
+      item.state === "prepared" &&
+      item.kind === "proposal" &&
+      !("withheld" in item) &&
+      item.phase === "awaiting_approval"
+        ? [Date.parse(item.proposal.expiresAt)]
+        : [],
+    );
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const schedule = () => {
+      clearTimeout(timer);
+      const checkedAt = now();
+      const next = Math.min(
+        ...deadlines.filter((deadline) => deadline > checkedAt),
+      );
+      if (Number.isFinite(next))
+        timer = setTimeout(
+          () => {
+            refreshClock((value) => value + 1);
+            schedule();
+          },
+          Math.min(next - checkedAt, 2_147_483_647),
+        );
+    };
+    const visible = () => {
+      if (document.visibilityState !== "visible") return;
+      refreshClock((value) => value + 1);
+      schedule();
+    };
+    schedule();
+    document.addEventListener("visibilitychange", visible);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("visibilitychange", visible);
+    };
+  }, [list, scopeKey, now]);
+  return now();
+}

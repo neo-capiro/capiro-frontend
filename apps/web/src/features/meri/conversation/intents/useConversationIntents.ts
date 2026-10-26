@@ -11,6 +11,7 @@ import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
+import { useIntentExpiry } from "./useIntentExpiry";
 import {
   intentDecisionRecovery,
   type IntentDecisionScope,
@@ -45,6 +46,7 @@ export function useConversationIntents(
     options.refreshKey,
   );
   const key = JSON.stringify([tenantId, actorId, conversationId]);
+  const checkedAt = useIntentExpiry(list, key, now);
   const current = useRef({ access, key, active: true });
   useLayoutEffect(() => {
     current.current = { access, key, active: true };
@@ -166,6 +168,9 @@ export function useConversationIntents(
         return;
       const id = proposal.proposalId,
         prior = attempts[id];
+      // A throttled tab may still hold a control from before the deadline.
+      // Keep saved decision reconciliation separate from a new decision.
+      if (!prior && Date.parse(proposal.expiresAt) <= now()) return;
       if (prior?.state === "pending" || (prior && prior.decision !== decision))
         return;
       const request: IntentsDecideRequest = {
@@ -233,7 +238,17 @@ export function useConversationIntents(
       });
       await refresh();
     },
-    [access, attempts, conversationId, ready, recoveryFor, guard, key, refresh],
+    [
+      access,
+      attempts,
+      conversationId,
+      ready,
+      recoveryFor,
+      guard,
+      key,
+      refresh,
+      now,
+    ],
   );
 
   const viewer = useMemo<Viewer>(
@@ -242,8 +257,8 @@ export function useConversationIntents(
   );
   const rows = useMemo(
     () =>
-      list.status === "ready" ? intentRows(list.items, now(), viewer) : [],
-    [list, now, viewer],
+      list.status === "ready" ? intentRows(list.items, checkedAt, viewer) : [],
+    [list, checkedAt, viewer],
   );
   return {
     list,

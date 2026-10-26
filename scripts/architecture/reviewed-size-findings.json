@@ -5389,5 +5389,14 @@
     "reason": "The hook owns one conversation intent-list observation lifetime: identity-bound state, cancellation, initial/refresh/page reads, and display disposition. The added denial branch reuses the shared admitted-error classifier; Core authorization, transport validation and durable decision recovery remain in their existing owners. Keeping these tightly related states together is clearer than a size-only split.",
     "reviewedBy": "Codex independent MF-03 reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents",
+    "fingerprint": "e28a9a60b57f510bbb0c9ea7a3be111b22d5e1a52f706b762357be29ef33ec38",
+    "reason": "The hook composes one conversation intent-review lifetime: admitted list projection, exact saved-decision recovery and explicit decisions. MF-04 delegates timer and visibility resource ownership to useIntentExpiry and adds only a fresh-decision deadline guard. Transport, authorization and durable journal semantics remain in existing owners; the small composition change adds no separate domain or reason to split the established recovery workflow.",
+    "reviewedBy": "Codex independent MF-04 reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]
