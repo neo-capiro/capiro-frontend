@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { useRunCommands } from "./useRunCommands";
@@ -32,6 +32,36 @@ export function useLiveRun(
     port.getSnapshot,
     port.getSnapshot,
   );
+  const [decisionRefresh, setDecisionRefresh] = useState(0);
+  const requested = useRef(0);
+  const handled = useRef(0),
+    generation = useRef(0);
+  const refreshAfterDecision = () => {
+    if (alive.current) setDecisionRefresh(++requested.current);
+  };
+  useEffect(() => {
+    if (
+      !alive.current ||
+      commands.busy ||
+      active.current ||
+      decisionRefresh <= handled.current
+    )
+      return;
+    handled.current = decisionRefresh;
+    const captured = generation.current;
+    // Coalesce read wakeups until an existing command finishes; never queue its write.
+    void commands.history().then(() => {
+      if (
+        alive.current &&
+        generation.current === captured &&
+        port.getSnapshot().status === "ready" &&
+        port.getSnapshot().observation?.runState === "waiting-for-approval"
+      )
+        observation.afterDecision();
+    });
+    // The command gate's busy transition releases a pending read wakeup.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [decisionRefresh, commands.busy]);
 
   useEffect(() => {
     alive.current = true;
@@ -77,7 +107,19 @@ export function useLiveRun(
     snapshot,
     ...commands,
     observing: observation.state,
-    suspendObservation: observation.stop,
-    reconnect: observation.observe,
+    refreshAfterDecision,
+    suspendObservation: () => {
+      handled.current = requested.current;
+      generation.current++;
+      observation.stop();
+    },
+    reconnect: () => {
+      if (
+        decisionRefresh &&
+        snapshot.observation?.runState === "waiting-for-approval"
+      )
+        refreshAfterDecision();
+      else observation.observe();
+    },
   };
 }
