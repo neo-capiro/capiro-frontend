@@ -9,15 +9,42 @@
   flex: 1;
   min-width: 200px;
 }
-.select {
-  background: #fff;
-  border: 1px solid #e7e5e4;
-  border-radius: 8px;
-  min-height: 36px;
-  padding: 6px 10px;
+.toolbar > [role="combobox"] {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: min(220px, 100%);
+}
+.toolbar > [role="combobox"] > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/**
+ * Long directory values (full committee names, street addresses) must not wrap the
+ * whole row to ~20 lines the way unbounded text does. Figma 3.4 renders these
+ * columns compact, so clamp to two lines and keep row rhythm consistent.
+ */
+/** Figma 3.4 renders Clear all as plain secondary text, not a bordered control. */
+.clearAll {
+  border: 0;
+  background: transparent;
+  padding: 6px 4px;
   font: inherit;
-  color: #292524;
-  max-width: 220px;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.clearAll:hover {
+  color: var(--foreground);
+}
+.cellClamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .split {
   display: grid;
@@ -213,18 +240,7 @@
   .personnelSplit {
     grid-template-columns: 1fr;
   }
-  .select {
-    flex: 1;
-  }
   .staff {
     grid-template-columns: 1fr;
   }
-}
-
-.select {
-  appearance: none;
-  background-image: url("/figma/modules/directory-chevron-down.svg");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  padding-right: 30px;
 }

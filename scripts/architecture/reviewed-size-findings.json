@@ -3286,10 +3286,12 @@
     "file": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
     "kind": "function",
     "symbol": "PersonnelDirectory",
-    "fingerprint": "c807490bf373a0c8631f079d52c788a2d7f41a67aa18000a9134c264a67010c1",
-    "reason": "One bounded personnel list owns URL filters, the list query, row selection and table presentation (reviewed at 246 lines on 2026-10-17). 53534db6 adds the verified selected-profile side preview: the read and rendering live in PersonnelPreview and row activation in DataTable; the growth here is the list/preview layout and URL-selected row binding only.",
-    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
-    "reviewedOn": "2026-10-18"
+    "line": 26,
+    "nonblank": 279,
+    "fingerprint": "7daab26fda7898aa518bc3ce86eaad428e143f7209f102a6aa610f815672d4e6",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
@@ -5241,6 +5243,39 @@
     "fingerprint": "d37700209b29d5dcb59fe5af69498b8bcc4907c4b359d66e58834c7627ce2328",
     "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One explicit link-preview dialog presents source input, pending/unknown/proposed outcomes and separate adoption. Duplicate manual fields are removed: AppControls alone edits them. The proposal uses the same empty-app defaults and source-version fence, preserves display choices/unknown nested fields on explicit update, and reuses current mutation/Undo owners. Keeping its mutually exclusive dialog states together does not add another state or transport owner. See W3-FE217-COMPOSITION-REVIEW.md.",
     "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/CommitteeDirectory.tsx",
+    "kind": "function",
+    "symbol": "CommitteeDirectory",
+    "line": 14,
+    "nonblank": 149,
+    "fingerprint": "26c6d1f463b83753d74c52fe3b16dfeac41f3724256c398af3f7fe50c2e30cdd",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
+    "kind": "function",
+    "symbol": "CongressionalContacts",
+    "line": 25,
+    "nonblank": 231,
+    "fingerprint": "a340f0665f0daec0dfaad20df669fc83e1897b1190e4e44a4d13e815335807ea",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/StateDirectory.tsx",
+    "kind": "function",
+    "symbol": "StateDirectory",
+    "line": 13,
+    "nonblank": 206,
+    "fingerprint": "726365d1118f6e2b1143050cbdc80bec2234f591c58e2c6d4a0ca9ab9278ede2",
+    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
