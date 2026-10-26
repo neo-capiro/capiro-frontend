@@ -6,6 +6,7 @@ import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { newsletterBackHref } from "./newsletter-route";
 import type { NewsletterDestination as Destination } from "./newsletter-route";
 import { NewsletterReceivingView } from "./newsletter-receiving/NewsletterReceivingView";
+import { NewsletterDelivery } from "./newsletter-delivery/NewsletterDelivery";
 import styles from "./engagement.module.css";
 
 /** Route hints select a canonical read; opening a record requires a separate click. */
@@ -37,10 +38,19 @@ export function NewsletterDestination({
     );
   if (selected.state === "loading")
     return <p role="status">Checking current client access…</p>;
+  if (destination.kind === "record")
+    return (
+      <NewsletterDelivery
+        key={JSON.stringify([destination, clientId])}
+        recordId={destination.id}
+        clientId={clientId}
+        back={back}
+      />
+    );
   return (
     <NewsletterReceivingView
       key={JSON.stringify([destination, clientId])}
-      destination={destination}
+      destination={{ kind: "stage", id: destination.id }}
       clientId={clientId}
       back={back}
     />
