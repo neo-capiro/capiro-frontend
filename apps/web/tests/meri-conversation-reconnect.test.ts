@@ -1,5 +1,10 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { ConversationHostController } from "../src/shared/meri-conversations/host-controller";
+import {
+  accessBinary,
+  accessInspection,
+} from "./meri-document-access-fixtures";
+import { ids } from "./meri-document-public-fixtures";
 
 const context = {
   tenantId: "synthetic-tenant",
@@ -213,6 +218,116 @@ function heldResponse() {
   });
   return { held, release };
 }
+
+it.each(["inspect", "download"] as const)(
+  "an active artifact %s defers early renewal until its entire bounded read settles",
+  async (action) => {
+    clock();
+    const held = heldResponse(),
+      receipt = accessInspection("docx");
+    const calls: string[] = [];
+    const host = new ConversationHostController({
+      hints: exactHints,
+      account,
+      fetcher: async (url) => {
+        const path = String(url);
+        calls.push(path);
+        if (path.endsWith("/session")) return session(context, 300_000);
+        if (path.endsWith("/inspect"))
+          return action === "inspect" ? held.held : Response.json(receipt);
+        if (path.endsWith("/issue"))
+          return Response.json({
+            versionId: ids.version,
+            token: `${"c".repeat(40)}.${"m".repeat(43)}`,
+            expiresAtMs: Date.now() + 60_000,
+          });
+        if (path.endsWith("/redeem")) return held.held;
+        throw new Error("Unexpected synthetic request");
+      },
+    });
+    const detach = host.attach();
+    try {
+      await host.connect();
+      const original = host.getSnapshot();
+      if (original.status !== "ready") throw new Error("not ready");
+      await vi.advanceTimersByTimeAsync(250_000);
+      const reading = original.port.artifacts[action](
+        ids.version,
+        new AbortController().signal,
+      );
+      await vi.advanceTimersByTimeAsync(15_000);
+      expect(host.getSnapshot()).toBe(original);
+      expect(original.port.artifacts.pending()).toBe(true);
+      held.release(
+        action === "inspect" ? Response.json(receipt) : accessBinary(receipt),
+      );
+      expect((await reading).ok).toBe(true);
+      expect(original.port.artifacts.pending()).toBe(false);
+      await vi.advanceTimersByTimeAsync(1_000);
+      expect(host.getSnapshot().status).toBe("expired");
+      expect(host.getExpirationReason()).toBe("renewal");
+      expect(calls).toEqual(
+        action === "inspect"
+          ? ["/api/action-followthrough/session", "/api/documents/inspect"]
+          : [
+              "/api/action-followthrough/session",
+              "/api/documents/inspect",
+              "/api/documents/links/issue",
+              "/api/documents/links/redeem",
+            ],
+      );
+    } finally {
+      detach();
+    }
+  },
+);
+
+it.each(["expiry", "revocation", "detach"])(
+  "artifact work still aborts on actual %s without automatic replay",
+  async (reason) => {
+    clock();
+    let fileSignal: AbortSignal | null | undefined;
+    let fileCalls = 0;
+    const host = new ConversationHostController({
+      hints: exactHints,
+      account,
+      fetcher: async (url, init) => {
+        if (String(url).endsWith("/session")) return session(context, 10_000);
+        fileCalls++;
+        fileSignal = init?.signal;
+        return new Promise<Response>(() => {});
+      },
+    });
+    const detach = host.attach();
+    try {
+      await host.connect();
+      const original = host.getSnapshot();
+      if (original.status !== "ready") throw new Error("not ready");
+      const reading = original.port.artifacts.inspect(
+        ids.version,
+        new AbortController().signal,
+      );
+      await vi.advanceTimersByTimeAsync(5_001);
+      expect(host.getSnapshot()).toBe(original);
+      if (reason === "expiry") await vi.advanceTimersByTimeAsync(5_000);
+      else if (reason === "revocation") host.revoke();
+      else detach();
+      expect(await reading).toEqual({ ok: false, code: "CANCELLED" });
+      expect(fileSignal?.aborted).toBe(true);
+      expect(original.port.artifacts.pending()).toBe(false);
+      expect(host.getExpirationReason()).toBe(
+        reason === "expiry"
+          ? "expiry"
+          : reason === "revocation"
+            ? "access-lost"
+            : undefined,
+      );
+      expect(fileCalls).toBe(1);
+    } finally {
+      detach();
+    }
+  },
+);
 
 it("an idle session renews itself 45 s before Meri's cap instead of running into it", async () => {
   clock();

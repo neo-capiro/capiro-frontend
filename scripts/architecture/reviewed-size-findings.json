@@ -5488,5 +5488,14 @@
     "reason": "This component coordinates one district read and its local display scope. Filtering returned rows by the existing selected state belongs beside the existing inScope derivation; summaries, presentation filters and valid selection then share that set. Core remains the source and authorization owner, useCapiroQuery retains replaced-read admission, and DistrictMap owns boundaries. The actual mounted all-state-response regression proves the prior mismatch and the correction, including null summaries and stale-selection retirement; no artificial split or new state owner is needed.",
     "reviewedBy": "Codex independent PR239 state-filter reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/host-controller.ts",
+    "kind": "function",
+    "symbol": "constructor",
+    "fingerprint": "5bb2933df0b4329486e4c41ff2ceef13cedc4f0c8d69bd7764697763f425b1f7",
+    "reason": "This constructor remains composition for one conversation session and its public ports. The extra artifact pending predicate is an observation supplied by the existing bounded artifact-access owner, parallel to feedback pending. The unchanged SessionLifetimeController owns renewal polling, hard expiry, revocation and cleanup. No file receiver, credential issuer, retry, replay or independent lifetime logic is added here; keeping the predicate beside other active-port checks preserves one renewal owner. Actual-host and mounted Preview/Download evidence proves early deferral while hard expiry/revocation/detach still abort.",
+    "reviewedBy": "Codex independent file-renewal reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

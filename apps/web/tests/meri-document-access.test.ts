@@ -30,6 +30,45 @@ const client = (fetcher: typeof fetch, lifetime = signal()) =>
   createArtifactAccess(session.credential, lifetime, fetcher);
 afterEach(() => vi.useRealTimers());
 
+it("keeps concurrent file reads pending until every bounded operation succeeds or throws", async () => {
+  const first = Promise.withResolvers<Response>();
+  const second = Promise.withResolvers<Response>();
+  const fetcher = vi
+    .fn<typeof fetch>()
+    .mockReturnValueOnce(first.promise)
+    .mockReturnValueOnce(second.promise);
+  const access = client(fetcher);
+  expect(access.pending()).toBe(false);
+  const one = access.inspect(ids.version, signal());
+  const two = access.inspect(ids.version, signal());
+  expect(access.pending()).toBe(true);
+  first.resolve(jsonResponse(accessInspection("docx")));
+  expect((await one).ok).toBe(true);
+  expect(access.pending()).toBe(true);
+  second.reject(new Error("Synthetic unavailable read"));
+  expect(await two).toEqual({ ok: false, code: "PREVIEW_UNAVAILABLE" });
+  expect(access.pending()).toBe(false);
+  expect(fetcher).toHaveBeenCalledTimes(2);
+});
+
+it.each(["caller", "lifetime", "deadline"])(
+  "releases pending file work after %s cancellation without replay",
+  async (kind) => {
+    vi.useFakeTimers();
+    const lifetime = new AbortController(),
+      caller = new AbortController();
+    const fetcher = vi.fn<typeof fetch>(() => new Promise<Response>(() => {}));
+    const access = client(fetcher, lifetime.signal);
+    const reading = access.download(ids.version, caller.signal);
+    expect(access.pending()).toBe(true);
+    if (kind === "deadline") await vi.advanceTimersByTimeAsync(30_001);
+    else (kind === "caller" ? caller : lifetime).abort();
+    expect(await reading).toEqual({ ok: false, code: "CANCELLED" });
+    expect(access.pending()).toBe(false);
+    expect(fetcher).toHaveBeenCalledOnce();
+  },
+);
+
 describe("B2 artifact inspection and signed-link download", () => {
   it.each(accessFormats)(
     "admits %s inspection and exact bytes through the same receiver",
