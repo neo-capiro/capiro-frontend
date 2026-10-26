@@ -30,7 +30,6 @@ async function noSamples(page: Page) {
     "FY27 funding landscape",
     "Weekly client updates",
     /Approvals · \d/,
-    "Your authorized data",
     "Disconnected synthetic fixture",
     "Conversation and workspace samples remain disconnected",
   ])
@@ -104,7 +103,7 @@ test("null account names and no client selection use neutral state, never sample
   await page.goto("/meri");
   await expect(page.getByText("Welcome.", { exact: true })).toBeVisible();
   await expect(
-    page.locator("summary").filter({ hasText: /^Choose scope$/ }),
+    page.getByRole("button", { name: /^Choose a scope$/ }),
   ).toBeVisible();
   await expect(
     page.getByRole("region", { name: "Current client", exact: true }),

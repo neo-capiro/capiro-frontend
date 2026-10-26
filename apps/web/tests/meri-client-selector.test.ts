@@ -1,7 +1,13 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { MeriClientSelector } from "../src/features/meri/MeriClientSelector";
+import {
+  GENERAL_SCOPE_ID,
+  MeriClientSelector,
+  ScopeRoster,
+  scopeHref,
+  scopeOptions,
+} from "../src/features/meri/MeriClientSelector";
 
 const mocks = vi.hoisted(() => ({
   query: {} as Record<string, unknown>,
@@ -25,6 +31,17 @@ vi.mock("../src/shared/session/SelectedClient", () => ({
 const scope = { tenantId: "tenant-a", userId: "actor-a" };
 const activeId = "11111111-1111-4111-8111-111111111111";
 const archivedId = "22222222-2222-4222-8222-222222222222";
+const roster = (
+  data: readonly { id: string; name: string; status: string }[],
+) => ({
+  isSuccess: true,
+  isPending: false,
+  isFetching: false,
+  error: null,
+  data,
+});
+const renderRoster = (props: Parameters<typeof ScopeRoster>[0]) =>
+  renderToStaticMarkup(createElement(ScopeRoster, props));
 
 afterEach(() => {
   mocks.query = {};
@@ -33,73 +50,109 @@ afterEach(() => {
   mocks.search = "";
 });
 
-it("offers only returned, nonarchived clients as explicit Meri route choices", () => {
-  mocks.query = {
-    isSuccess: true,
-    isPending: false,
-    isFetching: false,
-    error: null,
-    data: [
+it("offers General first and only returned, nonarchived clients as scopes", () => {
+  const options = scopeOptions([
+    { id: activeId, name: "Current client", status: "active" },
+    { id: archivedId, name: "Archived client", status: "archived" },
+    { id: "3", name: "  ", status: "active" },
+  ]);
+  expect(options.map((option) => option.id)).toEqual([
+    GENERAL_SCOPE_ID,
+    activeId,
+    "3",
+  ]);
+  expect(options[0]).toMatchObject({ name: "General workspace" });
+  expect(options[2]).toMatchObject({ name: "Unnamed client" });
+  expect(scopeHref("/meri", GENERAL_SCOPE_ID)).toBe("/meri?scope=general");
+  expect(scopeHref("/meri/conversations", activeId)).toBe(
+    `/meri/conversations?clientId=${activeId}`,
+  );
+});
+
+it("applies the chosen scope through the existing scoped route only", () => {
+  const html = renderRoster({
+    verified: true,
+    roster: roster([
       { id: activeId, name: "Current client", status: "active" },
       { id: archivedId, name: "Archived client", status: "archived" },
-    ],
-  };
-  mocks.selected = {
-    state: "authorized-client",
-    client: { id: activeId, name: "Current client" },
-  };
-  const html = renderToStaticMarkup(
-    createElement(MeriClientSelector, { scope }),
-  );
+    ]),
+    destination: "/meri",
+    appliedId: activeId,
+    onClose: () => undefined,
+  });
 
-  expect(mocks.useClients).toHaveBeenCalledWith({ enabled: true, scope });
   expect(html).toContain(`href="/meri?clientId=${activeId}"`);
   expect(html).toContain('aria-current="page"');
+  expect(html).toContain("Selected · Authorized client workspace");
+  expect(html).toContain("Data scope");
+  expect(html).toContain("Your draft is preserved");
   expect(html).not.toContain(archivedId);
   expect(html).not.toContain("Archived client");
 });
 
 it("shows an empty roster without selecting a client", () => {
-  mocks.query = {
-    isSuccess: true,
-    isPending: false,
-    isFetching: false,
-    error: null,
-    data: [{ id: archivedId, name: "Archived client", status: "archived" }],
-  };
-  const html = renderToStaticMarkup(
-    createElement(MeriClientSelector, { scope }),
-  );
+  const html = renderRoster({
+    verified: true,
+    roster: roster([
+      { id: archivedId, name: "Archived client", status: "archived" },
+    ]),
+    destination: "/meri",
+    onClose: () => undefined,
+  });
 
-  expect(html).toContain("Choose scope");
   expect(html).toContain("No available clients were returned");
+  expect(html).toContain('href="/meri?scope=general"');
   expect(html).not.toContain('href="/meri?clientId=');
 });
 
-it("preserves explicit General navigation without selecting a client", () => {
+it("labels the trigger from the current scope and never from the roster", () => {
   mocks.search = "scope=general";
-  mocks.query = { isSuccess: true, isFetching: false, data: [] };
-  const html = renderToStaticMarkup(
+  mocks.query = roster([]);
+  const general = renderToStaticMarkup(
     createElement(MeriClientSelector, { scope }),
   );
-  expect(html).toContain('href="/meri?scope=general"');
-  expect(html).toContain('aria-current="page"');
-  expect(html).not.toContain('href="/meri?clientId=');
-  expect(mocks.selected).toEqual({ state: "no-selection" });
+  expect(mocks.useClients).toHaveBeenCalledWith({ enabled: true, scope });
+  expect(general).toContain(">General<");
+  expect(general).toContain('aria-haspopup="dialog"');
+  expect(general).not.toContain('href="/meri?clientId=');
+
+  mocks.search = "";
+  mocks.selected = {
+    state: "authorized-client",
+    client: { id: activeId, name: "Current client" },
+  };
+  const client = renderToStaticMarkup(
+    createElement(MeriClientSelector, { scope }),
+  );
+  expect(client).toContain(">Current client<");
+
+  mocks.selected = { state: "no-selection" };
+  const none = renderToStaticMarkup(
+    createElement(MeriClientSelector, { scope }),
+  );
+  expect(none).toContain(">Choose a scope<");
 });
 
 it("keeps the roster unavailable when identity or the list is not verified", () => {
-  mocks.query = {
-    isSuccess: false,
-    isPending: false,
-    isFetching: false,
-    error: new Error("unavailable"),
-    refetch: vi.fn(),
-  };
-  const error = renderToStaticMarkup(
-    createElement(MeriClientSelector, { scope }),
-  );
-  const unverified = renderToStaticMarkup(createElement(MeriClientSelector));
+  const error = renderRoster({
+    verified: true,
+    roster: {
+      isSuccess: false,
+      isPending: false,
+      isFetching: false,
+      error: new Error("unavailable"),
+      refetch: vi.fn(),
+    },
+    destination: "/meri",
+    onClose: () => undefined,
+  });
+  const unverified = renderRoster({
+    verified: false,
+    roster: {},
+    destination: "/meri",
+    onClose: () => undefined,
+  });
+  renderToStaticMarkup(createElement(MeriClientSelector));
 
   expect(error).toContain("Available clients could not be loaded");
   expect(error).toContain("Retry clients");

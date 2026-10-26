@@ -1,5 +1,6 @@
 "use client";
 import { useId, useMemo } from "react";
+import { ChevronDown } from "lucide-react";
 import {
   Cascader,
   CascaderTrigger,
@@ -33,6 +34,8 @@ export function ModelSelectionPicker({
   compact = false,
   label,
   defaultLabel = "Use default",
+  defaultShortLabel = defaultLabel,
+  prefix,
   defaultDescription,
 }: {
   catalog: ModelCatalog;
@@ -41,7 +44,12 @@ export function ModelSelectionPicker({
   disabled?: boolean;
   compact?: boolean;
   label: string;
+  /** First menu entry for the server-chosen default. */
   defaultLabel?: string;
+  /** Trigger text for that default (Figma composer: "Model · Default"). */
+  defaultShortLabel?: string;
+  /** Visible trigger prefix (Figma composer: "Model"); the accessible label stays `label`. */
+  prefix?: string;
   defaultDescription?: string;
 }) {
   const id = useId();
@@ -50,6 +58,7 @@ export function ModelSelectionPicker({
     [catalog, defaultLabel],
   );
   const selected = value ? selectionLabel(catalog, value) : defaultLabel;
+  const shown = value ? selected : defaultShortLabel;
   const available = selectionAvailable(catalog, value);
   return (
     <div className={compact ? styles.compact : styles.field}>
@@ -80,7 +89,10 @@ export function ModelSelectionPicker({
           aria-describedby={`${id}-help`}
           title={selected}
         >
-          <span className={styles.value}>{selected}</span>
+          <span className={styles.value}>
+            {prefix ? `${prefix} · ${shown}` : shown}
+          </span>
+          <ChevronDown aria-hidden />
         </CascaderTrigger>
         <CascaderContent className={styles.popup}>
           <CascaderPanel>
