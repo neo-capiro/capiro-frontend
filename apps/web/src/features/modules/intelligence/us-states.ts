@@ -1,0 +1,62 @@
+/**
+ * US state postal codes, including DC.
+ *
+ * The State control has to offer every state, not only the ones already present
+ * in the current response: deriving the options from the loaded districts makes
+ * a state that is not already visible unselectable, which is the opposite of
+ * what a filter is for. This mirrors the postal codes the district boundary
+ * sources use (`US_STATE_FIPS_TO_USPS` on the API side).
+ */
+export const US_STATE_CODES = [
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "DC",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY",
+] as const;

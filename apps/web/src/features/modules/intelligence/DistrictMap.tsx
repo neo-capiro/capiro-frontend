@@ -13,9 +13,13 @@ import styles from "./intelligence.module.css";
 export function DistrictMap({
   districts,
   onSelect,
+  colorBy = "nexus",
+  selectedDistrictKey,
 }: {
   districts: readonly DistrictSummary[];
   onSelect: (district: DistrictSummary) => void;
+  colorBy?: "nexus" | "coverage";
+  selectedDistrictKey?: string;
 }) {
   const api = useCapiro();
   const [features, setFeatures] = useState<BoundaryFeature[]>([]);
@@ -78,14 +82,22 @@ export function DistrictMap({
                 <path
                   key={f.id}
                   d={districtPath(f)}
-                  fill={
-                    d?.score != null
-                      ? `hsl(191 22% ${94 - Math.min(100, d.score) * 0.3}%)`
-                      : "#f5f5f4"
-                  }
+                  fill={(() => {
+                    if (!d) return "#f5f5f4";
+                    if (d.districtKey === selectedDistrictKey) return "#0a0a0a";
+                    // Nexus and coverage are the only two dimensions this read
+                    // supplies; every other basis would be invented.
+                    const basis =
+                      colorBy === "coverage" ? d.coveragePercent : d.score;
+                    if (basis == null) return "#f5f5f4";
+                    return `hsl(191 22% ${94 - Math.min(100, basis) * 0.3}%)`;
+                  })()}
                   onClick={() => d && onSelect(d)}
                   tabIndex={d ? 0 : undefined}
                   role={d ? "button" : undefined}
+                  aria-pressed={
+                    d ? d.districtKey === selectedDistrictKey : undefined
+                  }
                   aria-label={
                     d ? `${f.id}, score ${d.score ?? "unavailable"}` : undefined
                   }
@@ -146,7 +158,7 @@ export function DistrictMap({
         {error
           ? "Official boundary data unavailable · reference outlines shown"
           : features.length
-            ? "Current official district boundaries · Nexus score"
+            ? `Current official district boundaries · ${colorBy === "coverage" ? "Coverage" : "Nexus score"}`
             : "Loading official boundaries…"}
       </div>
     </div>
