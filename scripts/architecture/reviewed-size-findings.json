@@ -1901,9 +1901,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "09c6a1f31dbbb0fa18e0f7d1f6a3f1f797b176d6e9bf4c1058642be6e3f59cd4",
-    "reason": "The existing Rich editor receives an explicit conversion candidate through its current edit/history controller and reuses the image asset replacement owner; ordinary saved-document loading remains intact.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "f1364e5526b076deccec133ff274a8a5518eb90ba68effb5edaede4908cccc46",
+    "reason": "One existing mounted editor coordinates explicit brand and survey views with the current draft and resets their local view keys on owner replacement. The additive union preserves the reviewed saved-content review, template/section library, conversion action, save recovery and Undo behavior.",
+    "reviewedBy": "Wave 3 Root independent composition reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4668,6 +4668,87 @@
     "fingerprint": "da410aa8dabaff56288626fcddec5bd47ebc5b315d360771db67091630547a89",
     "reason": "A single explicit conversion interaction captures actor, session, client and draft identity, explains unsupported input, and applies the reviewed local candidate through the existing editor owner without saving or submitting.",
     "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/BrandSettings.tsx",
+    "kind": "function",
+    "symbol": "ButtonSettings",
+    "fingerprint": "760a0a6816ffeceb195d0fc3d314f36dd3303583fd3b98115d6226318a28e03a",
+    "reason": "One local button-settings dialog binds the supported fields and primary selection; it changes the local Brand Kit only through the kit edit function. Fields and canonical modal are reused, with no independent persistence owner.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/BrandWorkspace.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "3ea5aa1f88c49bf9e7652dc616fd0352b6db3ac6fb41fec2fc3ab75d0f3151b1",
+    "reason": "BrandWorkspace is one four-tab presentation module sharing the same Brand Kit draft and preview. Network lifetime, pure transformations, fields, logo picker and settings dialogs are already separate owners; no further split is justified solely by line count.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/BrandWorkspace.tsx",
+    "kind": "function",
+    "symbol": "BrandWorkspace",
+    "fingerprint": "4612ed705b8a351d8b051a8d73cdbdfbac659cb48ac981777394f813707117d1",
+    "reason": "The long function is mostly JSX for one Brand Kit workspace and its four panels. It delegates persistence/lifetime, shared preview rendering, asset selection and settings dialogs; Apply uses one existing history edit. It introduces no parallel transport, save journal or policy engine.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/brand/use-brand-kit.ts",
+    "kind": "function",
+    "symbol": "useBrandKit",
+    "fingerprint": "16b942f0416b2ff6230e4a6917b07942766cd6684a271ec1725b6dafbe974be2",
+    "reason": "The hook owns one mounted kit interaction and its explicit read/save/font phases. Public response parsing, shared query/mutation hooks and scope identity protect completion; the kit/font unknown fence remains together across close and reload.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/SurveyForm.tsx",
+    "kind": "function",
+    "symbol": "SurveyForm",
+    "fingerprint": "c517ab1a0917f733d920f6120446e42456b523ebfc794344f13fb431a0539576",
+    "reason": "One local survey form owns tab selection and question ordering/focus restoration. Question controls and primitive fields are separate; persistence stays in useSurveyDrafts. The JSX preserves existing identity and definition fields.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/SurveyQuestion.tsx",
+    "kind": "function",
+    "symbol": "SurveyQuestion",
+    "fingerprint": "13a2ea881fdc418fab8ed809aa6f2b55a8407dca8acb5c286719e1702a0757fc",
+    "reason": "One canonical question union is rendered with conditional fields for its eight supported kinds. The function retains field identity and inert properties, delegates reusable fields, and never performs network work.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/SurveyWorkspace.tsx",
+    "kind": "function",
+    "symbol": "SurveyWorkspace",
+    "fingerprint": "7208f16c0ee92ec8484e70c128fff0dca8eb8ce0eec99dda8948c5d5384a4c6c",
+    "reason": "One modal composes accessible draft selection, form and unconfirmed presentation. Existing Modal owns focus; the hook owns writes, list scope and uncertainty. No draft publication, delivery or independent durable owner is added.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/surveys/use-survey-drafts.ts",
+    "kind": "function",
+    "symbol": "useSurveyDrafts",
+    "fingerprint": "97bf411bf9c79b1f5a58132680b1f258ae4deb725820f0772b6b34b328b9db06",
+    "reason": "The hook is the single mounted survey-list/form/save lifecycle. It binds current owner/document/API and saved id/revision, uses existing query/mutation transport, and treats mismatched readback as unconfirmed. Keeping those checks together prevents split uncertainty ownership.",
+    "reviewedBy": "Wave 3 Hermes independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "d5fe70ecfbdd33ab94d9cf357a127f6fe26692e96dd773251c0da66467fc6ef9",
+    "reason": "The existing editor remains the composition point for its document, history, review, library and explicit conversion owners. This union adds the independently reviewed brand and survey entry points and persistent sibling views; those features retain their separate lifecycle and transport owners.",
+    "reviewedBy": "Wave 3 Root independent composition reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]
