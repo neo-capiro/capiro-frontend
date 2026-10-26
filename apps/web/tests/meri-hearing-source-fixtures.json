@@ -1,0 +1,1108 @@
+{
+  "published": {
+    "schemaVersion": "meri.hearing-source-read/1",
+    "event": {
+      "contractVersion": "0.1.0",
+      "eventId": "7c2f4fc5-dc8c-8826-ac85-6cc5d5d55730",
+      "binding": {
+        "tenantId": "20000000-0000-4000-8000-000000000001",
+        "actorId": "10000000-0000-4000-8000-000000000001",
+        "conversationId": "30000000-0000-4000-8000-000000000003",
+        "runId": "40000000-0000-4000-8000-000000000004",
+        "attemptId": "50000000-0000-4000-8000-000000000005",
+        "workerId": "60000000-0000-4000-8000-000000000006",
+        "writerFence": 1
+      },
+      "sequence": 2,
+      "createdAt": "2026-10-26T05:00:00.000Z",
+      "scopes": [
+        {
+          "tenantId": "20000000-0000-4000-8000-000000000001",
+          "kind": "client",
+          "resourceId": "10000000-0000-4000-8000-000000000001",
+          "policyRevision": "policy1"
+        }
+      ],
+      "type": "source.native-hearing-record",
+      "data": {
+        "schemaVersion": "meri.native-hearing-source/1",
+        "deliveryId": "synthetic-hearing-source",
+        "operation": {
+          "id": "search_committee_hearings",
+          "version": "0.2.0"
+        },
+        "requestSha256": "664765be43b752def211fabe286d3a5fc877bb6b5e3090a83d2c748c11d175f5",
+        "argumentsSha256": "ceeee988127f96c08b887b41d8d4b114b2b939be131c11fe85e432672f9a6b21",
+        "resultSha256": "487b42dad27e7626ffa5c25e60389e61174f893d600fb375221050d92faa3e4d",
+        "executionSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "policyRevision": "policy1",
+        "selection": {
+          "recordsView": "published",
+          "hearingId": "h",
+          "recordId": "record",
+          "clientId": null,
+          "asOf": null,
+          "cursor": null
+        },
+        "source": {
+          "recordId": "published:record:06c14d4014abbdd847162ca5f6df627b0415462a9779565fb98f3c203bded448:0",
+          "provenance": {
+            "adapter": "hearings",
+            "sourceTable": "published_legislative_record",
+            "sourceRecordId": "record",
+            "hearingId": "h",
+            "contentHash": "06c14d4014abbdd847162ca5f6df627b0415462a9779565fb98f3c203bded448",
+            "historical": false
+          }
+        },
+        "page": {
+          "part": 0,
+          "format": "json",
+          "characterStart": 0,
+          "characterEnd": 417,
+          "totalCharacters": 417,
+          "contentComplete": true,
+          "payloadSha256": "06c14d4014abbdd847162ca5f6df627b0415462a9779565fb98f3c203bded448"
+        },
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "searchedEntityCount": 0,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": true,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 0,
+              "searchedEntityCount": 0,
+              "hasMore": false,
+              "truncated": false,
+              "paginationComplete": true,
+              "coverageComplete": false,
+              "stopReason": "exact_selected_version_complete_publisher_coverage_not_asserted"
+            }
+          ],
+          "complete": false,
+          "stopReason": "source_degraded"
+        }
+      }
+    },
+    "current": {
+      "result": {
+        "tool": "search_committee_hearings",
+        "records": [
+          {
+            "domain": "hearings",
+            "recordId": "published:record:06c14d4014abbdd847162ca5f6df627b0415462a9779565fb98f3c203bded448:0",
+            "occurredAt": null,
+            "updatedAt": null,
+            "payload": {
+              "id": "record",
+              "hash": "opaque revision",
+              "evidence": {
+                "text": "<script>alert(\"inert\")</script> Synthetic hearing evidence 😀 https://inert.example.test/"
+              },
+              "observed": "2026-10-26T05:00:00.000Z",
+              "date": "provider raw date",
+              "billId": null,
+              "kind": "official_transcript",
+              "current": true,
+              "eventId": "h",
+              "historical": false,
+              "authority": "Published source version; bill agenda membership alone does not establish hearing occurrence"
+            },
+            "provenance": {
+              "adapter": "hearings",
+              "sourceTable": "published_legislative_record",
+              "sourceRecordId": "record",
+              "hearingId": "h",
+              "contentHash": "06c14d4014abbdd847162ca5f6df627b0415462a9779565fb98f3c203bded448",
+              "historical": false
+            }
+          }
+        ],
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "searchedEntityCount": 0,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": true,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 0,
+              "searchedEntityCount": 0,
+              "hasMore": false,
+              "truncated": false,
+              "paginationComplete": true,
+              "coverageComplete": false,
+              "stopReason": "exact_selected_version_complete_publisher_coverage_not_asserted"
+            }
+          ],
+          "complete": false,
+          "stopReason": "source_degraded"
+        },
+        "observability": {
+          "queryClass": "lookup",
+          "requestedDomains": [
+            "hearings"
+          ],
+          "queriedDatasets": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "queriedEntityCount": 0,
+          "pagesByDomain": {
+            "hearings": 1
+          },
+          "sourceHealth": {
+            "hearings": "degraded"
+          },
+          "freshnessByDomain": {
+            "hearings": null
+          },
+          "coverageComplete": false,
+          "stopReason": "source_degraded"
+        },
+        "note": "One complete evidence chunk per page. Follow the hearings nextCursor for remaining official transcript chunks, machine segments and intelligence. Coverage reports unsupported browser-session material; search results never imply a complete transcript."
+      },
+      "sourceLocator": null,
+      "linkStatus": "unsafe"
+    }
+  },
+  "brief": {
+    "schemaVersion": "meri.hearing-source-read/1",
+    "event": {
+      "contractVersion": "0.1.0",
+      "eventId": "7c2f4fc5-dc8c-8826-ac85-6cc5d5d55730",
+      "binding": {
+        "tenantId": "20000000-0000-4000-8000-000000000001",
+        "actorId": "10000000-0000-4000-8000-000000000001",
+        "conversationId": "30000000-0000-4000-8000-000000000003",
+        "runId": "40000000-0000-4000-8000-000000000004",
+        "attemptId": "50000000-0000-4000-8000-000000000005",
+        "workerId": "60000000-0000-4000-8000-000000000006",
+        "writerFence": 1
+      },
+      "sequence": 2,
+      "createdAt": "2026-10-26T05:00:00.000Z",
+      "scopes": [
+        {
+          "tenantId": "20000000-0000-4000-8000-000000000001",
+          "kind": "client",
+          "resourceId": "10000000-0000-4000-8000-000000000001",
+          "policyRevision": "policy1"
+        }
+      ],
+      "type": "source.native-hearing-record",
+      "data": {
+        "schemaVersion": "meri.native-hearing-source/1",
+        "deliveryId": "synthetic-hearing-source",
+        "operation": {
+          "id": "search_committee_hearings",
+          "version": "0.2.0"
+        },
+        "requestSha256": "1abf35223b1f23fe603cafd26f298022ac55053effc0673c24a626fa6c3d46c4",
+        "argumentsSha256": "51d55f5523581dec5c4d8acb365729aca7ace414709d2f08dcbe6145cc3c4aba",
+        "resultSha256": "724061dc410613b666a7354b5de1f4ea48d34c96712a16f2b331967630f9cb72",
+        "executionSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "policyRevision": "policy1",
+        "selection": {
+          "recordsView": "briefs",
+          "hearingId": "h",
+          "recordId": "record",
+          "clientId": "10000000-0000-4000-8000-000000000001",
+          "asOf": null,
+          "cursor": null
+        },
+        "source": {
+          "recordId": "briefs:record:8be9e0bbf41f137f2eac0541c40f05a868c72eea04515ce92a4967c366859974:0",
+          "provenance": {
+            "adapter": "hearings",
+            "sourceTable": "intel_hearing_record_briefs",
+            "sourceRecordId": "record",
+            "hearingId": "h",
+            "contentHash": "8be9e0bbf41f137f2eac0541c40f05a868c72eea04515ce92a4967c366859974",
+            "historical": false,
+            "tenantId": "20000000-0000-4000-8000-000000000001"
+          }
+        },
+        "page": {
+          "part": 0,
+          "format": "json",
+          "characterStart": 0,
+          "characterEnd": 1263,
+          "totalCharacters": 1263,
+          "contentComplete": true,
+          "payloadSha256": "8be9e0bbf41f137f2eac0541c40f05a868c72eea04515ce92a4967c366859974"
+        },
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 1,
+          "searchedEntityCount": 1,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": true,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 1,
+              "searchedEntityCount": 1,
+              "hasMore": false,
+              "truncated": false,
+              "paginationComplete": true,
+              "coverageComplete": false,
+              "stopReason": "exact_selected_version_complete_publisher_coverage_not_asserted"
+            }
+          ],
+          "complete": false,
+          "stopReason": "source_degraded"
+        }
+      }
+    },
+    "current": {
+      "result": {
+        "tool": "search_committee_hearings",
+        "records": [
+          {
+            "domain": "hearings",
+            "recordId": "briefs:record:8be9e0bbf41f137f2eac0541c40f05a868c72eea04515ce92a4967c366859974:0",
+            "occurredAt": null,
+            "updatedAt": null,
+            "payload": {
+              "kind": "capiro_published_record_brief",
+              "id": "record",
+              "seriesId": "series",
+              "version": 1,
+              "createdAt": "2026-10-26T05:00:00.000Z",
+              "contentHash": "ac2c0ee178503473c8e7d604373b26a4360eaa64329b393410097c2b208d9c76",
+              "payload": {
+                "schema": "legiwatch.published-record-brief.v1",
+                "label": "Brief based on published records",
+                "author": "Capiro",
+                "title": "Assessment",
+                "eventId": "h",
+                "runId": "run",
+                "clientId": "10000000-0000-4000-8000-000000000001",
+                "folders": [],
+                "sourceHash": "opaque",
+                "cutoff": "2026-10-26T05:00:00.000Z",
+                "claims": [
+                  {
+                    "id": "owner-claim",
+                    "text": "Owner passage",
+                    "kind": "quote",
+                    "scope": "hearing_event",
+                    "billId": null,
+                    "references": [
+                      {
+                        "id": "source-record",
+                        "hash": "source-hash",
+                        "locator": "evidence.text"
+                      }
+                    ]
+                  }
+                ],
+                "records": [
+                  {
+                    "id": "source-record",
+                    "billId": null,
+                    "kind": "official_transcript",
+                    "hash": "source-hash",
+                    "identity": "Synthetic source",
+                    "date": null,
+                    "observedAt": "2026-10-26T05:00:00.000Z",
+                    "evidence": {
+                      "text": "Owner passage"
+                    },
+                    "association": "explicit_event"
+                  }
+                ],
+                "observation": null,
+                "coverage": [],
+                "selectedObservationIds": [],
+                "provenance": {
+                  "promptVersion": "published-record-brief-v1",
+                  "clientContext": "applied"
+                }
+              },
+              "current": true,
+              "approvedAt": "2026-10-26T05:00:00.000Z",
+              "status": "reviewed",
+              "historical": false,
+              "authority": "Capiro assessment; source citations retain separate publisher authority"
+            },
+            "provenance": {
+              "adapter": "hearings",
+              "sourceTable": "intel_hearing_record_briefs",
+              "sourceRecordId": "record",
+              "hearingId": "h",
+              "contentHash": "8be9e0bbf41f137f2eac0541c40f05a868c72eea04515ce92a4967c366859974",
+              "historical": false,
+              "tenantId": "20000000-0000-4000-8000-000000000001"
+            }
+          }
+        ],
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 1,
+          "searchedEntityCount": 1,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": true,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 1,
+              "searchedEntityCount": 1,
+              "hasMore": false,
+              "truncated": false,
+              "paginationComplete": true,
+              "coverageComplete": false,
+              "stopReason": "exact_selected_version_complete_publisher_coverage_not_asserted"
+            }
+          ],
+          "complete": false,
+          "stopReason": "source_degraded"
+        },
+        "observability": {
+          "queryClass": "lookup",
+          "requestedDomains": [
+            "hearings"
+          ],
+          "queriedDatasets": [
+            "hearings"
+          ],
+          "requestedEntityCount": 1,
+          "queriedEntityCount": 1,
+          "pagesByDomain": {
+            "hearings": 1
+          },
+          "sourceHealth": {
+            "hearings": "degraded"
+          },
+          "freshnessByDomain": {
+            "hearings": null
+          },
+          "coverageComplete": false,
+          "stopReason": "source_degraded"
+        },
+        "note": "One complete evidence chunk per page. Follow the hearings nextCursor for remaining official transcript chunks, machine segments and intelligence. Coverage reports unsupported browser-session material; search results never imply a complete transcript."
+      },
+      "sourceLocator": null,
+      "linkStatus": "unsafe"
+    }
+  },
+  "reconciliation": {
+    "schemaVersion": "meri.hearing-source-read/1",
+    "event": {
+      "contractVersion": "0.1.0",
+      "eventId": "7c2f4fc5-dc8c-8826-ac85-6cc5d5d55730",
+      "binding": {
+        "tenantId": "20000000-0000-4000-8000-000000000001",
+        "actorId": "10000000-0000-4000-8000-000000000001",
+        "conversationId": "30000000-0000-4000-8000-000000000003",
+        "runId": "40000000-0000-4000-8000-000000000004",
+        "attemptId": "50000000-0000-4000-8000-000000000005",
+        "workerId": "60000000-0000-4000-8000-000000000006",
+        "writerFence": 1
+      },
+      "sequence": 2,
+      "createdAt": "2026-10-26T05:00:00.000Z",
+      "scopes": [
+        {
+          "tenantId": "20000000-0000-4000-8000-000000000001",
+          "kind": "client",
+          "resourceId": "10000000-0000-4000-8000-000000000001",
+          "policyRevision": "policy1"
+        }
+      ],
+      "type": "source.native-hearing-record",
+      "data": {
+        "schemaVersion": "meri.native-hearing-source/1",
+        "deliveryId": "synthetic-hearing-source",
+        "operation": {
+          "id": "search_committee_hearings",
+          "version": "0.2.0"
+        },
+        "requestSha256": "0c89622891612e8d307d99691e99a68ce084c15c07a1e02b96800cbd3cadfa51",
+        "argumentsSha256": "47e4552ad3942508959926e9392fdf45f13da50a6d730281ce8d9655ec7301ed",
+        "resultSha256": "86e8e9aec62536e225a7a3565592d0f150c38a38dda506835a9967b74e6e46ee",
+        "executionSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "policyRevision": "policy1",
+        "selection": {
+          "recordsView": "reconciliation",
+          "hearingId": "h",
+          "recordId": "record",
+          "clientId": null,
+          "asOf": null,
+          "cursor": null
+        },
+        "source": {
+          "recordId": "reconciliation:record:b9cc860c0397f9aacb7653176e1f93f3b91ef88a230562fb863c5e659fb2dea9:0",
+          "provenance": {
+            "adapter": "hearings",
+            "sourceTable": "intel_hearing_record_reconciliation",
+            "sourceRecordId": "record",
+            "hearingId": "h",
+            "contentHash": "b9cc860c0397f9aacb7653176e1f93f3b91ef88a230562fb863c5e659fb2dea9",
+            "historical": false,
+            "tenantId": "20000000-0000-4000-8000-000000000001"
+          }
+        },
+        "page": {
+          "part": 0,
+          "format": "json",
+          "characterStart": 0,
+          "characterEnd": 1579,
+          "totalCharacters": 1579,
+          "contentComplete": true,
+          "payloadSha256": "b9cc860c0397f9aacb7653176e1f93f3b91ef88a230562fb863c5e659fb2dea9"
+        },
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "searchedEntityCount": 0,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": true,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 0,
+              "searchedEntityCount": 0,
+              "hasMore": false,
+              "truncated": false,
+              "paginationComplete": true,
+              "coverageComplete": false,
+              "stopReason": "exact_selected_version_complete_publisher_coverage_not_asserted"
+            }
+          ],
+          "complete": false,
+          "stopReason": "source_degraded"
+        }
+      }
+    },
+    "current": {
+      "result": {
+        "tool": "search_committee_hearings",
+        "records": [
+          {
+            "domain": "hearings",
+            "recordId": "reconciliation:record:b9cc860c0397f9aacb7653176e1f93f3b91ef88a230562fb863c5e659fb2dea9:0",
+            "occurredAt": null,
+            "updatedAt": null,
+            "payload": {
+              "kind": "capiro_record_reconciliation",
+              "id": "record",
+              "inputHash": "input",
+              "payload": {
+                "schema": "legiwatch.record-reconciliation.v1",
+                "event": {
+                  "id": "h",
+                  "title": "Hearing",
+                  "jurisdiction": null,
+                  "session": null,
+                  "date": "2026-10-26",
+                  "body": null,
+                  "revision": 0
+                },
+                "records": [
+                  {
+                    "id": "source-record",
+                    "billId": null,
+                    "kind": "official_transcript",
+                    "hash": "source-hash",
+                    "identity": "Synthetic source",
+                    "date": null,
+                    "observedAt": "2026-10-26T05:00:00.000Z",
+                    "evidence": {
+                      "text": "Owner passage"
+                    },
+                    "association": "explicit_event"
+                  }
+                ],
+                "sourceHash": "hash",
+                "claims": [
+                  {
+                    "id": "owner-claim",
+                    "text": "Owner passage",
+                    "kind": "quote",
+                    "scope": "hearing_event",
+                    "billId": null,
+                    "references": [
+                      {
+                        "id": "source-record",
+                        "hash": "source-hash",
+                        "locator": "evidence.text"
+                      }
+                    ]
+                  }
+                ],
+                "originalClaims": [],
+                "observation": null,
+                "cutoff": "2026-10-26T05:00:00.000Z",
+                "coverage": [],
+                "sourceSelections": []
+              },
+              "current": true,
+              "createdAt": "2026-10-26T05:00:00.000Z",
+              "assessments": [
+                {
+                  "id": "assessment",
+                  "claimId": "owner-claim",
+                  "claimHash": "0eb5971e29d68503f5abc000e239b1451bedafb59c053a4432d618d44b7592bf",
+                  "outcome": "needs_review",
+                  "rationale": "Owner assessment",
+                  "supported": [],
+                  "unresolved": [
+                    "Review required"
+                  ],
+                  "references": [
+                    {
+                      "id": "source-record",
+                      "hash": "source-hash",
+                      "locator": "evidence.text"
+                    }
+                  ],
+                  "requiresReview": true,
+                  "ruleVersion": "synthetic-owner-rule",
+                  "reviews": [
+                    {
+                      "id": "review",
+                      "createdAt": "2026-10-26T05:00:00.000Z",
+                      "outcome": "needs_review",
+                      "rationale": "Owner review",
+                      "references": [
+                        {
+                          "id": "source-record",
+                          "hash": "source-hash",
+                          "locator": "evidence.text"
+                        }
+                      ],
+                      "reviewer": "Synthetic owner"
+                    }
+                  ]
+                }
+              ],
+              "historical": false,
+              "authority": "Capiro assessment of the preserved captured account"
+            },
+            "provenance": {
+              "adapter": "hearings",
+              "sourceTable": "intel_hearing_record_reconciliation",
+              "sourceRecordId": "record",
+              "hearingId": "h",
+              "contentHash": "b9cc860c0397f9aacb7653176e1f93f3b91ef88a230562fb863c5e659fb2dea9",
+              "historical": false,
+              "tenantId": "20000000-0000-4000-8000-000000000001"
+            }
+          }
+        ],
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "searchedEntityCount": 0,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": true,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 0,
+              "searchedEntityCount": 0,
+              "hasMore": false,
+              "truncated": false,
+              "paginationComplete": true,
+              "coverageComplete": false,
+              "stopReason": "exact_selected_version_complete_publisher_coverage_not_asserted"
+            }
+          ],
+          "complete": false,
+          "stopReason": "source_degraded"
+        },
+        "observability": {
+          "queryClass": "lookup",
+          "requestedDomains": [
+            "hearings"
+          ],
+          "queriedDatasets": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "queriedEntityCount": 0,
+          "pagesByDomain": {
+            "hearings": 1
+          },
+          "sourceHealth": {
+            "hearings": "degraded"
+          },
+          "freshnessByDomain": {
+            "hearings": null
+          },
+          "coverageComplete": false,
+          "stopReason": "source_degraded"
+        },
+        "note": "One complete evidence chunk per page. Follow the hearings nextCursor for remaining official transcript chunks, machine segments and intelligence. Coverage reports unsupported browser-session material; search results never imply a complete transcript."
+      },
+      "sourceLocator": null,
+      "linkStatus": "unsafe"
+    }
+  },
+  "fragment": {
+    "schemaVersion": "meri.hearing-source-read/1",
+    "event": {
+      "contractVersion": "0.1.0",
+      "eventId": "7c2f4fc5-dc8c-8826-ac85-6cc5d5d55730",
+      "binding": {
+        "tenantId": "20000000-0000-4000-8000-000000000001",
+        "actorId": "10000000-0000-4000-8000-000000000001",
+        "conversationId": "30000000-0000-4000-8000-000000000003",
+        "runId": "40000000-0000-4000-8000-000000000004",
+        "attemptId": "50000000-0000-4000-8000-000000000005",
+        "workerId": "60000000-0000-4000-8000-000000000006",
+        "writerFence": 1
+      },
+      "sequence": 2,
+      "createdAt": "2026-10-26T05:00:00.000Z",
+      "scopes": [
+        {
+          "tenantId": "20000000-0000-4000-8000-000000000001",
+          "kind": "client",
+          "resourceId": "10000000-0000-4000-8000-000000000001",
+          "policyRevision": "policy1"
+        }
+      ],
+      "type": "source.native-hearing-record",
+      "data": {
+        "schemaVersion": "meri.native-hearing-source/1",
+        "deliveryId": "synthetic-hearing-source",
+        "operation": {
+          "id": "search_committee_hearings",
+          "version": "0.2.0"
+        },
+        "requestSha256": "da2007f3187620127098a75098cf64219c8fcb81584fc722899ef4548a70bf31",
+        "argumentsSha256": "bbda96cb97b74b9a81342c2e06ea735652cef64dd55be34e496c996b5353363c",
+        "resultSha256": "410ae090a8f8dedd73db3a55adc15b93c6b58aced0e7d179bf2446723d1a7636",
+        "executionSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "policyRevision": "policy1",
+        "selection": {
+          "recordsView": "published",
+          "hearingId": "h",
+          "recordId": "record",
+          "clientId": null,
+          "asOf": null,
+          "cursor": "hearing:eyJrZXkiOiJwdWJsaXNoZWQ6cmVjb3JkIiwicGFydCI6MSwiaGFzaCI6IjMwZTFiOWUxNDM4NWM4NDFmMGIyMWJmMzU1MTlkYWVhZmRjNTc0Mjk0NjcyMjdiNTg1MWNiZDQyZjJiNTEzOWMifQ"
+        },
+        "source": {
+          "recordId": "published:record:30e1b9e14385c841f0b21bf35519daeafdc57429467227b5851cbd42f2b5139c:1",
+          "provenance": {
+            "adapter": "hearings",
+            "sourceTable": "published_legislative_record",
+            "sourceRecordId": "record",
+            "hearingId": "h",
+            "contentHash": "30e1b9e14385c841f0b21bf35519daeafdc57429467227b5851cbd42f2b5139c",
+            "historical": false
+          }
+        },
+        "page": {
+          "part": 1,
+          "format": "json_fragment",
+          "characterStart": 2000,
+          "characterEnd": 4000,
+          "totalCharacters": 10350,
+          "contentComplete": false,
+          "payloadSha256": "e6e9acd552504bb4770933c0ba23bb2d8d8829398e21073d5ca03da6d155f534"
+        },
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "searchedEntityCount": 0,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": false,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 0,
+              "searchedEntityCount": 0,
+              "hasMore": true,
+              "nextCursor": "hearing:eyJrZXkiOiJwdWJsaXNoZWQ6cmVjb3JkIiwicGFydCI6MiwiaGFzaCI6IjMwZTFiOWUxNDM4NWM4NDFmMGIyMWJmMzU1MTlkYWVhZmRjNTc0Mjk0NjcyMjdiNTg1MWNiZDQyZjJiNTEzOWMifQ",
+              "truncated": true,
+              "paginationComplete": false,
+              "coverageComplete": false,
+              "stopReason": "exact_version_continues"
+            }
+          ],
+          "complete": false,
+          "stopReason": "pagination_incomplete"
+        }
+      }
+    },
+    "current": {
+      "result": {
+        "tool": "search_committee_hearings",
+        "records": [
+          {
+            "domain": "hearings",
+            "recordId": "published:record:30e1b9e14385c841f0b21bf35519daeafdc57429467227b5851cbd42f2b5139c:1",
+            "occurredAt": null,
+            "updatedAt": null,
+            "payload": {
+              "kind": "hearing_evidence_json_chunk",
+              "originalKind": "official_transcript",
+              "id": "record",
+              "title": "Hearing evidence",
+              "sourceUrl": null,
+              "contentFormat": "json_fragment",
+              "text": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+              "characterStart": 2000,
+              "characterEnd": 4000,
+              "totalCharacters": 10350,
+              "chunk": 2,
+              "chunkCount": 6,
+              "contentHash": "30e1b9e14385c841f0b21bf35519daeafdc57429467227b5851cbd42f2b5139c",
+              "note": "Complete range of the original record JSON. Join consecutive text fragments to read all fields; this fragment is not the complete record."
+            },
+            "provenance": {
+              "adapter": "hearings",
+              "sourceTable": "published_legislative_record",
+              "sourceRecordId": "record",
+              "hearingId": "h",
+              "contentHash": "30e1b9e14385c841f0b21bf35519daeafdc57429467227b5851cbd42f2b5139c",
+              "historical": false
+            }
+          }
+        ],
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "searchedEntityCount": 0,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": false,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 0,
+              "searchedEntityCount": 0,
+              "hasMore": true,
+              "nextCursor": "hearing:eyJrZXkiOiJwdWJsaXNoZWQ6cmVjb3JkIiwicGFydCI6MiwiaGFzaCI6IjMwZTFiOWUxNDM4NWM4NDFmMGIyMWJmMzU1MTlkYWVhZmRjNTc0Mjk0NjcyMjdiNTg1MWNiZDQyZjJiNTEzOWMifQ",
+              "truncated": true,
+              "paginationComplete": false,
+              "coverageComplete": false,
+              "stopReason": "exact_version_continues"
+            }
+          ],
+          "complete": false,
+          "stopReason": "pagination_incomplete"
+        },
+        "observability": {
+          "queryClass": "lookup",
+          "requestedDomains": [
+            "hearings"
+          ],
+          "queriedDatasets": [
+            "hearings"
+          ],
+          "requestedEntityCount": 0,
+          "queriedEntityCount": 0,
+          "pagesByDomain": {
+            "hearings": 1
+          },
+          "sourceHealth": {
+            "hearings": "degraded"
+          },
+          "freshnessByDomain": {
+            "hearings": null
+          },
+          "coverageComplete": false,
+          "stopReason": "pagination_incomplete"
+        },
+        "note": "One complete evidence chunk per page. Follow the hearings nextCursor for remaining official transcript chunks, machine segments and intelligence. Coverage reports unsupported browser-session material; search results never imply a complete transcript."
+      },
+      "sourceLocator": null,
+      "linkStatus": "unsafe"
+    }
+  },
+  "briefFragment": {
+    "schemaVersion": "meri.hearing-source-read/1",
+    "event": {
+      "contractVersion": "0.1.0",
+      "eventId": "7c2f4fc5-dc8c-8826-ac85-6cc5d5d55730",
+      "binding": {
+        "tenantId": "20000000-0000-4000-8000-000000000001",
+        "actorId": "10000000-0000-4000-8000-000000000001",
+        "conversationId": "30000000-0000-4000-8000-000000000003",
+        "runId": "40000000-0000-4000-8000-000000000004",
+        "attemptId": "50000000-0000-4000-8000-000000000005",
+        "workerId": "60000000-0000-4000-8000-000000000006",
+        "writerFence": 1
+      },
+      "sequence": 2,
+      "createdAt": "2026-10-26T05:00:00.000Z",
+      "scopes": [
+        {
+          "tenantId": "20000000-0000-4000-8000-000000000001",
+          "kind": "client",
+          "resourceId": "10000000-0000-4000-8000-000000000001",
+          "policyRevision": "policy1"
+        }
+      ],
+      "type": "source.native-hearing-record",
+      "data": {
+        "schemaVersion": "meri.native-hearing-source/1",
+        "deliveryId": "synthetic-hearing-source",
+        "operation": {
+          "id": "search_committee_hearings",
+          "version": "0.2.0"
+        },
+        "requestSha256": "1abf35223b1f23fe603cafd26f298022ac55053effc0673c24a626fa6c3d46c4",
+        "argumentsSha256": "51d55f5523581dec5c4d8acb365729aca7ace414709d2f08dcbe6145cc3c4aba",
+        "resultSha256": "d46e9ed6e8968e48aa1108489edc7222b40ba04e620e1e4afb59942ab656d9e3",
+        "executionSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "policyRevision": "policy1",
+        "selection": {
+          "recordsView": "briefs",
+          "hearingId": "h",
+          "recordId": "record",
+          "clientId": "10000000-0000-4000-8000-000000000001",
+          "asOf": null,
+          "cursor": null
+        },
+        "source": {
+          "recordId": "briefs:record:e61433a85ae1b2c9f4931d3db1afe54733877d31517f4118ceac9af89b02926d:0",
+          "provenance": {
+            "adapter": "hearings",
+            "sourceTable": "intel_hearing_record_briefs",
+            "sourceRecordId": "record",
+            "hearingId": "h",
+            "contentHash": "e61433a85ae1b2c9f4931d3db1afe54733877d31517f4118ceac9af89b02926d",
+            "historical": false,
+            "tenantId": "20000000-0000-4000-8000-000000000001"
+          }
+        },
+        "page": {
+          "part": 0,
+          "format": "json_fragment",
+          "characterStart": 0,
+          "characterEnd": 2000,
+          "totalCharacters": 11263,
+          "contentComplete": false,
+          "payloadSha256": "504d075e766e41c55d905ce6c4b0380e55622193e6865e94cd7050d952dd480e"
+        },
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 1,
+          "searchedEntityCount": 1,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": false,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 1,
+              "searchedEntityCount": 1,
+              "hasMore": true,
+              "nextCursor": "hearing:eyJrZXkiOiJicmllZnM6cmVjb3JkIiwicGFydCI6MSwiaGFzaCI6ImU2MTQzM2E4NWFlMWIyYzlmNDkzMWQzZGIxYWZlNTQ3MzM4NzdkMzE1MTdmNDExOGNlYWM5YWY4OWIwMjkyNmQifQ",
+              "truncated": true,
+              "paginationComplete": false,
+              "coverageComplete": false,
+              "stopReason": "exact_version_continues"
+            }
+          ],
+          "complete": false,
+          "stopReason": "pagination_incomplete"
+        }
+      }
+    },
+    "current": {
+      "result": {
+        "tool": "search_committee_hearings",
+        "records": [
+          {
+            "domain": "hearings",
+            "recordId": "briefs:record:e61433a85ae1b2c9f4931d3db1afe54733877d31517f4118ceac9af89b02926d:0",
+            "occurredAt": null,
+            "updatedAt": null,
+            "payload": {
+              "kind": "hearing_evidence_json_chunk",
+              "originalKind": "capiro_published_record_brief",
+              "id": "record",
+              "title": "Hearing evidence",
+              "sourceUrl": null,
+              "contentFormat": "json_fragment",
+              "text": "{\"kind\":\"capiro_published_record_brief\",\"id\":\"record\",\"seriesId\":\"series\",\"version\":1,\"createdAt\":\"2026-10-26T05:00:00.000Z\",\"contentHash\":\"502d296c71e77bfc0cb89dd9e26aa9bc27243073e76d61d7190f98a454489955\",\"payload\":{\"schema\":\"legiwatch.published-record-brief.v1\",\"label\":\"Brief based on published records\",\"author\":\"Capiro\",\"title\":\"Assessment\",\"eventId\":\"h\",\"runId\":\"run\",\"clientId\":\"10000000-0000-4000-8000-000000000001\",\"folders\":[],\"sourceHash\":\"opaque\",\"cutoff\":\"2026-10-26T05:00:00.000Z\",\"claims\":[{\"id\":\"owner-claim\",\"text\":\"Owner passage\",\"kind\":\"quote\",\"scope\":\"hearing_event\",\"billId\":null,\"references\":[{\"id\":\"source-record\",\"hash\":\"source-hash\",\"locator\":\"evidence.text\"}]}],\"records\":[{\"id\":\"source-record\",\"billId\":null,\"kind\":\"official_transcript\",\"hash\":\"source-hash\",\"identity\":\"Synthetic source\",\"date\":null,\"observedAt\":\"2026-10-26T05:00:00.000Z\",\"evidence\":{\"text\":\"Owner passage😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+              "characterStart": 0,
+              "characterEnd": 2000,
+              "totalCharacters": 11263,
+              "chunk": 1,
+              "chunkCount": 6,
+              "contentHash": "e61433a85ae1b2c9f4931d3db1afe54733877d31517f4118ceac9af89b02926d",
+              "note": "Complete range of the original record JSON. Join consecutive text fragments to read all fields; this fragment is not the complete record."
+            },
+            "provenance": {
+              "adapter": "hearings",
+              "sourceTable": "intel_hearing_record_briefs",
+              "sourceRecordId": "record",
+              "hearingId": "h",
+              "contentHash": "e61433a85ae1b2c9f4931d3db1afe54733877d31517f4118ceac9af89b02926d",
+              "historical": false,
+              "tenantId": "20000000-0000-4000-8000-000000000001"
+            }
+          }
+        ],
+        "coverage": {
+          "requestedDomains": [
+            "hearings"
+          ],
+          "searchedDomains": [
+            "hearings"
+          ],
+          "requestedEntityCount": 1,
+          "searchedEntityCount": 1,
+          "recordsEvaluated": 1,
+          "recordsReturned": 1,
+          "paginationComplete": false,
+          "unavailableSources": [],
+          "sources": [
+            {
+              "domain": "hearings",
+              "sourceStatus": "degraded",
+              "returned": 1,
+              "recordsEvaluated": 1,
+              "pagesRead": 1,
+              "requestedEntityCount": 1,
+              "searchedEntityCount": 1,
+              "hasMore": true,
+              "nextCursor": "hearing:eyJrZXkiOiJicmllZnM6cmVjb3JkIiwicGFydCI6MSwiaGFzaCI6ImU2MTQzM2E4NWFlMWIyYzlmNDkzMWQzZGIxYWZlNTQ3MzM4NzdkMzE1MTdmNDExOGNlYWM5YWY4OWIwMjkyNmQifQ",
+              "truncated": true,
+              "paginationComplete": false,
+              "coverageComplete": false,
+              "stopReason": "exact_version_continues"
+            }
+          ],
+          "complete": false,
+          "stopReason": "pagination_incomplete"
+        },
+        "observability": {
+          "queryClass": "lookup",
+          "requestedDomains": [
+            "hearings"
+          ],
+          "queriedDatasets": [
+            "hearings"
+          ],
+          "requestedEntityCount": 1,
+          "queriedEntityCount": 1,
+          "pagesByDomain": {
+            "hearings": 1
+          },
+          "sourceHealth": {
+            "hearings": "degraded"
+          },
+          "freshnessByDomain": {
+            "hearings": null
+          },
+          "coverageComplete": false,
+          "stopReason": "pagination_incomplete"
+        },
+        "note": "One complete evidence chunk per page. Follow the hearings nextCursor for remaining official transcript chunks, machine segments and intelligence. Coverage reports unsupported browser-session material; search results never imply a complete transcript."
+      },
+      "sourceLocator": null,
+      "linkStatus": "unsafe"
+    }
+  }
+}

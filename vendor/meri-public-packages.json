@@ -269,6 +269,51 @@
         "@capiro/meri-contracts": "0.1.15",
         "ai": "7.0.137"
       }
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.15-cc8a6d9f-f60b082509f4.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.15",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "cc8a6d9fce95e235fee15c1c6a524a611fba3912",
+      "sourceTree": "4c6a21af0ad8cdb3396bd1837eb0b8d0d83ef6c7",
+      "sha256": "f60b082509f496c70636bfaa97aa008196135ea8710da290ee50332493d363e9",
+      "integrity": "sha512-VqGOo3KVDhg13J+6CabiUykZa2sAVyzZMMLbfWQNDOyLVWSgo1uO1F+VHrmNjKuUbManUunigZs0/9XRzJv0ig==",
+      "bytes": 1021760,
+      "regularEntryCount": 69,
+      "status": "active-packed-frontend-input; deployed-acceptance-separate",
+      "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
+      "releaseReceiptSha256": "2e89f17f6bc3a2c82f659cbc5eac84f20d55e9c33397f855fc6dd303c898ecf0"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.5-cc8a6d9f-8b47501d43d9.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.5",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "cc8a6d9fce95e235fee15c1c6a524a611fba3912",
+      "sourceTree": "4c6a21af0ad8cdb3396bd1837eb0b8d0d83ef6c7",
+      "sha256": "8b47501d43d93f784a7e8ee7638edf860e7f24843b4a2ddc97dd985c7a253dd0",
+      "integrity": "sha512-JGPM4POAmpGl3PGM7QNgwxMH1HwB9SuvAJbGIb4aMXEgQjNKsQGQAlAiv2IMK1KWzwUOqXTZk4N0HfPZcDemqw==",
+      "bytes": 2964,
+      "regularEntryCount": 6,
+      "status": "active-packed-frontend-input; deployed-acceptance-separate",
+      "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
+      "releaseReceiptSha256": "2e89f17f6bc3a2c82f659cbc5eac84f20d55e9c33397f855fc6dd303c898ecf0"
+    },
+    {
+      "file": "capiro-meri-client-0.1.0-b5e000cf-aa38a4285a51.tgz",
+      "name": "@capiro/meri-client",
+      "version": "0.1.0",
+      "repository": "https://github.com/neo-capiro/capiro-frontend",
+      "sourceCommit": "b5e000cf8bac2edc6e1bcb02b67e1237b02c58f0",
+      "sourceTree": "2f75a9595f896ec43a316af450e790617eecefde",
+      "sha256": "aa38a4285a51db1273dbc3c4a2681ca3c63ea982ba1dbdde8cfd359f31ebd58c",
+      "integrity": "sha512-2PlOGDuGregnW3fI7QVVv8x3A10WgWEZcVmNfCbQKm48Bvm/JVPpFn6GUDsM8jbqIpqnsdMFg8AVeGS/Xn3Y1Q==",
+      "bytes": 158410,
+      "regularEntryCount": 46,
+      "status": "qualified-physical-client-evidence; native-workspace-owner-retained",
+      "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
+      "releaseReceiptSha256": "41a705bbfa806cfa796fd8003c75e0466a01e4d46d46dd410a43ae2aa6cdb5e5"
     }
   ]
 }

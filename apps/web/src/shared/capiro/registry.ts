@@ -3,6 +3,7 @@ import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
 import { engagementOperations } from "./operations/engagement";
+import { newsletterDeliveryOperations } from "./operations/newsletter-delivery";
 import { intelligenceOperations } from "./operations/intelligence";
 import { legiwatchOperations } from "./operations/legiwatch";
 import { plannerOperations } from "./operations/planner";
@@ -31,6 +32,7 @@ export const capiroOperations = {
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,
+  ...newsletterDeliveryOperations,
   ...workspaceOperations,
   ...strategiesOperations,
   ...directoryOperations,

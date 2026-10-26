@@ -78,6 +78,27 @@ export async function fixture(page: Page) {
         ? JSON.parse(url.searchParams.get("input") ?? "{}")
         : request.postDataJSON();
     state.requests.push({ key, method: request.method(), input });
+    if (key === "engagement.newsletter.mailboxes")
+      return route.fulfill({ json: [] });
+    if (key === "directory.contacts")
+      return route.fulfill({
+        json: {
+          contacts: [],
+          total: 0,
+          page: 1,
+          pageSize: 20,
+          totals: { all: 0, house: 0, senate: 0, governors: 0, staff: 0 },
+          availableStates: [],
+          availableFilters: {
+            chambers: [],
+            parties: [],
+            committees: [],
+            issues: [],
+            roles: [],
+            states: [],
+          },
+        },
+      });
     if (key === "engagement.richNewsletter.open") {
       if (state.openGate) await state.openGate.promise;
       if (state.openFailure)
