@@ -6,6 +6,7 @@ import {
   ActionButton,
   DataTable,
   Panel,
+  SelectInput,
   StatusPanel,
   TextInput,
 } from "../../../shared/module-ui";
@@ -13,6 +14,14 @@ import { ContactPreview } from "./ContactPreview";
 import { DirectoryPagination } from "./DirectoryPagination";
 import { MemberProfile } from "./MemberProfile";
 import styles from "./directory.module.css";
+
+const filterLabels = {
+  chamber: "Chamber",
+  state: "State",
+  role: "Role",
+  issue: "Issue area",
+  committee: "Committee",
+} as const;
 export function CongressionalContacts({
   favoritesOnly = false,
 }: {
@@ -74,25 +83,20 @@ export function CongressionalContacts({
           onChange={(e) => filter("q", e.target.value)}
         />
         {(Object.keys(options) as (keyof typeof options)[]).map((key) => (
-          <select
+          <SelectInput
             key={key}
-            className={styles.select}
             aria-label={key}
             value={filters[key]}
-            onChange={(e) => filter(key, e.target.value)}
-          >
-            <option value="">
-              {key === "issue"
-                ? "Issue area"
-                : key.charAt(0).toUpperCase() + key.slice(1)}{" "}
-              · Any
-            </option>
-            {options[key].map((x) => (
-              <option key={x}>{x}</option>
-            ))}
-          </select>
+            onValueChange={(next) => filter(key, next)}
+            options={[
+              { value: "", label: `${filterLabels[key]} · Any` },
+              ...options[key].map((x) => ({ value: x, label: x })),
+            ]}
+          />
         ))}
-        <ActionButton
+        <button
+          type="button"
+          className={styles.clearAll}
           onClick={() => {
             setFilters({
               q: "",
@@ -106,7 +110,7 @@ export function CongressionalContacts({
           }}
         >
           Clear all
-        </ActionButton>
+        </button>
       </div>
       <StatusPanel
         loading={query.loading}
@@ -140,6 +144,7 @@ export function CongressionalContacts({
                 {
                   key: "person",
                   label: "Office / person",
+                  width: "30%",
                   render: (c) => (
                     <div>
                       <div className={styles.person}>
@@ -199,17 +204,32 @@ export function CongressionalContacts({
                 {
                   key: "office",
                   label: "Office",
-                  render: (c) => c.officeLocation || "—",
+                  width: "22%",
+                  render: (c) => (
+                    <span className={styles.cellClamp}>
+                      {c.officeLocation || "—"}
+                    </span>
+                  ),
                 },
                 {
                   key: "committee",
                   label: "Committee",
-                  render: (c) => c.committees?.join(" · ") || "—",
+                  width: "26%",
+                  render: (c) => (
+                    <span className={styles.cellClamp}>
+                      {c.committees?.join(" · ") || "—"}
+                    </span>
+                  ),
                 },
                 {
                   key: "contact",
                   label: "Contact",
-                  render: (c) => c.email || c.phone || "—",
+                  width: "22%",
+                  render: (c) => (
+                    <span className={styles.cellClamp}>
+                      {c.email || c.phone || "—"}
+                    </span>
+                  ),
                 },
               ]}
             />

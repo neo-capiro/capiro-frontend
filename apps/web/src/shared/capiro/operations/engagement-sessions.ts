@@ -133,6 +133,7 @@ export const engagementSessionOperations = {
             limit: z.number().int().min(1).max(100).optional(),
             offset: z.number().int().nonnegative().optional(),
             includeArchived: z.boolean().optional(),
+            search: z.string().max(160).optional(),
           })
           .strict()
           .optional(),

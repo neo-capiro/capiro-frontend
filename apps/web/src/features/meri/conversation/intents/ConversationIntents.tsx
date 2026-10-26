@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import type { IntentsItem } from "@capiro/meri-client/intents";
 import { Button } from "@capiro/ui/button";
 import type { IntentsAccess } from "../../../../shared/meri-intents/access";
 import { StatusPill } from "../../ui/StatusPill";
@@ -262,11 +263,14 @@ export function ConversationIntents({
   access,
   scope,
   refreshKey,
+  children,
 }: {
   access: IntentsAccess;
   scope: IntentScope;
   /** Changes when the conversation shows new approval or file activity, so the list is read again. */
   refreshKey?: string;
+  /** Reuse this current, authorized list for adjacent file presentation. */
+  children?: (items: readonly IntentsItem[]) => ReactNode;
 }) {
   const state = useConversationIntents(
     access,
@@ -274,20 +278,23 @@ export function ConversationIntents({
     refreshKey === undefined ? {} : { refreshKey },
   );
   return (
-    <section className={styles.panel} aria-labelledby="conversation-actions">
-      <div className={styles.panelHeader}>
-        <h2 id="conversation-actions">Actions for your approval</h2>
-        {state.list.status === "ready" && (
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => void state.refresh()}
-          >
-            Refresh
-          </Button>
-        )}
-      </div>
-      <Body {...state} access={access} />
-    </section>
+    <>
+      <section className={styles.panel} aria-labelledby="conversation-actions">
+        <div className={styles.panelHeader}>
+          <h2 id="conversation-actions">Actions for your approval</h2>
+          {state.list.status === "ready" && (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => void state.refresh()}
+            >
+              Refresh
+            </Button>
+          )}
+        </div>
+        <Body {...state} access={access} />
+      </section>
+      {children?.(state.list.status === "ready" ? state.list.items : [])}
+    </>
   );
 }

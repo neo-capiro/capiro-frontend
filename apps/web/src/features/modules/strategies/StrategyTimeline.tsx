@@ -25,6 +25,7 @@ import { StrategyCalendar } from "./StrategyCalendar";
 import { StrategyExport } from "./StrategyExport";
 import { StrategyHistory } from "./StrategyHistory";
 import { StrategyStep } from "./StrategyStep";
+import { StrategyWatch } from "./watch/StrategyWatch";
 
 function TimelineView({
   strategy,
@@ -174,6 +175,7 @@ function TimelineView({
         onNode={setStep}
         onCalendar={() => setCalendarOpen(true)}
       />
+      <StrategyWatch key={strategy.id} strategyId={strategy.id} />
       {!strategy.nodes.length && (
         <Panel
           title="Build your working plan"

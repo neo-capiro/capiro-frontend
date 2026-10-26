@@ -3,10 +3,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
-  ActionButton,
   Badge,
   DataTable,
   Panel,
+  SelectInput,
   StatusPanel,
   TextInput,
 } from "../../../shared/module-ui";
@@ -130,43 +130,39 @@ export function PersonnelDirectory({
               );
             }}
           />
-          <select
-            className={styles.select}
+          <SelectInput
             aria-label="Service"
             value={service}
-            onChange={(e) => {
+            onValueChange={(next) => {
               updateFilters({
-                personnelService: services.includes(e.target.value)
-                  ? e.target.value
-                  : "",
+                personnelService: services.includes(next) ? next : "",
                 personnelPage: "",
               });
             }}
-          >
-            <option value="">Service · Any</option>
-            {services.map((x) => (
-              <option key={x}>{x}</option>
-            ))}
-          </select>
-          <select
-            className={styles.select}
+            options={[
+              { value: "", label: "Service · Any" },
+              ...services.map((x) => ({ value: x, label: x })),
+            ]}
+          />
+          <SelectInput
             aria-label="PE alignment"
             value={aligned}
-            onChange={(e) => {
+            onValueChange={(next) => {
               updateFilters({
                 personnelAligned:
-                  e.target.value === "aligned" || e.target.value === "unaligned"
-                    ? e.target.value
-                    : "",
+                  next === "aligned" || next === "unaligned" ? next : "",
                 personnelPage: "",
               });
             }}
-          >
-            <option value="">PE alignment · Any</option>
-            <option value="aligned">PE aligned</option>
-            <option value="unaligned">Unaligned</option>
-          </select>
-          <ActionButton
+            options={[
+              { value: "", label: "PE alignment · Any" },
+              { value: "aligned", label: "PE aligned" },
+              { value: "unaligned", label: "Unaligned" },
+            ]}
+          />
+          <button
+            type="button"
+            className={styles.clearAll}
             onClick={() => {
               updateFilters({
                 personnelQ: "",
@@ -177,7 +173,7 @@ export function PersonnelDirectory({
             }}
           >
             Clear all
-          </ActionButton>
+          </button>
         </div>
         <StatusPanel
           loading={query.loading}
