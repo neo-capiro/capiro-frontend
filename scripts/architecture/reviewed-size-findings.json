@@ -1901,10 +1901,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "b8c201eb9cc22c6a5d07df540f3b7fb3f95bc4e69e1577eccd03cffca0a5769c",
-    "reason": "Accept existing rich editor composition plus its local selection, display and close-confirmation state. Document/history transitions are delegated to the controller. Pending fieldsets are disabled/inert, and owner/editorRevision replacement resets transient or editor-local state. Wire/transport/cache/sanitization remain separately owned.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "67a462ae6215744dca9f062db81d36b60b5cc9770f0e43970e834472d3013d8a",
+    "reason": "The local host/view/focus composition delegates all domain state to the existing rich controller. Returning from saved preview preserves the unchanged local draft and focus. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
+    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
@@ -1973,9 +1973,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "fingerprint": "e7e1c6dca680337157798b52e269c3dd62e6626fc5d789c328178f4b7f578e90",
-    "reason": "One saved-document action/status view adds exact recovery controls. Parsing, transport and authority stay outside it. No independent domain responsibility or speculative UI abstraction is added. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
-    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "fingerprint": "b35805e1fd82f51c73e4a16859babc27e3bd7a5171ec8f2a7a3a83c1d4dc612d",
+    "reason": "One existing action/recovery surface retains exact duplicate presentation selection with unchanged canonical controller, state transitions, mutations and GET recovery callbacks. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
+    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4118,6 +4118,15 @@
     "fingerprint": "6ee25a3ee11079be3d516232ef735986ae93022c1c81656944d16c918c859bca",
     "reason": "One four-state review interaction delegates transactions, journal, current authorization and receipt verification to the existing staging owners. Splitting this cohesive modal solely for line count would scatter the same view state. Exact independent disposition: W3-FE186-SOURCE-RESPONSIBILITY-REVIEW.md.",
     "reviewedBy": "Independent Root Codex, FE186 cc7792ed48034138f6b8290d4d0b2f8b1f6f368e",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+    "kind": "function",
+    "symbol": "SavedRichPreview",
+    "fingerprint": "d0070cbc6c7fb5c15d734ac3c6ff8275fadf2ed85c60174b93bc2e4137fd943e",
+    "reason": "One cohesive inert saved-preview view owns width/plain-text controls and the information panel. The existing sanitizer/rendering and empty sandbox/no-referrer/CSP remain unchanged. Exact independent disposition: W3-FE187-SOURCE-RESPONSIBILITY-REVIEW.md and its final correction addendum.",
+    "reviewedBy": "Independent Root Codex, FE187 406d354aeb3b2a6de339573cdb560dab53b8603b",
     "reviewedOn": "2026-10-26"
   }
 ]
