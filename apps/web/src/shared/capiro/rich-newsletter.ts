@@ -4,21 +4,27 @@ import {
   parseNewsletterOutreachStage,
   parseNewsletterPreview,
   parseNewsletterStageReceipt,
+  parseNewsletterWriteReceipt,
+  parseNewsletterSaveRefusal,
+  type NewsletterCreateRequest,
+  type NewsletterSaveRequest,
+  type NewsletterWriteBinding,
+  type NewsletterSaveRefusal,
   type NewsletterReceiveIdentity,
   type NewsletterReceiveResult,
   type NewsletterOutreachStage,
 } from "@capiro/shared/newsletter";
-import type { OperationRequest } from "./contracts";
 import { CapiroApiError, type CapiroApi } from "./http";
 import { richNewsletterOperations } from "./operations/rich-newsletter";
 
 type Registry = typeof richNewsletterOperations;
-type SaveBody = OperationRequest<
-  Registry["workspace.richNewsletter.save"]
->["body"];
-type CreateBody = OperationRequest<
-  Registry["workspace.richNewsletter.create"]
->["body"];
+export class RichNewsletterSaveRefused extends Error {
+  constructor(readonly refusal: NewsletterSaveRefusal) {
+    super(
+      "This save made no change. Read current saved content before resolving your retained edits.",
+    );
+  }
+}
 
 function bound<T>(result: NewsletterReceiveResult<T>): T {
   if (result.ok) return result.value;
@@ -39,9 +45,25 @@ export function createRichNewsletterAdapter(
   return {
     list: (signal: AbortSignal) =>
       api.request("workspace.richNewsletter.list", {}, { signal }),
-    create: (body: CreateBody, signal: AbortSignal) =>
-      api.request("workspace.richNewsletter.create", { body }, { signal }),
-    async detail(id: string, clientId: string | null, signal: AbortSignal) {
+    async create(body: NewsletterCreateRequest, signal: AbortSignal) {
+      const submitted = structuredClone(body);
+      const value = await api.request(
+        "workspace.richNewsletter.create",
+        { body: submitted },
+        { signal },
+      );
+      return bound(
+        parseNewsletterWriteReceipt(value, {
+          requestId: submitted.requestId,
+          operation: "create",
+        }),
+      );
+    },
+    async detail(
+      id: string,
+      clientId: string | null | undefined,
+      signal: AbortSignal,
+    ) {
       const value = await api.request(
         "workspace.richNewsletter.detail",
         {
@@ -50,26 +72,51 @@ export function createRichNewsletterAdapter(
         { signal },
       );
       return bound(
-        parseNewsletterCampaign(value, { documentId: id, clientId }),
-      );
-    },
-    async save(id: string, body: SaveBody, signal: AbortSignal) {
-      const submitted = structuredClone(body);
-      const value = await api.request(
-        "workspace.richNewsletter.save",
-        {
-          params: { id },
-          body: submitted,
-        },
-        { signal },
-      );
-      return bound(
         parseNewsletterCampaign(value, {
           documentId: id,
-          revision: submitted.revision + 1,
-          clientId: submitted.config.clientId,
+          ...(clientId === undefined ? {} : { clientId }),
         }),
       );
+    },
+    async save(id: string, body: NewsletterSaveRequest, signal: AbortSignal) {
+      const submitted = structuredClone(body);
+      const expected = {
+        requestId: submitted.requestId,
+        operation: "save" as const,
+        documentId: id,
+        previousRevision: submitted.revision,
+      };
+      try {
+        const value = await api.request(
+          "workspace.richNewsletter.save",
+          {
+            params: { id },
+            body: submitted,
+          },
+          { signal },
+        );
+        return bound(parseNewsletterWriteReceipt(value, expected));
+      } catch (error) {
+        if (error instanceof CapiroApiError && error.status === 409) {
+          const refusal = parseNewsletterSaveRefusal(
+            error.newsletterSaveRefusal,
+            expected,
+          );
+          if (refusal.ok) throw new RichNewsletterSaveRefused(refusal.value);
+        }
+        throw error;
+      }
+    },
+    async writeRequest(expected: NewsletterWriteBinding, signal: AbortSignal) {
+      const captured = { ...expected };
+      const value = await api.request(
+        "workspace.richNewsletter.writeRequest",
+        { params: { requestId: captured.requestId } },
+        { signal },
+      );
+      return value === null
+        ? null
+        : bound(parseNewsletterWriteReceipt(value, captured));
     },
     async preview(
       id: string,

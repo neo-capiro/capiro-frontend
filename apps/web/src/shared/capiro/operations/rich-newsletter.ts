@@ -42,6 +42,7 @@ const objectBody = (value: unknown) =>
 // Public types provide compile-time input contracts without a second wire parser.
 export const richNewsletterSaveBody = z
   .object({
+    requestId: z.uuid(),
     revision: z
       .number()
       .int()
@@ -70,13 +71,15 @@ export const richNewsletterOperations = {
       .object({
         body: z
           .object({
+            requestId: z.uuid(),
             name: z.string().max(200).optional(),
             templateId: z.string().max(100).optional(),
           })
           .strict(),
       })
       .strict(),
-    response: receiving(parseNewsletterCampaign),
+    // The sole adapter binds this content-free receipt to the captured request.
+    response: z.unknown(),
     source,
   }),
   "workspace.richNewsletter.detail": defineOperation({
@@ -94,8 +97,19 @@ export const richNewsletterOperations = {
     request: z
       .object({ params: documentParams, body: richNewsletterSaveBody })
       .strict(),
-    response: receiving(parseNewsletterCampaign),
+    response: z.unknown(),
     source,
+  }),
+  "workspace.richNewsletter.writeRequest": defineOperation({
+    service: "workspace",
+    method: "GET",
+    path: "/newsletters/write-requests/:requestId",
+    request: z
+      .object({ params: z.object({ requestId: z.uuid() }).strict() })
+      .strict(),
+    response: z.unknown(),
+    source:
+      "capiro-backend@2381b4d75df8ade07e26fbbfee46af1d791815da docs/ws15-newsletter-write-recovery.md",
   }),
   "workspace.richNewsletter.preview": defineOperation({
     service: "workspace",

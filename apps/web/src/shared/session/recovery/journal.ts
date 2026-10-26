@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { parseNewsletterSaveRefusal } from "@capiro/shared/newsletter";
 import {
   decryptJournal,
   encryptJournal,
@@ -166,6 +167,7 @@ function retireRecovery(
         code:
           | "WORKSPACE_BRIEF_STATE_CONFLICT"
           | "WORKSPACE_SAVE_STATE_CONFLICT"
+          | "NEWSLETTER_SAVE_CAS_REFUSED"
           | "ACTIVITY_UNDO_REFUSED"
           | "DIRECTORY_NOTE_REFUSED"
           | "PROSPECT_NEW_CLIENT_REFUSED"
@@ -518,6 +520,45 @@ export function retireOrdinarySaveConflictRecovery<
       if (
         retained.body.requestId !== requestId ||
         retained.outcome?.kind !== "conflict"
+      )
+        throw new RecoveryStorageError();
+    },
+  );
+}
+
+/** Retire only the exact public no-write refusal stored with its original rich save. */
+export function retireRichNewsletterRefusalRecovery<
+  Data extends {
+    operation: string;
+    documentId?: string;
+    body: { requestId: string; revision?: number };
+    outcome?: { kind: string; refusal?: unknown };
+  },
+>(
+  scope: string,
+  requestId: string,
+  contract: RecoveryContract<Data>,
+  assert: () => void,
+) {
+  return retireRecovery(
+    scope,
+    requestId,
+    { state: "refused", code: "NEWSLETTER_SAVE_CAS_REFUSED" },
+    assert,
+    (record) => {
+      const retained = decode(record, contract);
+      if (
+        retained.operation !== "save" ||
+        retained.body.requestId !== requestId ||
+        typeof retained.documentId !== "string" ||
+        typeof retained.body.revision !== "number" ||
+        retained.outcome?.kind !== "refused" ||
+        !parseNewsletterSaveRefusal(retained.outcome.refusal, {
+          requestId,
+          operation: "save",
+          documentId: retained.documentId,
+          previousRevision: retained.body.revision,
+        }).ok
       )
         throw new RecoveryStorageError();
     },

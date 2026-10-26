@@ -1,4 +1,8 @@
-import type { OperationDefinition } from "./contracts";
+import type { OperationDefinition, OperationInput } from "./contracts";
+import {
+  isRichNewsletterSave,
+  richNewsletterSaveRefusal,
+} from "./rich-newsletter-errors";
 import {
   isOrdinarySaveOperation,
   ordinarySaveConflictCode,
@@ -36,7 +40,36 @@ export async function serviceErrorResponse(
   operation: OperationDefinition,
   signal: AbortSignal,
   publicCapability: boolean,
+  input: OperationInput = {},
 ): Promise<Response> {
+  if (
+    !publicCapability &&
+    response.status === 409 &&
+    isRichNewsletterSave(operation)
+  ) {
+    try {
+      const payload = await readBoundedJson(response.body, 4096, signal);
+      signal.throwIfAborted();
+      const refusal = richNewsletterSaveRefusal(
+        operation,
+        response.status,
+        payload,
+        input,
+      );
+      if (refusal)
+        return Response.json(refusal, {
+          status: 409,
+          headers: {
+            "Cache-Control": "no-store",
+            "Referrer-Policy": "no-referrer",
+          },
+        });
+    } catch (error) {
+      if (signal.aborted) throw error;
+      // Generic, malformed or mismatched errors cannot settle the retained save.
+    }
+    return jsonError(409, "The save outcome is not confirmed.");
+  }
   if (!publicCapability && isObjectiveAssociationOperation(operation)) {
     try {
       const payload = await readBoundedJson(response.body, 4096, signal);
