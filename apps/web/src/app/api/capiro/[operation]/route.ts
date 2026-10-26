@@ -6,6 +6,7 @@ import {
   handleCapiroRequest,
   handlePublicPlannerFormRequest,
   handlePublicOnboardRequest,
+  handlePublicResearchShareRequest,
 } from "../../../../shared/capiro/gateway";
 import { selectFirstChatGateway } from "../../../../shared/preview/first-chat-gateway.server";
 
@@ -35,6 +36,12 @@ async function handle(request: Request, context: Context) {
     );
   if (operation.startsWith("public-onboard."))
     return handlePublicOnboardRequest(
+      request,
+      operation,
+      readCapiroConfig(process.env),
+    );
+  if (operation.startsWith("public-research-share."))
+    return handlePublicResearchShareRequest(
       request,
       operation,
       readCapiroConfig(process.env),

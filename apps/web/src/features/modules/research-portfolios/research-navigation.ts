@@ -8,6 +8,7 @@ export const researchPortfolioTabs = [
   { id: "settings", label: "Settings" },
   { id: "snapshots", label: "Snapshots" },
   { id: "subscriptions", label: "Subscriptions" },
+  { id: "sharing", label: "Sharing" },
 ] as const;
 
 export type ResearchPortfolioView =
