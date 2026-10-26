@@ -51,7 +51,9 @@ export const workspaceHillDayOperations = {
           .object({
             clientId: workspaceId.optional(),
             status: z.string().max(30).optional(),
-            kind: z.literal("hillday").optional(),
+            kind: z.enum(["all", "hillday", "draft"]).optional(),
+            scope: z.enum(["all", "mine", "shared"]).optional(),
+            q: z.string().max(200).optional(),
             cursor: z.string().max(500).optional(),
             limit: z.number().int().min(1).max(100).optional(),
           })
@@ -63,7 +65,8 @@ export const workspaceHillDayOperations = {
       items: z.array(libraryDocument),
       nextCursor: z.string().nullable(),
     }),
-    source,
+    source:
+      "capiro-backend@b79a168cdb75aa021c48fe328f599c2788cdae07 apps/workspace/src/hillday/dto/hillday.dto.ts ListLibraryQueryDto; hillday.types.ts; hillday-document.service.ts listDocuments",
   }),
   "workspace.clients": defineOperation({
     service: "workspace",

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { type WorkspaceLibraryDocument } from "../../../shared/capiro/operations/workspace-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -12,6 +11,8 @@ import {
   TextInput,
 } from "../../../shared/module-ui";
 import styles from "./workspace.module.css";
+import { LibraryClientFilter } from "./LibraryClientFilter";
+import { useLibraryQuery } from "./library-query";
 
 function documentTone(status: string) {
   if (["complete", "generated", "delivered"].includes(status)) return "success";
@@ -76,42 +77,9 @@ export function DocumentsLibrary({
   onOpen: (row: WorkspaceLibraryDocument) => void;
   clientId?: string;
 }) {
-  const [search, setSearch] = useState("");
-  const [scope, setScope] = useState("all");
-  const [client, setClient] = useState("");
-  const [status, setStatus] = useState("");
-  const [template, setTemplate] = useState("");
-  const [cursor, setCursor] = useState<string>();
-  const documents = useCapiroQuery("workspace.documents", {
-    query: { clientId, cursor, status: status || undefined, limit: 50 },
-  });
-  const me = useCapiroQuery("me.read", {});
-  const needsIdentity = scope !== "all";
-  const identityError = needsIdentity ? me.error : undefined;
-  const error = documents.error ?? identityError;
-  const loading =
-    !error && (documents.loading || (needsIdentity && me.loading));
-  const ownerId = me.data?.user.clerkUserId;
-  const rows = (documents.data?.items ?? []).filter(
-    (row) =>
-      row.name.toLowerCase().includes(search.toLowerCase()) &&
-      (!clientId || row.clientAssociation !== "held") &&
-      (!client ||
-        (row.clientAssociation !== "held" && row.client === client)) &&
-      (!template || row.kind === template) &&
-      (scope === "all" ||
-        (ownerId !== undefined &&
-          (scope === "mine"
-            ? row.owner.id === ownerId
-            : row.kind === "draft" && row.owner.id !== ownerId))),
-  );
-  const clients = [
-    ...new Set(
-      (documents.data?.items ?? []).flatMap((row) =>
-        row.client && row.clientAssociation !== "held" ? [row.client] : [],
-      ),
-    ),
-  ];
+  const { query, setFilters, setCursor } = useLibraryQuery(clientId);
+  const documents = useCapiroQuery("workspace.documents", { query });
+  const rows = documents.data?.items ?? [];
   return (
     <>
       <div className={styles.filters}>
@@ -120,17 +88,19 @@ export function DocumentsLibrary({
           role="group"
           aria-label="Document ownership"
         >
-          {[
-            ["all", "Everyone"],
-            ["mine", "Mine"],
-            ["shared", "Shared with me"],
-          ].map(([id, label]) => (
+          {(
+            [
+              ["all", "Everyone"],
+              ["mine", "Mine"],
+              ["shared", "Shared with me"],
+            ] as const
+          ).map(([id, label]) => (
             <button
               key={id}
               type="button"
-              className={scope === id ? styles.active : ""}
-              aria-pressed={scope === id}
-              onClick={() => setScope(id!)}
+              className={query.scope === id ? styles.active : ""}
+              aria-pressed={query.scope === id}
+              onClick={() => setFilters({ scope: id })}
             >
               {label}
             </button>
@@ -139,35 +109,42 @@ export function DocumentsLibrary({
         <TextInput
           aria-label="Search documents"
           placeholder="Search documents"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
+          value={query.q ?? ""}
+          maxLength={200}
+          onChange={(event) => setFilters({ q: event.target.value })}
         />
-        <SelectInput
-          aria-label="Filter documents by client"
-          value={client}
-          onValueChange={setClient}
-          options={[
-            { value: "", label: "Client · All clients" },
-            ...clients.map((name) => ({ value: name, label: name })),
-          ]}
-        />
+        {clientId ? (
+          <SelectInput
+            aria-label="Filter documents by client"
+            value={clientId}
+            disabled
+            onValueChange={(id) => setFilters({ clientId: id })}
+            options={[{ value: clientId, label: "Client · Current selection" }]}
+          />
+        ) : (
+          <LibraryClientFilter
+            value={query.clientId}
+            onChange={(id) => setFilters({ clientId: id })}
+          />
+        )}
         <SelectInput
           aria-label="Filter documents by template"
-          value={template}
-          onValueChange={setTemplate}
+          value={query.kind ?? "all"}
+          onValueChange={(kind) =>
+            setFilters({ kind: kind as "all" | "hillday" | "draft" })
+          }
           options={[
-            { value: "", label: "Template · All" },
+            { value: "all", label: "Template · All" },
             { value: "hillday", label: "Hill Day" },
             { value: "draft", label: "Documents" },
           ]}
         />
         <SelectInput
           aria-label="Filter documents by status"
-          value={status}
-          onValueChange={(value) => {
-            setStatus(value);
-            setCursor(undefined);
-          }}
+          value={query.status ?? ""}
+          onValueChange={(status) =>
+            setFilters({ status: status || undefined })
+          }
           options={[
             { value: "", label: "Status · Any" },
             ...[
@@ -182,18 +159,15 @@ export function DocumentsLibrary({
         />
       </div>
       <StatusPanel
-        loading={loading}
-        error={error}
-        onRetry={() => {
-          if (documents.error) documents.reload();
-          if (identityError) me.reload();
-        }}
+        loading={documents.loading}
+        error={documents.error}
+        onRetry={documents.reload}
       >
         <DataTable
           rows={rows}
           rowKey={(row) => `${row.kind}:${row.id}`}
           caption="Workspace documents"
-          emptyMessage="No documents match these filters."
+          emptyMessage="No documents on this page."
           columns={[
             {
               key: "document",
@@ -243,7 +217,9 @@ export function DocumentsLibrary({
           ]}
         />
         <div className={styles.actions}>
-          <span className={styles.footnote}>{rows.length} documents</span>
+          <span className={styles.footnote}>
+            {rows.length} documents on this page
+          </span>
           {documents.data?.nextCursor && (
             <ActionButton
               onClick={() => setCursor(documents.data?.nextCursor ?? undefined)}
@@ -251,7 +227,7 @@ export function DocumentsLibrary({
               Load older
             </ActionButton>
           )}
-          {cursor && (
+          {query.cursor && (
             <ActionButton onClick={() => setCursor(undefined)}>
               Newest documents
             </ActionButton>
