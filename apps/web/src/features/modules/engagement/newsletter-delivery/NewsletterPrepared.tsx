@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { NewsletterOutreachRecord } from "@capiro/shared/newsletter";
-import type { SendingMailbox } from "../../../portfolio/relationships/email/mailboxes";
+import type { SendingMailbox } from "../../../portfolio/relationships/public";
 import { ActionButton, Field, SelectInput } from "../../../../shared/module-ui";
 import { SavedNewsletterHtml } from "../../workspace/rich-newsletter/RichPreview";
 import styles from "./newsletter-delivery.module.css";

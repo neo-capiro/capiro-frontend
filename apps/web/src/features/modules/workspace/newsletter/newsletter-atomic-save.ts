@@ -62,12 +62,22 @@ export const newsletterSaveModel: OrdinarySaveModel<NewsletterInput> = {
       (blocks.length !== expected.length ||
         blocks.some((block, index) => {
           const projected = expected[index];
+          const original = previous.body.blocks.find(
+            (value) => value.id === block.id,
+          );
+          // The earlier basic projection omitted social destinations. Accept only
+          // that exact old text, then preserve the URL in the next explicit save.
+          const legacySocial =
+            original?.kind === "social" &&
+            (block.title ?? "") === "" &&
+            (block.content ?? "") === original.text;
           return (
             !projected ||
             block.id !== projected.id ||
             block.type !== projected.type ||
-            (block.title ?? "") !== projected.title ||
-            (block.content ?? "") !== projected.content
+            (!legacySocial &&
+              ((block.title ?? "") !== projected.title ||
+                (block.content ?? "") !== projected.content))
           );
         }))
     )

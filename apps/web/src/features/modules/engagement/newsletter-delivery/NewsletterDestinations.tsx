@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { NewsletterOutreachRecord } from "@capiro/shared/newsletter";
-import type { SendingMailbox } from "../../../portfolio/relationships/email/mailboxes";
+import type { SendingMailbox } from "../../../portfolio/relationships/public";
 import {
   ActionButton,
   Field,

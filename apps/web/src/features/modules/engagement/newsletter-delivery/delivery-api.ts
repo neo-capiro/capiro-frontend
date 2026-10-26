@@ -9,7 +9,7 @@ import {
 import {
   sendingMailboxesSchema,
   type SendingMailbox,
-} from "../../../portfolio/relationships/email/mailboxes";
+} from "../../../portfolio/relationships/public";
 import { CapiroApiError, type CapiroApi } from "../../../../shared/capiro/http";
 import { createRichNewsletterAdapter } from "../../../../shared/capiro/rich-newsletter";
 import type { capiroOperations } from "../../../../shared/capiro/registry";

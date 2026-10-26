@@ -2,7 +2,6 @@ import {
   cloneNewsletterBlocks,
   newsletterId,
   type NewsletterSection,
-  type NewsletterSectionLibraryItem,
 } from "@capiro/shared/newsletter";
 import type { RichDraft } from "../draft";
 
@@ -27,8 +26,10 @@ export function appendSavedSection(
   };
 }
 
-export function filterSavedSections(
-  items: readonly NewsletterSectionLibraryItem[],
+export function filterLibraryItems<
+  T extends { name: string; folder?: string; updatedAt: string },
+>(
+  items: readonly T[],
   search: string,
   folder: string,
   sort: "recent" | "name",

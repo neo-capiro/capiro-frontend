@@ -101,6 +101,14 @@
   gap: 8px;
   margin-top: 12px;
 }
+.folderControls {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.folderControls .actions {
+  margin-top: 0;
+}
 .page,
 .file {
   margin: 12px 0;

@@ -9,7 +9,7 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
-import { personSchema } from "../../../portfolio/relationships/contracts";
+import { personSchema } from "../../../portfolio/relationships/public";
 import {
   newsletterDestinationInput,
   type NewsletterDestinationInput,

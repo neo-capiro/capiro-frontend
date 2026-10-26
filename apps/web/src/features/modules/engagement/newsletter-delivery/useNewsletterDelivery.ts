@@ -5,7 +5,7 @@ import type {
   NewsletterOutreachRecord,
   NewsletterSendReadback,
 } from "@capiro/shared/newsletter";
-import type { SendingMailbox } from "../../../portfolio/relationships/email/mailboxes";
+import type { SendingMailbox } from "../../../portfolio/relationships/public";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import type { NewsletterPrepareInput } from "../../../../shared/capiro/operations/newsletter-delivery";
 import { createNewsletterDeliveryApi } from "./delivery-api";
