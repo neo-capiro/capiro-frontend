@@ -2864,10 +2864,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
     "kind": "function",
     "symbol": "DocumentsLibrary",
-    "fingerprint": "2d75301592dc14979a988f9c8f9456b73afa4c8a02e7e5fef966862d3561ba97",
-    "reason": "Retain this function as the read-only Workspace document-list interaction. Query parameters, current page cursor, local search/ownership/template/client filters, loading/refusal state, table columns and open callbacks all operate on one admitted result page. The fixed workspace.documents schema/transport owns receipt parsing and requests; the backend owns visibility, while the optional clientId is sent as the existing server query scope. The A1 additions suppress held rows from client-scoped views/options and show the explicit recovery label without adding a write path, association inference or new store. The local client-name selector filters already-returned display rows and does not establish client identity or change bindings. Extracting columns or each filter into separate files would mainly split presentation configuration, not create a clearer ownership boundary.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "0ff1c95000eca5d382215b642533d5bae8bdb6d9b8b2348ef18d78333fb910cf",
+    "reason": "This exact 165-line function retains one authorized library filter/list presentation and its local cursor/loading/error lifetime. The fixed-operation query and canonical client selector remain separate owners. Independent PR158 review explicitly accepted the cohesive function at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de; composition preserves that entire source blob. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
+    "reviewedOn": "2026-10-25"
   },
   {
     "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
@@ -3929,6 +3929,33 @@
     "fingerprint": "e4ee7a975a0f73aeda07d58a8a9ca82231f507b874eb537b98cc7c12c104547b",
     "reason": "ConnectedWorkflow owns one connected recommendation follow-through view: controller subscription/disposal, recovery affordance and composition of existing recommendation, draft and proposal panels. The changed branch selects truthful copy and an explicit read-versus-retry callback from controller state. Authorization, transport, saved-command persistence, immutable binding and async operation control remain in their existing separate owners. The addition creates no second workflow, journal or authority owner; extracting this small presentation branch would fragment the same view without separating a new responsibility. Accepted for this exact function only; no whole-architecture pass is claimed.",
     "reviewedBy": "Codex independent File Workflows UI reviewer, Root allocated PR163 review",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "64155da97bb96b8706c60cccf26dec629a0c373dc85d9c2fe986aff843fbd67e",
+    "reason": "This 407-line declarative catalog retains the existing fixed Hill Day operation descriptors. The accepted change adds only authorized library query request metadata; it does not add a service lifecycle or browser authorization policy. Independent PR158 review explicitly accepted this catalog signal at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de. Composition preserves its exact blob. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
+    "kind": "function",
+    "symbol": "ExportDialog",
+    "fingerprint": "8d5587abe2e9468c3e1f4e4b32895d99463e5e2f0d2fe6029f5b82bfaf226def",
+    "reason": "The dialog owns declarative presentation of the known export receipt, pending/error/expiry state and explicit recovery/download actions. The adjacent accepted hook owns the request and download lifetime. Independent PR166 design review accepted this division without artificial splitting at83806222558a9d0ab779152e5f8a1c5f890df657; composition preserves the exact blob. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Independent Codex reviewer, W3-UI-PR166-REVIEW.md, 2026-10-25T21:09:35Z",
+    "reviewedOn": "2026-10-25"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/useHillDayExport.ts",
+    "kind": "function",
+    "symbol": "useHillDayExport",
+    "fingerprint": "93b6021e2469b0017e5efbe2a882548d5ec009522d4d9e2f43a192c68d276fc5",
+    "reason": "This hook owns one cohesive known-receipt status/poll/renewal/download lifecycle and delegates query, mutation, transport and authorization to existing owners. The independent PR166 design review accepted this exact source at83806222558a9d0ab779152e5f8a1c5f890df657. Its report counts120 nonblank lines for the hook module; the canonical AST scanner counts112 in the function. Neither count is silently changed into a whole architecture pass. See docs/wave3-integration-20261026/BRIEF.md.",
+    "reviewedBy": "Independent Codex reviewer, W3-UI-PR166-REVIEW.md, 2026-10-25T21:09:35Z",
     "reviewedOn": "2026-10-25"
   }
 ]
