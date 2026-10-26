@@ -300,7 +300,7 @@ test("a pending start cannot install its acknowledgement into a replacement acto
   ).toBeEnabled();
   f.release();
   await expect(
-    page.getByText("Building your packet", { exact: true }),
+    page.getByText("Meri is drafting the packet", { exact: true }),
   ).toBeVisible();
   await expect(
     page.getByText(

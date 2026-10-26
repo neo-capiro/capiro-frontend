@@ -18,6 +18,7 @@ import { HillDayContext } from "./HillDayContext";
 import { HillDayGeneration } from "./HillDayGeneration";
 import { HillDayMeetings } from "./HillDayMeetings";
 import { HillDayResolution } from "./HillDayResolution";
+import presentation from "./hillday-presentation.module.css";
 
 const steps = [
   "Template",
@@ -199,14 +200,25 @@ export function HillDayWizard({
     setStep(Math.min(5, step + 1));
   }
   return (
-    <section className={styles.wizard} data-design-node="411:116749">
-      <header className={styles.wizardHeader}>
+    <section
+      className={`${styles.wizard} ${presentation.wizard}`}
+      data-design-node="1064:258196"
+    >
+      <header className={`${styles.wizardHeader} ${presentation.wizardHeader}`}>
         <div className={styles.actions}>
           <ActionButton onClick={onClose}>←</ActionButton>
           <div>
             <h2>{existing ? "Resume document" : "New document"}</h2>
-            <span className={styles.footnote}>
+            <span
+              className={styles.footnote}
+              title={
+                documentId
+                  ? "Draft saved. Its sponsor and blueprint are fixed; the document name remains editable."
+                  : undefined
+              }
+            >
               Hill Day Schedule · {name || "Choose a sponsor"}
+              {documentId && " · Draft saved"}
             </span>
           </div>
         </div>
@@ -223,30 +235,28 @@ export function HillDayWizard({
           ))}
         </ol>
       </header>
-      <h1 className={styles.wizardTitle}>
-        {
-          [
-            "What are you making?",
-            "Who is the sponsor?",
-            "Which meetings go in the packet?",
-            "Confirm what we resolved",
-            "Add what we don’t know",
-            "Generate the packet",
-          ][step]
-        }
-      </h1>
+      {step !== 2 && (
+        <h1 className={`${styles.wizardTitle} ${presentation.wizardTitle}`}>
+          {
+            [
+              "What are you making?",
+              "Who is the sponsor?",
+              "Which meetings go in the packet?",
+              "Confirm what we resolved",
+              "Add what we don’t know",
+              "Generate the packet",
+            ][step]
+          }
+        </h1>
+      )}
       {(create.error || update.error) && (
         <p role="alert" className={styles.error}>
           {(create.error ?? update.error)?.message}
         </p>
       )}
-      {documentId && (
-        <p className={styles.footnote}>
-          Draft saved. Its sponsor and blueprint are fixed; the document name
-          remains editable.
-        </p>
-      )}
-      <div className={styles.wizardBody}>
+      <div
+        className={`${styles.wizardBody} ${step === 2 ? presentation.meetingSlot : ""}`}
+      >
         {step === 0 && (
           <StatusPanel
             loading={blueprints.loading}
@@ -292,6 +302,7 @@ export function HillDayWizard({
             id={documentId}
             clientId={clientId}
             saved={existing}
+            onBack={() => setStep(1)}
             onSaved={(rows) => {
               setMeetings(rows);
               setStep(3);
@@ -318,46 +329,48 @@ export function HillDayWizard({
           />
         )}
       </div>
-      <footer className={styles.wizardFooter}>
-        <p>
-          {
-            [
-              "Blueprint decides the questions and sections.",
-              "Calendar and objectives come from the sponsor.",
-              "Choose meetings before resolving attendees.",
-              "Unresolved attendees remain visible in the packet.",
-              "Context is optional. Threads outside the selected window stay excluded.",
-              "Generation progress is recorded by Workspace.",
-            ][step]
-          }
-        </p>
-        <div className={styles.actions}>
-          <ActionButton
-            disabled={step === 0}
-            onClick={() => setStep(Math.max(0, step - 1))}
-          >
-            Back
-          </ActionButton>
-          {step < 2 && (
+      {step !== 2 && (
+        <footer className={presentation.wizardFooter}>
+          <p>
+            {
+              [
+                "Blueprint decides the questions and sections.",
+                "Calendar and objectives come from the sponsor.",
+                "Choose meetings before resolving attendees.",
+                "Unresolved attendees remain visible in the packet.",
+                "Context is optional. Threads outside the selected window stay excluded.",
+                "Generation progress is recorded by Workspace.",
+              ][step]
+            }
+          </p>
+          <div className={styles.actions}>
             <ActionButton
-              primary
-              disabled={
-                pending ||
-                (step === 0 ? !chosenBlueprint : !clientId || !name.trim())
-              }
-              onClick={next}
+              disabled={step === 0}
+              onClick={() => setStep(Math.max(0, step - 1))}
             >
-              {pending
-                ? documentId
-                  ? "Saving…"
-                  : "Creating…"
-                : step === 1
-                  ? "Open calendar →"
-                  : "Continue →"}
+              Back
             </ActionButton>
-          )}
-        </div>
-      </footer>
+            {step < 2 && (
+              <ActionButton
+                primary
+                disabled={
+                  pending ||
+                  (step === 0 ? !chosenBlueprint : !clientId || !name.trim())
+                }
+                onClick={next}
+              >
+                {pending
+                  ? documentId
+                    ? "Saving…"
+                    : "Creating…"
+                  : step === 1
+                    ? "Open calendar →"
+                    : "Continue →"}
+              </ActionButton>
+            )}
+          </div>
+        </footer>
+      )}
     </section>
   );
 }
