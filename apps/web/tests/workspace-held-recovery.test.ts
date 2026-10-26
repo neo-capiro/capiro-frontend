@@ -1,3 +1,4 @@
+import { testIdentity } from "../test/browser/fixtures";
 import { beforeEach, expect, it, vi } from "vitest";
 import { createElement, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -53,6 +54,10 @@ vi.mock("react", async (original) => ({
     ];
   },
 }));
+vi.mock(
+  "../src/features/modules/workspace/ordinary-save/OrdinaryDraftSave",
+  () => import("./workspace-ordinary-save-host-stub"),
+);
 vi.mock("../src/shared/capiro/queries", () => ({
   useCapiroQuery: (key: string) => ({
     data:
@@ -60,7 +65,7 @@ vi.mock("../src/shared/capiro/queries", () => ({
         ? h.row
         : key === "workspace.draft.versions"
           ? []
-          : {},
+          : testIdentity,
     reload: h.reload,
     loading: false,
   }),
@@ -192,9 +197,10 @@ it("opens the existing ordinary editor for its current canonical client", () => 
 it("adopts a confirmed client without reloading or losing unsaved ordinary draft edits", async () => {
   render();
   const [title] = h.inputs.mock.calls.map(([props]) => props);
-  const [body] = h.editors.mock.calls.map(([props]) => props);
+
   title!.onChange({ target: { value: "Unsaved title" } });
-  body!.onChange("Unsaved body");
+  render();
+  h.editors.mock.lastCall![0].onChange("Unsaved body");
   render();
   const bound: WorkspaceDraftDocument = {
     ...h.row!,
@@ -209,15 +215,8 @@ it("adopts a confirmed client without reloading or losing unsaved ordinary draft
   expect(h.binding.mock.lastCall![0].draft).toBe(bound);
   expect(h.inputs.mock.calls.at(-1)![0].value).toBe("Unsaved title");
   expect(h.editors.mock.calls.at(-1)![0].value).toBe("Unsaved body");
-  const save = h.buttons.mock.calls.findLast(
-    ([props]) => props.children === "Save draft",
-  )![0];
-  await save.onClick();
-  expect(h.update).toHaveBeenCalledWith({
-    params: { id: draft.id },
-    body: {
-      docTitle: "Unsaved title",
-      config: { sectionContent: { Body: "Unsaved body" } },
-    },
-  });
+  // The obsolete PATCH save expectation is replaced by the mounted atomic-save
+  // association/rebase witness in workspace-ordinary-save.spec.ts.
+  expect(h.update).not.toHaveBeenCalled();
+  expect(h.snapshot).not.toHaveBeenCalled();
 });
