@@ -14,7 +14,9 @@ import { workspaceClientBriefCopyOperations } from "./workspace-client-brief-cop
 import { workspaceCollaboratorOperations } from "./workspace-collaborators";
 import { workspaceNotificationOperations } from "./workspace-notifications";
 import { richNewsletterReviewOperations } from "./rich-newsletter-review";
+import { richNewsletterCollaborationOperations } from "./rich-newsletter-collaboration";
 export const workspaceOperations = {
+  ...richNewsletterCollaborationOperations,
   ...richNewsletterAssetOperations,
   ...richNewsletterReviewOperations,
   ...workspaceCollaboratorOperations,

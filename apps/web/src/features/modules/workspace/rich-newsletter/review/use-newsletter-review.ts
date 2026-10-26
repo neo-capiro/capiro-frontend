@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import type { NewsletterComments } from "@capiro/shared/newsletter";
 import { useCapiroQuery } from "../../../../../shared/capiro/queries";
 import { CapiroApiError } from "../../../../../shared/capiro/http";
 import { receiveComments, receiveReview } from "./receiving";
@@ -8,6 +9,12 @@ import { receiveComments, receiveReview } from "./receiving";
 export function useNewsletterReview(documentId: string) {
   const [opened, setOpened] = useState(false);
   const [commentsRequested, setCommentsRequested] = useState(false);
+  const [writtenComments, setWrittenComments] = useState<NewsletterComments>();
+  const [writeAccessLost, setWriteAccessLost] = useState(false);
+  const denyAccess = useCallback(() => {
+    setWriteAccessLost(true);
+    setWrittenComments(undefined);
+  }, []);
   const query = useCapiroQuery(
     "workspace.richNewsletter.review",
     {
@@ -42,9 +49,10 @@ export function useNewsletterReview(documentId: string) {
     !commentsQuery.loading &&
     !commentsQuery.error &&
     !comments.ok;
-  const review = refused || malformed ? undefined : admitted;
+  const review = refused || malformed || writeAccessLost ? undefined : admitted;
   const unavailable = opened && !query.loading && !review;
   const accessLost =
+    writeAccessLost ||
     refused ||
     (query.error instanceof CapiroApiError &&
       [401, 403, 404].includes(query.error.status));
@@ -56,20 +64,27 @@ export function useNewsletterReview(documentId: string) {
     loading: query.loading,
     commentsLoading: commentsRequested && commentsQuery.loading,
     commentsError: Boolean(commentsQuery.error),
+    acceptComments: setWrittenComments,
+    denyAccess,
     comments: !review
       ? undefined
-      : !commentsRequested
-        ? review.comments
-        : !commentsQuery.loading && !commentsQuery.error && comments.ok
-          ? comments.value.items
-          : undefined,
+      : writtenComments
+        ? writtenComments.items
+        : !commentsRequested
+          ? review.comments
+          : !commentsQuery.loading && !commentsQuery.error && comments.ok
+            ? comments.value.items
+            : undefined,
     open() {
+      setWrittenComments(undefined);
+      setWriteAccessLost(false);
       setCommentsRequested(false);
       if (opened) query.reload();
       else setOpened(true);
     },
     refreshComments() {
       if (!review || commentsQuery.loading) return;
+      setWrittenComments(undefined);
       if (commentsRequested) commentsQuery.reload();
       else setCommentsRequested(true);
     },
