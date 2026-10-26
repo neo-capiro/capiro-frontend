@@ -1,5 +1,12 @@
 "use client";
 import { TemplateCard } from "./TemplateCard";
+import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@capiro/ui/dropdown-menu";
 
 import { useState } from "react";
 import type {
@@ -14,6 +21,7 @@ import {
   ActionButton,
   Field,
   Modal,
+  PageHeader,
   SelectInput,
   StatusPanel,
   TextInput,
@@ -21,6 +29,8 @@ import {
 import styles from "../workspace.module.css";
 import { TemplateDetails } from "./TemplateDetails";
 import { TemplateWizard } from "./TemplateWizard";
+import { workspaceHref } from "../workspace-route";
+import presentation from "./template-presentation.module.css";
 
 export function TemplateStudio({
   onClose,
@@ -111,31 +121,58 @@ export function TemplateStudio({
       : template.scope === scope,
   );
   return (
-    <section className={styles.screen} data-design-node="411:112887">
-      <nav className={styles.breadcrumb}>
-        <button className={styles.link} onClick={onClose}>
-          ← Workspace
-        </button>
-        <span>/ Template Studio</span>
+    <section className={styles.screen} data-design-node="1064:254094">
+      <PageHeader title="Workspace" />
+      <nav className={presentation.workspaceTabs} aria-label="Workspace views">
+        <button onClick={onClose}>Documents</button>
+        <span aria-current="page">Template Studio</span>
+        <Link
+          href={workspaceHref({
+            kind: "view",
+            view: "shares",
+            clientId: initialClientId,
+          })}
+        >
+          Client shares
+        </Link>
       </nav>
-      <header className={styles.heading}>
-        <div>
-          <h1>Template Studio</h1>
-          <p>Start from a reusable campaign template.</p>
+      <div className={presentation.templateType}>Outreach campaigns</div>
+      <header className={presentation.heading}>
+        <div className={presentation.titles}>
+          <p>Templates</p>
+          <h2>Start from an approved way of working</h2>
         </div>
-        <div className={styles.actions}>
-          <ActionButton onClick={() => setFromCampaign(true)}>
-            Save campaign as template
-          </ActionButton>
+        <div className={presentation.headActions}>
+          <SelectInput
+            aria-label="Sort templates"
+            value={sort}
+            onValueChange={(value) => setSort(value as typeof sort)}
+            options={[
+              { value: "updated", label: "Last updated" },
+              { value: "name", label: "Name" },
+              { value: "usage", label: "Most used" },
+              { value: "last_used", label: "Last used" },
+            ]}
+          />
           <ActionButton onClick={list.reload}>Refresh</ActionButton>
           <ActionButton primary onClick={() => setWizard(true)}>
             + Create template
           </ActionButton>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <ActionButton aria-label="More template actions">⋯</ActionButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onSelect={() => setFromCampaign(true)}>
+                Save campaign as template
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </header>
-      <div className={styles.filters}>
+      <div className={presentation.filters}>
         <div
-          className={styles.pills}
+          className={presentation.categories}
           role="group"
           aria-label="Template categories"
         >
@@ -149,7 +186,6 @@ export function TemplateStudio({
           ].map(([value, label]) => (
             <button
               key={value}
-              className={scope === value ? styles.active : ""}
               aria-pressed={scope === value}
               onClick={() => setScope(value!)}
             >
@@ -162,17 +198,6 @@ export function TemplateStudio({
           placeholder="Search templates…"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-        />
-        <SelectInput
-          aria-label="Sort templates"
-          value={sort}
-          onValueChange={(value) => setSort(value as typeof sort)}
-          options={[
-            { value: "updated", label: "Recently updated" },
-            { value: "name", label: "Name" },
-            { value: "usage", label: "Most used" },
-            { value: "last_used", label: "Last used" },
-          ]}
         />
       </div>
       {scope === "capiro" ? (
@@ -194,7 +219,7 @@ export function TemplateStudio({
               : undefined
           }
         >
-          <div className={styles.templateGrid}>
+          <div className={`${styles.templateGrid} ${presentation.cards}`}>
             {templates.map((template) => (
               <TemplateCard
                 key={template.id}

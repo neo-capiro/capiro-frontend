@@ -14,13 +14,16 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../workspace.module.css";
+import presentation from "./template-presentation.module.css";
 
 export function TemplateSettings({
   detail,
   onSaved,
+  onClose,
 }: {
   detail: OutreachTemplateDetail;
   onSaved: () => void;
+  onClose: () => void;
 }) {
   const [name, setName] = useState(detail.template.name);
   const [description, setDescription] = useState(
@@ -52,88 +55,91 @@ export function TemplateSettings({
   }
   const disabled = !detail.capabilities.canEdit || update.pending;
   return (
-    <div className={styles.form}>
-      <Field label="Name" htmlFor="template-settings-name">
-        <TextInput
-          id="template-settings-name"
-          disabled={disabled}
-          maxLength={160}
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-      </Field>
-      <Field label="Description" htmlFor="template-settings-description">
-        <TextArea
-          id="template-settings-description"
-          disabled={disabled}
-          maxLength={1000}
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        />
-      </Field>
-      <Field label="Campaign type" htmlFor="template-settings-type">
-        <TextInput
-          id="template-settings-type"
-          disabled={disabled}
-          maxLength={60}
-          value={campaignType}
-          onChange={(event) => setCampaignType(event.target.value)}
-        />
-      </Field>
-      <Field
-        label="Who can use it"
-        htmlFor="template-settings-scope"
-        description="The template service checks who may edit and publish in this scope."
-      >
-        <SelectInput
-          id="template-settings-scope"
-          disabled={disabled}
-          value={scope}
-          onValueChange={(value) => setScope(value as typeof scope)}
-          options={[
-            { value: "private", label: "Only me" },
-            { value: "firm", label: "Firm" },
-            { value: "client", label: "Client" },
-          ]}
-        />
-      </Field>
-      {scope === "client" && (
-        <Field label="Client" htmlFor="template-settings-client">
-          <SelectInput
-            id="template-settings-client"
+    <div>
+      <div className={presentation.settingsFields}>
+        <Field label="Name" htmlFor="template-settings-name">
+          <TextInput
+            id="template-settings-name"
             disabled={disabled}
-            value={clientId}
-            onValueChange={setClientId}
+            maxLength={160}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
+        </Field>
+        <Field label="Description" htmlFor="template-settings-description">
+          <TextArea
+            id="template-settings-description"
+            disabled={disabled}
+            maxLength={1000}
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </Field>
+        <Field label="Campaign type" htmlFor="template-settings-type">
+          <TextInput
+            id="template-settings-type"
+            disabled={disabled}
+            maxLength={60}
+            value={campaignType}
+            onChange={(event) => setCampaignType(event.target.value)}
+          />
+        </Field>
+        <Field label="Who can use it" htmlFor="template-settings-scope">
+          <SelectInput
+            id="template-settings-scope"
+            disabled={disabled}
+            value={scope}
+            onValueChange={(value) => setScope(value as typeof scope)}
             options={[
-              { value: "", label: "Select a client" },
-              ...(clients.data?.items ?? []).map((client) => ({
-                value: client.id,
-                label: client.name,
-              })),
+              { value: "private", label: "Only me" },
+              { value: "firm", label: "The firm" },
+              { value: "client", label: "Client" },
             ]}
           />
         </Field>
-      )}
-      {update.error && (
-        <p role="alert" className={styles.error}>
-          {update.error.message}
-        </p>
-      )}
-      {update.data && (
-        <p className={styles.success}>Template settings saved.</p>
-      )}
-      {clients.error && scope === "client" && (
-        <p role="alert" className={styles.error}>
-          {clients.error.message}
-        </p>
-      )}
-      <ActionButton
-        primary
-        disabled={disabled || !name.trim() || (scope === "client" && !clientId)}
-        onClick={save}
-      >
-        {update.pending ? "Saving…" : "Save settings"}
-      </ActionButton>
+        {scope === "client" && (
+          <Field label="Client" htmlFor="template-settings-client">
+            <SelectInput
+              id="template-settings-client"
+              disabled={disabled}
+              value={clientId}
+              onValueChange={setClientId}
+              options={[
+                { value: "", label: "Select a client" },
+                ...(clients.data?.items ?? []).map((client) => ({
+                  value: client.id,
+                  label: client.name,
+                })),
+              ]}
+            />
+          </Field>
+        )}
+        {update.error && (
+          <p role="alert" className={styles.error}>
+            {update.error.message}
+          </p>
+        )}
+        {update.data && (
+          <p className={styles.success}>Template settings saved.</p>
+        )}
+        {clients.error && scope === "client" && (
+          <p role="alert" className={styles.error}>
+            {clients.error.message}
+          </p>
+        )}
+      </div>
+      <footer className={presentation.settingsFooter}>
+        <ActionButton onClick={onClose}>Cancel</ActionButton>
+        <ActionButton
+          primary
+          disabled={
+            disabled || !name.trim() || (scope === "client" && !clientId)
+          }
+          onClick={save}
+        >
+          {update.pending ? "Saving…" : "Save"}
+        </ActionButton>
+      </footer>
     </div>
   );
 }
