@@ -112,11 +112,11 @@ for (const status of [200, 503]) {
     await adoptDocument(page);
     await expect(button(page, "Stage newsletter")).toBeDisabled();
     await expect(
-      page.getByText(/This saved revision has an uncertain stage attempt/),
+      page.getByText(/Staging could not be confirmed for revision/),
     ).toBeVisible();
-    await expect(page.getByText(/Stage .* received for document/)).toHaveCount(
-      0,
-    );
+    await expect(
+      page.getByRole("heading", { name: /Saved revision \d+ staged/ }),
+    ).toHaveCount(0);
     await expect(page.locator(`a[href*="${stageId}"]`)).toHaveCount(0);
     expect(fixture.calls("stage")).toHaveLength(1);
     await expect(page).toHaveURL(editorUrl);
