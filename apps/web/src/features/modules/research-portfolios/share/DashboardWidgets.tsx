@@ -27,17 +27,27 @@ export function formatTotal(total: Total): string {
   return `${total.value} ${unitLabel(total.basis.unit)}`;
 }
 export function basisLabel(basis: Total["basis"]): string {
-  return `FY${basis.fundingFiscalYear} · ${basis.stage}`;
+  return [
+    `FY${basis.fundingFiscalYear}`,
+    basis.stage,
+    basis.metric.replaceAll("_", " "),
+    `${basis.currency} · ${unitLabel(basis.unit)}`,
+    `price basis ${basis.priceBasis ?? "unspecified"}`,
+    `request ${basis.requestEdition ?? "unspecified"}`,
+    `known at ${basis.knownAt ?? "unspecified"}`,
+  ].join(" · ");
 }
 function basisKey(basis: Total["basis"]): string {
-  return [
+  return JSON.stringify([
     basis.fundingFiscalYear,
     basis.stage,
     basis.metric,
     basis.unit,
+    basis.currency,
+    basis.priceBasis,
     basis.requestEdition,
     basis.knownAt,
-  ].join(":");
+  ]);
 }
 function text(
   settings: Record<string, unknown>,
