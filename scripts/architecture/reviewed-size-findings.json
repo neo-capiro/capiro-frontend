@@ -4599,5 +4599,32 @@
     "reason": "One focused suite groups template and metadata operation boundaries: full-template versus section input, actual parser, exact ACK and no retry after malformed delete success. Individual cases remain separate it callbacks and share only synthetic library inputs. Exact independent review: W3-WS16-FE206-REVIEW.md at 0b49ccb781a971fa0423ed2f4cdcd5a05adadd2d.",
     "reviewedBy": "m3_scope, independent Wave 3 FE206 source and Figma reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/AssetFolders.tsx",
+    "kind": "function",
+    "symbol": "AssetFolders",
+    "fingerprint": "3af93a0cac36235ce69db60d4a421f97578c556a22ceb27c72e07214a2275131",
+    "reason": "One folder-filter and action group delegates reads and changes to existing feature owners; no new authority or mutation transport.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/AssetManagementForm.tsx",
+    "kind": "function",
+    "symbol": "AssetManagementForm",
+    "fingerprint": "408bef869dbbf9ee2e841b31e9a8d2460fe61e1c9d7c008ddf07fb88719b12ad",
+    "reason": "One form maps the same captured asset/folder command into canonical fields and confirmation copy; execution and uncertainty remain in the existing management owner.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/AssetReplaceControl.tsx",
+    "kind": "function",
+    "symbol": "usePickerDialog",
+    "fingerprint": "2f4a3aa5a2b422f5d8c193d61ef6c8a4117b2fcc5ede6e88f598414d8e7a9436",
+    "reason": "One existing dialog composes picker, upload, management, history and focus transitions; each request and editor insertion retains its existing owner.",
+    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

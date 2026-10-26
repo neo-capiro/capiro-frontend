@@ -30,7 +30,12 @@ export const assetUploadPolicy: MultipartPolicy = {
   maxMetadataBytes: 4096,
   maxTotalBytes: 10 * 1024 * 1024 + 64 * 1024,
 };
-function receiving<T>(parse: (value: unknown) => NewsletterReceiveResult<T>) {
+export const assetUuid = z
+  .uuid()
+  .refine((value) => "12345678".includes(value.charAt(14)));
+export function receiveAssetResponse<T>(
+  parse: (value: unknown) => NewsletterReceiveResult<T>,
+) {
   return z.unknown().transform((value, context): T | typeof z.NEVER => {
     const result = parse(value);
     if (result.ok) return result.value;
@@ -52,6 +57,7 @@ export const assetListQuery = z
     ]),
     search: z.string().max(200),
     sort: z.enum(assetSorts),
+    folder: z.union([assetUuid, z.literal("unfiled")]).optional(),
   })
   .strict();
 export type AssetListQuery = z.infer<typeof assetListQuery>;
@@ -61,7 +67,7 @@ export const richNewsletterAssetOperations = {
     method: "GET",
     path: "/newsletters/assets",
     request: z.object({ query: assetListQuery }).strict(),
-    response: receiving(parseNewsletterAssetList),
+    response: receiveAssetResponse(parseNewsletterAssetList),
     source,
   }),
   "workspace.richNewsletter.assets.detail": defineOperation({
@@ -72,9 +78,7 @@ export const richNewsletterAssetOperations = {
       .object({
         params: z
           .object({
-            id: z
-              .uuid()
-              .refine((value) => "12345678".includes(value.charAt(14))),
+            id: assetUuid,
           })
           .strict(),
       })
@@ -91,7 +95,7 @@ export const richNewsletterAssetOperations = {
     request: z.object({ body: z.object({}).strict() }).strict(),
     encoding: "multipart",
     multipart: assetUploadPolicy,
-    response: receiving(parseNewsletterAssetItem),
+    response: receiveAssetResponse(parseNewsletterAssetItem),
     source,
   }),
 } as const;

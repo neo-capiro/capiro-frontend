@@ -18,6 +18,11 @@ export function useAssetPicker(open: boolean) {
   });
   const [selectedId, select] = useState<string>();
   const [showDetails, setShowDetails] = useState(false);
+  const folders = useCapiroQuery(
+    "workspace.richNewsletter.assetFolders.list",
+    {},
+    { enabled: open },
+  );
   const list = useCapiroQuery(
     "workspace.richNewsletter.assets.list",
     { query },
@@ -44,6 +49,11 @@ export function useAssetPicker(open: boolean) {
   return {
     query,
     list,
+    folders,
+    selectedFolder: folders.data?.items.find(
+      (folder) => folder.id === query.folder,
+    ),
+    selectedImage: list.data?.items.find((item) => item.id === selectedId),
     selectedId,
     showDetails,
     details,
