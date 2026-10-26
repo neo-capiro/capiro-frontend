@@ -38,7 +38,7 @@ test("navigation reads the exact stage; explicit open returns a bound record and
   state.openGate.resolve();
   await expect(page).toHaveURL(new RegExp(`newsletter=${recordId}`));
   await expect(
-    page.getByRole("heading", { name: "Engagement record", exact: true }),
+    page.getByRole("heading", { name: "Select destinations", exact: true }),
   ).toBeVisible();
   expect(new URL(page.url()).searchParams.get("clientId")).toBe(clientId);
   expect(state.requests.find((r) => r.method === "POST")?.input).toEqual({
@@ -49,7 +49,7 @@ test("navigation reads the exact stage; explicit open returns a bound record and
     fullPage: true,
   });
   state.record.status = "sent";
-  await page.getByRole("button", { name: "Refresh record" }).click();
+  await page.getByRole("button", { name: "Refresh newsletter" }).click();
   await expect(page.getByText("Status: sent", { exact: true })).toBeVisible();
   await page.reload();
   await expect(page.getByText("Status: sent", { exact: true })).toBeVisible();
@@ -138,13 +138,13 @@ test("wrong selected client and revoked record refuse current content without op
     `/modules/engagement?newsletter=${recordId}&clientId=${clientId}`,
   );
   await expect(
-    page.getByRole("heading", { name: "Engagement record", exact: true }),
+    page.getByRole("heading", { name: "Select destinations", exact: true }),
   ).toBeVisible();
   state.refused = true;
-  await page.getByRole("button", { name: "Refresh record" }).click();
+  await page.getByRole("button", { name: "Refresh newsletter" }).click();
   await expect(
     page.getByText(
-      "This newsletter is unavailable for your current access or does not match this link.",
+      "This newsletter or its current delivery status is unavailable. Refresh to check current access.",
       { exact: true },
     ),
   ).toBeVisible();
@@ -192,7 +192,7 @@ test("session replacement and changed stage dispose late reads and open completi
   ).toBeVisible();
   state.openGate.resolve();
   await expect(
-    page.getByRole("heading", { name: "Engagement record", exact: true }),
+    page.getByRole("heading", { name: "Select destinations", exact: true }),
   ).toHaveCount(0);
   expect(new URL(page.url()).searchParams.has("newsletter")).toBe(false);
   expect(state.requests.filter((r) => r.method === "POST")).toHaveLength(1);
