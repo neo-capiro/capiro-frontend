@@ -1919,10 +1919,10 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
     "kind": "function",
     "symbol": "createRichDocumentController",
-    "fingerprint": "205beff7ca5c3ce57168f93e75cdc44bed8815565ad49a838e039adc1f009184",
-    "reason": "Accept this cohesive document workflow owner. Its shared local draft/history, read candidate, saved baseline and pending execution must transition together; splitting these interlocks into independent owners risks old receipts overwriting new work. It delegates wire validation/transport, cross-navigation fencing, React subscription lifetime and HTML display to separate canonical modules. The synchronous active guard, ticket-before-dispatch ordering and repeated current-execution checks are reviewed explicitly. It does not add backend authorization, providers or durable storage.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "e444e4155cfeb7c19673fa23ac0dc30d7f4725d6f580cc0596cf0ae5b4b440d2",
+    "reason": "Recovery needs the same active-request, lifetime and journal state as other document intents. The existing run guard is reused; extracting a second owner would obscure post-notification settlement. The recovery method itself is below80 lines. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
+    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
@@ -1982,19 +1982,19 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "fingerprint": "405b864f4c3d3506f369d662cac42a381d6fd293fd95e8466edaf824cca5515a",
-    "reason": "Accept cohesive presentation of one saved-document lifecycle: action availability, read/adopt/rebase decision, draft/receipt distinction and truthful uncertainty text. It invokes the controller only and introduces neither transport nor inferred authorization. Stage routes are displayed as data; unsupported delivery/collaboration stays unavailable.",
-    "reviewedBy": "core_intake_review (independent)",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "e7e1c6dca680337157798b52e269c3dd62e6626fc5d789c328178f4b7f578e90",
+    "reason": "One saved-document action/status view adds exact recovery controls. Parsing, transport and authority stay outside it. No independent domain responsibility or speculative UI abstraction is added. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
+    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/rich-newsletter.ts",
     "kind": "function",
     "symbol": "createRichNewsletterAdapter",
-    "fingerprint": "9535f5a145d16624ec813b181b1896757ae04b7b4a15a87ae2576cb72589db14",
-    "reason": "Accept the single rich newsletter request/receipt boundary: eight fixed operations capture current document, client, revision and record bindings over the existing cancelling transport and canonical public parser. It owns no UI recovery, backend authority, persistence, generic provider routing or retries. Public DTO validation remains package-owned; local request normalization remains the fixed registry. Root reviewed the complete factory and independently hash-bound boundary review; keeping correlated operation bindings together is cohesive.",
-    "reviewedBy": "Codex root responsibility review with independent core_intake boundary review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "81d57d2659ca342558b221c4e38f7344515bf1267ef60c596696004e4590ac92",
+    "reason": "One feature transport adapter adds a canonical parser binding and read call. The public package still owns wire shapes; Core owns authorization; the controller owns UI intent/lifetime. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
+    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
@@ -4046,6 +4046,15 @@
     "fingerprint": "519c4e4f07cbc3a772e90ec36f87c50c1846845232df651fb89e98eb604aa311",
     "reason": "The narrow delta adds one guarded refusal helper using the canonical storage, encryption and lock owner. It does not duplicate persistence or authority. The original scoped PR171 acceptance is unchanged and matches final source; it approves this exact helper addition within the existing module, not unrelated recovery expansion. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
     "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "8e6ace5829103b1bfc9a09a9e2cb47ff451abadba52b134464eadf2af6aa6234",
+    "reason": "The module remains state types/helpers plus the single explicit-intent controller. No network stack, DTO/schema, persistence or authorization implementation is added. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
+    "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
     "reviewedOn": "2026-10-26"
   }
 ]
