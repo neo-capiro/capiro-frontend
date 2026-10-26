@@ -90,8 +90,13 @@ export function DistrictNexus({ tabs }: { tabs?: ReactNode }) {
   const scope = JSON.stringify(input);
   const query = useCapiroQuery("intelligence.district.map", input);
   const inScope = useMemo(
-    () => (!query.loading && !query.error ? (query.data?.districts ?? []) : []),
-    [query.loading, query.error, query.data],
+    () =>
+      !query.loading && !query.error
+        ? (query.data?.districts ?? []).filter(
+            (row) => !state || row.state === state,
+          )
+        : [],
+    [query.loading, query.error, query.data, state],
   );
   // Presentation filters apply on top of the requested scope, so the query key
   // stays the server scope and a chart choice never re-fetches.
