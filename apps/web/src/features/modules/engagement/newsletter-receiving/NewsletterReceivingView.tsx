@@ -63,7 +63,9 @@ function ReceivingInspector({
             Opening does not send email or prepare recipients. Other record
             activity is separate.
           </p>
-          <ActionButton onClick={refresh}>Refresh record</ActionButton>
+          <ActionButton className={styles.readAction} onClick={refresh}>
+            Refresh record
+          </ActionButton>
         </>
       ) : (
         <>

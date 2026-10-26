@@ -223,19 +223,21 @@ export function RichDocumentActions({
             The saved stage record confirms this revision. No destination was
             opened and nothing was prepared or sent.
           </p>
-          <ActionButton
-            disabled={Boolean(state.pending)}
-            onClick={() => {
-              if (!state.stage) return;
-              const client =
-                selected.state === "authorized-client"
-                  ? `&clientId=${encodeURIComponent(selected.client.id)}`
-                  : "";
-              router.push(`${state.stage.route}${client}`);
-            }}
-          >
-            Review staged newsletter
-          </ActionButton>
+          <div className={styles.toolbar}>
+            <ActionButton
+              disabled={Boolean(state.pending)}
+              onClick={() => {
+                if (!state.stage) return;
+                const client =
+                  selected.state === "authorized-client"
+                    ? `&clientId=${encodeURIComponent(selected.client.id)}`
+                    : "";
+                router.push(`${state.stage.route}${client}`);
+              }}
+            >
+              Review staged newsletter
+            </ActionButton>
+          </div>
         </div>
       )}
       <div className={styles.toolbar}>
