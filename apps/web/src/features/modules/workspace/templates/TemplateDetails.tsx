@@ -190,11 +190,13 @@ export function TemplateDetails({
   mode,
   onClose,
   onEdit,
+  onSettingsSaved,
 }: {
   id: string;
   mode: "use" | "history" | "settings";
   onClose: () => void;
   onEdit: (detail: OutreachTemplateDetail) => void;
+  onSettingsSaved: () => void;
 }) {
   const query = useCapiroQuery("workspace.template", {
     params: { templateId: id },
@@ -224,7 +226,13 @@ export function TemplateDetails({
             {mode === "use" ? (
               <UseTemplate detail={query.data} />
             ) : mode === "settings" ? (
-              <TemplateSettings detail={query.data} onSaved={query.reload} />
+              <TemplateSettings
+                detail={query.data}
+                onSaved={() => {
+                  query.reload();
+                  onSettingsSaved();
+                }}
+              />
             ) : (
               <>
                 <p>{query.data.template.description}</p>
