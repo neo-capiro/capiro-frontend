@@ -27,6 +27,8 @@ export type Viewer = Readonly<{ tenantId: string; actorId: string }>;
 const operationLabels: Readonly<Record<string, string>> = {
   create_task: "Create a task",
   create_word: "Prepare a document",
+  create_excel: "Prepare a spreadsheet",
+  create_powerpoint: "Prepare a presentation",
   update_task: "Update a task",
   save_memory: "Save to memory",
   save_chat_attachments: "File chat attachments",
@@ -214,6 +216,12 @@ const plainLooks = {
     detail:
       "A schedule proposal was prepared. Approving schedules is not available here.",
   },
+  preparation: {
+    status: "Prepared",
+    tone: "neutral",
+    detail:
+      "Preparation was recorded. This receipt does not confirm a file or an approved action.",
+  },
   withheldProposal: {
     status: "Withheld",
     tone: "neutral",
@@ -348,7 +356,16 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
-  if (item.kind === "schedule_proposal") return closed(plainLooks.schedule);
+  if (item.kind === "schedule_proposal")
+    return closed(
+      [
+        "schedule_task",
+        "update_scheduled_task",
+        "cancel_scheduled_task",
+      ].includes(item.operation.id)
+        ? plainLooks.schedule
+        : plainLooks.preparation,
+    );
   if (item.kind === "memory_review") {
     const withheld = "withheld" in item;
     return {

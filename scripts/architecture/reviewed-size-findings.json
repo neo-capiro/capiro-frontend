@@ -5277,5 +5277,36 @@
     "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
     "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
+    "kind": "function",
+    "symbol": "DecisionControls",
+    "line": 42,
+    "nonblank": 83,
+    "fingerprint": "2334908c7ab0c9fd413ae363010868f38cdfad693c34d28e30e79a890905d03d",
+    "reason": "DecisionControls is unchanged at its exact 83-line fingerprint from the pinned base. This correction only exposes the existing current list to adjacent file presentation; no new decision responsibility or function growth is introduced.",
+    "reviewedBy": "Independent Library reviewer; not author",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 437,
+    "fingerprint": "ec2a5c19bacdbd29d7c5de73f2a86346d2ab2b38afe0fd96afca5157d45018ab",
+    "reason": "The existing intent-view module owns the closed presentation of admitted intent outcomes. The bounded addition adds document-family labels and separates generic preparation copy from actual schedule operations; it neither invents a file nor changes command decisions. Related status/label presentation remains cohesive. No count-only split is warranted for this exact 437-line module fingerprint.",
+    "reviewedBy": "Independent Library reviewer; not author",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/module-ui/module-ui.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "34e95545b56fa3dad13d63ff3947458295032163a2d7b66ed091a10123a9aba4",
+    "reason": "The existing module-ui stylesheet remains the canonical local presentation owner for shared module primitives. This bounded correction replaces the obsolete statusNote rule with one unavailable-only modifier and its heading/body rules; loading, transient error, empty states, base status styles and controls are unchanged. The 406-line file is cohesive; extracting a separate style owner only for this threshold would fragment the existing status primitive.",
+    "reviewedBy": "Wave 3 A3 independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

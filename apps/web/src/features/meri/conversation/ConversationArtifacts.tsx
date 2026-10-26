@@ -18,11 +18,10 @@ import { unavailableResources } from "../../../shared/meri-resources/unavailable
 import { DocumentInspectionSummary } from "../files/DocumentInspectionSummary";
 import { DocumentDownloadUrl } from "../files/download-url";
 import { StatusPill } from "../ui/StatusPill";
-import type { TurnView } from "./conversation-view";
+import type { ConversationFile as Listed } from "./intents/prepared-files";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
 
-type Listed = TurnView["artifacts"][number];
 type Status =
   | { kind: "idle" }
   | { kind: "working"; action: "preview" | "download" }
@@ -35,7 +34,7 @@ const sizes = (bytes: number) =>
       ? `${(bytes / 1024).toFixed(1)} KB`
       : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
-/** Files Meri published in this conversation; every read goes through the current session. */
+/** Published files and prepared drafts; every read goes through the current artifact owner. */
 export function ConversationArtifacts({
   artifacts,
   access,
@@ -48,7 +47,8 @@ export function ConversationArtifacts({
       <h2 id="conversation-files">Files in this conversation</h2>
       {artifacts.length === 0 ? (
         <p className={styles.muted}>
-          No files have been published in the turns shown here.
+          No published files or prepared drafts are available in the records
+          shown here.
         </p>
       ) : (
         <ul className={styles.fileList}>
@@ -156,6 +156,9 @@ function ConversationArtifact({
           </ArtifactDescription>
         </div>
       </ArtifactHeader>
+      {artifact.prepared && (
+        <p className={styles.muted}>Prepared draft · Not filed or shared</p>
+      )}
       <ArtifactActions className={styles.fileActions}>
         <Button
           type="button"
