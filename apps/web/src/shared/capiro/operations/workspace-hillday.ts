@@ -23,23 +23,38 @@ const docRead = z.object({ params: documentParams }).strict();
 const meetingParams = documentParams
   .extend({ meetingId: z.string().min(1).max(64) })
   .strict();
-const jobStatus = z.object({
+const generationSource =
+  "capirov2@6f4f82145f797a9a1a4fffb4c33ee4c1a260c882 apps/workspace/src/hillday/{hillday.controller.ts,hillday.types.ts,hillday-generation.service.ts,dto/hillday.dto.ts}";
+const jobLifecycle = z.enum([
+  "queued",
+  "running",
+  "complete",
+  "failed",
+  "cancelled",
+]);
+const jobRead = z
+  .object({ params: documentParams.extend({ jobId: workspaceId }).strict() })
+  .strict();
+export const hillDayJobStatus = z.object({
   jobId: workspaceId,
   documentId: workspaceId,
-  status: z.enum(["queued", "running", "complete", "failed"]),
+  status: jobLifecycle,
   units: z.array(
     z.object({
       sectionId: z.string().nullable(),
-      state: z.enum(["queued", "running", "done", "failed"]),
+      state: z.enum(["queued", "running", "done", "failed", "unknown"]),
       meetingId: z.string(),
-      reason: z.string().nullable().optional(),
+      reason: z.string().nullable(),
+      at: z.string(),
     }),
   ),
   quality: z.number().nullable(),
   error: z.string().nullable(),
+  cancelRequestedAt: z.string().nullable(),
   startedAt: z.string().nullable(),
   completedAt: z.string().nullable(),
 });
+export type HillDayJobStatus = z.infer<typeof hillDayJobStatus>;
 export const workspaceHillDayOperations = {
   "workspace.documents": defineOperation({
     service: "workspace",
@@ -350,24 +365,49 @@ export const workspaceHillDayOperations = {
     service: "workspace",
     method: "POST",
     path: "/hillday/documents/:id/generate",
-    request: docRead,
+    request: z
+      .object({
+        params: documentParams,
+        body: z.object({ requestId: workspaceId }).strict(),
+      })
+      .strict(),
     response: z.object({
       jobId: workspaceId,
-      status: z.enum(["queued", "running"]),
+      status: jobLifecycle,
     }),
-    source,
+    source: generationSource,
+  }),
+  "workspace.hillday.generation": defineOperation({
+    service: "workspace",
+    method: "GET",
+    path: "/hillday/documents/:id/generation",
+    request: docRead,
+    response: z.object({ job: hillDayJobStatus.nullable() }),
+    source: generationSource,
   }),
   "workspace.hillday.job": defineOperation({
     service: "workspace",
     method: "GET",
     path: "/hillday/documents/:id/generate/:jobId",
-    request: z
-      .object({
-        params: documentParams.extend({ jobId: workspaceId }).strict(),
-      })
-      .strict(),
-    response: jobStatus,
-    source,
+    request: jobRead,
+    response: hillDayJobStatus,
+    source: generationSource,
+  }),
+  "workspace.hillday.retry": defineOperation({
+    service: "workspace",
+    method: "POST",
+    path: "/hillday/documents/:id/generate/:jobId/retry",
+    request: jobRead,
+    response: hillDayJobStatus,
+    source: generationSource,
+  }),
+  "workspace.hillday.cancel": defineOperation({
+    service: "workspace",
+    method: "POST",
+    path: "/hillday/documents/:id/generate/:jobId/cancel",
+    request: jobRead,
+    response: hillDayJobStatus,
+    source: generationSource,
   }),
   "workspace.hillday.members": defineOperation({
     service: "workspace",

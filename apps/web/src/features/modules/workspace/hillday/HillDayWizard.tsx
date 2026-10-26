@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import type { HillDayDocument } from "../../../../shared/capiro/operations/workspace-schemas";
+import { hillDayPhases, type HillDayPhase } from "../workspace-route";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -114,23 +116,47 @@ export function HillDayWizard({
   onClose,
   onCreated,
   initialClientId = "",
+  existing,
+  phase,
+  onResume,
 }: {
   onClose: () => void;
   onCreated: (document: { id: string; clientId: string }) => void;
   initialClientId?: string;
+  existing?: HillDayDocument;
+  phase?: HillDayPhase;
+  onResume: (
+    document: { id: string; clientId: string },
+    phase: HillDayPhase,
+  ) => void;
 }) {
-  const [step, setStep] = useState(0);
+  const [localStep, setLocalStep] = useState(0);
+  const step = phase ? hillDayPhases.indexOf(phase) : localStep;
   const [blueprintId, setBlueprintId] = useState("");
-  const [clientId, setClientId] = useState(initialClientId);
-  const [name, setName] = useState("");
-  const [createdDocument, setCreatedDocument] = useState<{
-    id: string;
-    clientId: string;
-  }>();
+  const [clientId, setClientId] = useState(
+    existing?.client.id ?? initialClientId,
+  );
+  const [name, setName] = useState(existing?.name ?? "");
+  const [createdDocument, setCreatedDocument] = useState<
+    | {
+        id: string;
+        clientId: string;
+      }
+    | undefined
+  >(existing ? { id: existing.id, clientId: existing.client.id } : undefined);
   const documentId = createdDocument?.id ?? "";
   const [meetings, setMeetings] = useState<
     { meetingId: string; title: string }[]
-  >([]);
+  >(
+    existing?.sections.map((section) => ({
+      meetingId: section.meetingId,
+      title: section.member,
+    })) ?? [],
+  );
+  function setStep(next: number) {
+    setLocalStep(next);
+    if (createdDocument) onResume(createdDocument, hillDayPhases[next]!);
+  }
   const blueprints = useCapiroQuery("workspace.hillday.blueprints", {});
   const create = useCapiroMutation("workspace.hillday.create");
   const update = useCapiroMutation("workspace.hillday.update");
@@ -152,6 +178,7 @@ export function HillDayWizard({
         });
         setCreatedDocument({ id: result.id, clientId: result.client.id });
         setStep(2);
+        onResume({ id: result.id, clientId: result.client.id }, "meetings");
       } catch {
         /* No transition until the server acknowledges creation. */
       }
@@ -169,7 +196,7 @@ export function HillDayWizard({
       }
       return;
     }
-    setStep((previous) => Math.min(5, previous + 1));
+    setStep(Math.min(5, step + 1));
   }
   return (
     <section className={styles.wizard} data-design-node="411:116749">
@@ -177,7 +204,7 @@ export function HillDayWizard({
         <div className={styles.actions}>
           <ActionButton onClick={onClose}>←</ActionButton>
           <div>
-            <h2>New document</h2>
+            <h2>{existing ? "Resume document" : "New document"}</h2>
             <span className={styles.footnote}>
               Hill Day Schedule · {name || "Choose a sponsor"}
             </span>
@@ -264,6 +291,7 @@ export function HillDayWizard({
           <HillDayMeetings
             id={documentId}
             clientId={clientId}
+            saved={existing}
             onSaved={(rows) => {
               setMeetings(rows);
               setStep(3);
@@ -283,6 +311,7 @@ export function HillDayWizard({
         {step === 5 && (
           <HillDayGeneration
             id={documentId}
+            clientId={createdDocument?.clientId ?? clientId}
             onOpen={() => {
               if (createdDocument) onCreated(createdDocument);
             }}
@@ -305,7 +334,7 @@ export function HillDayWizard({
         <div className={styles.actions}>
           <ActionButton
             disabled={step === 0}
-            onClick={() => setStep((previous) => Math.max(0, previous - 1))}
+            onClick={() => setStep(Math.max(0, step - 1))}
           >
             Back
           </ActionButton>
@@ -330,5 +359,55 @@ export function HillDayWizard({
         </div>
       </footer>
     </section>
+  );
+}
+
+/** Resume only after the current service has admitted the saved document. */
+export function HillDayResume({
+  id,
+  expectedClientId,
+  phase,
+  onClose,
+  onCreated,
+  onResume,
+}: {
+  id: string;
+  expectedClientId?: string;
+  phase: HillDayPhase;
+  onClose: () => void;
+  onCreated: (document: { id: string; clientId: string }) => void;
+  onResume: (
+    document: { id: string; clientId: string },
+    phase: HillDayPhase,
+  ) => void;
+}) {
+  const query = useCapiroQuery("workspace.hillday.document", {
+    params: { id },
+  });
+  const mismatch =
+    query.data &&
+    (query.data.id.toLowerCase() !== id.toLowerCase() ||
+      (expectedClientId &&
+        query.data.client.id.toLowerCase() !== expectedClientId.toLowerCase()));
+  return (
+    <StatusPanel
+      loading={query.loading}
+      error={
+        mismatch
+          ? "The returned document does not match this link or its client scope."
+          : query.error
+      }
+      onRetry={query.reload}
+    >
+      {query.data && !mismatch && (
+        <HillDayWizard
+          existing={query.data}
+          phase={phase}
+          onClose={onClose}
+          onCreated={onCreated}
+          onResume={onResume}
+        />
+      )}
+    </StatusPanel>
   );
 }

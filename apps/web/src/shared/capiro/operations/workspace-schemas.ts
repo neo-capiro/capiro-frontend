@@ -206,6 +206,7 @@ export const hillDayDocument = z.object({
   firm: z.object({ name: z.string() }),
   owner: z.object({ id: z.string(), name: z.string(), initials: z.string() }),
   timeZone: z.string(),
+  weekStart: z.iso.date().nullable().optional(),
   lookbackDays: z.number(),
   updatedAt: z.string(),
   createdAt: z.string(),
