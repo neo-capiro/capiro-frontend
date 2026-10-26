@@ -118,12 +118,13 @@ export function StatusPanel({
     const classification = refusal(error);
     if (classification && !classification.retryable)
       return (
-        <div className={styles.status} role="alert">
+        <div
+          className={`${styles.status} ${styles.statusUnavailable}`}
+          role="alert"
+        >
           <h2>This view is unavailable</h2>
           <p>{message}</p>
-          <p className={styles.statusNote}>
-            {unavailableReason(classification.status)}
-          </p>
+          <p>{unavailableReason(classification.status)}</p>
         </div>
       );
     return (
