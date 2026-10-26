@@ -1,14 +1,22 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, type ComponentType } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ComponentType,
+  type ReactNode,
+} from "react";
 import type { WorkspaceDraftDocument } from "@/shared/capiro/operations/workspace-documents";
 import { ActionButton } from "@/shared/module-ui";
 import type { ManualDraftInput } from "../prospects/manual-draft";
 import { SectionPreview } from "../rich-document/SectionPreview";
-import type { OrdinarySaveScope } from "./ordinary-save";
+import { manualSaveModel, type OrdinarySaveScope } from "./ordinary-save";
 import { useOrdinaryDraftSave } from "./useOrdinaryDraftSave";
 
-export type OrdinarySave = ReturnType<typeof useOrdinaryDraftSave>;
+export type OrdinarySave = ReturnType<
+  typeof useOrdinaryDraftSave<ManualDraftInput>
+>;
 type Props = {
   draft: WorkspaceDraftDocument;
   actor: Pick<OrdinarySaveScope, "tenantId" | "userId" | "actorId">;
@@ -51,6 +59,7 @@ function OrdinarySaveSession({
 }) {
   const save = useOrdinaryDraftSave(
     { ...actor, draftId: draft.id, clientId: draft.clientId ?? null },
+    manualSaveModel,
     carriedInput,
   );
   const latestInput = useRef(save.input);
@@ -84,7 +93,13 @@ function OrdinarySaveSession({
     />
   );
 }
-export function OrdinarySaveRecovery({ save }: { save: OrdinarySave }) {
+export function OrdinarySaveRecovery({
+  save,
+  children,
+}: {
+  save: Omit<OrdinarySave, "input" | "setInput">;
+  children?: ReactNode;
+}) {
   const unknown = save.retained && !save.retained.outcome;
   return (
     <section aria-label="Document save recovery">
@@ -127,17 +142,19 @@ export function OrdinarySaveRecovery({ save }: { save: OrdinarySave }) {
         <details open>
           <summary>Current saved content — separate from your edits</summary>
           <h2>{save.readback.draft.docTitle}</h2>
-          {Object.entries(save.readback.draft.config.sectionContent ?? {}).map(
-            ([name, content]) => (
-              <section key={name}>
-                <h3>{name}</h3>
-                <SectionPreview value={content} />
-              </section>
-            ),
-          )}
+          {children ??
+            Object.entries(save.readback.draft.config.sectionContent ?? {}).map(
+              ([name, content]) => (
+                <section key={name}>
+                  <h3>{name}</h3>
+                  <SectionPreview value={content} />
+                </section>
+              ),
+            )}
           <p>
-            This view shows supported sections only. Other saved fields remain
-            untouched.
+            {children
+              ? "This view shows the saved newsletter fields."
+              : "This view shows supported sections only. Other saved fields remain untouched."}
           </p>
         </details>
       )}

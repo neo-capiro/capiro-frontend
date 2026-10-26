@@ -1,3 +1,4 @@
+import { manualSaveBody } from "../../src/shared/capiro/operations/workspace-documents";
 import { expect, test, type Page } from "@playwright/test";
 import {
   ordinarySaveFixture,
@@ -138,9 +139,9 @@ for (const settlement of ["acknowledged", "missing"]) {
     await expect.poll(() => f.saves.length).toBe(3);
     expect(f.saves[2]!.requestId).not.toBe(original!.requestId);
     expect(f.saves[2]!.draft.docTitle).toBe("Unsent tab B edits");
-    expect(f.saves[2]!.draft.config.sectionContent.Body).toBe(
-      "Unsent tab B body",
-    );
+    expect(
+      manualSaveBody.parse(f.saves[2]).draft.config.sectionContent.Body,
+    ).toBe("Unsent tab B body");
     expect(f.saves[2]!.expectedStateHash).toBe(
       f.versions.get(original!.requestId)!.response.receipt.stateHash,
     );

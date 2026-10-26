@@ -9,14 +9,22 @@ import {
   useCapiroQuery,
 } from "../../../../shared/capiro/queries";
 import { createNewsletter, newsletterDocumentBlocks } from "./newsletter-model";
+import {
+  newsletterMatchesSaved,
+  type NewsletterSave,
+} from "./newsletter-atomic-save";
 export function useNewsletter({
   onClose,
   existing,
   initialClientId,
+  saveOwner,
+  onAtomicBound,
 }: {
   onClose: () => void;
   existing?: WorkspaceDraftDocument;
   initialClientId: string;
+  saveOwner?: NewsletterSave;
+  onAtomicBound?: (draft: WorkspaceDraftDocument) => void;
 }) {
   const [step, setStep] = useState<"template" | "builder" | "review" | "stage">(
     existing ? "builder" : "template",
@@ -37,18 +45,30 @@ export function useNewsletter({
     if (next !== clientId) scopeGeneration.current += 1;
     updateClientId(next);
   }
-  const [title, setTitle] = useState(
+  const [localTitle, setLocalTitle] = useState(
     existing?.docTitle ?? "Weekly policy newsletter",
   );
-  const [body, setBody] = useState<NewsletterBody>(
+  const [localBody, setBody] = useState<NewsletterBody>(
     existing?.documents.flatMap((document) =>
       !document.sourceBriefVersion && document.body.newsletter
         ? [document.body.newsletter]
         : [],
     )[0] ?? createNewsletter("weekly"),
   );
-  const [draft, setDraft] = useState(existing);
-  const [saved, setSaved] = useState(Boolean(existing));
+  const [localDraft, setDraft] = useState(existing);
+  const [localSaved, setSaved] = useState(Boolean(existing));
+  const title = saveOwner?.input?.title ?? localTitle;
+  const body = saveOwner?.input?.body ?? localBody;
+  const draft = saveOwner?.currentDraft ?? localDraft;
+  const saved = saveOwner ? newsletterMatchesSaved(saveOwner) : localSaved;
+  const setTitle = (title: string) =>
+    saveOwner?.input
+      ? saveOwner.setInput({ ...saveOwner.input, title })
+      : setLocalTitle(title);
+  const updateBody = (body: NewsletterBody) =>
+    saveOwner?.input
+      ? saveOwner.setInput({ ...saveOwner.input, body })
+      : setBody(body);
   const [mobile, setMobile] = useState(false);
   const [history, setHistory] = useState<NewsletterBody[]>([]);
   const [future, setFuture] = useState<NewsletterBody[]>([]);
@@ -59,6 +79,7 @@ export function useNewsletter({
   const snapshot = useCapiroMutation("workspace.draft.snapshot");
   const saving = useRef(false);
   const pending =
+    Boolean(saveOwner?.pending) ||
     create.pending ||
     saveDocument.pending ||
     saveMetadata.pending ||
@@ -71,9 +92,10 @@ export function useNewsletter({
     saveMetadata.error ??
     snapshot.error;
   function edit(next: NewsletterBody) {
+    if (saveOwner?.frozen) return;
     setHistory((previous) => [...previous.slice(-49), body]);
     setFuture([]);
-    setBody(next);
+    updateBody(next);
     setSaved(false);
   }
   function select(preset: string) {
@@ -81,22 +103,44 @@ export function useNewsletter({
     setStep("builder");
   }
   function undo() {
+    if (saveOwner?.frozen) return;
     const prior = history.at(-1);
     if (!prior) return;
     setFuture((previous) => [...previous, body]);
-    setBody(prior);
+    updateBody(prior);
     setHistory((previous) => previous.slice(0, -1));
     setSaved(false);
   }
   function redo() {
+    if (saveOwner?.frozen) return;
     const next = future.at(-1);
     if (!next) return;
     setHistory((previous) => [...previous, body]);
-    setBody(next);
+    updateBody(next);
     setFuture((previous) => previous.slice(0, -1));
     setSaved(false);
   }
   async function save(exit = false) {
+    if (existing) {
+      if ((draft?.clientId ?? null) !== (clientId || null)) {
+        setLocalError(
+          new Error(
+            "This saved newsletter belongs to a different client. Open it in its original client scope.",
+          ),
+        );
+        return;
+      }
+      if (!saveOwner) {
+        setLocalError(
+          new Error(
+            "Reopen this saved newsletter to verify its atomic save state.",
+          ),
+        );
+        return;
+      }
+      if ((await saveOwner.save()) === true && exit) onClose();
+      return;
+    }
     if (saving.current) return;
     saving.current = true;
     const scope = scopeGeneration.current;
@@ -173,6 +217,10 @@ export function useNewsletter({
       bound.clientAssociation === "held"
     )
       return;
+    if (saveOwner) {
+      onAtomicBound?.(bound);
+      return;
+    }
     scopeGeneration.current += 1;
     setDraft(bound);
     updateClientId(bound.clientId);

@@ -15,23 +15,20 @@ import {
   RecoveryStorageError,
   retireOrdinarySaveConflictRecovery,
 } from "@/shared/session/recovery/journal";
-import type { ManualDraftInput } from "../prospects/manual-draft";
 import {
   bindOrdinaryReceipt,
   bindOrdinaryState,
-  captureOrdinarySave,
-  ordinaryInput,
   ordinaryRecoveryContract,
   ordinaryRecoveryScope,
   OrdinaryScopeError,
-  retainedOrdinaryInput,
   sameOrdinaryRequest,
   type OrdinaryRetained,
   type OrdinarySaveScope,
+  type OrdinarySaveModel,
 } from "./ordinary-save";
 
-type Editor = {
-  input: ManualDraftInput;
+type Editor<Input> = {
+  input: Input;
   baseline: OrdinaryDraftState;
   readback?: OrdinaryDraftState;
   needsReview: boolean;
@@ -66,9 +63,10 @@ async function checkRetained(
 
 /** Core owns authorization/CAS; this hook owns only the captured browser edit
  * and composes the existing durable journal and disposable request lifetime. */
-export function useOrdinaryDraftSave(
+export function useOrdinaryDraftSave<Input>(
   scope: OrdinarySaveScope,
-  carriedInput?: ManualDraftInput,
+  model: OrdinarySaveModel<Input>,
+  carriedInput?: Input,
 ) {
   const api = useCapiro();
   const key = ordinaryRecoveryScope(scope);
@@ -94,8 +92,8 @@ export function useOrdinaryDraftSave(
       verifiedCurrent.current = bindOrdinaryState(current, scope);
     },
   );
-  const [editor, setEditor] = useState<Editor>();
-  const retryEditor = useRef<Editor | undefined>(undefined);
+  const [editor, setEditor] = useState<Editor<Input>>();
+  const retryEditor = useRef<Editor<Input> | undefined>(undefined);
   // A blocked journal hides its snapshot; that must not erase the mounted
   // view's knowledge of an unresolved request or permit a fresh identity.
   const knownRequest = useRef<OrdinaryRetained | null>(null);
@@ -133,6 +131,7 @@ export function useOrdinaryDraftSave(
             retained.body,
           );
         journal.guard();
+        const retainedInput = retained ? model.retained(retained) : undefined;
         setEditor(
           local
             ? {
@@ -145,12 +144,12 @@ export function useOrdinaryDraftSave(
             : retained
               ? {
                   baseline: current,
-                  input: retainedOrdinaryInput(retained),
+                  input: retainedInput!,
                   needsReview: false,
                 }
               : {
                   baseline: current,
-                  input: carriedInput ?? ordinaryInput(current),
+                  input: carriedInput ?? model.input(current),
                   needsReview: Boolean(carriedInput),
                   ...(carriedInput ? { readback: current } : {}),
                 },
@@ -161,7 +160,7 @@ export function useOrdinaryDraftSave(
         journal.block(cause);
       }
     })();
-  }, [journal, editor, scope, carriedInput, key]);
+  }, [journal, editor, scope, carriedInput, key, model]);
 
   function installRetained(record: OrdinaryRetained | null) {
     journal.install(record);
@@ -185,14 +184,14 @@ export function useOrdinaryDraftSave(
       cause instanceof Error ? cause.message : "The save is not confirmed.",
     );
   }
-  async function action(run: () => Promise<void>) {
+  async function action<Result>(run: () => Promise<Result>) {
     if (working.current || !journal.ready || !editor) return;
     working.current = true;
     setPending(true);
     setError("");
     setMessage("");
     try {
-      await withRecoveryCommandLock(key, journal.guard, run);
+      return await withRecoveryCommandLock(key, journal.guard, run);
     } catch (cause) {
       fail(cause);
     } finally {
@@ -217,7 +216,7 @@ export function useOrdinaryDraftSave(
     current: OrdinaryDraftState,
   ) {
     setEditor((value) => value && { ...value, readback: current });
-    if (record.outcome?.kind !== "saved") return;
+    if (record.outcome?.kind !== "saved") return false;
     const result = await bindOrdinaryReceipt(
       record.outcome.response,
       scope,
@@ -228,13 +227,13 @@ export function useOrdinaryDraftSave(
       setMessage(
         "The other tab's save has a bound receipt. Review current saved content before adopting or rebasing your unsent edits.",
       );
-      return;
+      return false;
     }
     if (result.receipt.stateHash !== current.stateHash) {
       setMessage(
         "This request has a saved version. Current saved content has changed since that version; review it before adopting or rebasing your retained edits.",
       );
-      return;
+      return false;
     }
     await acknowledgeRecovery(key, record.body.requestId, journal.guard);
     installRetained(null);
@@ -250,6 +249,7 @@ export function useOrdinaryDraftSave(
     setMessage(
       "Saved. The immutable version and current saved content are confirmed.",
     );
+    return true;
   }
   async function dispatch(original: OrdinaryRetained) {
     await refreshCurrent();
@@ -287,7 +287,7 @@ export function useOrdinaryDraftSave(
         setError(
           "The saved document changed. Your edits are retained. Read current saved content, then deliberately adopt or rebase.",
         );
-        return;
+        return false;
       }
       throw cause;
     }
@@ -306,7 +306,7 @@ export function useOrdinaryDraftSave(
       journal.guard,
     );
     installRetained(confirmed);
-    await reconcile(confirmed, await refreshCurrent());
+    return reconcile(confirmed, await refreshCurrent());
   }
   async function save() {
     if (
@@ -317,15 +317,12 @@ export function useOrdinaryDraftSave(
     )
       return;
     const captured = structuredClone(editor.input);
-    await action(async () => {
-      const original: OrdinaryRetained = {
-        body: captureOrdinarySave(
-          editor.baseline,
-          captured,
-          crypto.randomUUID(),
-        ),
-        names: captured.names,
-      };
+    return action(async () => {
+      const original = model.capture(
+        editor.baseline,
+        captured,
+        crypto.randomUUID(),
+      );
       const retained = await reserveRecovery(
         key,
         original.body.requestId,
@@ -338,7 +335,7 @@ export function useOrdinaryDraftSave(
         setEditor((value) => value && { ...value, separateRequest: true });
         throw new RecoveryStorageError();
       }
-      await dispatch(retained);
+      return dispatch(retained);
     });
   }
   async function replay() {
@@ -407,6 +404,7 @@ export function useOrdinaryDraftSave(
         throw new Error(
           "Saved content changed again. Read and review it before adopting or rebasing.",
         );
+      const currentInput = model.input(current);
       const retained = await readRecovery(
         key,
         ordinaryRecoveryContract,
@@ -446,7 +444,7 @@ export function useOrdinaryDraftSave(
       setEditor(
         (value) =>
           value && {
-            input: choice === "adopt" ? ordinaryInput(current) : value.input,
+            input: choice === "adopt" ? currentInput : value.input,
             baseline: current,
             needsReview: false,
           },
@@ -488,7 +486,7 @@ export function useOrdinaryDraftSave(
       ready &&
       Boolean(editor!.readback) &&
       (!journal.record || Boolean(journal.record.outcome)),
-    setInput: (input: ManualDraftInput) => {
+    setInput: (input: Input) => {
       if (!ready || frozen || working.current) return;
       setEditor((value) => value && { ...value, input });
       setMessage("");

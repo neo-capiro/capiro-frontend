@@ -25,10 +25,35 @@ export async function ordinarySaveFixture(
     holdAssociation?: boolean;
     refusalCode?: string;
     formatted?: boolean;
+    newsletter?: boolean;
   } = {},
 ) {
   const page = Array.isArray(pageOrPages) ? pageOrPages[0]! : pageOrPages;
   let row = ordinary();
+  if (options.newsletter) {
+    row.product = "Newsletter";
+    row.docTitle = "Saved newsletter name";
+    row.config.sections = [];
+    row.config.sectionContent = {};
+    row.documents[0]!.body.newsletter = {
+      subject: "Saved email subject",
+      preview: "Saved preview",
+      firmName: "Synthetic firm",
+      mailingAddress: "Synthetic address",
+      blocks: [
+        { id: "paragraph", kind: "paragraph", text: "Saved newsletter body" },
+      ],
+    };
+    row.documents[0]!.body.blocks = [
+      {
+        id: "paragraph",
+        type: "section",
+        title: "",
+        content: "Saved newsletter body",
+        unrelated: "preserve block field",
+      },
+    ];
+  }
   if (options.heldClient) row.clientAssociation = "held";
   if (options.formatted)
     row.config.sectionContent.Body = "<p><strong>Saved rich body</strong></p>";
@@ -123,7 +148,26 @@ export async function ordinarySaveFixture(
       row = {
         ...row,
         docTitle: body.draft.docTitle,
-        config: { ...row.config, ...body.draft.config },
+        config: {
+          ...row.config,
+          ...("config" in body.draft ? body.draft.config : {}),
+        },
+        documents:
+          "documents" in body
+            ? row.documents.map((document) => {
+                const replacement = body.documents.find(
+                  (value) => value.id === document.id,
+                );
+                // Core replaces the complete supplied body; never fill dropped fields.
+                return replacement
+                  ? {
+                      ...document,
+                      name: replacement.name,
+                      body: replacement.body as typeof document.body,
+                    }
+                  : document;
+              })
+            : row.documents,
         updatedAt: "2026-10-25T12:00:00.000Z",
       };
       const response = receipt(body, row);
@@ -157,6 +201,16 @@ export async function ordinarySaveFixture(
         docTitle: title,
         config: { ...row.config, sectionContent: { Body: text } },
       };
+    },
+    changeNewsletter: (title: string, subject: string, text: string) => {
+      row.docTitle = title;
+      const document = row.documents[0]!;
+      document.body.newsletter = {
+        ...document.body.newsletter!,
+        subject,
+        blocks: [{ id: "paragraph", kind: "paragraph", text }],
+      };
+      document.body.blocks = [{ ...document.body.blocks[0]!, content: text }];
     },
     deny: () => {
       denied = true;
