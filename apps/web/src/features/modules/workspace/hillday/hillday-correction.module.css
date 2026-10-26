@@ -1,0 +1,110 @@
+.dialog {
+  width: min(760px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  border-radius: 12px;
+}
+
+.dialog > header {
+  padding: 24px;
+}
+
+.dialog > footer {
+  flex-wrap: wrap;
+}
+
+.attendee,
+.picker,
+.results {
+  display: grid;
+  min-width: 0;
+  gap: 10px;
+}
+
+.attendee {
+  padding: 12px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.manual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+}
+
+.attendee input {
+  border-color: var(--border-strong);
+  font-size: 13px;
+  height: auto;
+  padding: 8px 12px;
+  line-height: 1.45;
+}
+
+.attendee label,
+.attendee p,
+.pagination {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.attendee p {
+  margin: 0;
+}
+
+.results {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 2px;
+  justify-items: start;
+}
+
+.results .result {
+  max-width: 100%;
+  height: auto;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
+  justify-content: flex-start;
+  padding: 5px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  box-shadow: none;
+}
+
+.results .result[aria-pressed="true"] {
+  border-color: var(--foreground);
+}
+
+.choice {
+  overflow-wrap: anywhere;
+}
+
+.choice button {
+  margin-top: 8px;
+}
+
+.pagination,
+.pagination > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .dialog > header,
+  .dialog > footer,
+  .dialog > [data-slot="modal-body"] {
+    padding: 16px;
+  }
+  .manual {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
