@@ -11,7 +11,7 @@ import {
   heldResponse,
   documentId,
 } from "./newsletter-document-fixtures";
-import { auditDialog } from "./newsletter-assets-fixture";
+import { auditDialog } from "./newsletter-provider-a11y";
 
 test("writing uses explicit source and proposed plain text with keyboard adoption and Undo", async ({
   page,

@@ -9,7 +9,7 @@ import {
   expectNoProviderSideEffects,
 } from "./newsletter-providers-fixture";
 import { button, heldResponse } from "./newsletter-document-fixtures";
-import { auditDialog } from "./newsletter-assets-fixture";
+import { auditDialog } from "./newsletter-provider-a11y";
 
 async function searchStock(page: import("@playwright/test").Page) {
   await button(page, "Stock images").click();

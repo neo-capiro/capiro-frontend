@@ -117,10 +117,7 @@ export function AltTextTool({
                 <Field label="Proposed alt text" htmlFor={id}>
                   <TextArea id={id} readOnly value={proposal.result.text} />
                 </Field>
-                <p>
-                  Only alternative text will change. The image, link and style
-                  are retained.
-                </p>
+                <p>The image, link and style are retained.</p>
                 <ActionButton onClick={proposal.discard}>
                   Review source again
                 </ActionButton>

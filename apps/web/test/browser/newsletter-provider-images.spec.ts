@@ -113,6 +113,18 @@ test("four saved refinements require fresh current details before explicit inser
   await page
     .getByRole("switch", { name: "Generate multiple images (4)" })
     .check();
+  const toggle = page.getByRole("switch", {
+    name: "Generate multiple images (4)",
+  });
+  await expect(toggle).toHaveCSS("width", "40px");
+  await expect(toggle).toHaveCSS("height", "24px");
+  await expect(toggle).toHaveCSS("border-radius", "999px");
+  await expect(toggle).toHaveCSS("background-color", "rgb(10, 10, 10)");
+  expect(
+    await toggle.evaluate(
+      (element) => getComputedStyle(element, "::after").backgroundColor,
+    ),
+  ).toBe("rgb(255, 255, 255)");
   expect(fixture.calls("refineImage")).toEqual([]);
   await auditDialog(page, info, "refine-form-desktop");
   await page.screenshot({ path: info.outputPath("refine-form-desktop.png") });

@@ -9,7 +9,7 @@ import {
   expectNoProviderSideEffects,
 } from "./newsletter-providers-fixture";
 import { button, documentId } from "./newsletter-document-fixtures";
-import { auditDialog } from "./newsletter-assets-fixture";
+import { auditDialog } from "./newsletter-provider-a11y";
 
 test("video thumbnail binds the canonical source and is adopted separately with Undo", async ({
   page,
@@ -21,10 +21,12 @@ test("video thumbnail binds the canonical source and is adopted separately with 
     .inputValue();
   await button(page, "Video URL and thumbnail").click();
   await page
-    .getByLabel("Video URL", { exact: true })
+    .getByRole("textbox", { name: "Video URL", exact: true })
     .fill("https://unrelated.example.test/video");
   await expect(button(page, "Create thumbnail")).toBeDisabled();
-  await page.getByLabel("Video URL", { exact: true }).fill(videoUrl);
+  await page
+    .getByRole("textbox", { name: "Video URL", exact: true })
+    .fill(videoUrl);
   expect(fixture.calls("videoThumbnail")).toEqual([]);
   await auditDialog(page, info, "video-form-desktop");
   await page.screenshot({ path: info.outputPath("video-form-desktop.png") });
