@@ -9,6 +9,7 @@ import {
 import type {
   OrdinarySaveBody,
   OrdinarySaveResponse,
+  NewsletterBody,
 } from "../src/shared/capiro/operations/workspace-documents";
 
 // Synthetic producer-shaped rows. Field selection and hashes match Core129
@@ -26,6 +27,7 @@ export const ordinary = () => ({
   client: null as string | null,
   clientAssociation: undefined as "held" | undefined,
   docTitle: "Synthetic ordinary draft",
+  product: null as string | null,
   ask: "n/a",
   isPacket: false,
   docCount: 1,
@@ -38,7 +40,17 @@ export const ordinary = () => ({
   documents: [
     {
       ...draft.documents[0]!,
-      body: { blocks: [], unknown: { preserved: true } },
+      body: { blocks: [], unknown: { preserved: true } } as {
+        blocks: Array<{
+          id: string;
+          type: "section" | "photo" | "table" | "logo";
+          title?: string;
+          content?: string;
+          [key: string]: unknown;
+        }>;
+        unknown: { preserved: boolean };
+        newsletter?: NewsletterBody;
+      },
     },
   ],
 });

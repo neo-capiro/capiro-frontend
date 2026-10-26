@@ -1,3 +1,4 @@
+import { manualSaveBody } from "../../src/shared/capiro/operations/workspace-documents";
 import { expect, test } from "@playwright/test";
 import {
   ordinarySaveFixture,
@@ -320,9 +321,9 @@ test("supported formatted section survives the mounted atomic save without body 
   ).toHaveText("Saved rich body");
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
   await expect(page.getByText(saved, { exact: true })).toBeVisible();
-  expect(f.saves[0]!.draft.config.sectionContent.Body).toBe(
-    "<p><strong>Saved rich body</strong></p>",
-  );
+  expect(
+    manualSaveBody.parse(f.saves[0]).draft.config.sectionContent.Body,
+  ).toBe("<p><strong>Saved rich body</strong></p>");
   expect(f.saves[0]).not.toHaveProperty("documents");
 });
 test("explicit client association preserves unsaved edits and requires deliberate rebase before atomic save", async ({
@@ -376,9 +377,9 @@ test("explicit client association preserves unsaved edits and requires deliberat
   await expect(page.getByText(saved, { exact: true })).toBeVisible();
   expect(f.saves).toHaveLength(1);
   expect(f.saves[0]!.draft.docTitle).toBe("Edits during association");
-  expect(f.saves[0]!.draft.config.sectionContent.Body).toBe(
-    "Body during association",
-  );
+  expect(
+    manualSaveBody.parse(f.saves[0]).draft.config.sectionContent.Body,
+  ).toBe("Body during association");
   expect(f.saves[0]!.expectedClientId).toBe(f.current().clientId);
   expect(
     f.calls.filter((call) => call.key === "workspace.draft.update"),

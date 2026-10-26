@@ -31,7 +31,7 @@ export function OrdinaryDraftSave({
     canSave: true,
     canResolve: false,
     setInput,
-    save: noop,
+    save: async () => undefined,
     replay: noop,
     readCurrent: noop,
     resolve: noop,

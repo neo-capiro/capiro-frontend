@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   ordinaryDraftState,
   ordinarySaveBody,
+  manualSaveBody,
   ordinarySaveResponse,
   type OrdinaryDraftState,
   type OrdinarySaveBody,
@@ -58,8 +59,8 @@ export function captureOrdinarySave(
   state: OrdinaryDraftState,
   input: ManualDraftInput,
   requestId: string,
-): OrdinarySaveBody {
-  return ordinarySaveBody.parse({
+) {
+  return manualSaveBody.parse({
     requestId,
     expectedStateHash: state.stateHash,
     expectedClientId: state.clientId,
@@ -147,12 +148,31 @@ export const ordinaryRecoveryContract: RecoveryContract<OrdinaryRetained> = {
 export function retainedOrdinaryInput(
   value: OrdinaryRetained,
 ): ManualDraftInput {
+  if (value.body.label !== "Manual save")
+    throw new Error("The retained request belongs to a different editor.");
   return {
     title: value.body.draft.docTitle,
     names: value.names,
     sections: value.body.draft.config.sectionContent,
   };
 }
+export type OrdinarySaveModel<Input> = {
+  input: (state: OrdinaryDraftState) => Input;
+  retained: (record: OrdinaryRetained) => Input;
+  capture: (
+    state: OrdinaryDraftState,
+    input: Input,
+    requestId: string,
+  ) => OrdinaryRetained;
+};
+export const manualSaveModel: OrdinarySaveModel<ManualDraftInput> = {
+  input: ordinaryInput,
+  retained: retainedOrdinaryInput,
+  capture: (state, input, requestId) => ({
+    body: captureOrdinarySave(state, input, requestId),
+    names: input.names,
+  }),
+};
 export function sameOrdinaryRequest(a: OrdinaryRetained, b: OrdinaryRetained) {
   return (
     canonicalWorkspaceSnapshot(a.body) === canonicalWorkspaceSnapshot(b.body)
