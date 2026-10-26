@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   findNewsletterBlock,
   type NewsletterBlock,
-  type NewsletterBlockKind,
   type NewsletterPreview,
 } from "@capiro/shared/newsletter";
 import {
@@ -13,7 +12,6 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import {
-  addRichBlock,
   editRichBlock,
   editRichConfig,
   removeRichBlock,
@@ -25,23 +23,43 @@ import { RichStructure } from "./RichStructure";
 import { RichDocumentActions } from "./RichDocumentActions";
 import { NewsletterReview } from "./review/NewsletterReview";
 import { useRichDocument } from "./use-rich-document";
-import { useSectionLibrary } from "./library/use-section-library";
-import { SavedSections, SectionLibraryNotice } from "./library/SavedSections";
-import { SaveSectionDialog } from "./library/SaveSectionDialog";
+import { useNewsletterLibrary } from "./library/use-newsletter-library";
+import { SavedSections } from "./library/SavedSections";
+import { SavedTemplates } from "./library/SavedTemplates";
+import { LibraryDialog, LibraryNotice } from "./library/LibraryDialog";
+import { changeStructure, type StructureAction } from "./content/structure";
+import { DesignStyles, SectionSettings } from "./content/DesignStyles";
+import contentStyles from "./content/content.module.css";
+import { useBrandKit } from "./brand/use-brand-kit";
+import { BrandWorkspace } from "./brand/BrandWorkspace";
+import { useSurveyDrafts } from "./surveys/use-survey-drafts";
+import { SurveyWorkspace } from "./surveys/SurveyWorkspace";
 import libraryStyles from "./library/sections.module.css";
 import styles from "./rich-newsletter.module.css";
+import {
+  BasicConversionApply,
+  type BasicConversionCandidate,
+} from "../newsletter/BasicConversion";
 
 export function RichNewsletterEditor({
   onClose,
   documentId,
+  conversionCandidate,
 }: {
   onClose: () => void;
   documentId?: string;
+  conversionCandidate?: BasicConversionCandidate;
 }) {
   const { owner, state: history } = useRichDocument();
-  const library = useSectionLibrary(owner, history.saved?.id);
+  const brand = useBrandKit(owner);
+  const surveys = useSurveyDrafts(owner, history.saved?.id);
+  const [ownerEpoch, setOwnerEpoch] = useState(0);
+  const library = useNewsletterLibrary(owner, history.saved?.id);
   const libraryOpener = useRef<HTMLButtonElement | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [sectionId, setSectionId] = useState<string | null>(null);
+  const [emailStyles, setEmailStyles] = useState(false);
+  const [structureError, setStructureError] = useState("");
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
   const [closing, setClosing] = useState(false);
@@ -83,7 +101,11 @@ export function RichNewsletterEditor({
   }, [reviewId, history.pending]);
   if (previousOwner !== owner) {
     setPreviousOwner(owner);
+    setOwnerEpoch((value) => value + 1);
     setSelectedId(null);
+    setSectionId(null);
+    setEmailStyles(false);
+    setStructureError("");
     setMobile(false);
     setPlainText(false);
     setClosing(false);
@@ -94,6 +116,14 @@ export function RichNewsletterEditor({
   const selected = selectedId
     ? findNewsletterBlock(draft.design, selectedId)
     : null;
+  const selectedSection = draft.design.sections.find(
+    (section) => section.id === sectionId,
+  );
+  const selectBlock = (id: string) => {
+    setSelectedId(id);
+    setSectionId(null);
+    setEmailStyles(false);
+  };
   const commit = owner.edit;
   const update = (change: Partial<NewsletterBlock>) =>
     commit((current) => ({
@@ -102,11 +132,24 @@ export function RichNewsletterEditor({
         Object.assign(block, change),
       ),
     }));
-  const add = (section: string, kind: NewsletterBlockKind) =>
-    commit((current) => ({
-      ...current,
-      design: addRichBlock(current.design, section, kind).design,
-    }));
+  const structure = (action: StructureAction) => {
+    setStructureError("");
+    try {
+      let selection: string | undefined;
+      commit((current) => {
+        const result = changeStructure(current.design, action);
+        selection = result.selectedId;
+        return { ...current, design: result.design };
+      });
+      if (selection) selectBlock(selection);
+    } catch (error) {
+      setStructureError(
+        error instanceof Error
+          ? error.message
+          : "This structure change is unavailable.",
+      );
+    }
+  };
   const closeNotice = closing && (
     <div role="alert" className={styles.notice}>
       <p>
@@ -142,138 +185,256 @@ export function RichNewsletterEditor({
     );
   if (savedPreview)
     return (
-      <section className={styles.screen}>
-        <SavedRichPreview
-          preview={savedPreview}
-          name={
-            history.saved?.id === savedPreview.documentId &&
-            history.saved.revision === savedPreview.revision
-              ? history.saved.name
-              : undefined
-          }
-          onClose={() => {
-            returnFocus.current = true;
-            setDismissedPreview(savedPreview);
-          }}
-        />
-      </section>
+      <>
+        <BrandWorkspace key={`brand:${ownerEpoch}`} kit={brand} owner={owner} />
+        <SurveyWorkspace key={`surveys:${ownerEpoch}`} survey={surveys} />
+        <section className={styles.screen}>
+          <SavedRichPreview
+            preview={savedPreview}
+            name={
+              history.saved?.id === savedPreview.documentId &&
+              history.saved.revision === savedPreview.revision
+                ? history.saved.name
+                : undefined
+            }
+            onClose={() => {
+              returnFocus.current = true;
+              setDismissedPreview(savedPreview);
+            }}
+          />
+        </section>
+      </>
     );
   return (
-    <section className={styles.screen}>
-      <PageHeader
-        title="Rich newsletter editor preview"
-        description="Edit locally, then explicitly create or review a saved rich document. Submitted create/save requests remain in this browser for recovery; current saved content is reviewed separately. Comments opens a saved-content review; comment writing, sharing changes and delivery remain unavailable."
-        actions={
-          <ActionButton
-            disabled={Boolean(history.pending)}
-            onClick={() => setClosing(true)}
-          >
-            Close preview
-          </ActionButton>
-        }
-      />
-      {closeNotice}
-      <RichDocumentActions
-        state={history}
-        owner={owner}
-        previewButtonRef={previewButton}
-        commentsButtonRef={commentsButton}
-        onReview={setReviewId}
-        entryDocumentId={documentId}
-      />
-      <SectionLibraryNotice library={library} />
-      {library.save && (
-        <SaveSectionDialog
-          key={`${library.save.documentId}:${library.save.sectionId}`}
-          library={library}
-        />
-      )}
-      {(!documentId ||
-        history.saved?.id.toLowerCase() === documentId.toLowerCase()) && (
-        <fieldset
-          disabled={
-            Boolean(history.pending) || history.recovery.phase !== "ready"
-          }
-          inert={Boolean(history.pending) || history.recovery.phase !== "ready"}
-          className={styles.draftEditor}
-        >
-          <div className={styles.toolbar}>
-            <ActionButton disabled={!history.past.length} onClick={owner.undo}>
-              Undo
-            </ActionButton>
-            <ActionButton
-              disabled={!history.future.length}
-              onClick={owner.redo}
-            >
-              Redo
-            </ActionButton>
-            <ActionButton
-              aria-pressed={mobile}
-              onClick={() => setMobile((value) => !value)}
-            >
-              Mobile preview
-            </ActionButton>
-            <ActionButton
-              aria-pressed={plainText}
-              onClick={() => setPlainText((value) => !value)}
-            >
-              Plain text
-            </ActionButton>
-          </div>
-          <CampaignFields draft={draft} change={commit} />
-          <div
-            className={`${styles.editor} ${library.browsing ? libraryStyles.libraryLayout : ""}`}
-          >
-            <RichStructure
-              design={draft.design}
-              selectedId={selectedId}
-              select={setSelectedId}
-              add={add}
-              savedSectionIds={
-                history.saved?.design.sections.map((section) => section.id) ??
-                []
-              }
-              saveSection={library.startSave}
-              browse={(opener) => {
-                libraryOpener.current = opener;
-                void library.browse();
-              }}
+    <>
+      <BrandWorkspace key={`brand:${ownerEpoch}`} kit={brand} owner={owner} />
+      <SurveyWorkspace key={`surveys:${ownerEpoch}`} survey={surveys} />
+      <div hidden={brand.open}>
+        <section className={styles.screen}>
+          <PageHeader
+            title="Rich newsletter editor preview"
+            description="Edit your newsletter, save changes, and preview the result."
+            actions={
+              <ActionButton
+                disabled={Boolean(history.pending)}
+                onClick={() => setClosing(true)}
+              >
+                Close preview
+              </ActionButton>
+            }
+          />
+          {closeNotice}
+          {conversionCandidate && (
+            <BasicConversionApply
+              candidate={conversionCandidate}
+              owner={owner}
+              state={history}
             />
-            <RichPreview draft={draft} mobile={mobile} plainText={plainText} />
-            {library.browsing ? (
-              <SavedSections
-                library={library}
-                close={() => {
-                  library.closeBrowse();
-                  libraryOpener.current?.focus();
-                }}
-                insert={(item) => {
-                  if (library.insert(item)) libraryOpener.current?.focus();
-                }}
-              />
-            ) : selected ? (
-              <RichBlockControls
-                key={`${history.editorRevision}:${selected.id}`}
-                block={selected}
-                update={update}
-                remove={() => {
-                  commit((current) => ({
-                    ...current,
-                    design: removeRichBlock(current.design, selected.id),
-                  }));
-                  setSelectedId(null);
-                }}
-              />
-            ) : (
-              <aside className={styles.controls}>
-                <h2>Block settings</h2>
-                <p>Select a block to edit its content and style.</p>
-              </aside>
-            )}
-          </div>
-        </fieldset>
-      )}
-    </section>
+          )}
+          <RichDocumentActions
+            state={history}
+            owner={owner}
+            previewButtonRef={previewButton}
+            commentsButtonRef={commentsButton}
+            onReview={setReviewId}
+            entryDocumentId={documentId}
+          />
+          <LibraryNotice library={library} />
+          {structureError && (
+            <p role="alert" className={contentStyles.error}>
+              {structureError}
+            </p>
+          )}
+          {library.dialog && library.action && (
+            <LibraryDialog library={library} />
+          )}
+          {(!documentId ||
+            history.saved?.id.toLowerCase() === documentId.toLowerCase()) && (
+            <fieldset
+              disabled={
+                Boolean(history.pending) || history.recovery.phase !== "ready"
+              }
+              inert={
+                Boolean(history.pending) || history.recovery.phase !== "ready"
+              }
+              className={styles.draftEditor}
+            >
+              <div className={styles.toolbar}>
+                <ActionButton onClick={brand.enter}>Brand Kit</ActionButton>
+                <ActionButton disabled={!history.saved} onClick={surveys.enter}>
+                  Survey drafts
+                </ActionButton>
+                <ActionButton
+                  disabled={!history.past.length}
+                  onClick={owner.undo}
+                >
+                  Undo
+                </ActionButton>
+                <ActionButton
+                  disabled={!history.future.length}
+                  onClick={owner.redo}
+                >
+                  Redo
+                </ActionButton>
+                <ActionButton
+                  aria-pressed={mobile}
+                  onClick={() => setMobile((value) => !value)}
+                >
+                  Mobile preview
+                </ActionButton>
+                <ActionButton
+                  aria-pressed={plainText}
+                  onClick={() => setPlainText((value) => !value)}
+                >
+                  Plain text
+                </ActionButton>
+                <ActionButton
+                  className={libraryStyles.button}
+                  aria-pressed={emailStyles}
+                  onClick={() => {
+                    setEmailStyles((current) => !current);
+                    setSelectedId(null);
+                    setSectionId(null);
+                  }}
+                >
+                  Email styles
+                </ActionButton>
+                <ActionButton
+                  className={libraryStyles.button}
+                  onClick={(event) => {
+                    libraryOpener.current = event.currentTarget;
+                    void library.browse("template");
+                  }}
+                >
+                  Saved templates
+                </ActionButton>
+                <ActionButton
+                  className={libraryStyles.button}
+                  disabled={!history.saved || library.writing}
+                  onClick={() => library.startSave()}
+                >
+                  Save current server newsletter as template
+                </ActionButton>
+              </div>
+              {library.browsing === "template" ? (
+                <SavedTemplates
+                  library={library}
+                  close={() => {
+                    library.closeBrowse();
+                    libraryOpener.current?.focus();
+                  }}
+                  apply={(item) => {
+                    if (library.apply(item)) {
+                      setSelectedId(null);
+                      setSectionId(null);
+                      setEmailStyles(false);
+                      libraryOpener.current?.focus();
+                    }
+                  }}
+                />
+              ) : (
+                <>
+                  <CampaignFields draft={draft} change={commit} />
+                  <div
+                    className={`${styles.editor} ${contentStyles.editor} ${library.browsing === "section" ? libraryStyles.libraryLayout : ""}`}
+                  >
+                    <RichStructure
+                      design={draft.design}
+                      selectedId={selectedId}
+                      select={selectBlock}
+                      change={structure}
+                      editSection={(id) => {
+                        setSectionId(id);
+                        setSelectedId(null);
+                        setEmailStyles(false);
+                      }}
+                      savedSectionIds={
+                        history.saved?.design.sections.map(
+                          (section) => section.id,
+                        ) ?? []
+                      }
+                      saveSection={library.startSave}
+                      browse={(opener) => {
+                        libraryOpener.current = opener;
+                        void library.browse();
+                      }}
+                    />
+                    <RichPreview
+                      draft={draft}
+                      mobile={mobile}
+                      plainText={plainText}
+                    />
+                    {library.browsing === "section" ? (
+                      <SavedSections
+                        library={library}
+                        close={() => {
+                          library.closeBrowse();
+                          libraryOpener.current?.focus();
+                        }}
+                        insert={(item) => {
+                          if (library.insert(item))
+                            libraryOpener.current?.focus();
+                        }}
+                      />
+                    ) : emailStyles ? (
+                      <DesignStyles
+                        design={draft.design}
+                        change={(styles) =>
+                          commit((current) => ({
+                            ...current,
+                            design: { ...current.design, styles },
+                          }))
+                        }
+                      />
+                    ) : selectedSection ? (
+                      <SectionSettings
+                        key={selectedSection.id}
+                        section={selectedSection}
+                        change={(next) =>
+                          commit((current) => ({
+                            ...current,
+                            design: {
+                              ...current.design,
+                              sections: current.design.sections.map(
+                                (section) =>
+                                  section.id === next.id ? next : section,
+                              ),
+                            },
+                          }))
+                        }
+                      />
+                    ) : selected ? (
+                      <RichBlockControls
+                        key={`${history.editorRevision}:${selected.id}`}
+                        block={selected}
+                        design={draft.design}
+                        structure={structure}
+                        update={update}
+                        remove={() => {
+                          commit((current) => ({
+                            ...current,
+                            design: removeRichBlock(
+                              current.design,
+                              selected.id,
+                            ),
+                          }));
+                          setSelectedId(null);
+                        }}
+                      />
+                    ) : (
+                      <aside className={styles.controls}>
+                        <h2>Block settings</h2>
+                        <p>Select a block to edit its content and style.</p>
+                      </aside>
+                    )}
+                  </div>
+                </>
+              )}
+            </fieldset>
+          )}
+        </section>
+      </div>
+    </>
   );
 }
 

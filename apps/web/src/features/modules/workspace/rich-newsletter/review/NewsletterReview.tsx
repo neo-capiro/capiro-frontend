@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 import {
   ActionButton,
   PageHeader,
@@ -8,32 +9,61 @@ import {
 import { SavedNewsletterHtml } from "../RichPreview";
 import { useNewsletterReview } from "./use-newsletter-review";
 import { canEnterEditor } from "./receiving";
+import { useNewsletterCollaboration } from "./use-newsletter-collaboration";
+import { ReviewCollaborationDialogs } from "./ReviewCollaborationDialogs";
+import { ReviewActionNotice } from "./ReviewActionNotice";
 import styles from "./newsletter-review.module.css";
 
-export function NewsletterReview({
-  documentId,
-  onClose,
-  onEdit,
-  onEditableAccessLost,
-}: {
+type ReviewProps = {
   documentId: string;
   onClose: () => void;
   onEdit?: (documentId: string) => void;
   onEditableAccessLost?: () => void;
-}) {
+};
+
+export function NewsletterReview(props: ReviewProps) {
+  const { userId } = useAuth();
+  return userId ? (
+    <ReviewSession
+      key={`${userId}:${props.documentId}`}
+      {...props}
+      actorId={userId}
+    />
+  ) : null;
+}
+
+function ReviewSession({
+  documentId,
+  actorId,
+  onClose,
+  onEdit,
+  onEditableAccessLost,
+}: ReviewProps & { actorId: string }) {
   const state = useNewsletterReview(documentId);
+  const collaboration = useNewsletterCollaboration(
+    documentId,
+    actorId,
+    state.denyAccess,
+    state.acceptComments,
+    state.accessLost,
+    state.review?.role,
+  );
+  const { actions } = collaboration;
   const [mobile, setMobile] = useState(false);
   const [filter, setFilter] = useState<"all" | "open" | "resolved">("all");
   const heading = useRef<HTMLDivElement>(null);
   const { review } = state;
+  const effectiveRole = collaboration.currentRole;
+  const canComment = Boolean(effectiveRole && effectiveRole !== "viewer");
   useEffect(() => {
-    if (state.accessLost || (review && !canEnterEditor(review.role)))
+    if (state.accessLost || (effectiveRole && !canEnterEditor(effectiveRole)))
       onEditableAccessLost?.();
-  }, [state.accessLost, review, onEditableAccessLost]);
+  }, [state.accessLost, effectiveRole, onEditableAccessLost]);
   useEffect(() => {
     if (state.opened) heading.current?.focus();
   }, [state.opened, state.loading, state.unavailable]);
-  const role = review && review.role[0]!.toUpperCase() + review.role.slice(1);
+  const role =
+    effectiveRole && effectiveRole[0]!.toUpperCase() + effectiveRole.slice(1);
   const shown = state.comments?.filter(
     (comment) =>
       filter === "all" || comment.resolved === (filter === "resolved"),
@@ -46,12 +76,20 @@ export function NewsletterReview({
           description={review?.name}
           actions={
             <>
-              <ActionButton onClick={onClose}>Workspace</ActionButton>
-              {review && canEnterEditor(review.role) && onEdit && (
-                <ActionButton onClick={() => onEdit(review.id)}>
-                  Edit newsletter
-                </ActionButton>
-              )}
+              <ActionButton disabled={actions.pending} onClick={onClose}>
+                Workspace
+              </ActionButton>
+              {review &&
+                effectiveRole &&
+                canEnterEditor(effectiveRole) &&
+                onEdit && (
+                  <ActionButton
+                    disabled={actions.pending}
+                    onClick={() => onEdit(review.id)}
+                  >
+                    Edit newsletter
+                  </ActionButton>
+                )}
             </>
           }
         />
@@ -83,9 +121,28 @@ export function NewsletterReview({
             <div className={styles.notice}>
               <strong>Your role: {role}</strong>
               <p>
-                This review displays saved content and existing comments.
-                Comment writing is not available in this view.
+                This review displays saved content. Commenting does not save or
+                change your unsaved editor draft.
               </p>
+              <div className={styles.actions}>
+                {effectiveRole === "owner" && (
+                  <ActionButton
+                    disabled={actions.pending}
+                    onClick={() => collaboration.openTeam("sharing")}
+                  >
+                    Sharing and invitations
+                  </ActionButton>
+                )}
+                <ActionButton
+                  disabled={actions.pending}
+                  onClick={() => collaboration.openTeam("preferences")}
+                >
+                  In-app notifications
+                </ActionButton>
+              </div>
+              {!collaboration.dialog && (
+                <ReviewActionNotice actions={actions} />
+              )}
             </div>
             <div className={styles.layout}>
               <div className={styles.preview}>
@@ -105,7 +162,7 @@ export function NewsletterReview({
                   >
                     Mobile
                   </ActionButton>
-                  <ActionButton onClick={state.open}>
+                  <ActionButton disabled={actions.pending} onClick={state.open}>
                     Refresh review
                   </ActionButton>
                 </div>
@@ -128,6 +185,15 @@ export function NewsletterReview({
                 data-design-node="1176:300030"
               >
                 <h2>Comments</h2>
+                {canComment && (
+                  <ActionButton
+                    primary
+                    disabled={actions.blocked}
+                    onClick={() => collaboration.compose()}
+                  >
+                    Add comment
+                  </ActionButton>
+                )}
                 <p>
                   Up to 500 comments are loaded. Older comments may not be
                   shown.
@@ -169,12 +235,39 @@ export function NewsletterReview({
                           {new Date(comment.createdAt).toLocaleString()}
                         </time>
                         <p>{comment.message}</p>
+                        {comment.parentId && <p>Reply to a saved thread</p>}
+                        {canComment && (
+                          <div className={styles.actions}>
+                            <ActionButton
+                              disabled={actions.blocked}
+                              onClick={() => collaboration.compose(comment)}
+                            >
+                              Reply
+                            </ActionButton>
+                            <ActionButton
+                              disabled={actions.blocked}
+                              onClick={() => collaboration.resolve(comment)}
+                            >
+                              {comment.resolved
+                                ? "Reopen comment"
+                                : "Resolve comment"}
+                            </ActionButton>
+                            <ActionButton
+                              disabled={actions.pending}
+                              onClick={() =>
+                                collaboration.openWatchers(comment)
+                              }
+                            >
+                              Thread email choices
+                            </ActionButton>
+                          </div>
+                        )}
                       </article>
                     ))}
                   </>
                 )}
                 <ActionButton
-                  disabled={state.commentsLoading}
+                  disabled={state.commentsLoading || actions.pending}
                   onClick={state.refreshComments}
                 >
                   Refresh comments
@@ -183,6 +276,14 @@ export function NewsletterReview({
             </div>
           </>
         )
+      )}
+      {review && (
+        <ReviewCollaborationDialogs
+          state={collaboration}
+          documentId={documentId}
+          canComment={canComment}
+          onAccessLost={state.denyAccess}
+        />
       )}
     </section>
   );

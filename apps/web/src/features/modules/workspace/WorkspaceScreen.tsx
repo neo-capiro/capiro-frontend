@@ -16,6 +16,7 @@ import { HillDayEditor } from "./hillday/HillDayEditor";
 import { HillDayResume, HillDayWizard } from "./hillday/HillDayWizard";
 import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
 import { TemplateStudio } from "./templates/TemplateStudio";
+import { DocumentTemplateLibrary } from "./document-templates/DocumentTemplateLibrary";
 import styles from "./workspace.module.css";
 import headerStyles from "./workspace-header.module.css";
 import { WorkspaceDraft } from "./WorkspaceDraft";
@@ -181,6 +182,17 @@ export function WorkspaceScreen() {
     return <NewsletterWorkflow initialClientId={clientId} onClose={back} />;
   if (view === "templates")
     return <TemplateStudio initialClientId={clientId} onClose={back} />;
+  if (view === "document-templates")
+    return (
+      <DocumentTemplateLibrary
+        key={clientId ?? "general"}
+        clientId={clientId}
+        onClose={back}
+        onCreated={(id) =>
+          router.push(workspaceHref({ kind: "draft", draftId: id, clientId }))
+        }
+      />
+    );
   return (
     <section className={styles.screen} data-design-node="411:112533">
       <header className={styles.heading}>
@@ -210,6 +222,9 @@ export function WorkspaceScreen() {
               </DropdownMenuItem>
               <DropdownMenuItem onSelect={() => navigate("templates")}>
                 Template Studio
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => navigate("document-templates")}>
+                Document blueprints
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -279,10 +294,10 @@ export function WorkspaceScreen() {
           <ActionButton
             onClick={() => {
               setNewDocument(false);
-              navigate("templates");
+              navigate("document-templates");
             }}
           >
-            Start from a template
+            Start from a document blueprint
           </ActionButton>
         </div>
       </Modal>
