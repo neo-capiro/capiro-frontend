@@ -193,6 +193,11 @@
   max-width: 560px;
   line-height: 1.5;
 }
+/* Explains why no retry is offered; quieter than the diagnostic message. */
+.statusNote {
+  font-size: 12px !important;
+  color: var(--muted-foreground);
+}
 .tabs {
   display: flex;
   gap: 4px;
