@@ -26,6 +26,7 @@ export function OrdinaryDraftSave({
     currentDraft: currentDraft as NonNullable<OrdinarySave["currentDraft"]>,
     readback: undefined,
     retained: null,
+    otherRequest: false,
     frozen: false,
     canSave: true,
     canResolve: false,
