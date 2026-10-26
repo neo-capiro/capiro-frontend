@@ -8,7 +8,12 @@ import {
   Panel,
   SelectInput,
 } from "../../../../shared/module-ui";
-import { requireCompatibleSponsor, type StagingActor } from "./staging-model";
+import {
+  historicalStagingSource,
+  requireCompatibleSponsor,
+  verifyStagingProjection,
+  type StagingActor,
+} from "./staging-model";
 import { useNewsletterStaging } from "./useNewsletterStaging";
 import styles from "../workspace.module.css";
 
@@ -55,7 +60,11 @@ function StagingSelection({
   const [selectedSession, setSession] = useState("");
   const [offset, setOffset] = useState(0);
   const [reviewed, setReviewed] = useState("");
+  const [previousReviewKey, setPreviousReviewKey] = useState("");
   const original = flow.retained.record;
+  const historical = Boolean(
+    original && original.body.projectionVersion === undefined,
+  );
   const versionId = original?.body.versionId ?? selectedVersion;
   const sessionId = original?.sessionId ?? selectedSession;
   const versions = useCapiroQuery(
@@ -71,14 +80,19 @@ function StagingSelection({
   const revision = useCapiroQuery(
     "workspace.newsletter.revision",
     { params: { draftId, versionId } },
-    { enabled: flow.retained.ready && !!versionId },
+    { enabled: flow.retained.ready && !!versionId && !historical },
+  );
+  const historicalSource = useCapiroQuery(
+    "workspace.draft",
+    { params: { id: draftId } },
+    { enabled: flow.retained.ready && historical },
   );
   const destination = useCapiroQuery(
     "engagement.session",
     { params: { sessionId } },
     { enabled: flow.retained.ready && !!sessionId },
   );
-  const selected = revision.data;
+  const selected = historical ? undefined : revision.data;
   const target = destination.data;
   let unavailable = "";
   try {
@@ -97,6 +111,12 @@ function StagingSelection({
       );
     if (selected && target)
       requireCompatibleSponsor(selected, target.spec.sponsor);
+    if (original && selected) verifyStagingProjection(original, selected);
+    if (historical && historicalSource.data && target)
+      requireCompatibleSponsor(
+        historicalStagingSource(historicalSource.data, draftId),
+        target.spec.sponsor,
+      );
     if (
       !original &&
       target &&
@@ -110,15 +130,29 @@ function StagingSelection({
   const reviewKey = JSON.stringify([
     versionId,
     selected?.snapshotHash,
+    selected?.projectionVersion,
+    selected?.projectionHash,
+    selected?.clientId,
+    historical ? original?.body.requestId : undefined,
+    historical ? historicalSource.data?.clientId : undefined,
     sessionId,
     target?.currentStateVersion,
+    target?.spec.sponsor,
   ]);
+  if (previousReviewKey !== reviewKey) {
+    setPreviousReviewKey(reviewKey);
+    setReviewed("");
+  }
   const ready =
-    selected &&
+    (historical
+      ? historicalSource.data &&
+        !historicalSource.loading &&
+        !historicalSource.error
+      : selected && !revision.loading && !revision.error) &&
     target &&
     !unavailable &&
-    !revision.loading &&
-    !destination.loading;
+    !destination.loading &&
+    !destination.error;
   const error = flow.retained.error ?? unavailable ?? "";
   if (!flow.retained.ready)
     return (
@@ -153,7 +187,10 @@ function StagingSelection({
               id="staging-version"
               value={selectedVersion}
               disabled={flow.busy}
-              onValueChange={setVersion}
+              onValueChange={(value) => {
+                setReviewed("");
+                setVersion(value);
+              }}
               placeholder="Choose saved revision"
               options={(versions.data ?? [])
                 .filter((item) => item.draftId === draftId)
@@ -168,7 +205,10 @@ function StagingSelection({
               id="staging-session"
               value={selectedSession}
               disabled={flow.busy}
-              onValueChange={setSession}
+              onValueChange={(value) => {
+                setReviewed("");
+                setSession(value);
+              }}
               placeholder="Choose existing session"
               options={(sessions.data ?? []).map((item) => ({
                 value: item.id,
@@ -198,7 +238,12 @@ function StagingSelection({
           </div>
         </>
       )}
-      {[versions.error, sessions.error, revision.error, destination.error]
+      {[
+        versions.error,
+        sessions.error,
+        historical ? historicalSource.error : revision.error,
+        destination.error,
+      ]
         .filter(Boolean)
         .map((failure, index) => (
           <p role="alert" key={index}>
@@ -206,11 +251,12 @@ function StagingSelection({
             source and destination can be verified.
           </p>
         ))}
-      {(revision.loading || destination.loading) && (
+      {((historical ? historicalSource.loading : revision.loading) ||
+        destination.loading) && (
         <p role="status">Checking selected revision and Outreach session…</p>
       )}
       {unavailable && <p role="alert">{unavailable}</p>}
-      {ready && (
+      {ready && selected && (
         <Panel title="Review saved content for Outreach">
           <p>
             Revision {selected.versionId} · saved {selected.savedAt} · author{" "}
@@ -225,7 +271,12 @@ function StagingSelection({
               ? `Client ${selected.clientId}`
               : "Explicit firm content"}
           </p>
-          <h3>{selected.contentSkeleton.subject || "No subject"}</h3>
+          <h3>Authored email subject</h3>
+          <p style={{ whiteSpace: "pre-wrap" }}>
+            {selected.contentSkeleton.subject || (
+              <em>Empty subject (staged unchanged)</em>
+            )}
+          </p>
           <p style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
             {selected.contentSkeleton.body}
           </p>
@@ -245,6 +296,33 @@ function StagingSelection({
                 }
               />{" "}
               I reviewed this saved text and selected destination.
+            </label>
+          )}
+        </Panel>
+      )}
+      {ready && historical && original && (
+        <Panel title="Recover historical staging receipt">
+          <p>
+            This older request is held for recovery. Its saved revision is{" "}
+            {original.body.versionId}, snapshot {original.body.snapshotHash}.
+            The original plaintext cannot be previewed here. Recovering its
+            receipt uses the unchanged original request.
+          </p>
+          <p>
+            Destination: {target.session.title ?? sessionId}. Current access and
+            sponsor are checked again.
+          </p>
+          {!flow.receipt && (
+            <label>
+              <input
+                type="checkbox"
+                checked={reviewed === reviewKey}
+                disabled={flow.busy}
+                onChange={(event) =>
+                  setReviewed(event.target.checked ? reviewKey : "")
+                }
+              />{" "}
+              I want to recover this original staging request.
             </label>
           )}
         </Panel>
@@ -276,13 +354,18 @@ function StagingSelection({
           disabled={!ready || reviewed !== reviewKey || flow.busy}
           onClick={() =>
             ready &&
-            void flow.stage({
-              sessionId,
-              draftId,
-              versionId,
-              snapshotHash: selected.snapshotHash,
-              expectedStateVersion: target.currentStateVersion,
-            })
+            (original
+              ? void flow.stage()
+              : selected &&
+                void flow.stage({
+                  sessionId,
+                  draftId,
+                  versionId,
+                  snapshotHash: selected.snapshotHash,
+                  projectionVersion: selected.projectionVersion,
+                  projectionHash: selected.projectionHash,
+                  expectedStateVersion: target.currentStateVersion,
+                }))
           }
         >
           {flow.busy
@@ -299,6 +382,7 @@ function StagingSelection({
           versions.reload();
           sessions.reload();
           revision.reload();
+          historicalSource.reload();
           destination.reload();
         }}
       >
