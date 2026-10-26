@@ -5461,5 +5461,32 @@
     "reason": "This function remains the client/master calendar header presentation owner. The added client breadcrumb delegates navigation and keyboard/popover behavior to the existing ClientViewSwitcher through its public Portfolio interface; all three existing action callbacks and master-calendar branch are unchanged. No authorization, transport or state ownership was added. Keep this cohesive presentation rather than splitting to satisfy a size threshold.",
     "reviewedBy": "Codex independent PR236 reviewer",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DistrictMap.tsx",
+    "kind": "function",
+    "symbol": "DistrictMap",
+    "fingerprint": "94913d589db055b6288773ea1c998d1621e5fdafed91ddcf40340b7a9ccf22a3",
+    "reason": "This function remains the current-district map presentation and official-boundary adapter. It reuses the canonical typed binary read, geometry helpers and cancellation lifetime. The added color dimension and selected key are parent-provided display inputs; zoom/layers stay local and no client authority, data aggregation or mutation ownership is introduced. Keeping these cohesive map interactions together avoids an artificial split.",
+    "reviewedBy": "Codex independent PR239 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "60548682ecdd99d7213f62562bc300778e392a5b56271e52c632cd356d637580",
+    "reason": "This module owns the District Nexus view and its local presentation choices. It composes existing typed query, status, select, table and map owners; sums only reported values already aggregated by Core and preserves nulls. State/client query scope, presentation filters and current-row selection serve this single read-only screen. No persistence, provider access, authorization or new shared business-rule owner is introduced.",
+    "reviewedBy": "Codex independent PR239 reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+    "kind": "function",
+    "symbol": "DistrictNexus",
+    "fingerprint": "b1aeee9a94819f0950931f1d6f70825e280e561cd3a1f98b5a28cf33b01cc082",
+    "reason": "This component coordinates one district view: existing typed reads, scoped selection retirement, finite presentation filters, nullable summary cards and header/table/detail composition. Core remains the source and authorization owner; useCapiroQuery owns replaced-read admission and DistrictMap owns boundaries/geometry. The larger function is mostly cohesive declarative UI, with no command lifecycle or unrelated domain. Independent mounted cases cover client replacement/refusal, filtering, null/zero summaries and selected-state disposal.",
+    "reviewedBy": "Codex independent PR239 reviewer",
+    "reviewedOn": "2026-10-26"
   }
 ]

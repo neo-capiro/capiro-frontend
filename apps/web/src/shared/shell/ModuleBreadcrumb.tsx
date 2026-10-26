@@ -14,6 +14,15 @@ export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
   const params = useSearchParams();
   if (active === "intelligence" && params.get("view") === "legiwatch")
     return null;
+  // Figma 3.4 shows the active view as a trailing crumb
+  // (Modules / [Intelligence ▾] / District Nexus). Resolved from the catalog so
+  // no module has to hard-code its own crumb.
+  const view = params.get("view");
+  const chip = view
+    ? moduleCatalog
+        .find((descriptor) => descriptor.slug === active)
+        ?.chips.find((candidate) => candidate.view === view)
+    : undefined;
   return (
     <nav className={styles.breadcrumb} aria-label="Breadcrumb">
       <ScopedLink href="/modules">← Modules</ScopedLink>
@@ -40,6 +49,12 @@ export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
             );
         }}
       />
+      {chip && (
+        <>
+          <span aria-hidden="true">/</span>
+          <span>{chip.label}</span>
+        </>
+      )}
     </nav>
   );
 }

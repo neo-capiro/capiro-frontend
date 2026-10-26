@@ -109,9 +109,8 @@ test("District Nexus never retains an old side pane after a state-filter respons
     page.getByRole("heading", { name: california.name!, exact: true }),
   ).toBeVisible();
   try {
-    await page
-      .getByRole("textbox", { name: "Filter state", exact: true })
-      .fill("VA");
+    await page.getByRole("combobox", { name: "State", exact: true }).click();
+    await page.getByRole("option", { name: "VA", exact: true }).click();
     await expect.poll(() => waiting).toBe(true);
     await expect(page.getByRole("status")).toContainText("Loading");
     await expect(
@@ -134,10 +133,13 @@ test("District Nexus never retains an old side pane after a state-filter respons
     await expect(
       page.getByRole("heading", { name: virginia.name!, exact: true }),
     ).toBeVisible();
-    await page.getByRole("button", { name: "Clear all", exact: true }).click();
+    // Figma 1064:241658 has no "Clear all"; the State select's "All states"
+    // option is the reset, and it must still require a fresh selection.
+    await page.getByRole("combobox", { name: "State", exact: true }).click();
+    await page.getByRole("option", { name: "All states", exact: true }).click();
     await expect(
-      page.getByRole("textbox", { name: "Filter state", exact: true }),
-    ).toHaveValue("");
+      page.getByRole("combobox", { name: "State", exact: true }),
+    ).toContainText("All states");
     await expect(
       page.getByRole("button", { name: "CA-01", exact: true }),
     ).toBeVisible();
@@ -182,11 +184,17 @@ test("District Nexus scopes a repeated district key to the current client and se
   await expect(
     page.getByText("Replacement client warning", { exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("777+", { exact: true })).toBeVisible();
+  const panel = page.locator("section", {
+    has: page.getByRole("heading", {
+      name: "Replacement client district",
+      exact: true,
+    }),
+  });
+  await expect(panel.getByText("777+", { exact: true })).toBeVisible();
   expect(writes).toEqual([]);
 });
 
-test("a refused District Nexus filter is an error rather than an empty map and Clear all requires a fresh selection", async ({
+test("a refused District Nexus filter is an error rather than an empty map and resetting the State filter requires a fresh selection", async ({
   page,
 }) => {
   const writes = await install(page);
@@ -194,7 +202,7 @@ test("a refused District Nexus filter is an error rather than an empty map and C
     const input = JSON.parse(
       new URL(route.request().url()).searchParams.get("input") ?? "{}",
     ) as MapInput;
-    return input.query?.state === "ZZ"
+    return input.query?.state === "VA"
       ? route.fulfill({
           status: 403,
           json: { message: "Synthetic district scope refusal" },
@@ -206,19 +214,19 @@ test("a refused District Nexus filter is an error rather than an empty map and C
   await expect(
     page.getByRole("heading", { name: california.name!, exact: true }),
   ).toBeVisible();
-  await page
-    .getByRole("textbox", { name: "Filter state", exact: true })
-    .fill("ZZ");
+  await page.getByRole("combobox", { name: "State", exact: true }).click();
+  await page.getByRole("option", { name: "VA", exact: true }).click();
   await expect(page.getByRole("alert")).toContainText(
     "Synthetic district scope refusal",
   );
   await expect(
-    page.getByRole("heading", { name: "0 districts in scope", exact: true }),
+    page.getByRole("heading", { name: "Districts · 0", exact: true }),
   ).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: california.name!, exact: true }),
   ).toHaveCount(0);
-  await page.getByRole("button", { name: "Clear all", exact: true }).click();
+  await page.getByRole("combobox", { name: "State", exact: true }).click();
+  await page.getByRole("option", { name: "All states", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "CA-01", exact: true }),
   ).toBeVisible();

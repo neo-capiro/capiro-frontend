@@ -45,6 +45,8 @@
 }
 .stack {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
   gap: 20px;
 }
 .muted {
@@ -115,7 +117,7 @@
 }
 .metrics {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
   margin: 24px 0;
 }
@@ -133,6 +135,74 @@
   font-size: 11px;
   color: #78716c;
   text-transform: uppercase;
+}
+.metric small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #78716c;
+}
+.infoTip {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d6d3d1;
+  border-radius: 50%;
+  background: #f5f5f4;
+  color: #78716c;
+  font-size: 12px;
+  line-height: 1;
+}
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+/* SelectInput's trigger is width:100%; Figma shows the filters as compact
+   inline controls, so each one is constrained rather than filling the row. */
+.filterRow > * {
+  flex: 0 0 auto;
+  width: 168px;
+}
+.scopeSelect {
+  display: inline-block;
+  width: 180px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  padding: 12px 20px 0;
+  list-style: none;
+  font-size: 12px;
+  color: #78716c;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.swatch[data-tone="none"] {
+  background: #f5f5f4;
+  border: 1px solid #d6d3d1;
+}
+.swatch[data-tone="resolved"] {
+  background: hsl(191 22% 64%);
+}
+.swatch[data-tone="selected"] {
+  background: #0a0a0a;
+}
+.districtName {
+  color: #78716c;
 }
 .map {
   position: relative;
