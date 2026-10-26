@@ -12,6 +12,8 @@ import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
 import { richNewsletterAssetOperations } from "./rich-newsletter-assets";
 import { richNewsletterAssetManagementOperations } from "./rich-newsletter-asset-management";
+import { richNewsletterStockOperations } from "./rich-newsletter-stock";
+import { richNewsletterProviderOperations } from "./rich-newsletter-providers";
 import { richNewsletterLibraryOperations } from "./rich-newsletter-library";
 import { richNewsletterBrandOperations } from "./rich-newsletter-brand";
 import { richNewsletterSurveyOperations } from "./rich-newsletter-surveys";
@@ -30,6 +32,8 @@ export const workspaceOperations = {
   ...workspaceThemeStudioOperations,
   ...richNewsletterAssetOperations,
   ...richNewsletterAssetManagementOperations,
+  ...richNewsletterStockOperations,
+  ...richNewsletterProviderOperations,
   ...richNewsletterReviewOperations,
   ...workspaceCollaboratorOperations,
   ...workspaceNotificationOperations,

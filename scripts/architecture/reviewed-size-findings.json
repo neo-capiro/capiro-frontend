@@ -1892,18 +1892,22 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
     "kind": "function",
     "symbol": "RichBlockControls",
-    "fingerprint": "39b23a172181ff27e687ff05f5921b60ec904fad30c07f04fffe1f3c139cd911",
-    "reason": "One selected-block inspector dispatches to existing asset/content/style components; mutation remains the host callback and existing save owner.",
-    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "line": 24,
+    "nonblank": 173,
+    "fingerprint": "095f9854594b366b3237349c02ea1158ae1b0ee1c84681c6179faca4910e2a28",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One current block-control host adds only the existing provider child and optional current saved-document identity. Current manual content/structure/style and existing update/remove owners remain exact after reversing those additions. The shared request/proposal hook retains lifetime responsibility; this host does not implement a second writer. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "84dbc3a45b79a00750d9b5cbdea8a9af2f083ecce0caf22697fa3a225b7a9f11",
-    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
-    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
+    "line": 44,
+    "nonblank": 393,
+    "fingerprint": "4122ccaa252ab0cd03a954bf2e9a4b6eb920c87aca13e86babad7ede1a7289f5",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor function composes one provider-child identity with its existing current/unfenced history and revision/block key. Existing state and handlers remain exact; request/proposal and block editing responsibilities stay with their current children/owners. The affected explicit-adoption and stale-result browser checks pass. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -1977,11 +1981,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
     "kind": "function",
     "symbol": "RichDocumentActions",
-    "line": 14,
-    "nonblank": 291,
-    "fingerprint": "e701468f3e0fea219dcd1ad3bd187ebe694b902459e1e65c9c0a9e582543eadf",
-    "reason": "One presentation surface for the existing saved-document controller. The leased additions expose Comments from an existing saved identity and adapt known-ID list/create/read controls. Receipt/recovery/adoption semantics remain in the existing owner; this component adds no transport, journal or policy implementation.",
-    "reviewedBy": "Codex independent Ordinary reviewer; PR202 source responsibility review",
+    "fingerprint": "0377edb6c78ccdbe4622f552ac98cb65aabbefbc5b52fb64e26d1c68739d943b",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: The existing saved-document action host mounts a separate HTML-check child with saved ID/revision, current readiness and dirty-state inputs, and replaces the obsolete combined generation/send placeholder. It does not implement provider transport, report receiving or a new persistence owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4746,9 +4748,11 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "c1b5a2efc0ce83c200dc9ea251f69a659b7bbe96092b5e9e0b421a76f99710d0",
-    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
-    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
+    "line": 1,
+    "nonblank": 496,
+    "fingerprint": "fb46349c600648deebcdefc0d11f04ed113250b2d83d68f0d2029cf60b596b3b",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: The existing editor module adds only one current, unfenced saved-document identity prop to the existing revision/block-keyed child. Removing that prop restores the accepted current-base module exactly, preserving library, conversion, brand/survey, manual controls, history, recovery and Undo owners. No new module responsibility is introduced. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -5154,6 +5158,89 @@
     "fingerprint": "652d36e1e109e4b0900a864af531a45e638006a04c53774bfd5169e240ac9849",
     "reason": "One theme catalog host controls current selection and explicit creation, reusing the scoped query and common write owner.",
     "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/StockImageControl.tsx",
+    "kind": "function",
+    "symbol": "StockImageControl",
+    "fingerprint": "a7c57b819b78e71571473a3d34f97e8dde1e433216c5eddb6f4f47dc0f3c49b5",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One stock dialog presents selection, import uncertainty and current-detail review, then explicitly inserts through the existing caller. State and transport remain in the stock hook; rendering these mutually exclusive states together preserves the single import fence. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/StockImageControl.tsx",
+    "kind": "function",
+    "symbol": "StockSearch",
+    "fingerprint": "3705f16c71b2665391633ef2786bd00bb1d2e4fcca2222503682a1b59dfca61d",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One explicit-search panel presents fixed-page results, selected-source attribution and paging/detail actions. Search intent and current results come from its hook; this component adds no automatic import, authorization or alternate query owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/use-stock-images.ts",
+    "kind": "function",
+    "symbol": "useStockImages",
+    "fingerprint": "9fe8d332bb7214210cae194c060302fcd6fc958f7e472ea97cf1db3a82b217d6",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One feature-local hook owns stock search selection and the pending/proposed/unknown import lifecycle across dialog close. Existing query/mutation hooks own transport, cancellation and replacement; insertion still depends on requested-ID-bound current asset details. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/AltTextTool.tsx",
+    "kind": "function",
+    "symbol": "AltTextTool",
+    "fingerprint": "a023ba77fdba0c66c608723b13332576bd836383163542afac79720832f9a808",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One source-to-proposal dialog binds the selected image/file generation and admits only a separate alternative-text update. Shared proposal state, multipart transport and image-source receiving are reused; image, link and style remain with the existing block owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/HtmlCheckTool.tsx",
+    "kind": "function",
+    "symbol": "HtmlCheck",
+    "fingerprint": "b749cb17234f4089a6ab185af5a7af84c1c223a0a4a51b76306ee9f68f3166d2",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One saved-revision report view captures the explicit sandbox request, displays inert report data and distinguishes saved from unsaved content. It uses shared proposal/transport owners and does not add delivery, rendering or persistence responsibility. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/RefineImageTool.tsx",
+    "kind": "function",
+    "symbol": "RefineImageTool",
+    "fingerprint": "3d04773c202ff31406ce51823823fb2aff09550e1563a6874a4bb1b3a8bdce9c",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One image-refinement request dialog binds source, instructions and supported count to its proposal. The separate result child owns current-detail review; this function reuses source selection, proposal lifetime and multipart transport rather than duplicating image-library persistence. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/VideoThumbnailTool.tsx",
+    "kind": "function",
+    "symbol": "VideoThumbnailTool",
+    "fingerprint": "b3dca183b6a17678e5e717457654e019d98f65184aa09488e390c6d116314e2c",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One video source/proposal flow captures canonical provider/source identity, displays the saved thumbnail and requires explicit adoption through the existing block update. It neither implements downloading nor creates a second asset or authorization owner. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/WritingTool.tsx",
+    "kind": "function",
+    "symbol": "WritingTool",
+    "fingerprint": "86aab7d0224e4bccff465026b63d15b30db71b118ea2f98ee464b25f0fb54f14",
+    "reason": "FE217 1677eb7a8163569d7dab1f1a222d87aa6a747cf2: One writing dialog keeps explicit source/instructions, pending or unknown state and plain-text proposal adoption together. The common proposal hook and existing editor/Undo owner perform lifetime and mutation work; this view does not add automatic fetching, markup execution or saving. Exact source, retained meaningful checks and visual evidence reviewed in W3-FE217-PROVIDER-FINAL-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE217 source, responsibility and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/providers/LinkPreviewTool.tsx",
+    "kind": "function",
+    "symbol": "LinkPreviewTool",
+    "line": 21,
+    "nonblank": 147,
+    "fingerprint": "d37700209b29d5dcb59fe5af69498b8bcc4907c4b359d66e58834c7627ce2328",
+    "reason": "FE217 2422eaaea802d1f7a2e2afe63dcd8d81dd5455ce: One explicit link-preview dialog presents source input, pending/unknown/proposed outcomes and separate adoption. Duplicate manual fields are removed: AppControls alone edits them. The proposal uses the same empty-app defaults and source-version fence, preserves display choices/unknown nested fields on explicit update, and reuses current mutation/Undo owners. Keeping its mutually exclusive dialog states together does not add another state or transport owner. See W3-FE217-COMPOSITION-REVIEW.md.",
+    "reviewedBy": "a3_scope, independent FE217 composition and overlap reviewer; unchanged FE214 acceptance reused",
     "reviewedOn": "2026-10-26"
   }
 ]

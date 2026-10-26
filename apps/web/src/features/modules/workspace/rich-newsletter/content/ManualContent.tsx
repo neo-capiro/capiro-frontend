@@ -29,8 +29,7 @@ export function VideoControls({ block, update }: Props) {
       <p>
         {block.video?.thumbnail === "auto"
           ? "This block retains its existing automatic thumbnail. Changing the URL or image switches to a manual thumbnail."
-          : "Custom thumbnail"}{" "}
-        — automatic thumbnail lookup is not available in this editor.
+          : "Custom thumbnail"}
       </p>
       <Entry
         label="Thumbnail URL"
@@ -67,8 +66,8 @@ export function AppControls({ block, update }: Props) {
   return (
     <>
       <p>
-        Enter this link preview manually. No external page is fetched. Source
-        URLs must use public HTTPS without credentials.
+        Manual changes do not fetch an external page. Source URLs must use
+        public HTTPS without credentials.
       </p>
       <Entry
         label="Source URL"

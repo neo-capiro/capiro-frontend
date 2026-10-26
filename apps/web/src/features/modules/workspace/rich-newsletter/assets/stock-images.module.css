@@ -1,0 +1,20 @@
+.credit {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.credit a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.canvas {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--muted);
+}
+.canvas img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
