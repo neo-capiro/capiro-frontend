@@ -121,9 +121,20 @@ async function fixture(page: Page) {
     },
     "engagement.sessions": (input) => {
       calls.push({ key: "sessions", input });
-      const q = (input as { query: { offset: number; limit: number } }).query;
-      return campaigns.slice(q.offset, q.offset + q.limit);
+      const q = (
+        input as { query: { offset: number; limit: number; search?: string } }
+      ).query;
+      return campaigns
+        .filter(
+          (row) =>
+            !q.search ||
+            `${row.title} ${row.topic}`
+              .toLowerCase()
+              .includes(q.search.toLowerCase()),
+        )
+        .slice(q.offset, q.offset + q.limit);
     },
+    "workspace.template.provenance": null,
     "workspace.template.from-campaign": (input) => {
       calls.push({ key: "write", input });
       return { template, version: version(v2, 2, after), published: false };
@@ -186,14 +197,14 @@ test("campaign picker reaches beyond100 with explicit pages and never saves duri
     body: { sessionId: id(103), name: "Beyond100" },
   });
 });
-test("page-local filter and close/reopen clear stale selection and retain read refusal without exposing previous rows", async ({
+test("server search and close/reopen clear stale selection and retain read refusal without exposing previous rows", async ({
   page,
 }) => {
   const f = await fixture(page);
   await picker(page);
   await choose(page, "Campaign 1");
   await page.getByLabel("Template name", { exact: true }).fill("Unsent name");
-  await page.getByLabel("Filter this page", { exact: true }).fill("Topic 49");
+  await page.getByLabel("Search campaigns", { exact: true }).fill("Topic 49");
   await expect(
     page.getByRole("button", { name: "Save private draft" }),
   ).toBeDisabled();

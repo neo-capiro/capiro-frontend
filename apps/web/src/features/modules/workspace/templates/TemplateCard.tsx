@@ -12,9 +12,11 @@ import styles from "../workspace.module.css";
 
 export function TemplateCard({
   template,
+  writesBlocked = false,
   onAction,
 }: {
   template: OutreachTemplate;
+  writesBlocked?: boolean;
   onAction: (
     action:
       | "use"
@@ -57,7 +59,13 @@ export function TemplateCard({
               ].map(([action, label, enabled]) => (
                 <DropdownMenuItem
                   key={String(action)}
-                  disabled={!enabled}
+                  disabled={
+                    !enabled ||
+                    (writesBlocked &&
+                      ["duplicate", "publish", "archive"].includes(
+                        String(action),
+                      ))
+                  }
                   onSelect={() =>
                     onAction(
                       action as
