@@ -17,8 +17,13 @@ export type MemoryItem = {
   terms: readonly string[];
   /** Evidence or receipt for the record; disabled when it has no destination. */
   evidence: { label: string; href?: string | undefined };
-  /** Present when the record can receive a correction proposal. */
-  correction?: { href?: string | undefined };
+  /** Present when the record can receive a correction proposal: a destination, or a live selection. */
+  correction?: {
+    href?: string | undefined;
+    onSelect?: (() => void) | undefined;
+    selected?: boolean | undefined;
+    disabled?: boolean | undefined;
+  };
 };
 
 /** One recalled memory: approval, ownership, the fact itself and its review actions. */
@@ -52,7 +57,17 @@ export function MemoryCard({
         >
           {item.evidence.label}
         </LinkAction>
-        {item.correction ? (
+        {item.correction?.onSelect ? (
+          <button
+            type="button"
+            className={ui.ghost}
+            aria-pressed={item.correction.selected ?? false}
+            disabled={item.correction.disabled ?? false}
+            onClick={item.correction.onSelect}
+          >
+            <Sparkle aria-hidden fill="currentColor" /> Propose a correction
+          </button>
+        ) : item.correction ? (
           <LinkAction
             variant="ghost"
             href={item.correction.href}
