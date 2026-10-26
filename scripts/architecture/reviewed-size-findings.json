@@ -1892,18 +1892,18 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
     "kind": "function",
     "symbol": "RichBlockControls",
-    "fingerprint": "477a69a1cbced499133e95114a4dea29f64e7c45dd11c661e001f90f2110ed22",
-    "reason": "The existing block-settings function remains a presentation dispatcher for the currently selected block. This delta adds only the image/logo AssetReplaceControl child and its single imageUrl callback. Paged receiving, request lifetime, upload uncertainty and explicit selection are cohesive feature-local owners; draft updates and undo remain in the existing editor/controller. The 100\u2192106 nonblank increase does not add authority, transport or a second draft owner. No split solely for size is warranted.",
-    "reviewedBy": "Codex independent lifecycle_trace",
+    "fingerprint": "39b23a172181ff27e687ff05f5921b60ec904fad30c07f04fffe1f3c139cd911",
+    "reason": "One selected-block inspector dispatches to existing asset/content/style components; mutation remains the host callback and existing save owner.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "function",
     "symbol": "RichNewsletterEditor",
-    "fingerprint": "f1364e5526b076deccec133ff274a8a5518eb90ba68effb5edaede4908cccc46",
-    "reason": "One existing mounted editor coordinates explicit brand and survey views with the current draft and resets their local view keys on owner replacement. The additive union preserves the reviewed saved-content review, template/section library, conversion action, save recovery and Undo behavior.",
-    "reviewedBy": "Wave 3 Root independent composition reviewer",
+    "fingerprint": "84dbc3a45b79a00750d9b5cbdea8a9af2f083ecce0caf22697fa3a225b7a9f11",
+    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
+    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4746,9 +4746,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "d5fe70ecfbdd33ab94d9cf357a127f6fe26692e96dd773251c0da66467fc6ef9",
-    "reason": "The existing editor remains the composition point for its document, history, review, library and explicit conversion owners. This union adds the independently reviewed brand and survey entry points and persistent sibling views; those features retain their separate lifecycle and transport owners.",
-    "reviewedBy": "Wave 3 Root independent composition reviewer",
+    "fingerprint": "c1b5a2efc0ce83c200dc9ea251f69a659b7bbe96092b5e9e0b421a76f99710d0",
+    "reason": "Existing rich editor composes independently accepted content controls with retained Basic conversion, library/review and brand/survey owners. Root read and accepted the exact retained transforms, then expressly approved the description-only correction; no persistence or authority responsibility moved.",
+    "reviewedBy": "Wave 3 Root composition reviewer; exact union and literal correction explicitly accepted in delegation",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -4902,6 +4902,69 @@
     "fingerprint": "2615c6f86c6bd021cc2b69b9cce3cf412f57bf7c7eb8c2ad296a170a177ffa40",
     "reason": "One disposable request lifetime handles current reads, explicit preparation/send and retained URL request recovery. Identity/route changes abort; reload and unknown recovery only read the existing request.",
     "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+    "kind": "function",
+    "symbol": "RichStructure",
+    "fingerprint": "8beeccf29f0b854a731eaf22b3bc129305a756d47c4af5f6137a9e57b0454ba1",
+    "reason": "One recursive structure navigation surface invokes typed section/block actions and retains the existing saved-section callbacks.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/BlockPlacement.tsx",
+    "kind": "function",
+    "symbol": "BlockPlacement",
+    "fingerprint": "07a68f18a6f7525f5bbbddcabc82ff507df5e623a97370a46da75c8f99e71c16",
+    "reason": "One block-placement inspector binds current section/column choices and delegates changes to the guarded structural transform.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/DesignStyles.tsx",
+    "kind": "function",
+    "symbol": "DesignStyles",
+    "fingerprint": "c34c492eb9b038d7a60e2dfcc46daca47f0d39852474cb39905e5fc0a0885b87",
+    "reason": "One email-style inspector selects canonical desktop/mobile slots without replacing Brand Kit or document persistence. Numeric typing defect is separately required below; it is not a responsibility split issue.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/ManualContent.tsx",
+    "kind": "function",
+    "symbol": "ProductControls",
+    "fingerprint": "7a497a90ee19510e6240779c943988e66ef06957b5b43233a5baa08e5d0383a1",
+    "reason": "One manual product-list inspector edits/reorders the selected item and leaves fetching, recommendations and saving to existing owners.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/SocialControls.tsx",
+    "kind": "function",
+    "symbol": "SocialControls",
+    "fingerprint": "c00fcfeed1f5a0465af441302822d125f520ce4357184a3783dcd11b54b465c5",
+    "reason": "One follow/share inspector retains inactive lists and device settings through canonical social helpers; no share/send authority is introduced.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/StyleFields.tsx",
+    "kind": "function",
+    "symbol": "StyleFields",
+    "fingerprint": "08e29a9943632b7b0bb19292be48a8f66a2a2817b5373e4c870e76d310b773ac",
+    "reason": "One reusable projection of supported NewsletterStyle fields retains unknown keys and separates local device selection from authoritative persistence.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-newsletter/content/structure.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "db7f1d289efd62222628aca5671ee1f9d07c059b9cb7f9a18b869b526d7828d7",
+    "reason": "One structural transformation suite shares its small fixture and covers fresh identities, source/font preservation, bounds, stale targets and actual public receiver round-trip.",
+    "reviewedBy": "Wave 3 lifecycle_trace independent source and responsibility reviewer",
     "reviewedOn": "2026-10-26"
   }
 ]

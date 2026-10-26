@@ -2,128 +2,201 @@
 import {
   NEWSLETTER_BLOCK_LABELS,
   type NewsletterBlock,
+  type NewsletterDesign,
 } from "@capiro/shared/newsletter";
-import {
-  ActionButton,
-  Field,
-  TextArea,
-  TextInput,
-} from "../../../../shared/module-ui";
+import { ActionButton, Field, TextArea } from "../../../../shared/module-ui";
 import { RichText } from "./RichText";
 import { AssetReplaceControl } from "./assets/AssetReplaceControl";
-import styles from "./rich-newsletter.module.css";
+import { Entry, Choice, NumberEntry, Toggle } from "./content/Fields";
+import { BlockStyles } from "./content/StyleFields";
+import { BlockPlacement } from "./content/BlockPlacement";
+import { SocialControls } from "./content/SocialControls";
+import {
+  AppControls,
+  ProductControls,
+  VideoControls,
+} from "./content/ManualContent";
+import type { StructureAction } from "./content/structure";
+import styles from "./content/content.module.css";
+import ui from "./library/sections.module.css";
 
 export function RichBlockControls({
   block,
+  design,
+  structure,
   update,
   remove,
 }: {
   block: NewsletterBlock;
+  design: NewsletterDesign;
+  structure: (action: StructureAction) => void;
   update: (change: Partial<NewsletterBlock>) => void;
   remove: () => void;
 }) {
   const text = ["heading", "paragraph"].includes(block.kind);
-  const plainText = ["button", "logo"].includes(block.kind);
-  const image = ["image", "logo", "video"].includes(block.kind);
+  const image = ["image", "logo"].includes(block.kind);
   return (
-    <section className={styles.controls} aria-label="Selected block">
-      <h2>{NEWSLETTER_BLOCK_LABELS[block.kind]}</h2>
-      {text && (
-        <RichText
-          key={block.id}
-          html={block.html}
-          text={block.text}
-          onChange={(html, text) => update({ html, text })}
-        />
-      )}
-      {plainText && (
-        <Field label="Block text" htmlFor="rich-block-text">
-          <TextInput
-            id="rich-block-text"
+    <section className={styles.panel} aria-label="Selected block">
+      <h2>
+        {["product", "product-rec"].includes(block.kind)
+          ? "Product cards"
+          : NEWSLETTER_BLOCK_LABELS[block.kind]}
+      </h2>
+      <div className={ui.fields}>
+        {text && (
+          <RichText
+            key={block.id}
+            html={block.html}
+            text={block.text}
+            onChange={(html, text) => update({ html, text })}
+          />
+        )}
+        {block.kind === "heading" && (
+          <Choice
+            label="Heading level"
+            value={String(block.headingLevel)}
+            values={["1", "2", "3", "4"]}
+            change={(level) =>
+              update({
+                headingLevel: Number(level) as NewsletterBlock["headingLevel"],
+              })
+            }
+          />
+        )}
+        {["button", "logo"].includes(block.kind) && (
+          <Entry
+            label="Block text"
             value={block.text}
-            onChange={(event) => update({ text: event.target.value })}
+            maxLength={200000}
+            change={(text) => update({ text })}
           />
-        </Field>
-      )}
-      {block.kind === "code" && (
-        <Field label="HTML content" htmlFor="rich-html">
-          <TextArea
-            id="rich-html"
-            value={block.html}
-            onChange={(event) => update({ html: event.target.value })}
-          />
-        </Field>
-      )}
-      {image && (
-        <>
-          <Field label="Image URL" htmlFor="rich-image">
-            <TextInput
-              id="rich-image"
+        )}
+        {block.kind === "code" && (
+          <Field label="HTML content" htmlFor="rich-html">
+            <TextArea
+              id="rich-html"
+              value={block.html}
+              maxLength={200000}
+              onChange={(event) => update({ html: event.target.value })}
+            />
+          </Field>
+        )}
+        {image && (
+          <>
+            <Entry
+              label="Image URL"
               value={block.imageUrl}
-              onChange={(event) => update({ imageUrl: event.target.value })}
+              change={(imageUrl) => update({ imageUrl })}
             />
-          </Field>
-          <Field label="Alternative text" htmlFor="rich-alt">
-            <TextInput
-              id="rich-alt"
+            <Entry
+              label="Alternative text"
               value={block.alt}
-              onChange={(event) => update({ alt: event.target.value })}
+              maxLength={1000}
+              change={(alt) => update({ alt })}
             />
-          </Field>
-          {(block.kind === "image" || block.kind === "logo") && (
             <AssetReplaceControl
               blockId={block.id}
               onInsert={(asset) => update({ imageUrl: asset.url })}
             />
-          )}
-        </>
-      )}
-      {["button", "image", "logo", "video"].includes(block.kind) && (
-        <Field label="Link URL" htmlFor="rich-link">
-          <TextInput
-            id="rich-link"
-            value={block.url}
-            onChange={(event) => update({ url: event.target.value })}
-          />
-        </Field>
-      )}
-      <Field label="Text color" htmlFor="rich-color">
-        <TextInput
-          id="rich-color"
-          type="color"
-          value={block.style.color || "#111827"}
-          onChange={(event) =>
-            update({ style: { ...block.style, color: event.target.value } })
-          }
+            <Choice
+              label="Image size"
+              value={block.imageSize}
+              values={["original", "fill", "scale"]}
+              change={(imageSize) =>
+                update({ imageSize: imageSize as NewsletterBlock["imageSize"] })
+              }
+            />
+            {block.imageSize === "scale" && (
+              <NumberEntry
+                label="Image scale"
+                value={block.imageScale}
+                min={1}
+                max={100}
+                change={(imageScale) => {
+                  if (imageScale !== undefined) update({ imageScale });
+                }}
+              />
+            )}
+          </>
+        )}
+        {["button", "image", "logo"].includes(block.kind) && (
+          <>
+            <Entry
+              label="Link URL"
+              value={block.url}
+              change={(url) => update({ url })}
+            />
+            <Choice
+              label="Link type"
+              value={block.linkType}
+              values={["web", "email", "phone", "file", "anchor"]}
+              change={(linkType) =>
+                update({ linkType: linkType as NewsletterBlock["linkType"] })
+              }
+            />
+            <Toggle
+              label="Open in new tab"
+              checked={block.openNewTab}
+              change={(openNewTab) => update({ openNewTab })}
+            />
+          </>
+        )}
+        {block.kind === "social" && (
+          <SocialControls block={block} update={update} />
+        )}
+        {block.kind === "video" && (
+          <VideoControls block={block} update={update} />
+        )}
+        {block.kind === "apps" && <AppControls block={block} update={update} />}
+        {["product", "product-rec"].includes(block.kind) && (
+          <ProductControls block={block} update={update} />
+        )}
+        {["apps", "product", "product-rec"].includes(block.kind) && (
+          <>
+            <Choice
+              label="Content category"
+              value={block.sourceKind}
+              values={["bill", "news", "tweet", "event", "product", "people"]}
+              change={(sourceKind) =>
+                update({
+                  sourceKind: sourceKind as NewsletterBlock["sourceKind"],
+                })
+              }
+            />
+            <p>
+              This category is retained metadata. It does not fetch client
+              records or establish permission to use them.
+            </p>
+          </>
+        )}
+        {block.kind === "survey" && (
+          <p>
+            The stored survey definition is retained. Hosted survey
+            configuration remains with the survey authoring owner.
+          </p>
+        )}
+        {block.kind === "footer" && (
+          <p>
+            The footer uses the newsletter’s company, address and permission
+            reminder. Existing values remain unchanged.
+          </p>
+        )}
+        <BlockPlacement
+          block={block}
+          design={design}
+          change={structure}
+          update={update}
         />
-      </Field>
-      <Field label="Top padding" htmlFor="rich-padding">
-        <TextInput
-          id="rich-padding"
-          type="number"
-          min={0}
-          max={100}
-          value={block.style.paddingTop ?? 0}
-          onChange={(event) =>
-            update({
-              style: {
-                ...block.style,
-                paddingTop: Math.max(
-                  0,
-                  Math.min(100, Number(event.target.value)),
-                ),
-              },
-            })
-          }
-        />
-      </Field>
-      {!text && !plainText && !image && block.kind !== "code" && (
-        <p>
-          Advanced controls for this block are not available yet. Its content is
-          retained in the preview.
-        </p>
-      )}
-      <ActionButton onClick={remove}>Remove block</ActionButton>
+        <details>
+          <summary>Block styles</summary>
+          <div className={styles.stack}>
+            <BlockStyles block={block} update={update} />
+          </div>
+        </details>
+      </div>
+      <ActionButton className={ui.button} onClick={remove}>
+        Remove block
+      </ActionButton>
     </section>
   );
 }
