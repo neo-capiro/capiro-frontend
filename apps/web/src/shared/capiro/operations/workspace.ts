@@ -9,11 +9,15 @@ import { workspaceObjectiveOperations } from "./objective-work-destinations";
 import { richNewsletterOperations } from "./rich-newsletter";
 import { richNewsletterAssetOperations } from "./rich-newsletter-assets";
 import { richNewsletterLibraryOperations } from "./rich-newsletter-library";
+import { richNewsletterBrandOperations } from "./rich-newsletter-brand";
+import { richNewsletterSurveyOperations } from "./rich-newsletter-surveys";
 import { workspaceBriefCopyOperations } from "./workspace-brief-copy";
 import { workspaceClientBriefCopyOperations } from "./workspace-client-brief-copy";
 import { workspaceCollaboratorOperations } from "./workspace-collaborators";
 import { workspaceNotificationOperations } from "./workspace-notifications";
 export const workspaceOperations = {
+  ...richNewsletterBrandOperations,
+  ...richNewsletterSurveyOperations,
   ...richNewsletterAssetOperations,
   ...workspaceCollaboratorOperations,
   ...workspaceNotificationOperations,
