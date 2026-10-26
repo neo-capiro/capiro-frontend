@@ -97,7 +97,7 @@ test("rich document create is explicit, preserves local content and stages only 
   await expect(reviewStage).toBeEnabled();
   await reviewStage.scrollIntoViewIfNeeded();
   await page.screenshot({
-    path: "C:/Users/Administrator/Documents/Codex/2026-10-26/wave3-orchestrator-20261026/work/ws19/confirmed-stage-host.png",
+    path: test.info().outputPath("confirmed-stage-host.png"),
   });
   const writesBeforeNavigation = fixture.requests.filter(
     (entry) => entry.method !== "GET",
