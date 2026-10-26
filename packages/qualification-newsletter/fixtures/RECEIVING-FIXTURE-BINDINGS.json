@@ -14,12 +14,19 @@
     },
     {
       "path": "receiving-positive.ts",
-      "sourcePath": "docs/shared-newsletter-receiving-packed-distribution-20261013/qualified-38fec5c8/evidence/consumer-positive.ts",
-      "bytes": 3854,
-      "sha256": "d285307690594c6732acabd67db1b97886ef87b3f1b9ddbf73ae3ecc67510fd6",
-      "transportBytes": 3855,
-      "transportSha256": "f834a92d1893c2214a161bd071c8387b31bdad4a18301c7f2f2e483b3be2799a",
-      "transportCorrection": "Removed exactly one tool-appended LF; required resulting exact published byte length and SHA256 before copying."
+      "bytes": 4514,
+      "sha256": "afe3a36c6a5b06858fa7f6f415291b411d8a5209230f94d1e2eda593d7746337",
+      "frontendBase": "504add2eb594180c8c28d1ee9d025769af1a594a",
+      "adaptation": "Active public consumer fixture binds document/revision and distinguishes unbound content; rejects partial expectations. Original published fixture remains in Git history and its immutable source distribution.",
+      "adaptedFrom": {
+        "path": "receiving-positive.ts",
+        "sourcePath": "docs/shared-newsletter-receiving-packed-distribution-20261013/qualified-38fec5c8/evidence/consumer-positive.ts",
+        "bytes": 3854,
+        "sha256": "d285307690594c6732acabd67db1b97886ef87b3f1b9ddbf73ae3ecc67510fd6",
+        "transportBytes": 3855,
+        "transportSha256": "f834a92d1893c2214a161bd071c8387b31bdad4a18301c7f2f2e483b3be2799a",
+        "transportCorrection": "Removed exactly one tool-appended LF; required resulting exact published byte length and SHA256 before copying."
+      }
     },
     {
       "path": "receiving-negative.ts",
@@ -56,5 +63,7 @@
       "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c",
       "frontendPreservedAt": "7c87678730538958ace9762f824dc3e588bf445b"
     }
-  ]
+  ],
+  "activeArtifactSource": "d68024dc62edddb0784f79b4e5ca50335dd1ca89",
+  "activeArtifactSha256": "e92d6c6129f7c82b62b71086b81cbba6e0f57b786b41ba023017ca77b1c5c72e"
 }
