@@ -66,7 +66,12 @@ function RoutedApp() {
   // Dedicated synthetic harness mounts for the governed lifecycle and routine suites.
   // No production route uses these paths; "/" is otherwise only addressed by them.
   if (path === "/") return <SelectedLifecycleProbe />;
-  if (path === "/profile") return <ClientHandoffProbe />;
+  if (path === "/profile")
+    return (
+      <div data-portfolio-root>
+        <ClientHandoffProbe />
+      </div>
+    );
   if (path === "/routines") return <RoutinesProbe />;
   if (path === "/meri/conversations")
     return (
