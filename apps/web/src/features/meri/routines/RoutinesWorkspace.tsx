@@ -11,33 +11,109 @@ import type { RoutinesListResponse } from "@capiro/meri-contracts/routines-appli
 import type { RoutineWorkflow } from "../../../shared/meri-routines/workflow";
 import { RoutineReview } from "./RoutineReview";
 import { RoutineForm, RoutineCancellation } from "./RoutineForm";
-import { Panel } from "../ui/Panel";
+import { MeriPageHeading } from "../ui/MeriPageHeading";
+import { DataTable, type DataColumn } from "../ui/DataTable";
+import { Notice } from "../ui/Notice";
+import { phoneCardColumns } from "../ui/phone-card-columns";
 import styles from "../ui/meri-ui.module.css";
+import cards from "../ui/phone-cards.module.css";
+import phone from "../ui/phone-page.module.css";
+
+type Page = Omit<RoutinesListResponse["page"], "rows"> & {
+  rows: RoutinesListResponse["page"]["rows"][number][];
+};
+type Routine = Page["rows"][number];
+type RoutineRow = {
+  id: string;
+  name: string;
+  client: string;
+  nextRun: string;
+  status: string;
+  lastOutcome: string;
+  routine: Routine;
+};
+
+const STATE_LABEL: Record<Routine["projection"]["state"], string> = {
+  active: "Active",
+  paused: "Paused",
+  cancelled: "Cancelled",
+};
+const when = (iso: string) =>
+  new Date(iso).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "short",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+/** Figma 08.01 columns from the bounded list read; the schedule has no user title in its projection. */
+export function routineRows(
+  rows: readonly Routine[],
+  client: string,
+): RoutineRow[] {
+  return rows.map((routine) => {
+    const next = routine.inspection?.temporal.nextActionTimes[0];
+    const last = routine.inspection?.temporal.recentActions.at(-1);
+    return {
+      id: routine.projection.scheduleId,
+      name: `Routine ${routine.projection.scheduleId.slice(0, 8)}${
+        routine.unresolved ? " · unresolved change" : ""
+      }`,
+      client,
+      nextRun: next ? when(next) : "Not available",
+      status: STATE_LABEL[routine.projection.state],
+      lastOutcome: routine.inspection
+        ? last
+          ? `Started ${when(last.takenAt)}`
+          : "No runs observed"
+        : "Not available",
+      routine,
+    };
+  });
+}
+
+const columns: readonly DataColumn<RoutineRow>[] = [
+  { key: "name", label: "Routine", width: 29, render: (row) => row.name },
+  { key: "client", label: "Client", width: 12.5, render: (row) => row.client },
+  { key: "next", label: "Next run", width: 21.5, render: (row) => row.nextRun },
+  { key: "status", label: "Status", width: 14, render: (row) => row.status },
+  {
+    key: "outcome",
+    label: "Last outcome",
+    width: 23,
+    render: (row) => row.lastOutcome,
+  },
+];
+const cardColumns = phoneCardColumns(columns, {
+  key: "status",
+  tone: (row) => (row.status === "Active" ? "success" : "neutral"),
+});
 
 export function RoutinesWorkspace({
   port,
   preserveNewDraft = false,
+  client = "General",
 }: {
   port: RoutineWorkflow;
   /** Only the host keyed by immutable account/client may retain an unsent new draft across reauthorization. */
   preserveNewDraft?: boolean;
+  /** Scope name shown in the Client column (Figma 08.01). */
+  client?: string;
 }) {
   const state = useSyncExternalStore(
     port.subscribe,
     port.getSnapshot,
     port.getSnapshot,
   );
-  type Page = Omit<RoutinesListResponse["page"], "rows"> & {
-    rows: RoutinesListResponse["page"]["rows"][number][];
-  };
   const [page, setPage] = useState<Page | null>(null);
   const [loadingPort, setLoading] = useState<RoutineWorkflow | null>(null);
   const loading = loadingPort === port;
   const [error, setError] = useState<string | null>(null);
   const [editor, setEditor] = useState<{
-    mode: "edit" | "cancel";
+    mode: "edit" | "pause" | "delete";
     scheduleId?: string;
   } | null>(null);
+  const [selectedId, setSelectedId] = useState<string | undefined>();
   const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
   useLayoutEffect(() => {
@@ -93,34 +169,47 @@ export function RoutinesWorkspace({
     void port.prepare(request);
   };
   if (state.accessDenied) return <p role="alert">{state.message}</p>;
+  const rows = routineRows(page?.rows ?? [], client);
+  const selected = rows.find((row) => row.id === selectedId) ?? rows[0];
+  const routine = selected?.routine;
+  const rowBlocked =
+    !routine ||
+    disabled ||
+    Boolean(error) ||
+    routine.unresolved ||
+    routine.projection.state === "cancelled";
   return (
-    <div className={styles.page}>
-      <header>
-        <h1>Routines</h1>
-        <p>
-          Review recurring instructions, their scope and limits before any
-          schedule change.
-        </p>
-      </header>
-      <div className={styles.row}>
-        <Button disabled={disabled} onClick={() => setEditor({ mode: "edit" })}>
-          New routine
-        </Button>
-        <Button
-          variant="outline"
-          disabled={loading}
-          onClick={() => void read()}
-        >
-          Refresh routines
-        </Button>
-      </div>
+    <div className={`${styles.page} ${phone.page} ${cards.cards}`}>
+      <MeriPageHeading
+        title="Routines"
+        description="Recurring research and drafting within your permissions"
+        action={
+          // Direct children: the phone heading rule keeps an aside that holds buttons.
+          <>
+            <Button
+              variant="outline"
+              disabled={loading}
+              onClick={() => void read()}
+            >
+              Refresh routines
+            </Button>
+            <Button
+              disabled={disabled}
+              onClick={() => setEditor({ mode: "edit" })}
+            >
+              New routine
+            </Button>
+          </>
+        }
+      />
       <RoutineReview port={port} />
       {editor &&
         !state.saved &&
-        (editor.mode === "cancel" && editor.scheduleId ? (
+        (editor.mode !== "edit" && editor.scheduleId ? (
           <RoutineCancellation
-            key={editor.scheduleId}
+            key={`${editor.mode}:${editor.scheduleId}`}
             scheduleId={editor.scheduleId}
+            initialMode={editor.mode}
             disabled={disabled}
             prepare={prepare}
             close={() => setEditor(null)}
@@ -137,107 +226,135 @@ export function RoutinesWorkspace({
       {error && <p role="alert">{error}</p>}
       {loading && <p role="status">Reading current routines…</p>}
       {!page && !loading && (
-        <p>
+        <p className={styles.muted}>
           Refresh routines to read the current schedule definitions and bounded
           recent activity.
         </p>
       )}
       {page?.rows.length === 0 && (
-        <p>No routines were returned for the current account and scope.</p>
+        <p className={styles.muted}>
+          No routines were returned for the current account and scope.
+        </p>
       )}
-      {page?.rows.map((row) => (
-        <Panel
-          key={row.projection.scheduleId}
-          label={`Routine ${row.projection.scheduleId}`}
-        >
-          <p>
-            State: {row.projection.state}
-            {row.unresolved ? " · unresolved change" : ""}. Destination:{" "}
-            {row.projection.destinationId}. Timezone: {row.projection.timezone}.
-          </p>
-          <p>
-            Next observed runs:{" "}
-            {row.inspection?.temporal.nextActionTimes.join(", ") ||
-              "Not available"}
-            .
-          </p>
-          <p>
-            Effective per run: $
-            {(row.projection.maxCostMicrousd / 1_000_000).toFixed(6)},{" "}
-            {row.projection.maxRuntimeSeconds} seconds,{" "}
-            {row.projection.retryLimit} retries.
-          </p>
-          <div className={styles.row}>
+      {rows.length > 0 && (
+        <>
+          <DataTable
+            caption="Routines"
+            columns={cardColumns}
+            rows={rows}
+            selectedId={selected?.id}
+            onSelect={setSelectedId}
+          />
+          <div className={styles.row} aria-label="Selected routine actions">
             <Button
-              variant="outline"
-              disabled={
-                disabled ||
-                Boolean(error) ||
-                row.unresolved ||
-                row.projection.state === "cancelled"
-              }
+              disabled={rowBlocked}
               onClick={() =>
+                routine &&
                 setEditor({
                   mode: "edit",
-                  scheduleId: row.projection.scheduleId,
+                  scheduleId: routine.projection.scheduleId,
                 })
               }
             >
-              Edit or resume with fresh choices
+              Open routine
             </Button>
             <Button
               variant="outline"
-              disabled={
-                disabled ||
-                Boolean(error) ||
-                row.unresolved ||
-                row.projection.state === "cancelled"
-              }
+              disabled={rowBlocked || routine?.projection.state !== "active"}
               onClick={() =>
+                routine &&
                 setEditor({
-                  mode: "cancel",
-                  scheduleId: row.projection.scheduleId,
+                  mode: "pause",
+                  scheduleId: routine.projection.scheduleId,
                 })
               }
             >
-              Pause or cancel
+              Pause
+            </Button>
+            <Button
+              variant="outline"
+              disabled={rowBlocked || routine?.projection.state !== "paused"}
+              onClick={() =>
+                routine &&
+                setEditor({
+                  mode: "edit",
+                  scheduleId: routine.projection.scheduleId,
+                })
+              }
+            >
+              Resume
+            </Button>
+            <Button
+              variant="ghost"
+              disabled={rowBlocked}
+              onClick={() =>
+                routine &&
+                setEditor({
+                  mode: "delete",
+                  scheduleId: routine.projection.scheduleId,
+                })
+              }
+            >
+              Cancel routine
             </Button>
           </div>
-          <details>
-            <summary>Recent activity</summary>
-            {row.inspection ? (
-              <>
-                <p>
-                  Observed {row.inspection.observedAt}. This is bounded
-                  activity, not a complete history or verified current retry.
+          {routine && (
+            <details key={routine.projection.scheduleId}>
+              <summary>Recent activity</summary>
+              <p className={styles.muted}>
+                Destination: {routine.projection.destinationId}. Timezone:{" "}
+                {routine.projection.timezone}. Effective per run: $
+                {(routine.projection.maxCostMicrousd / 1_000_000).toFixed(6)},{" "}
+                {routine.projection.maxRuntimeSeconds} seconds,{" "}
+                {routine.projection.retryLimit} retries.
+              </p>
+              {routine.inspection ? (
+                <>
+                  <p className={styles.muted}>
+                    Observed {routine.inspection.observedAt}. This is bounded
+                    activity, not a complete history or verified current retry.
+                  </p>
+                  <ul>
+                    {routine.inspection.temporal.recentActions.map(
+                      (action, i) => (
+                        <li key={i}>
+                          Scheduled {action.scheduledAt}; started{" "}
+                          {action.takenAt}.
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                  <p className={styles.muted}>
+                    {routine.inspection.coverage.recentActions.omitted} recent
+                    entries omitted;{" "}
+                    {routine.inspection.coverage.runningActions.returned}{" "}
+                    running references observed. Their current execution
+                    identity is not verified.
+                  </p>
+                </>
+              ) : (
+                <p className={styles.muted}>
+                  Schedule inspection is currently unavailable.
                 </p>
-                <ul>
-                  {row.inspection.temporal.recentActions.map((action, i) => (
-                    <li key={i}>
-                      Scheduled {action.scheduledAt}; started {action.takenAt}.
-                    </li>
-                  ))}
-                </ul>
-                <p>
-                  {row.inspection.coverage.recentActions.omitted} recent entries
-                  omitted; {row.inspection.coverage.runningActions.returned}{" "}
-                  running references observed. Their current execution identity
-                  is not verified.
-                </p>
-              </>
-            ) : (
-              <p>Schedule inspection is currently unavailable.</p>
-            )}
-          </details>
-        </Panel>
-      ))}
+              )}
+            </details>
+          )}
+          <Notice
+            tone="success"
+            title="Routine drafting stays within the defined scope"
+          >
+            Outputs are saved to Meri. Any governed action still follows its
+            review rules.
+          </Notice>
+        </>
+      )}
       {page?.hasMore && (
         <Button
           disabled={loading}
           variant="outline"
           onClick={() => void read(true)}
         >
-          Show more routines
+          Load more
         </Button>
       )}
     </div>

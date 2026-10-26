@@ -317,11 +317,9 @@ test("dedicated General connect uses canonical bootstrap, reviewed pause, and bo
   });
   await page.getByRole("button", { name: "Refresh routines" }).click();
   await expect(
-    page.getByRole("button", { name: "Pause or cancel", exact: true }),
+    page.getByRole("button", { name: "Pause", exact: true }),
   ).toBeEnabled();
-  await page
-    .getByRole("button", { name: "Pause or cancel", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page.getByLabel("Reason", { exact: true }).fill("Pause after review");
   await page.getByRole("button", { name: "Prepare change for review" }).click();
   await expect(

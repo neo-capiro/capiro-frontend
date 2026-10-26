@@ -222,13 +222,16 @@ export function RoutineCancellation({
   disabled,
   prepare,
   close,
+  initialMode = "pause",
 }: {
   scheduleId: string;
   disabled: boolean;
   prepare: (request: RoutinesPrepareRequest) => void;
   close: () => void;
+  /** Figma 08.01 opens this from either Pause or Cancel routine; the change stays reviewable here. */
+  initialMode?: "pause" | "delete";
 }) {
-  const [mode, setMode] = useState<"pause" | "delete">("pause");
+  const [mode, setMode] = useState<"pause" | "delete">(initialMode);
   const [note, setNote] = useState("");
   return (
     <Panel label="Pause or cancel routine">

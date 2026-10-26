@@ -537,12 +537,12 @@ it.each([401, 403])(
     fetch.mockImplementationOnce(
       async () => new Response("not JSON", { status }),
     );
-    const html = await readWorkspace(port, "Show more routines");
+    const html = await readWorkspace(port, "Load more");
     expect(html).toContain("Routine access was denied");
     expect(html).not.toContain(f.listed.page.rows[0].projection.destinationId);
     expect(html).not.toContain("Recent activity");
     expect(html).not.toContain("Unsaved routine editor");
-    expect(html).not.toContain("Show more routines");
+    expect(html).not.toContain("Load more");
     await expect(port.list()).rejects.toBeInstanceOf(RoutinesAccessDenied);
     expect(fetch).toHaveBeenCalledTimes(2);
   },
@@ -601,7 +601,7 @@ it.each(["network", "service"])(
         { status: 503 },
       );
     });
-    const html = await readWorkspace(port, "Show more routines");
+    const html = await readWorkspace(port, "Load more");
     expect(html).toContain(f.listed.page.rows[0].projection.destinationId);
     expect(html).toContain(
       "Previously shown results are not current authority",
@@ -618,7 +618,7 @@ it.each(["network", "service"])(
         },
       }),
     );
-    expect(await readWorkspace(port, "Show more routines")).toContain(
+    expect(await readWorkspace(port, "Load more")).toContain(
       f.listed.page.rows[0].projection.destinationId,
     );
     expect(
@@ -639,7 +639,7 @@ it("replacement connection cannot inherit a page, cursor or unsaved editor", asy
   const html = renderWorkspace(replacement);
   expect(html).not.toContain(f.listed.page.rows[0].projection.destinationId);
   expect(html).not.toContain("Unsaved routine editor");
-  expect(html).not.toContain("Show more routines");
+  expect(html).not.toContain("Load more");
   await readWorkspace(replacement);
   expect(
     JSON.parse(String(fetch.mock.calls[1]![1]?.body)).afterScheduleId,
