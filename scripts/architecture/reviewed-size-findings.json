@@ -746,7 +746,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved targetâ€™s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -890,7 +890,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each job’s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload’s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each jobâ€™s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful uploadâ€™s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2361,7 +2361,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hookâ€™s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -3962,9 +3962,9 @@
     "file": "apps/web/src/features/modules/workspace/workspace.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "73522216baa709b3adc375f39aac0a0b71138d30c0c6f91b765d9970d67a6dd7",
-    "reason": "Existing805-line scoped Workspace presentation stylesheet adds only14 nonblank lines for versionFacts grid/terms/values, existing tokens and wrapping. These serve the accepted history view without global selector, shell, policy or behavior change. Moving unrelated inherited styles only to lower the count would unnecessarily enlarge the composition. Exact independent disposition: W3-FE173-COMPOSITION-REVIEW.md.",
-    "reviewedBy": "Independent Codex composition reviewer, FE173 cb5c41b08975a5319f337375768788a48a4a1755",
+    "fingerprint": "e60302b366d35b6360729e0671f387632e4cdd9e3a8a7a0aa8149d43a01cef98",
+    "reason": "The exact deletion removes six lines of unused stageCards styling and the mobile selector, adds no behavior or responsibility, and preserves every remaining shared style. Splitting shared CSS solely for line count is unnecessary. Independent Root follow-up disposition on FE186 57e111c6 and architecture-comparison.json accepts this exact fingerprint.",
+    "reviewedBy": "Independent Root Codex, FE186 CSS follow-up 57e111c65f11104a543c1d9562ba2a511a23254c",
     "reviewedOn": "2026-10-26"
   },
   {
