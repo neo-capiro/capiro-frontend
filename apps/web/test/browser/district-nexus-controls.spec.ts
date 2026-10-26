@@ -171,3 +171,55 @@ test("all-null aggregates stay unavailable and color-by label reflects the activ
     fullPage: true,
   });
 });
+
+test("state selection scopes every displayed rail even when the server returns cross-state awards", async ({
+  page,
+}) => {
+  const requests: unknown[] = [];
+  await setup(page, {
+    "intelligence.district.map": (input: unknown) => {
+      requests.push(input);
+      // Core's facility filter can leave award evidence from other states.
+      return response([
+        row("CA-01", 35, 0, 0),
+        row("VA-08", null, null, null),
+        row("TX-03", 70, 100, 2000000),
+      ]);
+    },
+    "intelligence.district.boundaries": boundaryFixture,
+  });
+  await page.goto(path);
+  await page.getByRole("button", { name: "CA-01", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Synthetic CA-01", exact: true }),
+  ).toBeVisible();
+  await choose(page, "State", "VA");
+  await expect
+    .poll(() => requests.at(-1))
+    .toEqual({ query: { view: "current", state: "VA" } });
+  await expect(
+    page.getByRole("heading", { name: "Districts · 1", exact: true }),
+  ).toBeVisible();
+  await expect(page.locator("tbody tr")).toHaveCount(1);
+  await expect(page.locator("tbody tr")).toContainText("VA-08");
+  await expect(page.locator("strong").filter({ hasText: "–" })).toHaveCount(4);
+  await expect(
+    page.getByText("0 firm nexus · 1 states", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Synthetic CA-01", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "CA-01, score 35", exact: true }),
+  ).toHaveCount(0);
+  await choose(page, "State", "All states");
+  await expect(
+    page.getByRole("heading", { name: "Districts · 3", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Synthetic CA-01", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "CA-01, score 35", exact: true }),
+  ).toHaveAttribute("aria-pressed", "false");
+});
