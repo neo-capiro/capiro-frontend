@@ -5349,5 +5349,27 @@
     "reason": "One cohesive receiver characterization group covers actual advisory shape, absent versus empty state, exact strategy/revision receiving and existing read/check routes.",
     "reviewedBy": "Wave 3 Root independent source and Figma review",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
+    "kind": "function",
+    "symbol": "DecisionControls",
+    "line": 42,
+    "nonblank": 83,
+    "fingerprint": "2334908c7ab0c9fd413ae363010868f38cdfad693c34d28e30e79a890905d03d",
+    "reason": "DecisionControls is unchanged at its exact 83-line fingerprint from the pinned base. This correction only exposes the existing current list to adjacent file presentation; no new decision responsibility or function growth is introduced.",
+    "reviewedBy": "Independent Library reviewer; not author",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 437,
+    "fingerprint": "ec2a5c19bacdbd29d7c5de73f2a86346d2ab2b38afe0fd96afca5157d45018ab",
+    "reason": "The existing intent-view module owns the closed presentation of admitted intent outcomes. The bounded addition adds document-family labels and separates generic preparation copy from actual schedule operations; it neither invents a file nor changes command decisions. Related status/label presentation remains cohesive. No count-only split is warranted for this exact 437-line module fingerprint.",
+    "reviewedBy": "Independent Library reviewer; not author",
+    "reviewedOn": "2026-10-26"
   }
 ]
