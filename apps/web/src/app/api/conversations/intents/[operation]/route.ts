@@ -17,7 +17,10 @@ export async function POST(
     readIntentsConfig(process.env),
     async () => {
       const session = await auth();
-      return session.userId ? session.getToken({ template: "capiro" }) : null;
+      // Meri's membership-gated product routes verify the native Clerk session token through Core,
+      // the same bearer the conversation history, settings and memory routes forward. The capiro
+      // template token is Core's own API credential and is refused there.
+      return session.userId ? session.getToken() : null;
     },
   );
 }
