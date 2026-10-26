@@ -48,7 +48,7 @@ A change is not done until what it replaced is gone.
 
 MF16 hearing player implementation outline — 26 October 2026
 
-Base 9438d2d0 (merged FE212), separate codex/w3-mf16-hearing-media-player-20261026 branch. This source work is excluded from frozen rollout 720741c5. Core producer PR175 is 850f48d18891337196a664b128f23f18e383a279; Meri public contract PR277 is a7da2543a76abb28a95216a2639763d90e487621. Core tree 43c6bfd96c522332d4aaa58d640c97f3826ec484; Meri tree 73d099436e3654fcbb60f3aa481f2f136d1989d3.
+Base 9438d2d0 (merged FE212), separate codex/w3-mf16-hearing-media-player-20261026 branch. This source work is excluded from the immediate release. Core producer PR175 is now 65afb925daa0d9688111fb9cd4b77ae9a6ac7e34 after the independent release-access finding; Meri public contract PR277 remains a7da2543a76abb28a95216a2639763d90e487621 and was independently accepted. Core tree 7d93c277b181a5d048a33069864f238c578fbf52; Meri tree 73d099436e3654fcbb60f3aa481f2f136d1989d3. Core requires independent recheck of the new head.
 
 Extend the existing current-read owner and fixed source-read proxy with the new public contract receiver. The saved source view loads owner audio coverage and a user-selected retained segment. Vidstack owns audio loading/playback; Media Chrome's existing store connects its accessible controls to Vidstack's actual HTML audio provider. Do not implement a media engine, custom transport, source-URL inference, captions, recording activation, or citation timestamp mapping. Display recording offsets and partial coverage honestly. Expired/denied/stale/replaced/closed source or identity disposes the player and discards the signed URL.
 
@@ -64,6 +64,19 @@ The player extends the existing source-read operation and current-read lifecycle
 
 Retained source tooling: Node 24.22.1, TypeScript 5.9.3, the frontend's ESLint configuration and canonical architecture AST scanner. The eleven changed TS/TSX files pass syntax parsing; changed production files have no size review signals. ESLint passed all eleven files, then passed the affected files after the state/render separation and public media-store import correction. Prettier and git diff --check pass. The state/render separation is a same-file hook, not a shared abstraction. The retained lint environment reports that automatic React version detection falls back because this worktree has no installed dependencies; that is not installed-package validation.
 
-Evidence is retained at C:/Users/Administrator/Documents/Codex/2026-10-25/wave2-visible-runtime/outputs/w3-mf16-hearing-media: frontend-lint-final.log, frontend-lint-refactor.log, frontend-lint-browser-final.log and frontend-source-checks.json. Earlier failing diagnostics remain in that folder. Producer evidence is independent: core-tests-frozen.json (6 passing), intel-tests.json (9 passing), meri-http-tests.log (17 passing), and the six passing receiver tests in meri-sparse-import-failure.log. Core/Intel and Meri producer commits above are frozen for independent review; the player's remaining checks do not block reviewing them.
+Evidence is retained at C:/Users/Administrator/Documents/Codex/2026-10-25/wave2-visible-runtime/outputs/w3-mf16-hearing-media: frontend-lint-final.log, frontend-lint-refactor.log, frontend-lint-browser-final.log and frontend-source-checks.json. Earlier failing diagnostics remain in that folder. Updated producer evidence: core-release-recheck-tests.json (9 passing) and the author's rerun of the three unchanged reviewer probes in core-review-probe-recheck.json. The unchanged intel-tests.json (9 passing), meri-http-tests.log (17 passing), and six passing receiver tests in meri-sparse-import-failure.log are reused. Core's corrected commit above is ready for independent recheck; the player's remaining checks do not block it.
 
 Three installed-contract unit tests and six full-host browser cases are authored but NOT RUN. Their remaining prerequisites are Release's generated public contracts from reviewed Meri PR277 and Integration's adopted player dependencies. Then verify actual installed types/public exports, the three unit tests, and the six browser cases including active identity replacement, real native playback/seek/mute/rate, URL disposal, responsive screenshots and accessibility. A production build and authenticated deployed acceptance remain Release/Root work. No package generation, dependency install, lock/vendor mutation, recording activation or deployment was performed by this source lane.
+
+Exact dependency delta for Integration
+
+In apps/web/package.json, add these exact entries to dependencies:
+
+```json
+"@vidstack/react": "1.15.7",
+"media-chrome": "4.19.4"
+```
+
+Replace only that manifest's @capiro/meri-contracts dependency, currently file:../../vendor/capiro-meri-contracts-0.1.15-cc8a6d9f-f60b082509f4.tgz, with the immutable vendor filename and byte hash returned by Release for accepted Meri a7da2543a76abb28a95216a2639763d90e487621 (tree 73d099436e3654fcbb60f3aa481f2f136d1989d3). The new filename/hash is not yet available and must not be invented. Integration owns the root package-lock.json and any existing package provenance records affected by this adoption. No root dependency, React version, client SDK behavior, UI-stream behavior or new public subpath is requested.
+
+The existing @capiro/meri-contracts/conversation-sources export must provide HEARING_MEDIA_READ_SCHEMA, receiveHearingMediaRequest, receiveHearingMediaResponse, HearingMediaReadRequest, HearingMediaReadResponse, and AdmittedHearingMediaRequest. Consumer runtime imports use the first three; the player derives its media/selection types from the public request/response types. Release's generated artifact and adopted libraries are required for the pending installed type, unit and mounted browser checks; the source lane will complete those checks after readiness instead of closing at this handoff.
