@@ -1259,15 +1259,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
-    "kind": "function",
-    "symbol": "NewsletterWorkflow",
-    "fingerprint": "7961cd8d1736147113f121d7fd685387443b9eb2d79a77fffe6418360ad05e04",
-    "reason": "Retain this function as the renderer and navigation composition for one newsletter draft. Its step branches consume a single useNewsletter result and route explicit events back to that hook; desktop/mobile preview, undo/redo buttons, save status and discard confirmation all present the same editing session. The function delegates comments, paper rendering, templates, staging and binding to named components rather than duplicating their state machines. Its client-binding addition passes only the current draft, pending state and the hook's adoption callback, preserving unsaved editor fields in the hook. The stage button and stage branch both reflect the held flag, while the trusted backend remains responsible for access. A new step controller or generic workflow abstraction would duplicate the existing canonical hook instead of clarifying ownership.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
     "kind": "function",
     "symbol": "useNewsletterStaging",
@@ -2492,15 +2483,6 @@
     "reviewedOn": "2026-10-13"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
-    "kind": "function",
-    "symbol": "useNewsletter",
-    "fingerprint": "445e20866f94852ffd471190411a41e12c477e83e76281f00a776e7e84daea29",
-    "reason": "Retain this hook as the owner of one newsletter editing session and its ordered save attempt. Title/body, undo/redo, selected client, current draft, saved status and the save-in-progress ref are coupled by the invariant that a save uses one draft and client scope through create, primary-document update, metadata update and snapshot. The scope generation checks after awaited writes and confirmed-client adoption must update that same session; separating them into unrelated hooks would make stale-save rejection and unsaved-edit preservation harder to follow. Pure preset/content conversion remains in newsletter-model, fixed requests and cancellation in shared Capiro queries, visual composition in NewsletterWorkflow, and Outreach staging in its own hook/component. It explicitly excludes sourceBriefVersion documents from ordinary newsletter initialization and update selection rather than absorbing copied-tab editing.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
-  },
-  {
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
@@ -2868,15 +2850,6 @@
     "reason": "This exact 165-line function retains one authorized library filter/list presentation and its local cursor/loading/error lifetime. The fixed-operation query and canonical client selector remain separate owners. Independent PR158 review explicitly accepted the cohesive function at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de; composition preserves that entire source blob. See docs/wave3-integration-20261026/BRIEF.md.",
     "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
     "reviewedOn": "2026-10-25"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "fe25e0d517a5f699138f7aee1af29dbcf5ca4a369d0d4b3715b57beb257377f9",
-    "reason": "Retain this file as the newsletter workflow presentation owner. Its only local helper, BuilderTools, adds bounded newsletter blocks through an onChange callback; NewsletterWorkflow composes template, builder, review and staging views of the same draft. Editing state and the create/PATCH/snapshot sequence already live in useNewsletter, content rendering in NewsletterPaper, comments in NewsletterComments, destination staging in NewsletterStaging, template selection in NewsletterTemplates, and held-client recovery in DraftClientAssociation. The file neither embeds those service lifecycles nor imports an unrelated feature's private implementation. The added recovery panel and two held-state staging branches connect an existing child boundary to the same draft. Splitting out each JSX step solely to reduce this file's line count would disperse one view composition without moving a distinct authority, persistence or transport owner.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
   },
   {
     "file": "apps/web/src/features/settings/InviteMember.tsx",
@@ -4013,33 +3986,6 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "7ba7f640862c62e4ea572649285cc7b8fc11f87738c45dabab7e3f8a387a0341",
-    "reason": "The ordinary-save lifecycle owner keeps editor state, immutable request recovery and explicit resolution in one captured scope. Its small comparison helper delegates positive disposition to the canonical journal. Splitting persistence or authority into another module would duplicate existing ownership. This exact final corrected body retains known submitted requests across absent or different journal records and preserves other-tab unsent edits. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
-    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
-    "kind": "function",
-    "symbol": "useOrdinaryDraftSave",
-    "fingerprint": "67b05f3110cdad27c6f53ad07b763df0743cc334e01fd71f1499a52d0428fb55",
-    "reason": "One ordinary-save lifecycle function owns editor state, immutable request recovery and explicit resolution in a shared captured scope. Positive acknowledgement/refusal remains with the canonical journal; missing state is not settlement. No persistence or authority owner is duplicated. The exact corrected transitions have independently inspected mounted recovery witnesses. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
-    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "6df8502e4da136253395f755a289a4a55d326929e85d6bd32d2b23811409361c",
-    "reason": "The existing document operation owner gains additive fixed state/save schemas with bounded input and explicit response bindings. The original scoped PR171 design acceptance remains unchanged and matches final source. This is an exact module disposition, not a broad allowance for future operations. Exact independent disposition: W3-UI-PR171-CORRECTION-REVIEW.md, with retained original scoped rationale in W3-UI-PR171-REVIEW.md.",
-    "reviewedBy": "Independent Codex Hermes reviewer, FE171 ff46015bf872155182d7df5f862fa005b03d460c",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/shared/session/recovery/journal.ts",
     "kind": "file",
     "symbol": "<module>",
@@ -4055,6 +4001,69 @@
     "fingerprint": "8e6ace5829103b1bfc9a09a9e2cb47ff451abadba52b134464eadf2af6aa6234",
     "reason": "The module remains state types/helpers plus the single explicit-intent controller. No network stack, DTO/schema, persistence or authorization implementation is added. Exact independent disposition: W3-WS15-CONSUMER-REVIEW.md.",
     "reviewedBy": "m3_scope independent reviewer, FE177 19b67f93c9ac278eff2731b456404667befc2fde",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "f23f461d90f898eb8522660d61c13b25a6454c78993146d97ea5a1331554f809",
+    "reason": "One newsletter presentation module still delegates editing, paper, comments, templates, association and staging. The added wrapper and saved-content renderer connect this view to the existing recovery owner; they add no transport or authorization lifecycle. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+    "kind": "function",
+    "symbol": "NewsletterEditor",
+    "fingerprint": "4ac93708fa8dec480e0bfcba274fe9a7911227e07d36f7918c74b9777b24c595",
+    "reason": "The renamed existing editor composes the same draft's steps and controls. Recovery/readback and frozen/confirmed-save states belong to this composition. Splitting individual JSX branches solely for count would disperse one view without removing a separate responsibility. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+    "kind": "function",
+    "symbol": "useNewsletter",
+    "fingerprint": "2d4f82b6ba6d403020e31eaf34d6097ca5e8c5cc5761d09366125fb178cee581",
+    "reason": "One newsletter session owns local edit history, current title/body, association and save event selection. Existing-draft persistence/recovery is delegated to the ordinary owner; preset/projection conversion stays in newsletter-model. No second journal or permission model is introduced. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+    "kind": "function",
+    "symbol": "useNewsletter > save",
+    "fingerprint": "a4a0e41ddfcc32f06240a39bf5e04985a6a9812df8afd7bb0e4950cd897b9823",
+    "reason": "A bounded existing-draft delegation/return precedes the retained new-creation sequence. Both answer one explicit save action; extracting an alternative persistence abstraction would duplicate ownership. This acceptance does not qualify the separately excluded creation recovery gap. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c33506c1f8d58dadd1f7c27793828ccb9fab95c64d93ba3f2c87ad87eb04afff",
+    "reason": "The established scoped save lifecycle remains together. Typed input/capture/hydration delegation replaces manual-specific coupling while request identity, recovery and positive settlement remain with their existing owners. The module count decreases from 495. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/ordinary-save/useOrdinaryDraftSave.ts",
+    "kind": "function",
+    "symbol": "useOrdinaryDraftSave",
+    "fingerprint": "5fac0d97957528d506d42e9eb1783e71999caacfdca5ca7ad85ee229e8cecc26",
+    "reason": "The same 428-line function owns one captured editor/recovery lifetime. Its limited generic model and confirmed boolean result support the newsletter consumer without copying the state machine or splitting authority across hooks. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
+    "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "fa0039c6058c81938e8ed3e22c95c71c46d0f99f7a5a560520df56ffa3f82ddb",
+    "reason": "This is the existing document operation/schema owner. The bounded newsletter variant joins the manual variant on the same fixed save operation; it does not introduce a serializer service, endpoint, policy decision or unrelated product owner. Exact independent disposition: W3-FE178-ATOMIC-SAVE-REVIEW.md.",
+    "reviewedBy": "Independent Codex lifecycle_trace, FE178 17a584ad583a1455283930faf572374eb9760139",
     "reviewedOn": "2026-10-26"
   }
 ]
