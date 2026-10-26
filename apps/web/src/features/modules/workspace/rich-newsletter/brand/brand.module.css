@@ -50,6 +50,19 @@
 .controls [data-slot="select-trigger"] {
   max-width: 100%;
 }
+.controls button:not([data-slot="select-trigger"]) {
+  align-self: flex-start;
+  justify-self: start;
+}
+.badge {
+  justify-self: start;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--muted-foreground);
+  font-size: 11px;
+  line-height: 17px;
+}
 .record {
   display: grid;
   gap: 8px;
@@ -68,12 +81,24 @@
   flex: 1;
   min-width: 0;
 }
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.swatches > div {
+  display: grid;
+  gap: 6px;
+}
+.swatches code {
+  font-size: 12px;
+  line-height: 18px;
+}
 .swatch {
-  height: 32px;
-  width: 32px;
-  flex-shrink: 0;
+  height: 56px;
+  width: 100%;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .flag {
   display: flex;

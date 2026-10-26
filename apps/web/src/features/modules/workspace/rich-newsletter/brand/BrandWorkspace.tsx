@@ -169,7 +169,7 @@ export function BrandWorkspace({
                         <article className={styles.record} key={logo.assetId}>
                           <strong>{logo.name || "Unnamed logo"}</strong>
                           {kit.draft!.primaryLogoId === logo.assetId && (
-                            <span>Primary</span>
+                            <span className={styles.badge}>Primary</span>
                           )}
                           <p>{logo.alt || "No alt text"}</p>
                           <div className={ui.actions}>
@@ -193,6 +193,7 @@ export function BrandWorkspace({
                       ))}
                       <ActionButton
                         className={ui.button}
+                        primary
                         disabled={kit.draft.logos.length >= 20}
                         onClick={() => setPicking(true)}
                       >
@@ -201,24 +202,33 @@ export function BrandWorkspace({
                     </div>
                   )}
                   {tab === "colors" && (
-                    <div className={ui.details} data-design-node="1176:292644">
-                      <h3>Colors</h3>
+                    <div
+                      className={styles.stack}
+                      data-design-node="1176:292644"
+                    >
                       {(["primary", "secondary"] as const).map((group) => (
-                        <section className={styles.stack} key={group}>
-                          <h4>
+                        <section className={ui.details} key={group}>
+                          <h3>
                             {group === "primary" ? "Primary" : "Secondary"}{" "}
                             colors
-                          </h4>
+                          </h3>
+                          <div className={styles.swatches}>
+                            {kit.draft!.colors[group].map((color, index) => (
+                              <div key={index}>
+                                <span
+                                  className={styles.swatch}
+                                  style={{
+                                    background: /^#[a-f\d]{6}$/i.test(color)
+                                      ? color
+                                      : "transparent",
+                                  }}
+                                />
+                                <code>{color}</code>
+                              </div>
+                            ))}
+                          </div>
                           {kit.draft!.colors[group].map((color, index) => (
                             <div className={styles.color} key={index}>
-                              <span
-                                className={styles.swatch}
-                                style={{
-                                  background: /^#[a-f\d]{6}$/i.test(color)
-                                    ? color
-                                    : "transparent",
-                                }}
-                              />
                               <BrandText
                                 label={`${group} color ${index + 1}`}
                                 value={color}
@@ -257,75 +267,90 @@ export function BrandWorkspace({
                     </div>
                   )}
                   {tab === "fonts" && (
-                    <div className={ui.details} data-design-node="1176:292904">
-                      <h3>Fonts</h3>
-                      <BrandFont
-                        label="Heading font"
-                        kit={kit.draft}
-                        value={kit.draft.fonts.heading}
-                        change={(value) =>
-                          kit.edit((next) => {
-                            next.fonts.heading = value;
-                          })
-                        }
-                      />
-                      <BrandFont
-                        label="Body font"
-                        kit={kit.draft}
-                        value={kit.draft.fonts.body}
-                        change={(value) =>
-                          kit.edit((next) => {
-                            next.fonts.body = value;
-                          })
-                        }
-                      />
-                      <Field label="Upload a font" htmlFor={fontFileId}>
-                        <TextInput
-                          id={fontFileId}
-                          type="file"
-                          accept=".ttf,.otf,.woff,.woff2"
-                          onChange={(event) => setFile(event.target.files?.[0])}
+                    <div
+                      className={styles.stack}
+                      data-design-node="1176:292904"
+                    >
+                      <section className={ui.details}>
+                        <h3>Font choices</h3>
+                        <BrandFont
+                          label="Heading font"
+                          kit={kit.draft}
+                          value={kit.draft.fonts.heading}
+                          change={(value) =>
+                            kit.edit((next) => {
+                              next.fonts.heading = value;
+                            })
+                          }
                         />
-                      </Field>
-                      <p className={styles.help}>
-                        One TTF, OTF, WOFF or WOFF2, up to 2 MiB. The server
-                        validates its bytes. Upload does not save Brand Kit.
-                      </p>
-                      <ActionButton
-                        className={ui.button}
-                        disabled={
-                          !file || kit.draft.fonts.uploaded.length >= 20
-                        }
-                        onClick={() => void kit.upload(file)}
-                      >
-                        Upload font asset
-                      </ActionButton>
-                      {kit.draft.fonts.uploaded.map((font) => (
-                        <article className={styles.record} key={font.assetId}>
-                          <strong>{font.name || "Unnamed font"}</strong>
-                          <span>{font.format}</span>
-                          <ActionButton
-                            className={ui.button}
-                            disabled={fontIsSelected(kit.draft!, font.family)}
-                            onClick={() =>
-                              kit.edit((next) => {
-                                next.fonts.uploaded =
-                                  next.fonts.uploaded.filter(
-                                    (item) => item.assetId !== font.assetId,
-                                  );
-                              })
+                        <BrandFont
+                          label="Body font"
+                          kit={kit.draft}
+                          value={kit.draft.fonts.body}
+                          change={(value) =>
+                            kit.edit((next) => {
+                              next.fonts.body = value;
+                            })
+                          }
+                        />
+                        <p className={styles.help}>
+                          Font preview: Your weekly policy briefing.
+                        </p>
+                      </section>
+                      <section className={ui.details}>
+                        <h3>Uploaded custom fonts</h3>
+                        <Field label="Upload a font" htmlFor={fontFileId}>
+                          <TextInput
+                            id={fontFileId}
+                            type="file"
+                            accept=".ttf,.otf,.woff,.woff2"
+                            onChange={(event) =>
+                              setFile(event.target.files?.[0])
                             }
-                          >
-                            Remove font from kit
-                          </ActionButton>
-                          {fontIsSelected(kit.draft!, font.family) && (
-                            <p>
-                              Choose a different heading, body or button font
-                              before removing this reference.
-                            </p>
-                          )}
-                        </article>
-                      ))}
+                          />
+                        </Field>
+                        <p className={styles.help}>
+                          One TTF, OTF, WOFF or WOFF2, up to 2 MiB. The server
+                          validates its bytes. Upload does not save Brand Kit.
+                        </p>
+                        <ActionButton
+                          className={ui.button}
+                          primary
+                          disabled={
+                            !file || kit.draft.fonts.uploaded.length >= 20
+                          }
+                          onClick={() => void kit.upload(file)}
+                        >
+                          Upload font asset
+                        </ActionButton>
+                        {kit.draft.fonts.uploaded.map((font) => (
+                          <article className={styles.record} key={font.assetId}>
+                            <span className={styles.badge}>Uploaded</span>
+                            <strong>{font.name || "Unnamed font"}</strong>
+                            <span>{font.format}</span>
+                            <ActionButton
+                              className={ui.button}
+                              disabled={fontIsSelected(kit.draft!, font.family)}
+                              onClick={() =>
+                                kit.edit((next) => {
+                                  next.fonts.uploaded =
+                                    next.fonts.uploaded.filter(
+                                      (item) => item.assetId !== font.assetId,
+                                    );
+                                })
+                              }
+                            >
+                              Remove font from kit
+                            </ActionButton>
+                            {fontIsSelected(kit.draft!, font.family) && (
+                              <p>
+                                Choose a different heading, body or button font
+                                before removing this reference.
+                              </p>
+                            )}
+                          </article>
+                        ))}
+                      </section>
                     </div>
                   )}
                   {tab === "buttons" && (
@@ -335,7 +360,7 @@ export function BrandWorkspace({
                         <article className={styles.record} key={button.id}>
                           <strong>{button.name || "Unnamed button"}</strong>
                           {kit.draft!.primaryButtonId === button.id && (
-                            <span>Primary</span>
+                            <span className={styles.badge}>Primary</span>
                           )}
                           <p>
                             {button.shape} · {button.variant}
