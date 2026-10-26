@@ -141,7 +141,7 @@ export function SessionComposer({
   );
 }
 
-/** One selected-conversation frame/composer; only the session-bound body is replaced. */
+/** One selected-conversation frame; credential renewal preserves the same run's local presentation. */
 export function ConversationView({
   session,
   scope,
@@ -152,8 +152,15 @@ export function ConversationView({
   const [composer] = useState(createConversationComposer);
   const ready =
     !session.accessLost && !session.latestTarget ? session.ready : undefined;
+  const [retained, setRetained] = useState(ready);
+  if (ready && retained !== ready) setRetained(ready);
+  const displayed =
+    ready ??
+    (!session.accessLost && !session.latestTarget && session.connection.renewing
+      ? retained
+      : undefined);
   return (
-    <FeedbackContext.Provider value={ready?.port ?? null}>
+    <FeedbackContext.Provider value={displayed?.port ?? null}>
       <ConversationFrame
         scope={scope}
         historyStatus={
@@ -165,10 +172,10 @@ export function ConversationView({
           <SessionComposer session={session} scope={scope} channel={composer} />
         }
       >
-        {ready ? (
+        {displayed ? (
           <MeriLiveConversation
-            key={ready.lifetimeKey}
-            port={ready.port}
+            key={displayed.lifetimeKey}
+            port={displayed.port}
             composer={composer}
             initialPrompt={session.connection.pending}
             earlier={session.earlier}
