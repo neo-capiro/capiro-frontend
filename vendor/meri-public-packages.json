@@ -230,6 +230,45 @@
       "mergedProducerCommit": "0d128fe18c91530ab67de8f729b769c6e4b64e55",
       "mergedProducerTree": "5cacccd0535e815456b9e5f7205facc5e49c3903",
       "mergedProducerPackageInputTree": "10c3b953a4f52c2b3a7df7c39dd9a95708cb57e8"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.15.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.15",
+      "sourceCommit": "0a0869cefb3157e90f3d902ed3e7d7ab0d0da0da",
+      "sourceTree": "d14c4d07b57bd1cbd51a69e258f89b34942844c3",
+      "packageInputTree": "05257855afe58a343b5dd13ae574aa50cbc586e3",
+      "sha256": "687783d1290a030e59132c73921286a27dd4b51252c707e03b4d0bc02f00ff38",
+      "integrity": "sha512-PEWUHTs9LcIhyQh1Rnt1umnNZbW8FSf8guQIwUWvaaEHyVROERDFNiCxJ9W2uV2QYgbJ/y4+YsAZdnNLH/pMvQ==",
+      "bytes": 906715,
+      "regularEntryCount": 69,
+      "status": "accepted-source-and-release-archive-gates; frontend-install-and-feature-qualification-pending",
+      "purpose": "Coherent MF16 native source and recorded run-usage public package cohort.",
+      "qualification": "Release isolated npm ci/npm ls and 37 public export runtime checks pass; Integration verifies every archived member against exact Git source. Frontend install, typecheck, build and mounted feature qualification remain pending.",
+      "releaseReceiptSha256": "80bcf2643fee5c61430fca28167b3748886065113afc7e64491257d736835546",
+      "peerDependencies": {}
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.5.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.5",
+      "sourceCommit": "0a0869cefb3157e90f3d902ed3e7d7ab0d0da0da",
+      "sourceTree": "d14c4d07b57bd1cbd51a69e258f89b34942844c3",
+      "packageInputTree": "3828c7e6a5454004e63f132b736fcca94dfbf2bd",
+      "sha256": "9a0db7c842d5d6862b70fdc2999d8455dd2c469d92f0548a6d3b4c6e423418e5",
+      "integrity": "sha512-NLpovDsSXFDD13kckj5cmFYpP+rBS/FEx4uiKwnDXF+ULWFaSjC8hBivEXwMUpDdPLDcvyZeXS4L4ZUgfccsSg==",
+      "bytes": 2949,
+      "regularEntryCount": 6,
+      "status": "accepted-source-and-release-archive-gates; frontend-install-and-feature-qualification-pending",
+      "purpose": "Coherent MF16 native source and recorded run-usage public package cohort.",
+      "qualification": "Release isolated npm ci/npm ls and 37 public export runtime checks pass; Integration verifies every archived member against exact Git source. Frontend install, typecheck, build and mounted feature qualification remain pending.",
+      "releaseReceiptSha256": "80bcf2643fee5c61430fca28167b3748886065113afc7e64491257d736835546",
+      "peerDependencies": {
+        "@capiro/meri-contracts": "0.1.15",
+        "ai": "7.0.137"
+      }
     }
   ]
 }

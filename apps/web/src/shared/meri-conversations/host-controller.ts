@@ -15,6 +15,10 @@ import {
   type ConversationContext,
 } from "./session";
 import type { ConversationSessionReceipt } from "@capiro/meri-contracts/conversation-session";
+import {
+  createConversationReads,
+  type ConversationReads,
+} from "./current-reads";
 
 export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
   readonly context: ConversationContext;
@@ -22,6 +26,7 @@ export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
   readonly artifacts: ArtifactAccess;
   /** Prepared-action list and decisions, checked by the public receiver under the same session lifetime. */
   readonly intents: IntentsAccess;
+  readonly reads: ConversationReads;
 };
 export type ConversationAccount = Readonly<{
   tenantId: string;
@@ -82,6 +87,13 @@ export class ConversationHostController extends SessionLifetimeController<
               : "x-meri-action-session",
           }),
           context: session.context,
+          reads: createConversationReads(
+            session.context,
+            signal,
+            lifetime.isCurrent,
+            lifetime.onAccessLost,
+            fetcher,
+          ),
           artifacts: createArtifactAccess(session.credential, signal, fetcher),
           intents: createIntentsAccess(
             session.credential,

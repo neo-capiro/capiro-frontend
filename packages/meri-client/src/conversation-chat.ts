@@ -2,11 +2,13 @@ import { Chat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import type { UIMessageChunk } from 'ai';
 import { validateUIEvent } from '@capiro/meri-contracts/browser';
+import { receiveNativeBillTextSourceEvent, BILL_TEXT_SOURCE_EVENT } from '@capiro/meri-contracts/conversation-sources';
 import {
   conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse,
   ConversationResponseError,
 } from '@capiro/meri-contracts/conversation-application';
 import type { MeriUIMessage } from '@capiro/meri-ui-stream/protocol';
+import type { ConversationEvent } from '@capiro/meri-contracts/conversation-application';
 import { MeriGuardedTransport } from './guarded-transport.js';
 import { ConversationUnavailable } from './conversation-network.js';
 import type { ConversationNetwork } from './conversation-network.js';
@@ -14,7 +16,7 @@ import type { ConversationObservation } from './conversation-observation.js';
 
 export interface ConversationChat {
   readonly chat: Chat<MeriUIMessage>;
-  readonly transport: MeriGuardedTransport;
+  readonly transport: MeriGuardedTransport<ConversationEvent>;
 }
 
 /** Only the pinned producer's content-free lifecycle frames may bypass event admission. */
@@ -88,6 +90,8 @@ export function conversationChat(
       };
     },
     validateEvent: value => {
+      if (value !== null && typeof value === 'object' && 'type' in value && value.type === BILL_TEXT_SOURCE_EVENT)
+        return receiveNativeBillTextSourceEvent(new TextEncoder().encode(JSON.stringify(value)));
       if (!validateUIEvent(value)) throw new ConversationUnavailable('invalid-event');
       return value;
     },
