@@ -57,18 +57,23 @@ async function setup(
       },
     }),
   );
-  await page.route("**/api/capiro/meri.conversation.bootstrap.v2", (route) => {
-    const body = route.request().postDataJSON().body;
-    calls.push({ operation: "bootstrap", body });
-    return route.fulfill({
-      json: {
-        ...body,
-        conversationId: f.context.conversationId,
-        tenantId: f.context.tenantId,
-        actorId,
-      },
-    });
-  });
+  await page.route(
+    general
+      ? "**/api/capiro/meri.conversation.bootstrap.v2"
+      : "**/api/capiro/meri.conversation.bootstrap",
+    (route) => {
+      const body = route.request().postDataJSON().body;
+      calls.push({ operation: "bootstrap", body });
+      return route.fulfill({
+        json: {
+          ...body,
+          conversationId: f.context.conversationId,
+          tenantId: f.context.tenantId,
+          actorId,
+        },
+      });
+    },
+  );
   await page.route("**/api/conversations/intents/list", (route) =>
     route.fulfill({
       json: {
@@ -368,6 +373,10 @@ test("chat routine uses schedule approval only and restores saved unknown approv
     page.getByRole("button", { name: "Finish review" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Finish review" }).click();
+  // Finish persists the acknowledged disposition asynchronously before reload.
+  await expect(
+    page.getByText("The routine change was acknowledged."),
+  ).toBeVisible();
   await page.reload();
   await expect(
     page.getByText("The routine change was acknowledged."),
