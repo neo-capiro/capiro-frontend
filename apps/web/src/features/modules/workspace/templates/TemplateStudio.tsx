@@ -8,15 +8,12 @@ import {
   DropdownMenuTrigger,
 } from "@capiro/ui/dropdown-menu";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type {
   OutreachTemplate,
   OutreachTemplateDetail,
 } from "../../../../shared/capiro/operations/outreach-template-schemas";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../../shared/capiro/queries";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
@@ -29,16 +26,52 @@ import {
 import styles from "../workspace.module.css";
 import { TemplateDetails } from "./TemplateDetails";
 import { TemplateWizard } from "./TemplateWizard";
+import { CampaignPicker } from "./CampaignPicker";
 import { workspaceHref } from "../workspace-route";
 import presentation from "./template-presentation.module.css";
+import {
+  TemplateCommandsProvider,
+  useTemplateCommands,
+} from "./useTemplateCommands";
+import { TemplateRecoveryPanel } from "./TemplateRecoveryPanel";
+import historyStyles from "./template-history.module.css";
 
-export function TemplateStudio({
+export function TemplateStudio(props: {
+  onClose: () => void;
+  initialClientId?: string;
+}) {
+  const me = useCapiroQuery("me.read", {});
+  return (
+    <StatusPanel loading={me.loading} error={me.error} onRetry={me.reload}>
+      {me.data && (
+        <TemplateCommandsProvider
+          key={JSON.stringify([
+            me.data.tenant.id,
+            me.data.user.id,
+            me.data.user.clerkUserId,
+            props.initialClientId,
+          ])}
+          actor={{
+            tenantId: me.data.tenant.id,
+            userId: me.data.user.id,
+            clerkUserId: me.data.user.clerkUserId,
+          }}
+        >
+          <TemplateStudioView {...props} />
+        </TemplateCommandsProvider>
+      )}
+    </StatusPanel>
+  );
+}
+
+function TemplateStudioView({
   onClose,
   initialClientId,
 }: {
   onClose: () => void;
   initialClientId?: string;
 }) {
+  const commands = useTemplateCommands();
   const [scope, setScope] = useState("all");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<"updated" | "name" | "usage" | "last_used">(
@@ -47,6 +80,7 @@ export function TemplateStudio({
   const [wizard, setWizard] = useState<true | OutreachTemplateDetail>();
   const [detail, setDetail] = useState<{
     id: string;
+    clientId?: string;
     mode: "use" | "history" | "settings";
   }>();
   const [confirm, setConfirm] = useState<{
@@ -65,52 +99,78 @@ export function TemplateStudio({
       sort,
     },
   });
-  const campaigns = useCapiroQuery(
-    "engagement.sessions",
-    { query: { limit: 100, offset: 0, includeArchived: false } },
-    { enabled: fromCampaign },
-  );
-  const duplicate = useCapiroMutation("workspace.template.duplicate");
-  const archive = useCapiroMutation("workspace.template.archive");
-  const publish = useCapiroMutation("workspace.template.publish");
-  const saveCampaign = useCapiroMutation("workspace.template.from-campaign");
-  const pending = duplicate.pending || archive.pending || publish.pending;
-  const error = duplicate.error ?? archive.error ?? publish.error;
+  const refreshedMetadata = useRef("");
+  const reloadList = list.reload;
+  useEffect(() => {
+    const record = commands.record;
+    if (
+      record?.metadataAcknowledged &&
+      refreshedMetadata.current !== record.requestId
+    ) {
+      refreshedMetadata.current = record.requestId;
+      reloadList();
+    }
+  }, [commands.record, reloadList]);
+  const pending = commands.busy;
+  const error = commands.error;
   function action(
     kind: "use" | "history" | "settings" | "duplicate" | "archive" | "publish",
     template: OutreachTemplate,
   ) {
     if (kind === "use" || kind === "history" || kind === "settings")
-      setDetail({ id: template.id, mode: kind });
+      setDetail({
+        id: template.id,
+        mode: kind,
+        clientId: template.clientId ?? undefined,
+      });
     else {
-      duplicate.reset();
-      archive.reset();
-      publish.reset();
+      if (commands.blocked) return;
       setConfirm({ template, action: kind });
     }
   }
   async function apply() {
-    if (!confirm) return;
+    if (!confirm || commands.blocked) return;
     const params = { templateId: confirm.template.id };
-    try {
-      if (confirm.action === "archive") await archive.run({ params });
-      else if (confirm.action === "publish") await publish.run({ params });
-      else await duplicate.run({ params, body: {} });
+    const completed =
+      confirm.action === "publish"
+        ? confirm.template.currentDraftVersionId &&
+          (await commands.submit({
+            operation: "workspace.template.publish",
+            accessClientId: confirm.template.clientId ?? undefined,
+            input: {
+              params,
+              body: {
+                expectedDraftVersionId: confirm.template.currentDraftVersionId,
+              },
+            },
+          }))
+        : confirm.action === "archive"
+          ? await commands.submit({
+              operation: "workspace.template.archive",
+              accessClientId: confirm.template.clientId ?? undefined,
+              input: { params },
+            })
+          : await commands.submit({
+              operation: "workspace.template.duplicate",
+              accessClientId: confirm.template.clientId ?? undefined,
+              input: {
+                params,
+                body: { clientId: confirm.template.clientId ?? undefined },
+              },
+            });
+    if (completed && completed.result !== undefined) {
       setConfirm(undefined);
       list.reload();
-    } catch {
-      /* Each response/error is attributed to its own operation. */
     }
   }
   async function fromSession() {
-    try {
-      await saveCampaign.run({
-        body: { sessionId, name: campaignName, scope: "private" },
-      });
+    const completed = await commands.submit({
+      operation: "workspace.template.from-campaign",
+      input: { body: { sessionId, name: campaignName, scope: "private" } },
+    });
+    if (completed?.result !== undefined) {
       setFromCampaign(false);
       list.reload();
-    } catch {
-      /* Preserve the campaign id and template name. */
     }
   }
   const templates = (list.data ?? []).filter((template) =>
@@ -120,9 +180,20 @@ export function TemplateStudio({
         : template.status === "active"
       : template.scope === scope,
   );
+  if (!commands.ready)
+    return <TemplateRecoveryPanel onAcknowledged={list.reload} />;
   return (
     <section className={styles.screen} data-design-node="1064:254094">
       <PageHeader title="Workspace" />
+      <TemplateRecoveryPanel
+        onAcknowledged={() => {
+          list.reload();
+          setDetail(undefined);
+          setWizard(undefined);
+          setConfirm(undefined);
+          setFromCampaign(false);
+        }}
+      />
       <nav className={presentation.workspaceTabs} aria-label="Workspace views">
         <button onClick={onClose}>Documents</button>
         <span aria-current="page">Template Studio</span>
@@ -155,7 +226,11 @@ export function TemplateStudio({
             ]}
           />
           <ActionButton onClick={list.reload}>Refresh</ActionButton>
-          <ActionButton primary onClick={() => setWizard(true)}>
+          <ActionButton
+            primary
+            disabled={commands.blocked}
+            onClick={() => setWizard(true)}
+          >
             + Create template
           </ActionButton>
           <DropdownMenu>
@@ -163,7 +238,13 @@ export function TemplateStudio({
               <ActionButton aria-label="More template actions">⋯</ActionButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onSelect={() => setFromCampaign(true)}>
+              <DropdownMenuItem
+                disabled={commands.blocked}
+                onSelect={() => {
+                  setSessionId("");
+                  setFromCampaign(true);
+                }}
+              >
                 Save campaign as template
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -224,6 +305,7 @@ export function TemplateStudio({
               <TemplateCard
                 key={template.id}
                 template={template}
+                writesBlocked={commands.blocked}
                 onAction={action}
               />
             ))}
@@ -241,6 +323,7 @@ export function TemplateStudio({
         <TemplateDetails
           key={detail.id}
           id={detail.id}
+          clientId={detail.clientId}
           mode={detail.mode}
           onClose={() => setDetail(undefined)}
           onEdit={setWizard}
@@ -266,7 +349,15 @@ export function TemplateStudio({
             >
               Cancel
             </ActionButton>
-            <ActionButton primary disabled={pending} onClick={apply}>
+            <ActionButton
+              primary
+              disabled={
+                commands.blocked ||
+                (confirm?.action === "publish" &&
+                  !confirm.template.currentDraftVersionId)
+              }
+              onClick={apply}
+            >
               {pending ? "Saving…" : "Confirm"}
             </ActionButton>
           </>
@@ -275,14 +366,17 @@ export function TemplateStudio({
         <p>{confirm?.template.name}</p>
         {error && (
           <p role="alert" className={styles.error}>
-            {error.message}
+            {error}
           </p>
         )}
       </Modal>
       <Modal
         open={fromCampaign}
-        onOpenChange={setFromCampaign}
-        title="Save campaign as template"
+        className={`${historyStyles.dialog} ${historyStyles.saveDialog}`}
+        onOpenChange={(open) => {
+          if (!commands.busy) setFromCampaign(open);
+        }}
+        title="Keep this reusable approach"
         description="Capture the reusable settings from an existing Outreach V3 campaign."
         footer={
           <>
@@ -291,9 +385,7 @@ export function TemplateStudio({
             </ActionButton>
             <ActionButton
               primary
-              disabled={
-                saveCampaign.pending || !campaignName.trim() || !sessionId
-              }
+              disabled={commands.blocked || !campaignName.trim() || !sessionId}
               onClick={fromSession}
             >
               Save private draft
@@ -302,39 +394,25 @@ export function TemplateStudio({
         }
       >
         <div className={styles.form}>
-          <Field label="Source campaign" htmlFor="template-session-id">
-            <SelectInput
-              id="template-session-id"
-              disabled={saveCampaign.pending}
+          {fromCampaign && (
+            <CampaignPicker
               value={sessionId}
-              onValueChange={setSessionId}
-              options={[
-                { value: "", label: "Choose an Outreach campaign" },
-                ...(campaigns.data ?? []).map((campaign) => ({
-                  value: campaign.id,
-                  label:
-                    campaign.title || campaign.topic || "Untitled campaign",
-                })),
-              ]}
+              onChange={setSessionId}
+              disabled={commands.blocked}
             />
-          </Field>
-          {campaigns.error && (
-            <p role="alert" className={styles.error}>
-              {campaigns.error.message}
-            </p>
           )}
-          {campaigns.loading && <p role="status">Loading campaigns…</p>}
           <Field label="Template name" htmlFor="template-from-session-name">
             <TextInput
+              disabled={commands.blocked}
               id="template-from-session-name"
               maxLength={160}
               value={campaignName}
               onChange={(event) => setCampaignName(event.target.value)}
             />
           </Field>
-          {saveCampaign.error && (
+          {commands.error && (
             <p role="alert" className={styles.error}>
-              {saveCampaign.error.message}
+              {commands.error}
             </p>
           )}
         </div>

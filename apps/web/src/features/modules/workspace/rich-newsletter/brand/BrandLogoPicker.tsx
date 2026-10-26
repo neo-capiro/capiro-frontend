@@ -23,6 +23,10 @@ export function BrandLogoPicker({
     asset?.currentRevision &&
     asset.id.toLowerCase() === picker.selectedId?.toLowerCase() &&
     ["image/png", "image/jpeg"].includes(asset.mimeType);
+  const refresh = () => {
+    picker.refresh();
+    picker.folders.reload();
+  };
   const leave = () => {
     picker.clear();
     close();
@@ -71,7 +75,7 @@ export function BrandLogoPicker({
         </>
       ) : (
         <>
-          <AssetLibrary picker={picker} refresh={picker.refresh} />
+          <AssetLibrary picker={picker} refresh={refresh} />
           <AssetUpload upload={upload} viewDetails={picker.viewUploaded} />
         </>
       )}

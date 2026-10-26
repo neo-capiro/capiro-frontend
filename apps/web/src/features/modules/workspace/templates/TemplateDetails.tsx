@@ -1,19 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useRef, useState } from "react";
-import type {
-  OutreachTemplateDetail,
-  OutreachTemplateUseReceipt,
-} from "../../../../shared/capiro/operations/outreach-template-schemas";
-import {
-  useCapiroMutation,
-  useCapiroQuery,
-} from "../../../../shared/capiro/queries";
+import { useState } from "react";
+import type { OutreachTemplateDetail } from "../../../../shared/capiro/operations/outreach-template-schemas";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import {
   ActionButton,
-  Badge,
-  DataTable,
   Field,
   Modal,
   SelectInput,
@@ -23,73 +14,55 @@ import {
 import styles from "../workspace.module.css";
 import { TemplateSettings } from "./TemplateSettings";
 import presentation from "./template-presentation.module.css";
+import { TemplateHistory } from "./TemplateHistory";
+import { useTemplateCommands } from "./useTemplateCommands";
+import historyStyles from "./template-history.module.css";
 
-function ApplicationReceipt({
-  receipt,
+function UseTemplate({
+  detail,
+  onApplied,
 }: {
-  receipt: OutreachTemplateUseReceipt;
+  detail: OutreachTemplateDetail;
+  onApplied: () => void;
 }) {
-  return (
-    <div className={styles.form}>
-      <p className={styles.success}>
-        Template applied · Version {receipt.receipt.templateVersionNumber}
-      </p>
-      {(["inherited", "refreshed", "unresolved", "unavailable"] as const).map(
-        (section) => (
-          <section key={section}>
-            <h3>{section[0]!.toUpperCase() + section.slice(1)}</h3>
-            {receipt.receipt[section].map((item, index) => (
-              <p key={`${item.field}:${index}`}>
-                <strong>{item.label}</strong>
-                <span className={styles.secondary}>{item.detail}</span>
-              </p>
-            ))}
-            {!receipt.receipt[section].length && (
-              <p className={styles.footnote}>None</p>
-            )}
-          </section>
-        ),
-      )}
-      <p>Recipients and live evidence must be reviewed in Outreach.</p>
-      <Link
-        href={`/modules/engagement?session=${encodeURIComponent(receipt.sessionId)}`}
-      >
-        Open Outreach draft →
-      </Link>
-    </div>
-  );
-}
-
-function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
   const version = detail.versions.find(
     (value) => value.id === detail.template.publishedVersionId,
   );
   const clients = useCapiroQuery("workspace.clients", {});
-  const [clientId, setClientId] = useState(detail.template.clientId ?? "");
-  const [title, setTitle] = useState("");
-  const [values, setValues] = useState<Record<string, string>>({});
-  const requestKey = useRef(crypto.randomUUID());
-  const apply = useCapiroMutation("workspace.template.use");
+  const commands = useTemplateCommands();
+  const retained = commands.record?.command;
+  const submitted =
+    retained?.operation === "workspace.template.use" &&
+    retained.input.params.templateId === detail.template.id
+      ? retained.input.body
+      : undefined;
+  const [clientId, setClientId] = useState(
+    submitted ? (submitted.clientId ?? "") : (detail.template.clientId ?? ""),
+  );
+  const [title, setTitle] = useState(submitted?.title ?? "");
+  const [values, setValues] = useState<Record<string, string>>(
+    submitted?.variableValues ?? {},
+  );
   async function use() {
-    try {
-      await apply.run({
+    const completed = await commands.submit({
+      operation: "workspace.template.use",
+      input: {
         params: { templateId: detail.template.id },
         body: {
-          requestKey: requestKey.current,
+          requestKey: crypto.randomUUID(),
           title: title || undefined,
           clientId: clientId || undefined,
           variableValues: values,
         },
-      });
-    } catch {
-      /* Keep the same idempotency key across acknowledgement loss. */
-    }
+      },
+    });
+    if (completed?.result !== undefined) onApplied();
   }
-  if (apply.data) return <ApplicationReceipt receipt={apply.data} />;
   return (
     <div className={styles.form}>
       <Field label="Client" htmlFor="template-use-client">
         <SelectInput
+          disabled={commands.blocked}
           id="template-use-client"
           value={clientId}
           onValueChange={setClientId}
@@ -104,6 +77,7 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
       </Field>
       <Field label="Campaign title" htmlFor="template-use-title">
         <TextInput
+          disabled={commands.blocked}
           id="template-use-title"
           value={title}
           maxLength={240}
@@ -119,6 +93,7 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
         >
           {variable.type === "choice" ? (
             <SelectInput
+              disabled={commands.blocked}
               id={`template-answer-${variable.key}`}
               value={values[variable.key] ?? variable.defaultValue ?? ""}
               onValueChange={(value) =>
@@ -137,6 +112,7 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
             />
           ) : (
             <TextInput
+              disabled={commands.blocked}
               id={`template-answer-${variable.key}`}
               type={
                 variable.type === "date"
@@ -161,16 +137,17 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
           )}
         </Field>
       ))}
-      {apply.error && (
+      {commands.error && (
         <p role="alert" className={styles.error}>
-          {apply.error.message}
+          {commands.error}
         </p>
       )}
       <ActionButton
         primary
         disabled={
+          commands.blocked ||
           !detail.capabilities.canUse ||
-          apply.pending ||
+          commands.busy ||
           !version ||
           version.spec.variables.some(
             (variable) =>
@@ -180,7 +157,7 @@ function UseTemplate({ detail }: { detail: OutreachTemplateDetail }) {
         }
         onClick={use}
       >
-        {apply.pending ? "Applying…" : "Apply template"}
+        {commands.busy ? "Applying…" : "Apply template"}
       </ActionButton>
     </div>
   );
@@ -192,28 +169,43 @@ export function TemplateDetails({
   onClose,
   onEdit,
   onSettingsSaved,
+  clientId,
 }: {
   id: string;
+  clientId?: string;
   mode: "use" | "history" | "settings";
   onClose: () => void;
   onEdit: (detail: OutreachTemplateDetail) => void;
   onSettingsSaved: () => void;
 }) {
+  const [selectedClientId, setSelectedClientId] = useState(clientId);
   const query = useCapiroQuery("workspace.template", {
     params: { templateId: id },
+    query: { clientId: selectedClientId },
   });
   return (
     <Modal
       open
-      className={mode === "settings" ? presentation.settingsDialog : undefined}
+      className={
+        mode === "settings"
+          ? presentation.settingsDialog
+          : mode === "history"
+            ? historyStyles.dialog
+            : undefined
+      }
       onOpenChange={(open) => {
         if (!open) onClose();
       }}
+      footer={
+        mode === "history" ? (
+          <ActionButton onClick={onClose}>Close</ActionButton>
+        ) : undefined
+      }
       title={
         mode === "use"
           ? "Use template · Questions"
           : mode === "history"
-            ? "Template version history"
+            ? (query.data?.template.name ?? "Template version history")
             : "Edit template"
       }
     >
@@ -224,52 +216,25 @@ export function TemplateDetails({
       >
         {query.data && (
           <div className={mode === "settings" ? undefined : styles.form}>
-            {mode !== "settings" && <h3>{query.data.template.name}</h3>}
+            {mode === "use" && <h3>{query.data.template.name}</h3>}
             {mode === "use" ? (
-              <UseTemplate detail={query.data} />
+              <UseTemplate detail={query.data} onApplied={onClose} />
             ) : mode === "settings" ? (
               <TemplateSettings
                 detail={query.data}
                 onClose={onClose}
-                onSaved={() => {
+                onSaved={(savedClientId) => {
+                  setSelectedClientId(savedClientId);
                   query.reload();
                   onSettingsSaved();
                 }}
               />
             ) : (
               <>
-                <p>{query.data.template.description}</p>
-                <Badge>{query.data.template.scope}</Badge>
-                <DataTable
-                  rows={query.data.versions}
-                  rowKey={(version) => version.id}
-                  caption="Template version history"
-                  columns={[
-                    {
-                      key: "version",
-                      label: "VERSION",
-                      render: (version) => `v${version.versionNumber}`,
-                    },
-                    {
-                      key: "status",
-                      label: "STATE",
-                      render: (version) => version.lifecycle,
-                    },
-                    {
-                      key: "created",
-                      label: "CREATED",
-                      render: (version) =>
-                        new Date(version.createdAt).toLocaleString(),
-                    },
-                    {
-                      key: "hash",
-                      label: "PIN",
-                      render: (version) => version.contentHash.slice(0, 12),
-                    },
-                  ]}
-                />
+                <TemplateHistory key={id} detail={query.data} />
                 {query.data.capabilities.canEdit && (
                   <ActionButton
+                    className={historyStyles.edit}
                     onClick={() => {
                       onEdit(query.data!);
                       onClose();

@@ -15,6 +15,7 @@ import {
   AssetManagementNotice,
 } from "./AssetManagementForm";
 import { AssetHistory } from "./AssetHistory";
+import { StockImageControl } from "./StockImageControl";
 import {
   managementLabels,
   type AssetManagementAction,
@@ -127,6 +128,7 @@ function AssetPicker(props: Props) {
       <ActionButton onClick={() => view.changeOpen(true)}>
         Replace from image library
       </ActionButton>
+      <StockImageControl onInsert={props.onInsert} />
       <Modal
         open={view.open}
         onOpenChange={view.changeOpen}
