@@ -4602,9 +4602,9 @@
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/assets/AssetFolders.tsx",
     "kind": "function",
     "symbol": "AssetFolders",
-    "fingerprint": "3af93a0cac36235ce69db60d4a421f97578c556a22ceb27c72e07214a2275131",
-    "reason": "One folder-filter and action group delegates reads and changes to existing feature owners; no new authority or mutation transport.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
+    "fingerprint": "1c814e2a9742846f356e1fc2283ce599ad250238fe415fe9fcd5d5d062cf35bf",
+    "reason": "FE720 repair 2761c645a0c1ecc3a510ffbeca2091c656b03ac2: one existing folder-selection view conditionally renders its management action row only when the caller supplies a real management callback. The full AssetReplaceControl caller and all its handlers remain byte-identical; BrandLogoPicker retains browse/select/upload responsibility. This capability guard adds no state, writer, policy or no-op action. Reviewed with the exact four-file delta, before/after affected type closure and focused mounted regression in W3-FE720-BRAND-PICKER-REPAIR-REVIEW.md.",
+    "reviewedBy": "m3_scope, independent FE720 repair source/responsibility reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
