@@ -3,7 +3,7 @@ import { defineOperation } from "../contracts";
 import { strategyDetail, strategyId } from "./strategies-schemas";
 
 const source =
-  "capirov2@4be13b0 apps/api-strategy/src/agents/{agents.controller,watcher.service,watch-review.service}.ts; WatchReviewState, WatchProposalCard, WatchRecheckResult";
+  "Core PR174 apps/api-strategy/src/agents/{agents.controller,watcher.service,watch-review.service,watch-source-dependencies}.ts; WatchReviewState, WatchProposalCard, WatchRecheckResult, watchSourceFindings";
 const params = z.object({ strategyId }).strict();
 const read = z.object({ params }).strict();
 export const monitoring = z.object({
@@ -79,6 +79,23 @@ export const watchState = z.object({
     }),
   ),
   lastRecheck: recheck.nullable().optional(),
+  // Older services omit this field; absence is not a clean source assessment.
+  sourceFindings: z
+    .array(
+      z.object({
+        code: z.literal("cited-source-stale"),
+        severity: z.literal("warning"),
+        nodeIds: z.array(strategyId),
+        message: z.string(),
+        suggestion: z.string().optional(),
+        category: z.literal("context"),
+        title: z.string(),
+        impact: z.string(),
+        whyCompared: z.array(z.string()),
+        sortRank: z.number(),
+      }),
+    )
+    .optional(),
 });
 const accepted = z.object({
   strategy: strategyDetail,
