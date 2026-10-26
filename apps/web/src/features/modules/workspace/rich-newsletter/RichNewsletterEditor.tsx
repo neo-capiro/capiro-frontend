@@ -188,7 +188,8 @@ export function RichNewsletterEditor({
           library={library}
         />
       )}
-      {(!documentId || history.saved?.id === documentId) && (
+      {(!documentId ||
+        history.saved?.id.toLowerCase() === documentId.toLowerCase()) && (
         <fieldset
           disabled={
             Boolean(history.pending) || history.recovery.phase !== "ready"

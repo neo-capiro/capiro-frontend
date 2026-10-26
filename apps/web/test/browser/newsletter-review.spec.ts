@@ -221,25 +221,63 @@ test("session replacement clears loaded private review and its opened intent", a
   ).toHaveCount(0);
 });
 
-test("known-ID Edit rechecks actual detail and waits for explicit adoption", async ({
-  page,
-}) => {
-  const fixture = await reviewPage(page, "editor");
-  await page.goto(reviewUrl());
-  await button(page, "Open review").click();
-  await button(page, "Edit newsletter").click();
-  await expect(
-    page.getByRole("region", { name: "Review current saved newsletter" }),
-  ).toBeVisible();
-  expect(fixture.calls("list")).toHaveLength(0);
-  expect(fixture.calls("detail")).toHaveLength(1);
-  await expect(page.getByLabel("Subject", { exact: true })).toHaveCount(0);
-  await button(page, "Adopt saved document and replace local draft").click();
-  await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
-    "Saved subject",
-  );
-  expect(fixture.calls("save")).toHaveLength(0);
-});
+for (const entryId of [reviewId, reviewId.toUpperCase()]) {
+  test(`known-ID ${entryId === reviewId ? "canonical" : "uppercase"} Edit rechecks actual detail and waits for explicit adoption`, async ({
+    page,
+  }) => {
+    const fixture = await reviewPage(page, "editor");
+    await page.goto(reviewUrl(entryId));
+    await button(page, "Open review").click();
+    await button(page, "Edit newsletter").click();
+    await expect(
+      page.getByRole("region", { name: "Review current saved newsletter" }),
+    ).toBeVisible();
+    expect(fixture.calls("list")).toHaveLength(0);
+    expect(fixture.calls("detail")).toHaveLength(1);
+    expect(fixture.calls("detail")[0]!.input).toEqual({
+      params: { id: entryId },
+    });
+    await expect(page.getByLabel("Subject", { exact: true })).toHaveCount(0);
+    await button(page, "Adopt saved document and replace local draft").click();
+    await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
+      "Saved subject",
+    );
+    expect(fixture.calls("save")).toHaveLength(0);
+    expect(fixture.calls("stage")).toHaveLength(0);
+    expectIsolated(fixture);
+  });
+}
+
+for (const refusal of ["foreign", "denied"] as const) {
+  test(`uppercase known-ID ${refusal} editable detail cannot expose or adopt a draft`, async ({
+    page,
+  }) => {
+    const fixture = await reviewPage(page, "editor");
+    fixture.queue("detail", (route) =>
+      route.fulfill(
+        refusal === "foreign"
+          ? { json: { ...fixture.control.current, id: otherReviewId } }
+          : { status: 403, json: { message: "Editing access revoked" } },
+      ),
+    );
+    await page.goto(reviewUrl(reviewId.toUpperCase()));
+    await button(page, "Open review").click();
+    await button(page, "Edit newsletter").click();
+    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(page.getByLabel("Subject", { exact: true })).toHaveCount(0);
+    await expect(
+      button(page, "Adopt saved document and replace local draft"),
+    ).toHaveCount(0);
+    await expect(
+      page.getByRole("region", { name: "Review current saved newsletter" }),
+    ).toHaveCount(0);
+    expect(fixture.calls("detail")).toHaveLength(1);
+    expect(fixture.calls("list")).toHaveLength(0);
+    expect(fixture.calls("save")).toHaveLength(0);
+    expect(fixture.calls("stage")).toHaveLength(0);
+    expectIsolated(fixture);
+  });
+}
 
 test("a fresh role downgrade removes Edit and a denied editable read releases no draft", async ({
   page,
