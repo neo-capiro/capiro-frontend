@@ -164,6 +164,11 @@ test("campaign picker reaches beyond100 with explicit pages and never saves duri
   await choose(page, "Campaign 103");
   await expect(page.getByRole("button", { name: "Next page" })).toBeDisabled();
   await page.getByLabel("Template name", { exact: true }).fill("Beyond100");
+  const dialog = page.getByRole("dialog");
+  await expect(
+    dialog.getByRole("heading", { name: "Keep this reusable approach" }),
+  ).toBeVisible();
+  expect((await dialog.boundingBox())?.width).toBe(580);
   expect(f.calls.filter((c) => c.key === "write")).toHaveLength(0);
   expect(
     f.calls

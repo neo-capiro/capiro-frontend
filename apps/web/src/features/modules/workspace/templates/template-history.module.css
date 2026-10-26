@@ -120,6 +120,56 @@
   background: var(--muted);
   justify-content: flex-end;
 }
+.saveDialog.saveDialog {
+  width: min(580px, calc(100vw - 32px));
+  max-width: 580px;
+  box-shadow:
+    0 2px 6px #0c0a090d,
+    0 16px 40px -12px #0c0a092e;
+}
+.saveDialog > header > div::before {
+  content: "Save as template";
+}
+.saveDialog > header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+}
+.saveDialog > header p {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.saveDialog > header > button {
+  width: 20px;
+  height: 20px;
+  color: var(--muted-foreground);
+  font-size: 20px;
+}
+.saveDialog > [data-slot="modal-body"] > div {
+  gap: 16px;
+}
+.saveDialog label {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-weight: 400;
+}
+.saveDialog input,
+.saveDialog [role="combobox"] {
+  border-color: var(--border-strong, #d6d3d1);
+  border-radius: 8px;
+}
+.saveDialog > footer {
+  gap: 10px;
+}
+.saveDialog > footer button {
+  border-radius: 8px;
+}
 @media (max-width: 680px) {
   .dialog.dialog {
     top: 16px;

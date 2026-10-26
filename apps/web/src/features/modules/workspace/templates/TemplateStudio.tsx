@@ -32,6 +32,7 @@ import { TemplateWizard } from "./TemplateWizard";
 import { CampaignPicker } from "./CampaignPicker";
 import { workspaceHref } from "../workspace-route";
 import presentation from "./template-presentation.module.css";
+import historyStyles from "./template-history.module.css";
 
 export function TemplateStudio({
   onClose,
@@ -282,8 +283,9 @@ export function TemplateStudio({
       </Modal>
       <Modal
         open={fromCampaign}
+        className={`${historyStyles.dialog} ${historyStyles.saveDialog}`}
         onOpenChange={setFromCampaign}
-        title="Save campaign as template"
+        title="Keep this reusable approach"
         description="Capture the reusable settings from an existing Outreach V3 campaign."
         footer={
           <>
