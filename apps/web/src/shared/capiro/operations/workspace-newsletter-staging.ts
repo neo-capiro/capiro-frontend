@@ -1,11 +1,30 @@
 import { z } from "zod";
+import type { workspaceSavedOutreachRevisionWithinTx } from "@capiro/shared";
 import { defineOperation } from "../contracts";
 
 const source =
-  "capirov2@3c20f798c731403ffe2bbb6fa75dcb1bbf80bb16 docs/newsletter-staging-20261012/CONTRACT.md; versions.service.ts; outreach-command-engine.service.ts";
+  "capiro-backend@3b4937ad2f5d15b85ea1c4474ed48b4a39e2f0ac packages/shared/src/workspace-saved-revision.ts; versions.service.ts; outreach-command-engine.service.ts";
 const id = z.uuid();
 const hash = z.string().regex(/^[a-f0-9]{64}$/);
 const hashFormat = z.literal("workspace-snapshot-canonical-json-v1");
+type PublicRevision = Awaited<
+  ReturnType<typeof workspaceSavedOutreachRevisionWithinTx>
+>;
+const projectionVersion = z.enum([
+  "workspace-outreach-plaintext-v1",
+  "workspace-newsletter-plaintext-v2",
+]) satisfies z.ZodType<PublicRevision["projectionVersion"]>;
+const projection = { projectionVersion, projectionHash: hash };
+const optionalProjection = {
+  projectionVersion: projectionVersion.optional(),
+  projectionHash: hash.optional(),
+};
+const completeProjection = (value: {
+  projectionVersion?: string;
+  projectionHash?: string;
+}) =>
+  (value.projectionVersion === undefined) ===
+  (value.projectionHash === undefined);
 const saved = {
   draftId: id,
   versionId: id,
@@ -19,6 +38,7 @@ const saved = {
 export const savedNewsletterRevision = z
   .object({
     ...saved,
+    ...projection,
     snapshot: z.unknown(),
     contentSkeleton: z
       .object({
@@ -39,8 +59,10 @@ export const newsletterStagingBody = z
     versionId: id,
     snapshotHash: hash,
     expectedStateVersion: z.number().int().positive(),
+    ...optionalProjection,
   })
-  .strict();
+  .strict()
+  .refine(completeProjection);
 export const newsletterStagingReceipt = z.object({
   status: z.enum(["applied", "no_change"]),
   batchId: id,
@@ -53,13 +75,15 @@ export const newsletterStagingReceipt = z.object({
   staged: z
     .object({
       ...saved,
+      ...optionalProjection,
       kind: z.literal("workspace_saved_newsletter_v1"),
       requestHash: hash,
       requestId: id,
       expectedStateVersion: z.number().int().positive(),
       commandHash: hash,
     })
-    .strict(),
+    .strict()
+    .refine(completeProjection),
 });
 export const newsletterStagingOperations = {
   "workspace.newsletter.revision": defineOperation({

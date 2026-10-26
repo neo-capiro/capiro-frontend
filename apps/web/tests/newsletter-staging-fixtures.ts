@@ -1,9 +1,11 @@
 import { draft as prospectDraft } from "./prospect-resources-fixtures";
+import type { StagingIntent } from "../src/features/modules/workspace/newsletter/staging-model";
 export const sessionId = "80000000-0000-4000-8000-000000000001";
 export const versionId = "90000000-0000-4000-8000-000000000001";
 export const draft = {
   ...prospectDraft,
   prospectId: null,
+  clientId: null,
   product: "Newsletter",
   docTitle: "Current working title",
 };
@@ -13,15 +15,66 @@ export const revision = {
   authorId: "test-user",
   authorKind: "human",
   savedAt: "2026-10-12T12:00:00.000Z",
-  snapshotHash: "a".repeat(64),
+  snapshotHash:
+    "d4d4651f36bd65cc2883b55bf27a9c0feae6f396609652f0f3924891bbaa1a41",
   hashFormat: "workspace-snapshot-canonical-json-v1" as const,
   clientId: null as string | null,
-  snapshot: { docTitle: "Saved subject", config: {}, documents: [] },
+  projectionVersion: "workspace-newsletter-plaintext-v2" as const,
+  // Core144's committed non-ASCII producer fixture, not a frontend-computed hash.
+  projectionHash:
+    "18fecd93ba5bf68d1e79bb02f08cb722a7e47b70f69238879a215cc62001fd42",
+  snapshot: {
+    docTitle: "Document label",
+    config: { product: "Newsletter" },
+    documents: [
+      {
+        body: {
+          newsletter: {
+            subject: "  Résumé — 日本語  ",
+            preview: "preview",
+            firmName: "Synthetic",
+            mailingAddress: "Synthetic address",
+            blocks: [
+              {
+                id: "paragraph",
+                kind: "paragraph",
+                text: "Hello café\r\n日本語  ",
+              },
+            ],
+          },
+          blocks: [{ content: "Historical generic body" }],
+        },
+      },
+    ],
+  },
   contentSkeleton: {
-    subject: "Saved subject",
-    body: "Saved revision plaintext. Synthetic test content.",
+    subject: "Résumé — 日本語",
+    body: "Hello café\n日本語",
     slots: [] as never[],
   },
+};
+// Captured from the same installed public producer as the non-ASCII fixture.
+export const emptyRevision = {
+  ...revision,
+  snapshotHash:
+    "f84787ea01aecc764e4ea3a719dd29b0619b85b8afc2924d0d659bdba44d2593",
+  projectionHash:
+    "4a3dd8c876ba8c47e5d16f8e5091fea39dc5a84ae30df32f6dab0e9a1c1700d4",
+  snapshot: {
+    ...revision.snapshot,
+    documents: [
+      {
+        body: {
+          ...revision.snapshot.documents[0]!.body,
+          newsletter: {
+            ...revision.snapshot.documents[0]!.body.newsletter,
+            subject: "",
+          },
+        },
+      },
+    ],
+  },
+  contentSkeleton: { ...revision.contentSkeleton, subject: "" },
 };
 export const version = {
   id: versionId,
@@ -78,19 +131,18 @@ export const session = {
     blockers: ["TARGETS_MISSING", "CONTEXT_NOT_REVIEWED"],
   },
 };
-export function receipt(
-  body: {
-    requestId: string;
-    draftId: string;
-    versionId: string;
-    snapshotHash: string;
-    expectedStateVersion: number;
-  },
-  replayed = false,
-) {
-  const { snapshot: _snapshot, contentSkeleton: _content, ...saved } = revision;
+export function receipt(body: StagingIntent["body"], replayed = false) {
+  const {
+    snapshot: _snapshot,
+    contentSkeleton: _content,
+    projectionVersion: _projectionVersion,
+    projectionHash: _projectionHash,
+    ...saved
+  } = revision;
   void _snapshot;
   void _content;
+  void _projectionVersion;
+  void _projectionHash;
   return {
     status: "applied" as const,
     batchId: body.requestId,

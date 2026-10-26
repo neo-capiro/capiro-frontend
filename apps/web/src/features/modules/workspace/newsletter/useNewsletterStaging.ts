@@ -2,7 +2,10 @@
 import { useRef, useState } from "react";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import { CapiroApiError } from "../../../../shared/capiro/http";
-import type { NewsletterStagingReceipt } from "../../../../shared/capiro/operations/workspace-newsletter-staging";
+import type {
+  NewsletterStagingReceipt,
+  SavedNewsletterRevision,
+} from "../../../../shared/capiro/operations/workspace-newsletter-staging";
 import { useRetainedIntent } from "../../../../shared/session/recovery/useRetainedIntent";
 import {
   acknowledgeRecovery,
@@ -15,6 +18,7 @@ import {
   stagingScope,
   verifyStagingActor,
   verifyStagingReceipt,
+  verifyStagingProjection,
   type StagingActor,
   type StagingIntent,
 } from "./staging-model";
@@ -30,25 +34,38 @@ export function useNewsletterStaging(actor: StagingActor, draftId: string) {
   const [busy, setBusy] = useState(false);
   const working = useRef(false);
   async function stage(
-    selection: Omit<StagingIntent["body"], "requestId"> & { sessionId: string },
+    selection?: Omit<StagingIntent["body"], "requestId"> &
+      Pick<SavedNewsletterRevision, "projectionVersion" | "projectionHash"> & {
+        sessionId: string;
+      },
   ) {
-    if (working.current || !retained.ready || receipt) return;
+    if (
+      working.current ||
+      !retained.ready ||
+      receipt ||
+      (!retained.record && !selection)
+    )
+      return;
     working.current = true;
     setBusy(true);
     setError("");
     let authorized = false;
     try {
       await retained.verify();
-      const original = retained.record ?? {
-        sessionId: selection.sessionId,
-        body: {
-          requestId: crypto.randomUUID(),
-          draftId,
-          versionId: selection.versionId,
-          snapshotHash: selection.snapshotHash,
-          expectedStateVersion: selection.expectedStateVersion,
+      const original = stagingRecovery.schema.parse(
+        retained.record ?? {
+          sessionId: selection!.sessionId,
+          body: {
+            requestId: crypto.randomUUID(),
+            draftId,
+            versionId: selection!.versionId,
+            snapshotHash: selection!.snapshotHash,
+            projectionVersion: selection!.projectionVersion,
+            projectionHash: selection!.projectionHash,
+            expectedStateVersion: selection!.expectedStateVersion,
+          },
         },
-      };
+      );
       const current = await readStagingSelection(
         api,
         draftId,
@@ -56,11 +73,9 @@ export function useNewsletterStaging(actor: StagingActor, draftId: string) {
         original.sessionId,
         retained.signal(),
         retained.guard,
+        original.body.projectionVersion === undefined,
       );
-      if (current.revision.snapshotHash !== original.body.snapshotHash)
-        throw new Error(
-          "The saved revision hash changed. The original request remains held.",
-        );
+      verifyStagingProjection(original, current.revision);
       if (
         !retained.record &&
         (current.session.currentStateVersion !==
@@ -123,11 +138,8 @@ export function useNewsletterStaging(actor: StagingActor, draftId: string) {
         retained.record.sessionId,
         retained.signal(),
         retained.guard,
+        retained.record.body.projectionVersion === undefined,
       );
-      if (current.revision.snapshotHash !== retained.record.body.snapshotHash)
-        throw new Error(
-          "The original saved revision is unavailable. Its staging receipt remains retained.",
-        );
       verifyStagingReceipt(receipt, retained.record, current.revision);
       await acknowledgeRecovery(scope, receipt.batchId, retained.guard);
       retained.install(null);
