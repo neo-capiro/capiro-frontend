@@ -6,7 +6,7 @@ import { useState } from "react";
 import type { WorkspaceLibraryDocument } from "../../../shared/capiro/operations/workspace-schemas";
 import { ActionButton, Modal } from "../../../shared/module-ui";
 import { HillDayEditor } from "./hillday/HillDayEditor";
-import { HillDayWizard } from "./hillday/HillDayWizard";
+import { HillDayResume, HillDayWizard } from "./hillday/HillDayWizard";
 import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
 import { TemplateStudio } from "./templates/TemplateStudio";
 import styles from "./workspace.module.css";
@@ -19,6 +19,7 @@ import {
   readWorkspaceRoute,
   workspaceHref,
   type WorkspaceView,
+  type HillDayPhase,
 } from "./workspace-route";
 
 const tabs: { id: WorkspaceView; label: string }[] = [
@@ -44,6 +45,18 @@ export function WorkspaceScreen() {
   const navigate = (view: WorkspaceView) =>
     router.push(workspaceHref({ kind: "view", view, clientId }));
   const back = () => navigate("documents");
+  const hillDayDestination = (
+    document: { id: string; clientId: string },
+    phase?: HillDayPhase,
+  ) =>
+    router.push(
+      workspaceHref({
+        kind: "hillday",
+        hilldayId: document.id,
+        clientId: document.clientId,
+        phase,
+      }),
+    );
   const openDocument = (row: Pick<WorkspaceLibraryDocument, "id" | "kind">) =>
     router.push(
       workspaceHref(
@@ -90,13 +103,39 @@ export function WorkspaceScreen() {
       />
     );
   if (route.kind === "hillday")
-    return (
-      <HillDayEditor
-        key={`${route.hilldayId}:${clientId ?? "general"}`}
+    return route.phase ? (
+      <HillDayResume
+        key={`${route.hilldayId}:${clientId ?? "general"}:${route.phase}`}
         id={route.hilldayId}
         expectedClientId={clientId}
+        phase={route.phase}
         onClose={back}
+        onCreated={(document) => hillDayDestination(document)}
+        onResume={hillDayDestination}
       />
+    ) : (
+      <>
+        <ActionButton
+          onClick={() =>
+            router.push(
+              workspaceHref({
+                kind: "hillday",
+                hilldayId: route.hilldayId,
+                clientId,
+                phase: "generate",
+              }),
+            )
+          }
+        >
+          Resume setup and generation
+        </ActionButton>
+        <HillDayEditor
+          key={`${route.hilldayId}:${clientId ?? "general"}`}
+          id={route.hilldayId}
+          expectedClientId={clientId}
+          onClose={back}
+        />
+      </>
     );
   const view = route.view;
   if (view === "rich-newsletter")
@@ -108,6 +147,7 @@ export function WorkspaceScreen() {
       <HillDayWizard
         initialClientId={clientId}
         onClose={back}
+        onResume={hillDayDestination}
         onCreated={(document) =>
           router.push(
             workspaceHref({

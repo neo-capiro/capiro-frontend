@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { HillDayEvent } from "../../../../shared/capiro/operations/workspace-schemas";
+import type {
+  HillDayDocument,
+  HillDayEvent,
+} from "../../../../shared/capiro/operations/workspace-schemas";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -109,18 +112,34 @@ export function HillDayMeetings({
   id,
   clientId,
   onSaved,
+  saved,
 }: {
   id: string;
   clientId: string;
+  saved?: Pick<HillDayDocument, "sections" | "weekStart" | "timeZone">;
   onSaved: (meetings: { meetingId: string; title: string }[]) => void;
 }) {
-  const [week, setWeek] = useState(() => mondayOf(new Date()));
+  const [week, setWeek] = useState(() =>
+    saved?.weekStart
+      ? new Date(`${saved.weekStart}T12:00:00`)
+      : mondayOf(new Date()),
+  );
   const [view, setView] = useState("calendar");
-  const [selected, setSelected] = useState<string[]>([]);
+  // Core's addManualMeeting emits `manual-${UUID}` event IDs and preserves
+  // those rows outside setMeetings' calendar replacement (Core143).
+  const [selected, setSelected] = useState<string[]>(
+    saved?.sections
+      .filter((row) => !row.eventId.startsWith("manual-"))
+      .map((row) => row.eventId) ?? [],
+  );
   const [manual, setManual] = useState<{ meetingId: string; title: string }[]>(
-    [],
+    saved?.sections
+      .filter((row) => row.eventId.startsWith("manual-"))
+      .map((row) => ({ meetingId: row.meetingId, title: row.member })) ?? [],
   );
   const [skipped, setSkipped] = useState<string[]>([]);
+  const timeZone =
+    saved?.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
   const end = new Date(week);
   end.setDate(end.getDate() + 7);
   const calendar = useCapiroQuery("workspace.hillday.calendar", {
@@ -128,7 +147,7 @@ export function HillDayMeetings({
     query: {
       from: week.toISOString(),
       to: end.toISOString(),
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      timeZone,
     },
   });
   const save = useCapiroMutation("workspace.hillday.meetings");
@@ -145,7 +164,7 @@ export function HillDayMeetings({
         body: {
           eventIds: selected,
           weekStart: localDate(week),
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          timeZone,
         },
       });
       setSkipped(result.skipped);
@@ -155,7 +174,6 @@ export function HillDayMeetings({
             meetingId: row.meetingId,
             title: row.event.subject,
           })),
-          ...manual,
         ]);
     } catch {
       /* Keep failed input available for retry. */
