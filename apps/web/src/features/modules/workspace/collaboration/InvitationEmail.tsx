@@ -48,7 +48,7 @@ const descriptions: Record<
   cancelled: [
     "Email request cancelled",
     "The email request has been cancelled.",
-    "The document invitation is unchanged.",
+    "Cancelling an email request does not remove the document invitation.",
   ],
   outcome_unknown: [
     "Email outcome unknown",
