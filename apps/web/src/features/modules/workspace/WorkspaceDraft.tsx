@@ -11,7 +11,6 @@ import {
   Field,
   Panel,
   StatusPanel,
-  TextArea,
   TextInput,
 } from "../../../shared/module-ui";
 import {
@@ -30,6 +29,7 @@ import styles from "./workspace.module.css";
 import { CopiedTabs } from "./brief-copy/CopiedTabs";
 import { DraftClientAssociation } from "./DraftClientAssociation";
 import { VersionHistory } from "./version-history/VersionHistory";
+import { OrdinaryDraftExport } from "./ordinary-export/OrdinaryDraftExport";
 
 function DraftEditor({
   draft,
@@ -92,8 +92,31 @@ function DraftEditor({
             key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
             draft={currentDraft}
           />
-          {draft.prospectId && (
+          {/* Safe preview of the supported section projection only. An ordinary
+              document whose stored body is not a supported projection is
+              refused with a reason, and a mixed projection is qualified, rather
+              than shown as the whole document. Prospect behavior is unchanged. */}
+          {draft.prospectId || names.length ? (
             <DocumentPreview title={title} names={names} sections={sections} />
+          ) : (
+            <p className={styles.secondary}>
+              Preview unavailable: there is no supported section content to
+              preview; stored body content is preserved read-only and is not
+              shown.
+            </p>
+          )}
+          {!draft.prospectId && names.length > 0 && (
+            <p className={styles.secondary}>
+              This preview shows only the supported sections; other saved
+              content, if present, is preserved read-only and is not shown.
+            </p>
+          )}
+          {!draft.prospectId && (
+            <OrdinaryDraftExport
+              key={`${currentDraft.id}:${currentDraft.clientId ?? ""}`}
+              draft={currentDraft}
+              disabled={pending}
+            />
           )}
           <ActionButton
             primary
@@ -182,28 +205,14 @@ function DraftEditor({
       {names.length ? (
         names.map((name) => (
           <Panel key={name} title={name}>
-            {draft.prospectId ? (
-              <SectionEditor
-                name={name}
-                value={sections[name] ?? ""}
-                disabled={pending}
-                onChange={(content) =>
-                  setSections((previous) => ({ ...previous, [name]: content }))
-                }
-              />
-            ) : (
-              <TextArea
-                aria-label={`${name} content`}
-                value={sections[name] ?? ""}
-                disabled={pending}
-                onChange={(event) =>
-                  setSections((previous) => ({
-                    ...previous,
-                    [name]: event.target.value,
-                  }))
-                }
-              />
-            )}
+            <SectionEditor
+              name={name}
+              value={sections[name] ?? ""}
+              disabled={pending}
+              onChange={(content) =>
+                setSections((previous) => ({ ...previous, [name]: content }))
+              }
+            />
           </Panel>
         ))
       ) : (
