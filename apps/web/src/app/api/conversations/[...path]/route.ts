@@ -5,6 +5,8 @@ import { proxyConversationRequest } from "../../../../shared/meri-conversations/
 import {
   conversationHistoryRoute,
   proxyConversationHistory,
+  proxyConversationNativeRead,
+  conversationCurrentReadOperation,
 } from "../../../../shared/meri-conversations/history-proxy";
 
 async function receive(
@@ -23,6 +25,14 @@ async function receive(
     return proxyConversationHistory(
       request,
       nativeRoute,
+      readConversationConfig(process.env),
+      nativeToken,
+    );
+  const currentRead = conversationCurrentReadOperation(path.join("/"));
+  if (currentRead)
+    return proxyConversationNativeRead(
+      request,
+      currentRead,
       readConversationConfig(process.env),
       nativeToken,
     );

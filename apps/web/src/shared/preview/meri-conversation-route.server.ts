@@ -39,6 +39,8 @@ const postPaths = new Set([
   "/api/conversations/next-turn",
   "/api/conversations/summaries",
   "/api/conversations/manage",
+  "/api/conversations/source-read",
+  "/api/conversations/usage",
   "/api/conversations/input/allocate",
   "/api/conversations/input/admit",
 ]);

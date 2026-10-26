@@ -1,5 +1,7 @@
 import type { ConversationObservationSnapshot } from "@capiro/meri-client/conversation";
 import type { RunBinding, UIEvent } from "@capiro/meri-contracts";
+import type { ConversationEvent } from "@capiro/meri-contracts/conversation-application";
+import type { NativeBillTextSourceEvent } from "@capiro/meri-contracts/conversation-sources";
 import {
   buildWorkspaceView,
   type WorkspaceView,
@@ -19,6 +21,7 @@ export type TurnView = Readonly<
     throughSequence?: number;
     /** UI key derived from admitted conversation + logical request identity; never prompt text. */
     promptKey?: string;
+    nativeSources: readonly NativeBillTextSourceEvent[];
   } & Pick<
     WorkspaceView,
     | "reasonCode"
@@ -63,14 +66,17 @@ export function turnFromObservation(
 
 /** Shared display fold for SDK observations and admitted saved history; it establishes no authority. */
 export function turnFromEvents(
-  events: readonly UIEvent[],
+  events: readonly ConversationEvent[],
   binding: Pick<RunBinding, "runId">,
   prompt: string | null,
   runState: RunState,
   omittedPrefix: boolean,
 ): TurnView {
   const first = events[0];
-  const view = first ? buildWorkspaceView(events, first.binding) : undefined;
+  const legacy = events.filter(
+    (event): event is UIEvent => event.type !== "source.native-bill-text",
+  );
+  const view = first ? buildWorkspaceView(legacy, first.binding) : undefined;
   return Object.freeze({
     runId: binding.runId,
     prompt,
@@ -81,6 +87,11 @@ export function turnFromEvents(
     messages: view?.messages ?? [],
     tools: view?.tools ?? [],
     sources: view?.sources ?? [],
+    nativeSources: events.filter(
+      (event): event is NativeBillTextSourceEvent =>
+        event.type === "source.native-bill-text" &&
+        event.binding.runId === binding.runId,
+    ),
     approvals: view?.approvals ?? [],
     artifacts: view?.artifacts ?? [],
     errors: view?.errors ?? [],
