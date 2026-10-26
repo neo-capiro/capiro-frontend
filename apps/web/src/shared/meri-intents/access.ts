@@ -41,6 +41,19 @@ export type IntentsReply<T> =
     }
   | { kind: "unavailable"; dispatched: boolean };
 
+/** Only canonical current-session refusals retire the conversation lifetime. */
+export function intentAccessLost(reply: IntentsReply<unknown>): boolean {
+  return (
+    reply.kind === "refused" &&
+    [
+      "UNAUTHENTICATED",
+      "ACCESS_DENIED",
+      "MEMBERSHIP_REVOKED",
+      "MEMBERSHIP_CHANGED",
+    ].includes(reply.code)
+  );
+}
+
 export interface IntentsAccess {
   /** Separate schedule owner: generic task decisions cannot mutate routines. */
   routines?: {
@@ -168,7 +181,21 @@ export function createIntentsAccess(
         dispatched = true;
         const path = intentsMetadata.routes[route].path;
         const response = await fetcher(path, post(body, token, signal));
-        return admitAnswer<T>(route, response, expectation, signal);
+        const reply = await admitAnswer<T>(
+          route,
+          response,
+          expectation,
+          signal,
+        );
+        signal.throwIfAborted();
+        // A concurrent refusal may already have retired this credential while
+        // this answer was being received. Never release its stale content.
+        if (!token) return { kind: "unavailable", dispatched } as const;
+        if (intentAccessLost(reply)) {
+          token = "";
+          onAccessLost?.();
+        }
+        return reply;
       });
     } catch {
       // A request the contract refuses never left; after dispatch, anything may have taken effect.
