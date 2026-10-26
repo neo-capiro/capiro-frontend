@@ -36,8 +36,10 @@ export function useLiveRun(
   const requested = useRef(0);
   const handled = useRef(0),
     generation = useRef(0);
+  const decisionGeneration = generation.current;
   const refreshAfterDecision = () => {
-    if (alive.current) setDecisionRefresh(++requested.current);
+    if (alive.current && generation.current === decisionGeneration)
+      setDecisionRefresh(++requested.current);
   };
   useEffect(() => {
     if (
@@ -103,16 +105,21 @@ export function useLiveRun(
     commands.error,
   ]);
 
+  const suspendObservation = () => {
+    handled.current = requested.current;
+    generation.current++;
+    observation.stop();
+  };
   return {
     snapshot,
     ...commands,
     observing: observation.state,
     refreshAfterDecision,
-    suspendObservation: () => {
-      handled.current = requested.current;
-      generation.current++;
-      observation.stop();
+    cancel: () => {
+      suspendObservation();
+      return commands.cancel();
     },
+    suspendObservation,
     reconnect: () => {
       if (
         decisionRefresh &&

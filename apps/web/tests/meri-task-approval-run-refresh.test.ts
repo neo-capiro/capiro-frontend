@@ -31,6 +31,7 @@ const hooks = vi.hoisted(() => ({
   cleanups: new Map<number, () => void>(),
   dirty: false,
   mounted: false,
+  onStop: undefined as (() => void) | undefined,
   list: { status: "loading" } as ListState,
   refresh: vi.fn(async () => undefined),
   decide: vi.fn<(...args: unknown[]) => Promise<unknown>>(),
@@ -41,7 +42,12 @@ vi.mock("@tanstack/react-query", async (original) => ({
   useQueryClient: () => hooks.cache,
 }));
 vi.mock("../src/features/meri/conversation/conversation-composer", () => ({
-  useLiveComposer: () => undefined,
+  useLiveComposer: (
+    _channel: unknown,
+    input: { controls: { onStop: () => void } },
+  ) => {
+    hooks.onStop = input.controls.onStop;
+  },
 }));
 vi.mock("../src/features/meri/conversation/lifecycle/useRunLifecycle", () => ({
   useRunLifecycle: () => ({ busy: false }),
@@ -275,6 +281,8 @@ async function mount(item = task()) {
           }),
         );
       }
+      if (String(url).endsWith("/cancel"))
+        return Response.json({ state: "cancelled" });
       if (String(url).includes("/events/")) {
         subscriptions++;
         return new Response(
@@ -367,6 +375,7 @@ beforeEach(() => {
   hooks.pending = [];
   hooks.cleanups.clear();
   hooks.dirty = false;
+  hooks.onStop = undefined;
   hooks.refresh.mockReset();
   hooks.refresh.mockResolvedValue(undefined);
   hooks.decide.mockReset();
@@ -656,6 +665,55 @@ it("does not wake a retired identity if the decision's list refresh loses access
     unmount();
   });
   await decide();
+  expect(f.reads).toBe(1);
+  expect(f.subscriptions).toBe(0);
+});
+
+it("actual mounted Stop cancels a decision wakeup queued before React rerenders", async () => {
+  const f = await mount();
+  await decisions.decide(decisions.rows[0]!, "approved");
+  hooks.onStop!();
+  await flush();
+  expect(f.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(1);
+  expect(f.reads).toBe(1);
+  expect(f.subscriptions).toBe(0);
+  expect(run.snapshot.cancelReceipt?.state).toBe("cancelled");
+  expect(run.snapshot.observation?.runState).toBe("waiting-for-approval");
+  await advance(60_000);
+  expect(f.reads).toBe(1);
+});
+
+it("actual mounted Stop retires a post-decision stream without changing cancel recovery", async () => {
+  const f = await mount();
+  await decide();
+  expect(f.subscriptions).toBe(1);
+  hooks.onStop!();
+  await flush();
+  expect(f.cancelled).toHaveBeenCalled();
+  expect(f.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(1);
+  expect(run.snapshot.cancelReceipt?.state).toBe("cancelled");
+  await advance(60_000);
+  expect(f.reads).toBe(2);
+  expect(f.subscriptions).toBe(1);
+});
+
+it("actual mounted Stop rejects a decision wakeup that completes after suspension", async () => {
+  const f = await mount();
+  let reply!: (value: unknown) => void;
+  hooks.decide.mockImplementation(
+    () =>
+      new Promise((resolve) => {
+        reply = resolve;
+      }),
+  );
+  const pending = decisions.decide(decisions.rows[0]!, "approved");
+  await flush();
+  hooks.onStop!();
+  await flush();
+  reply({ kind: "ok", value: { status: "approved" } });
+  await pending;
+  await flush();
+  expect(f.calls.filter((path) => path.endsWith("/cancel"))).toHaveLength(1);
   expect(f.reads).toBe(1);
   expect(f.subscriptions).toBe(0);
 });
