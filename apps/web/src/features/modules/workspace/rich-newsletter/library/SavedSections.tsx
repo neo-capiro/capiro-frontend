@@ -7,8 +7,8 @@ import {
   TextInput,
 } from "@/shared/module-ui";
 import type { NewsletterSectionLibraryItem } from "@capiro/shared/newsletter";
-import type { SectionLibrary } from "./use-section-library";
-import { filterSavedSections } from "./sections";
+import type { NewsletterLibrary } from "./use-newsletter-library";
+import { filterLibraryItems } from "./sections";
 import styles from "./sections.module.css";
 
 export function SavedSections({
@@ -16,7 +16,7 @@ export function SavedSections({
   close,
   insert,
 }: {
-  library: SectionLibrary;
+  library: NewsletterLibrary;
   close: () => void;
   insert: (item: NewsletterSectionLibraryItem) => void;
 }) {
@@ -24,7 +24,7 @@ export function SavedSections({
   const [folder, setFolder] = useState("");
   const [sort, setSort] = useState<"recent" | "name">("recent");
   const items = library.items ?? [];
-  const filtered = filterSavedSections(items, search, folder, sort);
+  const filtered = filterLibraryItems(items, search, folder, sort);
   const folders = [
     ...new Set(
       items
@@ -123,6 +123,22 @@ export function SavedSections({
               >
                 Insert section
               </ActionButton>
+              <ActionButton
+                className={styles.button}
+                disabled={!library.editable || library.writing}
+                onClick={() => library.manage("rename", item)}
+                aria-label={`Rename/move section ${item.name}`}
+              >
+                Rename/move
+              </ActionButton>
+              <ActionButton
+                className={styles.button}
+                disabled={!library.editable || library.writing}
+                onClick={() => library.manage("delete", item)}
+                aria-label={`Delete section ${item.name}`}
+              >
+                Delete
+              </ActionButton>
             </div>
           </article>
         ))}
@@ -140,27 +156,5 @@ export function SavedSections({
         </ActionButton>
       </div>
     </aside>
-  );
-}
-
-export function SectionLibraryNotice({ library }: { library: SectionLibrary }) {
-  const unknown = library.save?.phase === "unknown";
-  if (library.dialog || (!unknown && !library.notice)) return null;
-  return (
-    <div className={styles.notice} role="status">
-      <p>
-        {unknown
-          ? "Save was not confirmed. The section may have been added to your saved sections. This mounted view will not repeat that save."
-          : library.notice}
-      </p>
-      {unknown && (
-        <ActionButton
-          className={styles.button}
-          onClick={() => void library.browse()}
-        >
-          View saved sections
-        </ActionButton>
-      )}
-    </div>
   );
 }

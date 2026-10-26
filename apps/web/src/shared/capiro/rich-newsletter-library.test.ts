@@ -111,3 +111,110 @@ describe("fixed rich section operations", () => {
     ).rejects.toMatchObject({ name: "AbortError" });
   });
 });
+
+describe("fixed template and library metadata operations", () => {
+  const templates = operations["workspace.richNewsletter.templates.list"];
+  const saveTemplate = operations["workspace.richNewsletter.templates.save"];
+  const update = operations["workspace.richNewsletter.library.update"];
+  const remove = operations["workspace.richNewsletter.library.remove"];
+  it("separates full-template save from section save and admits no invented request or CAS contract", () => {
+    expect([templates.method, templates.path]).toEqual([
+      "GET",
+      "/newsletters/library/template",
+    ]);
+    expect([saveTemplate.method, saveTemplate.path]).toEqual([
+      "POST",
+      "/newsletters/documents/:id/library",
+    ]);
+    const input = {
+      params: { id },
+      body: { name: "Full template", folder: "Updates" },
+    };
+    expect(saveTemplate.request.parse(input)).toEqual(input);
+    for (const extra of [
+      { sectionId: "section" },
+      { revision: 4 },
+      { design: {} },
+      { requestId: id },
+    ])
+      expect(
+        saveTemplate.request.safeParse({
+          ...input,
+          body: { ...input.body, ...extra },
+        }).success,
+      ).toBe(false);
+    expect(
+      templates.request.safeParse({ query: { search: "not a server filter" } })
+        .success,
+    ).toBe(false);
+  });
+  it("uses the actual template receiver and preserves section-only rejection", () => {
+    const { section, ...metadata } = item();
+    const row = {
+      ...metadata,
+      design: createNewsletterLayout(1),
+      config: {
+        company: "Company",
+        mailingAddress: "Address",
+        permissionReminder: "Reminder",
+      },
+    };
+    expect(saveTemplate.response.parse(row)).toEqual(row);
+    expect(templates.response.parse({ items: [row] })).toEqual({
+      items: [row],
+    });
+    expect(
+      saveTemplate.response.safeParse({ ...metadata, section }).success,
+    ).toBe(false);
+    expect(save.response.safeParse(row).success).toBe(false);
+    expect(
+      templates.response.safeParse({
+        items: [{ ...row, config: { ...row.config, clientId: id } }],
+      }).success,
+    ).toBe(false);
+    expect(templates.response.safeParse({ items: [row, row] }).success).toBe(
+      false,
+    );
+  });
+  it("treats metadata/delete as exact ACKs, not a new document or revision receipt", () => {
+    expect([update.method, update.path, remove.method, remove.path]).toEqual([
+      "PATCH",
+      "/newsletters/library/items/:id",
+      "DELETE",
+      "/newsletters/library/items/:id",
+    ]);
+    expect(
+      update.request.parse({
+        params: { id },
+        body: { name: "Renamed", folder: "" },
+      }),
+    ).toEqual({ params: { id }, body: { name: "Renamed", folder: "" } });
+    expect(
+      remove.request.safeParse({ params: { id }, body: { force: true } })
+        .success,
+    ).toBe(false);
+    for (const response of [
+      { ok: false },
+      { ok: true, id },
+      { ok: true, revision: 2 },
+      null,
+    ]) {
+      expect(update.response.safeParse(response).success).toBe(false);
+      expect(remove.response.safeParse(response).success).toBe(false);
+    }
+    expect(update.response.parse({ ok: true })).toEqual({ ok: true });
+  });
+  it("does not retry an uncertain delete or accept a fabricated success body", async () => {
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ ok: true, id }));
+    const api = createCapiroApi(operations, { fetcher });
+    await expect(
+      api.request("workspace.richNewsletter.library.remove", {
+        params: { id },
+      }),
+    ).rejects.toThrow();
+    expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(fetcher.mock.calls[0]![1]!.method).toBe("DELETE");
+  });
+});
