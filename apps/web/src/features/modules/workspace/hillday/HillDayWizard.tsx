@@ -236,7 +236,13 @@ export function HillDayWizard({
         </ol>
       </header>
       {step !== 2 && (
-        <h1 className={`${styles.wizardTitle} ${presentation.wizardTitle}`}>
+        <h1
+          className={
+            step === 5
+              ? "sr-only"
+              : `${styles.wizardTitle} ${presentation.wizardTitle}`
+          }
+        >
           {
             [
               "What are you making?",
