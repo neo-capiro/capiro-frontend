@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { MailCompose } from "../MailCompose";
+import { replyQuote } from "../email/reply-quote";
 import { IncomingMailFiles } from "./IncomingMailFiles";
 import type { MailContact } from "../email";
 import {
@@ -140,11 +141,7 @@ export function NativeMailReply({
           if (!busy && reply?.supported) setOpen({ reply, source });
         }}
       >
-        {person
-          ? `Reply to ${person.name}`
-          : reply?.supported
-            ? `Reply to ${reply.to[0]!.email}`
-            : "Reply"}
+        {reply?.supported ? `Reply to ${reply.to[0]!.email}` : "Reply"}
       </button>
       <button
         className="button"
@@ -213,6 +210,11 @@ export function NativeMailReply({
           }
           thread={{ id: thread.id, subject: open.reply.subject }}
           reply={open.reply}
+          initialDraft={
+            open.reply.operation === "forward"
+              ? undefined
+              : { body: replyQuote(query.data?.messages[0]) }
+          }
           onClose={() => setOpen(null)}
         />
       )}

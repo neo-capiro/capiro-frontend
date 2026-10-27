@@ -20,6 +20,8 @@ export function ResearchSnapshots({
   onReload: () => void;
 }) {
   const api = useCapiro();
+  const editable =
+    portfolio.myRole !== "viewer" && portfolio.lifecycle === "active";
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
@@ -28,6 +30,7 @@ export function ResearchSnapshots({
     params: { id: portfolio.id },
   });
   async function create() {
+    if (!editable) return;
     setBusy(true);
     setError(undefined);
     try {
@@ -56,7 +59,7 @@ export function ResearchSnapshots({
       actions={
         <ActionButton
           primary
-          disabled={portfolio.myRole === "viewer"}
+          disabled={!editable}
           onClick={() => setOpen(true)}
         >
           Create snapshot
@@ -99,7 +102,7 @@ export function ResearchSnapshots({
         footer={
           <ActionButton
             primary
-            disabled={busy || !name.trim()}
+            disabled={!editable || busy || !name.trim()}
             onClick={create}
           >
             Capture snapshot

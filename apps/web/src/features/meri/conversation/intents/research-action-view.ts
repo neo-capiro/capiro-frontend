@@ -134,7 +134,7 @@ export function researchActionResultFields(
 }
 
 type RowView = Pick<IntentRow, "status" | "tone" | "detail">;
-const settledViews: Record<string, RowView> = {
+const settledViews = {
   succeeded: {
     status: "Action completed",
     tone: "success",
@@ -146,7 +146,7 @@ const settledViews: Record<string, RowView> = {
     tone: "neutral",
     detail: "This proposal was rejected. The action was not executed.",
   },
-};
+} satisfies Record<string, RowView>;
 const uncertainView: RowView = {
   status: "Result uncertain",
   tone: "warning",
@@ -220,6 +220,19 @@ export function researchActionRow(
       ...row,
       ...settledViews.succeeded,
       result: researchActionResultFields(result),
+      ...([
+        "prepare_research_portfolio_brief",
+        "prepare_research_portfolio_meeting",
+      ].includes(proposal.operation) &&
+      typeof result.resultSummary?.artifactId === "string" &&
+      proposal.preview.portfolioId
+        ? {
+            researchDraft: {
+              artifactId: result.resultSummary.artifactId,
+              portfolioId: proposal.preview.portfolioId,
+            },
+          }
+        : {}),
     };
   if (status === "dismissed") return { ...row, ...settledViews.dismissed };
   if (["outcome_unknown", "failed_retryable", "executing"].includes(status))

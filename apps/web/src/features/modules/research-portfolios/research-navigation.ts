@@ -9,6 +9,12 @@ export const researchPortfolioTabs = [
   { id: "snapshots", label: "Snapshots" },
   { id: "subscriptions", label: "Subscriptions" },
   { id: "sharing", label: "Sharing" },
+  { id: "rules", label: "Rules" },
+  { id: "imports", label: "Imports" },
+  { id: "outputs", label: "Outputs" },
+  { id: "bookmarks", label: "Bookmarks" },
+  { id: "operations", label: "Operations" },
+  { id: "drafts", label: "Drafts" },
 ] as const;
 
 export type ResearchPortfolioView =

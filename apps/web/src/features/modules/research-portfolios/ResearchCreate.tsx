@@ -70,6 +70,7 @@ function ScopedResearchCreate({
   const [pendingDraft, setPendingDraft] =
     useState<ResearchPortfolioCreateDraft | null>(null);
   const [name, setName] = useState("");
+  const [step, setStep] = useState<0 | 1 | 2>(0);
   const [purpose, setPurpose] = useState("");
   const [mode, setMode] =
     useState<ResearchPortfolioCreateDraft["mode"]>("manual");
@@ -82,11 +83,20 @@ function ScopedResearchCreate({
       if (!active) return;
       try {
         const pending = intent.pendingDraft();
+        const saved = pending ? null : intent.wizard();
         if (pending) {
           setName(pending.name);
           setPurpose(pending.purpose ?? "");
           setMode(pending.mode);
           setPendingDraft(pending);
+          setStep(2);
+          setCreating(true);
+        }
+        if (saved) {
+          setName(saved.draft.name);
+          setPurpose(saved.draft.purpose ?? "");
+          setMode(saved.draft.mode);
+          setStep(saved.step);
           setCreating(true);
         }
         setRecovery("ready");
@@ -119,6 +129,7 @@ function ScopedResearchCreate({
       const receipt = await intent.submit(
         { name, purpose: purpose || null, mode },
         async (body) => {
+          intent.clearWizard();
           const result = await api.request("research.create", { body });
           if (result.actorUserId !== scope.actorId)
             throw new Error("Portfolio creation account mismatch.");
@@ -153,6 +164,8 @@ function ScopedResearchCreate({
       setName("");
       setPurpose("");
       setMode("manual");
+      setStep(0);
+      intent.clearWizard();
       setError(undefined);
     } catch (failure) {
       setError(
@@ -160,6 +173,31 @@ function ScopedResearchCreate({
           ? failure.message
           : "Could not abandon the pending request.",
       );
+    }
+  }
+
+  function retain(
+    next: { name: string; purpose: string; mode: typeof mode },
+    nextStep: 0 | 1 | 2 = step,
+  ) {
+    if (intent.busy || pendingDraft) return;
+    try {
+      assertCurrent();
+      intent.saveWizard({
+        draft: { ...next, purpose: next.purpose || null },
+        step: nextStep,
+      });
+      setName(next.name);
+      setPurpose(next.purpose);
+      setMode(next.mode);
+      setStep(nextStep);
+    } catch (failure) {
+      setError(
+        failure instanceof Error
+          ? failure.message
+          : "Could not retain this draft.",
+      );
+      setRecovery("blocked");
     }
   }
 
@@ -179,16 +217,48 @@ function ScopedResearchCreate({
         }}
         title="New research portfolio"
         footer={
-          <ActionButton
-            primary
-            disabled={busy || recovery !== "ready" || !name.trim()}
-            onClick={create}
-          >
-            {pendingDraft ? "Retry portfolio request" : "Create portfolio"}
-          </ActionButton>
+          <div className={styles.actions}>
+            {step > 0 && !pendingDraft && (
+              <ActionButton
+                disabled={busy || recovery !== "ready"}
+                onClick={() =>
+                  retain({ name, purpose, mode }, (step - 1) as 0 | 1)
+                }
+              >
+                Back
+              </ActionButton>
+            )}
+            {step < 2 ? (
+              <ActionButton
+                primary
+                disabled={busy || recovery !== "ready" || !name.trim()}
+                onClick={() =>
+                  retain({ name, purpose, mode }, (step + 1) as 1 | 2)
+                }
+              >
+                Next
+              </ActionButton>
+            ) : (
+              <ActionButton
+                primary
+                disabled={busy || recovery !== "ready" || !name.trim()}
+                onClick={create}
+              >
+                {pendingDraft ? "Retry portfolio request" : "Create portfolio"}
+              </ActionButton>
+            )}
+          </div>
         }
       >
         <div className={styles.form}>
+          <p role="status">
+            Step {step + 1} of 3 ·{" "}
+            {step === 0
+              ? "Portfolio details"
+              : step === 1
+                ? "Membership"
+                : "Review and create"}
+          </p>
           {pendingDraft && (
             <p role="alert">
               The previous create result is unknown. Retry these exact details
@@ -196,46 +266,78 @@ function ScopedResearchCreate({
               portfolio.
             </p>
           )}
-          <Field label="Name" htmlFor="new-portfolio-name">
-            <TextInput
-              id="new-portfolio-name"
-              disabled={busy || recovery !== "ready" || !!pendingDraft}
-              value={name}
-              maxLength={240}
-              onChange={(event) => {
-                if (!intent.busy) setName(event.target.value);
-              }}
-            />
-          </Field>
-          <Field label="Purpose" htmlFor="new-portfolio-purpose">
-            <TextArea
-              id="new-portfolio-purpose"
-              disabled={busy || recovery !== "ready" || !!pendingDraft}
-              value={purpose}
-              maxLength={4000}
-              onChange={(event) => {
-                if (!intent.busy) setPurpose(event.target.value);
-              }}
-            />
-          </Field>
-          <Field label="Mode" htmlFor="new-portfolio-mode">
-            <select
-              id="new-portfolio-mode"
-              className={styles.select}
-              disabled={busy || recovery !== "ready" || !!pendingDraft}
-              value={mode}
-              onChange={(event) => {
-                if (!intent.busy)
-                  setMode(
-                    event.target.value as ResearchPortfolioCreateDraft["mode"],
-                  );
-              }}
-            >
-              {["manual", "rules", "hybrid"].map((value) => (
-                <option key={value}>{value}</option>
-              ))}
-            </select>
-          </Field>
+          {step === 0 && (
+            <>
+              <Field label="Name" htmlFor="new-portfolio-name">
+                <TextInput
+                  id="new-portfolio-name"
+                  disabled={busy || recovery !== "ready" || !!pendingDraft}
+                  value={name}
+                  maxLength={240}
+                  onChange={(event) => {
+                    retain({ name: event.target.value, purpose, mode });
+                  }}
+                />
+              </Field>
+              <Field label="Purpose" htmlFor="new-portfolio-purpose">
+                <TextArea
+                  id="new-portfolio-purpose"
+                  disabled={busy || recovery !== "ready" || !!pendingDraft}
+                  value={purpose}
+                  maxLength={4000}
+                  onChange={(event) => {
+                    retain({ name, purpose: event.target.value, mode });
+                  }}
+                />
+              </Field>
+            </>
+          )}
+          {step === 1 && (
+            <>
+              <Field label="Mode" htmlFor="new-portfolio-mode">
+                <select
+                  id="new-portfolio-mode"
+                  className={styles.select}
+                  disabled={busy || recovery !== "ready" || !!pendingDraft}
+                  value={mode}
+                  onChange={(event) => {
+                    retain({
+                      name,
+                      purpose,
+                      mode: event.target
+                        .value as ResearchPortfolioCreateDraft["mode"],
+                    });
+                  }}
+                >
+                  {["manual", "rules", "hybrid"].map((value) => (
+                    <option key={value}>{value}</option>
+                  ))}
+                </select>
+              </Field>
+              <p>
+                Manual membership keeps your explicit selections. Rules
+                membership uses published rule results. Hybrid membership
+                combines rules with your manual decisions. Add subjects and
+                preview rules after creation.
+              </p>
+            </>
+          )}
+          {step === 2 && (
+            <>
+              <dl>
+                <dt>Name</dt>
+                <dd>{name}</dd>
+                <dt>Purpose</dt>
+                <dd>{purpose || "Not specified"}</dd>
+                <dt>Membership mode</dt>
+                <dd>{mode}</dd>
+              </dl>
+              <p>
+                This creates an empty portfolio owned by your current account.
+                No clients, sharing links or subscriptions are added.
+              </p>
+            </>
+          )}
           {pendingDraft && (
             <ActionButton disabled={busy} onClick={abandon}>
               Abandon pending request and start different details

@@ -1,13 +1,25 @@
 "use client";
 import type { ResearchDetail } from "../../../shared/capiro/operations/research-schemas";
-import { useCapiroQuery } from "../../../shared/capiro/queries";
-import { Panel, StatusPanel } from "../../../shared/module-ui";
+import {
+  useCapiroMutation,
+  useCapiroQuery,
+} from "../../../shared/capiro/queries";
+import { ActionButton, Panel, StatusPanel } from "../../../shared/module-ui";
 import styles from "./research.module.css";
 export function ResearchOverview({ portfolio }: { portfolio: ResearchDetail }) {
   const analytics = useCapiroQuery("research.analytics", {
     params: { id: portfolio.id },
   });
   const fit = useCapiroQuery("research.fit", { params: { id: portfolio.id } });
+  const refreshFit = useCapiroMutation("research.fit.refresh");
+  async function refresh() {
+    try {
+      await refreshFit.run({ params: { id: portfolio.id } });
+      fit.reload();
+    } catch {
+      /* The error remains visible. */
+    }
+  }
   const reviews = useCapiroQuery("research.reviews", {
     params: { id: portfolio.id },
     query: { lane: "team" },
@@ -60,10 +72,24 @@ export function ResearchOverview({ portfolio }: { portfolio: ResearchDetail }) {
         </div>
       </div>
       <div className={styles.split}>
-        <Panel title="Linked-client fit">
+        <Panel
+          title="Linked-client fit"
+          actions={
+            <ActionButton
+              disabled={
+                refreshFit.pending ||
+                portfolio.myRole === "viewer" ||
+                portfolio.lifecycle === "archived"
+              }
+              onClick={() => void refresh()}
+            >
+              Refresh fit
+            </ActionButton>
+          }
+        >
           <StatusPanel
             loading={fit.loading}
-            error={fit.error}
+            error={fit.error || refreshFit.error}
             onRetry={fit.reload}
           >
             {fit.data?.clientFits.map((c) => (

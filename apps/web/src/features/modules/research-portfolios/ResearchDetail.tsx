@@ -16,6 +16,14 @@ import { ResearchSettings } from "./ResearchSettings";
 import { ResearchSharing } from "./share/ResearchSharing";
 import { ResearchSnapshots } from "./ResearchSnapshots";
 import { ResearchSubscriptions } from "./ResearchSubscriptions";
+import { ResearchRules } from "./ResearchRules";
+import { ResearchImports } from "./ResearchImports";
+import { ResearchOutputs } from "./ResearchOutputs";
+import { ResearchBookmarks } from "./ResearchBookmarks";
+import { ResearchOperations } from "./ResearchOperations";
+import { ResearchWatchConversion } from "./ResearchWatchConversion";
+import { ResearchTour } from "./ResearchTour";
+import { ResearchDrafts } from "./ResearchDrafts";
 import {
   readResearchPortfolioView,
   researchPortfolioTabs,
@@ -72,6 +80,25 @@ export function ResearchPortfolioDetail({
       >
         {p && (
           <>
+            <ResearchTour onView={onView} />
+            {view === "drafts" && <ResearchDrafts key={p.id} portfolio={p} />}
+            {view === "rules" && (
+              <ResearchRules key={p.id} portfolio={p} onReload={query.reload} />
+            )}
+            {view === "imports" && (
+              <ResearchImports
+                key={p.id}
+                portfolio={p}
+                onReload={query.reload}
+              />
+            )}
+            {view === "outputs" && <ResearchOutputs key={p.id} portfolio={p} />}
+            {view === "bookmarks" && (
+              <ResearchBookmarks key={p.id} portfolio={p} />
+            )}
+            {view === "operations" && (
+              <ResearchOperations key={p.id} portfolio={p} />
+            )}
             {view === "overview" && <ResearchOverview portfolio={p} />}{" "}
             {view === "members" && (
               <ResearchMembers portfolio={p} onReload={query.reload} />
@@ -92,6 +119,9 @@ export function ResearchPortfolioDetail({
               <ResearchSnapshots portfolio={p} onReload={query.reload} />
             )}{" "}
             {view === "subscriptions" && <ResearchSubscriptions id={id} />}{" "}
+            {view === "subscriptions" && (
+              <ResearchWatchConversion key={p.id} portfolio={p} />
+            )}
             {view === "sharing" && <ResearchSharing portfolio={p} />}
           </>
         )}

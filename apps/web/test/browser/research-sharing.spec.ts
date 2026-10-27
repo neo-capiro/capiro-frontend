@@ -12,10 +12,15 @@ import {
 
 async function sharingApi(
   page: Page,
-  options: { enabled?: boolean; tenantEnabled?: boolean; userId?: string } = {},
+  options: {
+    enabled?: boolean;
+    tenantEnabled?: boolean;
+    userId?: string;
+    links?: unknown[];
+  } = {},
 ) {
   let enabled = options.enabled ?? false;
-  let links: unknown[] = [];
+  let links: unknown[] = options.links ?? [];
   const writes: { key: string; body: Record<string, unknown> }[] = [];
   await page.route("**/api/capiro/**", async (route) => {
     const request = route.request();
@@ -128,6 +133,25 @@ async function sharingApi(
   return writes;
 }
 
+test("the owner lock badge follows lockedUntil rather than a lifetime failed-PIN count", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date("2026-10-27T12:00:00Z") });
+  await sharingApi(page, {
+    enabled: true,
+    links: [
+      { ...link, failedPinAttempts: 5, lockedUntil: "2026-10-27T12:15:00Z" },
+    ],
+  });
+  await page.goto("/research-sharing.html");
+  await expect(page.getByText(/5 · locked until/)).toBeVisible();
+  await page.clock.fastForward(900001);
+  await expect(page.getByText(/locked until/)).toHaveCount(0);
+  await expect(
+    page.getByRole("cell", { name: "5", exact: true }),
+  ).toBeVisible();
+});
+
 test("Sharing enables a PIN, publishes the exact selection once, and confirms disable", async ({
   page,
 }) => {
@@ -215,9 +239,34 @@ test("all keyboard designer removal and phone ordering controls announce their c
     .focus();
   await page.keyboard.press("Enter");
   await expect(widget).toHaveCount(0);
+  await expect(
+    page.getByRole("group", { name: /^Firm mark widget/ }),
+  ).toBeFocused();
   await expect(page.locator('[aria-live="polite"]')).toHaveText(
     "Commentary removed.",
   );
+});
+
+test("designer ignores modified and descendant keys and returns focus after keyboard deletion", async ({
+  page,
+}) => {
+  await page.goto("/research-sharing.html?mode=designer");
+  const widget = page.getByRole("group", { name: /^Commentary widget/ });
+  const initial = await widget.getAttribute("aria-label");
+  await widget.focus();
+  await page.keyboard.press("Alt+ArrowDown");
+  await expect(widget).toHaveAttribute("aria-label", initial!);
+  await page
+    .getByRole("button", { name: "Resize Commentary", exact: true })
+    .focus();
+  await page.keyboard.press("Delete");
+  await expect(widget).toHaveCount(1);
+  await widget.focus();
+  await page.keyboard.press("Delete");
+  await expect(widget).toHaveCount(0);
+  await expect(
+    page.getByRole("group", { name: /^Firm mark widget/ }),
+  ).toBeFocused();
 });
 
 test("archive and unlink wait for the live-link count and preserve the confirmation", async ({

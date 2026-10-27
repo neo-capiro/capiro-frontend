@@ -199,6 +199,16 @@ function IntentCard({
       <p className={styles.muted}>{row.detail}</p>
       <FieldList fields={row.fields} />
       <FieldList fields={row.result} label="Recorded result" />
+      {row.researchDraft && (
+        <Button variant="outline" asChild>
+          <Link
+            prefetch={false}
+            href={`/modules/research-portfolios?portfolioId=${encodeURIComponent(row.researchDraft.portfolioId)}&view=drafts&artifactId=${encodeURIComponent(row.researchDraft.artifactId)}`}
+          >
+            Open saved research draft
+          </Link>
+        </Button>
+      )}
       {row.task && (
         <Button variant="outline" asChild>
           <Link prefetch={false} href={workspaceTaskHref(row.task)}>

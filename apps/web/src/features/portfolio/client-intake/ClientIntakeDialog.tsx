@@ -54,6 +54,7 @@ function IntakeSession({
   );
   const [logo, setLogo] = useState<LogoAttempt>();
   const [logoValidation, setLogoValidation] = useState("");
+  const [failedLogoUrl, setFailedLogoUrl] = useState<string>();
   const [persisted, setPersisted] = useState<Client>();
   const persistedScope = useRef<IntakeWriteScope | undefined>(undefined);
   const [continuationError, setContinuationError] = useState<Error>();
@@ -224,13 +225,14 @@ function IntakeSession({
         >
           <div className={styles.logo}>
             <span className={styles.initials}>
-              {logoUrl ? (
+              {logoUrl && failedLogoUrl !== logoUrl ? (
                 // Signed, service-provided branding URL; no optimizer proxy or inline SVG.
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   className={styles.logoImage}
                   src={logoUrl}
                   alt="Current client logo"
+                  onError={() => setFailedLogoUrl(logoUrl)}
                 />
               ) : (
                 initials(values.name || "Client")

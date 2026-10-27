@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { ResearchReviewTools } from "./ResearchReviewTools";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { ResearchDetail } from "../../../shared/capiro/operations/research-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -23,6 +24,8 @@ export function ResearchReviews({
   onReload: () => void;
 }) {
   const api = useCapiro();
+  const editable =
+    portfolio.myRole !== "viewer" && portfolio.lifecycle === "active";
   const [lane, setLane] = useState<"mine" | "team" | "deferred" | "resolved">(
     "mine",
   );
@@ -40,7 +43,7 @@ export function ResearchReviews({
     query: { lane },
   });
   async function decide() {
-    if (!selected) return;
+    if (!selected || !editable) return;
     setBusy(true);
     setError(undefined);
     try {
@@ -102,7 +105,7 @@ export function ResearchReviews({
               label: "Action",
               render: (r) => (
                 <ActionButton
-                  disabled={portfolio.myRole === "viewer"}
+                  disabled={portfolio.lifecycle === "archived"}
                   onClick={() => {
                     setSelected(r);
                     setReason("");
@@ -124,7 +127,7 @@ export function ResearchReviews({
         footer={
           <ActionButton
             primary
-            disabled={busy || !reason.trim()}
+            disabled={!editable || busy || !reason.trim()}
             onClick={decide}
           >
             Save decision
@@ -132,6 +135,19 @@ export function ResearchReviews({
         }
       >
         <p>{selected?.reason}</p>
+        {selected && (
+          <ResearchReviewTools
+            key={selected.id}
+            portfolio={portfolio}
+            review={
+              query.data?.find((item) => item.id === selected.id) ?? selected
+            }
+            onReload={() => {
+              query.reload();
+              onReload();
+            }}
+          />
+        )}
         <Field label="Decision" htmlFor="review-decision">
           <select
             id="review-decision"

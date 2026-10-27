@@ -17,5 +17,6 @@ export type IntentRow = Readonly<{
   /** The owner's observed task or published document result. */
   result: readonly IntentField[];
   task?: Readonly<{ id: string; clientId: string | null }>;
+  researchDraft?: Readonly<{ artifactId: string; portfolioId: string }>;
 }>;
 export type Viewer = Readonly<{ tenantId: string; actorId: string }>;

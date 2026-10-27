@@ -69,6 +69,7 @@ export const researchShareLink = z.object({
   openCount: z.number(),
   lastOpenedAt: z.string().nullable(),
   failedPinAttempts: z.number(),
+  lockedUntil: z.string().nullable().optional(),
 });
 export const researchShareLinkPublished = z.object({
   link: researchShareLink,

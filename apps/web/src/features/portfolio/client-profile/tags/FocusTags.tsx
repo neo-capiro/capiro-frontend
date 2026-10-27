@@ -142,6 +142,7 @@ function FocusTagSession({ clientId }: { clientId: string }) {
             <input
               aria-describedby={tagHintId}
               autoComplete="off"
+              placeholder="Enter a focus area"
               maxLength={100}
               value={value}
               disabled={!allowed || pending || uncertain}

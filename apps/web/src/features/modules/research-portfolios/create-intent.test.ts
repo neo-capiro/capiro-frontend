@@ -28,6 +28,37 @@ function memoryStorage() {
 }
 
 describe("research portfolio create recovery", () => {
+  it("retains incomplete three-step drafts within their actor/tenant scope without issuing a command", () => {
+    const storage = memoryStorage();
+    const intent = new ResearchPortfolioCreateIntent(
+      scope,
+      () => storage,
+      () => ids[0]!,
+    );
+    intent.saveWizard({
+      draft: { name: "", purpose: "Unsubmitted purpose", mode: "hybrid" },
+      step: 0,
+    });
+    expect(intent.pendingDraft()).toBeNull();
+    const restored = new ResearchPortfolioCreateIntent(
+      scope,
+      () => storage,
+      () => ids[1]!,
+    );
+    expect(restored.wizard()).toEqual({
+      draft: { name: "", purpose: "Unsubmitted purpose", mode: "hybrid" },
+      step: 0,
+    });
+    restored.saveWizard({ draft, step: 2 });
+    expect(restored.wizard()?.step).toBe(2);
+    const other = new ResearchPortfolioCreateIntent(
+      { ...scope, actorId: "other" },
+      () => storage,
+    );
+    expect(other.wizard()).toBeNull();
+    restored.clearWizard();
+    expect(restored.wizard()).toBeNull();
+  });
   it("persists before POST, restores the exact draft after reload, and replays a lost response", async () => {
     const storage = memoryStorage();
     let nextId = 0;

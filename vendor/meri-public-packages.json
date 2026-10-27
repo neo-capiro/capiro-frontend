@@ -431,6 +431,19 @@
       "regularEntryCount": 6,
       "status": "candidate-source-pending-review-and-merge",
       "purpose": "Peer metadata admits contracts 0.1.21; runtime and declaration bytes unchanged from 0.1.7. Packed from the unmerged Fable candidate head; root may repack from the merged head and replace this record. No publication or deployment claim."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.21-2f425244-b93f9b7ed017.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.21",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "2f425244c133aa776a82d071a3faeedb351b4756",
+      "sourceTree": "8bc6169a35d4c90433706d04b0227ffd75690feb",
+      "bytes": 1298160,
+      "sha256": "b93f9b7ed017de6dcb3b3a52b4ff1f06f5933836b69338d4a1a66c6d8e5b79e4",
+      "regularEntryCount": 69,
+      "status": "frozen-author-candidate-pending-Hermes-review",
+      "purpose": "Wave 4 Fable closeout successor: read-only management actions no longer require approval; exact producer archive copied without repacking. Producer filename uses a nine-character commit prefix; consumer filename follows the existing eight-character provenance gate."
     }
   ]
 }
