@@ -1,9 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import type { ReactNode } from "react";
 import { ActionButton } from "../../../../shared/module-ui";
-import type { z } from "zod";
-import type { evidence } from "../../../../shared/capiro/operations/defense-research-schemas";
 
 export function useResearchLocation() {
   const params = useSearchParams(),
@@ -23,50 +20,6 @@ export function useResearchLocation() {
     update,
     page: Number.isSafeInteger(rawPage) && rawPage > 0 ? rawPage : 1,
   };
-}
-export function SourceLink({
-  url,
-  children = "Open source",
-}: {
-  url: string | null;
-  children?: ReactNode;
-}) {
-  let safe = false;
-  try {
-    safe = Boolean(url && ["https:", "http:"].includes(new URL(url).protocol));
-  } catch {
-    /* Unavailable source link. */
-  }
-  return safe ? (
-    <a href={url!} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  ) : (
-    <span>Source link unavailable</span>
-  );
-}
-export function EvidenceList({
-  items,
-}: {
-  items: readonly z.infer<typeof evidence>[];
-}) {
-  return (
-    <ul>
-      {items.map((item) => (
-        <li key={item.evidenceRefId}>
-          <SourceLink url={item.sourceUrl}>
-            {item.publisher || item.sourceFamily}
-          </SourceLink>
-          {item.edition && ` · ${item.edition}`}
-          {item.nativeLocator.page !== null &&
-            ` · page ${item.nativeLocator.page}`}
-          {item.nativeLocator.section && ` · ${item.nativeLocator.section}`}
-          {item.availability && ` · ${item.availability}`}
-          {item.reason && ` — ${item.reason}`}
-        </li>
-      ))}
-    </ul>
-  );
 }
 export function ResearchPages({
   page,

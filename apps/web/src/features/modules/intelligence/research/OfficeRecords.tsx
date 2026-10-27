@@ -9,12 +9,8 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../intelligence.module.css";
-import {
-  EvidenceList,
-  ResearchPages,
-  SourceLink,
-  useResearchLocation,
-} from "./ResearchNavigation";
+import { ResearchPages, useResearchLocation } from "./ResearchNavigation";
+import { EvidenceList, SourceLink } from "./ResearchEvidence";
 export function OfficeRecords() {
   const { params, update, page } = useResearchLocation();
   const q = params.get("researchQuery") || "",

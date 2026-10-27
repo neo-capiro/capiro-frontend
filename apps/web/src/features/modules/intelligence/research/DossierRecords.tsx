@@ -10,7 +10,8 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../intelligence.module.css";
-import { EvidenceList, useResearchLocation } from "./ResearchNavigation";
+import { useResearchLocation } from "./ResearchNavigation";
+import { EvidenceList } from "./ResearchEvidence";
 export function DossierRecords() {
   const { params, update } = useResearchLocation();
   const type = subjectType.safeParse(params.get("researchSubject"));

@@ -369,3 +369,98 @@ test("office relationships and acquisition continuity use their typed source own
   await expect(page.getByText(/Deadline: Not available/)).toBeVisible();
   expect(calls.every((call) => call.method === "GET")).toBe(true);
 });
+
+for (const changed of ["none", "hash", "revision"])
+  test(`typed evidence inspector ${changed !== "none" ? `refuses a changed source ${changed}` : "binds the exact occurrence and restores keyboard focus"}`, async ({
+    page,
+  }) => {
+    const evidence = {
+      evidenceRefId: "context-occurrence:20000000-0000-4000-8000-000000000001",
+      sourceDocumentId: "synthetic-document",
+      sourceRevisionId:
+        changed === "revision" ? "changed-revision" : "synthetic-revision",
+      sourceFamily: "hearing",
+      publisher: "Synthetic publisher",
+      sourceUrl: "https://example.test/source",
+      nativeLocator: {
+        page: 2,
+        section: "Section A",
+        occurrenceId: "20000000-0000-4000-8000-000000000001",
+      },
+      contentHash:
+        changed === "hash" ? "changed-hash" : "synthetic-original-hash",
+      edition: "1",
+      observedAt: at,
+    };
+    const calls = await intercept(page, (key) =>
+      key === "defenseResearch.evidence"
+        ? evidence
+        : {
+            id: evidence.nativeLocator.occurrenceId,
+            sourceDocumentId: evidence.sourceDocumentId,
+            sourceRevisionId: evidence.sourceRevisionId,
+            sourceSectionId: null,
+            exactSpan: "10:35",
+            originalWording: "Synthetic exact source wording",
+            referenceType: "mentions",
+            disposition: "resolved",
+            evidenceRef: evidence,
+          },
+    );
+    await page.goto("/defense-research.html?view=evidence");
+    const opener = page.getByRole("button", { name: "Inspect evidence" });
+    await opener.focus();
+    await opener.press("Enter");
+    const dialog = page.getByRole("dialog", { name: "Research evidence" });
+    await expect(dialog).toBeVisible();
+    if (changed !== "none") {
+      await expect(dialog.getByRole("alert")).toContainText(
+        "changed or is no longer available",
+      );
+      await expect(
+        dialog.getByText("Synthetic exact source wording"),
+      ).toHaveCount(0);
+      expect(
+        calls.some((call) => call.key === "defenseResearch.occurrence"),
+      ).toBe(false);
+    } else {
+      await expect(
+        dialog.getByText("Synthetic exact source wording"),
+      ).toBeVisible();
+      await expect(dialog.getByText("Span: 10:35")).toBeVisible();
+      await page.keyboard.press("Tab");
+      await expect
+        .poll(() =>
+          page.evaluate(
+            () => !!document.activeElement?.closest('[role="dialog"]'),
+          ),
+        )
+        .toBe(true);
+    }
+    await page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(0);
+    await expect(opener).toBeFocused();
+    expect(calls.every((call) => call.method === "GET")).toBe(true);
+  });
+
+test("typed evidence withholds details when current access is refused", async ({
+  page,
+}) => {
+  const keys: string[] = [];
+  await page.route("**/api/capiro/**", async (route) => {
+    keys.push(new URL(route.request().url()).pathname.split("/").at(-1)!);
+    await route.fulfill({
+      status: 403,
+      json: { message: "Current access refused" },
+    });
+  });
+  await page.goto("/defense-research.html?view=evidence");
+  await page.getByRole("button", { name: "Inspect evidence" }).click();
+  const dialog = page.getByRole("dialog", { name: "Research evidence" });
+  await expect(dialog.getByText(/does not have access/)).toBeVisible();
+  await expect(dialog.getByRole("link")).toHaveCount(0);
+  await expect(dialog.getByText("Synthetic exact source wording")).toHaveCount(
+    0,
+  );
+  expect(keys.every((key) => key === "defenseResearch.evidence")).toBe(true);
+});

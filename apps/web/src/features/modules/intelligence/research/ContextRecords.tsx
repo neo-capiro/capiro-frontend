@@ -9,7 +9,8 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import styles from "../intelligence.module.css";
-import { SourceLink, useResearchLocation } from "./ResearchNavigation";
+import { useResearchLocation } from "./ResearchNavigation";
+import { SourceLink } from "./ResearchEvidence";
 export function ContextRecords() {
   const { params, update } = useResearchLocation();
   const family = params.get("researchFamily") || "",

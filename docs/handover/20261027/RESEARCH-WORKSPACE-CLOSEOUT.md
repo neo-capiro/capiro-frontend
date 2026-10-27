@@ -25,3 +25,28 @@ Private ordinary logs: `C:/dev/w4-fable-research-browser-final.log`, `C:/dev/w4-
 Native controls are not source-corpus acceptance. DI qualification still needs actual narratives, source locators, dated relationships, acquisition continuity, denominators, qualified cohorts and historical cycles under existing governed owners. S09 Explore URL/results/selection, S10 composed Changes, S13 saved comparisons, S15 detailed evidence and existing program-profile tabs belong to their allocated owners. This commit does not silently declare those rows complete.
 
 The current customer Core contract exposes `GET /defense-budget/product-coverage`; no customer governed recheck operation is published. The UI therefore offers an accurately labelled read refresh and current source limitations. A missing denominator stays unknown; no completion percentage or fabricated physical population is derived. Real source requalification/publication remains with the existing governed source owner and is not simulated by a button.
+
+## DI-07 / S15 bounded inspector follow-up
+
+The initial native evidence list only linked to sources. `ResearchEvidence.tsx` now owns source links, the evidence list and a standard shared Modal inspector. The existing `GET /defense-budget/evidence/:evidenceRefId` rechecks qualified source admission; the inspector compares the captured source/document/revision/hash and native locator before displaying the reread. An exact occurrence is read only after that check and must match the qualified document/revision/target. A changed hash or revision, unavailable result or current access refusal withholds details. The source URL helper moved from ResearchNavigation into this evidence owner; no duplicate active helper remains.
+
+The fixed `defenseEvidenceOperations` registry addition is root-owned. The occurrence endpoint accepts the existing UUID and `federal-register-reference:` canonical key forms; neither a caller-selected URL nor a service-secret Meri endpoint is exposed. Modal focus trapping and return use the existing shared primitive. Source revision/hash absence is disclosed; it is not called immutable evidence.
+
+Author evidence: the prior four mounted workspace cases remain passing in the seven-case integration run; the final targeted inspector cases pass exact occurrence/focus return, changed hash refusal, changed revision refusal, and current-access 403 refusal. Scoped TypeScript for all Research components and the inspector fixture passes with no diagnostics; owned ESLint/format pass. No independent review or real-corpus acceptance is inferred.
+
+The current `DefenseEvidenceRefDto.nativeLocator` carries page, section and occurrence only. `DefenseReferenceOccurrenceDto` adds exact span, wording and document/revision identity. These public contracts do not supply structured table/row/cell coordinates, a prior/next evidence comparison or correction-impact graph. Existing ProgramSources supplies page ranges/snippets/SHA; LegiWatch ExactEvidence supplies its own retained revision/text and different domain rights. Neither is proof of the complete DI-07/S15 before/after/cell/correction requirement. No invented controls or fabricated locators were added; those exact contract/source qualifications remain open.
+
+## S10 owner mapping and unresolved composition
+
+The recovered `phase11/requirements-and-screens.md` S10 row and the two 28 September closeout reports say Budget/Congressional/Monitored/Actions and actual FY/source semantics, but do not define the latter two queues or their selection universe. Author source tracing found these existing, distinct owners:
+
+| Owner | Actual semantics; no equivalence inferred |
+| --- | --- |
+| `program-element.controller.ts` / `program-element-read.service.ts` | `deltas/needs-attention` and `:peCode/deltas` expose live budget deltas, materiality and asserted-FY filters. The cross-PE feed is bounded and tenant relevance is applied at read time. |
+| Same controller `:peCode/bill-actions` | Per-PE congressional action history from up to 40 bills / 60 actions per bill, returned at most 200 events. This route has no FY/source filter; action dates and bill stage are distinct from budget FY. |
+| `defense-budget-client-watch.controller.ts` | `/clients/:clientId/defense-budget-watches` owns client-specific watch list/subscription/update decisions. It is not a portfolio-wide or hearing notification feed. |
+| `research-portfolios.controller.ts` and existing `ResearchChanges.tsx` | Portfolio-specific changes, cursor paging and per-user acknowledgment/dismissal/undo; subscriptions/deliveries have their own portfolio scope. No shared FY filter. |
+| Existing `LegiWatchScreen` / Updates / Monitoring | Hearings, committees, notification inbox and configured monitoring/subscription owners. These are existing destinations, not a demonstrated substitute for the four S10 segments. |
+| `legiwatch-review.controller.ts` / `legislative-document-action.controller.ts` | Review and exact proposal/read/decision are service-secret-only Meri tools. They are not a customer Actions queue and are not exposed through the frontend gateway. |
+
+The source establishes those owners, but does not choose whether S10 Monitored is a current-client watch feed, portfolio recipient changes or another documented universe, nor which native Actions queue is intended. No speculative recomposition or renamed hearing/task screen was created. Root was given this exact missing mapping; existing destinations and their authority semantics remain intact. S10 is not claimed complete by this author trace.
