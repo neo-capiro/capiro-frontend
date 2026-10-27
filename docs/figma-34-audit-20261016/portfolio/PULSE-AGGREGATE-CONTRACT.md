@@ -52,7 +52,7 @@ from the definitions above. Line references are to `apps/web`.
 | Metric | Status | Evidence |
 |---|---|---|
 | Clients | Ready | `profileType` separates CLIENT/firm/prospect, and archiving sets `status === "archived"` (`client-intake/profile-api.ts:57`). `PortfolioPulse.tsx` currently counts `profileType === "CLIENT"` without excluding archived. |
-| Strategies | Ready | `strategies.list` exists (`shared/capiro/operations/strategies-plan.ts:21`). Needs the active filter and de-duplication by strategy id. |
+| Strategies | Blocked | `strategies.list` exists (`shared/capiro/operations/strategies-plan.ts:21`) but the `strategySummary` it returns carries no active/archived state: `status` and `archivedAt` exist only on `strategyNode` (`strategies-schemas.ts:59,76`), and `strategies.archive` returns `archivedAt` only as a command receipt. “Active strategies” is not derivable from the list read. |
 | Objectives | Blocked | The objective contract exposes an authoring status `["draft","in_review","ready"]` (`objectives/contracts.ts:59`), which is not the active/completed/canceled/archived lifecycle this definition names. |
 | Off track | Blocked | Off-track exists as Planner project health `["on_track","at_risk","off_track","on_hold","complete"]` (`operations/planner-core-schemas.ts:117`); the objective→off-track aggregate does not exist. |
 | Need attention | Blocked | Composite of overdue Planner work, off-track objectives and missed cadence; no read spans those sources. |
@@ -60,9 +60,24 @@ from the definitions above. Line references are to `apps/web`.
 | Overdue work | Partial | Planner carries due-date semantics (`dateField: created|start|due|completed`, `basedOn: due_date|completion_date`) but no client-scoped read exposes open items with due dates. |
 | Recorded touches | Blocked | `activitySchema` has `kind`, `sourceType` and `origin: recorded|derived` — nothing that classifies an interaction as external, completed, non-automated and non-bulk. This is why `OverviewSignals.tsx` documents that the activity feed "is a history list, not a touch, reply, or deadline summary". |
 | Touches per week | Blocked | Same classification gap as recorded touches. |
-| Awaiting reply | Blocked | No reply-state field on any current read. The definition itself anticipates this ("keep unavailable if reply tracking cannot support this definition"). |
+| Awaiting reply | Out of scope | Dropped by owner decision 2026-10-27 and left unavailable. No reply-state field exists on any current read, which the definition anticipated ("keep unavailable if reply tracking cannot support this definition"). |
 | Latest activity | Partial | `activitySchema` carries title, body and `occurredAt` but **no actor**, so the actor in this definition needs a new field or a design change. |
 | Engagement health | Blocked | No per-client contact-cadence setting exists (the only cadence settings in the tree are bill-tracker alert preferences, unrelated). Needs the cadence setting plus the recorded-touch definition. |
+
+## Required data-model additions
+
+Owner decision 2026-10-27: do not build reply tracking — Awaiting reply stays unavailable —
+and add the other four. Each is a Core/model change; none can be satisfied in the frontend
+alone.
+
+| # | Addition | Needed by | Shape |
+|---|---|---|---|
+| 1 | Objective lifecycle state | Objectives, Off track, Need attention, Open work linked | `active` / `completed` / `canceled` / `archived` plus an explicit off-track marking. The objective contract today exposes only the authoring status `draft` / `in_review` / `ready`. |
+| 2 | Touch classifier on interaction records | Recorded touches, Touches per week, Engagement health | A record-level way to say "completed external interaction" and to exclude drafts, internal messages, automated replies and bulk newsletters — distinct from the existing `kind` / `sourceType` / `origin`. |
+| 3 | Contact cadence setting | Engagement health, Need attention | A per-client interval (default 30 days, adjustable), with a stated measurable start for new clients (creation until first recorded touch). |
+| 4 | Activity actor | Latest activity | The actor on the activity read. `activitySchema` carries title, body and `occurredAt` but no actor, so this definition cannot be rendered as written. |
+
+Not added by decision: reply tracking (Awaiting reply).
 
 ## What this changes
 
