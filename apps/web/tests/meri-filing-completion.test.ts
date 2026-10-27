@@ -92,6 +92,20 @@ it("links each saved attachment through its retained client, keeping artifact ID
   ).toBe(false);
 });
 
+it("distinct saved objects may share one persisted attachment without losing either receipt link", async () => {
+  const fixture = filingIntent(["saved", "saved"]);
+  const item = fixture.response.intents[0];
+  const [first, second] = item.execution.outcome.result.files;
+  expect(first.object.objectId).not.toBe(second.object.objectId);
+  second.documentId = first.documentId;
+  second.reused = true;
+  const html = render(await receive(fixture));
+  const destination = `/portfolio/${item.proposal.command.arguments.clientId}/files?file=${first.documentId}`;
+  expect(hrefs(html)).toEqual([destination, destination]);
+  expect(html).toContain("Open saved-1.txt in Client Files");
+  expect(html).toContain("Open saved-2.txt in Client Files");
+});
+
 it("mixed completion links only saved files while retaining pending and persisted-failed receipts", async () => {
   const fixture = filingIntent();
   const item = fixture.response.intents[0];
