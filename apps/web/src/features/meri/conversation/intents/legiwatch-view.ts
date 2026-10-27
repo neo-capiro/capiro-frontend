@@ -34,6 +34,25 @@ export function legiwatchFields(
   proposal: IntentsLegiwatchProposal,
 ): readonly IntentField[] {
   const request = proposal.request;
+  if ("previewHash" in request)
+    return [
+      { label: "Action", value: "Save pending relevance suggestion" },
+      { label: "Client", value: request.clientId ?? "General" },
+      { label: "Folder", value: request.folderId },
+      { label: "Bill", value: request.billId },
+      { label: "Jurisdiction", value: request.jurisdiction },
+      { label: "Session", value: request.sessionKey },
+      { label: "Source fields", value: request.fields.join(", ") },
+      { label: "Rationale", value: request.explanation },
+      { label: "Document", value: request.documentId },
+      {
+        label: "Source offsets (UTF-16)",
+        value: `${request.start}–${request.end}`,
+      },
+      { label: "Verified quote", value: request.quote },
+      { label: "Preview hash", value: request.previewHash },
+      { label: "Expires", value: proposal.expiresAt },
+    ];
   return [
     { label: "Action", value: actions[request.action] },
     { label: "Client", value: request.clientId ?? "General" },
@@ -47,6 +66,12 @@ export function legiwatchFields(
 }
 
 const outcomes = {
+  suggested: {
+    status: "Suggestion saved",
+    tone: "success",
+    detail:
+      "The relevance suggestion was saved for review. It remains pending; no bill was assigned and no watch was activated.",
+  },
   added: {
     status: "Added",
     tone: "success",
@@ -123,7 +148,15 @@ export function legiwatchRow(
     };
   const proposal = item.proposal,
     result = item.result;
-  const row = { ...base, proposal, fields: legiwatchFields(proposal) };
+  const row = {
+    ...base,
+    title:
+      proposal.operation === "save_legiwatch_relevance"
+        ? "Pending relevance suggestion"
+        : base.title,
+    proposal,
+    fields: legiwatchFields(proposal),
+  };
   if (result === "unavailable")
     return {
       ...row,
@@ -137,6 +170,14 @@ export function legiwatchRow(
       ...row,
       ...outcomes[result.receipt.outcome],
       result: [
+        ...(result.receipt.outcome === "suggested"
+          ? [
+              {
+                label: "Saved suggestion",
+                value: result.receipt.payload.suggestionId,
+              },
+            ]
+          : []),
         {
           label: "Recorded outcome",
           value: result.receipt.outcome.replaceAll("_", " "),
@@ -145,7 +186,8 @@ export function legiwatchRow(
           label: "Recorded version",
           value: String(result.receipt.payload.version),
         },
-        ...(result.receipt.payload.decisionId
+        ...("decisionId" in result.receipt.payload &&
+        result.receipt.payload.decisionId
           ? [
               {
                 label: "Decision reference",

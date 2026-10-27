@@ -1,3 +1,4 @@
+import { clientRecordSettled } from "./client-record-view";
 import { legiwatchSettled } from "./legiwatch-view";
 import type {
   IntentsItem,
@@ -14,6 +15,8 @@ export function isResearchShareProposal(
 }
 
 export function intentDecisionSettled(response: IntentsDecideResponse) {
+  if (response.status === "client_record_decided")
+    return clientRecordSettled(response.result.status);
   if (response.status === "legiwatch_decided")
     return legiwatchSettled(response.result.status);
   return (

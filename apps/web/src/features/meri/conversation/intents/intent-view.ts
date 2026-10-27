@@ -1,4 +1,9 @@
 import {
+  isClientRecordProposal,
+  clientRecordFields,
+  clientRecordRow,
+} from "./client-record-view";
+import {
   isLegiwatchProposal,
   legiwatchFields,
   legiwatchRow,
@@ -67,6 +72,7 @@ export function proposalFields(
 ): readonly IntentField[] {
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
   if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
+  if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
   const command = proposal.command;
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
@@ -364,6 +370,8 @@ export function intentRow(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
+  if (item.kind === "client_record_action")
+    return clientRecordRow(item, now, viewer);
   if (item.kind === "research_share")
     return researchShareRow(item, now, viewer);
   if (item.kind === "schedule_proposal")

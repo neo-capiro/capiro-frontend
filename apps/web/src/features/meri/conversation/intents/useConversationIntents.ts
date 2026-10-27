@@ -11,6 +11,10 @@ import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
+import {
+  isClientRecordProposal,
+  clientRecordSettled,
+} from "./client-record-view";
 import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
 import { useIntentExpiry } from "./useIntentExpiry";
 import { useResearchShareResults } from "./useResearchShareResults";
@@ -98,7 +102,8 @@ export function useConversationIntents(
           item.state !== "prepared" ||
           (item.kind !== "proposal" &&
             item.kind !== "research_share" &&
-            item.kind !== "legiwatch_action") ||
+            item.kind !== "legiwatch_action" &&
+            item.kind !== "client_record_action") ||
           "withheld" in item
         )
           continue;
@@ -110,6 +115,9 @@ export function useConversationIntents(
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
         if (
+          (item.kind === "client_record_action" &&
+            item.result !== "unavailable" &&
+            clientRecordSettled(item.result.status)) ||
           (item.kind === "legiwatch_action" &&
             item.result !== "unavailable" &&
             legiwatchSettled(item.result.status)) ||
@@ -200,8 +208,11 @@ export function useConversationIntents(
       if (!prior && Date.parse(proposal.expiresAt) <= now()) return;
       if (prior?.state === "pending" || (prior && prior.decision !== decision))
         return;
-      // Reconcile an uncertain suggestion decision by reading its owner; never resend it.
-      if (prior && isLegiwatchProposal(proposal)) {
+      // Reconcile uncertain domain actions by reading their owner; never resend them.
+      if (
+        prior &&
+        (isLegiwatchProposal(proposal) || isClientRecordProposal(proposal))
+      ) {
         try {
           guard();
         } catch {
@@ -285,7 +296,9 @@ export function useConversationIntents(
         current.current.access === access
       )
         onDecisionSettled?.(
-          isResearchShareProposal(proposal) || isLegiwatchProposal(proposal)
+          isResearchShareProposal(proposal) ||
+            isLegiwatchProposal(proposal) ||
+            isClientRecordProposal(proposal)
             ? proposal.binding.runId
             : proposal.command.binding.runId,
         );

@@ -14,12 +14,29 @@ type Item = Extract<
   { kind: "legiwatch_action"; proposal: unknown }
 >;
 export type Result = Exclude<Item["result"], "unavailable">;
+type SuggestionRequest = Extract<
+  IntentsLegiwatchProposal["request"],
+  { action: unknown }
+>;
+type SuggestionReceipt = Extract<
+  NonNullable<Result["receipt"]>,
+  { payload: { action: unknown } }
+>;
+type SuggestionItem = Omit<Item, "proposal" | "result"> & {
+  proposal: Omit<IntentsLegiwatchProposal, "request"> & {
+    request: SuggestionRequest;
+  };
+  result: Omit<Result, "request" | "receipt"> & {
+    request: SuggestionRequest;
+    receipt: SuggestionReceipt | null;
+  };
+};
 export function legiwatchFixture(
   status: Result["status"] = "proposed",
-  outcome: NonNullable<Result["receipt"]>["outcome"] = "added",
-): Item {
+  outcome: SuggestionReceipt["outcome"] = "added",
+): SuggestionItem {
   const createdAt = new Date(Date.now() - 1000).toISOString();
-  const bound: Omit<IntentsLegiwatchProposal, "commandSha256"> = {
+  const bound: Omit<SuggestionItem["proposal"], "commandSha256"> = {
     kind: "legiwatch_action",
     operation: "apply_legiwatch_suggestion",
     proposalId: "00000000-0000-4000-8000-000000000002",
