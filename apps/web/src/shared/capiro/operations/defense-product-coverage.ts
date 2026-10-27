@@ -1,6 +1,29 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 const filter = z.string().max(200).optional();
+export const coverageRecordedOutcome = z.object({
+  sourceState: z.string().nullable(),
+  lastObservation: z
+    .object({
+      state: z.string(),
+      revisionKind: z.string(),
+      observedAt: z.string(),
+    })
+    .nullable(),
+  lastGovernedResolution: z
+    .object({
+      decision: z.enum([
+        "expected",
+        "not_filed",
+        "published",
+        "withdrawn",
+        "unavailable",
+      ]),
+      resolvedAt: z.string(),
+    })
+    .nullable(),
+  reason: z.string().nullable(),
+});
 export const coverageFilters = z
   .object({
     perimeter: filter,
@@ -40,6 +63,7 @@ export const productCoverage = z.object({
       published: z.number(),
       outcome: z.enum(["complete", "partial", "unavailable", "unknown"]),
       limitations: z.array(z.string()),
+      recordedOutcome: coverageRecordedOutcome.optional(),
     }),
   ),
   denominatorKnown: z.boolean(),
@@ -53,6 +77,6 @@ export const defenseProductCoverageOperations = {
     request: z.object({ query: coverageFilters }).strict(),
     response: productCoverage,
     source:
-      "capiro-backend@f7b3c4401 packages/shared/src/defense-research.ts DefenseProductCoverageResponseDto; defense-research.controller.ts",
+      "capiro-backend@b49f01017 packages/shared/src/defense-research.ts DefenseProductCoverageResponseDto; defense-research.controller.ts",
   }),
 } as const;

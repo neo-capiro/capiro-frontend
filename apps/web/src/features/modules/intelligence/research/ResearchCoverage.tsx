@@ -11,6 +11,7 @@ import {
 } from "../../../../shared/module-ui";
 import styles from "../intelligence.module.css";
 import { useResearchLocation } from "./ResearchNavigation";
+import { CoverageOutcome } from "./CoverageOutcome";
 const filterNames = [
   "perimeter",
   "component",
@@ -178,6 +179,13 @@ export function ResearchCoverage() {
                       <br />
                       {row.qualified} qualified · {row.published} published
                     </>
+                  ),
+                },
+                {
+                  key: "recordedOutcome",
+                  label: "Recorded source outcomes",
+                  render: (row) => (
+                    <CoverageOutcome outcome={row.recordedOutcome} />
                   ),
                 },
                 {

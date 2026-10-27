@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { evidenceLocatorDetails } from "./defense-evidence-details";
 // Public Core DTO projections. Unknown fields (including acquisition raw payloads) are stripped.
 export const availability = z.enum(["available", "partial", "unavailable"]);
 export const evidence = z.object({
@@ -12,6 +13,7 @@ export const evidence = z.object({
     page: z.number().nullable(),
     section: z.string().nullable(),
     occurrenceId: z.string().nullable(),
+    details: evidenceLocatorDetails.optional(),
   }),
   contentHash: z.string().nullable(),
   edition: z.string().nullable(),

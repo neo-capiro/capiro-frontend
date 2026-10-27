@@ -10,6 +10,7 @@ import {
 } from "../../../../shared/module-ui";
 import { useResearchLocation } from "../research/ResearchNavigation";
 import { ProgramBills } from "../ProgramEvidence";
+import { FederalEvidenceTimeline } from "./FederalEvidenceTimeline";
 import styles from "../intelligence.module.css";
 export function CongressionalChanges() {
   const { params, update } = useResearchLocation();
@@ -35,6 +36,7 @@ export function CongressionalChanges() {
               changesCongressPe: String(
                 new FormData(e.currentTarget).get("pe") || "",
               ).trim(),
+              changesEvidenceCursor: null,
             });
           }}
         >
@@ -113,6 +115,7 @@ export function CongressionalChanges() {
         )}
       </Panel>
       {valid && <ProgramBills peCode={peCode} />}
+      {valid && <FederalEvidenceTimeline key={peCode} peCode={peCode} />}
     </div>
   );
 }
