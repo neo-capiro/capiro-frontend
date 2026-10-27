@@ -146,9 +146,9 @@ function ExportDialog({ onClose, scope }: Props) {
         )}
         {state.loading && <p role="status">Reading saved export request…</p>}
         <p className={styles.caption}>
-          This request is retained across closing and reloading. Use Check
-          status to look for its original saved PDF. No replacement is
-          generated.
+          {held
+            ? "This request is retained across closing and reloading. Check status looks for its original saved PDF without generating a replacement."
+            : "After you generate a PDF, its request is retained across closing and reloading. If its outcome is unconfirmed, Check status will look up the original request without generating a replacement."}
         </p>
       </div>
     </Modal>

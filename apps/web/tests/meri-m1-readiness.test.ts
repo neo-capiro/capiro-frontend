@@ -414,6 +414,30 @@ function historySession(notReady: boolean, busy = false): Session {
 const renderHistory = (session: Session) =>
   renderToStaticMarkup(createElement(ConversationHistoryStatus, { session }));
 
+it("empty saved history does not dismiss an uncertain current turn or trigger recovery", () => {
+  const session = historySession(false);
+  session.history.empty = true;
+  const html = renderHistory(session);
+  expect(html).toContain(
+    "No saved turns were returned by the last history check",
+  );
+  expect(html).toContain("shown below has its own delivery status");
+  expect(html).toContain("A turn may already be in flight");
+  expect(html).not.toContain("No saved turns yet.");
+  expect(session.continuation.retry).not.toHaveBeenCalled();
+  expect(session.readReservation).not.toHaveBeenCalled();
+});
+
+it("unavailable history supersedes a previously empty result", () => {
+  const session = historySession(false);
+  session.history.empty = true;
+  session.history.unavailable = true;
+  const html = renderHistory(session);
+  expect(html).toContain("Saved conversation history unavailable");
+  expect(html).not.toContain("No saved turns were returned");
+  expect(session.continuation.retry).not.toHaveBeenCalled();
+});
+
 it("a not-ready turn refusal is a saved-message status with only explicit same-turn retry and busy protection", () => {
   for (const busy of [false, true]) {
     harness.buttons.length = 0;

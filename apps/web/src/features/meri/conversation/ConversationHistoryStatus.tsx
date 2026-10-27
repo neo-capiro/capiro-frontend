@@ -86,12 +86,15 @@ export function ConversationHistoryStatus({ session }: { session: Session }) {
         <p>A verified conversation is required to read saved history.</p>
       ) : loading ? (
         <p role="status">Loading saved conversation history.</p>
-      ) : history.empty ? (
-        <p>No saved turns yet.</p>
       ) : history.unavailable ? (
         <p role="status">
           Saved conversation history unavailable. No sample transcript was
           substituted.
+        </p>
+      ) : history.empty ? (
+        <p>
+          No saved turns were returned by the last history check. Any message
+          shown below has its own delivery status.
         </p>
       ) : (
         <p>

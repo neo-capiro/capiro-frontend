@@ -8,6 +8,8 @@ import {
 } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@capiro/ui/button";
+import ui from "../../../features/meri/ui/meri-ui.module.css";
+import { MeriPageHeading } from "../../../features/meri/ui/MeriPageHeading";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { scopedHref } from "../../../shared/session/client-route";
@@ -174,14 +176,13 @@ function ConnectedFiles({
       </section>
     );
   return (
-    <section aria-label="Document connection">
-      <h1>Files</h1>
-      <p>Client: {clientName}.</p>
-      <p>
+    <section className={ui.page} aria-label="Document connection">
+      <MeriPageHeading title="Files" description={`Client: ${clientName}.`} />
+      <p className={ui.muted}>
         Document creation uses a saved request from this tab’s current client
         chat. Connecting checks that context; it does not start a request.
       </p>
-      <p role="status">
+      <p className={ui.muted} role="status">
         {state.status === "connecting"
           ? "Checking the current document context…"
           : state.status === "expired"
@@ -190,24 +191,27 @@ function ConnectedFiles({
               ? "The current document context could not be verified."
               : "Connect to check the current document context. No file is created or revised automatically."}
       </p>
-      <Button
-        type="button"
-        disabled={state.status === "connecting"}
-        onClick={() => void host.connect()}
-      >
-        Connect document service
-      </Button>
-      {capabilities.newConversation.status === "on" && (
-        <p>
-          <Link
-            href={scopedHref("/meri", clientId)}
-            prefetch={false}
-            className="underline"
-          >
-            Open client chat
-          </Link>
-        </p>
-      )}
+      <div className={ui.row}>
+        <Button
+          type="button"
+          className={ui.outline}
+          disabled={state.status === "connecting"}
+          onClick={() => void host.connect()}
+        >
+          Connect document service
+        </Button>
+        {capabilities.newConversation.status === "on" && (
+          <p>
+            <Link
+              href={scopedHref("/meri", clientId)}
+              prefetch={false}
+              className="underline"
+            >
+              Open client chat
+            </Link>
+          </p>
+        )}
+      </div>
     </section>
   );
 }

@@ -166,12 +166,12 @@ it("date presentation never exposes recents before session, identity and client 
   expect(render("signed-in", false)).not.toContain("Conversation ·");
   fixture.identity = false;
   expect(render()).toContain(
-    "A verified account and current client are required.",
+    "Verify your account to load recent conversations.",
   );
   fixture.identity = true;
   fixture.selected = false;
   expect(render()).toContain(
-    "A verified account and current client are required.",
+    "Choose General or a permitted client to load recent conversations.",
   );
   expect(fixture.discovery).not.toHaveBeenCalled();
 });
