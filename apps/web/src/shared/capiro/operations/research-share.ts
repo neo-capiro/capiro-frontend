@@ -112,4 +112,44 @@ export const researchShareOperations = {
     response: s.researchShareLink,
     source,
   }),
+  // Tenant administrators: every live link in the workspace, and the workspace-wide switch.
+  "research.shareLinks.tenant": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/research-share-links",
+    request: z.object({}).strict(),
+    response: z.array(s.researchShareLink),
+    source,
+  }),
+  "research.shareLinks.tenantRevoke": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/research-share-links/:linkId/revoke",
+    request: z
+      .object({
+        params: z.object({ linkId: z.uuid() }).strict(),
+        body: z.object({}).strict(),
+      })
+      .strict(),
+    response: s.researchShareLink,
+    source,
+  }),
+  "research.tenantSharing": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/research-share-links/settings",
+    request: z.object({}).strict(),
+    response: s.researchTenantSharing,
+    source,
+  }),
+  "research.tenantSharing.set": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/research-share-links/settings",
+    request: z
+      .object({ body: z.object({ enabled: z.boolean() }).strict() })
+      .strict(),
+    response: s.researchTenantSharing,
+    source,
+  }),
 } as const;

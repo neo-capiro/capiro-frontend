@@ -114,6 +114,30 @@ it("the dashboard read carries the view token in the body of a same-origin POST"
   expect(new Headers(options.headers).has("cookie")).toBe(false);
 });
 
+it("the logo read is a same-origin POST that forwards only the view token", async () => {
+  const fetcher = vi.fn(async () =>
+    Response.json({ url: "https://signed.example/logo.png" }),
+  );
+  const response = await handlePublicResearchShareRequest(
+    write("public-research-share.logo", {
+      params: { token },
+      body: { viewToken: "link.exp.sig" },
+    }),
+    "public-research-share.logo",
+    config,
+    fetcher,
+  );
+  expect(response.status).toBe(200);
+  expect(await response.json()).toEqual({
+    url: "https://signed.example/logo.png",
+  });
+  const [url, options] = fetcher.mock.calls[0] as unknown as [URL, RequestInit];
+  expect(url.href).toBe(
+    `https://core.example.test/api/public/research-share/${token}/logo`,
+  );
+  expect(new Headers(options.headers).has("cookie")).toBe(false);
+});
+
 it("cross-origin PIN attempts and malformed tokens never reach the upstream", async () => {
   const fetcher = vi.fn();
   const crossOrigin = await handlePublicResearchShareRequest(

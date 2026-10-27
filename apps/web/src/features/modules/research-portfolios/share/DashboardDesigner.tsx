@@ -119,6 +119,8 @@ export function DashboardDesigner({
   const [name, setName] = useState(initialName);
   const [selected, setSelected] = useState<string>();
   const [mode, setMode] = useState<"arrange" | "preview">("arrange");
+  /** Read by screen readers after each keyboard or pointer change (FR-16.11). */
+  const [announcement, setAnnouncement] = useState("");
   const canvas = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
   const layout = draft ?? history.present;
@@ -176,12 +178,26 @@ export function DashboardDesigner({
     );
   }
   function endDrag() {
-    if (!drag.current) return;
+    const current = drag.current;
+    if (!current) return;
     drag.current = null;
     setDraft((d) => {
-      if (d) history.commit(d);
+      if (d) {
+        history.commit(d);
+        const moved = d.widgets.find((w) => w.id === current.id);
+        if (moved)
+          setAnnouncement(
+            describe(moved, current.mode === "move" ? "moved" : "resized"),
+          );
+      }
       return undefined;
     });
+  }
+  function describe(
+    widget: ResearchDashboardWidget,
+    verb: "moved" | "resized" | "added",
+  ) {
+    return `${widgetDefinition(widget.kind).label} ${verb}: column ${widget.x + 1}, row ${widget.y + 1}, ${widget.w} wide, ${widget.h} tall.`;
   }
   function onCellKey(
     event: KeyboardEvent<HTMLElement>,
@@ -197,26 +213,34 @@ export function DashboardDesigner({
       event.preventDefault();
       history.commit(removeWidget(history.present, widget.id));
       setSelected(undefined);
+      setAnnouncement(`${widgetDefinition(widget.kind).label} removed.`);
       return;
     }
     const delta = step[event.key];
     if (!delta) return;
     event.preventDefault();
-    history.commit(
-      event.shiftKey
-        ? resizeWidget(
-            history.present,
-            widget.id,
-            widget.w + delta[0],
-            widget.h + delta[1],
-          )
-        : moveWidget(
-            history.present,
-            widget.id,
-            widget.x + delta[0],
-            widget.y + delta[1],
-          ),
-    );
+    const next = event.shiftKey
+      ? resizeWidget(
+          history.present,
+          widget.id,
+          widget.w + delta[0],
+          widget.h + delta[1],
+        )
+      : moveWidget(
+          history.present,
+          widget.id,
+          widget.x + delta[0],
+          widget.y + delta[1],
+        );
+    const changed = next.widgets.find((w) => w.id === widget.id);
+    if (next === history.present || !changed) {
+      setAnnouncement(
+        `${widgetDefinition(widget.kind).label} cannot ${event.shiftKey ? "resize" : "move"} there.`,
+      );
+      return;
+    }
+    history.commit(next);
+    setAnnouncement(describe(changed, event.shiftKey ? "resized" : "moved"));
   }
 
   return (
@@ -264,6 +288,9 @@ export function DashboardDesigner({
         </ActionButton>
       </div>
       {error && <p role="alert">{error}</p>}
+      <p className={styles.srOnly} role="status" aria-live="polite">
+        {announcement}
+      </p>
       {problems.length > 0 && (
         <ul className={styles.problems}>
           {problems.map((p) => (
@@ -357,11 +384,13 @@ export function DashboardDesigner({
                     key={definition.kind}
                     type="button"
                     disabled={layout.widgets.length >= 40}
-                    onClick={() =>
-                      history.commit(
-                        addWidget(history.present, definition.kind),
-                      )
-                    }
+                    onClick={() => {
+                      const next = addWidget(history.present, definition.kind);
+                      history.commit(next);
+                      const added = next.widgets.at(-1);
+                      if (added && next !== history.present)
+                        setAnnouncement(describe(added, "added"));
+                    }}
                   >
                     {definition.label}
                     <small>{definition.description}</small>
