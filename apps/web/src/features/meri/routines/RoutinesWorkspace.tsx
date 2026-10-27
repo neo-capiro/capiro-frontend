@@ -93,12 +93,17 @@ export function RoutinesWorkspace({
   port,
   preserveNewDraft = false,
   client = "General",
+  onRequestExecution,
+  initialEditor,
 }: {
   port: RoutineWorkflow;
   /** Only the host keyed by immutable account/client may retain an unsent new draft across reauthorization. */
   preserveNewDraft?: boolean;
   /** Scope name shown in the Client column (Figma 08.01). */
   client?: string;
+  /** Explicitly enter the existing run-bound flow; management never manufactures execution authority. */
+  onRequestExecution?: (scheduleId?: string) => void;
+  initialEditor?: { scheduleId?: string };
 }) {
   const state = useSyncExternalStore(
     port.subscribe,
@@ -112,7 +117,7 @@ export function RoutinesWorkspace({
   const [editor, setEditor] = useState<{
     mode: "edit" | "pause" | "delete";
     scheduleId?: string;
-  } | null>(null);
+  } | null>(initialEditor ? { mode: "edit", ...initialEditor } : null);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
@@ -195,9 +200,13 @@ export function RoutinesWorkspace({
             </Button>
             <Button
               disabled={disabled}
-              onClick={() => setEditor({ mode: "edit" })}
+              onClick={() =>
+                port.managementOnly
+                  ? onRequestExecution?.()
+                  : setEditor({ mode: "edit" })
+              }
             >
-              New routine
+              {port.managementOnly ? "Create or edit routines" : "New routine"}
             </Button>
           </>
         }
@@ -250,10 +259,12 @@ export function RoutinesWorkspace({
               disabled={rowBlocked}
               onClick={() =>
                 routine &&
-                setEditor({
-                  mode: "edit",
-                  scheduleId: routine.projection.scheduleId,
-                })
+                (port.managementOnly
+                  ? onRequestExecution?.(routine.projection.scheduleId)
+                  : setEditor({
+                      mode: "edit",
+                      scheduleId: routine.projection.scheduleId,
+                    }))
               }
             >
               Open routine
@@ -276,10 +287,12 @@ export function RoutinesWorkspace({
               disabled={rowBlocked || routine?.projection.state !== "paused"}
               onClick={() =>
                 routine &&
-                setEditor({
-                  mode: "edit",
-                  scheduleId: routine.projection.scheduleId,
-                })
+                (port.managementOnly
+                  ? onRequestExecution?.(routine.projection.scheduleId)
+                  : setEditor({
+                      mode: "edit",
+                      scheduleId: routine.projection.scheduleId,
+                    }))
               }
             >
               Resume

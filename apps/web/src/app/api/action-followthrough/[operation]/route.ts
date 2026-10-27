@@ -20,7 +20,9 @@ export async function POST(
   return proxyActionRequest(
     request,
     operation,
-    operation === "objective-start" || routineRoute(operation)
+    operation === "objective-start" ||
+      operation === "routine-session" ||
+      routineRoute(operation)
       ? {
           enabled: connection.conversationEnabled,
           baseUrl: connection.baseUrl,
@@ -32,7 +34,9 @@ export async function POST(
     async () => {
       const session = await auth();
       return session.userId
-        ? operation === "session" || operation === "objective-start"
+        ? operation === "session" ||
+          operation === "objective-start" ||
+          operation === "routine-session"
           ? meriIdentityToken(session.sessionId, () => session.getToken())
           : session.getToken({ template: "capiro" })
         : null;

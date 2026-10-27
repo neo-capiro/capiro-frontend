@@ -13,6 +13,8 @@ import {
   routineApproval,
   routineDecision,
   receiveSavedRoutine,
+  isRoutineManagement,
+  requireFutureRoutineChange,
   type RoutineContext,
   type SavedRoutine,
 } from "./recovery";
@@ -52,6 +54,10 @@ export class RoutineWorkflow {
     this.observeLifetime();
   }
   getSnapshot = () => this.state;
+  /** UI affordance only; the server independently enforces the management vocabulary. */
+  get managementOnly() {
+    return isRoutineManagement(this.options.context);
+  }
   subscribe = (listener: () => void) => {
     this.listeners.add(listener);
     return () => {
@@ -149,7 +155,10 @@ export class RoutineWorkflow {
       actual.tenantId !== expected.tenantId ||
       actual.actorId !== expected.actorId ||
       actual.selectedClientId !== expected.selectedClientId ||
-      actual.conversationId !== expected.conversationId
+      isRoutineManagement(actual) !== isRoutineManagement(expected) ||
+      ("conversationId" in actual &&
+        "conversationId" in expected &&
+        actual.conversationId !== expected.conversationId)
     )
       throw new Error(
         "Reconnect to the original saved routine conversation before continuing.",
@@ -245,6 +254,7 @@ export class RoutineWorkflow {
         "prepare",
         JSON.stringify(request),
       );
+      if (this.managementOnly) requireFutureRoutineChange(body);
       const saved = await this.journal().reserve({
         requestId: body.requestId,
         context: this.options.context,

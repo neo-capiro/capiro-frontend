@@ -161,13 +161,18 @@ function runEffects() {
   view.effects = [];
   for (const effect of effects) effect();
 }
-function renderWorkspace(port: RoutineWorkflow) {
+function renderWorkspace(
+  port: RoutineWorkflow,
+  options: Partial<ComponentProps<typeof RoutinesWorkspace>> = {},
+) {
   let html = "";
   for (let render = 0; render < 5; render++) {
     view.index = 0;
     view.buttons = [];
     view.changed = false;
-    html = renderToStaticMarkup(createElement(RoutinesWorkspace, { port }));
+    html = renderToStaticMarkup(
+      createElement(RoutinesWorkspace, { port, ...options }),
+    );
     if (!view.changed) return html;
   }
   throw new Error("Workspace did not settle");
@@ -287,7 +292,9 @@ it("commits approval marker before HTTP, survives new-run reconnect and acknowle
   const next = workflow(fetch, { ...f.context, runId: crypto.randomUUID() });
   await next.load();
   expect(fetch).toHaveBeenCalledTimes(2);
-  expect(next.getSnapshot().saved?.context.runId).toBe(f.context.runId);
+  expect(next.getSnapshot().saved?.context).toMatchObject({
+    runId: f.context.runId,
+  });
   fetch.mockImplementationOnce(async () => Response.json(f.reconciled));
   await next.reconcile();
   expect(next.getSnapshot().saved?.result?.value).toEqual(f.reconciled);
@@ -934,6 +941,17 @@ function hostHarness(): HostHarness {
       calls.push({ path, body });
       if (path === "/api/action-followthrough/session")
         return Response.json(conversationReceipt());
+      if (path === "/api/action-followthrough/routine-session")
+        return Response.json({
+          kind: "routine-management",
+          credential: `routine_session_${"m".repeat(43)}`,
+          expiresAtMs: Date.now() + 30_000,
+          context: {
+            tenantId: f.context.tenantId,
+            actorId: f.context.actorId,
+            selectedClientId: body.clientId,
+          },
+        });
       return reply(
         path.replace("/api/action-followthrough/routine-", ""),
         body,
@@ -943,10 +961,15 @@ function hostHarness(): HostHarness {
   return { calls, setReply: (next) => (reply = next) };
 }
 const issuances = (h: HostHarness) =>
-  h.calls.filter((call) => call.path === "/api/action-followthrough/session")
-    .length;
+  h.calls.filter(
+    (call) => call.path === "/api/action-followthrough/routine-session",
+  ).length;
 const routineCalls = (h: HostHarness) =>
-  h.calls.filter((call) => call.path.includes("/routine-"));
+  h.calls.filter(
+    (call) =>
+      call.path.includes("/routine-") &&
+      !call.path.endsWith("/routine-session"),
+  );
 function renderHost() {
   view.index = 0;
   view.buttons = [];
@@ -970,6 +993,51 @@ function clickHost(label: string) {
   expect(button!.disabled).not.toBe(true);
   button!.onClick!({} as never);
 }
+
+it("cold General management connects without entering first chat even when General execution is disabled", async () => {
+  const h = hostHarness();
+  providers.selected = { state: "no-selection" };
+  view.captureEffects = true;
+  renderHost();
+  runEffects();
+  clickHost("Connect routines");
+  await vi.waitFor(() => {
+    hostMarkup();
+    expect(hostButton("Connect routines")).toBeUndefined();
+  });
+  expect(h.calls).toEqual([
+    {
+      path: "/api/action-followthrough/routine-session",
+      body: { clientId: null },
+    },
+  ]);
+});
+
+it("management editing affordances explicitly request the existing execution connection and do not prepare work", async () => {
+  const context = {
+      kind: "routine-management",
+      tenantId: f.context.tenantId,
+      actorId: f.context.actorId,
+      selectedClientId: f.context.selectedClientId,
+    },
+    fetch = fetcher(() => Response.json(f.listed)),
+    port = workflow(fetch, context),
+    requestEditing = vi.fn();
+  await port.load();
+  await readWorkspace(port);
+  const html = renderWorkspace(port, { onRequestExecution: requestEditing });
+  expect(html).toContain("Create or edit routines");
+  clickRoutine("Create or edit routines");
+  expect(requestEditing).toHaveBeenCalledWith();
+  expect(fetch).toHaveBeenCalledOnce();
+  expect(port.getSnapshot().saved).toBeNull();
+  renderWorkspace(port, { onRequestExecution: requestEditing });
+  clickRoutine("Open routine");
+  expect(requestEditing).toHaveBeenLastCalledWith(
+    f.listed.page.rows[0].projection.scheduleId,
+  );
+  expect(fetch).toHaveBeenCalledOnce();
+});
 
 it("a refused routine action retires the exact standalone connection so explicit Connect issues fresh access without reposting the saved approval", async () => {
   const harness = hostHarness();

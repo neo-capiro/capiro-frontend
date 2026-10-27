@@ -16,7 +16,10 @@ import {
 } from "../../../shared/capiro/operations/meri-first-chat";
 import { resolveFirstChatConversation } from "../../../shared/meri-conversations/first-chat-bootstrap";
 import { SessionLifetimeController } from "../../../shared/meri-actions/opaque-session-controller";
-import { bootstrapRoutineSession } from "../../../shared/meri-routines/session";
+import {
+  bootstrapRoutineSession,
+  bootstrapRoutineManagementSession,
+} from "../../../shared/meri-routines/session";
 import { createRoutinesAccess } from "../../../shared/meri-routines/access";
 import { RoutineWorkflow } from "../../../shared/meri-routines/workflow";
 import type { RoutineOwner } from "../../../shared/meri-routines/recovery";
@@ -25,6 +28,9 @@ import { MeriPageHeading } from "../ui/MeriPageHeading";
 import { Notice } from "../ui/Notice";
 import styles from "../ui/meri-ui.module.css";
 import phone from "../ui/phone-page.module.css";
+type RoutineSession =
+  | Awaited<ReturnType<typeof bootstrapRoutineSession>>
+  | Awaited<ReturnType<typeof bootstrapRoutineManagementSession>>;
 
 export function MeriRoutinesHost({
   enabled,
@@ -51,7 +57,7 @@ export function MeriRoutinesHost({
       selected.state === "no-selection" ? null : selected.requestedId,
   };
   return (
-    <Connected
+    <RoutineMode
       key={JSON.stringify(owner)}
       owner={owner}
       generalEnabled={generalEnabled}
@@ -72,72 +78,101 @@ export function MeriRoutinesHost({
   );
 }
 
+type RoutinePageContext = {
+  owner: RoutineOwner;
+  name: string;
+  available: boolean;
+  denied: boolean;
+  generalEnabled: boolean;
+};
+
+/** Management is the cold-page default. Editing explicitly enters the existing execution flow. */
+function RoutineMode(props: RoutinePageContext) {
+  const [editing, setEditing] = useState<{ scheduleId?: string } | null>(null);
+  return (
+    <Connected
+      {...props}
+      key={editing ? "execution" : "management"}
+      editing={editing}
+      onEdit={(scheduleId) => setEditing({ scheduleId })}
+      onManage={() => setEditing(null)}
+    />
+  );
+}
+
 function Connected({
   owner,
   name,
   available,
   denied,
   generalEnabled,
-}: {
-  owner: RoutineOwner;
-  name: string;
-  available: boolean;
-  denied: boolean;
-  generalEnabled: boolean;
+  editing,
+  onEdit,
+  onManage,
+}: RoutinePageContext & {
+  editing: { scheduleId?: string } | null;
+  onEdit: (scheduleId?: string) => void;
+  onManage: () => void;
 }) {
   const api = useApi();
   const capiro = useCapiro();
   const [host] = useState(
     () =>
-      new SessionLifetimeController({
+      new SessionLifetimeController<RoutineWorkflow, RoutineSession>({
         issue: (signal) =>
-          bootstrapRoutineSession({
-            api,
-            owner,
-            signal,
-            resolveConversation: async (signal) => {
-              if (owner.selectedClientId === null && !generalEnabled)
-                throw new Error("General routine context is not enabled.");
-              const result = await resolveFirstChatConversation({
-                scope:
-                  owner.selectedClientId === null
-                    ? {
-                        tenantId: owner.tenantId,
-                        actorId: owner.actorId,
-                        clientId: null,
-                        scopeKind: "general",
-                      }
-                    : {
-                        tenantId: owner.tenantId,
-                        actorId: owner.actorId,
-                        clientId: owner.selectedClientId,
-                      },
-                storage: window.sessionStorage,
+          editing === null
+            ? bootstrapRoutineManagementSession({ api, owner, signal })
+            : bootstrapRoutineSession({
+                api,
+                owner,
                 signal,
-                createOrReuse: (body, signal) => {
-                  return body.schemaVersion === 1
-                    ? capiro.request(
-                        firstChatCoreOperationKey,
-                        { body },
-                        { signal },
-                      )
-                    : capiro.request(
-                        firstChatV2OperationKey,
-                        { body },
-                        { signal },
-                      );
+                resolveConversation: async (signal) => {
+                  if (owner.selectedClientId === null && !generalEnabled)
+                    throw new Error("General routine context is not enabled.");
+                  const result = await resolveFirstChatConversation({
+                    scope:
+                      owner.selectedClientId === null
+                        ? {
+                            tenantId: owner.tenantId,
+                            actorId: owner.actorId,
+                            clientId: null,
+                            scopeKind: "general",
+                          }
+                        : {
+                            tenantId: owner.tenantId,
+                            actorId: owner.actorId,
+                            clientId: owner.selectedClientId,
+                          },
+                    storage: window.sessionStorage,
+                    signal,
+                    createOrReuse: (body, signal) => {
+                      return body.schemaVersion === 1
+                        ? capiro.request(
+                            firstChatCoreOperationKey,
+                            { body },
+                            { signal },
+                          )
+                        : capiro.request(
+                            firstChatV2OperationKey,
+                            { body },
+                            { signal },
+                          );
+                    },
+                  });
+                  return result.conversationId;
                 },
-              });
-              return result.conversationId;
-            },
-          }),
+              }),
         createPort: ({ session, signal, isCurrent, onAccessLost }) =>
           new RoutineWorkflow({
             context: {
+              ...("kind" in session
+                ? { kind: "routine-management" as const }
+                : {
+                    conversationId: session.context.conversationId,
+                    runId: session.context.runId,
+                  }),
               tenantId: session.context.tenantId,
               actorId: session.context.actorId,
-              conversationId: session.context.conversationId,
-              runId: session.context.runId,
               selectedClientId: session.context.selectedClientId,
             },
             access: createRoutinesAccess(session.credential, signal),
@@ -200,6 +235,11 @@ function Connected({
   const gated = state.status !== "ready" || !available;
   return (
     <section aria-label="Routines">
+      {editing !== null && (
+        <Button variant="outline" onClick={onManage}>
+          Back to routine management
+        </Button>
+      )}
       {gated && (
         <div className={`${styles.page} ${phone.page}`}>
           <MeriPageHeading
@@ -234,7 +274,13 @@ function Connected({
       )}
       {lastReady && (
         <div hidden={!available || state.status !== "ready"}>
-          <RoutinesWorkspace port={lastReady} preserveNewDraft client={name} />
+          <RoutinesWorkspace
+            port={lastReady}
+            preserveNewDraft
+            client={name}
+            onRequestExecution={onEdit}
+            initialEditor={editing ?? undefined}
+          />
         </div>
       )}
     </section>

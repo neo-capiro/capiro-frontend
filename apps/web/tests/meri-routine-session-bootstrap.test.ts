@@ -1,7 +1,10 @@
 import { installPlatform } from "./command-recovery-platform";
 import { expect, it, vi } from "vitest";
 import { createApiClient } from "../src/shared/portfolio/api/http";
-import { bootstrapRoutineSession } from "../src/shared/meri-routines/session";
+import {
+  bootstrapRoutineSession,
+  bootstrapRoutineManagementSession,
+} from "../src/shared/meri-routines/session";
 
 installPlatform();
 
@@ -26,7 +29,7 @@ function identity(tenant = tenantId, actor = actorId) {
 }
 
 it.each([clientId, null])(
-  "cold routine connection resolves an exact conversation for scope %s before session issuance",
+  "explicit routine execution connection resolves an exact conversation for scope %s before session issuance",
   async (selectedClientId) => {
     const owner = { tenantId, actorId, selectedClientId };
     const signal = new AbortController().signal;
@@ -60,6 +63,79 @@ it.each([clientId, null])(
     expect(fetcher).toHaveBeenCalledOnce();
   },
 );
+
+it.each([clientId, null])(
+  "cold management issues only explicit scope %s with no conversation or model request",
+  async (selectedClientId) => {
+    const owner = { tenantId, actorId, selectedClientId },
+      at = Date.now(),
+      fetcher = vi.fn<typeof fetch>(async (path, init) => {
+        expect(path).toBe("/api/action-followthrough/routine-session");
+        expect(JSON.parse(String(init?.body))).toEqual({
+          clientId: selectedClientId,
+        });
+        return Response.json({
+          kind: "routine-management",
+          credential: `routine_session_${"m".repeat(43)}`,
+          expiresAtMs: at + 30_000,
+          context: owner,
+        });
+      });
+    const receipt = await bootstrapRoutineManagementSession({
+      api: identity(),
+      owner,
+      signal: new AbortController().signal,
+      fetcher,
+      now: () => at,
+    });
+    expect(receipt.context).toEqual(owner);
+    expect(receipt.kind).toBe("routine-management");
+    expect(fetcher).toHaveBeenCalledOnce();
+    expect(receipt.context).not.toHaveProperty("conversationId");
+  },
+);
+
+it.each(["scope", "actor", "expired", "execution"])(
+  "management refuses a substituted %s receipt",
+  async (changed) => {
+    const owner = { tenantId, actorId, selectedClientId: clientId },
+      at = Date.now(),
+      value: Record<string, unknown> = {
+        kind: "routine-management",
+        credential: `routine_session_${"m".repeat(43)}`,
+        expiresAtMs: at + 30_000,
+        context: { ...owner },
+      };
+    if (changed === "scope")
+      value.context = { ...owner, selectedClientId: otherId };
+    if (changed === "actor") value.context = { ...owner, actorId: otherId };
+    if (changed === "expired") value.expiresAtMs = at;
+    if (changed === "execution")
+      value.context = { ...owner, conversationId, runId };
+    await expect(
+      bootstrapRoutineManagementSession({
+        api: identity(),
+        owner,
+        signal: new AbortController().signal,
+        fetcher: vi.fn(async () => Response.json(value)),
+        now: () => at,
+      }),
+    ).rejects.toThrow();
+  },
+);
+
+it("changed current identity refuses management before any bootstrap request", async () => {
+  const fetcher = vi.fn<typeof fetch>();
+  await expect(
+    bootstrapRoutineManagementSession({
+      api: identity(otherId),
+      owner: { tenantId, actorId, selectedClientId: null },
+      signal: new AbortController().signal,
+      fetcher,
+    }),
+  ).rejects.toThrow("Current routine account changed.");
+  expect(fetcher).not.toHaveBeenCalled();
+});
 
 it.each([
   ["tenant", otherId, actorId],
