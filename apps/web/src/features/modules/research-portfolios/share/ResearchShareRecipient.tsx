@@ -26,7 +26,13 @@ const UNAVAILABLE =
  */
 export function ResearchShareRecipient({ token }: { token: string }) {
   const [available, setAvailable] = useState<boolean>();
-  const [viewToken, setViewToken] = useState<string>();
+  const [session, setSession] = useState<{
+    viewToken: string;
+    expiresAt: string;
+  }>();
+  const viewToken = session?.viewToken;
+  const sessionExpiresAt = session?.expiresAt;
+  const [availabilityRevision, setAvailabilityRevision] = useState(0);
   const [dashboard, setDashboard] = useState<ResearchShareDashboard>();
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [error, setError] = useState<string>();
@@ -52,33 +58,61 @@ export function ResearchShareRecipient({ token }: { token: string }) {
         },
       );
     return () => controller.abort();
-  }, [token, valid]);
+  }, [token, valid, availabilityRevision]);
 
   useEffect(() => {
     if (!viewToken) return;
     const controller = new AbortController();
-    api
-      .request(
-        "public-research-share.dashboard",
-        { params: { token }, body: { viewToken } },
-        { signal: controller.signal },
+    let pending = false;
+    function endSession() {
+      if (controller.signal.aborted) return;
+      controller.abort();
+      setSession(undefined);
+      setDashboard(undefined);
+      setLogoUrl(null);
+      setAvailable(undefined);
+      setAvailabilityRevision((value) => value + 1);
+      setError("Your viewing session ended. Enter the PIN again.");
+    }
+    async function refresh() {
+      if (
+        pending ||
+        controller.signal.aborted ||
+        document.visibilityState === "hidden"
       )
-      .then(
-        (result) => {
-          if (controller.signal.aborted) return;
-          setLogoUrl(null);
-          setDashboard(result);
-        },
-        () => {
-          if (controller.signal.aborted) return;
-          setViewToken(undefined);
-          setDashboard(undefined);
-          setLogoUrl(null);
-          setError("Your viewing session ended. Enter the PIN again.");
-        },
-      );
-    return () => controller.abort();
-  }, [token, viewToken]);
+        return;
+      pending = true;
+      try {
+        const result = await api.request(
+          "public-research-share.dashboard",
+          { params: { token }, body: { viewToken: viewToken! } },
+          { signal: controller.signal },
+        );
+        if (!controller.signal.aborted) setDashboard(result);
+      } catch {
+        endSession();
+      } finally {
+        pending = false;
+      }
+    }
+    const remaining = Date.parse(sessionExpiresAt ?? "") - Date.now();
+    if (!Number.isFinite(remaining) || remaining <= 0) {
+      endSession();
+      return;
+    }
+    void refresh();
+    const interval = window.setInterval(() => void refresh(), 15_000);
+    const expiry = window.setTimeout(endSession, remaining);
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      controller.abort();
+      window.clearInterval(interval);
+      window.clearTimeout(expiry);
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [token, viewToken, sessionExpiresAt]);
 
   useEffect(() => {
     if (!viewToken || !dashboard?.branding?.logoAvailable) return;
@@ -98,7 +132,7 @@ export function ResearchShareRecipient({ token }: { token: string }) {
         },
       );
     return () => controller.abort();
-  }, [token, viewToken, dashboard]);
+  }, [token, viewToken, dashboard?.branding?.logoAvailable]);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -110,9 +144,11 @@ export function ResearchShareRecipient({ token }: { token: string }) {
         body: { pin },
       });
       setPin("");
-      setViewToken(session.viewToken);
+      setSession(session);
     } catch {
       setError("That PIN did not open this link. Check it and try again.");
+      setAvailable(undefined);
+      setAvailabilityRevision((value) => value + 1);
     } finally {
       setBusy(false);
     }

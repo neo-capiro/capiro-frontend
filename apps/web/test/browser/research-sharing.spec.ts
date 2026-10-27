@@ -9,8 +9,11 @@ import {
   timestamp,
 } from "./research-sharing-fixture";
 
-async function sharingApi(page: Page) {
-  let enabled = false;
+async function sharingApi(
+  page: Page,
+  options: { enabled?: boolean; tenantEnabled?: boolean } = {},
+) {
+  let enabled = options.enabled ?? false;
   let links: unknown[] = [];
   const writes: { key: string; body: Record<string, unknown> }[] = [];
   await page.route("**/api/capiro/**", async (route) => {
@@ -22,6 +25,7 @@ async function sharingApi(page: Page) {
     const settings = () => ({
       portfolioId: ids.portfolio,
       enabled,
+      tenantEnabled: options.tenantEnabled ?? true,
       pinSet: enabled,
       pinUpdatedAt: enabled ? timestamp : null,
       activeLinkCount: links.length,
@@ -113,6 +117,220 @@ test("Sharing enables a PIN, publishes the exact selection once, and confirms di
   expect(
     writes.filter((w) => w.key === "research.sharing.disable"),
   ).toHaveLength(1);
+});
+
+test("workspace switch prevents publishing an already enabled portfolio", async ({
+  page,
+}) => {
+  const writes = await sharingApi(page, {
+    enabled: true,
+    tenantEnabled: false,
+  });
+  await page.goto("/research-sharing.html");
+  await expect(
+    page.getByText("Client sharing is switched off for your whole workspace", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Publish link", exact: true }),
+  ).toBeDisabled();
+  expect(writes).toEqual([]);
+});
+
+test("all keyboard designer removal and phone ordering controls announce their changes", async ({
+  page,
+}) => {
+  await page.goto("/research-sharing.html?mode=designer");
+  const widget = page.getByRole("group", { name: /^Commentary widget/ });
+  await widget.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.locator('[aria-live="polite"]')).toContainText(
+    "Commentary moved: column 1, row 8",
+  );
+  await page
+    .getByRole("button", { name: "Move Commentary earlier", exact: true })
+    .focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator('[aria-live="polite"]')).toHaveText(
+    "Commentary moved to phone position 2.",
+  );
+  await page
+    .getByRole("button", { name: "Remove widget", exact: true })
+    .focus();
+  await page.keyboard.press("Enter");
+  await expect(widget).toHaveCount(0);
+  await expect(page.locator('[aria-live="polite"]')).toHaveText(
+    "Commentary removed.",
+  );
+});
+
+test("archive and unlink wait for the live-link count and preserve the confirmation", async ({
+  page,
+}) => {
+  let release: (() => void) | undefined;
+  const writes: string[] = [];
+  await page.route("**/api/capiro/**", async (route) => {
+    const key = new URL(route.request().url()).pathname.split("/").at(-1)!;
+    if (key === "research.sharing") {
+      await new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      await route.fulfill({
+        json: {
+          portfolioId: ids.portfolio,
+          enabled: true,
+          tenantEnabled: true,
+          pinSet: true,
+          pinUpdatedAt: timestamp,
+          activeLinkCount: 2,
+          updatedAt: timestamp,
+        },
+      });
+    } else if (route.request().method() !== "GET") {
+      writes.push(key);
+      await route.fulfill({
+        json: {
+          portfolioId: ids.portfolio,
+          eventId: "synthetic-event",
+          actorUserId: "owner",
+          occurredAt: timestamp,
+          resultingRevision: 2,
+          replayed: false,
+          outcomes: [],
+        },
+      });
+    } else await route.fulfill({ json: [] });
+  });
+  await page.goto("/research-sharing.html?mode=settings");
+  await expect.poll(() => Boolean(release)).toBe(true);
+  await expect(
+    page.getByRole("button", { name: "Archive portfolio", exact: true }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("button", { name: "Unlink", exact: true }),
+  ).toBeDisabled();
+  release!();
+  await page
+    .getByRole("button", { name: "Archive portfolio", exact: true })
+    .click();
+  await expect(page.getByRole("dialog")).toContainText(
+    "2 active client links will keep working",
+  );
+  expect(writes).toEqual([]);
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Unlink", exact: true }).click();
+  await expect(page.getByRole("dialog")).toContainText(
+    "2 active client links will keep working",
+  );
+  expect(writes).toEqual([]);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect.poll(() => writes).toEqual(["research.clients.unlink"]);
+});
+
+test("workspace admin confirms off, turns sharing on and revokes a listed link", async ({
+  page,
+}) => {
+  let enabled = true;
+  let activeLinks = [link];
+  const writes: string[] = [];
+  await page.route("**/api/capiro/**", async (route) => {
+    const request = route.request();
+    const key = new URL(request.url()).pathname.split("/").at(-1)!;
+    if (request.method() === "POST") {
+      writes.push(key);
+      if (key === "research.tenantSharing.set")
+        enabled = request.postDataJSON().body.enabled;
+      if (key === "research.shareLinks.tenantRevoke") activeLinks = [];
+    }
+    const json =
+      key === "research.shareLinks.tenant"
+        ? activeLinks
+        : key === "research.shareLinks.tenantRevoke"
+          ? { ...link, status: "revoked", revokedAt: timestamp }
+          : {
+              enabled,
+              activeLinkCount: activeLinks.length,
+              updatedAt: timestamp,
+              updatedByUserId: null,
+            };
+    await route.fulfill({ json });
+  });
+  await page.goto("/research-sharing.html?mode=admin");
+  await page
+    .getByRole("button", { name: "Turn off client sharing", exact: true })
+    .click();
+  await expect(page.getByRole("dialog")).toContainText(
+    "1 active link will stop working immediately",
+  );
+  await page
+    .getByRole("button", { name: "Keep sharing on", exact: true })
+    .click();
+  expect(writes).toEqual([]);
+  await page
+    .getByRole("button", { name: "Turn off client sharing", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Turn off", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Turn on client sharing", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Turn off client sharing", exact: true })
+    .waitFor();
+  await page.getByRole("button", { name: "Revoke", exact: true }).click();
+  await expect(
+    page.getByText("No active client links.", { exact: true }),
+  ).toBeVisible();
+  expect(writes).toEqual([
+    "research.tenantSharing.set",
+    "research.tenantSharing.set",
+    "research.shareLinks.tenantRevoke",
+  ]);
+});
+
+test("branded recipient fetches the signed logo only after PIN entry", async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  await page.route("**/synthetic-logo.svg", (route) =>
+    route.fulfill({
+      contentType: "image/svg+xml",
+      body: '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20"><rect width="40" height="20" fill="blue"/></svg>',
+    }),
+  );
+  await page.route("**/api/capiro/**", async (route) => {
+    const key = new URL(route.request().url()).pathname.split("/").at(-1)!;
+    requests.push(key);
+    const json = key.endsWith("availability")
+      ? { available: true }
+      : key.endsWith("pin")
+        ? {
+            viewToken: "synthetic-session",
+            expiresAt: new Date(Date.now() + 30 * 60_000).toISOString(),
+          }
+        : key.endsWith("logo")
+          ? { url: `${new URL(page.url()).origin}/synthetic-logo.svg` }
+          : {
+              ...dashboard,
+              branding: { firmName: "Synthetic firm", logoAvailable: true },
+            };
+    await route.fulfill({ json });
+  });
+  await page.goto("/research-sharing.html?mode=public");
+  await expect(page.getByLabel("PIN", { exact: true })).toBeVisible();
+  expect(new Set(requests)).toEqual(
+    new Set(["public-research-share.availability"]),
+  );
+  await page.getByLabel("PIN", { exact: true }).fill("123456");
+  await page.getByRole("button", { name: "Open dashboard" }).click();
+  await expect(
+    page.getByRole("img", { name: "Synthetic firm logo", exact: true }),
+  ).toHaveCount(2);
+  expect(requests.filter((key) => !key.endsWith("availability"))).toEqual([
+    "public-research-share.pin",
+    "public-research-share.dashboard",
+    "public-research-share.logo",
+  ]);
 });
 
 test("viewer has no publish, edit or settings write controls", async ({
@@ -210,7 +428,10 @@ test("public PIN opens the snapshot without external images or persistent creden
     const result = key.endsWith("availability")
       ? { available: true }
       : key.endsWith("pin")
-        ? { viewToken: "synthetic-session", expiresAt: "2026-10-26T12:30:00Z" }
+        ? {
+            viewToken: "synthetic-session",
+            expiresAt: new Date(Date.now() + 30 * 60_000).toISOString(),
+          }
         : dashboard;
     await route.fulfill({ json: result });
   });
@@ -269,7 +490,10 @@ test("unavailable links disclose no dashboard and late old-token work stays reti
       });
     } else if (key.endsWith("pin"))
       await route.fulfill({
-        json: { viewToken: "synthetic-session", expiresAt: timestamp },
+        json: {
+          viewToken: "synthetic-session",
+          expiresAt: new Date(Date.now() + 30 * 60_000).toISOString(),
+        },
       });
     else {
       dashboardRequested = true;

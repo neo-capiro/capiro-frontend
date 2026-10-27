@@ -5,6 +5,8 @@ import { ResearchSharing } from "../../src/features/modules/research-portfolios/
 import { ResearchShareRecipient } from "../../src/features/modules/research-portfolios/share/ResearchShareRecipient";
 import { DashboardDesigner } from "../../src/features/modules/research-portfolios/share/DashboardDesigner";
 import { DashboardGrid } from "../../src/features/modules/research-portfolios/share/DashboardGrid";
+import { ResearchSettings } from "../../src/features/modules/research-portfolios/ResearchSettings";
+import { ClientSharingSettings } from "../../src/features/settings/ClientSharingSettings";
 import type { ResearchDashboardLayout } from "../../src/shared/capiro/operations/research-share-schemas";
 import { dashboard, portfolio, shareToken } from "./research-sharing-fixture";
 import "../../src/app/globals.css";
@@ -45,12 +47,18 @@ function Fixture() {
     );
   return (
     <CapiroDataProvider onSessionExpired={() => undefined}>
-      <ResearchSharing
-        portfolio={{
-          ...portfolio,
-          myRole: query.get("role") === "viewer" ? "viewer" : "owner",
-        }}
-      />
+      {mode === "admin" ? (
+        <ClientSharingSettings />
+      ) : mode === "settings" ? (
+        <ResearchSettings portfolio={portfolio} onReload={() => undefined} />
+      ) : (
+        <ResearchSharing
+          portfolio={{
+            ...portfolio,
+            myRole: query.get("role") === "viewer" ? "viewer" : "owner",
+          }}
+        />
+      )}
     </CapiroDataProvider>
   );
 }

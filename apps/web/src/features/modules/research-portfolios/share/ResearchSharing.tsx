@@ -142,6 +142,7 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
       <ShareLinks
         portfolio={portfolio}
         enabled={settings.data?.enabled ?? false}
+        tenantEnabled={settings.data?.tenantEnabled ?? false}
         designs={designs.data ?? []}
         links={links}
         onChanged={() => {
@@ -442,12 +443,14 @@ function linkTone(status: ResearchShareLink["status"]) {
 function ShareLinks({
   portfolio,
   enabled,
+  tenantEnabled,
   designs,
   links,
   onChanged,
 }: {
   portfolio: ResearchDetail;
   enabled: boolean;
+  tenantEnabled: boolean;
   designs: readonly ResearchDashboardDesign[];
   links: ReturnType<typeof useCapiroQuery<"research.shareLinks">>;
   onChanged: () => void;
@@ -470,19 +473,22 @@ function ShareLinks({
   const revoke = useAction(onChanged);
   const canPublish =
     enabled &&
+    tenantEnabled &&
     portfolio.myRole !== "viewer" &&
     designs.length > 0 &&
     (snapshots.data?.length ?? 0) > 0 &&
     portfolio.clientLinks.length > 0;
-  const blocker = !enabled
-    ? "Turn on sharing first."
-    : !designs.length
-      ? "Create a dashboard design first."
-      : snapshots.data && !snapshots.data.length
-        ? "Capture a snapshot first; links are frozen at a snapshot."
-        : !portfolio.clientLinks.length
-          ? "Link a client to this portfolio first."
-          : undefined;
+  const blocker = !tenantEnabled
+    ? "Client sharing must be on for the workspace before you can publish."
+    : !enabled
+      ? "Turn on sharing first."
+      : !designs.length
+        ? "Create a dashboard design first."
+        : snapshots.data && !snapshots.data.length
+          ? "Capture a snapshot first; links are frozen at a snapshot."
+          : !portfolio.clientLinks.length
+            ? "Link a client to this portfolio first."
+            : undefined;
   function start() {
     setClientId(portfolio.clientLinks[0]?.clientId ?? "");
     setSnapshotId(snapshots.data?.[0]?.id ?? "");
@@ -495,6 +501,7 @@ function ShareLinks({
     setOpen(true);
   }
   async function submit() {
+    if (!canPublish) return;
     await publish.run(async () => {
       const result = await api.request("research.shareLinks.publish", {
         params,
@@ -624,7 +631,13 @@ function ShareLinks({
           ) : (
             <ActionButton
               primary
-              disabled={publish.busy || !clientId || !snapshotId || !designId}
+              disabled={
+                !canPublish ||
+                publish.busy ||
+                !clientId ||
+                !snapshotId ||
+                !designId
+              }
               onClick={submit}
             >
               Publish

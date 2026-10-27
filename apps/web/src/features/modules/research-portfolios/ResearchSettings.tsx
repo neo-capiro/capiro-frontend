@@ -9,6 +9,7 @@ import {
   Field,
   Modal,
   Panel,
+  StatusPanel,
   TextArea,
   TextInput,
 } from "../../../shared/module-ui";
@@ -44,6 +45,7 @@ export function ResearchSettings({
   const editable = portfolio.myRole !== "viewer";
   /** Active client links stay live through unlinking or archiving (FR-16.22): warn, never block. */
   function guarded(title: string, action: () => Promise<unknown>) {
+    if (!sharing.data || sharing.loading || sharing.error) return;
     if (activeLinks > 0) setWarning({ title, proceed: action });
     else void run(action);
   }
@@ -71,6 +73,11 @@ export function ResearchSettings({
           <ActionButton onClick={onReload}>Reload portfolio</ActionButton>
         </p>
       )}
+      <StatusPanel
+        loading={sharing.loading}
+        error={sharing.error}
+        onRetry={sharing.reload}
+      />
       <Panel title="Portfolio settings">
         <div className={`${styles.content} ${styles.form}`}>
           <Field label="Name" htmlFor="research-name">
@@ -119,7 +126,11 @@ export function ResearchSettings({
             Save settings
           </ActionButton>
           <ActionButton
-            disabled={!editable || busy}
+            disabled={
+              !editable ||
+              busy ||
+              (portfolio.lifecycle === "active" && !sharing.data)
+            }
             onClick={() => {
               const request = () =>
                 api.request(
@@ -151,7 +162,7 @@ export function ResearchSettings({
               label: "Action",
               render: (r) => (
                 <ActionButton
-                  disabled={!editable || busy}
+                  disabled={!editable || busy || !sharing.data}
                   onClick={() =>
                     guarded(`Unlink ${r.clientName}?`, () =>
                       api.request("research.clients.unlink", {

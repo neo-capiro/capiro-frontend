@@ -369,6 +369,9 @@ export function DashboardDesigner({
                     removeWidget(history.present, selectedWidget.id),
                   );
                   setSelected(undefined);
+                  setAnnouncement(
+                    `${widgetDefinition(selectedWidget.kind).label} removed.`,
+                  );
                 }}
               />
             ) : (
@@ -415,20 +418,28 @@ export function DashboardDesigner({
                       <ActionButton
                         aria-label={`Move ${widgetDefinition(widget.kind).label} earlier`}
                         disabled={index === 0}
-                        onClick={() =>
+                        onClick={() => {
                           history.commit(
                             movePhoneOrder(history.present, id, -1),
-                          )
-                        }
+                          );
+                          setAnnouncement(
+                            `${widgetDefinition(widget.kind).label} moved to phone position ${index}.`,
+                          );
+                        }}
                       >
                         ↑
                       </ActionButton>
                       <ActionButton
                         aria-label={`Move ${widgetDefinition(widget.kind).label} later`}
                         disabled={index === order.length - 1}
-                        onClick={() =>
-                          history.commit(movePhoneOrder(history.present, id, 1))
-                        }
+                        onClick={() => {
+                          history.commit(
+                            movePhoneOrder(history.present, id, 1),
+                          );
+                          setAnnouncement(
+                            `${widgetDefinition(widget.kind).label} moved to phone position ${index + 2}.`,
+                          );
+                        }}
                       >
                         ↓
                       </ActionButton>
