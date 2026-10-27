@@ -3838,18 +3838,18 @@
     "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
     "kind": "function",
     "symbol": "Connected",
-    "fingerprint": "6705a7ca112d4798e15c31c8d1cf6870bbf7b02ba35c95b9db1c75427ab69ad5",
-    "reason": "The routines host: binds the session lifetime controller to the routines workflow and renders it. One responsibility - host the routines workspace in a session - for the meri routines owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
+    "fingerprint": "f669e3a9e62caedc6e62a67cf8bb1e2d2f03f707a134a08f315c6c8199ed8ae5",
+    "reason": "The routines host connection-and-render owner for one page lifetime: it constructs the SessionLifetimeController (whose issue closure is the single explicit management-vs-execution seam), derives the RoutineWorkflow port from the admitted session receipt, wires attach and client availability revoke, re-connects only on identity expiry, and renders the page shell, gate notice and workspace. Every facet shares one host/session state and one component lifecycle; there is no second domain, no authority decision (the service owns scope/approval) and no duplicated transport, journal or model loop, so this is one connect-and-render responsibility. The two large regions are the single-caller pre-existing execution-resolution closure and declarative JSX, neither of which can be extracted without adding indirection rather than reducing coupling.",
+    "reviewedBy": "Hermes Agent independent architecture review (session 20261027_214238_eb5bec)",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
     "kind": "function",
     "symbol": "RoutinesWorkspace",
-    "fingerprint": "8d29aad000bbf56751166d65debf47fe5754e0e94043d17aa9414dc4332196d7",
-    "reason": "The routines workspace: routine list, prepare flow and workspace actions. One workspace responsibility for the meri routines owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
+    "fingerprint": "5a349e3607cd662cc498cff3276c72b692f5302e5ccbe21ff0757d82a7763a13",
+    "reason": "The routines workspace view owner for the current connection: list read and paging, selected-row and editor/cancellation view state, row actions, review panel, recent-activity details and status notices. All of it operates on one workflow port plus one local view state; row/column shaping is already extracted to module scope and the management-versus-execution difference is delegated to port.managementOnly with onRequestExecution. It holds no authority, transport or persistence responsibility of its own (the service decides scope, review and idempotency), so the mixed list/editor facets are one view responsibility rather than two. Splitting the row-action and details sub-renders is an optional future tidy-up, not a cohesion requirement.",
+    "reviewedBy": "Hermes Agent independent architecture review (session 20261027_214238_eb5bec)",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6426,9 +6426,9 @@
     "file": "apps/web/src/shared/meri-actions/proxy.ts",
     "kind": "function",
     "symbol": "proxyActionRequest",
-    "fingerprint": "c45250b1dd8005f223dc2ca1239d6016b0864e858aeb704dc1c50d2aa7ba41c7",
-    "reason": "The same-origin meri-actions proxy request adapter. One responsibility - forward a validated action request to the proxy route - for the meri-actions owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
+    "fingerprint": "9125fc6eb9a8d2ce01d63c17018e9ff633575e66de072b4773eef6c5a6d123bd",
+    "reason": "The fixed same-origin, bounded action-proxy adapter: route/method/origin/header admission, per-route native-credential selection, request-size bound with published-contract validation, bearer forward, response-size bound and uniform failure mapping. Route-specific behaviour lives in a small declarative table, and the function decides no authority of its own (Meri owns scope and effects), so it is one proxy-transport responsibility that sits barely over the function trigger.",
+    "reviewedBy": "Hermes Agent independent architecture review (session 20261027_214238_eb5bec)",
     "reviewedOn": "2026-10-27"
   },
   {
