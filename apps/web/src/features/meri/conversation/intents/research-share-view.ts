@@ -3,6 +3,7 @@ import { bizdevSettled } from "./bizdev-view";
 import { legislativeDocumentSettled } from "./legislative-document-view";
 import { clientRecordSettled } from "./client-record-view";
 import { legiwatchSettled } from "./legiwatch-view";
+import { researchActionSettled } from "./research-action-view";
 import type {
   IntentsItem,
   IntentsProposal,
@@ -28,6 +29,8 @@ export function intentDecisionSettled(response: IntentsDecideResponse) {
     return clientRecordSettled(response.result.status);
   if (response.status === "legiwatch_decided")
     return legiwatchSettled(response.result.status);
+  if (response.status === "research_action_decided")
+    return researchActionSettled(response.proposalStatus);
   return (
     response.status !== "indeterminate" &&
     (response.status !== "research_share_decided" ||
