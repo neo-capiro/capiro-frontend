@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { createCapiroApi } from "../../../../shared/capiro/http";
 import { publicResearchShareOperations } from "../../../../shared/capiro/operations/research-share-public";
 import type { ResearchShareDashboard } from "../../../../shared/capiro/operations/research-share-schemas";
@@ -9,7 +9,7 @@ import {
   StatusPanel,
   TextInput,
 } from "../../../../shared/module-ui";
-import { DashboardGrid } from "./DashboardGrid";
+import { ResearchDashboardView } from "./ResearchDashboardView";
 import styles from "./share.module.css";
 
 const api = createCapiroApi(publicResearchShareOperations, {
@@ -25,6 +25,17 @@ const UNAVAILABLE =
  * PIN again, and the Core service ends the session after 30 minutes anyway.
  */
 export function ResearchShareRecipient({ token }: { token: string }) {
+  return <RecipientSession key={token} token={token} />;
+}
+
+function RecipientSession({ token }: { token: string }) {
+  const pinRequest = useRef<AbortController | null>(null);
+  useEffect(
+    () => () => {
+      pinRequest.current?.abort();
+    },
+    [],
+  );
   const [available, setAvailable] = useState<boolean>();
   const [session, setSession] = useState<{
     viewToken: string;
@@ -136,21 +147,31 @@ export function ResearchShareRecipient({ token }: { token: string }) {
 
   async function submit(event: FormEvent) {
     event.preventDefault();
+    if (pinRequest.current) return;
+    const controller = new AbortController();
+    pinRequest.current = controller;
     setBusy(true);
     setError(undefined);
     try {
-      const session = await api.request("public-research-share.pin", {
-        params: { token },
-        body: { pin },
-      });
+      const session = await api.request(
+        "public-research-share.pin",
+        {
+          params: { token },
+          body: { pin },
+        },
+        { signal: controller.signal },
+      );
+      if (controller.signal.aborted) return;
       setPin("");
       setSession(session);
     } catch {
+      if (controller.signal.aborted) return;
       setError("That PIN did not open this link. Check it and try again.");
       setAvailable(undefined);
       setAvailabilityRevision((value) => value + 1);
     } finally {
-      setBusy(false);
+      if (!controller.signal.aborted) setBusy(false);
+      if (pinRequest.current === controller) pinRequest.current = null;
     }
   }
 
@@ -167,25 +188,7 @@ export function ResearchShareRecipient({ token }: { token: string }) {
   if (dashboard)
     return (
       <main className={styles.page}>
-        <div className={styles.frame}>
-          <DashboardGrid
-            layout={dashboard.layout}
-            dashboard={dashboard}
-            logoUrl={logoUrl}
-          />
-          <footer className={styles.footer}>
-            <span>
-              {dashboard.branding
-                ? `Prepared by ${dashboard.branding.firmName} with Capiro`
-                : "Prepared with Capiro"}
-              {" · "}snapshot {dashboard.snapshot.name}
-            </span>
-            <span>
-              Available until{" "}
-              {new Date(dashboard.expiresAt).toLocaleDateString()}
-            </span>
-          </footer>
-        </div>
+        <ResearchDashboardView dashboard={dashboard} logoUrl={logoUrl} />
       </main>
     );
   return (

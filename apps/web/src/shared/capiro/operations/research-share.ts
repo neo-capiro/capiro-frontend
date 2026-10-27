@@ -86,6 +86,32 @@ export const researchShareOperations = {
     "/research-portfolios/:id/share-links",
     z.array(s.researchShareLink),
   ),
+  "research.sharePreview": post(
+    "/research-portfolios/:id/share-preview",
+    z
+      .object({
+        snapshotId: z.uuid(),
+        designId: z.uuid(),
+        clientId: z.uuid(),
+        branding: z.boolean(),
+      })
+      .strict(),
+    s.researchSharePreview,
+  ),
+  "research.shareLinks.operation": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/research-portfolios/:id/share-links/operations/:operationKey",
+    request: z
+      .object({
+        params: params
+          .extend({ operationKey: z.string().min(1).max(128) })
+          .strict(),
+      })
+      .strict(),
+    response: z.object({ link: s.researchShareLink.nullable() }),
+    source,
+  }),
   "research.shareLinks.publish": post(
     "/research-portfolios/:id/share-links",
     z
@@ -95,6 +121,8 @@ export const researchShareOperations = {
         designId: z.uuid(),
         clientId: z.uuid(),
         branding: z.boolean(),
+        previewHash: z.string().regex(/^[0-9a-f]{64}$/),
+        expectedDesignVersion: z.number().int().min(1),
       })
       .strict(),
     s.researchShareLinkPublished,

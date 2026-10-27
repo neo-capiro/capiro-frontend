@@ -63,6 +63,19 @@ async function sharingApi(
           },
         ];
         break;
+      case "research.sharePreview":
+        result = {
+          dashboard: {
+            ...dashboard,
+            branding: input.body.branding
+              ? { firmName: "Frozen firm", logoAvailable: false }
+              : null,
+          },
+          previewHash: (input.body.branding ? "d" : "e").repeat(64),
+          designVersion: design.version,
+          logoUrl: null,
+        };
+        break;
       case "research.shareLinks.publish":
         links = [link];
         result = { link, token: shareToken, replayed: false };
@@ -90,10 +103,14 @@ test("Sharing enables a PIN, publishes the exact selection once, and confirms di
   await page.getByLabel("PIN", { exact: true }).fill("123456");
   await page.getByRole("button", { name: "Turn on sharing" }).click();
   await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Publish", exact: true }),
+  ).toBeDisabled();
+  await page
+    .getByLabel("I reviewed this frozen dashboard and everything it exposes.")
+    .check();
   await page.getByRole("button", { name: "Publish", exact: true }).click();
-  await expect(page.getByRole("dialog")).toContainText(
-    `/share/research/${shareToken}`,
-  );
+  await expect(page.getByRole("dialog")).toContainText(`/share/${shareToken}`);
   expect(
     writes.filter((w) => w.key === "research.shareLinks.publish"),
   ).toHaveLength(1);
@@ -104,6 +121,8 @@ test("Sharing enables a PIN, publishes the exact selection once, and confirms di
     snapshotId: ids.snapshot,
     designId: ids.design,
     branding: true,
+    previewHash: "d".repeat(64),
+    expectedDesignVersion: 1,
   });
   await page.getByRole("button", { name: "Done", exact: true }).click();
   await page
@@ -516,3 +535,116 @@ test("unavailable links disclose no dashboard and late old-token work stays reti
     page.getByRole("heading", { name: "Synthetic research" }),
   ).toHaveCount(0);
 });
+
+test("preview uses frozen figures and changes require reviewing the new frozen payload", async ({
+  page,
+}) => {
+  const writes = await sharingApi(page, { enabled: true });
+  await page.goto("/research-sharing.html");
+  await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  const preview = page.getByRole("region", { name: "Recipient preview" });
+  await expect(preview).toContainText("9007199254740993.123456");
+  await expect(preview).toContainText("Frozen firm");
+  await page
+    .getByLabel("I reviewed this frozen dashboard and everything it exposes.")
+    .check();
+  await expect(
+    page.getByRole("button", { name: "Publish", exact: true }),
+  ).toBeEnabled();
+  await page
+    .getByLabel("Show our firm name and logo on the dashboard")
+    .uncheck();
+  await expect(preview).not.toContainText("Frozen firm");
+  await expect(
+    page.getByLabel(
+      "I reviewed this frozen dashboard and everything it exposes.",
+    ),
+  ).not.toBeChecked();
+  await expect(
+    page.getByRole("button", { name: "Publish", exact: true }),
+  ).toBeDisabled();
+  expect(
+    writes.filter((row) => row.key === "research.shareLinks.publish"),
+  ).toHaveLength(0);
+});
+
+for (const outcome of ["present", "absent", "unknown"] as const) {
+  test(`lost publish response reconciles ${outcome} without an automatic write`, async ({
+    page,
+  }) => {
+    await sharingApi(page, { enabled: true });
+    const publications: unknown[] = [];
+    let lookups = 0;
+    await page.route(
+      "**/api/capiro/research.shareLinks.publish",
+      async (route) => {
+        publications.push(route.request().postDataJSON());
+        if (publications.length === 1) await route.abort("failed");
+        else
+          await route.fulfill({
+            json: { link, token: shareToken, replayed: false },
+          });
+      },
+    );
+    await page.route(
+      "**/api/capiro/research.shareLinks.operation?*",
+      async (route) => {
+        lookups += 1;
+        if (outcome === "unknown") await route.abort("failed");
+        else
+          await route.fulfill({
+            json: { link: outcome === "present" ? link : null },
+          });
+      },
+    );
+    await page.goto("/research-sharing.html");
+    await page
+      .getByRole("button", { name: "Publish link", exact: true })
+      .click();
+    await page
+      .getByLabel("I reviewed this frozen dashboard and everything it exposes.")
+      .check();
+    await page.getByRole("button", { name: "Publish", exact: true }).click();
+    await expect(
+      page.getByText("The publication result is unknown.", { exact: false }),
+    ).toBeVisible();
+    await expect(page.getByLabel("Close dialog")).toBeDisabled();
+    await expect(page.getByLabel("Client", { exact: true })).toBeDisabled();
+    expect(publications).toHaveLength(1);
+    expect(lookups).toBe(0);
+    await page
+      .getByRole("button", { name: "Check publication result" })
+      .click();
+    if (outcome === "present") {
+      await expect(page.getByRole("dialog")).toContainText(
+        "one-time address was not received here",
+      );
+      await expect(page.getByRole("button", { name: "Copy link" })).toHaveCount(
+        0,
+      );
+    } else if (outcome === "absent") {
+      await expect(
+        page.getByRole("button", { name: "Retry this publication" }),
+      ).toBeVisible();
+      expect(publications).toHaveLength(1);
+      await page
+        .getByRole("button", { name: "Retry this publication" })
+        .click();
+      await expect(page.getByRole("dialog")).toContainText(
+        `/share/${shareToken}`,
+      );
+      expect(publications).toHaveLength(2);
+      expect(publications[1]).toEqual(publications[0]);
+    } else {
+      await expect(
+        page.getByText("The publication result is still unknown.", {
+          exact: false,
+        }),
+      ).toBeVisible();
+      await expect(page.getByLabel("Close dialog")).toBeDisabled();
+      await expect(page.getByLabel("Client", { exact: true })).toBeDisabled();
+    }
+    expect(lookups).toBe(1);
+    if (outcome !== "absent") expect(publications).toHaveLength(1);
+  });
+}

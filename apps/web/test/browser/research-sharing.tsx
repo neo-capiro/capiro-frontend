@@ -24,7 +24,7 @@ function Fixture() {
         <button onClick={() => setToken("c".repeat(64))}>
           Switch synthetic token
         </button>
-        <ResearchShareRecipient key={token} token={token} />
+        <ResearchShareRecipient token={token} />
       </>
     );
   if (mode === "widgets")

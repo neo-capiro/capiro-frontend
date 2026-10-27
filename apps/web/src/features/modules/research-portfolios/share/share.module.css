@@ -359,6 +359,10 @@
   gap: 8px;
   font-size: 14px;
 }
+.publishDialog {
+  width: min(1160px, calc(100vw - 32px));
+  max-width: min(1160px, calc(100vw - 32px));
+}
 
 /* Recipient page */
 .page {

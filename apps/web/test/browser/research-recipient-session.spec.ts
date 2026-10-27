@@ -137,3 +137,51 @@ test("a response arriving after viewing expiry cannot restore content", async ({
     page.getByRole("heading", { name: dashboard.portfolioName }),
   ).toHaveCount(0);
 });
+
+for (const inFlight of [false, true]) {
+  test(`changing the recipient address clears ${inFlight ? "an in-flight PIN attempt" : "an unlocked dashboard"}`, async ({
+    page,
+  }) => {
+    let release: (() => void) | undefined;
+    const dashboardTokens: string[] = [];
+    await page.route("**/api/capiro/**", async (route) => {
+      const key = new URL(route.request().url()).pathname.split("/").at(-1)!;
+      if (key.endsWith("availability"))
+        await route.fulfill({ json: { available: true } });
+      else if (key.endsWith("pin")) {
+        if (inFlight)
+          await new Promise<void>((resolve) => {
+            release = resolve;
+          });
+        await route
+          .fulfill({
+            json: {
+              viewToken: "old-session",
+              expiresAt: new Date(Date.now() + 1_800_000).toISOString(),
+            },
+          })
+          .catch(() => undefined);
+      } else if (key.endsWith("dashboard")) {
+        dashboardTokens.push(route.request().postDataJSON().params.token);
+        await route.fulfill({ json: dashboard });
+      } else throw new Error(`Unexpected operation ${key}`);
+    });
+    await page.goto("/research-sharing.html?mode=public");
+    await page.getByLabel("PIN", { exact: true }).fill("123456");
+    await page.getByRole("button", { name: "Open dashboard" }).click();
+    if (inFlight) await expect.poll(() => Boolean(release)).toBe(true);
+    else
+      await expect(
+        page.getByRole("heading", { name: dashboard.portfolioName }),
+      ).toBeVisible();
+    await page.getByRole("button", { name: "Switch synthetic token" }).click();
+    await expect(
+      page.getByRole("heading", { name: dashboard.portfolioName }),
+    ).toHaveCount(0);
+    await expect(page.getByLabel("PIN", { exact: true })).toBeVisible();
+    if (inFlight) release!();
+    await expect(page.getByLabel("PIN", { exact: true })).toHaveValue("");
+    expect(dashboardTokens).not.toContain("c".repeat(64));
+    if (inFlight) expect(dashboardTokens).toEqual([]);
+  });
+}

@@ -19,8 +19,9 @@ import {
   StatusPanel,
   TextInput,
 } from "../../../../shared/module-ui";
-import { defaultLayout, widgetDefinition } from "./dashboard-layout";
+import { defaultLayout } from "./dashboard-layout";
 import { DashboardDesigner } from "./DashboardDesigner";
+import { PublishShareDialog } from "./PublishShareDialog";
 import { buildPreviewDashboard } from "./preview-dashboard";
 import styles from "./share.module.css";
 
@@ -379,59 +380,6 @@ function DesignEditor({
   );
 }
 
-/** The owner's own check before publishing: everything the link will expose, in plain words. */
-function ExposureList({
-  portfolio,
-  clientName,
-  snapshotName,
-  design,
-  branding,
-}: {
-  portfolio: ResearchDetail;
-  clientName?: string;
-  snapshotName?: string;
-  design?: ResearchDashboardDesign;
-  branding: boolean;
-}) {
-  const widgets = design?.layout.widgets ?? [];
-  const kinds = Array.from(new Set(widgets.map((w) => w.kind)));
-  const included = portfolio.members.filter(
-    (m) => m.disposition === "included",
-  ).length;
-  return (
-    <div className={styles.exposure}>
-      <p className={styles.widgetLabel}>What this link will expose</p>
-      <ul>
-        <li>
-          Prepared for <strong>{clientName ?? "the chosen client"}</strong>; no
-          other client&apos;s name, fit or notes.
-        </li>
-        <li>
-          Snapshot <strong>{snapshotName ?? "—"}</strong>, frozen as of its
-          capture date: {included} included subject{included === 1 ? "" : "s"}{" "}
-          of {portfolio.memberCount}.
-        </li>
-        <li>
-          {widgets.length} widget{widgets.length === 1 ? "" : "s"}:{" "}
-          {kinds.length
-            ? kinds.map((k) => widgetDefinition(k).label).join(", ")
-            : "none"}
-          .
-        </li>
-        <li>
-          {branding
-            ? "Your firm name and logo appear on the page."
-            : "No firm name or logo; the page says only that it was prepared with Capiro."}
-        </li>
-        <li>
-          Source documents are counted, never listed; subjects and figures come
-          only from sources you can read now.
-        </li>
-      </ul>
-    </div>
-  );
-}
-
 function linkTone(status: ResearchShareLink["status"]) {
   return status === "active"
     ? "success"
@@ -459,17 +407,6 @@ function ShareLinks({
   const params = { id: portfolio.id };
   const snapshots = useCapiroQuery("research.snapshots", { params });
   const [open, setOpen] = useState(false);
-  const [clientId, setClientId] = useState("");
-  const [snapshotId, setSnapshotId] = useState("");
-  const [designId, setDesignId] = useState("");
-  const [branding, setBranding] = useState(true);
-  const [operationKey, setOperationKey] = useState(() => crypto.randomUUID());
-  const [issued, setIssued] = useState<{
-    url: string;
-    clientName: string;
-  } | null>(null);
-  const [copied, setCopied] = useState(false);
-  const publish = useAction(onChanged);
   const revoke = useAction(onChanged);
   const canPublish =
     enabled &&
@@ -489,41 +426,17 @@ function ShareLinks({
           : !portfolio.clientLinks.length
             ? "Link a client to this portfolio first."
             : undefined;
-  function start() {
-    setClientId(portfolio.clientLinks[0]?.clientId ?? "");
-    setSnapshotId(snapshots.data?.[0]?.id ?? "");
-    setDesignId(designs[0]?.id ?? "");
-    setBranding(true);
-    setOperationKey(crypto.randomUUID());
-    setIssued(null);
-    setCopied(false);
-    publish.clear();
-    setOpen(true);
-  }
-  async function submit() {
-    if (!canPublish) return;
-    await publish.run(async () => {
-      const result = await api.request("research.shareLinks.publish", {
-        params,
-        body: { operationKey, snapshotId, designId, clientId, branding },
-      });
-      if (!result.token)
-        throw new Error(
-          "This link was already published; copy it from the earlier confirmation.",
-        );
-      setIssued({
-        url: `${window.location.origin}/share/research/${result.token}`,
-        clientName: result.link.clientName,
-      });
-    });
-  }
   return (
     <Panel
       title="Client links"
       description="Each link opens one client's frozen dashboard for one week, behind the portfolio PIN."
       actions={
         portfolio.myRole !== "viewer" && (
-          <ActionButton primary disabled={!canPublish} onClick={start}>
+          <ActionButton
+            primary
+            disabled={!canPublish}
+            onClick={() => setOpen(true)}
+          >
             Publish link
           </ActionButton>
         )
@@ -612,112 +525,16 @@ function ShareLinks({
           ]}
         />
       </StatusPanel>
-      <Modal
-        open={open}
-        onOpenChange={(next) => {
-          if (!publish.busy) setOpen(next);
-        }}
-        title={issued ? "Link published" : "Publish a client link"}
-        description={
-          issued
-            ? `Send this link to ${issued.clientName} and the PIN separately. The link is shown once.`
-            : "The recipient sees the chosen snapshot through the chosen design, frozen as of now."
-        }
-        footer={
-          issued ? (
-            <ActionButton primary onClick={() => setOpen(false)}>
-              Done
-            </ActionButton>
-          ) : (
-            <ActionButton
-              primary
-              disabled={
-                !canPublish ||
-                publish.busy ||
-                !clientId ||
-                !snapshotId ||
-                !designId
-              }
-              onClick={submit}
-            >
-              Publish
-            </ActionButton>
-          )
-        }
-      >
-        {issued ? (
-          <div className={styles.linkBox}>
-            <code>{issued.url}</code>
-            <div>
-              <ActionButton
-                onClick={async () => {
-                  await navigator.clipboard.writeText(issued.url);
-                  setCopied(true);
-                }}
-              >
-                {copied ? "Copied" : "Copy link"}
-              </ActionButton>
-            </div>
-          </div>
-        ) : (
-          <div className={styles.form}>
-            <Field label="Client" htmlFor="share-client">
-              <SelectInput
-                id="share-client"
-                value={clientId}
-                onValueChange={setClientId}
-                options={portfolio.clientLinks.map((c) => ({
-                  value: c.clientId,
-                  label: c.clientName,
-                }))}
-              />
-            </Field>
-            <Field label="Snapshot" htmlFor="share-snapshot">
-              <SelectInput
-                id="share-snapshot"
-                value={snapshotId}
-                onValueChange={setSnapshotId}
-                options={(snapshots.data ?? []).map((s) => ({
-                  value: s.id,
-                  label: `${s.name} · ${when(s.capturedAt)}`,
-                }))}
-              />
-            </Field>
-            <Field label="Design" htmlFor="share-design">
-              <SelectInput
-                id="share-design"
-                value={designId}
-                onValueChange={setDesignId}
-                options={designs.map((d) => ({
-                  value: d.id,
-                  label: `${d.name} v${d.version}`,
-                }))}
-              />
-            </Field>
-            <label className={styles.check}>
-              <input
-                type="checkbox"
-                checked={branding}
-                onChange={(e) => setBranding(e.target.checked)}
-              />
-              Show our firm name and logo on the dashboard
-            </label>
-            <ExposureList
-              portfolio={portfolio}
-              clientName={
-                portfolio.clientLinks.find((c) => c.clientId === clientId)
-                  ?.clientName
-              }
-              snapshotName={
-                snapshots.data?.find((s) => s.id === snapshotId)?.name
-              }
-              design={designs.find((d) => d.id === designId)}
-              branding={branding}
-            />
-            {publish.error && <p role="alert">{publish.error}</p>}
-          </div>
-        )}
-      </Modal>
+      {open && (
+        <PublishShareDialog
+          portfolio={portfolio}
+          designs={designs}
+          snapshots={snapshots.data ?? []}
+          canPublish={canPublish}
+          onChanged={onChanged}
+          onClose={() => setOpen(false)}
+        />
+      )}
     </Panel>
   );
 }
