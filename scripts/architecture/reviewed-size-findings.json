@@ -622,9 +622,9 @@
     "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
     "kind": "function",
     "symbol": "ContactMail",
-    "fingerprint": "a953d7b227833ebab5e10b9f29d5c2947679b4cdb7e3e0f1165223ca9aed5a3f",
-    "reason": "The existing contact-history and selected-thread composition now delegates native reply selection to NativeMailReply. Its remaining query, modal and current-contact lifetime state belongs to this one contact-mail view; it does not own transport, send authority or durable recovery. The embedded duplicate reply component is removed. No further split is required for this change.",
-    "reviewedBy": "Codex independent s3_assessment",
+    "fingerprint": "d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5",
+    "reason": "2. ContactMail.tsx:12 function ContactMail — 232 nonblank, fp d6bcd81c051904f4094202b8438cfda71ba1dee0291e845f895ab46197c928e5 (base a953d7b2…), changed. Owner of the contact message-history drawer, the selected thread body and compose; the change adds two classNames and a small dedicated style module rather than growing an existing shared sheet. ACCEPT.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -2488,10 +2488,10 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "d0ecf54d21fb247230aaf264729708d729e5b142741f5f10bc626dd3eebe3bfa",
-    "reason": "One exact allowlist predicate within the existing transport, no new authority.",
-    "reviewedBy": "Wave 3 Root independent reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "ad4452bb2bf3455a4f10c42b85f8e95ff87329b9307384c666071c5b07a63629",
+    "reason": "7. proxy.ts:33 function proxyRequest — 164 nonblank, fp ad4452bb2bf3455a4f10c42b85f8e95ff87329b9307384c666071c5b07a63629 (base d0ecf54d…), changed. The single canonical frontend proxy boundary (service/path validation, origin and session authentication, forwarding, error masking). Delta is one call inserted into the existing message chain; the route/status/body predicate was placed in its own cohesive 35-line module (no size signal) instead of adding another inline branch here — correct placement and no duplication of the existing command-refusal owner. ACCEPT.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -3127,9 +3127,9 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings",
-    "fingerprint": "57789cefa3702bdb976eaf792349c49c2ffb7aa312ec723040ccee6bd77df9da",
-    "reason": "The integrations settings page component: it renders providers and their connection rows and owns the register/disconnect/reset/detail dialog state and the connect/sync/subscription/disconnect request functions. It composes the canonical settings operations, useSettingsMutation, RegisterAccount, IntegrationHealth, SettingsMutationNotice and the OAuth outcome notice. One screen responsibility under the settings integrations owner.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3",
+    "reason": "5. IntegrationSettings.tsx:55 function IntegrationSettings — 531 nonblank, fp c769de7c96b62a59c8ac637f17377df6a15f8a25e45f70d01be7826611c299a3 (base 57789cef…), changed. Large container; the delta is two lines of truthful copy that do not add a responsibility, dependency or state. ACCEPT WITH NOTE (same bound as 4); no extraction is required by this change.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -3399,9 +3399,9 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5cd78d6b2270b90f78fba42e645cc27c8ff6d1f25d1ae6f1004044538bae8cce",
-    "reason": "Module for the engagement-integrations settings surface. Contains the exported IntegrationSettings page plus its private helpers (syncAge and the connect/sync/configureSubscriptions/disconnectAccount request functions), all serving that one admin surface. The operation catalogue is the canonical shared/capiro operations registry, the mutation/recovery lifecycle is useSettingsMutation, and outcomes/health/permissions are delegated to integrations/outcomes and integrations/IntegrationHealth. One cohesive surface owner; size is the provider/connection card layout, not a second concern.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2",
+    "reason": "4. IntegrationSettings.tsx:1 <module> — 581 nonblank, fp 16a3ed0e347f7a5a7d20b43c5db90a26320c4bcf81854812536fdf7df8262da2 (base 5cd78d6b…), changed. File-level signal already over the 400 threshold before this change; the delta is copy inside an existing provider render callback. ACCEPT WITH NOTE: the file is well past the threshold and any future addition should extract provider blocks rather than extend it.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5787,18 +5787,18 @@
     "file": "apps/web/src/features/portfolio/relationships/thread/IncomingMailFiles.tsx",
     "kind": "function",
     "symbol": "IncomingMailFiles",
-    "fingerprint": "325bc7d23c3d74929a5b9af98536420898807005de312a0bb427fc352a5a7058",
-    "reason": "Keep IncomingMailFiles as one selected-message panel owner: pending/error/manifest/handoff/receipt/stored/draft states, guarded execution and rendering are mutually dependent. Wire contracts and pure helpers already belong to email/incoming-files.ts; a size-based split would separate the guard from the surface it protects. Independent decision: work/hermes-review/incoming-mail-files-review/FE-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e",
+    "reason": "3. IncomingMailFiles.tsx:21 function IncomingMailFiles — 271 nonblank, fp b7a05a5406f83c03a5df6e0a767084bd9ec49e7893920c22d0b0b3d47825a22e (base 325bc7d2…), changed. Owner of the selected-message files panel: mount lifetime guard, manifest/handoff/import/receipt/stored states, and now the alert presentation. Delta is one className on the existing alert; no new state, effect or dependency. ACCEPT.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/screens/settings/ConnectorAccountsScreen.tsx",
     "kind": "function",
     "symbol": "ConnectorAccountsScreen",
-    "fingerprint": "64cafb17aca0cbbe0bf092d55ede690f7f03ac2207fb5139629c3bd53b814d08",
-    "reason": "One already-resolved connections view owns only row selection and disconnect confirmation; the host owns reads, mutations and authority. The table, granted-scope copy and confirmation render the same view. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "4c177e08cc7859f090e4b4e883f424160b9a736b35623f6047ace65477242736",
+    "reason": "1. ConnectorAccountsScreen.tsx:110 function ConnectorAccountsScreen — 101 nonblank, fp 4c177e08cc7859f090e4b4e883f424160b9a736b35623f6047ace65477242736 (base 64cafb17…), changed. One cohesive settings screen: the connections table, the single selected-row detail and the disconnect confirmation. Delta is a column descriptor plus a derived selection; the single piece of selection state stays owned here and the host still supplies one detail per row. ACCEPT (bounded responsibility).",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6239,9 +6239,9 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous> #3",
-    "fingerprint": "653a6d73b11691b29d412f450e4579589aec664b2542fc3a6e0690cc311fd50d",
-    "reason": "An inline callback inside IntegrationSettings (one of its provider/connection render or dialog-footer closures, #3 in source order), performing one bounded step of the integrations screen against the component's own state. It shares IntegrationSettings' owner and lifetime and adds no separate responsibility.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91",
+    "reason": "6. IntegrationSettings.tsx:190 anon #3 — 257 nonblank, fp 0ac0ea06ba31378a56e38b1b527b45102bfe5cbdda70871af16d8f20a0f1ca91 (base 653a6d73…), changed. The per-provider render callback (status, saved rows, missing-configuration explanation, guarded connect/reconnect notices). Bounded to one provider's block; the change is the conditional saved-records sentence. ACCEPT WITH NOTE.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {

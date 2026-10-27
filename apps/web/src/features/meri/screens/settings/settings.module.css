@@ -1,4 +1,7 @@
 /* Figma 3.4 09 · Settings pages (09.01–09.07): navigation, two content columns and preference cards. */
+.connectionStatus {
+  white-space: nowrap;
+}
 .page {
   display: flex;
   flex-direction: column;

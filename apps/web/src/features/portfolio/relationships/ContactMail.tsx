@@ -8,6 +8,7 @@ import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { defaultMailFilters, type MailFilters } from "./email/read";
 import { MailCoverageNotice, ThreadContent } from "./thread/ThreadContent";
 import { NativeMailReply } from "./thread/NativeMailReply";
+import styles from "./contact-mail.module.css";
 export function ContactMail({
   clientId,
   person,
@@ -58,7 +59,7 @@ export function ContactMail({
       ? thread.data
       : undefined;
   return (
-    <section className="stack">
+    <section className={`stack ${styles.history}`}>
       <header className="row between">
         <h3>Message history</h3>
         <button
@@ -89,7 +90,7 @@ export function ContactMail({
           />
           {history?.map((item) => (
             <button
-              className="button ghost"
+              className={`button ghost ${styles.historyRow}`}
               key={item.id}
               disabled={query.isFetching}
               onClick={() => {

@@ -96,7 +96,14 @@ const columns: readonly DataColumn<ConnectionRow>[] = [
     width: 100,
     render: (row) => row.refresh,
   },
-  { key: "health", label: "Health", width: 100, render: (row) => row.health },
+  {
+    key: "health",
+    label: "Stored status",
+    width: 130,
+    render: (row) => (
+      <span className={styles.connectionStatus}>{row.health}</span>
+    ),
+  },
 ];
 
 /** 09.02 Connector accounts and permissions, with the disconnect confirmation for the selected account. */
@@ -113,7 +120,12 @@ export function ConnectorAccountsScreen({
   disconnectOpen?: boolean;
 }) {
   const { connections } = view;
-  const [selectedId, setSelectedId] = useState(connections.initialSelectedId);
+  const [requestedId, setSelectedId] = useState(connections.initialSelectedId);
+  // A loading view can mount before rows arrive. Resolve only against the
+  // current supplied rows; never retain a removed account's detail.
+  const selectedId = connections.rows.some((row) => row.id === requestedId)
+    ? requestedId
+    : connections.initialSelectedId;
   const [confirming, setConfirming] = useState(disconnectOpen);
   const disconnectButton = useRef<HTMLButtonElement>(null);
   const selected = connections.rows.find((row) => row.id === selectedId);
