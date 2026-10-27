@@ -20,6 +20,7 @@ import {
 import { publicPlannerFormOperations } from "./operations/planner-public-forms";
 import { publicOnboardOperations } from "./operations/onboard-public";
 import { publicResearchShareOperations } from "./operations/research-share-public";
+import { publicShareOperations } from "./operations/share-public";
 
 import { jsonError, serviceErrorResponse } from "./gateway-errors";
 import { reportStrategyValidation } from "./strategy-validation-diagnostic";
@@ -297,6 +298,21 @@ export function handlePublicResearchShareRequest(
     request,
     key,
     publicResearchShareOperations,
+    config,
+    fetcher,
+  );
+}
+
+export function handlePublicShareRequest(
+  request: Request,
+  key: string,
+  config: CapiroConfig,
+  fetcher: typeof fetch = fetch,
+) {
+  return handlePublicOperationRequest(
+    request,
+    key,
+    publicShareOperations,
     config,
     fetcher,
   );

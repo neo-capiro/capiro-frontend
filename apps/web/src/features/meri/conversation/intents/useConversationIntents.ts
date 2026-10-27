@@ -12,6 +12,11 @@ import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
 import { useIntentExpiry } from "./useIntentExpiry";
+import { useResearchShareResults } from "./useResearchShareResults";
+import {
+  isResearchShareProposal,
+  intentDecisionSettled,
+} from "./research-share-view";
 import {
   intentDecisionRecovery,
   type IntentDecisionScope,
@@ -51,6 +56,7 @@ export function useConversationIntents(
     options.refreshKey,
   );
   const key = JSON.stringify([tenantId, actorId, conversationId]);
+  const oneTime = useResearchShareResults(key, access, list);
   const checkedAt = useIntentExpiry(list, key, now);
   const current = useRef({ access, key, active: true });
   useLayoutEffect(() => {
@@ -89,7 +95,7 @@ export function useConversationIntents(
       for (const item of list.items) {
         if (
           item.state !== "prepared" ||
-          item.kind !== "proposal" ||
+          (item.kind !== "proposal" && item.kind !== "research_share") ||
           "withheld" in item
         )
           continue;
@@ -101,10 +107,20 @@ export function useConversationIntents(
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
         if (
-          (item.phase === "rejected" &&
+          (item.kind === "research_share" &&
+            [
+              "succeeded",
+              "dismissed",
+              "expired",
+              "failed_terminal",
+              "blocked",
+            ].includes(item.proposalStatus)) ||
+          (item.kind === "proposal" &&
+            item.phase === "rejected" &&
             typeof item.decision === "object" &&
             item.decision?.decision === "rejected") ||
-          (item.phase === "completed" &&
+          (item.kind === "proposal" &&
+            item.phase === "completed" &&
             typeof item.execution === "object" &&
             item.execution?.state === "completed")
         )
@@ -201,8 +217,12 @@ export function useConversationIntents(
           request,
           proposal,
           new AbortController().signal,
+          (accepted) => {
+            guard();
+            oneTime.accept(proposal, decision, accepted);
+          },
         );
-        if (reply.kind === "ok" && reply.value.status !== "indeterminate")
+        if (reply.kind === "ok" && intentDecisionSettled(reply.value))
           attempt = null;
         else if (reply.kind === "refused")
           attempt = {
@@ -248,7 +268,11 @@ export function useConversationIntents(
         current.current.key === key &&
         current.current.access === access
       )
-        onDecisionSettled?.(proposal.command.binding.runId);
+        onDecisionSettled?.(
+          isResearchShareProposal(proposal)
+            ? proposal.binding.runId
+            : proposal.command.binding.runId,
+        );
     },
     [
       access,
@@ -261,6 +285,7 @@ export function useConversationIntents(
       refresh,
       now,
       onDecisionSettled,
+      oneTime,
     ],
   );
 
@@ -274,6 +299,8 @@ export function useConversationIntents(
     [list, checkedAt, viewer],
   );
   return {
+    oneTimeResults: oneTime.results,
+    dismissOneTime: oneTime.dismiss,
     list,
     rows,
     attempts,

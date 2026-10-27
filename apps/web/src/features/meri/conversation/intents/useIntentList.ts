@@ -15,7 +15,7 @@ export type ListState =
       loadingMore: boolean;
     }
   | { status: "disabled" }
-  | { status: "unavailable" };
+  | { status: "unavailable"; accessLost?: boolean };
 const loading: ListState = { status: "loading" };
 
 /**
@@ -87,7 +87,8 @@ export function useIntentList(
         reply.code === "INTENT_APPROVALS_DISABLED"
       )
         setList({ status: "disabled" });
-      else if (intentAccessLost(reply)) setList({ status: "unavailable" });
+      else if (intentAccessLost(reply))
+        setList({ status: "unavailable", accessLost: true });
       else
         setList((current) =>
           after && current.status === "ready"

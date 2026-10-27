@@ -14,6 +14,7 @@ test("Settings presentation never exposes HQ or workspace management to customer
       "team",
       "profiles",
       "branding",
+      "client-sharing",
       "ai-usage",
       "intelligence-mappings",
       "hq-tenants",
@@ -29,6 +30,8 @@ test("Settings presentation never exposes HQ or workspace management to customer
   }
   assert.equal(canOpenSettings("hq-tenants", identity("user_admin")), false);
   assert.equal(canOpenSettings("hq-tenants", identity("capiro_admin")), true);
+  for (const role of ["user_admin", "capiro_admin"])
+    assert.equal(canOpenSettings("client-sharing", identity(role)), true);
 });
 
 test("Billing mirrors both the user admin role and independent billing-admin grant", () => {

@@ -45,6 +45,7 @@ export const researchDashboardDesign = z.object({
 export const researchShareSettings = z.object({
   portfolioId: z.string(),
   enabled: z.boolean(),
+  tenantEnabled: z.boolean(),
   pinSet: z.boolean(),
   pinUpdatedAt: z.string().nullable(),
   activeLinkCount: z.number(),
@@ -133,7 +134,27 @@ export const researchShareDashboard = z.object({
         disposition: z.string(),
       }),
     ),
-    sources: z.array(z.object({ id: z.string() })),
+    sources: z.array(
+      z.object({
+        id: z.string(),
+        evidenceRefId: z.string().optional(),
+        sourceDocumentId: z.string().nullable().optional(),
+        sourceRevisionId: z.string().nullable().optional(),
+        sourceFamily: z.string().optional(),
+        publisher: z.string().nullable().optional(),
+        sourceUrl: z.string().nullable().optional(),
+        nativeLocator: z
+          .object({
+            page: z.number().nullable(),
+            section: z.string().nullable(),
+            occurrenceId: z.string().nullable(),
+          })
+          .optional(),
+        contentHash: z.string().nullable().optional(),
+        edition: z.string().nullable().optional(),
+        observedAt: z.string().nullable().optional(),
+      }),
+    ),
     clientFit: z
       .object({
         availability: z.enum(["available", "partial", "unavailable"]),
@@ -170,6 +191,21 @@ export const researchShareDashboard = z.object({
   expiresAt: z.string(),
 });
 export const researchShareAvailability = z.object({ available: z.boolean() });
+export const researchSharePreview = z.object({
+  dashboard: researchShareDashboard,
+  previewHash: z.string().regex(/^[0-9a-f]{64}$/),
+  designVersion: z.number().int().min(1),
+  logoUrl: z.string().nullable(),
+});
+/** Workspace-wide client sharing switch, administered by tenant administrators. */
+export const researchTenantSharing = z.object({
+  enabled: z.boolean(),
+  activeLinkCount: z.number(),
+  updatedAt: z.string().nullable(),
+  updatedByUserId: z.string().nullable(),
+});
+/** Short-lived signed address of the firm logo for a recipient; null without branding or logo. */
+export const researchShareLogo = z.object({ url: z.string().nullable() });
 export const researchShareViewSession = z.object({
   viewToken: z.string(),
   expiresAt: z.string(),
@@ -186,3 +222,5 @@ export type ResearchDashboardDesign = z.infer<typeof researchDashboardDesign>;
 export type ResearchShareSettings = z.infer<typeof researchShareSettings>;
 export type ResearchShareLink = z.infer<typeof researchShareLink>;
 export type ResearchShareDashboard = z.infer<typeof researchShareDashboard>;
+export type ResearchSharePreview = z.infer<typeof researchSharePreview>;
+export type ResearchTenantSharing = z.infer<typeof researchTenantSharing>;

@@ -8,6 +8,7 @@ export function canOpenSettings(section: string, identity: SettingsIdentity) {
       "team",
       "profiles",
       "branding",
+      "client-sharing",
       "intelligence-mappings",
       "ai-usage",
     ].includes(section)
@@ -36,6 +37,7 @@ export const settingsNavigation = [
       ["team", "Team"],
       ["profiles", "Profiles"],
       ["branding", "Branding"],
+      ["client-sharing", "Client sharing"],
       ["contact-info", "Contact info"],
       ["billing", "Billing"],
       ["ai-usage", "AI usage"],

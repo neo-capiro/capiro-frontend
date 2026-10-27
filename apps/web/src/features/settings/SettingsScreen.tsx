@@ -11,6 +11,7 @@ import { ProgramMatchQueue } from "./analyst/ProgramMatchQueue";
 import { ReconciliationQueue } from "./analyst/ReconciliationQueue";
 import { BillingSettings } from "./BillingSettings";
 import { BrandingSettings } from "./BrandingSettings";
+import { ClientSharingSettings } from "./ClientSharingSettings";
 import { SettingsNotice } from "./components";
 import { ContactSettings } from "./ContactSettings";
 import { AiKeysSettings } from "./hq/AiKeysSettings";
@@ -40,6 +41,7 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
   "contact-info": (context) => <ContactSettings identity={context.identity} />,
   branding: () => <BrandingSettings />,
+  "client-sharing": () => <ClientSharingSettings />,
   team: (context) => (
     <TeamSettings
       identity={context.identity}
@@ -82,6 +84,8 @@ const titles: Record<string, string> = {
 const descriptions: Record<string, string> = {
   personal: "The only Settings page everyone sees.",
   "contact-info": "Your organization’s contact details.",
+  "client-sharing":
+    "Research Portfolio links your firm has shared with clients, and the workspace-wide switch.",
   billing: "Your plan, payment method and invoices.",
   "meri-preferences": "Personal defaults for your Meri workspace.",
 };

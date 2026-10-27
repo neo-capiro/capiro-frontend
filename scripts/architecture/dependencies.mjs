@@ -38,6 +38,12 @@ function approvedTaskDestinationImport(from, to, entry) {
     && entry.kind === 'named' && entry.names.length === 1
     && entry.names[0] === 'workspaceTaskHref';
 }
+function approvedResearchSharePreviewImport(from, to, entry) {
+  return from === `${appSource}features/meri/conversation/intents/ResearchShareReview.tsx`
+    && to === `${appSource}features/modules/research-portfolios/share-preview-public.ts`
+    && entry.kind === 'named' && entry.names.length === 2
+    && ['ShareExposure', 'ResearchDashboardView'].every(name => entry.names.includes(name));
+}
 const clientBriefAuthorityImports = new Map([
   [`${clientBriefCopyOwner}authority.ts`, new Set(['verifyProspectWriter', 'ProspectWriter'])],
   [`${clientBriefCopyOwner}command.ts`, new Set(['prospectIntentScope', 'ProspectWriter'])],
@@ -221,7 +227,7 @@ function edgeViolation(from, to, entry, module) {
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
-  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry) && !approvedTaskDestinationImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
+  if (feature(from) && feature(to) && feature(from) !== feature(to) && !approvedClientBriefAuthorityImport(from, to, entry) && !approvedNewsletterRelationshipImport(from, to, entry) && !approvedTaskDestinationImport(from, to, entry) && !approvedResearchSharePreviewImport(from, to, entry)) return `${from}: private cross-feature import ${to}`;
   if (feature(from) === 'portfolio' && feature(to) === 'portfolio' && portfolioArea(from) !== portfolioArea(to) && !publicEntry(to)) return `${from}: private Portfolio domain import ${to}; use public.ts or a named *-public.ts entry`;
   return undefined;
 }

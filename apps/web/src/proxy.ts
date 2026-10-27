@@ -17,6 +17,7 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
   // These namespaces have their own closed public capability allowlists in the route.
   if (
     request.nextUrl.pathname.startsWith("/api/capiro/public-onboard.") ||
+    request.nextUrl.pathname.startsWith("/api/capiro/public-share.") ||
     request.nextUrl.pathname.startsWith("/api/capiro/public-research-share.")
   )
     return NextResponse.next();

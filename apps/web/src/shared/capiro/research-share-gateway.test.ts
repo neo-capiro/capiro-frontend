@@ -1,5 +1,8 @@
 import { expect, it, vi } from "vitest";
-import { handlePublicResearchShareRequest } from "./gateway";
+import {
+  handlePublicResearchShareRequest,
+  handlePublicShareRequest,
+} from "./gateway";
 
 const token = "b".repeat(64);
 const origin = "https://app.example.test";
@@ -91,6 +94,74 @@ it("availability works without Clerk and forwards only the link token", async ()
   expect(response.headers.get("referrer-policy")).toBe("no-referrer");
 });
 
+it("canonical sharing dispatch projects only availability and kind without authentication", async () => {
+  const fetcher = vi.fn(async () =>
+    Response.json({
+      available: true,
+      kind: "research_portfolio",
+      docTitle: "Hidden",
+      tenantId: "Hidden",
+    }),
+  );
+  const response = await handlePublicShareRequest(
+    read("public-share.kind", { params: { token } }),
+    "public-share.kind",
+    config,
+    fetcher,
+  );
+  expect(await response.json()).toEqual({
+    available: true,
+    kind: "research_portfolio",
+  });
+  const [url, options] = fetcher.mock.calls[0] as unknown as [URL, RequestInit];
+  expect(url.href).toBe(`https://core.example.test/api/public/share/${token}`);
+  expect(options.credentials).toBe("omit");
+  const headers = new Headers(options.headers);
+  expect(headers.has("cookie")).toBe(false);
+  expect(headers.has("authorization")).toBe(false);
+});
+
+it("the document capability routes only to Workspace and exposes the captured text projection", async () => {
+  const document = {
+    draftId: "",
+    versionId: "v1",
+    docTitle: "Shared",
+    sections: [
+      { id: "s", title: "Section", content: "<script>literal</script>" },
+    ],
+  };
+  const fetcher = vi.fn(async () =>
+    Response.json({ ...document, tenantId: "Hidden" }),
+  );
+  const response = await handlePublicShareRequest(
+    read("public-share.document", { params: { token } }),
+    "public-share.document",
+    {
+      ...config,
+      services: {
+        ...config.services,
+        workspace: "https://workspace.example.test/api",
+      },
+    },
+    fetcher,
+  );
+  expect(await response.json()).toEqual(document);
+  const [url, options] = fetcher.mock.calls[0] as unknown as [URL, RequestInit];
+  expect(url.href).toBe(
+    `https://workspace.example.test/api/public/workspace-share/${token}`,
+  );
+  expect(new Headers(options.headers).has("cookie")).toBe(false);
+  expect(new Headers(options.headers).has("authorization")).toBe(false);
+  const refused = await handlePublicShareRequest(
+    read("workspace.shares"),
+    "workspace.shares",
+    config,
+    fetcher,
+  );
+  expect(refused.status).toBe(404);
+  expect(fetcher).toHaveBeenCalledTimes(1);
+});
+
 it("the dashboard read carries the view token in the body of a same-origin POST", async () => {
   const fetcher = vi.fn(async () => Response.json(dashboard));
   const response = await handlePublicResearchShareRequest(
@@ -111,6 +182,30 @@ it("the dashboard read carries the view token in the body of a same-origin POST"
   expect(JSON.parse(String(options.body))).toEqual({
     viewToken: "link.exp.sig",
   });
+  expect(new Headers(options.headers).has("cookie")).toBe(false);
+});
+
+it("the logo read is a same-origin POST that forwards only the view token", async () => {
+  const fetcher = vi.fn(async () =>
+    Response.json({ url: "https://signed.example/logo.png" }),
+  );
+  const response = await handlePublicResearchShareRequest(
+    write("public-research-share.logo", {
+      params: { token },
+      body: { viewToken: "link.exp.sig" },
+    }),
+    "public-research-share.logo",
+    config,
+    fetcher,
+  );
+  expect(response.status).toBe(200);
+  expect(await response.json()).toEqual({
+    url: "https://signed.example/logo.png",
+  });
+  const [url, options] = fetcher.mock.calls[0] as unknown as [URL, RequestInit];
+  expect(url.href).toBe(
+    `https://core.example.test/api/public/research-share/${token}/logo`,
+  );
   expect(new Headers(options.headers).has("cookie")).toBe(false);
 });
 

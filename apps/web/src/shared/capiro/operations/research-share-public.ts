@@ -43,4 +43,17 @@ export const publicResearchShareOperations = {
     response: s.researchShareDashboard,
     source,
   }),
+  "public-research-share.logo": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/public/research-share/:token/logo",
+    request: z
+      .object({
+        params,
+        body: z.object({ viewToken: z.string().min(1).max(256) }).strict(),
+      })
+      .strict(),
+    response: s.researchShareLogo,
+    source,
+  }),
 } as const;
