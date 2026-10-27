@@ -92,6 +92,7 @@ export const mailCoverageSchema = z.object({
 export type MailCoverage = z.infer<typeof mailCoverageSchema>;
 export const mailBodySchema = messageSchema
   .extend({
+    updatedAt: instant.optional(),
     replyContext: mailReplyContextSchema.optional(),
     replyAllContext: mailReplyContextSchema.optional(),
     forwardContext: mailReplyContextSchema.optional(),

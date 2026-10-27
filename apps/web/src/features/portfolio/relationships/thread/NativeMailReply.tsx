@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { MailCompose } from "../MailCompose";
+import { IncomingMailFiles } from "./IncomingMailFiles";
 import type { MailContact } from "../email";
 import {
   readMailThreadPage,
@@ -171,6 +172,34 @@ export function NativeMailReply({
         Forward plain text
       </button>
       {forward?.supported === false && <small>{forward.reason}</small>}
+      {!busy &&
+        original &&
+        query.isSuccess &&
+        !query.isFetching &&
+        !query.error &&
+        (query.data.messages[0]?.updatedAt && query.data.connectionId ? (
+          <IncomingMailFiles
+            key={JSON.stringify([
+              scope,
+              selected,
+              query.data.messages[0].updatedAt,
+              query.data.connectionId,
+            ])}
+            clientId={clientId}
+            original={{
+              threadId: thread.id,
+              messageId: selected,
+              updatedAt: query.data.messages[0].updatedAt,
+              connectionId: query.data.connectionId,
+              clientId,
+            }}
+          />
+        ) : (
+          <p role="note">
+            Refresh this original to check its files. If its current revision is
+            unavailable, open it in your connected mailbox.
+          </p>
+        ))}
       {open && (
         <MailCompose
           key={`${selected}:${open.reply.originalUpdatedAt}:${open.reply.operation}`}
