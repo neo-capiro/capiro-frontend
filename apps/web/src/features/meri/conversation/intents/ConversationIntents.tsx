@@ -130,7 +130,7 @@ function DecisionControls({
           disabled={busy || approvalDisabled}
           onClick={() => setConfirming("approved")}
         >
-          Approveâ€¦
+          Approve…
         </Button>
         <Button
           type="button"
@@ -138,7 +138,7 @@ function DecisionControls({
           disabled={busy}
           onClick={() => setConfirming("rejected")}
         >
-          Rejectâ€¦
+          Reject…
         </Button>
       </div>
     );
@@ -255,7 +255,7 @@ function Body({
       </p>
     );
   if (list.status === "loading")
-    return <p className={styles.muted}>Reading the actions Meri preparedâ€¦</p>;
+    return <p className={styles.muted}>Reading the actions Meri prepared…</p>;
   if (list.status === "unavailable")
     return (
       <p className={styles.muted} role="status">
@@ -279,7 +279,7 @@ function Body({
         {!decisionsReady && (
           <li role="status">
             {recoveryError ??
-              "Checking saved decisions before another requestâ€¦"}
+              "Checking saved decisions before another request…"}
           </li>
         )}
         {rows.map((row) => {
