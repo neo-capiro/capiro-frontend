@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { Fragment, type ReactElement } from "react";
+import {
+  Children,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { LiveNewConversation } from "../src/shared/shell/LiveNewConversation";
 import {
   readFirstChatIntent,
@@ -20,6 +25,7 @@ vi.mock("react", async (importOriginal) => ({
   ...(await importOriginal<typeof import("react")>()),
   useContext: () => mocks.session,
   useState: () => [null, mocks.error],
+  useId: () => "synthetic-availability-reason",
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: mocks.push }),
@@ -77,24 +83,25 @@ function button() {
     conversationEnabled: true,
     firstChatBootstrapEnabled: true,
   }) as ReactElement<Record<string, unknown>>;
-  for (let depth = 0; depth < 5; depth++) {
+  for (let depth = 0; depth < 8; depth++) {
     if (element.type === "button")
       return element.props as {
         disabled: boolean;
         onClick?: () => void;
         title?: string;
       };
-    if (element.type === Fragment)
-      element = (
-        element.props.children as ReactElement<Record<string, unknown>>[]
-      )[0]!;
-    else {
-      expect(typeof element.type).toBe("function");
+    if (typeof element.type === "function") {
       element = (
         element.type as (
           props: Record<string, unknown>,
         ) => ReactElement<Record<string, unknown>>
       )(element.props);
+    } else {
+      const child = Children.toArray(element.props.children as ReactNode).find(
+        isValidElement,
+      );
+      expect(child).toBeDefined();
+      element = child as ReactElement<Record<string, unknown>>;
     }
   }
   throw Error("New conversation button missing");

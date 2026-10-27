@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useId } from "react";
 import { useSearchParams } from "next/navigation";
 import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
@@ -123,6 +124,7 @@ function MeriWorkspaceLinks({
   memoryReviewEnabled: boolean;
 }) {
   const capabilities = useMeriCapabilities();
+  const reasonId = useId();
   return (
     <section
       className={styles.workspaceLinks}
@@ -148,21 +150,21 @@ function MeriWorkspaceLinks({
               {label}
             </Link>
           ) : (
-            <Button
-              key={id}
-              type="button"
-              variant="ghost"
-              disabled
-              title={capabilities[id].reason}
-            >
-              {label}
-            </Button>
+            <div key={id} className={styles.unavailableWorkspace}>
+              <Button
+                type="button"
+                variant="ghost"
+                disabled
+                aria-describedby={`${reasonId}-${id}`}
+              >
+                {label}
+              </Button>
+              <small id={`${reasonId}-${id}`}>{capabilities[id].reason}</small>
+            </div>
           );
         })}
       </nav>
-      <p>
-        Some workspaces are not available yet. Disabled controls explain why.
-      </p>
+      <p>Unavailable workspaces show their current reason.</p>
     </section>
   );
 }
