@@ -5346,10 +5346,10 @@
     "file": "apps/web/src/shared/module-ui/module-ui.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "34e95545b56fa3dad13d63ff3947458295032163a2d7b66ed091a10123a9aba4",
-    "reason": "The existing module-ui stylesheet remains the canonical local presentation owner for shared module primitives. This bounded correction replaces the obsolete statusNote rule with one unavailable-only modifier and its heading/body rules; loading, transient error, empty states, base status styles and controls are unchanged. The 406-line file is cohesive; extracting a separate style owner only for this threshold would fragment the existing status primitive.",
-    "reviewedBy": "Wave 3 A3 independent source and Figma reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "d5fda4dc6c37c72aafeff433368b3390a3ef63aa83310c8193beff405008fe42",
+    "reason": "Shared design-system stylesheet of presentation primitives consumed across\n    modules. This change is additive and opt-in: a new .wrappedTabs rule (flex-wrap/overflow\n    visible/min-width 0) applied only when a caller passes wrap, so existing consumers are\n    untouched. Single cohesive design-system scope, no logic.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
@@ -5445,10 +5445,10 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/dashboard-layout.test.ts",
     "kind": "function",
     "symbol": "<anonymous>",
-    "fingerprint": "45223c7c8f4572cc0d83b7dd932d4056902e8d395fb204b9a2ea717a45778acc",
-    "reason": "This test describe groups seven focused pure layout cases covering validity, collision handling, resize, deletion and complete phone order. It has no production responsibility; splitting its single suite would not improve ownership.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "172a7c423266b670c5d09187e594d93fe3cbb2b768fb63c87bb678b0faf735d9",
+    "reason": "Test suite body only; carries no production responsibility, state or effect.\n    VERDICT: ACCEPTABLE (test-only).\n\n[12] file: apps/web/src/features/modules/research-portfolios/share/share.module.css\n    kind=file symbol=<module> nonblank=424\n    fingerprint=99332c10e118ace7c054ccd2f7d707f0e341964cee7ac1952c7bb0bbcd494564\n    RATIONALE: One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in §2.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchShareRecipient.tsx",
@@ -5598,8 +5598,8 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5b7f7c6e48468b34144a783e434f6c491db0a05176bfec49988fe05c7a798290",
-    "reason": "5b7f7c6e48468b34144a783e434f6c491db0a05176bfec49988fe05c7a798290 DashboardDesigner file, 552 nb ACCEPTABLE — single feature module (types + grid math + designer); grid math already partially lives in dashboard-layout.ts. Only small cohesive additions. No correction required.",
+    "fingerprint": "9c2bda53137e2f4f77e5869dd00f94e485859f3f064134863224a6319c3d085b",
+    "reason": "Module scope contains imports, one local useLayoutHistory hook and two components\n    (DashboardDesigner, WidgetSettings). It is a single designer feature in one file; module\n    scope defines no cross-cutting state or side effects, and the file exceeds the file\n    threshold only because it holds those components plus the shared history hook.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -5607,8 +5607,8 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
     "kind": "function",
     "symbol": "DashboardDesigner",
-    "fingerprint": "d5fa162fbce68d19d7394571e9fc0d98ab0c7b8c61101aa02dbe8b08868d31fd",
-    "reason": "d5fa162fbce68d19d7394571e9fc0d98ab0c7b8c61101aa02dbe8b08868d31fd DashboardDesigner fn, l99, 389 nb ACCEPTABLE — one cohesive editor component owning layout history, keyboard parity, drag, phone order and preview. This delta adds one bounded announcement primitive + history-command wrapper; no new responsibility, dependency direction stays one-way (component → useLayoutHistory/dashboard-layout helpers). Non-blocking: if it grows, extract the announcement/history pair and phone-order controls.",
+    "fingerprint": "a69c2753af3c8c217e5429cebe65dde8ee8b36da780793106b777d9cd78bdd17",
+    "reason": "One interaction surface for one dashboard canvas: layout history (commit/undo/\n    redo), pointer drag and corner resize, keyboard move/resize/delete, palette drop, selection/\n    focus management, live-region announcements and refusal messaging. All responsibilities are\n    \"edit this one layout\"; transient state is single-owner (draft/selected/refusal/announcement\n    plus a drag ref) and external effects are limited to the onDraft/onSave/onCancel callbacks. Drag\n    and keyboard paths share one layout state machine, so splitting them would add coupling, not\n    remove it.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
@@ -5616,18 +5616,18 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardWidgets.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "13b3417bb5b2685ec0ae60f969c4ec876404ad78353d13efb92d28256529d8a9",
-    "reason": "These are pure frozen-dashboard widget renderers under one finite discriminant. The additions expand captured table rows and captured evidence, with local disclosure state only. They issue no source requests, perform no financial aggregation and accept branding bytes through their renderer inputs; shared evidence rendering has its own module.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "133d4157472b5bb4c152c3bc04326cc0d209d3be9d9501e9f4b8b358947c5cbb",
+    "reason": "Presentation catalogue for the shared dashboard: pure label/format helpers, one\n    pure selector (selectWidgetDashboard) that isolates all filtering, ~13 small render-only\n    widget components and the WidgetContent router. The only local state in the file is\n    FundingTable's expand toggle; renderers share no state or effects, and selection logic lives\n    in the single pure function rather than being scattered across renderers.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/PublishShareDialog.tsx",
     "kind": "function",
     "symbol": "PublishReview",
-    "fingerprint": "a80a0592db02f0f582170072573141bb4dee93c70cadf5a160304819932ec857",
-    "reason": "This dialog owns the selection and exact recipient-preview confirmation workflow. It composes the canonical payload query, shared recipient renderer and separate publication/recovery hook; it does not produce payloads or implement idempotency storage itself. The reviewed hash and design version bind the visible preview to publication.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "9f739941ea30839f655d87b4c5099172793b3ed7ec919d2f289cc9b2a5a8db82",
+    "reason": "The single publish boundary: selection state, the frozen preview query, the\n    reviewed-hash gate that binds Publish to exactly the reviewed payload, pending/lost recovery\n    handling and submit. One coherent \"freeze, review, send exactly this\" responsibility with no\n    unrelated concern.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5643,18 +5643,18 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "b2a35b536b4b4ea4fd8e6a7852d9bf9c0f1d08cb55735da6450470b48d1758cd",
-    "reason": "reviewed-accept — already >400 before",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "03c963b6006c00091e01a9fd594ed26a5c72cc6948224b2013f31f0e1f68bacf",
+    "reason": "Feature module holding the whole sharing surface family in one import graph:\n    SharePinAttempts, useAction, ResearchSharing, SharingSettings, CopiedDesignEditor,\n    ReuseDesign, linkTone and ShareLinks. It is the largest file, but every member is a distinct\n    sharing sub-surface and the module shares one concern; a future extraction of the copy/reuse\n    sub-surfaces (CopiedDesignEditor/ReuseDesign) would be reasonable housekeeping, not a\n    correctness need.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "function",
     "symbol": "ResearchSharing",
-    "fingerprint": "d422c287e14f1ad0ad9459d872aa63f50db9228c0240728ca84724a80a169f42",
-    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "a3ebe7997e02fd540b301ab0e32282b55d0eb81323037703d7f133292e430c34",
+    "reason": "Thin tab coordinator: issues the settings/designs/shareLinks reads, drives the\n    open() flow and renders the child sharing surfaces; owns almost no state of its own.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5679,9 +5679,9 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/share.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "145fa82d13681f9dba23bf862227832bbf6a674ba10dd74a260c948460e08bd4",
-    "reason": "The stylesheet owns the single research-sharing surface across grid editing, recipient layouts, disclosure tables and responsive/light-dark presentation. New rules support existing components and screen-reader announcements; no unrelated feature styles or global behavior are added.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "99332c10e118ace7c054ccd2f7d707f0e341964cee7ac1952c7bb0bbcd494564",
+    "reason": "One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in §2.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6761,9 +6761,9 @@
     "file": "apps/web/src/features/modules/research-portfolios/ResearchDetail.tsx",
     "kind": "function",
     "symbol": "ResearchPortfolioDetail",
-    "fingerprint": "b43966e215dc6fde5f23346695042b974c62a4a347d8870f0005f7f2fa606762",
-    "reason": "reviewed-accept (function size, 131 nonblank, replaces the 97-nonblank record) — the detail owner retains its last verified display only for the same API instance and portfolio id while a read is pending, and clears it on a real error, a mismatched returned id or a scope change; the inert-plus-capture wrapper suppresses interaction (including portalled modal controls) only during that refresh while reads stay allowed. The retention rule is the component's whole reason for its shape and belongs with the single view switch it wraps.",
-    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "fingerprint": "2457f3b83e6454ca206e6815ede8bdb44f38f36b8ef2c64fba0e6b4463822ab9",
+    "reason": "Single screen-level coordinator for one research-portfolio detail view. It owns\n    exactly one detail read plus the refresh-safety concern (same-scope display preservation so\n    a same-scope refetch does not destroy child drafts/receipts, and an inert + capture-phase\n    guard that block interactions while query.loading). All 16 tab bodies are delegated to child\n    components that own their own state; the coordinator holds no mutation, no transport beyond\n    the read and no cross-child state. Cohesive, bounded responsibility.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6863,6 +6863,33 @@
     "fingerprint": "99d2ca51f7a66e6aa7222c917a646be2e081fd018346a25cb0073e38c45f938c",
     "reason": "Responsibility/cohesion: the body is a single cohesive presentational responsibility — the\nevents viewport for the active view, with an agenda branch (search, clear filters, status\npanel, agenda table, empty/error messaging) and a grid branch (status panel + grid), plus the\nextras loading/warning notices. It fetches nothing, normalizes nothing, owns no state and\npersists nothing; every input comes from CalendarModel and rendering is delegated to\nAgendaTable, CalendarGrid, StatusPanel, TextInput and ActionButton. No cross-owner logic, no\nduplicated authority, and no boundary or cycle involvement (errors[] empty). Concrete\nresidual: it takes the whole CalendarModel and reads 11 fields, and the two branches could\nlater be split into presentational sub-components — optional hardening, out of scope here and\nnot justified by any correctness risk. I give no blanket count pass and claim no exception:\nthe >80 threshold is a size/maintainability signal, and the concrete reasons above are why\nthis exact body is acceptable. Disposition: ACCEPT the exact body as cohesive\nsingle-responsibility presentation; the blocking state is a review-record invalidation\nartifact of the enclosing-file edit, not a new or changed architectural defect. I do not bind\nthe registry; root owns the matching final-byte binding.",
     "reviewedBy": "Hermes Agent source review 20261027_193444_620b36",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
+    "kind": "function",
+    "symbol": "WidgetSettings",
+    "fingerprint": "eba88e5899e982bab6a056d4cc67821b767cc9a31c7f184119adabe1e1a46770",
+    "reason": "Per-widget settings form: renders the controls for the selected widget kind and\n    emits controlled settings changes upward; owns no state beyond the controlled inputs and\n    performs no I/O. Cohesive, bounded.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DesignEditor.tsx",
+    "kind": "function",
+    "symbol": "ScopedDesignEditor",
+    "fingerprint": "7e25f1cd60dbd98192b0ffd4cffbacfb668c7253b725ace01e58756bedd7f22b",
+    "reason": "Scope-bound editor boundary that owns the recovery-safe save: lock acquisition\n    and ownership (Web Locks, ifAvailable), draft read/write/recovery, pending and storage-error\n    state, and the save call. Pure draft logic is delegated to design-draft.ts and reads to\n    queries; the component owns one coherent concern and no unrelated responsibility.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "ReuseDesign",
+    "fingerprint": "21689b497027476c66efc098fd99dbc67d7857e08a827939ea9bd14b6cc3ae5e",
+    "reason": "Cross-portfolio design reuse: cursor paging, source portfolio/design selection,\n    copy through reusableLayout (which strips snapshot/member/basis bindings while keeping\n    presentation) and a current-rights read of the source. Single bounded reuse concern.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   }
 ]
