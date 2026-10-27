@@ -1,3 +1,4 @@
+import { isWatchProposal } from "./watch-view";
 import { isBizdevProposal } from "./bizdev-view";
 import { isLegislativeDocumentProposal } from "./legislative-document-view";
 import { isClientRecordProposal } from "./client-record-view";
@@ -69,6 +70,7 @@ export function intentDecisionRecovery(
     deliveryId: string,
   ) {
     const sharing =
+      isWatchProposal(proposal) ||
       isBizdevProposal(proposal) ||
       isResearchShareProposal(proposal) ||
       isLegiwatchProposal(proposal) ||

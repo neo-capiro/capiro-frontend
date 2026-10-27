@@ -22,6 +22,7 @@ import {
   isClientRecordProposal,
   clientRecordSettled,
 } from "./client-record-view";
+import { isWatchProposal, watchSettled } from "./watch-view";
 import { isBizdevProposal, bizdevSettled } from "./bizdev-view";
 import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
 import { isMailSendProposal, mailOutcomeSettled } from "./mail-view";
@@ -138,6 +139,7 @@ export function useConversationIntents(
             item.kind !== "research_share" &&
             item.kind !== "legiwatch_action" &&
             item.kind !== "client_record_action" &&
+            item.kind !== "watch_action" &&
             item.kind !== "bizdev_action" &&
             item.kind !== "legislative_document_action") ||
           "withheld" in item
@@ -151,6 +153,9 @@ export function useConversationIntents(
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
         if (
+          (item.kind === "watch_action" &&
+            item.result !== "unavailable" &&
+            watchSettled(item.result.status)) ||
           (item.kind === "bizdev_action" &&
             item.result !== "unavailable" &&
             bizdevSettled(item.result.status)) ||
@@ -246,7 +251,8 @@ export function useConversationIntents(
       // Reconcile uncertain domain actions by reading their owner; never resend them.
       if (
         prior &&
-        (isBizdevProposal(proposal) ||
+        (isWatchProposal(proposal) ||
+          isBizdevProposal(proposal) ||
           isLegiwatchProposal(proposal) ||
           isClientRecordProposal(proposal) ||
           isMailSendProposal(proposal) ||
@@ -335,7 +341,8 @@ export function useConversationIntents(
         current.current.access === access
       )
         onDecisionSettled?.(
-          isBizdevProposal(proposal) ||
+          isWatchProposal(proposal) ||
+            isBizdevProposal(proposal) ||
             isResearchShareProposal(proposal) ||
             isLegiwatchProposal(proposal) ||
             isClientRecordProposal(proposal) ||

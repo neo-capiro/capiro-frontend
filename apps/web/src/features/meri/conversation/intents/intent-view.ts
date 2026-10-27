@@ -1,3 +1,4 @@
+import { isWatchProposal, watchFields, watchRow } from "./watch-view";
 import { isBizdevProposal, bizdevFields, bizdevRow } from "./bizdev-view";
 import {
   isLegislativeDocumentProposal,
@@ -84,6 +85,7 @@ const day = (iso: string) => iso.slice(0, 10);
 export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
+  if (isWatchProposal(proposal)) return watchFields(proposal);
   if (isBizdevProposal(proposal)) return bizdevFields(proposal);
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
   if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
@@ -389,6 +391,7 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "watch_action") return watchRow(item, now, viewer);
   if (item.kind === "bizdev_action") return bizdevRow(item, now, viewer);
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
   if (item.kind === "legislative_document_action")

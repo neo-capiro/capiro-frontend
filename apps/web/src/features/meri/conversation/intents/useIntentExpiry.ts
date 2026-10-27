@@ -19,6 +19,7 @@ export function useIntentExpiry(
           item.proposalStatus === "proposed") ||
         ((item.kind === "legiwatch_action" ||
           item.kind === "client_record_action" ||
+          item.kind === "watch_action" ||
           item.kind === "bizdev_action" ||
           item.kind === "legislative_document_action") &&
           item.result !== "unavailable" &&
