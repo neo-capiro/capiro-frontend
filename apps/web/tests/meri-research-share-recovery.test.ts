@@ -14,6 +14,7 @@ async function fixture() {
     JSON.stringify({ conversationId, intents: [prepared()], next: null }),
     { request: { conversationId } },
   );
+  if (!("intents" in list)) throw new Error("Synthetic list was refused");
   const item = list.intents[0]!;
   if (
     item.state !== "prepared" ||
