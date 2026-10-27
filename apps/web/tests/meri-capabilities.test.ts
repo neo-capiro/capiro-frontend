@@ -82,7 +82,9 @@ it("all 256 flag combinations preserve operation prerequisites and existing navi
     );
     expect(meriCapabilityHref("routines", state)).toBe("/meri/routines");
     expect(state.runs.status, `${bits}:runs`).toBe(flags[0] ? "on" : "off");
-    expect(meriCapabilityHref("runs", state)).toBe("/meri/runs");
+    expect(meriCapabilityHref("runs", state)).toBe(
+      flags[0] ? "/meri/runs" : undefined,
+    );
     ids.forEach((id, index) => {
       expect(state[id].status, `${bits}:${id}`).toBe(
         expected[index] ? "on" : "off",

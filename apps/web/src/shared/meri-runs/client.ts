@@ -2,6 +2,8 @@ import {
   RUN_INDEX_SCHEMA,
   RUN_DETAIL_SCHEMA,
   type RunIndexListRequest,
+  type RunIndexListResponse,
+  type RunIndexDetailResponse,
 } from "@capiro/meri-contracts/conversation-history";
 import { CONVERSATION_USAGE_SCHEMA } from "@capiro/meri-contracts/conversation-usage";
 import {
@@ -21,7 +23,7 @@ export function createRunsClient(
       input: Omit<RunIndexListRequest, "schemaVersion">,
       signal: AbortSignal,
     ) {
-      return readCurrentNative(
+      return readCurrentNative<RunIndexListResponse>(
         runReadOperation("list"),
         { schemaVersion: RUN_INDEX_SCHEMA, ...input },
         signal,
@@ -31,7 +33,7 @@ export function createRunsClient(
       );
     },
     detail(conversationId: string, runId: string, signal: AbortSignal) {
-      return readCurrentNative(
+      return readCurrentNative<RunIndexDetailResponse>(
         runReadOperation("detail"),
         { schemaVersion: RUN_DETAIL_SCHEMA, conversationId, runId },
         signal,

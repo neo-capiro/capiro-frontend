@@ -109,7 +109,6 @@ export const meriCapabilityTable = {
   runs: {
     label: "Runs",
     ordinaryRoute: "/meri/runs",
-    navigationWhenUnconfigured: true,
     deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
     publicContract: "run-index/1.0.0 + conversation-usage/1.0.0",
     sourcePin: "db450c39acbedb01c77694314c3f112aacbdbd94",
