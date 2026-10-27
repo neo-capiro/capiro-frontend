@@ -34,8 +34,9 @@ export function OutreachWorkflow({
     owner.busy ||
     !!owner.pending ||
     (owner.saved?.status !== "draft" && !!owner.saved);
-  const problem =
-    step === 2 && !owner.state.title.trim()
+  const problem = owner.readOnly
+    ? undefined
+    : step === 2 && !owner.state.title.trim()
       ? "Name your campaign."
       : step === 3
         ? recipientProblem(owner.state)
@@ -45,8 +46,8 @@ export function OutreachWorkflow({
             ? "Finish generation and review the saved drafts."
             : undefined;
   const onStep = (next: OutreachStep) => {
-    if (next > step && (next > step + 1 || problem)) return;
-    owner.update({ lastStep: next });
+    if (!owner.readOnly && next > step && (next > step + 1 || problem)) return;
+    owner.navigate(next);
   };
   if (owner.loading) return <StatusPanel loading />;
   if (id && !owner.saved)
@@ -61,7 +62,8 @@ export function OutreachWorkflow({
       title={owner.state.title || "New outreach"}
       step={step}
       busy={owner.busy}
-      fenced={!!owner.pending || owner.readOnly}
+      fenced={!!owner.pending}
+      readOnly={owner.readOnly}
       saved={!owner.dirty}
       error={owner.error}
       nextDisabled={problem}

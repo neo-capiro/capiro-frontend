@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import type { OutreachDraftArtifact } from "../../../../shared/capiro/operations/outreach-campaign-schemas";
 import {
   ActionButton,
@@ -9,12 +10,14 @@ import {
   SelectInput,
   TextArea,
   TextInput,
+  StatusPanel,
 } from "../../../../shared/module-ui";
 import type { useOutreachCampaign } from "./useOutreachCampaign";
 import {
   campaignUnits,
   campaignProblem,
   savedEnvelope,
+  historicalMessage,
 } from "./campaign-model";
 import styles from "./outreach-workflow.module.css";
 type Owner = ReturnType<typeof useOutreachCampaign>;
@@ -179,7 +182,47 @@ export function CampaignDrafts({ owner }: { owner: Owner }) {
           </div>
         </Panel>
       )}
+      {owner.saved && !owner.drafts.length && (
+        <HistoricalMessage
+          id={owner.saved.id}
+          clientId={owner.saved.state.clientId}
+        />
+      )}
     </div>
+  );
+}
+function HistoricalMessage({
+  id,
+  clientId,
+}: {
+  id: string;
+  clientId: string | null;
+}) {
+  const result = useCapiroQuery("engagement.outreach.record", {
+    params: { id },
+  });
+  const message = result.data
+    ? historicalMessage(result.data, { id, clientId })
+    : null;
+  if (result.loading || result.error)
+    return (
+      <StatusPanel
+        loading={result.loading}
+        error={result.error}
+        onRetry={result.reload}
+      />
+    );
+  if (!message) return null;
+  return (
+    <Panel
+      title="Previously saved message"
+      description="This historical copy is available to read. It is not a versioned draft ready for delivery."
+    >
+      <div className={styles.fields}>
+        <h3 className={styles.subject}>{message.subject || "No subject"}</h3>
+        <div className={styles.message}>{message.body}</div>
+      </div>
+    </Panel>
   );
 }
 function DraftEditor({

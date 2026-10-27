@@ -8,6 +8,8 @@ import {
   sendUnits,
   recoveredCampaignStep,
   canFinishTest,
+  navigateCampaign,
+  historicalMessage,
 } from "./campaign-model";
 import { createCampaignApi } from "./campaign-api";
 import { outreachCampaignOperations as operations } from "../../../../shared/capiro/operations/outreach-campaign";
@@ -32,6 +34,34 @@ function api(value: unknown) {
   >;
 }
 describe("canonical Outreach capture and exact-result receivers", () => {
+  it("lets historical empty campaigns navigate to saved text and status without mutating content or crossing pending work", () => {
+    const captured = { ...state(), lastStep: 2, recipients: [] };
+    const reviewed = navigateCampaign(captured, 6, false);
+    expect(reviewed.lastStep).toBe(6);
+    expect(sameCampaignContent(captured, reviewed)).toBe(true);
+    expect(navigateCampaign(reviewed, 7, false).lastStep).toBe(7);
+    expect(navigateCampaign(captured, 6, true)).toBe(captured);
+    expect(navigateCampaign(captured, 8, false)).toBe(captured);
+  });
+  it("preserves historical subject and body only for the current record and client, without inventing a sendable version", () => {
+    const record = {
+      id,
+      client: { id: foreign },
+      subject: "Saved subject",
+      body: "Saved body",
+    };
+    expect(
+      historicalMessage(record, { id: id.toUpperCase(), clientId: foreign }),
+    ).toEqual({ subject: "Saved subject", body: "Saved body" });
+    expect(historicalMessage(record, { id: foreign, clientId: foreign })).toBe(
+      null,
+    );
+    expect(historicalMessage(record, { id, clientId: id })).toBe(null);
+    expect(
+      historicalMessage({ ...record, client: null }, { id, clientId: null })
+        ?.body,
+    ).toBe("Saved body");
+  });
   it("expands one per list To member and one shared group with exact historical copies", () => {
     const s = state();
     s.recipients = [

@@ -225,6 +225,35 @@ export function recoveredCampaignStep(
     lastStep: sendPending ? 7 : generationPending ? 6 : state.lastStep,
   };
 }
+/** Navigation is local presentation state, including for historical read-only records. */
+export function navigateCampaign(
+  state: OutreachCampaignState,
+  step: number,
+  pending: boolean,
+): OutreachCampaignState {
+  return !pending && Number.isInteger(step) && step >= 1 && step <= 7
+    ? { ...state, lastStep: step }
+    : state;
+}
+export function historicalMessage(
+  record: {
+    id: string;
+    client?: { id: string } | null;
+    subject: string | null;
+    body: string | null;
+  },
+  expected: { id: string; clientId: string | null },
+) {
+  if (
+    !sameId(record.id, expected.id) ||
+    (record.client?.id ?? null)?.toLowerCase() !==
+      expected.clientId?.toLowerCase()
+  )
+    return null;
+  return record.subject || record.body
+    ? { subject: record.subject, body: record.body }
+    : null;
+}
 export function canFinishTest(
   send: {
     testMode: boolean;

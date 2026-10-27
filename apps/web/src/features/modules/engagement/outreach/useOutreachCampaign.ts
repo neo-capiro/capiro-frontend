@@ -23,6 +23,7 @@ import {
   sendUnits,
   recoveredCampaignStep,
   canFinishTest,
+  navigateCampaign,
 } from "./campaign-model";
 import {
   sendingMailboxesSchema,
@@ -390,6 +391,10 @@ export function useOutreachCampaign(id: string | undefined, clientId: string) {
     error,
     dirty,
     readOnly,
+    navigate: (step: number) => {
+      if (!active.current)
+        setState((value) => navigateCampaign(value, step, !!pending));
+    },
     update: (patch: Partial<OutreachCampaignState>) => {
       if (!active.current && !pending && !readOnly)
         setState((value) => ({ ...value, ...patch }));

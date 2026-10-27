@@ -3,6 +3,7 @@ import {
   setupOutreach,
   recordId,
   otherRecordId,
+  record,
 } from "./core109-outreach-fixtures";
 import { newCampaign } from "../../src/features/modules/engagement/outreach/campaign-model";
 const campaign = {
@@ -61,6 +62,37 @@ test("foreign canonical response never opens an editable campaign", async ({
   await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(
     0,
   );
+  expect(observed.writes).toEqual([]);
+});
+test("historical text with no recipients or versioned drafts remains readable without reopening writes", async ({
+  page,
+}) => {
+  const observed = await readFixtures(page);
+  await page.route("**/api/capiro/engagement.campaign?*", (route) =>
+    route.fulfill({
+      json: {
+        ...campaign,
+        status: "sent",
+        state: { ...campaign.state, clientId: record.client.id },
+      },
+    }),
+  );
+  await page.goto(`/modules/engagement?draft=${recordId}`);
+  await expect(
+    page.getByLabel("Campaign name", { exact: true }),
+  ).toBeDisabled();
+  await page
+    .getByRole("tab", { name: "Generate & review", exact: true })
+    .click();
+  await expect(page.getByText(record.subject, { exact: true })).toBeVisible();
+  await expect(page.getByText(record.body, { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Generate drafts", exact: true }),
+  ).toBeDisabled();
+  await page.getByRole("tab", { name: "Send", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Save draft", exact: true }),
+  ).toBeDisabled();
   expect(observed.writes).toEqual([]);
 });
 for (const width of [1440, 390])

@@ -23,6 +23,7 @@ export function OutreachWorkflowFrame({
   busy,
   saved,
   fenced,
+  readOnly,
   error,
   nextDisabled,
   onExit,
@@ -35,6 +36,7 @@ export function OutreachWorkflowFrame({
   busy: boolean;
   saved: boolean;
   fenced: boolean;
+  readOnly: boolean;
   error?: string;
   nextDisabled?: string;
   onExit: () => void;
@@ -65,7 +67,7 @@ export function OutreachWorkflowFrame({
           disabled:
             busy ||
             fenced ||
-            index + 1 > step + 1 ||
+            (!readOnly && index + 1 > step + 1) ||
             (index + 1 > step && Boolean(nextDisabled)),
         }))}
         onChange={(value) => onStep(Number(value) as OutreachStep)}
@@ -88,7 +90,10 @@ export function OutreachWorkflowFrame({
         <span className={styles.stepCount}>
           Step {step} of {outreachSteps.length}
         </span>
-        <ActionButton disabled={busy || fenced || saved} onClick={onSave}>
+        <ActionButton
+          disabled={busy || fenced || readOnly || saved}
+          onClick={onSave}
+        >
           Save draft
         </ActionButton>
         {step < 7 && (
