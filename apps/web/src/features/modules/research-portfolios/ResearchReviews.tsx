@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ResearchReviewTools } from "./ResearchReviewTools";
 import { ResearchReviewEvidence } from "./ResearchEvidence";
 import { ResearchBulkReviews } from "./ResearchBulkReviews";
@@ -31,9 +32,22 @@ export function ResearchReviews({
   const api = useCapiro();
   const editable =
     portfolio.myRole !== "viewer" && portfolio.lifecycle === "active";
-  const [lane, setLane] = useState<"mine" | "team" | "deferred" | "resolved">(
-    "mine",
-  );
+  const search = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const requestedLane = search.get("reviewLane");
+  const lane =
+    requestedLane === "team" ||
+    requestedLane === "deferred" ||
+    requestedLane === "resolved"
+      ? requestedLane
+      : "mine";
+  function selectLane(nextLane: string) {
+    if (nextLane === lane) return;
+    const next = new URLSearchParams(search);
+    next.set("reviewLane", nextLane);
+    router.push(`${pathname}?${next}`, { scroll: false });
+  }
   const [selected, setSelected] = useState<{
     id: string;
     revision: number;
@@ -140,7 +154,7 @@ export function ResearchReviews({
           label: id.charAt(0).toUpperCase() + id.slice(1),
         }))}
         value={lane}
-        onChange={(id) => setLane(id as typeof lane)}
+        onChange={selectLane}
       />
       <StatusPanel
         loading={query.loading}

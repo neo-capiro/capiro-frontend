@@ -457,3 +457,49 @@ test("bulk review lost acknowledgement retains its exact request through a queue
     page.getByRole("table", { name: "Bulk decision outcomes" }),
   ).toContainText("immutable-decision-replayed");
 });
+
+test("review lane uses URL authority through history and refresh while preserving the portfolio context", async ({
+  page,
+}) => {
+  const writes = await reads(page);
+  const lanes: string[] = [];
+  await page.route("**/api/capiro/research.reviews?*", async (route) => {
+    const input = JSON.parse(
+      new URL(route.request().url()).searchParams.get("input")!,
+    );
+    expect(input.params.id).toBe(ids.portfolio);
+    lanes.push(input.query.lane);
+    await route.fulfill({ json: [review] });
+  });
+  await page.goto(
+    `/research-contributions.html?view=reviews&reviewLane=invalid&clientId=${ids.client}&portfolioId=${ids.portfolio}`,
+  );
+  await expect(
+    page.getByRole("tab", { name: "Mine", exact: true }),
+  ).toHaveAttribute("aria-selected", "true");
+  await expect.poll(() => lanes.at(-1)).toBe("mine");
+  await page.getByRole("tab", { name: "Team", exact: true }).click();
+  await expect.poll(() => lanes.at(-1)).toBe("team");
+  await page.getByRole("tab", { name: "Deferred", exact: true }).click();
+  await expect.poll(() => lanes.at(-1)).toBe("deferred");
+  await page.goBack();
+  await expect(
+    page.getByRole("tab", { name: "Team", exact: true }),
+  ).toHaveAttribute("aria-selected", "true");
+  await expect.poll(() => lanes.at(-1)).toBe("team");
+  await page.goForward();
+  await expect(
+    page.getByRole("tab", { name: "Deferred", exact: true }),
+  ).toHaveAttribute("aria-selected", "true");
+  await expect.poll(() => lanes.at(-1)).toBe("deferred");
+  await page.reload();
+  await expect(
+    page.getByRole("tab", { name: "Deferred", exact: true }),
+  ).toHaveAttribute("aria-selected", "true");
+  expect(new URL(page.url()).searchParams.get("clientId")).toBe(ids.client);
+  expect(new URL(page.url()).searchParams.get("portfolioId")).toBe(
+    ids.portfolio,
+  );
+  expect(new URL(page.url()).searchParams.get("view")).toBe("reviews");
+  expect(writes).toHaveLength(0);
+});
