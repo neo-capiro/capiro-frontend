@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "gap": "DG-05",
+  "fileKey": "mpXWnySldUFzdVna8i69Ki",
+  "pageId": "1064:140864",
+  "sectionId": "3134:80066",
+  "reviewEntry": {
+    "nodeId": "3134:80067",
+    "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-80067"
+  },
+  "status": {
+    "productDefinitions": "APPROVED_BY_USER",
+    "designCoverage": "COMPLETE_FOR_REQUESTED_DG05_STATES",
+    "backendAggregationAndCoverage": "NOT_IMPLEMENTED_OR_CERTIFIED_BY_THIS_DESIGN_WORK",
+    "cadenceDefault": "30_DAYS_PROPOSED_ADJUSTABLE_PER_CLIENT",
+    "awaitingReply": "EXCLUDED_PER_USER_INSTRUCTION",
+    "ignoreControl": "NOT_GRANTED_NOT_PRESENT"
+  },
+  "scope": {
+    "ourSectionFrames": 24,
+    "existingPulseFramesUpdated": 8,
+    "activeFramesTotal": 32,
+    "existingOriginalOverviewModified": false,
+    "applicationCodeModified": false
+  },
+  "frames": [
+    {
+      "id": "3134:80067",
+      "name": "Overview metric coverage · Approved definitions review (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Linked review index for approved definitions and scenarios",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-80067",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:80412",
+      "name": "Overview metrics · current (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Current API/source coverage unavailable",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-80412",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:80737",
+      "name": "Overview metrics · loading (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Loading",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-80737",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:81064",
+      "name": "Overview metrics · zero (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Complete zero",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-81064",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:81399",
+      "name": "Overview metrics · positive (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Complete positive",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-81399",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:81742",
+      "name": "Overview metrics · partial (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Partial unknown",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-81742",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:82069",
+      "name": "Overview metrics · failed (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Failed with retry",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-82069",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:82409",
+      "name": "Overview metrics · denied (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Permission redacted",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-82409",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:82718",
+      "name": "Overview metrics · stale (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Stale with refresh",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-82718",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:83058",
+      "name": "Portfolio pulse · Approved product definitions (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Approved Pulse definitions: clients, active objectives, off track, active strategies, attention and linkage",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83058",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:83300",
+      "name": "Overview engagement · Approved product definitions (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Approved engagement definitions: last-30-day touches, last-eight-calendar-week series, cadence and activity feed",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83300",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:83607",
+      "name": "Overview work · Approved product definitions (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Approved Planner overdue and linkage definitions",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83607",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:83874",
+      "name": "Recorded touches · Page 1 (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Six matching last-30-day touches, page one of two",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83874",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:84093",
+      "name": "Recorded touches · Page 2 (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Six matching last-30-day touches, page two of two",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-84093",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:84312",
+      "name": "Need attention · Distinct clients and reasons (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Two distinct clients needing attention, with deduplicated reasons",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-84312",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:84520",
+      "name": "Overdue work · Matching records (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "One overdue Planner item at the reporting snapshot",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-84520",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:84724",
+      "name": "Linkage · Complete matching records (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Linkage 2 of 4 eligible open items, explicit direct and Strategy links",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-84724",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:84936",
+      "name": "Linkage · No eligible open work (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Zero denominator: No open work; percentage not applicable",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-84936",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3134:85152",
+      "name": "Metric drilldown · Coverage unavailable (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Unavailable drilldown with explicit source and coverage reason",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-85152",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3139:92302",
+      "name": "Overview · Complete-zero matching records (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Matching complete-zero client metrics and new-client cadence reason",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3139-92302",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3145:88040",
+      "name": "weeklyDrill · Recorded touches · Eight-week matching records (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Nine eight-week touch records; six in the separate last-30-day window",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3145-88040",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3145:88276",
+      "name": "pulseRecords · Pulse · Matching population records (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Matching three clients, three active Objectives and two active Strategies",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3145-88276",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3145:88446",
+      "name": "cadenceDetail · Engagement health · Cadence reasons (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "On track, needs attention and unknown cadence reasons; proposed per-client default",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3145-88446",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3145:88663",
+      "name": "pulseZeroRecords · Pulse · Complete-zero records (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Pulse complete-zero population and no open work",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3145-88663",
+      "ownership": "dg05-overview-coverage"
+    },
+    {
+      "id": "3109:58979",
+      "name": "Pulse · loading (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse loading",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-58979",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:59133",
+      "name": "Pulse · zero (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse complete zero with No open work linkage",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-59133",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:59293",
+      "name": "Pulse · positive (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse complete positive",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-59293",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:59479",
+      "name": "Pulse · partial (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse partial unknown",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-59479",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:59665",
+      "name": "Pulse · failed (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse failed/retry",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-59665",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:59822",
+      "name": "Pulse · denied (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse permission redacted",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-59822",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:59979",
+      "name": "Pulse · stale (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse stale",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-59979",
+      "ownership": "reused-existing-pulse"
+    },
+    {
+      "id": "3109:60136",
+      "name": "Pulse · Source coverage unavailable (1440)",
+      "width": 1440,
+      "height": 1040,
+      "purpose": "Reused Pulse source coverage unavailable",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3109-60136",
+      "ownership": "reused-existing-pulse"
+    }
+  ],
+  "repurposedFrames": [
+    {
+      "id": "3134:84312",
+      "activePurpose": "Need attention reasons",
+      "obsoletePurpose": "Awaiting reply drilldown"
+    },
+    {
+      "id": "3134:84724",
+      "activePurpose": "Linkage details",
+      "obsoletePurpose": "Due this week drilldown"
+    },
+    {
+      "id": "3134:84936",
+      "activePurpose": "No open work linkage",
+      "obsoletePurpose": "Open requests drilldown"
+    }
+  ],
+  "definitionFrames": [
+    {
+      "nodeId": "3134:83058",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83058"
+    },
+    {
+      "nodeId": "3134:83300",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83300"
+    },
+    {
+      "nodeId": "3134:83607",
+      "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3134-83607"
+    }
+  ],
+  "prototypeValidation": {
+    "brokenTargets": 0,
+    "totalLinksIncludingInherited": 1011,
+    "newActiveBatchLinks": 314,
+    "note": "1011 includes existing shell navigation; 314 is the approved update batch's explicit link registrations."
+  },
+  "fixtureConsistency": {
+    "overview": {
+      "recordedTouches30Days": 6,
+      "touchPages": [
+        3,
+        3
+      ],
+      "overdueWorkAsOf": 1,
+      "eightCalendarWeekBuckets": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        0
+      ],
+      "eightWeekTouchTotal": 9,
+      "last30DayTouchWindow": "2026-09-26T10:00 ET to 2026-10-26T10:00 ET",
+      "currentWeekLabel": "This week so far"
+    },
+    "pulse": {
+      "clients": 3,
+      "activeObjectives": 3,
+      "explicitlyOffTrackObjectives": 1,
+      "activeStrategies": 2,
+      "needAttentionClients": 2,
+      "eligibleOpenWork": 4,
+      "linkedEligibleOpenWork": 2,
+      "linkagePercent": 50,
+      "zeroDenominatorLabel": "No open work"
+    },
+    "illustrativeOnly": true,
+    "totalsReferToAllMatchesNotLoadedPage": true
+  },
+  "evidenceFiles": [
+    "APPROVED-UPDATE.json",
+    "APPROVED-SCOPE-FIX.json",
+    "FINAL-QA.json",
+    "HANDOFF.md"
+  ],
+  "historicalLedgerSuperseded": "LEDGER.json is local historical construction evidence and must not be used as the active inventory."
+}
