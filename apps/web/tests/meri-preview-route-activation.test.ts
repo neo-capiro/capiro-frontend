@@ -147,7 +147,7 @@ it("refuses a paired but unreviewed preview public origin", () => {
 it("binds the preview conversation gate to the app's pinned contract package", () => {
   const tarball = packageJson.dependencies["@capiro/meri-contracts"];
   const version =
-    /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)\.tgz$/.exec(
+    /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)(?:-[0-9a-f]{8}-[0-9a-f]{12})?\.tgz$/.exec(
       tarball,
     )?.[1];
   expect(version).toBeDefined();
