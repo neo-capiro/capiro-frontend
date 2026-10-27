@@ -200,6 +200,16 @@ function IntentCard({
       <p className={styles.muted}>{row.detail}</p>
       <FieldList fields={row.fields} />
       <FieldList fields={row.result} label="Recorded result" />
+      {row.fileLinks?.map((file) => (
+        <Button key={file.documentId} variant="outline" asChild>
+          <Link
+            prefetch={false}
+            href={`/portfolio/${encodeURIComponent(file.clientId)}/files?file=${encodeURIComponent(file.documentId)}`}
+          >
+            Open {file.fileName} in Client Files
+          </Link>
+        </Button>
+      ))}
       {row.researchDraft && (
         <Button variant="outline" asChild>
           <Link
