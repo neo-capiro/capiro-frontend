@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ResearchReviewTools } from "./ResearchReviewTools";
 import { ResearchReviewEvidence } from "./ResearchEvidence";
+import { ResearchBulkReviews } from "./ResearchBulkReviews";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import {
   researchDecisionRequestLimitBytes,
@@ -181,6 +182,16 @@ export function ResearchReviews({
           ]}
         />
       </StatusPanel>
+      <ResearchBulkReviews
+        key={portfolio.id}
+        portfolio={portfolio}
+        reviews={verifiedRows ?? []}
+        available={!query.loading && !query.error && !error && !mismatchedRows}
+        onRefresh={() => {
+          refreshReviews();
+          onReload();
+        }}
+      />
       <Modal
         open={!!selected}
         onOpenChange={(v) => {

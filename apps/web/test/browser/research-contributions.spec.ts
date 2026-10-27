@@ -280,3 +280,180 @@ test("oversized canonical evidence is refused before dispatch and reducing the s
   });
   expect(Buffer.byteLength(JSON.stringify(writes[0]))).toBeLessThan(1_000_000);
 });
+
+test("bulk review decisions preserve each selected revision and evidence and display mixed row outcomes", async ({
+  page,
+}) => {
+  const rows = [
+    review,
+    {
+      ...review,
+      id: "30000000-0000-4000-8000-000000000002",
+      targetId: "second-subject",
+      revision: 7,
+    },
+    {
+      ...review,
+      id: "30000000-0000-4000-8000-000000000003",
+      targetId: "third-subject",
+      revision: 9,
+    },
+  ];
+  const writes = await reads(page, {
+    "research.reviews": rows,
+    "research.reviews.bulk": {
+      portfolioId: ids.portfolio,
+      actorUserId: "owner",
+      occurredAt: timestamp,
+      outcomes: [
+        {
+          reviewId: rows[0]!.id,
+          status: "decided",
+          revision: 5,
+          decisionId: "immutable-decision-1",
+          message: null,
+        },
+        {
+          reviewId: rows[1]!.id,
+          status: "conflict",
+          revision: 8,
+          message: "This review changed.",
+        },
+        {
+          reviewId: rows[2]!.id,
+          status: "failed",
+          revision: 9,
+          message: "This review is cancelled.",
+        },
+      ],
+    },
+  });
+  await page.goto("/research-contributions.html?view=reviews");
+  for (const row of rows)
+    await page
+      .getByLabel(`Select review ${row.targetId}`, { exact: true })
+      .check();
+  await page
+    .getByLabel("Reason for selected reviews", { exact: true })
+    .fill("The selected citations support inclusion.");
+  const apply = page.getByRole("button", {
+    name: "Apply selected decisions",
+    exact: true,
+  });
+  await expect(apply).toBeDisabled();
+  for (const row of rows) {
+    const details = page.locator("details").filter({
+      has: page.getByText(
+        `Evidence for ${row.targetId} · revision ${row.revision}`,
+        { exact: true },
+      ),
+    });
+    await details.locator("summary").first().click();
+    await details
+      .getByLabel("Use supporting evidence 1", { exact: true })
+      .check();
+  }
+  await apply.click();
+  await expect.poll(() => writes.length).toBe(1);
+  expect(writes[0]).toMatchObject({
+    params: { id: ids.portfolio },
+    body: {
+      expectedRevision: 1,
+      items: rows.map((row) => ({
+        reviewId: row.id,
+        expectedRevision: row.revision,
+        decisionType: "include",
+        reason: "The selected citations support inclusion.",
+        evidenceFor: [forEvidence],
+        evidenceAgainst: [],
+      })),
+    },
+  });
+  await expect(page.getByRole("status")).toContainText(
+    "1 decided · 2 other outcomes",
+  );
+  const outcomes = page.getByRole("table", { name: "Bulk decision outcomes" });
+  await expect(
+    outcomes.getByRole("row").filter({ hasText: rows[0]!.id }),
+  ).toContainText("immutable-decision-1");
+  await expect(
+    outcomes.getByRole("row").filter({ hasText: rows[1]!.id }),
+  ).toContainText("conflict");
+  await expect(
+    outcomes.getByRole("row").filter({ hasText: rows[2]!.id }),
+  ).toContainText("failed");
+  await expect(
+    outcomes.getByText("No decision recorded", { exact: true }),
+  ).toHaveCount(2);
+  await page
+    .getByRole("button", { name: "Read latest review queue", exact: true })
+    .click();
+  await expect(
+    page.getByLabel(`Select review ${review.targetId}`, { exact: true }),
+  ).not.toBeChecked();
+});
+
+test("bulk review lost acknowledgement retains its exact request through a queue read and retries only on explicit check", async ({
+  page,
+}) => {
+  const writes: unknown[] = [];
+  await reads(page);
+  await page.route("**/api/capiro/research.reviews.bulk", async (route) => {
+    writes.push(route.request().postDataJSON());
+    if (writes.length === 1)
+      await route.fulfill({
+        status: 503,
+        json: { message: "The result was not received." },
+      });
+    else
+      await route.fulfill({
+        json: {
+          portfolioId: ids.portfolio,
+          actorUserId: "owner",
+          occurredAt: timestamp,
+          outcomes: [
+            {
+              reviewId: review.id,
+              status: "decided",
+              revision: 5,
+              decisionId: "immutable-decision-replayed",
+              message: null,
+            },
+          ],
+        },
+      });
+  });
+  await page.goto("/research-contributions.html?view=reviews");
+  await page
+    .getByLabel(`Select review ${review.targetId}`, { exact: true })
+    .check();
+  await page.getByLabel("Bulk decision", { exact: true }).selectOption("defer");
+  await page
+    .getByLabel("Reason for selected reviews", { exact: true })
+    .fill("Await the next source revision.");
+  await page
+    .getByRole("button", { name: "Apply selected decisions", exact: true })
+    .click();
+  await expect(page.getByRole("status")).toContainText(
+    "The outcome is unconfirmed",
+  );
+  await expect(
+    page.getByLabel("Reason for selected reviews", { exact: true }),
+  ).toHaveCount(0);
+  await page.getByRole("tab", { name: "Team", exact: true }).click();
+  const retry = page.getByRole("button", {
+    name: "Check same bulk request",
+    exact: true,
+  });
+  await expect(retry).toBeEnabled();
+  expect(writes).toHaveLength(1);
+  await retry.click();
+  await expect.poll(() => writes.length).toBe(2);
+  expect(writes[1]).toEqual(writes[0]);
+  await expect(page.getByRole("status")).toContainText(
+    "1 decided · 0 other outcomes",
+  );
+  await expect(
+    page.getByRole("table", { name: "Bulk decision outcomes" }),
+  ).toContainText("immutable-decision-replayed");
+});

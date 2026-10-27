@@ -68,7 +68,7 @@ Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 hando
 | RP-03 | Rules native controls added | Dynamic/hybrid outage/concurrency/manual-precedence acceptance. |
 | RP-04 | Existing templates and recursive editor | Qualified vocabulary/mapping, old-template reproduction and accessibility. |
 | RP-05 | Present | Multi-client wall/revocation propagation through fit, cache and artifacts. |
-| RP-06 | Notes, assignment and exact decision evidence added | Bulk outcome journey and real-cycle acceptance remain incomplete. |
+| RP-06 | Notes, assignment, exact decision evidence and bulk per-row outcomes added | Local mixed-outcome/retry checks pass; real-cycle acceptance remains incomplete. |
 | RP-07 | Existing review statuses | Real rename/split/merge/expiry corpus and exactly-once reopen. |
 | RP-08 | Worksheet added; mounted repair/apply pass | Database interruption and later-edit compensation acceptance. |
 | RP-09 | Subscriptions/change feed present; conversion added | Two-user baseline, no-flood restore and configured delivery proof. |
@@ -97,7 +97,7 @@ Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 hando
 | S04 | Rules and bookmarks added | Typed discovery, full bulk outcomes and outage precedence follow-on/acceptance. |
 | S05 | Existing Changes and subscriptions | Badge parity, two-user and no-flood deployed delivery proof. |
 | S06 | Totals and contribution ledger with basis/disposition/revision filters present | Ledger equality and target-corpus/source-cohort qualification remains. |
-| S07 | Four lanes, notes/assignment and explicit supporting/against evidence selection present | Bulk-decision UI/outcomes and real-cycle qualification remain. |
+| S07 | Four lanes, notes/assignment, explicit supporting/against evidence and bounded bulk decisions present | Local mixed-outcome/retry checks pass; real-cycle qualification remains. |
 | S08 | Settings guard fixed | Effective grants and open-form access loss/revocation proof. |
 | S09 | DataExplorer mounted | Dataset/query/page are local state; selected/page/all export and full typed facets/detail remain incomplete. |
 | S10 | Existing separate Changes/Budget destinations | Required composed Budget/Congressional/Monitored/Actions and FY/source semantics not established. |
@@ -138,7 +138,7 @@ Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 hando
 
 Root is assigning the remaining accepted source scope separately. Reuse actual Core DTOs and existing native readers. Do not relabel unrelated LegiWatch panels as Research completion, create a second evidence/analytics store, invent metric definitions or source coverage, or turn Q07 semantic work back on.
 
-1. S06/RP-10 contribution ledger/source-basis drilldowns and S07/RP-06 supporting/against evidence are implemented by the follow-on below. Keep bulk decision and corpus evidence obligations explicit.
+1. S06/RP-10 contribution ledger/source-basis drilldowns and S07/RP-06 supporting/against evidence and bulk decisions are implemented by the follow-ons below. Keep independent review and corpus evidence obligations explicit.
 2. Trace the real Core Research reader/compare/coverage/evidence contracts before implementing S09–S15. Keep exact URL-owned typed identities, existing grant checks and partial/unsupported states. Full source/corpus acceptance remains independently evidence-based.
 3. Hermes reviews the frozen author's source and actual images using `test/browser/research-workflow.html` and the existing sharing/Overview harnesses. This synthetic harness makes native routes reviewable without production credentials; it does not validate target data.
 4. Integrate only Hermes-reviewed architecture entries. Unchanged-main findings are recorded facts, not automatically approved by this handoff.
@@ -155,3 +155,13 @@ This section records a separate bounded author pass after the initial `dbc617dd`
 - Hermes mail follow-up: `NativeMailReply` now guards missing canonical To recipients before reading the first recipient or enabling reply/reply-all. The existing `mailReplyContextSchema` already rejects empty non-forward To arrays; the added UI guard is robustness. Quote headers are bounded individually and the whole visible quote remains below 6,000 characters with explicit omitted-text disclosure. Eight focused quote/CSV/bounds/recipient tests pass, including hostile headers and formatted HTML expansion. No mail was sent.
 - The shared registry count test encountered concurrent root-owned operation-family additions before their test-list integration. No registry/test-family edits were made by this follow-on. Root owns the combined registry gate; this is not an author claim that that integration gate passed.
 - This pass does not mark S07 bulk-decision UI, full target-corpus/evidence qualification, independent visual acceptance or any deployment complete.
+
+## S07 bulk review follow-on
+
+The subsequent bounded pass adds `ResearchBulkReviews` using the existing Core `POST /research-portfolios/:id/reviews/bulk` owner. No new backend route, model or evidence store is introduced.
+
+- Select 1–50 current rows explicitly, then one compatible decision and a nonempty reason. Every item keeps its selected review revision, the captured portfolio revision and its own exact supporting/opposing evidence. Include/exclude/dispute require a citation for every selected row. Selected row revisions are bound when selected, so a refreshed revision cannot silently substitute new evidence. The same 1,000,000-byte full-envelope limit applies without shortening evidence.
+- After submission, inputs are retired and the exact parsed request and idempotency key remain in the mounted view through queue reads. A lost/unknown response offers only an explicit check of that same request. This is in-view retention, not browser-restart persistence. A recognized 400/403/404/409/413/422 refusal offers a fresh queue read before preparing a corrected request. No write retries automatically.
+- A receipt must match the selected portfolio and identify every selected review exactly once. The result table displays every status, revision, decision ID and message; conflict/failed rows are never counted as decided. A known receipt allows a fresh read and a new key for the next selection.
+- Existing editor/active-lifecycle restrictions and freshly authorized current queue reads still gate submission. Foreign-portfolio queues are withheld. The receiver also retains Core's existing optional nullable `unresolvedInput` and `resolvedAt` member fields for the separate member-discovery owner.
+- Two focused mounted tests pass: three selected reviews returning decided/conflict/failed with exact per-row revisions and evidence, and a lost acknowledgement followed by a queue read and byte-equivalent explicit retry. Author lint, formatting, diff checks and full web typecheck pass; logs are `.qa-fable-bulk-{browser,eslint,typecheck}.txt`. Independent Hermes review, real-cycle data acceptance and deployment remain separate gates.

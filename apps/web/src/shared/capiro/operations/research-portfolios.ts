@@ -282,28 +282,60 @@ export const researchPortfolioOperations = {
           .strict(),
       })
       .strict(),
-    response: z.object({
-      portfolioId: z.string(),
-      actorUserId: z.string(),
-      occurredAt: z.string(),
-      outcomes: z.array(
-        z.object({
-          reviewId: z.string().nullable(),
-          status: z.enum([
-            "assigned",
-            "decided",
-            "unchanged",
-            "conflict",
-            "failed",
-            "note_added",
-          ]),
-          revision: z.number().nullable(),
-          message: z.string().nullable(),
-        }),
-      ),
-    }),
+    response: s.researchReviewMutationReceipt,
     source:
       "capiro-backend@fba7ed5d1 packages/shared/src/research-portfolios.ts DecideResearchPortfolioReviewDto; research-portfolio-review.service.ts",
+  }),
+  "research.reviews.bulk": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/research-portfolios/:id/reviews/bulk",
+    requestLimitBytes: s.researchDecisionRequestLimitBytes,
+    request: z
+      .object({
+        params,
+        body: metadata
+          .extend({
+            items: z
+              .array(
+                z
+                  .object({
+                    reviewId: z.uuid(),
+                    expectedRevision: z.number().int().nonnegative(),
+                    decisionType: z.enum([
+                      "include",
+                      "exclude",
+                      "defer",
+                      "reopen",
+                      "dispute",
+                    ]),
+                    reason: z.string().trim().min(1).max(4000),
+                    evidenceFor: z
+                      .array(
+                        s.researchReviewEvidence.extend({
+                          stance: z.literal("for"),
+                        }),
+                      )
+                      .max(100),
+                    evidenceAgainst: z
+                      .array(
+                        s.researchReviewEvidence.extend({
+                          stance: z.literal("against"),
+                        }),
+                      )
+                      .max(100),
+                  })
+                  .strict(),
+              )
+              .min(1)
+              .max(50),
+          })
+          .strict(),
+      })
+      .strict(),
+    response: s.researchReviewMutationReceipt,
+    source:
+      "capiro-backend@fba7ed5d1 packages/shared/src/research-portfolios.ts BulkResearchPortfolioReviewsDto; research-portfolio-review.service.ts bulkDecideReviews",
   }),
   "research.snapshots": read(
     "/research-portfolios/:id/snapshots",

@@ -33,6 +33,8 @@ export const researchMember = z.object({
     "unresolved",
   ]),
   origin: z.enum(["manual", "rule", "import"]).optional(),
+  unresolvedInput: z.record(z.string(), z.unknown()).nullable().optional(),
+  resolvedAt: z.string().nullable().optional(),
   reason: z.string().nullable(),
   revision: z.number().int(),
   updatedAt: z.string(),
@@ -157,6 +159,30 @@ export const researchReviewEvidence = z.object({
   locator: z.record(z.string(), z.unknown()),
   quote: z.string().max(10000).nullable(),
   stance: z.enum(["for", "against"]),
+});
+export const researchReviewMutationReceipt = z.object({
+  portfolioId: z.string(),
+  actorUserId: z.string(),
+  occurredAt: z.string(),
+  outcomes: z
+    .array(
+      z.object({
+        reviewId: z.string().nullable(),
+        status: z.enum([
+          "assigned",
+          "decided",
+          "unchanged",
+          "conflict",
+          "failed",
+          "note_added",
+        ]),
+        revision: z.number().nullable(),
+        decisionId: z.string().nullable().optional(),
+        noteId: z.string().nullable().optional(),
+        message: z.string().nullable(),
+      }),
+    )
+    .max(50),
 });
 export const researchFit = z.object({
   clientFits: z.array(
