@@ -8,7 +8,12 @@ import { dashboard, ids, shareToken } from "./research-sharing-fixture";
 
 async function arrange(
   page: Page,
-  options: { mismatch?: boolean; revoke?: boolean; held?: boolean } = {},
+  options: {
+    mismatch?: boolean;
+    revoke?: boolean;
+    held?: boolean;
+    unknown?: boolean;
+  } = {},
 ) {
   const item = prepared(options.revoke);
   await receiveIntentsResponse(
@@ -19,8 +24,10 @@ async function arrange(
   );
   const decisions: Record<string, unknown>[] = [];
   let withheld = false;
+  let lists = 0;
   let release: (() => void) | undefined;
   await page.route("**/api/conversations/intents/list", (route) => {
+    lists += 1;
     const request = route.request().postDataJSON();
     return route.fulfill({
       json: {
@@ -51,8 +58,11 @@ async function arrange(
       await new Promise<void>((resolve) => {
         release = resolve;
       });
-    item.proposalStatus =
-      request.decision === "approved" ? "succeeded" : "dismissed";
+    item.proposalStatus = options.unknown
+      ? "outcome_unknown"
+      : request.decision === "approved"
+        ? "succeeded"
+        : "dismissed";
     await route
       .fulfill({
         json: {
@@ -60,7 +70,9 @@ async function arrange(
           deliveryId: item.deliveryId,
           proposalId: item.proposal.proposalId,
           proposalStatus: item.proposalStatus,
-          ...(!options.revoke && request.decision === "approved"
+          ...(!options.unknown &&
+          !options.revoke &&
+          request.decision === "approved"
             ? {
                 oneTimeResult: {
                   sharePath: `/share/${shareToken}`,
@@ -97,6 +109,7 @@ async function arrange(
   await page.goto("/research-sharing.html?mode=meri");
   return {
     decisions,
+    listCount: () => lists,
     released: () => Boolean(release),
     release: () => release?.(),
     item,
@@ -152,6 +165,28 @@ test("Meri publication requires its exact reviewed preview and shows the winning
     page.getByRole("region", { name: "Published client link" }),
   ).toHaveCount(0);
   expect(fixture.decisions).toHaveLength(1);
+});
+
+test("an uncertain Meri share action checks recorded status without repeating approval", async ({
+  page,
+}) => {
+  const fixture = await arrange(page, { unknown: true });
+  await page
+    .getByLabel("I reviewed this frozen dashboard and everything it exposes.")
+    .check();
+  await page.getByRole("button", { name: "Approve…" }).click();
+  await page.getByRole("button", { name: "Confirm approval" }).click();
+  await expect(
+    page.getByText("outcome unknown", { exact: true }),
+  ).toBeVisible();
+  const before = fixture.listCount();
+  await page.getByRole("button", { name: "Check result", exact: true }).click();
+  await expect.poll(fixture.listCount).toBeGreaterThan(before);
+  expect(fixture.decisions).toHaveLength(1);
+  await expect(page.getByRole("button", { name: "Approve…" })).toHaveCount(0);
+  await expect(
+    page.getByRole("region", { name: "Published client link" }),
+  ).toHaveCount(0);
 });
 
 test("Meri refuses a changed preview while allowing the user to reject the proposal", async ({

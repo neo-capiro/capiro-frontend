@@ -43,41 +43,48 @@ function FieldList({
   );
 }
 
-/** Two explicit steps for a decision; after an uncertain attempt only the identical request can be sent again. */
+/** Explicit confirmation; uncertain sharing actions read their owner status without another write. */
 function DecisionControls({
   row,
   attempt,
   onDecide,
+  onRefresh,
   disabled,
   approvalDisabled = false,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  onRefresh: () => void;
   disabled: boolean;
   approvalDisabled?: boolean;
 }) {
   const [confirming, setConfirming] = useState<Choice | null>(null);
   const busy = disabled || attempt?.state === "pending";
+  const sharing = row.proposal && isResearchShareProposal(row.proposal);
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
-          {attempt.message ?? (
-            <>
-              We could not confirm whether your decision to{" "}
-              {attempt.decision === "approved" ? "approve" : "reject"} this was
-              recorded. Checking sends the same request again to recover its
-              outcome.
-            </>
-          )}
+          {sharing
+            ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
+            : (attempt.message ?? (
+                <>
+                  We could not confirm whether your decision to{" "}
+                  {attempt.decision === "approved" ? "approve" : "reject"} this
+                  was recorded. Checking sends the same request again to recover
+                  its outcome.
+                </>
+              ))}
         </p>
         <div className={styles.actions}>
           <Button
             type="button"
             variant="outline"
             disabled={busy}
-            onClick={() => onDecide(row, attempt.decision)}
+            onClick={() =>
+              sharing ? onRefresh() : onDecide(row, attempt.decision)
+            }
           >
             Check result
           </Button>
@@ -145,11 +152,13 @@ function IntentCard({
   row,
   attempt,
   onDecide,
+  onRefresh,
   disabled,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
+  onRefresh: () => void;
   disabled: boolean;
 }) {
   const titleId = `intent-${row.deliveryId.slice(4, 16)}`;
@@ -178,6 +187,7 @@ function IntentCard({
               row={row}
               attempt={attempt}
               onDecide={onDecide}
+              onRefresh={onRefresh}
               disabled={disabled}
               approvalDisabled={!ready}
             />
@@ -188,6 +198,7 @@ function IntentCard({
           row={row}
           attempt={attempt}
           onDecide={onDecide}
+          onRefresh={onRefresh}
           disabled={disabled}
         />
       )}
@@ -202,6 +213,7 @@ function Body({
   retry,
   loadMore,
   decide,
+  refresh,
   decisionsReady,
   recoveryError,
   access,
@@ -264,6 +276,7 @@ function Body({
                     row.proposal ? attempts[row.proposal.proposalId] : undefined
                   }
                   onDecide={decide}
+                  onRefresh={() => void refresh()}
                   disabled={!decisionsReady}
                 />
               )}
