@@ -18,6 +18,7 @@ import {
   isClientRecordProposal,
   clientRecordSettled,
 } from "./client-record-view";
+import { isBizdevProposal, bizdevSettled } from "./bizdev-view";
 import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
 import { isMailSendProposal, mailOutcomeSettled } from "./mail-view";
 import { useIntentExpiry } from "./useIntentExpiry";
@@ -132,7 +133,8 @@ export function useConversationIntents(
           (item.kind !== "proposal" &&
             item.kind !== "research_share" &&
             item.kind !== "legiwatch_action" &&
-            item.kind !== "client_record_action") ||
+            item.kind !== "client_record_action" &&
+            item.kind !== "bizdev_action") ||
           "withheld" in item
         )
           continue;
@@ -144,6 +146,9 @@ export function useConversationIntents(
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
         if (
+          (item.kind === "bizdev_action" &&
+            item.result !== "unavailable" &&
+            bizdevSettled(item.result.status)) ||
           (item.kind === "client_record_action" &&
             item.result !== "unavailable" &&
             clientRecordSettled(item.result.status)) ||
@@ -233,7 +238,8 @@ export function useConversationIntents(
       // Reconcile uncertain domain actions by reading their owner; never resend them.
       if (
         prior &&
-        (isLegiwatchProposal(proposal) ||
+        (isBizdevProposal(proposal) ||
+          isLegiwatchProposal(proposal) ||
           isClientRecordProposal(proposal) ||
           isMailSendProposal(proposal))
       ) {
@@ -320,7 +326,8 @@ export function useConversationIntents(
         current.current.access === access
       )
         onDecisionSettled?.(
-          isResearchShareProposal(proposal) ||
+          isBizdevProposal(proposal) ||
+            isResearchShareProposal(proposal) ||
             isLegiwatchProposal(proposal) ||
             isClientRecordProposal(proposal)
             ? proposal.binding.runId

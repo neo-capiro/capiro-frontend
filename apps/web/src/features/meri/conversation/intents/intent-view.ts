@@ -1,3 +1,4 @@
+import { isBizdevProposal, bizdevFields, bizdevRow } from "./bizdev-view";
 import {
   isClientRecordProposal,
   clientRecordFields,
@@ -78,6 +79,7 @@ const day = (iso: string) => iso.slice(0, 10);
 export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
+  if (isBizdevProposal(proposal)) return bizdevFields(proposal);
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
   if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
   if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
@@ -380,6 +382,7 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "bizdev_action") return bizdevRow(item, now, viewer);
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
   if (item.kind === "client_record_action")
     return clientRecordRow(item, now, viewer);

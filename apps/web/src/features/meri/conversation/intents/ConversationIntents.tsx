@@ -18,6 +18,7 @@ import { ConversationRoutine } from "../../routines/ConversationRoutine";
 import { isClientRecordProposal } from "./client-record-view";
 import { isLegiwatchProposal } from "./legiwatch-view";
 import { isResearchShareProposal } from "./research-share-view";
+import { isBizdevProposal } from "./bizdev-view";
 import { isMailSendProposal } from "./mail-view";
 import { ResearchShareReview } from "./ResearchShareReview";
 import { ResearchShareResult } from "./ResearchShareResult";
@@ -68,26 +69,31 @@ function DecisionControls({
   const legiwatch = row.proposal && isLegiwatchProposal(row.proposal);
   const clientRecord = row.proposal && isClientRecordProposal(row.proposal);
   const mail = row.proposal && isMailSendProposal(row.proposal);
+  const bizdev = row.proposal && isBizdevProposal(row.proposal);
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
-          {clientRecord
-            ? "The client action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
-            : legiwatch
-              ? "The suggestion action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
-              : sharing
-                ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
-                : mail
-                  ? "The message outcome is not confirmed. Check the current recorded status; the message will not be sent again."
-                  : (attempt.message ?? (
-                      <>
-                        We could not confirm whether your decision to{" "}
-                        {attempt.decision === "approved" ? "approve" : "reject"}{" "}
-                        this was recorded. Checking sends the same request again
-                        to recover its outcome.
-                      </>
-                    ))}
+          {bizdev
+            ? "The saved brief outcome is not confirmed. Check the current recorded status; the save will not be sent again."
+            : clientRecord
+              ? "The client action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
+              : legiwatch
+                ? "The suggestion action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
+                : sharing
+                  ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
+                  : mail
+                    ? "The message outcome is not confirmed. Check the current recorded status; the message will not be sent again."
+                    : (attempt.message ?? (
+                        <>
+                          We could not confirm whether your decision to{" "}
+                          {attempt.decision === "approved"
+                            ? "approve"
+                            : "reject"}{" "}
+                          this was recorded. Checking sends the same request
+                          again to recover its outcome.
+                        </>
+                      ))}
         </p>
         <div className={styles.actions}>
           <Button
@@ -95,7 +101,7 @@ function DecisionControls({
             variant="outline"
             disabled={busy}
             onClick={() =>
-              sharing || legiwatch || clientRecord || mail
+              sharing || legiwatch || clientRecord || mail || bizdev
                 ? onRefresh()
                 : onDecide(row, attempt.decision)
             }

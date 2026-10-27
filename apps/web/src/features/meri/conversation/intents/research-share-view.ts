@@ -1,3 +1,4 @@
+import { bizdevSettled } from "./bizdev-view";
 import { clientRecordSettled } from "./client-record-view";
 import { legiwatchSettled } from "./legiwatch-view";
 import type {
@@ -15,6 +16,8 @@ export function isResearchShareProposal(
 }
 
 export function intentDecisionSettled(response: IntentsDecideResponse) {
+  if (response.status === "bizdev_decided")
+    return bizdevSettled(response.result.status);
   if (response.status === "client_record_decided")
     return clientRecordSettled(response.result.status);
   if (response.status === "legiwatch_decided")
