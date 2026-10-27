@@ -6,6 +6,7 @@ import { scopedHref } from "../session/client-route";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SelectInput } from "../module-ui";
 import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
+import { resolveDirectoryView } from "./directory-views";
 import styles from "./module-shell.module.css";
 
 export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
@@ -14,15 +15,17 @@ export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
   const params = useSearchParams();
   if (active === "intelligence" && params.get("view") === "legiwatch")
     return null;
-  // Figma 3.4 shows the active view as a trailing crumb
-  // (Modules / [Intelligence ▾] / District Nexus). Resolved from the catalog so
-  // no module has to hard-code its own crumb.
+  // Directory uses the screen's resolved view, including its default. Other
+  // modules retain their catalog labels for the trailing breadcrumb.
   const view = params.get("view");
-  const chip = view
-    ? moduleCatalog
-        .find((descriptor) => descriptor.slug === active)
-        ?.chips.find((candidate) => candidate.view === view)
-    : undefined;
+  const chip =
+    active === "directory"
+      ? resolveDirectoryView(view)
+      : view
+        ? moduleCatalog
+            .find((descriptor) => descriptor.slug === active)
+            ?.chips.find((candidate) => candidate.view === view)
+        : undefined;
   return (
     <nav className={styles.breadcrumb} aria-label="Breadcrumb">
       <ScopedLink href="/modules">← Modules</ScopedLink>
