@@ -81,6 +81,7 @@ export function ResearchCoverage() {
         />
         <ActionButton type="submit">Apply coverage filters</ActionButton>
         <ActionButton
+          type="button"
           onClick={() =>
             update(
               Object.fromEntries(
