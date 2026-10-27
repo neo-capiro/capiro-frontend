@@ -83,10 +83,37 @@ test("timeline loads bounded message and exact body continuations", async ({
     nextBodyOffset: 6000,
     bodyCompleteness: "preview",
   };
+  const selectedReads: string[] = [];
   await page.route(`**/engagement/mail-threads/${threadId}*`, (route) => {
     expect(route.request().method()).toBe("GET");
     const params = new URL(route.request().url()).searchParams;
     expect(params.get("clientId")).toBe(fullThread.clientId);
+    if (params.get("bodyOffset") === "0" && params.has("messageId")) {
+      expect(params.get("messageId")).toBe(fullThread.messages[1]!.id);
+      expect(params.get("expectedUpdatedAt")).toBe(mailAsOf);
+      expect(params.get("expectedBodySha256")).toBe(
+        fullThread.messages[1]!.bodySha256,
+      );
+      selectedReads.push(params.get("messageId")!);
+      return json(route, {
+        ...fullThread,
+        messages: [
+          {
+            ...fullThread.messages[1]!,
+            replyContext: {
+              supported: false,
+              reason: "Synthetic selected original has no native reply proof.",
+            },
+            replyAllContext: {
+              supported: false,
+              reason:
+                "Synthetic selected original has no native recipient proof.",
+            },
+          },
+        ],
+        totalMessages: 1,
+      });
+    }
     if (params.has("bodyOffset")) {
       expect(params.get("asOf")).toBe(mailAsOf);
       expect(params.get("expectedUpdatedAt")).toBe(mailAsOf);
@@ -121,7 +148,7 @@ test("timeline loads bounded message and exact body continuations", async ({
   await page.goto("/__test/thread-mail");
   await page.getByRole("button", { name: "Expand email thread" }).click();
   await expect(
-    page.getByRole("button", { name: "Review reply all", exact: true }),
+    page.getByRole("button", { name: "Reply all", exact: true }),
   ).toBeDisabled();
   await expect(
     page.getByText("Only a provider preview was stored."),
@@ -134,9 +161,21 @@ test("timeline loads bounded message and exact body continuations", async ({
     .getByRole("button", { name: "Load more messages", exact: true })
     .click();
   await expect(page.getByText(/2 of 2 stored messages loaded/)).toBeVisible();
+  // Paging only supplies stored messages; native recipient authority requires
+  // the current exact selected-message read, even after all pages are loaded.
   await expect(
-    page.getByRole("button", { name: "Review reply all", exact: true }),
-  ).toBeEnabled();
+    page.getByRole("button", { name: "Reply all", exact: true }),
+  ).toBeDisabled();
+  await page
+    .getByRole("combobox", { name: "Original message", exact: true })
+    .selectOption(fullThread.messages[1]!.id);
+  await expect(
+    page.getByText("Synthetic selected original has no native reply proof."),
+  ).toBeVisible();
+  expect(selectedReads).toEqual([fullThread.messages[1]!.id]);
+  await expect(
+    page.getByRole("button", { name: "Reply all", exact: true }),
+  ).toBeDisabled();
 });
 
 test("a changed thread or removed account during continuation hides prior messages and restarts explicitly", async ({
