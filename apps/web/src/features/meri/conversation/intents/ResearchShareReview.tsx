@@ -3,8 +3,10 @@ import { useState, type ReactNode } from "react";
 import type { IntentsResearchShareProposal } from "@capiro/meri-client/intents";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import { StatusPanel } from "../../../../shared/module-ui";
-import { ShareExposure } from "../../../modules/research-portfolios/share/ShareExposure";
-import { ResearchDashboardView } from "../../../modules/research-portfolios/share/ResearchDashboardView";
+import {
+  ShareExposure,
+  ResearchDashboardView,
+} from "../../../modules/research-portfolios/share-preview-public";
 
 /** The existing Meri decision is enabled only after the exact retained publish preview is reviewed. */
 export function ResearchShareReview({

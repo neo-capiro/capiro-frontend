@@ -4,7 +4,7 @@ import type {
   IntentsResearchShareProposal,
   IntentsDecideResponse,
 } from "@capiro/meri-client/intents";
-import type { IntentField, IntentRow, Viewer } from "./intent-view";
+import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
 
 export function isResearchShareProposal(
   proposal: IntentsProposal,
