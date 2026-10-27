@@ -1,5 +1,10 @@
 import { isBizdevProposal, bizdevFields, bizdevRow } from "./bizdev-view";
 import {
+  isLegislativeDocumentProposal,
+  legislativeDocumentFields,
+  legislativeDocumentRow,
+} from "./legislative-document-view";
+import {
   isClientRecordProposal,
   clientRecordFields,
   clientRecordRow,
@@ -84,6 +89,8 @@ export function proposalFields(
   if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
   if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
   if (isMailSendProposal(proposal)) return mailFields(proposal);
+  if (isLegislativeDocumentProposal(proposal))
+    return legislativeDocumentFields(proposal);
   const command = proposal.command;
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
@@ -384,6 +391,8 @@ export function intentRow(
     );
   if (item.kind === "bizdev_action") return bizdevRow(item, now, viewer);
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
+  if (item.kind === "legislative_document_action")
+    return legislativeDocumentRow(item, now, viewer);
   if (item.kind === "client_record_action")
     return clientRecordRow(item, now, viewer);
   if (item.kind === "research_share")

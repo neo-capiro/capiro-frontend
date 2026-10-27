@@ -15,6 +15,7 @@ import {
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
+import { isLegislativeDocumentProposal } from "./legislative-document-view";
 import { isClientRecordProposal } from "./client-record-view";
 import { isLegiwatchProposal } from "./legiwatch-view";
 import { isResearchShareProposal } from "./research-share-view";
@@ -70,30 +71,34 @@ function DecisionControls({
   const clientRecord = row.proposal && isClientRecordProposal(row.proposal);
   const mail = row.proposal && isMailSendProposal(row.proposal);
   const bizdev = row.proposal && isBizdevProposal(row.proposal);
+  const legislativeDocument =
+    row.proposal && isLegislativeDocumentProposal(row.proposal);
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
           {bizdev
             ? "The saved brief outcome is not confirmed. Check the current recorded status; the save will not be sent again."
-            : clientRecord
-              ? "The client action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
-              : legiwatch
-                ? "The suggestion action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
-                : sharing
-                  ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
-                  : mail
-                    ? "The message outcome is not confirmed. Check the current recorded status; the message will not be sent again."
-                    : (attempt.message ?? (
-                        <>
-                          We could not confirm whether your decision to{" "}
-                          {attempt.decision === "approved"
-                            ? "approve"
-                            : "reject"}{" "}
-                          this was recorded. Checking sends the same request
-                          again to recover its outcome.
-                        </>
-                      ))}
+            : legislativeDocument
+              ? "The document save outcome is not confirmed. Check the recorded status; this save will not be sent again."
+              : clientRecord
+                ? "The client action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
+                : legiwatch
+                  ? "The suggestion action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
+                  : sharing
+                    ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
+                    : mail
+                      ? "The message outcome is not confirmed. Check the current recorded status; the message will not be sent again."
+                      : (attempt.message ?? (
+                          <>
+                            We could not confirm whether your decision to{" "}
+                            {attempt.decision === "approved"
+                              ? "approve"
+                              : "reject"}{" "}
+                            this was recorded. Checking sends the same request
+                            again to recover its outcome.
+                          </>
+                        ))}
         </p>
         <div className={styles.actions}>
           <Button
@@ -101,7 +106,12 @@ function DecisionControls({
             variant="outline"
             disabled={busy}
             onClick={() =>
-              sharing || legiwatch || clientRecord || mail || bizdev
+              sharing ||
+              legiwatch ||
+              clientRecord ||
+              mail ||
+              bizdev ||
+              legislativeDocument
                 ? onRefresh()
                 : onDecide(row, attempt.decision)
             }
@@ -120,7 +130,7 @@ function DecisionControls({
           disabled={busy || approvalDisabled}
           onClick={() => setConfirming("approved")}
         >
-          Approve…
+          Approveâ€¦
         </Button>
         <Button
           type="button"
@@ -128,7 +138,7 @@ function DecisionControls({
           disabled={busy}
           onClick={() => setConfirming("rejected")}
         >
-          Reject…
+          Rejectâ€¦
         </Button>
       </div>
     );
@@ -245,7 +255,7 @@ function Body({
       </p>
     );
   if (list.status === "loading")
-    return <p className={styles.muted}>Reading the actions Meri prepared…</p>;
+    return <p className={styles.muted}>Reading the actions Meri preparedâ€¦</p>;
   if (list.status === "unavailable")
     return (
       <p className={styles.muted} role="status">
@@ -269,7 +279,7 @@ function Body({
         {!decisionsReady && (
           <li role="status">
             {recoveryError ??
-              "Checking saved decisions before another request…"}
+              "Checking saved decisions before another requestâ€¦"}
           </li>
         )}
         {rows.map((row) => {

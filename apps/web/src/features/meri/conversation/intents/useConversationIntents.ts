@@ -15,6 +15,10 @@ import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
 import {
+  isLegislativeDocumentProposal,
+  legislativeDocumentSettled,
+} from "./legislative-document-view";
+import {
   isClientRecordProposal,
   clientRecordSettled,
 } from "./client-record-view";
@@ -134,7 +138,8 @@ export function useConversationIntents(
             item.kind !== "research_share" &&
             item.kind !== "legiwatch_action" &&
             item.kind !== "client_record_action" &&
-            item.kind !== "bizdev_action") ||
+            item.kind !== "bizdev_action" &&
+            item.kind !== "legislative_document_action") ||
           "withheld" in item
         )
           continue;
@@ -149,6 +154,9 @@ export function useConversationIntents(
           (item.kind === "bizdev_action" &&
             item.result !== "unavailable" &&
             bizdevSettled(item.result.status)) ||
+          (item.kind === "legislative_document_action" &&
+            item.result !== "unavailable" &&
+            legislativeDocumentSettled(item.result.status)) ||
           (item.kind === "client_record_action" &&
             item.result !== "unavailable" &&
             clientRecordSettled(item.result.status)) ||
@@ -241,7 +249,8 @@ export function useConversationIntents(
         (isBizdevProposal(proposal) ||
           isLegiwatchProposal(proposal) ||
           isClientRecordProposal(proposal) ||
-          isMailSendProposal(proposal))
+          isMailSendProposal(proposal) ||
+          isLegislativeDocumentProposal(proposal))
       ) {
         try {
           guard();
@@ -329,7 +338,8 @@ export function useConversationIntents(
           isBizdevProposal(proposal) ||
             isResearchShareProposal(proposal) ||
             isLegiwatchProposal(proposal) ||
-            isClientRecordProposal(proposal)
+            isClientRecordProposal(proposal) ||
+            isLegislativeDocumentProposal(proposal)
             ? proposal.binding.runId
             : proposal.command.binding.runId,
         );
