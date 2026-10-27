@@ -392,6 +392,19 @@
       "regularEntryCount": 6,
       "status": "verified-source-pending-consumer-qualification",
       "purpose": "Final Wave4 consumer integration candidate; source and physical bytes frozen, no publication or deployment claim."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.20-89d6d07b-b4b101eb14a3.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.20",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "89d6d07b2933df20311f780d148d6519b40e4254",
+      "sourceTree": "a05f4f64a2921065e309fa612c5738708c2e2db8",
+      "bytes": 1267200,
+      "sha256": "b4b101eb14a309312e8d119f1ffe6c8b0c304306e38253795c6d92839d6450d2",
+      "regularEntryCount": 69,
+      "status": "committed-cleanup-successor; final-consumer-review-pending",
+      "purpose": "Exact canonical cleanup successor removes one unreachable duplicate saved_note dispatch; schema/declarations and every other packed member unchanged. No repack or publication."
     }
   ]
 }
