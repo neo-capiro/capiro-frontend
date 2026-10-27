@@ -5544,18 +5544,18 @@
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "d23a5d3825d7955092642952c3d53da36f9a89b0ab08ae2370732cd3fab203d8",
-    "reason": "reviewed-accept — file was already >400 nonblank; single proposal→row registry retained",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "1008ca06e7faef749095109fd3f214f463fc7791cc3d8b5629942b61a3ed0302",
+    "reason": "reviewed-accept — file was already >400 nonblank (509→536); the added unit is filingLinks, one pure projection of the retained filing outcome beside the existing filing receipt projection. Single proposal→row registry retained; no new domain or authority owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "function",
     "symbol": "intentRow",
-    "fingerprint": "548fe3c6137b0f5edf455d6337c506883bad3f3ccffdf458b89e7aeab9c3efb4",
-    "reason": "reviewed-accept — adds the research_action branch",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "e6b74bb9372b3818bb9c505358f498ad75fb087d05f560479f92458da986de06",
+    "reason": "reviewed-accept — adds saved-file links to the existing native proposal row; the helper owns the filing completion projection (native-artifact-file). No new authority or domain owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_154620_698336",
     "reviewedOn": "2026-10-27"
   },
   {
