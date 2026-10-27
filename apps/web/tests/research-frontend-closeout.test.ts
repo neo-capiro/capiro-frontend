@@ -5,7 +5,11 @@ import {
 } from "../src/features/modules/research-portfolios/research-import-file";
 import { replyQuote } from "../src/features/portfolio/relationships/email/reply-quote";
 import type { MailBody } from "../src/features/portfolio/relationships/email/read";
-import { plainMailHtml } from "../src/features/portfolio/relationships/email/mail-body";
+import {
+  mailBodyError,
+  plainMailBody,
+  plainMailHtml,
+} from "../src/features/portfolio/relationships/email/mail-body";
 import {
   grantedScopeCard,
   coverageNotice,
@@ -86,6 +90,26 @@ it("quotes the verified original visibly as escaped editable text and labels inc
   expect(
     replyQuote({ ...original, bodyText: "\n".repeat(5900) }).length,
   ).toBeLessThan(8000);
+});
+it("bounds the whole visible reply quote including hostile headers and formatted expansion", () => {
+  for (const value of [
+    "&".repeat(10000),
+    "'".repeat(10000),
+    "\n".repeat(10000),
+    '<img onerror="bad">'.repeat(1000),
+  ]) {
+    const quote = replyQuote({
+      ...original,
+      fromName: value,
+      fromEmail: value,
+      subject: value,
+      bodyText: value.slice(0, 6000),
+    });
+    expect(quote.length).toBeLessThan(6000);
+    expect(quote).toContain("some headers or text are omitted");
+    expect(mailBodyError(plainMailBody(quote))).toBe("");
+    expect(plainMailHtml(quote)).not.toContain("<img");
+  }
 });
 it("does not mistake equally sized different scope sets for verified requested permissions", () => {
   const connection = {

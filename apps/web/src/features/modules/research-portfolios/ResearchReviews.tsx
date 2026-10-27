@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
 import { ResearchReviewTools } from "./ResearchReviewTools";
+import { ResearchReviewEvidence } from "./ResearchEvidence";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
-import type { ResearchDetail } from "../../../shared/capiro/operations/research-schemas";
+import {
+  researchDecisionRequestLimitBytes,
+  type ResearchDetail,
+} from "../../../shared/capiro/operations/research-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -36,27 +40,81 @@ export function ResearchReviews({
   }>();
   const [decision, setDecision] = useState<Decision>("include");
   const [reason, setReason] = useState("");
+  const [forSelection, setForSelection] = useState<number[]>([]);
+  const [againstSelection, setAgainstSelection] = useState<number[]>([]);
+  const [decisionKey, setDecisionKey] = useState(() => crypto.randomUUID());
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
   const query = useCapiroQuery("research.reviews", {
     params: { id: portfolio.id },
     query: { lane },
   });
+  const verifiedRows = query.data?.every(
+    (item) => item.portfolioId === portfolio.id,
+  )
+    ? query.data
+    : undefined;
+  const mismatchedRows =
+    query.data && !verifiedRows
+      ? "These reviews do not match the selected portfolio."
+      : undefined;
+  const currentReview =
+    selected && !query.loading && !query.error
+      ? verifiedRows?.find(
+          (item) =>
+            item.id === selected.id && item.revision === selected.revision,
+        )
+      : undefined;
+  const evidenceFor =
+    currentReview?.evidenceFor.filter((_, index) =>
+      forSelection.includes(index),
+    ) ?? [];
+  const evidenceAgainst =
+    currentReview?.evidenceAgainst.filter((_, index) =>
+      againstSelection.includes(index),
+    ) ?? [];
+  const needsEvidence = ["include", "exclude", "dispute"].includes(decision);
+  const decisionInput =
+    selected && currentReview
+      ? {
+          params: { id: portfolio.id, reviewId: selected.id },
+          body: {
+            expectedRevision: selected.revision,
+            expectedPortfolioRevision: portfolio.revision,
+            idempotencyKey: decisionKey,
+            decisionType: decision,
+            reason,
+            evidenceFor,
+            evidenceAgainst,
+          },
+        }
+      : undefined;
+  const selectionTooLarge = decisionInput
+    ? new TextEncoder().encode(JSON.stringify(decisionInput)).byteLength >
+      researchDecisionRequestLimitBytes
+    : false;
+  const ready =
+    editable &&
+    !!currentReview &&
+    !busy &&
+    !error &&
+    !selectionTooLarge &&
+    Boolean(reason.trim()) &&
+    (!needsEvidence || evidenceFor.length + evidenceAgainst.length > 0);
+  function refreshReviews() {
+    setSelected(undefined);
+    setError(undefined);
+    query.reload();
+  }
   async function decide() {
-    if (!selected || !editable) return;
+    if (!decisionInput || !ready) return;
     setBusy(true);
     setError(undefined);
     try {
-      const receipt = await api.request("research.reviews.decide", {
-        params: { id: portfolio.id, reviewId: selected.id },
-        body: {
-          expectedRevision: selected.revision,
-          expectedPortfolioRevision: portfolio.revision,
-          idempotencyKey: crypto.randomUUID(),
-          decisionType: decision,
-          reason,
-        },
-      });
+      const receipt = await api.request(
+        "research.reviews.decide",
+        decisionInput,
+      );
       const failed = receipt.outcomes.find((o) =>
         ["failed", "conflict"].includes(o.status),
       );
@@ -85,11 +143,11 @@ export function ResearchReviews({
       />
       <StatusPanel
         loading={query.loading}
-        error={query.error || error}
-        onRetry={query.reload}
+        error={query.error || error || mismatchedRows}
+        onRetry={refreshReviews}
       >
         <DataTable
-          rows={query.data || []}
+          rows={verifiedRows || []}
           rowKey={(r) => r.id}
           caption="Research portfolio review queue"
           columns={[
@@ -109,6 +167,11 @@ export function ResearchReviews({
                   onClick={() => {
                     setSelected(r);
                     setReason("");
+                    setForSelection([]);
+                    setAgainstSelection([]);
+                    setDecision("include");
+                    setDecisionKey(crypto.randomUUID());
+                    setError(undefined);
                   }}
                 >
                   Review
@@ -121,37 +184,62 @@ export function ResearchReviews({
       <Modal
         open={!!selected}
         onOpenChange={(v) => {
-          if (!v) setSelected(undefined);
+          if (!v && !busy) {
+            if (error) refreshReviews();
+            else setSelected(undefined);
+          }
         }}
         title="Review decision"
         footer={
-          <ActionButton
-            primary
-            disabled={!editable || busy || !reason.trim()}
-            onClick={decide}
-          >
+          <ActionButton primary disabled={!ready} onClick={decide}>
             Save decision
           </ActionButton>
         }
       >
-        <p>{selected?.reason}</p>
-        {selected && (
-          <ResearchReviewTools
-            key={selected.id}
-            portfolio={portfolio}
-            review={
-              query.data?.find((item) => item.id === selected.id) ?? selected
-            }
-            onReload={() => {
-              query.reload();
-              onReload();
-            }}
-          />
+        <p>{currentReview?.reason}</p>
+        {selected && !currentReview && (
+          <p role="alert">
+            Refresh the queue to read the current review and its recorded
+            evidence.
+          </p>
+        )}
+        {currentReview && (
+          <>
+            <p>
+              Select the exact recorded evidence to include with this decision.
+              Include, exclude and dispute require at least one source
+              reference.
+            </p>
+            <ResearchReviewEvidence
+              evidence={currentReview.evidenceFor}
+              selected={forSelection}
+              disabled={!editable || busy || Boolean(error)}
+              onSelect={setForSelection}
+              stance="for"
+            />
+            <ResearchReviewEvidence
+              evidence={currentReview.evidenceAgainst}
+              selected={againstSelection}
+              disabled={!editable || busy || Boolean(error)}
+              onSelect={setAgainstSelection}
+              stance="against"
+            />
+            <ResearchReviewTools
+              key={currentReview.id}
+              portfolio={portfolio}
+              review={currentReview}
+              onReload={() => {
+                query.reload();
+                onReload();
+              }}
+            />
+          </>
         )}
         <Field label="Decision" htmlFor="review-decision">
           <select
             id="review-decision"
             value={decision}
+            disabled={!editable || busy || Boolean(error)}
             onChange={(e) => setDecision(e.target.value as Decision)}
           >
             {["include", "exclude", "defer", "reopen", "dispute"].map((d) => (
@@ -164,10 +252,29 @@ export function ResearchReviews({
             id="review-reason"
             maxLength={4000}
             value={reason}
+            disabled={!editable || busy || Boolean(error)}
             onChange={(e) => setReason(e.target.value)}
           />
         </Field>
-        {error && <p role="alert">{error}</p>}
+        {selectionTooLarge && (
+          <p role="alert">
+            The selected evidence exceeds the 1 MB decision limit. Select fewer
+            citations before saving. Quotes and exact locations are not
+            shortened.
+          </p>
+        )}
+        {error && (
+          <>
+            <p role="alert">{error}</p>
+            <p>
+              The decision result was not confirmed. Read the current review
+              before making another decision.
+            </p>
+            <ActionButton onClick={refreshReviews}>
+              Refresh review queue
+            </ActionButton>
+          </>
+        )}
       </Modal>
     </Panel>
   );

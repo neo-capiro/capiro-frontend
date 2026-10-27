@@ -68,11 +68,11 @@ Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 hando
 | RP-03 | Rules native controls added | Dynamic/hybrid outage/concurrency/manual-precedence acceptance. |
 | RP-04 | Existing templates and recursive editor | Qualified vocabulary/mapping, old-template reproduction and accessibility. |
 | RP-05 | Present | Multi-client wall/revocation propagation through fit, cache and artifacts. |
-| RP-06 | Notes and assignment added | Supporting/against evidence rendering and bulk outcome journey remain incomplete. |
+| RP-06 | Notes, assignment and exact decision evidence added | Bulk outcome journey and real-cycle acceptance remain incomplete. |
 | RP-07 | Existing review statuses | Real rename/split/merge/expiry corpus and exactly-once reopen. |
 | RP-08 | Worksheet added; mounted repair/apply pass | Database interruption and later-edit compensation acceptance. |
 | RP-09 | Subscriptions/change feed present; conversion added | Two-user baseline, no-flood restore and configured delivery proof. |
-| RP-10 | Output controls added; totals present | Native contribution ledger/source drilldown is still missing; target-byte/basis qualification. |
+| RP-10 | Output controls and source-basis contribution ledger added | Target-byte/basis and ledger-equality qualification remains. |
 | DI-01 | ProgramElementProfile present | Complete narrative/real subject/evidence coverage unqualified. |
 | DI-02 | Existing reader seam | Complete precision/history source projection not established by this lane. |
 | DI-03 | Funding table present | Real edition/FYDP/cell evidence and unsupported-history qualification. |
@@ -96,8 +96,8 @@ Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 hando
 | S03 | Existing overview plus fit refresh | Common freshness/count projection distinctions remain unqualified. |
 | S04 | Rules and bookmarks added | Typed discovery, full bulk outcomes and outage precedence follow-on/acceptance. |
 | S05 | Existing Changes and subscriptions | Badge parity, two-user and no-flood deployed delivery proof. |
-| S06 | Totals table present | Contribution dispositions, ledger equality and source/cohort drilldown UI missing. |
-| S07 | Four lanes present; notes/assignment added | Supporting/against evidence and bulk outcomes still incomplete. |
+| S06 | Totals and contribution ledger with basis/disposition/revision filters present | Ledger equality and target-corpus/source-cohort qualification remains. |
+| S07 | Four lanes, notes/assignment and explicit supporting/against evidence selection present | Bulk-decision UI/outcomes and real-cycle qualification remain. |
 | S08 | Settings guard fixed | Effective grants and open-form access loss/revocation proof. |
 | S09 | DataExplorer mounted | Dataset/query/page are local state; selected/page/all export and full typed facets/detail remain incomplete. |
 | S10 | Existing separate Changes/Budget destinations | Required composed Budget/Congressional/Monitored/Actions and FY/source semantics not established. |
@@ -138,8 +138,20 @@ Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 hando
 
 Root is assigning the remaining accepted source scope separately. Reuse actual Core DTOs and existing native readers. Do not relabel unrelated LegiWatch panels as Research completion, create a second evidence/analytics store, invent metric definitions or source coverage, or turn Q07 semantic work back on.
 
-1. Complete S06/RP-10 contribution ledger/source drilldowns and S07/RP-06 supporting/against evidence using the fields already present in Core DTOs.
+1. S06/RP-10 contribution ledger/source-basis drilldowns and S07/RP-06 supporting/against evidence are implemented by the follow-on below. Keep bulk decision and corpus evidence obligations explicit.
 2. Trace the real Core Research reader/compare/coverage/evidence contracts before implementing S09–S15. Keep exact URL-owned typed identities, existing grant checks and partial/unsupported states. Full source/corpus acceptance remains independently evidence-based.
 3. Hermes reviews the frozen author's source and actual images using `test/browser/research-workflow.html` and the existing sharing/Overview harnesses. This synthetic harness makes native routes reviewable without production credentials; it does not validate target data.
 4. Integrate only Hermes-reviewed architecture entries. Unchanged-main findings are recorded facts, not automatically approved by this handoff.
 5. Release must coordinate Core's new link lock field/review-note/draft reads, final Meri contracts/catalog/installation receipt and frontend. Only release/Hermes can close live acceptance.
+
+## S06/S07 and Hermes mail follow-on
+
+This section records a separate bounded author pass after the initial `dbc617dd` freeze. The enclosing commit identifies its final source.
+
+- `ResearchAnalytics` now checks returned portfolio identity, shows the exact decimal strings, full compatible basis (including price basis, currency and known-at), calculation version, observed-at and read-at. Totals drill into the recorded ledger. `ResearchContributions` filters by basis, disposition and source revision and displays original reason, source disposition, revision/observation IDs, overlap identity and recorded evidence fields. It does not recompute totals or invent an evidence URL.
+- `ResearchReviews` now displays Core's supporting and opposing records and requires explicit selection for include/exclude/dispute. The operation receiver retains the exact selected arrays, source revision, typed locator, quote and stance. Current portfolio/review revision and existing editor/archived checks still gate writes. Foreign-portfolio projections are withheld. Failed/unknown decisions require a fresh queue read rather than another blind submission.
+- Core's exact evidence bounds are 100 items per stance, 2,048-character source revision IDs, 10,000-character quotes, and locators with at most 20 keys and 16,384 JSON characters plus server validation of exact coordinates. Those per-item bounds can exceed Core's default 1 MiB JSON parser in aggregate. The UI and operation now cap the **actual serialized full request envelope at 1,000,000 UTF-8 bytes**, display an actionable selection-too-large message, and never truncate evidence. No global body limit was raised.
+- Four mounted checks pass: exact decimals/separate price bases/ledger drilldown, explicit exact evidence submission, foreign projection withholding, and oversized Unicode evidence refusal followed by an exact reduced submission.
+- Hermes mail follow-up: `NativeMailReply` now guards missing canonical To recipients before reading the first recipient or enabling reply/reply-all. The existing `mailReplyContextSchema` already rejects empty non-forward To arrays; the added UI guard is robustness. Quote headers are bounded individually and the whole visible quote remains below 6,000 characters with explicit omitted-text disclosure. Eight focused quote/CSV/bounds/recipient tests pass, including hostile headers and formatted HTML expansion. No mail was sent.
+- The shared registry count test encountered concurrent root-owned operation-family additions before their test-list integration. No registry/test-family edits were made by this follow-on. Root owns the combined registry gate; this is not an author claim that that integration gate passed.
+- This pass does not mark S07 bulk-decision UI, full target-corpus/evidence qualification, independent visual acceptance or any deployment complete.

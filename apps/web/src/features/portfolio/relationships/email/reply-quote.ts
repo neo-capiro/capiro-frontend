@@ -10,8 +10,21 @@ export function replyQuote(original: MailBody | undefined): string {
     original.bodyCompleteness === "full" &&
     !original.bodyTruncated &&
     original.bodyOffset === 0 &&
-    quoted.length <= 6000;
+    quoted.length <= 5000;
   const date = original.sentAt ?? original.receivedAt ?? original.createdAt;
-  const heading = `${complete ? "Original message" : "Original message excerpt — stored text is incomplete"}\nFrom: ${original.fromName ? `${original.fromName} <${original.fromEmail ?? "unknown"}>` : (original.fromEmail ?? "Unknown sender")}\nDate: ${date}\nSubject: ${original.subject ?? "(no subject)"}`;
-  return `\n\n${heading}\n\n${quoted.slice(0, 6000)}${quoted.length > 6000 ? "\n[Excerpt ends]" : ""}`;
+  let shortened = false;
+  function header(value: string, limit: number) {
+    const singleLine = value.replace(/[\r\n]+/g, " ");
+    if (singleLine.length <= limit) return singleLine;
+    shortened = true;
+    return singleLine.slice(0, limit) + "…";
+  }
+  const sender = header(original.fromEmail ?? "Unknown sender", 254);
+  const name = header(original.fromName ?? "", 160);
+  const metadata = `From: ${name ? `${name} <${sender}>` : sender}\nDate: ${header(date, 60)}\nSubject: ${header(original.subject ?? "(no subject)", 300)}`;
+  const partial = !complete || shortened;
+  const heading = partial
+    ? "Original message excerpt — some headers or text are omitted"
+    : "Original message";
+  return `\n\n${heading}\n${metadata}\n\n${quoted.slice(0, 5000)}${partial ? "\n[Excerpt ends]" : ""}`;
 }

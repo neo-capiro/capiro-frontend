@@ -249,6 +249,7 @@ export const researchPortfolioOperations = {
     service: "core",
     method: "POST",
     path: "/research-portfolios/:id/reviews/:reviewId/decision",
+    requestLimitBytes: s.researchDecisionRequestLimitBytes,
     request: z
       .object({
         params: params.extend({ reviewId: z.uuid() }),
@@ -263,6 +264,20 @@ export const researchPortfolioOperations = {
               "dispute",
             ]),
             reason: z.string().trim().min(1).max(4000),
+            evidenceFor: z
+              .array(
+                s.researchReviewEvidence.extend({ stance: z.literal("for") }),
+              )
+              .max(100)
+              .optional(),
+            evidenceAgainst: z
+              .array(
+                s.researchReviewEvidence.extend({
+                  stance: z.literal("against"),
+                }),
+              )
+              .max(100)
+              .optional(),
           })
           .strict(),
       })
@@ -287,7 +302,8 @@ export const researchPortfolioOperations = {
         }),
       ),
     }),
-    source,
+    source:
+      "capiro-backend@fba7ed5d1 packages/shared/src/research-portfolios.ts DecideResearchPortfolioReviewDto; research-portfolio-review.service.ts",
   }),
   "research.snapshots": read(
     "/research-portfolios/:id/snapshots",
