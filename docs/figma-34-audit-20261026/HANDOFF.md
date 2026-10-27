@@ -1,5 +1,7 @@
 # Capiro 3.4 desktop audit additions — 26 October 2026
 
+> **Latest Overview update — 26 October 2026:** [Overview gap closure and approved metric definitions](overview-gap-close/HANDOFF.md) supersedes the Overview-specific pending-definition statements below. Awaiting reply is excluded. Backend aggregation/recovery and browser qualification remain explicit implementation work.
+
 Source requests: [NEO-DESIGN-REQUESTS.md](https://github.com/neo-capiro/capiro-frontend/blob/main/docs/figma-34-audit-20261016/NEO-DESIGN-REQUESTS.md), [Portfolio register](https://github.com/neo-capiro/capiro-frontend/blob/main/docs/figma-34-audit-20261016/portfolio/DESIGN-GAPS.json), [Modules register](https://github.com/neo-capiro/capiro-frontend/blob/main/docs/figma-34-audit-20261016/modules/DESIGN-GAPS.json).
 
 This is a dated design-delivery record, not a new implementation or release authorization. Recheck the current canonical source before implementation; later source changes take precedence over this snapshot.
