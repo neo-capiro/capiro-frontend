@@ -8,6 +8,7 @@ import { ConfirmActions } from "./ConfirmActions";
 import { SettingsCard } from "./SettingsCard";
 import { SettingsCallout } from "./SettingsCallout";
 import { SettingsLayout } from "./SettingsLayout";
+import styles from "./settings.module.css";
 import type {
   SettingsChrome,
   SettingsHeading,
@@ -34,6 +35,12 @@ export type ConnectorAccountsView = {
     initialSelectedId?: string | undefined;
   };
   coverageHref?: string | undefined;
+  /**
+   * Route of the surface that owns provider connect, reconnect, sync and
+   * disconnect for the current account. When present, this page links there
+   * instead of offering an action it cannot perform or verify.
+   */
+  ownerHref?: string | undefined;
   grantedScope: { title: string; description: string; notice: SettingsNotice };
   unavailable: SettingsNotice;
   disconnect: { description: string; confirm: string };
@@ -105,6 +112,7 @@ export function ConnectorAccountsScreen({
           <ConnectionActions
             chrome={chrome}
             coverageHref={view.coverageHref}
+            ownerHref={view.ownerHref}
             disconnectRef={disconnectButton}
             canDisconnect={Boolean(selected)}
             onDisconnect={() => setConfirming(true)}
@@ -125,16 +133,39 @@ export function ConnectorAccountsScreen({
             <MeriDialog
               open={confirming}
               onOpenChange={setConfirming}
-              title={`Disconnect the ${selected.connection.toLowerCase()}?`}
+              title={
+                view.ownerHref
+                  ? `Disconnect ${selected.connection}?`
+                  : `Disconnect the ${selected.connection.toLowerCase()}?`
+              }
               description={view.disconnect.description}
               width="compact"
               returnFocus={disconnectButton}
             >
-              <ConfirmActions
-                confirm={view.disconnect.confirm}
-                unavailable={chrome.unavailable}
-                onCancel={() => setConfirming(false)}
-              />
+              {view.ownerHref ? (
+                <div className={styles.stack}>
+                  <LinkAction
+                    variant="primary"
+                    href={view.ownerHref}
+                    unavailable={chrome.unavailable}
+                  >
+                    {view.disconnect.confirm}
+                  </LinkAction>
+                  <button
+                    type="button"
+                    className={ui.outline}
+                    onClick={() => setConfirming(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <ConfirmActions
+                  confirm={view.disconnect.confirm}
+                  unavailable={chrome.unavailable}
+                  onCancel={() => setConfirming(false)}
+                />
+              )}
             </MeriDialog>
           ) : null}
         </>
@@ -143,30 +174,45 @@ export function ConnectorAccountsScreen({
   );
 }
 
-/** Reconnect stays disabled; coverage navigates; Disconnect opens the confirmation for the selection. */
+/**
+ * Reconnect opens the supported owner when the page is bound to one; coverage
+ * navigates; Disconnect opens the confirmation for the selection.
+ */
 function ConnectionActions({
   chrome,
   coverageHref,
+  ownerHref,
   disconnectRef,
   canDisconnect,
   onDisconnect,
 }: {
   chrome: SettingsChrome;
   coverageHref?: string | undefined;
+  ownerHref?: string | undefined;
   disconnectRef: RefObject<HTMLButtonElement | null>;
   canDisconnect: boolean;
   onDisconnect: () => void;
 }) {
   return (
     <div className={ui.row}>
-      <button
-        type="button"
-        className={ui.primary}
-        disabled
-        title={chrome.unavailable}
-      >
-        Reconnect selected
-      </button>
+      {ownerHref ? (
+        <LinkAction
+          variant="primary"
+          href={ownerHref}
+          unavailable={chrome.unavailable}
+        >
+          Reconnect selected
+        </LinkAction>
+      ) : (
+        <button
+          type="button"
+          className={ui.primary}
+          disabled
+          title={chrome.unavailable}
+        >
+          Reconnect selected
+        </button>
+      )}
       <LinkAction
         variant="outline"
         href={coverageHref}

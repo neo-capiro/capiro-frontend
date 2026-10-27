@@ -114,7 +114,7 @@ export const connections: ConnectorAccountsView = {
   unavailable: {
     title: "Connection data unavailable",
     detail:
-      "Reconnect and disconnect remain unavailable until Meri is connected.",
+      "Capiro Integrations owns the current account's provider connections. Connect, reconnect and disconnect are performed there.",
     tone: "warning",
   },
   disconnect: {
