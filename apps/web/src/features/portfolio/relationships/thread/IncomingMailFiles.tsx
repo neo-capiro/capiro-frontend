@@ -150,7 +150,11 @@ export function IncomingMailFiles({
         {manifest ? "Refresh file list" : "Check message files"}
       </button>
       {pending && <p role="status">Checking this original’s files…</p>}
-      {error && <p role="alert">{error}</p>}
+      {error && (
+        <p role="alert" className="status error">
+          {error}
+        </p>
+      )}
       {handoff && (
         <p role="note">
           {handoff} Open the original in your connected mailbox to handle these
