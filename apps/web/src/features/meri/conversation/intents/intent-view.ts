@@ -10,7 +10,13 @@ import {
   researchShareRow,
 } from "./research-share-view";
 
-import type { IntentField, IntentRow, Viewer } from "./intent-view-types";
+import type {
+  IntentTone,
+  IntentDecision,
+  IntentField,
+  IntentRow,
+  Viewer,
+} from "./intent-view-types";
 export type {
   IntentTone,
   IntentDecision,
