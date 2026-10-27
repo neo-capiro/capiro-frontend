@@ -4505,10 +4505,10 @@
     "file": "apps/web/src/shared/capiro/gateway-errors.ts",
     "kind": "function",
     "symbol": "serviceErrorResponse",
-    "fingerprint": "dd0bfd753f833d476e0bee72f1de8202a5deab8e5f16ba8122e3b3bc8a8e0949",
-    "reason": "The existing sparse service-error boundary adds only a bounded 4096-byte branch for the exact workspace PATCH newsletter operation, using the shared public bound-refusal helper and no-store response. Every other error path retains its existing owner and behavior; malformed or mismatched proofs collapse to an unknown outcome. This is a cohesive addition to the canonical transport error translator, not a new authority or generic error-body relay.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "e8409dcb217e17dc0e366130be0b0305d719f9fb07925108282efad95320c31d",
+    "reason": "One bounded service-error translation owner: it recognizes the exact known refusal envelopes of the operation families this app calls and otherwise redacts by status. This change adds a single cohesive family behind the existing operation, method and public-capability fences and delegates the restricted-widget grammar and 10-reason vocabulary to its own leaf, research-share-errors.ts. The bounded 4096-byte read, the abort rethrow and the status-to-message redaction ladder remain shared in one place; no authority, write-outcome proof, retry or generic error-body relay is added. A size-based split is refused because extracting the per-family recognitions would separate the family dispatch from the shared bounded read and the single redaction ladder and duplicate the read per family. Independent decision: work/hermes-review/final-fe-consumer-binding/WIDGET-REFUSAL-REVIEW.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayMeetingFactsDialog.tsx",
