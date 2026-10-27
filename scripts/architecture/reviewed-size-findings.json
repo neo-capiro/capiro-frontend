@@ -746,7 +746,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target\u00e2\u20ac\u2122s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -890,7 +890,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each job’s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload’s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each job\u00e2\u20ac\u2122s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u00e2\u20ac\u2122s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2369,7 +2369,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook\u00e2\u20ac\u2122s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -5351,59 +5351,12 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
-    "kind": "function",
-    "symbol": "DecisionControls",
-    "line": 42,
-    "nonblank": 83,
-    "fingerprint": "2334908c7ab0c9fd413ae363010868f38cdfad693c34d28e30e79a890905d03d",
-    "reason": "DecisionControls is unchanged at its exact 83-line fingerprint from the pinned base. This correction only exposes the existing current list to adjacent file presentation; no new decision responsibility or function growth is introduced.",
-    "reviewedBy": "Independent Library reviewer; not author",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "0e964327fe6a8793965c6204e6660d244652e14383f61aecc73ab63cf8264509",
-    "reason": "The existing intent presentation module remains one cohesive durable-state projection owner. This delta adds a native-task identity field and exact completed-native conditional beside its existing result projection; no receiver, execution, authority or recovery implementation is duplicated.",
-    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/shared/module-ui/module-ui.module.css",
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "34e95545b56fa3dad13d63ff3947458295032163a2d7b66ed091a10123a9aba4",
     "reason": "The existing module-ui stylesheet remains the canonical local presentation owner for shared module primitives. This bounded correction replaces the obsolete statusNote rule with one unavailable-only modifier and its heading/body rules; loading, transient error, empty states, base status styles and controls are unchanged. The 406-line file is cohesive; extracting a separate style owner only for this threshold would fragment the existing status primitive.",
     "reviewedBy": "Wave 3 A3 independent source and Figma reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/meri/conversation/intents/useIntentList.ts",
-    "kind": "function",
-    "symbol": "useIntentList",
-    "fingerprint": "034996f781f7b3719b143d6caa890f74171358f5a467ef9c143fc815e2259611",
-    "reason": "The hook owns one conversation intent-list observation lifetime: identity-bound state, cancellation, initial/refresh/page reads, and display disposition. The added denial branch reuses the shared admitted-error classifier; Core authorization, transport validation and durable decision recovery remain in their existing owners. Keeping these tightly related states together is clearer than a size-only split.",
-    "reviewedBy": "Codex independent MF-03 reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
-    "kind": "function",
-    "symbol": "useConversationIntents",
-    "fingerprint": "3a3e03d911aa0138be277fecd3c3f2bc1400da207b051156399b97ca4cc99f17",
-    "reason": "The hook composes one conversation intent-review lifetime: admitted list projection, exact saved-decision recovery and explicit decisions. MF-05 adds only a completion notification after a known decision receipt and list refresh; current access and callback lifetime are checked. Run observation stays in its existing owner, and transport, authorization and durable journal semantics are unchanged.",
-    "reviewedBy": "Codex independent MF-05 reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
-    "kind": "function",
-    "symbol": "useConversationIntents > <anonymous> #6",
-    "fingerprint": "f8cd8e8a2ce7dcde9ed2fe1ebfc735b439f69720e819d41f7d017ab1be138fa4",
-    "reason": "This callback owns one immutable explicit decision and its existing receipt/recovery lifecycle. The added notification reports only known completion after list refresh and currentness checks. Keeping admission, retained decision bytes, receipt reconciliation and that final notification together preserves the existing uncertain-write fence without creating a second journal or dispatch path.",
-    "reviewedBy": "Codex independent MF-05 reviewer",
     "reviewedOn": "2026-10-26"
   },
   {
@@ -5506,65 +5459,11 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "4341b2f2e506aefbc24316b835596d20c1198fbd1c6aa3f78a0123b235ccd6b6",
-    "reason": "The file owns one local dashboard-layout editor: layout history, pointer/keyboard editing and widget settings presentation. Financial rendering and layout transformations remain separate owners; it performs no HTTP, authorization or publishing. Keep this complete local editor cohesive rather than split by line count.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
-    "kind": "function",
-    "symbol": "DashboardDesigner",
-    "fingerprint": "0fec7bbad0b3fab4d1ca5661c400b65d56f59f5bbda70281f3435fa49c92acde",
-    "reason": "This function coordinates one editing lifetime and renders its canvas, palette, settings and phone order. Pointer drags use a draft and commit once; history and layout validation delegate to existing pure helpers. It neither persists a design nor grants access. Mounted pointer, resize, undo/redo, keyboard and save witnesses pass.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchShareRecipient.tsx",
     "kind": "function",
     "symbol": "ResearchShareRecipient",
     "fingerprint": "993b27b4fed30a694c15d294f1634bd31bebea135a11534acc264435ccfe96c0",
     "reason": "This component owns a single capability-link viewing lifetime: availability, in-memory PIN session and frozen dashboard rendering. Reads use the closed public client; keyed route remount and effect aborts retire old-token completions. It imports no signed-in data owner, exposes no external HTML/images and persists no view token. Mounted unavailable, PIN, reload and stale-token checks pass.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "3f383e6f50f91a2bfd62b3569ef53dc932af13e50e1abe7ce3b7ffe2cd167fe7",
-    "reason": "This feature file composes the portfolio sharing settings, design editor and published-link controls with local subordinate components. Existing typed operations, Capiro request lifetimes, module controls, layout helpers and common widget renderer retain their respective ownership. No backend authorization, generic workflow framework or new persistence owner is introduced.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
-    "kind": "function",
-    "symbol": "ResearchSharing",
-    "fingerprint": "4506c798394176cb1d56702453fc250d47a71b9f98b337e1673e48c678445721",
-    "reason": "This function composes three existing typed query results and the local edit/list panel selection for one portfolio. Settings, editing and link publication stay in named subordinate owners; the parent keyed portfolio route and scoped client retain identity disposal. It adds no data normalization or cross-feature authority.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
-    "kind": "function",
-    "symbol": "SharingSettings",
-    "fingerprint": "8ecf0ff36331b858a800ec0b28fd22944bbec5d7faf5d965628f2e1f650a4965",
-    "reason": "The function is the cohesive owner-only sharing switch/PIN form and disable confirmation. It calls the established typed mutations and reload callbacks, while Core remains authorization and revocation authority. The mounted owner/viewer and explicit disable-confirmation checks validate its bounded UI responsibility.",
-    "reviewedBy": "Codex independent PR240 original-source reviewer",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
-    "kind": "function",
-    "symbol": "ShareLinks",
-    "fingerprint": "155408b5945ed685ea4152cfe85aae45274f425c5a6cdada2490ff2da39f8181",
-    "reason": "This function owns one publish/list/revoke UI workflow for a portfolio. It binds an explicit client, immutable snapshot/design selection and operation key, displays the returned token once and delegates network authority to the scoped API. It does not implement signing, token persistence or provider delivery. Mounted exact selection/publication and confirmation evidence support retaining this form/list owner.",
     "reviewedBy": "Codex independent PR240 original-source reviewer",
     "reviewedOn": "2026-10-26"
   },
@@ -5614,15 +5513,6 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
-    "kind": "function",
-    "symbol": "intentRow",
-    "fingerprint": "4eddb9a062d6a0a4d89058d78fc1ff4f0b4c5e04d31c46a2068bf13bf862c7a3",
-    "reason": "The canonical intent presentation projector adds a current-task reference only to a completed native-task outcome already admitted by the public receiver. Legacy, pending, unknown and withheld states stay unlinked. All status, decision and receipt behavior remains in this existing projection owner; extraction of this small conditional would split the same outcome projection.",
-    "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/features/meri/task-updates/TaskUpdateProposal.tsx",
     "kind": "function",
     "symbol": "TaskUpdateProposal",
@@ -5638,6 +5528,204 @@
     "fingerprint": "9bde1fbfce605c9c1ec0487aa22404fc58606fe3527beb7ce67749c6d0ce4f67",
     "reason": "This owner composes the exact-original selector, canonical scoped read and the lifetime of its one open native reply draft for Contact and Timeline. It passes only validated single-recipient context to the existing MailCompose and retires changed source or canonical context. It does not implement sending, recipient inference, authorization or attempt recovery. Keeping these dependent selection/render guards together is cohesive.",
     "reviewedBy": "Codex independent s3_assessment",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
+    "kind": "function",
+    "symbol": "DecisionControls",
+    "fingerprint": "3e1b002e2232273ff426b4880249c49cd0cc8b78cd0f045375a90080b586c28f",
+    "reason": "The existing decision control owns presentation and the signed-in user confirmation only. Research publication additionally consumes the canonical preview-ready flag. Its uncertain-result control now calls the existing read-only refresh, while native action behavior remains with its established owner; no new effect or receipt authority is introduced.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/decision-recovery.ts",
+    "kind": "function",
+    "symbol": "intentDecisionRecovery",
+    "fingerprint": "ff1b321c34851c5786f6d97c1af7454f8d840320483dba9286597329cc501ea4",
+    "reason": "This function remains the single encrypted decision-request journal adapter. The sharing proposal branch checks its own canonical actor/conversation/digest; the fresh accepted response callback runs after receiver admission and current-scope guard but before local acknowledgment, so the sole capability survives a storage error without being persisted. It does not own server execution or status truth.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "fc13bbccaed605abe8ff9f32b5a3e8aa6a383af0d7827d41d41c7b3b662b0e7c",
+    "reason": "This is the existing pure translation from admitted intent items into display rows. The new research branch delegates to a separate pure research-share presentation module, and common display types moved into an import-cycle-free types owner. No IO, approval, persistence or access grant was added.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
+    "kind": "function",
+    "symbol": "intentRow",
+    "fingerprint": "0b5fd76dcd401378873c111376358c32eb956acb8ec40b56738ccef02946bf96",
+    "reason": "This is the existing pure translation from admitted intent items into display rows. The new research branch delegates to a separate pure research-share presentation module, and common display types moved into an import-cycle-free types owner. No IO, approval, persistence or access grant was added.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents",
+    "fingerprint": "b19df84db36d6edee1dbc4c04823ac0c351140ca21ffc14221ce30c142094de6",
+    "reason": "The hook coordinates the existing scoped list, encrypted decision journal and current component identity. Research sharing uses the same decision owner; retained outcomes are reconciled from the list, and ephemeral capability display is delegated to a separate hook. Current identity guards surround async results. The nested decision callback is the same lifecycle responsibility, not a second authority.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents > <anonymous> #6",
+    "fingerprint": "b21c90a7d25ece5498f8a033937f79a9da6dbe3a10b53c076c2e54764c60b607",
+    "reason": "The hook coordinates the existing scoped list, encrypted decision journal and current component identity. Research sharing uses the same decision owner; retained outcomes are reconciled from the list, and ephemeral capability display is delegated to a separate hook. Current identity guards surround async results. The nested decision callback is the same lifecycle responsibility, not a second authority.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useIntentList.ts",
+    "kind": "function",
+    "symbol": "useIntentList",
+    "fingerprint": "5b1f8194e237ee49d208025e306d2ddeee89721902d89434ee257a731f248063",
+    "reason": "The existing conversation-scoped list owner adds an explicit accessLost distinction to its unavailable state. This allows the separate ephemeral-result owner to retire capability display immediately. Paging, request dispatch and current-scope checks remain together; the change adds no mutation or retention responsibility.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx",
+    "kind": "function",
+    "symbol": "ResearchSettings",
+    "fingerprint": "a696fe85d290697e058a150bfb5dd2f9785b6852537e1b68110d2c6e69370c03",
+    "reason": "The portfolio settings screen adds a current active-link warning before its existing unlink/archive actions. The modal captures the exact existing action and continues on the user confirmation; actual grant/revision checks remain in Core. This is one settings workflow, with shared query and modal components already separated.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2e1419270e791947db934174083a29f2d485a85d5d284f0381d2b05548b5a4e0",
+    "reason": "The editor retains one layout-interaction owner for grid selection, pointer/keyboard movement, size and responsive ordering. Announcements derive from the same accepted layout operations and report refused moves. Geometry/history helpers and recipient rendering are separate modules; no publication, data calculation or server authorization was added.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
+    "kind": "function",
+    "symbol": "DashboardDesigner",
+    "fingerprint": "202c21d877f963d556faa14c581b2fea4128b4928781c99ed9281f56f8843bbf",
+    "reason": "The editor retains one layout-interaction owner for grid selection, pointer/keyboard movement, size and responsive ordering. Announcements derive from the same accepted layout operations and report refused moves. Geometry/history helpers and recipient rendering are separate modules; no publication, data calculation or server authorization was added.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/DashboardWidgets.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "13b3417bb5b2685ec0ae60f969c4ec876404ad78353d13efb92d28256529d8a9",
+    "reason": "These are pure frozen-dashboard widget renderers under one finite discriminant. The additions expand captured table rows and captured evidence, with local disclosure state only. They issue no source requests, perform no financial aggregation and accept branding bytes through their renderer inputs; shared evidence rendering has its own module.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/PublishShareDialog.tsx",
+    "kind": "function",
+    "symbol": "PublishReview",
+    "fingerprint": "a80a0592db02f0f582170072573141bb4dee93c70cadf5a160304819932ec857",
+    "reason": "This dialog owns the selection and exact recipient-preview confirmation workflow. It composes the canonical payload query, shared recipient renderer and separate publication/recovery hook; it does not produce payloads or implement idempotency storage itself. The reviewed hash and design version bind the visible preview to publication.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchShareRecipient.tsx",
+    "kind": "function",
+    "symbol": "RecipientSession",
+    "fingerprint": "7ff2b66277f81ffb1a65191a593626e073be79a0110a4fc09f4282d73a4f2770",
+    "reason": "RecipientSession owns one link-scoped in-memory PIN/view lifecycle, including cancellation on token change, availability-first prompt, expiry and visible-session revalidation. The shared read-only renderer and public finite gateway remain separate. The added session transitions remove stale content and do not introduce signed-in product access.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "7e27e5d3473c2f90d2bb943aadec3d1f24b9d707d6d0c69c047c762c05578967",
+    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "ResearchSharing",
+    "fingerprint": "d422c287e14f1ad0ad9459d872aa63f50db9228c0240728ca84724a80a169f42",
+    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "SharingSettings",
+    "fingerprint": "60d578d772563c3b281c7ed2b54cecc15197999e8cbd20a6a503bca761ab6dce",
+    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
+    "kind": "function",
+    "symbol": "ShareLinks",
+    "fingerprint": "97e205543f9da5abfb2605a02b86aac8e7ad798c402a1daf31bd63efbb5e255a",
+    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/share.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "145fa82d13681f9dba23bf862227832bbf6a674ba10dd74a260c948460e08bd4",
+    "reason": "The stylesheet owns the single research-sharing surface across grid editing, recipient layouts, disclosure tables and responsive/light-dark presentation. New rules support existing components and screen-reader announcements; no unrelated feature styles or global behavior are added.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/ShareExposure.tsx",
+    "kind": "function",
+    "symbol": "ShareExposure",
+    "fingerprint": "3f975410df9fbbe8845f13dc076242651e890d9f97fe181bbd5af13c01415c6f",
+    "reason": "This pure component enumerates the exact frozen dashboard supplied by the producer for the owner review. It neither fetches live portfolio data nor recalculates totals; rendering the complete disclosure inventory is its single responsibility and is reused by manual and Meri confirmation.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/share/useSharePublish.ts",
+    "kind": "function",
+    "symbol": "useSharePublish",
+    "fingerprint": "5228940103869f06a6a0201782bb2ecb03f5a007ee2f62605ccec709ababf520",
+    "reason": "This hook owns one scoped publication attempt lifecycle. Its separate encrypted journal retains the exact operation key/input across refresh; it reads the canonical operation before any permitted retry and preserves unknown or access-denied outcomes. The UI and payload producer remain separate; one-time addresses stay in memory.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/ClientSharingSettings.tsx",
+    "kind": "function",
+    "symbol": "ClientSharingSettings",
+    "fingerprint": "8f0e92def234e1020db8933e00d4f56167cc58e8ff15c320fcd838167acf19dd",
+    "reason": "The administrator settings screen combines the tenant switch and current active-link list/revoke under one existing settings domain. It delegates authorization and effects to named Core operations and uses the existing confirmation/dialog components; it adds no background delivery or alternate link store.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/gateway.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "61fb3972c83fc2bb6ac21ef335ed0bf0c238384776878f5753a02493ec39f0fc",
+    "reason": "The shared HTTP gateway adds a thin adapter for the finite public-share operation catalog. It reuses the existing public request owner that omits identity credentials and cookies, rather than introducing another transport or product authority. Authenticated routing is unchanged.",
+    "reviewedBy": "Codex independent sharing release integration review (/root)",
     "reviewedOn": "2026-10-27"
   }
 ]
