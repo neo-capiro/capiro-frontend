@@ -216,6 +216,11 @@
   overflow-x: auto;
   padding: 2px;
 }
+.wrappedTabs {
+  flex-wrap: wrap;
+  overflow-x: visible;
+  min-width: 0;
+}
 .tabs button {
   border: 1px solid transparent;
   border-radius: 8px;

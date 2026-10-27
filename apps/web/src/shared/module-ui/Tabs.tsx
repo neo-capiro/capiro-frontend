@@ -14,11 +14,13 @@ export function Tabs({
   value,
   onChange,
   label = "Views",
+  wrap = false,
 }: {
   items: readonly TabItem[];
   value: string;
   onChange: (id: string) => void;
   label?: string;
+  wrap?: boolean;
 }) {
   const id = useId();
   const buttons = useRef<Map<string, HTMLButtonElement>>(new Map());
@@ -40,7 +42,11 @@ export function Tabs({
     }
   };
   return (
-    <div className={styles.tabs} role="tablist" aria-label={label}>
+    <div
+      className={`${styles.tabs}${wrap ? ` ${styles.wrappedTabs}` : ""}`}
+      role="tablist"
+      aria-label={label}
+    >
       {items.map((item) => (
         <button
           key={item.id}

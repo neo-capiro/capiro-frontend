@@ -231,6 +231,7 @@ export function addWidget(
   layout: ResearchDashboardLayout,
   kind: ResearchDashboardWidgetKind,
   id = newId(kind),
+  position?: { x: number; y: number },
 ): ResearchDashboardLayout {
   if (layout.widgets.length >= MAX_WIDGETS) return layout;
   if (layout.widgets.some((w) => w.id === id)) return layout;
@@ -238,12 +239,18 @@ export function addWidget(
   const widget: ResearchDashboardWidget = {
     id,
     kind,
-    x: 0,
-    y: bottomOf(layout.widgets),
+    x: position ? Math.round(position.x) : 0,
+    y: position ? Math.round(position.y) : bottomOf(layout.widgets),
     w: definition.w,
     h: definition.h,
     settings: {},
   };
+  if (
+    !Number.isFinite(widget.x) ||
+    !Number.isFinite(widget.y) ||
+    !fits(layout.widgets, widget)
+  )
+    return layout;
   return {
     ...layout,
     widgets: [...layout.widgets, widget],
@@ -251,10 +258,30 @@ export function addWidget(
   };
 }
 
+/** Reuse geometry and presentation only; snapshot/member selectors belong to the source portfolio. */
+export function reusableLayout(
+  layout: ResearchDashboardLayout,
+  samePortfolio: boolean,
+): ResearchDashboardLayout {
+  return {
+    ...layout,
+    widgets: layout.widgets.map((widget) => {
+      const settings = { ...widget.settings };
+      if (!samePortfolio) {
+        delete settings.snapshotId;
+        delete settings.subjectIds;
+        delete settings.basisKey;
+        delete settings.fundingFiscalYear;
+      }
+      return { ...widget, settings };
+    }),
+    phoneOrder: [...layout.phoneOrder],
+  };
+}
+
 /**
- * Moves a widget to the requested column and row. The column is clamped to the
- * grid; when the spot is taken, the widget settles on the first free row at or
- * below the requested one, so a drop never overlaps another widget.
+ * Snaps to the requested grid cell. Invalid drops preserve the original layout
+ * so pointer and keyboard callers can explain the refusal without moving it.
  */
 export function moveWidget(
   layout: ResearchDashboardLayout,
@@ -264,16 +291,13 @@ export function moveWidget(
 ): ResearchDashboardLayout {
   const widget = layout.widgets.find((w) => w.id === id);
   if (!widget) return layout;
-  const column = Math.min(Math.max(0, Math.round(x)), GRID_COLUMNS - widget.w);
-  const row = Math.max(0, Math.round(y));
-  for (let candidateY = row; candidateY < MAX_ROWS; candidateY += 1) {
-    const candidate = { ...widget, x: column, y: candidateY };
-    if (fits(layout.widgets, candidate)) return replace(layout, candidate);
-  }
-  return layout;
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return layout;
+  const candidate = { ...widget, x: Math.round(x), y: Math.round(y) };
+  if (candidate.x === widget.x && candidate.y === widget.y) return layout;
+  return fits(layout.widgets, candidate) ? replace(layout, candidate) : layout;
 }
 
-/** Resizes within the widget's minimums and the grid; a size that would overlap is refused. */
+/** Refuses overlap, out-of-grid or undersized resize without changing the layout. */
 export function resizeWidget(
   layout: ResearchDashboardLayout,
   id: string,
@@ -282,15 +306,16 @@ export function resizeWidget(
 ): ResearchDashboardLayout {
   const widget = layout.widgets.find((x) => x.id === id);
   if (!widget) return layout;
+  if (!Number.isFinite(w) || !Number.isFinite(h)) return layout;
   const definition = widgetDefinition(widget.kind);
   const candidate = {
     ...widget,
-    w: Math.min(
-      Math.max(definition.minW, Math.round(w)),
-      GRID_COLUMNS - widget.x,
-    ),
-    h: Math.min(Math.max(definition.minH, Math.round(h)), MAX_ROWS - widget.y),
+    w: Math.round(w),
+    h: Math.round(h),
   };
+  if (candidate.w < definition.minW || candidate.h < definition.minH)
+    return layout;
+  if (candidate.w === widget.w && candidate.h === widget.h) return layout;
   return fits(layout.widgets, candidate) ? replace(layout, candidate) : layout;
 }
 

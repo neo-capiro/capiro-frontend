@@ -11,6 +11,7 @@ import {
   StatusPanel,
 } from "../../../../shared/module-ui";
 import { ResearchDashboardView } from "./ResearchDashboardView";
+import { DashboardPreview } from "./DashboardPreview";
 import { ShareExposure } from "./ShareExposure";
 import { useSharePublish } from "./useSharePublish";
 import type { SharePublishActor } from "./share-publish-recovery";
@@ -274,11 +275,13 @@ function PublishReview({
               <>
                 <ShareExposure dashboard={preview.data.dashboard} />
                 <section aria-label="Recipient preview">
-                  <ResearchDashboardView
-                    preview
-                    dashboard={preview.data.dashboard}
-                    logoUrl={preview.data.logoUrl}
-                  />
+                  <DashboardPreview>
+                    <ResearchDashboardView
+                      preview
+                      dashboard={preview.data.dashboard}
+                      logoUrl={preview.data.logoUrl}
+                    />
+                  </DashboardPreview>
                 </section>
                 <label className={styles.check}>
                   <input
