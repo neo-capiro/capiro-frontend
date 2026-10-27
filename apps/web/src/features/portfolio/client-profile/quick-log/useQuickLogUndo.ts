@@ -5,7 +5,11 @@ import { useApi } from "@/shared/portfolio/api/provider";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { readRecovery } from "@/shared/session/recovery/journal";
 import { profileKey } from "../profile-keys";
-import { currentClientWriter, assertClientWriter } from "./authority";
+import {
+  currentClientWriter,
+  assertClientWriter,
+  type ClientWriter,
+} from "./authority";
 import { runQuickLogUndo } from "./actions";
 import {
   undoRecoveryContract,
@@ -21,13 +25,27 @@ type State = {
   result?: Result["result"];
   error?: string;
 };
+/**
+ * The scope is only a storage key, so an identity it cannot verify means "no
+ * saved Undo" rather than a failure. `undoRecoveryScope` asserts UUID-shaped
+ * ids and this runs during render, where a throw has no boundary above it and
+ * blanks the whole Overview — so the render path must not let it escape.
+ */
+function renderUndoScope(actor: ClientWriter | undefined, clientId: string) {
+  if (!actor) return undefined;
+  try {
+    return undoRecoveryScope(actor, clientId);
+  } catch {
+    return undefined;
+  }
+}
 /** Mounted by QuickLog, independently of its dialog and transient result toast. */
 export function useQuickLogUndo(clientId: string) {
   const api = useApi(),
     cache = useQueryClient();
   useIdentity();
   const actor = currentClientWriter(cache);
-  const scope = actor ? undoRecoveryScope(actor, clientId) : undefined;
+  const scope = renderUndoScope(actor, clientId);
   const [state, setState] = useState<State>();
   const [busy, setBusy] = useState(false);
   const [activation, setActivation] = useState({ scope, api, cache, epoch: 0 });
