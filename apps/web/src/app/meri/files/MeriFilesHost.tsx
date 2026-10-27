@@ -11,6 +11,7 @@ import { Button } from "@capiro/ui/button";
 import ui from "../../../features/meri/ui/meri-ui.module.css";
 import { MeriPageHeading } from "../../../features/meri/ui/MeriPageHeading";
 import { MeriFilesWorkflow } from "../../../features/meri/files/MeriFilesWorkflow";
+import { DocumentLibrary } from "../../../features/meri/files/DocumentLibrary";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { scopedHref } from "../../../shared/session/client-route";
 import { useMeriCapabilities } from "../../../shared/meri-resources/CapabilityContext";
@@ -33,6 +34,45 @@ import { documentSessionContext } from "../../../shared/meri-documents/session-c
 
 type Operation = "create_word" | "create_excel";
 export function MeriFilesHost({
+  enabled,
+  readEnabled = enabled,
+  operation,
+}: {
+  enabled: boolean;
+  readEnabled?: boolean;
+  operation: Operation;
+}) {
+  const selected = useSelectedClient();
+  const identity = useIdentity();
+  const account =
+    identity.data?.tenant?.id && !identity.error && !identity.isFetching
+      ? { tenantId: identity.data.tenant.id, actorId: identity.data.user.id }
+      : null;
+  const clientId =
+    selected.state === "authorized-client" ? selected.requestedId : undefined;
+  const available =
+    selected.state === "no-selection" || selected.state === "authorized-client";
+  return (
+    <>
+      {readEnabled &&
+        (account && available ? (
+          <DocumentLibrary
+            key={JSON.stringify([account.tenantId, account.actorId, clientId])}
+            account={account}
+            {...(clientId ? { clientId } : {})}
+          />
+        ) : (
+          <p role="status">
+            Current account and client access must be verified before loading
+            saved files.
+          </p>
+        ))}
+      <DocumentCreationHost enabled={enabled} operation={operation} />
+    </>
+  );
+}
+
+function DocumentCreationHost({
   enabled,
   operation,
 }: {

@@ -1,6 +1,10 @@
 import { receiveDocumentRequest } from "@capiro/meri-contracts/document-application";
 import type { DocumentRoute } from "@capiro/meri-contracts/document-application";
 import {
+  receiveDocumentRequest as receiveAccessRequest,
+  type DocumentAccessRoute,
+} from "@capiro/meri-client/document-access";
+import {
   boundedJsonBytes,
   boundedResponseBytes,
   withActionDeadline,
@@ -9,7 +13,14 @@ import { receivedActionSession } from "../meri-actions/session-header";
 import { sameRequestOrigin } from "../request-origin";
 import type { readDocumentConfig } from "./config";
 
-const routes = new Set<string>(["create", "revise", "inspect", "download"]);
+const routes = new Set<string>([
+  "create",
+  "revise",
+  "inspect",
+  "download",
+  "history",
+  "list",
+]);
 const jsonHeaders = {
   "Content-Type": "application/json",
   "Cache-Control": "no-store",
@@ -49,7 +60,7 @@ export async function proxyDocumentRequest(
     request.headers.has("content-encoding")
   )
     return unavailable(400);
-  const route = operation as DocumentRoute;
+  const route = operation as DocumentRoute | DocumentAccessRoute;
   // Writes need the bound document family; version reads also serve conversation artifacts.
   const write = route === "create" || route === "revise";
   if (!(write ? config.enabled && config.operation : config.readEnabled))
@@ -66,7 +77,9 @@ export async function proxyDocumentRequest(
         signal,
         2 * 1024 * 1024,
       );
-      const admitted = receiveDocumentRequest(route, body);
+      const admitted = write
+        ? receiveDocumentRequest(route as "create" | "revise", body)
+        : receiveAccessRequest(route as DocumentAccessRoute, body);
       if (
         "request" in admitted &&
         admitted.request.operation !== config.operation

@@ -33,8 +33,9 @@ export function DocumentVersionPanel({
     <section className={styles.panel} aria-labelledby={`${prefix}-heading`}>
       <h2 id={`${prefix}-heading`}>Immutable version</h2>
       <p className={styles.muted}>
-        Inspect a version ID you already know, or select one returned in this
-        view. This is not a file library.
+        Inspect a version ID you already know, or select a recent version from
+        this editor. Saved files and their full version history are available in
+        the library above.
       </p>
       <form
         className={styles.form}

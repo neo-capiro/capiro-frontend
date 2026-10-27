@@ -11,6 +11,7 @@ import {
 import {
   receiveDocumentResponse as receiveDocumentAccessResponse,
   type AdmittedDocumentRequest as AdmittedAccessRequest,
+  type DocumentAccessRoute,
 } from "@capiro/meri-client/document-access";
 import {
   boundedJsonBytes,
@@ -60,12 +61,16 @@ function documentReceiver(
     { once: true },
   );
   return async function receive<T>(
-    route: DocumentRoute,
+    route: DocumentRoute | DocumentAccessRoute,
     request: unknown,
     caller: AbortSignal,
     decode: (response: Response, signal: AbortSignal) => Promise<T>,
   ): Promise<{ status: number; value: T }> {
-    if (!["create", "revise", "inspect", "download"].includes(route))
+    if (
+      !["create", "revise", "inspect", "download", "history", "list"].includes(
+        route,
+      )
+    )
       throw new Error("Unknown document route");
     const body = JSON.stringify(request);
     let accessLost = false;
@@ -146,6 +151,19 @@ export function documentAccessTransport(
 ) {
   const receive = documentReceiver(credential, lifetime, fetcher);
   return {
+    metadata: <R extends "list" | "history">(
+      route: R,
+      request: AdmittedAccessRequest<R>,
+      signal: AbortSignal,
+    ) =>
+      receive(route, request, signal, async (response, current) =>
+        receiveDocumentAccessResponse(
+          route,
+          response.status,
+          await boundedJsonBytes(response, current, 16 * 1024 * 1024),
+          request,
+        ),
+      ),
     inspect: (request: AdmittedAccessRequest<"inspect">, signal: AbortSignal) =>
       receive("inspect", request, signal, async (response, current) =>
         receiveDocumentAccessResponse(
