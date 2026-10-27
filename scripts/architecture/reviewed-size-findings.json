@@ -628,10 +628,10 @@
     "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
     "kind": "function",
     "symbol": "ContactMail",
-    "fingerprint": "0d0605a8badfc336c6bed824ce74561152abb1fc24942292323d58d92b047153",
-    "reason": "ContactMail still owns current contact history, selected thread and read-error retirement. The former generic reply toggle is removed and delegated to ContactReply; ordinary new-mail composition remains separate. Existing query cancellation and application identity boundaries retain authority. No provider behavior or persistence moved into this component.",
-    "reviewedBy": "Codex independent Gmail frontend reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "a953d7b227833ebab5e10b9f29d5c2947679b4cdb7e3e0f1165223ca9aed5a3f",
+    "reason": "The existing contact-history and selected-thread composition now delegates native reply selection to NativeMailReply. Its remaining query, modal and current-contact lifetime state belongs to this one contact-mail view; it does not own transport, send authority or durable recovery. The embedded duplicate reply component is removed. No further split is required for this change.",
+    "reviewedBy": "Codex independent s3_assessment",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
@@ -754,10 +754,10 @@
     "file": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
     "kind": "function",
     "symbol": "ThreadSession",
-    "fingerprint": "da7c3383a48022a3cd22ad3e0b8b3b844d4d772e7f7ffc4dae8d5cf6d4a06d22",
-    "reason": "This session lazily reads one timeline thread and prepares a review-only reply. ThreadContent, replyRecipients and MailCompose already own rendering details, recipient derivation and composition. It introduces no second sender or outbound API. Read status and selected reply intent belong to the same viewed thread.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "5ce636de890ebd86110bbe9c81e1e946aac17a5a1631b40baa77b4325f2b6284",
+    "reason": "This remains the scoped Timeline thread view: expansion, bounded paging, read errors, refresh and review-only reply-all. It mounts the shared native reply owner and retains it during a background refresh so an accepted composer receipt is not erased; explicit refresh/collapse and current-read failure retire that child. Canonical reading and sending remain delegated. The inherited reply-all preview error/reopen limitation is explicitly outside this native-reply acceptance, not silently resolved by this review.",
+    "reviewedBy": "Codex independent s3_assessment",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
@@ -5605,24 +5605,6 @@
     "reviewedOn": "2026-10-26"
   },
   {
-    "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "becebeea1563857fb5d872856b6f8a8a05250a33cc145159e6d1954f048c18a5",
-    "reason": "Existing Contact mail/reply selection and composition remains unchanged; only capability copy includes Outlook. Preserve existing reviewed responsibility and replace the exact changed fingerprint after independent review. Independent source review confirms this bounded delta remains in the canonical owner; no alternate policy, execution or recovery owner was introduced.",
-    "reviewedBy": "Codex independent Graph substantive source review (/root/a4_assessment), original Core025f01d4/FEf4db31fd; subsequent cleanup separately reviewed by root",
-    "reviewedOn": "2026-10-26"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
-    "kind": "function",
-    "symbol": "ContactReply",
-    "fingerprint": "4dfcf97729523aee3487030e4cf9f6da527b023ba8bb79ac74617d7bddd5e392",
-    "reason": "Existing Contact mail/reply selection and composition remains unchanged; only capability copy includes Outlook. Preserve existing reviewed responsibility and replace the exact changed fingerprint after independent review. Independent source review confirms this bounded delta remains in the canonical owner; no alternate policy, execution or recovery owner was introduced.",
-    "reviewedBy": "Codex independent Graph substantive source review (/root/a4_assessment), original Core025f01d4/FEf4db31fd; subsequent cleanup separately reviewed by root",
-    "reviewedOn": "2026-10-26"
-  },
-  {
     "file": "apps/web/src/features/meri/actions/ProposalPanel.tsx",
     "kind": "function",
     "symbol": "ProposalPanel",
@@ -5648,5 +5630,14 @@
     "reason": "One task-update proposal/result presentation. The additive fixed Workspace link uses only the already-admitted native identity and delegates its URL to the Workspace public facade. Proposal approval, execution, uncertainty, reset and journal behavior remain with the existing workflow owners.",
     "reviewedBy": "Codex independent MF12 destination review (s3_assessment)",
     "reviewedOn": "2026-10-26"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/thread/NativeMailReply.tsx",
+    "kind": "function",
+    "symbol": "NativeMailReply",
+    "fingerprint": "9bde1fbfce605c9c1ec0487aa22404fc58606fe3527beb7ce67749c6d0ce4f67",
+    "reason": "This owner composes the exact-original selector, canonical scoped read and the lifetime of its one open native reply draft for Contact and Timeline. It passes only validated single-recipient context to the existing MailCompose and retires changed source or canonical context. It does not implement sending, recipient inference, authorization or attempt recovery. Keeping these dependent selection/render guards together is cohesive.",
+    "reviewedBy": "Codex independent s3_assessment",
+    "reviewedOn": "2026-10-27"
   }
 ]
