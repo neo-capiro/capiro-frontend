@@ -116,7 +116,10 @@ export function CalendarCard({ model }: { model: CalendarModel }) {
     toggle,
   } = model;
   return (
-    <section className={styles.card} aria-label="Master calendar">
+    <section
+      className={styles.card}
+      aria-label={clientId ? `${clientName} calendar` : "Master calendar"}
+    >
       <CalendarToolbar
         date={date}
         view={view}
