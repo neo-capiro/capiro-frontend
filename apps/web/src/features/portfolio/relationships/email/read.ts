@@ -15,15 +15,17 @@ export const mailReplyContextSchema = z.discriminatedUnion("supported", [
   z
     .object({
       supported: z.literal(true),
-      operation: z.enum(["reply", "reply_all"]),
+      operation: z.enum(["reply", "reply_all", "forward"]),
       originalMessageId: z.uuid(),
       originalUpdatedAt: instant,
+      originalBodySha256: z
+        .string()
+        .regex(/^[a-f0-9]{64}$/)
+        .optional(),
+      originalBodyText: z.string().min(1).max(6000).optional(),
       senderConnectionId: z.uuid(),
       subject: z.string().min(1).max(300),
-      to: z
-        .array(z.object({ email: z.email() }))
-        .min(1)
-        .max(50),
+      to: z.array(z.object({ email: z.email() })).max(50),
       cc: z
         .array(z.object({ email: z.email() }))
         .max(10)
@@ -33,7 +35,16 @@ export const mailReplyContextSchema = z.discriminatedUnion("supported", [
       const emails = [...context.to, ...(context.cc ?? [])].map((row) =>
         row.email.toLowerCase(),
       );
+      if (context.operation === "forward")
+        return (
+          context.to.length === 0 &&
+          !context.cc?.length &&
+          Boolean(context.originalBodySha256 && context.originalBodyText)
+        );
       return (
+        context.to.length > 0 &&
+        !context.originalBodySha256 &&
+        !context.originalBodyText &&
         new Set(emails).size === emails.length &&
         (context.operation === "reply_all" ||
           (context.to.length === 1 && !context.cc?.length))
@@ -83,6 +94,7 @@ export const mailBodySchema = messageSchema
   .extend({
     replyContext: mailReplyContextSchema.optional(),
     replyAllContext: mailReplyContextSchema.optional(),
+    forwardContext: mailReplyContextSchema.optional(),
     threadId: z.uuid(),
     sentAt: instant.nullable(),
     receivedAt: instant.nullable(),
@@ -146,7 +158,11 @@ export const mailThreadPageSchema = threadSchema
             (message.replyAllContext.operation === "reply_all" &&
               message.replyAllContext.originalMessageId === message.id &&
               message.replyAllContext.senderConnectionId ===
-                page.connectionId)),
+                page.connectionId)) &&
+          (!message.forwardContext?.supported ||
+            (message.forwardContext.operation === "forward" &&
+              message.forwardContext.originalMessageId === message.id &&
+              message.forwardContext.senderConnectionId === page.connectionId)),
       ) &&
       new Set(page.messages.map((message) => message.id)).size ===
         page.messages.length &&

@@ -69,6 +69,10 @@ export function NativeMailReply({
     query.isSuccess && !query.error && !query.isFetching
       ? query.data.messages[0]?.replyAllContext
       : undefined;
+  const forward =
+    query.isSuccess && !query.error && !query.isFetching
+      ? query.data.messages[0]?.forwardContext
+      : undefined;
   if (
     open &&
     (!original ||
@@ -78,7 +82,11 @@ export function NativeMailReply({
       (query.isSuccess &&
         !query.isFetching &&
         JSON.stringify(
-          open.reply.operation === "reply_all" ? replyAll : reply,
+          open.reply.operation === "forward"
+            ? forward
+            : open.reply.operation === "reply_all"
+              ? replyAll
+              : reply,
         ) !== JSON.stringify(open.reply)))
   )
     setOpen(null);
@@ -111,8 +119,8 @@ export function NativeMailReply({
       </label>
       <small>
         Reply to the verified sender or review all visible To and Cc recipients.
-        Known own addresses are excluded; review every recipient. Forwarding is
-        unavailable here.
+        Known own addresses are excluded; review every recipient. Forward
+        supports complete plain-text originals without incoming files.
       </small>
       {original && (
         <QueryState pending={query.isFetching} error={query.error} />
@@ -153,14 +161,24 @@ export function NativeMailReply({
           its full recipient list.
         </small>
       )}
+      <button
+        className="button"
+        disabled={busy || !forward?.supported}
+        onClick={() => {
+          if (!busy && forward?.supported) setOpen({ reply: forward, source });
+        }}
+      >
+        Forward plain text
+      </button>
+      {forward?.supported === false && <small>{forward.reason}</small>}
       {open && (
         <MailCompose
           key={`${selected}:${open.reply.originalUpdatedAt}:${open.reply.operation}`}
           clientId={clientId}
           person={
             person ?? {
-              name: open.reply.to[0]!.email,
-              email: open.reply.to[0]!.email,
+              name: open.reply.to[0]?.email ?? "Forward recipients",
+              email: open.reply.to[0]?.email ?? null,
               title: null,
             }
           }

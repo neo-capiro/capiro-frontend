@@ -365,3 +365,106 @@ describe("native reply-all receiver", () => {
     cache.clear();
   });
 });
+
+describe("native forward receiver", () => {
+  const digest = "a".repeat(64);
+  const forwardInput: SendInput = {
+    ...input,
+    operation: "forward",
+    subject: "Fwd: Original subject",
+    originalBodySha256: digest,
+    to: [{ email: "new@example.test" }],
+    cc: [{ email: "copy@example.test" }],
+  };
+  const forwardContext = {
+    ...context,
+    operation: "forward",
+    subject: forwardInput.subject,
+    to: [],
+    cc: [],
+    originalBodySha256: digest,
+    originalBodyText: "Complete original",
+  };
+  const receipt = {
+    ...accepted,
+    operation: "forward",
+    originalBodySha256: digest,
+  };
+  function forwardTransport(
+    change: Record<string, unknown> = {},
+    result: Record<string, unknown> = receipt,
+  ) {
+    const sent: unknown[] = [];
+    const api = createApiClient(async (url, options) => {
+      const path = String(url);
+      if (path.endsWith("/mail/mailboxes")) return Response.json([mailbox]);
+      if (path.includes("/mail-threads/"))
+        return Response.json({
+          id: originalThreadId,
+          clientId: input.clientId,
+          connectionId: mailbox.id,
+          messages: [
+            {
+              id: originalMessageId,
+              forwardContext: { ...forwardContext, ...change },
+            },
+          ],
+        });
+      if (options?.method === "POST") {
+        sent.push(JSON.parse(String(options.body)));
+        return Response.json(result);
+      }
+      throw new Error("Unexpected synthetic request");
+    });
+    return { api, sent };
+  }
+  it("forward binds the reviewed original hash and explicit new recipients without posting original content", async () => {
+    const h = forwardTransport();
+    expect(
+      await sendReviewedMail(h.api, forwardInput, () => {}, requestKey),
+    ).toMatchObject({ operation: "forward", originalBodySha256: digest });
+    expect(h.sent).toEqual([
+      expect.objectContaining({
+        originalBodySha256: digest,
+        to: forwardInput.to,
+        cc: forwardInput.cc,
+      }),
+    ]);
+    expect(h.sent[0]).not.toHaveProperty("originalBodyText");
+  });
+  it.each([
+    { originalBodySha256: "b".repeat(64) },
+    { supported: false },
+    { operation: "reply" },
+  ])("forward changed proof %j refuses before POST", async (change) => {
+    const h = forwardTransport(change);
+    await expect(
+      sendReviewedMail(h.api, forwardInput, () => {}, requestKey),
+    ).rejects.toMatchObject({ uncertain: false });
+    expect(h.sent).toHaveLength(0);
+  });
+  it("forward wrong-body receipt stays unknown and cannot retire its stored attempt", async () => {
+    const wrong = { ...receipt, originalBodySha256: "b".repeat(64) },
+      h = forwardTransport({}, wrong);
+    await expect(
+      sendReviewedMail(h.api, forwardInput, () => {}, requestKey),
+    ).rejects.toMatchObject({ uncertain: true });
+    const cache = new QueryClient(),
+      key = mailAttemptKey(id(20), id(21), id(1), "forward");
+    const token = await beginMailAttempt(cache, key, forwardInput);
+    expect(
+      await recoverMailAttempt(cache, key, {
+        ...wrong,
+        requestKey: token,
+      } as never),
+    ).toBeNull();
+    expect(cache.getQueryData(key)).toBeTruthy();
+    expect(
+      await recoverMailAttempt(cache, key, {
+        ...receipt,
+        requestKey: token,
+      } as never),
+    ).toBe("accepted");
+    cache.clear();
+  });
+});

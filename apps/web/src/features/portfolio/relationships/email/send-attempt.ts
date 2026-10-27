@@ -16,16 +16,21 @@ type MailAttempt = {
       | "threadId"
       | "originalMessageId"
       | "originalUpdatedAt"
+      | "originalBodySha256"
       | "senderConnectionId"
     >
   >;
   error?: MailSendError;
 };
 const replyBindingSchema = z.object({
-  operation: z.enum(["reply", "reply_all"]),
+  operation: z.enum(["reply", "reply_all", "forward"]),
   threadId: z.uuid(),
   originalMessageId: z.uuid(),
   originalUpdatedAt: z.iso.datetime({ offset: true }),
+  originalBodySha256: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .optional(),
   senderConnectionId: z.uuid(),
 });
 const storageKey = (key: QueryKey) =>
@@ -146,13 +151,16 @@ export async function beginMailAttempt(
       startedAt: Date.now(),
       status: "pending",
       input: structuredClone(input),
-      ...(input.operation === "reply" || input.operation === "reply_all"
+      ...(input.operation === "reply" ||
+      input.operation === "reply_all" ||
+      input.operation === "forward"
         ? {
             replyBinding: {
               operation: input.operation,
               threadId: input.threadId,
               originalMessageId: input.originalMessageId,
               originalUpdatedAt: input.originalUpdatedAt,
+              originalBodySha256: input.originalBodySha256,
               senderConnectionId: input.senderConnectionId,
             },
           }
@@ -223,6 +231,7 @@ export async function recoverMailAttempt(
     originalMessageId?: string;
     originalThreadId?: string;
     originalUpdatedAt?: string;
+    originalBodySha256?: string;
     senderConnectionId?: string;
   },
 ) {
@@ -240,7 +249,9 @@ export async function recoverMailAttempt(
     if (
       binding &&
       (!replyReceiptMatches(row, binding) ||
-        ((binding.operation === "reply" || binding.operation === "reply_all") &&
+        ((binding.operation === "reply" ||
+          binding.operation === "reply_all" ||
+          binding.operation === "forward") &&
           row.senderConnectionId !== binding.senderConnectionId))
     )
       return null;
@@ -248,10 +259,13 @@ export async function recoverMailAttempt(
     // origin evidence for a native reply; never infer it from the current composer.
     if (
       !attempt?.input &&
-      (row.operation === "reply" || row.operation === "reply_all") &&
+      (row.operation === "reply" ||
+        row.operation === "reply_all" ||
+        row.operation === "forward") &&
       (!row.originalMessageId ||
         !row.originalThreadId ||
         !row.originalUpdatedAt ||
+        (row.operation === "forward" && !row.originalBodySha256) ||
         !row.senderConnectionId)
     )
       return null;

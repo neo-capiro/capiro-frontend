@@ -10,9 +10,13 @@ import {
 } from "./mailboxes";
 
 export const sendInputSchema = z.object({
-  operation: z.enum(["reply", "reply_all"]).optional(),
+  operation: z.enum(["reply", "reply_all", "forward"]).optional(),
   originalMessageId: z.uuid().optional(),
   originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
+  originalBodySha256: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .optional(),
   clientId: z.uuid(),
   personIds: z.array(z.uuid()).max(50).optional(),
   to: z.array(mailRecipient).min(1).max(50),
@@ -35,21 +39,31 @@ export function replyReceiptMatches(
     originalMessageId?: string;
     originalThreadId?: string;
     originalUpdatedAt?: string;
+    originalBodySha256?: string;
     threadId?: string;
   },
   input: Pick<
     SendInput,
-    "operation" | "originalMessageId" | "originalUpdatedAt" | "threadId"
+    | "operation"
+    | "originalMessageId"
+    | "originalUpdatedAt"
+    | "threadId"
+    | "originalBodySha256"
   >,
 ) {
-  return input.operation === "reply" || input.operation === "reply_all"
+  return input.operation === "reply" ||
+    input.operation === "reply_all" ||
+    input.operation === "forward"
     ? Boolean(
         input.originalMessageId && input.originalUpdatedAt && input.threadId,
       ) &&
         receipt.operation === input.operation &&
         receipt.originalMessageId === input.originalMessageId &&
         receipt.originalThreadId === input.threadId &&
-        receipt.originalUpdatedAt === input.originalUpdatedAt
+        receipt.originalUpdatedAt === input.originalUpdatedAt &&
+        (input.operation !== "forward" ||
+          (Boolean(input.originalBodySha256) &&
+            receipt.originalBodySha256 === input.originalBodySha256))
     : receipt.operation === undefined &&
         (!input.threadId || receipt.threadId === input.threadId);
 }
@@ -75,12 +89,16 @@ export async function sendReviewedMail(
       (body.threadId ||
         body.operation ||
         body.originalMessageId ||
-        body.originalUpdatedAt) &&
-      (!["reply", "reply_all"].includes(body.operation ?? "") ||
+        body.originalUpdatedAt ||
+        body.originalBodySha256) &&
+      (!["reply", "reply_all", "forward"].includes(body.operation ?? "") ||
         !body.threadId ||
         !body.originalMessageId ||
         !body.originalUpdatedAt ||
         !body.senderConnectionId ||
+        (body.operation === "forward"
+          ? !body.originalBodySha256
+          : body.originalBodySha256 !== undefined) ||
         (body.operation === "reply" &&
           (body.to.length !== 1 || body.cc?.length)) ||
         body.bcc?.length)
@@ -114,15 +132,18 @@ export async function sendReviewedMail(
                 id: z.uuid(),
                 replyContext: mailReplyContextSchema.optional(),
                 replyAllContext: mailReplyContextSchema.optional(),
+                forwardContext: mailReplyContextSchema.optional(),
               }),
             ),
           })
           .refine((thread) => {
             const original = thread.messages[0];
             const context =
-              body.operation === "reply_all"
-                ? original?.replyAllContext
-                : original?.replyContext;
+              body.operation === "forward"
+                ? original?.forwardContext
+                : body.operation === "reply_all"
+                  ? original?.replyAllContext
+                  : original?.replyContext;
             return (
               thread.id === body.threadId &&
               thread.messages.length === 1 &&
@@ -133,10 +154,12 @@ export async function sendReviewedMail(
               context.originalUpdatedAt === body.originalUpdatedAt &&
               context.senderConnectionId === body.senderConnectionId &&
               context.subject === body.subject &&
-              JSON.stringify(context.to.map((row) => row.email)) ===
-                JSON.stringify(body.to.map((row) => row.email)) &&
-              JSON.stringify((context.cc ?? []).map((row) => row.email)) ===
-                JSON.stringify((body.cc ?? []).map((row) => row.email)) &&
+              (body.operation === "forward"
+                ? context.originalBodySha256 === body.originalBodySha256
+                : JSON.stringify(context.to.map((row) => row.email)) ===
+                    JSON.stringify(body.to.map((row) => row.email)) &&
+                  JSON.stringify((context.cc ?? []).map((row) => row.email)) ===
+                    JSON.stringify((body.cc ?? []).map((row) => row.email))) &&
               (thread.clientId === body.clientId || thread.clientId === null) &&
               (!sender || thread.connectionId === sender.id)
             );
@@ -178,10 +201,14 @@ export async function sendReviewedMail(
           senderName: z.string().nullable().optional(),
           signaturePolicy: z.literal("actor").optional(),
           signatureAppended: z.boolean().optional(),
-          operation: z.enum(["reply", "reply_all"]).optional(),
+          operation: z.enum(["reply", "reply_all", "forward"]).optional(),
           originalMessageId: z.uuid().optional(),
           originalThreadId: z.uuid().optional(),
           originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
+          originalBodySha256: z
+            .string()
+            .regex(/^[a-f0-9]{64}$/)
+            .optional(),
         })
         .refine(
           (receipt) =>

@@ -47,10 +47,14 @@ const sendIntentReceipt = z.object({
   ok: z.literal(true).optional(),
   threadId: z.uuid().optional(),
   messageId: z.uuid().optional(),
-  operation: z.enum(["reply", "reply_all"]).optional(),
+  operation: z.enum(["reply", "reply_all", "forward"]).optional(),
   originalMessageId: z.uuid().optional(),
   originalThreadId: z.uuid().optional(),
   originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
+  originalBodySha256: z
+    .string()
+    .regex(/^[a-f0-9]{64}$/)
+    .optional(),
   senderConnectionId: z.uuid().optional(),
 });
 type SendIntentReceipt = z.infer<typeof sendIntentReceipt>;
