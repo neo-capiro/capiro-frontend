@@ -42,7 +42,8 @@ export function ResearchSettings({
     params: { id: portfolio.id },
   });
   const activeLinks = sharing.data?.activeLinkCount ?? 0;
-  const editable = portfolio.myRole !== "viewer";
+  const canManage = portfolio.myRole !== "viewer";
+  const editable = canManage && portfolio.lifecycle === "active";
   /** Active client links stay live through unlinking or archiving (FR-16.22): warn, never block. */
   function guarded(title: string, action: () => Promise<unknown>) {
     if (!sharing.data || sharing.loading || sharing.error) return;
@@ -127,7 +128,7 @@ export function ResearchSettings({
           </ActionButton>
           <ActionButton
             disabled={
-              !editable ||
+              !canManage ||
               busy ||
               (portfolio.lifecycle === "active" && !sharing.data)
             }

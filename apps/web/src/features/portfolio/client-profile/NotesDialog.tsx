@@ -12,10 +12,12 @@ import { useProfileNotesEditor } from "./useProfileNotesEditor";
 
 export function NotesDialog({
   clientId,
+  clientName,
   open,
   onOpenChange,
 }: {
   clientId: string;
+  clientName: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
@@ -26,7 +28,7 @@ export function NotesDialog({
       open={open}
       onOpenChange={onOpenChange}
       title="Profile notes"
-      description="Profile notes are separate from internal intake notes."
+      description={`${clientName} · Profile notes are separate from internal intake notes.`}
     >
       {open && (
         <ProfileNotesEditor
@@ -112,9 +114,12 @@ function ProfileNotesEditor({
         </>
       )}
       <QueryState error={editor.error} />
-      <button className="button primary" disabled={!editor.canSave}>
-        {editor.pending ? "Saving…" : "Save notes"}
-      </button>
+      <small>Unsaved changes will be discarded when you close.</small>
+      <div className="row" style={{ justifyContent: "flex-end" }}>
+        <button className="button primary" disabled={!editor.canSave}>
+          {editor.pending ? "Saving…" : "Save notes"}
+        </button>
+      </div>
     </form>
   );
 }

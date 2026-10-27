@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { MailCompose } from "../MailCompose";
+import { replyQuote } from "../email/reply-quote";
 import { IncomingMailFiles } from "./IncomingMailFiles";
 import type { MailContact } from "../email";
 import {
@@ -74,11 +75,16 @@ export function NativeMailReply({
     query.isSuccess && !query.error && !query.isFetching
       ? query.data.messages[0]?.forwardContext
       : undefined;
+  const replyRecipient = reply?.supported ? reply.to[0]?.email : undefined;
+  const replyAllRecipient = replyAll?.supported
+    ? replyAll.to[0]?.email
+    : undefined;
   if (
     open &&
     (!original ||
       open.source !== source ||
       open.reply.senderConnectionId !== thread.connectionId ||
+      (open.reply.operation !== "forward" && !open.reply.to[0]?.email) ||
       query.isError ||
       (query.isSuccess &&
         !query.isFetching &&
@@ -135,22 +141,19 @@ export function NativeMailReply({
       )}
       <button
         className="button"
-        disabled={busy || !reply?.supported}
+        disabled={busy || !reply?.supported || !replyRecipient}
         onClick={() => {
-          if (!busy && reply?.supported) setOpen({ reply, source });
+          if (!busy && reply?.supported && replyRecipient)
+            setOpen({ reply, source });
         }}
       >
-        {person
-          ? `Reply to ${person.name}`
-          : reply?.supported
-            ? `Reply to ${reply.to[0]!.email}`
-            : "Reply"}
+        {replyRecipient ? `Reply to ${replyRecipient}` : "Reply"}
       </button>
       <button
         className="button"
-        disabled={busy || !replyAll?.supported}
+        disabled={busy || !replyAll?.supported || !replyAllRecipient}
         onClick={() => {
-          if (!busy && replyAll?.supported)
+          if (!busy && replyAll?.supported && replyAllRecipient)
             setOpen({ reply: replyAll, source });
         }}
       >
@@ -213,6 +216,11 @@ export function NativeMailReply({
           }
           thread={{ id: thread.id, subject: open.reply.subject }}
           reply={open.reply}
+          initialDraft={
+            open.reply.operation === "forward"
+              ? undefined
+              : { body: replyQuote(query.data?.messages[0]) }
+          }
           onClose={() => setOpen(null)}
         />
       )}

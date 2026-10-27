@@ -11,6 +11,20 @@ const opaqueId = z
   .max(256)
   .refine((value) => value === value.trim());
 const scopeSchema = z.strictObject({ tenantId: opaqueId, actorId: opaqueId });
+const wizardSchema = z.strictObject({
+  version: z.literal(1),
+  scope: scopeSchema,
+  step: z.union([z.literal(0), z.literal(1), z.literal(2)]),
+  draft: z.strictObject({
+    name: z.string().max(240),
+    purpose: z.string().max(4000).nullable(),
+    mode: z.enum(["manual", "rules", "hybrid"]),
+  }),
+});
+export type ResearchPortfolioWizard = Pick<
+  z.infer<typeof wizardSchema>,
+  "draft" | "step"
+>;
 const recordFields = {
   version: z.literal(1),
   scope: scopeSchema,
@@ -106,6 +120,55 @@ export class ResearchPortfolioCreateIntent {
 
   get busy() {
     return this.inFlight;
+  }
+
+  /** Unsubmitted form values are separate from the immutable pending command. */
+  wizard(): ResearchPortfolioWizard | null {
+    try {
+      const raw = this.storage().getItem(storageKey(this.scope) + ":draft");
+      if (raw === null || raw === "null") return null;
+      const saved = wizardSchema.parse(JSON.parse(raw));
+      if (
+        saved.scope.tenantId !== this.scope.tenantId ||
+        saved.scope.actorId !== this.scope.actorId
+      )
+        throw new Error("Portfolio account changed");
+      return { draft: saved.draft, step: saved.step };
+    } catch {
+      throw new ResearchPortfolioCreateStorageError();
+    }
+  }
+
+  saveWizard(value: ResearchPortfolioWizard) {
+    if (this.inFlight || this.pendingDraft())
+      throw new ResearchPortfolioPendingChangeError();
+    try {
+      const saved = wizardSchema.parse({
+        version: 1,
+        scope: this.scope,
+        ...value,
+      });
+      this.storage().setItem(
+        storageKey(this.scope) + ":draft",
+        JSON.stringify(saved),
+      );
+      if (
+        JSON.stringify(this.wizard()) !==
+        JSON.stringify({ draft: saved.draft, step: saved.step })
+      )
+        throw new Error("Draft changed in storage");
+    } catch (error) {
+      if (error instanceof ResearchPortfolioPendingChangeError) throw error;
+      throw new ResearchPortfolioCreateStorageError();
+    }
+  }
+
+  clearWizard() {
+    try {
+      this.storage().setItem(storageKey(this.scope) + ":draft", "null");
+    } catch {
+      throw new ResearchPortfolioCreateStorageError();
+    }
   }
 
   pendingDraft(): ResearchPortfolioCreateDraft | null {

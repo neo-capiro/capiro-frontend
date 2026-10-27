@@ -12,10 +12,10 @@
     "file": "apps/web/src/shared/meri-task-commands/transport.ts",
     "kind": "function",
     "symbol": "taskCommandTransport",
-    "fingerprint": "4e4b54536beb623966e690630d972b5b6432c4ed402be0c346ccd3ab0431792a",
-    "reason": "Re-review after integration: the browser now sends the opaque session in X-Meri-Action-Session instead of an Authorization bearer, matching every other Meri proxy (Clerk reads a bearer as signed out). Credential lifetime, bounded send path and receivers are unchanged; no workflow state or authority added.",
-    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "8775daeae32346842fe1ce3d14b8ecc6e63448a3bfd63d408a5d6028fc81f46c",
+    "reason": "Task-command transport adapter. One transport responsibility for the meri-task-commands owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email.ts",
@@ -228,12 +228,10 @@
     "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
     "kind": "function",
     "symbol": "IntakeSession",
-    "line": 41,
-    "nonblank": 314,
-    "fingerprint": "1835e4917e19e73b7f73d1b9da364f62a3848c16fb8f4ffccb7919a3678c2fca",
-    "reason": "Owns a single wizard session, validation focus, captured write scope and the transition from saved client to optional logo completion. Three field steps, payload validation, save/upload transports and capacity reads are already separate. Retain the persisted client and logo retry relationship to prevent duplicate profile creation. Extract the controlled logo input/status presentation when it changes; keep continuation and uncertainty state in one session owner.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "e83ab41ed59dd466371366fd620ee99299dbc6418b6a7e3755226bd27b29ffbd",
+    "reason": "reviewed-accept — failed-logo URL tracking",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-intake/form.ts",
@@ -416,11 +414,9 @@
     "file": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
     "kind": "function",
     "symbol": "FocusTagSession",
-    "line": 28,
-    "nonblank": 163,
-    "fingerprint": "93bafddc2d98ae39717df2919a5ac5a78422850998a5547896e4f7042dc34961",
-    "reason": "Owns one actor/client-keyed tag editor, draft, same-actor uncertainty freeze and chip projection. addFocusTag/assertTagWriter own payload preservation and write authority. The accessible hint id and hint text are the only addition; retain the freeze across close/reopen and keep whole-object intake mutation rules out of the chip renderer.",
-    "reviewedBy": "Hermes Agent independent source review",
+    "fingerprint": "c88ba0cd670ca981066ca675c297b864251d3c495325e2eef98ef146443343f5",
+    "reason": "reviewed-accept — placeholder only",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -460,10 +456,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
     "kind": "function",
     "symbol": "ObjectiveEditor",
-    "fingerprint": "354c963de0aac8074598217ea3868c2754c8100cfd03f062bfaf8c1c254163b0",
-    "reason": "One controlled Objective editor composes held intake and current-read panels beside existing field, readiness and action children. The editor session retains state and mutation; the changed JSX does not acquire a Core request or second Objective state owner.",
-    "reviewedBy": "Codex independent coherent integration source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "8503152b240eb022644d847a3b36ea51d7f6959a762c3758c5a6961a387f5a89",
+    "reason": "Dialog orchestrating the objective editing session: it composes the field, readiness and action controls and mounts the outreach, strategy-intake, governed-planner and work-destination sub-surfaces keyed by record id/version. Session state, mutation and validation are delegated to useObjectiveEditorSession. One responsibility (the objective editor shell) for the objectives owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
@@ -709,10 +705,10 @@
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
     "kind": "function",
     "symbol": "NoteSession",
-    "fingerprint": "8654d24cc3d3ec7cdb1d01f9f98c71745bf02f09ee442e7127f2cc3a7e841f90",
-    "reason": "The shared Directory member note form retains one supported Note draft and its existing integrity/lifetime hook. The excluded disabled Commitment choice is removed from the Global Quick log member path; no replacement adapter or semantics are introduced. Existing Call/Meeting/Email disclosures and Note fields, uncertain completion and save receipt remain the same cohesive form.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "3217e652c844ff69ec7cae54edae5876644bf0ce4d30e0bb9c439b64545d20b0",
+    "reason": "Private component owning the member-note form session: its text/validation state and the save/recover/acknowledge/retire-refusal affordances, with the command lifecycle and recovery delegated to useMemberNote. One responsibility (present and submit one member note) for the relationships member-notes owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberQuickLog.tsx",
@@ -727,10 +723,10 @@
     "file": "apps/web/src/features/portfolio/relationships/member-notes/useMemberNote.ts",
     "kind": "function",
     "symbol": "useMemberNote",
-    "fingerprint": "0780ec88cdc7848b11c12f0373d6d604ae4dbf11431710f0b5c17e444823e116",
-    "reason": "This hook owns one actor/tenant/member-bound note-write attempt, including lifetime, receipt and unknown-result freeze. It reuses the canonical writer/API, and the same retained attempt reference must cover all stages. There is no second note persistence implementation or invented Planner relationship.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "a4c33eaecdfb472e7432a1d83af9ff589a735b7c93ac84a60612313960329e9e",
+    "reason": "Hook owning the member-note command lifecycle for one member: actor/scope resolution from the session, recovery read, core-writer verification, save/recover/acknowledge/retire-refusal execution and the resulting cache invalidation. One concern (the member-note command) for the member-notes owner; journal mechanics are delegated to the shared session-recovery modules.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
@@ -1136,10 +1132,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLog",
-    "fingerprint": "ea36a1f5f6321725ff59874409c84faba8da1d153ddd9a89891af3e5f5bdfd6e",
-    "reason": "Existing Quick Log form composition retains canonical direct mutation, durable follow-up, detail-field and receipt owners. One fieldsLocked value consistently applies direct pending, uncertain outcome and retained-command state to the captured inputs. No activity domain rule, transaction owner or recovery state machine is added. The render length is existing structural debt; this bounded change adds no unrelated responsibility.",
-    "reviewedBy": "Codex receiving owner with independent core_inventory source review",
-    "reviewedOn": "2026-10-19"
+    "fingerprint": "6549b21347f724ff5f810d1373e4eff8a62e408c78d028a94fadcff4ad9020a2",
+    "reason": "The Quick log dialog surface: it renders the activity form scaffold and owns only its local kind/follow-up/validation state, submitting through useActivityCommand and reading undo through useQuickLogUndo and detail fields through useQuickLogDetailFields. One screen-level responsibility for the client-profile quick-log owner; the command and its recovery stay with the hook.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
@@ -1271,10 +1267,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
     "kind": "function",
     "symbol": "useCommandRecovery",
-    "fingerprint": "d9a78c326945d796ecb29eae0e04620a06f756f76fd415d91df922465127b57d",
-    "reason": "The recovery hook remains the single owner of fresh authority before retained Quicklog hydration. A render-time activation epoch invalidates ready state for every open/close/scope/API lifetime transition before any retained fields commit. The async effect still checks current Core identity and client authorization, aborts stale reads, then installs the journal. This closes the mounted reopen disclosure without weakening the original mutation checks or splitting one authority lifecycle across components.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "83f2c523a57862a61400e8aa96b93cf3e5cc07c95fce2f97472bb6f3f1af36da",
+    "reason": "Hook that binds reading a retained quick-log command to the dialog's open/authority epoch, re-verifying writer authority and invalidating when scope, api or cache identity changes. It owns only that binding; contracts and verification live in command-recovery.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/engagement/ObjectiveOutreachDestination.tsx",
@@ -1451,9 +1447,9 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "fingerprint": "7df6de37d45ed3d99b37378b9a7e23e925159d1934c2e23d9a069e47745a27a9",
-    "reason": "One client overview composes current client, team and activity reads with its cards and dialog entry points. Data mutations and detailed editors remain in child owners; the shared monogram owns only the identity avatar contents. No second workflow is introduced.",
-    "reviewedBy": "Hermes Agent independent source review",
+    "fingerprint": "45c4182ffdd2be672fc0507748efc65034baf69be3f8810446b1be01b4f6abbe",
+    "reason": "reviewed-accept",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -1487,10 +1483,10 @@
     "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
     "kind": "function",
     "symbol": "MeetingSharing",
-    "fingerprint": "727cc3956153caa435c9011566317d7a6016e5549990240f930348ade5090cdf",
-    "reason": "One explicit selected-artifact confirmation owns checkbox snapshots, current read states and the share/unshare confirmation. Native contracts, selection eligibility and dispatched attempt semantics are separate coherent modules.",
-    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "1c06fee35e244f2f576e57ef0c80abd72f3932043752f5cfe97f10e5060975e5",
+    "reason": "Dialog owning meeting-artifact share/unshare: share-vs-unshare and target-selection local state, target rendering, and the confirm-then-submit step. Retrieval is delegated to useSharing, target eligibility/reasons to the sharing targets derivation, and command lifecycle to MeetingCommandStatus. One responsibility for the calendar/sharing owner; it introduces no second data or authority owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
@@ -2161,10 +2157,10 @@
     "file": "apps/web/src/shared/shell/Sidebar.tsx",
     "kind": "function",
     "symbol": "Sidebar",
-    "fingerprint": "fd79fdbd2c5dfac1dcd09e05e44fea67b151b0da9e544d3e0e3f9dd914e1321a",
-    "reason": "Independent whole-function review: Sidebar remains the shared Meri navigation presentation owner. Explicit fixture composition gates local fixture reset, sample recents and approval count. Ordinary navigation reuses canonical route/scope helpers and disables unconnected conversation creation. Availability and fixture decisions stay beside their controls; no service query, authority, persistence, count fabrication or dispatch is added. Header/mobile navigation and feature workflows retain their own canonical owners. See docs/production-data-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent production data review outreach_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "4c5c4e513a9d02fd2462df0d68c9221e353d1bb8af4c16938ef18bb0deba1d97",
+    "reason": "The app shell sidebar navigation. Single responsibility - render shell navigation and its preference entry - for the shell owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
@@ -2341,19 +2337,19 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "a6a9cb4f409621fd0c94fcb6a283bbcb9a36e574c3ce91409a0ad8b66b1d668e",
-    "reason": "This remains the presentation owner for one meeting notes/debrief interaction. The actor-keyed wrapper and editor retain one list, local draft and dialog lifetime. O204 adds current explicit capability refusals to the existing admission and dialog checks; transport, receipt validation, attempt state, generation and document preview remain delegated to their existing owners. The change adds no grant store or server policy. Separating individual checks or JSX would disperse the same retained interaction rather than isolate a new responsibility.",
-    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "9a8882b349b4ce553aae6ead42582a57a770cfe3e0c2175625777f339994e12b",
+    "reason": "Module for the meeting-artifacts surface. Contains the exported MeetingArtifacts identity gate and its private ArtifactEditor, which together present one notes/debriefs artifact list and its edit/approve/share/preview dialogs. Artifact writes are delegated to useArtifactMutation, the command lifecycle to MeetingCommandStatus, debrief generation to DebriefGeneration and PDF preview to SavedMeetingDocumentPreview. One cohesive surface with the portfolio/calendar meeting-artifacts owner; size comes from the notes- and debriefs-mode list plus its guarded dialogs, not a second concern.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "kind": "function",
     "symbol": "ArtifactEditor",
-    "fingerprint": "d76ed5889e6c24d5936166b7d500c813f9fb5cfae5ebfec2a40d29be4d771af9",
-    "reason": "The editor owns one artifact selection and attempt lifetime shared by list rows, retained edit text and conditional share/edit dialogs. O204 applies the existing server-reported capability refusals to the cached current-command predicate and retained-dialog visibility, so both consume the same refreshed row. useArtifactMutation still owns dispatch/attempt state and existing API/contracts own receipts. Keeping selection, admission and concealment together preserves unsaved draft retention; splitting them merely to reduce line count would introduce additional lifecycle coordination.",
-    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "5f691cc050dd7b00ae1aad07cbffe58c3346f9bff2edd50dc45ec936b3d0454b",
+    "reason": "Private component owning the single meeting-artifact editor for one kind: row rendering, edit/share/preview dialog state, and the revision/authority staleness checks in assertReadable/readableRows that fence every change. Write execution is owned by useArtifactMutation and command status by MeetingCommandStatus. One responsibility (present and gate artifact changes) under the meeting-artifacts surface owner; no second data or authority owner is introduced.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
@@ -2809,19 +2805,19 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectivePlanOutcome.tsx",
     "kind": "function",
     "symbol": "ObjectivePlanOutcome",
-    "fingerprint": "cb02bd363ba56728f80f4ea2ba666584c64a9da4c6c80fe03b5da11061949cc5",
-    "reason": "One plan-outcome presentation shows truthful prepared, issues, partial and uncertain states with explicit recovery controls; it owns no transport or persistence.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "f3308b786410dbda88518e77fefc2862a8fb1611f026dd0ef53b38a6fdea937a",
+    "reason": "Renders one objective-plan preparation outcome (busy, error, failure issues, verified receipt) with continue/refresh actions. Plan request state and transitions remain owned by objective-plan-session.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/objectives/objective-plan-recovery.ts",
     "kind": "function",
     "symbol": "createPlanRecovery",
-    "fingerprint": "fbcecad096295582d9a3a5d3e0573c9bbc52d981e09f27d67fdf94ee3190f5bc",
-    "reason": "One canonical encrypted recovery adapter binds source, actor, frozen intent and immutable known outputs under the existing journal and cross-tab command lock; no second storage owner.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "d5a4ae68eaeb896482fec29fb61517ff8bba05ef3f2b1bdb8e5eeec6556bc63b",
+    "reason": "Factory binding objective plan preparation to the recovery journal: job-bound scope, receipt contract with plan/known-output identity checks, and load/reserve/save/lock. It is the canonical plan-recovery owner and delegates source authority to objectiveSourceAuthority.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
@@ -3025,10 +3021,10 @@
     "file": "apps/web/src/features/settings/mappings/AttachFederalRecord.tsx",
     "kind": "function",
     "symbol": "AttachFederalRecord",
-    "fingerprint": "f00704627b5907b1cca22a5b94e0e83c99a4e7b1daaa63b1f679dcb639dabd96",
-    "reason": "Retain as one manual mapping transaction from chosen client/source to selected external record. SourceSearch already owns source-specific querying and record presentation; presentation.ts derives allowed relationship values and award-decision applicability. This dialog owns the selected record, explicit relationship/roll-up inputs and one manual-attachment payload. Client/source/search changes invalidate selection, and source changes reset award choices. Its JSX implements a dependent form sequence, not another entity resolver or transport owner.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "026a000c7003a5e6ffede4360fc9fa98a9bd7b43de982790641d36f704193d6e",
+    "reason": "Owns the manual federal-record attach dialog: client/source selection, search delegation to SourceSearch, the award relationship/roll-up decision and the single manual mapping submission. Presentation facts stay in mappings/presentation.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
@@ -3070,19 +3066,19 @@
     "file": "apps/web/src/features/settings/security-write-reconciliation.ts",
     "kind": "function",
     "symbol": "reconcileSettingsWrite",
-    "fingerprint": "7f9bd5f36daaf654fdcd6c04a604bca4dad5b27f657f81b62fe80c4a90d55a57",
-    "reason": "This is the Settings readback policy owner: each branch identifies the authoritative read and target/result evidence required to confirm the requested current state for one retained SettingsWrite. It never dispatches a write, checks cancellation, bounds queue/audit traversal to20pages and refuses creation/send/rotation operations without sufficient attempt evidence. Receipt validation and metadata storage are separate modules; splitting branches into per-screen callbacks would scatter the fail-closed default and make no-replay review harder. Additional unrelated workflow execution would require a new review.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "11808ce0df77e8b08dc9f1fdf8e27f78c4a8e884040677fe151fbf6fc6710978",
+    "reason": "Module-level function owning read-only reconciliation: it proves one settings write's exact current state by re-reading the canonical operation and never replays the write, expressed as a flat switch over operations. One concern (settings-write reconciliation) for the settings security-write owner; size is the cohesive per-operation read-back table, not a second responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/security-writes.test.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f5c1cfd24f62cd927c33ab8e923e28388eb8f2a9478f32ac944fe1792e5aeca5",
-    "reason": "This test module covers one Settings write-safety boundary across receipt binding, read-only reconciliation and nonreplayable recovery metadata. The long negative-receipt fixture table and explicit target/value/cancellation cases are data and assertions, while snapshot, journal, reconciliation and bulk-review implementations stay imported from their existing owners. Keeping the fixture table with these cases makes the operation-to-evidence contract auditable; it introduces no production orchestration.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "ef75720b2ed214990f2f33c8168e55c79c76c20cdc787f23d7737a669763f92f",
+    "reason": "Test module covering the settings security-write receipt-binding and recovery-metadata boundaries (assertSettingsReceipt, reconciliation, journal fencing). Tests are not application architecture and a long case matrix is not a design defect; the canonical owner is the test file beside security-writes/security-write-reconciliation under test.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/security-writes.test.ts",
@@ -3097,46 +3093,46 @@
     "file": "apps/web/src/features/settings/security-writes.ts",
     "kind": "function",
     "symbol": "assertSettingsReceipt",
-    "fingerprint": "05a085db86711e33613d73863484cb29d447581d818d3c1bd67117094cb629f7",
-    "reason": "This is the single semantic receiver for Settings write receipts after transport shape validation. Explicit branches compare captured target/value where the receipt supplies them; flag-only removal/queue/customer/key receipts and returned invitation IDs depend on the separate required readback before success. It records the invitation ID or reprocess result needed for that readback and rejects unmatched/default cases with the uncertainty fence. Dispatch, storage and readback already have separate owners; the operation matrix keeps those differing confirmation contracts visible without a generic success fallback or authorization engine.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "cc14aa908ec21cb335e2b10cf0a76fa71202d88a07236e3854de8de4f6b18945",
+    "reason": "Module-level function binding a response receipt to the exact reviewed settings write via a flat switch over operations, with isDefiniteSettingsRejection/snapshotSettingsWrite as its co-located helpers. One concern (prove a receipt belongs to this write, stripping credentials) for the settings security-write owner; size is the cohesive per-operation receipt table, not a second responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/useSettingsMutation.ts",
     "kind": "function",
     "symbol": "useSettingsMutation",
-    "fingerprint": "32ab728a1b8667a9900c6fed614df81c75241c57578a5035d0ef2b7429aadd4a",
-    "reason": "This hook owns one section-and-auth-scoped Settings attempt lifecycle and its React Query/journal projection. It connects existing action cancellation, snapshot/receipt policy, nonreplayable storage and read-only reconciliation helpers rather than implementing those policies twice. Stable scope keys, subscription state and local lock all describe that same attempt; extracting them into independent hooks would risk separate lifetimes without another caller or responsibility.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "9e23e027a6267fa96504cfccd521fd8ef2fa5a362bbe2bc59360893a81b33f4a",
+    "reason": "Hook owning the settings mutation lifecycle: it wraps the capiro api so every non-GET write is authority-checked, journaled, dispatched once, receipt-asserted and reconciled, and exposes pending/locked/reconcile to the settings surfaces. One concern (the settings write + recovery lifecycle) for the settings owner; journaling, receipt binding and reconciliation are delegated to security-write-journal, security-writes and security-write-reconciliation.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/useSettingsMutation.ts",
     "kind": "function",
     "symbol": "useSettingsMutation > <anonymous> #4",
-    "fingerprint": "2667e9b561afa523e783b9c68a945b6d9b022362b9b0fd96738eaf5ca73c4b6b",
-    "reason": "This useMemo factory exposes one scoped API facade, preserving raw methods while wrapping only request for the Settings mutation contract. Its large size is the nested request sequence reviewed separately; the factory has no second lifecycle or policy. Keeping the facade and its explicit raw/cache/journal/scope dependencies together makes stale-scope behavior inspectable.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "9f3652b86b5b911ef116ba70a28b81a59af9aa4dc80c096cbc71a3859413f600",
+    "reason": "An inline callback inside useSettingsMutation (the api-wrapper request override or the reconcile action closure, #4 in source order), performing one bounded step of the settings write lifecycle against the hook's own state. It shares useSettingsMutation's owner and state and adds no separate responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/useSettingsMutation.ts",
     "kind": "function",
     "symbol": "useSettingsMutation > <anonymous> > request",
-    "fingerprint": "ef3233c8ba701a8b0f63d21ffb6aeb9d6fbc9cb37c86e9824c44be2a3580cd36",
-    "reason": "This callback sequences one captured Settings write: permit read-through, require signed-in scope, reject an occupied journal, clone input, persist metadata before dispatch, validate receipt/readback and clear only the matching attempt. Its dispatched/accepted flags keep definite pre-dispatch or definite API rejection separate from post-acceptance uncertainty. Snapshot, storage and receipt/readback policies are delegated; splitting this try/catch across helpers would obscure the ordering that prevents replay after an ambiguous write.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "3f7b2d5f3a3c4feb4790d5abca59d39783a97b552f85e6abe14dd610991c9feb",
+    "reason": "The request() function produced inside useSettingsMutation's api wrapper: it is the single wrapped request that validates the actor, journals the frozen write, dispatches exactly once, asserts the receipt and reconciles read-back before clearing. A bounded operation that shares useSettingsMutation's owner and state; it introduces no second owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings",
-    "fingerprint": "246bce636a95ffcfa30b21b7b1722ce3a3266c091b28c87fcece9e9f5faf78cd",
-    "reason": "This function coordinates one integration-settings page: list/capability queries, the selected registration/detail/disconnect record, fixed-operation callbacks and matching status views. The disconnect journal is owned by useSettingsMutation, account registration by RegisterAccount, and URL admission by settingsDestination; server OAuth and sync internals are absent. The large portion is provider/connection markup, separately reviewed below, so a new controller layer would currently duplicate the same selected-account lifetime.",
-    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "57789cefa3702bdb976eaf792349c49c2ffb7aa312ec723040ccee6bd77df9da",
+    "reason": "The integrations settings page component: it renders providers and their connection rows and owns the register/disconnect/reset/detail dialog state and the connect/sync/subscription/disconnect request functions. It composes the canonical settings operations, useSettingsMutation, RegisterAccount, IntegrationHealth, SettingsMutationNotice and the OAuth outcome notice. One screen responsibility under the settings integrations owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
@@ -3151,28 +3147,28 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous> > <anonymous> #2",
-    "fingerprint": "20fc2749d2e875e0b39f50226d56a9c259aa3458c5bd771f87428c75cf75fabd",
-    "reason": "This rows.map callback renders one connection identity, health/error, permission affordance and available account actions against the same connection/provider/capability values. It does not own a separate hook, subscription or persisted state; callbacks reuse parent action handling and selected-record setters. Keeping status and action eligibility together makes the displayed account and dispatched connection ID directly reviewable.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "cc239b0faf3b6dc9528501df147be2a5d9a3ba15c9e0addcadd9e353a97c7428",
+    "reason": "A nested inline callback within one of IntegrationSettings' render/footer closures (a further closure in the same step). It shares the IntegrationSettings owner and state and introduces no independent responsibility or owner boundary.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
     "kind": "function",
     "symbol": "ProfileSettings",
-    "fingerprint": "af8fcf127eef815ec0cc4915edd7c1785054eaa2757e9cc5da7002749373da73",
-    "reason": "One profile list owns status tabs, search, row projection, account-owner enrichment keyed by returned profile ID and archive/restore dialog state. Owner-read failure is explicitly unavailable; status writes verify the returned ID and achieved state. Creation remains in the local dialog.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "3bcd3c76e08b9792829817ab28431b4d756384b21a517383361d7182944be403",
+    "reason": "Owns the profile list screen: tab/search state, archive/restore confirmation and account-owner badges over clients.list. Creation is delegated to the private CreateProfile dialog and the write lifecycle to useSettingsMutation.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
     "kind": "function",
     "symbol": "CreateProfile",
-    "fingerprint": "3903509085a7e126734a5e96fcd57f8b6ca4ee4572069f7fc8e80d0571634fdd",
-    "reason": "One create form owns three draft fields and submit feedback. Its changed busy guard prevents dismissal during a pending write; the existing success callback refreshes the list and closes the form.",
-    "reviewedBy": "Codex independent coherent integration source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "5f200069b822504f8ac902970362d07d4aaedd876b48e9ea702b94699e3bf457",
+    "reason": "Owns the Add-profile dialog: name/website/description fields and the settings.profiles.create submission with its mutation notice. It is the create-operation owner inside the profiles surface, not a duplicate of the list.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/shared/markdown/MarkdownTextarea.tsx",
@@ -3369,10 +3365,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5572e0238ba00ba971baae3999336f1b835d63d52950a902e30abb141b4d126c",
-    "reason": "This CSS module scopes client-overview cards, government/facility details and the embedded timeline with their responsive variants. It changes no global token or cross-feature style owner; the section-specific selectors remain tied to this one page.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "8068cf99a5d601daeb3378d4383918decfd33982a9391165cd5c3b7662d9d18e",
+    "reason": "reviewed-accept for source; visual effect NOT verified here (min-height/overflow visible → combined visual run)",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogDetailFields.tsx",
@@ -3405,37 +3401,37 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "a4ebb9fa8282598a6cc931453f295465405f9e775b5db9127aa63ab232cb6ef0",
-    "reason": "This module presents the existing integration-account settings surface: provider cards, connection status/actions, selected-account permissions and disconnect confirmation. Provider metadata, account registration, destination validation and uncertain-write lifecycle already have separate owners; the only file-local helper formats sync age. It contains fixed API calls and view state, not OAuth/token exchange, mailbox sync algorithms or authority enforcement. Retaining these mutually related views avoids distributing selected connection and disconnect state merely to reduce line count.",
-    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "5cd78d6b2270b90f78fba42e645cc27c8ff6d1f25d1ae6f1004044538bae8cce",
+    "reason": "Module for the engagement-integrations settings surface. Contains the exported IntegrationSettings page plus its private helpers (syncAge and the connect/sync/configureSubscriptions/disconnectAccount request functions), all serving that one admin surface. The operation catalogue is the canonical shared/capiro operations registry, the mutation/recovery lifecycle is useSettingsMutation, and outcomes/health/permissions are delegated to integrations/outcomes and integrations/IntegrationHealth. One cohesive surface owner; size is the provider/connection card layout, not a second concern.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "3114e89fb80d8dc4e887d92593229dd1eec095fb674a363e490730b05e166101",
-    "reason": "This source contains one active/archived profile-settings screen and its local CreateProfile dialog, plus a date formatter and Client type for that same domain. Moving the dialog solely to satisfy a line threshold would separate closely related profile actions without adding an owner.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "c8a7a2f539ad30f79af158d83f6b35a367cc6c4fa9b6e9df7e23de710b92866c",
+    "reason": "Settings surface for the client-profile directory: one screen plus its private Add-profile dialog. Both belong to the profiles settings operation set, reuse the shared settings mutation/notice primitives, and introduce no second data or authority owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/TeamSettings.tsx",
     "kind": "function",
     "symbol": "TeamSettings",
-    "fingerprint": "bdbcd28dc2c8cc7fde7027f22e8122ef85d5b6bc647c40c35d87601ce61ce36a",
-    "reason": "The component composes membership and invitation projections of one team roster, including role/billing controls, invitation resend and selected-member removal confirmation. Both list reloads deliberately share the same refresh and team mutation scope; InviteMember already owns invitation-entry state, while query, mutation, table and dialog primitives own their respective mechanics. Column definitions and modal markup account for the size; no backend membership policy or separate persistence subsystem is implemented here.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "0385e09b2bcbd53feac0cd2bcd8f5bba8c081593f67419727833e646661df4bb",
+    "reason": "The team settings component: it renders the members and pending-invitations tab surfaces and owns their local tab/invite/remove state, issuing role/billing/resend/remove operations through useSettingsMutation. Row permission gating is delegated to team-permissions. One screen responsibility under the settings team owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/shared/capiro/operations/settings.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "692c8cc4863eb59fbfeb7db9aa18518506f47481feb98f9de5d6eb22eb9135ae",
-    "reason": "This is the existing declarative Settings gateway-operation catalog: fixed service/method/path, strict request schemas and response-shape validation, explicit limits and backend source attribution. Reusable wire schemas already live in settings-schemas and request execution in the gateway/http owners; the file contains no transport execution, provider implementation or authorization decisions. Keeping the catalog export together preserves a single typed registry owner and makes the branding name-only contract auditable without introducing a parallel registry.",
-    "reviewedBy": "agent 3 v1 source-cohesion review; proposed for coordinating-owner registration",
-    "reviewedOn": "2026-10-22"
+    "fingerprint": "269b8e4b11c663c7bd3a12039b7251800488f33944c9c278034ca103d2c2dc15",
+    "reason": "The canonical settings-operations registry: a flat table of operation definitions (id, labels, request/view projection, schemas, target route). Single responsibility is the settings operation catalogue; splitting it would fragment one owner across files, so the size is a cohesive data table, not a defect.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
@@ -3459,19 +3455,19 @@
     "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
     "kind": "function",
     "symbol": "MeriLiveConversation",
-    "fingerprint": "fcb1feba2430cb60fde78af5d91cc19db397314c9102824bfe8512b739b575b5",
-    "reason": "This component composes one session-bound conversation, composer, lifecycle and panels. It adds only the tab-return hook invocation; read dispatch, cancellation, current access and durable outcomes stay in their established owners. Existing lifecycle busy state also disables the visible manual action. No new domain logic is added to the composition function.",
-    "reviewedBy": "Codex independent MF-05 reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "2c2c49a7514b443811dd31c293b09ab84d5b41edf56a961efc0550269b58af9a",
+    "reason": "The live conversation screen component: composes session lifetime, run availability and status into the live view. Single presentational-orchestration responsibility for the meri conversation owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
     "kind": "function",
     "symbol": "useConversationSession",
-    "fingerprint": "aa553e07735c3720fe736dbc7f85c94d1b954012cf4a5164babaa8c70398f9c0",
-    "reason": "This hook composes one selected conversation lifetime: connection, saved-history view, draft and next-turn intent. Selecting a newly bound accepted run retires only the predecessor draft capture while retaining typed text; replacement sessions for the same run retain its capture. Request/run matching lives in initial-draft.ts and command identity remains in the canonical journal. Independent cross_run_review found no additional responsibility requiring extraction.",
-    "reviewedBy": "Codex root and independent cross_run_review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "6cdd65962f7c9c08fa76e009d3ecb2253b28f0cbd470e13b76183f9940014f07",
+    "reason": "Hook composing the screen lifetime of a conversation controller into React state, with its private useTurnOpening/useSelectedHistory helpers. One concern - session lifetime - for the meri conversation owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/shared/meetings/MeetingArtifacts.tsx",
@@ -3513,10 +3509,10 @@
     "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
     "kind": "function",
     "symbol": "MeetingForm",
-    "fingerprint": "80d852aced890d4d4dd01818924ccea78a37715815d72874b9be4be266b5c91a",
-    "reason": "Retain this one meeting-draft form. Subject, time, description, location and selected client are submitted together and share the pending/uncertain lock, local validation and close behavior. The form converts civil input using the existing range owner and delegates assignment intent to meetingAssignmentFields and dispatch to useSaveMeeting. Client availability and current-read feedback determine whether this same draft can be submitted; they are not a separate client-management workflow. The existing keyed callers reset the draft when the editor opens/closes. Splitting individual fields or validation JSX would disperse one submission contract without removing business or transport logic, which already lives outside the form.",
-    "reviewedBy": "Codex orchestrator: exact formatting and unchanged AST/cohesion review",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "e721489ab8998aba3322f565cca1b60768d161bc3d043d70f2dc4fc8c04cf150",
+    "reason": "Owns one meeting create/edit dialog: client selection, retained-draft display, zoned time conversion and submit validation. The save command, recovery status and assignment fields are delegated to useSaveMeeting, MeetingCommandStatus and meeting-save rather than duplicated here.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/mutations.ts",
@@ -3531,10 +3527,10 @@
     "file": "apps/web/src/features/meri/memory-review/MemoryCorrectionComposer.tsx",
     "kind": "function",
     "symbol": "MemoryCorrectionComposer",
-    "fingerprint": "9db9d5c18c631b102e794c3d9d6acefef28ab392814ceaca3d97a80a3e99a814",
-    "reason": "One Core-selected personal-memory correction form: selection, current-text display, bounded draft and submission feedback. The hook owns transport, CAS capture and unknown-outcome holds; the component owns no authority or canonical writes. Pending submission now disables the draft alongside selection and refresh, preventing success from erasing newer edits. Disabled/default and pending/uncertain behavior are exercised by real-browser fixtures.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "99414b66fdccd69e0becaa5ccfd758bf44b489bbf7c47f77a1202a1b9e7f378f",
+    "reason": "The Institutional Memory surface component: renders owner memory recall results and the correction-drafting form for that one surface. Recall (read) and correction (write) are the documented responsibilities of this single owner-reviewed surface, so it stays cohesive.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/MemoryOwnerInbox.tsx",
@@ -3567,46 +3563,46 @@
     "file": "apps/web/src/features/meri/memory-review/useOwnerCorrection.ts",
     "kind": "function",
     "symbol": "useOwnerCorrection",
-    "fingerprint": "dba76f4c36da12d89d94d77d9466f3894a861252e3ceff276f4f3ad676c6ccd5",
-    "reason": "One account-scoped correction workflow lifecycle. It loads controlling items, captures their microsecond CAS, manages pagination and records unknown submission IDs before dispatch. Generation and abort guards fence stale reads; ApplicationBoundary remounts on account/session/org changes. UI presentation and Core HTTP validation are separate owners. Its nested propose routine is separately reviewed.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "e32442ae2cb6e94ffd2885ba5342fdad073bf10957d6fba2cc0a33518dd5c687",
+    "reason": "Hook owning the owner-correction list, paging and propose flow. One concern - owner corrections - with the memory-review module as canonical owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/useOwnerCorrection.ts",
     "kind": "function",
     "symbol": "useOwnerCorrection > propose",
-    "fingerprint": "a3a8fec0ca263c102c5dad69388f9ba56109a6ec054c9b12a51987695df2dc32",
-    "reason": "One correction submission transaction: capture the selected item and expectedUpdatedAt, persist a nonsecret uncertainty marker before POST, release only for definite refusal/non-dispatch or validated review receipt, otherwise preserve the hold. It never applies canonical memory locally or invents a reconciliation endpoint. Browser tests verify pending immutable input and unknown-result persistence across reload.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "db54b10b1e5b482754070983234a32a6b03b2d723a6682fa77579318bfaa584b",
+    "reason": "The single propose operation (validate, POST and resolve one correction, with hold/recovery). A bounded operation inside the useOwnerCorrection hook that shares that hook's owner and state.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/useOwnerMemoryInbox.ts",
     "kind": "function",
     "symbol": "useOwnerMemoryInbox",
-    "fingerprint": "02356eb65a6d80ab6dc258c249dfd6184bdf42f976e43989a295d21f4b9a7300",
-    "reason": "One owner inbox lifecycle combining paged reads with the same account-scoped decision journal and explicit terminal-status reconciliation. Page abort/cursor checks fence stale windows; verification is bounded to twenty existing IDs and requires a validated terminal receipt, never list absence. Presentation, wire projection and server authority are separate. The decision transaction is separately reviewed.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "0c963cb7bc3ee6f1d4e6c4e754fb712d813ad47c8c8c5eff9ac7eaba3f44cc1d",
+    "reason": "Hook owning inbox load, paging, decide and verify. Large but a single inbox-state responsibility; decision hold/recovery mechanics are delegated to shared hold helpers rather than duplicated here.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/memory-review/useOwnerMemoryInbox.ts",
     "kind": "function",
     "symbol": "useOwnerMemoryInbox > decide",
-    "fingerprint": "0679f1b6ddbfc786a516641aa09edff1e5a3a3900d7f4faa3aafb6229b059a85",
-    "reason": "One captured owner-decision transaction across addition and governed-version endpoints. It reserves a nonsecret ID before dispatch, binds the chosen candidate and decision, releases only on definite Core results or confirmed non-dispatch, and retains ambiguous writes for read-only status verification. No browser value grants owner/tenant authority, no automatic retry changes the action, and no active-memory state is fabricated.",
-    "reviewedBy": "Codex frontend source receiving review",
-    "reviewedOn": "2026-10-21"
+    "fingerprint": "0cf18e9eedd149b3e1c2df22c33cd94ecda70bc525765ca81ca5722a1f08f38c",
+    "reason": "The single decide operation (apply a decision, maintain hold/recovery). A bounded operation inside the useOwnerMemoryInbox hook sharing that hook's owner and state.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/MeriHome.tsx",
     "kind": "function",
     "symbol": "MeriHome",
-    "fingerprint": "f6a15e0d845644a231b551a8f63cee6567a71e4e97c09496c305ce08305c3cff",
-    "reason": "One Meri landing-page composition: current identity/client-or-General presentation, capability-gated conversation host, and links to existing workspaces. Identity, session authority, bootstrap, approvals and workflow behavior remain delegated. The 81 nonblank lines are mainly explicit JSX; extracting fragments solely to cross the threshold would not create a new responsibility boundary.",
-    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "8c935e604fc1e1f4f32b30e01f2cbafa3fe20e48f458a1f0f9b8cba6c3c7b9fb",
+    "reason": "Meri's landing screen. Resolves and describes the active session identity and selected client scope, then renders the conversation host and the workspace entry links. One screen-level responsibility with the meri feature as canonical owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
@@ -3621,10 +3617,10 @@
     "file": "packages/meri-client/src/conversation-client.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "1e1797b909c9c16285f8624b6f85462d0003df1afb72d59e54f8d702dd67edfa",
-    "reason": "One public conversation connection state machine: retained initial/input admission identity, submit reconciliation, history binding, cancellation receipt and attachment of the current observation. ConversationNetwork owns credential/HTTP/deadline disposal, ConversationObservation owns cursor/event projection, conversationChat owns upstream UI transport, and public contracts own wire admission. Initial and next-input methods share the exact retained intent and uncertainty state; separating them into competing owners would weaken reconciliation. General only extends context correlation with the canonical actor-private scope; no model loop or server authorization is reproduced.",
-    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "a404679ff28ac1481053348ed543866c12c700a776a68b69cac27101bb673d33",
+    "reason": "The meri-client conversation client: the ConversationConnection class for one admitted run plus the createMeriConversation factory. Single responsibility is the public protocol client for one conversation run; the many methods are the run's operation surface, not separate concerns, so it remains cohesive.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
@@ -3846,19 +3842,19 @@
     "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
     "kind": "function",
     "symbol": "Connected",
-    "fingerprint": "daa937f215f8cf64bb9939e287af815b91708f750d5c6002c89ed7ac268cba03",
-    "reason": "PR162 exact48ddc9d: one routine connection composition for the immutable tenant/actor/client owner. The existing canonical issuer, controller, workflow and typed access stay separate owners. The added expiry-only effect and access-loss reset govern the same connection visibility; they add no credential, transport, storage or command-retry subsystem.124 nonblank function/204 file lines, unchanged imports. Mounted held-reauthorization, retry, refusal and identity-switch cases plus four causal mutants support the boundary. Keep cohesive here; splitting merely to satisfy the threshold would separate tightly coupled lifecycle state.",
-    "reviewedBy": "Independent Primary reviewer (Wave 2)",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "6705a7ca112d4798e15c31c8d1cf6870bbf7b02ba35c95b9db1c75427ab69ad5",
+    "reason": "The routines host: binds the session lifetime controller to the routines workflow and renders it. One responsibility - host the routines workspace in a session - for the meri routines owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
     "kind": "function",
     "symbol": "RoutinesWorkspace",
-    "fingerprint": "dffbd9bc74029f6458073a4cbbaa3f0f6160ae56765e200a2f7a708336e18ede",
-    "reason": "PR162 exact48ddc9d: one routine workspace owns local page/cursor/loading/editor lifetime and renders existing RoutineReview/RoutineForm/RoutineCancellation components. The opt-in predicate retains only a same-owner unsent New editor; both old/current denial latches, saved commands and existing-routine edit/cancel paths still clear it. Service data resets and stale-result fencing stay in this owner; mutations/journal/receivers remain delegated.222 nonblank function/244 file lines, unchanged imports and unchanged86-line row renderer fingerprint. No new domain responsibility or generic persistence framework; no extraction is warranted for this narrow lifetime change.",
-    "reviewedBy": "Independent Primary reviewer (Wave 2)",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "8d29aad000bbf56751166d65debf47fe5754e0e94043d17aa9414dc4332196d7",
+    "reason": "The routines workspace: routine list, prepare flow and workspace actions. One workspace responsibility for the meri routines owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
@@ -5363,10 +5359,10 @@
     "file": "apps/web/src/features/meri/conversation/useLiveRun.ts",
     "kind": "function",
     "symbol": "useLiveRun",
-    "fingerprint": "4b013923d8e009d0f573f46eaf30c9c19bddaa82343e7576fc3818007e58f725",
-    "reason": "This hook coordinates one admitted run command and observation lifetime. Manual and tab-return refresh reuse the existing coalesced history wakeup and generation fence; Stop/Pause retires old callbacks synchronously. Command journaling, transport admission, bounded subscription and authority remain in their existing owners, with no command replay or second queue.",
-    "reviewedBy": "Codex independent MF-05 reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "7c5f75a63e80490efe8d93c5f9d9e188e778b8c7ed176c4c6942b40cc2c0ba0d",
+    "reason": "Hook composing the session-bound live run state. Single responsibility - bind the live run to the active session - for the meri conversation owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/useRunObservation.ts",
@@ -5390,10 +5386,10 @@
     "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "f5d1187bbc173208529d4f73ad0c1a16996743df26b6e174a5d13d0df05e3847",
-    "reason": "This module remains the mounted conversation presentation and interaction composition. The separate local hook owns focus/visibility listener attachment and cleanup for that exact lifetime, with a timestamp-only cooldown and current public-snapshot eligibility checks. It delegates one read wakeup to useLiveRun; there is no timer scheduler, transport, persistence or authorization implementation to extract into another owner.",
-    "reviewedBy": "Codex independent MF-05 reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "9b826e5960b4c66ae52b4988c56cfb34bccd1fc306791bf190dcae010bf79d10",
+    "reason": "Module for the live-run screen. Contains LiveTurn row rendering, composerAvailability, the private useDraftAcknowledgement/useSettledRefresh/useExternalRunRefresh hooks, CurrentRunStatus and the MeriLiveConversation component - all private to presenting one live conversation. Cohesive module responsibility; over the 400 file threshold but no second concern is present.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/RunStatus.tsx",
@@ -5525,63 +5521,63 @@
     "file": "apps/web/src/features/portfolio/relationships/thread/NativeMailReply.tsx",
     "kind": "function",
     "symbol": "NativeMailReply",
-    "fingerprint": "63911aebd8ad43c1b76589f29df7b487e6f6e9a75e82ab51350adec03f7ecc2f",
-    "reason": "NativeMailReply owns selected-original/current-revision/current-connection mount eligibility. The incoming-file panel is keyed by scope, selected original, revision and connection so those changes retire its lifetime; moving that gate into the leaf would give the leaf an authority responsibility it does not own. Independent decision: work/hermes-review/incoming-mail-files-review/FE-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "8d1b157a548ae17637d306f48670b2e5637f38471c1971c904a184897b5f1460",
+    "reason": "reviewed-accept (function size, 201 nonblank) — the composer now guards the recipient explicitly: the reply/reply-all controls require a real recipient before opening and the open-state effect bails out when the reply has no usable address, with an added regression test covering an empty to list. This is the requested UI robustness guard; Core already rejects an unsupported empty To, so no server crash is claimed or relied on.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
     "kind": "function",
     "symbol": "DecisionControls",
-    "fingerprint": "97ff1a729d63631a7bb06da6b63c3ab1ec6ac2d68307d4dfe6873beb8451f75d",
-    "reason": "One current-state decision-control owner. The typed watch branch preserves arm/confirm, read-only uncertain recovery, expiry and closed behavior. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "66fb493c28e0e13de099ec29d0f2230a4a561594067a7702f8e7782bd548c7cf",
+    "reason": "reviewed-accept — refactor to one uncertainOutcome table; no authority change",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/decision-recovery.ts",
     "kind": "function",
     "symbol": "intentDecisionRecovery",
-    "fingerprint": "215b4cb8b9a8f3fbc2e1d34896caf4bfe1f1cb023f2f2804e0d791847c74207d",
-    "reason": "One saved-decision reconciliation owner matching the current proposal and delivery. The additive watch membership introduces no transport or ledger. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "06a6a2a7b1c751faf289ac7cbbd33466028411580987d237733f826cdb985d88",
+    "reason": "reviewed-accept — adds research_action to the read-only recovery set",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "5550483bea836ca0a9d7b307ee9322b9451f477cd9a7087ad982244fd885cc82",
-    "reason": "One shared field vocabulary and typed intent projection module changes only by importing and dispatching to the saved-note leaf. A size-based split is refused because it would fragment the shared vocabulary and separate dispatch from its vocabulary. Independent decision: work/hermes-review/note-fe-review/FRONTEND-REVIEW.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "d23a5d3825d7955092642952c3d53da36f9a89b0ab08ae2370732cd3fab203d8",
+    "reason": "reviewed-accept — file was already >400 nonblank; single proposal→row registry retained",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "function",
     "symbol": "intentRow",
-    "fingerprint": "105a015b1c74953297ed3a63201e4cd2ea02c468e6b206072768b893c63d777c",
-    "reason": "One ordered case ladder projects one current typed intent item through its exact family owner. The saved-note branch preserves the single-item dispatch responsibility. Independent decision: work/hermes-review/note-fe-review/FRONTEND-REVIEW.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "548fe3c6137b0f5edf455d6337c506883bad3f3ccffdf458b89e7aeab9c3efb4",
+    "reason": "reviewed-accept — adds the research_action branch",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
     "kind": "function",
     "symbol": "useConversationIntents",
-    "fingerprint": "d35f739ffbcf5eb8f63615cce812e1224579db8f13f57b62174a8433d4d5294d",
-    "reason": "One list, current-guard, journal-recovery and decision lifetime owner. Watch participates in the existing read-only reconciliation and exact single-request path. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "953790a9678aa5073a5b51c9491267b03d7ab4d71ed1d2d6d4c441f2a35f68ab",
+    "reason": "reviewed-accept — terminal-status awareness only",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
     "kind": "function",
     "symbol": "useConversationIntents > <anonymous> #6",
-    "fingerprint": "39de499d40615fd042a266a0f932637828d2b3b9894cee3d47f463f4697c2d6f",
-    "reason": "One decision callback owns its readiness, pending, expiry and prior-attempt fences. Uncertain domain actions read their owners; a new confirmed decision sends one exact request. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "3f2fe84231b102f311470346ee1db3cf2ee60750a25b2a69c288bde07481c1a6",
+    "reason": "reviewed-accept",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5597,27 +5593,27 @@
     "file": "apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx",
     "kind": "function",
     "symbol": "ResearchSettings",
-    "fingerprint": "a696fe85d290697e058a150bfb5dd2f9785b6852537e1b68110d2c6e69370c03",
-    "reason": "The portfolio settings screen adds a current active-link warning before its existing unlink/archive actions. The modal captures the exact existing action and continues on the user confirmation; actual grant/revision checks remain in Core. This is one settings workflow, with shared query and modal components already separated.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "578bf0ee226feddb9aabb0f54b37690af6f851b0c3ef6d45ba0b3e2f7a03b716",
+    "reason": "reviewed-accept — canManage vs editable split; grants stay visible",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "2e1419270e791947db934174083a29f2d485a85d5d284f0381d2b05548b5a4e0",
-    "reason": "The editor retains one layout-interaction owner for grid selection, pointer/keyboard movement, size and responsive ordering. Announcements derive from the same accepted layout operations and report refused moves. Geometry/history helpers and recipient rendering are separate modules; no publication, data calculation or server authorization was added.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "8d189c92c1fb905c267f0abf410f719ead3e7725d768e6b46a601db9e834b145",
+    "reason": "reviewed-accept — already >400 before",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
     "kind": "function",
     "symbol": "DashboardDesigner",
-    "fingerprint": "202c21d877f963d556faa14c581b2fea4128b4928781c99ed9281f56f8843bbf",
-    "reason": "The editor retains one layout-interaction owner for grid selection, pointer/keyboard movement, size and responsive ordering. Announcements derive from the same accepted layout operations and report refused moves. Geometry/history helpers and recipient rendering are separate modules; no publication, data calculation or server authorization was added.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "6307e8655e8f66492cc84e22b49638db1cfbb723738ddd81e5dadcecff8606fb",
+    "reason": "reviewed-accept — SH6/SH7 verified",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5651,9 +5647,9 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7e27e5d3473c2f90d2bb943aadec3d1f24b9d707d6d0c69c047c762c05578967",
-    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "b2a35b536b4b4ea4fd8e6a7852d9bf9c0f1d08cb55735da6450470b48d1758cd",
+    "reason": "reviewed-accept — already >400 before",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5678,9 +5674,9 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/ResearchSharing.tsx",
     "kind": "function",
     "symbol": "ShareLinks",
-    "fingerprint": "97e205543f9da5abfb2605a02b86aac8e7ad798c402a1daf31bd63efbb5e255a",
-    "reason": "The module composes the portfolio sharing settings, named design controls and links list. Settings retains PIN/enable presentation; ShareLinks retains link status/revoke presentation. Exact preview/publication was extracted into PublishShareDialog and recovery into a hook, keeping capability persistence and frozen rendering out of this composition.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "67c0f41c7b9068557b662c2ac93484d16996f693b4f71168b97f58941baf8801",
+    "reason": "reviewed-accept — SH5 verified, degrades safely",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5777,9 +5773,9 @@
     "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
     "kind": "function",
     "symbol": "useConversationIntents > <anonymous> #4",
-    "fingerprint": "3b3319aa71e39c13d57800c3b72f39ad111b324a29f8322813507706555f08fc",
-    "reason": "One current-list journal reconciliation effect. Exact settled watch results acknowledge the existing journal; unreadable or unresolved results remain uncertain. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
+    "fingerprint": "06792b7da61a2c8101b6d632591add5d48b7e5fd6020595695ba124d21c2eb32",
+    "reason": "reviewed-accept",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5854,6 +5850,987 @@
     "fingerprint": "e80ca51d8ae779fc7434db3c2ebe78b600b2f37e5c007300c8a101b469431d5e",
     "reason": "One actor/client/API-epoch-scoped Undo recovery lifecycle for a single client: scope derivation, activation epoch, abort lifetime, one in-flight operation lock, recovery read and post-dispatch status refresh. Journal persistence stays in shared/session/recovery, the stored-attempt contract and scope key in quick-log/command-undo, write authority in quick-log/authority, and command validation/execution in quick-log/actions (which keeps the strict scope assertion). The render-time containment only maps an unverifiable identity to 'no saved Undo'.",
     "reviewedBy": "Hermes Agent independent source review",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
+    "kind": "function",
+    "symbol": "DocumentCanvas",
+    "fingerprint": "2ba18d05fb5020ef28335a436f39a0c6f92e6e204d9ddf77b261337a4f675437",
+    "reason": "Private presentational canvas for one Hill Day document: it renders either the cover/schedule or the selected section and exposes only edit/reset callbacks. Document queries, mutations, export and delivery stay in DocumentEditor/HillDayExport, so it holds no second data or authority owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/commands/MeetingCommandStatus.tsx",
+    "kind": "function",
+    "symbol": "MeetingCommandStatus",
+    "fingerprint": "768d74f9b2f2ca642d9a113da11e153954259e4b863d8ff3bdbcf98fc7b0129d",
+    "reason": "Renders and dispatches recovery actions (check/retry/done/review) for exactly one saved meeting command attempt. Attempt state belongs to useMeetingCommand; this unit presents it and owns no journal or API authority.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/commands/recovery.ts",
+    "kind": "function",
+    "symbol": "runMeetingCommand",
+    "fingerprint": "a11b9d1f99c71d07067809b47789ae19b29915e01dc8970148c51b6d91069a14",
+    "reason": "Single orchestrator for a meeting command lifecycle in the durable recovery journal: scope derivation, reservation, canonical re-binding before send, and acknowledge/retire transitions. It is the canonical meeting-command owner; transport and journal primitives remain in the shared recovery module.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/commands/recovery.ts",
+    "kind": "function",
+    "symbol": "runMeetingCommand > <anonymous> #2",
+    "fingerprint": "cf1455d5c4a1ca48744a01f282ce4b249658f681d760edcd7d186cc0e05ef67f",
+    "reason": "Inline transactional body executed under withRecoveryCommandLock for runMeetingCommand. It carries the same single command responsibility and exists as a closure only to hold the exclusive lock, not as a second reusable or duplicated owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/sharing/targets.ts",
+    "kind": "function",
+    "symbol": "sharingTargets",
+    "fingerprint": "95cec94190ce00a2075be0d9f374adf9e493bb523dc3684728dfe13310080648",
+    "reason": "Pure derivation mapping a meeting's artifacts, plus readiness/approval/confidentiality/admin facts, into sharing targets and share/unshare reasons. It is the canonical eligibility owner, performs no I/O or mutation, and does not duplicate the sharing dialog's authority.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientMeriHandoffDialog.tsx",
+    "kind": "function",
+    "symbol": "ClientMeriHandoffDialog",
+    "fingerprint": "724c658b0741b0a948fc48e76dd38b5363b2da2ea3696c92f6e4c210c2a277b6",
+    "reason": "Canonical entry for the client-to-Meri handoff: re-reads identity and the client at click time, rejects changed or archived scope, writes the unsent draft to the conversation handoff store and routes to Meri. Authority comes from shared identity/client/capability contexts and nothing is sent here.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/ActivityCommandStatus.tsx",
+    "kind": "function",
+    "symbol": "ActivityCommandStatus",
+    "fingerprint": "531803f00bd5d5640f540cdc74048427ab25092cc406a9c4135ced8d3125aacc",
+    "reason": "Presents exactly one retained quick-log activity command and its recovery actions (read, recover, resume, done). Command state, authority and journal transitions stay with useActivityCommand and the quick-log command modules.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/FileAccess.tsx",
+    "kind": "function",
+    "symbol": "FileAccess",
+    "fingerprint": "a2bfa16e5344058a911c3af671808d16cdb6a7748bfffa4353b049fea1b93414",
+    "reason": "Owns one file/folder access-review dialog: frozen review snapshot, file selection limits, viewer mode/membership and the saved-attempt recovery surface. Command construction, execution and recovery are delegated to file-access-command and useFileChange.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/MoveFiles.tsx",
+    "kind": "function",
+    "symbol": "MoveFiles",
+    "fingerprint": "560cdc144d078f17acb4f0a7a8fb33692f4cdecf709cf9ae60f87c4d1da6285c",
+    "reason": "Owns the move/create-folder dialog for a reviewed file set: destination input, retained-move status and check/retry/retire actions. Batch command semantics and execution remain with batch-move and useBatchMove.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/file-access-recovery.ts",
+    "kind": "function",
+    "symbol": "fileAccessRecovery",
+    "fingerprint": "d29129b349ccfeef2b013537af5d248de91a8a168b8db10ddcaaf685777bd867",
+    "reason": "Factory that binds the file-access command family to the durable recovery journal: scope key, strict contract, digest verification, and load/reserve/update/acknowledge/retire/lock. It is the single recovery adapter for this command and performs no UI or transport ownership.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/folder-access.ts",
+    "kind": "function",
+    "symbol": "saveFileAccess",
+    "fingerprint": "641622e3ddad5f87b6dfcd4a5b080799d83a5f2193060552ae990ae5b0024cf2",
+    "reason": "Canonical executor for file and folder access changes: validates the reviewed manifest against cached current files, resolves the retained command, runs under the journal lock and maps Core outcomes into cache/recovery state. It owns this command end to end without duplicating the dialog or the API contract.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/folder-access.ts",
+    "kind": "function",
+    "symbol": "saveFileAccess > <anonymous>",
+    "fingerprint": "697cd905b07769c2da5fc11c1dbb12417e43c6830f91f0386a94b5dc47eb4e64",
+    "reason": "Inline locked transaction body of saveFileAccess passed to recovery.lock. It holds the access-command state machine inside that same single-responsibility executor; it is a closure for lock scoping, not a separate owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/NewClientConversion.tsx",
+    "kind": "function",
+    "symbol": "ConversionSession",
+    "fingerprint": "7e0f787d0801a43b17d0c28113bc71795c71e3b6dfd70756bd6637229049820d",
+    "reason": "Owns the new-client conversion review dialog: duplicate-review acknowledgement, capacity gating, retained-attempt/recover/refusal/acknowledge surfaces and focus return. Command authority and execution remain with useNewClientConversion and new-client-command.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/useNewClientConversion.ts",
+    "kind": "function",
+    "symbol": "useNewClientConversion",
+    "fingerprint": "1671eef11a44fc95cf4cd041f58cde73b55ed3bbc4756001389f6f99c81088d6",
+    "reason": "Single hook owner for one prospect conversion: reads the retained attempt, exposes ready/pending/receipt state and one mutation entry point. API calls and journal transitions are delegated to new-client-command and the shared recovery journal rather than reimplemented.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/useNewClientConversion.ts",
+    "kind": "function",
+    "symbol": "useNewClientConversion > mutationFn",
+    "fingerprint": "d70ea982e01e7a5a297ecd53a04a0efb0a9aa0beb7e1723bc245f20a8c2a1512",
+    "reason": "Executes one conversion command action (create, recover, acknowledge, retire-refusal) under writer verification and the recovery lock, then invalidates the affected queries. It is the command transaction for the hook and holds no separate state owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/useNewClientConversion.ts",
+    "kind": "function",
+    "symbol": "useNewClientConversion > mutationFn > <anonymous>",
+    "fingerprint": "4d26519acf606adfa640ffb0fb5a7b2d0e3178c4ea58496151781c3756005596",
+    "reason": "Inline locked body of the conversion mutationFn passed to withRecoveryCommandLock. It sequences current-record and duplicate revalidation plus the exact-request dispatch inside that single command transaction.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/thread/ThreadContent.tsx",
+    "kind": "function",
+    "symbol": "StoredMailBody",
+    "fingerprint": "8ec0cfce6f18e7708c7a82243b8b38ff6250f754c16f6d6975cccc56a10453e3",
+    "reason": "Private helper rendering one stored message body and loading further body pages against the thread's asOf, revision and body hash. Thread ordering, layout and read scope are owned by ThreadContent and the email read module.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/BrandingSettings.tsx",
+    "kind": "function",
+    "symbol": "BrandingForm",
+    "fingerprint": "6ea53dbe926cfad360b6fcf864aefe012a7df6f582b255cda9cb4d4955640803",
+    "reason": "Owns the branding edit surface: company-name form state, logo type/size validation and the upload-ticket/confirm flow, plus its local notices. Page query, sync status and mutation lifecycle are owned by BrandingSettings and shared settings hooks.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/BrandingSettings.tsx",
+    "kind": "function",
+    "symbol": "BrandingSettings",
+    "fingerprint": "35909a1a4e60ce566d942911651020048158a9468a4596e9616c06028f0be1f3",
+    "reason": "Owns the Branding settings screen: current branding read, save receipt/superseded status and the organization-sync retry notice. Form-level state is delegated to BrandingForm, so no operation is duplicated across the two.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/RegisterAccount.tsx",
+    "kind": "function",
+    "symbol": "RegisterAccount",
+    "fingerprint": "0e9c88b9fb449d850f87b2d33b345bddc9ed8653cf8b7f94b275f99989b5325c",
+    "reason": "Owns the integration account-registration dialog for one provider: email/display-name state, reviewed body construction and registration-receipt assertion. Provider catalog, action lifecycle and refresh remain external to it.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/SupportRequestForm.tsx",
+    "kind": "function",
+    "symbol": "SupportRequestForm",
+    "fingerprint": "cb621df51a98eeacc479a21885a3b4934972c6b6f96e4cc9484c136ba21d569d",
+    "reason": "Owns the support-report form: only the reviewed summary/detail and optional run reference are submitted, under the shared settings mutation notice. It defines no data ownership beyond the single support.create operation.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/billing-flow.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "6ba92d7400149cfa379d56dbc78736ad3f25e225135ce189f5faf72def95894e",
+    "reason": "Single describe group for the billing handoff contract: billingFlow selection by status, permission re-check before dispatch, destination allow-list and cancellation. It is the test owner for billingFlow/requestBillingDestination and carries no production responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/branding-sync.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "b4cac83a8919b7a2bbc78d2aa5f44994cdb10343065a2084280eae63028ac539",
+    "reason": "Single describe group covering provider-convergence statuses, retry-operation body rejection, current-identity verification and cancellation for branding-sync. Cohesive test owner for that one module.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-action.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "facb14ada69dfde27952c1519b9d3c03658fccf58558010cb5ae07beeacf9602",
+    "reason": "Test module for the settings write-security contract: one SSR hook-probe harness plus describe groups for accepted-metadata recovery, dispatch lifetime, personal-title recovery and remaining form recovery. All groups exercise the same useSettingsMutation/security surface, so it remains a single cohesive test owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-action.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #12",
+    "fingerprint": "a6f8467d1ce039c712bdee3d70d0710d10f62b47b6475fc230c44813b45d7e89",
+    "reason": "Describe group 'Accepted Settings response metadata survives reload': accepted resend, reprocess and signature receipts must survive readback denial and reload without replay or retained secrets. Cohesive per-behavior group within the settings write-security test module.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-action.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> > <anonymous> #5",
+    "fingerprint": "e98d0729e2297139250ada7bc08b949316fe7353812f1ec0cac1bf83c86acc47",
+    "reason": "Parameterised it.each case (a validated late receipt is retained only in its original scope) belonging to the accepted-metadata describe group. It exercises one behavior across three operations and is not a separate owner.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-action.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #14",
+    "fingerprint": "4edbf9146f1971cbeeefb468873b1c60fe04bc61d81d63ed405461955837117a",
+    "reason": "Describe group 'Settings dispatch lifetime': revoked-actor preflight, scope-change cancellation, single dispatch with frozen input, mismatched-receipt fencing and readback denial. Cohesive group for dispatch-lifetime semantics of the same settings mutation hook.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/security-action.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #16",
+    "fingerprint": "5555f3325fe8c5037d5b4617cb7543b081bb52f6d16dd6b6adf901980ba60534",
+    "reason": "Describe group 'Remaining Settings form recovery': support, branding, contact, profile and signature receipt recovery and identity checks. Cohesive per-form recovery group within the same settings write-security test module.",
+    "reviewedBy": "Hermes Agent architecture lane 1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor > <anonymous> #10",
+    "fingerprint": "7a27d29e190304decceb32e121b861890686d22437f3f79ffb893c102736961d",
+    "reason": "An inline callback defined inside ArtifactEditor (one of its map/render/event closures, #10 in source order), performing one bounded step of the artifact-editor flow against the editor's own state. It shares ArtifactEditor's owner and lifetime and introduces no independent responsibility or owner boundary.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/commands/useMeetingCommand.ts",
+    "kind": "function",
+    "symbol": "useMeetingCommand",
+    "fingerprint": "7629b3b0d06a255046830c3cf6e14d48f749de122d2304077ded21c86dce984d",
+    "reason": "Hook owning the meeting-command lifecycle for one meeting: it wires client-writer and core-writer authority verification, retains the intent in the existing recovery journal via useRetainedIntent, dispatches runMeetingCommand, and invalidates the calendar/meeting queries on settle. Single concern (the meeting command) for the portfolio/calendar command owner; the recovery contract stays in ./recovery rather than being duplicated here.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx",
+    "kind": "function",
+    "symbol": "ClientMeriActions",
+    "fingerprint": "ae3e490544ece8b671faa347acb017a3e6514f31227152c652f1fc62d60bf7ea",
+    "reason": "The client-header 'Meri actions' dropdown: it renders the three Meri entry items and owns only their dialog open-state, deriving availability from useMeriCapabilities and useSelectedClient. The handoff, enrichment and attendance dialogs are delegated to their own components. One responsibility (the Meri action menu for one client) under the client-profile owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useActivityCommand.ts",
+    "kind": "function",
+    "symbol": "useActivityCommand",
+    "fingerprint": "f8eeee226af88a1a357f3272136106826572ebe404aa92bee5eb238d48d031dc",
+    "reason": "Hook owning the client activity-command lifecycle for one client scope: view lifetime, authority verification, the retained-recovery journal (create/read/resume/recover/finish-acknowledge) and the resulting query invalidations. One concern (the activity command) for the quick-log owner; journal mechanics are delegated to the shared session-recovery modules and command actions to ./command-actions rather than reimplemented here.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useActivityCommand.ts",
+    "kind": "function",
+    "symbol": "useActivityCommand > run",
+    "fingerprint": "f8066980bbf8556d05fa4468915559071676e6830f705f363a17d35ea3d1f84a",
+    "reason": "The single run() dispatcher inside useActivityCommand: it guards open/actor/ready/busy, verifies command authority, reserves or reads the retained recovery record, dispatches exactly one of create|read|resume, then updates the recovery journal and cache and classifies failure (block vs. retained error). A bounded operation that shares useActivityCommand's owner and state; not a separate responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useActivityCommand.ts",
+    "kind": "function",
+    "symbol": "useActivityCommand > run > <anonymous>",
+    "fingerprint": "c3e8aa021dc76e7e3cc22c0edd91ab271ba56d8f572e56879d428f70405a8854",
+    "reason": "The inline callback supplied to withRecoveryCommandLock inside run() (the serialized transactional body that performs authority verification, recovery, dispatch and cache update). A bounded step within run(), sharing useActivityCommand's owner and state rather than establishing a new one.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/batch-move.ts",
+    "kind": "function",
+    "symbol": "moveFileBatch",
+    "fingerprint": "e8ad1f846e90e6b31ef50fab39f09cf4b068a7f727c9978ff4d086ab722494ad",
+    "reason": "Module-level function owning one serialized, journal-retained batch file move for a client: it fences stale selections, reserves/loads the retained attempt under the file execution guard, dispatches the POST (or receipt GET), records refusals and the late receipt to the immutable journal, acknowledges, and resolves unresolved state from the exact durable disposition. One concern (the batch-move command) for the files owner; contract/recovery mechanics live in batch-move-contract and batch-move-recovery.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/batch-move.ts",
+    "kind": "function",
+    "symbol": "moveFileBatch > <anonymous>",
+    "fingerprint": "835277be9269819b129f218a0bf7730bae189877e27c75aa481d772874996b35",
+    "reason": "An inline callback inside moveFileBatch (the recovery.lock transactional body and/or the request().catch refusal handler), performing one bounded step of the batch-move command against the function's own retained attempt. It shares moveFileBatch's owner and state and introduces no separate responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx",
+    "kind": "function",
+    "symbol": "GovernedPlannerOutputs",
+    "fingerprint": "484f6dd0645d9c6bf6980649c29301cc6fd7ddd03356b616283f0332f2ff4336",
+    "reason": "Private component rendering the current governed Planner output/project for a verified generation: it reads the outputs through the governed-output request, and reverifies project access before navigating. Verification and request shaping are delegated to objective-governed-planner-read and the shared governed-output selectors. One responsibility under the objectives governed-planner surface owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
+    "kind": "function",
+    "symbol": "ReadyStrategyIntake",
+    "fingerprint": "228caaeacaa823829fd87ab0e9e9eb9b3d869dcf3e3c9df2e3a9f79506a031f2",
+    "reason": "Private component rendering the Strategy-intake request control for a ready objective: strategy-type selection, the retained/started/recover states, and the bounded generation-job polling loop. It composes ObjectiveStrategyIntakeSession (view lifecycle only) and ObjectiveGenerationOutcome. One responsibility for the objectives strategy-intake owner; command identity stays in the session/recovery.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
+    "kind": "function",
+    "symbol": "submit",
+    "fingerprint": "a37779a38f80020d1f94b5c767b0252b6519b64cdbd92b67afcdd047fa847be4",
+    "reason": "The single submit() operation on ObjectiveStrategyIntakeSession: it authorizes, loads or reserves the retained intake, builds the versioned strategy-intake request (frozen type/IDs), dispatches it, records the accepted Core job before any generation start, and starts/recovers that job. A bounded operation that shares the session's owner and state; not a separate responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
+    "kind": "function",
+    "symbol": "submit > <anonymous>",
+    "fingerprint": "29b6f413a5bf50a83d86ccd3a899d117420d6539776392f090633fba694cd990",
+    "reason": "The inline callback passed to recovery.lock inside submit() (the serialized transactional body that reads/authorizes/reserves/dispatches). A bounded step within submit(), sharing the ObjectiveStrategyIntakeSession owner and state.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
+    "kind": "function",
+    "symbol": "submit > <anonymous> > <anonymous>",
+    "fingerprint": "f3fc0751082d43ccc3e38a814a7af8c7c4219d0245550e3258d37c76a916b35f",
+    "reason": "A nested inline callback within submit()'s locked body (one further closure in the same transactional step). It shares the ObjectiveStrategyIntakeSession owner and state and adds no independent responsibility or owner boundary.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/member-notes/useMemberNote.ts",
+    "kind": "function",
+    "symbol": "useMemberNote > execute",
+    "fingerprint": "52ec292c7331fe0a9a38c1d3a661f9c8bec03b4b20c33964d9c1fe2a55e3452c",
+    "reason": "The single execute() dispatcher inside useMemberNote: it guards session/scope/load/busy, takes the recovery lock, verifies core-writer authority, then performs exactly one of save|recover|acknowledge|retire-refusal against the retained note. A bounded operation sharing the hook's owner and state.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/member-notes/useMemberNote.ts",
+    "kind": "function",
+    "symbol": "useMemberNote > execute > <anonymous>",
+    "fingerprint": "5ef6cb34808e764bae8b6d55d70e2db6bd7cf6824edbf0e416e54718e9fda483",
+    "reason": "The inline callback supplied to withRecoveryCommandLock inside execute() (and/or the createMemberNote reserve callback), performing one bounded step of the member-note action. It shares useMemberNote's owner and state and introduces no separate responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
+    "kind": "function",
+    "symbol": "IntegrationSettings > <anonymous> #3",
+    "fingerprint": "653a6d73b11691b29d412f450e4579589aec664b2542fc3a6e0690cc311fd50d",
+    "reason": "An inline callback inside IntegrationSettings (one of its provider/connection render or dialog-footer closures, #3 in source order), performing one bounded step of the integrations screen against the component's own state. It shares IntegrationSettings' owner and lifetime and adds no separate responsibility.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/SignatureSettings.tsx",
+    "kind": "function",
+    "symbol": "SignatureEditor",
+    "fingerprint": "2031624f01401f040e49d7f60ccdb54ab7ff38f532b12be7ebdd43cf80753b17",
+    "reason": "Private component owning the email-signature editor: html/enabled local state, file read with size/type validation, preview rendering and save through useSettingsMutation (operation me.emailSignature.update). The exported EmailSignature wrapper supplies the same surface's query/loading shell. One responsibility (edit and save the user signature) for the settings signature owner.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/TeamSettings.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "2161e132b1bf9bc23010d4b7c5c854164e9421d0f6bd6f89e513057718296a9b",
+    "reason": "Module for the team settings surface. Contains the exported TeamSettings component plus its private joinedDate formatter, all serving that one admin surface: member/invitation tabs, role/billing/remove actions and dialogs. Mutation/recovery is useSettingsMutation, row authorization is team-permissions and invite is the InviteMember dialog. One cohesive surface owner; size is the two data tables and their row renderers, not a second concern.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/integrations/outcomes.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "74b69d1f561f6cdd6c080117b72ebdeac32908725d45ca0c05d0b6b0215b6a45",
+    "reason": "A test-suite callback (describe/it group) exercising the integrations outcomes module's return-hint and bounded-sync behaviour. Tests are not application architecture and a long case group is not a design defect; the canonical owner is the test file beside the module under test.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/settings/mappings/SourceSearch.tsx",
+    "kind": "function",
+    "symbol": "SourceSearch",
+    "fingerprint": "58b60a0fbac1c746c399c1c5118f31ea58acd2d6f37a7440b643e73b888597e7",
+    "reason": "Component owning the federal-record search for a selected mapping source: it issues the bounded per-source search queries, projects results into the shared table and raises the chosen record. One responsibility (search and select a source record) for the settings/mappings owner; the source catalogue and result shaping stay local to this surface.",
+    "reviewedBy": "Hermes Agent architecture lane 2",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/MeriComposer.tsx",
+    "kind": "function",
+    "symbol": "MeriComposer",
+    "fingerprint": "03ff1b2a826ee7625229893640a613a87aa8ecaf70399f31c3ab870254dbb303",
+    "reason": "The Meri turn composer surface. Renders the draft textarea, its tool row and the send/stop action; the co-located ComposerTools/ComposerAction helpers are private markup for this one component. Single responsibility = present and submit the composed turn; canonical owner is the features/meri composer surface.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
+    "kind": "function",
+    "symbol": "SessionComposer",
+    "fingerprint": "1d4544841b6d9689fc4c330db1ad7f9eb5a9b5b1d8bea9c684a0e01cadcb7e85",
+    "reason": "Sibling component that subscribes to the session composer channel and renders the composer's model, skill and handoff controls for the active conversation. Owns only composer-control composition; no broadcast or transport concern leaks in.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
+    "kind": "function",
+    "symbol": "SkillSelectionPicker",
+    "fingerprint": "f8f3feb68ef06106cdda9fe4cf8d2076dab72c6f9c5f3f307c2e0dca3112da26",
+    "reason": "Skill plus time-window-basis picker. Its size comes from the enumerated window-basis form variants rendered inline; all variants serve the one responsibility of selecting a skill and its evidence window.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/feedback/FeedbackFields.tsx",
+    "kind": "function",
+    "symbol": "FeedbackFields",
+    "fingerprint": "e1c9c0e8bbe8d3e13cf0859a3e35343e9cab9883d1f5816af2e7be3797914638",
+    "reason": "The target/kind/preference/text fields of the turn-feedback form. Pure controlled-field presentation; owns only field markup and change callbacks for the feedback owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/feedback/TurnFeedback.tsx",
+    "kind": "function",
+    "symbol": "FeedbackDialog",
+    "fingerprint": "5f5f3791f0df1371f58f7903962288360025fc7d07921757940c6ca65e4642f9",
+    "reason": "Turn-feedback dialog. Orchestrates submit and the send-with-recovery states of one feedback submission; single responsibility for the feedback dialog surface.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/feedback/useFeedback.ts",
+    "kind": "function",
+    "symbol": "useFeedback",
+    "fingerprint": "c0d2ce358e21c2fa97cd86474f490e87881848ac9f6c2468b00dad169844353a",
+    "reason": "Hook owning the feedback draft, submit, recovery and refresh state. One concern - feedback submission lifecycle - with the feedback module as canonical owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/lifecycle/RunLifecycleControls.tsx",
+    "kind": "function",
+    "symbol": "RunLifecycleControls",
+    "fingerprint": "f0dc4c221f2a393d9a3bc6e26f5e31f0d03f72b56f70e008191492e8ccb07cd9",
+    "reason": "Controls for pause/steer/resume/fork/checkpoint of the admitted run. Owns only the lifecycle control affordances and their handlers for the run-lifecycle owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/lifecycle/useRunLifecycle.ts",
+    "kind": "function",
+    "symbol": "useRunLifecycle",
+    "fingerprint": "ba3e5a67c617802e20a9e2fca14a20c40629a78aea9422df8822bf4dee97546a",
+    "reason": "Hook owning run lifecycle command state and effects (pause/steer/resume/fork/checkpoint). Single lifecycle concern for the conversation owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+    "kind": "function",
+    "symbol": "useRunCommands",
+    "fingerprint": "6740a6eb0a01ea23309362d94d4e39ff4c2bc4a5d1d3497c771a3f16f8afc536",
+    "reason": "Hook owning command-dispatch state for the active run. One concern for the run-commands owner; no unrelated concern folded in.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversations/ConversationHistoryList.tsx",
+    "kind": "function",
+    "symbol": "ConversationHistoryList",
+    "fingerprint": "b07d3aae782a8d11d1d49eaf93504bf267b4e9cc9ca2f0c8f5aa069cd65ed8de",
+    "reason": "The conversation history list screen: rows, selection and paging. Single list-surface responsibility for the meri conversations owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversations/SelectedConversationActions.tsx",
+    "kind": "function",
+    "symbol": "SelectedConversationActions",
+    "fingerprint": "e99b3dcb46b29ac95a755cfcc1dfe15966254d1536a5e1b4743bf1a7552fbe8b",
+    "reason": "Action affordances for the selected conversation row. Owns only the per-row action menu and its handlers for the conversations owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversations/useManagedChange.ts",
+    "kind": "function",
+    "symbol": "useManagedChange",
+    "fingerprint": "7bf5abe2818c11c67d4e8313760bb6043801052b13578f3a3e7e1d735b9dcd9e",
+    "reason": "Managed-change hook for the selected conversation. Single concern - track and submit the managed change - for the conversations owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/memory-review/useOwnerMemoryInbox.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "ac9d7bd783d1de03ac2899dcb8c774e31235d89d28b6e940f5705b4a8cf117d2",
+    "reason": "Module for the owner memory inbox hook plus its private helpers. One cohesive unit - loading, paging and deciding owner memory items - for the memory-review owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/routines/RoutineForm.tsx",
+    "kind": "function",
+    "symbol": "RoutineForm",
+    "fingerprint": "ebe929189b6efe51fd1436ffd11d4ccdaf6cf9a676de95e22a27feb83c70f9ab",
+    "reason": "The routine create/edit form. Owns only the routine form fields, validation and submit for the routines owner; the sibling RoutineCancellation panel shares the same prepare contract.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/user-preferences/UserPreferencesForm.tsx",
+    "kind": "function",
+    "symbol": "UserPreferencesForm",
+    "fingerprint": "88025b13dfcb3a10675ae47f1735bb8b2971e16f95231499bdee8ddbe46d9f2d",
+    "reason": "The user preferences form. Single responsibility - render and submit user preferences - for the meri user-preferences owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/objective-governed-strategy-intake.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "90b5f410b6bcb2cd56f89ca49e6b3c07064e5e635f5f4b128437a4d5782272b4",
+    "reason": "A test-suite describe callback grouping the cases for one operations module. Tests are not application architecture and a long case group is not a design defect; canonical owner is the operations test beside the module under test.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/meri-actions/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyActionRequest",
+    "fingerprint": "c45250b1dd8005f223dc2ca1239d6016b0864e858aeb704dc1c50d2aa7ba41c7",
+    "reason": "The same-origin meri-actions proxy request adapter. One responsibility - forward a validated action request to the proxy route - for the meri-actions owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/meri-actions/task-recovery.ts",
+    "kind": "function",
+    "symbol": "standaloneTaskRecovery",
+    "fingerprint": "0adfd34f985b052615275b8ac91906eaf1083ae495eb0bcd42f3993d9e2ca7c3",
+    "reason": "Recovery-journal adapter for standalone task actions. Single concern - persist and read standalone task recovery state - for the meri-actions owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/turn-journal.ts",
+    "kind": "function",
+    "symbol": "conversationTurnJournal",
+    "fingerprint": "9f7d99baa50797e84e4bb0199b59277c1f729beb224e077a58b56aaf740b0f31",
+    "reason": "The conversation turn journal reader/writer. One storage concern for the meri-conversations owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/meri-feedback/access.ts",
+    "kind": "function",
+    "symbol": "createFeedbackAccess",
+    "fingerprint": "e08577c7e78926002795b06ba92e7853cb19a829f8780126d9f45ee1a2c89732",
+    "reason": "Feedback transport/access factory. Single concern - construct the feedback access boundary - for the meri-feedback owner.",
+    "reviewedBy": "Hermes Agent architecture lane 3",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0a53f2b49d2ac97ec531577080f9d20c099f7b5494e73294f637bec5ea2b7edb",
+    "reason": "reviewed-accept (file size, 406 nonblank) — module scope is limited to the dataset registry, filter-state helpers that write through to the URL, the page-size/export-size constants and the route component; helpers are pure and already unit-covered by intelligence-location/explorer-export tests, so no further cohesive unit can be carved out without fragmenting the URL-owned state machine.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+    "kind": "function",
+    "symbol": "DataExplorer",
+    "fingerprint": "b319017b2498b5ba5a2751dcee87f0c07602bc673dbce562f8306836499ba9ae",
+    "reason": "reviewed-accept (function size, 353 nonblank) — one route component for /modules/intelligence; it owns the URL-derived dataset/filter/page/record state through useIntelligenceLocation and renders the fixed typed Explorer queries, faceted filter controls, list and selected-record panel. Growth is declarative query/results markup plus location wiring, not hidden branching; extracting the JSX would separate the URL contract from the single surface that must honour it while leaving every decision in place.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/DefenseBudget.tsx",
+    "kind": "function",
+    "symbol": "DefenseBudget",
+    "fingerprint": "065db1d936c3e0298678b0b4a527b7f48e8f2add037378e6bf7c95991be4e255",
+    "reason": "reviewed-accept (function size, 133 nonblank) — the component now derives its filters, page and search text from useIntelligenceLocation so reload and Back/Forward restore the same view; the body is the existing filter/list/detail markup plus the fixed intelligence.defense queries. No authority, mutation or aggregation logic is introduced by the URL wiring.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/ProgramElementProfile.tsx",
+    "kind": "function",
+    "symbol": "ProgramElementProfile",
+    "fingerprint": "2be620da57586cb13d90f8f8c8907b38efd04f8137f5c01524bc25a60ad373a4",
+    "reason": "reviewed-accept (function size, 97 nonblank) — the growth is the URL-owned Program Element identity and its existing five tabs (peTab/dossier) plus the mounted dossier/context/office/acquisition/funding readers; tab selection is read from and written to the location, so a split would duplicate that contract across components without removing a decision.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/AcquisitionRecords.tsx",
+    "kind": "function",
+    "symbol": "AcquisitionRecords",
+    "fingerprint": "404f5d1a235b3af2556a0f35dd9967c1f4587468f1fbb149298078fbf6b28f50",
+    "reason": "reviewed-accept (function size, 119 nonblank) — a single list surface over the fixed intelligence defense acquisition reader: URL-owned query/page, typed summary columns and links to the detail route. Presentation-only expansion over an unchanged operation contract.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/AcquisitionRecords.tsx",
+    "kind": "function",
+    "symbol": "AcquisitionDetail",
+    "fingerprint": "8ef202c3f4d0d11de5eb63436558271ee9fdd194a7fe12bb8ab02c3f2b4199ab",
+    "reason": "reviewed-accept (function size, 86 nonblank) — one detail panel rendering the acquisition record plus its revisions, child/amendment identities and associations from the frozen detail DTO; missing revisions/associations render as explicit 'None recorded' text rather than zero counts, and no numeric value is substituted for an absent one.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/ContextRecords.tsx",
+    "kind": "function",
+    "symbol": "ContextRecords",
+    "fingerprint": "a6ef6a79b3664388a2d2615a32a139f79c829c5314855661aa54e50504d36403",
+    "reason": "reviewed-accept (function size, 147 nonblank) — list/detail pair over defenseResearch.context and .context.detail with URL-owned selection; revisions, sections and coverageReason are rendered with availability/provenance rather than as zeroed values. No new operation or state model.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/DossierRecords.tsx",
+    "kind": "function",
+    "symbol": "DossierDetail",
+    "fingerprint": "73011372c1cd58ae1554970d8ff597e5006b6c39ef8355af8369342a161a5151",
+    "reason": "reviewed-accept (function size, 235 nonblank) — the dossier panel renders the four fixed DTO sections (identity, fields, funding matrix, coverage). Size comes from per-section table markup; funding cells use 'Not available' plus the disposition badge and Core's stated reason so a missing observation is never displayed as zero, and the component holds no client-side authority or recomputation.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/OfficeRecords.tsx",
+    "kind": "function",
+    "symbol": "OfficeRecords",
+    "fingerprint": "3ddb330c2611d3033fd44e8a47dbe9d5464adbf416495a7b977a9df1325bf18c",
+    "reason": "reviewed-accept (function size, 151 nonblank) — list/detail over defenseResearch.offices/.office with URL-owned query, page and selected office; mission/responsibilities/scope are projected from the wider Core office DTO (unknown fields deliberately stripped) and the panel renders availability/evidence rather than inferring values.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ImportWorksheet.tsx",
+    "kind": "function",
+    "symbol": "ImportWorksheet",
+    "fingerprint": "6fc771e0641857825589341fcf0f03e7fda0ac6c7e39fb21e1c905e99e2a7ca1",
+    "reason": "reviewed-accept (function size, 196 nonblank) — the import worksheet now retains one exact captured action request together with its operationKey and reuses both only while the semantic params/body are byte-identical (identity excludes the key), clearing on success and distinguishing refused from uncertain outcomes; this is the bounded same-key recovery requested for the P3 retry guard and introduces no automatic retry or new pipeline.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchContributions.tsx",
+    "kind": "function",
+    "symbol": "ResearchContributions",
+    "fingerprint": "e7592981cb717dc3990c393b8a19f0076728230416e0f2c9122d35f7f7676813",
+    "reason": "reviewed-accept (function size, 178 nonblank) — read-only contribution ledger over the extended research.analytics reader: member/target/disposition/totals filters, per-contribution basis, value, disposition, overlap link and evidence. It renders totals and contribution counts exactly as returned and states that it does not recalculate them, so a missing basis value is shown as absent rather than zero.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/comparison/ComparisonCapture.tsx",
+    "kind": "function",
+    "symbol": "ComparisonCapture",
+    "fingerprint": "950051cc71a61f28357ad67efb400ee5c8f422fa6fdff590da89b338d299598b",
+    "reason": "reviewed-accept (function size, 199 nonblank) — capture form that serialises the save body from the live preview projection (not from editable strings), refuses context subjects without a single exact revision plus native-section evidence, validates the selection subset and basis/metric shape before POST, and retains the exact body plus idempotencyKey so an uncertain save is retried identically while a refused (2xx/4xx) outcome clears it.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/comparison/ComparisonEditor.tsx",
+    "kind": "function",
+    "symbol": "ComparisonEditor",
+    "fingerprint": "60cb84d8f1c6c82ee7ae6ce9f80e94221932880d3d15e2c58c35e8b1fced08eb",
+    "reason": "reviewed-accept (function size, 184 nonblank) — subject chooser for the fixed research.comparisons.preview reader; it only renders capture controls when the preview token matches the current typed inputs, excludes member kinds Core cannot compare, refuses ids containing the delimiter, and mirrors Core's 2-5 subject and basis/metric constraints locally so the form cannot submit a shape Core would reject.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/comparison/ComparisonProjection.tsx",
+    "kind": "function",
+    "symbol": "ComparisonProjection",
+    "fingerprint": "b5b6dd98db242c1a67435cefa993c7c3f12ffc1676fdab5bbc161e4f0ed51f3f",
+    "reason": "reviewed-accept (function size, 100 nonblank) — presentational table of subjects x metrics from the frozen comparison projection; cells show the value or 'Unavailable' with the disposition badge and Core's reason, the caption states that missing values are not zero, and alignments render their state/reason. No client-side arithmetic or authority.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/comparison/ResearchComparisons.tsx",
+    "kind": "function",
+    "symbol": "ResearchComparisons",
+    "fingerprint": "eee4902ea8789e61f06a775f8b727ab4784993050202d021f8693f7b6894c22a",
+    "reason": "reviewed-accept (function size, 153 nonblank) — saved-comparison browser that reads list/read/version through the fixed gateway, refuses a selection that is not a subset of the named capture, hides comparisons belonging to another portfolio, and preserves unrelated URL params while forcing the portfolio/view scope. The 50-item list limit and version-by-id semantics are disclosed rather than inferred from a number.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/comparison/SavedComparisonView.tsx",
+    "kind": "function",
+    "symbol": "SavedComparisonView",
+    "fingerprint": "de4e5c5f5873c786949304041a6c4c289c3e2c10deb7fc036bfb3612a3818c6e",
+    "reason": "reviewed-accept (function size, 190 nonblank) — immutable-version viewer plus the add-selection/archive/restore actions. Actions are gated on lifecycle/myRole only as hints, every write sends expectedRevision (and expectedPortfolioRevision plus idempotencyKey for add) with the exact selection, and an uncertain failure retains one exact Attempt that is retried verbatim while a definitive 4xx clears it and reports the refusal.",
+    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchCreate.tsx",
+    "kind": "function",
+    "symbol": "ScopedResearchCreate",
+    "fingerprint": "2566172b98c33b62fecc9954260bfcb70052d41c9572cbc53f446d8e2055d46b",
+    "reason": "reviewed-accept — three-step wizard on the existing typed create-intent owner; unknown result keeps the keyed body",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchOverview.tsx",
+    "kind": "function",
+    "symbol": "ResearchOverview",
+    "fingerprint": "c5c0b1a02168230756628cff7c1eaa18cdda7cd34105d46829defd6725a514c7",
+    "reason": "reviewed-accept — explicit fit refresh, role/lifecycle guarded",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchSnapshots.tsx",
+    "kind": "function",
+    "symbol": "ResearchSnapshots",
+    "fingerprint": "5f7230b4395b44fdd7037dcf8c5d618835bbc91c3dd0fe005f946a7ad07efd3d",
+    "reason": "reviewed-accept — create gated active+non-viewer",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/create-intent.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "cf70f4356b131f6f9b7e3cc0f601c8c921f49cdf75e0f08b4f2426ad2e845754",
+    "reason": "reviewed-accept — recovery regression test",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchBookmarks.tsx",
+    "kind": "function",
+    "symbol": "ResearchBookmarks",
+    "fingerprint": "eb8a96f589f7b8e42f494aac4abcd6a5c1c8ec5bf3eb418c30e0beceb798f9ea",
+    "reason": "reviewed-accept — key retained across failure",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchDrafts.tsx",
+    "kind": "function",
+    "symbol": "DraftEditor",
+    "fingerprint": "61e80d9f3aa5c485582fb69a203073196ea4ceb33a17d680c24a4e82cf86e898",
+    "reason": "reviewed-accept for source (conditional on the P1 draft bound)",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchImports.tsx",
+    "kind": "function",
+    "symbol": "ResearchImports",
+    "fingerprint": "6113eeb9ce9334c74753e372dbd3e7a0ca8c0ac1a9a6c717dd9aa1db3e3a7d07",
+    "reason": "reviewed-accept — key retained; conditional on P1",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchOutputs.tsx",
+    "kind": "function",
+    "symbol": "ResearchOutputs",
+    "fingerprint": "c6fa745177e777c79c5a684bb45d979cc61451c11652cd797955a39a088e3a6b",
+    "reason": "reviewed-accept — same-request retry retained",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchOutputs.tsx",
+    "kind": "function",
+    "symbol": "OutputReceipt",
+    "fingerprint": "a3ed3189b1bd4caae14e5502028e7d25bc1a60368b39899a7cfed26d4d20f72e",
+    "reason": "reviewed-accept — artifact-id identity verified",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchReviewTools.tsx",
+    "kind": "function",
+    "symbol": "ResearchReviewTools",
+    "fingerprint": "4def25aa836b2ba3f357f39f7df1bd80f9778357ba4810812975c942286e2ebc",
+    "reason": "reviewed-accept — note key retained",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchRuleEditor.tsx",
+    "kind": "function",
+    "symbol": "ResearchRuleEditor",
+    "fingerprint": "6218d90bd29046bd6dec913ce031523a289982eb8b9c54b079e3ea66f2ffa643",
+    "reason": "reviewed-accept — depth/clause limits match Core",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchRules.tsx",
+    "kind": "function",
+    "symbol": "ResearchRules",
+    "fingerprint": "c10e29cc9afc8c94f8665fc95cdcbf98ea2df55228d9419665fa268f532fe424",
+    "reason": "reviewed-accept with the P3 publish-key note",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchWatchConversion.tsx",
+    "kind": "function",
+    "symbol": "ResearchWatchConversion",
+    "fingerprint": "befa5effba3dec57833487f9cfc735c2c27dfac070d225c263ff9949a94e11ad",
+    "reason": "reviewed-accept — preview hash/revision bound, no auto-enable",
+    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/BudgetChanges.tsx",
+    "kind": "function",
+    "symbol": "BudgetChanges",
+    "fingerprint": "3430a0bebb8b65ba650f6f011fcbb432ff00ac2042b4216a95d1912376aeb372",
+    "reason": "reviewed-accept (function size, 158 nonblank) — one Changes/Budget tab: URL-owned filters (changesBudgetPe/changesFy/changesScore/changesBudgetPage), the two mutually exclusive fixed delta reads (attention vs per-PE), the per-row peCode cross-check that withholds mismatched rows, and the fixed table plus paging. Growth is declarative rendering plus location wiring; no authority, mutation or aggregation is added, and splitting would separate the URL contract from its single owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/MonitoredChanges.tsx",
+    "kind": "function",
+    "symbol": "ClientWatchList",
+    "fingerprint": "258473a5e4b0d6d01ebc325e0bba067e58ed4ae0fa0df52b952afc1d91aa0ca7",
+    "reason": "reviewed-accept (function size, 98 nonblank) — the selected-client watch surface: one fixed watches read, a client identity cross-check on every watch and event, the newest subscription-event state derivation, the disclosed first-100 display for an unpaginated owner, and the retained-event panel for the URL-selected watch. One reader, one presentation decision.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/PortfolioActions.tsx",
+    "kind": "function",
+    "symbol": "PortfolioActions",
+    "fingerprint": "f9a49b54bc64cd39a69ef42bc07d1a99db7a30c089800c03b287f8c8619fe9fb",
+    "reason": "reviewed-accept (function size, 98 nonblank) — the Actions tab: authorized portfolio list with cursor paging (research.list), one detail read admitted only when the returned id equals the routed id, and the native review queue mounted through the reviews-public presentation boundary. It adds no authority; Core still re-checks grant, lifecycle and revision.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchBulkReviews.tsx",
+    "kind": "function",
+    "symbol": "ResearchBulkReviews",
+    "fingerprint": "64afe94982748b03c1b3a19e03158a637af49953f473c42e9fea4a4067560164",
+    "reason": "reviewed-accept (function size, 340 nonblank) — one bounded bulk-decision form and its recovery state machine over the fixed research.reviews.bulk owner: revision-bound per-row selection (≤50), one decision and reason, explicit per-row evidence, a pre-send 1 MB bound matching the declared operation limit, exact parsed-request and key retention across an unknown outcome, receipt identity validation (portfolioId plus exactly one outcome per selected review), and the per-row outcome table. The draft, the retained request/key and the receipt are one machine; extracting the retention logic would separate the byte-identical request from the state that must reproduce it.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchDetail.tsx",
+    "kind": "function",
+    "symbol": "ResearchPortfolioDetail",
+    "fingerprint": "b43966e215dc6fde5f23346695042b974c62a4a347d8870f0005f7f2fa606762",
+    "reason": "reviewed-accept (function size, 131 nonblank, replaces the 97-nonblank record) — the detail owner retains its last verified display only for the same API instance and portfolio id while a read is pending, and clears it on a real error, a mismatched returned id or a scope change; the inert-plus-capture wrapper suppresses interaction (including portalled modal controls) only during that refresh while reads stay allowed. The retention rule is the component's whole reason for its shape and belongs with the single view switch it wraps.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchMembers.tsx",
+    "kind": "function",
+    "symbol": "ResearchMembers",
+    "fingerprint": "eccbb7f0df26799d3d375ecc33f74507d134d38a167ae7005c4eee7b1dccaf4a",
+    "reason": "reviewed-accept (function size, 208 nonblank) — the native membership tab: bounded selection (≤100), explicit include/exclude decisions, unresolved rows routed to Resolve instead of Include, the decision receipt table keyed by member identity, and the two mounted member dialogs. One table plus one decision owner; the dialogs already own their own request/retention logic.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx",
+    "kind": "function",
+    "symbol": "ResearchReviews",
+    "fingerprint": "cf8c4f5cadc81bd4371695881d181b100767209c41a627903953d8a6833c211f",
+    "reason": "reviewed-accept (function size, 276 nonblank, replaces the 253-nonblank record) — the review owner: URL-owned lane, the lane queue read with per-row portfolio identity verification, the single-decision modal bound to the captured review revision, and the mounted bulk-decision surface. It remains the single place where review decisions are released, so the lane state, queue verification and both decision paths belong together.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/members/MemberDecision.tsx",
+    "kind": "function",
+    "symbol": "MemberDecision",
+    "fingerprint": "172c68c1346982fbfeaa24069f2775687d90715dc20cd64f1706f6acf00050d1",
+    "reason": "reviewed-accept (function size, 106 nonblank) — the explicit multi-member include/exclude modal: one reason applied to every selected member, the captured exact request and key retained across an unknown outcome with manual same-request retry only, a refused 4xx clearing retention, and the atomic-batch disclosure. One mutation with one recovery rule.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/members/MemberDiscovery.tsx",
+    "kind": "function",
+    "symbol": "MemberDiscovery",
+    "fingerprint": "15c952eadca724f49d7beb1967f38a59cae77ce1cb3bedc6af95f1a0137fec77",
+    "reason": "reviewed-accept (function size, 281 nonblank) — the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/CongressionalChanges.tsx",
+    "kind": "function",
+    "symbol": "CongressionalChanges",
+    "fingerprint": "a163132241b9eefa65da60b3e39c6867ab695a8adc33cdace39eb2f849326ca1",
+    "reason": "reviewed-accept (function size, 107 nonblank, replaces the 105-nonblank record) — one Changes/Congressional tab: the required PE input (trimmed, max 16) that also resets the retained evidence cursor, one fixed bill-actions read with its disclosed 200-action / 40-bill / 60-per-bill bound, the action table, and the existing ProgramBills plus the new PE-scoped Federal evidence revisions panel composed under the same validated PE. The added lines are one URL-state reset and one composition; no authority, mutation, occurrence association or fiscal-year filter is invented, and splitting would separate the PE/URL contract from its single owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/FederalEvidenceTimeline.tsx",
+    "kind": "function",
+    "symbol": "FederalEvidenceTimeline",
+    "fingerprint": "0b94b713d1f526b11082e292c8e9c8a24c2b73bf860664e02f0972e120a5d417",
+    "reason": "reviewed-accept (function size, 125 nonblank, new) — one fixed GET /federal-evidence/timeline reader: strict bounded request (PE from the existing Congressional context, limit 25, cursor, optional ISO knowledge time), URL-owned cursor and knowledge time with reset on PE or time change, non-submit Refresh/Latest controls, historical-evidence disclosure, and the per-event Before/After composition whose sides are independently admitted from their own event revision and content hash. It holds no authority and creates no event-to-occurrence association; request construction, gating and presentation are one read contract that would fragment if split.",
+    "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/ResearchCoverage.tsx",
+    "kind": "function",
+    "symbol": "ResearchCoverage",
+    "fingerprint": "e7714751449668907bf072b3861ecaf01327a3adedc7d93a21c6bb84fc038cb9",
+    "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) — the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
+    "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   }
 ]

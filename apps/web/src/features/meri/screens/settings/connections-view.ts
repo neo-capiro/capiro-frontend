@@ -73,7 +73,7 @@ export function accountCell(connection: Connection): string {
 export function grantedScopeCell(connection: Connection): string {
   const granted = connection.permissions?.grantedScopes ?? null;
   if (!granted) return "Not verified";
-  return `${granted.length} scopes verified`;
+  return `${new Set(granted).size} scopes verified`;
 }
 
 /** Last completed sync attempt; a scheduled time is reported separately in Core. */
@@ -132,6 +132,8 @@ export function coverageNotice(
       ? "The configured backfill is not complete."
       : "",
     coverage?.hasMore ? "More mail remains to import." : "",
+    connection.lastError ||
+      (coverage?.reason ? `${coverage.reason.replaceAll("_", " ")}.` : ""),
     coverage?.captureRepair === "required"
       ? "Retention repair is still required before coverage is complete."
       : "",
@@ -177,10 +179,13 @@ export function grantedScopeCard(
   const permissions = connection.permissions;
   const granted = permissions?.grantedScopes ?? null;
   const requested = permissions?.requestedScopes ?? connection.scopes;
+  const requestedSet = new Set(requested);
+  const grantedSet = new Set(granted ?? []);
+  const missing = [...requestedSet].filter((scope) => !grantedSet.has(scope));
   return {
     title: base.title,
     description: granted
-      ? `${provider} · ${account} · ${granted.length} of ${requested.length} requested scopes were verified ${stamp(permissions?.lastVerifiedAt) ?? "at an unrecorded time"}. A verified grant does not establish runtime availability.`
+      ? `${provider} · ${account} · ${requestedSet.size - missing.length} of ${requestedSet.size} requested scopes were verified ${stamp(permissions?.lastVerifiedAt) ?? "at an unrecorded time"}.${missing.length ? ` Missing requested scopes: ${missing.join(", ")}.` : ""} A verified grant does not establish runtime availability.`
       : `${provider} · ${account} · the current provider grants have not been verified. Stored scope names can reflect requested permissions, so no grant is claimed here. Verify them in Capiro Integrations before relying on them.`,
     notice: base.notice,
   };

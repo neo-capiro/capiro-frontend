@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import type { ResearchDetail } from "../../../../shared/capiro/operations/research-schemas";
 import type {
@@ -26,6 +26,25 @@ import { buildPreviewDashboard } from "./preview-dashboard";
 import styles from "./share.module.css";
 
 const PIN_RULE = /^[0-9]{6,12}$/;
+function SharePinAttempts({ link }: { link: ResearchShareLink }) {
+  const [now, setNow] = useState(() => Date.now());
+  const until = link.lockedUntil ? Date.parse(link.lockedUntil) : 0;
+  useEffect(() => {
+    const remaining = until - Date.now();
+    const timer = setTimeout(
+      () => setNow(Date.now()),
+      Math.max(0, Math.min(remaining + 1, 2147483647)),
+    );
+    return () => clearTimeout(timer);
+  }, [until]);
+  return until > now ? (
+    <Badge tone="warning">
+      {link.failedPinAttempts} · locked until {when(link.lockedUntil)}
+    </Badge>
+  ) : (
+    <>{link.failedPinAttempts}</>
+  );
+}
 function when(value: string | null | undefined): string {
   return value ? new Date(value).toLocaleString() : "—";
 }
@@ -495,12 +514,7 @@ function ShareLinks({
             {
               key: "pinFailures",
               label: "Wrong PINs",
-              render: (l) =>
-                l.failedPinAttempts >= 5 ? (
-                  <Badge tone="warning">{l.failedPinAttempts} · locked</Badge>
-                ) : (
-                  l.failedPinAttempts
-                ),
+              render: (l) => <SharePinAttempts link={l} />,
             },
             {
               key: "actions",

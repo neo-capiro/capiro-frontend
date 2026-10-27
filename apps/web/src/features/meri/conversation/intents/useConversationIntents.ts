@@ -33,6 +33,10 @@ import {
   intentDecisionSettled,
 } from "./research-share-view";
 import {
+  isResearchActionProposal,
+  researchActionSettled,
+} from "./research-action-view";
+import {
   intentDecisionRecovery,
   type IntentDecisionScope,
 } from "./decision-recovery";
@@ -137,6 +141,7 @@ export function useConversationIntents(
           item.state !== "prepared" ||
           (item.kind !== "proposal" &&
             item.kind !== "research_share" &&
+            item.kind !== "research_action" &&
             item.kind !== "legiwatch_action" &&
             item.kind !== "client_record_action" &&
             item.kind !== "watch_action" &&
@@ -168,6 +173,9 @@ export function useConversationIntents(
           (item.kind === "legiwatch_action" &&
             item.result !== "unavailable" &&
             legiwatchSettled(item.result.status)) ||
+          (item.kind === "research_action" &&
+            item.result !== "unavailable" &&
+            researchActionSettled(item.result.proposalStatus)) ||
           (item.kind === "research_share" &&
             [
               "succeeded",
@@ -344,6 +352,7 @@ export function useConversationIntents(
           isWatchProposal(proposal) ||
             isBizdevProposal(proposal) ||
             isResearchShareProposal(proposal) ||
+            isResearchActionProposal(proposal) ||
             isLegiwatchProposal(proposal) ||
             isClientRecordProposal(proposal) ||
             isLegislativeDocumentProposal(proposal)

@@ -172,6 +172,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
       <NotesDialog
         key={showNotes ? "open" : "closed"}
         clientId={clientId}
+        clientName={value.name}
         open={showNotes || params.has("notes")}
         onOpenChange={(open) => {
           setShowNotes(open);

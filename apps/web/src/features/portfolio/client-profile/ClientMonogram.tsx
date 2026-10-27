@@ -23,15 +23,16 @@ export function ClientMonogram({
   logoUrl?: string | null;
   size: number;
 }) {
-  const [failed, setFailed] = useState(false);
-  if (!logoUrl || failed) return <>{organizationInitials(name)}</>;
+  const [failedUrl, setFailedUrl] = useState<string>();
+  if (!logoUrl || failedUrl === logoUrl)
+    return <>{organizationInitials(name)}</>;
   return (
     <img
       src={logoUrl}
       width={size}
       height={size}
       alt=""
-      onError={() => setFailed(true)}
+      onError={() => setFailedUrl(logoUrl)}
     />
   );
 }

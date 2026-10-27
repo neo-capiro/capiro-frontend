@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useIntelligenceLocation } from "./intelligence-location";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -26,7 +27,19 @@ export function ProgramElementProfile({
   onBack: () => void;
 }) {
   const api = useCapiro();
-  const [tab, setTab] = useState("overview");
+  const { params, update } = useIntelligenceLocation();
+  const requestedTab = params.get("peTab");
+  const tab = [
+    "overview",
+    "funding",
+    "congressional",
+    "structure",
+    "sources",
+  ].includes(requestedTab ?? "")
+    ? requestedTab!
+    : "overview";
+  const setTab = (value: string) =>
+    update({ peTab: value === "overview" ? null : value });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
   const query = useCapiroQuery("intelligence.defense.detail", {

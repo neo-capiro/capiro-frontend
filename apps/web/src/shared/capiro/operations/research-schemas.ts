@@ -33,6 +33,8 @@ export const researchMember = z.object({
     "unresolved",
   ]),
   origin: z.enum(["manual", "rule", "import"]).optional(),
+  unresolvedInput: z.record(z.string(), z.unknown()).nullable().optional(),
+  resolvedAt: z.string().nullable().optional(),
   reason: z.string().nullable(),
   revision: z.number().int(),
   updatedAt: z.string(),
@@ -96,12 +98,46 @@ export const researchBasis = z.object({
 export const researchAnalytics = z.object({
   portfolioId: z.string(),
   portfolioRevision: z.number(),
+  calculationVersion: z.enum([
+    "research-portfolio-analytics-v1",
+    "research-portfolio-analytics-v2",
+  ]),
   availability: z.enum(["available", "partial", "unavailable"]),
   totals: z.array(
     z.object({
       basis: researchBasis,
       value: z.string(),
       contributionCount: z.number(),
+    }),
+  ),
+  contributions: z.array(
+    z.object({
+      contributionId: z.string(),
+      memberId: z.string(),
+      targetKind: researchMember.shape.targetKind,
+      targetId: z.string(),
+      label: z.string().nullable(),
+      basis: researchBasis.nullable(),
+      value: z.string().nullable(),
+      disposition: z.enum([
+        "included",
+        "excluded",
+        "overlap",
+        "incompatible",
+        "missing",
+        "unavailable",
+        "withheld",
+      ]),
+      sourceDisposition: z
+        .enum(["observed", "missing", "partial", "unavailable", "withheld"])
+        .nullable()
+        .optional(),
+      reason: z.string(),
+      sourceObservationId: z.string().nullable(),
+      sourceRevisionIds: z.array(z.string()),
+      evidence: z.array(z.record(z.string(), z.unknown())),
+      dedupKey: z.string().nullable(),
+      overlapsContributionId: z.string().nullable(),
     }),
   ),
   coverage: z.object({
@@ -114,6 +150,39 @@ export const researchAnalytics = z.object({
   }),
   limitations: z.array(z.string()),
   observedAt: z.string(),
+  readAt: z.string(),
+});
+// Below Core's existing 1 MiB JSON parser, including the browser operation envelope.
+export const researchDecisionRequestLimitBytes = 1_000_000;
+export const researchReviewEvidence = z.object({
+  sourceRevisionId: z.string().min(1).max(2048),
+  locator: z.record(z.string(), z.unknown()),
+  quote: z.string().max(10000).nullable(),
+  stance: z.enum(["for", "against"]),
+});
+export const researchReviewMutationReceipt = z.object({
+  portfolioId: z.string(),
+  actorUserId: z.string(),
+  occurredAt: z.string(),
+  outcomes: z
+    .array(
+      z.object({
+        reviewId: z.string().nullable(),
+        status: z.enum([
+          "assigned",
+          "decided",
+          "unchanged",
+          "conflict",
+          "failed",
+          "note_added",
+        ]),
+        revision: z.number().nullable(),
+        decisionId: z.string().nullable().optional(),
+        noteId: z.string().nullable().optional(),
+        message: z.string().nullable(),
+      }),
+    )
+    .max(50),
 });
 export const researchFit = z.object({
   clientFits: z.array(
@@ -136,6 +205,12 @@ export const researchReview = z.object({
   trigger: z.string(),
   assigneeUserId: z.string().nullable(),
   reason: z.string(),
+  evidenceFor: z
+    .array(researchReviewEvidence.extend({ stance: z.literal("for") }))
+    .max(100),
+  evidenceAgainst: z
+    .array(researchReviewEvidence.extend({ stance: z.literal("against") }))
+    .max(100),
   revision: z.number(),
   status: z.string(),
   updatedAt: z.string(),
@@ -172,3 +247,6 @@ export const researchSubscription = z.object({
 export type ResearchSummary = z.infer<typeof researchSummary>;
 export type ResearchDetail = z.infer<typeof researchDetail>;
 export type ResearchMember = z.infer<typeof researchMember>;
+export type ResearchAnalyticsProjection = z.infer<typeof researchAnalytics>;
+export type ResearchReview = z.infer<typeof researchReview>;
+export type ResearchReviewEvidence = z.infer<typeof researchReviewEvidence>;

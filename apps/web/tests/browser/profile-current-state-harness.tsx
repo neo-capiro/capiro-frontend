@@ -66,7 +66,12 @@ function ProfileCurrentStateHarness() {
             clientName="Synthetic profile client"
           />
         ) : (
-          <NotesDialog clientId={clientId} open onOpenChange={close} />
+          <NotesDialog
+            clientId={clientId}
+            clientName="Synthetic profile client"
+            open
+            onOpenChange={close}
+          />
         )
       ) : (
         <p>Profile view closed.</p>

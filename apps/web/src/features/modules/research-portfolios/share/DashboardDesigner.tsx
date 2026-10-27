@@ -203,6 +203,13 @@ export function DashboardDesigner({
     event: KeyboardEvent<HTMLElement>,
     widget: ResearchDashboardWidget,
   ) {
+    if (
+      event.target !== event.currentTarget ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey
+    )
+      return;
     const step: Record<string, [number, number]> = {
       ArrowLeft: [-1, 0],
       ArrowRight: [1, 0],
@@ -211,9 +218,7 @@ export function DashboardDesigner({
     };
     if (event.key === "Delete" || event.key === "Backspace") {
       event.preventDefault();
-      history.commit(removeWidget(history.present, widget.id));
-      setSelected(undefined);
-      setAnnouncement(`${widgetDefinition(widget.kind).label} removed.`);
+      removeAndFocus(widget);
       return;
     }
     const delta = step[event.key];
@@ -241,6 +246,23 @@ export function DashboardDesigner({
     }
     history.commit(next);
     setAnnouncement(describe(changed, event.shiftKey ? "resized" : "moved"));
+  }
+
+  function removeAndFocus(widget: ResearchDashboardWidget) {
+    const index = history.present.widgets.findIndex((w) => w.id === widget.id);
+    const next = removeWidget(history.present, widget.id);
+    const neighbour = next.widgets[Math.min(index, next.widgets.length - 1)];
+    history.commit(next);
+    setSelected(neighbour?.id);
+    setAnnouncement(`${widgetDefinition(widget.kind).label} removed.`);
+    requestAnimationFrame(() => {
+      const target = neighbour
+        ? canvas.current?.querySelector<HTMLElement>(
+            `[data-widget-id="${CSS.escape(neighbour.id)}"]`,
+          )
+        : canvas.current;
+      target?.focus();
+    });
   }
 
   return (
@@ -306,10 +328,16 @@ export function DashboardDesigner({
         )
       ) : (
         <div className={styles.designer}>
-          <div ref={canvas} className={`${styles.canvas} ${styles.grid}`}>
+          <div
+            ref={canvas}
+            tabIndex={-1}
+            aria-label="Dashboard canvas"
+            className={`${styles.canvas} ${styles.grid}`}
+          >
             {layout.widgets.map((widget) => (
               <section
                 key={widget.id}
+                data-widget-id={widget.id}
                 tabIndex={0}
                 role="group"
                 aria-label={`${widgetDefinition(widget.kind).label} widget, column ${widget.x + 1}, row ${widget.y + 1}, ${widget.w} wide, ${widget.h} tall`}
@@ -364,15 +392,7 @@ export function DashboardDesigner({
                     ),
                   )
                 }
-                onRemove={() => {
-                  history.commit(
-                    removeWidget(history.present, selectedWidget.id),
-                  );
-                  setSelected(undefined);
-                  setAnnouncement(
-                    `${widgetDefinition(selectedWidget.kind).label} removed.`,
-                  );
-                }}
+                onRemove={() => removeAndFocus(selectedWidget)}
               />
             ) : (
               <p className={styles.hint}>

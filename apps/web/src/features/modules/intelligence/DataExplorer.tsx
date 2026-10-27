@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { ExplorerExports } from "./ExplorerExports";
+import { useIntelligenceLocation } from "./intelligence-location";
 import {
   explorerDatasetOperations,
   type ExplorerDataset,
@@ -50,38 +52,65 @@ export function DataExplorer({
 }: {
   initialDataset?: ExplorerDataset;
 }) {
-  const [dataset, setDataset] = useState<ExplorerDataset>(initialDataset);
-  const [q, setQ] = useState("");
-  const [page, setPage] = useState(1);
-  const [congress, setCongress] = useState("");
-  const [chamber, setChamber] = useState("");
-  const [party, setParty] = useState("");
-  const [subject, setSubject] = useState("");
-  const [sort, setSort] = useState("");
-  const [selected, setSelected] = useState<ExplorerRecord>();
+  const { params, page, update } = useIntelligenceLocation();
+  const dataset =
+    datasets.find((item) => item.id === params.get("dataset"))?.id ??
+    initialDataset;
+  const q = (params.get("q") ?? "").slice(0, 2000);
+  const congress = params.get("congress") ?? "";
+  const chamber = params.get("chamber") ?? "";
+  const party = params.get("party") ?? "";
+  const subject = params.get("subject") ?? "";
+  const sort = params.get("sort") ?? "";
+  function filter(key: string, value: string, replace = false) {
+    update({ [key]: value, page: null, record: null }, replace);
+  }
+  function setPage(value: number) {
+    update({ page: String(value), record: null });
+  }
+  function chooseDataset(value: ExplorerDataset, nextSort = "") {
+    update({
+      dataset: value,
+      sort: nextSort,
+      page: null,
+      record: null,
+      congress: null,
+      chamber: null,
+      party: null,
+      subject: null,
+    });
+  }
   const facets = useCapiroQuery(
     "intelligence.explorer.bill-facets",
     {},
     { enabled: dataset === "bills" },
   );
+  const queryInput = {
+    q,
+    page,
+    pageSize: 25,
+    sort: sort || undefined,
+    ...(dataset === "bills"
+      ? {
+          congress: congress ? [congress] : undefined,
+          originChamber: chamber ? [chamber] : undefined,
+          sponsorParty: party ? [party] : undefined,
+          subjects: subject ? [subject] : undefined,
+        }
+      : {}),
+  };
   const query = useCapiroQuery(explorerDatasetOperations[dataset], {
-    query: {
-      q,
-      page,
-      pageSize: 25,
-      sort: sort || undefined,
-      ...(dataset === "bills"
-        ? {
-            congress: congress ? [congress] : undefined,
-            originChamber: chamber ? [chamber] : undefined,
-            sponsorParty: party ? [party] : undefined,
-            subjects: subject ? [subject] : undefined,
-          }
-        : {}),
-    },
+    query: queryInput,
   });
+  const selectionKey = JSON.stringify([dataset, queryInput]);
+  const [selection, setSelection] = useState<{ key: string; ids: string[] }>({
+    key: "",
+    ids: [],
+  });
+  const selectedIds = selection.key === selectionKey ? selection.ids : [];
   const bill = dataset === "bills";
   const rows = query.data?.rows || [];
+  const selected = rows.find((row) => row.id === params.get("record"));
   return (
     <>
       <nav className={styles.datasets} aria-label="Data sources">
@@ -91,10 +120,7 @@ export function DataExplorer({
             className={`${styles.dataset} ${dataset === d.id ? styles.selected : ""}`}
             aria-pressed={dataset === d.id}
             onClick={() => {
-              setDataset(d.id);
-              setPage(1);
-              setSelected(undefined);
-              setSort("");
+              chooseDataset(d.id);
             }}
           >
             {d.label}
@@ -103,10 +129,7 @@ export function DataExplorer({
         <button
           className={styles.dataset}
           onClick={() => {
-            setDataset("federal-register");
-            setSelected(undefined);
-            setSort("comment-close");
-            setPage(1);
+            chooseDataset("federal-register", "comment-close");
           }}
         >
           Comment Deadlines
@@ -118,8 +141,7 @@ export function DataExplorer({
           placeholder={`Search ${datasets.find((d) => d.id === dataset)?.label.toLowerCase()}`}
           value={q}
           onChange={(e) => {
-            setQ(e.target.value);
-            setPage(1);
+            filter("q", e.target.value, true);
           }}
         />
         {bill && (
@@ -129,8 +151,7 @@ export function DataExplorer({
               aria-label="Congress"
               value={congress}
               onChange={(e) => {
-                setCongress(e.target.value);
-                setPage(1);
+                filter("congress", e.target.value);
               }}
             >
               <option value="">Congress · Any</option>
@@ -143,8 +164,7 @@ export function DataExplorer({
               aria-label="Chamber"
               value={chamber}
               onChange={(e) => {
-                setChamber(e.target.value);
-                setPage(1);
+                filter("chamber", e.target.value);
               }}
             >
               <option value="">Chamber · Any</option>
@@ -157,8 +177,7 @@ export function DataExplorer({
               aria-label="Sponsor party"
               value={party}
               onChange={(e) => {
-                setParty(e.target.value);
-                setPage(1);
+                filter("party", e.target.value);
               }}
             >
               <option value="">Party · Any</option>
@@ -171,8 +190,7 @@ export function DataExplorer({
               aria-label="Subject"
               value={subject}
               onChange={(e) => {
-                setSubject(e.target.value);
-                setPage(1);
+                filter("subject", e.target.value);
               }}
             >
               <option value="">Subject · Any</option>
@@ -185,8 +203,7 @@ export function DataExplorer({
               aria-label="Sort bills"
               value={sort}
               onChange={(e) => {
-                setSort(e.target.value);
-                setPage(1);
+                filter("sort", e.target.value);
               }}
             >
               <option value="">Latest action</option>
@@ -197,12 +214,16 @@ export function DataExplorer({
         )}
         <ActionButton
           onClick={() => {
-            setQ("");
-            setCongress("");
-            setChamber("");
-            setParty("");
-            setSubject("");
-            setPage(1);
+            update({
+              q: null,
+              congress: null,
+              chamber: null,
+              party: null,
+              subject: null,
+              sort: null,
+              page: null,
+              record: null,
+            });
           }}
         >
           Clear all
@@ -222,10 +243,18 @@ export function DataExplorer({
           <Panel
             title={
               query.data
-                ? `${query.data.total.toLocaleString()} records · showing ${(page - 1) * 25 + 1} to ${Math.min(page * 25, query.data.total)}`
+                ? `${query.data.total.toLocaleString()} records · showing ${query.data.total === 0 ? 0 : (page - 1) * 25 + 1} to ${Math.min(page * 25, query.data.total)}`
                 : "Data Explorer"
             }
           >
+            <ExplorerExports
+              key={selectionKey}
+              dataset={dataset}
+              query={queryInput}
+              rows={rows}
+              selected={rows.filter((row) => selectedIds.includes(row.id))}
+              total={query.data?.total ?? 0}
+            />
             <DataTable
               rows={rows}
               rowKey={(r) => r.id}
@@ -234,12 +263,31 @@ export function DataExplorer({
               }
               columns={[
                 {
+                  key: "selection",
+                  label: "Select for export",
+                  render: (r) => (
+                    <input
+                      type="checkbox"
+                      aria-label={`Select ${title(r)} for export`}
+                      checked={selectedIds.includes(r.id)}
+                      onChange={(event) =>
+                        setSelection({
+                          key: selectionKey,
+                          ids: event.target.checked
+                            ? [...selectedIds, r.id]
+                            : selectedIds.filter((id) => id !== r.id),
+                        })
+                      }
+                    />
+                  ),
+                },
+                {
                   key: "title",
                   label: bill ? "Bill / title" : "Record / title",
                   render: (r) => (
                     <button
                       className={styles.link}
-                      onClick={() => setSelected(r)}
+                      onClick={() => update({ record: r.id })}
                     >
                       {bill
                         ? [r.billType?.toUpperCase(), r.billNumber]
