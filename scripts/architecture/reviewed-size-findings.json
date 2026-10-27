@@ -2848,10 +2848,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
     "kind": "function",
     "symbol": "DocumentsLibrary",
-    "fingerprint": "0ff1c95000eca5d382215b642533d5bae8bdb6d9b8b2348ef18d78333fb910cf",
-    "reason": "This exact 165-line function retains one authorized library filter/list presentation and its local cursor/loading/error lifetime. The fixed-operation query and canonical client selector remain separate owners. Independent PR158 review explicitly accepted the cohesive function at e637ac02a8c5851f9a2cc3d20cc91f9b9717b3de; composition preserves that entire source blob. See docs/wave3-integration-20261026/BRIEF.md.",
-    "reviewedBy": "Portfolio independent reviewer, W3-LIBRARY-PR158-REVIEW.txt, 2026-10-25T17:59:48.7001381Z",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "6405938b92a6a3cbc24212f2eed3ab8c27c4b93c37099166b10388b2f560d45c",
+    "reason": "  Verdict ACCEPTABLE (the one signal requiring independent review/binding). This is a single documents-library\n  surface: a filter bar (ownership pills, search, client filter, type and status selects), a StatusPanel, a\n  6-column DataTable and a paging footer. It owns no transport, cursor semantics, tenant scope or authorization\n  — query state is owned by useLibraryQuery (filters + opaque cursor, reset-before-receiver-change), typed\n  transport by useCapiroQuery(\"workspace.documents\"), and the client picker by LibraryClientFilter. The added\n  status label Map is module-scope display policy. The 163 nonblank lines are render-heavy JSX for one cohesive\n  responsibility, not multiple concerns fused. Threshold alone is not a failure; no concrete extraction is\n  required or requested. (Non-blocking observation, no source change requested: the filter bar is the most\n  separable sub-block and would be the natural candidate if this body later grows.)",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/settings/InviteMember.tsx",
