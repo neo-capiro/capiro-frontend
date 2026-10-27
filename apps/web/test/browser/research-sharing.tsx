@@ -8,6 +8,7 @@ import { DashboardGrid } from "../../src/features/modules/research-portfolios/sh
 import { ResearchSettings } from "../../src/features/modules/research-portfolios/ResearchSettings";
 import { ClientSharingSettings } from "../../src/features/settings/ClientSharingSettings";
 import { PublicShareRecipient } from "../../src/features/modules/workspace/PublicShareRecipient";
+import { MeriSharingFixture } from "./research-sharing-meri";
 import type { ResearchDashboardLayout } from "../../src/shared/capiro/operations/research-share-schemas";
 import { dashboard, portfolio, shareToken } from "./research-sharing-fixture";
 import "../../src/app/globals.css";
@@ -52,7 +53,7 @@ function Fixture() {
     );
   return (
     <CapiroDataProvider onSessionExpired={() => undefined}>
-      {mode === "admin" ? (
+      {mode === "meri" ? <MeriSharingFixture /> : mode === "admin" ? (
         <ClientSharingSettings />
       ) : mode === "settings" ? (
         <ResearchSettings portfolio={portfolio} onReload={() => undefined} />

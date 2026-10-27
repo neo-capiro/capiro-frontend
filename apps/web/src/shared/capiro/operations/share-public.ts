@@ -18,7 +18,7 @@ export const publicShareOperations = {
       available: z.boolean(),
       kind: z.enum(["research_portfolio", "workspace_document"]).optional(),
     }),
-    source: "apps/api/src/workspace/workspace-public-share.controller.ts",
+    source: "apps/api/src/research-portfolios/research-portfolio-share.controller.ts",
   }),
   "public-share.document": defineOperation({
     service: "workspace",

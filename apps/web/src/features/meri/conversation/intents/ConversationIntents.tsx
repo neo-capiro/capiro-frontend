@@ -15,6 +15,9 @@ import {
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
+import { isResearchShareProposal } from "./research-share-view";
+import { ResearchShareReview } from "./ResearchShareReview";
+import { ResearchShareResult } from "./ResearchShareResult";
 
 function FieldList({
   fields,
@@ -46,11 +49,13 @@ function DecisionControls({
   attempt,
   onDecide,
   disabled,
+  approvalDisabled = false,
 }: {
   row: IntentRow;
   attempt: Attempt | undefined;
   onDecide: (row: IntentRow, decision: Choice) => void;
   disabled: boolean;
+  approvalDisabled?: boolean;
 }) {
   const [confirming, setConfirming] = useState<Choice | null>(null);
   const busy = disabled || attempt?.state === "pending";
@@ -85,7 +90,7 @@ function DecisionControls({
       <div className={styles.actions}>
         <Button
           type="button"
-          disabled={busy}
+          disabled={busy || approvalDisabled}
           onClick={() => setConfirming("approved")}
         >
           Approve…
@@ -114,7 +119,7 @@ function DecisionControls({
       <div className={styles.actions}>
         <Button
           type="button"
-          disabled={busy}
+          disabled={busy || (confirming === "approved" && approvalDisabled)}
           onClick={() => {
             setConfirming(null);
             onDecide(row, confirming);
@@ -164,12 +169,28 @@ function IntentCard({
           </Link>
         </Button>
       )}
-      <DecisionControls
-        row={row}
-        attempt={attempt}
-        onDecide={onDecide}
-        disabled={disabled}
-      />
+      {row.proposal &&
+      isResearchShareProposal(row.proposal) &&
+      row.decision === "approvable" ? (
+        <ResearchShareReview proposal={row.proposal}>
+          {(ready) => (
+            <DecisionControls
+              row={row}
+              attempt={attempt}
+              onDecide={onDecide}
+              disabled={disabled}
+              approvalDisabled={!ready}
+            />
+          )}
+        </ResearchShareReview>
+      ) : (
+        <DecisionControls
+          row={row}
+          attempt={attempt}
+          onDecide={onDecide}
+          disabled={disabled}
+        />
+      )}
     </article>
   );
 }
@@ -320,6 +341,13 @@ export function ConversationIntents({
           )}
         </div>
         <Body {...state} access={access} />
+        {state.oneTimeResults.map((result) => (
+          <ResearchShareResult
+            key={`${result.proposalId}:${result.commandSha256}`}
+            sharePath={result.sharePath}
+            onDismiss={() => state.dismissOneTime(result.proposalId)}
+          />
+        ))}
       </section>
       {children?.(displayed.status === "ready" ? displayed.items : [])}
     </>

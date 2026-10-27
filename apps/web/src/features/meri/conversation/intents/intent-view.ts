@@ -2,7 +2,13 @@ import {
   intentsMetadata,
   type IntentsItem,
   type IntentsProposal,
+  type IntentsNativeProposal,
 } from "@capiro/meri-client/intents";
+import {
+  isResearchShareProposal,
+  researchShareFields,
+  researchShareRow,
+} from "./research-share-view";
 
 export type IntentTone = "neutral" | "success" | "warning" | "danger";
 /** What the person may do with a row: decide it, only read it (held), or nothing (closed). */
@@ -61,6 +67,7 @@ const day = (iso: string) => iso.slice(0, 10);
 export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
+  if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
   const command = proposal.command;
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
@@ -107,7 +114,7 @@ type Completed = Extract<
 >;
 function resultFields(
   execution: Completed,
-  action: IntentsProposal["command"]["action"],
+  action: IntentsNativeProposal["command"]["action"],
 ): readonly IntentField[] {
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
@@ -357,6 +364,8 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "research_share")
+    return researchShareRow(item, now, viewer);
   if (item.kind === "schedule_proposal")
     return closed(
       [

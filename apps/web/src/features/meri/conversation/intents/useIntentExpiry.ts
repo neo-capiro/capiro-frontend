@@ -13,9 +13,9 @@ export function useIntentExpiry(
     if (list.status !== "ready") return;
     const deadlines = list.items.flatMap((item) =>
       item.state === "prepared" &&
-      item.kind === "proposal" &&
       !("withheld" in item) &&
-      item.phase === "awaiting_approval"
+      ((item.kind === "proposal" && item.phase === "awaiting_approval") ||
+        (item.kind === "research_share" && item.proposalStatus === "proposed"))
         ? [Date.parse(item.proposal.expiresAt)]
         : [],
     );
