@@ -25,6 +25,26 @@ export type ConnectionRow = {
   health: string;
 };
 
+export type GrantedScopeCard = {
+  title: string;
+  description: string;
+  notice: SettingsNotice;
+};
+
+export type DisconnectTerms = { description: string; confirm: string };
+
+/**
+ * The supporting copy that belongs to one account row. The screen shows the entry
+ * for the selected row, so scope, coverage and disconnect terms always describe
+ * the account whose warning the user is reading.
+ */
+export type ConnectionAccountDetail = {
+  id: string;
+  grantedScope: GrantedScopeCard;
+  coverage: SettingsNotice;
+  disconnect: DisconnectTerms;
+};
+
 export type ConnectorAccountsView = {
   heading: SettingsHeading;
   connections: {
@@ -41,9 +61,14 @@ export type ConnectorAccountsView = {
    * instead of offering an action it cannot perform or verify.
    */
   ownerHref?: string | undefined;
-  grantedScope: { title: string; description: string; notice: SettingsNotice };
+  /**
+   * One entry per row, keyed by row id. The screen owns the selection and renders
+   * the selected entry; the view-level copy below is the no-selection fallback.
+   */
+  accounts?: readonly ConnectionAccountDetail[] | undefined;
+  grantedScope: GrantedScopeCard;
   unavailable: SettingsNotice;
-  disconnect: { description: string; confirm: string };
+  disconnect: DisconnectTerms;
 };
 
 const columns: readonly DataColumn<ConnectionRow>[] = [
@@ -92,6 +117,15 @@ export function ConnectorAccountsScreen({
   const [confirming, setConfirming] = useState(disconnectOpen);
   const disconnectButton = useRef<HTMLButtonElement>(null);
   const selected = connections.rows.find((row) => row.id === selectedId);
+  /**
+   * The supporting copy describes the SELECTED row, not the first one. The
+   * selection stays the single piece of state owned here; the host only supplies
+   * one detail per row, so no second selection authority exists.
+   */
+  const detail = view.accounts?.find((account) => account.id === selectedId);
+  const grantedScope = detail?.grantedScope ?? view.grantedScope;
+  const coverage = detail?.coverage ?? view.unavailable;
+  const disconnect = detail?.disconnect ?? view.disconnect;
   return (
     <SettingsLayout
       chrome={chrome}
@@ -122,13 +156,13 @@ export function ConnectorAccountsScreen({
       supporting={
         <>
           <SettingsCard
-            title={view.grantedScope.title}
-            description={view.grantedScope.description}
+            title={grantedScope.title}
+            description={grantedScope.description}
             emphasis
           >
-            <SettingsCallout notice={view.grantedScope.notice} />
+            <SettingsCallout notice={grantedScope.notice} />
           </SettingsCard>
-          <SettingsCallout notice={view.unavailable} />
+          <SettingsCallout notice={coverage} />
           {selected ? (
             <MeriDialog
               open={confirming}
@@ -138,7 +172,7 @@ export function ConnectorAccountsScreen({
                   ? `Disconnect ${selected.connection}?`
                   : `Disconnect the ${selected.connection.toLowerCase()}?`
               }
-              description={view.disconnect.description}
+              description={disconnect.description}
               width="compact"
               returnFocus={disconnectButton}
             >
@@ -149,7 +183,7 @@ export function ConnectorAccountsScreen({
                     href={view.ownerHref}
                     unavailable={chrome.unavailable}
                   >
-                    {view.disconnect.confirm}
+                    {disconnect.confirm}
                   </LinkAction>
                   <button
                     type="button"
@@ -161,7 +195,7 @@ export function ConnectorAccountsScreen({
                 </div>
               ) : (
                 <ConfirmActions
-                  confirm={view.disconnect.confirm}
+                  confirm={disconnect.confirm}
                   unavailable={chrome.unavailable}
                   onCancel={() => setConfirming(false)}
                 />
@@ -194,7 +228,7 @@ function ConnectionActions({
   onDisconnect: () => void;
 }) {
   return (
-    <div className={ui.row}>
+    <div className={`${ui.row} ${styles.actions}`}>
       {ownerHref ? (
         <LinkAction
           variant="primary"

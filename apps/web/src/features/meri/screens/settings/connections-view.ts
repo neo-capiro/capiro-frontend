@@ -148,7 +148,7 @@ export function coverageNotice(
     .filter(Boolean)
     .join(" ");
   return {
-    title: "Source coverage",
+    title: `Source coverage · ${providerNames[connection.provider]}`,
     detail: parts,
     tone:
       coverage?.sourceStatus === "unavailable"
@@ -173,14 +173,15 @@ export function grantedScopeCard(
       notice: base.notice,
     };
   const provider = providerNames[connection.provider];
+  const account = accountCell(connection);
   const permissions = connection.permissions;
   const granted = permissions?.grantedScopes ?? null;
   const requested = permissions?.requestedScopes ?? connection.scopes;
   return {
     title: base.title,
     description: granted
-      ? `${provider} · ${granted.length} of ${requested.length} requested scopes were verified ${stamp(permissions?.lastVerifiedAt) ?? "at an unrecorded time"}. A verified grant does not establish runtime availability.`
-      : `${provider} · the current provider grants have not been verified. Stored scope names can reflect requested permissions, so no grant is claimed here. Verify them in Capiro Integrations before relying on them.`,
+      ? `${provider} · ${account} · ${granted.length} of ${requested.length} requested scopes were verified ${stamp(permissions?.lastVerifiedAt) ?? "at an unrecorded time"}. A verified grant does not establish runtime availability.`
+      : `${provider} · ${account} · the current provider grants have not been verified. Stored scope names can reflect requested permissions, so no grant is claimed here. Verify them in Capiro Integrations before relying on them.`,
     notice: base.notice,
   };
 }
@@ -205,6 +206,10 @@ export function disconnectTerms(
  * Build the 09.02 view from the owner response. `ownerHref` is the route of the
  * surface that owns connect, reconnect, sync and disconnect, carrying the
  * current client context.
+ *
+ * Every row gets its own supporting detail; the screen renders the detail of the
+ * row the user selected. The view-level copy below is the no-selection fallback,
+ * so no row's scope, coverage or revoke terms can be shown for another account.
  */
 export function connectionView(
   connections: readonly Connection[],
@@ -212,15 +217,12 @@ export function connectionView(
   base: ConnectorAccountsView,
 ): ConnectorAccountsView {
   const rows = connectionRows(connections);
-  const selected = connections.find(
-    (connection) => connection.id === rows[0]?.id,
-  );
   return {
     heading: base.heading,
     connections: {
       title: base.connections.title,
       description: rows.length
-        ? "Your own provider connections for the current account and tenant. Connect, reconnect, sync and disconnect are performed in Capiro Integrations."
+        ? "Your own provider connections for the current account and tenant."
         : "No provider account is connected for the current account. Connect one in Capiro Integrations.",
       rows: rows.length
         ? rows
@@ -238,8 +240,14 @@ export function connectionView(
     },
     ownerHref,
     coverageHref: ownerHref,
-    grantedScope: grantedScopeCard(selected, base.grantedScope),
-    unavailable: coverageNotice(selected),
-    disconnect: disconnectTerms(selected, base.disconnect),
+    accounts: connections.map((connection) => ({
+      id: connection.id,
+      grantedScope: grantedScopeCard(connection, base.grantedScope),
+      coverage: coverageNotice(connection),
+      disconnect: disconnectTerms(connection, base.disconnect),
+    })),
+    grantedScope: grantedScopeCard(undefined, base.grantedScope),
+    unavailable: coverageNotice(undefined),
+    disconnect: disconnectTerms(undefined, base.disconnect),
   };
 }

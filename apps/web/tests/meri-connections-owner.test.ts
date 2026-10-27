@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { z } from "zod";
 import { ConnectorAccountsHost } from "../src/features/meri/screens/settings/ConnectorAccountsHost";
+import { ConnectorAccountsScreen } from "../src/features/meri/screens/settings/ConnectorAccountsScreen";
 import {
   connectionRows,
   connectionView,
@@ -206,14 +207,110 @@ describe("Meri connections owner projection", () => {
       owner,
       unavailablePreferences.connections,
     );
+    const account = view.accounts?.[0];
     expect(view.ownerHref).toBe(owner);
     expect(view.coverageHref).toBe(owner);
     expect(view.connections.initialSelectedId).toBe(connection().id);
-    expect(view.disconnect.confirm).toBe("Review in Capiro Integrations");
-    expect(view.disconnect.description).toContain(
+    expect(account?.id).toBe(connection().id);
+    expect(account?.disconnect.confirm).toBe("Review in Capiro Integrations");
+    expect(account?.disconnect.description).toContain(
       "retained but become unavailable in mail views",
     );
-    expect(view.disconnect.description).toContain("Capiro Integrations");
+    expect(account?.disconnect.description).toContain("Capiro Integrations");
+    // The handoff is stated once, on the page notice, not again in the card.
+    expect(view.connections.description).not.toContain(
+      "performed in Capiro Integrations",
+    );
+  });
+});
+
+describe("Meri connections selected-account detail", () => {
+  const archive = () =>
+    connection({
+      id: "55555555-5555-4555-8555-555555555555",
+      provider: "google_workspace",
+      accountEmail: "archive@example.test",
+      permissions: {
+        requestedScopes: ["Mail.Read", "Calendars.Read", "offline_access"],
+        grantedScopes: ["Mail.Read", "Calendars.Read"],
+        lastVerifiedAt: "2026-10-12T08:00:00.000Z",
+      },
+      mailCoverage: coverage({
+        sourceStatus: "degraded",
+        reason: "mail_sync_stale",
+        backfillComplete: false,
+        hasMore: true,
+      }),
+      subscriptions: {
+        configured: false,
+        updatedAt: null,
+        lastNotificationAt: null,
+        lastLifecycleEvent: "reauthorizationRequired",
+        resources: [
+          {
+            resource: "me/events",
+            expiresAt: null,
+            lastRenewedAt: null,
+            needsReauthorization: true,
+          },
+        ],
+      },
+    });
+
+  const twoConnections = () =>
+    connectionView(
+      [connection({ mailCoverage: coverage() }), archive()],
+      "/settings/integrations",
+      unavailablePreferences.connections,
+    );
+
+  it("gives each row its own scope, coverage and revoke detail", () => {
+    const built = twoConnections();
+    const [first, second] = built.accounts ?? [];
+    expect(built.accounts).toHaveLength(2);
+    expect(first?.id).toBe(connection().id);
+    expect(second?.id).toBe(archive().id);
+    expect(first?.grantedScope.description).toContain(
+      "Microsoft 365 · owner@example.test",
+    );
+    expect(first?.grantedScope.description).toContain("have not been verified");
+    expect(second?.grantedScope.description).toContain(
+      "Google Workspace · archive@example.test",
+    );
+    expect(second?.grantedScope.description).toContain(
+      "2 of 3 requested scopes were verified",
+    );
+    expect(second?.coverage.title).toContain("Google Workspace");
+    expect(second?.coverage.detail).toContain("Mail source degraded");
+    expect(second?.coverage.detail).toContain("need reauthorization");
+    expect(second?.disconnect.confirm).toBe("Review in Capiro Integrations");
+    // The first row's healthy statement is not reused for the second account.
+    expect(first?.coverage.detail).toContain("Mail source healthy");
+    expect(second?.coverage.detail).not.toContain("Mail source healthy");
+  });
+
+  it("shows the selected row's own detail, not the first row's", () => {
+    const built = twoConnections();
+    const html = renderToStaticMarkup(
+      createElement(ConnectorAccountsScreen, {
+        chrome,
+        view: {
+          ...built,
+          connections: {
+            ...built.connections,
+            initialSelectedId: archive().id,
+          },
+        },
+      }),
+    );
+    expect(html).toContain("Google Workspace · archive@example.test");
+    expect(html).toContain("Mail source degraded");
+    expect(html).toContain("need reauthorization");
+    expect(html).not.toContain("Microsoft 365 · owner@example.test");
+    expect(html).not.toContain("Mail source healthy");
+    // The unselected row stays listed and the owner handoff still points there.
+    expect(html).toContain("owner@example.test");
+    expect(html).toContain('href="/settings/integrations"');
   });
 });
 
