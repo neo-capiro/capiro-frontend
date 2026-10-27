@@ -8,6 +8,7 @@ import { FundingOpportunities } from "./FundingOpportunities";
 import { LegiWatchScreen } from "./legiwatch/LegiWatchScreen";
 import { ResearchWorkspace } from "./research/ResearchWorkspace";
 import { ResearchCoverage } from "./research/ResearchCoverage";
+import { ChangesWorkspace } from "./changes/ChangesWorkspace";
 const views = [
   { id: "explorer", label: "Data Explorer" },
   { id: "legiwatch", label: "LegiWatch" },
@@ -17,6 +18,7 @@ const views = [
   { id: "federal-spending", label: "Federal Spending" },
   { id: "research", label: "Research" },
   { id: "coverage", label: "Research Coverage" },
+  { id: "changes", label: "Changes" },
 ];
 export function IntelligenceScreen() {
   const params = useSearchParams();
@@ -53,6 +55,7 @@ export function IntelligenceScreen() {
       {view === "federal-spending" && <DataExplorer initialDataset="awards" />}
       {view === "research" && <ResearchWorkspace />}
       {view === "coverage" && <ResearchCoverage />}
+      {view === "changes" && <ChangesWorkspace />}
     </>
   );
 }
