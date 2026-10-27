@@ -14,7 +14,10 @@ function Fixture() {
   const search = useSearchParams();
   const router = useRouter();
   return (
-    <CapiroDataProvider onSessionExpired={() => undefined}>
+    <CapiroDataProvider
+      key={search.get("scope") ?? "default"}
+      onSessionExpired={() => undefined}
+    >
       {search.get("mode") === "create" ? (
         <DataProvider>
           <ResearchCreateAction
@@ -25,7 +28,7 @@ function Fixture() {
         </DataProvider>
       ) : (
         <ResearchPortfolioDetail
-          id={ids.portfolio}
+          id={search.get("portfolioId") ?? ids.portfolio}
           view={readResearchPortfolioView(search.get("view"))}
           onView={(view) => router.push(`/research-workflow.html?view=${view}`)}
           onBack={() => undefined}
