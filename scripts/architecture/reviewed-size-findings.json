@@ -6573,24 +6573,6 @@
     "reviewedOn": "2026-10-27"
   },
   {
-    "file": "apps/web/src/features/modules/research-portfolios/ResearchDetail.tsx",
-    "kind": "function",
-    "symbol": "ResearchPortfolioDetail",
-    "fingerprint": "5ab7f890965939db825b7d447aa9ed8fb24a1d4d2fd864d4e3d1c7dbc549214c",
-    "reason": "reviewed-accept (function size, 97 nonblank) — portfolio shell that mounts the URL-selected view from the shared tab list; the change only adds the 'comparisons' tab and its keyed ResearchComparisons mount, so the module grows by one declarative view registration and the view identity stays owned by the location contract.",
-    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
-    "reviewedOn": "2026-10-27"
-  },
-  {
-    "file": "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx",
-    "kind": "function",
-    "symbol": "ResearchReviews",
-    "fingerprint": "60961fcbf6226be24702765e43315d26675b5ca0c38af60c5172cef3af6ba383",
-    "reason": "reviewed-accept (function size, 154 nonblank) — review queue with explicit evidence selection per lane and a bounded 1 MB request guard below Core's 1 MiB JSON limit. The decision is released only from the refreshed queue at the captured revision (a changed revision refuses with a refresh prompt), the declared evidence caps mirror Core's own limits, and the retained idempotencyKey is reused on retry without shortening quotes or locations.",
-    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
-    "reviewedOn": "2026-10-27"
-  },
-  {
     "file": "apps/web/src/features/modules/research-portfolios/comparison/ComparisonCapture.tsx",
     "kind": "function",
     "symbol": "ComparisonCapture",
@@ -6750,6 +6732,96 @@
     "fingerprint": "befa5effba3dec57833487f9cfc735c2c27dfac070d225c263ff9949a94e11ad",
     "reason": "reviewed-accept — preview hash/revision bound, no auto-enable",
     "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/BudgetChanges.tsx",
+    "kind": "function",
+    "symbol": "BudgetChanges",
+    "fingerprint": "3430a0bebb8b65ba650f6f011fcbb432ff00ac2042b4216a95d1912376aeb372",
+    "reason": "reviewed-accept (function size, 158 nonblank) — one Changes/Budget tab: URL-owned filters (changesBudgetPe/changesFy/changesScore/changesBudgetPage), the two mutually exclusive fixed delta reads (attention vs per-PE), the per-row peCode cross-check that withholds mismatched rows, and the fixed table plus paging. Growth is declarative rendering plus location wiring; no authority, mutation or aggregation is added, and splitting would separate the URL contract from its single owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/CongressionalChanges.tsx",
+    "kind": "function",
+    "symbol": "CongressionalChanges",
+    "fingerprint": "c8f369d206bc215b755ba87d9a4a2be5add853399136bcbc026a897bc32ee2f7",
+    "reason": "reviewed-accept (function size, 105 nonblank) — the per-PE congressional tab: required PE input, one fixed bill-actions read, the disclosed 200-action/40-bill/60-per-bill bound, the action table and the existing ProgramBills composition. No fiscal-year or source filter is invented because the owner has none.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/MonitoredChanges.tsx",
+    "kind": "function",
+    "symbol": "ClientWatchList",
+    "fingerprint": "258473a5e4b0d6d01ebc325e0bba067e58ed4ae0fa0df52b952afc1d91aa0ca7",
+    "reason": "reviewed-accept (function size, 98 nonblank) — the selected-client watch surface: one fixed watches read, a client identity cross-check on every watch and event, the newest subscription-event state derivation, the disclosed first-100 display for an unpaginated owner, and the retained-event panel for the URL-selected watch. One reader, one presentation decision.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/PortfolioActions.tsx",
+    "kind": "function",
+    "symbol": "PortfolioActions",
+    "fingerprint": "f9a49b54bc64cd39a69ef42bc07d1a99db7a30c089800c03b287f8c8619fe9fb",
+    "reason": "reviewed-accept (function size, 98 nonblank) — the Actions tab: authorized portfolio list with cursor paging (research.list), one detail read admitted only when the returned id equals the routed id, and the native review queue mounted through the reviews-public presentation boundary. It adds no authority; Core still re-checks grant, lifecycle and revision.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchBulkReviews.tsx",
+    "kind": "function",
+    "symbol": "ResearchBulkReviews",
+    "fingerprint": "64afe94982748b03c1b3a19e03158a637af49953f473c42e9fea4a4067560164",
+    "reason": "reviewed-accept (function size, 340 nonblank) — one bounded bulk-decision form and its recovery state machine over the fixed research.reviews.bulk owner: revision-bound per-row selection (≤50), one decision and reason, explicit per-row evidence, a pre-send 1 MB bound matching the declared operation limit, exact parsed-request and key retention across an unknown outcome, receipt identity validation (portfolioId plus exactly one outcome per selected review), and the per-row outcome table. The draft, the retained request/key and the receipt are one machine; extracting the retention logic would separate the byte-identical request from the state that must reproduce it.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchDetail.tsx",
+    "kind": "function",
+    "symbol": "ResearchPortfolioDetail",
+    "fingerprint": "b43966e215dc6fde5f23346695042b974c62a4a347d8870f0005f7f2fa606762",
+    "reason": "reviewed-accept (function size, 131 nonblank, replaces the 97-nonblank record) — the detail owner retains its last verified display only for the same API instance and portfolio id while a read is pending, and clears it on a real error, a mismatched returned id or a scope change; the inert-plus-capture wrapper suppresses interaction (including portalled modal controls) only during that refresh while reads stay allowed. The retention rule is the component's whole reason for its shape and belongs with the single view switch it wraps.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchMembers.tsx",
+    "kind": "function",
+    "symbol": "ResearchMembers",
+    "fingerprint": "eccbb7f0df26799d3d375ecc33f74507d134d38a167ae7005c4eee7b1dccaf4a",
+    "reason": "reviewed-accept (function size, 208 nonblank) — the native membership tab: bounded selection (≤100), explicit include/exclude decisions, unresolved rows routed to Resolve instead of Include, the decision receipt table keyed by member identity, and the two mounted member dialogs. One table plus one decision owner; the dialogs already own their own request/retention logic.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx",
+    "kind": "function",
+    "symbol": "ResearchReviews",
+    "fingerprint": "cf8c4f5cadc81bd4371695881d181b100767209c41a627903953d8a6833c211f",
+    "reason": "reviewed-accept (function size, 276 nonblank, replaces the 253-nonblank record) — the review owner: URL-owned lane, the lane queue read with per-row portfolio identity verification, the single-decision modal bound to the captured review revision, and the mounted bulk-decision surface. It remains the single place where review decisions are released, so the lane state, queue verification and both decision paths belong together.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/members/MemberDecision.tsx",
+    "kind": "function",
+    "symbol": "MemberDecision",
+    "fingerprint": "172c68c1346982fbfeaa24069f2775687d90715dc20cd64f1706f6acf00050d1",
+    "reason": "reviewed-accept (function size, 106 nonblank) — the explicit multi-member include/exclude modal: one reason applied to every selected member, the captured exact request and key retained across an unknown outcome with manual same-request retry only, a refused 4xx clearing retention, and the atomic-batch disclosure. One mutation with one recovery rule.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/research-portfolios/members/MemberDiscovery.tsx",
+    "kind": "function",
+    "symbol": "MemberDiscovery",
+    "fingerprint": "15c952eadca724f49d7beb1967f38a59cae77ce1cb3bedc6af95f1a0137fec77",
+    "reason": "reviewed-accept (function size, 281 nonblank) — the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
+    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
     "reviewedOn": "2026-10-27"
   }
 ]
