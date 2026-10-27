@@ -6,10 +6,10 @@ import { DropdownMenu } from "radix-ui";
 import { clientViews } from "@/shared/portfolio/shell/client-views";
 import {
   type Client,
-  organizationInitials,
   clientLocation,
   clientSectorLabel,
 } from "@/features/portfolio/index/public";
+import { ClientMonogram } from "./ClientMonogram";
 import { ClientViewSwitcher } from "./ClientViewSwitcher";
 import { ClientProfileActions } from "./ClientProfileActions";
 import { ClientMeriActions } from "./ClientMeriActions";
@@ -75,11 +75,11 @@ export function ClientHeader({ client }: { client: Client }) {
       {view.suffix && (
         <section className={styles.strip} aria-label="Client identity">
           <span className={styles.avatar}>
-            {client.logoUrl ? (
-              <img src={client.logoUrl} alt="" width={40} height={40} />
-            ) : (
-              organizationInitials(client.name)
-            )}
+            <ClientMonogram
+              name={client.name}
+              logoUrl={client.logoUrl}
+              size={40}
+            />
           </span>
           <div className={styles.identity}>
             <strong>{client.name}</strong>

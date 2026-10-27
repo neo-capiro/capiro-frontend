@@ -1,12 +1,10 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowUpRight, NotebookPen, Plus, Users } from "lucide-react";
 import {
   useClient,
-  organizationInitials,
   clientLocation,
   clientSectorLabel,
   safeWebsite,
@@ -17,6 +15,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
 import { ClientDetails, GovernmentSummary } from "./ClientDetails";
+import { ClientMonogram } from "./ClientMonogram";
 import {
   DeadlineAndRequests,
   EngagementHealth,
@@ -79,11 +78,11 @@ export function ClientOverview({ clientId }: { clientId: string }) {
             </div>
             <div className={styles.identity}>
               <span className="monogram">
-                {value.logoUrl ? (
-                  <img src={value.logoUrl} width={52} height={52} alt="" />
-                ) : (
-                  organizationInitials(value.name)
-                )}
+                <ClientMonogram
+                  name={value.name}
+                  logoUrl={value.logoUrl}
+                  size={52}
+                />
               </span>
               <div>
                 <div className="row">
