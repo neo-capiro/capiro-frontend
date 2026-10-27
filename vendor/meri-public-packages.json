@@ -343,7 +343,7 @@
       "regularEntryCount": 69,
       "status": "superseded-by capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz; historical archive retained",
       "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
-      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u2026/5a1cf815\u2026). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
+      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614…/5a1cf815…). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
     },
     {
       "file": "capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz",
@@ -372,6 +372,26 @@
       "regularEntryCount": 6,
       "status": "qualified-local-consumer; deployed-acceptance-separate",
       "qualification": "Owner-regenerated public declarations preserve accepted hearing source union. All four runtime/declaration files byte-identical to accepted FE0.1.5 archive; owner-authored peer contracts0.1.18. Prior b63a artifact withheld before release; receipt preserved outside source."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.20-586e7d2b-422975f18e98.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "586e7d2be8cbb9a8971c60ece485444602d1ef0b",
+      "bytes": 1267203,
+      "sha256": "422975f18e989e9f5dd0c582464d4618d74afe1680f6605f0e78229a49483304",
+      "regularEntryCount": 69,
+      "status": "verified-source-pending-consumer-qualification",
+      "purpose": "Final Wave4 consumer integration candidate; source and physical bytes frozen, no publication or deployment claim."
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.7-329c3ee9-71ae991aa7fa.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "329c3ee9ff80b8eea770a60c975d5a6172ac191c",
+      "bytes": 3111,
+      "sha256": "71ae991aa7faec21374ffb0f01cd72bceddb8021151e95d377cf06cf4267ead1",
+      "regularEntryCount": 6,
+      "status": "verified-source-pending-consumer-qualification",
+      "purpose": "Final Wave4 consumer integration candidate; source and physical bytes frozen, no publication or deployment claim."
     }
   ]
 }

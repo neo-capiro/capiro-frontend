@@ -673,10 +673,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
     "kind": "function",
     "symbol": "sendReviewedMail",
-    "fingerprint": "5150fdb86326313c0ee2860ce8b208f9880d711148e91b7098c7aa25e42f38bd",
-    "reason": "This existing transport boundary owns bounded preflight and response admission for one explicit mail request. Native reply adds a canonical selected-original read and exact origin/revision/mailbox checks, then reuses attachment admission and the sole POST. The shared replyReceiptMatches leaf distinguishes original conversation from the actual provider-returned receipt. Pre-POST failures are definite; post-POST ambiguity remains uncertain unless the exact durable request is rejected. Core remains authorization and send-ledger owner.",
-    "reviewedBy": "Codex independent Gmail frontend reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "efca6718049fc39e7e51a45034c66b005fc5b0574eeb37266b25a494a93376c1",
+    "reason": "One reviewed-mail send owner performs the input parse, current-authority and original-context checks, attachment recheck, single dispatch and definite-versus-uncertain result classification. Its final actor check and dispatch remain together. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
@@ -754,9 +754,9 @@
     "file": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
     "kind": "function",
     "symbol": "ThreadSession",
-    "fingerprint": "5ce636de890ebd86110bbe9c81e1e946aac17a5a1631b40baa77b4325f2b6284",
-    "reason": "This remains the scoped Timeline thread view: expansion, bounded paging, read errors, refresh and review-only reply-all. It mounts the shared native reply owner and retains it during a background refresh so an accepted composer receipt is not erased; explicit refresh/collapse and current-read failure retire that child. Canonical reading and sending remain delegated. The inherited reply-all preview error/reopen limitation is explicitly outside this native-reply acceptance, not silently resolved by this review.",
-    "reviewedBy": "Codex independent s3_assessment",
+    "fingerprint": "4e8cac81f1066b2d6625f34c7434a69cfb34b1f901f447967a397b088f93ece2",
+    "reason": "One verified thread-session lifecycle owns expansion, lazy stored read and continuation, nested reply refresh lifetime and read-error presentation. Pagination and refresh branches belong to that single session owner. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -1406,19 +1406,19 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "3fba6d69953190d8594128e885ce08c2d5eb31d4da10aa18a0858bf5d2a291e3",
-    "reason": "This module is the existing reviewed mail composer. The additive reply mode fixes reviewed recipient/subject/mailbox context while body editing, uploads, signature, rewrite and send/recovery remain in their existing owners. Unsupported legacy thread inputs remain review-only. No new provider adapter, transport or persistence responsibility is introduced.",
-    "reviewedBy": "Codex independent Gmail frontend reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "a484890fb55d9fb6239073aebc5f94124a2774a1ee48fded58b605629347815e",
+    "reason": "One composed mail surface binds focused recipient, attachment, editor, mailbox, signature and authority owners into one review-then-send flow. Keeping the form and frozen review snapshot together preserves their evidence binding; a size-based split is refused. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "e683a59fb2031647792057e3135a3a389dad78a40dd37d2a064d5e725c88cab8",
-    "reason": "The composer continues to assemble an explicit user review and delegate dispatch to useSendMail. Reply adds original id/revision to the reviewed input, disables editable recipients/subject, verifies the original mailbox, and uses acceptance-accurate receipt copy. Existing body, attachment, signature, authority and uncertainty fences are retained. Most growth is cohesive declarative review UI; no duplicate command/recovery owner is created.",
-    "reviewedBy": "Codex independent Gmail frontend reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "0e6ad17285c9afd99fd33672f14e5a2227552fef0c7eb8f43a4bfa4449e11e16",
+    "reason": "One email draft and review-confirm-send transition owns its state, preconditions and uncertainty lock. The reviewed input and its two dialog renders remain in one body; a size-based split is refused. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
@@ -5552,8 +5552,8 @@
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "b4356efbd8191e72bb654fef1bc573beaa371278c4f9d805c03735be3335e2fc",
-    "reason": "The shared cell, label and per-kind projection vocabulary remains cohesive. Splitting by size would fragment that vocabulary without a responsibility gain. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "fingerprint": "5550483bea836ca0a9d7b307ee9322b9451f477cd9a7087ad982244fd885cc82",
+    "reason": "One shared field vocabulary and typed intent projection module changes only by importing and dispatching to the saved-note leaf. A size-based split is refused because it would fragment the shared vocabulary and separate dispatch from its vocabulary. Independent decision: work/hermes-review/note-fe-review/FRONTEND-REVIEW.txt.",
     "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
@@ -5561,8 +5561,8 @@
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "function",
     "symbol": "intentRow",
-    "fingerprint": "98337f2a469d101348c26796dabd478c7202a7806228606576695622174c7936",
-    "reason": "One current item is dispatched to its exact kind projection with truthful withheld and unavailable states; the watch branch stays adjacent to sibling action branches. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "fingerprint": "105a015b1c74953297ed3a63201e4cd2ea02c468e6b206072768b893c63d777c",
+    "reason": "One ordered case ladder projects one current typed intent item through its exact family owner. The saved-note branch preserves the single-item dispatch responsibility. Independent decision: work/hermes-review/note-fe-review/FRONTEND-REVIEW.txt.",
     "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
@@ -5797,6 +5797,51 @@
     "symbol": "IncomingMailFiles",
     "fingerprint": "325bc7d23c3d74929a5b9af98536420898807005de312a0bb427fc352a5a7058",
     "reason": "Keep IncomingMailFiles as one selected-message panel owner: pending/error/manifest/handoff/receipt/stored/draft states, guarded execution and rendering are mutually dependent. Wire contracts and pure helpers already belong to email/incoming-files.ts; a size-based split would separate the guard from the surface it protects. Independent decision: work/hermes-review/incoming-mail-files-review/FE-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/screens/settings/ConnectorAccountsScreen.tsx",
+    "kind": "function",
+    "symbol": "ConnectorAccountsScreen",
+    "fingerprint": "64cafb17aca0cbbe0bf092d55ede690f7f03ac2207fb5139629c3bd53b814d08",
+    "reason": "One already-resolved connections view owns only row selection and disconnect confirmation; the host owns reads, mutations and authority. The table, granted-scope copy and confirmation render the same view. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/screens/settings/MeriPreferencesPanel.tsx",
+    "kind": "function",
+    "symbol": "MeriPreferencesPanel",
+    "fingerprint": "7bec29b6a9b3dfefab74cb538f45987ba55f26aa18ad83275c51c77449c4308d",
+    "reason": "One preferences tab shell owns page selection and chrome, delegating reads, writes and authorization to each canonical page owner. Its size is the switch and per-page framing; no split is needed. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/read.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "e32d59684f22695d693bf7ea4f86c7b16c8353e1c16c90ee64da6e90b4868ce1",
+    "reason": "One stored-mail read and continuation contract owns its schemas, scope-binding refinements and read consumers. Splitting the schema from the rule binding current tenant, actor and association would fragment the contract. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/thread/IncomingMailFiles.tsx",
+    "kind": "function",
+    "symbol": "IncomingMailFiles > <anonymous> #2",
+    "fingerprint": "b51e478da518bce21ea39d813e065e6a19fd0b1891dcede9b4413aa390cd8c5a",
+    "reason": "The manifest.files.map render callback projects one incoming-file entry across handoff, import, stored-copy, quarantine and provenance states. It delegates handlers and authority to the panel and owns no state, fetch or authorization; this nested body was assessed independently. Independent decision: work/hermes-review/frontend-responsibility/RESPONSIBILITY-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/note-view.ts",
+    "kind": "function",
+    "symbol": "savedNoteRow",
+    "fingerprint": "f6135c7597a604eccd1efec9d77c5bd23e675dab92bcce17b801df6c6f270099",
+    "reason": "One pure finite status, readiness and receipt projection presents direct policy-approved note history. It performs no I/O, authorization, decision or replay. Independent decision: work/hermes-review/note-fe-review/FRONTEND-REVIEW.txt.",
     "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   }
