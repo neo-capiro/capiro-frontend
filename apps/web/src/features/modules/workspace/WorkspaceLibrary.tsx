@@ -14,6 +14,15 @@ import styles from "./workspace.module.css";
 import { LibraryClientFilter } from "./LibraryClientFilter";
 import { useLibraryQuery } from "./library-query";
 
+const documentStatusLabels = new Map([
+  ["draft", "Draft"],
+  ["generating", "Generating"],
+  ["generated", "Generated"],
+  ["partial", "Partial"],
+  ["delivered", "Delivered"],
+  ["complete", "Complete"],
+]);
+
 function documentTone(status: string) {
   if (["complete", "generated", "delivered"].includes(status)) return "success";
   if (["draft", "partial"].includes(status)) return "warning";
@@ -128,15 +137,15 @@ export function DocumentsLibrary({
           />
         )}
         <SelectInput
-          aria-label="Filter documents by template"
+          aria-label="Filter documents by type"
           value={query.kind ?? "all"}
           onValueChange={(kind) =>
             setFilters({ kind: kind as "all" | "hillday" | "draft" })
           }
           options={[
-            { value: "all", label: "Template · All" },
+            { value: "all", label: "Type · All" },
             { value: "hillday", label: "Hill Day" },
-            { value: "draft", label: "Documents" },
+            { value: "draft", label: "Documents (includes newsletters)" },
           ]}
         />
         <SelectInput
@@ -147,14 +156,10 @@ export function DocumentsLibrary({
           }
           options={[
             { value: "", label: "Status · Any" },
-            ...[
-              "draft",
-              "generating",
-              "generated",
-              "partial",
-              "delivered",
-              "complete",
-            ].map((state) => ({ value: state, label: state })),
+            ...Array.from(documentStatusLabels, ([value, label]) => ({
+              value,
+              label,
+            })),
           ]}
         />
       </div>
@@ -206,7 +211,9 @@ export function DocumentsLibrary({
               key: "status",
               label: "STATUS",
               render: (row) => (
-                <Badge tone={documentTone(row.status)}>{row.status}</Badge>
+                <Badge tone={documentTone(row.status)}>
+                  {documentStatusLabels.get(row.status) ?? row.status}
+                </Badge>
               ),
             },
             {
