@@ -5,6 +5,7 @@ import {
   legislativeDocumentFields,
   legislativeDocumentRow,
 } from "./legislative-document-view";
+import { savedNoteRow } from "./note-view";
 import {
   isClientRecordProposal,
   clientRecordFields,
@@ -396,6 +397,7 @@ export function intentRow(
   if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
   if (item.kind === "legislative_document_action")
     return legislativeDocumentRow(item, now, viewer);
+  if (item.kind === "saved_note") return savedNoteRow(item);
   if (item.kind === "client_record_action")
     return clientRecordRow(item, now, viewer);
   if (item.kind === "research_share")
