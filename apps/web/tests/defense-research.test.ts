@@ -18,7 +18,11 @@ describe("native Research fixed Core boundaries", () => {
       expect(operation.service).toBe("core");
       expect(operation.method).toBe("GET");
       expect(operation.path.startsWith("/defense-budget/")).toBe(true);
-      expect(operation.source).toContain("f7b3c4401");
+      expect(operation.source).toContain(
+        operation.path === "/defense-budget/product-coverage"
+          ? "b49f01017"
+          : "f7b3c4401",
+      );
     }
     const read = defenseResearchOperations["defenseResearch.offices"];
     expect(

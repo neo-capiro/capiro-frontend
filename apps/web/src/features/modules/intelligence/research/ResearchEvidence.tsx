@@ -2,8 +2,10 @@
 import { useState, type ReactNode } from "react";
 import type { z } from "zod";
 import type { evidence } from "../../../../shared/capiro/operations/defense-research-schemas";
+import type { referenceOccurrence } from "../../../../shared/capiro/operations/defense-evidence";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
 import { ActionButton, Modal, StatusPanel } from "../../../../shared/module-ui";
+import { EvidenceCoordinates } from "./EvidenceCoordinates";
 type Evidence = z.infer<typeof evidence>;
 export function SourceLink({
   url,
@@ -38,7 +40,44 @@ export function sameEvidence(expected: Evidence, actual: Evidence) {
     }) &&
     actual.nativeLocator.page === expected.nativeLocator.page &&
     actual.nativeLocator.section === expected.nativeLocator.section &&
-    actual.nativeLocator.occurrenceId === expected.nativeLocator.occurrenceId
+    actual.nativeLocator.occurrenceId === expected.nativeLocator.occurrenceId &&
+    (!expected.nativeLocator.details ||
+      (
+        [
+          "printedPage",
+          "tableLabel",
+          "rowLabel",
+          "columnLabel",
+          "textSpan",
+          "boundingBox",
+          "structuredElement",
+          "sourceSpanHash",
+        ] as const
+      ).every(
+        (field) =>
+          JSON.stringify(expected.nativeLocator.details?.[field]) ===
+          JSON.stringify(actual.nativeLocator.details?.[field]),
+      ))
+  );
+}
+export function sameOccurrenceEvidence(
+  expected: Evidence,
+  actual: z.infer<typeof referenceOccurrence>,
+) {
+  const span = expected.nativeLocator.details?.textSpan;
+  // Occurrence references retain the base contract; detailed native reads add coordinates separately.
+  const baseReference = {
+    ...expected,
+    nativeLocator: { ...expected.nativeLocator, details: undefined },
+  };
+  return (
+    actual.id === expected.nativeLocator.occurrenceId &&
+    actual.sourceDocumentId === expected.sourceDocumentId &&
+    actual.sourceRevisionId === expected.sourceRevisionId &&
+    actual.evidenceRef.availability !== "unavailable" &&
+    sameEvidence(baseReference, actual.evidenceRef) &&
+    (!span ||
+      (actual.startOffset === span.start && actual.endOffset === span.end))
   );
 }
 export function EvidenceList({ items }: { items: readonly Evidence[] }) {
@@ -133,6 +172,7 @@ function EvidenceInspector({
             </dl>
             {actual.reason && <p>{actual.reason}</p>}
             <SourceLink url={actual.sourceUrl} />
+            <EvidenceCoordinates details={actual.nativeLocator.details} />
             {actual.nativeLocator.occurrenceId && (
               <ExactOccurrence
                 evidence={actual}
@@ -159,9 +199,7 @@ function ExactOccurrence({
   const admitted =
     actual &&
     actual.id === occurrenceId &&
-    actual.sourceDocumentId === expected.sourceDocumentId &&
-    actual.sourceRevisionId === expected.sourceRevisionId &&
-    sameEvidence(expected, actual.evidenceRef);
+    sameOccurrenceEvidence(expected, actual);
   return (
     <StatusPanel
       loading={query.loading}
@@ -181,6 +219,12 @@ function ExactOccurrence({
             {actual.referenceType} · {actual.disposition}
           </p>
           <p>Span: {actual.exactSpan}</p>
+          <p>
+            Offsets:{" "}
+            {actual.startOffset != null && actual.endOffset != null
+              ? `${actual.startOffset}–${actual.endOffset}`
+              : "Not retained"}
+          </p>
           <blockquote>{actual.originalWording}</blockquote>
         </section>
       )}

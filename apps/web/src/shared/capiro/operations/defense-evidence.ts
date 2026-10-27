@@ -2,13 +2,15 @@ import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { evidence } from "./defense-research-schemas";
 const source =
-  "capiro-backend@f7b3c4401 packages/shared/src/defense-research.ts; defense-research.controller.ts evidence/referenceOccurrence";
+  "capiro-backend@b49f01017 packages/shared/src/defense-research.ts; defense-research.controller.ts evidence/referenceOccurrence";
 export const referenceOccurrence = z.object({
   id: z.string(),
   sourceDocumentId: z.string(),
   sourceRevisionId: z.string(),
   sourceSectionId: z.string().nullable(),
   exactSpan: z.string(),
+  startOffset: z.number().int().nonnegative().nullable().optional(),
+  endOffset: z.number().int().nonnegative().nullable().optional(),
   originalWording: z.string(),
   referenceType: z.string(),
   disposition: z.enum(["resolved", "ambiguous", "unresolved", "unavailable"]),
