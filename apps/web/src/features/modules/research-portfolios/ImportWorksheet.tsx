@@ -2,7 +2,11 @@
 import { useState } from "react";
 import type { z } from "zod";
 import type { ResearchDetail } from "../../../shared/capiro/operations/research-schemas";
-import { researchImportDetail } from "../../../shared/capiro/operations/research-imports";
+import {
+  researchImportDetail,
+  type researchImportOperations,
+} from "../../../shared/capiro/operations/research-imports";
+import { CapiroApiError } from "../../../shared/capiro/http";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -16,6 +20,9 @@ import {
 } from "../../../shared/module-ui";
 import styles from "./research.module.css";
 type ImportDetail = z.infer<typeof researchImportDetail>;
+type ImportActionRequest = z.infer<
+  (typeof researchImportOperations)["research.imports.action"]["request"]
+>;
 export function ImportWorksheet({
   portfolio,
   jobId,
@@ -34,6 +41,10 @@ export function ImportWorksheet({
     Record<string, Record<string, string>>
   >({});
   const [receipt, setReceipt] = useState<ImportDetail>();
+  const [retained, setRetained] = useState<{
+    identity: string;
+    request: ImportActionRequest;
+  }>();
   const job = receipt ?? query.data;
   const editable =
     portfolio.myRole !== "viewer" && portfolio.lifecycle === "active";
@@ -81,19 +92,27 @@ export function ImportWorksheet({
     confirmCompensation = false,
   ) {
     if (!allowed(name)) return;
+    const params = { id: portfolio.id, jobId, action: name };
+    const body = {
+      expectedRevision: portfolio.revision,
+      selectedRowIds: selectedIds,
+      ...(name === "preview" ? { repairs } : {}),
+      ...(confirmCompensation && compensation
+        ? { compensationPreviewHash: compensation.previewHash }
+        : {}),
+    };
+    const identity = JSON.stringify({ params, body });
+    const request =
+      retained?.identity === identity
+        ? retained.request
+        : {
+            params,
+            body: { operationKey: crypto.randomUUID(), ...body },
+          };
+    setRetained({ identity, request });
     try {
-      const next = await action.run({
-        params: { id: portfolio.id, jobId, action: name },
-        body: {
-          operationKey: crypto.randomUUID(),
-          expectedRevision: portfolio.revision,
-          selectedRowIds: selectedIds,
-          ...(name === "preview" ? { repairs } : {}),
-          ...(confirmCompensation && compensation
-            ? { compensationPreviewHash: compensation.previewHash }
-            : {}),
-        },
-      });
+      const next = await action.run(request);
+      setRetained(undefined);
       setReceipt(next);
       setSelected(null);
       setRepairs({});
@@ -108,9 +127,12 @@ export function ImportWorksheet({
       description={`Keep this import ID to reopen it: ${jobId}`}
       actions={
         <ActionButton
+          disabled={action.pending}
           onClick={() => {
             setReceipt(undefined);
+            action.reset();
             query.reload();
+            onReload();
           }}
         >
           Refresh status
@@ -122,6 +144,16 @@ export function ImportWorksheet({
         error={query.error || action.error}
         onRetry={query.reload}
       />
+      {retained && action.error && (
+        <p className={styles.content}>
+          {action.error instanceof CapiroApiError &&
+          action.error.status >= 400 &&
+          action.error.status < 500 &&
+          action.error.status !== 408
+            ? "The action was refused. Refresh its status or change the selected action or input before trying a corrected request."
+            : "The response is uncertain. Repeating this unchanged action sends the same request key; refresh its status before choosing another action."}
+        </p>
+      )}
       {job && (
         <>
           <p className={styles.content} role="status">
