@@ -6293,9 +6293,9 @@
     "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
     "kind": "function",
     "symbol": "SessionComposer",
-    "fingerprint": "1d4544841b6d9689fc4c330db1ad7f9eb5a9b5b1d8bea9c684a0e01cadcb7e85",
-    "reason": "Sibling component that subscribes to the session composer channel and renders the composer's model, skill and handoff controls for the active conversation. Owns only composer-control composition; no broadcast or transport concern leaks in.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
+    "fingerprint": "9a6533c6794cde516e6ac41bfdc787310392a762b6216ab86f571dc3474c6722",
+    "reason": "Composer shell. The revision-draft affordance is the twin of the existing ClientHandoffDraft block: same ready-port key, same disabled owner, and the onChange delegates selection retention to the existing initial-draft owner and rethrows on refusal. It adds no run, session, SDK or authority owner and no new publication path; 127 nonblank lines remain one presentation responsibility.",
+    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6834,7 +6834,7 @@
     "kind": "file",
     "symbol": "<module>",
     "fingerprint": "a982a37ae1d4e454604d59fae3283fa23c1ef8a63e308d9b2c744de3c644a174",
-    "reason": "reviewed-accept \u2014 composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7c\u2026), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3b\u2026, 66fb493c\u2026), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain \u2014 classification predicates, DecisionControls, IntentCard, Body, container \u2014 with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
+    "reason": "reviewed-accept — composed 421-nonblank module (411 at the Wave4 base plus the 10-line saved-filing receipt link block in IntentCard). IntentCard is byte-identical to the reviewed c462f484 card (2baf8e7c…), Body and DecisionControls are byte-identical to the reviewed 2146faae bodies (9cc9ac3b…, 66fb493c…), and the only other delta vs the reviewed MF19 tree is the already-reviewed Wave4 unavailable-panel/Refresh ui.outline styling. Content stays in one bounded prepared-action domain — classification predicates, DecisionControls, IntentCard, Body, container — with no new domain, effect, lifecycle owner, authority owner, dependency direction or shared-file write surface; a split is not required.",
     "reviewedBy": "Hermes Agent source review 20261027_205545_91530e",
     "reviewedOn": "2026-10-27"
   },
@@ -6860,9 +6860,9 @@
     "file": "apps/web/src/features/meri/files/DocumentLibrary.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "9bad3b5bf650067441c17cf1a0be553b218bac0917f7bd2081dca61bdca54dca",
-    "reason": "New Files-library presentation module (407 nonblank, crossing 400 for the first time). It owns one feature surface: saved-conversation discovery paging and origin selection, the per-origin connection host, and the list/history page with its actions. Paging state, the public-facade read port, session bootstrap and the creation workflow are separate owners in separate modules (document-library-state.ts, library-access.ts, library-session.ts, MeriFilesHost.tsx). Dependencies point outward to the shared/installed facade only; no cycle, no second domain, authority or lifecycle owner, no shared-file write surface. Splitting would move one cohesive surface across files.",
-    "reviewedBy": "Hermes Agent source review 20261027_214341_2f2a4b",
+    "fingerprint": "0b7636bd5bb9838306a010c5600f6b7c3dfc97198334d6f572b20b9bc74969fb",
+    "reason": "One feature-local Files library surface: the saved-conversation entry plus three private render helpers over the unchanged DocumentLibraryController/SessionLifetimeController/port owners. It owns no transport, storage, session or permission authority, and the +23 nonblank over the already registered 407-line module is JSX inside LibraryPage, so it is not split for a line threshold.",
+    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6878,18 +6878,36 @@
     "file": "apps/web/src/features/meri/files/DocumentLibrary.tsx",
     "kind": "function",
     "symbol": "LibraryPage",
-    "fingerprint": "0bc223fbf9ba9e04e3346aacaa6a0f77a1f0629918e12687a0ecd57983652e44",
-    "reason": "Single presentation of one DocumentLibraryController snapshot for either the scope list or one immutable history: continuation control, empty-page copy, reload, and the explicit inspect/download actions. Request, paging-consistency, byte-integrity and object-URL ownership stay in the controller and the existing artifact owners; the JSX only projects them.",
-    "reviewedBy": "Hermes Agent source review 20261027_214341_2f2a4b",
+    "fingerprint": "1b8f2cad9e7bb506c56121e343d758ad859c0d9c8d33451aa0a623b0f820f789",
+    "reason": "Library/history renderer. It composes the bounded preview panel and the revision link behind the canonical head check (the public history receiver enforces versions[0] === headVersionId on the first page), so no client-selected base version, write grant or model choice is introduced; earlier versions stay inspect/download only. 144 nonblank lines are one render responsibility.",
+    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/shared/meri-documents/proxy.ts",
     "kind": "function",
     "symbol": "proxyDocumentRequest",
-    "fingerprint": "8067a6f639341d25774fb90594666659f6f1d9f88748d2851685a9dd0c0b76f1",
-    "reason": "The one fixed-route document proxy, still a single responsibility: route allow-list (now including the two fixed read routes list/history), method/path/origin/header admission, read-vs-write capability gate, bounded request and response bodies, native-token plus opaque-session forwarding, and refusal of redirects/malformed bodies without inventing a dispatch outcome. Reads use the access-family receiver; writes keep the bound document-family receiver and the create/revise gate. No second proxy or admission owner.",
-    "reviewedBy": "Hermes Agent source review 20261027_214341_2f2a4b",
+    "fingerprint": "e44b61c73a2f27e42a575423269fa15afed05dcdfa2a0548b8ad1865ede61566",
+    "reason": "One same-origin forwarding owner. The preview routes reuse the existing origin/session/deadline/ bounded-read path and add an explicit binary header allowlist (CSP plus six x-meri-preview-* headers) with an 8 MiB read bound; admission uses the canonical preview request receiver and publication permission remains with the remote application, so readEnabled only enables forwarding and never grants a write.",
+    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/library-access.ts",
+    "kind": "function",
+    "symbol": "createDocumentLibraryAccess",
+    "fingerprint": "48ce112f281b3803fabdd4534d3bcba025071d0ff4cc8cb832a93f585d13e79e",
+    "reason": "One library port factory. It composes the existing artifact/HTTP owners with the new preview leaf and routes preview read/publish access loss and busy state through the same onAccessLost and pending() budget as the existing metadata/inspect/download paths; no new transport, header, session or retry owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/preview-access.ts",
+    "kind": "function",
+    "symbol": "createPreviewAccess",
+    "fingerprint": "3fca64cee427fcffb46fa25def4ebb399df4d5926c7d31a6dd0cde6e03f1f552",
+    "reason": "One read/publish port for artifact previews. Each explicit action re-admits source bytes through the canonical inspect receiver, refuses native or unsupported formats before dispatch, maps refusals to canonical outcomes (uncertain writes carry no disposition) and counts in-flight work for the existing session budget; read and explicit publication remain separate routes.",
+    "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
     "reviewedOn": "2026-10-27"
   }
 ]
