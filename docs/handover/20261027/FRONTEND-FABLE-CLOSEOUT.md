@@ -14,27 +14,27 @@ This is implementation evidence and a precise remaining-work register, not an in
 
 ## Fable findings and verified native omissions
 
-| Finding | Author disposition | Evidence / limit |
-|---|---|---|
-| SH5 | Fixed | Authenticated link DTO reads `lockedUntil`; owner badge expires on time instead of using lifetime failed attempts. Clock-controlled mounted browser check passes. Field is optional during the coordinated Core/web rollout. |
-| SH6 | Fixed | Widget keyboard handler ignores Alt/Ctrl/Meta and descendant-control keystrokes. Mounted browser check passes. |
-| SH7 | Fixed | Removing a widget moves focus to its adjacent widget or the canvas; keyboard and side-panel removal share this owner. Mounted browser check passes. |
-| MA1 | Fixed in visible composer preparation | Reply and reply-all seed an editable, escaped plain-text quote from the selected, freshly loaded original. Partial/truncated originals are disclosed. Reviewed outgoing HTML remains the exact send authority. No server-side hidden quote and no external send. |
-| MA2 | Fixed | Requested/granted scope sets are compared by value, with deduplicated counts and missing-scope names. Reconnect/source reasons are visible. Existing owner checks and new scope-set regression pass. |
-| MA3 | Fixed | Reply button names the verified reply recipient, not an unrelated relationship contact. |
-| D10 | Fixed | Archived settings, snapshots and review decisions disable mutation controls; eligible users retain restore. Viewer review comments follow Core's existing comment permission. Mounted archive check passes. |
-| D1–D9, D11 | Core/Meri owner | Frontend consumes the corrected owners and does not duplicate their authority rules. This report does not certify their server implementation or live execution. |
-| Rules | Implemented | Mounted Rules tab, existing templates, recursive condition/all/any/not editor, selected canonical member candidates, server preview, exact hash-bound publish and operation receipt. Preview invalidates on draft/selection/revision changes. |
-| Imports | Implemented | Bounded CSV upload, detected headers, per-kind mapping, original/mapped/repair values, selected rows, preview/apply, per-row outcomes, pause/resume/cancel/retry/reconcile and compensation preview/confirmation. URL-owned job receipt survives parent refresh. Core still owns validation and compensation correctness. |
-| Outputs/CSV/Client Files | Implemented | Existing snapshot/current projection, section selection, CSV job, cancel/retry/reconcile, bounded artifact download, linked-client filing and canonical `/portfolio/:clientId/files?file=:attachmentId` destination. Unknown create/filing preserves the exact key. Output bookmark IDs resolve as artifact downloads, never invented job IDs. |
-| Operations | Implemented | URL-owned operation ID, canonical status/limitations and reconcile; original filing key required where the owner requires it. Import/output job links use actual operation identity. |
-| Bookmarks | Implemented | Existing personal list/create/update/delete owners; exact target identity, label and note; archived write guard. Unsupported `other` is not offered. DELETE accepts the real void response. |
-| Review notes/assignment | Implemented | Existing internal member IDs for assignment, revision-bound writes, persisted note history via the narrow authorized GET, same-key explicit retry after unknown note result. Viewer comments and editor assignment/decisions are distinct. |
-| Watch conversion | Implemented | Server preview, selected eligible watch IDs, exact preview hash/revision and paused-result explanation. No automatic enabling or external delivery. |
-| Fit refresh | Implemented | Existing fit projection and explicit canonical refresh, retaining empty/partial states. |
-| Tour | Implemented | Five steps, server-owned active/dismissed/completed state and restart; no automatic completion. Independent responsive/keyboard acceptance is pending. |
-| S02 create | Implemented | Three-step details/membership/review flow, tenant/actor-scoped retained form, Back and same-tab refresh, existing durable create intent and exact explicit unknown-result retry. Mounted browser and recovery-unit checks pass. |
-| Saved brief/meeting Open/edit | Implemented | Successful Meri receipt's actual `artifactId` links to Drafts. Core-authorized GET reads stored bytes and child versions; existing version POST creates an immutable child. Unknown save locks repeat submission, retains edited text and discovers actual recorded children. No Workspace identity or URL is invented. |
+| Finding                       | Author disposition                    | Evidence / limit                                                                                                                                                                                                                                                                                                                               |
+| ----------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SH5                           | Fixed                                 | Authenticated link DTO reads `lockedUntil`; owner badge expires on time instead of using lifetime failed attempts. Clock-controlled mounted browser check passes. Field is optional during the coordinated Core/web rollout.                                                                                                                   |
+| SH6                           | Fixed                                 | Widget keyboard handler ignores Alt/Ctrl/Meta and descendant-control keystrokes. Mounted browser check passes.                                                                                                                                                                                                                                 |
+| SH7                           | Fixed                                 | Removing a widget moves focus to its adjacent widget or the canvas; keyboard and side-panel removal share this owner. Mounted browser check passes.                                                                                                                                                                                            |
+| MA1                           | Fixed in visible composer preparation | Reply and reply-all seed an editable, escaped plain-text quote from the selected, freshly loaded original. Partial/truncated originals are disclosed. Reviewed outgoing HTML remains the exact send authority. No server-side hidden quote and no external send.                                                                               |
+| MA2                           | Fixed                                 | Requested/granted scope sets are compared by value, with deduplicated counts and missing-scope names. Reconnect/source reasons are visible. Existing owner checks and new scope-set regression pass.                                                                                                                                           |
+| MA3                           | Fixed                                 | Reply button names the verified reply recipient, not an unrelated relationship contact.                                                                                                                                                                                                                                                        |
+| D10                           | Fixed                                 | Archived settings, snapshots and review decisions disable mutation controls; eligible users retain restore. Viewer review comments follow Core's existing comment permission. Mounted archive check passes.                                                                                                                                    |
+| D1–D9, D11                    | Core/Meri owner                       | Frontend consumes the corrected owners and does not duplicate their authority rules. This report does not certify their server implementation or live execution.                                                                                                                                                                               |
+| Rules                         | Implemented                           | Mounted Rules tab, existing templates, recursive condition/all/any/not editor, selected canonical member candidates, server preview, exact hash-bound publish and operation receipt. Preview invalidates on draft/selection/revision changes.                                                                                                  |
+| Imports                       | Implemented                           | Bounded CSV upload, detected headers, per-kind mapping, original/mapped/repair values, selected rows, preview/apply, per-row outcomes, pause/resume/cancel/retry/reconcile and compensation preview/confirmation. URL-owned job receipt survives parent refresh. Core still owns validation and compensation correctness.                      |
+| Outputs/CSV/Client Files      | Implemented                           | Existing snapshot/current projection, section selection, CSV job, cancel/retry/reconcile, bounded artifact download, linked-client filing and canonical `/portfolio/:clientId/files?file=:attachmentId` destination. Unknown create/filing preserves the exact key. Output bookmark IDs resolve as artifact downloads, never invented job IDs. |
+| Operations                    | Implemented                           | URL-owned operation ID, canonical status/limitations and reconcile; original filing key required where the owner requires it. Import/output job links use actual operation identity.                                                                                                                                                           |
+| Bookmarks                     | Implemented                           | Existing personal list/create/update/delete owners; exact target identity, label and note; archived write guard. Unsupported `other` is not offered. DELETE accepts the real void response.                                                                                                                                                    |
+| Review notes/assignment       | Implemented                           | Existing internal member IDs for assignment, revision-bound writes, persisted note history via the narrow authorized GET, same-key explicit retry after unknown note result. Viewer comments and editor assignment/decisions are distinct.                                                                                                     |
+| Watch conversion              | Implemented                           | Server preview, selected eligible watch IDs, exact preview hash/revision and paused-result explanation. No automatic enabling or external delivery.                                                                                                                                                                                            |
+| Fit refresh                   | Implemented                           | Existing fit projection and explicit canonical refresh, retaining empty/partial states.                                                                                                                                                                                                                                                        |
+| Tour                          | Implemented                           | Five steps, server-owned active/dismissed/completed state and restart; no automatic completion. Independent responsive/keyboard acceptance is pending.                                                                                                                                                                                         |
+| S02 create                    | Implemented                           | Three-step details/membership/review flow, tenant/actor-scoped retained form, Back and same-tab refresh, existing durable create intent and exact explicit unknown-result retry. Mounted browser and recovery-unit checks pass.                                                                                                                |
+| Saved brief/meeting Open/edit | Implemented                           | Successful Meri receipt's actual `artifactId` links to Drafts. Core-authorized GET reads stored bytes and child versions; existing version POST creates an immutable child. Unknown save locks repeat submission, retains edited text and discovers actual recorded children. No Workspace identity or URL is invented.                        |
 
 Each new panel calls fixed allowlisted operations in the existing Capiro gateway. There is no parallel rule, import, analytics, authority, output or draft persistence implementation. The version-write override is bounded to 3.1MB JSON because the existing 500,000 UTF-16-unit contract can require three million escaped JSON bytes; the gateway retains its bounded 8MB JSON response reader.
 
@@ -61,78 +61,78 @@ Logs are in root's `work/fable-closeout-20261027/frontend-author/` release evide
 
 Source: recovered `RESEARCH-PORTFOLIO-REQUIREMENTS.md` in the final Wave 4 handoff, exact RP/DI/MX/OP/S/AT IDs. Missing F01/V4 definitions and original sections 1–15 are not blockers under the user's instruction. Q07 semantic work stays skipped. The table has exactly 70 rows; `present` means a reachable native seam, not an acceptance pass.
 
-| ID | Frontend disposition | Remaining behavior/evidence |
-|---|---|---|
-| RP-01 | Present; archive guard fixed | Current-role database/access-loss and deployed conflict proof: Core/Hermes. |
-| RP-02 | Present | Full typed discovery, large collection and per-item bulk outcomes remain unqualified. |
-| RP-03 | Rules native controls added | Dynamic/hybrid outage/concurrency/manual-precedence acceptance. |
-| RP-04 | Existing templates and recursive editor | Qualified vocabulary/mapping, old-template reproduction and accessibility. |
-| RP-05 | Present | Multi-client wall/revocation propagation through fit, cache and artifacts. |
-| RP-06 | Notes, assignment, exact decision evidence and bulk per-row outcomes added | Local mixed-outcome/retry checks pass; real-cycle acceptance remains incomplete. |
-| RP-07 | Existing review statuses | Real rename/split/merge/expiry corpus and exactly-once reopen. |
-| RP-08 | Worksheet added; mounted repair/apply pass | Database interruption and later-edit compensation acceptance. |
-| RP-09 | Subscriptions/change feed present; conversion added | Two-user baseline, no-flood restore and configured delivery proof. |
-| RP-10 | Output controls and source-basis contribution ledger added | Target-byte/basis and ledger-equality qualification remains. |
-| DI-01 | ProgramElementProfile present | Complete narrative/real subject/evidence coverage unqualified. |
-| DI-02 | Existing reader seam | Complete precision/history source projection not established by this lane. |
-| DI-03 | Funding table present | Real edition/FYDP/cell evidence and unsupported-history qualification. |
-| DI-04 | Existing relationship readers | Temporal ownership/transition/unresolved projection not established. |
-| DI-05 | Existing acquisitions/awards readers | Qualified action identity, text and acquisition journey not established. |
-| DI-06 | Existing federal/LegiWatch evidence readers | Family denominators and exact occurrences not established. |
-| DI-07 | Program source links/snippets/pages present | Full immutable row/cell/span and before/after inspector remains incomplete. |
-| DI-08 | Existing graph foundations only | Dated authority edges/access-filtered negative qualification remains. |
-| DI-09 | Exact search present; semantic work skipped | Q07 semantic evaluation is user-deferred; exact result semantics remain in scope. |
-| DI-10 | LegiWatch BudgetCompare exists | Not the required saved Research comparison workbench; follow-on implementation required. |
-| DI-11 | Existing unrelated coverage readers | Research customer-safe denominator/cohort projection and governed recheck UI missing. |
-| MX-01 | Fable action receiver integrated | Meri/Core activation and same-owner enabled-surface parity: release/Hermes. |
-| MX-02 | Actual saved draft Open/edit added | Real produced lineage/bytes and current-access browser acceptance. |
-| MX-03 | Five-step persisted tour added | Independent breakpoint/keyboard/restart acceptance. |
-| OP-01 | Fixed canonical gateway operations | Image, routes and runtime readback: release. |
-| OP-02 | No source publication change | Governed source admission/real family qualification owner. |
-| OP-03 | No corpus lifecycle change | Two-cycle/full-perimeter source operations evidence. |
-| OP-04 | Author checks supplied | Independent quality/performance/fault/economics/deployment evidence. |
-| S01 | Existing list route | Loading/error/empty/revoked/list-context target browser proof. |
-| S02 | Three steps plus durable recovery added | Native author Back/refresh/unknown pass; independent accessibility/Forward proof pending. |
-| S03 | Existing overview plus fit refresh | Common freshness/count projection distinctions remain unqualified. |
-| S04 | Rules and bookmarks added | Typed discovery, full bulk outcomes and outage precedence follow-on/acceptance. |
-| S05 | Existing Changes and subscriptions | Badge parity, two-user and no-flood deployed delivery proof. |
-| S06 | Totals and contribution ledger with basis/disposition/revision filters present | Ledger equality and target-corpus/source-cohort qualification remains. |
-| S07 | Four lanes, notes/assignment, explicit supporting/against evidence and bounded bulk decisions present | Local mixed-outcome/retry checks pass; real-cycle qualification remains. |
-| S08 | Settings guard fixed | Effective grants and open-form access loss/revocation proof. |
-| S09 | DataExplorer mounted | Dataset/query/page are local state; selected/page/all export and full typed facets/detail remain incomplete. |
-| S10 | Existing separate Changes/Budget destinations | Required composed Budget/Congressional/Monitored/Actions and FY/source semantics not established. |
-| S11 | Separate Intelligence readers mounted | Four-segment Research workspace is not mounted in this checkout. |
-| S12 | Five-tab ProgramElementProfile mounted | Selected PE/tab navigation is local state; complete URL authority and real required narratives/evidence remain. |
-| S13 | Existing LegiWatch comparison only | Saved Research comparison workbench, typed Add and exact saved evidence bookmarks missing. |
-| S14 | Other module coverage panels exist | Required Research cohort/denominator Coverage and governed recheck UI missing. |
-| S15 | Existing source links and evidence foundations | Exact immutable occurrence/before-after/correction inspector and focus proof incomplete. |
-| S16 | Native worksheet added | All-row local outcomes pass; crash/reconcile/compensate after later edits pending Core/Hermes. |
-| S17 | Native outputs/filing/download added | Local unknown request/download/destination pass; real artifact store/scan/hash/access proof pending. |
-| S18 | Research context/actions integrated | All 17 MO-05 runtime discovery/current-scope/native-owner/UI parity pending release/Hermes. |
-| AT-01 | Not run on deployed empty tenant | Hermes after deploy. |
-| AT-02 | Partial local navigation checks | Full direct-link/Back/refresh/mobile matrix pending. |
-| AT-03 | Not owned by frontend author checks | Database-backed isolation and current access: Core/Hermes. |
-| AT-04 | Local exact create retry checked | Populated concurrent create/import/member race proof pending. |
-| AT-05 | Local rule preview invalidation checked | Outage/manual exclusion/populated database scenario pending. |
-| AT-06 | Not run | Independent continuity corpus owner. |
-| AT-07 | Not run | Qualified funding/projection/overlap corpus owner. |
-| AT-08 | Not run | Governed source correction/revocation owner. |
-| AT-09 | Not run | Qualified legislative corpus owner. |
-| AT-10 | Not run | Complete profile/milestone/browser evidence pending. |
-| AT-11 | Semantic portion user-skipped | Q07 deferred; exact-search negative evidence remains. |
-| AT-12 | Not run | Real-cycle reopen/carry-forward corpus owner. |
-| AT-13 | Local worksheet/download/filing path checked | Real object bytes/scan/index/open proof pending. |
-| AT-14 | Not run | Snapshot/source-correction reproduction owner. |
-| AT-15 | Typed receiver checks pass | Enabled UI/Meri/alias runtime parity pending. |
-| AT-16 | Not run | External delivery and two-user no-flood proof pending. |
-| AT-17 | Not run | Historical/next-cycle source operations owner. |
-| AT-18 | Local lost-ACK recovery checks | Actual provider/object/database failure injection pending. |
-| AT-19 | No deployment in author lane | Release owns images/migrations/flags/installation receipt. |
-| AT-20 | Partial local create and saved-draft path | Full deployed cited-brief buyer journey pending. |
-| AT-21 | Not run | Qualified editions/amendments/withdrawals/FYDP owner. |
-| AT-22 | Not run | Pre/during/post saved-artifact revocation matrix pending. |
-| AT-23 | Not run | Dated geography corpus owner. |
-| AT-24 | Not run | Marketed-corpus physical/logical denominator owner. |
+| ID    | Frontend disposition                                                                                  | Remaining behavior/evidence                                                                                     |
+| ----- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| RP-01 | Present; archive guard fixed                                                                          | Current-role database/access-loss and deployed conflict proof: Core/Hermes.                                     |
+| RP-02 | Present                                                                                               | Full typed discovery, large collection and per-item bulk outcomes remain unqualified.                           |
+| RP-03 | Rules native controls added                                                                           | Dynamic/hybrid outage/concurrency/manual-precedence acceptance.                                                 |
+| RP-04 | Existing templates and recursive editor                                                               | Qualified vocabulary/mapping, old-template reproduction and accessibility.                                      |
+| RP-05 | Present                                                                                               | Multi-client wall/revocation propagation through fit, cache and artifacts.                                      |
+| RP-06 | Notes, assignment, exact decision evidence and bulk per-row outcomes added                            | Local mixed-outcome/retry checks pass; real-cycle acceptance remains incomplete.                                |
+| RP-07 | Existing review statuses                                                                              | Real rename/split/merge/expiry corpus and exactly-once reopen.                                                  |
+| RP-08 | Worksheet added; mounted repair/apply pass                                                            | Database interruption and later-edit compensation acceptance.                                                   |
+| RP-09 | Subscriptions/change feed present; conversion added                                                   | Two-user baseline, no-flood restore and configured delivery proof.                                              |
+| RP-10 | Output controls and source-basis contribution ledger added                                            | Target-byte/basis and ledger-equality qualification remains.                                                    |
+| DI-01 | ProgramElementProfile present                                                                         | Complete narrative/real subject/evidence coverage unqualified.                                                  |
+| DI-02 | Existing reader seam                                                                                  | Complete precision/history source projection not established by this lane.                                      |
+| DI-03 | Funding table present                                                                                 | Real edition/FYDP/cell evidence and unsupported-history qualification.                                          |
+| DI-04 | Existing relationship readers                                                                         | Temporal ownership/transition/unresolved projection not established.                                            |
+| DI-05 | Existing acquisitions/awards readers                                                                  | Qualified action identity, text and acquisition journey not established.                                        |
+| DI-06 | Existing federal/LegiWatch evidence readers                                                           | Family denominators and exact occurrences not established.                                                      |
+| DI-07 | Program source links/snippets/pages present                                                           | Full immutable row/cell/span and before/after inspector remains incomplete.                                     |
+| DI-08 | Existing graph foundations only                                                                       | Dated authority edges/access-filtered negative qualification remains.                                           |
+| DI-09 | Exact search present; semantic work skipped                                                           | Q07 semantic evaluation is user-deferred; exact result semantics remain in scope.                               |
+| DI-10 | LegiWatch BudgetCompare exists                                                                        | Not the required saved Research comparison workbench; follow-on implementation required.                        |
+| DI-11 | Existing unrelated coverage readers                                                                   | Research customer-safe denominator/cohort projection and governed recheck UI missing.                           |
+| MX-01 | Fable action receiver integrated                                                                      | Meri/Core activation and same-owner enabled-surface parity: release/Hermes.                                     |
+| MX-02 | Actual saved draft Open/edit added                                                                    | Real produced lineage/bytes and current-access browser acceptance.                                              |
+| MX-03 | Five-step persisted tour added                                                                        | Independent breakpoint/keyboard/restart acceptance.                                                             |
+| OP-01 | Fixed canonical gateway operations                                                                    | Image, routes and runtime readback: release.                                                                    |
+| OP-02 | No source publication change                                                                          | Governed source admission/real family qualification owner.                                                      |
+| OP-03 | No corpus lifecycle change                                                                            | Two-cycle/full-perimeter source operations evidence.                                                            |
+| OP-04 | Author checks supplied                                                                                | Independent quality/performance/fault/economics/deployment evidence.                                            |
+| S01   | Existing list route                                                                                   | Loading/error/empty/revoked/list-context target browser proof.                                                  |
+| S02   | Three steps plus durable recovery added                                                               | Native author Back/refresh/unknown pass; independent accessibility/Forward proof pending.                       |
+| S03   | Existing overview plus fit refresh                                                                    | Common freshness/count projection distinctions remain unqualified.                                              |
+| S04   | Rules and bookmarks added                                                                             | Typed discovery, full bulk outcomes and outage precedence follow-on/acceptance.                                 |
+| S05   | Existing Changes and subscriptions                                                                    | Badge parity, two-user and no-flood deployed delivery proof.                                                    |
+| S06   | Totals and contribution ledger with basis/disposition/revision filters present                        | Ledger equality and target-corpus/source-cohort qualification remains.                                          |
+| S07   | Four lanes, notes/assignment, explicit supporting/against evidence and bounded bulk decisions present | Local mixed-outcome/retry checks pass; real-cycle qualification remains.                                        |
+| S08   | Settings guard fixed                                                                                  | Effective grants and open-form access loss/revocation proof.                                                    |
+| S09   | DataExplorer mounted                                                                                  | Dataset/query/page are local state; selected/page/all export and full typed facets/detail remain incomplete.    |
+| S10   | Existing separate Changes/Budget destinations                                                         | Required composed Budget/Congressional/Monitored/Actions and FY/source semantics not established.               |
+| S11   | Separate Intelligence readers mounted                                                                 | Four-segment Research workspace is not mounted in this checkout.                                                |
+| S12   | Five-tab ProgramElementProfile mounted                                                                | Selected PE/tab navigation is local state; complete URL authority and real required narratives/evidence remain. |
+| S13   | Existing LegiWatch comparison only                                                                    | Saved Research comparison workbench, typed Add and exact saved evidence bookmarks missing.                      |
+| S14   | Other module coverage panels exist                                                                    | Required Research cohort/denominator Coverage and governed recheck UI missing.                                  |
+| S15   | Existing source links and evidence foundations                                                        | Exact immutable occurrence/before-after/correction inspector and focus proof incomplete.                        |
+| S16   | Native worksheet added                                                                                | All-row local outcomes pass; crash/reconcile/compensate after later edits pending Core/Hermes.                  |
+| S17   | Native outputs/filing/download added                                                                  | Local unknown request/download/destination pass; real artifact store/scan/hash/access proof pending.            |
+| S18   | Research context/actions integrated                                                                   | All 17 MO-05 runtime discovery/current-scope/native-owner/UI parity pending release/Hermes.                     |
+| AT-01 | Not run on deployed empty tenant                                                                      | Hermes after deploy.                                                                                            |
+| AT-02 | Partial local navigation checks                                                                       | Full direct-link/Back/refresh/mobile matrix pending.                                                            |
+| AT-03 | Not owned by frontend author checks                                                                   | Database-backed isolation and current access: Core/Hermes.                                                      |
+| AT-04 | Local exact create retry checked                                                                      | Populated concurrent create/import/member race proof pending.                                                   |
+| AT-05 | Local rule preview invalidation checked                                                               | Outage/manual exclusion/populated database scenario pending.                                                    |
+| AT-06 | Not run                                                                                               | Independent continuity corpus owner.                                                                            |
+| AT-07 | Not run                                                                                               | Qualified funding/projection/overlap corpus owner.                                                              |
+| AT-08 | Not run                                                                                               | Governed source correction/revocation owner.                                                                    |
+| AT-09 | Not run                                                                                               | Qualified legislative corpus owner.                                                                             |
+| AT-10 | Not run                                                                                               | Complete profile/milestone/browser evidence pending.                                                            |
+| AT-11 | Semantic portion user-skipped                                                                         | Q07 deferred; exact-search negative evidence remains.                                                           |
+| AT-12 | Not run                                                                                               | Real-cycle reopen/carry-forward corpus owner.                                                                   |
+| AT-13 | Local worksheet/download/filing path checked                                                          | Real object bytes/scan/index/open proof pending.                                                                |
+| AT-14 | Not run                                                                                               | Snapshot/source-correction reproduction owner.                                                                  |
+| AT-15 | Typed receiver checks pass                                                                            | Enabled UI/Meri/alias runtime parity pending.                                                                   |
+| AT-16 | Not run                                                                                               | External delivery and two-user no-flood proof pending.                                                          |
+| AT-17 | Not run                                                                                               | Historical/next-cycle source operations owner.                                                                  |
+| AT-18 | Local lost-ACK recovery checks                                                                        | Actual provider/object/database failure injection pending.                                                      |
+| AT-19 | No deployment in author lane                                                                          | Release owns images/migrations/flags/installation receipt.                                                      |
+| AT-20 | Partial local create and saved-draft path                                                             | Full deployed cited-brief buyer journey pending.                                                                |
+| AT-21 | Not run                                                                                               | Qualified editions/amendments/withdrawals/FYDP owner.                                                           |
+| AT-22 | Not run                                                                                               | Pre/during/post saved-artifact revocation matrix pending.                                                       |
+| AT-23 | Not run                                                                                               | Dated geography corpus owner.                                                                                   |
+| AT-24 | Not run                                                                                               | Marketed-corpus physical/logical denominator owner.                                                             |
 
 ## Bounded follow-on instructions
 
