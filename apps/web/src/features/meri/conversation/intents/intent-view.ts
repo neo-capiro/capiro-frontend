@@ -19,6 +19,13 @@ import {
   researchShareFields,
   researchShareRow,
 } from "./research-share-view";
+import {
+  isMailSendProposal,
+  isNativeMailOutcome,
+  mailFields,
+  mailResultFields,
+  mailRow,
+} from "./mail-view";
 
 import type {
   IntentTone,
@@ -51,6 +58,7 @@ const actionLabels: Readonly<Record<string, string>> = {
   "document.draft": "Prepare a document",
   "memory.propose": "Propose a memory for review",
   "artifact.file": "File attachments to a client",
+  "mail.send": "Send an email",
 };
 const cap = (value: string, length = 400) =>
   value.length > length ? `${value.slice(0, length)}…` : value;
@@ -73,6 +81,7 @@ export function proposalFields(
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
   if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
   if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
+  if (isMailSendProposal(proposal)) return mailFields(proposal);
   const command = proposal.command;
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
@@ -121,6 +130,8 @@ function resultFields(
   execution: Completed,
   action: IntentsNativeProposal["command"]["action"],
 ): readonly IntentField[] {
+  if (isNativeMailOutcome(execution.outcome))
+    return mailResultFields(execution.outcome);
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
     return [
@@ -407,6 +418,10 @@ export function intentRow(
     };
   }
   if ("withheld" in item) return closed(plainLooks.withheldProposal);
+  if (item.kind === "proposal" && isMailSendProposal(item.proposal)) {
+    const mail = mailRow(item, now, viewer);
+    if (mail) return mail;
+  }
   const { look, decision } = proposalLook(item, now, viewer);
   const execution = item.execution;
   const completed =
