@@ -22,7 +22,12 @@ export function NotesDialog({
   useIdentity();
   const actor = useProfileActor();
   return (
-    <Dialog open={open} onOpenChange={onOpenChange} title="Profile notes">
+    <Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title="Profile notes"
+      description="Profile notes are separate from internal intake notes."
+    >
       {open && (
         <ProfileNotesEditor
           key={`${clientId}:${profileActorKey(actor)}`}
@@ -60,6 +65,7 @@ function ProfileNotesEditor({
       <TextareaField
         label="Notes"
         name="notes"
+        hint="Maximum 20,000 characters"
         value={editor.client.data ? editor.draft : ""}
         onChange={(event) => editor.setDraft(event.target.value)}
         readOnly={!editor.editable || !editor.client.source || editor.pending}

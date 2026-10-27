@@ -268,10 +268,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
     "kind": "function",
     "symbol": "ClientHeader",
-    "fingerprint": "e459c4a456dccf946de3a5b6c87edae7c9d9e22551e205d5011fb2bb2990061f",
-    "reason": "One client header composes breadcrumbs, view switcher and client action entry points using shared descriptors. Destination implementations remain in child owners; no new data or policy is computed by this header.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "3ab9c2fb4f7b65fa1a9565b0334e28ca8e8ff2b40b4508175298c388138b3190",
+    "reason": "One client header composes breadcrumbs, view switcher and client action entry points using shared descriptors. Destination implementations remain in child owners; the shared monogram renders the identity avatar contents only. No new data or policy is computed by this header.",
+    "reviewedBy": "Hermes Agent independent source review",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
@@ -417,11 +417,11 @@
     "kind": "function",
     "symbol": "FocusTagSession",
     "line": 28,
-    "nonblank": 158,
-    "fingerprint": "c25f75b538801bf9e6c98b8fcfb41f9258206cd5145ac85eeb43017567866c0b",
-    "reason": "Owns one actor/client-keyed tag editor, draft, same-actor uncertainty freeze and chip projection. `addFocusTag`/`assertTagWriter` own payload preservation and write authority. Retain the freeze across close/reopen; do not move whole-object intake mutation rules into the chip renderer or duplicate them in intake.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "nonblank": 163,
+    "fingerprint": "93bafddc2d98ae39717df2919a5ac5a78422850998a5547896e4f7042dc34961",
+    "reason": "Owns one actor/client-keyed tag editor, draft, same-actor uncertainty freeze and chip projection. addFocusTag/assertTagWriter own payload preservation and write authority. The accessible hint id and hint text are the only addition; retain the freeze across close/reopen and keep whole-object intake mutation rules out of the chip renderer.",
+    "reviewedBy": "Hermes Agent independent source review",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
@@ -1451,10 +1451,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "fingerprint": "2196df6b7f614d95b35930a29c9438a18c5bab93e4363c52a745ddb1106621ca",
-    "reason": "One client overview composes current client, team and activity reads with its cards and dialog entry points. Data mutations and detailed editors remain in child owners; the reordered cards do not introduce another workflow.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
-    "reviewedOn": "2026-10-18"
+    "fingerprint": "7df6de37d45ed3d99b37378b9a7e23e925159d1934c2e23d9a069e47745a27a9",
+    "reason": "One client overview composes current client, team and activity reads with its cards and dialog entry points. Data mutations and detailed editors remain in child owners; the shared monogram owns only the identity avatar contents. No second workflow is introduced.",
+    "reviewedBy": "Hermes Agent independent source review",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
@@ -5843,6 +5843,17 @@
     "fingerprint": "f6135c7597a604eccd1efec9d77c5bd23e675dab92bcce17b801df6c6f270099",
     "reason": "One pure finite status, readiness and receipt projection presents direct policy-approved note history. It performs no I/O, authorization, decision or replay. Independent decision: work/hermes-review/note-fe-review/FRONTEND-REVIEW.txt.",
     "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useQuickLogUndo.ts",
+    "kind": "function",
+    "symbol": "useQuickLogUndo",
+    "line": 43,
+    "nonblank": 128,
+    "fingerprint": "e80ca51d8ae779fc7434db3c2ebe78b600b2f37e5c007300c8a101b469431d5e",
+    "reason": "One actor/client/API-epoch-scoped Undo recovery lifecycle for a single client: scope derivation, activation epoch, abort lifetime, one in-flight operation lock, recovery read and post-dispatch status refresh. Journal persistence stays in shared/session/recovery, the stored-attempt contract and scope key in quick-log/command-undo, write authority in quick-log/authority, and command validation/execution in quick-log/actions (which keeps the strict scope assertion). The render-time containment only maps an unverifiable identity to 'no saved Undo'.",
+    "reviewedBy": "Hermes Agent independent source review",
     "reviewedOn": "2026-10-27"
   }
 ]
