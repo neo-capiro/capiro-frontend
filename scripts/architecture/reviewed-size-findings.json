@@ -6546,15 +6546,6 @@
     "reviewedOn": "2026-10-27"
   },
   {
-    "file": "apps/web/src/features/modules/intelligence/research/ResearchCoverage.tsx",
-    "kind": "function",
-    "symbol": "ResearchCoverage",
-    "fingerprint": "172bacd1706dc1908b5e403500ecdecf6f287266fec2ce300e00cbf5a0419338",
-    "reason": "reviewed-accept (function size, 189 nonblank) — product-coverage surface over the fixed defenseResearch.coverage reader: URL-owned perimeter/component/account/family/edition/stage/detail filters plus denominator/limitation display. It shows the projectionVersion, denominatorKnown state and Core's limitations verbatim and never derives a denominator of its own, so unknown coverage stays unknown instead of zero.",
-    "reviewedBy": "Hermes Agent source review 20261027_150622_856987",
-    "reviewedOn": "2026-10-27"
-  },
-  {
     "file": "apps/web/src/features/modules/research-portfolios/ImportWorksheet.tsx",
     "kind": "function",
     "symbol": "ImportWorksheet",
@@ -6744,15 +6735,6 @@
     "reviewedOn": "2026-10-27"
   },
   {
-    "file": "apps/web/src/features/modules/intelligence/changes/CongressionalChanges.tsx",
-    "kind": "function",
-    "symbol": "CongressionalChanges",
-    "fingerprint": "c8f369d206bc215b755ba87d9a4a2be5add853399136bcbc026a897bc32ee2f7",
-    "reason": "reviewed-accept (function size, 105 nonblank) — the per-PE congressional tab: required PE input, one fixed bill-actions read, the disclosed 200-action/40-bill/60-per-bill bound, the action table and the existing ProgramBills composition. No fiscal-year or source filter is invented because the owner has none.",
-    "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
-    "reviewedOn": "2026-10-27"
-  },
-  {
     "file": "apps/web/src/features/modules/intelligence/changes/MonitoredChanges.tsx",
     "kind": "function",
     "symbol": "ClientWatchList",
@@ -6822,6 +6804,33 @@
     "fingerprint": "15c952eadca724f49d7beb1967f38a59cae77ce1cb3bedc6af95f1a0137fec77",
     "reason": "reviewed-accept (function size, 281 nonblank) — the add/resolve modal: canonical typed discovery (search restricted to the four domain families with UUID gating except PE codes, awards through the existing 20-row paged reader), already-existing members disabled, same-request retention for unknown outcomes, and the resolve path reusing the same captured body. Both entry modes share one request owner; splitting add from resolve would duplicate that retention logic.",
     "reviewedBy": "Hermes Agent source review 20261027_154359_fdbba1",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/CongressionalChanges.tsx",
+    "kind": "function",
+    "symbol": "CongressionalChanges",
+    "fingerprint": "a163132241b9eefa65da60b3e39c6867ab695a8adc33cdace39eb2f849326ca1",
+    "reason": "reviewed-accept (function size, 107 nonblank, replaces the 105-nonblank record) — one Changes/Congressional tab: the required PE input (trimmed, max 16) that also resets the retained evidence cursor, one fixed bill-actions read with its disclosed 200-action / 40-bill / 60-per-bill bound, the action table, and the existing ProgramBills plus the new PE-scoped Federal evidence revisions panel composed under the same validated PE. The added lines are one URL-state reset and one composition; no authority, mutation, occurrence association or fiscal-year filter is invented, and splitting would separate the PE/URL contract from its single owner.",
+    "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/changes/FederalEvidenceTimeline.tsx",
+    "kind": "function",
+    "symbol": "FederalEvidenceTimeline",
+    "fingerprint": "0b94b713d1f526b11082e292c8e9c8a24c2b73bf860664e02f0972e120a5d417",
+    "reason": "reviewed-accept (function size, 125 nonblank, new) — one fixed GET /federal-evidence/timeline reader: strict bounded request (PE from the existing Congressional context, limit 25, cursor, optional ISO knowledge time), URL-owned cursor and knowledge time with reset on PE or time change, non-submit Refresh/Latest controls, historical-evidence disclosure, and the per-event Before/After composition whose sides are independently admitted from their own event revision and content hash. It holds no authority and creates no event-to-occurrence association; request construction, gating and presentation are one read contract that would fragment if split.",
+    "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/intelligence/research/ResearchCoverage.tsx",
+    "kind": "function",
+    "symbol": "ResearchCoverage",
+    "fingerprint": "e7714751449668907bf072b3861ecaf01327a3adedc7d93a21c6bb84fc038cb9",
+    "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) — the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
+    "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
     "reviewedOn": "2026-10-27"
   }
 ]
