@@ -19,6 +19,7 @@ import {
 import { recents } from "./SidebarRecents";
 import { ConversationRecents } from "./ConversationRecents";
 import { LiveNewConversation } from "./LiveNewConversation";
+import { UnavailableControlReason } from "./UnavailableControlReason";
 import styles from "./shell.module.css";
 
 type AssetSet = "home" | "cited-answer";
@@ -76,14 +77,19 @@ function MobileRecents({
           Workflows
         </Link>
       ) : (
-        <button
-          type="button"
-          className={styles.mobileItem}
-          disabled
-          title="Unavailable: no connected workflow library"
+        <UnavailableControlReason
+          label="Workflows"
+          reason="Unavailable: no connected workflow library"
         >
-          Workflows
-        </button>
+          <button
+            type="button"
+            className={styles.mobileItem}
+            disabled
+            title="Unavailable: no connected workflow library"
+          >
+            Workflows
+          </button>
+        </UnavailableControlReason>
       )}
     </>
   );
@@ -160,15 +166,20 @@ function MobileWorkflowLinks({
             {label}
           </Link>
         ) : (
-          <button
+          <UnavailableControlReason
             key={id}
-            type="button"
-            className={styles.mobileItem}
-            disabled
-            title={capabilities[id].reason}
+            label={label}
+            reason={capabilities[id].reason}
           >
-            {label}
-          </button>
+            <button
+              type="button"
+              className={styles.mobileItem}
+              disabled
+              title={capabilities[id].reason}
+            >
+              {label}
+            </button>
+          </UnavailableControlReason>
         );
       })}
     </>
@@ -220,16 +231,21 @@ function MobileMenu({
             {label}
           </Link>
         ) : (
-          <button
+          <UnavailableControlReason
             key={item.label}
-            type="button"
-            className={styles.mobileItem}
-            disabled
-            title={unavailableDestinationTitle(item, capabilities)}
+            label={label}
+            reason={unavailableDestinationTitle(item, capabilities)}
           >
-            {icon}
-            {label}
-          </button>
+            <button
+              type="button"
+              className={styles.mobileItem}
+              disabled
+              title={unavailableDestinationTitle(item, capabilities)}
+            >
+              {icon}
+              {label}
+            </button>
+          </UnavailableControlReason>
         );
       })}
       <MobileWorkflowLinks

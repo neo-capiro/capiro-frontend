@@ -83,6 +83,11 @@
   font-size: 10px;
   margin-top: 4px;
 }
+.table .scanDisclosure {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
 .fileName {
   display: flex;
   align-items: center;

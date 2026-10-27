@@ -13,6 +13,7 @@ import { useSelectedClient } from "../session/SelectedClient";
 import { productHref } from "../session/client-route";
 import { unavailableTitle } from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
+import { UnavailableControlReason } from "./UnavailableControlReason";
 
 type Props = {
   assetSet: "home" | "cited-answer";
@@ -48,16 +49,21 @@ function NewConversationButton({
   onClick,
 }: Props & { disabled: boolean; title?: string; onClick?: () => void }) {
   return (
-    <button
-      type="button"
-      className={className}
-      disabled={disabled}
-      title={title}
-      onClick={onClick}
+    <UnavailableControlReason
+      label="New conversation"
+      reason={disabled ? title : undefined}
     >
-      <DesignIcon name="plus" assetSet={assetSet} />
-      New conversation
-    </button>
+      <button
+        type="button"
+        className={className}
+        disabled={disabled}
+        title={title}
+        onClick={onClick}
+      >
+        <DesignIcon name="plus" assetSet={assetSet} />
+        New conversation
+      </button>
+    </UnavailableControlReason>
   );
 }
 

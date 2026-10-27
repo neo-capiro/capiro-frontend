@@ -40,7 +40,11 @@ export function MoveFiles({
             ? "Move to folder"
             : "Move selected files"
       }
-      description={`Review all ${count} files before moving them together.`}
+      description={
+        count === 1
+          ? "Review this file before moving it."
+          : `Review all ${count} files before moving them together.`
+      }
       onOpenChange={(open) => {
         if (!open && !move.pending) onClose();
       }}

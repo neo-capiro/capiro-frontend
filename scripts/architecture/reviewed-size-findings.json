@@ -432,12 +432,10 @@
     "file": "apps/web/src/features/portfolio/files/FileTable.tsx",
     "kind": "function",
     "symbol": "FileTable",
-    "line": 6,
-    "nonblank": 120,
-    "fingerprint": "e2040cc41ecd8da30ae7205decd1c9003c9be03fb94cc3778ee9d38bf35e49e7",
-    "reason": "Retains native visible-row selection and typed file action intent beside one table. Derives only selected-visible cardinality to set checked, mixed and empty-disabled presentation; existing union/subtraction behavior preserves off-view selections. Fetching, persistence, reader authority and mutation admission remain outside this component. No generic table framework or second selection state is introduced. The named focusable scroll region retains keyboard access when the empty table has no enabled row control; full-default axe and keyboard scrolling are exercised without suppressing rules.",
-    "reviewedBy": "Codex shared frontend integration owner",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "0f33c8972da83f6a94bb260ea161a1cb1a7bb26834600d87e4fed0b5b08dd6c7",
+    "reason": "Exact-body ground truth (canonical scanner, my run): head 124/0f33c897…; base 120/e2040cc4…; recorded transfer baseline (commit 02c02d95) 109/2a4413a0…. One cohesive responsibility: render one file row — selection checkbox state, name/source/disclosure cell, folder/date/owner, status chip, and the canonical four-action dropdown — driven only by props (files, selected, onSelect, onAction) plus contracts.fileStatus; the sole mutable DOM write is input.indeterminate, which is intrinsic to select-all. Coupling is prop-only and one-directional; the change is a 4-line relocation of an existing disclosure string, and the Status cell becomes chip-only by design. Bounded responsibility is acceptable: the count is dominated by JSX markup, and extracting the dropdown would not reduce real coupling. Reason the delta must still be reviewed: the transfer-baseline fingerprint no longer matches, so status changed-since-review is expected, not a new cohesion defect.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
@@ -5924,9 +5922,9 @@
     "file": "apps/web/src/features/portfolio/files/MoveFiles.tsx",
     "kind": "function",
     "symbol": "MoveFiles",
-    "fingerprint": "560cdc144d078f17acb4f0a7a8fb33692f4cdecf709cf9ae60f87c4d1da6285c",
-    "reason": "Owns the move/create-folder dialog for a reviewed file set: destination input, retained-move status and check/retry/retire actions. Batch command semantics and execution remain with batch-move and useBatchMove.",
-    "reviewedBy": "Hermes Agent architecture lane 1",
+    "fingerprint": "afdae17ddc449025f18b70e3583a636e5811c89c420279b820e81afe54e78120",
+    "reason": "Ground truth: head 134/afdae17d…; base 130/560cdc14…; no transfer-baseline record (hence \"new\"). One cohesive responsibility: the batch-move dialog — authoritative count from the held command before local selection, title/description copy, the start try/catch and its revision precondition message, the pending/refusal/unconfirmed status copy, the check/retry/retire controls and the primary submit gate keyed to move.canStart plus count bounds. All authority stays in useBatchMove/batchMoveCommand (untouched); no new state or effect path was added, so extraction candidates (held-command control block, file list) would re-thread the same context without reducing responsibility. Bounded responsibility acceptable. Note: this body is a preserved donor byte snapshot; any future edit is a new change, not a donor carry-over.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6863,6 +6861,15 @@
     "fingerprint": "99d2ca51f7a66e6aa7222c917a646be2e081fd018346a25cb0073e38c45f938c",
     "reason": "Responsibility/cohesion: the body is a single cohesive presentational responsibility — the\nevents viewport for the active view, with an agenda branch (search, clear filters, status\npanel, agenda table, empty/error messaging) and a grid branch (status panel + grid), plus the\nextras loading/warning notices. It fetches nothing, normalizes nothing, owns no state and\npersists nothing; every input comes from CalendarModel and rendering is delegated to\nAgendaTable, CalendarGrid, StatusPanel, TextInput and ActionButton. No cross-owner logic, no\nduplicated authority, and no boundary or cycle involvement (errors[] empty). Concrete\nresidual: it takes the whole CalendarModel and reads 11 fields, and the two branches could\nlater be split into presentational sub-components — optional hardening, out of scope here and\nnot justified by any correctness risk. I give no blanket count pass and claim no exception:\nthe >80 threshold is a size/maintainability signal, and the concrete reasons above are why\nthis exact body is acceptable. Disposition: ACCEPT the exact body as cohesive\nsingle-responsibility presentation; the blocking state is a review-record invalidation\nartifact of the enclosing-file edit, not a new or changed architectural defect. I do not bind\nthe registry; root owns the matching final-byte binding.",
     "reviewedBy": "Hermes Agent source review 20261027_193444_620b36",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/shared/shell/shell.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "ef9812ff1b83b9f28faa1f012442c0676ef373ae16b633e4e7874fdc30a16762",
+    "reason": "Ground truth: head 419/ef9812ff…; base 385 with no signal — this commit's +34 nonblank (helper group, Info button, focus-visible outline, tooltip reason width/wrapping, plus the mobile row sizing interaction) crossed the 400 threshold, so this is a newly introduced file-level signal, not an inherited exemption. Cohesion: the module is the single presentation owner for the Meri shell chrome (header/brand, sidebar toggle, mode/action buttons, sidebar nav, recents, preferences, main, mobile menu) and holds only declarative rules — no logic, no state, no responsibility overlap with home.module.css/files.module.css, and several already-shared breakpoint @media blocks re-target the same selectors, so splitting into sidebar/mobile/tooltip modules would fragment co-located overrides for no behaviour gain. The added rules are the correct home for the new disabled-control presentation. Accepted as a bounded single presentational surface; the rationale root binds must cover the whole 419-line body with the caveat that a future unrelated concern added to this file should be extracted rather than appended.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
