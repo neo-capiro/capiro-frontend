@@ -6,6 +6,8 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { DocumentPreviewPanel } from "./DocumentPreviewPanel";
+import { DocumentRevisionLink } from "./DocumentRevisionLink";
 import { Button } from "@capiro/ui/button";
 import type { ConversationListPage } from "../../../shared/meri-conversations/history-client";
 import {
@@ -395,6 +397,27 @@ function LibraryPage({
               Current bytes verified for {state.inspection.filename}. This
               inspection does not claim a rendered preview.
             </p>
+          )}
+          {state.inspection?.kind === "generated" && (
+            <>
+              <DocumentPreviewPanel
+                key={state.selected.versionId}
+                port={port}
+                versionId={state.selected.versionId}
+              />
+              {state.selected.versionId === state.versions[0]?.versionId ? (
+                <DocumentRevisionLink
+                  key={`revision:${state.selected.versionId}`}
+                  port={port}
+                  versionId={state.selected.versionId}
+                />
+              ) : (
+                <p>
+                  Select the latest version to revise. Earlier versions remain
+                  available to inspect and download.
+                </p>
+              )}
+            </>
           )}
           {state.download && (
             <a

@@ -1,3 +1,4 @@
+import { createPreviewAccess, type PreviewAccess } from "./preview-access";
 import {
   receiveDocumentRequest,
   type DocumentHistoryRequest,
@@ -19,7 +20,7 @@ import {
 
 export type LibraryScope = DocumentListRequest["scope"];
 export type LibraryVersion = Readonly<DocumentVersion>;
-export interface DocumentLibraryAccess extends ArtifactAccess {
+export interface DocumentLibraryAccess extends ArtifactAccess, PreviewAccess {
   readonly context: ConversationContext;
   list(
     request: DocumentListRequest,
@@ -75,6 +76,7 @@ export function createDocumentLibraryAccess({
   const signal = AbortSignal.any([lifetime, owned.signal]);
   const transport = documentAccessTransport(credential, signal, fetcher);
   const artifacts = createArtifactAccess(credential, signal, fetcher);
+  const previews = createPreviewAccess(credential, signal, fetcher);
   let active = 0;
   const refuse = (code: string, accessDenied = false) => {
     if (accessDenied) onAccessLost();
@@ -126,7 +128,17 @@ export function createDocumentLibraryAccess({
   }
   return {
     context,
-    pending: () => active > 0 || artifacts.pending(),
+    pending: () => active > 0 || artifacts.pending() || previews.pending(),
+    readPreview: async (id, caller) => {
+      const reply = await previews.readPreview(id, caller);
+      if (!reply.ok && reply.accessDenied) onAccessLost();
+      return reply;
+    },
+    publishPreview: async (id, caller) => {
+      const reply = await previews.publishPreview(id, caller);
+      if (!reply.ok && reply.accessDenied) onAccessLost();
+      return reply;
+    },
     list: (request, caller) => metadata("list", request, caller),
     history: (request, caller) => metadata("history", request, caller),
     inspect: async (versionId, caller) => {

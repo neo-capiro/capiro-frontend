@@ -28,6 +28,8 @@ function port(): DocumentLibraryAccess {
   return {
     context: session.context,
     pending: () => false,
+    readPreview: vi.fn(async () => refusal()),
+    publishPreview: vi.fn(async () => refusal()),
     dispose: vi.fn(),
     list: vi.fn(async () =>
       good({

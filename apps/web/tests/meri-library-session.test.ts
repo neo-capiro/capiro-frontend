@@ -1,3 +1,9 @@
+import { createPreviewAccess } from "../src/shared/meri-documents/preview-access";
+import {
+  previewSource,
+  previewResponse,
+  previewPublication,
+} from "./meri-preview-revision-fixtures";
 import { expect, it, vi } from "vitest";
 import {
   bootstrapLibrarySession,
@@ -133,4 +139,36 @@ it("retained origin selectors handle existing same-client private scope without 
   expect(libraryOriginClient(row, account)).toBe(clientId);
   row.scopes.push({ ...row.scopes[0]!, resourceId: binding.attemptId });
   expect(() => libraryOriginClient(row, account)).toThrow();
+});
+
+it("a saved completed run can request a derived preview explicitly without a new model turn", async () => {
+  const f = fixture("completed"),
+    original = f.fetcher.getMockImplementation()!,
+    source = previewSource();
+  source.version.binding = { ...binding };
+  source.version.scopes = structuredClone(conversation.scopes);
+  source.version.object.scopes = structuredClone(conversation.scopes);
+  f.fetcher.mockImplementation(async (url, init) => {
+    if (String(url) === "/api/documents/inspect") return Response.json(source);
+    if (String(url) === "/api/documents/preview-publish")
+      return Response.json(previewPublication(source));
+    if (String(url) === "/api/documents/preview") return previewResponse();
+    return original(url, init);
+  });
+  const admitted = await f.open();
+  const port = createPreviewAccess(admitted.credential, signal(), f.fetcher);
+  expect(
+    (await port.publishPreview(previewSource().version.versionId, signal())).ok,
+  ).toBe(true);
+  expect(
+    (await port.readPreview(previewSource().version.versionId, signal())).ok,
+  ).toBe(true);
+  expect(f.fetcher.mock.calls.map(([url]) => url)).toEqual([
+    "/api/conversations/transcript",
+    "/api/action-followthrough/session",
+    "/api/documents/inspect",
+    "/api/documents/preview-publish",
+    "/api/documents/inspect",
+    "/api/documents/preview",
+  ]);
 });

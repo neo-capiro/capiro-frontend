@@ -25,7 +25,7 @@ export type ConversationIntent = Readonly<{
 
 export type ConversationSkillSelection = Pick<
   ConversationSubmitRequest,
-  "skill" | "windowRequest"
+  "skill" | "windowRequest" | "documentRevision"
 >;
 
 /** Preserve exact selected inputs independently of mutable picker objects. */
@@ -33,8 +33,12 @@ export function skillSelectionFields(input: ConversationSkillSelection) {
   const copy = structuredClone({
     ...(input.skill ? { skill: input.skill } : {}),
     ...(input.windowRequest ? { windowRequest: input.windowRequest } : {}),
+    ...(input.documentRevision
+      ? { documentRevision: input.documentRevision }
+      : {}),
   });
   if (copy.skill) Object.freeze(copy.skill);
+  if (copy.documentRevision) Object.freeze(copy.documentRevision);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
   return Object.freeze(copy);
 }
@@ -45,6 +49,7 @@ export function receiveSkillSelection(value: unknown) {
     .strictObject({
       skill: z.unknown().optional(),
       windowRequest: z.unknown().optional(),
+      documentRevision: z.unknown().optional(),
     })
     .parse(value);
   return skillSelectionFields(
@@ -70,6 +75,9 @@ export function storedSubmission(
     new TextEncoder().encode(
       JSON.stringify({
         requestId: stored.requestId,
+        ...(stored.documentRevision
+          ? { documentRevision: stored.documentRevision }
+          : {}),
         prompt: stored.prompt,
         ...(stored.modelSelection
           ? { modelSelection: stored.modelSelection }
@@ -103,6 +111,7 @@ function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   const copy = structuredClone(submit);
   if (copy.windowRequest) Object.freeze(copy.windowRequest);
   if (copy.skill) Object.freeze(copy.skill);
+  if (copy.documentRevision) Object.freeze(copy.documentRevision);
   if (copy.modelSelection) Object.freeze(copy.modelSelection);
   return Object.freeze(copy);
 }

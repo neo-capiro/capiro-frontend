@@ -1,4 +1,5 @@
 "use client";
+import { DocumentRevisionDraft } from "./DocumentRevisionDraft";
 import { useState, useSyncExternalStore } from "react";
 import { MeriComposer } from "../MeriComposer";
 import {
@@ -76,6 +77,23 @@ export function SessionComposer({
                   throw Error("Draft could not be saved");
               }}
               disabled={modelDisabled}
+            />
+          )}
+          {session.ready && (
+            <DocumentRevisionDraft
+              key={JSON.stringify(session.ready.port.context)}
+              context={session.ready.port.context}
+              selection={session.skillSelection}
+              disabled={modelDisabled}
+              onChange={(selection) => {
+                session.setSkillSelection(selection);
+                if (
+                  session.initialDraft.error() ||
+                  JSON.stringify(session.initialDraft.selection()) !==
+                    JSON.stringify(selection)
+                )
+                  throw Error("Selection could not be retained");
+              }}
             />
           )}
           <SkillSelectionPicker
