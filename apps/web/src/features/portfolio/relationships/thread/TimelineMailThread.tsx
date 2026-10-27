@@ -15,9 +15,10 @@ import {
   type MailContinuation,
 } from "../email/read";
 import styles from "./thread.module.css";
+import { NativeMailReply } from "./NativeMailReply";
 
 const replyGap =
-  "Reply sending is unavailable here. You can review recipients and text, then reply from your mailbox.";
+  "Reply all sending is unavailable here. You can review recipients and text, then reply from your mailbox.";
 export function TimelineMailThread({
   clientId,
   threadId,
@@ -71,6 +72,7 @@ function ThreadSession({
   const cache = useQueryClient();
   const id = useId();
   const [expanded, setExpanded] = useState(false);
+  const [replyRevision, setReplyRevision] = useState(0);
   const [draft, setDraft] = useState<MailInitialDraft | null>(null);
   const [error, setError] = useState("");
   const [bodyError, setBodyError] = useState<Error | null>(null);
@@ -84,16 +86,11 @@ function ThreadSession({
     select: (data) => mergeMailPages(data.pages),
   });
   const thread =
-    query.isSuccess &&
-    !query.error &&
-    !bodyError &&
-    (!query.isFetching || query.isFetchingNextPage)
-      ? query.data
-      : undefined;
-  function review(all: boolean) {
+    query.isSuccess && !query.error && !bodyError ? query.data : undefined;
+  function reviewAll() {
     if (!thread || !canReply || thread.hasMore || query.isFetching) return;
     try {
-      const recipients = replyRecipients(thread, actorEmail, all);
+      const recipients = replyRecipients(thread, actorEmail, true);
       setError("");
       setDraft({
         subject: `Re: ${thread.subject.replace(/^Re:\s*/i, "")}`,
@@ -155,31 +152,31 @@ function ThreadSession({
                     thread.hasMore ||
                     query.isFetching
                   }
-                  onClick={() => review(false)}
+                  onClick={reviewAll}
                 >
-                  Reply
-                </button>
-                <button
-                  className="button"
-                  disabled={
-                    !canReply ||
-                    !thread.messages.length ||
-                    thread.hasMore ||
-                    query.isFetching
-                  }
-                  onClick={() => review(true)}
-                >
-                  Reply all
+                  Review reply all
                 </button>
                 <button
                   className="button ghost"
                   aria-expanded={true}
                   aria-controls={id}
-                  onClick={() => setExpanded(false)}
+                  onClick={() => {
+                    setDraft(null);
+                    setExpanded(false);
+                  }}
                 >
                   Show less
                 </button>
               </div>
+              {canReply && (
+                <NativeMailReply
+                  key={replyRevision}
+                  thread={thread}
+                  busy={query.isFetching}
+                  scope={scope}
+                  clientId={scope.clientId}
+                />
+              )}
               {query.hasNextPage && (
                 <button
                   className="button"
@@ -199,8 +196,8 @@ function ThreadSession({
               )}
               {thread.hasMore && (
                 <small>
-                  Load the remaining stored messages before reviewing reply
-                  recipients.
+                  Load the remaining stored messages to choose an earlier
+                  original or review reply-all recipients.
                 </small>
               )}
               <button
@@ -208,6 +205,7 @@ function ThreadSession({
                 disabled={query.isFetching}
                 onClick={() => {
                   setDraft(null);
+                  setReplyRevision((revision) => revision + 1);
                   setBodyError(null);
                   void cache.resetQueries({
                     queryKey: threadKey(scope),
@@ -239,7 +237,7 @@ function ThreadSession({
           )}
         </div>
       )}
-      {draft && thread && (
+      {expanded && draft && thread && (
         <MailCompose
           clientId={scope.clientId}
           person={{

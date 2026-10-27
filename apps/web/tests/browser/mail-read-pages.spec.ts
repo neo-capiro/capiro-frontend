@@ -121,7 +121,7 @@ test("timeline loads bounded message and exact body continuations", async ({
   await page.goto("/__test/thread-mail");
   await page.getByRole("button", { name: "Expand email thread" }).click();
   await expect(
-    page.getByRole("button", { name: "Reply", exact: true }),
+    page.getByRole("button", { name: "Review reply all", exact: true }),
   ).toBeDisabled();
   await expect(
     page.getByText("Only a provider preview was stored."),
@@ -135,7 +135,7 @@ test("timeline loads bounded message and exact body continuations", async ({
     .click();
   await expect(page.getByText(/2 of 2 stored messages loaded/)).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Reply", exact: true }),
+    page.getByRole("button", { name: "Review reply all", exact: true }),
   ).toBeEnabled();
 });
 
