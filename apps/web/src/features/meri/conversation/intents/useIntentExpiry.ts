@@ -15,7 +15,11 @@ export function useIntentExpiry(
       item.state === "prepared" &&
       !("withheld" in item) &&
       ((item.kind === "proposal" && item.phase === "awaiting_approval") ||
-        (item.kind === "research_share" && item.proposalStatus === "proposed"))
+        (item.kind === "research_share" &&
+          item.proposalStatus === "proposed") ||
+        (item.kind === "legiwatch_action" &&
+          item.result !== "unavailable" &&
+          item.result.status === "proposed"))
         ? [Date.parse(item.proposal.expiresAt)]
         : [],
     );

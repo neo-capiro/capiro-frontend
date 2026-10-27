@@ -1,4 +1,9 @@
 import {
+  isLegiwatchProposal,
+  legiwatchFields,
+  legiwatchRow,
+} from "./legiwatch-view";
+import {
   intentsMetadata,
   type IntentsItem,
   type IntentsProposal,
@@ -61,6 +66,7 @@ export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
+  if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
   const command = proposal.command;
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
@@ -357,6 +363,7 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
   if (item.kind === "research_share")
     return researchShareRow(item, now, viewer);
   if (item.kind === "schedule_proposal")

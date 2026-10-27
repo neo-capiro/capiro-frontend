@@ -15,6 +15,7 @@ import {
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
+import { isLegiwatchProposal } from "./legiwatch-view";
 import { isResearchShareProposal } from "./research-share-view";
 import { ResearchShareReview } from "./ResearchShareReview";
 import { ResearchShareResult } from "./ResearchShareResult";
@@ -62,20 +63,23 @@ function DecisionControls({
   const [confirming, setConfirming] = useState<Choice | null>(null);
   const busy = disabled || attempt?.state === "pending";
   const sharing = row.proposal && isResearchShareProposal(row.proposal);
+  const legiwatch = row.proposal && isLegiwatchProposal(row.proposal);
   if (attempt?.state === "uncertain")
     return (
       <>
         <p role="status" className={styles.refusal}>
-          {sharing
-            ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
-            : (attempt.message ?? (
-                <>
-                  We could not confirm whether your decision to{" "}
-                  {attempt.decision === "approved" ? "approve" : "reject"} this
-                  was recorded. Checking sends the same request again to recover
-                  its outcome.
-                </>
-              ))}
+          {legiwatch
+            ? "The suggestion action outcome is not confirmed. Check the current recorded status; the action will not be sent again."
+            : sharing
+              ? "The share action outcome is not confirmed. Check the current recorded status before any new action."
+              : (attempt.message ?? (
+                  <>
+                    We could not confirm whether your decision to{" "}
+                    {attempt.decision === "approved" ? "approve" : "reject"}{" "}
+                    this was recorded. Checking sends the same request again to
+                    recover its outcome.
+                  </>
+                ))}
         </p>
         <div className={styles.actions}>
           <Button
@@ -83,7 +87,9 @@ function DecisionControls({
             variant="outline"
             disabled={busy}
             onClick={() =>
-              sharing ? onRefresh() : onDecide(row, attempt.decision)
+              sharing || legiwatch
+                ? onRefresh()
+                : onDecide(row, attempt.decision)
             }
           >
             Check result

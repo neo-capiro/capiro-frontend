@@ -11,6 +11,7 @@ import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
+import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
 import { useIntentExpiry } from "./useIntentExpiry";
 import { useResearchShareResults } from "./useResearchShareResults";
 import {
@@ -95,7 +96,9 @@ export function useConversationIntents(
       for (const item of list.items) {
         if (
           item.state !== "prepared" ||
-          (item.kind !== "proposal" && item.kind !== "research_share") ||
+          (item.kind !== "proposal" &&
+            item.kind !== "research_share" &&
+            item.kind !== "legiwatch_action") ||
           "withheld" in item
         )
           continue;
@@ -107,6 +110,9 @@ export function useConversationIntents(
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
         if (
+          (item.kind === "legiwatch_action" &&
+            item.result !== "unavailable" &&
+            legiwatchSettled(item.result.status)) ||
           (item.kind === "research_share" &&
             [
               "succeeded",
@@ -194,6 +200,16 @@ export function useConversationIntents(
       if (!prior && Date.parse(proposal.expiresAt) <= now()) return;
       if (prior?.state === "pending" || (prior && prior.decision !== decision))
         return;
+      // Reconcile an uncertain suggestion decision by reading its owner; never resend it.
+      if (prior && isLegiwatchProposal(proposal)) {
+        try {
+          guard();
+        } catch {
+          return;
+        }
+        await refresh();
+        return;
+      }
       const request: IntentsDecideRequest = {
         conversationId,
         deliveryId: row.deliveryId,
@@ -269,7 +285,7 @@ export function useConversationIntents(
         current.current.access === access
       )
         onDecisionSettled?.(
-          isResearchShareProposal(proposal)
+          isResearchShareProposal(proposal) || isLegiwatchProposal(proposal)
             ? proposal.binding.runId
             : proposal.command.binding.runId,
         );

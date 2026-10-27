@@ -1,3 +1,4 @@
+import { legiwatchSettled } from "./legiwatch-view";
 import type {
   IntentsItem,
   IntentsProposal,
@@ -13,6 +14,8 @@ export function isResearchShareProposal(
 }
 
 export function intentDecisionSettled(response: IntentsDecideResponse) {
+  if (response.status === "legiwatch_decided")
+    return legiwatchSettled(response.result.status);
   return (
     response.status !== "indeterminate" &&
     (response.status !== "research_share_decided" ||

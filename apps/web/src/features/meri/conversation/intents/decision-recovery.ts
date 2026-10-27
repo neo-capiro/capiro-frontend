@@ -1,3 +1,4 @@
+import { isLegiwatchProposal } from "./legiwatch-view";
 import { z } from "zod";
 import {
   receiveIntentsRequest,
@@ -64,7 +65,8 @@ export function intentDecisionRecovery(
     proposal: IntentsProposal,
     deliveryId: string,
   ) {
-    const sharing = isResearchShareProposal(proposal);
+    const sharing =
+      isResearchShareProposal(proposal) || isLegiwatchProposal(proposal);
     const binding = sharing ? proposal.binding : proposal.command.binding;
     const approver = sharing ? proposal.binding : proposal.requiredApprover;
     if (
