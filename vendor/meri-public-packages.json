@@ -444,6 +444,34 @@
       "regularEntryCount": 69,
       "status": "frozen-author-candidate-pending-Hermes-review",
       "purpose": "Wave 4 Fable closeout successor: read-only management actions no longer require approval; exact producer archive copied without repacking. Producer filename uses a nine-character commit prefix; consumer filename follows the existing eight-character provenance gate."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.22-74890bb9-ff5afd102997.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.22",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "74890bb96232dcce96d4fb4f31359038efb9db63",
+      "sourceTree": "0a785558b0db372f2027a3630ec791becb82ad01",
+      "bytes": 1298157,
+      "sha256": "ff5afd10299750c680ec575da8da4937498918e619b8a728693860444ece3fa1",
+      "integrity": "sha512-ZwjtyMotHwLE27t7AaBJvUIGhJ3QlzihZKJpf2wEvF/irpPJ+gLgw+W9LvdJinJZMma9IQDirjbDvzzCgGX7iQ==",
+      "regularEntryCount": 69,
+      "status": "producer-verified-pending-Hermes-consumer-binding-review",
+      "purpose": "M5 document read provenance refresh; existing schemas, receivers, declarations and catalog retained."
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.9-74890bb9-5017b072bccb.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.9",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "74890bb96232dcce96d4fb4f31359038efb9db63",
+      "sourceTree": "0a785558b0db372f2027a3630ec791becb82ad01",
+      "bytes": 3288,
+      "sha256": "5017b072bccbd55797333936e042ddfdde8bcfe5834dfc65c1317e8e35b90365",
+      "integrity": "sha512-b9m+rnakKZHyAv61fXMIdeBMZFcfZW2k4FmKCUbEXPcbJX453Ky7ll43uKiYGX47stZGnj3g9Imrle0uC/qXOw==",
+      "regularEntryCount": 6,
+      "status": "producer-verified-pending-Hermes-consumer-binding-review",
+      "purpose": "Metadata-only peer compatibility for contracts0.1.22; runtime and declaration bytes unchanged from0.1.8."
     }
   ]
 }
