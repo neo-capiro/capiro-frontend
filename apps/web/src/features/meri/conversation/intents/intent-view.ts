@@ -1,3 +1,21 @@
+import { isWatchProposal, watchFields, watchRow } from "./watch-view";
+import { isBizdevProposal, bizdevFields, bizdevRow } from "./bizdev-view";
+import {
+  isLegislativeDocumentProposal,
+  legislativeDocumentFields,
+  legislativeDocumentRow,
+} from "./legislative-document-view";
+import { savedNoteRow } from "./note-view";
+import {
+  isClientRecordProposal,
+  clientRecordFields,
+  clientRecordRow,
+} from "./client-record-view";
+import {
+  isLegiwatchProposal,
+  legiwatchFields,
+  legiwatchRow,
+} from "./legiwatch-view";
 import {
   intentsMetadata,
   type IntentsItem,
@@ -9,6 +27,13 @@ import {
   researchShareFields,
   researchShareRow,
 } from "./research-share-view";
+import {
+  isMailSendProposal,
+  isNativeMailOutcome,
+  mailFields,
+  mailResultFields,
+  mailRow,
+} from "./mail-view";
 
 import type {
   IntentTone,
@@ -41,6 +66,7 @@ const actionLabels: Readonly<Record<string, string>> = {
   "document.draft": "Prepare a document",
   "memory.propose": "Propose a memory for review",
   "artifact.file": "File attachments to a client",
+  "mail.send": "Send an email",
 };
 const cap = (value: string, length = 400) =>
   value.length > length ? `${value.slice(0, length)}…` : value;
@@ -60,7 +86,14 @@ const day = (iso: string) => iso.slice(0, 10);
 export function proposalFields(
   proposal: IntentsProposal,
 ): readonly IntentField[] {
+  if (isWatchProposal(proposal)) return watchFields(proposal);
+  if (isBizdevProposal(proposal)) return bizdevFields(proposal);
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
+  if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
+  if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
+  if (isMailSendProposal(proposal)) return mailFields(proposal);
+  if (isLegislativeDocumentProposal(proposal))
+    return legislativeDocumentFields(proposal);
   const command = proposal.command;
   const args = command.arguments as Record<string, unknown>;
   const fields: IntentField[] = [
@@ -109,6 +142,8 @@ function resultFields(
   execution: Completed,
   action: IntentsNativeProposal["command"]["action"],
 ): readonly IntentField[] {
+  if (isNativeMailOutcome(execution.outcome))
+    return mailResultFields(execution.outcome);
   if ("version" in execution.outcome) {
     const { version } = execution.outcome;
     return [
@@ -357,6 +392,14 @@ export function intentRow(
     return closed(
       "withheld" in item ? plainLooks.withheldDraft : plainLooks.draft,
     );
+  if (item.kind === "watch_action") return watchRow(item, now, viewer);
+  if (item.kind === "bizdev_action") return bizdevRow(item, now, viewer);
+  if (item.kind === "legiwatch_action") return legiwatchRow(item, now, viewer);
+  if (item.kind === "legislative_document_action")
+    return legislativeDocumentRow(item, now, viewer);
+  if (item.kind === "saved_note") return savedNoteRow(item);
+  if (item.kind === "client_record_action")
+    return clientRecordRow(item, now, viewer);
   if (item.kind === "research_share")
     return researchShareRow(item, now, viewer);
   if (item.kind === "schedule_proposal")
@@ -392,6 +435,10 @@ export function intentRow(
     };
   }
   if ("withheld" in item) return closed(plainLooks.withheldProposal);
+  if (item.kind === "proposal" && isMailSendProposal(item.proposal)) {
+    const mail = mailRow(item, now, viewer);
+    if (mail) return mail;
+  }
   const { look, decision } = proposalLook(item, now, viewer);
   const execution = item.execution;
   const completed =

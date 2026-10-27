@@ -5,9 +5,7 @@ import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { canManageContacts } from "../contact-api";
-import { MailCompose, type MailInitialDraft } from "../MailCompose";
 import { readTimelineThread, threadKey, type ThreadScope } from "./contracts";
-import { replyRecipients } from "./recipients";
 import { ThreadContent, MailCoverageNotice } from "./ThreadContent";
 import {
   mergeMailPages,
@@ -17,8 +15,6 @@ import {
 import styles from "./thread.module.css";
 import { NativeMailReply } from "./NativeMailReply";
 
-const replyGap =
-  "Reply all sending is unavailable here. You can review recipients and text, then reply from your mailbox.";
 export function TimelineMailThread({
   clientId,
   threadId,
@@ -54,18 +50,15 @@ export function TimelineMailThread({
     <ThreadSession
       key={JSON.stringify(threadKey(scope))}
       scope={scope}
-      actorEmail={owner.user.email}
       canReply={canManageContacts(owner.role)}
     />
   );
 }
 function ThreadSession({
   scope,
-  actorEmail,
   canReply,
 }: {
   scope: ThreadScope;
-  actorEmail: string | null;
   canReply: boolean;
 }) {
   const api = useApi();
@@ -73,8 +66,6 @@ function ThreadSession({
   const id = useId();
   const [expanded, setExpanded] = useState(false);
   const [replyRevision, setReplyRevision] = useState(0);
-  const [draft, setDraft] = useState<MailInitialDraft | null>(null);
-  const [error, setError] = useState("");
   const [bodyError, setBodyError] = useState<Error | null>(null);
   const query = useInfiniteQuery({
     queryKey: threadKey(scope),
@@ -87,24 +78,6 @@ function ThreadSession({
   });
   const thread =
     query.isSuccess && !query.error && !bodyError ? query.data : undefined;
-  function reviewAll() {
-    if (!thread || !canReply || thread.hasMore || query.isFetching) return;
-    try {
-      const recipients = replyRecipients(thread, actorEmail, true);
-      setError("");
-      setDraft({
-        subject: `Re: ${thread.subject.replace(/^Re:\s*/i, "")}`,
-        to: recipients.to,
-        cc: recipients.cc,
-      });
-    } catch (error) {
-      setError(
-        error instanceof Error && !error.message.startsWith("[")
-          ? error.message
-          : "Stored recipient data could not be verified. Review this message in your mailbox.",
-      );
-    }
-  }
   return (
     <section className={styles.thread} aria-label="Synced email thread">
       {!expanded ? (
@@ -145,23 +118,10 @@ function ThreadSession({
                   {thread.totalMessages} stored messages loaded
                 </small>
                 <button
-                  className="button"
-                  disabled={
-                    !canReply ||
-                    !thread.messages.length ||
-                    thread.hasMore ||
-                    query.isFetching
-                  }
-                  onClick={reviewAll}
-                >
-                  Review reply all
-                </button>
-                <button
                   className="button ghost"
                   aria-expanded={true}
                   aria-controls={id}
                   onClick={() => {
-                    setDraft(null);
                     setExpanded(false);
                   }}
                 >
@@ -197,14 +157,13 @@ function ThreadSession({
               {thread.hasMore && (
                 <small>
                   Load the remaining stored messages to choose an earlier
-                  original or review reply-all recipients.
+                  original for reply or reply all.
                 </small>
               )}
               <button
                 className="button ghost"
                 disabled={query.isFetching}
                 onClick={() => {
-                  setDraft(null);
                   setReplyRevision((revision) => revision + 1);
                   setBodyError(null);
                   void cache.resetQueries({
@@ -224,7 +183,6 @@ function ThreadSession({
               )}
             </>
           )}
-          {error && <p role="alert">{error}</p>}
           {!thread && (
             <button
               className="button ghost"
@@ -236,20 +194,6 @@ function ThreadSession({
             </button>
           )}
         </div>
-      )}
-      {expanded && draft && thread && (
-        <MailCompose
-          clientId={scope.clientId}
-          person={{
-            name: draft.to?.[0]?.name ?? draft.to?.[0]?.email ?? "Recipient",
-            email: draft.to?.[0]?.email ?? null,
-            title: null,
-          }}
-          thread={{ id: thread.id, subject: thread.subject }}
-          initialDraft={draft}
-          onClose={() => setDraft(null)}
-          sendBlockedReason={replyGap}
-        />
       )}
     </section>
   );

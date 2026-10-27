@@ -2,7 +2,7 @@
 import { useState, type ReactNode } from "react";
 import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { TenantModelSettings } from "../../tenant-settings/TenantModelSettings";
-import { ConnectorAccountsScreen } from "./ConnectorAccountsScreen";
+import { ConnectorAccountsHost } from "./ConnectorAccountsHost";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
 import { NotificationsAccountScreen } from "./NotificationsAccountScreen";
 import { PersonalPreferencesScreen } from "./PersonalPreferencesScreen";
@@ -56,7 +56,16 @@ export function MeriPreferencesPanel({
       );
     case "connections":
       return (
-        <ConnectorAccountsScreen chrome={chrome} view={views.connections} />
+        <ConnectorAccountsHost
+          chrome={{
+            ...chrome,
+            notice: {
+              title: "Connections",
+              detail:
+                "These are your own provider connections for the current account, read from Capiro Integrations. Connect, reconnect, sync and disconnect are performed there.",
+            },
+          }}
+        />
       );
     case "usage":
       return (

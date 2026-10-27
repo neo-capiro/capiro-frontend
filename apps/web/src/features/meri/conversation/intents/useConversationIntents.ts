@@ -7,10 +7,25 @@ import {
   useRef,
   useState,
 } from "react";
-import type { IntentsDecideRequest } from "@capiro/meri-client/intents";
+import type {
+  IntentsDecideRequest,
+  IntentsItem,
+} from "@capiro/meri-client/intents";
 import type { IntentsAccess } from "@/shared/meri-intents/access";
 import { intentRows, type IntentRow, type Viewer } from "./intent-view";
 import { useIntentList, type ListState } from "./useIntentList";
+import {
+  isLegislativeDocumentProposal,
+  legislativeDocumentSettled,
+} from "./legislative-document-view";
+import {
+  isClientRecordProposal,
+  clientRecordSettled,
+} from "./client-record-view";
+import { isWatchProposal, watchSettled } from "./watch-view";
+import { isBizdevProposal, bizdevSettled } from "./bizdev-view";
+import { isLegiwatchProposal, legiwatchSettled } from "./legiwatch-view";
+import { isMailSendProposal, mailOutcomeSettled } from "./mail-view";
 import { useIntentExpiry } from "./useIntentExpiry";
 import { useResearchShareResults } from "./useResearchShareResults";
 import {
@@ -36,6 +51,31 @@ type RecoveryState = {
   attempts: Readonly<Record<string, Attempt>>;
   error?: string;
 };
+
+/**
+ * A durable owner outcome that settles this saved decision. A mail decision settles only on its
+ * exact native-mail accepted/failed outcome; absent, unreadable or mismatched stays uncertain.
+ */
+function settledOwnerOutcome(
+  item: Extract<IntentsItem, { kind: "proposal"; proposal: unknown }>,
+) {
+  if (item.phase === "rejected")
+    return (
+      typeof item.decision === "object" &&
+      item.decision?.decision === "rejected"
+    );
+  if (item.phase !== "completed") return false;
+  const execution = item.execution;
+  if (
+    execution === null ||
+    execution === "unavailable" ||
+    execution.state !== "completed"
+  )
+    return false;
+  return isMailSendProposal(item.proposal)
+    ? mailOutcomeSettled(execution.outcome)
+    : true;
+}
 
 /** Current list/proposal authority plus a durable exact decision; hydration never dispatches. */
 export function useConversationIntents(
@@ -95,7 +135,13 @@ export function useConversationIntents(
       for (const item of list.items) {
         if (
           item.state !== "prepared" ||
-          (item.kind !== "proposal" && item.kind !== "research_share") ||
+          (item.kind !== "proposal" &&
+            item.kind !== "research_share" &&
+            item.kind !== "legiwatch_action" &&
+            item.kind !== "client_record_action" &&
+            item.kind !== "watch_action" &&
+            item.kind !== "bizdev_action" &&
+            item.kind !== "legislative_document_action") ||
           "withheld" in item
         )
           continue;
@@ -107,6 +153,21 @@ export function useConversationIntents(
         if (!saved) continue;
         journal.matches(saved, item.proposal, item.deliveryId);
         if (
+          (item.kind === "watch_action" &&
+            item.result !== "unavailable" &&
+            watchSettled(item.result.status)) ||
+          (item.kind === "bizdev_action" &&
+            item.result !== "unavailable" &&
+            bizdevSettled(item.result.status)) ||
+          (item.kind === "legislative_document_action" &&
+            item.result !== "unavailable" &&
+            legislativeDocumentSettled(item.result.status)) ||
+          (item.kind === "client_record_action" &&
+            item.result !== "unavailable" &&
+            clientRecordSettled(item.result.status)) ||
+          (item.kind === "legiwatch_action" &&
+            item.result !== "unavailable" &&
+            legiwatchSettled(item.result.status)) ||
           (item.kind === "research_share" &&
             [
               "succeeded",
@@ -115,14 +176,7 @@ export function useConversationIntents(
               "failed_terminal",
               "blocked",
             ].includes(item.proposalStatus)) ||
-          (item.kind === "proposal" &&
-            item.phase === "rejected" &&
-            typeof item.decision === "object" &&
-            item.decision?.decision === "rejected") ||
-          (item.kind === "proposal" &&
-            item.phase === "completed" &&
-            typeof item.execution === "object" &&
-            item.execution?.state === "completed")
+          (item.kind === "proposal" && settledOwnerOutcome(item))
         )
           await journal.observed(item.proposal, item.deliveryId);
         else
@@ -194,6 +248,24 @@ export function useConversationIntents(
       if (!prior && Date.parse(proposal.expiresAt) <= now()) return;
       if (prior?.state === "pending" || (prior && prior.decision !== decision))
         return;
+      // Reconcile uncertain domain actions by reading their owner; never resend them.
+      if (
+        prior &&
+        (isWatchProposal(proposal) ||
+          isBizdevProposal(proposal) ||
+          isLegiwatchProposal(proposal) ||
+          isClientRecordProposal(proposal) ||
+          isMailSendProposal(proposal) ||
+          isLegislativeDocumentProposal(proposal))
+      ) {
+        try {
+          guard();
+        } catch {
+          return;
+        }
+        await refresh();
+        return;
+      }
       const request: IntentsDecideRequest = {
         conversationId,
         deliveryId: row.deliveryId,
@@ -269,7 +341,12 @@ export function useConversationIntents(
         current.current.access === access
       )
         onDecisionSettled?.(
-          isResearchShareProposal(proposal)
+          isWatchProposal(proposal) ||
+            isBizdevProposal(proposal) ||
+            isResearchShareProposal(proposal) ||
+            isLegiwatchProposal(proposal) ||
+            isClientRecordProposal(proposal) ||
+            isLegislativeDocumentProposal(proposal)
             ? proposal.binding.runId
             : proposal.command.binding.runId,
         );

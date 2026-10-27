@@ -52,15 +52,15 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@capiro/meri-contracts": "0.1.18",
-    "@capiro/meri-ui-stream": "0.1.6",
+    "@capiro/meri-contracts": "0.1.20",
+    "@capiro/meri-ui-stream": "0.1.7",
     "@ai-sdk/react": "4.0.140",
     "ai": "7.0.137",
     "react": "19.3.0"
   },
   "devDependencies": {
-    "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz",
-    "@capiro/meri-ui-stream": "file:../../vendor/capiro-meri-ui-stream-0.1.6-d8aaa800-ea31f32c5ffe.tgz",
+    "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.20-89d6d07b-b4b101eb14a3.tgz",
+    "@capiro/meri-ui-stream": "file:../../vendor/capiro-meri-ui-stream-0.1.7-329c3ee9-71ae991aa7fa.tgz",
     "@ai-sdk/react": "4.0.140",
     "ai": "7.0.137",
     "react": "19.3.0",

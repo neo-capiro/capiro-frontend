@@ -119,6 +119,11 @@
   align-items: flex-start;
   gap: 16px;
 }
+/* Scoped disabled affordance for this surface's action row: globals.css only sets
+   the cursor, so a gated control would otherwise paint as an enabled one. */
+.actions button:disabled {
+  opacity: 0.4;
+}
 .choices {
   display: flex;
   flex-wrap: wrap;

@@ -1,3 +1,8 @@
+import { watchSettled } from "./watch-view";
+import { bizdevSettled } from "./bizdev-view";
+import { legislativeDocumentSettled } from "./legislative-document-view";
+import { clientRecordSettled } from "./client-record-view";
+import { legiwatchSettled } from "./legiwatch-view";
 import type {
   IntentsItem,
   IntentsProposal,
@@ -13,6 +18,16 @@ export function isResearchShareProposal(
 }
 
 export function intentDecisionSettled(response: IntentsDecideResponse) {
+  if (response.status === "watch_decided")
+    return watchSettled(response.result.status);
+  if (response.status === "bizdev_decided")
+    return bizdevSettled(response.result.status);
+  if (response.status === "legislative_document_decided")
+    return legislativeDocumentSettled(response.result.status);
+  if (response.status === "client_record_decided")
+    return clientRecordSettled(response.result.status);
+  if (response.status === "legiwatch_decided")
+    return legiwatchSettled(response.result.status);
   return (
     response.status !== "indeterminate" &&
     (response.status !== "research_share_decided" ||

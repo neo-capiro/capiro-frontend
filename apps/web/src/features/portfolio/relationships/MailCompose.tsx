@@ -67,7 +67,7 @@ export function MailCompose({
         : []),
   );
   const [cc, setCc] = useState(
-    initialDraft?.cc?.map((item) => item.email).join(", ") ?? "",
+    (reply?.cc ?? initialDraft?.cc)?.map((item) => item.email).join(", ") ?? "",
   );
   const [bcc, setBcc] = useState("");
   const [validation, setValidation] = useState("");
@@ -109,7 +109,15 @@ export function MailCompose({
       onOpenChange={(open) => {
         if (!open && !send.isPending && !attachments.busy) onClose();
       }}
-      title={thread ? "Reply" : "New email"}
+      title={
+        reply?.operation === "forward"
+          ? "Forward plain-text message"
+          : reply?.operation === "reply_all"
+            ? "Reply all"
+            : thread
+              ? "Reply"
+              : "New email"
+      }
       description={
         sendBlockedReason
           ? "Review this reply. Sending is unavailable for this thread."
@@ -163,9 +171,12 @@ export function MailCompose({
                 input: {
                   ...(reply
                     ? {
-                        operation: "reply" as const,
+                        operation: reply.operation,
                         originalMessageId: reply.originalMessageId,
                         originalUpdatedAt: reply.originalUpdatedAt,
+                        ...(reply.operation === "forward"
+                          ? { originalBodySha256: reply.originalBodySha256 }
+                          : {}),
                       }
                     : {}),
                   clientId,
@@ -204,7 +215,7 @@ export function MailCompose({
             onCc={setCc}
             bcc={bcc}
             onBcc={setBcc}
-            disabled={locked || Boolean(reply)}
+            disabled={locked || Boolean(reply && reply.operation !== "forward")}
           />
           <label>
             Subject
@@ -216,6 +227,9 @@ export function MailCompose({
               onChange={(e) => setSubject(e.target.value)}
             />
           </label>
+          {reply?.operation === "forward" && (
+            <ForwardOriginal text={reply.originalBodyText!} />
+          )}
           <RichMailEditor
             key={sourceKey}
             value={body}
@@ -366,6 +380,9 @@ export function MailCompose({
               </p>
             )}
             <MailBodyPreview html={review.input.bodyHtml} />
+            {reply?.operation === "forward" && (
+              <ForwardOriginal text={reply.originalBodyText!} />
+            )}
             {!sendBlockedReason && (
               <small>
                 {review.input.attachmentIds?.length ?? 0} attachment(s),
@@ -431,5 +448,23 @@ export function MailCompose({
         </button>
       </Dialog>
     </Dialog>
+  );
+}
+
+function ForwardOriginal({ text }: { text: string }) {
+  return (
+    <section
+      className="stack"
+      aria-label="Original message included in forward"
+    >
+      <strong>Original plain-text message</strong>
+      <small>
+        This complete text is included after your comment. No incoming files or
+        original formatting are forwarded.
+      </small>
+      <pre style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
+        {text}
+      </pre>
+    </section>
   );
 }

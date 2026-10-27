@@ -1,3 +1,8 @@
+import { isWatchProposal } from "./watch-view";
+import { isBizdevProposal } from "./bizdev-view";
+import { isLegislativeDocumentProposal } from "./legislative-document-view";
+import { isClientRecordProposal } from "./client-record-view";
+import { isLegiwatchProposal } from "./legiwatch-view";
 import { z } from "zod";
 import {
   receiveIntentsRequest,
@@ -64,7 +69,13 @@ export function intentDecisionRecovery(
     proposal: IntentsProposal,
     deliveryId: string,
   ) {
-    const sharing = isResearchShareProposal(proposal);
+    const sharing =
+      isWatchProposal(proposal) ||
+      isBizdevProposal(proposal) ||
+      isResearchShareProposal(proposal) ||
+      isLegiwatchProposal(proposal) ||
+      isClientRecordProposal(proposal) ||
+      isLegislativeDocumentProposal(proposal);
     const binding = sharing ? proposal.binding : proposal.command.binding;
     const approver = sharing ? proposal.binding : proposal.requiredApprover;
     if (
