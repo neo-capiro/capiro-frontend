@@ -296,7 +296,7 @@
       "integrity": "sha512-JGPM4POAmpGl3PGM7QNgwxMH1HwB9SuvAJbGIb4aMXEgQjNKsQGQAlAiv2IMK1KWzwUOqXTZk4N0HfPZcDemqw==",
       "bytes": 2964,
       "regularEntryCount": 6,
-      "status": "active-packed-frontend-input; deployed-acceptance-separate",
+      "status": "superseded-by capiro-meri-ui-stream-0.1.6-d8aaa800-ea31f32c5ffe.tgz; historical archive retained",
       "qualification": "Release actual installed checks reused; Integration exact physical archive/entry/install and accepted client source hashes verified. No build/install/tests repeated. Client remains native workspace; this archive records the exact installed qualifier, not a replacement workspace link.",
       "releaseReceiptSha256": "2e89f17f6bc3a2c82f659cbc5eac84f20d55e9c33397f855fc6dd303c898ecf0"
     },
@@ -341,9 +341,37 @@
       "integrity": "sha512-4w+2cCu+GBULuP18Ptxh0n96UflMhOGwnKEZ9wgzPJaDnMZlTJiL2OIHGAUsYWDLOlR+ipB4p4/QXZPXDo3nMg==",
       "bytes": 1049133,
       "regularEntryCount": 69,
-      "status": "active-packed-frontend-input; deployed-acceptance-separate",
+      "status": "superseded-by capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz; historical archive retained",
       "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
       "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u2026/5a1cf815\u2026). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.18",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "3af2a1664432c6852721df1b88f546c1dd2f500e",
+      "sourceTree": "662d243b6e3c42e19dbbef3d8d5713ca79f964c7",
+      "sha256": "6b4bb0462314ceffbf582db690b769c57b4b6882a73393b7f06165837685b0cd",
+      "integrity": "sha512-sO95bbsx6fcJOXJOf7LnC8mS67T730Rku6cqKdxUvLWsl1iJ1EWFYjq+NrN+bHRk925SFBDiqyoxYhzhn6Zj4w==",
+      "bytes": 1066085,
+      "regularEntryCount": 69,
+      "status": "qualified-local-consumer; deployed-acceptance-separate",
+      "qualification": "Owner-built immutable archive; final intent receiver/declarations/schema byte-identical to qualified candidate. Targeted frontend 48 unit and 5 mounted cases pass; live acceptance remains separate."
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.6-d8aaa800-ea31f32c5ffe.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.6",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "d8aaa8009d66c4acb5f4754909e9bc2ec379deab",
+      "sourceTree": "bde3ce3e3c8cc4d053d10660b5d90c34b91d2b05",
+      "sha256": "ea31f32c5ffef8ff6a73ae38fa759bf8610360a8d358037b1eadbf4353282df6",
+      "integrity": "sha512-96invsJJCU2s620GnuixDl6wFNtx9gTJtVcKFC71r43RjKfsA+/J9IZsCA7RSoZ4Ubnks8+9tqcIB1HE7f3idQ==",
+      "bytes": 2966,
+      "regularEntryCount": 6,
+      "status": "qualified-local-consumer; deployed-acceptance-separate",
+      "qualification": "Owner-regenerated public declarations preserve accepted hearing source union. All four runtime/declaration files byte-identical to accepted FE0.1.5 archive; owner-authored peer contracts0.1.18. Prior b63a artifact withheld before release; receipt preserved outside source."
     }
   ]
 }
