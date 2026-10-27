@@ -31,7 +31,11 @@ export function PortfolioPulse({
         {[
           [
             "Clients",
-            clients?.filter((c) => c.profileType === "CLIENT").length,
+            // Owner definition: non-archived client profiles; exclude firm
+            // profiles and prospects. Archiving sets status "archived".
+            clients?.filter(
+              (c) => c.profileType === "CLIENT" && c.status !== "archived",
+            ).length,
           ],
           ["Need attention", undefined],
           ["Objectives", undefined],
