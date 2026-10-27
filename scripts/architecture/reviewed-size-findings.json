@@ -5446,7 +5446,7 @@
     "kind": "function",
     "symbol": "<anonymous>",
     "fingerprint": "172a7c423266b670c5d09187e594d93fe3cbb2b768fb63c87bb678b0faf735d9",
-    "reason": "Test suite body only; carries no production responsibility, state or effect.\n    VERDICT: ACCEPTABLE (test-only).\n\n[12] file: apps/web/src/features/modules/research-portfolios/share/share.module.css\n    kind=file symbol=<module> nonblank=424\n    fingerprint=99332c10e118ace7c054ccd2f7d707f0e341964cee7ac1952c7bb0bbcd494564\n    RATIONALE: One module stylesheet covering the dashboard grid, widget content, designer and\n    recipient page of a single visual surface family. It is pure presentation with no logic or\n    state; the recipient-vs-canvas distinction is expressed by the .recipientGrid container query\n    and the .canvas clip rules documented in §2.",
+    "reason": "Test suite body only; carries no production responsibility, state or effect.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
