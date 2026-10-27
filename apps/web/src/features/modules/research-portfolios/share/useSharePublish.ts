@@ -1,21 +1,56 @@
 "use client";
 import { useRef, useState } from "react";
 import { useCapiroMutation } from "../../../../shared/capiro/queries";
+import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import { CapiroApiError } from "../../../../shared/capiro/http";
-import type { OperationRequest } from "../../../../shared/capiro/contracts";
-import type { researchShareOperations } from "../../../../shared/capiro/operations/research-share";
 import type { ResearchShareLink } from "../../../../shared/capiro/operations/research-share-schemas";
-
-type Input = OperationRequest<
-  (typeof researchShareOperations)["research.shareLinks.publish"]
->;
+import { useRetainedIntent } from "../../../../shared/session/recovery/useRetainedIntent";
+import {
+  acknowledgeRecovery,
+  reserveRecovery,
+  RecoveryStorageError,
+} from "../../../../shared/session/recovery/journal";
+import {
+  sharePublishRecovery,
+  sharePublishScope,
+  type SharePublishActor,
+  type SharePublishInput as Input,
+} from "./share-publish-recovery";
 
 /** Keeps a possibly dispatched publication fixed until an explicit read resolves it. */
-export function useSharePublish(onChanged: () => void) {
+export function useSharePublish(
+  actor: SharePublishActor,
+  portfolioId: string,
+  onChanged: () => void,
+) {
+  const api = useCapiro();
+  const scope = sharePublishScope(actor, portfolioId);
+  const retained = useRetainedIntent(
+    scope,
+    sharePublishRecovery,
+    async (signal, guard) => {
+      const me = await api.request("me.read", {}, { signal });
+      guard();
+      if (me.tenant.id !== actor.tenantId || me.user.id !== actor.userId)
+        throw new Error(
+          "Your sharing session changed. Reopen this portfolio with the current account.",
+        );
+      const portfolio = await api.request(
+        "research.detail",
+        { params: { id: portfolioId } },
+        { signal },
+      );
+      guard();
+      if (portfolio.id !== portfolioId || portfolio.myRole === "viewer")
+        throw new Error(
+          "Current portfolio editing access is required to recover this publication.",
+        );
+    },
+  );
   const mutation = useCapiroMutation("research.shareLinks.publish");
   const lookup = useCapiroMutation("research.shareLinks.operation");
   const active = useRef(false);
-  const [pending, setPending] = useState<Input>();
+  const pending = retained.record;
   const [busy, setBusy] = useState(false);
   const [retryReady, setRetryReady] = useState(false);
   const [error, setError] = useState<string>();
@@ -24,29 +59,57 @@ export function useSharePublish(onChanged: () => void) {
     link: ResearchShareLink;
   }>();
   const [lost, setLost] = useState(false);
+  async function settle(input: Input) {
+    await acknowledgeRecovery(scope, input.body.operationKey, retained.guard);
+    retained.install(null);
+  }
   async function publish(input: Input) {
-    if (active.current || (pending && !retryReady)) return;
+    if (active.current || !retained.ready || (pending && !retryReady)) return;
     active.current = true;
     setBusy(true);
-    setPending(input);
     setRetryReady(false);
     setError(undefined);
     try {
+      await retained.verify();
+      const original = await reserveRecovery(
+        scope,
+        input.body.operationKey,
+        input,
+        sharePublishRecovery,
+        retained.guard,
+      );
+      retained.install(original);
+      if (JSON.stringify(original) !== JSON.stringify(input)) {
+        setError(
+          "Another view retained a publication. Check that recorded result before continuing.",
+        );
+        return;
+      }
       const result = await mutation.run(input);
-      setPending(undefined);
       if (result.token) setIssued({ token: result.token, link: result.link });
       else setLost(true);
+      await settle(input);
       onChanged();
     } catch (caught) {
       if (caught instanceof DOMException && caught.name === "AbortError")
         return;
+      if (caught instanceof RecoveryStorageError) {
+        retained.block(caught);
+        return;
+      }
       const knownRefusal =
         caught instanceof CapiroApiError &&
         caught.status >= 400 &&
         caught.status < 500 &&
         caught.status !== 408 &&
         caught.status !== 499;
-      if (knownRefusal) setPending(undefined);
+      if (knownRefusal) {
+        try {
+          await settle(input);
+        } catch (failure) {
+          retained.block(failure);
+        }
+      }
       setError(
         knownRefusal
           ? caught.message
@@ -58,11 +121,12 @@ export function useSharePublish(onChanged: () => void) {
     }
   }
   async function reconcile() {
-    if (!pending || active.current) return;
+    if (!pending || active.current || !retained.ready) return;
     active.current = true;
     setBusy(true);
     setError(undefined);
     try {
+      await retained.verify();
       const result = await lookup.run({
         params: {
           id: pending.params.id,
@@ -70,7 +134,7 @@ export function useSharePublish(onChanged: () => void) {
         },
       });
       if (result.link) {
-        setPending(undefined);
+        await settle(pending);
         setLost(true);
         onChanged();
       } else setRetryReady(true);
@@ -89,6 +153,9 @@ export function useSharePublish(onChanged: () => void) {
     pending,
     busy,
     retryReady,
+    ready: retained.ready,
+    recoveryError: retained.error,
+    reloadRecovery: retained.retry,
     error,
     issued,
     lost,

@@ -5,13 +5,14 @@ import {
   hostileText,
   ids,
   link,
+  portfolio,
   shareToken,
   timestamp,
 } from "./research-sharing-fixture";
 
 async function sharingApi(
   page: Page,
-  options: { enabled?: boolean; tenantEnabled?: boolean } = {},
+  options: { enabled?: boolean; tenantEnabled?: boolean; userId?: string } = {},
 ) {
   let enabled = options.enabled ?? false;
   let links: unknown[] = [];
@@ -33,6 +34,41 @@ async function sharingApi(
     });
     let result: unknown;
     switch (key) {
+      case "me.read":
+        result = {
+          user: {
+            id: options.userId ?? "10000000-0000-4000-8000-000000000006",
+            clerkUserId: "synthetic-owner",
+            email: null,
+            firstName: null,
+            lastName: null,
+            title: null,
+            emailSignatureEnabled: false,
+            hasEmailSignature: false,
+            tourCompleted: true,
+            legiwatchIntroSeen: false,
+          },
+          tenant: {
+            id: "10000000-0000-4000-8000-000000000007",
+            slug: "synthetic",
+            name: "Synthetic firm",
+          },
+          role: "standard_user",
+          billingAdmin: false,
+          entitlements: {
+            memoryGovernance: false,
+            peWatch: false,
+            defenseBudgetIntel: false,
+            complianceModule: false,
+            dataExport: false,
+            customConnectors: false,
+          },
+          features: {},
+        };
+        break;
+      case "research.detail":
+        result = portfolio;
+        break;
       case "research.sharing":
         result = settings();
         break;
@@ -824,4 +860,100 @@ test("recipient expands exact frozen source evidence and table rows without anot
   await expect(
     page.getByText("Prepared for Synthetic client", { exact: false }),
   ).toBeVisible();
+});
+
+test("a retained unknown publication survives reload and is isolated to its Core actor", async ({
+  page,
+}) => {
+  const actor = {
+    enabled: true,
+    userId: "10000000-0000-4000-8000-000000000006",
+  };
+  await sharingApi(page, actor);
+  const publications: unknown[] = [];
+  let operationKey: string | undefined;
+  let reads = 0;
+  await page.route(
+    "**/api/capiro/research.shareLinks.publish",
+    async (route) => {
+      const request = route.request().postDataJSON();
+      publications.push(request);
+      operationKey = request.body.operationKey;
+      await route.abort("failed");
+    },
+  );
+  await page.route(
+    "**/api/capiro/research.shareLinks.operation?*",
+    async (route) => {
+      reads += 1;
+      const input = JSON.parse(
+        new URL(route.request().url()).searchParams.get("input")!,
+      );
+      expect(input.params.operationKey).toBe(operationKey);
+      await route.fulfill({ json: { link } });
+    },
+  );
+  await page.goto("/research-sharing.html");
+  await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  await page
+    .getByLabel("I reviewed this frozen dashboard and everything it exposes.")
+    .check();
+  await page.getByRole("button", { name: "Publish", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Check publication result" }),
+  ).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Check publication result" }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Client", { exact: true })).toBeDisabled();
+  expect(publications).toHaveLength(1);
+  expect(reads).toBe(0);
+  actor.userId = "10000000-0000-4000-8000-000000000008";
+  await page.reload();
+  await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  await expect(
+    page.getByLabel(
+      "I reviewed this frozen dashboard and everything it exposes.",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Check publication result" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Publish", exact: true }),
+  ).toBeDisabled();
+  actor.userId = "10000000-0000-4000-8000-000000000006";
+  await page.reload();
+  await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  await page.getByRole("button", { name: "Check publication result" }).click();
+  await expect(page.getByRole("dialog")).toContainText(
+    "one-time address was not received here",
+  );
+  expect(publications).toHaveLength(1);
+  expect(reads).toBe(1);
+  expect(await page.evaluate(() => JSON.stringify(localStorage))).not.toContain(
+    shareToken,
+  );
+});
+
+test("unavailable publication recovery storage prevents a new write", async ({
+  page,
+}) => {
+  const writes = await sharingApi(page, { enabled: true });
+  await page.addInitScript(() =>
+    Object.defineProperty(navigator, "locks", { value: undefined }),
+  );
+  await page.goto("/research-sharing.html");
+  await page.getByRole("button", { name: "Publish link", exact: true }).click();
+  await expect(page.getByRole("alert")).toContainText(
+    "Saved-command recovery is unavailable",
+  );
+  await expect(
+    page.getByRole("button", { name: "Publish", exact: true }),
+  ).toBeDisabled();
+  expect(
+    writes.filter((row) => row.key === "research.shareLinks.publish"),
+  ).toHaveLength(0);
 });

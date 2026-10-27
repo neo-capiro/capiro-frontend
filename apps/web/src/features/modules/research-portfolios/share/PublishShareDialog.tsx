@@ -13,17 +13,11 @@ import {
 import { ResearchDashboardView } from "./ResearchDashboardView";
 import { ShareExposure } from "./ShareExposure";
 import { useSharePublish } from "./useSharePublish";
+import type { SharePublishActor } from "./share-publish-recovery";
 import styles from "./share.module.css";
 
 /** The publish boundary: choose a frozen payload, review it, then send that exact version. */
-export function PublishShareDialog({
-  portfolio,
-  designs,
-  snapshots,
-  canPublish,
-  onChanged,
-  onClose,
-}: {
+type Props = {
   portfolio: ResearchDetail;
   designs: readonly ResearchDashboardDesign[];
   snapshots: NonNullable<
@@ -32,36 +26,94 @@ export function PublishShareDialog({
   canPublish: boolean;
   onChanged: () => void;
   onClose: () => void;
-}) {
+};
+export function PublishShareDialog(props: Props) {
+  const me = useCapiroQuery("me.read", {});
+  if (!me.data)
+    return (
+      <Modal
+        open
+        onOpenChange={(open) => {
+          if (!open) props.onClose();
+        }}
+        title="Publish a client link"
+      >
+        <StatusPanel
+          loading={me.loading}
+          error={me.error}
+          onRetry={me.reload}
+        />
+      </Modal>
+    );
+  const actor = { tenantId: me.data.tenant.id, userId: me.data.user.id };
+  return (
+    <PublishReview
+      key={JSON.stringify([actor, props.portfolio.id])}
+      {...props}
+      actor={actor}
+    />
+  );
+}
+
+function PublishReview({
+  portfolio,
+  designs,
+  snapshots,
+  canPublish,
+  onChanged,
+  onClose,
+  actor,
+}: Props & { actor: SharePublishActor }) {
   const [clientId, setClientId] = useState(
     portfolio.clientLinks[0]?.clientId ?? "",
   );
   const [snapshotId, setSnapshotId] = useState(snapshots[0]?.id ?? "");
   const [designId, setDesignId] = useState(designs[0]?.id ?? "");
   const [branding, setBranding] = useState(true);
-  const [operationKey] = useState(() => crypto.randomUUID());
   const [reviewedHash, setReviewedHash] = useState<string>();
   const [copied, setCopied] = useState(false);
-  const publish = useSharePublish(onChanged);
-  const frozen = Boolean(publish.pending || publish.busy);
+  const publish = useSharePublish(actor, portfolio.id, onChanged);
+  const frozen = Boolean(publish.pending || publish.busy || !publish.ready);
+  const selection = publish.pending?.body ?? {
+    clientId,
+    snapshotId,
+    designId,
+    branding,
+  };
   const preview = useCapiroQuery(
     "research.sharePreview",
     {
       params: { id: portfolio.id },
-      body: { snapshotId, designId, clientId, branding },
+      body: {
+        snapshotId: selection.snapshotId,
+        designId: selection.designId,
+        clientId: selection.clientId,
+        branding: selection.branding,
+      },
     },
     {
       enabled: Boolean(
-        clientId && snapshotId && designId && !publish.issued && !publish.lost,
+        publish.ready &&
+        selection.clientId &&
+        selection.snapshotId &&
+        selection.designId &&
+        !publish.issued &&
+        !publish.lost,
       ),
     },
   );
   const ready =
     canPublish &&
+    publish.ready &&
     preview.data &&
     !preview.loading &&
     !preview.error &&
     reviewedHash === preview.data.previewHash;
+  const matchesRetained =
+    !publish.pending ||
+    (preview.data?.previewHash === publish.pending.body.previewHash &&
+      preview.data.designVersion ===
+        publish.pending.body.expectedDesignVersion);
   const url = publish.issued
     ? `${window.location.origin}/share/${publish.issued.token}`
     : "";
@@ -71,7 +123,7 @@ export function PublishShareDialog({
     await publish.publish({
       params: { id: portfolio.id },
       body: {
-        operationKey,
+        operationKey: crypto.randomUUID(),
         snapshotId,
         designId,
         clientId,
@@ -145,7 +197,7 @@ export function PublishShareDialog({
             <Field label="Client" htmlFor="share-client">
               <SelectInput
                 id="share-client"
-                value={clientId}
+                value={selection.clientId}
                 onValueChange={setClientId}
                 disabled={frozen}
                 options={portfolio.clientLinks.map((client) => ({
@@ -157,7 +209,7 @@ export function PublishShareDialog({
             <Field label="Snapshot" htmlFor="share-snapshot">
               <SelectInput
                 id="share-snapshot"
-                value={snapshotId}
+                value={selection.snapshotId}
                 onValueChange={setSnapshotId}
                 disabled={frozen}
                 options={snapshots.map((snapshot) => ({
@@ -169,7 +221,7 @@ export function PublishShareDialog({
             <Field label="Design" htmlFor="share-design">
               <SelectInput
                 id="share-design"
-                value={designId}
+                value={selection.designId}
                 onValueChange={setDesignId}
                 disabled={frozen}
                 options={designs.map((design) => ({
@@ -181,23 +233,49 @@ export function PublishShareDialog({
             <label className={styles.check}>
               <input
                 type="checkbox"
-                checked={branding}
+                checked={selection.branding}
                 disabled={frozen}
                 onChange={(event) => setBranding(event.target.checked)}
               />
               Show our firm name and logo on the dashboard
             </label>
           </div>
+          {publish.recoveryError && (
+            <p role="alert">
+              {publish.recoveryError}{" "}
+              <ActionButton onClick={publish.reloadRecovery}>
+                Retry recovery
+              </ActionButton>
+            </p>
+          )}
+          {!publish.ready && !publish.recoveryError && (
+            <p role="status">
+              Checking current access and any retained publication…
+            </p>
+          )}
+          {publish.pending && (
+            <p role="status">
+              A publication is retained with its original choices. Check its
+              recorded result before continuing.
+            </p>
+          )}
           <StatusPanel
             loading={preview.loading}
             error={preview.error}
             onRetry={preview.reload}
           >
-            {preview.data && (
+            {preview.data && !matchesRetained && (
+              <p role="status">
+                The current preview has changed since this retained publication.
+                Check its recorded result before preparing anything new.
+              </p>
+            )}
+            {preview.data && matchesRetained && (
               <>
                 <ShareExposure dashboard={preview.data.dashboard} />
                 <section aria-label="Recipient preview">
                   <ResearchDashboardView
+                    preview
                     dashboard={preview.data.dashboard}
                     logoUrl={preview.data.logoUrl}
                   />

@@ -10,14 +10,13 @@ import {
   TextInput,
 } from "../../../../shared/module-ui";
 import { ResearchDashboardView } from "./ResearchDashboardView";
+import { ShareUnavailable } from "../../../../shared/module-ui/ShareUnavailable";
 import styles from "./share.module.css";
 
 const api = createCapiroApi(publicResearchShareOperations, {
   credentials: "omit",
 });
 const TOKEN = /^[0-9a-f]{64}$/;
-const UNAVAILABLE =
-  "This link is not available. It may have expired or been withdrawn.";
 
 /**
  * Recipient page: link token in the address, portfolio PIN typed here, then the
@@ -175,13 +174,12 @@ function RecipientSession({ token }: { token: string }) {
     }
   }
 
-  if (!valid || available === false)
+  if (!valid || available === false) return <ShareUnavailable />;
+  if (available === undefined)
     return (
       <main className={styles.page}>
-        <section className={styles.gate} aria-label="Link unavailable">
-          <p className={styles.eyebrow}>Capiro</p>
-          <h1>Link not available</h1>
-          <p className={styles.description}>{UNAVAILABLE}</p>
+        <section className={styles.gate} aria-label="Checking link">
+          <StatusPanel loading />
         </section>
       </main>
     );

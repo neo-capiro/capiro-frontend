@@ -4,6 +4,7 @@ import { createCapiroApi } from "../../../shared/capiro/http";
 import { publicShareOperations } from "../../../shared/capiro/operations/share-public";
 import type { OperationResponse } from "../../../shared/capiro/contracts";
 import { StatusPanel } from "../../../shared/module-ui";
+import { ShareUnavailable } from "../../../shared/module-ui/ShareUnavailable";
 import { ResearchShareRecipient } from "../research-portfolios/share/ResearchShareRecipient";
 import styles from "./public-share.module.css";
 
@@ -12,15 +13,6 @@ const validToken = /^[0-9a-f]{64}$/;
 type SharedDocument = OperationResponse<
   (typeof publicShareOperations)["public-share.document"]
 >;
-
-function Unavailable() {
-  return (
-    <main className={styles.page}>
-      <h1>Link not available</h1>
-      <p>This link is not available. It may have expired or been withdrawn.</p>
-    </main>
-  );
-}
 
 /** One canonical address dispatches only after the shared lifecycle admits its kind. */
 export function PublicShareRecipient({ token }: { token: string }) {
@@ -51,7 +43,7 @@ function ShareSession({ token }: { token: string }) {
       );
     return () => controller.abort();
   }, [token]);
-  if (!validToken.test(token) || kind === false) return <Unavailable />;
+  if (!validToken.test(token) || kind === false) return <ShareUnavailable />;
   if (kind === "research_portfolio")
     return <ResearchShareRecipient token={token} />;
   if (kind === "workspace_document") return <DocumentRecipient token={token} />;
@@ -82,7 +74,7 @@ function DocumentRecipient({ token }: { token: string }) {
       );
     return () => controller.abort();
   }, [token]);
-  if (document === null) return <Unavailable />;
+  if (document === null) return <ShareUnavailable />;
   return (
     <main className={styles.page}>
       <StatusPanel loading={!document}>

@@ -185,3 +185,35 @@ for (const inFlight of [false, true]) {
     if (inFlight) expect(dashboardTokens).toEqual([]);
   });
 }
+
+test("availability must admit the link before any PIN prompt appears", async ({
+  page,
+}) => {
+  let release: (() => void) | undefined;
+  await page.route("**/api/capiro/**", async (route) => {
+    await new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await route.fulfill({ json: { available: false } });
+  });
+  await page.goto("/research-sharing.html?mode=public");
+  await expect.poll(() => Boolean(release)).toBe(true);
+  await expect(
+    page.getByRole("heading", { name: "Enter the PIN to open this dashboard" }),
+  ).toHaveCount(0);
+  await expect(page.getByLabel("PIN", { exact: true })).toHaveCount(0);
+  release!();
+  await expect(
+    page.getByRole("heading", { name: "Link not available" }),
+  ).toBeVisible();
+  const aliasMarkup = await page.locator("main").innerHTML();
+  await page.unroute("**/api/capiro/**");
+  await page.route("**/api/capiro/**", (route) =>
+    route.fulfill({ json: { available: false } }),
+  );
+  await page.goto("/research-sharing.html?mode=shared");
+  await expect(
+    page.getByRole("heading", { name: "Link not available" }),
+  ).toBeVisible();
+  expect(await page.locator("main").innerHTML()).toBe(aliasMarkup);
+});

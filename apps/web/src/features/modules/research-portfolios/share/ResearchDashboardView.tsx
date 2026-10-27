@@ -6,9 +6,11 @@ import styles from "./share.module.css";
 export function ResearchDashboardView({
   dashboard,
   logoUrl,
+  preview = false,
 }: {
   dashboard: ResearchShareDashboard;
   logoUrl: string | null;
+  preview?: boolean;
 }) {
   return (
     <div className={styles.frame}>
@@ -29,7 +31,9 @@ export function ResearchDashboardView({
           {" · "}snapshot {dashboard.snapshot.name}
         </span>
         <span>
-          Available until {new Date(dashboard.expiresAt).toLocaleDateString()}
+          {preview
+            ? "Available for one week after publishing"
+            : `Available until ${new Date(dashboard.expiresAt).toLocaleDateString()}`}
         </span>
       </footer>
     </div>
