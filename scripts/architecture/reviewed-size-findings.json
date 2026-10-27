@@ -746,7 +746,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u00e2\u20ac\u2122s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved targetâ€™s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -890,7 +890,7 @@
     "kind": "function",
     "symbol": "UploadFiles",
     "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
-    "reason": "One upload queue retains each job\u00e2\u20ac\u2122s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u00e2\u20ac\u2122s resulting state and adds no storage writer.",
+    "reason": "One upload queue retains each jobâ€™s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful uploadâ€™s resulting state and adds no storage writer.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2369,7 +2369,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u00e2\u20ac\u2122s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hookâ€™s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -5525,63 +5525,63 @@
     "file": "apps/web/src/features/portfolio/relationships/thread/NativeMailReply.tsx",
     "kind": "function",
     "symbol": "NativeMailReply",
-    "fingerprint": "9bde1fbfce605c9c1ec0487aa22404fc58606fe3527beb7ce67749c6d0ce4f67",
-    "reason": "This owner composes the exact-original selector, canonical scoped read and the lifetime of its one open native reply draft for Contact and Timeline. It passes only validated single-recipient context to the existing MailCompose and retires changed source or canonical context. It does not implement sending, recipient inference, authorization or attempt recovery. Keeping these dependent selection/render guards together is cohesive.",
-    "reviewedBy": "Codex independent s3_assessment",
+    "fingerprint": "63911aebd8ad43c1b76589f29df7b487e6f6e9a75e82ab51350adec03f7ecc2f",
+    "reason": "NativeMailReply owns selected-original/current-revision/current-connection mount eligibility. The incoming-file panel is keyed by scope, selected original, revision and connection so those changes retire its lifetime; moving that gate into the leaf would give the leaf an authority responsibility it does not own. Independent decision: work/hermes-review/incoming-mail-files-review/FE-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
     "kind": "function",
     "symbol": "DecisionControls",
-    "fingerprint": "3e1b002e2232273ff426b4880249c49cd0cc8b78cd0f045375a90080b586c28f",
-    "reason": "The existing decision control owns presentation and the signed-in user confirmation only. Research publication additionally consumes the canonical preview-ready flag. Its uncertain-result control now calls the existing read-only refresh, while native action behavior remains with its established owner; no new effect or receipt authority is introduced.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "97ff1a729d63631a7bb06da6b63c3ab1ec6ac2d68307d4dfe6873beb8451f75d",
+    "reason": "One current-state decision-control owner. The typed watch branch preserves arm/confirm, read-only uncertain recovery, expiry and closed behavior. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/decision-recovery.ts",
     "kind": "function",
     "symbol": "intentDecisionRecovery",
-    "fingerprint": "ff1b321c34851c5786f6d97c1af7454f8d840320483dba9286597329cc501ea4",
-    "reason": "This function remains the single encrypted decision-request journal adapter. The sharing proposal branch checks its own canonical actor/conversation/digest; the fresh accepted response callback runs after receiver admission and current-scope guard but before local acknowledgment, so the sole capability survives a storage error without being persisted. It does not own server execution or status truth.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "215b4cb8b9a8f3fbc2e1d34896caf4bfe1f1cb023f2f2804e0d791847c74207d",
+    "reason": "One saved-decision reconciliation owner matching the current proposal and delivery. The additive watch membership introduces no transport or ledger. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "fc13bbccaed605abe8ff9f32b5a3e8aa6a383af0d7827d41d41c7b3b662b0e7c",
-    "reason": "This is the existing pure translation from admitted intent items into display rows. The new research branch delegates to a separate pure research-share presentation module, and common display types moved into an import-cycle-free types owner. No IO, approval, persistence or access grant was added.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "b4356efbd8191e72bb654fef1bc573beaa371278c4f9d805c03735be3335e2fc",
+    "reason": "The shared cell, label and per-kind projection vocabulary remains cohesive. Splitting by size would fragment that vocabulary without a responsibility gain. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/intent-view.ts",
     "kind": "function",
     "symbol": "intentRow",
-    "fingerprint": "0b5fd76dcd401378873c111376358c32eb956acb8ec40b56738ccef02946bf96",
-    "reason": "This is the existing pure translation from admitted intent items into display rows. The new research branch delegates to a separate pure research-share presentation module, and common display types moved into an import-cycle-free types owner. No IO, approval, persistence or access grant was added.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "98337f2a469d101348c26796dabd478c7202a7806228606576695622174c7936",
+    "reason": "One current item is dispatched to its exact kind projection with truthful withheld and unavailable states; the watch branch stays adjacent to sibling action branches. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
     "kind": "function",
     "symbol": "useConversationIntents",
-    "fingerprint": "b19df84db36d6edee1dbc4c04823ac0c351140ca21ffc14221ce30c142094de6",
-    "reason": "The hook coordinates the existing scoped list, encrypted decision journal and current component identity. Research sharing uses the same decision owner; retained outcomes are reconciled from the list, and ephemeral capability display is delegated to a separate hook. Current identity guards surround async results. The nested decision callback is the same lifecycle responsibility, not a second authority.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "d35f739ffbcf5eb8f63615cce812e1224579db8f13f57b62174a8433d4d5294d",
+    "reason": "One list, current-guard, journal-recovery and decision lifetime owner. Watch participates in the existing read-only reconciliation and exact single-request path. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
     "kind": "function",
     "symbol": "useConversationIntents > <anonymous> #6",
-    "fingerprint": "b21c90a7d25ece5498f8a033937f79a9da6dbe3a10b53c076c2e54764c60b607",
-    "reason": "The hook coordinates the existing scoped list, encrypted decision journal and current component identity. Research sharing uses the same decision owner; retained outcomes are reconciled from the list, and ephemeral capability display is delegated to a separate hook. Current identity guards surround async results. The nested decision callback is the same lifecycle responsibility, not a second authority.",
-    "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "fingerprint": "39de499d40615fd042a266a0f932637828d2b3b9894cee3d47f463f4697c2d6f",
+    "reason": "One decision callback owns its readiness, pending, expiry and prior-attempt fences. Uncertain domain actions read their owners; a new confirmed decision sends one exact request. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -5726,6 +5726,78 @@
     "fingerprint": "61fb3972c83fc2bb6ac21ef335ed0bf0c238384776878f5753a02493ec39f0fc",
     "reason": "The shared HTTP gateway adds a thin adapter for the finite public-share operation catalog. It reuses the existing public request owner that omits identity credentials and cookies, rather than introducing another transport or product authority. Authenticated routing is unchanged.",
     "reviewedBy": "Codex independent sharing release integration review (/root)",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/bizdev-view.ts",
+    "kind": "function",
+    "symbol": "bizdevRow",
+    "fingerprint": "f392c3dfb053c9240b377b39089968bd9f6d6425359c40d50ce751eea612d07a",
+    "reason": "One saved-business-brief intent projection preserves the five sections, citation indexes, expected version and private/client scope, with truthful owner result fields. Independent decision: work/hermes-review/brief-legdoc-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/client-record-view.ts",
+    "kind": "function",
+    "symbol": "clientRecordRow",
+    "fingerprint": "a05f59941a309368517df42eac861e926890afcdaf032fb80b75d2f6fc94ee1d",
+    "reason": "One pure client-record outcome projection preserves explicit empty updates, child row errors, partial outcomes and the limits of non-atomic version checking. Independent decision: work/hermes-review/mail-client-review/FRONTEND-REVIEW.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/legislative-document-view.ts",
+    "kind": "function",
+    "symbol": "legislativeDocumentRow",
+    "fingerprint": "36f7a983a94a1d564e2cf358c03db2add86b5e345b19d39b7ef865c1b5f94364",
+    "reason": "One legislative-document intent projection preserves briefing sources/cutoff/timezone and research cross-session fields with inert citation text; selection-only and complete results remain distinct. Independent decision: work/hermes-review/brief-legdoc-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/legiwatch-view.ts",
+    "kind": "function",
+    "symbol": "legiwatchRow",
+    "fingerprint": "526becff41944a90e42aa2e905b643090ff0e5d6741f012dcb27a80a08ef3b03",
+    "reason": "One LegiWatch suggestion/relevance projection preserves verified quotes, UTF-16 offsets, rationale and preview binding, while distinguishing saved suggestions from assignments or watch activation. Independent decision: work/hermes-review/mail-client-review/FRONTEND-REVIEW.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/mail-view.ts",
+    "kind": "function",
+    "symbol": "mailRow",
+    "fingerprint": "23840f797932d7d20048dccc8e22ecc5f98ccb3648fed0fdb0a503ae1c9d1f4f",
+    "reason": "One native-mail intent projection preserves immutable review fields and differentiates provider acceptance, deterministic refusal and unresolved outcome. Accepted never means delivered; retained HTML remains inert. Independent decision: work/hermes-review/mail-client-review/FRONTEND-REVIEW.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/useConversationIntents.ts",
+    "kind": "function",
+    "symbol": "useConversationIntents > <anonymous> #4",
+    "fingerprint": "3b3319aa71e39c13d57800c3b72f39ad111b324a29f8322813507706555f08fc",
+    "reason": "One current-list journal reconciliation effect. Exact settled watch results acknowledge the existing journal; unreadable or unresolved results remain uncertain. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/watch-view.ts",
+    "kind": "function",
+    "symbol": "watchRow",
+    "fingerprint": "64da7755f2955809487620159f464f618bfb648c8cf3e84b7d0d201299bc5a14",
+    "reason": "One immutable watch proposal and observed owner-receipt projection. The four owner semantics, exact target, scope and verb, nullable version/delivery/event, needs-review and already-in-state fields remain together without inferring notification delivery. Independent decision: work/hermes-review/watch-fe-review/FRONTEND-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/thread/IncomingMailFiles.tsx",
+    "kind": "function",
+    "symbol": "IncomingMailFiles",
+    "fingerprint": "325bc7d23c3d74929a5b9af98536420898807005de312a0bb427fc352a5a7058",
+    "reason": "Keep IncomingMailFiles as one selected-message panel owner: pending/error/manifest/handoff/receipt/stored/draft states, guarded execution and rendering are mutually dependent. Wire contracts and pure helpers already belong to email/incoming-files.ts; a size-based split would separate the guard from the surface it protects. Independent decision: work/hermes-review/incoming-mail-files-review/FE-FINDINGS.txt.",
+    "reviewedBy": "Hermes independent frontend reviewer",
     "reviewedOn": "2026-10-27"
   }
 ]
