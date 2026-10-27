@@ -21,6 +21,7 @@ export function CalendarHeader({
   clients,
   disabled,
   clientId,
+  clientName,
   onClient,
   canCreate,
   onCreate,
@@ -28,10 +29,12 @@ export function CalendarHeader({
   clients: ClientOption[];
   disabled: boolean;
   clientId: string;
+  clientName: string;
   onClient: (id: string) => void;
   canCreate: boolean;
   onCreate: () => void;
 }) {
+  const title = clientId ? `${clientName} calendar` : "Master calendar";
   return (
     <header className={styles.pageHeader}>
       <div>
@@ -45,10 +48,10 @@ export function CalendarHeader({
             }
           }}
         >
-          <summary>Master calendar</summary>
+          <summary>{title}</summary>
           <ModuleBreadcrumb active="calendar" />
         </details>
-        <h1>Master calendar</h1>
+        <h1>{title}</h1>
       </div>
       <div className={styles.actions}>
         <label className={styles.scope}>

@@ -35,6 +35,7 @@ export function CalendarScreen() {
         clients={model.scopeOptions}
         disabled={clients.loading || Boolean(clients.error)}
         clientId={clientId}
+        clientName={model.clientName}
         onClient={changeScope}
         canCreate={Boolean(
           identity.data && identity.data.role !== "client_portal_user",
