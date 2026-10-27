@@ -1,7 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import type { ProgramElement } from "../../../shared/capiro/operations/intelligence-defense";
+import { useIntelligenceLocation } from "./intelligence-location";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -15,13 +13,14 @@ import { ProgramElementProfile } from "./ProgramElementProfile";
 const money = (value: string | number | null | undefined) =>
   value == null ? "Not available" : `$${value}M`;
 export function DefenseBudget() {
-  const params = useSearchParams();
-  const [q, setQ] = useState("");
-  const [service, setService] = useState("");
-  const [watched, setWatched] = useState(false);
-  const [page, setPage] = useState(1);
-  const [selected, setSelected] = useState<ProgramElement>();
-  const [peCode, setPeCode] = useState(params.get("peCode") || "");
+  const { params, page, update } = useIntelligenceLocation();
+  const q = (params.get("q") ?? "").slice(0, 500);
+  const service = params.get("service") ?? "";
+  const watched = params.get("watched") === "true";
+  const peCode = params.get("peCode") ?? "";
+  const setPage = (value: number) =>
+    update({ page: String(value), record: null });
+  const setPeCode = (value: string) => update({ peCode: value, peTab: null });
   const query = useCapiroQuery("intelligence.defense.list", {
     query: {
       q,
@@ -31,9 +30,13 @@ export function DefenseBudget() {
       limit: 25,
     },
   });
+  const selected = query.data?.data.find(
+    (row) => row.peCode === params.get("record"),
+  );
   if (peCode)
     return (
       <ProgramElementProfile
+        key={peCode}
         peCode={peCode}
         onBack={() => {
           setPeCode("");
@@ -49,8 +52,7 @@ export function DefenseBudget() {
           placeholder="PE code, program or capability…"
           value={q}
           onChange={(e) => {
-            setQ(e.target.value);
-            setPage(1);
+            update({ q: e.target.value, page: null, record: null }, true);
           }}
         />
         <select
@@ -58,8 +60,7 @@ export function DefenseBudget() {
           aria-label="Service"
           value={service}
           onChange={(e) => {
-            setService(e.target.value);
-            setPage(1);
+            update({ service: e.target.value, page: null, record: null });
           }}
         >
           <option value="">Service · Any</option>
@@ -72,18 +73,24 @@ export function DefenseBudget() {
         <ActionButton
           aria-pressed={watched}
           onClick={() => {
-            setWatched(!watched);
-            setPage(1);
+            update({
+              watched: watched ? null : "true",
+              page: null,
+              record: null,
+            });
           }}
         >
           {watched ? "Watching only" : "Watchlist"}
         </ActionButton>
         <ActionButton
           onClick={() => {
-            setQ("");
-            setService("");
-            setWatched(false);
-            setPage(1);
+            update({
+              q: null,
+              service: null,
+              watched: null,
+              page: null,
+              record: null,
+            });
           }}
         >
           Clear all
@@ -113,7 +120,7 @@ export function DefenseBudget() {
                   render: (r) => (
                     <button
                       className={styles.link}
-                      onClick={() => setSelected(r)}
+                      onClick={() => update({ record: r.peCode })}
                     >
                       <strong>{r.peCode}</strong>
                       <div>{r.title}</div>

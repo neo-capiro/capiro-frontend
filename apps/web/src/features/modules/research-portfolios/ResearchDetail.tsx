@@ -24,6 +24,7 @@ import { ResearchOperations } from "./ResearchOperations";
 import { ResearchWatchConversion } from "./ResearchWatchConversion";
 import { ResearchTour } from "./ResearchTour";
 import { ResearchDrafts } from "./ResearchDrafts";
+import { ResearchComparisons } from "./comparison/ResearchComparisons";
 import {
   readResearchPortfolioView,
   researchPortfolioTabs,
@@ -82,6 +83,13 @@ export function ResearchPortfolioDetail({
           <>
             <ResearchTour onView={onView} />
             {view === "drafts" && <ResearchDrafts key={p.id} portfolio={p} />}
+            {view === "comparisons" && (
+              <ResearchComparisons
+                key={p.id}
+                portfolio={p}
+                onReload={query.reload}
+              />
+            )}
             {view === "rules" && (
               <ResearchRules key={p.id} portfolio={p} onReload={query.reload} />
             )}

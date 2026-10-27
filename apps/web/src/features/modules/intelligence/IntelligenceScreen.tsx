@@ -6,6 +6,8 @@ import { DefenseBudget } from "./DefenseBudget";
 import { DistrictNexus } from "./DistrictNexus";
 import { FundingOpportunities } from "./FundingOpportunities";
 import { LegiWatchScreen } from "./legiwatch/LegiWatchScreen";
+import { ResearchWorkspace } from "./research/ResearchWorkspace";
+import { ResearchCoverage } from "./research/ResearchCoverage";
 const views = [
   { id: "explorer", label: "Data Explorer" },
   { id: "legiwatch", label: "LegiWatch" },
@@ -13,6 +15,8 @@ const views = [
   { id: "funding", label: "Funding Opportunities" },
   { id: "district-nexus", label: "District Nexus" },
   { id: "federal-spending", label: "Federal Spending" },
+  { id: "research", label: "Research" },
+  { id: "coverage", label: "Research Coverage" },
 ];
 export function IntelligenceScreen() {
   const params = useSearchParams();
@@ -47,6 +51,8 @@ export function IntelligenceScreen() {
       {view === "defense" && <DefenseBudget />}
       {view === "funding" && <FundingOpportunities />}
       {view === "federal-spending" && <DataExplorer initialDataset="awards" />}
+      {view === "research" && <ResearchWorkspace />}
+      {view === "coverage" && <ResearchCoverage />}
     </>
   );
 }

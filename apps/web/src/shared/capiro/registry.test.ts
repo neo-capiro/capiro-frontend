@@ -14,6 +14,10 @@ import { researchImportOperations } from "./operations/research-imports";
 import { researchOutputOperations } from "./operations/research-outputs";
 import { researchWorkflowOperations } from "./operations/research-workflow";
 import { researchDraftOperations } from "./operations/research-drafts";
+import { researchComparisonOperations } from "./operations/research-comparisons";
+import { defenseResearchOperations } from "./operations/defense-research";
+import { defenseProductCoverageOperations } from "./operations/defense-product-coverage";
+import { defenseEvidenceOperations } from "./operations/defense-evidence";
 import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
@@ -55,6 +59,10 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     researchOutputOperations,
     researchWorkflowOperations,
     researchDraftOperations,
+    researchComparisonOperations,
+    defenseResearchOperations,
+    defenseProductCoverageOperations,
+    defenseEvidenceOperations,
     onboardFunnelOperations,
     onboardSetupOperations,
     onboardCoreOperations,
