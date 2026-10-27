@@ -17,6 +17,9 @@ export function useIntentExpiry(
       ((item.kind === "proposal" && item.phase === "awaiting_approval") ||
         (item.kind === "research_share" &&
           item.proposalStatus === "proposed") ||
+        (item.kind === "research_action" &&
+          item.result !== "unavailable" &&
+          item.result.proposalStatus === "proposed") ||
         ((item.kind === "legiwatch_action" ||
           item.kind === "client_record_action" ||
           item.kind === "watch_action" ||

@@ -28,6 +28,11 @@ import {
   researchShareRow,
 } from "./research-share-view";
 import {
+  isResearchActionProposal,
+  researchActionFields,
+  researchActionRow,
+} from "./research-action-view";
+import {
   isMailSendProposal,
   isNativeMailOutcome,
   mailFields,
@@ -89,6 +94,7 @@ export function proposalFields(
   if (isWatchProposal(proposal)) return watchFields(proposal);
   if (isBizdevProposal(proposal)) return bizdevFields(proposal);
   if (isResearchShareProposal(proposal)) return researchShareFields(proposal);
+  if (isResearchActionProposal(proposal)) return researchActionFields(proposal);
   if (isLegiwatchProposal(proposal)) return legiwatchFields(proposal);
   if (isClientRecordProposal(proposal)) return clientRecordFields(proposal);
   if (isMailSendProposal(proposal)) return mailFields(proposal);
@@ -402,6 +408,8 @@ export function intentRow(
     return clientRecordRow(item, now, viewer);
   if (item.kind === "research_share")
     return researchShareRow(item, now, viewer);
+  if (item.kind === "research_action")
+    return researchActionRow(item, now, viewer);
   if (item.kind === "schedule_proposal")
     return closed(
       [

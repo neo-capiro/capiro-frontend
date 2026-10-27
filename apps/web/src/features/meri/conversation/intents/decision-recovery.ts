@@ -15,6 +15,7 @@ import {
   isResearchShareProposal,
   intentDecisionSettled,
 } from "./research-share-view";
+import { isResearchActionProposal } from "./research-action-view";
 import {
   acknowledgeRecovery,
   readRecovery,
@@ -73,6 +74,7 @@ export function intentDecisionRecovery(
       isWatchProposal(proposal) ||
       isBizdevProposal(proposal) ||
       isResearchShareProposal(proposal) ||
+      isResearchActionProposal(proposal) ||
       isLegiwatchProposal(proposal) ||
       isClientRecordProposal(proposal) ||
       isLegislativeDocumentProposal(proposal);
