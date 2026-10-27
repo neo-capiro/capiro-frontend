@@ -28,6 +28,7 @@ export function ResearchShareRecipient({ token }: { token: string }) {
   const [available, setAvailable] = useState<boolean>();
   const [viewToken, setViewToken] = useState<string>();
   const [dashboard, setDashboard] = useState<ResearchShareDashboard>();
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [error, setError] = useState<string>();
   const [busy, setBusy] = useState(false);
   const [pin, setPin] = useState("");
@@ -64,17 +65,40 @@ export function ResearchShareRecipient({ token }: { token: string }) {
       )
       .then(
         (result) => {
-          if (!controller.signal.aborted) setDashboard(result);
+          if (controller.signal.aborted) return;
+          setLogoUrl(null);
+          setDashboard(result);
         },
         () => {
           if (controller.signal.aborted) return;
           setViewToken(undefined);
           setDashboard(undefined);
+          setLogoUrl(null);
           setError("Your viewing session ended. Enter the PIN again.");
         },
       );
     return () => controller.abort();
   }, [token, viewToken]);
+
+  useEffect(() => {
+    if (!viewToken || !dashboard?.branding?.logoAvailable) return;
+    const controller = new AbortController();
+    api
+      .request(
+        "public-research-share.logo",
+        { params: { token }, body: { viewToken } },
+        { signal: controller.signal },
+      )
+      .then(
+        (result) => {
+          if (!controller.signal.aborted) setLogoUrl(result.url);
+        },
+        () => {
+          if (!controller.signal.aborted) setLogoUrl(null);
+        },
+      );
+    return () => controller.abort();
+  }, [token, viewToken, dashboard]);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -108,7 +132,11 @@ export function ResearchShareRecipient({ token }: { token: string }) {
     return (
       <main className={styles.page}>
         <div className={styles.frame}>
-          <DashboardGrid layout={dashboard.layout} dashboard={dashboard} />
+          <DashboardGrid
+            layout={dashboard.layout}
+            dashboard={dashboard}
+            logoUrl={logoUrl}
+          />
           <footer className={styles.footer}>
             <span>
               {dashboard.branding

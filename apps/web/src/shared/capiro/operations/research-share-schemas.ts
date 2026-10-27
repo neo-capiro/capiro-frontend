@@ -45,6 +45,7 @@ export const researchDashboardDesign = z.object({
 export const researchShareSettings = z.object({
   portfolioId: z.string(),
   enabled: z.boolean(),
+  tenantEnabled: z.boolean(),
   pinSet: z.boolean(),
   pinUpdatedAt: z.string().nullable(),
   activeLinkCount: z.number(),
@@ -170,6 +171,15 @@ export const researchShareDashboard = z.object({
   expiresAt: z.string(),
 });
 export const researchShareAvailability = z.object({ available: z.boolean() });
+/** Workspace-wide client sharing switch, administered by tenant administrators. */
+export const researchTenantSharing = z.object({
+  enabled: z.boolean(),
+  activeLinkCount: z.number(),
+  updatedAt: z.string().nullable(),
+  updatedByUserId: z.string().nullable(),
+});
+/** Short-lived signed address of the firm logo for a recipient; null without branding or logo. */
+export const researchShareLogo = z.object({ url: z.string().nullable() });
 export const researchShareViewSession = z.object({
   viewToken: z.string(),
   expiresAt: z.string(),
@@ -186,3 +196,4 @@ export type ResearchDashboardDesign = z.infer<typeof researchDashboardDesign>;
 export type ResearchShareSettings = z.infer<typeof researchShareSettings>;
 export type ResearchShareLink = z.infer<typeof researchShareLink>;
 export type ResearchShareDashboard = z.infer<typeof researchShareDashboard>;
+export type ResearchTenantSharing = z.infer<typeof researchTenantSharing>;

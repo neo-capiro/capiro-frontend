@@ -26,9 +26,12 @@ export function cellStyle(
 export function DashboardGrid({
   layout,
   dashboard,
+  logoUrl,
 }: {
   layout: ResearchDashboardLayout;
   dashboard: ResearchShareDashboard;
+  /** Signed firm logo address for a branded link; absent in previews and unbranded links. */
+  logoUrl?: string | null;
 }) {
   const order = normalizePhoneOrder(layout).phoneOrder;
   return (
@@ -39,7 +42,11 @@ export function DashboardGrid({
           className={styles.cell}
           style={cellStyle(widget, order.indexOf(widget.id))}
         >
-          <WidgetContent widget={widget} dashboard={dashboard} />
+          <WidgetContent
+            widget={widget}
+            dashboard={dashboard}
+            logoUrl={logoUrl}
+          />
         </section>
       ))}
     </div>

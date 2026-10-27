@@ -71,13 +71,22 @@ function date(value: string): string {
 function Header({
   widget,
   dashboard,
+  logoUrl,
 }: {
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
+  logoUrl?: string | null;
 }) {
   return (
     <div className={styles.header}>
       <div>
+        {logoUrl && dashboard.branding && (
+          <img
+            className={styles.logo}
+            src={logoUrl}
+            alt={`${dashboard.branding.firmName} logo`}
+          />
+        )}
         <p className={styles.eyebrow}>
           {dashboard.branding
             ? `${dashboard.branding.firmName} · Research Portfolio`
@@ -317,15 +326,25 @@ function Commentary({ widget }: { widget: ResearchDashboardWidget }) {
 function FirmMark({
   widget,
   dashboard,
+  logoUrl,
 }: {
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
+  logoUrl?: string | null;
 }) {
   if (!dashboard.branding)
     return <Empty>Shown when branding is on for the link.</Empty>;
   return (
     <div className={styles.firmMark}>
-      <strong>{dashboard.branding.firmName}</strong>
+      {logoUrl ? (
+        <img
+          className={styles.logoLarge}
+          src={logoUrl}
+          alt={`${dashboard.branding.firmName} logo`}
+        />
+      ) : (
+        <strong>{dashboard.branding.firmName}</strong>
+      )}
       {text(widget.settings, "caption") && (
         <span className={styles.muted}>{text(widget.settings, "caption")}</span>
       )}
@@ -340,13 +359,15 @@ function Empty({ children }: { children: string }) {
 export function WidgetContent({
   widget,
   dashboard,
+  logoUrl,
 }: {
   widget: ResearchDashboardWidget;
   dashboard: ResearchShareDashboard;
+  logoUrl?: string | null;
 }) {
   switch (widget.kind) {
     case "header":
-      return <Header widget={widget} dashboard={dashboard} />;
+      return <Header widget={widget} dashboard={dashboard} logoUrl={logoUrl} />;
     case "key_totals":
       return <KeyTotals dashboard={dashboard} />;
     case "funding_table":
@@ -364,6 +385,8 @@ export function WidgetContent({
     case "commentary":
       return <Commentary widget={widget} />;
     case "image":
-      return <FirmMark widget={widget} dashboard={dashboard} />;
+      return (
+        <FirmMark widget={widget} dashboard={dashboard} logoUrl={logoUrl} />
+      );
   }
 }

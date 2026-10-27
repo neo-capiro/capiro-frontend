@@ -19,7 +19,7 @@ import {
   StatusPanel,
   TextInput,
 } from "../../../../shared/module-ui";
-import { defaultLayout } from "./dashboard-layout";
+import { defaultLayout, widgetDefinition } from "./dashboard-layout";
 import { DashboardDesigner } from "./DashboardDesigner";
 import { buildPreviewDashboard } from "./preview-dashboard";
 import styles from "./share.module.css";
@@ -81,6 +81,7 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
           <SharingSettings
             portfolio={portfolio}
             enabled={settings.data.enabled}
+            tenantEnabled={settings.data.tenantEnabled}
             pinUpdatedAt={settings.data.pinUpdatedAt}
             activeLinkCount={settings.data.activeLinkCount}
             onChanged={() => {
@@ -155,12 +156,14 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
 function SharingSettings({
   portfolio,
   enabled,
+  tenantEnabled,
   pinUpdatedAt,
   activeLinkCount,
   onChanged,
 }: {
   portfolio: ResearchDetail;
   enabled: boolean;
+  tenantEnabled: boolean;
   pinUpdatedAt: string | null;
   activeLinkCount: number;
   onChanged: () => void;
@@ -203,6 +206,13 @@ function SharingSettings({
       actions={enabled ? <Badge tone="success">On</Badge> : <Badge>Off</Badge>}
     >
       {action.error && <p role="alert">{action.error}</p>}
+      {!tenantEnabled && (
+        <p role="status" className={styles.hint}>
+          Client sharing is switched off for your whole workspace by an
+          administrator. No link can be published or opened until it is switched
+          back on in Settings, Client sharing.
+        </p>
+      )}
       {!owner && (
         <p className={styles.hint}>
           Only the portfolio owner can turn sharing on or off or change the PIN.
@@ -245,7 +255,9 @@ function SharingSettings({
             <div>
               <ActionButton
                 primary
-                disabled={!owner || action.busy || !PIN_RULE.test(pin)}
+                disabled={
+                  !owner || !tenantEnabled || action.busy || !PIN_RULE.test(pin)
+                }
                 onClick={() =>
                   action.run(() =>
                     api.request("research.sharing.enable", {
@@ -362,6 +374,59 @@ function DesignEditor({
           )
         }
       />
+    </div>
+  );
+}
+
+/** The owner's own check before publishing: everything the link will expose, in plain words. */
+function ExposureList({
+  portfolio,
+  clientName,
+  snapshotName,
+  design,
+  branding,
+}: {
+  portfolio: ResearchDetail;
+  clientName?: string;
+  snapshotName?: string;
+  design?: ResearchDashboardDesign;
+  branding: boolean;
+}) {
+  const widgets = design?.layout.widgets ?? [];
+  const kinds = Array.from(new Set(widgets.map((w) => w.kind)));
+  const included = portfolio.members.filter(
+    (m) => m.disposition === "included",
+  ).length;
+  return (
+    <div className={styles.exposure}>
+      <p className={styles.widgetLabel}>What this link will expose</p>
+      <ul>
+        <li>
+          Prepared for <strong>{clientName ?? "the chosen client"}</strong>; no
+          other client&apos;s name, fit or notes.
+        </li>
+        <li>
+          Snapshot <strong>{snapshotName ?? "—"}</strong>, frozen as of its
+          capture date: {included} included subject{included === 1 ? "" : "s"}{" "}
+          of {portfolio.memberCount}.
+        </li>
+        <li>
+          {widgets.length} widget{widgets.length === 1 ? "" : "s"}:{" "}
+          {kinds.length
+            ? kinds.map((k) => widgetDefinition(k).label).join(", ")
+            : "none"}
+          .
+        </li>
+        <li>
+          {branding
+            ? "Your firm name and logo appear on the page."
+            : "No firm name or logo; the page says only that it was prepared with Capiro."}
+        </li>
+        <li>
+          Source documents are counted, never listed; subjects and figures come
+          only from sources you can read now.
+        </li>
+      </ul>
     </div>
   );
 }
@@ -508,6 +573,16 @@ function ShareLinks({
                 `${l.openCount}${l.lastOpenedAt ? ` · last ${when(l.lastOpenedAt)}` : ""}`,
             },
             {
+              key: "pinFailures",
+              label: "Wrong PINs",
+              render: (l) =>
+                l.failedPinAttempts >= 5 ? (
+                  <Badge tone="warning">{l.failedPinAttempts} · locked</Badge>
+                ) : (
+                  l.failedPinAttempts
+                ),
+            },
+            {
               key: "actions",
               label: "Actions",
               render: (l) =>
@@ -612,8 +687,20 @@ function ShareLinks({
                 checked={branding}
                 onChange={(e) => setBranding(e.target.checked)}
               />
-              Show our firm name on the dashboard
+              Show our firm name and logo on the dashboard
             </label>
+            <ExposureList
+              portfolio={portfolio}
+              clientName={
+                portfolio.clientLinks.find((c) => c.clientId === clientId)
+                  ?.clientName
+              }
+              snapshotName={
+                snapshots.data?.find((s) => s.id === snapshotId)?.name
+              }
+              design={designs.find((d) => d.id === designId)}
+              branding={branding}
+            />
             {publish.error && <p role="alert">{publish.error}</p>}
           </div>
         )}

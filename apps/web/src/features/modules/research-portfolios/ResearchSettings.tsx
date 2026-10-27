@@ -7,6 +7,7 @@ import {
   ActionButton,
   DataTable,
   Field,
+  Modal,
   Panel,
   TextArea,
   TextInput,
@@ -30,9 +31,22 @@ export function ResearchSettings({
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
+  const [warning, setWarning] = useState<{
+    title: string;
+    proceed: () => Promise<unknown>;
+  }>();
   const clients = useCapiroQuery("clients.list", {});
   const team = useCapiroQuery("settings.tenantMembers", {});
+  const sharing = useCapiroQuery("research.sharing", {
+    params: { id: portfolio.id },
+  });
+  const activeLinks = sharing.data?.activeLinkCount ?? 0;
   const editable = portfolio.myRole !== "viewer";
+  /** Active client links stay live through unlinking or archiving (FR-16.22): warn, never block. */
+  function guarded(title: string, action: () => Promise<unknown>) {
+    if (activeLinks > 0) setWarning({ title, proceed: action });
+    else void run(action);
+  }
   const metadata = () => ({
     expectedRevision: portfolio.revision,
     idempotencyKey: crypto.randomUUID(),
@@ -106,16 +120,18 @@ export function ResearchSettings({
           </ActionButton>
           <ActionButton
             disabled={!editable || busy}
-            onClick={() =>
-              run(() =>
+            onClick={() => {
+              const request = () =>
                 api.request(
                   portfolio.lifecycle === "active"
                     ? "research.archive"
                     : "research.restore",
                   { params: { id: portfolio.id }, body: metadata() },
-                ),
-              )
-            }
+                );
+              if (portfolio.lifecycle === "active")
+                guarded("Archive this portfolio?", request);
+              else void run(request);
+            }}
           >
             {portfolio.lifecycle === "active"
               ? "Archive portfolio"
@@ -137,7 +153,7 @@ export function ResearchSettings({
                 <ActionButton
                   disabled={!editable || busy}
                   onClick={() =>
-                    run(() =>
+                    guarded(`Unlink ${r.clientName}?`, () =>
                       api.request("research.clients.unlink", {
                         params: { id: portfolio.id, clientId: r.clientId },
                         body: metadata(),
@@ -181,6 +197,29 @@ export function ResearchSettings({
           </ActionButton>
         </div>
       </Panel>
+      <Modal
+        open={Boolean(warning)}
+        onOpenChange={(open) => {
+          if (!open) setWarning(undefined);
+        }}
+        title={warning?.title ?? ""}
+        description={`${activeLinks} active client link${activeLinks === 1 ? "" : "s"} will keep working until expiry or revoke. Revoke them on the Sharing tab if that is not what you want.`}
+        footer={
+          <ActionButton
+            primary
+            disabled={busy}
+            onClick={async () => {
+              const proceed = warning?.proceed;
+              setWarning(undefined);
+              if (proceed) await run(proceed);
+            }}
+          >
+            Continue
+          </ActionButton>
+        }
+      >
+        <p>Links are ended only by expiry or a revoke, never by this change.</p>
+      </Modal>
       <Panel title="Access grants">
         <DataTable
           rows={portfolio.grants}
