@@ -502,6 +502,36 @@
       "status": "producer-verified-pending-Hermes-consumer-binding-review",
       "purpose": "Peer-only compatibility for contracts0.1.23; UI runtime/types unchanged.",
       "independentSourceReview": "Hermes 20261027_205545_d71ea5"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.24-557b85db-827bd7789c29.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.24",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "557b85db61915ff77748694240342cdb0e77d7d6",
+      "sourceTree": "25fb04bc85176a2f5c686c089ffdaff47baf121d",
+      "bytes": 1333861,
+      "sha256": "827bd7789c292b5c5858a743355007da163d97984b0186e35703a7d1ad7eaf7b",
+      "integrity": "sha512-i26hAx789xhpzFSJmORQVgjzlbkv6GUMjEow/YS97TEWsB+wZ/ahQwbMrkuiXKQrXIld5L7i+ISX6KrPyDhxFQ==",
+      "regularEntryCount": 69,
+      "status": "producer-verified-pending-Hermes-consumer-binding-review",
+      "purpose": "Frozen preview, Runs and revision public receiver union; source reviewed; consumer, native and deployed acceptance separate.",
+      "independentSourceReview": "Hermes bounded union PASS 2026-10-27; outputs/WAVE5-PREVIEW-RUNS-REVISION-COHORT-HERMES-REVIEW.txt"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.11-557b85db-475a197298dc.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.11",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "557b85db61915ff77748694240342cdb0e77d7d6",
+      "sourceTree": "25fb04bc85176a2f5c686c089ffdaff47baf121d",
+      "bytes": 3498,
+      "sha256": "475a197298dc3e887276d25117e658e86869513ba87f1e23d98d1310a9e0f232",
+      "integrity": "sha512-foCjGk7ktW+YIkmeBFfD1DkUCqT90ISISxZ3jLsuxcLk14x/sNaQY93j+oXZRjOs1NnjgcEx/MNm8udXY+TRaw==",
+      "regularEntryCount": 6,
+      "status": "producer-verified-pending-Hermes-consumer-binding-review",
+      "purpose": "Peer-only compatibility for contracts0.1.24; UI runtime/types unchanged.",
+      "independentSourceReview": "Hermes bounded union PASS 2026-10-27; outputs/WAVE5-PREVIEW-RUNS-REVISION-COHORT-HERMES-REVIEW.txt"
     }
   ]
 }
