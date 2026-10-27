@@ -203,25 +203,6 @@ export const engagementOperations = {
     response: outreachRecord,
     source,
   }),
-  "engagement.outreach.update": defineOperation({
-    service: "core",
-    method: "PATCH",
-    path: "/engagement/outreach/:id",
-    request: z
-      .object({
-        params,
-        body: z
-          .object({
-            title: z.string().min(1).max(240).optional(),
-            subject: z.string().max(300).nullable().optional(),
-            body: z.string().nullable().optional(),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: outreachRecord,
-    source,
-  }),
   "engagement.notes": defineOperation({
     service: "core",
     method: "GET",

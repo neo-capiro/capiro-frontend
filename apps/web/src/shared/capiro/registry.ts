@@ -3,6 +3,8 @@ import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
 import { engagementOperations } from "./operations/engagement";
+import { outreachCampaignOperations } from "./operations/outreach-campaign";
+import { outreachSourceOperations } from "./operations/outreach-sources";
 import { newsletterDeliveryOperations } from "./operations/newsletter-delivery";
 import { intelligenceOperations } from "./operations/intelligence";
 import { legiwatchOperations } from "./operations/legiwatch";
@@ -33,6 +35,8 @@ export const capiroOperations = {
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,
+  ...outreachCampaignOperations,
+  ...outreachSourceOperations,
   ...newsletterDeliveryOperations,
   ...workspaceOperations,
   ...strategiesOperations,

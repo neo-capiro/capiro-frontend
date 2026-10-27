@@ -344,6 +344,26 @@
       "status": "active-packed-frontend-input; deployed-acceptance-separate",
       "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
       "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u2026/5a1cf815\u2026). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.16-3f729625-2eb702fabd26.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "3f7296253f8ff5e63753ad8d957274f6af846f80",
+      "bytes": 1050226,
+      "sha256": "2eb702fabd264680dfe6962d06af9155c0018b0777efc500db818224ad8e34af",
+      "regularEntryCount": 71,
+      "status": "source-frozen-pending-independent-review",
+      "purpose": "Canonical Outreach SDK start receiver and compatible UI stream peer metadata"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.6-3f729625-f2411a4fc0fa.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "3f7296253f8ff5e63753ad8d957274f6af846f80",
+      "bytes": 3031,
+      "sha256": "f2411a4fc0fac95bb536ccf333ce499f1bea31c0ceeffc87109b07461019f2dd",
+      "regularEntryCount": 6,
+      "status": "source-frozen-pending-independent-review",
+      "purpose": "Canonical Outreach SDK start receiver and compatible UI stream peer metadata"
     }
   ]
 }

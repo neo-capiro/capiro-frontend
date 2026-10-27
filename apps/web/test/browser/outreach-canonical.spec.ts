@@ -1,0 +1,144 @@
+import { expect, test, type Route } from "@playwright/test";
+import {
+  setupOutreach,
+  recordId,
+  otherRecordId,
+} from "./core109-outreach-fixtures";
+import { newCampaign } from "../../src/features/modules/engagement/outreach/campaign-model";
+const campaign = {
+  id: recordId,
+  revision: 3,
+  updatedAt: "2026-10-27T00:00:00Z",
+  status: "draft",
+  state: {
+    ...newCampaign(),
+    title: "Historical campaign",
+    mainIdea: "Saved idea",
+    lastStep: 2,
+  },
+};
+async function readFixtures(page: Parameters<typeof setupOutreach>[0]) {
+  const observed = await setupOutreach(page);
+  await page.route("**/api/capiro/engagement.campaign.templates?*", (route) =>
+    route.fulfill({ json: [] }),
+  );
+  await page.route("**/api/capiro/engagement.campaign.drafts?*", (route) =>
+    route.fulfill({ json: [] }),
+  );
+  await page.route("**/api/capiro/engagement.campaign?*", (route) =>
+    route.fulfill({ json: campaign }),
+  );
+  return observed;
+}
+test("both historical draft and session links use the same current canonical owner", async ({
+  page,
+}) => {
+  const observed = await readFixtures(page);
+  for (const selector of ["draft", "session"]) {
+    await page.goto(
+      `/modules/engagement?view=meetings&${selector}=${recordId}`,
+    );
+    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveValue(
+      campaign.state.title,
+    );
+    await expect(
+      page.getByRole("tablist", { name: "Outreach steps" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Meetings moved to Portfolio" }),
+    ).toHaveCount(0);
+  }
+  expect(observed.writes).toEqual([]);
+});
+test("foreign canonical response never opens an editable campaign", async ({
+  page,
+}) => {
+  const observed = await readFixtures(page);
+  await page.goto(`/modules/engagement?session=${otherRecordId}`);
+  await expect(page.getByRole("alert")).toContainText(
+    "does not match this campaign",
+  );
+  await expect(page.getByLabel("Campaign name", { exact: true })).toHaveCount(
+    0,
+  );
+  expect(observed.writes).toEqual([]);
+});
+for (const width of [1440, 390])
+  test(`canonical save freezes exact submitted state and current revision at ${width}px`, async ({
+    page,
+  }) => {
+    await readFixtures(page);
+    await page.setViewportSize({ width, height: 1000 });
+    let held: Route | undefined;
+    const bodies: {
+      params: { id: string };
+      body: { expectedRevision: number; state: typeof campaign.state };
+    }[] = [];
+    await page.route("**/api/capiro/engagement.campaign.save", (route) => {
+      held = route;
+      bodies.push(route.request().postDataJSON());
+    });
+    await page.goto(`/modules/engagement?draft=${recordId}`);
+    await page
+      .getByLabel("Campaign name", { exact: true })
+      .fill("Exact submitted title");
+    await page.getByRole("button", { name: "Save draft", exact: true }).click();
+    await expect.poll(() => !!held).toBe(true);
+    await expect(
+      page.getByLabel("Campaign name", { exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", { name: "← All outreach" }),
+    ).toBeDisabled();
+    expect(bodies).toHaveLength(1);
+    expect(bodies[0]?.body.expectedRevision).toBe(3);
+    expect(bodies[0]?.body.state.title).toBe("Exact submitted title");
+    await held!.fulfill({
+      json: { ...campaign, revision: 4, state: bodies[0]!.body.state },
+    });
+    await expect(
+      page.getByLabel("Campaign name", { exact: true }),
+    ).toBeEnabled();
+    await expect(page.getByLabel("Campaign name", { exact: true })).toHaveValue(
+      "Exact submitted title",
+    );
+  });
+test("lost create acknowledgement retains exact key across reload and never creates from absent readback", async ({
+  page,
+}) => {
+  await readFixtures(page);
+  let writes = 0;
+  const queries: string[] = [];
+  await page.route("**/api/capiro/engagement.campaign.create", (route) => {
+    writes++;
+    return route.fulfill({
+      status: 503,
+      json: { message: "Synthetic acknowledgement loss" },
+    });
+  });
+  await page.route("**/api/capiro/engagement.campaign.request?*", (route) => {
+    queries.push(
+      JSON.parse(new URL(route.request().url()).searchParams.get("input")!)
+        .query.requestKey,
+    );
+    return route.fulfill({ json: [] });
+  });
+  await page.goto("/modules/engagement?create=draft");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page
+    .getByLabel("Campaign name", { exact: true })
+    .fill("Pending campaign");
+  await page.getByRole("button", { name: "Save draft", exact: true }).click();
+  await expect(page.getByRole("alert")).toContainText(
+    "Synthetic acknowledgement loss",
+  );
+  const key = new URL(page.url()).searchParams.get("campaignRequest");
+  expect(key).toBeTruthy();
+  await page.reload();
+  await page.getByRole("button", { name: "Check saved draft" }).click();
+  await expect(
+    page.getByRole("button", { name: "Save draft", exact: true }),
+  ).toBeDisabled();
+  expect(queries.every((value) => value === key)).toBe(true);
+  expect(writes).toBe(1);
+});
