@@ -270,3 +270,98 @@ describe("reply origin recovery", () => {
     expect(values.get(storedKey)).toContain(id(99));
   });
 });
+
+describe("native reply-all receiver", () => {
+  const allInput: SendInput = {
+    ...input,
+    operation: "reply_all",
+    to: [...input.to, { email: "other@example.test" }],
+    cc: [{ email: "copy@example.test" }],
+  };
+  const allContext = {
+    ...context,
+    operation: "reply_all",
+    to: allInput.to,
+    cc: allInput.cc,
+  };
+  function allTransport(
+    change: Record<string, unknown> = {},
+    result: Record<string, unknown> = { ...accepted, operation: "reply_all" },
+  ) {
+    const sent: unknown[] = [];
+    const api = createApiClient(async (url, options) => {
+      const path = String(url);
+      if (path.endsWith("/mail/mailboxes")) return Response.json([mailbox]);
+      if (path.includes("/mail-threads/"))
+        return Response.json({
+          id: originalThreadId,
+          clientId: input.clientId,
+          connectionId: mailbox.id,
+          messages: [
+            {
+              id: originalMessageId,
+              replyContext: context,
+              replyAllContext: { ...allContext, ...change },
+            },
+          ],
+        });
+      if (options?.method === "POST") {
+        sent.push(JSON.parse(String(options.body)));
+        return Response.json(result);
+      }
+      throw new Error("Unexpected synthetic request");
+    });
+    return { api, sent };
+  }
+  it("reply-all sends only exact reviewed To/Cc and accepts matching durable operation", async () => {
+    const h = allTransport();
+    expect(
+      await sendReviewedMail(h.api, allInput, () => {}, requestKey),
+    ).toMatchObject({ operation: "reply_all", originalMessageId });
+    expect(h.sent).toEqual([
+      expect.objectContaining({
+        operation: "reply_all",
+        to: allInput.to,
+        cc: allInput.cc,
+        requestKey,
+      }),
+    ]);
+  });
+  it.each([
+    { operation: "reply" },
+    { cc: [{ email: "changed@example.test" }] },
+    { to: input.to },
+    { supported: false },
+  ])("reply-all context drift %j refuses before POST", async (change) => {
+    const h = allTransport(change);
+    await expect(
+      sendReviewedMail(h.api, allInput, () => {}, requestKey),
+    ).rejects.toMatchObject({ uncertain: false });
+    expect(h.sent).toHaveLength(0);
+  });
+  it("reply-all cannot accept a single-reply receipt or unlock its durable attempt", async () => {
+    const h = allTransport({}, accepted);
+    await expect(
+      sendReviewedMail(h.api, allInput, () => {}, requestKey),
+    ).rejects.toMatchObject({ uncertain: true });
+    expect(h.sent).toHaveLength(1);
+    const cache = new QueryClient(),
+      key = mailAttemptKey(id(20), id(21), id(1), "reply-all");
+    const token = await beginMailAttempt(cache, key, allInput);
+    expect(
+      await recoverMailAttempt(cache, key, {
+        ...accepted,
+        requestKey: token,
+      } as never),
+    ).toBeNull();
+    expect(cache.getQueryData(key)).toBeTruthy();
+    expect(
+      await recoverMailAttempt(cache, key, {
+        ...accepted,
+        operation: "reply_all",
+        requestKey: token,
+      } as never),
+    ).toBe("accepted");
+    cache.clear();
+  });
+});

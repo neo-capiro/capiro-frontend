@@ -47,7 +47,7 @@ const sendIntentReceipt = z.object({
   ok: z.literal(true).optional(),
   threadId: z.uuid().optional(),
   messageId: z.uuid().optional(),
-  operation: z.literal("reply").optional(),
+  operation: z.enum(["reply", "reply_all"]).optional(),
   originalMessageId: z.uuid().optional(),
   originalThreadId: z.uuid().optional(),
   originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),

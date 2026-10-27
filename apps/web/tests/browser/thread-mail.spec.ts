@@ -151,6 +151,7 @@ async function nativeSetup(
   options: {
     provider?: "google_workspace" | "microsoft_365";
     recover?: boolean;
+    all?: boolean;
     unknown?: boolean;
     selectedHold?: Promise<void>;
   } = {},
@@ -164,6 +165,12 @@ async function nativeSetup(
     senderConnectionId: sendingMailbox.id,
     subject: fullThread.subject,
     to: [{ email: "verified-reply-to@example.test" }] as [{ email: string }],
+  };
+  const allContext = {
+    ...context,
+    operation: "reply_all" as const,
+    to: [...context.to, { email: "colleague@example.test" }],
+    cc: [{ email: "copied@example.test" }],
   };
   let current: MailThreadPage = {
     ...fullThread,
@@ -179,7 +186,7 @@ async function nativeSetup(
           reason: "Outgoing originals cannot be replied to here.",
         },
       },
-      { ...original, replyContext: context },
+      { ...original, replyContext: context, replyAllContext: allContext },
     ],
   };
   const fixture = await setup(page, { body: current });
@@ -234,7 +241,7 @@ async function nativeSetup(
     state: "accepted",
     threadId: "a0000000-0000-4000-8000-000000000099",
     messageId: "b0000000-0000-4000-8000-000000000099",
-    operation: "reply",
+    operation: options.all ? "reply_all" : "reply",
     originalMessageId: original.id,
     originalThreadId: threadId,
     originalUpdatedAt: context.originalUpdatedAt,
@@ -268,6 +275,7 @@ async function nativeSetup(
     ...fixture,
     original,
     context,
+    allContext,
     sent,
     reads,
     selectedReads: () => selectedReads,
@@ -279,6 +287,14 @@ async function nativeSetup(
       status = 403;
     },
   };
+}
+
+async function openNativeAll(page: Page, originalId: string) {
+  await page
+    .getByLabel("Original message", { exact: true })
+    .selectOption(originalId);
+  await page.getByRole("button", { name: "Reply all", exact: true }).click();
+  return page.getByRole("dialog", { name: "Reply all", exact: true });
 }
 
 async function openNative(page: Page, originalId: string) {
@@ -608,44 +624,55 @@ test("unsupported original retains ordinary stored body and refuses native prepa
   expect(fixture.writes).toEqual([]);
 });
 
-test("Reply all exposes actual deduplicated Cc and excludes mailbox plus signed-in account", async ({
-  page,
-}) => {
-  const fixture = await setup(page);
-  await expand(page);
-  await page
-    .getByRole("button", { name: "Review reply all", exact: true })
-    .click();
-  const dialog = page.getByRole("dialog", { name: "Reply", exact: true });
-  await expect(dialog.getByLabel("Cc", { exact: true })).toHaveValue(
-    "colleague@example.test, copied@example.test",
-  );
-  await expect(
-    dialog.getByRole("button", {
-      name: "Remove recipient taylor@example.test",
+for (const provider of ["google_workspace", "microsoft_365"] as const)
+  test(`native reply-all ${provider} sends only the canonical reviewed To and Cc`, async ({
+    page,
+  }) => {
+    const fixture = await nativeSetup(page, { provider, all: true });
+    await expand(page);
+    const dialog = await openNativeAll(page, fixture.original.id);
+    await expect(dialog.getByLabel("Cc", { exact: true })).toHaveValue(
+      "copied@example.test",
+    );
+    await expect(dialog.getByLabel("Cc", { exact: true })).toBeDisabled();
+    await dialog
+      .getByLabel("Message", { exact: true })
+      .fill("Synthetic native reply all.");
+    await dialog
+      .getByRole("button", { name: "Review email", exact: true })
+      .click();
+    const review = page.getByRole("dialog", {
+      name: "Send email",
       exact: true,
-    }),
-  ).toBeVisible();
-  await dialog
-    .getByLabel("Message", { exact: true })
-    .fill("Explicit reply all review.");
-  await dialog.getByRole("button", { name: "Review email" }).click();
-  const review = page.getByRole("dialog", {
-    name: "Review reply",
-    exact: true,
+    });
+    await expect(
+      review.getByText("Cc: copied@example.test", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      review.getByText(
+        "To: verified-reply-to@example.test, colleague@example.test",
+        { exact: true },
+      ),
+    ).toBeVisible();
+    await review
+      .getByRole("button", { name: "Send email", exact: true })
+      .click();
+    await expect(
+      page.getByText("Your mailbox accepted the email.", { exact: true }),
+    ).toBeVisible();
+    expect(fixture.sent).toHaveLength(1);
+    expect(fixture.sent[0]).toMatchObject({
+      operation: "reply_all",
+      originalMessageId: fixture.original.id,
+      originalUpdatedAt: fixture.context.originalUpdatedAt,
+      threadId,
+      senderConnectionId: sendingMailbox.id,
+      to: fixture.allContext.to,
+      cc: fixture.allContext.cc,
+    });
+    expect(fixture.writes).toEqual([]);
   });
-  await expect(
-    review.getByText("Cc: colleague@example.test, copied@example.test", {
-      exact: true,
-    }),
-  ).toBeVisible();
-  await expect(
-    review.getByText(
-      /mailbox@example.test|actor@example.test|never-use-roster/,
-    ),
-  ).toHaveCount(0);
-  expect(fixture.writes).toEqual([]);
-});
+
 test("a failed thread read retries only GET and cannot leak stale message content", async ({
   page,
 }) => {
@@ -698,11 +725,11 @@ test("missing mailbox identity blocks recipient review without guessing from sni
   });
   await expand(page);
   await page
-    .getByRole("button", { name: "Review reply all", exact: true })
-    .click();
-  await expect(page.getByRole("alert")).toContainText(
-    "mailbox address is unavailable",
-  );
+    .getByLabel("Original message", { exact: true })
+    .selectOption(fullThread.messages[1]!.id);
+  await expect(
+    page.getByRole("button", { name: "Reply all", exact: true }),
+  ).toBeDisabled();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(fixture.writes).toEqual([]);
 });
@@ -715,18 +742,16 @@ test("read-only actor can expand but cannot prepare a reply", async ({
     page.getByText("Earlier outgoing message.", { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Review reply all", exact: true }),
-  ).toBeDisabled();
+    page.getByRole("button", { name: "Reply all", exact: true }),
+  ).toHaveCount(0);
   expect(fixture.writes).toEqual([]);
 });
 test("actor change closes the previous actor's draft and cached thread", async ({
   page,
 }) => {
-  await setup(page);
+  const fixture = await nativeSetup(page, { all: true });
   await expand(page);
-  await page
-    .getByRole("button", { name: "Review reply all", exact: true })
-    .click();
+  await openNativeAll(page, fixture.original.id);
   await page
     .getByLabel("Message", { exact: true })
     .fill("Previous actor private draft");
@@ -767,11 +792,9 @@ test("client change during held detail read never exposes the previous client me
 test("invalidated identity cannot retain an open reviewed draft", async ({
   page,
 }) => {
-  await setup(page);
+  const fixture = await nativeSetup(page, { all: true });
   await expand(page);
-  await page
-    .getByRole("button", { name: "Review reply all", exact: true })
-    .click();
+  await openNativeAll(page, fixture.original.id);
   await page.evaluate(() =>
     window.dispatchEvent(new Event("thread-identity-invalidate")),
   );
@@ -812,7 +835,7 @@ test("mobile dark expansion wraps without overflow", async ({ page }, info) => {
     fullPage: true,
   });
 });
-test("actual Overview expands only a valid derived synced source and reviews Reply all", async ({
+test("actual Overview expands only a valid derived synced source and requires canonical reply context", async ({
   page,
 }, info) => {
   const fixture = await setup(page, { actual: true });
@@ -836,39 +859,14 @@ test("actual Overview expands only a valid derived synced source and reviews Rep
   await expect(
     timeline.getByText("Earlier outgoing message.", { exact: true }),
   ).toBeVisible();
-  const replyAll = timeline.getByRole("button", {
-    name: "Review reply all",
-    exact: true,
-  });
-  const less = timeline.getByRole("button", { name: "Show less", exact: true });
-  const replyBox = await replyAll.boundingBox();
-  const lessBox = await less.boundingBox();
-  expect(replyBox && lessBox && Math.abs(replyBox.y - lessBox.y) < 2).toBe(
-    true,
-  );
+  await expect(
+    timeline.getByRole("button", { name: "Reply all", exact: true }),
+  ).toBeDisabled();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await timeline.scrollIntoViewIfNeeded();
   await page.screenshot({
     path: info.outputPath("actual-overview-thread-desktop.png"),
   });
-  await replyAll.click();
-  const dialog = page.getByRole("dialog", { name: "Reply", exact: true });
-  await expect(dialog.getByLabel("Cc", { exact: true })).toHaveValue(
-    "colleague@example.test, copied@example.test",
-  );
-  await dialog
-    .getByLabel("Message", { exact: true })
-    .fill("Actual Overview recipient review.");
-  await dialog.getByRole("button", { name: "Review email" }).click();
-  const review = page.getByRole("dialog", {
-    name: "Review reply",
-    exact: true,
-  });
-  await expect(
-    review.getByText("To: taylor@example.test", { exact: true }),
-  ).toBeVisible();
-  await expect(
-    review.getByRole("button", { name: "Sending unavailable", exact: true }),
-  ).toBeDisabled();
   expect(fixture.reads()).toBe(1);
   expect(fixture.writes).toEqual([]);
 });

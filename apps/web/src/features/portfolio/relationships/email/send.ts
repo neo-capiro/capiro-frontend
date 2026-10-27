@@ -10,7 +10,7 @@ import {
 } from "./mailboxes";
 
 export const sendInputSchema = z.object({
-  operation: z.literal("reply").optional(),
+  operation: z.enum(["reply", "reply_all"]).optional(),
   originalMessageId: z.uuid().optional(),
   originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
   clientId: z.uuid(),
@@ -42,11 +42,11 @@ export function replyReceiptMatches(
     "operation" | "originalMessageId" | "originalUpdatedAt" | "threadId"
   >,
 ) {
-  return input.operation === "reply"
+  return input.operation === "reply" || input.operation === "reply_all"
     ? Boolean(
         input.originalMessageId && input.originalUpdatedAt && input.threadId,
       ) &&
-        receipt.operation === "reply" &&
+        receipt.operation === input.operation &&
         receipt.originalMessageId === input.originalMessageId &&
         receipt.originalThreadId === input.threadId &&
         receipt.originalUpdatedAt === input.originalUpdatedAt
@@ -76,13 +76,13 @@ export async function sendReviewedMail(
         body.operation ||
         body.originalMessageId ||
         body.originalUpdatedAt) &&
-      (body.operation !== "reply" ||
+      (!["reply", "reply_all"].includes(body.operation ?? "") ||
         !body.threadId ||
         !body.originalMessageId ||
         !body.originalUpdatedAt ||
         !body.senderConnectionId ||
-        body.to.length !== 1 ||
-        body.cc?.length ||
+        (body.operation === "reply" &&
+          (body.to.length !== 1 || body.cc?.length)) ||
         body.bcc?.length)
     )
       throw new Error("Review a supported original message before replying.");
@@ -113,22 +113,30 @@ export async function sendReviewedMail(
               z.object({
                 id: z.uuid(),
                 replyContext: mailReplyContextSchema.optional(),
+                replyAllContext: mailReplyContextSchema.optional(),
               }),
             ),
           })
           .refine((thread) => {
             const original = thread.messages[0];
-            const context = original?.replyContext;
+            const context =
+              body.operation === "reply_all"
+                ? original?.replyAllContext
+                : original?.replyContext;
             return (
               thread.id === body.threadId &&
               thread.messages.length === 1 &&
               original?.id === body.originalMessageId &&
               context?.supported === true &&
+              context.operation === body.operation &&
               context.originalMessageId === body.originalMessageId &&
               context.originalUpdatedAt === body.originalUpdatedAt &&
               context.senderConnectionId === body.senderConnectionId &&
               context.subject === body.subject &&
-              context.to[0].email === body.to[0]?.email &&
+              JSON.stringify(context.to.map((row) => row.email)) ===
+                JSON.stringify(body.to.map((row) => row.email)) &&
+              JSON.stringify((context.cc ?? []).map((row) => row.email)) ===
+                JSON.stringify((body.cc ?? []).map((row) => row.email)) &&
               (thread.clientId === body.clientId || thread.clientId === null) &&
               (!sender || thread.connectionId === sender.id)
             );
@@ -170,7 +178,7 @@ export async function sendReviewedMail(
           senderName: z.string().nullable().optional(),
           signaturePolicy: z.literal("actor").optional(),
           signatureAppended: z.boolean().optional(),
-          operation: z.literal("reply").optional(),
+          operation: z.enum(["reply", "reply_all"]).optional(),
           originalMessageId: z.uuid().optional(),
           originalThreadId: z.uuid().optional(),
           originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),

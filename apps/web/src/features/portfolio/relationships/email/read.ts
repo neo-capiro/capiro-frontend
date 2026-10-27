@@ -12,15 +12,33 @@ const recipientSchema = z.object({
   name: z.string().nullable().optional(),
 });
 export const mailReplyContextSchema = z.discriminatedUnion("supported", [
-  z.object({
-    supported: z.literal(true),
-    operation: z.literal("reply"),
-    originalMessageId: z.uuid(),
-    originalUpdatedAt: instant,
-    senderConnectionId: z.uuid(),
-    subject: z.string().min(1).max(300),
-    to: z.tuple([z.object({ email: z.email() })]),
-  }),
+  z
+    .object({
+      supported: z.literal(true),
+      operation: z.enum(["reply", "reply_all"]),
+      originalMessageId: z.uuid(),
+      originalUpdatedAt: instant,
+      senderConnectionId: z.uuid(),
+      subject: z.string().min(1).max(300),
+      to: z
+        .array(z.object({ email: z.email() }))
+        .min(1)
+        .max(50),
+      cc: z
+        .array(z.object({ email: z.email() }))
+        .max(10)
+        .optional(),
+    })
+    .refine((context) => {
+      const emails = [...context.to, ...(context.cc ?? [])].map((row) =>
+        row.email.toLowerCase(),
+      );
+      return (
+        new Set(emails).size === emails.length &&
+        (context.operation === "reply_all" ||
+          (context.to.length === 1 && !context.cc?.length))
+      );
+    }),
   z.object({ supported: z.literal(false), reason: z.string().max(500) }),
 ]);
 export type MailReplyContext = z.infer<typeof mailReplyContextSchema>;
@@ -64,6 +82,7 @@ export type MailCoverage = z.infer<typeof mailCoverageSchema>;
 export const mailBodySchema = messageSchema
   .extend({
     replyContext: mailReplyContextSchema.optional(),
+    replyAllContext: mailReplyContextSchema.optional(),
     threadId: z.uuid(),
     sentAt: instant.nullable(),
     receivedAt: instant.nullable(),
@@ -120,8 +139,14 @@ export const mailThreadPageSchema = threadSchema
         (message) =>
           message.threadId === page.id &&
           (!message.replyContext?.supported ||
-            (message.replyContext.originalMessageId === message.id &&
-              message.replyContext.senderConnectionId === page.connectionId)),
+            (message.replyContext.operation === "reply" &&
+              message.replyContext.originalMessageId === message.id &&
+              message.replyContext.senderConnectionId === page.connectionId)) &&
+          (!message.replyAllContext?.supported ||
+            (message.replyAllContext.operation === "reply_all" &&
+              message.replyAllContext.originalMessageId === message.id &&
+              message.replyAllContext.senderConnectionId ===
+                page.connectionId)),
       ) &&
       new Set(page.messages.map((message) => message.id)).size ===
         page.messages.length &&

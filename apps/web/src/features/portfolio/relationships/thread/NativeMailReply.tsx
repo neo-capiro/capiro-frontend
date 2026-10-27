@@ -65,6 +65,10 @@ export function NativeMailReply({
     query.isSuccess && !query.error && !query.isFetching
       ? query.data.messages[0]?.replyContext
       : undefined;
+  const replyAll =
+    query.isSuccess && !query.error && !query.isFetching
+      ? query.data.messages[0]?.replyAllContext
+      : undefined;
   if (
     open &&
     (!original ||
@@ -73,7 +77,9 @@ export function NativeMailReply({
       query.isError ||
       (query.isSuccess &&
         !query.isFetching &&
-        JSON.stringify(reply) !== JSON.stringify(open.reply)))
+        JSON.stringify(
+          open.reply.operation === "reply_all" ? replyAll : reply,
+        ) !== JSON.stringify(open.reply)))
   )
     setOpen(null);
   return (
@@ -104,8 +110,9 @@ export function NativeMailReply({
         </select>
       </label>
       <small>
-        Reply to one verified Gmail or Outlook sender. Reply all sending and
-        forwarding are unavailable here.
+        Reply to the verified sender or review all visible To and Cc recipients.
+        Known own addresses are excluded; review every recipient. Forwarding is
+        unavailable here.
       </small>
       {original && (
         <QueryState pending={query.isFetching} error={query.error} />
@@ -127,17 +134,33 @@ export function NativeMailReply({
         {person
           ? `Reply to ${person.name}`
           : reply?.supported
-            ? `Reply to ${reply.to[0].email}`
+            ? `Reply to ${reply.to[0]!.email}`
             : "Reply"}
       </button>
+      <button
+        className="button"
+        disabled={busy || !replyAll?.supported}
+        onClick={() => {
+          if (!busy && replyAll?.supported)
+            setOpen({ reply: replyAll, source });
+        }}
+      >
+        Reply all
+      </button>
+      {replyAll?.supported === false && (
+        <small>
+          Reply all is unavailable for this original. Use your mailbox to review
+          its full recipient list.
+        </small>
+      )}
       {open && (
         <MailCompose
-          key={`${selected}:${open.reply.originalUpdatedAt}`}
+          key={`${selected}:${open.reply.originalUpdatedAt}:${open.reply.operation}`}
           clientId={clientId}
           person={
             person ?? {
-              name: open.reply.to[0].email,
-              email: open.reply.to[0].email,
+              name: open.reply.to[0]!.email,
+              email: open.reply.to[0]!.email,
               title: null,
             }
           }

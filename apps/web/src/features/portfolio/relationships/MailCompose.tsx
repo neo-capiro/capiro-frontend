@@ -67,7 +67,7 @@ export function MailCompose({
         : []),
   );
   const [cc, setCc] = useState(
-    initialDraft?.cc?.map((item) => item.email).join(", ") ?? "",
+    (reply?.cc ?? initialDraft?.cc)?.map((item) => item.email).join(", ") ?? "",
   );
   const [bcc, setBcc] = useState("");
   const [validation, setValidation] = useState("");
@@ -109,7 +109,13 @@ export function MailCompose({
       onOpenChange={(open) => {
         if (!open && !send.isPending && !attachments.busy) onClose();
       }}
-      title={thread ? "Reply" : "New email"}
+      title={
+        reply?.operation === "reply_all"
+          ? "Reply all"
+          : thread
+            ? "Reply"
+            : "New email"
+      }
       description={
         sendBlockedReason
           ? "Review this reply. Sending is unavailable for this thread."
@@ -163,7 +169,7 @@ export function MailCompose({
                 input: {
                   ...(reply
                     ? {
-                        operation: "reply" as const,
+                        operation: reply.operation,
                         originalMessageId: reply.originalMessageId,
                         originalUpdatedAt: reply.originalUpdatedAt,
                       }

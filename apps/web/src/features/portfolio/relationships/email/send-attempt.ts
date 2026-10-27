@@ -22,7 +22,7 @@ type MailAttempt = {
   error?: MailSendError;
 };
 const replyBindingSchema = z.object({
-  operation: z.literal("reply"),
+  operation: z.enum(["reply", "reply_all"]),
   threadId: z.uuid(),
   originalMessageId: z.uuid(),
   originalUpdatedAt: z.iso.datetime({ offset: true }),
@@ -146,7 +146,7 @@ export async function beginMailAttempt(
       startedAt: Date.now(),
       status: "pending",
       input: structuredClone(input),
-      ...(input.operation === "reply"
+      ...(input.operation === "reply" || input.operation === "reply_all"
         ? {
             replyBinding: {
               operation: input.operation,
@@ -240,7 +240,7 @@ export async function recoverMailAttempt(
     if (
       binding &&
       (!replyReceiptMatches(row, binding) ||
-        (binding.operation === "reply" &&
+        ((binding.operation === "reply" || binding.operation === "reply_all") &&
           row.senderConnectionId !== binding.senderConnectionId))
     )
       return null;
@@ -248,7 +248,7 @@ export async function recoverMailAttempt(
     // origin evidence for a native reply; never infer it from the current composer.
     if (
       !attempt?.input &&
-      row.operation === "reply" &&
+      (row.operation === "reply" || row.operation === "reply_all") &&
       (!row.originalMessageId ||
         !row.originalThreadId ||
         !row.originalUpdatedAt ||
