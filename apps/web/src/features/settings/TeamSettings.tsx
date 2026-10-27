@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@capiro/ui/tooltip";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import { DataTable, SelectInput, StatusPanel } from "../../shared/module-ui";
@@ -232,9 +234,22 @@ export function TeamSettings({
                           />
                           {row.billingAdmin ? "On" : "Off"}
                           {row.permissions.billingReason && (
-                            <span className={styles.description}>
-                              {row.permissions.billingReason}
-                            </span>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  type="button"
+                                  className={styles.billingReason}
+                                  aria-label={row.permissions.billingReason}
+                                >
+                                  <Info size={14} aria-hidden="true" />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent
+                                className={styles.billingReasonContent}
+                              >
+                                {row.permissions.billingReason}
+                              </TooltipContent>
+                            </Tooltip>
                           )}
                         </div>
                       ),

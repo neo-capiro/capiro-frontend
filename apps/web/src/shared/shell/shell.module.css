@@ -123,6 +123,11 @@
   white-space: nowrap;
   text-decoration: none;
 }
+.navButton:disabled,
+.newConversation:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 .newConversation {
   --meri-icon-filter: brightness(0) invert(1);
   color: white;

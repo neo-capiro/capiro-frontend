@@ -37,11 +37,12 @@ function VerifiedRecents(props: Props) {
     identity.isSuccess && !identity.isFetching && !identity.error
       ? identity.data
       : undefined;
-  if (
-    !current?.tenant?.id ||
-    (!general && selected.state !== "authorized-client")
-  )
-    return <p>A verified account and current client are required.</p>;
+  if (!current?.tenant?.id)
+    return <p>Verify your account to load recent conversations.</p>;
+  if (!general && selected.state !== "authorized-client")
+    return (
+      <p>Choose General or a permitted client to load recent conversations.</p>
+    );
   const account = { tenantId: current.tenant.id, actorId: current.user.id };
   const clientId = general
     ? null

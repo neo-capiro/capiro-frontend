@@ -469,8 +469,14 @@ test("designer commits pointer move/resize, undo/redo, keyboard and phone order"
   await expect(widget).toHaveAttribute("aria-label", /row 9,/);
   await page.getByRole("button", { name: "Undo", exact: true }).click();
   await expect(widget).toHaveAttribute("aria-label", /row 7,/);
+  await expect(page.getByRole("status")).toHaveText(
+    "Previous change undone. Layout restored.",
+  );
   await page.getByRole("button", { name: "Redo", exact: true }).click();
   await expect(widget).toHaveAttribute("aria-label", /row 9,/);
+  await expect(page.getByRole("status")).toHaveText(
+    "Change redone. Layout restored.",
+  );
   const resize = (await widget
     .getByRole("button", { name: "Resize Commentary" })
     .boundingBox())!;
@@ -484,6 +490,14 @@ test("designer commits pointer move/resize, undo/redo, keyboard and phone order"
   await expect(widget).toHaveAttribute("aria-label", /row 10,/);
   await page.keyboard.press("Shift+ArrowDown");
   await expect(widget).toHaveAttribute("aria-label", /5 tall$/);
+  await page.keyboard.press("Delete");
+  await expect(widget).toHaveCount(0);
+  await expect(page.getByRole("status")).toHaveText("Commentary removed.");
+  await page.keyboard.press("Control+z");
+  await expect(widget).toHaveAttribute("aria-label", /row 10,.*5 tall$/);
+  await expect(page.getByRole("status")).toHaveText(
+    "Previous change undone. Layout restored.",
+  );
   await page
     .getByRole("button", { name: "Move Commentary earlier", exact: true })
     .click();

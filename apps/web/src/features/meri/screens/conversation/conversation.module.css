@@ -1,4 +1,11 @@
 /* Figma 3.4 conversation screens: 01.03, 01.04, 01.05, 09.08 and shared rows/fields. */
+.scopeActions {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px 0;
+  background: var(--card);
+}
 .rowList {
   margin: 0;
   padding: 0;

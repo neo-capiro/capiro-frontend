@@ -377,6 +377,19 @@ describe("Core-owned personal memory review proxy", () => {
   it.each([
     { name: "empty", items: [], nextCursor: null },
     { name: "populated", items: [item], nextCursor: "opaque_page_2" },
+    {
+      name: "canonical presentation",
+      items: [
+        {
+          ...item,
+          displayTitle: "Learning feedback",
+          contentStatus: "metadata_only",
+          contentLimitation:
+            "This record contains capture metadata, not substantive memory content.",
+        },
+      ],
+      nextCursor: null,
+    },
   ])("delivers a $name items page to the browser decoder", async (page) => {
     const fetcher = vi.fn<typeof fetch>(async () =>
       Response.json({

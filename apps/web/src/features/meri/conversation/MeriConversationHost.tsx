@@ -97,8 +97,13 @@ export function MeriConversationHost({
       <section role="status">
         <h2>Conversation connection unavailable</h2>
         <p>
-          A verified account and current client are required. Select a permitted
-          client in Portfolio.
+          {!account
+            ? "Your account could not be verified. Reload or sign in again before opening a conversation."
+            : selected.state === "no-selection"
+              ? "Choose General or a permitted client above to start a conversation."
+              : selected.state === "loading"
+                ? "Verifying the selected client before opening a conversation."
+                : "The selected client is unavailable. Choose General or another permitted client above."}
         </p>
       </section>
     );

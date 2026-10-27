@@ -43,6 +43,7 @@ function BrandingForm({
 }) {
   const api = useCapiro();
   const [name, setName] = useState(initialName);
+  const [failedLogoUrl, setFailedLogoUrl] = useState<string>();
   const upload = useRef<HTMLInputElement>(null);
   const action = uploadAction;
   const locked = mutation.locked || action.busy || syncing;
@@ -131,16 +132,19 @@ function BrandingForm({
       </SettingsCard>
       <SettingsCard title="Logo">
         <div className={styles.row}>
-          {logoUrl ? (
+          {logoUrl && failedLogoUrl !== logoUrl ? (
             <img
               src={logoUrl}
               alt="Organization logo"
               width={160}
               height={80}
               style={{ objectFit: "contain" }}
+              onError={() => setFailedLogoUrl(logoUrl)}
             />
           ) : (
-            <div className={styles.logoPreview}>No logo</div>
+            <div className={styles.logoPreview}>
+              {logoUrl ? "Logo unavailable" : "No logo"}
+            </div>
           )}
           <SettingsButton
             disabled={locked}

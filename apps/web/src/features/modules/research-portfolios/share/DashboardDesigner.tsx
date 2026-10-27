@@ -120,7 +120,29 @@ export function DashboardDesigner({
   const [selected, setSelected] = useState<string>();
   const [mode, setMode] = useState<"arrange" | "preview">("arrange");
   /** Read by screen readers after each keyboard or pointer change (FR-16.11). */
-  const [announcement, setAnnouncement] = useState("");
+  const [announcement, setAnnouncement] = useState({
+    message: "",
+    revision: 0,
+  });
+  const announce = useCallback((message: string) => {
+    setAnnouncement((previous) => ({
+      message,
+      revision: previous.revision + 1,
+    }));
+  }, []);
+  const changeHistory = useCallback(
+    (direction: "undo" | "redo") => {
+      if (!(direction === "undo" ? history.past : history.future).length)
+        return;
+      history[direction]();
+      announce(
+        direction === "undo"
+          ? "Previous change undone. Layout restored."
+          : "Change redone. Layout restored.",
+      );
+    },
+    [history, announce],
+  );
   const canvas = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
   const layout = draft ?? history.present;
@@ -135,12 +157,11 @@ export function DashboardDesigner({
       const target = event.target as HTMLElement | null;
       if (target && ["INPUT", "TEXTAREA"].includes(target.tagName)) return;
       event.preventDefault();
-      if (event.shiftKey) history.redo();
-      else history.undo();
+      changeHistory(event.shiftKey ? "redo" : "undo");
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [history]);
+  }, [changeHistory]);
 
   function metrics() {
     const width = canvas.current?.clientWidth ?? 1200;
@@ -186,7 +207,7 @@ export function DashboardDesigner({
         history.commit(d);
         const moved = d.widgets.find((w) => w.id === current.id);
         if (moved)
-          setAnnouncement(
+          announce(
             describe(moved, current.mode === "move" ? "moved" : "resized"),
           );
       }
@@ -239,13 +260,13 @@ export function DashboardDesigner({
         );
     const changed = next.widgets.find((w) => w.id === widget.id);
     if (next === history.present || !changed) {
-      setAnnouncement(
+      announce(
         `${widgetDefinition(widget.kind).label} cannot ${event.shiftKey ? "resize" : "move"} there.`,
       );
       return;
     }
     history.commit(next);
-    setAnnouncement(describe(changed, event.shiftKey ? "resized" : "moved"));
+    announce(describe(changed, event.shiftKey ? "resized" : "moved"));
   }
 
   function removeAndFocus(widget: ResearchDashboardWidget) {
@@ -254,7 +275,7 @@ export function DashboardDesigner({
     const neighbour = next.widgets[Math.min(index, next.widgets.length - 1)];
     history.commit(next);
     setSelected(neighbour?.id);
-    setAnnouncement(`${widgetDefinition(widget.kind).label} removed.`);
+    announce(`${widgetDefinition(widget.kind).label} removed.`);
     requestAnimationFrame(() => {
       const target = neighbour
         ? canvas.current?.querySelector<HTMLElement>(
@@ -302,16 +323,27 @@ export function DashboardDesigner({
             onChange={(e) => setName(e.target.value)}
           />
         </Field>
-        <ActionButton onClick={history.undo} disabled={!history.past.length}>
+        <ActionButton
+          onClick={() => changeHistory("undo")}
+          disabled={!history.past.length}
+        >
           Undo
         </ActionButton>
-        <ActionButton onClick={history.redo} disabled={!history.future.length}>
+        <ActionButton
+          onClick={() => changeHistory("redo")}
+          disabled={!history.future.length}
+        >
           Redo
         </ActionButton>
       </div>
       {error && <p role="alert">{error}</p>}
-      <p className={styles.srOnly} role="status" aria-live="polite">
-        {announcement}
+      <p
+        className={styles.srOnly}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span key={announcement.revision}>{announcement.message}</span>
       </p>
       {problems.length > 0 && (
         <ul className={styles.problems}>
@@ -412,7 +444,7 @@ export function DashboardDesigner({
                       history.commit(next);
                       const added = next.widgets.at(-1);
                       if (added && next !== history.present)
-                        setAnnouncement(describe(added, "added"));
+                        announce(describe(added, "added"));
                     }}
                   >
                     {definition.label}
@@ -442,7 +474,7 @@ export function DashboardDesigner({
                           history.commit(
                             movePhoneOrder(history.present, id, -1),
                           );
-                          setAnnouncement(
+                          announce(
                             `${widgetDefinition(widget.kind).label} moved to phone position ${index}.`,
                           );
                         }}
@@ -456,7 +488,7 @@ export function DashboardDesigner({
                           history.commit(
                             movePhoneOrder(history.present, id, 1),
                           );
-                          setAnnouncement(
+                          announce(
                             `${widgetDefinition(widget.kind).label} moved to phone position ${index + 2}.`,
                           );
                         }}

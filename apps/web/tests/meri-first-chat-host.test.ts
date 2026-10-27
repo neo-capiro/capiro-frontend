@@ -132,6 +132,32 @@ it("explicit General does not inherit the selected client", () => {
   );
 });
 
+it("an authenticated unscoped entry asks for General or a client without claiming account failure", () => {
+  mocks.selectedState = "no-selection";
+  const html = renderToStaticMarkup(
+    createElement(MeriConversationHost, {
+      enabled: true,
+      account,
+      firstChatBootstrapEnabled: true,
+    }),
+  );
+  expect(html).toContain("Choose General or a permitted client above");
+  expect(html).not.toContain("account could not be verified");
+  expect(mocks.coreRequest).not.toHaveBeenCalled();
+  expect(mocks.session).not.toHaveBeenCalled();
+});
+
+it("missing identity is distinguished from an unapplied scope without opening a session", () => {
+  mocks.selectedState = "no-selection";
+  const html = renderToStaticMarkup(
+    createElement(MeriConversationHost, { enabled: true }),
+  );
+  expect(html).toContain("Your account could not be verified");
+  expect(html).not.toContain("Choose General");
+  expect(mocks.coreRequest).not.toHaveBeenCalled();
+  expect(mocks.session).not.toHaveBeenCalled();
+});
+
 it.each([
   "scope=general&clientId=33333333-3333-4333-8333-333333333333",
   "scope=general&scope=general",

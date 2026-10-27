@@ -308,12 +308,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/enrichment/FindingReview.tsx",
     "kind": "function",
     "symbol": "FindingReview",
-    "line": 136,
-    "nonblank": 141,
-    "fingerprint": "2910063fbb5a0be01c0e11c6b0fbf517d76f452490434a31642b5a34e44bf336",
-    "reason": "Owns comparison/evidence for one finding and local ignore/matter intent. Recursive value rendering and matter choice are already cohesive child functions. It emits typed review actions rather than writing directly. Retain the proposed/current/evidence comparison together.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d",
+    "reason": "9d78cde94f4f86573a0c98b7584d7b451fd9fa9b322985a8038c18da6db64c5d FindingReview fn, l137, 152 nb ACCEPTABLE — one finding-review card; new gate is a derived boolean, no new state/effect or coupling.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/export/ClientProfileExport.tsx",
@@ -3192,10 +3190,10 @@
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
     "symbol": "MeriConversationHost",
-    "fingerprint": "99cf7f159a896f749f47717cbe33128f3359c67043e084550d250e3fafa30371",
-    "reason": "One conversation selection and mount boundary: malformed URL refusal, enabled/current-account state, client eligibility, explicit General selection, and keyed lifetime replacement. Core bootstrap and session ownership remain in existing resolver/controller modules; browser selection is not authority. The branches choose presentations of the same connection, not separate domain workflows. Existing ConnectedConversation and notice helpers already isolate meaningful subresponsibilities.",
-    "reviewedBy": "Codex independent D (wave2_d_review_handover)",
-    "reviewedOn": "2026-10-24"
+    "fingerprint": "2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424",
+    "reason": "3. MeriConversationHost.tsx / function MeriConversationHost / line 22 / nonblank 113 / fingerprint 2adaafe1798fc2ba7bff8348b2c1923d404fbb5aac36770b8fbda976ec602424 / changed. Responsibility: mount arbitration over enabled / invalid-scope / general / identity / selection / archived / bootstrap, each branch thin. The added copy branch lengthens a conditional chain (IMPLEMENTATION-STANDARDS §8 signal), but it selects mount targets and messages, not providers/tools, and each arm is a short return. ACCEPT WITH NOTE: extract the arbitration when another state is added.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
@@ -3419,9 +3417,9 @@
     "file": "apps/web/src/features/settings/TeamSettings.tsx",
     "kind": "function",
     "symbol": "TeamSettings",
-    "fingerprint": "0385e09b2bcbd53feac0cd2bcd8f5bba8c081593f67419727833e646661df4bb",
-    "reason": "The team settings component: it renders the members and pending-invitations tab surfaces and owns their local tab/invite/remove state, issuing role/billing/resend/remove operations through useSettingsMutation. Row permission gating is delegated to team-permissions. One screen responsibility under the settings team owner.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438",
+    "reason": "4de41891f35570ba32380c6900ab16df65aadee44f0eee316230cd28fb482438 TeamSettings fn, l31, 393 nb ACCEPTABLE for this delta — a large settings screen whose size predates the change; this commit adds ~15 presentational lines (tooltip). No new state/effect. Non-blocking: extract the member/billing cell if it grows.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -3527,9 +3525,9 @@
     "file": "apps/web/src/features/meri/memory-review/MemoryCorrectionComposer.tsx",
     "kind": "function",
     "symbol": "MemoryCorrectionComposer",
-    "fingerprint": "99414b66fdccd69e0becaa5ccfd758bf44b489bbf7c47f77a1202a1b9e7f378f",
-    "reason": "The Institutional Memory surface component: renders owner memory recall results and the correction-drafting form for that one surface. Recall (read) and correction (write) are the documented responsibilities of this single owner-reviewed surface, so it stays cohesive.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
+    "fingerprint": "c6667ffbc7471614caa264a33213463278f751b49b1198d17f0cb5e5d3188363",
+    "reason": "8. MemoryCorrectionComposer.tsx / function MemoryCorrectionComposer / line 54 / nonblank 248 / fingerprint c6667ffbc7471614caa264a33213463278f751b49b1198d17f0cb5e5d3188363 / changed. Largest owned body. It carries capability gate + search/preview list + single-record correction form + notices + paging for one workflow. The presentation logic was correctly extracted to module scope (memoryPresentation), and the change adds no new state, effect, dependency or submission path. ACCEPT WITH NOTE (nearing the bound): if the correction form gains another responsibility, extract it; no extraction is required by this change.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -3599,9 +3597,9 @@
     "file": "apps/web/src/features/meri/MeriHome.tsx",
     "kind": "function",
     "symbol": "MeriHome",
-    "fingerprint": "8c935e604fc1e1f4f32b30e01f2cbafa3fe20e48f458a1f0f9b8cba6c3c7b9fb",
-    "reason": "Meri's landing screen. Resolves and describes the active session identity and selected client scope, then renders the conversation host and the workspace entry links. One screen-level responsibility with the meri feature as canonical owner.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
+    "fingerprint": "79d022f45b1c4347aa8e300826bcddf724d152859f602cb7d85d99f3c6d4db61",
+    "reason": "2. MeriHome.tsx / function MeriHome / line 18 / nonblank 86 / fingerprint 79d022f45b1c4347aa8e300826bcddf724d152859f602cb7d85d99f3c6d4db61 / changed. Responsibility: Meri entry screen composing identity/QueryState, client selector, conversation host and workspace links; the change is copy plus a nav wrapper in the separate MeriWorkspaceLinks child. Container stays thin; state/effect ownership unchanged. ACCEPT.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -3833,10 +3831,10 @@
     "file": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
     "kind": "function",
     "symbol": "ConnectedFiles",
-    "fingerprint": "737c72cb1edffd5c6c540b4bdb04ca7146514d8f425ec0cba4baf63470d57abf",
-    "reason": "Independent PR164 review at 4f10476063cd9ef52d341fc597f0a6cdc8c694f7 accepts this 114-nonblank-body-line function as one document connection composition and presentation lifetime. The parent account/client/operation key scopes the existing SessionLifetimeController; attachment, availability hiding, revocation, subscription and explicit Connect UI share that lifetime. bootstrapFileSession owns saved-request qualification, and DocumentWorkflow, its fixed transport and context journal retain document operations and uncertainty. The guidance adds only the existing capability-context read, truthful saved-request copy and scoped same-tab client-chat Link with prefetch disabled behind the existing authorized-client and server capability gates. It adds no effect, selector, automatic submission, bootstrap, policy or lifecycle owner. Actual authorization, admission and document generation/publication stay with existing owners. Splitting this coupled JSX/wiring solely for the threshold would scatter the same responsibility; no extraction is warranted. This exact function review preserves the source ACCEPT and does not close D1 live acceptance or classify its unknown failure.",
-    "reviewedBy": "Codex Schedule Worker, independent PR164 reviewer; W2-FE-PR164-SOURCE-REVIEW.txt and W2-FE-PR164-CONNECTEDFILES-COHESION.txt",
-    "reviewedOn": "2026-10-25"
+    "fingerprint": "e7cb7bbda23fc42685437f2d16b8d511fa37f2b1bef77413e4808005e3887885",
+    "reason": "1. MeriFilesHost.tsx / function ConnectedFiles / line 90 / nonblank 116 / fingerprint e7cb7bbda23fc42685437f2d16b8d511fa37f2b1bef77413e4808005e3887885 / changed. Responsibility: single \"document connection\" gate renderer for a Files page — connect status machine plus one optional capability-gated link. The change is presentation-only (shared heading + ui classes). Cohesive, one reason to change; extraction not needed. ACCEPT (bounded responsibility).",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/meri/routines/MeriRoutinesHost.tsx",
@@ -3923,10 +3921,10 @@
     "file": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
     "kind": "function",
     "symbol": "ExportDialog",
-    "fingerprint": "81b386ec8b508a0f7d1a3be1ddc2ee91f080d57e2cd1572d959d9d816a877798",
-    "reason": "Accept exact reviewed ExportDialog: one modal owns its focus lifetime, local page-size selection and the visible initial, retained, checking, failed and ready states of one export intent. Actions and admission are supplied by useHillDayExport. The JSX contains no direct API, persistence, signing or policy implementation; its state branches are mutually related presentations of that same intent.",
-    "reviewedBy": "Wave 3 independent source reviewer (Hermes)",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "9d4811d54f0d36d34cc04ca9e152ed8856a78cb9651f42a5e179facd9b3f0a6a",
+    "reason": "One cohesive responsibility: a modal that renders a single export request state machine (ready, queued, failed, held) and its local presentation branches. It owns no authorization, persistence or dispatch; every effect is delegated to the unchanged useHillDayExport hook, and state flows from props/scope through the hook to the view. The delta adds conditional copy branches without another dependency, state owner or boundary. Hermes verdict: ACCEPTABLE as-is; no extraction required.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/workspace/hillday/useHillDayExport.ts",
@@ -5256,12 +5254,10 @@
     "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
     "kind": "function",
     "symbol": "CongressionalContacts",
-    "line": 25,
-    "nonblank": 231,
-    "fingerprint": "a340f0665f0daec0dfaad20df669fc83e1897b1190e4e44a4d13e815335807ea",
-    "reason": "FE224 6bd3223ae7e0950b4e2b747d139be96db9d33a4c: The existing Directory surface keeps its current query/page/selection owner and replaces native controls with the established shared select plus local clear presentation. No second policy, transport, data or mutation owner is introduced. This is responsibility-only acceptance; rendered layout and affected browser interaction require the corrections in W3-FE224-DIRECTORY-REVIEW.md.",
-    "reviewedBy": "a3_scope, independent FE224 source/responsibility reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "bba620294172cd68f4ab91a4ed68a5a80951b9b8a8b3b6f10c4bd08c87eab64c",
+    "reason": "bba620294172cd68f4ab91a4ed68a5a80951b9b8a8b3b6f10c4bd08c87eab64c CongressionalContacts fn, l25, 240 nb ACCEPTABLE — one directory list surface (query, filters, table columns, detail rail). Added a conditional class, a title attribute and width values; state ownership (selected, filters, query) unchanged. No extraction needed.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
+    "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/directory/StateDirectory.tsx",
@@ -5602,18 +5598,18 @@
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "8d189c92c1fb905c267f0abf410f719ead3e7725d768e6b46a601db9e834b145",
-    "reason": "reviewed-accept — already >400 before",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "5b7f7c6e48468b34144a783e434f6c491db0a05176bfec49988fe05c7a798290",
+    "reason": "5b7f7c6e48468b34144a783e434f6c491db0a05176bfec49988fe05c7a798290 DashboardDesigner file, 552 nb ACCEPTABLE — single feature module (types + grid math + designer); grid math already partially lives in dashboard-layout.ts. Only small cohesive additions. No correction required.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
     "file": "apps/web/src/features/modules/research-portfolios/share/DashboardDesigner.tsx",
     "kind": "function",
     "symbol": "DashboardDesigner",
-    "fingerprint": "6307e8655e8f66492cc84e22b49638db1cfbb723738ddd81e5dadcecff8606fb",
-    "reason": "reviewed-accept — SH6/SH7 verified",
-    "reviewedBy": "Hermes Agent source review 20261027_144532_27e472",
+    "fingerprint": "d5fa162fbce68d19d7394571e9fc0d98ab0c7b8c61101aa02dbe8b08868d31fd",
+    "reason": "d5fa162fbce68d19d7394571e9fc0d98ab0c7b8c61101aa02dbe8b08868d31fd DashboardDesigner fn, l99, 389 nb ACCEPTABLE — one cohesive editor component owning layout history, keyboard parity, drag, phone order and preview. This delta adds one bounded announcement primitive + history-command wrapper; no new responsibility, dependency direction stays one-way (component → useLayoutHistory/dashboard-layout helpers). Non-blocking: if it grows, extract the announcement/history pair and phone-order controls.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6009,9 +6005,9 @@
     "file": "apps/web/src/features/settings/BrandingSettings.tsx",
     "kind": "function",
     "symbol": "BrandingForm",
-    "fingerprint": "6ea53dbe926cfad360b6fcf864aefe012a7df6f582b255cda9cb4d4955640803",
-    "reason": "Owns the branding edit surface: company-name form state, logo type/size validation and the upload-ticket/confirm flow, plus its local notices. Page query, sync status and mutation lifecycle are owned by BrandingSettings and shared settings hooks.",
-    "reviewedBy": "Hermes Agent architecture lane 1",
+    "fingerprint": "108a1b7fe300c4ee6ee261b50e6a11b06b78bf215c2d544de866200c6e41eac7",
+    "reason": "One cohesive responsibility: the branding form (company name, logo card and notices) for one organization record. The delta adds one local failedLogoUrl state and one presentation branch; existing upload, settings-action, settings-mutation and branding-sync owners remain unchanged. Hermes verdict: ACCEPTABLE as-is; no extraction required.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6261,9 +6257,9 @@
     "file": "apps/web/src/features/settings/TeamSettings.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "2161e132b1bf9bc23010d4b7c5c854164e9421d0f6bd6f89e513057718296a9b",
-    "reason": "Module for the team settings surface. Contains the exported TeamSettings component plus its private joinedDate formatter, all serving that one admin surface: member/invitation tabs, role/billing/remove actions and dialogs. Mutation/recovery is useSettingsMutation, row authorization is team-permissions and invite is the InviteMember dialog. One cohesive surface owner; size is the two data tables and their row renderers, not a second concern.",
-    "reviewedBy": "Hermes Agent architecture lane 2",
+    "fingerprint": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38",
+    "reason": "bc3423591e5b8bd365faf801ddf63a665e83288f47a70f8e2e27cc0853a55c38 TeamSettings file, 426 nb ACCEPTABLE — module holds schema types, a query hook and the component; single settings responsibility.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   },
   {
@@ -6831,6 +6827,33 @@
     "fingerprint": "e7714751449668907bf072b3861ecaf01327a3adedc7d93a21c6bb84fc038cb9",
     "reason": "reviewed-accept (function size, 189 nonblank, replaces the 188-nonblank record from df77d9701e1d60740fa1cae23a8b5b7f0f8bdd9e) — the coverage owner: URL-owned filters and fiscal year, one fixed product-coverage read, the denominator-known disclosure, the cohort table with its separate denominator / counts / status columns, the new read-only Recorded source outcomes column, and the Clear filters control now carrying an explicit type=\"button\" so clearing cannot be re-submitted with stale filter values (the untyped button previously defaulted to submit inside the filter form). Growth is one declarative column plus one button type; counts, publication status, denominator knowledge, tenant filter ownership and the no-ingestion refresh disclosure are unchanged, and the rows/columns/filter contract belongs to this single view.",
     "reviewedBy": "Hermes Agent source review 20261027_161311_6581a7",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0852eba753737f136ad0c58b5c0bcdac5be2f7146c2f547571da0167d96cd06b",
+    "reason": "5. ConversationIntents.tsx / module <module> / line 1 / nonblank 411 / fingerprint 0852eba753737f136ad0c58b5c0bcdac5be2f7146c2f547571da0167d96cd06b / changed. The file was already over 400 nonblank at base; this change adds one import and a presentation wrapper. Contents stay within one bounded domain (prepared-action intent approvals): classification predicates, DecisionControls, IntentCard, Body, container. No duplicate registry, no parallel switch chain, no new dependency direction introduced. ACCEPT WITH NOTE: at the upper bound; further growth should extract the proposal-kind predicates.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/intents/ConversationIntents.tsx",
+    "kind": "function",
+    "symbol": "Body",
+    "fingerprint": "9cc9ac3b2ff99f3fdce1cafa8b75c416ea6b81a1a1310b55e1f5271f522b9845",
+    "reason": "7. ConversationIntents.tsx / function Body / line 248 / nonblank 89 / fingerprint 9cc9ac3b2ff99f3fdce1cafa8b75c416ea6b81a1a1310b55e1f5271f522b9845 / changed. Responsibility: status-branch renderer (disabled/loading/unavailable/empty/list) for one list. The change rewraps the unavailable arm in a panel + ui.outline button. Cohesive; state is owned by the hook and passed in. ACCEPT.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_e1e009",
+    "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/enrichment/RunLedger.tsx",
+    "kind": "function",
+    "symbol": "RunLedger",
+    "fingerprint": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5",
+    "reason": "8c1ebf36f6668b174470ab56994ff730fc9f1c4707da02820f422176f844bdb5 RunLedger fn, l4, 91 nb ACCEPTABLE / IMPROVED — responsibility for source naming and outcome projection moved OUT of RunLedger into SourceOutcome (single owner of the label map, previously duplicated inline). No state added.",
+    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
   }
 ]

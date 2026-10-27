@@ -14,6 +14,7 @@ import {
   type IntentScope,
 } from "./useConversationIntents";
 import styles from "./intents.module.css";
+import ui from "../../ui/meri-ui.module.css";
 import { ConversationRoutine } from "../../routines/ConversationRoutine";
 import { isLegislativeDocumentProposal } from "./legislative-document-view";
 import { isClientRecordProposal } from "./client-record-view";
@@ -266,13 +267,22 @@ function Body({
     return <p className={styles.muted}>Reading the actions Meri prepared…</p>;
   if (list.status === "unavailable")
     return (
-      <p className={styles.muted} role="status">
-        Prepared actions could not be read right now. Their outcomes remain
-        unconfirmed.{" "}
-        <Button type="button" variant="outline" onClick={retry}>
-          Try again
-        </Button>
-      </p>
+      <div className={styles.panel} role="status">
+        <p className={styles.muted}>
+          Prepared actions could not be read right now. Their outcomes remain
+          unconfirmed.
+        </p>
+        <div className={styles.actions}>
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            onClick={retry}
+          >
+            Try again
+          </Button>
+        </div>
+      </div>
     );
   if (rows.length === 0)
     return (
@@ -385,6 +395,7 @@ export function ConversationIntents({
             <Button
               type="button"
               variant="outline"
+              className={ui.outline}
               onClick={() => void state.refresh()}
             >
               Refresh

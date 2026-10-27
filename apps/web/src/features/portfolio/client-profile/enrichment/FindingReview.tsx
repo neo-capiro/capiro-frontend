@@ -9,6 +9,7 @@ import {
   type JsonValue,
 } from "./contracts";
 import type { ReviewAction } from "./actions";
+import { ProfileCompletionOutcome } from "./SourceOutcome";
 import styles from "./enrichment.module.css";
 export function FindingValue({ value }: { value: JsonValue }) {
   if (value === null) return <span className="muted">None</span>;
@@ -153,6 +154,9 @@ export function FindingReview({
   const [panel, setPanel] = useState<"ignore" | "matter">();
   const [reason, setReason] = useState("");
   const selectable = canSelectFinding(finding);
+  const completionAudit =
+    finding.kind === "profile_completion" &&
+    finding.source === "completion_audit";
   return (
     <article
       className={styles.finding}
@@ -191,11 +195,19 @@ export function FindingReview({
       <div className={styles.comparison}>
         <div>
           <h4>Current</h4>
-          <ComparisonValue value={finding.currentValue} />
+          {completionAudit ? (
+            <ProfileCompletionOutcome value={finding.currentValue} />
+          ) : (
+            <ComparisonValue value={finding.currentValue} />
+          )}
         </div>
         <div>
           <h4>Proposed</h4>
-          <ComparisonValue value={finding.proposedValue} />
+          {completionAudit ? (
+            <ProfileCompletionOutcome value={finding.proposedValue} />
+          ) : (
+            <ComparisonValue value={finding.proposedValue} />
+          )}
         </div>
       </div>
       <details className={styles.evidence}>

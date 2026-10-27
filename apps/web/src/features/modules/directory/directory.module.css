@@ -52,6 +52,9 @@
   gap: 20px;
   align-items: start;
 }
+.single {
+  min-width: 0;
+}
 .personnelSplit {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
@@ -153,6 +156,7 @@
 }
 .avatar {
   display: grid;
+  flex: 0 0 30px;
   place-items: center;
   width: 30px;
   height: 30px;
@@ -172,6 +176,16 @@
 }
 .link:hover {
   text-decoration: underline;
+}
+.personLabel {
+  min-width: 0;
+}
+.personLabel > strong,
+.personLabel > div {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .staff {
   margin-left: 34px;

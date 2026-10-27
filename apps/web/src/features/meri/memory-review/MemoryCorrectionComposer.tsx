@@ -12,6 +12,7 @@ import phone from "../ui/phone-page.module.css";
 import memory from "../screens/memory/memory.module.css";
 import { useOwnerCorrection } from "./useOwnerCorrection";
 import styles from "./owner-review.module.css";
+import type { OwnerCorrectionItem } from "./owner-correction";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const EVIDENCE_UNAVAILABLE =
@@ -29,6 +30,17 @@ export function memoryTitle(key: string) {
   if (!slug) return key;
   const words = slug.replace(/[_-]+/g, " ").trim();
   return words ? words[0]!.toUpperCase() + words.slice(1) : key;
+}
+
+/** Display the canonical limitation without changing the original correction value. */
+export function memoryPresentation(item: OwnerCorrectionItem) {
+  return {
+    title: item.displayTitle ?? memoryTitle(item.title),
+    fact:
+      item.contentStatus && item.contentStatus !== "available"
+        ? item.contentLimitation!
+        : item.value,
+  };
 }
 
 const matches = (title: string, value: string, query: string) => {
@@ -57,9 +69,10 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
   const ready = items.state === "ready" ? items : undefined;
   const selected = ready?.items.find((item) => item.id === selectedId);
   const results =
-    ready?.items.filter((item) =>
-      matches(memoryTitle(item.title), item.value, query),
-    ) ?? [];
+    ready?.items.filter((item) => {
+      const display = memoryPresentation(item);
+      return matches(display.title, display.fact, query);
+    }) ?? [];
   const count = ready?.items.length;
   return (
     <section
@@ -191,11 +204,11 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                     unavailable={EVIDENCE_UNAVAILABLE}
                     item={{
                       id: item.id,
-                      title: memoryTitle(item.title),
+                      title: memoryPresentation(item).title,
                       meta: item.clientId
                         ? "Personal · client memory"
                         : "Personal · firm-wide",
-                      fact: item.value,
+                      fact: memoryPresentation(item).fact,
                       status: { label: "Current", tone: "neutral" },
                       terms: [],
                       evidence: { label: "View evidence" },
@@ -241,9 +254,13 @@ export function MemoryCorrectionComposer({ enabled }: { enabled: boolean }) {
                 });
               }}
             >
-              <h3>Propose a correction to {memoryTitle(selected.title)}</h3>
-              <p className={ui.muted}>Current canonical text</p>
-              <p className={styles.value}>{selected.value}</p>
+              <h3>
+                Propose a correction to {memoryPresentation(selected).title}
+              </h3>
+              <p className={ui.muted}>Current record</p>
+              <p className={styles.value}>
+                {memoryPresentation(selected).fact}
+              </p>
               {unknownIds.has(selected.id) ? (
                 <p role="status" className={styles.versionNotice}>
                   A correction for this item may already have been submitted.
