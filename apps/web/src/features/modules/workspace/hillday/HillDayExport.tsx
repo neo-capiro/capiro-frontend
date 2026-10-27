@@ -35,9 +35,11 @@ function ExportDialog({ onClose, scope }: Props) {
       description={
         ready
           ? "Download the original saved PDF for this request."
-          : held
+          : state.known
             ? "The original request is retained. Its outcome is not confirmed."
-            : "Create a PDF from the current saved document."
+            : state.error
+              ? "Saved export history is unavailable. Request retention is not confirmed."
+              : "Create a PDF from the current saved document."
       }
       footer={
         <>
@@ -126,7 +128,9 @@ function ExportDialog({ onClose, scope }: Props) {
                     : failed
                       ? (state.receipt?.error ??
                         "The renderer reported a failure.")
-                      : "Checking status looks up the original request. It does not create another PDF."}
+                      : state.known
+                        ? "Checking status looks up the original request. It does not create another PDF."
+                        : "Check status reads saved export history without creating a PDF."}
                 </p>
                 {!queued && !failed && (
                   <p className={styles.caption}>
@@ -146,9 +150,11 @@ function ExportDialog({ onClose, scope }: Props) {
         )}
         {state.loading && <p role="status">Reading saved export request…</p>}
         <p className={styles.caption}>
-          {held
+          {state.known
             ? "This request is retained across closing and reloading. Check status looks for its original saved PDF without generating a replacement."
-            : "After you generate a PDF, its request is retained across closing and reloading. If its outcome is unconfirmed, Check status will look up the original request without generating a replacement."}
+            : state.error
+              ? "Saved export history could not be read. Check status before generating a PDF; whether an earlier request was retained is not confirmed."
+              : "After you generate a PDF, its request is retained across closing and reloading. If its outcome is unconfirmed, Check status will look up the original request without generating a replacement."}
         </p>
       </div>
     </Modal>
