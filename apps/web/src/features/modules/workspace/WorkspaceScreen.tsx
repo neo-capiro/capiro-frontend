@@ -26,6 +26,7 @@ import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 import { NewsletterReviewEntry } from "./rich-newsletter/review/NewsletterReviewEntry";
 import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
+import { EngagementTaskDetail } from "./EngagementTaskDetail";
 import {
   readWorkspaceRoute,
   workspaceHref,
@@ -48,10 +49,18 @@ export function WorkspaceScreen() {
     return (
       <section role="alert">
         <h1>Workspace unavailable</h1>
-        <p>This link contains invalid or conflicting document references.</p>
+        <p>This link contains invalid or conflicting record references.</p>
       </section>
     );
   if (route.kind === "brief-copy") return <BriefCopyRoute />;
+  if (route.kind === "task")
+    return (
+      <EngagementTaskDetail
+        key={`${route.taskId}:${route.clientId ?? "general"}`}
+        taskId={route.taskId}
+        clientId={route.clientId}
+      />
+    );
   const clientId = route.clientId;
   const navigate = (view: WorkspaceView) =>
     router.push(workspaceHref({ kind: "view", view, clientId }));

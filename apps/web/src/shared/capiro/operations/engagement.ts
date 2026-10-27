@@ -2,6 +2,7 @@ import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { engagementArtifactOperations } from "./engagement-artifacts";
 import { engagementSessionOperations } from "./engagement-sessions";
+import { engagementTaskOperations } from "./engagement-tasks";
 import { objectiveDestinationOperations } from "./engagement-objective-destination";
 import { newsletterRoutingMetadata } from "./newsletter-routing";
 const source =
@@ -123,6 +124,7 @@ const scopeQuery = z
   })
   .strict();
 export const engagementOperations = {
+  ...engagementTaskOperations,
   ...engagementArtifactOperations,
   ...engagementSessionOperations,
   ...objectiveDestinationOperations,

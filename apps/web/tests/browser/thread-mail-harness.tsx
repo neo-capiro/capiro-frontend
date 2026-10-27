@@ -25,13 +25,18 @@ export function ThreadMailHarness() {
         refetchType: "none",
       });
     };
+    const refresh = () => {
+      void cache.invalidateQueries({ queryKey: ["mail-thread"] });
+    };
     window.addEventListener("thread-actor-change", actor);
     window.addEventListener("thread-client-change", client);
     window.addEventListener("thread-identity-invalidate", invalidate);
+    window.addEventListener("thread-refresh", refresh);
     return () => {
       window.removeEventListener("thread-actor-change", actor);
       window.removeEventListener("thread-client-change", client);
       window.removeEventListener("thread-identity-invalidate", invalidate);
+      window.removeEventListener("thread-refresh", refresh);
     };
   }, [cache]);
   return (

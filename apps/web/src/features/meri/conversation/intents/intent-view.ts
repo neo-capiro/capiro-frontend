@@ -21,6 +21,7 @@ export type IntentRow = Readonly<{
   fields: readonly IntentField[];
   /** The owner's observed task or published document result. */
   result: readonly IntentField[];
+  task?: Readonly<{ id: string; clientId: string | null }>;
 }>;
 export type Viewer = Readonly<{ tenantId: string; actorId: string }>;
 
@@ -408,6 +409,19 @@ export function intentRow(
     result: completed
       ? resultFields(completed, item.proposal.command.action)
       : [],
+    ...(completed &&
+    "execution" in completed.outcome &&
+    "kind" in completed.outcome.execution &&
+    completed.outcome.execution.kind === "native-task" &&
+    "result" in completed.outcome &&
+    "id" in completed.outcome.result
+      ? {
+          task: {
+            id: completed.outcome.result.id,
+            clientId: completed.outcome.result.clientId,
+          },
+        }
+      : {}),
   };
 }
 

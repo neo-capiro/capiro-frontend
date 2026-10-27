@@ -47,6 +47,11 @@ const sendIntentReceipt = z.object({
   ok: z.literal(true).optional(),
   threadId: z.uuid().optional(),
   messageId: z.uuid().optional(),
+  operation: z.literal("reply").optional(),
+  originalMessageId: z.uuid().optional(),
+  originalThreadId: z.uuid().optional(),
+  originalUpdatedAt: z.iso.datetime({ offset: true }).optional(),
+  senderConnectionId: z.uuid().optional(),
 });
 type SendIntentReceipt = z.infer<typeof sendIntentReceipt>;
 export function useSendMail(clientId: string, entity: string) {

@@ -131,6 +131,18 @@ function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {
           <p>No automatic retry will run from this view.</p>
         </section>
       )}
+      {state.execution?.status === "observed" &&
+        state.proposal &&
+        port.startNew && (
+          <Button
+            type="button"
+            variant="outline"
+            disabled={disabled}
+            onClick={() => void controller.startNew(state.proposal!.handle)}
+          >
+            Start another task
+          </Button>
+        )}
       <div className={styles.columns}>
         {state.page && (
           <RecommendationList

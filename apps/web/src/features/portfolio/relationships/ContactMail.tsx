@@ -7,6 +7,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { defaultMailFilters, type MailFilters } from "./email/read";
 import { MailCoverageNotice, ThreadContent } from "./thread/ThreadContent";
+import { NativeMailReply } from "./thread/NativeMailReply";
 export function ContactMail({
   clientId,
   person,
@@ -17,7 +18,7 @@ export function ContactMail({
   const [filters, setFilters] = useState(defaultMailFilters);
   const query = useContactThreads(clientId, person.email, filters);
   const [selected, setSelected] = useState<string | null>(null);
-  const [compose, setCompose] = useState<"new" | "reply" | null>(null);
+  const [compose, setCompose] = useState<"new" | null>(null);
   const thread = useMailThread(selected, clientId, person.email);
   const [bodyError, setBodyError] = useState<Error | null>(null);
   const contactKey = JSON.stringify([clientId, person.personId, person.email]);
@@ -42,7 +43,7 @@ export function ContactMail({
       setCompose(null);
       setBodyError(null);
       if (contactChanged) setFilters(defaultMailFilters);
-    } else if (thread.error && compose === "reply") setCompose(null);
+    }
   }
   const history =
     !contactChanged && query.isSuccess && !query.error
@@ -224,27 +225,21 @@ export function ContactMail({
           </>
         )}
         {currentThread && (
-          <button
-            className="button"
-            disabled={thread.isFetching || query.isFetching}
-            onClick={() => {
-              if (!thread.isFetching && !query.isFetching) setCompose("reply");
-            }}
-          >
-            Reply to {person.name}
-          </button>
+          <NativeMailReply
+            key={JSON.stringify(thread.scope)}
+            thread={currentThread}
+            busy={thread.isFetching || query.isFetching}
+            scope={thread.scope}
+            clientId={clientId}
+            person={person}
+          />
         )}
       </Dialog>
-      {history && compose && (compose === "new" || currentThread) && (
+      {history && compose && (
         <MailCompose
           key={`${compose}:${selected}`}
           clientId={clientId}
           person={person}
-          thread={
-            compose === "reply" && currentThread
-              ? { id: currentThread.id, subject: currentThread.subject }
-              : undefined
-          }
           onClose={() => setCompose(null)}
         />
       )}
