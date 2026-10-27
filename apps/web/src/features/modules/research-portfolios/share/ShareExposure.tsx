@@ -1,6 +1,7 @@
 import type { ResearchShareDashboard } from "../../../../shared/capiro/operations/research-share-schemas";
 import { basisLabel, formatTotal } from "./DashboardWidgets";
 import { widgetDefinition } from "./dashboard-layout";
+import { SourceEvidence } from "./SourceEvidence";
 import styles from "./share.module.css";
 
 /** Describes the received frozen payload, including data beyond the currently visible widgets. */
@@ -67,23 +68,42 @@ export function ShareExposure({
       </details>
       <details>
         <summary>{data.sources.length} source references</summary>
+        <SourceEvidence sources={data.sources} />
+      </details>
+      <details>
+        <summary>{data.changes.length} captured changes</summary>
         <ul>
-          {data.sources.map((source) => (
-            <li key={source.id}>{source.id}</li>
+          {data.changes.map((change) => (
+            <li key={change.id}>
+              {change.occurredAt} · {change.eventKind} · {change.summary}
+            </li>
           ))}
         </ul>
       </details>
-      <p>
-        {data.changes.length} captured changes;{" "}
-        {data.clientFit
-          ? "the selected client's fit and its basis"
-          : "no client-fit result"}
-        ;{" "}
-        {data.comparison
-          ? `comparison with ${data.comparison.snapshotName}`
-          : "no earlier-snapshot comparison"}
-        .
-      </p>
+      {data.clientFit && (
+        <details>
+          <summary>Selected client fit and basis</summary>
+          <p>
+            {data.clientFit.availability} · Score{" "}
+            {data.clientFit.fitScore ?? "Unavailable"} · Refreshed{" "}
+            {data.clientFit.refreshedAt ?? "Not captured"}
+          </p>
+          <pre>{JSON.stringify(data.clientFit.basis, null, 2)}</pre>
+        </details>
+      )}
+      {data.comparison && (
+        <details>
+          <summary>Comparison with {data.comparison.snapshotName}</summary>
+          <p>Captured {data.comparison.capturedAt}</p>
+          <ul>
+            {data.comparison.totals.map((total, index) => (
+              <li key={index}>
+                {formatTotal(total)} · {basisLabel(total.basis)}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
       {data.limitations.length > 0 && (
         <ul>
           {data.limitations.map((limitation, index) => (

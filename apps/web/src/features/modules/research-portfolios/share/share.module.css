@@ -363,6 +363,21 @@
   width: min(1160px, calc(100vw - 32px));
   max-width: min(1160px, calc(100vw - 32px));
 }
+.evidence {
+  display: grid;
+  gap: 10px;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.evidence dl {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(0, 3fr);
+  gap: 4px 12px;
+  padding: 8px 0;
+}
+.evidence dt {
+  color: var(--muted-foreground);
+}
 
 /* Recipient page */
 .page {

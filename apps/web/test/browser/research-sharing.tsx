@@ -7,6 +7,7 @@ import { DashboardDesigner } from "../../src/features/modules/research-portfolio
 import { DashboardGrid } from "../../src/features/modules/research-portfolios/share/DashboardGrid";
 import { ResearchSettings } from "../../src/features/modules/research-portfolios/ResearchSettings";
 import { ClientSharingSettings } from "../../src/features/settings/ClientSharingSettings";
+import { PublicShareRecipient } from "../../src/features/modules/workspace/PublicShareRecipient";
 import type { ResearchDashboardLayout } from "../../src/shared/capiro/operations/research-share-schemas";
 import { dashboard, portfolio, shareToken } from "./research-sharing-fixture";
 import "../../src/app/globals.css";
@@ -18,13 +19,17 @@ function Fixture() {
   const mode = query.get("mode");
   const [saved, setSaved] = useState<ResearchDashboardLayout>();
   const [token, setToken] = useState(query.get("token") ?? shareToken);
-  if (mode === "public")
+  if (mode === "public" || mode === "shared")
     return (
       <>
         <button onClick={() => setToken("c".repeat(64))}>
           Switch synthetic token
         </button>
-        <ResearchShareRecipient token={token} />
+        {mode === "shared" ? (
+          <PublicShareRecipient token={token} />
+        ) : (
+          <ResearchShareRecipient token={token} />
+        )}
       </>
     );
   if (mode === "widgets")

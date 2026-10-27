@@ -43,7 +43,9 @@ export function useSharePublish(onChanged: () => void) {
       const knownRefusal =
         caught instanceof CapiroApiError &&
         caught.status >= 400 &&
-        caught.status < 500;
+        caught.status < 500 &&
+        caught.status !== 408 &&
+        caught.status !== 499;
       if (knownRefusal) setPending(undefined);
       setError(
         knownRefusal

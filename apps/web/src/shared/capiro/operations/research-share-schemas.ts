@@ -134,7 +134,27 @@ export const researchShareDashboard = z.object({
         disposition: z.string(),
       }),
     ),
-    sources: z.array(z.object({ id: z.string() })),
+    sources: z.array(
+      z.object({
+        id: z.string(),
+        evidenceRefId: z.string().optional(),
+        sourceDocumentId: z.string().nullable().optional(),
+        sourceRevisionId: z.string().nullable().optional(),
+        sourceFamily: z.string().optional(),
+        publisher: z.string().nullable().optional(),
+        sourceUrl: z.string().nullable().optional(),
+        nativeLocator: z
+          .object({
+            page: z.number().nullable(),
+            section: z.string().nullable(),
+            occurrenceId: z.string().nullable(),
+          })
+          .optional(),
+        contentHash: z.string().nullable().optional(),
+        edition: z.string().nullable().optional(),
+        observedAt: z.string().nullable().optional(),
+      }),
+    ),
     clientFit: z
       .object({
         availability: z.enum(["available", "partial", "unavailable"]),

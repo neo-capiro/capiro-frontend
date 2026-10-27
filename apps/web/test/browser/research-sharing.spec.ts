@@ -568,7 +568,7 @@ test("preview uses frozen figures and changes require reviewing the new frozen p
   ).toHaveLength(0);
 });
 
-for (const outcome of ["present", "absent", "unknown"] as const) {
+for (const outcome of ["present", "absent", "unknown", "timeout"] as const) {
   test(`lost publish response reconciles ${outcome} without an automatic write`, async ({
     page,
   }) => {
@@ -579,7 +579,12 @@ for (const outcome of ["present", "absent", "unknown"] as const) {
       "**/api/capiro/research.shareLinks.publish",
       async (route) => {
         publications.push(route.request().postDataJSON());
-        if (publications.length === 1) await route.abort("failed");
+        if (publications.length === 1 && outcome === "timeout")
+          await route.fulfill({
+            status: 408,
+            json: { message: "Request timed out" },
+          });
+        else if (publications.length === 1) await route.abort("failed");
         else
           await route.fulfill({
             json: { link, token: shareToken, replayed: false },
@@ -593,7 +598,10 @@ for (const outcome of ["present", "absent", "unknown"] as const) {
         if (outcome === "unknown") await route.abort("failed");
         else
           await route.fulfill({
-            json: { link: outcome === "present" ? link : null },
+            json: {
+              link:
+                outcome === "present" || outcome === "timeout" ? link : null,
+            },
           });
       },
     );
@@ -615,7 +623,7 @@ for (const outcome of ["present", "absent", "unknown"] as const) {
     await page
       .getByRole("button", { name: "Check publication result" })
       .click();
-    if (outcome === "present") {
+    if (outcome === "present" || outcome === "timeout") {
       await expect(page.getByRole("dialog")).toContainText(
         "one-time address was not received here",
       );
@@ -648,3 +656,172 @@ for (const outcome of ["present", "absent", "unknown"] as const) {
     if (outcome !== "absent") expect(publications).toHaveLength(1);
   });
 }
+
+test("canonical address dispatches research to the PIN gate and a document to safe captured text", async ({
+  page,
+  context,
+}) => {
+  const requests: string[] = [];
+  let kind = "research_portfolio";
+  await page.route("**/api/capiro/**", async (route) => {
+    const key = new URL(route.request().url()).pathname.split("/").at(-1)!;
+    requests.push(key);
+    if (key === "public-share.kind")
+      await route.fulfill({ json: { available: true, kind } });
+    else if (key === "public-research-share.availability")
+      await route.fulfill({ json: { available: true } });
+    else if (key === "public-share.document")
+      await route.fulfill({
+        json: {
+          draftId: "",
+          versionId: "frozen-v1",
+          docTitle: "Captured document",
+          sections: [
+            {
+              id: "section",
+              title: "Captured section",
+              content:
+                '<img src="https://external.invalid/sentinel" onerror="alert(1)">',
+            },
+          ],
+        },
+      });
+    else throw new Error(`Unexpected operation ${key}`);
+  });
+  await page.goto("/research-sharing.html?mode=shared");
+  await expect(page.getByLabel("PIN", { exact: true })).toBeVisible();
+  expect(requests).not.toContain("public-share.document");
+  kind = "workspace_document";
+  await page.getByRole("button", { name: "Switch synthetic token" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Captured document" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(
+      '<img src="https://external.invalid/sentinel" onerror="alert(1)">',
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(page.locator("article img")).toHaveCount(0);
+  expect(
+    requests.every(
+      (key) =>
+        key.startsWith("public-share.") ||
+        key.startsWith("public-research-share."),
+    ),
+  ).toBe(true);
+  expect(await context.cookies()).toEqual([]);
+});
+
+test("canonical failed kind lookup reveals only unavailable", async ({
+  page,
+}) => {
+  await page.route("**/api/capiro/**", (route) =>
+    route.fulfill({ json: { available: false } }),
+  );
+  await page.goto("/research-sharing.html?mode=shared");
+  await expect(
+    page.getByRole("heading", { name: "Link not available" }),
+  ).toBeVisible();
+  await expect(page.getByLabel("PIN", { exact: true })).toHaveCount(0);
+});
+
+test("recipient expands exact frozen source evidence and table rows without another request", async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  const frozen = structuredClone(dashboard);
+  frozen.layout = {
+    columns: 12,
+    widgets: [
+      {
+        id: "funding",
+        kind: "funding_table",
+        x: 0,
+        y: 0,
+        w: 12,
+        h: 5,
+        settings: { limit: 1 },
+      },
+    ],
+    phoneOrder: ["funding"],
+  };
+  frozen.data.sources = [
+    {
+      id: "source",
+      evidenceRefId: "evidence",
+      sourceDocumentId: "doc",
+      sourceRevisionId: "revision-frozen",
+      sourceFamily: "budget",
+      publisher: "Captured publisher",
+      sourceUrl: "https://source.example/frozen",
+      nativeLocator: {
+        page: 37,
+        section: "Captured section",
+        occurrenceId: "occurrence",
+      },
+      contentHash: "frozenhash",
+      edition: "FY2027",
+      observedAt: timestamp,
+    },
+  ];
+  frozen.data.contributions = [1, 2].map((index) => ({
+    contributionId: `contribution-${index}`,
+    targetKind: "program",
+    targetId: `program-${index}`,
+    label: `Frozen subject ${index}`,
+    basis: frozen.data.totals[0]!.basis,
+    value: "9007199254740993.123456",
+    disposition: "included",
+    reason: "captured",
+    sourceRevisionIds: ["revision-frozen"],
+  }));
+  await page.route("**/api/capiro/**", async (route) => {
+    const key = new URL(route.request().url()).pathname.split("/").at(-1)!;
+    requests.push(key);
+    if (key.endsWith("availability"))
+      await route.fulfill({ json: { available: true } });
+    else if (key.endsWith("pin"))
+      await route.fulfill({
+        json: {
+          viewToken: "session",
+          expiresAt: new Date(Date.now() + 1_800_000).toISOString(),
+        },
+      });
+    else if (key.endsWith("dashboard")) await route.fulfill({ json: frozen });
+    else throw new Error(`Unexpected operation ${key}`);
+  });
+  await page.goto("/research-sharing.html?mode=public");
+  await page.getByLabel("PIN", { exact: true }).fill("123456");
+  await page.getByRole("button", { name: "Open dashboard" }).click();
+  await expect(
+    page.getByText("Frozen subject 1", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("Frozen subject 2", { exact: true })).toHaveCount(
+    0,
+  );
+  const before = requests.length;
+  await page
+    .locator("summary")
+    .filter({ hasText: "9007199254740993.123456" })
+    .click();
+  await page
+    .locator("summary")
+    .filter({ hasText: "Captured publisher" })
+    .click();
+  await expect(
+    page.getByText("revision-frozen", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Captured section", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("37", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Show all 2 rows" }).click();
+  await expect(
+    page.getByText("Frozen subject 2", { exact: true }),
+  ).toBeVisible();
+  expect(requests).toHaveLength(before);
+  await expect(
+    page.getByText("Prepared for Synthetic client", { exact: false }),
+  ).toBeVisible();
+});

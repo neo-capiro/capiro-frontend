@@ -12,6 +12,10 @@ export function ResearchDashboardView({
 }) {
   return (
     <div className={styles.frame}>
+      <p className={styles.muted}>
+        Prepared for {dashboard.preparedFor.clientName} · As of{" "}
+        {new Date(dashboard.asOf).toLocaleDateString()}
+      </p>
       <DashboardGrid
         layout={dashboard.layout}
         dashboard={dashboard}
