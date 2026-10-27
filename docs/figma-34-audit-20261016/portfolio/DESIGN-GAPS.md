@@ -74,6 +74,8 @@ Nearest current frames: [1064:153351](https://www.figma.com/design/mpXWnySldUFzd
 
 Owner: Core aggregate/read owners + Portfolio frontend/design. Acceptance choices: PF-portfolio-index-2, PF-client-overview-1, S-EMPTY, S-PARTIAL.
 
+**Update 2026-10-27:** the owner supplied the metric definitions, the linkage denominator and the ignore semantics — see [PULSE-AGGREGATE-CONTRACT.md](./PULSE-AGGREGATE-CONTRACT.md). The definition half of this gap is closed. The remaining work is the Core aggregate reads, most of which do not exist yet; the frontend is already correct in leaving unknown metrics unavailable rather than inferring a zero.
+
 ## DG-06 · Billing and conversion uncertainty, unsupported and role states
 
 Nearest current frames: [1064:157451](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-157451), [1064:157714](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-157714), [1064:157835](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-157835), [1064:158215](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-158215), [1064:158361](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-158361), [1064:158477](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-158477), [1064:180498](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-180498), [1064:180749](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio?node-id=1064-180749).
