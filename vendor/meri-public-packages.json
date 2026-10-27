@@ -472,6 +472,36 @@
       "regularEntryCount": 6,
       "status": "producer-verified-pending-Hermes-consumer-binding-review",
       "purpose": "Metadata-only peer compatibility for contracts0.1.22; runtime and declaration bytes unchanged from0.1.8."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.23-28afcb3e-06273b32d299.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.23",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "28afcb3e99dcbd2c31e9068e54cccddc67e97186",
+      "sourceTree": "4708b2810ee85bc13bb1bba99a33d0452e83cc51",
+      "bytes": 1305529,
+      "sha256": "06273b32d299586e6d516e508291ab3f636075890a934ff7400d0ec45ea21deb",
+      "integrity": "sha512-y/OXZbAA0WFa9wNFNvxL1IKigXUAgX0nVG7MA22jwFkosxxF+ndeoIB05hbIP6/Yw9CaD1L0jc3n3J525SkBrA==",
+      "regularEntryCount": 69,
+      "status": "producer-verified-pending-Hermes-consumer-binding-review",
+      "purpose": "Frozen library/history and routine-management public receivers; source reviewed, runtime continuations and consumer acceptance separate.",
+      "independentSourceReview": "Hermes 20261027_205545_d71ea5"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.10-28afcb3e-c9eba20d3918.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.10",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "28afcb3e99dcbd2c31e9068e54cccddc67e97186",
+      "sourceTree": "4708b2810ee85bc13bb1bba99a33d0452e83cc51",
+      "bytes": 3409,
+      "sha256": "c9eba20d3918938b53937030ccaa0837eb680c69a48033c13745dcb193c4730a",
+      "integrity": "sha512-RWB+uBFEESEXhfwagRsDR5lnSnOjSYRZdPAzxLs6juakw/UvfTLU7MBs6K6hALubJdtZPNyfma1lfIA+bHdRSw==",
+      "regularEntryCount": 6,
+      "status": "producer-verified-pending-Hermes-consumer-binding-review",
+      "purpose": "Peer-only compatibility for contracts0.1.23; UI runtime/types unchanged.",
+      "independentSourceReview": "Hermes 20261027_205545_d71ea5"
     }
   ]
 }
