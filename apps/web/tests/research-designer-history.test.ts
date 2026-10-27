@@ -118,6 +118,85 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe("dashboard history announcements", () => {
+  it("preserves the widget and visibly refuses a keyboard move outside the grid", () => {
+    const widget = groups()[0]!;
+    const target = {};
+    (widget.props.onKeyDown as (event: unknown) => void)({
+      key: "ArrowLeft",
+      target,
+      currentTarget: target,
+      preventDefault: vi.fn(),
+    });
+    render();
+    expect(groups()[0]!.props["aria-label"]).toBe(widget.props["aria-label"]);
+    expect(
+      elements(tree)
+        .filter((node) => node.props.role === "alert")
+        .map((node) => text(node)),
+    ).toContain(
+      "That change overlaps a widget or leaves the grid, or the size is too small. Original position kept.",
+    );
+    expect(status()).toBe("Sources cannot move there.");
+  });
+  it("undoes and redoes settings through the same layout history", () => {
+    (groups()[0]!.props.onFocus as () => void)();
+    render();
+    const settings = elements(tree).find(
+      (node) => node.props.widget && node.props.onChange,
+    )!;
+    (settings.props.onChange as (value: unknown) => void)({
+      title: "Selected evidence",
+      subjectIds: [],
+    });
+    render();
+    const current = () =>
+      elements(tree).find((node) => node.props.widget && node.props.onChange)!
+        .props.widget as { settings: unknown };
+    expect(current().settings).toEqual({
+      title: "Selected evidence",
+      subjectIds: [],
+    });
+    shortcut();
+    expect(current().settings).toEqual({});
+    shortcut(true);
+    expect(current().settings).toEqual({
+      title: "Selected evidence",
+      subjectIds: [],
+    });
+  });
+  it("adds a palette drop at the selected grid position and refuses an overlapping drop", () => {
+    const canvas = elements(tree).find(
+      (node) => node.props["aria-label"] === "Dashboard canvas",
+    )!;
+    (canvas.props.ref as { current: unknown }).current = {
+      clientWidth: 1200,
+      getBoundingClientRect: () => ({ left: 0, top: 0 }),
+    };
+    const drop = canvas.props.onDrop as (event: unknown) => void;
+    const event = (clientX: number) => ({
+      clientX,
+      clientY: 12,
+      preventDefault: vi.fn(),
+      dataTransfer: { getData: () => "commentary" },
+    });
+    drop(event(612));
+    render();
+    expect(groups()).toHaveLength(2);
+    expect(status()).toContain("Commentary added: column 7, row 1");
+    shortcut();
+    expect(groups()).toHaveLength(1);
+    const restoredCanvas = elements(tree).find(
+      (node) => node.props["aria-label"] === "Dashboard canvas",
+    )!;
+    (restoredCanvas.props.ref as { current: unknown }).current = {
+      clientWidth: 1200,
+      getBoundingClientRect: () => ({ left: 0, top: 0 }),
+    };
+    (restoredCanvas.props.onDrop as (event: unknown) => void)(event(12));
+    render();
+    expect(groups()).toHaveLength(1);
+    expect(status()).toBe("Widget not added: invalid drop.");
+  });
   it("announces keyboard restoration and redo instead of retaining the removal message", () => {
     const label = groups()[0]!.props["aria-label"];
     remove();

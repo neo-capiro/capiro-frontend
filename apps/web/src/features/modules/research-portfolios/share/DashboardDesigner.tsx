@@ -6,6 +6,7 @@ import {
   useState,
   type KeyboardEvent,
   type PointerEvent,
+  type DragEvent,
 } from "react";
 import type {
   ResearchDashboardLayout,
@@ -16,6 +17,7 @@ import {
   ActionButton,
   Field,
   Panel,
+  SelectInput,
   TextArea,
   TextInput,
 } from "../../../../shared/module-ui";
@@ -31,8 +33,10 @@ import {
   WIDGET_CATALOG,
   widgetDefinition,
 } from "./dashboard-layout";
-import { cellStyle, DashboardGrid } from "./DashboardGrid";
-import { WidgetContent } from "./DashboardWidgets";
+import { cellStyle } from "./DashboardGrid";
+import { ResearchDashboardView } from "./ResearchDashboardView";
+import { WidgetContent, basisKey, basisLabel } from "./DashboardWidgets";
+import { DashboardPreview } from "./DashboardPreview";
 import styles from "./share.module.css";
 
 const ROW_HEIGHT = 56;
@@ -49,6 +53,8 @@ type Drag = {
   startY: number;
   base: ResearchDashboardLayout;
   origin: ResearchDashboardWidget;
+  invalid?: boolean;
+  next?: ResearchDashboardLayout;
 };
 
 /** Undo/redo over whole layouts; drags preview on a draft and commit once on release. */
@@ -104,6 +110,8 @@ export function DashboardDesigner({
   error,
   onSave,
   onCancel,
+  onDraft,
+  snapshots = [],
 }: {
   initialName: string;
   initialLayout: ResearchDashboardLayout;
@@ -113,12 +121,15 @@ export function DashboardDesigner({
   error?: string;
   onSave: (name: string, layout: ResearchDashboardLayout) => void;
   onCancel: () => void;
+  onDraft?: (name: string, layout: ResearchDashboardLayout) => void;
+  snapshots?: readonly { id: string; name: string }[];
 }) {
   const history = useLayoutHistory(initialLayout);
   const [draft, setDraft] = useState<ResearchDashboardLayout>();
   const [name, setName] = useState(initialName);
   const [selected, setSelected] = useState<string>();
   const [mode, setMode] = useState<"arrange" | "preview">("arrange");
+  const [refusal, setRefusal] = useState("");
   /** Read by screen readers after each keyboard or pointer change (FR-16.11). */
   const [announcement, setAnnouncement] = useState({
     message: "",
@@ -149,9 +160,13 @@ export function DashboardDesigner({
   const problems = layoutProblems(layout);
   const selectedWidget = layout.widgets.find((w) => w.id === selected);
   const order = normalizePhoneOrder(layout).phoneOrder;
+  useEffect(() => {
+    onDraft?.(name, history.present);
+  }, [name, history.present, onDraft]);
 
   useEffect(() => {
     const onKey = (event: globalThis.KeyboardEvent) => {
+      if (busy) return;
       if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== "z")
         return;
       const target = event.target as HTMLElement | null;
@@ -161,7 +176,7 @@ export function DashboardDesigner({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [changeHistory]);
+  }, [changeHistory, busy]);
 
   function metrics() {
     const width = canvas.current?.clientWidth ?? 1200;
@@ -192,27 +207,64 @@ export function DashboardDesigner({
     const dx = Math.round((event.clientX - current.startX) / cell);
     const dy = Math.round((event.clientY - current.startY) / row);
     const { origin } = current;
-    setDraft(
+    const next =
       current.mode === "move"
         ? moveWidget(current.base, current.id, origin.x + dx, origin.y + dy)
-        : resizeWidget(current.base, current.id, origin.w + dx, origin.h + dy),
+        : resizeWidget(current.base, current.id, origin.w + dx, origin.h + dy);
+    current.invalid = (dx !== 0 || dy !== 0) && next === current.base;
+    current.next = next;
+    setRefusal(
+      current.invalid
+        ? "That position overlaps a widget or leaves the grid, or the size is too small. Original position kept."
+        : "",
     );
+    setDraft(next);
   }
   function endDrag() {
     const current = drag.current;
     if (!current) return;
     drag.current = null;
-    setDraft((d) => {
-      if (d) {
-        history.commit(d);
-        const moved = d.widgets.find((w) => w.id === current.id);
-        if (moved)
-          announce(
-            describe(moved, current.mode === "move" ? "moved" : "resized"),
-          );
-      }
-      return undefined;
+    setDraft(undefined);
+    if (current.invalid) {
+      announce("Invalid drop refused. Original position kept.");
+    } else if (current.next && current.next !== current.base) {
+      history.commit(current.next);
+      const moved = current.next.widgets.find((w) => w.id === current.id);
+      if (moved)
+        announce(
+          describe(moved, current.mode === "move" ? "moved" : "resized"),
+        );
+    }
+  }
+  function cancelDrag() {
+    drag.current = null;
+    setDraft(undefined);
+    setRefusal("");
+    announce("Drag cancelled. Original position kept.");
+  }
+  function dropWidget(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    const kind = event.dataTransfer.getData("application/x-research-widget");
+    const definition = WIDGET_CATALOG.find((entry) => entry.kind === kind);
+    if (!definition || !canvas.current) return;
+    const rect = canvas.current.getBoundingClientRect();
+    const { cell, row } = metrics();
+    const next = addWidget(history.present, definition.kind, undefined, {
+      x: Math.floor((event.clientX - rect.left - 12) / cell),
+      y: Math.floor((event.clientY - rect.top - 12) / row),
     });
+    if (next === history.present) {
+      setRefusal(
+        "This widget does not fit here. Choose an empty area inside the grid.",
+      );
+      announce("Widget not added: invalid drop.");
+      return;
+    }
+    setRefusal("");
+    history.commit(next);
+    const added = next.widgets.at(-1)!;
+    setSelected(added.id);
+    announce(describe(added, "added"));
   }
   function describe(
     widget: ResearchDashboardWidget,
@@ -260,12 +312,16 @@ export function DashboardDesigner({
         );
     const changed = next.widgets.find((w) => w.id === widget.id);
     if (next === history.present || !changed) {
+      setRefusal(
+        "That change overlaps a widget or leaves the grid, or the size is too small. Original position kept.",
+      );
       announce(
         `${widgetDefinition(widget.kind).label} cannot ${event.shiftKey ? "resize" : "move"} there.`,
       );
       return;
     }
     history.commit(next);
+    setRefusal("");
     announce(describe(changed, event.shiftKey ? "resized" : "moved"));
   }
 
@@ -337,6 +393,7 @@ export function DashboardDesigner({
         </ActionButton>
       </div>
       {error && <p role="alert">{error}</p>}
+      {refusal && <p role="alert">{refusal}</p>}
       <p
         className={styles.srOnly}
         role="status"
@@ -354,7 +411,13 @@ export function DashboardDesigner({
       )}
       {mode === "preview" ? (
         preview ? (
-          <DashboardGrid layout={layout} dashboard={preview} />
+          <DashboardPreview>
+            <ResearchDashboardView
+              dashboard={{ ...preview, layout }}
+              logoUrl={null}
+              preview
+            />
+          </DashboardPreview>
         ) : (
           <p className={styles.hint}>Loading live data for the preview…</p>
         )
@@ -365,6 +428,15 @@ export function DashboardDesigner({
             tabIndex={-1}
             aria-label="Dashboard canvas"
             className={`${styles.canvas} ${styles.grid}`}
+            onDragOver={(event) => {
+              if (
+                event.dataTransfer.types.includes(
+                  "application/x-research-widget",
+                )
+              )
+                event.preventDefault();
+            }}
+            onDrop={dropWidget}
           >
             {layout.widgets.map((widget) => (
               <section
@@ -383,7 +455,7 @@ export function DashboardDesigner({
                   onPointerDown={(e) => startDrag(e, widget, "move")}
                   onPointerMove={onDrag}
                   onPointerUp={endDrag}
-                  onPointerCancel={endDrag}
+                  onPointerCancel={cancelDrag}
                 >
                   <span>{widgetDefinition(widget.kind).label}</span>
                   <span className={styles.muted}>
@@ -406,7 +478,7 @@ export function DashboardDesigner({
                   onPointerDown={(e) => startDrag(e, widget, "resize")}
                   onPointerMove={onDrag}
                   onPointerUp={endDrag}
-                  onPointerCancel={endDrag}
+                  onPointerCancel={cancelDrag}
                 />
               </section>
             ))}
@@ -415,6 +487,8 @@ export function DashboardDesigner({
             {selectedWidget ? (
               <WidgetSettings
                 widget={selectedWidget}
+                dashboard={preview}
+                snapshots={snapshots}
                 onChange={(settings) =>
                   history.commit(
                     setWidgetSettings(
@@ -439,12 +513,23 @@ export function DashboardDesigner({
                     key={definition.kind}
                     type="button"
                     disabled={layout.widgets.length >= 40}
+                    draggable={layout.widgets.length < 40}
+                    onDragStart={(event) => {
+                      event.dataTransfer.setData(
+                        "application/x-research-widget",
+                        definition.kind,
+                      );
+                      event.dataTransfer.effectAllowed = "copy";
+                    }}
                     onClick={() => {
                       const next = addWidget(history.present, definition.kind);
                       history.commit(next);
                       const added = next.widgets.at(-1);
-                      if (added && next !== history.present)
+                      if (added && next !== history.present) {
+                        setRefusal("");
                         announce(describe(added, "added"));
+                      } else
+                        setRefusal("This widget does not fit in the grid.");
                     }}
                   >
                     {definition.label}
@@ -454,9 +539,9 @@ export function DashboardDesigner({
               </div>
             </div>
             <div>
-              <h3 className={styles.widgetLabel}>Phone order</h3>
+              <h3 className={styles.widgetLabel}>Tablet and phone order</h3>
               <p className={styles.hint}>
-                On a phone the widgets stack in this order.
+                On a tablet or phone the widgets stack in this saved order.
               </p>
               <ol className={styles.orderList}>
                 {order.map((id, index) => {
@@ -509,14 +594,39 @@ export function DashboardDesigner({
 
 function WidgetSettings({
   widget,
+  dashboard,
+  snapshots,
   onChange,
   onRemove,
 }: {
   widget: ResearchDashboardWidget;
+  dashboard?: ResearchShareDashboard;
+  snapshots: readonly { id: string; name: string }[];
   onChange: (settings: Record<string, unknown>) => void;
   onRemove: () => void;
 }) {
   const definition = widgetDefinition(widget.kind);
+  const financial = [
+    "key_totals",
+    "funding_table",
+    "sources",
+    "snapshot_comparison",
+  ].includes(widget.kind);
+  const subjects = ["funding_table", "subjects", "sources"].includes(
+    widget.kind,
+  );
+  const update = (key: string, value: unknown) => {
+    const settings = { ...widget.settings };
+    if (value === undefined) delete settings[key];
+    else settings[key] = value;
+    onChange(settings);
+  };
+  const totals = dashboard?.data.totals ?? [];
+  const bases = [
+    ...new Map(
+      totals.map((total) => [basisKey(total.basis), total.basis]),
+    ).entries(),
+  ];
   const set = (key: string, value: string) =>
     onChange({
       ...widget.settings,
@@ -529,7 +639,140 @@ function WidgetSettings({
     <div className={styles.form}>
       <h3 className={styles.widgetLabel}>{definition.label}</h3>
       <p className={styles.hint}>{definition.description}</p>
-      {definition.settings.map((setting) => {
+      {financial && (
+        <>
+          <Field label="Fiscal year" htmlFor={`fy-${widget.id}`}>
+            <SelectInput
+              id={`fy-${widget.id}`}
+              value={String(widget.settings.fundingFiscalYear ?? "all")}
+              onValueChange={(value) =>
+                update(
+                  "fundingFiscalYear",
+                  value === "all" ? undefined : Number(value),
+                )
+              }
+              options={[
+                { value: "all", label: "All available years" },
+                ...[
+                  ...new Set(
+                    totals.map((total) => total.basis.fundingFiscalYear),
+                  ),
+                ].map((year) => ({ value: String(year), label: `FY${year}` })),
+              ]}
+            />
+          </Field>
+          <Field label="Financial basis" htmlFor={`basis-${widget.id}`}>
+            <SelectInput
+              id={`basis-${widget.id}`}
+              value={
+                typeof widget.settings.basisKey === "string"
+                  ? widget.settings.basisKey
+                  : "all"
+              }
+              onValueChange={(value) =>
+                update("basisKey", value === "all" ? undefined : value)
+              }
+              options={[
+                { value: "all", label: "All compatible bases, separately" },
+                ...bases.map(([value, basis]) => ({
+                  value,
+                  label: basisLabel(basis),
+                })),
+              ]}
+            />
+          </Field>
+        </>
+      )}
+      {subjects && (
+        <fieldset>
+          <legend>Included subjects</legend>
+          <label className={styles.check}>
+            <input
+              type="checkbox"
+              checked={!Array.isArray(widget.settings.subjectIds)}
+              onChange={(event) =>
+                update("subjectIds", event.target.checked ? undefined : [])
+              }
+            />
+            All included subjects
+          </label>
+          {dashboard?.data.subjects
+            .filter((subject) => subject.disposition === "included")
+            .map((subject) => {
+              const selected = Array.isArray(widget.settings.subjectIds)
+                ? widget.settings.subjectIds
+                : undefined;
+              return (
+                <label key={subject.id} className={styles.check}>
+                  <input
+                    type="checkbox"
+                    checked={!selected || selected.includes(subject.id)}
+                    onChange={(event) => {
+                      const ids =
+                        selected ??
+                        dashboard.data.subjects
+                          .filter((item) => item.disposition === "included")
+                          .map((item) => item.id);
+                      update(
+                        "subjectIds",
+                        event.target.checked
+                          ? [...new Set([...ids, subject.id])]
+                          : ids.filter((id) => id !== subject.id),
+                      );
+                    }}
+                  />
+                  {subject.label ?? subject.targetId}
+                </label>
+              );
+            })}
+          {Array.isArray(widget.settings.subjectIds) &&
+            widget.settings.subjectIds.length === 0 && (
+              <p>No subjects selected. This widget will show an empty state.</p>
+            )}
+        </fieldset>
+      )}
+      {widget.kind === "funding_table" && (
+        <label className={styles.check}>
+          <input
+            type="checkbox"
+            checked={widget.settings.showSources !== false}
+            onChange={(event) => update("showSources", event.target.checked)}
+          />
+          Show source column
+        </label>
+      )}
+      {widget.kind === "snapshot_comparison" && (
+        <Field label="Earlier snapshot" htmlFor={`comparison-${widget.id}`}>
+          <SelectInput
+            id={`comparison-${widget.id}`}
+            value={
+              typeof widget.settings.snapshotId === "string"
+                ? widget.settings.snapshotId
+                : "previous"
+            }
+            onValueChange={(value) =>
+              update("snapshotId", value === "previous" ? undefined : value)
+            }
+            options={[
+              { value: "previous", label: "Previous eligible snapshot" },
+              ...snapshots.map((snapshot) => ({
+                value: snapshot.id,
+                label: snapshot.name,
+              })),
+            ]}
+          />
+          <p className={styles.hint}>
+            Must be earlier than the snapshot chosen when publishing.
+          </p>
+        </Field>
+      )}
+      {(definition.settings.some((setting) => setting.key === "title")
+        ? definition.settings
+        : [
+            { key: "title", label: "Title", input: "text" as const },
+            ...definition.settings,
+          ]
+      ).map((setting) => {
         const id = `widget-${widget.id}-${setting.key}`;
         const value = widget.settings[setting.key];
         const current = value == null ? "" : String(value);

@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCapiro } from "../../../../shared/capiro/CapiroBoundary";
 import type { ResearchDetail } from "../../../../shared/capiro/operations/research-schemas";
 import type {
   ResearchDashboardDesign,
-  ResearchDashboardLayout,
   ResearchShareLink,
 } from "../../../../shared/capiro/operations/research-share-schemas";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
@@ -19,10 +19,9 @@ import {
   StatusPanel,
   TextInput,
 } from "../../../../shared/module-ui";
-import { defaultLayout } from "./dashboard-layout";
-import { DashboardDesigner } from "./DashboardDesigner";
+import { reusableLayout } from "./dashboard-layout";
+import { DesignEditor } from "./DesignEditor";
 import { PublishShareDialog } from "./PublishShareDialog";
-import { buildPreviewDashboard } from "./preview-dashboard";
 import styles from "./share.module.css";
 
 const PIN_RULE = /^[0-9]{6,12}$/;
@@ -76,20 +75,105 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
   const settings = useCapiroQuery("research.sharing", { params });
   const designs = useCapiroQuery("research.designs", { params });
   const links = useCapiroQuery("research.shareLinks", { params });
-  const [editing, setEditing] = useState<{
-    design?: ResearchDashboardDesign;
-  } | null>(null);
-  if (editing)
-    return (
-      <DesignEditor
-        portfolio={portfolio}
-        design={editing.design}
-        onDone={() => {
-          setEditing(null);
-          designs.reload();
-        }}
-      />
+  const router = useRouter();
+  const pathname = usePathname();
+  const search = useSearchParams();
+  const editing =
+    search.get("dashboardPortfolio") === portfolio.id
+      ? search.get("dashboardDesign")
+      : null;
+  const clientId =
+    search.get("dashboardClient") ?? portfolio.clientLinks[0]?.clientId ?? "";
+  const copyId = search.get("dashboardCopy");
+  const sourceId = search.get("dashboardSource");
+  function open(
+    designId?: string,
+    copy?: ResearchDashboardDesign,
+    sourcePortfolioId = portfolio.id,
+  ) {
+    const next = new URLSearchParams(search.toString());
+    [
+      "dashboardDesign",
+      "dashboardCopy",
+      "dashboardSource",
+      "dashboardPortfolio",
+    ].forEach((key) => next.delete(key));
+    if (designId) {
+      next.set("dashboardDesign", designId);
+      next.set("dashboardPortfolio", portfolio.id);
+    }
+    if (copy) {
+      next.set("dashboardCopy", copy.id);
+      next.set("dashboardSource", sourcePortfolioId);
+    }
+    router.replace(`${pathname}?${next}`, { scroll: false });
+  }
+  const done = () => {
+    open();
+    designs.reload();
+  };
+  const canEdit =
+    portfolio.lifecycle === "active" && portfolio.myRole !== "viewer";
+  if (editing && canEdit) {
+    if (designs.loading || designs.error || !designs.data)
+      return (
+        <StatusPanel
+          loading={designs.loading}
+          error={designs.error}
+          onRetry={designs.reload}
+        />
+      );
+    const design = designs.data.find(
+      (item) => item.id === editing && item.portfolioId === portfolio.id,
     );
+    if (editing !== "new" && !design)
+      return (
+        <Panel title="Design unavailable">
+          <p>The current portfolio does not contain this design.</p>
+          <ActionButton onClick={done}>Back to saved designs</ActionButton>
+        </Panel>
+      );
+    return (
+      <div className={styles.stack}>
+        <Field label="Preview as client" htmlFor="design-preview-client">
+          <SelectInput
+            id="design-preview-client"
+            value={clientId || "none"}
+            onValueChange={(value) => {
+              const next = new URLSearchParams(search.toString());
+              next.set("dashboardClient", value === "none" ? "" : value);
+              router.replace(`${pathname}?${next}`, { scroll: false });
+            }}
+            options={
+              portfolio.clientLinks.length
+                ? portfolio.clientLinks.map((client) => ({
+                    value: client.clientId,
+                    label: client.clientName,
+                  }))
+                : [{ value: "none", label: "No linked client" }]
+            }
+          />
+        </Field>
+        {copyId && sourceId ? (
+          <CopiedDesignEditor
+            key={JSON.stringify([portfolio.id, sourceId, copyId, clientId])}
+            portfolio={portfolio}
+            sourceId={sourceId}
+            copyId={copyId}
+            clientId={clientId}
+            onDone={done}
+          />
+        ) : (
+          <DesignEditor
+            portfolio={portfolio}
+            design={design}
+            clientId={clientId}
+            onDone={done}
+          />
+        )}
+      </div>
+    );
+  }
   return (
     <div className={styles.stack}>
       <StatusPanel
@@ -115,8 +199,8 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
         title="Dashboard designs"
         description="Arrange what a recipient sees. Each published link freezes the design version it was published with."
         actions={
-          portfolio.myRole !== "viewer" && (
-            <ActionButton primary onClick={() => setEditing({})}>
+          canEdit && (
+            <ActionButton primary onClick={() => open("new")}>
               New design
             </ActionButton>
           )
@@ -149,16 +233,26 @@ export function ResearchSharing({ portfolio }: { portfolio: ResearchDetail }) {
                 key: "actions",
                 label: "Actions",
                 render: (d) =>
-                  portfolio.myRole === "viewer" ? null : (
-                    <ActionButton onClick={() => setEditing({ design: d })}>
-                      Edit
-                    </ActionButton>
+                  !canEdit ? null : (
+                    <div className={styles.inline}>
+                      <ActionButton onClick={() => open(d.id)}>
+                        Edit
+                      </ActionButton>
+                      <ActionButton onClick={() => open("new", d)}>
+                        Duplicate
+                      </ActionButton>
+                    </div>
                   ),
               },
             ]}
           />
         </StatusPanel>
       </Panel>
+      {canEdit && (
+        <ReuseDesign
+          onChoose={(design, sourceId) => open("new", design, sourceId)}
+        />
+      )}
       <ShareLinks
         portfolio={portfolio}
         enabled={settings.data?.enabled ?? false}
@@ -324,78 +418,148 @@ function SharingSettings({
   );
 }
 
-function DesignEditor({
+function CopiedDesignEditor({
   portfolio,
-  design,
+  sourceId,
+  copyId,
+  clientId,
   onDone,
 }: {
   portfolio: ResearchDetail;
-  design?: ResearchDashboardDesign;
+  sourceId: string;
+  copyId: string;
+  clientId: string;
   onDone: () => void;
 }) {
-  const api = useCapiro();
-  const action = useAction(onDone);
-  const params = { id: portfolio.id };
-  const [previewClient, setPreviewClient] = useState(
-    portfolio.clientLinks[0]?.clientId ?? "",
-  );
-  const analytics = useCapiroQuery("research.analytics", { params });
-  const fit = useCapiroQuery("research.fit", { params });
-  const changes = useCapiroQuery("research.changes", {
-    params,
-    query: { limit: 25 },
+  const source = useCapiroQuery("research.designs", {
+    params: { id: sourceId },
   });
-  const preview = analytics.data
-    ? buildPreviewDashboard(
-        {
-          portfolio,
-          clientId: previewClient,
-          branding: true,
-          analytics: analytics.data,
-          fit: fit.data,
-          changes: changes.data?.items,
-        },
-        design?.layout ?? defaultLayout(),
-      )
-    : undefined;
+  const design = source.data?.find(
+    (item) => item.id === copyId && item.portfolioId === sourceId,
+  );
+  if (source.loading || source.error || !design)
+    return (
+      <div>
+        <StatusPanel
+          loading={source.loading}
+          error={
+            source.error ??
+            (!source.loading
+              ? "The source design is no longer available to this account."
+              : undefined)
+          }
+          onRetry={source.reload}
+        />
+        <ActionButton onClick={onDone}>Back to saved designs</ActionButton>
+      </div>
+    );
   return (
-    <div className={styles.stack}>
-      {portfolio.clientLinks.length > 1 && (
+    <DesignEditor
+      portfolio={portfolio}
+      clientId={clientId}
+      seed={{
+        name: `${design.name.slice(0, 190)} (copy)`,
+        layout: reusableLayout(design.layout, sourceId === portfolio.id),
+        sourceId,
+        designId: design.id,
+        version: design.version,
+      }}
+      onDone={onDone}
+    />
+  );
+}
+
+function ReuseDesign({
+  onChoose,
+}: {
+  onChoose: (design: ResearchDashboardDesign, sourceId: string) => void;
+}) {
+  const [cursor, setCursor] = useState<string>();
+  const [sourceId, setSourceId] = useState("");
+  const portfolios = useCapiroQuery("research.list", {
+    query: { limit: 50, cursor },
+  });
+  const designs = useCapiroQuery(
+    "research.designs",
+    { params: { id: sourceId } },
+    { enabled: Boolean(sourceId) },
+  );
+  return (
+    <Panel
+      title="Reuse a design"
+      description="Choose a portfolio you can read. A copy keeps the layout; another portfolio's snapshot, subjects and financial selections are cleared and must be chosen again. The recipient's data is bound when publishing."
+    >
+      <StatusPanel
+        loading={portfolios.loading}
+        error={portfolios.error}
+        onRetry={portfolios.reload}
+      >
+        <SelectInput
+          aria-label="Source portfolio"
+          value={sourceId || "none"}
+          onValueChange={(id) => setSourceId(id === "none" ? "" : id)}
+          options={[
+            { value: "none", label: "Choose source portfolio" },
+            ...(portfolios.data?.items ?? []).map((item) => ({
+              value: item.id,
+              label: item.name,
+            })),
+          ]}
+        />
         <div className={styles.inline}>
-          <span className={styles.hint}>Preview as</span>
-          <SelectInput
-            aria-label="Preview as client"
-            value={previewClient}
-            onValueChange={setPreviewClient}
-            options={portfolio.clientLinks.map((c) => ({
-              value: c.clientId,
-              label: c.clientName,
-            }))}
-          />
+          <ActionButton
+            disabled={!cursor}
+            onClick={() => {
+              setCursor(undefined);
+              setSourceId("");
+            }}
+          >
+            First page
+          </ActionButton>
+          <ActionButton
+            disabled={!portfolios.data?.nextCursor}
+            onClick={() => {
+              setCursor(portfolios.data?.nextCursor ?? undefined);
+              setSourceId("");
+            }}
+          >
+            Next page
+          </ActionButton>
         </div>
+      </StatusPanel>
+      {sourceId && (
+        <StatusPanel
+          loading={designs.loading}
+          error={designs.error}
+          onRetry={designs.reload}
+        >
+          <DataTable
+            rows={(designs.data ?? []).filter(
+              (design) => design.portfolioId === sourceId,
+            )}
+            rowKey={(design) => design.id}
+            caption="Designs available to reuse"
+            emptyMessage="No designs available in this portfolio."
+            columns={[
+              {
+                key: "name",
+                label: "Design",
+                render: (design) => `${design.name} v${design.version}`,
+              },
+              {
+                key: "copy",
+                label: "Action",
+                render: (design) => (
+                  <ActionButton onClick={() => onChoose(design, sourceId)}>
+                    Use a copy
+                  </ActionButton>
+                ),
+              },
+            ]}
+          />
+        </StatusPanel>
       )}
-      <DashboardDesigner
-        initialName={design?.name ?? ""}
-        initialLayout={design?.layout ?? defaultLayout()}
-        preview={preview}
-        busy={action.busy}
-        error={action.error}
-        onCancel={onDone}
-        onSave={(name, layout: ResearchDashboardLayout) =>
-          action.run(() =>
-            design
-              ? api.request("research.designs.update", {
-                  params: { id: portfolio.id, designId: design.id },
-                  body: { name, layout, expectedVersion: design.version },
-                })
-              : api.request("research.designs.create", {
-                  params,
-                  body: { name, layout },
-                }),
-          )
-        }
-      />
-    </div>
+    </Panel>
   );
 }
 

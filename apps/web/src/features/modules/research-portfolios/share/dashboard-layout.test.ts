@@ -32,40 +32,44 @@ describe("client dashboard layout", () => {
     expect(addWidget(layout, "sources", "a")).toBe(layout);
   });
 
-  it("drops a moved widget on the first free row instead of overlapping", () => {
+  it("refuses invalid drops and leaves the original position unchanged", () => {
     const layout = addWidget(
       addWidget(emptyLayout(), "key_totals", "a"),
       "client_fit",
       "b",
     );
-    const moved = moveWidget(layout, "b", 0, 0);
-    expect(moved.widgets.find((w) => w.id === "b")).toMatchObject({
-      x: 0,
-      y: 3,
-    });
+    expect(moveWidget(layout, "b", 0, 0)).toBe(layout);
     const beside = moveWidget(layout, "b", 6, 0);
     expect(beside.widgets.find((w) => w.id === "b")).toMatchObject({
       x: 6,
       y: 0,
     });
-    expect(
-      moveWidget(layout, "b", 40, 0).widgets.find((w) => w.id === "b")?.x,
-    ).toBe(6);
+    for (const [x, y] of [
+      [40, 0],
+      [-1, 0],
+      [0, -1],
+      [0, 200],
+      [NaN, 0],
+    ])
+      expect(moveWidget(layout, "b", x!, y!)).toBe(layout);
     expect(moveWidget(layout, "missing", 0, 0)).toBe(layout);
   });
 
-  it("clamps resizes to the widget minimum and the grid, and refuses overlaps", () => {
+  it("accepts valid resizes and refuses minimum, grid and overlap violations", () => {
     const layout = moveWidget(
       addWidget(addWidget(emptyLayout(), "key_totals", "a"), "client_fit", "b"),
       "b",
       6,
       0,
     );
-    expect(resizeWidget(layout, "a", 1, 1).widgets[0]).toMatchObject({
+    expect(resizeWidget(layout, "a", 3, 2).widgets[0]).toMatchObject({
       w: 3,
       h: 2,
     });
-    expect(resizeWidget(layout, "b", 99, 3).widgets[1]).toMatchObject({ w: 6 });
+    expect(resizeWidget(layout, "a", 1, 1)).toBe(layout);
+    expect(resizeWidget(layout, "b", 99, 3)).toBe(layout);
+    expect(resizeWidget(layout, "b", 6, 201)).toBe(layout);
+    expect(resizeWidget(layout, "b", NaN, 3)).toBe(layout);
     expect(resizeWidget(layout, "a", 8, 3)).toBe(layout);
   });
 

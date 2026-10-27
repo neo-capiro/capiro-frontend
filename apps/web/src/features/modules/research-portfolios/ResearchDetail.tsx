@@ -99,6 +99,7 @@ export function ResearchPortfolioDetail({
         }
       />
       <Tabs
+        wrap
         items={researchPortfolioTabs}
         value={view}
         onChange={(nextView) => onView(readResearchPortfolioView(nextView))}

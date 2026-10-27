@@ -1,5 +1,6 @@
 /* Client dashboard: grid, widgets, designer and recipient page. */
-.grid {
+.grid,
+.recipientGrid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-auto-rows: 56px;
@@ -19,12 +20,23 @@
   border-radius: 12px;
   box-shadow: 0 1px 2px #0c0a090d;
 }
-@media (max-width: 760px) {
-  .grid {
+.dashboardViewport {
+  container-type: inline-size;
+  min-width: 0;
+}
+.previewScroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.previewWidth {
+  flex-shrink: 0;
+}
+@container (max-width: 900px) {
+  .recipientGrid {
     display: flex;
     flex-direction: column;
   }
-  .cell {
+  .recipientGrid > .cell {
     order: var(--order);
     overflow: visible;
   }
