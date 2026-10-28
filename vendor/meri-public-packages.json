@@ -562,6 +562,36 @@
       "status": "producer-verified-pending-independent-consumer-binding",
       "purpose": "Peer-only compatibility for contracts0.1.25; UI runtime/types unchanged.",
       "independentSourceReview": "Hermes bounded union PASS 2026-10-28; outputs/WAVE5-BILL-USAGE-COHORT-HERMES-REVIEW.txt"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.26-43333f63-779d8121169b.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.26",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "43333f6309e3734986ce969ab15ebe64504597b7",
+      "sourceTree": "fe32adf212bfd5d1cb6fea686a49a192046ad887",
+      "bytes": 1420961,
+      "sha256": "779d8121169b05db378d3bf38e9d6a5d907e0ba3a6aa7e70f9c2977b45a6c051",
+      "integrity": "sha512-//0LwMNUswCj3zRRIuwOFBm2L3y1atj6x86oTAqaXNtRpL0NJPJpKgzrxn+aAT8vW2nFjkK6R7116b77I3IHSg==",
+      "regularEntryCount": 74,
+      "status": "qualified-immutable-producer-pending-consumer-binding",
+      "purpose": "Reviewed upload receiving, metadata-only upload evidence, procedure and eligible selected-report input; intermediate source cohort, native/deployed acceptance separate.",
+      "independentSourceReview": "Hermes bounded union PASS 2026-10-28; outputs/WAVE5-UPLOAD-SELECTED-PACKAGE-COHORT-HERMES-REVIEW.txt"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.13-43333f63-aa021fa52899.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.13",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "43333f6309e3734986ce969ab15ebe64504597b7",
+      "sourceTree": "fe32adf212bfd5d1cb6fea686a49a192046ad887",
+      "bytes": 3661,
+      "sha256": "aa021fa528999a2601afa1441477cb65076155bd4741b94e02e1171e2309a3b6",
+      "integrity": "sha512-gDfoH23CUtjQXvPQY0eIp6zMIQPP5eOebztpV3R8ZTU1TxERPW2XzGXHb17i+2vyfTAlEZ2W8FtTStZxcnhESg==",
+      "regularEntryCount": 6,
+      "status": "qualified-immutable-producer-pending-consumer-binding",
+      "purpose": "Peer-only compatibility for contracts0.1.26; UI runtime/types unchanged.",
+      "independentSourceReview": "Hermes bounded union PASS 2026-10-28; outputs/WAVE5-UPLOAD-SELECTED-PACKAGE-COHORT-HERMES-REVIEW.txt"
     }
   ]
 }

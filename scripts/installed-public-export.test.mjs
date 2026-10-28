@@ -10,7 +10,7 @@ import {
 for (const name of ["intents", "user-preferences", "document-access"]) {
   test(`${name} SDK exports the actual installed canonical receiver`, async () => {
     const checked = checkInstalledPublicExport(name, `${name}-application`);
-    assert.equal(checked.packageVersion, "0.1.25");
+    assert.equal(checked.packageVersion, "0.1.26");
     assert.equal(
       checked.contractVersion,
       name === "document-access" ? "0.2.0" : "0.1.0",
