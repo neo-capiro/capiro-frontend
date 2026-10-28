@@ -1,4 +1,5 @@
 import {
+  USER_PREFERENCE_DEFAULTS,
   receiveUserPreferencesRequest,
   receiveUserPreferencesResponse,
   type UserPreferences,
@@ -242,6 +243,17 @@ export class UserPreferencesController {
       document,
       message:
         "Using the reviewed current saved preferences. The previous draft has not been reapplied.",
+    });
+  }
+  async resetPersonalDefaults() {
+    if (this.view.status !== "ready" || !this.view.document) return;
+    const { defaultModel, theme, density, timezone } = USER_PREFERENCE_DEFAULTS;
+    await this.save({
+      ...this.view.document.preferences,
+      defaultModel,
+      theme,
+      density,
+      timezone,
     });
   }
   async save(preferences: UserPreferences) {
