@@ -5737,10 +5737,10 @@
     "file": "apps/web/src/features/meri/conversation/intents/client-record-view.ts",
     "kind": "function",
     "symbol": "clientRecordRow",
-    "fingerprint": "a05f59941a309368517df42eac861e926890afcdaf032fb80b75d2f6fc94ee1d",
-    "reason": "One pure client-record outcome projection preserves explicit empty updates, child row errors, partial outcomes and the limits of non-atomic version checking. Independent decision: work/hermes-review/mail-client-review/FRONTEND-REVIEW.txt.",
-    "reviewedBy": "Hermes independent frontend reviewer",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "537908d710d606bd2fdc8e9ce60c002d1cb9448bd72509b38dcc56cbc9bd45a5",
+    "reason": "One pure client-record outcome projection. This change only appends the owner's two bounded informational readings (duplicate, capacity) to each existing row; it still preserves explicit empty updates, child row errors, partial outcomes, the non-atomic update limit, withheld/current-access silence and the immutable proposal fields, and it derives identity, approvability and expiry from the admitted proposal and viewer without adding authority, a reservation, a retry or any dispatch. Independent decision: outputs/WAVE5-PROFILE-PREFLIGHT-FE-HERMES-REVIEW.txt.",
+    "reviewedBy": "Hermes Agent source review 20261028_053505_17da33",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/conversation/intents/legislative-document-view.ts",
@@ -6299,19 +6299,19 @@
     "file": "apps/web/src/features/meri/conversation/ConversationView.tsx",
     "kind": "function",
     "symbol": "SessionComposer",
-    "fingerprint": "2147aedf8c872b47481b86631c51e2f034810a24e7b4c161d5995906fa6d1e3e",
-    "reason": "Composer shell for one conversation, extended with the attachment slot. The slot binds to the same ready port that already gates the handoff and revision drafts and only subscribes to the session upload access; it adds no publication path, run or authority owner.",
-    "reviewedBy": "Hermes session 20261028_042649_c62845 (configured-default Hermes, independent reviewer)",
+    "fingerprint": "982bf8ae97b259af2aa572cfa26ff247d61a282b44f3f7f5dd10eb4c76168dee",
+    "reason": "Composer shell for one conversation. It subscribes to the published controls, computes the one disabled predicate and lays the control row (client handoff, document revision, skill, Start Work / Delegate, and now the native procedure control) into MeriComposer. The added procedure control is mounted under the same ready gate as its siblings, is keyed by the account/client/session lifetime with a namespaced key, and writes through the existing selected-input channel, so it adds no publication path, run, authority owner, catalog store or second model loop. The size still comes from the pre-existing model slot and its recovery states, which belong to the same shell responsibility.",
+    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
     "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/conversation/SkillSelectionPicker.tsx",
     "kind": "function",
     "symbol": "SkillSelectionPicker",
-    "fingerprint": "f8f3feb68ef06106cdda9fe4cf8d2076dab72c6f9c5f3f307c2e0dca3112da26",
-    "reason": "Skill plus time-window-basis picker. Its size comes from the enumerated window-basis form variants rendered inline; all variants serve the one responsibility of selecting a skill and its evidence window.",
-    "reviewedBy": "Hermes Agent architecture lane 3",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "74597d3ac78d69e3fa11092393acda7b079fac99a85fa2337d9e5dd86c9ede69",
+    "reason": "Skill plus time-window-basis picker. Its size is pre-existing and comes from the enumerated window-basis form variants rendered inline; all variants serve the one responsibility of selecting a skill and its evidence window. This change only makes that selection additive within the same responsibility: clearing a skill keeps an applied work definition, and applying a skill keeps it, instead of replacing the whole selected input.",
+    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/conversation/feedback/FeedbackFields.tsx",
@@ -7259,6 +7259,33 @@
     "fingerprint": "9db2dd1e2627bed3c1327fac4dd05c76c3c9734e75aa6e62878ad9a7d8cfbafb",
     "reason": "reviewed-accept - NEW trigger, not a second forwarder. This is the existing inline deadline callback of the same single proxyDocumentRequest (`withActionDeadline([request.signal], async (signal) => ...)`); it was under the 80-line function threshold at base and crossed it with the additive results admission branch and its bounded-read selection. It shares the enclosing owner's config, request, route, fetcher, native-token/session gates, error path and signal, and it owns nothing of its own: no client, no state, no authority, no route vocabulary beyond the enclosing fixed set. The design assessment is the proxyDocumentRequest record above; this record exists only because the canonical scanner measures the nested body separately and the trigger must not be left unreviewed. Extracting the callback would move routing/config/fetcher/signal handling behind a hand-passed parameter list inside one forwarding owner without reducing coupling.",
     "reviewedBy": "Hermes Agent independent frontend source/design review (session 20261028_075000_8b6a19)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/work/WorkSelectionPicker.tsx",
+    "kind": "function",
+    "symbol": "WorkSelectionPicker",
+    "fingerprint": "49f9823120e92f54c63bcb15ec5d4d4209d00a156713bd044a919d3176f12039",
+    "reason": "New Start Work / Delegate control mounted by the real SessionComposer. One responsibility: choose the closed work definition {entry, jobKind, deliverables[], dependencies[]} for the next message and retain it on the unsent draft. It owns only local form state, local validation mirroring the canonical bounds, and apply/remove; every admission is delegated to the canonical public receiver and the control holds no request, store, runner, scheduled occurrence, budget, tool or approval authority. The 187 nonblank lines are the inline form and its own validation rules, which should not be separated from the form they constrain.",
+    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/ProcedureSelectionPicker.tsx",
+    "kind": "function",
+    "symbol": "ProcedureSelectionPicker",
+    "fingerprint": "d06d530c57e04f622b5d9ac513932a1cabbbc30f6e936001d6402836a37a31b5",
+    "reason": "New native procedure control mounted by the real SessionComposer. One responsibility: list what Core currently offers this account and tenant (the six canonical built-ins plus the eligible firm procedures) with Core's own label, purpose and scopes, and retain the exact closed selector {source, id or recordId, version, manifestDigest} on the unsent draft. It owns only the lifetime-keyed read through the existing useCurrentRead owner, the closed catalog receiver, the display of the applied selector, the retirement notice when a chosen procedure stops being listed exactly, and a refresh that is always a fresh read. It holds no request, store, run, occurrence, budget, tool or approval authority; admission is delegated to the canonical submit receiver, and Core re-resolves the exact procedure, version, digest and client access when the message is sent. The 186 nonblank lines are the inline form, the option groups and the closed-reader and retirement states, which should not be separated from the control they constrain.",
+    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/meri-conversations/query-journal.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "06edd952b0f3ee911d942a29676d62509080e3e8e8d5dd18bfac37180442c22c",
+    "reason": "Shared conversation draft and journal module. The file-level size is the accumulated public shape of one responsibility: the selected-input shell (skill, window request, document revision, work, and now the native procedure), the canonical-JSON submission identity, the stored echo that a recovered or uncertain message re-sends unchanged, and the retained-intent snapshot. This change adds the procedure member to the selection and draft shapes, copies and freezes it, admits it in the closed field set of the selection receiver, re-sends it unchanged from the stored submission, and adds withProcedureSelection, which resolves the canonical mutual exclusion between the static quick-skill pin and the native procedure through the receiver instead of restating eligibility. Every admission still belongs to the one canonical receiver; no authority, store, run or second owner was added. A size-based split would separate the shape from the identity and replay rules that constrain it.",
+    "reviewedBy": "Hermes independent source review session 20261028_071126_e8a975 (configured-default Hermes)",
     "reviewedOn": "2026-10-28"
   }
 ]
