@@ -1,5 +1,12 @@
 /* Figma 3.4 09 · Settings pages (09.01–09.07): navigation, two content columns and preference cards. */
-/* The two-column card can be narrow before the shared table's phone breakpoint. */
+/* The two-column card can be narrow before the shared table's phone breakpoint.
+   The Panel lays its children out from flex-start, so the wrapper sizes itself to
+   the table's own 640px and the shared frame can never scroll: the table is pushed
+   over the neighbouring card instead. Capping the wrapper at the card width lets the
+   frame scroll the table inside the card; at cards wider than 640px nothing changes. */
+.connectionsTable {
+  max-width: 100%;
+}
 .connectionsTable > div {
   overflow-x: auto;
 }
