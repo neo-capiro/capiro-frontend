@@ -50,7 +50,10 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   ),
   integrations: () => <IntegrationSettings />,
   memory: (context) => (
-    <MemorySettings reviewEnabled={context.memoryReviewEnabled} />
+    <MemorySettings
+      reviewEnabled={context.memoryReviewEnabled}
+      readOnlyPreview={context.readOnlyPreview}
+    />
   ),
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,

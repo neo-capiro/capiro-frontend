@@ -2,6 +2,7 @@ import type { CapiroApi } from "../../shared/capiro/http";
 import type { capiroOperations } from "../../shared/capiro/registry";
 import type { SettingsWrite } from "./security-writes";
 import { settingsRequestHash } from "./security-write-journal";
+import { reconcileMemoryGrant } from "./memory/grant-reconciliation";
 type Api = CapiroApi<typeof capiroOperations>;
 const row = (value: unknown): Record<string, unknown> =>
   value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -15,6 +16,9 @@ export async function reconcileSettingsWrite(
   signal.throwIfAborted();
   const { params = {}, body = {} } = write.input;
   switch (write.operation) {
+    case "settings.memory.grants.create":
+    case "settings.memory.grants.revoke":
+      return reconcileMemoryGrant(api, write, signal);
     case "settings.support.create": {
       if (
         !write.expectedAccount ||
@@ -319,6 +323,8 @@ export async function reconcileSettingsWrite(
 
 export const settingsWriteNeedsReadback = (operation: string) =>
   [
+    "settings.memory.grants.create",
+    "settings.memory.grants.revoke",
     "me.emailSignature.update",
     "settings.team.remove",
     "settings.team.resend",

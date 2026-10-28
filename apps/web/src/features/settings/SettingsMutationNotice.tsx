@@ -2,6 +2,8 @@
 import { SettingsButton, SettingsNotice } from "./components";
 import type { SettingsWrite } from "./security-writes";
 const labels: Record<string, string> = {
+  "settings.memory.grants.create": "Memory grant creation",
+  "settings.memory.grants.revoke": "Memory grant revocation",
   "settings.support.create": "Support report",
   "settings.branding.update": "Company name change",
   "me.update": "Personal title change",
