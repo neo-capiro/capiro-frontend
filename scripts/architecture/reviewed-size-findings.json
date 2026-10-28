@@ -6909,5 +6909,14 @@
     "reason": "One read/publish port for artifact previews. Each explicit action re-admits source bytes through the canonical inspect receiver, refuses native or unsupported formats before dispatch, maps refusals to canonical outcomes (uncertain writes carry no disposition) and counts in-flight work for the existing session budget; read and explicit publication remain separate routes.",
     "reviewedBy": "Hermes Agent source review 20261027_230644_3451cb",
     "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/LegacyReportLibrary.tsx",
+    "kind": "function",
+    "symbol": "LegacyReportLibrary",
+    "fingerprint": "6d30835092219fa9686d13e986939bb4395093831e3438ea8be7fbd3ed638d12",
+    "reason": "reviewed-accept - one account/client-scoped completed legacy reports list-and-reader view. It owns only presentation and user intent: one Load/Refresh plus conditional Load-more, status/alert and empty-page messaging, the report list, and one selected-report article with a current-authorized Download and Close. Transport is in the dedicated createLegacyReportClient canonical registered Capiro GET operations and paging/correlation/lifetime are in the dedicated LegacyReportController; the host keys this by [tenantId, actorId, clientId] and unmount abandons in-flight reads. It holds no authority decision (Core owns current source/client/held authorization), no cross-account cache or stored report body, no model loop, renderer or job settlement, and no second transport. The two JSX regions share one view state and one component lifecycle; a split would add indirection rather than reduce coupling.",
+    "reviewedBy": "Hermes Agent independent architecture review (session 20261028_001012_2888e9)",
+    "reviewedOn": "2026-10-28"
   }
 ]
