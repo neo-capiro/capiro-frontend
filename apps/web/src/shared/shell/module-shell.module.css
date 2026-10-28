@@ -282,6 +282,19 @@
     display: block;
     position: relative;
   }
+  /*
+   * "Modules menu" stays in the flow above the page (the phone pattern shell.module.css
+   * uses for the Workspace menu) instead of floating over the first content row: an
+   * absolutely positioned toggle sat on the breadcrumb's trailing crumb. The row inset is
+   * scoped to the shells that actually render that direct child, so Settings routes — which
+   * render no ModuleNavigation — keep their unshifted main row.
+   */
+  .body:has(> .mobileNavToggle) {
+    padding-top: 16px;
+  }
+  .breadcrumb {
+    flex-wrap: wrap;
+  }
   .navigation {
     display: none;
     min-height: auto;
@@ -309,10 +322,9 @@
   }
   .mobileNavToggle {
     display: block;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    margin: 0;
+    position: static;
+    width: fit-content;
+    margin: 0 16px 0 auto;
     padding: 6px 12px;
     background: white;
     border: 1px solid var(--border);
