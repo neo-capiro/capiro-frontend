@@ -6984,19 +6984,11 @@
     "file": "apps/web/src/features/meri/usage-overview/projection.ts",
     "kind": "function",
     "symbol": "projectUsageOverview",
-    "fingerprint": "b8fef83f252b38da9e5f002d5f8c53b99e5a75482f1979d08457a3acf781fd72",
-    "sourceFingerprint": "b8fef83f252b38da9e5f002d5f8c53b99e5a75482f1979d08457a3acf781fd72",
-    "reason": "One pure projection of the received tenant usage-overview contract into the Settings Usage view model: day / Monday-UTC-week / month cohorts, the separate monthly admission ledger, recorded vs unavailable vs not-recorded accounting, read-only canonical policy limits, durable queue state counts and an explicit unavailable capacity/economics statement. It performs no fetch, no polling, no local policy threshold, no zero-for-unknown substitution, no capacity or economic inference and no authority decision; every emitted value is either a received fact or the explicit string Unavailable. Formatting helpers (dollars, periodLabel) are module-local and stateless. No second domain or responsibility is present, so extraction would add indirection rather than reduce coupling.",
-    "rationale": "New cohesive presentation mapper for one contract, under the 400-line file and just over the 80-line function threshold. The body is a single declarative return of received facts; the two distinct accounting bases (run.createdAt cohorts vs sdk_usage_recorded_at admission) are kept separate in the same view rather than merged, which is the required behaviour. Accept as one reviewed body.",
-    "evidence": [
-      "apps/web/src/features/meri/usage-overview/projection.ts lines 35-135 (body)",
-      "apps/web/tests/meri-usage-overview-presentation.test.ts (7 cases: cohorts, ledger, unknowns, cap states, capacity, queue permission, staleness)",
-      "apps/web/tests/meri-usage-overview-fixtures.ts (physical .25 response shape)",
-      "node_modules/@capiro/meri-contracts@0.1.25 dist/conversation-usage.mjs (schema + overview semantics)",
-      "work/m7-usage-fe-architecture.json sizeFindings (nonblank 98, fingerprint b8fef83f..., reviewStatus unreviewed)",
-      "work/m7-usage-fe-final-focused.txt (21/21 PASS)"
-    ],
-    "reviewedBy": "Hermes Agent independent source review (session 20261028_004952_c1f9fa)",
+    "line": 45,
+    "nonblank": 133,
+    "fingerprint": "dbcebb0d0c339c2753de965dbe218639f9444c3ba37f09ddf756b07a9869e092",
+    "reason": "One pure translation from the closed, semantically received usage-overview/2 response to the existing UsageLimitsView. Period totals, monthly admission, job outcomes, coverage and queue observations remain separate received facts; null cost stays unavailable and SDK estimates are not provider bills. The whole-job block does not derive job identity or closure locally. Exact-body validation caught and required correction of the recorded-completed subtraction; f4857debb9f1a1def551d63574144c11c7ac82f3 now maps recorded.completed directly, proved by receiver-valid zero/mixed-accounting cases and the mounted table. Extracting small fragments solely to meet size would split a cohesive view translation without a new boundary. Physical package typing and deployed acceptance are not inferred from source-stage checks.",
+    "reviewedBy": "Codex bounded exact-body/source validation with designated Hermes SCRUM-220 session 20261028_102632_b2fd57 evidence: 26 focused checks and 4 mounted browser checks",
     "reviewedOn": "2026-10-28"
   },
   {
@@ -7301,6 +7293,17 @@
     "fingerprint": "1c916681e2c258afff98e977509f20183f7146b4c537f4ca68d1d2afb5987f86",
     "reason": "One current-context RoutineWorkflow owns the view lifetime and serializes prepare, approval, recovery and consent renewal through the same existing access port and journal lock. The added consent review and explicit renewal share its currentness guard, publication fence, access-loss retirement and one-review decision identity; they add no transport, durable store, scheduling executor or authority owner. Per-action methods remain bounded and request/response receiving, correlation and persistence are delegated to existing owners. Keeping these related state transitions together avoids splitting a single guarded lifecycle solely to satisfy the file threshold. Accepted exact module after reading the full body and its delta, reusing the independent source assessment; final installed-package and deployed acceptance remain required.",
     "reviewedBy": "Codex M5 bounded full-module validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/meri/screens/settings/UsageLimitsScreen.tsx",
+    "kind": "function",
+    "symbol": "UsageLimitsScreen",
+    "line": 76,
+    "nonblank": 92,
+    "fingerprint": "3b4ad7926632f187c09520ba32bb3cf61a13432ffc94265da0f1b113a91a014c",
+    "reason": "One usage-settings presentation boundary using the existing SettingsLayout, cards, DataTable, notices and configuration slot. The additive optional wholeJobs card renders only supplied view facts and cost labels; other callers omit it without changed behavior. It adds no request, authority, state lifetime, cost calculation or policy decision. Keeping the related usage sections together preserves this screen's single render responsibility. Exact body validated at f4857debb9f1a1def551d63574144c11c7ac82f3; real mounted host initial/refresh/denial/account-retirement checks and received-count regression are retained. Final installed .27 typing and deployed acceptance remain separate.",
+    "reviewedBy": "Codex bounded exact-body/source validation with designated Hermes SCRUM-220 session 20261028_102632_b2fd57 evidence: 26 focused checks and 4 mounted browser checks",
     "reviewedOn": "2026-10-28"
   }
 ]
