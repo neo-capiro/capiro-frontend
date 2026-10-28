@@ -3,6 +3,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, expect, it, vi } from "vitest";
 import SettingsPage from "../src/app/settings/[section]/page";
 import { MemorySettings } from "../src/features/settings/MemorySettings";
+vi.mock("../src/shared/capiro/queries", () => ({
+  useCapiroQuery: () => ({ loading: true, reload: vi.fn() }),
+}));
 
 afterEach(() => vi.unstubAllEnvs());
 

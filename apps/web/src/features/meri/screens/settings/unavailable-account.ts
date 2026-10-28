@@ -95,9 +95,9 @@ export const privacy: PrivacyDeletionView = {
         tone: "warning",
       },
       {
-        title: "Deletion in progress",
+        title: "Privacy requests unavailable",
         detail:
-          "The request is being checked. Do not offer a second destructive action while the outcome is pending.",
+          "No export or deletion request has been submitted from this page. Policy, request-status and permitted-download services must be connected before this page can accept a request.",
       },
     ],
     states: { label: "View retention states" },
