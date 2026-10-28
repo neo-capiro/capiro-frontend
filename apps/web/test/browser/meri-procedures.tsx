@@ -44,9 +44,9 @@ function Fixture() {
   const [mounted, setMounted] = useState(true);
   return (
     <>
-      <output data-testid="surface-state">
+      <span data-testid="surface-state">
         {mounted ? "mounted" : "unmounted"}
-      </output>
+      </span>
       <button type="button" onClick={() => setMounted((value) => !value)}>
         {mounted ? "Unmount surface" : "Mount surface"}
       </button>

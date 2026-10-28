@@ -58,7 +58,10 @@ export const procedureTemplate = {
   heading: "Hearing brief",
   sections: ["summary", "facts"],
 };
-export const procedureManifest = { scopes: ["client"], steps: ["read", "draft"] };
+export const procedureManifest = {
+  scopes: ["client"],
+  steps: ["read", "draft"],
+};
 
 export const storedSkill = (
   overrides: Record<string, unknown> = {},
@@ -132,7 +135,9 @@ export const thirdProcedureRow = procedureRow({
 });
 
 /** What the admin write routes return: the persisted row, not the list projection. */
-export const persistedProcedureRow = (overrides: Record<string, unknown> = {}) => ({
+export const persistedProcedureRow = (
+  overrides: Record<string, unknown> = {},
+) => ({
   id: procedureUuid(11),
   tenantId: procedureUuid(101),
   skillId: "hearing_prep",
@@ -213,6 +218,9 @@ export async function procedureFixture(page: Page) {
   // Catch-alls first: the most recently registered matching route wins, so every route below them
   // takes precedence.
   await page.route("**/api/**", (route) => {
+    // Vite also serves source modules whose directory is named `api`.
+    if (!new URL(route.request().url()).pathname.startsWith("/api/"))
+      return route.fallback();
     unexpected.push(route.request().url());
     return route.fulfill({
       status: 501,
@@ -244,7 +252,10 @@ export async function procedureFixture(page: Page) {
     const fallback: Reply =
       key === "meri.procedures.list"
         ? { json: rows }
-        : { status: 501, json: { message: `Unconfigured test operation: ${key}` } };
+        : {
+            status: 501,
+            json: { message: `Unconfigured test operation: ${key}` },
+          };
     if (!override && !defaults.has(key) && key !== "meri.procedures.list")
       unexpected.push(request.url());
     try {

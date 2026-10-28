@@ -284,7 +284,9 @@ test("a settled create leaves no retained custody behind", async ({ page }) => {
   });
   await openProcedureSurface(page);
   const create = async () => {
-    await page.getByLabel("Procedure id", { exact: true }).fill("brief_builder");
+    await page
+      .getByLabel("Procedure id", { exact: true })
+      .fill("brief_builder");
     await page.getByLabel("Name", { exact: true }).fill("Brief builder");
     await page
       .getByLabel("Triggers (comma separated)", { exact: true })
@@ -343,7 +345,9 @@ test("Remove asks for confirmation and dispatches exactly once", async ({
     .click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   // The surface reports the call, not a row it did not see.
-  await expect(page.getByText(/Core reported the row at version \?/)).toBeVisible();
+  await expect(
+    page.getByText(/Core reported the row at version \?/),
+  ).toBeVisible();
   const removeCalls = fixture.calls("meri.procedures.remove");
   expect(removeCalls).toHaveLength(1);
   expect(removeCalls[0]!.input).toEqual({
@@ -422,7 +426,9 @@ test("revoking the admin role ends the scope without dispatching another change"
     .click();
   await held.entered;
   fixture.setIdentity(procedureMember);
-  await replaceProcedureIdentity(page, { sessionId: "synthetic-revoked-session" });
+  await replaceProcedureIdentity(page, {
+    sessionId: "synthetic-revoked-session",
+  });
   await expect(
     page.getByText(/requires the current Core user_admin or capiro_admin role/),
   ).toBeVisible();

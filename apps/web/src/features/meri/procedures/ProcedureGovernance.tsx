@@ -10,7 +10,7 @@
  * status message and the run lifetime, so a result that arrives after the account changed or the
  * surface unmounted is retired there instead of being rendered here.
  */
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import type { FirmSkillGovernanceRow } from "../../../shared/capiro/operations/meri-firm-skills";
 import type { ProcedureGovernanceClient } from "../../../shared/meri-procedures/client";
 import {
@@ -66,17 +66,46 @@ const field = (
   onChange: (next: string) => void,
   error?: string,
 ) => (
-  <label key={label} className={surfaces.caption}>
-    {label}
-    <input
-      className={ui.outline}
-      value={value}
-      aria-invalid={error ? true : undefined}
-      onChange={(event) => onChange(event.target.value)}
-    />
-    {error ? <span className={ui.muted}>{error}</span> : null}
-  </label>
+  <ProcedureField
+    key={label}
+    label={label}
+    value={value}
+    onChange={onChange}
+    error={error}
+  />
 );
+
+function ProcedureField({
+  label,
+  value,
+  onChange,
+  error,
+}: {
+  label: string;
+  value: string;
+  onChange: (next: string) => void;
+  error?: string;
+}) {
+  const id = useId();
+  return (
+    <div className={surfaces.caption}>
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
+        className={ui.outline}
+        value={value}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
+        onChange={(event) => onChange(event.target.value)}
+      />
+      {error ? (
+        <span id={`${id}-error`} className={ui.muted}>
+          {error}
+        </span>
+      ) : null}
+    </div>
+  );
+}
 
 /**
  * The exact row identity/version/digest a control is fenced to. Each control captures it when the
