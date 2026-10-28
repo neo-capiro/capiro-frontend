@@ -5252,10 +5252,10 @@
     "file": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
     "kind": "function",
     "symbol": "CongressionalContacts",
-    "fingerprint": "bba620294172cd68f4ab91a4ed68a5a80951b9b8a8b3b6f10c4bd08c87eab64c",
-    "reason": "bba620294172cd68f4ab91a4ed68a5a80951b9b8a8b3b6f10c4bd08c87eab64c CongressionalContacts fn, l25, 240 nb ACCEPTABLE — one directory list surface (query, filters, table columns, detail rail). Added a conditional class, a title attribute and width values; state ownership (selected, filters, query) unchanged. No extraction needed.",
-    "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
-    "reviewedOn": "2026-10-27"
+    "fingerprint": "bd3f37f3285ba49ad0a0444442eab257a0d411e744263487a61ee1a695d20e77",
+    "reason": "Independent full-body review of PR267: one congressional directory list composition owns filters, paging, expansion and selected-contact navigation. Replacing inline initials with MemberPhoto delegates decorative image rendering and per-URL failure state to its focused component. Existing query, favorites, selection and permission boundaries are unchanged. The function remains cohesive; no extraction is required for this presentation-only change.",
+    "reviewedBy": "Codex Wave5 orchestrator independent PR267 source review",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/modules/directory/StateDirectory.tsx",
@@ -6898,5 +6898,14 @@
     "reason": "Cross-portfolio design reuse: cursor paging, source portfolio/design selection,\n    copy through reusableLayout (which strips snapshot/member/basis bindings while keeping\n    presentation) and a current-rights read of the source. Single bounded reuse concern.",
     "reviewedBy": "Hermes Agent source review 20261027_193032_cb9f61",
     "reviewedOn": "2026-10-27"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/MemberProfile.tsx",
+    "kind": "function",
+    "symbol": "MemberProfile",
+    "fingerprint": "aa78b42a282faf52f6373fc7430512e029d861a3a48340153b4e854ea09bb6ef",
+    "reason": "Independent full-body review of PR267: one member-profile composition owns tabs and existing typed notes, favorites, news and FEC views. The new title accessory delegates only decorative photo/fallback rendering to MemberPhoto. Existing API calls, state transitions, explicit mutations and unavailable capabilities are unchanged. This is a coherent profile surface with no new authorization, persistence or domain policy; splitting it for this small presentation delta is unnecessary.",
+    "reviewedBy": "Codex Wave5 orchestrator independent PR267 source review",
+    "reviewedOn": "2026-10-28"
   }
 ]
