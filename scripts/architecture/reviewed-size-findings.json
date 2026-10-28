@@ -1119,10 +1119,12 @@
     "file": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
     "kind": "function",
     "symbol": "ProfileChoiceSession",
-    "fingerprint": "f74a873373b60ce98d607820d05e23f1aa70d9f0be82ed1c51b75e3295043339",
-    "reason": "One Add profile choice and transition into the canonical intake form. Removing the billing summary sibling-host argument introduces no new responsibility or financial mutation. Existing capacity/intake/summary owners remain separate. See docs/integration-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
+    "line": 27,
+    "nonblank": 157,
+    "fingerprint": "199204b5211dd5f426d6faba8438a5f926a4e380736e47d0984d735b77f3c09f",
+    "reason": "Profile create-choice session. The change adds the third create choice (Meri) exactly as the two existing choices are handled: one boolean state, one early-return that mounts the existing MeriProfileStarterDialog, and a replacement of the previously disabled placeholder button with the same ChoiceContent markup gated on role/capacity/destination. It owns only choice presentation and mount; it creates nothing, sends nothing and calls no model, and it reuses the existing dialog, capacity hook and focus-switch mechanics. The growth is cohesive form/status markup for one additional choice, not a new responsibility.",
+    "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
@@ -1542,10 +1544,12 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
-    "fingerprint": "cf5eff94adf4c0698c3cf1420c1a31367aa96d989ecdb3ece58a29c96d32ab1f",
-    "reason": "The existing file-library presenter adds a frozen selection for deletion and an always-mounted, reader-keyed recovery child so a missing target cannot hide retained work. Other file actions continue through their separate components and hooks. It does not receive deletion receipts, infer outcomes, issue requests or own the journal. The exact narrow composition is cohesive despite inherited JSX length; no unrelated refactor is required.",
-    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
-    "reviewedOn": "2026-10-25"
+    "line": 25,
+    "nonblank": 422,
+    "fingerprint": "b6ca3aabe1ed4e92396057310faae7d4e42b0ab66255715777bb65a38e8a1e83",
+    "reason": "Files surface for one client. The change adds one boolean state, re-enables the existing 'Create with Meri' action button when the Meri destination is configured, and mounts the existing MeriArtifactStarterDialog beside the existing UploadDialog mount with the same conditional-mount pattern and the same client data already in the function. It adds one document entry point for the current client and no new data flow, owner or authority; the dialog writes only an unsent client-scoped draft. Cohesive with the function's existing file-action responsibility.",
+    "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
@@ -3784,10 +3788,12 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "2f5ae9a7db31cd7232341d26416fb28a183d1fcaac1178555e10a85da5a7c7d9",
-    "reason": "FilesPage remains the existing client-file library composition module. The bounded change snapshots the selected deletion review and mounts the separately owned DeleteFile recovery surface outside target-list presence. Existing list/filter/selection and feature dialogs keep their current owners; deletion contracts, access, transport and journal lifecycle live elsewhere. Crossing the file-size signal adds no independent business responsibility to this module.",
-    "reviewedBy": "Codex independent Tenant UI reviewer 01a170f5-2625-70f1-9cac-105ca395cd6e",
-    "reviewedOn": "2026-10-25"
+    "line": 1,
+    "nonblank": 454,
+    "fingerprint": "cfb870f026c4f903186e438b1542013b2b815251a8833df79d2dd059ae643472",
+    "reason": "Module-level companion to the FilesPage function finding above (already 435 nonblank at base, 454 after this change). The +19 nonblank growth is the single starter import, the one state and the one dialog mount described in the function finding; no new imports-owner, route or side effect is introduced at module scope. Reviewed together with the function finding as one cohesive file.",
+    "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/settings/PersonalSettings.tsx",
@@ -6998,6 +7004,28 @@
     "fingerprint": "e6b79e9e07e7744d3a1a329d78094f8509b3933c947a114e39f78773d71c9504",
     "reason": "reviewed-accept - one bounded metadata history read/display lifetime, 119 nonblank. It owns exactly the explicit Load/Refresh/Next/First control set, one page state keyed by the canonical file-scope lifetime key, a ref-held AbortSignal latch that refuses overlapping reads and withholds a late completion or failure after identity, files-list or abort change, and the version list with its 'Versions X-Y of N' status. It owns no transport (readFileHistory over the existing canonical Core attachment GET), no authority (useFileScope/file-reader plus Core decide current access; the panel grants nothing and shows no old-version bytes or links), no cursor semantics (the Core cursor is passed through opaquely and anchor/offset/page-size/original/head/count/order/duplicate/continuation correlation is asserted by the shared response-receiver schema), and no model or budget turn (nothing runs until the operator clicks; the file contains no effect hook). The 119 lines are one cohesive read-and-render state machine; splitting the controls, the list and the status line into siblings would fragment one lifetime without removing any coupling.",
     "reviewedBy": "Hermes Agent independent architecture review (session 20261028_015237_721345)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/MeriProfileStarterDialog.tsx",
+    "kind": "function",
+    "symbol": "ProfileStarterSession",
+    "line": 34,
+    "nonblank": 153,
+    "fingerprint": "27f3042cca58b5146694cbb2476270c85bd1867c22c9494037291bb1cab038d0",
+    "reason": "One profile starter-dialog session for a single unsent general-scope handoff: the seed fields, the existing owners' role/capacity/roster preflight presentation, the gated Continue that resolves the canonical general conversation and writes the canonical unsent draft, and explicit abort/error handling. It owns no client create, no submit, no model call, no proposal preparation and no authority; the first-chat resolver, preview capacity/clients, identity and the conversation draft owner remain the owners. The size is cohesive form + preflight/status markup for one handoff, not a second workflow.",
+    "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/MeriArtifactStarterDialog.tsx",
+    "kind": "function",
+    "symbol": "ArtifactStarterSession",
+    "line": 30,
+    "nonblank": 111,
+    "fingerprint": "6c6da47680a75e21157b57ed5967045b2a5e4956a5fa26f39ca96d82a0145900",
+    "reason": "One artifact starter-dialog session for a single selected client: the title/format/body fields, the receiver-matched whole-draft 32,000 bound, and the unsent client-bound handoff into the existing client-handoff journal followed by navigation. It writes no document, files nothing, sends nothing and prepares nothing; the journal receiver and the admitted conversation own reception. The size is cohesive typed form + status + one handoff, not a second responsibility.",
+    "reviewedBy": "Hermes Agent independent source/design review (session 20261028_015918_5b9924)",
     "reviewedOn": "2026-10-28"
   }
 ]
