@@ -14,13 +14,18 @@ import {
   type ArtifactReply,
 } from "./artifact-access";
 import {
+  createNativeResultsAccess,
+  type NativeResultsAccess,
+} from "./native-results-access";
+import {
   DocumentAccessUnavailable,
   documentAccessTransport,
 } from "./workflow-transport";
 
 export type LibraryScope = DocumentListRequest["scope"];
 export type LibraryVersion = Readonly<DocumentVersion>;
-export interface DocumentLibraryAccess extends ArtifactAccess, PreviewAccess {
+export interface DocumentLibraryAccess
+  extends ArtifactAccess, PreviewAccess, NativeResultsAccess {
   readonly context: ConversationContext;
   list(
     request: DocumentListRequest,
@@ -77,6 +82,7 @@ export function createDocumentLibraryAccess({
   const transport = documentAccessTransport(credential, signal, fetcher);
   const artifacts = createArtifactAccess(credential, signal, fetcher);
   const previews = createPreviewAccess(credential, signal, fetcher);
+  const results = createNativeResultsAccess(credential, signal, fetcher);
   let active = 0;
   const refuse = (code: string, accessDenied = false) => {
     if (accessDenied) onAccessLost();
@@ -128,7 +134,11 @@ export function createDocumentLibraryAccess({
   }
   return {
     context,
-    pending: () => active > 0 || artifacts.pending() || previews.pending(),
+    pending: () =>
+      active > 0 ||
+      artifacts.pending() ||
+      previews.pending() ||
+      results.pending(),
     readPreview: async (id, caller) => {
       const reply = await previews.readPreview(id, caller);
       if (!reply.ok && reply.accessDenied) onAccessLost();
@@ -148,6 +158,11 @@ export function createDocumentLibraryAccess({
     },
     download: async (versionId, caller) => {
       const reply = await artifacts.download(versionId, caller);
+      if (!reply.ok && reply.accessDenied) onAccessLost();
+      return reply;
+    },
+    results: async (caller) => {
+      const reply = await results.results(caller);
       if (!reply.ok && reply.accessDenied) onAccessLost();
       return reply;
     },

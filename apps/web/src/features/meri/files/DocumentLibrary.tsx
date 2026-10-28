@@ -8,6 +8,7 @@ import {
 } from "react";
 import { DocumentPreviewPanel } from "./DocumentPreviewPanel";
 import { DocumentRevisionLink } from "./DocumentRevisionLink";
+import { NativeResultFiles } from "./NativeResultFiles";
 import { Button } from "@capiro/ui/button";
 import type { ConversationListPage } from "../../../shared/meri-conversations/history-client";
 import {
@@ -193,12 +194,18 @@ function LibraryConnection({
   );
   if (state.status === "ready")
     return (
-      <LibraryPages
-        key={state.lifetimeKey}
-        port={state.port}
-        account={account}
-        {...(anchor ? { anchor } : {})}
-      />
+      <>
+        <NativeResultFiles
+          key={`results:${state.lifetimeKey}`}
+          port={state.port}
+        />
+        <LibraryPages
+          key={state.lifetimeKey}
+          port={state.port}
+          account={account}
+          {...(anchor ? { anchor } : {})}
+        />
+      </>
     );
   return (
     <section

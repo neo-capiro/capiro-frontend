@@ -16,6 +16,8 @@ import {
   type AdmittedDocumentPreviewRequest,
   receiveDocumentPreview,
   receiveDocumentPreviewPublication,
+  receiveNativeResultsRequest,
+  receiveNativeResultsResponse,
 } from "@capiro/meri-client/document-access";
 import {
   boundedJsonBytes,
@@ -24,6 +26,8 @@ import {
 import { actionSessionHeader } from "../meri-actions/session-header";
 
 type JsonRoute = Exclude<DocumentRoute, "download">;
+/** The admitted native-result request is the receiver's own shape; no contract type is re-declared. */
+type NativeResultsRequest = ReturnType<typeof receiveNativeResultsRequest>;
 export interface DocumentTransport {
   request<R extends JsonRoute>(
     route: R,
@@ -65,7 +69,12 @@ function documentReceiver(
     { once: true },
   );
   return async function receive<T>(
-    route: DocumentRoute | DocumentAccessRoute | "preview" | "preview-publish",
+    route:
+      | DocumentRoute
+      | DocumentAccessRoute
+      | "preview"
+      | "preview-publish"
+      | "results",
     request: unknown,
     caller: AbortSignal,
     decode: (response: Response, signal: AbortSignal) => Promise<T>,
@@ -80,6 +89,7 @@ function documentReceiver(
         "list",
         "preview",
         "preview-publish",
+        "results",
       ].includes(route)
     )
       throw new Error("Unknown document route");
@@ -181,6 +191,21 @@ export function documentAccessTransport(
           "inspect",
           response.status,
           await boundedJsonBytes(response, current, 16 * 1024 * 1024),
+          request,
+        ),
+      ),
+    /**
+     * The additive native-result discovery read. The wire request is the receiver's own closed empty
+     * object; the admitted `request` is the correlation token the canonical receiver checks the
+     * answer against, so the browser never supplies a scope, run, actor or client binding. It admits
+     * no version for inspect or download, leaving the existing inspect/download receiver the byte
+     * authority.
+     */
+    results: (request: NativeResultsRequest, signal: AbortSignal) =>
+      receive("results", {}, signal, async (response, current) =>
+        receiveNativeResultsResponse(
+          response.status,
+          await boundedJsonBytes(response, current, 256 * 1024),
           request,
         ),
       ),

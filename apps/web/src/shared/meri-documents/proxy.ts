@@ -4,6 +4,7 @@ import {
   receiveDocumentRequest as receiveAccessRequest,
   type DocumentAccessRoute,
   receiveDocumentPreviewRequest,
+  receiveNativeResultsRequest,
 } from "@capiro/meri-client/document-access";
 import {
   boundedJsonBytes,
@@ -23,6 +24,7 @@ const routes = new Set<string>([
   "list",
   "preview",
   "preview-publish",
+  "results",
 ]);
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -67,7 +69,8 @@ export async function proxyDocumentRequest(
     | DocumentRoute
     | DocumentAccessRoute
     | "preview"
-    | "preview-publish";
+    | "preview-publish"
+    | "results";
   // Generation needs the bound document family. Preview publication is an explicit derived write
   // with its own current remote permission; readEnabled only enables forwarding, never grants it.
   const write = route === "create" || route === "revise";
@@ -86,14 +89,16 @@ export async function proxyDocumentRequest(
         2 * 1024 * 1024,
       );
       const admitted =
-        route === "preview" || route === "preview-publish"
-          ? receiveDocumentPreviewRequest(
-              route === "preview" ? "read" : "publish",
-              body,
-            )
-          : write
-            ? receiveDocumentRequest(route as "create" | "revise", body)
-            : receiveAccessRequest(route as DocumentAccessRoute, body);
+        route === "results"
+          ? receiveNativeResultsRequest(body)
+          : route === "preview" || route === "preview-publish"
+            ? receiveDocumentPreviewRequest(
+                route === "preview" ? "read" : "publish",
+                body,
+              )
+            : write
+              ? receiveDocumentRequest(route as "create" | "revise", body)
+              : receiveAccessRequest(route as DocumentAccessRoute, body);
       if (
         "request" in admitted &&
         admitted.request.operation !== config.operation
@@ -125,7 +130,11 @@ export async function proxyDocumentRequest(
         const bytes = await (binary ? boundedResponseBytes : boundedJsonBytes)(
           response,
           signal,
-          route === "preview" ? 8 * 1024 * 1024 : 16 * 1024 * 1024,
+          route === "results"
+            ? 256 * 1024
+            : route === "preview"
+              ? 8 * 1024 * 1024
+              : 16 * 1024 * 1024,
         );
         signal.throwIfAborted();
         const headers = new Headers(binary ? undefined : jsonHeaders);
