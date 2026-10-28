@@ -38,6 +38,16 @@ export function assertSettingsReceipt(write: SettingsWrite, value: unknown) {
   const { params = {}, body = {} } = write.input;
   let confirmed = false;
   switch (write.operation) {
+    case "settings.memory.grants.create":
+      confirmed =
+        receipt.ok === true &&
+        receipt.id === body.id &&
+        receipt.expiresAt === body.expiresAt &&
+        sameMembers(receipt.permissions, body.permissions);
+      break;
+    case "settings.memory.grants.revoke":
+      confirmed = receipt.ok === true && typeof receipt.revoked === "boolean";
+      break;
     case "settings.support.create":
       confirmed =
         !!write.expectedAccount &&

@@ -78,6 +78,7 @@ export function useSettingsMutation(section: string) {
         let accepted = false;
         try {
           if (
+            operation.startsWith("settings.memory.grants.") ||
             operation === "me.update" ||
             operation === "me.emailSignature.update" ||
             operation === "settings.branding.update" ||

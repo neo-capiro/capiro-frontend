@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { DataTable, TextArea } from "../../shared/module-ui";
+import { TextArea } from "../../shared/module-ui";
+import { MemoryAccessGrants } from "./memory/MemoryAccessGrants";
 import {
   SettingField,
   SettingsButton,
@@ -25,7 +26,13 @@ const governanceTabs = [
   "Projection health",
 ];
 
-export function MemorySettings({ reviewEnabled }: { reviewEnabled: boolean }) {
+export function MemorySettings({
+  reviewEnabled,
+  readOnlyPreview = false,
+}: {
+  reviewEnabled: boolean;
+  readOnlyPreview?: boolean;
+}) {
   return (
     <div className={styles.stack} data-design-target="411:67920">
       <SettingsNotice title="New memory writes from Settings are unavailable">
@@ -41,7 +48,7 @@ export function MemorySettings({ reviewEnabled }: { reviewEnabled: boolean }) {
         </p>
         <Link href="/meri/updates">Open review notifications</Link>
       </SettingsCard>
-      <MemoryGovernanceCard />
+      <MemoryGovernanceCard readOnly={readOnlyPreview} />
       <MemoryFilesCard />
     </div>
   );
@@ -69,7 +76,7 @@ function MemoryReviewCard({ enabled }: { enabled: boolean }) {
   );
 }
 
-function MemoryGovernanceCard() {
+function MemoryGovernanceCard({ readOnly }: { readOnly: boolean }) {
   const [governance, setGovernance] = useState("Overview");
   return (
     <SettingsCard title="Memory Governance Center">
@@ -80,34 +87,7 @@ function MemoryGovernanceCard() {
         onChange={setGovernance}
       />
       {governance === "Access grants" ? (
-        <>
-          <div className={styles.row}>
-            <div className={styles.grow}>
-              <SettingField label="Client">
-                <select className={styles.input} disabled>
-                  <option>Client memory unavailable</option>
-                </select>
-              </SettingField>
-            </div>
-            <SettingsButton primary disabled title={reason}>
-              Add grant
-            </SettingsButton>
-          </div>
-          <DataTable
-            rows={[]}
-            rowKey={() => ""}
-            caption="Memory access grants"
-            emptyMessage="Access grant data is unavailable."
-            columns={[
-              "User",
-              "Permissions",
-              "Status",
-              "Expires",
-              "Reason",
-              "Actions",
-            ].map((label) => ({ key: label, label, render: () => "—" }))}
-          />
-        </>
+        <MemoryAccessGrants readOnly={readOnly} />
       ) : (
         <p className={styles.empty}>
           {governance} governance data is unavailable until its contract is
