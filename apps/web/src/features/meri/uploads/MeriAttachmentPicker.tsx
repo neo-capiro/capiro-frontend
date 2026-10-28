@@ -83,6 +83,44 @@ export function MeriAttachmentPicker({
         />
         Attach
       </PromptInputButton>
+      {slot.incoming.length > 0 && (
+        <ul
+          className={styles.tools}
+          aria-label="Files this conversation already holds"
+          style={{
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+            width: "100%",
+          }}
+        >
+          {slot.incoming.map((source) => (
+            <li
+              key={source.uploadId}
+              style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}
+            >
+              <span>{`file in this conversation: ${source.uploadId.slice(0, 8)}`}</span>
+              <span role="status">IN_CONVERSATION</span>
+              <button
+                type="button"
+                aria-pressed={source.selected}
+                disabled={slot.busy}
+                aria-label={
+                  source.selected
+                    ? "Leave this file out of the next message"
+                    : "Include this file in the next message"
+                }
+                onClick={() => slot.onToggleIncoming(source.uploadId)}
+              >
+                {source.selected ? "Included" : "Include"}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
       {slot.items.length > 0 && (
         <ul
           className={styles.tools}
@@ -104,6 +142,15 @@ export function MeriAttachmentPicker({
               <span>{item.filename}</span>
               <span>{size(item.bytes)}</span>
               <span role="status">{describe(item)}</span>
+              {item.state === "declaring" || item.state === "uploading" ? (
+                <button
+                  type="button"
+                  onClick={() => slot.onCancel(item.requestId)}
+                  aria-label={`Cancel the upload of ${item.filename}`}
+                >
+                  Cancel
+                </button>
+              ) : null}
               {item.state === "unknown" && item.uploadId ? (
                 <button
                   type="button"

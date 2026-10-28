@@ -4,6 +4,10 @@ import {
   type ArtifactAccess,
 } from "../meri-documents/artifact-access";
 import {
+  createUploadAccess,
+  type MeriUploadAccess,
+} from "../meri-uploads/access";
+import {
   createIntentsAccess,
   type IntentsAccess,
 } from "../meri-intents/access";
@@ -26,6 +30,11 @@ import {
 
 export type MeriConversationPort = ReturnType<typeof createMeriConversation> & {
   readonly context: ConversationContext;
+  /**
+   * Composer attachments under this exact session lifetime: the uploads this page declared, the
+   * sources the conversation already established, and the ordered argument a message carries.
+   */
+  readonly uploads: MeriUploadAccess;
   /** Read-only artifact preview/download under the same session lifetime. */
   readonly artifacts: ArtifactAccess;
   /** Prepared-action list and decisions, checked by the public receiver under the same session lifetime. */
@@ -69,7 +78,8 @@ export class ConversationHostController extends SessionLifetimeController<
           snapshot.cancel === "pending" ||
           snapshot.status === "loading" ||
           port.feedback.pending() ||
-          port.artifacts.pending()
+          port.artifacts.pending() ||
+          port.uploads.pending()
         );
       },
       createPort: ({ session, signal, ...lifetime }) => {
@@ -79,21 +89,41 @@ export class ConversationHostController extends SessionLifetimeController<
           session.context.actorId !== account.actorId
         )
           throw new Error("Conversation account mismatch");
-        const port = Object.freeze({
-          ...createMeriConversation({
-            context: session.context,
-            credential: session.credential,
-            expiresAtMs: session.expiresAtMs,
-            signal,
-            ...lifetime,
-            fetchImpl: fetcher,
-            origin,
-            // The same-origin proxy needs its own header; a trusted direct Meri origin expects a bearer.
-            credentialHeader: origin
-              ? "authorization"
-              : "x-meri-action-session",
-          }),
+        const conversation = createMeriConversation({
           context: session.context,
+          credential: session.credential,
+          expiresAtMs: session.expiresAtMs,
+          signal,
+          ...lifetime,
+          fetchImpl: fetcher,
+          origin,
+          // The same-origin proxy needs its own header; a trusted direct Meri origin expects a bearer.
+          credentialHeader: origin
+            ? "authorization"
+            : "x-meri-action-session",
+        });
+        /**
+         * Attachments ride this exact session: the access is built from the same credential and the
+         * same lifetime, and the sources it may re-select are the conversation's own admitted request
+         * echo. Selecting an established source reuses its id and never writes an original again.
+         */
+        const uploads = createUploadAccess({
+          credential: session.credential,
+          lifetime: signal,
+          isCurrent: lifetime.isCurrent,
+          established: () =>
+            conversation.getSnapshot().acceptedRequest?.uploads ?? [],
+          ...(fetcher ? { fetcher } : {}),
+        });
+        const port = Object.freeze({
+          ...conversation,
+          context: session.context,
+          uploads,
+          // Attachments belong to this port: its disposal takes the access with it.
+          dispose: () => {
+            uploads.dispose();
+            conversation.dispose();
+          },
           feedback: createFeedbackAccess({
             credential: session.credential,
             context: session.context,

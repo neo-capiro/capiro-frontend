@@ -12,26 +12,49 @@ import { defineConfig } from "vitest/config";
  * MERI_UPLOAD_CONTRACTS at another artifact to test a different producer revision, and delete the
  * alias once the frozen package export resolves from node_modules.
  */
-const resolveArtifact = () => {
-  const pinned =
-    process.env.MERI_UPLOAD_CONTRACTS ??
-    fileURLToPath(
-      new URL(
-        "../../../../../../wave5-upload-input-20261028/packages/contracts/dist/uploads-application.mjs",
-        import.meta.url,
-      ),
-    );
-  if (!pinned) throw new Error("No uploads-application artifact to bind");
+const artifact = (family: string) => {
+  if (family === "uploads-application" && process.env.MERI_UPLOAD_CONTRACTS)
+    return process.env.MERI_UPLOAD_CONTRACTS;
+  const file = `${family}.mjs`;
+  const pinned = process.env.MERI_CONTRACTS_DIST
+    ? join(process.env.MERI_CONTRACTS_DIST, file)
+    : fileURLToPath(
+        new URL(
+          `../../../../../../wave5-upload-input-20261028/packages/contracts/dist/${file}`,
+          import.meta.url,
+        ),
+      );
+  if (!pinned) throw new Error(`No ${family} artifact to bind`);
   return pinned;
 };
+
+/**
+ * The canonical families this join resolves against the pinned producer artifact: the uploads wire,
+ * the conversation input this app submits, its initial allocation, the history it recovers from and
+ * the session/lifecycle/usage readers around them. Nothing else is redirected.
+ */
+const families = [
+  "conversation-application",
+  "conversation-history",
+  "conversation-initial-input",
+  "conversation-input",
+  "conversation-lifecycle",
+  "conversation-session",
+  "conversation-sources",
+  "conversation-usage",
+  "uploads-application",
+] as const;
 
 export default defineConfig({
   // Keep the run's cache out of the source tree this checkout has to stay clean for.
   cacheDir: join(tmpdir(), "mf15-uploads-vitest"),
   resolve: {
-    alias: {
-      "@capiro/meri-contracts/uploads-application": resolveArtifact(),
-    },
+    alias: Object.fromEntries(
+      families.map((family) => [
+        `@capiro/meri-contracts/${family}`,
+        artifact(family),
+      ]),
+    ),
   },
   test: {
     root: fileURLToPath(new URL("./", import.meta.url)),

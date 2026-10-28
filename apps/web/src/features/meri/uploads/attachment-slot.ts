@@ -1,4 +1,5 @@
 import type {
+  IncomingUpload,
   UploadItem,
   UploadSendArgument,
 } from "../../../shared/meri-uploads/upload-controller";
@@ -13,6 +14,11 @@ export type ComposerAttachments = Readonly<{
   /** Existing composer copy explaining why attachments are unavailable. */
   unavailable?: string;
   items: readonly UploadItem[];
+  /**
+   * Files this conversation already holds, read from its own admitted request. Selecting one reuses
+   * its exact id in the next message and never writes an original again.
+   */
+  incoming: readonly IncomingUpload[];
   /** A bounded write or read of this conversation is in flight. */
   busy: boolean;
   /** The exact ordered ids and digests the next message would carry. */
@@ -20,5 +26,8 @@ export type ComposerAttachments = Readonly<{
   onPick: (files: readonly File[]) => void;
   onCheck: (requestId: string) => void;
   onRemove: (requestId: string) => void;
+  /** Aborts this page's own in-flight attempt for one row; it never undoes service custody. */
+  onCancel: (requestId: string) => void;
+  onToggleIncoming: (uploadId: string) => void;
   limit: number;
 }>;

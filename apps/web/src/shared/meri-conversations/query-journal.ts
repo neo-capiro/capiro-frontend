@@ -66,7 +66,10 @@ export function receiveSkillSelection(value: unknown) {
   );
 }
 
-/** Recover the original requested window and skill selection, never the normalized execution window. */
+/**
+ * Recover the original requested window, skill and attachment selection, never the normalized
+ * execution window: the stored uploads echo is what a recovered message re-sends unchanged.
+ */
 export function storedSubmission(
   stored: ConversationStoredRequest,
 ): ConversationSubmitRequest {
@@ -82,6 +85,7 @@ export function storedSubmission(
         ...(stored.modelSelection
           ? { modelSelection: stored.modelSelection }
           : {}),
+        ...(stored.uploads ? { uploads: stored.uploads } : {}),
         ...(stored.windowRequest
           ? { windowRequest: stored.windowRequest }
           : {}),
@@ -113,6 +117,9 @@ function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
   if (copy.skill) Object.freeze(copy.skill);
   if (copy.documentRevision) Object.freeze(copy.documentRevision);
   if (copy.modelSelection) Object.freeze(copy.modelSelection);
+  // A retained attachment reference is an exact id and digest, frozen like every other field.
+  if (copy.uploads)
+    for (const upload of copy.uploads) Object.freeze(upload);
   return Object.freeze(copy);
 }
 /** Only canonical request fields and local uncertainty survive reload; no receipt grants authority. */

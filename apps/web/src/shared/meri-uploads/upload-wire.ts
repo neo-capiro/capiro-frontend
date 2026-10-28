@@ -249,6 +249,9 @@ export function createUploadWire(
             headers: {
               "Content-Type": "application/octet-stream",
               [actionSessionHeader]: current,
+              // The declared digest of the exact original bytes below. The fixed proxy leaf recomputes
+              // it before forwarding, and custody still re-verifies the original against its record.
+              "X-Meri-Upload-Sha256": retained.sha256,
             },
             credentials: "same-origin",
             cache: "no-store",
@@ -271,6 +274,11 @@ export function createUploadWire(
           ? refuse(admitted.error.code, {
               outcome: admitted.error.outcome,
               status: response.status,
+              // A canonical reply that reports an unknown write outcome is the contract's uncertain
+              // case, not a refusal: only a status read may re-resolve it.
+              ...(admitted.error.outcome === "UNKNOWN"
+                ? { uncertain: true as const }
+                : {}),
             })
           : { ok: true, value: admitted };
       }),
