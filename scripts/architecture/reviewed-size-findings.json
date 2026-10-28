@@ -2418,10 +2418,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "0d8b6312761bd50cbb8833c58733b34cae33291362e8b264e4fe3f111a697273",
-    "reason": "The existing editor adds only a stored Blueprint-version label; save, export and recovery retain their existing owners.",
-    "reviewedBy": "Wave 3 Root independent source and Figma reviewer",
-    "reviewedOn": "2026-10-26"
+    "fingerprint": "7319356f666d0def5c211b2299e580756e8f43214b4099452930802a4198889d",
+    "reason": "Replacement for the earlier DraftEditor record at fingerprint 0d8b6312761bd50cbb8833c58733b34cae33291362e8b264e4fe3f111a697273; that record must be replaced, not duplicated. The delta adds five lines to this editor: the GenerationPanelHost mount for an ordinary saved draft plus the guard that keeps it off prospect drafts. Save, export, recovery, identity keying and the stored Blueprint label keep their existing owners, the host owns its own reads and dispatch, and the editor gains no new authority beyond rendering one child panel for a saved draft.",
+    "reviewedBy": "Hermes Agent source review 20261028_042649_c62845",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-document/DocumentLink.tsx",
@@ -7315,6 +7315,33 @@
     "fingerprint": "e7d5e0db75cf8a18ae52b090043d564e8e4ceb4bd4f5a25e1b3eff48b991e034",
     "reason": "One consent-review view subscribes to the existing routine workflow and renders its observation, reviewed intent and limits, explicit approval control, confirmed window and uncertain result. The correction only renders an absent optional instruction digest as unavailable instead of dereferencing it. The component delegates requests and decision custody to RoutineWorkflow; it adds no authorization, persistence, automatic retry or execution. Keeping this short related review surface together preserves the visible state-to-control relationship. Accepted exact 82-line body after full-body review; the new size finding is acknowledged, with physical canonical receiver and synthetic rendering coverage.",
     "reviewedBy": "Codex M7 bounded full-function review of physical MR04 optional-digest correction and actual canonical-package consent tests",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/generation/GeneratePanel.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "26f76ca4bac0ad736a7ede0b2380061107b51f1eac34c6b12658a65b901e6f06",
+    "reason": "One screen's generation-gate composition. The six gates (brief, context, outline, proposals, generation, quality) plus the shared GateRow/PlannedButton are plan-driven presentational surfaces over one props contract: no fetch, no effect, exactly one local input state (the brief textarea), no route, no schema and no decision. Authority stays with the owners this delta binds: plans.ts decides each advertised action and its ACL, controller.ts owns the read set, failure classification and recovery, owner-map.ts owns the route-to-owner allocation, and the operation registry owns the request/response contract. Boundary finding: the module is 408 nonblank lines, 8 over the review threshold, so it has no headroom left. The next gate or block added here must be split out along this delta's own controller.ts precedent (one module per responsibility) rather than refreshed under this record; the split is not required for the current six gates, which have no independent owner to carry.",
+    "reviewedBy": "Hermes Agent source review 20261028_042649_c62845",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/generation/use-generation-panel.ts",
+    "kind": "function",
+    "symbol": "useGenerationDispatch",
+    "fingerprint": "d390a69f5c5858be293f7600a18f0d61626e7812f5a63d5a20f07c1900b4d931",
+    "reason": "One dispatch responsibility for the mounted panel: authorize through the plan, send the exact declared request through the gateway, then classify the admission the owner returned (result / proposed / approval-required / unknown) and hand 'unknown' back to the reader instead of re-issuing it. The gateway owns transport and the single declared idempotency header, plans.ts owns refusal and ACL, controller.ts owns the read set and recovery classification, and no paid phase is ever re-sent automatically. One owner, not two.",
+    "reviewedBy": "Hermes Agent source review 20261028_042649_c62845",
+    "reviewedOn": "2026-10-28"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/workspace-generation-schemas.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0907a6d41d187604f0f6315086f96d0ed5879ed50db74c5849371502fae8c0d7",
+    "reason": "Leaf of closed receiving/request schemas for exactly one owner, the workspace-generation consumer: agent state and its parts, run status, proposals, context items, quality, the intake body and the native admission shapes the declared operations return. It is declarative zod only - strict objects, one refine that pins the outline coverage counts to their arrays, no IO, no fetch, no decision and no route - so each export answers the single question 'what may this owner's response contain'. The consuming operations assert the same closedness in workspace-generation.test.ts; there is no second responsibility to split out.",
+    "reviewedBy": "Hermes Agent source review 20261028_042649_c62845",
     "reviewedOn": "2026-10-28"
   }
 ]
