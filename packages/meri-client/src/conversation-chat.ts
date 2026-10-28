@@ -1,8 +1,6 @@
 import { Chat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import type { UIMessageChunk } from 'ai';
-import { validateUIEvent } from '@capiro/meri-contracts/browser';
-import { receiveNativeBillTextSourceEvent, BILL_TEXT_SOURCE_EVENT, receiveNativeHearingSourceEvent, HEARING_SOURCE_EVENT } from '@capiro/meri-contracts/conversation-sources';
 import {
   conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse,
   ConversationResponseError,
@@ -16,7 +14,12 @@ import type { ConversationObservation } from './conversation-observation.js';
 
 export interface ConversationChat {
   readonly chat: Chat<MeriUIMessage>;
-  readonly transport: MeriGuardedTransport<ConversationEvent>;
+  readonly transport: MeriGuardedTransport<Pick<ConversationEvent, 'eventId'>>;
+}
+
+function hasEventId(value: unknown): value is Pick<ConversationEvent, 'eventId'> {
+  return value !== null && typeof value === 'object' && 'eventId' in value
+    && typeof value.eventId === 'string';
 }
 
 /** Only the pinned producer's content-free lifecycle frames may bypass event admission. */
@@ -89,12 +92,10 @@ export function conversationChat(
         checkConversationFrame(chunk);
       };
     },
+    // Check frame identity before the canonical receiver consumes its single-use cursor.
+    // onEvent admits every event kind before the transport forwards it to the SDK.
     validateEvent: value => {
-      if (value !== null && typeof value === 'object' && 'type' in value && value.type === BILL_TEXT_SOURCE_EVENT)
-        return receiveNativeBillTextSourceEvent(new TextEncoder().encode(JSON.stringify(value)));
-      if (value !== null && typeof value === 'object' && 'type' in value && value.type === HEARING_SOURCE_EVENT)
-        return receiveNativeHearingSourceEvent(new TextEncoder().encode(JSON.stringify(value)));
-      if (!validateUIEvent(value)) throw new ConversationUnavailable('invalid-event');
+      if (!hasEventId(value)) throw new ConversationUnavailable('invalid-event');
       return value;
     },
     onEvent: event => { check(); observation.accept(event); },

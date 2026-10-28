@@ -108,14 +108,13 @@ export const meriCapabilityTable = {
   },
   runs: {
     label: "Runs",
-    ordinaryRoute: null,
-    deploymentFlag: null,
-    publicContract: "conversation-lifecycle/0.1.0 exists; no public run index",
-    sourcePin: runtimeSource,
-    runtimeOwner: "Meri conversation lifecycle owner",
-    requiredReceipt: "Current authorized run index (not published)",
-    unavailableReason:
-      "A run list is not available. Current runs can be reviewed within an enabled conversation.",
+    ordinaryRoute: "/meri/runs",
+    deploymentFlag: "MERI_CONVERSATION_WORKFLOW_ENABLED",
+    publicContract: "run-index/1.0.0 + conversation-usage/1.0.0",
+    sourcePin: "db450c39acbedb01c77694314c3f112aacbdbd94",
+    runtimeOwner: "Meri durable conversation run and usage owners",
+    requiredReceipt:
+      "Current authorized durable run observation and exact recorded usage; not worker liveness",
   },
   approvals: {
     label: "Approvals",

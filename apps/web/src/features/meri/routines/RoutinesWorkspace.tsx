@@ -9,6 +9,8 @@ import {
 import { Button } from "@capiro/ui/button";
 import type { RoutinesListResponse } from "@capiro/meri-contracts/routines-application";
 import type { RoutineWorkflow } from "../../../shared/meri-routines/workflow";
+import type { RoutinesConsentObservation } from "../../../shared/meri-routines/consent";
+import { ConsentReview } from "./ConsentReview";
 import { RoutineReview } from "./RoutineReview";
 import { RoutineForm, RoutineCancellation } from "./RoutineForm";
 import { MeriPageHeading } from "../ui/MeriPageHeading";
@@ -19,8 +21,12 @@ import styles from "../ui/meri-ui.module.css";
 import cards from "../ui/phone-cards.module.css";
 import phone from "../ui/phone-page.module.css";
 
+/** The canonical row plus the observation facet this read asks for, which the installed declarations do not carry. */
+type ListedRoutine = RoutinesListResponse["page"]["rows"][number] & {
+  consent?: RoutinesConsentObservation;
+};
 type Page = Omit<RoutinesListResponse["page"], "rows"> & {
-  rows: RoutinesListResponse["page"]["rows"][number][];
+  rows: ListedRoutine[];
 };
 type Routine = Page["rows"][number];
 type RoutineRow = {
@@ -93,12 +99,17 @@ export function RoutinesWorkspace({
   port,
   preserveNewDraft = false,
   client = "General",
+  onRequestExecution,
+  initialEditor,
 }: {
   port: RoutineWorkflow;
   /** Only the host keyed by immutable account/client may retain an unsent new draft across reauthorization. */
   preserveNewDraft?: boolean;
   /** Scope name shown in the Client column (Figma 08.01). */
   client?: string;
+  /** Explicitly enter the existing run-bound flow; management never manufactures execution authority. */
+  onRequestExecution?: (scheduleId?: string) => void;
+  initialEditor?: { scheduleId?: string };
 }) {
   const state = useSyncExternalStore(
     port.subscribe,
@@ -112,7 +123,7 @@ export function RoutinesWorkspace({
   const [editor, setEditor] = useState<{
     mode: "edit" | "pause" | "delete";
     scheduleId?: string;
-  } | null>(null);
+  } | null>(initialEditor ? { mode: "edit", ...initialEditor } : null);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [viewPort, setViewPort] = useState(port);
   const current = useRef<RoutineWorkflow | null>(port);
@@ -195,9 +206,13 @@ export function RoutinesWorkspace({
             </Button>
             <Button
               disabled={disabled}
-              onClick={() => setEditor({ mode: "edit" })}
+              onClick={() =>
+                port.managementOnly
+                  ? onRequestExecution?.()
+                  : setEditor({ mode: "edit" })
+              }
             >
-              New routine
+              {port.managementOnly ? "Create or edit routines" : "New routine"}
             </Button>
           </>
         }
@@ -250,10 +265,12 @@ export function RoutinesWorkspace({
               disabled={rowBlocked}
               onClick={() =>
                 routine &&
-                setEditor({
-                  mode: "edit",
-                  scheduleId: routine.projection.scheduleId,
-                })
+                (port.managementOnly
+                  ? onRequestExecution?.(routine.projection.scheduleId)
+                  : setEditor({
+                      mode: "edit",
+                      scheduleId: routine.projection.scheduleId,
+                    }))
               }
             >
               Open routine
@@ -276,10 +293,12 @@ export function RoutinesWorkspace({
               disabled={rowBlocked || routine?.projection.state !== "paused"}
               onClick={() =>
                 routine &&
-                setEditor({
-                  mode: "edit",
-                  scheduleId: routine.projection.scheduleId,
-                })
+                (port.managementOnly
+                  ? onRequestExecution?.(routine.projection.scheduleId)
+                  : setEditor({
+                      mode: "edit",
+                      scheduleId: routine.projection.scheduleId,
+                    }))
               }
             >
               Resume
@@ -298,6 +317,15 @@ export function RoutinesWorkspace({
               Cancel routine
             </Button>
           </div>
+          {routine && (
+            <ConsentReview
+              key={routine.projection.scheduleId}
+              port={port}
+              scheduleId={routine.projection.scheduleId}
+              observation={routine.consent ?? null}
+              disabled={rowBlocked}
+            />
+          )}
           {routine && (
             <details key={routine.projection.scheduleId}>
               <summary>Recent activity</summary>

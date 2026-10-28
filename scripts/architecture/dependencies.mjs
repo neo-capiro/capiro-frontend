@@ -107,6 +107,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
+  '@capiro/meri-contracts/uploads-application',
   '@capiro/meri-contracts/conversation-lifecycle',
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
@@ -130,6 +131,9 @@ export const publicExports = new Set([
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/meri/notifications/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-notifications/memory-proxy.server.ts`,
+  ])],
   [`${appSource}app/api/memory/owner/candidates/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
   ])],
@@ -167,6 +171,19 @@ export const serverAdapters = new Map([
     '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`, `${appSource}shared/meri-conversations/proxy.ts`,
     `${appSource}shared/meri-conversations/history-proxy.ts`,
   ])],
+  [`${appSource}app/api/conversations/runs/[operation]/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-runs/operations.ts`,
+  ])],
+  [`${appSource}app/api/conversations/usage-overview/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`, `${appSource}shared/meri-usage/operations.ts`,
+  ])],
+  ...['app/api/uploads/[operation]/route.ts', 'app/api/uploads/original/[uploadId]/route.ts'].map(route => [
+    `${appSource}${route}`, new Set([
+      previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-uploads/config.ts`, `${appSource}shared/meri-uploads/proxy.ts`,
+    ]),
+  ]),
   [`${appSource}app/api/documents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/proxy.ts`,

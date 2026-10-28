@@ -1,4 +1,7 @@
 import type { OperationRegistry } from "./contracts";
+import { completedReportOperations } from "./operations/meri-completed-reports";
+import { meriFirmSkillOperations } from "./operations/meri-firm-skills";
+import { meriProcedureOperations } from "./operations/meri-procedures";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
 import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
@@ -25,6 +28,7 @@ import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
 import { workspaceOperations } from "./operations/workspace";
+import { workspaceGenerationOperations } from "./operations/workspace-generation";
 import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
@@ -42,11 +46,15 @@ import {
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
+  ...completedReportOperations,
+  ...meriFirmSkillOperations,
+  ...meriProcedureOperations,
   ...settingsOperations,
   ...plannerOperations,
   ...engagementOperations,
   ...newsletterDeliveryOperations,
   ...workspaceOperations,
+  ...workspaceGenerationOperations,
   ...strategiesOperations,
   ...directoryOperations,
   ...directoryObjectiveOperations,

@@ -28,7 +28,11 @@ export type UsageRow = {
 export type UsageLimitsView = {
   heading: SettingsHeading;
   metrics: readonly { label: string; value: string; caption: string }[];
-  runUsage: { title: string; rows: readonly UsageRow[] };
+  runUsage: {
+    title: string;
+    firstColumnLabel?: string;
+    rows: readonly UsageRow[];
+  };
   configuration: {
     title: string;
     fields: readonly SettingsField[];
@@ -40,6 +44,14 @@ export type UsageLimitsView = {
     description: string;
     notices: readonly SettingsNotice[];
     queue: SettingsLink;
+  };
+  /** Additive whole-job economics; other callers keep the plain attempt view by omitting it. */
+  wholeJobs?: {
+    title: string;
+    description: string;
+    facts: readonly { label: string; value: string }[];
+    cost: { label: string; value: string; caption: string };
+    footnote: string;
   };
 };
 
@@ -90,10 +102,39 @@ export function UsageLimitsScreen({
           <SettingsCard title={view.runUsage.title}>
             <DataTable
               caption={view.runUsage.title}
-              columns={columns}
+              columns={
+                view.runUsage.firstColumnLabel
+                  ? columns.map((column) =>
+                      column.key === "run"
+                        ? { ...column, label: view.runUsage.firstColumnLabel! }
+                        : column,
+                    )
+                  : columns
+              }
               rows={view.runUsage.rows}
             />
           </SettingsCard>
+          {view.wholeJobs ? (
+            <SettingsCard
+              title={view.wholeJobs.title}
+              description={view.wholeJobs.description}
+            >
+              <dl className={styles.policy}>
+                {view.wholeJobs.facts.map((fact) => (
+                  <div key={fact.label}>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+                <div>
+                  <dt>{view.wholeJobs.cost.label}</dt>
+                  <dd>{view.wholeJobs.cost.value}</dd>
+                </div>
+              </dl>
+              <p className={surfaces.caption}>{view.wholeJobs.cost.caption}</p>
+              <p className={ui.muted}>{view.wholeJobs.footnote}</p>
+            </SettingsCard>
+          ) : null}
           <SettingsCard title={configuration.title}>
             {configurationContent ?? (
               <>

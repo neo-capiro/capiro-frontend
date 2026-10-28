@@ -63,6 +63,11 @@ export function readMeriCapabilities(env: Environment) {
   return resolveMeriCapabilities(
     {
       conversations,
+      runs: permitted(
+        "runs",
+        conversation.enabled,
+        "/api/conversations/runs/list",
+      ),
       routines: permitted(
         "routines",
         conversation.enabled,

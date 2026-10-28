@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { DataTable, TextArea, TextInput } from "../../shared/module-ui";
+import { DataTable, TextArea } from "../../shared/module-ui";
 import {
   SettingField,
   SettingsButton,
   SettingsCard,
-  SettingsDialog,
   SettingsNotice,
   SettingsTabs,
 } from "./components";
@@ -74,54 +73,50 @@ function MemoryReviewCard({ enabled }: { enabled: boolean }) {
 
 function MemoryGovernanceCard() {
   const [governance, setGovernance] = useState("Overview");
-  const [grant, setGrant] = useState(false);
   return (
-    <>
-      <SettingsCard title="Memory Governance Center">
-        <SettingsTabs
-          label="Memory governance"
-          items={governanceTabs.map((label) => ({ id: label, label }))}
-          value={governance}
-          onChange={setGovernance}
-        />
-        {governance === "Access grants" ? (
-          <>
-            <div className={styles.row}>
-              <div className={styles.grow}>
-                <SettingField label="Client">
-                  <select className={styles.input} disabled>
-                    <option>Client memory unavailable</option>
-                  </select>
-                </SettingField>
-              </div>
-              <SettingsButton primary onClick={() => setGrant(true)}>
-                Add grant
-              </SettingsButton>
+    <SettingsCard title="Memory Governance Center">
+      <SettingsTabs
+        label="Memory governance"
+        items={governanceTabs.map((label) => ({ id: label, label }))}
+        value={governance}
+        onChange={setGovernance}
+      />
+      {governance === "Access grants" ? (
+        <>
+          <div className={styles.row}>
+            <div className={styles.grow}>
+              <SettingField label="Client">
+                <select className={styles.input} disabled>
+                  <option>Client memory unavailable</option>
+                </select>
+              </SettingField>
             </div>
-            <DataTable
-              rows={[]}
-              rowKey={() => ""}
-              caption="Memory access grants"
-              emptyMessage="Access grant data is unavailable."
-              columns={[
-                "User",
-                "Permissions",
-                "Status",
-                "Expires",
-                "Reason",
-                "Actions",
-              ].map((label) => ({ key: label, label, render: () => "—" }))}
-            />
-          </>
-        ) : (
-          <p className={styles.empty}>
-            {governance} governance data is unavailable until its contract is
-            verified.
-          </p>
-        )}
-      </SettingsCard>
-      <MemoryGrantDialog open={grant} onClose={() => setGrant(false)} />
-    </>
+            <SettingsButton primary disabled title={reason}>
+              Add grant
+            </SettingsButton>
+          </div>
+          <DataTable
+            rows={[]}
+            rowKey={() => ""}
+            caption="Memory access grants"
+            emptyMessage="Access grant data is unavailable."
+            columns={[
+              "User",
+              "Permissions",
+              "Status",
+              "Expires",
+              "Reason",
+              "Actions",
+            ].map((label) => ({ key: label, label, render: () => "—" }))}
+          />
+        </>
+      ) : (
+        <p className={styles.empty}>
+          {governance} governance data is unavailable until its contract is
+          verified.
+        </p>
+      )}
+    </SettingsCard>
   );
 }
 
@@ -157,46 +152,5 @@ function MemoryFilesCard() {
         connected.
       </p>
     </SettingsCard>
-  );
-}
-
-function MemoryGrantDialog({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <SettingsDialog
-      open={open}
-      onClose={onClose}
-      title="Grant client memory access"
-      footer={
-        <>
-          <SettingsButton onClick={onClose}>Cancel</SettingsButton>
-          <SettingsButton primary disabled title={reason}>
-            Submit
-          </SettingsButton>
-        </>
-      }
-    >
-      <SettingField label="Active tenant member user ID">
-        <TextInput disabled />
-      </SettingField>
-      <SettingField label="Permissions">
-        <select className={styles.input} disabled>
-          <option>Read, Propose</option>
-          <option>Read</option>
-        </select>
-      </SettingField>
-      <SettingField label="Reason">
-        <TextArea disabled placeholder="Why does this person need access?" />
-      </SettingField>
-      <SettingField label="Expires at">
-        <TextInput type="datetime-local" disabled />
-      </SettingField>
-      <SettingsNotice title="Grant unavailable">{reason}</SettingsNotice>
-    </SettingsDialog>
   );
 }

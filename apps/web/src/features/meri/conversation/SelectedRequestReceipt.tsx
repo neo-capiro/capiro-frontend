@@ -9,6 +9,15 @@ export function SelectedRequestReceipt({
   request: ConversationStoredRequest | null | undefined;
   scope: string;
 }) {
+  if (request?.documentRevision)
+    return (
+      <details>
+        <summary>Applied document revision</summary>
+        <p>Scope: {scope}</p>
+        <p>Original version: {request.documentRevision.versionId}</p>
+        <p>Source bytes are pinned; the original version is retained.</p>
+      </details>
+    );
   if (!request?.skill) return null;
   const window = request.window;
   return (

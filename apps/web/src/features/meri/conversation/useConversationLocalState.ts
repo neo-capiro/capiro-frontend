@@ -15,7 +15,10 @@ import {
 } from "../../../shared/meri-conversations/tab-journal";
 import type { TurnView } from "./conversation-view";
 import { createInitialDraftOwner } from "./initial-draft";
-import type { ConversationSkillSelection } from "../../../shared/meri-conversations/query-journal";
+import type {
+  ConversationDraftRequest,
+  ConversationSkillSelection,
+} from "../../../shared/meri-conversations/query-journal";
 
 function draftOwner(scope: TabScope | undefined, accessLost: boolean) {
   if (accessLost) {
@@ -104,7 +107,7 @@ export function useConversationLocalState(
     if (accessLost) setTurns([]);
   }
   const bindNext = useCallback(
-    (target: ConversationContext, request: ConversationSubmitRequest) => {
+    (target: ConversationContext, request: ConversationDraftRequest) => {
       owner.bindNext(target, request);
     },
     [owner],
@@ -130,7 +133,7 @@ export function useConversationLocalState(
     initialDraft: owner,
     storageError: owner.error(),
     bindNext,
-    retainNext(finished: TurnView, request: ConversationSubmitRequest) {
+    retainNext(finished: TurnView, request: ConversationDraftRequest) {
       owner.reserve(owner.draft(), request);
       setTurns((previous) => [
         ...previous.filter((turn) => turn.runId !== finished.runId),

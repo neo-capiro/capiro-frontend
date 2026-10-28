@@ -1,17 +1,33 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { ConversationReads } from "../../../../shared/meri-conversations/current-reads";
+import type { MeriUploadAccess } from "../../../../shared/meri-uploads/access";
 import type { TurnView } from "../conversation-view";
 import { SourceCard } from "../../ui/SourceCard";
 import { BillSourceView } from "./BillSourceView";
 import { savedTime } from "./SourceReadState";
 import { HearingSourceView } from "./HearingSourceView";
 import { RecordedUsageView } from "./RecordedUsageView";
+import { savedUploadSource } from "./upload-source";
+import { UploadSourceView } from "./UploadSourceView";
 import ui from "../../ui/meri-ui.module.css";
 import styles from "./evidence.module.css";
 
+/** Every public native source kind, and what this surface calls it. */
+const sourceLabels = {
+  "source.native-bill-text": { lower: "bill text", title: "Bill text" },
+  "source.native-hearing-record": {
+    lower: "hearing record",
+    title: "Hearing record",
+  },
+  "source.native-upload": { lower: "uploaded file", title: "Uploaded file" },
+} as const;
+
 function savedSource(event: TurnView["nativeSources"][number]) {
   const saved = `Saved ${savedTime(event.createdAt)}`;
+  if (event.type === "source.native-upload")
+    // Metadata only: the saved upload states no extracted text, and none is shown.
+    return savedUploadSource(event, saved);
   return event.type === "source.native-hearing-record"
     ? {
         id: event.eventId,
@@ -35,11 +51,13 @@ function SelectedRead({
   selection,
   turn,
   reads,
+  uploads,
   onClose,
 }: {
   selection: string;
   turn: TurnView;
   reads: ConversationReads;
+  uploads: MeriUploadAccess;
   onClose: () => void;
 }) {
   const focus = useRef<HTMLElement>(null);
@@ -50,26 +68,21 @@ function SelectedRead({
     (event) => event.eventId === selection,
   );
   if (selection !== "usage" && !source) return null;
-  const sourceLabel =
-    source?.type === "source.native-hearing-record"
-      ? "hearing record"
-      : "bill text";
+  const label = source ? sourceLabels[source.type] : undefined;
   return (
     <section
       ref={focus}
       tabIndex={-1}
       className={styles.selected}
-      aria-label={
-        source
-          ? `${sourceLabel === "bill text" ? "Bill text" : "Hearing record"} viewer`
-          : "Run usage viewer"
-      }
+      aria-label={label ? `${label.title} viewer` : "Run usage viewer"}
     >
       <button type="button" className={ui.outline} onClick={onClose}>
-        Close {source ? sourceLabel : "recorded usage"}
+        Close {label ? label.lower : "recorded usage"}
       </button>
       {source?.type === "source.native-hearing-record" ? (
         <HearingSourceView event={source} reads={reads} />
+      ) : source?.type === "source.native-upload" ? (
+        <UploadSourceView event={source} uploads={uploads} />
       ) : source ? (
         <BillSourceView event={source} reads={reads} />
       ) : (
@@ -82,10 +95,12 @@ function SelectedRead({
 function RunEvidence({
   turn,
   reads,
+  uploads,
   label,
 }: {
   turn: TurnView;
   reads: ConversationReads;
+  uploads: MeriUploadAccess;
   label: string;
 }) {
   const [selection, setSelection] = useState<string>();
@@ -96,11 +111,15 @@ function RunEvidence({
       {turn.nativeSources.length > 0 && (
         <>
           <h3>
-            {turn.nativeSources.some(
-              (event) => event.type === "source.native-hearing-record",
+            {turn.nativeSources.every(
+              (event) => event.type === "source.native-bill-text",
             )
-              ? "Saved source pages"
-              : "Saved bill-text pages"}
+              ? "Saved bill-text pages"
+              : turn.nativeSources.every(
+                    (event) => event.type === "source.native-upload",
+                  )
+                ? "Saved uploaded files"
+                : "Saved source pages"}
           </h3>
           <p>
             Open a saved page to check current access. Saved references do not
@@ -121,7 +140,9 @@ function RunEvidence({
                         setSelection(event.eventId);
                       }}
                     >
-                      Open saved page
+                      {event.type === "source.native-upload"
+                        ? "Open saved file"
+                        : "Open saved page"}
                     </button>
                   }
                 />
@@ -146,6 +167,7 @@ function RunEvidence({
           selection={selection}
           turn={turn}
           reads={reads}
+          uploads={uploads}
           onClose={() => {
             setSelection(undefined);
             trigger.current?.focus();
@@ -159,10 +181,12 @@ function RunEvidence({
 /** Native sources and accounting reads stay separate from legacy references and UI tool activity. */
 export function ConversationEvidence({
   reads,
+  uploads,
   turn,
   earlier,
 }: {
   reads: ConversationReads;
+  uploads: MeriUploadAccess;
   turn: TurnView | null;
   earlier: readonly TurnView[];
 }) {
@@ -176,6 +200,7 @@ export function ConversationEvidence({
           key={saved.runId}
           turn={saved}
           reads={reads}
+          uploads={uploads}
           label={`Earlier run ${index + 1}`}
         />
       ))}
@@ -184,6 +209,7 @@ export function ConversationEvidence({
           key={turn.runId}
           turn={turn}
           reads={reads}
+          uploads={uploads}
           label="Current run"
         />
       )}

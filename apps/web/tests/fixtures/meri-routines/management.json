@@ -1,0 +1,206 @@
+{
+  "provenance": "Synthetic canonical Meri applicationFixture at 5a6170e0, no network/database/provider",
+  "context": {
+    "kind": "routine-management",
+    "tenantId": "tenant-a",
+    "actorId": "owner-a",
+    "selectedClientId": "10000000-0000-4000-8000-000000000005"
+  },
+  "request": {
+    "requestId": "10000000-0000-4000-8000-000000000950",
+    "operation": "cancel_scheduled_task",
+    "request": {
+      "scheduleId": "10000000-0000-4000-8000-000000000100",
+      "mode": "pause",
+      "running": "leave",
+      "runs": [],
+      "note": "Pause future synthetic work"
+    }
+  },
+  "prepared": {
+    "status": "approval_required",
+    "proposal": {
+      "operation": "cancel_scheduled_task",
+      "status": "approval_required",
+      "proposalId": "10000000-0000-4000-8000-000000000102",
+      "intentSha256": "17d9f3de2ff6841634921648044d6fe88b3ad110476006e5415fc0fa5d756e36",
+      "taskInstruction": null,
+      "projection": {
+        "scheduleId": "10000000-0000-4000-8000-000000000100",
+        "owner": {
+          "tenantId": "tenant-a",
+          "actorId": "owner-a"
+        },
+        "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+        "timezone": "UTC",
+        "scopes": [
+          {
+            "kind": "client",
+            "tenantId": "tenant-a",
+            "resourceId": "10000000-0000-4000-8000-000000000005",
+            "policyRevision": "p1"
+          }
+        ],
+        "state": "paused",
+        "maxCostMicrousd": 1000,
+        "maxRuntimeSeconds": 60,
+        "retryLimit": 0,
+        "destinationId": "meri-inbox",
+        "createdAt": "2026-10-17T12:00:00.000Z"
+      },
+      "policy": null,
+      "cancel": {
+        "mode": "pause",
+        "running": "leave",
+        "runs": [],
+        "note": "Pause future synthetic work"
+      }
+    }
+  },
+  "approved": {
+    "operation": "cancel_scheduled_task",
+    "status": "acknowledged",
+    "receipt": {
+      "operation": "cancel_scheduled_task",
+      "intentId": "10000000-0000-4000-8000-000000000102",
+      "generation": 2,
+      "projection": {
+        "scheduleId": "10000000-0000-4000-8000-000000000100",
+        "owner": {
+          "tenantId": "tenant-a",
+          "actorId": "owner-a"
+        },
+        "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+        "timezone": "UTC",
+        "scopes": [
+          {
+            "kind": "client",
+            "tenantId": "tenant-a",
+            "resourceId": "10000000-0000-4000-8000-000000000005",
+            "policyRevision": "p1"
+          }
+        ],
+        "state": "paused",
+        "maxCostMicrousd": 1000,
+        "maxRuntimeSeconds": 60,
+        "retryLimit": 0,
+        "destinationId": "meri-inbox",
+        "createdAt": "2026-10-17T12:00:00.000Z"
+      },
+      "outcome": "ACKNOWLEDGED",
+      "physicalStopProven": false
+    }
+  },
+  "listed": {
+    "operation": "list_scheduled_tasks",
+    "status": "listed",
+    "page": {
+      "operation": "list_scheduled_tasks",
+      "rows": [
+        {
+          "projection": {
+            "scheduleId": "10000000-0000-4000-8000-000000000100",
+            "owner": {
+              "tenantId": "tenant-a",
+              "actorId": "owner-a"
+            },
+            "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+            "timezone": "UTC",
+            "scopes": [
+              {
+                "kind": "client",
+                "tenantId": "tenant-a",
+                "resourceId": "10000000-0000-4000-8000-000000000005",
+                "policyRevision": "p1"
+              }
+            ],
+            "state": "paused",
+            "maxCostMicrousd": 1000,
+            "maxRuntimeSeconds": 60,
+            "retryLimit": 0,
+            "destinationId": "meri-inbox",
+            "createdAt": "2026-10-17T12:00:00.000Z"
+          },
+          "generation": 2,
+          "unresolved": false,
+          "inspection": {
+            "projection": {
+              "scheduleId": "10000000-0000-4000-8000-000000000100",
+              "owner": {
+                "tenantId": "tenant-a",
+                "actorId": "owner-a"
+              },
+              "temporalScheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+              "timezone": "UTC",
+              "scopes": [
+                {
+                  "kind": "client",
+                  "tenantId": "tenant-a",
+                  "resourceId": "10000000-0000-4000-8000-000000000005",
+                  "policyRevision": "p1"
+                }
+              ],
+              "state": "paused",
+              "maxCostMicrousd": 1000,
+              "maxRuntimeSeconds": 60,
+              "retryLimit": 0,
+              "destinationId": "meri-inbox",
+              "createdAt": "2026-10-17T12:00:00.000Z"
+            },
+            "projectionSha256": "43a7b2aad2db4e1cd9a1cdca76faa006c4011cb86483b634c77d8b4b2e3b0e90",
+            "observedAt": "2026-10-17T12:00:00.000Z",
+            "temporal": {
+              "scheduleId": "meri/schedules/10000000-0000-4000-8000-000000000100",
+              "paused": true,
+              "remainingActions": null,
+              "createdAt": "2025-10-15T12:00:00.000Z",
+              "lastUpdatedAt": null,
+              "numActionsTaken": 0,
+              "numActionsMissedCatchupWindow": 0,
+              "numActionsSkippedOverlap": 0,
+              "nextActionTimes": [],
+              "recentActions": [],
+              "runningActions": []
+            },
+            "coverage": {
+              "historyComplete": false,
+              "currentRunIdentityVerified": false,
+              "nextActions": {
+                "observed": 0,
+                "returned": 0,
+                "omitted": 0
+              },
+              "recentActions": {
+                "observed": 0,
+                "returned": 0,
+                "omitted": 0
+              },
+              "runningActions": {
+                "observed": 0,
+                "returned": 0,
+                "omitted": 0
+              }
+            }
+          },
+          "inspectionState": "observed"
+        }
+      ],
+      "hasMore": false,
+      "nextAfterScheduleId": null,
+      "originalRuns": {
+        "executions": [],
+        "coverage": {
+          "observedReferences": 0,
+          "returned": 0,
+          "omitted": 0,
+          "historyComplete": false,
+          "currentRetryVerified": false
+        }
+      },
+      "coverage": {
+        "complete": false,
+        "currentRetryVerified": false
+      }
+    }
+  }
+}

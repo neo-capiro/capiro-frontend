@@ -35,10 +35,41 @@ function Values({ value }: { value: unknown }) {
   );
 }
 
+/** The approved Work definition exactly as the contract states it. The review displays it verbatim: it never
+ *  re-derives, defaults, summarises or reorders it, and an ordinary routine simply carries none. */
+type WorkSelection = Readonly<{
+  entry: string;
+  jobKind: string;
+  deliverables: readonly string[];
+  dependencies: readonly string[];
+}>;
+function workSelection(proposal: unknown): WorkSelection | null {
+  if (!proposal || typeof proposal !== "object") return null;
+  const work = (proposal as { work?: unknown }).work;
+  return work && typeof work === "object" ? (work as WorkSelection) : null;
+}
+/** The work the owner is approving: entry, kind, deliverables and dependencies, shown as reviewed. */
+function WorkDefinition({ work }: { work: WorkSelection }) {
+  const listed = (items: readonly string[]) =>
+    items.length ? items.join("; ") : "none listed";
+  return (
+    <>
+      <h3>Work this routine starts</h3>
+      <p>
+        Entry: {work.entry === "start-work" ? "Start work" : work.entry}. Kind:{" "}
+        {work.jobKind}.
+      </p>
+      <p>Deliverables: {listed(work.deliverables)}.</p>
+      <p>Dependencies: {listed(work.dependencies)}.</p>
+    </>
+  );
+}
+
 /** Full retained policy remains inspectable, including uncommon calendars and cancellation modes. */
 export function RoutineProposalDetails({ saved }: { saved: SavedRoutine }) {
   const proposal = saved.proposal;
   const request = saved.prepare.request;
+  const work = workSelection(proposal);
   return (
     <>
       <p>
@@ -86,6 +117,7 @@ export function RoutineProposalDetails({ saved }: { saved: SavedRoutine }) {
           </p>
         </>
       )}
+      {work && <WorkDefinition work={work} />}
       <details>
         <summary>Review complete timing and behavior</summary>
         <Values value={"policy" in request ? request.policy : request} />
@@ -160,7 +192,8 @@ function Approval({
           disabled={busy}
           onChange={(event) => setReviewed(event.target.checked)}
         />{" "}
-        I reviewed the instructions, scope, timing, destination and limits.
+        I reviewed the instructions, scope, timing, destination and limits
+        {workSelection(saved.proposal) ? ", and the work this routine starts" : ""}.
       </label>
       <div className={styles.row}>
         <Button

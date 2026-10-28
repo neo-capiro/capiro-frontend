@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { ClientIntakeDialog } from "@/features/portfolio/client-intake/public";
 import { RegistrantImportDialog } from "@/features/portfolio/intake/registrant/public";
+import { MeriProfileStarterDialog } from "./MeriProfileStarterDialog";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -26,12 +27,14 @@ export function CreateProfileDialog(props: CreateProfileDialogProps) {
 function ProfileChoiceSession({
   open,
   onOpenChange,
+  destinations,
 }: CreateProfileDialogProps) {
   const router = useRouter();
   const identity = useIdentity();
   const [manual, setManual] = useState(false);
   const [registrant, setRegistrant] = useState(false);
-  const capacity = useProfileCapacity(!manual && !registrant);
+  const [meri, setMeri] = useState(false);
+  const capacity = useProfileCapacity(!manual && !registrant && !meri);
   const switching = useRef(false);
   const [opener] = useState(() =>
     typeof document !== "undefined" &&
@@ -68,6 +71,15 @@ function ProfileChoiceSession({
         open={open}
         onOpenChange={onOpenChange}
         onSaved={(client) => router.push(`/portfolio/${client.id}`)}
+        onCloseAutoFocus={restoreFocus}
+      />
+    );
+  if (meri)
+    return (
+      <MeriProfileStarterDialog
+        open={open}
+        onOpenChange={onOpenChange}
+        destinations={destinations}
         onCloseAutoFocus={restoreFocus}
       />
     );
@@ -123,22 +135,30 @@ function ProfileChoiceSession({
             description="Import clients from your firm’s lobbying filings."
           />
         </button>
-        <div className={styles.unavailableChoice}>
-          <button
-            className={styles.profileChoice}
-            disabled
-            aria-describedby="meri-create-unavailable"
-          >
-            <ChoiceContent
-              icon="sparkle"
-              title="Create with Meri"
-              description="Share a website, notes or files and Meri drafts the profile."
-            />
-          </button>
-          <small id="meri-create-unavailable">
-            Profile drafting is not available in this preview.
-          </small>
-        </div>
+        <button
+          className={styles.profileChoice}
+          disabled={!permitted || !capacity.allowed || !destinations.meri}
+          aria-describedby="meri-create-status"
+          onClick={() => {
+            switching.current = true;
+            setMeri(true);
+          }}
+        >
+          <ChoiceContent
+            icon="sparkle"
+            title="Create with Meri"
+            description="Share a website, notes or files and Meri drafts the profile."
+          />
+        </button>
+        <small id="meri-create-status">
+          {!destinations.meri
+            ? "Meri destination is not configured."
+            : !permitted
+              ? "Your role does not allow creating profiles."
+              : !capacity.allowed
+                ? "Your plan does not allow another profile right now."
+                : "Meri prepares a reviewable proposal. You approve it in the conversation before anything is created."}
+        </small>
         <p className="eyebrow">Prospect</p>
         {permitted ? (
           <Link

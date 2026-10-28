@@ -4,12 +4,17 @@ import { actionSessionHints } from "./session-bootstrap";
 import { conversationSessionHints } from "../meri-conversations/session";
 import { receivedActionSession } from "./session-header";
 import type { readActionConfig } from "./config";
-import { routineRoute } from "../meri-routines/routes";
 import {
-  routinesPaths,
+  routineRoute,
+  routinePaths,
+  receivedRoutineManagementSession,
+} from "../meri-routines/routes";
+import {
   routinesMetadata,
   receiveRoutinesRequest,
-} from "@capiro/meri-contracts/routines-application";
+  routineManagementSessionPath,
+  receiveRoutineManagementSessionRequest,
+} from "../meri-routines/canonical-receiver";
 import {
   objectiveGenerationStartMetadata,
   requireObjectiveGenerationStartRequest,
@@ -23,6 +28,7 @@ const routes = new Set([
   "prepare",
   "execute",
   "objective-start",
+  "routine-session",
 ]);
 const headers = {
   "Content-Type": "application/json",
@@ -34,6 +40,12 @@ const unavailable = (status: number) =>
     { error: { code: "FRONTEND_ACTION_UNAVAILABLE" } },
     { status, headers },
   );
+// The installed published declarations predate the two renewal routes, so the admitted name is not statically known to
+// them. The canonical receiver still validates the body; no header, credential or authority path changes here.
+const receiveRequest = receiveRoutinesRequest as unknown as (
+  route: string,
+  body: string,
+) => Promise<unknown>;
 
 /** A fixed same-origin adapter. The Meri host still owns every authority check. */
 export async function proxyActionRequest(
@@ -44,6 +56,7 @@ export async function proxyActionRequest(
   fetcher: typeof fetch = fetch,
 ) {
   const routine = routineRoute(route);
+  const managementSession = route === "routine-session";
   if (!routes.has(route) && !routine) return unavailable(404);
   if (request.method !== "POST") return unavailable(405);
   const url = new URL(request.url);
@@ -63,9 +76,10 @@ export async function proxyActionRequest(
       signal.throwIfAborted();
       if (!nativeToken) return unavailable(401);
       const credential =
-        route === "session" || route === "objective-start"
+        route === "session" || route === "objective-start" || managementSession
           ? nativeToken
-          : receivedActionSession(request);
+          : (receivedActionSession(request) ??
+            (routine ? receivedRoutineManagementSession(request) : null));
       if (!credential) return unavailable(401);
       const body = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
@@ -74,20 +88,21 @@ export async function proxyActionRequest(
           ? routinesMetadata.limits.requestBytes
           : route === "objective-start"
             ? objectiveGenerationStartMetadata.requestBytes
-            : route === "session"
+            : route === "session" || managementSession
               ? 4096
               : 16 * 1024 * 1024,
       );
       if (route === "session")
         actionSessionHints.or(conversationSessionHints).parse(JSON.parse(body));
-      if (routine) await receiveRoutinesRequest(routine, body);
+      if (routine) await receiveRequest(routine, body);
+      if (managementSession) receiveRoutineManagementSessionRequest(body);
       const objective =
         route === "objective-start"
           ? requireObjectiveGenerationStartRequest(JSON.parse(body))
           : undefined;
       signal.throwIfAborted();
       const response = await fetcher(
-        `${config.baseUrl}${routine ? routinesPaths[routine] : objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
+        `${config.baseUrl}${managementSession ? routineManagementSessionPath : routine ? routinePaths[routine] : objective ? objectiveGenerationStartMetadata.path : `/api/action-followthrough/${route}`}`,
         {
           method: "POST",
           body,
@@ -108,7 +123,7 @@ export async function proxyActionRequest(
           ? routinesMetadata.limits.responseBytes
           : objective
             ? objectiveGenerationStartMetadata.responseBytes
-            : route === "session"
+            : route === "session" || managementSession
               ? 4096
               : 16 * 1024 * 1024,
       );

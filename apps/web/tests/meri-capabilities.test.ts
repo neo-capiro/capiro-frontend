@@ -42,16 +42,15 @@ it("inventory distinguishes implemented ordinary routes from missing workspace c
     "/meri/task-updates",
     "/meri/memory",
     "/settings/preferences",
+    "/meri/runs",
     "/meri/routines",
   ]);
-  for (const id of ["runs", "approvals", "dataAccess"] as const) {
+  for (const id of ["approvals", "dataAccess"] as const) {
     expect(state[id].status, id).toBe("unavailable");
     expect(meriCapabilityHref(id, state), id).toBeUndefined();
     expect(meriCapabilityTable[id].deploymentFlag).toBeNull();
   }
-  expect(meriCapabilityTable.runs.publicContract).toContain(
-    "conversation-lifecycle/0.1.0 exists",
-  );
+  expect(meriCapabilityTable.runs.publicContract).toContain("run-index/1.0.0");
   expect(JSON.stringify(meriCapabilityTable)).not.toContain("/kit");
   expect(Object.isFrozen(state)).toBe(true);
   expect(Object.isFrozen(state.conversations)).toBe(true);
@@ -82,6 +81,10 @@ it("all 256 flag combinations preserve operation prerequisites and existing navi
       flags[0] ? "on" : "off",
     );
     expect(meriCapabilityHref("routines", state)).toBe("/meri/routines");
+    expect(state.runs.status, `${bits}:runs`).toBe(flags[0] ? "on" : "off");
+    expect(meriCapabilityHref("runs", state)).toBe(
+      flags[0] ? "/meri/runs" : undefined,
+    );
     ids.forEach((id, index) => {
       expect(state[id].status, `${bits}:${id}`).toBe(
         expected[index] ? "on" : "off",

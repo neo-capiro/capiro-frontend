@@ -9,6 +9,8 @@ import { PersonalPreferencesScreen } from "./PersonalPreferencesScreen";
 import { PrivacyDeletionScreen } from "./PrivacyDeletionScreen";
 import { SkillsTemplatesScreen } from "./SkillsTemplatesScreen";
 import { UsageLimitsScreen } from "./UsageLimitsScreen";
+import { UsageOverviewHost } from "../../usage-overview/UsageOverviewHost";
+import { ProcedureGovernanceHost } from "../../procedures/ProcedureGovernanceHost";
 import {
   preferencePages as pages,
   unavailablePreferences as views,
@@ -28,10 +30,14 @@ const unavailable =
 export function MeriPreferencesPanel({
   userPreferencesEnabled = false,
   tenantSettingsEnabled = false,
+  usageEnabled = false,
+  procedureGovernanceEnabled = false,
   reportContent,
 }: {
   userPreferencesEnabled?: boolean;
   tenantSettingsEnabled?: boolean;
+  usageEnabled?: boolean;
+  procedureGovernanceEnabled?: boolean;
   reportContent?: ReactNode;
 }) {
   const [page, setPage] = useState<PreferencePageId>("personal");
@@ -68,6 +74,15 @@ export function MeriPreferencesPanel({
         />
       );
     case "usage":
+      if (usageEnabled)
+        return (
+          <UsageOverviewHost
+            chrome={chrome}
+            configurationContent={
+              tenantSettingsEnabled ? <TenantModelSettings /> : undefined
+            }
+          />
+        );
       return (
         <UsageLimitsScreen
           chrome={
@@ -89,10 +104,39 @@ export function MeriPreferencesPanel({
         />
       );
     case "skills":
-      return <SkillsTemplatesScreen chrome={chrome} view={views.skills} />;
+      return (
+        <SkillsTemplatesScreen
+          chrome={
+            procedureGovernanceEnabled
+              ? {
+                  ...chrome,
+                  notice: {
+                    title: "Firm procedure governance",
+                    detail:
+                      "Current administrators can manage stored firm procedures. Native execution and template attachment retain their own availability checks.",
+                  },
+                }
+              : chrome
+          }
+          view={views.skills}
+          governance={
+            procedureGovernanceEnabled ? <ProcedureGovernanceHost /> : undefined
+          }
+        />
+      );
     case "updates":
       return (
-        <NotificationsAccountScreen chrome={chrome} view={views.updates} />
+        <NotificationsAccountScreen
+          chrome={{
+            ...chrome,
+            notice: {
+              title: "Updates and notification preferences",
+              detail:
+                "Review a recent permitted page of run notices and your memory-review notices. Optional notices use your saved preferences; required actions stay available.",
+            },
+          }}
+          view={views.updates}
+        />
       );
     case "privacy":
       return <PrivacyDeletionScreen chrome={chrome} view={views.privacy} />;

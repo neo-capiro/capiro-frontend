@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "baseUrl": "../..",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@capiro/meri-contracts/conversation-application": [
+        "../../../m7-work-selector-20261028/packages/contracts/dist/conversation-application.d.ts"
+      ],
+      "@capiro/meri-contracts/conversation-input": [
+        "../../../m7-work-selector-20261028/packages/contracts/dist/conversation-input.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "../../next-env.d.ts",
+    "../../src/features/meri/work/**/*.tsx",
+    "../../src/features/meri/conversation/ConversationView.tsx",
+    "../../src/features/meri/conversation/SkillSelectionPicker.tsx",
+    "../../src/features/meri/conversation/run-commands.ts",
+    "../../src/features/meri/conversation/useConversationTurn.ts",
+    "../../src/shared/meri-conversations/query-journal.ts",
+    "../../src/shared/meri-conversations/turn-journal.ts",
+    "./**/*.mts"
+  ],
+  "exclude": ["../../node_modules", "../../.next", "../../test-results"]
+}

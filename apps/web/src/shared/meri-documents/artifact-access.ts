@@ -28,6 +28,7 @@ export type ArtifactPreview = Readonly<{
     | Readonly<{
         kind: "generated";
         artifactId: string;
+        objectSha256: string;
         generationStatus: GeneratedVersion["generationStatus"];
         previewStatus: GeneratedVersion["previewStatus"];
         inspection: ArtifactInspection;
@@ -94,6 +95,7 @@ const preview = (receipt: DocumentInspectionResponse): ArtifactPreview => {
         ...common,
         kind: "generated",
         artifactId: receipt.version.artifactId,
+        objectSha256: receipt.version.object.sha256,
         filename: receipt.version.filename,
         mimeType: receipt.version.mimeType,
         generationStatus: receipt.version.generationStatus,

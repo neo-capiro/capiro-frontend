@@ -18,6 +18,7 @@ import {
   conversationIntentJournal,
   submissionIdentity,
   skillSelectionFields,
+  type ConversationDraftRequest,
   type ConversationSkillSelection,
 } from "../../../shared/meri-conversations/query-journal";
 import {
@@ -40,6 +41,7 @@ export type ConversationTurnTarget = {
   modelSelection?: ConversationSubmitRequest["modelSelection"];
   skill?: ConversationSubmitRequest["skill"];
   windowRequest?: ConversationSubmitRequest["windowRequest"];
+  work?: ConversationSkillSelection["work"];
 };
 
 /** Seed the existing canonical command journal before exact target session issuance. */
@@ -77,6 +79,7 @@ function prepareTarget(
         ...request,
         skill: previous.submit.skill,
         windowRequest: previous.submit.windowRequest,
+        work: previous.submit.work,
         modelSelection: previous.submit.modelSelection,
       }) !== submissionIdentity(request))
   )
@@ -109,7 +112,7 @@ async function requestTurn(
     source?: RunBinding | undefined;
     prompt?: string | undefined;
     readOnly: boolean;
-    capture?: (request: ConversationSubmitRequest) => void;
+    capture?: (request: ConversationDraftRequest) => void;
     modelSelection?: ConversationSubmitRequest["modelSelection"];
     selection?: ConversationSkillSelection;
   },
@@ -244,7 +247,7 @@ export function useConversationTurn(
     source?: RunBinding,
     prompt?: string,
     readOnly = false,
-    capture?: (request: ConversationSubmitRequest) => void,
+    capture?: (request: ConversationDraftRequest) => void,
     modelSelection?: ConversationSubmitRequest["modelSelection"],
     selection?: ConversationSkillSelection,
   ) =>
@@ -287,7 +290,7 @@ export function useConversationTurn(
     start: (
       source: RunBinding,
       prompt: string,
-      capture: (request: ConversationSubmitRequest) => void,
+      capture: (request: ConversationDraftRequest) => void,
       modelSelection?: ConversationSubmitRequest["modelSelection"],
       selection?: ConversationSkillSelection,
     ) => perform(source, prompt, false, capture, modelSelection, selection),

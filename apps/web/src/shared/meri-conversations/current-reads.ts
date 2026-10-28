@@ -104,7 +104,7 @@ export class ConversationReadUnavailable extends Error {
   }
 }
 
-async function read<T extends { schemaVersion: string }>(
+export async function readCurrentNative<T extends { schemaVersion: string }>(
   operation: CurrentReadOperation<T | { error: { code: string } }>,
   input: unknown,
   signal: AbortSignal,
@@ -168,7 +168,7 @@ export function createConversationReads(
 ) {
   return Object.freeze({
     source(runId: string, referenceId: string, signal: AbortSignal) {
-      return read(
+      return readCurrentNative(
         sourceReadOperation,
         {
           schemaVersion: BILL_TEXT_SOURCE_READ_SCHEMA,
@@ -183,7 +183,7 @@ export function createConversationReads(
       );
     },
     hearing(runId: string, referenceId: string, signal: AbortSignal) {
-      return read(
+      return readCurrentNative(
         hearingReadOperation,
         {
           schemaVersion: HEARING_SOURCE_READ_SCHEMA,
@@ -203,7 +203,7 @@ export function createConversationReads(
       playback: HearingMediaReadRequest["playback"],
       signal: AbortSignal,
     ) {
-      return read(
+      return readCurrentNative(
         hearingMediaReadOperation,
         {
           schemaVersion: HEARING_MEDIA_READ_SCHEMA,
@@ -219,7 +219,7 @@ export function createConversationReads(
       );
     },
     usage(runId: string, signal: AbortSignal) {
-      return read(
+      return readCurrentNative(
         usageReadOperation,
         {
           schemaVersion: CONVERSATION_USAGE_SCHEMA,

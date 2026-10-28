@@ -11,6 +11,13 @@ import {
 import {
   receiveDocumentResponse as receiveDocumentAccessResponse,
   type AdmittedDocumentRequest as AdmittedAccessRequest,
+  type DocumentAccessRoute,
+  type AdmittedGeneratedDocumentVersion,
+  type AdmittedDocumentPreviewRequest,
+  receiveDocumentPreview,
+  receiveDocumentPreviewPublication,
+  receiveNativeResultsRequest,
+  receiveNativeResultsResponse,
 } from "@capiro/meri-client/document-access";
 import {
   boundedJsonBytes,
@@ -19,6 +26,8 @@ import {
 import { actionSessionHeader } from "../meri-actions/session-header";
 
 type JsonRoute = Exclude<DocumentRoute, "download">;
+/** The admitted native-result request is the receiver's own shape; no contract type is re-declared. */
+type NativeResultsRequest = ReturnType<typeof receiveNativeResultsRequest>;
 export interface DocumentTransport {
   request<R extends JsonRoute>(
     route: R,
@@ -60,12 +69,29 @@ function documentReceiver(
     { once: true },
   );
   return async function receive<T>(
-    route: DocumentRoute,
+    route:
+      | DocumentRoute
+      | DocumentAccessRoute
+      | "preview"
+      | "preview-publish"
+      | "results",
     request: unknown,
     caller: AbortSignal,
     decode: (response: Response, signal: AbortSignal) => Promise<T>,
   ): Promise<{ status: number; value: T }> {
-    if (!["create", "revise", "inspect", "download"].includes(route))
+    if (
+      ![
+        "create",
+        "revise",
+        "inspect",
+        "download",
+        "history",
+        "list",
+        "preview",
+        "preview-publish",
+        "results",
+      ].includes(route)
+    )
       throw new Error("Unknown document route");
     const body = JSON.stringify(request);
     let accessLost = false;
@@ -146,6 +172,19 @@ export function documentAccessTransport(
 ) {
   const receive = documentReceiver(credential, lifetime, fetcher);
   return {
+    metadata: <R extends "list" | "history">(
+      route: R,
+      request: AdmittedAccessRequest<R>,
+      signal: AbortSignal,
+    ) =>
+      receive(route, request, signal, async (response, current) =>
+        receiveDocumentAccessResponse(
+          route,
+          response.status,
+          await boundedJsonBytes(response, current, 16 * 1024 * 1024),
+          request,
+        ),
+      ),
     inspect: (request: AdmittedAccessRequest<"inspect">, signal: AbortSignal) =>
       receive("inspect", request, signal, async (response, current) =>
         receiveDocumentAccessResponse(
@@ -154,6 +193,56 @@ export function documentAccessTransport(
           await boundedJsonBytes(response, current, 16 * 1024 * 1024),
           request,
         ),
+      ),
+    /**
+     * The additive native-result discovery read. The wire request is the receiver's own closed empty
+     * object; the admitted `request` is the correlation token the canonical receiver checks the
+     * answer against, so the browser never supplies a scope, run, actor or client binding. It admits
+     * no version for inspect or download, leaving the existing inspect/download receiver the byte
+     * authority.
+     */
+    results: (request: NativeResultsRequest, signal: AbortSignal) =>
+      receive("results", {}, signal, async (response, current) =>
+        receiveNativeResultsResponse(
+          response.status,
+          await boundedJsonBytes(response, current, 256 * 1024),
+          request,
+        ),
+      ),
+  };
+}
+
+/** Read never triggers publication. Both routes retain the same current session and public receiver. */
+export function documentPreviewTransport(
+  credential: string,
+  lifetime: AbortSignal,
+  fetcher: typeof fetch = fetch,
+) {
+  const receive = documentReceiver(credential, lifetime, fetcher);
+  return {
+    publish: (
+      request: AdmittedDocumentPreviewRequest<"publish">,
+      version: AdmittedGeneratedDocumentVersion,
+      signal: AbortSignal,
+    ) =>
+      receive("preview-publish", request, signal, async (response, current) =>
+        receiveDocumentPreviewPublication(
+          response.status,
+          await boundedJsonBytes(response, current, 65536),
+          request,
+          version,
+        ),
+      ),
+    read: (
+      request: AdmittedDocumentPreviewRequest<"read">,
+      version: AdmittedGeneratedDocumentVersion,
+      signal: AbortSignal,
+    ) =>
+      receive("preview", request, signal, async (response, current) =>
+        receiveDocumentPreview(response, version, {
+          signal: current,
+          maxBytes: 8 * 1024 * 1024,
+        }),
       ),
   };
 }

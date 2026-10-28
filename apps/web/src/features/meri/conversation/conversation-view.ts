@@ -10,6 +10,28 @@ import {
   type WorkspaceView,
 } from "../workspace/workspace-view";
 
+/**
+ * The canonical upload source event, taken from the generated conversation-event union: the app
+ * never restates the wire shape, and a producer that adds or changes a field shows up here.
+ */
+export type NativeUploadSourceEvent = Extract<
+  ConversationEvent,
+  { type: "source.native-upload" }
+>;
+/** Every public native source event this fold keeps apart from the legacy UI event stream. */
+export type NativeSourceEvent =
+  | NativeBillTextSourceEvent
+  | NativeHearingSourceEvent
+  | NativeUploadSourceEvent;
+
+const nativeSourceTypes = [
+  "source.native-bill-text",
+  "source.native-hearing-record",
+  "source.native-upload",
+] as const;
+const isNativeSource = (event: ConversationEvent): event is NativeSourceEvent =>
+  (nativeSourceTypes as readonly string[]).includes(event.type);
+
 type RunState = ConversationObservationSnapshot["runState"];
 
 /** One request/run in the conversation, folded from service-admitted events only. */
@@ -24,10 +46,7 @@ export type TurnView = Readonly<
     throughSequence?: number;
     /** UI key derived from admitted conversation + logical request identity; never prompt text. */
     promptKey?: string;
-    nativeSources: readonly (
-      | NativeBillTextSourceEvent
-      | NativeHearingSourceEvent
-    )[];
+    nativeSources: readonly NativeSourceEvent[];
   } & Pick<
     WorkspaceView,
     | "reasonCode"
@@ -79,10 +98,10 @@ export function turnFromEvents(
   omittedPrefix: boolean,
 ): TurnView {
   const first = events[0];
+  // Every public native source event is kept out of the legacy UI fold, not just bill and hearing:
+  // an unfamiliar native source must never be folded as if it were a legacy UI event.
   const legacy = events.filter(
-    (event): event is UIEvent =>
-      event.type !== "source.native-bill-text" &&
-      event.type !== "source.native-hearing-record",
+    (event): event is UIEvent => !isNativeSource(event),
   );
   const view = first ? buildWorkspaceView(legacy, first.binding) : undefined;
   return Object.freeze({
@@ -96,10 +115,8 @@ export function turnFromEvents(
     tools: view?.tools ?? [],
     sources: view?.sources ?? [],
     nativeSources: events.filter(
-      (event): event is NativeBillTextSourceEvent | NativeHearingSourceEvent =>
-        (event.type === "source.native-bill-text" ||
-          event.type === "source.native-hearing-record") &&
-        event.binding.runId === binding.runId,
+      (event): event is NativeSourceEvent =>
+        isNativeSource(event) && event.binding.runId === binding.runId,
     ),
     approvals: view?.approvals ?? [],
     artifacts: view?.artifacts ?? [],

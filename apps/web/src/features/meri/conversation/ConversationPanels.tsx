@@ -33,7 +33,12 @@ export function ConversationPanels({
   );
   return (
     <>
-      <ConversationEvidence reads={port.reads} turn={turn} earlier={earlier} />
+      <ConversationEvidence
+        reads={port.reads}
+        uploads={port.uploads}
+        turn={turn}
+        earlier={earlier}
+      />
       {approvals ? (
         <ConversationIntents
           access={port.intents}

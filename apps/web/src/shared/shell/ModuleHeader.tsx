@@ -75,14 +75,9 @@ export function ModuleHeader({
             >
               <ModuleAsset name="search" />
             </ScopedLink>
-            <button
-              type="button"
-              disabled
-              aria-label="Updates — unavailable"
-              title="Notifications integration is pending"
-            >
+            <ScopedLink href="/meri/updates" aria-label="Updates">
               <ModuleAsset name="updates" />
-            </button>
+            </ScopedLink>
             <ScopedLink href="/settings/personal" aria-label="Account settings">
               <ModuleAsset name="profile" />
             </ScopedLink>
