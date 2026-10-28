@@ -3853,10 +3853,12 @@
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
     "kind": "function",
     "symbol": "RoutinesWorkspace",
-    "fingerprint": "5a349e3607cd662cc498cff3276c72b692f5302e5ccbe21ff0757d82a7763a13",
-    "reason": "The routines workspace view owner for the current connection: list read and paging, selected-row and editor/cancellation view state, row actions, review panel, recent-activity details and status notices. All of it operates on one workflow port plus one local view state; row/column shaping is already extracted to module scope and the management-versus-execution difference is delegated to port.managementOnly with onRequestExecution. It holds no authority, transport or persistence responsibility of its own (the service decides scope, review and idempotency), so the mixed list/editor facets are one view responsibility rather than two. Splitting the row-action and details sub-renders is an optional future tidy-up, not a cohesion requirement.",
-    "reviewedBy": "Hermes Agent independent architecture review (session 20261027_214238_eb5bec)",
-    "reviewedOn": "2026-10-27"
+    "line": 98,
+    "nonblank": 278,
+    "fingerprint": "1b557e37a06d72e19adee12768a2655bc2876b74a15e9f40b281ea9b9137647e",
+    "reason": "One current-connection routines view: it holds list/paging, selected-row and editor state, delegates authority and mutations to the workflow port, and composes the existing form, cancellation, review and activity surfaces. The MR04 delta adds only the selected routine's ConsentReview with the existing disabled predicate; that child owns the explicit review interaction and the canonical workflow owns request custody. Account/port retirement, late-result fencing and management-versus-execution delegation remain in the same existing view lifetime. Splitting this render solely for size would not separate a second responsibility. Accepted exact body; source-stage public receiving and final installed-package/deployed checks remain distinct.",
+    "reviewedBy": "Codex bounded exact-body validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/features/meri/routines/RoutinesWorkspace.tsx",
@@ -6434,10 +6436,12 @@
     "file": "apps/web/src/shared/meri-actions/proxy.ts",
     "kind": "function",
     "symbol": "proxyActionRequest",
-    "fingerprint": "9125fc6eb9a8d2ce01d63c17018e9ff633575e66de072b4773eef6c5a6d123bd",
-    "reason": "The fixed same-origin, bounded action-proxy adapter: route/method/origin/header admission, per-route native-credential selection, request-size bound with published-contract validation, bearer forward, response-size bound and uniform failure mapping. Route-specific behaviour lives in a small declarative table, and the function decides no authority of its own (Meri owns scope and effects), so it is one proxy-transport responsibility that sits barely over the function trigger.",
-    "reviewedBy": "Hermes Agent independent architecture review (session 20261027_214238_eb5bec)",
-    "reviewedOn": "2026-10-27"
+    "line": 51,
+    "nonblank": 87,
+    "fingerprint": "856c979eed5f459a59286a5c1428f69d6ae9cfc39116c49c4f62d81e196600f7",
+    "reason": "One fixed same-origin bounded transport adapter: exact route/method/origin/header admission, canonical request validation, existing native/session credential selection, bounded forwarding and response relay. The MR04 change uses the canonical routines receiver resolution point and route table for the two renewal routes; it does not add authority, custody, a retry policy or another transport owner. Deadline, byte limits, credential isolation and the uncertain catch outcome are preserved. The widened TypeScript route-name cast does not replace runtime receiving; final physical-package typing remains an explicit integration check. Accepted as the existing single proxy responsibility.",
+    "reviewedBy": "Codex bounded exact-body validation, reusing independent Hermes consent-consumer review beb06061feee5ea7bbf0d732e53aac90848e902c2c08898abf65a5687272e89d section 5",
+    "reviewedOn": "2026-10-28"
   },
   {
     "file": "apps/web/src/shared/meri-actions/task-recovery.ts",
