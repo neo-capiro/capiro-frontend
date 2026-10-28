@@ -1,11 +1,10 @@
 /**
- * SOURCE STAGE ONLY acceptance for the Start Work / Delegate consumer.
+ * Installed-release acceptance for the Start Work / Delegate consumer.
  *
  * These tests exercise the real mounted composer control, the real selected-input journal, the real
- * send funnel and the canonical public receiver, resolved to the frozen successor generated public
- * files by tests/work-stage/vitest.work-stage.config.mts. The installed immutable 0.1.26 package is
- * exercised separately by tests/meri-work-selection-refusal.test.ts, which must refuse the same
- * definition.
+ * send funnel and the canonical public receiver from the physically installed contract package.
+ * tests/meri-work-selection-refusal.test.ts separately covers malformed definitions against that
+ * same release. These are local mounted-consumer checks, not deployed or live-model acceptance.
  */
 import { expect, it } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
