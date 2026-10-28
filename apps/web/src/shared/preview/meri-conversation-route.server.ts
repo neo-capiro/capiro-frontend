@@ -4,7 +4,7 @@ import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-o
 type Environment = Record<string, string | undefined>;
 
 /** The app's pinned @capiro/meri-contracts distribution (the installed package's own version). */
-export const previewMeriContractsPackageVersion = "0.1.26";
+export const previewMeriContractsPackageVersion = "0.1.27";
 const sourceCommit = /^[0-9a-f]{40}$/;
 const imageDigest = /^sha256:[0-9a-f]{64}$/;
 const meriHost =

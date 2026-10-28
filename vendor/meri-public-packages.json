@@ -343,7 +343,7 @@
       "regularEntryCount": 69,
       "status": "superseded-by capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz; historical archive retained",
       "purpose": "Replacement archive after Meri280 (feedback JSONB fix) and the skills-catalog/provenance refresh merged to meri-greenfield main: regenerated conversation-application (feedback contracts for FE225) and the conversation-sources hearing exports (FE222) in one package.",
-      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614\u2026/5a1cf815\u2026). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
+      "qualification": "Same recipe as the d1e1c50b archive: every packages/contracts generator run at the merged main tree 77d8c8a6, then npm pack (69 members). Regenerated conversation-sources.d.ts/.mjs are byte-identical to the d1e1c50b archive (sha256 e189e614…/5a1cf815…). The tracked dist on meri-greenfield main is stale for seven families and the package-level typecheck/public-type tests fail there on the history event union (pre-existing at d1e1c50b); recorded in the Wave 3 handoff. Frontend install, typecheck, lint and affected unit/browser suites recorded in the composing PR."
     },
     {
       "file": "capiro-meri-contracts-0.1.18-3af2a166-6b4bb0462314.tgz",
@@ -592,6 +592,56 @@
       "status": "qualified-immutable-producer-pending-consumer-binding",
       "purpose": "Peer-only compatibility for contracts0.1.26; UI runtime/types unchanged.",
       "independentSourceReview": "Hermes bounded union PASS 2026-10-28; outputs/WAVE5-UPLOAD-SELECTED-PACKAGE-COHORT-HERMES-REVIEW.txt"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.27-860acae0-82408f297f81.tgz",
+      "name": "@capiro/meri-contracts",
+      "version": "0.1.27",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "860acae06956c85f2773783dedf086562d533c16",
+      "sourceTree": "d973c88dfc54a131375a26cb1c57d1523671c4a9",
+      "bytes": 1570724,
+      "sha256": "82408f297f81f3002f58008c237e50f1b8f471848b07bdced6ab0d5332679dac",
+      "integrity": "sha512-LCE2vNrPHBw+S9fuBqJN+nxm1i7UKrQbiAWPEcjwP6z5a5/k9rA/IXqrHvnT1kgeg7xkZqhSpxG0y3ZSQrMb6g==",
+      "regularEntryCount": 75,
+      "status": "qualified-immutable-producer-pending-consumer-binding",
+      "purpose": "Final SCRUM-223 public cohort: usage-overview/2 successor receiver plus the upload, procedure, eligible selected-report, native-results and history receivers; every earlier public export preserved.",
+      "independentSourceReview": "Codex independent archive/member acceptance 2026-10-28; work/codex-validation/SCRUM-223-final-pack.txt",
+      "acceptedProducerSource": "860acae06956c85f2773783dedf086562d533c16 / tree d973c88dfc54a131375a26cb1c57d1523671c4a9",
+      "consumerBinding": {
+        "boundIn": "work/wave5-frontend-final-physical-binding-20261028",
+        "boundAtUtc": "2026-10-28T14:18:17Z",
+        "verifiedFrom": "work/wave5-final-public-qualified-artifacts-20261028/PACKAGES.json",
+        "bytesSha256IntegrityReVerified": true,
+        "installedMembersEqualToLedger": 75,
+        "installedRealpathInsideSuccessor": true,
+        "evidence": "work/hermes-review/frontend-final-physical-binding/PHYSICAL-BINDING-RESULT.txt"
+      }
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.14-860acae0-156b736c9d66.tgz",
+      "name": "@capiro/meri-ui-stream",
+      "version": "0.1.14",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "860acae06956c85f2773783dedf086562d533c16",
+      "sourceTree": "d973c88dfc54a131375a26cb1c57d1523671c4a9",
+      "bytes": 3580,
+      "sha256": "156b736c9d662797e0976285b73556d7492fe2c9387d0c9b1a39e4372a03c4e0",
+      "integrity": "sha512-P2SiTkpRtdDvCWJFY9YqrBCoxmzgwGLiNwu15QLZiWat4VYtTTfYriUDCZSjdAzeF21JesHuiKSRVM/8pQldkg==",
+      "regularEntryCount": 6,
+      "status": "qualified-immutable-producer-pending-consumer-binding",
+      "purpose": "Peer-only compatibility for contracts0.1.27; UI runtime/types unchanged.",
+      "independentSourceReview": "Codex independent archive/member acceptance 2026-10-28; work/codex-validation/SCRUM-223-final-pack.txt",
+      "acceptedProducerSource": "860acae06956c85f2773783dedf086562d533c16 / tree d973c88dfc54a131375a26cb1c57d1523671c4a9",
+      "consumerBinding": {
+        "boundIn": "work/wave5-frontend-final-physical-binding-20261028",
+        "boundAtUtc": "2026-10-28T14:18:17Z",
+        "verifiedFrom": "work/wave5-final-public-qualified-artifacts-20261028/PACKAGES.json",
+        "bytesSha256IntegrityReVerified": true,
+        "installedMembersEqualToLedger": 6,
+        "installedRealpathInsideSuccessor": true,
+        "evidence": "work/hermes-review/frontend-final-physical-binding/PHYSICAL-BINDING-RESULT.txt"
+      }
     }
   ]
 }
