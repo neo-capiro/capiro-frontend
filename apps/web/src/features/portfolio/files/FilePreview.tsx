@@ -5,6 +5,7 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { signedUrl, type Attachment } from "./contracts";
 import { useExtractFile } from "./extraction";
 import { useFileNavigation } from "./navigation";
+import { FileVersionHistory } from "./FileVersionHistory";
 export function FilePreview({
   clientId,
   file,
@@ -112,6 +113,7 @@ export function FilePreview({
             </pre>
           </>
         )}
+        <FileVersionHistory clientId={clientId} attachmentId={file.id} />
       </div>
     </Dialog>
   );
