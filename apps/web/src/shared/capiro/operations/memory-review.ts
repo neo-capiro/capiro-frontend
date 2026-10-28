@@ -2,6 +2,8 @@ import { z } from "zod";
 import {
   parseMemoryReviewDetail,
   parseMemoryReviewInboxPage,
+  parseMemoryReviewApproveResponse,
+  parseMemoryReviewRejectResponse,
   MEMORY_REVIEW_INBOX_VIEWS,
 } from "@capiro/shared/memory-review";
 import { defineOperation } from "../contracts";
@@ -25,6 +27,29 @@ const received = <T>(parse: (value: unknown) => T) =>
     }
   });
 export const memoryReviewOperations = {
+  "settings.memory.review.approve": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/memory/review/candidates/:id/approve",
+    source,
+    request: z
+      .object({ params: z.object({ id, requestId: id }).strict() })
+      .strict(),
+    response: received(parseMemoryReviewApproveResponse),
+  }),
+  "settings.memory.review.reject": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/memory/review/candidates/:id/reject",
+    source,
+    request: z
+      .object({
+        params: z.object({ id, requestId: id }).strict(),
+        body: z.object({ reason: z.string().trim().min(1).max(2000) }).strict(),
+      })
+      .strict(),
+    response: received(parseMemoryReviewRejectResponse),
+  }),
   "memory.review.inbox": defineOperation({
     service: "core",
     method: "GET",

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { SettingsCard, SettingsNotice } from "../../settings/components";
+import { MemoryReviewActions } from "./MemoryReviewActions";
 
 /** Shared protected detail destination for Settings and in-app review notifications. */
 export function MemoryReviewDetail({ requestId }: { requestId: string }) {
@@ -45,6 +46,11 @@ export function MemoryReviewDetail({ requestId }: { requestId: string }) {
         </p>
       )}
       <ReviewProposal proposal={review.proposal} />
+      <MemoryReviewActions
+        key={`${review.candidateId}:${review.status}`}
+        review={review}
+        refresh={result.reload}
+      />
       {review.feedbackReason && <p>Review feedback: {review.feedbackReason}</p>}
       {review.blockedReason && (
         <p role="status">

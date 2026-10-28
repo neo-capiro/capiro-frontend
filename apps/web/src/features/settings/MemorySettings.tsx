@@ -1,23 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { MemoryAccessGrants } from "./memory/MemoryAccessGrants";
+import { MemoryGovernanceCenter } from "./memory/MemoryGovernanceCenter";
 import { MemoryFiles } from "./memory/MemoryFiles";
-import { SettingsCard, SettingsNotice, SettingsTabs } from "./components";
+import { SettingsCard, SettingsNotice } from "./components";
 import styles from "./styles";
-
-const governanceTabs = [
-  "Overview",
-  "Active",
-  "Pending review",
-  "Conflicts",
-  "Review due",
-  "History",
-  "Access grants",
-  "Transition history",
-  "Projection health",
-];
 
 export function MemorySettings({
   reviewEnabled,
@@ -41,7 +28,7 @@ export function MemorySettings({
         </p>
         <Link href="/meri/updates">Open review notifications</Link>
       </SettingsCard>
-      <MemoryGovernanceCard readOnly={readOnlyPreview} />
+      <MemoryGovernanceCenter readOnly={readOnlyPreview} />
       <MemoryFiles />
     </div>
   );
@@ -64,28 +51,6 @@ function MemoryReviewCard({ enabled }: { enabled: boolean }) {
           The governed owner review connection has not been enabled for this
           workspace.
         </SettingsNotice>
-      )}
-    </SettingsCard>
-  );
-}
-
-function MemoryGovernanceCard({ readOnly }: { readOnly: boolean }) {
-  const [governance, setGovernance] = useState("Overview");
-  return (
-    <SettingsCard title="Memory Governance Center">
-      <SettingsTabs
-        label="Memory governance"
-        items={governanceTabs.map((label) => ({ id: label, label }))}
-        value={governance}
-        onChange={setGovernance}
-      />
-      {governance === "Access grants" ? (
-        <MemoryAccessGrants readOnly={readOnly} />
-      ) : (
-        <p className={styles.empty}>
-          {governance} governance data is unavailable until its contract is
-          verified.
-        </p>
       )}
     </SettingsCard>
   );
