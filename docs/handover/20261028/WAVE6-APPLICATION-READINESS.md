@@ -46,3 +46,12 @@ Keep domain logic with existing Core owners and frontend feature modules; reuse 
 
 **Finite next slice/acceptance.** Once selected, deliver read-only question list/detail with source identity and accurate lifecycle, then one exact-version decision through its domain owner. Prove pagination, restricted-source history, role change, stale decision, duplicate outcome and unavailable versus empty. Automation follows only a selected real producer. Ten focused operational-contract tests passed; no question/automation connected or live acceptance is claimed.
 
+## B5 — government target context
+
+**Owners/current behavior.** `relationships/TargetDrawer.tsx` uses canonical government target/Directory identities, shared Dialog/QueryState/SelectField, and existing target mutation owners. It explicitly states linked Strategy/ask/next-action context unavailable. `target-contracts.ts` contains no canonical linked-work association receipt. No source evidence justifies matching names, email addresses or note text to fabricate those links. Opening a target remains a read; explicit existing note/tier/mail actions remain distinct.
+
+**Required receiving contract.** Core/Strategy/Objectives/Planner owners return canonical target/resource/client IDs with current readable associations, labels and authoritative next-action status/date. Present multiple strategies in deterministic labeled order. Removed/archived/inaccessible links disappear or show unavailable. Receiver navigation must resolve the exact resource under current access. A card read must never create work or send communication.
+
+**Decision/dependencies.** Read-only context versus authoring/managing target work is pending. Existing target editing does not authorize new Strategy/Objective authoring. Reuse Objective association/destination contracts where they actually represent the relation; allocate any missing public target-context shape to its canonical owner before UI work.
+
+**Finite next slice/acceptance.** Deliver read-only canonical linked-work context first if selected: one target with multiple Strategies/Objectives and current asks/actions, deterministic sorting, foreign client/access withdrawal/archived resource denial and exact destination navigation. No name matching or implicit effect. Twenty-nine existing relationship tests passed. Context contract integration and live acceptance remain undelivered; no misleading linked-work UI is added.
