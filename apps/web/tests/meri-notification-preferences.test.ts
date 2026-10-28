@@ -204,9 +204,9 @@ describe("notification category and delivery mapping", () => {
     expect(notificationCategory("memory-review").key).toBe("memoryReviewed");
   });
 
-  it("leaves the approval toggle unavailable because no optional producer exists", () => {
+  it("maps the approval toggle to optional waiting-run notices only", () => {
     const decisions = notificationCategory("decisions");
-    expect(decisions.control).toBe("unavailable");
+    expect(decisions.control).toBe("revisioned");
     expect(decisions.reason).toMatch(/mandatory assignment notices/);
     expect(optionalNoticePresented("decisions", null)).toBe(false);
   });
@@ -371,10 +371,18 @@ describe("closed notifications adapter", () => {
         url: String(url),
         authorization: new Headers(init?.headers).get("authorization"),
       });
-      return new Response(JSON.stringify(page([rawItem("review_assigned")])), {
-        status: 200,
-        headers: json,
-      });
+      // Actual Core listNotifications wire has no browser-envelope schemaVersion.
+      return new Response(
+        JSON.stringify({
+          enabled: true,
+          items: [rawItem("review_assigned")],
+          nextCursor: null,
+        }),
+        {
+          status: 200,
+          headers: json,
+        },
+      );
     }) as unknown as typeof fetch;
     const unsigned = await call(
       new Request("https://app.test/api/meri/notifications?limit=20"),
@@ -393,7 +401,11 @@ describe("closed notifications adapter", () => {
       "https://core.test/api/memory/review/notifications?limit=20",
     );
     expect(seen[0]?.authorization).toBe("Bearer native-token");
-    const body = (await ok.json()) as { items: unknown[] };
+    const body = (await ok.json()) as {
+      schemaVersion: string;
+      items: unknown[];
+    };
+    expect(body.schemaVersion).toBe("meri.memory-notifications/1");
     expect(body.items).toHaveLength(1);
   });
 
@@ -418,6 +430,11 @@ describe("closed notifications adapter", () => {
       { fetcher: broken },
     );
     expect(unavailable.status).toBe(503);
+    const wrongEnvelope = await call(
+      new Request("https://app.test/api/meri/notifications?limit=20"),
+      { fetcher: (async () => Response.json(page([]))) as typeof fetch },
+    );
+    expect(wrongEnvelope.status).toBe(503);
     const failed = (async () =>
       new Response(JSON.stringify({ message: "boom" }), {
         status: 500,
@@ -449,7 +466,7 @@ describe("browser notifications client", () => {
     expect(lost).toBe(1);
 
     let current = true;
-    let release: (() => void) | null = null;
+    let release!: () => void;
     const gate = new Promise<void>((resolve) => (release = resolve));
     const late = createMemoryNotificationsClient(
       () => current,
@@ -464,7 +481,7 @@ describe("browser notifications client", () => {
     );
     const pending = late.list({ cursor: null }, new AbortController().signal);
     current = false;
-    release?.();
+    release();
     await expect(pending).rejects.toThrow();
     expect(lost).toBe(1);
   });
@@ -613,6 +630,47 @@ describe("joined updates projection", () => {
     expect(notEnabled.memoryNotifications).toBe("not-enabled");
     expect(notEnabled.state).toBe("empty");
     expect(JSON.stringify(notEnabled)).not.toMatch(/caught up|unread|count/i);
+  });
+
+  it("uses approvalRequested for waiting runs without suppressing mandatory decisions", () => {
+    const waiting = completedRun({ state: "waiting-for-approval" });
+    const input = {
+      notifications: { state: "observed" as const, page: feed },
+      runs: { state: "observed" as const, runs: [waiting] },
+    };
+    const enabled = projectUpdates({
+      ...input,
+      preferences: USER_PREFERENCE_DEFAULTS,
+    });
+    const notice = enabled.notices.find((row) => row.source === "run-approval");
+    expect(notice?.governedBy).toBe("approvalRequested");
+    expect(notice?.title).toBe("Run waiting for approval");
+    expect(notice?.detail).toContain("does not establish that you can approve");
+    expect(notice?.read).toBeNull();
+    expect(enabled.runCoverage).toBe("recent-page");
+    const disabled = projectUpdates({
+      ...input,
+      preferences: applyNotificationPreference(
+        USER_PREFERENCE_DEFAULTS,
+        "approvalRequested",
+        false,
+      ),
+    });
+    expect(disabled.notices.some((row) => row.source === "run-approval")).toBe(
+      false,
+    );
+    expect(
+      disabled.notices.filter((row) => row.delivery === "required"),
+    ).toHaveLength(1);
+    expect(
+      disabled.notices.some((row) => row.governedBy === "memoryReviewed"),
+    ).toBe(true);
+    expect(disabled.withheldOptional).toBe(1);
+    const unknown = projectUpdates({ ...input, preferences: null });
+    expect(
+      unknown.notices.filter((row) => row.delivery === "required"),
+    ).toHaveLength(1);
+    expect(unknown.withheldReason).toBe("preferences-unverified");
   });
 });
 
@@ -781,12 +839,12 @@ describe("revisioned controls rendering", () => {
     expect(html).toContain('data-category="run-outcomes"');
     expect(html).toContain('data-control="revisioned"');
     expect(html).toContain('data-category="decisions"');
-    expect(html).toContain('data-control="unavailable"');
+    expect(html).not.toContain('data-control="unavailable"');
     expect(html).toContain('data-category="connections"');
     expect(html).toContain('data-control="unsupported"');
     expect(html).toContain("Always delivered");
     expect(html).toContain("never mapped to memoryReviewed");
-    expect(html).toContain("mandatory assignment notices");
+    expect(html).toContain("visible runs currently waiting for approval");
     expect(html).not.toMatch(/caught up|all caught up|preview/i);
     expect(html).toMatch(/aria-pressed="false"/);
     expect(html).toMatch(/aria-pressed="true"/);

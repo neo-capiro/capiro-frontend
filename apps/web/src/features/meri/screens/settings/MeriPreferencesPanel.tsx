@@ -104,7 +104,17 @@ export function MeriPreferencesPanel({
       return <SkillsTemplatesScreen chrome={chrome} view={views.skills} />;
     case "updates":
       return (
-        <NotificationsAccountScreen chrome={chrome} view={views.updates} />
+        <NotificationsAccountScreen
+          chrome={{
+            ...chrome,
+            notice: {
+              title: "Updates and notification preferences",
+              detail:
+                "Review a recent permitted page of run notices and your memory-review notices. Optional notices use your saved preferences; required actions stay available.",
+            },
+          }}
+          view={views.updates}
+        />
       );
     case "privacy":
       return <PrivacyDeletionScreen chrome={chrome} view={views.privacy} />;

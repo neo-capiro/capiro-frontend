@@ -54,12 +54,19 @@ export function useUpdatesFeed(input: {
     feed.snapshot,
   );
   useEffect(() => {
+    feed.attach();
+    readFor.current = null;
+    return () => {
+      readFor.current = null;
+      feed.dispose();
+    };
+  }, [feed]);
+  useEffect(() => {
     const key = `${lifetime}|${scopeId}`;
     if (readFor.current === key) return;
     readFor.current = key;
     void feed.read(runScope(input.clientId));
   }, [feed, lifetime, scopeId, input.clientId]);
-  useEffect(() => () => feed.dispose(), [feed]);
   return {
     snapshot,
     loadMore: feed.loadMore,

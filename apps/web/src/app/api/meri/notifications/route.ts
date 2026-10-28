@@ -12,6 +12,6 @@ export async function GET(request: Request) {
   if (held) return held;
   return proxyMemoryNotifications(request, process.env, async () => {
     const session = await auth();
-    return session.userId ? session.getToken() : null;
+    return session.userId ? session.getToken({ template: "capiro" }) : null;
   });
 }

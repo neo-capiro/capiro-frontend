@@ -130,6 +130,9 @@ export const publicExports = new Set([
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/meri/notifications/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-notifications/memory-proxy.server.ts`,
+  ])],
   [`${appSource}app/api/memory/owner/candidates/route.ts`, new Set([
     previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
   ])],

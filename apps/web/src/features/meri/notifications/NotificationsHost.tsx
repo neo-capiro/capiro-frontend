@@ -98,6 +98,12 @@ function OwnedUpdates({
     alive.current = false;
     setDenied(true);
   }, []);
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
+    };
+  }, []);
   const runsClient = useMemo(
     // eslint-disable-next-line react-hooks/refs -- the factory stores the fence callbacks; it does not read them during render
     () => createRunsClient(isCurrent, onAccessLost),
@@ -125,21 +131,13 @@ function OwnedUpdates({
     controller.snapshot,
     controller.snapshot,
   );
-  useEffect(() => controller.attach(), [controller]);
-  // Exactly one explicit load of the saved document per account lifetime. It is a
-  // read-specific load: it never replays a write.
-  const loaded = useRef(false);
+  // Reattachment may repeat this read; an earlier aborted generation remains
+  // fenced. Ordinary renders do not reload and no write is replayed.
   useEffect(() => {
-    if (loaded.current) return;
-    loaded.current = true;
+    const detach = controller.attach();
     void controller.load();
+    return detach;
   }, [controller]);
-  useEffect(
-    () => () => {
-      alive.current = false;
-    },
-    [],
-  );
   // A lost preferences lifetime retires the rows too: nothing read under a closed
   // account lifetime may stay visible. The retired state is derived in render
   // (`view.status === "access-lost"`), so this effect performs no setState.
@@ -262,8 +260,8 @@ function OwnedUpdates({
       ) : null}
       {projection.runOutcomes === "unavailable" ? (
         <p role="note">
-          Recent completed runs could not be read, so run notices are missing
-          from this list.
+          Recent run states could not be read, so run notices are missing from
+          this list.
         </p>
       ) : null}
       <ul className={styles.rows} aria-label="Observed updates">

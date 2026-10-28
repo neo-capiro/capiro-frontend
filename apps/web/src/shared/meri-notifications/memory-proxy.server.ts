@@ -8,7 +8,7 @@ import {
   MEMORY_NOTIFICATION_RESPONSE_BYTES,
   MEMORY_NOTIFICATION_SCHEMA,
   memoryNotificationPaths,
-  receiveMemoryNotificationPage,
+  receiveCoreMemoryNotificationPage,
 } from "./memory-contract";
 
 type Environment = Record<string, string | undefined>;
@@ -127,7 +127,7 @@ export async function proxyMemoryNotifications(
               signal,
               MEMORY_NOTIFICATION_RESPONSE_BYTES,
             );
-            const page = receiveMemoryNotificationPage(JSON.parse(raw));
+            const page = receiveCoreMemoryNotificationPage(JSON.parse(raw));
             return Response.json(page, { headers });
           } finally {
             if (!response.bodyUsed)

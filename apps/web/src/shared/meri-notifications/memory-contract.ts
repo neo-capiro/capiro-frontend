@@ -1,11 +1,13 @@
 /**
  * Closed receiving contract for the Meri memory-review notification feed.
  *
- * Mirrors the released Core owner response of GET /memory/review/notifications
+ * Adapts the released Core owner response of GET /memory/review/notifications
  * (Core apps/api/src/memory/memory-review-inbox.service.ts listNotifications):
  * { enabled, items[], nextCursor } with rows
  * { id, reviewRequestId, candidateId, clientId, eventType, title, readAt, createdAt }.
- * Core source is not imported; this decoder fails closed so a changed upstream
+ * Core does not emit schemaVersion. Only the server adapter brands the validated
+ * Core page with this browser-envelope version. Core source is not imported;
+ * these separate receivers fail closed so a changed upstream
  * shape can never be presented as an empty or caught-up Updates page.
  */
 export const MEMORY_NOTIFICATION_SCHEMA =
@@ -162,4 +164,27 @@ export function receiveMemoryNotificationPage(
     items,
     nextCursor: cursor(page.nextCursor),
   };
+}
+
+/** Exact upstream Core shape; it is not already the versioned browser envelope. */
+export function receiveCoreMemoryNotificationPage(
+  value: unknown,
+): MemoryNotificationPage {
+  if (!value || typeof value !== "object" || Array.isArray(value))
+    throw new Error("Invalid Core notification page");
+  const keys = ["enabled", "items", "nextCursor"];
+  const descriptors = Object.getOwnPropertyDescriptors(value);
+  if (
+    Reflect.ownKeys(descriptors).length !== keys.length ||
+    keys.some(
+      (key) => !descriptors[key]?.enumerable || !("value" in descriptors[key]),
+    )
+  )
+    throw new Error("Invalid Core notification page");
+  return receiveMemoryNotificationPage({
+    schemaVersion: MEMORY_NOTIFICATION_SCHEMA,
+    enabled: descriptors.enabled!.value,
+    items: descriptors.items!.value,
+    nextCursor: descriptors.nextCursor!.value,
+  });
 }

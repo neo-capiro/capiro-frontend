@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import type { RunIndexSummary } from "@capiro/meri-contracts/conversation-history";
 import {
   MEMORY_NOTIFICATION_SCHEMA,
   receiveMemoryNotificationPage,
@@ -46,7 +47,7 @@ function page(
   });
 }
 
-const run = {
+const run: RunIndexSummary = {
   conversationId,
   runId,
   createdAt: "2026-10-26T09:00:00.000Z",
@@ -86,6 +87,7 @@ function harness(options: { hold?: boolean } = {}) {
         await gate.promise;
       }
       const next = pages[Math.min(pageIndex, pages.length - 1)];
+      if (!next) throw new Error("No synthetic notification page configured");
       pageIndex += 1;
       return next;
     },
@@ -278,8 +280,9 @@ describe("updates pagination admission", () => {
     test.setPages([page([notification(ids.b)], { nextCursor: "cursor-1" })]);
     await expect(feed.loadMore()).resolves.toBeUndefined();
     expect(feed.snapshot().moreError).toMatch(/did not advance/i);
-    if (feed.snapshot().notifications.state === "observed")
-      expect(feed.snapshot().notifications.value.items).toHaveLength(1);
+    const afterCursor = feed.snapshot().notifications;
+    if (afterCursor.state === "observed")
+      expect(afterCursor.value.items).toHaveLength(1);
     // A malformed window the closed receiver refuses. The raw object bypasses
     // the receiver here so the feed's own re-admission is what rejects it.
     test.setPages([
@@ -292,10 +295,9 @@ describe("updates pagination admission", () => {
     ]);
     await expect(feed.loadMore()).resolves.toBeUndefined();
     expect(feed.snapshot().moreError).toMatch(/could not be verified/i);
-    if (feed.snapshot().notifications.state === "observed")
-      expect(
-        feed.snapshot().notifications.value.items.map((row) => row.id),
-      ).toEqual([ids.a]);
+    const afterMalformed = feed.snapshot().notifications;
+    if (afterMalformed.state === "observed")
+      expect(afterMalformed.value.items.map((row) => row.id)).toEqual([ids.a]);
   });
 
   it("refuses a second window while one is in flight and after the lifetime ends", async () => {

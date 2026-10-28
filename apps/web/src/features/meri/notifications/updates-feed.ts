@@ -62,7 +62,7 @@ type RunsClient = Readonly<{
   list(
     input: Readonly<{
       scope: UpdatesScope;
-      status: "terminal";
+      status: "all";
       cursor: null;
       limit: number;
     }>,
@@ -93,6 +93,7 @@ export function createUpdatesFeed(input: {
   let controller: AbortController | undefined;
   let pending = false;
   let disposed = false;
+  let retired = false;
   let scope = input.scope;
   let reads = 0;
   const listeners = new Set<() => void>();
@@ -128,7 +129,7 @@ export function createUpdatesFeed(input: {
     const [notifications, runs] = await Promise.allSettled([
       input.notificationsClient.list({ cursor: null }, current.signal),
       input.runsClient.list(
-        { scope: nextScope, status: "terminal", cursor: null, limit: 20 },
+        { scope: nextScope, status: "all", cursor: null, limit: 20 },
         current.signal,
       ),
     ]);
@@ -158,6 +159,10 @@ export function createUpdatesFeed(input: {
   }
 
   return Object.freeze({
+    /** Reattach the same React lifetime; an authority loss is permanent. */
+    attach() {
+      if (!retired) disposed = false;
+    },
     snapshot: () => value,
     scope: () => scope,
     subscribe(listener: () => void) {
@@ -251,6 +256,7 @@ export function createUpdatesFeed(input: {
     /** Ends this account lifetime: every retained row is released. */
     lose() {
       generation += 1;
+      retired = true;
       disposed = true;
       controller?.abort();
       controller = undefined;

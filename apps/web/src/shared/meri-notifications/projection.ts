@@ -56,11 +56,11 @@ export const NOTIFICATION_CATEGORIES: readonly NotificationCategory[] =
       id: "decisions",
       label: "Approval requests",
       description:
-        "Pending decisions that need your action remain visible in the memory-review feed.",
+        "Optional in-app notices for visible runs currently waiting for approval.",
       key: "approvalRequested",
-      control: "unavailable",
+      control: "revisioned",
       reason:
-        "no proven optional approval notice producer exists yet; pending approvals are mandatory assignment notices and are always delivered",
+        "governs only observed waiting-for-approval run notices; mandatory assignment notices and approval actions remain available",
     },
     {
       id: "memory-review",
@@ -132,7 +132,7 @@ export function applyNotificationPreference(
   });
 }
 
-export type NoticeSource = "memory-review" | "run-outcome";
+export type NoticeSource = "memory-review" | "run-outcome" | "run-approval";
 /** "observed" means the owner answered; it is never a claim about completeness. */
 export type FeedObservation = "observed" | "unavailable";
 
@@ -238,18 +238,22 @@ export function projectUpdates(input: {
     }
     if (input.runs.state === "observed") {
       for (const run of input.runs.runs) {
-        if (run.state !== "completed") continue;
-        if (optionalNoticePresented("run-outcomes", input.preferences)) {
+        const waiting = run.state === "waiting-for-approval";
+        if (!waiting && run.state !== "completed") continue;
+        const category = waiting ? "decisions" : "run-outcomes";
+        const source = waiting ? "run-approval" : "run-outcome";
+        if (optionalNoticePresented(category, input.preferences)) {
           rows.push({
-            id: `run-outcome:${run.conversationId}:${run.runId}`,
-            source: "run-outcome",
-            title: "Run completed",
-            detail:
-              "A run you can see reached a completed state. This optional notice has no per-row read record.",
+            id: `${source}:${run.conversationId}:${run.runId}`,
+            source,
+            title: waiting ? "Run waiting for approval" : "Run completed",
+            detail: waiting
+              ? "A visible run is waiting for approval. This notice does not establish that you can approve it; approval actions check current authority. It has no per-row read record."
+              : "A run you can see reached a completed state. This optional notice has no per-row read record.",
             occurredAt: run.statusAt,
             read: null,
             delivery: "optional",
-            governedBy: "runCompleted",
+            governedBy: waiting ? "approvalRequested" : "runCompleted",
             run: { conversationId: run.conversationId, runId: run.runId },
             reviewRequestId: null,
           });
