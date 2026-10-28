@@ -2,11 +2,11 @@
  * Installed-contract acceptance for the native procedure catalog read and the native procedure
  * selection — Wave5 MO01/ST16.
  *
- * Everything here runs against the installed immutable @capiro/meri-contracts 0.1.26 package: the
- * canonical closed `procedure` member is part of that artifact, so this is the ordinary (non
- * source-stage) proof. The catalog read goes through the REAL operation registry and the REAL
- * transport with only the boundary answer stubbed, and every listed selector is put back through the
- * canonical public receiver before it is trusted.
+ * Everything here runs against the installed immutable @capiro/meri-contracts 0.1.27 package: the
+ * canonical closed `procedure` member and the canonical closed `work` member are part of that
+ * artifact, so this is the ordinary (non source-stage) proof. The catalog read goes through the REAL
+ * operation registry and the REAL transport with only the boundary answer stubbed, and every listed
+ * selector is put back through the canonical public receiver before it is trusted.
  */
 import { expect, it } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
@@ -378,12 +378,41 @@ it("accepts the canonical procedure on the installed receiver and refuses anythi
   expect(
     withProcedureSelection({ procedure: builtinSelector(2) }, undefined),
   ).toEqual({});
-  // This installed package predates the work definition, so a selection carrying one is refused
-  // here: the combined work-and-procedure qualification belongs to the successor cohort.
+  // The installed package carries the canonical work definition as well, so the successor cohort
+  // submits the native procedure and the work definition together: the real receiver admits that
+  // combination and both members survive it exactly, list order included.
+  const besideWork = receiveConversationRequest(
+    "submit",
+    bytes({
+      requestId: id(5),
+      prompt: "Start the research",
+      procedure: builtinSelector(1),
+      work,
+    }),
+  );
+  expect(besideWork.procedure).toEqual(builtinSelector(1));
+  expect(besideWork.work).toEqual(work);
+  // Either member being non-canonical still refuses the whole submit.
   expect(() =>
     receiveConversationRequest(
       "submit",
-      bytes({ requestId: id(5), prompt: "Start the research", work }),
+      bytes({
+        requestId: id(5),
+        prompt: "Start the research",
+        procedure: { ...builtinSelector(1), id: "not_a_builtin" },
+        work,
+      }),
+    ),
+  ).toThrow();
+  expect(() =>
+    receiveConversationRequest(
+      "submit",
+      bytes({
+        requestId: id(5),
+        prompt: "Start the research",
+        procedure: builtinSelector(1),
+        work: { ...work, allowedTools: ["*"] },
+      }),
     ),
   ).toThrow();
 });
